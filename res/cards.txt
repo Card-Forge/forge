@@ -1344,6 +1344,7 @@ no text
 Trample
 Modular 1
 WheneverKeyword:EntersBattleField:Type/Artifact:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another artifact enters the battlefield, put a +1/+1 counter on Arcbound Crusher.
+SVar:BuffedBy:Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_crusher.jpg
 
@@ -1889,6 +1890,7 @@ Creature Beast
 Aura Gnarlid gets +1/+1 for each Aura on the battlefield.
 2/2
 Creatures with power less than CARDNAME's power can't block it.
+SVar:BuffedBy:Aura
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_gnarlid.jpg
 
@@ -2269,6 +2271,7 @@ StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.white!NotSelf:Other w
 WheneverKeyword:CastSpell/Controller:Color/red:Play:Damage/3:NormalInput/Player:ASAP:No_Condition:No Special Condition:Whenever you cast a red spell, Balefire Liege deals 3 damage to target player.
 WheneverKeyword:CastSpell/Controller:Color/white:Play:ModifyLife/3:ControllingPlayer_Initiator:ASAP:No_Condition:No Special Condition:Whenever you cast a white spell, you gain 3 life.
 SVar:PlayMain1:TRUE
+SVar:BuffedBy:Spell.Red,Spell.White
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balefire_liege.jpg
 
@@ -2612,6 +2615,7 @@ no text
 0/1
 Flying
 StaticEffect:Play:Self:SetPT/Type.Creature/Type.Creature:Permanents you Control:Battle Squadron's power and toughness are each equal to the number of creatures you control.
+SVar:BuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_squadron.jpg
 
@@ -2672,6 +2676,7 @@ no text
 1/3
 WheneverKeyword:EntersBattleField:Type/Forest:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:Initiator - OwnedByController:Whenever a Forest enters the battlefield under your control, Battlewand Oak gets +2/+2 until end of turn.
 WheneverKeyword:CastSpell/Controller:Type/Treefolk:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Treefolk spell, Battlewand Oak gets +2/+2 until end of turn.
+SVar:BuffedBy:Forest,Treefolk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlewand_oak.jpg
 
@@ -5785,6 +5790,7 @@ Concordant Crossroads
 G
 Enchantment
 All creatures have haste.
+SVar:BuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/concordant_crossroads.jpg
 
@@ -9874,6 +9880,7 @@ Fervor
 2 R
 Enchantment
 Creatures you control have haste.
+SVar:BuffedBy:Creature
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fervor.jpg
@@ -11084,6 +11091,7 @@ Furious Assault
 Enchantment
 no text
 WheneverKeyword:CastSpell/Controller:Type/Creature:Play:Damage/1:NormalInput/Player:ASAP:No_Condition:No Special Condition:Whenever you cast a creature spell, Furious Assault deals 1 damage to target player.
+SVar:BuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furious_assault.jpg
 
@@ -11720,6 +11728,7 @@ no text
 3/4
 Cycling:WU
 WheneverKeyword:EntersBattleField:Type/Artifact:Play:KeywordPumpEOT/Unblockable!StatsPumpEOT/1/1:Self!Self:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Other than Self:Whenever another artifact enters the battlefield under your control, Glassdust Hulk gets +1/+1 until end of turn and is unblockable this turn.
+SVar:BuffedBy:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glassdust_hulk.jpg
 
@@ -11737,6 +11746,7 @@ no text
 0/1
 Flying
 WheneverKeyword:EntersBattleField:Type/Artifact:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Other than Self:Whenever another artifact enters the battlefield under your control, Glaze Fiend gets +2/+2 until end of turn.
+SVar:BuffedBy:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glaze_fiend.jpg
 
@@ -12059,6 +12069,7 @@ Other Goblin creatures you control get +1/+1 and have haste.
 2/2
 Haste
 SVar:PlayMain1:TRUE
+SVar:BuffedBy:Goblin
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_chieftain.jpg
 
@@ -12409,6 +12420,7 @@ Goblin spells you cast cost 1 less to cast. Goblin creatures you control have ha
 2/2
 CostChange:Player:Less:1:Spell:All:Goblin:NoSpecial
 SVar:PlayMain1:TRUE
+SVar:BuffedBy:Goblin
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warchief.jpg
 
@@ -13556,6 +13568,7 @@ Creature Sliver
 All Sliver creatures have haste.
 1/1
 SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_sliver.jpg
 
@@ -13811,6 +13824,7 @@ Creature Beast
 no text
 2/2
 WheneverKeyword:EntersBattleField:Type/Creature:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Other than Self:Whenever another creature enters the battlefield under your control, Herd Gnarr gets +2/+2 until end of turn.
+SVar:BuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/herd_gnarr.jpg
 
@@ -15703,7 +15717,7 @@ Creature Human Knight
 no text
 2/4
 WheneverKeyword:EntersBattleField:Type/Creature:Play:+1+1 Counters/1!+1+1 Counters/1:Self!Initiating_Card:ASAP:No_Condition:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on Juniper Order Ranger.
-SVar:PlayMain1:TRUE
+SVar:BuffedBy:Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_ranger.jpg
 
@@ -15847,6 +15861,7 @@ Creature Spirit
 no text
 2/5
 WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:KeywordPumpEOT/Flying:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Spirit or Arcane spell, Kami of Tattered Shoji gains flying until end of turn.
+SVar:BuffedBy:Arcane,Spirit
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_tattered_shoji.jpg
 
@@ -15863,8 +15878,8 @@ Kami of the Hunt
 Creature Spirit
 no text
 2/2
-WheneverKeyword:CastSpell/Controller:Type/Arcane:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Arcane spell, Kami of the Hunt gets +1/+1 until end of turn.
-WheneverKeyword:CastSpell/Controller:Type/Spirit:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Spirit spell, Kami of the Hunt gets +1/+1 until end of turn.
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Spirit or Arcane spell, Kami of the Hunt gets +1/+1 until end of turn.
+SVar:BuffedBy:Arcane,Spirit
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_hunt.jpg
 
@@ -16019,6 +16034,7 @@ no text
 StaticEffect:Play:All Permanents:Keyword/Trample:Type.Creature!Type.Kavu:Kavu creatures have trample.
 WheneverKeyword:EntersBattleField:Type/Kavu:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another Kavu enters the battlefield, put a +1/+1 counter on Kavu Monarch.
 SVar:PlayMain1:TRUE
+SVar:BuffedBy:Kavu
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_monarch.jpg
 
@@ -18058,6 +18074,7 @@ Creature Cyclops Warrior
 Creatures you control have haste.
 3/4
 SVar:PlayMain1:TRUE
+SVar:BuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/madrush_cyclops.jpg
 
@@ -18563,6 +18580,7 @@ Mass Calcify
 Sorcery
 Destroy all nonwhite creatures.
 spDestroyAll:Creature.nonWhite
+SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_calcify.jpg
 
@@ -18570,6 +18588,8 @@ Mass Hysteria
 R
 Enchantment
 All creatures have haste.
+SVar:RemAIDeck:True
+SVar:BuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_hysteria.jpg
 
@@ -20455,6 +20475,7 @@ Creature Nightmare
 Nightmare's power and toughness are each equal to the number of Swamps you control.
 1/1
 Flying
+SVar:BuffedBy:Swamp
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83186.jpg
 
@@ -21055,6 +21076,7 @@ R
 Enchantment
 no text
 WheneverKeyword:CastSpell/Controller:Type/Creature:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:No Special Condition:Whenever you cast a creature spell, tap target creature.
+SVar:BuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/onslaught.jpg
 
@@ -21156,6 +21178,7 @@ no text
 Reach
 WheneverKeyword:CastSpell/Controller:Type/Arcane:Play:KeywordPumpEOT/Forestwalk:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Arcane spell, Orbweaver Kumo gains forestwalk until end of turn.
 WheneverKeyword:CastSpell/Controller:Type/Spirit:Play:KeywordPumpEOT/Forestwalk:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Spiritspell, Orbweaver Kumo gains forestwalk until end of turn.
+SVar:BuffedBy:Arcane,Spirit
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orbweaver_kumo.jpg
 
@@ -23620,6 +23643,7 @@ no text
 1/1
 Haste
 StaticEffect:Play:Self:SetPT/Type.Goblin/Type.Goblin:All Permanents:Reckless One's power and toughness are each equal to the number of Goblins on the battlefield.
+SVar:BuffedBy:Goblin
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_one.jpg
 
@@ -25256,6 +25280,7 @@ no text
 4/4
 WheneverKeyword:CastSpell/Controller:Type/Arcane:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Arcane spell, Scaled Hulk gets +2/+2 until end of turn.
 WheneverKeyword:CastSpell/Controller:Type/Spirit:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Spirit spell, Scaled Hulk gets +2/+2 until end of turn.
+SVar:BuffedBy:Arcane,Spirit
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scaled_hulk.jpg
 
@@ -25411,6 +25436,7 @@ Creature Avatar
 no text
 0/1
 StaticEffect:Play:Self:SetPT/Type.Creature/Type.Creature:Permanents you Control:Scion of the Wild's power and toughness are each equal to the number of creatures you control.
+SVar:BuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_the_wild.jpg
 
@@ -32778,6 +32804,7 @@ Creature Horror
 no text
 1/1
 WheneverKeyword:EntersBattleField:Type/Artifact:Play:StatsPumpEOT/4/4:Self:ASAP:No_Condition:No Special Condition:Whenever an artifact enters the battlefield, Vermiculos gets +4/+4 until end of turn.
+SVar:BuffedBy:Artifact
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vermiculos.jpg
 
@@ -35233,6 +35260,7 @@ Yavimaya Enchantress
 Creature Human Druid
 Yavimaya Enchantress gets +1/+1 for each Enchantment in play. 
 2/2
+SVar:BuffedBy:Enchantment
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_enchantress.jpg
 
