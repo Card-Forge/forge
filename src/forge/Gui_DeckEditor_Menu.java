@@ -1006,8 +1006,9 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
             JOptionPane.showMessageDialog(null, "No decks found", "Open Deck", JOptionPane.PLAIN_MESSAGE);
             return "";
         }
-        Object o = JOptionPane.showInputDialog(null, "Deck Name", "Open Deck", JOptionPane.OK_CANCEL_OPTION, null,
-                choices.toArray(), choices.toArray()[0]);
+        //Object o = JOptionPane.showInputDialog(null, "Deck Name", "Open Deck", JOptionPane.OK_CANCEL_OPTION, null,
+        //        choices.toArray(), choices.toArray()[0]);
+        Object o = AllZone.Display.getChoiceOptional("Open Deck", choices.toArray());
         
         if(o == null) return "";
         
