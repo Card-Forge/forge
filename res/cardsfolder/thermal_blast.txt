@@ -2,7 +2,7 @@ Name:Thermal Blast
 ManaCost:4 R
 Types:Instant
 Text:no text
-K:spDamageTgtC:X:Thermal Blast deals 3 damage to target creature. Threshold - Thermal Blast deals 5 damage to that creature instead if seven or more cards are in your graveyard.
+A:SP$DealDamage | Cost$ 4 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ Thermal Blast deals 3 damage to target creature. Threshold - Thermal Blast deals 5 damage to that creature instead if seven or more cards are in your graveyard.
 SVar:X:Count$Threshold.5.3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thermal_blast.jpg

@@ -2,7 +2,7 @@ Name:Feast of Flesh
 ManaCost:B
 Types:Sorcery
 Text:no text
-K:spDamageTgtC:X:Drawback$YouGainLife/X:Feast of Flesh deals X damage to target creature and you gain X life, where X is 1 plus the number of cards named Feast of Flesh in all graveyards.:Feast of Flesh - deals X damage.
+A:SP$DealDamage | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ YouGainLife/X | SpellDescription$ Feast of Flesh deals X damage to target creature and you gain X life, where X is 1 plus the number of cards named Feast of Flesh in all graveyards.
 SVar:X:Count$NamedInAllYards.Feast of Flesh/Plus.1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_of_flesh.jpg

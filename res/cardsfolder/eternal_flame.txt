@@ -2,7 +2,7 @@ Name:Eternal Flame
 ManaCost:2 R R
 Types:Sorcery
 Text:no text
-K:spDamageTgtOpp:X:Drawback$DamageYou/X.HalfUp:Eternal Flame deals X damage to target opponent where X is the number of mountains you control. It deals half X damage, rounded up, to you.:Eternal Flame - deals X damage and half X damage to you.
+A:SP$DealDamage | Cost$ 2 R R | ValidTgts$ Opponent | NumDmg$ X | SubAbility$ DamageYou/X.HalfUp | SpellDescription$ Eternal Flame deals X damage to target opponent where X is the number of mountains you control. It deals half X damage, rounded up, to you.
 SVar:X:Count$NumTypeYouCtrl.Mountain
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_flame.jpg
