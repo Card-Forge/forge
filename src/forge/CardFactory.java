@@ -4872,8 +4872,7 @@ public class CardFactory implements NewConstants {
             card.addFirstSpellAbility(spell);
         }
         //*************** END ************ END *************************
-        
-        
+                
         
         //*************** START *********** START **************************
         else if(cardName.equals("Bridge from Below")) {
@@ -5022,6 +5021,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************		
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Eternity Vessel")) {
             Command intoPlay = new Command() {
@@ -5035,6 +5035,7 @@ public class CardFactory implements NewConstants {
             };
             card.addComesIntoPlayCommand(intoPlay);          
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Oubliette")) {
@@ -5149,6 +5150,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
   
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Necrogenesis")) {
             final SpellAbility necrogen = new Ability(card, "2") {
@@ -5375,34 +5377,7 @@ public class CardFactory implements NewConstants {
             ability.setBeforePayMana(payLife);
             
         }//*************** END ************ END **************************
-        
-        /*
-        //*************** START *********** START **************************  
-        else if(cardName.equals("Hatching Plans")) {
-            
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.getController().drawCards(3);
-                }
-            };
-            
-            Command draw3Cards = new Command() {
-                private static final long serialVersionUID = -4919203791300685078L;
-                
-                public void execute() {
-                	
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getName()).append(" - draw three cards.");
-                	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
-                }
-            };
-            
-            card.addDestroyCommand(draw3Cards);
-        }//*************** END ************ END **************************
-		*/
+
         
         //*************** START *********** START **************************
         else if(cardName.equals("Lifespark Spellbomb")) {
@@ -5468,8 +5443,7 @@ public class CardFactory implements NewConstants {
                 }//resolve()
             };//SpellAbility
             card.addSpellAbility(ability);
-            ability.setDescription("G, Sacrifice Lifespark Spellbomb: Target land becomes a 3/3 Creature until end of turn. It is still a land.");
-            
+            ability.setDescription("G, Sacrifice Lifespark Spellbomb: Target land becomes a 3/3 Creature until end of turn. It is still a land.");            
         }//*************** END ************ END **************************
 
         
@@ -5660,6 +5634,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability1);
         }
         //*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Volrath's Dungeon")) {
@@ -5995,7 +5970,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Illusions of Grandeur")) {
             final SpellAbility gainLife = new Ability(card, "0") {
@@ -6041,10 +6016,9 @@ public class CardFactory implements NewConstants {
             };
             
             card.addComesIntoPlayCommand(intoPlay);
-            card.addLeavesPlayCommand(leavesPlay);
-            
+            card.addLeavesPlayCommand(leavesPlay);          
         }//*************** END ************ END **************************       
-  
+  	*/
 	  
       //*************** START *********** START **************************
       else if(cardName.equals("Isochron Scepter"))
@@ -6431,37 +6405,13 @@ public class CardFactory implements NewConstants {
             };
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
-                
+        
         /*
         //*************** START *********** START **************************
-        else if(cardName.equals("Chromatic Star")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.getController().drawCard();
-                }
-            };
-            Command destroy = new Command() {
-				private static final long serialVersionUID = 7982507967024313067L;
-
-				public void execute() {
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - ").append(card.getController()).append(" draws a card");
-					ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
-                }
-            };
-            card.addDestroyCommand(destroy);
-        }//*************** END ************ END **************************   
-   		*/
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Elixir of Immortality")) {
-        	/*
+        	 *
         	 * 2, Tap: You gain 5 life. Shuffle Elixir of Immortality and your graveyard into your library.
-        	 */
+        	 *
         	Ability_Cost abCost = new Ability_Cost("2 T", cardName, true);
         	final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
 				private static final long serialVersionUID = -1299603105585632846L;
@@ -6495,7 +6445,7 @@ public class CardFactory implements NewConstants {
         	ability.setDescription(abCost+"You gain 5 life. Shuffle Elixir of Immortality and your graveyard into your library.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-
+    	*/
 
         //*************** START *********** START **************************
         else if(cardName.equals("Curse of Wizardry")) {
