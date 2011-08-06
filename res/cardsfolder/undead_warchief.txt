@@ -4,7 +4,7 @@ Types:Creature Zombie
 Text:Zombie spells you cast cost 1 less to cast.
 PT:1/1
 K:CostChange:Player:Less:1:Spell:All:Zombie:NoSpecial
-K:stPumpAll:Creature.ZombieYouCtrl:2/1:No Condition:Zombie creatures you control get +2/+1.
+K:stPumpAll:Creature.Zombie+YouCtrl:2/1:No Condition:Zombie creatures you control get +2/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_warchief.jpg
