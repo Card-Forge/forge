@@ -1866,6 +1866,143 @@ class CardFactory_Planeswalkers {
 	      return card2;
 	    }//*************** END ************ END **************************
 	    
+	    //*************** START *********** START **************************
+	    else if (cardName.equals("Jace Beleren"))
+	    {
+	    
+	    	final int turn[] = new int[1];
+		      turn[0] = -1;
+
+		      final Card card2 = new Card()
+		      {
+		        public void addDamage(int n)
+		        {
+		          subtractCounter(Counters.LOYALTY,n);
+		          AllZone.GameAction.checkStateEffects();
+		        }
+		      };
+		      card2.addCounter(Counters.LOYALTY,3);
+
+		      card2.setOwner(owner);
+		      card2.setController(owner);
+
+		      card2.setName(card.getName());
+		      card2.setType(card.getType());
+		      card2.setManaCost(card.getManaCost());
+		      card2.addSpellAbility(new Spell_Permanent(card2));
+		      
+		      
+		      //ability1
+		      final SpellAbility ability1 = new Ability(card2, "0")
+		      {
+		        public void resolve()
+		        {
+		          card2.addCounter(Counters.LOYALTY, 2);
+
+		          turn[0] = AllZone.Phase.getTurn();
+		          
+		          AllZone.GameAction.drawCard(Constant.Player.Computer);
+		          AllZone.GameAction.drawCard(Constant.Player.Human);
+		          
+		        }//resolve()
+		        public boolean canPlayAI()
+		        {
+		          return card2.getCounters(Counters.LOYALTY) < 11 && AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
+		        }
+		        public boolean canPlay()
+		        {
+		          return  AllZone.getZone(card2).is(Constant.Zone.Play) &&
+		                  turn[0] != AllZone.Phase.getTurn() &&
+		                  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+		                  !AllZone.Phase.getPhase().equals("End of Turn") &&
+		                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+		        }//canPlay()
+		      };
+		      
+		      ability1.setDescription("+2: Each player draws a card.");
+		      ability1.setStackDescription(cardName +  " - Each player draws a card.");
+		      
+		      //ability2
+		      final SpellAbility ability2 = new Ability(card2, "0")
+		      {
+		        public void resolve()
+		        {
+		          card2.subtractCounter(Counters.LOYALTY, 1);
+
+		          turn[0] = AllZone.Phase.getTurn();
+		          String player = getTargetPlayer();
+		          
+		          AllZone.GameAction.drawCard(player);
+		          
+		        }//resolve()
+		        public boolean canPlayAI()
+		        {
+		          return false;
+		        }
+		        public boolean canPlay()
+		        {
+		          return  AllZone.getZone(card2).is(Constant.Zone.Play) &&
+		          		  card2.getCounters(Counters.LOYALTY) >= 1 &&
+		                  turn[0] != AllZone.Phase.getTurn() &&
+		                  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+		                  !AllZone.Phase.getPhase().equals("End of Turn") &&
+		                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+		        }//canPlay()
+		      };
+		      ability2.setDescription("-1: Target player draws a card.");
+		      ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
+		      
+		      //ability3
+		      final SpellAbility ability3 = new Ability(card2, "0")
+		      {
+		        public void resolve()
+		        {
+		          card2.subtractCounter(Counters.LOYALTY, 10);
+
+		          turn[0] = AllZone.Phase.getTurn();
+		          String player = getTargetPlayer();
+		          
+		          PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+		          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+		          CardList libList = new CardList(lib.getCards());
+
+		          int max = 20;
+		          if (libList.size() < 20)
+		        	  max = libList.size();
+		          
+		          for (int i=0;i<max;i++)
+		          {
+		        	  Card c = libList.get(i);
+		        	  lib.remove(c);
+		        	  grave.add(c);
+		          }
+		          
+		        }//resolve()
+		        public boolean canPlayAI()
+		        {
+		          setTargetPlayer(Constant.Player.Human);
+		          return card2.getCounters(Counters.LOYALTY) >= 11;
+		        }
+		        public boolean canPlay()
+		        {
+		          return  AllZone.getZone(card2).is(Constant.Zone.Play) &&
+		          		  card2.getCounters(Counters.LOYALTY) >= 10 &&
+		                  turn[0] != AllZone.Phase.getTurn() &&
+		                  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+		                  !AllZone.Phase.getPhase().equals("End of Turn") &&
+		                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+		        }//canPlay()
+		      };
+		      ability3.setDescription("-10: Target player puts the top twenty cards of his or her library into his or her graveyard.");
+		      ability3.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability3));
+		      
+		      card2.addSpellAbility(ability1);
+		      card2.addSpellAbility(ability2);
+		      card2.addSpellAbility(ability3);
+		      
+		      return card2;
+	  	}//*************** END ************ END **************************
+	    
 	    return card;
 	}
 }

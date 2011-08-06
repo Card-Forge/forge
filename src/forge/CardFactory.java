@@ -17433,6 +17433,34 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     	ability.setBeforePayMana(runtime);
     
     }//*************** END ************ END **************************
+	
+	//*************** START *********** START **************************
+    else if(cardName.equals("Spell Snare"))
+    {
+      SpellAbility spell = new Spell(card)
+      {
+		private static final long serialVersionUID = -3254886985412814994L;
+		public void resolve()
+        {
+          SpellAbility sa = AllZone.Stack.pop();
+          AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+        }
+        public boolean canPlay()
+        {
+          if(AllZone.Stack.size() == 0)
+            return false;
+
+          //see if spell is on stack and that opponent played it
+          String opponent = AllZone.GameAction.getOpponent(card.getController());
+          SpellAbility sa = AllZone.Stack.peek();
+
+          return sa.isSpell() && opponent.equals(sa.getSourceCard().getController()) 
+          		 && CardFactoryUtil.isCounterable(sa.getSourceCard()) && CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost()) == 2;
+        }
+      };
+      card.clearSpellAbility();
+      card.addSpellAbility(spell);
+    }//*************** END ************ END **************************
 
 	
     

@@ -391,7 +391,8 @@ private Card getCurrentCard(int ID)
     	  for (int i=0;i < c.getEnchanting().size(); i++)
     	  {
     		  Card perm = c.getEnchanting().get(i);
-    		  if (!AllZone.GameAction.isCardInPlay(perm) || CardFactoryUtil.hasProtectionFrom(c, perm))
+    		  if (!AllZone.GameAction.isCardInPlay(perm) || CardFactoryUtil.hasProtectionFrom(c, perm) 
+    			  || (c.getKeyword().contains("Enchant creature") && !perm.getType().contains("Creature")) )
     		  {
     			  c.unEnchantCard(perm); 			  
     			  destroy(c);
@@ -436,9 +437,21 @@ private Card getCurrentCard(int ID)
     for(int i = 0; i < list.size(); i++)
     {
       c = list.get(i);
+      
       if(c.getCounters(Counters.LOYALTY) <= 0)
         AllZone.GameAction.moveToGraveyard(c);
+      
+      CardList cl = getPlaneswalkerSubtype(list, c);
+      
+      if (cl.size() > 1)
+      {
+    	  for (Card crd : cl)
+    	  {
+    		  AllZone.GameAction.moveToGraveyard(crd);
+    	  }
+      }
     }
+     
   }
 
   private void destroyLegendaryCreatures()
@@ -454,6 +467,8 @@ private Card getCurrentCard(int ID)
       {
         for(int i = 0; i < b.size(); i++)
           AllZone.GameAction.destroy((Card)b.get(i));
+        
+        
       }
     }
   }//destroyLegendaryCreatures()
@@ -470,6 +485,21 @@ private Card getCurrentCard(int ID)
         a.add(c[i]);
     }
     return a;
+  }
+  
+  public CardList getPlaneswalkerSubtype(CardList search, Card planeswalker)
+  {
+	  final String type = planeswalker.getType().toString();
+	  CardList list = search;
+	  list = list.filter(new CardListFilter()
+	  {
+		  public boolean addCard(Card c)
+		  {
+			  return c.getType().toString().equals(type);
+		  }
+	  });
+	  
+	  return list;
   }
   
   

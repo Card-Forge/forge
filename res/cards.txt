@@ -1,3 +1,43 @@
+Jace Beleren
+1 U U
+Planeswalker - Jace
+no text
+
+Spell Snare
+U
+Instant
+Counter target spell with converted mana cost 2.
+
+Timber Protector
+4 G
+Creature Treefolk Warrior
+Other Treefolk creatures you control get +1/+1. Other Treefolk and Forests you control are indestructible.
+4/6
+
+Viridian Zealot
+G G
+Creature Elf Warrior
+no text
+2/1
+
+Ronom Unicorn
+1 W
+Creature Unicorn
+no text
+2/2
+
+Kami of Ancient Law
+1 W
+Creature Spirit
+no text
+2/2
+
+Capashen Unicorn
+1 W
+Creature Unicorn
+no text
+1/2
+
 Qasali Pridemage
 G W
 Creature Cat Wizard
@@ -2929,7 +2969,7 @@ Cycling:2
 
 Nissa Revane
 2 G G
-Legendary Planeswalker - Nissa
+Planeswalker - Nissa
 no text
 
 Nissa's Chosen
@@ -7713,7 +7753,7 @@ Whenever you draw a card, you may put a hoofprint counter on Hoofprints of the S
 
 Nicol Bolas, Planeswalker
 4 U B B R
-Legendary Planeswalker - Bolas
+Planeswalker - Bolas
 no text
 
 Aven Squire
@@ -8769,7 +8809,7 @@ Exalted
 
 Elspeth, Knight-Errant
 2 W W
-Legendary Planeswalker - Elspeth
+Planeswalker - Elspeth
 no text
 
 Ratcatcher
@@ -11694,7 +11734,7 @@ Flying
 Mishra's Factory
 no cost
 Land
-1: Mishra's Factory becomes a 2/2 Assembly-Worker artifact creature until end of turn. It's still a land.
+no text
 tap: add 1
 
 Cranial Extraction
@@ -11765,22 +11805,22 @@ Choose two - Incendiary Command deals 4 damage to target player; or Incendiary C
 
 Ajani Goldmane
 2 W W
-Legendary Planeswalker - Ajani
+Planeswalker - Ajani
 no text
 
 Chandra Nalaar
 3 R R
-Legendary Planeswalker - Chandra 
+Planeswalker - Chandra 
 no text
 
 Garruk Wildspeaker
 2 G G
-Legendary Planeswalker - Garruk
+Planeswalker - Garruk
 no text
 
 Liliana Vess  
 3 B B
-Legendary Planeswalker - Liliana
+Planeswalker - Liliana
 no text
 
 Dark Banishing

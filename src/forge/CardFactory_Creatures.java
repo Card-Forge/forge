@@ -16528,12 +16528,26 @@ public class CardFactory_Creatures {
 	    	final Ability ability = new Ability(card, "1")
 	    	{
 				public void resolve() {
-					if (AllZone.GameAction.isCardInPlay(card))
+					if (AllZone.GameAction.isCardInPlay(card)) {
 						AllZone.GameAction.sacrifice(card);
 					
-					Card c = getTargetCard();
-					AllZone.GameAction.destroy(c);				
+						Card c = getTargetCard();
+						AllZone.GameAction.destroy(c);		
+					}
 				}	    
+				
+				public boolean canPlay()
+				{
+					SpellAbility sa;
+	    	    	for (int i=0; i<AllZone.Stack.size(); i++)
+	    	    	{
+	    	    	     sa = AllZone.Stack.peek(i);
+	    	    	     if (sa.getSourceCard().equals(card))
+	    	    	          return false;
+	    	    	}
+	    	    	
+					return super.canPlay();
+				}
 				
 				public boolean canPlayAI()
 				{
@@ -16563,6 +16577,243 @@ public class CardFactory_Creatures {
 	    	ability.setBeforePayMana(new Input()
  	        {
 				private static final long serialVersionUID = -3565024591921095303L;
+
+				public void showMessage()
+		        {
+		    		 PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		    		 PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+		    		 
+		    		 CardList list = new CardList();
+		    		 list.addAll(hPlay.getCards());
+		    		 list.addAll(cPlay.getCards());
+		    		 
+		    		 list = list.filter(new CardListFilter()
+		    		 {
+						public boolean addCard(Card c) {
+							return c.isArtifact() || c.isEnchantment();
+						}
+		    		 });
+		    		 
+		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select an Artifact or Enchantment", true));
+		           }
+		       });
+	    	card.addSpellAbility(ability);
+	    }//*************** END ************ END **************************
+	      
+	    //*************** START *********** START **************************
+	    else if (cardName.equals("Viridian Zealot"))
+	    {
+	    	final Ability ability = new Ability(card, "1 G")
+	    	{
+				public void resolve() {
+					if (AllZone.GameAction.isCardInPlay(card)) {
+						AllZone.GameAction.sacrifice(card);
+					
+						Card c = getTargetCard();
+						AllZone.GameAction.destroy(c);		
+					}
+				}	    
+				
+				public boolean canPlay()
+				{
+					SpellAbility sa;
+	    	    	for (int i=0; i<AllZone.Stack.size(); i++)
+	    	    	{
+	    	    	     sa = AllZone.Stack.peek(i);
+	    	    	     if (sa.getSourceCard().equals(card))
+	    	    	          return false;
+	    	    	}
+	    	    	
+					return super.canPlay();
+				}
+				
+				public boolean canPlayAI()
+				{
+					 PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		    		 CardList list = new CardList();
+		    		 list.addAll(hPlay.getCards());
+		    		 
+		    		 list = list.filter(new CardListFilter()
+		    		 {
+						public boolean addCard(Card c) {
+							return c.isArtifact() || c.isEnchantment() && CardUtil.getConvertedManaCost(c.getManaCost()) >= 4;
+						}
+		    		 });
+		    		 
+		    		 if (list.size() > 0)
+		    		 {
+		    			 list.shuffle();
+		    			 setTargetCard(list.get(0));
+		    		 }
+		    		 
+		    		 return list.size() > 0;
+				}
+				
+				
+	    	};
+	    	ability.setDescription("1 G, Sacrifice Viridian Zealot: Destroy target artifact or enchantment.");
+	    	ability.setBeforePayMana(new Input()
+ 	        {
+				private static final long serialVersionUID = -3565024591921095303L;
+
+				public void showMessage()
+		        {
+		    		 PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		    		 PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+		    		 
+		    		 CardList list = new CardList();
+		    		 list.addAll(hPlay.getCards());
+		    		 list.addAll(cPlay.getCards());
+		    		 
+		    		 list = list.filter(new CardListFilter()
+		    		 {
+						public boolean addCard(Card c) {
+							return c.isArtifact() || c.isEnchantment();
+						}
+		    		 });
+		    		 
+		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select an Artifact or Enchantment", true));
+		           }
+		       });
+	    	card.addSpellAbility(ability);
+	    }//*************** END ************ END **************************
+	      
+	      //*************** START *********** START **************************
+	    else if (cardName.equals("Ronom Unicorn") || cardName.equals("Kami of Ancient Law"))
+	    {
+	    	final Ability ability = new Ability(card, "0")
+	    	{
+				public void resolve() {
+					if (AllZone.GameAction.isCardInPlay(card)) {
+						AllZone.GameAction.sacrifice(card);
+					
+						Card c = getTargetCard();
+						AllZone.GameAction.destroy(c);		
+					}
+				}	    
+				
+				public boolean canPlay()
+				{
+					SpellAbility sa;
+	    	    	for (int i=0; i<AllZone.Stack.size(); i++)
+	    	    	{
+	    	    	     sa = AllZone.Stack.peek(i);
+	    	    	     if (sa.getSourceCard().equals(card))
+	    	    	          return false;
+	    	    	}
+	    	    	
+					return super.canPlay();
+				}
+				
+				public boolean canPlayAI()
+				{
+					 PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		    		 CardList list = new CardList();
+		    		 list.addAll(hPlay.getCards());
+		    		 
+		    		 list = list.filter(new CardListFilter()
+		    		 {
+						public boolean addCard(Card c) {
+							return c.isEnchantment() && CardUtil.getConvertedManaCost(c.getManaCost()) >= 4;
+						}
+		    		 });
+		    		 
+		    		 if (list.size() > 0)
+		    		 {
+		    			 list.shuffle();
+		    			 setTargetCard(list.get(0));
+		    		 }
+		    		 
+		    		 return list.size() > 0;
+				}
+				
+				
+	    	};
+	    	ability.setDescription("Sacrifice " +cardName +": Destroy target enchantment.");
+	    	ability.setBeforePayMana(new Input()
+ 	        {
+				private static final long serialVersionUID = -2023409303136493987L;
+
+				public void showMessage()
+		        {
+		    		 PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		    		 PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+		    		 
+		    		 CardList list = new CardList();
+		    		 list.addAll(hPlay.getCards());
+		    		 list.addAll(cPlay.getCards());
+		    		 
+		    		 list = list.filter(new CardListFilter()
+		    		 {
+						public boolean addCard(Card c) {
+							return c.isEnchantment();
+						}
+		    		 });
+		    		 
+		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select target Enchantment", true));
+		           }
+		       });
+	    	card.addSpellAbility(ability);
+	    }//*************** END ************ END **************************
+	      
+	    //*************** START *********** START **************************
+	    else if (cardName.equals("Capashen Unicorn"))
+	    {
+	    	final Ability_Tap ability = new Ability_Tap(card, "1 W")
+	    	{
+
+				private static final long serialVersionUID = 3723881006291076691L;
+
+				public void resolve() {
+					if (AllZone.GameAction.isCardInPlay(card)) {
+						AllZone.GameAction.sacrifice(card);
+					
+						Card c = getTargetCard();
+						AllZone.GameAction.destroy(c);		
+					}
+				}	    
+				
+				public boolean canPlay()
+				{
+					SpellAbility sa;
+	    	    	for (int i=0; i<AllZone.Stack.size(); i++)
+	    	    	{
+	    	    	     sa = AllZone.Stack.peek(i);
+	    	    	     if (sa.getSourceCard().equals(card))
+	    	    	          return false;
+	    	    	}
+	    	    	
+					return super.canPlay();
+				}
+				
+				public boolean canPlayAI()
+				{
+					 PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+		    		 CardList list = new CardList();
+		    		 list.addAll(hPlay.getCards());
+		    		 
+		    		 list = list.filter(new CardListFilter()
+		    		 {
+						public boolean addCard(Card c) {
+							return c.isArtifact() || c.isEnchantment() && CardUtil.getConvertedManaCost(c.getManaCost()) >= 4;
+						}
+		    		 });
+		    		 
+		    		 if (list.size() > 0)
+		    		 {
+		    			 list.shuffle();
+		    			 setTargetCard(list.get(0));
+		    		 }
+		    		 
+		    		 return list.size() > 0;
+				}
+				
+				
+	    	};
+	    	ability.setDescription("1 W, tap, Sacrifice Capashen Unicorn: Destroy target artifact or enchantment.");
+	    	ability.setBeforePayMana(new Input()
+ 	        {
+				private static final long serialVersionUID = -4032330058005016682L;
 
 				public void showMessage()
 		        {

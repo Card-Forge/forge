@@ -8809,6 +8809,115 @@ public class GameActionUtil
 		
 	};//Elvish_Champion_Other
 	
+	public static Command Timber_Protector_Pump = new Command()
+	{
+
+		private static final long serialVersionUID = 395882142255572162L;
+		CardList gloriousAnthemList = new CardList();
+
+		public void execute()
+		{
+
+			CardList cList = gloriousAnthemList;
+			Card c;
+
+			for (int i = 0; i < cList.size(); i++)
+			{
+				c = cList.get(i);
+				if (c.isCreature()) {
+					c.addSemiPermanentAttackBoost(-1);
+					c.addSemiPermanentDefenseBoost(-1);
+					c.removeExtrinsicKeyword("Indestructible");
+				}
+				else //forest
+				{
+					c.removeExtrinsicKeyword("Indestructible");
+				}
+			}
+			cList.clear();
+			PlayerZone[] zone = getZone("Timber Protector");
+
+			// for each zone found add +1/+1 to each card
+			for (int outer = 0; outer < zone.length; outer++)
+			{
+				CardList creature = new CardList();
+				creature.addAll(AllZone.Human_Play.getCards());
+				creature.addAll(AllZone.Computer_Play.getCards());
+				creature = creature.filter(new CardListFilter()
+				{
+					public boolean addCard(Card c)
+					{
+						return c.getType().equals("Treefolk") || c.getType().equals("Forest") || c.getKeyword().contains("Changeling");
+					}
+				});
+
+				for (int i = 0; i < creature.size(); i++)
+				{
+					c = creature.get(i);
+					if (c.isCreature()
+							&& !c.getName().equals("Timber Protector"))
+					{
+						c.addSemiPermanentAttackBoost(1);
+						c.addSemiPermanentDefenseBoost(1);
+						c.addExtrinsicKeyword("Indestructible");
+						gloriousAnthemList.add(c);
+					}
+					else if (c.getKeyword().contains("Forest"))
+					{
+						c.addExtrinsicKeyword("Indestructible");
+					}
+
+				} // for
+			} // for
+
+		}// execute()
+
+	};//Timber_Protector_Pump
+	
+	public static Command Timber_Protector_Other = new Command()
+	{
+		private static final long serialVersionUID = -3107498901233064819L;
+		int otherLords=0;
+		
+		private int countOtherLords()
+		{
+			PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+			PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			CardList lords = new CardList();
+			lords.addAll(hPlay.getCards());
+			lords.addAll(cPlay.getCards());
+			lords = lords.getName("Timber Protector");
+			return lords.size()-1;
+
+		}
+
+		public void execute()
+		{
+
+			
+			CardList creature = new CardList();
+			creature.addAll(AllZone.Human_Play.getCards());
+			creature.addAll(AllZone.Computer_Play.getCards());
+			
+			creature = creature.getName("Timber Protector");
+
+			for (int i = 0; i < creature.size(); i++)
+			{
+				Card c = creature.get(i);
+				otherLords = countOtherLords();
+				c.setOtherAttackBoost(otherLords);
+				c.setOtherDefenseBoost(otherLords);
+				if (!c.getExtrinsicKeyword().contains("Indestructible") && otherLords > 0)
+					c.addExtrinsicKeyword("Indestructible");
+				//else if (c.getExtrinsicKeyword().contains("Mountainwalk") && otherLords == 0 )
+					
+
+			}// for inner
+		}// execute()
+		
+	};//Timber_Protector_Other
+	
+	
 	public static Command Goblin_Chieftain_Pump = new Command()
 	{
 
@@ -11582,6 +11691,8 @@ public class GameActionUtil
 		commands.put("Merfolk_Sovereign_Other", Merfolk_Sovereign_Other);
 		commands.put("Lord_of_Atlantis_Pump", Lord_of_Atlantis_Pump);
 		commands.put("Lord_of_Atlantis_Other", Lord_of_Atlantis_Other);
+		commands.put("Timber_Protector_Pump", Timber_Protector_Pump);
+		commands.put("Timber_Protector_Other", Timber_Protector_Other);
 		commands.put("Goblin_Chieftain_Pump", Goblin_Chieftain_Pump);
 		commands.put("Goblin_Chieftain_Other", Goblin_Chieftain_Other);
 		commands.put("Goblin_King_Pump", Goblin_King_Pump);

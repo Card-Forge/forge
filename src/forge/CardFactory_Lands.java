@@ -557,6 +557,7 @@ class CardFactory_Lands {
 	           }
 	         };//SpellAbility
 	         card.addSpellAbility(a1);
+	         a1.setDescription("1: Mishra's Factory becomes a 2/2 Assembly-Worker artifact creature until end of turn. It's still a land.");
 	         a1.setStackDescription(card +" - becomes a 2/2 creature until EOT");
 
 	         Command paid1 = new Command() {
