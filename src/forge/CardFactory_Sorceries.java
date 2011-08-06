@@ -3105,7 +3105,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Roar of the Wurm")) {
             SpellAbility spell = new Spell(card) {
@@ -3128,7 +3128,8 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "3 G", "0"));
             
         }//*************** END ************ END **************************
-        
+        */
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Crush of Wurms")) {
             SpellAbility spell = new Spell(card) {
@@ -3158,6 +3159,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "9 G G G", "0"));
             
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Grizzly Fate")) {
