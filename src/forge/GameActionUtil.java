@@ -7384,11 +7384,11 @@ public class GameActionUtil
 	private static void upkeep_Overbeing_of_Myth()
 	{
 		final String player = AllZone.Phase.getActivePlayer();
-
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		
 		CardList list = new CardList();
-		list.addAll(AllZone.Human_Play.getCards());
-		list.addAll(AllZone.Computer_Play.getCards());
-
+		
+		list.addAll(play.getCards());
 		list = list.getName("Overbeing of Myth");
 
 		for (int i = 0; i < list.size(); i++)
