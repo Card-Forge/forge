@@ -1,0 +1,9 @@
+Name:Pradesh Gypsies
+ManaCost:2 G
+Types:Creature Human Nomad
+Text:no text
+PT:1/1
+A:AB$Pump|Cost$1 G T|Tgt$TgtC|NumAtt$-2|IsCurse$True|SpellDescription$Target creature gets -2/-0 until end of turn. 
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pradesh_gypsies.jpg
+End
