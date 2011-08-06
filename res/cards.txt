@@ -1,3 +1,18 @@
+Mishra, Artificer Prodigy
+1 U B R
+Legendary Creature Human Artificer
+no text
+4/4
+WheneverKeyword:CastSpell/Controller:Type/Artifact:Play:MoveFrom-Any-Play:SearchShuffle_SameName/Library/Hand/Graveyard:ASAP:Choice_Instant-SearchLibrary:SearchType/Artifact:Whenever you cast an artifact spell, you may search your graveyard, hand, and/or library for a card with the same name as that spell and put it onto the battlefield. If you search your library this way, shuffle it.
+
+Masked Admirers
+2 G G
+Creature Elf Shaman
+no text
+3/2
+WheneverKeyword:EntersBattleField:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Masked Admirers enters the battlefield, draw a card.
+WheneverKeyword:CastSpell/Controller:Type/Creature:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/G G:No Special Condition:Whenever you cast a creature spell, you may pay G G. If you do, return Masked Admirers from your graveyard to your hand.
+
 Crucible of Worlds
 3
 Artifact

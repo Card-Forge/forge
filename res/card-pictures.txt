@@ -38,6 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+mishra_artificer_prodigy.jpg	http://www.wizards.com/global/images/magic/general/mishra_artificer_prodigy.jpg
+masked_admirers.jpg		http://www.wizards.com/global/images/magic/general/masked_admirers.jpg
 summer_bloom.jpg		http://www.wizards.com/global/images/magic/general/summer_bloom.jpg
 horn_of_greed.jpg		http://www.wizards.com/global/images/magic/general/horn_of_greed.jpg
 dune_brood_nephilim.jpg			http://www.wizards.com/global/images/magic/general/dune_brood_nephilim.jpg

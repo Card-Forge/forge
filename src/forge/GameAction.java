@@ -666,6 +666,7 @@ public class GameAction {
     }
     
     // Whenever Keyword
+    // Whenever Keyword
     public void CheckWheneverKeyword(Card Triggering_Card,String Event, Object[] Custom_Parameters) { 
         PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
         PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
@@ -716,6 +717,10 @@ public class GameAction {
     	 * 					: Custom_Parameters[2] = Damage Source
     	 */
 		final Card F_TriggeringCard = c;
+		final String[] Custom_Strings = new String[10];
+		int Custom_Strings_Count = 0;
+		boolean Stop = false;
+		for(int i = 0; i < Custom_Strings.length; i++) Custom_Strings[i] = "Null";
         PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
         PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
         PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
@@ -816,6 +821,7 @@ public class GameAction {
                         String Special_Condition[] = Special_ConditionsParse.split("!");
                         Special_Conditions = Special_Condition.length;
                             for(int y = 0; y < Special_Conditions; y++) {
+                            	
                   	if(Special_Condition[y].contains("Initiator - Other than Self")) {
                  		if(card.equals(c)) k[4] = "Null";      		
                  	}
@@ -839,6 +845,18 @@ public class GameAction {
                         if(((AllZone.getZone(Constant.Zone.Hand, card.getController())).getCards()).length 
                         		<= (AllZone.getZone(Constant.Zone.Hand, getOpponent(card.getController()))).getCards().length) k[4] = "Null";
                  	}
+                  	if(Special_Condition[y].contains("SearchType")) {
+                    	for(int TypeRestrict = 0; TypeRestrict < (Special_Condition[y].split("/")).length - 1; TypeRestrict ++) {
+                        	Custom_Strings[Custom_Strings_Count] = "Type" + (Special_Condition[y].split("/"))[TypeRestrict + 1];
+                    	Custom_Strings_Count++;
+                    	}
+                 	}
+                  	if(Special_Condition[y].contains("SearchColor")) {
+                    	for(int ColorRestrict = 0; ColorRestrict < (Special_Condition[y].split("/")).length - 1; ColorRestrict ++) {
+                        	Custom_Strings[Custom_Strings_Count] = "Color" + (Special_Condition[y].split("/"))[ColorRestrict + 1];
+                    	Custom_Strings_Count++;
+                    	}
+                 	}
                     }
                             
                   	// Mana Cost (if Any)
@@ -847,6 +865,7 @@ public class GameAction {
                         String PayAmountParse = k[7];                
                         ManaCost = PayAmountParse.split("/")[1];
             		}
+            		
                   	// Targets
             		           		
                     int Target_Conditions = 1;
@@ -860,9 +879,9 @@ public class GameAction {
     				if(Targets[y].equals("ControllingPlayer_Opponent")) TargetPlayer[y] = getOpponent(card.getController());
     				if(Targets[y].equals("ControllingPlayer_Initiator")) TargetPlayer[y] = F_TriggeringCard.getController();  				  				
     				if(Targets[y].equals("Self")) TargetCard[y] = F_card;
-    				if(Targets[y].equals("Initiating_Card")) TargetCard[y] = c;   
+    				if(Targets[y].equals("Initiating_Card")) TargetCard[y] = c; 
                         }
-                        
+
                         final String[] F_TargetPlayer = TargetPlayer;
                         final Card[] F_TargetCard = TargetCard;
                      //   JOptionPane.showMessageDialog(null, Targets, "", JOptionPane.INFORMATION_MESSAGE);
@@ -885,6 +904,19 @@ public class GameAction {
                 			}
                 		};
                         
+                		if(k[7].contains("Choice_Instant") && k[4] != "Null") {
+                	    	if(card.getController().equals("Human")) {
+                	        	Object[] possibleValues = {"Yes", "No"};
+                	        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + card.getName(),card.getName() + " Ability", 
+                	        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                	        			null, possibleValues, possibleValues[0]);
+                	              if(q.equals(1)) {
+                	            	  Stop = true;
+                	                }
+                	    	}
+                		}
+                		if(Stop == false) { 
+                		
                         for(int y = 0; y < Effects; y++) {  
                         	// Variables
                            String AmountParse = Effect[y]; 
@@ -1084,20 +1116,40 @@ public class GameAction {
                              if(ZoneConditions[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
                           // if(ZoneConditions[z].contains("Sideboard")) PZones[z] = AllZone.getZone(Constant.Zone.Sideboard, card.getController());
                             }
+                            final String[] F_ZoneConditions = ZoneConditions;
                             final PlayerZone[] F_PZones = PZones;
                     			Command Proper_resolve = new Command() {
                                 	private static final long serialVersionUID = 151367344511590317L;
 
                         			public void execute() {
-                        				if(Whenever_Go(F_card,F_k) == true) if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],F_PZones[1])) {
+                        				if(Whenever_Go(F_card,F_k) == true) {
+                            				Card NewSearch[] = Search(F_card,F_TriggeringCard, F_k,Custom_Strings);
+                            				if(NewSearch[0] != null) {
+                            				for(int i = 0; i < NewSearch.length; i++) {
+            			                    	  AllZone.GameAction.moveTo(F_PZones[2], NewSearch[i]);
+              			                    	  checkStateEffects(); // For Legendaries	
+                            				}
+                            				} else {
+                        					if(!F_ZoneConditions[1].equals("Any")) {
+                        					if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],F_PZones[1])) {
       			                    	  AllZone.GameAction.moveTo(F_PZones[2], F_TargetCard[F_Target]);
       			                    	  checkStateEffects(); // For Legendaries
       			                      }
-
+                        					} else if(F_TargetCard[F_Target] != null) {
+            			                    	  AllZone.GameAction.moveTo(F_PZones[2], F_TargetCard[F_Target]);
+              			                    	  checkStateEffects(); // For Legendaries
+                        					}
     			                      }
+                        				}
+                        			}
                     			};
                             Command_Effects[F_Target] = Proper_resolve;      
-                            StackDescription = StackDescription + F_TargetCard[y] + " moves from  " + ZoneConditions[1] + " to " + ZoneConditions[2] ;                        
+                            if(F_TargetCard[y] != null) StackDescription = StackDescription + F_TargetCard[y] + "moves from  " + ZoneConditions[1] + " to " + ZoneConditions[2] + " zone";                        
+                            else {
+                            	String[] SD = Search_Description(F_TriggeringCard ,k, Custom_Strings);
+                            	StackDescription = StackDescription + F_card.getController() + " searches his/her " + SD[0] + " for a " + SD[1] + "card and moves it to the " + ZoneConditions[2] 
+                            	                   + " zone. If that player searches a library this way, shuffle it";
+                            }
                 		}
                 		
                 		// Deal Damage
@@ -1141,12 +1193,141 @@ public class GameAction {
                     				break;
                     			}
  		        }
+                		 }
  		}	
  		}
     }
+    
+    Card[] Search (Card Source, Card Initiator ,String[] Keyword_Details, final String[] Custom_Strings) {
+        String SearchDescription = " ";
+        boolean SearchLib = true;
+        if(Keyword_Details[7].contains("Choice_Instant-SearchLibrary")) {
+    	    	if(Source.getController().equals("Human")) {
+    	        	Object[] possibleValues = {"Yes", "No"};
+    	        	Object q = JOptionPane.showOptionDialog(null, "Search Libraries?",Source.getName() + " Ability", 
+    	        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+    	        			null, possibleValues, possibleValues[0]);
+    	              if(q.equals(1)) {
+    	            	  SearchLib = false;
+    	                }
+    			}	
+        }
+        int Target_Conditions = 1;
+        String TargetParse = Keyword_Details[5];                
+        String Targets[] = TargetParse.split("!");
+        Target_Conditions = Targets.length;
+        String Zone_Owner = Source.getController();
+        Card SearchedCard[] = new Card[Target_Conditions];
+            for(int y = 0; y < Target_Conditions; y++) {       			
+		if(Targets[y].contains("SearchShuffle") /** && Keyword_Details[4] != "Null" **/) {
+			if(Targets[y].contains("OSearchShuffle")) {
+				Zone_Owner = getOpponent(Source.getController());
+				SearchDescription = SearchDescription + "Opponent's ";
+			}
+			else Zone_Owner = Source.getController();
+            String SearchParse = Targets[y];  
+            String Search[] = SearchParse.split("/");
+            String[] SearchZone = new String[Search.length - 1];
+            PlayerZone[] PZones = new PlayerZone[SearchZone.length];    
+            CardList SearchBase = new CardList();
+            for(int z = 0; z < PZones.length; z++) {
+             SearchZone[z] = Search[z+1];
+             if(SearchZone[z].equals("Hand")) PZones[z] = AllZone.getZone(Constant.Zone.Hand, Zone_Owner);
+             if(SearchZone[z].equals("Graveyard")) PZones[z] = AllZone.getZone(Constant.Zone.Graveyard, Zone_Owner);
+             if(SearchZone[z].equals("Play")) PZones[z] = AllZone.getZone(Constant.Zone.Play, Zone_Owner);
+             if(SearchZone[z].contains("Library") && SearchLib) PZones[z] = AllZone.getZone(Constant.Zone.Library, Zone_Owner);
+             if(SearchZone[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Removed_From_Play, Zone_Owner);
+          // if(ZoneConditions[z].contains("Sideboard")) PZones[z] = AllZone.getZone(Constant.Zone.Sideboard, Zone_Owner);
+             if(PZones[z] != null) {
+             SearchBase.addAll(PZones[z].getCards());
+             SearchDescription = SearchDescription + SearchZone[z] + " ";
+             }
+             if(z + 2 < PZones.length && PZones[z] != null) SearchDescription = SearchDescription + ", ";
+             else if(z + 2 == PZones.length) SearchDescription = SearchDescription + "and ";
+            }
+            
+            @SuppressWarnings("unused")
+			Object check2 = AllZone.Display.getChoiceOptional("View" + SearchDescription,
+            		SearchBase.toArray());
+            if(Search[0].contains("SearchShuffle_SameName")) SearchBase = SearchBase.getName(Initiator.getName());
+            if(Search[0].contains("SearchShuffle_Type")) {
+            	for(int TypeRestrict = 0; TypeRestrict < Custom_Strings.length; TypeRestrict ++) {
+            	if(Custom_Strings[TypeRestrict].startsWith("Type")) SearchBase = SearchBase.getType(Custom_Strings[TypeRestrict].replaceFirst("Type", ""));
+            	if(Custom_Strings[TypeRestrict].startsWith("Color")) {
+            		final int Number = TypeRestrict;
+            		SearchBase = SearchBase.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            if(CardUtil.getColors(c).contains(Custom_Strings[Number].replaceFirst("Color", ""))) return true;
+                            return false;
+                        }
+                    });
+            	}
+            }
+            }
+            if(SearchBase.size() != 0) {
+                Object check = AllZone.Display.getChoiceOptional("Select a Suitable Card",
+                		SearchBase.toArray());
+                if(check != null) {
+                    SearchedCard[y] = (Card) check;
+                    if(SearchLib) AllZone.GameAction.shuffle(((Card) check).getController());
+                }                      
+            } else {
+            	JOptionPane.showMessageDialog(null, "No suitable cards in" + SearchDescription, "", JOptionPane.INFORMATION_MESSAGE);
+            	if(SearchLib && Targets[y].contains("OSearchShuffle")) AllZone.GameAction.shuffle(getOpponent(Source.getController()));
+            	else if(SearchLib) AllZone.GameAction.shuffle((Source.getController()));
+            }
+		}
+            }
+            return SearchedCard;
+    }
+    
+    String[] Search_Description(Card Initiator ,String[] Keyword_Details, final String[] Custom_Strings) {
+    	String[] SD = new String[2];
+        String SearchDescription = "";
+        String SearchType = "";
+        int Target_Conditions = 1;
+        String TargetParse = Keyword_Details[5];                
+        String Targets[] = TargetParse.split("!");
+        Target_Conditions = Targets.length;
+            for(int y = 0; y < Target_Conditions; y++) {       			
+		if(Targets[y].contains("SearchShuffle")) {
+			if(Targets[y].contains("OSearchShuffle")) {
+				SearchDescription = SearchDescription + "Opponent's";
+			}
+            String SearchParse = Targets[y];  
+            String Search[] = SearchParse.split("/");   
+            
+            for(int z = 0; z < Search.length - 1; z++) {
+             SearchDescription = SearchDescription + Search[z+1];
+             if(z + 3 < Search.length) SearchDescription = SearchDescription + ", ";
+             else if(z + 2 != Search.length) SearchDescription = SearchDescription + " and/or ";
+            }       
+            if(Search[0].contains("SearchShuffle_SameName")) SearchType = Initiator.getName() + " ";
+            if(Search[0].contains("SearchShuffle_Type")) {
+            	for(int TypeRestrict = 0; TypeRestrict < Custom_Strings.length; TypeRestrict ++) {
+            	if(Custom_Strings[TypeRestrict].startsWith("Color")) {
+            		SearchType = SearchType + Custom_Strings[TypeRestrict].replaceFirst("Color", "");
+            		if(TypeRestrict + 1 != Custom_Strings.length) SearchType = SearchType + " ";
+            	}
+            }
+            	for(int TypeRestrict = 0; TypeRestrict < Custom_Strings.length; TypeRestrict ++) {
+                	if(Custom_Strings[TypeRestrict].startsWith("Type")) {
+                		SearchType = SearchType + Custom_Strings[TypeRestrict].replaceFirst("Type", "");
+                		if(TypeRestrict + 1 != Custom_Strings.length) SearchType = SearchType + " ";
+                	}
+            	}
+            }
+            }
+            }
+            SD[0] = SearchDescription;
+            SD[1] = SearchType;
+            
+            return SD; 
+    }
+    
     void Whenever_ManaPaid (Card Source, String[] Keyword_Details, final Command Proper_Resolve, SpellAbility ability) {
 		String S_Amount = "0";
-		if(!Keyword_Details[7].contains("No_Condition") && !Keyword_Details[7].equals("Yes_No")) {
+		if(!Keyword_Details[7].contains("No_Condition") && !Keyword_Details[7].equals("Yes_No") && !Keyword_Details[7].contains("Choice_Instant")) {
 		if(Keyword_Details[7].contains("PayMana")) {
             String PayAmountParse = Keyword_Details[7];                
             S_Amount = PayAmountParse.split("/")[1];
@@ -1184,6 +1365,8 @@ public class GameAction {
     		} else Proper_Resolve.execute();
 
     }
+    
+    
 	boolean Whenever_Go (Card Source, String[] Keyword_Details) {
 		boolean Go = true;
 		String Zones = Keyword_Details[3];
