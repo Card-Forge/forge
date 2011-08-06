@@ -660,7 +660,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell_two);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Threaten") || cardName.equals("Act of Treason") || cardName.equals("Slave of Bolas")) {
             final PlayerZone[] orig = new PlayerZone[1];
@@ -750,6 +750,7 @@ public class CardFactory_Sorceries {
             
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Insurrection")) {
@@ -7524,8 +7525,6 @@ public class CardFactory_Sorceries {
 					maxCards = Math.min(maxCards, num);
 					
 					//opponent moves this many cards to graveyard
-					PlayerZone oppLib = AllZone.getZone(Constant.Zone.Library, opp);
-
 					opp.mill(maxCards);
 					
 					//then, move revealed cards to bottom of library

@@ -31,18 +31,17 @@ public class AbilityFactory_GainControl {
 		AF = newAF;
 		params = AF.getMapParams();
 		hostCard = AF.getHostCard();
-		if (params.containsKey("LoseControl"))
+		if (params.containsKey("LoseControl")) {
 			lose = new ArrayList<String>(Arrays.asList(params.get("LoseControl").split(",")));
+		}
 		if(params.containsKey("Untap")) {
 				bUntap = true;
 		}
 		if(params.containsKey("TapOnLose")) {
-			//if(params.get("Untap").equals("True")) {
 				bTapOnLose = true;
-			//}
 		}
 		if(params.containsKey("AddKWs")) {
-			kws = new ArrayList<String>(Arrays.asList(params.get("AddKWs").split("&")));
+			kws = new ArrayList<String>(Arrays.asList(params.get("AddKWs").split(" & ")));
 		}
 	}
 	
