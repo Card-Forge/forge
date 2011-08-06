@@ -3493,7 +3493,9 @@ public class GameActionUtil {
 		 * When there are no creatures on the battlefield, sacrifice Drop of Honey.
 		 */
 		final String player = AllZone.Phase.getActivePlayer();
-		final CardList cards = AllZoneUtil.getPlayerCardsInPlay(player, "Drop of Honey");
+		CardList drops = AllZoneUtil.getPlayerCardsInPlay(player, "Drop of Honey");
+		drops.add(AllZoneUtil.getPlayerCardsInPlay(player, "Porphyry Nodes"));
+		final CardList cards = drops;
 		
 		//if no creatures in play, sacrifice all "Drop of Honey"s
 		if(AllZoneUtil.getCreaturesInPlay().size() == 0) {
