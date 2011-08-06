@@ -94,7 +94,8 @@ public class AllZone implements NewConstants {
     {
     if (player.equals("")) { //this is a really bad hack, to allow raging goblin to attack on turn 1
     	player = "Human"; 
-    	System.out.println("Evil hack");
+    	//TODO - someday, maybe this needs to be fixed so it's *not* an evil hack
+    	//System.out.println("Evil hack");
     }
 
 	Object o = map.get(zone + player);
