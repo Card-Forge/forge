@@ -276,6 +276,9 @@ public class TriggerHandler {
 			
 			final SpellAbility[] sa = new SpellAbility[1];
 			Card host = AllZoneUtil.getCardState(regtrig.getHostCard());
+
+            if(host == null)
+                host = regtrig.getHostCard();
 			
 			// This will fix the Oblivion Ring issue, but is this the right fix?
 			for(Card c : regtrig.getHostCard().getRemembered())
