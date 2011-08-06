@@ -66,7 +66,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
     private JComboBox         petComboBox        = new JComboBox();
     private ButtonGroup       oppGroup           = new ButtonGroup();
     private static JCheckBox  smoothLandCheckBox = new JCheckBox("", false);
-    public static JCheckBox  resizeCheckbox     = new JCheckBox("", true);
+    public static JCheckBox   newGUICheckbox	 = new JCheckBox("", true);
     private static JCheckBox  millLoseCheckBox 	 = new JCheckBox("", true);
     
     public static void main(String[] args) {
@@ -262,8 +262,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         smoothLandCheckBox.setText("Stack AI land");
         smoothLandCheckBox.setBounds(new Rectangle(65, 62, 153, 21));
         //smoothLandCheckBox.setSelected(true);
-        resizeCheckbox.setText("New GUI");
-        resizeCheckbox.setBounds(new Rectangle(65, 28, 165, 24));
+        newGUICheckbox.setText("New GUI");
+        newGUICheckbox.setBounds(new Rectangle(65, 28, 165, 24));
         millLoseCheckBox.setText("Milling = Loss Condition");
         millLoseCheckBox.setBounds(new Rectangle(65, 94, 190, 25));
         
@@ -303,7 +303,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         this.getContentPane().add(deckEditorButton, null);
         this.getContentPane().add(playGameButton, null);
         jPanel3.add(smoothLandCheckBox, null);
-        jPanel3.add(resizeCheckbox, null);
+        jPanel3.add(newGUICheckbox, null);
         jPanel3.add(millLoseCheckBox, null);
         this.getContentPane().add(jPanel2, null);
         this.getContentPane().add(jPanel3, null);
@@ -770,7 +770,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         //smoothLandCheckBox.isSelected() - for the AI
         
         //DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards are added
-        if(resizeCheckbox.isSelected()) AllZone.Display = new GuiDisplay4();
+        if(newGUICheckbox.isSelected()) AllZone.Display = new GuiDisplay4();
         else AllZone.Display = new GuiDisplay3();
         
         if(smoothLandCheckBox.isSelected()) Constant.Runtime.Smooth[0] = true;

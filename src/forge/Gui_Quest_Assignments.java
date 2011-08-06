@@ -268,11 +268,13 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     	int extraLife = 0;
     	if (questData.getGearLevel() == 2)
     		extraLife = 3;
+    	
+	    if(Gui_Quest.newGUICheckbox.isSelected()) AllZone.Display = new GuiDisplay4();
+        else AllZone.Display = new GuiDisplay3();
+    	
 	    AllZone.GameAction.newGame(hDeck, computerDeck, QuestUtil.getHumanPlantAndPet(questData, selectedQuest), new CardList(), questData.getLife()+extraLife, 
 	    						   selectedQuest.getComputerLife(), selectedQuest);
 	    
-	    if(Gui_Quest.resizeCheckbox.isSelected()) AllZone.Display = new GuiDisplay4();
-        else AllZone.Display = new GuiDisplay3();
 	    AllZone.Display.setVisible(true);
         dispose();
     }
