@@ -3342,6 +3342,7 @@ public class GameActionUtil {
 	}
 
 	private static boolean showAllyDialog(Card c) {
+		AllZone.Display.setCard(c);
 		String[] choices = {"Yes", "No"};
 
 		Object q = null;
@@ -3520,7 +3521,7 @@ public class GameActionUtil {
 	}
 	
     public static boolean showYesNoDialog(Card c, String question) {
-        
+        AllZone.Display.setCard(c);
         StringBuilder title = new StringBuilder();
         title.append(c.getName()).append(" - Ability");
         
@@ -3535,6 +3536,7 @@ public class GameActionUtil {
     }
     
     public static void showInfoDialg(String message) {
+    	AllZone.Display.setCard(c);
     	JOptionPane.showMessageDialog(null, message);
     }
     
@@ -3948,6 +3950,7 @@ public class GameActionUtil {
 
 
 	private static boolean showLandfallDialog(Card c) {
+		AllZone.Display.setCard(c);
 		String[] choices = {"Yes", "No"};
 
 		Object q = null;
