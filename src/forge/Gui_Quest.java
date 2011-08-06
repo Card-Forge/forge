@@ -471,6 +471,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("James T Kirk 3		hard	Rares 40 card black discard deck + Liliana Vess");
         sb.append("\r\n");
+        sb.append("Joe Kidd 1		easy	Voracious Hatchling, Nightsky Mimic, no planeswalkers + a few WB spells");
+        sb.append("\r\n");
+        sb.append("Joe Kidd 2		medium	Voracious Hatchling, Nightsky Mimic, no planeswalkers + some WB spells");
+        sb.append("\r\n");
+        sb.append("Joe Kidd 3		hard	Voracious Hatchling, Nightsky Mimic, no planeswalkers + many WB spells");
+        sb.append("\r\n");
         sb.append("King Arthur 1		easy	Wilt-Leaf Cavaliers; Knight of the Skyward Eye and Leonin Skyhunter");
         sb.append("\r\n");
         sb.append("King Arthur 2		medium	Wilt-Leaf Cavaliers; Knights with flanking");
