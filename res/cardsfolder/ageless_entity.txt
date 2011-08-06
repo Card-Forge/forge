@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Creature Elemental
 Text:(NOTE: This spell is rather buggy and should not be used at this time.)
 PT:4/4
-K:WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/Life_Gained:Self:ASAP:No_Condition:No Special Condition:Whenever you gain life, put that many +1/+1 counters on Ageless Entity.
+K:WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/Life_Gained:Self:ASAP:No_Condition:Initiator - OwnedByController:Whenever you gain life, put that many +1/+1 counters on Ageless Entity.
 SVar:RemAIDeck:True
 SVar:Rarity:None
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ageless_entity.jpg

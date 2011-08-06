@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Cat Soldier
 Text:(NOTE: This spell is rather buggy and should not be used at this time.)
 PT:2/2
-K:WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/1:Self:ASAP:Yes_No:No Special Condition:Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.
+K:WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.
 SVar:RemAIDeck:True
 SVar:Rarity:None
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_pridemate.jpg
