@@ -1,0 +1,11 @@
+Name:Revenant
+ManaCost:4 B
+Types:Creature Spirit
+Text:no text
+PT:0/0
+K:Flying
+K:stPumpSelf:Creature:X/X:No Condition:Revenant's power and toughness are each equal to the number of creature cards in your graveyard.
+SVar:X:Count$TypeInYourYard.Creature
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/revenant.jpg
+End
