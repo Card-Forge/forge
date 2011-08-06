@@ -1347,16 +1347,16 @@ class CardFactory_Lands {
         	
         	final String[] type = new String[1];
         	if(cardName.equals("Kjeldoran Outpost")) type[0] = "Plains";
-        	else if(cardName.equals("Balduvian Trading Post")) type[0] = "Mountain";
+        	else if(cardName.equals("Balduvian Trading Post")) type[0] = "Mountain.untapped";
         	else if(cardName.equals("Heart of Yavimaya")) type[0] = "Forest";
         	else if(cardName.equals("Lake of the Dead")) type[0] = "Swamp";
-        	else if(cardName.equals("Soldevi Excavations")) type[0] = "Island";
+        	else if(cardName.equals("Soldevi Excavations")) type[0] = "Island.untapped";
         	
         	final Command comesIntoPlay = new Command() {
         		private static final long serialVersionUID = 6175830918425915833L;
         		final Player player = card.getController();
         		public void execute() {
-        			CardList land = AllZoneUtil.getPlayerTypeInPlay(player, type[0]);
+        			final CardList land = AllZoneUtil.getPlayerCardsInPlay(player).getValidCards(type[0], player, card);
 
         			if( player.equals(AllZone.ComputerPlayer)) {
         				if( land.size() > 0 ) {
@@ -1387,7 +1387,7 @@ class CardFactory_Lands {
         						stop();
         					}
         					public void selectCard(Card c, PlayerZone zone) {
-        						if(c.isLand() && zone.is(Constant.Zone.Battlefield) && c.getType().contains(type[0])) {
+        						if(c.isLand() && zone.is(Constant.Zone.Battlefield) && land.contains(c)) {
         							AllZone.GameAction.sacrifice(c);
         							stop();
         						}
