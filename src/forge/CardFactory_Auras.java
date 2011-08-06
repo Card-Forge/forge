@@ -564,8 +564,9 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************		
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Spreading Seas")) {
+        else if(cardName.equals("Convincing Mirage") || cardName.equals("Phantasmal Terrain") || cardName.equals("Spreading Seas")) {
             
+        	final String[] NewType = new String[1];
             final SpellAbility spell = new Spell(card) {
                 
                 private static final long serialVersionUID = 53941812202244498L;
@@ -576,7 +577,7 @@ class CardFactory_Auras {
                     list = list.getType("Land");
                     list = list.filter(new CardListFilter() {
                     	public boolean addCard(Card c) {
-                    		return !c.getType().contains("Island");
+                    		return c.getType().contains("Land");
                     	}
                     });
                     if(list.isEmpty()) return false;
@@ -587,12 +588,20 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                	if(card.getName().equals("Spreading Seas"))
+                	{
+                		NewType[0] = "Island";
+                	}
+                	else
+                	{
+                		NewType[0] = AllZone.Display.getChoice("Select land type.", "Plains","Island","Swamp","Mountain","Forest");
+                	}
+                	PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);                    
                     
                 }//resolve()
             };//SpellAbility
@@ -602,7 +611,7 @@ class CardFactory_Auras {
             Command onEnchant = new Command() {
                 
 
-                private static final long serialVersionUID = 3528675502863241126L;
+                private static final long serialVersionUID = 3528675112863241126L;
                 
                 public void execute() {
                     if(card.isEnchanting()) {
@@ -610,26 +619,50 @@ class CardFactory_Auras {
                         ArrayList<Card> Seas = crd.getEnchantedBy();
                         int Count = 0;
                         for(int i = 0; i < Seas.size(); i++) {
-                        if(Seas.get(i).getName().equals("Spreading Seas")) Count = Count + 1;	
+                        	if(Seas.get(i).getName().equals(card.getName()))
+                        	{
+                        		Count = Count + 1;
+                        	}
                         }
                         if(Count == 1) {                      
-                        crd.removeType("Swamp");
-                        crd.removeType("Forest");
-                        crd.removeType("Island");
-                        crd.removeType("Plains");
-                        crd.removeType("Mountain");
+                        	crd.removeType("Swamp");
+                        	crd.removeType("Forest");
+                        	crd.removeType("Island");
+                        	crd.removeType("Plains");
+                        	crd.removeType("Mountain");
                         
-                        crd.addType("Island");
-                    	SpellAbility[] Abilities = crd.getSpellAbility();
-                    	for(int i = 0; i < Abilities.length; i++) {
-                    		if(Abilities[i].isIntrinsic()) {
-                    			card.addSpellAbility(Abilities[i]);
-                    			crd.removeSpellAbility(Abilities[i]);
-                    		}
-                    	}
-                        crd.addSpellAbility(new Ability_Mana(card, "tap: add U") {
-                            private static final long serialVersionUID = 787103012484588884L;
-                        });
+                        	crd.addType(NewType[0]);
+                        	SpellAbility[] Abilities = crd.getSpellAbility();
+                        	for(int i = 0; i < Abilities.length; i++) {
+                        		if(Abilities[i].isIntrinsic()) {
+                        			card.addSpellAbility(Abilities[i]);
+                        			crd.removeSpellAbility(Abilities[i]);
+                        		}
+                        	}
+                        	String ManaCol = "";
+                        	if(NewType[0].equals("Plains"))
+                        	{
+                        		ManaCol = "W";
+                        	}
+                        	else if(NewType[0].equals("Island"))
+                        	{
+                        		ManaCol = "U";
+                        	}
+                        	else if(NewType[0].equals("Swamp"))
+                        	{
+                        		ManaCol = "B";
+                        	}
+                        	else if(NewType[0].equals("Mountain"))
+                        	{
+                        		ManaCol = "R";
+                        	}
+                        	else if(NewType[0].equals("Forest"))
+                        	{
+                        		ManaCol = "G";
+                        	}
+                        	crd.addSpellAbility(new Ability_Mana(card, "tap: add " + ManaCol) {
+                    			private static final long serialVersionUID = 787111012484588884L;
+                    		});
                         } else {
                         	Card Other_Seas = null;
                         	for(int i = 0; i < Seas.size(); i++) {
@@ -646,7 +679,7 @@ class CardFactory_Auras {
             
 
             Command onUnEnchant = new Command() {
-                private static final long serialVersionUID = -2021446345291180334L;
+                private static final long serialVersionUID = -202144631191180334L;
                 
                 public void execute() {
                     if(card.isEnchanting()) {                       
@@ -654,10 +687,10 @@ class CardFactory_Auras {
                         ArrayList<Card> Seas = crd.getEnchantedBy();
                         int Count = 0;
                         for(int i = 0; i < Seas.size(); i++) {
-                        if(Seas.get(i).getName().equals("Spreading Seas")) Count = Count + 1;	
+                        if(Seas.get(i).getName().equals(card.getName())) Count = Count + 1;	
                         }
                         if(Count == 1) {
-                            crd.removeType("Island");
+                            crd.removeType(NewType[0]);
                             crd.removeType("Land");
                             crd.removeType("Basic");
                             crd.removeType("Snow");
@@ -685,7 +718,7 @@ class CardFactory_Auras {
             
             Command onLeavesPlay = new Command() {
                 
-                private static final long serialVersionUID = -4543302260602460839L;
+                private static final long serialVersionUID = -45433022112460839L;
                 
                 public void execute() {
                     if(card.isEnchanting()) {
@@ -701,7 +734,7 @@ class CardFactory_Auras {
             
             Input runtime = new Input() {
                 
-                private static final long serialVersionUID = -6237279587146079880L;
+                private static final long serialVersionUID = -62372711146079880L;
                 
                 @Override
                 public void showMessage() {
