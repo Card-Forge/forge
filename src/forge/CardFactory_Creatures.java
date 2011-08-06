@@ -21439,6 +21439,32 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(untap);
     	}//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Cerulean Sphinx")) {
+        	final Ability intoLibrary = new Ability(card, "U") {
+        		public void resolve() {
+        			if(AllZoneUtil.isCardInPlay(card)) {
+        				AllZone.GameAction.moveToLibrary(card);
+        				AllZone.GameAction.shuffle(card.getOwner());
+        			}
+        		}
+        	};
+
+        	Input runtime = new Input() {
+        		private static final long serialVersionUID = 8914195530360741167L;
+
+        		@Override
+        		public void showMessage() {
+        			intoLibrary.setStackDescription("Shuffle " + card + " into its owner's library");     
+        			stopSetNext(new Input_PayManaCost(intoLibrary));
+        		}
+        	};
+
+        	intoLibrary.setStackDescription(card +" - shuffle "+card+" into owner's library");
+        	card.addSpellAbility(intoLibrary);
+        	intoLibrary.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {

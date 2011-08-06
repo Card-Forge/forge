@@ -1,0 +1,9 @@
+Name:Cerulean Sphinx
+ManaCost:4 U U
+Types:Creature Sphinx
+Text:U: Cerulean Sphinx's owner shuffles it into his or her library.
+PT:5/5
+K:Flying
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cerulean_sphinx.jpg
+End

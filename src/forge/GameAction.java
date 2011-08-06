@@ -113,6 +113,10 @@ public class GameAction {
         library.add(c, 0);
     }
     
+    public void moveToLibrary(Card c) {
+    	moveToTopOfLibrary(c);
+    }
+    
     /**
      * moves a card from whichever Zone it's in to the bottom of its owner's library
      * 
