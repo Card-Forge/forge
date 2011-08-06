@@ -295,7 +295,7 @@ class CardFactory_Equipment {
         
         
         //*************** START *********** START **************************
-        if(cardName.equals("Hedron Matrix")) {
+        else if(cardName.equals("Hedron Matrix")) {
         	/*
         	 * Equipped creature gets +X/+X, where X is its converted mana cost.
         	 */
