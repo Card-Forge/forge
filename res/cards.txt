@@ -7829,6 +7829,7 @@ Terminate
 B R
 Instant
 Destroy target creature. It can't be regenerated.
+spDestroyTgt:Creature:NoRegen
 
 Unmake
 WB WB WB
@@ -13800,7 +13801,8 @@ no text
 Dark Banishing
 2 B
 Instant
-Destroy target nonblack creature. It can't be regenerated. 
+Destroy target nonblack creature. It can't be regenerated.
+spDestroyTgt:Creature.nonBlack:NoRegen
 
 Dross Prowler
 2 B
@@ -14195,6 +14197,7 @@ Saltblast
 3 W W
 Sorcery
 Destroy target nonwhite permanent.
+spDestroyTgt:Permanent.nonWhite
 
 Sunlance
 W
@@ -16538,6 +16541,7 @@ Vindicate
 1 W B
 Sorcery
 Destroy target permanent.
+spDestroyTgt:Permanent
 
 Ardent Militia
 4 W

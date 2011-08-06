@@ -3478,7 +3478,7 @@ public class CardFactory implements NewConstants {
    }//*************** END ************ END **************************
     
 
-
+/*
     //contributed code
     //*************** START *********** START **************************
     if(cardName.equals("Dark Banishing"))
@@ -3561,6 +3561,7 @@ public class CardFactory implements NewConstants {
 
       spell.setBeforePayMana(target);
     }//*************** END ************ END **************************
+*/
    
 
     //*************** START *********** START **************************
@@ -4280,6 +4281,8 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
     
+    
+/*
   //*************** START *********** START **************************
     else if(cardName.equals("Terminate"))
     {
@@ -4318,7 +4321,7 @@ public class CardFactory implements NewConstants {
       spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-    
+*/
     
 /*    
     //*************** START *********** START **************************
@@ -8031,6 +8034,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Saltblast"))
     {
@@ -8103,6 +8107,7 @@ public class CardFactory implements NewConstants {
 
       spell.setBeforePayMana(target);
     }//*************** END ************ END **************************
+*/
 
 
     //*************** START *********** START **************************
@@ -14751,6 +14756,8 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
     
+    
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Vindicate"))
     {
@@ -14806,6 +14813,7 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
+*/
     
 
     //*************** START *********** START **************************
