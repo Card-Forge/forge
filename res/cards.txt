@@ -1,3 +1,73 @@
+Snow-Covered Forest
+no cost
+Basic Snow Land Forest
+no text
+tap: add G
+
+Snow-Covered Mountain
+no cost
+Basic Snow Land Mountain
+no text
+tap: add R
+
+Snow-Covered Plains
+no cost
+Basic Snow Land Plains
+no text
+tap: add W
+
+Snow-Covered Island
+no cost
+Basic Snow Land Island
+no text
+tap: add U
+
+Snow-Covered Swamp
+no cost
+Basic Snow Land Swamp
+no text
+tap: add B
+
+Arctic Flats
+no cost
+Snow Land
+no text
+Comes into play tapped.
+tap: add W
+tap: add G
+
+Boreal Shelf
+no cost
+Snow Land
+no text
+Comes into play tapped.
+tap: add W
+tap: add U
+
+Frost Marsh
+no cost
+Snow Land
+no text
+Comes into play tapped.
+tap: add U
+tap: add B
+
+Highland Weald
+no cost
+Snow Land
+no text
+Comes into play tapped.
+tap: add R
+tap: add G
+
+Tresserhorn Sinks
+no cost
+Snow Land
+no text
+Comes into play tapped.
+tap: add B
+tap: add R
+
 Dakmor Ghoul
 2 B B
 Creature Zombie
