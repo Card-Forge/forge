@@ -324,9 +324,10 @@ public class CardFactory_Creatures {
             return newCard;
         }//*************** END ************ END **************************
         
-
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Stuffy Doll")) {
+        	/*
             final Card newCard = new Card() {
                 Card c = this;
                 
@@ -364,30 +365,36 @@ public class CardFactory_Creatures {
             newCard.setBaseDefense(1);
             
             newCard.addIntrinsicKeyword("Indestructible");
+            */
             
 			Ability_Cost abilCost = new Ability_Cost("T", cardName, true);
 
-			final Ability_Activated ability = new Ability_Activated(newCard, abilCost, null){
+			final Ability_Activated ability = new Ability_Activated(card, abilCost, null){
                 private static final long serialVersionUID = 577739727089395613L;
                 
                 @Override
                 public void resolve() {
-                    newCard.addDamage(1, newCard);
+                    card.addDamage(1, card);
                 }
             };//SpellAbility
             
             StringBuilder sb = new StringBuilder();
             sb.append(abilCost.toString()).append("Stuffy Doll deals 1 damage to itself.");
             ability.setDescription(sb.toString());
+            ability.setStackDescription("Stuffy Doll - deals 1 damage to itself.");
             
+            card.addSpellAbility(ability);
+            /*
             ability.setStackDescription("Stuffy Doll - deals 1 damage to itself.");
             
             newCard.addSpellAbility(new Spell_Permanent(newCard));
             newCard.addSpellAbility(ability);
             
+            newCard.addSpellAbility(ability);
+            
             newCard.setSVars(card.getSVars());
             
-            return newCard;
+            return newCard;*/
         }//*************** END ************ END **************************
         
 

@@ -2841,6 +2841,22 @@ public class Card extends MyObservable {
         	damage += damageToAdd;
         }
         
+        if(this.getName().equals("Stuffy Doll")) {
+        	final Player opponent = this.getOwner().getOpponent();
+        	final int stuffyDamage = damageToAdd;
+        	SpellAbility ability = new Ability(this, "0") {
+        		@Override
+        		public void resolve() {
+        			opponent.addDamage(stuffyDamage, Card.this);
+        		}
+        	};
+        	StringBuilder sb = new StringBuilder();
+            sb.append("Stuffy Doll - causes ").append(stuffyDamage).append(" damage to ").append(opponent);
+            ability.setStackDescription(sb.toString());
+            
+            AllZone.Stack.add(ability);
+        }
+        
         if(source.getKeyword().contains("Lifelink") && CardFactoryUtil.canDamage(source, this)) GameActionUtil.executeLifeLinkEffects(source, damageToAdd);
         
         if(isEnchantedBy("Mortal Wound")) {
