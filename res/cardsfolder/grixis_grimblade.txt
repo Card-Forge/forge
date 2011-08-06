@@ -1,0 +1,9 @@
+Name:Grixis Grimblade
+ManaCost:UR B
+Types:Creature Zombie Warrior
+Text:As long as you control another multicolored permanent, Grixis Grimblade gets +1/+1 and has deathtouch.
+PT:2/1
+K:SVar:BuffedBy:Permanent.MultiColor
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_grimblade.jpg
+End

@@ -1,0 +1,9 @@
+Name:Goblin Sledder
+ManaCost:R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+K:abPumpTgtC 0 Sac-Goblin:+1/+1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_sledder.jpg
+End

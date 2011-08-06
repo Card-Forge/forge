@@ -1,0 +1,8 @@
+Name:Gwafa Hazid, Profiteer
+ManaCost:1 W U
+Types:Legendary Creature Human Rogue
+Text:Creatures with bribery counters on them can't attack or block.
+PT:2/2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gwafa_hazid_profiteer.jpg
+End

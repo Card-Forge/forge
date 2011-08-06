@@ -1,0 +1,9 @@
+Name:Goblin Marshal
+ManaCost:4 R R
+Types:Creature Goblin Warrior
+Text:When Goblin Marshal enters the battlefield or is put into a graveyard from the battlefield, put two 1/1 red Goblin creature tokens onto the battlefield.
+PT:3/3
+K:Echo:4 R R
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_marshal.jpg
+End

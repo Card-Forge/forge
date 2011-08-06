@@ -1,0 +1,9 @@
+Name:Giant Strength
+ManaCost:R R
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+2.
+K:Enchant creature
+K:enPump:+2/+2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_strength.jpg
+End

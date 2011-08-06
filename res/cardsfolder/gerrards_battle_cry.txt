@@ -1,0 +1,8 @@
+Name:Gerrard's Battle Cry
+ManaCost:W
+Types:Enchantment
+Text:no text
+K:abAllPump 2 W:YouCtrl:+1/+1:Creatures you control get +1/+1 until end of turn.:Gerrard's Battle Cry - creatures get +1/+1 until EOT
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrards_battle_cry.jpg
+End

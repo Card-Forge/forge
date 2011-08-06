@@ -1,0 +1,8 @@
+Name:Global Ruin
+ManaCost:4 W
+Types:Sorcery
+Text:Each player chooses from the lands he or she controls a land of each basic land type and sacrifices the rest.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/global_ruin.jpg
+End

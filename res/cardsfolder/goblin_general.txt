@@ -1,0 +1,8 @@
+Name:Goblin General
+ManaCost:1 R R
+Types:Creature Goblin Warrior
+Text:Whenever Goblin General attacks, Goblin creatures you control get +1/+1 until end of turn.
+PT:1/1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/goblin_general.jpg
+End

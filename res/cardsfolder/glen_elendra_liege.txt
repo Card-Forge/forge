@@ -1,0 +1,12 @@
+Name:Glen Elendra Liege
+ManaCost:1 UB UB UB
+Types:Creature Faerie Knight
+Text:no text
+PT:2/3
+K:Flying
+K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.blue!NotSelf:Other blue creatures you control get +1/+1.
+K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.black!NotSelf:Other black creatures you control get +1/+1.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/glen_elendra_liege.jpg
+End

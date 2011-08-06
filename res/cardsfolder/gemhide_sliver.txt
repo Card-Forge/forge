@@ -1,0 +1,9 @@
+Name:Gemhide Sliver
+ManaCost:1 G
+Types:Creature Sliver
+Text:All Slivers have "tap: Add one mana of any color to your mana pool."
+PT:1/1
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gemhide_sliver.jpg
+End

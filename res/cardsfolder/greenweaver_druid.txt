@@ -1,0 +1,10 @@
+Name:Greenweaver Druid
+ManaCost:2 G
+Types:Creature Elf Druid
+Text:no text
+PT:1/1
+K:tap: add G G
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/greenweaver_druid.jpg
+End

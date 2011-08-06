@@ -1,0 +1,9 @@
+Name:Greater Mossdog
+ManaCost:3 G
+Types:Creature Plant Hound
+Text:no text
+PT:3/3
+K:Dredge 3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_mossdog.jpg
+End

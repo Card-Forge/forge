@@ -1,0 +1,9 @@
+Name:Goblin Piledriver
+ManaCost:1 R
+Types:Creature Goblin Warrior
+Text:Whenever Goblin Piledriver attacks, it gets +2/+0 until end of turn for each other attacking Goblin.
+PT:1/2
+K:Protection from blue
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_piledriver.jpg
+End

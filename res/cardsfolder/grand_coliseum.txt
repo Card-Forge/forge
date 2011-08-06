@@ -1,0 +1,14 @@
+Name:Grand Coliseum
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+K:paintap:1:W
+K:paintap:1:U
+K:paintap:1:B
+K:paintap:1:R
+K:paintap:1:G
+K:Comes into play tapped.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_coliseum.jpg
+End

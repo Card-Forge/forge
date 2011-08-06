@@ -1,0 +1,9 @@
+Name:Ghost Warden
+ManaCost:1 W
+Types:Creature Spirit
+Text:no text
+PT:1/1
+K:abPumpTgtC T:+1/+1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96901.jpg
+End

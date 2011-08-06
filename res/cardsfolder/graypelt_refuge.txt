@@ -1,0 +1,9 @@
+Name:Graypelt Refuge
+ManaCost:no cost
+Types:Land
+Text:Graypelt Refuge enters the battlefield tapped.\r\nWhen Graypelt Refuge enters the battlefield, you gain 1 life.
+K:tap: add W
+K:tap: add G
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_refuge.jpg
+End

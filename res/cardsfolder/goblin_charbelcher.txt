@@ -1,0 +1,7 @@
+Name:Goblin Charbelcher
+ManaCost:4
+Types:Artifact
+Text:no text
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_charbelcher.jpg
+End

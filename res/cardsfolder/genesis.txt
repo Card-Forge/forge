@@ -1,0 +1,8 @@
+Name:Genesis
+ManaCost:4 G
+Types:Creature Incarnation
+Text:At the beginning of your upkeep, if Genesis is in your graveyard, you may pay 2G. If you do, return target creature card from your graveyard to your hand.
+PT:4/4
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/genesis.jpg
+End

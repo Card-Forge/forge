@@ -1,0 +1,9 @@
+Name:Goblin Guide
+ManaCost:R
+Types:Creature Goblin Scout
+Text:Whenever Goblin Guide attacks, defending player reveals the top card of his or her library. If it's a land card, that player puts it into his or her hand.
+PT:2/2
+K:Haste
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_guide.jpg
+End

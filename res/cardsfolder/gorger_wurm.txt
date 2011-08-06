@@ -1,0 +1,9 @@
+Name:Gorger Wurm
+ManaCost:3 R G
+Types:Creature Wurm
+Text:no text
+PT:5/5
+K:Devour:1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gorger_wurm.jpg
+End

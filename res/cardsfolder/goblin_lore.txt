@@ -1,0 +1,8 @@
+Name:Goblin Lore
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+K:spDrawCards:4:Drawback$YouDiscard/3/AtRandom:Draw four cards, then discard three cards at random.:Goblin Lore - Draw 4 cards, then discard 3 at random.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_lore.jpg
+End

@@ -1,0 +1,7 @@
+Name:Grizzly Fate
+ManaCost:3 G G
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/grizzly_fate.jpg
+End

@@ -1,0 +1,9 @@
+Name:Goblin King
+ManaCost:1 R R
+Types:Creature Goblin
+Text:Other Goblin creatures get +1/+1 and have mountainwalk.
+PT:2/2
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_king.jpg
+End

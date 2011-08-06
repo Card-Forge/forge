@@ -1,0 +1,8 @@
+Name:Gaea's Anthem
+ManaCost:1 G G
+Types:Enchantment
+Text:Creatures you control get +1/+1.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122367.jpg
+End

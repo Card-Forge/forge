@@ -1,0 +1,7 @@
+Name:Gemstone Array
+ManaCost:4
+Types:Artifact
+Text:no text
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gemstone_array.jpg
+End

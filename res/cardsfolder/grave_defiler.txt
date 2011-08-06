@@ -1,0 +1,9 @@
+Name:Grave Defiler
+ManaCost:3 B
+Types:Creature Zombie
+Text:When Grave Defiler enters the battlefield, reveal the top four cards of your library. Put all Zombie cards revealed this way into your hand and the rest on the bottom of your library.
+PT:2/1
+K:RegenerateMe:1 B
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_defiler.jpg
+End

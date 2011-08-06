@@ -1,0 +1,9 @@
+Name:Green Ward
+ManaCost:W
+Types:Enchantment Aura
+Text:Enchanted creature has protection from green. This effect doesn't remove Green Ward.
+K:Enchant creature
+K:enPump:Protection from green
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/green_ward.jpg
+End

@@ -1,0 +1,10 @@
+Name:Glimmering Angel
+ManaCost:3 W
+Types:Creature Angel
+Text:no text
+PT:2/2
+K:Flying
+K:abPump U:Shroud
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmering_angel.jpg
+End

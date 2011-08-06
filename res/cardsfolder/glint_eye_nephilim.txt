@@ -1,0 +1,8 @@
+Name:Glint-Eye Nephilim
+ManaCost:U B R G
+Types:Creature Nephilim
+Text:Whenever Glint-Eye Nephilim deals combat damage to a player, draw that many cards.
+PT:2/2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_eye_nephilim.jpg
+End

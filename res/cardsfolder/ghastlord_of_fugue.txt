@@ -1,0 +1,9 @@
+Name:Ghastlord of Fugue
+ManaCost:UB UB UB UB UB
+Types:Creature Spirit Avatar
+Text:Whenever Ghastlord of Fugue deals combat damage to a player, that player reveals his or her hand. You choose a card from it. That player exiles that card.
+PT:4/4
+K:Unblockable
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastlord_of_fugue.jpg
+End

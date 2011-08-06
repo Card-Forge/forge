@@ -1,0 +1,8 @@
+Name:Goldmeadow Harrier
+ManaCost:W
+Types:Creature Kithkin Soldier
+Text:no text
+PT:1/1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Lorwyn/goldmeadow_harrier.jpg
+End

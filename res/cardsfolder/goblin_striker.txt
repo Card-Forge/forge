@@ -1,0 +1,10 @@
+Name:Goblin Striker
+ManaCost:1 R
+Types:Creature Goblin Berserker
+Text:no text
+PT:1/1
+K:First Strike
+K:Haste
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_striker.jpg
+End

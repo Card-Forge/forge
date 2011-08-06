@@ -1,0 +1,9 @@
+Name:Guided Strike
+ManaCost:1 W
+Types:Instant
+Text:no text
+K:spPumpTgt:+1/+0/First Strike
+K:Draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/guided_strike.jpg
+End

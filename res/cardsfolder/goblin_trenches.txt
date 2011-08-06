@@ -1,0 +1,7 @@
+Name:Goblin Trenches
+ManaCost:1 R W
+Types:Enchantment
+Text:no text
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_trenches.jpg
+End

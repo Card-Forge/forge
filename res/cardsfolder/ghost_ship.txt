@@ -1,0 +1,10 @@
+Name:Ghost Ship
+ManaCost:2 U U
+Types:Creature Spirit
+Text:no text
+PT:2/4
+K:Flying
+K:RegenerateMe:U U U
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card107294.jpg
+End

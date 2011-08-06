@@ -1,0 +1,9 @@
+Name:Giant Scorpion
+ManaCost:2 B
+Types:Creature Scorpion
+Text:no text
+PT:1/3
+K:Deathtouch
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_scorpion.jpg
+End

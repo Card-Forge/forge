@@ -1,0 +1,9 @@
+Name:Goblin Patrol
+ManaCost:R
+Types:Creature Goblin
+Text:no text
+PT:2/1
+K:Echo:R
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_patrol.jpg
+End

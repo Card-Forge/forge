@@ -1,0 +1,9 @@
+Name:Goblin Chariot
+ManaCost:2 R
+Types:Creature Goblin Warrior
+Text:no text
+PT:2/2
+K:Haste
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83109.jpg
+End

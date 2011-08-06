@@ -1,0 +1,9 @@
+Name:Guard Duty
+ManaCost:W
+Types:Enchantment Aura
+Text:Enchanted creature has defender.
+K:Enchant creature
+K:enPumpCurse:Defender
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/guard_duty.jpg
+End

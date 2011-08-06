@@ -1,0 +1,9 @@
+Name:Goblin Spy
+ManaCost:R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+K:Play with the top card of your library revealed.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_spy.jpg
+End

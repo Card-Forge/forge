@@ -1,0 +1,9 @@
+Name:Gelectrode
+ManaCost:1 U R
+Types:Creature Weird
+Text:Whenever you play an instant or sorcery spell, you may untap Gelectrode.
+PT:0/1
+K:abDamageTgtCP T:1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gelectrode.jpg
+End

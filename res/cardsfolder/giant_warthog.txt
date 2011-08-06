@@ -1,0 +1,9 @@
+Name:Giant Warthog
+ManaCost:5 G
+Types:Creature Beast
+Text:no text
+PT:5/5
+K:Trample
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/jud/en-us/card36112.jpg
+End

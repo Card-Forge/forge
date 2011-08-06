@@ -1,0 +1,10 @@
+Name:Gibbering Kami
+ManaCost:3 B
+Types:Creature Spirit
+Text:no text
+PT:2/2
+K:Flying
+K:Soulshift:3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gibbering_kami.jpg
+End

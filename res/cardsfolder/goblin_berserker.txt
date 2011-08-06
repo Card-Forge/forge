@@ -1,0 +1,10 @@
+Name:Goblin Berserker
+ManaCost:3 R
+Types:Creature Goblin Berserker
+Text:no text
+PT:2/2
+K:First Strike
+K:Haste
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_berserker.jpg
+End

@@ -1,0 +1,11 @@
+Name:Great Sable Stag
+ManaCost:1 G G
+Types:Creature Elk
+Text:no text
+PT:3/3
+K:Protection from blue
+K:Protection from black
+K:CARDNAME can't be countered.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/great_sable_stag.jpg
+End

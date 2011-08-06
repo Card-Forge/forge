@@ -1,0 +1,8 @@
+Name:Gerrard's Command
+ManaCost:W G
+Types:Instant
+Text:no text
+K:spPumpTgt:+3/+3:Drawback$UntapTgt:Untap target creature. It gets +3/+3 until end of turn.:Untap target creature. It gets +3/+3 until end of turn.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gerrards_command.jpg
+End

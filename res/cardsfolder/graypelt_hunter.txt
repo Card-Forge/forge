@@ -1,0 +1,10 @@
+Name:Graypelt Hunter
+ManaCost:3 G
+Types:Creature Human Warrior Ally
+Text:Whenever Graypelt Hunter or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Graypelt Hunter.
+PT:2/2
+K:Trample
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_hunter.jpg
+End

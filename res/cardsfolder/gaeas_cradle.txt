@@ -1,0 +1,9 @@
+Name:Gaea's Cradle
+ManaCost:no cost
+Types:Legendary Land
+Text:no text
+K:tap: add G to your mana pool for each Creature you control.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_cradle.jpg
+End

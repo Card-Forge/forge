@@ -1,0 +1,9 @@
+Name:Goblin War Paint
+ManaCost:1 R
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+2 and has haste.
+K:Enchant creature
+K:enPump:+2/+2/Haste
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_paint.jpg
+End

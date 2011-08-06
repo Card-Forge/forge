@@ -1,0 +1,9 @@
+Name:Ghitu Encampment
+ManaCost:no cost
+Types:Land
+Text:no text
+K:Comes into play tapped.
+K:tap: add R
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_encampment.jpg
+End

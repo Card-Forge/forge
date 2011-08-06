@@ -1,0 +1,11 @@
+Name:Geothermal Crevice
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add R
+K:tap, Sacrifice CARDNAME: Add B G to your mana pool.
+K:Comes into play tapped.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/geothermal_crevice.jpg
+End

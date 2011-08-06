@@ -1,0 +1,10 @@
+Name:Goblin Rimerunner
+ManaCost:2 R
+Types:Snow Creature Goblin Warrior
+Text:no text
+PT:2/2
+K:abPumpTgtC T:CARDNAME can't block.
+K:abPump S:Haste
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_rimerunner.jpg
+End

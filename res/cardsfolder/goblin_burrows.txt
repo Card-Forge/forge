@@ -1,0 +1,8 @@
+Name:Goblin Burrows
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_burrows.jpg
+End

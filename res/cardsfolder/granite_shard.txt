@@ -1,0 +1,9 @@
+Name:Granite Shard
+ManaCost:3
+Types:Artifact
+Text:no text
+K:abDamageTgtCP 3 T:1
+K:abDamageTgtCP R T:1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_shard.jpg
+End

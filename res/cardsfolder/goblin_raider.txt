@@ -1,0 +1,9 @@
+Name:Goblin Raider
+ManaCost:1 R
+Types:Creature Goblin Warrior
+Text:no text
+PT:2/2
+K:CARDNAME can't block.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6583.jpg
+End

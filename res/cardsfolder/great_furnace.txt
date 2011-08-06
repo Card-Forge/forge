@@ -1,0 +1,8 @@
+Name:Great Furnace
+ManaCost:no cost
+Types:Artifact Land
+Text:(Great Furnace isn't a spell.)
+K:tap: add R
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/great_furnace.jpg
+End

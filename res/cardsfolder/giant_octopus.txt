@@ -1,0 +1,8 @@
+Name:Giant Octopus
+ManaCost:3 U
+Types:Creature Octopus
+Text:no text
+PT:3/3
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83104.jpg
+End

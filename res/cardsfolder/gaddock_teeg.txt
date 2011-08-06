@@ -1,0 +1,8 @@
+Name:Gaddock Teeg
+ManaCost:G W
+Types:Legendary Creature Kithkin Advisor
+Text:Noncreature spells with converted mana cost 4 or greater can't be cast.\r\nNoncreature spells with X in their mana costs can't be cast.
+PT:2/2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gaddock_teeg.jpg
+End

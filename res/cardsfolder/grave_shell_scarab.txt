@@ -1,0 +1,10 @@
+Name:Grave-Shell Scarab
+ManaCost:2 B G G
+Types:Creature Insect
+Text:no text
+PT:4/4
+K:1, Sacrifice CARDNAME: Draw a card.
+K:Dredge 1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_shell_scarab.jpg
+End

@@ -1,0 +1,9 @@
+Name:Gorgon Recluse
+ManaCost:3 B B
+Types:Creature Gorgon
+Text:Whenever Gorgon Recluse blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
+PT:2/4
+K:Madness:B B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgon_recluse.jpg
+End

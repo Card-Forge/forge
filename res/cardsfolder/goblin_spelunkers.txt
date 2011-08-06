@@ -1,0 +1,9 @@
+Name:Goblin Spelunkers
+ManaCost:2 R
+Types:Creature Goblin
+Text:no text
+PT:2/2
+K:Mountainwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83803.jpg
+End

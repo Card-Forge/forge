@@ -1,0 +1,9 @@
+Name:Garruk's Companion
+ManaCost:G G
+Types:Creature Beast
+Text:no text
+PT:3/2
+K:Trample
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/garruks_companion.jpg
+End

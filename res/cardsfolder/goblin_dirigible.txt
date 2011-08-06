@@ -1,0 +1,11 @@
+Name:Goblin Dirigible
+ManaCost:6
+Types:Artifact Creature Construct
+Text:no text
+PT:4/4
+K:Flying
+K:CARDNAME doesn't untap during your untap step.
+K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/4:ControllerUpkeep:At the beginning of your upkeep, you may pay 4. If you do, untap Goblin Dirigible.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_dirigible.jpg
+End

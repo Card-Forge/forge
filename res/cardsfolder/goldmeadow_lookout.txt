@@ -1,0 +1,8 @@
+Name:Goldmeadow Lookout
+ManaCost:3 W
+Types:Creature Kithkin Spellshaper
+Text:no text
+PT:2/2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130311.jpg
+End

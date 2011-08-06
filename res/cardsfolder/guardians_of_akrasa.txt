@@ -1,0 +1,10 @@
+Name:Guardians of Akrasa
+ManaCost:2 W
+Types:Creature Human Soldier
+Text:no text
+PT:0/4
+K:Defender
+K:Exalted
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/guardians_of_akrasa.jpg
+End

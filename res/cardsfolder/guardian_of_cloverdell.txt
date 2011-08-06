@@ -1,0 +1,8 @@
+Name:Guardian of Cloverdell
+ManaCost:5 G G
+Types:Creature Treefolk Shaman
+Text:When Guardian of Cloverdell comes into play, put three 1/1 white Kithkin Soldier creature tokens into play.
+PT:4/5
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_cloverdell.jpg
+End

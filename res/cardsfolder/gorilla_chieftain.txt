@@ -1,0 +1,9 @@
+Name:Gorilla Chieftain
+ManaCost:2 G G
+Types:Creature Ape
+Text:no text
+PT:3/3
+K:RegenerateMe:1 G
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gorilla_chieftain.jpg
+End

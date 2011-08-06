@@ -1,0 +1,9 @@
+Name:Glory
+ManaCost:3 W W
+Types:Creature Incarnation
+Text:no text
+PT:3/3
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/glory.jpg
+End

@@ -1,0 +1,9 @@
+Name:Grave Titan
+ManaCost:4 B B
+Types:Creature Giant
+Text:Whenever Grave Titan enters the battlefield or attacks, put two 2/2 black Zombie creature tokens onto the battlefield.
+PT:6/6
+K:Deathtouch
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_titan.jpg
+End

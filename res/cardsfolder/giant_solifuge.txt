@@ -1,0 +1,11 @@
+Name:Giant Solifuge
+ManaCost:2 RG RG
+Types:Creature Insect
+Text:no text
+PT:4/1
+K:Trample
+K:Haste
+K:Shroud
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_solifuge.jpg
+End

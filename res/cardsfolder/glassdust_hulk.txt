@@ -1,0 +1,11 @@
+Name:Glassdust Hulk
+ManaCost:3 W U
+Types:Artifact Creature Golem
+Text:no text
+PT:3/4
+K:Cycling:WU
+K:WheneverKeyword:EntersBattleField:Type/Artifact:Play:KeywordPumpEOT/Unblockable!StatsPumpEOT/1/1:Self!Self:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Other than Self:Whenever another artifact enters the battlefield under your control, Glassdust Hulk gets +1/+1 until end of turn and is unblockable this turn.
+K:SVar:BuffedBy:Artifact
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/glassdust_hulk.jpg
+End

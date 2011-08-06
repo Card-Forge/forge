@@ -1,0 +1,11 @@
+Name:Goblin Sharpshooter
+ManaCost:2 R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+K:abDamageTgtCP T:1
+K:CARDNAME doesn't untap during your untap step.
+K:Whenever a creature is put into a graveyard from the battlefield, untap Goblin Sharpshooter.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_sharpshooter.jpg
+End

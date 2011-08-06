@@ -1,0 +1,9 @@
+Name:Gnat Miser
+ManaCost:B
+Types:Creature Rat Shaman
+Text:Each opponent's hand size is reduced by one.
+PT:1/1
+K:HandSize - 1 Opponent
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gnat_miser.jpg
+End

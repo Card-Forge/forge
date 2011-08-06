@@ -1,0 +1,9 @@
+Name:Ghoul's Feast
+ManaCost:1 B
+Types:Instant
+Text:no text
+K:spPumpTgt:+X/+0:Target creature gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
+K:SVar:X:Count$TypeInYourYard.Creature
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ghouls_feast.jpg
+End

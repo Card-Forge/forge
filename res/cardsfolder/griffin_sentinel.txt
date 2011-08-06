@@ -1,0 +1,10 @@
+Name:Griffin Sentinel
+ManaCost:2 W
+Types:Creature Griffin
+Text:no text
+PT:1/3
+K:Flying
+K:Vigilance
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/griffin_sentinel.jpg
+End

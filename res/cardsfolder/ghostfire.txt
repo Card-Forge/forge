@@ -1,0 +1,9 @@
+Name:Ghostfire
+ManaCost:2 R
+Types:Instant
+Text:no text
+K:spDamageTgtCP:3
+K:CARDNAME is colorless.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostfire.jpg
+End

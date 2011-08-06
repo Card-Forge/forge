@@ -1,0 +1,9 @@
+Name:Gnat Alley Creeper
+ManaCost:2 R
+Types:Creature Human Rogue
+Text:no text
+PT:3/1
+K:CARDNAME can't be blocked by creatures with flying.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gnat_alley_creeper.jpg
+End

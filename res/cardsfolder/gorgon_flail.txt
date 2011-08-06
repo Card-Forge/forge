@@ -1,0 +1,8 @@
+Name:Gorgon Flail
+ManaCost:2
+Types:Artifact Equipment
+Text:Equipped creature gets +1/+1 and has deathtouch.
+K:eqPump 2:+1/+1/Deathtouch
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgon_flail.jpg
+End
