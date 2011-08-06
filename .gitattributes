@@ -1232,6 +1232,7 @@ res/cardsfolder/disempower.txt -text svneol=native#text/plain
 res/cardsfolder/disenchant.txt -text svneol=native#text/plain
 res/cardsfolder/disentomb.txt -text svneol=native#text/plain
 res/cardsfolder/disfigure.txt -text svneol=native#text/plain
+res/cardsfolder/disintegrate.txt -text svneol=native#text/plain
 res/cardsfolder/dismal_failure.txt -text svneol=native#text/plain
 res/cardsfolder/dismiss.txt -text svneol=native#text/plain
 res/cardsfolder/disorient.txt -text svneol=native#text/plain

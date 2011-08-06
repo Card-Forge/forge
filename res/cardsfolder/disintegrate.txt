@@ -1,0 +1,10 @@
+Name:Disintegrate
+ManaCost:X R
+Types:Sorcery
+Text:no text
+A:SP$DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X |SubAbility$SVar=DB| SpellDescription$ CARDNAME deals X damage to target creature or player. That creature can't be regenerated this turn. If the creature would be put into a graveyard this turn, exile it instead.
+SVar:X:Count$xPaid
+SVar:DB:DB$Pump | KW$CARDNAME can't be regenerated. & If CARDNAME would be put into a graveyard this turn, exile it instead. | Defined$Targeted
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/disintegrate.jpg
+End
