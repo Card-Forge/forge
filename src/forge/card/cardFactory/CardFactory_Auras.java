@@ -130,7 +130,8 @@ class CardFactory_Auras {
                 }//resolve()
             };//SpellAbility
             spell.setType("Extrinsic");
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             Cost abCost = new Cost("W W T", spell.getTargetCard() != null ? spell.getTargetCard().getName(): "", true);
@@ -322,7 +323,8 @@ class CardFactory_Auras {
                 }//resolve()
             };//SpellAbility
             spell.setType("Extrinsic");
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             Cost abCost = new Cost("G U T", spell.getTargetCard() != null ? spell.getTargetCard().getName(): "", true);
@@ -448,7 +450,8 @@ class CardFactory_Auras {
             };//SpellAbility
             //spell.setType("Extrinsic");
             
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             Input runtime = new Input() {
@@ -580,7 +583,8 @@ class CardFactory_Auras {
                     
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             // Need to set the spell description for Lingering Mirage since it has cycling ability.
@@ -780,7 +784,8 @@ class CardFactory_Auras {
                     
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             Command onEnchant = new Command() {
@@ -899,7 +904,8 @@ class CardFactory_Auras {
                     }
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             final boolean[] badTarget = {true};
@@ -992,7 +998,8 @@ class CardFactory_Auras {
                     }
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             Command onEnchant = new Command() {
@@ -1087,7 +1094,8 @@ class CardFactory_Auras {
                     		&& CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
@@ -1151,7 +1159,8 @@ class CardFactory_Auras {
                     }
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             Command onEnchant = new Command() {
@@ -1253,7 +1262,8 @@ class CardFactory_Auras {
                     }
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             Command onEnchant = new Command() {
@@ -1363,7 +1373,8 @@ class CardFactory_Auras {
                     }
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             Command onEnchant = new Command() {
@@ -1689,7 +1700,8 @@ class CardFactory_Auras {
                     }
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             Command onEnchant = new Command() {
@@ -1803,7 +1815,8 @@ class CardFactory_Auras {
                     }
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             Command onEnchant = new Command() {
@@ -2270,7 +2283,8 @@ class CardFactory_Auras {
                         
                     }//resolve()
                 };//SpellAbility
-                card.clearSpellAbility();
+                // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+                card.clearFirstSpellAbility();
                 card.addSpellAbility(spell);
                 
                 final Player[] prevController = new Player[1];
@@ -2410,7 +2424,8 @@ class CardFactory_Auras {
                         
                     }//resolve()
                 };//SpellAbility
-                card.clearSpellAbility();
+                // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+                card.clearFirstSpellAbility();
                 card.addSpellAbility(spell);
                 
                 final Player[] prevController = new Player[1];
