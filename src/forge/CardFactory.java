@@ -4814,28 +4814,6 @@ public class CardFactory implements NewConstants {
         
         
         
-       
-        
-        //*************** START *********** START **************************
-        else if (cardName.equals("Resuscitate")) {
-        	/**
-        	 *  This card does not work and this is a place holder.
-        	 *  May require a keyword factory.
-        	 */
-        	final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 2024445242584858534L;
-				
-        		@Override
-				public void resolve() {
-        			
-        		}//resolve
-        	};//SpellAbility
-        	spell.setStackDescription(card.getName() + " - I do nothing but go to the graveyard.");
-        	card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Pyrohemia")) {
             SpellAbility ability = new Ability(card, "R") {
