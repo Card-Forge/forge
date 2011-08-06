@@ -960,6 +960,11 @@ public abstract class Player extends MyObservable{
     	return grave.size() >= 7;
     }
     
+    public boolean hasHellbent() {
+    	CardList hand = AllZoneUtil.getPlayerHand(this);
+    	return hand.size() == 0;
+    }
+    
     private ArrayList<HandSizeOp> handSizeOperations;
 
     public int getMaxHandSize() {

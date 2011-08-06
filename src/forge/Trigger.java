@@ -149,6 +149,14 @@ public abstract class Trigger {
 			}
 		}
 		
+		if(mapParams.containsKey("Hellbent"))
+		{
+			if(mapParams.get("Hellbent").equals("True") && !hostCard.getController().hasHellbent())
+			{
+				return false;
+			}
+		}
+		
 		if(mapParams.containsKey("PlayersPoisoned"))
 		{
 			if(mapParams.get("PlayersPoisoned").equals("You") && hostCard.getController().getPoisonCounters() == 0)
