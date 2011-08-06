@@ -291,8 +291,16 @@ public class Card extends MyObservable
         sb.append(sa[i].toString() + "\r\n");
       
       // Cantrip -> Draw a card.
+//    if (getKeyword().contains("Draw a card."))
+//  	  sb.append("Draw a card.\r\n");
       if (getKeyword().contains("Draw a card."))
-    	  sb.append("Draw a card.\r\n");
+      {
+        if (sb.toString().endsWith("Draw a card.\r\n\r\n"))
+        {
+            sb.delete(sb.toString().length() - 16, sb.toString().length() - 2);
+        }
+        sb.append("Draw a card.\r\n");
+      }
 
       return sb.toString();
     }
