@@ -38,6 +38,13 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+raging_ravine.jpg		http://www.wizards.com/global/images/magic/general/raging_ravine.jpg
+creeping_tar_pit.jpg		http://www.wizards.com/global/images/magic/general/creeping_tar_pit.jpg
+stirring_wildwood.jpg		http://www.wizards.com/global/images/magic/general/stirring_wildwood.jpg
+celestial_colonnade.jpg		http://www.wizards.com/global/images/magic/general/celestial_colonnade.jpg
+ruthless_cullblade.jpg		http://www.wizards.com/global/images/magic/general/ruthless_cullblade.jpg
+anowon_the_ruin_sage.jpg		http://www.wizards.com/global/images/magic/general/anowon_the_ruin_sage.jpg
+pulse_tracker.jpg		http://www.wizards.com/global/images/magic/general/pulse_tracker.jpg
 harabaz_druid.jpg		http://www.wizards.com/global/images/magic/general/harabaz_druid.jpg
 amulet_of_vigor.jpg		http://www.wizards.com/global/images/magic/general/amulet_of_vigor.jpg
 stoneforge_mystic.jpg		http://www.wizards.com/global/images/magic/general/stoneforge_mystic.jpg
