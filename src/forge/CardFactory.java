@@ -18303,7 +18303,7 @@ public class CardFactory implements NewConstants {
                 	for(int i = 0; i < c.length; i++) {
                         if(c[i].isCreature()) {
                             AllZone.GameAction.sacrifice(c[i]);
-                            CardFactoryUtil.makeToken("Hellion", "", c[i], "R", new String[] {
+                            CardFactoryUtil.makeToken("Hellion", "R 4 4 hellion", c[i], "R", new String[] {
                                     "Creature", "Hellion"}, 4, 4, new String[] {""});
                         }
                     }
