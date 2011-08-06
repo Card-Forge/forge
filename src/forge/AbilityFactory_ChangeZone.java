@@ -156,10 +156,10 @@ public class AbilityFactory_ChangeZone {
 		HashMap<String,String> params = af.getMapParams();
 		String origin = params.get("Origin");
 		
-		if (isHidden(origin, params.containsKey("Hidden")))
+		if (isHidden(origin, params.containsKey("Hidden")) && !params.containsKey("Ninjutsu"))
 			changeHiddenOriginResolve(af, sa);
 		
-		else if (isKnown(origin))
+		else if (isKnown(origin) || params.containsKey("Ninjutsu"))
 			changeKnownOriginResolve(af, sa);
 	}
 
@@ -888,12 +888,16 @@ public class AbilityFactory_ChangeZone {
 	    		}
 	    		else{
 		    		if (destination.equals("Battlefield")){
-		        		if (params.containsKey("Tapped"))
+		        		if (params.containsKey("Tapped") || params.containsKey("Ninjutsu"))
 		        			tgtC.tap();
 		        		if (params.containsKey("GainControl"))
 		        			tgtC.setController(sa.getActivatingPlayer());
 		        	
 		        		AllZone.GameAction.moveTo(AllZone.getZone(destination, tgtC.getController()),tgtC);
+		        		
+		        		if(params.containsKey("Ninjutsu")) {
+		        			AllZone.Combat.addAttacker(tgtC);
+		        		}
 		    		}
 		    		else
 		    		{
