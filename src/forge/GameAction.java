@@ -2469,7 +2469,10 @@ public class GameAction {
     }
     
     //TODO: shuffling seems to change a card's unique number but i'm not 100% sure
+    @Deprecated
     public void shuffle(Player player) {
+    	player.shuffle();
+    	/*
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
         Card c[] = library.getCards();
         
@@ -2484,8 +2487,6 @@ public class GameAction {
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);
-        
-//      random = java.security.SecureRandom.getInstance("SHA1PRNG");
         
         Object o;
         for(int i = 0; i < list.size(); i++) {
@@ -2503,6 +2504,7 @@ public class GameAction {
 
         list.toArray(c);
         library.setCards(c);
+        */
     }//shuffle
     
     /**

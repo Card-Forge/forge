@@ -2,6 +2,9 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
 
 
 public abstract class Player extends MyObservable{
@@ -304,6 +307,42 @@ public abstract class Player extends MyObservable{
         
         throw new RuntimeException("Input_Draw : getDredgeNumber() card doesn't have dredge - " + c.getName());
     }//getDredgeNumber()
+    
+    ////////////////////////////////
+    public void shuffle() {
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, this);
+        Card c[] = library.getCards();
+        
+        if(c.length <= 1) return;
+        
+        ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(c));
+        //overdone but wanted to make sure it was really random
+        Random random = new Random();
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        
+        Object o;
+        for(int i = 0; i < list.size(); i++) {
+            o = list.remove(random.nextInt(list.size()));
+            list.add(random.nextInt(list.size()), o);
+        }
+        
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        Collections.shuffle(list, random);
+        
+
+        list.toArray(c);
+        library.setCards(c);
+    }//shuffle
+    ////////////////////////////////
 	
 	////////////////////////////////
 	//
