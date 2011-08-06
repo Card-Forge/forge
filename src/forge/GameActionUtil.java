@@ -1602,7 +1602,6 @@ public class GameActionUtil {
 							} else target = AllZone.HumanPlayer; // check for target of spell/abilities should be here
 							//AllZone.GameAction.getPlayerLife(target).loseLife(1,card);
 							target.loseLife(1, card);
-							//AllZone.GameAction.gainLife(card.getController(), 1);
 							card.getController().gainLife(1, card);
 
 						} //resolve
@@ -1772,7 +1771,6 @@ public class GameActionUtil {
 								else target = null;
 							} else target = AllZone.ComputerPlayer; // check for target of spell/abilities should be here						
 							if(!(null == target)) {
-								//AllZone.GameAction.gainLife(target, converted);
 								target.gainLife(converted, card);
 							}
 								
@@ -8307,7 +8305,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					if (player.getLife() <= 10)
-						player.gainLife(1, source);  //AllZone.GameAction.gainLife(player, 1);
+						player.gainLife(1, source);
 				}
 			};// Ability
 			
@@ -8369,7 +8367,6 @@ public class GameActionUtil {
 				public void resolve() {
 					int numCards = AllZoneUtil.getPlayerHand(player).size();
 					if( numCards > 4 ) {
-						//AllZone.GameAction.gainLife(player, numCards - 4);
 						player.gainLife(numCards - 4, source);
 					}
 				}
