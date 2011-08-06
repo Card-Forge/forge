@@ -9,4 +9,5 @@ SVar:X:Count$BlackTypeOppCtrl.Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pygmy_kavu.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/88.jpg
 End

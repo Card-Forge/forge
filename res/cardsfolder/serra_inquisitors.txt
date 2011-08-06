@@ -8,4 +8,5 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature.Black | 
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_inquisitors.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/120.jpg
 End
