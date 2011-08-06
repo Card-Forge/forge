@@ -5,7 +5,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 @SuppressWarnings("unchecked") // Comparable needs <type>
 
-public class TableSorter implements Comparator, NewConstants
+public class TableSorter implements Comparator<Card>, NewConstants
 {
   private final int column;
   private boolean ascending;
@@ -15,9 +15,6 @@ public class TableSorter implements Comparator, NewConstants
   //used by compare()
   private Comparable aCom = null;
   private Comparable bCom = null;
-  private Card a;
-  private Card b;
-
   //used if in_column is 7, new cards first - the order is based on cards.txt
   //static because this should only be read once
   //static to try to reduce file io operations
@@ -47,11 +44,9 @@ public class TableSorter implements Comparator, NewConstants
   }
  
  
-  final public int compare(Object in_a, Object in_b)
+  final public int compare(Card a, Card b)
   {
-    a = (Card)in_a;
-    b = (Card)in_b;
-
+    
     if(column == 0)//Qty
     {
       aCom = Integer.valueOf(countCardName(a.getName(), all));

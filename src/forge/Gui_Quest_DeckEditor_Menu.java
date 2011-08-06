@@ -268,7 +268,6 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         
     }//exportDeck()
     
-    @SuppressWarnings("unchecked")
     // TableSorter type safety
     private String getExportDeckText(Deck aDeck) {
         //convert Deck into CardList
