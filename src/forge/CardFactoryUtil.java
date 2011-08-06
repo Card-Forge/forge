@@ -908,7 +908,7 @@ public class CardFactoryUtil {
             public void resolve() {
                 Card card = AllZone.GameAction.moveToPlay(sourceCard);
 
-                card.addIntrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+                card.addIntrinsicKeyword("At the beginning of the end step, exile CARDNAME.");
                 card.addIntrinsicKeyword("Haste");
                 card.setUnearthed(true);
             }
@@ -2006,7 +2006,7 @@ public class CardFactoryUtil {
     {
     	SpellAbility mana = new Ability_Mana(c, "Sacrifice CARDNAME: Add 1 to your mana pool.") {
 			private static final long serialVersionUID = 2384540533244132975L;
-		};
+    	};
     	
 		return (Ability_Mana)mana;
     }
