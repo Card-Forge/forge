@@ -54,8 +54,6 @@ public class GameActionUtil {
 		*/
 		
 		upkeep_Curse_of_Chains();
-		upkeep_Festering_Wound_Counter();
-		upkeep_Festering_Wound_Damage();
 		upkeep_Greener_Pastures();
 		upkeep_Squee();
 		//upkeep_Sporesower_Thallid();
@@ -4907,75 +4905,6 @@ public class GameActionUtil {
         }//list > 0
     }//upkeep_Curse_of_Chains()
 	
-	private static void upkeep_Festering_Wound_Counter() {
-		final String auraName = "Festering Wound";
-        final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-        
-        CardList list = new CardList(playZone.getCards());
-        list = list.getName(auraName);
-        
-        if(list.size() > 0) {
-        	Ability ability2;
-        	for(Card target:list) {
-        		final Card source = list.get(0);
-        		final Card enchantedCard = target;
-        		ability2 = new Ability(source, "0") {
-        			@Override
-        			public void resolve() {
-        				source.addCounter(Counters.INFECTION, 1);
-        			}
-        		};
-        		
-        		StringBuilder sb = new StringBuilder();
-        		sb.append(auraName).append(" - add an infection counter to ");
-        		sb.append(enchantedCard.getName());
-        		ability2.setStackDescription(sb.toString());
-        		
-        		AllZone.Stack.add(ability2);
-        	}
-        }//list > 0
-	}
-	
-	private static void upkeep_Festering_Wound_Damage() {
-		final String auraName = "Festering Wound";
-        final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-        
-        CardList list = new CardList(playZone.getCards());
-        list = list.filter(new CardListFilter() {
-            public boolean addCard(Card c) {
-                return c.isCreature() && c.isEnchanted();
-            }
-        });
-        
-        if(list.size() > 0) {
-        	Ability ability1;
-        	for(Card target:list) {
-        		if(target.isEnchantedBy(auraName)) {
-        			CardList auras = new CardList(target.getEnchantedBy().toArray());
-        			auras = auras.getName(auraName);
-        			for(Card aura:auras) {
-        				final Card source = aura;
-        				final Card enchantedCard = target;
-        				ability1 = new Ability(aura, "0") {
-        					@Override
-        					public void resolve() {
-        						int damage = source.getCounters(Counters.INFECTION);
-        						enchantedCard.getController().addDamage(damage, source);
-        					}
-        				};
-        				
-        				StringBuilder sb = new StringBuilder();
-        				sb.append(auraName).append(" - deals X damage to ").append(target.getController());
-        				ability1.setStackDescription(sb.toString());
-        				
-        				AllZone.Stack.add(ability1);
-        			} 
-        		}
-        	}
-        }//list > 0
-    }//upkeep_Festering_Wound_Damage()
 
     private static void upkeep_Squee() {
         final Player player = AllZone.Phase.getPlayerTurn();
