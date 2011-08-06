@@ -2301,8 +2301,12 @@ public class CombatUtil {
             final Ability ability = new Ability(b, "0") {
                 @Override
                 public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, attacker.getOwner());
-                    AllZone.GameAction.moveTo(hand, attacker);
+                	if(attacker.isToken())
+                		AllZone.GameAction.removeFromGame(attacker);
+                	else {
+                		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, attacker.getOwner());
+                		AllZone.GameAction.moveTo(hand, attacker);
+                	}
                 }
             };
             
