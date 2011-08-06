@@ -1,0 +1,11 @@
+Name:Elder Druid
+ManaCost:3 G
+Types:Creature Elf Cleric Druid
+Text:no text
+PT:2/2
+K:abTapTgt 3 G T:Artifact,Creature,Land:Tap target artifact, creature, or land.
+K:abUntapTgt 3 G T:Artifact,Creature,Land:Untap target artifact, creature, or land.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_druid.jpg
+End
