@@ -177,6 +177,7 @@ public class CardFactory_Instants {
                     card[0].setBaseAttack(4);
                     card[0].setBaseDefense(4);
                     card[0].addExtrinsicKeyword("Flying");
+                    card[0].addExtrinsicKeyword("HIDDEN Changeling");
                     
                     //EOT
                     final Command untilEOT = new Command() {
@@ -187,6 +188,7 @@ public class CardFactory_Instants {
                             card[0].setBaseDefense(oldDefense[0]);
                             
                             card[0].removeExtrinsicKeyword("Flying");
+                            card[0].removeExtrinsicKeyword("HIDDEN Changeling");
                         }
                     };
                     
