@@ -199,43 +199,25 @@ public class CardFactory_Creatures {
                          {
 	                        //TODO: Use central copy methods
 	                        Card copy;
-	                        if(!getTargetCard().isToken()) {
-	                            //CardFactory cf = new CardFactory("cards.txt");
-	                            
-	
-	                            //copy creature and put it onto the battlefield
-	                            //copy = getCard(getTargetCard(), getTargetCard().getName(), card.getController());
-	                            copy = cfact.getCard(getTargetCard().getName(), getTargetCard().getOwner());
-	                            
-	                            //when copying something stolen:
-	                            copy.setController(getTargetCard().getController());
-	                            
-	                            copy.setToken(true);
-	                            copy.setCopiedToken(true);
-	                            
-	                            copy.addIntrinsicKeyword("Haste");
-	                        } else //isToken()
-	                        {
 	                            Card c = getTargetCard();
-	                            
+
 	                            copy = CardFactory.copyStats(c);
-	                            
+
 	                            copy.setName(c.getName());
 	                            copy.setImageName(c.getImageName());
-	                            
+
 	                            copy.setOwner(c.getController());
 	                            copy.setController(c.getController());
-	                            
+
 	                            copy.setManaCost(c.getManaCost());
 	                            copy.setColor(c.getColor());
 	                            copy.setToken(true);
-	                            
+
 	                            copy.setType(c.getType());
-	                            
+
 	                            copy.setBaseAttack(c.getBaseAttack());
 	                            copy.setBaseDefense(c.getBaseDefense());
 	                            copy.addIntrinsicKeyword("Haste");
-	                        }
 	                        
 	                        //Slight hack in case Kiki copies a creature with triggers.
                             for(Trigger t : copy.getTriggers())
@@ -279,8 +261,8 @@ public class CardFactory_Creatures {
 	                                if(AllZone.GameAction.isCardInPlay(target[index]))
 	                                {
 	                                	//Slight hack in case kiki copies a creature with triggers
+                                        AllZone.GameAction.sacrifice(target[index]); //maybe do a setSacrificeAtEOT, but probably not.
 	                                	AllZone.TriggerHandler.removeAllFromCard(target[index]);
-	                                	AllZone.GameAction.sacrifice(target[index]); //maybe do a setSacrificeAtEOT, but probably not.
 	                                }
 	                            }
 	                        };//Command
