@@ -3703,27 +3703,36 @@ public class CardFactoryUtil {
         
         String d[] = DB.split("/");
         int X = 0;
-        if(d.length > 1) if(d[1].matches("dX")) // 2/10
+        if(d.length > 1)
         {
-            String dX = Src.getSVar(d[1]);
-            if(dX.startsWith("Count$")) {
-                String dd[] = dX.split("\\$");
-                if (dd[1].contains("Tgt"))
-                	X = xCount(TgtC, dd[1]);
-                else
-                	X = xCount(Src, dd[1]);
-            }
-        } else if(d[1].matches("X")) {
-            X = nDB;
-            if(d[1].contains(".")) {
-                String dd[] = d[1].split("\\.");
-                ArrayList<String> ddd = new ArrayList<String>();
-                for(int i = 1; i < dd.length; i++)
-                    ddd.add(dd[i]);
-                
-                X = doXMath(X, ddd.toArray(new String[3]));
-            }
-        } else if(d[1].matches("[0-9][0-9]?")) X = Integer.parseInt(d[1]);
+        	if(d[1].contains("dX")) // 2/10
+        	{
+	            String dX = Src.getSVar(d[1]);
+	            if(dX.startsWith("Count$"))
+	            {
+	                String dd[] = dX.split("\\$");
+	                if (dd[1].contains("Tgt"))
+	                	X = xCount(TgtC, dd[1]);
+	                else
+	                	X = xCount(Src, dd[1]);
+	            }
+	        } 
+	        else if(d[1].contains("X")) {
+	            X = nDB;
+	            if(d[1].contains(".")) {
+	                String dd[] = d[1].split("\\.", 2);
+	                String m[] = {"none"};
+	                m[0] = dd[1];
+	                //ArrayList<String> ddd = new ArrayList<String>();
+	                //for(int i = 1; i < dd.length; i++)
+	                //    ddd.add(dd[i]);
+	                
+	                X = doXMath(X, m);
+	            }
+	        } 
+	        else if(d[1].matches("[0-9][0-9]?")) 
+	        	X = Integer.parseInt(d[1]);
+        }
         
         String dbPlayer = "";
         if(d[0].contains("You"))
