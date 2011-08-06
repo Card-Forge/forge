@@ -1661,6 +1661,7 @@ res/cardsfolder/dreamscape_artist.txt -text svneol=native#text/plain
 res/cardsfolder/dreamstone_hedron.txt -text svneol=native#text/plain
 res/cardsfolder/dredge.txt -text svneol=native#text/plain
 res/cardsfolder/dreg_reaver.txt -text svneol=native#text/plain
+res/cardsfolder/dregs_of_sorrow.txt svneol=native#text/plain
 res/cardsfolder/dregscape_zombie.txt -text svneol=native#text/plain
 res/cardsfolder/drekavac.txt -text svneol=native#text/plain
 res/cardsfolder/drelnoch.txt -text svneol=native#text/plain
