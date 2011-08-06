@@ -5522,9 +5522,11 @@ public class GameActionUtil {
     	if (damage > 0)
     	{
         	Object[] DealsDamage_Whenever_Parameters = new Object[3];
-        	DealsDamage_Whenever_Parameters[0] = c.getController().getOpponent();
         	DealsDamage_Whenever_Parameters[2] = c;
-        	AllZone.GameAction.checkWheneverKeyword(c, "DealsDamage/Opponent", DealsDamage_Whenever_Parameters);
+        	DealsDamage_Whenever_Parameters[0] = player;
+        	AllZone.GameAction.checkWheneverKeyword(c, "DealsDamage/Player", DealsDamage_Whenever_Parameters);
+        	if(!c.getController().equals(player))
+        		AllZone.GameAction.checkWheneverKeyword(c, "DealsDamage/Opponent", DealsDamage_Whenever_Parameters);
         	
     		CardList playerPerms = AllZoneUtil.getPlayerCardsInPlay(player);
     		
