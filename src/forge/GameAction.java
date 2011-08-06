@@ -158,8 +158,8 @@ public class GameAction {
     		return moveTo(AllZone.getZone(Constant.Zone.Exile, c.getOwner()), c);
     	}
     	
-    	if(c.getName().equals("Nissa's Chosen") && origZone.is(Constant.Zone.Battlefield)) {
-            return moveToLibrary(c);
+    	if (c.getName().equals("Nissa's Chosen") && origZone.is(Constant.Zone.Battlefield)) {
+            return moveToLibrary(c, -1);
         }
     	
     	if(c.hasKeyword("If CARDNAME would be put into a graveyard this turn, exile it instead.")) {
