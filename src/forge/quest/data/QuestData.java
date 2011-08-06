@@ -1,19 +1,14 @@
 package forge.quest.data;
 
-import com.esotericsoftware.minlog.Log;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.ConversionException;
 import forge.*;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.item.QuestInventory;
-import forge.quest.data.pet.*;
+import forge.quest.data.pet.QuestPetManager;
 
-import java.io.*;
+import java.io.File;
 import java.util.*;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
 
 //when you create QuestDataOld and AFTER you copy the AI decks over
@@ -27,52 +22,58 @@ import java.util.zip.GZIPOutputStream;
 public class QuestData {
     QuestPreferences preferences = null;
 
-    private int rankIndex;
-    private int win;
-    private int lost;
+    int rankIndex;
+    int win;
+    int lost;
 
-    private int life;
+    int life;
     private int maxLife;
 
-    private int questsPlayed;
+    int questsPlayed;
 
-    private long credits;
-    private int diffIndex;
-    private String difficulty;
+    long credits;
+    int diffIndex;
+    String difficulty;
 
-    private String mode = "";
+    String mode = "";
 
     private transient Map<String, Deck> aiDecks;
     private transient List<String> easyAIDecks;
     private transient List<String> mediumAIDecks;
     private transient List<String> hardAIDecks;
 
-    private Map<String, Deck> myDecks = new HashMap<String, Deck>();
+    Map<String, Deck> myDecks = new HashMap<String, Deck>();
 
     //holds String card names
-    private List<String> cardPool = new ArrayList<String>();
-    private List<String> newCardList = new ArrayList<String>();
+    List<String> cardPool = new ArrayList<String>();
+    List<String> newCardList = new ArrayList<String>();
 
-    private List<String> shopList = new ArrayList<String>();
-    private List<Integer> availableQuests = new ArrayList<Integer>();
+    List<String> shopList = new ArrayList<String>();
+    List<Integer> availableQuests = new ArrayList<Integer>();
 
-    private List<Integer> completedQuests = new ArrayList<Integer>();
+    List<Integer> completedQuests = new ArrayList<Integer>();
 
     private transient QuestBoosterPack boosterPack;
 
     //used by shouldAddAdditionalCards()
-    private Random random = new Random();
+    private long randomSeed = 0;
 
     private transient String[] rankArray;
 
     public static final String FANTASY = "Fantasy";
     public static final String REALISTIC = "Realistic";
 
-    private QuestInventory inventory = new QuestInventory();
-    private QuestPetManager petManager = new QuestPetManager();
+    QuestInventory inventory = new QuestInventory();
 
-    //This field stores the version number of the QuestData format
-    private static int VERSION_NUMBER = 0;
+    //This field holds the version of the Quest Data
+    public static final int CURRENT_VERSION_NUMBER = 1;
+
+    //This field places the version number into QD instance,
+    //but only when the object is created through the constructor
+    //DO NOT RENAME THIS FIELD
+    int versionNumber = CURRENT_VERSION_NUMBER;
+
+    QuestPetManager petManager = new QuestPetManager();
 
     public QuestData() {
         preferences = new QuestPreferences();
@@ -159,11 +160,21 @@ public class QuestData {
         return getOpponents(hardAIDecks);
     }
 
+
     public String[] getOpponents(List<String> aiDeck) {
-        Collections.shuffle(aiDeck);
+        //This is to make sure that the opponents do not change when the deck editor is launched.
+        List<String> deckListCopy = new ArrayList<String>(aiDeck);
+        Collections.shuffle(deckListCopy, new Random(randomSeed));
 
-        return new String[]{aiDeck.get(0), aiDeck.get(1), aiDeck.get(2)};
+        return new String[]{deckListCopy.get(0), deckListCopy.get(1), deckListCopy.get(2)};
 
+    }
+
+    /**
+     * This method should be called whenever the opponents should change.
+     */
+    public void randomizeOpponents(){
+        randomSeed = (new Random()).nextLong();
     }
 
     private static List<String> readFile(File file, List<String> aiDecks) {
@@ -198,135 +209,8 @@ public class QuestData {
     }
 
 
-    static public QuestData loadData() {
-        try {
-            //read file "questData"
-            QuestData data = null;
-
-            File xmlSaveFile = ForgeProps.getFile(NewConstants.QUEST.XMLDATA);
-
-            //if the new file format does not exist, convert the old one and save it as the new copy
-
-            if (!xmlSaveFile.exists()) {
-                data = convertSaveFormat();
-                data.saveData();
-            }
-
-            else {
-                BufferedInputStream bin = new BufferedInputStream(new FileInputStream(xmlSaveFile));
-                GZIPInputStream zin = new GZIPInputStream(bin);
-
-                XStream xStream = new XStream();
-
-                try{
-                    data = (QuestData) xStream.fromXML(zin);
-                } catch (ConversionException e){
-                    Iterator it = e.keys();
-                    while (it.hasNext()) {
-                        Object o = it.next();
-                        System.out.println("o = " + e.get((String) o));
-                    }
-                }
-                zin.close();
-            }
-            return data;
-        }
-
-        catch (Exception ex) {
-            ErrorViewer.showError(ex, "Error loading Quest Data");
-            throw new RuntimeException(ex);
-        }
-    }
-
     public void saveData() {
-        try {
-            File f = ForgeProps.getFile(NewConstants.QUEST.XMLDATA);
-            BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
-            GZIPOutputStream zout = new GZIPOutputStream(bout);
-
-            XStream xStream = new XStream();
-            xStream.toXML(this, zout);
-
-            zout.flush();
-            zout.close();
-        } catch (Exception ex) {
-            ErrorViewer.showError(ex, "Error saving Quest Data");
-            throw new RuntimeException(ex);
-        }
-        }
-
-    @SuppressWarnings({"deprecation"})
-    private static QuestData convertSaveFormat() {
-        forge.QuestData oldData = forge.QuestData.loadData();
-        QuestData newData = new QuestData();
-
-
-        newData.difficulty = oldData.getDifficulty();
-        newData.diffIndex = oldData.getDiffIndex();
-        newData.rankIndex = oldData.getWin() / newData.preferences.getWinsForRankIncrease(newData.diffIndex);
-
-        newData.win = oldData.getWin();
-        newData.lost = oldData.getLost();
-
-        newData.life = oldData.getLife();
-        newData.inventory.setItemLevel("Estates", oldData.getEstatesLevel());
-        newData.inventory.setItemLevel("Lucky Coin", oldData.getLuckyCoinLevel());
-        newData.inventory.setItemLevel("Sleight", oldData.getSleightOfHandLevel());
-        newData.inventory.setItemLevel("Estates", oldData.getEstatesLevel());
-        if (oldData.getGearLevel() >= 1){
-            newData.inventory.setItemLevel("Map", 1);
-        }
-        if (oldData.getGearLevel() == 2){
-            newData.inventory.setItemLevel("Zeppelin", 1);
-        }
-
-        newData.questsPlayed = oldData.getQuestsPlayed();
-        newData.credits = oldData.getCredits();
-        newData.mode = oldData.getMode();
-
-        newData.myDecks = new HashMap<String, Deck>();
-        for (String deckName : oldData.getDeckNames()) {
-            newData.myDecks.put(deckName, oldData.getDeck(deckName));
-        }
-
-        newData.cardPool = oldData.getCardpool();
-        newData.newCardList = oldData.getAddedCards();
-        newData.shopList = oldData.getShopList();
-
-        newData.availableQuests = oldData.getAvailableQuests();
-        newData.completedQuests = oldData.getCompletedQuests();
-
-        QuestPetAbstract newPet;
-
-        if (oldData.getBirdPetLevel() > 0) {
-            newPet = new QuestPetBird();
-            newPet.setLevel(oldData.getBirdPetLevel());
-            newData.petManager.addPet(newPet);
-        }
-        if (oldData.getHoundPetLevel() > 0) {
-            newPet = new QuestPetHound();
-            newPet.setLevel(oldData.getHoundPetLevel());
-            newData.petManager.addPet(newPet);
-        }
-        if (oldData.getWolfPetLevel() > 0) {
-            newPet = new QuestPetWolf();
-            newPet.setLevel(oldData.getWolfPetLevel());
-            newData.petManager.addPet(newPet);
-        }
-        if (oldData.getCrocPetLevel() > 0) {
-            newPet = new QuestPetCrocodile();
-            newPet.setLevel(oldData.getCrocPetLevel());
-            newData.petManager.addPet(newPet);
-        }
-        if (oldData.getPlantLevel() > 0) {
-            newPet = new QuestPetPlant();
-            newPet.setLevel(oldData.getPlantLevel());
-            newData.petManager.getPlant().setLevel(oldData.getPlantLevel());
-        }
-
-        newData.getPetManager().setSelectedPet(null);
-
-        return newData;
+        QuestDataIO.saveData(this);
     }
 
 
@@ -756,8 +640,7 @@ public class QuestData {
             chance = 0.65f;
         }
 
-        float r = random.nextFloat();
-        Log.debug("Random:" + r);
+        float r = (new Random()).nextFloat();
 
         if (didWin) {
             return r <= chance;
@@ -781,7 +664,7 @@ public class QuestData {
 
         for (int i = 0; i < 10; i++) {
             q.saveData();
-            q = QuestData.loadData();
+            q = QuestDataIO.loadData();
         }
 
         System.exit(1);

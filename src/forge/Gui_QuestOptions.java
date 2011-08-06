@@ -2,6 +2,7 @@ package forge;
 
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
+import forge.quest.data.QuestDataIO;
 import forge.quest.gui.QuestFrame;
 
 import javax.swing.*;
@@ -190,7 +191,7 @@ public class Gui_QuestOptions extends JFrame {
     
     void continueQuestButton_actionPerformed(ActionEvent e) {
         //set global variable
-        AllZone.QuestData = forge.quest.data.QuestData.loadData();
+        AllZone.QuestData = QuestDataIO.loadData();
         AllZone.QuestData.setDifficultyIndex();
         dispose();
         

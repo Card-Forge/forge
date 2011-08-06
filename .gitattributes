@@ -7698,6 +7698,7 @@ src/forge/properties/Preferences.java svneol=native#text/plain
 src/forge/properties/SavePreferencesListener.java svneol=native#text/plain
 src/forge/quest/data/QuestBoosterPack.java svneol=native#text/plain
 src/forge/quest/data/QuestData.java svneol=native#text/plain
+src/forge/quest/data/QuestDataIO.java svneol=native#text/plain
 src/forge/quest/data/QuestMatchState.java svneol=native#text/plain
 src/forge/quest/data/QuestPreferences.java svneol=native#text/plain
 src/forge/quest/data/QuestUtil.java svneol=native#text/plain
