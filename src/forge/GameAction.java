@@ -103,15 +103,15 @@ public class GameAction {
     	if( p != null ) p.remove(c);
     	if(!c.isToken()) lib.add(c);
     }
-    
+    /*
     @Deprecated
     public void discardRandom(Player player, SpellAbility sa) {
     	player.discardRandom(sa);
     	/*
         Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
         if(c.length != 0) discard(CardUtil.getRandom(c), sa);
-        */
-    }
+        *
+    }*/
     
     @Deprecated
     public void mill(Player player, int n)

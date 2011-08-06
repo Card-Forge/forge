@@ -197,9 +197,10 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    Player player = getTargetPlayer();
-                    if(player.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-                    else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this); // wise discard should be here  
+                	getTargetPlayer().discard(this);
+                    //Player player = getTargetPlayer();
+                    //if(player.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                    //else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this); // wise discard should be here  
                     
                 }
                 
@@ -2492,9 +2493,10 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     Player opponent = card.getController().getOpponent();
-                    if(AllZone.HumanPlayer.equals(opponent)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-                    else //computer
-                    AllZone.GameAction.discardRandom(opponent, this);
+                    opponent.discard(this);
+                    //if(AllZone.HumanPlayer.equals(opponent)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                    //else //computer
+                    //AllZone.GameAction.discardRandom(opponent, this);
                 }//resolve()
             };//SpellAbility
             
@@ -2795,7 +2797,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     if(hand.getCards().length == 0) AllZone.GameAction.sacrifice(card);
-                    else AllZone.GameAction.discardRandom(card.getController(), this);
+                    else card.getController().discardRandom(this);
                 }
             };//SpellAbility
             
@@ -4523,9 +4525,10 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                 	card.getController().drawCard();
+                	card.getController().discard(this);
                     
-                    if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-                    else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
+                    //if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                    //else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
                 }
             };//SpellAbility
             
@@ -5457,12 +5460,13 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     int discard = ((Integer) countZubera.execute()).intValue();
+                    getTargetPlayer().discard(discard, this);
                     
-                    if(AllZone.HumanPlayer.equals(getTargetPlayer())) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(discard, this));
-                    else {
-                        for(int i = 0; i < discard; i++)
-                            AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
-                    }
+                    //if(AllZone.HumanPlayer.equals(getTargetPlayer())) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(discard, this));
+                    //else {
+                     //   for(int i = 0; i < discard; i++)
+                      //      AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
+                    //}
                 }//resolve()
             };//SpellAbility
             
@@ -7083,12 +7087,13 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     Player player = card.getController().getOpponent();
+                    player.discard(2, this);
                     
-                    if(player.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(2, this));
-                    else {
-                        AllZone.GameAction.discardRandom(player, this);
-                        AllZone.GameAction.discardRandom(player, this);
-                    }
+                    //if(player.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(2, this));
+                    //else {
+                     //   AllZone.GameAction.discardRandom(player, this);
+                      //  AllZone.GameAction.discardRandom(player, this);
+                    //}
                 }//resolve()
                 
                 @Override
@@ -7137,7 +7142,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     Player player = getTargetPlayer();
                     
-                    AllZone.GameAction.discardRandom(player, this);
+                    player.discardRandom(this);
                     
                 }//resolve()
                 
@@ -7401,6 +7406,7 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Glint-Eye Nephilim")) {
+        	//TODO: update to Ability_Cost
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = 5790680475821014099L;
                 
@@ -7419,7 +7425,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void chooseTargetAI() {
-                    AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
+                    AllZone.ComputerPlayer.discardRandom(this);
                 }
                 
                 @Override
@@ -7810,7 +7816,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void chooseTargetAI() {
-                    AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
+                    AllZone.ComputerPlayer.discardRandom(this);
                 }
                 
                 @Override
@@ -7964,7 +7970,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void chooseTargetAI() {
-                    AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
+                    AllZone.ComputerPlayer.discardRandom(this);
                 }
                 
                 @Override
@@ -8102,7 +8108,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.discardRandom(card.getController(), this);
+                    card.getController().discardRandom(this);
                     if(AllZone.GameAction.isCardInPlay(card)) {
                         card.addIntrinsicKeyword("Protection from white");
                         
@@ -9177,8 +9183,8 @@ public class CardFactory_Creatures {
                     opponent.loseLife(2, card);
                     card.getController().gainLife(2, card);
                     
-                    //computer discards here, todo: should discard when ability put on stack
-                    if(card.getController().equals(AllZone.ComputerPlayer)) AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
+                    //computer discards here, TODO: should discard when ability put on stack
+                    if(card.getController().equals(AllZone.ComputerPlayer)) AllZone.ComputerPlayer.discardRandom(this);
                 }
                 
                 @Override
@@ -10033,8 +10039,9 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.ComputerPlayer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
-                    else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
+                	getTargetPlayer().discard(this);
+                    //if(AllZone.ComputerPlayer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
+                    //else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
                 }//resolve()
             };//SpellAbility
             
@@ -17122,7 +17129,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.mill(getTargetPlayer(),3);                    
+                    getTargetPlayer().mill(3);                    
                 }
                 
                 @Override
@@ -17148,7 +17155,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.mill(getTargetPlayer(),2);
+                    getTargetPlayer().mill(2);
                     
                 }
                 
@@ -17176,7 +17183,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.mill(getTargetPlayer(),1);
+                    getTargetPlayer().mill(1);
                 }
                 
                 @Override
