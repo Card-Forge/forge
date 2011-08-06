@@ -18558,6 +18558,36 @@ public class CardFactory_Creatures {
         }
         //*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Symbiotic Wurm")) {
+            final SpellAbility ability = new Ability(card, "0") {
+
+                @Override
+                public void resolve() {
+                    for(int i = 0; i < 7; i++) {
+                        makeToken();
+                    }
+                }
+        
+                void makeToken() {
+                    CardFactoryUtil.makeToken("Insect", "G 1 1 Insect", card, "G", new String[] {
+                            "Creature", "Insect"}, 1, 1, new String[] {""});
+                }//makeToken()
+            };//SpellAbility
+        
+            Command destroy = new Command() {
+                private static final long serialVersionUID = -7121390569051656027L;
+
+                public void execute() {
+                    ability.setStackDescription("Symbiotic Wurm - " + card.getController()
+                            + " puts seven 1/1 tokens into play ");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addDestroyCommand(destroy);
+        }//*************** END ************ END **************************
+        
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {
