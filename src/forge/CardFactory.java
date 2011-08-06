@@ -5761,7 +5761,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************  
         else if(cardName.equals("Hatching Plans")) {
             
@@ -5787,7 +5787,7 @@ public class CardFactory implements NewConstants {
             
             card.addDestroyCommand(draw3Cards);
         }//*************** END ************ END **************************
-
+		*/
         
         //*************** START *********** START **************************
         else if(cardName.equals("Lifespark Spellbomb")) {
@@ -6877,9 +6877,8 @@ public class CardFactory implements NewConstants {
             };
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
-        
-        
-        
+                
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Chromatic Star")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -6902,7 +6901,7 @@ public class CardFactory implements NewConstants {
             };
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************   
-   
+   		*/
         
         //*************** START *********** START **************************
         else if(cardName.equals("Feldon's Cane")) {

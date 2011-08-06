@@ -1,7 +1,9 @@
 Name:Hatching Plans
 ManaCost:1 U
 Types:Enchantment
-Text:When Hatching Plans is put into a graveyard from play, draw three cards.
+Text:no text
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Optional$ True | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw three cards.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 3 
 SVar:RemAIDeck:True
 SVar:SacMe:5
 SVar:Rarity:Rare
