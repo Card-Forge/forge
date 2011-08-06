@@ -2745,17 +2745,20 @@ public class CardFactory_Creatures {
 			public void showMessage()
 	        {
 	          AllZone.Display.showMessage("Discard from your hand a non-creature card");
-	          ButtonUtil.disableAll();
+	          ButtonUtil.enableOnlyCancel();
 	        }
 	        public void selectCard(Card c, PlayerZone zone)
 	        {
-	          if(zone.is(Constant.Zone.Hand))
+	          if(zone.is(Constant.Zone.Hand) && c.isCreature())
 	          {
 	            AllZone.GameAction.discard(c);
-	            if(c.isCreature())
-	              AllZone.GameAction.sacrifice(card);
 	            stop();
 	          }
+	        }
+	        public void selectButtonCancel()
+	        {
+	        	AllZone.GameAction.sacrifice(card);
+	        	stop();
 	        }
 	      };//Input
 
@@ -10737,7 +10740,7 @@ public class CardFactory_Creatures {
 	        	if (all.size() != 0) {
 	        		
 	        		if(card.getController().equals(Constant.Player.Human)) {
-	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target permanent.", true));
+	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target permanent to destroy.", true));
 	        			ButtonUtil.disableAll();
 	        		}
 	        		else if (card.getController().equals(Constant.Player.Computer)) {

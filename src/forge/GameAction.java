@@ -912,7 +912,7 @@ private Card getCurrentCard(int ID)
     library.add(13, land.get(5));
     library.add(16, land.get(6));
 	}
-    catch(NullPointerException e)
+    catch(IndexOutOfBoundsException e)
 	{
 		System.err.println("Error: cannot smooth mana curve, not enough land");
 		return in;

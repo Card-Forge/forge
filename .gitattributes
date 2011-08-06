@@ -61,7 +61,6 @@ src/forge/CardList.java svneol=native#text/plain
 src/forge/CardListFilter.java svneol=native#text/plain
 src/forge/CardListUtil.java svneol=native#text/plain
 src/forge/CardPanel.java svneol=native#text/plain
-src/forge/CardParser.java svneol=native#text/plain
 src/forge/CardUtil.java svneol=native#text/plain
 src/forge/Combat.java svneol=native#text/plain
 src/forge/CombatPlaneswalker.java svneol=native#text/plain

@@ -1,24 +1,20 @@
 package forge;
     import java.util.*;
 
-    @SuppressWarnings("unused") // java.util.*
+    //@SuppressWarnings("unused") // java.util.*
 	public class InputControl extends MyObservable implements java.io.Serializable
     {
 		private static final long serialVersionUID = 3955194449319994301L;
 		
 		private Input input;
         static int n = 0;
+        private Stack<Input> inputStack = new Stack<Input>();
 
         public void setInput(final Input in)
         {
        if(!(input == null || input instanceof Input_StackNotEmpty))
-    	   AllZone.Stack.add(new Ability(AllZone.ManaPool, "no cost", "Delayed Input")//TODO: source other than mp?
-    	   {
-    		   public void resolve() {
-    			   AllZone.InputControl.setInput(in);
-    		   }
-    	   });
-       else input = in;
+    	   inputStack.add(input);
+       input = in;
        updateObservers();
         }
         public void resetInput()
@@ -34,6 +30,12 @@ package forge;
 
        if(input != null)
            return input;
+       
+       else if(inputStack.size() > 0)
+       {
+    	   setInput(inputStack.pop());
+    	   return input;
+       }
 
        else if(AllZone.Stack.size() > 0)
        {
