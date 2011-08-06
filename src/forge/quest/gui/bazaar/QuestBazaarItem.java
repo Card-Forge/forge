@@ -2,93 +2,68 @@
 package forge.quest.gui.bazaar;
 
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-
 import forge.AllZone;
 import forge.gui.GuiUtils;
 import forge.gui.MultiLineLabel;
+import forge.quest.data.bazaar.QuestStallPurchasable;
 import forge.quest.gui.FontConstants;
 
+import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public abstract class QuestAbstractBazaarItem {
-    
-    String    name;
-    String    description;
-    int       price;
-    ImageIcon image;
-    
-    protected QuestAbstractBazaarItem(String name, String description, int price) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        
-        //create a blank image placeholder
-        this.image = GuiUtils.getEmptyIcon(40, 40);
-    }
-    
-    protected QuestAbstractBazaarItem(String name, String description, int price, ImageIcon image) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        
-        if(image == null) {
-            //create a blank image placeholder
-            this.image = GuiUtils.getEmptyIcon(40, 40);
-        } else {
-            this.image = image;
-        }
+
+public class QuestBazaarItem {
+
+    QuestStallPurchasable item;
+    protected QuestBazaarItem(QuestStallPurchasable purchasable){
+        this.item = purchasable;
     }
     
     /**
      * Invoked by the Bazaar UI when the item is purchased. The credits of the item should not be deducted here.
      */
-    public abstract void purchaseItem();
+    public void purchaseItem(){
+        item.onPurchase();
+    }
     
     protected final JPanel getItemPanel() {
-        ImageIcon resizedImage = GuiUtils.getResizedIcon(image, 40, 40);
+        ImageIcon icon = GuiUtils.getIconFromFile(item.getImageName());
+        if (icon == null){
+            icon = GuiUtils.getEmptyIcon(40,40);
+        }
+        ImageIcon resizedImage = GuiUtils.getResizedIcon(icon, 40, 40);
         
         JLabel iconLabel = new JLabel(resizedImage);
         iconLabel.setBorder(new LineBorder(Color.BLACK));
         JPanel iconPanel = new JPanel(new BorderLayout());
         iconPanel.add(iconLabel, BorderLayout.NORTH);
         
-        JLabel nameLabel = new JLabel(name);
+        JLabel nameLabel = new JLabel(item.getPurchaseName());
         nameLabel.setFont(new Font(FontConstants.SANS_SERIF, Font.BOLD, 14));
         
-        JLabel descriptionLabel = new MultiLineLabel("<html>" + description + "</html>");
+        JLabel descriptionLabel = new MultiLineLabel("<html>" + item.getPurchaseDescription()+ "</html>");
         descriptionLabel.setFont(new Font(FontConstants.SANS_SERIF, Font.PLAIN, 12));
         
-        JLabel priceLabel = new JLabel("<html><b>Cost:</b> " + price + " credits</html>");
+        JLabel priceLabel = new JLabel("<html><b>Cost:</b> " + item.getPrice() + " credits</html>");
         priceLabel.setFont(new Font(FontConstants.SANS_SERIF, Font.PLAIN, 12));
         
 
         JButton purchaseButton = new JButton("Buy");
         purchaseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                AllZone.QuestData.subtractCredits(price);
+                AllZone.QuestData.subtractCredits(item.getPrice());
                 purchaseItem();
                 AllZone.QuestData.saveData();
                 QuestBazaarPanel.refreshLastInstance();
             }
         });
         
-        if(AllZone.QuestData.getCredits() < price) {
+        if(AllZone.QuestData.getCredits() < item.getPrice()) {
             purchaseButton.setEnabled(false);
         }
         

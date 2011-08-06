@@ -1,12 +1,14 @@
 package forge.quest.data.item;
 
+import forge.quest.data.bazaar.QuestStallManager;
+
 public class QuestItemLuckyCoin extends QuestItemAbstract{
     QuestItemLuckyCoin(){
-        super("Lucky Coin",QuestInventory.BANKER);
+        super("Lucky Coin", QuestStallManager.BANKER);
     }
 
     @Override
-    public String getUpgradeDescription() {
+    public String getPurchaseDescription() {
         return "This coin is believed to give good luck to its owner.<br>"+
                 "Improves the chance of getting a random <br>rare after each match by <b>15%</b>.";
     }

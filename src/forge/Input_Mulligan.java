@@ -34,7 +34,7 @@ public class Input_Mulligan extends Input {
         
         if(AllZone.QuestData != null)
         {
-        	if (AllZone.QuestData.getSleightOfHandLevel() >= 1 && AllZone.GameInfo.getHumanNumberOfTimesMulliganed() == 1)
+        	if (AllZone.QuestData.getInventory().hasItem("Sleight") && AllZone.GameInfo.getHumanNumberOfTimesMulliganed() == 1)
         		newHand++;
         }
         for(int i = 0; i < newHand; i++)

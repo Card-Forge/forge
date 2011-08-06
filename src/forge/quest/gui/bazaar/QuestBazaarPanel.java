@@ -1,5 +1,6 @@
 package forge.quest.gui.bazaar;
 
+import forge.quest.data.bazaar.QuestStallManager;
 import forge.quest.gui.QuestAbstractPanel;
 import forge.quest.gui.QuestFrame;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public class QuestBazaarPanel extends QuestAbstractPanel {
 	private static final long serialVersionUID = 1418913010051869222L;
 	
-    static List<QuestAbstractBazaarStall> stallList = new ArrayList<QuestAbstractBazaarStall>();
+    static List<QuestBazaarStall> stallList = new ArrayList<QuestBazaarStall>();
 
     JPanel buttonPanel = new JPanel(new BorderLayout());
     JPanel buttonPanelMain = new JPanel();
@@ -32,13 +33,11 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
         super(mainFrame);
         this.setLayout(new BorderLayout());
 
-        stallList = new ArrayList<QuestAbstractBazaarStall>();
-        stallList.add(new QuestAlchemistStall());
-        stallList.add(new QuestBankerStall());
-        stallList.add(new QuestBookStall());
-        stallList.add(new QuestGearStall());
-        stallList.add(new QuestNurseryStall());
-        stallList.add(new QuestPetStall());
+        stallList = new ArrayList<QuestBazaarStall>();
+
+        for (String stallName : QuestStallManager.getStallNames()) {
+            stallList.add(new QuestBazaarStall(QuestStallManager.getStall(stallName)));
+        }
 
         buttonPanelMain.setLayout(new GridLayout(stallList.size(),1));
         
@@ -48,7 +47,7 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
         double maxWidth=0;
         double maxHeight=0;
 
-        for(QuestAbstractBazaarStall stall:stallList){
+        for(QuestBazaarStall stall:stallList){
             JToggleButton stallButton = new JToggleButton(stall.getStallName(), stall.getStallIcon());
             stallButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -119,7 +118,7 @@ public class QuestBazaarPanel extends QuestAbstractPanel {
      * @return The last created instance of this object, used for updates after purchases.
      */
     static void refreshLastInstance(){
-        for (QuestAbstractBazaarStall stall: stallList){
+        for (QuestBazaarStall stall: stallList){
             stall.updateItems();
         }
     }

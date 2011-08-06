@@ -1,6 +1,7 @@
 package forge.quest.data.pet;
 
 import forge.*;
+import forge.quest.data.bazaar.QuestStallManager;
 
 public class QuestPetPlant extends QuestPetAbstract {
     @Override
@@ -129,4 +130,15 @@ public class QuestPetPlant extends QuestPetAbstract {
                 "g_1_4_plant_wall_small.jpg"
         };
     }
+
+    @Override
+    public String getStallName() {
+        return QuestStallManager.NURSERY;
+    }
+
+    @Override
+    public void onPurchase() {
+        AllZone.QuestData.getPetManager().addPlantLevel();
+    }
+    
 }

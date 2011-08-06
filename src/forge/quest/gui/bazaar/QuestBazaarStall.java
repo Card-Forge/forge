@@ -4,13 +4,18 @@ import forge.AllZone;
 import forge.gui.GuiUtils;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestData;
+import forge.quest.data.bazaar.QuestStallDefinition;
+import forge.quest.data.bazaar.QuestStallManager;
+import forge.quest.data.bazaar.QuestStallPurchasable;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
-public abstract class QuestAbstractBazaarStall extends JPanel implements NewConstants {
+public class QuestBazaarStall extends JPanel implements NewConstants {
     private static final long serialVersionUID = -4147745071116906043L;
+    String name;
     String stallName;
     String fluff;
     ImageIcon icon;
@@ -21,13 +26,22 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
 
     protected QuestData questData = AllZone.QuestData;
 
-    protected QuestAbstractBazaarStall(String stallName, String iconName, String fluff) {
+    protected QuestBazaarStall(String name, String stallName, String iconName, String fluff) {
+        this.name = name;
         this.fluff = fluff;
         this.icon = GuiUtils.getIconFromFile(iconName);
         this.stallName = stallName;
 
         initUI();
 
+    }
+
+    protected QuestBazaarStall(QuestStallDefinition definition) {
+        this.fluff = definition.fluff;
+        this.icon = GuiUtils.getIconFromFile(definition.iconName);
+        this.stallName = definition.displayName;
+        this.name = definition.name;
+        initUI();
     }
 
     private void initUI() {
@@ -95,7 +109,7 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
         this.setBorder(new EmptyBorder(0,5,0,0));
     }
 
-    private void populateInventory(java.util.List<QuestAbstractBazaarItem> stallItems) {
+    private void populateInventory(java.util.List<QuestBazaarItem> stallItems) {
         inventoryPanel.removeAll();
 
         GridBagLayout innerLayout = new GridBagLayout();
@@ -125,7 +139,7 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
         else{
 
             innerConstraints.insets = new Insets(5,20,5,5);
-            for (QuestAbstractBazaarItem item : stallItems) {
+            for (QuestBazaarItem item : stallItems) {
                 JPanel itemPanel = item.getItemPanel();
 
                 innerLayout.setConstraints(itemPanel, innerConstraints);
@@ -140,7 +154,16 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
         inventoryPanel.add(fillLabel);
     }
 
-    protected abstract java.util.List<QuestAbstractBazaarItem> populateItems();
+    protected java.util.List<QuestBazaarItem> populateItems(){
+        java.util.List<QuestBazaarItem> ret = new ArrayList<QuestBazaarItem>();
+        java.util.List<QuestStallPurchasable> purchasables = QuestStallManager.getItems(name);
+
+        for (QuestStallPurchasable purchasable : purchasables) {
+            ret.add(new QuestBazaarItem(purchasable));
+        }
+        
+        return ret;
+    }
 
 
     public ImageIcon getStallIcon() {

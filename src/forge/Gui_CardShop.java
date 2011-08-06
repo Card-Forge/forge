@@ -393,11 +393,11 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         
         if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY))
         {
-        	if (questData.getEstatesLevel()==1)
+        	if (questData.getInventory().getItemLevel("Estates")==1)
         		multi+=0.01;
-        	else if (questData.getEstatesLevel()==2)
+        	else if (questData.getInventory().getItemLevel("Estates")==2)
         		multi+=0.0175;
-        	else if (questData.getEstatesLevel()>=3)
+        	else if (questData.getInventory().getItemLevel("Estates")>=3)
         		multi+=0.025;
         }
     	

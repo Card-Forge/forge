@@ -1,8 +1,11 @@
 package forge.quest.data.pet;
 
+import forge.AllZone;
 import forge.Card;
+import forge.quest.data.bazaar.QuestStallManager;
+import forge.quest.data.bazaar.QuestStallPurchasable;
 
-public abstract class QuestPetAbstract implements Comparable{
+public abstract class QuestPetAbstract implements QuestStallPurchasable{
     int level;
     private int maxLevel;
     private String name;
@@ -11,7 +14,7 @@ public abstract class QuestPetAbstract implements Comparable{
     public abstract Card getPetCard();
 
     public abstract int[] getAllUpgradePrices();
-    public int getUpgradePrice(){
+    public int getPrice(){
         return getAllUpgradePrices()[level];
     }
 
@@ -59,6 +62,13 @@ public abstract class QuestPetAbstract implements Comparable{
         this.level = level;
     }
 
+    public String getPurchaseDescription() {
+        return "<em>"+getDescription()+"</em><br>" + getUpgradeDescription()+
+                "<br><br><u>Current stats:</u> " + getStats()+
+                "<br><u>Upgraded stats:</u> " + getUpgradedStats();
+
+    }
+
     public String getDescription() {
         return description;
     }
@@ -74,5 +84,25 @@ public abstract class QuestPetAbstract implements Comparable{
 
     public int compareTo(Object o) {
         return name.compareTo(o.toString());
+    }
+
+    public String getPurchaseName() {
+        return name;
+    }
+
+    public String getStallName() {
+        return QuestStallManager.PET_SHOP;
+    }
+
+    public boolean isAvailable() {
+        QuestPetAbstract pet = AllZone.QuestData.getPetManager().getPet(name);
+        if (pet == null){
+            return true;
+        }
+        return pet.level < pet.getMaxLevel();
+    }
+
+    public void onPurchase() {
+        AllZone.QuestData.getPetManager().addPetLevel(name);
     }
 }

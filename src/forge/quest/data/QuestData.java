@@ -2,6 +2,7 @@ package forge.quest.data;
 
 import com.esotericsoftware.minlog.Log;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.converters.ConversionException;
 import forge.*;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
@@ -66,9 +67,6 @@ public class QuestData {
 
     public static final String FANTASY = "Fantasy";
     public static final String REALISTIC = "Realistic";
-
-    //TODO: Temporary.
-    public boolean useNewQuestUI = false;
 
     private QuestInventory inventory = new QuestInventory();
     private QuestPetManager petManager = new QuestPetManager();
@@ -203,7 +201,7 @@ public class QuestData {
     static public QuestData loadData() {
         try {
             //read file "questData"
-            QuestData data;
+            QuestData data = null;
 
             File xmlSaveFile = ForgeProps.getFile(NewConstants.QUEST.XMLDATA);
 
@@ -220,8 +218,15 @@ public class QuestData {
 
                 XStream xStream = new XStream();
 
-                data = (QuestData) xStream.fromXML(zin);
-
+                try{
+                    data = (QuestData) xStream.fromXML(zin);
+                } catch (ConversionException e){
+                    Iterator it = e.keys();
+                    while (it.hasNext()) {
+                        Object o = it.next();
+                        System.out.println("o = " + e.get((String) o));
+                    }
+                }
                 zin.close();
             }
             return data;

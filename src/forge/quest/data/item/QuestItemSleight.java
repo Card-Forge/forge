@@ -1,8 +1,10 @@
 package forge.quest.data.item;
 
+import forge.quest.data.bazaar.QuestStallManager;
+
 public class QuestItemSleight extends QuestItemAbstract{
     QuestItemSleight(){
-        super("Sleight", QuestInventory.BOOKSTORE);
+        super("Sleight", QuestStallManager.BOOKSTORE);
 
     }
     @Override
@@ -21,8 +23,8 @@ public class QuestItemSleight extends QuestItemAbstract{
     }
 
     @Override
-    public String getUpgradeDescription() {
+    public String getPurchaseDescription() {
         return "These volumes explain how to perform the most difficult of sleights.<br>"+
-                "<u>Your first mulligan is <b>free</b></u>.";
+                "<em>Effect: </em>Your first mulligan is <b>free</b>";
     }
 }

@@ -1,8 +1,9 @@
 package forge.quest.data.item;
 
 import forge.AllZone;
+import forge.quest.data.bazaar.QuestStallPurchasable;
 
-public abstract class QuestItemAbstract {
+public abstract class QuestItemAbstract implements QuestStallPurchasable{
     private int level = 0;
     private String name;
     private String shopName;
@@ -34,7 +35,7 @@ public abstract class QuestItemAbstract {
         return name;
     }
 
-    public String getShopName() {
+    public String getStallName() {
         return shopName;
     }
 
@@ -43,13 +44,11 @@ public abstract class QuestItemAbstract {
      * This method will be invoked when an item is bought in a shop.
      */
     public void onPurchase() {
+        int currentLevel = AllZone.QuestData.getInventory().getItemLevel(name);
+        AllZone.QuestData.getInventory().setItemLevel(name, currentLevel +1);
     }
 
-    /**
-     * Returns if the item is available for purchase;
-     * @return <code>true</code> if the item can be displayed in a store
-     * <code>false</code> if the item should not be displayed in store since, for example, prerequisites are not met
-     */
+
     public boolean isAvailable(){
         return AllZone.QuestData.getInventory().getItemLevel(name) < maxLevel;
     }
@@ -70,10 +69,14 @@ public abstract class QuestItemAbstract {
         return maxLevel == 1;
     }
 
-    public abstract String getUpgradeDescription();
+    public abstract String getPurchaseDescription();
 
     public abstract String getImageName();
 
     public abstract int getPrice();
 
+    public int compareTo(Object o) {
+        QuestStallPurchasable q = (QuestStallPurchasable) o;
+        return this.getPurchaseName().compareTo(q.getPurchaseName());
+    }
 }

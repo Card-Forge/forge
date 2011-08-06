@@ -231,7 +231,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     		int extraLife = 0;
     		if (AllZone.QuestAssignment != null) {
     			forge.quest.data.QuestUtil.setupQuest(AllZone.QuestAssignment);
-    			if (AllZone.QuestData.getGearLevel() == 2)
+    			if (AllZone.QuestData.getInventory().hasItem("Zeppelin"))
     				extraLife = 3;
     		}
     		//AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife);
@@ -261,7 +261,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     		//AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife);
     		if (AllZone.QuestAssignment != null) {
     			forge.quest.data.QuestUtil.setupQuest(AllZone.QuestAssignment);
-    			if (AllZone.QuestData.getGearLevel() == 2)
+    			if (AllZone.QuestData.getInventory().hasItem("Zeppelin"))
     				extraLife = 3;
     		}
     			
@@ -361,11 +361,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     		sb.append("You have not lost once! Bonus: <b>+");
     		sb.append(qdPrefs.getMatchRewardNoLosses()).append(" credits</b>.<br>");
     	
-    	if(q.getEstatesLevel() == 1)
+    	if(q.getInventory().getItemLevel("Estates") == 1)
     		sb.append("Estates bonus: <b>10%</b>.<br>");
-    	else if(q.getEstatesLevel() == 2)
+    	else if(q.getInventory().getItemLevel("Estates") == 2)
     		sb.append("Estates bonus: <b>15%</b>.<br>");
-    	else if(q.getEstatesLevel() == 3)
+    	else if(q.getInventory().getItemLevel("Estates") == 3)
     		sb.append("Estates bonus: <b>20%</b>.<br>");
     	
     	sb.append("You have earned <b>" + creds + " credits</b> in total.");
@@ -498,12 +498,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             AllZone.QuestAssignment = null;
             
             quest.saveData();
-            if (AllZone.QuestData.useNewQuestUI){
-                new QuestFrame();
-            }
-            else{
-                new Gui_Quest();
-            }
+
+            new QuestFrame();
         }//else - on quest
         
         dispose();

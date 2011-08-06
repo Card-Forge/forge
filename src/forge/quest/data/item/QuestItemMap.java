@@ -1,8 +1,10 @@
 package forge.quest.data.item;
 
+import forge.quest.data.bazaar.QuestStallManager;
+
 public class QuestItemMap extends QuestItemAbstract{
     QuestItemMap(){
-        super("Map",QuestInventory.GEAR);
+        super("Map", QuestStallManager.GEAR);
     }
 
     @Override
@@ -11,9 +13,9 @@ public class QuestItemMap extends QuestItemAbstract{
     }
 
     @Override
-    public String getUpgradeDescription() {
+    public String getPurchaseDescription() {
         return "These ancient charts should facilitate navigation during your travels significantly.<br>"+
-                "<u>Quest assignments become available more frequently</u>.";
+                "<em>Effect: </em>Quest assignments become available more frequently.";
     }
 
     @Override

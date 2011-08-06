@@ -1,6 +1,7 @@
 package forge.quest.data.item;
 
 import forge.AllZone;
+import forge.quest.data.bazaar.QuestStallManager;
 
 /**
  * This item has special coding because of the
@@ -8,11 +9,11 @@ import forge.AllZone;
 public class QuestItemElixir extends QuestItemAbstract{
 
     QuestItemElixir(){
-        super("Elixir of Life", QuestInventory.ALCHEMIST, 15);
+        super("Elixir of Life", QuestStallManager.ALCHEMIST, 15);
     }
 
     @Override
-    public String getUpgradeDescription() {
+    public String getPurchaseDescription() {
         return "Gives +1 to maximum life<br>Current Life: "+AllZone.QuestData.getLife();
     }
 

@@ -1,14 +1,16 @@
 package forge.quest.data.item;
 
+import forge.quest.data.bazaar.QuestStallManager;
+
 public class QuestItemEstates extends QuestItemAbstract {
     QuestItemEstates() {
-        super("Estates",QuestInventory.BANKER, 3);
+        super("Estates", QuestStallManager.BANKER, 3);
     }
 
     @Override
-    public String getUpgradeDescription() {
+    public String getPurchaseDescription() {
         return String.format("Gives a bonus of <b>%d%%</b> to match winnings.<br>" +
-                "Improves sell percentage by <b>%f%%</b>.", (10 + getLevel() * 5), (1 + getLevel() * 0.75));
+                "Improves sell percentage by <b>%.2f%%</b>.", (10 + getLevel() * 5), (1 + getLevel() * 0.75));
     }
 
     @Override

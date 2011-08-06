@@ -1,8 +1,11 @@
 package forge.quest.data.item;
 
+import forge.AllZone;
+import forge.quest.data.bazaar.QuestStallManager;
+
 public class QuestItemZeppelin extends QuestItemAbstract{
     QuestItemZeppelin(){
-        super("Zeppelin",QuestInventory.GEAR);
+        super("Zeppelin", QuestStallManager.GEAR);
     }
 
     @Override
@@ -11,9 +14,9 @@ public class QuestItemZeppelin extends QuestItemAbstract{
     }
 
     @Override
-    public String getUpgradeDescription() {
+    public String getPurchaseDescription() {
         return "This extremely comfortable airship allows for more efficient and safe travel<br>to faraway destinations. <br>"+
-                "<u>Quest assignments become available more frequently<br>Adds +3 to max life during quest games</u>.";
+                "<em>Effect: </em>Quest assignments become available more frequently<br><em>Effect: </em>Adds +3 to max life during quest games.";
     }
 
     @Override
@@ -24,5 +27,10 @@ public class QuestItemZeppelin extends QuestItemAbstract{
     @Override
     public int getPrice() {
         return 2000;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return super.isAvailable() && AllZone.QuestData.getInventory().hasItem("Map");
     }
 }

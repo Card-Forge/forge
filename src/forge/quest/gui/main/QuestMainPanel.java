@@ -2,49 +2,24 @@
 package forge.quest.gui.main;
 
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
-
-import forge.AllZone;
-import forge.CardList;
-import forge.Command;
-import forge.Constant;
-import forge.Deck;
-import forge.GuiDisplay3;
-import forge.GuiDisplay4;
-import forge.Gui_CardShop;
-import forge.Gui_NewGame;
-import forge.Gui_Quest_DeckEditor;
-import forge.ImageCache;
-import forge.Quest_Assignment;
+import forge.*;
 import forge.gui.GuiUtils;
 import forge.quest.data.QuestData;
 import forge.quest.gui.FontConstants;
 import forge.quest.gui.QuestAbstractPanel;
 import forge.quest.gui.QuestFrame;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.*;
+import java.util.List;
 
 
 public class QuestMainPanel extends QuestAbstractPanel {
@@ -478,10 +453,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
         int questsPlayed = questData.getQuestsPlayed();
         int mul = 6;
         
-        if(questData.getGearLevel() == 1) {
-            mul = 5;
-        } else if(questData.getGearLevel() == 2) {
+        if(questData.getInventory().hasItem("Zeppelin")) {
             mul = 4;
+        } else if(questData.getInventory().hasItem("Map")) {
+            mul = 5;
         }
         
         int delta = (questsPlayed * mul) - questData.getWin();
@@ -593,7 +568,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
         
         int extraLife = 0;
         
-        if(questData.getGearLevel() == 2) {
+        if(questData.getInventory().getItemLevel("Gear") == 2) {
             extraLife = 3;
         }
         

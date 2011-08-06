@@ -1,33 +1,52 @@
 package forge.quest.data.item;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class QuestInventory {
     Map<String, QuestItemAbstract> inventory = new HashMap<String, QuestItemAbstract>();
 
-    public boolean hasItem(String itemName){
-        return inventory.containsKey(itemName);
+    public boolean hasItem(String itemName) {
+        return inventory.containsKey(itemName) && inventory.get(itemName).getLevel() > 0;
     }
 
-    public void addItem(QuestItemAbstract item){
-        inventory.put(item.getName(),item);
+    public void addItem(QuestItemAbstract item) {
+        inventory.put(item.getName(), item);
     }
 
-    public int getItemLevel(String itemName){
+    public int getItemLevel(String itemName) {
         QuestItemAbstract item = inventory.get(itemName);
-        if (item == null){
+        if (item == null) {
             return 0;
         }
         return item.getLevel();
     }
 
-    public static final String ALCHEMIST = "Alchemist";
-    public static final String BANKER = "Banker";
-    public static final String BOOKSTORE = "Bookstore";
-    public static final String GEAR = "Gear";
-
     public void setItemLevel(String itemName, int level) {
         inventory.get(itemName).setLevel(level);
     }
+
+    public static Set<QuestItemAbstract> getAllItems() {
+        SortedSet<QuestItemAbstract> set = new TreeSet<QuestItemAbstract>();
+
+        set.add(new QuestItemElixir());
+        set.add(new QuestItemEstates());
+        set.add(new QuestItemLuckyCoin());
+        set.add(new QuestItemMap());
+        set.add(new QuestItemSleight());
+        set.add(new QuestItemZeppelin());
+
+        return set;
+    }
+
+    //Magic to support added pet types when reading saves.
+    private Object readResolve() {
+        for (QuestItemAbstract item : getAllItems()) {
+            if (!inventory.containsKey(item.getName())) {
+                inventory.put(item.getImageName(), item);
+            }
+        }
+        return this;
+    }
+
+    
 }
