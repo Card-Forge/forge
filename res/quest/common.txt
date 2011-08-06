@@ -37,6 +37,7 @@ Anodet Lurker
 Antler Skulkin
 Anurid Murkdiver
 Apprentice Wizard
+Araba Mothrider
 Arcbound Bruiser
 Arcbound Hybrid
 Arcbound Stinger
@@ -84,6 +85,7 @@ Battering Craghorn
 Battering Sliver
 Battle Hurda
 Battle Rampart
+Battle-Mad Ronin
 Battlegate Mimic
 Bay Falcon
 Bayou Dragonfly
@@ -135,6 +137,7 @@ Breath of Malfegor
 Breathstealer
 Briarberry Cohort
 Brilliant Halo
+Brothers of Fire
 Brute Force
 Bull Rush
 Buoyancy
@@ -170,6 +173,7 @@ Cavern Harpy
 Cavern Thoctar
 Cemetery Gate
 Centaur Courser
+Cephalid Looter
 Cerodon Yearling
 Cessation
 Ceta Disciple
@@ -225,6 +229,7 @@ Crimson Kobolds
 Crookshank Kobolds
 Cruel Edict
 Crypt Ripper
+Cursed Ronin
 Cylian Elf
 Dakmor Bat
 Dakmor Scorpion
@@ -256,6 +261,7 @@ Demolish
 Demystify
 Despondency
 Devoted Hero
+Devoted Retainer
 Devouring Deep
 Diabolic Edict
 Dimir Infiltrator
@@ -342,6 +348,7 @@ Feast of the Unicorn
 Femeref Knight
 Femeref Scouts
 Feral Shadow
+Ferocious Charge
 Festival of Trokin
 Fetid Horror
 Fiery Fall
@@ -351,6 +358,7 @@ Fire Ambush
 Fire Elemental
 Fire Sprites
 Firebolt
+Fireslinger
 First Volley
 Fissure
 Fists of the Anvil
@@ -360,6 +368,7 @@ Flame Jet
 Flame Rift
 Flamecore Elemental
 Flamekin Brawler
+Flamewave Invoker
 Fledgling Djinn
 Flight
 Floating-Dream Zubera
@@ -447,6 +456,7 @@ Goretusk Firebeast
 Gorger Wurm
 Gorilla Chieftain
 Gorilla Warrior
+Granger Guildmage
 Grappler Spider
 Gravedigger
 Gravelgill Axeshark
@@ -556,6 +566,7 @@ Kindle
 Kindled Fury
 Kird Ape
 Kitesail
+Kitsune Blademaster
 Kitsune Loreweaver
 Kjeldoran Outrider
 Kjeldoran War Cry
@@ -568,6 +579,7 @@ Kor Skyfisher
 Kraken Hatchling
 Kranioceros
 Krovikan Scoundrel
+Kuro's Taken
 Kyren Glider
 Lab Rats
 Lace with Moonglove
@@ -668,6 +680,7 @@ Moorish Cavalry
 Morsel Theft
 Moss Kami
 Moss Monster
+Mothrider Samurai
 Mountain Bandit
 Mountain Goat
 Mountain Yeti
@@ -693,6 +706,7 @@ Needleshot Gourna
 Nessian Courser
 Neurok Hoversail
 Nezumi Cutthroat
+Nezumi Ronin
 Nightguard Patrol
 Nightshade Stinger
 Nightsky Mimic
@@ -799,6 +813,7 @@ Raging Minotaur
 Raiding Nightstalker
 Raise Dead
 Raise the Alarm
+Rakdos Ickspitter
 Rakdos Signet
 Ramosian Lieutenant
 Ramosian Sergeant
@@ -811,6 +826,7 @@ Ravenous Skirge
 Razorfin Hunter
 Razorfoot Griffin
 Razortooth Rats
+Reckless Scholar
 Recover
 Red Cliffs Armada
 Redwood Treefolk
@@ -845,6 +861,8 @@ River Kaijin
 Riverfall Mimic
 Robe of Mirrors
 Rock Badger
+Ronin Cavekeeper
+Ronin Houndmaster
 Ronom Unicorn
 Roofstalker Wight
 Rootwalla
@@ -902,6 +920,7 @@ Sengir Bats
 Serpent Warrior
 Serpentine Kavu
 Serra Zealot
+Serum Visions
 Severed Legion
 Sewn-Eye Drake
 Shade of Trokair
@@ -942,6 +961,7 @@ Silkenfist Fighter
 Silver Myr
 Silverback Ape
 Silvercoat Lion
+Silverstorm Samurai
 Simian Grunts
 Simic Ragworm
 Simic Signet
@@ -988,6 +1008,7 @@ Spell Pierce
 Spell Snip
 Spidersilk Armor
 Spidersilk Net
+Spikeshot Goblin
 Spined Basher
 Spined Wurm
 Spineless Thug
@@ -1024,6 +1045,7 @@ Streetbreaker Wurm
 Striped Bears
 Sudden Strength
 Sunbeam Spellbomb
+Sunflare Shaman
 Sunlance
 Suntail Hawk
 Suq'Ata Lancer

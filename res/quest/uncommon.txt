@@ -49,6 +49,7 @@ Basalt Gargoyle
 Basalt Monolith
 Battle Mastery
 Battlefield Percher
+Bazaar of Baghdad
 Beast Attack
 Bee Sting
 Behemoth Sledge
@@ -99,6 +100,7 @@ Cateran Kidnappers
 Celestial Prism
 Celestial Purge
 Centaur Glade
+Cephalid Broker
 Cerulean Wyvern
 Chainer's Edict
 Chambered Nautilus
@@ -266,9 +268,11 @@ Gods' Eye, Gate to the Reikai
 Goldmeadow Lookout
 Goliath Spider
 Gorgon Flail
+Granite Shard
 Graypelt Refuge
 Greater Forgeling
 Greenweaver Druid
+Grixis Battlemage
 Grizzly Fate
 Guardian of Cloverdell
 Guma
@@ -310,6 +314,7 @@ Imperiosaur
 Implode
 Infest
 Inkfathom Infiltrator
+Inner-Chamber Guard
 Inspirit
 Iron Lance
 Iron Tusk Elephant
@@ -317,6 +322,7 @@ Iron-Barb Hellion
 Ivy Dancer
 Jabari's Banner
 Jackal Pup
+Jalum Tome
 Jasmine Boreal
 Jedit Ojanen
 Jerrard of the Closed Fist
@@ -381,6 +387,7 @@ Loxodon Stalwart
 Loxodon Warhammer
 Loyal Retainers
 Lynx
+Magma Jet
 Malach of the Dawn
 Mana Prism
 Mantis Engine
@@ -505,6 +512,7 @@ Rootbreaker Wurm
 Sabertooth Wyvern
 Salt Marsh
 Saltblast
+Samurai Enforcers
 Sandbar Serpent
 Sangrite Surge
 Sanguine Guard
@@ -598,6 +606,7 @@ Strength of Cedars
 Strip Mine
 Stromgald Crusader
 Stronghold Zeppelin
+Stun Sniper
 Sturdy Hatchling
 Sunastian Falconer
 Sunder from Within
@@ -613,6 +622,8 @@ Tangle Spider
 Taoist Hermit
 Tattermunge Maniac
 Tectonic Fiend
+Tel-Jilad Justice
+Telim'Tor's Darts
 Tempest Drake
 Tempest of Light
 The Lady of the Mountain
@@ -640,6 +651,7 @@ Tower Gargoyle
 Towering Baloth
 Trailblazer's Boots
 Transguild Courier
+Treasure Trove
 Treefolk Harbinger
 Treetop Sentinel
 Treetop Village

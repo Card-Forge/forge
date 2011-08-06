@@ -1,4 +1,5 @@
 Absorb
+Abyssal Hunter
 Academy Rector
 Academy Ruins
 Adarkar Valkyrie
@@ -28,6 +29,7 @@ Archon of Justice
 Argothian Enchantress
 Arid Mesa
 Armageddon
+Armistice
 Armored Guardian
 Ashes to Ashes
 Augury Adept
@@ -173,6 +175,7 @@ Elvish Farmer
 Elvish Piper
 Emeria Angel
 Emeria, the Sky Ruin
+Emmessi Tome
 Enchantress's Presence
 Endless Cockroaches
 Energizer
@@ -289,7 +292,9 @@ Iona, Shield of Emeria
 Iridescent Angel
 Isamaru, Hound of Konda
 Jace Beleren
+Jace, the Mind Sculptor
 Jacques le Vert
+Jayemdae Tome
 Jedit Ojanen of Efrava
 Jenara, Asura of War
 Jeska, Warrior Adept
@@ -316,6 +321,7 @@ Knotvine Paladin
 Kobold Overlord
 Kodama of the North Tree
 Kokusho, the Evening Star
+Konda, Lord of Eiganjo
 Korlash, Heir to Blackblade
 Krosan Cloudscraper
 Krosan Colossus
@@ -346,6 +352,7 @@ Mad Auntie
 Madrush Cyclops
 Maelstrom Pulse
 Magnivore
+Magus of the Bazaar
 Magus of the Coffers
 Magus of the Disk
 Magus of the Library
@@ -362,6 +369,7 @@ Mass Calcify
 Mass Hysteria
 Master Transmuter
 Master of Etherium
+Masticore
 Mawcor
 Meddling Mage
 Meekstone
@@ -455,6 +463,7 @@ Primordial Sage
 Privileged Position
 Progenitus
 Proper Burial
+Psionic Entity
 Pulse of the Tangle
 Punish Ignorance
 Purify
@@ -477,12 +486,14 @@ Rathi Assassin
 Ravages of War
 Raven Guild Master
 Reach of Branches
+Reckless Embermage
 Reki, the History of Kamigawa
 Rendclaw Trow
 Retribution of the Meek
 Reya Dawnbringer
 Rhys the Redeemed
 Riding the Dilu Horse
+Riptide Director
 Rith, the Awakener
 River Merfolk
 Roc of Kher Ridges
@@ -509,6 +520,7 @@ Scepter of Insight
 Scion of Oona
 Scrubland
 Scute Mob
+Sea Gate Loremaster
 Searing Wind
 Sedge Troll
 Seizan, Perverter of Truth
@@ -568,6 +580,7 @@ Stirring Wildwood
 Stomping Ground
 Stoneforge Mystic
 Storm Herd
+Storm Spirit
 Stuffy Doll
 Sun Ce, Young Conquerer
 Sun Quan, Lord of Wu
@@ -599,6 +612,7 @@ The Tabernacle at Pendrell Vale
 The Unspeakable
 Thelonite Hermit
 Thornling
+Thornscape Master
 Thoughtseize
 Thriss, Nantuko Primus
 Tidal Kraken
@@ -613,6 +627,7 @@ Tithe
 Tolarian Academy
 Tolsimir Wolfblood
 Tower of Champions
+Tower of Fortunes
 Tower of the Magistrate
 Tradewind Rider
 Trailblazer
