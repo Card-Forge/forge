@@ -89,6 +89,7 @@ Balduvian Bears
 Balduvian War-Makers
 Ballynock Cohort
 Ballynock Trapper
+Ballyrush Banneret
 Banishing Knack
 Bant Sureblade
 Barbarian Horde
@@ -131,6 +132,7 @@ Blood Vassal
 Bloodrite Invoker
 Bloodrock Cyclops
 Bloodshed Fever
+Bloodthrone Vampire
 Blossoming Wreath
 Bog Imp
 Bog Initiate
@@ -154,6 +156,7 @@ Boreal Griffin
 Boros Garrison
 Boros Recruit
 Boros Signet
+Bosk Banneret
 Bountiful Harvest
 Brainbite
 Brainstorm
@@ -269,6 +272,7 @@ Crazed Goblin
 Crimson Acolyte
 Crimson Kobolds
 Crookshank Kobolds
+Crossbow Ambush
 Cruel Edict
 Crumble
 Crypt Ripper
@@ -352,6 +356,7 @@ Drifting Meadow
 Dripping-Tongue Zubera
 Dromad Purebred
 Dross Crocodile
+Dross Golem
 Dross Prowler
 Drowned
 Drudge Reavers
@@ -374,6 +379,7 @@ Echoing Truth
 Ekundu Griffin
 Elephant Ambush
 Elite Cat Warrior
+Elves of Deep Shadow
 Elvish Fury
 Elvish Herder
 Elvish Hunter
@@ -402,6 +408,8 @@ Eternal Warrior
 Eternity Snare
 Ethercaste Knight
 Etherium Abomination
+Etherium Sculptor
+Evolving Wilds
 Exclude
 Exhume
 Expedition Map
@@ -472,6 +480,8 @@ Foxfire Oak
 Freewind Falcon
 Fresh Volunteers
 Frog Tongue
+Frogmite
+Frogtosser Banneret
 Frontline Sage
 Frost Ogre
 Frost Raptor
@@ -515,6 +525,7 @@ Glorious Charge
 Glory Seeker
 Gnarled Mass
 Gnarlid Pack
+Gnat Miser
 Goblin Brigand
 Goblin Bully
 Goblin Cavaliers
@@ -591,6 +602,7 @@ Helionaut
 Hematite Golem
 Henchfiend of Ukor
 Hero's Resolve
+High Tide
 Highland Berserker
 Highland Giant
 Highway Robber
@@ -662,6 +674,7 @@ Jhessian Zombies
 Join the Ranks
 Jolrael's Centaur
 Joraga Bard
+Journey to Nowhere
 Joyous Respite
 Jukai Messenger
 Jump
@@ -763,6 +776,7 @@ Magefire Wings
 Mageta's Boon
 Maggot Carrier
 Maggot Therapy
+Magnetic Flux
 Magnify
 Makindi Griffin
 Makindi Shieldmate
@@ -796,6 +810,7 @@ Metathran Soldier
 Metathran Zombie
 Might of Alara
 Might of the Masses
+Minamo Scrollkeeper
 Minister of Impediments
 Minotaur Warrior
 Mire Boa
@@ -834,10 +849,12 @@ Mtenda Herder
 Muck Rats
 Mudbrawler Cohort
 Mudbutton Torchrunner
+Muddle the Mixture
 Mulldrifter
 Multani's Acolyte
 Muscle Burst
 Muscle Sliver
+Myr Enforcer
 Mystic Restraints
 Nacatl Outlander
 Nacatl Savage
@@ -858,6 +875,7 @@ Nezumi Cutthroat
 Nezumi Ronin
 Nightguard Patrol
 Nighthaze
+Nightscape Familiar
 Nightshade Stinger
 Nightsky Mimic
 Nightsoil Kami
@@ -909,6 +927,7 @@ Ostiary Thrull
 Ostracize
 Oubliette
 Outrider of Jhess
+Oxidda Golem
 Pacifism
 Pale Recluse
 Pallid Mycoderm
@@ -992,6 +1011,7 @@ Rats of Rath
 Ravaged Highlands
 Ravenous Rats
 Ravenous Skirge
+Razor Golem
 Razorfin Hunter
 Razorfoot Griffin
 Razortooth Rats
@@ -1036,6 +1056,7 @@ River Kaijin
 Riverfall Mimic
 Robe of Mirrors
 Rock Badger
+Roiling Terrain
 Ronin Cavekeeper
 Ronin Houndmaster
 Ronom Unicorn
@@ -1070,6 +1091,7 @@ Sandstone Warrior
 Sangrite Backlash
 Sangrophage
 Savage Hunger
+Scale of Chiss-Goria
 Scaled Wurm
 Scare Tactics
 Scarwood Goblins
@@ -1193,6 +1215,7 @@ Sneaky Homunculus
 Sokenzan Bruiser
 Solidarity
 Soltari Foot Soldier
+Somber Hoverguard
 Sootfeather Flock
 Soothing Balm
 Soul's Attendant
@@ -1210,6 +1233,7 @@ Spined Wurm
 Spineless Thug
 Spiraling Embers
 Spire Barrage
+Spire Golem
 Spire Owl
 Spirit Shackle
 Spitting Earth
@@ -1236,15 +1260,18 @@ Steel Leaf Paladin
 Steppe Lynx
 Steward of Valeron
 Stinging Barrier
+Stinkdrinker Daredevil
 Stomper Cub
 Stone Kavu
 Stone Rain
 Stone-Throwing Devils
 Stonewood Invoker
 Stonework Puma
+Stonybrook Banneret
 Storm Crow
 Stormfront Pegasus
 Stormscape Apprentice
+Stormscape Familiar
 Strangling Soot
 Straw Soldiers
 Stream Hopper
@@ -1257,8 +1284,14 @@ Sulfur Vent
 Sunbeam Spellbomb
 Sunflare Shaman
 Sunlance
+Sunscape Familiar
 Suntail Hawk
 Suq'Ata Lancer
+Surging AEther
+Surging Dementia
+Surging Flame
+Surging Might
+Surging Sentinels
 Swamp Mosquito
 Sylvan Bounty
 Symbiotic Elf
@@ -1269,6 +1302,7 @@ Talas Scout
 Talon Sliver
 Talon Trooper
 Talruum Minotaur
+Tangle Golem
 Tanglebloom
 Tarfire
 Tarpan
@@ -1297,10 +1331,14 @@ Thirst
 Thistledown Duo
 Thorn-Thrash Viashino
 Thornscape Apprentice
+Thornscape Familiar
 Thornweald Archer
 Thornwind Faeries
 Thought Courier
+Thought Nibbler
+Thoughtcast
 Thunderscape Apprentice
+Thunderscape Familiar
 Tidehollow Strix
 Tiger Claws
 Timberland Ruins
@@ -1310,6 +1348,7 @@ Tinder Farm
 Titanic Bulvox
 Titanium Golem
 Tome Scour
+Tooth of Chiss-Goria
 Tor Giant
 Torch Drake
 Torii Watchward
@@ -1365,6 +1404,7 @@ Utvara Scalper
 Valeron Outlander
 Valiant Guard
 Valley Rannet
+Vampire Aristocrat
 Vampire Bats
 Vampire Lacerator
 Vampiric Touch

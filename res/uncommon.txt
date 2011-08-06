@@ -5,6 +5,7 @@ Abbey Gargoyles
 Abomination
 Absolute Grace
 Absolute Law
+Abyssal Specter
 Acidic Soil
 Act of Treason
 Adarkar Sentinel
@@ -44,6 +45,7 @@ Ashen Monstrosity
 Ashenmoor Gouger
 Aspect of Mongoose
 Assembly-Worker
+Assert Authority
 Auriok Bladewarden
 Avalanche Riders
 Aven Fateshaper
@@ -122,6 +124,7 @@ Cateran Kidnappers
 Celestial Prism
 Celestial Purge
 Centaur Glade
+Centaur Omenreader
 Cephalid Broker
 Cerulean Wyvern
 Chainer's Edict
@@ -134,6 +137,7 @@ Char-Rumbler
 Charcoal Diamond
 Charging Bandits
 Charging Troll
+Chill
 Chilling Apparition
 Cinder Storm
 City of Brass
@@ -170,6 +174,7 @@ Cudgel Troll
 Cunning Sparkmage
 Curse of Wizardry
 Cursed Land
+Cursed Rack
 Daggerclaw Imp
 Dakmor Ghoul
 Dakmor Salvage
@@ -179,6 +184,7 @@ Darigaaz's Attendant
 Darksteel Gargoyle
 Darkwatch Elves
 Daru Encampment
+Daru Warchief
 Dauthi Embrace
 Dauthi Ghoul
 Dauthi Mercenary
@@ -202,6 +208,7 @@ Dismiss
 Dissipate
 Divine Transformation
 Dragon Blood
+Dragonspeaker Shaman
 Dragonstalker
 Drake-Skull Cameo
 Dread Statuary
@@ -216,10 +223,12 @@ Duergar Cave-Guard
 Dunerider Outlaw
 Duskdale Wurm
 Duskmantle, House of Shadow
+Dwarven Demolition Team
 Dwarven Ruins
 Earth Elemental
 Ebon Stronghold
 Ebony Treefolk
+Edgewalker
 Elfhame Palace
 Elite Vanguard
 Elven Riders
@@ -240,6 +249,7 @@ Execute
 Exotic Disease
 Explosive Revelation
 Fabricate
+Fact or Fiction
 Faerie Conclave
 Faerie Harbinger
 Faerie Swarm
@@ -255,6 +265,7 @@ Feral Lightning
 Festering Wound
 Fighting Drake
 Filigree Sages
+Filth
 Fire Bowman
 Fire Diamond
 Fire Drake
@@ -309,6 +320,7 @@ Gilder Bairn
 Glacial Wall
 Glass Golem
 Glasses of Urza
+Gloom
 Gloomwidow
 Gluttonous Slime
 Gluttonous Zombie
@@ -325,10 +337,12 @@ Goblin Mutant
 Goblin Offensive
 Goblin Ringleader
 Goblin Spy
+Goblin Warchief
 Gods' Eye, Gate to the Reikai
 Goldmeadow Lookout
 Goliath Spider
 Gorgon Flail
+Graceful Adept
 Granite Shard
 Grave Defiler
 Graypelt Refuge
@@ -359,9 +373,11 @@ Hedge Troll
 Hedron Crab
 Heedless One
 Hellspark Elemental
+Helm of Awakening
 Henge Guardian
 Henge of Ramos
 Heroes' Reunion
+High Seas
 Highland Weald
 Honden of Cleansing Fire
 Honden of Infinite Rage
@@ -393,6 +409,7 @@ Infest
 Inkfathom Infiltrator
 Inner-Chamber Guard
 Inspirit
+Irini Sengir
 Iron Lance
 Iron Tusk Elephant
 Iron-Barb Hellion
@@ -448,6 +465,7 @@ Knotvine Mystic
 Kor Duelist
 Kor Firewalker
 Koskun Keep
+Krakilin
 Lady Orca
 Lance
 Land Tax
@@ -471,6 +489,7 @@ Llanowar Mentor
 Loam Lion
 Lobotomy
 Lockjaw Snapper
+Locust Miser
 Longbow Archer
 Lorescale Coatl
 Loxodon Stalwart
@@ -585,6 +604,7 @@ Pyre Charger
 Pyroclasm
 Pyrohemia
 Quagmire Lamprey
+Qumulox
 Rabid Wombat
 Radiant's Dragoons
 Rain of Tears
@@ -601,6 +621,7 @@ Reckless Wurm
 Red Ward
 Regrowth
 Relentless Rats
+Reliquary Tower
 Remand
 Reminisce
 Renegade Troops
@@ -657,6 +678,7 @@ Serra's Embrace
 Shambling Remains
 Shatterstorm
 Shepherd of the Lost
+Shifting Wall
 Shimmering Barrier
 Shivan Oasis
 Shivan Raptor
@@ -704,6 +726,7 @@ Spectral Bears
 Spectral Procession
 Spectral Searchlight
 Spell Snare
+Spellbook
 Spitfire Handler
 Spitting Drake
 Spitting Spider
@@ -722,6 +745,7 @@ Steel Wall
 Stern Judge
 Stitch Together
 Stolen Grain
+Stone Calendar
 Stone Spirit
 Stonecloaker
 Storm Entity
@@ -750,10 +774,16 @@ Swords to Plowshares
 Sylvan Basilisk
 Sylvan Messenger
 Syphon Life
+Talisman of Dominance
+Talisman of Impulse
+Talisman of Indulgence
+Talisman of Progress
+Talisman of Unity
 Talonrend
 Tangle Spider
 Taoist Hermit
 Tattermunge Maniac
+Tectonic Edge
 Tectonic Fiend
 Tel-Jilad Justice
 Telim'Tor's Darts
@@ -766,6 +796,7 @@ Thief of Hope
 Thieving Magpie
 Thirst for Knowledge
 Thopter Foundry
+Thought Eater
 Thoughtcutter Agent
 Thousand-legged Kami
 Thran Dynamo
@@ -800,6 +831,7 @@ Turtleshell Changeling
 Twinblade Slasher
 Uktabi Orangutan
 Umbral Mantle
+Undead Warchief
 Undercity Shade
 Underworld Dreams
 Undying Rage
