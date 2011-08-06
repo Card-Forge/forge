@@ -8,4 +8,5 @@ SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_of_progenitus.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/218.jpg
 End
