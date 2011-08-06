@@ -3107,7 +3107,7 @@ class CardFactory_Planeswalkers {
                     CardList dragons = new CardList(play.getCards());
                     dragons = dragons.filter(new CardListFilter() {
                     	public boolean addCard(Card c) {
-                    		return c.getType().contains("Dragon");
+                    		return c.isType("Dragon");
                     	}
                     });
                     for(int i = 0; i < dragons.size(); i++) {
@@ -3125,7 +3125,7 @@ class CardFactory_Planeswalkers {
                     CardList dragons = new CardList(play.getCards());
                     dragons = dragons.filter(new CardListFilter() {
                     	public boolean addCard(Card c) {
-                    		return c.getType().contains("Dragon");
+                    		return c.isType("Dragon");
                     	}
                     });
                     return card2.getCounters(Counters.LOYALTY) >= 4 && dragons.size() >= 1;
