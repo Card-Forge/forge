@@ -1,0 +1,8 @@
+Name:Psychic Barrier
+ManaCost:U U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ U U | Type$ Spell | CounterValid$ Creature | ExtraActions$ CC-LoseLife(1) | SpellDescription$ Counter target creature spell. Its controller loses 1 life.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_barrier.jpg
+End
