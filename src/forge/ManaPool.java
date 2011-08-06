@@ -118,6 +118,7 @@ public class ManaPool extends Card {
     	for(Mana m : manaList){
     		addManaToPool(floatingMana, m);
     	}
+    	AllZone.GameAction.checkStateEffects();
     }
     
     public static ArrayList<Mana> convertStringToMana(String manaStr, Card card){
