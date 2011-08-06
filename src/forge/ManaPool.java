@@ -352,7 +352,7 @@ public class ManaPool extends Card
 					if(choices.size() == 0) return manaCost;
 					chosen = choices.get(0);
 					if (choices.size()> 1)
-						chosen = (String)AllZone.Display.getChoiceOptional("Choose "+ (isSnow()? "snow " : "")+"mana to pay" + Mana, choices.toArray());
+						chosen = (String)AllZone.Display.getChoiceOptional("Choose "+ (isSnow()? "snow " : "")+"mana to pay " + Mana, choices.toArray());
 					if (chosen == null) {spendAll = false; return manaCost;}
 					if(chosen.equals(Constant.Color.Snow))
 						manaCost.subtractMana(chosen);

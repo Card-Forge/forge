@@ -1421,7 +1421,10 @@ public class CardFactory implements NewConstants {
                    if(getTargetCard() != null)
                    {
                      if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) ) {
-                       getTargetCard().addDamage(dmg[0]);
+                       if (card.getKeyword().contains("Wither"))
+                    	   getTargetCard().addCounter(Counters.M1M1, dmg[0]);
+                       else
+                    	   getTargetCard().addDamage(dmg[0]);
                        if (card.getKeyword().contains("Lifelink"))
                     	   GameActionUtil.executeLifeLinkEffects(card, dmg[0]);
                        for(int i=0; i < CardFactoryUtil.hasNumberEnchantments(card, "Guilty Conscience"); i++)
@@ -1466,7 +1469,10 @@ public class CardFactory implements NewConstants {
                    {
                      if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
                      {
-                       getTargetCard().addDamage(dmg[0]);
+                       if (card.getKeyword().contains("Wither"))
+                      	 getTargetCard().addCounter(Counters.M1M1, dmg[0]);
+                       else
+                      	 getTargetCard().addDamage(dmg[0]);
                        if (card.getKeyword().contains("Lifelink"))
                     	   GameActionUtil.executeLifeLinkEffects(card, dmg[0]); 
                        for(int i=0; i < CardFactoryUtil.hasNumberEnchantments(card, "Guilty Conscience"); i++)
@@ -1513,7 +1519,10 @@ public class CardFactory implements NewConstants {
                    if(getTargetCard() != null)
                    {
                      if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) ) {
-                       getTargetCard().addDamage(dmg[0]);
+                       if (card.getKeyword().contains("Wither"))
+                      	 getTargetCard().addCounter(Counters.M1M1, dmg[0]);
+                       else
+                      	 getTargetCard().addDamage(dmg[0]);
                        if (card.getKeyword().contains("Lifelink"))
                     	   GameActionUtil.executeLifeLinkEffects(card, dmg[0]);
                        for(int i=0; i < CardFactoryUtil.hasNumberEnchantments(card, "Guilty Conscience"); i++)
@@ -16166,7 +16175,12 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     		boolean undoable = true;
     		public void undo() {card.addCounter(Counters.CHARGE, 1);}
     		public String Mana() {return this.choices_made[0].toString();}
-    		public boolean canPlay() {return super.canPlay() && card.getCounters(Counters.CHARGE) > 0;}
+    		public boolean canPlay()
+    		{
+    			if(choices_made[0] == null)
+    				choices_made[0] = "1";
+    			return super.canPlay() && card.getCounters(Counters.CHARGE) > 0;
+    		}
     		public void resolve(){card.subtractCounter(Counters.CHARGE, 1); super.resolve();}
     	};
     	retrieve.choices_made = new String[1];
@@ -16177,8 +16191,6 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 			public void showMessage()
     		{
     			retrieve.choices_made[0] = Input_PayManaCostUtil.getColor2((String)AllZone.Display.getChoiceOptional("Select a Color", Constant.Color.onlyColors));
-    			if(retrieve.choices_made[0] == null)
-    				retrieve.choices_made[0] = "1";
     			AllZone.Stack.add(retrieve);
     			stop();
     		}
