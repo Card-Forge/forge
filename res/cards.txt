@@ -1,3 +1,10 @@
+Dust Corona
+R
+Enchantment Aura
+Enchanted creature gets +2/+0 and can't be blocked by creatures with flying.
+Enchant creature
+enPump:+2/+0/CARDNAME can't be blocked by creatures with flying.
+
 Elven Riders
 3 G G
 Creature Elf
