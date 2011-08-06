@@ -107,6 +107,7 @@ public class AllZone implements NewConstants {
     
     public static PlayerZone getZone(String zone, Player player)
     {
+    	if(zone.equals("Stack")) player = null;
 		Object o = map.get(zone + player);
 		if(o == null)
 		    throw new RuntimeException("AllZone : getZone() invalid parameters " +zone +" " +player);
