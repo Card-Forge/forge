@@ -1,0 +1,10 @@
+Name:Boggart Arsonists
+ManaCost:2 R
+Types:Creature Goblin Rogue
+Text:no text
+PT:2/1
+K:Plainswalk
+K:abDestroyTgtV 2 R Sac<1/CARDNAME>:Scarecrow,Plains:Destroy target Scarecrow or Plains.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_arsonists.jpg
+End
