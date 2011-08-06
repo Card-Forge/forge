@@ -503,6 +503,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Magneto 3		hard	Shriekmaw, Assassins, creature removal + Liliana Vess");
         sb.append("\r\n");
+        sb.append("Magnum 1		easy	Sturdy Hatchling, Shorecrasher Mimic, Garruk & Jace, the Mind Sculptor + GU spells");
+        sb.append("\r\n");
+        sb.append("Magnum 2		medium	Sturdy Hatchling, Shorecrasher Mimic, Garruk & Jace, the Mind Sculptor + GU spells");
+        sb.append("\r\n");
+        sb.append("Magnum 3		hard	Sturdy Hatchling, Shorecrasher Mimic, Garruk & Jace, the Mind Sculptor + GU spells");
+        sb.append("\r\n");
         sb.append("Marge Simpson 3 	hard   	RG deck, creates tokens which are devoured by R and RG creatures with devour");
         sb.append("\r\n");
         sb.append("Morpheus 3		hard	Elves with Overrun, Gaea's Anthem, Imperious Perfect and other pumps");
