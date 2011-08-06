@@ -18104,10 +18104,17 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    String player = getTargetPlayer();
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                    CardList libList = new CardList(lib.getCards());
-                    return libList.size() > 0;
+                	// Haunting Echoes shouldn't be cast if only basic land in graveyard or library is empty
+                	CardList graveyard = AllZoneUtil.getPlayerGraveyard("Human");
+                	CardList library = AllZoneUtil.getPlayerCardsInLibrary("Human");
+                	int graveCount =  graveyard.size();
+            		graveyard = graveyard.filter(new CardListFilter() {
+        				public boolean addCard(Card c) {
+        					return c.isBasicLand();
+        				}
+        			});
+            		
+                    return ((graveCount - graveyard.size() > 0) && library.size() > 0);
                 }
                 
                 @Override
@@ -18125,14 +18132,14 @@ public class CardFactory implements NewConstants {
                     
                     for(int j = 0; j < grv; j++) {
                         Card g = grvList.get(j);
-                        for(int i = 0; i < max; i++) {
-                            Card c = libList.get(i);
-                            if(c.getName().equals(g.getName()) && !g.getType().contains("Basic")) {
-                                lib.remove(c);
-                                exiled.add(c);
-                            }
-                        }
                         if(!g.getType().contains("Basic")) {
+	                        for(int i = 0; i < max; i++) {
+	                            Card c = libList.get(i);
+	                            if(c.getName().equals(g.getName())) {
+	                                lib.remove(c);
+	                                exiled.add(c);
+	                            }
+	                        }
                             grave.remove(g);
                             exiled.add(g);
                         }
