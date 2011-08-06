@@ -12208,8 +12208,7 @@ Target player reveals his or her hand and discards all nonland cards.
 Sprout Swarm
 1 G
 Instant
-no text
-Buyback 3 (You may pay an additional 3 as you play this spell. If you do, put this card into your hand as it resolve.)
+(NOTE: "Convoke" is not implemented.)
 
 Llanowar Mentor
 G

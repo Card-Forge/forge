@@ -6015,7 +6015,7 @@ public class CardFactory implements NewConstants {
       spell_one.setManaCost("1 G");
       spell_two.setManaCost("4 G");
 
-      spell_one.setDescription("Put a 1/1 green Saproling token into play. -- Sorry no convoke yet.");
+      spell_one.setDescription("Put a 1/1 green Saproling token into play.");
       spell_two.setDescription("Buyback 3 - Pay 4G, put this card into your hand as it resolves.");
 
       spell_one.setStackDescription("Sprout Swarm - Put a 1/1 green Saproling token into play");
