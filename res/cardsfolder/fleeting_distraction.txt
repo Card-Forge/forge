@@ -4,4 +4,5 @@ Types:Instant
 Text:no text
 K:spPumpTgtCurse:-1/-0
 K:Draw a card.
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fleeting_distraction.jpg
 End
