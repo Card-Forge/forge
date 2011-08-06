@@ -1,0 +1,8 @@
+Name:Vault Skyward
+ManaCost:U
+Types:Instant
+Text:no text
+K:spPumpTgt:Flying:Drawback$UntapTgt:Target creature gains flying until end of turn. Untap it.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vault_skyward.jpg
+End
