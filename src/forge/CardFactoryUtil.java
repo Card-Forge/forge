@@ -2921,9 +2921,15 @@ public class CardFactoryUtil {
                 
                 if (targets.size() > 0) {
                     spell.setTargetList(targets);
-                    stopSetNext(new Input_PayManaCost(spell));
-                } else stop();
-                
+                    
+                    if (this.isFree()) {
+                        
+                        this.setFree(false);
+                        stop();
+                        AllZone.Stack.add(spell);
+                    }
+                    else stopSetNext(new Input_PayManaCost(spell));
+                }
             }// showMessage()
             
             public CardList getGraveyardList() {
