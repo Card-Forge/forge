@@ -2546,10 +2546,17 @@ public class GameAction {
             for(int i = 0; i < humanDeck.countMain(); i++) {
                 card = c.getCard(humanDeck.getMain(i), Constant.Player.Human);
                 card.setUniqueNumber(nextUniqueNumber++);
-                if(card.isBasicLand()) {
-                    card.setRandomPicture(generator.nextInt(4));
+                
+                //if(card.isBasicLand()) {
+                String PC = card.getSVar("PicCount");
+                int n = 0;
+                if (PC.matches("[0-9][0-9]?"))
+                	n = Integer.parseInt(PC);
+                if (n > 1)
+                    card.setRandomPicture(generator.nextInt(n));
                     //System.out.println("human random number:" + card.getRandomPicture());
-                }
+                //}
+                
                 AllZone.Human_Library.add(card);
                 
             }
@@ -2557,10 +2564,17 @@ public class GameAction {
             for(int i = 0; i < computerDeck.countMain(); i++) {
                 card = c.getCard(computerDeck.getMain(i), Constant.Player.Computer);
                 card.setUniqueNumber(nextUniqueNumber++);
-                if(card.isBasicLand()) {
-                    card.setRandomPicture(generator.nextInt(4));
+                
+                //if(card.isBasicLand()) {
+                String PC = card.getSVar("PicCount");
+                int n = 0;
+                if (PC.matches("[0-9][0-9]?"))
+                	n = Integer.parseInt(PC);
+                if (n > 1)
+                    card.setRandomPicture(generator.nextInt(n));
                     //System.out.println("computer random number:" + card.getRandomPicture());
-                }
+                //}
+                
                 AllZone.Computer_Library.add(card);
                 
                 //get card picture so that it is in the image cache
