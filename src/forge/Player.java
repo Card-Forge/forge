@@ -238,6 +238,10 @@ public abstract class Player extends MyObservable{
 	///
 	////////////////////////////////
 	
+	public abstract void mayDrawCard();
+	
+	public abstract void mayDrawCards(int numCards);
+	
 	public void drawCard() {
 		drawCards(1);
 	}

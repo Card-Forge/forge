@@ -42,6 +42,16 @@ public class AIPlayer extends Player{
 	///
 	////////////////////////////////
 	
+	public void mayDrawCard() {
+		mayDrawCards(1);
+	}
+	
+	public void mayDrawCards(int n) {
+		if(AllZone.Computer_Library.size() > n) {
+			drawCards(n);
+		}
+	}
+	
 	public boolean dredge() {
 		Random random = new Random();
 		boolean use = random.nextBoolean();

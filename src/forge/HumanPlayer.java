@@ -34,6 +34,17 @@ public class HumanPlayer extends Player{
 	///
 	///////////////
 	
+	public void mayDrawCards(int n) {
+		String[] choices = {"Yes", "No"};
+		Object choice = AllZone.Display.getChoice("Draw "+n+" cards?", choices);
+		if(choice.equals("Yes")) 
+			drawCards(n);
+	}
+	
+	public void mayDrawCard() {
+		mayDrawCards(1);
+	}
+	
 	public boolean dredge() {
 		boolean dredged = false;
 		String choices[] = {"Yes", "No"};

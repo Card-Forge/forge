@@ -485,8 +485,7 @@ public class GameActionUtil {
 		{
 			public void resolve()
 			{
-				for (int i=0;i<4;i++)
-					AllZone.GameAction.drawCard(controller);
+				controller.drawCards(4);
 			}
 		};
 		ability.setStackDescription("Kozilek - draw four cards.");
@@ -2322,14 +2321,7 @@ public class GameActionUtil {
 			Ability ability2 = new Ability(card, "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.drawCard(drawer);
-					AllZone.GameAction.drawCard(drawer);
-					AllZone.GameAction.drawCard(drawer);
-					AllZone.GameAction.drawCard(drawer);
-					AllZone.GameAction.drawCard(drawer);
-					AllZone.GameAction.drawCard(drawer);
-					AllZone.GameAction.drawCard(drawer);
-
+					drawer.drawCards(7);
 				}
 			}; // ability2
 			if(!(card.getController().equals(c.getController()))) {
@@ -2361,9 +2353,7 @@ public class GameActionUtil {
 					// sac standstill
 					AllZone.GameAction.sacrifice(card);
 					// player who didn't play spell, draws 3 cards
-					AllZone.GameAction.drawCard(drawer);
-					AllZone.GameAction.drawCard(drawer);
-					AllZone.GameAction.drawCard(drawer);
+					drawer.drawCards(3);
 				}
 			}; // ability2
 
@@ -2485,7 +2475,7 @@ public class GameActionUtil {
                             }// May Draw a card
                             
                             if ((mayDrawNotMust && choice == JOptionPane.YES_OPTION) || !mayDrawNotMust) {
-                                AllZone.GameAction.drawCard(card.getController());
+                                card.getController().drawCard();
                             }
                         }// Human
                         
@@ -2493,7 +2483,7 @@ public class GameActionUtil {
                             int compLibSize = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
                             int compHandSize = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size();
                             if ((!mayDrawNotMust) || (mayDrawNotMust && compLibSize >= 5  && compHandSize <= 7)) {
-                                AllZone.GameAction.drawCard(card.getController());
+                                card.getController().drawCard();
                             }
                         }// Computer
                     }// resolve()
@@ -2530,7 +2520,7 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						// draws a card
-						AllZone.GameAction.drawCard(card.getController());
+						card.getController().drawCard();
 					}
 				}; // ability2
 
@@ -2557,7 +2547,7 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						// draws a card
-						AllZone.GameAction.drawCard(card.getController());
+						card.getController().drawCard();
 					}
 				}; // ability2
 
@@ -2585,7 +2575,7 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						// draws a card
-						AllZone.GameAction.drawCard(card.getController());
+						card.getController().drawCard();
 					}
 				}; // ability2
 
@@ -2668,7 +2658,7 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						// draws a card
-						AllZone.GameAction.drawCard(card.getController());
+						card.getController().drawCard();
 					}
 				}; // ability2
 
@@ -4404,8 +4394,8 @@ public class GameActionUtil {
 			public void resolve() {
 				Player player = crd.getController();
 				if(player.equals(AllZone.HumanPlayer)) {
-					if(showDialog(crd2)) AllZone.GameAction.drawCard(player);
-				} else AllZone.GameAction.drawCard(player); //computer
+					if(showDialog(crd2)) player.drawCard();
+				} else player.drawCard(); //computer
 			}
 		};
 		ability.setStackDescription("Fecundity - " + destroyed.getController() + " may draw a card.");
@@ -4532,8 +4522,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				Player player = crd.getController();
-				AllZone.GameAction.drawCard(player);
+				crd.getController().drawCard();
 			}
 		};
 		ability.setStackDescription("Femeref Enchantress - " + c.getController() + " draws a card.");
@@ -5026,7 +5015,7 @@ public class GameActionUtil {
 					getTargetPlayer().addDamage(2, src);
 				}
 				
-				AllZone.GameAction.drawCard(src.getController());
+				src.getController().drawCard();
 			}
 		}; // ability
 
@@ -5409,7 +5398,7 @@ public class GameActionUtil {
 			Ability ability2 = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.drawCard(player);
+					player.drawCard();
 					if(opponent.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
 					else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
 
@@ -5462,15 +5451,7 @@ public class GameActionUtil {
 			{
 				if (crd.isUntapped())
 				{
-					if (player.equals(AllZone.HumanPlayer))
-					{
-						String[] choices = {"Yes", "No"};
-						Object choice = AllZone.Display.getChoice("Draw a card?", choices);
-						if(choice.equals("Yes")) 
-							AllZone.GameAction.drawCard(player);
-					}
-					else
-						AllZone.GameAction.drawCard(player);
+					player.mayDrawCard();
 				}
 			}
 		};
@@ -5649,16 +5630,7 @@ public class GameActionUtil {
 			Ability ability2 = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-					if(player.equals(AllZone.HumanPlayer)) {
-						String[] choices = {"Yes", "No"};
-						Object choice = AllZone.Display.getChoice("Draw a card?", choices);
-						if(choice.equals("Yes")) {
-							AllZone.GameAction.drawCard(player);
-						}
-					}
-					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-					CardList libList = new CardList(lib.getCards());
-					if(player.equals(AllZone.ComputerPlayer) && (libList.size() > 3)) AllZone.GameAction.drawCard(player);
+					player.mayDrawCard();
 				}
 			};// ability2
 
@@ -5789,26 +5761,7 @@ public class GameActionUtil {
             Ability ability2 = new Ability(c, "0") {
                 @Override
                 public void resolve() {
-                    if (player.equals(AllZone.HumanPlayer)) {
-                    	StringBuilder title = new StringBuilder();
-                        title.append(c.getName()).append(" Ability");
-                        StringBuilder message = new StringBuilder();
-                        message.append("Will you draw a card?");
-                        int choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
-                        
-                        if (choice == JOptionPane.YES_OPTION) {
-                            AllZone.GameAction.drawCard(player);
-                        }// May Draw a card
-                    }// Human
-                    
-                    if (player.equals(AllZone.ComputerPlayer)) {
-                        int compLibSize = AllZone.getZone(Constant.Zone.Library, player).size();
-                        int compHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
-                        
-                        if (compLibSize >= 5  && compHandSize < 7) {
-                            AllZone.GameAction.drawCard(player);
-                        }// May Draw a card
-                    }// Computer
+                    player.mayDrawCard();
                 }//resolve()
             };// ability2
             
@@ -5827,9 +5780,7 @@ public class GameActionUtil {
 			Ability ability2 = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-					for(int i = 0; i < power; i++) {
-						AllZone.GameAction.drawCard(player);
-					}
+					player.drawCards(power);
 				}
 			};// ability2
 
@@ -5977,7 +5928,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					player[0] = crd.getController();
-					AllZone.GameAction.drawCard(player[0]);
+					player[0].drawCard();
 				}
 			};// ability2
 
@@ -6974,10 +6925,8 @@ public class GameActionUtil {
 				for(int j = 0; j < oc.length; j++)
 					AllZone.GameAction.discard(oc[j], crd.getSpellAbility()[0]);
 
-				for(int z = 0; z < 4; z++) {
-					AllZone.GameAction.drawCard(AllZone.ComputerPlayer);
-					AllZone.GameAction.drawCard(AllZone.HumanPlayer);
-				}
+				AllZone.ComputerPlayer.drawCards(4);
+				AllZone.HumanPlayer.drawCards(4);
 
 			}
 		}// for
@@ -8020,9 +7969,8 @@ public class GameActionUtil {
             	public void resolve()
             	{
             		if (player.getLife() <= 5){
-	            		//AllZone.GameAction.gainLife(player, 3);
 	            		player.gainLife(3);
-            			AllZone.GameAction.drawCard(player);
+            			player.drawCard();
             		}
             	}
             };// Ability
@@ -9106,20 +9054,7 @@ public class GameActionUtil {
 		list = list.getName("Bringer of the Blue Dawn");
 
 		for(int i = 0; i < list.size(); i++) {
-			String[] choices = {"Yes", "No"};
-			Object q = null;
-			if(player.equals(AllZone.HumanPlayer)) {
-				q = AllZone.Display.getChoiceOptional("Use Bringer of the Blue Dawn?", choices);
-
-				if(q == null || q.equals("No")) return;
-			}
-			if(player.equals(AllZone.ComputerPlayer)) {
-				AllZone.GameAction.drawCard(player);
-				AllZone.GameAction.drawCard(player);
-			} else if(q.equals("Yes")) {
-				AllZone.GameAction.drawCard(player);
-				AllZone.GameAction.drawCard(player);
-			}
+			player.mayDrawCards(2);
 		}// for
 	}// upkeep_Bringer_of_the_Blue_Dawn()
 
@@ -9260,35 +9195,24 @@ public class GameActionUtil {
 
 		for(int i = 0; i < list.size(); i++){
 			if( list.getCard(i).isUntapped() ) {
-				AllZone.GameAction.drawCard(player);
+				player.drawCard();
 			}
 		}
 	}// Howling_Mine()
 	
 	private static void draw_Spiteful_Visions(final Player player) {
 		CardList list = AllZoneUtil.getCardsInPlay("Spiteful Visions");
-
-		for(int i = 0; i < list.size(); i++){
-			AllZone.GameAction.drawCard(player);
-		}
+		player.drawCards(list.size());
 	}// Spiteful_Visions()
 	
 	private static void draw_Kami_Crescent_Moon(Player player) {
-		CardList list = new CardList();
-		list.addAll(AllZone.Human_Play.getCards());
-		list.addAll(AllZone.Computer_Play.getCards());
-		list = list.getName("Kami of the Crescent Moon");
-
-		AllZone.GameAction.drawCards(player, list.size());
+		CardList list = AllZoneUtil.getCardsInPlay("Kami of the Crescent Moon");
+		player.drawCards(list.size());
 	}// Kami_Crescent_Moon()
 
 	private static void draw_Font_of_Mythos(Player player) {
-		CardList list = new CardList();
-		list.addAll(AllZone.Human_Play.getCards());
-		list.addAll(AllZone.Computer_Play.getCards());
-		list = list.getName("Font of Mythos");
-
-		AllZone.GameAction.drawCards(player, 2*list.size());
+		CardList list = AllZoneUtil.getCardsInPlay("Font of Mythos");
+		player.drawCards(2*list.size());
 	}// Font_of_Mythos()
 	
 	private static void draw_Teferi_Puzzle_Box(Player player) {
@@ -9326,7 +9250,7 @@ public class GameActionUtil {
                     }
             	}
             			
-				AllZone.GameAction.drawCards(player, Count);
+				player.drawCards(Count);
             }
 		}
 
@@ -9422,7 +9346,7 @@ public class GameActionUtil {
 
 		for(int i = 0; i < list.size(); i++) {
 			final Card F_card = list.get(i);
-			AllZone.GameAction.drawCard(player);
+			player.drawCard();
 			player.subtractLife(1,F_card);
 
 			AllZone.GameAction.checkStateEffects();
@@ -9454,19 +9378,11 @@ public class GameActionUtil {
 		list = list.getName("Honden of Seeing Winds");
 
 		for(int i = 0; i < list.size(); i++) {
-			//			final Ability ability2 = new Ability(list.get(i), "0")
-			//	    {   
-			//	public void resolve() {
 			PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
 			CardList hondlist = new CardList();
 			hondlist.addAll(Play.getCards());
 			hondlist = hondlist.getType("Shrine");
-			for(int j = 0; j < hondlist.size(); j++) {
-				AllZone.GameAction.drawCard(player);
-			}//}
-		//  };
-			//    ability2.setStackDescription(list.get(i)+" - " + list.get(i).getController() + " draws a card for each Shrine he controls.");
-			//	    AllZone.Stack.add(ability2);	
+			player.drawCards(hondlist.size());
 		}
 
 	}// upkeep_Honden_of_Seeing_Winds
@@ -9671,8 +9587,7 @@ public class GameActionUtil {
 		AllZone.Stack.add(ability);
 
 		//drawing cards doesn't seem to work during upkeep if it's in an ability
-		AllZone.GameAction.drawCard(player);
-		AllZone.GameAction.drawCard(player);
+		player.drawCards(2);
 	}// upkeep_Seizan_Perverter_of_Truth()
 
 	private static void upkeep_Moroii() {
