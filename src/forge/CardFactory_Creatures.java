@@ -6281,12 +6281,12 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Phyrexian Dreadnought")) {
-        	final Command comesIntoPlay = new Command() {
-        		private static final long serialVersionUID = 7680692311339496770L;
-        		final Player player = card.getController();
-        		final CardList toSac = new CardList();
-
-        		public void execute() {
+        	final Player player = card.getController();
+    		final CardList toSac = new CardList();
+    		
+        	final Ability sacOrSac = new Ability(card, "") {
+        		@Override
+        		public void resolve() {
         			if(player.isHuman()) {
         				Input target = new Input() {
         					private static final long serialVersionUID = 2698036349873486664L;
@@ -6334,14 +6334,23 @@ public class CardFactory_Creatures {
         				};//Input
         				AllZone.InputControl.setInput(target);
         			}
-        		}
-
+        		}//end resolve
+        		
         		private int getTotalPower() {
         			int sum = 0;
         			for(Card c:toSac) {
         				sum += c.getNetAttack();
         			}
         			return sum;
+        		}
+        	};// end sacOrSac
+        	
+        	final Command comesIntoPlay = new Command() {
+        		private static final long serialVersionUID = 7680692311339496770L;
+        		
+        		public void execute() {
+        			sacOrSac.setStackDescription("When "+cardName+" enters the battlefield, sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.");
+        			AllZone.Stack.add(sacOrSac);
         		}
         	};
 
