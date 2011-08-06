@@ -4132,8 +4132,6 @@ public class CardFactory implements NewConstants {
         		
         		String[] tmpCost = tmp.split(" ", 2);
         		
-        		int inc = 0;
-        		
         		final Target abTgt;
         		if (tmpCost[0].equals(""))
         			abTgt = null;
@@ -5662,7 +5660,7 @@ public class CardFactory implements NewConstants {
 				@Override
 				public boolean canPlay(){
 					Cost_Payment pay = new Cost_Payment(abCost, this);
-					return !card.hasSickness() && (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+					return !card.isSick() && (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
 				}
         		
 				@Override
