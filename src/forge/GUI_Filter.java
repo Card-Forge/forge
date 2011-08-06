@@ -139,12 +139,16 @@ public class GUI_Filter extends javax.swing.JDialog {
             this.setPreferredSize(new java.awt.Dimension(280, 300));
             
             Dimension screen = getToolkit().getScreenSize();
-            int x = (screen.width - 280) / 2;
-            int y = (screen.height - 300) / 2;
-            this.setBounds(x, y, 280, 300);
-            this.setResizable(false);
+            // int x = (screen.width - 280) / 2;
+            // int y = (screen.height - 300) / 2;
+            // this.setBounds(x, y, 280, 300);
+            // this.setResizable(false);
+            int x = (screen.width - 340) / 2;
+            int y = (screen.height - 360) / 2;
+            this.setBounds(x, y, 340, 360);
+            this.setResizable(true);
             this.setTitle("Filter");
-            pack();
+            // pack();
             this.setIconImage(null);
             this.addWindowListener(new WListener());
             
