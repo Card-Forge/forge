@@ -2653,7 +2653,6 @@ class CardFactory_Lands {
 	                    }
 	                 });
 	                
-	                
 	                for(int i=0;i<evildead.size();i++)
 	                {
 	               	 mp.addExtrinsicKeyword("ManaPool:B");
@@ -2901,6 +2900,30 @@ class CardFactory_Lands {
 	          a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
 	        }//*************** END ************ END **************************
 	        
+	        //*************** START *********** START **************************
+	        else if (cardName.equals("Khalni Garden"))
+	        {
+	        	final Ability ability = new Ability(card, "0")
+	        	{
+	        		public void resolve()
+	        		{
+	        			CardFactoryUtil.makeToken("Plant", "G 0 1 Plant", card, "G", new String[] {"Creature", "Plant"}, 0, 1, new String[] {""} );
+	        		}
+	        	};
+	        	ability.setStackDescription("When Khalni Garden enters the battlefield, put a 0/1 green Plant creature token onto the battlefield.");
+	        	
+	        	final Command comesIntoPlay = new Command()
+	        	{
+					private static final long serialVersionUID = 6175835326425915833L;
+					public void execute()
+	        		{
+	        			AllZone.Stack.add(ability);
+	        		}
+	        	};
+	        	card.clearSpellKeepManaAbility();
+	        	card.addComesIntoPlayCommand(comesIntoPlay);
+	        }//*************** END ************ END **************************
+    
 	        
 	        if (hasKeyword(card, "Cycling") != -1)
 		       {

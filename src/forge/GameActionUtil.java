@@ -3255,7 +3255,8 @@ public class GameActionUtil
 		if (c.getName().equals("Kazandu Blademaster") || c.getName().equals("Makindi Shieldmate") || 
 			c.getName().equals("Nimana Sell-Sword") || c.getName().equals("Oran-Rief Survivalist") || 
 			c.getName().equals("Tuktuk Grunts") || c.getName().equals("Umara Raptor") || 
-			c.getName().equals("Hada Freeblade") )
+			c.getName().equals("Hada Freeblade") || c.getName().equals("Bojuka Brigand") ||
+			c.getName().equals("Graypelt Hunter") )
 			ally_Generic_P1P1(c);
 		else if (c.getName().equals("Turntimber Ranger"))	
 			ally_Turntimber_Ranger(c);
@@ -4219,7 +4220,6 @@ public class GameActionUtil
 			}
 		
 		}
-
 	}
 
 	public static void executePlayerCombatDamageEffects(Card c)

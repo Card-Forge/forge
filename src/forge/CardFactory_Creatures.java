@@ -5884,8 +5884,8 @@ public class CardFactory_Creatures {
 	        {
 	          ability.setStackDescription(card +" causes damage to creature or player");
 
-	          @SuppressWarnings("unused") // damage
-			  int damage = ((Integer)countZubera.execute()).intValue();
+	          //@SuppressWarnings("unused") // damage
+			  //int damage = ((Integer)countZubera.execute()).intValue();
 
 	          String con = card.getController();
 
@@ -9317,8 +9317,6 @@ public class CardFactory_Creatures {
 	              getTargetCard().removeExtrinsicKeyword("Flying");
 	            }
 
-	            @SuppressWarnings("unused") // target
-	  		  final Card[] target = {getTargetCard()};
 	            AllZone.EndOfTurn.addUntil(new Command()
 	            {
 	              private static final long serialVersionUID = -8889549737746466810L;
@@ -10541,11 +10539,8 @@ public class CardFactory_Creatures {
 	    //*************** START *********** START **************************
 	      else if(cardName.equals("Ramosian Revivalist"))
 	      {
-	      	@SuppressWarnings("unused") // costMinusOne
-	  		String costMinusOne = "";
 	  	    int a = Integer.parseInt("6");
 	  	    a--;
-	  	    costMinusOne = Integer.toString(a);
 	  	    final int converted = a;
 	  	    final String player = card.getController();
 	  	    
@@ -14148,17 +14143,12 @@ public class CardFactory_Creatures {
 	          {
 	        	
 	            Card c = getTargetCard();
-	            @SuppressWarnings("unused") // hand
-				PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
 
 	            if(AllZone.GameAction.isCardInPlay(c))
 	            {
 	              //AllZone.getZone(c).remove(c);
 	            	AllZone.GameAction.sacrifice(c);
-	          	  
 	            	card.addShield();
-	             
-	              
 	            }
 	            AllZone.EndOfTurn.addUntil(eot1);
 	          }
@@ -14199,8 +14189,6 @@ public class CardFactory_Creatures {
 	         public void resolve()
 	        {
 	          Card c = getTargetCard();
-	          @SuppressWarnings("unused") // graveyard
-			  PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
 
 	          if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, getTargetCard()) )
 	          {
@@ -16780,8 +16768,6 @@ public class CardFactory_Creatures {
   	              getTargetCard().addExtrinsicKeyword("Unblockable");
   	            }
 
-  	            @SuppressWarnings("unused") // target
-  	  		    final Card[] target = {getTargetCard()};
   	            AllZone.EndOfTurn.addUntil(new Command()
   	            {
 				  private static final long serialVersionUID = -1884018112259809603L;
@@ -16870,8 +16856,6 @@ public class CardFactory_Creatures {
   	              getTargetCard().addExtrinsicKeyword("Mountainwalk");
   	            }
 
-  	            @SuppressWarnings("unused") // target
-  	  		    final Card[] target = {getTargetCard()};
   	            AllZone.EndOfTurn.addUntil(new Command()
   	            {
 
@@ -18349,9 +18333,9 @@ public class CardFactory_Creatures {
 	            card.addSpellAbility(a2[0]);
 	            a2[0].setDescription("tap: Target Assembly-Worker creature gets +1/+1 until end of turn.");
 
-
+	            /*
 	            @SuppressWarnings("unused") // target unused
-	         final Input target = new Input()
+	         	inal Input target = new Input()
 	            {
 	             private static final long serialVersionUID = 8913477363141356082L;
 	            
@@ -18383,6 +18367,7 @@ public class CardFactory_Creatures {
 	                stop();
 	              }
 	            };//Input target
+	            */
 	            a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Assembly-Worker"));
 
 	          }//*************** END ************ END **************************

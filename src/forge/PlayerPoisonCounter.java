@@ -8,7 +8,7 @@ public class PlayerPoisonCounter extends MyObservable implements java.io.Seriali
     {
     	return poisonCounters;
     }
-    public void setLife(int poisonCounters2)
+    public void setPoisonCounters(int poisonCounters2)
     {
     	poisonCounters = poisonCounters2;
     	this.updateObservers();

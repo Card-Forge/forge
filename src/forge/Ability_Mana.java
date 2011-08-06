@@ -45,7 +45,8 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
 	   
 	   this.sourceCard = sourceCard;
 	   this.orig=orig;
-	   setDescription(orig);
+	   //setDescription(orig);
+	   setDescription("123");
 	  
 	   /*
 	   String parts[] = orig.split(":");

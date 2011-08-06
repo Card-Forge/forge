@@ -948,6 +948,9 @@ private Card getCurrentCard(int ID)
 	AllZone.GameInfo.setComputerCanPlayNumberOfLands(1);
 	AllZone.GameInfo.setHumanCanPlayNumberOfLands(1);
 	
+	AllZone.Human_PoisonCounter.setPoisonCounters(0);
+	AllZone.Computer_PoisonCounter.setPoisonCounters(0);
+	
     AllZone.Computer_Life.setLife(20);
     AllZone.Human_Life.setLife(20);
 

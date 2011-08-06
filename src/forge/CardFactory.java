@@ -5135,8 +5135,6 @@ public class CardFactory implements NewConstants {
         private static final long serialVersionUID = -5744842090293912606L;
 		public boolean canPlayAI()
         {
-          Combat combat = ComputerUtil.getAttackers();
-
           CardList small = new CardList(AllZone.Computer_Play.getCards());
           small = small.getType("Creature");
 
@@ -12915,9 +12913,8 @@ public class CardFactory implements NewConstants {
 
       ability2.setBeforePayMana(new Input()
       {
-		private static final long serialVersionUID = -4773496833654414458L;
-		@SuppressWarnings("unused") // check
-		int check = -1;
+         private static final long serialVersionUID = -4773496833654414458L;
+
          public void showMessage()
          {
              AllZone.Stack.push(ability2);
@@ -13744,9 +13741,7 @@ public class CardFactory implements NewConstants {
           final int boost = countLandTypes();
           PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
           CardList list = new CardList(play.getCards());
-          @SuppressWarnings("unused") // c
-		  Card c;
-
+          
           for(int i = 0; i < list.size(); i++)
           {
             final Card[] target = new Card[1];
@@ -13810,8 +13805,6 @@ public class CardFactory implements NewConstants {
         {
           PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
           CardList list = new CardList(play.getCards());
-          @SuppressWarnings("unused") // c
-		  Card c;
 
           for(int i = 0; i < list.size(); i++)
           {
@@ -14747,8 +14740,6 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     	{
 			private static final long serialVersionUID = -2938965362221626028L;
 			
-			@SuppressWarnings("unused")
-    		boolean undoable = true;
     		public void undo() {card.addCounter(Counters.CHARGE, 1);}
     		public String Mana() {return this.choices_made[0].toString();}
     		public boolean canPlay()
