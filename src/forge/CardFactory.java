@@ -4232,6 +4232,7 @@ public class CardFactory implements NewConstants {
         }//spTutor
 		*/
         
+        /*
         while(hasKeyword(card, "abDrawCards") != -1) {
             int n = hasKeyword(card, "abDrawCards");
             String parse = card.getKeyword().get(n).toString();
@@ -4352,7 +4353,9 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(abDraw);
         }
+        */
         
+        /*
         if(hasKeyword(card, "spDrawCards") != -1) {
             int n = hasKeyword(card, "spDrawCards");
             String parse = card.getKeyword().get(n).toString();
@@ -4467,6 +4470,7 @@ public class CardFactory implements NewConstants {
             }
 
         }//spDrawCards
+        */
         
         if (hasKeyword(card, "spLoseLife") != -1)
         {
