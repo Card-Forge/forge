@@ -923,8 +923,12 @@ public class CardFactory implements NewConstants {
 		                			{
 		                				CardList dChoices = new CardList();
 			                				                			
-			                			if (DiscardMethod.contains("Creature") && !DiscardMethod.contains("nonCreature"))
-			                				dChoices.add(CardFactoryUtil.AI_getBestCreature(dPChHand));
+			                			if (DiscardMethod.contains("Creature") && !DiscardMethod.contains("nonCreature")) {
+			                				Card c = CardFactoryUtil.AI_getBestCreature(dPChHand);
+			                				if (c!=null)
+			                					dChoices.add(CardFactoryUtil.AI_getBestCreature(dPChHand));
+			                			}
+			                				
 			                			
 		                				CardListUtil.sortByTextLen(dPChHand);
 		                				dChoices.add(dPChHand.get(0));
