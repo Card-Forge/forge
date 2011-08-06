@@ -284,4 +284,49 @@ public class AllZoneUtil {
 			return c.isArtifact();
 		}
 	};
+	
+	//zone manipulation, maybe be better off in GameAction.java...
+	/**
+	 * use this when you need to rearrange the top X cards in a player's library.  You
+	 * may also specify a shuffle when done
+	 * 
+	 * @param player the player to target (currently *cannot* be Computer - no effect)
+	 * @param numCards the number of cards from the top to rearrange
+	 * @param shuffle true if a shuffle is desired at the end, false otherwise
+	 */
+	public static void rearrangeTopOfLibrary(final String player, final int numCards, boolean shuffle) {
+		if(player.equals(Constant.Player.Human)) {
+			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+			int maxCards = lib.size();
+			maxCards = Math.min(maxCards, numCards);
+			if(maxCards == 0) return;
+			CardList topCards =   new CardList();
+			//show top n cards:
+			for(int j = 0; j < maxCards; j++ ) {
+				topCards.add(lib.get(j));
+			}
+			for(int i = 1; i <= maxCards; i++) {
+				String suffix = "";
+				switch(i) {
+				case 1:	suffix="st"; break;
+				case 2: suffix="nd"; break;
+				case 3: suffix="rd"; break;
+				default: suffix="th";
+				}
+				String title = "Put "+i+suffix+" in Library: ";
+				Object o = AllZone.Display.getChoiceOptional(title, topCards.toArray());
+				if(o == null) break;
+				Card c_1 = (Card) o;
+				topCards.remove(c_1);
+				lib.remove(c_1);
+				lib.add(c_1, i - 1);
+			}
+			if(shuffle) {
+					AllZone.GameAction.shuffle(player);
+			}
+		}
+		else {
+			//this does not and is not expected to work for the AI at this time
+		}
+	}
 }
