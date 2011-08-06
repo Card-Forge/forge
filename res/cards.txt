@@ -41,7 +41,7 @@ spDamageTgtCP:Count$NamedInAllYards.Kindle/Plus.2:Kindle deals X damage to targe
 
 Ire of Kaminari
 3 R
-Instant — Arcane
+Instant ï¿½ Arcane
 no text
 spDamageTgtCP:Count$TypeInYourYard.Arcane:Ire of Kaminari deals damage to target creature or player equal to the number of Arcane cards in your graveyard.
 
@@ -85,7 +85,7 @@ Thermal Blast
 4 R
 Instant
 no text
-spDamageTgtC:Count$Hellbent.5.3:Thermal Blast deals 3 damage to target creature. Threshold — Thermal Blast deals 5 damage to that creature instead if seven or more cards are in your graveyard.
+spDamageTgtC:Count$Hellbent.5.3:Thermal Blast deals 3 damage to target creature. Threshold ï¿½ Thermal Blast deals 5 damage to that creature instead if seven or more cards are in your graveyard.
 
 Spitting Earth
 1 R
@@ -3653,19 +3653,19 @@ Persist
 
 Wings of Velis Vel
 1 U
-Instant
+Tribal Instant - Shapeshifter
 Changeling. Target creature becomes 4/4 and gains flying until end of turn.
 Changeling
 
 Nameless Inversion
 1 B
-Instant
+Tribal Instant - Shapeshifter
 Changeling. Target creature gets +3/-3 until end of turn.
 Changeling
 
 Crib Swap
 2 W
-Instant
+Tribal Instant - Shapeshifter
 Changeling. Remove target creature from the game. Its controller puts a 1/1 colorless Shapeshifter creature token into play.
 Changeling
 

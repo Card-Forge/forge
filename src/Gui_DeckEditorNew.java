@@ -2,6 +2,7 @@ import static javax.swing.BorderFactory.*;
 import static org.jdesktop.swingx.MultiSplitLayout.*;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
@@ -24,7 +25,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
@@ -49,12 +49,8 @@ import forge.properties.NewConstants.LANG;
 public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstants.GUI.GuiDeckEditor {
     public static void main(String[] args) {
 //        JFrame jf = new JFrame();
-        Gui_DeckEditorNew jf = new Gui_DeckEditorNew(new EmptyCardPoolModel(), new EmptyCardPoolModel());
+        Gui_DeckEditorNew jf = new Gui_DeckEditorNew();
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jf.pane.add(new JTextField("test"), "detail");
-        jf.pane.add(new JTextField("test2"), "picture");
-        jf.pane.add(new JTextField("test3"), "pool");
-        jf.pane.add(new JTextField("test4"), "deck");
         
 //        MultiSplitPane p = new MultiSplitPane();
 //        p.setModel(MultiSplitLayout.parseModel("(ROW (LEAF name=pool) (LEAF name=deck))"));
@@ -62,26 +58,8 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
 //        p.add(new JTextField("deck"), "deck");
 //        jf.add(p);
         
-        jf.pack();
+//        jf.pack();
         jf.setVisible(true);
-    }
-    
-    private static class EmptyCardPoolModel extends CardPoolModel {
-        @Override
-        public void add(Card c) {}
-        
-        @Override
-        public void remove(Card c) {}
-        
-        @Override
-        public int getRowCount() {
-            return 0;
-        }
-        
-        @Override
-        public CardQty getRow(int row) {
-            return null;
-        }
     }
     
     Gui_DeckEditor_Menu    customMenu;
@@ -140,10 +118,14 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
     private JTable         topTable;
     private JTable         bottomTable;
     
+    public Gui_DeckEditorNew() {
+        this(null, null);
+    }
+    
     public Gui_DeckEditorNew(CardPoolModel top, CardPoolModel bottom) {
         try {
-            topModel = top;
-            bottomModel = bottom;
+            topModel = top != null? top:new EmptyCardPoolModel();
+            bottomModel = bottom != null? bottom:new EmptyCardPoolModel();
             setupFrame();
             setupGUI();
             jbInit();
@@ -183,20 +165,30 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
             pane.getMultiSplitLayout().setModel(model);
             //pane.getMultiSplitLayout().setFloatingDividers(false);
         } catch(Exception ex) {
+//            model = parseModel(""//
+//                    + "(ROW "//
+//                    + " (COLUMN pool deck) "//
+////                    + "  (LEAF weight=0.5 name=pool) "//
+////                    + "  (LEAF weight=0.5 name=deck) "//
+////                    + " ) "//
+//                    + " (COLUMN detail picture) "//
+////                    + "  (LEAF weight=0.5 name=detail) "//
+////                    + "  (LEAF weight=0.5 name=picture) "//
+////                    + " ) "//
+//                    + ") ");
             model = parseModel(""//
-                    + "(ROW "//
-                    + " (COLUMN "//
-                    + "  (LEAF weight=0.5 name=pool) "//
-                    + "  (LEAF weight=0.5 name=deck) "//
-                    + " ) "//
-                    + " (COLUMN "//
-                    + "  (LEAF weight=0.5 name=detail) "//
-                    + "  (LEAF weight=0.5 name=picture) "//
-                    + " ) "//
-                    + ") ");
+                    + "(ROW"//
+                    + " (COLUMN weight=0.5"// 
+                    + "  (LEAF weight=0.5 name=pool)"//
+                    + "  (LEAF weight=0.5 name=deck)"//
+                    + " )" //
+                    + " (COLUMN weight=0.5"//
+                    + "  (LEAF weight=0.5 name=detail)"//
+                    + "  (LEAF weight=0.5 name=picture)"//
+                    + " )"//
+                    + ")");
             pane.setModel(model);
         }
-        pane.getMultiSplitLayout().setFloatingDividers(false);
         getContentPane().add(pane);
     }
     
@@ -216,7 +208,7 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
                 buttons.add(removeButton);
                 south.add(buttons, BorderLayout.WEST);
                 
-                JPanel filters = new JPanel(); //FlowLayout
+                JPanel filters = new JPanel(new FlowLayout());
                 //TODO add checkboxes
                 south.add(filters);
             }
@@ -227,8 +219,8 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
         
         { //Deck
             JPanel deck = new JPanel(new BorderLayout());
-            JScrollPane sp = new JScrollPane(topTable);
-            sp.setBorder(createTitledBorder("All Cards"));
+            JScrollPane sp = new JScrollPane(bottomTable);
+            sp.setBorder(createTitledBorder("Deck"));
             deck.add(sp);
             deck.add(statsLabel, BorderLayout.SOUTH);
             
@@ -828,7 +820,7 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
          * Sets the column widths of the table. The table must use a CardPoolModel as its table model.
          */
         public static void setColumnWidths(JTable t) {
-            if(!(t.getModel() instanceof CardPoolModel)) throw new IllegalArgumentException(
+            if(t.getModel() != null && !(t.getModel() instanceof CardPoolModel)) throw new IllegalArgumentException(
                     "Model is not a CardPoolModel");
             TableColumnModel m = t.getColumnModel();
             for(int i = 0; i < m.getColumnCount(); i++) {
@@ -880,7 +872,8 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
         }
         
         /**
-         * Returns the non-null {@link CardQty} object for the given row index, unsorted
+         * Returns the non-null {@link CardQty} object for the given row index, unsorted. Throws an
+         * {@link IllegalArgumentException} if {@code index < 0 || index >= }{@link #getRowCount()}.
          */
         public abstract CardQty getRow(int row);
         
@@ -903,6 +896,29 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
             public Card getCard();
             
             public int getQty();
+        }
+    }
+    
+    /**
+     * A stub model that cannot contain cards.
+     */
+    private static class EmptyCardPoolModel extends CardPoolModel {
+        private static final long serialVersionUID = -5832487673696527783L;
+        
+        @Override
+        public void add(Card c) {}
+        
+        @Override
+        public void remove(Card c) {}
+        
+        @Override
+        public int getRowCount() {
+            return 0;
+        }
+        
+        @Override
+        public CardQty getRow(int row) {
+            throw new IllegalArgumentException();
         }
     }
 }
