@@ -828,6 +828,88 @@ public class CardFactory_Sorceries {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Insurrection")) {
+        	/*
+        	 * Untap all creatures and gain control of them until end of
+        	 * turn. They gain haste until end of turn.
+        	 */
+            final ArrayList<PlayerZone> orig = new ArrayList<PlayerZone>();
+            final PlayerZone[] newZone = new PlayerZone[1];
+            final ArrayList<String> controllerEOT = new ArrayList<String>();
+            final ArrayList<Card> targets = new ArrayList<Card>();
+            
+            final Command untilEOT = new Command() {
+				private static final long serialVersionUID = -5809548350739536763L;
+
+				public void execute() {
+                	int i = 0;
+                	for(Card target:targets) {
+                		//if card isn't in play, do nothing
+                		if(!AllZone.GameAction.isCardInPlay(target)) break;
+
+                		target.setController(controllerEOT.get(i));
+
+                		((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
+                		((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+
+                		newZone[0].remove(target);
+                		orig.get(i).add(target);
+                		target.untap();
+                		target.removeExtrinsicKeyword("Haste");
+
+                		((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
+                		((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                		i++;
+                	}
+                }//execute()
+            };//Command
+            
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -532862769235091780L;
+
+				@Override
+                public void resolve() {
+                	CardList creatures = AllZoneUtil.getCreaturesInPlay();
+                	newZone[0] = AllZone.getZone(Constant.Zone.Play, card.getController());;
+                	int i = 0;
+                	for(Card target:creatures) {
+                		if(AllZone.GameAction.isCardInPlay(target)) {
+                			orig.add(i, AllZone.getZone(target));
+                			controllerEOT.add(i, target.getController());
+                			targets.add(i, target);
+
+                			//set the controller
+                			target.setController(card.getController());
+
+                			((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
+                			((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                			
+                			newZone[0].add(target);
+                			orig.get(i).remove(target);
+
+                			((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
+                			((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+
+                			target.untap();
+                			target.addExtrinsicKeyword("Haste");
+                		}//is card in play?
+                	}//end for
+                	AllZone.EndOfTurn.addUntil(untilEOT);
+                }//resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                	CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+                    return creatures.size() > 0 && AllZone.Phase.getPhase().equals(Constant.Phase.Main1);
+                }//canPlayAI()
+                
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            card.setSVar("PlayMain1", "TRUE");
+        }//*************** END ************ END **************************
+        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Beacon of Unrest")) {
