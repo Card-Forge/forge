@@ -11409,7 +11409,13 @@ public class GameActionUtil {
   	      		Handcards.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
 	      		if (Handcards.size() > 0) return false;
 	      	}
-  	      if(SpecialConditions.contains("isPresent")) { // is a card of a certain type/color present?
+  	      	if(SpecialConditions.contains("Metalcraft")) {
+    			CardList CardsinPlay = new CardList();
+      			CardsinPlay.addAll(AllZone.Human_Play.getCards());
+      			CardsinPlay = CardsinPlay.getType("Artifact");
+	      		if (CardsinPlay.size() < 3) return false;
+	      	}
+  	      	if(SpecialConditions.contains("isPresent")) { // is a card of a certain type/color present?
   	    	  	SpecialConditions = SpecialConditions.replaceAll("isPresent ", "");
     			CardList CardsinPlay = new CardList();
       			CardsinPlay.addAll(AllZone.Human_Play.getCards());
@@ -11417,7 +11423,7 @@ public class GameActionUtil {
       			String Conditions[] = SpecialConditions.split(",");
       			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController());
 	      		if (CardsinPlay.isEmpty()) return false;
-	      	}
+  	      	}
   	      	if(SpecialConditions.contains("isEquipped")) {
 	      		if (!SourceCard.isEquipped()) return false;
 	      	}
