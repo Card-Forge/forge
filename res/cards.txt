@@ -1,3 +1,9 @@
+Animate Artifact
+3 U
+Enchantment Aura
+As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
+Enchant artifact
+
 Awakening Zone
 2 G
 Enchantment
