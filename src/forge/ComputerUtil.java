@@ -425,7 +425,11 @@ public class ComputerUtil
             				sourceLand.getController().addDamage(1, manabarb);
             			}
             		};
-            		ability.setStackDescription(manabarb.getName()+" - deal 1 damage to "+sourceLand.getController());
+            		
+            		StringBuilder sb = new StringBuilder();
+            		sb.append(manabarb.getName()).append(" - deal 1 damage to ").append(sourceLand.getController());
+            		ability.setStackDescription(sb.toString());
+            		
             		AllZone.Stack.add(ability);
             	}
             }
