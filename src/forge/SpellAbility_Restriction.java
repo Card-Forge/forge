@@ -50,6 +50,16 @@ public class SpellAbility_Restriction {
 		return bPlayerTurn;
 	}
 	
+	private boolean bOpponentTurn = false;
+	
+	public void setOpponentTurn(boolean bTurn){
+		bOpponentTurn = bTurn;
+	}
+	
+	public boolean getOpponentTurn(){
+		return bOpponentTurn;
+	}
+	
 	private int activationLimit = -1;
 	private int numberTurnActivations = 0;
 	
@@ -116,6 +126,9 @@ public class SpellAbility_Restriction {
 			return false;
 		
 		if (bPlayerTurn && !AllZone.Phase.isPlayerTurn(activator))
+			return false;
+		
+		if (bOpponentTurn && AllZone.Phase.isPlayerTurn(activator))
 			return false;
 		
 		if (!bAnyPlayer && !activator.equals(c.getController()))

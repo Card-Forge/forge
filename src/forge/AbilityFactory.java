@@ -351,6 +351,9 @@ public class AbilityFactory {
         if (mapParams.containsKey("PlayerTurn"))
         	SA.getRestrictions().setPlayerTurn(true);
         
+        if (mapParams.containsKey("OpponentTurn"))
+        	SA.getRestrictions().setOpponentTurn(true);
+        
         if (mapParams.containsKey("AnyPlayer"))
         	SA.getRestrictions().setAnyPlayer(true);
         
