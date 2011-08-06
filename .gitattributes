@@ -7502,6 +7502,7 @@ src/forge/quest/data/pet/QuestPetHound.java svneol=native#text/plain
 src/forge/quest/data/pet/QuestPetManager.java svneol=native#text/plain
 src/forge/quest/data/pet/QuestPetPlant.java svneol=native#text/plain
 src/forge/quest/data/pet/QuestPetWolf.java svneol=native#text/plain
+src/forge/quest/gui/FontConstants.java svneol=native#text/plain
 src/forge/quest/gui/QuestAbstractPanel.java svneol=native#text/plain
 src/forge/quest/gui/QuestFrame.java svneol=native#text/plain
 src/forge/quest/gui/bazaar/QuestAbstractBazaarItem.java svneol=native#text/plain
