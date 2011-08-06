@@ -1795,6 +1795,7 @@ res/cardsfolder/force_of_will.txt -text svneol=native#text/plain
 res/cardsfolder/force_spike.txt -text svneol=native#text/plain
 res/cardsfolder/forced_fruition.txt -text svneol=native#text/plain
 res/cardsfolder/forced_retreat.txt -text svneol=native#text/plain
+res/cardsfolder/foresee.txt -text svneol=native#text/plain
 res/cardsfolder/foresight.txt -text svneol=native#text/plain
 res/cardsfolder/forest.txt -text svneol=native#text/plain
 res/cardsfolder/forest_bear.txt -text svneol=native#text/plain
