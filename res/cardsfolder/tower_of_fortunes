@@ -1,0 +1,7 @@
+Name:Tower of Fortunes
+ManaCost:4
+Types:Artifact
+Text:no text
+K:abDrawCards 8 T:4:Draw four cards.:Tower of Fortunes - Draw four cards.
+SVar:Rarity:Rare
+End
