@@ -19620,6 +19620,77 @@ public class CardFactory_Creatures {
         	intoLibrary.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Singing Tree")) {
+            final SpellAbility ability = new Ability_Activated(card, "0") {
+				private static final long serialVersionUID = 3750045284339229395L;
+
+				@Override
+                public boolean canPlayAI() {
+                    Card c = getCreature();
+                    if(c == null) return false;
+                    else {
+                        setTargetCard(c);
+                        return true;
+                    }
+                }//canPlayAI()
+                
+                //may return null
+                public Card getCreature() {
+                    CardList attacking = AllZoneUtil.getCreaturesInPlay();
+                    attacking = attacking.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isAttacking() && c != card && CardFactoryUtil.canTarget(card, c);
+                        }
+                    });
+                    if(attacking.isEmpty()) return null;
+                    
+                    Card big = CardFactoryUtil.AI_getBestCreature(attacking);
+                    return big;
+                }
+                
+                @Override
+                public boolean canPlay() {
+                	return Phase.canPlayDuringCombat();
+                }
+                
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                        final Card[] creature = new Card[1];
+                        
+                        creature[0] = getTargetCard();
+                        final int[] originalAttack = {creature[0].getBaseAttack()};
+                        creature[0].setBaseAttack(0);
+                        
+                        final Command EOT = new Command() {
+							private static final long serialVersionUID = -7188543458319933986L;
+
+							public void execute() {
+                        		if(AllZone.GameAction.isCardInPlay(creature[0])) {
+                        			creature[0].setBaseAttack(originalAttack[0]);
+                        		}
+                        	}
+                        };
+                        AllZone.EndOfTurn.addUntil(EOT);
+                    }//is card in play?
+                }//resolve()
+            };//SpellAbility
+            
+            Target target = new Target("TgtV");
+            target.setVTSelection("Select target attacking creature.");
+            final String Tgts[] = {"Creature.attacking"};
+            target.setValidTgts(Tgts);
+            
+            ability.setTarget(target);
+           
+            final Ability_Cost cost = new Ability_Cost("T", card.getName(), true);
+            ability.setPayCosts(cost);
+            
+            card.addSpellAbility(ability); 
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

@@ -1,0 +1,8 @@
+Name:Singing Tree
+ManaCost:3 G
+Types:Creature Plant
+Text:tap: Target attacking creature's power becomes 0 until end of turn.
+PT:0/3
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/singing_tree.jpg
+End
