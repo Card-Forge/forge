@@ -4914,6 +4914,7 @@ res/cardsfolder/ostracize.txt -text svneol=native#text/plain
 res/cardsfolder/otarian_juggernaut.txt -text svneol=native#text/plain
 res/cardsfolder/oubliette.txt -text svneol=native#text/plain
 res/cardsfolder/oust.txt -text svneol=native#text/plain
+res/cardsfolder/outbreak.txt svneol=native#text/plain
 res/cardsfolder/outrage_shaman.txt svneol=native#text/plain
 res/cardsfolder/outrider_of_jhess.txt -text svneol=native#text/plain
 res/cardsfolder/overbeing_of_myth.txt -text svneol=native#text/plain
