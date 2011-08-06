@@ -1,3 +1,18 @@
+Tribal Forcemage
+1 G
+Creature Elf Wizard
+When Tribal Forcemage is turned face up, creatures of the creature type of your choice get +2/+2 and gain trample until end of turn.
+1/1
+Morph:1 G
+
+Nirkana Cutthroat
+2 B
+Creature Vampire Warrior
+LEVEL 1-2 4/3 Deathtouch LEVEL 3+ 5/4 First strike, Deathtouch
+3/2
+Level up:2 B
+maxLevel:3
+
 Dust Corona
 R
 Enchantment Aura

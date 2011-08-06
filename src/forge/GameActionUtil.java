@@ -10229,6 +10229,47 @@ public class GameActionUtil {
 		}
 	};
 	
+	/*
+	 * Level up 2 B
+	 * LEVEL 1-2 4/3 Deathtouch
+	 * LEVEL 3+ 5/4 First strike, deathtouch
+	 */
+	public static Command Nirkana_Cutthroat  = new Command() {
+		private static final long serialVersionUID = 3804539422363462063L;
+
+		public void execute()
+		{
+			/* CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Nirkana Cutthroat"); */
+			CardList list = AllZoneUtil.getCardsInPlay("Nirkana Cutthroat");
+
+			for (Card c:list)
+			{
+				int lcs = c.getCounters(Counters.LEVEL);
+				if ( lcs < 1)
+				{
+					c.setBaseAttack(3);
+					c.setBaseDefense(2);
+				}
+				else if ( lcs >=1 && lcs < 3 )  //levels 1-2
+				{
+					c.setBaseAttack(4);
+					c.setBaseDefense(3);
+					c.addNonStackingIntrinsicKeyword("Deathtouch");
+				}
+				else
+				{
+					c.setBaseAttack(5);
+					c.setBaseDefense(4);
+					c.addNonStackingIntrinsicKeyword("Deathtouch");
+					c.addNonStackingIntrinsicKeyword("First strike");
+				}
+			}
+		}
+	};
+	
 	public static Command Student_of_Warfare 		  = new Command() {
 		private static final long serialVersionUID = 2627513737024865169L;
 
@@ -15715,6 +15756,7 @@ public class GameActionUtil {
 		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
 		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
 		commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
+		commands.put("Nirkana_Cutthroat", Nirkana_Cutthroat);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Champions_Drake", Champions_Drake);
 		
