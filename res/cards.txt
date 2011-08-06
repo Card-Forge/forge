@@ -1,3 +1,30 @@
+Crumble
+G
+Instant
+Destroy target artifact. It can't be regenerated. That artifact's controller gains life equal to its converted mana cost.
+spDestroyTgt:Artifact:NoRegen:Drawback$GainLifeTgtCtrlr/dX
+SVar:dX:Count$TgtCardManaCost
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crumble.jpg
+
+Devour in Shadow
+B B
+Instant
+Destroy target creature. It can't be regenerated. You lose life equal to that creature's toughness.
+spDestroyTgt:Creature:NoRegen:Drawback$YouLoseLife/dX
+SVar:dX:Count$TgtCardToughness
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card50210.jpg
+
+Divine Offering
+1 W
+Instant
+Destroy target artifact. You gain life equal to its converted mana cost.
+spDestroyTgt:Artifact:Drawback$YouGainLife/dX
+SVar:dX:Count$TgtCardManaCost
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_offering.jpg
+
 Dark Offering
 4 B B
 Sorcery
@@ -6800,13 +6827,6 @@ Target opponent sacrifices a creature, discards three cards, then loses 5 life. 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_ultimatum.jpg
 
-Crumble
-G
-Instant
-Destroy target artifact. It can't be regenerated. That artifact's controller gains life equal to its converted mana cost.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crumble.jpg
-
 Crumbling Necropolis
 no cost
 Land
@@ -7838,13 +7858,6 @@ Bushido 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devoted_retainer.jpg
 
-Devour in Shadow
-B B
-Instant
-Destroy target creature. It can't be regenerated. You lose life equal to that creature's toughness.
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card50210.jpg
-
 Devouring Deep
 2 U
 Creature Fish
@@ -8128,13 +8141,6 @@ no text
 spDrawCards:2:Draw two cards.:Divination - Draw 2 cards.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divination.jpg
-
-Divine Offering
-1 W
-Instant
-Destroy target artifact. You gain life equal to its converted mana cost.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_offering.jpg
 
 Divine Transformation
 2 W W

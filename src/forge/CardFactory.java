@@ -5345,7 +5345,8 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
-
+        
+/* Converted to the spDestroyTgt keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Devour in Shadow")) {
             final SpellAbility spell = new Spell(card) {
@@ -5391,6 +5392,7 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -20040,13 +20042,13 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
 */
         
-        
+/* Converted to the spDestroyTgt keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Crumble") || cardName.equals("Divine Offering")) {
-        	/*
+        	*
         	 * Destroy target artifact. It can't be regenerated. That artifact's controller 
         	 * gains life equal to its converted mana cost.
-        	 */
+        	 *
         	SpellAbility spell = new Spell(card) {
         		private static final long serialVersionUID = 4752943254606319269L;
 
@@ -20098,6 +20100,7 @@ public class CardFactory implements NewConstants {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
         
         
         //*************** START *********** START **************************
