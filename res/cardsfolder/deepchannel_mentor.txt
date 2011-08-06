@@ -3,7 +3,7 @@ ManaCost:5 U
 Types:Creature Merfolk Rogue
 Text:no text
 PT:2/2
-K:StaticEffect:Play:Permanents you Control:Keyword/Unblockable:Type.Creature!Color.blue:Blue creatures you control are unblockable.
+K:stPumpAll:Creature.Blue+YouCtrl:0/0/Unblockable:No Condition:Blue creatures you control are unblockable.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deepchannel_mentor.jpg

@@ -3,8 +3,8 @@ ManaCost:1 BG BG BG
 Types:Creature Horror
 Text:At the beginning of your upkeep, you may put a 1/1 black and green Worm creature token onto the battlefield.
 PT:2/2
-K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.green!NotSelf:Other green creatures you control get +1/+1.
-K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.black!NotSelf:Other black creatures you control get +1/+1.
+K:stPumpAll:Creature.Green+Other+YouCtrl:1/1:No Condition:Other green creatures you control get +1/+1.
+K:stPumpAll:Creature.Black+Other+YouCtrl:1/1:No Condition:Other black creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/creakwood_liege.jpg

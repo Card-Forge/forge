@@ -1,8 +1,7 @@
 Name:Fires of Yavimaya
 ManaCost:1 R G
 Types:Enchantment
-Text:no text
-K:StaticEffect:Play:Permanents you Control:Keyword/Haste:Type.Creature:Creatures you control have haste.
+Text:no text0/0/Haste:No Condition:Creatures you control have haste.
 K:abPumpTgtC Sac<1/CARDNAME>:+2/+2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fires_of_yavimaya.jpg

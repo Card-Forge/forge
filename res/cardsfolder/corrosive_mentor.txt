@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Elemental Rogue
 Text:no text
 PT:1/3
-K:StaticEffect:Play:Permanents you Control:Keyword/Wither:Type.Creature!Color.black:Black creatures you control have wither. (They deal damage to creatures in the form of -1/-1 counters.)
+K:stPumpAll:Creature.Black+YouCtrl:0/0/Wither:No Condition:Black creatures you control have wither. (They deal damage to creatures in the form of -1/-1 counters.)
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrosive_mentor.jpg
