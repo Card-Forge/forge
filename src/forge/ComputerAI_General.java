@@ -13,18 +13,18 @@ public class ComputerAI_General implements Computer {
     }
     
     public void main1() {
-    	ComputerUtil.chooseLandsToPlay();
-    	if(AllZone.Stack.size() != 0)
-    	{
+    	if (!ComputerUtil.chooseLandsToPlay()){
+    		if (AllZone.Phase.getPriorityPlayer().isComputer())
+    			stackResponse();
     		return;
     	}
         playCards(Constant.Phase.Main1);
     }//main1()
     
     public void main2() {
-    	ComputerUtil.chooseLandsToPlay();	// in case we can play more lands now, or drew cards since first main phase
-    	if(AllZone.Stack.size() != 0)
-    	{
+    	if (!ComputerUtil.chooseLandsToPlay()){	// in case we can play more lands now, or drew cards since first main phase
+    		if (AllZone.Phase.getPriorityPlayer().isComputer())
+    			stackResponse();
     		return;
     	}
         playCards(Constant.Phase.Main2);

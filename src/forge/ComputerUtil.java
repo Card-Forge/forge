@@ -528,7 +528,7 @@ public class ComputerUtil
   }//getAvailableMana()
 
   //plays a land if one is available
-  static public void chooseLandsToPlay()
+  static public boolean chooseLandsToPlay()
   {
 	  Player computer = AllZone.ComputerPlayer;
 		ArrayList<Card> landList = PlayerZoneUtil.getCardType(AllZone.Computer_Hand, "Land");
@@ -553,7 +553,10 @@ public class ComputerUtil
 		    computer.playLand(land);
 		    
 		    AllZone.GameAction.checkStateEffects();
+		    if (AllZone.Stack.size() != 0)
+		    	return false;
 		}
+		return true;
   }
   
   static public Card getCardPreference(Card activate, String pref, CardList typeList){
