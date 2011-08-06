@@ -1,3 +1,86 @@
+Arcane Sanctum
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add W
+tap: add U
+tap: add B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_sanctum.jpg
+
+Badlands
+no cost
+Land Mountain Swamp
+no text
+tap: add B
+tap: add R
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/badlands.jpg
+
+Breeding Pool
+no cost
+Land Forest Island
+As Breeding Pool into play, you may pay 2 life. If you don't, Breeding Pool comes into play tapped instead.
+tap: add U
+tap: add G
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97088.jpg
+
+Coastal Tower
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add W
+tap: add U
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_tower.jpg
+
+Crumbling Necropolis
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add U
+tap: add B
+tap: add R
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_necropolis.jpg
+
+Darksteel Ingot
+3
+Artifact
+no text
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+Indestructible
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_ingot.jpg
+
+Drake-Skull Cameo
+3
+Artifact
+no text
+tap: add U
+tap: add B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_skull_cameo.jpg
+
+Druid of the Anima
+1 G
+Creature Elf Druid
+no text
+1/1
+tap: add W
+tap: add R
+tap: add G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/druid_of_the_anima.jpg
+
 Abandoned Outpost
 no cost
 Land
@@ -1320,17 +1403,6 @@ R, Exile the top ten cards of your library: Arc-Slogger deals 2 damage to target
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arc_slogger.jpg
 
-Arcane Sanctum
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add B
-tap: add U
-tap: add W
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arcane_sanctum.jpg
-
 Arcanis the Omnipotent
 3 U U U
 Legendary Creature Wizard
@@ -2232,15 +2304,6 @@ Black creatures get +1/+1
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bad_moon.jpg
-
-Badlands
-no cost
-Land Mountain Swamp
-no text
-tap: add R
-tap: add B
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/badlands.jpg
 
 Bala Ged Scorpion
 3 B
@@ -4033,15 +4096,6 @@ WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MakeToken-Thrull-B-0-1-None
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breeding_pit.jpg
 
-Breeding Pool
-no cost
-Land Forest Island
-As Breeding Pool into play, you may pay 2 life. If you don't, Breeding Pool comes into play tapped instead.
-tap: add G
-tap: add U
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97088.jpg
-
 Briarberry Cohort
 1 U
 Creature Faerie Soldier
@@ -5699,16 +5753,6 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24574.jpg
 
-Coastal Tower
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add U
-tap: add W
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_tower.jpg
-
 Coat of Arms
 5
 Artifact
@@ -6416,17 +6460,6 @@ SVar:dX:Count$TgtCardManaCost
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crumble.jpg
 
-Crumbling Necropolis
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add R
-tap: add B
-tap: add U
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_necropolis.jpg
-
 Crusade
 W W
 Enchantment
@@ -6873,19 +6906,6 @@ Flying
 Indestructible
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46136.jpg
-
-Darksteel Ingot
-3
-Artifact
-no text
-tap: add B
-tap: add G
-tap: add R
-tap: add U
-tap: add W
-Indestructible
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_ingot.jpg
 
 Darkwatch Elves
 2 G
@@ -8121,15 +8141,6 @@ abPump U:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_hatchling.jpg
 
-Drake-Skull Cameo
-3
-Artifact
-no text
-tap: add B
-tap: add U
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_skull_cameo.jpg
-
 Dread Drone
 4 B
 Creature Eldrazi Drone
@@ -8402,17 +8413,6 @@ no text
 RegenerateMe:B
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83061.jpg
-
-Druid of the Anima
-1 G
-Creature Elf Druid
-no text
-1/1
-tap: add R
-tap: add G
-tap: add W
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/druid_of_the_anima.jpg
 
 Dryad Arbor
 no cost
