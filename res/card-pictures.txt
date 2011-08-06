@@ -18,6 +18,11 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+honden_of_cleansing_fire.jpg http://www.wizards.com/global/images/magic/general/honden_of_cleansing_fire.jpg
+honden_of_infinite_rage.jpg http://www.wizards.com/global/images/magic/general/honden_of_infinite_rage.jpg
+honden_of_lifes_web.jpg http://www.wizards.com/global/images/magic/general/honden_of_lifes_web.jpg
+honden_of_seeing_winds.jpg http://www.wizards.com/global/images/magic/general/honden_of_seeing_winds.jpg
+honden_of_nights_reach.jpg http://www.wizards.com/global/images/magic/general/honden_of_nights_reach.jpg
 thoughtcutter_agent.jpg		http://magic.tcgplayer.com/db/cards/16857.jpg
 singe_mind_ogre.jpg			http://magic.tcgplayer.com/db/cards/17138.jpg
 chainer_dementia_master.jpg	http://www.wizards.com/global/images/magic/general/chainer_dementia_master.jpg

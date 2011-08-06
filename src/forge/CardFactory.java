@@ -3119,7 +3119,7 @@ public class CardFactory implements NewConstants {
     			{
 	    			input[0] =  (String)JOptionPane.showInputDialog(null, "Which creature type?", "Pick type", JOptionPane.QUESTION_MESSAGE);
 	    			
-	    			if (input[0].equals("Legendary") || input[0].equals("Artifact") || input[0].equals("Enchantment") || input[0].equals("Creature"))
+	    			if (input[0].equals("Legendary") || input[0].equals("Artifact") || input[0].equals("Enchantment") || input[0].equals("Shrine") || input[0].equals("Creature"))
 	    				input[0] = "";
 	    			//TODO: some more input validation, case-sensitivity, etc.
 	    			

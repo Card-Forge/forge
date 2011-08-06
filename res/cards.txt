@@ -1,3 +1,28 @@
+Honden of Infinite Rage
+2 R
+Legendary Enchantment Shrine
+At the beginning of your upkeep, Honden of Infinite Rage deals damage to target creature or player equal to the number of Shrines you control.
+
+Honden of Night's Reach
+3 B
+Legendary Enchantment Shrine
+At the beginning of your upkeep, target opponent discards a card for each Shrine you control.
+
+Honden of Cleansing Fire
+3 W
+Legendary Enchantment Shrine
+At the beginning of your upkeep, you gain 2 life for each Shrine you control.
+
+Honden of Life's Web
+4 G
+Legendary Enchantment Shrine
+At the beginning of your upkeep, put a 1/1 colorless Spirit creature token into play for each Shrine you control.
+
+Honden of Seeing Winds
+4 U
+Legendary Enchantment Shrine
+At the beginning of your upkeep, draw a card for each Shrine you control.
+
 Singe-Mind Ogre
 2 B R
 Creature Ogre Mutant

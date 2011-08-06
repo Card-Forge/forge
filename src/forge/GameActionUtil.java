@@ -11,6 +11,11 @@ public class GameActionUtil
 		//upkeep_Echo();
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
 		upkeep_Phyrexian_Arena();
+		upkeep_Honden_of_Cleansing_Fire();
+		upkeep_Honden_of_Seeing_Winds();
+		upkeep_Honden_of_Lifes_Web();
+		upkeep_Honden_of_Nights_Reach();
+		upkeep_Honden_of_Infinite_Rage();
 		upkeep_Land_Tax();
 		upkeep_Greener_Pastures();
 		upkeep_Squee();
@@ -6041,6 +6046,238 @@ public class GameActionUtil
 			AllZone.GameAction.getPlayerLife(player).subtractLife(1);
 		}
 	}// upkeep_Phyrexian_Arena
+	
+	private static void upkeep_Honden_of_Seeing_Winds()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Honden of Seeing Winds");
+
+		for (int i = 0; i < list.size(); i++) {
+//			final Ability ability2 = new Ability(list.get(i), "0")
+	//	    {   
+		//	public void resolve() {
+			PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
+			CardList hondlist = new CardList();
+			hondlist.addAll(Play.getCards());
+			hondlist = hondlist.getType("Shrine");
+		     for (int j = 0; j < hondlist.size() ; j++) 
+		    {        
+		    	 AllZone.GameAction.drawCard(player);
+		    }//}
+		  //  };
+		//    ability2.setStackDescription(list.get(i)+" - " + list.get(i).getController() + " draws a card for each Shrine he controls.");
+	//	    AllZone.Stack.add(ability2);	
+		}
+						
+	}// upkeep_Honden_of_Seeing_Winds
+	
+	private static void upkeep_Honden_of_Cleansing_Fire()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Honden of Cleansing Fire");
+
+		for (int i = 0; i < list.size(); i++) {
+			final Ability ability = new Ability(list.get(i), "0")
+		    {   
+			public void resolve() {
+			PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
+			CardList hondlist = new CardList();
+			hondlist.addAll(Play.getCards());
+			hondlist = hondlist.getType("Shrine");
+		     for (int j = 0; j < hondlist.size() ; j++) 
+		    {        
+		    	AllZone.GameAction.getPlayerLife(player).addLife(2);
+		    }}
+		    };
+		    ability.setStackDescription(list.get(i)+" - " + list.get(i).getController() + " gains 2 life for each Shrine he controls.");
+		    AllZone.Stack.add(ability);	
+		}
+						
+	}// upkeep_Honden_of_Cleansing_Fire
+	
+	private static void upkeep_Honden_of_Nights_Reach()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		final String opponent = AllZone.GameAction.getOpponent(player);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Honden of Night's Reach");
+
+		for (int i = 0; i < list.size(); i++) {
+			final Ability ability = new Ability(list.get(i), "0")
+		    {   
+			public void resolve() {
+			PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
+			CardList hondlist = new CardList();
+			hondlist.addAll(Play.getCards());
+			hondlist = hondlist.getType("Shrine");
+		    
+		    for (int j = 0; j < hondlist.size() ; j++) 
+		    {        
+		    	  if(opponent.equals(Constant.Player.Human))
+		            AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+		          else
+		          {
+		        	  AllZone.GameAction.discardRandom(Constant.Player.Computer);
+	    	          }
+		     }
+			}
+		    };
+		    ability.setStackDescription(list.get(i)+" - " + AllZone.GameAction.getOpponent(list.get(i).getController()) + " discards a card for each Shrine "+ list.get(i).getController() + " controls.");
+		    AllZone.Stack.add(ability);
+		    }
+		}
+						
+	// upkeep_Honden_of_Nights_Reach()
+	
+	private static void upkeep_Honden_of_Infinite_Rage()
+	{
+		final String controller = AllZone.Phase.getActivePlayer();
+		//final String opponent = AllZone.GameAction.getOpponent(player);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Honden of Infinite Rage");
+		PlayerZone Play = AllZone.getZone(Constant.Zone.Play, controller);
+		CardList hondlist = new CardList();
+		hondlist.addAll(Play.getCards());
+		hondlist = hondlist.getType("Shrine");
+		for (int i = 0; i < list.size(); i++) {
+	
+			final Card card = list.get(i);
+			final Ability ability = new Ability(list.get(i), "0")
+		    {   
+				
+		
+	    	     
+		        public void resolve()
+		        {
+		        PlayerZone Play = AllZone.getZone(Constant.Zone.Play, controller);
+		    	CardList hondlist = new CardList();
+		    	hondlist.addAll(Play.getCards());
+		    	hondlist = hondlist.getType("Shrine");
+		          if(controller.equals("Human"))
+		          {
+		        	  String opp = AllZone.GameAction.getOpponent(controller);
+		        	  PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play, opp);
+		        	  
+		        	  String[] choices = { "Yes", "No, target a creature instead" };
+		        	  
+		        	  Object q = AllZone.Display.getChoiceOptional("Select computer as target?", choices);
+		        	  if (q.equals("Yes"))
+		        		  AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(hondlist.size());
+		        	  else
+		        	  {
+			        	  CardList cards = new CardList(oppPlay.getCards());
+			        	  CardList oppCreatures = new CardList();
+			        	  for (int i=0;i<cards.size();i++)
+			        	  {
+			        		  if (cards.get(i).isPlaneswalker() || cards.get(i).isCreature())
+			        		  {
+			        			  oppCreatures.add(cards.get(i));
+			        		  }
+			        	  }
+			        	  
+			        	  if (oppCreatures.size() > 0)
+			        	  {
+			        		  
+			        		  Object o = AllZone.Display.getChoiceOptional("Pick target creature", oppCreatures.toArray());
+			        		  Card c = (Card)o;
+			        		  c.addDamage(hondlist.size());
+			        	  }
+		        	  }
+		          }
+		          
+		          else 
+		          {   
+		        	  Card targetc = null;
+		        	  CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
+		        	  if(AllZone.Human_Life.getLife() > hondlist.size()*2) {
+		        	  for(int i = 0; i < flying.size(); i++){
+	    	        	  if(flying.get(i).getNetDefense() <= hondlist.size()){targetc = flying.get(i);}
+	    	        	  
+	    	        	  }}
+			          if(targetc != null)
+			          {
+			            if(AllZone.GameAction.isCardInPlay(targetc))
+			            	targetc.addDamage(hondlist.size());
+			          }
+			          else
+			            AllZone.GameAction.getPlayerLife(Constant.Player.Human).subtractLife(hondlist.size());
+		          }
+		        }//resolve()
+		    };//SpellAbility
+		    
+		    ability.setStackDescription(list.get(i) + " - Deals " + hondlist.size() + " damage to target creature or player");
+		    AllZone.Stack.add(ability);	
+		
+		    
+		}
+						
+	}// upkeep_Honden_of_Infinite_Rage
+
+	
+	private static void upkeep_Honden_of_Lifes_Web()
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Honden of Life's Web");
+
+		for (int i = 0; i < list.size(); i++) {
+			final Ability ability = new Ability(list.get(i), "0")
+		    {   
+			public void resolve() {
+			PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
+			CardList hondlist = new CardList();
+			hondlist.addAll(Play.getCards());
+			hondlist = hondlist.getType("Shrine");
+		    for (int j = 0; j < hondlist.size() ; j++) 
+		    {        
+		    	Card crd = new Card();
+
+				crd.setOwner(player);
+				crd.setController(player);
+				
+				crd.setName("Spirit");
+				crd.setImageName("C 1 1 Spirit");
+				crd.setManaCost("");
+				crd.setToken(true);
+
+				crd.addType("Creature");
+				crd.addType("Spirit");
+
+				crd.setBaseAttack(1);
+				crd.setBaseDefense(1);
+
+				PlayerZone addplay = AllZone.getZone(Constant.Zone.Play, player);
+				addplay.add(crd); 
+		    }
+			}
+		    };
+		    ability.setStackDescription(list.get(i)+" - " + list.get(i).getController() + " puts a 1/1 colorless Spirit creature token into play for each Shrine he controls.");
+		    AllZone.Stack.add(ability);
+		}
+						
+	}// upkeep_Honden_of_Lifes_Web
 
 	private static void upkeep_Seizan_Perverter_of_Truth()
 	{
