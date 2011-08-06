@@ -234,7 +234,7 @@ public class AbilityFactory_DealDamage {
             }
         } else {
             tgtP = saMe.getTargetPlayer();
-            AllZone.GameAction.addDamage(tgtP, AF.getHostCard(), damage);
+            tgtP.addDamage(damage, AF.getHostCard());
             
             if(AF.hasSubAbility()) 
             	CardFactoryUtil.doDrawBack(AF.getMapParams().get("SubAbility"), damage,

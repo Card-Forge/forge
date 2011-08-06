@@ -147,7 +147,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 	SpellAbility ability = new Ability(source, "") {
                 		@Override
                 		public void resolve() {
-                			AllZone.GameAction.addDamage(ankhLand.getController(), source, 2);
+                			ankhLand.getController().addDamage(2, source);
                 		}
                 	};
                 	ability.setStackDescription(source+" - deals 2 damage to "+ankhLand.getController());
