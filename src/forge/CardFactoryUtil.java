@@ -1791,12 +1791,7 @@ public class CardFactoryUtil {
 
                 // Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
                 CardList equipMagnetList = list;
-                equipMagnetList = equipMagnetList.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
-                        return c.getName().equals("Loxodon Punisher") 
-                                || c.getName().equals("Goblin Gaveleer");
-                    }
-                });
+                equipMagnetList = equipMagnetList.getEquipMagnets();
                 
                 if (!equipMagnetList.isEmpty() && Tough >= 0) {
                     return equipMagnetList;
@@ -1926,11 +1921,8 @@ public class CardFactoryUtil {
                 
                 if (Tough >= -1) {    // we want Rabid Wombat or a Uril, the Miststalker to gain at least +1 toughness
                     CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
-                    auraMagnetList = auraMagnetList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                	        return c.isCreature() && (c.getName().equals("Rabid Wombat") || c.getName().equals("Uril, the Miststalker"));
-                	    }
-                    });
+                    auraMagnetList = auraMagnetList.getEnchantMagnets();
+                    
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
                         auraMagnetList.shuffle();
                         for (int i = 0; i < auraMagnetList.size(); i++) {

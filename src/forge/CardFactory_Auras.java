@@ -1264,11 +1264,8 @@ class CardFactory_Auras {
                     //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                     
                     CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
-                    auraMagnetList = auraMagnetList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                    	    return c.isCreature() && (c.getName().equals("Rabid Wombat") || c.getName().equals("Uril, the Miststalker"));
-                    	}
-                    });
+                    auraMagnetList = auraMagnetList.getEnchantMagnets();
+                    
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
                         auraMagnetList.shuffle();
                         for (int i = 0; i < auraMagnetList.size(); i++) {
@@ -1374,11 +1371,8 @@ class CardFactory_Auras {
                     //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                     
                     CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
-                    auraMagnetList = auraMagnetList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                    	    return c.isCreature() && (c.getName().equals("Rabid Wombat") || c.getName().equals("Uril, the Miststalker"));
-                    	}
-                    });
+                    auraMagnetList = auraMagnetList.getEnchantMagnets();
+                    
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
                         auraMagnetList.shuffle();
                         for (int i = 0; i < auraMagnetList.size(); i++) {
@@ -1483,11 +1477,8 @@ class CardFactory_Auras {
                     //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                     
                     CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
-                    auraMagnetList = auraMagnetList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                    	    return c.isCreature() && (c.getName().equals("Rabid Wombat") || c.getName().equals("Uril, the Miststalker"));
-                    	}
-                    });
+                    auraMagnetList = auraMagnetList.getEnchantMagnets();
+                    
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
                         auraMagnetList.shuffle();
                         for (int i = 0; i < auraMagnetList.size(); i++) {
@@ -1746,11 +1737,8 @@ class CardFactory_Auras {
                     //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                     
                     CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
-                    auraMagnetList = auraMagnetList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                    	    return c.isCreature() && (c.getName().equals("Rabid Wombat") || c.getName().equals("Uril, the Miststalker"));
-                    	}
-                    });
+                    auraMagnetList = auraMagnetList.getEnchantMagnets();
+                    
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
                         auraMagnetList.shuffle();
                         for (int i = 0; i < auraMagnetList.size(); i++) {

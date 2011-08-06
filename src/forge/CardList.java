@@ -383,4 +383,22 @@ public class CardList implements Iterable<Card> {
         return retList;
     }//getValidCards
     */
+    
+    public CardList getEquipMagnets() {
+    	return this.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+            	return (c.isCreature() && (c.getSVar("EquipMe").equals("Multiple") 
+        	    		|| (c.getSVar("EquipMe").equals("Once") && !c.isEnchanted())));
+            }
+        });
+    }
+    
+    public CardList getEnchantMagnets() {
+    	return this.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+            	return (c.isCreature() && (c.getSVar("EnchantMe").equals("Multiple") 
+        	    		|| (c.getSVar("EnchantMe").equals("Once") && !c.isEnchanted())));
+            }
+        });
+    }
 }

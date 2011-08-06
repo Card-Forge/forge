@@ -4,6 +4,7 @@ Types:Creature Wombat
 Text:Rabid Wombat gets +2/+2 for each Aura attached to it.
 PT:0/1
 K:Vigilance
+SVar:EnchantMe:Multiple
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rabid_wombat.jpg
 End

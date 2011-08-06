@@ -16,6 +16,7 @@ class CardFactory_Equipment {
         
         return -1;
     }
+
     
     public static Card getCard(final Card card, String cardName, String owner) {
     	
@@ -71,12 +72,7 @@ class CardFactory_Equipment {
                     
                     // Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
                     CardList equipMagnetList = list;
-                    equipMagnetList = equipMagnetList.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return c.getName().equals("Loxodon Punisher") 
-                    				|| c.getName().equals("Goblin Gaveleer");
-                    	}
-                    });
+                    equipMagnetList = equipMagnetList.getEquipMagnets();
                     
                     if (equipMagnetList.size() != 0) {
                         return equipMagnetList;
@@ -277,12 +273,7 @@ class CardFactory_Equipment {
                     
                     // Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
                     CardList equipMagnetList = list;
-                    equipMagnetList = equipMagnetList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getName().equals("Loxodon Punisher") 
-                                    || c.getName().equals("Goblin Gaveleer");
-                        }
-                    });
+                    equipMagnetList = equipMagnetList.getEquipMagnets();
                     
                     if (equipMagnetList.size() != 0) {
                         return equipMagnetList;
@@ -358,12 +349,7 @@ class CardFactory_Equipment {
         			
         			// Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
                     CardList equipMagnetList = list;
-                    equipMagnetList = equipMagnetList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getName().equals("Loxodon Punisher") 
-                                    || c.getName().equals("Goblin Gaveleer");
-                        }
-                    });
+                    equipMagnetList = equipMagnetList.getEquipMagnets();
 
         			if (equipMagnetList.size() != 0) {
         				return equipMagnetList;
@@ -552,12 +538,7 @@ class CardFactory_Equipment {
                     
                     // Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
                     CardList equipMagnetList = list;
-                    equipMagnetList = equipMagnetList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getName().equals("Loxodon Punisher") 
-                                    || c.getName().equals("Goblin Gaveleer");
-                        }
-                    });
+                    equipMagnetList = equipMagnetList.getEquipMagnets();
                     
                     if (equipMagnetList.size() != 0) {
                         return equipMagnetList;
@@ -659,12 +640,7 @@ class CardFactory_Equipment {
                     
                     // Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
                     CardList equipMagnetList = list;
-                    equipMagnetList = equipMagnetList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getName().equals("Loxodon Punisher") 
-                                    || c.getName().equals("Goblin Gaveleer");
-                        }
-                    });
+                    equipMagnetList = equipMagnetList.getEquipMagnets();
                     
                     if (equipMagnetList.size() != 0) {
                         return equipMagnetList;
@@ -766,12 +742,7 @@ class CardFactory_Equipment {
                     
                     // Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
                     CardList equipMagnetList = list;
-                    equipMagnetList = equipMagnetList.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getName().equals("Loxodon Punisher") 
-                                    || c.getName().equals("Goblin Gaveleer");
-                        }
-                    });
+                    equipMagnetList = equipMagnetList.getEquipMagnets();
                     
                     if (equipMagnetList.size() != 0) {
                         return equipMagnetList;

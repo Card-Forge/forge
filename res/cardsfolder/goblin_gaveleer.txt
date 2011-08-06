@@ -4,6 +4,7 @@ Types:Creature Goblin Warrior
 Text:Goblin Gaveleer gets +2/+0 for each Equipment attached to it.
 PT:1/1
 K:Trample
+SVar:EquipMe:Multiple
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_gaveleer.jpg
 End

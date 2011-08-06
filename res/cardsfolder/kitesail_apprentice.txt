@@ -4,6 +4,7 @@ Types:Creature Kor Soldier
 Text:no text
 PT:1/1
 K:stPumpSelf:Permanent.equipped:1/1/Flying:No Condition:As long as Kitesail Apprentice is equipped, it gets +1/+1 and has flying.
+SVar:EquipMe:Once
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitesail_apprentice.jpg
 End

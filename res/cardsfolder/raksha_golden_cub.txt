@@ -5,6 +5,7 @@ Text:no text
 PT:3/4
 K:Vigilance
 K:stPumpAll:Creature.Cat+YouCtrl:2/2/Double Strike:isEquipped:As long as Raksha Golden Cub is equipped, Cat creatures you control get +2/+2 and have double strike.
+SVar:EquipMe:Once
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raksha_golden_cub.jpg
 End
