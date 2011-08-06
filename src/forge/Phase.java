@@ -143,10 +143,7 @@ public class Phase extends MyObservable
         PlayerCreatureSpellCount = 0;   
         ComputerSpellCount = 0;
         ComputerCreatureSpellCount = 0;
-        if (playerTurn.isHuman())
-        	AllZone.GameInfo.setHumanPlayedLands(0);
-        else
-            AllZone.GameInfo.setComputerPlayedLands(0);
+        playerTurn.setNumLandsPlayed(0);
     }
 
 	public void handleBeginPhase(){

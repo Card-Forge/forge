@@ -155,8 +155,8 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
 	                sa[1].setActivatingPlayer(AllZone.HumanPlayer);
 	                if(sa[1].canPlay() && !c.isUnCastable()) AllZone.GameAction.playSpellAbility(sa[1]);
             	}
-            	else if (CardFactoryUtil.canHumanPlayLand())
-            		GameAction.playLand(c, AllZone.Human_Graveyard);
+            	else	// PlayLand checks if the land can be played
+            		AllZone.HumanPlayer.playLand(c);
             }
         };
         COMPUTER_GRAVEYARD_ACTION = new ZoneAction(AllZone.Computer_Graveyard, COMPUTER_GRAVEYARD);

@@ -26,6 +26,9 @@ public abstract class Player extends MyObservable{
 	protected int nTurns = 0;
 	protected boolean skipNextUntap = false;
 	
+	protected int maxLandsToPlay = 1;
+	protected int numLandsPlayed = 0;
+	
 	protected Card lastDrawnCard;
 	protected int numDrawnThisTurn = 0;
 	protected CardList slowtripList = new CardList();
@@ -49,6 +52,8 @@ public abstract class Player extends MyObservable{
 		altLose = false;
 		winCondition = "";
 		loseCondition = "";
+		maxLandsToPlay = 1;
+		numLandsPlayed = 0;
 		
 		handSizeOperations = new ArrayList<HandSizeOp>();
 	}
@@ -66,6 +71,8 @@ public abstract class Player extends MyObservable{
 		altLose = false;
 		winCondition = "";
 		loseCondition = "";
+		maxLandsToPlay = 1;
+		numLandsPlayed = 0;
 		this.updateObservers();
 	}
 	
@@ -745,6 +752,19 @@ public abstract class Player extends MyObservable{
     }
     ///////////////////////////////
     
+    public void playLand(Card land){
+    	if (canPlayLand()){
+    		AllZone.GameAction.moveToPlay(land);
+			CardFactoryUtil.playLandEffects(land);
+			numLandsPlayed++;
+    	}
+    }
+    
+    public boolean canPlayLand(){
+    	return Phase.canCastSorcery(this) && (numLandsPlayed < maxLandsToPlay || 
+    			AllZoneUtil.getPlayerCardsInPlay(this, "Fastbond").size() > 0);
+    }
+    
     ///////////////////////////////
     ////
     ////	properties about the player and his/her cards/game status
@@ -1001,6 +1021,26 @@ public abstract class Player extends MyObservable{
     
     public Card getChannelCard() {
     	return channelCard;
+    }
+    
+    public int getMaxLandsToPlay(){
+    	return maxLandsToPlay;
+    }
+    
+    public void setMaxLandsToPlay(int n){
+    	maxLandsToPlay = n;
+    }
+    
+	public void addMaxLandsToPlay(int n){
+		maxLandsToPlay += n;
+    }
+    
+    public int getNumLandsPlayed(){
+    	return numLandsPlayed;
+    }
+    
+    public void setNumLandsPlayed(int n){
+    	numLandsPlayed = n;
     }
     
     ////////////////////////////////

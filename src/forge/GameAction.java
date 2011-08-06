@@ -2223,9 +2223,6 @@ public class GameAction {
 //    AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
         Constant.Quest.fantasyQuest[0] = false;
     	
-        AllZone.GameInfo.setComputerMaxPlayNumberOfLands(1);
-        AllZone.GameInfo.setHumanMaxPlayNumberOfLands(1);
-        
         AllZone.GameInfo.setPreventCombatDamageThisTurn(false);
         AllZone.GameInfo.setHumanNumberOfTimesMulliganed(0);
         AllZone.GameInfo.setHumanMulliganedToZero(false);
@@ -2649,7 +2646,7 @@ public class GameAction {
         SpellAbility[] abilities = canPlaySpellAbility(c.getSpellAbility());
         ArrayList<String> choices = new ArrayList<String>();
         
-        if(c.isLand() && isCardInZone(c, AllZone.Human_Hand) && CardFactoryUtil.canHumanPlayLand()) 
+        if(c.isLand() && isCardInZone(c, AllZone.Human_Hand) && AllZone.HumanPlayer.canPlayLand()) 
         		choices.add("Play land");
         
         for(SpellAbility sa:abilities) {
@@ -2673,7 +2670,7 @@ public class GameAction {
         	return false;
         
         if(choice.equals("Play land")){
-        	playLand(c, AllZone.Human_Hand);
+        	AllZone.HumanPlayer.playLand(c);
         	return true;
         }
         
@@ -2684,18 +2681,7 @@ public class GameAction {
         }
 		return false;
     }
-    
-    static public void playLand(Card land, PlayerZone zone)
-    {
-    	if (CardFactoryUtil.canHumanPlayLand()){
-    		AllZone.GameAction.moveToPlay(land);
-	    	/*zone.remove(land);
-			AllZone.Human_Battlefield.add(land);*/
-			CardFactoryUtil.playLandEffects(land);
-			AllZone.GameInfo.incrementHumanPlayedLands();
-    	}
-    }
-    
+
     public void playCardNoCost(Card c) {
         //SpellAbility[] choices = (SpellAbility[]) c.getSpells().toArray();
         ArrayList<SpellAbility> choices = c.getBasicSpells();

@@ -991,14 +991,9 @@ public class CardFactory_Sorceries {
 	                if(target != null) c = AllZone.CardFactory.copyCard(target);
 	                
 					if(c != null) {
-						if(c.isLand() == true) {
-		   					if(CardFactoryUtil.canHumanPlayLand()) {
-		   					// todo(sol): would prefer this in GameAction.playLand somehow
-		    					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-				                play.add(c);
-				                card.unattachCard(c);
-				                CardFactoryUtil.playLandEffects(c);
-		  		                AllZone.GameInfo.incrementHumanPlayedLands();
+						if(c.isLand()) {
+		   					if(player.canPlayLand()) {
+		   						player.playLand(c);
 		   					} else {
 		   					JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
 		   					}
@@ -1234,21 +1229,19 @@ public class CardFactory_Sorceries {
 	                    	  }
                         }
                         
-                    } else//Computer chooses (It picks the highest converted mana cost card and 1 random card.)
-                    {
-                        Card biggest = null;
-                        biggest = Exiled.get(0);
+                    } 
+                    else{//Computer chooses (It picks the highest converted mana cost card and 1 random card.)
+                        Card biggest = Exiled.get(0);
                         
-                        for(int i = 0; i < Count; i++) {
-                            if(CardUtil.getConvertedManaCost(biggest.getManaCost()) >= CardUtil.getConvertedManaCost(biggest.getManaCost())) {
-                                biggest = cards.get(i);
-                            }
-                        }
+                        for(Card c : Exiled)
+                            if(CardUtil.getConvertedManaCost(biggest.getManaCost()) < CardUtil.getConvertedManaCost(c.getManaCost()))
+                                biggest = c;
+
                         Pile1.add(biggest);
                         cards.remove(biggest);
-                        if(cards.size() > 0) { 
-                        Card Random = CardUtil.getRandom(cards.toArray());
-                        Pile1.add(Random);
+                        if(cards.size() > 2) { 
+	                        Card Random = CardUtil.getRandom(cards.toArray());
+	                        Pile1.add(Random);
                         }
                         for(int i = 0; i < Count; i++) if(!Pile1.contains(Exiled.get(i))) Pile2.add(Exiled.get(i));
                         StringBuilder sb = new StringBuilder();
@@ -1261,52 +1254,32 @@ public class CardFactory_Sorceries {
 			        	Object q = JOptionPane.showOptionDialog(null, sb, "Brilliant Ultimatum", 
 			        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 			        			null, possibleValues, possibleValues[0]);
-			        	boolean stop2 = false;
-	                      if(q.equals(0)) {	  
-	                    	  int Spells = Pile1.size();
-	                    	  for( int i = 0; i < Spells; i++) {
-	                    		  if(stop2 == false) {
-	                    			  Object check = GuiUtils.getChoiceOptional("Select spells to play in reverse order: ", Pile1.toArray());
-	                    			  if(check != null) {
-	                    				  if(((Card) check).isLand() == true) {
-	                    					  if(CardFactoryUtil.canHumanPlayLand()) {
-	                    						  PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-	                    						  GameAction.playLand((Card)check, play);
-	                    					  } else {
-	                    						  JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
-	                    					  }
-	                    				  } else if(((Card) check).isPermanent() == true && ((Card) check).isAura() == false) {	
-	                    					  AllZone.Stack.add(((Card) check).getSpellAbility()[0]);
-	                    				  } else {
-	                    					  AllZone.GameAction.playCardNoCost(((Card) check));
-	                    				  }
-	                    				  Pile1.remove((Card) check);
-	                    			  } 
-	                    		  }  else stop2 = true;
-	                    	  }
-	                      } else {
-	                    	  int Spells = Pile2.size();
-	                    	  for( int i = 0; i < Spells; i++) {
-	                    		  if(stop2 == false) {
-	                    			  Object check = GuiUtils.getChoiceOptional("Select spells to play in reverse order: ", Pile2.toArray());
-	                    			  if(check != null) {
-	                    				  if(((Card) check).isLand() == true) {
-	                    					  if(CardFactoryUtil.canHumanPlayLand()) {
-	                    						  PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-	                    						  GameAction.playLand((Card)check, play);
-	                    					  } else {
-	                    						  JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
-	                    					  }
-	                    				  } else if(((Card) check).isPermanent() == true && ((Card) check).isAura() == false) {	
-	                    					  AllZone.Stack.add(((Card) check).getSpellAbility()[0]);
-	                    				  } else {
-	                    					  AllZone.GameAction.playCardNoCost(((Card) check));
-	                    				  }
-	                    				  Pile2.remove((Card) check);
-	                    			  } 
-	                    		  }  else stop2 = true;
-	                    	  }
-	                      }
+
+			        	CardList chosen;	
+			        	if (q.equals(0))
+			        		chosen = Pile1;
+			        	else
+			        		chosen = Pile2;
+			        	
+			        	int numChosen = chosen.size();
+                	  for( int i = 0; i < numChosen; i++) {
+            			  Object check = GuiUtils.getChoiceOptional("Select spells to play in reverse order: ", chosen.toArray());
+            			  if (check == null)
+            				  break;
+            			  
+        				  Card playing = (Card)check;
+        				  if(playing.isLand()) {
+        					  if(card.getController().canPlayLand()) {
+        						  card.getController().playLand(playing);
+        					  } else {
+        						  JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
+        					  }
+        				  } else {
+        					  AllZone.GameAction.playCardNoCost(playing);
+        				  }
+        				  chosen.remove(playing);
+                	  }
+
                     }
                    Pile1.clear();
                    Pile2.clear();
@@ -4732,23 +4705,17 @@ public class CardFactory_Sorceries {
    			
    			public void resolve() {
    				final Player thePlayer = card.getController();
-   				if (thePlayer.equals(AllZone.HumanPlayer))
-   					AllZone.GameInfo.addHumanMaxPlayNumberOfLands(3);
-   				else
-   					AllZone.GameInfo.addComputerMaxPlayNumberOfLands(3);
+   				thePlayer.addMaxLandsToPlay(3);
    				
    				Command untilEOT = new Command()
    				{
 					private static final long serialVersionUID = 1665720009691293263L;
 
 					public void execute(){
-   						if (thePlayer.equals(AllZone.HumanPlayer))
-   							AllZone.GameInfo.addHumanMaxPlayNumberOfLands(-3);
-   						else
-   							AllZone.GameInfo.addComputerMaxPlayNumberOfLands(-3);
+						thePlayer.addMaxLandsToPlay(-3);
  	            	}
    	          	};
-       	          AllZone.EndOfTurn.addUntil(untilEOT);
+       	        AllZone.EndOfTurn.addUntil(untilEOT);
        		}
        	};
        	card.clearSpellAbility();
@@ -4782,10 +4749,7 @@ public class CardFactory_Sorceries {
 
         		public void resolve() {
         			final Player thePlayer = card.getController();
-        			if (thePlayer.equals(AllZone.HumanPlayer))
-        				AllZone.GameInfo.addHumanMaxPlayNumberOfLands(1);
-        			else
-        				AllZone.GameInfo.addComputerMaxPlayNumberOfLands(1);
+        			thePlayer.addMaxLandsToPlay(1);
 
         			Command untilEOT = new Command()
         			{
@@ -4793,10 +4757,7 @@ public class CardFactory_Sorceries {
         				private static final long serialVersionUID = -2618916698575607634L;
 
         				public void execute(){
-        					if (thePlayer.equals(AllZone.HumanPlayer))
-        						AllZone.GameInfo.addHumanMaxPlayNumberOfLands(-1);
-        					else
-        						AllZone.GameInfo.addComputerMaxPlayNumberOfLands(-1);
+        					thePlayer.addMaxLandsToPlay(-1);
         				}
         			};
         			AllZone.EndOfTurn.addUntil(untilEOT);

@@ -33,7 +33,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         //cannot use addComesIntoPlayCommand - trigger might be set to false;
         // Keep track of max lands can play per turn
         int addMax = 0;
-        boolean isHuman = c.getController().equals(AllZone.HumanPlayer);
+
         boolean adjustLandPlays = false;
         boolean eachPlayer = false;
         
@@ -55,13 +55,11 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         
         if (adjustLandPlays){
         	if (eachPlayer){
-        		AllZone.GameInfo.addHumanMaxPlayNumberOfLands(addMax);
-        		AllZone.GameInfo.addComputerMaxPlayNumberOfLands(addMax);
+        		AllZone.HumanPlayer.addMaxLandsToPlay(addMax);
+        		AllZone.ComputerPlayer.addMaxLandsToPlay(addMax);
         	}
-        	else if (isHuman)
-        		AllZone.GameInfo.addHumanMaxPlayNumberOfLands(addMax);
         	else
-        		AllZone.GameInfo.addComputerMaxPlayNumberOfLands(addMax);
+        		c.getController().addMaxLandsToPlay(addMax);
         }
         
         if(trigger) {
@@ -398,7 +396,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         
         // Keep track of max lands can play per turn
         int addMax = 0;
-        boolean isHuman = c.getController().equals(AllZone.HumanPlayer);
+
         boolean adjustLandPlays = false;
         boolean eachPlayer = false;
         
@@ -419,13 +417,11 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         
         if (adjustLandPlays){
         	if (eachPlayer){
-        		AllZone.GameInfo.addHumanMaxPlayNumberOfLands(addMax);
-        		AllZone.GameInfo.addComputerMaxPlayNumberOfLands(addMax);
+        		AllZone.HumanPlayer.addMaxLandsToPlay(addMax);
+        		AllZone.ComputerPlayer.addMaxLandsToPlay(addMax);
         	}
-        	else if (isHuman)
-        		AllZone.GameInfo.addHumanMaxPlayNumberOfLands(addMax);
         	else
-        		AllZone.GameInfo.addComputerMaxPlayNumberOfLands(addMax);
+        		c.getController().addMaxLandsToPlay(addMax);
         }
         
 

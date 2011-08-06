@@ -7925,13 +7925,8 @@ public class CardFactory implements NewConstants {
         			Player player = card.getController();
         				if(freeCard != null) {
         					if(freeCard.isLand() == true) {
-        						if(CardFactoryUtil.canHumanPlayLand()) {
-        							PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-        							PlayerZone orig = AllZone.getZone(freeCard);
-            						orig.remove(freeCard);
-        							play.add(freeCard);
-        							CardFactoryUtil.playLandEffects(freeCard);
-        							AllZone.GameInfo.incrementHumanPlayedLands();
+        						if(card.getController().canPlayLand()) {
+        							card.getController().playLand(freeCard);
         						}
         						else {
         							JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);

@@ -4288,7 +4288,6 @@ public class CardFactoryUtil {
         return getRandomCard(new CardList(zone.getCards()));
     }
     
-    
     public static void revertManland(Card c, String[] removeTypes, String[] removeKeywords, String cost, long timeStamp) {
         c.setBaseAttack(0);
         c.setBaseDefense(0);
@@ -4327,32 +4326,13 @@ public class CardFactoryUtil {
         long timestamp = c.addColor(cost, c, false, true);
         return timestamp;
     }
-    
-    public static boolean canHumanPlayLand(){
-    	return canPlayerPlayLand(AllZone.HumanPlayer, AllZone.GameInfo.humanNumberLandPlaysLeft());
-    }
-    
-    public static boolean canComputerPlayLand(){
-    	return canPlayerPlayLand(AllZone.ComputerPlayer, AllZone.GameInfo.computerNumberLandPlaysLeft());
-    }
-    
-    public static boolean canPlayerPlayLand(Player player, int landPlaysLeft){
-    	// LandsToPlay Left or Fastbond in play, Computer's turn, Stack is Empty, In Main Phase
-    	return (Phase.canCastSorcery(player) && (landPlaysLeft > 0 || 
-    			AllZoneUtil.getPlayerCardsInPlay(player, "Fastbond").size() > 0));
-    }
-    
+
     public static void playLandEffects(Card c){
     	final Player player = c.getController();
     	CardList cityOfTraitors = AllZoneUtil.getPlayerCardsInPlay(player, "City of Traitors");
     	cityOfTraitors.remove(c);
-    	boolean extraLand;
-    	if (player.equals(AllZone.HumanPlayer)){
-    		extraLand = AllZone.GameInfo.humanPlayedFirstLandThisTurn();
-    	}
-    	else{
-    		extraLand = AllZone.GameInfo.computerPlayedFirstLandThisTurn();
-    	}
+		// > 0 because land amount isn't incremented until after playLandEffects
+    	boolean extraLand = player.getNumLandsPlayed() > 0;
     	
 		if(extraLand) {
 			CardList fastbonds = AllZoneUtil.getPlayerCardsInPlay(player, "Fastbond");

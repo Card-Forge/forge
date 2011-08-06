@@ -1354,30 +1354,14 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    CardList library = new CardList(AllZone.getZone(Constant.Zone.Library, card.getController()).getCards());
-                    Card top = library.get(0);
+				// todo: change to static ability?
+                	CardList library = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
+                	if(library.size() == 0)
+                		return;
                     
-                    if(library.size() > 0 && top.getType().contains("Land") ) {
-                    	boolean canPlayLand = false;
-                    	boolean isHuman = false;
-                    	if(card.getController() == AllZone.HumanPlayer){
-                    		canPlayLand = CardFactoryUtil.canHumanPlayLand();
-                    		isHuman = true;
-                    	}
-                        else{
-                        	canPlayLand = CardFactoryUtil.canComputerPlayLand();
-                        }
-                    	if (canPlayLand){
-                    		 //todo(sol): would prefer to use GameAction.playLand(top, play) but it doesn't work
-	                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-	                        Card land = AllZone.GameAction.moveTo(play, top);
-	                        CardFactoryUtil.playLandEffects(land);
-	                        if (isHuman)
-	                        	AllZone.GameInfo.incrementHumanPlayedLands();
-	                        else
-	                        	AllZone.GameInfo.incrementComputerPlayedLands();
-                    	}
-                    }
+                    Card top = library.get(0);
+                    if(top.isLand()) 
+                    	card.getController().playLand(top);
                 }//resolve()
                 
                 @Override
@@ -1385,11 +1369,9 @@ public class CardFactory_Creatures {
                     CardList library = new CardList(AllZone.getZone(Constant.Zone.Library, card.getController()).getCards());
                     if(library.size() == 0) return false;
                     PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());                                      
-                    boolean canPlayLand = false;
-                        if(card.getController() == AllZone.HumanPlayer) canPlayLand = CardFactoryUtil.canHumanPlayLand();
-                        else canPlayLand = CardFactoryUtil.canComputerPlayLand();
+                    boolean canPlayLand = card.getController().canPlayLand();
                         
-                    return (AllZone.GameAction.isCardInZone(card, play) && library.get(0).getType().contains("Land") && canPlayLand);
+                    return (AllZone.GameAction.isCardInZone(card, play) && library.get(0).isLand() && canPlayLand);
                 }
             };//SpellAbility
             

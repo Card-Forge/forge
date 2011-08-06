@@ -27,6 +27,8 @@ public class ComputerUtil
 	    	if(canPayCost(all[i]) && all[i].canPlay() && all[i].canPlayAI())
 	    	{
 		    	AllZone.Stack.freezeStack();
+		    	
+		    	// todo(sol) this conditional will be removed when Stack Zone is in
 	    		if(all[i].isSpell() && AllZone.GameAction.isCardInZone(all[i].getSourceCard(),AllZone.Computer_Hand))
 		        	AllZone.Computer_Hand.remove(all[i].getSourceCard());
 		
@@ -547,17 +549,17 @@ public class ComputerUtil
   //plays a land if one is available
   static public void chooseLandsToPlay()
   {
+	  Player computer = AllZone.ComputerPlayer;
 		ArrayList<Card> landList = PlayerZoneUtil.getCardType(AllZone.Computer_Hand, "Land");
 		
-		if (AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Crucible of Worlds").size() > 0)
+		if (AllZoneUtil.getPlayerCardsInPlay(computer, "Crucible of Worlds").size() > 0)
 		{
-			CardList lands = AllZoneUtil.getPlayerTypeInGraveyard(AllZone.ComputerPlayer, "Land");
+			CardList lands = AllZoneUtil.getPlayerTypeInGraveyard(computer, "Land");
 			for (Card crd : lands)
 				landList.add(crd);
 		}
-		
-		while(!landList.isEmpty() && (AllZone.GameInfo.computerNumberLandPlaysLeft() > 0 ||
-		    	AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Fastbond").size() > 0)){
+
+		while(!landList.isEmpty() && computer.canPlayLand()){
 			// play as many lands as you can
 		    int ix = 0;
 		    while (landList.get(ix).isReflectedLand() && (ix+1 < landList.size())) {
@@ -567,19 +569,10 @@ public class ComputerUtil
 
 	    	Card land = landList.get(ix);
 		    landList.remove(ix);
-		    playLand(land, AllZone.getZone(land));
+		    computer.playLand(land);
 		    
 		    AllZone.GameAction.checkStateEffects();
 		}
-  }
-  
-  static public void playLand(Card land, PlayerZone zone)
-  {
-	    AllZone.GameAction.moveToPlay(land);
-	    /*zone.remove(land);
-	    AllZone.Computer_Battlefield.add(land);*/
-	    CardFactoryUtil.playLandEffects(land);
-	    AllZone.GameInfo.incrementComputerPlayedLands();
   }
   
   static public Card getCardPreference(Card activate, String pref, CardList typeList){
