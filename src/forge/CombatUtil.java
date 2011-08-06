@@ -1450,28 +1450,6 @@ public class CombatUtil {
                 
             }//Witch-Maw Nephilim
             
-            /*
-            else if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureAttackedThisCombat()) {
-                final Card jedit = c;
-                Ability ability2 = new Ability(c, "0") {
-                    @Override
-                    public void resolve() {
-                        CardFactoryUtil.makeToken("Cat Warrior", "G 2 2 Cat Warrior", jedit.getController(), "G", new String[] {
-                                "Creature", "Cat", "Warrior"}, 2, 2, new String[] {"Forestwalk"});
-                        //(anger) :
-                        //GameActionUtil.executeCardStateEffects(); 
-                        
-                    }
-                }; //Ability
-                
-                StringBuilder sb2 = new StringBuilder();
-                sb2.append(c.getName()).append(" - put a 2/2 green Cat Warrior creature token with forestwalk onto the battlefield.");
-                ability2.setStackDescription(sb2.toString());
-                
-                AllZone.Stack.add(ability2);
-                
-            }//Jedit */
-            
             else if(c.getName().equals("Preeminent Captain") && !c.getCreatureAttackedThisCombat()) {
                 System.out.println("Preeminent Captain Attacks");
                 PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getController());
@@ -1935,60 +1913,6 @@ public class CombatUtil {
 				AllZone.Stack.add(fhAddCombat);
 			}
 		}
-		
-        if(AllZoneUtil.isCardInPlay("Rafiq of the Many", phasingPlayer)) {
-            Ability ability2 = new Ability(c, "0") {
-                @Override
-                public void resolve() {
-                    final Command untilEOT = new Command() {
-                        private static final long serialVersionUID = -8943526706248389725L;
-                        
-                        public void execute() {
-                            if(AllZone.GameAction.isCardInPlay(crd)) crd.removeExtrinsicKeyword("Double Strike");
-                        }
-                    };//Command
-                    
-                    if(AllZone.GameAction.isCardInPlay(crd)) {
-                        crd.addExtrinsicKeyword("Double Strike");
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }//resolve
-                
-            };//ability2
-            
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(c).append(" - (Exalted) gets Double Strike until EOT.");
-            ability2.setStackDescription(sb2.toString());
-            
-            AllZone.Stack.add(ability2);
-        }
-        
-        if(AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Battlegrace Angel").size() > 0) {
-            Ability ability3 = new Ability(c, "0") {
-                @Override
-                public void resolve() {
-                    final Command untilEOT = new Command() {
-                        private static final long serialVersionUID = -8154692281049657338L;
-                        
-                        public void execute() {
-                            if(AllZone.GameAction.isCardInPlay(crd)) crd.removeExtrinsicKeyword("Lifelink");
-                        }
-                    };//Command
-                    
-                    if(AllZone.GameAction.isCardInPlay(crd)) {
-                        crd.addExtrinsicKeyword("Lifelink");
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }//resolve
-                
-            };//ability2
-            
-            StringBuilder sb3 = new StringBuilder();
-            sb3.append(c).append(" - (Exalted) gets Lifelink until EOT.");
-            ability3.setStackDescription(sb3.toString());
-            
-            AllZone.Stack.add(ability3);
-        }
         
         if(AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Sovereigns of Lost Alara").size() > 0) {
             for(int i = 0; i < AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Sovereigns of Lost Alara").size(); i++) { 
