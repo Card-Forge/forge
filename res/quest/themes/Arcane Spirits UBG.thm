@@ -1,0 +1,77 @@
+BasicLandPercentage=16
+
+[Group MaxCnt=4 Percentage=21]
+Underground Sea
+Tropical Island
+Bayou
+Verdant Catacombs
+Polluted Delta
+Misty Rainforest
+[/Group]
+
+[Group MaxCnt=4 Percentage=13]
+Long-Forgotten Gohei
+Thief of Hope
+[/Group]
+
+[Group MaxCnt=1 Percentage=5]
+Bounteous Kirin
+Cloudhoof Kirin
+Infernal Kirin
+[/Group]
+
+[Group MaxCnt=3 Percentage=12]
+Baku Altar
+Orbweaver Kumo
+Kami of the Hunt
+Scaled Hulk
+Sire of the Storm
+[/Group]
+
+[Group MaxCnt=4 Percentage=5]
+Eye of Nowhere
+Eye of Nowhere
+Reach Through Mists
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Inner Calm, Outer Strength
+Kodama's Reach
+Kodama's Reach
+Rend Flesh
+Rend Flesh
+Waking Nightmare
+[/Group]
+
+[Group MaxCnt=3 Percentage=4]
+Joyous Respite
+Uproot
+Dance of Shadows
+Death of a Thousand Stings
+Ribbons of the Reikai
+Strength of Cedars
+Three Tragedies
+[/Group]
+
+[Group MaxCnt=3 Percentage=5]
+Gibbering Kami
+Kami of Empty Graves
+Kami of the Tended Garden
+Lifespinner
+Rootrunner
+Waking Nightmare
+[/Group]
+
+[Group MaxCnt=3 Percentage=4]
+Body of Jukai
+Forked-Branch Garami
+Harbinger of Spring
+Honden of Life's Web
+Kami of Lunacy
+Nightsoil Kami
+Thousand-legged Kami
+Venerable Kumo
+[/Group]
+
+
+End

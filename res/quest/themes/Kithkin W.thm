@@ -1,4 +1,11 @@
-BasicLandPercentage=35
+BasicLandPercentage=33
+
+[Group MaxCnt=4 Percentage=2]
+Emeria, the Sky Ruin
+Kabira Crossroads
+Karakas
+Flagstones of Trokair
+[/Group]
 
 [Group MaxCnt=4 Percentage=15]
 Ballyrush Banneret
