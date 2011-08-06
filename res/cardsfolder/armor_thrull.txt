@@ -1,0 +1,10 @@
+Name:Armor Thrull
+ManaCost:2 B
+Types:Creature Thrull
+Text:no text
+PT:1/3
+A:AB$PutCounter|Cost$T Sac<1/CARDNAME>|Tgt$TgtC|CounterType$P1P2|CounterNum$1|SpellDescription$Put a +1/+2 counter on target creature.
+SVar:Rarity:Common
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/armor_thrull.jpg
+End
