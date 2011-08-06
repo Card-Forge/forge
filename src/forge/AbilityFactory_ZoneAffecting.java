@@ -250,7 +250,7 @@ public class AbilityFactory_ZoneAffecting {
 	        else{
 				String DrawBack = params.get("SubAbility");
 				if (af.hasSubAbility())
-					 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), source.getController(), source, null, sa);
+					 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
 	        }
 		}
 	}
