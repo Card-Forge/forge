@@ -3732,8 +3732,14 @@ public class GameAction {
     }
     
     public void addCombatDamage(Card card, HashMap<Card, Integer> map) {
-        //int totalDamage = 0;
+        
+    	if (card.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.") ||
+    		card.getKeyword().contains("Prevent all combat damage that would be dealt to CARDNAME."))
+    		return;
+
+    	//int totalDamage = 0;
         CardList list = new CardList();
+        
         
         for(Entry<Card, Integer> entry : map.entrySet()){
             Card source = entry.getKey();
@@ -3742,29 +3748,33 @@ public class GameAction {
             int damageToAdd = damage;
             //AllZone.GameAction.addDamage(c, crd , assignedDamageMap.get(crd));
             
-            if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && card.isCreature()) {
-                damageToAdd = 0;
-                card.addCounter(Counters.M1M1, damage);
+            if (source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME."))
+            	damage = 0;
+            else {
+	            if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && card.isCreature()) {
+	                damageToAdd = 0;
+	                card.addCounter(Counters.M1M1, damage);
+	            }
+	            if(card.isCreature() && (source.getName().equals("Spiritmonger") || source.getName().equals("Mirri the Cursed")) ) {
+	                final Card thisCard = source;
+	                Ability ability2 = new Ability(source, "0") {
+	                    @Override
+	                    public void resolve() {
+	                        thisCard.addCounter(Counters.P1P1, 1);
+	                    }
+	                }; // ability2
+	                
+	                ability2.setStackDescription(source.getName() + " - gets a +1/+1 counter");
+	                AllZone.Stack.add(ability2);
+	            }
+	            if(source.getKeyword().contains("Deathtouch") && card.isCreature()) {
+	                AllZone.GameAction.destroy(card);
+	                AllZone.Combat.removeFromCombat(card);
+	            }
+	            
+	            //totalDamage += damageToAdd;
+	            map.put(source, damageToAdd);
             }
-            if(card.isCreature() && (source.getName().equals("Spiritmonger") || source.getName().equals("Mirri the Cursed")) ) {
-                final Card thisCard = source;
-                Ability ability2 = new Ability(source, "0") {
-                    @Override
-                    public void resolve() {
-                        thisCard.addCounter(Counters.P1P1, 1);
-                    }
-                }; // ability2
-                
-                ability2.setStackDescription(source.getName() + " - gets a +1/+1 counter");
-                AllZone.Stack.add(ability2);
-            }
-            if(source.getKeyword().contains("Deathtouch") && card.isCreature()) {
-                AllZone.GameAction.destroy(card);
-                AllZone.Combat.removeFromCombat(card);
-            }
-            
-            //totalDamage += damageToAdd;
-            map.put(source, damageToAdd);
         }
         
         if(isCardInPlay(card)) {
@@ -3776,9 +3786,6 @@ public class GameAction {
         	Card source = entry.getKey();
         	CombatUtil.executeCombatDamageEffects(source);
         }
-        
-        
-        
     }
     
     public void addDamage(Card card, Card source, int damage) {

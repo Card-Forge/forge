@@ -1,0 +1,11 @@
+Name:Fog Bank
+ManaCost:2 B
+Types:Creature Wall
+Text:no text
+PT:0/2
+K:Defender
+K:Flying
+K:Prevent all combat damage that would be dealt to and dealt by CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fog_bank.jpg
+End
