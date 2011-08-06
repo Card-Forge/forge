@@ -497,7 +497,6 @@ public class GameActionUtil {
 		playCard_Standstill(c);
 		playCard_Sigil_of_the_Empty_Throne(c);
 		playCard_Merrow_Levitator(c);
-		playCard_Fable_of_Wolf_and_Owl(c);
 		//playCard_Kor_Firewalker(c);
 		playCard_Curse_of_Wizardry(c);
 		playCard_Venser_Emblem(c);
@@ -1887,60 +1886,6 @@ public class GameActionUtil {
 		}// if is blue spell
 	}//merrow levitator
 
-	public static void playCard_Fable_of_Wolf_and_Owl(Card c) {
-		final Player controller = c.getController();
-
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Fable of Wolf and Owl");
-
-		if(list.size() > 0) {
-			if(c.isBlue()) {
-				for(int i = 0; i < list.size(); i++) {
-					final Card card = list.get(i);
-
-					Ability ability2 = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							CardFactoryUtil.makeToken("Bird", "U 1 1 Bird", card.getController(), "U", new String[] {
-									"Creature", "Bird"}, 1, 1, new String[] {"Flying"});
-						}
-					}; // ability2
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - ").append(c.getController());
-					sb.append(" played a blue spell, put a 1/1 blue Bird token with flying onto the battlefield.");
-					ability2.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability2);
-				}
-			}//if
-		}
-
-		if(c.isGreen()) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
-
-				Ability ability = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card.getController(), "G", new String[] {
-								"Creature", "Wolf"}, 2, 2, new String[] {""});
-					}
-				}; // ability
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" played a green spell, put a 2/2 green Wolf token onto the battlefield.");
-				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
-			}
-		}//if
-	}//Fable
 	
 	/*
     public static void playCard_Kor_Firewalker(Card c) {
