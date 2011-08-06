@@ -114,16 +114,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                     }
                 });
                 
-                graveList = graveList.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
-                        return c.getName().equals("Bloodghast");
-                    }
-                });
-                
-                for(Card crd:graveList) {
-                    list.add(crd);
-                }
-                
                 for(int i = 0; i < list.size(); i++) {
                     GameActionUtil.executeLandfallEffects(list.get(i));
                 }

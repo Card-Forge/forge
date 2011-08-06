@@ -3782,7 +3782,6 @@ public class GameActionUtil {
 		else if(c.getName().equals("Ior Ruin Expedition")
 				|| c.getName().equals("Khalni Heart Expedition")) landfall_AddQuestCounter(c);
 		else if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
-		else if(c.getName().equals("Bloodghast")) landfall_Bloodghast(c);
 		else if(c.getName().equals("Avenger of Zendikar")) landfall_Avenger_of_Zendikar(c);
 		else if(c.getName().equals("Eternity Vessel")) landfall_Eternity_Vessel(c);
 	}
@@ -4087,37 +4086,6 @@ public class GameActionUtil {
 			// todo: once AI has a mana pool he should choose add Ability and choose a mana as appropriate
 		}
 	}
-
-
-	private static void landfall_Bloodghast(Card c) {
-		PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
-		if(!AllZone.GameAction.isCardInZone(c, grave)) return;
-
-		final Card crd = c;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, crd.getController());
-
-				if(AllZone.GameAction.isCardInZone(crd, grave)) {
-					AllZone.GameAction.moveToPlay(crd);
-				}
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c).append(" - return Bloodghast from your graveyard to the battlefield.");
-		ability.setStackDescription(sb.toString());
-
-		if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
-		} else if(c.getController().equals(AllZone.ComputerPlayer)) {
-			AllZone.Stack.add(ability);
-		}
-
-		AllZone.GameAction.checkStateEffects();
-
-	}//landfall_Bloodghast
 
 	private static void landfall_Avenger_of_Zendikar(Card c) {
 		final Card crd = c;
