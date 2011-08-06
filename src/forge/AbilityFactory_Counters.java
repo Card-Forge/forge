@@ -103,7 +103,9 @@ public class AbilityFactory_Counters {
 		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("CounterNum"), sa);
 
 		sb.append("Put ").append(amount).append(" ").append(cType.getName())
-				.append(" counter on");
+				.append(" counter");
+		if(amount != 1) sb.append("s");
+		sb.append(" on");
 
 		if (af.getAbTgt() == null)
 			sb.append(" ").append(name);
@@ -473,7 +475,9 @@ public class AbilityFactory_Counters {
 		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("CounterNum"), sa);
 
 		sb.append("Remove ").append(amount).append(" ").append(cType.getName())
-				.append(" counter on");
+				.append(" counter");
+		if(amount != 1) sb.append("s");
+		sb.append("on");
 
 		if (af.getAbTgt() == null)
 			sb.append(" ").append(name);
