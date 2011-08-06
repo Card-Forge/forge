@@ -1140,6 +1140,7 @@ res/cardsfolder/contagion_clasp.txt -text svneol=native#text/plain
 res/cardsfolder/contagion_engine.txt -text svneol=native#text/plain
 res/cardsfolder/contagious_nim.txt -text svneol=native#text/plain
 res/cardsfolder/contemplation.txt -text svneol=native#text/plain
+res/cardsfolder/contested_war_zone.txt svneol=native#text/plain
 res/cardsfolder/control_magic.txt -text svneol=native#text/plain
 res/cardsfolder/control_of_the_court.txt -text svneol=native#text/plain
 res/cardsfolder/controvert.txt -text svneol=native#text/plain

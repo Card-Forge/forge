@@ -4609,7 +4609,7 @@ public class GameActionUtil {
     }
     
     //restricted to combat damage, restricted to players
-	public static void executeCombatDamageToPlayerEffects(final Player player, Card c, final int damage) {
+	public static void executeCombatDamageToPlayerEffects(final Player player, final Card c, final int damage) {
 		
 		if (damage <= 0) return;
 		
@@ -4618,6 +4618,22 @@ public class GameActionUtil {
     	DealsDamage_Whenever_Parameters[0] = c.getController().getOpponent();
     	DealsDamage_Whenever_Parameters[2] = c;
     	AllZone.GameAction.checkWheneverKeyword(c, "DealsCombatDamage/Opponent", DealsDamage_Whenever_Parameters);
+    	
+    	if(c.isCreature() && AllZoneUtil.isCardInPlay("Contested War Zone", player)) {
+    		CardList zones = AllZoneUtil.getPlayerCardsInPlay(player, "Contested War Zone");
+    		for(final Card zone:zones) {
+    			Ability ability = new Ability(zone, "0") {
+    				@Override
+    				public void resolve() {
+    					if(AllZone.GameAction.isCardInPlay(zone)) {
+        					AllZone.GameAction.changeController(new CardList(zone), zone.getController(), c.getController());
+    					}
+    				}
+    			};
+    			ability.setStackDescription(zone+" - "+c.getController()+" gains control of "+zone);
+    			AllZone.Stack.add(ability);
+    		}
+    	}
 
 		if (c.hasStartOfKeyword("Poisonous"))
 		{
