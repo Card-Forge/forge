@@ -1924,11 +1924,9 @@ public class Card extends MyObservable {
         	boolean r = true;
             String incR[] = Restrictions[i].split("\\."); // Inclusive restrictions are Card types
             
-            if(!incR[0].equals("Card")) {   //Check for wrong type
-            	if (incR[0].equals("Spell") && isType("Land")) r = false;
-            	else if (incR[0].equals("Permanent") && (isType("Instant") || isType("Sorcery"))) r = false;
-            	else if (!isType(incR[0])) r = false;
-            }
+            if (incR[0].equals("Spell") && isType("Land")) r = false;
+            if (incR[0].equals("Permanent") && (isType("Instant") || isType("Sorcery"))) r = false;
+            if(!incR[0].equals("Card") && !incR[0].equals("Spell") && !incR[0].equals("Permanent") && !(isType(incR[0])) r = false; //Check for wrong type
             
             if(incR.length > 1) {
                 final String excR = incR[1];
