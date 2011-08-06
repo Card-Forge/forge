@@ -3694,7 +3694,10 @@ public class CardFactoryUtil {
             String dX = Src.getSVar(d[1]);
             if(dX.startsWith("Count$")) {
                 String dd[] = dX.split("\\$");
-                X = xCount(Src, dd[1]);
+                if (dd[1].contains("Tgt"))
+                	X = xCount(TgtC, dd[1]);
+                else
+                	X = xCount(Src, dd[1]);
             }
         } else if(d[1].matches("X")) {
             X = nDB;
@@ -3720,11 +3723,19 @@ public class CardFactoryUtil {
         
         
 
-        if(d[0].contains("GainLife")) AllZone.GameAction.getPlayerLife(dbPlayer).addLife(X);
+        if (d[0].contains("GainLifeTgtCtrlr"))
+        	AllZone.GameAction.getPlayerLife(TgtC.getController()).addLife(X);
+        else if (d[0].contains("GainLifeTgtOwner"))
+        	AllZone.GameAction.getPlayerLife(TgtC.getOwner()).addLife(X);
+        else if(d[0].contains("GainLife")) 
+        	AllZone.GameAction.getPlayerLife(dbPlayer).addLife(X);
 
         if(d[0].contains("LoseLifeTgtCtrlr")) //2/10
-        AllZone.GameAction.getPlayerLife(TgtC.getController()).subtractLife(X,Src);
-        else if(d[0].contains("LoseLife")) AllZone.GameAction.getPlayerLife(dbPlayer).subtractLife(X,Src);
+        	AllZone.GameAction.getPlayerLife(TgtC.getController()).subtractLife(X,Src);
+        else if (d[0].contains("LoseLifeTgtOwner"))
+        	AllZone.GameAction.getPlayerLife(TgtC.getOwner()).subtractLife(X, Src);
+        else if(d[0].contains("LoseLife")) 
+        	AllZone.GameAction.getPlayerLife(dbPlayer).subtractLife(X,Src);
         
         if(d[0].contains("Discard")) {
             if(d.length > 2) {
