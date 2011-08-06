@@ -5406,9 +5406,9 @@ public class CardFactory_Instants {
                 		//skip walls, skip creatures with summoning sickness
                 		//also skip creatures with haste if they came into play this turn
                 		if((!creature.isWall() && !creature.hasSickness())
-                				|| !(creature.getKeyword().contains("Haste") && creature.getTurnInZone() == 1)) {
+                				|| (creature.getKeyword().contains("Haste") && creature.getTurnInZone() != 1)) {
                 			creature.setSirenAttackOrDestroy(true);
-                			//System.out.println("Siren's Call - setting flag for "+creature.getName());
+                			System.out.println("Siren's Call - setting flag for "+creature.getName());
                 		}
                 	}
                 	Command atEOT = new Command() {
@@ -5420,11 +5420,11 @@ public class CardFactory_Instants {
 							CardList creatures = AllZoneUtil.getCreaturesInPlay(opponent);
 							
 							for(Card creature:creatures) {
-								//System.out.println("Siren's Call - EOT - "+creature.getName() +" flag: "+creature.getSirenAttackOrDestroy());
-								//System.out.println("Siren's Call - EOT - "+creature.getName() +" attacked?: "+creature.getCreatureAttackedThisCombat());
+								System.out.println("Siren's Call - EOT - "+creature.getName() +" flag: "+creature.getSirenAttackOrDestroy());
+								System.out.println("Siren's Call - EOT - "+creature.getName() +" attacked?: "+creature.getCreatureAttackedThisCombat());
 								if(creature.getSirenAttackOrDestroy() && !creature.getCreatureAttackedThisCombat()) {
 									if(AllZone.GameAction.isCardInPlay(creature)) {
-										//System.out.println("Siren's Call - destroying "+creature.getName());
+										System.out.println("Siren's Call - destroying "+creature.getName());
 										//this should probably go on the stack
 										AllZone.GameAction.destroy(creature);
 									}
