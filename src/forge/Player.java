@@ -221,7 +221,6 @@ public abstract class Player extends MyObservable{
         }
         	
         GameActionUtil.executeDamageDealingEffects(source, damageToDo);
-        
         GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
 	}
 	
@@ -329,7 +328,6 @@ public abstract class Player extends MyObservable{
     	//GameActionUtil.executePlayerDamageEffects(player, source, damage, true);
     	GameActionUtil.executeCombatDamageToPlayerEffects(source, damageToDo);
     	GameActionUtil.executeCombatDamageEffects(source, damageToDo);
-    	source.setDealtCombatDmgToOppThisTurn(true);
     }
 	
 	//////////////////////////

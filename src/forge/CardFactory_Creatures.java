@@ -5818,25 +5818,6 @@ public class CardFactory_Creatures {
             ability.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
-        /*
-
-					String player = card2.getController();
-                    CardList creatures;
-                    if(player.equals(AllZone.HumanPlayer)) {
-                        creatures = new CardList(AllZone.Human_Play.getCards());
-                    } else {
-                        creatures = new CardList(AllZone.Computer_Play.getCards());
-                    }
-                    
-                    creatures = creatures.getType("Creature");
-                    
-                    for(int i = 0; i < creatures.size(); i++) {
-                        Card card = creatures.get(i);
-                        card.addCounter(Counters.P1P1, 1);
-                        card.addExtrinsicKeyword("Vigilance");
-                    }
-                    
-         */
                 
         //*************** START *********** START **************************
         else if(cardName.equals("Giltspire Avenger")) {
@@ -5849,21 +5830,11 @@ public class CardFactory_Creatures {
                 }
                 
                 @Override
-                public boolean canPlay() {
-                    Log.debug("Giltspire Avenger","phase =" + AllZone.Phase.getPhase());
-                    if((AllZone.Phase.getPhase().equals(Constant.Phase.Main2) || AllZone.Phase.getPhase().equals(
-                            Constant.Phase.End_Of_Turn))
-                            && !card.hasSickness() && card.isUntapped() && super.canPlay()) return true;
-                    else return false;
-                    
-                }
-                
-                @Override
                 public void resolve() {
                     Card c = getTargetCard();
                     
                     if(AllZone.GameAction.isCardInPlay(c)
-                            && (c.getDealtCombatDmgToOppThisTurn() || c.getDealtDmgToOppThisTurn())
+                            && c.getDealtDmgToOppThisTurn()
                             && CardFactoryUtil.canTarget(card, c)) {
                         AllZone.GameAction.destroy(c);
                     }
@@ -5888,10 +5859,7 @@ public class CardFactory_Creatures {
                 public void selectCard(Card c, PlayerZone zone) {
                     if(!CardFactoryUtil.canTarget(card, c)) {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    } else if(c.isCreature() && zone.is(Constant.Zone.Play)
-                            && (c.getDealtCombatDmgToOppThisTurn() || c.getDealtDmgToOppThisTurn())) {
-                        //tap ability
-                        card.tap();
+                    } else if(c.isCreature() && zone.is(Constant.Zone.Play) &&  c.getDealtDmgToOppThisTurn()) {
                         
                         ability.setTargetCard(c);
                         AllZone.Stack.add(ability);

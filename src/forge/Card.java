@@ -53,11 +53,11 @@ public class Card extends MyObservable {
     private boolean 					 copiedSpell					   = false; 
     private boolean 					 SpellwithChoices				   = false; 
     private boolean 					 SpellCopyingCard				   = false; 
-    private boolean						creatureAttackedThisTurn			= false;
+    private boolean						 creatureAttackedThisTurn		   = false;
     private boolean                      creatureAttackedThisCombat        = false;
     private boolean                      creatureBlockedThisCombat         = false;
     private boolean                      creatureGotBlockedThisCombat      = false;
-    private boolean                      dealtCombatDmgToOppThisTurn       = false;
+    //private boolean                    dealtCombatDmgToOppThisTurn       = false;
     private boolean                      dealtDmgToOppThisTurn             = false;
     private boolean						 sirenAttackOrDestroy			   = false;
     private boolean                      exaltedBonus                      = false;
@@ -253,14 +253,14 @@ public class Card extends MyObservable {
     public boolean getCreatureGotBlockedThisCombat() {
         return creatureGotBlockedThisCombat;
     }
-    
+    /*
     public void setDealtCombatDmgToOppThisTurn(boolean b) {
         dealtCombatDmgToOppThisTurn = b;
     }
     
     public boolean getDealtCombatDmgToOppThisTurn() {
         return dealtCombatDmgToOppThisTurn;
-    }
+    }*/
     
     public boolean canAnyPlayerActivate() {
     	for(SpellAbility s : spellAbility)

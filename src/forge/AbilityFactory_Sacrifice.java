@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class AbilityFactory_Sacrifice {
 	//**************************************************************
-	// ****************************** FOG **************************
+	// *************************** Sacrifice ***********************
 	//**************************************************************
 	
 	public static SpellAbility createAbilitySacrifice(final AbilityFactory AF){
@@ -114,14 +114,15 @@ public class AbilityFactory_Sacrifice {
 	}
 	
 	public static boolean sacrificeCanPlayAI(final AbilityFactory af, SpellAbility sa){
-		// AI should only activate this during Human's Declare Blockers phase
+		
+		HashMap<String,String> params = af.getMapParams();
 		boolean chance = sacrificeTgtAI(af, sa);
 
 		// Some additional checks based on what is being sacrificed, and who is sacrificing
 		Target tgt = af.getAbTgt();
 		if (tgt != null){
-			String valid = af.getMapParams().get("SacValid");
-			String num = af.getMapParams().get("Amount");
+			String valid = params.get("SacValid");
+			String num = params.get("Amount");
 			num = (num == null) ? "1" : num;
 			int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 			
@@ -136,8 +137,6 @@ public class AbilityFactory_Sacrifice {
 			// If the Human has at least half rounded up of the amount to be sacrificed, cast the spell
 			if (list.size() < half)
 				return false;
-			
-			return true;
 		}
 		
 		Ability_Sub subAb = sa.getSubAbility();
@@ -161,7 +160,11 @@ public class AbilityFactory_Sacrifice {
 	}
 	
 	public static boolean sacrificeTgtAI(AbilityFactory af, SpellAbility sa){
+		
+		HashMap<String,String> params = af.getMapParams();
+		Card card = sa.getSourceCard();
 		Target tgt = af.getAbTgt();
+		
 		if (tgt != null){
 			tgt.resetTargets();
 			if (AllZone.HumanPlayer.canTarget(sa.getSourceCard()))
@@ -170,15 +173,24 @@ public class AbilityFactory_Sacrifice {
 				return false;
 		}
 		else{
-			String defined = af.getMapParams().get("Defined");
+			String defined = params.get("Defined");
 			if (defined == null){
 				// Self Sacrifice. 
 			}
 			else if (defined.equals("Each")){
 			// If Sacrifice hits both players:
-			// Don't cast it if Human doesn't have any of valid
-			// Definitely cast it if AI doesn't have any of Valid
-			// Cast if the type is favorable: my "worst" valid is worse than his "worst" valid
+			// Only cast it if Human has the full amount of valid
+			// Only cast it if AI doesn't have the full amount of Valid
+			// TODO: Cast if the type is favorable: my "worst" valid is worse than his "worst" valid
+				String valid = params.get("SacValid");
+				String num = params.containsKey("Amount") ? params.get("Amount") : "1";
+				int amount = AbilityFactory.calculateAmount(card, num, sa);
+				CardList humanList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+				humanList = humanList.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+				CardList computerList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+				computerList = computerList.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+				
+				if(humanList.size() < amount || computerList.size() >= amount ) return false;
 			}
 		}
 		

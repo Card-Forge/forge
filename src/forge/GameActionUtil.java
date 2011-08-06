@@ -3130,8 +3130,8 @@ public class GameActionUtil {
 
 		for(int i = 0; i < list.size(); i++) {
 			Card c = list.get(i);
-			if(c.getDealtCombatDmgToOppThisTurn()) c.setDealtCombatDmgToOppThisTurn(false);
-			if(c.getDealtDmgToOppThisTurn()) c.setDealtDmgToOppThisTurn(false);
+			//c.setDealtCombatDmgToOppThisTurn(false);
+			c.setDealtDmgToOppThisTurn(false);
 		}
 	}
 
@@ -5874,7 +5874,9 @@ public class GameActionUtil {
 			else if(c.getName().equals("Thieving Magpie")|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
 			else if(c.getName().equals("Warren Instigator")) playerCombatDamage_Warren_Instigator(c);
 			else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
-				playerCombatDamage_Whirling_Dervish(c);		
+				playerCombatDamage_Whirling_Dervish(c);
+	    	
+	    	if (!c.getController().isPlayer(player)) c.setDealtDmgToOppThisTurn(true);
     	}
     }
     //restricted to combat damage, restricted to players
@@ -5979,8 +5981,9 @@ public class GameActionUtil {
 		else if(c.getName().equals("Treva, the Renewer")) playerCombatDamage_Treva(c);
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
 		else if(c.getName().equals("Vorosh, the Hunter")) playerCombatDamage_Vorosh(c);
-
-		if(c.getNetAttack() > 0) c.setDealtCombatDmgToOppThisTurn(true);
+		
+		//Unused variable
+		//c.setDealtCombatDmgToOppThisTurn(true); 
 
 	}
 
