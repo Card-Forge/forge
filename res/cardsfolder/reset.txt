@@ -1,0 +1,8 @@
+Name:Reset
+ManaCost:U U
+Types:Instant
+Text:Cast Reset only during an opponent's turn after his or her upkeep step.\r\nUntap all lands you control.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reset.jpg
+End

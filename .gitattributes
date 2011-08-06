@@ -3094,6 +3094,7 @@ res/cardsfolder/repentant_blacksmith.txt -text svneol=native#text/plain
 res/cardsfolder/reprisal.txt -text svneol=native#text/plain
 res/cardsfolder/repulse.txt -text svneol=native#text/plain
 res/cardsfolder/rescind.txt -text svneol=native#text/plain
+res/cardsfolder/reset.txt -text svneol=native#text/plain
 res/cardsfolder/respite.txt -text svneol=native#text/plain
 res/cardsfolder/restless_apparition.txt -text svneol=native#text/plain
 res/cardsfolder/restless_bones.txt -text svneol=native#text/plain

@@ -5088,6 +5088,37 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if( cardName.equals("Reset") ) {
+            /*
+             * Cast Reset only during an opponent's turn after his or her upkeep step.
+             * Untap all lands you control.
+             */
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 1399682288920959188L;
+
+				@Override
+                public boolean canPlay() {
+					String opponent = AllZone.GameAction.getOpponent(card.getController());
+					return Phase.canPlayAfterUpkeep() && AllZone.GameAction.isPlayerTurn(opponent);
+				}//canPlay
+				
+				@Override
+				public boolean canPlayAI() {
+					return false;
+				}//canPlayAI
+                
+                @Override
+                public void resolve() {
+                	CardList lands = AllZoneUtil.getPlayerLandsInPlay(card.getController());
+                	for(Card land:lands) land.untap();
+                }
+            };//SpellAbility
+            spell.setStackDescription(card.getName() + " - untap all lands you control.");
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
