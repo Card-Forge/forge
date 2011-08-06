@@ -436,7 +436,8 @@ public class AbilityFactory_ChangeZone {
         	fetchList.remove(c);
         }
         
-        player.shuffle();
+        if (origin.equals("Library"))
+        	player.shuffle();
         
         for(Card c : fetched){
         	origZone.remove(c);
