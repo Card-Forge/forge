@@ -5109,7 +5109,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Hermit Druid")) {
-            final SpellAbility ability = new Ability_Tap(card, "G") {
+        	Ability_Cost abCost = new Ability_Cost("G T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
 				private static final long serialVersionUID = 5884624727757154056L;
 
 				@Override
@@ -5157,7 +5158,7 @@ public class CardFactory_Creatures {
 					}
                 }
             };
-            ability.setStackDescription("G, tap: Reveal cards until you reveal a basic land. Put that in your hand, and put the rest in your graveyard");
+            ability.setStackDescription(abCost+"Reveal cards until you reveal a basic land. Put that in your hand, and put the rest in your graveyard");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
@@ -5231,7 +5232,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Steel Overseer")) {
-            final Ability_Tap ability = new Ability_Tap(card) {
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
 
 				private static final long serialVersionUID = 1822894871718751099L;
 
@@ -5255,7 +5257,7 @@ public class CardFactory_Creatures {
                 }//canPlayAI()
             };//SpellAbility
             card.addSpellAbility(ability);
-            ability.setDescription("tap: Put a +1/+1 counter on each artifact creature you control.");
+            ability.setDescription(abCost+"Put a +1/+1 counter on each artifact creature you control.");
             
             StringBuilder sb = new StringBuilder();
             sb.append(cardName).append(" - Put a +1/+1 counter on each artifact creature you control.");
@@ -5547,7 +5549,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mayael the Anima")) {
-            final Ability_Tap ability = new Ability_Tap(card, "3 R G W") {
+        	Ability_Cost abCost = new Ability_Cost("3 R G W T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
                 
                 private static final long serialVersionUID = -9076784333448226913L;
                 
@@ -5628,7 +5631,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             
             StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append("3 R G W, Tap: Look at the top five cards of your library. ");
+            sbDesc.append(abCost+"Look at the top five cards of your library. ");
             sbDesc.append("You may put a creature card with power 5 or greater from among them onto the battlefield. ");
             sbDesc.append("Put the rest on the bottom of your library in any order.");
             ability.setDescription(sbDesc.toString());
@@ -5856,11 +5859,10 @@ public class CardFactory_Creatures {
         }// *************** END ************ END **************************
         
         
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Subterranean Spirit")) {
-            
-            final SpellAbility ability = new Ability_Tap(card, "0") {
+            Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
             	
                 private static final long serialVersionUID = 7698358771810336470L;
 
@@ -5887,9 +5889,10 @@ public class CardFactory_Creatures {
             sb.append(card).append(" deals 1 damage to each creature without flying.");
             ability.setStackDescription(sb.toString());
             
-            ability.setDescription("T: Subterranean Spirit deals 1 damage to each creature without flying.");
+            ability.setDescription(abCost+cardName+" deals 1 damage to each creature without flying.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Ashen Firebeast")) {
