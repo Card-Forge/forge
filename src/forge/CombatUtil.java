@@ -450,8 +450,7 @@ public class CombatUtil {
                 || (AllZoneUtil.isCardInPlay("Reverence", c.getController().getOpponent()) && c.getNetAttack() < 3))
         	return false;
         
-        if(c.getKeyword().contains("Defender") && !(c.isType("Wall") && AllZoneUtil.isCardInPlay("Rolling Stones")) &&
-        		(!(c.isType("Wall") && c.isEnchantedBy("Animate Wall"))) && !c.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
+        if(c.getKeyword().contains("Defender") && !c.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
         	return false;
         }
         

@@ -1,8 +1,9 @@
 Name:Animate Wall
 ManaCost:W
 Types:Enchantment Aura
-Text:Enchanted Wall can attack as though it didn't have defender.
+Text:no text
 K:Enchant Wall
+K:enPump:HIDDEN CARDNAME can attack as though it didn't have defender.:Enchanted Wall can attack as though it didn't have defender.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/animate_wall.jpg
