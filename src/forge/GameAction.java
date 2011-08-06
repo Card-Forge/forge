@@ -566,1048 +566,1049 @@ public class GameAction {
     // Whenever Keyword
     public void checkWheneverKeyword(Card Triggering_Card,String Event, Object[] Custom_Parameters) {
     	checkStateEffects();
-    	
-        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-        PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
-        PlayerZone Cgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
-        PlayerZone HRFG = AllZone.getZone(Constant.Zone.Exile, AllZone.HumanPlayer);
-        PlayerZone CRFG = AllZone.getZone(Constant.Zone.Exile, AllZone.ComputerPlayer);
-        
- 		CardList Cards_WithKeyword = new CardList();
-        Cards_WithKeyword.add(new CardList(Hplay.getCards()));
-        Cards_WithKeyword.add(new CardList(Cplay.getCards()));
-        Cards_WithKeyword.add(new CardList(Hgrave.getCards()));
-        Cards_WithKeyword.add(new CardList(Cgrave.getCards()));
-        Cards_WithKeyword.add(new CardList(HRFG.getCards()));
-        Cards_WithKeyword.add(new CardList(CRFG.getCards()));
- 		Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
-             public boolean addCard(Card c) {
-                 if(c.getKeyword().toString().contains("WheneverKeyword")) return true;
-                 return false;
-             }
-         });
- 		
- 		if(!Cards_WithKeyword.contains(Triggering_Card)) Cards_WithKeyword.add(Triggering_Card);
- 		
- 		boolean Triggered = false;
- 		for(int i = 0; i < Cards_WithKeyword.size() ; i++) {	
- 		if(Triggered == false) {	
- 			Card card = Cards_WithKeyword.get(i);
- 		        ArrayList<String> a = card.getKeyword();
- 		        int WheneverKeywords = 0;
- 		        int WheneverKeyword_Number[] = new int[a.size()];
- 		        for(int x = 0; x < a.size(); x++)
- 		            if(a.get(x).toString().startsWith("WheneverKeyword")) {
- 		            	WheneverKeyword_Number[WheneverKeywords] = x;
- 		            	WheneverKeywords = WheneverKeywords + 1;
- 		            }
- 		        for(int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
- 		    		if(Triggered == false) {	
-                 String parse = card.getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
-                 String k[] = parse.split(":");
-                 if((k[1].contains(Event))) {
-                	 runWheneverKeyword(Triggering_Card, Event, Custom_Parameters); // Beached
-                	 Triggered = true;
-                 }
- 		        }
- 		        }
- 		}
- 		}	
+
+    	PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+    	PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+    	PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
+    	PlayerZone Cgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
+    	PlayerZone HRFG = AllZone.getZone(Constant.Zone.Exile, AllZone.HumanPlayer);
+    	PlayerZone CRFG = AllZone.getZone(Constant.Zone.Exile, AllZone.ComputerPlayer);
+
+    	CardList Cards_WithKeyword = new CardList();
+    	Cards_WithKeyword.add(new CardList(Hplay.getCards()));
+    	Cards_WithKeyword.add(new CardList(Cplay.getCards()));
+    	Cards_WithKeyword.add(new CardList(Hgrave.getCards()));
+    	Cards_WithKeyword.add(new CardList(Cgrave.getCards()));
+    	Cards_WithKeyword.add(new CardList(HRFG.getCards()));
+    	Cards_WithKeyword.add(new CardList(CRFG.getCards()));
+    	Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			if(c.getKeyword().toString().contains("WheneverKeyword")) return true;
+    			return false;
+    		}
+    	});
+
+    	if(!Cards_WithKeyword.contains(Triggering_Card)) Cards_WithKeyword.add(Triggering_Card);
+
+    	boolean Triggered = false;
+    	for(int i = 0; i < Cards_WithKeyword.size() ; i++) {	
+    		if(Triggered == false) {	
+    			Card card = Cards_WithKeyword.get(i);
+    			ArrayList<String> a = card.getKeyword();
+    			int WheneverKeywords = 0;
+    			int WheneverKeyword_Number[] = new int[a.size()];
+    			for(int x = 0; x < a.size(); x++)
+    				if(a.get(x).toString().startsWith("WheneverKeyword")) {
+    					WheneverKeyword_Number[WheneverKeywords] = x;
+    					WheneverKeywords = WheneverKeywords + 1;
+    				}
+    			for(int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
+    				if(Triggered == false) {	
+    					String parse = card.getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
+    					String k[] = parse.split(":");
+    					if((k[1].contains(Event))) {
+    						runWheneverKeyword(Triggering_Card, Event, Custom_Parameters); // Beached
+    						Triggered = true;
+    					}
+    				}
+    			}
+    		}
+    	}	
     }
+    
 	static boolean MultiTarget_Cancelled = false;
-    public void runWheneverKeyword(Card c, String Event, Object[] Custom_Parameters) { 
-    	/**
-    	 * Custom_Parameters Info: 
-    	 * For GainLife		: Custom_Parameters[0] = Amount of Life Gained
-    	 * For DealsDamage	: Custom_Parameters[0] = Player Target
-    	 * 					: Custom_Parameters[2] = Damage Source
-    	 * For DrawCard		: Custom_Parameters[0] = Initiating Player
-    	 */
+	public void runWheneverKeyword(Card c, String Event, Object[] Custom_Parameters) { 
+		/**
+		 * Custom_Parameters Info: 
+		 * For GainLife		: Custom_Parameters[0] = Amount of Life Gained
+		 * For DealsDamage	: Custom_Parameters[0] = Player Target
+		 * 					: Custom_Parameters[2] = Damage Source
+		 * For DrawCard		: Custom_Parameters[0] = Initiating Player
+		 */
 		final Card F_TriggeringCard = c;
 		final String[] Custom_Strings = new String[10];
 		int Custom_Strings_Count = 0;
 		boolean Stop = false;
 		for(int i = 0; i < Custom_Strings.length; i++) Custom_Strings[i] = "Null";
-        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-        PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
-        PlayerZone Cgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
-        PlayerZone HRFG = AllZone.getZone(Constant.Zone.Exile, AllZone.HumanPlayer);
-        PlayerZone CRFG = AllZone.getZone(Constant.Zone.Exile, AllZone.ComputerPlayer);
-        
- 		CardList Cards_WithKeyword = new CardList();
-        Cards_WithKeyword.add(new CardList(Hplay.getCards()));
-        Cards_WithKeyword.add(new CardList(Cplay.getCards()));
-        Cards_WithKeyword.add(new CardList(Hgrave.getCards()));
-        Cards_WithKeyword.add(new CardList(Cgrave.getCards()));
-        Cards_WithKeyword.add(new CardList(HRFG.getCards()));
-        Cards_WithKeyword.add(new CardList(CRFG.getCards()));
- 		Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
-             public boolean addCard(Card c) {
-                 if(c.getKeyword().toString().contains("WheneverKeyword")) return true;
-                 return false;
-             }
-         });
- 		
- 		if(!Cards_WithKeyword.contains(c)) Cards_WithKeyword.add(c);
- 		
- 		for(int i = 0; i < Cards_WithKeyword.size() ; i++) {	
- 			Card card = Cards_WithKeyword.get(i);
- 			final Card F_card = card;
- 		        ArrayList<String> a = card.getKeyword();
- 		        int WheneverKeywords = 0;
- 		        int WheneverKeyword_Number[] = new int[a.size()];
- 		        for(int x = 0; x < a.size(); x++)
- 		            if(a.get(x).toString().startsWith("WheneverKeyword")) {
- 		            	WheneverKeyword_Number[WheneverKeywords] = x;
- 		            	WheneverKeywords = WheneverKeywords + 1;
- 		            }
- 		        for(int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
-                 String parse = card.getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
-                 String k[] = parse.split(":");
-                 final String F_k[] = k;
-                 // Conditions
-                 if((k[1].contains(Event)))
-                		 {      
-                    if(k[1].contains("DealsDamage")) {
-                    	boolean Nullified = true;
-                        String DamageTakerParse = k[1];                
-                        String DamageTaker[] = DamageTakerParse.split("/");
-                        for(int z = 0; z < DamageTaker.length - 1; z++) {
-                        	if(DamageTaker[z + 1].equals("Opponent") && Custom_Parameters[0].equals(card.getController().getOpponent())) Nullified = false;  
-                        }
-                        if(Nullified == true) k[4] = "Null";   
-                        }
-                    if(k[1].contains("CastSpell")) {
-                    	boolean Nullified = true;              	
-                        String SpellControllerParse = k[1];                
-                        String SpellController[] = SpellControllerParse.split("/");
-                        for(int z = 0; z < SpellController.length - 1; z++) {
-                        	if(SpellController[z + 1].equals("Controller") && (c.getController()).equals(card.getController())) Nullified = false;  
-                        	if(SpellController[z + 1].equals("Opponent") && (c.getController()).equals(card.getController().getOpponent())) Nullified = false;
-                        	if(SpellController[z + 1].equals("Any")) Nullified = false;
-                        }
-                        if(Nullified == true) k[4] = "Null";   
-                        }
-                    if(k[1].contains("PlayLand")) {
-                    	boolean Nullified = true;              	
-                        String SpellControllerParse = k[1];                
-                        String SpellController[] = SpellControllerParse.split("/");
-                        for(int z = 0; z < SpellController.length - 1; z++) {
-                        	if(SpellController[z + 1].equals("Controller") && (c.getController()).equals(card.getController())) Nullified = false;  
-                        	if(SpellController[z + 1].equals("Opponent") && (c.getController()).equals(card.getController().getOpponent())) Nullified = false;
-                        	if(SpellController[z + 1].equals("Any")) Nullified = false;
-                        }
-                        if(Nullified == true) k[4] = "Null";   
-                        }
-                    int Initiator_Conditions = 1;
-                    String ConditionsParse = k[2];                
-                    String Conditions[] = ConditionsParse.split("!");
-                    Initiator_Conditions = Conditions.length;
-                        for(int y = 0; y < Initiator_Conditions; y++) {
-                            if(Conditions[y].contains("Self") && !Conditions[y].contains("ControllingPlayer_Self")) {
-                            	if(!card.equals(c)) k[4] = "Null";    
-                                }
-                            if(Conditions[y].contains("ControllingPlayer_Self")) {
-                            	if(!card.getController().equals(Custom_Parameters[0])) k[4] = "Null";    
-                                }
-                            if(Conditions[y].contains("ControllingPlayer_Opponent")) {
-                            	// Special Case for Draw Card
-                            	if(Event.equals("DrawCard")) {
-                            		if(!card.getController().equals(((Player) Custom_Parameters[0]).getOpponent())) k[4] = "Null"; 	
-                            	} else if(!card.getController().equals(c.getController().getOpponent())) k[4] = "Null";    
-                                }
-                                
-                            if(Conditions[y].contains("Enchanted_Creature")) {
-                            	if(((Card)Custom_Parameters[2]).getEnchantedBy().contains(card) == false) k[4] = "Null";    
-                                }
-                            if(Conditions[y].contains("Equipped_Creature")) {
-                            	if(((Card)Custom_Parameters[2]).getEquippedBy().contains(card) == false) k[4] = "Null";    
-                                }
-                           	if(Conditions[y].contains("Type") && !Conditions[y].contains("OneTypeOfMany")) {
-                                String TypeParse = Conditions[y];                
-                                String Type[] = TypeParse.split("/");
-                                for(int z = 0; z < Type.length - 1; z++) if(!c.isType(Type[z + 1])) k[4] = "Null";     		
-                                     	}
-                           	if(Conditions[y].contains("OneTypeOfMany")) {
-                           		boolean Nullified = true;
-                                String TypeParse = Conditions[y];                
-                                String Type[] = TypeParse.split("/");
-                                for(int z = 0; z < Type.length - 1; z++) if(c.isType(Type[z + 1])) Nullified = false;   
-                                if(Nullified == true) k[4] = "Null";
-                                     	}
-                           	if(Conditions[y].contains("Color")) {
-                                String ColorParse = Conditions[y];                
-                                String Color[] = ColorParse.split("/");
-                                for(int z = 0; z < Color.length - 1; z++) if(!CardUtil.getColors(c).contains(Color[z + 1])) k[4] = "Null";     		
-                                     	}
-                            }
-                    // Zone Condition
-                		String Zones = k[3];
-                        PlayerZone[] Required_Zones = new PlayerZone[1];
-                        	if(Zones.equals("Hand")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                        	if(Zones.equals("Graveyard")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                        	if(Zones.equals("Play") || Zones.equals("Any")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                        	if(Zones.contains("Library")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Library, card.getController());
-                        	if(Zones.contains("Exiled")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Exile, card.getController());
-                        //	if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, card.getController());
-                        	final PlayerZone Required_Zone = Required_Zones[0]; 
-                        	final String F_Zones = Zones;
-                    // Special Conditions   
-                        int Special_Conditions = 1;
-                        String Special_ConditionsParse = k[8];                
-                        String Special_Condition[] = Special_ConditionsParse.split("!");
-                        Special_Conditions = Special_Condition.length;
-                            for(int y = 0; y < Special_Conditions; y++) {
-                            	
-                  	if(Special_Condition[y].contains("Initiator - Other than Self")) {
-                 		if(card.equals(c)) k[4] = "Null";      		
-                 	}
-                  	if(Special_Condition[y].contains("Initiator - OwnedByController")) {
-                 		if(!c.getController().equals(card.getController())) k[4] = "Null";      		
-                 	}
-                  	if(Special_Condition[y].contains("Initiator - Has Keyword")) {
-                  		boolean Nullified = true;
-                        String KeywordParse = Special_Condition[y];                
-                        String Keyword[] = KeywordParse.split("/");
-                        for(int z = 0; z < Keyword.length - 1; z++) if((c.getKeyword()).contains(Keyword[z + 1])) Nullified = false;  
-                        if(Nullified == true) k[4] = "Null";
-                 	}
-                  	if(Special_Condition[y].contains("ControllerUpkeep")) {
-                        if(!AllZone.Phase.isPlayerTurn(card.getController())) k[4] = "Null";	
-                 	}
-                  	if(Special_Condition[y].contains("ControllerEndStep")) {
-                        if(!AllZone.Phase.isPlayerTurn(card.getController())) k[4] = "Null";	
-                 	}
-                  	if(Special_Condition[y].contains("MoreCardsInHand")) {
-                        if(((AllZone.getZone(Constant.Zone.Hand, card.getController())).getCards()).length 
-                        		<= (AllZone.getZone(Constant.Zone.Hand, card.getController().getOpponent())).getCards().length) k[4] = "Null";
-                 	}
-                  	if(Special_Condition[y].contains("SearchType")) {
-                    	for(int TypeRestrict = 0; TypeRestrict < (Special_Condition[y].split("/")).length - 1; TypeRestrict ++) {
-                        	Custom_Strings[Custom_Strings_Count] = "Type" + (Special_Condition[y].split("/"))[TypeRestrict + 1];
-                    	Custom_Strings_Count++;
-                    	}
-                 	}
-                  	if(Special_Condition[y].contains("SearchColor")) {
-                    	for(int ColorRestrict = 0; ColorRestrict < (Special_Condition[y].split("/")).length - 1; ColorRestrict ++) {
-                        	Custom_Strings[Custom_Strings_Count] = "Color" + (Special_Condition[y].split("/"))[ColorRestrict + 1];
-                    	Custom_Strings_Count++;
-                    	}
-                 	}
-                  	if(Special_Condition[y].contains("Suspended")) {
-                 		if(!card.hasSuspend()) k[4] = "Null";      		
-                 	}  	
-                    }
-                            
-                  	// Mana Cost (if Any)
-            		String ManaCost = "0";
-            		if(k[7].contains("PayMana")) {
-                        String PayAmountParse = k[7];                
-                        ManaCost = PayAmountParse.split("/")[1];
-            		}
-            		
-                  	// Targets
-            		           		
-                    int Target_Conditions = 1;
-                    String TargetParse = k[5];                
-                    String Targets[] = TargetParse.split("!");
-                    Target_Conditions = Targets.length;
-                    Player TargetPlayer[] = new Player[Target_Conditions];
-                    Card TargetCard[] = new Card[Target_Conditions];
-                        for(int y = 0; y < Target_Conditions; y++) {       			
-    				if(Targets[y].equals("ControllingPlayer_Self")) TargetPlayer[y] = card.getController();
-    				if(Targets[y].equals("ControllingPlayer_Opponent")) TargetPlayer[y] = card.getController().getOpponent();
-    				if(Targets[y].equals("ControllingPlayer_Initiator")) TargetPlayer[y] = F_TriggeringCard.getController();  				  				
-    				if(Targets[y].equals("Self")) TargetCard[y] = F_card;
-    				if(Targets[y].equals("Initiating_Card")) TargetCard[y] = c; 
-                        }
+		PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+		PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+		PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
+		PlayerZone Cgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
+		PlayerZone HRFG = AllZone.getZone(Constant.Zone.Exile, AllZone.HumanPlayer);
+		PlayerZone CRFG = AllZone.getZone(Constant.Zone.Exile, AllZone.ComputerPlayer);
 
-                        final Player[] F_TargetPlayer = TargetPlayer;
-                        final Card[] F_TargetCard = TargetCard;
-                     //   JOptionPane.showMessageDialog(null, Targets, "", JOptionPane.INFORMATION_MESSAGE);
-                        
-    				// Effects
-                        
-                        int Effects = 1;
-                        String EffectParse = k[4];                
-                        String Effect[] = EffectParse.split("!");
-                        Effects = Effect.length;
-                        final Command[] Command_Effects = new Command[Effects];
-                        final Command[] CommandExecute = new Command[1];
-                        String StackDescription = F_card + " - ";                    
-                        final int[] Effects_Count = new int[1];   
-                        
-                   		final Ability Ability = new Ability(card, ManaCost) {
-                			@Override
-                			public void resolve() {
-                				for(int Commands = 0; Commands < Command_Effects.length; Commands++) Whenever_ManaPaid(F_card, F_k, Command_Effects[Commands], this);
-                			}
-                		};
-                        
-                   		final Spell Spell = new Spell(card) {
-							private static final long serialVersionUID = -4909393989689642952L;
+		CardList Cards_WithKeyword = new CardList();
+		Cards_WithKeyword.add(new CardList(Hplay.getCards()));
+		Cards_WithKeyword.add(new CardList(Cplay.getCards()));
+		Cards_WithKeyword.add(new CardList(Hgrave.getCards()));
+		Cards_WithKeyword.add(new CardList(Cgrave.getCards()));
+		Cards_WithKeyword.add(new CardList(HRFG.getCards()));
+		Cards_WithKeyword.add(new CardList(CRFG.getCards()));
+		Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				if(c.getKeyword().toString().contains("WheneverKeyword")) return true;
+				return false;
+			}
+		});
 
-							@Override
-                			public void resolve() {
-                				for(int Commands = 0; Commands < Command_Effects.length; Commands++) Whenever_ManaPaid(F_card, F_k, Command_Effects[Commands], this);
-                			}
-                		};
+		if(!Cards_WithKeyword.contains(c)) Cards_WithKeyword.add(c);
 
-                		SpellAbility[] SpellAbility = new SpellAbility[1];
-                		if(k[1].equals("ActualSpell")) SpellAbility[0] = Spell;
-                		else SpellAbility[0] = Ability;
-                		
-                		final SpellAbility F_SpellAbility = SpellAbility[0];
-                		
-                		if(k[7].contains("Choice_Instant") && k[4] != "Null") {
-                	    	if(card.getController().equals(AllZone.HumanPlayer)) {
-                	        	Object[] possibleValues = {"Yes", "No"};
-                	        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + card.getName(),card.getName() + " Ability", 
-                	        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                	        			null, possibleValues, possibleValues[0]);
-                	              if(q.equals(1)) {
-                	            	  Stop = true;
-                	                }
-                	    	}
-                		}
-                		if(Stop == false) { 
-                		
-                        for(int y = 0; y < Effects; y++) {  
-                        	// Variables
-                           String AmountParse = Effect[y];                          
-                           String[] S_Amount = AmountParse.split("/");
-                           int[] I_Amount = new int[S_Amount.length - 1];
-                           int Multiple_Targets = 1;
-                           
-                           for(int b = 0; b < S_Amount.length - 1; b++) {
-                           if(S_Amount[b+1].equals("Toughness")) I_Amount[b] = F_TriggeringCard.getNetDefense();
-                           else if(S_Amount[b+1].equals("Power")) I_Amount[b] = F_TriggeringCard.getNetAttack();
-                           else if(S_Amount[b+1].equals("Life_Gained")) I_Amount[b] = ((Integer)Custom_Parameters[0]);
-                           else if(S_Amount[b+1].contains("ControlledAmountType")) {
-                        	   final String[] TypeSplit =  AmountParse.split("/");
-                        		CardList Cards_WithAllTypes = new CardList();
-                        		Cards_WithAllTypes.add(new CardList(AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards()));
-                        		Cards_WithAllTypes = Cards_WithAllTypes.filter(new CardListFilter() {
-                                     public boolean addCard(Card c) {
-                                    	 for(int z = 0; z < TypeSplit.length - 1; z++)
-                                         if(c.isType(TypeSplit[z + 1])) return true;
-                                         return false;
-                                     }
-                                 });
-                        		I_Amount[b] = Cards_WithAllTypes.size();
-                           }
-                           else if(!S_Amount[0].equals("KeywordPumpEOT")&& !S_Amount[1].contains("ControlledAmountType")) I_Amount[b] = Integer.valueOf(S_Amount[b+1]);
-                           
-                           // NOTE: Multiple Targets and Groups of Integers is not supported
-                           
-                           if(k[8].contains("MultipleTargets")) {
-                           	Multiple_Targets = I_Amount[0];
-                           	I_Amount[0] = 1;
-                           }
-                           } // For
-                           // Input for Targets
-                           
-                           final int F_Multiple_Targets = Multiple_Targets; 
-                       	   final Object[] Targets_Multi = new Object[Multiple_Targets];
-                           final int[] index = new int[1];
-                           final int[] F_Amount = I_Amount;
-                           final String[] F_S_Amount = S_Amount;
-                           final int F_Target = Effects_Count[0];
+		for(int i = 0; i < Cards_WithKeyword.size() ; i++) {	
+			Card card = Cards_WithKeyword.get(i);
+			final Card F_card = card;
+			ArrayList<String> a = card.getKeyword();
+			int WheneverKeywords = 0;
+			int WheneverKeyword_Number[] = new int[a.size()];
+			for(int x = 0; x < a.size(); x++)
+				if(a.get(x).toString().startsWith("WheneverKeyword")) {
+					WheneverKeyword_Number[WheneverKeywords] = x;
+					WheneverKeywords = WheneverKeywords + 1;
+				}
+			for(int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
+				String parse = card.getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
+				String k[] = parse.split(":");
+				final String F_k[] = k;
+				// Conditions
+				if((k[1].contains(Event)))
+				{      
+					if(k[1].contains("DealsDamage")) {
+						boolean Nullified = true;
+						String DamageTakerParse = k[1];                
+						String DamageTaker[] = DamageTakerParse.split("/");
+						for(int z = 0; z < DamageTaker.length - 1; z++) {
+							if(DamageTaker[z + 1].equals("Opponent") && Custom_Parameters[0].equals(card.getController().getOpponent())) Nullified = false;  
+						}
+						if(Nullified == true) k[4] = "Null";   
+					}
+					if(k[1].contains("CastSpell")) {
+						boolean Nullified = true;              	
+						String SpellControllerParse = k[1];                
+						String SpellController[] = SpellControllerParse.split("/");
+						for(int z = 0; z < SpellController.length - 1; z++) {
+							if(SpellController[z + 1].equals("Controller") && (c.getController()).equals(card.getController())) Nullified = false;  
+							if(SpellController[z + 1].equals("Opponent") && (c.getController()).equals(card.getController().getOpponent())) Nullified = false;
+							if(SpellController[z + 1].equals("Any")) Nullified = false;
+						}
+						if(Nullified == true) k[4] = "Null";   
+					}
+					if(k[1].contains("PlayLand")) {
+						boolean Nullified = true;              	
+						String SpellControllerParse = k[1];                
+						String SpellController[] = SpellControllerParse.split("/");
+						for(int z = 0; z < SpellController.length - 1; z++) {
+							if(SpellController[z + 1].equals("Controller") && (c.getController()).equals(card.getController())) Nullified = false;  
+							if(SpellController[z + 1].equals("Opponent") && (c.getController()).equals(card.getController().getOpponent())) Nullified = false;
+							if(SpellController[z + 1].equals("Any")) Nullified = false;
+						}
+						if(Nullified == true) k[4] = "Null";   
+					}
+					int Initiator_Conditions = 1;
+					String ConditionsParse = k[2];                
+					String Conditions[] = ConditionsParse.split("!");
+					Initiator_Conditions = Conditions.length;
+					for(int y = 0; y < Initiator_Conditions; y++) {
+						if(Conditions[y].contains("Self") && !Conditions[y].contains("ControllingPlayer_Self")) {
+							if(!card.equals(c)) k[4] = "Null";    
+						}
+						if(Conditions[y].contains("ControllingPlayer_Self")) {
+							if(!card.getController().equals(Custom_Parameters[0])) k[4] = "Null";    
+						}
+						if(Conditions[y].contains("ControllingPlayer_Opponent")) {
+							// Special Case for Draw Card
+							if(Event.equals("DrawCard")) {
+								if(!card.getController().equals(((Player) Custom_Parameters[0]).getOpponent())) k[4] = "Null"; 	
+							} else if(!card.getController().equals(c.getController().getOpponent())) k[4] = "Null";    
+						}
 
-                		
-                           final Command MultiTargetsCommand = new Command() {
-                               private static final long serialVersionUID = -83034517601871955L;
-                               
-                               public void execute() {
-                               	MultiTarget_Cancelled = false;
-                                   for(int i = 0; i < F_Multiple_Targets; i++) {
-                                  	 AllZone.InputControl.setInput(CardFactoryUtil.input_MultitargetCreatureOrPlayer(F_SpellAbility , i , F_Amount[0]*F_Multiple_Targets,new Command() {
-                                  	
-                                        private static final long serialVersionUID = -328305150127775L;
-                                        
-                                        public void execute() {
-                                       	 Targets_Multi[index[0]] = F_SpellAbility.getTargetPlayer(); 
-                                       	 if(Targets_Multi[index[0]] == null) Targets_Multi[index[0]] = F_SpellAbility.getTargetCard();
-                                            index[0]++;  
-                                            if(F_Multiple_Targets == 1) AllZone.Stack.updateObservers();
-                                       	 }
-                                    }));
-                                   } 
-                               	AllZone.Stack.add(F_SpellAbility);
-                               }
-                           };
-                           
-                           final Command InputCommand = new Command() {
-                               private static final long serialVersionUID = -83034517601871955L;
-                               
-                               public void execute() {             						
-                   		            String WhichInput = F_k[5].split("/")[1]; 
-                   		            if(WhichInput.equals("Creature")) 
-                   		            	if(F_card.getController().equals(AllZone.HumanPlayer))
-                   		            		AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(F_SpellAbility, GetTargetsCommand));
-                   		            	else {
-                   		            		CardList PossibleTargets = new CardList();	
-                   		            		PossibleTargets.addAll(AllZone.Human_Battlefield.getCards());
-                   		            		PossibleTargets.addAll(AllZone.Computer_Battlefield.getCards());
-                   		            		PossibleTargets = PossibleTargets.getType("Creature");
-                   		            		if(Whenever_AI_GoodEffect(F_k)) {
-                   		            			PossibleTargets = PossibleTargets.filter(new CardListFilter() {
-                                                    public boolean addCard(Card c) {
-                                                        if(c.getController().equals(AllZone.ComputerPlayer)) return true;
-                                                        return false;
-                                                    }
-                                        		});
-                   		            			if(PossibleTargets.size() > 0) {
-                   		            			Targets_Multi[index[0]] = CardFactoryUtil.AI_getBestCreature(PossibleTargets,F_card);
-                   		            			AllZone.Stack.add(F_SpellAbility);              		            			 
-                   		            			}
-                   		            			index[0]++;
-                   		            		} else {
-                   		            			PossibleTargets = PossibleTargets.filter(new CardListFilter() {
-                                                    public boolean addCard(Card c) {
-                                                        if(c.getController().equals(AllZone.HumanPlayer)) return true;
-                                                        return false;
-                                                    }
-                                        		});
-                   		            			if(PossibleTargets.size() > 0) {
-                       		            		Targets_Multi[index[0]] = CardFactoryUtil.AI_getBestCreature(PossibleTargets,F_card);
-                       		            		AllZone.Stack.add(F_SpellAbility);              		            			 
-                       		            		}
-                       		            		index[0]++; 
-                   		            		}
-                           		      		
-                   		            	}
-                   		            if(WhichInput.equals("Player")) 
-                   		            	if(F_card.getController().equals(AllZone.HumanPlayer))
-                   		            		AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(F_SpellAbility, GetTargetsCommand));
-                   		            	else {
-                   		            		if(Whenever_AI_GoodEffect(F_k)) {
-                   		            			Targets_Multi[index[0]] = AllZone.ComputerPlayer;
-                   		            			if(Targets_Multi[index[0]] != null) AllZone.Stack.add(F_SpellAbility);
-                   		            			index[0]++; 
-                   		            		}
-                   		            		 else {
-                   		            			 Targets_Multi[index[0]] = AllZone.HumanPlayer;
-                   		            		     if(Targets_Multi[index[0]] != null) AllZone.Stack.add(F_SpellAbility);
-                   		            			 index[0]++; 
-                   		            		 }
-                           		      		
-                   		            	}
-                   		            if(WhichInput.contains("Specific")) {
-                   		      		CardList Cards_inPlay = new CardList();
-                   		      		Cards_inPlay.addAll(AllZone.Human_Battlefield.getCards());
-                   		      		Cards_inPlay.addAll(AllZone.Computer_Battlefield.getCards());
-                   		      		final String[] Specific = F_k[5].split("/");
-                   		      		final int[] Restriction_Count = new int[1]; 
-                   		      		for(int i = 0; i < Specific.length - 2;i++) {
-                   		      			if(Specific[i+2].contains("Type.") && !Specific[i+2].contains("NonType.")) {
-                   		      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
-                                                public boolean addCard(Card c) {
-                                                    if(c.isType(Specific[Restriction_Count[0] + 2].replaceFirst("Type.", ""))) return true;
-                                                    return false;
-                                                }
-                                    		});
-                   		      			}
-                   		      			if(Specific[i+2].contains("NonType.")) {
-                       		      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
-                                                    public boolean addCard(Card c) {
-                                                        if(!c.isType(Specific[Restriction_Count[0] + 2].replaceFirst("NonType.", ""))) return true;
-                                                        return false;
-                                                    }
-                                        		});
-                       		      			}
-                   		      			if(Specific[i+2].contains("Color.") && !Specific[i+2].contains("NonColor.")) {
-                       		      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
-                                                    public boolean addCard(Card c) {
-                                                        if(CardUtil.getColors(c).contains(Specific[Restriction_Count[0] + 2].replaceFirst("Color.", ""))) return true;
-                                                        return false;
-                                                    }
-                                        		});	
-                       		      			}
-                   		      			if(Specific[i+2].contains("NonColor.")) {
-                       		      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
-                                                    public boolean addCard(Card c) {
-                                                        if(!CardUtil.getColors(c).contains(Specific[Restriction_Count[0] + 2].replaceFirst("NonColor.", ""))) return true;
-                                                        return false;
-                                                    }
-                                        		});	
-                       		      			}
-                   		      			if(Specific[i+2].equals("NotSelf")) {
-                       		      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
-                                                    public boolean addCard(Card c) {
-                                                        if(!c.equals(F_card)) return true;
-                                                        return false;
-                                                    }
-                                        		});
-                       		      			}
-                   		      		Restriction_Count[0]++;
-                   		      		}
-                   		            	if(F_card.getController().equals(AllZone.HumanPlayer))
-                   		            		AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(F_SpellAbility, Cards_inPlay, "Select a Valid Card", GetTargetsCommand, true, true));
-                   		            	else {
-                   		            		if(Whenever_AI_GoodEffect(F_k)) {
-                   		            			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
-                                                    public boolean addCard(Card c) {
-                                                        if(c.getController().equals(AllZone.ComputerPlayer)) return true;
-                                                        return false;
-                                                    }
-                                        		});
-                		            			if(Cards_inPlay.size() > 0) {
-                           		            		Targets_Multi[index[0]] = CardFactoryUtil.AI_getBestCreature(Cards_inPlay,F_card);
-                           		            		AllZone.Stack.add(F_SpellAbility);              		            			 
-                           		            		}
-                           		            		index[0]++; 
-                   		            		} else {
-                   		            			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
-                                                    public boolean addCard(Card c) {
-                                                        if(c.getController().equals(AllZone.HumanPlayer)) return true;
-                                                        return false;
-                                                    }
-                                        		});
-                  		            			if(Cards_inPlay.size() > 0) {
-                           		            		Targets_Multi[index[0]] = CardFactoryUtil.AI_getBestCreature(Cards_inPlay,F_card);
-                           		            		AllZone.Stack.add(F_SpellAbility);              		            			 
-                           		            		}
-                           		            		index[0]++;                  		            			
-                   		            		}
-                           		      		
-                   		            	}
-                   		            }	
-                   		            
-                   		         AllZone.Stack.updateObservers();
-                               }
-                               
-                   		   final Command GetTargetsCommand = new Command() {
-                                  	
-                                        private static final long serialVersionUID = -328305150127775L;
-                                        
-                                        public void execute() {
-                                       	 Targets_Multi[index[0]] = F_SpellAbility.getTargetPlayer(); 
-                                       	 if(Targets_Multi[index[0]] == null) Targets_Multi[index[0]] = F_SpellAbility.getTargetCard();
-                                       	if(F_k[8].contains("AttachTarget")) F_card.attachCard((Card) Targets_Multi[index[0]]);
-                                            index[0]++;  
-                                            if(F_Multiple_Targets == 1) AllZone.Stack.updateObservers();                                       
-                                      	 }
-                           };
-                               
-                           };
-                           
-                           if(k[8].contains("MultipleTargets")) CommandExecute[0] = MultiTargetsCommand;
-                           else if(k[8].contains("SingleTarget")) CommandExecute[0] = MultiTargetsCommand;
-                           else if(k[5].contains("NormalInput")) CommandExecute[0] = InputCommand;
-                           else {
-                        	   if(F_TargetPlayer[y] != null) Targets_Multi[index[0]] = F_TargetPlayer[y];
-                        	   if(F_TargetCard[y] != null) Targets_Multi[index[0]] = F_TargetCard[y];
-                        	   index[0]++; 
-                        	   CommandExecute[0] = Command.Blank;
-                           }
-                    
-                           // Null
-                   		if(Effect[y].equals("Null")) {
-                        Command_Effects[F_Target] = Command.Blank;      
-                   		}
-                   		
-                		// +1 +1 Counters
-                		if(Effect[y].contains("+1+1 Counters")) {
+						if(Conditions[y].contains("Enchanted_Creature")) {
+							if(((Card)Custom_Parameters[2]).getEnchantedBy().contains(card) == false) k[4] = "Null";    
+						}
+						if(Conditions[y].contains("Equipped_Creature")) {
+							if(((Card)Custom_Parameters[2]).getEquippedBy().contains(card) == false) k[4] = "Null";    
+						}
+						if(Conditions[y].contains("Type") && !Conditions[y].contains("OneTypeOfMany")) {
+							String TypeParse = Conditions[y];                
+							String Type[] = TypeParse.split("/");
+							for(int z = 0; z < Type.length - 1; z++) if(!c.isType(Type[z + 1])) k[4] = "Null";     		
+						}
+						if(Conditions[y].contains("OneTypeOfMany")) {
+							boolean Nullified = true;
+							String TypeParse = Conditions[y];                
+							String Type[] = TypeParse.split("/");
+							for(int z = 0; z < Type.length - 1; z++) if(c.isType(Type[z + 1])) Nullified = false;   
+							if(Nullified == true) k[4] = "Null";
+						}
+						if(Conditions[y].contains("Color")) {
+							String ColorParse = Conditions[y];                
+							String Color[] = ColorParse.split("/");
+							for(int z = 0; z < Color.length - 1; z++) if(!CardUtil.getColors(c).contains(Color[z + 1])) k[4] = "Null";     		
+						}
+					}
+					// Zone Condition
+					String Zones = k[3];
+					PlayerZone[] Required_Zones = new PlayerZone[1];
+					if(Zones.equals("Hand")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Hand, card.getController());
+					if(Zones.equals("Graveyard")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+					if(Zones.equals("Play") || Zones.equals("Any")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+					if(Zones.contains("Library")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Library, card.getController());
+					if(Zones.contains("Exiled")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Exile, card.getController());
+					//	if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, card.getController());
+					final PlayerZone Required_Zone = Required_Zones[0]; 
+					final String F_Zones = Zones;
+					// Special Conditions   
+					int Special_Conditions = 1;
+					String Special_ConditionsParse = k[8];                
+					String Special_Condition[] = Special_ConditionsParse.split("!");
+					Special_Conditions = Special_Condition.length;
+					for(int y = 0; y < Special_Conditions; y++) {
 
-                			Command Proper_resolve = new Command() {
-                            	private static final long serialVersionUID = 151367344511590317L;
+						if(Special_Condition[y].contains("Initiator - Other than Self")) {
+							if(card.equals(c)) k[4] = "Null";      		
+						}
+						if(Special_Condition[y].contains("Initiator - OwnedByController")) {
+							if(!c.getController().equals(card.getController())) k[4] = "Null";      		
+						}
+						if(Special_Condition[y].contains("Initiator - Has Keyword")) {
+							boolean Nullified = true;
+							String KeywordParse = Special_Condition[y];                
+							String Keyword[] = KeywordParse.split("/");
+							for(int z = 0; z < Keyword.length - 1; z++) if((c.getKeyword()).contains(Keyword[z + 1])) Nullified = false;  
+							if(Nullified == true) k[4] = "Null";
+						}
+						if(Special_Condition[y].contains("ControllerUpkeep")) {
+							if(!AllZone.Phase.isPlayerTurn(card.getController())) k[4] = "Null";	
+						}
+						if(Special_Condition[y].contains("ControllerEndStep")) {
+							if(!AllZone.Phase.isPlayerTurn(card.getController())) k[4] = "Null";	
+						}
+						if(Special_Condition[y].contains("MoreCardsInHand")) {
+							if(((AllZone.getZone(Constant.Zone.Hand, card.getController())).getCards()).length 
+									<= (AllZone.getZone(Constant.Zone.Hand, card.getController().getOpponent())).getCards().length) k[4] = "Null";
+						}
+						if(Special_Condition[y].contains("SearchType")) {
+							for(int TypeRestrict = 0; TypeRestrict < (Special_Condition[y].split("/")).length - 1; TypeRestrict ++) {
+								Custom_Strings[Custom_Strings_Count] = "Type" + (Special_Condition[y].split("/"))[TypeRestrict + 1];
+								Custom_Strings_Count++;
+							}
+						}
+						if(Special_Condition[y].contains("SearchColor")) {
+							for(int ColorRestrict = 0; ColorRestrict < (Special_Condition[y].split("/")).length - 1; ColorRestrict ++) {
+								Custom_Strings[Custom_Strings_Count] = "Color" + (Special_Condition[y].split("/"))[ColorRestrict + 1];
+								Custom_Strings_Count++;
+							}
+						}
+						if(Special_Condition[y].contains("Suspended")) {
+							if(!card.hasSuspend()) k[4] = "Null";      		
+						}  	
+					}
 
-                    			public void execute() {
-                    				if(Whenever_Go(F_card,F_k) == true) {
-                    					CardList All = Check_if_All_Targets(F_card, F_k);
-                    					if(All.size() > 0) {
-                    						for(int i = 0; i < All.size(); i++) {
-                            					if(AllZone.GameAction.isCardInZone(All.get(i),Required_Zone) || F_Zones.equals("Any")) 
-                            						All.get(i).addCounter(Counters.P1P1, F_Amount[0]);	
-                    						}
-                    					}
-                    					if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone) || F_Zones.equals("Any")) 
-                    						F_TargetCard[F_Target].addCounter(Counters.P1P1, F_Amount[0]);
-                    				}
-                    				};
-                		};
-                        Command_Effects[F_Target] = Proper_resolve;      
-                        if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + "all specified permanents get" + F_Amount[0] + " +1/+1 counters";
-                        else StackDescription = StackDescription +  F_TargetCard[y] + " gets " + F_Amount[0] + " +1/+1 counters";
-                	}
-                		
-                		// CustomCounters.(What Counter)/Amount
-                		if(Effect[y].contains("CustomCounter")) {
+					// Mana Cost (if Any)
+					String ManaCost = "0";
+					if(k[7].contains("PayMana")) {
+						String PayAmountParse = k[7];                
+						ManaCost = PayAmountParse.split("/")[1];
+					}
 
-                			Command Proper_resolve = new Command() {
-                            	private static final long serialVersionUID = 151367344511590317L;
+					// Targets
 
-                    			public void execute() {
-                    				if(Whenever_Go(F_card,F_k) == true) {
-                    					String PossibleCounter = (F_k[4].split("/")[0]).replaceFirst("CustomCounter.", "");
-                    					Counters Counter = null;
-                    					for(int i = 0; i < Counters.values().length ; i++) {
-                    						if(Counters.values()[i].toString().equals(PossibleCounter)) 
-                    							Counter = Counters.values()[i];
-                    					}
-                    					CardList All = Check_if_All_Targets(F_card, F_k);
-                    					if(All.size() > 0) {
-                    						for(int i = 0; i < All.size(); i++) {
-                            					if(AllZone.GameAction.isCardInZone(All.get(i),Required_Zone) || F_Zones.equals("Any")) 
-                            						All.get(i).addCounter(Counter, F_Amount[0]);	
-                    						}
-                    					}
-                    					if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone) || F_Zones.equals("Any")) 
-                    						F_TargetCard[F_Target].addCounter(Counter, F_Amount[0]);
-                    				}
-                    				};
-                		};
-                        Command_Effects[F_Target] = Proper_resolve;      
-                        if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + "all specified permanents get" + F_Amount[0] + " +1/+1 counters";
-                        else StackDescription = StackDescription +  F_TargetCard[y] + " gets " + F_Amount[0] + 
-                        " " + (F_k[4].split("/")[0]).replaceFirst("CustomCounter.", "") + " "+((F_Amount[0]>1)?"counters":"counter");
-                	}
-                		
-                		// StatsPumpEOT/Power/Toughness
-                		if(Effect[y].contains("StatsPumpEOT")) {
+					int Target_Conditions = 1;
+					String TargetParse = k[5];                
+					String Targets[] = TargetParse.split("!");
+					Target_Conditions = Targets.length;
+					Player TargetPlayer[] = new Player[Target_Conditions];
+					Card TargetCard[] = new Card[Target_Conditions];
+					for(int y = 0; y < Target_Conditions; y++) {       			
+						if(Targets[y].equals("ControllingPlayer_Self")) TargetPlayer[y] = card.getController();
+						if(Targets[y].equals("ControllingPlayer_Opponent")) TargetPlayer[y] = card.getController().getOpponent();
+						if(Targets[y].equals("ControllingPlayer_Initiator")) TargetPlayer[y] = F_TriggeringCard.getController();  				  				
+						if(Targets[y].equals("Self")) TargetCard[y] = F_card;
+						if(Targets[y].equals("Initiating_Card")) TargetCard[y] = c; 
+					}
 
-                			Command Proper_resolve = new Command() {
-                            	private static final long serialVersionUID = 151367344511590317L;
+					final Player[] F_TargetPlayer = TargetPlayer;
+					final Card[] F_TargetCard = TargetCard;
+					//   JOptionPane.showMessageDialog(null, Targets, "", JOptionPane.INFORMATION_MESSAGE);
 
-                    			public void execute() {
-                                    final Command untilEOT = new Command() {
-                                        private static final long serialVersionUID = 1497565871061029469L;
-                                        
-                                        public void execute() {                                       	
-                                            if(AllZone.GameAction.isCardInPlay(F_card)) {
-                                            	F_TargetCard[F_Target].addTempAttackBoost(- F_Amount[0]);
-                                            	F_TargetCard[F_Target].addTempDefenseBoost(- F_Amount[1]);
-                                            }
-                                        }
-                                        }; //Command
-                                        
-                    				if(Whenever_Go(F_card,F_k) == true) {
-                    					CardList All = Check_if_All_Targets(F_card, F_k);
-                    					if(All.size() > 0) {
-                    						for(int i = 0; i < All.size(); i++) { 
-                                                F_TargetCard[F_Target].addTempAttackBoost(F_Amount[0]);
-                                                F_TargetCard[F_Target].addTempDefenseBoost(F_Amount[1]);
-                                                AllZone.EndOfTurn.addUntil(untilEOT);	
-                    						}
-                    					}
-                    					else if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone) || F_Zones.equals("Any")) {                                       
-                                        F_TargetCard[F_Target].addTempAttackBoost(F_Amount[0]);
-                                        F_TargetCard[F_Target].addTempDefenseBoost(F_Amount[1]);
-                                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    					}
-                    				}
-                			};
-                		};
-                        Command_Effects[F_Target] = Proper_resolve;      
-                        if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + "all specified permanents get" + ((F_Amount[0] > -1)? "+" :"") + F_Amount[0] 
-                        + "/" + ((F_Amount[1] > -1)? "+" :"") + F_Amount[1]  + " until End of Turn";
-                        else StackDescription = StackDescription +  F_TargetCard[y] + " gets " + ((F_Amount[0] > -1)? "+" :"") + F_Amount[0] 
-                                           + "/" + ((F_Amount[1] > -1)? "+" :"") + F_Amount[1]  + " until End of Turn";
-                	}
-                	
-                		// KeywordPumpEOT/Keyword(s)
-                		if(Effect[y].contains("KeywordPumpEOT")) {
+					// Effects
 
-                			Command Proper_resolve = new Command() {
-                            	private static final long serialVersionUID = 151367344511590317L;
+					int Effects = 1;
+					String EffectParse = k[4];                
+					String Effect[] = EffectParse.split("!");
+					Effects = Effect.length;
+					final Command[] Command_Effects = new Command[Effects];
+					final Command[] CommandExecute = new Command[1];
+					String StackDescription = F_card + " - ";                    
+					final int[] Effects_Count = new int[1];   
 
-                    			public void execute() {
-            						final Command untilEOT = new Command() {
-                                        private static final long serialVersionUID = 1497565871061029469L;
-                                        
-                                        public void execute() {
-                                            if(AllZone.GameAction.isCardInPlay(F_card)) {
-                                                for(int i =0; i < F_S_Amount.length - 1; i++) {
-                                                    F_card.removeIntrinsicKeyword(F_S_Amount[i + 1]);
-                                                    }
-                                            }
-                                        }
-                                    };//Command
-                    				if(Whenever_Go(F_card,F_k) == true) {
-                    					CardList All = Check_if_All_Targets(F_card, F_k);
-                    					if(All.size() > 0) {
-                    						for(int i = 0; i < All.size(); i++) { 
-                                                for(int i2 =0; i2 < F_S_Amount.length - 1; i2++) {
-                                                    F_card.addIntrinsicKeyword(F_S_Amount[i2 + 1]);
-                                                    }
-                                                    AllZone.EndOfTurn.addUntil(untilEOT);	
-                    						}
-                    					}
-                    					else if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone) || F_Zones.equals("Any")) {                                       
-                                        for(int i =0; i < F_S_Amount.length - 1; i++) {
-                                        F_card.addIntrinsicKeyword(F_S_Amount[i + 1]);
-                                        }
-                                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    				}
-                    					}
-                			};
-                		};
-                		String Desc = "";
-                		for(int KW =0; KW < F_S_Amount.length - 1; KW++) {
-                		Desc = Desc + F_S_Amount[KW + 1];
-                		if(KW < F_S_Amount.length - 2) Desc = Desc + ", ";
-                		}
-                        Command_Effects[F_Target] = Proper_resolve;      
-                        if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + "all specified permanents get" + Desc + " until End of Turn";
-                        else StackDescription = StackDescription +  F_TargetCard[y] + " gets " + Desc + " until End of Turn";
-                	}
-                		
-                		// ModifyLife/Amount
-                		if(Effect[y].contains("ModifyLife")) {
-                			Command Proper_resolve = new Command() {
-                            	private static final long serialVersionUID = 151367344511590317L;
+					final Ability Ability = new Ability(card, ManaCost) {
+						@Override
+						public void resolve() {
+							for(int Commands = 0; Commands < Command_Effects.length; Commands++) Whenever_ManaPaid(F_card, F_k, Command_Effects[Commands], this);
+						}
+					};
 
-                    			public void execute() {
-                    				if(Whenever_Go(F_card,F_k) == true) 
-                    					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-    			        				if(F_Amount[0] > -1) 
-    			        					F_TargetPlayer[F_Target].gainLife(F_Amount[0], F_card);
-    			        				else 
-    			        					F_TargetPlayer[F_Target].loseLife(F_Amount[0] * -1,F_card);
-    			                      }
+					final Spell Spell = new Spell(card) {
+						private static final long serialVersionUID = -4909393989689642952L;
 
-			                      }
-                			};
-                            Command_Effects[F_Target] = Proper_resolve;      
-                            StackDescription = StackDescription +  F_TargetPlayer[F_Target] + ((F_Amount[0] > -1)? " gains " + F_Amount[0]:"") + ((F_Amount[0] <= -1)? " loses " + F_Amount[0] * -1:"") + " life";
-                		}
-                		
-                		// Destroy
-                		if(Effect[y].contains("Destroy")) {
+						@Override
+						public void resolve() {
+							for(int Commands = 0; Commands < Command_Effects.length; Commands++) Whenever_ManaPaid(F_card, F_k, Command_Effects[Commands], this);
+						}
+					};
 
-                			Command Proper_resolve = new Command() {
-                            	private static final long serialVersionUID = 151367344511590317L;
+					SpellAbility[] SpellAbility = new SpellAbility[1];
+					if(k[1].equals("ActualSpell")) SpellAbility[0] = Spell;
+					else SpellAbility[0] = Ability;
 
-                    			public void execute() {
-                        				if(Whenever_Go(F_card,F_k) == true) {
-                        					CardList All = Check_if_All_Targets(F_card, F_k);
-                        					if(All.size() > 0) {
-                        						for(int i = 0; i < All.size(); i++) { 
-                                						destroy(All.get(i));	
-                        						}
-                        					} else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-                        						for(int z = 0; z < Targets_Multi.length; z++) {
-                        							if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
-    			                                      && CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
-                        								Card c = (Card) Targets_Multi[z];
-                        								destroy(c);
-    			                              }
-    			                              }
-    			                      }
-                    			}
-                			};
-                		};
-                        Command_Effects[F_Target] = Proper_resolve;      
-                        if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + " destroys all specified permanents";
-                        else StackDescription = StackDescription + " destroys " + (((Card) Targets_Multi[y] != null)? (Card) Targets_Multi[y]:"");
-                	}
-                		
-                		// TapPermanent
-                		if(Effect[y].contains("TapPermanent")) {
+					final SpellAbility F_SpellAbility = SpellAbility[0];
 
-                			Command Proper_resolve = new Command() {
-                            	private static final long serialVersionUID = 151367344511590317L;
+					if(k[7].contains("Choice_Instant") && k[4] != "Null") {
+						if(card.getController().equals(AllZone.HumanPlayer)) {
+							Object[] possibleValues = {"Yes", "No"};
+							Object q = JOptionPane.showOptionDialog(null, "Activate - " + card.getName(),card.getName() + " Ability", 
+									JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+									null, possibleValues, possibleValues[0]);
+							if(q.equals(1)) {
+								Stop = true;
+							}
+						}
+					}
+					if(Stop == false) { 
 
-                    			public void execute() {
-                    				if(Whenever_Go(F_card,F_k) == true) {
-                    					CardList All = Check_if_All_Targets(F_card, F_k);
-                    					if(All.size() > 0) {
-                    						for(int i = 0; i < All.size(); i++) { 
-                    							All.get(i).tap();	
-                    						}
-                    					}
-                    					else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-    			                    	  for(int z = 0; z < Targets_Multi.length; z++) {
-    			                              if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
-    			                                      && CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
-    			                                  Card c = (Card) Targets_Multi[z];
-    			                                  c.tap();
-    			                              }
-    			                      }
-        	                    		}
-                    			}
-                			};
-                		};
-                        Command_Effects[F_Target] = Proper_resolve;      
-                        if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + " taps all specified permanents";
-                        else StackDescription = StackDescription + " taps " + (((Card) Targets_Multi[y] != null)? (Card) Targets_Multi[y]:"");
-                	}
-                	
-                		// UntapPermanent
-                		if(Effect[y].contains("UntapPermanent")) {
+						for(int y = 0; y < Effects; y++) {  
+							// Variables
+							String AmountParse = Effect[y];                          
+							String[] S_Amount = AmountParse.split("/");
+							int[] I_Amount = new int[S_Amount.length - 1];
+							int Multiple_Targets = 1;
 
-                			Command Proper_resolve = new Command() {
-                            	private static final long serialVersionUID = 151367344511590317L;
+							for(int b = 0; b < S_Amount.length - 1; b++) {
+								if(S_Amount[b+1].equals("Toughness")) I_Amount[b] = F_TriggeringCard.getNetDefense();
+								else if(S_Amount[b+1].equals("Power")) I_Amount[b] = F_TriggeringCard.getNetAttack();
+								else if(S_Amount[b+1].equals("Life_Gained")) I_Amount[b] = ((Integer)Custom_Parameters[0]);
+								else if(S_Amount[b+1].contains("ControlledAmountType")) {
+									final String[] TypeSplit =  AmountParse.split("/");
+									CardList Cards_WithAllTypes = new CardList();
+									Cards_WithAllTypes.add(new CardList(AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards()));
+									Cards_WithAllTypes = Cards_WithAllTypes.filter(new CardListFilter() {
+										public boolean addCard(Card c) {
+											for(int z = 0; z < TypeSplit.length - 1; z++)
+												if(c.isType(TypeSplit[z + 1])) return true;
+											return false;
+										}
+									});
+									I_Amount[b] = Cards_WithAllTypes.size();
+								}
+								else if(!S_Amount[0].equals("KeywordPumpEOT")&& !S_Amount[1].contains("ControlledAmountType")) I_Amount[b] = Integer.valueOf(S_Amount[b+1]);
 
-                    			public void execute() {
-                    				if(Whenever_Go(F_card,F_k) == true) {
-                    					CardList All = Check_if_All_Targets(F_card, F_k);
-                    					if(All.size() > 0) {
-                    						for(int i = 0; i < All.size(); i++) { 
-                    							All.get(i).untap();	
-                    						}
-                    					}
-                    					else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-    			                    	  for(int z = 0; z < Targets_Multi.length; z++) {
-    			                              if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
-    			                                      && CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
-    			                                  Card c = (Card) Targets_Multi[z];
-    			                                  c.untap();
-    			                              }
-    			                    	  }
-    			                      }
-                    			}
-                			};
-                		};
-                        Command_Effects[F_Target] = Proper_resolve;      
-                        if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + " untaps all specified permanents";
-                        else StackDescription = StackDescription + " untaps " + (((Card) Targets_Multi[y] != null)? (Card) Targets_Multi[y]:"");
-                	}
-                		
-                		
-                		// Draw Cards
-                		if(Effect[y].contains("DrawCards")) {
-                    			Command Proper_resolve = new Command() {
-                                	private static final long serialVersionUID = 151367344511590317L;
+								// NOTE: Multiple Targets and Groups of Integers is not supported
 
-                        			public void execute() {
-                        				if(Whenever_Go(F_card,F_k) == true) 
-                        					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-                        						F_TargetPlayer[F_Target].drawCard();
-      			                      }
+								if(k[8].contains("MultipleTargets")) {
+									Multiple_Targets = I_Amount[0];
+									I_Amount[0] = 1;
+								}
+							} // For
+							// Input for Targets
 
-    			                      }
-                    		};
-                            Command_Effects[F_Target] = Proper_resolve;      
-                            StackDescription = StackDescription +  F_TargetPlayer[F_Target] + " draws " + F_Amount[0] + " card(s)";                     
-                		}
+							final int F_Multiple_Targets = Multiple_Targets; 
+							final Object[] Targets_Multi = new Object[Multiple_Targets];
+							final int[] index = new int[1];
+							final int[] F_Amount = I_Amount;
+							final String[] F_S_Amount = S_Amount;
+							final int F_Target = Effects_Count[0];
 
-                		
-                		// Discard Cards
-                		if(Effect[y].contains("DiscardCards")) {
-                    			Command Proper_resolve = new Command() {
-                                	private static final long serialVersionUID = 151367344511590317L;
 
-                        			public void execute() {
-                        				if(Whenever_Go(F_card,F_k) == true) 
-                        					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-                        						//this might not work:
-                        						F_TargetPlayer[F_Target].discard(F_Amount[0], Ability, false);
-      			                      }
+							final Command MultiTargetsCommand = new Command() {
+								private static final long serialVersionUID = -83034517601871955L;
 
-    			                      }
-                    			};
-                            Command_Effects[F_Target] = Proper_resolve;      
-                            StackDescription = StackDescription + F_TargetPlayer[F_Target] + " discards " + F_Amount[0] + " card(s)";                        
-                		}
-                		
-                		// Make Token-Type-color-Power-Toughness-Keywords---Amount
-                		if(Effect[y].contains("MakeToken")) {
-                            String[] TokenConditions = AmountParse.split("-");
-                            
-                            String[] KeyWordConditions = new String[TokenConditions.length - 6];
-                            for(int z = 5; z < TokenConditions.length - 1; z++) 
-                            	if(!TokenConditions[z - 5].equals("None")) KeyWordConditions[z - 5] = TokenConditions[z];
-                            final String[] F_TokenConditions = TokenConditions;
-                            final String[] F_KeyWordConditions = KeyWordConditions;
-                            
-        					String Color = F_TokenConditions[2];
-        					if(F_TokenConditions[2].equals("c")) Color = "Colorless";
-        					else if(F_TokenConditions[2].equals("W")) Color = "White";
-        					else if(F_TokenConditions[2].equals("U")) Color = "Blue";
-        					else if(F_TokenConditions[2].equals("G")) Color = "Green";
-        					else if(F_TokenConditions[2].equals("R")) Color = "Red";
-        					else if(F_TokenConditions[2].equals("B")) Color = "Black";
-        					else Color = "Multicolored";
-        					final String F_Color = Color;
-                    			Command Proper_resolve = new Command() {
-                                	private static final long serialVersionUID = 151367344511590317L;
+								public void execute() {
+									MultiTarget_Cancelled = false;
+									for(int i = 0; i < F_Multiple_Targets; i++) {
+										AllZone.InputControl.setInput(CardFactoryUtil.input_MultitargetCreatureOrPlayer(F_SpellAbility , i , F_Amount[0]*F_Multiple_Targets,new Command() {
 
-                        			public void execute() {
-                        				if(Whenever_Go(F_card,F_k) == true) 
-                        					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-                        					String[] types = F_TokenConditions[1].split(" ");
-                        					String[] creatTypes = new String[types.length+1];
-                        					creatTypes[0] = "Creature";
-                        					for (int i=0;i<types.length;i++)
-                        						creatTypes[i+1]=types[i];
+											private static final long serialVersionUID = -328305150127775L;
 
-                        					String Color = F_TokenConditions[2];
-                        					if(F_TokenConditions[2].equals("c")) Color = "1";
-                        					for(int z = 0; z < F_Amount[0]; z++) 
-                        						
-                        					// CardFactoryUtil.makeToken( F_TokenConditions[1] + " Token", F_TokenConditions[2]+ " " + 
-                        						
-                                            CardFactoryUtil.makeToken( F_TokenConditions[1], F_TokenConditions[2]+ " " + 
-                                            		Integer.valueOf(F_TokenConditions[3])+ " " + Integer.valueOf(F_TokenConditions[4])
-                                             + " " + F_TokenConditions[1], F_card.getController(), Color, creatTypes, Integer.valueOf(F_TokenConditions[3]), 
-                                             Integer.valueOf(F_TokenConditions[4]), F_KeyWordConditions);
-      			                      }
+											public void execute() {
+												Targets_Multi[index[0]] = F_SpellAbility.getTargetPlayer(); 
+												if(Targets_Multi[index[0]] == null) Targets_Multi[index[0]] = F_SpellAbility.getTargetCard();
+												index[0]++;  
+												if(F_Multiple_Targets == 1) AllZone.Stack.updateObservers();
+											}
+										}));
+									} 
+									AllZone.Stack.add(F_SpellAbility);
+								}
+							};
 
-    			                      }
-                    			};
-                            Command_Effects[F_Target] = Proper_resolve;      
-                            StackDescription = StackDescription + F_TargetPlayer[F_Target] + " puts " + F_Amount[0] + " " +  F_TokenConditions[3] + 
-                            "/" + F_TokenConditions[4] + " " + F_Color + " " + F_TokenConditions[1] + " creature token(s) onto the battlefield";                        
-                		}
-                		
-                		// Copy Spell
-                		if(Effect[y].contains("CopySpell")) {
-                    			Command Proper_resolve = new Command() {
-                                	private static final long serialVersionUID = 151367344511590317L;
+							final Command InputCommand = new Command() {
+								private static final long serialVersionUID = -83034517601871955L;
 
-                        			public void execute() {
-                        				if(Whenever_Go(F_card,F_k) == true) 
-                        					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-                        					AllZone.CardFactory.copySpellontoStack(F_card,F_TargetCard[F_Target], true);
-                                    };
+								public void execute() {             						
+									String WhichInput = F_k[5].split("/")[1]; 
+									if(WhichInput.equals("Creature")) 
+										if(F_card.getController().equals(AllZone.HumanPlayer))
+											AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(F_SpellAbility, GetTargetsCommand));
+										else {
+											CardList PossibleTargets = new CardList();	
+											PossibleTargets.addAll(AllZone.Human_Battlefield.getCards());
+											PossibleTargets.addAll(AllZone.Computer_Battlefield.getCards());
+											PossibleTargets = PossibleTargets.getType("Creature");
+											if(Whenever_AI_GoodEffect(F_k)) {
+												PossibleTargets = PossibleTargets.filter(new CardListFilter() {
+													public boolean addCard(Card c) {
+														if(c.getController().equals(AllZone.ComputerPlayer)) return true;
+														return false;
+													}
+												});
+												if(PossibleTargets.size() > 0) {
+													Targets_Multi[index[0]] = CardFactoryUtil.AI_getBestCreature(PossibleTargets,F_card);
+													AllZone.Stack.add(F_SpellAbility);              		            			 
+												}
+												index[0]++;
+											} else {
+												PossibleTargets = PossibleTargets.filter(new CardListFilter() {
+													public boolean addCard(Card c) {
+														if(c.getController().equals(AllZone.HumanPlayer)) return true;
+														return false;
+													}
+												});
+												if(PossibleTargets.size() > 0) {
+													Targets_Multi[index[0]] = CardFactoryUtil.AI_getBestCreature(PossibleTargets,F_card);
+													AllZone.Stack.add(F_SpellAbility);              		            			 
+												}
+												index[0]++; 
+											}
 
-    			                      }
-                    			};
-                            Command_Effects[F_Target] = Proper_resolve;      
-                            StackDescription = StackDescription + F_card.getController() + " copies " + F_TargetCard[y];                     
-                		}
-                		
-                		// MoveFrom/From Zone1/to Zone2
-                		if(Effect[y].contains("MoveFrom")) {
-                            String[] ZoneConditions = AmountParse.split("-");
-                            PlayerZone[] PZones = new PlayerZone[ZoneConditions.length];
-                            for(int z = 0; z < ZoneConditions.length; z++) {
-                             if(ZoneConditions[z].equals("Hand")) PZones[z] = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                             if(ZoneConditions[z].equals("Graveyard")) PZones[z] = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                             if(ZoneConditions[z].equals("Play")) PZones[z] = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                             if(ZoneConditions[z].contains("Library")) PZones[z] = AllZone.getZone(Constant.Zone.Library, card.getController());
-                             if(ZoneConditions[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Exile, card.getController());
-                          // if(ZoneConditions[z].contains("Sideboard")) PZones[z] = AllZone.getZone(Constant.Zone.Sideboard, card.getController());
-                            }
-                    			Command Proper_resolve = new Command() {
-                                	private static final long serialVersionUID = 151367344511590317L;
+										}
+									if(WhichInput.equals("Player")) 
+										if(F_card.getController().equals(AllZone.HumanPlayer))
+											AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(F_SpellAbility, GetTargetsCommand));
+										else {
+											if(Whenever_AI_GoodEffect(F_k)) {
+												Targets_Multi[index[0]] = AllZone.ComputerPlayer;
+												if(Targets_Multi[index[0]] != null) AllZone.Stack.add(F_SpellAbility);
+												index[0]++; 
+											}
+											else {
+												Targets_Multi[index[0]] = AllZone.HumanPlayer;
+												if(Targets_Multi[index[0]] != null) AllZone.Stack.add(F_SpellAbility);
+												index[0]++; 
+											}
 
-                        			public void execute() {
-                        				if(Whenever_Go(F_card,F_k) == true) {
-                        					CardList All = Check_if_All_Targets(F_card, F_k);
-                        					if(All.size() > 0) {
-                        						for(int i = 0; i < All.size(); i++) { 
-              			                    	  AllZone.GameAction.moveTo(Whenever_GetMoveToZone(All.get(i), F_k)[1], All.get(i));
-              			                    	  checkStateEffects(); // For Legendaries	
-                        						}
-                        					}
-                        					else {
-                            				Card NewSearch[] = Search(F_card,F_TriggeringCard, F_k,Custom_Strings);
-                            				if(NewSearch[0] != null) {
-                            				for(int i = 0; i < NewSearch.length; i++) {
-            			                    	  AllZone.GameAction.moveTo(Whenever_GetMoveToZone(NewSearch[i], F_k)[1], NewSearch[i]);
-              			                    	  checkStateEffects(); // For Legendaries	
-                            				}
-                            				} else {
-                                				if(F_TargetCard[F_Target] == null) {
-                                					for(int z = 0; z < Targets_Multi.length; z++) { 
-                                						F_TargetCard[F_Target] = (Card) Targets_Multi[z];
-                                    					if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Whenever_GetMoveToZone(F_TargetCard[F_Target], F_k)[0])) {
-                        			                    	  AllZone.GameAction.moveTo(Whenever_GetMoveToZone(F_TargetCard[F_Target], F_k)[1], F_TargetCard[F_Target]);
-                        			                    	  checkStateEffects(); // For Legendaries
-                                          					} 
-                                				}
-                                				} else if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Whenever_GetMoveToZone(F_TargetCard[F_Target], F_k)[0])) {
-                                						AllZone.GameAction.moveTo(Whenever_GetMoveToZone(F_TargetCard[F_Target], F_k)[1], F_TargetCard[F_Target]);
-                                						checkStateEffects(); // For Legendaries
-                                					}
-                        					} 
-                        					}
-                        				}
-                        			}
-                    			};
-                            Command_Effects[F_Target] = Proper_resolve;      
-                            if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription  + " moves to all specified permanents from " + ZoneConditions[1] + " to " + ZoneConditions[2] + " zone";
-                            else if(F_TargetCard[y] != null) StackDescription = StackDescription + F_TargetCard[y] + " moves from  " + ZoneConditions[1] + " to " + ZoneConditions[2] + " zone";                        
-                            else {
-                            	String[] SD = Search_Description(F_TriggeringCard ,k, Custom_Strings);
-                            	StackDescription = StackDescription + F_card.getController() + " searches his/her " + SD[0] + " for a " + SD[1] + "card and moves it to the " + ZoneConditions[2] 
-                            	                   + " zone. If that player searches a library this way, shuffle it";
-                            }
-                		}
-                		
-                		// Deal Damage
-                		if(Effect[y].contains("Damage")) {
-                    			Command Proper_resolve = new Command() {
-                                	private static final long serialVersionUID = 151367344511590317L;
+										}
+									if(WhichInput.contains("Specific")) {
+										CardList Cards_inPlay = new CardList();
+										Cards_inPlay.addAll(AllZone.Human_Battlefield.getCards());
+										Cards_inPlay.addAll(AllZone.Computer_Battlefield.getCards());
+										final String[] Specific = F_k[5].split("/");
+										final int[] Restriction_Count = new int[1]; 
+										for(int i = 0; i < Specific.length - 2;i++) {
+											if(Specific[i+2].contains("Type.") && !Specific[i+2].contains("NonType.")) {
+												Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
+													public boolean addCard(Card c) {
+														if(c.isType(Specific[Restriction_Count[0] + 2].replaceFirst("Type.", ""))) return true;
+														return false;
+													}
+												});
+											}
+											if(Specific[i+2].contains("NonType.")) {
+												Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
+													public boolean addCard(Card c) {
+														if(!c.isType(Specific[Restriction_Count[0] + 2].replaceFirst("NonType.", ""))) return true;
+														return false;
+													}
+												});
+											}
+											if(Specific[i+2].contains("Color.") && !Specific[i+2].contains("NonColor.")) {
+												Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
+													public boolean addCard(Card c) {
+														if(CardUtil.getColors(c).contains(Specific[Restriction_Count[0] + 2].replaceFirst("Color.", ""))) return true;
+														return false;
+													}
+												});	
+											}
+											if(Specific[i+2].contains("NonColor.")) {
+												Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
+													public boolean addCard(Card c) {
+														if(!CardUtil.getColors(c).contains(Specific[Restriction_Count[0] + 2].replaceFirst("NonColor.", ""))) return true;
+														return false;
+													}
+												});	
+											}
+											if(Specific[i+2].equals("NotSelf")) {
+												Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
+													public boolean addCard(Card c) {
+														if(!c.equals(F_card)) return true;
+														return false;
+													}
+												});
+											}
+											Restriction_Count[0]++;
+										}
+										if(F_card.getController().equals(AllZone.HumanPlayer))
+											AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(F_SpellAbility, Cards_inPlay, "Select a Valid Card", GetTargetsCommand, true, true));
+										else {
+											if(Whenever_AI_GoodEffect(F_k)) {
+												Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
+													public boolean addCard(Card c) {
+														if(c.getController().equals(AllZone.ComputerPlayer)) return true;
+														return false;
+													}
+												});
+												if(Cards_inPlay.size() > 0) {
+													Targets_Multi[index[0]] = CardFactoryUtil.AI_getBestCreature(Cards_inPlay,F_card);
+													AllZone.Stack.add(F_SpellAbility);              		            			 
+												}
+												index[0]++; 
+											} else {
+												Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
+													public boolean addCard(Card c) {
+														if(c.getController().equals(AllZone.HumanPlayer)) return true;
+														return false;
+													}
+												});
+												if(Cards_inPlay.size() > 0) {
+													Targets_Multi[index[0]] = CardFactoryUtil.AI_getBestCreature(Cards_inPlay,F_card);
+													AllZone.Stack.add(F_SpellAbility);              		            			 
+												}
+												index[0]++;                  		            			
+											}
 
-                        			public void execute() {
-                        				if(Whenever_Go(F_card,F_k) == true) {
-                        					CardList All = Check_if_All_Targets(F_card, F_k);
-                        					if(All.size() > 0) {
-                        						for(int i = 0; i < All.size(); i++) { 
-                        							All.get(i).addDamage(F_Amount[0], F_card);	
-                        						}
-                        					}
-                        					else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-      			                    	  if(F_card.getController().equals(AllZone.HumanPlayer)) {
-      			                    	  for(int z = 0; z < Targets_Multi.length; z++) {
-      			                    		  if(!(Targets_Multi[z].equals(AllZone.HumanPlayer) || Targets_Multi[z].equals(AllZone.ComputerPlayer))) {
-      			                    			  if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
-      			                    					  && CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
-      			                    				  Card c = (Card) Targets_Multi[z];
-      			                    				  c.addDamage(F_Amount[0], F_card);
-      			                    			  }
-      			                    		  } 
-      			                    		  else {
-      			                    			  ((Player) Targets_Multi[z]).addDamage(F_Amount[0], F_card);
-      			                    		  }
-      			                      }
-      			                      }
-      			                    	  if(F_card.getController().equals(AllZone.ComputerPlayer)) AllZone.HumanPlayer.addDamage(F_Amount[0]*F_Multiple_Targets, F_card);
-                      			}
-                        				}
-                                    };
+										}
+									}	
 
-    			                      };
-                            Command_Effects[F_Target] = Proper_resolve; 
-                            if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription  + "deals " + F_Amount[0]*F_Multiple_Targets + " damage" + " to all specified permanents/players";
-                            else if(F_Multiple_Targets != 1) StackDescription = StackDescription + "deals " + F_Amount[0]*F_Multiple_Targets + " damage" + " divided among up to " +  Multiple_Targets + " target creatures and/or players";
-                            else if(F_card.getController().equals(AllZone.ComputerPlayer)) StackDescription = StackDescription + "targeting Human ";
-                            else StackDescription = StackDescription + "targeting " + ((F_TargetCard[y] != null)? F_TargetCard[y]:"") + 
-                            ((F_TargetPlayer[y] != null)? F_TargetPlayer[y]:"");
-                		}
-                		
-                		Effects_Count[0]++;
-                		if(Effects_Count[0] != Effects) StackDescription = StackDescription + " and ";
-                		else StackDescription = StackDescription + ".";
-                		 }  // For     
-                        F_SpellAbility.setStackDescription(StackDescription);
-                        for(int Check = 0; Check < Command_Effects.length; Check++)
-                        	if(!Command_Effects[Check].equals(Command.Blank)) {
-                        		Whenever_Input(F_card,F_k,CommandExecute[0],F_SpellAbility);
-                        		break;
-                        	}
-                		}
-                	}
- 		        }	
- 			}
+									AllZone.Stack.updateObservers();
+								}
+
+								final Command GetTargetsCommand = new Command() {
+
+									private static final long serialVersionUID = -328305150127775L;
+
+									public void execute() {
+										Targets_Multi[index[0]] = F_SpellAbility.getTargetPlayer(); 
+										if(Targets_Multi[index[0]] == null) Targets_Multi[index[0]] = F_SpellAbility.getTargetCard();
+										if(F_k[8].contains("AttachTarget")) F_card.attachCard((Card) Targets_Multi[index[0]]);
+										index[0]++;  
+										if(F_Multiple_Targets == 1) AllZone.Stack.updateObservers();                                       
+									}
+								};
+
+							};
+
+							if(k[8].contains("MultipleTargets")) CommandExecute[0] = MultiTargetsCommand;
+							else if(k[8].contains("SingleTarget")) CommandExecute[0] = MultiTargetsCommand;
+							else if(k[5].contains("NormalInput")) CommandExecute[0] = InputCommand;
+							else {
+								if(F_TargetPlayer[y] != null) Targets_Multi[index[0]] = F_TargetPlayer[y];
+								if(F_TargetCard[y] != null) Targets_Multi[index[0]] = F_TargetCard[y];
+								index[0]++; 
+								CommandExecute[0] = Command.Blank;
+							}
+
+							// Null
+							if(Effect[y].equals("Null")) {
+								Command_Effects[F_Target] = Command.Blank;      
+							}
+
+							// +1 +1 Counters
+							if(Effect[y].contains("+1+1 Counters")) {
+
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										if(Whenever_Go(F_card,F_k) == true) {
+											CardList All = Check_if_All_Targets(F_card, F_k);
+											if(All.size() > 0) {
+												for(int i = 0; i < All.size(); i++) {
+													if(AllZone.GameAction.isCardInZone(All.get(i),Required_Zone) || F_Zones.equals("Any")) 
+														All.get(i).addCounter(Counters.P1P1, F_Amount[0]);	
+												}
+											}
+											if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone) || F_Zones.equals("Any")) 
+												F_TargetCard[F_Target].addCounter(Counters.P1P1, F_Amount[0]);
+										}
+									};
+								};
+								Command_Effects[F_Target] = Proper_resolve;      
+								if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + "all specified permanents get" + F_Amount[0] + " +1/+1 counters";
+								else StackDescription = StackDescription +  F_TargetCard[y] + " gets " + F_Amount[0] + " +1/+1 counters";
+							}
+
+							// CustomCounters.(What Counter)/Amount
+							if(Effect[y].contains("CustomCounter")) {
+
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										if(Whenever_Go(F_card,F_k) == true) {
+											String PossibleCounter = (F_k[4].split("/")[0]).replaceFirst("CustomCounter.", "");
+											Counters Counter = null;
+											for(int i = 0; i < Counters.values().length ; i++) {
+												if(Counters.values()[i].toString().equals(PossibleCounter)) 
+													Counter = Counters.values()[i];
+											}
+											CardList All = Check_if_All_Targets(F_card, F_k);
+											if(All.size() > 0) {
+												for(int i = 0; i < All.size(); i++) {
+													if(AllZone.GameAction.isCardInZone(All.get(i),Required_Zone) || F_Zones.equals("Any")) 
+														All.get(i).addCounter(Counter, F_Amount[0]);	
+												}
+											}
+											if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone) || F_Zones.equals("Any")) 
+												F_TargetCard[F_Target].addCounter(Counter, F_Amount[0]);
+										}
+									};
+								};
+								Command_Effects[F_Target] = Proper_resolve;      
+								if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + "all specified permanents get" + F_Amount[0] + " +1/+1 counters";
+								else StackDescription = StackDescription +  F_TargetCard[y] + " gets " + F_Amount[0] + 
+								" " + (F_k[4].split("/")[0]).replaceFirst("CustomCounter.", "") + " "+((F_Amount[0]>1)?"counters":"counter");
+							}
+
+							// StatsPumpEOT/Power/Toughness
+							if(Effect[y].contains("StatsPumpEOT")) {
+
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										final Command untilEOT = new Command() {
+											private static final long serialVersionUID = 1497565871061029469L;
+
+											public void execute() {                                       	
+												if(AllZone.GameAction.isCardInPlay(F_card)) {
+													F_TargetCard[F_Target].addTempAttackBoost(- F_Amount[0]);
+													F_TargetCard[F_Target].addTempDefenseBoost(- F_Amount[1]);
+												}
+											}
+										}; //Command
+
+										if(Whenever_Go(F_card,F_k) == true) {
+											CardList All = Check_if_All_Targets(F_card, F_k);
+											if(All.size() > 0) {
+												for(int i = 0; i < All.size(); i++) { 
+													F_TargetCard[F_Target].addTempAttackBoost(F_Amount[0]);
+													F_TargetCard[F_Target].addTempDefenseBoost(F_Amount[1]);
+													AllZone.EndOfTurn.addUntil(untilEOT);	
+												}
+											}
+											else if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone) || F_Zones.equals("Any")) {                                       
+												F_TargetCard[F_Target].addTempAttackBoost(F_Amount[0]);
+												F_TargetCard[F_Target].addTempDefenseBoost(F_Amount[1]);
+												AllZone.EndOfTurn.addUntil(untilEOT);
+											}
+										}
+									};
+								};
+								Command_Effects[F_Target] = Proper_resolve;      
+								if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + "all specified permanents get" + ((F_Amount[0] > -1)? "+" :"") + F_Amount[0] 
+								                                                                                                                                                                 + "/" + ((F_Amount[1] > -1)? "+" :"") + F_Amount[1]  + " until End of Turn";
+								else StackDescription = StackDescription +  F_TargetCard[y] + " gets " + ((F_Amount[0] > -1)? "+" :"") + F_Amount[0] 
+								                                                                                                                  + "/" + ((F_Amount[1] > -1)? "+" :"") + F_Amount[1]  + " until End of Turn";
+							}
+
+							// KeywordPumpEOT/Keyword(s)
+							if(Effect[y].contains("KeywordPumpEOT")) {
+
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										final Command untilEOT = new Command() {
+											private static final long serialVersionUID = 1497565871061029469L;
+
+											public void execute() {
+												if(AllZone.GameAction.isCardInPlay(F_card)) {
+													for(int i =0; i < F_S_Amount.length - 1; i++) {
+														F_card.removeIntrinsicKeyword(F_S_Amount[i + 1]);
+													}
+												}
+											}
+										};//Command
+										if(Whenever_Go(F_card,F_k) == true) {
+											CardList All = Check_if_All_Targets(F_card, F_k);
+											if(All.size() > 0) {
+												for(int i = 0; i < All.size(); i++) { 
+													for(int i2 =0; i2 < F_S_Amount.length - 1; i2++) {
+														F_card.addIntrinsicKeyword(F_S_Amount[i2 + 1]);
+													}
+													AllZone.EndOfTurn.addUntil(untilEOT);	
+												}
+											}
+											else if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Required_Zone) || F_Zones.equals("Any")) {                                       
+												for(int i =0; i < F_S_Amount.length - 1; i++) {
+													F_card.addIntrinsicKeyword(F_S_Amount[i + 1]);
+												}
+												AllZone.EndOfTurn.addUntil(untilEOT);
+											}
+										}
+									};
+								};
+								String Desc = "";
+								for(int KW =0; KW < F_S_Amount.length - 1; KW++) {
+									Desc = Desc + F_S_Amount[KW + 1];
+									if(KW < F_S_Amount.length - 2) Desc = Desc + ", ";
+								}
+								Command_Effects[F_Target] = Proper_resolve;      
+								if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + "all specified permanents get" + Desc + " until End of Turn";
+								else StackDescription = StackDescription +  F_TargetCard[y] + " gets " + Desc + " until End of Turn";
+							}
+
+							// ModifyLife/Amount
+							if(Effect[y].contains("ModifyLife")) {
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										if(Whenever_Go(F_card,F_k) == true) 
+											if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
+												if(F_Amount[0] > -1) 
+													F_TargetPlayer[F_Target].gainLife(F_Amount[0], F_card);
+												else 
+													F_TargetPlayer[F_Target].loseLife(F_Amount[0] * -1,F_card);
+											}
+
+									}
+								};
+								Command_Effects[F_Target] = Proper_resolve;      
+								StackDescription = StackDescription +  F_TargetPlayer[F_Target] + ((F_Amount[0] > -1)? " gains " + F_Amount[0]:"") + ((F_Amount[0] <= -1)? " loses " + F_Amount[0] * -1:"") + " life";
+							}
+
+							// Destroy
+							if(Effect[y].contains("Destroy")) {
+
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										if(Whenever_Go(F_card,F_k) == true) {
+											CardList All = Check_if_All_Targets(F_card, F_k);
+											if(All.size() > 0) {
+												for(int i = 0; i < All.size(); i++) { 
+													destroy(All.get(i));	
+												}
+											} else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
+												for(int z = 0; z < Targets_Multi.length; z++) {
+													if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
+															&& CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
+														Card c = (Card) Targets_Multi[z];
+														destroy(c);
+													}
+												}
+											}
+										}
+									};
+								};
+								Command_Effects[F_Target] = Proper_resolve;      
+								if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + " destroys all specified permanents";
+								else StackDescription = StackDescription + " destroys " + (((Card) Targets_Multi[y] != null)? (Card) Targets_Multi[y]:"");
+							}
+
+							// TapPermanent
+							if(Effect[y].contains("TapPermanent")) {
+
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										if(Whenever_Go(F_card,F_k) == true) {
+											CardList All = Check_if_All_Targets(F_card, F_k);
+											if(All.size() > 0) {
+												for(int i = 0; i < All.size(); i++) { 
+													All.get(i).tap();	
+												}
+											}
+											else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
+												for(int z = 0; z < Targets_Multi.length; z++) {
+													if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
+															&& CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
+														Card c = (Card) Targets_Multi[z];
+														c.tap();
+													}
+												}
+											}
+										}
+									};
+								};
+								Command_Effects[F_Target] = Proper_resolve;      
+								if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + " taps all specified permanents";
+								else StackDescription = StackDescription + " taps " + (((Card) Targets_Multi[y] != null)? (Card) Targets_Multi[y]:"");
+							}
+
+							// UntapPermanent
+							if(Effect[y].contains("UntapPermanent")) {
+
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										if(Whenever_Go(F_card,F_k) == true) {
+											CardList All = Check_if_All_Targets(F_card, F_k);
+											if(All.size() > 0) {
+												for(int i = 0; i < All.size(); i++) { 
+													All.get(i).untap();	
+												}
+											}
+											else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
+												for(int z = 0; z < Targets_Multi.length; z++) {
+													if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
+															&& CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
+														Card c = (Card) Targets_Multi[z];
+														c.untap();
+													}
+												}
+											}
+										}
+									};
+								};
+								Command_Effects[F_Target] = Proper_resolve;      
+								if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription + " untaps all specified permanents";
+								else StackDescription = StackDescription + " untaps " + (((Card) Targets_Multi[y] != null)? (Card) Targets_Multi[y]:"");
+							}
+
+
+							// Draw Cards
+							if(Effect[y].contains("DrawCards")) {
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										if(Whenever_Go(F_card,F_k) == true) 
+											if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
+												F_TargetPlayer[F_Target].drawCard();
+											}
+
+									}
+								};
+								Command_Effects[F_Target] = Proper_resolve;      
+								StackDescription = StackDescription +  F_TargetPlayer[F_Target] + " draws " + F_Amount[0] + " card(s)";                     
+							}
+
+
+							// Discard Cards
+							if(Effect[y].contains("DiscardCards")) {
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										if(Whenever_Go(F_card,F_k) == true) 
+											if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
+												//this might not work:
+												F_TargetPlayer[F_Target].discard(F_Amount[0], Ability, false);
+											}
+
+									}
+								};
+								Command_Effects[F_Target] = Proper_resolve;      
+								StackDescription = StackDescription + F_TargetPlayer[F_Target] + " discards " + F_Amount[0] + " card(s)";                        
+							}
+
+							// Make Token-Type-color-Power-Toughness-Keywords---Amount
+							if(Effect[y].contains("MakeToken")) {
+								String[] TokenConditions = AmountParse.split("-");
+
+								String[] KeyWordConditions = new String[TokenConditions.length - 6];
+								for(int z = 5; z < TokenConditions.length - 1; z++) 
+									if(!TokenConditions[z - 5].equals("None")) KeyWordConditions[z - 5] = TokenConditions[z];
+								final String[] F_TokenConditions = TokenConditions;
+								final String[] F_KeyWordConditions = KeyWordConditions;
+
+								String Color = F_TokenConditions[2];
+								if(F_TokenConditions[2].equals("c")) Color = "Colorless";
+								else if(F_TokenConditions[2].equals("W")) Color = "White";
+								else if(F_TokenConditions[2].equals("U")) Color = "Blue";
+								else if(F_TokenConditions[2].equals("G")) Color = "Green";
+								else if(F_TokenConditions[2].equals("R")) Color = "Red";
+								else if(F_TokenConditions[2].equals("B")) Color = "Black";
+								else Color = "Multicolored";
+								final String F_Color = Color;
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										if(Whenever_Go(F_card,F_k) == true) 
+											if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
+												String[] types = F_TokenConditions[1].split(" ");
+												String[] creatTypes = new String[types.length+1];
+												creatTypes[0] = "Creature";
+												for (int i=0;i<types.length;i++)
+													creatTypes[i+1]=types[i];
+
+												String Color = F_TokenConditions[2];
+												if(F_TokenConditions[2].equals("c")) Color = "1";
+												for(int z = 0; z < F_Amount[0]; z++) 
+
+													// CardFactoryUtil.makeToken( F_TokenConditions[1] + " Token", F_TokenConditions[2]+ " " + 
+
+													CardFactoryUtil.makeToken( F_TokenConditions[1], F_TokenConditions[2]+ " " + 
+															Integer.valueOf(F_TokenConditions[3])+ " " + Integer.valueOf(F_TokenConditions[4])
+															+ " " + F_TokenConditions[1], F_card.getController(), Color, creatTypes, Integer.valueOf(F_TokenConditions[3]), 
+															Integer.valueOf(F_TokenConditions[4]), F_KeyWordConditions);
+											}
+
+									}
+								};
+								Command_Effects[F_Target] = Proper_resolve;      
+								StackDescription = StackDescription + F_TargetPlayer[F_Target] + " puts " + F_Amount[0] + " " +  F_TokenConditions[3] + 
+								"/" + F_TokenConditions[4] + " " + F_Color + " " + F_TokenConditions[1] + " creature token(s) onto the battlefield";                        
+							}
+
+							// Copy Spell
+							if(Effect[y].contains("CopySpell")) {
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										if(Whenever_Go(F_card,F_k) == true) 
+											if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
+												AllZone.CardFactory.copySpellontoStack(F_card,F_TargetCard[F_Target], true);
+											};
+
+									}
+								};
+								Command_Effects[F_Target] = Proper_resolve;      
+								StackDescription = StackDescription + F_card.getController() + " copies " + F_TargetCard[y];                     
+							}
+
+							// MoveFrom/From Zone1/to Zone2
+							if(Effect[y].contains("MoveFrom")) {
+								String[] ZoneConditions = AmountParse.split("-");
+								PlayerZone[] PZones = new PlayerZone[ZoneConditions.length];
+								for(int z = 0; z < ZoneConditions.length; z++) {
+									if(ZoneConditions[z].equals("Hand")) PZones[z] = AllZone.getZone(Constant.Zone.Hand, card.getController());
+									if(ZoneConditions[z].equals("Graveyard")) PZones[z] = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+									if(ZoneConditions[z].equals("Play")) PZones[z] = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+									if(ZoneConditions[z].contains("Library")) PZones[z] = AllZone.getZone(Constant.Zone.Library, card.getController());
+									if(ZoneConditions[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Exile, card.getController());
+									// if(ZoneConditions[z].contains("Sideboard")) PZones[z] = AllZone.getZone(Constant.Zone.Sideboard, card.getController());
+								}
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										if(Whenever_Go(F_card,F_k) == true) {
+											CardList All = Check_if_All_Targets(F_card, F_k);
+											if(All.size() > 0) {
+												for(int i = 0; i < All.size(); i++) { 
+													AllZone.GameAction.moveTo(Whenever_GetMoveToZone(All.get(i), F_k)[1], All.get(i));
+													checkStateEffects(); // For Legendaries	
+												}
+											}
+											else {
+												Card NewSearch[] = Search(F_card,F_TriggeringCard, F_k,Custom_Strings);
+												if(NewSearch[0] != null) {
+													for(int i = 0; i < NewSearch.length; i++) {
+														AllZone.GameAction.moveTo(Whenever_GetMoveToZone(NewSearch[i], F_k)[1], NewSearch[i]);
+														checkStateEffects(); // For Legendaries	
+													}
+												} else {
+													if(F_TargetCard[F_Target] == null) {
+														for(int z = 0; z < Targets_Multi.length; z++) { 
+															F_TargetCard[F_Target] = (Card) Targets_Multi[z];
+															if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Whenever_GetMoveToZone(F_TargetCard[F_Target], F_k)[0])) {
+																AllZone.GameAction.moveTo(Whenever_GetMoveToZone(F_TargetCard[F_Target], F_k)[1], F_TargetCard[F_Target]);
+																checkStateEffects(); // For Legendaries
+															} 
+														}
+													} else if(AllZone.GameAction.isCardInZone(F_TargetCard[F_Target],Whenever_GetMoveToZone(F_TargetCard[F_Target], F_k)[0])) {
+														AllZone.GameAction.moveTo(Whenever_GetMoveToZone(F_TargetCard[F_Target], F_k)[1], F_TargetCard[F_Target]);
+														checkStateEffects(); // For Legendaries
+													}
+												} 
+											}
+										}
+									}
+								};
+								Command_Effects[F_Target] = Proper_resolve;      
+								if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription  + " moves to all specified permanents from " + ZoneConditions[1] + " to " + ZoneConditions[2] + " zone";
+								else if(F_TargetCard[y] != null) StackDescription = StackDescription + F_TargetCard[y] + " moves from  " + ZoneConditions[1] + " to " + ZoneConditions[2] + " zone";                        
+								else {
+									String[] SD = Search_Description(F_TriggeringCard ,k, Custom_Strings);
+									StackDescription = StackDescription + F_card.getController() + " searches his/her " + SD[0] + " for a " + SD[1] + "card and moves it to the " + ZoneConditions[2] 
+									                                                                                                                                                               + " zone. If that player searches a library this way, shuffle it";
+								}
+							}
+
+							// Deal Damage
+							if(Effect[y].contains("Damage")) {
+								Command Proper_resolve = new Command() {
+									private static final long serialVersionUID = 151367344511590317L;
+
+									public void execute() {
+										if(Whenever_Go(F_card,F_k) == true) {
+											CardList All = Check_if_All_Targets(F_card, F_k);
+											if(All.size() > 0) {
+												for(int i = 0; i < All.size(); i++) { 
+													All.get(i).addDamage(F_Amount[0], F_card);	
+												}
+											}
+											else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
+												if(F_card.getController().equals(AllZone.HumanPlayer)) {
+													for(int z = 0; z < Targets_Multi.length; z++) {
+														if(!(Targets_Multi[z].equals(AllZone.HumanPlayer) || Targets_Multi[z].equals(AllZone.ComputerPlayer))) {
+															if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
+																	&& CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
+																Card c = (Card) Targets_Multi[z];
+																c.addDamage(F_Amount[0], F_card);
+															}
+														} 
+														else {
+															((Player) Targets_Multi[z]).addDamage(F_Amount[0], F_card);
+														}
+													}
+												}
+												if(F_card.getController().equals(AllZone.ComputerPlayer)) AllZone.HumanPlayer.addDamage(F_Amount[0]*F_Multiple_Targets, F_card);
+											}
+										}
+									};
+
+								};
+								Command_Effects[F_Target] = Proper_resolve; 
+								if(Check_if_All_Targets(F_card, F_k).size() > 0) StackDescription = StackDescription  + "deals " + F_Amount[0]*F_Multiple_Targets + " damage" + " to all specified permanents/players";
+								else if(F_Multiple_Targets != 1) StackDescription = StackDescription + "deals " + F_Amount[0]*F_Multiple_Targets + " damage" + " divided among up to " +  Multiple_Targets + " target creatures and/or players";
+								else if(F_card.getController().equals(AllZone.ComputerPlayer)) StackDescription = StackDescription + "targeting Human ";
+								else StackDescription = StackDescription + "targeting " + ((F_TargetCard[y] != null)? F_TargetCard[y]:"") + 
+								((F_TargetPlayer[y] != null)? F_TargetPlayer[y]:"");
+							}
+
+							Effects_Count[0]++;
+							if(Effects_Count[0] != Effects) StackDescription = StackDescription + " and ";
+							else StackDescription = StackDescription + ".";
+						}  // For     
+						F_SpellAbility.setStackDescription(StackDescription);
+						for(int Check = 0; Check < Command_Effects.length; Check++)
+							if(!Command_Effects[Check].equals(Command.Blank)) {
+								Whenever_Input(F_card,F_k,CommandExecute[0],F_SpellAbility);
+								break;
+							}
+					}
+				}
+			}	
 		}
+	}
     
-	PlayerZone[] Whenever_GetMoveToZone (Card Target, String[] Keyword_Details) {
-		String Zones = Keyword_Details[4];
-		String[] Zone = Zones.split("-");
-        PlayerZone[] Required_Zone = new PlayerZone[2];
+    PlayerZone[] Whenever_GetMoveToZone (Card Target, String[] Keyword_Details) {
+    	String Zones = Keyword_Details[4];
+    	String[] Zone = Zones.split("-");
+    	PlayerZone[] Required_Zone = new PlayerZone[2];
     	if(Zone[1].contains("Hand")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Hand, Target.getController());
     	if(Zone[1].contains("Graveyard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Graveyard, Target.getController());
     	if(Zone[1].contains("Play") || Zones.equals("Any")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Battlefield, Target.getController());
     	if(Zone[1].contains("Library")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Library, Target.getController());
     	if(Zone[1].contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Exile, Target.getController());
-    //	if(Zone[1].contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Target.getController());
-    	
-        	if(Zone[2].contains("Hand")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Hand, Target.getController());
-        	if(Zone[2].contains("Graveyard")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Graveyard, Target.getController());
-        	if(Zone[2].contains("Play") || Zones.equals("Any")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Battlefield, Target.getController());
-        	if(Zone[2].contains("Library")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Library, Target.getController());
-        	if(Zone[2].contains("Exiled")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Exile, Target.getController());
-        //	if(Zone[2].contains("Sideboard")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Sideboard, Target.getController());
+    	//	if(Zone[1].contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Target.getController());
 
-		return Required_Zone;
-		}
+    	if(Zone[2].contains("Hand")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Hand, Target.getController());
+    	if(Zone[2].contains("Graveyard")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Graveyard, Target.getController());
+    	if(Zone[2].contains("Play") || Zones.equals("Any")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Battlefield, Target.getController());
+    	if(Zone[2].contains("Library")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Library, Target.getController());
+    	if(Zone[2].contains("Exiled")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Exile, Target.getController());
+    	//	if(Zone[2].contains("Sideboard")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Sideboard, Target.getController());
+
+    	return Required_Zone;
+    }
     
     CardList Check_if_All_Targets (final Card Triggering_Card, String[] Keyword_Details) {
     	CardList Cards_inPlay = new CardList();
