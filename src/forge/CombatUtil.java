@@ -453,6 +453,56 @@ public class CombatUtil {
     	return i;
     }
     
+    //This function take Doran and Double Strike into account
+    public static int getAttack(Card c)
+    {
+       int n = c.getNetAttack();
+
+       if(CombatUtil.isDoranInPlay())
+          n = c.getNetDefense();
+
+       if(c.hasDoubleStrike())
+          n *= 2;
+
+       return n;
+    }
+    
+    //Checks if the life of the attacked Player/Planeswalker is in danger 
+    public static boolean lifeInDanger(Combat combat) {
+ 	   
+ 	   int damage = 0;
+ 	   int poison = 0;
+ 	   CardList attackers = new CardList(combat.getAttackers());
+ 	   CardList unblocked = new CardList(combat.getAttackers());
+ 	   CardList blockers = new CardList();
+ 	   Card attacker = new Card();
+ 	   
+ 	   for(int i = 0; i < attackers.size(); i++) {
+ 			  attacker = attackers.get(i);
+ 			  
+ 			  blockers = combat.getBlockers(attacker);
+ 			  
+ 			  if(blockers.size() == 0) unblocked.add(attacker);
+ 			  else if(attacker.hasKeyword("Trample") && getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,blockers)) {
+ 				  if(!attacker.hasKeyword("Infect"))	  
+ 					  damage += getAttack(attacker) - CombatUtil.totalShieldDamage(attacker,blockers);
+ 				  if(attacker.hasKeyword("Infect"))
+ 					  poison += getAttack(attacker) - CombatUtil.totalShieldDamage(attacker,blockers);
+ 				  if(attacker.hasKeyword("Poisonous"))
+ 					  poison += attacker.getKeywordMagnitude("Poisonous");
+ 			  }
+ 	   }
+ 	   
+ 	   if (combat.getPlaneswalker() == null) {
+ 		   if (damage + 3 > AllZone.ComputerPlayer.getLife() || poison + 2 > 10 - AllZone.ComputerPlayer.getPoisonCounters())
+ 			   return true;
+ 	   } else {
+ 		   if (damage + 1 > combat.getPlaneswalker().getCounters(Counters.LOYALTY))
+ 			   return true;
+ 	   }
+    return false;   
+    }
+    
     public static int totalDamageOfBlockers(Card attacker, CardList defenders) {
     	int damage = 0;
     	

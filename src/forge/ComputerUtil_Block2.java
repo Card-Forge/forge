@@ -409,7 +409,7 @@ public class ComputerUtil_Block2
    {
       return c.getNetDefense();
    }
-	*/
+
 	
    //this doesn't take into account first strike,
    //use CombatUtil.canDestroyAttacker()
@@ -425,7 +425,7 @@ public class ComputerUtil_Block2
 
       return n;
    }
-   
+
    private static int sumAttack(CardList attackers)
    {
       int sum = 0;
@@ -468,7 +468,7 @@ public class ComputerUtil_Block2
 	   
 	   return sum;
    }
-   
+   */
    
    //finds the creatures able to block the attacker 
    private static CardList getPossibleBlockers(Card attacker, CardList blockersLeft) {
@@ -506,22 +506,6 @@ public class ComputerUtil_Block2
    return blockers;   
    }
    
-   //Checks if the life of the Player/Planeswalker is in danger 
-   private static boolean lifeInDanger(Combat combat, int anticipatedDamage, int anticipatedPoison , CardList attackersLeft) {
-	   
-	   if (combat.getPlaneswalker() == null) {
-		   if (anticipatedDamage + sumAttack(attackersLeft) + 3 > AllZone.ComputerPlayer.getLife()
-					  || anticipatedPoison + sumPoison(attackersLeft) + 2 > 10 - AllZone.ComputerPlayer.getPoisonCounters())
-			   return true;
-	   } else {
-		   if (anticipatedDamage + sumAttack(attackersLeft) +1 > combat.getPlaneswalker().getCounters(Counters.LOYALTY))
-			   return true;
-	   }
-
-	  
-   return false;   
-   }
-   
   public static Combat getBlockers(Combat originalCombat, CardList possibleBlockers) {
 	  
 	  Combat combat = originalCombat;
@@ -530,13 +514,6 @@ public class ComputerUtil_Block2
       
 	  if (attackers.size() == 0)
 		  return combat;
-	  
-	  /*
-	  for(int i = 0; i < attackers.size(); i++) {
-		  Card a = attackers.get(i);
-          combat.addAttacker(a);  
-	  }
-	  */
 	   
 	  CardList attackersLeft = attackers; //keeps track of all currently unblocked attackers
 	  CardList blockedButUnkilled = new CardList(); //keeps track of all blocked attackers that currently wouldn't be destroyed
@@ -546,8 +523,6 @@ public class ComputerUtil_Block2
 	  CardList safeBlockers = new CardList();
 	  CardList killingBlockers = new CardList();
 	  CardList chumpBlockers = new CardList();
-	  int anticipatedDamage = 0;	//this is the anticipated damage to the computer player
-	  int anticipatedPoison = 0;	//this is the anticipated poison to the computer player
 	  int diff = AllZone.ComputerPlayer.getLife() * 2 + 5; //This is the minimal gain for an unnecessary trade 
 	  Card a = new Card();
 	  Card b = new Card();
@@ -560,8 +535,6 @@ public class ComputerUtil_Block2
 		  a = attackers.get(i);
 		  if(!CombatUtil.canBeBlocked(a)) { 
 			  attackersLeft.remove(a);
-			  anticipatedDamage += getAttack(a);
-			  //anticipatedPoison += a.getNetAttack(); //TODO Poison
 		  }
 	  }
 	   
@@ -579,6 +552,9 @@ public class ComputerUtil_Block2
 	   
 	  //Begin with the attackers that pose the biggest thread
 	  CardListUtil.sortAttack(attackersLeft);
+	  
+	  //Begin with the weakest blockers
+	  CardListUtil.sortAttackLowFirst(blockersLeft);
 	   
 	  CardList currentAttackers = attackersLeft;
 
@@ -611,8 +587,6 @@ public class ComputerUtil_Block2
 				  
 				  if(CardFactoryUtil.evaluateCreature(worst) + diff < CardFactoryUtil.evaluateCreature(attacker)) {
 					  blocker = worst;
-					  anticipatedDamage += anticipateDamage(attacker, blocker);
-					  anticipatedPoison += anticipatePoison(attacker, blocker);
 				  }
 			  // TODO: 4.good Gangblocks 
 			  }
@@ -629,14 +603,12 @@ public class ComputerUtil_Block2
 	  if(blockersLeft.size() == 0) return combat;
 	  
 	  //choose necessary trade blocks if life is in danger
-	  if (lifeInDanger(combat, anticipatedDamage, anticipatedPoison, attackersLeft))
+	  if (CombatUtil.lifeInDanger(combat))
 		  for(int i = 0; i < attackersLeft.size(); i++) {
 		  	  attacker = attackersLeft.get(i);
 			  killingBlockers = getKillingBlockers(attacker, getPossibleBlockers(attacker, blockersLeft));
 			  if(killingBlockers.size() > 0) {
 				  blocker = CardFactoryUtil.AI_getWorstCreature(killingBlockers);
-				  if (attacker.hasKeyword("Trample") && getAttack(attacker) > blocker.getNetDefense())
-					  anticipatedDamage += getAttack(attacker) - blocker.getNetDefense();
 				  combat.addBlocker(attacker, blocker);
 				  currentAttackers.remove(attacker);
 				  blockersLeft.remove(blocker);
@@ -646,14 +618,12 @@ public class ComputerUtil_Block2
 	  attackersLeft = currentAttackers;
 	   
 	  //choose necessary chump blocks if life is still in danger
-	  if (lifeInDanger(combat, anticipatedDamage, anticipatedPoison, attackersLeft))
+	  if (CombatUtil.lifeInDanger(combat))
 		  for(int i = 0; i < attackersLeft.size(); i++) {
 			  attacker = attackersLeft.get(i);	  
 			  chumpBlockers = getPossibleBlockers(attacker, blockersLeft);
 			  if(chumpBlockers.size() > 0) {
 				  blocker = CardFactoryUtil.AI_getWorstCreature(chumpBlockers);
-				  if (attacker.hasKeyword("Trample") && getAttack(attacker) > blocker.getNetDefense())
-					  anticipatedDamage += getAttack(attacker) - blocker.getNetDefense();
 				  combat.addBlocker(attacker, blocker);
 				  currentAttackers.remove(attacker);
 				  blockedButUnkilled.add(attacker);
@@ -664,7 +634,7 @@ public class ComputerUtil_Block2
 	 attackersLeft = currentAttackers; 
 	  
 	 //Reinforce blockers blocking attackers with trample if life is still in danger
-	  if (lifeInDanger(combat, anticipatedDamage, anticipatedPoison, attackersLeft)) {
+	  if (CombatUtil.lifeInDanger(combat)) {
 		  tramplingAttackers = attackers.getKeyword("Trample");
 		  tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); 	//Don't make it worse 
 		  for(int i = 0; i < tramplingAttackers.size(); i++) {
@@ -673,7 +643,7 @@ public class ComputerUtil_Block2
 			  for(int j = 0; j < chumpBlockers.size(); j++) {
 				  blocker = chumpBlockers.get(j);
 			  	  //Add an additional blocker if the current blockers are not enough and the new one would suck some of the damage
-			  	  if(getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,combat.getBlockers(attacker)) 
+			  	  if(CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,combat.getBlockers(attacker)) 
 			  			  && CombatUtil.shieldDamage(attacker, blocker) > 0) {
 			  		  combat.addBlocker(attacker, blocker);
 			  		  blockersLeft.remove(blocker);

@@ -198,13 +198,23 @@ public class ComputerAI_General implements Computer {
     public void declare_blockers() {
         CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
         
-        AllZone.pwCombat = ComputerUtil_Block2.getBlockers(AllZone.pwCombat, blockers);
-        
-        CardList remove = AllZone.pwCombat.getAllBlockers();
-        for(int i = 0; i < remove.size(); i++)
-            blockers.remove(remove.get(i));
-        
-        AllZone.Combat = ComputerUtil_Block2.getBlockers(AllZone.Combat, blockers);
+        //If Player life is in danger protect it first
+        if(CombatUtil.lifeInDanger(AllZone.Combat)) {
+        	AllZone.Combat = ComputerUtil_Block2.getBlockers(AllZone.Combat, blockers);
+            CardList remove = AllZone.Combat.getAllBlockers();
+            for(int i = 0; i < remove.size(); i++)
+                blockers.remove(remove.get(i));
+            
+            AllZone.pwCombat = ComputerUtil_Block2.getBlockers(AllZone.pwCombat, blockers);
+        } else { // Otherwise protect Planeswalkers first
+	        AllZone.pwCombat = ComputerUtil_Block2.getBlockers(AllZone.pwCombat, blockers);
+	        
+	        CardList remove = AllZone.pwCombat.getAllBlockers();
+	        for(int i = 0; i < remove.size(); i++)
+	            blockers.remove(remove.get(i));
+	        
+	        AllZone.Combat = ComputerUtil_Block2.getBlockers(AllZone.Combat, blockers);
+        }
         
         CombatUtil.showCombat();
         
