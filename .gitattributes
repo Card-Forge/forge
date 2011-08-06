@@ -1270,6 +1270,7 @@ res/cardsfolder/crucible_of_worlds.txt -text svneol=native#text/plain
 res/cardsfolder/crude_rampart.txt -text svneol=native#text/plain
 res/cardsfolder/cruel_bargain.txt -text svneol=native#text/plain
 res/cardsfolder/cruel_edict.txt -text svneol=native#text/plain
+res/cardsfolder/cruel_revival.txt -text svneol=native#text/plain
 res/cardsfolder/cruel_tutor.txt -text svneol=native#text/plain
 res/cardsfolder/cruel_ultimatum.txt -text svneol=native#text/plain
 res/cardsfolder/crumble.txt -text svneol=native#text/plain
@@ -1559,6 +1560,7 @@ res/cardsfolder/disciple_of_malice.txt -text svneol=native#text/plain
 res/cardsfolder/disciple_of_the_vault.txt -text svneol=native#text/plain
 res/cardsfolder/discombobulate.txt -text svneol=native#text/plain
 res/cardsfolder/discordant_dirge.txt -text svneol=native#text/plain
+res/cardsfolder/disease_carriers.txt -text svneol=native#text/plain
 res/cardsfolder/disempower.txt -text svneol=native#text/plain
 res/cardsfolder/disenchant.txt -text svneol=native#text/plain
 res/cardsfolder/disentomb.txt -text svneol=native#text/plain
@@ -2052,6 +2054,7 @@ res/cardsfolder/fervent_charge.txt -text svneol=native#text/plain
 res/cardsfolder/fervent_denial.txt -text svneol=native#text/plain
 res/cardsfolder/fervor.txt -text svneol=native#text/plain
 res/cardsfolder/festering_evil.txt -text svneol=native#text/plain
+res/cardsfolder/festering_goblin.txt -text svneol=native#text/plain
 res/cardsfolder/festering_march.txt svneol=native#text/plain
 res/cardsfolder/festering_wound.txt -text svneol=native#text/plain
 res/cardsfolder/festival_of_trokin.txt -text svneol=native#text/plain
@@ -2864,6 +2867,7 @@ res/cardsfolder/horned_troll.txt -text svneol=native#text/plain
 res/cardsfolder/horned_turtle.txt -text svneol=native#text/plain
 res/cardsfolder/hornet_cannon.txt -text svneol=native#text/plain
 res/cardsfolder/hornet_cobra.txt -text svneol=native#text/plain
+res/cardsfolder/hornet_harasser.txt -text svneol=native#text/plain
 res/cardsfolder/hornet_sting.txt -text svneol=native#text/plain
 res/cardsfolder/horobi_deaths_wail.txt -text svneol=native#text/plain
 res/cardsfolder/horrible_hordes.txt -text svneol=native#text/plain
@@ -7503,6 +7507,7 @@ res/quest/themes/Vampires[!!-~]B.thm -text
 res/quest/themes/Vigilance[!!-~]Meekstone[!!-~]W.thm -text
 res/quest/themes/White.thm -text
 res/quest/themes/Wolves[!!-~]WG.thm -text
+res/quest/themes/Zombies[!!-~]B.thm -text
 res/reprintSetInfo.py -text svneol=native#text/x-python
 res/setInfoScript.py -text svneol=native#text/x-python
 res/sound/tap.mp3 -text svneol=unset#audio/mpeg
