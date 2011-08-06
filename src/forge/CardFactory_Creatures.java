@@ -259,8 +259,7 @@ public class CardFactory_Creatures {
                     SpellAbility ability = new Ability(card, "0") {
                         @Override
                         public void resolve() {
-                            //AllZone.GameAction.getPlayerLife(getController()).subtractLife(n,card);
-                        	AllZone.GameAction.addDamage(getController(), card, n);
+                            getController().addDamage(n, card);
                         }
                     };
                     ability.setStackDescription("Shinka Gatekeeper - causes " + n + " damage to "
@@ -298,8 +297,7 @@ public class CardFactory_Creatures {
                     SpellAbility ability = new Ability(card, "0") {
                         @Override
                         public void resolve() {
-                            //AllZone.GameAction.getPlayerLife(getController()).subtractLife(n,card);
-                        	AllZone.GameAction.addDamage(getController(), card, n);
+                            getController().addDamage(n, card);
                         }
                     };
                     ability.setStackDescription("Jackal Pup - causes " + n + " damage to " + getController());
@@ -1532,7 +1530,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     if(getTargetCard() != null && CardFactoryUtil.canDamage(card, getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(3, card);
-                    else AllZone.GameAction.addDamage(getTargetPlayer(), card, 3);
+                    else getTargetPlayer().addDamage(3, card);
                 }
             };
             Command leavesPlay = new Command() {
@@ -1608,8 +1606,8 @@ public class CardFactory_Creatures {
                         Card crd = creatures.get(i);
                         if(CardFactoryUtil.canDamage(card, crd)) crd.addDamage(2, card);
                     }
-        			AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, 2);
-        			AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, 2);
+        			AllZone.ComputerPlayer.addDamage(2, card);
+        			AllZone.HumanPlayer.addDamage(2, card);
                 }
             };
             Command intoPlay = new Command() {
@@ -1701,8 +1699,8 @@ public class CardFactory_Creatures {
                       for(int i = 0; i < all.size(); i++)
                           	all.get(i).addDamage(2, card);
                       
-                      AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, 2);
-                      AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, 2);
+                      AllZone.HumanPlayer.addDamage(2, card);
+                      AllZone.ComputerPlayer.addDamage(2, card);
 
                 }
             };
@@ -5119,7 +5117,7 @@ public class CardFactory_Creatures {
                                 Card c = getTargetCard();
                                 c.addDamage(damage, card);
                             }
-                        } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
+                        } else getTargetPlayer().addDamage(damage, card);
                     }
                 }//resolve()
             };//SpellAbility
@@ -8703,8 +8701,8 @@ public class CardFactory_Creatures {
         			for(Card c:all) {
         				AllZone.GameAction.addDamage(c, card, damage);
         			}
-        			AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, damage);
-        			AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, damage);
+        			AllZone.ComputerPlayer.addDamage(damage, card);
+        			AllZone.HumanPlayer.addDamage(damage, card);
                 }//resolve()
             };//SpellAbility
             
@@ -9136,10 +9134,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     //get all creatures
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay();
                     
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -9149,10 +9144,8 @@ public class CardFactory_Creatures {
                     for(int i = 0; i < list.size(); i++)
                         list.get(i).addDamage(4, card);
                     
-                    //AllZone.HumanPlayer.subtractLife(4,card);
-                    //AllZone.ComputerPlayer.subtractLife(4,card);
-                    AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, 4);
-                    AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, 4);
+                    AllZone.HumanPlayer.addDamage(4, card);
+                    AllZone.ComputerPlayer.addDamage(4, card);
                 }//resolve()
             };//SpellAbility
             card.addSpellAbility(ability);
@@ -10829,9 +10822,7 @@ public class CardFactory_Creatures {
                                 AllZone.GameAction.sacrifice(c);
                                 Player opponent = player.getOpponent();
                                 
-                                //PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
-                                //life.subtractLife(power,card);
-                                AllZone.GameAction.addDamage(opponent, card, power);
+                                opponent.addDamage(power, card);
                                 
                                 //TODO: this may not be needed
                                 GameActionUtil.executeLifeLinkEffects(card, power);
@@ -15504,7 +15495,7 @@ public class CardFactory_Creatures {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,
                                 card);
-                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, 1);
+                    } else getTargetPlayer().addDamage(1, card);
                 }//resolve()
                 
             };//SpellAbility
@@ -15794,7 +15785,7 @@ public class CardFactory_Creatures {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(total,
                                 card);
-                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, total);
+                    } else getTargetPlayer().addDamage(total, card);
                    card.subtractCounter(Counters.P1P1,total);
                 }//resolve()
             };//SpellAbility
@@ -16888,7 +16879,7 @@ public class CardFactory_Creatures {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,
                                 card);
-                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, 1);
+                    } else getTargetPlayer().addDamage(1, card);
                 }//resolve()
             };//SpellAbility
             
@@ -18692,7 +18683,7 @@ public class CardFactory_Creatures {
                  Card c = getTargetCard();
                  if (c != null)
                 	 AllZone.GameAction.sacrifice(c);
-                 AllZone.GameAction.addDamage(card.getController(), card, 1);
+                 card.getController().addDamage(1, card);
               }
            };
 
@@ -19245,7 +19236,7 @@ public class CardFactory_Creatures {
         						&& CardFactoryUtil.canTarget(card, getTargetCard())) {
         					AllZone.GameAction.addDamage(getTargetCard(), card, damage);
         				}
-        			} else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
+        			} else getTargetPlayer().addDamage(damage, card);
 
         		}   
         	};
@@ -19865,10 +19856,8 @@ public class CardFactory_Creatures {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
-                    //AllZone.HumanPlayer.subtractLife(1,card);
-                    //AllZone.ComputerPlayer.subtractLife(1,card);
-                    AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, 1);
-                    AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, 1);
+                    AllZone.HumanPlayer.addDamage(1, card);
+                    AllZone.ComputerPlayer.addDamage(1, card);
                 }//resolve()
             };//SpellAbility
             ability.setDescription("B: Pestilence Demon deals 1 damage to each creature and each player.");
@@ -19927,8 +19916,8 @@ public class CardFactory_Creatures {
                     
                     //AllZone.HumanPlayer.subtractLife(1,card);
                     //AllZone.ComputerPlayer.subtractLife(1,card);
-                    AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, 1);
-                    AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, 1);
+                    AllZone.HumanPlayer.addDamage(1, card);
+                    AllZone.ComputerPlayer.addDamage(1, card);
                 }//resolve()
             };//SpellAbility
             ability.setDescription("B: Thrashing Wumpus deals 1 damage to each creature and each player.");
@@ -19989,18 +19978,15 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     //get all creatures
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay();
                     list = list.getKeyword("Flying");
                     
                     for(int i = 0; i < list.size(); i++) {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
-                    AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, 1);
-                    AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, 1);
+                    AllZone.HumanPlayer.addDamage(1, card);
+                    AllZone.ComputerPlayer.addDamage(1, card);
                 }//resolve()
             };//SpellAbility
             ability.setDescription("G: Ifh-Biff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability");
