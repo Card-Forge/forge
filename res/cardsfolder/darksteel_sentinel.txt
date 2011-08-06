@@ -1,0 +1,10 @@
+Name:Darksteel Sentinel
+ManaCost:6
+Types:Artifact Creature Golem
+Text:no text
+PT:3/3
+K:Vigilance
+K:Indestructible
+K:Flash
+K:SVar:Rarity:Uncommon
+End
