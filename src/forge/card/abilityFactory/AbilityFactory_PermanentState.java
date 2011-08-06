@@ -2,6 +2,7 @@ package forge.card.abilityFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 import forge.AllZone;
@@ -21,7 +22,7 @@ import forge.gui.GuiUtils;
 
 public class AbilityFactory_PermanentState {
 	// ****************************************
-	// ************** Untapping *****************
+	// ************** Untap *******************
 	// ****************************************
 	public static SpellAbility createAbilityUntap(final AbilityFactory AF){
 		final SpellAbility abUntap = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
@@ -129,8 +130,13 @@ public class AbilityFactory_PermanentState {
 			tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 		}
 		
-		for(Card c : tgtCards)
-			sb.append(c.getName()).append(" ");
+		Iterator<Card> it = tgtCards.iterator();
+		while(it.hasNext()) {
+			sb.append(it.next());
+			if(it.hasNext()) sb.append(" ");
+		}
+		
+		sb.append(".");
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null)
@@ -374,7 +380,7 @@ public class AbilityFactory_PermanentState {
 	}
 	
 	// ****************************************
-	// ************** Tapping *****************
+	// ************** Tap *********************
 	// ****************************************
 	
 	public static SpellAbility createAbilityTap(final AbilityFactory AF){
@@ -482,8 +488,13 @@ public class AbilityFactory_PermanentState {
 			tgtCards.add(af.getHostCard());	
 		}
 		
-		for(Card c : tgtCards)
-			sb.append(c.getName()).append(" ");
+		Iterator<Card> it = tgtCards.iterator();
+		while(it.hasNext()) {
+			sb.append(it.next());
+			if(it.hasNext()) sb.append(" ");
+		}
+		
+		sb.append(".");
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null)
@@ -1191,8 +1202,13 @@ public class AbilityFactory_PermanentState {
 			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 		}
 		
-		for(Card c : tgtCards)
-			sb.append(c.getName()).append(", ");
+		Iterator<Card> it = tgtCards.iterator();
+		while(it.hasNext()) {
+			sb.append(it.next());
+			if(it.hasNext()) sb.append(" ");
+		}
+		
+		sb.append(".");
 
         Ability_Sub subAb = sa.getSubAbility();
         if (subAb != null)
