@@ -11,6 +11,10 @@ public class Input_Block extends Input {
     private Card              currentAttacker  = null;
     private ArrayList<Card>   allBlocking      = new ArrayList<Card>();
     
+    public void removeFromAllBlocking(Card c){
+    	allBlocking.remove(c);
+    }
+    
     @Override
     public void showMessage() {
         //for Castle Raptors, since it gets a bonus if untapped

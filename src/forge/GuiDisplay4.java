@@ -410,6 +410,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                         else if (inputControl.input instanceof Input_Block) {
                         	if(c.getController().isHuman())
                         		AllZone.Combat.removeFromCombat(c);
+                        	((Input_Block)inputControl.input).removeFromAllBlocking(c);
                         }
                     } else inputControl.selectCard(c, AllZone.Human_Battlefield);
                 }

@@ -407,10 +407,10 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                         }
                         
                         else if (inputControl.input instanceof Input_Block){
-
                         	Card crd = cardPanel.getCard();
                         	if(crd.getController().isHuman())
                         		AllZone.Combat.removeFromCombat(crd);
+                        	((Input_Block)inputControl.input).removeFromAllBlocking(crd);
                         }
                     }
 
