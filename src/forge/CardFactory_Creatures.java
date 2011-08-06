@@ -9221,7 +9221,7 @@ public class CardFactory_Creatures {
 	      
 
 	      //*************** START *********** START **************************
-	      else if(cardName.equals("Bonded Fetch"))
+	      else if(cardName.equals("Bonded Fetch") || cardName.equals("Merfolk Looter"))
 	      {
 	        final Ability_Tap ability = new Ability_Tap(card)
 	        {
@@ -9822,7 +9822,8 @@ public class CardFactory_Creatures {
 
 	      //*************** START *********** START **************************
 	      if (cardName.equals("Goldmeadow Harrier") || cardName.equals("Loxodon Mystic") 
-	      	|| cardName.equals("Master Decoy") || cardName.equals("Benalish Hero"))
+	      	|| cardName.equals("Master Decoy") || cardName.equals("Benalish Trapper") || cardName.equals("Whipcorder")
+	      	|| cardName.equals("Blinding Mage") || cardName.equals("Ostiary Thrull"))
 	      {
 	      	final SpellAbility ability = new Ability_Tap(card, "W")
 	          {
@@ -12862,6 +12863,77 @@ public class CardFactory_Creatures {
 	    }//*************** END ************ END **************************
 	    
 	  //*************** START *********** START **************************
+	    if(cardName.equals("Silver Drake"))
+	    {
+	      final SpellAbility ability = new Ability(card, "0")
+	      {
+	        public void resolve()
+	        {
+	          Card c = getTargetCard();
+	          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
+
+	          if(AllZone.GameAction.isCardInPlay(c))
+	          {
+	            AllZone.getZone(c).remove(c);
+
+	            if(! c.isToken())
+	            {
+	              Card newCard = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
+	              hand.add(newCard);
+	            }
+	          }
+	        }
+	      };
+	      Command intoPlay = new Command()
+	      {
+
+			private static final long serialVersionUID = -8473976122518500976L;
+
+			public void execute()
+	        {
+	           PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	           
+	           CardList creatures = new CardList(play.getCards());
+	           creatures = creatures.getType("Creature");
+	           
+	           CardList whiteBlue = new CardList();
+	           
+	           
+	           for(int i=0;i <creatures.size(); i++)
+	           {
+	              //if(!CardUtil.getColors(nonBlackCards.get(i)).contains(Constant.Color.Black))
+	              if (CardUtil.getColors(creatures.get(i)).contains(Constant.Color.White))
+	              {
+	                 whiteBlue.add(creatures.get(i));
+	              }
+	              else if (CardUtil.getColors(creatures.get(i)).contains(Constant.Color.Blue))
+	              {
+	                 whiteBlue.add(creatures.get(i));
+	              }
+	           }
+	           
+	           AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, whiteBlue, "Select a white or blue creature you control.", false));
+	            ButtonUtil.disableAll();
+	         
+	        }//execute()
+	      };//Command
+	      card.addComesIntoPlayCommand(intoPlay);
+
+	      card.clearSpellAbility();
+
+	      card.addSpellAbility(new Spell_Permanent(card)
+	      {
+
+			private static final long serialVersionUID = -5048658151377675270L;
+
+			public boolean canPlayAI()
+			{
+		          return false;
+		    }
+	      });
+	    }//*************** END ************ END **************************
+	    
+	  //*************** START *********** START **************************
 	    else if(cardName.equals("Fleetfoot Panther") || cardName.equals("Steel Leaf Paladin"))
 	    {
 	      final SpellAbility ability = new Ability(card, "0")
@@ -15280,8 +15352,87 @@ public class CardFactory_Creatures {
 	              card.addSpellAbility(ability);
 	              card.addSpellAbility(ability2);
 	              
-	    		 
 			 }//*************** END ************ END **************************
+	    	 
+	    	//*************** START *********** START **************************
+    	    if(cardName.equals("Frontline Sage"))
+    	    {
+    	         final SpellAbility ability = new Ability_Tap(card, "U")
+    	         {
+					private static final long serialVersionUID = 4999015283563842050L;
+					public boolean canPlayAI() {return false;}
+	    	        public void resolve()
+	    	        {
+	    	          AllZone.GameAction.drawCard(card.getController());
+	    	          AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+	    	        }
+    	      };//SpellAbility
+    	      card.addSpellAbility(ability);
+    	      ability.setDescription("U, tap: Draw a card, then discard a card.");
+    	      ability.setStackDescription("Frontline Sage - draw a card, then discard a card.");
+    	    }//*************** END ************ END **************************
+    	    
+    	    
+    	  //*************** START *********** START **************************
+	      if (cardName.equals("Thornscape Apprentice"))
+          {
+	           final SpellAbility ability = new Ability_Tap(card, "W")
+	            {
+					private static final long serialVersionUID = 7296467409302755815L;
+					public void resolve()
+		            {
+		                 Card c = getTargetCard();
+		                 c.tap();
+		            }
+		            public boolean canPlayAI() {return false;}
+	            };//SpellAbility
+
+	            card.addSpellAbility(ability);
+	            ability.setDescription("W, tap: Tap target creature.");
+	            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+
+	       }//*************** END ************ END **************************
+	      
+	      
+	      //*************** START *********** START **************************
+		    else if(cardName.equals("Covetous Dragon"))
+		    {
+		      SpellAbility spell = new Spell_Permanent(card)
+		      {
+				
+				private static final long serialVersionUID = -1446713295855849195L;
+
+				public boolean canPlayAI()
+		        {
+				  CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+				  list = list.getType("Artifact");
+		          return super.canPlay() && list.size() > 0;
+		        }
+		      };
+		      card.clearSpellAbility();
+		      card.addSpellAbility(spell);
+		    }
+		    //*************** END ************ END **************************
+	      
+	    //*************** START *********** START **************************
+		    else if(cardName.equals("Tethered Griffin"))
+		    {
+		      SpellAbility spell = new Spell_Permanent(card)
+		      {
+				private static final long serialVersionUID = -7872917651421012893L;
+
+				public boolean canPlayAI()
+		        {
+				  CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+				  list = list.getType("Enchantment");
+		          return super.canPlay() && list.size() > 0;
+		        }
+		      };
+		      card.clearSpellAbility();
+		      card.addSpellAbility(spell);
+		    }
+		    //*************** END ************ END **************************
+	      
 	    
 	    
 	      // Cards with Cycling abilities

@@ -8771,13 +8771,11 @@ public class GameActionUtil
 			brigadiers.addAll(cPlay.getCards());
 			brigadiers = brigadiers.getName("Aven Brigadier");
 			return brigadiers.size()-1;
-
 		}
 
 		public void execute()
 		{
-
-			
+	
 			CardList creature = new CardList();
 			creature.addAll(AllZone.Human_Play.getCards());
 			creature.addAll(AllZone.Computer_Play.getCards());
@@ -8788,8 +8786,13 @@ public class GameActionUtil
 			{
 				Card c = creature.get(i);
 				otherBrigadiers = countOtherBrigadiers();
-				c.setOtherAttackBoost(2*otherBrigadiers);
-				c.setOtherDefenseBoost(2*otherBrigadiers);
+				int boost = 0;
+				if (c.getType().contains("Bird"))
+					boost++;
+				if (c.getType().contains("Soldier"))
+					boost++;
+				c.setOtherAttackBoost(boost*otherBrigadiers);
+				c.setOtherDefenseBoost(boost*otherBrigadiers);
 			}// for inner
 		}// execute()
 		
@@ -8851,8 +8854,7 @@ public class GameActionUtil
 		
 		private int countOtherScions(Card c)
 		{
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c
-					.getController());
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
 			CardList scions = new CardList(play.getCards());
 			scions = scions.getName("Scion of Oona");
 			return scions.size()-1;
@@ -8873,10 +8875,19 @@ public class GameActionUtil
 			{
 				Card c = creature.get(i);
 				otherScions = countOtherScions(c);
-				c.setOtherAttackBoost(otherScions);
-				c.setOtherDefenseBoost(otherScions);
-				if (!c.getExtrinsicKeyword().contains("Shroud") && otherScions > 0)
-					c.addExtrinsicKeyword("Shroud");
+				if (c.getType().equals("Faerie") || c.getKeyword().contains("Changeling"))
+				{
+					c.setOtherAttackBoost(otherScions);
+					c.setOtherDefenseBoost(otherScions);
+					if (!c.getExtrinsicKeyword().contains("Shroud") && otherScions > 0)
+						c.addExtrinsicKeyword("Shroud");
+				}
+				else
+				{
+					c.setOtherAttackBoost(0);
+					c.setOtherDefenseBoost(0);
+					c.removeExtrinsicKeyword("Shroud");
+				}
 
 			}// for inner
 		}// execute()

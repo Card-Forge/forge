@@ -5342,6 +5342,109 @@ class CardFactory_Auras {
 		 
 		  spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
 		}//*************** END ************ END **************************
+		
+		//*************** START *********** START **************************
+		if(cardName.equals("Asha's Favor"))
+		{
+		  final SpellAbility spell = new Spell(card)
+		  {
+			  
+			private static final long serialVersionUID = 8803901572203454960L;
+			public boolean canPlayAI()
+		    {
+		      CardList list = new CardList(AllZone.Computer_Play.getCards());
+		      list = list.getType("Creature");
+
+		      if(list.isEmpty())
+		       return false;
+
+		      //else
+		      CardListUtil.sortAttack(list);
+		      CardListUtil.sortFlying(list);
+
+		      for (int i=0;i<list.size();i++) {
+		         if (CardFactoryUtil.canTarget(card, list.get(i)))
+		         {
+		            setTargetCard(list.get(i));
+		            return true;
+		         }
+		      }
+		      return false;
+		    }//canPlayAI()
+		    public void resolve()
+		    {
+		      PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+		      play.add(card);
+		     
+		      Card c = getTargetCard();
+		     
+		      if(AllZone.GameAction.isCardInPlay(c)  && CardFactoryUtil.canTarget(card, c) )
+		      {
+		         card.enchantCard(c);
+		         System.out.println("Enchanted: " +getTargetCard());
+		      }
+		    }//resolve()
+		  };//SpellAbility
+		  card.clearSpellAbility();
+		  card.addSpellAbility(spell);
+
+		  Command onEnchant = new Command()
+		  {   
+
+			private static final long serialVersionUID = 7126996983975855960L;
+
+			public void execute()
+		      {
+		         if (card.isEnchanting())
+		         {
+			          Card crd = card.getEnchanting().get(0);
+			          crd.addExtrinsicKeyword("Flying");
+				      crd.addExtrinsicKeyword("First Strike");
+				      crd.addExtrinsicKeyword("Vigilance");
+		         }
+		      }//execute()
+		  };//Command
+
+
+		  Command onUnEnchant = new Command()
+		  {   
+
+			private static final long serialVersionUID = 6114584155701098976L;
+
+			public void execute()
+		      {
+		         if (card.isEnchanting())
+		         {
+		            Card crd = card.getEnchanting().get(0);
+		            crd.removeExtrinsicKeyword("Flying");
+		            crd.removeExtrinsicKeyword("First Strike");
+		            crd.removeExtrinsicKeyword("Vigilance");
+		         }
+		     
+		      }//execute()
+		   };//Command
+		   
+		   Command onLeavesPlay = new Command()
+		   {
+
+			private static final long serialVersionUID = -7360753270796020955L;
+
+			public void execute()
+		      {
+		         if (card.isEnchanting())
+		         {
+		            Card crd = card.getEnchanting().get(0);
+		            card.unEnchantCard(crd);
+		         }
+		      }
+		   };
+
+		  card.addEnchantCommand(onEnchant);
+		  card.addUnEnchantCommand(onUnEnchant);
+		  card.addLeavesPlayCommand(onLeavesPlay);
+
+		  spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+		}//*************** END ************ END **************************
 
 		
 	    return card;

@@ -1,3 +1,137 @@
+Merfolk Looter
+1 U
+Creature Merfolk Rogue
+no text
+1/1
+
+Thornscape Apprentice
+G
+Creature Human Wizard
+no text
+1/1
+TgtKpump R T: First strike
+
+Scepter of Insight
+1 U U
+Artifact
+no text
+
+Asha's favor
+2 W
+Enchantment Aura
+Enchanted creature gains flying, first strike and vigilance.
+Enchant creature
+
+Frontline Sage
+2 U
+Creature Human Wizard
+no text
+0/1
+Exalted
+
+Blinding mage
+1 W
+Creature Human Wizard
+no text
+1/2
+
+Ostiary Thrull
+3 B
+Creature Thrull
+no text
+2/2
+
+Whipcorder
+W W
+Creature Human Soldier Rebel
+no text
+2/2
+Morph:W
+
+Borrowing 100,000 Arrows
+2 U
+Sorcery
+no text
+spDrawCards:Count$TypeOppCtrlTapped.Creature:Draw a card for each tapped creature target opponent controls.:Borrowing 100,000 Arrows - Draw cards.
+
+Cruel Bargain
+B B B
+Sorcery
+no text
+spDrawCards:4:Drawback$LoseLifeYou/Count$YourLifeTotal/HalfUp:Draw four cards.:You lose half your life, rounded up.:Cruel Bargain - Draw cards and lose half your life, rounded up.
+
+Infernal Contract
+B B B
+Sorcery
+no text
+spDrawCards:4:Drawback$LoseLifeYou/Count$YourLifeTotal/HalfUp:Draw four cards.:You lose half your life, rounded up.:Infernal Contract - Draw cards and lose half your life, rounded up.
+
+Theft of Dreams
+2 U
+Sorcery
+no text
+spDrawCards:Count$TypeOppCtrlTapped.Creature:Draw a card for each tapped creature target opponent controls.:Theft of Dreams - Draw cards.
+
+Night's Whisper
+1 B
+Sorcery
+no text
+spDrawCards:2:Drawback$YouLoseLife/2:You draw two cards and you lose 2 life.:Night's Whisper - draw 2 cards and lose 2 life.
+
+Words of Wisdom
+1 U
+Instant
+no text
+spDrawCards:2:Drawback$OppDraw/1:You draw two cards, then each other player draws a card.:Words of Wisdom - draw 2 cards and opponent draws 1 card.
+
+Counsel of the Soratami
+2 U
+Sorcery
+no text
+spDrawCards:2:Draw two cards.:Counsel of the Soratami - draw 2 cards.
+
+Touch of Brilliance
+3 U
+Sorcery
+no text
+spDrawCards:2:Draw two cards.:Touch of Brilliance - draw 2 cards.
+
+Inspiration
+3 U
+Sorcery
+no text
+spDrawCards:2:Draw two cards.:Inspiration - draw 2 cards.
+
+Concentrate
+2 U U
+Sorcery
+no text
+spDrawCards:3:Draw three cards.:Concentrate - draw 3 cards.
+
+Harmonize
+2 G G
+Sorcery
+no text
+spDrawCards:3:Draw three cards.:Harmonize - draw 3 cards.
+
+Ancestral Recall
+U
+Instant
+no text
+spDrawCardsTgt:3:Target player draws three cards.:Ancestral Recall - draw 3 cards.
+
+Minions' Murmurs
+2 B B
+Sorcery
+no text
+spDrawCards:Count$TypeYouCtrl.Creature:Drawback$YouLoseLife/X:You draw X cards and you lose X life, where X is the number of creatures you control.:Minion's Murmurs - draw cards and lose life.
+
+Brainstorm
+U
+Instant
+no text
+spDrawCards:3:Drawback$YouHandToLibrary/2/Top:Draw three cards, then put two cards from your hand on top of your library in any order.:Brainstorm - draw 3 cards and put 2 on top of your library.
+
 Knighthood
 2 W
 Enchantment
@@ -222,7 +356,7 @@ Enchantment Aura
 Enchanted creature gets +2/+0 and has flying.
 Enchant creature
 
-Benalish Hero
+Benalish Trapper
 1 W
 Creature Human Soldier
 no text
@@ -2521,16 +2655,6 @@ Act of Treason
 2 R
 Sorcery
 Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn. (It can attack this turn.)
-
-Touch of Brilliance
-3 U
-Sorcery
-Draw two cards.
-
-Inspiration
-3 U
-Sorcery
-Draw two cards.
 
 Preemptive Strike
 1 U
@@ -7980,11 +8104,6 @@ Legendary Creature Human Artificer
 no text
 1/2
 
-Brainstorm
-U
-Instant
-Draw three cards, then put two cards from your hand on top of your library in any order.
-
 Jedit Ojanen of Efrava
 3 G G G
 Legendary Creature Cat Warrior Lord
@@ -11275,11 +11394,6 @@ Tendrils of Corruption
 Instant
 Tendrils of Corruption deals X damage to target creature and you gain X life, where X is the number of Swamps you control.
 
-Minions' Murmurs
-2 B B
-Sorcery
-You draw X cards and you lose X life, where X is the number of creatures you control.
-
 Ichor Slick
 2 B
 Sorcery
@@ -11467,11 +11581,6 @@ Pyrohemia
 2 R R
 Enchantment
 At end of turn, if no creatures are in play, sacrifice Pyrohemia.
-
-Harmonize
-2 G G
-Sorcery
-Draw three cards.
 
 Gaea's Anthem
 1 G G
@@ -11681,11 +11790,6 @@ Killer Whale
 Creature Whale
 no text
 3/5
-
-Concentrate
-2 U U
-Sorcery
-Draw three cards.
 
 Impulse
 1 U
@@ -12088,11 +12192,6 @@ Infest
 Sorcery
 All creatures get -2/-2 until end of turn.
 
-Night's Whisper
-1 B
-Sorcery
-You draw two cards and you lose 2 life.
-
 Do or Die
 1 B
 Sorcery
@@ -12373,11 +12472,6 @@ Remand
 Instant
 Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard. Draw a card.
 
-Counsel of the Soratami
-2 U
-Sorcery
-Draw two cards.
-
 Counterspell
 U U
 Instant
@@ -12392,11 +12486,6 @@ Opt
 U
 Instant
 Look at the top card of your library. You may put that card on the bottom of your library. Draw a card.
-
-Words of Wisdom
-1 U
-Instant
-You draw two cards, then each other player draws a card.
 
 Remove Soul
 1 U
@@ -13169,11 +13258,6 @@ Relentless Rats
 Creature Rat
 Relentless Rats gets +1/+1 for each other creature in play named Relentless Rats. A deck can have any number of cards named Relentless Rats.
 2/2
-
-Ancestral Recall
-U
-Instant
-Target player draws three cards.
 
 Eternal Witness
 1 G G

@@ -48,7 +48,9 @@ import forge.properties.NewConstants.LANG;
  * @author Clemens Koza
  */
 public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstants.GUI.GuiDeckEditor {
-    public static void main(String[] args) {
+	private static final long serialVersionUID = 680850452718332565L;
+
+	public static void main(String[] args) {
 //        JFrame jf = new JFrame();
         Gui_DeckEditorNew jf = new Gui_DeckEditorNew();
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

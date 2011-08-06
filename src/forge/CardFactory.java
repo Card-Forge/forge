@@ -1928,84 +1928,40 @@ public class CardFactory implements NewConstants {
         Tgt[0] = k[0].contains("Tgt");
        
         final int NumCards[] = {-1};
-        final String NumCardsType[] = {"none"};
-        final boolean NumCardsTypeYouCtrl[] = {false};
-        final boolean NumCardsTypeInPlay[] = {false};
-        final boolean NumCardsTypeInYourYard[] = {false};
-        final boolean NumCardsTypeInAllYards[] = {false};
-        final boolean NumCardsDomain[] = {false};
-        if (k[1].length() == 1)
+        final String NumCardsX[] = {"none"};
+
+        if (k[1].length() <= 2)
            NumCards[0] = Integer.parseInt(k[1]);
         else
         {
-           if (k[1].startsWith("NumCardsType"))
-           {
-              String kk[] = k[1].split("/");
-              NumCardsType[0] = kk[1];
-              NumCardsTypeYouCtrl[0] = kk[2].equals("YouCtrl");
-              NumCardsTypeInPlay[0] = kk[2].equals("InPlay");
-              NumCardsTypeInYourYard[0] = kk[2].equals("InYourYard");
-              NumCardsTypeInAllYards[0] = kk[2].equals("InAllYards");
+           if (k[1].startsWith("Count$"))
+           {             
+             String kk[] = k[1].split("\\$");
+              NumCardsX[0] = kk[1];
            }
-           NumCardsDomain[0] = k[1].equals("Domain");
         }
        
-        final int NumDiscard[] = {0};
-        final String UnlessDiscardType[] = {"none"};
-        final boolean AtRandom[] = {false};
-       
-        final int NumLoseLife[] = {0};
-       
-        final int NumToLibrary[] = {0};
-        final String LibraryPosition[] = {"none"};
-       
-        final int NumOppDraw[] = {0};
-       
+        // drawbacks and descriptions
+        final String DrawBack[] = {"none"};
+        final String spDesc[] = {"none"};
+        final String stDesc[] = {"none"};
         if (k.length > 2)
         {
-           if (k[2].contains("Discard"))
+           if (k[2].contains("Drawback$"))
            {
-              String kk[] = k[2].split("/");
-              if (kk[1].equals("X"))
-                 NumDiscard[0] = -1;
-              else
-                 NumDiscard[0] = Integer.parseInt(kk[1]);
-              
-              if (kk.length > 2)
-              {
-                 if (kk[2].equals("UnlessDiscardType"))
-                    UnlessDiscardType[0] = kk[3];
-                 
-                 AtRandom[0] = kk[2].equals("AtRandom");
-              }
+              String kk[] = k[2].split("\\$");
+              DrawBack[0] = kk[1];
+              if (k.length > 3)
+                 spDesc[0] = k[3];
+              if (k.length > 4)
+                 stDesc[0] = k[4];
            }
-
-           if (k[2].contains("LoseLife"))
+           else
            {
-              String kk[] = k[2].split("/");
-              if (kk[1].equals("X"))
-                 NumLoseLife[0] = -1;
-              else
-                 NumLoseLife[0] = Integer.parseInt(kk[1]);
-           }
-
-           if (k[2].contains("NumToLibrary"))
-           {
-              String kk[] = k[2].split("/");
-              if (kk[1].equals("X"))
-                 NumToLibrary[0] = -1;
-              else
-                 NumToLibrary[0] = Integer.parseInt(kk[1]);
-              LibraryPosition[0] = kk[2];
-           }
-           
-           if (k[2].contains("NumOppDraw"))
-           {
-              String kk[] = k[2].split("/");
-              if (kk[1].equals("X"))
-                 NumOppDraw[0] = -1;
-              else
-                 NumOppDraw[0] = Integer.parseInt(kk[1]);
+              if (k.length > 2)
+                 spDesc[0] = k[2];
+              if (k.length > 3)
+                 stDesc[0] = k[3];
            }
         }
        
@@ -2013,132 +1969,71 @@ public class CardFactory implements NewConstants {
         {
            private static final long serialVersionUID = -7049779241008089696L;
 
+           private int ncards;
+           
            public int getNumCards()
            {
               if (NumCards[0] != -1)
                  return NumCards[0];
 
-              int n = 0;
-
-              String cardController = card.getController();
-              PlayerZone myPlay = AllZone.getZone(Constant.Zone.Play, cardController);
-              PlayerZone opPlay = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(cardController));
-
-              PlayerZone myYard = AllZone.getZone(Constant.Zone.Graveyard, cardController);
-              PlayerZone opYard = AllZone.getZone(Constant.Zone.Graveyard, AllZone.GameAction.getOpponent(cardController));
-
-              CardList AllCards = new CardList();
-
-              if (! NumCardsType[0].equals("none"))
-              {
-                 if (NumCardsTypeInYourYard[0] == false)
-                    AllCards.addAll(myYard.getCards());
-
-                 if (NumCardsTypeInAllYards[0] == false)
-                 {
-                    AllCards.addAll(myYard.getCards());
-                    AllCards.addAll(opYard.getCards());
-                 }
-
-                 if (NumCardsTypeYouCtrl[0] == true)
-                    AllCards.addAll(myPlay.getCards());
-
-                 if (NumCardsTypeInPlay[0] == true)
-                 {
-                    AllCards.addAll(myPlay.getCards());
-                    AllCards.addAll(opPlay.getCards());
-                 }
-
-                 AllCards = AllCards.filter(new CardListFilter()
-                 {
-                    public boolean addCard(Card c)
-                    {
-                       if (c.getType().contains(NumCardsType[0]))
-                          return true;
-
-                       return false;
-                    }
-                 });
-
-                 n = AllCards.size();
-              }
-              if (NumCardsDomain[0] == true)
-              {
-                 AllCards.addAll(myPlay.getCards()); 
-                 String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp"};
-
-                 for(int i = 0; i < basic.length; i++)
-                    if (! AllCards.getType(basic[i]).isEmpty())
-                       n++;
-              }
-
-              if (NumDiscard[0] == -1)
-                 NumDiscard[0] = n;
-              if (NumLoseLife[0] == -1)
-                 NumLoseLife[0] = n;
-              if (NumToLibrary[0] == -1)
-                 NumToLibrary[0] = n;
-              if (NumOppDraw[0] == -1)
-                 NumOppDraw[0] = n;
-
-              return n;
+              if (! NumCardsX[0].equals("none"))
+                 return CardFactoryUtil.xCount(card, NumCardsX[0]);
+             
+              return 0;
            }
 
            public boolean canPlayAI()
            {
-              int n = getNumCards();
+              ncards = getNumCards();
               int h = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).size();
+              int hl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human).size();
+              int cl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).size();
               Random r = new Random();
 
-              if (((h + n) - (NumDiscard[0] + NumToLibrary[0]) <= 7)
-                    && (AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() - NumLoseLife[0]) >= 8
-                    && (r.nextInt(10) > 4))
+              if (((hl - ncards) < 2) && Tgt[0])
               {
                  setTargetPlayer(Constant.Player.Computer);
                  return true;
               }
-
+             
+              if (((h + ncards) <= 7) && !((cl - ncards) < 1) && (r.nextInt(10) > 4))
+              {
+                 setTargetPlayer(Constant.Player.Computer);
+                 return true;
+              }
+             
               return false;
            }
 
            public void resolve()
            {
-              int n = getNumCards();
+              ncards = getNumCards();
 
               String TgtPlayer = card.getController();
               if (Tgt[0])
                  TgtPlayer = getTargetPlayer();
 
-              for (int i=0; i < n; i++)
+              for (int i=0; i < ncards; i++)
                  AllZone.GameAction.drawCard(TgtPlayer);
 
-              if (NumDiscard[0] > 0)
-              {
-                 if (!UnlessDiscardType[0].equals("none"))
-                    AllZone.GameAction.discardUnless(TgtPlayer, NumDiscard[0], UnlessDiscardType[0]);
-                 else if (AtRandom[0] == true)
-                    AllZone.GameAction.discardRandom(TgtPlayer, NumDiscard[0]);
-                 else
-                    AllZone.GameAction.discard(TgtPlayer, NumDiscard[0]);
-              }
-                 
-              if (NumLoseLife[0] > 0)
-                 AllZone.GameAction.getPlayerLife(TgtPlayer).subtractLife(NumLoseLife[0]);
-
-              if (NumToLibrary[0] > 0)
-                 AllZone.GameAction.handToLibrary(TgtPlayer, NumToLibrary[0], LibraryPosition[0]);
-
-              if (NumOppDraw[0] > 0)
-                 for (int i = 0; i < NumOppDraw[0]; i++)
-                    AllZone.GameAction.drawCard(AllZone.GameAction.getOpponent(TgtPlayer));
+              if (! DrawBack[0].equals("none"))
+                 CardFactoryUtil.doDrawBack(DrawBack[0], ncards, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
            }
         };
 
         if (Tgt[0])
            spDraw.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spDraw));
 
-        spDraw.setDescription(card.getText());
-        card.setText("");
+        if (! spDesc[0].equals("none"))
+           spDraw.setDescription(spDesc[0]);
+        else
+           spDraw.setDescription("Draw " + NumCards[0] + " cards.");
+       
+        if (! stDesc[0].equals("none"))
+           spDraw.setStackDescription(stDesc[0]);
+        else
+           spDraw.setStackDescription("You draw " + NumCards[0] + " cards.");
+       
         card.clearSpellAbility();
         card.addSpellAbility(spDraw);
     }//spDrawCards
@@ -4845,34 +4740,6 @@ public class CardFactory implements NewConstants {
 
       card.clearSpellAbility();
       spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "All"));
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-
-
-
-    //*************** START *********** START **************************
-    else if(cardName.equals("Night's Whisper"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -8594340516961923197L;
-		
-		public boolean canPlayAI()
-        {
-          return AllZone.Computer_Life.getLife()>2;
-        }
-        public void resolve()
-        {
-          //draw 2 cards, subtract 2 life
-          String player = card.getController();
-          AllZone.GameAction.drawCard(player);
-          AllZone.GameAction.drawCard(player);
-
-          AllZone.GameAction.getPlayerLife(player).subtractLife(2);
-        }//resolve()
-      };
-
-      card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
 
@@ -10371,68 +10238,6 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
 
-
-    //*************** START *********** START **************************
-    else if(cardName.equals("Words of Wisdom"))
-    {
-      SpellAbility spell = new Spell(card)
-      {
-        private static final long serialVersionUID = -7394898791285593737L;
-
-		public void resolve()
-        {
-          AllZone.GameAction.drawCard(card.getController());
-          AllZone.GameAction.drawCard(card.getController());
-
-          String opponent = AllZone.GameAction.getOpponent(card.getController());
-          AllZone.GameAction.drawCard(opponent);
-        }
-      };
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-
-
-
-    //*************** START *********** START **************************
-    else if(cardName.equals("Counsel of the Soratami") || cardName.equals("Inspiration") || cardName.equals("Touch of Brilliance"))
-    {
-      SpellAbility spell = new Spell(card)
-      {
-        private static final long serialVersionUID = -1889094576060845154L;
-
-		public void resolve()
-        {
-          AllZone.GameAction.drawCard(card.getController());
-          AllZone.GameAction.drawCard(card.getController());
-        }
-      };
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-
-
-
-    //*************** START *********** START **************************
-    else if(cardName.equals("Concentrate") || cardName.equals("Harmonize") )
-    {
-      SpellAbility spell = new Spell(card)
-      {
-        private static final long serialVersionUID = -3561111468549060269L;
-
-		public void resolve()
-        {
-          AllZone.GameAction.drawCard(card.getController());
-          AllZone.GameAction.drawCard(card.getController());
-          AllZone.GameAction.drawCard(card.getController());
-        }
-      };
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-
-
-
     //*************** START *********** START **************************
     else if(cardName.equals("Amnesia"))
     {
@@ -10535,32 +10340,7 @@ public class CardFactory implements NewConstants {
     		}
     	};//command
     	card.addDestroyCommand(destroy);
-    }
-
-
-    //*************** START *********** START **************************
-    else if(cardName.equals("Ancestral Recall"))
-    {
-      SpellAbility spell = new Spell(card)
-      {
-        private static final long serialVersionUID = 4696857462510589599L;
-		public void resolve()
-        {
-          AllZone.GameAction.drawCard(getTargetPlayer());
-          AllZone.GameAction.drawCard(getTargetPlayer());
-          AllZone.GameAction.drawCard(getTargetPlayer());
-        }
-        public boolean canPlayAI()
-        {
-          return AllZone.Computer_Hand.getCards().length <= 5;
-        }
-      };
-      spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
-
-      spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
+    }//*************** START *********** START **************************
     
     //*************** START *********** START **************************
     else if(cardName.equals("Deep Analysis"))
@@ -11615,46 +11395,6 @@ public class CardFactory implements NewConstants {
       
       card.setFlashback(true);
     }//*************** END ************ END **************************
-
-
-
-    //*************** START *********** START **************************
-    else if(cardName.equals("Minions' Murmurs"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-        private static final long serialVersionUID = 7270026936498671973L;
-
-		public boolean canPlayAI()
-        {
-          int n = countCreatures();
-          return 0 < n && n < AllZone.Computer_Life.getLife();
-        }//canPlayAI()
-
-        public void resolve()
-        {
-          int n = countCreatures();
-          for(int i = 0; i < n; i++)
-            AllZone.GameAction.drawCard(card.getController());
-
-          AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(n);
-        }//resolve()
-
-        int countCreatures()
-        {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          CardList list = new CardList(play.getCards());
-          list = list.getType("Creature");
-          return list.size();
-        }
-      };//SpellAbility
-
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-
-
-
 
     //*************** START *********** START **************************
     else if(cardName.equals("Tendrils of Corruption"))
@@ -13818,87 +13558,6 @@ public class CardFactory implements NewConstants {
       
   }//*************** END ************ END **************************
     
-  //*************** START *********** START **************************
-  else if(cardName.equals("Brainstorm"))
-  {
-	  final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -5722651962081633839L;
-
-		public void resolve()
-        {
-            AllZone.GameAction.drawCard(card.getController());
-            AllZone.GameAction.drawCard(card.getController());
-            AllZone.GameAction.drawCard(card.getController());
-            
-            String player = card.getController();
-            if(player.equals(Constant.Player.Human))
-              humanResolve();
-            else
-              computerResolve();
-        }
-        
-        public void humanResolve()
-        {
-        	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
-        	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
-        	
-        	CardList putOnTop = new CardList(hand.getCards());
-        	
-        	Object o = AllZone.Display.getChoiceOptional("First card to put on top: ", putOnTop.toArray());
-        	if(o != null)
-            {
-        		Card c1 = (Card)o;
-        		putOnTop.remove(c1);
-        		hand.remove(c1);
-        		lib.add(c1,0);
-            }
-        	o = AllZone.Display.getChoiceOptional("Second card to put on top: ", putOnTop.toArray());
-        	if(o != null)
-            {
-        		Card c2 = (Card)o;
-        		putOnTop.remove(c2);
-        		hand.remove(c2);
-        		lib.add(c2,0);
-            }
-        	
-        }
-        
-        public void computerResolve()
-        {
-        	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
-        	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
-        	
-        	CardList putOnTop = new CardList(hand.getCards());
-        	
-        	Card c1 = putOnTop.get(0);
-        	putOnTop.remove(c1);
-        	hand.remove(c1);
-        	lib.add(c1, 0);
-        	
-        	Card c2 = putOnTop.get(0);
-        	putOnTop.remove(c2);
-        	hand.remove(c2);
-        	lib.add(c2, 0);
-        	//TODO: somehow find the least desirable cards at the moment, and put those on top
-        }
-        
-        public boolean canPlay()
-        {
-        	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
-        	
-        	if (lib.size() >= 2)
-        		return true;
-        	else
-        		return false;
-        }
-        
-      };
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-	  
-    
-  }//*************** END ************ END **************************
     
   //*************** START *********** START **************************
     else if(cardName.equals("Banishing Knack"))
@@ -16013,7 +15672,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     }//*************** END ************ END **************************
     
  
-    
+    //*************** START *********** START **************************
     if (cardName.equals("Ior Ruin Expedition"))
     {
 	    final SpellAbility ability = new Ability(card, "0")
@@ -16809,6 +16468,26 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       ability.setDescription("tap: You gain 1 life.");
       ability.setStackDescription("Braidwood Cup -"+card.getController() + " gains 1 life.");
       ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
+    }//*************** END ************ END **************************
+    
+  //*************** START *********** START **************************
+    if(cardName.equals("Scepter of Insight"))
+    {
+     final SpellAbility ability = new Ability_Tap(card, "3 U")
+     {
+		private static final long serialVersionUID = -3567474686431369541L;
+
+		public boolean canPlayAI() {return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);}
+
+         public void resolve()
+         {
+        	 AllZone.GameAction.drawCard(card.getController());
+         }
+         
+      };//SpellAbility
+      card.addSpellAbility(ability);
+      ability.setDescription("3 U, tap: Draw a card.");
+      ability.setStackDescription(card.getName() + " - draw a card.");
     }//*************** END ************ END **************************
     
     
