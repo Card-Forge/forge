@@ -141,51 +141,6 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Pongify")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -7657135492744577568L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return (getCreature().size() != 0) && (AllZone.Phase.getTurn() > 3);
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    Card best = CardFactoryUtil.AI_getBestCreature(getCreature());
-                    setTargetCard(best);
-                }
-                
-                CardList getCreature() {
-                    CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (3 < c.getNetAttack());
-                        }
-                    });
-                    list = list.getNotKeyword("Indestructible");
-                    return list;
-                }//getCreature()
-                
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        CardFactoryUtil.makeToken("Ape", "G 3 3 Ape", getTargetCard().getController(), "G",
-                                new String[] {"Creature", "Ape"}, 3, 3, new String[] {""});
-                        AllZone.GameAction.destroyNoRegeneration(getTargetCard());
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            card.setSVar("PlayMain1", "TRUE");
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
