@@ -586,7 +586,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
+                	card.getController().drawCard();
                 }//resolve()
             };//SpellAbility
             
@@ -596,7 +596,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
+                	card.getController().drawCard();
                     done();
                 }//resolve()
                 
@@ -1571,9 +1571,7 @@ public class CardFactory_Instants {
                         }
                     });
                     
-                    for(int i = 0; i <= count.size(); i++) {
-                        AllZone.GameAction.drawCard(card.getController());
-                    }
+                    card.getController().drawCards(count.size());
                 }
             };
             spell.setDescription("Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.");
@@ -2650,7 +2648,7 @@ public class CardFactory_Instants {
     				Card Sacrificed = getTargetCard();
     				if(Sacrificed != null) {
     					for(int i = 0; i < Sacrificed.getNetAttack(); i++) {
-    						AllZone.GameAction.drawCard(card.getController());
+    						card.getController().drawCard();
     					}
                         //AllZone.GameAction.gainLife(card.getController(), Sacrificed.getNetDefense());
                         card.getController().gainLife( Sacrificed.getNetDefense() );
@@ -2710,7 +2708,7 @@ public class CardFactory_Instants {
                     
                     int convertedManaCost = CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost());
                     for(int i = 0; i < convertedManaCost; i++) {
-                        AllZone.GameAction.drawCard(card.getController());
+                    	card.getController().drawCard();
                     }
                     
                 }
@@ -3429,8 +3427,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
-                    AllZone.GameAction.drawCard(card.getController());
+                	card.getController().drawCards(2);
                 }
             };
             spell.setDescription("Draw two cards.");
@@ -3441,8 +3438,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
-                    AllZone.GameAction.drawCard(card.getController());
+                	card.getController().drawCards(2);
                 }
                 
                 @Override
@@ -3906,7 +3902,7 @@ public class CardFactory_Instants {
   				Player player = getTargetPlayer();
       			  for(int i=0;i<card.getXManaCostPaid();i++)
       			  {
-      				  AllZone.GameAction.drawCard(player);
+      				  player.drawCard();
       			  }
       			  card.setXManaCostPaid(0);
       		  }

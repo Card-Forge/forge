@@ -224,7 +224,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     Player player = getTargetPlayer();
-                    AllZone.GameAction.drawCard(player);
+                    player.drawCard();
                     
                 }
                 
@@ -1726,8 +1726,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    for(int i = 0; i < 2; i++)
-                        AllZone.GameAction.drawCard(card.getController());
+                    card.getController().drawCards(2);
                 }
             };
             Command intoPlay = new Command() {
@@ -1958,8 +1957,7 @@ public class CardFactory_Creatures {
                     //PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
                     card.getController().subtractLife(2,card);
                     
-                    AllZone.GameAction.drawCard(card.getController());
-                    AllZone.GameAction.drawCard(card.getController());
+                    card.getController().drawCards(2);
                 }//resolve()
             };//SpellAbility
             Command intoPlay = new Command() {
@@ -1983,7 +1981,7 @@ public class CardFactory_Creatures {
                     //PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
                     card.getController().subtractLife(1,card);
                     
-                    AllZone.GameAction.drawCard(card.getController());
+                    card.getController().drawCard();
                 }//resolve()
             };//SpellAbility
             Command intoPlay = new Command() {
@@ -4023,7 +4021,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
+                	card.getController().drawCard();
                 }
             };
             Command destroy = new Command() {
@@ -4296,7 +4294,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
+                	card.getController().drawCard();
                     
                     if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
                     else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
@@ -4329,7 +4327,7 @@ public class CardFactory_Creatures {
                     
                     //draw same number of cards as before
                     for(int i = 0; i < c.length; i++)
-                        AllZone.GameAction.drawCard(card.getController());
+                    	card.getController().drawCard();
                 }
             };
             Command intoPlay = new Command() {
@@ -5249,7 +5247,7 @@ public class CardFactory_Creatures {
                     int number = ((Integer) countZubera.execute()).intValue();
                     
                     for(int i = 0; i < number; i++)
-                        AllZone.GameAction.drawCard(getTargetPlayer());
+                        getTargetPlayer().drawCard();
                 }//resolve()
             };//SpellAbility
             
@@ -8167,7 +8165,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
+                	card.getController().drawCard();
                 }//resolve()
             };//SpellAbility
             
@@ -9808,9 +9806,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
-                    AllZone.GameAction.drawCard(card.getController());
-                    AllZone.GameAction.drawCard(card.getController());
+                	card.getController().drawCards(3);
                 }
             };//SpellAbility
             
@@ -11479,7 +11475,7 @@ public class CardFactory_Creatures {
                         //AllZone.getZone(c).remove(c);
                         AllZone.GameAction.sacrifice(c);
                         
-                        AllZone.GameAction.drawCard(c.getController());
+                        card.getController().drawCard();
                     }
                 }//resolve
                 
@@ -11525,7 +11521,7 @@ public class CardFactory_Creatures {
                     if(AllZone.GameAction.isCardInPlay(c)) {
                         //AllZone.getZone(c).remove(c);
                         AllZone.GameAction.sacrifice(c);
-                        AllZone.GameAction.drawCard(c.getController());
+                        card.getController().drawCard();
                     }
                 }//resolve
                 
@@ -11927,7 +11923,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     
-                    AllZone.GameAction.drawCard(card.getController());
+                	card.getController().drawCard();
                 }//resolve()
             };//Ability
             
@@ -14775,7 +14771,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
+                	card.getController().drawCard();
                 }
             };//SpellAbility
             card.addSpellAbility(ability2);
@@ -16128,7 +16124,7 @@ public class CardFactory_Creatures {
                                     hand.remove(c);
                                     lib.add(c); //put on bottom
                                     
-                                    AllZone.GameAction.drawCard(player);
+                                    player.drawCard();
                                 }
                             }
                         } else //comp
@@ -16137,7 +16133,7 @@ public class CardFactory_Creatures {
                                 Card c = CardFactoryUtil.AI_getMostExpensivePermanent(nonLandList, card, false);
                                 hand.remove(c);
                                 lib.add(c);
-                                AllZone.GameAction.drawCard(AllZone.HumanPlayer);
+                                AllZone.HumanPlayer.drawCard();
                             }
                         }
                     }//handsize > 0
@@ -17298,7 +17294,7 @@ public class CardFactory_Creatures {
                         public void resolve() {
                             Player player = source.getController();
                             for(int i = 0; i < n; i++)
-                                AllZone.GameAction.drawCard(player);
+                                player.drawCard();
                         }
                     };
                     ability.setStackDescription("Swans of Bryn Argoll - " + source.getController() + " draws " + n
@@ -19734,7 +19730,7 @@ public class CardFactory_Creatures {
     	                //if (card.getController().equals(AllZone.ComputerPlayer))
     	            	//for now, sac happens during resolution:
     	                AllZone.GameAction.sacrifice(getSourceCard());
-    	                AllZone.GameAction.drawCard(card.getController());
+    	                card.getController().drawCard();
     	            }
     	        };
     	        ability.setDescription("2, Sacrifice " + card.getName() + ": Draw a card.");
@@ -19791,7 +19787,7 @@ public class CardFactory_Creatures {
                     Card tgtC = getTargetCard();
                 	if(AllZone.GameAction.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(card, tgtC)) {
                         tgtC.addCounter(Counters.BRIBERY, 1);
-                        AllZone.GameAction.drawCard(tgtC.getController());
+                        tgtC.getController().drawCard();
                     }//is card in play?
                 }//resolve()
                 

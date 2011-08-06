@@ -1601,7 +1601,7 @@ public class GameAction {
                         			public void execute() {
                         				if(Whenever_Go(F_card,F_k) == true) 
                         					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-      			                    	  AllZone.GameAction.drawCard(F_TargetPlayer[F_Target]);
+                        						F_TargetPlayer[F_Target].drawCard();
       			                      }
 
     			                      }
@@ -2350,12 +2350,12 @@ public class GameAction {
     	return playerTurn;
     }
     
-    /**
+    /*
      * target player draws a certain number of cards
      * 
      * @param player target player to draw
      * @param numCards the number of cards the player should draw
-     */
+     *
     @Deprecated
     public void drawCards(Player player, int numCards) {
     	player.drawCards(numCards);
@@ -2364,7 +2364,7 @@ public class GameAction {
     			drawCard(player);
     		}
     	}
-    	*/
+    	*
     }
     @Deprecated
     public void drawCard(Player player) {
@@ -2399,7 +2399,7 @@ public class GameAction {
         else {
         	doDraw(player, library, hand);
         }
-        */
+        *
     }
     /*
     private void doDraw(Player player, PlayerZone library, PlayerZone hand) {
@@ -2689,8 +2689,8 @@ public class GameAction {
         	computerStartsGame();
         
         for(int i = 0; i < 7; i++) {
-            this.drawCard(AllZone.HumanPlayer);
-            this.drawCard(AllZone.ComputerPlayer);
+            AllZone.HumanPlayer.drawCard();
+            AllZone.ComputerPlayer.drawCard();
         }
 
         ManaPool mp = AllZone.ManaPool;
@@ -3536,7 +3536,7 @@ public class GameAction {
         		@Override
         		public void resolve() {
         			Player player = skullclamp.getController();
-        			AllZone.GameAction.drawCards(player, 2);
+        			player.drawCards(2);
         		}
         	};//Ability
         	draw.setStackDescription("Skullclamp - " + skullclamp.getController() + " draws 2 cards (" + c.getName() + ").");
