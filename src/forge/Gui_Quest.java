@@ -335,6 +335,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Albert Einstein 3	hard	Stronger version of the above deck");
         sb.append("\r\n");
+        sb.append("Barney Rubble 1   	easy   	Sloth's Sovereigns of Lost Alara deck with walls and auras");
+        sb.append("\r\n");
+        sb.append("Barney Rubble 2   	medium   	Sloth's Sovereigns of Lost Alara deck with walls and auras");
+        sb.append("\r\n");
+        sb.append("Barney Rubble 3   	hard   	Sloth's Sovereigns of Lost Alara deck with walls and auras");
+        sb.append("\r\n");
         sb.append("Bart Simpson 1   	easy   	AI has creatures that will tap your creatures and will use auras to keep them tapped");
         sb.append("\r\n");
         sb.append("Bart Simpson 2   	medium   	AI has creatures that will tap your creatures and will use auras to keep them tapped");
