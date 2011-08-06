@@ -342,7 +342,7 @@ public class CombatUtil {
         	return false;
         
         if (isCardInPlay("Ensnaring Bridge")) {
-        	int limit = 0;
+        	int limit = Integer.MAX_VALUE;
         	CardList Human = new CardList();
         	Human.addAll(AllZone.Human_Play.getCards());
         	if (Human.getName("Ensnaring Bridge").size() > 0) {
