@@ -1,7 +1,7 @@
 Name:Phyrexian Gargantua
 ManaCost:4 B B
 Types:Creature Horror
-Text:When Phyrexian Gargantua comes into play, you draw two cards and you lose 2 life.
+Text:When CARDNAME enters the battlefield, you draw two cards and you lose 2 life.
 PT:4/4
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84393.jpg

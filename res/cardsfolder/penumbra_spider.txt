@@ -1,7 +1,7 @@
 Name:Penumbra Spider
 ManaCost:2 G G
 Types:Creature Spider
-Text:When Penumbra Spider is put into a graveyard from play, put a 2/4 black Spider creature token with reach into play.
+Text:When CARDNAME is put into a graveyard from the battlefield, put a 2/4 black Spider creature token with reach onto the battlefield.
 PT:2/4
 K:Reach
 SVar:Rarity:Common

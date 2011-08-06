@@ -1,7 +1,7 @@
 Name:Pongify
 ManaCost:U
 Types:Instant
-Text:Destroy target creature. It can't be regenerated. That creature's controller puts a 3/3 green Ape creature token into play.
+Text:Destroy target creature. It can't be regenerated. That creature's controller puts a 3/3 green Ape creature token onto the battlefield.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card129015.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/44.jpg

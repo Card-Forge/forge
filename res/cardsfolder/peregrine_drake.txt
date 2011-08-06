@@ -1,7 +1,7 @@
 Name:Peregrine Drake
 ManaCost:4 U
 Types:Creature Drake
-Text:When Peregrine Drake comes into play, untap up to five lands.
+Text:When CARDNAME enters the battlefield, untap up to five lands.
 PT:2/3
 K:Flying
 SVar:Rarity:Uncommon

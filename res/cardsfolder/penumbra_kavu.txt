@@ -1,7 +1,7 @@
 Name:Penumbra Kavu
 ManaCost:4 G
 Types:Creature Kavu
-Text:When Penumbra Kavu is put into a graveyard from play, put a 3/3 black Kavu creature token into play.
+Text:When CARDNAME is put into a graveyard from the battlefield, put a 3/3 black Kavu creature token onto the battlefield.
 PT:3/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card25956.jpg

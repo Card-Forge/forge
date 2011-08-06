@@ -1,7 +1,7 @@
 Name:Penumbra Bobcat
 ManaCost:2 G
 Types:Creature Cat
-Text:When Penumbra Cat is put into a graveyard from play, put a 2/1 black Cat creature token into play.
+Text:When CARDNAME is put into a graveyard from the battlefield, put a 2/1 black Cat creature token onto the battlefield.
 PT:2/1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card26815.jpg

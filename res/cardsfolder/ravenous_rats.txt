@@ -1,7 +1,7 @@
 Name:Ravenous Rats
 ManaCost:1 B
 Types:Creature Rat
-Text:When Ravenous Rats comes into play, target opponent discards a card.
+Text:When CARDNAME enters the battlefield, target opponent discards a card.
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_rats.jpg

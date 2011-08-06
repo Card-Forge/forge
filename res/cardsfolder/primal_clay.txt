@@ -1,7 +1,7 @@
 Name:Primal Clay
 ManaCost:4
 Types:Artifact Creature Shapeshifter
-Text:As Primal Clay comes into play, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 artifact creature with defender.
+Text:As CARDNAME enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types.
 PT:*/*
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/4e/en-us/card2065.jpg

@@ -1,7 +1,7 @@
 Name:Rhox Bodyguard
 ManaCost:3 G W
 Types:Creature Rhino Monk Soldier
-Text:When Rhox Bodyguard comes into play, you gain 3 life.
+Text:When CARDNAME enters the battlefield, you gain 3 life.
 PT:2/3
 K:Exalted
 SVar:Rarity:Common
