@@ -115,7 +115,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 			
 			@Override
 			public String getStackDescription() {
-				return doStackDescription();
+				return doStackDescription(this);
 			}
 		};
 		
@@ -145,7 +145,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 			
 			@Override
 			public String getStackDescription() {
-				return doStackDescription();
+				return doStackDescription(this);
 			}
 		};
 		
@@ -164,7 +164,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 
 			@Override
 			public String getStackDescription() {
-				return doStackDescription();
+				return doStackDescription(this);
 			}
 
 			@Override
@@ -177,7 +177,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 		return dbDealDamage;
 	}
 	
-	private String doStackDescription() {
+	private String doStackDescription(SpellAbility sa) {
 		int finalPower,finalToughness,finalAmount;
 		
 		if(tokenPower.matches("[0-9][0-9]?")) {
@@ -211,7 +211,12 @@ public class AbilityFactory_Token extends AbilityFactory {
 		}
 		else {
 			sb.append(".");
-		}					
+		}
+		
+		if (hasSubAbAF){
+     	   subAbAF.setParent(sa);
+     	   sb.append(subAbAF.getStackDescription());
+        }
 		
 		return sb.toString();
 	}
@@ -293,5 +298,16 @@ public class AbilityFactory_Token extends AbilityFactory {
 			CardFactoryUtil.makeToken(tokenName, imageName, controller, cost, tokenTypes, finalPower, finalToughness, tokenKeywords);
 		}
 		
+		if (hasSubAbAF) {
+     	   if (subAbAF.getParent() == null)
+     		   subAbAF.setParent(sa);
+			   subAbAF.resolve();
+        }
+		else if (hasSubAbStr){
+
+           CardFactoryUtil.doDrawBack(subAbStr, 0, AF.getHostCard().getController(),
+              AF.getHostCard().getController().getOpponent(), null, AF.getHostCard(), null, sa);
+           
+        }
 	}
 }
