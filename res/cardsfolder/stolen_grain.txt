@@ -2,7 +2,8 @@ Name:Stolen Grain
 ManaCost:4 B B
 Types:Sorcery
 Text:no text
-K:spDamageTgtOpp:5:Drawback$YouGainLife/4:Stolen Grain deals 5 damage to target opponent. You gain 5 life.:Stolen Grain - deals 5 damage; you gain 5 life.
+A:SP$DealDamage | Cost$ 4 B B | ValidTgts$ Opponent | NumDmg$ 5 | SubAbility$ SVar=DBGainLife | SpellDescription$ CARDNAME deals 5 damage to target opponent. You gain 5 life.
+SVar:DBGainLife:DB$GainLife | LifeAmount$ 5 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stolen_grain.jpg
 SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/83.jpg
