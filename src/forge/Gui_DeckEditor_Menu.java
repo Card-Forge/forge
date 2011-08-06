@@ -683,6 +683,13 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         CardList all = new CardList();
         for(int i = 0; i < aDeck.countMain(); i++) {
             String cardName = aDeck.getMain(i);
+            
+            if (cardName.contains("|"))
+            {
+            	String s[] = cardName.split("\\|",2);
+            	cardName = s[0];
+            }
+            
             Card c = AllZone.CardFactory.getCard(cardName, null);
             
             all.add(c);
@@ -1068,7 +1075,10 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         //always move "bottom" to main
         list = deckDisplay.getBottom();
         for(int i = 0; i < list.size(); i++) {
-            cardName = list.get(i).getName() + "|" + list.get(i).getCurSetCode();
+            if (!list.get(i).getCurSetCode().equals(""))
+            	cardName = list.get(i).getName() + "|" + list.get(i).getCurSetCode();
+            else
+            	cardName = list.get(i).getName();
             deck.addMain(AllZone.NameChanger.getOriginalName(cardName));
         }
         
