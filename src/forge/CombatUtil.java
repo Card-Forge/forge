@@ -1600,11 +1600,8 @@ public class CombatUtil {
                 StringBuilder sb = new StringBuilder();
                 sb.append(c.getName()).append(" - taps up to 8 target permanents.");
                 ability.setStackDescription(sb.toString());
-               
-        		CardList Silence = AllZoneUtil.getPlayerCardsInPlay(c.getController().getOpponent()); 		
-        		Silence = Silence.getName("Linvala, Keeper of Silence");
-        		if(Silence.size() == 0) {
-        			setLorthosCancelled(false);
+
+        		setLorthosCancelled(false);
                 if(c.getController().equals(AllZone.HumanPlayer)) {
                     AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Activate " + c.getName() + "'s ability: " + "\r\n",
                             ability.getManaCost(), paidCommand, unpaidCommand));
@@ -1640,7 +1637,6 @@ public class CombatUtil {
                     	AllZone.Stack.add(ability);
                     }
                 }
-        		} // Silenced
             }// Lorthos, the Tidemaker
             
             else if(c.getName().equals("Sapling of Colfenor") && !c.getCreatureAttackedThisCombat()) {
