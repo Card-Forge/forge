@@ -106,6 +106,7 @@ public class Target {
 		// CP = All three
 		
 		tgtValid = true;
+		srcCard = src;
 
 		if (parse.contains("Tgt")){
 			parse = parse.replace("Tgt", "");
