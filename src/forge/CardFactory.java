@@ -12192,6 +12192,116 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(counter);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Candelabra of Tawnos")) {
+        	/*
+        	 * X, Tap: Untap X target lands.
+        	 */
+        	
+        	//no reason this should never be enough targets
+        	final Card[] target = new Card[100];
+        	final int[] index = new int[1];
+        	
+        	final Ability_Tap ability = new Ability_Tap(card, "X 0") {
+				private static final long serialVersionUID = -4615638742299513654L;
+
+				@Override
+        		public void resolve() {
+        			System.out.println("Candelabra of Tawnos - card targets: ");
+        			printCardTargets();
+        			for(int i = 0; i < target.length; i++) {
+        				if(AllZone.GameAction.isCardInPlay(target[i])
+        						&& CardFactoryUtil.canTarget(card, target[i])
+        						&& null != target[i]) {
+        					//DEBUG
+        					System.out.println("Candelabra of Tawnos - untapping: "+target[i]);
+        					target[i].untap();
+        				}
+        			}
+        		}//resolve()
+        		
+        		//DEBUG
+        		private void printCardTargets() {
+        			StringBuilder sb = new StringBuilder("[");
+        			for(int i = 0; i < target.length; i++) {
+        				sb.append(target[i]).append(",");
+        			}
+        			sb.append("]");
+        			System.out.println("Candelabra of Tawnos: "+sb.toString());
+        		}
+        		
+        	};//SpellAbility
+
+        	final Input input = new Input() {
+				private static final long serialVersionUID = 9040108401780787183L;
+
+				@Override
+        		public void showMessage() {
+        			AllZone.Display.showMessage("Select target lands to untap.  Currently, "+getNumTargets()+" targets.  Click OK when done.");
+        		}
+				
+				private int getNumTargets() {
+        			int numTargets = 0;
+        			for( int j = 0; j < target.length; j++ ) {
+        				if( null != target[j] ) {
+        					numTargets++;
+        				}
+        			}
+        			return numTargets;
+        		}
+
+        		@Override
+        		public void selectButtonCancel() { stop(); }
+        		
+        		@Override
+        		public void selectButtonOK() {
+        			ability.setManaCost(Integer.toString(getNumTargets()));
+        			if(this.isFree()) {
+						this.setFree(false);
+						AllZone.Stack.add(ability);
+						stop();
+					} else stopSetNext(new Input_PayManaCost(ability));
+        		}
+
+        		@Override
+        		public void selectCard(Card c, PlayerZone zone) {
+        			if( !CardFactoryUtil.canTarget(card, c)) {
+        				AllZone.Display.showMessage("Cannot target this card.");
+    					return; //cannot target
+        			}
+        			for(int i = 0; i < index[0]; i++) {
+        				if(c.equals(target[i])) {
+        					AllZone.Display.showMessage("You have already selected this target.");
+        					return; //cannot target the same land twice.
+        				}
+        			}
+
+        			if(c.isLand() && zone.is(Constant.Zone.Play)) {
+        				target[index[0]] = c;
+        				index[0]++;
+        				showMessage();
+        			}
+        		}//selectCard()
+        	};//Input
+
+        	Input runtime = new Input() {
+				private static final long serialVersionUID = 6968433293909855375L;
+
+				@Override
+        		public void showMessage() {
+        			index[0] = 0;
+        			stopSetNext(input);
+        		}
+        	};//Input
+        	///////////////////////////////////////
+        	/////////////////////////////////////
+
+        	ability.setDescription("X, tap: "+"Untap X target lands.");
+        	ability.setStackDescription(card.getName()+" - Untap X target lands.");
+        	card.addSpellAbility(ability);
+        	ability.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
         
 
         return postFactoryKeywords(card);
