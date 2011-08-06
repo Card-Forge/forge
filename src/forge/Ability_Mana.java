@@ -49,8 +49,6 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
 		// change this, once ManaPool moves to the Player
 		// this.getActivatingPlayer().ManaPool.addManaToFloating(origProduced, getSourceCard());
 		AllZone.ManaPool.addManaToFloating(produced, source);
-		
-		System.out.println("Mana produced: "+produced);
 
 		// TODO: all of the following would be better as trigger events "tapped for mana"
 		
