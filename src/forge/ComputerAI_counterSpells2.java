@@ -60,6 +60,10 @@ public class ComputerAI_counterSpells2 {
 		{
 			public boolean addCard(Card c)
 			{
+				if(sa.getSourceCard().getType().contains("Sorcery") || sa.getSourceCard().getType().contains("Instant")) {
+					if(c.getName().equals("Muddle the Mixture"))
+						return true;
+				}
 				if (CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost()) == 2)
 					if (c.getName().equals("Spell Snare"))
 						return true;
