@@ -1099,6 +1099,7 @@ res/cardsfolder/enclave_elite.txt -text svneol=native#text/plain
 res/cardsfolder/encroach.txt -text svneol=native#text/plain
 res/cardsfolder/endless_cockroaches.txt -text svneol=native#text/plain
 res/cardsfolder/energizer.txt -text svneol=native#text/plain
+res/cardsfolder/energy_flux.txt -text svneol=native#text/plain
 res/cardsfolder/energy_tap.txt -text svneol=native#text/plain
 res/cardsfolder/enfeeblement.txt -text svneol=native#text/plain
 res/cardsfolder/engineered_plague.txt -text svneol=native#text/plain
