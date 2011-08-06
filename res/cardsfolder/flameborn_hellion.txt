@@ -1,0 +1,10 @@
+Name:Flameborn Hellion
+ManaCost:5 R
+Types:Creature Hellion
+Text:no text
+PT:5/4
+K:Haste
+K:CARDNAME attacks each turn if able.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flameborn_hellion.jpg
+End
