@@ -7325,16 +7325,16 @@ public class CardFactory_Sorceries {
         			{
         				aPlay = new CardList(AllZone.getZone(Constant.Zone.Play, actPlayer).getCards());
         				aLands = aPlay.getType("Land");
-
-        				AllZone.GameAction.sacrificePermanent(actPlayer, "Select a Land to sacrifice", aLands);
+        				if(aLands.size()>0) 
+        					AllZone.GameAction.sacrificePermanent(actPlayer, "Select a Land to sacrifice", aLands);
         			}
         			
         			for (int i=0; i<number; i++)
         			{
         				oPlay = new CardList(AllZone.getZone(Constant.Zone.Play, oppPlayer).getCards());
         				oLands = oPlay.getType("Land");
-        				
-        				AllZone.GameAction.sacrificePermanent(oppPlayer, "Select a land to sacrifice", oLands);
+        				if(oLands.size()>0) 
+        					AllZone.GameAction.sacrificePermanent(oppPlayer, "Select a land to sacrifice", oLands);
         			}
         				
         			for (int i=0; i<aCreatures.size(); i++)
