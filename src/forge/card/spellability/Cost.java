@@ -700,14 +700,10 @@ public class Cost {
 		}
 		
 		if(exileType.equals("CARDNAME"))
-			cost.append(name).append(" ");
+			cost.append(name).append(" from the top of you library");
 		else {
-			cost.append("the top");
-			if(exileFromTopAmount != 1) {
-				cost.append(convertIntAndTypeToWords(exileFromTopAmount, exileFromTopType));
-			}
-			cost.append(" card");
-			if(exileFromTopAmount != 1) cost.append("s");
+			cost.append("the top ");
+			cost.append(convertIntAndTypeToWords(exileFromTopAmount, exileFromTopType));
 			cost.append(" of your library");
 		}
 		return cost.toString();
