@@ -342,7 +342,7 @@ public class AbilityFactory_ZoneAffecting {
 			sb.append(" ");
 		
 		sb.append("Mills ");
-		int numCards = calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa);
+		int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa);
 		sb.append(numCards);
 		sb.append(" Card(s) from ");
 		sb.append(player.toString());
@@ -402,7 +402,7 @@ public class AbilityFactory_ZoneAffecting {
 		if (tgt != null){
 			tgt.resetTargets();
 			
-			int numCards = calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+			int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 			
 			CardList pLibrary = AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.HumanPlayer);
 			
@@ -429,7 +429,7 @@ public class AbilityFactory_ZoneAffecting {
 		
 		Card source = sa.getSourceCard();
 
-		int numCards = calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+		int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 		
 		ArrayList<Player> tgtPlayers;
 
@@ -458,29 +458,5 @@ public class AbilityFactory_ZoneAffecting {
 					 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
 			}
 		}
-	}
-	
-	public static int calculateAmount(Card card, String amount, SpellAbility ability){
-		// handle deciding what X would be around here for Psychic Drain type cards
-		if (amount.matches("X"))
-		{
-			String calcX[] = card.getSVar(amount).split("\\$");
-			if (calcX.length == 1 || calcX[1].equals("none"))
-				return 0;
-			
-			if (calcX[0].startsWith("Count"))
-			{
-				return CardFactoryUtil.xCount(card, calcX[1]);
-			}
-			else if (calcX[0].startsWith("Sacrificed"))
-			{
-				return CardFactoryUtil.handlePaid(ability.getSacrificedCost(), calcX[1]);
-			}
-			else
-				return 0;
-		}
-
-		return Integer.parseInt(amount);
-	}
-	
+	}	
 }

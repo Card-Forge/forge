@@ -252,9 +252,8 @@ public class AbilityFactory {
 		if (API.equals("LoseLife")){
 			if (isAb)
 				SA = AbilityFactory_AlterLife.createAbilityLoseLife(this);
-			else if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_AlterLife.createSpellLoseLife(this);
-			}
 			else if (isDb)
 				SA = AbilityFactory_AlterLife.createDrawbackLoseLife(this);
 			if(hasSubAbility())
@@ -264,42 +263,41 @@ public class AbilityFactory {
 		if (API.equals("Fog")){
 			if (isAb)
 				SA = AbilityFactory_Combat.createAbilityFog(this);
-			if (isSp){
+			if (isSp)
 				SA = AbilityFactory_Combat.createSpellFog(this);
-			}
 		}
 		
 		if (API.equals("Bounce")){
 			if (isAb)
 				SA = AbilityFactory_Bounce.createAbilityBounce(this);
-			if (isSp){
+			if (isSp)
 				SA = AbilityFactory_Bounce.createSpellBounce(this);
-			}
 			hostCard.setSVar("PlayMain1", "TRUE");
 		}
 		
 		if (API.equals("Untap")){
 			if (isAb)
 				SA = AbilityFactory_PermanentState.createAbilityUntap(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_PermanentState.createSpellUntap(this);
-			}
+			else if (isDb)
+				SA = AbilityFactory_PermanentState.createDrawbackUntap(this);
+			if(hasSubAbility())
+				SA.setSubAbility(getSubAbility());
 		}
 		
 		if (API.equals("Tap")){
 			if (isAb)
 				SA = AbilityFactory_PermanentState.createAbilityTap(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_PermanentState.createSpellTap(this);
-			}
 		}
 		
 		if (API.equals("Regenerate")){
 			if (isAb)
 				SA = AbilityFactory_Regenerate.getAbility(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_Regenerate.getSpell(this);
-			}
 		}
 		
 		if (API.equals("Draw")){
@@ -437,6 +435,26 @@ public class AbilityFactory {
         return abSub;
 	}
 	
-	
+	public static int calculateAmount(Card card, String counterNum, SpellAbility ability){
+		if (counterNum.matches("X"))
+		{
+			String calcX[] = card.getSVar(counterNum).split("\\$");
+			if (calcX.length == 1 || calcX[1].equals("none"))
+				return 0;
+			
+			if (calcX[0].startsWith("Count"))
+			{
+				return CardFactoryUtil.xCount(card, calcX[1]);
+			}
+			else if (ability != null && calcX[0].startsWith("Sacrificed"))
+			{
+				return CardFactoryUtil.handlePaid(ability.getSacrificedCost(), calcX[1]);
+			}
+			else
+				return 0;
+		}
+
+		return Integer.parseInt(counterNum);
+	}
 }
 

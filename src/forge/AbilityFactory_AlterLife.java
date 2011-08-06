@@ -33,7 +33,7 @@ public class AbilityFactory_AlterLife {
 			
 			@Override
 			public void resolve() {
-				int amount = calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
 				gainLifeResolve(af, this, amount);
 			}
 			
@@ -69,7 +69,7 @@ public class AbilityFactory_AlterLife {
 			
 			@Override
 			public void resolve() {
-				int amount = calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
 				gainLifeResolve(af, this, amount);
 			}
 			
@@ -100,7 +100,7 @@ public class AbilityFactory_AlterLife {
 			
 			@Override
 			public void resolve() {
-				int amount = calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
 				gainLifeResolve(af, this, amount);
 			}
 
@@ -141,7 +141,7 @@ public class AbilityFactory_AlterLife {
 			
 			@Override
 			public void resolve() {
-				int amount = calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
 				loseLifeResolve(af, this, amount);
 			}
 		};
@@ -176,7 +176,7 @@ public class AbilityFactory_AlterLife {
 			
 			@Override
 			public void resolve() {
-				int amount = calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
 				loseLifeResolve(af, this, amount);
 			}
 		};
@@ -206,7 +206,7 @@ public class AbilityFactory_AlterLife {
 			
 			@Override
 			public void resolve() {
-				int amount = calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
 				loseLifeResolve(af, this, amount);
 			}
 
@@ -218,32 +218,9 @@ public class AbilityFactory_AlterLife {
 		return dbLoseLife;
 	}
 
-	
-	public static int calculateAmount(Card card, String lifeAmount, SpellAbility ability){
-		if (lifeAmount.matches("X"))
-		{
-			String calcX[] = card.getSVar(lifeAmount).split("\\$");
-			if (calcX.length == 1 || calcX[1].equals("none"))
-				return 0;
-			
-			if (calcX[0].startsWith("Count"))
-			{
-				return CardFactoryUtil.xCount(card, calcX[1]);
-			}
-			else if (calcX[0].startsWith("Sacrificed"))
-			{
-				return CardFactoryUtil.handlePaid(ability.getSacrificedCost(), calcX[1]);
-			}
-			else
-				return 0;
-		}
-
-		return Integer.parseInt(lifeAmount);
-	}
-	
 	public static String gainLifeStackDescription(AbilityFactory af, SpellAbility sa){
 		StringBuilder sb = new StringBuilder();
-		int amount = calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
+		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
 
 		if (!(sa instanceof Ability_Sub))
 			sb.append(sa.getSourceCard().getName()).append(" - ");
@@ -266,7 +243,7 @@ public class AbilityFactory_AlterLife {
 	
 	static String loseLifeStackDescription(AbilityFactory af, SpellAbility sa){
 		 StringBuilder sb = new StringBuilder();
-		 int amount = calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
+		 int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
 	
 		 Player player = sa.getActivatingPlayer().getOpponent();
 	
@@ -376,7 +353,7 @@ public class AbilityFactory_AlterLife {
 		int aiLife = AllZone.ComputerPlayer.getLife();
 
 		// TODO handle proper calculation of X values based on Cost and what would be paid
-		final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
+		final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
 		
 		if (abCost != null){
 			// AI currently disabled for these costs

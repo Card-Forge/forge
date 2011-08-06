@@ -23,7 +23,7 @@ public class AbilityFactory_Counters {
 				 Counters cType = Counters.valueOf(type);
 				 StringBuilder sb = new StringBuilder();
 				 String name = af.getHostCard().getName();
-				 int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				 int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
 				 sb.append(name).append(" - Put ").append(amount).append(" ").append(cType.getName()).append(" counter on ");
 				 Card tgt = getTargetCard();
 				 if (tgt != null)
@@ -45,7 +45,7 @@ public class AbilityFactory_Counters {
 			
 			@Override
 			public void resolve() {
-				int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
 				putResolve(af, this, amount, type);
 			}
 			
@@ -69,7 +69,7 @@ public class AbilityFactory_Counters {
 				 Counters cType = Counters.valueOf(type);
 				 StringBuilder sb = new StringBuilder();
 				 String name = af.getHostCard().getName();
-				 int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				 int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
 				 sb.append(name).append(" - Remove ").append(amount).append(" ").append(cType.getName()).append(" counter from ");
 				 Card tgt = getTargetCard();
 				 if (tgt != null)
@@ -91,7 +91,7 @@ public class AbilityFactory_Counters {
 			
 			@Override
 			public void resolve() {
-				int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
 				removeResolve(af, this, amount, type);
 			}
 			
@@ -114,7 +114,7 @@ public class AbilityFactory_Counters {
 				 Counters cType = Counters.valueOf(type);
 				 StringBuilder sb = new StringBuilder();
 				 String name = af.getHostCard().getName();
-				 int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				 int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
 				 sb.append(name).append(" - Put ").append(amount).append(" ").append(cType.getName()).append(" counter on ");
 				 Card tgt = getTargetCard();
 				 if (tgt != null)
@@ -139,7 +139,7 @@ public class AbilityFactory_Counters {
 			
 			@Override
 			public void resolve() {
-				int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
 				putResolve(af, this, amount, type);
 			}
 			
@@ -162,7 +162,7 @@ public class AbilityFactory_Counters {
 				 Counters cType = Counters.valueOf(type);
 				 StringBuilder sb = new StringBuilder();
 				 String name = af.getHostCard().getName();
-				 int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				 int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
 				 sb.append(name).append(" - Remove ").append(amount).append(" ").append(cType.getName()).append(" counter from ");
 				 Card tgt = getTargetCard();
 				 if (tgt != null)
@@ -187,34 +187,12 @@ public class AbilityFactory_Counters {
 			
 			@Override
 			public void resolve() {
-				int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
 				removeResolve(af, this, amount, type);
 			}
 			
 		};
 		return spPutCounter;
-	}
-	
-	public static int calculateAmount(Card card, String counterNum, SpellAbility ability){
-		if (counterNum.matches("X"))
-		{
-			String calcX[] = card.getSVar(counterNum).split("\\$");
-			if (calcX.length == 1 || calcX[1].equals("none"))
-				return 0;
-			
-			if (calcX[0].startsWith("Count"))
-			{
-				return CardFactoryUtil.xCount(card, calcX[1]);
-			}
-			else if (calcX[0].startsWith("Sacrificed"))
-			{
-				return CardFactoryUtil.handlePaid(ability.getSacrificedCost(), calcX[1]);
-			}
-			else
-				return 0;
-		}
-
-		return Integer.parseInt(counterNum);
 	}
 	
 	public static boolean putCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr, final String type){
@@ -264,7 +242,7 @@ public class AbilityFactory_Counters {
 			return false;
 		
 		// TODO handle proper calculation of X values based on Cost
-		final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
+		final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
 		
 		 // prevent run-away activations - first time will always return true
 		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
