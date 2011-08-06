@@ -1,3 +1,8 @@
+Goblin Assault
+2 R
+Enchantment
+At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield. Goblin creatures attack each turn if able.
+
 Cagemail
 1 W
 Enchantment Aura

@@ -66,6 +66,7 @@ public class GameActionUtil {
         upkeep_Bringer_of_the_White_Dawn();
         upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
         upkeep_Bitterblossom();
+        upkeep_Goblin_Assault();
         upkeep_Battle_of_Wits();
         upkeep_Helix_Pinnacle();
         upkeep_Barren_Glory();
@@ -6250,6 +6251,31 @@ public class GameActionUtil {
         }// for
     }// upkeep_Bitterblossom()
     
+    private static void upkeep_Goblin_Assault() {
+        final String player = AllZone.Phase.getActivePlayer();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName("Goblin Assault");
+        
+        Ability ability;
+        for(int i = 0; i < list.size(); i++) {
+            final Card crd = list.get(i);
+            ability = new Ability(list.get(i), "0") {
+                @Override
+                public void resolve() {
+                    AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+                    CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", crd, "R", new String[] {
+                            "Creature", "Goblin"}, 1, 1, new String[] {"Haste"});
+                }// resolve()
+            };// Ability
+            ability.setStackDescription("Goblin Assault - " + player +
+                     " puts a 1/1 red Goblin creature token with haste onto the battlefield.");
+            
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Bitterblossom()
+    
     private static void upkeep_Masticore() {
         final String player = AllZone.Phase.getActivePlayer();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
@@ -8237,6 +8263,42 @@ public class GameActionUtil {
                                                               }// for outer
                                                           }// execute()
                                                       }; //Steely Resolve
+                                                      
+      public static Command Goblin_Assault                = new Command() {
+                                                          
+    	  												private static final long serialVersionUID = 5138624295158786103L;
+														CardList                  gloriousAnthemList = new CardList();
+                                                          
+                                                          public void execute() {
+                                                              String keyword = "This card attacks each turn if able.";
+                                                              
+                                                              CardList list = gloriousAnthemList;
+                                                              Card c;
+                                                              // reset all cards in list - aka "old" cards
+                                                              for(int i = 0; i < list.size(); i++) {
+                                                                  c = list.get(i);
+                                                                  c.removeExtrinsicKeyword(keyword);
+                                                              }
+                                                              
+                                                              list.clear();
+                                                              PlayerZone[] zone = getZone("Goblin Assault");
+                                                              
+                                                              for(int outer = 0; outer < zone.length; outer++) {
+                                                                  CardList creature = new CardList();
+                                                                  creature.addAll(AllZone.Human_Play.getCards());
+                                                                  creature.addAll(AllZone.Computer_Play.getCards());
+                                                                  creature = creature.getType("Goblin");
+                                                                  
+                                                                  for(int i = 0; i < creature.size(); i++) {
+                                                                      c = creature.get(i);
+                                                                      if(!c.getKeyword().contains(keyword)) {
+                                                                          c.addExtrinsicKeyword(keyword);
+                                                                          gloriousAnthemList.add(c);
+                                                                      }
+                                                                  }// for inner
+                                                              }// for outer
+                                                          }// execute()
+                                                      }; //Goblin Assault                                                 
                                                          
     public static Command Mobilization                = new Command() {
                                                           private static final long serialVersionUID   = 2005579284163773044L;
@@ -14875,6 +14937,7 @@ public class GameActionUtil {
         commands.put("Serras_Blessing", Serras_Blessing);
         commands.put("Cover_of_Darkness", Cover_of_Darkness);
         commands.put("Steely_Resolve", Steely_Resolve);
+        commands.put("Goblin_Assault", Goblin_Assault);
         commands.put("Concordant_Crossroads", Concordant_Crossroads);
         commands.put("Mass_Hysteria", Mass_Hysteria);
         commands.put("Fervor", Fervor);

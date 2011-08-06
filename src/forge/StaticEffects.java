@@ -139,6 +139,7 @@ public class StaticEffects
 		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"Tabernacle"});
 		cardToEffectsList.put("Magus of the Tabernacle", new String[] {"Magus_of_the_Tabernacle"});
 		cardToEffectsList.put("Mobilization", new String[] {"Mobilization"});
+		cardToEffectsList.put("Goblin Assault", new String[] {"Goblin_Assault"});
 		cardToEffectsList.put("Serra's Blessing", new String[] {"Serras_Blessing"});
 		cardToEffectsList.put("Cover of Darkness", new String[] {"Cover_of_Darkness"});
 		cardToEffectsList.put("Steely Resolve", new String[] {"Steely_Resolve"});
