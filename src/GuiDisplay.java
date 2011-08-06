@@ -161,7 +161,7 @@ public class GuiDisplay extends JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel3.setText("Hand: ");
         jLabel3.setBounds(new Rectangle(39, 608, 60, 28));
-        jPanel12.setToolTipText("Mana Pool");
+        jPanel12.setToolTipText("Snow Mana Pool");
         jPanel12.setBounds(new Rectangle(1, 571, 246, 30));
         jPanel12.setLayout(gridLayout2);
         gridLayout2.setColumns(6);

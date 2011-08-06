@@ -817,7 +817,8 @@ private Card getCurrentCard(int ID)
     AllZone.Human_Play.add(mp);
 	*/
     
-    Card mp = AllZone.ManaPool;
+    ManaPool mp = AllZone.ManaPool;
+    AllZone.Human_Play.add(mp.smp);
     AllZone.Human_Play.add(mp);
 
     AllZone.Stack.reset();//this works, it clears the stack of Upkeep effects like Bitterblossom

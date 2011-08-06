@@ -315,7 +315,7 @@ public class GuiDisplayUtil implements NewConstants {
         if(stack) {
             // add all Cards in list to the GUI, add arrows to Local Enchantments 
             
-            ArrayList<Card> manaPool = getCard(list, "Mana Pool");
+            ArrayList<Card> manaPools = getManaPools(list);
             ArrayList<Card> enchantedLands = getEnchantedLands(list);
             ArrayList<Card> basicBlues = getBasics(list, Constant.Color.Blue);
             ArrayList<Card> basicReds = getBasics(list, Constant.Color.Red);
@@ -343,7 +343,7 @@ public class GuiDisplayUtil implements NewConstants {
             //ArrayList<Card> moxDiamond = getMoxen(list, "Mox Diamond");
             
             list = new ArrayList<Card>();
-            list.addAll(manaPool);
+            list.addAll(manaPools);
             list.addAll(enchantedLands);
             list.addAll(basicBlues);
             list.addAll(basicReds);
@@ -443,9 +443,10 @@ public class GuiDisplayUtil implements NewConstants {
                 	System.out.println("startANewStack: " + startANewStack);
                 }
                 */
-                if(c.isAura() && c.isEnchanting() && prevCard != null && prevCard.getName().equals("Mana Pool"))
+                if(c.isAura() && c.isEnchanting() && prevCard != null && prevCard instanceof ManaPool)
                     startANewStack = true;
-                
+                if(c instanceof ManaPool && prevCard instanceof ManaPool && prevCard.isSnow())
+                	startANewStack = false;
 
                 if(startANewStack) {
                     setupConnectedCards(connectedCards);
@@ -832,7 +833,7 @@ public class GuiDisplayUtil implements NewConstants {
         ArrayList<Card> ret = new ArrayList<Card>();
         
         for(Card c:cards) {
-            if(!c.isLand() && !c.getName().startsWith("Mox") && !c.getName().equals("Mana Pool")) {
+            if(!c.isLand() && !c.getName().startsWith("Mox") && !(c instanceof ManaPool)) {
                 ret.add(c);
             } else {
                 String name = c.getName();
@@ -843,7 +844,7 @@ public class GuiDisplayUtil implements NewConstants {
                         || name.equals("Plateau") || name.equals("Scrubland") || name.equals("Savannah")
                         || name.equals("Taiga") || name.equals("Tropical Island") || name.equals("Tundra")
                         || name.equals("Underground Sea") || name.equals("Volcanic Island")
-                        || name.startsWith("Mox") || name.equals("Mana Pool")) {
+                        || name.startsWith("Mox") || c instanceof ManaPool) {
                     // do nothing.
                 } else {
                     ret.add(c);
@@ -862,6 +863,17 @@ public class GuiDisplayUtil implements NewConstants {
         
         return ret;
     }
+    public static ArrayList<Card> getManaPools(ArrayList<Card> cards) {
+        ArrayList<Card> ret = new ArrayList<Card>();
+        for(Card c:cards) {
+            if(c instanceof ManaPool && !c.isSnow()) {
+            	ret.add(((ManaPool)c).smp);
+                ret.add(c);
+            }
+            
+        }
+        return ret;
+    }
     
     public static boolean isStackable(Card c) {
         
@@ -877,7 +889,7 @@ public class GuiDisplayUtil implements NewConstants {
         if(c.isLand() || (c.getName().startsWith("Mox") && !c.getName().equals("Mox Diamond") )|| (c.isLand() && c.isEnchanted())
                 || (c.isAura() && c.isEnchanting()) || (c.isToken() && CardFactoryUtil.multipleControlled(c))
                 || (c.isCreature() && (c.isEquipped() || c.isEnchanted())) || (c.isEquipment() && c.isEquipping())
-                || (c.isEnchantment())) return true;
+                || (c.isEnchantment()) || (c instanceof ManaPool && c.isSnow())) return true;
         
         return false;
     }

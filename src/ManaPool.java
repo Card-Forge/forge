@@ -4,7 +4,7 @@ import java.util.*;
 public class ManaPool extends Card 
 {
 	private ArrayList<Ability_Mana> used = new ArrayList<Ability_Mana>();
-	boolean[] spendAsCless ={true,true,true,true,true,true};
+	//boolean[] spendAsCless ={true,true,true,true,true,true};
 	boolean spendAll = true;
 /*	private int cIndex(String s)
 	{
@@ -61,10 +61,17 @@ public class ManaPool extends Card
 	}
 	public int getExtrinsicKeywordSize() {updateKeywords(); return extrinsicKeyword.size(); }
 	
+	public ManaPool smp;
 	public ManaPool(String contents){this(); this.addMana(contents);}
-	public ManaPool()
+	public ManaPool(){this(false);}
+	public ManaPool(boolean snow)
 	{
 		super();
+		if(!snow)
+			smp = new ManaPool(true);
+		else{smp = this; addType("Snow");}
+		updateObservers();
+		
 		setName("Mana Pool");
 		addIntrinsicKeyword("Shroud");
 		addIntrinsicKeyword("Indestructible");
@@ -73,10 +80,10 @@ public class ManaPool extends Card
 	public String getText()
 	{
 		//empty = true;
-		String res="Mana available:\r\n";
-		if (isEmpty()) return res+"None";
+		String res=(isSnow() ? "Snow " : "") + "Mana available:\r\n";
+		if (isEmpty())res+="None\r\n";
 		//if(has[0]>0) {res+=Integer.toString(has[0]); empty = false;}
-		for(char c : mcolors.toCharArray())//int j=0; j<colors.length();j++){char c=colors.charAt(j);
+		else for(char c : mcolors.toCharArray())//int j=0; j<colors.length();j++){char c=colors.charAt(j);
 		{
 			int n = containsColor(c);//has[cIndex(c+"")];
 			if(n == 0) continue;
@@ -90,12 +97,14 @@ public class ManaPool extends Card
 			}
 			res += "\r\n";
 		}
-		return res;		
+		if(!isSnow())
+			res += smp.getText();
+		return res;
 	}
 	
 	public final static String colors = "WUBRG";
 	public final static String mcolors = "1WUBRG";
-	public boolean isEmpty(){ return has.equals(""); }
+	public boolean isEmpty(){ return has.equals("");}
 /*	private boolean empty = false;
 	private int[] paid= new int[6];
 	private int[] has = new int[6];*/
@@ -111,7 +120,7 @@ public class ManaPool extends Card
 		String res = "";
 		for(char color : mcolors.toCharArray())
 			for(char c : mana.toCharArray())
-				if(c == color) mana += c;
+				if(c == color) res += c;
 		return res;
 	}
 	int containsColor(String color)
@@ -125,7 +134,9 @@ public class ManaPool extends Card
 	int containsColor(char color)
 	{
 		if(!has.contains(color + "")) return 0;
-		return has.lastIndexOf(color) - has.indexOf(color) + 1;
+		int res = has.lastIndexOf(color) - has.indexOf(color) + 1;
+		if(!isSnow()) res += smp.containsColor(color);
+		return res;
 	}
 	
 	public static String oraclize(String manaCost){
@@ -154,7 +165,12 @@ public class ManaPool extends Card
 	    return mana;
 	  }
 	String getColor(String s){return Input_PayManaCostUtil.getColor(s);}
-	public void addMana(Ability_Mana am){addMana(!am.Mana().contains("X") ? am.Mana() : am.Mana().replaceAll("X", am.getX()+""));}
+	public void addMana(Ability_Mana am)
+	{
+		(!isSnow() && am.getSourceCard().isSnow()
+			? smp : this).addMana(!am.Mana().contains("X") ? am.Mana() :
+				am.Mana().replaceAll("X", am.getX()+""));
+	}
 	public void addMana(String mana){
 		if (mana.length()<=1) {addOne(mana); return;}
 		String[] cost=mana.split("");
@@ -250,34 +266,47 @@ public class ManaPool extends Card
 		if(Colorless > 0) res.add(0, Colorless+"");
 		return res.toArray(new String[0]);
 	}
-	public ManaCost subtractMana(ManaCost m){
-		spendAll = true;//TODO:check something? GUI?
-		String mana = oraclize(m.toString());
-		if (isEmpty() || mana.equals(null)) return m;
-		if (mana.length()==1)
+	
+	public ManaCost subtractMana(ManaCost m, Ability_Mana... mabilities)
+	{
+		if(mabilities.length == 0)
 		{
-			m=subtractOne(m,mana);
+			spendAll = true;//TODO:check something? GUI?
+			if (m.isPaid() || ( isEmpty() && (isSnow() || smp.isEmpty()) ) )
+				return m;
+			else if (isEmpty()) return smp.subtractMana(m, mabilities);
+			String mana = oraclize(m.toString());
+			if (mana.length()==1)
+			{
+				m=subtractOne(m,mana);
+				return m;
+			}
+			String[] cost=getManaParts(m.toString());
+			for(String s : cost)
+				m=subtractOne(m, s);
 			return m;
 		}
-		String[] cost=getManaParts(m.toString());
-		for(String s : cost)
-			m=subtractOne(m, s);
-		return m;
-	}
-	public ManaCost subtractMana(ManaCost m, Ability_Mana mability)
-	{
-		used.add(mability);
-		for(String c : getManaParts(mability))
-    	{
-    		if(c.equals("")) continue; // some sort of glitch
-    		m=subtractOne(m, c);
-    	}
+		else//redundant
+			for(Ability_Mana mability : mabilities)
+			{
+				if(mability.getSourceCard().isSnow() && !isSnow())
+				{
+					m=smp.subtractMana(m, mability);
+					continue;
+				}
+				used.add(mability);
+				for(String c : getManaParts(mability))
+				{
+					if(c.equals("")) continue; // some sort of glitch
+					m=subtractOne(m, c);
+				}
+			}
 		return m;
 	}
 	public void subtractOne(String Mana){subtractOne(new ManaCost(Mana),Mana);}
 	public ManaCost subtractOne(ManaCost manaCost, String Mana)
 	{
-		if(Mana.trim().equals("") || manaCost.toString().trim().equals("")) return manaCost;
+		if(Mana.trim().equals("") || manaCost.isPaid()) return manaCost;
 		if(colors.contains(Mana))//Index(Mana) > 0 )
 		{
 			  if(!manaCost.isNeeded(Mana) || //has[cIndex(Mana)]
@@ -314,6 +343,8 @@ public class ManaPool extends Card
 				manaCost.subtractMana(Constant.Color.Colorless);
 				return manaCost;
 			}
+			else if (Mana.equals("(S)"))
+				manaCost = smp.subtractOne(manaCost, "1");
 			else
 			{
 				//if (has[0]>0){manaCost=subtractOne(manaCost,"1"); cless--; continue;}
@@ -349,19 +380,24 @@ public class ManaPool extends Card
 		for (int n : has)
 			res += n;*/
 		sortContents();
-		return has.length();//res;
+		int res = has.length();
+		if(!isSnow()) res += smp.totalMana();
+		return res;
 	}
 	public void clear(){
+		if (!isSnow()) smp.clear();
 		used.clear();
 		paid = "";//Arrays.fill(paid, 0);
 		has = "";//Arrays.fill(has, 0);
 	}
 	public void paid(){
+		if (!isSnow()) smp.paid();
 		used.clear();
 		has = "";//Arrays.fill(paid, 0);
 		sortContents();
 	}
 	public void unpaid(){
+		if (!isSnow()) smp.unpaid();
 		String hasbak = has;
 		has = paid;
 		if (!used.isEmpty())

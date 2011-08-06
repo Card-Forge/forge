@@ -806,7 +806,8 @@ public class Card extends MyObservable
   public boolean isEquipment()     {return type.contains("Equipment");}
   public boolean isPlaneswalker()  {return type.contains("Planeswalker");}
   public boolean isTribal()		   {return type.contains("Tribal");}
-
+  public boolean isSnow()  {return type.contains("Snow");}
+  
   //global and local enchantments
   public boolean isEnchantment()          {return typeContains("Enchantment"); }
   public boolean isLocalEnchantment()  {return typeContains("Aura");   }
