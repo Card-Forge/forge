@@ -606,6 +606,27 @@ public class Phase extends MyObservable
 			AllZone.Phase.getPhase().equals(Constant.Phase.Main1)) && AllZone.Stack.size() == 0;
 	}
 	
+	public String buildActivateString(String startPhase, String endPhase){
+		StringBuilder sb = new StringBuilder();
+		
+		boolean add = false;
+		for(int i = 0; i < phaseOrder.length; i++){
+			if (phaseOrder[i].equals(startPhase))
+				add = true;
+			
+			if (add){
+				if (sb.length() != 0)
+					sb.append(",");
+				sb.append(phaseOrder[i]);
+			}
+			
+			if (phaseOrder[i].equals(endPhase))
+				add = false;
+		}
+		
+		return sb.toString();
+	}
+	
 	public static boolean canPlayDuringCombat() {
 		String phase = AllZone.Phase.getPhase();
 		ArrayList<String> validPhases = new ArrayList<String>();
@@ -620,13 +641,7 @@ public class Phase extends MyObservable
 		
 		return validPhases.contains(phase);
 	}
-	
-	public static boolean canPlayAfterUpkeep() {
-		String phase = AllZone.Phase.getPhase();
-		
-		return !phase.equals(Constant.Phase.Upkeep);
-	}
-	
+
     public static void main(String args[]) {
         Phase phase = new Phase();
         for(int i = 0; i < phase.phaseOrder.length; i++) {

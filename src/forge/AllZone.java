@@ -23,9 +23,11 @@ public class AllZone implements NewConstants {
     public static EndOfTurn                      EndOfTurn          = new EndOfTurn();
     public static EndOfCombat					 EndOfCombat		= new EndOfCombat();
 
+    public static final Phase                    Phase              = new Phase();
+    
+    // Phase is now a prerequisite for CardFactory
     public static final CardFactory              CardFactory        = new CardFactory(ForgeProps.getFile(CARDSFOLDER));
     
-    public static final Phase                    Phase              = new Phase();
     public static final MagicStack               Stack              = new MagicStack();
     public static final InputControl             InputControl       = new InputControl();
     public static final GameAction               GameAction         = new GameAction();

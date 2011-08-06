@@ -2,7 +2,7 @@ Name:Reset
 ManaCost:U U
 Types:Instant
 Text:no text
-A:SP$UntapAll|Cost$U U|ValidCards$Land.YouCtrl|OpponentTurn$True|ActivatingPhases$AfterUpkeep|SpellDescription$Cast Reset only during an opponent's turn after his or her upkeep step.  Untap all lands you control.
+A:SP$UntapAll|Cost$U U|ValidCards$Land.YouCtrl|OpponentTurn$True|ActivatingPhases$Draw->|SpellDescription$Cast Reset only during an opponent's turn after his or her upkeep step.  Untap all lands you control.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reset.jpg
