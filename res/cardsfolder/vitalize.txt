@@ -2,7 +2,7 @@ Name:Vitalize
 ManaCost:G
 Types:Instant
 Text:no text
-A:SP$UntapAll|Cost$G|ValidCards$Creature.YouCtrl|SpellDescription$Untap all creatures you control.
+A:SP$ UntapAll | Cost$ G | ValidCards$ Creature.YouCtrl | SpellDescription$ Untap all creatures you control.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitalize.jpg
