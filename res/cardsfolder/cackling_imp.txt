@@ -1,0 +1,10 @@
+Name:Cackling Imp
+ManaCost:2 B B
+Types:Creature Imp
+Text:no text
+PT:2/2
+K:Flying
+K:abLoseLifeTgt T:1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73597.jpg
+End

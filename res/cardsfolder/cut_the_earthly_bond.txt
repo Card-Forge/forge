@@ -1,0 +1,8 @@
+Name:Cut the Earthly Bond
+ManaCost:U
+Types:Instant Arcane
+Text:Return target enchanted permanent to its owner's hand.
+K:spBounceTgt:Permanent.enchanted:Hand
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cut_the_earthly_bond.jpg
+End

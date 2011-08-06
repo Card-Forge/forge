@@ -1,0 +1,9 @@
+Name:Charging Paladin
+ManaCost:2 W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:WheneverKeyword:Attacks:Self:Play:StatsPumpEOT/0/3:Self:ASAP:No_Condition:No Special Condition:Whenever Charging Paladin attacks, it gets +0/+3 until end of turn.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/charging_paladin.jpg
+End

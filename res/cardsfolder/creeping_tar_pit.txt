@@ -1,0 +1,10 @@
+Name:Creeping Tar Pit
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add U
+K:tap: add B
+K:Comes into play tapped.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/creeping_tar_pit.jpg
+End

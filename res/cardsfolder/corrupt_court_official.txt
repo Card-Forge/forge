@@ -1,0 +1,8 @@
+Name:Corrupt Court Official
+ManaCost:1 B
+Types:Creature Human Advisor
+Text:When Corrupt Court Official enters the battlefield, target opponent discards a card.
+PT:1/1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupt_court_official.jpg
+End

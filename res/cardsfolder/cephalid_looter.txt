@@ -1,0 +1,9 @@
+Name:Cephalid Looter
+ManaCost:2 U
+Types:Creature Cephalid Rogue
+Text:no text
+PT:2/1
+K:abDrawCardsTgt T:1:Drawback$TgtDiscard/1:Target player draws a card, then discards a card.:Cephalid Looter - target players draws a card and discards a card
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_looter.jpg
+End

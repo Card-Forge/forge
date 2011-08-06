@@ -1,0 +1,9 @@
+Name:Cosi's Ravager
+ManaCost:3 R
+Types:Creature Elemental
+Text:no text
+PT:2/2
+K:WheneverKeyword:EntersBattleField:Type/Land:Play:Damage/1:NormalInput/Player:ASAP:Yes_No:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may have Cosi's Ravager deal 1 damage to target player.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cosis_ravager.jpg
+End

@@ -1,0 +1,9 @@
+Name:Concordant Crossroads
+ManaCost:G
+Types:Enchantment
+Text:All creatures have haste.
+K:SVar:BuffedBy:Creature
+K:SVar:AntiBuffedBy:Creature
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/concordant_crossroads.jpg
+End

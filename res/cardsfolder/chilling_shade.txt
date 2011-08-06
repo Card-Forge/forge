@@ -1,0 +1,10 @@
+Name:Chilling Shade
+ManaCost:2 B
+Types:Snow Creature Shade
+Text:no text
+PT:1/1
+K:Flying
+K:abPump S:+1/+1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/chilling_shade.jpg
+End

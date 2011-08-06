@@ -1,0 +1,9 @@
+Name:Cold-Eyed Selkie
+ManaCost:1 GU GU
+Types:Creature Merfolk Rogue
+Text:Whenever Cold-Eyed Selkie deals combat damage to a player, you may draw that many cards.
+PT:1/1
+K:Islandwalk
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cold_eyed_selkie.jpg
+End

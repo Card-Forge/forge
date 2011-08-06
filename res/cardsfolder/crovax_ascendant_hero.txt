@@ -1,0 +1,11 @@
+Name:Crovax, Ascendant Hero
+ManaCost:4 W W
+Types:Legendary Creature Human
+Text:no text
+PT:4/4
+K:StaticEffect:Play:All Permanents:PTBonus/1/1:Color.white!NotSelf:Other white creatures get +1/+1.
+K:StaticEffect:Play:All Permanents:PTBonus/-1/-1:NonColor.white:Nonwhite creatures get -1/-1.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crovax_ascendant_hero.jpg
+End

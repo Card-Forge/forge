@@ -1,0 +1,10 @@
+Name:Craw Giant
+ManaCost:3 G G G G
+Types:Creature Giant
+Text:no text
+PT:6/4
+K:Trample
+K:Rampage 2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/craw_giant.jpg
+End

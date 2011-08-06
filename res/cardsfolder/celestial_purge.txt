@@ -1,0 +1,8 @@
+Name:Celestial Purge
+ManaCost:1 W
+Types:Instant
+Text:Exile target black or red permanent.
+K:spBounceTgt:Permanent.Black,Permanent.Red:Exile
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_purge.jpg
+End

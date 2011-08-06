@@ -1,0 +1,8 @@
+Name:Craw Wurm
+ManaCost:4 G G
+Types:Creature Wurm
+Text:no text
+PT:6/4
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83040.jpg
+End

@@ -1,0 +1,10 @@
+Name:Cateran Enforcer
+ManaCost:3 B B
+Types:Creature Horror Mercenary
+Text:no text
+PT:4/3
+K:Fear
+K:SearchMerc:4
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_enforcer.jpg
+End

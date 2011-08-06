@@ -1,0 +1,9 @@
+Name:Corrupt Official
+ManaCost:4 B
+Types:Creature Human Minion
+Text:Whenever Corrupt Official becomes blocked, defending player discards a card at random.
+PT:3/1
+K:RegenerateMe:2 B
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupt_official.jpg
+End

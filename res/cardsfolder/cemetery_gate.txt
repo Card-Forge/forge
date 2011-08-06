@@ -1,0 +1,10 @@
+Name:Cemetery Gate
+ManaCost:2 B
+Types:Creature Wall
+Text:no text
+PT:0/5
+K:Defender
+K:Protection from black
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cemetery_gate.jpg
+End

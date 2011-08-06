@@ -1,0 +1,7 @@
+Name:Call of the Herd
+ManaCost:2 G
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/call_of_the_herd.jpg
+End

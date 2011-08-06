@@ -1,0 +1,9 @@
+Name:Castle Raptors
+ManaCost:4 W
+Types:Creature Bird Soldier
+Text:As long as Castle Raptors is untapped, it gets +0/+2.
+PT:3/3
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card113614.jpg
+End

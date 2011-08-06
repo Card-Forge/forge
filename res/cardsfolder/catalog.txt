@@ -1,0 +1,8 @@
+Name:Catalog
+ManaCost:2 U
+Types:Instant
+Text:no text
+K:spDrawCards:2:Drawback$YouDiscard/1:Draw two cards, then discard a card.:Catalog - Draw 2 cards, then discard 1 card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/catalog.jpg
+End

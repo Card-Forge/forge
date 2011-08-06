@@ -1,0 +1,9 @@
+Name:Cao Ren, Wei Commander
+ManaCost:2 B B
+Types:Legendary Creature Human Soldier Warrior
+Text:When Cao Ren, Wei Commander enters the battlefield, you lose 3 life.
+PT:3/3
+K:Horsemanship
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cao_ren_wei_commander.jpg
+End

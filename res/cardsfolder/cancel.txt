@@ -1,0 +1,8 @@
+Name:Cancel
+ManaCost:1 U U
+Types:Instant
+Text:Counter target spell.
+K:spCounter:Spell:None:Graveyard:None
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cancel.jpg
+End

@@ -1,0 +1,8 @@
+Name:Crib Swap
+ManaCost:2 W
+Types:Tribal Instant Shapeshifter
+Text:Remove target creature from the game. Its controller puts a 1/1 colorless Shapeshifter creature token into play.
+K:Changeling
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crib_swap.jpg
+End

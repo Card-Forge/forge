@@ -1,0 +1,9 @@
+Name:Calciderm
+ManaCost:2 W W
+Types:Creature Beast
+Text:Vanishing 4
+PT:5/5
+K:Shroud
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/calciderm.jpg
+End

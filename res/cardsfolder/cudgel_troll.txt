@@ -1,0 +1,9 @@
+Name:Cudgel Troll
+ManaCost:2 G G
+Types:Creature Troll
+Text:no text
+PT:4/3
+K:RegenerateMe:G
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cudgel_troll.jpg
+End

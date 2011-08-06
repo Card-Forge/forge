@@ -1,0 +1,9 @@
+Name:Cabal Coffers
+ManaCost:no cost
+Types:Land
+Text:no text
+K:2, tap: add B to your mana pool for each Swamp you control.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_coffers.jpg
+End

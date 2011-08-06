@@ -1,0 +1,10 @@
+Name:Commander Eesha
+ManaCost:2 W W
+Types:Legendary Creature Bird Soldier
+Text:no text
+PT:2/4
+K:Flying
+K:Protection from creatures
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/commander_eesha.jpg
+End

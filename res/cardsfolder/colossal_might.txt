@@ -1,0 +1,8 @@
+Name:Colossal Might
+ManaCost:R G
+Types:Instant
+Text:no text
+K:spPumpTgt:+4/+2/Trample
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/colossal_might.jpg
+End

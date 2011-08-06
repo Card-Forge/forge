@@ -1,0 +1,10 @@
+Name:Composite Golem
+ManaCost:6
+Types:Artifact Creature Golem
+Text:no text
+PT:4/4
+K:Sacrifice CARDNAME: Add W U B R G to your mana pool.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/composite_golem.jpg
+End

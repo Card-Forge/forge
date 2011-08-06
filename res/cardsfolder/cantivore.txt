@@ -1,0 +1,9 @@
+Name:Cantivore
+ManaCost:1 W W
+Types:Creature Lhurgoyf
+Text:Cantivore's power and toughness are equal to the number of enchantment cards in all graveyards.
+PT:1/1
+K:Vigilance
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cantivore.jpg
+End

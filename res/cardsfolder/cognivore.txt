@@ -1,0 +1,9 @@
+Name:Cognivore
+ManaCost:6 U U
+Types:Creature Lhurgoyf
+Text:Cognivore's power and toughness are each equal to the number of instant cards in all graveyards.
+PT:1/1
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cognivore.jpg
+End

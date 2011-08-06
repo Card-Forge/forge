@@ -1,0 +1,8 @@
+Name:Chalice of the Void
+ManaCost:X X 0
+Types:Artifact
+Text:Chalice of the Void enters the battlefield with X charge counters on it.\r\nWhenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/chalice_of_the_void.jpg
+End

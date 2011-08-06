@@ -1,0 +1,12 @@
+Name:City of Brass
+ManaCost:no cost
+Types:Land
+Text:Whenever City of Brass becomes tapped, it deals 1 damage to you.
+K:tap: add W
+K:tap: add B
+K:tap: add U
+K:tap: add R
+K:tap: add G
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/city_of_brass.jpg
+End

@@ -1,0 +1,7 @@
+Name:Cruel Edict
+ManaCost:1 B
+Types:Sorcery
+Text:Target opponent sacrifices a creature.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_edict.jpg
+End

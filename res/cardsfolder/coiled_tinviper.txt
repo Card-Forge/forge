@@ -1,0 +1,9 @@
+Name:Coiled Tinviper
+ManaCost:3
+Types:Artifact Creature Snake
+Text:no text
+PT:2/1
+K:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/coiled_tinviper.jpg
+End

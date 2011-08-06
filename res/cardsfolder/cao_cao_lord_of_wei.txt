@@ -1,0 +1,8 @@
+Name:Cao Cao, Lord of Wei
+ManaCost:3 B B
+Types:Legendary Creature Human Soldier
+Text:no text
+PT:3/3
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10548.jpg
+End

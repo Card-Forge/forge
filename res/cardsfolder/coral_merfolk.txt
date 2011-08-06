@@ -1,0 +1,8 @@
+Name:Coral Merfolk
+ManaCost:1 U
+Types:Creature Merfolk
+Text:no text
+PT:2/1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5613.jpg
+End

@@ -1,0 +1,10 @@
+Name:Corpulent Corpse
+ManaCost:5 B
+Types:Creature Zombie
+Text:no text
+PT:3/3
+K:Fear
+K:Suspend:5:B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/corpulent_corpse.jpg
+End

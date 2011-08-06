@@ -1,0 +1,9 @@
+Name:Cavern Harpy
+ManaCost:U B
+Types:Creature Beast
+Text:When Cavern Harpy comes into play, return a blue or black creature you control to its owner's hand. Pay 1 life: Return Cavern Harpy to its owner's hand.
+PT:2/1
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cavern_harpy.jpg
+End

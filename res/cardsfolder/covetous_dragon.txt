@@ -1,0 +1,10 @@
+Name:Covetous Dragon
+ManaCost:4 R
+Types:Creature Dragon
+Text:When you control no artifacts, sacrifice Covetous Dragon.
+PT:6/5
+K:Flying
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/covetous_dragon.jpg
+End

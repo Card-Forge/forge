@@ -1,0 +1,10 @@
+Name:Citanul Centaurs
+ManaCost:3 G
+Types:Creature Centaur
+Text:no text
+PT:6/3
+K:Echo:3 G
+K:Shroud
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/citanul_centaurs.jpg
+End

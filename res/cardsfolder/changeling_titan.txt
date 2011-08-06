@@ -1,0 +1,9 @@
+Name:Changeling Titan
+ManaCost:4 G
+Types:Creature Shapeshifter
+Text:Champion a creature
+PT:7/7
+K:Changeling
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/changeling_titan.jpg
+End

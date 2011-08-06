@@ -1,0 +1,8 @@
+Name:Cursed Land
+ManaCost:2 B B
+Types:Enchantment Aura
+Text:At the beginning of the upkeep of enchanted land's controller, Cursed Land deals 1 damage to that player.
+K:Enchant land
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_land.jpg
+End

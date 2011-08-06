@@ -1,0 +1,7 @@
+Name:Crush of Wurms
+ManaCost:6 G G G
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crush_of_wurms.jpg
+End

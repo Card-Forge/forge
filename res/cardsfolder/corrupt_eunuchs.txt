@@ -1,0 +1,8 @@
+Name:Corrupt Eunuchs
+ManaCost:3 R
+Types:Creature Human Advisor
+Text:When Corrupt Eunuchs enters the battlefield, it deals 2 damage to target creature.
+PT:2/2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupt_eunuchs.jpg
+End

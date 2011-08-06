@@ -1,0 +1,8 @@
+Name:Cinder Storm
+ManaCost:6 R
+Types:Sorcery
+Text:no text
+K:spDamageTgtCP:7
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_storm.jpg
+End

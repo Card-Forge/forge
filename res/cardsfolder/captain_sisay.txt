@@ -1,0 +1,8 @@
+Name:Captain Sisay
+ManaCost:2 G W
+Types:Legendary Creature Human Soldier
+Text:no text
+PT:2/2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card25976.jpg
+End

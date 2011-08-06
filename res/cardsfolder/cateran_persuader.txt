@@ -1,0 +1,9 @@
+Name:Cateran Persuader
+ManaCost:B B
+Types:Creature Human Mercenary
+Text:no text
+PT:2/1
+K:SearchMerc:1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_persuader.jpg
+End

@@ -1,0 +1,8 @@
+Name:Crossbow Ambush
+ManaCost:G
+Types:Instant
+Text:no text
+K:spAllPump:YouCtrl:Reach:Creatures you control gain reach until end of turn.:Crossbow Ambush - Creatures gain reach until EOT
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crossbow_ambush.jpg
+End

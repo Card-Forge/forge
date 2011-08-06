@@ -1,0 +1,9 @@
+Name:Charcoal Diamond
+ManaCost:2
+Types:Artifact
+Text:no text
+K:tap: add B
+K:Comes into play tapped.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/charcoal_diamond.jpg
+End

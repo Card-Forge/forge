@@ -1,0 +1,9 @@
+Name:Clay Statue
+ManaCost:4
+Types:Artifact Creature Golem
+Text:no text
+PT:3/1
+K:RegenerateMe:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/clay_statue.jpg
+End

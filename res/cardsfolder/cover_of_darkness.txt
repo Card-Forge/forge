@@ -1,0 +1,7 @@
+Name:Cover of Darkness
+ManaCost:1 B
+Types:Enchantment
+Text:As Cover of Darkness comes into play, choose a creature type.\r\nCreatures of the chosen type have fear.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cover_of_darkness.jpg
+End

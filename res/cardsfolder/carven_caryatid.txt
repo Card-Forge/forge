@@ -1,0 +1,10 @@
+Name:Carven Caryatid
+ManaCost:1 G G
+Types:Creature Spirit
+Text:no text
+PT:2/5
+K:Defender
+K:When CARDNAME enters the battlefield, draw a card.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/carven_caryatid.jpg
+End

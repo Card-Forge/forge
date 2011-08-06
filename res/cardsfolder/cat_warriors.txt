@@ -1,0 +1,9 @@
+Name:Cat Warriors
+ManaCost:1 G G
+Types:Creature Cat Warrior
+Text:no text
+PT:2/2
+K:Forestwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card16450.jpg
+End

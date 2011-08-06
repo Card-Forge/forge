@@ -1,0 +1,9 @@
+Name:Craven Giant
+ManaCost:2 R
+Types:Creature Giant
+Text:no text
+PT:4/1
+K:CARDNAME can't block.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5130.jpg
+End

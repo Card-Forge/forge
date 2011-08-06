@@ -1,0 +1,10 @@
+Name:Colos Yearling
+ManaCost:2 R
+Types:Creature Goat Beast
+Text:no text
+PT:1/1
+K:Mountainwalk
+K:abPump R:+1/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/colos_yearling.jpg
+End

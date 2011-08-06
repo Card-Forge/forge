@@ -1,0 +1,7 @@
+Name:Culling Sun
+ManaCost:2 W W B
+Types:Sorcery
+Text:Destroy each creature with converted manacost 3 or less.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/culling_sun.jpg
+End

@@ -1,0 +1,10 @@
+Name:Crosis's Attendant
+ManaCost:5
+Types:Artifact Creature Golem
+Text:no text
+PT:3/3
+K:1, Sacrifice CARDNAME: Add U B R to your mana pool.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crosiss_attendant.jpg
+End

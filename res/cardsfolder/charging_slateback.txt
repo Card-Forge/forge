@@ -1,0 +1,10 @@
+Name:Charging Slateback
+ManaCost:4 R
+Types:Creature Beast
+Text:no text
+PT:4/3
+K:CARDNAME can't block.
+K:Morph:4 R
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/charging_slateback.jpg
+End

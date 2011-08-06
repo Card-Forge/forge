@@ -1,0 +1,9 @@
+Name:Canopy Spider
+ManaCost:1 G
+Types:Creature Spider
+Text:no text
+PT:1/3
+K:Reach
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card135185.jpg
+End

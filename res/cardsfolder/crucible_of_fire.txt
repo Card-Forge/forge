@@ -1,0 +1,9 @@
+Name:Crucible of Fire
+ManaCost:3 R
+Types:Enchantment
+Text:Dragon creatures you control get +3/+3.
+K:SVar:RemAIDeck:True
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crucible_of_fire.jpg
+End

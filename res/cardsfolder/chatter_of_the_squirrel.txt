@@ -1,0 +1,7 @@
+Name:Chatter of the Squirrel
+ManaCost:G
+Types:Sorcery
+Text:no text
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/chatter_of_the_squirrel.jpg
+End

@@ -1,0 +1,9 @@
+Name:Chronatog
+ManaCost:1 U
+Types:Creature Atog
+Text:no text
+PT:1/2
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/chronatog.jpg
+End

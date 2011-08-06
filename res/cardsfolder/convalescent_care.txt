@@ -1,0 +1,7 @@
+Name:Convalescent Care
+ManaCost:1 W W
+Types:Enchantment
+Text:At the beginning of your upkeep, if you have 5 life or less, you gain 3 life and draw a card.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/convalescent_care.jpg
+End

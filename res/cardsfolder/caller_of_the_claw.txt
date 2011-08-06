@@ -1,0 +1,9 @@
+Name:Caller of the Claw
+ManaCost:2 G
+Types:Creature Elf
+Text:When Caller of the Claw comes into play, put a 2/2 green Bear creature token into play for each nontoken creature put into your graveyard from play this turn.
+PT:2/2
+K:Flash
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card42187.jpg
+End

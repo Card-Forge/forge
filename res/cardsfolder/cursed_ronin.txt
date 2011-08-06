@@ -1,0 +1,10 @@
+Name:Cursed Ronin
+ManaCost:3 B
+Types:Creature Human Samurai
+Text:no text
+PT:1/1
+K:abPump B:+1/+1
+K:Bushido 1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_ronin.jpg
+End

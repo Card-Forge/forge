@@ -1,0 +1,10 @@
+Name:Cateran Slaver
+ManaCost:4 B B
+Types:Creature Horror Mercenary
+Text:no text
+PT:5/5
+K:Swampwalk
+K:SearchMerc:5
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_slaver.jpg
+End

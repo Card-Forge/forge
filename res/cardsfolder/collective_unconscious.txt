@@ -1,0 +1,9 @@
+Name:Collective Unconscious
+ManaCost:4 G G
+Types:Sorcery
+Text:no text
+K:spDrawCards:X:Draw a card for each creature you control.:Collective Unconscious - draw cards.
+K:SVar:X:Count$TypeYouCtrl.Creature
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/collective_unconscious.jpg
+End

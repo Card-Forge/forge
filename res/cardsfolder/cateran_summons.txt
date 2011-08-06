@@ -1,0 +1,9 @@
+Name:Cateran Summons
+ManaCost:B
+Types:Sorcery
+Text:Search your library for a Mercenary card, reveal that card, and put it into your hand. Then shuffle your library.
+K:spTutor:Mercenary:Hand
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_summons.jpg
+End

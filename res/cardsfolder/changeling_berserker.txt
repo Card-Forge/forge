@@ -1,0 +1,10 @@
+Name:Changeling Berserker
+ManaCost:3 R
+Types:Creature Shapeshifter
+Text:Champion a creature
+PT:5/3
+K:Changeling
+K:Haste
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/changeling_berserker.jpg
+End

@@ -1,0 +1,9 @@
+Name:Cruel Bargain
+ManaCost:B B B
+Types:Sorcery
+Text:no text
+K:spDrawCards:4:Drawback$LoseLifeYou/dX:Draw four cards. You lose half your life, rounded up.:Cruel Bargain - Draw cards and lose half your life, rounded up.
+K:SVar:dX:Count$YourLifeTotal/HalfUp
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4214.jpg
+End

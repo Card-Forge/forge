@@ -1,0 +1,8 @@
+Name:Cleanfall
+ManaCost:2 W
+Types:Sorcery Arcane
+Text:Destroy all enchantments.
+K:spDestroyAll:Enchantment
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanfall.jpg
+End

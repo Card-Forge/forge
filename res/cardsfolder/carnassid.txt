@@ -1,0 +1,10 @@
+Name:Carnassid
+ManaCost:4 G G
+Types:Creature Beast
+Text:no text
+PT:5/4
+K:Trample
+K:RegenerateMe:1 G
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5217.jpg
+End

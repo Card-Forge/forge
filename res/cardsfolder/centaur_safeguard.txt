@@ -1,0 +1,9 @@
+Name:Centaur Safeguard
+ManaCost:2 GW
+Types:Creature Centaur Warrior
+Text:no text
+PT:3/1
+K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:ModifyLife/3:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:When Centaur Safeguard is put into a graveyard from the battlefield, you may gain 3 life.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_safeguard.jpg
+End

@@ -1,0 +1,8 @@
+Name:Chandra's Outrage
+ManaCost:2 R R
+Types:Instant
+Text:no text
+K:spDamageTgtC:4:Drawback$DamageTgt/2:Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.:Chandra's Outrage - deals 4 damage to creature and 2 damage to its controller.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_outrage.jpg
+End

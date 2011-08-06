@@ -1,0 +1,9 @@
+Name:Clear
+ManaCost:1 W
+Types:Instant
+Text:Destroy target enchantment.
+K:spDestroyTgt:Enchantment
+K:Cycling:2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/clear.jpg
+End

@@ -1,0 +1,8 @@
+Name:Constricting Tendrils
+ManaCost:U
+Types:Instant
+Text:no text
+K:spPumpTgtCurse:-3/-0
+K:Cycling:2
+K:SVar:RemAIDeck:True
+End

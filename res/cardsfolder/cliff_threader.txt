@@ -1,0 +1,9 @@
+Name:Cliff Threader
+ManaCost:1 W
+Types:Creature Kor Scout
+Text:no text
+PT:2/1
+K:Mountainwalk
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cliff_threader.jpg
+End

@@ -1,0 +1,9 @@
+Name:Child of Night
+ManaCost:1 B
+Types:Creature Vampire
+Text:no text
+PT:2/1
+K:Lifelink
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_night.jpg
+End

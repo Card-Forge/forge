@@ -1,0 +1,9 @@
+Name:Child of Alara
+ManaCost:W U B R G
+Types:Legendary Creature Avatar
+Text:When Child of Alara is put into a graveyard from play, destroy all nonland permanents. They can't be regenerated.
+PT:6/6
+K:Trample
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_alara.jpg
+End

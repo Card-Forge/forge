@@ -1,0 +1,9 @@
+Name:Cobalt Golem
+ManaCost:4
+Types:Artifact Creature Golem
+Text:no text
+PT:2/3
+K:abPump 1 U:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cobalt_golem.jpg
+End

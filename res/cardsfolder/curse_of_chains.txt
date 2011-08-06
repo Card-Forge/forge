@@ -1,0 +1,8 @@
+Name:Curse of Chains
+ManaCost:1 WU
+Types:Enchantment Aura
+Text:At the beginning of each upkeep, tap enchanted creature.
+K:Enchant Creature Curse
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_chains.jpg
+End

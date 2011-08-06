@@ -1,0 +1,9 @@
+Name:Cagemail
+ManaCost:1 W
+Types:Enchantment Aura
+Text:Enchanted creature gets +2/+2 and can't attack.
+K:Enchant creature
+K:enPumpCurse:+2/+2/CARDNAME can't attack.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cagemail.jpg
+End

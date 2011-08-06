@@ -1,0 +1,9 @@
+Name:Control Magic
+ManaCost:2 U U
+Types:Enchantment Aura
+Text:You control enchanted creature.
+K:Enchant creature
+K:enControlCreature
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/control_magic.jpg
+End

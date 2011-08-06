@@ -1,0 +1,10 @@
+Name:Char-Rumbler
+ManaCost:2 R R
+Types:Creature Elemental
+Text:no text
+PT:-1/3
+K:Double Strike
+K:abPump R:+1/+0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/char_rumbler.jpg
+End

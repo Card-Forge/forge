@@ -1,0 +1,9 @@
+Name:Clinging Darkness
+ManaCost:1 B
+Types:Enchantment Aura
+Text:Enchanted creature gets -4/-1.
+K:Enchant creature
+K:enPumpCurse:-4/-1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/clinging_darkness.jpg
+End

@@ -1,0 +1,9 @@
+Name:Cateran Overlord
+ManaCost:4 B B B
+Types:Creature Horror Mercenary
+Text:no text
+PT:7/5
+K:SearchMerc:6
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_overlord.jpg
+End

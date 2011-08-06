@@ -1,0 +1,7 @@
+Name:Convalescence
+ManaCost:1 W
+Types:Enchantment
+Text:At the beginning of your upkeep, if you have 10 life or less, you gain 1 life.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/convalescence.jpg
+End

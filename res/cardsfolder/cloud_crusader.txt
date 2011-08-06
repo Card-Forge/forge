@@ -1,0 +1,10 @@
+Name:Cloud Crusader
+ManaCost:2 W W
+Types:Creature Human Knight
+Text:no text
+PT:2/3
+K:Flying
+K:First Strike
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_crusader.jpg
+End
