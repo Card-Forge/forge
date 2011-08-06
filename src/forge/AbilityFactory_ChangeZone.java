@@ -674,9 +674,6 @@ public class AbilityFactory_ChangeZone {
 		 
 		 sb.append(host.getName()).append(" - ");
 		 
-		 if (params.containsKey("Defined"))
-			 return sb.toString() + params.get("SpellDescription");
-		 
 		String destination = params.get("Destination");
 		String origin = params.get("Destination");
 		 
@@ -688,7 +685,7 @@ public class AbilityFactory_ChangeZone {
 		 else{
 			 // otherwise add self to list and go from there
 			 tgts = new ArrayList<Card>();
-			 tgts.add(af.getHostCard());
+			 tgts.add(knownDetermineDefined(sa, params.get("Defined"), origin));
 		 }
 		 
 		 for(Card c : tgts)
@@ -771,12 +768,7 @@ public class AbilityFactory_ChangeZone {
 			tgtCards = tgt.getTargetCards();
 		else{
 			tgtCards = new ArrayList<Card>();
-			Card retrieval;
-			if (params.containsKey("Defined"))
-				retrieval = knownDetermineDefined(sa, params.get("Defined"), origin);
-			else
-				retrieval = sa.getSourceCard();
-			tgtCards.add(retrieval);
+			tgtCards.add(knownDetermineDefined(sa, params.get("Defined"), origin));
 		}
 
 		for(Card tgtC : tgtCards){
@@ -838,10 +830,10 @@ public class AbilityFactory_ChangeZone {
 	
 	// **************************** Known Utility **************************************
 	private static Card knownDetermineDefined(SpellAbility sa, String defined, String origin){
-		// todo: get this working in AF.getDefined stuff
+		// todo: this function should return a ArrayList<Card> and then be handled by the callees
 		CardList grave = AllZoneUtil.getCardsInZone(origin, sa.getActivatingPlayer());
 		
-		if (defined.equals("Top")){
+		if (defined != null && defined.equals("Top")){
 			// the "top" of the graveyard, is the last to be added to the graveyard list?
 			if (grave.size() == 0)
 				return null;

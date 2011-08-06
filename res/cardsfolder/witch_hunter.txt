@@ -4,6 +4,7 @@ Types:Creature Human Cleric
 Text:no text
 PT:1/1
 A:AB$DealDamage | Cost$ T | NumDmg$ 1 | Tgt$ TgtP | SpellDescription$ CARDNAME deals 1 damage to target player.
+A:AB$ChangeZone | Cost$ 1 W W T | ValidTgts$ Creature+YouDontCtrl | TgtPrompt$ Select target creature you don't control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature you don't control to its owner's hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_hunter.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/92.jpg

@@ -15036,41 +15036,7 @@ public class CardFactory_Creatures {
         	
         	card.addSpellAbility(ability);
 	    }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Cerulean Sphinx")) {
-        	final Ability intoLibrary = new Ability(card, "U") {
-        		public void resolve() {
-        			if(AllZoneUtil.isCardInPlay(card)) {
-        				AllZone.GameAction.moveToLibrary(card);
-        				card.getOwner().shuffle();
-        			}
-        		}
-        	};
 
-        	Input runtime = new Input() {
-        		private static final long serialVersionUID = 8914195530360741167L;
-
-        		@Override
-        		public void showMessage() {
-        			StringBuilder sb = new StringBuilder();
-        			sb.append("Shuffle ").append(card).append(" into its owner's library");
-        			intoLibrary.setStackDescription(sb.toString());
-        			
-        			stopSetNext(new Input_PayManaCost(intoLibrary));
-        		}
-        	};
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(card).append(" - shuffle ").append(card).append(" into owner's library");
-        	intoLibrary.setStackDescription(sb.toString());
-        	
-        	card.addSpellAbility(intoLibrary);
-        	intoLibrary.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Singing Tree")) {
             final String Tgts[] = {"Creature.attacking"};
@@ -15259,86 +15225,6 @@ public class CardFactory_Creatures {
         	
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Witch Hunter")) {
-        	final String Tgts[] = {"Creature+YouDontCtrl"};
-        	Target target = new Target("Select target creature you don't control.", Tgts);
-        	final Ability_Cost abCost = new Ability_Cost("1 W W T", card.getName(), true);
-
-        	final SpellAbility ability = new Ability_Activated(card, abCost, target) {
-				private static final long serialVersionUID = -7134239527522243583L;
-
-				@Override
-        		public void resolve() {
-        			Card target = getTargetCard();
-        			if( AllZone.GameAction.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
-        				AllZone.GameAction.moveToHand(target);
-        			}
-        		}
-        		
-        		@Override
-        		public boolean canPlay() {
-        			Player opp = card.getController().getOpponent();
-        			CardList targets = AllZoneUtil.getCreaturesInPlay(opp);
-        			return AllZoneUtil.isCardInPlay(card) && targets.size() > 0 && super.canPlay();
-        		}
-
-        		@Override
-        		public boolean canPlayAI() {
-        			return false;
-        		}
-        	};//SpellAbility
-        	
-        	card.addSpellAbility(ability);
-        	
-        	StringBuilder sbDesc = new StringBuilder();
-        	sbDesc.append(abCost).append("Return target creature an opponent controls to its owner's hand.");
-        	ability.setDescription(sbDesc.toString());
-        	
-        	StringBuilder sbStack = new StringBuilder();
-        	sbStack.append(card.getName()).append(" - return target creature to owner's hand.");
-        	ability.setStackDescription(sbStack.toString());
-        	
-        	//ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Temporal Adept")) {
-        	final Ability_Tap ability = new Ability_Tap(card, "U U U") {
-				private static final long serialVersionUID = 6775250144167556206L;
-
-				@Override
-        		public void resolve() {
-        			Card target = getTargetCard();
-        			if( CardFactoryUtil.canTarget(card, target)) {
-        				AllZone.GameAction.moveToHand(target);
-        			}
-        		}
-        		
-        		@Override
-        		public boolean canPlay() {
-        			CardList targets = AllZoneUtil.getCardsInPlay();
-        			return AllZoneUtil.isCardInPlay(card) && targets.size() > 0 && super.canPlay();
-        		}
-
-        		@Override
-        		public boolean canPlayAI() {
-        			return false;
-        		}
-        	};//SpellAbility
-        	
-        	card.addSpellAbility(ability);
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(card.getName()).append(" - return target permanent to owner's hand.");
-        	ability.setStackDescription(sb.toString());
-        	
-        	ability.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability));
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Architects of Will")) {
