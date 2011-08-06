@@ -19,13 +19,17 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
         if (c.isFaceDown() && isIntrinsic())	// Intrinsic abilities can't be activated by face down cards
         	return false;
         
-        if(c.isCreature()) {
+        if(c.isCreature() && AllZone.getZone(c).getZone().equals(Constant.Zone.Play)) {
 			CardList Silence = AllZoneUtil.getPlayerCardsInPlay(getSourceCard().getController().getOpponent());
 			Silence = Silence.getName("Linvala, Keeper of Silence");
 			if (Silence.size() != 0)
 				return false;
         }
-        return Cost_Payment.canPayAdditionalCosts(payCosts, this) && AllZone.GameAction.isCardInPlay(c);
+        
+        if (!(getRestrictions().canPlay(c)))     
+        	return false;
+        
+        return Cost_Payment.canPayAdditionalCosts(payCosts, this);
         //TODO: make sure you can't play the Computer's activated abilities
     }
 }

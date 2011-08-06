@@ -113,7 +113,12 @@ public class Cost_Payment {
     		CardList handList = new CardList(zone.getCards());
     		String discType = cost.getDiscardType();
     		int discAmount = cost.getDiscardAmount();
-    		if (discType.equals("Hand")){
+    		
+    		if (cost.getDiscardThis()){
+    			if (!AllZone.getZone(card).getZone().equals(Constant.Zone.Hand))
+    				return false;
+    		}
+    		else if (discType.equals("Hand")){
     			// this will always work
     		}
     		else{
@@ -246,7 +251,12 @@ public class Cost_Payment {
     		CardList handList = new CardList(zone.getCards());
     		String discType = cost.getDiscardType();
     		int discAmount = cost.getDiscardAmount();
-    		if (discType.equals("Hand")){
+    		
+    		if (cost.getDiscardThis()){
+    			AllZone.GameAction.discard(card, ability);
+    			payDiscard = true;
+    		}
+    		else if (discType.equals("Hand")){
     			AllZone.GameAction.discardHand(card.getController(), ability);
     			payDiscard = true;
     		}
@@ -392,6 +402,11 @@ public class Cost_Payment {
 	    	}
     	}
     	
+    	if (cost.getDiscardThis()){
+			if (!AllZone.getZone(card).equals(Constant.Zone.Hand))
+				return;
+    	}
+    	
     	if (cost.getTapXTypeCost()) {
     		boolean tap = cost.getTap();
     		
@@ -433,7 +448,11 @@ public class Cost_Payment {
     	if (cost.getDiscardCost()){
     		String discType = cost.getDiscardType();
     		int discAmount = cost.getDiscardAmount();
-    		if (discType.equals("Hand")){
+    		
+    		if (cost.getDiscardThis()){
+    			AllZone.GameAction.discard(card, ability);
+    		}
+    		else if (discType.equals("Hand")){
     			AllZone.GameAction.discardHand(card.getController(), ability);
     		}
     		else{

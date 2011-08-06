@@ -45,6 +45,8 @@ public abstract class SpellAbility {
     protected Ability_Cost	payCosts		   = null;
     protected Target		chosenTarget	   = null;
     
+    private SpellAbility_Restriction restrictions = new SpellAbility_Restriction();
+    
     private CardList 		sacrificedCards	   = null;
     
     private Command         cancelCommand      = Command.Blank;
@@ -250,6 +252,14 @@ public abstract class SpellAbility {
     
     public void setTarget(Target tgt) {
     	chosenTarget = tgt;
+    }
+    
+    public void setRestrictions(SpellAbility_Restriction restrict){
+    	restrictions = restrict;
+    }
+    
+    public SpellAbility_Restriction getRestrictions(){
+    	return restrictions;
     }
     
     public void addSacrificedCost(Card c){

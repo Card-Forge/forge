@@ -241,6 +241,9 @@ public class AbilityFactory {
         if (!isTargeted)
         	SA.setStackDescription(hostCard.getName());
         
+        if (mapParams.containsKey("ActivatingZone"))
+        	SA.getRestrictions().setActivateZone(mapParams.get("ActivatingZone"));
+        
         return SA;
 	}
 	

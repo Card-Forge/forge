@@ -56,6 +56,8 @@ public class Ability_Cost {
 	public int getDiscardAmount() { return discardAmount; }
 	private String discardType = "";
 	public String getDiscardType() { return discardType; }
+	private boolean discardThis = false;
+	public boolean getDiscardThis() { return discardThis;}
 	
 	private boolean returnCost = false;	// Return something to owner's hand
 	public boolean getReturnCost() { return returnCost; }
@@ -120,6 +122,7 @@ public class Ability_Cost {
         	
         	discardAmount = Integer.parseInt(splitStr[0]);
         	discardType = splitStr[1];
+        	discardThis = (discardType.equals("CARDNAME"));
         }
         
         String sacStr = "Sac<";
@@ -254,7 +257,11 @@ public class Ability_Cost {
 				cost.append("discard ");
 			else
 				cost.append("and discard ");
-			if (discardType.equals("Hand")){
+			
+			if (discardThis){
+				cost.append(name);
+			}
+			else if (discardType.equals("Hand")){
 				cost.append(" your hand");
 			}
 			else{
@@ -368,7 +375,11 @@ public class Ability_Cost {
 				cost.append("Discard ");
 			else
 				cost.append(", discard ");
-			if (discardType.equals("Hand")){
+			
+			if (discardThis){
+				cost.append(name);
+			}
+			else if (discardType.equals("Hand")){
 				cost.append(" your hand");
 			}
 			else{

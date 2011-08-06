@@ -270,7 +270,12 @@ public class ComputerUtil
     		CardList handList = new CardList(zone.getCards());
     		String discType = cost.getDiscardType();
     		int discAmount = cost.getDiscardAmount();
-    		if (discType.equals("Hand")){
+    		
+    		if (cost.getDiscardThis()){
+    			if (!AllZone.getZone(card).equals(Constant.Zone.Hand))
+    				return false;
+    		}
+    		else if (discType.equals("Hand")){
     			// this will always work
     		}
     		else{
