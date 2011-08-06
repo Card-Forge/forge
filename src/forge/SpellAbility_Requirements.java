@@ -21,6 +21,10 @@ public class SpellAbility_Requirements {
 	}
 	
 	public void fillRequirements(){
+		fillRequirements(false);
+	}
+	
+	public void fillRequirements(boolean skipTargeting){
 		if (ability instanceof Spell && !bCasting){
 			// remove from hand
 			bCasting = true;
@@ -35,8 +39,8 @@ public class SpellAbility_Requirements {
 		// freeze Stack. No abilities should go onto the stack while I'm filling requirements.
 		AllZone.Stack.freezeStack();
 		
-		// Skip to paying if parent ability doesn't target and has no subAbilities.
-		if (select.doesTarget() || ability.getSubAbility() != null){
+		// Skip to paying if parent ability doesn't target and has no subAbilities. (or trigger case where its already targeted)
+		if (!skipTargeting && (select.doesTarget() || ability.getSubAbility() != null)){
 			select.setRequirements(this);
 			select.resetTargets();
 			select.chooseTargets();

@@ -3283,22 +3283,14 @@ public class GameAction {
     	sa.setActivatingPlayer(AllZone.HumanPlayer);
     	
     	if (sa.getPayCosts() != null){
-    		Target_Selection ts = null;
-    		if(skipTargeting)
-    		{
-    			ts = new Target_Selection(null, sa);
-    		}
-    		else
-    		{
-    			ts = new Target_Selection(sa.getTarget(),sa);
-    		}
+    		Target_Selection ts = new Target_Selection(sa.getTarget(),sa);
     		Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
     		
     		payment.changeCost();
     		
     		SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
     		req.setSkipStack(true);
-    		req.fillRequirements();
+    		req.fillRequirements(skipTargeting);
     	}
     	else{
 	    	ManaCost manaCost = new ManaCost(sa.getManaCost());

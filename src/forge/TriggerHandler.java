@@ -523,7 +523,8 @@ public class TriggerHandler {
 				@Override
 				public void resetOnceResolved()
 				{
-					sa[0].resetOnceResolved();
+					// Fixing an issue with Targeting + Paying Mana
+					//sa[0].resetOnceResolved();
 				}
 				
 				@Override
@@ -752,10 +753,11 @@ public class TriggerHandler {
 						}
 					}
 					
+					
 					//sa[0].resolve();
 					if(sa[0].getSourceCard().getController().isHuman())
 					{
-						AllZone.GameAction.playSpellAbility_NoStack(sa[0],true);
+						AllZone.GameAction.playSpellAbility_NoStack(sa[0], true);
 					}
 					else
 					{
