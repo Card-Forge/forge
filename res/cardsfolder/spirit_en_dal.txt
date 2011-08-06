@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:2/1
 K:Shadow
-A:AB$Pump | Cost$ 1 W | ActivatingZone$ Hand | Tgt$ TgtC | KW$ Shadow | ActivationLimit$ 1 | PlayerTurn$ True | ActivatingPhases$ Upkeep | PrecostDesc$Forecast - | SpellDescription$ Target creature gains shadow until end of turn. (Activate this ability only during your upkeep and only once each turn.)
+A:AB$Pump | Cost$ 1 W | ActivatingZone$ Hand | Tgt$ TgtC | KW$ Shadow | ActivationLimit$ 1 | PlayerTurn$ True | ActivatingPhases$ Upkeep | PrecostDesc$ Forecast - | SpellDescription$ Target creature gains shadow until end of turn. (Activate this ability only during your upkeep and only once each turn.)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_en_dal.jpg
 End
