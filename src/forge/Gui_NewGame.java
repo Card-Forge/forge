@@ -192,7 +192,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         Dimension screen = getToolkit().getScreenSize();
         Rectangle bounds = getBounds();
-        bounds.width = 520;
+        bounds.width = 550;
         bounds.height = 553;
         bounds.x = (screen.width - bounds.width) / 2;
         bounds.y = (screen.height - bounds.height) / 2;
