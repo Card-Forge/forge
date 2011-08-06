@@ -342,6 +342,7 @@ res/cardsfolder/ashes_to_ashes.txt -text svneol=native#text/plain
 res/cardsfolder/ashnods_altar.txt -text svneol=native#text/plain
 res/cardsfolder/ashnods_transmogrant.txt -text svneol=native#text/plain
 res/cardsfolder/aspect_of_mongoose.txt -text svneol=native#text/plain
+res/cardsfolder/aspect_of_wolf.txt svneol=native#text/plain
 res/cardsfolder/assassinate.txt -text svneol=native#text/plain
 res/cardsfolder/assassins_blade.txt -text svneol=native#text/plain
 res/cardsfolder/assault_griffin.txt -text svneol=native#text/plain
