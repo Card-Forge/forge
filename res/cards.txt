@@ -1,3 +1,10 @@
+Mind Sludge
+4 B
+Sorcery
+no text
+spDiscardTgt:TgtChoose:X:Target player discards a card for each Swamp you control.:Mind Sludge - target player discards cards
+SVar:X:Count$TypeYouCtrl.Swamp
+
 Matca Rioters
 2 G
 Creature Human Warrior
@@ -572,13 +579,6 @@ Mind Rot
 Sorcery
 no text
 spDiscardTgt:TgtChoose:2:Target player discards two cards.:Mind Rot - target player discards cards
-
-Mind Sludge
-4 B
-ry
-no text
-spDiscardTgt:TgtChoose:X:Target player discards a card for each Swamp you control.:Mind Sludge - target player discards cards
-SVar:X:Count$TypeYouCtrl.Swamp
 
 Specter's Wail
 1 B 

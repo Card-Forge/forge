@@ -38,6 +38,9 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+matca_rioters.jpg		http://www.wizards.com/global/images/magic/general/matca_rioters.jpg
+psychatog.jpg		http://www.wizards.com/global/images/magic/general/psychatog.jpg
+crucible_of_worlds.jpg		http://www.wizards.com/global/images/magic/general/crucible_of_worlds.jpg
 mishra_artificer_prodigy.jpg	http://www.wizards.com/global/images/magic/general/mishra_artificer_prodigy.jpg
 masked_admirers.jpg		http://www.wizards.com/global/images/magic/general/masked_admirers.jpg
 summer_bloom.jpg		http://www.wizards.com/global/images/magic/general/summer_bloom.jpg
