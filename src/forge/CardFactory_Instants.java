@@ -1298,7 +1298,7 @@ public class CardFactory_Instants {
                     //check for no cards in hand on resolve
                     PlayerZone Library = AllZone.getZone(Constant.Zone.Library, card.getController());
                     PlayerZone Hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    PlayerZone Grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    //PlayerZone Grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     CardList cards = new CardList();
                     
                     if(Library.size() == 0) {
