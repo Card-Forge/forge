@@ -1,7 +1,7 @@
 Name:Tempest of Light
 ManaCost:2 W
 Types:Instant
-Text:no texxt
+Text:no text
 A:SP$DestroyAll | Cost$ 2 W | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempest_of_light.jpg

@@ -2,7 +2,7 @@ Name:Remand
 ManaCost:1 U
 Types:Instant
 Text:no text
-A:SP$Counter | Cost$ 1 U | Type$ Spell | SpellTarget$ Creature | Destination$ Hand | SubAbility$ SVar=DBDraw | SpellDescription$ Counter target spell. If that spell is countered this way, put it into it's owner's hand instead of into that player's graveyard.\r\nDraw a card.
+A:SP$Counter | Cost$ 1 U | Type$ Spell | SpellTarget$ Creature | Destination$ Hand | SubAbility$ SVar=DBDraw | SpellDescription$ Counter target spell. If that spell is countered this way, put it into it's owner's hand instead of into that player's graveyard. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87919.jpg

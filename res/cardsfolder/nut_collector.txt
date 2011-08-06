@@ -3,7 +3,7 @@ ManaCost:5 G
 Types:Creature Human Druid
 Text:At the beginning of your upkeep, you may put a 1/1 green Squirrel creature token onto the battlefield.
 PT:1/1
-K:stPumpAll:Creature.Squirrel:2/2:Threshold:Threshold Ñ Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.
+K:stPumpAll:Creature.Squirrel:2/2:Threshold:Threshold - Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nut_collector.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/259.jpg

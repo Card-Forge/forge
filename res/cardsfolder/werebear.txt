@@ -4,7 +4,7 @@ Types:Creature Human Bear Druid
 Text:no text
 PT:1/1
 K:tap: add G
-K:stPumpSelf:Creature:3/3:Threshold:Threshold Ñ Werebear gets +3/+3 as long as seven or more cards are in your graveyard.
+K:stPumpSelf:Creature:3/3:Threshold:Threshold - Werebear gets +3/+3 as long as seven or more cards are in your graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/werebear.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/282.jpg
