@@ -139,6 +139,7 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
     		if(mirariCanAdd("B", produced)) colors.add("B");
     		if(mirariCanAdd("R", produced)) colors.add("R");
     		if(colors.size() > 0) {
+    			this.undoable = false;
     			if(colors.size() == 1) {
     				AllZone.ManaPool.addManaToFloating(colors.get(0), source);
     			}
@@ -151,6 +152,7 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
     				}
     			}
     		}
+    		
         }
 	}
 	
