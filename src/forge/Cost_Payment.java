@@ -320,7 +320,7 @@ public class Cost_Payment {
     	}
     	
     	// double check if counters available? Real check is in ComputerUtil.canPayAdditionalCosts()
-    	if (cost.getCounterNum() > card.getCounters(cost.getCounterType())){
+    	if (cost.getSubCounter() && cost.getCounterNum() > card.getCounters(cost.getCounterType())){
     		System.out.println("Not enough " + cost.getCounterType() + " on " + card.getName());
     		return;
     	}
