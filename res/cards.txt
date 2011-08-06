@@ -1,3 +1,9 @@
+Trinket Mage
+2 U
+Creature Human Wizard
+When Trinket Mage comes into play, you may search your library for an artifact card with converted mana cost 1 or less, reveal that card, and put it into your hand. If you do, shuffle your library.
+2/2
+
 Phyrexian Tower
 no cost
 Legendary Land
@@ -13354,12 +13360,6 @@ Nullmage Shepherd
 Creature Elf Shaman
 no text
 2/4
-
-Trinket Mage
-2 U
-Creature Human Mage
-When Trinket Mage comes into play, you may search your library for an artifact card with converted mana cost 1 or less, reveal that card, and put it into your hand. If you do, shuffle your library.
-2/2
 
 Goblin Matron
 2 R
