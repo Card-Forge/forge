@@ -1,3 +1,79 @@
+Basalt Monolith
+3
+Artifact
+no text
+CARDNAME doesn't untap during your untap step.
+Untap:3
+tap: add 3
+
+Dehydration
+3 U
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant creature
+enPumpCurse:CARDNAME doesn't untap during your untap step.
+
+Eternity Snare
+5 U
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant creature
+enPumpCurse:CARDNAME doesn't untap during your untap step.
+When CARDNAME enters the battlefield, draw a card.
+
+Goblin Sharpshooter
+2 R
+Creature Goblin
+no text
+1/1
+abDamageTgtCP T:1
+CARDNAME doesn't untap during your untap step.
+Whenever a creature is put into a graveyard from the battlefield, untap Goblin Sharpshooter.
+
+Grim Monolith
+2
+Artifact
+no text
+CARDNAME doesn't untap during your untap step.
+Untap:4
+tap: add 3
+
+Leaden Fists
+2 U
+Enchantment Aura
+Enchanted creature gets +3/+3 and doesn't untap during its controller's untap step.
+Flash
+Enchant creature
+enPumpCurse:+3/+3/CARDNAME doesn't untap during your untap step.
+
+Paralyzing Grasp
+2 U
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant creature
+enPumpCurse:CARDNAME doesn't untap during your untap step.
+
+Phyrexian Ironfoot
+3
+Snow Artifact Creature Construct
+no text
+3/4
+CARDNAME doesn't untap during your untap step.
+Untap:1 S
+
+Time Vault
+2
+Artifact
+If you would begin your turn while Time Vault is tapped, you may skip that turn instead. If you do, untap Time Vault.
+CARDNAME doesn't untap during your untap step.
+Comes into play tapped.
+
+Vulshok Gauntlets
+2
+Artifact Equipment
+Equipped creature gets +4/+2 and doesn't untap during its controller's untap step.
+eqPump 3:+4/+2/CARDNAME doesn't untap during your untap step.
+
 Genesis
 4 G
 Creature Incarnation
@@ -40,14 +116,6 @@ Elvish Visionary
 Creature Elf Shaman
 no text
 1/1
-When CARDNAME enters the battlefield, draw a card.
-
-Eternity Snare
-5 U
-Enchantment Aura
-Enchanted creature doesn't untap during its controller's untap step.
-Enchant creature
-enPumpCurse:This card doesn't untap during your untap step.
 When CARDNAME enters the battlefield, draw a card.
 
 Frog Tongue
@@ -1088,14 +1156,6 @@ Enchanted creature gets -1/-1 and has fear.
 Enchant creature
 enPump:-1/-1/Fear
 
-Leaden Fists
-2 U
-Enchantment Aura
-Enchanted creature gets +3/+3 and doesn't untap during its controller's untap step.
-Flash
-Enchant creature
-enPumpCurse:+3/+3/This card doesn't untap during your untap step.
-
 Zephyr Net
 1 U
 Enchantment Aura
@@ -1224,26 +1284,12 @@ Enchanted creature attacks each turn if able.
 Enchant creature
 enPumpCurse:This card attacks each turn if able.
 
-Dehydration
-3 U
-Enchantment Aura
-Enchanted creature doesn't untap during its controller's untap step.
-Enchant creature
-enPumpCurse:This card doesn't untap during your untap step.
-
 Wings of Aesthir
 W U
 Enchantment Aura
 Enchanted creature gets +1/+0 and has flying and first strike.
 Enchant creature
 enPump:+1/+0/Flying & First Strike
-
-Paralyzing Grasp
-2 U
-Enchantment Aura
-Enchanted creature doesn't untap during its controller's untap step.
-Enchant creature
-enPumpCurse:This card doesn't untap during your untap step.
 
 Artifact Ward
 W
@@ -2083,12 +2129,6 @@ Vulshok Battlegear
 Artifact Equipment
 Equipped creature gets +3/+3.
 eqPump 3:+3/+3
-
-Vulshok Gauntlets
-2
-Artifact Equipment
-Equipped creature gets +4/+2 and doesn't untap during its controller's untap step.
-eqPump 3:+4/+2/This card doesn't untap during your untap step.
 
 Vulshok Morningstar
 2
@@ -3196,13 +3236,6 @@ Wanderbrine Rootcutters
 Creature Merfolk Rogue
 Wanderbrine Rootcutters can't be blocked by green creatures.
 3/3
-
-Time Vault
-2
-Artifact
-If you would begin your turn while Time Vault is tapped, you may skip that turn instead. If you do, untap Time Vault.
-This card doesn't untap during your untap step.
-Comes into play tapped.
 
 Mana Tithe
 W
@@ -5641,14 +5674,6 @@ no text
 1/1
 RegenerateMe:S
 
-Phyrexian Ironfoot
-3
-Snow Artifact Creature Construct
-no text
-3/4
-This card doesn't untap during your untap step.
-Untap:1 S
-
 Door to Nothingness
 5
 Artifact
@@ -5764,15 +5789,6 @@ Fecundity
 Enchantment
 no text
 Whenever a creature is put into a graveyard from the battlefield, that creature's controller may draw a card.
-
-Goblin Sharpshooter
-2 R
-Creature Goblin
-no text
-1/1
-abDamageTgtCP T:1
-This card doesn't untap during your untap step.
-Whenever a creature is put into a graveyard from the battlefield, untap Goblin Sharpshooter.
 
 Soulcatcher
 1 W
@@ -9392,22 +9408,6 @@ Voltaic Key
 1
 Artifact
 no text
-
-Basalt Monolith
-3
-Artifact
-no text
-This card doesn't untap during your untap step.
-Untap:3
-tap: add 3
-
-Grim Monolith
-2
-Artifact
-no text
-This card doesn't untap during your untap step.
-Untap:4
-tap: add 3
 
 Akki Drillmaster
 2 R

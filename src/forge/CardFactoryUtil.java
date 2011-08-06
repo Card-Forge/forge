@@ -1749,10 +1749,10 @@ public class CardFactoryUtil {
                     });
                 }
                 
-                // If extrinsicKeywords contains "This card doesn't untap during your untap step."
+                // If extrinsicKeywords contains "CARDNAME doesn't untap during your untap step."
                 //     then remove creatures with Vigilance from the list
                 
-                if (extKeywords.contains("This card doesn't untap during your untap step.")) {
+                if (extKeywords.contains("CARDNAME doesn't untap during your untap step.")) {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isCreature() && 
