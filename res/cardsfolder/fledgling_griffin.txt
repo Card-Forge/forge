@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Griffin
 Text:no text
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigPump | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, CARDNAME gains flying until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, CARDNAME gains flying until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Flying
 SVar:BuffedBy:Land
 SVar:Rarity:Common
