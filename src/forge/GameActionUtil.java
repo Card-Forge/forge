@@ -3713,8 +3713,10 @@ public class GameActionUtil {
         else if(c.getName().equals("Slith Strider") || c.getName().equals("Slith Ascendant")
                 || c.getName().equals("Slith Bloodletter") || c.getName().equals("Slith Firewalker")
                 || c.getName().equals("Slith Predator")) playerCombatDamage_Slith(c);
-        else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")
-                || c.getName().equals("Arcbound Slith")) playerCombatDamage_Whirling_Dervish(c);
+        else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
+        	playerCombatDamage_Whirling_Dervish(c);
+        else if (c.getName().equals("Arcbound Slith"))
+        	playerCombatDamage_Arcbound_Slith(c);
         else if(c.getName().equals("Oros, the Avenger")) playerCombatDamage_Oros(c);
         else if(c.getName().equals("Rootwater Thief")) playerCombatDamage_Rootwater_Thief(c);
         else if(c.getName().equals("Treva, the Renewer")) playerCombatDamage_Treva(c);
@@ -3901,6 +3903,25 @@ public class GameActionUtil {
                 }
             };
             AllZone.EndOfTurn.addAt(dealtDmg);
+            
+        } // if
+    }
+    
+    private static void playerCombatDamage_Arcbound_Slith(Card c) {
+        final int power = c.getNetAttack();
+        final Card card = c;
+        
+        if(power > 0) {
+            final Ability ability2 = new Ability(c, "0") {
+                @Override
+                public void resolve() {
+                    card.addCounter(Counters.P1P1, 1);
+                }
+            };// ability2
+            
+            ability2.setStackDescription(c.getName() + " - gets a +1/+1 counter.");
+            
+            AllZone.Stack.add(ability2);
             
         } // if
     }
