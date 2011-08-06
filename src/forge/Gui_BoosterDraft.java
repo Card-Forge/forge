@@ -2,7 +2,6 @@
 package forge;
 
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GridLayout;
@@ -26,59 +25,45 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import forge.error.ErrorViewer;
+import forge.gui.game.CardDetailPanel;
+import forge.gui.game.CardPicturePanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 
-public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants, NewConstants.LANG.Gui_BoosterDraft {
-    private static final long serialVersionUID  = -6055633915602448260L;
+public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConstants, NewConstants.LANG.Gui_BoosterDraft {
+    private static final long    serialVersionUID  = -6055633915602448260L;
     
-    private BoosterDraft      boosterDraft;
+    private BoosterDraft         boosterDraft;
     
     private static final boolean limitedDeckEditor = true;
     
-    private TableModel        allCardModel;
-    private TableModel        deckModel;
+    private TableModel           allCardModel;
+    private TableModel           deckModel;
     
-    private JScrollPane       jScrollPane1      = new JScrollPane();
-    private JScrollPane       jScrollPane2      = new JScrollPane();
-    @SuppressWarnings("unused")
-    // border1
-    private Border            border1;
-    private TitledBorder      titledBorder1;
-    @SuppressWarnings("unused")
-    // border2
-    private Border            border2;
-    private TitledBorder      titledBorder2;
-    private JPanel            cardDetailPanel   = new JPanel();
-    private Border            border3;
-    private TitledBorder      titledBorder3;
-    private JPanel            picturePanel      = new JPanel();
-    private JLabel            statsLabel        = new JLabel();
-    private JTable            allCardTable      = new JTable();
-    private JTable            deckTable         = new JTable();
-    private JScrollPane       jScrollPane3      = new JScrollPane();
-    private JPanel            jPanel3           = new JPanel();
-    private JLabel            cdLabel4          = new JLabel();
-    private JLabel            cdLabel1          = new JLabel();
-    private JLabel            cdLabel2          = new JLabel();
-    private JLabel            cdLabel3          = new JLabel();
-    private GridLayout        gridLayout1       = new GridLayout();
-    private JLabel            cdLabel5          = new JLabel();
-    private JTextArea         cdTextArea        = new JTextArea();
-    private BorderLayout      borderLayout1     = new BorderLayout();
-    private JLabel            statsLabel2       = new JLabel();
-    private JButton           jButton1          = new JButton();
+    private JScrollPane          jScrollPane1      = new JScrollPane();
+    private JScrollPane          jScrollPane2      = new JScrollPane();
+    private TitledBorder         titledBorder1;
+    private TitledBorder         titledBorder2;
+    private Border               border3;
+    private TitledBorder         titledBorder3;
+    private JLabel               statsLabel        = new JLabel();
+    private JTable               allCardTable      = new JTable();
+    private JTable               deckTable         = new JTable();
+    private JScrollPane          jScrollPane3      = new JScrollPane();
+    private JPanel               jPanel3           = new JPanel();
+    private GridLayout           gridLayout1       = new GridLayout();
+    private JLabel               statsLabel2       = new JLabel();
+    private JButton              jButton1          = new JButton();
+    private CardDetailPanel      detail            = new CardDetailPanel(null);
+    private CardPicturePanel     picture           = new CardPicturePanel(null);
     
     public static void main(String[] args) {
         Constant.Runtime.GameType[0] = Constant.GameType.Draft;
@@ -125,7 +110,7 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
         allCardTable.setModel(allCardModel);
         
         allCardModel.resizeCols(allCardTable);
-
+        
         //construct deckModel
         deckModel = new TableModel(this);
         deckModel.addListeners(deckTable);
@@ -187,16 +172,20 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
         }
     }
     
-    public void updateCardDetail(Card c) {
-        CardDetailUtil.updateCardDetail(c, cdTextArea, cardDetailPanel, picturePanel, new JLabel[] {
-                cdLabel1, cdLabel2, cdLabel3, cdLabel4, cdLabel5});
+    @Override
+    public Card getCard() {
+        return detail.getCard();
+    }
+    
+    @Override
+    public void setCard(Card card) {
+        detail.setCard(card);
+        picture.setCard(card);
     }
     
     private void jbInit() throws Exception {
-        border1 = new EtchedBorder(EtchedBorder.RAISED, Color.white, new Color(148, 145, 140));
         titledBorder1 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
                 "Previous Picked Cards");
-        border2 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
         titledBorder2 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
                 "Choose one card");
         border3 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
@@ -206,12 +195,9 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
         jScrollPane1.setBounds(new Rectangle(19, 28, 661, 344));
         jScrollPane2.setBorder(titledBorder1);
         jScrollPane2.setBounds(new Rectangle(19, 478, 661, 184));
-        cardDetailPanel.setBorder(titledBorder3);
-        cardDetailPanel.setBounds(new Rectangle(693, 23, 239, 323));
-        cardDetailPanel.setLayout(null);
-        picturePanel.setBorder(BorderFactory.createEtchedBorder());
-        picturePanel.setBounds(new Rectangle(693, 348, 240, 340));
-        picturePanel.setLayout(borderLayout1);
+        detail.setBorder(titledBorder3);
+        detail.setBounds(new Rectangle(693, 23, 239, 323));
+        picture.setBounds(new Rectangle(693, 348, 240, 340));
         statsLabel.setFont(new java.awt.Font("Dialog", 0, 16));
         statsLabel.setText("Total - 0, Creatures - 0 Land - 0");
         statsLabel.setBounds(new Rectangle(19, 665, 665, 31));
@@ -221,21 +207,8 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
         jScrollPane3.setBounds(new Rectangle(6, 168, 225, 143));
         jPanel3.setBounds(new Rectangle(7, 21, 224, 141));
         jPanel3.setLayout(gridLayout1);
-        cdLabel4.setFont(new java.awt.Font("Dialog", 0, 14));
-        cdLabel4.setHorizontalAlignment(SwingConstants.LEFT);
-        cdLabel1.setFont(new java.awt.Font("Dialog", 0, 14));
-        cdLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        cdLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
-        cdLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-        cdLabel3.setFont(new java.awt.Font("Dialog", 0, 14));
-        cdLabel3.setHorizontalAlignment(SwingConstants.CENTER);
         gridLayout1.setColumns(1);
         gridLayout1.setRows(0);
-        cdLabel5.setFont(new java.awt.Font("Dialog", 0, 14));
-        cdLabel5.setHorizontalAlignment(SwingConstants.LEFT);
-        cdTextArea.setFont(new java.awt.Font("Dialog", 0, 12));
-        cdTextArea.setLineWrap(true);
-        cdTextArea.setWrapStyleWord(true);
         statsLabel2.setBounds(new Rectangle(19, 378, 665, 31));
         statsLabel2.setText("Total - 0, Creatures - 0 Land - 0");
         statsLabel2.setFont(new java.awt.Font("Dialog", 0, 16));
@@ -247,15 +220,8 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
                 jButton1_actionPerformed(e);
             }
         });
-        this.getContentPane().add(cardDetailPanel, null);
-        cardDetailPanel.add(jScrollPane3, null);
-        jScrollPane3.getViewport().add(cdTextArea, null);
-        cardDetailPanel.add(jPanel3, null);
-        jPanel3.add(cdLabel1, null);
-        jPanel3.add(cdLabel2, null);
-        jPanel3.add(cdLabel3, null);
-        jPanel3.add(cdLabel4, null);
-        this.getContentPane().add(picturePanel, null);
+        this.getContentPane().add(detail, null);
+        this.getContentPane().add(picture, null);
         this.getContentPane().add(jScrollPane1, null);
         this.getContentPane().add(statsLabel2, null);
         this.getContentPane().add(statsLabel, null);
@@ -263,7 +229,6 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
         this.getContentPane().add(jButton1, null);
         jScrollPane2.getViewport().add(deckTable, null);
         jScrollPane1.getViewport().add(allCardTable, null);
-        jPanel3.add(cdLabel5, null);
     }
     
     void addButton_actionPerformed(ActionEvent e) {

@@ -1,153 +1,233 @@
+
 package forge;
-import java.awt.Image;
-import java.awt.Rectangle;
+
+
+import static java.lang.Double.*;
+import static java.lang.Math.*;
+
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
-//import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
-import forge.error.ErrorViewer;
+import com.google.common.base.Function;
+import com.google.common.collect.ComputationException;
+import com.google.common.collect.MapMaker;
+
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
+
 /**
- * For storing card images in a cache.
+ * This class stores ALL card images in a cache with soft values. this means that the images may be collected when
+ * they are not needed any more, but will be kept as long as possible.
+ * 
+ * The keys are the following:
+ * <ul>
+ * <li>Keys start with the file name, extension is skipped</li>
+ * <li>If the key belongs to a token, "#Token" is appended</li>
+ * <li>If the key belongs to the unrotated image, "#Normal" is appended</li>
+ * <li>If the key belongs to the rotated image, "#Tapped" is appended</li>
+ * <li>If the key belongs to the large preview image, "#<i>scale</i>" is appended, where scale is a double
+ * precision floating point number</li>
+ * <li>The key without suffix belongs to the unmodified image from the file</li>
+ * </ul>
  */
 public class ImageCache implements NewConstants {
+    private static final Map<String, BufferedImage> imageCache;
+    private static final Pattern                    FULL_SIZE = Pattern.compile("(.*)#(\\d+.\\d+)");
     
-    /**
-     * Card size.
-     */
-    //protected static Rectangle cardSize = new Rectangle(93, 130);
-    //protected static Rectangle cardSize = new Rectangle(70, 98);
-    //public static Rectangle cardSize = new Rectangle(70,98);
-    public static Rectangle              cardSize = new Rectangle(Constant.Runtime.width[0],
-                                                          Constant.Runtime.height[0]);
+    private static final String                     TOKEN     = "#Token", NORMAL = "#Normal", TAPPED = "#Tapped";
     
-
-    /**
-     * Cache for storing images.
-     */
-    public static HashMap<String, Image> cache    = new HashMap<String, Image>();
-    
-    //protected static HashMap<String, Image> cache = new HashMap<String, Image>();
-    
-    //~  Image size was not getting updated if the user changed it between games...
-    public static void dumpCache() {
-        cardSize = new Rectangle(Constant.Runtime.width[0], Constant.Runtime.height[0]);
-        cache = new HashMap<String, Image>();
-    }
-    
-    //~
-    
-
-    /**
-     * Load image from disk and then put it into the cache. If image has been loaded before then no loading is
-     * needed.
-     * 
-     * @param card card to load image for
-     * @return {@link Image}
-     */
-    final public static Image getImage(Card card) {
-        
-        /**
-         * Try to get from cache.
-         */
-        String name = card.getImageName();
-        if(card.isBasicLand()) {
-            if(card.getRandomPicture() != 0) name += Integer.toString(card.getRandomPicture());
-        } else if(card.isFaceDown()) name = "Morph";
-        if(cache.containsKey(name)) {
-            return cache.get(name);
-        }
-        
-        /**
-         * Load image.
-         */
-        BufferedImage image = null;
-        Image resized = null;
-        
-        File imagePath = getImagePath(card);
-        if(imagePath == null) {
-            return null;
-        }
-        
-        try {
-            image = ImageIO.read(imagePath);
-            
-            resized = image.getScaledInstance(cardSize.width, cardSize.height, java.awt.Image.SCALE_SMOOTH);
-        } catch(Exception ex) {
-            ErrorViewer.showError(ex);
-        }
-        
-        /**
-         * Put to cache.
-         */
-
-        //currently doesn't work:
-        /*
-        if (cache.size() >= 35) {
-			int count = 10;
-			ArrayList<String> imgNames = new ArrayList<String>(count);
-			for (String imgName : cache.keySet()) {
-				imgNames.add(imgName);				
-				count--;
-				if (count == 0)
-					break;
-			}
-			for (String imgName : imgNames)
-				cache.remove(imgName);
-        }
-        */
-        
-        cache.put(name, resized);
-        
-        return resized;
-    }
-    
-    /**
-     * Get path to image for specific card.
-     * 
-     * @param c card to get path for
-     * @return String if image exists, else null
-     */
-    final public static File getImagePath(Card c) {
-        if(AllZone.NameChanger.shouldChangeCardName()) {
-            return null;
-        }
-        
-        String suffix = ".jpg";
-        String filename = "";
-        if(!c.isFaceDown()) {
-            String basicLandSuffix = "";
-            if(c.isBasicLand()) {
-                if(c.getRandomPicture() != 0) basicLandSuffix = Integer.toString(c.getRandomPicture());
+    static {
+        imageCache = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
+            public BufferedImage apply(String key) {
+                try {
+                    
+                    System.out.printf("Currently %d %s in the cache%n", imageCache.size(),
+                            imageCache.size() == 1? "image":"images");
+                    System.out.printf("New Image for key: %s%n", key);
+                    if(key.endsWith(NORMAL)) {
+                        //normal
+                        key = key.substring(0, key.length() - NORMAL.length());
+                        return getNormalSizeImage(imageCache.get(key));
+                    } else if(key.endsWith(TAPPED)) {
+                        //tapped
+                        key = key.substring(0, key.length() - TAPPED.length());
+                        return getTappedSizeImage(imageCache.get(key));
+                    }
+                    Matcher m = FULL_SIZE.matcher(key);
+                    
+                    if(m.matches()) {
+                        //full size
+                        key = m.group(1);
+                        return getFullSizeImage(imageCache.get(key), parseDouble(m.group(2)));
+                    } else {
+                        //original
+                        File path;
+                        if(key.endsWith(TOKEN)) {
+                            key = key.substring(0, key.length() - TOKEN.length());
+                            path = ForgeProps.getFile(IMAGE_TOKEN);
+                        } else path = ForgeProps.getFile(IMAGE_BASE);
+                        File file = new File(path, key + ".jpg");
+                        if(!file.exists()) {
+                            System.out.println("File not found, no image created");
+                            return null;
+                        }
+                        BufferedImage image = ImageIO.read(file);
+                        return image;
+                    }
+                } catch(Exception ex) {
+                    System.out.println("Exception, no image created");
+                    if(ex instanceof ComputationException) throw (ComputationException) ex;
+                    else throw new ComputationException(ex);
+                }
             }
-            filename = GuiDisplayUtil.cleanString(c.getImageName()) + basicLandSuffix + suffix;
-        } else filename = "morph" + suffix;
+        });
+    }
+    
+    /**
+     * Returns the image appropriate to display the card in a zone
+     */
+    public static BufferedImage getImage(Card card) {
+        String key = card.isFaceDown()? "Morph":getKey(card);
+        if(card.isTapped()) key += TAPPED;
+        else key += NORMAL;
+        return getImage(key);
+    }
+    
+    /**
+     * Returns the image appropriate to display the card in the picture panel
+     */
+    public static BufferedImage getImage(Card card, int width, int height) {
+        String key = (card.isFaceDown() && card.getController() == Constant.Player.Computer)? "Morph":getKey(card);
+        BufferedImage original = getImage(key);
+        if(original == null) return null;
         
-        String loc = "";
-        if (!c.isToken())
-        	loc = IMAGE_BASE;
-        else
-        	loc = IMAGE_TOKEN;
+        double scale = min((double) width / original.getWidth(), (double) height / original.getHeight());
+        //TODO here would be the place to limit the scaling
         
-        File file = new File(ForgeProps.getFile(loc), filename);
-        
-        /**
-         * try current directory
-         */
-        if(!file.exists()) {
-            filename = GuiDisplayUtil.cleanString(c.getName()) + suffix;
-            file = new File(filename);
-        }
-        
-        if(file.exists()) {
-            return file;
-        } else {
+        return getImage(key + "#" + scale);
+    }
+    
+    /**
+     * Returns the Image corresponding to the key
+     */
+    private static BufferedImage getImage(String key) {
+        try {
+            BufferedImage image = imageCache.get(key);
+            //if an image is still cached and it was not the expected size, drop it
+            if(!isExpectedSize(key, image)) {
+                imageCache.remove(key);
+                image = imageCache.get(key);
+            }
+            return image;
+        } catch(NullPointerException ex) {
+            //unfortunately NullOutputException, thrown when apply() returns null, is not public
+            //NullOutputException is a subclass of NullPointerException
+            //legitimate, happens when a card has no image
+            return null;
+        } catch(ComputationException ex) {
+            if(ex.getCause() instanceof NullPointerException) return null;
+            ex.printStackTrace();
             return null;
         }
+    }
+    
+    /**
+     * Returns if the image for the key is the proper size.
+     */
+    private static boolean isExpectedSize(String key, BufferedImage image) {
+        if(key.endsWith(NORMAL)) {
+            //normal
+            return image.getWidth() == Constant.Runtime.width[0]
+                    && image.getHeight() == Constant.Runtime.height[0];
+        } else if(key.endsWith(TAPPED)) {
+            //tapped
+            return image.getWidth() == Constant.Runtime.height[0]
+                    && image.getHeight() == Constant.Runtime.width[0];
+        } else {
+            //original & full is never wrong
+            return true;
+        }
+    }
+    
+    /**
+     * Returns the map key for a card, without any suffixes for the image size.
+     */
+    private static String getKey(Card card) {
+        String key = card.getImageName();
+        if(card.isBasicLand() && card.getRandomPicture() != 0) key += card.getRandomPicture();
+        if(card.isToken()) key += TOKEN;
+        return GuiDisplayUtil.cleanString(key);
+    }
+    
+    /**
+     * Returns an image scaled to the size given in {@link Constant.Runtime}
+     */
+    private static BufferedImage getNormalSizeImage(BufferedImage original) {
+        int srcWidth = original.getWidth();
+        int srcHeight = original.getHeight();
+        int tgtWidth = Constant.Runtime.width[0];
+        int tgtHeight = Constant.Runtime.height[0];
+        
+        if(srcWidth == tgtWidth && srcHeight == tgtHeight) return original;
+        
+
+        AffineTransform at = new AffineTransform();
+        at.scale((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
+//        at.translate(srcHeight, 0);
+//        at.rotate(PI / 2);
+        
+
+        BufferedImage image = new BufferedImage(tgtWidth, tgtHeight, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = (Graphics2D) image.getGraphics();
+        g2d.drawImage(original, at, null);
+        g2d.dispose();
+        return image;
+    }
+    
+    /**
+     * Returns an image scaled to the size given in {@link Constant.Runtime}, but rotated
+     */
+    private static BufferedImage getTappedSizeImage(BufferedImage original) {
+        int srcWidth = original.getWidth();
+        int srcHeight = original.getHeight();
+        int tgtWidth = Constant.Runtime.width[0];
+        int tgtHeight = Constant.Runtime.height[0];
+        
+        AffineTransform at = new AffineTransform();
+        at.scale((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
+        at.translate(srcHeight, 0);
+        at.rotate(Math.PI / 2);
+        
+
+        BufferedImage image = new BufferedImage(tgtHeight, tgtWidth, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = (Graphics2D) image.getGraphics();
+        g2d.drawImage(original, at, null);
+        g2d.dispose();
+        return image;
+    }
+    
+    /**
+     * Returns an image scaled to the size appropriate for the card picture panel
+     */
+    private static BufferedImage getFullSizeImage(BufferedImage original, double scale) {
+        if(scale == 1) return original;
+        
+        AffineTransform at = new AffineTransform();
+        at.scale(scale, scale);
+        
+        BufferedImage image = new BufferedImage((int) (original.getWidth() * scale),
+                (int) (original.getHeight() * scale), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = (Graphics2D) image.getGraphics();
+        g2d.drawImage(original, at, null);
+        g2d.dispose();
+        return image;
     }
 }

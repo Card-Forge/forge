@@ -20,11 +20,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.BufferedImage;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
@@ -33,16 +31,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.concurrent.ConcurrentMap;
 
-//import javax.imageio.ImageIO;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
@@ -66,21 +59,17 @@ import javax.swing.event.ListSelectionListener;
 import org.jdesktop.swingx.MultiSplitPane;
 import org.jdesktop.swingx.MultiSplitLayout.Node;
 
-import com.google.common.collect.MapMaker;
-//import org.omg.CORBA.portable.InputStream;
-
-import arcane.ui.ScaledImagePanel;
-import arcane.ui.ScaledImagePanel.MultipassType;
-import arcane.ui.ScaledImagePanel.ScalingType;
-
 import forge.error.ErrorViewer;
 import forge.gui.ForgeAction;
 import forge.gui.ListChooser;
+import forge.gui.game.CardDetailPanel;
+import forge.gui.game.CardPanel;
+import forge.gui.game.CardPicturePanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 
-public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewConstants.GUI.GuiDisplay, NewConstants.LANG.GuiDisplay {
+public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewConstants, NewConstants.GUI.GuiDisplay, NewConstants.LANG.GuiDisplay {
     private static final long serialVersionUID = 4519302185194841060L;
     
     private GuiInput          inputControl;
@@ -98,14 +87,11 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     public Color c2 = new Color(50,50,50);
     public Color c3 = new Color(204,204,204);
     */
-    
-    private ConcurrentMap<String, BufferedImage> imageCache = new MapMaker().softValues().makeMap();
-    private String current_picture = "";
     //private int count = 0;
-
+    
     public static Color       c1               = new Color(204, 204, 204);
     public static Color       c2               = new Color(204, 204, 204);
-    public static Color 	  c3 			   = new Color(0, 164, 0);
+    public static Color       c3               = new Color(0, 164, 0);
     
     private Action            HUMAN_GRAVEYARD_ACTION;
     private Action            HUMAN_REMOVED_ACTION;
@@ -113,7 +99,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     private Action            COMPUTER_GRAVEYARD_ACTION;
     private Action            COMPUTER_REMOVED_ACTION;
     private Action            CONCEDE_ACTION;
-    public Card cCardHQ;  
+    public Card               cCardHQ;
     
     //private CardList multiBlockers = new CardList();
     
@@ -157,7 +143,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     	new Gui_MultipleBlockers3(attacker, multiBlockers, damage, this);
     }
     */
-    
+
     private void setupActions() {
         HUMAN_GRAVEYARD_ACTION = new ZoneAction(AllZone.Human_Graveyard, HUMAN_GRAVEYARD);
         HUMAN_REMOVED_ACTION = new ZoneAction(AllZone.Human_Removed, HUMAN_REMOVED);
@@ -184,8 +170,9 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     private void addMenu() {
         Object[] obj = {
                 HUMAN_GRAVEYARD_ACTION, HUMAN_REMOVED_ACTION, HUMAN_FLASHBACK_ACTION, COMPUTER_GRAVEYARD_ACTION,
-                COMPUTER_REMOVED_ACTION, new JSeparator(), GuiDisplay3.eotCheckboxForMenu, GuiDisplay3.playsoundCheckboxForMenu, new JSeparator(),
-                ErrorViewer.ALL_THREADS_ACTION, CONCEDE_ACTION};
+                COMPUTER_REMOVED_ACTION, new JSeparator(), GuiDisplay3.eotCheckboxForMenu,
+                GuiDisplay3.playsoundCheckboxForMenu, new JSeparator(), ErrorViewer.ALL_THREADS_ACTION,
+                CONCEDE_ACTION};
         
         JMenu gameMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.MENU.TITLE));
         for(Object o:obj) {
@@ -271,14 +258,13 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     //returned Object could be null
     public <T> T getChoiceOptional(String message, T[] choices) {
         if(choices == null || choices.length == 0) return null;
-    	ListChooser<T> c = new ListChooser<T>(message, 0, 1, choices);
+        ListChooser<T> c = new ListChooser<T>(message, 0, 1, choices);
         final JList list = c.getJList();
         if(choices[0] instanceof Card) {
             list.addListSelectionListener(new ListSelectionListener() {
                 public void valueChanged(ListSelectionEvent ev) {
-                    if(list.getSelectedValue() instanceof Card){
-                    	updateCardDetailText((Card) list.getSelectedValue());
-                    	updateCardDetailPicture((Card) list.getSelectedValue());
+                    if(list.getSelectedValue() instanceof Card) {
+                        setCard((Card) list.getSelectedValue());
                     }
                 }
             });
@@ -296,8 +282,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
             list.addListSelectionListener(new ListSelectionListener() {
                 public void valueChanged(ListSelectionEvent ev) {
                     if(list.getSelectedValue() instanceof Card) {
-                    	updateCardDetailText((Card) list.getSelectedValue());
-                    	updateCardDetailPicture((Card) list.getSelectedValue());
+                        setCard((Card) list.getSelectedValue());
                     }
                 }
             });
@@ -343,19 +328,19 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
                 if(o instanceof CardPanel) {
                     CardPanel cardPanel = (CardPanel) o;
                     
-                    if(cardPanel.getCard().isUntapped()){
-                    	MP3Player mp3 = new MP3Player ("tap.mp3");
-                    	mp3.play();
+                    if(cardPanel.getCard().isUntapped()) {
+                        MP3Player mp3 = new MP3Player("tap.mp3");
+                        mp3.play();
                     }
                     
                     if(cardPanel.getCard().isTapped()
                             && (inputControl.input instanceof Input_PayManaCost || inputControl.input instanceof Input_PayManaCost_Ability)) {
-                    	
-                    	while(cardPanel.connectedCard != null) {
+                        
+                        while(cardPanel.connectedCard != null) {
                             cardPanel = cardPanel.connectedCard;
                             
                             if(cardPanel.getCard().isUntapped()) {
-                            	
+                                
                                 break;
                             }
                         }
@@ -387,16 +372,14 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
                         }
                     }
                     //right click:
-                    if (e.isMetaDown()) {
-                    	if (att.contains(cardPanel.getCard()) )
-                    	{
-                    		cardPanel.getCard().untap();
-                    		AllZone.Combat.removeFromCombat(cardPanel.getCard());
-                    	}
-                    } 
-                    
-                    else
-                    	inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
+                    if(e.isMetaDown()) {
+                        if(att.contains(cardPanel.getCard())) {
+                            cardPanel.getCard().untap();
+                            AllZone.Combat.removeFromCombat(cardPanel.getCard());
+                        }
+                    }
+
+                    else inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
                 }
             }
         });
@@ -406,8 +389,8 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
             @Override
             public void mousePressed(MouseEvent e) {
                 Object o = playerHandPanel.getComponentAt(e.getPoint());
-                if(o instanceof CardPanel) {                	
-                    CardPanel cardPanel = (CardPanel) o; 
+                if(o instanceof CardPanel) {
+                    CardContainer cardPanel = (CardContainer) o;
                     inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Hand);
                     okButton.requestFocusInWindow();
                 }
@@ -424,7 +407,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
             public void mousePressed(MouseEvent e) {
                 Object o = oppLandPanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
-                    CardPanel cardPanel = (CardPanel) o;
+                    CardContainer cardPanel = (CardContainer) o;
                     inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Play);
                 }
             }
@@ -437,7 +420,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
             public void mousePressed(MouseEvent e) {
                 Object o = oppCreaturePanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
-                    CardPanel cardPanel = (CardPanel) o;
+                    CardContainer cardPanel = (CardContainer) o;
                     inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Play);
                 }
             }
@@ -446,246 +429,16 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
 
     }//addListener()
     
-    public void updateCardDetailText(Card c) {
-//      if(! c.isToken())
-//        System.out.println(c +" " +c.getSpellAbility()[0].canPlay() +" " +c.getSpellAbility()[0].getManaCost());
-        
-        if(c == null) return;
-        
-        cdLabel1.setText("");
-        cdLabel2.setText("");
-        cdLabel3.setText("");
-        cdLabel4.setText("");
-        cdLabel5.setText("");
-        cdLabel6.setText("");
-        cdArea.setText("");
-        
-        if(!c.isFaceDown()) {
-            if(c.isLand()) cdLabel1.setText(c.getName());
-            else cdLabel1.setText(c.getName() + "  - " + c.getManaCost());
-        } else cdLabel1.setText("Morph");
-        
-        cdLabel2.setText(GuiDisplayUtil.formatCardType(c));
-        
-        if(c.isFaceDown()) cdLabel2.setText("Creature");
-        
-        if(c.isCreature()) {
-            String stats = "" + c.getNetAttack() + " / " + c.getNetDefense();
-            cdLabel3.setText(stats);
-        }
-        
-        if(c.isCreature()) cdLabel4.setText("Damage: " + c.getDamage() + " Assigned Damage: "
-                + c.getTotalAssignedDamage());
-        
-        if(c.isPlaneswalker()) cdLabel4.setText("Assigned Damage: " + c.getTotalAssignedDamage());
-        
-        String uniqueID = c.getUniqueNumber() + " ";
-        cdLabel5.setText("Card ID  " + uniqueID);
-        
-        //if (c.getCounters(Counters.SPORE) != 0)
-        //	cdLabel6.setText("Spore counters: " + c.getCounters(Counters.SPORE));
-        
-        
-        String tokenText = "";
-        if(c.isToken()) tokenText = tokenText + "Token\r\n";
-        
-        StringBuilder counterText = new StringBuilder();
-        counterText.append("\r\n");
-        
-        if(c.getCounters(Counters.AGE) != 0) { 
-        	counterText.append("Age counters: "); 
-        	counterText.append(c.getCounters(Counters.AGE));
-        	counterText.append("\r\n");
-        }
-        if(c.getCounters(Counters.BLAZE) != 0) {
-        	counterText.append("Blaze counters: "); 
-        	counterText.append(c.getCounters(Counters.BLAZE));
-        	counterText.append("\r\n");
-        }
-        if(c.getCounters(Counters.CHARGE) != 0) {
-        	counterText.append("Charge counters: "); 
-        	counterText.append(c.getCounters(Counters.CHARGE));
-        	counterText.append("\r\n");
-        }
-        if(c.getCounters(Counters.DIVINITY) != 0) {
-        	counterText.append("Divinity counters: "); 
-        	counterText.append(c.getCounters(Counters.DIVINITY));
-        	counterText.append("\r\n");
-        }
-        if(c.getCounters(Counters.FADE) != 0) {
-        	counterText.append("Fade counters: "); 
-        	counterText.append(c.getCounters(Counters.FADE));
-        	counterText.append("\r\n");
-        }
-        if(c.getCounters(Counters.HOOFPRINT) != 0) {
-        	counterText.append("Hoofprint counters: "); 
-        	counterText.append(c.getCounters(Counters.HOOFPRINT));
-        	counterText.append("\r\n");
-        }
-        if(c.getCounters(Counters.ICE) != 0) {
-        	counterText.append("Ice counters: "); 
-        	counterText.append(c.getCounters(Counters.ICE));
-        	counterText.append("\r\n");	
-        }
-        if(c.getCounters(Counters.LOYALTY) != 0) {
-        	counterText.append("Loyalty counters: "); 
-        	counterText.append(c.getCounters(Counters.LOYALTY));
-        	counterText.append("\r\n");
-        }
-        if(c.getCounters(Counters.MANA) != 0){
-        	counterText.append("Mana counters: "); 
-        	counterText.append(c.getCounters(Counters.MANA));
-        	counterText.append("\r\n");
-        }
-        if(c.getCounters(Counters.P0M1) != 0) {
-        	counterText.append("+0/-1 counters: "); 
-        	counterText.append(c.getCounters(Counters.P0M1));
-        	counterText.append("\r\n");
-        }
-        if(c.getNetPTCounters() != 0) { //+1/+1 and -1/-1 counters should cancel each other out:
-            if(c.getNetPTCounters() > 0) { 
-	            counterText.append("+1/+1 counters: "); 
-	        	counterText.append(c.getNetPTCounters());
-	        	counterText.append("\r\n");
-            }
-            else {
-                int m1m1Counters = -1 * c.getNetPTCounters();
-                counterText.append("-1/-1 counters: "); 
-            	counterText.append(m1m1Counters);
-            	counterText.append("\r\n");
-            }
-        }
-        /*if (c.getCounters(Counters.P1P1) != 0)
-         	counterText = counterText + "+1/+1 counters: " + c.getCounters(Counters.P1P1) + "\r\n";
-        if (c.getCounters(Counters.M1M1) != 0)
-         	counterText = counterText + "-1/-1 counters: " + c.getCounters(Counters.M1M1) + "\r\n";
-        */
-        if(c.getCounters(Counters.QUEST) != 0) {
-        	counterText.append("Quest counters: "); 
-        	counterText.append(c.getCounters(Counters.QUEST));
-        	counterText.append("\r\n");
-        }
-        if(c.getCounters(Counters.SPORE) != 0) {
-        	counterText.append("Spore counters: "); 
-        	counterText.append(c.getCounters(Counters.SPORE));
-        	counterText.append("\r\n");
-        }
-        if(c.getCounters(Counters.TIME) != 0) {
-        	counterText.append("Time counters: "); 
-        	counterText.append(c.getCounters(Counters.TIME));
-        	counterText.append("\r\n");
-        }
-        
-        String chosenTypeText = "";
-        if(c.getChosenType() != "") chosenTypeText = "(chosen type: " + c.getChosenType() + ")";
-       
-        String chosenColorText = "";
-        if(c.getChosenColor() != "") chosenColorText = "(chosen color: " + c.getChosenColor() + ")";
-        
-        String namedCardText = "";
-        if (c.getNamedCard() != "") namedCardText = "(named card: " + c.getNamedCard() + ")";
-        
-        String equippingText = "";
-        if(c.getEquipping().size() > 0) equippingText = "=Equipping " + c.getEquipping().get(0) + "=";
-        
-
-        StringBuilder equippedByText = new StringBuilder();
-        if(c.getEquippedBy().size() > 0) {
-            equippedByText.append("=Equipped by ");
-            equippedByText.append(c.getEquippedBy().get(0));
-            for(int i = 1; i < c.getEquippedBy().size(); i++) {
-            	equippedByText.append(", ");
-            	equippedByText.append(c.getEquippedBy().get(i));
-            }
-            equippedByText.append("=");
-        }
-        
-        String enchantingText = "";
-        if(c.getEnchanting().size() > 0) {
-            enchantingText = "*Enchanting " + c.getEnchanting().get(0) + "*";
-        }
-        
-        StringBuilder enchantedByText = new StringBuilder();
-        if(c.getEnchantedBy().size() > 0) {
-            enchantedByText.append("*Enchanted by ");
-            enchantedByText.append(c.getEnchantedBy().get(0));
-            for(int i = 1; i < c.getEnchantedBy().size(); i++) {
-                enchantedByText.append(", ");
-                enchantedByText.append(c.getEnchantedBy().get(i));
-            }
-            enchantedByText.append("*");
-        }
-        
-        String uncastableText = "";
-        if (c.isUnCastable())
-        	uncastableText = "This card can't be cast.";
-        
-        StringBuilder textBuilder = new StringBuilder();
-        textBuilder.append(tokenText);
-        textBuilder.append(c.getText());
-        textBuilder.append(counterText.toString());
-        textBuilder.append(chosenTypeText);
-        textBuilder.append(chosenColorText);
-        textBuilder.append(namedCardText);
-        textBuilder.append(equippingText);
-        textBuilder.append(equippedByText.toString());
-        textBuilder.append(enchantingText);
-        textBuilder.append(enchantedByText.toString());
-        textBuilder.append(uncastableText);
-        
-        if(!c.isFaceDown()) this.cdArea.setText(textBuilder.toString());
-        else this.cdArea.setText(tokenText + counterText.toString());
-        
-        cdPanel.setBorder(GuiDisplayUtil.getBorder(c));
-        cCardHQ = c;       
+    @Override
+    public Card getCard() {
+        return detail.getCard();
     }
-    public void updateCardDetailPicture(Card c)
-    {	
-    	String imageName = c.getImageName();
-    	if (c.isFaceDown())
-    		imageName = "Morph";
-    	
-    	if (imageName.equals(current_picture) /*&& !c.isBasicLand()*/)
-    		return;
-    		
-        //picture
-    	//System.out.println("UPDATING PICTURE!!! #:" + count++);
-    	/*
-    	current_picture = c.getImageName();
-        picturePanel.removeAll();
-        JPanel pic = GuiDisplayUtil.getPicture(c);
-        pic.setSize(300, 300);
-        picturePanel.add(pic);
-        picturePanel.revalidate();
-
-    	*/
-    	
-    	current_picture = imageName;
-    	
-    	BufferedImage srcImage = null;
-    	if(imageCache.containsKey(imageName))
-    		srcImage = imageCache.get(imageName);
-    	else {
-    		InputStream stream;
-			try {
-				stream = GuiDisplayUtil.getURL(c).openStream();
-				srcImage = arcane.ui.util.ImageUtil.getImage(stream);
-	    		imageCache.put(imageName, srcImage);
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    		
-    	}
-    	
-    	cardImagePanel.setImage(srcImage, null);
-		cardImagePanel.repaint();
-    	
-    	//System.out.println(picturePanel.getComponentCount());
-    }//updateCardDetail()
+    
+    @Override
+    public void setCard(Card card) {
+        detail.setCard(card);
+        picture.setCard(card);
+    }
     
     private void addObservers() {
         //Human Hand, Graveyard, and Library totals
@@ -779,8 +532,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
                         
                         @Override
                         public void mouseMoved(MouseEvent me) {
-                            GuiDisplay3.this.updateCardDetailText(cardPanel.getCard());
-                            GuiDisplay3.this.updateCardDetailPicture(cardPanel.getCard());
+                            setCard(cardPanel.getCard());
                         }//mouseMoved
                     });
                     
@@ -808,7 +560,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
                 Card c[] = pZone.getCards();
                 JPanel panel;
                 for(int i = 0; i < c.length; i++) {
-                    panel = GuiDisplayUtil.getCardPanel(c[i]);
+                    panel = new CardPanel(c[i]);
                     p.add(panel);
                 }
                 
@@ -892,7 +644,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     private void initComponents() {
         //Preparing the Frame
         setTitle(ForgeProps.getLocalized(LANG.PROGRAM_NAME));
-        if (!Gui_NewGame.useLAFFonts.isSelected()) setFont(new Font("Times New Roman", 0, 16));
+        if(!Gui_NewGame.useLAFFonts.isSelected()) setFont(new Font("Times New Roman", 0, 16));
         getContentPane().setLayout(new BorderLayout());
         addWindowListener(new WindowAdapter() {
             @Override
@@ -948,8 +700,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         
         //adding the individual parts
         
-        if (!Gui_NewGame.useLAFFonts.isSelected()) 
-        	initFonts(pane);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) initFonts(pane);
         
         initMsgYesNo(pane);
         initOpp(pane);
@@ -959,39 +710,29 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         initCardPicture(pane);
     }
     
-    private void initFonts(JPanel pane)
-    {
-    	messageArea.setFont(getFont());
-    	
-    	oppLifeLabel.setFont(lifeFont);
-    	
-    	oppPCLabel.setFont(statFont);
-    	oppLibraryLabel.setFont(statFont);
-    	
-    	oppHandValue.setFont(statFont);
-    	oppLibraryValue.setFont(statFont);
-    	oppRemovedValue.setFont(statFont);
-    	oppGraveValue.setFont(statFont);
-    	
-    	playerLifeLabel.setFont(lifeFont);
-    	playerPCLabel.setFont(statFont);
-    	
-    	playerHandValue.setFont(statFont);
-    	playerLibraryValue.setFont(statFont);
-    	playerRemovedValue.setFont(statFont);
-    	playerGraveValue.setFont(statFont);
-    	playerFBValue.setFont(statFont);
-    	
-    	combatArea.setFont(getFont());
-    	
-    	cdLabel1.setFont(getFont());
-    	cdLabel2.setFont(getFont());
-    	cdLabel3.setFont(getFont());
-    	cdLabel4.setFont(getFont());
-    	cdLabel5.setFont(getFont());
-    	cdLabel6.setFont(getFont());
-    	
-    	cdArea.setFont(getFont());
+    private void initFonts(JPanel pane) {
+        messageArea.setFont(getFont());
+        
+        oppLifeLabel.setFont(lifeFont);
+        
+        oppPCLabel.setFont(statFont);
+        oppLibraryLabel.setFont(statFont);
+        
+        oppHandValue.setFont(statFont);
+        oppLibraryValue.setFont(statFont);
+        oppRemovedValue.setFont(statFont);
+        oppGraveValue.setFont(statFont);
+        
+        playerLifeLabel.setFont(lifeFont);
+        playerPCLabel.setFont(statFont);
+        
+        playerHandValue.setFont(statFont);
+        playerLibraryValue.setFont(statFont);
+        playerRemovedValue.setFont(statFont);
+        playerGraveValue.setFont(statFont);
+        playerFBValue.setFont(statFont);
+        
+        combatArea.setFont(getFont());
     }
     
     private void initMsgYesNo(JPanel pane) {
@@ -1066,7 +807,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         oppGraveButton.setText((String) COMPUTER_GRAVEYARD_ACTION.getValue("buttonText"));
         oppGraveButton.setMargin(new Insets(0, 0, 0, 0));
         oppGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
-        if(!Gui_NewGame.useLAFFonts.isSelected()) oppGraveButton.setFont(statFont); 
+        if(!Gui_NewGame.useLAFFonts.isSelected()) oppGraveButton.setFont(statFont);
         
 
         JPanel gravePanel = new JPanel(new BorderLayout());
@@ -1140,7 +881,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         JButton playerGraveButton = new JButton(HUMAN_GRAVEYARD_ACTION);
         playerGraveButton.setText((String) HUMAN_GRAVEYARD_ACTION.getValue("buttonText"));
         playerGraveButton.setMargin(new Insets(0, 0, 0, 0));
-        playerGraveButton.setHorizontalAlignment(SwingConstants.TRAILING); 
+        playerGraveButton.setHorizontalAlignment(SwingConstants.TRAILING);
         if(!Gui_NewGame.useLAFFonts.isSelected()) playerGraveButton.setFont(statFont);
         
 
@@ -1162,7 +903,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         playerRemovedButton.setMargin(new Insets(0, 0, 0, 0));
         //removedButton.setHorizontalAlignment(SwingConstants.TRAILING);
         if(!Gui_NewGame.useLAFFonts.isSelected()) playerRemovedButton.setFont(statFont);
-
+        
         playerHandValue.setHorizontalAlignment(SwingConstants.LEADING);
         playerLibraryValue.setHorizontalAlignment(SwingConstants.LEADING);
         playerGraveValue.setHorizontalAlignment(SwingConstants.LEADING);
@@ -1209,69 +950,8 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     }
     
     private void initCardPicture(JPanel pane) {
-        //cdLabel1.setFont(getFont());
-        cdLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        cdLabel1.setText("jLabel3");
-        
-        //cdLabel2.setFont(getFont());
-        cdLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-        cdLabel2.setText("jLabel4");
-        
-        //cdLabel3.setFont(getFont());
-        cdLabel3.setHorizontalAlignment(SwingConstants.CENTER);
-//~        cdLabel3.setText("jLabel5");
-        
-        //cdLabel4.setFont(getFont());
-//~        cdLabel4.setText("jLabel6");
-        
-        //cdLabel5.setFont(getFont());
-//~        cdLabel5.setText("jLabel7");
-        
-        //cdLabel6.setFont(getFont());
-//~        cdLabel6.setText("jLabel8");
-        
-        JPanel cdLabels = new JPanel(new GridLayout(6, 0, 0, 5));
-        cdLabels.add(cdLabel1);
-        cdLabels.add(cdLabel2);
-        cdLabels.add(cdLabel3);
-        cdLabels.add(cdLabel4);
-        cdLabels.add(cdLabel6);
-        cdLabels.add(cdLabel5);
-        //cdLabels.setBackground(c1);
-        
-        //StyledEditorKit se = new StyledEditorKit();
-        
-        //cdArea.setEditorKit(new StyledEditorKit());
-        //cdArea.setFont(getFont());
-        cdArea.setLineWrap(true);
-        cdArea.setWrapStyleWord(true);
-        
-        JScrollPane cdPane = new JScrollPane(cdArea);
-        
-        cdPanel.setLayout(new GridLayout(2, 1, 0, 5));
-        cdPanel.setBorder(new EtchedBorder());
-        cdPanel.add(cdLabels);
-        cdPanel.add(cdPane);
-        pane.add(new ExternalPanel(cdPanel), "detail");
-        
-        //~ picturePanel.setBorder(new EtchedBorder());
-        
-        /*
-        picturePanel.setLayout(new BoxLayout(picturePanel, BoxLayout.Y_AXIS));
-        picturePanel.setBackground(c1);
-        picturePanel.addMouseListener(new CustomListener());
-        pane.add(new ExternalPanel(picturePanel), "picture");
-        */
-        
-        cardImagePanel.setScalingBlur(false); //use blured image if scaling down more than 50%
-        //cardImagePanel.setScaleLarger(false); //upscale if needed true
-        cardImagePanel.setScalingType(ScalingType.bicubic); // type of scaling bicubic has good quality / speed ratio
-        cardImagePanel.setScalingMultiPassType(MultipassType.none);
-        
-        cardImagePanel.setLayout(new BoxLayout(cardImagePanel, BoxLayout.Y_AXIS));
-        cardImagePanel.setBackground(c1);
-        cardImagePanel.addMouseListener(new CustomListener());
-        pane.add(new ExternalPanel(cardImagePanel), "picture");
+        pane.add(new ExternalPanel(detail), "detail");
+        pane.add(new ExternalPanel(picture), "picture");
     }
     
     private void cancelButtonActionPerformed(ActionEvent evt) {
@@ -1293,54 +973,42 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     
     public boolean stopEOT() {
         return eotCheckboxForMenu.isSelected();
-    }   
+    }
     
-    public static JCheckBoxMenuItem eotCheckboxForMenu  = new JCheckBoxMenuItem("Stop at End of Turn", true);
-    public static JCheckBoxMenuItem playsoundCheckboxForMenu  = new JCheckBoxMenuItem("Play Sound", false);
+    public static JCheckBoxMenuItem eotCheckboxForMenu       = new JCheckBoxMenuItem("Stop at End of Turn", true);
+    public static JCheckBoxMenuItem playsoundCheckboxForMenu = new JCheckBoxMenuItem("Play Sound", false);
     
-    MultiSplitPane                  pane                = new MultiSplitPane();
-    JButton                         cancelButton        = new JButton();
-    JButton                         okButton            = new JButton();
-    JTextArea                       messageArea         = new JTextArea(1, 10);
-    JTextArea                       cdArea              = new JTextArea(4, 12);
-    //JEditorPane cdArea 			  = new JEditorPane();
-    JTextArea                       combatArea          = new JTextArea();
-    JPanel                          stackPanel          = new JPanel();
-    JPanel                          oppLandPanel        = new JPanel();
-    JPanel                          oppCreaturePanel    = new JPanel();
-    JPanel                          playerCreaturePanel = new JPanel();
-    JPanel                          playerLandPanel     = new JPanel();
-    //JPanel    playerLandPanel 	  = new ImageJPanel("forest.jpg");
-    //JPanel playerLandPanel = new BackgroundPanel("bg1.jpg");
-    JPanel                          playerHandPanel     = new JPanel();
-    //JPanel playerHandPanel = new BackgroundPanel("bg2.jpg");
-    JPanel                          cdPanel             = new JPanel();
-    //JPanel    picturePanel        = new JPanel();
-   public  JPanel                          picturePanel        = new JPanel();
-   
-    JLabel                          oppLifeLabel        = new JLabel();
-    JLabel                          playerLifeLabel     = new JLabel();
-    JLabel 							oppPCLabel			= new JLabel();
-    JLabel							playerPCLabel		= new JLabel();
-    JLabel                          cdLabel1            = new JLabel();
-    JLabel                          cdLabel2            = new JLabel();
-    JLabel                          cdLabel3            = new JLabel();
-    JLabel                          cdLabel4            = new JLabel();
-    JLabel                          cdLabel5            = new JLabel();
-    JLabel                          cdLabel6            = new JLabel();
-    JLabel 							oppLibraryLabel 	= new JLabel(ForgeProps.getLocalized(COMPUTER_LIBRARY.TITLE), SwingConstants.TRAILING);
-    JLabel                          oppHandValue        = new JLabel();
-    JLabel                          oppLibraryValue     = new JLabel();
-    JLabel                          oppGraveValue       = new JLabel();
-    JLabel                          oppRemovedValue     = new JLabel();
-    JLabel                          playerHandValue     = new JLabel();
-    JLabel                          playerLibraryValue  = new JLabel();
-    JLabel                          playerGraveValue    = new JLabel();
-    JLabel                          playerFBValue       = new JLabel();
-    JLabel                          playerRemovedValue  = new JLabel();
+    MultiSplitPane                  pane                     = new MultiSplitPane();
+    JButton                         cancelButton             = new JButton();
+    JButton                         okButton                 = new JButton();
+    JTextArea                       messageArea              = new JTextArea(1, 10);
+    JTextArea                       combatArea               = new JTextArea();
+    JPanel                          stackPanel               = new JPanel();
+    JPanel                          oppLandPanel             = new JPanel();
+    JPanel                          oppCreaturePanel         = new JPanel();
+    JPanel                          playerCreaturePanel      = new JPanel();
+    JPanel                          playerLandPanel          = new JPanel();
+    JPanel                          playerHandPanel          = new JPanel();
+    JPanel                          cdPanel                  = new JPanel();
+    JLabel                          oppLifeLabel             = new JLabel();
+    JLabel                          playerLifeLabel          = new JLabel();
+    JLabel                          oppPCLabel               = new JLabel();
+    JLabel                          playerPCLabel            = new JLabel();
+    JLabel                          oppLibraryLabel          = new JLabel(
+                                                                     ForgeProps.getLocalized(COMPUTER_LIBRARY.TITLE),
+                                                                     SwingConstants.TRAILING);
+    JLabel                          oppHandValue             = new JLabel();
+    JLabel                          oppLibraryValue          = new JLabel();
+    JLabel                          oppGraveValue            = new JLabel();
+    JLabel                          oppRemovedValue          = new JLabel();
+    JLabel                          playerHandValue          = new JLabel();
+    JLabel                          playerLibraryValue       = new JLabel();
+    JLabel                          playerGraveValue         = new JLabel();
+    JLabel                          playerFBValue            = new JLabel();
+    JLabel                          playerRemovedValue       = new JLabel();
     
-    
-    ScaledImagePanel cardImagePanel = new ScaledImagePanel(); // < our JPanel
+    CardDetailPanel                 detail                   = new CardDetailPanel(null);
+    CardPicturePanel                picture                  = new CardPicturePanel(null);
     
     private class ZoneAction extends ForgeAction {
         private static final long serialVersionUID = -5822976087772388839L;
@@ -1391,71 +1059,51 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     }
     
     
-    public class CustomListener implements MouseListener {
-
-        public void mouseClicked(MouseEvent e) {
-        	        	
-        }
-
-        public void mouseEntered(MouseEvent e) { 
-        	       	
-        	if (picturePanel.getComponentCount()!=0){
-        			if(cCardHQ.isFaceDown()==true && cCardHQ.getOwner()=="Computer"){
-        			return;	
-        			}else{
-        			 if(GuiDisplayUtil.IsPictureHQExists(cCardHQ)){    
-        				int cWidth = 0;
-						try {
-							cWidth = GuiDisplayUtil.getPictureHQwidth(cCardHQ);
-						} catch (IOException e2) {
-							
-							e2.printStackTrace();
-						}
-        				int cHeight = 0;
-						try {
-							cHeight = GuiDisplayUtil.getPictureHQheight(cCardHQ);
-						} catch (IOException e2) {
-							
-							e2.printStackTrace();
-						}
-        		 
-						
-						if(cWidth>=312 &&cHeight >=445){ 
-							
-							GUI_PictureHQ hq = new GUI_PictureHQ(GuiDisplay3.this,cCardHQ);
-						try {
-							hq.letsGo(GuiDisplay3.this, cCardHQ);							
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-						}
-							
-        		}}}
-      	
-        }
-
-        public void mouseExited(MouseEvent e) {             
-            
-        }
-
-        public void mousePressed(MouseEvent e) {             
-             
-        }
-
-        public void mouseReleased(MouseEvent e) {           
-             
-        }
-   }
+    public class CustomListener extends MouseAdapter {
+//        TODO reenable
+//        @Override
+//        public void mouseEntered(MouseEvent e) {
+//            if(picturePanel.getComponentCount() != 0) {
+//                if(cCardHQ.isFaceDown() == true && cCardHQ.getOwner() == "Computer") {
+//                    return;
+//                } else {
+//                    if(GuiDisplayUtil.IsPictureHQExists(cCardHQ)) {
+//                        int cWidth = 0;
+//                        try {
+//                            cWidth = GuiDisplayUtil.getPictureHQwidth(cCardHQ);
+//                        } catch(IOException e2) {
+//                            
+//                            e2.printStackTrace();
+//                        }
+//                        int cHeight = 0;
+//                        try {
+//                            cHeight = GuiDisplayUtil.getPictureHQheight(cCardHQ);
+//                        } catch(IOException e2) {
+//                            
+//                            e2.printStackTrace();
+//                        }
+//                        
+//
+//                        if(cWidth >= 312 && cHeight >= 445) {
+//                            
+//                            GUI_PictureHQ hq = new GUI_PictureHQ(GuiDisplay3.this, cCardHQ);
+//                            try {
+//                                hq.letsGo(GuiDisplay3.this, cCardHQ);
+//                            } catch(IOException e1) {
+//                                e1.printStackTrace();
+//                            }
+//                        }
+//                        
+//                    }
+//                }
+//            }
+//        }
+    }
     
-    
-    
+
 }
 
 //very hacky
-
-
-
-
 
 
 class Gui_MultipleBlockers3 extends JFrame {
@@ -1463,7 +1111,7 @@ class Gui_MultipleBlockers3 extends JFrame {
     
     private int               assignDamage;
     private Card              att;
-    private GuiDisplay3       guiDisplay;
+    private CardContainer     guiDisplay;
     
     private BorderLayout      borderLayout1    = new BorderLayout();
     private JPanel            mainPanel        = new JPanel();
@@ -1485,7 +1133,7 @@ class Gui_MultipleBlockers3 extends JFrame {
             new Gui_MultipleBlockers3(null, list, i + 1, null);
     }
     
-    Gui_MultipleBlockers3(Card attacker, CardList creatureList, int damage, GuiDisplay3 display) {
+    Gui_MultipleBlockers3(Card attacker, CardList creatureList, int damage, CardContainer display) {
         this();
         assignDamage = damage;
         updateDamageLabel();//update user message about assigning damage
@@ -1493,7 +1141,7 @@ class Gui_MultipleBlockers3 extends JFrame {
         att = attacker;
         
         for(int i = 0; i < creatureList.size(); i++)
-            creaturePanel.add(GuiDisplayUtil.getCardPanel(creatureList.get(i)));
+            creaturePanel.add(new CardPanel(creatureList.get(i)));
         
 
         JDialog dialog = new JDialog(this, true);
@@ -1549,17 +1197,16 @@ class Gui_MultipleBlockers3 extends JFrame {
     void creaturePanel_mousePressed(MouseEvent e) {
         Object o = creaturePanel.getComponentAt(e.getPoint());
         if(o instanceof CardPanel) {
-            CardPanel cardPanel = (CardPanel) o;
+            CardContainer cardPanel = (CardContainer) o;
             Card c = cardPanel.getCard();
             //c.setAssignedDamage(c.getAssignedDamage() + 1);
             CardList cl = new CardList();
             cl.add(att);
-           
-            AllZone.GameAction.addAssignedDamage(c, att, /*c.getTotalAssignedDamage() +*/ 1);
+            
+            AllZone.GameAction.addAssignedDamage(c, att, /*c.getTotalAssignedDamage() +*/1);
             
             if(guiDisplay != null) {
-            	guiDisplay.updateCardDetailText(c);
-            	guiDisplay.updateCardDetailPicture(c);
+                guiDisplay.setCard(c);
             }
         }
         //reduce damage, show new user message, exit if necessary
@@ -1575,17 +1222,12 @@ class Gui_MultipleBlockers3 extends JFrame {
     void creaturePanel_mouseMoved(MouseEvent e) {
         Object o = creaturePanel.getComponentAt(e.getPoint());
         if(o instanceof CardPanel) {
-            CardPanel cardPanel = (CardPanel) o;
+            CardContainer cardPanel = (CardContainer) o;
             Card c = cardPanel.getCard();
             
-            if(guiDisplay != null) { 
-            	guiDisplay.updateCardDetailText(c);
-            	guiDisplay.updateCardDetailPicture(c);
+            if(guiDisplay != null) {
+                guiDisplay.setCard(c);
             }
-            
         }
     }
-    
-   
-    
 }

@@ -1,4 +1,7 @@
+
 package forge;
+
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -199,8 +202,9 @@ public class Gui_WinLose extends JFrame {
         dispose();
         
         //clear Image caches, so the program doesn't get slower and slower
-        ImageUtil.rotatedCache.clear();
-        ImageCache.cache.clear();
+        //not needed with soft values - will shrink as needed
+//        ImageUtil.rotatedCache.clear();
+//        ImageCache.cache.clear();
     }
     
     void this_windowClosing(WindowEvent e) {

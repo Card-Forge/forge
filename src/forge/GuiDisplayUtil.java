@@ -1,140 +1,96 @@
+
 package forge;
+
+
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import javax.imageio.*;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-//import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
-import forge.properties.ForgeProps;
+import forge.gui.game.CardPanel;
 import forge.properties.NewConstants;
 
 
-
 public class GuiDisplayUtil implements NewConstants {
-	
-	
-    public static JPanel getCardPanel(Card c) {
-        return getCardPanel(c, c.getName());
+    public static MouseMotionListener getCardDetailMouse(final CardContainer visual) {
+        return new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent me) {
+                JPanel panel = (JPanel) me.getSource();
+                Object o = panel.getComponentAt(me.getPoint());
+                
+                if((o != null) && (o instanceof CardPanel)) {
+                    CardContainer cardPanel = (CardContainer) o;
+                    visual.setCard(cardPanel.getCard());
+                }
+            }//mouseMoved
+        };
     }
     
-    public static JPanel getCardPanel(Card c, String name) {
-        JPanel panel = new CardPanel(c);
-        panel.setBorder(getBorder(c));
-        Image cardImage = ImageCache.getImage(c);
-        
-        if(cardImage != null) {
-            
-            panel.setLayout(new GridLayout(1, 1));
-            JLabel imageLabel = new JLabel();
-            
-
-            if(c.isBasicLand()) {
-                String basicLandSuffix = "";
-                if(c.getRandomPicture() != 0) {
-                    basicLandSuffix = Integer.toString(c.getRandomPicture());
-                    name += basicLandSuffix;
-                }
-            } else if(c.isFaceDown()) name = "Morph";
-            
-            if(c.isTapped()) {
-                cardImage = ImageUtil.getTappedImage(cardImage, name);
-            }
-            imageLabel.setIcon(new ImageIcon(cardImage));
-            panel.add(imageLabel);
-        } else {
-            
-            panel.setLayout(new GridLayout(4, 1));
-            
-            if(c.isFaceDown()) name = "Morph";
-            
-            panel.add(new JLabel(name + "   " + c.getManaCost()));
-            panel.add(new JLabel(formatCardType(c)));
-            
-            JPanel p1 = new JPanel();
-            panel.add(p1);
-            JLabel tapLabel = new JLabel();
-            p1.add(tapLabel);
-            
-            if(c.isTapped()) {
-                if(!c.isCreature()) {
-                    panel.setLayout(new GridLayout(3, 1));
-                }
+    /**
+     * Returns the listener that updates the card preview panel
+     */
+    public static MouseMotionListener getCardDetailMouse(final GuiDisplay2 visual) {
+        return new MouseAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent me) {
+                JPanel panel = (JPanel) me.getSource();
+                Object o = panel.getComponentAt(me.getPoint());
                 
-                p1.setBackground(Color.white);
-                tapLabel.setText("Tapped");
-            }
-            String stats = c.getNetAttack() + " / " + c.getNetDefense();
+                if((o != null) && (o instanceof CardPanel)) {
+                    CardContainer cardPanel = (CardContainer) o;
+                    visual.setCard(cardPanel.getCard());
+                }
+            }//mouseMoved
             
-            if(c.isCreature()) panel.add(new JLabel(stats));
-        }
-        
-        return panel;
-    }//getCardPanel(Card c, String name)
+            /**
+             * Could be added to the card panels for the same effect
+             */
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                if(!(e.getSource() instanceof CardPanel)) return;
+                CardContainer panel = (CardContainer) e.getSource();
+                visual.setCard(panel.getCard());
+            }
+        };
+    }
     
     public static Border getBorder(Card card) {
+        if(card == null) return BorderFactory.createEmptyBorder(2, 2, 2, 2);
         Color color;
-/*
-        if(card.isArtifact()) color = Color.gray;
-        else if(CardUtil.getColor(card).equals(Constant.Color.Black) || card.getName().equals("Swamp")
-                || card.getName().equals("Bog")) color = Color.black;
-        else if(CardUtil.getColor(card).equals(Constant.Color.Green) || card.getName().equals("Forest")
-                || card.getName().equals("Grass")) color = new Color(0, 220, 39);
-        else if(CardUtil.getColor(card).equals(Constant.Color.White) || card.getName().equals("Plains")
-                || card.getName().equals("White Sand")) color = Color.white;
-        else if(CardUtil.getColor(card).equals(Constant.Color.Red) || card.getName().equals("Mountain")
-                || card.getName().equals("Rock")) color = Color.red;
-        else if(CardUtil.getColor(card).equals(Constant.Color.Blue) || card.getName().equals("Island")
-                || card.getName().equals("Underwater")) color = Color.blue;
-        else color = Color.black;
+        if(CardUtil.getColors(card).size() > 1) color = Color.orange;
+        else if((CardUtil.getColor(card).equals(Constant.Color.Black) && (!card.getKeyword().contains(
+                card.getName() + " is colorless.")))
+                || (card.getIntrinsicKeyword().contains(card.getName() + " is black."))) color = Color.black;
+        else if((CardUtil.getColor(card).equals(Constant.Color.Green) && (!card.getKeyword().contains(
+                card.getName() + " is colorless.")))
+                || (card.getIntrinsicKeyword().contains(card.getName() + " is green."))) color = new Color(0, 220,
+                39);
+        else if((CardUtil.getColor(card).equals(Constant.Color.White) && (!card.getKeyword().contains(
+                card.getName() + " is colorless.")))
+                || (card.getIntrinsicKeyword().contains(card.getName() + " is white."))) color = Color.white;
+        else if((CardUtil.getColor(card).equals(Constant.Color.Red) && (!card.getKeyword().contains(
+                card.getName() + " is colorless.")))
+                || (card.getIntrinsicKeyword().contains(card.getName() + " is red."))) color = Color.red;
+        else if((CardUtil.getColor(card).equals(Constant.Color.Blue) && (!card.getKeyword().contains(
+                card.getName() + " is colorless.")))
+                || (card.getIntrinsicKeyword().contains(card.getName() + " is blue."))) color = Color.blue;
+        else if(CardUtil.getColor(card).equals(Constant.Color.Colorless)
+                || (card.getKeyword().contains(card.getName() + " is colorless."))) color = Color.gray;
+        else color = new Color(200, 0, 230); // If your card has a violet border, something is wrong
         
-        if(CardUtil.getColors(card).size() != 1) {
-            color = Color.orange;
-        }
-*/
-        if(CardUtil.getColors(card).size() > 1)
-            color = Color.orange;
-          else if((CardUtil.getColor(card).equals(Constant.Color.Black) && (!card.getKeyword().contains(card.getName() + " is colorless.")))
-              || (card.getIntrinsicKeyword().contains(card.getName() + " is black."))) color = Color.black;
-          else if((CardUtil.getColor(card).equals(Constant.Color.Green) && (!card.getKeyword().contains(card.getName() + " is colorless.")))
-          	|| (card.getIntrinsicKeyword().contains(card.getName() + " is green."))) color = new Color(0, 220, 39);
-          else if((CardUtil.getColor(card).equals(Constant.Color.White) && (!card.getKeyword().contains(card.getName() + " is colorless.")))
-          	|| (card.getIntrinsicKeyword().contains(card.getName() + " is white."))) color = Color.white;
-          else if((CardUtil.getColor(card).equals(Constant.Color.Red) && (!card.getKeyword().contains(card.getName() + " is colorless.")))
-          	|| (card.getIntrinsicKeyword().contains(card.getName() + " is red."))) color = Color.red;
-          else if((CardUtil.getColor(card).equals(Constant.Color.Blue) && (!card.getKeyword().contains(card.getName() + " is colorless.")))
-          	|| (card.getIntrinsicKeyword().contains(card.getName() + " is blue."))) color = Color.blue;
-          else if(CardUtil.getColor(card).equals(Constant.Color.Colorless) || (card.getKeyword().contains(card.getName() + " is colorless.")))
-              color = Color.gray;
-          else color = new Color(200, 0, 230);	// If your card has a violet border, something is wrong
-        
-//      if(!card.isArtifact()) {
-        
-        if(!CardUtil.getColor(card).equals(Constant.Color.Colorless) || (!card.getKeyword().contains(card.getName() + " is colorless."))) {
+        if(!CardUtil.getColor(card).equals(Constant.Color.Colorless)
+                || (!card.getKeyword().contains(card.getName() + " is colorless."))) {
             int r = color.getRed();
             int g = color.getGreen();
             int b = color.getBlue();
@@ -150,46 +106,12 @@ public class GuiDisplayUtil implements NewConstants {
             b = Math.max(0, b);
             
             color = new Color(r, g, b);
-        }
-        //~
-        
-        return BorderFactory.createLineBorder(color, 2);
+            
+            return BorderFactory.createLineBorder(color, 2);
+        } else return BorderFactory.createLineBorder(Color.gray, 2);
     }
-    
-    public static MouseMotionListener getCardDetailMouse(final GuiDisplay3 visual) {
-        return new MouseMotionAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent me) {
-                JPanel panel = (JPanel) me.getSource();
-                Object o = panel.getComponentAt(me.getPoint());
-                
-                if((o != null) && (o instanceof CardPanel)) {
-                    CardPanel cardPanel = (CardPanel) o;
-                    visual.updateCardDetailText(cardPanel.getCard());
-                    visual.updateCardDetailPicture(cardPanel.getCard());
-                }
-            }//mouseMoved
-        };
-    }
-    
-    public static MouseMotionListener getCardDetailMouse(final GuiDisplay2 visual) {
-        return new MouseMotionAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent me) {
-                JPanel panel = (JPanel) me.getSource();
-                Object o = panel.getComponentAt(me.getPoint());
-                
-                if((o != null) && (o instanceof CardPanel)) {
-                    CardPanel cardPanel = (CardPanel) o;
-                    visual.updateCardDetail(cardPanel.getCard());
-                }
-            }//mouseMoved
-        };
-    }
-    
     
     public static String formatCardType(Card card) {
-        
         ArrayList<String> list = card.getType();
         StringBuilder sb = new StringBuilder();
         String s = "";
@@ -204,307 +126,13 @@ public class GuiDisplayUtil implements NewConstants {
         return sb.toString();
     }
     
-    public static ImageIcon getImageIcon(Card c)
-    {
-    	String suffix = ".jpg";
-        String filename = "";
-        if(!c.isFaceDown()) {
-            String basicLandSuffix = "";
-            if(c.isBasicLand()) {
-                if(c.getRandomPicture() != 0) basicLandSuffix = Integer.toString(c.getRandomPicture());
-            }
-            
-            filename = cleanString(c.getImageName()) + basicLandSuffix + suffix;
-        } else filename = "morph" + suffix;
-        
-        String loc = "";
-        if (!c.isToken())
-        	loc = IMAGE_BASE;
-        else
-        	loc = IMAGE_TOKEN;
-        
-        File file = new File(ForgeProps.getFile(loc), filename);
-        
-        //try current directory
-        if(!file.exists()) {
-            filename = cleanString(c.getName()) + suffix;
-            file = new File(filename);
-        }
-        
-
-        if(file.exists()) {
-	        if(c.isFaceDown()){
-	        	 return new ImageIcon(filename);     	
-	        }else{
-	        	int cWidth = 0;
-	        	int cHeight = 0;
-	        	try {
-					cWidth = GuiDisplayUtil.getPictureHQwidth(c);
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
-	        	
-				try {
-					cHeight = GuiDisplayUtil.getPictureHQheight(c);
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
-				
-	        	if(cWidth<=312 || cHeight<=445) {     	
-	            return new ImageIcon(filename);
-	        	}else{
-	        	return new ImageIcon(filename);	
-	        	}
-	        	}
-        }
-        /*else {
-            ImageIcon i = new ImageIcon();
-            
-            JTextArea text = new JTextArea("\r\n\r\n" + filename, 10, 15);
-            Font f = text.getFont();
-            f = f.deriveFont(f.getSize() + 2.0f);
-            text.setFont(f);
-            text.setBackground(p.getBackground());
-            
-            i.add(text);
-            
-            if(c.isToken()) return new ImageIcon();
-            
-            return i;
-        }//else
-        */
-        return new ImageIcon();
-    }
-    
-    @SuppressWarnings("deprecation")
-	public static URL getURL(Card c)
-    {
-    	File dir1 = new File (".");
-    	
-    	/*
-    	try {
-			System.out.println ("Current dir : " + dir1.getCanonicalPath());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-
-    	String path = "";
-    	try {
-			path = dir1.getCanonicalPath();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	String suffix = ".jpg";
-        String filename = "";
-        if(!c.isFaceDown()) {
-            String basicLandSuffix = "";
-            if(c.isBasicLand()) {
-                if(c.getRandomPicture() != 0) { 
-                	basicLandSuffix = Integer.toString(c.getRandomPicture());
-                	//c.setImageName(c.getImageName() + basicLandSuffix);
-                }
-
-            }
-            filename = cleanString(c.getImageName())+ basicLandSuffix + suffix;
-        } else filename = "morph" + suffix;
-        
-        String loc = "";
-        if (!c.isToken())
-        	loc = IMAGE_BASE;
-        else
-        	loc = IMAGE_TOKEN;
-        
-        String fileString = path + File.separator + ForgeProps.getFile(loc) + File.separator + filename;
-        //System.out.println(fileString);
-        File file = new File(fileString);
-        
-        URL url = null; try { url = file.toURL(); return url; } catch (MalformedURLException e) { } 
-        return null;
-        
-    }
-    
-    public static InputStream getPictureStream(Card c)
-    {
-    	String suffix = ".jpg";
-        String filename = "";
-        if(!c.isFaceDown()) {
-            String basicLandSuffix = "";
-            if(c.isBasicLand()) {
-                if(c.getRandomPicture() != 0) { 
-                	basicLandSuffix = Integer.toString(c.getRandomPicture());
-                	//c.setImageName(c.getImageName() + basicLandSuffix);
-                }
-
-            }
-            filename = cleanString(c.getImageName())+ basicLandSuffix + suffix;
-        } else filename = "morph" + suffix;
-        
-        String loc = "";
-        if (!c.isToken())
-        	loc = IMAGE_BASE;
-        else
-        	loc = IMAGE_TOKEN;
-        
-        String fileString = ForgeProps.getFile(loc) + File.separator + filename;
-    	
-        try {
-			BufferedInputStream is = new BufferedInputStream(new FileInputStream(fileString));
-			return is;
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-    }
-    
-    public static JPanel getPicture(Card c) {
-        if(AllZone.NameChanger.shouldChangeCardName()) return new JPanel();
-        
-        String suffix = ".jpg";
-        String filename = "";
-        if(!c.isFaceDown()) {
-            String basicLandSuffix = "";
-            if(c.isBasicLand()) {
-                if(c.getRandomPicture() != 0) { 
-                	basicLandSuffix = Integer.toString(c.getRandomPicture());
-                	//c.setImageName(c.getImageName() + basicLandSuffix);
-                }
-
-            }
-            filename = cleanString(c.getImageName())+ basicLandSuffix + suffix;
-        } else filename = "morph" + suffix;
-        
-        String loc = "";
-        if (!c.isToken())
-        	loc = IMAGE_BASE;
-        else
-        	loc = IMAGE_TOKEN;
-        
-        File file = new File(ForgeProps.getFile(loc), filename);
-        
-        //try current directory
-        if(!file.exists()) {
-            filename = cleanString(c.getName()) + suffix;
-            file = new File(filename);
-        }
-        
-
-        if(file.exists()) {
-	        if(c.isFaceDown()){
-	        	 return new PicturePanel(file);     	
-	        }else{
-	        	int cWidth = 0;
-	        	int cHeight = 0;
-	        	try {
-					cWidth = GuiDisplayUtil.getPictureHQwidth(c);
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
-	        	
-				try {
-					cHeight = GuiDisplayUtil.getPictureHQheight(c);
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
-				
-	        	if(cWidth<=312 || cHeight<=445) {     	
-	            return new PicturePanel(file);
-	        	}else{
-	        	return new PicturePanelResize(file);	
-	        	}
-	        	}
-        } else {
-            JPanel p = new JPanel();
-            
-            JTextArea text = new JTextArea("\r\n\r\n" + filename, 10, 15);
-            Font f = text.getFont();
-            f = f.deriveFont(f.getSize() + 2.0f);
-            text.setFont(f);
-            text.setBackground(p.getBackground());
-            
-            p.add(text);
-            
-            if(c.isToken()) return new JPanel();
-            
-            return p;
-        }//else
-    }//getPicture()
-    
-    public static PicturePanel getPictureHQ(Card c) {
-    	return new PicturePanel(getPictureHQFile(c));
-    }
-    
-    /**
-     * Get picture location
-     * @param c card to return picture location for
-     * @return File
-     */
-    public static File getPictureHQFile(Card c) {
-    	String loc = "";
-        if (c.isToken()== false)
-        	loc = IMAGE_BASE;
-        else
-        	loc = IMAGE_TOKEN;
-        String filename = GuiDisplayUtil.cleanString(c.getImageName()) + ".jpg";
-        File file = new File(ForgeProps.getFile(loc), filename);
-        return file;
-    }
-    
-    public static int getPictureHQheight(Card c) throws IOException{
-    	String loc = "";
-        if (c.isToken()== false)
-        	loc = IMAGE_BASE;
-        else
-        	loc = IMAGE_TOKEN;
-        String filename = GuiDisplayUtil.cleanString(c.getImageName()) + ".jpg";
-        File file = new File(ForgeProps.getFile(loc), filename); 	  	
-    	BufferedImage a = ImageIO.read(file);
-    	return a.getHeight();
-    }
-    
-    public static int getPictureHQwidth(Card c) throws IOException{
-    	String loc = "";
-        if (c.isToken()== false)
-        	loc = IMAGE_BASE;
-        else
-        	loc = IMAGE_TOKEN;
-        String filename = GuiDisplayUtil.cleanString(c.getImageName()) + ".jpg";
-        File file = new File(ForgeProps.getFile(loc), filename);	  	
-    	BufferedImage a = ImageIO.read(file);
-    	return a.getWidth();
-    }
-    
-    public static boolean IsPictureHQExists(Card c) {
-    	String loc = "";
-        if (c.isToken()== false)
-        	loc = IMAGE_BASE;
-        else
-        	loc = IMAGE_TOKEN;
-        String filename = GuiDisplayUtil.cleanString(c.getImageName()) + ".jpg";
-        File file = new File(ForgeProps.getFile(loc), filename);
-    	if(file.exists()){
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
-    }
-    
-    
     public static String cleanString(String in) {
         StringBuffer out = new StringBuffer();
         char c;
         for(int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
             if(c == ' ' || c == '-') out.append('_');
-            else if(Character.isLetterOrDigit(c) || c=='_') {
+            else if(Character.isLetterOrDigit(c) || c == '_') {
                 out.append(c);
             }
         }
@@ -549,8 +177,8 @@ public class GuiDisplayUtil implements NewConstants {
         for(int i = 0; i < c.length; i++)
             if((!(c[i].isCreature() || c[i].isEnchantment() || c[i].isArtifact() || c[i].isPlaneswalker()) || (c[i].isLand()
                     && c[i].isArtifact() && !c[i].isCreature() && !c[i].isEnchantment()))
-                    && !AllZone.GameAction.isAttachee(c[i]) || (c[i].getName().startsWith("Mox") && !c[i].getName().equals("Mox Diamond")) )
-            	a.add(c[i]);
+                    && !AllZone.GameAction.isAttachee(c[i])
+                    || (c[i].getName().startsWith("Mox") && !c[i].getName().equals("Mox Diamond"))) a.add(c[i]);
         
         setupPanel(j, a, true);
     }
@@ -675,7 +303,7 @@ public class GuiDisplayUtil implements NewConstants {
                 JPanel addPanel;
                 c = list.get(i);
                 
-                addPanel = getCardPanel(c);
+                addPanel = new CardPanel(c);
                 
 
                 boolean startANewStack = false;
@@ -726,11 +354,9 @@ public class GuiDisplayUtil implements NewConstants {
                 	System.out.println("startANewStack: " + startANewStack);
                 }
                 */
-                if(c.isAura() && c.isEnchanting() && prevCard != null && prevCard instanceof ManaPool)
-                    startANewStack = true;
-                if(c instanceof ManaPool && prevCard instanceof ManaPool && prevCard.isSnow())
-                	startANewStack = false;
-
+                if(c.isAura() && c.isEnchanting() && prevCard != null && prevCard instanceof ManaPool) startANewStack = true;
+                if(c instanceof ManaPool && prevCard instanceof ManaPool && prevCard.isSnow()) startANewStack = false;
+                
                 if(startANewStack) {
                     setupConnectedCards(connectedCards);
                     connectedCards.clear();
@@ -798,7 +424,7 @@ public class GuiDisplayUtil implements NewConstants {
                 else
                   addPanel = getCardPanel(c);
                   */
-                addPanel = getCardPanel(c);
+                addPanel = new CardPanel(c);
                 
                 p.add(addPanel);
             }
@@ -865,7 +491,7 @@ public class GuiDisplayUtil implements NewConstants {
             for(int i = 0; i < list.size(); i++) {
                 JPanel addPanel;
                 c = list.get(i);
-                addPanel = getCardPanel(c);
+                addPanel = new CardPanel(c);
                 
                 boolean startANewStack = false;
                 
@@ -889,7 +515,7 @@ public class GuiDisplayUtil implements NewConstants {
                     startANewStack = true;
                 }
                 
-                
+
                 if((c.isEquipment() || c.isAura()) && (c.isEquipping() || c.isEnchanting())
                         && !nextEquippedEnchanted) startANewStack = false;
                 else if((c.isEquipment() || c.isAura()) && (c.isEquipping() || c.isEnchanting())) {
@@ -908,8 +534,8 @@ public class GuiDisplayUtil implements NewConstants {
                 else if(prevCard != null && c.isCreature() && prevCard.isCreature()
                         && !prevCard.getName().equals(c.getName())) startANewStack = true;
                 
-                if( ( (c.isAura() && c.isEnchanting()) || (c.isEquipment() && c.isEquipping()) ) && prevCard != null && prevCard.isPlaneswalker())
-                    startANewStack = true;
+                if(((c.isAura() && c.isEnchanting()) || (c.isEquipment() && c.isEquipping())) && prevCard != null
+                        && prevCard.isPlaneswalker()) startANewStack = true;
                 
                 if(startANewStack) {
                     setupConnectedCards(connectedCards);
@@ -970,7 +596,7 @@ public class GuiDisplayUtil implements NewConstants {
             JPanel addPanel;
             for(int i = 0; i < list.size(); i++) {
                 c = list.get(i);
-                addPanel = getCardPanel(c);
+                addPanel = new CardPanel(c);
                 
                 p.add(addPanel);
             }
@@ -1146,11 +772,12 @@ public class GuiDisplayUtil implements NewConstants {
         
         return ret;
     }
+    
     public static ArrayList<Card> getManaPools(ArrayList<Card> cards) {
         ArrayList<Card> ret = new ArrayList<Card>();
         for(Card c:cards) {
             if(c instanceof ManaPool && !c.isSnow()) {
-            	ret.add(((ManaPool)c).smp);
+                ret.add(((ManaPool) c).smp);
                 ret.add(c);
             }
             
@@ -1169,8 +796,9 @@ public class GuiDisplayUtil implements NewConstants {
           return true;
         }
         */
-        if(c.isLand() || (c.getName().startsWith("Mox") && !c.getName().equals("Mox Diamond") )|| (c.isLand() && c.isEnchanted())
-                || (c.isAura() && c.isEnchanting()) || (c.isToken() && CardFactoryUtil.multipleControlled(c))
+        if(c.isLand() || (c.getName().startsWith("Mox") && !c.getName().equals("Mox Diamond"))
+                || (c.isLand() && c.isEnchanted()) || (c.isAura() && c.isEnchanting())
+                || (c.isToken() && CardFactoryUtil.multipleControlled(c))
                 || (c.isCreature() && (c.isEquipped() || c.isEnchanted())) || (c.isEquipment() && c.isEquipping())
                 || (c.isEnchantment()) || (c instanceof ManaPool && c.isSnow())) return true;
         

@@ -1,4 +1,7 @@
+
 package forge;
+
+
 import static javax.swing.BorderFactory.*;
 import static org.jdesktop.swingx.MultiSplitLayout.*;
 
@@ -25,7 +28,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.AbstractTableModel;
@@ -36,6 +38,8 @@ import org.jdesktop.swingx.MultiSplitPane;
 import org.jdesktop.swingx.MultiSplitLayout.Node;
 
 import forge.error.ErrorViewer;
+import forge.gui.game.CardDetailPanel;
+import forge.gui.game.CardPicturePanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.properties.NewConstants.LANG;
@@ -48,10 +52,10 @@ import forge.properties.NewConstants.LANG;
  * @author Clemens Koza
  */
 @SuppressWarnings("unused")
-public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstants.GUI.GuiDeckEditor {
-	private static final long serialVersionUID = 680850452718332565L;
-
-	public static void main(String[] args) {
+public class Gui_DeckEditorNew extends JFrame implements CardContainer, NewConstants.GUI.GuiDeckEditor {
+    private static final long serialVersionUID = 680850452718332565L;
+    
+    public static void main(String[] args) {
 //        JFrame jf = new JFrame();
         Gui_DeckEditorNew jf = new Gui_DeckEditorNew();
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,62 +69,57 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
 //        jf.pack();
         jf.setVisible(true);
     }
-	
-    Gui_DeckEditor_Menu    customMenu;
     
-    private ImageIcon      upIcon               = Constant.IO.upIcon;
-    private ImageIcon      downIcon             = Constant.IO.downIcon;
+    Gui_DeckEditor_Menu      customMenu;
     
-    private JScrollPane    jScrollPane1         = new JScrollPane();
-    private JScrollPane    jScrollPane2         = new JScrollPane();
-    private JButton        removeButton         = new JButton();
+    private ImageIcon        upIcon               = Constant.IO.upIcon;
+    private ImageIcon        downIcon             = Constant.IO.downIcon;
+    
+    private JScrollPane      jScrollPane1         = new JScrollPane();
+    private JScrollPane      jScrollPane2         = new JScrollPane();
+    private JButton          removeButton         = new JButton();
     
     // border1
-    private Border         border1;
-    private TitledBorder   titledBorder1;
-    private Border         border2;
-    private TitledBorder   titledBorder2;
-    private JButton        addButton            = new JButton();
-    private JPanel         cardDetailPanel      = new JPanel();
-    private Border         border3;
-    private TitledBorder   titledBorder3;
-    private JPanel         picturePanel         = new JPanel();
-    private JLabel         statsLabel           = new JLabel();
-    private JScrollPane    jScrollPane3         = new JScrollPane();
-    private JPanel         jPanel3              = new JPanel();
-    private JLabel         cdLabel4             = new JLabel();
-    private JLabel         cdLabel1             = new JLabel();
-    private JLabel         cdLabel2             = new JLabel();
-    private JLabel         cdLabel3             = new JLabel();
-    private GridLayout     gridLayout1          = new GridLayout();
-    private JLabel         cdLabel5             = new JLabel();
-    private JTextArea      cdTextArea           = new JTextArea();
-    private BorderLayout   borderLayout1        = new BorderLayout();
-    private JLabel         statsLabel2          = new JLabel();
-    private JLabel         jLabel1              = new JLabel();
+    private Border           border1;
+    private TitledBorder     titledBorder1;
+    private Border           border2;
+    private TitledBorder     titledBorder2;
+    private JButton          addButton            = new JButton();
+    private Border           border3;
+    private TitledBorder     titledBorder3;
+    private JLabel           statsLabel           = new JLabel();
+    private JScrollPane      jScrollPane3         = new JScrollPane();
+    private JPanel           jPanel3              = new JPanel();
+    private GridLayout       gridLayout1          = new GridLayout();
+    private BorderLayout     borderLayout1        = new BorderLayout();
+    private JLabel           statsLabel2          = new JLabel();
+    private JLabel           jLabel1              = new JLabel();
     
-    private JCheckBox      whiteCheckBox        = new JCheckBox("W", true);
-    private JCheckBox      blueCheckBox         = new JCheckBox("U", true);
-    private JCheckBox      blackCheckBox        = new JCheckBox("B", true);
-    private JCheckBox      redCheckBox          = new JCheckBox("R", true);
-    private JCheckBox      greenCheckBox        = new JCheckBox("G", true);
-    private JCheckBox      colorlessCheckBox    = new JCheckBox("C", true);
+    private JCheckBox        whiteCheckBox        = new JCheckBox("W", true);
+    private JCheckBox        blueCheckBox         = new JCheckBox("U", true);
+    private JCheckBox        blackCheckBox        = new JCheckBox("B", true);
+    private JCheckBox        redCheckBox          = new JCheckBox("R", true);
+    private JCheckBox        greenCheckBox        = new JCheckBox("G", true);
+    private JCheckBox        colorlessCheckBox    = new JCheckBox("C", true);
     
-    private JCheckBox      landCheckBox         = new JCheckBox("Land", true);
-    private JCheckBox      creatureCheckBox     = new JCheckBox("Creature", true);
-    private JCheckBox      sorceryCheckBox      = new JCheckBox("Sorcery", true);
-    private JCheckBox      instantCheckBox      = new JCheckBox("Instant", true);
-    private JCheckBox      planeswalkerCheckBox = new JCheckBox("Planeswalker", true);
-    private JCheckBox      artifactCheckBox     = new JCheckBox("Artifact", true);
-    private JCheckBox      enchantmentCheckBox  = new JCheckBox("Enchant", true);
+    private JCheckBox        landCheckBox         = new JCheckBox("Land", true);
+    private JCheckBox        creatureCheckBox     = new JCheckBox("Creature", true);
+    private JCheckBox        sorceryCheckBox      = new JCheckBox("Sorcery", true);
+    private JCheckBox        instantCheckBox      = new JCheckBox("Instant", true);
+    private JCheckBox        planeswalkerCheckBox = new JCheckBox("Planeswalker", true);
+    private JCheckBox        artifactCheckBox     = new JCheckBox("Artifact", true);
+    private JCheckBox        enchantmentCheckBox  = new JCheckBox("Enchant", true);
     
-    private MultiSplitPane pane;
+    private MultiSplitPane   pane;
     
-    private CardPoolModel  topModel;
-    private CardPoolModel  bottomModel;
+    private CardPoolModel    topModel;
+    private CardPoolModel    bottomModel;
     
-    private JTable         topTable;
-    private JTable         bottomTable;
+    private JTable           topTable;
+    private JTable           bottomTable;
+    
+    private CardDetailPanel  detail;
+    private CardPicturePanel picture;
     
     public Gui_DeckEditorNew() {
         this(null, null);
@@ -710,13 +709,15 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
         return show;
     }//getStats()
     
-    public void updateCardDetail(Card c) {
-        //change card name if needed
-        c = AllZone.CardFactory.copyCard(c);
-        if(AllZone.NameChanger.shouldChangeCardName()) c = AllZone.NameChanger.changeCard(c);
-        
-        CardDetailUtil.updateCardDetail(c, cdTextArea, cardDetailPanel, picturePanel, new JLabel[] {
-                cdLabel1, cdLabel2, cdLabel3, cdLabel4, cdLabel5});
+    @Override
+    public Card getCard() {
+        return detail.getCard();
+    }
+    
+    @Override
+    public void setCard(Card card) {
+        detail.setCard(card);
+        picture.setCard(card);
     }
     
     /*
@@ -812,14 +813,16 @@ public class Gui_DeckEditorNew extends JFrame implements CardDetail, NewConstant
     */
 
     public abstract static class CardPoolModel extends AbstractTableModel {
-		private static final long serialVersionUID = 7773113247062724912L;
-		
-		private static final String[]   labels    = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "R"};
-        private static final Class<?>[] classes   = {Integer.class, String.class, String.class, String.class};
+        private static final long       serialVersionUID = 7773113247062724912L;
+        
+        private static final String[]   labels           = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "R"};
+        private static final Class<?>[] classes          = {
+                                                                 Integer.class, String.class, String.class,
+                                                                 String.class};
         //values taken from TableModel
-        private static final int[]      minWidth  = {-1, 190, 85, -1, -1, -1, -1};
-        private static final int[]      prefWidth = {25, 190, 85, 58, 130, 32, 20};
-        private static final int[]      maxWidth  = {25, 190, 126, 58, -1, 42, 20};
+        private static final int[]      minWidth         = {-1, 190, 85, -1, -1, -1, -1};
+        private static final int[]      prefWidth        = {25, 190, 85, 58, 130, 32, 20};
+        private static final int[]      maxWidth         = {25, 190, 126, 58, -1, 42, 20};
         
         /**
          * Sets the column widths of the table. The table must use a CardPoolModel as its table model.

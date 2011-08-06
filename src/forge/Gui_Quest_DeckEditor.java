@@ -1,4 +1,7 @@
+
 package forge;
+
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,8 +11,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -19,18 +21,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-//import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -39,11 +37,13 @@ import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileFilter;
 
 import forge.error.ErrorViewer;
+import forge.gui.game.CardDetailPanel;
+import forge.gui.game.CardPicturePanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 
-public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisplay, NewConstants {
+public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckDisplay, NewConstants {
     private static final long serialVersionUID     = 152061168634545L;
     
     Gui_Quest_DeckEditor_Menu customMenu;
@@ -64,49 +64,42 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
     private Border            border2;
     private TitledBorder      titledBorder2;
     private JButton           addButton            = new JButton();
-    private JButton           analysisButton            = new JButton();
-    private JButton           changePictureButton            = new JButton();
-    private JButton           removePictureButton            = new JButton();
-    private JPanel            cardDetailPanel      = new JPanel();
+    private JButton           analysisButton       = new JButton();
+    private JButton           changePictureButton  = new JButton();
+    private JButton           removePictureButton  = new JButton();
     private Border            border3;
     private TitledBorder      titledBorder3;
-    private JPanel            picturePanel         = new JPanel();
     private JLabel            statsLabel           = new JLabel();
     private JTable            topTable             = new JTable();
     private JTable            bottomTable          = new JTable();
-    private JScrollPane       jScrollPane3         = new JScrollPane();
-    private JPanel            jPanel3              = new JPanel();
-    private JLabel            cdLabel4             = new JLabel();
-    private JLabel            cdLabel1             = new JLabel();
-    private JLabel            cdLabel2             = new JLabel();
-    private JLabel            cdLabel3             = new JLabel();
     private GridLayout        gridLayout1          = new GridLayout();
-    private JLabel            cdLabel5             = new JLabel();
-    private JTextArea         cdTextArea           = new JTextArea();
     private BorderLayout      borderLayout1        = new BorderLayout();
     private JLabel            statsLabel2          = new JLabel();
     private JLabel            jLabel1              = new JLabel();
     
-    public JCheckBox         whiteCheckBox        = new JCheckBox("W", true);
-    public JCheckBox         blueCheckBox         = new JCheckBox("U", true);
-    public JCheckBox         blackCheckBox        = new JCheckBox("B", true);
-    public JCheckBox         redCheckBox          = new JCheckBox("R", true);
-    public JCheckBox         greenCheckBox        = new JCheckBox("G", true);
-    public JCheckBox         colorlessCheckBox    = new JCheckBox("C", true);
+    public JCheckBox          whiteCheckBox        = new JCheckBox("W", true);
+    public JCheckBox          blueCheckBox         = new JCheckBox("U", true);
+    public JCheckBox          blackCheckBox        = new JCheckBox("B", true);
+    public JCheckBox          redCheckBox          = new JCheckBox("R", true);
+    public JCheckBox          greenCheckBox        = new JCheckBox("G", true);
+    public JCheckBox          colorlessCheckBox    = new JCheckBox("C", true);
     
-    public JCheckBox         landCheckBox         = new JCheckBox("Land", true);
-    public JCheckBox         creatureCheckBox     = new JCheckBox("Creature", true);
-    public JCheckBox         sorceryCheckBox      = new JCheckBox("Sorcery", true);
-    public JCheckBox         instantCheckBox      = new JCheckBox("Instant", true);
-    public JCheckBox         planeswalkerCheckBox = new JCheckBox("Planeswalker", true);
-    public JCheckBox         artifactCheckBox     = new JCheckBox("Artifact", true);
-    public JCheckBox         enchantmentCheckBox  = new JCheckBox("Enchant", true);
-    public CardList 		 stCardList;
-    public boolean           filterUsed;
-    private CardList         top;
-    private CardList         bottom;
-    public Card cCardHQ; 
-    private static File       previousDirectory = null;
+    public JCheckBox          landCheckBox         = new JCheckBox("Land", true);
+    public JCheckBox          creatureCheckBox     = new JCheckBox("Creature", true);
+    public JCheckBox          sorceryCheckBox      = new JCheckBox("Sorcery", true);
+    public JCheckBox          instantCheckBox      = new JCheckBox("Instant", true);
+    public JCheckBox          planeswalkerCheckBox = new JCheckBox("Planeswalker", true);
+    public JCheckBox          artifactCheckBox     = new JCheckBox("Artifact", true);
+    public JCheckBox          enchantmentCheckBox  = new JCheckBox("Enchant", true);
+    public CardList           stCardList;
+    public boolean            filterUsed;
+    private CardList          top;
+    private CardList          bottom;
+    public Card               cCardHQ;
+    private static File       previousDirectory    = null;
+    
+    private CardDetailPanel   detail               = new CardDetailPanel(null);
+    private CardPicturePanel  picture              = new CardPicturePanel(null);
     
     public static void main(String[] args) {
 
@@ -355,8 +348,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         //show cards, makes this user friendly, lol, well may, ha
         updateDisplay(cardpool, bottom);
         
-        
-        
+
         //this affects the card pool
         topModel.sort(4, true);//sort by type
         topModel.sort(3, true);//then sort by color
@@ -409,9 +401,8 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         bounds.x = (screen.width - bounds.width) / 2;
         bounds.y = (screen.height - bounds.height) / 2;
         setBounds(bounds);
-       
-		
         
+
         //TODO use this as soon the deck editor has resizable GUI
 //        //Use both so that when "un"maximizing, the frame isn't tiny
 //        setSize(1024, 740);
@@ -433,25 +424,27 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
     
     public Gui_Quest_DeckEditor() {
         try {
-        	filterUsed=false;
+            filterUsed = false;
             jbInit();
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
     }
     
-    public void updateCardDetail(Card c) {
-        //change card name if needed
-        c = AllZone.CardFactory.copyCard(c);
-        if(AllZone.NameChanger.shouldChangeCardName()) c = AllZone.NameChanger.changeCard(c);
-        cCardHQ = c; 
-        CardDetailUtil.updateCardDetail(c, cdTextArea, cardDetailPanel, picturePanel, new JLabel[] {
-                cdLabel1, cdLabel2, cdLabel3, cdLabel4, cdLabel5});
+    @Override
+    public Card getCard() {
+        return detail.getCard();
+    }
+    
+    @Override
+    public void setCard(Card card) {
+        detail.setCard(card);
+        picture.setCard(card);
     }
     
     private void jbInit() throws Exception {
-
-    	border1 = new EtchedBorder(EtchedBorder.RAISED, Color.white, new Color(148, 145, 140));
+        
+        border1 = new EtchedBorder(EtchedBorder.RAISED, Color.white, new Color(148, 145, 140));
         titledBorder1 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
                 "All Cards");
         border2 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
@@ -466,7 +459,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         jScrollPane2.setBounds(new Rectangle(19, 458, 726, 218));
         removeButton.setBounds(new Rectangle(180, 403, 146, 49));
         //removeButton.setIcon(upIcon);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
+        if(!Gui_NewGame.useLAFFonts.isSelected()) removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
         removeButton.setText("Remove Card");
         removeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -480,34 +473,34 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
             }
         });
         //addButton.setIcon(downIcon);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) addButton.setFont(new java.awt.Font("Dialog", 0, 13));
+        if(!Gui_NewGame.useLAFFonts.isSelected()) addButton.setFont(new java.awt.Font("Dialog", 0, 13));
         addButton.setBounds(new Rectangle(23, 403, 146, 49));
         
         analysisButton.setText("Deck Analysis");
         analysisButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	analysisButton_actionPerformed(e);
+                analysisButton_actionPerformed(e);
             }
         });
-        if (!Gui_NewGame.useLAFFonts.isSelected()) analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
+        if(!Gui_NewGame.useLAFFonts.isSelected()) analysisButton.setFont(new java.awt.Font("Dialog", 0, 13));
         analysisButton.setBounds(new Rectangle(578, 426, 166, 25));
         
         changePictureButton.setText("Change picture...");
         changePictureButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	changePictureButton_actionPerformed(e);
+                changePictureButton_actionPerformed(e);
             }
         });
-        if (!Gui_NewGame.useLAFFonts.isSelected()) changePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
+        if(!Gui_NewGame.useLAFFonts.isSelected()) changePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
         changePictureButton.setBounds(new Rectangle(765, 349, 118, 20));
         
         removePictureButton.setText("Remove picture...");
         removePictureButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	removePictureButton_actionPerformed(e);
+                removePictureButton_actionPerformed(e);
             }
         });
-        if (!Gui_NewGame.useLAFFonts.isSelected()) removePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
+        if(!Gui_NewGame.useLAFFonts.isSelected()) removePictureButton.setFont(new java.awt.Font("Dialog", 0, 10));
         removePictureButton.setBounds(new Rectangle(885, 349, 118, 20));
         
         /**
@@ -515,7 +508,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
          */
         Font f = new Font("Tahoma", Font.PLAIN, 10);
         landCheckBox.setBounds(340, 400, 48, 20);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) landCheckBox.setFont(f);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) landCheckBox.setFont(f);
         landCheckBox.setOpaque(false);
         landCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
@@ -523,7 +516,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
             }
         });
         creatureCheckBox.setBounds(385, 400, 65, 20);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) creatureCheckBox.setFont(f);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) creatureCheckBox.setFont(f);
         creatureCheckBox.setOpaque(false);
         creatureCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
@@ -531,7 +524,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
             }
         });
         sorceryCheckBox.setBounds(447, 400, 62, 20);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) sorceryCheckBox.setFont(f);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) sorceryCheckBox.setFont(f);
         sorceryCheckBox.setOpaque(false);
         sorceryCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
@@ -539,7 +532,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
             }
         });
         instantCheckBox.setBounds(505, 400, 60, 20);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) instantCheckBox.setFont(f);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) instantCheckBox.setFont(f);
         instantCheckBox.setOpaque(false);
         instantCheckBox.addItemListener(new ItemListener() {
             
@@ -548,7 +541,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
             }
         });
         planeswalkerCheckBox.setBounds(558, 400, 85, 20);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) planeswalkerCheckBox.setFont(f);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) planeswalkerCheckBox.setFont(f);
         planeswalkerCheckBox.setOpaque(false);
         planeswalkerCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
@@ -556,7 +549,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
             }
         });
         artifactCheckBox.setBounds(638, 400, 58, 20);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) artifactCheckBox.setFont(f);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) artifactCheckBox.setFont(f);
         artifactCheckBox.setOpaque(false);
         artifactCheckBox.addItemListener(new ItemListener() {
             
@@ -565,7 +558,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
             }
         });
         enchantmentCheckBox.setBounds(692, 400, 80, 20);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) enchantmentCheckBox.setFont(f);
+        if(!Gui_NewGame.useLAFFonts.isSelected()) enchantmentCheckBox.setFont(f);
         enchantmentCheckBox.setOpaque(false);
         enchantmentCheckBox.addItemListener(new ItemListener() {
             
@@ -622,7 +615,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         colorlessCheckBox.addItemListener(new ItemListener() {
             
             public void itemStateChanged(ItemEvent e) {
-            	
+                
                 updateDisplay();
             }
         });
@@ -631,51 +624,23 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
          * Other
          */
         
-        cardDetailPanel.setBorder(titledBorder3);
-        cardDetailPanel.setBounds(new Rectangle(765, 23, 239, 323));
-        cardDetailPanel.setLayout(null);
-        picturePanel.setBorder(BorderFactory.createEtchedBorder());
-        picturePanel.setBounds(new Rectangle(765, 372, 239, 338));
-        picturePanel.setLayout(borderLayout1);
-        picturePanel.addMouseListener(new CustomListener());
-        if (!Gui_NewGame.useLAFFonts.isSelected()) statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+        detail.setBounds(new Rectangle(765, 23, 239, 323));
+        picture.setBounds(new Rectangle(765, 372, 239, 338));
+        picture.addMouseListener(new CustomListener());
+        if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         statsLabel.setText("Total - 0, Creatures - 0 Land - 0");
         statsLabel.setBounds(new Rectangle(19, 672, 720, 31));
         //Do not lower statsLabel any lower, we want this to be visible at 1024 x 768 screen size
         this.setTitle("Deck Editor");
-        jScrollPane3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane3.setBounds(new Rectangle(6, 168, 225, 143));
-        jPanel3.setBounds(new Rectangle(7, 21, 224, 141));
-        jPanel3.setLayout(gridLayout1);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) cdLabel4.setFont(new java.awt.Font("Dialog", 0, 14));
-        cdLabel4.setHorizontalAlignment(SwingConstants.LEFT);
-        if (!Gui_NewGame.useLAFFonts.isSelected())  cdLabel1.setFont(new java.awt.Font("Dialog", 0, 14));
-        cdLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) cdLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
-        cdLabel2.setHorizontalAlignment(SwingConstants.CENTER);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) cdLabel3.setFont(new java.awt.Font("Dialog", 0, 14));
-        cdLabel3.setHorizontalAlignment(SwingConstants.CENTER);
         gridLayout1.setColumns(1);
         gridLayout1.setRows(0);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) cdLabel5.setFont(new java.awt.Font("Dialog", 0, 14));
-        cdLabel5.setHorizontalAlignment(SwingConstants.LEFT);
-        if (!Gui_NewGame.useLAFFonts.isSelected()) cdTextArea.setFont(new java.awt.Font("Dialog", 0, 12));
-        cdTextArea.setLineWrap(true);
-        cdTextArea.setWrapStyleWord(true);
         statsLabel2.setBounds(new Rectangle(19, 365, 720, 31));
         statsLabel2.setText("Total - 0, Creatures - 0 Land - 0");
-        if (!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
+        if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
         jLabel1.setText("Click on the column name (like name or color) to sort the cards");
         jLabel1.setBounds(new Rectangle(20, 1, 400, 19));
-        this.getContentPane().add(cardDetailPanel, null);
-        cardDetailPanel.add(jScrollPane3, null);
-        jScrollPane3.getViewport().add(cdTextArea, null);
-        cardDetailPanel.add(jPanel3, null);
-        jPanel3.add(cdLabel1, null);
-        jPanel3.add(cdLabel2, null);
-        jPanel3.add(cdLabel3, null);
-        jPanel3.add(cdLabel4, null);
-        this.getContentPane().add(picturePanel, null);
+        this.getContentPane().add(detail, null);
+        this.getContentPane().add(picture, null);
         this.getContentPane().add(jScrollPane1, null);
         this.getContentPane().add(jScrollPane2, null);
         this.getContentPane().add(addButton, null);
@@ -688,7 +653,6 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         this.getContentPane().add(jLabel1, null);
         jScrollPane2.getViewport().add(bottomTable, null);
         jScrollPane1.getViewport().add(topTable, null);
-        jPanel3.add(cdLabel5, null);
         
         this.getContentPane().add(landCheckBox, null);
         this.getContentPane().add(creatureCheckBox, null);
@@ -704,7 +668,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         this.getContentPane().add(redCheckBox, null);
         this.getContentPane().add(greenCheckBox, null);
         this.getContentPane().add(colorlessCheckBox, null);
-       
+        
     }
     
     void addButton_actionPerformed(ActionEvent e) {
@@ -715,17 +679,17 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
             Card c = topModel.rowToCard(n);
             bottomModel.addCard(c);
             bottomModel.resort();
-            	if(filterUsed==true){
-            		stCardList.remove(c.getName());
-            		stCardList.shuffle();
-            	}
+            if(filterUsed == true) {
+                stCardList.remove(c.getName());
+                stCardList.shuffle();
+            }
             
-            
+
             if(!Constant.GameType.Constructed.equals(customMenu.getGameType())) {
                 topModel.removeCard(c);
-                	if(filterUsed==false){
-                		stCardList=this.getTop();  
-                	}
+                if(filterUsed == false) {
+                    stCardList = this.getTop();
+                }
                 
             }
             
@@ -736,112 +700,110 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
                 topTable.addRowSelectionInterval(n, n);
             }
         }//if(valid row)
-       
-    	   
         
-    
+
     }//addButton_actionPerformed
     
- void analysisButton_actionPerformed(ActionEvent e) {
+    void analysisButton_actionPerformed(ActionEvent e) {
         
-    	if (bottomModel.getRowCount()==0){
-    		JOptionPane.showMessageDialog(null, "Cards in deck not found.", "Analysis Deck", JOptionPane.INFORMATION_MESSAGE );
-    	}else{
-    	Gui_Quest_DeckEditor g = Gui_Quest_DeckEditor.this;
-    	GUI_DeckAnalysis dAnalysis = new GUI_DeckAnalysis(g, bottomModel);
-    	dAnalysis.setVisible(true);
-    	g.setEnabled(false);
-    }}
+        if(bottomModel.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cards in deck not found.", "Analysis Deck",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            Gui_Quest_DeckEditor g = Gui_Quest_DeckEditor.this;
+            GUI_DeckAnalysis dAnalysis = new GUI_DeckAnalysis(g, bottomModel);
+            dAnalysis.setVisible(true);
+            g.setEnabled(false);
+        }
+    }
     
- void changePictureButton_actionPerformed(ActionEvent e) {
- 	if (cCardHQ!=null){
- 	File file = getImportFilename();
- 	if (file!=null){
- 	String fileName = GuiDisplayUtil.cleanString(cCardHQ.getName())+".jpg";
- 	File base = ForgeProps.getFile(IMAGE_BASE);
- 	File f = new File(base, fileName);
- 	f.delete();
- 	
- 	try {
- 	    
- 	    f.createNewFile();
- 	    FileOutputStream fos = new FileOutputStream(f);
- 	    FileInputStream fis = new FileInputStream(file);
- 	    byte[] buff = new byte[32*1024];
- 	    int length;
- 	    while(fis.available()>0){
- 	        length = fis.read(buff);
- 	        if (length>0)
- 	            fos.write(buff,0,length);
- 	    }
- 	    fos.flush();
- 	    fis.close();
- 	    fos.close();
- 	    updateCardDetail(cCardHQ);
- 	    
- 	} catch (IOException e1) {
- 	    e1.printStackTrace();
- 	}
- 	
- 	}}
- }
- 
- private File getImportFilename() {
-     JFileChooser chooser = new JFileChooser(previousDirectory);
-     ImagePreviewPanel preview = new ImagePreviewPanel();
-     chooser.setAccessory(preview);
-     chooser.addPropertyChangeListener(preview);
-     chooser.addChoosableFileFilter(dckFilter);   
-     int returnVal = chooser.showOpenDialog(null);
-     
-     if(returnVal == JFileChooser.APPROVE_OPTION) {
-         File file = chooser.getSelectedFile();
-         previousDirectory = file.getParentFile();
-         return file;
-     }
-     
-
-     return null;
-     
- }
- 
- private FileFilter dckFilter = new FileFilter(){
-
-		public boolean accept(File f) {
-			return f.getName().endsWith(".jpg") || f.isDirectory();
-		}
-
-		public String getDescription() {
-			return "*.jpg";
-		}
- 	
- };
-
- 
- void removePictureButton_actionPerformed(ActionEvent e) {
- 	if (cCardHQ!=null){
- 	String options[] = {"Yes", "No"};
-     int value = JOptionPane.showOptionDialog(
-             null,
-             "Do you want delete " +cCardHQ.getName()+" picture?" ,
-             "Delete picture",
-             JOptionPane.YES_NO_OPTION,  
-             JOptionPane.QUESTION_MESSAGE,
-             null,
-             options,
-             options[1]);
-     if(value == 0){
-     	String fileName = GuiDisplayUtil.cleanString(cCardHQ.getName())+".jpg";
-     	File base = ForgeProps.getFile(IMAGE_BASE);
-     	File f = new File(base, fileName);
-     	f.delete();
-     	JOptionPane.showMessageDialog(null, "Picture "+cCardHQ.getName()+" deleted.","Delete picture" ,JOptionPane.INFORMATION_MESSAGE );
-     	updateCardDetail(cCardHQ);
-     }}
+    void changePictureButton_actionPerformed(ActionEvent e) {
+        if(cCardHQ != null) {
+            File file = getImportFilename();
+            if(file != null) {
+                String fileName = GuiDisplayUtil.cleanString(cCardHQ.getName()) + ".jpg";
+                File base = ForgeProps.getFile(IMAGE_BASE);
+                File f = new File(base, fileName);
+                f.delete();
+                
+                try {
+                    
+                    f.createNewFile();
+                    FileOutputStream fos = new FileOutputStream(f);
+                    FileInputStream fis = new FileInputStream(file);
+                    byte[] buff = new byte[32 * 1024];
+                    int length;
+                    while(fis.available() > 0) {
+                        length = fis.read(buff);
+                        if(length > 0) fos.write(buff, 0, length);
+                    }
+                    fos.flush();
+                    fis.close();
+                    fos.close();
+                    setCard(cCardHQ);
+                    
+                } catch(IOException e1) {
+                    e1.printStackTrace();
+                }
+                
+            }
+        }
+    }
     
- }   
- 
- 
+    private File getImportFilename() {
+        JFileChooser chooser = new JFileChooser(previousDirectory);
+        ImagePreviewPanel preview = new ImagePreviewPanel();
+        chooser.setAccessory(preview);
+        chooser.addPropertyChangeListener(preview);
+        chooser.addChoosableFileFilter(dckFilter);
+        int returnVal = chooser.showOpenDialog(null);
+        
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            previousDirectory = file.getParentFile();
+            return file;
+        }
+        
+
+        return null;
+        
+    }
+    
+    private FileFilter dckFilter = new FileFilter() {
+                                     
+                                     @Override
+                                     public boolean accept(File f) {
+                                         return f.getName().endsWith(".jpg") || f.isDirectory();
+                                     }
+                                     
+                                     @Override
+                                     public String getDescription() {
+                                         return "*.jpg";
+                                     }
+                                     
+                                 };
+    
+    
+    void removePictureButton_actionPerformed(ActionEvent e) {
+        if(cCardHQ != null) {
+            String options[] = {"Yes", "No"};
+            int value = JOptionPane.showOptionDialog(null,
+                    "Do you want delete " + cCardHQ.getName() + " picture?", "Delete picture",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+            if(value == 0) {
+                String fileName = GuiDisplayUtil.cleanString(cCardHQ.getName()) + ".jpg";
+                File base = ForgeProps.getFile(IMAGE_BASE);
+                File f = new File(base, fileName);
+                f.delete();
+                JOptionPane.showMessageDialog(null, "Picture " + cCardHQ.getName() + " deleted.",
+                        "Delete picture", JOptionPane.INFORMATION_MESSAGE);
+                setCard(cCardHQ);
+            }
+        }
+        
+    }
+    
+    
     void removeButton_actionPerformed(ActionEvent e) {
         setTitle("Deck Editor : " + customMenu.getDeckName() + " : unsaved");
         
@@ -849,16 +811,16 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         if(n != -1) {
             Card c = bottomModel.rowToCard(n);
             bottomModel.removeCard(c);
-            	if(filterUsed==true){
-            		stCardList.add(c);
-            	}
+            if(filterUsed == true) {
+                stCardList.add(c);
+            }
             
             if(!Constant.GameType.Constructed.equals(customMenu.getGameType())) {
                 topModel.addCard(c);
                 topModel.resort();
-                	if(filterUsed==false){
-                		stCardList=this.getTop();  
-                	}
+                if(filterUsed == false) {
+                    stCardList = this.getTop();
+                }
             }
             
             //3 conditions" 0 cards left, select the same row, select next row
@@ -868,9 +830,8 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
                 bottomTable.addRowSelectionInterval(n, n);
             }
         }//if(valid row)
-    
         
-        
+
     }//removeButton_actionPerformed
     
     @SuppressWarnings("unused")
@@ -917,59 +878,44 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         topModel.resort();
         bottomModel.resort();
     }////refreshGui()
-   
-    public class CustomListener implements MouseListener {
-
-        public void mouseClicked(MouseEvent e) {
-        	        	
-        }
-
-        public void mouseEntered(MouseEvent e) { 
-        	       	
-        	if (picturePanel.getComponentCount()!=0){
-        		   
-            	
-        		    if(GuiDisplayUtil.IsPictureHQExists(cCardHQ)){    
-        		    	int cWidth = 0;
-						try {
-							cWidth = GuiDisplayUtil.getPictureHQwidth(cCardHQ);
-						} catch (IOException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						}
-        				int cHeight = 0;
-						try {
-							cHeight = GuiDisplayUtil.getPictureHQheight(cCardHQ);
-						} catch (IOException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						}
-        		 
-        			if(cWidth>=312 &&cHeight >=445){ 
-        		    	
-					GUI_PictureHQ hq = new GUI_PictureHQ(Gui_Quest_DeckEditor.this,cCardHQ);
-					try {
-						hq.letsGo(Gui_Quest_DeckEditor.this, cCardHQ);						
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-					}
-					
-        		}}
-      	
-        }
-
-        public void mouseExited(MouseEvent e) {             
-            
-        }
-
-        public void mousePressed(MouseEvent e) {             
-             
-        }
-
-        public void mouseReleased(MouseEvent e) {           
-             
-        }
-   }
+    
+    public class CustomListener extends MouseAdapter {
+//        TODO reenable
+//        public void mouseEntered(MouseEvent e) {
+//            
+//            if(picturePanel.getComponentCount() != 0) {
+//                
+//
+//                if(GuiDisplayUtil.IsPictureHQExists(cCardHQ)) {
+//                    int cWidth = 0;
+//                    try {
+//                        cWidth = GuiDisplayUtil.getPictureHQwidth(cCardHQ);
+//                    } catch(IOException e2) {
+//                        // TODO Auto-generated catch block
+//                        e2.printStackTrace();
+//                    }
+//                    int cHeight = 0;
+//                    try {
+//                        cHeight = GuiDisplayUtil.getPictureHQheight(cCardHQ);
+//                    } catch(IOException e2) {
+//                        // TODO Auto-generated catch block
+//                        e2.printStackTrace();
+//                    }
+//                    
+//                    if(cWidth >= 312 && cHeight >= 445) {
+//                        
+//                        GUI_PictureHQ hq = new GUI_PictureHQ(Gui_Quest_DeckEditor.this, cCardHQ);
+//                        try {
+//                            hq.letsGo(Gui_Quest_DeckEditor.this, cCardHQ);
+//                        } catch(IOException e1) {
+//                            e1.printStackTrace();
+//                        }
+//                    }
+//                    
+//                }
+//            }
+//            
+//        }
+    }
     
 }

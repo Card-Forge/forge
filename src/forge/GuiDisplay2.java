@@ -1,5 +1,5 @@
-package forge;
 
+package forge;
 
 
 import java.awt.BorderLayout;
@@ -24,11 +24,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.gui.ListChooser;
+import forge.gui.game.CardDetailPanel;
+import forge.gui.game.CardPanel;
+import forge.gui.game.CardPicturePanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 
-public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConstants {
+public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Display, NewConstants {
     private static final long       serialVersionUID   = 8974795337536720207L;
     
     //private CardList multiBlockers = new CardList();
@@ -63,6 +66,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
         }
         super.setVisible(visible);
     }
+    
     /*
     public void addAssignDamage(Card attacker, Card blocker, int damage) {
     	multiBlockers.add(blocker);
@@ -72,7 +76,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
         new Gui_MultipleBlockers(attacker, multiBlockers, damage, this);
     }
     */
-    
+
     public void assignDamage(Card attacker, CardList blockers, int damage) {
         new Gui_MultipleBlockers(attacker, blockers, damage, this);
     }
@@ -200,7 +204,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
         if(choices[0] instanceof Card) {
             list.addListSelectionListener(new ListSelectionListener() {
                 public void valueChanged(ListSelectionEvent ev) {
-                    if(list.getSelectedValue() instanceof Card) updateCardDetail((Card) list.getSelectedValue());
+                    if(list.getSelectedValue() instanceof Card) setCard((Card) list.getSelectedValue());
                 }
             });
         }
@@ -216,7 +220,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
         if(choices[0] instanceof Card) {
             list.addListSelectionListener(new ListSelectionListener() {
                 public void valueChanged(ListSelectionEvent ev) {
-                    if(list.getSelectedValue() instanceof Card) updateCardDetail((Card) list.getSelectedValue());
+                    if(list.getSelectedValue() instanceof Card) setCard((Card) list.getSelectedValue());
                 }
             });
         }
@@ -256,7 +260,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
             public void mousePressed(MouseEvent e) {
                 Object o = playerLandPanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
-                    CardPanel cardPanel = (CardPanel) o;
+                    CardContainer cardPanel = (CardContainer) o;
                     inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
                 }
             }
@@ -267,7 +271,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
             public void mousePressed(MouseEvent e) {
                 Object o = playerCreaturePanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
-                    CardPanel cardPanel = (CardPanel) o;
+                    CardContainer cardPanel = (CardContainer) o;
                     inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
                 }
             }
@@ -278,7 +282,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
             public void mousePressed(MouseEvent e) {
                 Object o = playerHandPanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
-                    CardPanel cardPanel = (CardPanel) o;
+                    CardContainer cardPanel = (CardContainer) o;
                     inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Hand);
                 }
             }
@@ -292,7 +296,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
             public void mousePressed(MouseEvent e) {
                 Object o = oppLandPanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
-                    CardPanel cardPanel = (CardPanel) o;
+                    CardContainer cardPanel = (CardContainer) o;
                     inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Play);
                 }
             }
@@ -304,7 +308,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
             public void mousePressed(MouseEvent e) {
                 Object o = oppCreaturePanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
-                    CardPanel cardPanel = (CardPanel) o;
+                    CardContainer cardPanel = (CardContainer) o;
                     inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Play);
                 }
             }
@@ -312,52 +316,16 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
         
     }//addListener()
     
-    public void updateCardDetail(Card c) {
-        if(c == null) return;
-        
-        cdLabel1.setText("");
-        cdLabel2.setText("");
-        cdLabel3.setText("");
-        cdLabel4.setText("");
-        cdLabel5.setText("");
-        cdArea.setText("");
-        
-        //do not change the name of tokens
-        if(!(c.isToken() || c.getName().equals(""))) {
-            //change name, probably need to fix this
-            //cards that change creatures like Angelic Blessing don't show
-            //that the creature has flying, or Coastal Hornclaw's flying ability
-            //c = AllZone.CardFactory.copyCard(c);
-            if(AllZone.NameChanger.shouldChangeCardName()) c = AllZone.NameChanger.changeCard(c);
-        }
-        
-        if(c.isLand()) cdLabel1.setText(c.getName());
-        else cdLabel1.setText(c.getName() + "  - " + c.getManaCost());
-        
-        cdLabel2.setText(GuiDisplayUtil.formatCardType(c));
-        
-        if(c.isCreature()) {
-            String stats = "" + c.getNetAttack() + " / " + c.getNetDefense();
-            cdLabel3.setText(stats);
-        }
-        
-        if(c.isCreature()) cdLabel4.setText("Damage: " + c.getDamage() + " Assigned Damage: "
-                + c.getTotalAssignedDamage());
-        
-        if(c.isPlaneswalker()) cdLabel4.setText("Assigned Damage: " + c.getTotalAssignedDamage());
-        
-        String uniqueID = c.getUniqueNumber() + " ";
-        cdLabel5.setText("Card ID  " + uniqueID);
-        
-        this.cdArea.setText(c.getText());
-        
-        cdPanel.setBorder(GuiDisplayUtil.getBorder(c));
-        
-        //picture
-        picturePanel.removeAll();
-        picturePanel.add(GuiDisplayUtil.getPicture(c));
-        picturePanel.revalidate();
-    }//updateCardDetail()
+    @Override
+    public Card getCard() {
+        return detail.getCard();
+    }
+    
+    @Override
+    public void setCard(Card card) {
+        detail.setCard(card);
+        picture.setCard(card);
+    }
     
     private void addObservers() {
         //Human Hand, Graveyard, and Library totals
@@ -435,7 +403,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
                     cardPanel.addMouseMotionListener(new MouseMotionAdapter() {
                         @Override
                         public void mouseMoved(MouseEvent me) {
-                            GuiDisplay2.this.updateCardDetail(cardPanel.getCard());
+                            GuiDisplay2.this.setCard(cardPanel.getCard());
                         }//mouseMoved
                     });
                     
@@ -468,7 +436,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
                 
                 JPanel panel;
                 for(int i = 0; i < c.length; i++) {
-                    panel = GuiDisplayUtil.getCardPanel(c[i]);
+                    panel = new CardPicturePanel(c[i]);
                     p.add(panel);
                 }
                 p.revalidate();
@@ -611,16 +579,6 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
         oppLifeLabel = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         playerLifeLabel = new javax.swing.JLabel();
-        cdPanel = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        cdLabel1 = new javax.swing.JLabel();
-        cdLabel2 = new javax.swing.JLabel();
-        cdLabel3 = new javax.swing.JLabel();
-        cdLabel4 = new javax.swing.JLabel();
-        cdLabel5 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        cdArea = new javax.swing.JTextArea();
         picturePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -636,6 +594,8 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
         playerGraveLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuBar = new javax.swing.JMenu();
+        detail = new CardDetailPanel(null);
+        picture = new CardPicturePanel(null);
         
         getContentPane().setLayout(null);
         
@@ -768,49 +728,8 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
         getContentPane().add(jPanel7);
         jPanel7.setBounds(210, 600, 90, 90);
         
-        cdPanel.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
-        
-        cdPanel.setBorder(new javax.swing.border.EtchedBorder());
-        jPanel9.setLayout(new java.awt.GridLayout(5, 0, 0, 5));
-        
-        cdLabel1.setFont(getFont());
-        cdLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cdLabel1.setText("jLabel3");
-        jPanel9.add(cdLabel1);
-        
-        cdLabel2.setFont(getFont());
-        cdLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cdLabel2.setText("jLabel4");
-        jPanel9.add(cdLabel2);
-        
-        cdLabel3.setFont(getFont());
-        cdLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cdLabel3.setText("jLabel5");
-        jPanel9.add(cdLabel3);
-        
-        cdLabel4.setFont(getFont());
-        cdLabel4.setText("jLabel6");
-        jPanel9.add(cdLabel4);
-        
-        cdLabel5.setFont(getFont());
-        cdLabel5.setText("jLabel7");
-        jPanel9.add(cdLabel5);
-        
-        cdPanel.add(jPanel9);
-        
-        jPanel10.setLayout(new java.awt.BorderLayout());
-        
-        cdArea.setFont(getFont());
-        cdArea.setLineWrap(true);
-        cdArea.setWrapStyleWord(true);
-        jScrollPane5.setViewportView(cdArea);
-        
-        jPanel10.add(jScrollPane5, java.awt.BorderLayout.CENTER);
-        
-        cdPanel.add(jPanel10);
-        
-        getContentPane().add(cdPanel);
-        cdPanel.setBounds(790, 20, 230, 300);
+        getContentPane().add(detail);
+        detail.setBounds(790, 20, 230, 300);
         
         picturePanel.setLayout(new java.awt.BorderLayout());
         
@@ -919,13 +838,6 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton     cancelButton;
-    private javax.swing.JTextArea   cdArea;
-    private javax.swing.JLabel      cdLabel1;
-    private javax.swing.JLabel      cdLabel2;
-    private javax.swing.JLabel      cdLabel3;
-    private javax.swing.JLabel      cdLabel4;
-    private javax.swing.JLabel      cdLabel5;
-    public javax.swing.JPanel       cdPanel;
     private javax.swing.JTextArea   combatArea;
     private javax.swing.JLabel      jLabel1;
     private javax.swing.JLabel      jLabel2;
@@ -938,18 +850,15 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
     // jMenuBar2
     private javax.swing.JMenuBar    jMenuBar2;
     private javax.swing.JPanel      jPanel1;
-    private javax.swing.JPanel      jPanel10;
     private javax.swing.JPanel      jPanel2;
     private javax.swing.JPanel      jPanel3;
     private javax.swing.JPanel      jPanel5;
     private javax.swing.JPanel      jPanel6;
     private javax.swing.JPanel      jPanel7;
-    private javax.swing.JPanel      jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JMenu       menuBar;
     private javax.swing.JTextArea   messageArea;
     private javax.swing.JButton     okButton;
@@ -968,6 +877,8 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
     private javax.swing.JLabel      playerLibraryLabel;
     private javax.swing.JLabel      playerLifeLabel;
     private javax.swing.JPanel      stackPanel;
+    private CardDetailPanel         detail;
+    private CardPicturePanel        picture;
     // End of variables declaration//GEN-END:variables
     
 }

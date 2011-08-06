@@ -28,14 +28,17 @@ public class FileType implements PropertyType<File> {
     public String getSuffix() {
         return suffix;
     }
-
+    
     public Class<File> getType() {
         return type;
     }
     
-
+    
     public File toObject(TreeProperties p, String s) {
-        return new File(p.getPath(), getPath(s));
+        String path = getPath(s);
+        File f = new File(path);
+        if(f.isAbsolute()) return f;
+        else return new File(p.getPath(), path);
     }
     
     /**

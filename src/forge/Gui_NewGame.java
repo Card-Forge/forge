@@ -6,7 +6,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-//import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -39,6 +38,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
 import forge.gui.ListChooser;
@@ -80,7 +80,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private TitledBorder            titledBorder2;
     private static JCheckBox        newGuiCheckBox       = new JCheckBox("", true);
     private static JCheckBox        smoothLandCheckBox   = new JCheckBox("", true);
-    private static JCheckBox 		millLoseCheckBox 	 = new JCheckBox("", true);
+    private static JCheckBox        millLoseCheckBox     = new JCheckBox("", true);
     
     // GenerateConstructedDeck.get2Colors() and GenerateSealedDeck.get2Colors()
     // use these two variables
@@ -88,21 +88,22 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                                                                  ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.REMOVE_SMALL));
     public static JCheckBoxMenuItem removeArtifacts      = new JCheckBoxMenuItem(
                                                                  ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.REMOVE_ARTIFACTS));
-    public static JCheckBoxMenuItem useLAFFonts			= new JCheckBoxMenuItem(ForgeProps.getLocalized(MENU_BAR.OPTIONS.FONT));
+    public static JCheckBoxMenuItem useLAFFonts          = new JCheckBoxMenuItem(
+                                                                 ForgeProps.getLocalized(MENU_BAR.OPTIONS.FONT));
     
     private JButton                 questButton          = new JButton();
     
     private Action                  LOOK_AND_FEEL_ACTION = new LookAndFeelAction(this);
     private Action                  DOWNLOAD_ACTION      = new DownloadAction();
-    private Action                  DOWNLOAD_ACTION_LQ      = new DownloadActionLQ();
-    private Action                  IMPORT_PICTURE      = new ImportPictureAction();
+    private Action                  DOWNLOAD_ACTION_LQ   = new DownloadActionLQ();
+    private Action                  IMPORT_PICTURE       = new ImportPictureAction();
     private Action                  CARD_SIZES_ACTION    = new CardSizesAction();
     private Action                  ABOUT_ACTION         = new AboutAction();
     
     public static void main(String[] args) {
         ExceptionHandler.registerErrorHandling();
         
-        
+
         try {
             Object[] o = UIManager.getInstalledLookAndFeels();
             if(o.length > 3) {
@@ -120,7 +121,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
-
+        
         try {
             //deck migration - this is a little hard to read, because i can't just plainly reference a class in the
             //default package
@@ -152,9 +153,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                     }
             });
             */
-           
-           new Gui_NewGame();
-           
+
+            new Gui_NewGame();
+            
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
@@ -198,7 +199,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         bounds.x = (screen.width - bounds.width) / 2;
         bounds.y = (screen.height - bounds.height) / 2;
         setBounds(bounds);
-     
+        
         setTitle(ForgeProps.getLocalized(LANG.PROGRAM_NAME));
         setupMenu();
         setVisible(true);
@@ -207,8 +208,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     private void setupMenu() {
         Action[] actions = {
-                LOOK_AND_FEEL_ACTION, DOWNLOAD_ACTION,DOWNLOAD_ACTION_LQ, IMPORT_PICTURE ,CARD_SIZES_ACTION, ErrorViewer.ALL_THREADS_ACTION,
-                ABOUT_ACTION};
+                LOOK_AND_FEEL_ACTION, DOWNLOAD_ACTION, DOWNLOAD_ACTION_LQ, IMPORT_PICTURE, CARD_SIZES_ACTION,
+                ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION};
         JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
         for(Action a:actions)
             menu.add(a);
@@ -483,22 +484,16 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         
         //DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards are added
         
-        if(newGuiCheckBox.isSelected())
-        	AllZone.Display = new GuiDisplay3();
-        else
-        	AllZone.Display = new GuiDisplay2();
+        if(newGuiCheckBox.isSelected()) AllZone.Display = new GuiDisplay3();
+        else AllZone.Display = new GuiDisplay2();
         
-        if(smoothLandCheckBox.isSelected())
-        	Constant.Runtime.Smooth[0] = true;
-        else
-        	Constant.Runtime.Smooth[0] = false;
+        if(smoothLandCheckBox.isSelected()) Constant.Runtime.Smooth[0] = true;
+        else Constant.Runtime.Smooth[0] = false;
         
-        if(millLoseCheckBox.isSelected())
-        	Constant.Runtime.Mill[0] = true;
-        else
-        	Constant.Runtime.Mill[0] = false;
+        if(millLoseCheckBox.isSelected()) Constant.Runtime.Mill[0] = true;
+        else Constant.Runtime.Mill[0] = false;
         
-        
+
         AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
         AllZone.Display.setVisible(true);
         
@@ -640,12 +635,12 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         public void actionPerformed(ActionEvent e) {
             LookAndFeelInfo[] info = UIManager.getInstalledLookAndFeels();
             HashMap<String, String> LAFMap = new HashMap<String, String>();
-            for (int i=0; i < info.length; i++)
-            	LAFMap.put(info[i].getName(), info[i].getClassName());          
+            for(int i = 0; i < info.length; i++)
+                LAFMap.put(info[i].getName(), info[i].getClassName());
             
             //NapkinLookAndFeel napkin = new NapkinLookAndFeel();
             //NimRODLookAndFeel nrLAF = new NimRODLookAndFeel();
-                        
+            
             //add Substance LAFs:
             LAFMap.put("Autumn", "org.jvnet.substance.skin.SubstanceAutumnLookAndFeel");
             LAFMap.put("Business", "org.jvnet.substance.skin.SubstanceBusinessLookAndFeel");
@@ -680,15 +675,15 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             String[] keys = new String[LAFMap.size()];
             int count = 0;
             Iterator<String> iter = LAFMap.keySet().iterator();
-      	  	while(iter.hasNext()) {
-      	  		String s = iter.next();	
-      	  		keys[count++] = s;
-      	  	}
-      	  	Arrays.sort(keys);
-      	  	                        
+            while(iter.hasNext()) {
+                String s = iter.next();
+                keys[count++] = s;
+            }
+            Arrays.sort(keys);
+            
             ListChooser<String> ch = new ListChooser<String>("Choose one", 0, 1, keys);
             if(ch.show()) try {
-            	String name = ch.getSelectedValue();
+                String name = ch.getSelectedValue();
                 int index = ch.getSelectedIndex();
                 if(index == -1) return;
                 //UIManager.setLookAndFeel(info[index].getClassName());
@@ -710,39 +705,39 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         }
         
         public void actionPerformed(ActionEvent e) {
-        	
+            
             Gui_DownloadPictures.startDownload(null);
         }
     }
     
- public static class DownloadActionLQ extends AbstractAction {
-   
-	private static final long serialVersionUID = -6234380664413874813L;
-
-		public DownloadActionLQ() {
+    public static class DownloadActionLQ extends AbstractAction {
+        
+        private static final long serialVersionUID = -6234380664413874813L;
+        
+        public DownloadActionLQ() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADLQ));
         }
         
         public void actionPerformed(ActionEvent e) {
-        	
+            
             Gui_DownloadPictures_LQ.startDownload(null);
         }
     }
     
- public static class ImportPictureAction extends AbstractAction {
-	
-	private static final long serialVersionUID = 6893292814498031508L;
-
-			public ImportPictureAction() {
-	            super(ForgeProps.getLocalized(MENU_BAR.MENU.IMPORTPICTURE));
-	        }
-	        
-	        public void actionPerformed(ActionEvent e) {
-	        	GUI_ImportPicture ip = new GUI_ImportPicture(null);
-	            ip.setVisible(true);
-	        }
-	    }    
-
+    public static class ImportPictureAction extends AbstractAction {
+        
+        private static final long serialVersionUID = 6893292814498031508L;
+        
+        public ImportPictureAction() {
+            super(ForgeProps.getLocalized(MENU_BAR.MENU.IMPORTPICTURE));
+        }
+        
+        public void actionPerformed(ActionEvent e) {
+            GUI_ImportPicture ip = new GUI_ImportPicture(null);
+            ip.setVisible(true);
+        }
+    }
+    
     public static class CardSizesAction extends AbstractAction {
         
         private static final long serialVersionUID = -2900235618450319571L;
@@ -761,7 +756,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 if(index == -1) return;
                 Constant.Runtime.width[0] = widths[index];
                 Constant.Runtime.height[0] = heights[index];
-                ImageCache.dumpCache();
+                //not needed any more
+//                ImageCache.dumpCache();
             } catch(Exception ex) {
                 ErrorViewer.showError(ex);
             }
@@ -780,9 +776,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         public void actionPerformed(ActionEvent e) {
             JTextArea area = new JTextArea(8, 25);
             
-            if (useLAFFonts.isSelected()) {
-	            Font f = new Font(area.getFont().getName(), Font.PLAIN, 13);
-	            area.setFont(f);
+            if(useLAFFonts.isSelected()) {
+                Font f = new Font(area.getFont().getName(), Font.PLAIN, 13);
+                area.setFont(f);
             }
             
             area.setText("I enjoyed programming this project.  I'm glad other people also enjoy my program.  MTG Forge has turned out to be very successful.\n\nmtgrares@yahoo.com\nhttp://mtgrares.blogspot.com\n\nWritten by: Forge");
