@@ -673,9 +673,19 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     {
     	GenerateThemeDeck gen = new GenerateThemeDeck();
     	ArrayList<String> tNames = gen.getThemeNames();
+    	tNames.add(0, "Random");
     	Object o = AllZone.Display.getChoice("Select a theme.", tNames.toArray());
     	
-    	CardList td = gen.getThemeDeck(o.toString(), 60);
+    	String stDeck;
+    	if (o.toString().equals("Random"))
+    	{
+    		Random r = new Random();
+    		stDeck = tNames.get(r.nextInt(tNames.size() - 1) + 1);
+    	}
+    	else
+    		stDeck = o.toString();
+    	
+    	CardList td = gen.getThemeDeck(stDeck, 60);
     	Deck deck = new Deck(Constant.GameType.Constructed);
     	
     	for (int i=0; i<td.size(); i++)
