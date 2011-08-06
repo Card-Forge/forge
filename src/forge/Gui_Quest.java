@@ -158,7 +158,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         creditsLabel.setHorizontalTextPosition(SwingConstants.CENTER);
         
         
-        infoButton.setBounds(new Rectangle(15, 25, 142, 28));
+        infoButton.setBounds(new Rectangle(338, 235, 142, 28));
         infoButton.setFont(new java.awt.Font("Dialog", 0, 14));
         infoButton.setText("Opponent Notes");
         infoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +175,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
             lifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
             lifeLabel.setHorizontalTextPosition(SwingConstants.CENTER);
             
-        	otherShopsButton.setBounds(new Rectangle(291, 60, 142, 38));
+        	otherShopsButton.setBounds(new Rectangle(338, 290, 142, 38));
         	otherShopsButton.setFont(new java.awt.Font("Dialog", 0, 18));
         	otherShopsButton.setText("Bazaar");
         	otherShopsButton.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +195,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         	
         }
         
-        cardShopButton.setBounds(new Rectangle(291, 104, 142, 38));
+        cardShopButton.setBounds(new Rectangle(338, 334, 142, 38));
         cardShopButton.setFont(new java.awt.Font("Dialog", 0, 18));
         cardShopButton.setText("Card Shop");
         cardShopButton.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +204,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
             }
         });
         
-        deckEditorButton.setBounds(new Rectangle(291, 148, 142, 38));
+        deckEditorButton.setBounds(new Rectangle(338, 378, 142, 38));
         deckEditorButton.setFont(new java.awt.Font("Dialog", 0, 18));
         deckEditorButton.setText("Deck Editor");
         deckEditorButton.addActionListener(new java.awt.event.ActionListener() {
@@ -213,7 +213,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
             }
         });
         jPanel2.setBorder(titledBorder1);
-        jPanel2.setBounds(new Rectangle(39, 223, 441, 198));
+        jPanel2.setBounds(new Rectangle(20, 223, 300, 198));
         jPanel2.setLayout(null);
         playGameButton.setBounds(new Rectangle(150, 516, 161, 37));
         playGameButton.setFont(new java.awt.Font("Dialog", 0, 18));
@@ -250,13 +250,13 @@ public class Gui_Quest extends JFrame implements NewConstants{
         this.getContentPane().add(winLostLabel, null);
         this.getContentPane().add(creditsLabel,null);
         jPanel2.add(jLabel5, null);
-        jPanel2.add(infoButton, null);
+        this.getContentPane().add(infoButton, null);
         jPanel2.add(deckComboBox, null);
         jPanel2.add(oppOneRadio, null);
         jPanel2.add(oppTwoRadio, null);
         jPanel2.add(oppThreeRadio, null);
         if ("Fantasy".equals(questData.getMode())) {
-        	jPanel2.add(otherShopsButton, null);
+        	this.getContentPane().add(otherShopsButton, null);
         	this.getContentPane().add(lifeLabel,null);
         	this.getContentPane().add(questsButton, null);
         	
@@ -267,8 +267,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         	else
         		questsButton.setEnabled(true);
         }
-        jPanel2.add(cardShopButton, null);
-        jPanel2.add(deckEditorButton, null);
+        this.getContentPane().add(cardShopButton, null);
+        this.getContentPane().add(deckEditorButton, null);
         this.getContentPane().add(playGameButton, null);
         this.getContentPane().add(smoothLandCheckBox, null);
         this.getContentPane().add(resizeCheckbox, null);
