@@ -1,0 +1,9 @@
+Name:Krark-Clan Engineers
+ManaCost:3 R
+Types:Creature Goblin Artificer
+Text:no text
+PT:2/2
+A:AB$Destroy | Cost$ R Sac<2/Artifact> | ValidTgts$Artifact| TgtPrompt$Select target artifact. | SpellDescription$ Destroy target artifact.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/krark_clan_engineers.jpg
+End
