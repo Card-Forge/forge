@@ -1006,7 +1006,7 @@ public class CardFactory implements NewConstants {
                 if (TgtPlayer[0] == true)
                 {
                    setTargetPlayer(Constant.Player.Human);
-                   return shouldTgtP();
+                   return true; //shouldTgtP();
                 }
                
                 if (TgtCreature[0] == true)
