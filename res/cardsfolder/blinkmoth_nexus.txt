@@ -3,6 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
+A:AB$Pump|Cost$1 T|ValidTgts$Creature.Blinkmoth|TgtPrompt$Select target Blinkmoth creature|NumAtt$+1|NumDef$+1|SpellDescription$Target Blinkmoth creature gets +1/+1 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card39439.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/163.jpg

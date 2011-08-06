@@ -720,130 +720,6 @@ class CardFactory_Lands {
                 }
             };
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
-            
-            final SpellAbility[] a2 = new SpellAbility[1];
-            final Command eot2 = new Command() {
-                private static final long serialVersionUID = 6180724472470740160L;
-                
-                public void execute() {
-                    Card c = a2[0].getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        c.addTempAttackBoost(-1);
-                        c.addTempDefenseBoost(-1);
-                    }
-                }
-            };
-            
-            a2[0] = new Ability_Tap(card, "1") {
-                private static final long serialVersionUID = 3561450520225198222L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getAttacker() != null  && super.canPlayAI();
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    setTargetCard(getAttacker());
-                }
-                
-                /*
-                 *  getAttacker() will now filter out non-Blinkmoths and non-Changelings
-                 */
-                
-                public Card getAttacker() {
-                    //target creature that is going to attack
-                    Combat attackers = ComputerUtil.getAttackers();
-                    CardList list = new CardList(attackers.getAttackers());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return CardFactoryUtil.canTarget(card, c) && 
-                            (c.getType().contains("Blinkmoth") || c.getKeyword().contains("Changeling"));
-                        }
-                    });
-                    list.remove(card);
-                    list.shuffle();
-                    
-                    if(list.size() != 0) return list.get(0);
-                    else return null;
-                }//getAttacker()
-                
-                @Override
-                public void resolve() {
-                    Card c = a2[0].getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        c.addTempAttackBoost(1);
-                        c.addTempDefenseBoost(1);
-                        
-                        AllZone.EndOfTurn.addUntil(eot2);
-                    }
-                }//resolve()
-            };//SpellAbility
-            card.addSpellAbility(a2[0]);
-            a2[0].setDescription("1, tap: Target Blinkmoth gets +1/+1 until end of turn.");
-            
-/*
-            @SuppressWarnings("unused")
-            // target unused
-            final Input target = new Input() {
-                private static final long serialVersionUID = 8913477363141356082L;
-                
-                @Override
-                public void showMessage() {
-                    ButtonUtil.enableOnlyCancel();
-                    AllZone.Display.showMessage("Select Blinkmoth to get +1/+1");
-                }
-                
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    if(!CardFactoryUtil.canTarget(card, c)) {
-                        AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    } else if(c.isCreature() && c.getType().contains("Blinkmoth")) {
-                        card.tap();
-                        AllZone.Human_Play.updateObservers();
-                        
-                        a2[0].setTargetCard(c);//since setTargetCard() changes stack description
-                        a2[0].setStackDescription(c + " gets +1/+1 until EOT");
-                        
-                        AllZone.InputControl.resetInput();
-                        AllZone.Stack.add(a2[0]);
-                    }
-                }//selectCard()
-                
-                @Override
-                public void selectButtonCancel() {
-                    card.untap();
-                    stop();
-                }
-            };//Input target
-*/
-            /*
-             *  This input method will allow the human to select both Blinkmoths and Changelings
-             */
-            
-            Input runtime = new Input() {
-				private static final long serialVersionUID = 2530992128400417560L;
-
-				@Override
-                public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    CardList creatures = new CardList();
-                    creatures.addAll(comp.getCards());
-                    creatures.addAll(hum.getCards());
-                    creatures = creatures.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && CardFactoryUtil.canTarget(card, c) && 
-                                  (c.getType().contains("Blinkmoth") || c.getKeyword().contains("Changeling"));
-                        }
-                    });
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(a2[0], creatures, "Select target Blinkmoth", true, false));
-                }
-            };//Input target
-            a2[0].setBeforePayMana(runtime);
-            
-//          a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Blinkmoth"));
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -1223,7 +1099,9 @@ class CardFactory_Lands {
                             && c.getTurnInZone() == AllZone.Phase.getTurn();
                 }
             };
-            Ability_Tap ability = new Ability_Tap(card, "G U") {
+            
+            Ability_Cost abCost = new Ability_Cost("G U T", cardName, true);
+            Ability_Activated ability = new Ability_Activated(card, abCost, null) {
                 private static final long serialVersionUID = 1416258136308898492L;
                 
                 CardList                  inPlay           = new CardList();
@@ -1246,8 +1124,8 @@ class CardFactory_Lands {
                         targ.addCounter(Counters.P1P1, 1);
                 }
             };
-            ability.setDescription("G U, tap: Put a +1/+1 counter on each creature that entered the battlefield this turn.");
-            ability.setStackDescription("Put a +1/+1 counter on each creature that entered the battlefield this turn.");
+            ability.setDescription(abCost+"Put a +1/+1 counter on each creature that entered the battlefield this turn.");
+            ability.setStackDescription(cardName+" - Put a +1/+1 counter on each creature that entered the battlefield this turn.");
             card.addSpellAbility(ability);
         }
         //*************** END ************ END **************************
@@ -1255,7 +1133,8 @@ class CardFactory_Lands {
         
        //*************** START *********** START **************************
         else if(cardName.equals("Crypt of Agadeem")) {
-            final SpellAbility ability = new Ability_Tap(card, "2") {
+        	Ability_Cost abCost = new Ability_Cost("2 T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
                 private static final long serialVersionUID = -3561865824450791583L;
                 
                 @Override
@@ -1275,7 +1154,7 @@ class CardFactory_Lands {
                 }
             };
             
-            ability.setDescription("2, tap: Add B to your mana pool for each for each black creature card in your graveyard.");
+            ability.setDescription(abCost+"Add B to your mana pool for each for each black creature card in your graveyard.");
             StringBuilder sb = new StringBuilder();
             sb.append(cardName).append(" adds B to your mana pool for each black creature card in your graveyard.");
             ability.setStackDescription(sb.toString());
@@ -2029,7 +1908,10 @@ class CardFactory_Lands {
         	/*
         	 * Tap: The power of target creature with flying becomes 0 until end of turn.
         	 */
-        	final Ability_Tap ability = new Ability_Tap(card) {
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+        	final String Tgts[] = {"Creature.withFlying"};
+        	Target target = new Target("Select target creature with flying.", Tgts);
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
         		private static final long serialVersionUID = -2090435946748184314L;
 
         		@Override
@@ -2079,8 +1961,9 @@ class CardFactory_Lands {
                     }//is card in play?
                 }//resolve()
             };//SpellAbility
+            ability.setDescription(abCost+"The power of target creature with flying becomes 0 until end of turn.");
+            ability.setStackDescription(cardName+" - target creature's power becomes 0.");
             card.addSpellAbility(ability);
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreatureKeyword_NoCost_TapAbility("Flying", ability));
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
