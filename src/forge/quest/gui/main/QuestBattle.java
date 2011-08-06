@@ -316,8 +316,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Storm 2", "medium", "WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant");
         addToDeckList("Storm 3", "hard", "WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant");
 //        addToDeckList("Superboy 3", "hard", "R Artifact deck");
-        addToDeckList("Superman 1", "easy", "WUBRG Slivers deck with Raise Dead and Breath of Life");
-        addToDeckList("Superman 2", "medium", "WUBRG Slivers deck with Zombify and Tribal Flames");
+        addToDeckList("Superman 3", "hard", "WRG counters deck with Borborygmos, Rushwood Elemental, Doubling Season and Titania's Boon");
 //        addToDeckList("Swamp Thing 1", "easy", "BG deck");
 //        addToDeckList("Swamp Thing 2", "medium", "BG deck");
 //        addToDeckList("Swamp Thing 3", "hard", "BG deck");
