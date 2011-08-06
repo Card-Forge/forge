@@ -13700,8 +13700,9 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Viridian Shaman") || cardName.equals("Uktabi Orangutan")
-                || cardName.equals("Vithian Renegades") || cardName.equals("Keldon Vandals")) {
+        else if(cardName.equals("Viridian Shaman")      || cardName.equals("Uktabi Orangutan")
+                || cardName.equals("Vithian Renegades") || cardName.equals("Keldon Vandals")
+                || cardName.equals("Manic Vandal")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
