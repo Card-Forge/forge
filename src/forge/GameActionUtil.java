@@ -4854,7 +4854,6 @@ public class GameActionUtil {
     
     	if(c.getName().equals("Marsh Viper")) playerCombatDamage_PoisonCounter(c, 2);
     	else if(c.getName().equals("Abyssal Specter")) opponent_Discard(c, 1);
-    	else if(c.getName().equals("Hypnotic Specter")) opponent_Discard_Random(c, 1);
     	else if(c.getName().equals("Nicol Bolas")) playerCombatDamage_Nicol_Bolas(c);
 		else if(c.getName().equals("Thieving Magpie")|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
 		else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
@@ -5619,28 +5618,6 @@ public class GameActionUtil {
 			ability2.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability2);
-		}
-	}
-
-	private static void opponent_Discard_Random(final Card source, final int num) {
-		final Player player = source.getController().getOpponent();
-
-		if(source.getNetAttack() > 0 && !source.isFaceDown()) {
-			Ability ability = new Ability(source, "0") {
-				@Override
-				public void resolve() {
-					player.discardRandom(num, this);
-				}
-			};// ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(source.getName()).append(" - ").append(player).append(" discards ");
-			sb.append(num).append(" card");
-			if(1 != num) sb.append("s");
-			sb.append(" at random");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
 		}
 	}
 	
