@@ -136,6 +136,10 @@ public class AbilityFactory_Clash {
         AbilityFactory AF_Outcomes = new AbilityFactory();
         boolean victory = AF.getHostCard().getController().clashWithOpponent(AF.getHostCard());
 
+        //Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Player",AF.getHostCard().getController());
+
         if(victory)
         {
                 if(AF.getMapParams().containsKey("WinSubAbility"))
@@ -146,12 +150,7 @@ public class AbilityFactory_Clash {
 
                     win.resolve();
                 }
-
-                //Run triggers
-                HashMap<String,Object> runParams = new HashMap<String,Object>();
-                runParams.put("Player",AF.getHostCard().getController());
                 runParams.put("Won","True");
-                AllZone.TriggerHandler.runTrigger("Clashed",runParams);
         }
         else
         {
@@ -163,17 +162,15 @@ public class AbilityFactory_Clash {
 
                     otherwise.resolve();
                 }
-                //Run triggers
-                HashMap<String,Object> runParams = new HashMap<String,Object>();
-                runParams.put("Player",AF.getHostCard().getController());
                 runParams.put("Won","False");
-                AllZone.TriggerHandler.runTrigger("Clashed",runParams);
         }
 
         //Oldstyle drawbacks shouldn't be necessary anymore?
         if(AF.hasSubAbility())
             if (SA.getSubAbility() != null)
                 SA.getSubAbility().resolve();
+
+        AllZone.TriggerHandler.runTrigger("Clashed",runParams);
     }
 
 }
