@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Human Wizard
 Text:no text
 PT:1/1
-K:abTapTgt tapXType<2/Wizard>:Permanent:Tap target permanent.
+A:AB$Tap | Cost$ tapXType<2/Wizard> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Tap target permanent.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_grifter.jpg

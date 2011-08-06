@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Scout
 Text:no text
 PT:1/1
-K:abTapTgt W T:Artifact:Tap target artifact.
+A:AB$Tap | Cost$ W T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Tap target artifact.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_transfixer.jpg
