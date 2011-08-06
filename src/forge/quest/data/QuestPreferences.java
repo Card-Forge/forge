@@ -10,54 +10,54 @@ import java.io.Serializable;
 public class QuestPreferences implements Serializable {
 	private static final long serialVersionUID = 3266336025656577905L;
 
-	private int numDiff = 4; 
+	private static int numDiff = 4; 
 	
 	// Descriptive difficulty names
-	private String[] sDifficulty = { "Easy", "Normal", "Hard", "Very Hard" };
+	private static String[] sDifficulty = { "Easy", "Normal", "Hard", "Very Hard" };
 	
 	// Default match wins it takes to gain a booster
-	private int[] winsForBooster = { 1, 1, 2, 2 };
-	private int[] winsForRankIncrease = { 1, 2, 3, 4 };
-	private int[] winsForMediumAI = { 6, 6, 11, 11 };
-	private int[] winsForHardAI = { 9, 9, 21, 21 };
-	private int[] winsForVeryHardAI = { 29, 29, 31, 31 };
+	private static int[] winsForBooster = { 1, 1, 2, 2 };
+	private static int[] winsForRankIncrease = { 1, 2, 3, 4 };
+	private static int[] winsForMediumAI = { 6, 6, 11, 11 };
+	private static int[] winsForHardAI = { 9, 9, 21, 21 };
+	private static int[] winsForVeryHardAI = { 29, 29, 31, 31 };
 	
 	// Default starting land for a quest
-	private int startingBasicLand = 20;
-	private int startingSnowBasicLand = 20;
+	private static int startingBasicLand = 20;
+	private static int startingSnowBasicLand = 20;
 
 	// Default starting amount of each rarity
-	private int[] startingCommons = {45, 40, 40, 40};
-	private int[] startingUncommons = {20, 15, 15, 15};
-	private int[] startingRares = {10, 10, 10, 10};
+	private static int[] startingCommons = {45, 40, 40, 40};
+	private static int[] startingUncommons = {20, 15, 15, 15};
+	private static int[] startingRares = {10, 10, 10, 10};
 	
-	private int startingCredits = 250;
+	private static int startingCredits = 250;
 
-	private int boosterPackRare = 1;
-	private int boosterPackUncommon = 3;
-	private int boosterPackCommon = 9;
+	private static int boosterPackRare = 1;
+	private static int boosterPackUncommon = 3;
+	private static int boosterPackCommon = 9;
 
-	private int matchRewardBase = 10;
-	private double matchRewardTotalWins = 0.3;
-	private int matchRewardNoLosses = 10;
+	private static int matchRewardBase = 10;
+	private static double matchRewardTotalWins = 0.3;
+	private static int matchRewardNoLosses = 10;
 	
-	private int matchRewardPoisonWinBonus = 50;
-	private int matchRewardMilledWinBonus = 40;
-	private int matchRewardAltWinBonus = 100;
+	private static int matchRewardPoisonWinBonus = 50;
+	private static int matchRewardMilledWinBonus = 40;
+	private static int matchRewardAltWinBonus = 100;
 	
-	private int matchRewardWinOnFirstTurn = 1500;
-	private int matchRewardWinByTurnFive = 250;
-	private int matchRewardWinByTurnTen = 50;
-	private int matchRewardWinByTurnFifteen = 5;
-	private int matchRewardMullToZero = 500;
+	private static int matchRewardWinOnFirstTurn = 1500;
+	private static int matchRewardWinByTurnFive = 250;
+	private static int matchRewardWinByTurnTen = 50;
+	private static int matchRewardWinByTurnFifteen = 5;
+	private static int matchRewardMullToZero = 500;
 	
-	public QuestPreferences()
-	{
+	
+	static {
 		// if quest.prefs exists
 		grabPrefsFromFile();
 	}
 	
-	public void grabPrefsFromFile(){
+	public static void grabPrefsFromFile(){
 		try{
 			BufferedReader input = new BufferedReader(new FileReader(ForgeProps.getFile(QUEST.PREFS)));
 			String line = null;
@@ -124,239 +124,238 @@ public class QuestPreferences implements Serializable {
 		}    
 	}
 	
-	// getters
-	public String[] getDifficulty(){
+	public static String[] getDifficulty(){
 		return sDifficulty;
 	}
 	
-	public String getDifficulty(int index){
+	public static String getDifficulty(int index){
 		return sDifficulty[index];
 	}
 	
-	public int getWinsForBooster(int index){
+	public static int getWinsForBooster(int index){
 		return winsForBooster[index];
 	}
 	
-	public int getWinsForRankIncrease(int index){
+	public static int getWinsForRankIncrease(int index){
 		return winsForRankIncrease[index];
 	}
 	
-	public int getWinsForMediumAI(int index){
+	public static int getWinsForMediumAI(int index){
 		return winsForMediumAI[index];
 	}
 	
-	public int getWinsForHardAI(int index){
+	public static int getWinsForHardAI(int index){
 		return winsForHardAI[index];
 	}
 	
-	public int getWinsForVeryHardAI(int index){
+	public static int getWinsForVeryHardAI(int index){
 		return winsForVeryHardAI[index];
 	}
 	
-	public int getStartingBasic(){
+	public static int getStartingBasic(){
 		return startingBasicLand;
 	}
 	
-	public int getStartingSnowBasic(){
+	public static int getStartingSnowBasic(){
 		return startingSnowBasicLand;
 	}
 	
-	public int getStartingCommons(int index){
+	public static int getStartingCommons(int index){
 		return startingCommons[index];
 	}
 	
-	public int getStartingUncommons(int index){
+	public static int getStartingUncommons(int index){
 		return startingUncommons[index];
 	}
 	
-	public int getStartingRares(int index){
+	public static int getStartingRares(int index){
 		return startingRares[index];
 	}
 	
-	public int getStartingCredits(){
+	public static int getStartingCredits(){
 		return startingCredits;
 	}
 	
-	public int getNumCommon(){
+	public static int getNumCommon(){
 		return boosterPackCommon;
 	}
 	
-	public int getNumUncommon(){
+	public static int getNumUncommon(){
 		return boosterPackUncommon;
 	}
 	
-	public int getNumRare(){
+	public static int getNumRare(){
 		return boosterPackRare;
 	}
 	
 	
-	public int getMatchRewardBase(){
+	public static int getMatchRewardBase(){
 		return matchRewardBase;
 	}
 	
-	public double getMatchRewardTotalWins(){
+	public static double getMatchRewardTotalWins(){
 		return matchRewardTotalWins;
 	}
 	
-	public int getMatchRewardNoLosses(){
+	public static int getMatchRewardNoLosses(){
 		return matchRewardNoLosses;
 	}
 	
-	public int getMatchRewardPoisonWinBonus(){
+	public static int getMatchRewardPoisonWinBonus(){
 		return matchRewardPoisonWinBonus;
 	}
 	
-	public int getMatchRewardMilledWinBonus(){
+	public static int getMatchRewardMilledWinBonus(){
 		return matchRewardMilledWinBonus;
 	}
 	
-	public int getMatchRewardAltWinBonus(){
+	public static int getMatchRewardAltWinBonus(){
 		return matchRewardAltWinBonus;
 	}
 	
 	
-	public int getMatchRewardWinFirst(){
+	public static int getMatchRewardWinFirst(){
 		return matchRewardWinOnFirstTurn;
 	}
 	
-	public int getMatchRewardWinByFifth(){
+	public static int getMatchRewardWinByFifth(){
 		return matchRewardWinByTurnFive;
 	}
 	
-	public int getMatchRewardWinByTen(){
+	public static int getMatchRewardWinByTen(){
 		return matchRewardWinByTurnTen;
 	}
 	
-	public int getMatchRewardWinByFifteen(){
+	public static int getMatchRewardWinByFifteen(){
 		return matchRewardWinByTurnFifteen;
 	}
 	
-	public int getMatchMullToZero(){
+	public static int getMatchMullToZero(){
 		return matchRewardMullToZero;
 	}
 	
 	
 	// setters
-	public void setDifficulty(String diff){
-		this.sDifficulty = diff.split(",");
+	public static void setDifficulty(String diff){
+		sDifficulty = diff.split(",");
 	}
 	
-	public void setWinsForBooster(String wins){
+	public static void setWinsForBooster(String wins){
 		String[] winsStr = wins.split(",");
 		
 		for(int i = 0; i < numDiff; i++)
-			this.winsForBooster[i] = Integer.parseInt(winsStr[i]);
+			winsForBooster[i] = Integer.parseInt(winsStr[i]);
 	}
 	
-	public void setWinsForRank(String wins){
+	public static void setWinsForRank(String wins){
 		String[] winsStr = wins.split(",");
 		
 		for(int i = 0; i < numDiff; i++)
-			this.winsForRankIncrease[i] = Integer.parseInt(winsStr[i]);
+			winsForRankIncrease[i] = Integer.parseInt(winsStr[i]);
 	}
 	
-	public void setWinsForMediumAI(String wins){
+	public static void setWinsForMediumAI(String wins){
 		String[] winsStr = wins.split(",");
 		
 		for(int i = 0; i < numDiff; i++)
-			this.winsForMediumAI[i] = Integer.parseInt(winsStr[i]);
+			winsForMediumAI[i] = Integer.parseInt(winsStr[i]);
 	}
 	
-	public void setWinsForHardAI(String wins){
+	public static void setWinsForHardAI(String wins){
 		String[] winsStr = wins.split(",");
 		
 		for(int i = 0; i < numDiff; i++)
-			this.winsForHardAI[i] = Integer.parseInt(winsStr[i]);
+			winsForHardAI[i] = Integer.parseInt(winsStr[i]);
 	}
 	
-	public void setStartingBasic(String land){
-		this.startingBasicLand = Integer.parseInt(land);
+	public static void setStartingBasic(String land){
+		startingBasicLand = Integer.parseInt(land);
 	}
 	
-	public void setStartingSnowBasic(String land){
-		this.startingSnowBasicLand = Integer.parseInt(land);
+	public static void setStartingSnowBasic(String land){
+		startingSnowBasicLand = Integer.parseInt(land);
 	}
 	
-	public void setStartingCommons(String rarity){
+	public static void setStartingCommons(String rarity){
 		String[] splitStr = rarity.split(",");
 		
 		for(int i = 0; i < numDiff; i++)
-			this.startingCommons[i] = Integer.parseInt(splitStr[i]);
+			startingCommons[i] = Integer.parseInt(splitStr[i]);
 	}
 	
-	public void setStartingUncommons(String rarity){
+	public static void setStartingUncommons(String rarity){
 		String[] splitStr = rarity.split(",");
 		
 		for(int i = 0; i < numDiff; i++)
-			this.startingUncommons[i] = Integer.parseInt(splitStr[i]);
+			startingUncommons[i] = Integer.parseInt(splitStr[i]);
 	}
 	
-	public void setStartingRares(String rarity){
+	public static void setStartingRares(String rarity){
 		String[] splitStr = rarity.split(",");
 		
 		for(int i = 0; i < numDiff; i++)
-			this.startingRares[i] = Integer.parseInt(splitStr[i]);
+			startingRares[i] = Integer.parseInt(splitStr[i]);
 	}
 	
-	public void setStartingCredits(String credits){
-		this.startingCredits = Integer.parseInt(credits);
+	public static void setStartingCredits(String credits){
+		startingCredits = Integer.parseInt(credits);
 	}
 	
-	public void setNumCommon(String pack){
-		this.boosterPackCommon = Integer.parseInt(pack);
+	public static void setNumCommon(String pack){
+		boosterPackCommon = Integer.parseInt(pack);
 	}
 	
-	public void setNumUncommon(String pack){
-		this.boosterPackUncommon = Integer.parseInt(pack);
+	public static void setNumUncommon(String pack){
+		boosterPackUncommon = Integer.parseInt(pack);
 	}
 	
-	public void setNumRares(String pack){
-		this.boosterPackRare = Integer.parseInt(pack);
-	}
-	
-	
-	public void setMatchRewardBase(String match){
-		this.matchRewardBase = Integer.parseInt(match);
-	}
-	
-	public void setMatchRewardTotalWins(String match){
-		this.matchRewardTotalWins = Double.parseDouble(match);
-	}
-	
-	public void setMatchRewardNoLosses(String match){
-		this.matchRewardNoLosses = Integer.parseInt(match);
-	}
-	
-	public void setMatchRewardPoisonWinBonus(String match){
-		this.matchRewardPoisonWinBonus = Integer.parseInt(match);
-	}
-	
-	public void setMatchRewardMilledWinBonus(String match){
-		this.matchRewardMilledWinBonus = Integer.parseInt(match);
-	}
-	
-	public void setMatchRewardAltWinBonus(String match){
-		this.matchRewardAltWinBonus = Integer.parseInt(match);
+	public static void setNumRares(String pack){
+		boosterPackRare = Integer.parseInt(pack);
 	}
 	
 	
-	public void setMatchRewardWinFirst(String match){
-		this.matchRewardWinOnFirstTurn = Integer.parseInt(match);
+	public static void setMatchRewardBase(String match){
+		matchRewardBase = Integer.parseInt(match);
 	}
 	
-	public void setMatchRewardWinByFifth(String match){
-		this.matchRewardWinByTurnFive = Integer.parseInt(match);
+	public static void setMatchRewardTotalWins(String match){
+		matchRewardTotalWins = Double.parseDouble(match);
 	}
 	
-	public void setMatchRewardWinByTen(String match){
-		this.matchRewardWinByTurnTen = Integer.parseInt(match);
+	public static void setMatchRewardNoLosses(String match){
+		matchRewardNoLosses = Integer.parseInt(match);
 	}
 	
-	public void setMatchRewardWinByFifteen(String match){
-		this.matchRewardWinByTurnFifteen = Integer.parseInt(match);
+	public static void setMatchRewardPoisonWinBonus(String match){
+		matchRewardPoisonWinBonus = Integer.parseInt(match);
 	}
 	
-	public void setMatchMullToZero(String match){
-		this.matchRewardMullToZero = Integer.parseInt(match);
+	public static void setMatchRewardMilledWinBonus(String match){
+		matchRewardMilledWinBonus = Integer.parseInt(match);
+	}
+	
+	public static void setMatchRewardAltWinBonus(String match){
+		matchRewardAltWinBonus = Integer.parseInt(match);
+	}
+	
+	
+	public static void setMatchRewardWinFirst(String match){
+		matchRewardWinOnFirstTurn = Integer.parseInt(match);
+	}
+	
+	public static void setMatchRewardWinByFifth(String match){
+		matchRewardWinByTurnFive = Integer.parseInt(match);
+	}
+	
+	public static void setMatchRewardWinByTen(String match){
+		matchRewardWinByTurnTen = Integer.parseInt(match);
+	}
+	
+	public static void setMatchRewardWinByFifteen(String match){
+		matchRewardWinByTurnFifteen = Integer.parseInt(match);
+	}
+	
+	public static void setMatchMullToZero(String match){
+		matchRewardMullToZero = Integer.parseInt(match);
 	}
 }

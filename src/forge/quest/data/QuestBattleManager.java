@@ -15,7 +15,7 @@ public class QuestBattleManager {
     private static transient List<String> hardAIDecks;
     private static transient List<String> veryHardAIDecks;
 
-   static {
+    static {
         List<String> aiDeckNames = getAIDeckNames();
         easyAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.EASY), aiDeckNames);
         mediumAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.MEDIUM), aiDeckNames);
@@ -64,27 +64,45 @@ public class QuestBattleManager {
     public static String[] getOpponents() {
         int index = AllZone.QuestData.getDifficultyIndex();
 
-        if (AllZone.QuestData.getWin() < AllZone.QuestData.getPreferences().getWinsForMediumAI(index)) {
-            return new String[]{getOpponent(easyAIDecks,0),getOpponent(easyAIDecks,1),getOpponent(easyAIDecks,2)};
-        }
-        
-        if (AllZone.QuestData.getWin() == AllZone.QuestData.getPreferences().getWinsForMediumAI(index)) {
-            return new String[]{getOpponent(easyAIDecks,0),getOpponent(mediumAIDecks,1),getOpponent(mediumAIDecks,2)};
-        }
-
-        if (AllZone.QuestData.getWin() < AllZone.QuestData.getPreferences().getWinsForHardAI(index)) {
-            return new String[]{getOpponent(mediumAIDecks,0),getOpponent(mediumAIDecks,1),getOpponent(mediumAIDecks,2)};
-        }
-        
-        if (AllZone.QuestData.getWin() == AllZone.QuestData.getPreferences().getWinsForHardAI(index)) {
-            return new String[]{getOpponent(mediumAIDecks,0),getOpponent(hardAIDecks,1),getOpponent(hardAIDecks,2)};
-        }
-        
-        if (AllZone.QuestData.getWin() >= AllZone.QuestData.getPreferences().getWinsForVeryHardAI(index)) {
-            return new String[]{getOpponent(hardAIDecks,0),getOpponent(hardAIDecks,1),getOpponent(veryHardAIDecks,2)};
+        if (AllZone.QuestData.getWin() < QuestPreferences.getWinsForMediumAI(index)) {
+            return new String[]{
+                    getOpponent(easyAIDecks, 0),
+                    getOpponent(easyAIDecks, 1),
+                    getOpponent(easyAIDecks, 2)};
         }
 
-        return new String[]{getOpponent(hardAIDecks,0),getOpponent(hardAIDecks,1),getOpponent(hardAIDecks,2)};
+        if (AllZone.QuestData.getWin() == QuestPreferences.getWinsForMediumAI(index)) {
+            return new String[]{
+                    getOpponent(easyAIDecks, 0),
+                    getOpponent(mediumAIDecks, 0),
+                    getOpponent(mediumAIDecks, 1)};
+        }
+
+        if (AllZone.QuestData.getWin() < QuestPreferences.getWinsForHardAI(index)) {
+            return new String[]{
+                    getOpponent(mediumAIDecks, 0),
+                    getOpponent(mediumAIDecks, 1),
+                    getOpponent(mediumAIDecks, 2)};
+        }
+
+        if (AllZone.QuestData.getWin() == QuestPreferences.getWinsForHardAI(index)) {
+            return new String[]{
+                    getOpponent(mediumAIDecks, 0),
+                    getOpponent(hardAIDecks, 0),
+                    getOpponent(hardAIDecks, 1)};
+        }
+
+        if (AllZone.QuestData.getWin() >= QuestPreferences.getWinsForVeryHardAI(index)) {
+            return new String[]{
+                    getOpponent(hardAIDecks, 0),
+                    getOpponent(hardAIDecks, 1),
+                    getOpponent(veryHardAIDecks, 0)};
+        }
+
+        return new String[]{
+                getOpponent(hardAIDecks, 0),
+                getOpponent(hardAIDecks, 1),
+                getOpponent(hardAIDecks, 2)};
     }
 
     private static List<String> readFile(File file, List<String> aiDecks) {

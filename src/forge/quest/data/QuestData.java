@@ -7,7 +7,10 @@ import forge.properties.NewConstants;
 import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.QuestPetManager;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 //when you create QuestDataOld and AFTER you copy the AI decks over
@@ -20,7 +23,6 @@ import java.util.*;
 //which reads the files "questDecks-easy", "questDecks-medium","questDecks-hard",
 
 public class QuestData {
-    QuestPreferences preferences = null;
 
     int rankIndex;
     int win;
@@ -71,9 +73,8 @@ public class QuestData {
     QuestPetManager petManager = new QuestPetManager();
 
     public QuestData() {
-        preferences = new QuestPreferences();
 
-        for (int i = 0; i < preferences.getStartingBasic(); i++) {
+        for (int i = 0; i < QuestPreferences.getStartingBasic(); i++) {
             cardPool.add("Forest");
             cardPool.add("Mountain");
             cardPool.add("Swamp");
@@ -81,7 +82,7 @@ public class QuestData {
             cardPool.add("Plains");
         }
 
-        for (int i = 0; i < preferences.getStartingSnowBasic(); i++) {
+        for (int i = 0; i < QuestPreferences.getStartingSnowBasic(); i++) {
             cardPool.add("Snow-Covered Forest");
             cardPool.add("Snow-Covered Mountain");
             cardPool.add("Snow-Covered Swamp");
@@ -121,12 +122,12 @@ public class QuestData {
 
         ArrayList<String> list = new ArrayList<String>();
 
-        list.addAll(boosterPack.getQuestStarterDeck(allCards, preferences.getStartingCommons(difficulty),
-                preferences.getStartingUncommons(difficulty), preferences.getStartingRares(difficulty), standardStart));
+        list.addAll(boosterPack.getQuestStarterDeck(allCards, QuestPreferences.getStartingCommons(difficulty),
+                QuestPreferences.getStartingUncommons(difficulty), QuestPreferences.getStartingRares(difficulty), standardStart));
 
         //because cardPool already has basic land added to it
         cardPool.addAll(list);
-        credits = preferences.getStartingCredits();
+        credits = QuestPreferences.getStartingCredits();
 
         mode = m;
         if (mode.equals(FANTASY)) {
@@ -266,9 +267,9 @@ public class QuestData {
 
     public void addCards() {
         CardList cards = AllZone.CardFactory.getCards();
-        int nCommon = preferences.getNumCommon();
-        int nUncommon = preferences.getNumUncommon();
-        int nRare = preferences.getNumRare();
+        int nCommon = QuestPreferences.getNumCommon();
+        int nUncommon = QuestPreferences.getNumUncommon();
+        int nRare = QuestPreferences.getNumRare();
 
         ArrayList<String> newCards = new ArrayList<String>();
         newCards.addAll(boosterPack.generateCards(cards, nCommon, Constant.Rarity.Common, null));
@@ -340,49 +341,49 @@ public class QuestData {
     }
 
     public long getCreditsToAdd(QuestMatchState matchState) {
-        long creds = (long) (preferences.getMatchRewardBase() + (preferences.getMatchRewardTotalWins() * win));
+        long creds = (long) (QuestPreferences.getMatchRewardBase() + (QuestPreferences.getMatchRewardTotalWins() * win));
         String[] wins = matchState.getWinMethods();
         int[] winTurns = matchState.getWinTurns();
         boolean[] mulliganedToZero = matchState.getMulliganedToZero();
 
         if (matchState.getLose() == 0) {
-            creds += preferences.getMatchRewardNoLosses();
+            creds += QuestPreferences.getMatchRewardNoLosses();
         }
 
         for (String s : wins) {
             if (s != null) {
                 if (s.equals("Poison Counters")) {
-                    creds += preferences.getMatchRewardPoisonWinBonus();
+                    creds += QuestPreferences.getMatchRewardPoisonWinBonus();
                 }
                 else if (s.equals("Milled")) {
-                    creds += preferences.getMatchRewardMilledWinBonus();
+                    creds += QuestPreferences.getMatchRewardMilledWinBonus();
                 }
                 else if (s.equals("Battle of Wits") || s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") ||
                         s.equals("Epic Struggle") || s.equals("Door to Nothingness") || s.equals("Barren Glory") ||
                         s.equals("Near-Death Experience") || s.equals("Mortal Combat") || s.equals("Test of Endurance")) {
-                    creds += preferences.getMatchRewardAltWinBonus();
+                    creds += QuestPreferences.getMatchRewardAltWinBonus();
                 }
             }
         }
         for (int i : winTurns) {
             if (i == 1) {
-                creds += preferences.getMatchRewardWinFirst();
+                creds += QuestPreferences.getMatchRewardWinFirst();
             }
             else if (i <= 5) {
-                creds += preferences.getMatchRewardWinByFifth();
+                creds += QuestPreferences.getMatchRewardWinByFifth();
             }
             else if (i <= 10) {
-                creds += preferences.getMatchRewardWinByTen();
+                creds += QuestPreferences.getMatchRewardWinByTen();
             }
             else if (i <= 15) {
-                creds += preferences.getMatchRewardWinByFifteen();
+                creds += QuestPreferences.getMatchRewardWinByFifteen();
             }
         }
 
 
         for (boolean b : mulliganedToZero) {
             if (b == true) {
-                creds += preferences.getMatchMullToZero();
+                creds += QuestPreferences.getMatchMullToZero();
             }
         }
 
@@ -413,7 +414,7 @@ public class QuestData {
     public int getTotalNumberOfGames(int difficulty) {
         //-2 because you start a level 1, and the last level is secret
         int numberLevels = rankArray.length - 2;
-        int nMatches = preferences.getWinsForRankIncrease(difficulty);
+        int nMatches = QuestPreferences.getWinsForRankIncrease(difficulty);
 
         return numberLevels * nMatches;
     }
@@ -423,7 +424,7 @@ public class QuestData {
     public void addWin() {
         win++;
 
-        if (win % preferences.getWinsForRankIncrease(diffIndex) == 0) {
+        if (win % QuestPreferences.getWinsForRankIncrease(diffIndex) == 0) {
             rankIndex++;
         }
     }
@@ -499,11 +500,11 @@ public class QuestData {
 
     public void setDifficulty(int i) {
         diffIndex = i;
-        difficulty = preferences.getDifficulty(i);
+        difficulty = QuestPreferences.getDifficulty(i);
     }
 
     public void setDifficultyIndex() {
-        String[] diffStr = preferences.getDifficulty();
+        String[] diffStr = QuestPreferences.getDifficulty();
         for (int i = 0; i < diffStr.length; i++) {
             if (difficulty.equals(diffStr[i])) {
                 diffIndex = i;
@@ -512,7 +513,7 @@ public class QuestData {
     }
 
     public String[] getDifficultyChoices() {
-        return preferences.getDifficulty();
+        return QuestPreferences.getDifficulty();
     }
 
     public String getRank() {
@@ -527,7 +528,7 @@ public class QuestData {
     //add cards after a certain number of wins or losses
 
     public boolean shouldAddCards(boolean didWin) {
-        int n = preferences.getWinsForBooster(diffIndex);
+        int n = QuestPreferences.getWinsForBooster(diffIndex);
 
         if (didWin) {
             return getWin() % n == 0;
@@ -577,10 +578,6 @@ public class QuestData {
         return petManager;
     }
 
-    public QuestPreferences getQuestPreferences() {
-        return preferences;
-    }
-
     //get new cards that were added to your card pool by addCards()
 
     public void addToNewList(ArrayList<String> added) {
@@ -594,10 +591,6 @@ public class QuestData {
 
     public QuestInventory getInventory() {
         return inventory;
-    }
-
-    public QuestPreferences getPreferences() {
-        return preferences;
     }
 
     public long getRandomSeed() {

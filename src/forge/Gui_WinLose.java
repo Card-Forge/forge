@@ -289,8 +289,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     	String[] wins = winLose.getWinMethods();
     	
     	sb.append("<html>");
-    	
-    	QuestPreferences qdPrefs = q.getQuestPreferences();
+
     	
     	for (String s : wins)
     	{
@@ -302,15 +301,15 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     			sb.append("! Bonus: <b>+");
     			
     			if (s.equals("Poison Counters"))
-    				sb.append(qdPrefs.getMatchRewardPoisonWinBonus());
+    				sb.append(QuestPreferences.getMatchRewardPoisonWinBonus());
     			else if (s.equals("Milled"))
-    				sb.append(qdPrefs.getMatchRewardMilledWinBonus());
+    				sb.append(QuestPreferences.getMatchRewardMilledWinBonus());
     			else if (s.equals("Battle of Wits") || 
 	    			s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || s.equals("Epic Struggle") ||
 	    			s.equals("Door to Nothingness") || s.equals("Barren Glory") || s.equals("Near-Death Experience") ||
 	    			s.equals("Mortal Combat") || s.equals("Test of Endurance") ) {
 
-	    			sb.append(qdPrefs.getMatchRewardAltWinBonus());
+	    			sb.append(QuestPreferences.getMatchRewardAltWinBonus());
 	    		}
     			
     			sb.append(" credits</b>.<br>");
@@ -328,19 +327,19 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     			
         		if (i == 1){
         			sb.append("Won in one turn!");
-        			turnCredits += qdPrefs.getMatchRewardWinFirst();
+        			turnCredits += QuestPreferences.getMatchRewardWinFirst();
         		}
     			else if (i <= 5){
     				sb.append("Won by turn 5!");
-    				turnCredits += qdPrefs.getMatchRewardWinByFifth();
+    				turnCredits += QuestPreferences.getMatchRewardWinByFifth();
     			}
     			else if (i <= 10){
     				sb.append("Won by turn 10!");
-    				turnCredits += qdPrefs.getMatchRewardWinByTen();
+    				turnCredits += QuestPreferences.getMatchRewardWinByTen();
     			}
     			else if (i <= 15){
     				sb.append("Won by turn 15!");
-    				turnCredits += qdPrefs.getMatchRewardWinByFifteen();
+    				turnCredits += QuestPreferences.getMatchRewardWinByFifteen();
     			}
         		if (turnCredits > 0)
         			sb.append(" Bonus: <b>+").append(turnCredits).append(" credits</b>.<br>");
@@ -353,13 +352,13 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     	{
     		if (b){
     			sb.append("Mulliganed to zero and still won! Bonus: <b>+");
-    			sb.append(qdPrefs.getMatchMullToZero()).append(" credits</b>.<br>");
+    			sb.append(QuestPreferences.getMatchMullToZero()).append(" credits</b>.<br>");
     		}
     	}
     	
     	if (winLose.getLose()==0)
     		sb.append("You have not lost once! Bonus: <b>+");
-    		sb.append(qdPrefs.getMatchRewardNoLosses()).append(" credits</b>.<br>");
+    		sb.append(QuestPreferences.getMatchRewardNoLosses()).append(" credits</b>.<br>");
     	
     	if(q.getInventory().getItemLevel("Estates") == 1)
     		sb.append("Estates bonus: <b>10%</b>.<br>");

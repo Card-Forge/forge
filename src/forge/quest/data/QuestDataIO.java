@@ -130,7 +130,7 @@ public class QuestDataIO {
 
         newData.difficulty = oldData.getDifficulty();
         newData.diffIndex = oldData.getDiffIndex();
-        newData.rankIndex = oldData.getWin() / newData.preferences.getWinsForRankIncrease(newData.diffIndex);
+        newData.rankIndex = oldData.getWin() / QuestPreferences.getWinsForRankIncrease(newData.diffIndex);
 
         newData.win = oldData.getWin();
         newData.lost = oldData.getLost();
