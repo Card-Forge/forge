@@ -1214,6 +1214,29 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Phyrexian Rebirth")) {
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -9183346394081027286L;
+
+				@Override
+                public void resolve() {
+                	int count = 0;
+                	CardList play = AllZoneUtil.getCreaturesInPlay();
+                	for(Card c:play) {
+                		AllZone.GameAction.destroy(c);
+                		if(!c.hasKeyword("Indestructible")) count++;
+                	}
+                	CardFactoryUtil.makeToken("Horror", "C X X Horror", card.getController(), "", new String[] {
+                        "Artifact", "Creature", "Horror"}, count, count, new String[] {});
+                }
+                
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Martial Coup")) {
