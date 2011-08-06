@@ -4034,40 +4034,6 @@ public class CardFactory_Sorceries {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Time Warp")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -76579316599195788L;
-                
-                @Override
-                public void resolve() {
-                    AllZone.Phase.addExtraTurn(getTargetPlayer());
-                }
-            };
-            card.clearSpellAbility();
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************        
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Time Walk") || cardName.equals("Temporal Manipulation")
-                || cardName.equals("Capture of Jingzhou")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 35300742940184315L;
-                
-                @Override
-                public void resolve() {
-                    //System.out.println("Turn: " + AllZone.Phase.getTurn());
-                    AllZone.Phase.addExtraTurn(card.getController());
-                }
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************        
-        
-
-        //*************** START *********** START **************************
         else if(cardName.equals("Traumatize")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 42470566751344693L;
