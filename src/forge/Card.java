@@ -1312,7 +1312,7 @@ public class Card extends MyObservable {
     
     public void addDamage(int n, Card source) {
         Log.debug("addDamage called on " + this + " for " + n + " damage.");
-        if(this.getName().equals("Cho-Manno, Revolutionary")) n = 0;
+        if(this.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) n = 0;
         //setDamage(getDamage() + n);
         
         if(CardFactoryUtil.canDamage(source, this)) {
@@ -1321,7 +1321,7 @@ public class Card extends MyObservable {
     }
     
     public void setDamage(int n) {
-        if(this.getName().equals("Cho-Manno, Revolutionary")) n = 0;
+        if(this.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) n = 0;
         damage = n;
     }
     
