@@ -11341,6 +11341,9 @@ public class GameActionUtil {
   	      		Handcards.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
 	      		if (Handcards.size() > 0) return false;
 	      	}
+  	      	if(SpecialConditions.contains("isEquipped")) {
+	      		if (!SourceCard.isEquipped()) return false;
+	      	}
   	      	return true;
 			
 		}
