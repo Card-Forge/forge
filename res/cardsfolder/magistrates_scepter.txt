@@ -1,0 +1,8 @@
+Name:Magistrate's Scepter
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$PutCounter|Cost$4 T|CounterType$CHARGE|CounterNum$1|SpellDescription$Put a charge counter on CARDNAME.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magistrates_scepter.jpg
+End

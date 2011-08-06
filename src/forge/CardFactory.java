@@ -11163,7 +11163,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
         
-      //*************** START ************ START **************************
+        //*************** START ************ START **************************
         else if(cardName.equals("Black Mana Battery") || cardName.equals("Blue Mana Battery")
         		|| cardName.equals("Green Mana Battery") || cardName.equals("Red Mana Battery")
         		|| cardName.equals("White Mana Battery")) {
@@ -11224,6 +11224,30 @@ public class CardFactory implements NewConstants {
             
             addMana.setBeforePayMana(runtime);
             card.addSpellAbility(addMana);
+        }//*************** END ************ END **************************
+        
+        //*************** START ************ START **************************
+        else if(cardName.equals("Magistrate's Scepter")) {
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+            final Ability_Activated addTurn = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = -8712180600748576359L;
+				@Override
+				public boolean canPlay() {
+					return card.getCounters(Counters.CHARGE) >= 3;
+				}
+				@Override 
+				public boolean canPlayAI() {
+					return canPlay();
+				}
+                @Override
+                public void resolve() {
+                    card.subtractCounter(Counters.CHARGE, 3);
+                    AllZone.Phase.addExtraTurn(card.getController());
+                }
+            };
+            addTurn.setDescription("tap, Remove three charge counters from Magistrate's Scepter: Take an extra turn after this one.");
+            addTurn.setStackDescription(cardName+" - take an extra turn after this one.");
+            card.addSpellAbility(addTurn);
         }//*************** END ************ END **************************
 
         return postFactoryKeywords(card);
