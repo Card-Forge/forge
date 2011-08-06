@@ -9896,7 +9896,9 @@ public class CardFactory implements NewConstants {
                     CardList computer = new CardList(AllZone.Computer_Play.getCards());
                     
                     human = human.getType("Creature");
+                    human = human.getNotKeyword("Indestructible");
                     computer = computer.getType("Creature");
+                    computer = computer.getNotKeyword("Indestructible");
                     
                     // the computer will at least destroy 2 more human creatures
                     return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
