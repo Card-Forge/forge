@@ -1,0 +1,10 @@
+Name:Mistveil Plains
+ManaCost:no cost
+Types:Land Plains
+Text:no text
+K:tap: add W
+K:CARDNAME enters the battlefield tapped.
+A:AB$ChangeZone| Cost$ W T | IsPresent$ Permanent.White+YouCtrl | PresentCompare$ GE2 | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card in your graveyard. | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | ChangeNum $ 1 | SpellDescription$ Put target card from your graveyard on the bottom of your library. Activate this ability only if you control two or more white permanents.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mistveil_plains.jpg
+End
