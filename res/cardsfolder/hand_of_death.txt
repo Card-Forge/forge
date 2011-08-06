@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Sorcery
 Text:Destroy target nonblack creature.
 K:spDestroyTgt:Creature.nonBlack
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hand_of_death.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hand_of_death.jpg
 End

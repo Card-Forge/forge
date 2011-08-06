@@ -4,7 +4,7 @@ Types:Creature Elf Druid
 Text:no text
 PT:2/2
 K:1, tap: add W R G
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/knotvine_mystic.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knotvine_mystic.jpg
 End

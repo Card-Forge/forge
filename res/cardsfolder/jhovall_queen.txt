@@ -4,6 +4,6 @@ Types:Creature Cat Rebel
 Text:no text
 PT:4/7
 K:Vigilance
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jhovall_queen.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jhovall_queen.jpg
 End

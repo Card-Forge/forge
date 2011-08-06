@@ -4,6 +4,6 @@ Types:Creature Human Cleric
 Text:Whenever Headhunter deals combat damage to a player, that player discards a card.
 PT:1/1
 K:Morph:B
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/headhunter.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/headhunter.jpg
 End

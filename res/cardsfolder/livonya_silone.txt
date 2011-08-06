@@ -5,6 +5,6 @@ Text:no text
 PT:4/4
 K:First Strike
 K:Legendary landwalk
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/livonya_silone.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/livonya_silone.jpg
 End

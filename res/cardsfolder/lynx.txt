@@ -4,6 +4,6 @@ Types:Creature Cat
 Text:no text
 PT:2/1
 K:Forestwalk
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21053.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21053.jpg
 End

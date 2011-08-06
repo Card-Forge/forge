@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 Text:Spells cost 1 less to cast.
 K:CostChange:All:Less:1:Spell:All:All:NoSpecial
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_awakening.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_awakening.jpg
 End

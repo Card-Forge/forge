@@ -8,8 +8,8 @@ K:tap: add U to your mana pool for each Ally you control.
 K:tap: add B to your mana pool for each Ally you control.
 K:tap: add R to your mana pool for each Ally you control.
 K:tap: add G to your mana pool for each Ally you control.
-K:SVar:RemAIDeck:True
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/harabaz_druid.jpg
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/harabaz_druid.jpg
 End

@@ -4,6 +4,6 @@ Types:Sorcery
 Text:Destroy target land.
 K:spDestroyTgt:Land
 K:Draw a card.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/implode.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/implode.jpg
 End

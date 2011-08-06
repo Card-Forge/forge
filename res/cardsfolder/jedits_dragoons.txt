@@ -4,6 +4,6 @@ Types:Creature Cat Soldier
 Text:When Jedit's Dragoons comes into play, you gain 4 life.
 PT:2/5
 K:Vigilance
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jedits_dragoons.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jedits_dragoons.jpg
 End

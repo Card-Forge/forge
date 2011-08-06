@@ -4,6 +4,6 @@ Types:Creature Kavu
 Text:no text
 PT:3/3
 K:When CARDNAME enters the battlefield, draw a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83175.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83175.jpg
 End

@@ -4,7 +4,7 @@ Types:Creature Human Knight
 Text:no text
 PT:2/4
 K:WheneverKeyword:EntersBattleField:Type/Creature:Play:+1+1 Counters/1!+1+1 Counters/1:Self!Initiating_Card:ASAP:No_Condition:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on Juniper Order Ranger.
-K:SVar:BuffedBy:Creature
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_ranger.jpg
+SVar:BuffedBy:Creature
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_ranger.jpg
 End

@@ -2,7 +2,7 @@ Name:Knighthood
 ManaCost:2 W
 Types:Enchantment
 Text:Creatures you control have first strike.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/knighthood.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knighthood.jpg
 End

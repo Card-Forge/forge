@@ -4,6 +4,6 @@ Types:Creature Human Soldier
 Text:no text
 PT:1/4
 K:abPump W:Vigilance
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_cavalry.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_cavalry.jpg
 End

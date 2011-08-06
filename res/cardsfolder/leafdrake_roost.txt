@@ -3,6 +3,6 @@ ManaCost:3 G U
 Types:Enchantment Aura
 Text:Enchanted land has "G U, Tap: Put a 2/2 green and blue Drake creature token with flying onto the battlefield."
 K:Enchant land
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/leafdrake_roost.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leafdrake_roost.jpg
 End

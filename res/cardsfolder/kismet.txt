@@ -2,6 +2,6 @@ Name:Kismet
 ManaCost:3 W
 Types:Enchantment
 Text:Artifacts, creatures, and lands your opponents control enter the battlefield tapped.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kismet.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kismet.jpg
 End

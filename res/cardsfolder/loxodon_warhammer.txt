@@ -3,6 +3,6 @@ ManaCost:3
 Types:Artifact Equipment
 Text:Equipped creature gets +3/+0 and has lifelink and trample.
 K:eqPump 3:+3/+0/Trample & Lifelink
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_warhammer.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_warhammer.jpg
 End

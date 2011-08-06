@@ -4,6 +4,6 @@ Types:Creature Lammasu
 Text:When Hunted Lammasu enters the battlefield, put a 4/4 black Horror creature token onto the battlefield under target opponent's control.
 PT:5/5
 K:Flying
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_lammasu.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hunted_lammasu.jpg
 End

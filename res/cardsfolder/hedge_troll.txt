@@ -4,6 +4,6 @@ Types:Creature Troll Cleric
 Text:Hedge Troll gets +1/+1 as long as you control a Plains.
 PT:2/2
 K:RegenerateMe:W
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hedge_troll.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hedge_troll.jpg
 End

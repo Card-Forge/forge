@@ -4,6 +4,6 @@ Types:Legendary Creature Human Warrior
 Text:no text
 PT:5/4
 K:Rampage 1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hunding_gjornersen.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hunding_gjornersen.jpg
 End

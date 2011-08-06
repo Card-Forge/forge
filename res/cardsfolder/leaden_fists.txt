@@ -5,6 +5,6 @@ Text:Enchanted creature gets +3/+3 and doesn't untap during its controller's unt
 K:Flash
 K:Enchant creature
 K:enPumpCurse:+3/+3/CARDNAME doesn't untap during your untap step.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/leaden_fists.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leaden_fists.jpg
 End

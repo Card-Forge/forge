@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 K:tap: add G
 K:Sacrifice CARDNAME: Add G to your mana pool.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/horn_of_ramos.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/horn_of_ramos.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Treefolk
 Text:no text
 PT:3/4
 K:Forestwalk
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4767.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4767.jpg
 End

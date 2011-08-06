@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Enchantment
 Text:When Illusions of Grandeur enters the battlefield, you gain 20 life. When Illusions of Grandeur leaves the battlefield, you lose 20 life.
 K:Cumulative upkeep:2
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/illusions_of_grandeur.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/illusions_of_grandeur.jpg
 End

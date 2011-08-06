@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Creature Human Scout
 Text:no text
 PT:2/1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jhessian_lookout.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jhessian_lookout.jpg
 End

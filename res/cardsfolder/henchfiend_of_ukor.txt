@@ -6,6 +6,6 @@ PT:3/2
 K:Haste
 K:Echo:1 B
 K:abPump BR:+1/+0
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/henchfiend_of_ukor.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/henchfiend_of_ukor.jpg
 End

@@ -4,6 +4,6 @@ Types:Sorcery
 Text:no text
 K:spLoseLifeTgt:1:Drawback$YouGainLife/1:Target player loses 1 life and you gain 1 life.
 K:Draw a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/last_caress.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/last_caress.jpg
 End

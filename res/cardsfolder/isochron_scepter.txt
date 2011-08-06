@@ -2,6 +2,6 @@ Name:Isochron Scepter
 ManaCost:2
 Types:Artifact
 Text:Imprint - When Isochron Scepter enters the battlefield, you may exile an instant card with converted mana cost 2 or less from your hand.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/isochron_scepter.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/isochron_scepter.jpg
 End

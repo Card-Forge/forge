@@ -5,6 +5,6 @@ Text:no text
 PT:3/3
 K:Flying
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:B B
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/junun_efreet.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/junun_efreet.jpg
 End

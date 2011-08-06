@@ -2,6 +2,6 @@ Name:Honden of Infinite Rage
 ManaCost:2 R
 Types:Legendary Enchantment Shrine
 Text:At the beginning of your upkeep, Honden of Infinite Rage deals damage to target creature or player equal to the number of Shrines you control.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_infinite_rage.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_infinite_rage.jpg
 End

@@ -6,6 +6,6 @@ PT:3/4
 K:Flying
 K:Vigilance
 K:Haste
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card109746.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card109746.jpg
 End

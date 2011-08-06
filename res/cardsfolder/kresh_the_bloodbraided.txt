@@ -4,6 +4,6 @@ Types:Legendary Creature Human Warrior
 Text:no text
 PT:3/3
 K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/Power:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put X +1/+1 counters on Kresh the Bloodbraided, where X is that creature's power.
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kresh_the_bloodbraided.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kresh_the_bloodbraided.jpg
 End

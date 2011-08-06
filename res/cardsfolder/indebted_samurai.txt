@@ -5,6 +5,6 @@ Text:no text
 PT:2/3
 K:Bushido 1
 K:WheneverKeyword:PermanentIntoGraveyard:Type/Samurai:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a Samurai you control is put into a graveyard from the battlefield, you may put a +1/+1 counter on Indebted Samurai.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/indebted_samurai.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/indebted_samurai.jpg
 End

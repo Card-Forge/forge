@@ -4,6 +4,6 @@ Types:Creature Human Knight
 Text:When Knight of the White Orchid comes into play, if an opponents controls more lands than you you may search your library for a plains card, put it into play, then shuffle your library.
 PT:2/2
 K:First Strike
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_white_orchid.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_white_orchid.jpg
 End

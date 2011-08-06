@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Instant
 Text:Destroy target legendary creature.
 K:spDestroyTgt:Creature.Legendary
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/heros_demise.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heros_demise.jpg
 End

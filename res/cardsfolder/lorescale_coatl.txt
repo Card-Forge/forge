@@ -3,6 +3,6 @@ ManaCost:1 G U
 Types:Creature Snake
 Text:Whenever you draw a card, you may put a +1/+1 counter on Lorescale Coatl.
 PT:2/2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lorescale_coatl.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lorescale_coatl.jpg
 End

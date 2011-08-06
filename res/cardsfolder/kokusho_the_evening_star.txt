@@ -4,6 +4,6 @@ Types:Legendary Creature Dragon Spirit
 Text:When Kokusho, the Evening Star is put into a graveyard from play, each opponent loses 5 life. You gain life equal to the life lost this way.
 PT:5/5
 K:Flying
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50445.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50445.jpg
 End

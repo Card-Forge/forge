@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Human Rogue
 Text:no text
 PT:2/1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121226.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121226.jpg
 End

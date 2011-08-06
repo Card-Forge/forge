@@ -9,6 +9,6 @@ K:abPump W W:Protection from blue
 K:abPump W W:Protection from green
 K:abPump W W:Protection from red
 K:abPump W W:Protection from white
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_dawn.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_dawn.jpg
 End

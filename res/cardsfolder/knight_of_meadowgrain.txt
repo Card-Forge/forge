@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:First Strike
 K:Lifelink
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_meadowgrain.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_meadowgrain.jpg
 End

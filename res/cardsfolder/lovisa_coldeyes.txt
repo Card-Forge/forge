@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Legendary Creature Human Barbarian
 Text:Warrior, Berserker, and/or other Barbarian creatures get +2/+2 and have haste.
 PT:3/3
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lovisa_coldeyes.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lovisa_coldeyes.jpg
 End

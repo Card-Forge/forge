@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 K:When CARDNAME enters the battlefield, draw a card.
 K:5, tap, Sacrifice CARDNAME: Add W U B R G to your mana pool.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kaleidostone.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kaleidostone.jpg
 End

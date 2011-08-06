@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Elf Warrior
 Text:All Elf creatures you control get +1/+1
 PT:1/1
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/imperious_perfect.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/imperious_perfect.jpg
 End

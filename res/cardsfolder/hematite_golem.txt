@@ -4,6 +4,6 @@ Types:Artifact Creature Golem
 Text:no text
 PT:1/4
 K:abPump 1 R:+2/+0
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hematite_golem.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hematite_golem.jpg
 End

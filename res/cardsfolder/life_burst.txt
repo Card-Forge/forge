@@ -2,6 +2,6 @@ Name:Life Burst
 ManaCost:1 W
 Types:Instant
 Text:Target player gains 4 life, then gains 4 life for each card named Life Burst in each graveyard.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card29704.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card29704.jpg
 End

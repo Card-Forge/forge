@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Instant
 Text:no text
 K:spDrawCardsTgt:2:Target player draws two cards.:Inspiration - draw 2 cards.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/inspiration.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/inspiration.jpg
 End

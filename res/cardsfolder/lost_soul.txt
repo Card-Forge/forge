@@ -4,6 +4,6 @@ Types:Creature Spirit Minion
 Text:no text
 PT:2/1
 K:Swampwalk
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card20178.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card20178.jpg
 End

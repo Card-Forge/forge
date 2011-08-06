@@ -3,6 +3,6 @@ ManaCost:G
 Types:Sorcery
 Text:Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
 K:spTutor:Land.Basic:Hand
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lay_of_the_land.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lay_of_the_land.jpg
 End

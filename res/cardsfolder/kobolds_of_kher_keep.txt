@@ -4,6 +4,6 @@ Types:Creature Kobold
 Text:no text
 PT:0/1
 K:CARDNAME is red.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kobolds_of_kher_keep.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kobolds_of_kher_keep.jpg
 End

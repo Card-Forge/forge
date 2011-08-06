@@ -4,6 +4,6 @@ Types:Creature Lizard
 Text:no text
 PT:3/1
 K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:Damage/1:NormalInput/Player:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may have Hissing Iguanar deal 1 damage to target player.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hissing_iguanar.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hissing_iguanar.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:R
 Types:Instant
 Text:no text
 K:spDamageTgtCP:3
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/bd/en-us/card27255.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/bd/en-us/card27255.jpg
 End

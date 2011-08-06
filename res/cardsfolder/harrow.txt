@@ -2,6 +2,6 @@ Name:Harrow
 ManaCost:2 G
 Types:Instant
 Text:As an additional cost to cast Harrow, sacrifice a land.\r\nSearch your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/harrow.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/harrow.jpg
 End

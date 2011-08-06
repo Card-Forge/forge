@@ -4,6 +4,6 @@ Types:Creature Centaur
 Text:no text
 PT:2/2
 K:Forestwalk
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card29782.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card29782.jpg
 End

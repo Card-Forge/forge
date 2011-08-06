@@ -5,6 +5,6 @@ Text:LEVEL 1-2 2/2 Unblockable LEVEL 3+ 3/3 Unblockable Shroud
 PT:1/1
 K:Level up:2 U
 K:maxLevel:4
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hada_spy_patrol.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hada_spy_patrol.jpg
 End

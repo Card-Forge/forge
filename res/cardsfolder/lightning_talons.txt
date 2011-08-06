@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature gets +3/+0 and has first strike.
 K:Enchant creature
 K:enPump:+3/+0/First Strike
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_talons.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_talons.jpg
 End

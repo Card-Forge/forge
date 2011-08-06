@@ -2,6 +2,6 @@ Name:Howl of the Night Pack
 ManaCost:6 G
 Types:Sorcery
 Text:Put a 2/2 green Wolf creature token onto the battlefield for each Forest you control.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/howl_of_the_night_pack.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/howl_of_the_night_pack.jpg
 End

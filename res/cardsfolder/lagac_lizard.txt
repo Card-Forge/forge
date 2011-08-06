@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Lizard
 Text:no text
 PT:3/3
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lagac_lizard.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lagac_lizard.jpg
 End

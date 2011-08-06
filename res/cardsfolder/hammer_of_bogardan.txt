@@ -3,6 +3,6 @@ ManaCost:1 R R
 Types:Sorcery
 Text:no text
 K:spDamageTgtCP:3
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_of_bogardan.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hammer_of_bogardan.jpg
 End

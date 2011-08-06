@@ -4,6 +4,6 @@ Types:Creature Hound
 Text:no text
 PT:3/2
 K:First Strike
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_hounds.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_hounds.jpg
 End

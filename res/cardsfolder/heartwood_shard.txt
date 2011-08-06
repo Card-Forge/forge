@@ -4,6 +4,6 @@ Types:Artifact
 Text:no text
 K:abPumpTgtC 3 T:Trample
 K:abPumpTgtC G T:Trample
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/heartwood_shard.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heartwood_shard.jpg
 End

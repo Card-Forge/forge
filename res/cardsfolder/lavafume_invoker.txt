@@ -4,6 +4,6 @@ Types:Creature Goblin Shaman
 Text:no text
 PT:2/2
 K:abAllPump 8:YouCtrl:+3/+0:Creatures you control get +3/+0 until end of turn.:Lavafume Invoker - creatures get +3/+0 until EOT
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lavafume_invoker.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lavafume_invoker.jpg
 End

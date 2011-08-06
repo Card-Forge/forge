@@ -2,6 +2,6 @@ Name:Halcyon Glaze
 ManaCost:1 U U
 Types:Enchantment
 Text:Whenever you play a creature spell, Halcyon Glaze becomes a 4/4 Illusion creature with flying until end of turn. It's still an enchantment.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/halcyon_glaze.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/halcyon_glaze.jpg
 End

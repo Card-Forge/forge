@@ -2,6 +2,6 @@ Name:Kaervek's Spite
 ManaCost:B B B
 Types:Instant
 Text:As an additional cost to cast Kaervek's Spite, sacrifice all permanents you control and discard your hand. Target player loses 5 life.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kaerveks_spite.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kaerveks_spite.jpg
 End

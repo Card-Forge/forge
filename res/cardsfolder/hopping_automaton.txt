@@ -4,6 +4,6 @@ Types:Artifact Creature Construct
 Text:no text
 PT:2/2
 K:abPump 0:-1/-1/Flying
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hopping_automaton.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hopping_automaton.jpg
 End

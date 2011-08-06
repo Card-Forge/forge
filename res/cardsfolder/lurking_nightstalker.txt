@@ -3,6 +3,6 @@ ManaCost:B B
 Types:Creature Nightstalker
 Text:If Lurking Nightstalker attacks, it gets +2/+0 until the end of the turn.
 PT:1/1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/lurking_nightstalker.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/lurking_nightstalker.jpg
 End

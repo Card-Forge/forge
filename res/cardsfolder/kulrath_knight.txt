@@ -5,6 +5,6 @@ Text:Creatures your opponents control with counters on them can't attack or bloc
 PT:3/3
 K:Flying
 K:Wither
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kulrath_knight.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kulrath_knight.jpg
 End

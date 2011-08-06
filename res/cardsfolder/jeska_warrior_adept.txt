@@ -6,6 +6,6 @@ PT:3/1
 K:First Strike
 K:Haste
 K:abDamageTgtCP T:1
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jeska_warrior_adept.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jeska_warrior_adept.jpg
 End

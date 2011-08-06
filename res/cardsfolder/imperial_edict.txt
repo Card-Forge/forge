@@ -2,6 +2,6 @@ Name:Imperial Edict
 ManaCost:1 B
 Types:Sorcery
 Text:Target opponent sacrifices a creature.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_edict.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_edict.jpg
 End

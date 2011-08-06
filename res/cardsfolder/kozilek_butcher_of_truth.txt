@@ -5,6 +5,6 @@ Text:When you cast Kozilek, Butcher of Truth, draw four cards.
 PT:12/12
 K:Annihilator 4
 K:When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and its owner shuffles his or her graveyard into his or her library.
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kozilek_butcher_of_truth.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kozilek_butcher_of_truth.jpg
 End

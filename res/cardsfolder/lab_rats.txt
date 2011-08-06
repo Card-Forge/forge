@@ -2,7 +2,7 @@ Name:Lab Rats
 ManaCost:B
 Types:Sorcery
 Text:no text
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lab_rats.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lab_rats.jpg
 End

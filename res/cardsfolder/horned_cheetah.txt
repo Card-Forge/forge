@@ -4,6 +4,6 @@ Types:Creature Cat
 Text:no text
 PT:2/2
 K:Lifelink
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_cheetah.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_cheetah.jpg
 End

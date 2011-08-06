@@ -5,7 +5,7 @@ Text:Whenever Kazandu Blademaster or another Ally enters the battlefield under y
 PT:1/1
 K:First Strike
 K:Vigilance
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_blademaster.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_blademaster.jpg
 End

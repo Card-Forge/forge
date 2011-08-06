@@ -3,9 +3,9 @@ ManaCost:1 R
 Types:Creature Sliver
 Text:All Sliver creatures have haste.
 PT:1/1
-K:SVar:PlayMain1:TRUE
-K:SVar:BuffedBy:Sliver
-K:SVar:AntiBuffedBy:Sliver
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_sliver.jpg
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Sliver
+SVar:AntiBuffedBy:Sliver
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heart_sliver.jpg
 End

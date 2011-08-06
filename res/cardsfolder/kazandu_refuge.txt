@@ -4,6 +4,6 @@ Types:Land
 Text:Kazandu Refuge enters the battlefield tapped.\r\nWhen Kazandu Refuge enters the battlefield, you gain 1 life.
 K:tap: add R
 K:tap: add G
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_refuge.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_refuge.jpg
 End

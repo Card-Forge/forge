@@ -5,6 +5,6 @@ Text:no text
 PT:3/3
 K:Vigilance
 K:abPump W:+0/+1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_stalwart.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_stalwart.jpg
 End

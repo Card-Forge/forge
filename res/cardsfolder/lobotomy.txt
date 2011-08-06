@@ -2,6 +2,6 @@ Name:Lobotomy
 ManaCost:2 U B
 Types:Sorcery
 Text:Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and remove them from the game. Then that player shuffles his or her library.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lobotomy.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lobotomy.jpg
 End

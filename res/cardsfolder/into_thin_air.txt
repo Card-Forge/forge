@@ -4,6 +4,6 @@ Types:Instant
 Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.) Return target artifact to its owner's hand.
 K:spBounceTgt:Artifact:Hand
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/into_thin_air.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/into_thin_air.jpg
 End

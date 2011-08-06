@@ -4,6 +4,6 @@ Types:Legendary Creature Human Rogue
 Text:no text
 PT:3/3
 K:abDestroyTgtV R R R T:Artifact.nonCreature:Destroy target noncreature artifact.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/joven.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/joven.jpg
 End

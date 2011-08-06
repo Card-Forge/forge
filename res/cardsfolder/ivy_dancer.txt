@@ -4,6 +4,6 @@ Types:Creature Dryad Shaman
 Text:no text
 PT:1/2
 K:abPumpTgtC T:Forestwalk
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ivy_dancer.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ivy_dancer.jpg
 End

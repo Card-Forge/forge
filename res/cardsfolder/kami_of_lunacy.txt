@@ -5,6 +5,6 @@ Text:no text
 PT:4/1
 K:Flying
 K:Soulshift:5
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_lunacy.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_lunacy.jpg
 End

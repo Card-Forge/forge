@@ -4,6 +4,6 @@ Types:Creature Specter
 Text:Whenever Hypnotic Specter deals damage to an opponent, that player discards a card at random.
 PT:2/2
 K:Flying
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hypnotic_specter.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hypnotic_specter.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Instant
 Text:no text
 K:spDamageTgtC:2:Drawback$YouGainLife/2:Last Kiss deals 2 damage to target creature and you gain 2 life.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/last_kiss.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/last_kiss.jpg
 End

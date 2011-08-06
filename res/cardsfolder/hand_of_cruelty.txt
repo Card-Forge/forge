@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:Protection from white
 K:Bushido 1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74063.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74063.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Zombie Horror
 Text:no text
 PT:2/2
 K:WheneverKeyword:Attacks:Self:Play:ModifyLife/-2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Infectious Horror attacks, each opponent loses 2 life.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_horror.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_horror.jpg
 End

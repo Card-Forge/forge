@@ -6,6 +6,6 @@ PT:6/6
 K:abPump R:+1/+0
 K:WheneverKeyword:EntersBattleField:Self:Play:Damage/3:InputType - CreatureORPlayer:ASAP:No_Condition:MultipleTargets:Whenever Inferno Titan enters the battlefield
 K:WheneverKeyword:Attacks:Self:Play:Damage/3:InputType - CreatureORPlayer:ASAP:No_Condition:MultipleTargets:or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno_titan.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno_titan.jpg
 End

@@ -3,7 +3,7 @@ ManaCost:2 G G G G
 Types:Enchantment
 Text:no text
 K:StaticEffect:Play:All Permanents:Keyword/Forestwalk:Type.Creature!Color.green:Green creatures have forestwalk.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_path.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_path.jpg
 End

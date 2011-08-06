@@ -6,6 +6,6 @@ PT:2/1
 K:Trample
 K:Haste
 K:At the beginning of the end step, sacrifice CARDNAME.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_serpent.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_serpent.jpg
 End

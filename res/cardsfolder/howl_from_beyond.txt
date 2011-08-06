@@ -3,7 +3,7 @@ ManaCost:X B
 Types:Instant
 Text:no text
 K:spPumpTgt:+X/+0:Target creature gets +X/+0 until end of turn.
-K:SVar:X:Count$xPaid
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/howl_from_beyond.jpg
+SVar:X:Count$xPaid
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/howl_from_beyond.jpg
 End

@@ -5,6 +5,6 @@ Text:no text
 PT:2/1
 K:Flying
 K:WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Liliana's Specter enters the battlefield, each opponent discards a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_specter.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_specter.jpg
 End

@@ -5,6 +5,6 @@ Text:no text
 PT:3/3
 K:Flying
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:ControllerUpkeep:At the beginning of your upkeep, tap target creature.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/harrier_griffin.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/harrier_griffin.jpg
 End

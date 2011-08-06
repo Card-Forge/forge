@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Enchantment
 Text:Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Khalni Heart Expedition.
 K:Landfall
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/khalni_heart_expedition.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/khalni_heart_expedition.jpg
 End

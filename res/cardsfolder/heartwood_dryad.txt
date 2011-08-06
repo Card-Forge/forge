@@ -4,6 +4,6 @@ Types:Creature Dryad
 Text:no text
 PT:2/1
 K:CARDNAME can block creatures with shadow as though they didn't have shadow.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/heartwood_dryad.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heartwood_dryad.jpg
 End

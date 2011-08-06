@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Zombie Knight
 Text:no text
 PT:2/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1442.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1442.jpg
 End

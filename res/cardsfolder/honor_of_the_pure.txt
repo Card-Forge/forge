@@ -2,7 +2,7 @@ Name:Honor of the Pure
 ManaCost:1 W
 Types:Enchantment
 Text:White creatures you control get +1/+1.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_of_the_pure.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_of_the_pure.jpg
 End

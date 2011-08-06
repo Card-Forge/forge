@@ -4,6 +4,6 @@ Types:Creature Cat
 Text:no text
 PT:3/1
 K:abPumpTgtC W T:CARDNAME can't block.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jamuraan_lion.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jamuraan_lion.jpg
 End

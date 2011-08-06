@@ -2,6 +2,6 @@ Name:Innocent Blood
 ManaCost:B
 Types:Sorcery
 Text:Each player sacrifices a creature.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/innocent_blood.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/innocent_blood.jpg
 End

@@ -4,7 +4,7 @@ Types:Creature Snake
 Text:Landfall - Whenever a land enters the battlefield under your control, you may add one mana of any color to your mana pool.
 PT:2/1
 K:Landfall
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_cobra.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lotus_cobra.jpg
 End

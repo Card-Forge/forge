@@ -5,6 +5,6 @@ Text:When Lightkeeper of Emeria enters the battlefield, you gain 2 life for each
 PT:2/4
 K:Flying
 K:Multikicker W
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lightkeeper_of_emeria.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lightkeeper_of_emeria.jpg
 End

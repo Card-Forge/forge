@@ -4,6 +4,6 @@ Types:Creature Crab
 Text:Landfall - Whenever a land enters the battlefield under your control, target player puts the top three cards of his or her library into his or her graveyard.
 PT:0/2
 K:Landfall
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_crab.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hedron_crab.jpg
 End

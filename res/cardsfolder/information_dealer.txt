@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Creature Human Wizard
 Text:Tap: Look at the top X cards of your library, where X is the number of Wizards on the battlefield, then put them back in any order.
 PT:1/1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/information_dealer.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/information_dealer.jpg
 End

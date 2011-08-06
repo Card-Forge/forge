@@ -4,6 +4,6 @@ Types:Creature Human Rogue
 Text:no text
 PT:2/2
 K:Unblockable
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/jhessian_infiltrator.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jhessian_infiltrator.jpg
 End

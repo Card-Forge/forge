@@ -4,6 +4,6 @@ Types:Instant
 Text:no text
 K:spPumpTgt:Flying
 K:Draw a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/leap.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leap.jpg
 End

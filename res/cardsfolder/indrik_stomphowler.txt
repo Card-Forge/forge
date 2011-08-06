@@ -4,6 +4,6 @@ Types:Creature Beast
 Text:When Indrik Stomphowler enters the battlefield, destroy target artifact or enchantment.
 PT:4/4
 K:etbDestroyTgt:Artifact,Enchantment
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/indrik_stomphowler.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/indrik_stomphowler.jpg
 End

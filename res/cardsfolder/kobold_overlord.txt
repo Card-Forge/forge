@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Kobold
 Text:Kobold creatures you control have first strike.
 PT:1/2
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_overlord.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_overlord.jpg
 End

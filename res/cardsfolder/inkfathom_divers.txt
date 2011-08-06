@@ -4,6 +4,6 @@ Types:Creature Merfolk Soldier
 Text:When Inkfathom Divers enters the battlefield, look at the top four cards of your library, then put them back in any order.
 PT:3/3
 K:Islandwalk
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/inkfathom_divers.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/inkfathom_divers.jpg
 End

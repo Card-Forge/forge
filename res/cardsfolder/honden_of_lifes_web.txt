@@ -2,6 +2,6 @@ Name:Honden of Life's Web
 ManaCost:4 G
 Types:Legendary Enchantment Shrine
 Text:At the beginning of your upkeep, put a 1/1 colorless Spirit creature token into play for each Shrine you control.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_lifes_web.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/honden_of_lifes_web.jpg
 End

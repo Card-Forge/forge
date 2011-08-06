@@ -4,7 +4,7 @@ Types:Creature Human Knight
 Text:Other Knight creatures you control get +1/+1 and are indestructible.
 PT:2/2
 K:First Strike
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_exemplar.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_exemplar.jpg
 End

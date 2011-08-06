@@ -3,6 +3,6 @@ ManaCost:R
 Types:Instant
 Text:no text
 K:spPumpTgt:+1/+0/First Strike
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kindled_fury.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kindled_fury.jpg
 End

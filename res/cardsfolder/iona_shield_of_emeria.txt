@@ -4,6 +4,6 @@ Types:Legendary Creature Angel
 Text:As Iona, Shield of Emeria enters the battlefield, choose a color.\r\nYour opponents can't cast spells of the chosen color.
 PT:7/7
 K:Flying
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/iona_shield_of_emeria.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/iona_shield_of_emeria.jpg
 End

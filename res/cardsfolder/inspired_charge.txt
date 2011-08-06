@@ -3,6 +3,6 @@ ManaCost:2 W W
 Types:Instant
 Text:no text
 K:spAllPump:YouCtrl:+2/+1:Creatures you control get +2/+1 until end of turn.:Inspired Charge - Creatures get +2/+1 until EOT
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/inspired_charge.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/inspired_charge.jpg
 End

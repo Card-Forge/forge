@@ -4,6 +4,6 @@ Types:Creature Cat Cleric
 Text:no text
 PT:1/1
 K:WheneverKeyword:EntersBattleField:Type/Artifact:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever an artifact enters the battlefield, you may gain 1 life.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_elder.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_elder.jpg
 End

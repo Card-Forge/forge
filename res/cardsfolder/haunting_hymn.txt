@@ -3,7 +3,7 @@ ManaCost:4 B B
 Types:Instant
 Text:no text
 K:spDiscardTgt:TgtChoose:X:Target player discards two cards. If you cast this spell during your main phase, that player discards four cards instead.:Haunting Hymn - target player discards cards
-K:SVar:X:Count$IfMainPhase.4.2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_hymn.jpg
+SVar:X:Count$IfMainPhase.4.2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_hymn.jpg
 End

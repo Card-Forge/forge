@@ -4,6 +4,6 @@ Types:Enchantment Creature Elemental
 Text:no text
 PT:3/3
 K:Flying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130691.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130691.jpg
 End

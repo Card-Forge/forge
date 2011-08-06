@@ -6,6 +6,6 @@ PT:5/1
 K:Haste
 K:TypeCycling:Swamp:2
 K:TypeCycling:Mountain:2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/igneous_pouncer.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/igneous_pouncer.jpg
 End

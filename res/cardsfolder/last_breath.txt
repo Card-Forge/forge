@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Instant
 Text:Exile target creature with power 2 or less. Its controller gains 4 life.
 K:spBounceTgt:Creature.powerLE2:Exile:Drawback$TgtCtrlrGainLife/4
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/last_breath.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/last_breath.jpg
 End

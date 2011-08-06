@@ -4,6 +4,6 @@ Types:Creature Beast
 Text:Krakilin enters the battlefield with X +1/+1 counters on it.
 PT:0/0
 K:RegenerateMe:1 G
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4769&type=card
+SVar:Rarity:Uncommon
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4769&type=card
 End

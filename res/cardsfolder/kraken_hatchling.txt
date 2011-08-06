@@ -3,6 +3,6 @@ ManaCost:U
 Types:Creature Kraken
 Text:no text
 PT:0/4
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kraken_hatchling.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kraken_hatchling.jpg
 End

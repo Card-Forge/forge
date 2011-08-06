@@ -4,6 +4,6 @@ Types:Creature Human Monk
 Text:no text
 PT:1/1
 K:Forestwalk
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80525.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80525.jpg
 End

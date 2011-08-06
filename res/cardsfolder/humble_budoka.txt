@@ -4,6 +4,6 @@ Types:Creature Human Monk
 Text:no text
 PT:2/2
 K:Shroud
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/humble_budoka.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/humble_budoka.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:5 U U U
 Types:Legendary Creature Octopus
 Text:Whenever Lorthos, the Tidemaker attacks, you may pay 8. If you do, tap up to eight target permanents. Those permanents don't untap during their controllers' next untap steps.
 PT:8/8
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lorthos_the_tidemaker.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lorthos_the_tidemaker.jpg
 End

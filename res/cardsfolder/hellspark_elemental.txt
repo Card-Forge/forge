@@ -7,6 +7,6 @@ K:Trample
 K:Haste
 K:At the beginning of the end step, sacrifice CARDNAME.
 K:Unearth:1 R
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hellspark_elemental.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hellspark_elemental.jpg
 End

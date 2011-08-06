@@ -4,6 +4,6 @@ Types:Creature Spirit
 Text:no text
 PT:2/2
 K:abDestroyTgtV Sac<1/CARDNAME>:Enchantment:Destroy target enchantment.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_ancient_law.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_ancient_law.jpg
 End

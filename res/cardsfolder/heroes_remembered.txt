@@ -4,6 +4,6 @@ Types:Sorcery
 Text:no text
 K:spGainLife:20
 K:Suspend:10:W
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/heroes_remembered.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heroes_remembered.jpg
 End

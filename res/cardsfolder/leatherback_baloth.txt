@@ -3,6 +3,6 @@ ManaCost:G G G
 Types:Creature Beast
 Text:no text
 PT:4/5
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/leatherback_baloth.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leatherback_baloth.jpg
 End
