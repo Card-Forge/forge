@@ -9119,8 +9119,6 @@ public class CardFactory_Creatures {
                     AllZone.Stack.add(ability);
                 }//execute()
             };//Command
-            //ability.setStackDescription("Ranger of Eos - Grab 2 creatures");
-            //AllZone.Stack.add(ability);
             card.addComesIntoPlayCommand(intoPlay);
             
         }//*************** END ************ END **************************
@@ -9128,7 +9126,6 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Master of the Wild Hunt")) {
-        	
         	
         	final Ability_Cost abCost = new Ability_Cost("T", cardName, true);
         	final Target abTgt = new Target("Target a creature to Hunt", "Creature".split(","));
@@ -9277,7 +9274,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Scarblade Elite")) {
-            final Ability_Tap ability = new Ability_Tap(card) {
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target("TgtC")) {
                 private static final long serialVersionUID = 3505019464802566898L;
                 
                 @Override
@@ -9328,15 +9326,13 @@ public class CardFactory_Creatures {
                     sins = sins.getType("Assassin");
                     
                     if(card.getController().equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Pick an Assassin to remove", sins.toArray());
+                        Object o = AllZone.Display.getChoiceOptional("Select an Assassin to exile", sins.toArray());
                         
                         if(o != null) {
                             Card crd = (Card) o;
-                            graveyard.remove(crd);
+                            AllZone.GameAction.exile(crd);
                             
-
                             Card c = getTargetCard();
-                            
                             if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                                 AllZone.GameAction.destroy(c);
                             }
@@ -9344,7 +9340,7 @@ public class CardFactory_Creatures {
                     }//player.equals("human")
                     else {
                         Card crd = sins.get(0);
-                        graveyard.remove(crd);
+                        AllZone.GameAction.exile(crd);
                         
                         Card c = getTargetCard();
                         if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
@@ -9354,40 +9350,8 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-            Input target = new Input() {
-                private static final long serialVersionUID = -4853162388286494888L;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select target creature to destroy");
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    if(!CardFactoryUtil.canTarget(ability, card)) {
-                        AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    }
-                    if(c.isCreature() && zone.is(Constant.Zone.Battlefield)) {
-                        //tap ability
-                        card.tap();
-                        
-                        ability.setTargetCard(c);
-                        AllZone.Stack.add(ability);
-                        stop();
-                    }
-                }//selectCard()
-            };//Input
-            
             card.addSpellAbility(ability);
-            ability.setDescription("tap: Remove an Assassin card in your graveyard from the game: Destroy target creature.");
-            ability.setBeforePayMana(target);
-            
+            ability.setDescription(abCost+"Exile an Assassin card from your graveyard: Destroy target creature.");
         }//*************** END ************ END **************************
 
         
@@ -9411,7 +9375,6 @@ public class CardFactory_Creatures {
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
-            
         }//*************** END ************ END **************************
         
         
@@ -10052,7 +10015,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Elvish Hunter")) {
-            final SpellAbility ability = new Ability_Tap(card, "1 G") {
+        	Ability_Cost abCost = new Ability_Cost("1 G T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target("TgtC")) {
                 private static final long serialVersionUID = -560200335562416099L;
                 
                 @Override
@@ -10064,18 +10028,15 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void chooseTargetAI() {
-                    card.tap();
                     Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
                     setTargetCard(target);
                 }
                 
                 CardList getCreature() {
-                    CardList list = new CardList(AllZone.Human_Battlefield.getCards());
+                    CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature()
-                                    && (!c.getKeyword().contains(
-                                            "This card doesn't untap during your next untap step."))
+                            return (!c.getKeyword().contains("This card doesn't untap during your next untap step."))
                                     && CardFactoryUtil.canTarget(card, c) && c.isTapped();
                         }
                     });
@@ -10087,16 +10048,12 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        final Card[] creature = new Card[1];
-                        creature[0] = getTargetCard();
-                        creature[0].addExtrinsicKeyword("This card doesn't untap during your next untap step.");
+                        getTargetCard().addExtrinsicKeyword("This card doesn't untap during your next untap step.");
                     }//if (card is in play)
                 }//resolve()
             };//SpellAbility
             card.addSpellAbility(ability);
-            ability.setDescription("1 G, tap: Target creature doesn't untap during its controller's next untap step.");
-            
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+            ability.setDescription(abCost+"Target creature doesn't untap during its controller's next untap step.");
         }//*************** END ************ END **************************
         
 
@@ -10254,8 +10211,9 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Molten Hydra")) {
-        	
-            final Ability_Tap ability2 = new Ability_Tap(card,"0") {
+        	Target target = new Target("TgtCP");
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+            final Ability_Activated ability2 = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = 2626619319289064289L;
                 
                 @Override
@@ -10284,7 +10242,7 @@ public class CardFactory_Creatures {
                     CardList list = CardFactoryUtil.AI_getHumanCreature(card.getCounters(Counters.P1P1), card, true);
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                        	int total = card.sumAllCounters();
+                        	int total = card.getCounters(Counters.P1P1);
                             return (total >= c.getKillDamage());
                         }
                     });
@@ -10293,7 +10251,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                	int total = card.sumAllCounters();
+                	int total = card.getCounters(Counters.P1P1);
                     if(getTargetCard() != null) {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(total,
@@ -10302,48 +10260,12 @@ public class CardFactory_Creatures {
                    card.subtractCounter(Counters.P1P1,total);
                 }//resolve()
             };//SpellAbility
-            
-        Input target = new Input() {
-                
-                private static final long serialVersionUID = 4246601245231656L;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select creature or player to target: ");
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectPlayer(Player player) {
-                	ability2.setTargetPlayer(player);
-                    AllZone.Stack.add(ability2);
-                    stop();
-                	//card.subtractCounter(Counters.P1P1, total);
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    if(AllZone.GameAction.isCardInZone(c, Hplay) || AllZone.GameAction.isCardInZone(c, Cplay)) {
-                    	ability2.setTargetCard(c);
-                        AllZone.Stack.add(ability2);
-                        stop();
-                    	//card.subtractCounter(Counters.P1P1, total);
-                    }
-                }//selectCard()
-            };//Input
 
             card.addSpellAbility(ability2);
-            ability2.setBeforePayMana(target);
             
             StringBuilder sb = new StringBuilder();
-            sb.append("Tap: Remove all +1/+1 counters and deal damage equal to number of counters ");
-            sb.append("removed to target creature or player.");
+            sb.append(abCost+"Remove all +1/+1 counters from "+cardName+".  "+cardName);
+            sb.append(" deals damage to target creature or player equal to the number of counters removed this way.");
             ability2.setDescription(sb.toString());
             
             ability2.setStackDescription("Molten Hydra deals damage to number of counters on it to target creature or player.");
@@ -11757,17 +11679,18 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Thoughtcutter Agent")) {
-            final SpellAbility ability = new Ability_Tap(card, "U B") {
+        	Target target = new Target("Select target player", new String[] {"Player"});
+        	Ability_Cost abCost = new Ability_Cost("U B T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -3880035465617987801L;
                 
                 @Override
                 public void resolve() {
-                	Player opponent = card.getController().getOpponent();
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
-                    opponent.loseLife(1,card);
-                    Card[] handLook = hand.getCards();
-                    if(opponent.equals(AllZone.ComputerPlayer)) {
-                        AllZone.Display.getChoice("Look", handLook);
+                	Player player = getTargetPlayer();
+                    CardList hand = AllZoneUtil.getPlayerHand(player);
+                    player.loseLife(1, card);
+                    if(player.equals(AllZone.ComputerPlayer)) {
+                        AllZone.Display.getChoice("Look", hand.toArray());
                     }
                     
                 }
@@ -11782,11 +11705,12 @@ public class CardFactory_Creatures {
                     return (!list.contains(card));
                 }
             };//SpellAbility
+            ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card.addSpellAbility(ability);
-            ability.setDescription("U B, tap: Target player loses 1 life and reveals his or her hand.");
+            ability.setDescription(abCost+"Target player loses 1 life and reveals his or her hand.");
             
             StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - Opponent loses 1 life.");
+            sb.append(card.getName()).append(" - target player loses 1 life.");
             ability.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
@@ -13125,7 +13049,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Cemetery Reaper")) {
-        	final Ability_Tap ability = new Ability_Tap(card, "2 B")
+        	Ability_Cost abCost = new Ability_Cost("2 B T", cardName, true);
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, null)
         	{
 				private static final long serialVersionUID = 1067370853723993280L;
 
@@ -13162,13 +13087,14 @@ public class CardFactory_Creatures {
 					//AI will only use this when there's creatures in human's graveyard:
 					CardList humanList = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
 					humanList = humanList.getType("Creature");
-					return humanList.size()>0;
+					return humanList.size() > 0;
 				}
         	};
         	card.addSpellAbility(ability);
         	
         	StringBuilder sbDesc = new StringBuilder();
-        	sbDesc.append("2 B, tap: Exile target creature card from a graveyard. ");
+        	sbDesc.append(abCost);
+        	sbDesc.append("Exile target creature card from a graveyard. ");
         	sbDesc.append("Put a 2/2 black Zombie creature token onto the battlefield.");
         	ability.setDescription(sbDesc.toString());
         	
