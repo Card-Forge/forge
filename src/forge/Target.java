@@ -133,7 +133,7 @@ public class Target {
 			return;
 		}
 		
-		sb.append(src + " - ");
+		if(src != null) sb.append(src + " - ");
 		sb.append(prompt);
 		vtSelection = sb.toString();
 		ValidTgts = valid.split(",");
