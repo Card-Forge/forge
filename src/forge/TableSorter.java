@@ -31,27 +31,8 @@ public class TableSorter implements Comparator<Card>, NewConstants
 	  all = new CardList(in_all.toArray());
 	  column = in_column;
 	  ascending = in_ascending;
+  }
 
-	  /*
-	  if(cardsTxt == null)
-		  cardsTxt = readCardsTxt();
-		*/
-  }
-  /*
-  //reads the file "cards.txt"
-  private HashMap<String, Integer> readCardsTxt()
-  {
-    HashMap<String, Integer>  map = new HashMap<String, Integer> ();
-    ArrayList<String> list = FileUtil.readFile(ForgeProps.getFile(CARDS));
-   
-    for(int i = 0; i < list.size(); i++)
-       map.put(list.get(i).toString().trim(), Integer.valueOf(i));
-    
-    return map;
-  }
-  */
- 
- 
   final public int compare(Card a, Card b)
   {
     
@@ -105,11 +86,11 @@ public class TableSorter implements Comparator<Card>, NewConstants
       aCom = getValue(a);
       bCom = getValue(b);
     }
-    else if (column == 99)//New First
+    /*else if (column == 99)//New First
     {
       aCom = sortNewFirst(a);
       bCom = sortNewFirst(b);
-    }
+    }*/
 
     if(ascending)
       return aCom.compareTo(bCom);
@@ -161,11 +142,4 @@ public class TableSorter implements Comparator<Card>, NewConstants
     return c.getType().toString();
   }
 
-  final private Comparable<Integer> sortNewFirst(Card c)
-  {
-   if(! cardsTxt.containsKey(c.getName()))
-     throw new RuntimeException("TableSorter : sortNewFirst() error, Card not found - " +c.getName() +" in hashmap - " +cardsTxt);
-
-   return cardsTxt.get(c.getName());
-  }
 }

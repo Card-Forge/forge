@@ -418,14 +418,14 @@ public class CardFactoryUtil {
     
     public static int evaluateCreatureList(CardList list) {
     	int value = 0;
-    	for(int i = 0; i < list.size(); i++) value =+ evaluateCreature(list.get(i));
+    	for(int i = 0; i < list.size(); i++) value += evaluateCreature(list.get(i));
     	
     	return value;
     }
     
     public static int evaluatePermanentList(CardList list) {
     	int value = 0;
-    	for(int i = 0; i < list.size(); i++) value =+ list.get(i).getCMC() + 1;
+    	for(int i = 0; i < list.size(); i++) value += list.get(i).getCMC() + 1;
     	
     	return value;
     }

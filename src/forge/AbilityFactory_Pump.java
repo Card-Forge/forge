@@ -225,7 +225,7 @@ public class AbilityFactory_Pump {
                 boolean kSize = Keywords.size() > 0;
                 String KWs[] = {"none"};
                 if (!Keywords.get(0).equals("none"))
-                	KWs = (String[]) Keywords.toArray();
+                	KWs = Keywords.toArray(new String[Keywords.size()]);
                 
                 boolean hKW = c.hasAnyKeyword(KWs);
                 return (cAtt && cTgt && (kSize && !hKW) && !(!hSick && kHaste));
