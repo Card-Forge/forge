@@ -144,7 +144,7 @@ def addSets(card):
 	block = html[start:end]
 	
 	for edition in allSets.keys():
-		edIndex = block.find(edition)
+		edIndex = block.find(edition+'<')
 		if edIndex == -1:
 			continue
 			
@@ -162,7 +162,7 @@ def addSets(card):
 		# Get setAbbreviation and setNumber
 		dataIndex = block.rfind('"/',0,edIndex)
 		data = block[dataIndex+2:edIndex-2]
-		
+
 		splitData = data.split('/')
 		setAbbr = splitData[0]
 		setNum = splitData[2].replace('.html', '')
