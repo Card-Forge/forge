@@ -698,29 +698,28 @@ public class ComputerUtil
     return block.getBlockers();
   }
   
-@SuppressWarnings("unchecked") // Comparator needs type
-static void sortSpellAbilityByCost(SpellAbility sa[])
+  static void sortSpellAbilityByCost(SpellAbility sa[])
   {
-    //sort from highest cost to lowest
-    //we want the highest costs first
-    Comparator c = new Comparator()
-    {
-      public int compare(Object a, Object b)
-      {
-        int a1 = CardUtil.getConvertedManaCost((SpellAbility)a);
-        int b1 = CardUtil.getConvertedManaCost((SpellAbility)b);
+	  //sort from highest cost to lowest
+	  //we want the highest costs first
+	  Comparator<SpellAbility> c = new Comparator<SpellAbility>()
+	  {
+		  public int compare(SpellAbility a, SpellAbility b)
+		  {
+			  int a1 = CardUtil.getConvertedManaCost(a);
+			  int b1 = CardUtil.getConvertedManaCost(b);
 
-        //puts creatures in front of spells
-        if(((SpellAbility)a).getSourceCard().isCreature())
-          a1 += 1;
+			  //puts creatures in front of spells
+			  if(a.getSourceCard().isCreature())
+				  a1 += 1;
 
-        if(((SpellAbility)b).getSourceCard().isCreature())
-          b1 += 1;
+			  if(b.getSourceCard().isCreature())
+				  b1 += 1;
 
 
-        return b1 - a1;
-      }
-    };//Comparator
-    Arrays.sort(sa, c);
+			  return b1 - a1;
+		  }
+	  };//Comparator
+	  Arrays.sort(sa, c);
   }//sortSpellAbilityByCost()
 }

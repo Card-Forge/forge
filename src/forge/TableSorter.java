@@ -148,12 +148,12 @@ public class TableSorter implements Comparator<Card>, NewConstants
     return "multi";
   }
 
-  final private Comparable getType(Card c)
+  final private Comparable<String> getType(Card c)
   {
     return c.getType().toString();
   }
 
-  final private Comparable sortNewFirst(Card c)
+  final private Comparable<Integer> sortNewFirst(Card c)
   {
    if(! cardsTxt.containsKey(c.getName()))
      throw new RuntimeException("TableSorter : sortNewFirst() error, Card not found - " +c.getName() +" in hashmap - " +cardsTxt);
