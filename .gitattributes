@@ -787,6 +787,7 @@ res/cardsfolder/changeling_berserker.txt -text svneol=native#text/plain
 res/cardsfolder/changeling_hero.txt -text svneol=native#text/plain
 res/cardsfolder/changeling_sentinel.txt -text svneol=native#text/plain
 res/cardsfolder/changeling_titan.txt -text svneol=native#text/plain
+res/cardsfolder/channel.txt -text svneol=native#text/plain
 res/cardsfolder/channel_the_suns.txt -text svneol=native#text/plain
 res/cardsfolder/chaos_charm.txt -text svneol=native#text/plain
 res/cardsfolder/chaosphere.txt -text svneol=native#text/plain

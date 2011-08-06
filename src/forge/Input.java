@@ -14,7 +14,15 @@ public abstract class Input implements java.io.Serializable {
     
     public void selectCard(Card c, PlayerZone zone) {}
     
-    public void selectPlayer(Player player) {}
+    public void selectPlayer(final Player player) {
+    	if(player.canChannel()) {
+    		Card channel = player.getChannelCard();
+    		if (GameActionUtil.showYesNoDialog(channel, "Pay 1 life?")) {
+    			player.payLife(1, channel);
+    			AllZone.ManaPool.addManaToFloating("1", channel);
+    		}
+    	}
+    }
     
     public void selectButtonOK() {}
     
