@@ -1126,7 +1126,7 @@ class CardFactory_Lands {
                     if(c != null) {
                         if(CardFactoryUtil.canTarget(card, c) && c.isCreature()
                                 && c.getType().contains("Legendary")) AllZone.GameAction.moveTo(AllZone.getZone(
-                                Constant.Zone.Hand, card.getOwner()), c);
+                                Constant.Zone.Hand, c.getOwner()), c);
                     }
                 }
             };

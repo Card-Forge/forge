@@ -12193,6 +12193,14 @@ public class CardFactory_Creatures {
                             false, false));
                 }
             };
+            
+            final Ability a3 = new Ability(card,"0")
+            {
+            	public void resolve()
+            	{
+            		
+            	}
+            };
             a1.setDescription("2G: Put a 1/1 green Saproling creature token into play.");
             a1.setStackDescription("Put a 1/1 Saproling into play.");
             card.addSpellAbility(a1);
@@ -12201,6 +12209,10 @@ public class CardFactory_Creatures {
             card.addSpellAbility(a2);
             a2.setDescription("Sacrifice a Saproling: Saproling creatures get +1/+1 until end of turn");
             a2.setStackDescription("Saprolings get +1/+1 until end of turn.");
+            
+            card.addSpellAbility(a3);
+            a3.setDescription("(Alternate way of sacrificing multiple creatures).");
+            a3.setStackDescription("Saprolings get +X/+X until end of turn.");
             
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************

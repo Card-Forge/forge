@@ -2888,8 +2888,7 @@ public class CardFactory implements NewConstants {
                         //System.out.println("Creats size: " + creats.size());
                         
                         if(card.getController().equals(Constant.Player.Human)) {
-                            List<Card> selection = AllZone.Display.getChoices("Select creature to sacrifice",
-                                    creats.toArray());
+                            List<Card> selection = AllZone.Display.getChoices("Select creature to sacrifice", creats.toArray());
                             
                             numCreatures[0] = selection.size();
                             for(int m = 0; m < selection.size(); m++) {
