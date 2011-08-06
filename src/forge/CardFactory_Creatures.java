@@ -6779,7 +6779,7 @@ public class CardFactory_Creatures {
                         long stamp = timeStamp[0];
                         Card tgt = c;
                         public void execute() {
-                            String[] types = { "Creature", "Elemental" };
+                            String[] types = { "Creature", "Treefolk" };
                             String[] keywords = { "" };
                             CardFactoryUtil.revertManland(tgt, types, keywords, "G", stamp);
                         }
