@@ -6106,7 +6106,7 @@ public class CardFactory_Creatures {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
-        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************  
         else if(cardName.equals("Plague Spitter")) {
             
@@ -6132,7 +6132,7 @@ public class CardFactory_Creatures {
             
             card.addDestroyCommand(damage);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Necratog")) {

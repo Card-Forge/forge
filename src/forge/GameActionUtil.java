@@ -51,7 +51,11 @@ public class GameActionUtil {
 		upkeep_Farmstead();
 		upkeep_Unstable_Mutation();
 		upkeep_Warp_Artifact();
+		
+		/* Converteded to AF Trigger
 		upkeep_Plague_Spitter();
+		*/
+		
 		upkeep_Soul_Bleed();
 		upkeep_Wanderlust();
 		upkeep_Curse_of_Chains();
@@ -7570,11 +7574,12 @@ public class GameActionUtil {
 		}//for
 	}//upkeep_Dega_Sanctuary()
 	
-			private static void upkeep_Plague_Spitter() {
-		/*
-		 * At the beginning of your upkeep, Plague Spitter deals 1 damage
-		 * to each creature and each player
-		 */
+	/* Converteded to AF Trigger
+	private static void upkeep_Plague_Spitter() {
+		//
+		// At the beginning of your upkeep, Plague Spitter deals 1 damage
+		// to each creature and each player
+		//
 		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Plague Spitter");
 
@@ -7595,9 +7600,10 @@ public class GameActionUtil {
 
 			AllZone.Stack.add(ability);
 		}// for
-	}
+	}//upkeep_Plague_Spitter()
+	*/
 		
-		private static void upkeep_Power_Surge() {
+	private static void upkeep_Power_Surge() {
 		/*
 		 * At the beginning of each player's upkeep, Power Surge deals X
 		 * damage to that player, where X is the number of untapped
