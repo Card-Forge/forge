@@ -4,6 +4,6 @@ Types:Sorcery
 Text:Return up to two target creature cards from your graveyard to your hand.
 K:spReturnTgt:2/UpTo:Creature:Hand
 K:Draw a card.
-SVar:Rarity:None
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_uprising.jpg
 End
