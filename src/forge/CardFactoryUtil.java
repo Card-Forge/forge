@@ -1471,6 +1471,24 @@ public class CardFactoryUtil {
         return desc;
     }//soul_desc()
     
+    public static Input input_targetValid(final SpellAbility sa, final String[] Tgts, final String message)
+    {
+    	return new Input() {
+        private static final long serialVersionUID = -142142142142L;
+        
+        @Override
+        public void showMessage() {
+            CardList allCards = new CardList();
+            allCards.addAll(AllZone.Human_Play.getCards());
+            allCards.addAll(AllZone.Computer_Play.getCards());
+            
+            CardList choices = allCards.getValidCards(Tgts);
+            boolean free = false;
+            if(this.isFree()) free = true;
+            stopSetNext(CardFactoryUtil.input_targetSpecific(sa, choices, message, true, free));
+        }
+       };
+    }//input_targetValid
     //CardList choices are the only cards the user can successful select
     public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, final boolean targeted, final boolean free) {
         return input_targetSpecific(spell, choices, message, Command.Blank, targeted, free);

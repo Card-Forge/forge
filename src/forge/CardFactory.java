@@ -172,7 +172,6 @@ public class CardFactory implements NewConstants {
         ArrayList<String> a = c.getIntrinsicKeyword();
         for(int i = 0; i < a.size(); i++)
             if(a.get(i).toString().contains(": add ")) return i;
-        
         return -1;
     }
     
@@ -2434,7 +2433,8 @@ public class CardFactory implements NewConstants {
                 }
             }; //SpDstryTgt
             
-            Input InGetTarget = new Input() {
+            Input InGetTarget = CardFactoryUtil.input_targetValid(spDstryTgt, Tgts, Selec);
+            	/*new Input() {
                 private static final long serialVersionUID = -142142142142L;
                 
                 @Override
@@ -2442,18 +2442,18 @@ public class CardFactory implements NewConstants {
                     CardList allCards = new CardList();
                     allCards.addAll(AllZone.Human_Play.getCards());
                     allCards.addAll(AllZone.Computer_Play.getCards());
-                    allCards.filter(new CardListFilter() {
+                    / *allCards.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return (CardFactoryUtil.canTarget(card, c));
                         }
-                    });
+                    });* ///Input_targetSpecific already checks for this
                     
                     CardList choices = allCards.getValidCards(Tgts);
                     boolean free = false;
                     if(this.isFree()) free = true;
                     stopSetNext(CardFactoryUtil.input_targetSpecific(spDstryTgt, choices, Selec, true, free));
                 }
-            };//InGetTarget
+            };*///InGetTarget
             
             //card.clearSpellAbility();
             spDstryTgt.setBeforePayMana(InGetTarget);
