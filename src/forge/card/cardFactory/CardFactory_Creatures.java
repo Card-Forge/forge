@@ -156,7 +156,7 @@ public class CardFactory_Creatures {
         }
         //*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Kiki-Jiki, Mirror Breaker")) {
             final CardFactory cfact = cf;
@@ -299,7 +299,7 @@ public class CardFactory_Creatures {
             ability.setDescription(sb.toString());
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-
+         */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Loxodon Hierarch")) {
