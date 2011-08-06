@@ -1,3 +1,22 @@
+Venomous Vines
+2 G G
+Sorcery
+Destroy target enchanted permanent.
+spDestroyTgt:Permanent.enchanted
+
+Cut the Earthly Bond
+U
+Instant Arcane
+Return target enchanted permanent to its owner's hand.
+spBounceTgt:Permanent.enchanted:Hand
+
+Brainspoil
+3 B B
+Sorcery
+Destroy target creature that isn't enchanted. It can't be regenerated.
+spDestroyTgt:Creature.unenchanted:NoRegen
+Transmute:1 B B
+
 Bad Moon
 1 B
 Enchantment
@@ -4158,6 +4177,13 @@ Instant
 no text
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/back_to_nature.jpg
+
+Bad Moon
+1 B
+Enchantment
+Black creatures get +1/+1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bad_moon.jpg
 
 Badlands
 no cost

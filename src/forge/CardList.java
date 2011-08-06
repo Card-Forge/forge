@@ -252,11 +252,11 @@ public class CardList implements Iterable<Card> {
                                     && (!c.getKeyword().contains(exR[j].substring(7)));
                             else r = r && (c.getKeyword().contains(exR[j].substring(4)));
                             else if(exR[j].startsWith("tapped")) r = r && (c.isTapped());
+                            else if(exR[j].startsWith("enchanted")) r = r && (c.isEnchanted());
+                            else if(exR[j].startsWith("unenchanted")) r = r && (!c.isEnchanted());
+                            else if(exR[j].startsWith("token")) r = r && (c.isToken());
                             //TODO: converted mana cost
-                            //TODO: tapped
-                            //TODO: enchanted
                             //TODO: enchanting
-                            //TODO: token
                             //TODO: counters
                             else if(exR[j].startsWith("named")) //by name
                             r = r && (c.getName().equals(exR[j].substring(6)));
