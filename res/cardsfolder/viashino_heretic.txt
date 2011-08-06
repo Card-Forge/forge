@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Viashino
 Text:no text
 PT:1/3
-K:abDestroyTgtV 1 R T:Artifact:Drawback$DamageTgtCtrlr/dX:Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's converted mana cost.
+A:AB$Destroy | Cost$ 1 R T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DamageTgtCtrlr/dX | SpellDescription$ Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's converted mana cost.
 SVar:dX:Count$TgtCardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viashino_heretic.jpg

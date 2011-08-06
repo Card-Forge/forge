@@ -4,7 +4,7 @@ Types:Creature Cat Wizard
 Text:no text
 PT:2/2
 K:Exalted
-K:abDestroyTgtV 1 Sac<1/CARDNAME>:Artifact,Enchantment:Destroy target artifact or enchantment.
+A:AB$Destroy | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/qasali_pridemage.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/75.jpg

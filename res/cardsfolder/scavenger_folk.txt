@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Human
 Text:no text
 PT:1/1
-K:abDestroyTgtV G T Sac<1/CARDNAME>:Artifact:Destroy target artifact.
+A:AB$Destroy | Cost$ G T Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenger_folk.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/185.jpg

@@ -4,7 +4,7 @@ Types:Creature Treefolk Shaman
 Text:no text
 PT:4/4
 K:etbCounter:M1M1:1
-K:abDestroyTgtV G SubCounter<1/M1M1>:Artifact,Enchantment:Destroy target artifact or enchantment.
+A:AB$Destroy | Cost$ G SubCounter<1/M1M1> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wickerbough_elder.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/80.jpg

@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Creature Human Assassin
 Text:no text
 PT:1/1
-K:abDestroyTgtV T:Creature.tapped:Destroy target tapped creature.
+A:AB$Destroy | Cost$ T | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83235.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/159.jpg
