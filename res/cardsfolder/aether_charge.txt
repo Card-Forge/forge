@@ -1,0 +1,11 @@
+Name:AEther Charge
+ManaCost:4 R
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Beast.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDealDamage | TriggerDescription$ Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | DamageSource$ TriggeredCard | ValidTgts$ Opponent | NumDmg$ 4
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_charge.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/184.jpg
+End
