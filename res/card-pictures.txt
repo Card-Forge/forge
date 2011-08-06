@@ -38,6 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+robber_fly.jpg		http://www.wizards.com/global/images/magic/general/robber_fly.jpg
+balance.jpg		http://www.wizards.com/global/images/magic/general/balance.jpg
 deepwood_tantiv.jpg		http://www.wizards.com/global/images/magic/general/deepwood_tantiv.jpg
 sacred_prey.jpg		http://www.wizards.com/global/images/magic/general/sacred_prey.jpg
 vedalken_ghoul.jpg		http://www.wizards.com/global/images/magic/general/vedalken_ghoul.jpg

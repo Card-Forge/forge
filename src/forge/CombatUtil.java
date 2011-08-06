@@ -1593,6 +1593,18 @@ public class CombatUtil {
         } else if(a.getName().equals("Corrupt Official") && !a.getCreatureGotBlockedThisTurn()) {
             String opp = b.getController();
             AllZone.GameAction.discardRandom(opp);
+        } else if (a.getName().equals("Robber Fly") && !a.getCreatureGotBlockedThisTurn()) {
+        	String opp = b.getController();
+        	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);
+        	CardList list = new CardList(hand.getCards());
+        	int handSize = list.size();
+        	
+        	for (int ctr = 0; ctr < handSize; ctr ++) {   // opponent discards their hand,
+        		AllZone.GameAction.discardRandom(opp);
+        	}
+        	for (int ctr = 0; ctr < handSize; ctr ++) {   // then draws that many cards
+        		AllZone.GameAction.drawCard(opp);;
+        	}
         } else if(a.getName().equals("Sylvan Basilisk")) {
             AllZone.GameAction.destroy(b);
             System.out.println("destroyed blocker " + b.getName());
@@ -1615,7 +1627,7 @@ public class CombatUtil {
                 AllZone.GameAction.discardRandom(opp);
             }
         }//Alley Grifters
-        else if(a.getName().equals("Quagmire Lamprey")) {
+          else if(a.getName().equals("Quagmire Lamprey")) {
             b.addCounter(Counters.M1M1, 1);
         } else if(a.getName().equals("Elven Warhounds")) {
             PlayerZone play = AllZone.getZone(Constant.Zone.Play, b.getController());
@@ -1628,22 +1640,18 @@ public class CombatUtil {
             AllZone.GameAction.drawCard(player);
             AllZone.GameAction.drawCard(player);
             AllZone.GameAction.drawCard(player);
-        } else if(a.getName().equals("Drelnoch") && !a.getCreatureBlockedThisTurn()) {
+        } else if (a.getName().equals("Drelnoch") && !a.getCreatureBlockedThisTurn()) {
             String player = a.getController();
             AllZone.GameAction.drawCard(player);
             AllZone.GameAction.drawCard(player);
         } else if((a.getName().equals("Silkenfist Order") || a.getName().equals("Silkenfist Fighter"))
                 && !a.getCreatureBlockedThisTurn()) {
             a.untap();
-        }
-        
-        if (a.getName().equals("Deepwood Tantiv") && !a.getCreatureBlockedThisTurn()) {
+        } else if (a.getName().equals("Deepwood Tantiv") && !a.getCreatureBlockedThisTurn()) {
         	AllZone.GameAction.getPlayerLife(a.getController()).addLife(2);
         } else if (a.getName().equals("Sacred Prey") && !a.getCreatureBlockedThisTurn()) {
         	AllZone.GameAction.getPlayerLife(a.getController()).addLife(1);
-        }
-
-        if (a.getName().equals("Vedalken Ghoul") && !a.getCreatureBlockedThisTurn()) {
+        } else if (a.getName().equals("Vedalken Ghoul") && !a.getCreatureBlockedThisTurn()) {
         	AllZone.GameAction.subLife(b.getController(), 4);
         }
         
