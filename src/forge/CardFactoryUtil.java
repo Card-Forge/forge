@@ -1439,7 +1439,7 @@ public class CardFactoryUtil {
             
             @Override
             public void resolve() {
-                AllZone.GameAction.drawCard(sourceCard.getController());
+                sourceCard.getController().drawCard();
                 sourceCard.cycle();
             }
         };
@@ -3832,7 +3832,7 @@ public class CardFactoryUtil {
         if(d[0].contains("HandToLibrary")) AllZone.GameAction.handToLibrary(dbPlayer, X, d[2]);
         
         if(d[0].contains("Draw")) for(int i = 0; i < X; i++)
-            AllZone.GameAction.drawCard(dbPlayer);
+            dbPlayer.drawCard();
         
         if(d[0].contains("UntapTgt")) TgtC.untap();
         
@@ -4467,7 +4467,7 @@ public class CardFactoryUtil {
 	            SpellAbility ability = new Ability(g, "0") {
 	                @Override
 	                public void resolve() {
-	                	AllZone.GameAction.drawCard(player);
+	                	player.drawCard();
 	                }
 	            };
 	            ability.setStackDescription("Horn of Greed - " + player + " draws a card.");

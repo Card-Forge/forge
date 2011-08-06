@@ -1853,8 +1853,8 @@ class CardFactory_Planeswalkers {
                     
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    AllZone.GameAction.drawCard(AllZone.ComputerPlayer);
-                    AllZone.GameAction.drawCard(AllZone.HumanPlayer);
+                    AllZone.ComputerPlayer.drawCard();
+                    AllZone.HumanPlayer.drawCard();
                     
                 }//resolve()
                 
@@ -1887,7 +1887,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     Player player = getTargetPlayer();
                     
-                    AllZone.GameAction.drawCard(player);
+                    player.drawCard();
                     
                 }//resolve()
                 
@@ -2821,9 +2821,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public void resolve() {
                     turn[0] = AllZone.Phase.getTurn();
-                    AllZone.GameAction.drawCard(card.getController());
-                    AllZone.GameAction.drawCard(card.getController());
-                    AllZone.GameAction.drawCard(card.getController());
+                    card.getController().drawCards(3);
                     
                     Player player = card.getController();
                     if(player.equals(AllZone.HumanPlayer)) humanResolve();

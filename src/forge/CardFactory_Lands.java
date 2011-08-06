@@ -1263,7 +1263,7 @@ class CardFactory_Lands {
                     //in case no more cards in hand
                     if(n == nCards || AllZone.Human_Hand.getCards().length == 0) {
                         stop();
-                        AllZone.GameAction.drawCard(card.getController());
+                        card.getController().drawCard();
                         n = 0; //very important, otherwise the 2nd time you play this ability, you
                         //don't have to discard
                     }
@@ -1310,7 +1310,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
+                    card.getController().drawCard();
                 }
             };//SpellAbility
             card.addSpellAbility(ability2);
@@ -1334,7 +1334,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
+                    card.getController().drawCard();
                 }
             };//SpellAbility
             card.addSpellAbility(ability2);
