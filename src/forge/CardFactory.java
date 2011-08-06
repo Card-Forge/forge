@@ -4725,6 +4725,9 @@ public class CardFactory implements NewConstants {
             String parse = card.getKeyword().get(spike).toString();
             card.removeIntrinsicKeyword(parse);
             
+            final Ability_Cost cost = new Ability_Cost("2 SubCounter<P1P1/1>", card.getName(), true);
+            final Target tgt = new Target("TgtC");
+            
             final int m = Integer.parseInt(parse.substring(6));
             String t = card.getSpellText();
             if(!t.equals("")) t += "\r\n";
@@ -4742,23 +4745,17 @@ public class CardFactory implements NewConstants {
                 }
             });//ComesIntoPlayCommand
             
-            final SpellAbility ability = new Ability(card, "2") {
+            final SpellAbility ability = new Ability(card, cost.getMana()) {
                 
                 @Override
                 public boolean canPlay() {
-                    // stack peek is needed to prevent Spike Feeder from trying to double activate
-                    SpellAbility sa;
-                    for (int i = 0; i < AllZone.Stack.size(); i++) {
-                        sa = AllZone.Stack.peek(i);
-                        if (sa.getSourceCard().equals(card)) return false;
-                    }
-                    return (card.getCounters(Counters.P1P1) > 0);
+                	Cost_Payment pay = new Cost_Payment(cost, this);
+                	return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
                 }//canPlay()
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getCreature().size() != 0 
-                            && card.getCounters(Counters.P1P1) > 0 
+                    return getCreature().size() != 0 && ComputerUtil.canPayCost(this)
                             && !CardFactoryUtil.AI_doesCreatureAttack(card);
                 }//canPlayAI()
                 
@@ -4791,40 +4788,14 @@ public class CardFactory implements NewConstants {
                 }//resolve()
             };//SpellAbility
             
-            Input target = new Input() {
-                private static final long serialVersionUID = 903928778649052032L;
-
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select target creature for " + card.getName());
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card target, PlayerZone zone) {
-                    // Choose a legal target, then remove a counter
-                    if (!CardFactoryUtil.canTarget(ability, target)) {
-                        AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    } else if (target.isCreature() && zone.is(Constant.Zone.Play)) {
-                        card.subtractCounter(Counters.P1P1, 1);
-                        ability.setTargetCard(target);
-                        AllZone.Stack.add(ability);
-                        AllZone.GameAction.checkStateEffects();
-                        stop();
-                    }
-                }//selectCard()
-            };//Input()
-            
-            ability.setAfterPayMana(target);
             StringBuffer sb = new StringBuffer();
             sb.append("Put a +1/+1 counter from ").append(card.getName()).append(" on target creature.");
+            
             ability.setStackDescription(sb.toString());
-            ability.setDescription("2, Remove a +1/+1 counter: Add a +1/+1 counter to target creature");
+            ability.setDescription("2, Remove a +1/+1 counter: Put a +1/+1 counter on target creature");
+            ability.setPayCosts(cost);
+            ability.setTarget(tgt);
+            
             card.addSpellAbility(ability);
         } // if Spike
         
