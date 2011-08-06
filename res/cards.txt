@@ -31,13 +31,6 @@ X X U
 Sorcery
 Discard X cards, then return a card from your graveyard to your hand for each card discarded this way. Exile Recall.
 
-Coffin Queen
-2 B
-Creature Zombie Wizard
-2B, tap: Put target creature card from a graveyard onto the battlefield under your control. When Coffin Queen becomes untapped or you lose control of Coffin Queen, exile that creature.
-1/1
-You may choose not to untap CARDNAME during your untap step.
-
 Moldervine Cloak
 2 G
 Enchantment Aura
