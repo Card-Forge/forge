@@ -1,3 +1,15 @@
+Chill to the Bone
+3 B
+Instant
+Destroy target nonsnow creature.
+spDestroyTgt:Creature.nonSnow
+
+Rend Flesh
+2 B
+Instant Arcane
+Destroy target non-Spirit creature.
+spDestroyTgt:Creature.nonSpirit
+
 Haunting Misery
 1 B B
 Sorcery
