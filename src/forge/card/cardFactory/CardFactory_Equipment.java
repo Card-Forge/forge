@@ -5,6 +5,8 @@ package forge.card.cardFactory;
 import java.util.ArrayList;
 
 import forge.AllZone;
+import forge.AllZoneUtil;
+import forge.ButtonUtil;
 import forge.Card;
 import forge.CardList;
 import forge.CardListFilter;
@@ -14,12 +16,15 @@ import forge.Constant;
 import forge.Counters;
 import forge.Phase;
 import forge.Player;
+import forge.PlayerZone;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Cost;
+import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.gui.input.Input;
 
 
 class CardFactory_Equipment {
@@ -249,93 +254,6 @@ class CardFactory_Equipment {
 
         } //*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if (cardName.equals("Adventuring Gear")) {
-            final Ability equip = new Ability(card, "1") {
-            	
-                @Override
-                public void resolve() {
-                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                    	
-                        if (card.isEquipping()) {
-                            Card crd = card.getEquipping().get(0);
-                            if (crd.equals(getTargetCard())) return;
-                            
-                            card.unEquipCard(crd);
-                        }
-                        card.equipCard(getTargetCard());
-                    }
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
-                            && Phase.canCastSorcery(getSourceCard().getController())
-                            && super.canPlay();
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getCreature().size() != 0 
-                    		&& !card.isEquipping()
-                    		&& super.canPlayAI();
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
-                    setTargetCard(target);
-                }
-                
-                CardList getCreature() {    // build list and do some pruning
-                	CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-                	list = list.filter(new CardListFilter() {
-                		public boolean addCard(Card c) {
-                			return c.isCreature() 
-                					&& CardFactoryUtil.AI_doesCreatureAttack(c)
-                					&& CardFactoryUtil.canTarget(card, c)
-                					&& (!c.getKeyword().contains("Defender"));
-                		}
-                	});
-                	
-                	return list;
-                }//getCreature()
-            };// equip ability
-            
-            Command onEquip = new Command() {
-				private static final long serialVersionUID = -5278473287541239581L;
-
-				public void execute() {
-        			if(card.isEquipping()) {
-        				Card crd = card.getEquipping().get(0);
-        				crd.addStackingExtrinsicKeyword("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.");
-        			}
-        		}//execute()
-        	};//Command
-            
-            Command onUnEquip = new Command() {
-				private static final long serialVersionUID = -2979834244752321236L;
-
-				public void execute() {
-        			if(card.isEquipping()) {
-        				Card crd = card.getEquipping().get(0);
-        				crd.removeExtrinsicKeyword("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.");
-        			}
-
-        		}//execute()
-        	};//Command
-            
-            equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
-            equip.setDescription("Equip: 1");
-            
-            card.addSpellAbility(equip);
-
-            card.addEquipCommand(onEquip);
-        	card.addUnEquipCommand(onUnEquip);
-        }//*************** END ************ END **************************
-		*/
         
         //*************** START *********** START **************************
         else if(cardName.equals("Blade of the Bloodchief"))
@@ -363,6 +281,58 @@ class CardFactory_Equipment {
 
             card.addTrigger(myTrigger);
         } //*************** END ************ END **************************
+        
+      
+        //*************** START *********** START **************************
+        else if (cardName.equals("Piston Sledge")) {
+        	
+        	final Input in = new Input() {
+				private static final long serialVersionUID = 1782826197612459365L;
+
+				@Override
+				public void showMessage() {
+					CardList list = AllZoneUtil.getCreaturesInPlay(card.getController());
+					list = list.filter(AllZoneUtil.getCanTargetFilter(card));
+            		AllZone.Display.showMessage(card+" - Select target creature you control to attach");
+            		ButtonUtil.disableAll();
+            		if(list.size() == 0) stop();
+            	}
+            	
+				@Override
+            	public void selectCard(Card c, PlayerZone z) {
+            		if(z.is(Constant.Zone.Battlefield, card.getController()) && c.isCreature() 
+            				&& CardFactoryUtil.canTarget(card, c)) {
+            			card.equipCard(c);
+        				stop();
+        			}
+            	}
+            	
+            };
+            
+        	final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                	AllZone.InputControl.setInput(in);
+                }//resolve()
+            }; //comesIntoPlayAbility
+            
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = 2985015252466920757L;
+
+				public void execute() {
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append("When Piston Sledge enters the battlefield, attach it to target creature you control.");
+					comesIntoPlayAbility.setStackDescription(sb.toString());
+
+                    AllZone.Stack.addSimultaneousStackEntry(comesIntoPlayAbility);
+
+                }
+            };
+            
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
 
         if (shouldEquip(card) != -1) {
             int n = shouldEquip(card);
