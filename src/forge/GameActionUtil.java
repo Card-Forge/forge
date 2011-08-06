@@ -3671,41 +3671,36 @@ public class GameActionUtil {
 	public static void endOfTurn_Thran_Quarry() 
 	{
 		final String player = AllZone.Phase.getActivePlayer();
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		CardList list = new CardList(playZone.getCards());
-
-		CardList quarries = list.getName("Thran Quarry");
-		
-		if (quarries.size() == 0) return;
-		
-		CardList creatures = list.getType("Creature");
-		
-		if (creatures.size() == 0){
-			for(Card c : quarries){
-				AllZone.GameAction.sacrifice(c);
-			}
-		}
+		final String opponent = AllZone.GameAction.getOpponent(player);
+		controlNoTypeSacrifice("Thran Quarry", "Creature", player);
+		controlNoTypeSacrifice("Thran Quarry", "Creature", opponent);
 	}
 	
 	public static void endOfTurn_Glimmervoid() 
-	{
+	{ 		
 		final String player = AllZone.Phase.getActivePlayer();
+		final String opponent = AllZone.GameAction.getOpponent(player);
+		controlNoTypeSacrifice("Glimmervoid", "Artifact", player);
+		controlNoTypeSacrifice("Glimmervoid", "Artifact", opponent);
+	}
+	
+	public static void controlNoTypeSacrifice(String name, String type, String player)
+	{
 		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList(playZone.getCards());
 
-		CardList glimmers = list.getName("Glimmervoid");
+		CardList nameList = list.getName(name);
 		
-		if (glimmers.size() == 0) return;
+		if (nameList.size() == 0) return;
 		
-		CardList artifacts = list.getType("Artifact");
+		CardList typeList = list.getType(type);
 		
-		if (artifacts.size() == 0){
-			for(Card c : glimmers){
+		if (typeList.size() == 0){
+			for(Card c : nameList){
 				AllZone.GameAction.sacrifice(c);
 			}
 		}
 	}
-
 
 	//END ENDOFTURN CARDS
 
