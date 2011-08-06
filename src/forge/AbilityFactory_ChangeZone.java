@@ -866,7 +866,7 @@ public class AbilityFactory_ChangeZone {
 		        		if (params.containsKey("GainControl"))
 		        			tgtC.setController(sa.getActivatingPlayer());
 		        	
-		        		AllZone.GameAction.moveTo(AllZone.getZone(destination, tgtC.getOwner()),tgtC);
+		        		AllZone.GameAction.moveTo(AllZone.getZone(destination, tgtC.getController()),tgtC);
 		    		}
 		    		else
 		    		{
