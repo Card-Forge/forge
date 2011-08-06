@@ -232,4 +232,19 @@ public class AllZoneUtil {
 		return getPlayerCardsInPlay(player, cardName).size() > 0;
 	}
 	
+	///get a list of certain types are in play (like Mountain, Elf, etc...)
+	
+	
+	public static CardList getTypeInPlay(final String cardType) {
+		CardList cards = getCardsInPlay();
+		cards = cards.getType(cardType);
+		return cards;
+	}
+	
+	public static CardList getPlayerTypeInPlay(final String player, final String cardType) {
+		CardList cards = getPlayerCardsInPlay(player);
+		cards = cards.getType(cardType);
+		return cards;
+	}
+	
 }

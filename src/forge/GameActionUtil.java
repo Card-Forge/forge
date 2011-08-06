@@ -10851,10 +10851,11 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
+			/*CardList list = new CardList();
 			list.addAll(AllZone.Human_Play.getCards());
 			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Heedless One");
+			list = list.getName("Heedless One"); */
+			CardList list = AllZoneUtil.getCardsInPlay("Heedless One");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -10865,10 +10866,11 @@ public class GameActionUtil {
 		}// execute()
 
 		private int countElves(Card c) {
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+			/*PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
 			CardList elves = new CardList(play.getCards());
 			elves = elves.getType("Elf");
-			return elves.size();
+			return elves.size();*/
+			return AllZoneUtil.getTypeInPlay("Elf").size();
 		}
 	}; 
 
