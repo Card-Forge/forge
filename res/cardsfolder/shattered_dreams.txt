@@ -2,7 +2,7 @@ Name:Shattered Dreams
 ManaCost:B
 Types:Sorcery
 Text:no text
-A:SP$Discard | Cost$ B | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Artifact | Mode$ RevealYouChoose | SpellDescription$ Target player discards three cards.
+A:SP$Discard | Cost$ B | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Artifact | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals his or her hand. You choose an artifact card from it. That player discards that card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shattered_dreams.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/59.jpg
