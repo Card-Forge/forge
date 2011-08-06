@@ -20635,12 +20635,13 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        /*
         //*************** START ********** START *************************
         else if(cardName.equals("Niall Silvain") || cardName.equals("Ragnar")) {
         	/*
         	 * G G G G, Tap: Regenerate target creature.
         	 * U W G, Tap: Regenerate target creature.
-        	 */
+        	 *
 
         	final String Tgts[] = {"Creature"};
         	Target target = new Target("TgtV", "Select target creature.", Tgts);
@@ -20687,6 +20688,7 @@ public class CardFactory_Creatures {
         	
         	card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Witch Hunter")) {
