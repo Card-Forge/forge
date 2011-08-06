@@ -17927,7 +17927,7 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Sage Owl") || cardName.equals("Inkfathor Divers") ||
+        else if(cardName.equals("Sage Owl") || cardName.equals("Inkfathom Divers") ||
         		cardName.equals("Sage Aven") || cardName.equals("Sage of Epityr") ||
         		cardName.equals("Spire Owl")) {
         	final SpellAbility ability = new Ability(card, "0") {
