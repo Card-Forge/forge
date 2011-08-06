@@ -1,3 +1,9 @@
+Dauntless Escort
+1 W G
+Creature Rhino Soldier
+Sacrifice Dauntless Escort: Creatures you control are indestructible this turn.
+3/3
+
 Life from the Loam
 1 G
 Sorcery

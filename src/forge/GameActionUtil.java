@@ -8630,7 +8630,8 @@ public class GameActionUtil {
 		Anger.execute();
 		Valor.execute();
 		Brawn.execute();
-
+		Dauntless_Escort.execute();
+	
 		Baru.execute();
 		Reach_of_Branches.execute();
 
@@ -12250,7 +12251,76 @@ public class GameActionUtil {
 		}
 	}; 
 
+	public static Command Dauntless_Escort = new Command() {
+		private static final long serialVersionUID = -2201201455269804L;
 
+		public void execute() {
+			// Human Activates Dauntless Escort
+	        PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Play,"Human");
+	        CardList PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
+	        PlayerCreatureList = PlayerCreatureList.getType("Creature");
+			PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play,"Computer");
+	        CardList opponentCreatureList = new CardList(opponentPlayZone.getCards());
+	        opponentCreatureList = opponentCreatureList.getType("Creature");
+			if(Phase.Sac_Dauntless_Escort == true) {
+				if(PlayerCreatureList.size() != 0) {
+                for(int i = 0; i < PlayerCreatureList.size(); i++) {
+                    	Card c = PlayerCreatureList.get(i);
+                        c.removeExtrinsicKeyword("Indestructible");	
+                        c.addExtrinsicKeyword("Indestructible");
+                }
+				}
+				if(opponentCreatureList.size() != 0) {
+                for(int i = 0; i < opponentCreatureList.size(); i++) {
+                	Card c = opponentCreatureList.get(i);
+                	if(c.getOwner() == "Human") {
+                		c.removeExtrinsicKeyword("Indestructible");	               		
+                	}
+                }
+                }            
+			} else {
+				if(PlayerCreatureList.size() != 0) {
+                for(int i = 0; i < PlayerCreatureList.size(); i++) {
+                	Card c = PlayerCreatureList.get(i);
+                    c.removeExtrinsicKeyword("Indestructible");				
+			}
+				}
+			}
+			// Computer Activates Dauntless Escort
+	        PlayerPlayZone = AllZone.getZone(Constant.Zone.Play,"Computer");
+	        PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
+	        PlayerCreatureList = PlayerCreatureList.getType("Creature");
+			opponentPlayZone = AllZone.getZone(Constant.Zone.Play,"Human");
+	        opponentCreatureList = new CardList(opponentPlayZone.getCards());
+	        opponentCreatureList = opponentCreatureList.getType("Creature");
+			if(Phase.Sac_Dauntless_Escort_Comp == true) {
+				if(PlayerCreatureList.size() != 0) {
+                for(int i = 0; i < PlayerCreatureList.size(); i++) {
+                    	Card c = PlayerCreatureList.get(i);
+                        c.removeExtrinsicKeyword("Indestructible");	
+                        c.addExtrinsicKeyword("Indestructible");
+                }
+				}
+				if(opponentCreatureList.size() != 0) {
+                for(int i = 0; i < opponentCreatureList.size(); i++) {
+                	Card c = opponentCreatureList.get(i);
+                	if(c.getOwner() == "Computer") {
+                		c.removeExtrinsicKeyword("Indestructible");	               		
+                	}
+                }
+                }            
+			} else {
+				if(PlayerCreatureList.size() != 0) {
+                for(int i = 0; i < PlayerCreatureList.size(); i++) {
+                	Card c = PlayerCreatureList.get(i);
+                    c.removeExtrinsicKeyword("Indestructible");				
+			}
+				}
+			}			
+		}// execute()
+
+	}; 
+	
 	public static Command Kird_Ape                    = new Command() {
 		private static final long serialVersionUID = 3448725650293971110L;
 

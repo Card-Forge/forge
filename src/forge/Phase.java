@@ -10,6 +10,8 @@ public class Phase extends MyObservable
 	private int phaseIndex;
 	private int turn;
     static int	   StormCount;
+    static boolean	   Sac_Dauntless_Escort;
+    static boolean	   Sac_Dauntless_Escort_Comp;
     
 	private int humanExtraTurns;
 	private int computerExtraTurns;

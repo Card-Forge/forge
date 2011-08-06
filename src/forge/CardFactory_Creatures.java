@@ -5911,7 +5911,41 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Dauntless Escort")) {
+        	final SpellAbility ability = new Ability(card, "0") {
+        		@Override
+        		public boolean canPlayAI() {
+			        PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Play, "Computer");
+			        CardList PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
+			        PlayerCreatureList = PlayerCreatureList.getType("Creature");
+					PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, "Human");
+			        CardList opponentCreatureList = new CardList(opponentPlayZone.getCards());
+			        opponentCreatureList = opponentCreatureList.getType("Creature");
+                    return ((PlayerCreatureList.size() + 1 > 2* opponentCreatureList.size() + 1) && (Phase.Sac_Dauntless_Escort_Comp == false) && (AllZone.Phase.getPhase().equals(Constant.Phase.Main1))) ;
+        		}
+               
+                final Command untilEOT = new Command() {
+                    private static final long serialVersionUID = 2701248867610L;
+                    
+                    public void execute() {
+                        if(card.getController() == "Human") Phase.Sac_Dauntless_Escort = false;
+                        else Phase.Sac_Dauntless_Escort_Comp = false;	                     
+                    }
+                };
+        		@Override
+        		public void resolve() {
+                    AllZone.GameAction.sacrifice(card);
+                    if(card.getController() == "Human") Phase.Sac_Dauntless_Escort = true;
+                    else Phase.Sac_Dauntless_Escort_Comp = true;	
 
+                    AllZone.EndOfTurn.addUntil(untilEOT);
+        		}
+        	};
+        	card.addSpellAbility(ability);
+            ability.setStackDescription("Sacrifice Dauntless Escort: Creatures you control are indestructible this turn.");
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Ramses Overdark")) {
             final Ability_Tap ability = new Ability_Tap(card) {
