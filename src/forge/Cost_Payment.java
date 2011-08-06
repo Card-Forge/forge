@@ -415,6 +415,9 @@ public class Cost_Payment {
     	}
     	
     	if (cost.getDiscardThis()){
+    		if(!AllZoneUtil.getPlayerHand(card.getController()).contains(card.getController().getLastDrawnCard())) {
+    			return;
+    		}
 			if (!AllZone.getZone(card).equals(Constant.Zone.Hand))
 				return;
     	}

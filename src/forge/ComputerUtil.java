@@ -275,6 +275,10 @@ public class ComputerUtil
     			if (!AllZone.getZone(card).equals(Constant.Zone.Hand))
     				return false;
     		}
+    		else if( discType.equals("LastDrawn")) {
+    			//compy can't yet use this effectively
+    			return false;
+    		}
     		else if (discType.equals("Hand")){
     			// this will always work
     		}
