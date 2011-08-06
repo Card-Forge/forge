@@ -11462,11 +11462,14 @@ public class CardFactory_Creatures {
                 public void execute() {
                     if(card.getController().equals(Constant.Player.Human)) AllZone.InputControl.setInput(CardFactoryUtil.input_targetPermanent(ability));
                     else {
-                        //if computer controlled Archon of Justice have it select the best creature, or enchantment, or artifact, whatever the human controllers, and as a last option a card it controls
-                        
+                        /*
+                         *  if computer controlled Archon of Justice have it select the best creature, or enchantment, 
+                         *  or artifact, whatever the human controllers, and as a last option a card it controls.
+                         */
                         Card temp;
                         
                         CardList human_list = new CardList(AllZone.Human_Play.getCards());
+                        human_list.remove("Mana Pool");
                         temp = CardFactoryUtil.AI_getBestCreature(human_list);
                         if(temp != null) ability.setTargetCard(CardFactoryUtil.AI_getBestCreature(human_list));
                         if(ability.getTargetCard() == null) {
