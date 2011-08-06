@@ -557,11 +557,7 @@ public class CardFactory implements NewConstants {
         
 
         /*
-         *  We have three cards which can not be converted to AF_SP$DestroyAll at this time:
-         *  Fracturing Gust
-         *  Multani's Decree
-         *  Righteous Fury
-         */
+
         // Generic destroy all card
         if(hasKeyword(card, "spDestroyAll") != -1) {
             int n = hasKeyword(card, "spDestroyAll");
@@ -691,7 +687,7 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(spDstryAll);            
         }//spDestroyAll
-
+*/
         
         
         if(hasKeyword(card, "SearchRebel") != -1) {
