@@ -1141,13 +1141,13 @@ public class CardFactoryUtil {
         return ability;
     }
     
-    public static Ability_Static ability_Morph_Up(final Card sourceCard, String cost, String orgManaCost, int a, int d) {
+    public static Ability ability_Morph_Up(final Card sourceCard, String cost, String orgManaCost, int a, int d) {
         //final String player = sourceCard.getController();
         //final String manaCost = cost;
         final int attack = a;
         final int defense = d;
         final String origManaCost = orgManaCost;
-        final Ability_Static morph_up = new Ability_Static(sourceCard, cost) {
+        final Ability morph_up = new Ability(sourceCard, cost) {
             private static final long serialVersionUID = -7892773658629724785L;
             
             @Override
