@@ -1,7 +1,7 @@
 Name:Zur the Enchanter
 ManaCost:1 W U B
 Types:Legendary Creature Human Wizard
-Text:Flying. Whenever Zur the Enchanter attacks, you may search your library for an enchantment card with converted mana cost 3 or less and put it into play. If you do, shuffle your library.
+Text:Whenever CARDNAME attacks, you may search your library for an enchantment card with converted mana cost 3 or less and put it onto the battlefield. If you do, shuffle your library.
 PT:1/4
 K:Flying
 SVar:Rarity:Rare

@@ -1,7 +1,7 @@
 Name:Wood Elves
 ManaCost:2 G
 Types:Creature Elf Scout
-Text:When Wood Elves comes into play, search your library for a Forest card and put that card into play. Then shuffle your library.
+Text:When CARDNAME enters the battlefield, search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wood_elves.jpg

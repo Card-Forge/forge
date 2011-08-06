@@ -1,7 +1,7 @@
 Name:Vodalian Merchant
 ManaCost:1 U
 Types:Creature Merfolk
-Text:When Vodalian Merchant comes into play, draw a card, then discard a card.
+Text:When CARDNAME enters the battlefield, draw a card, then discard a card.
 PT:1/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card26296.jpg

@@ -1,7 +1,7 @@
 Name:Venerable Monk
 ManaCost:2 W
 Types:Creature Cleric
-Text:When Venerable Monk comes into play, you gain 2 life.
+Text:When CARDNAME enters the battlefield, you gain 2 life.
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83441.jpg
