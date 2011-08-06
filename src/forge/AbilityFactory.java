@@ -726,6 +726,11 @@ public class AbilityFactory {
 					players.add(p);
 			}
 		}
+		else if (defined.equals("TriggeringController")){
+				Player p = sa.getTriggeringCard().getController();
+				if (!players.contains(p))
+					players.add(p);
+		}
 		else{
 			if (defined.equals("You") || defined.equals("Each"))
 				players.add(sa.getActivatingPlayer());

@@ -1556,6 +1556,7 @@ res/cardsfolder/earthbind.txt -text svneol=native#text/plain
 res/cardsfolder/earthblighter.txt -text svneol=native#text/plain
 res/cardsfolder/earthcraft.txt -text svneol=native#text/plain
 res/cardsfolder/earthen_goo.txt -text svneol=native#text/plain
+res/cardsfolder/earthlink.txt -text svneol=native#text/plain
 res/cardsfolder/earthquake.txt -text svneol=native#text/plain
 res/cardsfolder/eastern_paladin.txt -text svneol=native#text/plain
 res/cardsfolder/eater_of_days.txt -text svneol=native#text/plain
