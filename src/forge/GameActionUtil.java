@@ -10127,7 +10127,7 @@ public class GameActionUtil {
 						            public void selectCard(Card card, PlayerZone zone) {
 						                if(zone.is(Constant.Zone.Hand) && true == card.getDrawnThisTurn()) {
 						                    /////////////////////////////////////////
-						                	if ((player.getLife() >= 4) && GameActionUtil.showYesNoDialog(source, cardQuestion)) {
+						                	if (player.canPayLife(4) && GameActionUtil.showYesNoDialog(source, cardQuestion)) {
 						                		player.payLife(4, source);
 						                		//card stays in hand
 						                	}

@@ -162,8 +162,14 @@ public abstract class Player extends MyObservable{
 	}
 	*/
 	
+	public boolean canPayLife(int lifePayment) {
+		if(life < lifePayment) return false;
+		if(lifePayment > 0 && AllZoneUtil.isCardInPlay("Platinum Emperion",this)) return false;
+		return true;
+	}
+	
 	public boolean payLife(int lifePayment, Card source) {
-    	
+    	if (!canPayLife(lifePayment)) return false;
 		//rule 118.8
     	if (life >= lifePayment){
     		return loseLife(lifePayment, source);

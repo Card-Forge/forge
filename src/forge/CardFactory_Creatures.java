@@ -13845,39 +13845,10 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(gain2Life);
         }//*************** END ************ END **************************
 
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Godsire")) {
-            final SpellAbility a1 = new Ability_Tap(card) {
-                private static final long serialVersionUID = -1160527561099142816L;
-                
-                @Override
-                public void resolve() {
-                    makeToken();
-                }
-                
-                void makeToken() {
-                    CardFactoryUtil.makeToken("Beast", "RGW 8 8 Beast", card, "R G W", new String[] {
-                            "Creature", "Beast"}, 8, 8, new String[] {""});
-                }//makeToken()
-                
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.Phase.getPhase().equals("Main2");
-                }
-                
-            };//SpellAbility
-            card.addSpellAbility(a1);
-            a1.setDescription("tap: Put an 8/8 Beast creature token into play that's red, green, and white.");
-            a1.setStackDescription("Put an 8/8 Beast creature token into play that's red, green, and white.");
-            
-            //a1.setBeforePayMana(new Input_PayManaCost(a1));
-        }//*************** END ************ END **************************
-        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Wydwen, the Biting Gale")) {
-            final SpellAbility a1 = new Ability(card, "U B") {
+            final SpellAbility a1 = new Ability(card, "U B PayLife<1>") {
             	
                 @Override
                 public boolean canPlayAI() {
@@ -13886,8 +13857,6 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                	//or payLife()...
-                    card.getController().loseLife(1, card);
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
                     /*
                     AllZone.getZone(card).remove(card);

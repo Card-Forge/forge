@@ -103,10 +103,7 @@ public class Cost_Payment {
     	}
     	
     	if (cost.getLifeCost()){
-    		int curLife = card.getController().getLife();
-    		if (curLife < cost.getLifeAmount())
-    			return false;
-    		if(cost.getLifeAmount() > 0 && AllZoneUtil.isCardInPlay("Platinum Emperion",card.getController())) return false;
+    		if (!card.getController().canPayLife(cost.getLifeAmount())) return false;
     	}
     	
     	if (cost.getDiscardCost()){
