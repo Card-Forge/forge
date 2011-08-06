@@ -121,9 +121,11 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    makeToken();
+                    //makeToken();
+                	CardFactoryUtil.makeToken("Caribou", "W 0 1 Caribou", spell.getTargetCard(), "W", new String[] {
+                        "Creature", "Caribou"}, 0, 1, new String[] {""});
                 }
-                
+                /*
                 void makeToken() {
                     Card c = new Card();
                     Card crd = spell.getTargetCard();
@@ -145,6 +147,7 @@ class CardFactory_Auras {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                     play.add(c);
                 }//makeToken()
+                */
             };//SpellAbility
             
             produceCaribou.setType("Extrinsic"); // Required for Spreading Seas
@@ -352,9 +355,12 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    makeToken();
+                	CardFactoryUtil.makeToken("Drake", "GU 2 2 Drake", spell.getTargetCard(), "G U", new String[] {
+                        "Creature", "Drake"}, 2, 2, new String[] {"Flying"});
+                	//makeToken();
                 }
                 
+                /*
                 void makeToken() {
                     Card c = new Card();
                     Card crd = spell.getTargetCard();
@@ -377,6 +383,7 @@ class CardFactory_Auras {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                     play.add(c);
                 }//makeToken()
+                */
             };//SpellAbility
             
             produceDrakes.setType("Extrinsic"); // Required for Spreading Seas
@@ -510,9 +517,12 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    makeToken();
+                    //makeToken();
+                	CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", spell.getTargetCard(), "G", new String[] {
+                            "Creature", "Squirrel"}, 1, 1, new String[] {""});
                 }
                 
+                /*
                 void makeToken() {
                     Card c = new Card();
                     Card crd = spell.getTargetCard();
@@ -534,6 +544,7 @@ class CardFactory_Auras {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                     play.add(c);
                 }//makeToken()
+                */
             };//SpellAbility
             
             produceSquirrels.setType("Extrinsic"); // Required for Spreading Seas
