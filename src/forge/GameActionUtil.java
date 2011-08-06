@@ -12331,6 +12331,13 @@ public class GameActionUtil {
       			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController(), SourceCard);
 	      		if (CardsinPlay.isEmpty()) return false;
   	      	}
+  	      	if(SpecialConditions.contains("isInGraveyard")) { // is a card of a certain type/color present in yard?
+  	      		String Requirements = SpecialConditions.replaceAll("isInGraveyard ", "");
+  	      		CardList CardsinYards = AllZoneUtil.getCardsInGraveyard();
+  	      		String Conditions[] = Requirements.split(",");
+  	      		CardsinYards = CardsinYards.getValidCards(Conditions, SourceCard.getController(), SourceCard);
+  	      		if (CardsinYards.isEmpty()) return false;
+  	      	}
   	      	if(SpecialConditions.contains("isNotPresent")) { // is no card of a certain type/color present?
   	      		String Requirements = SpecialConditions.replaceAll("isNotPresent ", "");
     			CardList CardsinPlay = new CardList();
