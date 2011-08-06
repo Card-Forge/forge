@@ -5749,6 +5749,57 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(abMakeToken);
         	card.setSVar("PlayMain1", "TRUE");
         }// end abMakeToken keyword
+        
+        if(hasKeyword(card, "etbMakeToken") != -1) {
+        	int n = hasKeyword(card, "etbMakeToken");
+        	String parse = card.getKeyword().get(n).toString();
+            card.removeIntrinsicKeyword(parse);
+            final String[] k = parse.split("<>");
+            final String numString = k[1].equals("X") ? card.getSVar("X") : k[1];
+            final boolean xString = k[1].equals("X") ? true : false;
+            final String name = k[2];
+            final String imageName = k[3];
+            final String controllerString = k[4];
+            final String manaCost = k[5];
+            final String[] types = k[6].split(";");
+            final int attack = Integer.valueOf(k[7]);
+            final int defense = Integer.valueOf(k[8]);
+            final String[] keywords = k[9].split(";");
+            final String abDesc = k[10];
+            
+            final SpellAbility ability = new Ability(card, "0") {
+				@Override
+				public boolean canPlayAI() {
+					if(xString && CardFactoryUtil.xCount(card, numString) > 0) {
+						return false;
+					}
+					else{
+						return true;
+					}
+				}
+				
+				@Override
+            	public void resolve() {
+					String controller = (controllerString.equals("Controller") ? card.getController() : AllZone.GameAction.getOpponent(card.getController()));
+					if(keywords[0].equals("None")) keywords[0] = "";
+					
+					int num = xString ? CardFactoryUtil.xCount(card, numString) : Integer.valueOf(numString);
+		            for(int i = 0; i < num; i ++ ){
+                    	CardFactoryUtil.makeToken(name, imageName, controller, manaCost, types, attack, defense, keywords);
+                    }
+            	}
+            };
+            
+            final Command cip = new Command() {
+				private static final long serialVersionUID = 903342987065874979L;
+
+				public void execute() {
+            		ability.setStackDescription(card+" - "+abDesc);
+            		AllZone.Stack.add(ability);
+            	}
+            };
+            card.addComesIntoPlayCommand(cip);
+        }//end etbMakeToken
         	
         //******************************************************************
         //************** Link to different CardFactories ******************* 
