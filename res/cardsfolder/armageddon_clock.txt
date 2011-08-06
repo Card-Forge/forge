@@ -3,7 +3,7 @@ ManaCost:6
 Types:Artifact
 Text:no text
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:CustomCounter.DOOM/1:Self:ASAP:No_Condition:ControllerUpkeep:At the beginning of your upkeep, put a doom counter on CARDNAME.
-A:AB$RemoveCounter|Cost$4|CounterType$DOOM|CounterNum$1|ActivatingPhases$Upkeep|AnyPlayer$True|SpellDescription$Remove a doom counter from Armageddon Clock. Any player may activate this ability but only during any upkeep step.
+A:AB$RemoveCounter | Cost$ 4 | CounterType$ DOOM | CounterNum$ 1 | ActivatingPhases$ Upkeep | AnyPlayer$ True | SpellDescription$ Remove a doom counter from Armageddon Clock. Any player may activate this ability but only during any upkeep step.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armageddon_clock.jpg
 End
