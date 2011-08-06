@@ -1,3 +1,18 @@
+Sootwalkers
+2 RB RB
+Creature Elemental Rogue
+no text
+3/3
+CARDNAME can't be blocked by white creatures.
+
+Dauthi Horrow
+1 B
+Creature Dauthi Horror
+no text
+2/1
+Shadow
+CARDNAME can't be blocked by white creatures.
+
 Crovax, Ascendant Hero
 4 W W
 Legendary Creature Human

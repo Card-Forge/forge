@@ -196,6 +196,12 @@ public class CombatUtil {
             return false;
         }
         
+        if (attacker.getKeyword().contains("CARDNAME can't be blocked by white creatures."))
+        {
+        	if (!CardUtil.getColors(blocker).contains(Constant.Color.White))
+        		return false;
+        }
+        
         if(attacker.getKeyword().contains("Intimidate")) {
             if(!blocker.getType().contains("Artifact") && !CardFactoryUtil.sharesColorWith(attacker, blocker)) return false;
         }
