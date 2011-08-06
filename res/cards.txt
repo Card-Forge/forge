@@ -38,8 +38,8 @@ Draw a card.
 Doom Blade
 1 B
 Instant
-no text
-WheneverKeyword:ActualSpell:Self:Any:Destroy/1:NormalInput/Specific/NonColor.black/Type.Creature:ASAP:No_Condition:No Special Condition:Destroy target nonblack creature.
+Destroy target nonblack creature.
+spDestroyTgt:Creature.nonBlack
 
 Gemstone Mine
 no cost
