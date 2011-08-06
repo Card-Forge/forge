@@ -253,7 +253,7 @@ public class CardUtil {
         {
             String nn = "";
         	if (card.getRandomPicture() > 0)
-                nn = Integer.toString(card.getRandomPicture() + 1);
+                nn = Integer.toString(card.getRandomPicture());
         	
         	//First try 3 letter set code with MWS filename format 
         	sbKey.append(card.getCurSetCode() + "/");
