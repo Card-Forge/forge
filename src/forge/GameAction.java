@@ -1192,8 +1192,14 @@ public class GameAction {
     }
     
     public void playSpellAbilityForFree(SpellAbility sa) {
-        if(sa.getBeforePayMana() == null) {
-            AllZone.Stack.add(sa);
+    	
+    	
+    	if(sa.getBeforePayMana() == null) {
+    		boolean x = false;
+        	if (sa.getSourceCard().getManaCost().contains("X"))
+        		x = true;
+    		
+    		AllZone.Stack.add(sa, x);
             
             /*
             if (sa.getAfterPayMana() != null)

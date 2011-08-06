@@ -323,7 +323,7 @@ public class CardFactoryUtil {
                         (Ability_Tap) spell));
                 else if(spell.getManaCost().equals("0") || this.isFree()) {
                     this.setFree(false);
-                    AllZone.Stack.add(spell);
+                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
                     stop();
                 } else stopSetNext(new Input_PayManaCost(spell));
             }
@@ -361,7 +361,7 @@ public class CardFactoryUtil {
                         (Ability_Tap) spell));
                 else if(spell.getManaCost().equals("0") || this.isFree()) {
                     this.setFree(false);
-                    AllZone.Stack.add(spell);
+                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
                     stop();
                 } else stopSetNext(new Input_PayManaCost(spell));
             }
@@ -398,7 +398,7 @@ public class CardFactoryUtil {
                         (Ability_Tap) spell));
                 else if(spell.getManaCost().equals("0") || this.isFree()) {
                     this.setFree(false);
-                    AllZone.Stack.add(spell);
+                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
                     stop();
                 } else stopSetNext(new Input_PayManaCost(spell));
             }
@@ -432,7 +432,7 @@ public class CardFactoryUtil {
                     
                     if(spell.getManaCost().equals("0") || this.isFree()) {
                         this.setFree(false);
-                        AllZone.Stack.add(spell);
+                        AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
                         stop();
                     } else stopSetNext(new Input_PayManaCost(spell));
                 }
@@ -1677,7 +1677,7 @@ public class CardFactoryUtil {
                 else if(spell.getManaCost().equals("0") || this.isFree())//for "sacrifice this card" abilities
                 {
                     this.setFree(false);
-                    AllZone.Stack.add(spell);
+                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
                     stop();
                 } else stopSetNext(new Input_PayManaCost(spell));
                 
@@ -1768,7 +1768,7 @@ public class CardFactoryUtil {
                 spell.setTargetPlayer(player);
                 if(spell.getManaCost().equals("0") || this.isFree()) {
                     this.setFree(false);
-                    AllZone.Stack.add(spell);
+                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
                     if(spell.isTapAbility()) spell.getSourceCard().tap();
                     if(spell.isUntapAbility()) spell.getSourceCard().untap();
                     stop();
@@ -1800,7 +1800,7 @@ public class CardFactoryUtil {
                 spell.setTargetPlayer(player);
                 if(spell.getManaCost().equals("0") || this.isFree()) {
                     this.setFree(false);
-                    AllZone.Stack.add(spell);
+                    AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
                     stop();
                 } else stopSetNext(new Input_PayManaCost(spell));
             }

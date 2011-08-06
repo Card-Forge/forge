@@ -10,6 +10,19 @@ public class MagicStack extends MyObservable
 	  stack.clear();
 	  this.updateObservers();
   }
+  
+  public void add(SpellAbility sp, boolean useX)
+  {
+	  if (!useX)
+		  this.add(sp);
+	  else
+	  {
+		  if(sp instanceof Ability_Mana || sp instanceof Ability_Triggered)//TODO make working triggered abilities!
+			  sp.resolve(); 
+		  else
+			  push(sp);
+	  }
+  }
 
   public void add(SpellAbility sp)
   {
@@ -117,7 +130,6 @@ public class MagicStack extends MyObservable
     this.updateObservers();
     if(sp.isSpell())
     {
-    	
     	//attempt to counter human spell
     	if (sp.getSourceCard().getController().equals(Constant.Player.Human) &&
     		CardFactoryUtil.isCounterable(sp.getSourceCard()) )
