@@ -8,8 +8,10 @@ public class GameActionUtil
 	{
 		
 		upkeep_removeDealtDamageToOppThisTurn();
-		upkeep_UpkeepCost();
-		upkeep_CumulativeUpkeepCost();
+		upkeep_UpkeepCost(); //sacrifice unless upkeep cost is paid
+		upkeep_DestroyUpkeepCost(); //destroy unless upkeep cost is paid
+		upkeep_DamageUpkeepCost(); //deal damage unless upkeep cost is paid
+		upkeep_CumulativeUpkeepCost(); //sacrifice unless cumulative upkeep cost is paid
 		upkeep_Echo();
 		upkeep_TabernacleUpkeepCost();
 		upkeep_MagusTabernacleUpkeepCost();
@@ -2812,7 +2814,159 @@ public class GameActionUtil
 		}
 	}//upkeepCost
 	
+	public static void upkeep_DestroyUpkeepCost()
+	{
+		String player = AllZone.Phase.getActivePlayer();
+		
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+		//list = list.getType("Creature");
+		list = list.filter(new CardListFilter()
+		{
+			public boolean addCard(Card c)
+			{
+				ArrayList<String> a = c.getKeyword();
+				for (int i = 0; i < a.size(); i++)
+				{
+					if (a.get(i).toString().startsWith("At the beginning of your upkeep, destroy " +c.getName()))
+					{
+						String k[] = a.get(i).toString().split(":");
+				        c.setUpkeepCost(k[1]);
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+		
+		for (int i=0; i<list.size();i++)
+		{
+			final Card c = list.get(i);
+						 
+		  	final Ability sacAbility = new Ability(c, c.getUpkeepCost())
+		  	{
+		  		public void resolve()
+		  		{
+		  			;
+		  		}
+		  	};
+		  	
+		  	final Command unpaidCommand = new Command() {
+				private static final long serialVersionUID = 8942537892273123542L;
 
+				public void execute() {
+					if(c.getName().equals("Cosmic Horror"))
+					{
+						String player = c.getController();
+						PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+						life.subtractLife(7);	
+					}
+	  				AllZone.GameAction.destroy(c);
+	  			}
+		  	};
+	  	
+		  	final Command paidCommand = new Command() {
+				private static final long serialVersionUID = -8462246567257483700L;
+
+				public void execute() {
+		  			;
+		  		}
+		  	};
+		  	
+		  	//AllZone.Stack.add(sacAbility);
+		  	if (c.getController().equals(Constant.Player.Human)) {
+		  		AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Upkeep for "+ c +"\r\n", sacAbility.getManaCost(), paidCommand, unpaidCommand));
+		  	}
+		  	else //computer
+		  	{
+		  		if (ComputerUtil.canPayCost(sacAbility))
+		  			ComputerUtil.playNoStack(sacAbility);
+		  		else
+		  			AllZone.GameAction.destroy(c);
+		  	}	
+		}
+	}//upkeepCost
+	
+	
+	public static void upkeep_DamageUpkeepCost()
+	{
+		String player = AllZone.Phase.getActivePlayer();
+		
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+		//list = list.getType("Creature");
+		list = list.filter(new CardListFilter()
+		{
+			public boolean addCard(Card c)
+			{
+				ArrayList<String> a = c.getKeyword();
+				for (int i = 0; i < a.size(); i++)
+				{
+					if (a.get(i).toString().startsWith("At the beginning of your upkeep, " +c.getName() + " deals "))
+					{
+						String k[] = a.get(i).toString().split("deals ");
+						String s1 = k[1].substring(0, 2);
+						s1 = s1.trim();
+						c.setUpkeepDamage(Integer.parseInt(s1));
+						System.out.println(k[1]);
+						String l[] = k[1].split("pay:");
+						System.out.println(l[1]);
+						c.setUpkeepCost(l[1]);
+						
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+		
+		for (int i=0; i<list.size();i++)
+		{
+			final Card c = list.get(i);
+						 
+		  	final Ability sacAbility = new Ability(c, c.getUpkeepCost())
+		  	{
+		  		public void resolve()
+		  		{
+		  			;
+		  		}
+		  	};
+		  	
+		  	final Command unpaidCommand = new Command() {
+				private static final long serialVersionUID = 8942537892273123542L;
+
+				public void execute() {
+	  				//AllZone.GameAction.sacrifice(c);
+					String player = c.getController();
+					PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+					life.subtractLife(c.getUpkeepDamage());	
+	  			}
+		  	};
+	  	
+		  	final Command paidCommand = new Command() {
+				private static final long serialVersionUID = -8462246567257483700L;
+
+				public void execute() {
+		  			;
+		  		}
+		  	};
+		  	
+		  	//AllZone.Stack.add(sacAbility);
+		  	if (c.getController().equals(Constant.Player.Human)) {
+		  		AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Upkeep for "+ c +"\r\n", sacAbility.getManaCost(), paidCommand, unpaidCommand));
+		  	}
+		  	else //computer
+		  	{
+		  		if (ComputerUtil.canPayCost(sacAbility))
+		  			ComputerUtil.playNoStack(sacAbility);
+		  		else
+		  			AllZone.GameAction.sacrifice(c);
+		  	}	
+		}
+	}//damageUpkeepCost
+	
 	public static void removeAttackedBlockedThisTurn()
 	{
 		// resets the status of attacked/blocked this turn

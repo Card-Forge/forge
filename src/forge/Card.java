@@ -71,6 +71,8 @@ public class Card extends MyObservable
   
   private int randomPicture = 0;
   
+  private int upkeepDamage = 0;
+  
   private int X = 0;
   
   private String owner      = "";
@@ -794,6 +796,9 @@ public class Card extends MyObservable
   
   public void setRandomPicture(int n) { randomPicture = n; }
   public int getRandomPicture() { return randomPicture; }
+  
+  public void setUpkeepDamage(int n) { upkeepDamage = n;}
+  public int getUpkeepDamage() { return upkeepDamage ;}
   
   //public int getAttack(){return attack;}
   

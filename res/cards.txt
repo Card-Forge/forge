@@ -1,3 +1,58 @@
+Cosmic Horror
+3 B B B
+Creature
+If Cosmic is destroyed this way, it deals 7 damage to you.
+7/7
+First Strike
+At the beginning of your upkeep, destroy Cosmic Horror unless you pay:3 B B B
+
+Force of Nature
+2 G G G G
+Creature
+no text
+8/8
+Trample
+At the beginning of your upkeep, Force of Nature deals 8 damage to you unless you pay:G G G G
+
+Krosan Cloudshaper
+7 G G G
+Creature Beast Mutant
+no text
+13/13
+At the beginning of your upkeep, sacrifice Krosan Cloudshaper unless you pay:G G
+Morph:7 G G
+
+Kami of the Tended Garden
+3 G
+Creature Spirit
+no text
+4/4
+At the beginning of your upkeep, sacrifice Kami of the Tended Garden unless you pay:G
+Soulshift:3
+
+Junun Efreet
+1 B B
+Creature
+no text
+3/3
+Flying
+At the beginning of your upkeep, sacrifice Junun Efreet unless you pay:B B
+
+Hungry Mist
+2 G G
+Creature Elemental
+no text
+6/2
+At the beginning of your upkeep, sacrifice Hungry Mist unless you pay:G G
+
+Child of Gaea
+3 G G G
+Creature Elemental
+no text
+7/7
+Trample
+At the beginning of your upkeep, sacrifice Child of Gaea unless you pay:G G
+
 Burning Fields
 4 R
 Sorcery
@@ -147,16 +202,18 @@ Cumulative upkeep:2
 Drifting Djinn
 4 U U
 Creature Djinn
-At the beginning of your upkeep, sacrifice Drifting Djinn unless you pay:1 U
+no text
 5/5
 Flying
 Cycling:2
+At the beginning of your upkeep, sacrifice Drifting Djinn unless you pay:1 U
 
 Drifter il-Dal
 U
 Creature Human Wizard
-At the beginning of your upkeep, sacrifice Drifter il-Dal unless you pay:U
+no text
 2/1
+At the beginning of your upkeep, sacrifice Drifter il-Dal unless you pay:U
 Shadow
 
 Karmic Guide
