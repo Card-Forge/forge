@@ -25,7 +25,6 @@ public class PhaseUtil {
     	//Run triggers
     	HashMap<String,Object> runParams = new HashMap<String,Object>();
     	runParams.put("Phase", Constant.Phase.Untap);
-    	runParams.put("Part", "Beginning");
     	runParams.put("Player", AllZone.Phase.getPlayerTurn());
     	AllZone.TriggerHandler.runTrigger("Phase", runParams);
 		
@@ -57,10 +56,6 @@ public class PhaseUtil {
         
         //otherwise land seems to stay tapped when it is really untapped
         AllZone.Human_Battlefield.updateObservers();
-        
-    	//Run triggers
-    	runParams.put("Part", "End");
-    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
         
         AllZone.Phase.setNeedToNextPhase(true);
 	}
@@ -318,15 +313,10 @@ public class PhaseUtil {
     	//Run triggers
     	HashMap<String,Object> runParams = new HashMap<String,Object>();
     	runParams.put("Phase", Constant.Phase.Upkeep);
-    	runParams.put("Part", "Beginning");
     	runParams.put("Player", AllZone.Phase.getPlayerTurn());
     	AllZone.TriggerHandler.runTrigger("Phase", runParams);
 		
         GameActionUtil.executeUpkeepEffects();
-        
-    	//Run triggers
-    	runParams.put("Part", "End");
-    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
 	}
 	
     public static boolean skipUpkeep()
@@ -355,16 +345,11 @@ public class PhaseUtil {
     	//Run triggers
     	HashMap<String,Object> runParams = new HashMap<String,Object>();
     	runParams.put("Phase", Constant.Phase.Draw);
-    	runParams.put("Part", "Beginning");
     	runParams.put("Player", AllZone.Phase.getPlayerTurn());
     	AllZone.TriggerHandler.runTrigger("Phase", runParams);
     	
     	playerTurn.drawCard();
         GameActionUtil.executeDrawStepEffects();
-        
-    	//Run triggers
-    	runParams.put("Part", "End");
-    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
     }
     
 	private static boolean skipDraw(Player player){

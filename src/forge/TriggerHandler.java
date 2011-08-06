@@ -15,50 +15,62 @@ public class TriggerHandler {
 		String mode = mapParams.get("Mode");
 		if(mode.equals("Attacks"))
 		{
+			System.out.println("Creating: Attacks.");
 			ret = new Trigger_Attacks(mapParams,host);
 		}
 		else if(mode.equals("Blocks"))
 		{
+			System.out.println("Creating: Blocks.");
 			ret = new Trigger_Blocks(mapParams,host);
 		}
 		else if(mode.equals("ChangesZone"))
 		{
+			System.out.println("Creating: ChangesZone.");
 			ret = new Trigger_ChangesZone(mapParams,host);
 		}
 		else if(mode.equals("DamageDone"))
 		{
+			System.out.println("Creating: DamageDone.");
 			ret = new Trigger_DamageDone(mapParams,host);
 		}
 		else if(mode.equals("Discarded"))
 		{
+			System.out.println("Creating: Discarded.");
 			ret = new Trigger_Discarded(mapParams,host);
 		}
 		else if(mode.equals("LifeGained"))
 		{
+			System.out.println("Creating: LifeGained.");
 			ret = new Trigger_LifeGained(mapParams,host);
 		}
 		else if(mode.equals("LifeLost"))
 		{
+			System.out.println("Creating: LifeLost.");
 			ret = new Trigger_LifeLost(mapParams,host);
 		}
 		else if(mode.equals("Phase"))
 		{
+			System.out.println("Creating: Phase.");
 			ret = new Trigger_Phase(mapParams,host);
 		}
 		else if(mode.equals("Sacrificed"))
 		{
+			System.out.println("Creating: Sacrificed.");
 			ret = new Trigger_Sacrificed(mapParams,host);
 		}
 		else if(mode.equals("SpellCast"))
 		{
+			System.out.println("Creating: SpellCast.");
 			ret = new Trigger_SpellCast(mapParams,host);
 		}
 		else if(mode.equals("Taps"))
 		{
+			System.out.println("Creating: Taps.");
 			ret = new Trigger_Taps(mapParams,host);
 		}
 		else if(mode.equals("Untaps"))
 		{
+			System.out.println("Creating: Untaps.");
 			ret = new Trigger_Untaps(mapParams,host);
 		}
 		
@@ -132,63 +144,81 @@ public class TriggerHandler {
 	
 	public void runTrigger(String mode,HashMap<String,Object> runParams)
 	{
+		//AP
 		for(Trigger regtrig : registeredTriggers)
 		{
-			if(!regtrig.requirementsCheck())
+			if(regtrig.getHostCard().getController().equals(AllZone.Phase.getPlayerTurn()))
 			{
-				continue;
+				runSingleTrigger(regtrig,mode,runParams);
 			}
-			
-			HashMap<String,String> trigParams = regtrig.getMapParams();
-			
-			if(mode.equals(trigParams.get("Mode")))
+		}
+		
+		//NAP
+		for(Trigger regtrig : registeredTriggers)
+		{
+			if(regtrig.getHostCard().getController().equals(AllZone.Phase.getPlayerTurn().getOpponent()))
 			{
-				System.out.println("Mode is " + mode);
-				if(!regtrig.performTest(runParams))
+				runSingleTrigger(regtrig,mode,runParams);
+			}
+		}
+	}
+	
+	private void runSingleTrigger(Trigger regtrig, String mode,HashMap<String,Object> runParams)
+	{
+		if(!regtrig.requirementsCheck())
+		{
+			return;
+		}
+		
+		HashMap<String,String> trigParams = regtrig.getMapParams();
+		
+		if(mode.equals(trigParams.get("Mode")))
+		{
+			System.out.println("Mode is " + mode);
+			if(!regtrig.performTest(runParams))
+			{
+				return;
+			}				
+			
+			//All tests passed, execute ability.
+			System.out.println("All tests succeeded.");
+			AbilityFactory AF = new AbilityFactory();
+			
+			SpellAbility sa = regtrig.getOverridingAbility();
+			if(sa == null)
+			{
+				sa = AF.getAbility(regtrig.getHostCard().getSVar(trigParams.get("Execute")), regtrig.getHostCard());
+			}
+			sa.setActivatingPlayer(regtrig.getHostCard().getController());
+			if(sa.getStackDescription().equals(""))
+			{
+				sa.setStackDescription(trigParams.get("TriggerDescription"));
+			}
+			if(trigParams.containsKey("Optional"))
+			{
+				if(trigParams.get("Optional").equals("True"))
 				{
-					continue;
-				}				
-				
-				//All tests passed, execute ability.
-				System.out.println("All tests succeeded.");
-				AbilityFactory AF = new AbilityFactory();
-				
-				SpellAbility sa = regtrig.getOverridingAbility();
-				if(sa == null)
-				{
-					sa = AF.getAbility(regtrig.getHostCard().getSVar(trigParams.get("Execute")), regtrig.getHostCard());
-				}
-				sa.setActivatingPlayer(regtrig.getHostCard().getController());
-				if(sa.getStackDescription().equals(""))
-				{
-					sa.setStackDescription(trigParams.get("TriggerDescription"));
-				}
-				if(trigParams.containsKey("Optional"))
-				{
-					if(trigParams.get("Optional").equals("True"))
+					if(regtrig.getHostCard().getController().equals(AllZone.HumanPlayer))
 					{
-						if(regtrig.getHostCard().getController().equals(AllZone.HumanPlayer))
+						StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
+						buildQuestion.append(regtrig.getHostCard().getName()).append("(").append(regtrig.getHostCard().getUniqueNumber()).append(")?");
+						if(!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString()))
 						{
-							StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
-							buildQuestion.append(regtrig.getHostCard().getName()).append("(").append(regtrig.getHostCard().getUniqueNumber()).append(")?");
-							if(!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString()))
-							{
-								System.out.println("Player refused optional activation. Fail.");
-								continue;
-							}
+							System.out.println("Player refused optional activation. Fail.");
+							return;
 						}
-						else
+					}
+					else
+					{
+						if(!sa.canPlayAI())
 						{
-							if(!sa.canPlayAI())
-							{
-								System.out.println("AI refused optional activation. Fail.");
-								continue;
-							}
+							System.out.println("AI refused optional activation. Fail.");
+							return;
 						}
 					}
 				}
-				AllZone.GameAction.playSpellAbility(sa);
-			}			
+			}
+			AllZone.GameAction.playSpellAbility(sa);
 		}
 	}
 	

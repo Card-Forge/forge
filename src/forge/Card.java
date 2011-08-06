@@ -1992,9 +1992,8 @@ public class Card extends MyObservable {
     		
     		//Run triggers
     		HashMap<String,Object> runParams = new HashMap<String,Object>();
-    		runParams.put("Action", "Tap");
     		runParams.put("Card", this);
-    		AllZone.TriggerHandler.runTrigger("TapsUntaps", runParams);
+    		AllZone.TriggerHandler.runTrigger("Taps", runParams);
     	}
     	setTapped(true);
     }
@@ -2006,9 +2005,8 @@ public class Card extends MyObservable {
     		
     		//Run triggers
     		HashMap<String,Object> runParams = new HashMap<String,Object>();
-    		runParams.put("Action", "Untap");
     		runParams.put("Card", this);
-    		AllZone.TriggerHandler.runTrigger("TapsUntaps", runParams);
+    		AllZone.TriggerHandler.runTrigger("Untaps", runParams);
     	}
     	if (isTapped() && isReflectedLand()) {
     		Ability_Reflected_Mana am = (Ability_Reflected_Mana) getManaAbility().get(0);

@@ -24,7 +24,6 @@ public class EndOfTurn implements java.io.Serializable
 	//Run Triggers
   	HashMap<String,Object> runParams = new HashMap<String,Object>();
   	runParams.put("Phase", Constant.Phase.End_Of_Turn);
-  	runParams.put("Part", "Beginning");
   	runParams.put("Player", AllZone.Phase.getPlayerTurn());
   	AllZone.TriggerHandler.runTrigger("Phase", runParams);
 	  
@@ -199,11 +198,7 @@ public class EndOfTurn implements java.io.Serializable
     	if(c.getCreatureAttackedThisTurn()) c.setCreatureAttackedThisTurn(false);
     }
     execute(at);
-    
-	//Run triggers
-	runParams.put("Part", "End");
-	AllZone.TriggerHandler.runTrigger("Phase", runParams);
-    
+        
   }//executeAt()
 
 
