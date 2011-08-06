@@ -1,4 +1,4 @@
-Name:Carrior Howler
+Name:Carrion Howler
 ManaCost:3 B
 Types:Creature Zombie Wolf
 Text:no text
