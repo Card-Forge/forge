@@ -146,7 +146,10 @@ def addSets(card):
 	print card.name
 	
 	for edition in allSets.keys():
-		edIndex = block.find(edition+'<')
+		edIndex = block.find('>'+edition+'<') # Portal/Mirrodin issue
+		
+		if edIndex == -1:	
+			edIndex = block.find('>'+edition+' (') # Single set issue
 		if edIndex == -1:
 			continue
 			
