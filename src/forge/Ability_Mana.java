@@ -127,8 +127,16 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     @Override
     public boolean equals(Object o)//Mana abilities with equal descriptions are considered equal, please take this into account
     {
-        return (o instanceof Ability_Mana? ((Ability_Mana) o).orig.equals(orig):(o instanceof String? o.toString().equals(
-                orig):false));
+    	if(o instanceof Ability_Mana){
+    		Ability_Mana ab = (Ability_Mana) o;
+    		return ab.orig.equals(orig);
+    	}
+    	else return false;
+    }
+    
+    public boolean equals(String s)//Mana abilities with equal descriptions are considered equal, please take this into account
+    {
+        return s.equals(orig);
     }
     
     public boolean equalsIgnoreMana(Ability_Mana ma) {

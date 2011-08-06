@@ -721,7 +721,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     		if (c2.toString().equals("Random"))
     			c2 = colors.get(r.nextInt(colors.size() - 1) + 1);
     	}
-    	else if (p.equals("C"))
+    	else //if (p.equals("C"))
     	{
     		c1 = colors.get(r.nextInt(colors.size() - 1) + 1);
     		colors.remove(c1);
@@ -773,7 +773,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     			c3 = colors.get(r.nextInt(colors.size() - 1) + 1);
 
     	}
-    	else if (p.equals("C"))
+    	else //if (p.equals("C"))
     	{
     		c1 = colors.get(r.nextInt(colors.size() - 1) + 1);
     		colors.remove(c1);
