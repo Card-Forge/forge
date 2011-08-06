@@ -2816,17 +2816,18 @@ public class CardFactory implements NewConstants {
                     
                     for(int i = 0; i < all.size(); i++) {
                         Card c = all.get(i);
-                        	if(c.isToken()) AllZone.getZone(c).remove(c);
-                        	else {  if(Destination.equals("TopofLibrary")) AllZone.GameAction.moveToTopOfLibrary(c);
+                        if(c.isToken()) AllZone.getZone(c).remove(c);
+                        else {  
+					if(Destination.equals("TopofLibrary")) AllZone.GameAction.moveToTopOfLibrary(c);
 					else if(Destination.equals("ShuffleIntoLibrary")) {
 							AllZone.GameAction.moveToTopOfLibrary(c);
 							AllZone.GameAction.shuffle(c.getOwner());
-					}
+						}
 					else if(Destination.equals("Exile")) AllZone.GameAction.removeFromGame(c); 
 					else if(Destination.equals("Hand")) {
                             			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
                            	 		AllZone.GameAction.moveTo(hand, c);
-					}
+						}
 				}
                     }
                 }// resolve()

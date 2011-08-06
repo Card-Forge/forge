@@ -1,3 +1,9 @@
+Final Judgment
+4 W W
+Sorcery
+Exile all creatures.
+spBounceAll:Creature:Exile
+
 Upheaval
 4 U U
 Sorcery
@@ -15,7 +21,7 @@ Inundate
 3 U U U
 Sorcery
 Return all nonblue creatures to their owners' hands.
-spBounceAll:Permanent.nonBlue:Hand
+spBounceAll:Creature.nonBlue:Hand
 
 Reduce to Dreams
 3 U U
