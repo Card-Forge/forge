@@ -1,8 +1,51 @@
+Aura Extraction
+1 W
+Instant
+Put target enchantment on top of its owner's library.
+spBounceTgt:Enchantment:TopofLibrary
+Cycling:2
+
+Disempower
+1 W
+Instant
+Put target artifact or enchantment on top of its owner's library.
+spBounceTgt:Artifact,Enchantment:TopofLibrary
+
+Excommunicate
+2 W
+Instant
+Put target creature on top of its owner's library.
+spBounceTgt:Creature:TopofLibrary
+
+Fallow Earth
+2 G
+Sorcery
+Put target land on top of its owner's library.
+spBounceTgt:Land:TopofLibrary
+
+Uproot
+3 G
+Sorcery Arcane
+Put target land on top of its owner's library.
+spBounceTgt:Land:TopofLibrary
+
+Forced Retreat
+2 U
+Sorcery
+Put target creature on top of its owner's library.
+spBounceTgt:Creature:TopofLibrary
+
+Repel
+3 U
+Instant
+Put target creature on top of its owner's library.
+spBounceTgt:Creature:TopofLibrary
+
 Temporal Eddy
 2 U U
 Sorcery
 Put target creature or land on top of its owner's library.
-spBounceTgt:Creature, Land:TopofLibrary
+spBounceTgt:Creature,Land:TopofLibrary
 
 Time Ebb
 2 U
