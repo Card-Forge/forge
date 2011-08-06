@@ -732,6 +732,16 @@ public class GameAction {
             
             c.addCounter(Counters.M1M1, 1);
             */
+        	
+        	PlayerZone ownerPlay = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+            PlayerZone grave = AllZone.getZone(c);
+            grave.remove(c);
+        	
+        	Card crd = new Card();
+        	crd = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
+        	ownerPlay.add(crd);
+        	
+        	crd.addCounter(Counters.M1M1, 1);
         }
         
         //if (c.getName().equals("Rancor") || c.getName().equals("Brilliant Halo") || c.getName().equals("Undying Rage"))
