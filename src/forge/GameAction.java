@@ -742,6 +742,10 @@ public class GameAction
     	c.setTempDefenseBoost(0);
     	c.setExaltedBonus(false);
     	//reset more stuff ?
+
+    	for(Counters counter : Counters.values())
+            if (c.getCounters(counter) != 0)
+                c.setCounter(counter, 0);
     	
     	c.addCounter(Counters.M1M1, 1);
     }
