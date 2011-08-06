@@ -188,41 +188,42 @@ public class AbilityFactory {
 		if (API.equals("PutCounter")){
 			if (isAb)
 				SA = AbilityFactory_Counters.createAbilityPutCounters(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_Counters.createSpellPutCounters(this);
-			}
+			else if (isDb)
+				SA = AbilityFactory_Counters.createDrawbackPutCounters(this);
 		}
 		
 		if (API.equals("RemoveCounter")){
 			if (isAb)
 				SA = AbilityFactory_Counters.createAbilityRemoveCounters(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_Counters.createSpellRemoveCounters(this);
-			}
+			else if (isDb)
+				SA = AbilityFactory_Counters.createDrawbackRemoveCounters(this);
 		}
 		
 		if (API.equals("Proliferate")){
 			if (isAb)
 				SA = AbilityFactory_Counters.createAbilityProliferate(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_Counters.createSpellProliferate(this);
-			}
+			else if (isDb)
+				SA = AbilityFactory_Counters.createDrawbackProliferate(this);
 		}
 
 		if (API.equals("Fetch")){
 			if (isAb)
 				SA = AbilityFactory_Fetch.createAbilityFetch(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_Fetch.createSpellFetch(this);
-			}
 		}
 		
 		if (API.equals("Retrieve")){
 			if (isAb)
 				SA = AbilityFactory_Fetch.createAbilityRetrieve(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_Fetch.createSpellRetrieve(this);
-			}
 		}
 		
 		if (API.equals("Pump"))
@@ -231,7 +232,7 @@ public class AbilityFactory {
 			
 			if (isAb)
 				SA = afPump.getAbility();
-			if (isSp)
+			else if (isSp)
 				SA = afPump.getSpell();
 			
 			hostCard.setSVar("PlayMain1", "TRUE");
@@ -258,14 +259,14 @@ public class AbilityFactory {
 		if (API.equals("Fog")){
 			if (isAb)
 				SA = AbilityFactory_Combat.createAbilityFog(this);
-			if (isSp)
+			else if (isSp)
 				SA = AbilityFactory_Combat.createSpellFog(this);
 		}
 		
 		if (API.equals("Bounce")){
 			if (isAb)
 				SA = AbilityFactory_Bounce.createAbilityBounce(this);
-			if (isSp)
+			else if (isSp)
 				SA = AbilityFactory_Bounce.createSpellBounce(this);
 			hostCard.setSVar("PlayMain1", "TRUE");
 		}
@@ -312,17 +313,15 @@ public class AbilityFactory {
 		if (API.equals("Destroy")){
 			if (isAb)
 				SA = AbilityFactory_Destroy.createAbilityDestroy(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_Destroy.createSpellDestroy(this);
-			}
 		}
 		
 		if (API.equals("DestroyAll")){
 			if (isAb)
 				SA = AbilityFactory_Destroy.createAbilityDestroyAll(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_Destroy.createSpellDestroyAll(this);
-			}
 		}
 		
 		if(API.equals("Token")){
@@ -330,9 +329,9 @@ public class AbilityFactory {
 			
 			if(isAb)
 				SA = AFT.getAbility();
-			if(isSp)
+			else if(isSp)
 				SA = AFT.getSpell();
-			if(isDb)
+			else if(isDb)
 				SA = AFT.getDrawback();
 		}
 		
@@ -341,7 +340,7 @@ public class AbilityFactory {
 			
 			if (isAb)
 				SA = afControl.getAbility();
-			if (isSp)
+			else if (isSp)
 				SA = afControl.getSpell();
 		}
 		
@@ -360,7 +359,7 @@ public class AbilityFactory {
 			
 			if(isAb)
 				SA = c.getAbilityCounter(this);
-			if(isSp)
+			else if(isSp)
 				SA = c.getSpellCounter(this);
 		}
 		
@@ -389,43 +388,7 @@ public class AbilityFactory {
         if (!isTargeted)
         	SA.setStackDescription(hostCard.getName());
         
-        // SpellAbility_Restrictions should be added in here
-        
-        if (mapParams.containsKey("ActivatingZone"))
-        	SA.getRestrictions().setActivateZone(mapParams.get("ActivatingZone"));
-        
-        if (mapParams.containsKey("SorcerySpeed"))
-        	SA.getRestrictions().setSorcerySpeed(true);
-        
-        if (mapParams.containsKey("PlayerTurn"))
-        	SA.getRestrictions().setPlayerTurn(true);
-        
-        if (mapParams.containsKey("OpponentTurn"))
-        	SA.getRestrictions().setOpponentTurn(true);
-        
-        if (mapParams.containsKey("AnyPlayer"))
-        	SA.getRestrictions().setAnyPlayer(true);
-        
-        if (mapParams.containsKey("ActivationLimit"))
-        	SA.getRestrictions().setActivationLimit(Integer.parseInt(mapParams.get("ActivationLimit")));
-        
-        if(mapParams.containsKey("ActivationNumberSacrifice"))
-        	SA.getRestrictions().setActivationNumberSacrifice(Integer.parseInt(mapParams.get("ActivationNumberSacrifice")));
-
-        if (mapParams.containsKey("ActivatingPhases"))
-        	SA.getRestrictions().setActivatePhases(mapParams.get("ActivatingPhases"));
-        
-        if (mapParams.containsKey("ActivatingCardsInHand"))
-        	SA.getRestrictions().setActivateCardsInHand(Integer.parseInt(mapParams.get("ActivatingCardsInHand")));
-        
-        if (mapParams.containsKey("Threshold"))
-        	SA.getRestrictions().setThreshold(true);
-        
-        if (mapParams.containsKey("IsPresent")){
-        	SA.getRestrictions().setIsPresent(mapParams.get("IsPresent"));
-        	if (mapParams.containsKey("PresentCompare"))
-        		SA.getRestrictions().setPresentCompare(mapParams.get("PresentCompare"));
-        }
+        SA.setRestrictions(buildRestrictions(SA));
         
         return SA;
 	}
@@ -450,6 +413,47 @@ public class AbilityFactory {
        }
 
         return abSub;
+	}
+	
+	public SpellAbility_Restriction buildRestrictions(SpellAbility SA){
+        // SpellAbility_Restrictions should be added in here
+        SpellAbility_Restriction restrict = SA.getRestrictions(); 
+        if (mapParams.containsKey("ActivatingZone"))
+        	restrict.setActivateZone(mapParams.get("ActivatingZone"));
+        
+        if (mapParams.containsKey("SorcerySpeed"))
+        	restrict.setSorcerySpeed(true);
+        
+        if (mapParams.containsKey("PlayerTurn"))
+        	restrict.setPlayerTurn(true);
+        
+        if (mapParams.containsKey("OpponentTurn"))
+        	restrict.setOpponentTurn(true);
+        
+        if (mapParams.containsKey("AnyPlayer"))
+        	restrict.setAnyPlayer(true);
+        
+        if (mapParams.containsKey("ActivationLimit"))
+        	restrict.setActivationLimit(Integer.parseInt(mapParams.get("ActivationLimit")));
+        
+        if(mapParams.containsKey("ActivationNumberSacrifice"))
+        	restrict.setActivationNumberSacrifice(Integer.parseInt(mapParams.get("ActivationNumberSacrifice")));
+
+        if (mapParams.containsKey("ActivatingPhases"))
+        	restrict.setActivatePhases(mapParams.get("ActivatingPhases"));
+        
+        if (mapParams.containsKey("ActivatingCardsInHand"))
+        	restrict.setActivateCardsInHand(Integer.parseInt(mapParams.get("ActivatingCardsInHand")));
+        
+        if (mapParams.containsKey("Threshold"))
+        	restrict.setThreshold(true);
+        
+        if (mapParams.containsKey("IsPresent")){
+        	restrict.setIsPresent(mapParams.get("IsPresent"));
+        	if (mapParams.containsKey("PresentCompare"))
+        		restrict.setPresentCompare(mapParams.get("PresentCompare"));
+        }
+        return restrict;
 	}
 	
 	public static int calculateAmount(Card card, String amount, SpellAbility ability){
@@ -492,4 +496,3 @@ public class AbilityFactory {
 		return Integer.parseInt(amount) * multiplier;
 	}
 }
-
