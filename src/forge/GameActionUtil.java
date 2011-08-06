@@ -112,7 +112,6 @@ public class GameActionUtil {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		draw_Teferi_Puzzle_Box(player);
 		draw_Anvil_of_Bogardan(player);
-		draw_Overbeing_of_Myth(player);
 		draw_Sylvan_Library(player);
 		AllZone.Stack.unfreezeStack();	
 	}
@@ -6042,7 +6041,7 @@ public class GameActionUtil {
 				player.drawCard();
 				player.discard(null);
 		}
-	}// Howling_Mine()
+	}// Anvil_of_Bogarden()
 	
 	private static void draw_Sylvan_Library(final Player player) {
 		/*
@@ -6145,11 +6144,6 @@ public class GameActionUtil {
 		}
 
 	}// Teferi_Puzzle_Box
-
-	private static void draw_Overbeing_of_Myth(Player player) {
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Overbeing of Myth");
-		player.drawCards(list.size());
-	}// Overbeing_of_Myth()
 
 		private static void upkeep_Carnophage() {
 		final Player player = AllZone.Phase.getPlayerTurn();
