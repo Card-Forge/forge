@@ -11589,77 +11589,6 @@ public class GameActionUtil {
 	}; // Gemhide_Sliver
 
 	
-	public static Command Knighthood                  = new Command() {
-
-		private static final long serialVersionUID   = -6904191523315339355L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "First Strike";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Knighthood");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-
-	public static Command Darksteel_Forge 			  = new Command() {
-
-		private static final long serialVersionUID = 7212793187625704417L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Indestructible";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Darksteel Forge");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList arts = new CardList(
-						zone[outer].getCards());
-				arts = arts.getType("Artifact");
-
-				for(int i = 0; i < arts.size(); i++) {
-					c = arts.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-
-	};
-	
 	public static Command Elspeth_Emblem 			  = new Command() {
 
 		private static final long serialVersionUID = 7414127991531889390L;
@@ -11873,86 +11802,7 @@ public class GameActionUtil {
         }// execute()
     };
     
-	public static Command Goblin_Warchief                 = new Command() {
-
-		private static final long serialVersionUID   = -6707183535529395830L;
-		CardList                  gloriousAnthemList = new CardList();
-    	Player[]              Akroma_Memorial_Controller = new Player[10]; // Shouldn't have more than 8 in play, let alone 10.
-        public void execute() {
-            String keyword = "Haste";
-            CardList list = gloriousAnthemList;
-            Card c;
-            
-			CardList Akroma_List = AllZoneUtil.getCardsInPlay("Goblin Warchief");
-			CardList Akroma_Zone = new CardList();
-        	for(int i = 0; i < Akroma_List.size(); i++) {
-        		Akroma_Zone.clear();
-				Akroma_Zone.addAll(AllZone.getZone(Constant.Zone.Play, Akroma_List.get(i).getController()).getCards());	
-        	}
-        	CardList List_Copy = new CardList();
-        	List_Copy.add(list);
-            for(int i = 0; i < List_Copy.size(); i++) {
-                c = List_Copy.get(i);                 
-                if(!Akroma_Zone.contains(c)) {
-                	c.removeExtrinsicKeyword(keyword);
-                    list.remove(c);
-                }
-            }
-
-            PlayerZone[] zone = getZone("Goblin Warchief");
-			if(AllZoneUtil.isCardInPlay("Goblin Warchief")) {
-			CardList ControllerCheck = AllZoneUtil.getCardsInPlay("Goblin Warchief");
-			for(int i = 0; i < ControllerCheck.size(); i++) Akroma_Memorial_Controller[i] = ControllerCheck.get(i).getController();
-            for(int outer = 0; outer < zone.length; outer++) {
-                CardList creature = new CardList(
-                        zone[outer].getCards());
-                creature = creature.getType("Creature");
-            	
-                for(int i = 0; i < creature.size(); i++) {
-                    c = creature.get(i);
-                    if(!list.contains(c)) {
-                    gloriousAnthemList.add(c);
-                    
-                    if(!c.getIntrinsicKeyword().contains(keyword)) {
-                        c.addExtrinsicKeyword(keyword);  
-                    }
-                    }
-                }// for inner
-            }// for outer
-			} 
-        }// execute()
-/**
-		public void execute() {
-			String keyword = "Haste";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Goblin Warchief");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-		**/
-	};
-    
+	
 	public static Command StaticEffectKeyword  		= new Command() {
 		/** StaticEffectKeyword
 		 * Syntax:[ k[0] StaticEffect : k[1] Where the Card must be : k[2] Which Cards the Bonus Affects : 
@@ -12966,42 +12816,6 @@ public class GameActionUtil {
 					gloriousAnthemList.add(c);
 				}// for inner
 			}
-		}// execute()
-	};
-
-
-	public static Command Serras_Blessing             = new Command() {
-		private static final long serialVersionUID   = -6904191523315339355L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Vigilance";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Serra's Blessing");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
 		}// execute()
 	};
 
@@ -18049,7 +17863,6 @@ public class GameActionUtil {
 		commands.put("Crucible_of_Fire", Crucible_of_Fire);
 		
 		commands.put("Dakkon", Dakkon);
-		commands.put("Darksteel_Forge", Darksteel_Forge);
 		commands.put("Daru_Warchief", Daru_Warchief);
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("Deaths_Shadow", Deaths_Shadow);
@@ -18072,7 +17885,6 @@ public class GameActionUtil {
 		commands.put("Giant_Tortoise", Giant_Tortoise);
 		commands.put("Goblin_Assault", Goblin_Assault);
 		commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
-		commands.put("Goblin_Warchief", Goblin_Warchief);
 		commands.put("Grixis_Grimblade", Grixis_Grimblade);
 		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
 		commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
@@ -18097,7 +17909,6 @@ public class GameActionUtil {
 		commands.put("Kithkin_Rabble", Kithkin_Rabble);
 		commands.put("Knight_of_the_Reliquary", Knight_of_the_Reliquary);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
-		commands.put("Knighthood", Knighthood);
 		commands.put("Kor_Duelist", Kor_Duelist);
 		commands.put("Kor_Spiritdancer", Kor_Spiritdancer);
 		commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
@@ -18153,7 +17964,6 @@ public class GameActionUtil {
 		commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
 		commands.put("Serra_Ascendant", Serra_Ascendant);
 		commands.put("Serra_Avatar", Serra_Avatar);
-		commands.put("Serras_Blessing", Serras_Blessing);
 		commands.put("Shared_Triumph", Shared_Triumph);
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);

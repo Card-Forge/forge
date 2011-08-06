@@ -50,7 +50,6 @@ public class StaticEffects
 		cardToEffectsList.put("Crucible of Fire", new String[] {"Crucible_of_Fire"});
 		
 		cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon"});
-		cardToEffectsList.put("Darksteel Forge", new String[] {"Darksteel_Forge"} );
 		cardToEffectsList.put("Daru Warchief", new String[] {"Daru_Warchief"});
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});
 		cardToEffectsList.put("Death's Shadow", new String[] {"Deaths_Shadow"});
@@ -72,7 +71,6 @@ public class StaticEffects
 		cardToEffectsList.put("Giant Tortoise", new String[] {"Giant_Tortoise"});
 		cardToEffectsList.put("Goblin Assault", new String[] {"Goblin_Assault"});
 		cardToEffectsList.put("Goblin Gaveleer", new String[] {"Goblin_Gaveleer"});
-		cardToEffectsList.put("Goblin Warchief", new String[] {"Goblin_Warchief"});
 		cardToEffectsList.put("Grixis Grimblade", new String[] {"Grixis_Grimblade"});
 		cardToEffectsList.put("Guul Draz Specter", new String[] {"Guul_Draz_Specter"});
 		cardToEffectsList.put("Guul Draz Vampire", new String[] {"Guul_Draz_Vampire"});
@@ -97,7 +95,6 @@ public class StaticEffects
 		cardToEffectsList.put("Kithkin Rabble", new String[] {"Kithkin_Rabble"});
 		cardToEffectsList.put("Knight of Cliffhaven", new String[] {"Knight_of_Cliffhaven"});
 		cardToEffectsList.put("Knight of the Reliquary", new String[] {"Knight_of_the_Reliquary"});
-		cardToEffectsList.put("Knighthood", new String[] {"Knighthood"});
 		cardToEffectsList.put("Kor Duelist", new String[] {"Kor_Duelist"});
 		cardToEffectsList.put("Kor Spiritdancer", new String[] {"Kor_Spiritdancer"});
 		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash_Heir_to_Blackblade"});
@@ -150,7 +147,6 @@ public class StaticEffects
 		cardToEffectsList.put("Serpent of the Endless Sea", new String[] {"Serpent_of_the_Endless_Sea"});
 		cardToEffectsList.put("Serra Ascendant", new String[] {"Serra_Ascendant"});
 		cardToEffectsList.put("Serra Avatar", new String[] {"Serra_Avatar"});
-		cardToEffectsList.put("Serra's Blessing", new String[] {"Serras_Blessing"});
 		cardToEffectsList.put("Shared Triumph", new String[] {"Shared_Triumph"});
 		cardToEffectsList.put("Skywatcher Adept", new String[] {"Skywatcher_Adept"});
 		cardToEffectsList.put("Soulsurge Elemental", new String[] {"Soulsurge_Elemental"});

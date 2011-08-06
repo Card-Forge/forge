@@ -1,7 +1,8 @@
 Name:Darksteel Forge
 ManaCost:9
 Types:Artifact
-Text:Artifacts you control are indestructible.
+Text:no text
+K:stPumpAll:Artifact.YouCtrl:0/0/Indestructible:No Condition:Artifacts you control are indestructible.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darksteel_forge.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/110.jpg

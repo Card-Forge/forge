@@ -1,7 +1,8 @@
 Name:Serra's Blessing
 ManaCost:1 W
 Types:Enchantment
-Text:Creatures you control have vigilance.
+Text:no text
+K:stPumpAll:Creature.YouCtrl:0/0/Vigilance:No Condition:Creatures you control have vigilance.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serras_blessing.jpg
