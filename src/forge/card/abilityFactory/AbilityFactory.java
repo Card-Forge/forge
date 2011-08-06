@@ -605,13 +605,13 @@ public class AbilityFactory {
 				SA = AbilityFactory_ZoneAffecting.createDrawbackRevealHand(this);
 		}
 		
-		if (API.equals("Reveal")){
+		if (API.equals("Dig")){
 			if (isAb)
-				SA = AbilityFactory_Reveal.createAbilityReveal(this);
+				SA = AbilityFactory_Reveal.createAbilityDig(this);
 			else if (isSp)
-				SA = AbilityFactory_Reveal.createSpellReveal(this);
+				SA = AbilityFactory_Reveal.createSpellDig(this);
 			else if (isDb)
-				SA = AbilityFactory_Reveal.createDrawbackReveal(this);
+				SA = AbilityFactory_Reveal.createDrawbackDig(this);
 		}
 		
 		if (SA == null)
