@@ -4545,7 +4545,7 @@ public class CardFactory_Creatures {
 	          list = list.filter(new CardListFilter()
 	          {
 				public boolean addCard(Card c) {
-					return c.getName().equals("");
+					return !c.equals(card) && !c.getName().equals("Mana Pool");
 				}
 	          });
 	          
