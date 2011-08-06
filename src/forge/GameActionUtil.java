@@ -11344,6 +11344,9 @@ public class GameActionUtil {
   	      	if(SpecialConditions.contains("isEquipped")) {
 	      		if (!SourceCard.isEquipped()) return false;
 	      	}
+  	      	if(SpecialConditions.contains("isEnchanted")) {
+	      		if (!SourceCard.isEnchanted()) return false;
+	      	}
   	      	if(SpecialConditions.contains("isUntapped")) {
 	      		if (!SourceCard.isUntapped()) return false;
 	      	}

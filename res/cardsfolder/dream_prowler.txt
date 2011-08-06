@@ -1,0 +1,10 @@
+Name:Dream Prowler
+ManaCost:2 U U
+Types:Creature Illusion
+Text:no text
+PT:1/5
+K:WheneverKeyword:Attack - Alone:Self:Play:KeywordPumpEOT/Unblockable:Self:ASAP:No_Condition:No Special Condition:Dream Prowler is unblockable as long as it's attacking alone.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_prowler.jpg
+End
