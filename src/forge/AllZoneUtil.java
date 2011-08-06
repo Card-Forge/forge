@@ -10,6 +10,7 @@ package forge;
  */
 public class AllZoneUtil {
 	
+	//////////// Creatures
 	/**
 	 * use to get a list of creatures in play for a given player
 	 * 
@@ -34,6 +35,25 @@ public class AllZoneUtil {
 	private static CardListFilter creatures = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isCreature();
+		}
+	};
+	
+	///////////////// Lands
+	
+	/**
+	 * use to get a list of all lands a given player has in play
+	 * 
+	 * @param player the player whose lands we want to get
+	 * @return a CardList containing all lands the given player has in play
+	 */
+	public static CardList getPlayerLandsInPlay(final String player) {
+		CardList cards = getPlayerCardsInPlay(player);
+		return cards.filter(lands);
+	}
+	
+	private static CardListFilter lands = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isLand();
 		}
 	};
 	

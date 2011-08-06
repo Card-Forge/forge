@@ -18935,6 +18935,45 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Acidic Soil")) {
+        	/*
+        	 * Acidic Soil deals damage to each player equal to the number of
+        	 * lands he or she controls.
+        	 */
+        	SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 8555498267738686288L;
+
+				@Override
+        		public void resolve() {
+        			CardList humanLands = AllZoneUtil.getPlayerLandsInPlay(Constant.Player.Human);
+        			CardList compLands = AllZoneUtil.getPlayerLandsInPlay(Constant.Player.Computer);
+        			
+        			AllZone.GameAction.addDamage(Constant.Player.Computer, compLands.size(), card);
+        			AllZone.GameAction.addDamage(Constant.Player.Human, humanLands.size(), card);
+        		}// resolve()
+
+        		@Override
+        		public boolean canPlayAI() {
+        			PlayerLife compLife = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
+        			PlayerLife humanLife = AllZone.GameAction.getPlayerLife(Constant.Player.Human);
+        			CardList human = AllZoneUtil.getPlayerLandsInPlay(Constant.Player.Human);
+        			CardList comp = AllZoneUtil.getPlayerLandsInPlay(Constant.Player.Computer);
+        			
+        			if(humanLife.getLife() <= human.size() ) {
+        				return true;
+        			}
+        			
+        			if( compLife.getLife() >= comp.size() && human.size() > comp.size()+2 ) {
+        				return true;
+        			}
+        			return false;
+        		}
+        	};// SpellAbility
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }// *************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

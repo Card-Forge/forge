@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+acidic_soil.jpg					http://www.wizards.com/global/images/magic/general/acidic_soil.jpg
 dissipate.jpg		http://www.wizards.com/global/images/magic/general/dissipate.jpg
 all_is_dust.jpg					http://www.wizards.com/global/images/magic/general/all_is_dust.jpg
 tranquil_path.jpg				http://www.wizards.com/global/images/magic/general/tranquil_path.jpg

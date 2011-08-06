@@ -1,3 +1,8 @@
+Acidic Soil
+2 R
+Sorcery
+Acidic Soil deals damage to each player equal to the number of lands he or she controls.
+
 Dissipate
 1 U U
 Instant
