@@ -197,6 +197,7 @@ public class StaticEffects
 		cardToEffectsList.put("Iona, Shield of Emeria", new String[] {"Iona_Shield_of_Emeria"});
 		cardToEffectsList.put("Kor Duelist", new String[] {"Kor_Duelist"});
 		cardToEffectsList.put("Keldon Warlord", new String[] {"Keldon_Warlord"});
+		cardToEffectsList.put("Heedless One", new String[] {"Heedless_One"});
 	}
 	
 	public HashMap<String, String[]> getCardToEffectsList()

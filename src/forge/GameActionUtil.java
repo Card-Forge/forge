@@ -10582,7 +10582,33 @@ public class GameActionUtil {
 			forests = forests.getType("Forest");
 			return forests.size();
 		}
-	};  
+	};
+	
+	public static Command Heedless_One = new Command() {
+		private static final long serialVersionUID = -220650457326100804L;
+
+		public void execute() {
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Heedless One");
+
+			for(int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
+				c.setBaseAttack(countElves(c));
+				c.setBaseDefense(countElves(c));
+			}
+
+		}// execute()
+
+		private int countElves(Card c) {
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+			CardList elves = new CardList(play.getCards());
+			elves = elves.getType("Elf");
+			return elves.size();
+		}
+	}; 
 
 
 	public static Command Kird_Ape                    = new Command() {
@@ -15837,6 +15863,7 @@ public class GameActionUtil {
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		commands.put("Kor_Duelist", Kor_Duelist);
 		commands.put("Keldon_Warlord", Keldon_Warlord);
+		commands.put("Heedless_One", Heedless_One);
 		//System.out.println("size of commands: " + commands.size());
 
 	}
