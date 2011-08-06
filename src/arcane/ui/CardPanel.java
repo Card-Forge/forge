@@ -188,12 +188,12 @@ public class CardPanel extends JPanel implements CardContainer{
 		}
 		
 		//int yOff = (cardHeight/4) + 2;
-		if (showCastingCost && !isAnimationPanel && getCard().isAttacking() ) 
+		if (showCastingCost && !isAnimationPanel && cardWidth < 200 && getCard().isAttacking() ) 
 			ManaSymbols.drawSymbol("attack", g, cardXOffset + cardWidth / 4 - 16, cardYOffset + cardHeight - (cardHeight/8) - 16);
-		else if (showCastingCost && !isAnimationPanel && getCard().isBlocking() ) 
+		else if (showCastingCost && !isAnimationPanel && cardWidth < 200 && getCard().isBlocking() ) 
 			ManaSymbols.drawSymbol("defend", g, cardXOffset + cardWidth / 4 - 16, cardYOffset + cardHeight - (cardHeight/8) - 16);
 		
-		if (showCastingCost && !isAnimationPanel && getCard().isCreature() && getCard().hasSickness() && AllZoneUtil.isCardInPlay(getCard())) 
+		if (showCastingCost && !isAnimationPanel && cardWidth < 200 && getCard().isCreature() && getCard().hasSickness() && AllZoneUtil.isCardInPlay(getCard())) 
 			ManaSymbols.drawSymbol("summonsick", g, cardXOffset + cardWidth / 2 - 16, cardYOffset + cardHeight - (cardHeight/8) - 16 );
 	}
 
