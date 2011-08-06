@@ -2038,24 +2038,30 @@ public class CardFactory_Sorceries {
                 private static final long serialVersionUID = -4997834790204261916L;
                 
                 @Override
-                public boolean canPlay() {
-                    Player oppPlayer = card.getController().getOpponent();
+                public boolean canPlayAI() {
+                	Player oppPlayer = card.getController().getOpponent();
                     CardList self = AllZoneUtil.getPlayerLandsInPlay(card.getController());
                     CardList opp = AllZoneUtil.getPlayerLandsInPlay(oppPlayer);
                     
-                    return (self.size() < opp.size()) && super.canPlay();
-                }//canPlay()
+                    return (self.size() < opp.size());
+                }
                 
                 @Override
                 public void resolve() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                	Player oppPlayer = card.getController().getOpponent();
+                    CardList self = AllZoneUtil.getPlayerLandsInPlay(card.getController());
+                    CardList opp = AllZoneUtil.getPlayerLandsInPlay(oppPlayer);
                     
-                    CardList plains = new CardList(library.getCards());
-                    plains = plains.getType("Plains");
-                    
-                    for(int i = 0; i < 3 && i < plains.size(); i++)
-                        AllZone.GameAction.moveTo(hand, plains.get(i));
+                    if(self.size() < opp.size()) {
+	                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+	                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+	                    
+	                    CardList plains = new CardList(library.getCards());
+	                    plains = plains.getType("Plains");
+	                    
+	                    for(int i = 0; i < 3 && i < plains.size(); i++)
+	                        AllZone.GameAction.moveTo(hand, plains.get(i));
+                    }
                 }//resolve()
             };//SpellAbility
             
