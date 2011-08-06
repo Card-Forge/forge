@@ -9,19 +9,14 @@ public class AbilityFactory_Combat {
 			
 			final AbilityFactory af = AF;
 			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
 			public boolean canPlayAI()
 			{
-				return putCanPlayAI(af, this);
+				return fogCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				putResolve(af, this);
+				fogResolve(af, this);
 			}
 			
 		};
@@ -34,28 +29,48 @@ public class AbilityFactory_Combat {
 			
 			final AbilityFactory af = AF;
 			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
 			public boolean canPlayAI()
 			{
-				return putCanPlayAI(af, this);
+				return fogCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				putResolve(af, this);
+				fogResolve(af, this);
 			}
 			
 		};
 		return spFog;
 	}
 	
-	public static boolean putCanPlayAI(final AbilityFactory af, SpellAbility sa){
-		// AI cannot use this properly until he can use SAs during Humans turn
-		boolean chance = false;
+	public static SpellAbility createDrawbackFog(final AbilityFactory AF){
+		final SpellAbility dbFog = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -5141246507533353605L;
+			
+			final AbilityFactory af = AF;
+			
+			@Override
+			public void resolve() {
+				fogResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return fogCanPlayAI(af, this);
+			}
+			
+		};
+		return dbFog;
+	}
+	
+	public static boolean fogCanPlayAI(final AbilityFactory af, SpellAbility sa){
+		// AI should only activate this during Human's Declare Blockers phase
+		boolean chance = AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers_InstantAbility, sa.getActivatingPlayer().getOpponent());
+
+		// Only cast when Stack is empty, so Human uses spells/abilities first
+		chance &= AllZone.Stack.size() == 0;
+		
+		// Some additional checks on how much Damage/Poison AI would take, or how many creatures would be lost
 		
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)
@@ -64,7 +79,19 @@ public class AbilityFactory_Combat {
 		return chance;
 	}
 	
-	public static void putResolve(final AbilityFactory af, final SpellAbility sa){
+	public static boolean fogPlayDrawbackAI(final AbilityFactory af, SpellAbility sa){
+		// AI should only activate this during Human's turn
+		boolean chance = AllZone.Phase.isPlayerTurn(sa.getActivatingPlayer().getOpponent()) || 
+			AllZone.Phase.isAfter(Constant.Phase.Combat_Damage);
+		
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
+		
+		return chance;
+	}
+	
+	public static void fogResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		Card card = sa.getSourceCard();
 		String DrawBack = params.get("SubAbility");

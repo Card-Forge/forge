@@ -50,7 +50,7 @@ public class AbilityFactory_Pump {
             private static final long serialVersionUID = 42244224L;
                         
             public boolean canPlayAI() {
-            	return doTgtAI(this);
+            	return pumpPlayAI(this);
             }
             
 			@Override
@@ -73,69 +73,7 @@ public class AbilityFactory_Pump {
                         
             @Override
             public boolean canPlayAI() {
-            	if (!AllZone.GameAction.isCardInPlay(hostCard)) return false;
-            	
-            	// temporarily disabled until AI is improved
-            	if (AF.getAbCost().getSacCost()) return false;	
-            	if (AF.getAbCost().getLifeCost())	 return false;
-            	if (AF.getAbCost().getSubCounter()){
-            		// instead of never removing counters, we will have a random possibility of failure.
-            		// all the other tests still need to pass if a counter will be removed
-            		Counters count = AF.getAbCost().getCounterType();
-            		double chance = .66;
-            		if (count.equals(Counters.P1P1)){	// 10% chance to remove +1/+1 to pump
-            			chance = .1;
-            		}
-            		else if (count.equals(Counters.CHARGE)){ // 50% chance to remove +1/+1 to pump
-            			chance = .5;
-            		}
-                    Random r = new Random();
-                    if(r.nextFloat() > chance)
-                    	return false;
-            	}
-            	//if (bPumpEquipped && card.getEquippingCard() == null) return false;
-            	
-            	if (!ComputerUtil.canPayCost(this))
-            		return false;
-            	
-            	//don't risk sacrificing a creature just to pump it
-            	if(this.getRestrictions().getActivationNumberSacrifice() != -1 &&
-        				this.getRestrictions().getNumberTurnActivations() >= (this.getRestrictions().getActivationNumberSacrifice() - 1)) {
-            		return false;
-        		}
-            	
-                int defense = getNumDefense(this);
-                
-                if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) return false;
-                
-                if(AF.getAbTgt() == null || !AF.getAbTgt().doesTarget()) {
-                	Card creature;
-                    //if (bPumpEquipped)
-                    //	creature = card.getEquippingCard();
-                    //else 
-                    creature = hostCard;
-                    
-                    if((creature.getNetDefense() + defense > 0) && (!creature.hasAnyKeyword(Keywords))) {
-                    	if(creature.hasSickness() && Keywords.contains("Haste")) 
-                    		return true;
-                    	else if (creature.hasSickness() ^ Keywords.contains("Haste"))
-                            return false;
-                    	else {
-                            Random r = new Random();
-                            if(r.nextFloat() <= Math.pow(.6667, hostCard.getAbilityUsed())) 
-                            	return CardFactoryUtil.AI_doesCreatureAttack(creature);
-                        }
-                    }
-                }
-                else
-                	return doTgtAI(this);
-                
-                return false;
-            }
-            
-            @Override
-            public boolean canPlay() {
-                return super.canPlay();
+            	return pumpPlayAI(this);
             }
                         
 			@Override
@@ -154,6 +92,33 @@ public class AbilityFactory_Pump {
         };//SpellAbility
 
         return abPump;
+	}
+	
+	public SpellAbility getDrawback()
+	{
+        SpellAbility dbPump = new Ability_Sub(hostCard, AF.getAbTgt()) {
+            private static final long serialVersionUID = 42244224L;
+                        
+            public boolean canPlayAI() {
+            	return pumpPlayAI(this);
+            }
+            
+			@Override
+			public String getStackDescription(){
+				return pumpStackDescription(AF, this);
+			}
+            
+            public void resolve() {
+            	doResolve(this);
+            }//resolve
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return doDrawbackAI(this);
+			}
+        };//SpellAbility
+        
+        return dbPump;
 	}
 	
     private int getNumAttack(SpellAbility sa) {
@@ -232,6 +197,69 @@ public class AbilityFactory_Pump {
     	
     	return list;
     }
+    
+    private boolean pumpPlayAI(SpellAbility sa){
+    	// if there is no target and host card isn't in play, don't activate
+    	if (AF.getAbTgt() == null && !AllZone.GameAction.isCardInPlay(hostCard)) 
+    		return false;
+    	
+    	// temporarily disabled until AI is improved
+    	if (AF.getAbCost().getSacCost()) return false;	
+    	if (AF.getAbCost().getLifeCost())	 return false;
+    	if (AF.getAbCost().getSubCounter()){
+    		// instead of never removing counters, we will have a random possibility of failure.
+    		// all the other tests still need to pass if a counter will be removed
+    		Counters count = AF.getAbCost().getCounterType();
+    		double chance = .66;
+    		if (count.equals(Counters.P1P1)){	// 10% chance to remove +1/+1 to pump
+    			chance = .1;
+    		}
+    		else if (count.equals(Counters.CHARGE)){ // 50% chance to remove +1/+1 to pump
+    			chance = .5;
+    		}
+            Random r = new Random();
+            if(r.nextFloat() > chance)
+            	return false;
+    	}
+    	//if (bPumpEquipped && card.getEquippingCard() == null) return false;
+    	
+    	if (!ComputerUtil.canPayCost(sa))
+    		return false;
+    	
+    	//don't risk sacrificing a creature just to pump it
+    	if(sa.getRestrictions().getActivationNumberSacrifice() != -1 &&
+				sa.getRestrictions().getNumberTurnActivations() >= (sa.getRestrictions().getActivationNumberSacrifice() - 1)) {
+    		return false;
+		}
+    	
+        int defense = getNumDefense(sa);
+
+        if(AllZone.Phase.is(Constant.Phase.Main2)) return false;
+        
+        if(AF.getAbTgt() == null || !AF.getAbTgt().doesTarget()) {
+        	Card creature;
+            //if (bPumpEquipped)
+            //	creature = card.getEquippingCard();
+            //else 
+            creature = hostCard;
+            
+            if((creature.getNetDefense() + defense > 0) && (!creature.hasAnyKeyword(Keywords))) {
+            	if(creature.hasSickness() && Keywords.contains("Haste")) 
+            		return true;
+            	else if (creature.hasSickness() ^ Keywords.contains("Haste"))
+                    return false;
+            	else {
+                    Random r = new Random();
+                    if(r.nextFloat() <= Math.pow(.6667, hostCard.getAbilityUsed())) 
+                    	return CardFactoryUtil.AI_doesCreatureAttack(creature);
+                }
+            }
+        }
+        else
+        	return doTgtAI(sa);
+        
+        return false;
+    }
 
     private boolean doTgtAI(SpellAbility sa)
     {
@@ -297,9 +325,25 @@ public class AbilityFactory_Pump {
 		}
         
         return true;
-
     }
     
+    private boolean doDrawbackAI(SpellAbility sa)
+    {
+    	 if(AF.getAbTgt() == null || !AF.getAbTgt().doesTarget()) {
+    		 int defense = getNumDefense(sa);
+    		 if (hostCard.isCreature()){
+    			 if (!hostCard.hasKeyword("Indestructible") && hostCard.getNetDefense() + defense <= hostCard.getDamage())
+    				 return false;
+    			 if (hostCard.getNetDefense() + defense <= 0)
+    				 return false;
+    		 }
+    	 }
+    	 else
+    		 return doTgtAI(sa);
+    	 
+    	return true; 
+    }
+    	
     private String pumpStackDescription(AbilityFactory af, SpellAbility sa){
 		// when damageStackDescription is called, just build exactly what is happening
 		 StringBuilder sb = new StringBuilder();
@@ -313,8 +357,12 @@ public class AbilityFactory_Pump {
 			tgtCards = new ArrayList<Card>();
 			tgtCards.add(hostCard);
 		}
-	        
-		 sb.append(name).append(" - ");
+	     
+		if (sa instanceof Ability_Sub)
+			sb.append(" ");
+		else
+			sb.append(name).append(" - ");
+		
 		 for(Card c : tgtCards){
 			 sb.append(c.getName());
 			 sb.append(" ");
@@ -343,7 +391,8 @@ public class AbilityFactory_Pump {
 			}
 	    }
 		 
-		 sb.append("until end of turn.");
+		if (!params.containsKey("Permanent"))
+			sb.append("until end of turn.");
 		 
 		 
 		 Ability_Sub abSub = sa.getSubAbility();
@@ -379,28 +428,7 @@ public class AbilityFactory_Pump {
 			
 	        final int a = getNumAttack(sa);
 	        final int d = getNumDefense(sa);
-	        
-	        final Command untilEOT = new Command() {
-	            private static final long serialVersionUID = -42244224L;
-	            
-	            public void execute() {
-	                if(AllZone.GameAction.isCardInPlay(tgtC)) {
-	                	tgtC.addTempAttackBoost(-1 * a);
-	                	tgtC.addTempDefenseBoost(-1 * d);
-	                    
-	                    if(Keywords.size() > 0)
-	                    {
-	                    	for (int i=0; i<Keywords.size(); i++)
-	                    	{
-	                    		if (!Keywords.get(i).equals("none"))
-	                    			tgtC.removeExtrinsicKeyword(Keywords.get(i));
-	                    	}
-	                    }
-	                    	
-	                }
-	            }
-	        };
-	        
+    
 	        tgtC.addTempAttackBoost(a);
 	        tgtC.addTempDefenseBoost(d);
 	        if(Keywords.size() > 0)
@@ -412,8 +440,31 @@ public class AbilityFactory_Pump {
 	        	}
 	        }
 	        
-	        AllZone.EndOfTurn.addUntil(untilEOT);
-        
+	        if (!params.containsKey("Permanent")){
+	        	// If not Permanent, remove Pumped at EOT
+		        final Command untilEOT = new Command() {
+		            private static final long serialVersionUID = -42244224L;
+		            
+		            public void execute() {
+		                if(AllZone.GameAction.isCardInPlay(tgtC)) {
+		                	tgtC.addTempAttackBoost(-1 * a);
+		                	tgtC.addTempDefenseBoost(-1 * d);
+		                    
+		                    if(Keywords.size() > 0)
+		                    {
+		                    	for (int i=0; i<Keywords.size(); i++)
+		                    	{
+		                    		if (!Keywords.get(i).equals("none"))
+		                    			tgtC.removeExtrinsicKeyword(Keywords.get(i));
+		                    	}
+		                    }
+		                    	
+		                }
+		            }
+		        };
+		        
+		        AllZone.EndOfTurn.addUntil(untilEOT);
+	        }
 		}
 		
 		

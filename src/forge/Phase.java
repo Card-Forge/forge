@@ -478,6 +478,10 @@ public class Phase extends MyObservable
 	public synchronized boolean is(String phase) {
         return (getPhase().equals(phase));
     }
+	
+	public boolean isAfter(String phase) {
+		return phaseIndex > findIndex(phase);
+	}
     
     private int findIndex(String phase) {
         for(int i = 0; i < phaseOrder.length; i++) {

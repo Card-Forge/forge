@@ -212,6 +212,7 @@ public class AbilityFactory {
 				SA = AbilityFactory_Counters.createDrawbackProliferate(this);
 		}
 
+		// do we want to merge Fetch, Retrieve and Bounce into ChangeZone?
 		if (API.equals("Fetch")){
 			if (isAb)
 				SA = AbilityFactory_Fetch.createAbilityFetch(this);
@@ -226,6 +227,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_Fetch.createSpellRetrieve(this);
 		}
 		
+		if (API.equals("Bounce")){
+			if (isAb)
+				SA = AbilityFactory_Bounce.createAbilityBounce(this);
+			else if (isSp)
+				SA = AbilityFactory_Bounce.createSpellBounce(this);
+			hostCard.setSVar("PlayMain1", "TRUE");
+		}
+		// Above to be merged? If so, merge then do SubAbility for each
+		
 		if (API.equals("Pump"))
 		{
 			AbilityFactory_Pump afPump = new AbilityFactory_Pump(this);
@@ -234,8 +244,11 @@ public class AbilityFactory {
 				SA = afPump.getAbility();
 			else if (isSp)
 				SA = afPump.getSpell();
+			else if (isDb)
+				SA = afPump.getDrawback();
 			
-			hostCard.setSVar("PlayMain1", "TRUE");
+			if (isAb || isSp)
+				hostCard.setSVar("PlayMain1", "TRUE");
 		}
 		
 		if (API.equals("GainLife")){
@@ -261,14 +274,8 @@ public class AbilityFactory {
 				SA = AbilityFactory_Combat.createAbilityFog(this);
 			else if (isSp)
 				SA = AbilityFactory_Combat.createSpellFog(this);
-		}
-		
-		if (API.equals("Bounce")){
-			if (isAb)
-				SA = AbilityFactory_Bounce.createAbilityBounce(this);
-			else if (isSp)
-				SA = AbilityFactory_Bounce.createSpellBounce(this);
-			hostCard.setSVar("PlayMain1", "TRUE");
+			else if (isDb)
+				SA = AbilityFactory_Combat.createDrawbackFog(this);
 		}
 		
 		if (API.equals("Untap")){
@@ -276,6 +283,8 @@ public class AbilityFactory {
 				SA = AbilityFactory_PermanentState.createAbilityUntap(this);
 			else if (isSp)
 				SA = AbilityFactory_PermanentState.createSpellUntap(this);
+			else if (isDb)
+				SA = AbilityFactory_PermanentState.createDrawbackUntap(this);
 		}
 		
 		if (API.equals("Tap")){
@@ -283,6 +292,8 @@ public class AbilityFactory {
 				SA = AbilityFactory_PermanentState.createAbilityTap(this);
 			else if (isSp)
 				SA = AbilityFactory_PermanentState.createSpellTap(this);
+			else if (isDb)
+				SA = AbilityFactory_PermanentState.createDrawbackTap(this);
 		}
 		
 		if (API.equals("Regenerate")){
