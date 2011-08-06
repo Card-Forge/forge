@@ -12873,7 +12873,8 @@ public class CardFactory implements NewConstants {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Regrowth")) {
+        else if(cardName.equals("Regrowth") || cardName.equals("Reclaim")) {
+        	// added cousin Reclaim since 90% of the code is shared
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -1771016287736735113L;
                 
@@ -12884,7 +12885,10 @@ public class CardFactory implements NewConstants {
                     
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), graveyard)) {
                         graveyard.remove(getTargetCard());
-                        hand.add(getTargetCard());
+                        if (cardName.equals("Regrowth"))
+                        	hand.add(getTargetCard());
+                        else if (cardName.equals("Reclaim"))
+                        	AllZone.GameAction.moveToTopOfLibrary(getTargetCard());
                     }
                 }//resolve()
                 
@@ -12903,7 +12907,13 @@ public class CardFactory implements NewConstants {
                     Object o = AllZone.Display.getChoiceOptional("Select target card", graveyard.getCards());
                     if(o == null) stop();
                     else {
-                        spell.setStackDescription("Return " + o + " to its owner's hand");
+                    	String location = "";
+                    	if (cardName.equals("Regrowth"))
+                    		location = "owner's hand";
+                    	else if (cardName.equals("Reclaim"))
+                    		location = "top of owner's library";
+                    	
+                        spell.setStackDescription("Return " + o + " to " + location);
                         spell.setTargetCard((Card) o);
                         if(this.isFree()) 
                         {
@@ -12934,8 +12944,7 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(runtime);
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
+        }//*************** END ************ END **************************       
 
         //*************** START *********** START **************************
         else if(cardName.equals("Commune with Nature")) {

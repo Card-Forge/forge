@@ -1,3 +1,8 @@
+Reclaim
+G
+Instant
+Put target card from your graveyard on top of your library.
+
 Skirk Prospector
 R
 Creature Goblin
