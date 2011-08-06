@@ -3,6 +3,8 @@ package forge;
 
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class CombatUtil {
@@ -777,6 +779,40 @@ public class CombatUtil {
         if( /*AllZone.Phase.getPhase().equals("Declare Blockers") ||*/
         AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
             
+        	//Annihilator:
+        	ArrayList<String> kws = c.getKeyword();
+        	Pattern p = Pattern.compile("Annihilator [0-9]+");
+        	Matcher m;
+        	for (String key : kws)
+        	{
+        		m = p.matcher(key);
+        		if (m.find())
+        		{
+        			String k[] = key.split(" ");
+                    final int a = Integer.valueOf(k[1]);
+                    final Card crd = c;
+                    
+                    final Ability ability = new Ability(c, "0")
+                    {
+                    	public void resolve()
+                    	{
+                    		if (crd.getController().equals(Constant.Player.Human))
+                    		{
+                    			//comp sacks
+                    		}
+                    		else
+                    		{
+                    			AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanents(a));
+                    		}
+                    			
+                    	}
+                    };
+                    ability.setStackDescription("");
+                    AllZone.Stack.add(ability);
+        		}
+        	}
+        	//Annihilator
+        	
             //Beastmaster Ascension
             if(!c.getCreatureAttackedThisCombat()) {
                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
@@ -847,6 +883,9 @@ public class CombatUtil {
                 for(int i = 0; i < count; i++)
                     AllZone.Stack.add(ability);
             }//Raging Ravine
+            
+            //
+           
             
             if(c.getName().equals("Zhang He, Wei General") && !c.getCreatureAttackedThisCombat()) {
                 final PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());

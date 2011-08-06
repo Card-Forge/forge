@@ -476,6 +476,40 @@ public class CardFactoryUtil {
         return target;
     }//input_sacrifice()
     
+    public static Input input_sacrificePermanents(final int nCards) {
+    	Input target = new Input() {
+			private static final long serialVersionUID = -8149416676562317629L;
+			int                       n                = 0;
+            
+            @Override
+            public void showMessage() {
+            	
+                AllZone.Display.showMessage("Select a permanent to sacrifice (" +(nCards-n) +" left)");
+                ButtonUtil.disableAll();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(zone.equals(AllZone.Human_Play) && !card.getName().equals("Mana Pool")) {
+                    AllZone.GameAction.sacrifice(card);
+                    n++;
+                    
+                    //in case no more {type}s in play
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.filter(new CardListFilter(){
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isPermanent() && !c.getName().equals("Mana Pool");
+                    	}
+                    });
+                    if(n == nCards || list.size() == 0) stop();
+                    else
+                    	showMessage();
+                }
+            }
+        };
+        return target;
+    }//input_sacrificePermanents()
     
     public static Input input_sacrificePermanents(final int nCards, final String type) {
     	Input target = new Input() {
