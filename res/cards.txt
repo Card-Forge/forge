@@ -1,3 +1,9 @@
+Sliver Legion
+W U B R G
+Legendary Creature Sliver
+All Sliver creatures get +1/+1 for each other Sliver in play.
+7/7
+
 Winter Orb
 2
 Artifact
@@ -16943,12 +16949,6 @@ G
 Creature Elf Spellshaper
 no text
 1/1
-
-Sliver Legion
-W U B R G
-Legendary Creature Sliver
-All Sliver creatures get +1/+1 for each Sliver in play.
-6/6
 
 Skirk Shaman
 1 R R
