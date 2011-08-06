@@ -1,0 +1,8 @@
+Name:Fiery Conclusion
+ManaCost:1 R
+Types:Instant
+Text:no text
+A:SP$DealDamage|Cost$1 R Sac<1/Creature>|Tgt$TgtC|NumDmg$5|SpellDescription$CARDNAME deals 5 damage to target creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_conclusion.jpg
+End
