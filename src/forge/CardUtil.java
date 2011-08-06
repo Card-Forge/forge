@@ -125,7 +125,7 @@ public class CardUtil {
             }
         }
         for(String kw : c.getKeyword())
-        	if(kw.startsWith(c.getName()+" is "))
+        	if(kw.startsWith(c.getName()+" is ") || kw.startsWith("CARDNAME is "))
         		for(String color : Constant.Color.Colors)
         			if(kw.endsWith(color+"."))
         				colors.add(color);
@@ -162,7 +162,7 @@ public class CardUtil {
             }
         }
         for(String kw : c.getKeyword())
-        	if(kw.startsWith(c.getName()+" is "))
+        	if(kw.startsWith(c.getName()+" is ") || kw.startsWith("CARDNAME is "))
         		for(String color : Constant.Color.Colors)
         			if(kw.endsWith(color+"."))
         				colors.add(color); 

@@ -1,3 +1,42 @@
+Crimson Kobolds
+0
+Creature Kobold
+no text
+0/1
+CARDNAME is red.
+
+Crookshank Kobolds
+0
+Creature Kobold
+no text
+0/1
+CARDNAME is red.
+
+Ghostfire
+2 R
+Instant
+Ghostfire is colorless.
+spDamageTgtCP:3
+CARDNAME is colorless.
+
+Kobolds of Kher Keep
+0
+Creature Kobold
+no text
+0/1
+CARDNAME is red.
+
+Transguild Courier
+4
+Artifact Creature Golem
+no text
+3/3
+CARDNAME is white.
+CARDNAME is blue.
+CARDNAME is black.
+CARDNAME is red.
+CARDNAME is green.
+
 Grave-Shell Scarab
 2 B G G
 Creature Insect
@@ -8041,17 +8080,6 @@ B
 Sorcery
 Each player sacrifices a creature.
 
-Transguild Courier
-4
-Artifact Creature Golem
-no text
-3/3
-Transguild courier is white.
-Transguild courier is blue.
-Transguild courier is black.
-Transguild courier is red.
-Transguild courier is green.
-
 Oran-Rief, the Vastwood
 no cost
 Land
@@ -13816,13 +13844,6 @@ Fire Ambush
 Sorcery
 no text
 spDamageTgtCP:3
-
-Ghostfire
-2 R
-Instant
-Ghostfire is colorless.
-spDamageTgtCP:3
-Ghostfire is colorless.
 
 Lightning Blast
 3 R
@@ -21198,20 +21219,6 @@ no text
 1/1
 tap: add G
 
-Crimson Kobolds
-0
-Creature Kobold
-no text
-0/1
-Crimson Kobolds is red.
-
-Crookshank Kobolds
-0
-Creature Kobold
-no text
-0/1
-Crookshank Kobolds is red.
-
 Cylian Elf
 1 G
 Creature Elf Scout
@@ -21301,13 +21308,6 @@ Creature Elf Archer
 no text
 2/2
 Reach
-
-Kobolds of Kher Keep
-0
-Creature Kobold
-no text
-0/1
-Kobolds of Kher Keep is red.
 
 Leaden Myr
 2
