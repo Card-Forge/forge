@@ -1,0 +1,10 @@
+Name:Spike Breeder
+ManaCost:3 G
+Types:Creature Spike
+Text:no text
+PT:0/0
+K:Spike 3
+A:AB$Token | Cost$ 2 SubCounter<1/P1P1> | TokenAmount$ 1 | TokenName$ Spike | TokenTypes$ Creature,Spike | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Spike creature token onto the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_breeder.jpg
+End
