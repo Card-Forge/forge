@@ -290,6 +290,10 @@ public class Phase extends MyObservable
 	    	AllZone.ComputerPlayer.resetNumDrawnThisTurn();
 	    }
         
+        //This line fixes Combat Damage triggers not going off when they should
+        AllZone.Stack.unfreezeStack();
+        
+        
 		resetPriority();
 	}
 	
