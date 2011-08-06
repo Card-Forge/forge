@@ -1,46 +1,8 @@
-Nameless Inversion
-1 B
-Tribal Instant Shapeshifter
-Changeling.\r\nTarget creature gets +3/-3 until end of turn.
-Changeling
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_inversion.jpg
-
-Necropotence
-B B B
-Enchantment
-Skip your draw step.\r\nIf you would discard a card from your hand, remove that card from the game instead.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/necropotence.jpg
-
-Nesting Wurm
-4 G G
-Creature Wurm
-no text
-4/3
-Trample
-When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nesting_wurm.jpg
-
-Noxious Hatchling
-3 BG
-Creature Elemental
-Noxious Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.\r\nWhenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
-6/6
-Wither
-SVar:BuffedBy:Spell.Black,Spell.Green
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Noxious_Hatchling.jpg
-
-Nyxathid
-1 B B
-Creature Elemental
-As Nyxathid comes into play, choose an opponent.\r\nNyxathid gets -1/-1 for each card in the chosen player's hand.
-7/7
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nyxathid.jpg
+Cateran Summons
+B
+Sorcery
+Search your library for a Mercenary card, reveal that card, and put it into your hand. Then shuffle your library.
+spTutor:Mercenary:Hand
 
 Evincar's Justice
 2 B B
@@ -20671,6 +20633,14 @@ Protection from artifacts
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nacatl_savage.jpg
 
+Nameless Inversion
+1 B
+Tribal Instant Shapeshifter
+Changeling. Target creature gets +3/-3 until end of turn.
+Changeling
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_inversion.jpg
+
 Nantuko Disciple
 3 G
 Creature Insect Druid
@@ -20832,6 +20802,14 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogenesis.jpg
 
+Necropotence
+B B B
+Enchantment
+Skip your draw step. If you would discard a card from your hand, remove that card from the game instead.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/necropotence.jpg
+
 Need for Speed
 R
 Enchantment
@@ -20932,6 +20910,15 @@ When Nest Invader enters the battlefield, put a 0/1 colorless Eldrazi Spawn crea
 2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nest_invader.jpg
+
+Nesting Wurm
+4 G G
+Creature Wurm
+no text
+4/3
+When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nesting_wurm.jpg
 
 Nether Horror
 3 B
@@ -21370,6 +21357,16 @@ tap: add 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/novijen_heart_of_progress.jpg
 
+Noxious Hatchling
+3 BG
+Creature Elemental
+Noxious Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling. Whenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
+6/6
+Wither
+SVar:BuffedBy:Spell.Black,Spell.Green
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Noxious_Hatchling.jpg
+
 Nullmage Shepherd
 3 G
 Creature Elf Shaman
@@ -21385,6 +21382,14 @@ At the beginning of your upkeep, you may put a 1/1 green Squirrel creature token
 1/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nut_collector.jpg
+
+Nyxathid
+1 B B
+Creature Elemental
+As Nyxathid comes into play, choose an opponent. Nyxathid gets -1/-1 for each card in the chosen player's hand.
+7/7
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nyxathid.jpg
 
 Oakenform
 2 G

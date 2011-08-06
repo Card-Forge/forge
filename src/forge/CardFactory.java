@@ -3171,6 +3171,81 @@ public class CardFactory implements NewConstants {
 
         }//spBounceAll
 
+        // Generic Tutor cards
+        if(hasKeyword(card, "spTutor") != -1) {
+            int n = hasKeyword(card, "spTutor");
+            
+            String parse = card.getKeyword().get(n).toString();
+            card.removeIntrinsicKeyword(parse);
+            
+            String k[] = parse.split(":");
+            String Targets = k[1]; // Artifact, Creature, Enchantment, Land, Permanent, White, Blue, Black, Red, Green, Colorless, MultiColor
+            // non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
+            //non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
+            final String Tgts[] = Targets.split(",");
+                        
+            final String Destination = k[2];
+            card.clearSpellAbility();
+            
+            final SpellAbility spTtr = new Spell(card) {     
+                private static final long serialVersionUID = 209109273165L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Computer);
+                    list = list.getValidCards(Tgts);
+                	  if (list.size() > 0) return true;
+                    return false;
+                }
+                
+               @Override
+                public void resolve() {
+                    String player = card.getController();
+                    if(player.equals(Constant.Player.Human)) humanResolve();
+                    else computerResolve();   
+                }
+                
+                public void computerResolve() {
+                    CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Computer);
+                    list = list.getValidCards(Tgts);
+                                        
+                    if(list.size() != 0) {
+                        //comp will just grab the first one it finds
+                        Card c = list.get(0);
+                        AllZone.GameAction.shuffle(card.getController());
+                        //move to hand
+                        AllZone.Computer_Library.remove(c);
+                        if (Destination == "Hand") AllZone.Computer_Hand.add(c);
+                        else if (Destination == "TopOfLibrary") AllZone.Computer_Library.add(c, 0);
+                        
+                        CardList l = new CardList();
+                        l.add(c);
+                        AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
+                    }
+                }//computerResolve()
+                
+                public void humanResolve() {
+                    CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Human);
+                    list = list.getValidCards(Tgts);
+                    
+                    if(list.size() != 0) {
+                        Object o = AllZone.Display.getChoiceOptional("Select a card", list.toArray());
+                        
+                        AllZone.GameAction.shuffle(card.getController());
+                        if(o != null) {
+                            //put card in hand
+                        	AllZone.Human_Library.remove(o);
+                        	if (Destination.equals("Hand")) AllZone.Human_Hand.add((Card) o);
+                            else if (Destination.equals("TopOfLibrary")) AllZone.Human_Library.add((Card) o, 0);
+                        }
+                    }//if
+                }//resolve()
+            }; // spell ability SpTutorTgt
+            
+            spTtr.setDescription(card.getSpellText());
+            card.setText("");
+            card.addSpellAbility(spTtr);
+        }//spTutor
 
         while(hasKeyword(card, "abDrawCards") != -1) {
             int n = hasKeyword(card, "abDrawCards");
