@@ -2160,7 +2160,7 @@ class CardFactory_Lands {
             
         }//*************** END ************ END **************************
         */
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Vitu-Ghazi, the City-Tree")) {
             final Ability_Tap ability = new Ability_Tap(card, "2 G W") {
@@ -2180,6 +2180,7 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
             
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Gods' Eye, Gate to the Reikai")) {
