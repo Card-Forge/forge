@@ -1,0 +1,10 @@
+Name:Pestilence Rats
+ManaCost:2 B
+Types:Creature Rat
+Text:no text
+PT:*/3
+K:stSetPT:Count$Valid Rat:3:Pestilence Rats's power is equal to the number of other Rats on the battlefield.
+SVar:BuffedBy:Rat
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilence_rats.jpg
+End
