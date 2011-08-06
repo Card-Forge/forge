@@ -6117,6 +6117,7 @@ res/cardsfolder/wipe_clean.txt -text svneol=native#text/plain
 res/cardsfolder/wirecat.txt -text svneol=native#text/plain
 res/cardsfolder/wirewood_elf.txt -text svneol=native#text/plain
 res/cardsfolder/wirewood_guardian.txt -text svneol=native#text/plain
+res/cardsfolder/wirewood_herald.txt -text svneol=native#text/plain
 res/cardsfolder/wirewood_hivemaster.txt -text svneol=native#text/plain
 res/cardsfolder/wirewood_lodge.txt -text svneol=native#text/plain
 res/cardsfolder/wirewood_pride.txt -text svneol=native#text/plain

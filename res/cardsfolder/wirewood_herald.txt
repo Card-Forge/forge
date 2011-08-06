@@ -1,0 +1,11 @@
+Name:Wirewood Herald
+ManaCost:1 G
+Types:Creature Elf
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may search your library for an Elf card, reveal that card, put it into your hand, then shuffle your library.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Card.Elf | ChangeNum$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_herald.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/302.jpg
+End
