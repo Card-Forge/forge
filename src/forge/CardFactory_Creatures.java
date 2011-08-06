@@ -19628,6 +19628,31 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Sunblast Angel") ) {
+                        
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    CardList tappedCreatures = AllZoneUtil.getCreaturesInPlay();
+                    tappedCreatures = tappedCreatures.filter(AllZoneUtil.tapped);
+                    for(Card c:tappedCreatures) {
+                    	AllZone.GameAction.destroy(c);
+                    }
+                }//resolve()
+            };//SpellAbility
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = -8702934390670388771L;
+
+				public void execute() {
+					ability.setStackDescription(card+" - destroy all tapped creatures.");
+                    AllZone.Stack.add(ability);
+                }//execute()
+            };
+                       
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

@@ -1,0 +1,9 @@
+Name:Sunblast Angel
+ManaCost:4 W W
+Types:Creature Angel
+Text:When Sunblast Angel enters the battlefield, destroy all tapped creatures.
+PT:4/5
+K:Flying
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sunblast_angel.jpg
+End
