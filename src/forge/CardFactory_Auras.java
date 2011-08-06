@@ -400,8 +400,16 @@ class CardFactory_Auras {
                     
                     if (list.isEmpty()) return false;
                     else {
-                    	list.shuffle();
-                        setTargetCard(list.get(0));
+                    	// prefer untapped lands to tapped lands
+                    	CardList untapped = list.getTapState("Untapped");
+                    	if (untapped.isEmpty()){
+	                    	list.shuffle();
+	                        setTargetCard(list.get(0));
+                    	}
+                    	else{
+                    		untapped.shuffle();
+	                        setTargetCard(untapped.get(0));
+                    	}
                         return super.canPlayAI();
                     }
                 }//canPlayAI()
@@ -417,71 +425,12 @@ class CardFactory_Auras {
                     
                 }//resolve()
             };//SpellAbility
-            spell.setType("Extrinsic");
+            //spell.setType("Extrinsic");
             
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
-            Ability_Cost abCost = new Ability_Cost("T", spell.getTargetCard() != null ? spell.getTargetCard().getName(): "", true);
-            final Ability_Activated produceSquirrels = new Ability_Activated(spell.getTargetCard(), abCost, null) {
-            	private static final long serialVersionUID = -4800170026789001271L;
-                
-                @Override
-                public void resolve() {
-                    //makeToken();
-                	CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", spell.getTargetCard().getController(), "G", new String[] {
-                            "Creature", "Squirrel"}, 1, 1, new String[] {""});
-                }
-            
-            };//SpellAbility
-            
-            produceSquirrels.setType("Extrinsic"); // Required for Spreading Seas
-            produceSquirrels.setDescription(abCost+"Put a 1/1 green Squirrel creature token onto the battlefield.");
-            produceSquirrels.setStackDescription("Put a 1/1 green Squirrel creature token onto the battlefield.");
-            
-            Command onEnchant = new Command() {
-                
-                private static final long serialVersionUID = 3528675502863241126L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        //crd.clearSpellAbility();
-                        crd.addSpellAbility(produceSquirrels);
-                    }
-                }//execute()
-            };//Command
-            
-            Command onUnEnchant = new Command() {
-                private static final long serialVersionUID = -2021446345291180334L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        
-                        Card crd = card.getEnchanting().get(0);
-                        crd.removeSpellAbility(produceSquirrels);
-                    }
-                }//execute()
-            };//Command
-            
-            Command onLeavesPlay = new Command() {
-                
-                private static final long serialVersionUID = -4543302260602460839L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            
-            card.addEnchantCommand(onEnchant);
-            card.addUnEnchantCommand(onUnEnchant);
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
             Input runtime = new Input() {
-                
                 private static final long serialVersionUID = 967525396666242309L;
                 
                 @Override
