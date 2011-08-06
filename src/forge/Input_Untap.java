@@ -26,6 +26,8 @@ public class Input_Untap extends Input {
         if (AllZone.Phase.getTurn() != 1)
             GameActionUtil.executeUpkeepEffects();
         
+        AllZone.GameAction.resetActivationsPerTurn();
+        
         //otherwise land seems to stay tapped when it is really untapped
         AllZone.Human_Play.updateObservers();
         

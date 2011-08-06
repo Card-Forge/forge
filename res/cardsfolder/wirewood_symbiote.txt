@@ -1,0 +1,10 @@
+Name:Wirewood Symbiote
+ManaCost:G
+Types:Creature Insect
+Text:no text
+PT:1/1
+A:AB$Untap|Cost$Return<1/Elf>|Tgt$TgtC|ActivationLimit$1|SpellDescription$Untap target creature. Activate this ability only once each turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_symbiote.jpg
+End

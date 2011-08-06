@@ -48,19 +48,32 @@ public class SpellAbility_Restriction {
 		return bPlayerTurn;
 	}
 	
+	int activationLimit = -1;
+	int numberTurnActivations = 0;
+	
+	public void setActivationLimit(int limit){
+		activationLimit = limit;
+	}
+	
+	public void abilityActivated(){
+		numberTurnActivations++;
+	}
+	
+	public void resetTurnActivations(){
+		numberTurnActivations = 0;
+	}
+	
 	/*
 	 * Restrictions of the future
 
 	ArrayList<String> activatePhases = new ArrayList<String>();
-	int amountPerTurn = -1;
-	int activatedPerTurn = 0;
 
 	boolean bHasThreshold = false;
 	boolean bHasMetalcraft = false;
 	int levelMin = 0;
 	int levelMax = 0;
-	boolean bThreshold = false;
-	boolean bMetalcraft = false;
+	youControl
+	oppControl
 	*/
 	
 	SpellAbility_Restriction(){	}
@@ -84,6 +97,9 @@ public class SpellAbility_Restriction {
 		if (!bAnyPlayer && !activater.equals(c.getController()))
 			return false;
 		
+		if (activationLimit != -1 && numberTurnActivations >= activationLimit)
+			return false;
+			
 		return true;
 	}
 }

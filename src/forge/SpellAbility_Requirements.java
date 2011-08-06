@@ -73,9 +73,10 @@ public class SpellAbility_Requirements {
 	}
 	
 	public void addAbilityToStack(){
-			AllZone.ManaPool.clearPay(false);
-			AllZone.Stack.addAndUnfreeze(ability);
-			if (select != null)
-				select.resetTargets();
+		ability.getRestrictions().abilityActivated();
+		AllZone.ManaPool.clearPay(false);
+		AllZone.Stack.addAndUnfreeze(ability);
+		if (select != null)
+			select.resetTargets();
 	}
 }

@@ -228,6 +228,14 @@ public class AbilityFactory {
 			}
 		}
 		
+		if (API.equals("Untap")){
+			if (isAb)
+				SA = AbilityFactory_PermanentState.createAbilityUntap(this);
+			if (isSp){
+				SA = AbilityFactory_PermanentState.createSpellUntap(this);
+			}
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
         if (hasSpDesc)
@@ -254,6 +262,10 @@ public class AbilityFactory {
         
         if (mapParams.containsKey("AnyPlayer"))
         	SA.getRestrictions().setAnyPlayer(true);
+        
+        if (mapParams.containsKey("ActivationLimit"))
+        	SA.getRestrictions().setActivationLimit(Integer.parseInt(mapParams.get("ActivationLimit")));
+
         
         return SA;
 	}

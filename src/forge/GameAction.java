@@ -39,11 +39,17 @@ public class GameAction {
         return c.get(0);
     }
 
- 
-
-    @SuppressWarnings("unused")
-    // getCurrentCard
-    private Card getCurrentCard(int ID) {
+    public void resetActivationsPerTurn(){
+    	CardList all = getCardsInGame();
+    	
+        // Reset Activations per Turn
+        for(Card card : all){
+        	for(SpellAbility sa : card.getSpellAbility())
+        		sa.getRestrictions().resetTurnActivations();
+        }
+    }
+    
+    public CardList getCardsInGame(){
         CardList all = new CardList();
         all.addAll(AllZone.Human_Graveyard.getCards());
         all.addAll(AllZone.Human_Hand.getCards());
@@ -57,11 +63,8 @@ public class GameAction {
         all.addAll(AllZone.Computer_Play.getCards());
         all.addAll(AllZone.Computer_Removed.getCards());
         
-        for(int i = 0; i < all.size(); i++)
-            if(all.get(i).getUniqueNumber() == ID) return all.get(i);
-        
-        return null;
-    }//getCurrentCard()
+        return all;
+    }
     
     public Card moveTo(PlayerZone zone, Card c) {
         //c = getCurrentCard(c); - breaks things, seems to not be needed
@@ -3198,7 +3201,7 @@ public class GameAction {
             {
                 AllZone.Stack.add(sa);
                 AllZone.InputControl.setInput(new ComputerAI_StackNotEmpty());
-            }
+        } 
             */
         } else {
         	sa.setManaCost("0"); // Beached As
