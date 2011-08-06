@@ -531,8 +531,8 @@ public class AbilityFactory_Destroy {
 			Valid.replace("X", Integer.toString(xPay));
 		}
 		
-		CardList humanlist = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
-		CardList computerlist = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+		CardList humanlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+		CardList computerlist = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
 		
 		humanlist = humanlist.getValidCards(Valid.split(","), source.getController(), source);
 		computerlist = computerlist.getValidCards(Valid.split(","), source.getController(), source);
@@ -566,6 +566,10 @@ public class AbilityFactory_Destroy {
 		 if (humanlist.getNotType("Creature").size() == 0 && computerlist.getNotType("Creature").size() == 0) {
 			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
 				 return false;
+		 }//only lands involved
+		 else if (humanlist.getNotType("Land").size() == 0 && computerlist.getNotType("Land").size() == 0) {
+			 if(CardFactoryUtil.evaluatePermanentList(computerlist) + 1 >= CardFactoryUtil.evaluatePermanentList(humanlist))
+				 return false;
 		 } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
 		 else if(CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil.evaluatePermanentList(humanlist))
 			 return false;
@@ -574,7 +578,7 @@ public class AbilityFactory_Destroy {
 		 if (subAb != null)
 		 	chance &= subAb.chkAI_Drawback();
 		 
-		 return ((r.nextFloat() < .6667) && chance);
+		 return ((r.nextFloat() < .9667) && chance);
 	}
 	
 	public static void destroyAllResolve(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
