@@ -7833,9 +7833,7 @@ public class CardFactory_Sorceries {
                         input[0] = JOptionPane.showInputDialog(null, "Which creature type?", "Pick type",
                                 JOptionPane.QUESTION_MESSAGE);
                         
-                        if(input[0].equals("Legendary") || input[0].equals("Artifact")
-                                || input[0].equals("Enchantment") || input[0].equals("Shrine")
-                                || input[0].equals("Creature")) input[0] = "";
+                        if(!CardUtil.isCreatureType(input[0])) input[0] = "";
                         //TODO: some more input validation, case-sensitivity, etc.
                         
                         input[0] = input[0].trim(); //this is to prevent "cheating", and selecting multiple creature types,eg "Goblin Soldier"
@@ -7843,16 +7841,12 @@ public class CardFactory_Sorceries {
                         PlayerZone aiGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
                         HashMap<String,Integer> countInGraveyard = new HashMap<String,Integer>();
                         CardList allGrave = new CardList(aiGrave.getCards());
-                        allGrave.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return c.getType().contains("Creature");
-                            }
-                        });
+                        allGrave.getType("Creature");
                         for(Card c:allGrave)
                         {
                             for(String type:c.getType())
                             {
-                                if(!type.equals("Legendary") && !type.equals("Creature") && !type.equals("Artifact"))
+                                if(CardUtil.isCreatureType(type))
                                 {
                                     if(countInGraveyard.containsKey(type))
                                     {
@@ -7883,7 +7877,7 @@ public class CardFactory_Sorceries {
                         PlayerZone humanBattlefield = AllZone.getZone(Constant.Zone.Play,Constant.Player.Human);
                         for(Card c:humanGrave.getCards())
                         {
-                            if(c.getType().contains(input[0]))
+                            if(c.isType(input[0]))
                             {
                                 humanGrave.remove(c);
                                 humanBattlefield.add(c);
@@ -7893,7 +7887,7 @@ public class CardFactory_Sorceries {
                         PlayerZone computerBattlefield = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
                         for(Card c:computerGrave.getCards())
                         {
-                            if(c.getType().contains(input[1]))
+                            if(c.isType(input[1]))
                             {
                                 computerGrave.remove(c);
                                 computerBattlefield.add(c);
@@ -7916,7 +7910,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             StringBuilder sb = new StringBuilder();
-            sb.append("When ").append(card.getName()).append(" comes into play, choose a creature type.");
+            sb.append(card.getName()).append(" - choose a creature type.");
             spell.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         

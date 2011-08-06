@@ -200,4 +200,20 @@ public class CardUtil {
     	//else if(relation.startsWith("target ")) return c.getTargetCard();
     	else throw new IllegalArgumentException("Error at CardUtil.getRelative: " + relation + "is not a valid relation");
     }
+    
+    // Check if a Type is a Creature Type (by excluding all other types)
+    public static boolean isCreatureType(String cardType) {
+    	return (!cardType.equals("Creature")
+    			&& !cardType.equals("Legendary") && !cardType.equals("Planeswalker")
+                && !cardType.equals("Basic") && !cardType.equals("Enchantment")
+                && !cardType.equals("Land") && !cardType.equals("Sorcery")
+                && !cardType.equals("Instant") && !cardType.equals("Artifact")
+                && !cardType.equals("Snow") && !cardType.equals("Arcane")
+                && !cardType.equals("Equipment") && !cardType.equals("Aura")
+                && !cardType.equals("World") && !cardType.equals("Locus")
+                && !cardType.equals("Fortification") && !cardType.equals("Lair")
+                && !cardType.equals("Plains") && !cardType.equals("Mountain")
+                && !cardType.equals("Island") && !cardType.equals("Forest")
+                && !cardType.equals("Swamp"));
+    }
 }

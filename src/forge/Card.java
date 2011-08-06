@@ -2164,18 +2164,11 @@ public class Card extends MyObservable {
     	cardType = toMixedCase(cardType);
     	
     	if (type.contains(cardType)
-                    || ((isCreature() || (isTribal() && !cardType.equals("Creature")))
-                            && !cardType.equals("Legendary") && !cardType.equals("Planeswalker")
-                            && !cardType.equals("Basic") && !cardType.equals("Enchantment")
-                            && !cardType.equals("Land") && !cardType.equals("Sorcery")
-                            && !cardType.equals("Instant") && !cardType.equals("Artifact")
-                            && !cardType.equals("Snow") && !cardType.equals("Arcane")
-                            && !cardType.equals("Equipment") && !cardType.equals("Aura")
-                            && !cardType.equals("Plains") && !cardType.equals("Mountain")
-                            && !cardType.equals("Island") && !cardType.equals("Forest")
-                            && !cardType.equals("Swamp") && getKeyword().contains("Changeling"))) return true;
+                    || ( (isCreature() || isTribal())
+                    		&& CardUtil.isCreatureType(cardType) && getKeyword().contains("Changeling"))) return true;
         return false;
     }
+    	
     
     public boolean isValidCard(String Restris[], String You) {
     	String Restriction[] = {""};
