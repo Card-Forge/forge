@@ -26,6 +26,8 @@ public abstract class Player extends MyObservable{
 	protected int numDrawnThisTurn = 0;
 	protected CardList slowtripList = new CardList();
 	
+	protected Card channelCard = null;
+	
 	public Player(String myName) {
 		this(myName, 20, 0);
 	}
@@ -747,6 +749,11 @@ public abstract class Player extends MyObservable{
     	return list.size() >= 3;
     }
     
+    public boolean hasThreshold() {
+    	CardList grave = AllZoneUtil.getPlayerGraveyard(this);
+    	return grave.size() >= 7;
+    }
+    
     private ArrayList<HandSizeOp> handSizeOperations;
 
     public int getMaxHandSize() {
@@ -817,6 +824,24 @@ public abstract class Player extends MyObservable{
     public static int getHandSizeStamp() {
        return NextHandSizeStamp++;
     }
+    
+    /////////////////
+    //
+    //	for using the card Channel
+    //
+    /////////////////
+    public void setChannelCard(Card c) {
+    	channelCard = c;
+    }
+    
+    public boolean canChannel() {
+    	return null != channelCard;
+    }
+    
+    public Card getChannelCard() {
+    	return channelCard;
+    }
+    
 	////////////////////////////////
 	//
 	// generic Object overrides
