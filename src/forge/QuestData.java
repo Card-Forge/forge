@@ -58,6 +58,8 @@ public class QuestData implements NewConstants {
     
     private int 				  life;
     private int 				  estatesLevel;
+    private int					  luckyCoinLevel;
+    private int					  sleightOfHandLevel;
     
     private int					  questsPlayed;
     
@@ -259,6 +261,8 @@ public class QuestData implements NewConstants {
             data.selectedPet  = state.selectedPet;
             data.life = state.life;
             data.estatesLevel = state.estatesLevel;
+            data.luckyCoinLevel = state.luckyCoinLevel;
+            data.sleightOfHandLevel = state.sleightOfHandLevel;
             data.questsPlayed = state.questsPlayed;
             data.availableQuests = state.availableQuests;
             data.completedQuests = state.completedQuests;
@@ -687,6 +691,26 @@ public class QuestData implements NewConstants {
     	estatesLevel+=n;
     }
     
+    public int getLuckyCoinLevel()
+    {
+    	return luckyCoinLevel;
+    }
+    
+    public void addLuckyCoinLevel(int n)
+    {
+    	luckyCoinLevel+=n;
+    }
+    
+    public int getSleightOfHandLevel()
+    {
+    	return sleightOfHandLevel;
+    }
+    
+    public void addSleightOfHandLevel(int n)
+    {
+    	sleightOfHandLevel+=n;
+    }
+    
     public int getQuestsPlayed()
     {
     	return questsPlayed;
@@ -749,7 +773,12 @@ public class QuestData implements NewConstants {
     }
     
     public boolean shouldAddAdditionalCards(boolean didWin) {
-        if(didWin) return random.nextBoolean();
+    	float chance = 0.5f;
+    	if (getLuckyCoinLevel() >= 1)
+    		chance = 0.65f;
+    	
+    	if(didWin) return random.nextFloat() <= chance;
+        	
         else return false;
     }
     
@@ -807,6 +836,8 @@ public class QuestData implements NewConstants {
             state.selectedPet = q.selectedPet;
             state.life = q.life;
             state.estatesLevel = q.estatesLevel;
+            state.luckyCoinLevel = q.luckyCoinLevel;
+            state.sleightOfHandLevel = q.sleightOfHandLevel;
             state.questsPlayed = q.questsPlayed;
             state.availableQuests = q.availableQuests;
             

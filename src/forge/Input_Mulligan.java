@@ -32,11 +32,21 @@ public class Input_Mulligan extends Input {
         for(int i = 0; i < 100; i++)
             AllZone.GameAction.shuffle(Constant.Player.Human);
         
+        
         int newHand = hand.length - 1;
+        AllZone.GameInfo.addHumanNumberOfTimesMulliganed(1);
+        
+        //System.out.println("Mulliganed this turn:" + AllZone.GameInfo.getHumanNumberOfTimesMulliganed());
+        
+        if(AllZone.QuestData != null)
+        {
+        	if (AllZone.QuestData.getSleightOfHandLevel() >= 1 && AllZone.GameInfo.getHumanNumberOfTimesMulliganed() == 1)
+        		newHand = hand.length;
+        }
         for(int i = 0; i < newHand; i++)
             AllZone.GameAction.drawCard(Constant.Player.Human);
         
-        if(newHand == 1) end();
+        if(newHand == 0) end();
     }//selectButtonOK()
     
     void end() {

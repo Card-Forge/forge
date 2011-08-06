@@ -17,28 +17,28 @@ import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
-public class Gui_Treasury extends JFrame implements NewConstants{
+public class Gui_Library extends JFrame implements NewConstants{
 	
 	private static final long serialVersionUID = 2409591658245091210L;
 		
 	private JFrame 			  shopsGUI;
 	private JLabel            titleLabel        = new JLabel();
 	
-	private JLabel 			  estatesDescLabel  = new JLabel();
-	//private JLabel		  estatesStatsLabel = new JLabel();
-	private JLabel 			  estatesPriceLabel = new JLabel();
-	private JLabel 			  estatesIconLabel  = new JLabel();
+	private JLabel 			  sleightOfHandDescLabel  = new JLabel();
+
+	private JLabel 			  sleightOfHandPriceLabel = new JLabel();
+	private JLabel 			  sleightOfHandIconLabel  = new JLabel();
 	
 	private JLabel			  creditsLabel     	= new JLabel();
 	
-	private ImageIcon		  estatesIcon	  	= new ImageIcon();
+	private ImageIcon		  sleightOfHandIcon	  	= new ImageIcon();
 	    
-	private JButton           learnEstatesButton= new JButton();
+	private JButton           sleightOfHandButton= new JButton();
     private JButton			  quitButton 	    = new JButton();
     
     private QuestData 		  questData 	    = AllZone.QuestData;
     
-    public Gui_Treasury(JFrame parent) {
+    public Gui_Library(JFrame parent) {
         try {
             jbInit();
         } catch(Exception ex) {
@@ -63,10 +63,10 @@ public class Gui_Treasury extends JFrame implements NewConstants{
     
     //only do this ONCE:
     private void setup() {
-    	learnEstatesButton.setBounds(new Rectangle(10, 297, 120, 50));
-    	learnEstatesButton.setText(getButtonText());
+    	sleightOfHandButton.setBounds(new Rectangle(10, 297, 120, 50));
+    	sleightOfHandButton.setText(getButtonText());
     	//buyPlantButton.setIcon(icon);
-    	learnEstatesButton.addActionListener(new java.awt.event.ActionListener() {
+    	sleightOfHandButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
 					learnEstatesButton_actionPerformed(e);
@@ -84,37 +84,15 @@ public class Gui_Treasury extends JFrame implements NewConstants{
     	StringBuilder sb = new StringBuilder();
     	sb.append("<html>");
 
-    	if (questData.getEstatesLevel() == 0) 
+    	if (questData.getSleightOfHandLevel() == 0) 
     	{
-    		sb.append("<u>Level 1 Estates</u><br>");
-    		sb.append("Gives a bonus of <b>10%</b> to match winnings.<br>");
-    		sb.append("Improves sell percentage by <b>1.0%</b>.");
-    	}
-    	else if (questData.getEstatesLevel() == 1)
-    	{
-    		sb.append("<u>Level 2 Estates</u><br>");
-    		sb.append("Gives a bonus of <b>15%</b> to match winnings.<br>");
-    		sb.append("Improves sell percentage by <b>1.75%</b>.");
-    	}
-    	else if (questData.getEstatesLevel() == 2)
-    	{
-    		sb.append("<u>Level 3 Estates</u><br>");
-    		sb.append("Gives a bonus of <b>20%</b> to match winnings.<br>");
-    		sb.append("Improves sell percentage by <b>2.5%</b>.");
-    	}
-    	else if (questData.getEstatesLevel() >= 3 && questData.getLuckyCoinLevel() == 0)
-    	{
-    		sb.append("Estates Level Maxed out.<br>");
-    		sb.append("<u><b>Lucky Coin</b></u><br>");
-    		sb.append("This coin is believed to give good luck to its owner.<br>");
-    		sb.append("Improves the chance of getting a random <br>rare after each match by <b>15%</b>.");
-    		/*sb.append("Current Level: 3/3<br>");
-    		sb.append("Gives a bonus of <b>20%</b> to match winnings.<br>");
-    		sb.append("Improves sell percentage by <b>2.5%</b>.");*/
+    		sb.append("<u><b>Sleight of Hand Vol. I</b></u><br>");
+    		sb.append("These volumes explain how to perform the most difficult of sleights.<br>");
+    		sb.append("<u>Your first mulligan is <b>free</b></u>.");
     	}
     	else
     	{
-    		sb.append("Currently nothing for sale at the Treasury. <br>Please check back later.");
+    		sb.append("Currently nothing to study at the Library. <br>Please check back later.");
     	}
     	
     	sb.append("</html>");
@@ -124,39 +102,26 @@ public class Gui_Treasury extends JFrame implements NewConstants{
     private long getPrice()
     {
     	long l = 0;
-    	if (questData.getEstatesLevel() == 0)
-    		l = 500;
-    	else if (questData.getEstatesLevel() == 1)
-    		l = 750;
-    	else if (questData.getEstatesLevel() == 2)
-    		l = 1000;
-    	else if (questData.getEstatesLevel() >= 3 && questData.getLuckyCoinLevel() == 0)
-    		l = 500;
-    		
-    		
+    	if (questData.getSleightOfHandLevel() == 0)
+    		l = 2000;    		
+    	
     	return l;
     }
     
     private String getButtonText()
     {
-    	if (questData.getEstatesLevel() < 3)
-    		return "Learn Estates";
-    	else
-    		return "Buy Coin";
+    	return "Learn Sleight";
     }
     
     private String getImageString()
     {
-    	if (questData.getEstatesLevel() < 3)
-    		return "GoldIconLarge.png";
-    	else
-    		return "CoinIcon.png";
+    	return "BookIcon.png";
     }
     
     private void jbInit() throws Exception {
         titleLabel.setFont(new java.awt.Font("sserif", Font.BOLD, 22));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setText("Treasury");
+        titleLabel.setText("Library");
         titleLabel.setBounds(new Rectangle(130, 5, 198, 60));
         this.getContentPane().setLayout(null);
         
@@ -166,30 +131,30 @@ public class Gui_Treasury extends JFrame implements NewConstants{
         potionStatsLabel.setBounds(new Rectangle(10, 65, 100, 15));
         */
         
-        estatesDescLabel.setFont(new Font("sserif", 0, 12));
-        estatesDescLabel.setText(getDesc());
-        estatesDescLabel.setBounds(new Rectangle(10, 80, 300, 150));
+        sleightOfHandDescLabel.setFont(new Font("sserif", 0, 12));
+        sleightOfHandDescLabel.setText(getDesc());
+        sleightOfHandDescLabel.setBounds(new Rectangle(10, 80, 300, 150));
         
-        estatesPriceLabel.setFont(new Font("sserif", 0, 12));
-        estatesPriceLabel.setText("<html><b><u>Price</u></b>: " + getPrice() + " credits</html>");
-        estatesPriceLabel.setBounds(new Rectangle(10, 230, 150, 15));
+        sleightOfHandPriceLabel.setFont(new Font("sserif", 0, 12));
+        sleightOfHandPriceLabel.setText("<html><b><u>Price</u></b>: " + getPrice() + " credits</html>");
+        sleightOfHandPriceLabel.setBounds(new Rectangle(10, 230, 150, 15));
         
         creditsLabel.setFont(new Font("sserif", 0, 12));
         creditsLabel.setText("Credits: " + questData.getCredits());
         creditsLabel.setBounds(new Rectangle(10, 265, 150, 15));
         
-        estatesIcon = getIcon(getImageString());
-        estatesIconLabel.setText("");
-        estatesIconLabel.setIcon(estatesIcon);
-        estatesIconLabel.setBounds(new Rectangle(255, 65, 256, 256));
-        estatesIconLabel.setIconTextGap(0);
+        sleightOfHandIcon = getIcon(getImageString());
+        sleightOfHandIconLabel.setText("");
+        sleightOfHandIconLabel.setIcon(sleightOfHandIcon);
+        sleightOfHandIconLabel.setBounds(new Rectangle(300, 135, 128, 128));
+        sleightOfHandIconLabel.setIconTextGap(0);
         
         //String fileName = "LeafIconSmall.png";
     	//ImageIcon icon = getIcon(fileName);
     	
-    	learnEstatesButton.setEnabled(true);
-    	if (questData.getCredits() < getPrice() || (questData.getEstatesLevel() >= 3 && questData.getLuckyCoinLevel() >= 1))
-    		learnEstatesButton.setEnabled(false);
+        sleightOfHandButton.setEnabled(true);
+    	if (questData.getCredits() < getPrice() || questData.getSleightOfHandLevel() >= 1)
+    		sleightOfHandButton.setEnabled(false);
        
         quitButton.setBounds(new Rectangle(140, 297, 120, 50));
         quitButton.setText("Quit");
@@ -201,11 +166,11 @@ public class Gui_Treasury extends JFrame implements NewConstants{
 
 
         //jPanel2.add(quitButton, null);
-        this.getContentPane().add(learnEstatesButton, null);
+        this.getContentPane().add(sleightOfHandButton, null);
         this.getContentPane().add(titleLabel, null);
-        this.getContentPane().add(estatesDescLabel, null);
-        this.getContentPane().add(estatesIconLabel, null);
-        this.getContentPane().add(estatesPriceLabel, null);
+        this.getContentPane().add(sleightOfHandDescLabel, null);
+        this.getContentPane().add(sleightOfHandIconLabel, null);
+        this.getContentPane().add(sleightOfHandPriceLabel, null);
         this.getContentPane().add(creditsLabel, null);
         this.getContentPane().add(quitButton,null);
     }
@@ -213,13 +178,9 @@ public class Gui_Treasury extends JFrame implements NewConstants{
     void learnEstatesButton_actionPerformed(ActionEvent e) throws Exception {
 	    	questData.subtractCredits(getPrice());
 	    	
-	    	if (questData.getEstatesLevel() < 3)
+	    	if (questData.getSleightOfHandLevel() < 1)
 	    	{
-	    		questData.addEstatesLevel(1);
-	    	}
-	    	else if (questData.getLuckyCoinLevel() < 1)
-	    	{
-	    		questData.addLuckyCoinLevel(1);
+	    		questData.addSleightOfHandLevel(1);
 	    	}
 	    	QuestData.saveData(questData);
 	    	jbInit();

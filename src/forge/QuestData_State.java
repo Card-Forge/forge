@@ -24,7 +24,7 @@ public class QuestData_State implements Serializable {
     private static final long serialVersionUID = 7007940230351051937L;
     
     int                       rankIndex, win, lost;
-    int 					  plantLevel, wolfPetLevel, crocPetLevel, life, estatesLevel, questsPlayed;
+    int 					  plantLevel, wolfPetLevel, crocPetLevel, life, estatesLevel, luckyCoinLevel, sleightOfHandLevel, questsPlayed;
     long 					  credits;
     String                    difficulty, mode, selectedPet;
     
@@ -38,7 +38,7 @@ public class QuestData_State implements Serializable {
      * This constructor is used by QestData_State in the default package to create a replacement object for the
      * obsolete class.
      */
-    public QuestData_State(int rankIndex, int win, int lost, int plantLevel, int wolfPetLevel, int crocPetLevel, String selectedPet, int life, int estatesLevel, int questsPlayed,
+    public QuestData_State(int rankIndex, int win, int lost, int plantLevel, int wolfPetLevel, int crocPetLevel, String selectedPet, int life, int estatesLevel, int luckyCoinLevel, int sleightOfHandLevel, int questsPlayed,
     					   ArrayList<Integer> availableQuests, ArrayList<Integer> completedQuests, long credits, String difficulty, String mode, 
     					   ArrayList<String> cardPool, ArrayList<String> shopList, Map<String, Deck> myDecks, Map<String, Deck> aiDecks) {
         this.rankIndex = rankIndex;
@@ -49,6 +49,7 @@ public class QuestData_State implements Serializable {
         this.crocPetLevel = crocPetLevel;
         this.life = life;
         this.estatesLevel = estatesLevel;
+        this.luckyCoinLevel = luckyCoinLevel;
         this.questsPlayed = questsPlayed;
         this.availableQuests = availableQuests;
         this.completedQuests = completedQuests;

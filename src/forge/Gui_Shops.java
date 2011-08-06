@@ -35,6 +35,7 @@ public class Gui_Shops extends JFrame implements NewConstants {
     private JButton           plantShopButton  = new JButton();
     private JButton 		  healthShopButton = new JButton();
     private JButton			  bankButton	   = new JButton();
+    private JButton		      libraryButton    = new JButton();
     private JButton           quitButton       = new JButton();
 
     private JPanel            jPanel2          = new JPanel();
@@ -63,7 +64,7 @@ public class Gui_Shops extends JFrame implements NewConstants {
         
         Dimension screen = this.getToolkit().getScreenSize();
         setBounds(screen.width / 3, 100, //position
-                286, 630); //size
+                286, 700); //size
         setVisible(true);
     }
     
@@ -124,7 +125,18 @@ public class Gui_Shops extends JFrame implements NewConstants {
             }
         });
         
-        quitButton.setBounds(new Rectangle(45, 445, 180, 77));
+        fileName = "BookIconSmall.png";
+        icon = getIcon(fileName);
+        libraryButton.setBounds(new Rectangle(25, 360, 180, 77));
+        libraryButton.setText("Library");
+        libraryButton.setIcon(icon);
+        libraryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                libraryButton_actionPerformed(e);
+            }
+        });
+        
+        quitButton.setBounds(new Rectangle(45, 530, 180, 77));
         quitButton.setText("Quit");
         quitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -133,7 +145,7 @@ public class Gui_Shops extends JFrame implements NewConstants {
         });
 
         jPanel2.setBorder(BorderFactory.createLineBorder(Color.black));
-        jPanel2.setBounds(new Rectangle(20, 50, 230, 375));
+        jPanel2.setBounds(new Rectangle(20, 50, 234, 452));
         jPanel2.setLayout(null);
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -146,6 +158,7 @@ public class Gui_Shops extends JFrame implements NewConstants {
         jPanel2.add(plantShopButton, null);
         jPanel2.add(bankButton, null);
         jPanel2.add(healthShopButton, null);
+        jPanel2.add(libraryButton, null);
         //jPanel2.add(quitButton, null);
         jPanel2.add(petShopButton, null);
         this.getContentPane().add(titleLabel, null);
@@ -200,6 +213,13 @@ public class Gui_Shops extends JFrame implements NewConstants {
     
     void treasuryButton_actionPerformed(ActionEvent e){
     	Gui_Treasury g = new Gui_Treasury(this);
+    	g.setVisible(true);
+    	
+    	dispose();
+    }
+    
+    void libraryButton_actionPerformed(ActionEvent e){
+    	Gui_Library g = new Gui_Library(this);
     	g.setVisible(true);
     	
     	dispose();

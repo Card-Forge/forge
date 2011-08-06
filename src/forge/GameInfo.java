@@ -7,6 +7,8 @@ public class GameInfo {
 	private boolean computerPlayedFirstLandThisTurn;
 	private boolean humanPlayedFirstLandThisTurn;
 	
+	private int humanNumberOfTimesMulliganed;
+	
 	private boolean preventCombatDamageThisTurn;
 
 	public void setComputerCanPlayNumberOfLands(int n) {
@@ -52,7 +54,20 @@ public class GameInfo {
 		return humanPlayedFirstLandThisTurn;
 	}
 
+	public int getHumanNumberOfTimesMulliganed()
+	{
+		return humanNumberOfTimesMulliganed;
+	}
 	
+	public void addHumanNumberOfTimesMulliganed(int n)
+	{
+		humanNumberOfTimesMulliganed+=n;
+	}
+	
+	public void setHumanNumberOfTimesMulliganed(int n)
+	{
+		humanNumberOfTimesMulliganed = n;
+	}
 
 	public void setPreventCombatDamageThisTurn(boolean b) {
 		preventCombatDamageThisTurn = b;
