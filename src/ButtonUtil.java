@@ -1,0 +1,34 @@
+public class ButtonUtil
+{
+    public static void reset()
+    {
+	getOK().setText("OK");
+	getCancel().setText("Cancel");
+	
+	getOK().setSelectable(false);
+	getCancel().setSelectable(false);
+    }
+    public static void enableOnlyOK()
+    {
+	getOK().setSelectable(true);
+	getCancel().setSelectable(false);	
+    }
+    public static void enableOnlyCancel()
+    {
+	getOK().setSelectable(false);
+	getCancel().setSelectable(true);
+    }
+    public static void disableAll()
+    {
+	getOK().setSelectable(false);
+	getCancel().setSelectable(false);	
+    }
+    public static void enableAll()
+    {
+	getOK().setSelectable(true);
+	getCancel().setSelectable(true);	
+    }    
+    
+    private static MyButton getOK()  {return AllZone.Display.getButtonOK();}
+    private static MyButton getCancel()  {return AllZone.Display.getButtonCancel();}
+}

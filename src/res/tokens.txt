@@ -1,0 +1,255 @@
+    Angel
+    B
+    Creature Angel
+    3/3
+    Flying
+
+    Angel
+    W
+    Creature Angel
+    4/4
+    Flying
+
+    Ape
+    G
+    Creature Ape
+    3/3
+
+    Avatar
+    W
+    Creature Avatar
+    n/n
+    This creature's power and toughness are each equal to your life total.
+
+    Bear
+    G
+    Creature Bear
+    2/2
+
+    Beast
+    G
+    Creature Beast
+    3/3
+
+    Beast
+    R G W
+    Creature Beast
+    8/8
+
+    Cat
+    B
+    Creature Cat
+    2/1
+
+    Cat Warrior
+    G
+    Creature Cat Warrior
+    2/2
+
+    Centaur
+    G
+    Creature Centaur
+    3/3
+
+    Dragon
+    R
+    Creature Dragon
+    4/4
+    Flying
+
+    Dragon
+    R
+    Creature Dragon
+    5/5
+    Flying
+
+    Elemental
+    W
+    Creature Elemental
+    4/4
+    Flying
+
+    Elemental
+    R
+    Creature Elemental
+    3/1
+    Haste
+
+    Elf Warrior
+    G
+    Creature Elf Warrior
+    1/1
+
+    Elf Warrior
+    G W
+    Creature Elf Warrior
+    1/1
+
+    Faerie
+    U
+    Creature Faerie
+    1/1
+    Flying
+
+    Faerie Rogue
+    B
+    Creature Faerie Rogue
+    1/1
+    Flying
+
+    Giant Warrior
+    W
+    Creature Giant Warrior
+    5/5
+
+    Goat
+    W
+    Creature Goat
+    0/1
+
+    Goblin
+    R
+    Creature Goblin
+    1/1
+    Haste
+
+    Goblin Soldier
+    R W
+    Creature Goblin Soldier
+    1/1
+
+    Illusion
+    U
+    Creature Illusion
+    1/1
+    Flying
+
+    Insect
+    G
+    Creature Insect
+    1/1
+
+    Kavu
+    B
+    Creature Kavu
+    3/3
+
+    Kelp
+    U
+    Creature Plant Wall
+    0/1
+    Defender
+
+    Kithkin Soldier
+    W
+    Creature Kithkin Soldier
+    1/1
+
+    Knight
+    W
+    Creature Knight
+    2/2
+    First Strike
+
+    Kobolds of Kher Keep
+    R
+    Creature Kobold
+    0/1
+
+    Marit Lage
+    B
+    Legendary Creature Avatar
+    20/20
+    Flying
+    Indestructible
+
+    Morph
+    C
+    Creature
+    2/2
+
+    Pegasus
+    W
+    Creature Pegasus
+    1/1
+    Flying
+
+    Rat
+    B
+    Creature Rat
+    1/1
+
+    Saproling
+    G
+    Creature Saproling
+    1/1
+
+    Serf
+    B
+    Creature Serf
+    0/1
+
+    Shapeshifter
+    C
+    Creature Shapeshifter
+    1/1
+    Changeling
+
+    Sliver
+    C
+    Creature Sliver
+    1/1
+
+    Soldier
+    W
+    Creature Soldier
+    1/1
+
+    Spider
+    B
+    Creature Spider
+    2/4
+    Reach
+
+    Spirit
+    C
+    Creature Spirit
+    1/1
+
+    Spirit
+    W
+    Creature Spirit
+    1/1
+    Flying
+
+    Treefolk Shaman
+    G
+    Creature Treefolk Shaman
+    2/5
+
+    Voja
+    G W
+    Legendary Creature Wolf
+    2/2
+
+    Wasp
+    C
+    Artifact Creature Insect
+    1/1
+    Flying
+
+    Wolf
+    G
+    Creature Wolf
+    2/2
+
+    Wurm
+    B
+    Creature Wurm
+    6/6
+    Trample
+
+    Wurm
+    G
+    Creature Wurm
+    x/x

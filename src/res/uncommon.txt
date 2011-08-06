@@ -1,0 +1,220 @@
+//you can edit this file
+//this file is used for sealed and draft games to generate booster packs
+//all cards in this file are considered uncommon
+//no blank lines
+//lines beginning with // are ignored
+Air Elemental
+Allied Strategies
+Anaconda
+Angel of Light
+Angel of Mercy
+Anger
+Animate Land
+Arachnoid
+Arcane Sanctum
+Armored Griffin
+Arrogant Vampire
+Balshan Collaborator
+Bant Battlemage
+Battlefield Percher
+Blade Sliver
+Bog Wraith
+Bonded Fetch
+Boros Swiftblade
+Branchsnap Lorian
+Brawn
+Briarhorn
+Bull Cerodon
+Bull Hippo
+Carrion Ants
+Cateran Enforcer
+Cateran Kidnappers
+Centaur Glade
+Char-Rumbler
+Charcoal Diamond
+Charging Troll
+Cinder Storm
+Cloud Djinn
+Cloudseeder
+Coastal Tower
+Concentrate
+Crazed Skirge
+Crib Swap
+Crude Rampart
+Crumbling Necropolis
+Daggerclaw Imp
+Darksteel Gargoyle
+Desert Drake
+Dryad Arbor
+Ebony Treefolk
+Elfhame Palace
+Enlightened Tutor
+Eron the Relentless
+Eternal Witness
+Faerie Conclave
+Fire Diamond
+Fire Drake
+Fire Imp
+Flametongue Kavu
+Fleetfoot Panther
+Forbidding Watchtower
+Furnace Whelp
+Fury Sliver
+Gerrard's Verdict
+Ghor-Clan Bloodscale
+Ghost Ship
+Giant Octopus
+Gloomwidow
+Gluttonous Slime
+Gluttonous Zombie
+Goblin Berserker
+Goblin Ringleader
+Goldmeadow Lookout
+Goliath Spider
+Guardian of Cloverdell
+Harmonize
+Heartwood Treefolk
+Horned Cheetah
+Horned Sliver
+Imperiosaur
+Imperious Perfect
+Inspirit
+Iron Tusk Elephant
+Iron-Barb Hellion
+Ivy Dancer
+Jhessian Infiltrator
+Jungle Barrier
+Jungle Shrine
+Jungle Troll
+Keening Banshee
+King Cheetah
+Kithkin Harbinger
+Kithkin Rabble
+Kjeldoran Gargoyle
+Knight of Meadowgrain
+Leonin Skyhunter
+Lightning Helix
+Llanowar Behemoth
+Llanowar Mentor
+Longbow Archer
+Loxodon Stalwart
+Lynx
+Marble Diamond
+Meadowboon
+Might Sliver
+Minions' Murmurs
+Mistral Charger
+Mogg Fanatic
+Moss Diamond
+Moss Monster
+Mountain Bandit
+Mycologist
+Needle Storm
+Nettletooth Djinn
+Nightshade Schemers
+Orcish Artillery
+Ornithopter
+Overrun
+Pardic Collaborator
+Patagia Golem
+Patrol Signaler
+Penumbra Kavu
+Peregrine Drake
+Phantom Monster
+Phantom Warrior
+Phyrexian Gargantua
+Pongify
+Primal Boost
+Primeval Shambler
+Primoc Escapee
+Psychotrope Thallid
+Puppeteer
+Pyre Charger
+Pyrohemia
+Ramosian Captain
+Ramosian Commander
+Ramosian Revivalist
+Ranger en-Vec
+Rathi Fiend
+Razorfoot Griffin
+Rhox Charger
+Rhox War Monk
+Ridgeline Rager
+Ridgetop Raptor
+Riptide Crab
+River Bear
+River Boa
+Sabertooth Wyvern
+Sabretooth Tiger
+Salt Marsh
+Saltblast
+Sandbar Serpent
+Sarcomite Myr
+Savage Lands
+Screeching Harpy
+Sea Eagle
+Sea Spirit
+Seaside Citadel
+Segovian Leviathan
+Sengir Autocrat
+Sentinels of Glen Elendra
+Shimmering Barrier
+Shivan Oasis
+Shriekmaw
+Sigiled Paladin
+Silver Erne
+Sky Diamond
+Sky Spirit
+Skyhunter Skirmisher
+Soul Feast
+Soul Warden
+Sparkspitter
+Spitting Drake
+Spitting Spider
+Sporesower Thallid
+Springjack Shepherd
+Sprouting Thrinax
+Standstill
+Starlit Angel
+Steam Spitter
+Steel Wall
+Stonecloaker
+Stratozeppelid
+Stronghold Zeppelin
+Sunhome, Fortress of the Legion
+Sylvan Messenger
+Tangle Spider
+Tempest Drake
+Thieving Magpie
+Threaten
+Thunder-Thrash Elder
+Thundering Giant
+Tower Gargoyle
+Towering Baloth
+Treefolk Harbinger
+Uktabi Orangutan
+Unseen Walker
+Unyaro Bee Sting
+Urborg Volcano
+Uthden Troll
+Valor
+Vedalken Mastermind
+Viridian Shaman
+Vitu-Ghazi, the City-Tree
+Wall of Air
+Wall of Blossoms
+Wall of Mulch
+Wall of Swords
+Warthog
+Watchwolf
+Whip Sergeant
+Wild Ox
+Wind Dancer
+Wirewood Hivemaster
+Wojek Embermage
+Wolf-Skull Shaman
+Wonder
+Worldly Tutor
+Yavimaya Enchantress
+Zebra Unicorn
+Zombify

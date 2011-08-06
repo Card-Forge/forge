@@ -1,0 +1,208 @@
+//you can edit this file
+//this file is used for sealed and draft games to generate booster packs
+//all cards in this file are considered rare
+//no blank lines
+//lines beginning with // are ignored
+Ajani Goldmane
+Aluren
+Ancestral Recall
+Ancient Silverback
+Ancient Spider
+Angel of Despair
+Arcanis the Omnipotent
+Ashes to Ashes
+Badlands
+Ball Lightning
+Baru, Fist of Krosa
+Battlegrace Angel
+Bayou
+Beacon of Destruction
+Beacon of Unrest
+Belbe's Portal
+Birds of Paradise
+Bitterblossom
+Blistering Firecat
+Blood Crypt
+Breeding Pool
+Bribery
+Brion Stoutarm
+Broodmate Dragon
+Caldera Hellion
+Caller of the Claw
+Cateran Overlord
+Cateran Slaver
+Chandra Nalaar
+Char
+Cho-Manno, Revolutionary
+Cleanse
+Conspiracy
+Convalescent Care
+Cranial Extraction
+Crucible of Fire
+Cruel Tutor
+Damnation
+Dark Confidant
+Defense of the Heart
+Demonic Tutor
+Do or Die
+Doran, the Siege Tower
+El-Hajjaj
+Eladamri's Call
+Elspeth, Knight-Errant
+Elvish Archers
+Elvish Farmer
+Elvish Piper
+Essence Sliver
+Evacuation
+Exalted Angel
+Feudkiller's Verdict
+Flagstones of Trokair
+Flamebreak
+Flowstone Wyvern
+Garruk Wildspeaker
+Gilt-Leaf Archdruid
+Giltspire Avenger
+Glint-Eye Nephilim
+Global Ruin
+Godless Shrine
+Granite Gargoyle
+Guiltfeeder
+Hallowed Fountain
+Hammerfist Giant
+Hanna, Ship's Navigator
+Hellkite Overlord
+Hidetsugu's Second Rite
+Hoofprints of the Stag
+Howling Mine
+Hunted Dragon
+Hystrodon
+Immaculate Magistrate
+Imperial Hellkite
+Infernal Kirin
+Intrepid Hero
+Isamaru, Hound of Konda
+Jedit Ojanen of Efrava
+Jeska, Warrior Adept
+Joiner Adept
+Jokulhaups
+Jugan, the Rising Star
+Kaysa
+Keiga, the Tide Star
+Kiki-Jiki, Mirror Breaker
+Kinsbaile Borderguard
+Kinsbaile Cavalier
+Knight of the Reliquary
+Knight of the White Orchid
+Kokusho, the Evening Star
+Korlash, Heir to Blackblade
+Land Tax
+Leaf-Crowned Elder
+Lightning Angel
+Liliana Vess
+Mad Auntie
+Magus of the Disk
+Magus of the Library
+Magus of the Moat
+Marble Titan
+March of Souls
+Marrow-Gnawer
+Master of Etherium
+Mawcor
+Meglonoth
+Meloku the Clouded Mirror
+Memnarch
+Meng Huo, Barbarian King
+Might of Oaks
+Mirri, Cat Warrior
+Mobilization
+Mox Diamond
+Muraganda Petroglyphs
+Mycoloth
+Nantuko Shade
+Nath of the Gilt-Leaf
+Nevinyrral's Disk
+Night of Souls' Betrayal
+Niv-Mizzet, the Firemind
+Noble Hierarch
+Onulet
+Order of Whiteclay
+Oros, the Avenger
+Overgrown Tomb
+Pale Bears
+Pearl Dragon
+Phyrexian Arena
+Plateau
+Predator Dragon
+Preeminent Captain
+Primal Clay
+Primordial Sage
+Psionic Blast
+Pulse of the Tangle
+Pyroclasm
+Quirion Dryad
+Radiant, Archangel
+Raging Kavu
+Rakka Mar
+Ramosian Sky Marshal
+Ranger of Eos
+Rathi Assassin
+Regrowth
+Retribution of the Meek
+Reya Dawnbringer
+Rhys the Redeemed
+River Merfolk
+Roc of Kher Ridges
+Rockshard Elemental
+Rootwater Thief
+Rorix Bladewing
+Royal Assassin
+Ryusei, the Falling Star
+Sacred Foundry
+Savannah
+Savannah Lions
+Scrubland
+Sengir Vampire
+Sensation Gorger
+Serendib Efreet
+Serra Angel
+Serra Avenger
+Serra Sphinx
+Shadowmage Infiltrator
+Shared Triumph
+Shivan Dragon
+Simic Sky Swallower
+Skullmulcher
+Sleeper Agent
+Sol'kanar the Swamp King
+Solemn Simulacrum
+Sorceress Queen
+Spawnwrithe
+Squee, Goblin Nabob
+Steam Vents
+Stomping Ground
+Sunweb
+Taiga
+Talas Warrior
+Tarox Bladewing
+Temple Garden
+Thelonite Hermit
+Thunder Spirit
+Titanic Ultimatum
+Tithe
+Tolsimir Wolfblood
+Treva, the Renewer
+Tropical Island
+Tundra
+Underground Sea
+Vampiric Tutor
+Vedalken Archmage
+Vindicate
+Visara the Dreadful
+Volcanic Dragon
+Wall of Kelp
+Warrior Angel
+Wheel of Fortune
+Will-o'-the-Wisp
+Wort, Boggart Auntie
+Wrath of God
+Yore-Tiller Nephilim

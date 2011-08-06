@@ -1,0 +1,378 @@
+//you can edit this file
+//this file is used for sealed and draft games to generate booster packs
+//all cards in this file are considered common
+//no blank lines
+//lines beginning with // are ignored
+Advance Scout
+Akki Drillmaster
+Akrasan Squire
+Alaborn Musketeer
+Ambassador Oak
+Amrou Scout
+Amrou Seekers
+Anaba Shaman
+Anarchist
+Angelic Blessing
+Angelic Wall
+Anodet Lurker
+Anurid Murkdiver
+Argothian Swine
+Ascending Aven
+Ashen-Skin Zubera
+Assault Zeppelid
+Aven Fisher
+Aven Riftwatcher
+Aven Squire
+Avian Changeling
+Barkhide Mauler
+Battering Craghorn
+Battering Sliver
+Bay Falcon
+Bayou Dragonfly
+Belbe's Percher
+Benalish Knight
+Blightspeaker
+Blockade Runner
+Bog Imp
+Bog Raiders
+Bonesplitter Sliver
+Boomerang
+Brainstorm
+Breath of Life
+Brute Force
+Cackling Flames
+Cackling Imp
+Canopy Spider
+Canyon Wildcat
+Capashen Knight
+Castle Raptors
+Cateran Brute
+Cateran Persuader
+Cavern Thoctar
+Charging Slateback
+Chartooth Cougar
+Cloud Elemental
+Cloudcrown Oak
+Cloudheath Drake
+Coercion
+Commune with Nature
+Corrupt
+Counsel of the Soratami
+Court Archers
+Covert Operative
+Dark Banishing
+Darkling Stalker
+Darklit Gargoyle
+Darksteel Ingot
+Daru Lancer
+Deeptread Merrow
+Defiant Falcon
+Dirtwater Wraith
+Disciple of Kangee
+Disenchant
+Diving Griffin
+Douse in Gloom
+Dream Stalker
+Dripping-Tongue Zubera
+Dross Prowler
+Drowned
+Drudge Reavers
+Drudge Skeletons
+Druid of the Anima
+Dungeon Shade
+Duress
+Dusk Imp
+Echoing Decay
+Echoing Truth
+Ekundu Griffin
+Elite Cat Warrior
+Elvish Fury
+Elvish Herder
+Ember-Fist Zubera
+Erratic Explosion
+Esper Cormorants
+Essence Warden
+Expunge
+Faceless Butcher
+Feral Shadow
+Fetid Horror
+Fire Ambush
+Fire Elemental
+Fog of Gnats
+Foxfire Oak
+Fresh Volunteers
+Frostling
+Frostweb Spider
+Funeral Charm
+Furnace Spirit
+Fyndhorn Elves
+Gaea's Skyfolk
+Gemhide Sliver
+Gerrard's Command
+Ghost Warden
+Ghostfire
+Giant Growth
+Giant Spider
+Giant Warthog
+Gnarled Mass
+Goblin Cavaliers
+Goblin Chariot
+Goblin Deathraiders
+Goblin Hero
+Goblin Mountaineer
+Goblin Raider
+Goblin Skycutter
+Goblin Spelunkers
+Goblin Striker
+Goretusk Firebeast
+Gorilla Chieftain
+Gravedigger
+Guardians of Akrasa
+Guided Strike
+Havenwood Wurm
+Heart Sliver
+Highway Robber
+Hillcomber Giant
+Hoar Shade
+Hooded Kavu
+Horned Kavu
+Horned Troll
+Hornet Cobra
+Horseshoe Crab
+Hundroog
+Hurloon Minotaur
+Hyalopterous Lemure
+Hymn to Tourach
+Icatian Scout
+Ichor Slick
+Impulse
+Inner-Flame Acolyte
+Jukai Messenger
+Jungle Weaver
+Kabuto Moth
+Kavu Climber
+Kavu Glider
+Keen-Eyed Archers
+Keeneye Aven
+Keepers of the Faith
+Kird Ape
+Knight Errant
+Kodama's Reach
+Kranioceros
+Kyren Glider
+Lab Rats
+Land Leeches
+Leaf Dancer
+Leaf Gilder
+Lightning Blast
+Lightning Bolt
+Lightning Elemental
+Lightning Hounds
+Lignify
+Lionheart Maverick
+Living Airship
+Llanowar Dead
+Llanowar Elves
+Loch Korrigan
+Looming Shade
+Lost Soul
+Lowland Giant
+Lucent Liminid
+Macetail Hystrodon
+Maggot Carrier
+Man-o'-War
+Marsh Boa
+Merfolk of the Pearl Trident
+Merrow Levitator
+Mesa Falcon
+Metathran Soldier
+Metathran Zombie
+Mire Boa
+Misshapen Fiend
+Moaning Spirit
+Moor Fiend
+Morsel Theft
+Mountain Goat
+Mudbutton Torchrunner
+Mulldrifter
+Muscle Sliver
+Nameless Inversion
+Naturalize
+Needlepeak Spider
+Nezumi Cutthroat
+Nightguard Patrol
+Nightshade Stinger
+Norwood Archers
+Obelisk of Bant
+Obelisk of Esper
+Obelisk of Grixis
+Obelisk of Jund
+Obelisk of Naya
+Oblivion Ring
+Obsidian Giant
+Ogre Berserker
+Opt
+Orochi Sustainer
+Oubliette
+Outrider of Jhess
+Pallid Mycoderm
+Parapet Watchers
+Pegasus Charger
+Pendrell Drake
+Penumbra Bobcat
+Penumbra Spider
+Pestilence
+Phyrexian Battleflies
+Phyrexian Monitor
+Phyrexian Rager
+Phyrexian Walker
+Plague Beetle
+Plated Rootwalla
+Plated Sliver
+Plated Spider
+Plover Knights
+Prickly Boggart
+Primal Plasma
+Prodigal Pyromancer
+Prodigal Sorcerer
+Pygmy Pyrosaur
+Pygmy Razorback
+Python
+Raging Cougar
+Raging Minotaur
+Raiding Nightstalker
+Raise the Alarm
+Ramosian Lieutenant
+Ramosian Sergeant
+Rathi Intimidator
+Ravenous Rats
+Razorfin Hunter
+Razortooth Rats
+Redwood Treefolk
+Reflex Sliver
+Regress
+Repulse
+Restless Bones
+Rhox Bodyguard
+Rib Cage Spider
+Ridge Rannet
+Righteous Avengers
+Rip-Clan Crasher
+Rishadan Airship
+Rock Badger
+Roofstalker Wight
+Rootwalla
+Rootwater Commando
+Rune-Cervin Rider
+Rushwood Dryad
+Sakura-Tribe Elder
+Sandbar Merfolk
+Sandstone Warrior
+Scarwood Treefolk
+Scathe Zombies
+Scorching Spear
+Scryb Sprites
+Serpent Warrior
+Serra Zealot
+Shanodin Dryads
+Shatter
+Shield Sphere
+Shock
+Shore Snapper
+Silent-Chant Zubera
+Silver Myr
+Sinew Sliver
+Skirk Shaman
+Skyhunter Patrol
+Skyhunter Prowler
+Skyknight Legionnaire
+Skyshroud Falcon
+Skyshroud Troll
+Skyshroud Troopers
+Slaughterhouse Bouncer
+Sleight of Hand
+Snapping Drake
+Sokenzan Bruiser
+Sootfeather Flock
+Southern Elephant
+Spark Spray
+Sparksmith
+Spined Wurm
+Spitting Gourna
+Spotted Griffin
+Squirming Mass
+Steel Leaf Paladin
+Steward of Valeron
+Stone Kavu
+Stone-Throwing Devils
+Stonewood Invoker
+Strangling Soot
+Streetbreaker Wurm
+Sunlance
+Synchronous Sliver
+Talas Air Ship
+Talas Scout
+Talruum Minotaur
+Tarfire
+Tattered Drake
+Tel-Jilad Exile
+Tendrils of Corruption
+Terror
+Thallid
+Thallid Shell-Dweller
+Thorn-Thrash Viashino
+Thought Courier
+Timberwatch Elf
+Titanic Bulvox
+Torii Watchward
+Tower Drake
+Trained Armodon
+Transluminant
+Treespring Lorian
+Tribal Flames
+Tyrranax
+Urborg Elf
+Urborg Syphon-Mage
+Valiant Guard
+Venerable Monk
+Venser's Sliver
+Veteran Armorer
+Viashino Fangtail
+Viashino Grappler
+Viashino Slasher
+Vine Trellis
+Viscid Lemures
+Vodalian Merchant
+Volcanic Hammer
+Volcano Imp
+Vulshok Berserker
+Vulshok Sorcerer
+War Mammoth
+Watcher Sliver
+Waveskimmer Aven
+Wayward Soul
+Weatherseed Elf
+Whip-Spine Drake
+Whispering Shade
+Wild Aesthir
+Wild Colos
+Wild Elephant
+Wild Griffin
+Wild Jhovall
+Wild Mongrel
+Wildsize
+Willow Dryad
+Willow Faerie
+Wind Drake
+Windseeker Centaur
+Windwright Mage
+Winged Sliver
+Wings of Velis Vel
+Winnower Patrol
+Wirewood Elf
+Words of Wisdom
+Yavimaya Ancients
+Yavimaya Wurm
+Yoked Plowbeast
+Youthful Knight
+Zephyr Falcon
