@@ -2421,11 +2421,11 @@ public class CardFactoryUtil {
 		public void showMessage() {
              StringTokenizer st = new StringTokenizer(cardTypeList, ";");
              if(cardTypeList.equals("All")) {
-                AllZone.Display.showMessage("Select target permanent");
+                AllZone.Display.showMessage(spell.getSourceCard()+" - Select target permanent");
              }
              else {
                 StringBuffer toDisplay = new StringBuffer();
-                toDisplay.append("Select target ");
+                toDisplay.append(spell.getSourceCard()+" - Select target ");
                 while( st.hasMoreTokens() ) {
                    toDisplay.append(st.nextToken());
                    if( st.hasMoreTokens() ) {

@@ -5076,6 +5076,53 @@ public class GameActionUtil {
         }
         return true; // Tell the calling routine it's okay to call again if there are other Valakuts in play
 	}
+	
+	public static void execute_Reaper_King_Destroy_Effect(final Card reaper) {
+		
+        SpellAbility destroyTgt = new Spell(reaper) {
+        	private static final long serialVersionUID = 7708410549601333534L;
+        	
+            /*CardList getPermanents() {
+                CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+                list = list.filter(new CardListFilter() {
+                    public boolean addCard(Card c) {
+                        return !c.hasKeyword("Indestructible");
+                    }
+                });
+                list = list.filter(AllZoneUtil.getCanTargetFilter(reaper));
+                return list;
+            }//getCreature()
+ 
+            /*@Override
+            public void chooseTargetAI() {
+            	// Get a list of all permanents Reaper King could destroy
+            	CardList list = getPermanents();
+                else {
+                    list.shuffle();
+                    setTargetCard(list.get(0));
+                }
+            }//chooseTargetAI() */
+			
+			@Override
+            public void resolve() {
+            	Card target = getTargetCard();
+                if(getTargetCard() != null) {
+                    if(AllZone.GameAction.isCardInPlay(target) && CardFactoryUtil.canTarget(reaper, target)) {
+                    	AllZone.GameAction.destroy(target);
+                    }       
+                }
+            }//resolve()
+
+        };
+        destroyTgt.setManaCost("0");
+        destroyTgt.setStackDescription(reaper+" - destroy target permanent.");
+        if (reaper.getController() == AllZone.HumanPlayer) {
+        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetType(destroyTgt, "All"));
+        } else {
+        	destroyTgt.setChooseTargetAI(CardFactoryUtil.AI_targetType("Permanent", AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer)));
+        	AllZone.Stack.add(destroyTgt);
+        }
+	}
 
 
 	private static boolean showLandfallDialog(Card c) {

@@ -129,6 +129,14 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                     }
             }
             
+            if(c.isType("Scarecrow") && AllZoneUtil.isCardInPlay("Reaper King", c.getController())) {
+            	CardList kings = AllZoneUtil.getCardsInPlay("Reaper King");
+            	kings.remove(c);
+            	for(final Card king:kings){
+            		GameActionUtil.execute_Reaper_King_Destroy_Effect(king);
+            	}
+            }
+            
             if(c.isCreature() && AllZoneUtil.isCardInPlay("Intruder Alarm")) {
             	CardList alarms = AllZoneUtil.getCardsInPlay("Intruder Alarm");
             	for(Card alarm:alarms) {
@@ -295,24 +303,24 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             
             if(SimultaneousEntry == false) { // For Cards with Multiple Token Entry. Only Affects Allies at the moment.
             	for(int i = 0; i < SimultaneousEntryCounter; i++) {
-            if(c.getType().contains("Ally") || (c.getKeyword().contains("Changeling") && c.isCreature())
-                    || (clist.size() > 0 && (c.getType().contains("Creature") || c.getKeyword().contains(
-                            "Changeling"))) || allyNamesList.contains(c.getName())) {
-                CardList list = new CardList(play.getCards());
-                list = list.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
-                        return c.getType().contains("Ally") || c.getKeyword().contains("Changeling")
-                                || allyNamesList.contains(c.getName());
-                    }
-                });
-                
-                for(Card var:list) {
-                    GameActionUtil.executeAllyEffects(var);
-                }
-            }
+            		if(c.getType().contains("Ally") || (c.getKeyword().contains("Changeling") && c.isCreature())
+            				|| (clist.size() > 0 && (c.getType().contains("Creature") || c.getKeyword().contains(
+            				"Changeling"))) || allyNamesList.contains(c.getName())) {
+            			CardList list = new CardList(play.getCards());
+            			list = list.filter(new CardListFilter() {
+            				public boolean addCard(Card c) {
+            					return c.getType().contains("Ally") || c.getKeyword().contains("Changeling")
+            					|| allyNamesList.contains(c.getName());
+            				}
+            			});
+
+            			for(Card var:list) {
+            				GameActionUtil.executeAllyEffects(var);
+            			}
+            		}
             	}
             	SimultaneousEntryCounter = 1;
-        } else SimultaneousEntryCounter = SimultaneousEntryCounter + 1;
+            } else SimultaneousEntryCounter = SimultaneousEntryCounter + 1;
         }
         
         if(AllZone.StaticEffects.getCardToEffectsList().containsKey(c.getName())) {
