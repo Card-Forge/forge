@@ -1588,10 +1588,13 @@ public class CardFactoryUtil {
 
 			@Override
 			public boolean canPlay(){
-				if (sourceCard.isInstant())
-					return super.canPlay();
-				
-				return Phase.canCastSorcery(sourceCard.getOwner()) && super.canPlay();
+				if (!(getRestrictions().canPlay(sourceCard, this)))     
+	                 return false;
+	            
+	            if (sourceCard.isInstant())
+	               return true;
+	            
+	            return Phase.canCastSorcery(sourceCard.getOwner());
 			}
 			
 			@Override
