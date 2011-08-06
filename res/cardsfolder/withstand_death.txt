@@ -2,7 +2,7 @@ Name:Withstand Death
 ManaCost:G
 Types:Instant
 Text:Target creature is indestructible this turn. 
-K:spPumpTgt:HIDDEN Indestructible & (Withstand Death - Indestructible)
+K:spPumpTgt:HIDDEN Indestructible
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withstand_death.jpg
 End
