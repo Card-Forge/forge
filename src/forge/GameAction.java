@@ -1219,7 +1219,7 @@ public class GameAction {
                         		Cards_WithAllTypes = Cards_WithAllTypes.filter(new CardListFilter() {
                                      public boolean addCard(Card c) {
                                     	 for(int z = 0; z < TypeSplit.length - 1; z++)
-                                         if(c.getType().contains(TypeSplit[z + 1])) return true;
+                                         if(c.isType(TypeSplit[z + 1])) return true;
                                          return false;
                                      }
                                  });
@@ -1332,7 +1332,7 @@ public class GameAction {
                    		      			if(Specific[i+2].contains("Type.") && !Specific[i+2].contains("NonType.")) {
                    		      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
                                                 public boolean addCard(Card c) {
-                                                    if(c.getType().contains(Specific[Restriction_Count[0] + 2].replaceFirst("Type.", ""))) return true;
+                                                    if(c.isType(Specific[Restriction_Count[0] + 2].replaceFirst("Type.", ""))) return true;
                                                     return false;
                                                 }
                                     		});
@@ -1340,7 +1340,7 @@ public class GameAction {
                    		      			if(Specific[i+2].contains("NonType.")) {
                        		      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
                                                     public boolean addCard(Card c) {
-                                                        if(!c.getType().contains(Specific[Restriction_Count[0] + 2].replaceFirst("NonType.", ""))) return true;
+                                                        if(!c.isType(Specific[Restriction_Count[0] + 2].replaceFirst("NonType.", ""))) return true;
                                                         return false;
                                                     }
                                         		});
@@ -1948,7 +1948,7 @@ public class GameAction {
 	      			if(AllTargets[i2+1].contains("Type.")) {
 	      			Cards_inPlay = Cards_inPlay.filter(new CardListFilter() {
                          public boolean addCard(Card c) {
-                             if(c.getType().contains(AllTargets[Restriction_Count[0] + 1].replaceFirst("Type.", ""))) return true;
+                             if(c.isType(AllTargets[Restriction_Count[0] + 1].replaceFirst("Type.", ""))) return true;
                              return false;
                          }
              		});
@@ -3310,7 +3310,7 @@ public class GameAction {
                             for(int cs_num = 0; cs_num < color_spilt.length; cs_num++) {
                             	k[string_no] = color_spilt[cs_num];
                             	if(string_no == 5 && CardUtil.getColors(sa.getSourceCard()).contains(k[5])) break; 	
-                            	if(string_no == 6 && (sa.getSourceCard().getType().contains(k[6]))) break;
+                            	if(string_no == 6 && (sa.getSourceCard().isType(k[6]))) break;
                    		}
                    		}
                  	}
@@ -3328,7 +3328,7 @@ public class GameAction {
   	                            	}
   	                            	}
   	                            	if(string_no == 6) {
-  	                            		if(sa.getSourceCard().getType().contains(k[6])  || k[6].equals("All"))  {  	                            			
+  	                            		if(sa.getSourceCard().isType(k[6])  || k[6].equals("All"))  {  	                            			
   	                            	} else {
   	                            		k[6] = "Nullified";
   	                            		break;
@@ -3344,8 +3344,8 @@ public class GameAction {
                         && ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true) 
                         || (k[4].equals("Self") && originalCard.equals(card)) || k[4].equals("All"))
                  		&& ((CardUtil.getColors(sa.getSourceCard()).contains(k[5])) || k[5].equals("All")) 
-                        && ((sa.getSourceCard().getType().contains(k[6])) 
-                        || (!(sa.getSourceCard().getType().contains(k[6])) && k[7].contains("NonType")) || k[6].equals("All"))) {      
+                        && ((sa.getSourceCard().isType(k[6])) 
+                        || (!(sa.getSourceCard().isType(k[6])) && k[7].contains("NonType")) || k[6].equals("All"))) {      
                   	if(k[7].contains("CardIsTapped")) {
                  		if(card.isTapped() == false) k[3] = "0";             		
                  	}
@@ -3353,7 +3353,7 @@ public class GameAction {
                  		if(!Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
                  	}
                  	if(k[7].contains("NonType")) {
-                 		if(originalCard.getType().contains(k[6])) k[3] = "0";             		
+                 		if(originalCard.isType(k[6])) k[3] = "0";             		
                  	}
                  	if(k[7].contains("OpponentTurn")) {
                  		if(isPlayerTurn(originalCard.getController())) k[3] = "0";             		
@@ -3447,7 +3447,7 @@ public class GameAction {
       	                            for(int cs_num = 0; cs_num < color_spilt.length; cs_num++) {
       	                            	k[string_no] = color_spilt[cs_num];
       	                            	if(string_no == 5 && CardUtil.getColors(sa.getSourceCard()).contains(k[5])) break; 	
-      	                            	if(string_no == 6 && (sa.getSourceCard().getType().contains(k[6]))) break;
+      	                            	if(string_no == 6 && (sa.getSourceCard().isType(k[6]))) break;
       	                   		}
       	                   		}
       	                 	}
@@ -3465,7 +3465,7 @@ public class GameAction {
       	                            	}
       	                            	}
       	                            	if(string_no == 6) {
-      	                            		if(sa.getSourceCard().getType().contains(k[6])  || k[6].equals("All"))  {  	                            			
+      	                            		if(sa.getSourceCard().isType(k[6])  || k[6].equals("All"))  {  	                            			
       	                            	} else {
       	                            		k[6] = "Nullified";
       	                            		break;
@@ -3486,9 +3486,9 @@ public class GameAction {
                                   *  This appears to reduce the cost correctly.
                                   *  Works for both the computer and the human.
                                   */
-                                && (((sa.getSourceCard().getType().contains(k[6])) || sa.getSourceCard().getKeyword().contains("Changeling"))
+                                && ((sa.getSourceCard().isType(k[6]))
                          				
-                         		|| (!(sa.getSourceCard().getType().contains(k[6])) && k[7].contains("NonType")) || k[6].equals("All"))) { 
+                         		|| (!(sa.getSourceCard().isType(k[6])) && k[7].contains("NonType")) || k[6].equals("All"))) { 
                          	if(k[7].contains("CardIsTapped")) {
                          		if(card.isTapped() == false) k[3] = "0";             		
                          	}
@@ -3496,7 +3496,7 @@ public class GameAction {
                          		if(!Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
                          	}
                          	if(k[7].contains("NonType")) {
-                         		if(originalCard.getType().contains(k[6])) k[3] = "0";             		
+                         		if(originalCard.isType(k[6])) k[3] = "0";             		
                          	}
                          	if(k[7].contains("OpponentTurn")) {
                          		if(isPlayerTurn(originalCard.getController())) k[3] = "0";             		
@@ -3704,9 +3704,9 @@ public class GameAction {
         if(card.getKeyword().contains("Protection from everything")) assignedDamage = 0;
         if(card.getKeyword().contains("Protection from artifacts") && sourceCard.isArtifact()) assignedDamage = 0;
         
-        if(card.getKeyword().contains("Protection from Dragons") && sourceCard.getType().contains("Dragon")) assignedDamage = 0;
-        if(card.getKeyword().contains("Protection from Demons") && sourceCard.getType().contains("Demon")) assignedDamage = 0;
-        if(card.getKeyword().contains("Protection from Goblins") && sourceCard.getType().contains("Goblin")) assignedDamage = 0;
+        if(card.getKeyword().contains("Protection from Dragons") && sourceCard.isType("Dragon")) assignedDamage = 0;
+        if(card.getKeyword().contains("Protection from Demons") && sourceCard.isType("Demon")) assignedDamage = 0;
+        if(card.getKeyword().contains("Protection from Goblins") && sourceCard.isType("Goblin")) assignedDamage = 0;
         
         if(card.getKeyword().contains("Protection from enchantments")
                 && sourceCard.getType().contains("Enchantment")) assignedDamage = 0;
