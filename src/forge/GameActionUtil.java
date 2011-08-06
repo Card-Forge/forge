@@ -14755,7 +14755,7 @@ public class GameActionUtil {
 
 	}; //Masumaro, first to live
 	*/
-	
+	/*
 	public static Command Adamaro_First_to_Desire                       = new Command() {
 		private static final long serialVersionUID = -8778912687347191965L;
 
@@ -14791,7 +14791,9 @@ public class GameActionUtil {
 		}
 
 	}; //Adamaro, first to desire
+	*/
 
+	/*
 	public static Command Overbeing_of_Myth           = new Command() {
 		private static final long serialVersionUID = -2250795040532050455L;
 
@@ -14827,6 +14829,7 @@ public class GameActionUtil {
 		}
 
 	}; //overbeing of myth
+	*/
 
 	public static Command Guul_Draz_Specter           = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
@@ -16300,7 +16303,7 @@ public class GameActionUtil {
 		
 		commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
 		commands.put("Omnath", Omnath);
-		commands.put("Overbeing_of_Myth", Overbeing_of_Myth);
+		//commands.put("Overbeing_of_Myth", Overbeing_of_Myth);
 		
 		//commands.put("People_of_the_Woods", People_of_the_Woods);
 		commands.put("Phylactery_Lich", Phylactery_Lich);

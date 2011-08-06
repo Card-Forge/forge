@@ -102,7 +102,7 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Old Man of the Sea", new String[] {"Old_Man_of_the_Sea"});
 		cardToEffectsList.put("Omnath, Locus of Mana", new String[] {"Omnath"});
-		cardToEffectsList.put("Overbeing of Myth", new String[] {"Overbeing_of_Myth"});
+		//cardToEffectsList.put("Overbeing of Myth", new String[] {"Overbeing_of_Myth"});
 		
 		//cardToEffectsList.put("People of the Woods", new String[] {"People_of_the_Woods"});
 		cardToEffectsList.put("Phylactery Lich", new String[]{"Phylactery_Lich"});
