@@ -10817,10 +10817,9 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlay() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    String activePlayer = AllZone.Phase.getActivePlayer();
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     
-                    return AllZone.GameAction.isCardInZone(card, grave) && card.getController().equals(activePlayer) && hand.size() > 0;                   
+                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.GameAction.getLastPlayerToDraw() == card.getController() && hand.size() > 0;                   
                 }
                 
             };
@@ -10830,7 +10829,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void showMessage() {
-                    AllZone.Display.showMessage("Select a card to discard: ");
+                    AllZone.Display.showMessage("Select a card to discard");
                     ButtonUtil.enableOnlyCancel();
                 }
                 
@@ -10848,7 +10847,7 @@ public class CardFactory_Creatures {
             ability.setFlashBackAbility(true);
             card.setUnearth(true);
             ability.setDescription("1 B, Discard a card: Return Undead Gladiator from your graveyard to your hand. Activate this ability only during your upkeep.");
-            ability.setStackDescription(card.getName() + "returns from the graveyard to hand");
+            ability.setStackDescription(card.getName() + " returns from the graveyard to hand");
             ability.setAfterPayMana(target);
         }//*************** END ************ END **************************
         
