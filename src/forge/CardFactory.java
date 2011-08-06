@@ -6335,7 +6335,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlay() {
-                    return getCreatures().length != 0;
+                    return super.canPlay() && getCreatures().length != 0;
                 }
                 
                 public Card[] getCreatures() {
