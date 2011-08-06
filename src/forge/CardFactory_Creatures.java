@@ -2801,6 +2801,18 @@ public class CardFactory_Creatures {
                     
                     for(int i = 0; i < goblin.size(); i++)
                         AllZone.GameAction.moveTo(hand, goblin.get(i));
+                    
+                    if (card.getController().equals(Constant.Player.Computer))
+                    {
+                    	StringBuilder sb = new StringBuilder();
+                    	sb.append("<html><b>");
+                    	for (Card c:top) {
+                    		sb.append(c.getName());
+                    		sb.append("<br>");
+                    	}
+                    	sb.append("</b></html>");
+                    	JOptionPane.showMessageDialog(null, sb.toString(), "Computer reveals:", JOptionPane.INFORMATION_MESSAGE); 
+                    }
                 }//resolve()
             };//SpellAbility
             Command intoPlay = new Command() {
@@ -2882,10 +2894,22 @@ public class CardFactory_Creatures {
                         libraryZone.add(top.get(i));
                     }
                     
-                    CardList goblin = top.getType("Elf");
+                    CardList elf = top.getType("Elf");
                     
-                    for(int i = 0; i < goblin.size(); i++)
-                        AllZone.GameAction.moveTo(hand, goblin.get(i));
+                    for(int i = 0; i < elf.size(); i++)
+                        AllZone.GameAction.moveTo(hand, elf.get(i));
+                    
+                    if (card.getController().equals(Constant.Player.Computer))
+                    {
+                    	StringBuilder sb = new StringBuilder();
+                    	sb.append("<html><b>");
+                    	for (Card c:top) {
+                    		sb.append(c.getName());
+                    		sb.append("<br>");
+                    	}
+                    	sb.append("</b></html>");
+                    	JOptionPane.showMessageDialog(null, sb.toString(), "Computer reveals:", JOptionPane.INFORMATION_MESSAGE); 
+                    }
                 }//resolve()
             };//SpellAbility
             Command intoPlay = new Command() {
