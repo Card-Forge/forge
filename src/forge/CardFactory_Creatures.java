@@ -20631,6 +20631,74 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
+        if (cardName.equals("Yavimaya Elder"))
+        {
+    	        final SpellAbility ability = new Ability(card, "2") {
+    	            @Override
+    	            public boolean canPlay() {
+    	                return AllZone.GameAction.isCardInPlay(card)
+    	                        && !AllZone.Stack.getSourceCards().contains(card);//in play and not already activated(Sac cost problems)
+    	            }
+    	            
+    	            @Override
+    	            public boolean canPlayAI() {
+    	                return (AllZone.Computer_Hand.size() < 3) && (AllZone.Computer_Library.size() > 0)
+    	                        && MyRandom.random.nextBoolean();
+    	            }
+    	            
+    	            @Override
+    	            public void resolve() {
+    	                //if (card.getController().equals(Constant.Player.Computer))
+    	            	//for now, sac happens during resolution:
+    	                AllZone.GameAction.sacrifice(getSourceCard());
+    	                AllZone.GameAction.drawCard(card.getController());
+    	            }
+    	        };
+    	        ability.setDescription("2, Sacrifice " + card.getName() + ": Draw a card.");
+    	        ability.setStackDescription(card.getName() + " - Draw a card.");
+    	        
+    	        final Command destroy = new Command()
+    	        {
+					private static final long serialVersionUID = -5552202665064265632L;
+
+					public void execute()
+    	        	{
+    	        		AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(), Constant.Zone.Hand, false, Constant.Zone.Hand, false);
+    	        	}
+    	        };
+    	        
+    	        /*
+    	        Input runtime = new Input() {
+                    
+					private static final long serialVersionUID = -4361362367624073190L;
+					boolean                   once             = true;
+                    
+                    @Override
+                    public void showMessage() {
+                        //this is necessary in order not to have a StackOverflowException
+                        //because this updates a card, it creates a circular loop of observers
+                        if(once) {
+                            once = false;
+                            stopSetNext(new Input_PayManaCost(ability));
+                            AllZone.GameAction.sacrifice(card);
+                            
+                            
+                            //AllZone.Stack.add(ability);
+                            //stop();
+                        }
+                    }//showMessage()
+                };
+    	        
+                ability.setBeforePayMana(runtime);
+                */
+                
+    	        card.addSpellAbility(ability);
+    	        card.addDestroyCommand(destroy);
+        	    
+        }
+       //*************** END ************ END **************************
+        
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {
