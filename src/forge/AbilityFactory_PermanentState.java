@@ -353,6 +353,31 @@ public class AbilityFactory_PermanentState {
 		return dbTap;
 	}
 	
+	public static SpellAbility createDrawbackTapAll(final AbilityFactory AF){
+		final SpellAbility dbTap = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -4990932993654533449L;
+			
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription(){
+				return tapAllStackDescription(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				tapAllResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return tapAllPlayDrawbackAI(af, this);
+			}
+			
+		};
+		return dbTap;
+	}
+	
 	public static String tapStackDescription(AbilityFactory af, SpellAbility sa){
 		// when getStackDesc is called, just build exactly what is happening
 		 StringBuilder sb = new StringBuilder();
@@ -787,6 +812,10 @@ public class AbilityFactory_PermanentState {
 			sb.append(subAb.getStackDescription());
 
 		return sb.toString();
+	}
+	
+	private static boolean tapAllPlayDrawbackAI(final AbilityFactory af, SpellAbility sa){
+		return true;
 	}
 	
 	//Phasing? Something else? Who knows!
