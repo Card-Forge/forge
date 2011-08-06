@@ -38,6 +38,13 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+trevas_attendant.jpg			http://www.wizards.com/global/images/magic/general/trevas_attendant.jpg
+riths_attendant.jpg				http://www.wizards.com/global/images/magic/general/riths_attendant.jpg
+dromars_attendant.jpg			http://www.wizards.com/global/images/magic/general/dromars_attendant.jpg
+darigaazs_attendant.jpg			http://www.wizards.com/global/images/magic/general/darigaazs_attendant.jpg
+crosiss_attendant.jpg			http://www.wizards.com/global/images/magic/general/crosiss_attendant.jpg
+blood_vassal.jpg				http://www.wizards.com/global/images/magic/general/blood_vassal.jpg
+blood_pet.jpg					http://www.wizards.com/global/images/magic/general/blood_pet.jpg
 crystal_vein.jpg				http://www.wizards.com/global/images/magic/general/crystal_vein.jpg
 tooth_of_ramos.jpg				http://www.wizards.com/global/images/magic/general/tooth_of_ramos.jpg
 skull_of_ramos.jpg				http://www.wizards.com/global/images/magic/general/skull_of_ramos.jpg
