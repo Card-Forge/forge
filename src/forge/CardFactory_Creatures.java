@@ -6151,49 +6151,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Elvish Hunter")) {
-        	Ability_Cost abCost = new Ability_Cost("1 G T", cardName, true);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target(card,"TgtC")) {
-                private static final long serialVersionUID = -560200335562416099L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    if(CardFactoryUtil.AI_doesCreatureAttack(card)) return false;
-                    
-                    return (getCreature().size() != 0);
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
-                    setTargetCard(target);
-                }
-                
-                CardList getCreature() {
-                    CardList list = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (!c.getKeyword().contains("This card doesn't untap during your next untap step."))
-                                    && CardFactoryUtil.canTarget(card, c) && c.isTapped();
-                        }
-                    });
-                    list.remove(card);
-                    return list;
-                }//getCreature()
-                
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        getTargetCard().addExtrinsicKeyword("This card doesn't untap during your next untap step.");
-                    }//if (card is in play)
-                }//resolve()
-            };//SpellAbility
-            card.addSpellAbility(ability);
-            ability.setDescription(abCost+"Target creature doesn't untap during its controller's next untap step.");
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Shifting Wall") || cardName.equals("Maga, Traitor to Mortals") || cardName.equals("Feral Hydra")
