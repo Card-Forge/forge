@@ -275,8 +275,10 @@ public class AbilityFactory {
         	
         	if (mapParams.containsKey("PrecostDesc"))
         		sb.append(mapParams.get("PrecostDesc"));
+        	if (mapParams.containsKey("CostDesc"))
+        		sb.append(mapParams.get("CostDesc"));
+        	else sb.append(abCost.toString());
         	
-        	sb.append(abCost.toString());
         	sb.append(mapParams.get("SpellDescription"));
         	
         	SA.setDescription(sb.toString());

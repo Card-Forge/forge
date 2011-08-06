@@ -1,7 +1,8 @@
 Name:Natural Order
 ManaCost:2 G G
 Types:Sorcery
-Text:As an additional cost to cast Natural Order, sacrifice a green creature. Search your library for a green creature card and put it onto the battlefield. Then shuffle your library.
+Text:no text
+A:SP$Fetch|Cost$2 G G Sac<1/Creature.green>|CostDesc$As an additional cost to cast Natural Order, sacrifice a green creature. |Destination$Battlefield|FetchType$Creature.Green|FetchNum$1|SpellDescription$Search your library for a green creature card and put it onto the battlefield. Then shuffle your library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_order.jpg
 End

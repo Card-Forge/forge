@@ -7090,7 +7090,7 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if (cardName.equals("Natural Order")){
             final SpellAbility spell = new Spell(card) {
@@ -7178,7 +7178,7 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(runtime);
 
         } //*************** END ************ END **************************
-        
+        */
 
         //*************** START ********** START *************************
         if (cardName.equals("Destructive Force") || cardName.equals("Wildfire"))
