@@ -3668,7 +3668,14 @@ public class CardFactory implements NewConstants {
         }//spBounceAll
         
         
-        /**
+        /*
+         *  NOTE:
+         *  This keyword is still used by 6 cards. AF_Retrieve will 
+         *  need some modifications to be able to support these cards:
+         *  
+         *  Death's Duet        Footbottom Feast        Life from the Loam
+         *  Macabre Waltz       Reinforcements          Urborg Uprising
+         * 
          *  Generic return target card(s) from graveyard to Hand, Battlefield or Top of Library
          *  spReturnTgt:{Num Cards/Parameters}:{Type}:{To Zone}:{DrawBack}:{Spell Desc}
          *  
