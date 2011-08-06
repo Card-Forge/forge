@@ -10606,6 +10606,88 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Affa Guard Hound")) {
+                final CommandReturn getCreature = new CommandReturn() {
+                    //get target card, may be null
+                    public Object execute() {
+                        Combat combat = ComputerUtil.getAttackers();
+                        Card[] c = combat.getAttackers();
+                        CardList list = new CardList();
+                       
+                        if(c.length == 0) {
+                            list.addAll(AllZone.Computer_Play.getCards());
+                            list = list.filter(new CardListFilter() {
+                                public boolean addCard(Card c) {
+                                    return c.isCreature();
+                                }
+                            });
+                           
+                            if(list.size() == 0) return card;
+                            else {
+                                CardListUtil.sortAttack(list);
+                                CardListUtil.sortFlying(list);
+                               
+                                for(int i = 0; i < list.size(); i++)
+                                    if(list.get(i).isUntapped()) return list.get(i);
+                               
+                                return list.get(0);
+                            }
+                        }
+                       
+                        return c[0];
+                    }//execute()
+                };//CommandReturn
+               
+                final SpellAbility ability = new Ability(card, "0") {
+                    @Override
+                    public void resolve() {
+                        final Card c = getTargetCard();
+                       
+                        if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                            c.addTempDefenseBoost(3);
+                           
+                            AllZone.EndOfTurn.addUntil(new Command() {
+                                private static final long serialVersionUID = -6478141025919509688L;
+                               
+                                public void execute() {
+                                    c.addTempDefenseBoost(-3);
+                                }
+                            });
+                        }//if
+                    }//resolve()
+                };//SpellAbility
+                Command intoPlay = new Command() {
+                    private static final long serialVersionUID = -4514602963470596654L;
+                   
+                    public void execute() {
+                        if(card.getController().equals(Constant.Player.Human)) {
+                            AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(ability));
+                        } else//computer
+                        {
+                            Object o = getCreature.execute();
+                            if(o != null)//should never happen, but just in case
+                            {
+                                ability.setTargetCard((Card) o);
+                                AllZone.Stack.add(ability);
+                            }
+                        }//else
+                    }//execute()
+                };
+                card.addComesIntoPlayCommand(intoPlay);
+               
+                card.clearSpellAbility();
+                card.addSpellAbility(new Spell_Permanent(card) {
+                    private static final long serialVersionUID = 7153795935713327863L;
+                   
+                    @Override
+                    public boolean canPlayAI() {
+                        Object o = getCreature.execute();
+                       
+                        return (o != null) && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
+                    }
+                });
+            }//*************** END ************ END **************************         
 
         //*************** START *********** START **************************
         else if(cardName.equals("Elvish Farmer") || cardName.equals("Mycologist")) {

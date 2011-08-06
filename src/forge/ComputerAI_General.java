@@ -77,6 +77,7 @@ public class ComputerAI_General implements Computer {
         play.add("Flametongue Kavu");
         play.add("Briarhorn");
         play.add("Inner-Flame Acolyte");
+        play.add("Affa Guard Hound");
         play.add("Keening Banshee");
         play.add("Aggressive Urge");
         play.add("Amnesia");

@@ -1,3 +1,10 @@
+Affa Guard Hound
+2 W 
+Creature Hound
+When Affa Guard Hound comes into play, target creature gets +0/+3 until end of turn.
+2/2
+Flash
+
 Totem-Guide Hartebeest
 4 W
 Creature Antelope
