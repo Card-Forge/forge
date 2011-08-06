@@ -1,0 +1,10 @@
+Name:Holy Armor
+ManaCost:W
+Types:Enchantment Aura
+Text:Enchanted creature gets +0/+2.
+K:Enchant creature
+K:enPump:+0/+2
+A:AB$Pump | Cost$ W | Defined$ Enchanted | NumDef$ +1 | SpellDescription$ Enchanted creature gets +0/+1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/holy_armor.jpg
+End

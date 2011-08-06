@@ -1,0 +1,15 @@
+Name:Manacles of Decay
+ManaCost:1 W
+Types:Enchantment Aura
+Text:Enchanted creature can't attack.
+K:Enchant creature
+K:enPump:CARDNAME can't attack.
+A:AB$Pump | Cost$ B | Defined$ Enchanted | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Enchanted creature gets -1/-1 until end of turn.
+A:AB$Pump | Cost$ R | Defined$ Enchanted | KW$ CARDNAME can't block. | IsCurse$ True | SpellDescription$ Enchanted creature can't block this turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/manacles_of_decay.jpg
+End
+
+
+
+
