@@ -1,6 +1,7 @@
 package forge;
 
 import java.util.HashMap;
+import java.util.Random;
 
 public class AbilityFactory_Token extends AbilityFactory {
 	private AbilityFactory AF = null;
@@ -119,7 +120,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 
 			@Override
 			public boolean canPlayAI() {
-				return true;
+				return tokenCanPlayAI(this);
 			}
 			
 			@Override
@@ -135,8 +136,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return tokenDoTriggerAI(this, mandatory);
 			}
 		};
 		
@@ -151,7 +151,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 
 			@Override
 			public boolean canPlayAI() {
-				return true;
+				return tokenCanPlayAI(this);
 			}
 			
 			@Override
@@ -190,13 +190,62 @@ public class AbilityFactory_Token extends AbilityFactory {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return tokenDoTriggerAI(this, mandatory);
 			}
 
 		}; // Spell
 
 		return dbDealDamage;
+	}
+	
+	private boolean tokenCanPlayAI(SpellAbility sa){
+		Ability_Cost cost = sa.getPayCosts();
+		if (!ComputerUtil.canPayCost(sa))	// If there is a cost payment it's usually not mandatory
+			return false;
+
+		if (AllZone.Phase.is(Constant.Phase.End_Of_Turn, AllZone.HumanPlayer) &&
+				cost.isReusuableResource())
+			return true;
+
+		// todo: if i don't have enough blockers and my token can block one of the unblocked creatures
+		// create it after attackers are declared
+		//if (AllZone.Phase.is(Constant.Phase.Combat_Declare_Attackers_InstantAbility, AllZone.HumanPlayer))
+		//	return true;
+
+		// prevent run-away activations - first time will always return true
+		Random r = new Random();
+		final Card source = sa.getSourceCard();
+		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+
+		Target tgt = sa.getTarget();
+		if (tgt != null){
+			tgt.resetTargets();
+			if (tgt.canOnlyTgtOpponent())
+				tgt.addTarget(AllZone.HumanPlayer);
+			else
+				tgt.addTarget(AllZone.ComputerPlayer);		
+		}
+
+		if (cost != null){
+			// AI currently disabled for these costs
+			if (cost.getSubCounter()){
+				// A card has a 25% chance per counter to be able to pass through here
+				// 4+ counters will always pass. 0 counters will never
+				int currentNum = source.getCounters(cost.getCounterType());
+				double percent = .25 * (currentNum / cost.getCounterNum());
+				if (percent <= r.nextFloat())
+					return false;
+			}
+		}
+
+		return ((r.nextFloat() < .33) && chance);
+	}
+	
+	private boolean tokenDoTriggerAI(SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa) && !mandatory)	// If there is a cost payment it's usually not mandatory
+			return false;
+		
+		return true;
 	}
 	
 	private String doStackDescription(SpellAbility sa) {
