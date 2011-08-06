@@ -189,6 +189,8 @@ public class ManaCost {
     		}
     		extraParts.remove(o);
     	}
+    	if (part != null)
+    		manaPart.add(part);
     }
     
     @Override

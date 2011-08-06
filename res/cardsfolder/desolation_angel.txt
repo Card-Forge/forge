@@ -4,10 +4,11 @@ Types:Creature Angel
 Text:no text
 PT:5/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroyYourLand | TriggerDescription$ When CARDNAME comes into play, destroy all lands you control.
-SVar:TrigDestroyYourLand:AB$DestroyAll | Cost$ 0 | ValidCards$ Land.YouCtrl | SpellDescription$ CARDNAME destroys your land.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigKicker | TriggerDescription$ Kicker: If you paid the kicker cost, destroy all lands instead.
-SVar:TrigKicker:AB$DestroyAll | Cost$ W W | ValidCards$ Land | SpellDescription$ CARDNAME destroys all land.
+K:Kicker:W W
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+notkicked | Execute$ TrigDestroyYourLand | TriggerDescription$ When Desolation Angel enters the battlefield, destroy all lands you control. If it was kicked, destroy all lands instead.
+SVar:TrigDestroyYourLand:AB$DestroyAll | Cost$ 0 | ValidCards$ Land.YouCtrl | SpellDescription$ CARDNAME destroys all land you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Secondary$ True | Execute$ TrigKicker | TriggerDescription$ Kicker: If you paid the kicker cost, destroy all lands instead.
+SVar:TrigKicker:AB$DestroyAll | Cost$ 0 | ValidCards$ Land | SpellDescription$ CARDNAME destroys all land.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desolation_angel.jpg
 End
