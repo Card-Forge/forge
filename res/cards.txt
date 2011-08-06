@@ -3209,6 +3209,7 @@ Baru, Fist of Krosa
 Legendary Creature Human Druid
 Whenever a Forest comes into play, green creatures you control get +1/+1 until end of turn.
 4/4
+SVar:BuffedBy:Forest
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136155.jpg
 
@@ -33082,7 +33083,7 @@ Valorous Charge
 1 W W
 Sorcery
 no text
-spAllPump:All/White:+2/+0:White creatures get +1/+0 until end of turn.:Valorous Charge - Creatures get +1/+0 until EOT
+spAllPump:All/White:+2/+0:White creatures get +2/+0 until end of turn.:Valorous Charge - Creatures get +2/+0 until EOT
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4402.jpg
 
