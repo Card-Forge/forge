@@ -1,7 +1,7 @@
 Name:Burrowing
 ManaCost:R
 Types:Enchantment Aura
-Text:Enchanted creature has mountainwalk.
+Text:no text
 K:Enchant creature
 K:enPump:Mountainwalk
 SVar:Rarity:Uncommon

@@ -1,9 +1,9 @@
 Name:Black Ward
 ManaCost:W
 Types:Enchantment Aura
-Text:Enchanted creature has protection from black. This effect doesn't remove Black Ward.
+Text:no text
 K:Enchant creature
-K:enPump:Protection from black
+K:enPump:Protection from black:Enchanted creature has protection from black. This effect doesn't remove Black Ward.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_ward.jpg
