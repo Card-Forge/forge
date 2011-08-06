@@ -14584,7 +14584,7 @@ public class CardFactory_Creatures {
                     list.addAll(AllZone.Computer_Play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && c.getType().contains("Merfolk")
+                            return c.isCreature() && (c.getType().contains("Merfolk") || c.getKeyword().contains("Changeling"))
                                     && CardFactoryUtil.canTarget(card, c);
                         }
                     });
