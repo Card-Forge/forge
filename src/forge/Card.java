@@ -2443,7 +2443,7 @@ public class Card extends MyObservable {
         receivedDamageFromThisTurn.clear();
     }
     
-  //the amount of damage needed to kill the creature
+    //the amount of damage needed to kill the creature
     public int getKillDamage() {
         return getNetDefense() - getDamage();
     }
@@ -2509,7 +2509,7 @@ public class Card extends MyObservable {
     public int getDamage() {
         return damage;
     }
-    
+    /*
     public void addAssignedDamage(int n, Card source) {
         Log.debug(this + " - was assigned " + n + " damage, by " + source);
         if(!assignedDamageHashMap.containsKey(source)) assignedDamageHashMap.put(source, n);
@@ -2517,9 +2517,9 @@ public class Card extends MyObservable {
             assignedDamageHashMap.put(source, assignedDamageHashMap.get(source) + n);
         }
     }
+    */
     
-    
-    public void addGameActionAssignedDamage(int damage, Card sourceCard) {
+    public void addAssignedDamage(int damage, Card sourceCard) {
         if(damage < 0) damage = 0;
         
         int assignedDamage = damage;
@@ -2541,7 +2541,6 @@ public class Card extends MyObservable {
         */
     }
     
-    //public void setAssignedDamage(int n) {assignedDamage = n;}
     public void clearAssignedDamage() {
         assignedDamageHashMap.clear();
     }
@@ -2615,7 +2614,5 @@ public class Card extends MyObservable {
         	CombatUtil.executeCombatDamageEffects(source);
         }
     }
-    
-    
 
 }

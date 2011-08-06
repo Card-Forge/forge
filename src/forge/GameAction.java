@@ -3609,7 +3609,8 @@ public class GameAction {
     
     @Deprecated
     public void addAssignedDamage(Card card, Card sourceCard, int damage) {
-    	card.addGameActionAssignedDamage(damage, sourceCard);
+    	//use card.addAssignedDamage(damage, sourceCard) instead
+    	card.addAssignedDamage(damage, sourceCard);
     }
     
     public void searchLibraryLand(String type, Player player, String Zone1, boolean tapLand) {
