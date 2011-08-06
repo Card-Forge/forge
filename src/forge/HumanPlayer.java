@@ -137,7 +137,8 @@ public class HumanPlayer extends Player{
 	protected void clashMoveToTopOrBottom(Card c) {
 		String choice = "";
     	String choices[] = {"top","bottom"};
-    	choice = (String) GuiUtils.getChoice(c.getName()+" - Top or bottom of Library", choices);
+    	AllZone.Display.setCard(c);
+        choice = (String) GuiUtils.getChoice(c.getName()+" - Top or bottom of Library", choices);
 
     	if(choice.equals("bottom"))  {
     		AllZone.GameAction.moveToBottomOfLibrary(c);
