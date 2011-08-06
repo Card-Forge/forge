@@ -13160,35 +13160,6 @@ public class GameActionUtil {
 		}// execute()
 	}; // Wirewood_Hivemaster
 	
-	public static Command Maraxus_of_Keld = new Command() {
-		private static final long serialVersionUID = 7128144927031872127L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Maraxus of Keld");
-
-			for(int i = 0; i < list.size(); i++) {
-				
-				Card c = list.get(i);
-				Player controller = c.getController();
-				int pt = countUntapped(controller);
-				
-				c.setBaseAttack(pt);
-				c.setBaseDefense(pt);
-			}
-		}// execute()
-		
-		private int countUntapped(Player player) {
-			CardList num = AllZoneUtil.getPlayerCardsInPlay(player);
-			num = num.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isArtifact() || c.isCreature() || c.isLand();
-				}
-			});
-			num = num.filter(AllZoneUtil.untapped);
-			return num.size();
-		}
-	};
-	
 	public static Command Old_Man_of_the_Sea = new Command() {
 		private static final long serialVersionUID = 8076177362922156784L;
 
@@ -14577,7 +14548,6 @@ public class GameActionUtil {
 		commands.put("Liu_Bei", Liu_Bei);
 		
 		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
-		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		commands.put("Meddling_Mage", Meddling_Mage);
 		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
 		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);

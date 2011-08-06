@@ -34,7 +34,6 @@ public class StaticEffects
 		cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] {"Liu_Bei"});
 		
 		cardToEffectsList.put("Magus of the Tabernacle", new String[] {"Magus_of_the_Tabernacle"});
-		cardToEffectsList.put("Maraxus of Keld", new String[] {"Maraxus_of_Keld"});
 		cardToEffectsList.put("Meddling Mage", new String[] {"Meddling_Mage"});
 		cardToEffectsList.put("Mul Daya Channelers", new String[] {"Mul_Daya_Channelers"});
 		cardToEffectsList.put("Muraganda Petroglyphs", new String[] {"Muraganda_Petroglyphs"});
