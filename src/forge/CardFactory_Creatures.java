@@ -17871,6 +17871,62 @@ public class CardFactory_Creatures {
         	//ability.setStackDescription(cardName + " - Rearrange the top X cards in your library in any order.");
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if(cardName.equals("Kor Line-Slinger")) {
+        	final Ability_Tap ability = new Ability_Tap(card) {
+				private static final long serialVersionUID = -5883773208646266056L;
+				
+				@Override
+				public boolean canPlayAI() {
+        			CardList list = new CardList(AllZone.Human_Play.getCards());
+        			list = list.filter(new CardListFilter() {
+        				public boolean addCard(Card c) {
+        					return c.isUntapped() &&c.isCreature() && 
+        						c.getNetAttack() <= 3 && CardFactoryUtil.canTarget(card, c);
+        				}
+        			});
+        			if (list.isEmpty()) return false;
+
+        			CardListUtil.sortAttack(list);
+        			CardListUtil.sortFlying(list);
+        			setTargetCard(list.get(0));
+        			return true;
+        		}//canPlayAI()
+				
+				@Override
+        		public void resolve() {
+					Card c = getTargetCard();
+        			if(AllZone.GameAction.isCardInPlay(c) && c.isUntapped()) {
+        				c.tap();
+        			}
+        		}//resolve
+        	};//SpellAbility
+
+        	Input target = new Input() {
+				private static final long serialVersionUID = 5727787884951469579L;
+				@Override
+				public void showMessage() {
+        			AllZone.Display.showMessage("Select target Creature to tap");
+        			ButtonUtil.enableOnlyCancel();
+        		}
+				@Override
+        		public void selectButtonCancel() {
+        			stop();
+        		}
+        		@Override
+        		public void selectCard(Card c, PlayerZone zone) {
+        			if(zone.is(Constant.Zone.Play) && c.isUntapped() && 
+        					c.isCreature() && (c.getNetAttack() <= 3)) {
+        				ability.setTargetCard(c);
+        				 AllZone.Stack.add(ability);
+        				 stop();
+        			}
+        		}
+        	};//input
+        	card.addSpellAbility(ability);
+        	ability.setBeforePayMana(target);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {

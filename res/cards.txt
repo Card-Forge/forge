@@ -1,3 +1,9 @@
+Kor Line-Slinger
+1 W
+Creature Kor Scout
+tap: Tap target creature with power 3 or less.
+0/1
+
 Dawnglare Invoker
 2 W
 Creature Kor Wizard
