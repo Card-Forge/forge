@@ -1,0 +1,7 @@
+Name:Smoke
+ManaCost:R R
+Types:Enchantment
+Text:Players can't untap more than one creature during their untap steps.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/smoke.jpg
+End

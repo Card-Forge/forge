@@ -80,6 +80,14 @@ public class Input_Untap extends Input {
     			return true;
     		}
     	});
+    	list = list.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			if((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel"))
+    					&& c.isCreature())
+    				return false;
+    			return true;
+    		}
+    	});
 
     	for(Card c : list) {
     		if(c.getKeyword().contains("You may choose not to untap CARDNAME during your untap step.")) {
@@ -172,6 +180,37 @@ public class Input_Untap extends Input {
     			artList = artList.filter(AllZoneUtil.artifacts);
     			artList = artList.filter(AllZoneUtil.tapped);
     			if( artList.size() > 0 ) {
+    				AllZone.InputControl.setInput(target);
+    			}
+    		}
+    	}
+    	if((AllZoneUtil.isCardInPlay("Smoke") || AllZoneUtil.isCardInPlay("Stoic Angel")) ) {
+    		if( AllZone.Phase.getActivePlayer().equals(Constant.Player.Computer) ) {
+    			CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
+    			creatures = creatures.filter(AllZoneUtil.tapped);
+    			if( creatures.size() > 0 ) {
+    				creatures.get(0).untap();
+    			}
+    		}
+    		else {
+    			Input target = new Input() {
+					private static final long serialVersionUID = 5555427219659889707L;
+					public void showMessage() {
+    					AllZone.Display.showMessage("Select one creature to untap");
+    					ButtonUtil.enableOnlyCancel();
+    				}
+    				public void selectButtonCancel() {stop();}
+    				public void selectCard(Card c, PlayerZone zone) {
+    					if(c.isCreature() && zone.is(Constant.Zone.Play) 
+    							&& c.getController().equals(Constant.Player.Human)) {
+    						c.untap();
+    						stop();
+    					}
+    				}//selectCard()
+    			};//Input
+    			CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+    			creatures = creatures.filter(AllZoneUtil.tapped);
+    			if( creatures.size() > 0 ) {
     				AllZone.InputControl.setInput(target);
     			}
     		}
