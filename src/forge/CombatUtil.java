@@ -416,6 +416,7 @@ public class CombatUtil {
         }//flanking
         
         if(attacker.getName().equals("Cho-Manno, Revolutionary")) return false;
+        if(attacker.getKeyword().contains("Indestructible")) return false;
         
         //this usually doesn't happen, unless the attacker got pro {color} after being blocked, or the defender became {color}
         if(attacker.getKeyword().contains("Protection from white")
@@ -512,6 +513,8 @@ public class CombatUtil {
     } //canDestroyAttacker
     
     public static boolean canDestroyBlocker(Card defender, Card attacker) {
+    	
+        if(defender.getKeyword().contains("Indestructible")) return false;
         if(attacker.getName().equals("Sylvan Basilisk")) return true;
         
         int flankingMagnitude = 0;
