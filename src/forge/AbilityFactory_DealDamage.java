@@ -175,9 +175,10 @@ import java.util.Random;
         }
        
         private boolean shouldTgtP(int d, final boolean noPrevention) {
+        	int restDamage = d;
         	
-        	if (AllZone.HumanPlayer.preventAllDamageToPlayer(AF.getHostCard(), false) 
-        			|| !AllZone.HumanPlayer.canTarget(AF.getHostCard())) 	return false;
+        	if (!noPrevention)
+        		restDamage = AllZone.HumanPlayer.staticDamagePrevention(restDamage,AF.getHostCard(),false);
         	
             PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
             CardList hand = new CardList(compHand.getCards());
@@ -197,10 +198,12 @@ import java.util.Random;
             CardList hPlay = new CardList(human.getCards());
             hPlay = hPlay.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
+                	int restDamage = d;
+                	if (!noPrevention)
+                		restDamage = c.staticDamagePrevention(d,AF.getHostCard(),false);
                     // will include creatures already dealt damage
-                    return c.isCreature() && (c.getKillDamage() <= d)
+                    return c.isCreature() && (c.getKillDamage() <= restDamage)
                             && CardFactoryUtil.canTarget(AF.getHostCard(), c)
-                            && !(c.preventAllDamageToCard(AF.getHostCard(),false) && !noPrevention) 
                             && !c.getKeyword().contains("Indestructible")
                             && !(c.getSVar("SacMe").length() > 0);
                 }

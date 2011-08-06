@@ -218,41 +218,21 @@ public abstract class Player extends MyObservable{
         GameActionUtil.executePlayerDamageEffects(this, source, damageToDo, false);
 	}
 	
-	public boolean preventAllDamageToPlayer(final Card source, final boolean isCombat) {
-		boolean reduce = false;
+	//This should be also usable by the AI to forecast an effect (so it must not change the game state) 
+	public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
+		int restDamage = damage;
 		
     	if(isCombat) {
-    		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.");
-    		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME.");
+    		if(source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")) return 0;
+    		if(source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME.")) return 0;
+    		if (AllZoneUtil.isCardInPlay("Purity", this)) return 0;
     	}
-    	reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.");
-		reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME.");
-		
-		//Spirit of Resistance
-		if(AllZoneUtil.isCardInPlay("Spirit of Resistance", this)) {
-			if( AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Black).size() > 0
-					&& AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Blue).size() > 0
-					&& AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Green).size() > 0
-					&& AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Red).size() > 0
-					&& AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.White).size() > 0) {
-				reduce = true;
-			}
-		}
-		return reduce;
-	}
-	
-	public int preventDamage(final int damage, Card source, boolean isCombat) {
-    	int restDamage = damage;
+    	if(source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.")) return 0;
+    	if(source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME.")) return 0;
     	
-    	if (AllZoneUtil.isCardInPlay("Purity", this) && !isCombat) {
-    		gainLife(restDamage,null);
-    		return 0;
-    	}
+    	
+    	//specific cards
     	if (AllZoneUtil.isCardInPlay("Energy Storm") && source.isSpell()) return 0;
-    	
-    	if( preventAllDamageToPlayer(source, isCombat)) {
-    		return 0;
-        }
     	
     	if (AllZoneUtil.isCardInPlay("Spirit of Resistance", this) && !source.getController().equals(this)
     			&& restDamage > 0) restDamage = restDamage - 1;
@@ -283,6 +263,29 @@ public abstract class Player extends MyObservable{
 			else return 0;
     	}
     	if (AllZoneUtil.isCardInPlay("Urza's Armor", this) && restDamage > 0) restDamage = restDamage - 1;
+		
+		if(AllZoneUtil.isCardInPlay("Spirit of Resistance", this)) {
+			if( AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Black).size() > 0
+					&& AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Blue).size() > 0
+					&& AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Green).size() > 0
+					&& AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Red).size() > 0
+					&& AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.White).size() > 0) {
+				return 0;
+			}
+		}
+		return restDamage;
+	}
+	
+	public int preventDamage(final int damage, Card source, boolean isCombat) {
+    	int restDamage = damage;
+    	
+    	// Purity has to stay here because it changes the game state
+    	if (AllZoneUtil.isCardInPlay("Purity", this) && !isCombat) {
+    		gainLife(restDamage,null);
+    		return 0;
+    	}
+    	
+    	restDamage = staticDamagePrevention(restDamage, source, isCombat);
 
     	
     	if(restDamage >= preventNextDamage) {

@@ -2216,11 +2216,11 @@ public class Card extends MyObservable {
     }
 	
 	// This is for keywords with a number like Bushido, Annihilator and Rampage. It returns the total.
-	public int getKeywordMagnitute(String k) {
+	public int getKeywordMagnitude(String k) {
 		int count = 0;
         ArrayList<String> keywords = getKeyword();
         for(String kw:keywords) {
-            if(kw.contains(k)) {
+            if(kw.startsWith(k)) {
                 String[] parse = kw.split(" ");
                 String s = parse[1];
                 count += Integer.parseInt(s);
@@ -2661,10 +2661,8 @@ public class Card extends MyObservable {
         return getNetDefense() + preventNextDamage - getDamage();
     }
     
-    
-    
     public void setDamage(int n) {
-        if(this.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) n = 0;
+        //if(this.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) n = 0;
         damage = n;
     }
     
@@ -2761,46 +2759,58 @@ public class Card extends MyObservable {
         }
     }
     
-    public boolean preventAllDamageToCard(Card source, boolean isCombat) {
-    	boolean reduce = false;
+	//This should be also usable by the AI to forecast an effect (so it must not change the game state) 
+	public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
+		int restDamage = damage;
+		
     	if(isCombat) {
-    		reduce = reduce || getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.");
-    		reduce = reduce || getKeyword().contains("Prevent all combat damage that would be dealt to CARDNAME.");
-    		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.");
-    		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME.");
+    		if(getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME."))return 0;
+    		if(getKeyword().contains("Prevent all combat damage that would be dealt to CARDNAME."))return 0;
+    		if(source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME."))return 0;
+    		if(source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME."))return 0;
     	}
-    	reduce = reduce || getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.");
-    	reduce = reduce || getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.");
-    	reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.");
-		reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME.");
+    	if(getKeyword().contains("Prevent all damage that would be dealt to CARDNAME."))return 0;
+    	if(getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME."))return 0;
+    	if(source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME."))return 0;
+    	if(source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME."))return 0;
+    	
+    	if(hasStartOfKeyword("Absorb")) {
+    		int absorbed = this.getKeywordMagnitude("Absorb");
+    		if (restDamage > absorbed) restDamage = restDamage - absorbed;
+    		else return 0;
+    	}
     	
 		//more specific prevents here:
-		reduce = reduce || (getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
-				&& source.isCreature() && source.isArtifact());
-		reduce = reduce || (getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifacts.") 
-				&& source.isArtifact());
-		reduce = reduce || (getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by creatures.")
-				&& source.isCreature());
+    	if((getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
+				&& source.isCreature() && source.isArtifact()))return 0;
+    	if((getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifacts.") 
+				&& source.isArtifact()))return 0;
+    	if((getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by creatures.")
+				&& source.isCreature()))return 0;
 		
 		// specific Cards
-		reduce = reduce || (this.isCreature() && source.isCreature() && 
-				AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this));
-		reduce = reduce || (!isCombat && AllZoneUtil.isCardInPlay("Mark of Asylum", getController()));
-		reduce = reduce || (source.getController() == getController() && AllZoneUtil.isCardInPlay("Light of Sanction", getController()));
-		return reduce;
+    	if(!isCreature()) { //and not a planeswalker
+    		if((this.isCreature() && source.isCreature() && 
+				AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this)))return 0;
+    	
+    		if((!isCombat && AllZoneUtil.isCardInPlay("Mark of Asylum", getController())))return 0;
+    	
+    		if((source.getController().isPlayer(getController()) && AllZoneUtil.isCardInPlay("Light of Sanction", getController())))
+    			return 0;
+    	
+    		if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell() 
+    			&& restDamage > 0) restDamage = restDamage - 1;
+    	} //Creature end
+    	
+		if (AllZoneUtil.isCardInPlay("Energy Storm") && source.isSpell()) return 0;
+    	
+		return restDamage;
     }
     
     public int preventDamage(final int damage, Card source, boolean isCombat) {
     	int restDamage = damage;
     	
-    	if (AllZoneUtil.isCardInPlay("Energy Storm") && source.isSpell()) return 0;
-    	
-    	if( preventAllDamageToCard(source, isCombat)) {
-    		return 0;
-        }
-    	
-    	if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell() 
-    			&& restDamage > 0) restDamage = restDamage - 1;
+    	restDamage = staticDamagePrevention(restDamage, source, isCombat);
     	
     	if(restDamage >= preventNextDamage) {
     		restDamage = restDamage - preventNextDamage;

@@ -454,7 +454,7 @@ public class CardFactoryUtil {
         
         //Battle stats increasing keywords
         if (c.hasKeyword("Double Strike")) value += power * 15;
-        value += c.getKeywordMagnitute("Bushido") * 20;
+        value += c.getKeywordMagnitude("Bushido") * 20;
         value += c.getAmountOfKeyword("Flanking") * 20;
         
         //Other good keywords
@@ -465,8 +465,8 @@ public class CardFactoryUtil {
         if (c.hasKeyword("Trample")) value += power * 3;
         if (c.hasKeyword("Vigilance")) value += power * 5 + toughness * 5;
         if (c.hasKeyword("Wither")) value += power * 10;
-        value += c.getKeywordMagnitute("Rampage");
-        value += c.getKeywordMagnitute("Annihilator") * 30;
+        value += c.getKeywordMagnitude("Rampage");
+        value += c.getKeywordMagnitude("Annihilator") * 30;
         if (c.hasKeyword("Changeling")) value += 5;
         if (c.hasKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat") && power > 0) value += 15;
         if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.") && power > 0) value += 2;
@@ -4493,19 +4493,6 @@ public class CardFactoryUtil {
 		}
     	
     	return list;
-    }
-    
-    public static int getTotalBushidoMagnitude(Card c) {
-        int count = 0;
-        ArrayList<String> keywords = c.getKeyword();
-        for(String kw:keywords) {
-            if(kw.contains("Bushido")) {
-                String[] parse = kw.split(" ");
-                String s = parse[1];
-                count += Integer.parseInt(s);
-            }
-        }
-        return count;
     }
     
     public static ArrayList<Ability> getBushidoEffects(Card c) {

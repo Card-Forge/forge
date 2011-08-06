@@ -471,8 +471,8 @@ public class CombatUtil {
         
         if(!CardFactoryUtil.canDamage(defender, attacker)) return false;
         
-        int defBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(defender);
-        int attBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(attacker);
+        int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
+        int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
         
         int defenderDamage = defender.getNetAttack() - flankingMagnitude + defBushidoMagnitude;
         int attackerDamage = attacker.getNetAttack() + attBushidoMagnitude;
@@ -576,8 +576,8 @@ public class CombatUtil {
         
         if(!CardFactoryUtil.canDamage(attacker,defender)) return false;
         
-        int defBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(defender);
-        int attBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(attacker);
+        int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
+        int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
         
         int defenderDamage = defender.getNetAttack() - flankingMagnitude + defBushidoMagnitude;
         int attackerDamage = attacker.getNetAttack() + attBushidoMagnitude;
