@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+lightkeeper_of_emeria.jpg		http://www.wizards.com/global/images/magic/general/lightkeeper_of_emeria.jpg
 bloodcurdling_scream.jpg		http://www.wizards.com/global/images/magic/general/bloodcurdling_scream.jpg
 enrage.jpg		http://www.wizards.com/global/images/magic/general/enrage.jpg
 heat_ray.jpg		http://www.wizards.com/global/images/magic/general/heat_ray.jpg

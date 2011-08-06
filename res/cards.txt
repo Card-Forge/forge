@@ -1,3 +1,11 @@
+Lightkeeper of Emeria
+3 W
+Creature Angel
+When Lightkeeper of Emeria enters the battlefield, you gain 2 life for each time it was kicked.
+2/4
+Flying
+Multikicker W
+
 Basilisk Collar
 1
 Artifact Equipment

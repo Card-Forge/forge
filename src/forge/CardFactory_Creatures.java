@@ -17320,6 +17320,32 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if (cardName.equals("Lightkeeper of Emeria"))
+        {
+        	final Ability ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                	AllZone.GameAction.getPlayerLife(card.getController()).addLife(card.getMultiKickerMagnitude() * 2);
+                    card.setMultiKickerMagnitude(0);
+                }
+            };
+            StringBuilder sb = new StringBuilder();
+            sb.append("Lightkeeper of Emeria enters the battlefield and ");
+            sb.append(card.getController());
+            sb.append(" gains 2 life for each time it was kicked.");
+            ability.setStackDescription(sb.toString());
+            
+            final Command comesIntoPlay = new Command() {
+                private static final long serialVersionUID = 4418758359403878255L;
+
+                public void execute() {
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {
