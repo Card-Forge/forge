@@ -67,6 +67,7 @@ Ashen-Skin Zubera
 Ashenmoor Cohort
 Ashnod's Transmogrant
 Assault Zeppelid
+Astral Steel
 Aura Blast
 Aura Gnarlid
 Auramancer
@@ -178,8 +179,10 @@ Burst Lightning
 Burst of Speed
 Cackling Flames
 Cackling Imp
+Cadaver Imp
 Cadaverous Knight
 Cagemail
+Call to Glory
 Caller of Gales
 Cancel
 Canopy Spider
@@ -502,6 +505,7 @@ Giant Tortoise
 Giant Warthog
 Gibbering Kami
 Gift of Granite
+Gleam of Resistance
 Glimmerdust Nap
 Glimmering Angel
 Glintwing Invoker
@@ -544,6 +548,7 @@ Gorger Wurm
 Gorilla Chieftain
 Gorilla Warrior
 Granger Guildmage
+Grapeshot
 Grappler Spider
 Gravedigger
 Gravelgill Axeshark
@@ -571,6 +576,7 @@ Hagra Crocodile
 Halberdier
 Halimar Depths
 Halimar Wavewatch
+Hammerhead Shark
 Hand of Death
 Harrow
 Harvest Gwyllion
@@ -665,6 +671,7 @@ Juvenile Gloomwidow
 Jwari Scuttler
 Kabira Crossroads
 Kabuto Moth
+Kaleidostone
 Kami of Ancient Law
 Kami of Empty Graves
 Kathari Screecher
@@ -794,6 +801,7 @@ Mire Boa
 Miscalculation
 Misshapen Fiend
 Mist Leopard
+Mnemonic Wall
 Moaning Spirit
 Mob Justice
 Mogg War Marshal
@@ -986,6 +994,7 @@ Ravenous Skirge
 Razorfin Hunter
 Razorfoot Griffin
 Razortooth Rats
+Reaping the Graves
 Reckless Scholar
 Recover
 Red Cliffs Armada
@@ -1065,6 +1074,7 @@ Scare Tactics
 Scarwood Goblins
 Scarwood Treefolk
 Scathe Zombies
+Scattershot
 Scavenged Weaponry
 Scavenging Scarab
 Scorching Spear
@@ -1088,6 +1098,7 @@ Seat of the Synod
 Secluded Steppe
 Seething Song
 Seismic Strike
+Sejiri Steppe
 Selesnya Sanctuary
 Selesnya Signet
 Sengir Bats
@@ -1204,9 +1215,11 @@ Spitting Earth
 Spitting Gourna
 Sporecap Spider
 Spotted Griffin
+Spreading Seas
 Spring of Eternal Peace
 Sprout
 Sprout Swarm
+Sprouting Vines
 Squall Drifter
 Squee's Embrace
 Squire
@@ -1264,6 +1277,7 @@ Tel-Jilad Archers
 Tel-Jilad Chosen
 Tel-Jilad Exile
 Tel-Jilad Outrider
+Temporal Fissure
 Temporal Spring
 Tendrils of Corruption
 Terminate
@@ -1300,8 +1314,10 @@ Torch Drake
 Torii Watchward
 Torment
 Tormented Angel
+Tormod's Crypt
 Torpor Dust
 Tortoise Formation
+Totem-Guide Hartebeest
 Touch of Brilliance
 Touch of Invisibility
 Tower Drake
@@ -1378,6 +1394,7 @@ Vigilance
 Vigilant Drake
 Villainous Ogre
 Vine Trellis
+Violent Outburst
 Viridian Acolyte
 Viridian Joiner
 Virtuous Charge

@@ -7,6 +7,7 @@ Adarkar Valkyrie
 Adun Oakenshield
 Ajani Goldmane
 Ajani Vengeant
+Akroma's Memorial
 Akroma's Vengeance
 Akroma, Angel of Fury
 Akroma, Angel of Wrath
@@ -38,6 +39,10 @@ Armistice
 Armored Guardian
 Ashes to Ashes
 Augury Adept
+Avatar of Fury
+Avatar of Might
+Avatar of Will
+Avatar of Woe
 Aven Brigadier
 Avenger of Zendikar
 Awakening Zone
@@ -106,6 +111,7 @@ Cateran Slaver
 Celestial Colonnade
 Cemetery Reaper
 Chainer, Dementia Master
+Chalice of the Void
 Chameleon Colossus
 Chandra Nalaar
 Char
@@ -139,6 +145,7 @@ Cromat
 Crucible of Fire
 Cruel Bargain
 Cruel Tutor
+Cruel Ultimatum
 Crusade
 Crush of Wurms
 Crypt of Agadeem
@@ -153,6 +160,7 @@ Darksteel Colossus
 Darksteel Forge
 Darkwater Catacombs
 Dauntless Dourbark
+Dauntless Escort
 Day of Judgment
 Death Grasp
 Deathless Angel
@@ -168,6 +176,7 @@ Divinity of Pride
 Djinn of the Lamp
 Do or Die
 Donate
+Doomed Necromancer
 Door to Nothingness
 Doran, the Siege Tower
 Doubling Season
@@ -177,6 +186,7 @@ Dragon Engine
 Dragon Roost
 Dragonmaster Outcast
 Dragonskull Summit
+Dragonstorm
 Drifting Djinn
 Drowned Catacomb
 Dwarven Pony
@@ -207,6 +217,7 @@ Epic Proportions
 Epic Struggle
 Essence Sliver
 Eternal Flame
+Eternity Vessel
 Ethersworn Adjudicator
 Evacuation
 Eviscerator
@@ -236,6 +247,7 @@ Flooded Grove
 Flooded Strand
 Flowstone Mauler
 Flowstone Overseer
+Flowstone Slide
 Flowstone Wyvern
 Font of Mythos
 Forbidden Orchard
@@ -274,6 +286,7 @@ Godless Shrine
 Godsire
 Goliath Sphinx
 Granite Gargoyle
+Grave-Shell Scarab
 Graven Cairns
 Great Sable Stag
 Greener Pastures
@@ -322,6 +335,7 @@ Ifh-Biff Efreet
 Illusions of Grandeur
 Imperial Hellkite
 Imperial Seal
+Implements of Sacrifice
 Incendiary Command
 Indomitable Ancients
 Infernal Contract
@@ -359,6 +373,7 @@ Kazandu Tuskcaller
 Kazuul Warlord
 Keening Stone
 Keiga, the Tide Star
+Khalni Hydra
 Kher Keep
 Kiki-Jiki, Mirror Breaker
 Kinsbaile Borderguard
@@ -379,12 +394,14 @@ Krosan Colossus
 Lady Zhurong, Warrior Queen
 Laquatus's Champion
 Last Word
+Lavaclaw Reaches
 Lavalanche
 Leaf-Crowned Elder
 Legacy Weapon
 Lhurgoyf
 Lich Lord of Unx
 Lichenthrope
+Life from the Loam
 Lifeblood
 Lighthouse Chronologist
 Lightning Angel
@@ -407,6 +424,7 @@ Lu Meng, Wu General
 Lu Xun, Scholar General
 Mad Auntie
 Madrush Cyclops
+Maelstrom Nexus
 Maelstrom Pulse
 Magnivore
 Magus of the Bazaar
@@ -443,6 +461,7 @@ Mikokoro, Center of the Sea
 Mind Shatter
 Mind Spring
 Mind Twist
+Mind's Desire
 Mirri the Cursed
 Mirri, Cat Warrior
 Mirror-Sigil Sergeant
@@ -470,6 +489,7 @@ Mystic Snake
 Mythic Proportions
 Nantuko Shade
 Nath of the Gilt-Leaf
+Natural Order
 Natural Selection
 Nature's Cloak
 Near-Death Experience
@@ -487,13 +507,16 @@ Niv-Mizzet, the Firemind
 Noble Hierarch
 Noble Panther
 Nova Chaser
+Novablast Wurm
 Nyxathid
+Oath of Druids
 Ob Nixilis, the Fallen
 Obliterate
 Oboro, Palace in the Clouds
 Obsidian Fireheart
 Okina, Temple to the Grandfathers
 Old Man of the Sea
+Omnath, Locus of Mana
 Oran-Rief, the Vastwood
 Order of Whiteclay
 Orgg
@@ -635,6 +658,7 @@ Soltari Champion
 Soltari Emissary
 Sorceress Queen
 Soulscour
+Sovereigns of Lost Alara
 Sower of Temptation
 Spawnwrithe
 Spectral Force
@@ -674,8 +698,11 @@ Sunweb
 Supreme Exemplar
 Survival of the Fittest
 Swans of Bryn Argoll
+Sword of Fire and Ice
+Sword of Light and Shadow
 Sygg, River Guide
 Sylvan Tutor
+Symbiotic Wurm
 Taiga
 Take Possession
 Talas Warrior
@@ -683,6 +710,7 @@ Taoist Mystic
 Tarmogoyf
 Tarox Bladewing
 Teeka's Dragon
+Teferi's Puzzle Box
 Temple Garden
 Temporal Manipulation
 Terra Stomper
@@ -749,6 +777,7 @@ Vedalken Archmage
 Veldrane of Sengir
 Vendilion Clique
 Vengeful Firebrand
+Vengevine
 Verdant Catacombs
 Verduran Enchantress
 Vexing Beetle

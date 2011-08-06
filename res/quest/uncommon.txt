@@ -8,6 +8,7 @@ Absolute Law
 Acidic Soil
 Act of Treason
 Adarkar Sentinel
+Affa Guard Hound
 Air Elemental
 Akoum Refuge
 Alaborn Zealot
@@ -96,6 +97,7 @@ Borrowing 100,000 Arrows
 Bottle Gnomes
 Bound in Silence
 Braidwood Cup
+Brain Freeze
 Branchsnap Lorian
 Brave the Elements
 Brawn
@@ -185,6 +187,7 @@ Death's Shadow
 Deathmark
 Deep-Sea Serpent
 Deepwood Tantiv
+Demonic Consultation
 Demonic Tutor
 Desert Drake
 Desert Twister
@@ -345,6 +348,7 @@ Harmonize
 Haunted Angel
 Havenwood Battleground
 Hawkeater Moth
+Haze of Rage
 Hazerider Drake
 Headhunter
 Hearthfire Hobgoblin
@@ -371,12 +375,14 @@ Hoverguard Observer
 Howl of the Night Pack
 Hulking Cyclops
 Hunding Gjornersen
+Hunting Pack
 Hurricane
 Hypnotic Specter
 Icatian Priest
 Ice Storm
 Icy Manipulator
 Igneous Golem
+Ignite Memories
 Ihsan's Shade
 Imperial Recruiter
 Imperiosaur
@@ -713,9 +719,11 @@ Staunch Defenders
 Steam Spitter
 Steel Wall
 Stern Judge
+Stitch Together
 Stolen Grain
 Stone Spirit
 Stonecloaker
+Storm Entity
 Storm Seeker
 Storm Shaman
 Stormcloud Djinn
@@ -750,6 +758,7 @@ Tel-Jilad Justice
 Telim'Tor's Darts
 Tempest Drake
 Tempest of Light
+Tendrils of Agony
 The Lady of the Mountain
 The Rack
 Thief of Hope
@@ -823,6 +832,7 @@ Voice of Grace
 Voice of Law
 Voice of Reason
 Voice of Truth
+Volcanic Awakening
 Volcanic Fallout
 Volcanic Geyser
 Voltaic Key
@@ -868,8 +878,10 @@ Wild Ox
 Wildfire Emissary
 Wilt-Leaf Cavaliers
 Wind Dancer
+Windfall
 Windreaper Falcon
 Windstorm
+Wing Shards
 Wings of Aesthir
 Winter's Grasp
 Wirewood Hivemaster
