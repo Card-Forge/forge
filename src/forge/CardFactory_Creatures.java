@@ -18033,6 +18033,74 @@ public class CardFactory_Creatures {
 	    	  card.addLeavesPlayCommand(leavesPlay);
 	      }//*************** END ************ END **************************
 	       
+	     //*************** START *********** START **************************
+          else if(cardName.equals("Thoughtcutter Agent"))
+          {
+        final SpellAbility ability = new Ability_Tap(card, "U B")
+            {
+            private static final long serialVersionUID = -3880035465617987801L;
+          public void resolve()
+              {
+                String opponent = AllZone.GameAction.getOpponent(card.getController());
+                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
+                AllZone.GameAction.getPlayerLife(opponent).subtractLife(1);
+                Card[] handLook= hand.getCards();
+                if(opponent.equals(Constant.Player.Computer))
+                {
+                   AllZone.Display.getChoice("Look", handLook);
+                }
+                                      
+              }
+              public boolean canPlayAI()
+              {
+                //computer should play ability if this creature doesn't attack
+                Combat c = ComputerUtil.getAttackers();
+                CardList list = new CardList(c.getAttackers());
+
+                //could this creature attack?, if attacks, do not use ability
+                return (! list.contains(card));
+              }
+            };//SpellAbility
+            card.addSpellAbility(ability);
+            ability.setDescription("U B, tap: Target player loses 1 life and reveals his or her hand.");
+            ability.setStackDescription(card.getName() + " - Opponent loses 1 life.");
+          }//*************** END ************ END **************************
+	       
+	     //*************** START *********** START **************************
+          else if(cardName.equals("Singe-Mind Ogre"))
+           {
+             final SpellAbility ability = new Ability(card, "0")
+             {
+               public void resolve()
+               {
+                  Card choice = null;
+                  String opponent = AllZone.GameAction.getOpponent(card.getController());
+                   PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
+                   Card[] handChoices = hand.getCards();
+                   choice = CardUtil.getRandom(handChoices);
+                   handChoices[0]=choice;
+                   for (int i=1; i<handChoices.length; i++)
+                   {
+                      handChoices[i]=null;
+                   }
+                   AllZone.Display.getChoice("Random card", handChoices);                    
+                   AllZone.GameAction.getPlayerLife(opponent).subtractLife(CardUtil.getConvertedManaCost(choice.getManaCost()));
+               }//resolve()
+             };
+             Command intoPlay = new Command()
+             {
+          
+             private static final long serialVersionUID = -4833144157620224716L;
+
+             public void execute()
+               {
+                 ability.setStackDescription("Singe-Mind Ogre - target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.");
+                 AllZone.Stack.add(ability);
+               }
+             };
+             card.addComesIntoPlayCommand(intoPlay);
+          }//*************** END ************ END **************************
+	       
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
 	      if (shouldCycle(card) != -1)

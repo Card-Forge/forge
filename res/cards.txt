@@ -1,3 +1,15 @@
+Singe-Mind Ogre
+2 B R
+Creature Ogre Mutant
+When Singe-Mind Ogre comes into play, target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.
+3/2
+
+Thoughtcutter Agent
+U B
+Artifact Creature Human Rogue
+no text
+1/1
+
 Earthbind
 R
 Enchantment Aura
