@@ -143,10 +143,15 @@ public class AbilityFactory_AlterLife {
 	
 	public static boolean gainLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		Random r = new Random();
+		HashMap<String,String> params = af.getMapParams();
 		Ability_Cost abCost = sa.getPayCosts();
 		final Card source = sa.getSourceCard();
 		int life = AllZone.ComputerPlayer.getLife();
+		int lifeAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("LifeAmount"), sa);
 		String amountStr = af.getMapParams().get("LifeAmount");
+		
+		//don't use it if no life to gain
+		if (lifeAmount <= 0) return false;
 
 		if (abCost != null){
 			// AI currently disabled for these costs
