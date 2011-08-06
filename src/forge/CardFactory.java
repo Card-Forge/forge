@@ -21133,6 +21133,43 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(runtime);
 
         } //*************** END ************ END **************************
+      //*************** START *********** START **************************
+        else if(cardName.equals("Tormod's Crypt")) {
+        	/*
+        	 * Tap, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.
+        	 */
+        	final Ability_Tap ability = new Ability_Tap(card, "0") {
+
+				private static final long serialVersionUID = -8877371657709894494L;
+
+				@Override
+        		public void resolve() {
+					if (card.getController().equals(Constant.Player.Computer))
+						setTargetPlayer(Constant.Player.Human);
+					
+        			final String player = getTargetPlayer();
+        			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+        			//sac tormod's crypt
+        			AllZone.GameAction.sacrifice(card);
+        			
+        			for(Card c:grave) {
+        				AllZone.GameAction.removeFromGame(c);
+        			}
+        			AllZone.getZone(Constant.Zone.Graveyard, player).reset();
+        			AllZone.GameAction.shuffle(player);
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			PlayerZone grave = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
+        			return grave.size() < 15;
+        		}
+
+        	};//SpellAbility
+        	ability.setDescription("Tap, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.");
+        	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+        	card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
