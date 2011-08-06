@@ -1,3 +1,34 @@
+Call to Heel
+1 U
+Instant
+Return target creature to its owner's hand. Its controller draws a card.
+spBounceTgt:Creature:Hand:Drawback$TgtCtrlrDraw/1
+
+Clutch of the Undercity
+1 U U B
+Instant
+Return target permanent to its owner's hand. Its controller loses 3 life.
+spBounceTgt:Permanent:Hand:Drawback$TgtCtrlrLoseLife/3
+Transmute: 1 U B
+
+Last Breath
+1 W
+Instant
+Exile target creature with power 2 or less. Its controller gains 4 life.
+spBounceTgt:Creature.powerLTE2:Exile:Drawback$TgtCtrlrGainLife/4
+
+Recoil
+1 U B
+Instant
+Return target permanent to its owner's hand. Then that player discard a card.
+spBounceTgt:Permanent:Hand:Drawback$TgtOwnerDiscard/1
+
+Snap
+1 U
+Instant
+Return target creature to its owner's hand. Untap up to two lands.
+spBounceTgt:Creature:Hand:Drawback$YouUntapUpTo/2/Land
+
 Stampede Driver
 G
 Creature Human Spellshaper
