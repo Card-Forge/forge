@@ -241,6 +241,7 @@ res/cardsfolder/ambassador_laquatus.txt -text svneol=native#text/plain
 res/cardsfolder/ambassador_oak.txt -text svneol=native#text/plain
 res/cardsfolder/ambitions_cost.txt -text svneol=native#text/plain
 res/cardsfolder/ambush.txt svneol=native#text/plain
+res/cardsfolder/ambush_commander.txt -text svneol=native#text/plain
 res/cardsfolder/ambush_party.txt -text svneol=native#text/plain
 res/cardsfolder/amnesia.txt -text svneol=native#text/plain
 res/cardsfolder/amok.txt -text svneol=native#text/plain
