@@ -509,7 +509,7 @@ public class AbilityFactory_DealDamage {
 			desc = params.get("ValidDescription");
 		int dmg = getNumDamage(sa);
 
-		sb.append(name).append(" - Deals "+dmg+" to "+desc);
+		sb.append(name).append(" - Deals "+dmg+" damage to "+desc);
 
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null) {
