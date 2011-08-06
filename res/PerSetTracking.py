@@ -9,10 +9,10 @@ if not os.path.exists(pathToMtgData) :
         raw_input("")
         sys.exit()
 
-if not os.path.isdir(sys.path[0] + "\\PerSetTracking Results") :
-        os.mkdir(sys.path[0] + "\\PerSetTracking Results")
+if not os.path.isdir(sys.path[0] + os.sep + 'PerSetTracking Results') :
+        os.mkdir(sys.path[0] + os.sep + 'PerSetTracking Results')
 
-forgeFolderContents = os.listdir(sys.path[0] + "\\cardsfolder")
+forgeFolderContents = os.listdir(sys.path[0] + os.sep + "cardsfolder")
 forgeFolderFiles = []
 forgeCards = []
 mtgDataCards = {}
@@ -39,9 +39,10 @@ with open(pathToMtgData) as mtgdata :
                 if hasFetchedSets :
                         if not hasFetchedCardName :
                                 tmpName = line
+                                tmpName = tmpName.replace('\n','')
                                 hasFetchedCardName = True
                         if line == "\n" :
-                                mtgDataCards[tmpName] = prevline
+                                mtgDataCards[tmpName] = prevline.replace('\n', '')
                                 hasFetchedCardName = False
 
                 prevline = line
@@ -49,13 +50,15 @@ with open(pathToMtgData) as mtgdata :
 #Parse Forge
 print("Parsing Forge")
 for i in forgeFolderContents :
-        if os.path.isfile(sys.path[0] + "\\cardsfolder\\" + i) == True :
+        if os.path.isfile(sys.path[0] + os.sep + "cardsfolder" + os.sep + i) == True :
                 forgeFolderFiles.append(i)
 for file in forgeFolderFiles :
-        with open(sys.path[0] + "\\cardsfolder\\" + file) as currentForgeCard :
+        with open(sys.path[0] + os.sep + "cardsfolder" + os.sep + file) as currentForgeCard :
                 tmpname = currentForgeCard.readline()
-                tmpname = tmpname[5:len(tmpname)].replace("AE","Ae")
+                tmpname = tmpname[5:].replace("AE","Ae")
+                tmpname = tmpname.replace('\r\n', '')
                 forgeCards.append(tmpname)
+
                 
 #Compare datasets and output results
 print("Comparing datasets and outputting results.")
@@ -79,17 +82,17 @@ for currentSet in setCodes :
 		currentMissing.sort()
 		currentImplemented.sort()
 		
-        with open(sys.path[0] + "\PerSetTracking Results\set_" + currentSet + ".txt","w") as output :
+        with open(sys.path[0] + os.sep + "PerSetTracking Results" + os.sep + "set_" + currentSet + ".txt", "w") as output :
                 output.write("Implemented (" + str(len(currentImplemented)) + "):\n")
                 for everyImplemented in currentImplemented :
-                        output.write(everyImplemented)
+                        output.write(everyImplemented + '\n')
                 output.write("\n")
                 output.write("Missing (" + str(len(currentMissing)) + "):\n")
                 for everyMissing in currentMissing :
-                        output.write(everyMissing)
+                        output.write(everyMissing + '\n')
                 output.write("\n")
                 output.write("Total: " + str(total) + "\n")
-                output.write("Percentage implemented: " + str(percentage) + "%\n")
+                output.write("Percentage implemented: " + str(round(percentage,2)) + "%\n")
         totalData[currentSet] = (len(currentImplemented),len(currentMissing),total,percentage)
         del currentMissing[:]
         del currentImplemented[:]
@@ -102,13 +105,13 @@ totalPercentage = 0
 totalMissing = 0
 totalImplemented = 0
 fullTotal = 0
-with open(sys.path[0] + "\PerSetTracking Results\CompleteStats.txt","w") as statsfile:
+with open(sys.path[0] + os.sep + "PerSetTracking Results" + os.sep + "CompleteStats.txt", "w") as statsfile:
         statsfile.write("Set: Implemented (Missing) / Total = Percentage Implemented\n")
         for dataKey in sorted(totalData.keys()) :
                 totalImplemented += totalData[dataKey][0]
                 totalMissing += totalData[dataKey][1]
                 fullTotal += totalData[dataKey][2]
-                statsfile.write(dataKey + ": " + str(totalData[dataKey][0]) + " (" + str(totalData[dataKey][1]) + ") / " + str(totalData[dataKey][2]) + " = " + str(round(totalData[dataKey][3])) + "%\n")
+                statsfile.write(dataKey + ": " + str(totalData[dataKey][0]) + " (" + str(totalData[dataKey][1]) + ") / " + str(totalData[dataKey][2]) + " = " + str(round(totalData[dataKey][3], 2)) + "%\n")
         totalPercentage = totalImplemented / fullTotal
         statsfile.write("\n")
         statsfile.write("Total over all sets: " + str(totalImplemented) + " (" + str(totalMissing) + ") / " + str(fullTotal))
