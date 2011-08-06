@@ -24,6 +24,9 @@ public class CombatUtil {
         if (combat.getAllBlockers().size() > 0 && AllZoneUtil.isCardInPlay("Silent Arbiter"))
         	return false;
         
+        if (combat.getAllBlockers().size() > 0 && AllZoneUtil.isCardInPlay("Dueling Grounds"))
+        	return false;
+        
 		
 		return canBlock(blocker);
 	}
@@ -337,6 +340,9 @@ public class CombatUtil {
         	return false;
         
         if (combat.getAttackers().length > 0 && AllZoneUtil.isCardInPlay("Silent Arbiter"))
+        	return false;
+        
+        if (combat.getAttackers().length > 0 && AllZoneUtil.isCardInPlay("Dueling Grounds"))
         	return false;
     	
     	return canAttack(c);

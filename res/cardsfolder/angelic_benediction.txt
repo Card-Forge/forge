@@ -2,7 +2,7 @@ Name:Angelic Benediction
 ManaCost:3 W
 Types:Enchantment
 Text:no text
-K:WheneverKeyword:Attack - Alone:No_Initiator:Play:StatsPumpEOT/1/1:Initiating_Card:ASAP:No_Condition:Initiator - OwnedByController:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
+K:Exalted
 K:WheneverKeyword:Attack - Alone:No_Initiator:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:Initiator - OwnedByController:Whenever a creature you control attacks alone, you may tap target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_benediction.jpg

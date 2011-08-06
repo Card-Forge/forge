@@ -1349,6 +1349,7 @@ res/cardsfolder/dry_spell.txt -text svneol=native#text/plain
 res/cardsfolder/dryad_arbor.txt -text svneol=native#text/plain
 res/cardsfolder/dryad_sophisticate.txt -text svneol=native#text/plain
 res/cardsfolder/dryads_favor.txt -text svneol=native#text/plain
+res/cardsfolder/dueling_grounds.txt -text svneol=native#text/plain
 res/cardsfolder/duergar_assailant.txt -text svneol=native#text/plain
 res/cardsfolder/duergar_cave_guard.txt -text svneol=native#text/plain
 res/cardsfolder/dune_brood_nephilim.txt -text svneol=native#text/plain
@@ -5983,6 +5984,7 @@ res/quest/themes/Domain.thm -text
 res/quest/themes/Elves[!!-~]G.thm -text
 res/quest/themes/Enchantments[!!-~]WG.thm -text
 res/quest/themes/Equipment[!!-~]W.thm -text
+res/quest/themes/Exalted[!!-~]WUG.thm -text
 res/quest/themes/Flying[!!-~]W.thm -text
 res/quest/themes/Flying[!!-~]WR.thm -text
 res/quest/themes/Flying[!!-~]WU.thm -text
