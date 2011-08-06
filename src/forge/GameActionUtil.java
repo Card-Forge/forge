@@ -988,7 +988,7 @@ public class GameActionUtil {
 		list = list.getName("Emberstrike Duo");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Black)) {
+			if(c.isBlack()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final Command untilEOT = new Command() {
@@ -1018,7 +1018,7 @@ public class GameActionUtil {
 			}//if
 		}
 
-		if(CardUtil.getColors(c).contains(Constant.Color.Red)) {
+		if(c.isRed()) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 				final Command untilEOT = new Command() {
@@ -1060,7 +1060,7 @@ public class GameActionUtil {
 		list = list.getName("Gravelgill Duo");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Blue)) {
+			if(c.isBlue()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final Command untilEOT = new Command() {
@@ -1092,7 +1092,7 @@ public class GameActionUtil {
 			}//if
 		}
 
-		if(CardUtil.getColors(c).contains(Constant.Color.Black)) {
+		if(c.isBlack()) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 				final Command untilEOT = new Command() {
@@ -1160,7 +1160,7 @@ public class GameActionUtil {
 		list = list.getName("Safehold Duo");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Green)) {
+			if(c.isGreen()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final Command untilEOT = new Command() {
@@ -1192,7 +1192,7 @@ public class GameActionUtil {
 			}//if
 		}
 
-		if(CardUtil.getColors(c).contains(Constant.Color.White)) {
+		if(c.isWhite()) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 				final Command untilEOT = new Command() {
@@ -1234,7 +1234,7 @@ public class GameActionUtil {
 		list = list.getName("Tattermunge Duo");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Red)) {
+			if(c.isRed()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final Command untilEOT = new Command() {
@@ -1266,7 +1266,7 @@ public class GameActionUtil {
 			}//if
 		}
 
-		if(CardUtil.getColors(c).contains(Constant.Color.Green)) {
+		if(c.isGreen()) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 				final Command untilEOT = new Command() {
@@ -1308,7 +1308,7 @@ public class GameActionUtil {
 		list = list.getName("Thistledown Duo");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.White)) {
+			if(c.isWhite()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final Command untilEOT = new Command() {
@@ -1340,7 +1340,7 @@ public class GameActionUtil {
 			}//if
 		}
 
-		if(CardUtil.getColors(c).contains(Constant.Color.Blue)) {
+		if(c.isBlue()) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 				final Command untilEOT = new Command() {
@@ -1667,8 +1667,7 @@ public class GameActionUtil {
 		list = list.getName("Shorecrasher Mimic");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Blue)
-					&& CardUtil.getColors(c).contains(Constant.Color.Green)) {
+			if(c.isBlue() && c.isGreen()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final Command untilEOT = new Command() {
@@ -1716,8 +1715,7 @@ public class GameActionUtil {
 		list = list.getName("Battlegate Mimic");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Red)
-					&& CardUtil.getColors(c).contains(Constant.Color.White)) {
+			if(c.isRed() && c.isWhite()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final Command untilEOT = new Command() {
@@ -1765,8 +1763,7 @@ public class GameActionUtil {
 		list = list.getName("Nightsky Mimic");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Black)
-					&& CardUtil.getColors(c).contains(Constant.Color.White)) {
+			if(c.isBlack() && c.isWhite()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final Command untilEOT = new Command() {
@@ -1814,8 +1811,7 @@ public class GameActionUtil {
 		list = list.getName("Riverfall Mimic");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Blue)
-					&& CardUtil.getColors(c).contains(Constant.Color.Red)) {
+			if(c.isBlue() && c.isRed()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final Command untilEOT = new Command() {
@@ -1863,8 +1859,7 @@ public class GameActionUtil {
 		list = list.getName("Woodlurker Mimic");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Black)
-					&& CardUtil.getColors(c).contains(Constant.Color.Green)) {
+			if(c.isBlack() && c.isGreen()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 					final Command untilEOT = new Command() {
@@ -1969,7 +1964,7 @@ public class GameActionUtil {
 		list = list.getName("Belligerent Hatchling");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Red)) {
+			if(c.isRed()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 
@@ -1988,7 +1983,7 @@ public class GameActionUtil {
 			}//if
 		}
 
-		if(CardUtil.getColors(c).contains(Constant.Color.White)) {
+		if(c.isWhite()) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 
@@ -2020,7 +2015,7 @@ public class GameActionUtil {
 		list = list.getName("Noxious Hatchling");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Black)) {
+			if(c.isBlack()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 
@@ -2039,7 +2034,7 @@ public class GameActionUtil {
 			}//if
 		}
 
-		if(CardUtil.getColors(c).contains(Constant.Color.Green)) {
+		if(c.isGreen()) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 
@@ -2071,7 +2066,7 @@ public class GameActionUtil {
 		list = list.getName("Sturdy Hatchling");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Blue)) {
+			if(c.isBlue()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 
@@ -2090,7 +2085,7 @@ public class GameActionUtil {
 			}//if
 		}
 
-		if(CardUtil.getColors(c).contains(Constant.Color.Green)) {
+		if(c.isGreen()) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 
@@ -2122,7 +2117,7 @@ public class GameActionUtil {
 		list = list.getName("Voracious Hatchling");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Black)) {
+			if(c.isBlack()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 
@@ -2141,7 +2136,7 @@ public class GameActionUtil {
 			}//if
 		}
 
-		if(CardUtil.getColors(c).contains(Constant.Color.White)) {
+		if(c.isWhite()) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 
@@ -2253,7 +2248,7 @@ public class GameActionUtil {
 
         list = list.getName("Cinder Pyromancer");
 
-        if (list.size() > 0 && CardUtil.getColors(c).contains(Constant.Color.Red)) {
+        if (list.size() > 0 && c.isRed()) {
 
             for (int i = 0; i < list.size(); i++) {
                 final Card card = list.get(i);
@@ -2413,7 +2408,7 @@ public class GameActionUtil {
 
 		list = list.getName("Sol'kanar the Swamp King");
 
-		if(list.size() > 0 && CardUtil.getColors(c).contains(Constant.Color.Black)) {
+		if(list.size() > 0 && c.isBlack()) {
 			final Card card = list.get(0);
 			final String controller = card.getController();
 
@@ -2613,7 +2608,7 @@ public class GameActionUtil {
 
 		list = list.getName("Merrow Levitator");
 
-		if(CardUtil.getColors(c).contains(Constant.Color.Blue)) {
+		if(c.isBlue()) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 
@@ -2669,11 +2664,7 @@ public class GameActionUtil {
 
 		list = list.getName("Quirion Dryad");
 
-		if(list.size() > 0
-				&& (CardUtil.getColors(c).contains(Constant.Color.White)
-						|| CardUtil.getColors(c).contains(Constant.Color.Blue)
-						|| CardUtil.getColors(c).contains(Constant.Color.Black) || CardUtil.getColors(c).contains(
-								Constant.Color.Red))) {
+		if(list.size() > 0 && (c.isWhite() ||c.isBlue() || c.isBlack() || c.isRed())) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 
@@ -2702,9 +2693,7 @@ public class GameActionUtil {
 
 		list = list.getName("Mold Adder");
 
-		if(list.size() > 0
-				&& (CardUtil.getColors(c).contains(Constant.Color.Blue) || CardUtil.getColors(c).contains(
-						Constant.Color.Black))) {
+		if(list.size() > 0 && (c.isBlue() || c.isBlack())) {
 			for(int i = 0; i < list.size(); i++) {
 
 				final Card card = list.get(i);
@@ -2736,7 +2725,7 @@ public class GameActionUtil {
 		list = list.getName("Fable of Wolf and Owl");
 
 		if(list.size() > 0) {
-			if(CardUtil.getColors(c).contains(Constant.Color.Blue)) {
+			if(c.isBlue()) {
 				for(int i = 0; i < list.size(); i++) {
 					final Card card = list.get(i);
 
@@ -2755,7 +2744,7 @@ public class GameActionUtil {
 			}//if
 		}
 
-		if(CardUtil.getColors(c).contains(Constant.Color.Green)) {
+		if(c.isGreen()) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);
 
@@ -2776,17 +2765,14 @@ public class GameActionUtil {
 
     public static void playCard_Kor_Firewalker(Card c) {
 
-        final PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
-        final PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+        //final PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+        //final PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
 
-        CardList list = new CardList();
-        list.addAll(play.getCards());
-        list.addAll(comp.getCards());
-        list = list.getName("Kor Firewalker");
+        CardList list = AllZoneUtil.getCardsInPlay("Kor Firewalker");
 
         if (list.size() > 0) {
-            ArrayList<String> cl=CardUtil.getColors(c);
-            if (cl.contains(Constant.Color.Red)) {
+            //ArrayList<String> cl=CardUtil.getColors(c);
+            if (c.isRed()) {
                 for (int i=0;i<list.size();i++) {
                     final Card card = list.get(i);
                     
@@ -9494,7 +9480,7 @@ public class GameActionUtil {
 					blueGreen = blueGreen.filter(new CardListFilter() {
 						public boolean addCard(Card c)
 						{
-							return c.isCreature() && c.isTapped() && (CardUtil.getColors(c).contains(Constant.Color.Blue) || CardUtil.getColors(c).contains(Constant.Color.Green));
+							return c.isCreature() && c.isTapped() && (c.isBlue() || c.isGreen());
 						}
 					});
 					
@@ -13104,9 +13090,7 @@ public class GameActionUtil {
 
 						all = all.filter(new CardListFilter() {
 							public boolean addCard(Card c) {
-								return c.isCreature()
-								&& CardUtil.getColors(c).contains(
-										Constant.Color.Green);
+								return c.isCreature() && c.isGreen();
 							}
 						});
 
@@ -14054,8 +14038,7 @@ public class GameActionUtil {
 					c = creature.get(i);
 					if (CardFactoryUtil.getTopCard(c) != null)
 					{
-						if(CardUtil.getColors(CardFactoryUtil.getTopCard(c)).contains(
-								Constant.Color.Black)) {
+						if((CardFactoryUtil.getTopCard(c)).isBlack()) {
 							c.addSemiPermanentAttackBoost(2);
 							c.addSemiPermanentDefenseBoost(1);
 							c.addExtrinsicKeyword("Flying");
@@ -17634,8 +17617,7 @@ public class GameActionUtil {
 					play.getCards());
 			whitePermanents = whitePermanents.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return CardUtil.getColors(c).contains(
-							Constant.Color.White);
+					return c.isWhite();
 				}
 
 			});
@@ -17668,8 +17650,7 @@ public class GameActionUtil {
 					play.getCards());
 			whitePermanents = whitePermanents.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return CardUtil.getColors(c).contains(
-							Constant.Color.Black);
+					return c.isBlack();
 				}
 
 			});
@@ -17702,8 +17683,7 @@ public class GameActionUtil {
 					play.getCards());
 			whitePermanents = whitePermanents.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return CardUtil.getColors(c).contains(
-							Constant.Color.Blue);
+					return c.isBlue();
 				}
 
 			});
@@ -17736,8 +17716,7 @@ public class GameActionUtil {
 					play.getCards());
 			whitePermanents = whitePermanents.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
-					return CardUtil.getColors(c).contains(
-							Constant.Color.Green);
+					return c.isGreen();
 				}
 
 			});
@@ -19524,8 +19503,7 @@ public class GameActionUtil {
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
-					if(CardUtil.getColors(c).contains(
-							Constant.Color.Green)) {
+					if(c.isGreen()) {
 						c.addSemiPermanentDefenseBoost(2);
 						gloriousAnthemList.add(c);
 					}
@@ -19563,8 +19541,7 @@ public class GameActionUtil {
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
-					if(CardUtil.getColors(c).contains(
-							Constant.Color.Green)) {
+					if(c.isGreen()) {
 						c.addSemiPermanentAttackBoost(1);
 						c.addSemiPermanentDefenseBoost(1);
 						gloriousAnthemList.add(c);
@@ -19604,10 +19581,7 @@ public class GameActionUtil {
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
-					if(CardUtil.getColors(c).contains(
-							Constant.Color.Green)
-							&& !c.getName().equals(
-									"Meng Huo, Barbarian King")) {
+					if(c.isGreen() && !c.getName().equals("Meng Huo, Barbarian King")) {
 						c.addSemiPermanentAttackBoost(1);
 						c.addSemiPermanentDefenseBoost(1);
 						gloriousAnthemList.add(c);
@@ -19670,13 +19644,11 @@ public class GameActionUtil {
 			// reset all cards in list - aka "old" cards
 			for(int i = 0; i < list.size(); i++) {
 				c = list.get(i);
-				if(CardUtil.getColors(c).contains(
-						Constant.Color.Green)) {
+				if(c.isGreen()) {
 					c.addSemiPermanentAttackBoost(-1);
 					c.addSemiPermanentDefenseBoost(-1);
 				}
-				if(CardUtil.getColors(c).contains(
-						Constant.Color.White)) {
+				if(c.isWhite()) {
 					c.addSemiPermanentAttackBoost(-1);
 					c.addSemiPermanentDefenseBoost(-1);
 				}
@@ -19696,13 +19668,11 @@ public class GameActionUtil {
 					c = creature.get(i);
 					if(!c.getName().equals("Tolsimir Wolfblood")
 							&& !c.isFaceDown()) {
-						if(CardUtil.getColors(c).contains(
-								Constant.Color.Green)) {
+						if(c.isGreen()) {
 							c.addSemiPermanentAttackBoost(1);
 							c.addSemiPermanentDefenseBoost(1);
 						}
-						if(CardUtil.getColors(c).contains(
-								Constant.Color.White)) {
+						if(c.isWhite()) {
 							c.addSemiPermanentAttackBoost(1);
 							c.addSemiPermanentDefenseBoost(1);
 						}
@@ -19743,9 +19713,7 @@ public class GameActionUtil {
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
-					if(CardUtil.getColors(c).contains(
-							Constant.Color.Black)
-							&& !c.isFaceDown()) {
+					if(c.isBlack() && !c.isFaceDown()) {
 						c.addSemiPermanentAttackBoost(1);
 						c.addSemiPermanentDefenseBoost(1);
 
@@ -19787,9 +19755,7 @@ public class GameActionUtil {
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
-					if(CardUtil.getColors(c).contains(
-							Constant.Color.White)
-							&& !c.isFaceDown()) {
+					if(c.isWhite() && !c.isFaceDown()) {
 						c.addSemiPermanentAttackBoost(1);
 						c.addSemiPermanentDefenseBoost(1);
 						gloriousAnthemList.add(c);
@@ -19826,9 +19792,7 @@ public class GameActionUtil {
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
-					if(CardUtil.getColors(c).contains(
-							Constant.Color.White)
-							&& !c.isFaceDown()) {
+					if(c.isWhite() && !c.isFaceDown()) {
 						c.addSemiPermanentAttackBoost(1);
 						c.addSemiPermanentDefenseBoost(1);
 						gloriousAnthemList.add(c);
