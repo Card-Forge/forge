@@ -1,9 +1,10 @@
 Name:Knight Exemplar
 ManaCost:1 W W
 Types:Creature Human Knight
-Text:Other Knight creatures you control get +1/+1 and are indestructible.
+Text:no text
 PT:2/2
 K:First Strike
+K:stPumpAll:Creature.Knight+Other+YouCtrl:1/1/Indestructible:No Condition:Other Knight creatures you control get +1/+1 and are indestructible.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_exemplar.jpg

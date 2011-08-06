@@ -1,8 +1,9 @@
 Name:Cemetery Reaper
 ManaCost:1 B B
 Types:Creature Zombie
-Text:Other Zombie creatures you control get +1/+1.
+Text:no text
 PT:2/2
+K:stPumpAll:Creature.Zombie+Other+YouCtrl:1/1:No Condition:Other Zombie creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cemetery_reaper.jpg

@@ -1,8 +1,9 @@
 Name:Lord of the Undead
 ManaCost:1 B B
 Types:Creature Zombie
-Text:Other Zombie creatures get +1/+1.
+Text:no text
 PT:2/2
+K:stPumpAll:Creature.Zombie+Other:1/1:No Condition:Other Zombie creatures get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_undead.jpg
