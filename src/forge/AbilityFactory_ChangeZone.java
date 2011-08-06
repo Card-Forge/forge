@@ -361,10 +361,10 @@ public class AbilityFactory_ChangeZone {
                     if (origin.equals("Library") && i < 1) {
                         player.shuffle();
                     }
-                    destZone.add(c, libraryPos);
+                    AllZone.GameAction.moveToLibrary(c, libraryPos);
                 }
                 else {
-                    destZone.add(c);
+                	AllZone.GameAction.moveTo(destZone, c);
                     if (destination.equals("Battlefield") && params.containsKey("Tapped"))
                         c.tap();
                 }
@@ -456,10 +456,11 @@ public class AbilityFactory_ChangeZone {
         	origZone.remove(c);
         	if (destination.equals("Library")){
             	int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
-        		destZone.add(c, libraryPos);
+            	AllZone.GameAction.moveToLibrary(c, libraryPos);
         	}
         	else
-        		destZone.add(c);
+        		AllZone.GameAction.moveTo(destZone, c);
+        	
         	if (destination.equals("Battlefield") && params.containsKey("Tapped"))
         		c.tap();
         }
@@ -808,6 +809,7 @@ public class AbilityFactory_ChangeZone {
 		
 		for(Card tgtC : tgtCards){
 			PlayerZone originZone = AllZone.getZone(tgtC);
+			// if Target isn't in the expected Zone, continue
 			if (!originZone.is(origin))
 				continue;
 	        
@@ -835,10 +837,8 @@ public class AbilityFactory_ChangeZone {
 	           if (libraryPosition == -1)
 	        	   libraryPosition = library.size();
 	           
-	           Card cardCopy = AllZone.CardFactory.copyCard(tgtC);
-	           
-	           library.add(cardCopy, libraryPosition); //move to library
-	           
+	           AllZone.GameAction.moveToLibrary(tgtC, libraryPosition);
+
 	           if (params.containsKey("Shuffle"))	// for things like Gaea's Blessing
 	        	   player.shuffle();
 	    	}

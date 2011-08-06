@@ -675,8 +675,9 @@ public abstract class Player extends MyObservable{
     
     public void discardRandom(final int num, final SpellAbility sa) {
     	for(int i = 0; i < num; i++) {
-    		Card[] c = AllZone.getZone(Constant.Zone.Hand, this).getCards();
-    		if(c.length != 0) doDiscard(CardUtil.getRandom(c), sa);
+    		CardList list = AllZoneUtil.getPlayerHand(this);
+    		if(list.size() != 0) 
+    			doDiscard(CardUtil.getRandom(list.toArray()), sa);
     	}
     }
     

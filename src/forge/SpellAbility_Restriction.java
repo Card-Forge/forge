@@ -171,13 +171,13 @@ public class SpellAbility_Restriction {
 		
 		if (nCardsInHand != -1){
 			// Can handle Library of Alexandria, or Hellbent
-			if (AllZone.getZone(Constant.Zone.Hand, activator).size() != nCardsInHand)
+			if (AllZoneUtil.getPlayerHand(activator).size() != nCardsInHand)
 				return false;
 		}
 		
 		if (bNeedsThreshold){
 			// Threshold
-			if (AllZone.getZone(Constant.Zone.Graveyard, activator).size() < THRESHOLD)
+			if (AllZoneUtil.getPlayerGraveyard(activator).size() < THRESHOLD)
 				return false;
 		}
 		

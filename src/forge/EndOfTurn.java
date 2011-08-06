@@ -35,8 +35,8 @@ public class EndOfTurn implements java.io.Serializable
     if(creature.isEmpty())
     {
       CardList sacrifice = new CardList();
-      sacrifice.addAll(all.getName("Pyrohemia").toArray());
-      sacrifice.addAll(all.getName("Pestilence").toArray());
+      sacrifice.add(all.getName("Pyrohemia"));
+      sacrifice.add(all.getName("Pestilence"));
 
       for(int i = 0; i < sacrifice.size(); i++)
         AllZone.GameAction.sacrifice(sacrifice.get(i));
@@ -54,17 +54,7 @@ public class EndOfTurn implements java.io.Serializable
     AllZone.GameInfo.setPreventCombatDamageThisTurn(false);
     
     AllZone.StaticEffects.rePopulateStateBasedList();
-    
-    /*
-    PlayerZone cz = AllZone.getZone(Constant.Zone.Removed_From_Play, AllZone.ComputerPlayer);
-    PlayerZone hz = AllZone.getZone(Constant.Zone.Removed_From_Play, AllZone.HumanPlayer);
-    
-    CardList c = new CardList(cz.getCards());
-    CardList h = new CardList(hz.getCards());
-    
-    System.out.println("number of cards in compy removed zone: " + c.size());
-    System.out.println("number of cards in human removed zone: " + h.size());
-    */
+
     for(Card c : all) {
     	if(!c.isFaceDown()
     			&& c.getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME."))

@@ -89,15 +89,8 @@ public class StaticEffects
 	public void rePopulateStateBasedList()
 	{
 		reset();
-		PlayerZone playerZone = AllZone.getZone(Constant.Zone.Battlefield,
-				AllZone.HumanPlayer);
-		PlayerZone computerZone = AllZone.getZone(Constant.Zone.Battlefield,
-				AllZone.ComputerPlayer);
 
-		CardList cards = new CardList();
-		cards.addAll(playerZone.getCards());
-		cards.addAll(computerZone.getCards());
-		
+		CardList cards = AllZoneUtil.getCardsInPlay();
 		
 		Log.debug("== Start add state effects ==");
 		for (int i=0;i<cards.size();i++)

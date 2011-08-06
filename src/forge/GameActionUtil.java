@@ -123,25 +123,18 @@ public class GameActionUtil {
 		
 		// Win / Lose	
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-		PlayerZone OpplayZone = AllZone.getZone(Constant.Zone.Battlefield, player.getOpponent());
-		CardList Platinumlist = new CardList(OpplayZone.getCards());
-		Platinumlist = Platinumlist.getName("Platinum Angel");
-		CardList Abyssallist = new CardList(playZone.getCards());
-		Abyssallist = Abyssallist.getName("Abyssal Persecutor");
-		if(Platinumlist.size() == 0 && Abyssallist.size() == 0) {
-			upkeep_Battle_of_Wits();
-			upkeep_Mortal_Combat();
-			upkeep_Epic_Struggle();
-			upkeep_Near_Death_Experience();
-			upkeep_Test_of_Endurance();
-			upkeep_Helix_Pinnacle();
-			upkeep_Barren_Glory();
-			upkeep_Felidar_Sovereign();
-			upkeep_Klass();
-		}
+
 		//Win / Lose
-		
+		// Checks for can't win or can't lose happen in Player.altWinConditionMet()
+		upkeep_Battle_of_Wits();
+		upkeep_Mortal_Combat();
+		upkeep_Epic_Struggle();
+		upkeep_Near_Death_Experience();
+		upkeep_Test_of_Endurance();
+		upkeep_Helix_Pinnacle();
+		upkeep_Barren_Glory();
+		upkeep_Felidar_Sovereign();
+
 		upkeep_Convalescence();
 		upkeep_Convalescent_Care();
 		upkeep_Ancient_Runes();
@@ -10062,33 +10055,6 @@ public class GameActionUtil {
 			}
 		}// for
 	}// upkeep_Power_Surge()
-
-	private static void upkeep_Klass() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList elf = new CardList(playZone.getCards());
-		elf = elf.getType("Elf");
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Klaas, Elf Friend");
-
-		if(0 < list.size() && 10 <= elf.size()) {
-			final Card source = list.get(0);
-			Ability ability = new Ability(source, "0") {
-				@Override
-				public void resolve() {
-					player.getOpponent().setLife(0, source);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Klaas, Elf Friend - ").append(player).append(" wins the game");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}// if
-	}// upkeep_Klass
 
 	private static void upkeep_Felidar_Sovereign() {
 		final Player player = AllZone.Phase.getPlayerTurn();

@@ -53,7 +53,7 @@ public class Input_Mulligan extends Input {
     
     void end() {
         ButtonUtil.reset();
-        CardList HHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer).getCards());
+        CardList HHandList = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
         PlayerZone HPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
         PlayerZone HHand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
         for(int i = 0; i < HHandList.size() ; i++) {
@@ -68,7 +68,7 @@ public class Input_Mulligan extends Input {
         		}
         	}
         }
-        CardList CHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
+        CardList CHandList = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
         PlayerZone CPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
         PlayerZone CHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
         for(int i = 0; i < CHandList.size() ; i++) {

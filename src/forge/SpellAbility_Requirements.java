@@ -24,6 +24,8 @@ public class SpellAbility_Requirements {
 			bCasting = true;
 			if (!ability.getSourceCard().isCopiedSpell()){
 				Card c = ability.getSourceCard();
+
+				// todo(sol): move Spell to Stack here?
 				fromZone = AllZone.getZone(c);
 				if (fromZone != null)
 					fromZone.remove(c);	

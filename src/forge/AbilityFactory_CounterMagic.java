@@ -344,7 +344,8 @@ public class AbilityFactory_CounterMagic {
 					}
 					else {
 						//AI decision-making, only draws a card if it doesn't risk discarding it.
-						if(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards().length + Integer.parseInt(SplitActionParams[0]) < 6) {
+						
+						if(AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer).size() + Integer.parseInt(SplitActionParams[0]) < 6) {
 							Target.drawCards(Integer.parseInt(SplitActionParams[0]));
 						}
 					}
@@ -419,7 +420,7 @@ public class AbilityFactory_CounterMagic {
 						//Does nothing now, of course, but sometime in the future the AI may be able to remember cards revealed and prioritize discard spells accordingly.
 					}
 					else {
-						CardList list = new CardList(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards());
+						CardList list = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
 						AllZone.Display.getChoiceOptional("Revealed cards",list.toArray());
 					}
 				}
@@ -440,7 +441,7 @@ public class AbilityFactory_CounterMagic {
 						AllZoneUtil.rearrangeTopOfLibrary(Target, Integer.parseInt(SplitActionParams[0]), false);
 					}
 					else {
-						CardList list = new CardList(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards());
+						CardList list = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
 						AllZone.Display.getChoiceOptional("Revealed cards",list.toArray());
 					}
 				}

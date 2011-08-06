@@ -151,8 +151,7 @@ public class AbilityFactory_Regenerate {
 				else weight[0] = 0;
 
 				// if there are many cards in hand, then maybe it's not such a great idea to waste mana
-				CardList HandList = new CardList(AllZone.getZone(Constant.Zone.Hand,
-						AllZone.ComputerPlayer).getCards());
+				CardList HandList = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
 
 				if(HandList.size() >= 4) weight[1] = 25;
 				else weight[1] = 75;
@@ -164,8 +163,7 @@ public class AbilityFactory_Regenerate {
 					if(CardUtil.getConvertedManaCost(HandList.getCard(i).getManaCost()) > hCMC) hCMC = CardUtil.getConvertedManaCost(HandList.getCard(
 							i).getManaCost());
 
-				CardList LandList = new CardList(AllZone.getZone(Constant.Zone.Battlefield,
-						AllZone.ComputerPlayer).getCards());
+				CardList LandList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
 				LandList = LandList.getType("Land");
 
 				//most regenerate abilities cost 2 or less

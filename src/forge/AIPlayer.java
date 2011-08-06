@@ -140,11 +140,10 @@ public class AIPlayer extends Player{
 				if(r.nextBoolean()) libPos = "top";
 				else libPos = "bottom";
 			}
-			CardList hand = new CardList();
-			hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
+			CardList hand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
 
-			CardList blIP = new CardList();
-			blIP.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
+			CardList blIP = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+			
 			blIP = blIP.getType("Basic");
 			if(blIP.size() > 5) {
 				CardList blIH = hand.getType("Basic");
@@ -183,8 +182,7 @@ public class AIPlayer extends Player{
 		for(int i = 0; i < num; i++) {
             boolean b = false;
             if(topN.get(i).getType().contains("Basic")) {
-                CardList bl = new CardList(
-                        AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
+                CardList bl = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                 bl = bl.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
                         if(c.getType().contains("Basic")) return true;
@@ -196,8 +194,7 @@ public class AIPlayer extends Player{
                 if(bl.size() > 5) // if control more than 5 Basic land, probably don't need more
                 b = true;
             } else if(topN.get(i).getType().contains("Creature")) {
-                CardList cl = new CardList(
-                        AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
+                CardList cl = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                 cl = cl.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
                         if(c.getType().contains("Creature")) return true;

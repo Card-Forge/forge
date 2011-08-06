@@ -208,8 +208,7 @@ public class AbilityFactory_DealDamage {
 
 		if (restDamage == 0) return false;
 
-		PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
-		CardList hand = new CardList(compHand.getCards());
+		CardList hand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
 
 		if(AF.isSpell() && hand.size() > 7) // anti-discard-at-EOT
 		return true;

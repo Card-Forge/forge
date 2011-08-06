@@ -151,8 +151,8 @@ public class AbilityFactory_Destroy {
 		Target abTgt = sa.getTarget();
 		final Card source = sa.getSourceCard();
 		CardList list;
-		
-		list = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
+
+		list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 		list = list.getTargetableCards(source);
 		
 		if (abTgt != null){
@@ -246,8 +246,8 @@ public class AbilityFactory_Destroy {
 		if(params.containsKey("ValidCards")) 
 			Valid = params.get("ValidCards");
 		
-		CardList humanlist = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
-		CardList computerlist = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
+		CardList humanlist = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+		CardList computerlist = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
 		
 		humanlist = humanlist.getValidCards(Valid.split(","), source.getController(), source);
 		computerlist = computerlist.getValidCards(Valid.split(","), source.getController(), source);
@@ -339,8 +339,8 @@ public class AbilityFactory_Destroy {
 		if(params.containsKey("ValidCards")) 
 			Valid = params.get("ValidCards");
 		
-		CardList list = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
-		list.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
+		
+		CardList list = AllZoneUtil.getCardsInPlay();
 		
 		list = list.getValidCards(Valid.split(","), card.getController(), card);
 

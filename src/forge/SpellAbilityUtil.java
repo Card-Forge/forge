@@ -40,23 +40,22 @@ public class SpellAbilityUtil
     
     static public CardList getAvailableMana(Player player)
     {
-	PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-	CardList all = new CardList(play.getCards());
-	CardList mana = all.filter(new CardListFilter()
-	{
-	    public boolean addCard(Card c)
-	    {
-		if(c.isTapped())
-		    return false;
+		CardList all = AllZoneUtil.getPlayerCardsInPlay(player);
+		CardList mana = all.filter(new CardListFilter()
+		{
+		    public boolean addCard(Card c)
+		    {
+			if(c.isTapped())
+			    return false;
+			
+			ArrayList<Ability_Mana> a = c.getManaAbility();
+			for(Ability_Mana am : a)
+				return am.isBasic();
+			
+			return false;
+		    }//addCard()
+		});//CardListFilter
 		
-		ArrayList<Ability_Mana> a = c.getManaAbility();
-		for(Ability_Mana am : a)
-			return am.isBasic();
-		
-		return false;
-	    }//addCard()
-	});//CardListFilter
-	
-	return mana;
+		return mana;
     }//getUntappedMana     
 }

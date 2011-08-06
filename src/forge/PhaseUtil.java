@@ -28,8 +28,7 @@ public class PhaseUtil {
     	runParams.put("Player", AllZone.Phase.getPlayerTurn());
     	AllZone.TriggerHandler.runTrigger("Phase", runParams);
 		
-        PlayerZone p = AllZone.getZone(Constant.Zone.Battlefield, turn);
-        Card[] c = p.getCards();
+
         
         AllZone.Phase.turnReset();
         
@@ -39,8 +38,9 @@ public class PhaseUtil {
         
         // For tokens a player starts the game with they don't recover from Sum. Sickness on first turn
         if (turn.getTurn() > 0){
-	        for(int i = 0; i < c.length; i++)
-	            c[i].setSickness(false);
+        	CardList list = AllZoneUtil.getPlayerCardsInPlay(turn);
+        	for(Card c : list)
+        		c.setSickness(false);
         }
         turn.incrementTurn();
         
@@ -63,9 +63,8 @@ public class PhaseUtil {
     private static void doUntap()
     {
     	Player player = AllZone.Phase.getPlayerTurn();
-    	PlayerZone p = AllZone.getZone(Constant.Zone.Battlefield, player);
-    	CardList list = new CardList(p.getCards());
-    	
+    	CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+
     	for(Card c : list) {
     		if (c.getBounceAtUntap() && c.getName().contains("Undiscovered Paradise") )
     		{
@@ -325,9 +324,8 @@ public class PhaseUtil {
     		return true;
     	
     	Player turn = AllZone.Phase.getPlayerTurn();
-    	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, turn);
 
-    	if (turn.getCards(hand).size() == 0 && AllZoneUtil.isCardInPlay("Gibbering Descent", turn))
+    	if (AllZoneUtil.getPlayerHand(turn).size() == 0 && AllZoneUtil.isCardInPlay("Gibbering Descent", turn))
     		return true;
     	
     	return false;
@@ -405,13 +403,10 @@ public class PhaseUtil {
         if (list.size() == 1){
         	AllZone.GameAction.checkWheneverKeyword(list.get(0), "Attack - Alone", null);
             Player attackingPlayer = AllZone.Combat.getAttackingPlayer();
-            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, attackingPlayer);
-            CardList exalted = new CardList(play.getCards());
-            exalted = exalted.filter(new CardListFilter() {
-                public boolean addCard(Card c) {
-                    return c.getKeyword().contains("Exalted");
-                }
-            });
+            
+            CardList exalted = AllZoneUtil.getPlayerCardsInPlay(attackingPlayer);
+            exalted = exalted.getKeyword("Exalted");
+
             if(exalted.size() > 0) CombatUtil.executeExaltedAbility(list.get(0), exalted.size());
             // Make sure exalted effects get applied only once per combat
         }

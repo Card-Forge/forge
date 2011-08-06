@@ -32,7 +32,7 @@ public class GameAction {
         		sa.getRestrictions().resetTurnActivations();
         }
     }
-    
+
     public Card moveTo(PlayerZone zone, Card c) {
     	// Remove card from Current Zone, if it has one
     	String prevZone = "";
@@ -51,6 +51,8 @@ public class GameAction {
         	moving = addSuspendTriggers(moving);
         }
         
+        //boolean dontTrigger = p != null && p.is(Constant.Zone.Battlefield) && zone.is(Constant.Zone.Battlefield);
+        
         zone.add(moving);
         
         //Run triggers        
@@ -59,7 +61,7 @@ public class GameAction {
         runParams.put("Origin", prevZone);
         runParams.put("Destination", zone.getZoneName());
         AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
-        
+
         return moving;
     }
     
@@ -191,7 +193,17 @@ public class GameAction {
     }
     
     public void moveToLibrary(Card c) {
-    	moveToTopOfLibrary(c);
+    	moveToLibrary(c, 0);
+    }
+    
+    public void moveToLibrary(Card c, int libPosition){
+        PlayerZone p = AllZone.getZone(c);
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getOwner());
+        
+        if(p != null) p.remove(c);
+        if(!c.isToken()) c = AllZone.CardFactory.copyCard(c);
+        
+        library.add(c, libPosition);
     }
     
     /**

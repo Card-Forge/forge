@@ -457,10 +457,8 @@ public class Phase extends MyObservable
     
     public void resetAttackedThisCombat(Player player) {
         // resets the status of attacked/blocked this phase
-        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-        
-        CardList list = new CardList();
-        list.addAll(play.getCards());
+        CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+
         list = list.getType("Creature");
         
         for(int i = 0; i < list.size(); i++) {

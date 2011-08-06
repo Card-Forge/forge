@@ -609,8 +609,7 @@ public class MagicStack extends MyObservable {
 					private static final long serialVersionUID = -2559488318473330418L;
 
 					public void execute() {
-						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, crd.getOwner());
-						AllZone.GameAction.moveTo(hand, crd);
+						AllZone.GameAction.moveToHand(crd);
 					}
 				});
 			}
