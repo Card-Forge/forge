@@ -212,6 +212,7 @@ public class GenerateThemeDeck
 					int nLand = (int)((float)numBLands * p);
 					tmpDeck += "numLand-" + ClrCnts[i].Color + ":" + nLand + "\n";
 				
+					CardCounts.put(ClrCnts[i].Color, 2);
 					for (int j=0; j<nLand; j++)
 						tDeck.add(AllZone.CardFactory.getCard(ClrCnts[i].Color, Constant.Player.Computer));
 				}
