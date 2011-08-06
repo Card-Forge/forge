@@ -366,7 +366,9 @@ public class AbilityFactory_ChangeZone {
                 }
             }
         }
-        player.shuffle();
+        
+        if (origin.equals("Library"))
+        	player.shuffle();
 	            
 		String DrawBack = params.get("SubAbility");
         
