@@ -107,6 +107,7 @@ public class GameActionUtil
 		playCard_Noxious_Hatchling(c);
 		playCard_Witch_Maw_Nephilim(c);
 		playCard_Forced_Fruition(c);
+		playCard_Gelectrode(c);
 		playCard_Standstill(c);
 		playCard_Memory_Erosion(c);
 		playCard_SolKanar(c);
@@ -1237,6 +1238,51 @@ public class GameActionUtil
 					}
 			}				
 	}// Witch-Maw Nephilim
+	
+	public static void playCard_Gelectrode(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Gelectrode");
+
+		if (list.size() > 0 && ( c.getType().contains("Instant") || c.getType().contains("Sorcery") )){
+						
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								
+								  if (card.getController().equals("Human"))
+						            {
+						               String[] choices =
+						               { "Yes", "No" };
+						               Object choice = AllZone.Display.getChoice(
+						                     "Untap gelectrode?", choices);
+						               if (choice.equals("Yes")) {
+									card.untap();}
+						            }
+								  if (card.getController().equals("Computer")) {card.untap();}
+							}
+							
+						}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played an instant or sorcery spell, you may untap Gelectrode.");
+						AllZone.Stack.add(ability2);
+					}
+			}				
+	}// Gelectrode
+
 	
     public static void playCard_Forced_Fruition(Card c)
     {

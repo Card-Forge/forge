@@ -1,3 +1,10 @@
+Gelectrode
+1 U R
+Creature Weird
+Whenever you play an instant or sorcery spell, you may untap Gelectrode.
+0/1
+abDamageCP T:1
+
 Rathi Trapper
 1 B
 Creature Human Rebel Rogue
