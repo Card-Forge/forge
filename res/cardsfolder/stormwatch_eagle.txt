@@ -8,4 +8,5 @@ A:AB$ChangeZone | Cost$ Sac<1/Land> | Origin$ Battlefield | Destination$ Hand | 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormwatch_eagle.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/50.jpg
 End

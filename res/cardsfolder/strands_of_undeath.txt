@@ -9,4 +9,5 @@ K:WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/2:ControllingPlayer_O
 A:AB$Regenerate | Cost$ B | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strands_of_undeath.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/108.jpg
 End

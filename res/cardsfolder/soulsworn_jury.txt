@@ -8,4 +8,5 @@ A:AB$Counter | Cost$ 1 U Sac<1/CARDNAME> | Type$ Spell | CounterValid$ Creature 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulsworn_jury.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/17.jpg
 End

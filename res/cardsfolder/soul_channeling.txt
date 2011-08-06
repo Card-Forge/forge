@@ -8,4 +8,5 @@ A:AB$Regenerate | Cost$ PayLife<2> | Defined$ Enchanted | SpellDescription$ Rege
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_channeling.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/163.jpg
 End

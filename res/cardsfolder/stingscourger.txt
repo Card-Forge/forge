@@ -7,4 +7,5 @@ K:etbBounceTgt:Creature.YouDontCtrl:Hand
 K:Echo:3 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stingscourger.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/107.jpg
 End

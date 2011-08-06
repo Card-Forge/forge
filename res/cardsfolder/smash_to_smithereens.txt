@@ -6,4 +6,5 @@ A:SP$Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifa
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smash_to_smithereens.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/107.jpg
 End

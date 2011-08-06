@@ -9,4 +9,5 @@ K:stPumpSelf:Creature:0/0/HIDDEN CARDNAME can attack as though it didn't have de
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slithering_shade.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/55.jpg
 End

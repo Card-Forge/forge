@@ -8,4 +8,5 @@ K:enPumpCurse:HIDDEN CARDNAME's activated abilities can't be activated.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stupefying_touch.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/48.jpg
 End
