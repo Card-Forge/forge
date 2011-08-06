@@ -7,8 +7,10 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,9 +21,11 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 
-public class Gui_WinLose extends JFrame {
+public class Gui_WinLose extends JFrame implements NewConstants {
     private static final long serialVersionUID = -5800412940994975483L;
     
     private JLabel            titleLabel       = new JLabel();
@@ -174,6 +178,23 @@ public class Gui_WinLose extends JFrame {
         dispose();
     }
     
+    private String getWinText(long creds, WinLose winLose)
+    {
+    	StringBuilder sb = new StringBuilder();
+    	if (winLose.getLose()==0)
+    		sb.append("You have not lost once! Bonus: 10 credits.\r\n");
+    	sb.append("You have earned " + creds + " credits in total.");
+    	return sb.toString();
+    }
+    
+    private ImageIcon getIcon(String fileName)
+    {
+    	File base = ForgeProps.getFile(IMAGE_BASE);
+    	File file = new File(base, fileName);
+    	ImageIcon icon = new ImageIcon(file.toString());
+    	return icon;
+    }
+    
     void quitButton_actionPerformed(ActionEvent e) {
         //are we on a quest?
         if(AllZone.QuestData == null) new Gui_NewGame();
@@ -189,24 +210,33 @@ public class Gui_WinLose extends JFrame {
             
             if(quest.shouldAddCards(winLose.didWinRecently())) {
                 quest.addCards();
-                JOptionPane.showMessageDialog(null, "You have won new cards.");
+                String fileName = "BookIcon.png";
+                ImageIcon icon = getIcon(fileName);
+                JOptionPane.showMessageDialog(null, "You have won new cards.", "", JOptionPane.INFORMATION_MESSAGE, icon );
             }
             
-            if(quest.shouldAddAdditionalCards(winLose.didWinRecently())) {
-                quest.addAdditionalCards();
-                JOptionPane.showMessageDialog(null, "You have won a random rare.");
-            }
             
             if (winLose.didWinRecently())
             {
-            	long creds = quest.getCreditsToAdd();
-            	JOptionPane.showMessageDialog(null, "You have earned " + creds + " credits.");
+            	long creds = quest.getCreditsToAdd(winLose);
+            	String s = getWinText(creds, winLose);
+            	            	
+            	String fileName = "GoldIcon.png";
+            	ImageIcon icon = getIcon(fileName);
             	
+            	JOptionPane.showMessageDialog(null, s, "",  JOptionPane.INFORMATION_MESSAGE, icon);
             }
             else
             {
             	quest.subtractCredits(15);
             	JOptionPane.showMessageDialog(null, "You FAIL! You have lost 15 credits.");
+            }
+            
+            if(quest.shouldAddAdditionalCards(winLose.didWinRecently())) {
+            	String fileName = quest.addRandomRare() + ".jpg";
+            	ImageIcon icon = getIcon(fileName);
+                
+                JOptionPane.showMessageDialog(null, "You have won a random rare.", "", JOptionPane.INFORMATION_MESSAGE, icon);
             }
             
             winLose.reset();

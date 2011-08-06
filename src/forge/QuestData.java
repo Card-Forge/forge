@@ -362,16 +362,15 @@ public class QuestData implements NewConstants {
         
     }//addCards()
     
-    public void addAdditionalCards() {
-        int nRare = 1;
-        
+    public String addRandomRare() {
+
         ArrayList<String> newCards = new ArrayList<String>();
-        newCards.addAll(boosterPack.getRare(nRare));
+        newCards.addAll(boosterPack.getRare(1));
         
         cardPool.addAll(newCards);
-        //getAddedCards() uses newCardList
-
         newCardList.addAll(newCards);
+        
+        return GuiDisplayUtil.cleanString(newCards.get(0));
     }
     
     public void addCard(Card c)
@@ -417,9 +416,11 @@ public class QuestData implements NewConstants {
     	}
     }
     
-    public long getCreditsToAdd()
+    public long getCreditsToAdd(WinLose winLose)
     {
     	long creds = (long) (10 + (0.2 * win));
+    	if (winLose.getLose() == 0)
+    		creds += 10;
     	this.addCredits(creds);
     	
     	return creds;
