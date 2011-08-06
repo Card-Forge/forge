@@ -2463,18 +2463,7 @@ public class GameActionUtil {
     //***CREATURES START HERE***
 
     public static void executeDestroyCreatureCardEffects(Card c, Card destroyed) {
-        //if (AllZone.GameAction.isCardInPlay(c)){
-    	
-        /* Goblin Sharpshooter converted to trigger
-        if(c.getName().equals("Goblin Sharpshooter")) destroyCreature_Goblin_Sharpshooter(c, destroyed);
-        */
-    	
-        if (c.getName().equals("Prowess of the Fair") 
-                && destroyed.isType("Elf")
-                && !destroyed.isToken() 
-                && !c.equals(destroyed)
-                && destroyed.getController().equals(c.getController())) destroyCreature_Prowess_of_the_Fair(c, destroyed);
-        else if (c.getName().equals("Fecundity")) destroyCreature_Fecundity(c, destroyed);
+        if (c.getName().equals("Fecundity")) destroyCreature_Fecundity(c, destroyed);
         else if (c.getName().equals("Moonlit Wake")) destroyCreature_Moonlit_Wake(c, destroyed);
         else if (c.getName().equals("Proper Burial") 
                 && destroyed.getController().equals(c.getController())) destroyCreature_Proper_Burial(c, destroyed);
@@ -2486,41 +2475,6 @@ public class GameActionUtil {
     }
 
     //***
-
-    /* Goblin Sharpshooter converted to trigger
-    private static void destroyCreature_Goblin_Sharpshooter(Card c, Card destroyed) {
-        //not using stack for this one
-        if(AllZone.GameAction.isCardInPlay(c) && c.isTapped()) c.untap();
-    }
-    */
-
-	private static void destroyCreature_Prowess_of_the_Fair(Card c, Card destroyed) {
-        final Card crd = c;
-        final Card crd2 = c;
-        
-        Ability ability = new Ability(c, "0") {
-            @Override
-            public void resolve() {
-                Player player = crd.getController();
-                if (player.isHuman()) {
-                    String question = "Put a 1/1 green Elf Warrior creature token onto the battlefield?";
-                    if (showYesNoDialog(crd2, question)) makeToken();
-                } else makeToken();
-            }
-
-            public void makeToken() {
-                CardFactoryUtil.makeToken("Elf Warrior", "G 1 1 Elf Warrior", crd.getController(), "G", 
-                        new String[] {"Creature", "Elf", "Warrior"}, 1, 1, new String[] {""});
-            }
-        };
-        
-        StringBuilder sb = new StringBuilder();
-        sb.append("Prowess of the Fair - ").append(c.getController());
-        sb.append(" may put a 1/1 green Elf Warrior creature token onto the battlefield.");
-        ability.setStackDescription(sb.toString());
-        
-        AllZone.Stack.add(ability);
-    }
 
 	private static void destroyCreature_Fecundity(Card c, Card destroyed) {
         final Card crd = destroyed;
