@@ -2,8 +2,10 @@ Name:Minions' Murmurs
 ManaCost:2 B B
 Types:Sorcery
 Text:no text
-K:spDrawCards:X:Drawback$YouLoseLife/X:You draw X cards and you lose X life, where X is the number of creatures you control.:Minion's Murmurs - draw cards and lose life.
+A:SP$Draw | Cost$ 2 B B | NumCards$ X | SpellDescription$ You draw X cards and you lose X life, where X is the number of creatures you control. | SubAbility$ SVar=DB1
+SVar:DB1:DB$LoseLife | LifeAmount$ X
 SVar:X:Count$TypeYouCtrl.Creature
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130316.jpg
 SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/71.jpg
