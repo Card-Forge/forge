@@ -1,3 +1,27 @@
+Fists of Ironwood
+1 G
+Enchantment Aura
+Enchanted creature has trample.
+Enchant creature
+enPump:+0/+0/Trample
+WheneverKeyword:EntersBattleField:Self:Play:MakeToken-Saproling-G-1-1-None-/2:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Fists of Ironwood enters the battlefield, put two 1/1 green Saproling creature tokens onto the battlefield.
+
+Lys Alana Huntmaster
+2 G G
+Creature Elf Warrior
+no text
+3/3
+WheneverKeyword:CastSpell/Controller:Type/Elf:Play:MakeToken-Elf Warrior-G-1-1-None-/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever you cast an Elf spell, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
+
+Infested Roothold
+4 G
+Creature Wall
+no text
+0/3
+Defender
+Protection from artifacts
+WheneverKeyword:CastSpell/Opponent:Type/Artifact:Play:MakeToken-Insect-G-1-1-None-/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever an opponent casts an artifact spell, you may put a 1/1 green Insect creature token onto the battlefield.
+
 Parallel Evolution
 3 G G
 Sorcery
