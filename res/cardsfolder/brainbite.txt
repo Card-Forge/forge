@@ -3,7 +3,7 @@ ManaCost:2 U B
 Types:Sorcery
 Text:no text
 K:Draw a card.
-A:SP$Discard|Cost$2 U B|Opponent$True|NumCards$1|Mode$RevealYouChoose|SpellDescription$Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
+A:SP$Discard | Cost$ 2 U B | ValidTgts$ Opponent | NumCards$ 1 | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brainbite.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/18.jpg
