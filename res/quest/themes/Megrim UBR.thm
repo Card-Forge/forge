@@ -1,0 +1,71 @@
+BasicLandPercentage=16
+
+[Group MaxCnt=4 Percentage=21]
+Underground Sea
+Badlands
+Volcanic Island
+Crumbling Necropolis
+Bloodstained Mire
+Polluted Delta
+[/Group]
+
+[Group MaxCnt=4 Percentage=18]
+Megrim
+Megrim
+Megrim
+Liliana's Caress
+Liliana's Caress
+Liliana's Caress
+Geth's Grimoire
+[/Group]
+
+[Group MaxCnt=4 Percentage=28]
+Recoil
+Recoil
+Burning Inquiry
+Burning Inquiry
+Wheel of Fortune
+Windfall
+Wheel and Deal
+Hymn to Tourach
+Blightning
+[/Group]
+
+[Group MaxCnt=4 Percentage=1]
+Corrupt Court Official
+Ravenous Rats
+[/Group]
+
+[Group MaxCnt=4 Percentage=7]
+Alley Grifters
+Chilling Apparition
+Cunning Lethemancer
+Dimir Cutpurse
+Hypnotic Specter
+Sedraxis Specter
+Abyssal Nocturnus
+Liliana's Specter
+Stupor
+[/Group]
+
+[Group MaxCnt=1 Percentage=6]
+Abyssal Nightstalker
+Abyssal Specter
+Blazing Specter
+Order of Yawgmoth
+Wei Night Raiders
+Cackling Fiend
+[/Group]
+
+[Group MaxCnt=1 Percentage=3]
+Liliana Vess
+Abyssal Horror
+Shrieking Specter
+Silent Specter
+Brutal Nightstalker
+Cruel Ultimatum
+Ebon Dragon
+Zhang Liao, Hero of Hefei
+[/Group]
+
+End
