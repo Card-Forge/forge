@@ -80,6 +80,7 @@ res/lib/napkinlaf-1.2.jar -text svneol=unset#unset
 res/lib/nimrodlf.jar -text svneol=unset#unset
 res/lib/substance.jar -text svneol=unset#unset
 res/main.properties svneol=native#text/plain
+res/migratedCardsScript.py -text svneol=native#text/x-python
 res/pics/BookIcon.png -text svneol=unset#image/png
 res/pics/BoxIcon.png -text svneol=unset#image/png
 res/pics/GoldIcon.png -text svneol=unset#image/png
