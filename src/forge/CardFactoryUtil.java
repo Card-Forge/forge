@@ -21,6 +21,14 @@ public class CardFactoryUtil {
         else return "" + n;
     }
     
+    /**
+     * nothing should need to call this directly.  It is here for backwards compat until all counterspell abilities
+     * are converted to AbilityFactory$Counter
+     * 
+     * AbilityFactory_CounterMagic has it's own version of this.
+     */
+    
+    @Deprecated
     public static boolean spCounter_MatchSpellAbility(Card srcCard,SpellAbility sa,String[] splitRestrictions,String targetType)
     {
     	boolean fullResult = true;
