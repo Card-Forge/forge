@@ -3,6 +3,7 @@ ManaCost:3 W W
 Types:Creature Human Knight
 Text:no text
 PT:4/4
+K:First Strike
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigExile | Optional$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may exile target black or red permanent that player controls.
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent.Black+YouDontCtrl,Permanent.Red+YouDontCtrl | TgtPrompt$ Choose target black or red permanent. | Origin$ Battlefield | Destination$ Exile | IsCurse$ True
 SVar:Rarity:Rare
