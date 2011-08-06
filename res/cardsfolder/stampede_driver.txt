@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Human Spellshaper
 Text:no text
 PT:1/1
-K:abAllPump 1 G T:YouCtrl:+1/+1/Trample:Drawback$YouDiscard/1:Creatures you control get +1/+1 and gain trample until end of turn.:Stampede Driver - creatures get +1/+1 and gain trample until EOT
+A:AB$PumpAll|Cost$1 G T Discard<1/Any>|ValidCards$Creature.YouCtrl|NumAtt$+1|NumDef$+1|KW$Trample|SpellDescription$Creatures you control get +1/+1 and gain trample until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stampede_driver.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/122.jpg
