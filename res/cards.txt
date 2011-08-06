@@ -1,3 +1,10 @@
+Pestilence Demon
+5 B B B
+Creature Demon
+no text
+7/6
+Flying
+
 Palladia-Mors
 2 W W R R G G
 Legendary Creature Elder Dragon

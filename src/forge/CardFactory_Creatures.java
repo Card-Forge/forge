@@ -19693,6 +19693,65 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Pestilence Demon")) {
+            final SpellAbility ability = new Ability(card, "B") {
+            	
+                @Override
+                public boolean canPlayAI() {
+                    CardList human = new CardList(AllZone.Human_Play.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    
+                    human = human.getType("Creature");
+                    computer = computer.getType("Creature");
+                    
+                    return AllZone.Computer_Life.getLife() > 2 
+                    			&& !(human.size() == 0 
+                    			&& 0 < computer.size()) 
+                    			&& card.getKillDamage() > 1;
+                }
+                
+                @Override
+                public void resolve() {
+                    //get all creatures
+                    CardList list = new CardList();
+                    list.addAll(AllZone.Human_Play.getCards());
+                    list.addAll(AllZone.Computer_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
+                    }
+                    
+                    AllZone.Human_Life.subtractLife(1);
+                    AllZone.Computer_Life.subtractLife(1);
+                }//resolve()
+            };//SpellAbility
+            ability.setDescription("B: Pestilence Demon deals 1 damage to each creature and each player.");
+            ability.setStackDescription(card + " deals 1 damage to each creature and each player.");
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(new Spell_Permanent(card) {
+				private static final long serialVersionUID = -9008807568695047980L;
+
+				@Override
+                public boolean canPlayAI() {
+                    //get all creatures
+                    CardList list = new CardList();
+                    list.addAll(AllZone.Human_Play.getCards());
+                    list.addAll(AllZone.Computer_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    return 0 < list.size();
+                }
+            });
+            
+            card.addSpellAbility(ability);
+            
+            card.setSVar("PlayMain1", "TRUE");
+        }
+        //*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
