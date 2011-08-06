@@ -102,10 +102,19 @@ public class AbilityFactory_ZoneAffecting {
 		else
 			sb.append(" ");
 		
-		sb.append(player.toString());
-		sb.append(" draws (");
-		sb.append(AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa));
-		sb.append(")");
+		String defined = af.getMapParams().get("Defined");
+		if (defined != null){
+			if (defined.equals("Each"))
+				sb.append("Each player");
+		}
+		else
+			sb.append(player.toString());
+
+        int numCards = 1;
+        if (af.getMapParams().containsKey("NumCards"))
+        	numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa);
+		
+		sb.append(" draws (").append(numCards).append(")");
 		
 		if (af.getMapParams().containsKey("NextUpkeep"))
 			sb.append(" at the beginning of the next upkeep");
@@ -206,14 +215,18 @@ public class AbilityFactory_ZoneAffecting {
             tgt.addTarget(AllZone.ComputerPlayer);
         }
         else {
+        	// todo: when non-targeted abilities can make the Human draw, take that into consideration
+        	
             // ability is not targeted
             if (numCards >= computerLibrarySize) {
                 // Don't deck yourself
                 return false;
             }
+            
             if (computerHandSize + numCards > computerMaxHandSize) {
                 // Don't draw too many cards and then risk discarding cards at EOT
-                return false;
+            	if (!(af.getMapParams().containsKey("NextUpkeep") || sa instanceof Ability_Sub))
+            		return false;
             }
         }
         return true;
@@ -223,7 +236,9 @@ public class AbilityFactory_ZoneAffecting {
 		HashMap<String,String> params = af.getMapParams();
 		
 		Card source = sa.getSourceCard();
-		int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+        int numCards = 1;
+        if (params.containsKey("NumCards"))
+        	numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 		
 		ArrayList<Player> tgtPlayers;
 
@@ -231,8 +246,13 @@ public class AbilityFactory_ZoneAffecting {
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
 		else{
+			String defined = params.containsKey("Defined") ? params.get("Defined") : "Self";
+			
 			tgtPlayers = new ArrayList<Player>();
-			tgtPlayers.add(sa.getActivatingPlayer());
+			if (defined.equals("Self") || defined.equals("Each"))
+				tgtPlayers.add(sa.getActivatingPlayer());
+			if (defined.equals("Each"))
+				tgtPlayers.add(sa.getActivatingPlayer().getOpponent());
 		}
 		
 		for(Player p : tgtPlayers)

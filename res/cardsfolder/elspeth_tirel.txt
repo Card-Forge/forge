@@ -2,6 +2,7 @@ Name:Elspeth Tirel
 ManaCost:3 W W
 Types:Planeswalker - Elspeth
 Text:no text
+Loyalty:4
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_tirel.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/6.jpg

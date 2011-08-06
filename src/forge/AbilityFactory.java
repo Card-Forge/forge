@@ -447,7 +447,7 @@ public class AbilityFactory {
         if (mapParams.containsKey("ActivationLimit"))
         	restrict.setActivationLimit(Integer.parseInt(mapParams.get("ActivationLimit")));
         
-        if(mapParams.containsKey("ActivationNumberSacrifice"))
+        if (mapParams.containsKey("ActivationNumberSacrifice"))
         	restrict.setActivationNumberSacrifice(Integer.parseInt(mapParams.get("ActivationNumberSacrifice")));
 
         if (mapParams.containsKey("ActivatingPhases"))
@@ -458,6 +458,9 @@ public class AbilityFactory {
         
         if (mapParams.containsKey("Threshold"))
         	restrict.setThreshold(true);
+        
+        if (mapParams.containsKey("Planeswalker"))
+        	restrict.setPlaneswalker(true);
         
         if (mapParams.containsKey("IsPresent")){
         	restrict.setIsPresent(mapParams.get("IsPresent"));

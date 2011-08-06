@@ -138,6 +138,13 @@ public class ReadCard implements Runnable, NewConstants {
             		c.setBaseDefense(def);
             	}
             	
+            	else if (s.startsWith("Loyalty:"))
+            	{
+            		String splitStr[] = s.split(":");
+            		int loyal = Integer.parseInt(splitStr[1]);
+            		c.setBaseLoyalty(loyal);
+            	}
+            	
             	else if (s.startsWith("K:"))
             	{
             		String t = s.substring(2);

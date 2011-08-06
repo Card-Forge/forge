@@ -266,6 +266,10 @@ public class ComputerUtil
 			}
 		}
 		
+		if (cost.getAddCounter()){
+			// this should always be true
+		}
+		
 		if (cost.getLifeCost()){
 			if (AllZone.ComputerPlayer.getLife() <= cost.getLifeAmount())
 				return false;

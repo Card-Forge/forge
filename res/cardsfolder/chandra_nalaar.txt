@@ -2,6 +2,7 @@ Name:Chandra Nalaar
 ManaCost:3 R R
 Types:Planeswalker - Chandra
 Text:no text
+Loyalty:6
 SVar:Rarity:Mythic
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140176.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/127.jpg

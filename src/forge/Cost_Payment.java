@@ -23,6 +23,7 @@ public class Cost_Payment {
 	private boolean payMana;
 	private boolean payXMana;
 	private boolean paySubCounter;
+	private boolean payAddCounter;
 	private boolean paySac;
 	private boolean payExile;
 	private boolean payLife;
@@ -58,6 +59,7 @@ public class Cost_Payment {
 		payMana = cost.hasNoManaCost();
 		payXMana = cost.hasNoXManaCost();
 		paySubCounter = !cost.getSubCounter();
+		payAddCounter = !cost.getAddCounter();
 		paySac = !cost.getSacCost();
 		payExile = !cost.getExileCost();
 		payLife = !cost.getLifeCost();
@@ -103,6 +105,10 @@ public class Cost_Payment {
 			if (countersLeft < 0){
 	    		return false;
 			}
+    	}
+    	
+    	if (cost.getAddCounter()){
+    		// Adding Counters as a cost should always be able to be paid
     	}
     	
     	if (cost.getLifeCost()){
@@ -225,9 +231,9 @@ public class Cost_Payment {
 		}
 		
 		if (!paySubCounter && cost.getSubCounter()){	// pay counters here. 
-			Counters c = cost.getCounterType();
-			if (card.getCounters(c) >= cost.getCounterNum()){
-				card.subtractCounter(c, cost.getCounterNum());
+			Counters type = cost.getCounterType();
+			if (card.getCounters(type) >= cost.getCounterNum()){
+				card.subtractCounter(type, cost.getCounterNum());
 				paySubCounter = true;
 			}
 			else{
@@ -235,6 +241,11 @@ public class Cost_Payment {
 				req.finishPaying();
 				return false;
 			}
+		}
+		
+		if (!payAddCounter && cost.getAddCounter()){	// add counters here.
+			card.addCounterFromNonEffect(cost.getCounterType(), cost.getCounterNum());
+			payAddCounter = true;
 		}
 		
 		if (!payLife && cost.getLifeCost()){			// pay life here
@@ -326,7 +337,9 @@ public class Cost_Payment {
 	}
 
 	public boolean isAllPaid(){
-		return (payTap && payUntap && payMana && payXMana && paySubCounter && paySac && payExile && payLife && payDiscard && payTapXType && payReturn);
+		// if you add a new Cost type add it here
+		return (payTap && payUntap && payMana && payXMana && paySubCounter && payAddCounter &&
+				paySac && payExile && payLife && payDiscard && payTapXType && payReturn);
 	}
 	
 	public void resetUndoList(){
@@ -357,9 +370,12 @@ public class Cost_Payment {
         
         // refund counters
         if (cost.getSubCounter() && paySubCounter){
-			Counters c = cost.getCounterType();
-			int countersLeft = card.getCounters(c) + cost.getCounterNum();
-			card.setCounter(c, countersLeft, true);
+			card.addCounterFromNonEffect(cost.getCounterType(), cost.getCounterNum());
+        }
+        
+        // remove added counters
+        if (cost.getAddCounter() && payAddCounter){
+			card.subtractCounter(cost.getCounterType(), cost.getCounterNum());
         }
         
         // refund life
@@ -472,6 +488,10 @@ public class Cost_Payment {
     	if (cost.getSubCounter())
     		card.subtractCounter(cost.getCounterType(), cost.getCounterNum());
     	
+    	if (cost.getAddCounter()){
+			card.addCounterFromNonEffect(cost.getCounterType(), cost.getCounterNum());
+    	}
+    	
     	if (cost.getLifeCost())
     		AllZone.ComputerPlayer.payLife(cost.getLifeAmount(), null);
     	
@@ -525,9 +545,7 @@ public class Cost_Payment {
 		cost.changeCost(ability);
 	}
 	
-	
-	
-	
+
 	// ******************************************************************************
 	// *********** Inputs used by Cost_Payment below here ***************************
 	// ******************************************************************************

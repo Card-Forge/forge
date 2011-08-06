@@ -37,6 +37,7 @@ public class Ability_Cost {
 	
 	private boolean subtractCounterCost = false;
 	public boolean getSubCounter() { return subtractCounterCost; }
+	
 	private boolean addCounterCost = false;
 	public boolean getAddCounter() { return addCounterCost; } 
 	
@@ -121,7 +122,18 @@ public class Ability_Cost {
 
         	counterAmount = Integer.parseInt(splitStr[0]);
         	counterType = Counters.valueOf(splitStr[1]);
-        }       
+        }
+        
+		String addStr = "AddCounter<";
+        if(parse.contains(addStr)) {
+        	// AddCounter<NumCounters/CounterType>
+        	addCounterCost = true;
+        	String[] splitStr = abCostParse(parse, addStr, 2);
+        	parse = abUpdateParse(parse, addStr);
+
+        	counterAmount = Integer.parseInt(splitStr[0]);
+        	counterType = Counters.valueOf(splitStr[1]);
+        }    
 		
         String lifeStr = "PayLife<";
         if(parse.contains(lifeStr)) {
@@ -260,7 +272,10 @@ public class Ability_Cost {
 			// tap cost for spells will not be in this form.
 		}
 		
-		if (subtractCounterCost){
+		if (subtractCounterCost || addCounterCost){
+			// add counterCost only appears in this form, which is currently on supported: 
+			// put a -1/-1 counter on a creature you control.
+			
 			// subtractCounter for spells will not be in this form
 
 		}
@@ -372,21 +387,47 @@ public class Ability_Cost {
 		}
 		
 		if (subtractCounterCost){
-			if (first)
-				cost.append("Remove ");
-			else
-				cost.append(", remove ");
-			if (counterAmount != 1)
-				cost.append(counterAmount);
-			else
-				cost.append("a");
-			cost.append(" " + counterType.getName());
-			cost.append(" counter");
-			if (counterAmount != 1)
-				cost.append("s");
-			cost.append(" from ");
-			cost.append(name);
+			if (counterType.getName().equals("Loyalty"))
+				cost.append("-").append(counterAmount);
+			else{
+				if (first)
+					cost.append("Remove ");
+				else
+					cost.append(", remove ");
+				if (counterAmount != 1)
+					cost.append(counterAmount);
+				else
+					cost.append("a");
+				cost.append(" " + counterType.getName());
+				cost.append(" counter");
+				if (counterAmount != 1)
+					cost.append("s");
+				cost.append(" from ");
+				cost.append(name);
+			}
 
+			first = false;
+		}
+		
+		if (addCounterCost){
+			if (counterType.getName().equals("Loyalty"))
+				cost.append("+").append(counterAmount);
+			else{
+				if (first)
+					cost.append("Put ");
+				else
+					cost.append(", put ");
+				if (counterAmount != 1)
+					cost.append(counterAmount);
+				else
+					cost.append("a");
+				cost.append(" " + counterType.getName());
+				cost.append(" counter");
+				if (counterAmount != 1)
+					cost.append("s");
+				cost.append(" from ");
+				cost.append(name);
+			}
 			first = false;
 		}
 		

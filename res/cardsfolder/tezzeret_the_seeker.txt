@@ -2,6 +2,7 @@ Name:Tezzeret the Seeker
 ManaCost:3 U U
 Types:Planeswalker - Tezzeret
 Text:no text
+Loyalty:4
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzeret_the_seeker.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/60.jpg

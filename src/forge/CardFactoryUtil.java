@@ -3705,6 +3705,9 @@ public class CardFactoryUtil {
         PlayerZone myHand = AllZone.getZone(Constant.Zone.Hand, cardController);
         PlayerZone opHand = AllZone.getZone(Constant.Zone.Hand, oppController);
         
+        PlayerZone myLibrary = AllZone.getZone(Constant.Zone.Library, cardController);
+        PlayerZone opLibrary = AllZone.getZone(Constant.Zone.Library, oppController);    
+        
         final String[] l;
         l = s.split("/"); // separate the specification from any math
         final String m[] = {"none"};
@@ -3858,6 +3861,11 @@ public class CardFactoryUtil {
         
         if(sq[0].contains("InYourYard")) if(MY == false) {
             someCards.addAll(myYard.getCards());
+            MY = true;
+        }
+        
+        if(sq[0].contains("InYourLibrary")) if(MY == false) {
+            someCards.addAll(myLibrary.getCards());
             MY = true;
         }
         

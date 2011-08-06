@@ -2,6 +2,7 @@ Name:Garruk Wildspeaker
 ManaCost:2 G G
 Types:Planeswalker - Garruk
 Text:no text
+Loyalty:3
 SVar:Rarity:Mythic
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card140205.jpg
 SetInfo:M11|Mythic|http://magiccards.info/scans/en/m11/175.jpg

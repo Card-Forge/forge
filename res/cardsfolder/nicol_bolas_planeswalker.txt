@@ -2,6 +2,7 @@ Name:Nicol Bolas, Planeswalker
 ManaCost:4 U B B R
 Types:Planeswalker - Bolas
 Text:no text
+Loyalty:5
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nicol_bolas_planeswalker.jpg
 SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/120.jpg

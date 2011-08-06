@@ -87,6 +87,7 @@ public class Card extends MyObservable {
     
     private int                          baseAttack;
     private int                          baseDefense;
+    private int							 baseLoyalty 					   = 0;
     
     private int                          damage;
     
@@ -1627,6 +1628,16 @@ public class Card extends MyObservable {
     
     public ArrayList<String> getPrevType() {
         return new ArrayList<String>(prevType);
+    }
+    
+    //values that are printed on card
+    public int getBaseLoyalty() {
+    	return baseLoyalty;
+    }
+    
+    //values that are printed on card
+    public void setBaseLoyalty(int n) {
+        baseLoyalty = n;
     }
     
     //values that are printed on card

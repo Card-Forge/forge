@@ -68,7 +68,6 @@ public class SpellAbility_Restriction {
 		activationLimit = limit;
 	}
 	
-	
 	public void abilityActivated(){
 		numberTurnActivations++;
 	}
@@ -118,8 +117,13 @@ public class SpellAbility_Restriction {
 		presentCompare = compare;
 	}
 	
+	private boolean pwAbility = false;
+	public void setPlaneswalker(boolean bPlaneswalker) { pwAbility = bPlaneswalker; }
+	public boolean getPlaneswalker() { return pwAbility; }
+	
 	/*
 	 * Restrictions of the future
+	 * (can level Min level Max be done with isPresent?)
 		int levelMin = 0;
 		int levelMax = 0;
 	*/
@@ -190,6 +194,19 @@ public class SpellAbility_Restriction {
 			
 			if (!Card.compare(left, presentCompare, right))
 				return false;
+		}
+		
+		if (pwAbility){
+			// Planeswalker abilities can only be activated as Sorceries
+			if (!Phase.canCastSorcery(activator))
+				return false;
+			
+			for(SpellAbility pwAbs : c.getSpellAbility()){
+				// check all abilities on card that have their planeswalker restriction set to confirm they haven't been activated
+				SpellAbility_Restriction restrict = pwAbs.getRestrictions();
+				if (restrict.getPlaneswalker() && restrict.getNumberTurnActivations() > 0)
+					return false;
+			}
 		}
 			
 		return true;

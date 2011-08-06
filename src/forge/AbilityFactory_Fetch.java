@@ -24,6 +24,10 @@ public class AbilityFactory_Fetch {
 				return super.canPlay();	
 			}
 			
+			public String getStackDescription(){
+				return fetchStackDescription(af, this);
+			}
+			
 			@Override
 			public void resolve() {
 				doFetch(af, this);
@@ -48,12 +52,25 @@ public class AbilityFactory_Fetch {
 				return super.canPlay();	
 			}
 			
+			public String getStackDescription(){
+				return fetchStackDescription(af, this);
+			}
+			
 			@Override
 			public void resolve() {
 				doFetch(af, this);
 			}		
 		};
 		return spFetch;
+	}
+	
+	private static String fetchStackDescription(AbilityFactory af, final SpellAbility sa){
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(af.getHostCard()).append(" - ");
+		sb.append(sa.toString());
+		
+		return sb.toString();
 	}
 	
 	private static void doFetch(AbilityFactory af, final SpellAbility sa){
@@ -83,7 +100,7 @@ public class AbilityFactory_Fetch {
 		
         int fetchNum = 1;	// Default to 1
         if (params.containsKey("FetchNum"))
-        	fetchNum = Integer.parseInt(params.get("FetchNum"));
+        	fetchNum = AbilityFactory.calculateAmount(card, params.get("FetchNum"), sa);
         
         int libraryPosition = 0;        // this needs to be zero indexed. Top = 0, Third = 2
         if (params.containsKey("LibraryPosition"))
@@ -94,34 +111,35 @@ public class AbilityFactory_Fetch {
 	        	
 	            Object o = AllZone.Display.getChoiceOptional("Select a card", library.toArray());
 	            
-	            if(o != null) {
-	            	AllZone.Human_Library.remove(o);
-	            	Card c = (Card) o;
-	            	library.remove(c);
-	                player.shuffle();
-	            	if (destination.equals("Hand")) 
-	            		AllZone.Human_Hand.add(c);         			//move to hand
-	            	else if (destination.equals("Library")) 
-	                	AllZone.Human_Library.add(c, libraryPosition); //move to top of library
-	            	else if (destination.equals("Battlefield")){
-	                	AllZone.getZone(Constant.Zone.Play, player).add(c); //move to battlefield
-	                	if (params.containsKey("Tapped"))
-	                		c.tap();
-	            	}
-	            	else if (destination.equals("Exile"))	// Jester's Cap
-	            		AllZone.getZone(Constant.Zone.Removed_From_Play, player).add(c);
-
-	            }
+	            if (o == null)	// Player didn't want anything? Bail from loop
+	            	break;
 	            
-	            if (af.hasSubAbility()){
-	            	Ability_Sub abSub = sa.getSubAbility();
-	            	if (abSub != null){
-	            	   abSub.resolve();
-	            	}
-	            	else
-	            		CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-	            }
+            	AllZone.Human_Library.remove(o);
+            	Card c = (Card) o;
+            	library.remove(c);
+                player.shuffle();
+            	if (destination.equals("Hand")) 
+            		AllZone.Human_Hand.add(c);         			//move to hand
+            	else if (destination.equals("Library")) 
+                	AllZone.Human_Library.add(c, libraryPosition); //move to top of library
+            	else if (destination.equals("Battlefield")){
+                	AllZone.getZone(Constant.Zone.Play, player).add(c); //move to battlefield
+                	if (params.containsKey("Tapped"))
+                		c.tap();
+            	}
+            	else if (destination.equals("Exile"))	// Jester's Cap
+            		AllZone.getZone(Constant.Zone.Removed_From_Play, player).add(c);
+
 	        }//if
+        }
+        
+        if (af.hasSubAbility()){
+        	Ability_Sub abSub = sa.getSubAbility();
+        	if (abSub != null){
+        	   abSub.resolve();
+        	}
+        	else
+        		CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
         }
 	}
 	
