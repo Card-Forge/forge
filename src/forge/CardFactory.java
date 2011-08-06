@@ -2187,6 +2187,8 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
+                	if (AllZone.Phase.getTurn() <= 3) return false;
+                	
                     CardList results = new CardList();
                     CardList choices = getTargets();
                     
