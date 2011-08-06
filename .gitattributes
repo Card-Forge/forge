@@ -5398,6 +5398,7 @@ res/quest/themes/Domain.thm -text
 res/quest/themes/Enchantments[!!-~]WG.thm -text
 res/quest/themes/Equipment[!!-~]W.thm -text
 res/quest/themes/Flying[!!-~]W.thm -text
+res/quest/themes/Flying[!!-~]WR.thm -text
 res/quest/themes/Flying[!!-~]WU.thm -text
 res/quest/themes/Goblins[!!-~]BR.thm -text
 res/quest/themes/Goblins[!!-~]R.thm -text
@@ -5409,8 +5410,8 @@ res/quest/themes/Mono[!!-~]Black.thm -text
 res/quest/themes/Multicolor[!!-~]BG.thm -text
 res/quest/themes/Multicolor[!!-~]BR.thm -text
 res/quest/themes/Multicolor[!!-~]RG.thm -text
-res/quest/themes/Multicolor[!!-~]RW.thm -text
 res/quest/themes/Multicolor[!!-~]UG.thm -text
+res/quest/themes/Multicolor[!!-~]WR.thm -text
 res/quest/themes/Reanimator[!!-~]B.thm -text
 res/quest/themes/Treefolk[!!-~]WBG.thm -text
 res/quest/themes/Vampires[!!-~]B.thm -text
