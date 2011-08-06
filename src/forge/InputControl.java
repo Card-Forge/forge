@@ -13,8 +13,8 @@ package forge;
         public void setInput(final Input in)
         {
        if(!(input == null || input instanceof Input_StackNotEmpty))
-    	   inputStack.add(input);
-       input = in;
+    	   inputStack.add(in);
+       else input = in;
        updateObservers();
         }
         public void resetInput()
