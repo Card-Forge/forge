@@ -1354,7 +1354,7 @@ public class CardFactory implements NewConstants {
             		}
             	}
             	
-            	SpellAbility abAllPump = new Ability_Activated(card, abCost.getMana())
+            	SpellAbility abAllPump = new Ability_Activated(card, abCost, abTgt)
             	{
             		private static final long serialVersionUID = 7783282947592874L;
             		
@@ -1518,8 +1518,6 @@ public class CardFactory implements NewConstants {
 
             	abAllPump.setDescription(abCost.toString() + spDesc[0]);
             	abAllPump.setStackDescription(stDesc[0]);
-            	abAllPump.setPayCosts(abCost);
-            	abAllPump.setTarget(abTgt);
 
                 card.addSpellAbility(abAllPump);
         	}
@@ -1679,7 +1677,7 @@ public class CardFactory implements NewConstants {
                 }
                 
                 // start ability here:
-                final SpellAbility ability = new Ability_Activated(card, abCost.getMana()) {
+                final SpellAbility ability = new Ability_Activated(card, abCost, abTgt) {
                     private static final long serialVersionUID = -1118592153328758083L;
                     
                     private int               defense;
@@ -1831,15 +1829,12 @@ public class CardFactory implements NewConstants {
                         }//if (card is in play)
                     }//resolve()
                 };//SpellAbility
-                    
-                ability.setPayCosts(abCost);
+
                 ability.setDescription(spDesc[0]);
                 ability.setStackDescription(stDesc[0]);
                 
                 if(!abTgt.doesTarget())
                 	ability.setTargetCard(card);
-                else
-                	ability.setTarget(abTgt);
 
                 card.addSpellAbility(ability);
             }
@@ -2337,7 +2332,7 @@ public class CardFactory implements NewConstants {
                 spDesc[0] = abCost.toString() + spDesc[0];
                            
                 // Damage ability starts here
-                final SpellAbility abDamage = new Ability_Activated(card, abCost.getMana()) {
+                final SpellAbility abDamage = new Ability_Activated(card, abCost, abTgt) {
                     private static final long serialVersionUID = -7560349014757367722L;
                     
                     private int               damage;
@@ -2481,8 +2476,6 @@ public class CardFactory implements NewConstants {
                     }//resolve()
                 };//Ability_Activated
                 
-                abDamage.setPayCosts(abCost);
-                abDamage.setTarget(abTgt);
                 abDamage.setDescription(spDesc[0]);
                 abDamage.setStackDescription(stDesc[0]);
                 
@@ -2686,7 +2679,7 @@ public class CardFactory implements NewConstants {
         	
         	spDesc[0] = abCost.toString() + spDesc[0];
         	
-        	final SpellAbility AbDstryTgt = new Ability_Activated(card, abCost.getMana())
+        	final SpellAbility AbDstryTgt = new Ability_Activated(card, abCost, tgtDstryTgt)
         	{
         		private static final long serialVersionUID = -141142183348756081L;
         		
@@ -2774,13 +2767,6 @@ public class CardFactory implements NewConstants {
 
         	}; //AbDstryTgt
         	
-        	AbDstryTgt.setPayCosts(abCost);
-            
-        	//Input InGetTarget = CardFactoryUtil.input_targetValid(AbDstryTgt, Tgts, Selec);
-        	
-            //AbDstryTgt.setBeforePayMana(InGetTarget);
-            AbDstryTgt.setTarget(tgtDstryTgt);
-            
         	AbDstryTgt.setDescription(spDesc[0]);
         	
         	card.addSpellAbility(AbDstryTgt);

@@ -12,9 +12,18 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
         this(sourceCard, "");
     }
     
+    // todo: remove this constructor when everything uses the abCost system
     public Ability_Activated(Card sourceCard, String manaCost) {
         super(SpellAbility.Ability, sourceCard);
         setManaCost(manaCost);
+    }
+    
+    public Ability_Activated(Card sourceCard, Ability_Cost abCost, Target tgt) {
+        super(SpellAbility.Ability, sourceCard);
+        setManaCost(abCost.getMana());
+        setPayCosts(abCost);
+        if (tgt.doesTarget())
+        	setTarget(tgt);
     }
     
     @Override
