@@ -79,7 +79,8 @@ public class SetInfoUtil {
 		{"ROE", "ROE", "Rise of the Eldrazi"},
 		{"M11", "M11", "Magic The Gathering 2011"},
 		{"SOM", "SOM", "Scars of Mirrodin"},
-		{"MBS", "MBS", "Mirrodin Besieged"}
+		{"MBS", "MBS", "Mirrodin Besieged"},
+        {"NPH", "NPH", "New Phyrexia"}
 	};
 	
 	public static ArrayList<String> getSetCode2List()
