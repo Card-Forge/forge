@@ -8299,7 +8299,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 */
 
-
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Psionic Blast"))
     {
@@ -8408,6 +8408,7 @@ public class CardFactory implements NewConstants {
       };
       spell.setBeforePayMana(target);
     }//*************** END ************ END **************************
+*/
 
 
     //*************** START *********** START **************************
@@ -10967,6 +10968,8 @@ public class CardFactory implements NewConstants {
       card.setFlashback(true);
     }//*************** END ************ END **************************
 
+    
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Tendrils of Corruption"))
     {
@@ -11012,7 +11015,7 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-
+*/
 
 
     //*************** START *********** START **************************
@@ -16601,6 +16604,8 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
     }//*************** END ************ END **************************
     
+    
+/*
   //*************** START *********** START **************************
 	if(cardName.equals("Corrupt"))
 	{
@@ -16676,6 +16681,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		
 		spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell,true));
 	}//*************** END ************ END **************************
+*/
 	
 	
 	//*************** START *********** START **************************

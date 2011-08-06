@@ -8658,7 +8658,8 @@ When Hatching Plans is put into a graveyard from play, draw three cards.
 Corrupt
 5 B
 Sorcery
-Corrupt deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way.
+no text
+spDamageTgtCP:Count$TypeYouCtrl.Swamp:Drawback$YouGainLife/X:Corrupt deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way.:Corrupt deals damage and you gain life.
 
 Sunweb
 3 W
@@ -13206,7 +13207,8 @@ tap: add 1
 Tendrils of Corruption
 3 B
 Instant
-Tendrils of Corruption deals X damage to target creature and you gain X life, where X is the number of Swamps you control.
+no text
+spDamageTgtC:Count$TypeYouCtrl.Swamp:Drawback$YouGainLife/X:Tendrils of Corruption deals X damage to target creature and you gain X life, where X is the number of Swamps you control.:Tendrils of Corruption - deals damage and you gain life.
 
 Ichor Slick
 2 B
@@ -13593,7 +13595,8 @@ Creature Yeti
 Psionic Blast
 2 U
 Instant
-Psionic Blast deals 4 damage to target creature or player and 2 damage to you.
+no text
+spDamageTgtCP:4:Drawback$DamageYou/2:Psionic Blast deals 4 damage to target creature or player and 2 damage to you.:Psionic Blast - deals 4 damage and 2 damage to you.
 
 Allied Strategies
 4 U
