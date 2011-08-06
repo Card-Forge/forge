@@ -6082,7 +6082,7 @@ public class GameActionUtil {
 			@Override
 			public void resolve() {
 				Card target = getTargetCard();
-				if (AllZone.GameAction.isCardInZone(target, grave)) {
+				if (AllZone.GameAction.isCardInZone(target, grave) && CardFactoryUtil.canTarget(source, target)) {
 					AllZone.GameAction.moveToHand(target);
 				}
 			}//resolve()
@@ -6091,6 +6091,7 @@ public class GameActionUtil {
 		
         CardList choices = new CardList(grave.getCards());
         choices = choices.getValidCards(valid, player, source);
+        choices = choices.filter(AllZoneUtil.getCanTargetFilter(source));
         
         if( choices.isEmpty() ) return;
 
