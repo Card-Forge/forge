@@ -12,9 +12,9 @@ import java.util.HashMap;
 //			-LoseControl - you lose control of source card
 //			-PowerGT - (not implemented yet for Old Man of the Sea)
 //	UntilEOT - set to True if this only lasts to end of turn (not implemented yet)
-//	AddKWs	- Keywords to add to the controlled card (like Haste, Sacrifice CARDNAME at EOT, any standard keyword) - not implemented yet
+//	AddKWs	- Keywords to add to the controlled card (as a "&"-separated list; like Haste, Sacrifice CARDNAME at EOT, any standard keyword)
 //  OppChoice - set to True if opponent chooses creature (for Preacher) - not implemented yet
-//	Untap	- set to true if target card should untap when control is taken
+//	Untap	- set to True if target card should untap when control is taken
 
 public class AbilityFactory_GainControl {
 	
@@ -25,6 +25,8 @@ public class AbilityFactory_GainControl {
 	private Card hostCard = null;
 	private ArrayList<String> lose = null;
 	private boolean bUntap = false;
+	private boolean bTapOnLose = false;
+	private ArrayList<String> kws = null;
 	
 	public AbilityFactory_GainControl(AbilityFactory newAF) {
 		AF = newAF;
@@ -33,9 +35,15 @@ public class AbilityFactory_GainControl {
 		if (params.containsKey("LoseControl"))
 			lose = new ArrayList<String>(Arrays.asList(params.get("LoseControl").split(",")));
 		if(params.containsKey("Untap")) {
-			if(params.get("Untap").equals("True")) {
 				bUntap = true;
-			}
+		}
+		if(params.containsKey("TapOnLose")) {
+			//if(params.get("Untap").equals("True")) {
+				bTapOnLose = true;
+			//}
+		}
+		if(params.containsKey("AddKWs")) {
+			kws = new ArrayList<String>(Arrays.asList(params.get("AddKWs").split("&")));
 		}
 	}
 	
@@ -176,6 +184,12 @@ public class AbilityFactory_GainControl {
                 
                 if(bUntap) tgtC.untap();
                 
+                if(null != kws) {
+					for(String kw:kws) {
+						tgtC.addExtrinsicKeyword(kw);
+					}
+				}
+                
                 ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
                 ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
             }
@@ -192,6 +206,9 @@ public class AbilityFactory_GainControl {
 	            }
 	            if(lose.contains("ChangeController")) {
 	            	hostCard.addChangeControllerCommand(getLoseControlCommand(j));
+	            }
+	            if(lose.contains("EOT")) {
+	            	AllZone.EndOfTurn.addAt(getLoseControlCommand(j));
 	            }
             }
         
@@ -235,6 +252,14 @@ public class AbilityFactory_GainControl {
 
     				PlayerZone to = AllZone.getZone(Constant.Zone.Play, c.getOwner());
     				to.add(c);
+    				
+    				if(bTapOnLose) c.tap();
+    				
+    				if(null != kws) {
+    					for(String kw:kws) {
+    						c.removeExtrinsicKeyword(kw);
+    					}
+    				}
 
     				((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
     				((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
