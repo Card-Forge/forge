@@ -300,14 +300,18 @@ public abstract class SpellAbility {
     }
     
     public void setTargetCard(Card card) {
-        targetPlayer = null;//reset setTargetPlayer()
-        
-        targetCard = card;
-        String desc = "";
-        if(!card.isFaceDown()) desc = getSourceCard().getName() + " - targeting " + card;
-        else desc = getSourceCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
-        setStackDescription(desc);
-        
+    	targetPlayer = null;//reset setTargetPlayer()
+
+    	targetCard = card;
+    	String desc = "";
+    	if(null != card) {
+    		if(!card.isFaceDown()) desc = getSourceCard().getName() + " - targeting " + card;
+    		else desc = getSourceCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
+    		setStackDescription(desc);
+    	}
+    	else {
+    		System.out.println(getSourceCard()+" - SpellAbility.setTargetCard() called with null for target card.");
+    	}
         //System.out.println(card + " has become target of a spell or ability (" +this.getSourceCard() + ")");
     }
     
