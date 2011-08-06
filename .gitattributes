@@ -2958,6 +2958,7 @@ res/cardsfolder/hivis_of_the_scale.txt -text svneol=native#text/plain
 res/cardsfolder/hoar_shade.txt -text svneol=native#text/plain
 res/cardsfolder/hoard_smelter_dragon.txt -text svneol=native#text/plain
 res/cardsfolder/hoarders_greed.txt svneol=native#text/plain
+res/cardsfolder/hobble.txt -text svneol=native#text/plain
 res/cardsfolder/hobgoblin_dragoon.txt -text svneol=native#text/plain
 res/cardsfolder/hokori_dust_drinker.txt -text svneol=native#text/plain
 res/cardsfolder/hold_the_line.txt svneol=native#text/plain
