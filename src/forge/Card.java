@@ -107,7 +107,7 @@ public class Card extends MyObservable {
     private String						 topCardName					   = "";
     
 
-    public ArrayList<Ability_Triggered>  zcTriggers                        = new ArrayList<Ability_Triggered>();
+    private ArrayList<Ability_Triggered>  zcTriggers                        = new ArrayList<Ability_Triggered>();
     /*private ArrayList<Command> comesIntoPlayCommandList = new ArrayList<Command>();
     private ArrayList<Command> destroyCommandList       = new ArrayList<Command>();
     private ArrayList<Command> leavesPlayCommandList	  = new ArrayList<Command>();*/
@@ -1362,7 +1362,7 @@ public class Card extends MyObservable {
     //public void removeKeyword(String s) {keyword.remove(s);              this.updateObservers();}
     //public int getKeywordSize() 	{return keyword.size();}
     
-    public String[] basics = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
+    //public String[] basics = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
     
     public ArrayList<String> getIntrinsicKeyword() {
         return new ArrayList<String>(intrinsicKeyword);
