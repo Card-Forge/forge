@@ -4330,6 +4330,34 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
         
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Songs of the Damned")) {
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -7613104859827691986L;
+
+				@Override
+                public boolean canPlayAI() {
+                	//Compy doesn't have a mana pool, so can't play this spell
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	CardList creats = AllZoneUtil.getPlayerGraveyard(card.getController());
+                	creats = creats.filter(AllZoneUtil.creatures);
+                	StringBuilder mana = new StringBuilder();
+                	for(int i = 0; i < creats.size(); i++) {
+                		mana.append("B ");
+                	}
+                	Card mp = AllZone.ManaPool;
+                	mp.addExtrinsicKeyword("ManaPool:"+mana.toString());
+                }
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }

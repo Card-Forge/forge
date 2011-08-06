@@ -1,0 +1,7 @@
+Name:Songs of the Damned
+ManaCost:B
+Types:Instant
+Text:Add B to your mana pool for each creature card in your graveyard.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/songs_of_the_damned.jpg
+End
