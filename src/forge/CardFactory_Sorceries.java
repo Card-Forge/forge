@@ -7697,6 +7697,102 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Dust to Dust")) {
+        	/*
+        	 * Exile two target artifacts.
+        	 */
+            final Card[] target = new Card[2];
+            final int[] index = new int[1];
+            
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -6657178029755410643L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return 2 <= getArtifacts().size();
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    CardList human = getArtifacts();
+                    CardListUtil.sortAttack(human);
+                    
+                    target[0] = human.get(0);
+                    target[1] = human.get(1);
+                }
+                
+                CardList getArtifacts() {
+                	CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isArtifact() && CardFactoryUtil.canTarget(card, c);
+                        }
+                    });
+                    return list;
+                }//getNonArtifact()
+                
+                @Override
+                public void resolve() {
+                    for(int i = 0; i < target.length; i++) {
+                        Card c = target[i];
+                        if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c))
+                        	AllZone.GameAction.exile(c);
+                    }
+                }//resolve()
+            };//SpellAbility
+            
+
+            final Input input = new Input() {
+				private static final long serialVersionUID = -2347728746555100991L;
+
+				@Override
+                public void showMessage() {
+                    if(index[0] == 0) AllZone.Display.showMessage("Select 1st target artifact to exile");
+                    else AllZone.Display.showMessage("Select 2nd target artifact to exile");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    if(c.isArtifact() && zone.is(Constant.Zone.Play)) {
+                        target[index[0]] = c;
+                        index[0]++;
+                        showMessage();
+                        
+                        if(index[0] == target.length) {
+                            if(this.isFree()) {
+                                this.setFree(false);
+                                AllZone.Stack.add(spell);
+                                stop();
+                            } else stopSetNext(new Input_PayManaCost(spell));
+                        }
+                    }
+                }//selectCard()
+            };//Input
+            
+            Input runtime = new Input() {
+				private static final long serialVersionUID = 1757906446704412414L;
+
+				@Override
+                public void showMessage() {
+                    index[0] = 0;
+                    stopSetNext(input);
+                }
+            };//Input
+            
+            card.setSVar("PlayMain1", "TRUE");
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            spell.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Take Possession")) {

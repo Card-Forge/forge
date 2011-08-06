@@ -1,0 +1,8 @@
+Name:Dust to Dust
+ManaCost:1 W W
+Types:Sorcery
+Text:Exile two target artifacts.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dust_to_dust.jpg
+End
