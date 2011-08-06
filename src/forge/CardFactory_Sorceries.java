@@ -7593,7 +7593,7 @@ public class CardFactory_Sorceries {
                     CardList choices = AllZoneUtil.getCreaturesInPlay(card.getController());
                 	choices = choices.filter(AllZoneUtil.untapped);
                     stopSetNext(CardFactoryUtil.input_targetSpecific(spell, choices,
-                    		"Select target tapped creature", true, false));
+                    		"Select target untapped creature", true, false));
                 }//showMessage()
             };//Input
         	spell.setBeforePayMana(runtime);
