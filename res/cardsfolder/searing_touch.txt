@@ -6,4 +6,5 @@ A:SP$DealDamage | Cost$ R | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME 
 SVar:Buyback:4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_touch.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/201.jpg
 End
