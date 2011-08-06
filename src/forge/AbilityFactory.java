@@ -658,6 +658,11 @@ public class AbilityFactory {
         	if (mapParams.containsKey("PresentCompare"))
         		restrict.setPresentCompare(mapParams.get("PresentCompare"));
         }
+        
+        if (mapParams.containsKey("IsNotPresent")){
+        	restrict.setIsPresent(mapParams.get("IsNotPresent"));
+        	restrict.setPresentCompare("EQ0");
+        }
         return restrict;
 	}
 	
