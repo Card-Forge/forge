@@ -21724,7 +21724,8 @@ public class CardFactory implements NewConstants {
         		
         		private CardListFilter colorless = new CardListFilter() {
         			public boolean addCard(Card c) {
-    					return !CardUtil.getColors(c).contains(Constant.Color.Colorless) && !c.getName().equals("Mana Pool");
+    					return !CardUtil.getColors(c).contains(Constant.Color.Colorless) && !c.getName().equals("Mana Pool") &&
+    					       !c.getName().equals("Mind's Desire");
     				}
         		};
         	};// SpellAbility
