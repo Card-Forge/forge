@@ -1,6 +1,7 @@
 
 package forge.properties;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,6 +28,11 @@ public class ForgePreferences extends Preferences {
 
 	public ForgePreferences (String fileName) throws Exception {
 		this.fileName = fileName;
+		File f = new File(fileName);
+		if(!f.exists())
+		{
+			f.createNewFile();
+		}
 		try {
 			FileInputStream stream = new FileInputStream(fileName);
 			load(stream);
