@@ -102,9 +102,8 @@ for currentSet in setCodes :
         del currentMissing[:]
         del currentImplemented[:]
 
-#UNTESTED sort sets by percentage completed
+#sort sets by percentage completed
 totalDataList = sorted(totalData.items(), key=lambda (key,entry): entry[3], reverse=True)
-#UNTESTED
 
 totalPercentage = 0
 totalMissing = 0
