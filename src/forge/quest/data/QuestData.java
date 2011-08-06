@@ -65,8 +65,6 @@ public class QuestData {
     //used by shouldAddAdditionalCards()
     private Random random = new Random();
 
-
-    //feel free to change this to something funnier
     private transient String[] rankArray;
 
     public static final String FANTASY = "Fantasy";
@@ -76,6 +74,9 @@ public class QuestData {
     public boolean useNewQuestUI = false;
 
     public final QuestPetManager petManager = new QuestPetManager();
+
+    //This field stores the version number of the QuestData format
+    private static int VERSION_NUMBER = 0;
 
     public QuestData() {
         preferences = new QuestPreferences();
