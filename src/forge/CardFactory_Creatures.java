@@ -9315,7 +9315,6 @@ public class CardFactory_Creatures {
       
         //*************** START *********** START **************************
         else if(cardName.equals("Brass Squire")) {
-        	final Card[] equipwith = new Card[1];
         	
         	Target t2 = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));
             final Ability_Sub sub = new Ability_Sub(card, t2) {
@@ -9328,8 +9327,7 @@ public class CardFactory_Creatures {
 				
 				@Override
 				public void resolve() {
-					Card equipment = equipwith[0];
-					//Card equipment = Ability_Activated.this.getTargetCard();
+					Card equipment = this.getParent().getTargetCard();
 					Card creature = getTargetCard();
 					if(AllZoneUtil.isCardInPlay(equipment) && AllZoneUtil.isCardInPlay(creature)) {
 						if(CardFactoryUtil.canTarget(card, equipment) && CardFactoryUtil.canTarget(card, creature)) {
@@ -9365,7 +9363,6 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                	equipwith[0] = getTargetCard();
                 	sub.resolve();
                 }
             };
