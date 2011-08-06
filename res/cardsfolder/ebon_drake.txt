@@ -4,7 +4,7 @@ Types:Creature Drake
 Text:no text
 PT:3/3
 K:Flying
-T:Mode$ SpellCast | TriggerZone$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a spell, you lose 1 life.
+T:Mode$ SpellCast | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a spell, you lose 1 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:AntiBuffedBy:Spell
 SVar:Rarity:Uncommon
