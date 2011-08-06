@@ -135,24 +135,24 @@ public class Gui_Quest extends JFrame implements NewConstants{
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 25));
         jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel1.setText("Quest Mode");
-        jLabel1.setBounds(new Rectangle(1, 7, 453, 45));
+        jLabel1.setBounds(new Rectangle(1, 7, 499, 45));
         this.setResizable(false);
         this.setTitle("Quest Mode");
         this.getContentPane().setLayout(null);
         difficultyLabel.setText("Medium");
-        difficultyLabel.setBounds(new Rectangle(1, 52, 453, 41));
+        difficultyLabel.setBounds(new Rectangle(1, 52, 499, 41));
         difficultyLabel.setFont(new java.awt.Font("Dialog", 0, 25));
         difficultyLabel.setHorizontalAlignment(SwingConstants.CENTER);
         winLostLabel.setText("23 wins / 10 losses");
-        winLostLabel.setBounds(new Rectangle(1, 130, 453, 43));
+        winLostLabel.setBounds(new Rectangle(1, 130, 499, 43));
         winLostLabel.setFont(new java.awt.Font("Dialog", 0, 25));
         winLostLabel.setHorizontalAlignment(SwingConstants.CENTER);
         winLostLabel.setHorizontalTextPosition(SwingConstants.CENTER);
         rankLabel.setText("Card Flopper");
-        rankLabel.setBounds(new Rectangle(1, 93, 453, 37));
+        rankLabel.setBounds(new Rectangle(1, 93, 499, 37));
         rankLabel.setFont(new java.awt.Font("Dialog", 0, 25));
         rankLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        creditsLabel.setBounds(new Rectangle(1, 175, 453, 15));
+        creditsLabel.setBounds(new Rectangle(1, 175, 499, 15));
         //creditsLabel.setText("Credits: 1000");
         creditsLabel.setHorizontalAlignment(SwingConstants.CENTER);
         creditsLabel.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -171,7 +171,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         if ("Fantasy".equals(questData.getMode()))
         {
 
-            lifeLabel.setBounds(new Rectangle(1, 195, 453, 15));
+            lifeLabel.setBounds(new Rectangle(1, 195, 499, 15));
             lifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
             lifeLabel.setHorizontalTextPosition(SwingConstants.CENTER);
             
