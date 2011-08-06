@@ -9,4 +9,5 @@ SVar:Pump:AB$Pump | Cost$ RW | Defined$ Self | NumAtt$ +1 | SpellDescription$ Th
 K:stPumpEnchanted:Creature.White:1/1/Lifelink:No Condition:As long as enchanted creature is white, it gets +1/+1 and has lifelink. (Damage dealt by the creature also causes its controller to gain that much life.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_of_the_nobilis.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/146.jpg
 End

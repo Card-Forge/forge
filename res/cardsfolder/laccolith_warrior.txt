@@ -9,4 +9,5 @@ SVar:DBPump:DB$Pump | Defined$ Self | KW$ HIDDEN Prevent all combat damage that 
 SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laccolith_warrior.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/90.jpg
 End

@@ -9,4 +9,5 @@ SVar:DBPump:DB$Pump | Defined$ Self | KW$ HIDDEN Prevent all combat damage that 
 SVar:X:Count$CardPower
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laccolith_whelp.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/91.jpg
 End

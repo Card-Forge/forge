@@ -7,4 +7,5 @@ T:Mode$ SpellCast | ValidCard$ Card.Blue | TriggerZones$ Battlefield | Execute$ 
 SVar:TrigMill:AB$Mill | Cost$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drowner_initiate.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/36.jpg
 End
