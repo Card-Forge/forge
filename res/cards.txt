@@ -1,3 +1,29 @@
+Evincar's Justice
+2 B B
+Sorcery
+no text
+spDamageAll:Player,Creature:2:Evincar's Justice deals 2 damage to each creature and each player.
+SVar:Buyback:3
+
+Claws of Wirewood
+3 G
+Sorcery
+no text
+spDamageAll:Player,Creature.withFlying:3:Claws of Wirewood deals 3 damage to each creature with flying and each player.
+Cycling:2
+
+Gale Force
+4 G
+Sorcery
+no text
+spDamageAll:Creature.withFlying:5:Gale Force deals 5 damage to each creature with flying.
+
+Squall
+2 G
+Sorcery
+no text
+spDamageAll:Creature.withFlying:2:Squall deals 2 damage to each creature with flying.
+
 Triskelion
 6
 Artifact Creature Construct
