@@ -1,3 +1,25 @@
+Saprazzan Raider
+2 U
+Creature Merfolk
+no text
+1/2
+WheneverKeyword:BecomesBlocked:Self:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:No Special Condition:When Saprazzan Raider becomes blocked, return it to its owner's hand.
+
+Timid Drake
+2 U
+Creature Drake
+no text
+3/3
+Flying
+WheneverKeyword:EntersBattleField:Type/Creature:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:Initiator - Other than Self:When another creature enters the battlefield, return Timid Drake to its owner's hand.
+
+Zephyr Spirit
+5 U
+Creature Spirit
+no text
+0/6
+WheneverKeyword:Blocks:Self:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:No Special Condition:When Zephyr Spirit blocks, return it to its owner's hand.
+
 Regress
 2 U
 Instant
