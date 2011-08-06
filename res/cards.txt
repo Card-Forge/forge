@@ -1,3 +1,56 @@
+Clinging Darkness
+1 B
+Enchantment Aura
+Enchanted creature gets -4/-1.
+Enchant creature
+enPumpCurse:-4/-1
+
+Enfeeblement
+B B
+Enchantment Aura
+Enchanted creature gets -2/-2.
+Enchant creature
+enPumpCurse:-2/-2
+
+Feebleness
+1 B
+Enchantment Aura
+Enchanted creature gets -2/-1.
+Flash
+Enchant creature
+enPumpCurse:-2/-1
+
+Greel's Caress
+1 B
+Enchantment Aura
+Enchanted creature gets -3/-0.
+Flash
+Enchant creature
+enPumpCurse:-3/-0
+
+Sicken
+B
+Enchantment Aura
+Enchanted creature gets -1/-1.
+Enchant creature
+enPumpCurse:-1/-1
+Cycling:2
+
+Torment
+1 B
+Enchantment Aura
+Enchanted creature gets -3/-0.
+Enchant creature
+enPumpCurse:-3/-0
+
+Torpor Dust
+2 UB
+Enchantment Aura
+Enchanted creature gets -3/-0.
+Flash
+Enchant creature
+enPumpCurse:-3/-0
+
 Ironclaw Orcs
 1 R
 Creature Orc

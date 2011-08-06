@@ -38,6 +38,14 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+clinging_darkness.jpg		http://www.wizards.com/global/images/magic/general/clinging_darkness.jpg
+enfeeblement.jpg		http://www.wizards.com/global/images/magic/general/enfeeblement.jpg
+feebleness.jpg		http://www.wizards.com/global/images/magic/general/feebleness.jpg
+greels_caress.jpg		http://www.wizards.com/global/images/magic/general/greels_caress.jpg
+sicken.jpg		http://www.wizards.com/global/images/magic/general/sicken.jpg
+torment.jpg		http://www.wizards.com/global/images/magic/general/torment.jpg
+torpor_dust.jpg		http://www.wizards.com/global/images/magic/general/torpor_dust.jpg
+copper_tablet.jpg		http://www.wizards.com/global/images/magic/general/copper_tablet.jpg
 ironclaw_orcs.jpg		http://www.wizards.com/global/images/magic/general/ironclaw_orcs.jpg
 bloodshed_fever.jpg		http://www.wizards.com/global/images/magic/general/bloodshed_fever.jpg
 dehydration.jpg		http://www.wizards.com/global/images/magic/general/dehydration.jpg
