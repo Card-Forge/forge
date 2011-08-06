@@ -1,8 +1,11 @@
 Name:Elven Cache
 ManaCost:2 G G
 Types:Sorcery
-Text:Return target card from your graveyard to your hand.
-K:spReturnTgt:1:Card:Hand
+Text:no text
+A:SP$Retrieve | Cost$ 2 G G | Destination$ Hand | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Return target card from your graveyard to your hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_cache.jpg
 End
+#
+#K:spReturnTgt:1:Card:Hand
+#
