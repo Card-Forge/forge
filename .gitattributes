@@ -7782,6 +7782,7 @@ src/forge/AIPlayer.java -text svneol=native#text/plain
 src/forge/Ability.java svneol=native#text/plain
 src/forge/AbilityFactory.java -text svneol=native#text/plain
 src/forge/AbilityFactory_AlterLife.java -text svneol=native#text/plain
+src/forge/AbilityFactory_Animate.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Bounce.java -text svneol=native#text/plain
 src/forge/AbilityFactory_ChangeZone.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Combat.java -text svneol=native#text/plain

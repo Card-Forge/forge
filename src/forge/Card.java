@@ -1799,6 +1799,13 @@ public class Card extends MyObservable {
     public ArrayList<String> getType() {
         return new ArrayList<String>(type);
     }
+    
+    public ArrayList<String> clearAllTypes() {
+    	ArrayList<String> originalTypes = new ArrayList<String>();
+    	originalTypes.addAll(type);
+    	type.clear();
+    	return originalTypes;
+    }
 
     public void setPrevType(ArrayList<String> a) {
         prevType = new ArrayList<String>(a);
