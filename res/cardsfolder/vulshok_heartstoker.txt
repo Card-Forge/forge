@@ -1,0 +1,8 @@
+Name:Vulshok Heartstoker
+ManaCost:2 R
+Types:Creature Human Shaman
+Text:When Vulshok Heartstoker enters the battlefield, target creature gets +2/+0 until end of turn.
+PT:2/2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vulshok_heartstoker.jpg
+End

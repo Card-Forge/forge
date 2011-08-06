@@ -3275,7 +3275,7 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Inner-Flame Acolyte")) {
+        else if(cardName.equals("Inner-Flame Acolyte") || cardName.equals("Vulshok Heartstoker")) {
             final CommandReturn getCreature = new CommandReturn() {
                 //get target card, may be null
                 public Object execute() {
@@ -3314,14 +3314,18 @@ public class CardFactory_Creatures {
                     
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         c.addTempAttackBoost(2);
-                        c.addExtrinsicKeyword("Haste");
+                        if (card.getName().equals("Inner-Flame Acolyte")) {
+                            c.addExtrinsicKeyword("Haste");
+                        }
                         
                         AllZone.EndOfTurn.addUntil(new Command() {
                             private static final long serialVersionUID = -6478147896119509688L;
                             
                             public void execute() {
                                 c.addTempAttackBoost(-2);
-                                c.removeExtrinsicKeyword("Haste");
+                                if (card.getName().equals("Inner-Flame Acolyte")) {
+                                    c.removeExtrinsicKeyword("Haste");
+                                }
                             }
                         });
                     }//if
@@ -3359,15 +3363,16 @@ public class CardFactory_Creatures {
                     return (o != null) && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
                 }
             });
-            
-            card.addSpellAbility(new Spell_Evoke(card, "R") {
-                private static final long serialVersionUID = 8173305091293824506L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            });
+            if (card.getName().equals("Inner-Flame Acolyte")) {
+                card.addSpellAbility(new Spell_Evoke(card, "R") {
+                    private static final long serialVersionUID = 8173305091293824506L;
+                    
+                    @Override
+                    public boolean canPlayAI() {
+                        return false;
+                    }
+                });
+            }
         }//*************** END ************ END **************************
         
 
