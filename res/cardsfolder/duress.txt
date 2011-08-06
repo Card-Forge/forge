@@ -2,7 +2,6 @@ Name:Duress
 ManaCost:B
 Types:Sorcery
 Text:no text
-#K:spDiscardOpp:RevealYouChoose/Card.nonCreature+nonLand:1:Target opponent reveals his or her hand. Choose a noncreature, nonland card from it. That player discards that card.:Duress - opponent reveals hand and discards a card
 A:SP$Discard|Cost$B|Opponent$True|Mode$RevealYouChoose|DiscardValid$Card.nonCreature+nonLand|NumCards$1|SpellDescription$Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duress.jpg
