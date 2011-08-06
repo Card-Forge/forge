@@ -4,6 +4,6 @@ Types:Creature Minotaur Shaman
 Text:no text
 PT:1/3
 K:StaticEffect:Play:Permanents you Control:PTBonus/1/0:Type.Creature!Type.Minotaur:Minotaur creatures get +1/+0.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/anaba_spirit_crafter.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/anaba_spirit_crafter.jpg
 End

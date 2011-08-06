@@ -3,6 +3,6 @@ ManaCost:3 B
 Types:Instant
 Text:Destroy target nonsnow creature.
 K:spDestroyTgt:Creature.nonSnow
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/chill_to_the_bone.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chill_to_the_bone.jpg
 End

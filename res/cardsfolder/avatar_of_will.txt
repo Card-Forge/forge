@@ -4,6 +4,6 @@ Types:Creature Avatar
 Text:If an opponent has no cards in hand, Avatar of Will costs 6 less to play.
 PT:5/6
 K:Flying
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_will.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_will.jpg
 End

@@ -10,6 +10,6 @@ K:Trample
 K:Haste
 K:Protection from red
 K:Protection from black
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106645.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106645.jpg
 End

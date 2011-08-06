@@ -6,6 +6,6 @@ K:Comes into play tapped.
 K:tap: add U
 K:tap: add B
 K:tap: add R
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_necropolis.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_necropolis.jpg
 End

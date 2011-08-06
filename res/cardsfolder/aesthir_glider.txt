@@ -5,6 +5,6 @@ Text:no text
 PT:2/1
 K:CARDNAME can't block.
 K:Flying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/al/en-us/card3040.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/al/en-us/card3040.jpg
 End

@@ -5,6 +5,6 @@ Text:no text
 PT:2/1
 K:Prevent all damage that would be dealt to CARDNAME by artifact creatures.
 K:CARDNAME can't be blocked by artifact creatures.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_pixies.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_pixies.jpg
 End

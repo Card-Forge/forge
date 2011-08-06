@@ -4,6 +4,6 @@ Types:Creature Beast
 Text:Fading 3
 PT:5/5
 K:Shroud
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blastoderm.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blastoderm.jpg
 End

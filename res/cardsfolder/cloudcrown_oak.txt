@@ -4,6 +4,6 @@ Types:Creature Treefolk Warrior
 Text:no text
 PT:3/4
 K:Reach
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139492.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139492.jpg
 End

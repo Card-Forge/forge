@@ -4,6 +4,6 @@ Types:Creature Human Soldier
 Text:no text
 PT:1/2
 K:Double Strike
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_swiftblade.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_swiftblade.jpg
 End

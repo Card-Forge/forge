@@ -2,6 +2,6 @@ Name:Crucible of Worlds
 ManaCost:3
 Types:Artifact
 Text:You may play land cards from your graveyard.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crucible_of_worlds.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crucible_of_worlds.jpg
 End

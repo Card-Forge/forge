@@ -4,6 +4,6 @@ Types:Creature Human Soldier Knight
 Text:no text
 PT:2/3
 K:abPump R:+1/+0
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card21253.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card21253.jpg
 End

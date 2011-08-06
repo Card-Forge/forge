@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Legendary Creature Human Monk
 Text:You may play two additional lands on each of your turns.
 PT:1/2
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/azusa_lost_but_seeking.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/azusa_lost_but_seeking.jpg
 End

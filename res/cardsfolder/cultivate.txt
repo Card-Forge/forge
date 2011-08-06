@@ -2,6 +2,6 @@ Name:Cultivate
 ManaCost:2 G
 Types:Sorcery
 Text:Search your library for up to two basic land cards, reveal those cards, and put one onto the battlefield tapped and the other into your hand. Then shuffle your library.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cultivate.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cultivate.jpg
 End

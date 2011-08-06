@@ -4,7 +4,7 @@ Types:Creature Human Warrior Ally
 Text:Whenever Bojuka Brigand or another Ally creature enters the battlefield under your control, you may put a +1/+1 counter on Bojuka Brigand.
 PT:1/1
 K:CARDNAME can't block.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bojuka_brigand.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bojuka_brigand.jpg
 End

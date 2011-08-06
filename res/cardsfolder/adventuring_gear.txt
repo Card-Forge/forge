@@ -2,7 +2,7 @@ Name:Adventuring Gear
 ManaCost:1
 Types:Artifact Equipment
 Text:Landfall - Whenever a land enters the battlefield under your control, equipped creature gets +2/+2 until end of turn.
-K:SVar:BuffedBy:Land
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/adventuring_gear.jpg
+SVar:BuffedBy:Land
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/adventuring_gear.jpg
 End

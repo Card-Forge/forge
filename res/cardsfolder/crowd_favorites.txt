@@ -4,6 +4,6 @@ Types:Creature Human Soldier
 Text:no text
 PT:4/4
 K:abPump 3 W:+0/+5
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crowd_favorites.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crowd_favorites.jpg
 End

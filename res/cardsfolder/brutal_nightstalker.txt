@@ -4,6 +4,6 @@ Types:Creature Nightstalker
 Text:no text
 PT:3/2
 K:WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:Yes_No:No Special Condition:When Brutal Nightstalker enters the battlefield, you may have target opponent discard a card.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/brutal_nightstalker.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/brutal_nightstalker.jpg
 End

@@ -3,6 +3,6 @@ ManaCost:3
 Types:Artifact Creature Assembly-Worker
 Text:no text
 PT:2/2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/assembly_worker.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/assembly_worker.jpg
 End

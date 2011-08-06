@@ -3,7 +3,7 @@ ManaCost:X R
 Types:Sorcery
 Text:no text
 K:spDamageTgtCP:X:Blaze deals X damage to target creature or player.
-K:SVar:X:Count$xPaid
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blaze.jpg
+SVar:X:Count$xPaid
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blaze.jpg
 End

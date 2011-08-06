@@ -5,6 +5,6 @@ Text:LEVEL 1-4 2/2 LEVEL 5+ 5/5 First Strike
 PT:1/1
 K:Level up:2
 K:maxLevel:5
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/caravan_escort.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/caravan_escort.jpg
 End

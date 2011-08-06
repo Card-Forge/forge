@@ -5,6 +5,6 @@ Text:no text
 PT:5/5
 K:Flying
 K:Untap:3 U
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/bd/en-us/card26653.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/bd/en-us/card26653.jpg
 End

@@ -5,6 +5,6 @@ Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact y
 PT:1/1
 K:Flying
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/broodstar.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/broodstar.jpg
 End

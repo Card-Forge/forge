@@ -4,6 +4,6 @@ Types:Sorcery
 Text:no text
 K:spDiscardOpp:RevealYouChoose:1:Target opponent reveals his or her hand. You choose a card from it. That player discards that card.:Brainbite - opponent reveals hand and dicards a card
 K:Draw a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/brainbite.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brainbite.jpg
 End

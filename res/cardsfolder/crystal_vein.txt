@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 K:tap: add 1
 K:tap, Sacrifice CARDNAME: Add 2 to your mana pool.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_vein.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_vein.jpg
 End

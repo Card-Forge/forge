@@ -3,6 +3,6 @@ ManaCost:R
 Types:Instant
 Text:Counter target artifact spell.
 K:spCounter:Spell:Type(Artifact):Graveyard:None
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_blast.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_blast.jpg
 End

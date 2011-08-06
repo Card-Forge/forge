@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Flanking
 K:StaticEffect:Play:Permanents you Control:Keyword/Flanking:Type.Creature!with.Flanking!NotSelf:Other creatures you control with flanking have flanking. (Each instance of flanking triggers separately.)
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cavalry_master.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cavalry_master.jpg
 End

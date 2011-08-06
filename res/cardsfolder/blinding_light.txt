@@ -2,7 +2,7 @@ Name:Blinding Light
 ManaCost:2 W
 Types:Sorcery
 Text:Tap all nonwhite creatures.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20388.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20388.jpg
 End

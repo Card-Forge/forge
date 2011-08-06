@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Human Wizard
 Text:At the beginning of your upkeep, each player discards a card.
 PT:2/2
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_lethemancer.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_lethemancer.jpg
 End

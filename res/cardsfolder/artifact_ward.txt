@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature has protection from artifacts. This effect doesn't remove Artifact Ward.
 K:Enchant creature
 K:enPump:Protection from artifacts
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_ward.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_ward.jpg
 End

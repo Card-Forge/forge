@@ -9,7 +9,7 @@ K:G, tap: add U
 K:G, tap: add B
 K:G, tap: add R
 K:G, tap: add G
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ceta_disciple.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ceta_disciple.jpg
 End

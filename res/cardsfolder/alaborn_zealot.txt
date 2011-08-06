@@ -3,6 +3,6 @@ ManaCost:W
 Types:Creature Human Soldier
 Text:When Alaborn Zealot blocks a creature, destroy that creature and Alaborn Zealot.
 PT:1/1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/alaborn_zealot.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/alaborn_zealot.jpg
 End

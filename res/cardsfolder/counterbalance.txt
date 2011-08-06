@@ -2,7 +2,7 @@ Name:Counterbalance
 ManaCost:U U
 Types:Enchantment
 Text:Whenever an opponent plays a spell, you may reveal the top card of your library. If you do, counter that spell if it has the same converted mana cost as the revealed card.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/counterbalance.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/counterbalance.jpg
 End

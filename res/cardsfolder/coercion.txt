@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Sorcery
 Text:no text
 K:spDiscardOpp:RevealYouChoose:1:Target opponent reveals his or her hand. You choose a card from it. That player discards that card.:Coercion - opponent reveals hand and discards a card
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83034.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83034.jpg
 End

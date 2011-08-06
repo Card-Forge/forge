@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Sorcery
 Text:no text
 K:spDrawCardsTgt:3:Drawback$TgtDiscard/2/UnlessDiscardType.Land:Target player draws three cards. Then that player discards two cards unless he or she discards a land card.:Compulsive Research - draw 3 cards, then discards 2 unless discards a land.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/compulsive_research.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/compulsive_research.jpg
 End

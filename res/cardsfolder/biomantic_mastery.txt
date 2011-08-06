@@ -3,7 +3,7 @@ ManaCost:4 UG UG UG
 Types:Sorcery
 Text:no text
 K:spDrawCards:X:Draw a card for each creature target player controls, then draw a card for each creature another target player controls.:Biomantic Mastery - Draw cards.
-K:SVar:X:Count$TypeOnBattlefield.Creature
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/biomantic_mastery.jpg
+SVar:X:Count$TypeOnBattlefield.Creature
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/biomantic_mastery.jpg
 End

@@ -2,6 +2,6 @@ Name:Burning Inquiry
 ManaCost:R
 Types:Sorcery
 Text:Each player draws three cards, then discards three cards at random.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_inquiry.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_inquiry.jpg
 End

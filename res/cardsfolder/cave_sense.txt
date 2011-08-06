@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature gets +1/+1 and has mountainwalk.
 K:Enchant creature
 K:enPump:+1/+1/Mountainwalk
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cave_sense.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cave_sense.jpg
 End

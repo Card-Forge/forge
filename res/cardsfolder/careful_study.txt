@@ -3,6 +3,6 @@ ManaCost:U
 Types:Sorcery
 Text:no text
 K:spDrawCards:2:Drawback$YouDiscard/2:Draw two cards, then discard two cards.:Careful Study - Draw 2 cards, then discard 2 cards.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/careful_study.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/careful_study.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Soldier
 Text:no text
 PT:2/2
 K:Vigilance
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10487.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10487.jpg
 End

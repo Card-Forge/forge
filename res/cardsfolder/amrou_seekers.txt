@@ -4,6 +4,6 @@ Types:Creature Kithkin Rebel
 Text:no text
 PT:2/2
 K:CARDNAME can't be blocked except by artifact creatures and/or white creatures.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/amrou_seekers.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/amrou_seekers.jpg
 End

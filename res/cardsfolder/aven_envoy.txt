@@ -4,6 +4,6 @@ Types:Creature Bird Soldier
 Text:no text
 PT:0/2
 K:Flying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card44325.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card44325.jpg
 End

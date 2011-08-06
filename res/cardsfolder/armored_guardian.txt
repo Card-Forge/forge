@@ -9,6 +9,6 @@ K:abPumpTgtC 1 W W:Protection from black
 K:abPumpTgtC 1 W W:Protection from red
 K:abPumpTgtC 1 W W:Protection from green
 K:abPump 1 U U:Shroud
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_guardian.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_guardian.jpg
 End

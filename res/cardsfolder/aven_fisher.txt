@@ -4,6 +4,6 @@ Types:Creature Bird Soldier
 Text:When Aven Fisher is put into a graveyard from play, you may draw a card.
 PT:2/2
 K:Flying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82998.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82998.jpg
 End

@@ -4,6 +4,6 @@ Types:Land Swamp Forest
 Text:no text
 K:tap: add B
 K:tap: add G
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/1e/en-us/card280.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/1e/en-us/card280.jpg
 End

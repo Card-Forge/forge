@@ -4,6 +4,6 @@ Types:Creature Cephalid
 Text:no text
 PT:2/2
 K:abDrawCardsTgt T:2:Drawback$TgtDiscard/2:Target player draws two cards, then discards two cards.:Cephalid Broker - target player draws cards and discards cards
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_broker.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_broker.jpg
 End

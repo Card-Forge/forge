@@ -2,6 +2,6 @@ Name:Acorn Harvest
 ManaCost:3 G
 Types:Sorcery
 Text:no text
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/acorn_harvest.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/acorn_harvest.jpg
 End

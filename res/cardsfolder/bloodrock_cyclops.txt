@@ -4,6 +4,6 @@ Types:Creature Cyclops
 Text:no text
 PT:3/3
 K:CARDNAME attacks each turn if able.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodrock_cyclops.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodrock_cyclops.jpg
 End

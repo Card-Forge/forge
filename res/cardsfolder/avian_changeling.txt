@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:Flying
 K:Changeling
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145813.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145813.jpg
 End

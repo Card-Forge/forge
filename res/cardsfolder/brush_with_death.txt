@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Sorcery
 Text:no text
 K:spLoseLifeTgt:2:Drawback$YouGainLife/2:Target opponent loses 2 life and you gain 2 life.
-K:SVar:Buyback:2 B B
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/brush_with_death.jpg
+SVar:Buyback:2 B B
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brush_with_death.jpg
 End

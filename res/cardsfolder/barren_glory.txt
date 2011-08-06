@@ -2,7 +2,7 @@ Name:Barren Glory
 ManaCost:4 W W
 Types:Enchantment
 Text:At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/barren_glory.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/barren_glory.jpg
 End

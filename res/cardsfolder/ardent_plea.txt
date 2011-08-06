@@ -4,6 +4,6 @@ Types:Enchantment
 Text:no text
 K:Exalted
 K:Cascade
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ardent_plea.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ardent_plea.jpg
 End

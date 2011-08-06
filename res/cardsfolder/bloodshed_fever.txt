@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature attacks each turn if able.
 K:Enchant creature
 K:enPumpCurse:CARDNAME attacks each turn if able.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodshed_fever.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodshed_fever.jpg
 End

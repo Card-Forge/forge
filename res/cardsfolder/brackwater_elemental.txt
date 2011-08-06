@@ -6,6 +6,6 @@ PT:4/4
 K:WheneverKeyword:Attacks:Self:Play:KeywordPumpEOT/At the beginning of the end step, sacrifice CARDNAME.:Self:ASAP:No_Condition:No Special Condition:When Brackwater Elemental attacks, sacrifice it at the beginning of the next end step.
 K:WheneverKeyword:Blocks:Self:Play:KeywordPumpEOT/At the beginning of the end step, sacrifice CARDNAME.:Self:ASAP:No_Condition:No Special Condition:When Brackwater Elemental blocks, sacrifice it at the beginning of the next end step.
 K:Unearth:2 U
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/brackwater_elemental.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brackwater_elemental.jpg
 End

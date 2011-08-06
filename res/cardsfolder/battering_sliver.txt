@@ -3,7 +3,7 @@ ManaCost:5 R
 Types:Creature Sliver
 Text:All Sliver creatures have trample.
 PT:4/4
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_sliver.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_sliver.jpg
 End

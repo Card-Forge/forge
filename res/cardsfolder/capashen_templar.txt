@@ -4,6 +4,6 @@ Types:Creature Human Knight
 Text:no text
 PT:2/2
 K:abPump W:+0/+1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_templar.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_templar.jpg
 End

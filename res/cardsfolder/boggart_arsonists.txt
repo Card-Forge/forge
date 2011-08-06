@@ -5,6 +5,6 @@ Text:no text
 PT:2/1
 K:Plainswalk
 K:abDestroyTgtV 2 R Sac<1/CARDNAME>:Scarecrow,Plains:Destroy target Scarecrow or Plains.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_arsonists.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_arsonists.jpg
 End

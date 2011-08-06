@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Sorcery
 Text:no text
 K:spDrawCards:X:Draw a card for each Bird on the battlefield.:Airborne Aid - draw cards.
-K:SVar:X:Count$TypeOnBattlefield.Bird
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/airborne_aid.jpg
+SVar:X:Count$TypeOnBattlefield.Bird
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/airborne_aid.jpg
 End

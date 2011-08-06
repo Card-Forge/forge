@@ -4,6 +4,6 @@ Types:Sorcery
 Text:no text
 K:spLoseLifeTgt:4:Drawback$YouGainLife/4:Target player loses 4 life and you gain 4 life.
 K:TypeCycling:Basic:1 B
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/absorb_vis.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/absorb_vis.jpg
 End

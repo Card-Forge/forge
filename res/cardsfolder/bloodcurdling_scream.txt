@@ -3,7 +3,7 @@ ManaCost:X B
 Types:Sorcery
 Text:no text
 K:spPumpTgt:+X/+0:Target creature gets +X/+0 until end of turn.
-K:SVar:X:Count$xPaid
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodcurdling_scream.jpg
+SVar:X:Count$xPaid
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodcurdling_scream.jpg
 End

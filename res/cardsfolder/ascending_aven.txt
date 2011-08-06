@@ -6,6 +6,6 @@ PT:3/2
 K:Flying
 K:CARDNAME can block only creatures with flying.
 K:Morph:2 U
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ascending_aven.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ascending_aven.jpg
 End

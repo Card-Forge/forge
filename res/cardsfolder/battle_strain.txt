@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Enchantment
 Text:no text
 K:WheneverKeyword:Blocks:No_Initiator:Play:Damage/1:ControllingPlayer_Initiator:ASAP:No_Condition:No Special Condition:Whenever a creature blocks, Battle Strain deals 1 damage to that creature's controller.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_strain.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_strain.jpg
 End

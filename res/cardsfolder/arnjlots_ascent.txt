@@ -4,6 +4,6 @@ Types:Enchantment
 Text:no text
 K:Cumulative upkeep:U
 K:abPumpTgtC 1:Flying:Target creature gains flying until end of turn.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arnjlots_ascent.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arnjlots_ascent.jpg
 End

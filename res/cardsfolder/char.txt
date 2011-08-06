@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Instant
 Text:no text
 K:spDamageTgtCP:4:Drawback$DamageYou/2:Char deals 4 damage to target creature or player and 2 damage to you.:Char deals 4 damage.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87942.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87942.jpg
 End

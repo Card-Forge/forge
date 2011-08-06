@@ -4,6 +4,6 @@ Types:Creature Bear
 Text:no text
 PT:2/2
 K:Flash
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card114905.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card114905.jpg
 End

@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Creature Eldrazi Drone
 Text:Eldrazi Spawn creatures you control get +2/+1.
 PT:4/4
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/broodwarden.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/broodwarden.jpg
 End

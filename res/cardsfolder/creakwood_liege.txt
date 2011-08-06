@@ -5,7 +5,7 @@ Text:At the beginning of your upkeep, you may put a 1/1 black and green Worm cre
 PT:2/2
 K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.green!NotSelf:Other green creatures you control get +1/+1.
 K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.black!NotSelf:Other black creatures you control get +1/+1.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/creakwood_liege.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/creakwood_liege.jpg
 End

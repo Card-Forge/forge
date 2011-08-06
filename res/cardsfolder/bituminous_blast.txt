@@ -4,6 +4,6 @@ Types:Instant
 Text:no text
 K:Cascade
 K:spDamageTgtC:4
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bituminous_blast.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bituminous_blast.jpg
 End

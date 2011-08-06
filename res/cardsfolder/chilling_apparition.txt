@@ -4,6 +4,6 @@ Types:Creature Spirit
 Text:Whenever Chilling Apparition deals combat damage to a player, that player discards a card.
 PT:1/1
 K:RegenerateMe:B
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/chilling_apparition.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chilling_apparition.jpg
 End

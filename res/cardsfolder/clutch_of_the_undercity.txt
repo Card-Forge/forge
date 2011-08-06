@@ -4,6 +4,6 @@ Types:Instant
 Text:Return target permanent to its owner's hand. Its controller loses 3 life.
 K:spBounceTgt:Permanent:Hand:Drawback$TgtCtrlrLoseLife/3
 K:Transmute: 1 U B
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/clutch_of_the_undercity.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/clutch_of_the_undercity.jpg
 End

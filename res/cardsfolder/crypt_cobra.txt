@@ -3,6 +3,6 @@ ManaCost:3 B
 Types:Creature Snake
 Text:Whenever Crypt Cobra attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
 PT:3/3
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_cobra.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_cobra.jpg
 End

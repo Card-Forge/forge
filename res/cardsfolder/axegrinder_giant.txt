@@ -3,6 +3,6 @@ ManaCost:4 R R
 Types:Creature Giant Warrior
 Text:no text
 PT:6/4
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145976.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card145976.jpg
 End

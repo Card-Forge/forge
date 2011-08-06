@@ -3,6 +3,6 @@ ManaCost:4
 Types:Artifact
 Text:As Cursed Rack enters the battlefield, choose an opponent. The chosen player's maximum hand size is four.
 K:HandSize = 4 Opponent
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_rack.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_rack.jpg
 End

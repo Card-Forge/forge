@@ -6,6 +6,6 @@ PT:7/7
 K:Trample
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G G
 K:RegenerateMe:1 G
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_gaea.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_gaea.jpg
 End

@@ -4,6 +4,6 @@ Types:Artifact Creature Scarecrow
 Text:no text
 PT:3/3
 K:abPumpTgtC 2:Persist
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/antler_skulkin.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/antler_skulkin.jpg
 End

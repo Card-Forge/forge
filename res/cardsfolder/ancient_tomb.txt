@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:paintap:2:2
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_tomb.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_tomb.jpg
 End

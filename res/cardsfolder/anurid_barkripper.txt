@@ -4,6 +4,6 @@ Types:Creature Frog Beast
 Text:no text
 PT:2/2
 K:stPumpAll:Creature:Self:2/2:Threshold:Threshold - Anurid Barkripper gets +2/+2 as long as seven or more cards are in your graveyard.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/anurid_barkripper.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/anurid_barkripper.jpg
 End

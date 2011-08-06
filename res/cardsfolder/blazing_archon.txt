@@ -4,6 +4,6 @@ Types:Creature Archon
 Text:Creatures can't attack you.
 PT:5/6
 K:Flying
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_archon.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_archon.jpg
 End

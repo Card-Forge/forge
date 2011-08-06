@@ -6,6 +6,6 @@ K:Enchant creature
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:1 U
 K:enControlCreature
 K:enPump:+0/+1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/binding_grasp.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/binding_grasp.jpg
 End

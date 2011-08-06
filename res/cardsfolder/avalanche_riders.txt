@@ -6,6 +6,6 @@ PT:2/2
 K:Haste
 K:Echo:3 R
 K:etbDestroyTgt:Land
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/avalanche_riders.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/avalanche_riders.jpg
 End

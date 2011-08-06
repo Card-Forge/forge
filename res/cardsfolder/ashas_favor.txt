@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature has flying, first strike, and vigilance.
 K:Enchant creature
 K:enPump:Flying & First Strike & Vigilance
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ashas_favor.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ashas_favor.jpg
 End

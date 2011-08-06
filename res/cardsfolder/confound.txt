@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Instant
 Text:Counter target spell that targets one or more creatures.\r\nDraw a card.
 K:spCounter:Spell:Targets(Creature):Graveyard:My-Draw(1)
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/confound.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/confound.jpg
 End

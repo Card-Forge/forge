@@ -4,6 +4,6 @@ Types:Creature Archon
 Text:When Archon of Justic is put into a graveyard from play, remove target permanent from the game.
 PT:4/4
 K:Flying
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/archon_of_justice.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/archon_of_justice.jpg
 End

@@ -9,6 +9,6 @@ K:tap, Sacrifice CARDNAME: Add B to your mana pool.
 K:tap, Sacrifice CARDNAME: Add R to your mana pool.
 K:tap, Sacrifice CARDNAME: Add G to your mana pool.
 K:Comes into play tapped.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_wreckage.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_wreckage.jpg
 End

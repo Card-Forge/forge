@@ -2,6 +2,6 @@ Name:Centaur Glade
 ManaCost:3 G G
 Types:Enchantment
 Text:no text
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_glade.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_glade.jpg
 End

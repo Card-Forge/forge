@@ -5,6 +5,6 @@ Text:no text
 PT:4/5
 K:Flying
 K:Vigilance
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121196.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121196.jpg
 End

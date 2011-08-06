@@ -5,6 +5,6 @@ Text:no text
 K:Comes into play tapped.
 K:tap: add B
 K:Cycling:B
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/barren_moor.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/barren_moor.jpg
 End

@@ -6,6 +6,6 @@ PT:1/1
 K:Flying
 K:Echo:2B
 K:etbDestroyTgt:Creature.nonArtifact+nonBlack
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_shredder.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_shredder.jpg
 End

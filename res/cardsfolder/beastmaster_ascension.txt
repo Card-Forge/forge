@@ -2,7 +2,7 @@ Name:Beastmaster Ascension
 ManaCost:2 G
 Types:Enchantment
 Text:Whenever a creature you control attacks, you may put a quest counter on Beastmaster Ascension.\r\nAs long as Beastmaster Ascension has seven or more quest counters on it, creatures you control get +5/+5.
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/beastmaster_ascension.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/beastmaster_ascension.jpg
 End

@@ -6,7 +6,7 @@ K:tap: add 1
 K:UR, tap: add U U
 K:UR, tap: add U R
 K:UR, tap: add R R
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cascade_bluffs.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cascade_bluffs.jpg
 End

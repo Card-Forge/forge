@@ -7,7 +7,7 @@ K:1, tap, Sacrifice CARDNAME: Add U to your mana pool.
 K:1, tap, Sacrifice CARDNAME: Add B to your mana pool.
 K:1, tap, Sacrifice CARDNAME: Add R to your mana pool.
 K:1, tap, Sacrifice CARDNAME: Add G to your mana pool.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_star.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_star.jpg
 End

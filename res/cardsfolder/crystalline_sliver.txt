@@ -3,7 +3,7 @@ ManaCost:W U
 Types:Creature Sliver
 Text:All slivers have shroud.
 PT:2/2
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crystalline_sliver.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crystalline_sliver.jpg
 End

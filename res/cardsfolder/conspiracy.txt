@@ -2,7 +2,7 @@ Name:Conspiracy
 ManaCost:3 B B
 Types:Enchantment
 Text:As Conspiracy comes into play, choose a creature type.\r\nCreature cards you own that aren't in play, creature spells you control, and creatures you control are the chosen type.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/conspiracy.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/conspiracy.jpg
 End

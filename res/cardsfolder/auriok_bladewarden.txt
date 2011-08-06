@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 Text:no text
 PT:1/1
 K:abPumpTgtC T:+X/+X:Target creature get +X/+X until end of turn, where X is Auriok Bladewarden's power.
-K:SVar:X:Count$CardPower
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_bladewarden.jpg
+SVar:X:Count$CardPower
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_bladewarden.jpg
 End

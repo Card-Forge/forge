@@ -4,6 +4,6 @@ Types:Creature Zombie
 Text:no text
 PT:2/1
 K:WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Cackling Fiend enters the battlefield, each opponent discards a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cackling_fiend.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cackling_fiend.jpg
 End

@@ -2,6 +2,6 @@ Name:Beast Attack
 ManaCost:2 G G G
 Types:Instant
 Text:no text
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_attack.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_attack.jpg
 End

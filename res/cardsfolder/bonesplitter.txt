@@ -3,6 +3,6 @@ ManaCost:1
 Types:Artifact Equipment
 Text:Equipped creature gets +2/+0.
 K:eqPump 1:+2/+0
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bonesplitter.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bonesplitter.jpg
 End

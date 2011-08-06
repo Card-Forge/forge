@@ -5,6 +5,6 @@ Text:no text
 PT:1/1
 K:First Strike
 K:abPump 1 W:+1/+0
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_knight.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_knight.jpg
 End

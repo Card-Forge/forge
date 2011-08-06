@@ -4,6 +4,6 @@ Types:Artifact Creature Slith
 Text:Whenever Arcbound Slith deals combat damage to a player, put a +1/+1 counter on it.
 PT:0/0
 K:Modular 1
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_slith.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_slith.jpg
 End

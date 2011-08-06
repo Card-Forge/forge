@@ -4,6 +4,6 @@ Types:Instant
 Text:Destroy target nonblack creature. It can't be regenerated.
 K:spDestroyTgt:Creature.nonBlack:NoRegen
 K:Draw a card.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/annihilate.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/annihilate.jpg
 End

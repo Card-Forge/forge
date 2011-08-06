@@ -5,6 +5,6 @@ Text:Play this ability only once each turn.
 PT:1/1
 K:abPump 1 G:+2/+2
 K:Madness:0
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/basking_rootwalla.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/basking_rootwalla.jpg
 End

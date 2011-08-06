@@ -10,6 +10,6 @@ K:Protection from blue
 K:abPump R:+1/+0
 K:Morph:3 R R R
 K:CARDNAME can't be countered.
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122432.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122432.jpg
 End

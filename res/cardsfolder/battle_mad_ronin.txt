@@ -5,6 +5,6 @@ Text:no text
 PT:1/1
 K:CARDNAME attacks each turn if able.
 K:Bushido 2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_mad_ronin.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_mad_ronin.jpg
 End

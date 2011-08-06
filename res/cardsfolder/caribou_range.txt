@@ -3,6 +3,6 @@ ManaCost:2 W W
 Types:Enchantment Aura
 Text:Enchanted land has "W W, Tap: Put a 0/1 white Caribou creature token onto the battlefield."
 K:Enchant land you control
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/caribou_range.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/caribou_range.jpg
 End

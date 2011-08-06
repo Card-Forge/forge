@@ -5,6 +5,6 @@ Text:no text
 PT:0/0
 K:Flying
 K:Modular 1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_stinger.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_stinger.jpg
 End

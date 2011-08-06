@@ -5,6 +5,6 @@ Text:When Arctic Nishoba is put into a graveyard from the battlefield, you gain 
 PT:6/6
 K:Trample
 K:Cumulative upkeep:GW
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_nishoba.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_nishoba.jpg
 End

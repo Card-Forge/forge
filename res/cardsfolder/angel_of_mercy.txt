@@ -4,6 +4,6 @@ Types:Creature Angel
 Text:When Angel of Mercy comes into play, you gain 3 life.
 PT:3/3
 K:Flying
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82992.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82992.jpg
 End

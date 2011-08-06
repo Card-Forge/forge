@@ -4,6 +4,6 @@ Types:Land
 Text:no text
 K:Comes into play tapped.
 K:tap: add B
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_of_agadeem.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_of_agadeem.jpg
 End

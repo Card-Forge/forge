@@ -2,6 +2,6 @@ Name:Black Vise
 ManaCost:1
 Types:Artifact
 Text:At the beginning of your opponent's upkeep, Black Vise deals X damage to that player, where X is the number of cards in his or her hand minus 4.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/black_vise.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/black_vise.jpg
 End

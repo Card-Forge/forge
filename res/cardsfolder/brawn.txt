@@ -4,6 +4,6 @@ Types:Creature Incarnation
 Text:As long as Brawn is in your graveyard and you control a Forest, creatures you control have trample.
 PT:3/3
 K:Trample
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/brawn.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/brawn.jpg
 End

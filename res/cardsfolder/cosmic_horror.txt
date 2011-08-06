@@ -5,6 +5,6 @@ Text:If Cosmic is destroyed this way, it deals 7 damage to you.
 PT:7/7
 K:First Strike
 K:At the beginning of your upkeep, destroy CARDNAME unless you pay:3 B B B
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cosmic_horror.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cosmic_horror.jpg
 End

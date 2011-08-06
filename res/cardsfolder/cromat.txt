@@ -6,6 +6,6 @@ PT:5/5
 K:abPump U R:Flying
 K:RegenerateMe:B G
 K:abPump R W:+1/+1
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cromat.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cromat.jpg
 End

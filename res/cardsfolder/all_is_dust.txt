@@ -2,6 +2,6 @@ Name:All is Dust
 ManaCost:7
 Types:Tribal Sorcery Eldrazi
 Text:Each player sacrifices all colored permanents he or she controls.
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/all_is_dust.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/all_is_dust.jpg
 End

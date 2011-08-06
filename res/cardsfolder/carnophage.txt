@@ -3,6 +3,6 @@ ManaCost:B
 Types:Creature Zombie
 Text:At the beginning of your upkeep, tap Carnophage unless you pay 1 life
 PT:2/2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/carnophage.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/carnophage.jpg
 End

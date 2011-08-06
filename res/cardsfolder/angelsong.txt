@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Instant
 Text:no text
 K:Cycling:2
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/angelsong.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angelsong.jpg
 End

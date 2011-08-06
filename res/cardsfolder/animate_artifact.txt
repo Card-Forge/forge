@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Enchantment Aura
 Text:As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
 K:Enchant artifact
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/animate_artifact.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/animate_artifact.jpg
 End

@@ -4,6 +4,6 @@ Types:Enchantment Aura
 Text:Enchanted creature gets -1/-1 and has fear.
 K:Enchant creature
 K:enPump:-1/-1/Fear
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_flesh.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_flesh.jpg
 End

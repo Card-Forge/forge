@@ -6,7 +6,7 @@ PT:0/0
 K:Trample
 K:Modular 1
 K:WheneverKeyword:EntersBattleField:Type/Artifact:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another artifact enters the battlefield, put a +1/+1 counter on Arcbound Crusher.
-K:SVar:BuffedBy:Artifact
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_crusher.jpg
+SVar:BuffedBy:Artifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_crusher.jpg
 End

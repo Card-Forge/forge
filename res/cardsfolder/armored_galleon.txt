@@ -4,6 +4,6 @@ Types:Creature Human Pirate
 Text:no text
 PT:5/4
 K:CARDNAME can't attack unless defending player controls an Island.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/armored_galleon.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/armored_galleon.jpg
 End

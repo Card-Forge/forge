@@ -3,9 +3,9 @@ ManaCost:1 U U
 Types:Instant
 Text:Return target permanent to its owner's hand.
 K:spBounceTgt:Permanent:Hand
-K:SVar:Buyback:3
-K:SVar:RemAIDeck:True
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/capsize.jpg
+SVar:Buyback:3
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/capsize.jpg
 End

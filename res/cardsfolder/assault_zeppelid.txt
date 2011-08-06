@@ -5,6 +5,6 @@ Text:no text
 PT:3/3
 K:Flying
 K:Trample
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97107.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97107.jpg
 End

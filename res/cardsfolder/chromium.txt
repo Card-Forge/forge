@@ -6,6 +6,6 @@ PT:7/7
 K:Flying
 K:Rampage 2
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:W U B
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/chromium.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chromium.jpg
 End

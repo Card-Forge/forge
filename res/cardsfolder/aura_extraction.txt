@@ -4,6 +4,6 @@ Types:Instant
 Text:Put target enchantment on top of its owner's library.
 K:spBounceTgt:Enchantment:TopofLibrary
 K:Cycling:2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_extraction.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_extraction.jpg
 End

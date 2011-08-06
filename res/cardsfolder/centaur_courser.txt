@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Centaur Warrior
 Text:no text
 PT:3/3
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_courser.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_courser.jpg
 End

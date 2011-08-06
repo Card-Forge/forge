@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Instant
 Text:Destroy target nonblack creature that entered the battlefield this turn.
 K:spDestroyTgt:Creature.nonBlack+enteredBattlefieldThisTurn
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cradle_to_grave.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cradle_to_grave.jpg
 End

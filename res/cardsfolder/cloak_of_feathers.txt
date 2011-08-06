@@ -4,6 +4,6 @@ Types:Sorcery
 Text:no text
 K:spPumpTgt:Flying
 K:Draw a card.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/cloak_of_feathers.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cloak_of_feathers.jpg
 End

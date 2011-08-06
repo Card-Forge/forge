@@ -4,7 +4,7 @@ Types:Artifact Creature Golem
 Text:no text
 PT:3/3
 K:3, Sacrifice CARDNAME: Add R R R to your mana pool.
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/coal_golem.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coal_golem.jpg
 End

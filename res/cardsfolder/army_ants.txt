@@ -4,6 +4,6 @@ Types:Creature Insect
 Text:no text
 PT:1/1
 K:abDestroyTgtV T Sac<1/Land>:Land:Destroy target land.
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/army_ants.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/army_ants.jpg
 End

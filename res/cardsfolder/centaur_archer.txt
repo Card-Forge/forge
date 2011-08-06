@@ -4,6 +4,6 @@ Types:Creature Centaur Archer
 Text:no text
 PT:3/2
 K:abDamageTgtV T:1:Creature.withFlying
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_archer.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_archer.jpg
 End

@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Sliver
 Text:All Sliver creatures get +2/+0.
 PT:2/2
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bonesplitter_sliver.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bonesplitter_sliver.jpg
 End

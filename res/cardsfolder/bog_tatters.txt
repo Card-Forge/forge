@@ -4,6 +4,6 @@ Types:Creature Wraith
 Text:no text
 PT:4/2
 K:Swampwalk
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_tatters.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_tatters.jpg
 End

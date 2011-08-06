@@ -4,7 +4,7 @@ Types:Creature Beast
 Text:Aura Gnarlid gets +1/+1 for each Aura on the battlefield.
 PT:2/2
 K:Creatures with power less than CARDNAME's power can't block it.
-K:SVar:BuffedBy:Aura
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_gnarlid.jpg
+SVar:BuffedBy:Aura
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_gnarlid.jpg
 End

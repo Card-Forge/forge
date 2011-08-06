@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Sorcery
 Text:no text
 K:spDrawCards:X:Draw a card for each tapped creature target opponent controls.:Borrowing 100,000 Arrows - Draw cards.
-K:SVar:X:Count$TypeOppCtrlTapped.Creature
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/borrowing_100000_arrows.jpg
+SVar:X:Count$TypeOppCtrlTapped.Creature
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/borrowing_100000_arrows.jpg
 End

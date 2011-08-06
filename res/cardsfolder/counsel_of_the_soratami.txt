@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Sorcery
 Text:no text
 K:spDrawCards:2:Draw two cards.:Counsel of the Soratami - draw 2 cards.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83390.jpg
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83390.jpg
 End

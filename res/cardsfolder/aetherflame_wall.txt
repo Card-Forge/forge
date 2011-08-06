@@ -6,6 +6,6 @@ PT:0/4
 K:Defender
 K:abPump R:+1/+0
 K:CARDNAME can block creatures with shadow as though they didn't have shadow.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherflame_wall.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherflame_wall.jpg
 End

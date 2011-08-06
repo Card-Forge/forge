@@ -4,6 +4,6 @@ Types:Creature Scorpion
 Text:When Bala Ged Scorpion enters the battlefield, you may destroy target creature with power 1 or less.
 PT:2/3
 K:etbDestroyTgtMay:Creature.powerLE1
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bala_ged_scorpion.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bala_ged_scorpion.jpg
 End

@@ -4,6 +4,6 @@ Types:Creature Elemental
 Text:no text
 PT:0/3
 K:WheneverKeyword:Attacks:Self:Play:StatsPumpEOT/5/0:Self:ASAP:No_Condition:No Special Condition:Whenever Bramble Creeper attacks, it gets +5/+0 until end of turn.
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bramble_creeper.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bramble_creeper.jpg
 End

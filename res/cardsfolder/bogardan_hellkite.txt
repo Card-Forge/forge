@@ -6,6 +6,6 @@ PT:5/5
 K:Flash
 K:Flying
 K:WheneverKeyword:EntersBattleField:Self:Play:Damage/5:InputType - CreatureORPlayer:ASAP:No_Condition:MultipleTargets:When Bogardan Hellkite enters the battlefield, it deals 5 damage divided as you choose among any number of target creatures and/or players.
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bogardan_hellkite.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bogardan_hellkite.jpg
 End

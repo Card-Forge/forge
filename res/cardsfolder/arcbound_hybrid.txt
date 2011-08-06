@@ -5,6 +5,6 @@ Text:no text
 PT:0/0
 K:Haste
 K:Modular 2
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_hybrid.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_hybrid.jpg
 End

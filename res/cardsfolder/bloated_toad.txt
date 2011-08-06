@@ -5,6 +5,6 @@ Text:no text
 PT:2/2
 K:Protection from blue
 K:Cycling:2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/bloated_toad.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloated_toad.jpg
 End

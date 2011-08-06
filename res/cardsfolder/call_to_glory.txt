@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Instant
 Text:no text
 K:spAllPump:YouCtrl/Samurai:+1/+1:Drawback$UntapAllTypeYouCtrl.Creature:Untap all creatures you control. Samurai creatures get +1/+1 until end of turn.:Call to Glory - Untap all creatures you control; Samurai get +1/+1 until EOT
-K:SVar:PlayMain1:TRUE
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_glory.jpg
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_glory.jpg
 End

@@ -8,6 +8,6 @@ K:First Strike
 K:Lifelink
 K:Protection from Demons
 K:Protection from Dragons
-K:SVar:Rarity:Mythic
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/baneslayer_angel.jpg
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/baneslayer_angel.jpg
 End

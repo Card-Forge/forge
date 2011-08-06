@@ -3,6 +3,6 @@ ManaCost:U B
 Types:Instant
 Text:Counter target noncreature spell. It's controller loses 2 life.
 K:spCounter:Spell:Type(Non-Creature):Graveyard:CC-LoseLife(2)
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/countersquall.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/countersquall.jpg
 End

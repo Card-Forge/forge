@@ -5,6 +5,6 @@ Text:no text
 PT:2/5
 K:First Strike
 K:Reach
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_spider.jpg
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_spider.jpg
 End

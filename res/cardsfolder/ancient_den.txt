@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Artifact Land
 Text:(Ancient Den isn't a spell.)
 K:tap: add W
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_den.jpg
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_den.jpg
 End

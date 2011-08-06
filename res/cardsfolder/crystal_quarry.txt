@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 K:tap: add 1
 K:5, tap: add W U B R G
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Rare
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_quarry.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_quarry.jpg
 End

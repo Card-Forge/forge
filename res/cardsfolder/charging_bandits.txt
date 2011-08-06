@@ -3,6 +3,6 @@ ManaCost:4 B
 Types:Creature Human Rogue
 Text:If Charging Bandits attacks, it gets +2/+0 until the end of the turn.
 PT:3/3
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/charging_bandits.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/charging_bandits.jpg
 End

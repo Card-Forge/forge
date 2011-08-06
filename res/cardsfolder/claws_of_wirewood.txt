@@ -4,6 +4,6 @@ Types:Sorcery
 Text:no text
 K:spDamageAll:Player,Creature.withFlying:3:Claws of Wirewood deals 3 damage to each creature with flying and each player.
 K:Cycling:2
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/claws_of_wirewood.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/claws_of_wirewood.jpg
 End

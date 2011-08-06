@@ -5,6 +5,6 @@ Text:no text
 PT:0/4
 K:Defender
 K:abPumpTgtC T:+0/+4
-K:SVar:Rarity:Uncommon
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/crenellated_wall.jpg
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crenellated_wall.jpg
 End

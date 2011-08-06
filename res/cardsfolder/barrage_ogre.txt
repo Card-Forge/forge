@@ -4,6 +4,6 @@ Types:Creature Ogre Warrior
 Text:no text
 PT:3/3
 K:abDamageTgtCP T Sac<1/Artifact>:2
-K:SVar:Rarity:Uncommon
-K:SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:RemAIDeck:True
 End

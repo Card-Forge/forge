@@ -5,7 +5,7 @@ Text:no text
 K:Boros Garrison enters the battlefield tapped.
 K:When Boros Garrison enters the battlefield, return a land you control to its owner's hand.
 K:Tap: add R W
-K:SVar:RemAIDeck:True
-K:SVar:Rarity:Common
-K:SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_garrison.jpg
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_garrison.jpg
 End
