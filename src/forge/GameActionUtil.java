@@ -2483,38 +2483,7 @@ public class GameActionUtil {
 			}//auras > 0
 		}//end c.isEnchanted()
 		
-		/*
-		 * Darien, King of Kjeldor - 
-		 * Whenever you're dealt damage, you may put that many 1/1 white
-		 * Soldier creature tokens onto the battlefield.
-		 */
-		if( playerPerms.getName("Darien, King of Kjeldor").size() > 0) {
-			CardList dariens = playerPerms.getName("Darien, King of Kjeldor");
-			for(Card crd:dariens) {
-				final Card darien = crd;
-				SpellAbility ability = new Ability(darien, "0") {
-					public void resolve() {
-						for(int i = 0; i < damage; i++)
-							CardFactoryUtil.makeToken11WSoldier(darien.getController());
-					}
-				};
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(darien.getName()).append(" - ").append(darien.getController());
-				sb.append(" puts ").append(damage).append(" Soldier tokens onto the battlefield.");
-				ability.setStackDescription(sb.toString());
 
-                AllZone.Stack.addSimultaneousStackEntry(ability);
-
-			}
-		}
-		/*if (playerPerms.getName("Dissipation Field").size() > 0)  {  
-			CardList disFields = playerPerms.getName("Dissipation Field");
-			for (int i=0;i<disFields.size();i++) {
-				Card crd = disFields.get(i);
-				playerDamage_Dissipation_Field(c, crd);
-			}
-		}*/
 		if (playerPerms.getName("Farsight Mask").size() > 0)    		
 		{
 			final Card c1 = c;
@@ -2707,27 +2676,6 @@ public class GameActionUtil {
 		final Player opponent = c.getController().getOpponent();
 		opponent.addPoisonCounters(n);
 	}
-	
-	/*private static void playerDamage_Dissipation_Field(final Card c, final Card crd)
-	{
-		final Player owner = c.getOwner();
-		
-		Ability ability = new Ability(crd,"0")
-		{
-			public void resolve() {
-				if (AllZone.GameAction.isCardInPlay(c)) {
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, owner);
-					AllZone.GameAction.moveTo(hand, c);
-				}
-			}	
-		};// Ability
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Dissipation Field - returns ").append(c).append(" back to owner's hand.");
-		ability.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability);
-	}*/
 	
 	private static void playerDamage_Farsight_Mask(final Player player, final Card c, final Card crd)
 	{
