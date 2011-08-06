@@ -43,7 +43,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Bart Simpson 1", "easy", "BUG creatures that will tap your creatures and will use auras to keep them tapped");
         addToDeckList("Bart Simpson 2", "medium", "WUG creatures that will tap your creatures and will use auras to keep them tapped");
         addToDeckList("Bart Simpson 3", "hard", "WUG creatures that will tap your creatures and will use auras to keep them tapped");
-        addToDeckList("Batman 3", "hard", "Creatures with Exalted and Unblockable abilities, WoG and Armageddon");
+        addToDeckList("Batman 3", "hard", "RG Valakut Titan");
 //        addToDeckList("Bear 1", "easy", "G Bear theme");
 //        addToDeckList("Bear 2", "medium", "2/2s with abilities ");
 //        addToDeckList("Bear 3", "hard", "Token 2/2s, a lot of Token 2/2s");
@@ -208,7 +208,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Lisa Simpson 3", "hard", "GW deck, creates tokens which are devoured by Skullmulcher and Gluttonous Slime");
 //        addToDeckList("Lucifer 2", "medium", "W Sacrifice");
 //        addToDeckList("Lucifer 3", "hard", "W Sacrifice");
-        addToDeckList("Luke Skywalker 3", "hard", "GWU weenie style deck with Garruk Wildspeaker and Gaea's Anthem");
+        addToDeckList("Luke Skywalker 3", "hard", "WU Rebels Training Grounds");
         
         addToDeckList("Maggie Simpson 3", "hard", "This is a jund deck from the deck forum with some modifications");
         addToDeckList("Magneto 3", "hard", "Shriekmaw, Assassins, creature removal + Liliana Vess");
