@@ -2519,58 +2519,7 @@ public class Card extends MyObservable {
         return getNetDefense() - getDamage();
     }
     
-    public void addDamage(HashMap<Card, Integer> sourcesMap) {
-        for(Entry<Card, Integer> entry : sourcesMap.entrySet()) {
-            this.addCardDamage(entry.getValue(), entry.getKey());
-        }
-    }
     
-    public void addDamage(int damageIn, Card source) {
-        int damageToAdd = damageIn;
-        if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && isCreature()) {
-            damageToAdd = 0;
-            addCounter(Counters.M1M1, damage);
-        }
-        if(source.getName().equals("Spiritmonger")) {
-            final Card thisCard = source;
-            Ability ability2 = new Ability(source, "0") {
-                @Override
-                public void resolve() {
-                    thisCard.addCounter(Counters.P1P1, 1);
-                }
-            }; // ability2
-            
-            ability2.setStackDescription(source.getName() + " - gets a +1/+1 counter");
-            AllZone.Stack.add(ability2);
-        }
-        
-        if(source.getKeyword().contains("Deathtouch") && isCreature()) {
-            AllZone.GameAction.destroy(this);
-            AllZone.Combat.removeFromCombat(this);
-        }
-        
-        Log.debug("Adding " + damageToAdd + " damage to " + getName());
-        if(AllZoneUtil.isCardInPlay(this)) {
-        	addCardDamage(damageToAdd, source);
-        }
-        
-        if(source.getKeyword().contains("Lifelink") && CardFactoryUtil.canDamage(source, this)) GameActionUtil.executeLifeLinkEffects(source, damageToAdd);
-        
-        CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
-        for(Card c:cl) {
-            GameActionUtil.executeGuiltyConscienceEffects(source, c, damageToAdd);
-        }
-        
-    }
-    
-    private void addCardDamage(int n, Card source) {
-    	Log.debug("addDamage called on " + this + " for " + n + " damage.");
-        if(this.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) n = 0;
-        
-        if(CardFactoryUtil.canDamage(source, this)) {
-            damage += n;
-        }
-    }
     
     public void setDamage(int n) {
         if(this.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) n = 0;
@@ -2591,6 +2540,12 @@ public class Card extends MyObservable {
     */
     
     public void addAssignedDamage(int damage, Card sourceCard) {
+    	System.out.println("addAssignedDamage");
+    	System.out.println("Card: "+this.getName());
+    	System.out.println("Damage: "+damage);
+    	System.out.println("Source: "+sourceCard.getName());
+    	System.out.println("canDamage: "+CardFactoryUtil.canDamage(sourceCard, this));
+    	
         if(damage < 0) damage = 0;
         
         int assignedDamage = damage;
@@ -2637,44 +2592,30 @@ public class Card extends MyObservable {
     }
     
     public void addCombatDamage(HashMap<Card, Integer> map) {
-        
-    	if (getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.") ||
-    		getKeyword().contains("Prevent all combat damage that would be dealt to CARDNAME."))
-    		return;
-
-    	//int totalDamage = 0;
         CardList list = new CardList();
-        
         
         for(Entry<Card, Integer> entry : map.entrySet()){
             Card source = entry.getKey();
             list.add(source);
-            int damage = entry.getValue();
-            int damageToAdd = damage;
+            int damageToAdd = entry.getValue();
             
-            if (source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
-        			|| source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME."))
+            if (reduceDamageToZero(source, true)) {
             	damageToAdd = 0;
+            }
             else {
-	            if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && isCreature()) {
-	                damageToAdd = 0;
-	                addCounter(Counters.M1M1, damage);
-	            }
-	            if(isCreature() && (source.getName().equals("Spiritmonger") || source.getName().equals("Mirri the Cursed")) ) {
+	            if(isCreature() && source.getName().equals("Mirri the Cursed") ) {
 	                final Card thisCard = source;
-	                Ability ability2 = new Ability(source, "0") {
+	                Ability ability2 = new Ability(thisCard, "0") {
 	                    @Override
 	                    public void resolve() {
 	                        thisCard.addCounter(Counters.P1P1, 1);
 	                    }
 	                }; // ability2
-	                
-	                ability2.setStackDescription(source.getName() + " - gets a +1/+1 counter");
+	                ability2.setStackDescription(thisCard.getName() + " - gets a +1/+1 counter");
 	                AllZone.Stack.add(ability2);
 	            }
 	            if(source.getKeyword().contains("Deathtouch") && isCreature()) {
 	                AllZone.GameAction.destroy(this);
-	                AllZone.Combat.removeFromCombat(this);
 	            }
             }
 	        map.put(source, damageToAdd);
@@ -2689,5 +2630,62 @@ public class Card extends MyObservable {
         	CombatUtil.executeCombatDamageEffects(source);
         }
     }
+    
+    private boolean reduceDamageToZero(Card source, boolean isCombat) {
+    	boolean reduce = false;
+    	if(isCombat) {
+    		reduce = reduce || getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.");
+    		reduce = reduce || getKeyword().contains("Prevent all combat damage that would be dealt to CARDNAME.");
+    		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.");
+    		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME.");
+    		reduce = reduce || (source.getKeyword().contains("Wither") && this.isCreature());
+    		reduce = reduce || (source.getKeyword().contains("Infect") && this.isCreature());
+    	}
+    	reduce = reduce || getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.");
+    	reduce = reduce || getKeyword().contains("Prevent all damage that would be dealt to or dealt by CARDNAME.");
+    	return reduce;
+    }
+    
+    public void addDamage(HashMap<Card, Integer> sourcesMap) {
+        for(Entry<Card, Integer> entry : sourcesMap.entrySet()) {
+            this.addDamage(entry.getValue(), entry.getKey());
+        }
+    }
+    
+    public void addDamage(final int damageIn, final Card source) {
+        int damageToAdd = damageIn;
+        if( reduceDamageToZero(source, false) ) {
+        	damageToAdd = 0;
+        }
+        if( damageToAdd == 0 ) return;  //Rule 119.8
+        
+        if(this.isPlaneswalker()) {
+        	this.subtractCounter(Counters.LOYALTY, damageToAdd);
+        }
+        
+        if(source.getName().equals("Spiritmonger")) {
+        	final Card thisCard = source;
+        	Ability ability2 = new Ability(thisCard, "0") {
+        		@Override
+        		public void resolve() {
+        			thisCard.addCounter(Counters.P1P1, 1);
+        		}
+        	}; // ability2
+        	ability2.setStackDescription(thisCard.getName() + " - gets a +1/+1 counter");
+        	AllZone.Stack.add(ability2);
+        }
+        
+        Log.debug("Adding " + damageToAdd + " damage to " + getName());
+        if(AllZoneUtil.isCardInPlay(this) && CardFactoryUtil.canDamage(source, this)) {
+        	damage += damageToAdd;
+        }
+        
+        if(source.getKeyword().contains("Lifelink") && CardFactoryUtil.canDamage(source, this)) GameActionUtil.executeLifeLinkEffects(source, damageToAdd);
+        
+        CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
+        for(Card c:cl) {
+            GameActionUtil.executeGuiltyConscienceEffects(source, c, damageToAdd);
+        }
+    }
 
-}
+}//end Card class
