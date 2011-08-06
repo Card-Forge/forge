@@ -74,6 +74,9 @@ public class ReadCard implements Runnable, NewConstants {
     	
     	for (int i=0; i<fileList.length; i++)
     	{
+    		if (!fileList[i].endsWith(".txt"))
+    			continue;
+    		
             try {
             	fl = new File("res/cardsfolder/" + fileList[i]);
                 in = new BufferedReader(new FileReader(fl));
