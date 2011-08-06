@@ -79,6 +79,7 @@ public class Input_Mulligan extends Input {
         	if(CHandList.get(i).getName().startsWith("Leyline") && (AllZoneUtil.getCardsInPlay("Leyline of Singularity").size() == 0)) {
             	CPlay.add(CHandList.get(i));
             	CHand.remove(CHandList.get(i));
+            	AllZone.GameAction.checkStateEffects();
         }
     	
     }
