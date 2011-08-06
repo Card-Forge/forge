@@ -6149,8 +6149,8 @@ public class GameActionUtil {
         }//isEquipped
 
 		
-		if(c.getName().equals("Dimir Cutpurse")) playerCombatDamage_Dimir_Cutpurse(c);
-		else if(c.getName().equals("Ghastlord of Fugue")) playerCombatDamage_Ghastlord_of_Fugue(c);
+		//if(c.getName().equals("Dimir Cutpurse")) playerCombatDamage_Dimir_Cutpurse(c);
+		if(c.getName().equals("Ghastlord of Fugue")) playerCombatDamage_Ghastlord_of_Fugue(c);
 		else if(c.getName().equals("Garza Zol, Plague Queen")) playerCombatDamage_May_draw(c);
 		else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c); 
 		else if(c.getName().equals("Guul Draz Specter")) opponent_Discard(c, 1);
@@ -6329,7 +6329,7 @@ public class GameActionUtil {
 		if(c.getController().equals(AllZone.HumanPlayer)) AllZone.GameAction.playSpellAbility(sa[1]);
 		else ComputerUtil.playNoStack(sa[1]);
 	}
-
+	/*
 	private static void playerCombatDamage_Dimir_Cutpurse(Card c) {
 		final Player player = c.getController();
 		final Player opponent = player.getOpponent();
@@ -6349,7 +6349,7 @@ public class GameActionUtil {
 			
 			AllZone.Stack.add(ability2);
 		}
-	}
+	}*/
 	
 	private static void playerDamage_Dissipation_Field(final Card c, final Card crd)
 	{
