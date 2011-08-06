@@ -3639,6 +3639,92 @@ public class CardFactory implements NewConstants {
             
         }//while shouldModular
         
+        int spike = hasKeyword(card, "Spike");
+        if(spike != -1) {
+            String parse = card.getKeyword().get(spike).toString();
+            card.removeIntrinsicKeyword(parse);
+            
+            final int m = Integer.parseInt(parse.substring(6));
+            String t = card.getSpellText();
+            if(!t.equals("")) t += "\r\n";
+            card.setText(t
+                    + parse
+                    + " (This enters the battlefield with "
+                    + m
+                    + " +1/+1 counters on it.)");
+            card.addComesIntoPlayCommand(new Command() {
+				private static final long serialVersionUID = -2292898970576123040L;
+
+				public void execute() {
+                    card.addCounter(Counters.P1P1, m);
+                }
+            });
+            
+            final SpellAbility ability = new Ability(card, "2") {
+                @Override
+                public void resolve() {
+	                if(card.getController().equals(Constant.Player.Computer)) {
+	                    CardList choices = new CardList(AllZone.Computer_Play.getCards()).filter(new CardListFilter() {
+	                        public boolean addCard(Card c) {
+	                            return c.isCreature();
+	                        }
+	                    });
+	                    if(choices.size() != 0) CardFactoryUtil.AI_getBestCreature(choices).addCounter(
+	                            Counters.P1P1, 1);
+	                } else {
+	                	Card c = getTargetCard();
+	                	c.addCounter(Counters.P1P1, 1);
+	                } 
+                }//resolve()
+                
+                @Override
+                public boolean canPlay() {
+                	// stack peek is needed to prevent Spike Feeder from trying to double activate
+                    SpellAbility sa;
+                    for(int i = 0; i < AllZone.Stack.size(); i++) {
+                        sa = AllZone.Stack.peek(i);
+                        if(sa.getSourceCard().equals(card)) return false;
+                    }
+                	return (card.getCounters(Counters.P1P1) > 0);
+                }
+                
+            };
+            Input target = new Input() {
+				private static final long serialVersionUID = 903928778649052032L;
+
+				@Override
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select target creature for " + card.getName());
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                
+                @Override
+                public void selectCard(Card target, PlayerZone zone) {
+                	// Choose a legal target, then sacrifice a creature
+                    if(!CardFactoryUtil.canTarget(ability, target)) {
+                        AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+                    } else if(target.isCreature() && zone.is(Constant.Zone.Play)) {
+                    	card.subtractCounter(Counters.P1P1, 1);
+                    	ability.setTargetCard(target);
+                        AllZone.Stack.add(ability);
+                        AllZone.GameAction.checkStateEffects();
+                        stop();
+                    }
+                }
+            };//Input
+            
+            ability.setAfterPayMana(target);
+            ability.setStackDescription("Put a +1/+1 counter from " + card + " on target creature.");
+            ability.setDescription("2, Remove a +1/+1 counter: Add a +1/+1 counter to target creature");
+            card.addSpellAbility(ability);
+        } // if Spike 
+        
+        
         if(hasKeyword(card, "1, Sacrifice CARDNAME: Draw a card.") != -1) {
             int n = hasKeyword(card, "1, Sacrifice CARDNAME: Draw a card.");
             if(n != -1) {

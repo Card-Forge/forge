@@ -1043,3 +1043,9 @@ Bloodmark Mentor
 Kobold Drill Sergeant
 Kobold Taskmaster
 Necrogenesis
+Spike Feeder
+Havoc
+Flowstone Surge
+Insight
+Deepchannel Mentor
+Warmth

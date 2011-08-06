@@ -1,3 +1,38 @@
+Spike Feeder
+1 G G
+Creature Spike
+no text
+0/0
+Spike 2
+
+Spike Weaver
+2 G G
+Creature Spike
+no text
+0/0
+Spike 3
+
+Spike Worker
+2 G
+Creature Spike
+no text
+0/0
+Spike 2
+
+Spike Colony
+4 G
+Creature Spike
+no text
+0/0
+Spike 4
+
+Spike Drone
+G
+Creature Spike
+no text
+0/0
+Spike 1
+
 Grizzled Wolverine
 1 R R
 Creature Wolverine

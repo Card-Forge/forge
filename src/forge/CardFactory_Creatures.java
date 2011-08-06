@@ -20726,6 +20726,85 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Spike Weaver")) {
+            final SpellAbility fog = new Ability(card, "1") {
+                @Override
+                public void resolve() {
+                	AllZone.GameInfo.setPreventCombatDamageThisTurn(true);
+                }//resolve
+                
+                @Override
+                public boolean canPlay() {
+                    // false until AI can activate things during human combat
+                    return card.getCounters(Counters.P1P1)  > 0;
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    // false until AI can activate things outside of main phases
+                    return false;
+                }
+            };//SpellAbility
+            
+            Input runtime = new Input() {
+				private static final long serialVersionUID = -8190396950879103322L;
+				private boolean paid = false;
+				@Override
+				public void showMessage() {
+					if (!paid)
+					{
+	                	card.subtractCounter(Counters.P1P1, 1);
+	                	paid = true;
+	                	AllZone.Stack.add(fog);
+	                	stop();
+					}
+                }
+            };
+            
+            fog.setAfterPayMana(runtime);
+            fog.setDescription("1, Remove a +1/+1 counter: Prevent all combat damage that would be dealt this turn.");
+            fog.setStackDescription("Prevent all combat damage that would be dealt this turn.");
+            card.addSpellAbility(fog);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Spike Feeder")) {
+            final SpellAbility heal = new Ability(card, "0") {
+            	// removing of a +1/+1 should be in the activation, but it doesn't work properly right now.
+            	
+                @Override
+                public void resolve() {
+                	if (card.getCounters(Counters.P1P1) > 0){
+                		card.subtractCounter(Counters.P1P1, 1);
+	                    PlayerLife life = AllZone.GameAction.getPlayerLife(getActivatingPlayer());
+	                    life.addLife(2);
+                	}
+                }//resolve
+                
+                @Override
+                public boolean canPlay() {
+                	// stack peek is needed to prevent Spike Feeder from trying to double activate
+                    SpellAbility sa;
+                    for(int i = 0; i < AllZone.Stack.size(); i++) {
+                        sa = AllZone.Stack.peek(i);
+                        if(sa.getSourceCard().equals(card)) return false;
+                    }
+                    return card.getCounters(Counters.P1P1) > 0 && super.canPlay();
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    // when should the AI sacrifice his feeder for health?
+                	return card.getCounters(Counters.P1P1) > 0 && AllZone.Computer_Life.getLife() < 5;
+                }
+            };//SpellAbility
+
+            heal.setDescription("Remove a +1/+1 counter: Gain 2 life.");
+            heal.setStackDescription("Gain 2 life");
+            card.addSpellAbility(heal);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if (cardName.equals("Yavimaya Elder"))
         {
     	        final SpellAbility ability = new Ability(card, "2") {

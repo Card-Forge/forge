@@ -1697,3 +1697,10 @@ Spinneret Sliver
 Keldon Marauders
 Furious Assault
 Night Soil
+Spike Worker
+Spike Colony
+Spike Drone
+Grizzled Wolverine
+Anaba Spirit Crafter
+Hissing Iguanar
+Sunken City
