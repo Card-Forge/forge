@@ -204,59 +204,6 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Crib Swap")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -4567382566960071562L;
-                
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                    	Player controller = getTargetCard().getController();
-                    	
-                        AllZone.GameAction.exile(getTargetCard());
-                        
-                        CardFactoryUtil.makeToken("Shapeshifter", "C 1 1 Shapeshifter",
-                                controller, "", new String[] {"Creature", "Shapeshifter"}, 1,
-                                1, new String[] {"Changeling"});
-                    }
-                }//resolve()
-                
-                @Override
-                public boolean canPlayAI() {
-                	return (getCreature().size() != 0) && (AllZone.Phase.getTurn() > 4);
-                }//canPlayAI()
-                
-                CardList getCreature() {
-                	CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (c.getNetAttack() > 2 
-                            		&& CardFactoryUtil.canTarget(card, c) 
-                            		&& (!c.getName().equals("Shapeshifter") 
-                            		|| (c.getName().equals("Shapeshifter") 
-                            		&& (c.isEnchanted() 
-                            		|| c.getCounters(Counters.P1P1) != 0))));
-                        }
-                    });
-                    return list;
-                }//getCreature()
-
-                @Override
-                public void chooseTargetAI() {
-                	Card best = CardFactoryUtil.AI_getBestCreature(getCreature());
-                    setTargetCard(best);
-                }//chooseTargetAI()
-            };//SpellAbility
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-            
-            card.setSVar("PlayMain1", "TRUE");
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sprout Swarm")) {
