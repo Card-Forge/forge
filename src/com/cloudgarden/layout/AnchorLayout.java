@@ -26,7 +26,7 @@ public class AnchorLayout implements LayoutManager2 {
 
 	private int preferredWidth, preferredHeight, minHeight, minWidth;
 
-	private HashMap constraintMap = new HashMap();
+	private HashMap<Component, Object> constraintMap = new HashMap<Component, Object>();
 	private boolean sizesCalculated = false;
 	//private Container container;
 
@@ -221,7 +221,6 @@ public class AnchorLayout implements LayoutManager2 {
 	/* (non-Javadoc)
 	 * @see java.awt.LayoutManager2#addLayoutComponent(java.awt.Component, java.lang.Object)
 	 */
-	@SuppressWarnings("unchecked")
 	public void addLayoutComponent(Component comp, Object constraints) {
 		constraintMap.put(comp, constraints);
 	}

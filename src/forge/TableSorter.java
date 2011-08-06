@@ -32,10 +32,10 @@ public class TableSorter implements Comparator<Card>, NewConstants
       cardsTxt = readCardsTxt();
   }
   //reads the file "cards.txt"
-  private HashMap readCardsTxt()
+  private HashMap<String, Integer> readCardsTxt()
   {
     HashMap<String, Integer>  map = new HashMap<String, Integer> ();
-    ArrayList list = FileUtil.readFile(ForgeProps.getFile(CARDS));
+    ArrayList<String> list = FileUtil.readFile(ForgeProps.getFile(CARDS));
    
     for(int i = 0; i < list.size(); i++)
        map.put(list.get(i).toString().trim(), Integer.valueOf(i));
@@ -140,7 +140,7 @@ public class TableSorter implements Comparator<Card>, NewConstants
   
   final public static String getColor(Card c)
   {
-    ArrayList list = CardUtil.getColors(c);
+    ArrayList<String> list = CardUtil.getColors(c);
 
     if(list.size() == 1)
       return list.get(0).toString();
