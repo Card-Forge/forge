@@ -135,7 +135,8 @@ public class GameAction {
         discard_nath(c);
         discard_megrim(c);
         moveToGraveyard(c);
-        if(CardFactoryUtil.hasNecropotence(c.getOwner())) removeFromGame(c);
+        if(CardFactoryUtil.getCards("Necropotence", c.getOwner()).size() > 0) 
+        	removeFromGame(c);
     }
     
     public void discardRandom(String player, int numDiscard) {
@@ -2317,6 +2318,19 @@ public class GameAction {
         else throw new RuntimeException("GameAction : getPlayerLife() invalid player string " + player);
     }
     
+    public boolean payLife(String player, int lifePayment, Card source){
+    	if(player == null) return false;
+    	
+    	PlayerLife curLife = player.equals(Constant.Player.Human) ? AllZone.Human_Life : AllZone.Computer_Life;
+    	
+    	if (lifePayment <= curLife.getLife()){
+    		curLife.subtractLife(lifePayment, source);
+    		return true;
+    	}
+    	return false;
+    	
+    }
+    
     //removes all damage from player's creatures
     public void removeDamage(String player) {
         PlayerZone p = AllZone.getZone(Constant.Zone.Play, player);
@@ -3221,8 +3235,10 @@ public class GameAction {
          } // Khalni Hydra      
          return manaCost;
     }//GetSpellCostChange
+    
     public void playSpellAbility(SpellAbility sa) {
     	ManaCost manaCost = new ManaCost(sa.getManaCost());
+
     	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
     		manaCost = new ManaCost("0"); 
     	} else {
