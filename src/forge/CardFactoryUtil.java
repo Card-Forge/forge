@@ -1303,7 +1303,7 @@ public class CardFactoryUtil {
                         play.add(merc);
                     }
                 }
-                AllZone.GameAction.shuffle(sourceCard.getController());
+                sourceCard.getController().shuffle();
             }
         };
         ability.setDescription(cost
@@ -1414,7 +1414,7 @@ public class CardFactoryUtil {
                         }
                     }
                 }
-                AllZone.GameAction.shuffle(sourceCard.getController());
+                sourceCard.getController().shuffle();
             }
         };
         ability.setDescription(cost
@@ -1503,7 +1503,7 @@ public class CardFactoryUtil {
                     
 
                 }
-                AllZone.GameAction.shuffle(sourceCard.getController());
+                sourceCard.getController().shuffle();
                 
 
             }
@@ -1568,7 +1568,7 @@ public class CardFactoryUtil {
                     
 
                 }
-                AllZone.GameAction.shuffle(sourceCard.getController());
+                sourceCard.getController().shuffle();
             }
             
         };

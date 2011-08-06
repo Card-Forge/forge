@@ -190,7 +190,7 @@ public class AbilityFactory_Bounce {
          		else if(Destination.equals("ShuffleIntoLibrary"))
          		{
          			AllZone.GameAction.moveToTopOfLibrary(tgtC);
-         			AllZone.GameAction.shuffle(tgtC.getOwner());
+         			tgtC.getOwner().shuffle();
          		}
          		else if(Destination.equals("Exile"))
          			AllZone.GameAction.exile(tgtC); 

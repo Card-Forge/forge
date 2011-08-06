@@ -82,7 +82,7 @@ public class AbilityFactory_Fetch {
 	            
 	            if(o != null) {
 	            	AllZone.Human_Library.remove(o);
-	                AllZone.GameAction.shuffle(player);
+	                player.shuffle();
 	            	Card c = (Card) o;
 	            	library.remove(c);
 	            	if (destination.equals("Hand")) 
@@ -132,7 +132,7 @@ public class AbilityFactory_Fetch {
 	        		c = library.get(0);
 
             	AllZone.Computer_Library.remove(c);
-                AllZone.GameAction.shuffle(player);
+                player.shuffle();
             	library.remove(c);
             	if (destination.equals("Hand")) {
                     	CardList l = new CardList();

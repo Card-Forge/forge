@@ -380,7 +380,7 @@ public class AllZoneUtil {
 			lib.add(c_1, i - 1);
 		}
 		if(shuffle) {
-			AllZone.GameAction.shuffle(player);
+			player.shuffle();
 		}
 	}
 	
@@ -399,7 +399,7 @@ public class AllZoneUtil {
 			Card card = (Card) o;
 			AllZone.GameAction.exile(card);
 		}
-		if(shuffle) AllZone.GameAction.shuffle(zone.getPlayer());
+		if(shuffle) zone.getPlayer().shuffle();
 	}
 	
 	public static int CompareTypeAmountInPlay(final Player player, String type)

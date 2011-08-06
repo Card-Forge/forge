@@ -1028,7 +1028,7 @@ class CardFactory_Lands {
                     if(target == null) target = library.get(0);                  
                     AllZone.Computer_Library.remove(target);
                     AllZone.Computer_Hand.add(target);                 
-                    AllZone.GameAction.shuffle(AllZone.ComputerPlayer);
+                    AllZone.ComputerPlayer.shuffle();
                     JOptionPane.showMessageDialog(null, "The Computer searched for: " + target.getName(), "", JOptionPane.INFORMATION_MESSAGE);
                 }//computerResolve()
                 
@@ -1053,7 +1053,7 @@ class CardFactory_Lands {
                     } else {
                     	JOptionPane.showMessageDialog(null, "No more suitable cards in Library", "", JOptionPane.INFORMATION_MESSAGE);
                     }
-                    AllZone.GameAction.shuffle(card.getController());
+                    card.getController().shuffle();
                 }//resolve()
              };//SpellAbility
 
@@ -2105,7 +2105,7 @@ class CardFactory_Lands {
                             }
                         }
                     }
-                    AllZone.GameAction.shuffle(card.getController());
+                    card.getController().shuffle();
                 }//resolve()
             };//Ability
             
