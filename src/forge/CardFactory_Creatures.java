@@ -7158,11 +7158,12 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         */
         
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Phyrexian War Beast")) {
-           /* When Phyrexian War Beast leaves the battlefield, sacrifice a land
-            * and Phyrexian War Beast deals 1 damage to you.
-            */
+           // When Phyrexian War Beast leaves the battlefield, sacrifice a land
+           // and Phyrexian War Beast deals 1 damage to you.
+           //
            final Ability ability = new Ability(card, "0") {
               private static final long serialVersionUID = -3829801813561677938L;
 
@@ -7209,7 +7210,7 @@ public class CardFactory_Creatures {
            
            card.addLeavesPlayCommand(sacrificeLandAndOneDamage);
         }//*************** END ************ END **************************
-
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Tribal Forcemage")) {
