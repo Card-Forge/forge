@@ -664,7 +664,7 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Grapeshot")) {
         	final SpellAbility spell = new Spell(card) {
@@ -688,7 +688,7 @@ public class CardFactory_Sorceries {
         	spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
         	spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
         }//*************** END ************ END ************************** 
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Ignite Memories")) {
@@ -807,7 +807,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Tendrils of Agony")) {
         	SpellAbility spell = new Spell(card) {
@@ -828,7 +828,7 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Roiling Terrain")) {
@@ -1332,7 +1332,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Dragonstorm")) {
             SpellAbility spell = new Spell(card) {
@@ -1407,7 +1407,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Feudkiller's Verdict")) {
