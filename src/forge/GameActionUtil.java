@@ -2856,29 +2856,6 @@ public class GameActionUtil {
 		res.execute();
 	}
 	
-	public static void executeSwordOfBodyAndMindEffects(Card source)
-	{
-		final Card src = source;
-		final Ability ability = new Ability(src, "0") {
-			@Override
-			public void resolve() {
-				Player opponent = src.getController().getOpponent();
-				
-				CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", src.getController(), "G",
-						new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
-				
-				opponent.mill(10);
-			}
-		}; // ability
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Sword of Body and Mind - put a 2/2 green Wolf creature token onto the battlefield ");
-		sb.append("and opponent puts the top ten cards of his or her library into his or her graveyard.");
-		ability.setStackDescription(sb.toString());
-
-		AllZone.Stack.add(ability);
-	}
-	
     //this is for cards like Sengir Vampire
     public static void executeVampiricEffects(Card c) {
         ArrayList<String> a = c.getKeyword();
@@ -3143,9 +3120,6 @@ public class GameActionUtil {
         	for(Card equip:equips) {
         		if(equip.getName().equals("Sword of Light and Shadow")) {
         			GameActionUtil.executeSwordOfLightAndShadowEffects(equip);
-        		}
-        		if(equip.getName().equals("Sword of Body and Mind")) {
-        			GameActionUtil.executeSwordOfBodyAndMindEffects(equip);
         		}
         	}
         }//isEquipped
