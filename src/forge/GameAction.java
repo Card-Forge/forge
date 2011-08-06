@@ -195,92 +195,7 @@ public class GameAction {
     	if( p != null ) p.remove(c);
     	if(!c.isToken()) lib.add(c);
     }
-    /*
-    @Deprecated
-    public void discardRandom(Player player, SpellAbility sa) {
-    	player.discardRandom(sa);
-    	/*
-        Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
-        if(c.length != 0) discard(CardUtil.getRandom(c), sa);
-        *
-    }*/
-    /*
-    @Deprecated
-    public void mill(Player player, int n)
-    {
-    	player.mill(n);
-    	/*
-    	CardList lib = AllZoneUtil.getPlayerCardsInLibrary(player);
-		
-        int max = Math.min(n, lib.size());
-        
-        for(int i = 0; i < max; i++) {
-            AllZone.GameAction.moveToGraveyard(lib.get(i));
-        }
-        *
-    }
-    */
-    /*
-    public void discard(Card c, SpellAbility sa)
-    {
-    	if (sa!= null)
-    	{
-    		;
-    	}
-    	
-    	AllZone.GameAction.CheckWheneverKeyword(c,"DiscardsCard",null);
-        discard_nath(c);
-        discard_megrim(c);
-        if(AllZoneUtil.getPlayerCardsInPlay(c.getOwner(), "Necropotence").size() > 0){	// necro disrupts madness
-        	exile(c);
-        	return;
-        }
-        discard_madness(c);
-	        if ((c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.") ||
-	        	c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard."))	
-	        	&& !c.getController().equals(sa.getSourceCard().getController()))
-	        	discard_PutIntoPlayInstead(c);
-	        else if (c.getKeyword().contains("If a spell or ability an opponent controls causes you to discard CARDNAME, return it to your hand."))
-	        		;
-	    	else
-	        	moveToGraveyard(c);
-    	}
-    */
-    /*
-    @Deprecated
-    public void discardRandom(Player player, int numDiscard, SpellAbility sa) {
-    	player.discardRandom(numDiscard, sa);
-    	/*
-        for(int i = 0; i < numDiscard; i++) {
-            Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
-            if(c.length != 0) discard(CardUtil.getRandom(c), sa);
-        }
-    }*/
     
-    /*
-    public void discard(Player player, int numDiscard, SpellAbility sa) {
-        if(player.isHuman()) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(numDiscard, sa));
-        else {
-            for(int i = 0; i < numDiscard; i++)
-                AI_discard(sa);
-        }
-    }
-    */
-    /*
-    @Deprecated
-    public void discardUnless(Player player, int numDiscard, String uType, SpellAbility sa) {
-        if(player.isHuman()) AllZone.InputControl.setInput(CardFactoryUtil.input_discardNumUnless(
-                numDiscard, uType, sa));
-        else AI_discardNumUnless(numDiscard, uType, sa);
-    }
-    */
-    /*
-    public void discardHand(Player player, SpellAbility sa) {
-        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-        CardList list = new CardList(hand.getCards());
-        discardRandom(player, list.size(), sa);
-    }
-    */
     
     public boolean AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
         CardList hand = new CardList();
@@ -296,116 +211,6 @@ public class GameAction {
         }
         return false;
     }
-    /*
-    public void AI_discardNum(int numDiscard, SpellAbility sa) {
-        for(int i = 0; i < numDiscard; i++)
-            AI_discard(sa);
-    }*/
-    /*
-    @Deprecated
-    public void AI_discardNumUnless(int numDiscard, String uType, SpellAbility sa) {
-        CardList hand = new CardList();
-        hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
-        CardList tHand = hand.getType(uType);
-        
-        if(tHand.size() > 0) {
-            CardListUtil.sortCMC(tHand);
-            tHand.reverse();
-            tHand.get(0).getController().discard(tHand.get(0), sa);  //this got changed to doDiscard basically
-            return;
-        }
-        for(int i = 0; i < numDiscard; i++)
-            AllZone.ComputerPlayer.discard(sa);
-    }
-    */
-    /*
-    public void AI_discard(SpellAbility sa) {
-        CardList hand = new CardList();
-        hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
-        
-        if(hand.size() > 0) {
-            CardList blIP = new CardList();
-            blIP.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
-            blIP = blIP.getType("Basic");
-            if(blIP.size() > 5) {
-                CardList blIH = hand.getType("Basic");
-                if(blIH.size() > 0) {
-                    discard(blIH.get(CardUtil.getRandomIndex(blIH)), sa);
-                    return;
-                }
-                
-                CardListUtil.sortAttackLowFirst(hand);
-                CardListUtil.sortNonFlyingFirst(hand);
-                discard(hand.get(0), sa);
-                return;
-            } else {
-                CardListUtil.sortCMC(hand);
-                discard(hand.get(0), sa);
-                return;
-            }
-        }
-    }
-    */
-    /*
-    public void handToLibrary(Player player, int numToLibrary, String libPos) {
-        if(player.isHuman()) {
-            if(libPos.equals("Top") || libPos.equals("Bottom")) libPos = libPos.toLowerCase();
-            else {
-                Object o = new Object();
-                String s = "card";
-                if(numToLibrary > 1) s += "s";
-                
-                o = AllZone.Display.getChoice("Do you want to put the " + s
-                        + " on the top or bottom of your library?", new Object[] {"top", "bottom"});
-                libPos = o.toString();
-            }
-            AllZone.InputControl.setInput(CardFactoryUtil.input_putFromHandToLibrary(libPos, numToLibrary));
-        } else {
-            for(int i = 0; i < numToLibrary; i++) {
-                if(libPos.equals("Top") || libPos.equals("Bottom")) libPos = libPos.toLowerCase();
-                else {
-                    Random r = new Random();
-                    if(r.nextBoolean()) libPos = "top";
-                    else libPos = "bottom";
-                }
-                AI_handToLibrary(libPos);
-            }
-        }
-    }
-    
-    public void AI_handToLibrary(String libPos) {
-        CardList hand = new CardList();
-        hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
-        
-        CardList blIP = new CardList();
-        blIP.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
-        blIP = blIP.getType("Basic");
-        if(blIP.size() > 5) {
-            CardList blIH = hand.getType("Basic");
-            if(blIH.size() > 0) {
-                Card card = blIH.get(CardUtil.getRandomIndex(blIH));
-                AllZone.Computer_Hand.remove(card);
-                if(libPos.equals("top")) AllZone.Computer_Library.add(card, 0);
-                else AllZone.Computer_Library.add(card);
-                return;
-            }
-            
-            CardListUtil.sortAttackLowFirst(hand);
-            CardListUtil.sortNonFlyingFirst(hand);
-            if(libPos.equals("top")) AllZone.Computer_Library.add(hand.get(0), 0);
-            else AllZone.Computer_Library.add(hand.get(0));
-            AllZone.Computer_Hand.remove(hand.get(0));
-            return;
-        } else {
-            CardListUtil.sortCMC(hand); 
-            if(libPos.equals("top")) AllZone.Computer_Library.add(hand.get(0), 0);
-            else AllZone.Computer_Library.add(hand.get(0));
-            AllZone.Computer_Hand.remove(hand.get(0));
-            return;
-        }
-    }
-    */
-    
     
     public void discard_nath(Card discardedCard) {
         final Player owner = discardedCard.getOwner();
@@ -471,7 +276,6 @@ public class GameAction {
     	final Ability cast = new Ability(madness, madness.getMadnessCost()) {
     		@Override
     		public void resolve() {
-    			//moveToHand(madness);
     			if (madness.getOwner().isHuman())
     				AllZone.Human_Graveyard.remove(madness);
     			else
@@ -581,7 +385,6 @@ public class GameAction {
 	        
 	        GameActionUtil.executeCardStateEffects();
 	        GameActionUtil.stSetPT.execute();
-	        //GameActionUtil.StaticEffectKeyword.execute();
 	        GameActionUtil.stPump.execute();
 	        
 	        //System.out.println("checking state effects");
@@ -680,13 +483,10 @@ public class GameAction {
         
     }
     
-    private void destroyLegendaryCreatures() {
-        //ArrayList<Card> a = PlayerZoneUtil.getCardType(AllZone.Human_Play, "Legendary");
-        //a.addAll(PlayerZoneUtil.getCardType(AllZone.Computer_Play, "Legendary"));  
+    private void destroyLegendaryCreatures() { 
         CardList a = AllZoneUtil.getTypeInPlay("Legendary");
 
         while(!a.isEmpty() && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
-            //ArrayList<Card> b = getCardsNamed(a, (a.get(0)).getName());
         	CardList b = AllZoneUtil.getCardsInPlay(a.get(0).getName());
             a.remove(0);
             if(1 < b.size()) {
@@ -1957,159 +1757,159 @@ public class GameAction {
     
     String[] Search_Description(Card Initiator ,String[] Keyword_Details, final String[] Custom_Strings) {
     	String[] SD = new String[2];
-        String SearchDescription = "";
-        String SearchType = "";
-        int Target_Conditions = 1;
-        String TargetParse = Keyword_Details[5];                
-        String Targets[] = TargetParse.split("!");
-        Target_Conditions = Targets.length;
-            for(int y = 0; y < Target_Conditions; y++) {       			
-		if(Targets[y].contains("SearchShuffle")) {
-			if(Targets[y].contains("OSearchShuffle")) {
-				SearchDescription = SearchDescription + "Opponent's";
-			}
-            String SearchParse = Targets[y];  
-            String Search[] = SearchParse.split("/");   
-            
-            for(int z = 0; z < Search.length - 1; z++) {
-             SearchDescription = SearchDescription + Search[z+1];
-             if(z + 3 < Search.length) SearchDescription = SearchDescription + ", ";
-             else if(z + 2 != Search.length) SearchDescription = SearchDescription + " and/or ";
-            }       
-            if(Search[0].contains("SearchShuffle_SameName")) SearchType = Initiator.getName() + " ";
-            if(Search[0].contains("SearchShuffle_Type")) {
-            	for(int TypeRestrict = 0; TypeRestrict < Custom_Strings.length; TypeRestrict ++) {
-            	if(Custom_Strings[TypeRestrict].startsWith("Color")) {
-            		SearchType = SearchType + Custom_Strings[TypeRestrict].replaceFirst("Color", "");
-            		if(TypeRestrict + 1 != Custom_Strings.length) SearchType = SearchType + " ";
-            	}
-            }
-            	for(int TypeRestrict = 0; TypeRestrict < Custom_Strings.length; TypeRestrict ++) {
-                	if(Custom_Strings[TypeRestrict].startsWith("Type")) {
-                		SearchType = SearchType + Custom_Strings[TypeRestrict].replaceFirst("Type", "");
-                		if(TypeRestrict + 1 != Custom_Strings.length) SearchType = SearchType + " ";
-                	}
-            	}
-            }
-            }
-            }
-            SD[0] = SearchDescription;
-            SD[1] = SearchType;
-            
-            return SD; 
+    	String SearchDescription = "";
+    	String SearchType = "";
+    	int Target_Conditions = 1;
+    	String TargetParse = Keyword_Details[5];                
+    	String Targets[] = TargetParse.split("!");
+    	Target_Conditions = Targets.length;
+    	for(int y = 0; y < Target_Conditions; y++) {       			
+    		if(Targets[y].contains("SearchShuffle")) {
+    			if(Targets[y].contains("OSearchShuffle")) {
+    				SearchDescription = SearchDescription + "Opponent's";
+    			}
+    			String SearchParse = Targets[y];  
+    			String Search[] = SearchParse.split("/");   
+
+    			for(int z = 0; z < Search.length - 1; z++) {
+    				SearchDescription = SearchDescription + Search[z+1];
+    				if(z + 3 < Search.length) SearchDescription = SearchDescription + ", ";
+    				else if(z + 2 != Search.length) SearchDescription = SearchDescription + " and/or ";
+    			}       
+    			if(Search[0].contains("SearchShuffle_SameName")) SearchType = Initiator.getName() + " ";
+    			if(Search[0].contains("SearchShuffle_Type")) {
+    				for(int TypeRestrict = 0; TypeRestrict < Custom_Strings.length; TypeRestrict ++) {
+    					if(Custom_Strings[TypeRestrict].startsWith("Color")) {
+    						SearchType = SearchType + Custom_Strings[TypeRestrict].replaceFirst("Color", "");
+    						if(TypeRestrict + 1 != Custom_Strings.length) SearchType = SearchType + " ";
+    					}
+    				}
+    				for(int TypeRestrict = 0; TypeRestrict < Custom_Strings.length; TypeRestrict ++) {
+    					if(Custom_Strings[TypeRestrict].startsWith("Type")) {
+    						SearchType = SearchType + Custom_Strings[TypeRestrict].replaceFirst("Type", "");
+    						if(TypeRestrict + 1 != Custom_Strings.length) SearchType = SearchType + " ";
+    					}
+    				}
+    			}
+    		}
+    	}
+    	SD[0] = SearchDescription;
+    	SD[1] = SearchType;
+
+    	return SD; 
     }
     
     void Whenever_ManaPaid (Card Source, String[] Keyword_Details, final Command Proper_Resolve, SpellAbility ability) {
-		String S_Amount = "0";
-		if(!Keyword_Details[7].contains("No_Condition") && !Keyword_Details[7].equals("Yes_No") 
-				&& !Keyword_Details[7].equals("Opponent_Yes_No")&& !Keyword_Details[7].contains("Choice_Instant")) {
-		if(Keyword_Details[7].contains("PayMana")) {
-            String PayAmountParse = Keyword_Details[7];                
-            S_Amount = PayAmountParse.split("/")[1];
-		
-        if(Source.getController().equals(AllZone.HumanPlayer)) {
-        	final Command paid = new Command() {
-            	private static final long serialVersionUID = 151367344511590317L;
+    	String S_Amount = "0";
+    	if(!Keyword_Details[7].contains("No_Condition") && !Keyword_Details[7].equals("Yes_No") 
+    			&& !Keyword_Details[7].equals("Opponent_Yes_No")&& !Keyword_Details[7].contains("Choice_Instant")) {
+    		if(Keyword_Details[7].contains("PayMana")) {
+    			String PayAmountParse = Keyword_Details[7];                
+    			S_Amount = PayAmountParse.split("/")[1];
 
-    			public void execute() {
-    				Proper_Resolve.execute();
-                }
-        	};
-        	StringBuilder sb = new StringBuilder();
-        	sb.append("Activate ").append(Source.getName()).append("'s ability: \n");
+    			if(Source.getController().equals(AllZone.HumanPlayer)) {
+    				final Command paid = new Command() {
+    					private static final long serialVersionUID = 151367344511590317L;
 
-        	GameActionUtil.payManaDuringAbilityResolve(sb.toString(), S_Amount, paid, Command.Blank);
-        } else {
-            if(ComputerUtil.canPayCost(S_Amount)) {
-            	ComputerUtil.payManaCost(ability);
-            	Proper_Resolve.execute();
-        }
-        }
-		}
-		if(Keyword_Details[7].contains("SacrificeType")) {
-            String PayAmountParse = Keyword_Details[7];                
-            S_Amount = PayAmountParse.split("/")[1];
-            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, Source.getController());
-            CardList choice = new CardList(play.getCards());
-            choice = choice.getType(S_Amount);
-        if(Source.getController().equals(AllZone.HumanPlayer)) {
-            AllZone.InputControl.setInput(CardFactoryUtil.Wheneverinput_sacrifice(ability, choice, "Select a " + S_Amount +" to sacrifice.",Proper_Resolve));
-        } /**else {
-            if(choice.size() > 5) {
-            	sacrifice(choice.get(0));
-            	Proper_Resolve.execute();
-        }
-        } **/ 
-		}
-    		} else Proper_Resolve.execute();
+    					public void execute() {
+    						Proper_Resolve.execute();
+    					}
+    				};
+    				StringBuilder sb = new StringBuilder();
+    				sb.append("Activate ").append(Source.getName()).append("'s ability: \n");
+
+    				GameActionUtil.payManaDuringAbilityResolve(sb.toString(), S_Amount, paid, Command.Blank);
+    			} else {
+    				if(ComputerUtil.canPayCost(S_Amount)) {
+    					ComputerUtil.payManaCost(ability);
+    					Proper_Resolve.execute();
+    				}
+    			}
+    		}
+    		if(Keyword_Details[7].contains("SacrificeType")) {
+    			String PayAmountParse = Keyword_Details[7];                
+    			S_Amount = PayAmountParse.split("/")[1];
+    			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, Source.getController());
+    			CardList choice = new CardList(play.getCards());
+    			choice = choice.getType(S_Amount);
+    			if(Source.getController().equals(AllZone.HumanPlayer)) {
+    				AllZone.InputControl.setInput(CardFactoryUtil.Wheneverinput_sacrifice(ability, choice, "Select a " + S_Amount +" to sacrifice.",Proper_Resolve));
+    			} /*else {
+    				if(choice.size() > 5) {
+    					sacrifice(choice.get(0));
+    					Proper_Resolve.execute();
+    				}
+    			} */
+    		}
+    	} else Proper_Resolve.execute();
 
     }
     
     
-	boolean Whenever_Go (Card Source, String[] Keyword_Details) {
-		boolean Go = true;
-		String Zones = Keyword_Details[3];
-        PlayerZone[] Required_Zone = new PlayerZone[1];
-        	if(Zones.equals("Hand")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Hand, Source.getController());
-        	if(Zones.equals("Graveyard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Graveyard, Source.getController());
-        	if(Zones.equals("Play") || Zones.equals("Any")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Battlefield, Source.getController());
-        	if(Zones.contains("Library")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Library, Source.getController());
-        	if(Zones.contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Exile, Source.getController());
-        //	if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Source.getController());
-        	
-    		if(AllZone.GameAction.isCardInZone(Source,Required_Zone[0]) || Zones.equals("Any")) {
-		if(Keyword_Details[7].equals("Yes_No")) {
-    	if(Source.getController().equals(AllZone.HumanPlayer)) {
-        	Object[] possibleValues = {"Yes", "No"};
-        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + Source.getName(),Source.getName() + " Ability", 
-        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-        			null, possibleValues, possibleValues[0]);
-              if(q.equals(1)) {
-            	  Go = false;
-                }
-    	}
-		}
-		if(Keyword_Details[7].equals("Opponent_Yes_No")) {
-	    	if(!Source.getController().equals(AllZone.HumanPlayer)) {
-	        	Object[] possibleValues = {"Yes", "No"};
-	        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + Source.getName(),Source.getName() + " Ability", 
-	        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-	        			null, possibleValues, possibleValues[0]);
-	              if(q.equals(1)) {
-	            	  Go = false;
-	                }
-	    	}
-			}
-    		}
+    boolean Whenever_Go (Card Source, String[] Keyword_Details) {
+    	boolean Go = true;
+    	String Zones = Keyword_Details[3];
+    	PlayerZone[] Required_Zone = new PlayerZone[1];
+    	if(Zones.equals("Hand")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Hand, Source.getController());
+    	if(Zones.equals("Graveyard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Graveyard, Source.getController());
+    	if(Zones.equals("Play") || Zones.equals("Any")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Battlefield, Source.getController());
+    	if(Zones.contains("Library")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Library, Source.getController());
+    	if(Zones.contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Exile, Source.getController());
+    	//if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Source.getController());
 
-		return Go;
-		}
+    	if(AllZone.GameAction.isCardInZone(Source,Required_Zone[0]) || Zones.equals("Any")) {
+    		if(Keyword_Details[7].equals("Yes_No")) {
+    			if(Source.getController().equals(AllZone.HumanPlayer)) {
+    				Object[] possibleValues = {"Yes", "No"};
+    				Object q = JOptionPane.showOptionDialog(null, "Activate - " + Source.getName(),Source.getName() + " Ability", 
+    						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+    						null, possibleValues, possibleValues[0]);
+    				if(q.equals(1)) {
+    					Go = false;
+    				}
+    			}
+    		}
+    		if(Keyword_Details[7].equals("Opponent_Yes_No")) {
+    			if(!Source.getController().equals(AllZone.HumanPlayer)) {
+    				Object[] possibleValues = {"Yes", "No"};
+    				Object q = JOptionPane.showOptionDialog(null, "Activate - " + Source.getName(),Source.getName() + " Ability", 
+    						JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+    						null, possibleValues, possibleValues[0]);
+    				if(q.equals(1)) {
+    					Go = false;
+    				}
+    			}
+    		}
+    	}
+
+    	return Go;
+    }
 	
 	public void Whenever_Input(Card Source, String[] Keyword_Details, Command paidCommand, final SpellAbility ability) {
 		if(!Keyword_Details[8].contains("ActualEffect")) {
-		String Zones = Keyword_Details[3];
-        PlayerZone[] Required_Zone = new PlayerZone[1];
-        	if(Zones.equals("Hand")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Hand, Source.getController());
-        	if(Zones.equals("Graveyard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Graveyard, Source.getController());
-        	if(Zones.equals("Play") || Zones.equals("Any")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Battlefield, Source.getController());
-        	if(Zones.contains("Library")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Library, Source.getController());
-        	if(Zones.contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Exile, Source.getController());
-        //	if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Source.getController());
-        	
-    		if(AllZone.GameAction.isCardInZone(Source,Required_Zone[0]) || Zones.equals("Any")) {	
-    			if(Keyword_Details[6].equals("ASAP")) {
-    				if(Keyword_Details[5].equals("InputType - CreatureORPlayer") && Source.getController().equals(AllZone.HumanPlayer)) {
-    					paidCommand.execute();
-    				}
-    				else if(Keyword_Details[5].equals("InputType - CreatureORPlayer") && Source.getController().equals(AllZone.ComputerPlayer)) 
-        	AllZone.Stack.add(ability);
-    				else if(Keyword_Details[5].contains("NormalInput")) {
-    					paidCommand.execute();
-    				}                 				
-    				else AllZone.Stack.add(ability);
-    			}
-		}
-	} else paidCommand.execute();
+			String Zones = Keyword_Details[3];
+			PlayerZone[] Required_Zone = new PlayerZone[1];
+			if(Zones.equals("Hand")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Hand, Source.getController());
+			if(Zones.equals("Graveyard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Graveyard, Source.getController());
+			if(Zones.equals("Play") || Zones.equals("Any")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Battlefield, Source.getController());
+			if(Zones.contains("Library")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Library, Source.getController());
+			if(Zones.contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Exile, Source.getController());
+			//if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Source.getController());
+
+			if(AllZone.GameAction.isCardInZone(Source,Required_Zone[0]) || Zones.equals("Any")) {	
+				if(Keyword_Details[6].equals("ASAP")) {
+					if(Keyword_Details[5].equals("InputType - CreatureORPlayer") && Source.getController().equals(AllZone.HumanPlayer)) {
+						paidCommand.execute();
+					}
+					else if(Keyword_Details[5].equals("InputType - CreatureORPlayer") && Source.getController().equals(AllZone.ComputerPlayer)) 
+						AllZone.Stack.add(ability);
+					else if(Keyword_Details[5].contains("NormalInput")) {
+						paidCommand.execute();
+					}                 				
+					else AllZone.Stack.add(ability);
+				}
+			}
+		} else paidCommand.execute();
 	}
     // Whenever Keyword
 	
