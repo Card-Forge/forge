@@ -95,11 +95,6 @@ public class StaticEffects
 		cardToEffectsList.put("Grixis Grimblade", new String[] {"Grixis_Grimblade"});
 		cardToEffectsList.put("Jund Hackblade", new String[] {"Jund_Hackblade"});
 		cardToEffectsList.put("Naya Hushblade", new String[] {"Naya_Hushblade"});
-		cardToEffectsList.put("Ashenmoor Cohort", new String[] {"Ashenmoor_Cohort"});
-		cardToEffectsList.put("Ballynock Cohort", new String[] {"Ballynock_Cohort"});
-		cardToEffectsList.put("Briarberry Cohort", new String[] {"Briarberry_Cohort"});
-		cardToEffectsList.put("Crabapple Cohort", new String[] {"Crabapple_Cohort"});
-		cardToEffectsList.put("Mudbrawler Cohort", new String[] {"Mudbrawler_Cohort"});
 		cardToEffectsList.put("Mystic Enforcer", new String[] {"Mystic_Enforcer"});
 		//cardToEffectsList.put("Nimble Mongoose", new String[] {"Nimble_Mongoose"});
 		cardToEffectsList.put("Werebear", new String[] {"Werebear"});

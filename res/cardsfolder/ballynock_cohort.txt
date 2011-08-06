@@ -1,9 +1,10 @@
 Name:Ballynock Cohort
 ManaCost:2 W
 Types:Creature Kithkin Soldier
-Text:Ballynock Cohort gets +1/+1 as long as you control another white creature.
+Text:no text
 PT:2/2
 K:First Strike
+K:stPumpSelf:Creature:1/1:isPresent Creature.White+Other+YouCtrl:CARDNAME gets +1/+1 as long as you control another white creature.
 SVar:BuffedBy:Creature.White
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballynock_cohort.jpg

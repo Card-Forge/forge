@@ -1,8 +1,9 @@
 Name:Crabapple Cohort
 ManaCost:4 G
 Types:Creature Treefolk Warrior
-Text:Crabapple Cohort gets +1/+1 as long as you control another green creature.
+Text:no text
 PT:4/4
+K:stPumpSelf:Creature:1/1:isPresent Creature.Green+Other+YouCtrl:CARDNAME gets +1/+1 as long as you control another green creature.
 SVar:BuffedBy:Creature.Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crabapple_cohort.jpg

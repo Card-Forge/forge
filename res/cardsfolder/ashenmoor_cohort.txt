@@ -1,8 +1,9 @@
 Name:Ashenmoor Cohort
 ManaCost:5 B
 Types:Creature Elemental Warrior
-Text:Ashenmoor Cohort gets +1/+1 as long as you control another black creature.
+Text:no text
 PT:4/3
+K:stPumpSelf:Creature:1/1:isPresent Creature.Black+Other+YouCtrl:CARDNAME gets +1/+1 as long as you control another black creature.  
 SVar:BuffedBy:Creature.Black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashenmoor_cohort.jpg
