@@ -1,0 +1,10 @@
+Name:Orim's Prayer
+ManaCost:1 W W
+Types:Enchantment
+Text:no text
+T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever one or more creatures attack you, you gain 1 life for each attacking creature.
+SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1 | SpellDescription$ You gain 1 life for each attacking creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/orims_prayer.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/245.jpg
+End
