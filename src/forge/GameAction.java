@@ -617,6 +617,10 @@ public class GameAction {
     }
     
     public void sacrifice(Card c) {
+    	if(c.getName().equals("Mana Pool")) {
+    		System.out.println("Trying to sacrifice mana pool...");
+    		return;
+    	}
         sacrificeDestroy(c);
         
         //Run triggers
