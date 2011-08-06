@@ -52,6 +52,31 @@ public class Input_Mulligan extends Input {
     }//selectButtonOK()
     
     void end() {
+    	
+        CardList CHandList = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
+        PlayerZone CPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+        PlayerZone CHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
+        
+    	//Computer mulligan
+        Card[] hand = AllZone.Computer_Hand.getCards();
+        CardList handCards = new CardList(hand);
+        Card dummy = handCards.get(0);
+        //Computer mulligans if there are no cards with converted mana cost of 0 in its hand
+        if(handCards.getValidCards("Card.cmcEQ0",AllZone.ComputerPlayer,dummy).size() == 0) {
+	        for(int i = 0; i < hand.length; i++) {
+	            AllZone.Computer_Library.add(hand[i]);
+	            AllZone.Computer_Hand.remove(hand[i]);
+	        }
+	        
+	        for(int i = 0; i < 100; i++)
+	            AllZone.ComputerPlayer.shuffle();
+	        	        
+	        int newHand = hand.length - 1;
+	        for(int i = 0; i < newHand; i++)
+	            AllZone.ComputerPlayer.drawCard();
+        }
+        
+        //Human Leylines
         ButtonUtil.reset();
         CardList HHandList = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
         PlayerZone HPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
@@ -68,11 +93,11 @@ public class Input_Mulligan extends Input {
         		}
         	}
         }
-        CardList CHandList = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
-        PlayerZone CPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-        PlayerZone CHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
+
+        //Computer Leylines
         for(int i = 0; i < CHandList.size() ; i++) {
-        	if(CHandList.get(i).getName().startsWith("Leyline") && (AllZoneUtil.getCardsInPlay("Leyline of Singularity").size() == 0)) {
+        	if(CHandList.get(i).getName().startsWith("Leyline") && !(CHandList.get(i).getName().startsWith("Leyline of Singularity")
+        			&& AllZoneUtil.getCardsInPlay("Leyline of Singularity").size() > 0)) {
         		CPlay.add(CHandList.get(i));
         		CHand.remove(CHandList.get(i));
         		AllZone.GameAction.checkStateEffects();
