@@ -16018,125 +16018,7 @@ public class GameActionUtil {
 
 	}; //Lovisa Coldeyes Pump
 	
-	public static Command Aven_Brigadier_Soldier_Pump = new Command() {
-		private static final long serialVersionUID   = -2052700621466065388L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Aven Brigadier");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Soldier");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isCreature()
-							&& !c.getName().equals(
-									"Aven Brigadier")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						gloriousAnthemList.add(c);
-					}
-
-				} // for
-			} // for
-
-		}// execute()
-
-	}; //Aven Brigadier Soldier Pump
-
-	public static Command Aven_Brigadier_Bird_Pump    = new Command() {
-		private static final long serialVersionUID   = 69906668683163765L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Aven Brigadier");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Bird");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isCreature()
-							&& !c.getName().equals(
-									"Aven Brigadier")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						gloriousAnthemList.add(c);
-					}
-
-				} // for
-			} // for
-
-		}// execute()
-
-	}; //Aven Brigadier Bird Pump
-
-	public static Command Aven_Brigadier_Other        = new Command() {
-		private static final long serialVersionUID = 3214384167995760060L;
-
-		int                       otherBrigadiers  = 0;
-
-		private int countOtherBrigadiers() {
-			PlayerZone hPlay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.HumanPlayer);
-			PlayerZone cPlay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.ComputerPlayer);
-			CardList brigadiers = new CardList();
-
-			brigadiers.addAll(hPlay.getCards());
-			brigadiers.addAll(cPlay.getCards());
-			brigadiers = brigadiers.getName("Aven Brigadier");
-			return brigadiers.size() - 1;
-		}
-
-		public void execute() {
-
-			CardList creature = AllZoneUtil.getCardsInPlay("Aven Brigadier");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				otherBrigadiers = countOtherBrigadiers();
-				int boost = 0;
-				if(c.isType("Bird")) boost++;
-				if(c.isType("Soldier")) boost++;
-				c.setOtherAttackBoost(boost * otherBrigadiers);
-				c.setOtherDefenseBoost(boost * otherBrigadiers);
-			}// for inner
-		}// execute()
-
-	}; //brigadiers other
-
+	
 	public static Command Scion_of_Oona_Pump          = new Command() {
 		private static final long serialVersionUID   = 8659017444482040867L;
 
@@ -19371,11 +19253,13 @@ public class GameActionUtil {
 		commands.put("Aven_Trailblazer", Aven_Trailblazer);
 		
 		commands.put("Bant_Sureblade", Bant_Sureblade);
+		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
 		commands.put("Bloodghast", Bloodghast);
 		
 		commands.put("Cantivore", Cantivore);
 		commands.put("Castle", Castle);
 		commands.put("Castle_Raptors", Castle_Raptors);
+		commands.put("Champions_Drake", Champions_Drake);
 		commands.put("Cognivore", Cognivore);
 		commands.put("Conspiracy", Conspiracy);
 		commands.put("Cover_of_Darkness", Cover_of_Darkness);
@@ -19473,8 +19357,7 @@ public class GameActionUtil {
 		commands.put("Caravan_Escort", Caravan_Escort);
 		commands.put("Ikiral_Outrider", Ikiral_Outrider);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
-		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
-		commands.put("Champions_Drake", Champions_Drake);
+		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);
@@ -19516,9 +19399,6 @@ public class GameActionUtil {
 		commands.put("Death_Baron_Pump", Death_Baron_Pump);
 		commands.put("Death_Baron_Other", Death_Baron_Other);
 		commands.put("Lovisa_Coldeyes_Pump", Lovisa_Coldeyes_Pump);
-		commands.put("Aven_Brigadier_Soldier_Pump", Aven_Brigadier_Soldier_Pump);
-		commands.put("Aven_Brigadier_Bird_Pump", Aven_Brigadier_Bird_Pump);
-		commands.put("Aven_Brigadier_Other", Aven_Brigadier_Other);
 		commands.put("Scion_of_Oona_Pump", Scion_of_Oona_Pump);
 		commands.put("Scion_of_Oona_Other", Scion_of_Oona_Other);
 

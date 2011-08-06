@@ -4,6 +4,8 @@ Types:Creature Bird Soldier
 Text:Other Bird creatures get +1/+1.\r\nOther Soldier creatures get +1/+1.
 PT:3/5
 K:Flying
+K:stPumpAll:Creature.Bird+Other:1/1:No Condition:Other Bird creatures get +1/+1.
+K:stPumpAll:Creature.Soldier+Other:1/1:No Condition:Other Soldier creatures get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_brigadier.jpg
