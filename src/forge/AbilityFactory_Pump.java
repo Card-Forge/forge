@@ -313,15 +313,15 @@ public class AbilityFactory_Pump {
 			}
         }
         else
-        	return doTgtAI(sa, defense, attack);
+        	return doTgtAI(sa, defense, attack, false);
         
         return false;
     }
 
-    private boolean doTgtAI(SpellAbility sa, int defense, int attack)
+    private boolean doTgtAI(SpellAbility sa, int defense, int attack, boolean mandatory)
     {
         String curPhase = AllZone.Phase.getPhase();
-        if(curPhase.equals(Constant.Phase.Main2) && !(AF.isCurse() && defense < 0))
+        if(!mandatory && curPhase.equals(Constant.Phase.Main2) && !(AF.isCurse() && defense < 0))
         	return false;
         
 		Target tgt = AF.getAbTgt();
@@ -345,7 +345,7 @@ public class AbilityFactory_Pump {
         }
         
         if (list.isEmpty())
-        	return false;
+        	return mandatory && pumpMandatoryTarget(AF, sa, mandatory);
         
 		while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
 			Card t = null;
@@ -353,6 +353,9 @@ public class AbilityFactory_Pump {
 			
 			if (list.isEmpty()){
 				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
+					if (mandatory)
+						return pumpMandatoryTarget(AF, sa, mandatory);
+					
 					tgt.resetTargets();
 					return false;
 				}
@@ -378,21 +381,76 @@ public class AbilityFactory_Pump {
 	        	tgt.addTarget(t);
 	        	list.remove(t);
 	        }
-	        
-			if (list.isEmpty()){
-				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
-					tgt.resetTargets();
-					return false;
-				}
-				else{
-					// todo is this good enough? for up to amounts?
-					break;
-				}
-			}
 		}
         
         return true;
     }
+    
+    private boolean pumpMandatoryTarget(AbilityFactory af, SpellAbility sa, boolean mandatory){
+    	CardList list = AllZoneUtil.getCardsInPlay();
+    	Target tgt = sa.getTarget();
+    	list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+    	
+    	if (list.size() < tgt.getMinTargets(sa.getSourceCard(), sa)){
+    		tgt.resetTargets();
+    		return false;
+    	}
+    	
+    	// Remove anything that's already been targeted
+    	for(Card c : tgt.getTargetCards())
+    		list.remove(c);
+    	
+    	CardList pref;
+    	CardList forced;
+    	Card source = sa.getSourceCard();
+    	
+    	if (af.isCurse()){
+    		pref = list.getController(AllZone.HumanPlayer);
+    		forced = list.getController(AllZone.ComputerPlayer);
+    	}
+    	else{
+    		pref = list.getController(AllZone.ComputerPlayer);
+    		forced = list.getController(AllZone.HumanPlayer);
+    	}
+    	
+    	while(tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)){
+    		if (pref.isEmpty())
+    			break;
+    		
+    		Card c;
+    		if (pref.getNotType("Creature").size() == 0)
+    			c = CardFactoryUtil.AI_getBestCreature(pref);
+    		else
+    			c = CardFactoryUtil.AI_getMostExpensivePermanent(pref, source, true);
+    		
+    		pref.remove(c);
+    		
+    		tgt.addTarget(c);
+    	}
+    	
+    	while(tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)){
+    		if (forced.isEmpty())
+    			break;
+    		
+    		Card c;
+    		if (forced.getNotType("Creature").size() == 0)
+    			c = CardFactoryUtil.AI_getWorstCreature(forced);
+    		else
+    			c = CardFactoryUtil.AI_getCheapestPermanent(forced, source, true);
+    		
+    		forced.remove(c);
+    		
+    		tgt.addTarget(c);
+    	}
+    	
+    	if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)){
+    		tgt.resetTargets();
+    		return false;
+    	}
+    	
+    	return true;
+    }
+    
     
     private boolean pumpTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
 		if (!ComputerUtil.canPayCost(sa))
@@ -402,14 +460,26 @@ public class AbilityFactory_Pump {
 		
     	int defense;
 		if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")){
-			defense = Integer.parseInt(source.getSVar("PayX"));
+			// Set PayX here to maximum value.
+			int xPay = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(xPay));
+			defense = xPay;
 		}
 		else
 			defense = getNumDefense(sa);
 
     	int attack;
 		if (numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")){
-			attack = Integer.parseInt(source.getSVar("PayX"));
+			// Set PayX here to maximum value.
+			String toPay = source.getSVar("PayX");
+			
+			if (toPay.equals("")){
+				int xPay = ComputerUtil.determineLeftoverMana(sa);
+				source.setSVar("PayX", Integer.toString(xPay));
+				attack = xPay;
+			}
+			else
+				attack = Integer.parseInt(toPay);
 		}
 		else
 			attack = getNumAttack(sa);
@@ -421,7 +491,7 @@ public class AbilityFactory_Pump {
     		
     	}
     	else{
-    		return doTgtAI(sa, defense, attack);
+    		return doTgtAI(sa, defense, attack, mandatory);
     	}
     	
     	return true;
@@ -453,7 +523,7 @@ public class AbilityFactory_Pump {
     		 }
     	 }
     	 else
-    		 return doTgtAI(sa, defense, attack);
+    		 return doTgtAI(sa, defense, attack, false);
     	 
     	return true; 
     }
