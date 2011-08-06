@@ -15866,15 +15866,12 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 8607200838396348507L;
 
 		public void execute() {
-			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Soulsurge Elemental");
+			CardList list = AllZoneUtil.getCardsInPlay("Soulsurge Elemental");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				c.setBaseAttack(countCreatures(c));
+				//c.setBaseAttack(countCreatures(c));
+				c.setBaseAttack(AllZoneUtil.getCreaturesInPlay(c.getController()).size());
 				c.setBaseDefense(1);
 			}
 

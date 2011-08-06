@@ -17,7 +17,7 @@ public class AllZoneUtil {
 	 * @return a CardList containing all creatures a give player has in play
 	 */
 	public static CardList getCreaturesInPlay(final String player) {
-		CardList creatures = AllZoneUtil.getCardsInPlay(player);
+		CardList creatures = AllZoneUtil.getPlayerCardsInPlay(player);
 		return creatures.filter(AllZoneUtil.creatures);
 	}
 	
