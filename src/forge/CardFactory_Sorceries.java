@@ -3139,38 +3139,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if (cardName.equals("Burning Inquiry")) {
-        	final SpellAbility spell = new Spell(card){
-				private static final long serialVersionUID = 7133052973770045886L;
-
-				@Override
-        		public void resolve() {
-        			//each player draws three cards
-        			AllZone.ComputerPlayer.drawCards(3);
-        			AllZone.HumanPlayer.drawCards(3);
-        			
-        			//now, each player discards 3 cards at random
-        			AllZone.ComputerPlayer.discardRandom(3, this);
-        			AllZone.HumanPlayer.discardRandom(3, this);
-        		}
-
-        		@Override
-        		public boolean canPlayAI() {
-        			return AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size() > 0;
-        		}
-        	};
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(cardName).append(" - each player draws 3 cards, then discards 3 cards at random.");
-        	spell.setStackDescription(sb.toString());
-        	
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
+                //*************** START *********** START **************************
         else if(cardName.equals("Brood Birthing")) {
         	final SpellAbility spell = new Spell(card)
         	{
