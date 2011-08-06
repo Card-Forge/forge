@@ -297,50 +297,66 @@ public class CardFactoryUtil {
         if (c.hasKeyword("Fear")) value += power * 5;
         if (c.hasKeyword("Intimidate")) value += power * 5;
         if (c.hasStartOfKeyword("CARDNAME can't be blocked except by")) value += power * 5;
+        if (c.hasStartOfKeyword("CARDNAME can't be blocked by")) value += power * 2;
         
         //Battle stats increasing keywords
         if (c.hasKeyword("Double Strike")) value += power * 15;
-        value += getTotalBushidoMagnitude(c) * 20;
-        value += getTotalFlankingMagnitude(c) * 20;
+        value += c.getKeywordMagnitute("Bushido") * 20;
+        value += c.getAmountOfKeyword("Flanking") * 20;
         
         //Other good keywords
-        if (c.hasKeyword("Deathtouch")) value += 25;
-        if (c.hasKeyword("Exalted")) value += 20;
-        if (c.hasKeyword("First Strike")) value += 15;
+        if (c.hasKeyword("Deathtouch") && power > 0) value += 25;
+        value += c.getAmountOfKeyword("Exalted") * 20;
+        if (c.hasKeyword("First Strike") && !c.hasKeyword("Double Strike") && power > 0) value += 15;
         if (c.hasKeyword("Lifelink")) value += power * 10;
-        if (c.hasKeyword("Rampage")) value += 2;
-        if (c.hasKeyword("Reach")) value += 5;
-        if (c.hasKeyword("Trample")) value += 15;
+        if (c.hasKeyword("Trample")) value += power * 3;
         if (c.hasKeyword("Vigilance")) value += power * 5 + toughness * 5;
         if (c.hasKeyword("Wither")) value += power * 10;
-        if (c.hasKeyword("Annihilator")) value += 30;
+        value += c.getKeywordMagnitute("Rampage");
+        value += c.getKeywordMagnitute("Annihilator") * 30;
+        if (c.hasKeyword("Changeling")) value += 5;
+        if (c.hasKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat") && power > 0) value += 15;
+        if (c.hasKeyword("Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.") && power > 0) value += 2;
+        
+        //Defensive Keywords
+        if (c.hasKeyword("Reach")) value += 5;
+        if (c.hasKeyword("CARDNAME can block creatures with shadow as though they didn't have shadow.")) value += 3;
+        if (c.hasKeyword("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")) value += 15;
 
         //Protection
         if (c.hasKeyword("Indestructible")) value += 70;
-        if (c.hasKeyword("Shroud")) value += 25;
+        if (c.hasKeyword("Shroud")) value += 30;
         if (c.hasKeyword("CARDNAME can't be the target of spells or abilities your opponents control.")) value += 35;
         if (c.hasStartOfKeyword("Protection from")) value += 20;
         
+        //Activated Abilities
+        if (c.hasStartOfKeyword("ab")) value += 10;
+        
         //Bad keywords
-        if (c.hasKeyword("Defender")) value -= power * 10 + 50;
+        if (c.hasKeyword("Defender") || c.hasKeyword("CARDNAME can't attack.")) value -= power * 10 + 50;
         if (c.hasKeyword("CARDNAME can't block.")) value -= 10;
-        if (c.hasKeyword("CARDNAME attacks each turn if able.")) value -= 5;
+        if (c.hasKeyword("CARDNAME attacks each turn if able.")) value -= 10;
         if (c.hasKeyword("CARDNAME can block only creatures with flying.")) value -= toughness * 5;
-        if (c.hasKeyword("CARDNAME can't attack or block.")) value -= power * 15 + toughness * 10;
-        if (c.hasKeyword("CARDNAME can't block.")) value -= 10;
+        
+        if (c.hasKeyword("CARDNAME can't attack or block.")) value = 100 + c.getCMC() * 5; //reset everything - useless
         if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) value -= 50;
         if (c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) value -= 50;
         if (c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) value -= 50;
         if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) value -= 20;
         if (c.hasStartOfKeyword("At the beginning of your upkeep, destroy CARDNAME unless you pay")) value -= 20;
         if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) value -= 20;
-        if (c.hasStartOfKeyword("Cumulative upkeep")) value -= 20;
-        if (c.hasStartOfKeyword("Fading")) value -= 20;
-        if (c.hasStartOfKeyword("Vanishing")) value -= 20;
+        if (c.hasStartOfKeyword("Upkeep:")) value -= 20;
+        if (c.hasStartOfKeyword("Cumulative upkeep")) value -= 30;
+        if (c.hasStartOfKeyword("Fading")) value -= 20; //not used atm
+        if (c.hasStartOfKeyword("Vanishing")) value -= 20; //not used atm
+        
+        //undesired effects
+        if (c.hasStartOfKeyword("When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.")) value -= 10;
         
         return value;
         
     } //evaluateCreature
+
     
     public static Card AI_getBestCreature(CardList list, Card c) {
         final Card crd = c;
@@ -4390,18 +4406,6 @@ public class CardFactoryUtil {
     	
     	return list;
     }
-    
-    public static int getTotalFlankingMagnitude(Card c) {
-	int flankingMagnitude = 0;
-        String kw = "";
-        ArrayList<String> lst = c.getKeyword();
-        
-        for(int j = 0; j < lst.size(); j++) {
-            kw = lst.get(j);
-            if(kw.equals("Flanking")) flankingMagnitude++;
-        }
-    return flankingMagnitude;
-	}
     
     public static int getTotalBushidoMagnitude(Card c) {
         int count = 0;

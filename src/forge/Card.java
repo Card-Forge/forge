@@ -2177,7 +2177,32 @@ public class Card extends MyObservable {
 		
 		return false;
 	}
+	
+	//This counts the number of instances of a keyword a card has
+	public int getAmountOfKeyword(String k) {
+		int count = 0;
+        ArrayList<String> keywords = getKeyword();
+        for(int j = 0; j < keywords.size(); j++) {
+            if(keywords.get(j).equals(k)) count++;
+        }
 
+        return count;
+    }
+	
+	// This is for keywords with a number like Bushido, Annihilator and Rampage. It returns the total.
+	public int getKeywordMagnitute(String k) {
+		int count = 0;
+        ArrayList<String> keywords = getKeyword();
+        for(String kw:keywords) {
+            if(kw.contains(k)) {
+                String[] parse = kw.split(" ");
+                String s = parse[1];
+                count += Integer.parseInt(s);
+            }
+        }
+        return count;
+    }
+	
     private String toMixedCase(String s)
     {
     	String fc = "";
