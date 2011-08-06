@@ -1435,6 +1435,7 @@ res/cardsfolder/darkness.txt -text svneol=native#text/plain
 res/cardsfolder/darkslick_drake.txt -text svneol=native#text/plain
 res/cardsfolder/darkslick_shores.txt -text svneol=native#text/plain
 res/cardsfolder/darksteel_axe.txt -text svneol=native#text/plain
+res/cardsfolder/darksteel_brute.txt -text svneol=native#text/plain
 res/cardsfolder/darksteel_citadel.txt -text svneol=native#text/plain
 res/cardsfolder/darksteel_colossus.txt -text svneol=native#text/plain
 res/cardsfolder/darksteel_forge.txt -text svneol=native#text/plain
