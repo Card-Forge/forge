@@ -14,6 +14,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
+import com.esotericsoftware.minlog.Log;
+
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -798,7 +800,7 @@ public class QuestData implements NewConstants {
     		chance = 0.65f;
     	
     	float r = random.nextFloat();
-    	System.out.println("Random:" + r);
+    	Log.debug("Random:" + r);
     	
     	if(didWin) return r <= chance;
         	

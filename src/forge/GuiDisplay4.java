@@ -120,9 +120,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             
             //Use both so that when "un"maximizing, the frame isn't tiny
             setSize(1024, 740);
-            System.out.println(getExtendedState());
             setExtendedState(Frame.MAXIMIZED_BOTH);
-            System.out.println(getExtendedState());
         }
         super.setVisible(visible);
     }

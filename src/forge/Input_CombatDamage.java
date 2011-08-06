@@ -7,6 +7,8 @@ import java.util.HashMap;
 //import java.util.Iterator;
 import java.util.Map.Entry;
 
+import com.esotericsoftware.minlog.Log;
+
 
 public class Input_CombatDamage extends Input {
     private static final long serialVersionUID = -8549102582210309044L;
@@ -36,7 +38,7 @@ public class Input_CombatDamage extends Input {
         
         //AllZone.Phase.nextPhase();
         //for debugging: 
-        System.out.println("need to nextPhase(Input_CombatDamage.selectButtonOK) = true");
+        Log.debug("need to nextPhase(Input_CombatDamage.selectButtonOK) = true");
         AllZone.Phase.setNeedToNextPhase(true);
     }
     

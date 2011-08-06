@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.esotericsoftware.minlog.Log;
+
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -66,7 +68,7 @@ public class ReadPriceList implements NewConstants {
                         
                         map.put(name, val);
                      } catch (NumberFormatException nfe) {
-                        System.out.println("NumberFormatException: " + nfe.getMessage());
+                        Log.warn("NumberFormatException: " + nfe.getMessage());
                      }
                 }
                 line = in.readLine();

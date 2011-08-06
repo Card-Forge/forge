@@ -5,6 +5,8 @@ import java.util.ArrayList;
 // import java.util.Collection;
 // import java.util.TreeSet;
 
+import com.esotericsoftware.minlog.Log;
+
 
 public class ComputerAI_General implements Computer {
     //private boolean          playLand = true;
@@ -258,7 +260,7 @@ public class ComputerAI_General implements Computer {
         Card[] att = c.getAttackers();
         for(int i = 0; i < att.length; i++) {
             if(!att[i].getKeyword().contains("Vigilance")) att[i].tap();
-            System.out.println("Computer just assigned " + att[i].getName() + " as an attacker.");
+            Log.debug("Computer just assigned " + att[i].getName() + " as an attacker.");
         }
         
         AllZone.Computer_Play.updateObservers();

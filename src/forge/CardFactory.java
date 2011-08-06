@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-
+import com.esotericsoftware.minlog.Log;
 
 public class CardFactory implements NewConstants {
     // String cardname is the key, Card is the value
@@ -757,7 +757,7 @@ public class CardFactory implements NewConstants {
 
                 public boolean canPlayAI()
                 {
-                	//System.out.println("Phase - " + AllZone.Phase.getPhase());
+                	//Log.debug("spAllPump", "Phase - " + AllZone.Phase.getPhase());
                 	String curPhase = AllZone.Phase.getPhase();
                 	if (curPhase.equals(Constant.Phase.Main2)) 
                 		return false;
@@ -794,7 +794,7 @@ public class CardFactory implements NewConstants {
                 	
                 	final CardList sl = getScopeList();
                 	
-                	System.out.println("Phase - " + AllZone.Phase.getPhase());
+                	Log.debug("spAllPump", "Phase - " + AllZone.Phase.getPhase());
                 	
                 	final Command untilEOT = new Command()
                 	{
@@ -10386,7 +10386,7 @@ public class CardFactory implements NewConstants {
                     
                     for(int i = 0; i < all.size(); i++) {
                         Card c = all.get(i);
-                        System.out.println("WOG: " + c);
+                        Log.debug("Wrath of God", "WOG: " + c);
                         AllZone.GameAction.destroyNoRegeneration(c);
                     }
                 }// resolve()
@@ -15581,12 +15581,12 @@ public class CardFactory implements NewConstants {
                     CardList libCards = new CardList(library.getCards());
                     int lifeGain = libCards.size();
                     
-                    System.out.println("lifeGain: " + lifeGain);
+                    Log.debug("Invincible Hymn", "lifeGain: " + lifeGain);
                     
                     PlayerLife life = AllZone.GameAction.getPlayerLife(player);
                     life.setLife(lifeGain);
                     
-                    System.out.println("life.getLife(): " + life.getLife());
+                    Log.debug("Invincible Hymn", "life.getLife(): " + life.getLife());
                 }
                 
                 @Override
@@ -16775,7 +16775,7 @@ public class CardFactory implements NewConstants {
                     
                     Card c = getFlying();
                     
-                    if(check == null && c != null) System.out.println("Check equals null");
+                    if(check == null && c != null) Log.debug("Goblin Grenade", "Check equals null");
                     else if((c == null) || (!check.equals(c))) throw new RuntimeException(card
                             + " error in chooseTargetAI() - Card c is " + c + ",  Card check is " + check);
                     
@@ -16787,11 +16787,11 @@ public class CardFactory implements NewConstants {
                     CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
                     for(int i = 0; i < flying.size(); i++)
                         if(flying.get(i).getNetDefense() <= 5) {
-                            System.out.println("getFlying() returns " + flying.get(i).getName());
+                        	Log.debug("Goblin Grenade", "getFlying() returns " + flying.get(i).getName());
                             return flying.get(i);
                         }
                     
-                    System.out.println("getFlying() returned null");
+                    Log.debug("Goblin Grenade", "getFlying() returned null");
                     return null;
                 }
                 
@@ -18303,22 +18303,20 @@ public class CardFactory implements NewConstants {
                     CardList libList = new CardList(lib.getCards());
                     
                     int max = libList.size();
-                    int prev = 0;
                     int count = 0;
                     int total = 0;
                     
 
                     for(int i = 0; i < max; i++) {
                         Card c = libList.get(i);
+                        total = i;
                         if(c.getType().contains("Land")) {
-                            count = count + 1;
-                            if(count == 4 && prev == 0) total = i;
-                            if(count == 4) prev = 1;
-                            
+                            count++;
+                            if(count == 4) break;                          
                         }
                     }
                     
-                    for(int i = 0; i < total + 1; i++) {
+                    for(int i = 0; i <= total; i++) {
                         Card c = libList.get(i);
                         lib.remove(c);
                         grave.add(c);
@@ -22058,7 +22056,7 @@ public class CardFactory implements NewConstants {
         			CardList computer = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
         			computer = computer.filter(colorless);
 
-        			System.out.println("Current phase:" + AllZone.Phase.getPhase());
+        			Log.debug("All is Dust", "Current phase:" + AllZone.Phase.getPhase());
         			// the computer will at least destroy 2 more human permanents
         			return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
         				(computer.size() < human.size() - 1
@@ -22242,7 +22240,7 @@ public class CardFactory implements NewConstants {
                 	 * your library until you reveal a nonland card.
                 	 */
                     CardList lib = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
-                    System.out.println("Library before: "+lib);
+                    Log.debug("Explosive Revelation", "Library before: "+lib);
                     CardList revealed = new CardList();
                     if( lib.size() > 0 ) {
                     	int index = 0;
@@ -22631,10 +22629,10 @@ public class CardFactory implements NewConstants {
         			int damage = (card.getXManaCostPaid() - getNumTargets() + 1) / getNumTargets();
         			//add that much damage to each creature
         			//DEBUG
-        			System.out.println("Fireball - damage to each target: "+damage);
-        			System.out.print("Fireball - card targets: ");
+        			Log.debug("Fireball", "Fireball - damage to each target: "+damage);
+        			Log.debug("Fireball", "Fireball - card targets: ");
         			printCardTargets();
-        			System.out.print("Fireball - player targets: ");
+        			Log.debug("Fireball", "Fireball - player targets: ");
         			printPlayerTargets();
         			if(card.getController().equals(Constant.Player.Computer)) {
         				StringBuilder sb = new StringBuilder();
@@ -22658,14 +22656,14 @@ public class CardFactory implements NewConstants {
         						&& CardFactoryUtil.canTarget(card, target[i])
         						&& null != target[i]) {
         					//DEBUG
-        					System.out.println("Fireball does "+damage+" to: "+target[i]);
+        					Log.debug("Fireball", "Fireball does "+damage+" to: "+target[i]);
         					AllZone.GameAction.addDamage(target[i], card, damage);
         				}
         			}
         			for(int i = 0; i < targetPlayers.length; i++) {
         				if( null != targetPlayers[i] ) {
         					//DEBUG
-        					System.out.println("Fireball does "+damage+" to: "+targetPlayers[i]);
+        					Log.debug("Fireball", "Fireball does "+damage+" to: "+targetPlayers[i]);
         					AllZone.GameAction.addDamage(targetPlayers[i], card, damage);
         				}
         			}
@@ -22673,19 +22671,21 @@ public class CardFactory implements NewConstants {
         		
         		//DEBUG
         		private void printCardTargets() {
-        			System.out.print("[");
+        			StringBuilder sb = new StringBuilder("[");
         			for(int i = 0; i < target.length; i++) {
-        				System.out.print(target[i]+",");
+        				sb.append(target[i]).append(",");
         			}
-        			System.out.println("]");
+        			sb.append("]");
+        			Log.debug("Fireball", sb.toString());
         		}
         		//DEBUG
         		private void printPlayerTargets() {
-        			System.out.print("[");
+        			StringBuilder sb = new StringBuilder("[");
         			for(int i = 0; i < targetPlayers.length; i++) {
-        				System.out.print(targetPlayers[i]+",");
+        				sb.append(targetPlayers[i]).append(",");
         			}
-        			System.out.println("]");
+        			sb.append("]");
+        			Log.debug("Fireball", sb.toString());
         		}
         		
         		private int getNumTargets() {
@@ -22726,7 +22726,7 @@ public class CardFactory implements NewConstants {
         				}
         			}
         			//DEBUG
-        			System.out.println("Fireball - numTargets = "+numTargets);
+        			Log.debug("Fireball", "Fireball - numTargets = "+numTargets);
         			return numTargets;
         		}
 
@@ -23836,7 +23836,7 @@ public class CardFactory implements NewConstants {
                private static final long serialVersionUID = 778987998465463L;
                
                public void execute() {
-                  System.out.println("Control changed: " + card.getController());
+                  Log.debug("HandSize", "Control changed: " + card.getController());
                   if(card.getController().equals(Constant.Player.Human)) {
                      Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
                      Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));

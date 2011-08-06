@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.esotericsoftware.minlog.Log;
+
 
 public class CombatUtil {
 	static boolean Lorthos_Cancelled;
@@ -2053,7 +2055,7 @@ public class CombatUtil {
             
             ability2.setStackDescription(b.getName() + " - gets -" + mag + "/-" + mag + " until EOT.");
             AllZone.Stack.add(ability2);
-            System.out.println("Adding Flanking!");
+            Log.debug("Adding Flanking!");
             //AllZone.GameAction.checkStateEffects();
             
         }//flanking

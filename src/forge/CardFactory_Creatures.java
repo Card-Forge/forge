@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
-
+import com.esotericsoftware.minlog.Log;
 
 public class CardFactory_Creatures {
     
@@ -3183,7 +3183,7 @@ public class CardFactory_Creatures {
                     PlayerZone to = AllZone.getZone(Constant.Zone.Play,
                             AllZone.GameAction.getOpponent(card.getOwner()));
                     to.add(card);
-                    System.out.println("cards controller = " + card.getController());
+                    Log.debug("Sleeper Agent", "cards controller = " + card.getController());
                     
                     ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
                     ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
@@ -6543,7 +6543,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    System.out.println("phase =" + AllZone.Phase.getPhase());
+                    Log.debug("Giltspire Avenger","phase =" + AllZone.Phase.getPhase());
                     if((AllZone.Phase.getPhase().equals(Constant.Phase.Main2) || AllZone.Phase.getPhase().equals(
                             Constant.Phase.End_Of_Turn))
                             && !card.hasSickness() && card.isUntapped() && super.canPlay()) return true;
@@ -10284,7 +10284,7 @@ public class CardFactory_Creatures {
                         
                     }
                     
-                    if(getTargetCard() == null) System.out.println("getTargetCard null");
+                    if(getTargetCard() == null) Log.debug("Marrow-Gnawer", "getTargetCard null");
                     if(getTargetCard() != null && list.size() > 3) return true;
                     else return false;
                 }
@@ -10902,7 +10902,7 @@ public class CardFactory_Creatures {
                     if(legends.size() != 0) {
                         Card c = CardFactoryUtil.AI_getBestCreature(legends);
                         if(c == null) c = library[0];
-                        System.out.println("computer picked - " + c);
+                        Log.debug("Captain Sisay","computer picked - " + c);
                         AllZone.Computer_Library.remove(c);
                         AllZone.Computer_Hand.add(c);
                     }
@@ -12215,7 +12215,7 @@ public class CardFactory_Creatures {
                     if(card.getController().equals("Human")) {
                         String choices[] = {"white", "blue", "black", "red", "green"};
                         Object o = AllZone.Display.getChoiceOptional("Select Color: ", choices);
-                        System.out.println("Color:" + o);
+                        Log.debug("Treva, the Renewer", "Color:" + o);
                         lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor((String) o);
                         
                     } else {
@@ -12646,7 +12646,7 @@ public class CardFactory_Creatures {
                         Card c = CardFactoryUtil.AI_getBestArtifact(list);
                         if(c == null) c = CardFactoryUtil.AI_getBestEnchantment(list, card, true);
                         if(c == null) c = grave[0];
-                        System.out.println("computer picked - " + c);
+                        Log.debug("Hanna, Ship's Navigator", "computer picked - " + c);
                         AllZone.Computer_Graveyard.remove(c);
                         AllZone.Computer_Hand.add(c);
                     }
@@ -20558,7 +20558,7 @@ public class CardFactory_Creatures {
                private static final long serialVersionUID = 778987998465463L;
                
                public void execute() {
-                  System.out.println("Control changed: " + card.getController());
+                  Log.debug("HandSize", "Control changed: " + card.getController());
                   if(card.getController().equals(Constant.Player.Human)) {
                      Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
                      Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));

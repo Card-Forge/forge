@@ -1,6 +1,8 @@
 package forge;
 import java.util.*;
 
+import com.esotericsoftware.minlog.Log;
+
 public class CardListUtil
 {
   public static CardList filterToughness(CardList in, int atLeastToughness)
@@ -317,7 +319,7 @@ public class CardListUtil
             attack += c.get(i).getNetDefense(); 
       }
     }
-    System.out.println("Total First Strike attack: " +attack);
+    Log.debug("Total First Strike attack: " +attack);
     return attack;
   }//sumFirstStrikeAttack()
 }

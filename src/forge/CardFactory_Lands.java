@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
-
+import com.esotericsoftware.minlog.Log;
 
 class CardFactory_Lands {
     
@@ -1295,7 +1295,7 @@ class CardFactory_Lands {
                     CardListUtil.sortBySelectable(full, land1[0]);
                     
                     for (Card c:full)
-                    	System.out.println(c);
+                    	Log.debug(c.toString());
                     
                     Object o = AllZone.Display.getChoiceOptional("Choose a " + land1[0] + " or " + land2[0],
                             full.toArray());
@@ -1913,7 +1913,7 @@ class CardFactory_Lands {
                     if(arts.size() != 0) {
                         Card c = CardFactoryUtil.AI_getBestArtifact(list);
                         if(c == null) c = grave[0];
-                        System.out.println("computer picked - " + c);
+                        Log.debug("Academy Ruins", "computer picked - " + c);
                         AllZone.Computer_Graveyard.remove(c);
                         AllZone.Computer_Library.add(c, 0);
                     }
@@ -3657,7 +3657,7 @@ class CardFactory_Lands {
                private static final long serialVersionUID = 778987998465463L;
                
                public void execute() {
-                  System.out.println("Control changed: " + card.getController());
+                  Log.debug("HandSize", "Control changed: " + card.getController());
                   if(card.getController().equals(Constant.Player.Human)) {
                      Input_Cleanup.removeHandSizeOperation(Integer.parseInt(card.getSVar("HSStamp")));
                      Computer_Cleanup.addHandSizeOperation(new HandSizeOp(Mode,Amount,Integer.parseInt(card.getSVar("HSStamp"))));

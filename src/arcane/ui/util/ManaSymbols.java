@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
+import com.esotericsoftware.minlog.Log;
+
 
 public class ManaSymbols {
 	static private final Map<String, Image> manaImages = new HashMap<String, Image>();
@@ -29,7 +31,7 @@ public class ManaSymbols {
 			String symbol = tok.nextToken();
 			Image image = manaImages.get(symbol);
 			if (image == null) {
-				System.out.println("Symbol not recognized \"" + symbol + "\" in mana cost: " + manaCost);
+				Log.info("Symbol not recognized \"" + symbol + "\" in mana cost: " + manaCost);
 				continue;
 			}
 			g.drawImage(image, x, y, null);

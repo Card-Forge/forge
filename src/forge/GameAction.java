@@ -14,6 +14,8 @@ import java.util.Map.Entry;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.esotericsoftware.minlog.Log;
+
 
 public class GameAction {
     //  private StaticEffects staticEffects = new StaticEffects();
@@ -2298,7 +2300,7 @@ public class GameAction {
         
         card.addAssignedDamage(assignedDamage, sourceCard);
         
-        System.out.println("***");
+        Log.debug("***");
         /*
         if(sourceCards.size() > 1)
           System.out.println("(MULTIPLE blockers):");
@@ -2414,7 +2416,7 @@ public class GameAction {
           
         }
         */
-        System.out.println("Adding " + damageToAdd + " damage to " + card.getName());
+        Log.debug("Adding " + damageToAdd + " damage to " + card.getName());
         if(isCardInPlay(card)) card.addDamage(damageToAdd, source);
         
         if(source.getKeyword().contains("Lifelink") && CardFactoryUtil.canDamage(source, card)) GameActionUtil.executeLifeLinkEffects(source, damageToAdd);

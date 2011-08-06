@@ -39,6 +39,8 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import com.esotericsoftware.minlog.Log;
+
 import arcane.ui.util.ManaSymbols;
 
 import net.miginfocom.swing.MigLayout;
@@ -205,6 +207,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         setVisible(true);
         
         ManaSymbols.loadImages();
+        Log.WARN(); //set logging level to warn
     }// init()
     
     private void setupMenu() {

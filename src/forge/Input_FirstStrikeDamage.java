@@ -7,6 +7,8 @@ import java.util.HashMap;
 //import java.util.Iterator;
 import java.util.Map.Entry;
 
+import com.esotericsoftware.minlog.Log;
+
 
 //import java.util.ArrayList; //unused
 
@@ -69,7 +71,7 @@ public class Input_FirstStrikeDamage extends Input {
         PlayerLife life = AllZone.GameAction.getPlayerLife(player);
         life.subtractLife(AllZone.Combat.getTotalFirstStrikeDefendingDamage(),AllZone.CardFactory.HumanNullCard);
         // Quick Fix, should work for Whenever keyword because of GameActionUtil.ExecutePlayerCombatEffects
-        System.out.println("getTotalFirstStrikeDefendingDamage: "
+        Log.debug("getTotalFirstStrikeDefendingDamage: "
                 + AllZone.Combat.getTotalFirstStrikeDefendingDamage());
         
         //What is this even for? doesn't look like it's used.

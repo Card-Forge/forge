@@ -9,6 +9,8 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import com.esotericsoftware.minlog.Log;
+
 
 
 public class Card extends MyObservable {
@@ -999,7 +1001,7 @@ public class Card extends MyObservable {
     }
     
     public void addDamage(int n, Card source) {
-        System.out.println("addDamage called on " + this + " for " + n + " damage.");
+        Log.debug("addDamage called on " + this + " for " + n + " damage.");
         if(this.getName().equals("Cho-Manno, Revolutionary")) n = 0;
         //setDamage(getDamage() + n);
         
@@ -1023,7 +1025,7 @@ public class Card extends MyObservable {
     }*/
 
     public void addAssignedDamage(int n, Card source) {
-        System.out.println(this + " - was assigned " + n + " damage, by " + source);
+        Log.debug(this + " - was assigned " + n + " damage, by " + source);
         if(!assignedDamageHashMap.containsKey(source)) assignedDamageHashMap.put(source, n);
         else {
             assignedDamageHashMap.put(source, assignedDamageHashMap.get(source) + n);

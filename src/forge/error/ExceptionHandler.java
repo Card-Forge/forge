@@ -9,6 +9,8 @@ package forge.error;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 
+import com.esotericsoftware.minlog.Log;
+
 
 /**
 * This class handles all exceptions that weren't caught by showing the error to the user.
@@ -25,7 +27,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
      * Call this at the beginning to make sure that the class is loaded and the static initializer has run
      */
     public static void registerErrorHandling() {
-        System.out.println("Error handling registered!");
+        Log.debug("Error handling registered!");
     }
    
     

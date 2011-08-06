@@ -4,7 +4,7 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-
+import com.esotericsoftware.minlog.Log;
 
 
 class CardFactory_Auras {
@@ -1013,7 +1013,7 @@ class CardFactory_Auras {
                     
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         card.enchantCard(c);
-                        System.out.println("Enchanted: " + getTargetCard());
+                        Log.debug("Enchanted: " + getTargetCard());
                     }
                 }//resolve()
             };//SpellAbility
@@ -1272,7 +1272,7 @@ class CardFactory_Auras {
                     
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         card.enchantCard(c);
-                        System.out.println("Enchanted: " + getTargetCard());
+                        Log.debug("Enchanted: " + getTargetCard());
                     }
                 }//resolve()
             };//SpellAbility

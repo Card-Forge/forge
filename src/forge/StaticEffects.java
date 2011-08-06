@@ -1,6 +1,8 @@
 package forge;
 import java.util.*;
 
+import com.esotericsoftware.minlog.Log;
+
 
 public class StaticEffects
 {
@@ -271,7 +273,7 @@ public class StaticEffects
 		cards.addAll(computerZone.getCards());
 		
 		
-		System.out.println("== Start add state effects ==");
+		Log.debug("== Start add state effects ==");
 		for (int i=0;i<cards.size();i++)
 		{
 			Card c = cards.get(i);
@@ -280,11 +282,11 @@ public class StaticEffects
 				String[] effects = getCardToEffectsList().get(c.getName());
 				for (String effect : effects) {
 					addStateBasedEffect(effect);
-					System.out.println("Added " + effect);
+					Log.debug("Added " + effect);
 				}
 			}
 		}
-		System.out.println("== End add state effects ==");
+		Log.debug("== End add state effects ==");
 		
 	}
 }

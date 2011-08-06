@@ -5,6 +5,8 @@ package forge;
 import java.util.HashMap;
 import java.util.List;
 
+import com.esotericsoftware.minlog.Log;
+
 
 class CardFactory_Planeswalkers {
     public static Card getCard(final Card card, String cardName, String owner) {
@@ -970,7 +972,7 @@ class CardFactory_Planeswalkers {
                     
 
                     AllZone.GameAction.getPlayerLife(card2.getController()).addLife(2);
-                    System.out.println("current phase: " + AllZone.Phase.getPhase());
+                    Log.debug("Ajani Goldmane", "current phase: " + AllZone.Phase.getPhase());
                 }
                 
                 @Override
@@ -3027,10 +3029,8 @@ class CardFactory_Planeswalkers {
                     	}
                     });
                 	setTargetCard(CardFactoryUtil.AI_getCheapestCreature(cards, card2, true));
-                	//DEBUG
-                	/*
-                	System.out.println("Sarkhan the Mad caused sacrifice of: "+
-                			CardFactoryUtil.AI_getCheapestCreature(cards, card2, true).getName()); */
+                	Log.debug("Sarkhan the Mad", "Sarkhan the Mad caused sacrifice of: "+
+                			CardFactoryUtil.AI_getCheapestCreature(cards, card2, true).getName());
                 }
                 
                 @Override

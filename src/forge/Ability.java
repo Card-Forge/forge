@@ -1,6 +1,8 @@
 
 package forge;
 
+import com.esotericsoftware.minlog.Log;
+
 
 abstract public class Ability extends SpellAbility {
     public Ability(Card sourceCard, String manaCost) {
@@ -11,7 +13,7 @@ abstract public class Ability extends SpellAbility {
     public Ability(Card sourceCard, String manaCost, String stackDescription) {
         this(sourceCard, manaCost);
         setStackDescription(stackDescription);
-        System.out.println("an ability is being played from" + sourceCard.getName());
+        Log.debug("an ability is being played from" + sourceCard.getName());
     }
     
     @Override

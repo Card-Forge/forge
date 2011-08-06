@@ -10,6 +10,8 @@ import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.Map.Entry;
 
+import com.esotericsoftware.minlog.Log;
+
 
 
 public class CardFactoryUtil {
@@ -3645,7 +3647,7 @@ public class CardFactoryUtil {
         
         for(Entry<String, Integer> entry : map.entrySet()){
             String type = entry.getKey();
-            System.out.println(type + " - " + entry.getValue());
+            Log.debug(type + " - " + entry.getValue());
             
             if(max < entry.getValue()) {
                 max = entry.getValue();
@@ -3677,7 +3679,7 @@ public class CardFactoryUtil {
 
         for(Entry<String, Integer> entry : map.entrySet()){
             String color = entry.getKey();
-            System.out.println(color + " - " + entry.getValue());
+            Log.debug(color + " - " + entry.getValue());
             
             if(max < entry.getValue()) {
                 max = entry.getValue();
