@@ -1,0 +1,9 @@
+Name:Broken Dam
+ManaCost:U
+Types:Sorcery
+Text:no text
+A:SP$Tap|Cost$U|TargetMin$1|TargetMax$2|TgtPrompt$Choose target creature without horsemanship|ValidTgts$Creature.withoutHorsemanship|SpellDescription$Tap one or two target creatures without horsemanship.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/broken_dam.jpg
+End

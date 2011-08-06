@@ -118,7 +118,8 @@ public class Target_Selection {
             }
             
             @Override
-            public void selectButtonOK() {	
+            public void selectButtonOK() {
+            	select.setDoneTarget(true);
             	done();
             }
             

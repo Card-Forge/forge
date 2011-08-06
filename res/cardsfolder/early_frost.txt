@@ -1,0 +1,9 @@
+Name:Early Frost
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$Tap|Cost$1 U|TargetMin$1|TargetMax$3|TgtPrompt$Choose target land|ValidTgts$Land|SpellDescription$Tap up to three target lands.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/early_frost.jpg
+End
