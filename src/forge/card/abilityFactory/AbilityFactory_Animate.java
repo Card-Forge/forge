@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import forge.AllZone;
 import forge.Card;
+import forge.CardUtil;
 import forge.Command;
 import forge.ComputerUtil;
 import forge.Constant;
@@ -393,7 +394,7 @@ public class AbilityFactory_Animate {
         		c.addExtrinsicKeyword(k);
 			//this maybe should just blindly add since multiple instances of a keyword sometimes have effects
 			//practically, this shouldn't matter though, and will display more cleanly
-        	else if(!c.getIntrinsicKeyword().contains(k))
+        	else if(!c.getIntrinsicKeyword().contains(k) || CardUtil.isStackingKeyword(k))
 				c.addIntrinsicKeyword(k);	
 		}
 

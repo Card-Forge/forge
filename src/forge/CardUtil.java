@@ -241,6 +241,24 @@ public class CardUtil {
     			|| cardType.equals("Mountain") || cardType.equals("Forest"));
     }
     
+    //this function checks, if duplicates of a keyword are not necessary (like flying, trample, etc.)
+    public static boolean isNonStackingKeyword(String keyword) {
+    	return (
+    			keyword.equals("Deathtouch") || keyword.equals("Defender")
+    			|| keyword.equals("Double Strike") || keyword.equals("First Strike")
+    			|| keyword.equals("Flash") || keyword.equals("Flying")
+    			|| keyword.equals("Haste") || keyword.equals("Intimidate")
+    			|| keyword.equals("Lifelink") || keyword.equals("Reach")
+    			|| keyword.equals("Shroud") || keyword.equals("Trample")
+    			|| keyword.equals("Vigilance") || keyword.equals("Horsemanship")
+    			|| keyword.equals("Fear") || keyword.equals("Changeling")
+    			|| keyword.equals("Wither") || keyword.equals("Infect"));
+    }
+    
+    public static boolean isStackingKeyword(String keyword) {
+    	return !isNonStackingKeyword(keyword);
+    }
+    
     public static String buildFilename(Card card)
     {	
         File path = null;
