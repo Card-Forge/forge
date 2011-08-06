@@ -3860,8 +3860,10 @@ public class CardFactory implements NewConstants {
                     
                     if (returnUpTo[0]) {
                         for (int i = 0; i < numCardsToReturn; i++) {
-                            if (!grave.isEmpty()) {
-                                Card c = AllZone.Display.getChoiceOptional("Select a card", grave.toArray());
+                            if (grave.size() > 0) {
+                                Object o = AllZone.Display.getChoiceOptional("Select a card", grave.toArray());
+                                if (o == null) break;
+                                Card c = (Card) o;
                                 targets.add(c);
                                 grave.remove(c);
                             }
@@ -3869,7 +3871,8 @@ public class CardFactory implements NewConstants {
                         
                     } else if (grave.size() > numCardsToReturn) {
                         for (int i = 0; i < numCardsToReturn; i++) {
-                            Card c = AllZone.Display.getChoice("Select a card", grave.toArray());
+                            Object o = AllZone.Display.getChoice("Select a card", grave.toArray());
+                            Card c = (Card) o;
                             targets.add(c);
                             grave.remove(c);
                         }
@@ -3878,7 +3881,7 @@ public class CardFactory implements NewConstants {
                         targets = grave;
                     }
                     
-                    if (targets != null && !targets.isEmpty()) {
+                    if (targets.size() > 0) {
                         spRtrnTgt.setTargetList(targets);
                         stopSetNext(new Input_PayManaCost(spRtrnTgt));
                     } else stop();

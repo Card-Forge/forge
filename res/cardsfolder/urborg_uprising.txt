@@ -1,7 +1,7 @@
 Name:Urborg Uprising
 ManaCost:4 B
 Types:Sorcery
-Text:Return up to two target creature cards from your graveyard to your hand. (NOTE: This spell is rather buggy and should not be used at this time.)
+Text:Return up to two target creature cards from your graveyard to your hand.
 K:spReturnTgt:2/UpTo:Creature:Hand
 K:Draw a card.
 SVar:Rarity:None
