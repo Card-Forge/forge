@@ -194,35 +194,36 @@ public class CombatUtil {
         
         ArrayList<String> attackerKeywords = c.getKeyword();
         for (int i = 0; i < attackerKeywords.size(); i++) {
-        	if (attackerKeywords.get(i).toString().startsWith("CARDNAME can't attack if defending player controls an untapped creature with power")) {
+            if (attackerKeywords.get(i).toString().startsWith("CARDNAME can't attack if defending player controls an untapped creature with power")) {
                 hasKeyword = true;
                 keywordPosition = i;
            }
         }
         
         if (hasKeyword) {    // The keyword "CARDNAME can't attack if defending player controls an untapped creature with power" ... is present
-        	String tmpString = c.getKeyword().get(keywordPosition).toString();
-            String asSeparateWords[]  = tmpString.trim().split(" ");
+            String tmpString = c.getKeyword().get(keywordPosition).toString();
+            final String asSeparateWords[]  = tmpString.trim().split(" ");
             
-            if (asSeparateWords.length >= 13) {
-            	if (asSeparateWords[12].matches("[0-9][0-9]?")) {
-            		powerLimit[0] = Integer.parseInt((asSeparateWords[12]).trim());
-            		
-            		CardList list = null;
-            		if(c.getController().equals(Constant.Player.Human)) {
+            if (asSeparateWords.length >= 15) {
+                if (asSeparateWords[12].matches("[0-9][0-9]?")) {
+                    powerLimit[0] = Integer.parseInt((asSeparateWords[12]).trim());
+                    
+                    CardList list = null;
+                    if (c.getController().equals(Constant.Player.Human)) {
                         list = new CardList(AllZone.Computer_Play.getCards());
                     } else {
                         list = new CardList(AllZone.Human_Play.getCards());
                     }
-            		
-            		list = list.getType("Creature");
+                    
+                    list = list.getType("Creature");
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card ct) {
-                            return (ct.isUntapped() && ct.getNetAttack() >= powerLimit[0]);
+                            return ((ct.isUntapped() && ct.getNetAttack() >= powerLimit[0] && asSeparateWords[14].contains("greater")) ||
+                                    (ct.isUntapped() && ct.getNetAttack() <= powerLimit[0] && asSeparateWords[14].contains("less")));
                         }
                     });
                     if (!list.isEmpty()) return false;
-            	}
+                }
             }
         } // hasKeyword = CARDNAME can't attack if defending player controls an untapped creature with power ...
         

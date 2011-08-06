@@ -1,3 +1,10 @@
+Mogg Jailer
+1 R
+Creature Goblin
+no text
+2/2
+CARDNAME can't attack if defending player controls an untapped creature with power 2 or less.
+
 Goblin Mutant
 2 R R
 Creature Goblin Mutant
