@@ -461,7 +461,8 @@ public class CombatUtil {
             
         }//flanking
         
-        if(attacker.getName().equals("Cho-Manno, Revolutionary")) return false;
+        if(attacker.hasStartOfKeyword("Prevent all combat damage that would be dealt to") ||
+           attacker.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) return false;
         if(attacker.getKeyword().contains("Indestructible") && 
         		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
         
@@ -587,7 +588,8 @@ public class CombatUtil {
     		if(defender.isValidCard(restrictions)) return true;
         }
         
-        if(defender.getName().equals("Cho-Manno, Revolutionary")) return false;
+        if(defender.hasStartOfKeyword("Prevent all combat damage that would be dealt to")||
+           defender.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) return false;
         
         if(defender.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
         		&& attacker.isCreature() && attacker.isArtifact()) return false;
