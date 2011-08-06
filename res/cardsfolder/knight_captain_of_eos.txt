@@ -1,0 +1,11 @@
+Name:Knight-Captain of Eos
+ManaCost:4 W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:etbMakeToken<>2<>Soldier<>W 1 1 Soldier<>Controller<>W<>Creature;Soldier<>1<>1<>None<>put two 1/1 white Soldier creature tokens onto the battlefield.
+A:AB$Fog | Cost$ W Sac<1/Soldier> | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_captain_of_eos.jpg
+End

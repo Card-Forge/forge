@@ -1,0 +1,8 @@
+Name:Tremble
+ManaCost:1 R
+Types:Sorcery
+A:SP$Sacrifice | Cost$ 1 R | SacValid$ Land | Defined$ Each | SpellDescription$ Each player sacrifices a land.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tremble.jpg
+End

@@ -1,0 +1,8 @@
+Name:Simplify
+ManaCost:G
+Types:Sorcery
+A:SP$Sacrifice | Cost$ G | SacValid$ Enchantment | Defined$ Each | SpellDescription$ Each player sacrifices an enchantment.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/simplify.jpg
+End

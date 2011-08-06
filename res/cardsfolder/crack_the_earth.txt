@@ -1,0 +1,8 @@
+Name:Crack the Earth
+ManaCost:R
+Types:Sorcery Arcane
+A:SP$Sacrifice | Cost$ R | SacValid$ Permanent | Defined$ Each | SpellDescription$ Each player sacrifices a permanent.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crack_the_earth.jpg
+End
