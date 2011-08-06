@@ -2747,6 +2747,7 @@ res/cardsfolder/minotaur_warrior.txt -text svneol=native#text/plain
 res/cardsfolder/mirari.txt -text svneol=native#text/plain
 res/cardsfolder/mire_boa.txt -text svneol=native#text/plain
 res/cardsfolder/mire_kavu.txt -text svneol=native#text/plain
+res/cardsfolder/mire_shade.txt -text svneol=native#text/plain
 res/cardsfolder/miren_the_moaning_well.txt -text svneol=native#text/plain
 res/cardsfolder/mirozel.txt -text svneol=native#text/plain
 res/cardsfolder/mirri_cat_warrior.txt -text svneol=native#text/plain
@@ -4464,7 +4465,6 @@ res/cardsfolder/tower_of_calamities.txt -text svneol=native#text/plain
 res/cardsfolder/tower_of_champions.txt -text svneol=native#text/plain
 res/cardsfolder/tower_of_coireall.txt -text svneol=native#text/plain
 res/cardsfolder/tower_of_eons.txt -text svneol=native#text/plain
-res/cardsfolder/tower_of_fortunes -text
 res/cardsfolder/tower_of_fortunes.txt -text svneol=native#text/plain
 res/cardsfolder/tower_of_murmurs.txt -text svneol=native#text/plain
 res/cardsfolder/tower_of_the_magistrate.txt -text svneol=native#text/plain
