@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPump:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Protection from black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terohs_vanguard.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/19.jpg
 End

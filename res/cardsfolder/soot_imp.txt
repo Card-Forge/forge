@@ -9,4 +9,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | Lif
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soot_imp.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/43.jpg
 End

@@ -9,4 +9,5 @@ SVar:Animate:DB$Animate | Defined$ Targeted | Types$ Vampire
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/captivating_vampire.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/87.jpg
 End

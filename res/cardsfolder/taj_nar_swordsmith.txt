@@ -8,4 +8,5 @@ SVar:TrigChange:AB$ChangeZone | Cost$ X | Origin$ Library | Destination$ Battlef
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taj_nar_swordsmith.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/27.jpg
 End
