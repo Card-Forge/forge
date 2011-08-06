@@ -2,7 +2,7 @@ AEther Flash
 2 R R
 Enchantment
 no text
-WheneverKeyword:EntersBattleField:Type/Creature:Play:Damage/2:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a creature enters the battlefield, Aether Flash deals 2 damage to it.
+WheneverKeyword:EntersBattleField:Type/Creature:Play:Damage/2:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a creature enters the battlefield, AEther Flash deals 2 damage to it.
 
 Close Quarters
 2 R R
