@@ -124,6 +124,12 @@ public class PhaseUtil {
     	
     	
     	//opponent untapping during your untap phase
+    	CardList opp = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
+    	for(Card oppCard:opp) 
+    		if(oppCard.getKeyword().contains("CARDNAME untaps during each other player's untap step."))
+    			oppCard.untap();
+		/*
+		for(Card oppCard:opp) oppCard.untap();
     	if(AllZoneUtil.isCardInPlay("Murkfiend Liege", player.getOpponent())) {
     		CardList opp = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
     		opp = opp.filter(new CardListFilter() {
@@ -137,7 +143,7 @@ public class PhaseUtil {
     		CardList opp = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent());
     		for(Card oppCard:opp) oppCard.untap();
     		
-    	}
+    	}*/
     	//end opponent untapping during your untap phase
     	
     	if( canOnlyUntapOneLand()) {
