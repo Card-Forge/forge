@@ -3446,7 +3446,7 @@ public class CardFactory implements NewConstants {
         	}
         } // etbBounceTgt
 
-        // Generic bounce all card
+        /*// Generic bounce all card
         if(hasKeyword(card, "spBounceAll") != -1) {
             int n = hasKeyword(card, "spBounceAll");
             
@@ -3524,7 +3524,7 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(spBnceAll);            
 
-        }//spBounceAll
+        }//spBounceAll*/
         
         
         /*

@@ -1,8 +1,8 @@
 Name:Harmonic Convergence
 ManaCost:2 G
 Types:Instant
-Text:Put all enchantments on top of their owners' libraries.
-K:spBounceAll:Enchantment:TopofLibrary
+Text:no text
+A:SP$ChangeZoneAll | Cost$ 2 G | ChangeType$ Enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 |SpellDescription$ Put all enchantments on top of their owners' libraries.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harmonic_convergence.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/103.jpg
