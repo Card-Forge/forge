@@ -165,7 +165,7 @@ public class Combat
   {
     blocked.add(attacker);
     getList(attacker).add(blocker);
-    CombatUtil.checkBlockedAttackers(attacker, blocker);
+    //CombatUtil.checkBlockedAttackers(attacker, blocker);
   }
   public void resetBlockers()
   {

@@ -3047,7 +3047,6 @@ public class CardFactoryUtil {
                 list.add(ability);
             }
         }
-        
         return list;
     }
     
@@ -3063,6 +3062,16 @@ public class CardFactoryUtil {
 			neededDamage = target.getNetDefense() - target.getDamage();
 		
 		return neededDamage;
+    }
+    
+    public static void checkEquipmentOnControllerChange(PlayerZone from, PlayerZone to, Card c)
+    {
+    	if (!c.isEquipped())
+    		;
+    	else if (!from.equals(to))
+    	{
+    		c.unEquipAllCards();
+    	}
     }
     
     //may return null

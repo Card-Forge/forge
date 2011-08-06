@@ -114,7 +114,34 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                     //do not return getInput() here. There is now a check for null by this method's caller.
                     return null;
                 }
-            } else if(phase.equals(Constant.Phase.Combat_FirstStrikeDamage)) {
+            }
+            /*
+            else if (phase.equals(Constant.Phase.Combat_After_Declare_Blockers))
+            {
+                    CardList list = new CardList();
+                    list.addAll(AllZone.Combat.getAllBlockers().toArray());
+                    list.addAll(AllZone.pwCombat.getAllBlockers().toArray());
+                    
+                    CardList attList = new CardList();
+                    attList.addAll(AllZone.Combat.getAttackers());
+                    attList.addAll(AllZone.pwCombat.getAttackers());
+
+                    
+                    for(Card c:list)
+                        CombatUtil.checkDeclareBlockers(c);
+                    
+                    
+                    for (Card a:attList){
+                    	CardList blockList = AllZone.Combat.getBlockers(a);
+                    	for (Card b:blockList)
+                    		CombatUtil.checkBlockedAttackers(a, b);
+                    }
+                
+            		AllZone.Phase.setNeedToNextPhase(true);
+            }
+            */
+            
+            else if(phase.equals(Constant.Phase.Combat_FirstStrikeDamage)) {
                 if(!skipPhase()) return new Input_FirstStrikeDamage();
                 else {
                     

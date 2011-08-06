@@ -45,6 +45,11 @@ public class ComputerAI_Testing implements Computer
     	//for debugging: System.out.println("need to nextPhase(ComputerAI_Testing.declare_blockers_after) = true");
         AllZone.Phase.setNeedToNextPhase(true);
     }
+    
+    public void after_declare_blockers()
+    {
+    	AllZone.Phase.setNeedToNextPhase(true);
+    }
 
     public void end_of_combat()
     {

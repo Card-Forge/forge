@@ -123,6 +123,11 @@ public class ComputerAI_Rats2 implements Computer
     
     public void declare_blockers_after(){playInstantAndAbilities();}
     
+    public void after_declare_blockers()
+    {
+    	AllZone.Phase.setNeedToNextPhase(true);
+    }
+    
     public void end_of_combat()
     {
     	AllZone.Phase.setNeedToNextPhase(true);

@@ -7765,6 +7765,7 @@ public class CardFactory_Creatures {
                         from.remove(c);
                         
                         PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        CardFactoryUtil.checkEquipmentOnControllerChange(from, to, c);
                         to.add(c);
                         
                         ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);

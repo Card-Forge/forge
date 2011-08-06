@@ -287,6 +287,29 @@ public class ComputerAI_General implements Computer {
         AllZone.Phase.setNeedToNextPhase(true);
     }
     
+    public void after_declare_blockers()    {
+            CardList list = new CardList();
+            list.addAll(AllZone.Combat.getAllBlockers().toArray());
+            list.addAll(AllZone.pwCombat.getAllBlockers().toArray());
+            
+            CardList attList = new CardList();
+            attList.addAll(AllZone.Combat.getAttackers());
+            attList.addAll(AllZone.pwCombat.getAttackers());
+
+            
+            for(Card c:list)
+                CombatUtil.checkDeclareBlockers(c);
+            
+            
+            for (Card a:attList){
+            	CardList blockList = AllZone.Combat.getBlockers(a);
+            	for (Card b:blockList)
+            		CombatUtil.checkBlockedAttackers(a, b);
+            }
+        
+    		AllZone.Phase.setNeedToNextPhase(true);
+    }
+    
     public void end_of_combat()
     {
     	AllZone.Phase.setNeedToNextPhase(true);

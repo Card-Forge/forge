@@ -418,7 +418,7 @@ public class CombatUtil {
             
             //loop through blockers
             for(int inner = 0; inner < defend.length; inner++) {
-                checkDeclareBlockers(defend[inner]);
+                //checkDeclareBlockers(defend[inner]);
                 blockerName = defend[inner].getName();
                 if(defend[inner].isFaceDown()) blockerName = "Morph";
                 
@@ -469,7 +469,7 @@ public class CombatUtil {
             
             //loop through blockers
             for(int inner = 0; inner < defend.length; inner++) {
-                checkDeclareBlockers(defend[inner]);
+                //checkDeclareBlockers(defend[inner]);
                 blockerName = defend[inner].getName();
                 if(defend[inner].isFaceDown()) blockerName = "Morph";
                 
@@ -1444,7 +1444,7 @@ public class CombatUtil {
 
     }
     
-    private static void checkDeclareBlockers(Card c) {
+    static void checkDeclareBlockers(Card c) {
         if(AllZone.Phase.getPhase().equals("Declare Blockers")) {
             
             if(c.getName().equals("Jedit Ojanen of Efrava") && !c.getCreatureBlockedThisTurn()) {
@@ -1509,9 +1509,11 @@ public class CombatUtil {
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
         }
-        
+        if (!b.getCreatureBlockedThisTurn()) {
         for(Ability ab:CardFactoryUtil.getBushidoEffects(b))
             AllZone.Stack.add(ab);
+        	b.setCreatureBlockedThisTurn(true);
+        }
         
         if(a.getKeyword().contains("Flanking") && !b.getKeyword().contains("Flanking")) {
             int flankingMagnitude = 0;

@@ -2849,6 +2849,8 @@ class CardFactory_Auras {
                         PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
                         to.add(crd);
                         
+                        CardFactoryUtil.checkEquipmentOnControllerChange(from, to, crd);
+                        
                         ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
                         ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
                     }
@@ -2881,6 +2883,7 @@ class CardFactory_Auras {
                             crd.setController(opp);
                             
                             PlayerZone to = AllZone.getZone(Constant.Zone.Play, opp);
+                            CardFactoryUtil.checkEquipmentOnControllerChange(from, to, crd);
                             to.add(crd);
                             
                             ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
