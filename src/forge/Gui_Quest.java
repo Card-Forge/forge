@@ -417,6 +417,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Genghis Khan 3	hard	Mana Elves + Birds + Armageddon, Llanowar Behemoth + Elspeth, Knight-Errant");
         sb.append("\r\n");
+        sb.append("George of the Jungle 1	easy	Belligerent Hatchling, Battlegate Mimic, Ajani Vengeant + a few RW spells");
+        sb.append("\r\n");
+        sb.append("George of the Jungle 2	medium	Belligerent Hatchling, Battlegate Mimic, Ajani Vengeant + some RW spells");
+        sb.append("\r\n");
+        sb.append("George of the Jungle 3	hard	Belligerent Hatchling, Battlegate Mimic, Ajani Vengeant + many RW spells");
+        sb.append("\r\n");
         sb.append("Gold Finger 3   	hard   	Rares' U control deck, various counter spells and Serra Sphinx + Memnarch");
         sb.append("\r\n");
         sb.append("Grampa Simpson 1   	easy   	Sloth' double strike deck, various equipments and auras");
