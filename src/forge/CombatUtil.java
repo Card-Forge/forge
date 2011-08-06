@@ -634,22 +634,17 @@ public class CombatUtil {
         for(Card crd:cl)
             GameActionUtil.executeGuiltyConscienceEffects(c, crd);
         
-        if(CardFactoryUtil.hasNumberEquipments(c, "Umezawa's Jitte") == 1 && c.getNetAttack() > 0) {
-            PlayerZone play = AllZone.getZone(c);
-            CardList clist = new CardList(play.getCards());
-            clist = clist.getName("Umezawa's Jitte");
-            Card jitte;
-            if(clist.size() > 0) jitte = clist.get(0);
-            else //jitte belongs to opponent
-            {
-                PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play,
-                        AllZone.GameAction.getOpponent(c.getController()));
-                CardList crdList = new CardList(oppPlay.getCards());
-                crdList.getName("Umezawa's Jitte");
-                jitte = crdList.get(0);
-            }
-            
-            jitte.addCounter(Counters.CHARGE, 2);
+        /*
+         * Whenever equipped creature deals combat damage, put two
+         * charge counters on Umezawa's Jitte.
+         */
+        if(c.isEquipped() && c.getNetAttack() > 0) {
+        	ArrayList<Card> equips = c.getEquippedBy();
+        	for(Card equip:equips) {
+        		if(equip.getName().equals("Umezawa's Jitte")) {
+        			equip.addCounter(Counters.CHARGE, 2);
+        		}
+        	}
         }
     }
     
