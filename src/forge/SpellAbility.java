@@ -346,12 +346,24 @@ public abstract class SpellAbility {
         description = s;
     }
     
-    @Override
-    public String toString() {
-    	if (description.contains("CARDNAME"))
-    		description = description.replace("CARDNAME", this.getSourceCard().getName());
+    public String getDescription() {
         return description;
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        SpellAbility node = this;
+
+		while(node != null){
+			if (node != this)
+				sb.append(" ");
+			sb.append(node.getDescription().replace("CARDNAME", node.getSourceCard().getName()));
+			node = node.getSubAbility();
+
+		}
+		return sb.toString();
+ }
     
 	public void setSubAbility(Ability_Sub subAbility) {
 		this.subAbility = subAbility;

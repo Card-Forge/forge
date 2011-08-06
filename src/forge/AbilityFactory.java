@@ -473,20 +473,24 @@ public class AbilityFactory {
 		
         if (hasSpDesc)
         {
-        	if(isDb)
-        		throw new RuntimeException("AbilityFactory : getAbility -- SpellDescription on Drawback in " + hostCard.getName());
         	StringBuilder sb = new StringBuilder();
         	
-        	if (mapParams.containsKey("PrecostDesc"))
-        		sb.append(mapParams.get("PrecostDesc")).append(" ");
-        	if (mapParams.containsKey("CostDesc"))
-        		sb.append(mapParams.get("CostDesc")).append(" ");
-        	else sb.append(abCost.toString());
+        	
+        	if (!isDb){	// SubAbilities don't have Costs or Cost descriptors 
+	        	if (mapParams.containsKey("PrecostDesc"))
+	        		sb.append(mapParams.get("PrecostDesc")).append(" ");
+	        	if (mapParams.containsKey("CostDesc"))
+	        		sb.append(mapParams.get("CostDesc")).append(" ");
+	        	else 
+	        		sb.append(abCost.toString());
+        	}
         	
 	        sb.append(mapParams.get("SpellDescription"));
         	
         	SA.setDescription(sb.toString());
         }
+        else
+        	SA.setDescription("");
         
         if (!isTargeted)
         	SA.setStackDescription(hostCard.getName());
