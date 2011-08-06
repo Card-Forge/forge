@@ -827,6 +827,10 @@ public class Card extends MyObservable {
                     String k = keyword.get(i);
                     k = k.replace("Curse", "");
                     sbLong.append(k).append("\r\n");
+                } else if (keyword.get(i).startsWith("Soulshift")) {
+                    String k = keyword.get(i);
+                    k = k.replace(":", " ");
+                    sbLong.append(k).append("\r\n");
                 } else if (keyword.get(i).endsWith(".")) {
                     sbLong.append(keyword.get(i).toString()).append("\r\n");
                 } else if (keyword.get(i).contains("At the beginning of your upkeep, ") 
