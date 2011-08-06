@@ -30,18 +30,6 @@ public class EndOfTurn implements java.io.Serializable
     //Pyrohemia and Pestilence
     CardList all = AllZoneUtil.getCardsInPlay();
 
-    CardList creature = all.getType("Creature");
-
-    if(creature.isEmpty())
-    {
-      CardList sacrifice = new CardList();
-      sacrifice.add(all.getName("Pyrohemia"));
-      sacrifice.add(all.getName("Pestilence"));
-
-      for(int i = 0; i < sacrifice.size(); i++)
-        AllZone.GameAction.sacrifice(sacrifice.get(i));
-    }
-    
     GameActionUtil.endOfTurn_Predatory_Advantage();
     GameActionUtil.endOfTurn_Wall_Of_Reverence();
     GameActionUtil.endOfTurn_Lighthouse_Chronologist();
