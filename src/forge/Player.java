@@ -211,7 +211,7 @@ public abstract class Player extends MyObservable{
         GameActionUtil.executePlayerDamageEffects(this, source, damageToDo, false);
 	}
 	
-	private boolean reducePlayerDamageToZero(final Card source, final boolean isCombat) {
+	public boolean reducePlayerDamageToZero(final Card source, final boolean isCombat) {
 		boolean reduce = false;
     	if(isCombat) {
     		//for future use

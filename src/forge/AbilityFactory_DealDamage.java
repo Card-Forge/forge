@@ -174,6 +174,10 @@ import java.util.Random;
         }
        
         private boolean shouldTgtP(int d) {
+        	
+        	if (AllZone.HumanPlayer.reducePlayerDamageToZero(AF.getHostCard(), false) 
+        			|| !AllZone.HumanPlayer.canTarget(AF.getHostCard())) 	return false;
+        	
             PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
             CardList hand = new CardList(compHand.getCards());
            
@@ -227,7 +231,7 @@ import java.util.Random;
            }
            if (AF.getAbCost().getSubCounter())  {
         	   // +1/+1 counters only if damage from this ability would kill the human, otherwise ok
-               if(AllZone.HumanPlayer.getLife() - damage > 0 || !AF.getAbCost().getCounterType().equals(Counters.P1P1))
+        	   if(AllZone.HumanPlayer.getLife() - damage > 0 && AF.getAbCost().getCounterType().equals(Counters.P1P1))
         	   return false;
            }
            if (AF.getAbCost().getLifeCost())    {

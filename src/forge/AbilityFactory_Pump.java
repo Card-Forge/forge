@@ -268,7 +268,7 @@ public class AbilityFactory_Pump {
             if (addsKeywords) {
             	list = list.filter(new CardListFilter() {
             		public boolean addCard(Card c) {
-            			return c.hasAnyKeyword(KWs);    // don't add duplicate negative keywords
+            			return !c.hasAnyKeyword(KWs);    // don't add duplicate negative keywords
             		}
             	});
             }
