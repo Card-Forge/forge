@@ -14043,6 +14043,7 @@ public class GameActionUtil {
 		}
 	};//Old Man of the Sea
 	
+	/*
 	public static Command Serpent_of_the_Endless_Sea = new Command() {
 		private static final long serialVersionUID = 8263339065128877297L;
 
@@ -14055,7 +14056,7 @@ public class GameActionUtil {
 				c.setBaseDefense(pt);
 			}
 		}// execute()
-	};
+	};*/
 	
 	public static Command Heedless_One = new Command() {
 		private static final long serialVersionUID = -220650457326100804L;
@@ -16299,13 +16300,14 @@ public class GameActionUtil {
 		}// execute()
 	}; //
 
+	/*
 	public static Command Keldon_Warlord                   = new Command() {
 		private static final long serialVersionUID = 3804539422363462063L;
 		
-		/*
+		 *
 		 * Keldon Warlord's power and toughness are each equal to the number
 		 * of non-Wall creatures you control.
-		 */
+		 *
 		public void execute() {
 			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Keldon Warlord");
@@ -16328,7 +16330,7 @@ public class GameActionUtil {
 			});
 			return creatures.size();
 		}
-	};
+	};*/
 	
 	public static Command Soulsurge_Elemental                   = new Command() {
 		private static final long serialVersionUID = 8607200838396348507L;
@@ -16434,7 +16436,7 @@ public class GameActionUtil {
 		commands.put("Joiner_Adept", Joiner_Adept);
 		
 		commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
-		commands.put("Keldon_Warlord", Keldon_Warlord);
+		//commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Kithkin_Rabble", Kithkin_Rabble);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
 		commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
@@ -16478,7 +16480,7 @@ public class GameActionUtil {
 		
 		commands.put("Ruthless_Cullblade", Ruthless_Cullblade);
 		
-		commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
+		//commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
 		commands.put("Serra_Avatar", Serra_Avatar);
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);

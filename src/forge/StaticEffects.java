@@ -72,7 +72,7 @@ public class StaticEffects
 		cardToEffectsList.put("Joiner Adept", new String[] {"Joiner_Adept"});
 		
 		cardToEffectsList.put("Kargan Dragonlord", new String[]{"Kargan_Dragonlord"});
-		cardToEffectsList.put("Keldon Warlord", new String[] {"Keldon_Warlord"});
+		//cardToEffectsList.put("Keldon Warlord", new String[] {"Keldon_Warlord"});
 		cardToEffectsList.put("Kithkin Rabble", new String[] {"Kithkin_Rabble"});
 		cardToEffectsList.put("Knight of Cliffhaven", new String[] {"Knight_of_Cliffhaven"});
 		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash_Heir_to_Blackblade"});

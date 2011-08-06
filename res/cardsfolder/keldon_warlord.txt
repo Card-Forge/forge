@@ -1,8 +1,9 @@
 Name:Keldon Warlord
 ManaCost:2 R R
 Types:Creature Human Barbarian
-Text:Keldon Warlord's power and toughness are each equal to the number of non-Wall creatures you control.
-PT:1/1
+Text:no text
+PT:*/*
+K:stSetPT:Count$Valid Creature.nonWall+YouCtrl:Count$Valid Creature.nonWall+YouCtrl:Keldon Warlord's power and toughness are each equal to the number of non-Wall creatures you control.
 SVar:BuffedBy:Creature.nonWall
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_warlord.jpg
