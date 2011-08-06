@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land Urza's Mine
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | Bonus $UrzaLands | BonusProduced$ 1 | SpellDescription$ Add 1 to your mana pool. If you control an Urza's Power-Plant and an Urza's Tower, add 2 to your mana pool instead.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_mine.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/328.jpg
