@@ -9847,20 +9847,11 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -3882798504865405413L;
                 
                 public void execute() {
-                    makeToken();
-                    makeToken();
-                    makeToken();
-                    makeToken();
+                	for(int i = 0; i < 4; i++)
+                		CardFactoryUtil.makeTokenSaproling(card.getController());
                     
                 }//execute()
-                
-                public void makeToken() {
-                    CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
-                            "Creature", "Saproling"}, 1, 1, new String[] {""});
-                }
             };//Command
-            
-
             card.addTurnFaceUpCommand(turnsFaceUp);
         }//*************** END ************ END **************************
         
@@ -11434,14 +11425,9 @@ public class CardFactory_Creatures {
                     }
                     
                     for(int i = 0; i < numberTokens; i++) {
-                        makeToken();
+                        CardFactoryUtil.makeTokenSaproling(card.getController());
                     }
                 }
-                
-                void makeToken() {
-                    CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
-                            "Creature", "Saproling"}, 1, 1, new String[] {""});
-                }//makeToken()
                 
                 @Override
                 public boolean canPlay() {
@@ -11558,15 +11544,9 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    makeToken();
-                    makeToken();
-                    makeToken();
+                	for(int i = 0; i < 3; i++)
+                		CardFactoryUtil.makeTokenSaproling(card.getController());
                 }//resolve()
-                
-                void makeToken() {
-                    CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
-                            "Creature", "Saproling"}, 1, 1, new String[] {""});
-                }//makeToken()
             };//Ability
             
             Command make3Tokens = new Command() {
@@ -11580,7 +11560,6 @@ public class CardFactory_Creatures {
             };
             
             card.addDestroyCommand(make3Tokens);
-            
         }//*************** END ************ END **************************
         
         

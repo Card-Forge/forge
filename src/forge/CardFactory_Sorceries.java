@@ -8298,8 +8298,7 @@ public class CardFactory_Sorceries {
                     
                     //forest
                     for(int i = 0; i < numForests; i++)
-                    	CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", player, "G",
-                    			new String[] {"Creature", "Saproling"}, 1, 1, new String[] {""});
+                    	CardFactoryUtil.makeTokenSaproling(player);
                     
                     //plains
                     AllZone.GameAction.gainLife(player, 2*numPlains);

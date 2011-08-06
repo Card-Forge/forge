@@ -708,9 +708,8 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
-                            "Creature", "Saproling"}, 1, 1, new String[] {""});
-                }//resolve()
+                    CardFactoryUtil.makeTokenSaproling(card.getController());
+                }
             };//SpellAbility
             
             final SpellAbility spell_two = new Spell(card) {
@@ -718,8 +717,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
-                            "Creature", "Saproling"}, 1, 1, new String[] {""});
+                    CardFactoryUtil.makeTokenSaproling(card.getController());
                     //return card to the hand
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     AllZone.GameAction.moveTo(hand, card);

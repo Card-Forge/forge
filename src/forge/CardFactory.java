@@ -6691,8 +6691,7 @@ public class CardFactory implements NewConstants {
                 	if (AllZone.getZone(c).is(Constant.Zone.Graveyard)){
                 		// target is still in the grave, ability resolves
                 		AllZone.GameAction.exile(c);
-                		CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
-                            "Creature", "Saproling"}, 1, 1, new String[] {""});
+                		CardFactoryUtil.makeTokenSaproling(card.getController());
                 	}
                 }
                 
@@ -6749,8 +6748,7 @@ public class CardFactory implements NewConstants {
             final SpellAbility nightSoil = new Ability(card, "1") {
                 @Override
                 public void resolve() {
-            		CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
-                        "Creature", "Saproling"}, 1, 1, new String[] {""});
+            		CardFactoryUtil.makeTokenSaproling(card.getController());
                 }
                 
                 @Override

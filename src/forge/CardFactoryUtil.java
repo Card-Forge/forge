@@ -4284,6 +4284,10 @@ public class CardFactoryUtil {
         return list;
     }
     
+    public static CardList makeTokenSaproling(String controller) {
+    	return makeToken("Saproling", "G 1 1 Saproling", controller, "G", new String[] {"Creature", "Saproling"}, 1, 1, new String[] {""});
+    }
+    
     public static CardList makeToken(String name, String imageName, String controller, String manaCost, String[] types, int baseAttack, int baseDefense, String[] intrinsicKeywords) {
         CardList list = new CardList();
         Card c = new Card();

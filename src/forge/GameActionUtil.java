@@ -8368,8 +8368,7 @@ public class GameActionUtil {
 				ability = new Ability(list.get(i), "0") {
 					@Override
 					public void resolve() {
-						CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", mostLands, "G", new String[] {
-								"Creature", "Saproling"}, 1, 1, new String[] {""});
+						CardFactoryUtil.makeTokenSaproling(mostLands);
 					}// resolve()
 				};// Ability
 				ability.setStackDescription("Greener Pastures - " + mostLands
@@ -8628,8 +8627,7 @@ public class GameActionUtil {
 				}// resolve()
 
 				public void makeToken() {
-					CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
-							"Creature", "Saproling"}, 1, 1, new String[] {""});
+					CardFactoryUtil.makeTokenSaproling(card.getController());
 				}
 			};// Ability
 			ability.setStackDescription("Mycoloth - " + player
