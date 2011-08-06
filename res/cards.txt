@@ -54,7 +54,6 @@ Destroy target creature. It can't be regenerated. You lose life equal to that cr
 spDestroyTgt:Creature:NoRegen:Drawback$YouLoseLife/dX
 SVar:dX:Count$TgtCardToughness
 SVar:PlayMain1:TRUE
-
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card50210.jpg
 
@@ -65,7 +64,6 @@ Destroy target artifact. You gain life equal to its converted mana cost.
 spDestroyTgt:Artifact:Drawback$YouGainLife/dX
 SVar:dX:Count$TgtCardManaCost
 SVar:PlayMain1:TRUE
-
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_offering.jpg
 
