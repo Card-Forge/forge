@@ -1300,46 +1300,6 @@ public class CombatUtil {
   				}
             }//Mijae Djinn
             
-            if (AllZone.Combat.getAttackers().length == 1)
-            {
-	            if (c.getKeyword().contains("Whenever this creature attacks alone, it gets +2/+0 until end of turn.") || 
-	            	c.getKeyword().contains("Whenever CARDNAME attacks alone, it gets +2/+0 until end of turn."))
-	            {
-	            	final Card charger = c;
-	            	Ability ability2 = new Ability(c, "0") {
-	                    @Override
-	                    public void resolve() {
-	                        
-	                        final Command untilEOT = new Command() {
-								private static final long serialVersionUID = -6039349249335745813L;
-
-								public void execute() {
-	                                if(AllZone.GameAction.isCardInPlay(charger)) {
-	                                    charger.addTempAttackBoost(-2);
-	                                    charger.addTempDefenseBoost(0);
-	                                }
-	                            }
-	                        };//Command
-	                        
-
-	                        if(AllZone.GameAction.isCardInPlay(charger)) {
-	                            charger.addTempAttackBoost(2);
-	                            charger.addTempDefenseBoost(0);
-	                            
-	                            AllZone.EndOfTurn.addUntil(untilEOT);
-	                        }
-	                    }//resolve
-	                    
-	                };//ability
-	                
-	                StringBuilder sb2 = new StringBuilder();
-	                sb2.append(c.getName()).append(" - attacks alone and gets +2/+0 until EOT.");
-	                ability2.setStackDescription(sb2.toString());
-	                
-	                AllZone.Stack.add(ability2);
-	            }
-            }
-            
             if(c.getName().equals("Zur the Enchanter") && !c.getCreatureAttackedThisCombat()) {
                 //hack, to make sure this doesn't break grabbing an oblivion ring:
             	c.setCreatureAttackedThisCombat(true);
