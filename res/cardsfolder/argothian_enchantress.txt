@@ -1,7 +1,7 @@
 Name:Argothian Enchantress
 ManaCost:1 G
 Types:Creature Human Druid
-Text:Whenever you play an enchantment spell, draw a card.
+Text:Whenever you cast an enchantment spell, draw a card.
 PT:0/1
 K:Shroud
 SVar:Rarity:Rare

@@ -1,7 +1,7 @@
 Name:Verduran Enchantress
 ManaCost:1 G G
 Types:Creature Human Druid
-Text:Whenever you play an enchantment spell, you may draw a card.
+Text:Whenever you cast an enchantment spell, you may draw a card.
 PT:0/2
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

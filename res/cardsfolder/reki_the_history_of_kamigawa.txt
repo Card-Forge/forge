@@ -1,7 +1,7 @@
 Name:Reki, the History of Kamigawa
 ManaCost:2 G
 Types:Legendary Creature Human Shaman
-Text:Whenever you play a legendary spell, draw a card.
+Text:Whenever you cast a legendary spell, draw a card.
 PT:1/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reki_the_history_of_kamigawa.jpg

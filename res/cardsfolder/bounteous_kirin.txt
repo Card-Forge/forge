@@ -1,7 +1,7 @@
 Name:Bounteous Kirin
 ManaCost:5 G G
 Types:Legendary Creature Kirin Spirit
-Text:Whenever you play a Spirit or Arcane spell, you may gain life equal to that spell's converted mana cost.
+Text:Whenever you cast a Spirit or Arcane spell, you may gain life equal to that spell's converted mana cost.
 PT:4/4
 K:Flying
 SVar:Rarity:Rare

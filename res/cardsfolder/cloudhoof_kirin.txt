@@ -1,7 +1,7 @@
 Name:Cloudhoof Kirin
 ManaCost:3 U U
 Types:Legendary Creature Kirin Spirit
-Text:Whenever you play a Spirit or Arcane spell, you may put the top X cards of target player's library into his or her graveyard, where X is that spell's converted mana cost.
+Text:Whenever you cast a Spirit or Arcane spell, you may put the top X cards of target player's library into his or her graveyard, where X is that spell's converted mana cost.
 PT:4/4
 K:Flying
 SVar:Rarity:Rare
