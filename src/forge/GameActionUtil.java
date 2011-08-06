@@ -44,15 +44,12 @@ public class GameActionUtil {
 		upkeep_Mana_Crypt();
 		upkeep_Farmstead();
 		
-		/* Converteded to AF Trigger
-		upkeep_Plague_Spitter();
-		*/
-		
 		upkeep_Greener_Pastures();
 		upkeep_Heartmender();
-		upkeep_Cunning_Lethemancer();
 		upkeep_Shapeshifter();
 		upkeep_Vesuvan_Doppelganger_Keyword();
+		
+		//Kinship cards
 		upkeep_Ink_Dissolver();
 		upkeep_Kithkin_Zephyrnaut();
 		upkeep_Leaf_Crowned_Elder();
@@ -69,7 +66,6 @@ public class GameActionUtil {
 		upkeep_Oversold_Cemetery();
 		upkeep_Nether_Spirit();
 		upkeep_Vampire_Lacerator();
-		upkeep_Seizan_Perverter_of_Truth();
 		upkeep_Sleeper_Agent();
 		upkeep_Pillory_of_the_Sleepless();
 		upkeep_Mirror_Sigil_Sergeant();
@@ -3806,29 +3802,6 @@ public class GameActionUtil {
 			} // for
 		} // if creatures > 0
 	}//upkeep_Heartmender
-
-	private static void upkeep_Cunning_Lethemancer() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-
-		PlayerZone zone1 = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(zone1.getCards());
-		list = list.getName("Cunning Lethemancer");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					AllZone.ComputerPlayer.discard(this);
-					AllZone.HumanPlayer.discard(this);
-				}
-			}; // ability
-			ability.setStackDescription("Cunning Lethemancer - Everyone discards a card.");
-			AllZone.Stack.add(ability);
-		}
-	}
 	
     /////////////////////////
     // Start of Kinship cards
@@ -5247,35 +5220,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}//for
 	}//upkeep_Dega_Sanctuary()
-	
-	/* Converteded to AF Trigger
-	private static void upkeep_Plague_Spitter() {
-		//
-		// At the beginning of your upkeep, Plague Spitter deals 1 damage
-		// to each creature and each player
-		//
-		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Plague Spitter");
-
-		Ability ability;
-		for(Card spitter:list) {
-			final Card source = spitter;
-			ability = new Ability(source, "0") {
-				@Override
-				public void resolve() {
-					for(Player p:AllZoneUtil.getPlayersInGame()) p.addDamage(1, source);
-					for(Card c:AllZoneUtil.getCreaturesInPlay()) c.addDamage(1, source);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(source.getName()).append(" - deals 1 damage to each creature and each player.");
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}//upkeep_Plague_Spitter()
-	*/
 		
 	private static void upkeep_Power_Surge() {
 		/*
@@ -6332,33 +6276,6 @@ public class GameActionUtil {
 			if(land.isTapped()) land.addCounter(Counters.STORAGE, 1);
 		}
 	} //upkeep_Fallen_Empires_Storage_Lands
-	
-	
-	private static void upkeep_Seizan_Perverter_of_Truth() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-
-		// get all creatures
-		CardList list = AllZoneUtil.getCardsInPlay("Seizan, Perverter of Truth");
-
-		if(list.size() == 0) return;
-		final Card F_card = list.get(0);
-		Ability ability = new Ability(list.get(0), "0") {
-			@Override
-			public void resolve() {
-				player.loseLife(2, F_card);
-			}
-		};// Ability
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Seizan, Perverter of Truth - ").append(player);
-		sb.append(" loses 2 life and draws 2 cards");
-		ability.setStackDescription(sb.toString());
-
-		AllZone.Stack.add(ability);
-
-		//drawing cards doesn't seem to work during upkeep if it's in an ability
-		player.drawCards(2);
-	}// upkeep_Seizan_Perverter_of_Truth()
 
 	private static void upkeep_Vampire_Lacerator() {
 		final Player player = AllZone.Phase.getPlayerTurn();
