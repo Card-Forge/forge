@@ -10290,7 +10290,7 @@ public class GameActionUtil {
 
 	            		
 	            		//get the affected cards
-						String k[] = keyword.split(":");    
+						String k[] = keyword.split(":",5);    
 						
 						if(SpecialConditionsMet(cardWithKeyword, k[3])) { //special Conditions are Threshold, etc.
 						
@@ -10305,7 +10305,7 @@ public class GameActionUtil {
 		                 		x = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("X").split("\\$")[1]);
 		                 	se.setXValue(x);	
 		            		
-							addStaticEffects(affectedCards,k[2],x); //give the boni to the affected cards
+							addStaticEffects(cardWithKeyword,affectedCards,k[2],x); //give the boni to the affected cards
 
 							storage.add(se); // store the information
 						}
@@ -10314,7 +10314,7 @@ public class GameActionUtil {
 	    	}
 		}// execute()
 		
-		void addStaticEffects(CardList affectedCards, String Keyword_Details, int xValue) {
+		void addStaticEffects(Card source, CardList affectedCards, String Keyword_Details, int xValue) {
 			
 			int powerbonus = 0;
 			int toughnessbonus = 0;
@@ -10336,25 +10336,34 @@ public class GameActionUtil {
 				if (Keyword.length > 2) {
 					String Keywords[] = Keyword[2].split(" & ");
 					for(int j = 0; j < Keywords.length; j++) {
-						affectedCard.addExtrinsicKeyword(Keywords[j]);
+						String keyword = Keywords[j];
+						if(keyword.startsWith("ABSVar=")) {
+							String ability = source.getSVar(keyword.split("SVar=")[1]);
+			        		AbilityFactory AF = new AbilityFactory();
+			        		SpellAbility sa = AF.getAbility(ability, affectedCard);
+			        		sa.setType("Temporary");
+			        		
+			        		affectedCard.addSpellAbility(sa);
+						}
+						else affectedCard.addExtrinsicKeyword(keyword);
 					}
 				}
 			}
 		}
 		
 		void removeStaticEffect(StaticEffect se) {
-			Card Source = se.getSource();
+			Card source = se.getSource();
 			CardList affected = se.getAffectedCards();
 			int KeywordNumber = se.getKeywordNumber();
 			int xValue = se.getXValue(); 		// the old xValue has to be removed, not the actual one!
-            String parse = Source.getKeyword().get(KeywordNumber).toString();                
+            String parse = source.getKeyword().get(KeywordNumber).toString();                
             String k[] = parse.split(":");
 			for(int i = 0; i < affected.size(); i++) {
-				removeStaticEffect(affected.get(i),k,xValue);
+				removeStaticEffect(source, affected.get(i),k,xValue);
 			}	
 		}
 		
-		void removeStaticEffect(Card affectedCard, String[] Keyword_Details, int xValue) {
+		void removeStaticEffect(Card source, Card affectedCard, String[] Keyword_Details, int xValue) {
 			
 			int powerbonus = 0;
 			int toughnessbonus = 0;
@@ -10374,7 +10383,16 @@ public class GameActionUtil {
 			if (Keyword.length > 2) {
 				String Keywords[] = Keyword[2].split(" & ");
 				for(int j = 0; j < Keywords.length; j++) {
-					affectedCard.removeExtrinsicKeyword(Keywords[j]);
+					String keyword = Keywords[j];
+					if(keyword.startsWith("ABSVar=")) {
+						SpellAbility[] spellAbility = affectedCard.getSpellAbility();
+						for(SpellAbility s : spellAbility)
+				    	{
+				    		if (s.getType().equals("Temporary"))
+				    			affectedCard.removeSpellAbility(s);
+				    	}
+					}
+					affectedCard.removeExtrinsicKeyword(keyword);
 				}
 			}
 		}

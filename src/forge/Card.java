@@ -888,7 +888,7 @@ public class Card extends MyObservable {
                     String k[] = keyword.get(i).split(":");
                     sbLong.append(k[5]).append("\r\n");
                 } else if (keyword.get(i).toString().contains("stPump")) {
-                    String k[] = keyword.get(i).split(":");
+                    String k[] = keyword.get(i).split(":",5);
                     if (!k[4].contains("no text")) sbLong.append(k[4]).append("\r\n");
                 } else if (keyword.get(i).toString().contains("stSetPT")) {
                     String k[] = keyword.get(i).split(":");

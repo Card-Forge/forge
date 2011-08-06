@@ -383,6 +383,11 @@ public abstract class SpellAbility {
         type = s;
     }
     
+    public String getType() //Extrinsic or Intrinsic:
+    {
+        return type;
+    }
+    
     //setDescription() includes mana cost and everything like
     //"G, tap: put target creature from your hand onto the battlefield"
     public void setDescription(String s) {
