@@ -10460,6 +10460,10 @@ public class CardFactory implements NewConstants {
             //move to top of library
             AllZone.Computer_Library.remove(c);
             AllZone.Computer_Library.add(c, 0);
+            
+            CardList l = new CardList();
+            l.add(c);
+            AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
           }
         }//computerResolve()
         public void humanResolve()

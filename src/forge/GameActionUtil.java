@@ -185,7 +185,15 @@ public class GameActionUtil
 						
 						if (cascadedCard.getController().equals(Constant.Player.Human))
 						{
-							AllZone.GameAction.playCardNoCost(cascadedCard);
+							String[] choices = { "Yes", "No" };
+					    	  
+							Object q = null;
+
+							q = AllZone.Display.getChoiceOptional("Cast " + cascadedCard.getName() + "?", choices);
+							if (q != null) { 
+								if (q.equals("Yes"))
+									AllZone.GameAction.playCardNoCost(cascadedCard);
+							}
 						}
 						else
 						{
@@ -11034,6 +11042,43 @@ public class GameActionUtil
 		}
 	};
 	
+	public static Command Guul_Draz_Vampire = new Command()
+	{
+		private static final long serialVersionUID = -4252257530318024113L;
+
+		public void execute()
+		{
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Guul Draz Vampire");
+
+			for (int i = 0; i < list.size(); i++)
+			{
+				Card c = list.get(i);
+				if (oppLess10Life(c)) {
+					if (!c.getIntrinsicKeyword().contains("Intimidate")) 
+						c.addIntrinsicKeyword("Intimidate");
+					c.setBaseAttack(3);
+					c.setBaseDefense(2);
+				}
+				else {
+					c.removeIntrinsicKeyword("Haste");
+					c.setBaseAttack(1);
+					c.setBaseDefense(1);
+				}
+			}
+		}// execute()
+
+		//does opponent have 10 or less life?
+		private boolean oppLess10Life(Card c)
+		{
+			String opp = AllZone.GameAction.getOpponent(c.getController());
+			return AllZone.GameAction.getPlayerLife(opp).getLife() <= 10;
+		}
+	};
+	
 	public static Command Bloodghast = new Command()
 	{
 		private static final long serialVersionUID = -4252257530318024113L;
@@ -16292,6 +16337,7 @@ public class GameActionUtil
 		commands.put("Wild_Nacatl", Wild_Nacatl);
 		commands.put("Liu_Bei", Liu_Bei);
 		commands.put("Mystic_Enforcer", Mystic_Enforcer);
+		commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
 		commands.put("Bloodghast", Bloodghast);
 		commands.put("Bant_Sureblade", Bant_Sureblade);
 		commands.put("Esper_Stormblade", Esper_Stormblade);

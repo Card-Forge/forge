@@ -1,3 +1,16 @@
+Guul Draz Vampire
+B
+Creature Vampire Rogue
+As long as an opponent has 10 or less life, Guul Draz Vampire gets +2/+1 and has intimidate. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
+1/1
+
+Bladetusk Boar
+3 R
+Creature Boar
+no text
+3/2
+Intimidate
+
 Bituminous Blast
 3 B R
 Instant
