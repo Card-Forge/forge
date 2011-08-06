@@ -68,11 +68,11 @@ Creature Human Rebel Scout
 no text
 1/4
 Flying
-abPumpTgt 2 W:Protection from white
-abPumpTgt 2 W:Protection from blue
-abPumpTgt 2 W:Protection from black
-abPumpTgt 2 W:Protection from red
-abPumpTgt 2 W:Protection from green
+abPump 2 W:Protection from white.
+abPump 2 W:Protection from blue.
+abPump 2 W:Protection from black.
+abPump 2 W:Protection from red.
+abPump 2 W:Protection from green.
 
 Jodah's Avenger
 5 U

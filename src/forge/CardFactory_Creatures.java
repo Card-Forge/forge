@@ -15400,6 +15400,8 @@ public class CardFactory_Creatures {
 	    	
 	    }//*************** END ************ END **************************
 	    
+	    
+/*
 	    //*************** START *********** START **************************
 	    if (cardName.equals("Chameleon Colossus"))
 	    {
@@ -15460,6 +15462,8 @@ public class CardFactory_Creatures {
 	        card.addSpellAbility(ability);
 	    
 		}//*************** END ************ END **************************
+*/
+	    
 	    
 	    //*************** START *********** START **************************
 	    if (cardName.equals("Figure of Destiny"))
