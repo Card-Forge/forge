@@ -187,22 +187,7 @@ public class GameActionUtil {
 		/* cards with Tap side effects can be listed here, just like in
 		 * the CardFactory classes
 		 */
-		if(c.getName().equals("City of Brass")) {
-			final Player player = c.getController();
-			final Card crd = c;
-			Ability ability = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					player.addDamage(1, crd);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("City of Brass deals 1 damage to ").append(player);
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}//end City of Brass
+		
 		
 		if(c.getType().contains("Mountain")) {
 			final Player opponent = c.getController().getOpponent();
