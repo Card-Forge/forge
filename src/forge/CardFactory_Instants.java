@@ -2147,7 +2147,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Think Twice")) {
             SpellAbility spell = new Spell(card) {
@@ -2164,7 +2164,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 U", "0"));
             
         }//*************** END ************ END **************************
-        
+        */
         /*
         //*************** START *********** START **************************
         else if(cardName.equals("Elephant Ambush")) {

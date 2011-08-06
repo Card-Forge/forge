@@ -1,7 +1,9 @@
 Name:Think Twice
 ManaCost:1 U
 Types:Instant
-Text:Draw a card.
+Text:no text
+K:spDrawCards:1:Draw a card.:Think Twice - draw a card.
+K:Flashback:2 U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/think_twice.jpg
 End
