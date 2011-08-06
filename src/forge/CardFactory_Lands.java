@@ -3327,6 +3327,59 @@ class CardFactory_Lands {
             ability.setBeforePayMana(runtime);
            
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Phyrexian Tower")) {
+            final Ability_Mana ability = new Ability_Mana(card, "tap, Sacrifice a creature: Add B B") {
+				private static final long serialVersionUID = 5290938125518969674L;
+
+				@Override
+                public boolean canPlayAI() {
+					return false;
+                }
+               
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                   
+                    if(c != null && c.isCreature() ) {
+                    	card.tap();
+                    	AllZone.GameAction.sacrifice(c);
+                    	super.resolve();
+                    }
+                }
+                
+                @Override
+				public String mana() {
+					return "B B";
+            	}
+            };
+           
+            Input runtime = new Input() {
+				private static final long serialVersionUID = -7876248316975077074L;
+
+				@Override
+                public void showMessage() {
+                    CardList choice = new CardList();
+                    final String player = card.getController();
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    choice.addAll(play.getCards());
+
+                    choice = choice.getType("Creature");
+                    choice = choice.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return (c.isCreature());
+                        }
+                    });
+                   
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice,
+                            "Sacrifice a creature:", true, false));
+                }
+            };
+
+            card.addSpellAbility(ability);
+            ability.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
         if(cardName.equals("Kjeldoran Outpost")) {

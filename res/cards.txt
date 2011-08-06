@@ -1,3 +1,9 @@
+Phyrexian Tower
+no cost
+Legendary Land
+no text
+tap: add 1
+
 Undiscovered Paradise
 no cost
 Land
