@@ -21,6 +21,7 @@ public class Card extends MyObservable {
     
     //private Collection keyword   = new TreeSet();
     //private ArrayList<String> keyword = new ArrayList<String>();
+    private ArrayList<String>			 intrinsicAbility				   = new ArrayList<String>();
     private ArrayList<String>            intrinsicKeyword                  = new ArrayList<String>();
     private ArrayList<String>            extrinsicKeyword                  = new ArrayList<String>();
     private ArrayList<String>			 otherExtrinsicKeyword			   = new ArrayList<String>();
@@ -1814,6 +1815,11 @@ public class Card extends MyObservable {
         return a1;
     }
     
+    public ArrayList<String> getIntrinsicAbilities()
+    {
+    	return intrinsicAbility;
+    }
+    
     //public void setKeyword(ArrayList a) {keyword = new ArrayList(a); this.updateObservers();}
     //public void addKeyword(String s)     {keyword.add(s);                    this.updateObservers();}
     //public void removeKeyword(String s) {keyword.remove(s);              this.updateObservers();}
@@ -1830,9 +1836,20 @@ public class Card extends MyObservable {
         this.updateObservers();
     }
     
+    public void setIntrinsicAbilities(ArrayList<String> a)
+    {
+    	intrinsicAbility = new ArrayList<String>(a);
+    }
+    
     public void addIntrinsicKeyword(String s) {/*if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s){}); else*/
         if (s.trim().length()!=0)
         	intrinsicKeyword.add((getName().trim().length()== 0 ? s :s.replaceAll(getName(), "CARDNAME")));
+    }
+    
+    public void addIntrinsicAbility(String s)
+    {
+    	if (s.trim().length() != 0)
+    		intrinsicAbility.add(s);
     }
     
     public void addNonStackingIntrinsicKeyword(String s) {/*if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s){}); else*/

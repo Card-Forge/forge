@@ -5999,7 +5999,25 @@ public class CardFactory implements NewConstants {
         	AbUntapTgt.setDescription(abDesc[0]);
         	card.addSpellAbility(AbUntapTgt);
         }//End abUntapTgt
+
+        
+        //**************************************************
+        // AbilityFactory cards
+        ArrayList<String> IA = card.getIntrinsicAbilities();
+        if (IA.size() > 0)
+        {
+        	AbilityFactory AF = new AbilityFactory();
         	
+        	if (card.isInstant() || card.isSorcery())
+        		card.clearSpellAbility();
+        	
+        	for (int i=0; i<IA.size(); i++)
+        		card.addSpellAbility(AF.getAbility(IA.get(i), card));
+
+        }
+
+        
+        
         //******************************************************************
         //************** Link to different CardFactories ******************* 
         Card card2 = null;
