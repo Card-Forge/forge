@@ -127,7 +127,6 @@ public class Cost_Payment {
 		}
 		
 		if (!payLife && cost.getLifeCost()){			// pay life here
-			// todo: should ask with a yes/no popup box to pay life?
 			StringBuilder sb = new StringBuilder();
 			sb.append(getCard().getName());
 			sb.append(" - Pay ");
@@ -250,7 +249,7 @@ public class Cost_Payment {
             @Override
             public void showMessage() {
             	Card card = spell.getSourceCard();
-                if(card.getController().equals(Constant.Player.Human)) {
+                if(card.getController().equals(Constant.Player.Human) && AllZone.GameAction.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
         			sb.append(" - Sacrifice?");
@@ -259,8 +258,8 @@ public class Cost_Payment {
                 			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
                 			null, possibleValues, possibleValues[0]);
                     if(choice.equals(0)) {
-                    	AllZone.GameAction.sacrifice(card);
                     	payment.setPaySac(true);
+                    	AllZone.GameAction.sacrifice(card);
                     	stop();
                     	payment.payCost();
                     }
@@ -300,8 +299,8 @@ public class Cost_Payment {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
                 if(typeList.contains(card)) {
-                	AllZone.GameAction.sacrifice(card);
                 	payment.setPaySac(true);
+                	AllZone.GameAction.sacrifice(card);
                 	stop();
                 	payment.payCost();
                 }
