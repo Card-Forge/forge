@@ -834,7 +834,7 @@ At the beginning of your upkeep, sacrifice Stasis unless you pay:U
 
 Cosmic Horror
 3 B B B
-Creature
+Creature Horror
 If Cosmic is destroyed this way, it deals 7 damage to you.
 7/7
 First Strike
@@ -842,7 +842,7 @@ At the beginning of your upkeep, destroy Cosmic Horror unless you pay:3 B B B
 
 Force of Nature
 2 G G G G
-Creature
+Creature Elemental
 no text
 8/8
 Trample
@@ -866,7 +866,7 @@ Soulshift:3
 
 Junun Efreet
 1 B B
-Creature
+Creature  Efreet
 no text
 3/3
 Flying
@@ -1754,7 +1754,7 @@ SVar:X:Count$NamedInAllYards.Feast of Flesh/Plus.1
 
 First Volley
 1 R
-Instant - Arcane
+Instant Arcane
 no text
 spDamageTgtC:1:Drawback$DamageTgt/1:First Volley deals 1 damage to target creature and 1 damage to that creature's controller.:First Volley - deals 1 damage to creature and 1 damage to its controller.
 
@@ -3997,7 +3997,7 @@ As long as you control another multicolored permanent, Bant Sureblade gets +1/+1
 
 Dakkon Blackblade
 2 B U U W
-Legendary Creature
+Legendary Creature Human Warrior
 Dakkon Blackblade's power and toughness are each equal to the number of lands you control.
 1/1
 
@@ -7416,19 +7416,19 @@ Persist
 
 Wings of Velis Vel
 1 U
-Tribal Instant - Shapeshifter
+Tribal Instant Shapeshifter
 Changeling. Target creature becomes 4/4 and gains flying until end of turn.
 Changeling
 
 Nameless Inversion
 1 B
-Tribal Instant - Shapeshifter
+Tribal Instant Shapeshifter
 Changeling. Target creature gets +3/-3 until end of turn.
 Changeling
 
 Crib Swap
 2 W
-Tribal Instant - Shapeshifter
+Tribal Instant Shapeshifter
 Changeling. Remove target creature from the game. Its controller puts a 1/1 colorless Shapeshifter creature token into play.
 Changeling
 
@@ -15027,7 +15027,7 @@ spPumpTgt:+3/+3
 
 Primal Clay
 4
-Artifact Creature
+Artifact Creature Shapeshifter
 As Primal Clay comes into play, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 artifact creature with defender.
 3/3
 
