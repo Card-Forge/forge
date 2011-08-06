@@ -457,6 +457,15 @@ public class AllZoneUtil {
 		}
 	};	
 	
+	/**
+	 * a CardListFilter to get all enchanted cards in a list
+	 */
+	public static CardListFilter enchanted = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isEnchanted();
+		}
+	};
+	
 	public static CardListFilter nonToken = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return !c.isToken();

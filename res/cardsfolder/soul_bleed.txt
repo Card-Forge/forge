@@ -1,0 +1,8 @@
+Name:Soul Bleed
+ManaCost:2 B
+Types:Enchantment Aura
+Text:At the beginning of the upkeep of enchanted creature's controller, that player loses 1 life.
+K:Enchant Creature Curse
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_bleed.jpg
+End

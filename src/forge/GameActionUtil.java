@@ -41,6 +41,7 @@ public class GameActionUtil {
 		upkeep_Mana_Vault();
 		upkeep_Feedback();
 		upkeep_Warp_Artifact();
+		upkeep_Soul_Bleed();
 		upkeep_Wanderlust();
 		upkeep_Curse_of_Chains();
 		upkeep_Festering_Wound_Counter();
@@ -6311,6 +6312,35 @@ public class GameActionUtil {
         	}
         }//list > 0
     }//upkeep_Warp_Artifact()
+	
+	private static void upkeep_Soul_Bleed() {
+		final String auraName = "Soul Bleed";
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+
+		CardList list = new CardList(playZone.getCards());
+		list = list.filter(AllZoneUtil.enchanted);
+
+		if(list.size() > 0) {
+			Ability ability;
+			for(Card target:list) {
+				if(target.isEnchantedBy(auraName)) {
+					CardList auras = new CardList(target.getEnchantedBy().toArray());
+					auras = auras.getName(auraName);
+					for(Card aura:auras) {
+						ability = new Ability(aura, "0") {
+							@Override
+							public void resolve() {
+								AllZone.GameAction.loseLife(player, 1);
+							}
+						};
+						ability.setStackDescription(auraName+" - "+player+" loses 1 life.");
+						AllZone.Stack.add(ability);
+					} 
+				}
+			}
+		}//list > 0
+	}//upkeep_Soul_Bleed()
 	
 	private static void upkeep_Wanderlust() {
 		final String auraName = "Wanderlust";
