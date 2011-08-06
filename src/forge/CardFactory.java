@@ -2711,9 +2711,12 @@ public class CardFactory implements NewConstants {
             }
         } // etbDestoryTgt
         */
+        
+        
+        /////////////////////////////////////////////////////////////////////////////
         // NOTE: This cannot currently be converted to triggers because of this line:
         // card.getSpellPermanent().setLoseLifeAmount(num);
-        
+        //
         // Generic enters the battlefield lose life
         // there is also code in Spell_Permanent canPlayAI to handle that part
         if (hasKeyword(card, "etbLoseLife") != -1) {
