@@ -8210,6 +8210,56 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Sanity Grinding")) {
+        	/*
+        	 * Chroma — Reveal the top ten cards of your library. For each blue
+        	 * mana symbol in the mana costs of the revealed cards, target opponent
+        	 * puts the top card of his or her library into his or her graveyard.
+        	 * Then put the cards you revealed this way on the bottom of your
+        	 * library in any order.
+        	 */
+        	SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 4475834103787262421L;
+
+				@Override
+				public void resolve() {
+					String player = card.getController();
+					String opp = AllZone.GameAction.getOpponent(player);
+					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+					int maxCards = lib.size();
+					maxCards = Math.min(maxCards, 10);
+					if(maxCards == 0) return;
+					CardList topCards =   new CardList();
+					//show top n cards:
+					for(int j = 0; j < maxCards; j++ ) {
+						topCards.add(lib.get(j));
+					}
+					final int num = CardFactoryUtil.getNumberOfManaSymbolsByColor("U", topCards);
+					AllZone.Display.getChoiceOptional("Revealed cards - "+num+" U mana symbols", topCards.toArray());
+					
+					//opponent moves this many cards to graveyard
+					PlayerZone oppLib = AllZone.getZone(Constant.Zone.Library, opp);
+					for(int i = 0; i < num; i++) {
+						AllZone.GameAction.moveToGraveyard(oppLib.get(i));
+					}
+					
+					//then, move revealed cards to bottom of library
+					for(Card c:topCards) {
+						AllZone.GameAction.moveToBottomOfLibrary(c);
+					}
+				}// resolve()
+				
+				@Override
+				public boolean canPlayAI() {
+					return AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Computer).size() > 0;
+				}
+				
+        	};// SpellAbility
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }// *************** END ************ END **************************
+        
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
             int n = hasKeyword(card, "Cycling");

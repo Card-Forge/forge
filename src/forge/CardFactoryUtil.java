@@ -3162,11 +3162,11 @@ public class CardFactoryUtil {
     }
     
     public static int getNumberOfManaSymbolsControlledByColor(String colorAbb, String player) {
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-        
-        CardList cards = new CardList();
-        cards.addAll(play.getCards());
-        
+        CardList cards = AllZoneUtil.getPlayerCardsInPlay(player);
+        return getNumberOfManaSymbolsByColor(colorAbb, cards);
+    }
+    
+    public static int getNumberOfManaSymbolsByColor(String colorAbb, CardList cards) {
         int count = 0;
         for(int i = 0; i < cards.size(); i++) {
             Card c = cards.get(i);
