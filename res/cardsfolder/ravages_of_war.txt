@@ -1,7 +1,9 @@
 Name:Ravages of War
 ManaCost:3 W
 Types:Sorcery
-Text:Destroy all lands.
+#Text:Destroy all lands.
+Text:no text
+A:SP$DestroyAll | Cost$ 3 W | ValidCards$ Land | SpellDescription$ Destroy all lands. 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravages_of_war.jpg
 End

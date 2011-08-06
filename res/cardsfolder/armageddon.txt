@@ -1,7 +1,9 @@
 Name:Armageddon
 ManaCost:3 W
 Types:Sorcery
-Text:Destroy all lands.
+#Text:Destroy all lands.
+Text:no text
+A:SP$DestroyAll | Cost$ 3 W | ValidCards$ Land | SpellDescription$ Destroy all lands.  
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20387.jpg
 End
