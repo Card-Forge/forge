@@ -3909,7 +3909,20 @@ public class CardFactoryUtil {
         else if(s[0].contains("Times")) return num * Integer.parseInt(s[1]);
         else return num;
     }
-    
+	
+	public static int handlePaid(CardList paidList, String string) {
+		if (paidList == null || paidList.size() == 0)
+			return 0;
+		
+		if (string.equals("Amount"))
+			return paidList.size();
+		
+		int tot = 0;
+		for(Card c : paidList)
+			tot += xCount(c, string);
+		
+		return tot;
+	}
     
     public static void doDrawBack(String DB, int nDB, String cardController, String Opp, String TgtP, Card Src, Card TgtC, SpellAbility sa) {
         // Drawbacks may be any simple additional effect a spell or ability may have

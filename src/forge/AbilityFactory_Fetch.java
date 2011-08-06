@@ -34,7 +34,7 @@ public class AbilityFactory_Fetch {
 	}
 	
 	public static SpellAbility createSpellFetch(final AbilityFactory AF){
-		final SpellAbility spFetch = new Spell(AF.getHostCard()) {
+		final SpellAbility spFetch = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
 			private static final long serialVersionUID = 3270484211099902059L;
 
 			AbilityFactory af = AF;

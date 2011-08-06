@@ -59,5 +59,4 @@ public class SpellAbilityUtil
 	
 	return mana;
     }//getUntappedMana     
-    public static boolean canPlaySpell(Card c) {return Spell.canPlay(c);}
 }

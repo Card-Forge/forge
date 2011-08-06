@@ -5723,7 +5723,7 @@ public class CardFactory implements NewConstants {
             final Ability_Cost abCost = new Ability_Cost(fullCost, card.getName(), true);
         	          	
         	final String spDesc[] = {"none"};
-        	spDesc[0] = abCost.toString()+ " - " + abDesc;
+        	spDesc[0] = abCost.toString() + abDesc;
         	
         	final SpellAbility abMakeToken = new Ability_Activated(card, abCost, null) {
 				private static final long serialVersionUID = -1415539558367883075L;
@@ -11157,30 +11157,7 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
             }
         }//Vanishing
-    	
-        // Spell has Additional Cost. Reuse Ability_Cost
-        if (hasKeyword(card, "ACost") != -1){
-        	int n = hasKeyword(card, "ACost");
-        	String parse = card.getKeyword().get(n).toString();
-        	card.removeIntrinsicKeyword(parse);
-        	
-        	String k[] = parse.split(":");
-        	
-        	Ability_Cost cost = new Ability_Cost(k[1], card.getName(), false);
-        	
-        	StringBuilder sb = new StringBuilder(cost.toString());
-        	sb.append("\n");
-        	sb.append(card.getText());
-        	card.setText(sb.toString());
-        	
-        	// loop through each of the cards spells and add abCost to it
-        	ArrayList<SpellAbility> spells = card.getSpells();
-        	for(SpellAbility sa : spells){
-        		if (sa instanceof Spell){
-        			sa.setPayCosts(cost);
-        		}
-        	}
-        }
+        
         return card;
     }
     

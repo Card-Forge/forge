@@ -163,7 +163,7 @@ public class AbilityFactory {
             if (tmpND.length() > 0)
             {
             	if (tmpND.matches("X"))
-            		NumDmgX[0] = hostCard.getSVar(tmpND.substring(1));
+            		NumDmgX[0] = hostCard.getSVar(tmpND);
             	
             	else if (tmpND.matches("[0-9][0-9]?"))
             		NumDmg[0] = Integer.parseInt(tmpND);
@@ -184,7 +184,7 @@ public class AbilityFactory {
 			if (isAb)
 				SA = AbilityFactory_Counters.createAbilityPutCounters(this);
 			if (isSp){
-				// todo: createSpellPutCounters
+				SA = AbilityFactory_Counters.createSpellPutCounters(this);
 			}
 		}
 
@@ -198,15 +198,6 @@ public class AbilityFactory {
 		
 		// *********************************************
 		// set universal properties of the SpellAbility
-		if (isSp){	
-			// Ability_Activated sets abTgt and abCost in the constructor so this only needs to be set for Spells
-			// Once Spell constructors set Tgt and abCost this block should be removed
-	        if (isTargeted)
-	        	SA.setTarget(abTgt);
-	        
-	        SA.setPayCosts(abCost);
-		}
-        
         if (hasSpDesc)
         {
         	StringBuilder sb = new StringBuilder(abCost.toString());

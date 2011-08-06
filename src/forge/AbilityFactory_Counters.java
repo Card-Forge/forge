@@ -13,7 +13,7 @@ public class AbilityFactory_Counters {
 			
 			final AbilityFactory af = AF;
 			final HashMap<String,String> params = af.getMapParams();
-			final int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"));
+
 			final String type = params.get("CounterType");
 		
 			@Override
@@ -22,6 +22,7 @@ public class AbilityFactory_Counters {
 				 Counters cType = Counters.valueOf(type);
 				 StringBuilder sb = new StringBuilder();
 				 String name = af.getHostCard().getName();
+				 int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
 				 sb.append(name).append(" - Put ").append(amount).append(" ").append(cType.getName()).append(" counter on ");
 				 Card tgt = getTargetCard();
 				 if (tgt != null)
@@ -38,11 +39,12 @@ public class AbilityFactory_Counters {
 			
 			public boolean canPlayAI()
 			{
-				return putCanPlayAI(af, this, amount, type);
+				return putCanPlayAI(af, this, params.get("CounterNum"), type);
 			}
 			
 			@Override
 			public void resolve() {
+				int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
 				putResolve(af, this, amount, type);
 			}
 			
@@ -50,25 +52,77 @@ public class AbilityFactory_Counters {
 		return abPutCounter;
 	}
 	
-	public static int calculateAmount(Card card, String counterNum){
-		int amount;
-		if (counterNum.matches("X"))
-		{
-			String calcX = card.getSVar(counterNum);
-			if (calcX.startsWith("Count$"))
-			{
-				String kk[] = calcX.split("\\$");
-				amount = kk[1].equals("none") ? 0 : CardFactoryUtil.xCount(card, kk[1]);
+	public static SpellAbility createSpellPutCounters(final AbilityFactory AF){
+		final SpellAbility spPutCounter = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = -323471693082498224L;
+			
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+			
+			final String type = params.get("CounterType");
+		
+			@Override
+			public String getStackDescription(){
+			// when getStackDesc is called, just build exactly what is happening
+				 Counters cType = Counters.valueOf(type);
+				 StringBuilder sb = new StringBuilder();
+				 String name = af.getHostCard().getName();
+				 int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				 sb.append(name).append(" - Put ").append(amount).append(" ").append(cType.getName()).append(" counter on ");
+				 Card tgt = getTargetCard();
+				 if (tgt != null)
+					 sb.append(tgt.getName());
+				 else
+					 sb.append(name);
+				 return sb.toString();
 			}
-			else
-				amount = 0;
-		}
-		else
-			amount = Integer.parseInt(counterNum);
-		return amount;
+			
+			public boolean canPlay(){
+				// super takes care of AdditionalCosts
+				return (CardFactoryUtil.canUseAbility(af.getHostCard()) && super.canPlay());	
+			}
+			
+			public boolean canPlayAI()
+			{
+				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
+				// then call xCount with that card to properly calculate the amount
+				// Or choosing how many to sacrifice 
+				return putCanPlayAI(af, this, params.get("CounterNum"), type);
+			}
+			
+			@Override
+			public void resolve() {
+				int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				putResolve(af, this, amount, type);
+			}
+			
+		};
+		return spPutCounter;
 	}
 	
-	public static boolean putCanPlayAI(final AbilityFactory af, final SpellAbility sa, final int amount, final String type){
+	public static int calculateAmount(Card card, String counterNum, SpellAbility ability){
+		if (counterNum.matches("X"))
+		{
+			String calcX[] = card.getSVar(counterNum).split("\\$");
+			if (calcX.length == 1 || calcX[1].equals("none"))
+				return 0;
+			
+			if (calcX[0].startsWith("Count"))
+			{
+				return CardFactoryUtil.xCount(card, calcX[1]);
+			}
+			else if (calcX[0].startsWith("Sacrificed"))
+			{
+				return CardFactoryUtil.handlePaid(ability.getSacrificedCost(), calcX[1]);
+			}
+			else
+				return 0;
+		}
+
+		return Integer.parseInt(counterNum);
+	}
+	
+	public static boolean putCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr, final String type){
 		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
 		Random r = new Random();
 		Ability_Cost abCost = sa.getPayCosts();
@@ -99,7 +153,9 @@ public class AbilityFactory_Counters {
 		
 		if (abCost != null){
 			// AI currently disabled for these costs
-			if (abCost.getSacCost()) return false;	
+			if (abCost.getSacCost()){ 
+				return false;
+			}
 			if (abCost.getLifeCost())	 return false;
 			if (abCost.getDiscardCost()) return false;
 			
@@ -115,6 +171,9 @@ public class AbilityFactory_Counters {
 		
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
+		
+		// TODO handle proper calculation of X values based on Cost
+		final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
 		
 		 // prevent run-away activations - first time will always return true
 		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());

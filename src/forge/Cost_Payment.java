@@ -16,7 +16,7 @@ public class Cost_Payment {
 	public void setRequirements(SpellAbility_Requirements reqs) { req = reqs; } 
 	public void setCancel(boolean cancel) { bCancel = cancel; } 
 	public boolean isCanceled() { return bCancel; }
-	
+		
 	// No default values so an error will be kicked if not set properly in constructor
 	private boolean payTap;
 	private boolean payUntap; 
@@ -548,6 +548,7 @@ public class Cost_Payment {
                 			null, possibleValues, possibleValues[0]);
                     if(choice.equals(0)) {
                     	payment.setPaySac(true);
+                    	payment.getAbility().addSacrificedCost(card);
                     	AllZone.GameAction.sacrifice(card);
                     	stop();
                     	payment.payCost();
@@ -596,6 +597,7 @@ public class Cost_Payment {
             public void selectCard(Card card, PlayerZone zone) {
                 if(typeList.contains(card)) {
                 	nSacrifices++;
+                	payment.getAbility().addSacrificedCost(card);
                 	AllZone.GameAction.sacrifice(card);
                 	typeList.remove(card);
                     //in case nothing else to sacrifice

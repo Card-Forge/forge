@@ -61,7 +61,7 @@ public class AbilityFactory_DealDamage {
 		if (AF.getMapParams().get("Tgt").equals("TgtOpp"))
 			TgtOpp = true;
 		
-		final SpellAbility spDealDamage = new Spell(AF.getHostCard()) {
+		final SpellAbility spDealDamage = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
             private static final long serialVersionUID = 7239608350643325111L;
 
             @Override
@@ -88,13 +88,24 @@ public class AbilityFactory_DealDamage {
 		return spDealDamage;
 	}
 
-    private int getNumDamage() {
+    private int getNumDamage(SpellAbility saMe) {
         if(nDamage != -1) return nDamage;
         
-        if(!XDamage.equals("none")) 
-        	return CardFactoryUtil.xCount(AF.getHostCard(), XDamage);
-        
-        return 0;
+		String calcX[] = XDamage.split("\\$");
+		
+		if (calcX.length == 1 || calcX[1].equals("none"))
+			return 0;
+		
+		if (calcX[0].startsWith("Count"))
+		{
+			return CardFactoryUtil.xCount(AF.getHostCard(), calcX[1]);
+		}
+		else if (calcX[0].startsWith("Sacrificed"))
+		{
+			return CardFactoryUtil.handlePaid(saMe.getSacrificedCost(), calcX[1]);
+		}
+		
+		return 0;
     }
     
     private boolean shouldTgtP(int d) {
@@ -154,7 +165,8 @@ public class AbilityFactory_DealDamage {
     	if (!ComputerUtil.canPayCost(saMe))
     		return false;
 
-        int damage = getNumDamage();
+		// TODO handle proper calculation of X values based on Cost
+        int damage = getNumDamage(saMe);
         
         boolean rr = false;
         
@@ -198,7 +210,7 @@ public class AbilityFactory_DealDamage {
     
     private void doResolve(SpellAbility saMe)
     {
-        int damage = getNumDamage();
+        int damage = getNumDamage(saMe);
         String tgtP = "";
         
         if(TgtOpp == true) {

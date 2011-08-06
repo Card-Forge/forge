@@ -1,0 +1,10 @@
+Name:Fling
+ManaCost:1 R
+Types:Instant
+Text:no text
+A:SP$DealDamage|Cost$1 R Sac<1/Creature>|Tgt$TgtCP|NumDmg$X|SpellDescription$CARDNAME deals damage equal to the sacrificed creature's power.
+SVar:X:Sacrificed$CardPower
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fling.jpg
+End

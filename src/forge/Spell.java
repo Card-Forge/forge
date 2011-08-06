@@ -11,46 +11,37 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
         
         setManaCost(sourceCard.getManaCost());
         setStackDescription(sourceCard.getSpellText());
+    }
+    
+    public Spell(Card sourceCard, Ability_Cost abCost, Target abTgt) {
+        super(SpellAbility.Spell, sourceCard);
         
+        setManaCost(sourceCard.getManaCost());
+        //abCost.setMana(getManaCost());
+        setPayCosts(abCost);
+        setTarget(abTgt);
+        setStackDescription(sourceCard.getSpellText());
     }
     
     @Override
     public boolean canPlay() {
-        return canPlay(getSourceCard());
-    }//canPlay()
-    
-    @Override
-    public String getStackDescription() {
-        return super.getStackDescription();
-        
-//      return getSourceCard().getName() +" - " + super.getStackDescription();
-    }
-    
-    public static boolean canPlay(Card card) {
-        String controller = card.getController();
-        
-        String phase = AllZone.Phase.getPhase();
-        String activePlayer = AllZone.Phase.getActivePlayer();
+    	Card card = getSourceCard();
         PlayerZone zone = AllZone.getZone(card);
         
         if (card.isUnCastable())
         	return false;
         
-        /*
-        if (!card.isCreature() && card.getSpellAbility().length > 0)
-        {
-        	if (card.getSpellAbility()[0].isXCost() && CardFactoryUtil.getCards("Gaddock Teeg").size()>0)
+        if (payCosts != null)
+        	if  (!Cost_Payment.canPayAdditionalCosts(payCosts, this))
         		return false;
-        }
-        */
         
-        if(card.isInstant()) return true;
-        else if((phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2))
-                && controller.equals(activePlayer) && AllZone.Stack.size() == 0 && zone.is(Constant.Zone.Hand)) {
-            return true;
-        }
-        return false;
-    }//canPlay(Card)
+        return ((card.isInstant() || Phase.canCastSorcery(card.getController())) && zone.is(Constant.Zone.Hand));
+    }//canPlay()
+    
+    @Override
+    public String getStackDescription() {
+        return super.getStackDescription();
+    }
     
     @Override
     public Object clone() {

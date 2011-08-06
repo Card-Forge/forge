@@ -45,6 +45,8 @@ public abstract class SpellAbility {
     protected Ability_Cost	payCosts		   = null;
     protected Target		chosenTarget	   = null;
     
+    private CardList 		sacrificedCards	   = null;
+    
     private Command         cancelCommand      = Command.Blank;
     private Command         beforePayManaAI    = Command.Blank;
     
@@ -248,6 +250,20 @@ public abstract class SpellAbility {
     
     public void setTarget(Target tgt) {
     	chosenTarget = tgt;
+    }
+    
+    public void addSacrificedCost(Card c){
+    	if (sacrificedCards == null)
+    		sacrificedCards = new CardList();
+    	sacrificedCards.add(c);
+    }
+    
+    public CardList getSacrificedCost(){
+    	return sacrificedCards;
+    }
+    
+    public void resetSacrificedCost(){
+    	sacrificedCards = null;
     }
     
     public Input getAfterResolve() {

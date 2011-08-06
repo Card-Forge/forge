@@ -27,6 +27,7 @@ public class Input_StackNotEmpty extends Input implements java.io.Serializable {
         boolean fizzle = false;
         
         if (sa.getTargetCard() != null){
+        	// Fizzling will only work for Abilities that use the Target class, since the info isn't available otherwise
         	fizzle = !CardFactoryUtil.isTargetStillValid(sa, sa.getTargetCard());
         }
         else if (sa.getTargetPlayer() != "") {
@@ -76,6 +77,8 @@ public class Input_StackNotEmpty extends Input implements java.io.Serializable {
         	// Spell fizzles, alert player?
         	Log.debug(c.getName() + " ability fizzles.");
         }
+        
+        sa.resetSacrificedCost();
         
         AllZone.GameAction.checkStateEffects();
         
