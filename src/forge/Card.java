@@ -2899,13 +2899,6 @@ public class Card extends MyObservable {
             	if (isCreature())
             		GameActionUtil.executeCombatDamageToCreatureEffects(source, this, damageToAdd);
             	GameActionUtil.executeCombatDamageEffects(source, damageToAdd);
-            	
-            	//Run triggers
-                HashMap<String,Object> runParams = new HashMap<String,Object>();
-                runParams.put("DamageSource", source);
-                runParams.put("DamageTarget",this);
-                runParams.put("DamageAmount", damageToAdd);
-                AllZone.TriggerHandler.runTrigger("DamageDone", runParams);
             }
         	map.put(source, damageToAdd);
         }

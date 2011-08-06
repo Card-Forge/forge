@@ -131,7 +131,7 @@ public abstract class Trigger {
 		
 		if(mapParams.containsKey("CardsIn"))
 		{
-			for(String OCIOper : mapParams.get("OpponentCardsIn").split(","))
+			for(String OCIOper : mapParams.get("CardsIn").split(","))
 			{
 				String[] splitOCIO = OCIOper.split("\\.");
 				Player player = splitOCIO[0].equals("You") ? hostCard.getController() : hostCard.getController().getOpponent();
@@ -142,7 +142,7 @@ public abstract class Trigger {
 				
 				if(!Card.compare(amt,operator,operand))
 				{
-					System.out.println("Requirement failed: Required cards not present/too many cards present.");
+					System.out.println("Requirement failed: Required cards not present/too many cards present in specific zone.");
 					return false;
 				}
 			}
