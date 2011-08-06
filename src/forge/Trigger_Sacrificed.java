@@ -10,7 +10,7 @@ public class Trigger_Sacrificed extends Trigger {
 
 	@Override
 	public boolean performTest(HashMap<String, Object> runParams) {
-		Card sac = ((Card)runParams.get("Sacrificed"));
+		Card sac = (Card)runParams.get("Card");
 		if(mapParams.containsKey("ValidPlayer"))
 		{
 			if(!matchesValid(sac.getController(),mapParams.get("ValidPlayer").split(","),hostCard))
