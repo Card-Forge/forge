@@ -1,4 +1,3 @@
-
 package forge;
 
 
@@ -10510,71 +10509,13 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    String player = card.getController();
-                    
-                    if(player.equals(Constant.Player.Human)) humanResolve();
-                    else computerResolve();
+                	// Look for two basic lands: one goes into play tapped, one
+                	// goes into your hand
+                	AllZone.GameAction.SearchLibraryTwoBasicLand(card.getController(),
+                			Constant.Zone.Play, true, 
+                			Constant.Zone.Hand, false);
                 }
                 
-                public void computerResolve() {
-                    CardList land = new CardList(AllZone.Computer_Library.getCards());
-                    land = land.getType("Basic");
-                    
-                    //just to make the computer a little less predictable
-                    land.shuffle();
-                    
-                    //3 branches: 1-no land in deck, 2-one land in deck, 3-two or more land in deck
-                    if(land.size() != 0) {
-                        //branch 2 - at least 1 land in library
-                        Card tapped = land.remove(0);
-                        tapped.tap();
-                        
-                        AllZone.Computer_Play.add(tapped);
-                        AllZone.Computer_Library.remove(tapped);
-                        
-                        //branch 3
-                        if(land.size() != 0) {
-                            Card toHand = land.remove(0);
-                            AllZone.Computer_Hand.add(toHand);
-                            AllZone.Computer_Library.remove(toHand);
-                        }
-                    }
-                }//computerResolve()
-                
-                public void humanResolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    
-                    CardList list = new CardList(library.getCards());
-                    list = list.getType("Basic");
-                    
-                    //3 branches: 1-no land in deck, 2-one land in deck, 3-two or more land in deck
-                    
-                    //branch 1
-                    if(list.size() == 0) return;
-                    
-                    //branch 2
-                    Object o = AllZone.Display.getChoiceOptional("Put into play tapped", list.toArray());
-                    if(o != null) {
-                        Card c = (Card) o;
-                        c.tap();
-                        list.remove(c);
-                        
-                        library.remove(c);
-                        play.add(c);
-                        
-                        if(list.size() == 0) return;
-                        
-                        o = AllZone.Display.getChoiceOptional("Put into your hand", list.toArray());
-                        if(o != null) {
-                            //branch 3
-                            library.remove(o);
-                            hand.add(o);
-                        }
-                        AllZone.GameAction.shuffle(card.getController());
-                    }//if
-                }//resolve()
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
@@ -17668,63 +17609,9 @@ public class CardFactory implements NewConstants {
 
 				@Override
                 public void resolve() {
-                    String player = card.getController();
-                    
-                    if(player.equals(Constant.Player.Human)) humanResolve();
-                    else computerResolve();
-                    
-                    AllZone.GameAction.shuffle(card.getController());
-                }
-                
-                public void computerResolve() {
-                    CardList land = new CardList(AllZone.Computer_Library.getCards());
-                    land = land.getType("Basic");
-                    
-                    //just to make the computer a little less predictable
-                    land.shuffle();
-                    
-                    //3 branches: 1-no land in deck, 2-one land in deck, 3-two or more land in deck
-                    if(land.size() != 0) {
-                        //branch 2 - at least 1 land in library
-                        Card tapped = land.remove(0);
-                        tapped.tap();
-                        
-                        AllZone.Computer_Play.add(tapped);
-                        AllZone.Computer_Library.remove(tapped);
-                        
-                        //branch 3
-                        if(land.size() != 0) {
-                            Card toHand = land.remove(0);
-                            AllZone.Computer_Hand.add(toHand);
-                            AllZone.Computer_Library.remove(toHand);
-                        }
-                    }
-                }//computerResolve()
-                
-                public void humanResolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    
-                    CardList list = new CardList(library.getCards());
-                    list = list.getType("Basic");
-                    
-                    //3 branches: 1-no land in deck, 2-one land in deck, 3-two or more land in deck
-                    
-                    //branch 1
-                    if(list.size() == 0) return;
-                    
-                    //branch 2
-                    Object o = AllZone.Display.getChoiceOptional("Put into play tapped", list.toArray());
-                    if(o != null) {
-                        Card c = (Card) o;
-                        c.tap();
-                        list.remove(c);
-                        
-                        library.remove(c);
-                        play.add(c);
-                        
-                    }//if
-                }//resolve()
+					AllZone.GameAction.SearchLibraryBasicLand(card.getController(), 
+							Constant.Zone.Play, true);
+				}
                 
                 public boolean canPlayAI()
                 {
@@ -17737,6 +17624,62 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+
+        //*************** START *********** START **************************
+        else if (cardName.equals("Harrow")){
+            final SpellAbility spell = new Spell(card) {
+
+				private static final long serialVersionUID = -6598323179507468746L;
+
+				@Override
+                public void resolve() {
+					// Put two lands into play, tapped
+					AllZone.GameAction.SearchLibraryTwoBasicLand(card.getController(), 
+							Constant.Zone.Play, false, 
+							Constant.Zone.Play, false);
+                } // resolve
+               
+        		public void chooseTargetAI() {
+        			Card target = null;
+        			target = CardFactoryUtil.getWorstLand(Constant.Player.Computer);
+        			setTargetCard(target);
+        			AllZone.GameAction.sacrifice(getTargetCard());
+        		}//chooseTargetAI()
+
+                
+                public boolean canPlayAI()
+                {
+                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                	CardList list = new CardList(library.getCards());
+                	list = list.getType("Basic");
+                	PlayerZone inPlay = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                	CardList listInPlay = new CardList(inPlay.getCards());
+                	listInPlay = listInPlay.getType("Land");
+                	// One or more lands in library, 2 or more lands in play
+                	return (list.size() > 0) && (listInPlay.size() > 1);
+                }
+            };//SpellAbility
+            Input runtime = new Input() {
+                
+				private static final long serialVersionUID = -7551607354431165941L;
+
+				@Override
+                public void showMessage() {
+                    String player = card.getController();
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    CardList choice = new CardList(play.getCards());
+                    choice = choice.getType("Land");                    
+                    if (player.equals(Constant.Player.Human)) {
+                    	stopSetNext(CardFactoryUtil.input_sacrifice(spell, choice, "Select a land to sacrifice."));
+                    }
+                }
+            };
+
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            spell.setBeforePayMana(runtime);
+
+        } //*************** END ************ END **************************
         
         
         //*************** START *********** START **************************

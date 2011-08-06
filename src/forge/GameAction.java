@@ -27,7 +27,9 @@ public class GameAction {
         
         return c.get(0);
     }
-    
+
+ 
+
     @SuppressWarnings("unused")
     // getCurrentCard
     private Card getCurrentCard(int ID) {
@@ -1584,6 +1586,92 @@ public class GameAction {
         
     }
     
+    public void SearchLibraryBasicLand(String player, String Zone1, boolean tapLand) {
+    	SearchLibraryTwoBasicLand(player, Zone1, tapLand, "", false);
+    }
+
+	public void SearchLibraryTwoBasicLand(String player,
+			String Zone1, boolean tapFirstLand, 
+			String Zone2, boolean tapSecondLand) {
+        
+        if(player.equals(Constant.Player.Human)) {
+        	HumanSearchTwoBasicLand(Zone1, tapFirstLand, Zone2, tapSecondLand);
+        } else {
+        	AISearchTwoBasicLand(Zone1, tapFirstLand, Zone2, tapSecondLand);
+        }
+        
+        AllZone.GameAction.shuffle(player);
+    }
+    
+    private void AISearchTwoBasicLand(String Zone1, boolean tapFirstLand,
+    		String Zone2, boolean tapSecondLand) {
+        CardList land = new CardList(AllZone.Computer_Library.getCards());
+        land = land.getType("Basic");
+        PlayerZone firstZone = AllZone.getZone(Zone1, Constant.Player.Computer);
+        //just to make the computer a little less predictable
+        land.shuffle();
+        
+        //3 branches: 1-no land in deck, 2-one land in deck, 3-two or more land in deck
+        if(land.size() != 0) {
+            //branch 2 - at least 1 land in library
+            Card firstLand = land.remove(0);
+            if (tapFirstLand)
+            	firstLand.tap();
+            
+            firstZone.add(firstLand);
+            AllZone.Computer_Library.remove(firstLand);
+            
+            //branch 3
+            if(!Zone2.isEmpty() && (land.size() != 0)) {
+                PlayerZone secondZone = AllZone.getZone(Zone2, Constant.Player.Computer);
+                Card secondLand = land.remove(0);
+                if (tapSecondLand)
+                	secondLand.tap();
+                secondZone.add(secondLand);
+                AllZone.Computer_Library.remove(secondLand);
+            }
+        }
+    }
+
+    private void HumanSearchTwoBasicLand(String Zone1, boolean tapFirstLand, String Zone2, boolean tapSecondLand) {
+        PlayerZone firstZone = AllZone.getZone(Zone1, Constant.Player.Human);
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
+        
+        CardList list = new CardList(library.getCards());
+        list = list.getType("Basic");
+        
+        //3 branches: 1-no land in deck, 2-one land in deck, 3-two or more land in deck
+        
+        //branch 1
+        if(list.size() == 0) return;
+        
+        //branch 2
+        Object o = AllZone.Display.getChoiceOptional("Choose first land", list.toArray());
+        if(o != null) {
+            Card c = (Card) o;
+            list.remove(c);
+            if (tapFirstLand)
+            	c.tap();
+
+            library.remove(c);
+            firstZone.add(c);
+            
+        }//if
+        if ((list.size() == 0) || Zone2.isEmpty()) return;
+        //branch 3
+        o = AllZone.Display.getChoiceOptional("Choose second land", list.toArray());
+        if(o != null) {
+            PlayerZone secondZone = AllZone.getZone(Zone2, Constant.Player.Human);
+
+            Card c = (Card) o;
+            list.remove(c);
+            if (tapSecondLand)
+            	c.tap();
+            
+            library.remove(c);
+            secondZone.add(c);
+        }
+    }
     public static void main(String[] args) {
         GameAction gameAction = new GameAction();
         GenerateConstructedDeck gen = new GenerateConstructedDeck();
