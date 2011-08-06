@@ -6,5 +6,6 @@ A:SP$Pump | Cost$ 1 R | ValidTgts$ Creature.blocking | TgtPrompt$ Select target 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alibans_tower.jpg
+SVar:PicCount:2
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/76.jpg
 End
