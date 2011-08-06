@@ -289,7 +289,7 @@ public class AbilityFactory_Animate {
 			//final ArrayList<Card_Color> originalColors = c.getColor();
 			final ArrayList<String> originalTypes = c.getType();
 			
-			final long timestamp = doAnimate(c, power, toughness, types, finalDesc, keywords);
+			final long timestamp = doAnimate(c, af, power, toughness, types, finalDesc, keywords);
 			
 			//give abilities
 			final ArrayList<SpellAbility> actualAbilities= new ArrayList<SpellAbility>();
@@ -338,10 +338,11 @@ public class AbilityFactory_Animate {
 		}
 	}
 
-	private static long doAnimate(Card c, int power, int toughness, ArrayList<String> types, String colors, ArrayList<String> keywords) {
+	private static long doAnimate(Card c, AbilityFactory af, int power, int toughness, ArrayList<String> types, String colors, ArrayList<String> keywords) {
 		c.setBaseAttack(power);
 		c.setBaseDefense(toughness);
 
+		if(null != af && af.getMapParams().containsKey("OverwriteTypes")) c.clearAllTypes();
 		for(String r : types) {
 			// if the card doesn't have that type, add it
 			if (!c.getType().contains(r))
