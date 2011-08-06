@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ X
 SVar:X:Count$Valid Creature.Beast+Other+attacking/Times.3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaleskin_bruiser.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/226.jpg
 End
