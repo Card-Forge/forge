@@ -7,4 +7,5 @@ K:Flying
 K:Lifelink
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warrior_angel.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/123.jpg
 End

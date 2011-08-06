@@ -7,4 +7,11 @@ K:Defender
 A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_bone.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/41.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/169.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/65.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/52.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/119.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/42.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/41.jpg
 End

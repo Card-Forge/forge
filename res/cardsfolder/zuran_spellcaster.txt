@@ -6,4 +6,5 @@ PT:1/1
 K:abDamageTgtCP T:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zuran_spellcaster.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/111.jpg
 End

@@ -6,4 +6,5 @@ PT:2/2
 K:When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wistful_selkie.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/165.jpg
 End

@@ -6,4 +6,9 @@ K:WheneverKeyword:CastSpell/Any:Color/green:Play:ModifyLife/1:ControllingPlayer_
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurms_tooth.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/222.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/222.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/162.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/316.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/346.jpg
 End

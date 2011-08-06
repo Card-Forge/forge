@@ -6,4 +6,6 @@ PT:3/3
 K:stPumpSelf:Creature:1/1:isPresent Island.YouDontCtrl:Wu Admiral gets +1/+1 as long as an opponent controls an Island.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_admiral.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/57.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/57.jpg
 End

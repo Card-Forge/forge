@@ -7,4 +7,5 @@ K:Defender
 K:abPump R:+1/+1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_lava.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/223.jpg
 End

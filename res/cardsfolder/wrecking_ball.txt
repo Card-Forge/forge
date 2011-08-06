@@ -5,4 +5,5 @@ Text:Destroy target creature or land.
 K:spDestroyTgt:Creature,Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrecking_ball.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/139.jpg
 End

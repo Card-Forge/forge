@@ -7,4 +7,5 @@ K:Defender
 K:abPump W:+0/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_faith.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/40.jpg
 End

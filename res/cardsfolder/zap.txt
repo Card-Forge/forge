@@ -6,4 +6,5 @@ K:spDamageTgtCP:1
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zap.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/180.jpg
 End

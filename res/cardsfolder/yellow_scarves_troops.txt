@@ -6,4 +6,6 @@ PT:2/2
 K:CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10542.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/127.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/127.jpg
 End

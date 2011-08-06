@@ -6,4 +6,5 @@ PT:2/2
 K:etbDestroyTgtMay:Enchantment
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_priest_of_thune.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/38.jpg
 End

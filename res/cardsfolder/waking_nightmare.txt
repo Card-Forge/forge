@@ -5,4 +5,5 @@ Text:no text
 K:spDiscardTgt:TgtChoose:2:Target player discards two cards.:Waking Nightmare - target player discards cards
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waking_nightmare.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/149.jpg
 End

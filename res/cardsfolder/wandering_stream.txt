@@ -6,4 +6,5 @@ K:spGainLife:X:Domain - You gain 2 life for each basic land type among lands you
 SVar:X:Count$Domain/Times.2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23119.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/224.jpg
 End

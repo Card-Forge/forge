@@ -7,4 +7,5 @@ K:Defender
 K:When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/st/en-us/card5265.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/75.jpg
 End

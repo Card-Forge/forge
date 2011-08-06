@@ -5,4 +5,5 @@ Text:Wild Nacatl gets +1/+1 as long as you control a Mountain. Wild Nacatl gets 
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_nacatl.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/152.jpg
 End

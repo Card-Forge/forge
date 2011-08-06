@@ -5,4 +5,7 @@ Text:Destroy target creature with flying.
 K:spDestroyTgt:Creature.withFlying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_snare.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/288.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/117.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/283.jpg
 End

@@ -7,4 +7,5 @@ K:Morph:W
 K:abTapTgt W T:Creature:Tap target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whipcorder.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/60.jpg
 End

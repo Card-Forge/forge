@@ -5,4 +5,5 @@ Text:no text
 A:AB$Regenerate | Cost$ Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Regenerate target artifact.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/welding_jar.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/274.jpg
 End

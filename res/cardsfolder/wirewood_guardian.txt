@@ -6,4 +6,5 @@ PT:6/6
 K:TypeCycling:Forest:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_guardian.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/132.jpg
 End

@@ -7,4 +7,5 @@ K:abUntapTgt G T:Elf:Untap target Elf.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_lodge.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/329.jpg
 End

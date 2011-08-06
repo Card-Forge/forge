@@ -7,4 +7,5 @@ K:Protection from white
 K:abPump 1 R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wildfire_emissary.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/203.jpg
 End

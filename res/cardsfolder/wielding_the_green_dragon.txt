@@ -5,4 +5,6 @@ Text:no text
 K:spPumpTgt:+4/+4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wielding_the_green_dragon.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/157.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/157.jpg
 End

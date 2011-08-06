@@ -9,4 +9,5 @@ K:stPumpAll:Creature.White+Other+YouCtrl:1/1:No Condition:Other white creatures 
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wilt_leaf_liege.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/245.jpg
 End

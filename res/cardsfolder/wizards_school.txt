@@ -9,4 +9,5 @@ K:2, tap: add B
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wizards_school.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/140.jpg
 End

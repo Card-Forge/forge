@@ -6,4 +6,5 @@ PT:1/2
 K:tap: add G
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39828.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/301.jpg
 End

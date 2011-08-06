@@ -6,4 +6,6 @@ PT:2/1
 K:Horsemanship
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wei_strike_force.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/91.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/91.jpg
 End

@@ -8,4 +8,5 @@ K:etbDestroyTgt:Enchantment
 SVar:Evoke:W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wispmare.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/48.jpg
 End

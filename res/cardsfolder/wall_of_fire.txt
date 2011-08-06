@@ -7,4 +7,13 @@ K:Defender
 K:abPump R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_fire.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/183.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/227.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/273.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/248.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/247.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/162.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/216.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/182.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/182.jpg
 End

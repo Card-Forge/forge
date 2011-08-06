@@ -6,4 +6,9 @@ K:Enchant creature
 K:enPump:+0/+2/Reach
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/web.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/137.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/136.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/171.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/281.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/137.jpg
 End

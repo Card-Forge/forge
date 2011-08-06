@@ -6,4 +6,6 @@ PT:3/3
 K:Horsemanship
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wei_elite_companions.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/87.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/87.jpg
 End

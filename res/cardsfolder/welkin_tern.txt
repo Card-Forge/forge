@@ -7,4 +7,5 @@ K:Flying
 K:CARDNAME can block only creatures with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/welkin_tern.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/76.jpg
 End

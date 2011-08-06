@@ -6,4 +6,5 @@ PT:2/2
 K:Haste
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/cg/en-us/card15198.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/100.jpg
 End

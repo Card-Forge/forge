@@ -7,4 +7,5 @@ K:Changeling
 K:abPump R:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_spike_changeling.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/112.jpg
 End

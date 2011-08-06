@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+1/+0/Flying & First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_aesthir.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/383.jpg
 End

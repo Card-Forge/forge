@@ -9,4 +9,5 @@ K:abPump W:+0/+1
 SVar:Rarity:Rare
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windreaver.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/138.jpg
 End

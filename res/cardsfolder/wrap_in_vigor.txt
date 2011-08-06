@@ -4,4 +4,5 @@ Types:Instant
 Text:Regenerate each creature you control.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130331.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/141.jpg
 End

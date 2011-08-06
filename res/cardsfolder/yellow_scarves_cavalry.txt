@@ -7,4 +7,6 @@ K:Horsemanship
 K:CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yellow_scarves_cavalry.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/125.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/125.jpg
 End

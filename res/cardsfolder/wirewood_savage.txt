@@ -6,4 +6,5 @@ PT:2/2
 K:WheneverKeyword:EntersBattleField:Type/Beast:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever a Beast enters the battlefield, you may draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_savage.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/304.jpg
 End

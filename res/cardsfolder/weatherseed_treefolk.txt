@@ -7,4 +7,5 @@ K:Trample
 K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weatherseed_treefolk.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/116.jpg
 End

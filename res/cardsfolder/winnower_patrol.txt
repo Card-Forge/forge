@@ -5,4 +5,5 @@ Text:Kinship - At the beginning of your upkeep, you may look at the top card of 
 PT:3/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winnower_patrol.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/139.jpg
 End

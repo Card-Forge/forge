@@ -5,4 +5,6 @@ Text:no text
 PT:1/1
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83311.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/59.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/54.jpg
 End

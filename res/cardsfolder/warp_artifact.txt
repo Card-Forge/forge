@@ -5,4 +5,9 @@ Text:At the beginning of the upkeep of enchanted artifact's controller, Warp Art
 K:Enchant Artifact Curse
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warp_artifact.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/66.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/42.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/43.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/53.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/42.jpg
 End

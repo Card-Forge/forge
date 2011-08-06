@@ -5,4 +5,7 @@ Text:no text
 A:SP$Retrieve | Cost$ 3 B | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83342.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/174.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/171.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/171.jpg
 End

@@ -7,4 +7,5 @@ K:stPumpSelf:Creature:0/0/Trample:isPresent Land.Snow+YouCtrl:Woolly Mammoths ha
 SVar:BuffedBy:Land.Snow
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woolly_mammoths.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/166.jpg
 End

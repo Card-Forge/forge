@@ -7,4 +7,5 @@ K:Defender
 K:abPump 1:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_opposition.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/168.jpg
 End

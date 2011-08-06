@@ -7,4 +7,5 @@ K:abPump G:Forestwalk:Drawback$DamageYou/1:Wormwood Dryad gains forestwalk until
 K:abPump B:Swampwalk:Drawback$DamageYou/1:Wormwood Dryad gains swampwalk until end of turn and deals 1 damage to you.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormwood_dryad.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/233.jpg
 End

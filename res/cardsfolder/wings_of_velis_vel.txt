@@ -5,4 +5,5 @@ Text:Target creature becomes 4/4 and gains flying until end of turn.
 K:Changeling
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_velis_vel.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/97.jpg
 End

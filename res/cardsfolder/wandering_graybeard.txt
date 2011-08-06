@@ -5,4 +5,5 @@ Text:Kinship - At the beginning of your upkeep, you may look at the top card of 
 PT:4/4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wandering_graybeard.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/27.jpg
 End

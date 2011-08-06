@@ -6,4 +6,5 @@ K:spPumpTgt:+2/+2/Trample
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card107097.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/98.jpg
 End

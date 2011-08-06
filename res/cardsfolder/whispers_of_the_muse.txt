@@ -5,4 +5,5 @@ Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whispers_of_the_muse.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/103.jpg
 End

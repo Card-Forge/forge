@@ -7,4 +7,5 @@ K:abDestroyTgtV 1 SubCounter<1/FADE>:Artifact:Destroy target artifact.
 K:Fading:3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodripper.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/125.jpg
 End

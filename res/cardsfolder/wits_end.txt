@@ -6,4 +6,5 @@ K:spDiscardTgt:Hand:0:Target player discards his or her hand.:Wit's End - target
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card107562.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/58.jpg
 End

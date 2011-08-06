@@ -7,4 +7,5 @@ K:Flanking
 K:abPump W W:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhalfirin_knight.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/254.jpg
 End

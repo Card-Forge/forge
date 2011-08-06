@@ -6,4 +6,6 @@ K:WheneverKeyword:CastSpell/Opponent:Color/white:Play:ModifyLife/1!ModifyLife/-1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_edict.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/170.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/171.jpg
 End

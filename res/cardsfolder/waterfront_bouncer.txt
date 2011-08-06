@@ -7,4 +7,5 @@ A:AB$Bounce | Cost$ U T Discard<1/Any> | ValidTgts$ Creature | TgtPrompt$ Select
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waterfront_bouncer.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/114.jpg
 End

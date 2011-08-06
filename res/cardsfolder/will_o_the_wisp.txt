@@ -7,4 +7,9 @@ K:Flying
 A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83411.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/44.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/45.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/55.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/169.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/44.jpg
 End

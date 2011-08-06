@@ -6,4 +6,5 @@ PT:1/1
 SVar:BuffedBy:Spell
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_maw_nephilim.jpg
+SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/138.jpg
 End

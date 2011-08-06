@@ -7,4 +7,8 @@ K:Defender
 K:abPump U:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_water.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/91.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/91.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/114.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/91.jpg
 End

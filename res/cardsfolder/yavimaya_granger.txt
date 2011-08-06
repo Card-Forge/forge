@@ -6,4 +6,5 @@ PT:2/2
 K:Echo:2 G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_granger.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/118.jpg
 End

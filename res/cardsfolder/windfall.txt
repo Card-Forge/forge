@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windfall.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/111.jpg
 End

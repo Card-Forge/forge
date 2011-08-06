@@ -8,4 +8,5 @@ K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Instant/Sorcery:Play:StatsP
 SVar:BuffedBy:Instant,Sorcery
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wee_dragonauts.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/137.jpg
 End

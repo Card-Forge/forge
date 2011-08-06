@@ -6,4 +6,5 @@ A:AB$Draw | Cost$ PayLife<1> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yawgmoths_bargain.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/75.jpg
 End

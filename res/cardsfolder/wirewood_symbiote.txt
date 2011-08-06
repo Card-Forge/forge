@@ -7,4 +7,5 @@ A:AB$Untap | Cost$ Return<1/Elf> | Tgt$ TgtC | ActivationLimit$ 1 | SpellDescrip
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_symbiote.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/133.jpg
 End

@@ -7,4 +7,5 @@ K:Flying
 K:Morph:2 W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_spine_drake.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/62.jpg
 End

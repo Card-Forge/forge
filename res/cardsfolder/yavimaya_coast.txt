@@ -8,4 +8,7 @@ K:paintap:1:G
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_coast.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/143.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/330.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/363.jpg
 End

@@ -6,4 +6,5 @@ PT:2/2
 K:Lifelink
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zebra_unicorn.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/350.jpg
 End

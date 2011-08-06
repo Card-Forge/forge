@@ -8,4 +8,5 @@ K:Flying
 K:Deathtouch
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winged_coatl.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/105.jpg
 End

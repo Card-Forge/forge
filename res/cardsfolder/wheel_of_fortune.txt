@@ -4,4 +4,7 @@ Types:Sorcery
 Text:Each player discards his or her hand and draws seven cards.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/3e/en-us/card1326.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/185.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/184.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/184.jpg
 End

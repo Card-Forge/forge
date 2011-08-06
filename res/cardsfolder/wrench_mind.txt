@@ -5,4 +5,5 @@ Text:no text
 K:spDiscardTgt:TgtChoose:2/UnlessDiscardType.Artifact:Target player discards two cards unless he or she discards an artifact card.:Wrench Mind - target player discards cards
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrench_mind.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/84.jpg
 End

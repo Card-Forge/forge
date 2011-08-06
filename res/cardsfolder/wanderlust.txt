@@ -5,4 +5,9 @@ Text:At the beginning of the upkeep of enchanted creature's controller, Wanderlu
 K:Enchant Creature Curse
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderlust.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/201.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/135.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/134.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/169.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/135.jpg
 End

@@ -6,4 +6,7 @@ PT:1/1
 K:abPumpTgtC T:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wyluli_wolf.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/207.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/270.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/40.jpg
 End

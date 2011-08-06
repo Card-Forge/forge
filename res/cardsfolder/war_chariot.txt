@@ -5,4 +5,5 @@ Text:no text
 K:abPumpTgtC 3 T:Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_chariot.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/323.jpg
 End

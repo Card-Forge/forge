@@ -6,4 +6,5 @@ K:spDestroyTgt:Artifact,Land
 K:CARDNAME can't be countered.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wreak_havoc.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/139.jpg
 End

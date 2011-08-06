@@ -5,4 +5,6 @@ Text:no text
 K:spGainLife:5
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whitesuns_passage.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/27.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/27.jpg
 End

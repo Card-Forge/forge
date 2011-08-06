@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+1/+3/Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_hope.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/289.jpg
 End

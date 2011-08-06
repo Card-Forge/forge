@@ -6,4 +6,5 @@ PT:1/1
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winged_sliver.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/106.jpg
 End

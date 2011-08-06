@@ -5,4 +5,5 @@ Text:Kinship - At the beginning of your upkeep, you may look at the top card of 
 PT:2/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolf_skull_shaman.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/140.jpg
 End

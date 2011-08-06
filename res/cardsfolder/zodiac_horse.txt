@@ -6,4 +6,6 @@ PT:3/3
 K:Islandwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10598.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/159.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/159.jpg
 End

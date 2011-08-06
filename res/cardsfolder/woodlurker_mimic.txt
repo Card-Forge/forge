@@ -6,4 +6,5 @@ PT:2/1
 SVar:BuffedBy:Spell.Black+Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Woodlurker_Mimic.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/130.jpg
 End

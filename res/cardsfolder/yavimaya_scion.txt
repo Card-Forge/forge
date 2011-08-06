@@ -6,4 +6,5 @@ PT:4/4
 K:Protection from artifacts
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_scion.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/119.jpg
 End

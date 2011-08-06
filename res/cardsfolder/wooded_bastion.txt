@@ -9,4 +9,5 @@ K:WG, tap: add G G
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wooded_bastion.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/281.jpg
 End

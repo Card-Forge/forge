@@ -6,4 +6,6 @@ PT:2/1
 K:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/youthful_knight.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/125.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/62.jpg
 End

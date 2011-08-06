@@ -7,4 +7,5 @@ K:enPump:+2/+2/Trample
 K:enControlCreature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimayas_embrace.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/127.jpg
 End

@@ -10,4 +10,5 @@ K:Sacrifice CARDNAME: Add R to your mana pool.
 K:Sacrifice CARDNAME: Add G to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_cantor.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/149.jpg
 End
