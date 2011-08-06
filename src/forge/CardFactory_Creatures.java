@@ -5078,30 +5078,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Vorosh, the Hunter")) {
-            
-            final Ability ability2 = new Ability(card, "2 G") {
-                @Override
-                public void resolve() {
-                    card.addCounter(Counters.P1P1, 6);
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    //this is set to false, since it should only TRIGGER
-                    return false;
-                }
-            };// ability2
-            //card.clearSpellAbility();
-            card.addSpellAbility(ability2);
-            
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(card.getName()).append(" - gets six +1/+1 counters.");
-            ability2.setStackDescription(sb2.toString());
-        }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
         else if(cardName.equals("Cromat")) {
             //Kill ability

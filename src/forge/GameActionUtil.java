@@ -4728,7 +4728,6 @@ public class GameActionUtil {
 		else if(c.getName().equals("Rootwater Thief")) playerCombatDamage_Rootwater_Thief(c);
 		else if(c.getName().equals("Treva, the Renewer")) playerCombatDamage_Treva(c);
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
-		else if(c.getName().equals("Vorosh, the Hunter")) playerCombatDamage_Vorosh(c);
 		else if(c.getName().equals("Doomsday Specter")) opponent_Discard_You_Choose(c);
 		//else if(c.getName().equals("Silent Specter")) opponent_Discard(c, 2);
 		else if(c.getName().equals("The Unspeakable")) may_Return_Graveyard_to_Hand(c, "Arcane".split(","));
@@ -5020,12 +5019,7 @@ public class GameActionUtil {
 		else ComputerUtil.playNoStack(sa[1]);
 	}
 
-	private static void playerCombatDamage_Vorosh(Card c) {
-		SpellAbility[] sa = c.getSpellAbility();
-		if(c.getController().equals(AllZone.HumanPlayer)) AllZone.GameAction.playSpellAbility(sa[1]);
-		else ComputerUtil.playNoStack(sa[1]);
-	}
-
+	
 	private static void playerCombatDamage_Slith(Card c) {
 		final int power = c.getNetAttack();
 		final Card card = c;
