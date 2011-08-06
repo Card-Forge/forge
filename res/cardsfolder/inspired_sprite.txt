@@ -6,7 +6,7 @@ PT:2/2
 K:Flash
 K:Flying
 K:WheneverKeyword:CastSpell/Controller:Type/Wizard:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Wizard spell, you may untap Inspired Sprite.
-K:abDrawCards T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Inspired Sprite - draw a card and discard a card
+A:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ YouDiscard/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inspired_sprite.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/37.jpg

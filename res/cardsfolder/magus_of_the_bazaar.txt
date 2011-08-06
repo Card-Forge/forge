@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Human Wizard
 Text:no text
 PT:0/1
-K:abDrawCards T:2:Drawback$YouDiscard/3:Draw two cards, then discard three cards.:Magus of the Bazaar - draw cards and discard cards
+A:AB$Draw | Cost$ T | NumCards$ 2 | SpellDescription$ Draw two cards, then discard three cards. | SubAbility$ YouDiscard/3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_bazaar.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/43.jpg
