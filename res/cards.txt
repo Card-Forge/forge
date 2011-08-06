@@ -5826,6 +5826,7 @@ G
 Enchantment
 All creatures have haste.
 SVar:BuffedBy:Creature
+SVar:AntiBuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/concordant_crossroads.jpg
 
@@ -18627,6 +18628,7 @@ Enchantment
 All creatures have haste.
 SVar:RemAIDeck:True
 SVar:BuffedBy:Creature
+SVar:AntiBuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mass_hysteria.jpg
 
@@ -24549,6 +24551,7 @@ Rolling Stones
 1 W
 Enchantment
 Wall creatures can attack as though they didn't have defender.
+SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_stones.jpg
 
@@ -26021,6 +26024,7 @@ Creature Serpent
 Serpent of the Endless Sea's power and toughness are each equal to the number of Islands you control.
 1/1
 CARDNAME can't attack unless defending player controls an Island.
+SVar:BuffedBy:Island
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serpent_of_the_endless_sea.jpg
 
@@ -35170,6 +35174,7 @@ Creature Zombie Frog Beast
 no text
 3/3
 WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/-1:ControllingPlayer_Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another creature enters the battlefield, you lose 1 life.
+SVar:AntiBuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wretched_anurid.jpg
 
