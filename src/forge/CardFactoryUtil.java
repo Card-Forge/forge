@@ -2719,6 +2719,13 @@ public class CardFactoryUtil {
         return canTarget(ability.getSourceCard(), target);
     }
     
+    public static boolean isColored(Card c)
+    {
+    	return CardUtil.getColors(c).contains(Constant.Color.White) || CardUtil.getColors(c).contains(Constant.Color.Blue) ||
+    		   CardUtil.getColors(c).contains(Constant.Color.Black) || CardUtil.getColors(c).contains(Constant.Color.Red) ||
+    		   CardUtil.getColors(c).contains(Constant.Color.Green);
+    }
+    
     public static boolean canTarget(Card spell, Card target) {
         if(target == null) return true;
         //System.out.println("Target:" + target);
@@ -2758,6 +2765,9 @@ public class CardFactoryUtil {
                 if(kw.equals("Protection from enchantments") && spell.getType().contains("Enchantment")) return false;
                 
                 if(kw.equals("Protection from everything")) return false;
+                
+                if(kw.equals("Protection from colored spells") && (spell.isInstant() || spell.isSorcery() || spell.isAura() ) &&
+                   isColored(spell)) return false;
             }
         }
         return true;

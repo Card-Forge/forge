@@ -1,3 +1,14 @@
+Emrakul, the Aeons Thorn
+15
+Legendary Creature Eldrazi
+When you cast Emrakul, take an extra turn after this one.
+15/15
+This card can't be countered.
+Flying
+Protection from colored spells
+Annihilator 6
+When this card is put into a graveyard from anywhere, reveal this card and shuffle it into its owner's library instead.
+
 Warp Artifact
 B B
 Enchantment Aura

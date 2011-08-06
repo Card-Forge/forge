@@ -14983,7 +14983,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    System.out.println("Turn: " + AllZone.Phase.getTurn());
+                    //System.out.println("Turn: " + AllZone.Phase.getTurn());
                     AllZone.Phase.addExtraTurn(card.getController());
                 }
             };

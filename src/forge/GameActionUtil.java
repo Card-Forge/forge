@@ -205,6 +205,8 @@ public class GameActionUtil {
 			playCard_Kozilek(c);
 		else if (c.getName().equals("Ulamog, the Infinite Gyre"))
 			playCard_Ulamog(c);
+		else if (c.getName().equals("Emrakul, the Aeons Thorn"))
+			playCard_Emrakul(c);
 
 		playCard_Cascade(c);
 
@@ -305,6 +307,21 @@ public class GameActionUtil {
 			ability.chooseTargetAI();
 			AllZone.Stack.add(ability);
 		}
+	}
+	
+	public static void playCard_Emrakul(Card c)
+	{
+		final String controller = c.getController();
+		final Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				AllZone.Phase.addExtraTurn(controller);
+			}
+		};
+		ability.setStackDescription(c + " - When you cast Emrakul, take an extra turn after this one.");
+		AllZone.Stack.add(ability);
+		
 	}
 	
 	public static void playCard_Cascade(Card c) {
