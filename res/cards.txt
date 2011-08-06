@@ -7667,6 +7667,7 @@ Fireshrieker
 3
 Artifact Equipment
 Equipped creature has double strike.
+VanillaEquipment:0:0:2:Double Strike:none:none
 
 Skullclamp
 1
@@ -7677,6 +7678,7 @@ Bonesplitter
 1
 Artifact Equipment
 Equipped creature gets +2/+0.
+VanillaEquipment:2:0:1:none:none:none
 
 Survival of the Fittest
 1 G

@@ -347,7 +347,7 @@ class CardFactory_Equipment {
         } //*************** END ************ END **************************
 */
         
-
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Fireshrieker")) {
             final Ability equip = new Ability(card, "2") {
@@ -452,6 +452,7 @@ class CardFactory_Equipment {
             card.addUnEquipCommand(onUnEquip);
             
         } //*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -560,6 +561,8 @@ class CardFactory_Equipment {
             
         } //*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Bonesplitter")) {
             final Ability equip = new Ability(card, "1") {
@@ -660,6 +663,8 @@ class CardFactory_Equipment {
             card.addEquipCommand(onEquip);
             card.addUnEquipCommand(onUnEquip);
         } //*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Trailblazer's Boots")) {
