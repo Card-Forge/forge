@@ -1,6 +1,13 @@
 
 package forge;
 
+/**
+ * AllZoneUtil contains static functions used to get CardLists of various
+ * cards in various zones.
+ * 
+ * @author dennis.r.friedrichsen (slapshot5 on slightlymagic.net)
+ *
+ */
 public class AllZoneUtil {
 	
 	/**
