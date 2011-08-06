@@ -51,6 +51,7 @@ src/CardList.java svneol=native#text/plain
 src/CardListFilter.java svneol=native#text/plain
 src/CardListUtil.java svneol=native#text/plain
 src/CardPanel.java svneol=native#text/plain
+src/CardParser.java svneol=native#text/plain
 src/CardUtil.java svneol=native#text/plain
 src/Combat.java svneol=native#text/plain
 src/CombatPlaneswalker.java svneol=native#text/plain
