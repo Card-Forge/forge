@@ -2191,7 +2191,7 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         */
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Beast Attack")) {
             SpellAbility spell = new Spell(card) {
@@ -2224,7 +2224,8 @@ public class CardFactory_Instants {
             card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 G G G", "0"));
             
         }//*************** END ************ END **************************
-                
+        */
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Wrap in Vigor")) {
             SpellAbility spell = new Spell(card) {
