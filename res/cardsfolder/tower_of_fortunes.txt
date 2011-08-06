@@ -2,7 +2,7 @@ Name:Tower of Fortunes
 ManaCost:4
 Types:Artifact
 Text:no text
-K:abDrawCards 8 T:4:Draw four cards.:Tower of Fortunes - draw cards
+A:AB$Draw | Cost$ 8 T | NumCards$ 4 | SpellDescription$ Draw four cards.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_fortunes.jpg
 End
