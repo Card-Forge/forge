@@ -1,3 +1,20 @@
+Nikko-Onna
+2 W
+Creature Spirit
+When Nikko-Onna enters the battlefield, destroy target enchantment.
+2/2
+etbDestroyTgt:Enchantment
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Nikko-Onna to its owner's hand.
+
+Woodfall Primus
+5 G G G
+Creature Treefolk Shaman
+When Woodfall Primus enters the battlefield, destroy target noncreature permanent.
+6/6
+Trample
+etbDestroyTgt:Permanent.nonCreature
+Persist
+
 Gorgon Recluse
 3 B B
 Creature Gorgon
@@ -17613,7 +17630,7 @@ Last Breath
 1 W
 Instant
 Exile target creature with power 2 or less. Its controller gains 4 life.
-spBounceTgt:Creature.powerLTE2:Exile:Drawback$TgtCtrlrGainLife/4
+spBounceTgt:Creature.powerLE2:Exile:Drawback$TgtCtrlrGainLife/4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_breath.jpg
 
