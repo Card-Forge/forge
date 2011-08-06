@@ -4013,6 +4013,7 @@ res/cardsfolder/meng_huos_horde.txt -text svneol=native#text/plain
 res/cardsfolder/mental_discipline.txt -text svneol=native#text/plain
 res/cardsfolder/mental_note.txt svneol=native#text/plain
 res/cardsfolder/mephitic_ooze.txt -text svneol=native#text/plain
+res/cardsfolder/mercenary_informer.txt -text svneol=native#text/plain
 res/cardsfolder/merchant_of_secrets.txt -text svneol=native#text/plain
 res/cardsfolder/merchant_scroll.txt -text svneol=native#text/plain
 res/cardsfolder/merchant_ship.txt -text svneol=native#text/plain
