@@ -7,10 +7,7 @@ import forge.quest.data.QuestData;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 
 public abstract class QuestAbstractBazaarStall extends JPanel implements NewConstants {
     private static final long serialVersionUID = -4147745071116906043L;
@@ -55,7 +52,7 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
         fluffArea.setOpaque(false);
         fluffArea.setEditable(false);
         fluffArea.setFocusable(false);
-
+        fluffArea.setPreferredSize(new Dimension(fluffArea.getPreferredSize().width,40));
         GridBagConstraints constraints = new GridBagConstraints(0,
                 0,
                 1,
