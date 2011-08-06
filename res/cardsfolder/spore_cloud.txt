@@ -7,5 +7,5 @@ SVar:DBFog:DB$Fog | SubAbility$ SVar=DBPumpAll
 SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.attacking,Creature.blocking | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spore_cloud.jpg
-SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/83.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/83.jpg|3
 End
