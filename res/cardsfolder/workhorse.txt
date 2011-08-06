@@ -1,7 +1,7 @@
 Name:Workhorse
 ManaCost:6
 Types:Artifact Creature Construct
-Text:Workhorse enters the battlefield with four +1/+1 counters. Remove a +1/+1 counter: Add 1 to your mana pool. 
+Text:Workhorse enters the battlefield with four +1/+1 counters. 
 PT:0/0
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/workhorse.jpg

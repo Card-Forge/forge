@@ -1,9 +1,9 @@
 Name:Amugaba
 ManaCost:5 U U
 Types:Creature Illusion	
-Text:none.
-K:Flying
+Text:no text
 PT:6/6
+K:Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amugaba.jpg
 End

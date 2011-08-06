@@ -1,8 +1,9 @@
 Name:Selenia Dark Angel
 ManaCost:3 W B
 Types:Creature Angel
-Text:Pay 2 life: return Selenia Dark Angel to owner's hand.
+Text:no text
 PT:3/3
+K:Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selenia_dark_angel.jpg
 End
