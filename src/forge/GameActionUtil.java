@@ -2263,7 +2263,6 @@ public class GameActionUtil {
 
 	public static void executeLandfallEffects(Card c) {
 		if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
-		else if(c.getName().equals("Eternity Vessel")) landfall_Eternity_Vessel(c);
 	}
 	
 	private static boolean checkValakutCondition(Card valakutCard, Card mtn) {
@@ -2419,53 +2418,6 @@ public class GameActionUtil {
 			// todo: once AI has a mana pool he should choose add Ability and choose a mana as appropriate
 		}
 	}
-	
-	private static void landfall_Eternity_Vessel(final Card c) {
-		final Card crd = c;
-		Card biggest = null;
-		if(c.getController() == AllZone.ComputerPlayer) {
-			CardList vessels = new CardList();
-			PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-			if(zone != null) {
-				vessels.addAll(zone.getCards());
-				vessels = vessels.getName("Eternity Vessel");
-				biggest = vessels.get(0);
-				for(int i = 0; i < vessels.size(); i++)
-					if(biggest.getCounters(Counters.CHARGE) < vessels.get(i).getCounters(Counters.CHARGE)) biggest = vessels.get(i);                         
-			}
-		}
-        final Card compVessel = biggest;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				Card Target = null;
-				if(crd.getController() == AllZone.HumanPlayer) Target = crd;
-				else Target = compVessel;
-				
-                        int lifeGain = Target.getCounters(Counters.CHARGE);
-                        Target.getController().setLife(lifeGain, c);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Landfall: Whenever a land enters the battlefield under your control, you may ");
-		sb.append("have your life total become the number of charge counters on Eternity Vessel.");
-		ability.setStackDescription(sb.toString());
-
-		if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
-		} else if(c.getController().equals(AllZone.ComputerPlayer)) {
-			CardList Hexmages = new CardList();
-			PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-			if(zone != null) {
-				Hexmages.addAll(zone.getCards());
-				Hexmages = Hexmages.getName("Vampire Hexmage");
-				int clife = AllZone.ComputerPlayer.getLife();			
-				if(compVessel.getCounters(Counters.CHARGE) > clife && (Hexmages.size() == 0)) AllZone.Stack.add(ability);
-			}
-		}
-
-	}//landfall_Eternity_Vessel
 	
 	//not restricted to combat damage, not restricted to dealing damage to creatures/players
 	public static void executeDamageDealingEffects(final Card source, int damage) {

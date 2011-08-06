@@ -951,6 +951,9 @@ public class AbilityFactory_AlterLife {
 		}
 		else
 			amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+		
+		if(source.getName().equals("Eternity Vessel") && 
+				(AllZoneUtil.isCardInPlay("Vampire Hexmage", AllZone.HumanPlayer) || (source.getCounters(Counters.CHARGE) == 0))) return false;
 
 		// If the Target is gaining life, target self.
 		// if the Target is modifying how much life is gained, this needs to be handled better
