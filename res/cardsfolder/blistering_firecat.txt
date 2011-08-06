@@ -1,6 +1,6 @@
 Name:Blistering Firecat
 ManaCost:1 R R R
-Types:Creature Cat
+Types:Creature Elemental Cat
 Text:no text
 PT:7/1
 K:Morph:R R
