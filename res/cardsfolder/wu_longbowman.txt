@@ -1,0 +1,9 @@
+Name:Wu Longbowman
+ManaCost:2 U
+Types:Creature Human Soldier Archer
+Text:no text
+PT:1/1
+A:AB$DealDamage|Cost$T|Tgt$TgtCP|NumDmg$1|PlayerTurn$True|ActivatingPhases$Upkeep,Draw,Main1,BeginCombat|SpellDescription$Wu Longbowman deals 1 damage to target creature or player. Activate this ability only during your turn, before attackers are declared.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_longbowman.jpg
+End
