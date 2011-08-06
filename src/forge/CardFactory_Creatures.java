@@ -20659,6 +20659,8 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
+/* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
         else if (cardName.equals("Dwarven Demolition Team")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -20729,6 +20731,8 @@ public class CardFactory_Creatures {
             ability.setDescription("tap: Destroy target Wall.");
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Pestilence Demon")) {
