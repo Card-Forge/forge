@@ -1,0 +1,10 @@
+Name:Puppet Strings
+ManaCost:3
+Types:Artifact
+Text:no text
+K:abTapTgt 2 T:Creature:Tap target creature.
+K:abUntapTgt 2 T:Creature:Untap target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/puppet_strings.jpg
+End

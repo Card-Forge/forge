@@ -1,0 +1,10 @@
+Name:Seeker of Skybreak
+ManaCost:1 G
+Types:Creature Elf
+Text:no text
+PT:2/1
+K:abUntapTgt T:Creature:Untap target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seeker_of_skybreak.jpg
+End

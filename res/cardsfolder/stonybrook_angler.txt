@@ -1,0 +1,11 @@
+Name:Stonybrook Angler
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+Text:no text
+PT:1/2
+K:abTapTgt 1 U T:Creature:Tap target creature.
+K:abUntapTgt 1 U T:Creature:Untap target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stonybrook_angler.jpg
+End
