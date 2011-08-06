@@ -20,7 +20,7 @@ public class ComputerUtil_Attack2 {
 	private CardList humanList;   //holds human player creatures
 	private CardList computerList;//holds computer creatures
 
-    private int aiAggression = 0; // added by me, how aggressive the ai attack will be depending on circumstances
+    private int aiAggression = 0; // added by Masher, how aggressive the ai attack will be depending on circumstances
 	
 	public ComputerUtil_Attack2(Card[] possibleAttackers, Card[] possibleBlockers, int blockerLife)
 	{
@@ -332,7 +332,7 @@ public class ComputerUtil_Attack2 {
                boolean isUnblockableCreature = true;
                // check blockers individually, as the bulk canBeBlocked doesn't check all circumstances
                for(Card blocker:blockers){
-                    if(!blocker.isTapped() && CombatUtil.canBlock(attacker, blocker)){
+                    if(CombatUtil.canBlock(attacker, blocker)){
                         isUnblockableCreature = false;
                     }
                }
@@ -352,18 +352,18 @@ public class ComputerUtil_Attack2 {
                aiAggression = 5; // attack at all costs
             }else if((playerLifeToDamageRatio < 2 && ratioDiff >= 0) || ratioDiff > 3 || (ratioDiff > 0 && outNumber > 0)){
                aiAggression = 3;  // attack expecting to kill creatures or damage player.
-            }  else if(ratioDiff >= 0 || ratioDiff + outNumber >= -1){ // at 0 ratio expect to potentially gain an advantage by attacking first
+            }else if(ratioDiff >= 0 || ratioDiff + outNumber >= -1){ // at 0 ratio expect to potentially gain an advantage by attacking first
                 // if the ai has a slight advantage
                 // or the ai has a significant advantage numerically but only a slight disadvantage damage/life
                 aiAggression = 2; // attack expecting to destroy creatures/be unblockable
-            }else if(doUnblockableAttack || ((ratioDiff * -1) < turnsUntilDeathByUnblockable)){
-                aiAggression = 4; // look for unblockable creatures that might be able to attack for a bit of
-                // fatal damage even if the player is significantly better
             }else if(ratioDiff < 0 && aiLifeToPlayerDamageRatio > 1){
                // the player is overmatched but there are a few turns before death
                 aiAggression = 2; // attack expecting to destroy creatures/be unblockable
+            }else if(doUnblockableAttack || ((ratioDiff * -1) < turnsUntilDeathByUnblockable)){
+                aiAggression = 1; // look for unblockable creatures that might be able to attack for a bit of
+                // fatal damage even if the player is significantly better
             }else if(ratioDiff < 0){
-                aiAggression = 1;
+                aiAggression = 0;
             } // stay at home to block
             System.out.println(String.valueOf(aiAggression) + " = ai aggression");
 
@@ -457,19 +457,11 @@ public class ComputerUtil_Attack2 {
     
     public boolean shouldAttack(Card attacker, CardList defenders, Combat combat)
     {
-    	boolean canBeKilledByOne = false;
-        boolean canKillOne = false;
-    	boolean canKillAllDangerous = true; // indicates if the attacker can kill all creatures that are currently capable of dealing damage to it or the player
+    	boolean canBeKilledByOne = false; // indicates if the attacker can be killed by a single blockers
+        boolean canKillAll = true; // indicates if the attacker can kill all single blockers
+    	boolean canKillAllDangerous = true; // indicates if the attacker can kill all single blockers with wither or infect
         boolean isWorthLessThanAllKillers = true;
-    	CardList blockers = new CardList(); //all creatures that can block the attacker
-    	CardList killingBlockers = new CardList(); //all creatures that can kill the attacker alone
         boolean canBeBlocked = false;
-        boolean canCauseDamage = true;
-        
-        // ensure that this attacker can actually cause some damage
-        if(attacker.getNetCombatDamage() <= 0){
-        	canCauseDamage = false;
-        }
 
         // look at the attacker in relation to the blockers to establish a number of factors about the attacking
         // context that will be relevant to the attackers decision according to the selected strategy
@@ -478,7 +470,6 @@ public class ComputerUtil_Attack2 {
                 canBeBlocked = true;
     			if(CombatUtil.canDestroyAttacker(attacker, defender)) {
     				canBeKilledByOne = true;  // there is a single creature on the battlefield that can kill the creature
-    				killingBlockers.add(defender);
                     // see if the defending creature is of higher or lower value. We don't want to attack only to lose value
                     if(CardFactoryUtil.evaluateCreature(defender) <= CardFactoryUtil.evaluateCreature(attacker)){
                     	isWorthLessThanAllKillers = false;
@@ -486,20 +477,16 @@ public class ComputerUtil_Attack2 {
     			}
                 // see if this attacking creature can destroy this defender, if not record that it can't kill everything
     			if(!CombatUtil.canDestroyBlocker(defender, attacker)){
-                    // make exception for walls, they are usually extra tough but not dangerous unless they have
-                    // high power, so check for walls that can kill but ignore others
-                    if(!(defender.isWall() && defender.getNetCombatDamage() <= 0)){
+    				canKillAll = false;
+                    if(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect")){
                     	canKillAllDangerous = false; // there is a dangerous creature that can survive an attack from this creature
                     }
-                } else {
-                    canKillOne = true; // there is at least one opposition creature on the battlefield the creature can kill
                 }
-    			blockers.add(defender);
     		}
     	}
 
         // if the creature cannot block and can kill all opponents they might as well attack, they do nothing staying back
-        if(canKillAllDangerous && !CombatUtil.canBlock(attacker) && isWorthLessThanAllKillers){
+        if(canKillAll && !CombatUtil.canBlock(attacker) && isWorthLessThanAllKillers){
             System.out.println(attacker.getName() + " = attacking because they can't block, expecting to kill or damage player");
             return true;
         }
@@ -507,23 +494,26 @@ public class ComputerUtil_Attack2 {
         // decide if the creature should attack based on the prevailing strategy choice in aiAggression
         switch(aiAggression){
             case 5: // all out attacking
-            	if(canCauseDamage){
             		System.out.println(attacker.getName() + " = all out attacking");
                 	return true;
-            	}
-            case 4: // unblockable creatures only
-                if(!canBeBlocked && canCauseDamage){
-                    System.out.println(attacker.getName() + " = attacking expecting not to be blocked");
+            case 4: // expecting to at least trade with something
+                if(canKillAll || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked){
+                    System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
                     return true;
                 }
-            case 3: // expecting to at least kill a creature of equal value, not be blocked or to attract a group block. A standard attacking strategy
-                if(((canKillAllDangerous && isWorthLessThanAllKillers) || !canBeBlocked || !canBeKilledByOne) && canCauseDamage){
+            case 3: // expecting to at least kill a creature of equal value, not be blocked 
+                if((canKillAll && isWorthLessThanAllKillers) || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked){
                     System.out.println(attacker.getName() + " = attacking expecting to kill creature or cause damage, or is unblockable");
                     return true;
                 }
-            case 2: // attack expecting to attract even a group block or destroying single blockers and surviving
-                if(((canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked) && canCauseDamage){
+            case 2: // attack expecting to attract a group block or destroying a single blocker and surviving
+                if((canKillAll && !canBeKilledByOne) || !canBeBlocked){
                     System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
+                    return true;
+                }
+            case 1: // unblockable creatures only
+                if(!canBeBlocked){
+                    System.out.println(attacker.getName() + " = attacking expecting not to be blocked");
                     return true;
                 }
         }
