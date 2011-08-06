@@ -19,6 +19,7 @@ Aggressive Urge
 Agility
 Air Bladder
 Airborne Aid
+Ajani's Mantra
 Akki Drillmaster
 Akrasan Squire
 Alaborn Grenadier
@@ -168,6 +169,7 @@ Bosk Banneret
 Bountiful Harvest
 Brainbite
 Brainstorm
+Brass Gnat
 Brassclaw Orcs
 Breach
 Break Asunder
@@ -717,6 +719,7 @@ Kabuto Moth
 Kaleidostone
 Kami of Ancient Law
 Kami of Empty Graves
+Kami of Tattered Shoji
 Kami of the Hunt
 Karplusan Wolverine
 Kathari Screecher
@@ -1356,6 +1359,7 @@ Sylvan Bounty
 Sylvan Ranger
 Symbiotic Elf
 Synchronous Sliver
+Tablet of Epityr
 Talas Air Ship
 Talas Merchant
 Talas Scout

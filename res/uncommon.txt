@@ -39,6 +39,7 @@ Animate Land
 Annihilate
 Arachnoid
 Arcane Sanctum
+Arcbound Crusher
 Arcbound Lancer
 Arcbound Slith
 Archaeological Dig
@@ -114,6 +115,7 @@ Bound in Silence
 Braidwood Cup
 Brain Freeze
 Branchsnap Lorian
+Brass Man
 Brave the Elements
 Brawn
 Briarhorn
@@ -350,6 +352,7 @@ Goblin Artillery
 Goblin Balloon Brigade
 Goblin Berserker
 Goblin Burrows
+Goblin Dirigible
 Goblin General
 Goblin Glider
 Goblin Lackey
@@ -428,6 +431,7 @@ Imperial Recruiter
 Imperiosaur
 Implode
 Improvised Armor
+Indebted Samurai
 Infest
 Inheritance
 Inkfathom Infiltrator

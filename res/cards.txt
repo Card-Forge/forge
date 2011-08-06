@@ -1,3 +1,71 @@
+Brass Gnat
+1
+Artifact Creature Insect
+no text
+1/1
+Flying
+CARDNAME doesn't untap during your untap step.
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/1:ControllerUpkeep:At the beginning of your upkeep, you may pay {1}. If you do, untap Brass Gnat.
+
+Brass Man
+1
+Artifact Creature Construct
+no text
+1/3
+CARDNAME doesn't untap during your untap step.
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/1:ControllerUpkeep:At the beginning of your upkeep, you may pay {1}. If you do, untap Brass Man.
+
+Goblin Dirigible
+6
+Artifact Creature Construct
+no text
+4/4
+Flying
+CARDNAME doesn't untap during your untap step.
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/4:ControllerUpkeep:At the beginning of your upkeep, you may pay {4}. If you do, untap Goblin Dirigible.
+
+Ajani's Mantra
+1 W
+Enchantment
+no text
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may gain 1 life.
+
+Tablet of Epityr
+1
+Artifact  
+no text
+WheneverKeyword:PermanentIntoGraveyard:Type/Artifact:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:PayMana/1:Initiator - OwnedByController:Whenever an artifact you control is put into a graveyard from the battlefield, you may pay {1}. If you do, you gain 1 life.
+
+Kami of Tattered Shoji
+4 W
+Creature Spirit 
+no text
+2/5
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:KeywordPumpEOT/Flying:Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Spirit or Arcane spell, Kami of Tattered Shoji gains flying until end of turn.
+
+Indebted Samurai
+3 W
+Creature Human Samurai
+no text
+2/3
+Bushido 1
+WheneverKeyword:PermanentIntoGraveyard:Type/Samurai:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a Samurai you control is put into a graveyard from the battlefield, you may put a +1/+1 counter on Indebted Samurai.
+
+Scrapheap
+3
+Artifact  
+no text
+WheneverKeyword:PermanentIntoGraveyard:OneTypeOfMany/Artifact/Enchantment:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:No_Condition:Initiator - OwnedByController:Whenever an artifact or enchantment is put into your graveyard from the battlefield, you gain 1 life.
+
+Arcbound Crusher
+4
+Artifact Creature Juggernaut
+no text
+0/0
+Trample
+Modular 1
+WheneverKeyword:EntersBattleField:Type/Artifact:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another artifact enters the battlefield, put a +1/+1 counter on Arcbound Crusher.
+
 AEther Flash
 2 R R
 Enchantment

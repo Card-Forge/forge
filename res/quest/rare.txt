@@ -712,6 +712,7 @@ Scalpelexis
 Scarblade Elite
 Scepter of Insight
 Scion of Oona
+Scrapheap
 Scrubland
 Scute Mob
 Sea Gate Loremaster
