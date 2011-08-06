@@ -100,8 +100,6 @@ public class GameAction {
         runParams.put("Destination", zone.getZoneName());
         AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
 
-
-
         return c;
     }
     
@@ -199,7 +197,7 @@ public class GameAction {
 		c = moveTo(grave, c);
 		
 		//Recover keyword
-		if(c.isType("Creature") && AllZoneUtil.isCardInPlay(c))
+		if(c.isType("Creature") && origZone.is(Constant.Zone.Battlefield))
 		{
 			for(final Card recoverable : grave.getCards())
 		    {
@@ -222,6 +220,16 @@ public class GameAction {
 							return SD.toString();
 						}
 					};
+
+                    Command notPaid = new Command() {
+                        public void execute()
+                        {
+                            AllZone.GameAction.exile(recoverable);
+                        }
+                    };
+
+                    abRecover.setCancelCommand(notPaid);
+                    abRecover.setTrigger(true);
 								
 		    		String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover")).split(":")[1];
 		    		Cost abCost = new Cost(recoverCost,recoverable.getName(),false);
@@ -248,16 +256,18 @@ public class GameAction {
 		    					
 		    		if(shouldRecoverForHuman)
 		    		{    						
-		    			AllZone.GameAction.playSpellAbility(abRecover);
+		    			AllZone.Stack.addSimultaneousStackEntry(abRecover);
+		    			//AllZone.GameAction.playSpellAbility(abRecover);
 		    		}
 		    		else if(shouldRecoverForAI)
 		    		{
-		    			ComputerUtil.playStack(abRecover);
+                        AllZone.Stack.addSimultaneousStackEntry(abRecover);
+		    			//ComputerUtil.playStack(abRecover);
 		    		}
 
 		    		if(!grave.hasChanged()) //If the controller declined Recovery or didn't pay the cost, exile the recoverable
 		    		{
-		    			AllZone.GameAction.exile(recoverable);
+
 		    		}
 		    	}
 		    }
