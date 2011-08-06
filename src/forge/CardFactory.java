@@ -466,6 +466,16 @@ public class CardFactory implements NewConstants {
                 if(ptk.length == 3) // power/toughness/keyword
                 Keyword[0] = ptk[2];
                 
+                String dK = Keyword[0];
+                if (Keyword[0].contains(" & "))
+                {
+                	int amp = Keyword[0].lastIndexOf("&");
+                	StringBuffer sbk = new StringBuffer(Keyword[0]);
+                	sbk.replace(amp, amp + 1, "and");
+                	dK = sbk.toString();
+                	dK = dK.replace(" & ", ", ");
+                }
+                
                 final String DrawBack[] = {"none"};
                 final String spDesc[] = {"none"};
                 final String stDesc[] = {"none"};
@@ -505,7 +515,7 @@ public class CardFactory implements NewConstants {
                         sbD.append(" gains ");
                     }
                     
-                    sbD.append(Keyword[0]);
+                    sbD.append(dK);
                     sbD.append(" until end of turn.");
                 }
                 if((AttackX[0].equals("none") && !(NumAttack[0] == -1138))
@@ -531,7 +541,7 @@ public class CardFactory implements NewConstants {
                     
                     sbD.append(Math.abs(NumDefense[0]));
                     sbD.append(" and gains ");
-                    sbD.append(Keyword[0]);
+                    sbD.append(dK);
                     sbD.append(" until end of turn.");
                 }
                 //if (!sbD.toString().isEmpty())
@@ -587,9 +597,9 @@ public class CardFactory implements NewConstants {
                                 setTargetCard(card);
                                 
                                 if((card.getNetDefense() + defense > 0) && (!card.getKeyword().contains(keyword))) if(card.hasSickness()
-                                        && keyword.equals("Haste")) return true;
-                                else if((card.hasSickness() && (!keyword.equals("Haste")))
-                                        || ((!card.hasSickness()) && keyword.equals("Haste"))) return false;
+                                        && keyword.contains("Haste")) return true;
+                                else if((card.hasSickness() && (!keyword.contains("Haste")))
+                                        || ((!card.hasSickness()) && keyword.contains("Haste"))) return false;
                                 else {
                                     Random r = new Random();
                                     if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) return CardFactoryUtil.AI_doesCreatureAttack(card);
@@ -630,13 +640,13 @@ public class CardFactory implements NewConstants {
                             list = list.filter(new CardListFilter() {
                                 public boolean addCard(Card c) {
                                     if(c.isCreature()) {
-                                        if(c.hasSickness() && keyword.equals("Haste")) // AI_doesCreatureAttack would have prevented the effect from granting haste, because it assumes the creature would already have it
+                                        if(c.hasSickness() && keyword.contains("Haste")) // AI_doesCreatureAttack would have prevented the effect from granting haste, because it assumes the creature would already have it
                                         return CardFactoryUtil.canTarget(card, c);
                                         
                                         return (CardFactoryUtil.AI_doesCreatureAttack(c))
                                                 && (CardFactoryUtil.canTarget(card, c))
-                                                && (!keyword.equals("none") && !c.getKeyword().contains(keyword))
-                                                && (!(!c.hasSickness()) && keyword.equals("Haste")); // if creature doesn't have sickness, the haste keyword won't help
+                                                && (!keyword.equals("none") && !c.hasAnyKeyword(keyword.split(" & ")))
+                                                && (!(!c.hasSickness()) && keyword.contains("Haste")); // if creature doesn't have sickness, the haste keyword won't help
                                     }
                                     return false;
                                 }
@@ -663,7 +673,12 @@ public class CardFactory implements NewConstants {
                                         if(AllZone.GameAction.isCardInPlay(creature[0])) {
                                             creature[0].addTempAttackBoost(-1 * a);
                                             creature[0].addTempDefenseBoost(-1 * d);
-                                            if(!Keyword[0].equals("none")) creature[0].removeExtrinsicKeyword(Keyword[0]);
+                                            if(!Keyword[0].equals("none"))
+                                            {
+                                            	String[] kws = Keyword[0].split(" & ");
+                                            	for (int i=0; i<kws.length; i++)
+                                            		creature[0].removeExtrinsicKeyword(kws[i]);
+                                            }
                                         }
                                         
                                     }
@@ -671,7 +686,12 @@ public class CardFactory implements NewConstants {
                                 
                                 creature[0].addTempAttackBoost(a);
                                 creature[0].addTempDefenseBoost(d);
-                                if(!Keyword[0].equals("none")) creature[0].addExtrinsicKeyword(Keyword[0]);
+                                if(!Keyword[0].equals("none")) 
+                                {
+                                	String[] kws = Keyword[0].split(" & ");
+                                	for (int i=0; i<kws.length; i++)
+                                		creature[0].addExtrinsicKeyword(kws[i]);
+                                }
                                 
                                 card.setAbilityUsed(card.getAbilityUsed() + 1);
                                 AllZone.EndOfTurn.addUntil(EOT);
@@ -753,18 +773,18 @@ public class CardFactory implements NewConstants {
                             else return false;
                         }
                         
-                        CardList getCreatures() {
+                        private CardList getCreatures() {
                             CardList list = new CardList(AllZone.Computer_Play.getCards());
                             list = list.filter(new CardListFilter() {
                                 public boolean addCard(Card c) {
                                     if(c.isCreature()) {
-                                        if(c.hasSickness() && keyword.equals("Haste")) return CardFactoryUtil.canTarget(
-                                                card, c);
+                                        if(c.hasSickness() && keyword.contains("Haste")) 
+                                        	return CardFactoryUtil.canTarget(card, c);
                                         
                                         return (CardFactoryUtil.AI_doesCreatureAttack(c))
                                                 && (CardFactoryUtil.canTarget(card, c))
-                                                && (!keyword.equals("none") && !c.getKeyword().contains(keyword))
-                                                && (!(!c.hasSickness()) && keyword.equals("Haste"));
+                                                && (!keyword.equals("none") && !c.hasAnyKeyword(keyword.split(" & ")))
+                                                && (!(!c.hasSickness()) && keyword.contains("Haste"));
                                     }
                                     return false;
                                 }
@@ -791,14 +811,24 @@ public class CardFactory implements NewConstants {
                                         if(AllZone.GameAction.isCardInPlay(creature[0])) {
                                             creature[0].addTempAttackBoost(-1 * a);
                                             creature[0].addTempDefenseBoost(-1 * d);
-                                            if(!Keyword[0].equals("none")) creature[0].removeExtrinsicKeyword(Keyword[0]);
+                                            if(!Keyword[0].equals("none"))
+                                            {
+                                            	String[] kws = Keyword[0].split(" & ");
+                                            	for (int i=0; i<kws.length; i++)
+                                            		creature[0].removeExtrinsicKeyword(kws[i]);
+                                            }
                                         }
                                     }
                                 };
                                 
                                 creature[0].addTempAttackBoost(a);
                                 creature[0].addTempDefenseBoost(d);
-                                if(!Keyword[0].equals("none")) creature[0].addExtrinsicKeyword(Keyword[0]);
+                                if(!Keyword[0].equals("none"))
+                                {
+                                	String[] kws = Keyword[0].split(" & ");
+                                	for (int i=0; i<kws.length; i++)
+                                		creature[0].addExtrinsicKeyword(kws[i]);
+                                }
                                 
                                 AllZone.EndOfTurn.addUntil(EOT);
                                 
@@ -820,7 +850,6 @@ public class CardFactory implements NewConstants {
                     
                     card.addSpellAbility(ability);
                 }
-                
             }
         }//while
         
