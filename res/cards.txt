@@ -1,3 +1,18 @@
+Cancel
+1 U U
+Instant
+Counter target spell.
+spCounter:Spell:None:Graveyard:None
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cancel.jpg
+
+Dream Fracture
+1 U U
+Instant
+Counter target spell. Its controller draws a card. Draw a card.
+spCounter:Spell:None:Graveyard:My-Draw(1) CC-Draw(1)
+SVar:Rarity:Uncommon
+
 Hallowed Burial
 3 W W
 Sorcery
@@ -1493,13 +1508,6 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/umara_raptor.jpg
 
-Dream Fracture
-1 U U
-Instant
-Counter target spell. Its controller draws a card. Draw a card.
-spCounter:Spell:None:Graveyard:My-Draw(1) Opp-Draw(1)
-SVar:Rarity:Uncommon
-
 Absorb
 W U U
 Instant
@@ -1544,14 +1552,6 @@ Instant
 Counter target activated ability. Draw a card.
 spCounter:Ability:None:None:My-Draw(1)
 SVar:Rarity:Rare
-
-Cancel
-1 U U
-Instant
-Counter target spell.
-spCounter:Spell::Graveyard:None
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cancel.jpg
 
 Confound
 1 U
