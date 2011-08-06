@@ -22,7 +22,8 @@ public class Spell_Permanent extends Spell {
     @Override
     public boolean canPlay() {
         return super.canPlay()
-                || (getSourceCard().getKeyword().contains("Flash") && !AllZone.GameAction.isCardInPlay(getSourceCard()));
+                || (getSourceCard().getKeyword().contains("Flash") && !AllZone.GameAction.isCardInPlay(getSourceCard())
+                    && !getSourceCard().isUnCastable());
     }
     
     @Override
