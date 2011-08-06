@@ -170,6 +170,10 @@ public class Card extends MyObservable
 	 return doubleStrike || getKeyword().contains("Double Strike");
   }
   
+  public boolean hasSecondStrike(){
+	  return !hasFirstStrike() || (hasFirstStrike() && hasDoubleStrike());
+  };
+  
   public void addCounter(Counters counterName, int n)
   {
 	  if(counters.containsKey(counterName))

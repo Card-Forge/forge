@@ -65,8 +65,7 @@ private void playerDamage(PlayerLife p)
     for(int j = 0; j < unblocked.size(); j++)
     {
        //System.out.println("Unblocked Creature: " +unblocked.get(j).getName());
-    	if (!unblocked.getCard(j).hasFirstStrike() ||
-       		 (unblocked.getCard(j).hasFirstStrike() && unblocked.getCard(j).hasDoubleStrike())) {
+    	if (unblocked.getCard(j).hasSecondStrike()) {
     		GameActionUtil.executePlayerCombatDamageEffects(unblocked.get(j));       
     	}
 
@@ -147,8 +146,7 @@ private void playerDamage(PlayerLife p)
     	//this shouldn't trigger if creature has first strike, only if it also has double strike
     	
     	
-    	if (!blockers.getCard(i).hasFirstStrike() ||
-       		 (blockers.getCard(i).hasFirstStrike() && blockers.getCard(i).hasDoubleStrike()))
+    	if (blockers.get(i).hasSecondStrike())
         {
     		
     		if (blockers.getCard(i).getKeyword().contains("Lifelink"))
@@ -201,8 +199,7 @@ private void playerDamage(PlayerLife p)
     }
     for (int i=0; i < pwBlockers.size(); i++){
        //System.out.println("blocker #" + i + ": " + blockers.getCard(i).getName() +" " + blockers.getCard(i).getAttack());
-    	if ( (!pwBlockers.getCard(i).hasFirstStrike() || 
-     		   (pwBlockers.getCard(i).hasFirstStrike() && pwBlockers.getCard(i).hasDoubleStrike()) ) )
+    	if ( (pwBlockers.getCard(i).hasSecondStrike()) )
         {
     	  if (pwBlockers.getCard(i).getKeyword().contains("Lifelink"))
     		  GameActionUtil.executeLifeLinkEffects(pwBlockers.getCard(i));

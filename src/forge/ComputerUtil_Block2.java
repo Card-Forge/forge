@@ -218,9 +218,7 @@ public class ComputerUtil_Block2
       for(int i = 0; i < attackers.size(); i++)
       {
 
-         boolean doubleStrike = false;
-         if(attackers.get(i).hasDoubleStrike() || attackers.get(i).getKeyword().contains("Double Strike"))
-         doubleStrike = true;
+         boolean doubleStrike = attackers.get(i).hasDoubleStrike();
 
          //the computer blocks 50% of the time or if the computer would lose the game
          shouldBlock = random.nextBoolean() || blockersLife <= sumUnblockedAttackers(combat);
@@ -316,7 +314,7 @@ public class ComputerUtil_Block2
       if(CombatUtil.isDoranInPlay())
          n = c.getNetDefense();
 
-      if(c.getKeyword().contains("Double Strike"))
+      if(c.hasDoubleStrike())
          n *= 2;
 
       return n;
