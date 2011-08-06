@@ -4,7 +4,7 @@ Types:Creature Troll
 Text:no text
 PT:1/1
 A:AB$Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
-T:Mode$ AttackerBlocked | CardValid$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn.
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 1 | NumDef$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pygmy_troll.jpg
