@@ -34893,6 +34893,7 @@ no text
 1/1
 abGainLife T:X:You gain 1 life for each Elf on the battlefield.:Wellwisher - you gain life
 SVar:X:Count$TypeOnBattlefield.Elf
+SVar:BuffedBy:Elf
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39497.jpg
 
@@ -35480,6 +35481,7 @@ no cost
 Land
 no text
 tap: add 1
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_lodge.jpg
 
@@ -35525,6 +35527,7 @@ Wistful Thinking
 Sorcery
 no text
 spDrawCardsTgt:2:Drawback$TgtDiscard/4:Target player draws two cards, then discards four cards.:Wistful Thinking - Target player draws 2 cards, then discards 4 cards.
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wistful_thinking.jpg
 
@@ -35533,6 +35536,7 @@ G W U B
 Creature Nephilim
 Whenever you play a spell, you may put two +1/+1 counters on Witch-Maw Nephilim. Whenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
 1/1
+SVar:BuffedBy:Spell
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_maw_nephilim.jpg
 
