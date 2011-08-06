@@ -1,0 +1,9 @@
+Name:Lat-Nam's Legacy
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$ Draw | Cost$ Discard<1/Card> | NumCards$ 2 | NextUpkeep$ True | Shuffle$ True | SpellDescription$ Shuffle a card from your hand into your library. If you do, draw two cards at the beginning of the next turn's upkeep.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lat_nams_legacy.jpg
+End
