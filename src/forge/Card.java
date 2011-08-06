@@ -2622,7 +2622,7 @@ public class Card extends MyObservable {
     		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME.");
     	}
     	reduce = reduce || getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.");
-    	reduce = reduce || getKeyword().contains("Prevent all damage that would be dealt to or dealt by CARDNAME.");
+    	reduce = reduce || getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.");
     	reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.");
 		reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME.");
     	return reduce;
@@ -2662,6 +2662,7 @@ public class Card extends MyObservable {
         	AllZone.Stack.add(ability2);
         }
         
+        System.out.println("Adding " + damageToAdd + " damage to " + getName());
         Log.debug("Adding " + damageToAdd + " damage to " + getName());
         if(AllZoneUtil.isCardInPlay(this) && CardFactoryUtil.canDamage(source, this)) {
         	damage += damageToAdd;

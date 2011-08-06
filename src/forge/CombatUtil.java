@@ -458,41 +458,17 @@ public class CombatUtil {
             
         }//flanking
         
-        if(attacker.hasStartOfKeyword("Prevent all combat damage that would be dealt to")) return false;
+        if(attacker.hasStartOfKeyword("Prevent all combat damage that would be dealt to") ||
+        		attacker.hasStartOfKeyword("Prevent all damage that would be dealt to")) return false;
         if(defender.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.") ||
-        		defender.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME")) return false;
+        		defender.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME") ||
+        		defender.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.") ||
+        		defender.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME")) return false;
         
         if(attacker.getKeyword().contains("Indestructible") && 
         		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
         
         if(!CardFactoryUtil.canDamage(defender, attacker)) return false;
-        
-        /* Checked by the function above
-        //this usually doesn't happen, unless the attacker got pro {color} after being blocked, or the defender became {color}
-        if(attacker.getKeyword().contains("Protection from white")
-                && defender.isWhite()) return false;
-        if(attacker.getKeyword().contains("Protection from blue")
-                && defender.isBlue()) return false;
-        if(attacker.getKeyword().contains("Protection from black")
-                && defender.isBlack()) return false;
-        if(attacker.getKeyword().contains("Protection from red")
-                && defender.isRed()) return false;
-        if(attacker.getKeyword().contains("Protection from green")
-                && defender.isGreen()) return false;
-        
-        if(attacker.getKeyword().contains("Protection from artifacts") && defender.isArtifact()) return false;
-        
-        if(attacker.getKeyword().contains("Protection from creatures")) return false;
-        
-        if(attacker.getKeyword().contains("Protection from Dragons")
-                && (defender.getType().contains("Dragon") || defender.getKeyword().contains("Changeling"))) return false;
-        if(attacker.getKeyword().contains("Protection from Demons")
-                && (defender.getType().contains("Demon") || defender.getKeyword().contains("Changeling"))) return false;
-        if(attacker.getKeyword().contains("Protection from Goblins")
-                && (defender.getType().contains("Goblin") || defender.getKeyword().contains("Changeling"))) return false;
-        if(attacker.getKeyword().contains("Protection from Clerics")
-                && (defender.getType().contains("Cleric") || defender.getKeyword().contains("Changeling"))) return false;
-        */
         
         int defBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(defender);
         int attBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(attacker);
@@ -590,37 +566,14 @@ public class CombatUtil {
     		if(defender.isValidCard(restrictions)) return true;
         }
         
-        if(defender.hasStartOfKeyword("Prevent all combat damage that would be dealt to")) return false;
+        if(defender.hasStartOfKeyword("Prevent all combat damage that would be dealt to") ||
+        		defender.hasStartOfKeyword("Prevent all damage that would be dealt to")) return false;
         if(attacker.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.") ||
-        		attacker.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME")) return false;
+        		attacker.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME") ||
+        		attacker.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.") ||
+        		attacker.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME")) return false;
         
         if(!CardFactoryUtil.canDamage(attacker,defender)) return false;
-        
-        /* Checked by the function above
-        if(defender.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
-        		&& attacker.isCreature() && attacker.isArtifact()) return false;
-        if(defender.getKeyword().contains("Protection from white")
-                && attacker.isWhite()) return false;
-        if(defender.getKeyword().contains("Protection from blue")
-                && attacker.isBlue()) return false;
-        if(defender.getKeyword().contains("Protection from black")
-                && attacker.isBlack()) return false;
-        if(defender.getKeyword().contains("Protection from red")
-                && attacker.isRed()) return false;
-        if(defender.getKeyword().contains("Protection from green")
-                && attacker.isGreen()) return false;
-        
-        if(defender.getKeyword().contains("Protection from artifacts") && attacker.isArtifact()) return false;
-        
-        if(defender.getKeyword().contains("Protection from creatures")) return false;
-        
-        if(defender.getKeyword().contains("Protection from Dragons")
-                && (attacker.getType().contains("Dragon") || attacker.getKeyword().contains("Changeling"))) return false;
-        if(defender.getKeyword().contains("Protection from Demons")
-                && (attacker.getType().contains("Demon") || attacker.getKeyword().contains("Changeling"))) return false;
-        if(defender.getKeyword().contains("Protection from Goblins")
-                && (attacker.getType().contains("Goblin") || attacker.getKeyword().contains("Changeling"))) return false;
-        */
         
         int defBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(defender);
         int attBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(attacker);
