@@ -6842,7 +6842,92 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Wall of Kelp - Put a 0/1 blue Kelp Wall creature token with defender into play");
             ability.setBeforePayMana(new Input_PayManaCost(ability));
         }//*************** END ************ END **************************
-        
+ 
+        //*************** START *********** START **************************
+        if(cardName.equals("Mayael the Anima")) {
+            final Ability_Tap ability = new Ability_Tap(card, "3 R G W") {
+                
+                private static final long serialVersionUID = -9076784333448226913L;
+                
+				@Override
+                public void resolve() {
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    CardList Library = new CardList(lib.getCards());
+                    int Count = 5;
+                    if(Library.size() < 5) Count = Library.size();
+                    CardList TopCards = new CardList();
+                    
+                    for(int i = 0; i < Count; i++) TopCards.add(Library.get(i));
+                    CardList TopCreatures = TopCards;
+                    if(card.getController().equals(Constant.Player.Human)) {
+                        if(TopCards.size()  > 0) {
+						@SuppressWarnings("unused")
+						Object o = AllZone.Display.getChoice(
+                                "Look at the top five cards: ", TopCards.toArray());
+                        TopCreatures = TopCreatures.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                if(c.isCreature() && c.getNetAttack() >= 5) return true;
+                                else return false;
+                            }
+                        });
+                        if(TopCreatures.size() > 0) {
+                        Object o2 = AllZone.Display.getChoiceOptional(
+                                "Put a creature with a power 5 or greater onto the battlefield: ", TopCreatures.toArray());
+                        if(o2 != null) {
+                            Card c = (Card) o2;
+                            lib.remove(c);
+                            play.add(c);
+                            TopCards.remove(c);
+                        }
+                        } else JOptionPane.showMessageDialog(null, "No creatures in top 5 cards with a power greater than 5.", "", JOptionPane.INFORMATION_MESSAGE); 
+                        
+                        Count = TopCards.size();
+                    	for(int i = 0; i < Count; i++) {   
+                            AllZone.Display.showMessage("Select a card to put " + (Count - i) + " from the bottom of your library: "  + (Count - i) + " Choices to go.");
+                            ButtonUtil.enableOnlyCancel();
+                            Object check = AllZone.Display.getChoice("Select a card: ", TopCards.toArray());   
+                            AllZone.GameAction.moveTo(lib, (Card) check);
+                            TopCards.remove((Card) check);
+                        	}
+                        }  else JOptionPane.showMessageDialog(null, "No more cards in library.", "", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                        else {
+                        TopCreatures = TopCreatures.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                            	CardList Compplay = new CardList();
+                            	Compplay.addAll(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+                            	Compplay = Compplay.getName(c.getName());
+                                if(c.isCreature() && c.getNetAttack() >= 5 && (Compplay.size() == 0 && c.getType().contains("Legendary"))) return true;
+                                else return false;
+                            }
+                        });
+                        if(TopCreatures.size() > 0) {
+                        	Card c = CardFactoryUtil.AI_getBestCreature(TopCreatures);
+                            lib.remove(c);
+                            play.add(c);
+                            TopCards.remove(c);
+                        Count = TopCards.size();
+                    	for(int i = 0; i < Count; i++) {
+                    		Card Remove_Card = TopCards.get(i);
+                            AllZone.GameAction.moveTo(lib, Remove_Card);
+                        	}
+                    } 
+                        
+                    }
+                }              
+                @Override
+                public boolean canPlayAI() {
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+                    CardList Library = new CardList(lib.getCards());
+                    return Library.size() > 0 && super.canPlay();
+                }
+            };
+                     
+            card.addSpellAbility(ability);
+            ability.setDescription("3 R G W, Tap: Look at the top five cards of your library. You may put a creature card with power 5 or greater from among them onto the battlefield. Put the rest on the bottom of your library in any order.");
+            ability.setStackDescription(card + " - Looks at the top five cards of his/her library. That player may put a creature card with power 5 or greater from among them onto the battlefield. The player then puts the rest on the bottom of his/her library in any order.");           
+        }//*************** END ************ END ************************** 
 
         //*************** START *********** START **************************
         else if(cardName.equals("Vedalken Mastermind")) {
