@@ -5201,12 +5201,12 @@ public class CardFactory_Creatures {
       		  public boolean canPlayAI()
       		  {
       			 return false;
-      			  /**
+      			  /*
       			CardList Clist = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards()).getType("Creature"); 
       			CardList Hlist = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards()).getType("Creature");
-      			return((Clist.size() - Hlist.size() * ComputerUtil.getAvailableMana().size() > AllZone.GameAction.getPlayerLife(AllZone.HumanPlayer).getLife())
+      			return((Clist.size() - Hlist.size() * ComputerUtil.getAvailableMana().size() > AllZone.HumanPlayer.getLife())
       					&& AllZone.Phase.getPhase().equals(Constant.Phase.Main1));
-      					**/
+      					*/
       					
       		  }
       	  };

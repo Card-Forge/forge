@@ -2415,7 +2415,6 @@ public class CardFactory_Instants {
 
 				@Override
                 public boolean canPlayAI() {
-                    //PlayerLife compLife = AllZone.GameAction.getPlayerLife(AllZone.ComputerPlayer);
                     int life = AllZone.ComputerPlayer.getLife();
                     if(4 < AllZone.Phase.getTurn() && AllZone.Computer_Library.size() > 0 && life >= 4) return true;
                     else return false;

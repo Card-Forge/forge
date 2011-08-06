@@ -43,12 +43,6 @@ public class AllZone implements NewConstants {
     public static Combat Combat   = new Combat();
     public static Combat pwCombat = new Combat();//for Planeswalker combat
 
-    //public static PlayerLife Human_Life    = new PlayerLife(AllZone.HumanPlayer);
-    //public static PlayerLife ComputerPlayer = new PlayerLife(AllZone.ComputerPlayer);
-    
-    //public static PlayerPoisonCounter Human_PoisonCounter = new PlayerPoisonCounter();
-    //public static PlayerPoisonCounter ComputerPlayer = new PlayerPoisonCounter();
-
     //Human_Play, Computer_Play is different because Card.comesIntoPlay() is called when a card is added by PlayerZone.add(Card)
     public final static PlayerZone Human_Play      = new PlayerZone_ComesIntoPlay(Constant.Zone.Play, AllZone.HumanPlayer);
     public final static PlayerZone Human_Hand      = new DefaultPlayerZone(Constant.Zone.Hand      , AllZone.HumanPlayer);

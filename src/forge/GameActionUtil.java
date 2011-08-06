@@ -1637,7 +1637,6 @@ public class GameActionUtil {
 								}// if choice yes
 								else target = AllZone.HumanPlayer; // check for target of spell/abilities should be here
 							} else target = AllZone.HumanPlayer; // check for target of spell/abilities should be here
-							//AllZone.GameAction.getPlayerLife(target).loseLife(1,card);
 							target.loseLife(1, card);
 							card.getController().gainLife(1, card);
 
@@ -6776,7 +6775,6 @@ public class GameActionUtil {
 				+ "Turn: " + AllZone.Phase.getTurn());
 		if(libraryZone.size() == 0 && AllZone.Phase.getPhase().equals(Constant.Phase.Untap)
 				&& AllZone.Phase.getTurn() > 1) {
-			//PlayerLife life = AllZone.GameAction.getPlayerLife(player);
 			player.setLife(0, null);
 			// TODO display this somehow!!!
 		}// if
@@ -9333,11 +9331,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Convalescence() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		//final PlayerLife pLife = AllZone.GameAction.getPlayerLife(player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Convalescence");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Convalescence");
 
 		for(int i = 0; i < list.size(); i++) {
 			final Card source = list.get(i);
@@ -9846,7 +9840,6 @@ public class GameActionUtil {
 		 * At the beginning of your upkeep, if you have exactly 1 life, you win the game.
 		 */
 		final Player player = AllZone.Phase.getPlayerTurn();
-		//PlayerLife life = AllZone.GameAction.getPlayerLife(player);
 		
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Near-Death Experience");
 

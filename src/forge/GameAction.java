@@ -1457,7 +1457,6 @@ public class GameAction {
                     			public void execute() {
                     				if(Whenever_Go(F_card,F_k) == true) 
                     					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
-    			          				//PlayerLife life = AllZone.GameAction.getPlayerLife(F_TargetPlayer[F_Target]);
     			        				if(F_Amount[0] > -1) 
     			        					F_TargetPlayer[F_Target].gainLife(F_Amount[0], F_card);
     			        				else 

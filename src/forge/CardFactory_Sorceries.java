@@ -944,8 +944,7 @@ public class CardFactory_Sorceries {
 				} // Resolve
 
 				public boolean canPlayAI() {
-                    Player opponent = card.getController().getOpponent();
-                    //PlayerLife target = AllZone.GameAction.getPlayerLife(opponent);	
+                    Player opponent = card.getController().getOpponent();	
                     PlayerZone Lib = AllZone.getZone(Constant.Zone.Library, card.getController());
                     CardList Deck = new CardList();
                     Deck.addAll(Lib.getCards()); 
@@ -3548,7 +3547,6 @@ public class CardFactory_Sorceries {
 
 				@Override
                 public boolean canPlayAI() {
-                    //PlayerLife compLife = AllZone.GameAction.getPlayerLife(AllZone.ComputerPlayer);
                     int life = AllZone.ComputerPlayer.getLife();
                     if(4 < AllZone.Phase.getTurn() && AllZone.Computer_Library.size() > 0 && life >= 4) return true;
                     else return false;
@@ -3635,8 +3633,6 @@ public class CardFactory_Sorceries {
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
                     CardList libCards = new CardList(library.getCards());
                     int lifeGain = libCards.size();
-                    
-                    //PlayerLife compLife = AllZone.GameAction.getPlayerLife(AllZone.ComputerPlayer);
                     
                     if(lifeGain > AllZone.ComputerPlayer.getLife()) return true;
                     else return false;
@@ -5836,8 +5832,6 @@ public class CardFactory_Sorceries {
 
         		@Override
         		public boolean canPlayAI() {
-        			//PlayerLife compLife = AllZone.GameAction.getPlayerLife(AllZone.ComputerPlayer);
-        			//PlayerLife humanLife = AllZone.GameAction.getPlayerLife(AllZone.HumanPlayer);
         			CardList human = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
         			CardList comp = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer);
         			
