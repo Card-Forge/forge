@@ -1,3 +1,125 @@
+Aluren
+2 G G
+Enchantment
+no text
+SVar:RemAIDeck:True
+
+Conspiracy
+3 B B
+Enchantment
+As Conspiracy comes into play, choose a creature type. Creature cards you own that aren't in play, creature spells you control, and creatures you control are the chosen type.
+SVar:RemAIDeck:True
+
+Crucible of Fire
+3 R
+Enchantment
+Dragon creatures you control get +3/+3.
+SVar:RemAIDeck:True
+
+Enchantress's Presence
+2 G
+Enchantment
+Whenever you play an enchantment spell, draw a card.
+SVar:RemAIDeck:True
+
+Glimmervoid
+no cost
+Land
+At the beginning of the end step, if you control no artifacts, sacrifice CARDNAME
+tap: add W
+tap: add B
+tap: add U
+tap: add R
+tap: add G
+SVar:RemAIDeck:True
+
+Hatching Plans
+1 U
+Enchantment
+When Hatching Plans is put into a graveyard from play, draw three cards.
+SVar:RemAIDeck:True
+
+Magus of the Moat
+2 W W
+Creature Human Wizard
+Creatures without flying can't attack.
+0/3
+SVar:RemAIDeck:True
+
+Mesa Enchantress
+1 W W
+Creature Human Druid
+Whenever you play an enchantment spell, you may draw a card.
+0/2
+SVar:RemAIDeck:True
+
+Moat
+2 W W
+Enchantment
+Creatures without flying can't attack.
+SVar:RemAIDeck:True
+
+Parallel Evolution
+3 G G
+Sorcery
+no text
+SVar:RemAIDeck:True
+
+Relentless Rats
+1 B B
+Creature Rat
+Relentless Rats gets +1/+1 for each other creature in play named Relentless Rats. A deck can have any number of cards named Relentless Rats.
+2/2
+SVar:RemAIDeck:True
+
+Sensation Gorger
+1 R R
+Creature Goblin Shaman
+At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Sensation Gorger, you may reveal it. If you do, each player discards his or her hand and draws four cards.
+2/2
+SVar:RemAIDeck:True
+
+Soultether Golem
+2
+Artifact Creature Golem
+no text
+3/3
+WheneverKeyword:EntersBattleField:Type/Creature:Play:CustomCounter.TIME/1:Self:ASAP:No_Condition:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature enters the battlefield under your control, put a time counter on Soultether Golem.
+Vanishing:1
+SVar:RemAIDeck:True
+
+Thran Quarry
+no cost
+Land
+At the beginning of the end step, if you control no creatures, sacrifice CARDNAME
+tap: add W
+tap: add B
+tap: add U
+tap: add R
+tap: add G
+SVar:RemAIDeck:True
+
+Time Elemental
+2 U
+Creature Elemental
+When Time Elemental attacks or blocks, at end of combat, sacrifice it and it deals 5 damage to you.  2 U U, tap: Return target permanent that isn't enchanted to its owner's hand.
+0/2
+SVar:RemAIDeck:True
+
+Vedalken Archmage
+2 U U
+Creature Vedalken Wizard
+Whenever you play an artifact spell, draw a card.
+0/2
+SVar:RemAIDeck:True
+
+Verduran Enchantress
+1 G G
+Creature Human Druid
+Whenever you play an enchantment spell, you may draw a card.
+0/2
+SVar:RemAIDeck:True
+
 Admonition Angel
 3 W W W
 Creature Angel
@@ -405,11 +527,6 @@ no text
 Defender
 Protection from artifacts
 WheneverKeyword:CastSpell/Opponent:Type/Artifact:Play:MakeToken-Insect-G-1-1-None-/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever an opponent casts an artifact spell, you may put a 1/1 green Insect creature token onto the battlefield.
-
-Parallel Evolution
-3 G G
-Sorcery
-no text
 
 Quicksilver Amulet
 4
@@ -1049,14 +1166,6 @@ Snow Creature Wolverine Beast
 no text
 1/1
 WheneverKeyword:BecomesBlocked:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:Yes_No:SingleTarget:Whenever Karplusan Wolverine becomes blocked, you may have it deal 1 damage to target creature or player.
-
-Soultether Golem
-2
-Artifact Creature Golem
-no text
-3/3
-WheneverKeyword:EntersBattleField:Type/Creature:Play:CustomCounter.TIME/1:Self:ASAP:No_Condition:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature enters the battlefield under your control, put a time counter on Soultether Golem.
-Vanishing:1
 
 Necrogenesis
 B G
@@ -3309,26 +3418,6 @@ Land
 CARDNAME enters the battlefield tapped. When CARDNAME enters the battlefield, exile target player's graveyard.
 tap: add B
 
-Thran Quarry
-no cost
-Land
-At the beginning of the end step, if you control no creatures, sacrifice CARDNAME
-tap: add W
-tap: add B
-tap: add U
-tap: add R
-tap: add G
-
-Glimmervoid
-no cost
-Land
-At the beginning of the end step, if you control no artifacts, sacrifice CARDNAME
-tap: add W
-tap: add B
-tap: add U
-tap: add R
-tap: add G
-
 Nature's Lore
 1 G
 Sorcery
@@ -3432,11 +3521,6 @@ Creature Cat
 no text
 5/4
 At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G
-
-Aluren
-2 G G
-Enchantment
-no text
 
 Coat of Arms
 5
@@ -6176,12 +6260,6 @@ Creature Vampire Shaman
 Sacrifice Vampire Hexmage: Remove all counters from target permanent.
 2/1
 First Strike
-
-Time Elemental
-2 U
-Creature Elemental
-When Time Elemental attacks or blocks, at end of combat, sacrifice it and it deals 5 damage to you.  2 U U, tap: Return target permanent that isn't enchanted to its owner's hand.
-0/2
 
 Old Man of the Sea
 1 U U
@@ -18634,12 +18712,6 @@ Creature Ape
 Kird Ape gets +1/+2 as long as you control a Forest.
 1/1
 
-Mesa Enchantress
-1 W W
-Creature Human Druid
-Whenever you play an enchantment spell, you may draw a card.
-0/2
-
 Knight of the Reliquary
 1 G W
 Creature Human Knight
@@ -18666,11 +18738,6 @@ Creature Bringer
 At the beginning of your upkeep, you may return target artifact card from your graveyard to play.
 5/5
 Trample
-
-Conspiracy
-3 B B
-Enchantment
-As Conspiracy comes into play, choose a creature type. Creature cards you own that aren't in play, creature spells you control, and creatures you control are the chosen type.
 
 Yavimaya Enchantress
 2 G
@@ -18889,11 +18956,6 @@ Creature Rat
 When Ravenous Rats comes into play, target opponent discards a card.
 1/1
 
-Hatching Plans
-1 U
-Enchantment
-When Hatching Plans is put into a graveyard from play, draw three cards.
-
 Corrupt
 5 B
 Sorcery
@@ -18907,17 +18969,6 @@ Creature Archon
 Creatures can't attack you.
 5/6
 Flying
-
-Magus of the Moat
-2 W W
-Creature Human Wizard
-Creatures without flying can't attack.
-0/3
-
-Moat
-2 W W
-Enchantment
-Creatures without flying can't attack.
 
 Sleeper Agent
 B
@@ -20047,17 +20098,6 @@ U
 Sorcery
 Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
 
-Vedalken Archmage
-2 U U
-Creature Vedalken Wizard
-Whenever you play an artifact spell, draw a card.
-0/2
-
-Enchantress's Presence
-2 G
-Enchantment
-Whenever you play an enchantment spell, draw a card.
-
 Reki, the History of Kamigawa
 2 G
 Legendary Creature Human Shaman
@@ -20137,12 +20177,6 @@ Creature Elf Druid
 Whenever you play a Druid spell, you may draw a card. Tap seven untapped Druids you control: Gain control of all lands target player controls.
 3/3
 
-Verduran Enchantress
-1 G G
-Creature Human Druid
-Whenever you play an enchantment spell, you may draw a card.
-0/2
-
 Sol'kanar the Swamp King
 2 U B R
 Legendary Creature Demon
@@ -20162,11 +20196,6 @@ When Stonecloaker comes into play, return a creature you control to its owner's 
 3/2
 Flash
 Flying
-
-Crucible of Fire
-3 R
-Enchantment
-Dragon creatures you control get +3/+3.
 
 Godsire
 4 R G G W
@@ -24648,12 +24677,6 @@ As Watery Grave comes into play, you may pay 2 life.  If you don't, Watery Grave
 tap: add U
 tap: add B
 
-Relentless Rats
-1 B B
-Creature Rat
-Relentless Rats gets +1/+1 for each other creature in play named Relentless Rats. A deck can have any number of cards named Relentless Rats.
-2/2
-
 Eternal Witness
 1 G G
 Creature Human Shaman
@@ -26124,12 +26147,6 @@ Creature Rhino Monk
 no text
 3/4
 Lifelink
-
-Sensation Gorger
-1 R R
-Creature Goblin Shaman
-At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Sensation Gorger, you may reveal it. If you do, each player discards his or her hand and draws four cards.
-2/2
 
 Shivan Wurm
 3 R G
