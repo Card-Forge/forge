@@ -458,4 +458,13 @@ public class AllZoneUtil {
 			return c.isLand();
 		}
 	};
+	
+	public static CardListFilter getCanTargetFilter(final Card source) {
+		CardListFilter canTarget = new CardListFilter() {
+			public boolean addCard(Card c) {
+				return CardFactoryUtil.canTarget(source, c);
+			}
+		};
+		return canTarget;
+	}
 }

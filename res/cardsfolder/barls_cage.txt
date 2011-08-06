@@ -1,0 +1,7 @@
+Name:Barl's Cage
+ManaCost:4
+Types:Artifact
+Text:3: Target creature doesn't untap during its controller's next untap step.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/barls_cage.jpg
+End

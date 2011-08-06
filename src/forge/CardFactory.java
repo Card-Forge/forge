@@ -10508,6 +10508,54 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Creature;Artifact"));
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Barl's Cage")) {
+            final SpellAbility ability = new Ability_Activated(card, "3") {
+				private static final long serialVersionUID = 8941566961041310961L;
+
+				@Override
+                public boolean canPlayAI() {
+                    Card c = getCreature();
+                    if(c == null) return false;
+                    else {
+                        setTargetCard(c);
+                        return true;
+                    }
+                }//canPlayAI()
+                
+                //may return null
+                public Card getCreature() {
+                    CardList tappedCreatures = AllZoneUtil.getCreaturesInPlay();
+                    tappedCreatures = tappedCreatures.filter(AllZoneUtil.tapped);
+                    tappedCreatures = tappedCreatures.filter(AllZoneUtil.getCanTargetFilter(card));
+                    if(tappedCreatures.isEmpty()) return null;
+                    
+                    return CardFactoryUtil.AI_getBestCreature(tappedCreatures);
+                }
+                
+                @Override
+                public void resolve() {
+                	Card target = getTargetCard();
+                    if(AllZone.GameAction.isCardInPlay(target)
+                            && CardFactoryUtil.canTarget(card, target)) {
+                    	target.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
+                    }//is card in play?
+                }//resolve()
+            };//SpellAbility
+            
+            Target target = new Target("TgtV");
+            target.setVTSelection("Select target creature.");
+            final String Tgts[] = {"Creature"};
+            target.setValidTgts(Tgts);
+            
+            ability.setTarget(target);
+           
+            final Ability_Cost cost = new Ability_Cost("3", card.getName(), true);
+            ability.setPayCosts(cost);
+            
+            card.addSpellAbility(ability); 
+        }//*************** END ************ END **************************
 
         
         // Cards with Cycling abilities
