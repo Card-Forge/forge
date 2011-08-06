@@ -18,6 +18,7 @@ import java.util.*;
 //static readAIQuestDeckFiles(QuestDataOld data, ArrayList aiDeckNames)
 //OR non-static readAIQuestDeckFiles()
 //which reads the files "questDecks-easy", "questDecks-medium","questDecks-hard",
+
 public class QuestData {
     QuestPreferences preferences = null;
 
@@ -69,7 +70,7 @@ public class QuestData {
 
     QuestPetManager petManager = new QuestPetManager();
 
-     public QuestData() {
+    public QuestData() {
         preferences = new QuestPreferences();
 
         for (int i = 0; i < preferences.getStartingBasic(); i++) {
@@ -89,6 +90,7 @@ public class QuestData {
         }
 
         initTransients();
+        randomizeOpponents();
     }
 
     private void initTransients() {
@@ -111,15 +113,16 @@ public class QuestData {
 
 
     //adds cards to card pool and sets difficulty
+
     public void newGame(int difficulty, String m, boolean standardStart) {
         setDifficulty(difficulty);
 
         CardList allCards = AllZone.CardFactory.getCards();
-        
+
         ArrayList<String> list = new ArrayList<String>();
-        
-        list.addAll(boosterPack.getQuestStarterDeck(allCards, preferences.getStartingCommons(difficulty), 
-        		preferences.getStartingUncommons(difficulty), preferences.getStartingRares(difficulty), standardStart));
+
+        list.addAll(boosterPack.getQuestStarterDeck(allCards, preferences.getStartingCommons(difficulty),
+                preferences.getStartingUncommons(difficulty), preferences.getStartingRares(difficulty), standardStart));
 
         //because cardPool already has basic land added to it
         cardPool.addAll(list);
@@ -137,7 +140,7 @@ public class QuestData {
     /**
      * This method should be called whenever the opponents should change.
      */
-    public void randomizeOpponents(){
+    public void randomizeOpponents() {
         randomSeed = (new Random()).nextLong();
     }
 
@@ -148,6 +151,7 @@ public class QuestData {
 
 
     //returns Strings of the card names
+
     public List<String> getCardpool() {
         //make a copy so the internal ArrrayList cannot be changed externally
         return new ArrayList<String>(cardPool);
@@ -215,6 +219,7 @@ public class QuestData {
     //this Deck object is a Constructed deck
     //deck.getDeckType() is Constant.GameType.Sealed
     //sealed since the card pool is the Deck sideboard
+
     public Deck getDeck(String deckName) {
         //have to always set the card pool aka the Deck sideboard
         //because new cards may have been added to the card pool by addCards()
@@ -244,20 +249,23 @@ public class QuestData {
 
     //returns human player decks
     //returns ArrayList of String deck names
+
     public List<String> getDeckNames() {
         return new ArrayList<String>(myDecks.keySet());
     }
 
 
     //get new cards that were added to your card pool by addCards()
+
     public List<String> getAddedCards() {
         return new ArrayList<String>(newCardList);
     }
 
     //adds 11 cards, to the current card pool
     //(I chose 11 cards instead of 15 in order to make things more challenging)
+
     public void addCards() {
-    	CardList cards = AllZone.CardFactory.getCards();
+        CardList cards = AllZone.CardFactory.getCards();
         int nCommon = preferences.getNumCommon();
         int nUncommon = preferences.getNumUncommon();
         int nRare = preferences.getNumRare();
@@ -280,12 +288,12 @@ public class QuestData {
 
         cardPool.addAll(newCards);
         newCardList.addAll(newCards);
-        
+
         return newCards;
     }
 
     public String addRandomRare() {
-    	return addRandomRare(1).get(0);
+        return addRandomRare(1).get(0);
     }
 
     public void addCard(Card c) {
@@ -394,6 +402,7 @@ public class QuestData {
     }
 
     //gets all of the cards that are in the cardpool
+
     public List<String> getCards() {
         //copy CardList in order to keep private variables private
         //if we just return cardPool, it could be changed externally
@@ -410,6 +419,7 @@ public class QuestData {
     }
 
     //this changes getRank()
+
     public void addWin() {
         win++;
 
@@ -478,6 +488,7 @@ public class QuestData {
     }
 
     //should be called first, because the difficultly won't change
+
     public String getDifficulty() {
         return difficulty;
     }
@@ -514,6 +525,7 @@ public class QuestData {
     }
 
     //add cards after a certain number of wins or losses
+
     public boolean shouldAddCards(boolean didWin) {
         int n = preferences.getWinsForBooster(diffIndex);
 
@@ -543,10 +555,10 @@ public class QuestData {
     }
 
     public boolean hasSaveFile() {
-        return ForgeProps.getFile(NewConstants.QUEST.DATA).exists()||
+        return ForgeProps.getFile(NewConstants.QUEST.DATA).exists() ||
                 ForgeProps.getFile(NewConstants.QUEST.XMLDATA).exists();
     }
-    
+
     public static void main(String[] args) {
         QuestData q = new QuestData();
         for (int i = 0; i < 20; i++) {
@@ -570,6 +582,7 @@ public class QuestData {
     }
 
     //get new cards that were added to your card pool by addCards()
+
     public void addToNewList(ArrayList<String> added) {
         newCardList.addAll(added);
     }

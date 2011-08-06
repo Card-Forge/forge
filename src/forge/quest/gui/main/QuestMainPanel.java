@@ -5,6 +5,7 @@ import forge.*;
 import forge.gui.GuiUtils;
 import forge.quest.data.QuestBattleManager;
 import forge.quest.data.QuestData;
+import forge.quest.data.item.QuestItemZeppelin;
 import forge.quest.gui.FontConstants;
 import forge.quest.gui.QuestAbstractPanel;
 import forge.quest.gui.QuestFrame;
@@ -40,7 +41,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
     private QuestSelectablePanel selectedOpponent;
 
     JPanel nextMatchPanel = new JPanel();
-    CardLayout nextMatchLayout = new CardLayout();
+    CardLayout nextMatchLayout;
 
     boolean isShowingQuests = false;
     private JCheckBox devModeCheckBox = new JCheckBox("Developer Mode");
@@ -55,6 +56,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
     //TODO: Make this ordering permanent
     private static String lastUsedDeck;
+    private JButton zeppelinButton;
 
     public QuestMainPanel(QuestFrame mainFrame) {
         super(mainFrame);
@@ -64,7 +66,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     private void initUI() {
-        refresh();
 
         this.setLayout(new BorderLayout(5, 5));
         JPanel centerPanel = new JPanel(new BorderLayout());
@@ -79,17 +80,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
         JPanel matchSettingsPanel = createMatchSettingsPanel();
         centerPanel.add(matchSettingsPanel, BorderLayout.SOUTH);
 
-        JPanel nextGamePanel = createNextMatchPanel();
-        centerPanel.add(nextGamePanel, BorderLayout.CENTER);
+        centerPanel.add(nextMatchPanel, BorderLayout.CENTER);
         this.setBorder(new EmptyBorder(5, 5, 5, 5));
-    }
-
-    private JPanel createNextMatchPanel() {
-        nextMatchPanel = new JPanel();
-        nextMatchPanel.setLayout(nextMatchLayout);
-        nextMatchPanel.add(createBattlePanel(), BATTLES);
-        nextMatchPanel.add(createQuestPanel(), QUESTS);
-        return nextMatchPanel;
+        refresh();
+        
     }
 
     private JPanel createStatusPanel() {
@@ -274,6 +268,9 @@ public class QuestMainPanel extends QuestAbstractPanel {
         GuiUtils.addGap(matchPanel);
 
         if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY)) {
+            JPanel fantasyPanel = new JPanel();
+            fantasyPanel.setLayout(new BoxLayout(fantasyPanel, BoxLayout.X_AXIS));
+
             JPanel petPanel = new JPanel();
             petPanel.setLayout(new BoxLayout(petPanel, BoxLayout.X_AXIS));
 
@@ -313,9 +310,28 @@ public class QuestMainPanel extends QuestAbstractPanel {
             GuiUtils.addGap(petPanel, 10);
             petPanel.add(this.plantBox);
 
-            matchPanel.add(petPanel);
+            fantasyPanel.add(petPanel, BorderLayout.WEST);
             petPanel.setMaximumSize(petPanel.getPreferredSize());
             petPanel.setAlignmentX(LEFT_ALIGNMENT);
+
+            this.zeppelinButton = new JButton("<html>Launch<br>Zeppelin</html>", GuiUtils.getResizedIcon(GuiUtils.getIconFromFile("ZeppelinIcon.png"), 40, 40));
+
+            zeppelinButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent actionEvent) {
+                    questData.randomizeOpponents();
+                    refreshNextMatchPanel();
+                    QuestItemZeppelin zeppelin = (QuestItemZeppelin) questData.getInventory().getItem("Zeppelin");
+                    zeppelin.setZeppelinUsed(true);
+                    zeppelinButton.setEnabled(false);
+                }
+            });
+
+            zeppelinButton.setMaximumSize(zeppelinButton.getPreferredSize());
+
+            GuiUtils.addExpandingHorizontalSpace(fantasyPanel);
+            fantasyPanel.add(zeppelinButton);
+            fantasyPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+            matchPanel.add(fantasyPanel);
         }
         return matchPanel;
     }
@@ -438,6 +454,15 @@ public class QuestMainPanel extends QuestAbstractPanel {
             this.plantBox.setEnabled(questData.getPetManager().getPlant().getLevel() > 0);
             this.plantBox.setSelected(questData.getPetManager().shouldPlantBeUsed());
 
+            QuestItemZeppelin zeppelin = (QuestItemZeppelin) questData.getInventory().getItem("Zeppelin");
+            if (zeppelin.getLevel() > 0 && !zeppelin.hasBeenUsed()){
+                zeppelinButton.setEnabled(true);
+            }
+            else{
+                zeppelinButton.setEnabled(false);
+            }
+            
+
         }
 
         if (nextQuestInWins() > 0) {
@@ -446,6 +471,18 @@ public class QuestMainPanel extends QuestAbstractPanel {
         else {
             nextQuestLabel.setText("Next Quest available now.");
         }
+
+        nextMatchLayout = new CardLayout();
+
+        refreshNextMatchPanel();
+    }
+
+    private void refreshNextMatchPanel() {
+        nextMatchPanel.removeAll();
+        nextMatchLayout = new CardLayout();
+        nextMatchPanel.setLayout(nextMatchLayout);
+        nextMatchPanel.add(createBattlePanel(), BATTLES);
+        nextMatchPanel.add(createQuestPanel(), QUESTS);
     }
 
     private int nextQuestInWins() {
@@ -519,7 +556,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
         //TODO: This is a temporary hack to see if the image cache affects the heap usage significantly.
         ImageCache.clear();
         
+        QuestItemZeppelin zeppelin = (QuestItemZeppelin) questData.getInventory().getItem("Zeppelin");
+        zeppelin.setZeppelinUsed(false);
         questData.randomizeOpponents();
+
         String humanDeckName = (String) deckComboBox.getSelectedItem();
         Deck humanDeck = questData.getDeck(humanDeckName);
         Constant.Runtime.HumanDeck[0] = humanDeck;

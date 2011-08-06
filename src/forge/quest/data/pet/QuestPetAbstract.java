@@ -94,7 +94,7 @@ public abstract class QuestPetAbstract implements QuestStallPurchasable{
         return QuestStallManager.PET_SHOP;
     }
 
-    public boolean isAvailable() {
+    public boolean isAvailableForPurchase() {
         QuestPetAbstract pet = AllZone.QuestData.getPetManager().getPet(name);
         if (pet == null){
             return true;

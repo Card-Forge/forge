@@ -29,7 +29,7 @@ public interface QuestStallPurchasable extends Comparable{
      * @return <code>true</code> if the item can be displayed in a store
      * <code>false</code> if the item should not be displayed in store since, for example, prerequisites are not met
      */
-    public boolean isAvailable();
+    public boolean isAvailableForPurchase();
 
     /**
      * Executed when the item is bought

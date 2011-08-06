@@ -60,4 +60,8 @@ public class QuestInventory {
     public Collection<QuestItemAbstract> getItems() {
         return inventory.values();
     }
+
+    public QuestItemAbstract getItem(String itemName) {
+        return inventory.get(itemName);
+    }
 }

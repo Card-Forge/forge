@@ -89,7 +89,7 @@ public class QuestStallManager {
         List<QuestStallPurchasable> ret = new ArrayList<QuestStallPurchasable>();
 
         for (QuestStallPurchasable purchasable : items.get(stallName)) {
-            if (purchasable.isAvailable()){
+            if (purchasable.isAvailableForPurchase()){
                 ret.add(purchasable);
             }
         }

@@ -49,7 +49,7 @@ public abstract class QuestItemAbstract implements QuestStallPurchasable{
     }
 
 
-    public boolean isAvailable(){
+    public boolean isAvailableForPurchase(){
         return AllZone.QuestData.getInventory().getItemLevel(name) < maxLevel;
     }
 

@@ -4,6 +4,8 @@ import forge.AllZone;
 import forge.quest.data.bazaar.QuestStallManager;
 
 public class QuestItemZeppelin extends QuestItemAbstract{
+    boolean zeppelinUsed = false;
+
     QuestItemZeppelin(){
         super("Zeppelin", QuestStallManager.GEAR);
     }
@@ -16,7 +18,9 @@ public class QuestItemZeppelin extends QuestItemAbstract{
     @Override
     public String getPurchaseDescription() {
         return "This extremely comfortable airship allows for more efficient and safe travel<br>to faraway destinations. <br>"+
-                "<em>Effect: </em>Quest assignments become available more frequently<br><em>Effect: </em>Adds +3 to max life during quest games.";
+                "<em>Effect: </em>Quest assignments become available more frequently<br>" +
+                "<em>Effect: </em>Adds +3 to max life during quest games.<br>" +
+                "<em>Effect: </em>Allows travel to far places, allowing you to see a new set of opponents";
     }
 
     @Override
@@ -30,7 +34,15 @@ public class QuestItemZeppelin extends QuestItemAbstract{
     }
 
     @Override
-    public boolean isAvailable() {
-        return super.isAvailable() && AllZone.QuestData.getInventory().hasItem("Map");
+    public boolean isAvailableForPurchase() {
+        return super.isAvailableForPurchase() && AllZone.QuestData.getInventory().hasItem("Map");
+    }
+
+    public boolean hasBeenUsed() {
+        return zeppelinUsed;
+    }
+
+    public void setZeppelinUsed(boolean used){
+        this.zeppelinUsed = used;
     }
 }
