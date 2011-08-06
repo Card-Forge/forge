@@ -18112,6 +18112,36 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);		
         }//end Twiddle
         //****************END*******END***********************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Storm Seeker")) {
+        	/*
+        	 * Storm Seeker deals damage equal to the number of cards in target player's hand to that player.
+        	 */
+        	// TODO - this should be converted to keyword.  
+        	// tweak spDamageTgt keyword and add "TgtPHand" or something to CardFactoryUtil.xCount()
+        	SpellAbility spell = new Spell(card) {
+        		private static final long serialVersionUID = -5456164079435151319L;
+
+        		@Override
+        		public void resolve() {
+        			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetPlayer());
+        			int damage = hand.size();
+
+        			//sanity check
+        			if( damage < 0 )
+        				damage = 0;
+
+        			AllZone.GameAction.addDamage(getTargetPlayer(), damage, card);
+        		}
+        	};
+        	spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+
+        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
 
         
         // Cards with Cycling abilities

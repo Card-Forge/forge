@@ -1,3 +1,8 @@
+Storm Seeker
+3 G
+Instant
+Storm Seeker deals damage equal to the number of cards in target player's hand to that player.
+
 Twiddle
 U
 Instant
