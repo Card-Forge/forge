@@ -1,3 +1,12 @@
+Stampede Driver
+G
+Creature Human Spellshaper
+no text
+1/1
+abAllPump 1 G T:YouCtrl:+1/+1/Trample:Drawback$YouDiscard/1:Creatures you control get +1/+1 and gain trample until end of turn.:Stampede Driver - creatures get +1/+1 and gain trample until EOT
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stampede_driver.jpg
+
 Abandoned Outpost
 no cost
 Land
@@ -28645,15 +28654,6 @@ Defender
 StaticEffect:Play:Permanents you Control:PTBonus/0/2:Type.Creature!with.Defender!NotSelf:Other creatures you control with defender get +0/+2..
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalwart_shield_bearers.jpg
-
-Stampede Driver
-G
-Creature Human Spellshaper
-no text
-1/1
-abAllPump 1 G T:YouCtrl:+1/+1/Trample:Drawback$Discard/1:Creatures you control get +1/+1 and gain trample until end of turn.:Stampede Driver - creatures get +1/+1 and gain trample until EOT
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stampede_driver.jpg
 
 Stampeding Rhino
 4 G
