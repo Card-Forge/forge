@@ -18334,6 +18334,38 @@ public class CardFactory_Creatures {
         	ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Vampire Hexmage")) {
+        	/*
+        	 * TODO - replace this code with correct code
+        	 */
+        	final SpellAbility ability = new Ability(card, "0") {
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+        		
+        		@Override
+        		public boolean canPlay() {
+        			return AllZoneUtil.isCardInPlay(card) && !card.hasSickness();
+        		}
+
+        		@Override
+        		public void resolve() {
+        			final Card c = getTargetCard();
+        			for(Counters counter:Counters.values()) {
+        				if(c.getCounters(counter) > 0) {
+        					c.setCounter(counter, 0);
+        				}
+        			}
+        			AllZone.GameAction.sacrifice(card);
+        		}
+        	};
+        	card.addSpellAbility(ability);
+        	ability.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability));
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {

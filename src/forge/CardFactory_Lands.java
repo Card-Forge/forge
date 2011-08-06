@@ -1141,10 +1141,35 @@ class CardFactory_Lands {
                     
                 }
             };
-            ability.setDescription("Dark Depths enters the battlefield with ten ice counters on it.\r\n\r\n3: Remove an ice counter from Dark Depths.\r\n\r\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.");
+            final SpellAbility sacrifice = new Ability(card, "0") {
+            	//TODO - this should probably be a state effect
+                @Override
+                public boolean canPlay() {
+                    return card.getCounters(Counters.ICE) == 0 && AllZone.GameAction.isCardInPlay(card);
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return canPlay();
+                }
+                
+                @Override
+                public void resolve() {
+                    if(card.getCounters(Counters.ICE) == 0) {
+                    CardFactoryUtil.makeToken("Marit Lage",
+                            "B 20 20 Marit Lage", card, "B", new String[] {"Legendary", "Creature", "Avatar"}, 20,
+                            20, new String[] {"Flying", "Indestructible"});
+                    }
+                    AllZone.GameAction.sacrifice(card);  
+                }
+            };
+            //ability.setDescription("Dark Depths enters the battlefield with ten ice counters on it.\r\n\r\n3: Remove an ice counter from Dark Depths.\r\n\r\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.");
+            ability.setDescription("3: remove an Ice Counter.");
             ability.setStackDescription(card.getName() + " - remove an ice counter.");
             
             card.addSpellAbility(ability);
+            sacrifice.setStackDescription("Sacrifice "+card.getName());
+            card.addSpellAbility(sacrifice);
             
         }//*************** END ************ END **************************
         

@@ -1,3 +1,15 @@
+Dark Depths
+no cost
+Legendary Snow Land
+Dark Depths enters the battlefield with ten ice counters on it.  When Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.
+
+Vampire Hexmage
+B B
+Creature Vampire Shaman
+Sacrifice Vampire Hexmage: Remove all counters from target permanent.
+2/1
+First Strike
+
 Time Elemental
 2 U
 Creature Elemental
@@ -13719,11 +13731,6 @@ Chroma - When Springjack Shepherd comes into play, put a 0/1 white Goat creature
 Goblin Trenches
 1 R W
 Enchantment
-no text
-
-Dark Depths
-no cost
-Legendary Snow Land
 no text
 
 Font of Mythos
