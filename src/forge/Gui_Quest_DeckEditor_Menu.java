@@ -4,6 +4,7 @@ package forge;
 
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
+import forge.quest.data.QuestBattleManager;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -443,7 +444,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
             	cardpool.add(AllZone.CardFactory.getCard(cardName, null));
             }
         } else {
-            questData.ai_addDeck(deck);
+            QuestBattleManager.addAIDeck(deck);
             cardpool = AllZone.CardFactory.getAllCards();
         }
         
@@ -499,14 +500,14 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         //AI
         viewAllDecks.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent a) {
-                List<String> nameList = questData.ai_getDeckNames();
+                List<String> nameList = QuestBattleManager.getAIDeckNames();
                 Collections.sort(nameList);
                 
                 Deck deck;
                 StringBuffer allText = new StringBuffer();
-                
-                for(int i = 0; i < nameList.size(); i++) {
-                    deck = questData.ai_getDeck(nameList.get(i).toString());
+
+                for (String aNameList : nameList) {
+                    deck = QuestBattleManager.getAIDeck(aNameList);
                     allText.append(deck.getName()).append("\r\n");
                     allText.append(getExportDeckText(deck));
                     allText.append("++++++++++++++++++++++++++++++++++++++++++++++++++++++ \r\n \r\n");
@@ -521,7 +522,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         //AI
         open.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent a) {
-                String deckName = getUserInput_OpenDeck(questData.ai_getDeckNames());
+                String deckName = getUserInput_OpenDeck(QuestBattleManager.getAIDeckNames());
                 
                 //check if user selected "cancel"
                 if(deckName.equals("")) return;
@@ -529,7 +530,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
 
                 setComputerPlayer(deckName);
                 
-                Deck d = questData.ai_getDeck(deckName);
+                Deck d = QuestBattleManager.getAIDeck(deckName);
                 CardList deck = new CardList();
                 
                 for(int i = 0; i < d.countMain(); i++) {
@@ -564,19 +565,19 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         //AI
         rename.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent a) {
-                String name = getUserInput_GetDeckName(questData.ai_getDeckNames());
+                String name = getUserInput_GetDeckName(QuestBattleManager.getAIDeckNames());
                 
                 //check if user cancels
                 if(name.equals("")) return;
                 
                 //is the current deck already saved and in QuestData?
-                if(questData.ai_getDeckNames().contains(currentDeck.getName())) questData.ai_removeDeck(currentDeck.getName());//remove old deck
+                if(QuestBattleManager.getAIDeckNames().contains(currentDeck.getName())) QuestBattleManager.removeAIDeck(currentDeck.getName());//remove old deck
                 
                 currentDeck.setName(name);
                 
                 Deck deck = convertCardListToDeck(deckDisplay.getBottom());
                 deck.setName(name);
-                questData.ai_addDeck(deck);
+                QuestBattleManager.addAIDeck(deck);
                 
                 setComputerPlayer(name);
             }
@@ -590,7 +591,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
                 
                 //check to see if name is set
                 if(name.equals("")) {
-                    name = getUserInput_GetDeckName(questData.ai_getDeckNames());
+                    name = getUserInput_GetDeckName(QuestBattleManager.getAIDeckNames());
                     
                     //check if user cancels
                     if(name.equals("")) return;
@@ -601,7 +602,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
                 Deck deck = convertCardListToDeck(deckDisplay.getBottom());
                 deck.setName(name);
                 
-                questData.ai_addDeck(deck);
+                QuestBattleManager.addAIDeck(deck);
             }
         });//save
         
@@ -609,7 +610,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         //AI
         copy.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent a) {
-                String name = getUserInput_GetDeckName(questData.ai_getDeckNames());
+                String name = getUserInput_GetDeckName(QuestBattleManager.getAIDeckNames());
                 
                 //check if user cancels
                 if(name.equals("")) return;
@@ -619,7 +620,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
                 Deck deck = convertCardListToDeck(deckDisplay.getBottom());
                 deck.setName(name);
                 
-                questData.ai_addDeck(deck);
+                QuestBattleManager.addAIDeck(deck);
             }
         });//copy
         
@@ -633,7 +634,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
                         "Delete", JOptionPane.YES_NO_OPTION);
                 if(check == JOptionPane.NO_OPTION) return;//stop here
                 
-                questData.ai_removeDeck(currentDeck.getName());
+                QuestBattleManager.removeAIDeck(currentDeck.getName());
                 
                 //show card pool
                 CardList cardpool = AllZone.CardFactory.getAllCards();

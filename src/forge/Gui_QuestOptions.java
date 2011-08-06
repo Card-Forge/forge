@@ -239,11 +239,5 @@ public class Gui_QuestOptions extends JFrame {
         new QuestFrame();
     }
     
-    //copy AI decks from old to newData
-    void copyAIDecks(forge.quest.data.QuestData newData, forge.quest.data.QuestData old) {
-        java.util.List<String> oldDeckNames = old.ai_getDeckNames();
-        for (String oldDeckName : oldDeckNames) {
-            newData.ai_addDeck(old.ai_getDeck(oldDeckName));
-        }
-    }
+
 }

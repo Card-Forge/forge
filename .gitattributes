@@ -7715,6 +7715,7 @@ src/forge/properties/ForgeProps.java svneol=native#text/plain
 src/forge/properties/NewConstants.java svneol=native#text/plain
 src/forge/properties/Preferences.java svneol=native#text/plain
 src/forge/properties/SavePreferencesListener.java svneol=native#text/plain
+src/forge/quest/data/QuestBattleManager.java svneol=native#text/plain
 src/forge/quest/data/QuestBoosterPack.java svneol=native#text/plain
 src/forge/quest/data/QuestData.java svneol=native#text/plain
 src/forge/quest/data/QuestDataIO.java svneol=native#text/plain

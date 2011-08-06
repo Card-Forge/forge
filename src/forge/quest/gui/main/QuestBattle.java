@@ -1,9 +1,8 @@
 package forge.quest.gui.main;
 
 
-import forge.AllZone;
 import forge.gui.GuiUtils;
-import forge.quest.data.QuestData;
+import forge.quest.data.QuestBattleManager;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -233,8 +232,7 @@ public class QuestBattle extends QuestSelectablePanel {
     public static List<QuestSelectablePanel> getBattles(){
         List<QuestSelectablePanel> opponentList = new ArrayList<QuestSelectablePanel>();
 
-        QuestData questData = AllZone.QuestData;
-        String[] opponentNames = questData.getOpponents();
+        String[] opponentNames = QuestBattleManager.getOpponents();
         for (String opponentName : opponentNames) {
 
                 String oppIconName = opponentName.substring(0, opponentName.length() - 1).trim() + ".jpg";

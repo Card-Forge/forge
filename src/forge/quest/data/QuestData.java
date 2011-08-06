@@ -7,7 +7,6 @@ import forge.properties.NewConstants;
 import forge.quest.data.item.QuestInventory;
 import forge.quest.data.pet.QuestPetManager;
 
-import java.io.File;
 import java.util.*;
 
 
@@ -36,11 +35,6 @@ public class QuestData {
     String difficulty;
 
     String mode = "";
-
-    private transient Map<String, Deck> aiDecks;
-    private transient List<String> easyAIDecks;
-    private transient List<String> mediumAIDecks;
-    private transient List<String> hardAIDecks;
 
     Map<String, Deck> myDecks = new HashMap<String, Deck>();
 
@@ -75,7 +69,7 @@ public class QuestData {
 
     QuestPetManager petManager = new QuestPetManager();
 
-    public QuestData() {
+     public QuestData() {
         preferences = new QuestPreferences();
 
         for (int i = 0; i < preferences.getStartingBasic(); i++) {
@@ -98,12 +92,6 @@ public class QuestData {
     }
 
     private void initTransients() {
-        aiDecks = new HashMap<String, Deck>();
-        List<String> aiDeckNames = ai_getDeckNames();
-        easyAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.EASY), aiDeckNames);
-        mediumAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.MEDIUM), aiDeckNames);
-        hardAIDecks = readFile(ForgeProps.getFile(NewConstants.QUEST.HARD), aiDeckNames);
-
         rankArray = new String[]{
                 "Level 0 - Confused Wizard",
                 "Level 1 - Mana Mage",
@@ -146,66 +134,11 @@ public class QuestData {
         }
     }
 
-    public String[] getOpponents() {
-        int index = getDifficultyIndex();
-
-        if (getWin() < preferences.getWinsForMediumAI(index)) {
-            return getOpponents(easyAIDecks);
-        }
-
-        if (getWin() < preferences.getWinsForHardAI(index)) {
-            return getOpponents(mediumAIDecks);
-        }
-
-        return getOpponents(hardAIDecks);
-    }
-
-
-    public String[] getOpponents(List<String> aiDeck) {
-        //This is to make sure that the opponents do not change when the deck editor is launched.
-        List<String> deckListCopy = new ArrayList<String>(aiDeck);
-        Collections.shuffle(deckListCopy, new Random(randomSeed));
-
-        return new String[]{deckListCopy.get(0), deckListCopy.get(1), deckListCopy.get(2)};
-
-    }
-
     /**
      * This method should be called whenever the opponents should change.
      */
     public void randomizeOpponents(){
         randomSeed = (new Random()).nextLong();
-    }
-
-    private static List<String> readFile(File file, List<String> aiDecks) {
-        ArrayList<String> list = FileUtil.readFile(file);
-
-        //remove any blank lines
-        ArrayList<String> noBlankLines = new ArrayList<String>();
-        String s;
-        for (String aList : list) {
-            s = aList.trim();
-            if (!s.equals("")) {
-                noBlankLines.add(s);
-            }
-        }
-        list = noBlankLines;
-
-        if (list.size() < 3) {
-            ErrorViewer.showError(new Exception(),
-                    "QuestData : readFile() error, file %s is too short, it must contain at least 3 ai decks names",
-                    file);
-        }
-
-
-        for (String aList : list) {
-            if (!aiDecks.contains(aList)) {
-                aiDecks.add(aList);
-            }
-        }
-
-
-        return list;
     }
 
 
@@ -274,16 +207,9 @@ public class QuestData {
         myDecks.remove(deckName);
     }
 
-    public void ai_removeDeck(String deckName) {
-        aiDecks.remove(deckName);
-    }
 
     public void addDeck(Deck d) {
         myDecks.put(d.getName(), d);
-    }
-
-    public void ai_addDeck(Deck d) {
-        aiDecks.put(d.getName(), d);
     }
 
     //this Deck object is a Constructed deck
@@ -293,8 +219,12 @@ public class QuestData {
         //have to always set the card pool aka the Deck sideboard
         //because new cards may have been added to the card pool by addCards()
 
-        //this sets the cards in Deck main
-        Deck d = getDeckFromMap(myDecks, deckName);
+        if (!myDecks.containsKey(deckName)) {
+            ErrorViewer.showError(new Exception(),
+                    "QuestData : getDeckFromMap(String deckName) error, deck name not found - %s", deckName);
+        }
+
+        Deck d = myDecks.get(deckName);
 
         //below is probably not needed
 
@@ -305,58 +235,19 @@ public class QuestData {
 
         //add all cards to card pool
         for (int i = 0; i < cardPool.size(); i++) {
-            d.addSideboard(cardPool.get(i).toString());
+            d.addSideboard(cardPool.get(i));
         }
 
         return d;
     }
 
-    //this Deck object is a Constructed deck
-    //deck.getDeckType() is Constant.GameType.Constructed
-    //constructed because the computer can use any card
-    public Deck ai_getDeck(String deckName) {
-        return getDeckFromMap(aiDecks, deckName);
-    }
-
-    public Deck ai_getDeckNewFormat(String deckName) {
-        DeckIO deckIO = new NewDeckIO(ForgeProps.getFile(NewConstants.QUEST.DECKS), true);
-        Deck aiDeck = deckIO.readDeck(deckName);
-        return aiDeck;
-    }
-
-
-    private Deck getDeckFromMap(Map<String, Deck> map, String deckName) {
-        if (!map.containsKey(deckName)) {
-            ErrorViewer.showError(new Exception(),
-                    "QuestData : getDeckFromMap(String deckName) error, deck name not found - %s", deckName);
-        }
-
-        return map.get(deckName);
-    }
 
     //returns human player decks
     //returns ArrayList of String deck names
     public List<String> getDeckNames() {
-        return getDeckNames_String(myDecks);
+        return new ArrayList<String>(myDecks.keySet());
     }
 
-    //returns AI computer decks
-    //returns ArrayList of String deck names
-    public List<String> ai_getDeckNames() {
-        return getDeckNames_String(aiDecks);
-    }
-
-    //returns ArrayList of Deck String names
-    private List<String> getDeckNames_String(Map<String, Deck> map) {
-        ArrayList<String> out = new ArrayList<String>();
-
-        Iterator<String> it = map.keySet().iterator();
-        while (it.hasNext()) {
-            out.add(it.next().toString());
-        }
-
-        return out;
-    }
 
     //get new cards that were added to your card pool by addCards()
     public List<String> getAddedCards() {
@@ -690,5 +581,13 @@ public class QuestData {
 
     public QuestInventory getInventory() {
         return inventory;
+    }
+
+    public QuestPreferences getPreferences() {
+        return preferences;
+    }
+
+    public long getRandomSeed() {
+        return randomSeed;
     }
 }
