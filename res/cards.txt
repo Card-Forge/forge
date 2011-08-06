@@ -1,3 +1,33 @@
+Déjà Vu
+2 U
+Sorcery
+no text
+spRaiseDead:1/Sorcery
+
+Reconstruction
+U
+Sorcery
+no text
+spRaiseDead:1/Artifact
+
+Ritual of Restoration
+W
+Sorcery
+no text
+spRaiseDead:1/Artifact
+
+Sage's Knowledge
+2 U
+Sorcery
+no text
+spRaiseDead:1/Sorcery
+
+Disperse
+1 U
+Instant
+Return target nonland permanent to its owner's hand.
+spBounceTgt:Permanent.nonLand:Hand
+
 Altar's Light
 2 W W
 Instant
@@ -34,12 +64,6 @@ Hoodwink
 Instant
 Return target artifact, enchantment, or land to its owner's hand.
 spBounceTgt:Artifact,Enchantment,Land:Hand
-
-Disperse
-1 U
-Instant
-Return target nonland permanent to its owner's hand.
-spBounceTgt:Artifact,Enchantment,Creature,Planeswalker:Hand
 
 Into Thin Air
 5 U
