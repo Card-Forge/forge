@@ -855,9 +855,6 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                 int code = arg0.getKeyCode();
                 if(code == KeyEvent.VK_ESCAPE) {
                     cancelButton.doClick();
-                } else if(code == KeyEvent.VK_ENTER) {
-                    //same as space
-                    okButton.doClick();
                 }
             }
         });
@@ -1171,51 +1168,6 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
             concede();
         }
     }
-   
-   
-    public class CustomListener extends MouseAdapter {
-//        TODO reenable
-//        @Override
-//        public void mouseEntered(MouseEvent e) {
-//            if(picturePanel.getComponentCount() != 0) {
-//                if(cCardHQ.isFaceDown() == true && cCardHQ.getOwner() == "Computer") {
-//                    return;
-//                } else {
-//                    if(GuiDisplayUtil.IsPictureHQExists(cCardHQ)) {
-//                        int cWidth = 0;
-//                        try {
-//                            cWidth = GuiDisplayUtil.getPictureHQwidth(cCardHQ);
-//                        } catch(IOException e2) {
-//                            
-//                            e2.printStackTrace();
-//                        }
-//                        int cHeight = 0;
-//                        try {
-//                            cHeight = GuiDisplayUtil.getPictureHQheight(cCardHQ);
-//                        } catch(IOException e2) {
-//                            
-//                            e2.printStackTrace();
-//                        }
-//                        
-//
-//                        if(cWidth >= 312 && cHeight >= 445) {
-//                            
-//                            GUI_PictureHQ hq = new GUI_PictureHQ(GuiDisplay3.this, cCardHQ);
-//                            try {
-//                                hq.letsGo(GuiDisplay3.this, cCardHQ);
-//                            } catch(IOException e1) {
-//                                e1.printStackTrace();
-//                            }
-//                        }
-//                        
-//                    }
-//                }
-//            }
-//        }
-    }
-   
-
-
 }
 
 //very hacky

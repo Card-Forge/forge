@@ -58,6 +58,8 @@ import forge.gui.ListChooser;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.properties.ForgePreferences.CardSizeType;
+import forge.properties.ForgePreferences.StackOffsetType;
 import forge.properties.NewConstants.LANG.Gui_NewGame.MENU_BAR.MENU;
 import forge.properties.NewConstants.LANG.Gui_NewGame.MENU_BAR.OPTIONS;
 
@@ -140,6 +142,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         	smoothLandCheckBox.setSelected(preferences.stackAiLand);
         	millLoseCheckBox.setSelected(preferences.millingLossCondition);
         	cardOverlay.setSelected(preferences.cardOverlay);
+        	CardStackOffsetAction.set(preferences.stackOffset);
+        	CardStackAction.set(preferences.maxStackSize);
+        	CardSizesAction.set(preferences.cardSize);
 		} catch (Exception e) {
 			Log.error("Error loading preferences");
 		}
@@ -371,9 +376,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         jPanel3.setLayout(new MigLayout("align center"));
         
         newGuiCheckBox.setText("New GUI");
-        // newGuiCheckBox.setSelected(true);
         smoothLandCheckBox.setText("Stack AI land");
-        // smoothLandCheckBox.setSelected(true);
         millLoseCheckBox.setText("Milling = Loss Condition");
         
         /*
@@ -804,9 +807,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     public static class CardSizesAction extends AbstractAction {
         
         private static final long serialVersionUID = -2900235618450319571L;
-        private String[]          keys             = {"Tiny", "Smaller", "Small", "Medium", "Large", "Huge"};
-        private int[]             widths           = {36, 42, 63, 70, 93,  120};
-        private int[]             heights          = {50, 59, 88, 98, 130, 168};
+        private static String[]          keys             = {"Tiny", "Smaller", "Small", "Medium", "Large", "Huge"};
+        private static int[]             widths           = {36, 42, 63, 70, 93,  120};
+        private static int[]             heights          = {50, 59, 88, 98, 130, 168};
         
         public CardSizesAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_SIZES));
@@ -819,19 +822,35 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 if(index == -1) return;
                 Constant.Runtime.width[0] = widths[index];
                 Constant.Runtime.height[0] = heights[index];
-                //not needed any more
-//                ImageCache.dumpCache();
             } catch(Exception ex) {
                 ErrorViewer.showError(ex);
             }
+        }
+        
+        public static void set(int index) {
+        	preferences.cardSize = CardSizeType.valueOf(keys[index].toLowerCase());
+        	Constant.Runtime.width[0] = widths[index];
+            Constant.Runtime.height[0] = heights[index];
+        }
+        
+        public static void set(CardSizeType s) {
+        	preferences.cardSize = s;
+        	int index = 0;
+        	for(String str : keys){
+        		if(str.toLowerCase().equals(s.toString()))
+        			break;
+        		index++;
+        	}
+        	Constant.Runtime.width[0] = widths[index];
+            Constant.Runtime.height[0] = heights[index];
         }
     }
     
     public static class CardStackAction extends AbstractAction {
 
 		private static final long serialVersionUID = -3770527681359311455L;
-		private String[]          keys             = {"3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-        private int[]             values           = {3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+		private static String[]          keys             = {"3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+        private static int[]             values           = {3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         
         public CardStackAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_STACK));
@@ -842,19 +861,24 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             if(ch.show()) try {
                 int index = ch.getSelectedIndex();
                 if(index == -1) return;
-                Constant.Runtime.stackSize[0] = values[index];
+                set(index);
 
             } catch(Exception ex) {
                 ErrorViewer.showError(ex);
             }
+        }
+        
+        public static void set(int index) {
+        	preferences.maxStackSize = values[index];
+        	Constant.Runtime.stackSize[0] = values[index];
         }
     }
     
     public static class CardStackOffsetAction extends AbstractAction {
         
 		private static final long serialVersionUID = 5021304777748833975L;
-		private String[]          keys             = {"Tiny", "Small", "Medium", "Large"};
-        private int[]             offsets          = {5, 7, 10, 15};
+		private static String[]          keys             = {"Tiny", "Small", "Medium", "Large"};
+        private static int[]             offsets          = {5, 7, 10, 15};
         
         public CardStackOffsetAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_STACK_OFFSET));
@@ -865,11 +889,27 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             if(ch.show()) try {
                 int index = ch.getSelectedIndex();
                 if(index == -1) return;
-                Constant.Runtime.stackOffset[0] = offsets[index];
+                set(index);
 
             } catch(Exception ex) {
                 ErrorViewer.showError(ex);
             }
+        }
+        
+        public static void set(int index) {
+        	preferences.stackOffset = StackOffsetType.valueOf(keys[index].toLowerCase());
+        	Constant.Runtime.stackOffset[0] = offsets[index];
+        }
+        
+        public static void set(StackOffsetType s) {
+        	preferences.stackOffset = s;
+        	int index = 0;
+        	for(String str : keys){
+        		if(str.toLowerCase().equals(s.toString()))
+        			break;
+        		index++;
+        	}
+        	Constant.Runtime.stackOffset[0] = offsets[index];
         }
     }
     

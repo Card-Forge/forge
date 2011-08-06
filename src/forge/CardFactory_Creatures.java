@@ -3512,11 +3512,18 @@ public class CardFactory_Creatures {
                         }
                     });
                     
-                    CardList list = new CardList(art.toArray());                  
-                    if (list.isEmpty())	
-                    	return null;
-                    
-                    Card target = list.get(0);
+                    CardList list = new CardList(art.toArray());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getExtrinsicKeyword().contains("Indestructible");
+                        }
+                    });
+
+                    Card target = null;
+                    if(!list.isEmpty())
+                    	target = list.get(0);
+                    else if (!art.isEmpty())
+                    	target = art.get(0);
 
                     return target;
                 }//execute()
