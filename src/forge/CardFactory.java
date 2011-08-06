@@ -3787,15 +3787,24 @@ public class CardFactory implements NewConstants {
                         }// for nctr
                     }// if choices
                     
-                    if (!anyNumber[0] 
-                            && results.size() >= numCardsToReturn) {
-                        results.shuffle();
+                    if (!anyNumber[0]) {
                         CardList targets = new CardList();
-                        for (int i = 0; i < numCardsToReturn; i++) {
-                            targets.add(results.get(i));
+                        
+                        if (results.size() >= numCardsToReturn) {
+                            results.shuffle();
+                            for (int i = 0; i < numCardsToReturn; i++) {
+                                targets.add(results.get(i));
+                            }
+                            
+                        } else if (results.size() >= 1  
+                                       && returnUpTo[0]) {
+                            targets = results;
                         }
-                        setTargetList(targets);
-                        return true;
+                        
+                        if (targets.size() > 0) {
+                            setTargetList(targets);
+                            return true;
+                        }
                     }
                     return false;
                 }// canPlayAI()
@@ -3871,7 +3880,7 @@ public class CardFactory implements NewConstants {
             };// spRtrnTgt
             
             spRtrnTgt.setBeforePayMana(CardFactoryUtil.spReturnTgt_input_targetCards_InGraveyard(
-            		card, spRtrnTgt, returnUpTo[0], numCardsToReturn, Tgts, anyNumber[0]));
+                    card, spRtrnTgt, returnUpTo[0], numCardsToReturn, Tgts, anyNumber[0]));
             
             if (desc.length() > 0) {
                 spRtrnTgt.setDescription(desc);
