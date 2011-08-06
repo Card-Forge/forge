@@ -12884,43 +12884,6 @@ public class GameActionUtil {
 		}// execute()
 	};
 
-	public static Command That_Which_Was_Taken        = new Command() {
-		private static final long serialVersionUID   = -4142514935709694293L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "HIDDEN Indestructible";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("That Which Was Taken");
-
-			if(zone.length > 0) {
-				CardList cards = new CardList();
-				cards.addAll(AllZone.Human_Battlefield.getCards());
-				cards.addAll(AllZone.Computer_Battlefield.getCards());
-
-				for(int i = 0; i < cards.size(); i++) {
-					c = cards.get(i);
-					if(!c.getKeyword().contains(keyword)
-							&& c.getCounters(Counters.DIVINITY) > 0) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-	
-	
 	public static Command Emperor_Crocodile                      = new Command() {
 		private static final long serialVersionUID   = -5406532269475480827L;
 
@@ -14487,50 +14450,6 @@ public class GameActionUtil {
 		}
 	};
 	
-	/*
-    public static Command Goblin_Gaveleer            = new Command() {
-		
-        private static final long serialVersionUID = -9039509574117844271L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Goblin Gaveleer");
-			
-			for (int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(1 + countEquipment(c) * 2);
-			}
-			
-		}// execute()
-		
-		private int countEquipment(Card c) {
-			CardList equipment = new CardList(
-					c.getEquippedBy().toArray());
-			return equipment.size();
-		}
-	};// Goblin_Gaveleer
-	*/
-	/*
-	public static Command Uril                        = new Command() {
-		private static final long serialVersionUID = 8168928048322850517L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Uril, the Miststalker");
-
-			if(list.size() > 0) {
-				Card c = list.get(0);
-				c.setBaseAttack(5 + (countAuras(c) * 2));
-				c.setBaseDefense(c.getBaseAttack());
-			}
-
-		}// execute()
-
-		private int countAuras(Card c) {
-			CardList auras = new CardList(
-					c.getEnchantedBy().toArray());
-			return auras.size();
-		}
-	};
-	*/
 
 	public static Command Kithkin_Rabble              = new Command() {
 		private static final long serialVersionUID = 6686690505949642328L;
@@ -16144,7 +16063,6 @@ public class GameActionUtil {
 		//commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
 		//commands.put("Goblin_Assault", Goblin_Assault);
-		//commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
 		//commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
 		//commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
 		
@@ -16214,11 +16132,9 @@ public class GameActionUtil {
 		commands.put("Tarmogoyf", Tarmogoyf);
 		commands.put("Terravore", Terravore);
 		commands.put("Tethered_Griffin", Tethered_Griffin);
-		commands.put("That_Which_Was_Taken", That_Which_Was_Taken);
 		commands.put("Transcendent_Master", Transcendent_Master);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);
-		//commands.put("Uril", Uril);
 		
 		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
 		commands.put("Vexing_Beetle", Vexing_Beetle);

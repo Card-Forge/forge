@@ -52,7 +52,6 @@ public class StaticEffects
 		//cardToEffectsList.put("Gaea's Avenger", new String[] {"Gaeas_Avenger"});
 		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
 		//cardToEffectsList.put("Goblin Assault", new String[] {"Goblin_Assault"});
-		//cardToEffectsList.put("Goblin Gaveleer", new String[] {"Goblin_Gaveleer"});
 		//cardToEffectsList.put("Guul Draz Specter", new String[] {"Guul_Draz_Specter"});
 		//cardToEffectsList.put("Guul Draz Vampire", new String[] {"Guul_Draz_Vampire"});
 		
@@ -119,12 +118,10 @@ public class StaticEffects
 		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
 		cardToEffectsList.put("Terravore", new String[] {"Terravore"});
 		cardToEffectsList.put("Tethered Griffin", new String[] {"Tethered_Griffin"});
-		cardToEffectsList.put("That Which Was Taken", new String[] {"That_Which_Was_Taken"});
 		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"Tabernacle"});
 		cardToEffectsList.put("Transcendent Master", new String[]{"Transcendent_Master"});
 		
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});
-		//cardToEffectsList.put("Uril, the Miststalker", new String[] {"Uril"});
 		
 		cardToEffectsList.put("Vampire Nocturnus", new String[]{"Vampire_Nocturnus"});
 		cardToEffectsList.put("Vexing Beetle", new String[] {"Vexing_Beetle"});
