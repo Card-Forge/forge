@@ -778,6 +778,7 @@ res/cardsfolder/cabal_coffers.txt -text svneol=native#text/plain
 res/cardsfolder/cabal_executioner.txt svneol=native#text/plain
 res/cardsfolder/cabal_pit.txt svneol=native#text/plain
 res/cardsfolder/cabal_ritual.txt -text svneol=native#text/plain
+res/cardsfolder/cabal_slaver.txt -text svneol=native#text/plain
 res/cardsfolder/cabal_torturer.txt -text svneol=native#text/plain
 res/cardsfolder/cabal_trainee.txt -text svneol=native#text/plain
 res/cardsfolder/cackling_fiend.txt -text svneol=native#text/plain
