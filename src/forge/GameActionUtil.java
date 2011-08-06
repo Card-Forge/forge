@@ -8116,7 +8116,7 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", crd, "C", new String[] {
+					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", crd, "", new String[] {
 							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
 					for (Card c:cl)
 						c.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(c));

@@ -21771,7 +21771,7 @@ public class CardFactory implements NewConstants {
         				times = 3;
         			for (int i=0;i<times;i++)
         			{
-	        			cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "C", new String[] {
+	        			cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "", new String[] {
 								"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
 	        			for (Card crd:cl)
 	        				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
@@ -21794,7 +21794,7 @@ public class CardFactory implements NewConstants {
 					AllZone.GameAction.searchLibraryBasicLand(card.getController(), 
 							Constant.Zone.Play, true);
 					
-					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "C", new String[] {
+					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "", new String[] {
 							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
         			for (Card crd:cl)
         				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
@@ -21825,7 +21825,7 @@ public class CardFactory implements NewConstants {
 
         			for (int i=0;i<5;i++)
         			{
-	        			cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "C", new String[] {
+	        			cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "", new String[] {
 								"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
 	        			for (Card crd:cl)
 	        				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));

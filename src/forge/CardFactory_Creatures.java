@@ -19223,7 +19223,7 @@ public class CardFactory_Creatures {
                 }//resolve()
                 
                 public void makeToken() {
-                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "C", new String[] {
+                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "", new String[] {
 							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
         			for (Card crd:cl)
         				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
@@ -19255,7 +19255,7 @@ public class CardFactory_Creatures {
                 }//resolve()
                 
                 public void makeToken() {
-                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "C", new String[] {
+                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "", new String[] {
 							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
         			for (Card crd:cl)
         				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
@@ -19285,7 +19285,7 @@ public class CardFactory_Creatures {
                 }//resolve()
                 
                 public void makeToken() {
-                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "C", new String[] {
+                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "", new String[] {
 							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
         			for (Card crd:cl)
         				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
