@@ -218,7 +218,7 @@ public class Card extends MyObservable {
     
     
     public boolean getSacrificeAtEOT() {
-        return sacrificeAtEOT;
+        return sacrificeAtEOT || getKeyword().contains("At the beggining of the end step, sacrifice CARDNAME.");
     }
     
     public void setSacrificeAtEOT(boolean sacrificeAtEOT) {
@@ -1282,7 +1282,7 @@ public class Card extends MyObservable {
     }
     
     public void addIntrinsicKeyword(String s) {/*if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s){}); else*/
-        intrinsicKeyword.add(s);
+        intrinsicKeyword.add((getName().isEmpty() ? s :s.replaceAll(getName(), "CARDNAME")));
     }
     
     public void removeIntrinsicKeyword(String s) {
@@ -1305,10 +1305,10 @@ public class Card extends MyObservable {
     
     public void addExtrinsicKeyword(String s) {
         //if(!getKeyword().contains(s)){
-        if(s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s) {
+        if(s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, (getName().isEmpty() ? s : s.replaceAll(getName(), "CARDNAME"))) {
             private static final long serialVersionUID = 221124403788942412L;
         });
-        else extrinsicKeyword.add(s);
+        else extrinsicKeyword.add((getName().isEmpty() ? s :s.replaceAll(getName(), "CARDNAME")));
         //}
     }
     

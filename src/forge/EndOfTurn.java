@@ -48,7 +48,20 @@ public class EndOfTurn implements java.io.Serializable
     System.out.println("number of cards in compy removed zone: " + c.size());
     System.out.println("number of cards in human removed zone: " + h.size());
     */
-    
+    for(Card c : all)
+      if(!c.isFaceDown()
+    	&& c.getKeyword().contains("At the beggining of the end step, sacrifice CARDNAME."))
+      {
+    	  final Card card = c;
+    	  final SpellAbility sac = new Ability(card, "0") {
+              @Override
+              public void resolve() {
+                  if(AllZone.GameAction.isCardInPlay(card)) AllZone.GameAction.sacrifice(card);
+              }
+          };
+          sac.setStackDescription("Sacrifice " + card);
+    	  AllZone.Stack.add(sac);
+      }
     execute(at);
   }//executeAt()
 

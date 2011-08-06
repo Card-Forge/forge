@@ -2048,7 +2048,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
+        /* ************** START *********** START **************************
         else if(cardName.equals("Groundbreaker") || cardName.equals("Ball Lightning")
                 || cardName.equals("Blistering Firecat") || cardName.equals("Spark Elemental")) {
             final SpellAbility spell = new Ability(card, "0") {
@@ -2077,7 +2077,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
             card.addTurnFaceUpCommand(intoPlay);
             card.setSacrificeAtEOT(true);
-        }//*************** END ************ END **************************
+        }//*************** END ************ END ************************* */
         
 
         //*************** START *********** START **************************
@@ -8857,13 +8857,16 @@ public class CardFactory_Creatures {
                         c.addType("Elemental");
                         c.setBaseAttack(3);
                         c.setBaseDefense(1);
+
+                        c.addIntrinsicKeyword("Trample");
+                        c.addIntrinsicKeyword("Haste");
                         
                         //custom settings
                         c.setName("Spark Elemental");
                         c.setImageName("R 3 1 Spark Elemental");
                         
 
-                        final SpellAbility spell = new Ability(card, "0") {
+                        /*final SpellAbility spell = new Ability(card, "0") {
                             @Override
                             public void resolve() {
                                 if(AllZone.GameAction.isCardInPlay(c)) AllZone.GameAction.sacrifice(c);
@@ -8889,7 +8892,8 @@ public class CardFactory_Creatures {
                             }
                         };
                         c.addComesIntoPlayCommand(intoPlay);
-                        c.setSacrificeAtEOT(true);
+                        c.setSacrificeAtEOT(true);*/
+                        c.addIntrinsicKeyword("At the beggining of the end step, sacrifice Spark Elemental.");
                         
                         play.add(c);
                     }

@@ -9949,6 +9949,7 @@ At end of turn, sacrifice Blistering Firecat.
 Morph:R R
 Trample
 Haste
+At the beggining of the end step, sacrifice Blistering Firecat.
 
 Lava Spike
 R
@@ -14849,10 +14850,11 @@ no text
 Spark Elemental
 R
 Creature Elemental
-At end of turn, sacrifice Spark Elemental.
+no text
 3/1
 Trample
 Haste
+At the beggining of the end step, sacrifice Spark Elemental.
 
 Reckless Wurm
 3 R R
@@ -15174,18 +15176,20 @@ Creatures you control get +1/+1.
 Ball Lightning
 R R R
 Creature Elemental
-At end of turn, sacrifice Ball Lightning.
+no text
 6/1
 Haste
 Trample
+At the beggining of the end step, sacrifice Ball Lighting.
 
 Groundbreaker
 G G G
 Creature Elemental
-At end of turn, sacrifice Groundbreaker.
+no text
 6/1
 Haste
 Trample
+At the beggining of the end step, sacrifice Groundbreaker.
 
 Giant Dustwasp
 3 G G
