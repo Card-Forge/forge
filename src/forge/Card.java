@@ -591,6 +591,15 @@ public class Card extends MyObservable {
                 }
             }
             
+            // Storm
+            if (getKeyword().contains("Storm") && !sb.toString().contains("Storm (When you ")) {
+                sb.append("Storm (When you cast this spell, copy it for each spell cast before it this turn.");
+                if (sb.toString().contains("Target") || sb.toString().contains("target")) {
+                    sb.append(" You may choose new targets for the copies.");
+                }
+                sb.append(")\r\n");
+            }
+            
             // CARDNAME can't be countered.
             if (getKeyword().contains("CARDNAME can't be countered.") && !sb.toString().contains("CARDNAME can't be countered.")) {
                 if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
