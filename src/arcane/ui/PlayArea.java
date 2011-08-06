@@ -55,7 +55,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 			for (int i = 0, n = allLands.size(); i < n; i++) {
 				Stack stack = allLands.get(i);
 				CardPanel firstPanel = stack.get(0);
-				if (firstPanel.gameCard.getName().equals(panel.gameCard.getName())) {
+				if (firstPanel.gameCard.getName().equals(panel.gameCard.getName()) && !panel.gameCard.isCreature()) {
 					if (!firstPanel.attachedPanels.isEmpty() || firstPanel.gameCard.isEnchanted()) {
 						// Put this land to the left of lands with the same name and attachments.
 						insertIndex = i;
