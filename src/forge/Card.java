@@ -719,7 +719,9 @@ public class Card extends MyObservable {
             		&& 
             		!keyword.get(i).toString().contains("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")
             		&& 
-            		!keyword.get(i).toString().contains("Permanents don't untap during their controllers' untap steps"))
+            		!keyword.get(i).toString().contains("Permanents don't untap during their controllers' untap steps")
+            		&& 
+            		!keyword.get(i).toString().contains("PreventAllDamageBy"))
             	{
                 if (keyword.get(i).toString().contains("WheneverKeyword")) {
                     String k[] = keyword.get(i).split(":");
@@ -2781,7 +2783,7 @@ public class Card extends MyObservable {
     	}
     	
     	if(hasStartOfKeyword("PreventAllDamageBy")) {
-    		String valid = this.getKeyword().get(getKeywordPosition("PreventAllDamageBy")).split(" ")[1]; 
+    		String valid = this.getKeyword().get(getKeywordPosition("PreventAllDamageBy")).split(" ", 2)[1]; 
     		if (source.isValid(valid,this.getController(),this))
     			return 0;
     	}
