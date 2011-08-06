@@ -661,11 +661,10 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         AllZone.Human_Play.addObserver(new Observer() {
             public void update(Observable a, Object b) {
                 PlayerZone pZone = (PlayerZone) a;
-                PlayArea p = playerPlayPanel;;
                
                 Card c[] = pZone.getCards();
-               
-                GuiDisplayUtil.setupPlayZone(p, c);
+
+                GuiDisplayUtil.setupPlayZone(playerPlayPanel, c);
             }
         });
         AllZone.Human_Play.updateObservers();
@@ -676,11 +675,10 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         AllZone.Computer_Play.addObserver(new Observer() {
             public void update(Observable a, Object b) {
             	PlayerZone pZone = (PlayerZone) a;
-                PlayArea p = oppPlayPanel;;
                
                 Card c[] = pZone.getCards();
                
-                GuiDisplayUtil.setupPlayZone(p, c);
+                GuiDisplayUtil.setupPlayZone(oppPlayPanel, c);
             }
         });
         AllZone.Computer_Play.updateObservers();

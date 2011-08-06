@@ -876,26 +876,31 @@ public class GuiDisplayUtil implements NewConstants {
         	if(card.isEnchanted()){
         		ArrayList<Card> enchants = card.getEnchantedBy();
         		for(Card e : enchants){
-        			toPanel.attachedPanels.add(p.getCardPanel(e.getUniqueNumber()));
+        			arcane.ui.CardPanel cardE = p.getCardPanel(e.getUniqueNumber());
+        			if(cardE != null)
+        				toPanel.attachedPanels.add(cardE);
         		}
         	}
-        	if(card.isEnchanting() && card.getEnchanting().size() == 1){
-        		toPanel.attachedToPanel = p.getCardPanel(card.getEnchanting().get(0).getUniqueNumber());
-        	} 
-        	else toPanel.attachedToPanel = null;
         	
         	if(card.isEquipped()){
         		ArrayList<Card> enchants = card.getEquippedBy();
         		for(Card e : enchants){
-        			toPanel.attachedPanels.add(p.getCardPanel(e.getUniqueNumber()));
+        			arcane.ui.CardPanel cardE = p.getCardPanel(e.getUniqueNumber());
+        			if(cardE != null)
+        				toPanel.attachedPanels.add(cardE);
         		}
         	}
         	
-        	if(card.isEquipping() && card.getEquipping().size() == 1){
+        	if(card.isEnchanting()){
+        		toPanel.attachedToPanel = p.getCardPanel(card.getEnchanting().get(0).getUniqueNumber());
+        	} else if(card.isEquipping()){
         		toPanel.attachedToPanel = p.getCardPanel(card.getEquipping().get(0).getUniqueNumber());
         	} 
         	else toPanel.attachedToPanel = null;
+        	
+        	toPanel.setText(toPanel.gameCard);
         }
+        p.invalidate();
         p.repaint();
     }
 }
