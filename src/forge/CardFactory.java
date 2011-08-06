@@ -5720,6 +5720,196 @@ public class CardFactory implements NewConstants {
             };
             card.addComesIntoPlayCommand(cip);
         }//end etbMakeToken
+        
+        // Generic tap target ___ activated ability
+        //abTapTgt {Ability_Cost}:{Valid Targets}:{Description}
+        if (hasKeyword(card, "abTapTgt") != -1)
+        {
+        	int n = hasKeyword(card, "abTapTgt");
+
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+
+        	String k[] = parse.split(":");
+
+        	String tmpCost = k[0].substring(8);
+        	final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName(), true);
+
+        	final Target tapTargets = new Target("TgtV");
+        	final String Tgts[] = k[1].split(",");
+        	tapTargets.setValidTgts(Tgts);
+        	final String abDesc[] = {"none"};
+        	abDesc[0] = k[2];
+
+        	String tmpDesc = abDesc[0].substring(11);
+        	int i = tmpDesc.indexOf(".");
+        	tmpDesc = tmpDesc.substring(0, i);
+        	tapTargets.setVTSelection("Select target " + tmpDesc + " to tap.");
+
+        	abDesc[0] = abCost.toString() + abDesc[0];
+
+        	final SpellAbility AbTapTgt = new Ability_Activated(card, abCost, tapTargets) {
+        		private static final long serialVersionUID = 2794477584289098775L;
+
+        		@Override
+        		public boolean canPlayAI() {
+        			if (!ComputerUtil.canPayCost(this))
+        				return false;
+
+        			CardList hCards = getTargets();
+
+        			Random r = new Random();
+        			boolean rr = false;
+        			if (r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed()))
+        				rr = true;
+
+        			if(hCards.size() > 0) {
+        				Card c = null;
+        				CardList dChoices = new CardList();
+
+        				for(int i = 0; i < Tgts.length; i++) {
+        					if (Tgts[i].startsWith("Creature")) {
+        						c = CardFactoryUtil.AI_getBestCreature(hCards);
+        						if (c != null)
+        							dChoices.add(c);
+        					}
+
+        					CardListUtil.sortByTextLen(hCards);
+        					dChoices.add(hCards.get(0));
+
+        					CardListUtil.sortCMC(hCards);
+        					dChoices.add(hCards.get(0));
+        				}
+
+        				c = dChoices.get(CardUtil.getRandomIndex(dChoices));
+        				setTargetCard(c);
+
+        				return rr;
+        			}
+
+        			return false;
+        		}
+
+        		CardList getTargets() {
+        			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+        			tmpList = tmpList.getValidCards(Tgts);
+        			tmpList = tmpList.getTargetableCards(card);
+        			return tmpList;
+        		}
+
+        		@Override
+        		public boolean canPlay() {
+        			Cost_Payment pay = new Cost_Payment(abCost, this);
+        			return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        		}
+
+        		@Override
+        		public void resolve() {
+        			Card tgtC = getTargetCard();
+        			if(AllZone.GameAction.isCardInPlay(tgtC)
+        					&& CardFactoryUtil.canTarget(card, tgtC)) {
+        				tgtC.tap();
+        			}
+        		}
+        	}; //AbTapTgt
+
+        	AbTapTgt.setDescription(abDesc[0]);
+        	card.addSpellAbility(AbTapTgt);
+        	card.setSVar("PlayMain1", "TRUE");
+        }//End abTapTgt
+        
+        // Generic tap target ___ activated ability
+        //abTapAll {Ability_Cost}:{Valid Targets}:{Description}
+        if (hasKeyword(card, "abTapAll") != -1)
+        {
+        	int n = hasKeyword(card, "abTapAll");
+
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+
+        	String k[] = parse.split(":");
+
+        	String tmpCost = k[0].substring(8);
+        	final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName(), true);
+
+        	//final Target tapTargets = new Target("TgtV");
+        	String Targets = k[1];
+        	final String Tgts[] = Targets.split(",");
+        	//tapTargets.setValidTgts(Tgts);
+        	final String abDesc[] = {"none"};
+        	final String stackDesc[] = {"none"};
+        	stackDesc[0] = k[2];
+
+        	String tmpDesc = stackDesc[0].substring(8);
+        	int i = tmpDesc.indexOf(".");
+        	tmpDesc = tmpDesc.substring(0, i);
+        	//tapTargets.setVTSelection("Select target " + tmpDesc + " to tap.");
+
+        	abDesc[0] = abCost.toString() + stackDesc[0];
+
+        	final SpellAbility AbTapAll = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = 2161279836590135215L;
+
+				@Override
+        		public boolean canPlayAI() {
+        			if (!ComputerUtil.canPayCost(this))
+        				return false;
+
+        			CardList hCards = getTargets();
+
+        			Random r = new Random();
+        			boolean rr = false;
+        			if (r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed()))
+        				rr = true;
+
+        			if(hCards.size() > 0) {
+        				CardList human = hCards.filter(new CardListFilter() {
+        					public boolean addCard(Card c) {
+        						return c.getController().equals(Constant.Player.Human);
+        					}
+        				});
+        				CardList compy = hCards.filter(new CardListFilter() {
+        					public boolean addCard(Card c) {
+        						return c.getController().equals(Constant.Player.Human);
+        					}
+        				});
+        				if(human.size() > compy.size()) {
+        					return rr;
+        				}
+        			}
+        			return false;
+        		}
+
+        		private CardList getTargets() {
+        			CardList tmpList = AllZoneUtil.getCardsInPlay();
+        			tmpList = tmpList.getValidCards(Tgts);
+        			tmpList = tmpList.getTargetableCards(card);
+        			return tmpList;
+        		}
+
+        		@Override
+        		public boolean canPlay() {
+        			Cost_Payment pay = new Cost_Payment(abCost, this);
+        			return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        		}
+
+        		@Override
+        		public void resolve() {
+        			CardList tgts = getTargets();
+        			for(Card c:tgts) {
+        				if(AllZone.GameAction.isCardInPlay(c)
+        						&& CardFactoryUtil.canTarget(card, c)) {
+        					c.tap();
+        				}
+        			}
+        		}
+        	}; //AbTapTgt
+
+        	AbTapAll.setDescription(abDesc[0]);
+        	AbTapAll.setStackDescription(card.getName()+" - "+stackDesc[0]);
+        	card.addSpellAbility(AbTapAll);
+        	card.setSVar("PlayMain1", "TRUE");
+        }//End abTapAll
         	
         //******************************************************************
         //************** Link to different CardFactories ******************* 
