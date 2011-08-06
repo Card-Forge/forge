@@ -399,7 +399,15 @@ public class CombatUtil {
     
     public static boolean canDestroyAttacker(Card attacker, Card defender) {
         
-        if(attacker.getName().equals("Sylvan Basilisk")) return false;
+        if(defender.hasStartOfKeyword("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")) {
+    		int KeywordPosition = defender.getKeywordPosition("Whenever CARDNAME blocks a creature, destroy that creature at end of combat");
+    		String parse = defender.getKeyword().get(KeywordPosition).toString();
+    		String k[] = parse.split(":");
+    		final String restrictions[] = k[1].split(",");
+    		if(attacker.isValidCard(restrictions)) return true;
+        }
+        
+        if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return false;
         
         int flankingMagnitude = 0;
         if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
@@ -516,6 +524,14 @@ public class CombatUtil {
     	
         if(defender.getKeyword().contains("Indestructible")) return false;
         if(attacker.getName().equals("Sylvan Basilisk")) return true;
+        
+        if(attacker.hasStartOfKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")) {
+        	int KeywordPosition = attacker.getKeywordPosition("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat");
+        	String parse = attacker.getKeyword().get(KeywordPosition).toString();
+    		String k[] = parse.split(":");
+    		final String restrictions[] = k[1].split(",");
+    		if(defender.isValidCard(restrictions)) return true;
+        }
         
         int flankingMagnitude = 0;
         if(attacker.getKeyword().contains("Flanking") && !defender.getKeyword().contains("Flanking")) {
@@ -2206,7 +2222,7 @@ public class CombatUtil {
             
         }//flanking
         
-        // if (b.getName().equals("Abomination")) {
+        
         if(b.hasStartOfKeyword("Whenever CARDNAME blocks a creature, destroy that creature at end of combat")) {
     		int KeywordPosition = b.getKeywordPosition("Whenever CARDNAME blocks a creature, destroy that creature at end of combat");
     		String parse = b.getKeyword().get(KeywordPosition).toString();
