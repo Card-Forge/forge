@@ -25,8 +25,6 @@ public class StaticEffects
 		cardToEffectsList.put("Windwright Mage", new String[] {"Windwright_Mage"});
 		//cardToEffectsList.put("Baru, Fist of Krosa", new String[] {"Baru"});
 		//cardToEffectsList.put("Reach of Brances", new String[] {"Reach_of_Branches"});
-		//cardToEffectsList.put("Essence Warden", new String[] {"Essence_Warden"});
-		//cardToEffectsList.put("Soul Warden", new String[] {"Soul_Warden"});
 		//cardToEffectsList.put("Wirewood Hivemaster", new String[] {"Wirewood_Hivemaster"});
 		//cardToEffectsList.put("Angelic Chorus", new String[] {"Angelic_Chorus"});
 		cardToEffectsList.put("Uril, the Miststalker", new String[] {"Uril"});
@@ -60,7 +58,7 @@ public class StaticEffects
 		cardToEffectsList.put("Overbeing of Myth", new String[] {"Overbeing_of_Myth"});
 		cardToEffectsList.put("Guul Draz Specter", new String[] {"Guul_Draz_Specter"});
 		cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon"});
-		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash"});
+		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash_Heir_to_Blackblade"});
 		cardToEffectsList.put("Student of Warfare", new String[]{"Student_of_Warfare"});
 		cardToEffectsList.put("Kargan Dragonlord", new String[]{"Kargan_Dragonlord"});
 		cardToEffectsList.put("Transcendent Master", new String[]{"Transcendent_Master"});
@@ -84,7 +82,6 @@ public class StaticEffects
 		cardToEffectsList.put("Old Man of the Sea", new String[] {"Old_Man_of_the_Sea"});
 		cardToEffectsList.put("Serpent of the Endless Sea", new String[] {"Serpent_of_the_Endless_Sea"});
 		cardToEffectsList.put("Vexing Beetle", new String[] {"Vexing_Beetle"});
-		//cardToEffectsList.put("Sejiri Merfolk", new String[] {"Sejiri_Merfolk"});
 		cardToEffectsList.put("Wild Nacatl", new String[] {"Wild_Nacatl"});
 		cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] {"Liu_Bei"});
 		cardToEffectsList.put("Guul Draz Vampire", new String[] {"Guul_Draz_Vampire"});
@@ -120,15 +117,9 @@ public class StaticEffects
 		cardToEffectsList.put("Lord of the Undead", new String[] {"Lord_of_the_Undead_Pump", "Lord_of_the_Undead_Other"});
 		cardToEffectsList.put("Cemetery Reaper", new String[] {"Cemetery_Reaper_Pump", "Cemetery_Reaper_Other"});
 		cardToEffectsList.put("Captain of the Watch", new String[] {"Captain_of_the_Watch_Pump", "Captain_of_the_Watch_Other"});
-		//cardToEffectsList.put("Veteran Armorsmith", new String[] {"Veteran_Armorsmith_Pump", "Veteran_Armorsmith_Other"});
 		cardToEffectsList.put("Veteran Swordsmith", new String[] {"Veteran_Swordsmith_Pump", "Veteran_Swordsmith_Other"});
-		//cardToEffectsList.put("Timber Protector", new String[] {"Timber_Protector_Pump", "Timber_Protector_Other"});
-		//cardToEffectsList.put("Goblin Chieftain", new String[] {"Goblin_Chieftain_Pump", "Goblin_Chieftain_Other"});
-		//cardToEffectsList.put("Goblin King", new String[] {"Goblin_King_Pump", "Goblin_King_Other"});
-		//cardToEffectsList.put("Merfolk Sovereign", new String[] {"Merfolk_Sovereign_Pump", "Merfolk_Sovereign_Other"});
 		//cardToEffectsList.put("Lord of Atlantis", new String[] {"Lord_of_Atlantis_Pump","Lord_of_Atlantis_Other"});
 		cardToEffectsList.put("Elvish Champion", new String[] {"Elvish_Champion_Pump","Elvish_Champion_Other"});
-		//cardToEffectsList.put("Field Marshal", new String[] {"Field_Marshal_Pump", "Field_Marshal_Other"});
 		cardToEffectsList.put("Death Baron", new String[] {"Death_Baron_Pump","Death_Baron_Other"});
 		cardToEffectsList.put("Lovisa Coldeyes", new String[] {"Lovisa_Coldeyes_Pump"});
 		cardToEffectsList.put("Aven Brigadier", new String[] {"Aven_Brigadier_Soldier_Pump", "Aven_Brigadier_Bird_Pump", "Aven_Brigadier_Other"});
@@ -141,8 +132,6 @@ public class StaticEffects
 		cardToEffectsList.put("Time of Heroes", new String[] {"Time_of_Heroes"});
 		cardToEffectsList.put("Glorious Anthem", new String[] {"Glorious_Anthem"});
 		cardToEffectsList.put("Gaea's Anthem", new String[] {"Gaeas_Anthem"});
-		//cardToEffectsList.put("Bad Moon", new String[] {"Bad_Moon"});
-		//cardToEffectsList.put("Crusade", new String[] {"Crusade"});
 		cardToEffectsList.put("Honor of the Pure", new String[] {"Honor_of_the_Pure"});
 		cardToEffectsList.put("Beastmaster Ascension", new String[] {"Beastmaster_Ascension"});
 		cardToEffectsList.put("Spidersilk Armor", new String[] {"Spidersilk_Armor"});
@@ -160,7 +149,6 @@ public class StaticEffects
 		cardToEffectsList.put("Eladamri, Lord of Leaves", new String[] {"Eladamri"});
 		cardToEffectsList.put("Tolsimir Wolfblood", new String[] {"Tolsimir"});
 		cardToEffectsList.put("Imperious Perfect", new String[] {"Imperious_Perfect"});
-		//cardToEffectsList.put("Mad Auntie", new String[] {"Mad_Auntie"});
 		cardToEffectsList.put("Kongming, \"Sleeping Dragon\"", new String[] {"Kongming"});
 		cardToEffectsList.put("Radiant, Archangel", new String[] {"Radiant_Archangel"});
 		cardToEffectsList.put("Castle", new String[] {"Castle"});

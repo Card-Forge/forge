@@ -11187,8 +11187,6 @@ public class GameActionUtil {
 		//Reach_of_Branches.execute();
 		Sosukes_Summons.execute();
 
-		//Essence_Warden.execute();
-		//Soul_Warden.execute();
 		//Souls_Attendant.execute();
 		Wirewood_Hivemaster.execute();
 
@@ -14244,43 +14242,7 @@ public class GameActionUtil {
 			return false;
 		}// newSnake()
 	}; // Sosukes Summons
-	/*
-	public static Command Mad_Auntie                  = new Command() {
-		private static final long serialVersionUID   = 7969640438477308299L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Mad Auntie");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Goblin");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(1);
-					c.addSemiPermanentDefenseBoost(1);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute
-	}; // Mad_Auntie()
-	*/
+	
 	public static Command Imperious_Perfect           = new Command() {
 		private static final long serialVersionUID   = 5835056455026735693L;
 
@@ -14937,7 +14899,7 @@ public class GameActionUtil {
 		}
 	};
 
-	public static Command Korlash                     = new Command() {
+	public static Command Korlash_Heir_to_Blackblade                     = new Command() {
 		private static final long serialVersionUID = 1791221644995716398L;
 
 		public void execute() {
@@ -15149,45 +15111,6 @@ public class GameActionUtil {
 			return opp.getLife() <= 10;
 		}
 	};
-	/*
-	public static Command Sejiri_Merfolk                   = new Command() {
-
-		private static final long serialVersionUID = 3624165284236103054L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Sejiri Merfolk");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				if(hasPlains(c)) {
-					if (!c.getIntrinsicKeyword().contains("First Strike"))
-						c.addIntrinsicKeyword("First Strike");
-					if (!c.getIntrinsicKeyword().contains("Lifelink"))
-						c.addIntrinsicKeyword("Lifelink");
-				} else {
-					c.removeIntrinsicKeyword("Lifelink");
-					c.removeIntrinsicKeyword("First Strike");
-				}
-			}
-		}// execute()
-
-		private boolean hasPlains(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-
-			CardList land = new CardList();
-			land.addAll(play.getCards());
-
-			land = land.getType("Plains");
-			if(land.size() > 0) return true;
-			else return false;
-		}
-	};
-	*/
 
 	public static Command Gaeas_Avenger                   = new Command() {
 		private static final long serialVersionUID = 1987511098173387864L;
@@ -16720,82 +16643,7 @@ public class GameActionUtil {
 
 	}; //Veteran Swordsmith Other
 	
-	/*
-
-	public static Command Veteran_Armorsmith_Pump     = new Command() {
-		private static final long serialVersionUID   = 542524781150091105L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Veteran Armorsmith");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Soldier");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isCreature()
-							&& !c.getName().equals(
-									"Veteran Armorsmith")) {
-						c.addSemiPermanentDefenseBoost(1);
-						gloriousAnthemList.add(c);
-					}
-
-				} // for
-			} // for
-
-		}// execute()
-
-	}; //Veteran_Armorsmith_Pump
-
-	public static Command Veteran_Armorsmith_Other    = new Command() {
-		private static final long serialVersionUID = -7242601069504800797L;
-
-		int                       otherCenns       = 0;
-
-		private int countOtherCenns(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList cenns = new CardList(play.getCards());
-			cenns = cenns.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.getName().equals(
-							"Veteran Armorsmith")
-							&& (c.getType().contains("Soldier") || c.getKeyword().contains("Changeling"));
-				}
-			});
-			return cenns.size() - 1;
-
-		}
-
-		public void execute() {
-
-			CardList creature = AllZoneUtil.getCardsInPlay("Veteran Armorsmith");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				otherCenns = countOtherCenns(c);
-				c.setOtherDefenseBoost(otherCenns);
-
-
-			}// for inner
-		}// execute()
-
-	}; //Veteran Armorsmith Other
-	*/
+	
 
 	public static Command Elvish_Champion_Pump        = new Command() {
 
@@ -16878,102 +16726,6 @@ public class GameActionUtil {
 
 	}; //Elvish_Champion_Other
 
-	/*
-	public static Command Timber_Protector_Pump       = new Command() {
-
-		private static final long serialVersionUID   = 395882142255572162L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				if(c.isCreature()) {
-					c.addSemiPermanentAttackBoost(-1);
-					c.addSemiPermanentDefenseBoost(-1);
-					c.removeExtrinsicKeyword("Indestructible");
-				} else //forest
-				{
-					c.removeExtrinsicKeyword("Indestructible");
-				}
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Timber Protector");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-
-				creature = creature.filter(new CardListFilter() {
-					public boolean addCard(Card c) {
-						return c.getType().contains("Treefolk")
-						|| c.getType().contains("Forest")
-						|| c.getKeyword().contains("Changeling");
-					}
-				});
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isCreature()
-							&& !c.getName().equals(
-							"Timber Protector")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						c.addExtrinsicKeyword("Indestructible");
-						gloriousAnthemList.add(c);
-					} else if(c.getType().contains("Forest")) {
-						c.addExtrinsicKeyword("Indestructible");
-						gloriousAnthemList.add(c);
-					}
-
-				} // for
-			} // for
-
-		}// execute()
-
-	}; //Timber_Protector_Pump
-
-	public static Command Timber_Protector_Other      = new Command() {
-		private static final long serialVersionUID = -3107498901233064819L;
-		int                       otherLords       = 0;
-
-		private int countOtherLords() {
-			CardList lords = AllZoneUtil.getCardsInPlay("Timber Protector");
-			return lords.size() - 1;
-
-		}
-
-		public void execute() {
-
-
-			CardList creature = AllZoneUtil.getCardsInPlay("Timber Protector");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				otherLords = countOtherLords();
-				c.setOtherAttackBoost(otherLords);
-				c.setOtherDefenseBoost(otherLords);
-				if(!c.getOtherExtrinsicKeyword().contains(
-						"Indestructible")
-						&& otherLords > 0) c.addOtherExtrinsicKeyword("Indestructible");
-				else if (c.getOtherExtrinsicKeyword().contains("Indestructible") && otherLords == 0 )
-					c.removeOtherExtrinsicKeyword("Indestructible");
-
-
-			}// for inner
-		}// execute()
-
-	}; //Timber_Protector_Other
-	*/
-	
-	
-	
-	
-	
 	
 	public static Command Death_Baron_Pump = new Command() {
 
@@ -19891,84 +19643,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Tolsimir
-	/*
-	public static Command Bad_Moon                    = new Command() {
-		private static final long serialVersionUID   = 7137954808896324237L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-
-			}
-
-			// add +1/+1 to black cards
-			list.clear();
-			PlayerZone[] zone = getZone("Bad Moon");
-
-			// for each zone found add +1/+1 to each black card
-			for(int outer = 0; outer < zone.length; outer++) {
-				// CardList creature = new CardList(zone[outer].getCards());
-				CardList creature = AllZoneUtil.getCreaturesInPlay();
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isBlack() && !c.isFaceDown()) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-
-						gloriousAnthemList.add(c);
-					}
-
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Bad Moon
 	
-
-	public static Command Crusade                     = new Command() {
-		private static final long serialVersionUID   = 880902091818475216L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-
-			}
-
-			// add +1/+1 to white cards
-			list.clear();
-			PlayerZone[] zone = getZone("Crusade");
-
-			// for each zone found add +1/+1 to each white card
-			for(int outer = 0; outer < zone.length; outer++) {
-				// CardList creature = new CardList(zone[outer].getCards());
-				CardList creature = AllZoneUtil.getCreaturesInPlay();
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isWhite() && !c.isFaceDown()) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Crusade
-	*/
 
 	public static Command Honor_of_the_Pure           = new Command() {
 
@@ -20655,75 +20330,126 @@ public class GameActionUtil {
 
 	public static HashMap<String, Command> commands = new HashMap<String, Command>();
 	static {
-		commands.put("Conspiracy", Conspiracy);
-		commands.put("Serra_Avatar", Serra_Avatar);
+		//Please add cards in alphabetical order so they are easier to find
+		
+		commands.put("Absolute_Grace", Absolute_Grace);
+		commands.put("Absolute_Law", Absolute_Law);
+		commands.put("Adamaro_First_to_Desire", Adamaro_First_to_Desire);
 		commands.put("Ajani_Avatar_Token", Ajani_Avatar_Token);
-		commands.put("Windwright_Mage", Windwright_Mage);
-
-		//commands.put("Baru", Baru);
-		//commands.put("Reach_of_Branches", Reach_of_Branches);
-
-		//commands.put("Essence_Warden", Essence_Warden);
-		//commands.put("Soul_Warden", Soul_Warden);
-		//commands.put("Wirewood_Hivemaster", Wirewood_Hivemaster);
 		//commands.put("Angelic_Chorus", Angelic_Chorus);
-
-		commands.put("Uril", Uril);
-		commands.put("Rabid_Wombat", Rabid_Wombat);
-		commands.put("Kithkin_Rabble", Kithkin_Rabble);
-		commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
-		commands.put("Faerie_Swarm", Faerie_Swarm);
-		commands.put("Drove_of_Elves", Drove_of_Elves);
-		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
-		commands.put("Lhurgoyf", Lhurgoyf);
-		commands.put("Deaths_Shadow", Deaths_Shadow);
-		commands.put("Nightmare", Nightmare);
+		commands.put("Angry_Mob", Angry_Mob);
 		commands.put("Aven_Trailblazer", Aven_Trailblazer);
-		commands.put("Matca_Rioters", Matca_Rioters);
-		commands.put("Rakdos_Pit_Dragon", Rakdos_Pit_Dragon);
-		commands.put("Nyxathid", Nyxathid);
-		commands.put("Lord_of_Extinction", Lord_of_Extinction);
+		
+		//commands.put("Baru", Baru);
+		
 		commands.put("Cantivore", Cantivore);
+		commands.put("Castle", Castle);
+		commands.put("Castle_Raptors", Castle_Raptors);
 		commands.put("Cognivore", Cognivore);
-		commands.put("Mortivore", Mortivore);
-		commands.put("Terravore", Terravore);
+		commands.put("Conspiracy", Conspiracy);
+		commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
+		
+		commands.put("Deaths_Shadow", Deaths_Shadow);
+		commands.put("Drove_of_Elves", Drove_of_Elves);
+		
+		commands.put("Eladamri", Eladamri);
+		
+		commands.put("Faerie_Swarm", Faerie_Swarm);
+		
+		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
+		
+		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
+		commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
+		commands.put("Homarid", Homarid);
+		
+		commands.put("Imperious_Perfect", Imperious_Perfect);
+		
+		commands.put("Joiner_Adept", Joiner_Adept);
+		
+		commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
+		
+		commands.put("Kithkin_Rabble", Kithkin_Rabble);
+		commands.put("Knight_of_the_Reliquary", Knight_of_the_Reliquary);
+		commands.put("Kor_Spiritdancer", Kor_Spiritdancer);
+		commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
+		
+		
+		commands.put("Lhurgoyf", Lhurgoyf);
+		commands.put("Lord_of_Extinction", Lord_of_Extinction);
+		
 		commands.put("Magnivore", Magnivore);
-		commands.put("Tarmogoyf", Tarmogoyf);
-		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
-		commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
-		commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
 		commands.put("Maro", Maro);
 		commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
-		commands.put("Adamaro_First_to_Desire", Adamaro_First_to_Desire);
+		commands.put("Matca_Rioters", Matca_Rioters);
+		commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
+		commands.put("Mortivore", Mortivore);
+		commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
+		
+		commands.put("Nightmare", Nightmare);
+		commands.put("Nyxathid", Nyxathid);
+		
+		commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
 		commands.put("Overbeing_of_Myth", Overbeing_of_Myth);
-		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
-		commands.put("Dakkon", Dakkon);
-		commands.put("Korlash", Korlash);
-
-		commands.put("Student_of_Warfare", Student_of_Warfare);
-		commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
-		commands.put("Transcendent_Master", Transcendent_Master);
-		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
+		
+		commands.put("People_of_the_Woods", People_of_the_Woods);
+		commands.put("Plague_Rats", Plague_Rats);
+		commands.put("Primalcrux", Primalcrux);
+		
+		
+		
+		commands.put("Rabid_Wombat", Rabid_Wombat);
+		commands.put("Rakdos_Pit_Dragon", Rakdos_Pit_Dragon);
+		//commands.put("Reach_of_Branches", Reach_of_Branches);
+		
+		commands.put("Serra_Avatar", Serra_Avatar);
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
+		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
+		commands.put("Student_of_Warfare", Student_of_Warfare);
+		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
+		
+		commands.put("Tarmogoyf", Tarmogoyf);
+		commands.put("Terravore", Terravore);
+		commands.put("Transcendent_Master", Transcendent_Master);
+		
+		commands.put("Uril", Uril);
+		
+		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
+		
+		commands.put("Windwright_Mage", Windwright_Mage);
+		//commands.put("Wirewood_Hivemaster", Wirewood_Hivemaster);
+		
+		commands.put("Yavimaya_Enchantress", Yavimaya_Enchantress);
+		
+		commands.put("Zulaport_Enforcer", Zulaport_Enforcer);
+		
+		///The commands above are in alphabetical order by cardname.  The cammands.put() below need to be filed above
+		
+		
+		commands.put("Dakkon", Dakkon);
+		
+
+		
+		
+		
+		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
+		
 		commands.put("Caravan_Escort", Caravan_Escort);
 		commands.put("Ikiral_Outrider", Ikiral_Outrider);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
 		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
-		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
-		commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
+		
 		commands.put("Nirkana_Cutthroat", Nirkana_Cutthroat);
-		commands.put("Zulaport_Enforcer", Zulaport_Enforcer);
+		
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Champions_Drake", Champions_Drake);
 		
-		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
+		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
-		commands.put("People_of_the_Woods", People_of_the_Woods);
-		commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
+		
+		
 		commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Vexing_Beetle", Vexing_Beetle);
-		//commands.put("Sejiri_Merfolk", Sejiri_Merfolk);
 		commands.put("Wild_Nacatl", Wild_Nacatl);
 		commands.put("Liu_Bei", Liu_Bei);
 		commands.put("Mystic_Enforcer", Mystic_Enforcer);
@@ -20739,10 +20465,9 @@ public class GameActionUtil {
 		commands.put("Werebear", Werebear);
 		commands.put("Divinity_of_Pride", Divinity_of_Pride);
 		commands.put("Serra_Ascendant", Serra_Ascendant);
-		commands.put("Yavimaya_Enchantress", Yavimaya_Enchantress);
+		
 		commands.put("Aura_Gnarlid", Aura_Gnarlid);
-		commands.put("Kor_Spiritdancer", Kor_Spiritdancer);
-		commands.put("Knight_of_the_Reliquary", Knight_of_the_Reliquary);
+		
 		commands.put("Zuberi", Zuberi);
 		commands.put("Loxodon_Punisher", Loxodon_Punisher);
 		commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
@@ -20770,18 +20495,6 @@ public class GameActionUtil {
 		commands.put("Captain_of_the_Watch_Other", Captain_of_the_Watch_Other);
 		commands.put("Veteran_Swordsmith_Pump", Veteran_Swordsmith_Pump);
 		commands.put("Veteran_Swordsmith_Other", Veteran_Swordsmith_Other);
-		//commands.put("Veteran_Armorsmith_Pump", Veteran_Armorsmith_Pump);
-		//commands.put("Veteran_Armorsmith_Other", Veteran_Armorsmith_Other);
-		//commands.put("Merfolk_Sovereign_Pump", Merfolk_Sovereign_Pump);
-		//commands.put("Merfolk_Sovereign_Other", Merfolk_Sovereign_Other);
-		//commands.put("Timber_Protector_Pump", Timber_Protector_Pump);
-		//commands.put("Timber_Protector_Other", Timber_Protector_Other);
-		//commands.put("Goblin_Chieftain_Pump", Goblin_Chieftain_Pump);
-		//commands.put("Goblin_Chieftain_Other", Goblin_Chieftain_Other);
-		//commands.put("Goblin_King_Pump", Goblin_King_Pump);
-		//commands.put("Goblin_King_Other", Goblin_King_Other);
-		//commands.put("Field_Marshal_Pump", Field_Marshal_Pump);
-		//commands.put("Field_Marshal_Other", Field_Marshal_Other);
 		commands.put("Death_Baron_Pump", Death_Baron_Pump);
 		commands.put("Death_Baron_Other", Death_Baron_Other);
 		commands.put("Lovisa_Coldeyes_Pump", Lovisa_Coldeyes_Pump);
@@ -20800,8 +20513,6 @@ public class GameActionUtil {
 		commands.put("Time_of_Heroes", Time_of_Heroes);
 		commands.put("Glorious_Anthem", Glorious_Anthem);
 		commands.put("Gaeas_Anthem", Gaeas_Anthem);
-		//commands.put("Bad_Moon", Bad_Moon);
-		//commands.put("Crusade", Crusade);
 		commands.put("Honor_of_the_Pure", Honor_of_the_Pure);
 		commands.put("Beastmaster_Ascension", Beastmaster_Ascension);
 		commands.put("Spidersilk_Armor", Spidersilk_Armor);
@@ -20818,15 +20529,12 @@ public class GameActionUtil {
 		commands.put("Jacques", Jacques);
 		commands.put("Kaysa", Kaysa);
 		commands.put("Meng_Huo", Meng_Huo);
-		commands.put("Eladamri", Eladamri);
+		
 		commands.put("Tolsimir", Tolsimir);
-		commands.put("Imperious_Perfect", Imperious_Perfect);
-		//commands.put("Mad_Auntie", Mad_Auntie);
 
 		commands.put("Kongming", Kongming);
 		commands.put("Radiant_Archangel", Radiant_Archangel);
-		commands.put("Castle", Castle);
-		commands.put("Castle_Raptors", Castle_Raptors);
+		
 		commands.put("Giant_Tortoise", Giant_Tortoise);
 
 		commands.put("Darksteel_Forge", Darksteel_Forge);
@@ -20840,8 +20548,7 @@ public class GameActionUtil {
 		commands.put("Daru_Warchief", Daru_Warchief);
 		commands.put("Levitation", Levitation);
 		commands.put("Knighthood", Knighthood);
-		commands.put("Absolute_Law", Absolute_Law);
-		commands.put("Absolute_Grace", Absolute_Grace);
+		
 		commands.put("Tabernacle", Tabernacle);
 		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
 		//commands.put("Mobilization", Mobilization);
@@ -20888,7 +20595,7 @@ public class GameActionUtil {
 		commands.put("Marrow_Gnawer", Marrow_Gnawer);
 
 		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
-		commands.put("Joiner_Adept", Joiner_Adept);
+		
 		commands.put("Meddling_Mage", Meddling_Mage);
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
@@ -20896,12 +20603,10 @@ public class GameActionUtil {
 		commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Heedless_One", Heedless_One);
 		commands.put("Omnath", Omnath);
-		commands.put("Angry_Mob", Angry_Mob);
+		
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		commands.put("Umbra_Stalker", Umbra_Stalker);
-		commands.put("Primalcrux", Primalcrux);
-		commands.put("Homarid", Homarid);
-		commands.put("Plague_Rats", Plague_Rats);
+		
 		
 		//System.out.println("size of commands: " + commands.size());
 
