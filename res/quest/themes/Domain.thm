@@ -1,6 +1,6 @@
 BasicLandPercentage=0
 
-[Group MaxCnt=40 Percentage=40]
+[Group MaxCnt=4 Percentage=40]
 Underground Sea
 Plateau
 Taiga
@@ -13,7 +13,7 @@ Badlands
 Volcanic Island
 [/Group]
 
-[Group MaxCnt=20 Percentage=30]
+[Group MaxCnt=4 Percentage=30]
 Aven Trailblazer
 Drag Down
 Tribal Flames
@@ -21,7 +21,7 @@ Allied Strategies
 Matca Rioters
 [/Group]
 
-[Group MaxCnt=30 Percentage=20]
+[Group MaxCnt=4 Percentage=20]
 Collective Restraint
 Voices from the Void
 Ordered Migration
@@ -31,9 +31,10 @@ Gaea's Might
 Global Ruin
 Exotic Disease
 Stratadon
+Spore Burst
 [/Group]
 
-[Group MaxCnt=20 Percentage=10]
+[Group MaxCnt=2 Percentage=10]
 Wandering Goblins
 Wandering Stream
 Power Armor
