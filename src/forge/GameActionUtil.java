@@ -13864,7 +13864,7 @@ public class GameActionUtil {
 		}
 	};
 	*/
-
+	/*
 	public static Command Bloodghast                  = new Command() {
 		private static final long serialVersionUID = -4252257530318024113L;
 
@@ -13884,6 +13884,7 @@ public class GameActionUtil {
 			return opp.getLife() <= 10;
 		}
 	};
+	*/
 	/*
 	public static Command Gaeas_Avenger                   = new Command() {
 		private static final long serialVersionUID = 1987511098173387864L;
@@ -16234,7 +16235,7 @@ public class GameActionUtil {
 		//commands.put("Aven_Trailblazer", Aven_Trailblazer);
 		
 		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
-		commands.put("Bloodghast", Bloodghast);
+		//commands.put("Bloodghast", Bloodghast);
 		commands.put("Broodwarden", Broodwarden);
 		
 		//commands.put("Cantivore", Cantivore);

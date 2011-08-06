@@ -1,10 +1,11 @@
 Name:Bloodghast
 ManaCost:B B
 Types:Creature Vampire Spirit
-Text:Bloodghast has haste as long as an opponent has 10 or less life.\r\nLandfall - Whenever a land enters the battlefield under your control, you may return Bloodghast from your graveyard to the battlefield.
+Text:Landfall - Whenever a land enters the battlefield under your control, you may return Bloodghast from your graveyard to the battlefield.
 PT:2/1
 K:CARDNAME can't block.
 K:Landfall
+K:stPumpSelf:Creature:0/0/Haste:OppLifeLE/10:CARDNAME has haste as long as an opponent has 10 or less life.
 SVar:SacMe:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodghast.jpg
