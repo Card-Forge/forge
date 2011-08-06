@@ -5146,6 +5146,7 @@ res/cardsfolder/raze.txt -text svneol=native#text/plain
 res/cardsfolder/razing_snidd.txt svneol=native#text/plain
 res/cardsfolder/razor_golem.txt -text svneol=native#text/plain
 res/cardsfolder/razor_hippogriff.txt svneol=native#text/plain
+res/cardsfolder/razor_pendulum.txt -text svneol=native#text/plain
 res/cardsfolder/razorclaw_bear.txt svneol=native#text/plain
 res/cardsfolder/razorfield_rhino.txt -text svneol=native#text/plain
 res/cardsfolder/razorfield_thresher.txt -text svneol=native#text/plain
