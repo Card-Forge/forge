@@ -6261,6 +6261,7 @@ res/cardsfolder/terminate.txt -text svneol=native#text/plain
 res/cardsfolder/terohs_faithful.txt -text svneol=native#text/plain
 res/cardsfolder/terra_eternal.txt -text svneol=native#text/plain
 res/cardsfolder/terra_stomper.txt -text svneol=native#text/plain
+res/cardsfolder/terrain_generator.txt -text svneol=native#text/plain
 res/cardsfolder/terramorphic_expanse.txt -text svneol=native#text/plain
 res/cardsfolder/terravore.txt -text svneol=native#text/plain
 res/cardsfolder/territorial_baloth.txt -text svneol=native#text/plain
