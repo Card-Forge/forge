@@ -635,7 +635,7 @@ public class ComputerUtil_Block2
 			  }
 		  }
 	  
-	 attackersLeft = currentAttackers; 
+	  attackersLeft = new CardList(currentAttackers.toArray()); 
 	  
 	 //Reinforce blockers blocking attackers with trample if life is still in danger
 	  if (CombatUtil.lifeInDanger(combat)) {
