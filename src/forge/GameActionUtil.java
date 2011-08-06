@@ -7268,77 +7268,6 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Sensation_Gorger() 
 
-	private static void upkeep_Winnower_Patrol() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Winnower Patrol");
-
-		// final Ability ability;
-		if(library.size() > 0) {
-		 for(int i = 0; i < list.size(); i++) {
-			// System.out.println("top of deck: " + library.get(i).getName());
-			String creatureType = library.get(0).getType().toString();
-			String cardName = library.get(0).getName();
-
-
-			System.out.println("CardName: " + list.get(i) + " id: " + list.get(i).getUniqueNumber());
-
-			final int cardIndex = i;
-
-			final Ability ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-					PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-
-					String creatureType = library.get(cardIndex).getType().toString();
-
-
-					if(creatureType.contains("Elf") || creatureType.contains("Warrior")
-							|| library.get(cardIndex).getKeyword().contains("Changeling")) {
-
-						CardList list = new CardList(play.getCards());
-						list = list.getName("Winnower Patrol");
-
-						Card c = list.get(cardIndex); // must get same winnower
-						// patrol
-						System.out.println("cardIndex: " + cardIndex + " name: " + c.getName());
-						int attack = c.getBaseAttack();
-						int defense = c.getBaseDefense();
-
-						attack++;
-						defense++;
-
-						c.setBaseAttack(attack);
-						c.setBaseDefense(defense);
-
-					}
-
-				}// resolve()
-			};// Ability
-			if(creatureType.contains("Elf") || creatureType.contains("Warrior")) {
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("Winnower Patrol - ").append(player).append(" reveals: ");
-				sb.append(cardName).append(", and Winnower Patrol gets +1/+1.");
-				ability.setStackDescription(sb.toString());
-			}
-			else {
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("Winnower Patrol - ").append(player).append(" reveals top card: ");
-				sb.append(cardName).append(".");
-				ability.setStackDescription(sb.toString());
-			}
-
-			AllZone.Stack.add(ability);
-		 }// for
-		}//library.size()>0
-	}// upkeep_Winnower_Patrol()
-	
 	private static void upkeep_Benthic_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
@@ -7652,6 +7581,72 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }// for
     }// upkeep_Wandering_Graybeard()
+    
+    
+    private static void upkeep_Winnower_Patrol() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Winnower Patrol");
+        
+        if (kinship.size() == 0)
+            return;
+        
+        final String[] shareTypes = { "Elf", "Warrior" };
+        final Card[] prevCardShown = { null };
+        final Card peek[] = { null };
+        
+        for (final Card k : kinship) {
+            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+                @Override
+                public void resolve() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    if (library.size() <= 0)
+                        return;
+                    
+                    peek[0] = library.get(0);
+                    boolean wantCounter = false;
+                    
+                    // We assume that both players will want to peek, ask if they want to reveal.
+                    // We do not want to slow down the pace of the game by asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    
+                    if (peek[0].isValidCard(shareTypes)) {
+                        if (player.isHuman()) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Your top card is ").append(peek[0].getName());
+                            question.append(". Reveal card and put a +1/+1 counter on Winnower Patrol?");
+                            if (showYesNoDialog(k, question.toString())) {
+                                wantCounter = true;
+                            }
+                        }
+                        // player isComputer()
+                        else {
+                            String title = "Computer reveals";
+                            revealTopCard(title);
+                            wantCounter = true;
+                        }
+                    } else if (player.isHuman()) {
+                        String title = "Your top card is";
+                        revealTopCard(title);
+                    }
+                    if (wantCounter)
+                        k.addCounter(Counters.P1P1, 1);
+                }// resolve()
+                
+                private void revealTopCard(String title) {
+                    if (peek[0] != prevCardShown[0]) {
+                        AllZone.Display.getChoice(title, peek[0]);
+                        prevCardShown[0] = peek[0];
+                    }
+                }// revealTopCard()
+            };// ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Winnower Patrol - ").append(player);
+            sb.append(" triggers Kinship");
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Winnower_Patrol()
     
     
     private static void upkeep_Wolf_Skull_Shaman() {
