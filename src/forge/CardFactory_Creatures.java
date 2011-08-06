@@ -4760,24 +4760,7 @@ public class CardFactory_Creatures {
             
             card.addTurnFaceUpCommand(turnsFaceUp);
         }//*************** END ************ END **************************
-        */
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Serra Avatar")) {
-            Command leavesPlay = new Command() {
-                private static final long serialVersionUID = -2274397219668820020L;
-                
-                public void execute() {
-                    //moveto library
-                    PlayerZone libraryZone = AllZone.getZone(Constant.Zone.Library, card.getOwner());
-                    AllZone.GameAction.moveTo(libraryZone, card);
-                    //shuffle library
-                    card.getOwner().shuffle();
-                }//execute()
-            };//Command
-            card.addDestroyCommand(leavesPlay);
-        }//*************** END ************ END **************************
-        
+        */        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Pestermite")) {
