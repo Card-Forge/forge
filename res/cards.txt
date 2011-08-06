@@ -1,3 +1,46 @@
+Long-Term Plans
+2 U
+Instant
+Search your library for a card, shuffle your library, then put that card third from the top.
+spTutor:Card:ThirdFromTopOfLibrary
+SVar:RemAIDeck:True
+
+Personal Tutor
+U
+Sorcery
+Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
+spTutor:Sorcery:TopOfLibrary
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/personal_tutor.jpg
+
+Fabricate
+2 U
+Sorcery
+Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.
+spTutor:Artifact:Hand
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fabricate.jpg
+
+Mystical Tutor
+U
+Instant
+Search your library for an instant or sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
+spTutor:Instant,Sorcery:TopOfLibrary
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mystical_tutor.jpg
+
+Enlightened Tutor
+W
+Instant
+Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
+spTutor:Artifact,Enchantment:TopOfLibrary
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enlightened_tutor.jpg
+
 Crib Swap
 2 W
 Tribal Instant Shapeshifter
@@ -9379,13 +9422,6 @@ As Engineered Plague comes into play, choose a creature type.\r\nAll creatures o
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/engineered_plague.jpg
 
-Enlightened Tutor
-W
-Instant
-Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/enlightened_tutor.jpg
-
 Enlisted Wurm
 4 G W
 Creature Wurm
@@ -9867,13 +9903,6 @@ Whenever you play a green spell, you may put a 2/2 green Wolf creature token int
 SVar:BuffedBy:Spell.Green,Spell.Blue
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fable_of_wolf_and_owl.jpg
-
-Fabricate
-2 U
-Sorcery
-Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fabricate.jpg
 
 Faceless Butcher
 2 B B
@@ -20592,13 +20621,6 @@ Flash
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
 
-Mystical Tutor
-U
-Instant
-Search your library for an instant or sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mystical_tutor.jpg
-
 Mythic Proportions
 4 G G G
 Enchantment Aura
@@ -22454,14 +22476,6 @@ Sorcery
 Target opponent reveals his or her hand. You choose a card from it. That player shuffles that card into his or her library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perish_the_thought.jpg
-
-Personal Tutor
-U
-Sorcery
-Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
-spTutor:Sorcery:TopOfLibrary
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/personal_tutor.jpg
 
 Persuasion
 3 U U

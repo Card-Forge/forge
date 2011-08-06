@@ -2171,7 +2171,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
+/* Converted to keyword        
         //*************** START *********** START **************************
         else if(cardName.equals("Enlightened Tutor")) {
             SpellAbility spell = new Spell(card) {
@@ -2242,7 +2242,9 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+ 		*/
+
+        /* Converted to keyword 
         //*************** START *********** START **************************
         else if(cardName.equals("Mystical Tutor")) {
             SpellAbility spell = new Spell(card) {
@@ -2311,7 +2313,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Think Twice")) {

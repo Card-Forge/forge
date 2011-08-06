@@ -8429,7 +8429,7 @@ public class CardFactory_Sorceries {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
-        
+/* Converted to keyword        
         //*************** START *********** START **************************
         else if(cardName.equals("Fabricate")) {
             SpellAbility spell = new Spell(card) {
@@ -8485,7 +8485,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+*/        
         
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
