@@ -1,8 +1,8 @@
 Name:Unsummon
 ManaCost:U
 Types:Instant
-Text:Return target creature to its owner's hand.
-K:spBounceTgt:Creature:Hand
+Text:no text
+A:SP$Bounce|Cost$U|ValidTgts$Creature|TgtPrompt$Select target creature|Destination$Hand|SpellDescription$Return target creature to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unsummon.jpg
 End

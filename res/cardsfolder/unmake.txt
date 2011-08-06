@@ -1,8 +1,8 @@
 Name:Unmake
 ManaCost:WB WB WB
 Types:Instant
-Text:Remove target creature from the game.
-K:spBounceTgt:Creature:Exile
+Text:no text
+A:SP$Bounce|Cost$WB WB WB|ValidTgts$Creature|TgtPrompt$Select target creature|Destination$Exile|SpellDescription$Remove target creature from the game.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unmake.jpg
 End

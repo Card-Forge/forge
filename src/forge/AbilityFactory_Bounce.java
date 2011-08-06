@@ -91,8 +91,12 @@ public class AbilityFactory_Bounce {
 					 for(Card c : tgts)
 						 sb.append(c.getName()).append(" ");
 					 
-					 sb.append(" to ");
-					 sb.append(destination);
+					 sb.append("to ");
+					 
+					 if (destination.equals("TopofLibrary"))
+                         sb.append("Top of Library");
+                     else
+					     sb.append(destination);
 
 					 return sb.toString();
 				}
