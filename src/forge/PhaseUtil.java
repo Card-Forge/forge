@@ -381,4 +381,11 @@ public class PhaseUtil {
 			AllZone.Stack.add(ability);
 		}//end for
 	}
+	
+	public static boolean isBeforeAttackersAreDeclared() {
+		String phase = AllZone.Phase.getPhase();
+		return phase.equals(Constant.Phase.Untap) || phase.equals(Constant.Phase.Upkeep)
+			|| phase.equals(Constant.Phase.Draw) || phase.equals(Constant.Phase.Main1)
+			|| phase.equals(Constant.Phase.Combat_Begin);
+	}
 }

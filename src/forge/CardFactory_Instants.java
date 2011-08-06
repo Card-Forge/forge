@@ -4893,15 +4893,15 @@ public class CardFactory_Instants {
              *  Note: I cheated a bit - they are destroyed at the end of combat since
              *  the getCreatureAttackedThisCombat is cleared at the end of combat, and
              *  as far as I know, this info is not available at EndOfTurn
+             *  
+             *  TODO - add getCreatureAttackedThisTurn function
              */
             final SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = -5746330758531799264L;
 
 				@Override
                 public boolean canPlay() {
-					//can only cast during compy's turn before attackers are declared
-					//Main1 phase won't work because this happens too soon I think
-					return AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Begin);
+					return PhaseUtil.isBeforeAttackersAreDeclared() && AllZone.Phase.isPlayerTurn(card.getController().getOpponent());
                 }//canPlay
 				
 				@Override
