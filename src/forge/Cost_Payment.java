@@ -625,7 +625,9 @@ public class Cost_Payment {
     
     public static Input exileThis(final SpellAbility spell, final Cost_Payment payment) {
         Input target = new Input() {
-            @Override
+			private static final long serialVersionUID = 678668673002725001L;
+
+			@Override
             public void showMessage() {
             	Card card = spell.getSourceCard();
                 if(card.getController().equals(Constant.Player.Human) && AllZone.GameAction.isCardInPlay(card)) {
@@ -655,7 +657,9 @@ public class Cost_Payment {
     
     public static Input exileType(final SpellAbility spell, final String type, final Cost_Payment payment){
         Input target = new Input() {
-            private CardList typeList;
+			private static final long serialVersionUID = 1403915758082824694L;
+			
+			private CardList typeList;
             private int nExiles = 0;
             private int nNeeded = payment.getCost().getExileAmount();
             
