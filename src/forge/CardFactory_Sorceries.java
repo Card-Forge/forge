@@ -2,8 +2,6 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.Map.Entry;
@@ -1054,44 +1052,44 @@ public class CardFactory_Sorceries {
             freeCast.setStackDescription("Mind's Desire - play card without paying its mana cost.");
 
             Command intoPlay = new Command() {
-                private static final long serialVersionUID = 920148510259054021L;
-                
-                public void execute() {
-					Player player = AllZone.Phase.getPlayerTurn();
-					PlayerZone Play = AllZone.getZone(Constant.Zone.Battlefield, player);
-					Card Minds_D = card;
-					if(player.isHuman()) card.getController().shuffle();
-                		CardList MindsList = new CardList(Play.getCards());
-                		MindsList = MindsList.getName("Mind's Desire");
-                		MindsList.remove(card);
-                		if(MindsList.size() > 0) {
-                			Play.remove(card);   
-                			Minds_D = MindsList.get(0);
-                		} else JOptionPane.showMessageDialog(null, "Click Mind's Desire to see the available cards to play without paying its mana cost.", "", JOptionPane.INFORMATION_MESSAGE);			
-        			        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-        			        CardList libList = new CardList(lib.getCards());
-        			        Card c = null;
-        			        if(libList.size() > 0) {
-        			        	c = libList.get(0);
-            			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Exile, player);
-                                AllZone.GameAction.moveTo(RFG, c);
-                                Minds_D.attachCard(c); 
-        			        }
-                                final Card Minds = card;  
-            	            //	AllZone.GameAction.exile(Minds);   
-                                Minds.setImmutable(true);
-                                Command untilEOT = new Command() {
-                                    private static final long serialVersionUID = -28032591440730370L;
-                                    
-                                    public void execute() {
-                                    	Player player = AllZone.Phase.getPlayerTurn();
-                    					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-                    			        	play.remove(Minds);
-                                            }
-                                };
-                                AllZone.EndOfTurn.addUntil(untilEOT);
-                }
-                
+            	private static final long serialVersionUID = 920148510259054021L;
+
+            	public void execute() {
+            		Player player = AllZone.Phase.getPlayerTurn();
+            		PlayerZone Play = AllZone.getZone(Constant.Zone.Battlefield, player);
+            		Card Minds_D = card;
+            		if(player.isHuman()) card.getController().shuffle();
+            		CardList MindsList = new CardList(Play.getCards());
+            		MindsList = MindsList.getName("Mind's Desire");
+            		MindsList.remove(card);
+            		if(MindsList.size() > 0) {
+            			Play.remove(card);   
+            			Minds_D = MindsList.get(0);
+            		} else JOptionPane.showMessageDialog(null, "Click Mind's Desire to see the available cards to play without paying its mana cost.", "", JOptionPane.INFORMATION_MESSAGE);			
+            		PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+            		CardList libList = new CardList(lib.getCards());
+            		Card c = null;
+            		if(libList.size() > 0) {
+            			c = libList.get(0);
+            			PlayerZone RFG = AllZone.getZone(Constant.Zone.Exile, player);
+            			AllZone.GameAction.moveTo(RFG, c);
+            			Minds_D.attachCard(c); 
+            		}
+            		final Card Minds = card;  
+            		//	AllZone.GameAction.exile(Minds);   
+            		Minds.setImmutable(true);
+            		Command untilEOT = new Command() {
+            			private static final long serialVersionUID = -28032591440730370L;
+
+            			public void execute() {
+            				Player player = AllZone.Phase.getPlayerTurn();
+            				PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
+            				play.remove(Minds);
+            			}
+            		};
+            		AllZone.EndOfTurn.addUntil(untilEOT);
+            	}
+
             };
             SpellAbility spell = new Spell_Permanent(card) {
                 private static final long serialVersionUID = -2940969025405788931L;
@@ -1496,38 +1494,24 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    Player opponent = card.getController().getOpponent();
-                    Card choice = null;
-                    
-                    //check for no cards in library
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, opponent);
-                    
-                    if(library.size() == 0) //this is not right, but leaving it in here for now.
-                    return;
+                    Player target = getTargetPlayer();
+                    String choice = null;
                     
                     //human chooses
-                    if(opponent.equals(AllZone.ComputerPlayer)) {
-                        CardList all = AllZone.CardFactory.getAllCards();
-                        all.sort(new Comparator<Card>() {
-                            public int compare(Card a1, Card b1) {
-                                return a1.getName().compareTo(b1.getName());
-                            }
-                        });
-                        choice = AllZone.Display.getChoice("Choose", removeLand(all.toArray()));
+                    if(card.getController().isHuman()) {
+                        choice = JOptionPane.showInputDialog(null, "Name a nonland card", cardName, JOptionPane.QUESTION_MESSAGE);
                         
-                        Card[] showLibrary = library.getCards();
-                        Comparator<Card> com = new TableSorter(new CardList(showLibrary), 2, true);
-                        Arrays.sort(showLibrary, com);
+                        CardList showLibrary = AllZoneUtil.getPlayerCardsInLibrary(target);
+                        AllZone.Display.getChoiceOptional("Target Player's Library", showLibrary.toArray());
                         
-                        AllZone.Display.getChoiceOptional("Opponent's Library", showLibrary);
-                        opponent.shuffle();
+                        CardList showHand = AllZoneUtil.getPlayerHand(target);
+                        AllZone.Display.getChoiceOptional("Target Player's Hand", showHand.toArray());
                     }//if
-                    else//computer chooses
+                    else  //computer chooses
                     {
                         //the computer cheats by choosing a creature in the human players library or hand
-                        CardList all = new CardList();
-                        all.addAll(AllZone.Human_Hand.getCards());
-                        all.addAll(AllZone.Human_Library.getCards());
+                        CardList all = AllZoneUtil.getPlayerHand(target);
+                        all.add(AllZoneUtil.getPlayerCardsInLibrary(target));
                         
                         CardList four = all.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
@@ -1536,54 +1520,39 @@ public class CardFactory_Sorceries {
                                 return 3 < CardUtil.getConvertedManaCost(c.getManaCost());
                             }
                         });
-                        if(!four.isEmpty()) choice = CardUtil.getRandom(four.toArray());
-                        else choice = CardUtil.getRandom(all.toArray());
+                        if(!four.isEmpty()) choice = CardUtil.getRandom(four.toArray()).getName();
+                        else choice = CardUtil.getRandom(all.toArray()).getName();
                         
                     }//else
-                    remove(choice, opponent);
-                    opponent.shuffle();
+                    remove(choice, target);
+                    target.shuffle();
                 }//resolve()
                 
-                void remove(Card c, Player player) {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                void remove(String name, Player player) {
+                    CardList all = AllZoneUtil.getPlayerHand(player);
+                    all.add(AllZoneUtil.getPlayerGraveyard(player));
+                    all.add(AllZoneUtil.getPlayerCardsInLibrary(player));
                     
-                    CardList all = new CardList();
-                    all.addAll(hand.getCards());
-                    all.addAll(grave.getCards());
-                    all.addAll(library.getCards());
-                    
-                    for(int i = 0; i < all.size(); i++)
-                        if(all.get(i).getName().equals(c.getName())) {
-                            AllZone.GameAction.exile(all.get(i));
+                    for(int i = 0; i < all.size(); i++) {
+                        if(all.get(i).getName().equals(name)) {
+                            if(!all.get(i).isLand()) AllZone.GameAction.exile(all.get(i));
                         }
+                    }
                 }//remove()
                 
                 @Override
                 public boolean canPlayAI() {
-                    Card[] c = removeLand(AllZone.Human_Library.getCards());
-                    return 0 < c.length;
+                    CardList c = AllZoneUtil.getPlayerCardsInLibrary(AllZone.HumanPlayer);
+                    c = c.filter(AllZoneUtil.nonlands);
+                    return c.size() > 0;
                 }
-                
-                Card[] removeLand(Card[] in) {
-                    CardList c = new CardList(in);
-                    c = c.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return !c.isLand();
-                        }
-                    });
-                    return c.toArray();
-                }//removeLand()
             };//SpellAbility spell
+            
+            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+            
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-            
-            spell.setBeforePayMana(new Input_PayManaCost(spell));
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - targeting opponent");
-            spell.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
         
