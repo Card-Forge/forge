@@ -3540,8 +3540,12 @@ public class GameActionUtil {
 	//***ENCHANTMENTS END HERE***
 
 	public static void executeLandfallEffects(Card c) {
-		if (c.getKeyword().contains("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.")) 
+		
+		ArrayList<String> kws = c.getKeyword();
+		for (String kw : kws){
+			if (kw.equals("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn."))
 			landfall_Generic_P2P2_UntilEOT(c);
+		}
 
 		if(c.getName().equals("Rampaging Baloths")) landfall_Rampaging_Baloths(c);
 		else if(c.getName().equals("Emeria Angel")) landfall_Emeria_Angel(c);
@@ -3591,11 +3595,12 @@ public class GameActionUtil {
 		};
 		ability.setStackDescription(c + " - Landfall: gets +2/+2 until EOT.");
 
-		if(c.getController().equals(Constant.Player.Human)) {
+		/*if(c.getController().equals(Constant.Player.Human)) {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
 		}
 
-		else if(c.getController().equals(Constant.Player.Computer)) AllZone.Stack.add(ability);
+		else if(c.getController().equals(Constant.Player.Computer))*/
+		AllZone.Stack.add(ability);
 	}
 
 	private static void landfall_Rampaging_Baloths(Card c) {

@@ -108,24 +108,7 @@ class CardFactory_Equipment {
                 }//execute()
             };//Command
             
-
-            Input runtime = new Input() {
-                
-                private static final long serialVersionUID = 6238211194632758032L;
-                
-                @Override
-                public void showMessage() {
-                    //get all creatures you control
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list = list.getType("Creature");
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list,
-                            "Select target creature to equip", true, false));
-                }
-            };//Input
-            
-            equip.setBeforePayMana(runtime);
+            equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
             
             equip.setDescription("Equip: 2");
             card.addSpellAbility(equip);
@@ -226,7 +209,7 @@ class CardFactory_Equipment {
                 }//execute()
             };//Command
             
-            equip.setBeforePayMana(CardFactoryUtil.input_targetCreature(equip));
+            equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
             
             equip.setDescription("Equip: 0");
             card.addSpellAbility(equip);
@@ -296,24 +279,6 @@ class CardFactory_Equipment {
                 
             };//equip ability
             
-
-            Input runtime = new Input() {
-                
-                private static final long serialVersionUID = 3087795844819115833L;
-                
-                @Override
-                public void showMessage() {
-                    //get all creatures you control
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list = list.getType("Creature");
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list,
-                            "Select target creature to equip", true, false));
-                }
-            };//Input
-            
-
             final Ability gainLife = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -477,7 +442,7 @@ class CardFactory_Equipment {
             boost.setDescription("Remove a charge counter from Umezawa's Jitte: Equipped creature gets +2/+2 until end of turn.");
             boost.setStackDescription(cardName + " - Equipped creature gets +2/+2 untin end of turn.");
             
-            equip.setBeforePayMana(runtime);
+            equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
             equip.setDescription("Equip: 2");
             card.addSpellAbility(equip);
             card.addSpellAbility(boost);
@@ -582,23 +547,7 @@ class CardFactory_Equipment {
         		}//execute()
         	};//Command
 
-
-        	Input runtime = new Input() {
-				private static final long serialVersionUID = 6695915082103949795L;
-
-				@Override
-        		public void showMessage() {
-        			//get all creatures you control
-        			CardList list = new CardList();
-        			list.addAll(AllZone.Human_Play.getCards());
-        			list = list.getType("Creature");
-
-        			stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list,
-        					"Select target creature to equip", true, false));
-        		}
-        	};//Input
-
-        	equip.setBeforePayMana(runtime);
+        	equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
 
         	equip.setDescription("Equip: 4");
         	card.addSpellAbility(equip);
@@ -608,7 +557,57 @@ class CardFactory_Equipment {
 
         } //*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Adventuring Gear")) {
+            final Ability equip = new Ability(card, "1") {
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                        if(card.isEquipping()) {
+                            Card crd = card.getEquipping().get(0);
+                            if(crd.equals(getTargetCard())) return;
+                            
+                            card.unEquipCard(crd);
+                        }
+                        card.equipCard(getTargetCard());
+                    }
+                }
+            };
+            
+            Command onEquip = new Command() {
+				private static final long serialVersionUID = -5278473287541239581L;
 
+				public void execute() {
+        			if(card.isEquipping()) {
+        				Card crd = card.getEquipping().get(0);
+        				crd.addStackingExtrinsicKeyword("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.");
+        			}
+        		}//execute()
+        	};//Command
+            
+            Command onUnEquip = new Command() {
+				private static final long serialVersionUID = -2979834244752321236L;
+
+				public void execute() {
+        			if(card.isEquipping()) {
+        				Card crd = card.getEquipping().get(0);
+        				crd.removeExtrinsicKeyword("Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.");
+        			}
+
+        		}//execute()
+        	};//Command
+            
+            equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
+            equip.setDescription("Equip: 1");
+            
+            card.addSpellAbility(equip);
+
+            card.addEquipCommand(onEquip);
+        	card.addUnEquipCommand(onUnEquip);
+        }//*************** END ************ END **************************
+
+        
         if (shouldEquip(card) != -1) {
             int n = shouldEquip(card);
             if (n != -1) {

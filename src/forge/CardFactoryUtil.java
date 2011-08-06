@@ -2046,6 +2046,24 @@ public class CardFactoryUtil {
         return target;
     }//input_targetSpecific()
     
+    public static Input input_equipCreature(final SpellAbility equip) {
+        Input runtime = new Input() {	
+			private static final long serialVersionUID = 2029801495067540196L;
+
+			@Override
+	        public void showMessage() {
+	            //get all creatures you control
+	            CardList list = new CardList();
+	            list.addAll(AllZone.Human_Play.getCards());
+	            list = list.getType("Creature");
+	            
+	            stopSetNext(input_targetSpecific(equip, list,
+	                    "Select target creature to equip", true, false));
+	        }
+	    };//Input
+	    return runtime;
+    }
+    
     public static Input input_discard(final SpellAbility spell, final int nCards) {
         Input target = new Input() {
             private static final long serialVersionUID = 5101772642421944050L;
