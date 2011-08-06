@@ -296,6 +296,7 @@ res/cardsfolder/atog.txt -text svneol=native#text/plain
 res/cardsfolder/attrition.txt -text svneol=native#text/plain
 res/cardsfolder/attunement.txt -text svneol=native#text/plain
 res/cardsfolder/augur_il_vec.txt -text svneol=native#text/plain
+res/cardsfolder/augur_of_skulls.txt -text svneol=native#text/plain
 res/cardsfolder/augury_adept.txt -text svneol=native#text/plain
 res/cardsfolder/augury_owl.txt -text svneol=native#text/plain
 res/cardsfolder/aura_blast.txt -text svneol=native#text/plain
