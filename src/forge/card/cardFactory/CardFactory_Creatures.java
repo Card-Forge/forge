@@ -525,7 +525,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-				// todo: change to static ability?
+				// TODO: change to static ability?
                 	CardList library = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
                 	if(library.size() == 0)
                 		return;
@@ -693,7 +693,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                	// Todo: this need to be targeted
+                	// TODO: this need to be targeted
                 	AllZone.GameAction.changeController(new CardList(card), card.getController(), card.getController().getOpponent());
                 }
             };
@@ -1318,7 +1318,7 @@ public class CardFactory_Creatures {
 						AllZone.GameAction.moveToHand(basicGrab);
 						revealed.remove(basicGrab);
 					}
-					// place revealed cards in graveyard (todo: player should choose order)
+					// place revealed cards in graveyard (TODO: player should choose order)
 					for(Card c : revealed){
 						AllZone.GameAction.moveToGraveyard(c);
 					}

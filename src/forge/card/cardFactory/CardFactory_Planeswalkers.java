@@ -1440,7 +1440,7 @@ class CardFactory_Planeswalkers {
                     emblem.setController(card.getController());
                     emblem.setOwner(card.getOwner());
                     
-                    // todo: Emblems live in the command zone
+                    // TODO: Emblems live in the command zone
                     AllZone.GameAction.moveToPlay(emblem);
                     
                     //AllZone.GameAction.checkStateEffects();

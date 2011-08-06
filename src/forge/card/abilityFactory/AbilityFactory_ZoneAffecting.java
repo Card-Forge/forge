@@ -981,7 +981,7 @@ public class AbilityFactory_ZoneAffecting {
 			discardTargetAI(af);
 		}
 		else{
-			// todo: Add appropriate restrictions
+			// TODO: Add appropriate restrictions
 			ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 			
 			if (players.size() == 1){
@@ -1063,7 +1063,7 @@ public class AbilityFactory_ZoneAffecting {
 		if(tgt!= null) {
 			discardTargetAI(af);
 		}
-		// todo: check for some extra things
+		// TODO: check for some extra things
 		return true;
 	}// discardCheckDrawbackAI()
 	

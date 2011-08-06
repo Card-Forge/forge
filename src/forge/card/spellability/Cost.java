@@ -200,7 +200,7 @@ public class Cost {
         
         String sacStr = "Sac<";
         if(parse.contains(sacStr)) {
-        	// todo: maybe separate SacThis from SacType? not sure if any card would use both
+        	// TODO: maybe separate SacThis from SacType? not sure if any card would use both
         	sacCost = true;
         	String[] splitStr = abCostParse(parse, sacStr, 2);
         	parse = abUpdateParse(parse, sacStr);
@@ -340,7 +340,7 @@ public class Cost {
 	public boolean isReusuableResource() {
 		return !(sacCost || exileCost || exileFromHandCost || tapXTypeCost || discardCost ||
 				returnCost || lifeCost) && isAbility;
-		// todo: add/sub counter? Maybe check if it's we're adding a positive counter, or removing a negative counter
+		// TODO: add/sub counter? Maybe check if it's we're adding a positive counter, or removing a negative counter
 	}
 	
 	public String toString()

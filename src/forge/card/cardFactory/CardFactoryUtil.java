@@ -4216,7 +4216,7 @@ public class CardFactoryUtil {
         //c.setController(controller);
         //c.setOwner(controller);
         
-        // todo: most tokens mana cost is 0, this needs to be fixed
+        // TODO: most tokens mana cost is 0, this needs to be fixed
         //c.setManaCost(manaCost);
         c.addColor(manaCost);
         c.setToken(true);
@@ -4233,7 +4233,7 @@ public class CardFactoryUtil {
         	else c.addIntrinsicKeyword(kw);
         
         int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(controller);
-        // todo: does this need to set PlayerZone_ComesIntoPlay.SimultaneousEntry like Rite of Replication does?
+        // TODO: does this need to set PlayerZone_ComesIntoPlay.SimultaneousEntry like Rite of Replication does?
         for(int i = 0; i < multiplier; i++) {
             Card temp = CardFactory.copyStats(c);
             temp.setController(controller);

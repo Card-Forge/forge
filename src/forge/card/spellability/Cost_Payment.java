@@ -434,7 +434,7 @@ public class Cost_Payment {
 	}
 	
 	public void resetUndoList(){
-		// todo: clear other undoLists here?
+		// TODO: clear other undoLists here?
 		payTapXTypeTappedList.clear();
 	}
 	

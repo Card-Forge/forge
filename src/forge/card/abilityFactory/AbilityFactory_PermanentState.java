@@ -189,7 +189,7 @@ public class AbilityFactory_PermanentState {
 			if (mandatory)
 				return true;
 			
-			// todo: use Defined to determine, if this is an unfavorable result
+			// TODO: use Defined to determine, if this is an unfavorable result
 			
 			return true;
 		}
@@ -251,7 +251,7 @@ public class AbilityFactory_PermanentState {
 					return false;
 				}
 				else{
-					// todo is this good enough? for up to amounts?
+					// TODO is this good enough? for up to amounts?
 					break;
 				}
 			}
@@ -267,7 +267,7 @@ public class AbilityFactory_PermanentState {
 					return false;
 				}
 				else{
-					// todo is this good enough? for up to amounts?
+					// TODO is this good enough? for up to amounts?
 					break;
 				}
 			}
@@ -326,7 +326,7 @@ public class AbilityFactory_PermanentState {
 					return false;
 				}
 				else{
-					// todo is this good enough? for up to amounts?
+					// TODO is this good enough? for up to amounts?
 					break;
 				}
 			}
@@ -343,7 +343,7 @@ public class AbilityFactory_PermanentState {
 					return false;
 				}
 				else{
-					// todo is this good enough? for up to amounts?
+					// TODO is this good enough? for up to amounts?
 					break;
 				}
 			}
@@ -585,7 +585,7 @@ public class AbilityFactory_PermanentState {
 			if (mandatory)
 				return true;
 			
-			// todo: use Defined to determine, if this is an unfavorable result
+			// TODO: use Defined to determine, if this is an unfavorable result
 			
 			return true;
 		}
@@ -648,7 +648,7 @@ public class AbilityFactory_PermanentState {
 					return false;
 				}
 				else{
-					// todo is this good enough? for up to amounts?
+					// TODO is this good enough? for up to amounts?
 					break;
 				}
 			}
@@ -665,7 +665,7 @@ public class AbilityFactory_PermanentState {
 					return false;
 				}
 				else{
-					// todo is this good enough? for up to amounts?
+					// TODO is this good enough? for up to amounts?
 					break;
 				}
 			}
@@ -727,7 +727,7 @@ public class AbilityFactory_PermanentState {
 					return false;
 				}
 				else{
-					// todo is this good enough? for up to amounts?
+					// TODO is this good enough? for up to amounts?
 					break;
 				}
 			}
@@ -744,7 +744,7 @@ public class AbilityFactory_PermanentState {
 					return false;
 				}
 				else{
-					// todo is this good enough? for up to amounts?
+					// TODO is this good enough? for up to amounts?
 					break;
 				}
 			}

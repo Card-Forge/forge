@@ -3193,9 +3193,9 @@ public class CardFactory implements NewConstants {
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
     	
-    	// todo: certain cards have two different kicker types, kicker will need to be written differently to handle this
-    	// todo: kicker costs can only be mana right now i think?
-    	// todo: this kicker only works for pemanents. maybe we can create an optional cost class for buyback, kicker, that type of thing
+    	// TODO: certain cards have two different kicker types, kicker will need to be written differently to handle this
+    	// TODO: kicker costs can only be mana right now i think?
+    	// TODO: this kicker only works for pemanents. maybe we can create an optional cost class for buyback, kicker, that type of thing
     	int kicker = hasKeyword(card, "Kicker");
     	if (kicker != -1){
             final SpellAbility kickedSpell = new Spell(card) {

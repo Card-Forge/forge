@@ -568,7 +568,7 @@ public class ManaPool extends Card {
     }
     
     public boolean accountFor(SpellAbility sa, String[] mana, Card c){
-    	// todo: account for unpaying mana in payMana and floatingPool
+    	// TODO: account for unpaying mana in payMana and floatingPool
     	ArrayList<Mana> payMana = sa.getPayingMana(); 
     	
     	ArrayList<Mana> removePaying = new ArrayList<Mana>();
@@ -638,7 +638,7 @@ public class ManaPool extends Card {
 
     
     public void unpaid(SpellAbility sa, boolean untap) {
-    	// todo: having some crash in here related to undo and not tracking abilities properly
+    	// TODO: having some crash in here related to undo and not tracking abilities properly
     	ArrayList<Ability_Mana> payAbs = sa.getPayingManaAbilities(); 
     	
     	// go through paidAbilities if they are undoable 
