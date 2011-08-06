@@ -607,7 +607,8 @@ public class CardFactory implements NewConstants {
                  }
             }
             
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             
             final SpellAbility spDstryAll = new Spell(card) {
                 private static final long serialVersionUID = 132554543614L;
@@ -1000,7 +1001,9 @@ public class CardFactory implements NewConstants {
         if (IA.size() > 0)
         {
         	if (card.isInstant() || card.isSorcery())
-        		card.clearSpellAbility();
+        		
+        		// Do not remove SpellAbilities created by AbilityFactory or Keywords.
+        		card.clearFirstSpellAbility();
         	
         	for (int i=0; i<IA.size(); i++)
         	{
@@ -1078,16 +1081,18 @@ public class CardFactory implements NewConstants {
                     return false;
                 }
             };
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }
         //*************** END ************ END *************************
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Conspiracy") || cardName.equals("Cover of Darkness")
+        else if(cardName.equals("Conspiracy")           || cardName.equals("Cover of Darkness")
                 || cardName.equals("Door of Destinies") || cardName.equals("Engineered Plague")
-                || cardName.equals("Shared Triumph") || cardName.equals("Belbe's Portal")
+                || cardName.equals("Shared Triumph")    || cardName.equals("Belbe's Portal")
                 || cardName.equals("Steely Resolve")) {
             final String[] input = new String[1];
             final Player player = card.getController();
@@ -1272,9 +1277,11 @@ public class CardFactory implements NewConstants {
                     AllZone.Stack.add(ability);
                 }//execute()
             };//Command
+            
             card.addLeavesPlayCommand(commandLeavesPlay);
             
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(enchantment);
             
             card.setSVar("PlayMain1", "TRUE");
@@ -1838,7 +1845,10 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Standstill")) {
-            card.clearSpellAbility();
+        	
+        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
+            
             card.addSpellAbility(new Spell_Permanent(card) {
                 private static final long serialVersionUID = 6912683989507840172L;
                 
@@ -1956,8 +1966,11 @@ public class CardFactory implements NewConstants {
                     getTargetPlayer().loseLife(5, card);
                 }
             };
+            
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
@@ -2018,148 +2031,152 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
 
 	  
-      //*************** START *********** START **************************
-      else if(cardName.equals("Isochron Scepter"))
-      {
-    	  Cost abCost = new Cost("2 T", cardName, true);
-    	  final Ability_Activated freeCast = new Ability_Activated(card, abCost, null)
-          {
+        //*************** START *********** START **************************
+        else if(cardName.equals("Isochron Scepter"))
+        {
+        	Cost abCost = new Cost("2 T", cardName, true);
+        	final Ability_Activated freeCast = new Ability_Activated(card, abCost, null)
+        	{
 
-			private static final long serialVersionUID = 4455819149429678456L;
+        		private static final long serialVersionUID = 4455819149429678456L;
 
-			@Override
-			public void resolve() {
-				if(getSourceCard().getAttachedCards().length == 0)
-				{
-					//AllZone.Display.showMessage("You have not exiled a card.");
-					return;
-				}
-				Card c = copyCard(getSourceCard().getAttachedCards()[0]);
-				if(getSourceCard().getController().equals(AllZone.ComputerPlayer))
-				{
-					for(SpellAbility sa:getSourceCard().getAttachedCards()[0].getSpellAbility())
-		            if(sa.canPlayAI())
-		            {
-		            	ComputerUtil.playStackFree(sa);
-		            	return;
-		            }
-				}
-				else AllZone.GameAction.playCardNoCost(c);
-			}
+        		@Override
+        		public void resolve() {
+        			if(getSourceCard().getAttachedCards().length == 0)
+        			{
+        				//AllZone.Display.showMessage("You have not exiled a card.");
+        				return;
+        			}
+        			Card c = copyCard(getSourceCard().getAttachedCards()[0]);
+        			if(getSourceCard().getController().equals(AllZone.ComputerPlayer))
+        			{
+        				for(SpellAbility sa:getSourceCard().getAttachedCards()[0].getSpellAbility())
+        					if(sa.canPlayAI())
+        					{
+        						ComputerUtil.playStackFree(sa);
+        						return;
+        					}
+        			}
+        			else AllZone.GameAction.playCardNoCost(c);
+        		}
 			
-			public boolean canPlay()
-			{
-				if (!super.canPlay())
-					return false;
+        		public boolean canPlay()
+        		{
+        			if (!super.canPlay())
+        				return false;
 				
-				if (getSourceCard().getAttachedCards().length > 0)
-				{
-					Card c = copyCard(getSourceCard().getAttachedCards()[0]);
-					if (ComputerAI_counterSpells2.KeywordedCounterspells.contains(c.getName()))
-					{
-						SpellAbility sa = c.getSpellAbility()[0];
-						return sa.canPlay();
-					}
-					else return true;
-				}
-				else
-					return false;
-			}
+        			if (getSourceCard().getAttachedCards().length > 0)
+        			{
+        				Card c = copyCard(getSourceCard().getAttachedCards()[0]);
+        				if (ComputerAI_counterSpells2.KeywordedCounterspells.contains(c.getName()))
+        				{
+        					SpellAbility sa = c.getSpellAbility()[0];
+        					return sa.canPlay();
+        				}
+        				else return true;
+        			}
+        			else
+        				return false;
+        		}
 			
-			public boolean canPlayAI()
-			{
-				if (getSourceCard().getAttachedCards().length == 0)
-					return false;
-				for(SpellAbility sa:getSourceCard().getAttachedCards()[0].getSpellAbility())
-                    if(sa.canPlayAI())
-                    	return true;
-                return false;
-			}
-          };
-          freeCast.setDescription(abCost+"You may copy the exiled card. If you do, you may cast the copy without paying its mana cost");
-          freeCast.setStackDescription("Copy the exiled card and cast the copy without paying its mana cost.");
+        		public boolean canPlayAI()
+        		{
+        			if (getSourceCard().getAttachedCards().length == 0)
+        				return false;
+        			for(SpellAbility sa:getSourceCard().getAttachedCards()[0].getSpellAbility())
+        				if(sa.canPlayAI())
+        					return true;
+        			return false;
+        		}
+        	};
+        	freeCast.setDescription(abCost+"You may copy the exiled card. If you do, you may cast the copy without paying its mana cost");
+        	freeCast.setStackDescription("Copy the exiled card and cast the copy without paying its mana cost.");
           
-          final Input exile = new Input() {
-              private static final long serialVersionUID = -6392468000100283596L;
+        	final Input exile = new Input() {
+        		private static final long serialVersionUID = -6392468000100283596L;
               
-              @Override
-              public void showMessage() {
-                  AllZone.Display.showMessage("You may exile an Instant with converted mana cost two or less from your hand");
-                  ButtonUtil.enableOnlyCancel();
-              }
+        		@Override
+        		public void showMessage() {
+        			AllZone.Display.showMessage("You may exile an Instant with converted mana cost two or less from your hand");
+        			ButtonUtil.enableOnlyCancel();
+        		}
               
-              @Override
-              public void selectCard(Card c, PlayerZone zone) {
-                  if(zone.is(Constant.Zone.Hand) && c.isInstant() && CardUtil.getConvertedManaCost(c) <= 2)
-                  {
-                      AllZone.GameAction.moveTo(AllZone.Human_Exile, c);
-                      card.attachCard(c);
-                      stop();
-                  }
-              }
+        		@Override
+        		public void selectCard(Card c, PlayerZone zone) {
+        			if(zone.is(Constant.Zone.Hand) && c.isInstant() && CardUtil.getConvertedManaCost(c) <= 2)
+        			{
+        				AllZone.GameAction.moveTo(AllZone.Human_Exile, c);
+        				card.attachCard(c);
+        				stop();
+        			}
+        		}
               
-              @Override
-              public void selectButtonCancel() {
-                  stop();
-              }
-          };//Input
+        		@Override
+        		public void selectButtonCancel() {
+        			stop();
+        		}
+        	};//Input
           
-          final SpellAbility ability = new Ability(card, "0") {
-              @Override
-              public void resolve() {
-                  if(card.getController().equals(AllZone.HumanPlayer)) {
-                      if(AllZone.Human_Hand.getCards().length > 0)
-                    	  AllZone.InputControl.setInput(exile);
-                  } else {
-                      CardList list = new CardList(AllZone.Computer_Hand.getCards())
-                        .filter(
-                    		  new CardListFilter(){
-                    			  public boolean addCard(Card c)
-                    			  {
-                    				  return c.isInstant()
-                    				  && CardUtil.getConvertedManaCost(c) <=2 ;
-                    			  }
-                    		  });
-                      CardListUtil.sortCMC(list);
-                      list.reverse();
-                      Card c = list.get(0);
-                      AllZone.GameAction.moveTo(AllZone.Computer_Exile, c);
-                      card.attachCard(c);
-                  }//else
-              }//resolve()
-          };//SpellAbility
-          Command intoPlay = new Command() {
-              private static final long serialVersionUID = 9202753910259054021L;
+        	final SpellAbility ability = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
+        			if(card.getController().equals(AllZone.HumanPlayer)) {
+        				if(AllZone.Human_Hand.getCards().length > 0)
+        					AllZone.InputControl.setInput(exile);
+        			} else {
+        				CardList list = new CardList(AllZone.Computer_Hand.getCards())
+        					.filter(
+        						new CardListFilter(){
+        							public boolean addCard(Card c)
+        							{
+        								return c.isInstant()
+        									&& CardUtil.getConvertedManaCost(c) <=2 ;
+        							}
+        						});
+        				CardListUtil.sortCMC(list);
+        				list.reverse();
+        				Card c = list.get(0);
+        				AllZone.GameAction.moveTo(AllZone.Computer_Exile, c);
+        				card.attachCard(c);
+        			}//else
+        		}//resolve()
+        	};//SpellAbility
+        	
+        	Command intoPlay = new Command() {
+        		private static final long serialVersionUID = 9202753910259054021L;
               
-              public void execute() {
+        		public void execute() {
             	  
-            	  StringBuilder sb = new StringBuilder();
-            	  sb.append("Imprint - ").append(card.getController());
-            	  sb.append(" may exile an instant card with converted mana cost 2 or less from their hand.");
-            	  ability.setStackDescription(sb.toString());
+        			StringBuilder sb = new StringBuilder();
+        			sb.append("Imprint - ").append(card.getController());
+        			sb.append(" may exile an instant card with converted mana cost 2 or less from their hand.");
+        			ability.setStackDescription(sb.toString());
                   
-                  AllZone.Stack.add(ability);
-              }
-          };
-          SpellAbility spell = new Spell_Permanent(card) {
-              private static final long serialVersionUID = -2940969025405788931L;
+        			AllZone.Stack.add(ability);
+        		}
+        	};
+        	
+        	SpellAbility spell = new Spell_Permanent(card) {
+        		private static final long serialVersionUID = -2940969025405788931L;
               
-              //could never get the AI to work correctly
-              //it always played the same card 2 or 3 times
-              @Override
-              public boolean canPlayAI() {
-                  for(Card c : AllZone.Computer_Hand.getCards())
-                	  if(c.isInstant() && CardUtil.getConvertedManaCost(c) <=2)
-                		  return true;
-                  return false;
-              }
-          };
-          card.addComesIntoPlayCommand(intoPlay);
-          card.clearSpellAbility();
-          card.addSpellAbility(spell);
-          card.addSpellAbility(freeCast);
-      }
-      //*************** END ************ END **************************
+        		//could never get the AI to work correctly
+        		//it always played the same card 2 or 3 times
+        		@Override
+        		public boolean canPlayAI() {
+        			for(Card c : AllZone.Computer_Hand.getCards())
+        				if(c.isInstant() && CardUtil.getConvertedManaCost(c) <=2)
+        					return true;
+        			return false;
+        		}
+        	};
+          
+        	card.addComesIntoPlayCommand(intoPlay);
+          
+        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
+        	card.clearFirstSpellAbility();
+        	card.addSpellAbility(spell);
+        	card.addSpellAbility(freeCast);
+        }//*************** END ************ END **************************
        
         
         //*************** START *********** START **************************
@@ -2583,7 +2600,7 @@ public class CardFactory implements NewConstants {
         
         
         //*************** START ************ START **************************
-        else if(cardName.equals("Black Mana Battery") || cardName.equals("Blue Mana Battery")
+        else if(cardName.equals("Black Mana Battery")    || cardName.equals("Blue Mana Battery")
         		|| cardName.equals("Green Mana Battery") || cardName.equals("Red Mana Battery")
         		|| cardName.equals("White Mana Battery")) {
         	
