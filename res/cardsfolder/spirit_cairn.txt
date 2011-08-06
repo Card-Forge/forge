@@ -6,4 +6,5 @@ T:Mode$ ChangesZone | ValidCard$ Card | Origin$ Hand | Destination$ Graveyard | 
 SVar:TrigToken:AB$Token | Cost$ W | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_cairn.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/26.jpg
 End

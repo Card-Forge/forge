@@ -8,4 +8,5 @@ SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1 | SubAbility$ SVar=
 SVar:DBPump:DB$Pump | Cost$ 0 | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ophidian.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/45.jpg
 End
