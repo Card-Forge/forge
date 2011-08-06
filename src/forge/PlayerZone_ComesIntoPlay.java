@@ -94,9 +94,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 
             	//not for the Elvish Vanguard coming onto the battlefield now
             	list.remove(c);
-                for(Card var:list) {
-                	final Card crd = var;
-                	Ability ability = new Ability(c, "0") {
+                for(final Card crd:list) {
+                	Ability ability = new Ability(crd, "0") {
             			@Override
             			public void resolve() {
             				crd.addCounter(Counters.P1P1, 1);
@@ -104,7 +103,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             		};// Ability
             		
             		StringBuilder sb = new StringBuilder();
-            		sb.append(c.getName()).append(" - gets a +1/+1 counter.");
+            		sb.append(crd.getName()).append(" - gets a +1/+1 counter.");
             		ability.setStackDescription(sb.toString());
             		
             		AllZone.Stack.add(ability);
