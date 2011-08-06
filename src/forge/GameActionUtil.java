@@ -11331,8 +11331,9 @@ public class GameActionUtil {
 				list.get(i).addSemiPermanentAttackBoost(Integer.valueOf(Keyword[0]));
 				list.get(i).addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[1]));
 				if (Keyword.length > 2) {
-					for(int j = 2; j < Keyword.length; j++) {
-						list.get(i).addExtrinsicKeyword(Keyword[j]);
+					String Keywords[] = Keyword[2].split(" & ");
+					for(int j = 0; j < Keywords.length; j++) {
+						list.get(i).addExtrinsicKeyword(Keywords[j]);
 					}
 				}
 			}
@@ -11378,8 +11379,9 @@ public class GameActionUtil {
 			affcard.addSemiPermanentAttackBoost(Integer.valueOf(Keyword[0]) * -1);
 			affcard.addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[1]) * -1);
 			if (Keyword.length > 2) {
-				for(int j = 2; j < Keyword.length; j++) {
-					affcard.removeExtrinsicKeyword(Keyword[j]);
+				String Keywords[] = Keyword[2].split(" & ");
+				for(int j = 0; j < Keywords.length; j++) {
+					affcard.removeExtrinsicKeyword(Keywords[j]);
 				}
 			}
 		}
