@@ -16888,6 +16888,7 @@ public class CardFactory_Creatures {
                 }
                 
             };
+            kicker.setKickerAbility(true);
             kicker.setManaCost("B B B");
             kicker.setAdditionalManaCost("B");
             kicker.setDescription("Kicker B");

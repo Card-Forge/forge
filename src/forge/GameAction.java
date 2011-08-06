@@ -1419,8 +1419,7 @@ public class GameAction {
     }
     
     public void playSpellAbilityForFree(final SpellAbility sa) {
-    	
-    	
+
     	if(sa.getBeforePayMana() == null) {
     		boolean x = false;
         	if (sa.getSourceCard().getManaCost().contains("X"))
@@ -1436,9 +1435,9 @@ public class GameAction {
                     }
                 };
             	AllZone.InputControl.setInput(new Input_PayManaCost_Ability(sa.getAdditionalManaCost(),paid1));        		
+        	}else {
+        		AllZone.Stack.add(sa, x);
         	}
-    		AllZone.Stack.add(sa, x);
-            
             /*
             if (sa.getAfterPayMana() != null)
             	AllZone.InputControl.setInput(sa.getAfterPayMana());

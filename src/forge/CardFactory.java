@@ -14537,7 +14537,7 @@ public class CardFactory implements NewConstants {
                     }//for
                 }//resolve()
             };
-            
+            kicker.setKickerAbility(true);
             kicker.setManaCost("8 W W W");
             kicker.setAdditionalManaCost("6");
             kicker.setDescription("Kicker 6: If Conqueror's Pledge was kicked, put twelve of those tokens onto the battlefield instead.");
