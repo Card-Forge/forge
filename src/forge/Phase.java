@@ -3,6 +3,7 @@ package forge;
 
 
 import java.util.Observer;
+import java.util.ArrayList;
 
 
 public class Phase extends MyObservable
@@ -18,6 +19,12 @@ public class Phase extends MyObservable
     static int	   ComputerCreatureSpellCount;
     static boolean	   Sac_Dauntless_Escort;
     static boolean	   Sac_Dauntless_Escort_Comp;
+    
+    //Not sure these should be here but I can't think of a better place
+    static ArrayList<Integer> ManaDrain_BonusMana_Human = new ArrayList<Integer>();
+    static ArrayList<Integer> ManaDrain_BonusMana_AI = new ArrayList<Integer>();
+    static CardList ManaDrain_Source_Human = new CardList();
+    static CardList ManaDrain_Source_AI = new CardList();
     
 	private int humanExtraTurns;
 	private int computerExtraTurns;
@@ -274,6 +281,31 @@ public class Phase extends MyObservable
             ComputerSpellCount = 0;
             ComputerCreatureSpellCount = 0;
         }
+        
+        //Mana Drain's delayed bonus mana.The AI can't cast Mana Drain yet, but there are 
+        //provisions for that here for future use
+        if((is(Constant.Phase.Main1,Constant.Player.Human) || is(Constant.Phase.Main2,Constant.Player.Human) )&& Phase.ManaDrain_BonusMana_Human.size() != 0)
+        {        	
+        	for(int i=0;i<Phase.ManaDrain_BonusMana_Human.size();i++)
+        	{
+        		AllZone.ManaPool.addManaToFloating(Integer.toString(Phase.ManaDrain_BonusMana_Human.get(i)), Phase.ManaDrain_Source_Human.get(i) );
+        	}
+        	
+        	Phase.ManaDrain_BonusMana_Human.clear();
+        	Phase.ManaDrain_Source_Human.clear();
+        }
+        if((is(Constant.Phase.Main1,Constant.Player.Computer) || is(Constant.Phase.Main2,Constant.Player.Computer) )&& Phase.ManaDrain_BonusMana_AI.size() != 0)
+        {
+        	for(int i=0;i<Phase.ManaDrain_BonusMana_AI.size();i++)
+        	{
+        		AllZone.ManaPool.addManaToFloating(Integer.toString(Phase.ManaDrain_BonusMana_AI.get(i)), Phase.ManaDrain_Source_AI.get(i) );
+        	}
+        	
+        	Phase.ManaDrain_BonusMana_AI.clear();
+        	Phase.ManaDrain_Source_AI.clear();
+        }
+        
+        
         //for debugging: System.out.println(getPhase());
         //System.out.println(getPhase() + " " + getActivePlayer());
         //System.out.print("");

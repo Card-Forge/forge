@@ -23817,6 +23817,51 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START ********** START *************************
+        if(cardName.equals("Mana Drain"))//NOTE: The AI can't cast this spell due to inability to use a manapool, but provisions are still made for it for if/when we get to that point.
+        {
+        	SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 6139754377230333678L;
+                
+                @Override
+                public void resolve() {
+                	SpellAbility sa = AllZone.Stack.pop();
+                	
+                	if(card.getController().equals(Constant.Player.Human))
+                	{
+                		Phase.ManaDrain_BonusMana_Human.add(CardUtil.getConvertedManaCost(sa.getSourceCard()));
+                		Phase.ManaDrain_Source_Human.add(card);
+                	}
+                	else if(card.getController().equals(Constant.Player.Computer))
+                	{
+                		Phase.ManaDrain_BonusMana_AI.add(CardUtil.getConvertedManaCost(sa.getSourceCard()));
+                		Phase.ManaDrain_Source_AI.add(card);
+                		
+                	}
+                }
+                
+                @Override
+                public boolean canPlayAI()
+                {
+                	return false;
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    if(AllZone.Stack.size() != 0)
+                    {
+                    	return AllZone.Stack.peek().isSpell();
+                    }
+                    else
+                    {
+                    	return false;
+                    }
+                }
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END ************************** 
+        
+        //*************** START ********** START *************************
         if (cardName.equals("Finest Hour") || cardName.equals("Gaea's Anthem") ||
         		cardName.equals("Glorious Anthem"))  
         	// no card factory code, cards handled elsewhere, 

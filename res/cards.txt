@@ -1,3 +1,10 @@
+Mana Drain
+U U
+Instant
+Counter target spell. At the beginning of your next main phase, add X to your mana pool, where X is that spell's converted mana cost
+SVar:Rarity:Rare
+SVar:RemAIDeck:True
+
 Abandoned Outpost
 no cost
 Land
@@ -5931,7 +5938,7 @@ Countersquall
 U B
 Instant
 Counter target noncreature spell. It's controller loses 2 life.
-spCounter:Spell:Type(Non-Creature):Graveyard:Opp-LoseLife(2)
+spCounter:Spell:Type(Non-Creature):Graveyard:CC-LoseLife(2)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/countersquall.jpg
 
@@ -7537,7 +7544,7 @@ Dismal Failure
 2 U U
 Instant
 Counter target spell. Its controller discards a card.
-spCounter:Spell:None:Graveyard:Opp-Discard(1)
+spCounter:Spell:None:Graveyard:CC-Discard(1)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dismal_failure.jpg
 
@@ -22516,7 +22523,7 @@ Punish Ignorance
 W U U B
 Instant
 Counter target spell. It's controller loses 3 life and you gain 3 life.
-spCounter:Spell:None:Graveyard:Opp-LoseLife(3) My-GainLife(3)
+spCounter:Spell:None:Graveyard:CC-LoseLife(3) My-GainLife(3)
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/punish_ignorance.jpg
 
@@ -31593,7 +31600,7 @@ Undermine
 U U B
 Instant
 Counter target spell. It's controller loses 3 life.
-spCounter:Spell:None:Graveyard:Opp-LoseLife(3)
+spCounter:Spell:None:Graveyard:CC-LoseLife(3)
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card23190.jpg
 
