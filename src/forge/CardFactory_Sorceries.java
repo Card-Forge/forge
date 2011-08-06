@@ -8166,11 +8166,15 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spDFWf);
         }//*************** END ************ END **************************
         
+
         //*************** START *********** START **************************
         else if(cardName.equals("Patriarch's Bidding")) {
             final String[] input = new String[2];
             
-            final SpellAbility ability = new Ability(card, "0") {
+            // final SpellAbility ability = new Ability(card, "0") {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = -2182173662547136798L;
+
                 @Override
                 public void resolve() {
 
@@ -8188,36 +8192,36 @@ public class CardFactory_Sorceries {
                         HashMap<String,Integer> countInGraveyard = new HashMap<String,Integer>();
                         CardList allGrave = new CardList(aiGrave.getCards());
                         allGrave.filter(new CardListFilter() {
-                        	public boolean addCard(Card c) {
-                        		return c.getType().contains("Creature");
-                        	}
+                            public boolean addCard(Card c) {
+                                return c.getType().contains("Creature");
+                            }
                         });
                         for(Card c:allGrave)
                         {
-                        	for(String type:c.getType())
-                        	{
-                        		if(!type.equals("Legendary") && !type.equals("Creature") && !type.equals("Artifact"))
-                        		{
-                        			if(countInGraveyard.containsKey(type))
-                        			{
-                        				countInGraveyard.put(type, countInGraveyard.get(type)+1);
-                        			}
-                        			else
-                        			{
-                        				countInGraveyard.put(type, 1);
-                        			}
-                        		}
-                        	}
+                            for(String type:c.getType())
+                            {
+                                if(!type.equals("Legendary") && !type.equals("Creature") && !type.equals("Artifact"))
+                                {
+                                    if(countInGraveyard.containsKey(type))
+                                    {
+                                        countInGraveyard.put(type, countInGraveyard.get(type)+1);
+                                    }
+                                    else
+                                    {
+                                        countInGraveyard.put(type, 1);
+                                    }
+                                }
+                            }
                         }
                         String maxKey = "";
                         int maxCount = -1;
                         for(String type:countInGraveyard.keySet())
                         {
-                        	if(countInGraveyard.get(type) > maxCount)
-                        	{
-                        		maxKey = type;
-                        		maxCount = countInGraveyard.get(type);
-                        	}
+                            if(countInGraveyard.get(type) > maxCount)
+                            {
+                                maxKey = type;
+                                maxCount = countInGraveyard.get(type);
+                            }
                         }
                         if(!maxKey.equals("")) input[1] = maxKey;
                         else input[1] = "Sliver";
@@ -8227,24 +8231,25 @@ public class CardFactory_Sorceries {
                         PlayerZone humanBattlefield = AllZone.getZone(Constant.Zone.Play,Constant.Player.Human);
                         for(Card c:humanGrave.getCards())
                         {
-                        	if(c.getType().contains(input[0]))
-                        	{
-                        		humanGrave.remove(c);
-                        		humanBattlefield.add(c);
-                        	}
+                            if(c.getType().contains(input[0]))
+                            {
+                                humanGrave.remove(c);
+                                humanBattlefield.add(c);
+                            }
                         }
                         PlayerZone computerGrave = AllZone.getZone(Constant.Zone.Graveyard,Constant.Player.Computer);
                         PlayerZone computerBattlefield = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
                         for(Card c:computerGrave.getCards())
                         {
-                        	if(c.getType().contains(input[1]))
-                        	{
-                        		computerGrave.remove(c);
-                        		computerBattlefield.add(c);
-                        	}
+                            if(c.getType().contains(input[1]))
+                            {
+                                computerGrave.remove(c);
+                                computerBattlefield.add(c);
+                            }
                         }
-                }
-            };//ability
+                }//resolve()
+            };//SpellAbility
+/* No longer needed.
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 5634360316643996274L;
                 
@@ -8254,8 +8259,13 @@ public class CardFactory_Sorceries {
                     AllZone.Stack.add(ability);
                 }
             };
-            card.addComesIntoPlayCommand(intoPlay);            
-
+            card.addComesIntoPlayCommand(intoPlay);
+*/
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            StringBuilder sb = new StringBuilder();
+            sb.append("When ").append(card.getName()).append(" comes into play, choose a creature type.");
+            spell.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
         
