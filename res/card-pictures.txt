@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+kor_duelist.jpg					http://www.wizards.com/global/images/magic/general/kor_duelist.jpg
 stalking_assassin.jpg		http://www.wizards.com/global/images/magic/general/stalking_assassin.jpg
 burst_lightning.jpg		http://www.wizards.com/global/images/magic/general/burst_lightning.jpg
 crowd_favorites.jpg		http://www.wizards.com/global/images/magic/general/crowd_favorites.jpg

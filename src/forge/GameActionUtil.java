@@ -14985,6 +14985,29 @@ public class GameActionUtil {
                                                               }// for outer
                                                           }// execute()
                                                       }; //
+                                                      public static Command Kor_Duelist           = new Command() {
+                                                    	  private static final long serialVersionUID = -8050975750696096661L;
+
+                                                    	  /*
+                                                    	   * As long as Kor Duelist is equipped, it has double strike.
+                                                    	   */
+                                                    	  public void execute() {
+                                                    		  CardList list = new CardList();
+                                                    		  list.addAll(AllZone.Human_Play.getCards());
+                                                    		  list.addAll(AllZone.Computer_Play.getCards());
+                                                    		  list = list.getName("Kor Duelist");
+
+                                                    		  for(int i = 0; i < list.size(); i++) {
+                                                    			  Card c = list.get(i);
+                                                    			  if(c.isEquipped()
+                                                    					  && !c.getIntrinsicKeyword().contains(
+                                                    					  "Double Strike")) c.addIntrinsicKeyword("Double Strike");
+                                                    			  else if(!c.isEquipped()
+                                                    					  && c.getIntrinsicKeyword().contains(
+                                                    					  "Double Strike")) c.removeIntrinsicKeyword("Double Strike");
+                                                    		  }
+                                                    	  }
+                                                      }; //Kor Duelist
                                                          
 
     // returns all PlayerZones that has at least 1 Glorious Anthem
@@ -15207,6 +15230,7 @@ public class GameActionUtil {
         commands.put("Meddling_Mage", Meddling_Mage);
         commands.put("Gaddock_Teeg", Gaddock_Teeg);
         commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
+        commands.put("Kor_Duelist", Kor_Duelist);
         //System.out.println("size of commands: " + commands.size());
         
     }
