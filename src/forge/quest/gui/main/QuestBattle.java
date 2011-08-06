@@ -22,19 +22,19 @@ public class QuestBattle extends QuestSelectablePanel {
     private static void buildDeckList() {
         //TODO: Build this list dynamically from the deck files.
 
-        addToDeckList("Abraham Lincoln 3", "hard", "WUR flying creatures with Flamebreak and Earthquake");
-        addToDeckList("Albert Einstein 2", "medium", "Garruk Wildspeaker, W+G creatures with Needle Storm and Retribution of the Meek");
-        addToDeckList("Albert Einstein 3", "hard", "Garruk Wildspeaker, W+G creatures with Needle Storm and Retribution of the Meek");
-        addToDeckList("Aquaman 1", "easy", "WU Control");
-        addToDeckList("Aquaman 2", "medium", "WU Caw-Blade");
-        addToDeckList("Aquaman 3", "hard", "WU Caw-Blade");
-        addToDeckList("Aragorn 2", "medium", "WBRG Landfall deck");
-//        addToDeckList("Ash 1", "easy", "WB Singleton");
-//        addToDeckList("Ash 2", "medium", "WB Singleton ");
+        addToDeckList("Abraham Lincoln 3", "hard", "WUR flying creatures deck with Flamebreak and Earthquake");
+        addToDeckList("Albert Einstein 2", "medium", "WG deck with Garruk Wildspeaker, Needle Storm and Retribution of the Meek");
+        addToDeckList("Albert Einstein 3", "hard", "WG deck with Garruk Wildspeaker, Needle Storm and Retribution of the Meek");
+        addToDeckList("Aquaman 1", "easy", "WU Control deck");
+        addToDeckList("Aquaman 2", "medium", "WU Caw-Blade deck");
+        addToDeckList("Aquaman 3", "hard", "WU Caw-Blade deck");
+        addToDeckList("Aragorn 2", "medium", "WUBRG Landfall deck");
+//        addToDeckList("Ash 1", "easy", "WB Singleton deck");
+//        addToDeckList("Ash 2", "medium", "WB Singleton deck");
 //        addToDeckList("Ash 3", "hard", "WB Oversold Cemetery deck");
-//        addToDeckList("Atomic Robo 1", "easy", "Artifact Singleton");
-//        addToDeckList("Atomic Robo 2", "medium", " Artifact Singleton ");
-//        addToDeckList("Atomic Robo 3", "hard", "Artifact Standard Constructed");
+//        addToDeckList("Atomic Robo 1", "easy", "Artifact Singleton deck");
+//        addToDeckList("Atomic Robo 2", "medium", "Artifact Singleton deck");
+//        addToDeckList("Atomic Robo 3", "hard", "Artifact Standard Constructed deck");
         
         addToDeckList("Bamm Bamm Rubble 1", "easy", "WBURG Domain deck");
         addToDeckList("Barney Rubble 1", "easy", "WU Sovereigns of Lost Alara deck with walls and auras");
