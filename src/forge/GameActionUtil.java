@@ -8967,11 +8967,6 @@ public class GameActionUtil {
 
 	private static void upkeep_Ivory_Tower() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList hand = AllZoneUtil.getPlayerHand(player);
-		
-		if(hand.size() <= 4) {
-			return;
-		}
 
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Ivory Tower");
 
@@ -9034,11 +9029,6 @@ public class GameActionUtil {
 	
 	private static void upkeep_Vensers_Journal() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		final CardList hand = AllZoneUtil.getPlayerHand(player);
-		
-		if(0 == hand.size()) {
-			return;
-		}
 
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Venser's Journal");
 
@@ -9046,130 +9036,103 @@ public class GameActionUtil {
 			final Card source = journal;
 			final Ability ability = new Ability(source, "0") {
 				public void resolve() {
+					CardList hand = AllZoneUtil.getPlayerHand(player);
 					player.gainLife(hand.size(), source);
 				}
 			};//Ability
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append(source.getName()).append(" - ").append(player);
-			sb.append(" gains ").append(hand.size()).append(" life.");
+			sb.append(" gains 1 life for each card in your hand.");
 			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}//for
 	}//upkeep_Vensers_Journal()
 
-	//Forge doesn't distinguish between beginning and end of upkeep
-	//so, we'll put The Rack next to Black Vise
 	private static void upkeep_The_Rack() {
-		// sanity check. If a player has >= 3 cards The Rack does nothing.
 		final Player player = AllZone.Phase.getPlayerTurn();
-		final int playerHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
 
-		if(playerHandSize >= 3) {
-			return;
-		}
-
-		// if a player has 2 or fewer cards The Rack does damage
-		// so, check if opponent of the current player has The Rack
-		Player opponent = player.getOpponent();
-
-		PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, opponent);
-
-		CardList racks = new CardList(opponentPlayZone.getCards());
-		racks = racks.getName("The Rack");
-
-		// determine how much damage to deal the current player
-		final int damage = 3 - playerHandSize;
+		CardList racks = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent(), "The Rack");
 
 		// if there are 1 or more The Racks owned by the opponent of the
 		// current player have each of them deal damage.
-		if(0 < racks.size()) {
-			for(Card rack:racks) {
-				final Card src = rack;
-				Ability ability = new Ability(src, "0") {
-					@Override
-					public void resolve() {
-						player.addDamage(damage, src);
-					}
-				};// Ability
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("The Rack -  deals ").append(damage).append(" damage to ").append(player);
-				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
-			}
-		}// if
-	}// upkeep_The_Rack
-	
-	private static void upkeep_Storm_World() {
-		// sanity check. If a player has >= 3 cards The Rack does nothing.
-		final Player player = AllZone.Phase.getPlayerTurn();
-		final int playerHandSize = AllZoneUtil.getPlayerHand(player).size();
-
-		if(playerHandSize >= 4) {
-			return;
-		}
-		CardList storms = AllZoneUtil.getCardsInPlay("Storm World");
-
-		// determine how much damage to deal the current player
-		final int damage = 4 - playerHandSize;
-
-		if(0 < storms.size()) {
-			for(Card storm:storms) {
-				final Card source = storm;
-				Ability ability = new Ability(source, "0") {
-					@Override
-					public void resolve() {
-						player.addDamage(damage, source);
-					}
-				};// Ability
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(storm).append(" -  deals ").append(damage).append(" damage to ").append(player);
-				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
-			}
-		}// if
-	}// upkeep_Storm_World
-
-	// Currently we don't determine the difference between beginning and end of
-	// upkeep in MTG forge.
-	// So Black Vise's effects happen at the beginning of the upkeep instead of
-	// at the end.
-	private static void upkeep_BlackVise() {
-		// sanity check. If a player has <= 4 cards black vise does nothing.
-		final Player player = AllZone.Phase.getPlayerTurn();
-		final int playerHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
-
-		if(playerHandSize <= 4) {
-			return;
-		}
-
-		// if a player has 5 or more cards black vise does damage
-		// so, check if opponent of the current player has Black Vise
-		Player opponent = player.getOpponent();
-
-		CardList vises = AllZoneUtil.getPlayerCardsInPlay(opponent, "Black Vise");
-
-		// determine how much damage to deal the current player
-		final int damage = playerHandSize - 4;
-
-		// if there are 1 or more black vises owned by the opponent of the
-		// current player have each of them deal damage
-		for(Card vise:vises) {
-			final Card src = vise;
+		for(Card rack:racks) {
+			final Card src = rack;
 			Ability ability = new Ability(src, "0") {
 				@Override
 				public void resolve() {
+					int playerHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
+					int damage = 3 - playerHandSize;
+					if (damage < 1) 
+						return;
 					player.addDamage(damage, src);
 				}
 			};// Ability
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("Black Vise deals ").append(damage).append(" to ").append(player);
+			sb.append("The Rack - deals X damage to ").append(player);
+			sb.append(", where X is 3 minus the number of cards in his or her hand.");
+			ability.setStackDescription(sb.toString());
+			
+			AllZone.Stack.add(ability);
+		}
+	}// upkeep_The_Rack
+	
+	private static void upkeep_Storm_World() {
+		final Player player = AllZone.Phase.getPlayerTurn();
+
+		CardList storms = AllZoneUtil.getCardsInPlay("Storm World");
+
+		for(Card storm:storms) {
+			final Card source = storm;
+			Ability ability = new Ability(source, "0") {
+				@Override
+				public void resolve() {
+					int playerHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
+					int damage = 3 - playerHandSize;
+					if (damage < 1) 
+						return;
+					player.addDamage(damage, source);
+				}
+			};// Ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(storm).append(" - deals X damage to ").append(player);
+			sb.append(", where X is 3 minus the number of cards in his or her hand.");
+			ability.setStackDescription(sb.toString());
+			
+			AllZone.Stack.add(ability);
+		}
+	}// upkeep_Storm_World
+
+	private static void upkeep_BlackVise() {
+		// Vise should always trigger, just in case the draw cards while Ability is on the stack
+		final Player player = AllZone.Phase.getPlayerTurn();
+
+		CardList vises = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent(), "Black Vise");
+
+		// Each vise triggers
+		for(Card vise:vises) {
+			final Card src = vise;
+			Ability ability = new Ability(src, "0") {
+				@Override
+				public void resolve() {
+					// determine how much damage to deal the current player
+					int playerHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
+
+					if(playerHandSize <= 4) {
+						return;
+					}
+				
+					// determine how much damage to deal the current player
+					player.addDamage(playerHandSize - 4, src);
+				}
+			};// Ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Black Vise deals X damage to ").append(player);
+			sb.append(", where X is the number of cards in his or her hand minus 4.");
 			ability.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability);
