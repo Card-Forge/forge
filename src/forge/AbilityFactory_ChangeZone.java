@@ -824,7 +824,7 @@ public class AbilityFactory_ChangeZone {
 		        		tgtC.setController(sa.getActivatingPlayer());
 		    	}
 
-	    		AllZone.getZone(destination, pl).add(tgtC);
+		    	AllZone.GameAction.moveTo(AllZone.getZone(destination, pl), tgtC);
 	    	}
 		}
 
