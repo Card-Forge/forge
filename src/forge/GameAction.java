@@ -305,10 +305,14 @@ public class GameAction {
     		@Override
     		public void resolve() {
     			// pay madness cost here.
-    			if (cast.getManaCost().equals("0"))
-    				AllZone.Stack.add(cast);
-    			else if (madness.getOwner().isHuman())
-    				AllZone.InputControl.setInput(new Input_PayManaCost(cast));
+    			if (madness.getOwner().isHuman()){
+    				if (GameActionUtil.showYesNoDialog(madness, madness + " - Discarded. Pay Madness Cost?")){
+	    				if (cast.getManaCost().equals("0"))
+	    					AllZone.Stack.add(cast);
+	    				else 
+	    					AllZone.InputControl.setInput(new Input_PayManaCost(cast));
+    				}
+    			}
     			else 	// computer will ALWAYS pay a madness cost if he has the mana.
     				ComputerUtil.playStack(cast);	
     		}
