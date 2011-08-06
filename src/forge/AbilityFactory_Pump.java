@@ -90,8 +90,7 @@ public class AbilityFactory_Pump {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return pumpPlayAI(this);
 			}
             
             
@@ -125,8 +124,7 @@ public class AbilityFactory_Pump {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return doDrawbackAI(this);
 			}
         };//SpellAbility
         
@@ -237,16 +235,32 @@ public class AbilityFactory_Pump {
     	if (!ComputerUtil.canPayCost(sa))
     		return false;
     	
-    	int activations = sa.getRestrictions().getNumberTurnActivations();
-    	int sacActivations = sa.getRestrictions().getActivationNumberSacrifice();
+    	SpellAbility_Restriction restrict = sa.getRestrictions();
+    	
+    	// Phase Restrictions
+    	if (AllZone.Stack.size() == 0 && !AllZone.Phase.inCombat()){
+    		// Instant-speed pumps should not be cast outside of combat when the stack is empty
+    		if (!AF.isCurse()){
+	    		if (sa.isSpell() && !hostCard.isSorcery())
+	    			return false;
+	    		else if (sa.isAbility() && !restrict.getSorcerySpeed())
+	    			return false;
+    		}
+    	}
+    	else if (AllZone.Stack.size() > 0){
+    		// todo: pump something only if the top thing on the stack will kill it via damage
+    		
+    		return false;
+    	}
+    	
+    	int activations = restrict.getNumberTurnActivations();
+    	int sacActivations = restrict.getActivationNumberSacrifice();
     	//don't risk sacrificing a creature just to pump it
     	if(sacActivations != -1 && activations >= (sacActivations - 1)) {
     		return false;
 		}
     	
         int defense = getNumDefense(sa);
-
-        if(AllZone.Phase.is(Constant.Phase.Main2)) return false;
         
         if(AF.getAbTgt() == null || !AF.getAbTgt().doesTarget()) {
         	ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
@@ -297,6 +311,16 @@ public class AbilityFactory_Pump {
         	list = getPumpCreatures();
 		
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        
+        if (AllZone.Stack.size() == 0){
+        	// If the cost is tapping, don't activate before declare attack/block
+        	if (sa.getPayCosts().getTap()){
+	        	if (AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers) && AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer))
+	        		list.remove(sa.getSourceCard());
+	        	if (AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Blockers) && AllZone.Phase.isPlayerTurn(AllZone.HumanPlayer))
+	        		list.remove(sa.getSourceCard());
+        	}
+        }
         
         if (list.isEmpty())
         	return false;
@@ -513,7 +537,6 @@ public class AbilityFactory_Pump {
             	return pumpAllCanPlayAI(this);
             }
             
-            
 			@Override
 			public String getStackDescription(){
 				return pumpAllStackDescription(AF, this);
@@ -528,14 +551,61 @@ public class AbilityFactory_Pump {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return pumpAllCanPlayAI(this);
 			}
             
             
         };//SpellAbility
 
         return abPumpAll;
+	}
+    
+    public SpellAbility getPumpAllSpell() {
+    	SpellAbility spPumpAll = new Spell(hostCard, AF.getAbCost(), AF.getAbTgt()) {
+    		private static final long serialVersionUID = -4055467978660824703L;
+
+    		public boolean canPlayAI() {
+    			return pumpAllCanPlayAI(this);
+    		}
+    		
+			@Override
+			public String getStackDescription(){
+				return pumpAllStackDescription(AF, this);
+			}
+
+    		public void resolve() {
+    			doPumpAllResolve(this);
+    		}//resolve
+    	};//SpellAbility
+
+    	return spPumpAll;
+    }
+    
+    public SpellAbility getPumpAllDrawback() {
+        SpellAbility dbPumpAll = new Ability_Sub(hostCard, AF.getAbTgt()) {
+			private static final long serialVersionUID = 6411531984691660342L;
+
+			@Override
+			public String getStackDescription(){
+				return pumpAllStackDescription(AF, this);
+			}
+            
+            public void resolve() {
+            	doPumpAllResolve(this);
+            }//resolve
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return chkPumpAllDrawbackAI(this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return chkPumpAllDrawbackAI(this);
+			}
+        };//SpellAbility
+        
+        return dbPumpAll;
 	}
     
     private boolean pumpAllCanPlayAI(SpellAbility sa) {
@@ -627,59 +697,7 @@ public class AbilityFactory_Pump {
         
     }
     
-    public SpellAbility getPumpAllDrawback() {
-        SpellAbility dbPumpAll = new Ability_Sub(hostCard, AF.getAbTgt()) {
-			private static final long serialVersionUID = 6411531984691660342L;
 
-			public boolean canPlayAI() {
-            	return pumpAllCanPlayAI(this);
-            }
-            
-			/*
-			@Override
-			public String getStackDescription(){
-				return pumpStackDescription(AF, this);
-			}*/
-            
-            public void resolve() {
-            	doPumpAllResolve(this);
-            }//resolve
-
-			@Override
-			public boolean chkAI_Drawback() {
-				return chkPumpAllDrawbackAI(this);
-			}
-
-			@Override
-			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-        };//SpellAbility
-        
-        return dbPumpAll;
-	}
-    
-    public SpellAbility getPumpAllSpell() {
-    	SpellAbility spPumpAll = new Spell(hostCard, AF.getAbCost(), AF.getAbTgt()) {
-    		private static final long serialVersionUID = -4055467978660824703L;
-
-    		public boolean canPlayAI() {
-    			return pumpAllCanPlayAI(this);
-    		}
-    		
-			@Override
-			public String getStackDescription(){
-				return pumpAllStackDescription(AF, this);
-			}
-
-    		public void resolve() {
-    			doPumpAllResolve(this);
-    		}//resolve
-    	};//SpellAbility
-
-    	return spPumpAll;
-    }
 
     private boolean chkPumpAllDrawbackAI(SpellAbility sa) {
     	return true;
