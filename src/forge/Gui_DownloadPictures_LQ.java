@@ -268,7 +268,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
         
     	ArrayList<mCard> CList = new ArrayList<mCard>();
     	CardList AllCards = AllZone.CardFactory.getAllCards();
-    	Log.error("AllCards.size: " + AllCards.size());
+    	//Log.error("AllCards.size: " + AllCards.size());
     	
     	for (int i=0; i<AllCards.size(); i++)
     	{
@@ -294,7 +294,8 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
         //check to see which cards we already have
         for(int i = 0; i < cardPlay.length; i++) {
             file = new File(base, cardPlay[i].name);
-            if(!file.exists()) list.add(cardPlay[i]);
+            if(!file.exists()) 
+            	list.add(cardPlay[i]);
         }
         base = ForgeProps.getFile(IMAGE_TOKEN);
         for(int i = 0; i < cardTokenLQ.length; i++) {
