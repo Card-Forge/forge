@@ -1,8 +1,9 @@
 Name:Might Sliver
 ManaCost:4 G
 Types:Creature Sliver
-Text:All Sliver creatures get +2/+2.
+Text:no text
 PT:2/2
+K:stPumpAll:Creature.Sliver:2/2:no Condition:All Sliver creatures get +2/+2.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/might_sliver.jpg

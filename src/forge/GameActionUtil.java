@@ -13917,81 +13917,6 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	};
-	
-
-	public static Command Bonesplitter_Sliver         = new Command() {
-		private static final long serialVersionUID   = -3463429634177142721L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			int pumpAttack = 2;
-			int pumpDefense = 0;
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-pumpAttack);
-				c.addSemiPermanentDefenseBoost(-pumpDefense);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Bonesplitter Sliver");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(pumpAttack);
-					c.addSemiPermanentDefenseBoost(pumpDefense);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Muscles_Sliver
-
-	public static Command Might_Sliver                = new Command() {
-		private static final long serialVersionUID   = 1618762378975019557L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			int pumpAttack = 2;
-			int pumpDefense = 2;
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-pumpAttack);
-				c.addSemiPermanentDefenseBoost(-pumpDefense);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Might Sliver");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(pumpAttack);
-					c.addSemiPermanentDefenseBoost(pumpDefense);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Muscles_Sliver
 
 	public static Command Plated_Sliver               = new Command() {
 		private static final long serialVersionUID   = 7670935990022098909L;
@@ -20421,9 +20346,6 @@ public class GameActionUtil {
 		////////////////////
 
 		commands.put("Sliver_Legion", Sliver_Legion);
-		
-		commands.put("Bonesplitter_Sliver", Bonesplitter_Sliver);
-		commands.put("Might_Sliver", Might_Sliver);
 		
 		commands.put("Watcher_Sliver", Watcher_Sliver);
 		commands.put("Plated_Sliver", Plated_Sliver);
