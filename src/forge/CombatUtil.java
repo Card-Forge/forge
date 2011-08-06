@@ -1531,6 +1531,7 @@ public class CombatUtil {
                     public void resolve() {
                         CardList list = new CardList();
                         list.addAll(AllZone.Combat.getAttackers());
+                        list.addAll(AllZone.pwCombat.getAttackers());
                         list = list.filter(new CardListFilter() {
                             public boolean addCard(Card card) {
                                 return (!card.equals(piledriver) && card.isCreature() && (card.getType().contains(
