@@ -2190,8 +2190,8 @@ public class CombatUtil {
     
     public static void checkBlockedAttackers(Card a, Card b) {
         //System.out.println(a.getName() + " got blocked by " + b.getName());
-        
-    	AllZone.GameAction.CheckWheneverKeyword(a,"BecomesBlocked",null);
+    	if(!a.getCreatureGotBlockedThisCombat()) 
+    		AllZone.GameAction.CheckWheneverKeyword(a,"BecomesBlocked",null);
     	
         if(!a.getCreatureGotBlockedThisCombat()) {
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
