@@ -3238,7 +3238,7 @@ public class GameAction {
     
     public void playSpellAbility(SpellAbility sa) {
     	ManaCost manaCost = new ManaCost(sa.getManaCost());
-
+    	sa.setActivatingPlayer(Constant.Player.Human);
     	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
     		manaCost = new ManaCost("0"); 
     	} else {

@@ -3797,14 +3797,7 @@ public class CardFactoryUtil {
         }
         return s;
     }
-    
-    public static boolean hasNecropotence(String player) {
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-        CardList list = new CardList(play.getCards());
-        list = list.getName("Necropotence");
-        return list.size() > 0;
-    }
-        
+
     public static CardList getCards(String cardName)
     {
     	CardList list = new CardList();
@@ -3905,7 +3898,8 @@ public class CardFactoryUtil {
     }
     
     public static CardList makeToken(String name, String imageName, Card source, String manaCost, String[] types, int baseAttack, int baseDefense, String[] intrinsicKeywords) {
-        CardList list = new CardList();
+    	// todo(sol) this function shouldn't be called, better to call makeToken with String controller as third paramter
+    	CardList list = new CardList();
         Card c = new Card();
         c.setName(name);
         c.setImageName(imageName);
@@ -3935,12 +3929,11 @@ public class CardFactoryUtil {
             Card temp = CardFactory.copyStats(c);
             temp.setToken(true);
             temp.setController(source.getController());
-            temp.setOwner(source.getOwner());
+            temp.setOwner(source.getController());
             play.add(temp);
             list.add(temp);
         }
         return list;
-        
     }
     
     public static CardList makeToken(String name, String imageName, String controller, String manaCost, String[] types, int baseAttack, int baseDefense, String[] intrinsicKeywords) {

@@ -36,6 +36,7 @@ public class ComputerUtil
         payManaCost(all[i]);
         all[i].chooseTargetAI();
         all[i].getBeforePayManaAI().execute();
+        all[i].setActivatingPlayer(Constant.Player.Computer);
         AllZone.Stack.add(all[i]);
 
         return false;
@@ -52,6 +53,7 @@ public class ComputerUtil
 		  if (AllZone.GameAction.isCardInZone(sa.getSourceCard(),AllZone.Computer_Hand))
 	    		AllZone.Computer_Hand.remove(sa.getSourceCard());
 	  
+		  sa.setActivatingPlayer(Constant.Player.Computer);
 	  
 		  if (sa.getSourceCard().getKeyword().contains("Draw a card."))
 		      	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
@@ -63,6 +65,8 @@ public class ComputerUtil
   
   final static public void playStackFree(SpellAbility sa)
   {
+	  sa.setActivatingPlayer(Constant.Player.Computer);
+	  
 	  if (AllZone.GameAction.isCardInZone(sa.getSourceCard(),AllZone.Computer_Hand))
 		  AllZone.Computer_Hand.remove(sa.getSourceCard());
 	  
@@ -85,6 +89,8 @@ public class ComputerUtil
         //sa.getSourceCard().comesIntoPlay(); - messes things up, maybe for the future fix this
       }
 
+      sa.setActivatingPlayer(Constant.Player.Computer);
+      
       if(sa instanceof Ability_Tap)
         sa.getSourceCard().tap();
       

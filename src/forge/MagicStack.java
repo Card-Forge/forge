@@ -80,6 +80,12 @@ public class MagicStack extends MyObservable
   
   public void add(SpellAbility sp)
   {
+	  // if activating player slips through the cracks, assign activating Player to the controller here
+	  if (sp.getActivatingPlayer().equals("")){
+			sp.setActivatingPlayer(sp.getSourceCard().getController());
+			//System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
+	  }
+	  
 	  if(sp instanceof Ability_Mana || sp instanceof Ability_Triggered)//TODO make working triggered abilities!
 		  sp.resolve(); 
 	  else {

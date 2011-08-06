@@ -18,6 +18,7 @@ public abstract class SpellAbility {
     private String          additionalManaCost = "";
     private String			multiKickerManaCost= "";
     private String 			xManaCost		   = "";
+    private String			activatingPlayer   = "";
     
     private String          type               = "Intrinsic";  //set to Intrinsic by default
                                                                 
@@ -127,6 +128,16 @@ public abstract class SpellAbility {
     public void setXManaCost(String cost)
     {
     	xManaCost = cost;
+    }
+    
+    public String getActivatingPlayer()
+    {
+    	return activatingPlayer;
+    }
+    
+    public void setActivatingPlayer(String player)
+    {
+    	activatingPlayer = player;
     }
     
     public boolean isSpell() {

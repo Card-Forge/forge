@@ -189,7 +189,7 @@ public class CardFactory_Creatures {
                 }//resolve()
                 
                 public void makeToken() {
-                    CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card, "W", new String[] {
+                    CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", getActivatingPlayer(), "W", new String[] {
                             "Creature", "Soldier"}, 1, 1, new String[] {""});
                 }
                 
@@ -14076,7 +14076,7 @@ public class CardFactory_Creatures {
                 }
                 
                 void makeToken() {
-                    CardFactoryUtil.makeToken("Elemental", "R 3 1 Elemental", card, "R", new String[] {
+                    CardFactoryUtil.makeToken("Elemental", "R 3 1 Elemental", getActivatingPlayer(), "R", new String[] {
                             "Creature", "Elemental"}, 3, 1, new String[] {"Haste"});
                 }//makeToken()
             };//SpellAbility
