@@ -1,3 +1,11 @@
+Abyssal Horror
+4 B B
+Creature Horror
+no text
+2/2
+Flying
+WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Abyssal Horror enters the battlefield, target player discards two cards.
+
 Deathgreeter
 B
 Creature Human Shaman
@@ -20,12 +28,12 @@ WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:DrawCards/1:Controllin
 
 Nether Traitor
 B B
-Legendary Creature Spirit
+Creature Spirit
 no text
 1/1
 Haste
 Shadow
-WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Graveyard:MoveFrom-Graveyard-Play:Self:ASAP:PayMana/B:Initiator - Other than Self:Whenever another creature is put into your graveyard from the battlefield, you may pay B. If you do, return Nether Traitor from your graveyard to the battlefield.
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Graveyard:MoveFrom-Graveyard-Play:Self:ASAP:PayMana/B:Initiator - Other than Self!Initiator - OwnedByController:Whenever another creature is put into your graveyard from the battlefield, you may pay B. If you do, return Nether Traitor from your graveyard to the battlefield.
 
 Soul Net
 1
