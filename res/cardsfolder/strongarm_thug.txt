@@ -1,0 +1,9 @@
+Name:Strongarm Thug
+ManaCost:2 B
+Types:Creature Human Mercenary
+Text:When Strongarm Thug enters the battlefield, you may return target Mercenary card from your graveyard to your hand.
+PT:1/1
+K:etbReturnTgt:1:Mercenary:Hand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/strongarm_thug.jpg
+End

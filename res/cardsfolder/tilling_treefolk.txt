@@ -1,0 +1,9 @@
+Name:Tilling Treefolk
+ManaCost:2 G
+Types:Creature Treefolk Druid
+Text:When Tilling Treefolk enters the battlefield, you may return up to two target land cards from your graveyard to your hand.
+PT:1/3
+K:etbReturnTgt:2/UpTo:Land:Hand
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tilling_treefolk.jpg
+End

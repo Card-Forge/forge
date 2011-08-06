@@ -1,0 +1,9 @@
+Name:Treasure Hunter
+ManaCost:2 W
+Types:Creature Human
+Text:When Treasure Hunter enters the battlefield, you may return target artifact card from your graveyard to your hand.
+PT:2/2
+K:etbReturnTgt:1:Artifact:Hand
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_hunter.jpg
+End
