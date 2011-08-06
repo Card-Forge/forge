@@ -5976,7 +5976,9 @@ public class CardFactory implements NewConstants {
          *  Generic tap all ___ activated ability
          *  
          *  syntax: abTapAll {Ability_Cost}:{Valid Targets}:{Description}
-         */
+         *
+         *
+         *no longer used...
         if (hasKeyword(card, "abTapAll") != -1) {
         	int n = hasKeyword(card, "abTapAll");
 
@@ -6066,12 +6068,13 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(AbTapAll);
         	card.setSVar("PlayMain1", "TRUE");
         }//End abTapAll
+        */
         
         /*
          *  Generic untap target ___ activated ability
          *  
          *  syntax: abUntapAll {Ability_Cost}:{Valid Targets}:{Description}
-         */
+         *
         if (hasKeyword(card, "abUntapAll") != -1) {
         	int n = hasKeyword(card, "abUntapAll");
 
@@ -6097,7 +6100,7 @@ public class CardFactory implements NewConstants {
         		public boolean canPlayAI() {
 					/**
 					 * All cards using this currently have SVar:RemAIDeck:True
-					 */
+					 *
 					/*
         			if (!ComputerUtil.canPayCost(this))
         				return false;
@@ -6123,7 +6126,7 @@ public class CardFactory implements NewConstants {
         				if(human.size() > compy.size()) {
         					return rr;
         				}
-        			} */
+        			} *
         			return false;
         		}
 				
@@ -6147,7 +6150,7 @@ public class CardFactory implements NewConstants {
         			CardList tgts = getTargets();
         			for(Card c:tgts) {
         				if(AllZone.GameAction.isCardInPlay(c)
-        						/*&& CardFactoryUtil.canTarget(card, c)*/) {
+        						/*&& CardFactoryUtil.canTarget(card, c)*) {
         					c.untap();
         				}
         			}
@@ -6159,13 +6162,14 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(AbUntapAll);
         	card.setSVar("PlayMain1", "TRUE");
         }//End abUntapAll
+        */
         
         
         /*
          * Generic untap all targets spell
          *
          * syntax: spUntapAll:{Valid Targets}:{Description}
-         */
+         *
         if (hasKeyword(card, "spUntapAll") != -1) {
         	int n = hasKeyword(card, "spUntapAll");
 
@@ -6218,7 +6222,7 @@ public class CardFactory implements NewConstants {
         				setTargetCard(c);
 
         				return rr;
-        			}*/
+        			}*
 
         			return false;
         		}
@@ -6237,14 +6241,14 @@ public class CardFactory implements NewConstants {
         		public boolean canPlay() {
         			return (CardFactoryUtil.canUseAbility(card) && super.canPlay());
         		}
-        		 */
+        		 *
 
         		@Override
         		public void resolve() {
         			CardList tgts = getTargets();
         			for(Card c:tgts) {
         				if(AllZone.GameAction.isCardInPlay(c)
-        						/*&& CardFactoryUtil.canTarget(card, c)*/ ) {
+        						/*&& CardFactoryUtil.canTarget(card, c)* ) {
         					c.untap();
         				}
         			}
@@ -6258,6 +6262,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(SpUntapAll);
         	card.setSVar("PlayMain1", "TRUE");
         }//End spUntapAll keyword
+        */
         
         //**************************************************
         // AbilityFactory cards
