@@ -282,7 +282,7 @@ public class AbilityFactory_Destroy {
 			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
 				 return false;
 		 } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
-		 else if(CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil.evaluateCreatureList(humanlist))
+		 else if(CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil.evaluatePermanentList(humanlist))
 			 return false;
 		 
 		 Ability_Sub subAb = sa.getSubAbility();

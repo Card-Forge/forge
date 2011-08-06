@@ -525,7 +525,7 @@ public class AbilityFactory_DealDamage {
     		final Card source = sa.getSourceCard();
     		final HashMap<String,String> params = af.getMapParams();
     		String numDmg = params.get("NumDmg");
-    		int dmg = getNumDamage(sa); 
+    		final int dmg = getNumDamage(sa); 
     		String validC = "";
     		String validP = "";
     		final int maxX = ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(source);
@@ -541,17 +541,29 @@ public class AbilityFactory_DealDamage {
     		humanlist = humanlist.getValidCards(validC.split(","), source.getController(), source);
     		computerlist = computerlist.getValidCards(validC.split(","), source.getController(), source);
     		
+    		CardListFilter filterX = new CardListFilter(){
+    			public boolean addCard(Card c)
+    			{
+    				return CardFactoryUtil.canDamage(source, c) && c.staticDamagePrevention(maxX, source, false) >= c.getKillDamage();
+    			}
+    		};
+    		
     		CardListFilter filter = new CardListFilter(){
     			public boolean addCard(Card c)
     			{
-    				return CardFactoryUtil.canDamage(source, c) && maxX >= (c.getNetDefense() + c.getDamage());
+    				return CardFactoryUtil.canDamage(source, c) && c.staticDamagePrevention(dmg, source, false) >= c.getKillDamage();
     			}
     		};
 
     		humanlist = humanlist.getNotKeyword("Indestructible");
-    		
     		computerlist = computerlist.getNotKeyword("Indestructible");
+    		
+    		//TODO: X may be something different than X paid
     		if(numDmg.equals("X")) {
+    			humanlist = humanlist.filter(filterX);
+    			computerlist = computerlist.filter(filterX);
+    		}
+    		else {
     			humanlist = humanlist.filter(filter);
     			computerlist = computerlist.filter(filter);
     		}
@@ -578,19 +590,29 @@ public class AbilityFactory_DealDamage {
     			return false;
     		/////
     		
+    		//Don't kill yourself
+    		if (validP.contains("Each") 
+    				&& AllZone.ComputerPlayer.getLife() <= AllZone.ComputerPlayer.staticDamagePrevention(dmg, source, false))
+				return false;
     		
-			if (AllZone.HumanPlayer.getLife() <= maxX)
+    		//TODO: X may be something different than X paid
+			if ((validP.contains("Each") || validP.contains("EachOpponent")) && numDmg.equals("X") 
+					&& AllZone.HumanPlayer.getLife() <= AllZone.HumanPlayer.staticDamagePrevention(maxX, source, false))
 					return true;
     		
     		//if we can kill human, do it
-    		if((validP.contains("Each") || validP.contains("EachOpponent")) && AllZone.HumanPlayer.getLife() <= dmg) {
+    		if((validP.contains("Each") || validP.contains("EachOpponent")) 
+    				&& AllZone.HumanPlayer.getLife() <= AllZone.HumanPlayer.staticDamagePrevention(dmg, source, false))
     			return true;
-    		}
 
     		 // prevent run-away activations - first time will always return true
     		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 
-    		 chance &= AllZone.ComputerPlayer.getLife() > dmg && !(humanlist.size() == 0 && 0 < computerlist.size());
+    		 // evaluate both lists and pass only if human creatures are more valuable
+    		 if (humanlist.getNotType("Creature").size() == 0 && computerlist.getNotType("Creature").size() == 0) {
+    			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
+    				 return false;
+    		 }
 
     		 Ability_Sub subAb = sa.getSubAbility();
     		 if (subAb != null)
