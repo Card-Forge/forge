@@ -67,9 +67,6 @@ public class TriggerHandler {
 		{
 			ret = new Trigger_Attacks(mapParams,host);
 		}
-		else if(mode.equals("AttacksAlone")) {
-			ret = new Trigger_AttacksAlone(mapParams,host);
-		}
 		else if(mode.equals("Blocks"))
 		{
 			ret = new Trigger_Blocks(mapParams,host);

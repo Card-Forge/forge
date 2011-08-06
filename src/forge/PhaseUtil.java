@@ -1,7 +1,6 @@
 package forge;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.gui.input.Input;
@@ -394,10 +393,6 @@ public class PhaseUtil {
             if(exalted.size() > 0) CombatUtil.executeExaltedAbility(list.get(0), exalted.size());
             // Make sure exalted effects get applied only once per combat
             
-            //Run triggers
-            HashMap<String,Object> runParams = new HashMap<String,Object>();
-            runParams.put("Attacker", list.get(0));
-            AllZone.TriggerHandler.runTrigger("AttacksAlone", runParams);
         }
         
         for(Card c:list)
