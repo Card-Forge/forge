@@ -2553,7 +2553,7 @@ class CardFactory_Auras {
                     CardList list = new CardList(AllZone.Computer_Play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && c.getKeyword().contains("Flying");
+                            return !c.isCreature() && c.getKeyword().contains("Flying");
                         }
                     });
                     

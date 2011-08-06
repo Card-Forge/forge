@@ -1410,7 +1410,31 @@ public class CardFactoryUtil {
                 
                 if (list.isEmpty()) return false;
                 
-                //else
+                //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
+                
+                CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
+                auraMagnetList = auraMagnetList.filter(new CardListFilter() {
+                	public boolean addCard(Card c) {
+                		return c.isCreature() && (c.getName().equals("Rabid Wombat") || c.getName().equals("Uril, the Miststalker"));
+                	}
+                });
+                if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
+                	auraMagnetList.shuffle();
+                	for (int i = 0; i < auraMagnetList.size(); i++) {
+                		if (CardFactoryUtil.canTarget(sourceCard, auraMagnetList.get(i))) {
+                			setTargetCard(auraMagnetList.get(i));    // Target only Rabid Wombat or Uril, the Miststalker
+                			return true;
+                		}
+                	}
+                }
+                
+                //else (prune list if needed?) and set target creature
+                
+                if (Power <= 0 && Tough <= 0) {    // This aura is keyword only
+                	// Need code to remove creatures from the list if 
+                	// the aura does not provide new keyword abilities.
+                }
+                
                 CardListUtil.sortAttack(list);
                 CardListUtil.sortFlying(list);
                 
