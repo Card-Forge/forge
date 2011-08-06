@@ -139,6 +139,13 @@ public class ReadCard implements Runnable, NewConstants {
             		c.addIntrinsicKeyword(t);
             	}
             	
+            	else if (s.startsWith("SVar:"))
+            	{
+            		String t[] = s.split(":");
+            		c.setSVar(t[1], t[2]);
+            	}
+            	
+            	
             	s = readLine();
             } // while !End
 

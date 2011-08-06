@@ -627,6 +627,7 @@ public class CardFactory implements NewConstants {
 
         // Support for using string variables to define Count$ for X or Y
         // Or just about any other String that a card object needs at any given time
+// TODO: To Be Removed 
         while(hasKeyword(card, "SVar") != -1) {
             int n = hasKeyword(card, "SVar");
             if(n != -1) {
@@ -10473,6 +10474,7 @@ public class CardFactory implements NewConstants {
         c.setType(sim.getType());
         c.setText(sim.getSpellText());
         c.setManaCost(sim.getManaCost());
+        c.setSVars(sim.getSVars());
         
         return c;
     }// copyStats()
