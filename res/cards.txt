@@ -1,3 +1,67 @@
+Glimpse the Unthinkable
+U B
+Sorcery
+Target player puts the top ten cards of his or her library into his or her graveyard.
+
+Tome Scour
+U
+Sorcery
+Target player puts the top five cards of his or her library into his or her graveyard.
+
+Memory Erosion
+1 U U
+Enchantment
+Whenever an opponent casts a spell, that player puts the top two cards of his or her library into his or her graveyard.
+
+Forced Fruition
+4 U U
+Enchantment
+Whenever an opponent casts a spell, that player draws seven cards.
+
+Vedalken Entrancer
+3 U
+Creature Vedalken Wizard
+no text
+1/4
+
+Raven Guild Master
+1 U U
+Creature Wizard Mutant
+Whenever Raven Guild Master deals combat damage to a player, that player removes the top ten cards of his or her library from the game.
+1/1
+Morph:2 U U
+
+Ambassador Laquatus
+1 U U
+Legendary Creature Merfolk Wizard
+no text
+1/3
+
+Vampire Lacerator
+B
+Creature Vampire Warrior
+At the beginning of your upkeep, you lose 1 life unless an opponent has 10 or less life.
+2/2
+
+Nemesis of Reason
+3 U B
+Creature Leviathan Horror
+Whenever Nemesis of Reason attacks, defending player puts the top ten cards of his or her library into his or her graveyard.
+3/7
+
+Duskmantle, House of Shadow
+no cost
+Land
+no text
+tap: add 1
+
+Moroii
+2 U B
+Creature Vampire
+At the beginning of your upkeep, you lose 1 life.
+4/4
+Flying
+
 Identity Crisis
 2 W W B B
 Sorcery

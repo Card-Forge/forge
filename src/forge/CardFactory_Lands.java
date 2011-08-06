@@ -2620,6 +2620,50 @@ class CardFactory_Lands {
 
          }//*************** END ************ END **************************
          
+       //*************** START *********** START **************************
+         if(cardName.equals("Duskmantle, House of Shadow"))
+         {
+            card.clearSpellKeepManaAbility();
+            
+            Ability_Tap ability = new Ability_Tap(card,"U B")
+            {
+               private static final long serialVersionUID = 42470566751344693L;
+
+                 public boolean canPlayAI()
+                 {
+                     String player = getTargetPlayer();
+                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+                     CardList libList = new CardList(lib.getCards());
+                     return libList.size() > 0;
+                 }
+
+                 public void resolve()
+                 {
+                      String player = getTargetPlayer();
+                      
+                      PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+                      PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+                      CardList libList = new CardList(lib.getCards());
+
+                      int max = 1;
+                      if (libList.size() < 1)
+                         max = libList.size();
+                      
+                      for (int i=0;i<max;i++)
+                      {
+                         Card c = libList.get(i);
+                         lib.remove(c);
+                         grave.add(c);
+                      }
+               }
+            };
+            ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+            ability.setDescription("tap U B: Target player puts the top card of his or her library into his or her graveyard.");
+            ability.setStackDescription("Target player puts the top card of his or her library into his or her graveyard.");
+            card.addSpellAbility(ability);
+         }
+         //*************** END ************ END **************************
+         
 		return card;
 	}
 	

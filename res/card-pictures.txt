@@ -18,6 +18,17 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+glimpse_the_unthinkable.jpg http://www.wizards.com/global/images/magic/general/glimpse_the_unthinkable.jpg
+tome_scour.jpg              http://www.wizards.com/global/images/magic/general/tome_scour.jpg
+memory_erosion.jpg          http://www.wizards.com/global/images/magic/general/memory_erosion.jpg
+forced_fruition.jpg      	http://www.wizards.com/global/images/magic/general/Forced_Fruition.jpg
+vedalken_entrancer.jpg      http://www.wizards.com/global/images/magic/general/vedalken_entrancer.jpg
+raven_guild_master.jpg      http://www.wizards.com/global/images/magic/general/raven_guild_master.jpg
+ambassador_laquatus.jpg     http://www.wizards.com/global/images/magic/general/ambassador_laquatus.jpg
+vampire_lacerator.jpg		http://www.wizards.com/global/images/magic/general/vampire_lacerator.jpg
+nemesis_of_reason.jpg       http://www.wizards.com/global/images/magic/general/nemesis_of_reason.jpg
+duskmantle_house_of_shadow.jpg  http://www.wizards.com/global/images/magic/general/Duskmantle_House_of_Shadow.jpg
+moroii.jpg                	http://www.wizards.com/global/images/magic/general/moroii.jpg
 laquatuss_champion.jpg		http://www.wizards.com/global/images/magic/general/laquatuss_champion.jpg
 identity_crisis.jpg         http://www.wizards.com/global/images/magic/general/identity_crisis.jpg
 lobotomy.jpg                http://www.wizards.com/global/images/magic/general/lobotomy.jpg

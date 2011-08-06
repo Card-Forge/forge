@@ -1631,7 +1631,6 @@ public class CardFactory implements NewConstants {
                   }
                }
             }
-
             
             if (results.size() > 0)
             {
@@ -17346,6 +17345,48 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	  
 	  
 	//*************** START *********** START **************************
+	    if (cardName.equals("Glimpse the Unthinkable") || cardName.equals("Tome Scour"))
+	    {
+	      final SpellAbility spell = new Spell(card)
+	      {
+	      private static final long serialVersionUID = 42470566751344693L;
+
+	        public boolean canPlayAI()
+	        {
+	            String player = getTargetPlayer();
+	            PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	            CardList libList = new CardList(lib.getCards());
+	            return libList.size() > 0;
+	        }
+
+	        public void resolve()
+	        {
+	             String player = getTargetPlayer();
+	            
+	             PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	             PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+	             CardList libList = new CardList(lib.getCards());
+
+	             int max = 0;
+	             if (cardName.equals("Glimpse the Unthinkable")) max = 10; else max = 5;
+	             if (libList.size() < max)
+	                max = libList.size();
+	            
+	             for (int i=0;i<max;i++)
+	             {
+	                Card c = libList.get(i);
+	                lib.remove(c);
+	                grave.add(c);
+	             }
+	        }
+	      };//SpellAbility
+	      spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+	      card.clearSpellAbility();
+	      card.addSpellAbility(spell);
+	    }//*************** END ************ END **************************
+	  
+	  
+	//*************** START *********** START **************************
 	    if (cardName.equals("Traumatize"))
 	    {
 	      final SpellAbility spell = new Spell(card)
@@ -17512,7 +17553,8 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	          CardList grvList = new CardList(grave.getCards());
 	          CardList fullHand = new CardList(hand.getCards());
 	          Card[] handChoices = removeLand(hand.getCards());
-
+	          if (fullHand.size() > 0 && card.getController().equals(Constant.Player.Human))
+	             AllZone.Display.getChoice("Revealing hand", fullHand.toArray());
 	          if(card.getController().equals(Constant.Player.Human))
 	          {
 	            choice = (Card) AllZone.Display.getChoice("Choose", handChoices);
@@ -17578,7 +17620,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	      card.addSpellAbility(spell);
 
 	      spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-	    }//*************** END ************ END ************************** 
+	    }//*************** END ************ END **************************  
 	    
 	    
 	  //*************** START *********** START **************************

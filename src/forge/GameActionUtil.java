@@ -37,6 +37,8 @@ public class GameActionUtil
 		upkeep_Fledgling_Djinn();
 		upkeep_Juzam_Djinn();
 		upkeep_Grinning_Demon();
+		upkeep_Moroii();
+		upkeep_Vampire_Lacerator();
 		upkeep_Seizan_Perverter_of_Truth();
 		upkeep_Serendib_Efreet();
 		upkeep_Sleeper_Agent();
@@ -82,7 +84,9 @@ public class GameActionUtil
 		// (called in MagicStack.java)
 		Card c = sa.getSourceCard();
 
+		playCard_Forced_Fruition(c);
 		playCard_Standstill(c);
+		playCard_Memory_Erosion(c);
 		playCard_SolKanar(c);
 		playCard_Gilt_Leaf_Archdruid(c);
 		playCard_Reki(c);
@@ -95,6 +99,50 @@ public class GameActionUtil
 		playCard_Mold_Adder(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
 	}
+	
+    public static void playCard_Forced_Fruition(Card c)
+    {
+      PlayerZone hplay = AllZone.getZone(Constant.Zone.Play,
+            Constant.Player.Human);
+      PlayerZone cplay = AllZone.getZone(Constant.Zone.Play,
+            Constant.Player.Computer);
+
+      CardList list = new CardList();
+      list.addAll(hplay.getCards());
+      list.addAll(cplay.getCards());
+
+      list = list.getName("Forced Fruition");
+
+      for (int i = 0; i < list.size(); i++)
+      {
+         final Card card = list.get(i);
+         final String drawer = AllZone.GameAction.getOpponent(card
+               .getController());
+         
+
+         Ability ability2 = new Ability(card, "0")
+         {
+            public void resolve()
+            {
+               AllZone.GameAction.drawCard(drawer);
+               AllZone.GameAction.drawCard(drawer);
+               AllZone.GameAction.drawCard(drawer);
+               AllZone.GameAction.drawCard(drawer);
+               AllZone.GameAction.drawCard(drawer);
+               AllZone.GameAction.drawCard(drawer);
+               AllZone.GameAction.drawCard(drawer);
+            
+            }
+         }; // ability2
+            if (!(card.getController() == c.getController())) {
+         ability2.setStackDescription(card.getName() + " - "
+               + c.getController() + " played a spell, " + drawer
+               + " draws seven cards.");
+         AllZone.Stack.add(ability2);
+            }
+      }
+
+   }
 
 	public static void playCard_Standstill(Card c)
 	{
@@ -135,6 +183,60 @@ public class GameActionUtil
 
 		}
 
+	}
+	
+	public static void playCard_Memory_Erosion(Card c)
+	{
+	      PlayerZone hplay = AllZone.getZone(Constant.Zone.Play,
+	            Constant.Player.Human);
+	      PlayerZone cplay = AllZone.getZone(Constant.Zone.Play,
+	            Constant.Player.Computer);
+
+	      CardList list = new CardList();
+	      list.addAll(hplay.getCards());
+	      list.addAll(cplay.getCards());
+
+	      list = list.getName("Memory Erosion");
+
+	      for (int i = 0; i < list.size(); i++)
+	      {
+	         final Card card = list.get(i);
+	         final String drawer = AllZone.GameAction.getOpponent(card
+	               .getController());
+	         
+
+	         Ability ability2 = new Ability(card, "0")
+	         {
+	            public void resolve()
+	            {
+	               // sac standstill
+	   //            AllZone.GameAction.sacrifice(card);
+	               // player who didn't play spell, draws 3 cards
+	               PlayerZone lib = AllZone.getZone(Constant.Zone.Library, drawer);
+	                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, drawer);
+	                    CardList libList = new CardList(lib.getCards());
+
+	                    int max = 2;
+	                    if (libList.size() < 2)
+	                       max = libList.size();
+	                   
+	                    for (int i=0;i<max;i++)
+	                    {
+	                       Card c = libList.get(i);
+	                       lib.remove(c);
+	                       grave.add(c);
+	                    }
+	            
+	            }
+	         }; // ability2
+	            if (!(card.getController() == c.getController())) {
+	         ability2.setStackDescription(card.getName() + " - "
+	               + c.getController() + " played a spell, " + drawer
+	               + " puts the top two cards of his or her library into his or her graveyard.");
+	         AllZone.Stack.add(ability2);
+	         
+	         }
+	      }
 	}
 
 	public static void playCard_SolKanar(Card c)
@@ -1829,6 +1931,8 @@ public class GameActionUtil
 			playerCombatDamage_Glint_Eye_Nephilim(c);
 		else if (c.getName().equals("Hystrodon") && !c.isFaceDown())
 			playerCombatDamage_Hystrodon(c);
+		else if (c.getName().equals("Raven Guild Master") && !c.isFaceDown())
+	         playerCombatDamage_Raven_Guild_Master(c);
 		else if (c.getName().equals("Slith Strider") || c.getName().equals("Slith Ascendant") ||
 				 c.getName().equals("Slith Bloodletter") || c.getName().equals("Slith Firewalker") ||
 				 c.getName().equals("Slith Predator"))
@@ -1850,7 +1954,6 @@ public class GameActionUtil
 			Card jitte = list.get(0);
 		}
 		*/
-
 		if (c.getNetAttack() > 0)
 			c.setDealtCombatDmgToOppThisTurn(true);
 
@@ -1962,6 +2065,45 @@ public class GameActionUtil
 		
 		} // if
 	}
+	
+	private static void playerCombatDamage_Raven_Guild_Master(Card c)
+    {
+      final String player = c.getController();
+      final String opponent = AllZone.GameAction.getOpponent(player);
+
+      if (c.getNetAttack() > 0)
+      {
+         Ability ability = new Ability(c, "0")
+         {
+            public void resolve()
+            {
+               AllZone.GameAction.discardRandom(opponent);
+               
+               ////////////
+               
+                   
+                   PlayerZone lib = AllZone.getZone(Constant.Zone.Library, opponent);
+                   PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, opponent);
+                   CardList libList = new CardList(lib.getCards());
+
+                   int max = 10;
+                   if (libList.size() < 10)
+                      max = libList.size();
+                   
+                   for (int i=0;i<max;i++)
+                   {
+                      Card c = libList.get(i);
+                      lib.remove(c);
+                      exiled.add(c);
+                   }
+            }
+         };// ability
+
+         ability.setStackDescription("Raven Guild Master - " + opponent
+               + " removes the top ten cards of his or her library from the game");
+         AllZone.Stack.add(ability);
+       }
+    }
 	
 	private static void playerCombatDamage_Hystrodon(Card c)
 	{
@@ -4854,6 +4996,39 @@ public class GameActionUtil
 		AllZone.GameAction.drawCard(player);
 	}// upkeep_Seizan_Perverter_of_Truth()
 	
+	private static void upkeep_Moroii()
+	{
+	      final String player = AllZone.Phase.getActivePlayer();
+	      PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+
+	      CardList list = new CardList();
+	      list.addAll(play.getCards());
+
+	      list = list.getName("Moroii");
+
+	      for (int i = 0; i < list.size(); i++) {
+	         AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+	      }
+	}// upkeep_Moroii
+	
+	private static void upkeep_Vampire_Lacerator()
+    {
+      final String player = AllZone.Phase.getActivePlayer();
+      PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+
+      CardList list = new CardList();
+      list.addAll(play.getCards());
+
+      list = list.getName("Vampire Lacerator");
+
+      for (int i = 0; i < list.size(); i++) {
+       if (player == "Human" &&  AllZone.Computer_Life.getLife() > 10)   
+         {AllZone.GameAction.getPlayerLife(player).subtractLife(1);}
+       else{ if (player == "Computer" &&  AllZone.Computer_Life.getLife() > 10)
+       {AllZone.GameAction.getPlayerLife(player).subtractLife(1);}}
+      }
+    }// upkeep_Vampire_Lacerator
+	
 	private static void upkeep_Grinning_Demon()
 	{
 		final String player = AllZone.Phase.getActivePlayer();
@@ -4879,7 +5054,7 @@ public class GameActionUtil
 				AllZone.Stack.add(ability);
 			}
 		}// for
-	}// upkeep_Juzam_Djinn()
+	}// upkeep_Grinning_Demon()
 
 	private static void upkeep_Juzam_Djinn()
 	{

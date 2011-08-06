@@ -1122,6 +1122,31 @@ public class CombatUtil
 	          } //if (creatures.size() > 0) 
 		  }//Preeminent Captain
 		  
+		  else if(c.getName().equals("Nemesis of Reason") && !c.getCreatureAttackedThisTurn())
+	      {
+	              String player =  AllZone.GameAction.getOpponent(c.getController());
+	              //if (c.getController().equals(Constant.Player.Human))
+	              //player="Human";
+	              //else if (c.getController().equals(Constant.Player.Computer))
+	              //player="Computer";
+	                
+	                PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+	                CardList libList = new CardList(lib.getCards());
+
+	                int max = 10;
+	                if (libList.size() < 10)
+	                   max = libList.size();
+	                
+	                for (int i=0;i<max;i++)
+	                {
+	                   Card c1 = libList.get(i);
+	                   lib.remove(c1);
+	                   grave.add(c1);
+	                }
+
+	      }//Nemesis of Reason
+		  
 		  c.setCreatureAttackedThisTurn(true);
 		  
 	  }//if Phase = declare attackers
