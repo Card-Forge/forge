@@ -1,0 +1,9 @@
+Name:Flash of Defiance
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+A:SP$PumpAll | Cost$ 1 R | ValidCards$ Creature.Green,Creature.White | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Green creatures and white creatures can't block this turn.
+K:Flashback:1 R PayLife<3>
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_of_defiance.jpg
+End
