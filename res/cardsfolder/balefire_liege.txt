@@ -3,8 +3,8 @@ ManaCost:2 RW RW RW
 Types:Creature Spirit Horror
 Text:no text
 PT:2/4
-K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.red!NotSelf:Other red creatures you control get +1/+1.
-K:StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.white!NotSelf:Other white creatures you control get +1/+1.
+K:stPumpAll:Creature.Red+Other+YouCtrl:1/1:No Condition:Other red creatures you control get +1/+1.
+K:stPumpAll:Creature.White+Other+YouCtrl:1/1:No Condition:Other white creatures you control get +1/+1.
 K:WheneverKeyword:CastSpell/Controller:Color/red:Play:Damage/3:NormalInput/Player:ASAP:No_Condition:No Special Condition:Whenever you cast a red spell, Balefire Liege deals 3 damage to target player.
 K:WheneverKeyword:CastSpell/Controller:Color/white:Play:ModifyLife/3:ControllingPlayer_Initiator:ASAP:No_Condition:No Special Condition:Whenever you cast a white spell, you gain 3 life.
 SVar:PlayMain1:TRUE

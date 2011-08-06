@@ -11496,6 +11496,14 @@ public class CardFactory implements NewConstants {
 		SpellAbility[] abilities = card.getSpellAbility();
 		if (abilities.length > 0){
 			String altCost = card.getSVar("AltCost");
+			String altCostDescription = "";
+			String[] altCosts = altCost.split("\\$");
+			
+			if (altCosts.length > 1) {
+				altCostDescription = altCosts[1];
+				altCost = altCosts[0];
+			}
+			
 			SpellAbility sa = abilities[0];
 			if (!altCost.equals("") && sa.isSpell())
 			{
@@ -11506,8 +11514,13 @@ public class CardFactory implements NewConstants {
 				
 	            StringBuilder sb = new StringBuilder();
 	            
-	            sb.append("You may ").append(abCost.toStringAlt());
-	            sb.append(" rather than pay ").append(card.getName()).append("'s mana cost");
+	            if (altCosts.length > 1) {
+	            	sb.append(altCostDescription);
+	            }
+	            else {
+	            	sb.append("You may ").append(abCost.toStringAlt());
+	            	sb.append(" rather than pay ").append(card.getName()).append("'s mana cost");
+	            }
 	            
 	            altCostSA.setDescription(sb.toString());
 	
