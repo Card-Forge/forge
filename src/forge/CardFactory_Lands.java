@@ -3607,6 +3607,65 @@ class CardFactory_Lands {
         	ability.setStackDescription(cardName + " - Rearrange the top 3 cards in your library in any order.");
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Island of Wak-Wak")) {
+        	/*
+        	 * Tap: The power of target creature with flying becomes 0 until end of turn.
+        	 */
+        	final Ability_Tap ability = new Ability_Tap(card) {
+        		private static final long serialVersionUID = -2090435946748184314L;
+
+        		@Override
+        		public boolean canPlayAI() {
+        			Card c = getCreature();
+                    if(c == null) return false;
+                    else {
+                        setTargetCard(c);
+                        return true;
+                    }
+                }//canPlayAI()
+                
+                //may return null
+                private Card getCreature() {
+                    CardList untapped = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
+                    untapped = untapped.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isUntapped() && 0 < c.getNetDefense();
+                        }
+                    });
+                    if(untapped.isEmpty()) return null;
+                    
+                    Card big = CardFactoryUtil.AI_getBestCreature(untapped);
+                    return big;
+                }
+                
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                        final Card[] creature = new Card[1];
+                        
+                        creature[0] = getTargetCard();
+                        final int[] originalAttack = {creature[0].getBaseAttack()};
+                        creature[0].setBaseAttack(0);
+                        
+                        final Command EOT = new Command() {
+							private static final long serialVersionUID = 3502589085738502851L;
+
+							public void execute() {
+                                if(AllZone.GameAction.isCardInPlay(creature[0])) {
+                                    creature[0].setBaseAttack(originalAttack[0]);
+                                }
+                            }
+                        };
+                        AllZone.EndOfTurn.addUntil(EOT);
+                    }//is card in play?
+                }//resolve()
+            };//SpellAbility
+            card.addSpellAbility(ability);
+            ability.setBeforePayMana(CardFactoryUtil.input_targetCreatureKeyword_NoCost_TapAbility("Flying", ability));
+        }//*************** END ************ END **************************
 
         if(hasKeyword(card, "Cycling") != -1) {
             int n = hasKeyword(card, "Cycling");

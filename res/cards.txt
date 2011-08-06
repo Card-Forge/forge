@@ -1,3 +1,10 @@
+Island of Wak-Wak
+no cost
+Land
+tap: The power of target creature with flying becomes 0 until end of turn.
+SVars:Rarity:Rare
+SVars:Picture:http://www.wizards.com/global/images/magic/general/island_of_wak-wak.jpg
+
 Blistering Firecat
 1 R R R
 Creature Cat

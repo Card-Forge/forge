@@ -2679,6 +2679,39 @@ public class CardFactoryUtil {
         return target;
     }//input_targetCreature()
     
+    /*
+     * copied from input_targetCreature_NoCost_TapAbility
+     * Note: that function should probably call this one to reuse code
+     */
+    public static Input input_targetCreatureKeyword_NoCost_TapAbility(final String keyword, final Ability_Tap spell) {
+        Input target = new Input() {
+			private static final long serialVersionUID = 5458576880476178627L;
+
+			@Override
+            public void showMessage() {
+                AllZone.Display.showMessage("Select target creature with "+keyword);
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+                stop();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(card.isCreature() && zone.is(Constant.Zone.Play) && canTarget(spell, card)
+                		&& card.getKeyword().contains(keyword)) {
+                    spell.setTargetCard(card);
+                    spell.getSourceCard().tap();
+                    AllZone.Stack.push(spell);
+                    stop();
+                }
+            }
+        };
+        return target;
+    }//input_targetCreature()
+    
     public static Input MasteroftheWildHunt_input_targetCreature(final SpellAbility spell, final CardList choices, final Command paid) {
         Input target = new Input() {
             private static final long serialVersionUID = -1779224307654698954L;
