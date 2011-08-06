@@ -24,6 +24,7 @@ public class GameActionUtil {
 		AllZone.GameAction.CheckWheneverKeyword(AllZone.CardFactory.HumanNullCard, "BeginningOfUpkeep", null);
 		
 		upkeep_The_Abyss();
+		upkeep_Defiler_of_Souls();
 		upkeep_Yawgmoth_Demon();
 		upkeep_Lord_of_the_Pit();
 		upkeep_Drop_of_Honey();
@@ -3468,6 +3469,61 @@ public class GameActionUtil {
 		return creats;
 	}
 
+	private static void upkeep_Defiler_of_Souls() {
+		/*
+		 * At the beginning of each player's upkeep, destroy target
+		 * nonartifact creature that player controls of his or her
+		 * choice. It can't be regenerated.
+		 */
+		final Player player = AllZone.Phase.getActivePlayer();
+		final CardList defilers = AllZoneUtil.getCardsInPlay("Defiler of Souls");
+		
+		for(Card c:defilers) {
+			final Card defiler = c;
+			
+			final Ability sacrificeCreature = new Ability(defiler, "") {
+				@Override
+				public void resolve() {
+					if(player.equals(AllZone.HumanPlayer)) {
+						AllZone.InputControl.setInput( new Input() {
+							private static final long serialVersionUID = 8013298767165776609L;
+							public void showMessage() {
+								AllZone.Display.showMessage("Defiler of Souls - Select a monocolored creature to sacrifice");
+								ButtonUtil.disableAll();
+							}
+							public void selectCard(Card selected, PlayerZone zone) {
+								//probably need to restrict by controller also
+								if(selected.isCreature() && CardUtil.getColors(selected).size() == 1 && !selected.isColorless() 
+										&& zone.is(Constant.Zone.Play) && zone.getPlayer().equals(AllZone.HumanPlayer)) {
+									AllZone.GameAction.sacrificeDestroy(selected);
+									stop();
+								}
+							}//selectCard()
+						});//Input
+					}
+					else { //computer
+						CardList targets = Defiler_of_Souls_getTargets(player,defiler);
+						Card target = CardFactoryUtil.AI_getWorstCreature(targets);
+						if(null == target) {
+							//must be nothing valid to destroy
+						}
+						else AllZone.GameAction.sacrificeDestroy(target);
+					}
+				}//resolve
+			};//sacrificeCreature
+			sacrificeCreature.setStackDescription("Defiler of Souls - Select a monocolored creature to sacrifice");
+			if(Defiler_of_Souls_getTargets(player,defiler).size() > 0)
+				AllZone.Stack.add(sacrificeCreature);
+		}//end for
+	}//The Abyss
+	
+	private static CardList Defiler_of_Souls_getTargets(final Player player, Card card) {
+		CardList creats = AllZoneUtil.getCreaturesInPlay(player);
+		String mono[] = {"Creature.MonoColor"};
+		creats = creats.getValidCards(mono);
+		return creats;
+	}
+	
 	private static void upkeep_Yawgmoth_Demon() {
 		/*
 		 * At the beginning of your upkeep, you may sacrifice an artifact. If
