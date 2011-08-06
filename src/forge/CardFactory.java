@@ -6810,7 +6810,7 @@ public class CardFactory implements NewConstants {
         //*************** START *********** START **************************
       	else if(cardName.equals("Bottle of Suleiman")) {
       		/*
-      		 * Sacrifice Bottle of Suleiman: Flip a coin. If you lose the flip,
+      		 * 1, Sacrifice Bottle of Suleiman: Flip a coin. If you lose the flip,
       		 * Bottle of Suleiman deals 5 damage to you. If you win the flip,
       		 * put a 5/5 colorless Djinn artifact creature token with flying
       		 * onto the battlefield.
@@ -6834,23 +6834,10 @@ public class CardFactory implements NewConstants {
 
       			@Override
       			public void resolve() {
-      				final Player player = AllZone.Phase.getPlayerTurn();
-      				String choice = "";
-      				String choices[] = {"heads","tails"};
-      				boolean flip = MyRandom.percentTrue(50);
-      				if(card.getController().equals(AllZone.HumanPlayer)) {
-      					choice = (String) AllZone.Display.getChoice("Choose one", choices);
-      				}
-      				else {
-      					choice = choices[MyRandom.random.nextInt(2)];
-      				}
-
-      				if( (flip == true && choice.equals("heads")) ||   (flip == false && choice.equals("tails"))) {
-      					JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Win! - "+player+" puts a 5/5 Flying Djinn in play.", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
+      				if(GameActionUtil.flipACoin(card.getController(), card)) {
       					CardFactoryUtil.makeToken("Djinn", "C 5 5 Djinn", card.getController(), "", new String[] {"Creature", "Artifact", "Djinn"}, 5, 5, new String[] {"Flying"});
       				}
-      				else{
-      					JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Lose - Bottle does 5 damage to "+player+".", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
+      				else {
       					card.getController().addDamage(5, card);
       				}
       			}
