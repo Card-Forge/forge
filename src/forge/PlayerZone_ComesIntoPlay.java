@@ -163,6 +163,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 }
                 
                 CardList ankhs = AllZoneUtil.getCardsInPlay("Ankh of Mishra");
+                ankhs.add(AllZoneUtil.getCardsInPlay("Zo-Zu the Punisher"));
                 final Card ankhLand = c;
                 for(Card ankh:ankhs) {
                 	final Card source = ankh;
