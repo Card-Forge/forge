@@ -1910,6 +1910,7 @@ res/cardsfolder/exhume.txt -text svneol=native#text/plain
 res/cardsfolder/exile.txt -text svneol=native#text/plain
 res/cardsfolder/exiled_boggart.txt -text svneol=native#text/plain
 res/cardsfolder/exorcist.txt -text svneol=native#text/plain
+res/cardsfolder/exoskeletal_armor.txt -text svneol=native#text/plain
 res/cardsfolder/exotic_curse.txt -text svneol=native#text/plain
 res/cardsfolder/exotic_disease.txt -text svneol=native#text/plain
 res/cardsfolder/exotic_orchard.txt -text svneol=native#text/plain
