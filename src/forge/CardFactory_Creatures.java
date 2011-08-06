@@ -13511,6 +13511,48 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(commandComes);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Arashi, the Sky Asunder")) {
+        	Ability_Cost abCost = new Ability_Cost("X G G Discard<1/CARDNAME>", cardName, true);
+            Ability_Activated ability = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = -3230406552520874483L;
+
+				@Override
+                public boolean canPlayAI() {
+					return false;
+					/*
+                    CardList human = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+                    human = human.filter(AllZoneUtil.getKeywordFilter("Flying"));
+                    CardList computer = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+                    computer = computer.filter(AllZoneUtil.getKeywordFilter("Flying"));
+                    
+                    return AllZone.ComputerPlayer.getLife() > 8 && !(human.size() == 0 && 0 < computer.size());
+                    */
+                }
+                
+                @Override
+                public void resolve() {
+                	int damage = card.getXManaCostPaid();
+                    
+                	CardList list = AllZoneUtil.getCreaturesInPlay();
+                    list = list.filter(AllZoneUtil.getKeywordFilter("Flying"));
+                    for(Card c:list) c.addDamage(damage, card);
+                    
+                    for(Player p:AllZoneUtil.getPlayersInGame()) p.addDamage(damage, card);
+                    
+                    card.setXManaCostPaid(0);
+                }//resolve()
+            };//SpellAbility
+            ability.setDescription("Channel - "+abCost+cardName+" deals X damage to each creature with flying and each player.");
+            ability.getRestrictions().setActivateZone(Constant.Zone.Hand);
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" deals X damage to each creature with flying and each player.");
+            ability.setStackDescription(sb.toString());
+            card.addSpellAbility(ability);
+            card.setSVar("PlayMain1", "TRUE");
+        }//*************** END ************ END **************************
+        
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {

@@ -697,4 +697,11 @@ public class AllZoneUtil {
 		lands.add(getPlayerLandsInPlay(AllZone.ComputerPlayer));
 		return lands;
 	}
+	
+	public static ArrayList<Player> getPlayersInGame() {
+		ArrayList<Player> list = new ArrayList<Player>();
+		list.add(AllZone.HumanPlayer);
+		list.add(AllZone.ComputerPlayer);
+		return list;
+	}
 }

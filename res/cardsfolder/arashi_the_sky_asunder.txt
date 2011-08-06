@@ -1,7 +1,7 @@
 Name:Arashi, the Sky Asunder
 ManaCost:3 G G
 Types:Legendary Creature Spirit
-Text:(NOTE: "Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
+Text:no text
 PT:5/5
 A:AB$DealDamage | Cost$ X G T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target flying creature. | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature with flying.
 SVar:X:Count$xPaid
