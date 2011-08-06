@@ -1694,7 +1694,7 @@ public class CardFactory implements NewConstants {
               DamageTgt.setStackDescription(card.getName() + " - deals " + NumDmg[0] + " damage.");
 
           if (TgtCP[0])
-             DamageTgt.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(DamageTgt, true));
+             DamageTgt.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(DamageTgt, true, false));
           else if (TgtCreature[0])
              DamageTgt.setBeforePayMana(CardFactoryUtil.input_targetCreature(DamageTgt));
           else if (TgtPlayer[0])
@@ -1836,7 +1836,7 @@ public class CardFactory implements NewConstants {
                };//Ability_Activated
                
                ability.setDescription(manaCost + ": " + Desc);
-               ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true));
+               ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
                card.addSpellAbility(ability);
             }//!tapCost
            
@@ -1896,7 +1896,7 @@ public class CardFactory implements NewConstants {
                };//Ability_Tap
            
                ability.setDescription("tap: " + Desc);
-               ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true));
+               ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
                card.addSpellAbility(ability);
           }//tapOnlyCost
          
@@ -1954,7 +1954,7 @@ public class CardFactory implements NewConstants {
                };//Ability_Tap
            
                ability.setDescription(manaCost + ", tap: " + Desc);
-               ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true));
+               ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
                card.addSpellAbility(ability);               
           }//!tapOnlyCost && tapCost
        }//n       
@@ -2600,9 +2600,7 @@ public class CardFactory implements NewConstants {
       }
     }//flashback
     
-    
 
-    
     if (hasKeyword(card, "Devour") != -1)
     {
       int n = hasKeyword(card, "Devour");
@@ -6147,7 +6145,7 @@ public class CardFactory implements NewConstants {
       };
       spell.setChooseTargetAI(CardFactoryUtil.AI_targetHumanCreatureOrPlayer());
 
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true));
+      spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
@@ -8366,15 +8364,16 @@ public class CardFactory implements NewConstants {
           
         }
       };//flashback
+      flashback.setFlashBackAbility(true);
       flashback.setManaCost("4 R");
-      flashback.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(flashback,true));
+      flashback.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(flashback, true, false));
       flashback.setDescription("Flashback: 4R");
       
       card.clearSpellAbility();
       card.addSpellAbility(spell);
       card.addSpellAbility(flashback);
 
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell,true));
+      spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
       card.setFlashback(true);
     }//*************** END ************ END **************************
 
@@ -8511,7 +8510,7 @@ public class CardFactory implements NewConstants {
 
       card.addSpellAbility(spell);
 
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true));
+      spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
     }//*************** END ************ END **************************
 
     //*************** START *********** START **************************
@@ -11191,6 +11190,7 @@ public class CardFactory implements NewConstants {
         }
       };//Input
       
+      flashback.setFlashBackAbility(true);
       flashback.setManaCost("5 R");
       flashback.setBeforePayMana(targetFB);
       flashback.setDescription("Flashback: 5 R");
@@ -12190,16 +12190,23 @@ public class CardFactory implements NewConstants {
           
           Card c1 = list.get(0);
           list.remove(c1);
+          /*
           AllZone.Computer_Graveyard.add(c1);
           AllZone.Computer_Hand.remove(c1);          
+          */
+          AllZone.GameAction.discard(c1);
           
           if (list.size()== 0)
         	  return;
           
           Card c2 = list.get(0);
           list.remove(c2);
+          
+          /*
           AllZone.Computer_Graveyard.add(c2);
           AllZone.Computer_Hand.remove(c2);    
+          */
+          AllZone.GameAction.discard(c2);
           
           if (c1.getType().contains("Land")) {
         	  PlayerLife life = AllZone.GameAction.getPlayerLife(Constant.Player.Human);
@@ -12216,7 +12223,6 @@ public class CardFactory implements NewConstants {
         public void computerResolve()
         {
         	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
-        	PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
             CardList list = new CardList(hand.getCards());
             
             if (list.size() > 0){
@@ -12225,9 +12231,12 @@ public class CardFactory implements NewConstants {
 	            
 	            Card c = (Card)o;
 	      		list.remove(c);
-	
+	      		
+	      		/*
 	      		hand.remove(c);
 	      		grave.add(c);
+	      		*/
+	      		AllZone.GameAction.discard(c);
 	      		
 	      		if(c.getType().contains("Land")) {
 	      			PlayerLife life = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
@@ -12241,8 +12250,11 @@ public class CardFactory implements NewConstants {
 		            Card c2 = (Card)o2;
 		      		list.remove(c2);
 		
+		      		/*
 		      		hand.remove(c2);
 		      		grave.add(c2);
+		      		*/
+		      		AllZone.GameAction.discard(c2);
 		      		
 		      		if(c2.getType().contains("Land")) {
 		      			PlayerLife life = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
@@ -13560,7 +13572,7 @@ public class CardFactory implements NewConstants {
       }//resolve()
      };//Ability_Activated
      
-      ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true));
+      ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
       ability.setDescription("R, Sacrifice Pyrite Spellbomb: Pyrite Spellbomb deals 2 damage to target creature or player.");
       card.addSpellAbility(ability);
     }//*************** END ************ END **************************
@@ -16273,7 +16285,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
         {
           AllZone.GameAction.sacrifice(card);
         }
-      }, true));
+      }, true, false));
     }//*************** END ************ END **************************
     
   //*************** START *********** START **************************
@@ -16633,7 +16645,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		};
 		ability.setDescription("3, tap: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.");
 		ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-		ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true));
+		ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
 		card.addSpellAbility(ability);
 
 		

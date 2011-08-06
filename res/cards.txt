@@ -1,3 +1,47 @@
+Bituminous Blast
+3 B R
+Instant
+Cascade. 
+spDamageTgtC:4
+
+Enlisted Wurm
+4 G W
+Creature Wurm
+no text
+5/5
+Cascade
+
+Kathari Remnant
+2 U B
+Creature Bird Skeleton
+no text
+0/1
+Flying
+RegenerateMe:B
+Cascade
+
+Ardent Plea
+1 W U
+Enchantment
+no text
+Exalted
+Cascade
+
+Kor Skyfisher
+1 W
+Creature Kor Soldier
+When Kor Skyfisher enters the battlefield, return a permanent you control to its owner's hand.
+2/3
+Flying
+
+Bloodbraid Elf
+2 R G
+Creature Elf
+no text
+3/2
+Haste
+Cascade
+
 Bloodghast
 B B
 Creature Vampire Spirit
@@ -120,7 +164,7 @@ Upkeep:1 W
 
 Arctic Nishoba
 5 G
-Creature Cat Warrior
+Creature Cat
 When Arctic Nishoba is put into a graveyard from the battlefield, you gain 2 life for each age counter on it.
 6/6
 Trample
@@ -6317,7 +6361,7 @@ TgtKPump B B:Shadow
 Ember Shot
 6 R
 Instant
-no text
+Draw a card. 
 spDamageTgtCP:3
 Draw a card.
 
@@ -6330,7 +6374,7 @@ TgtKPump 1 W:First Strike
 Zap
 2 R
 Instant
-no text
+no text 
 spDamageTgtCP:1
 Draw a card.
 

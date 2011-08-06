@@ -371,7 +371,6 @@ public class Card extends MyObservable
 		  manaAbility.remove((Ability_Mana)a); 
 	  else 
 		  spellAbility.remove(a);
-	  
   }
   
 
@@ -411,6 +410,33 @@ public class Card extends MyObservable
     res.toArray(s);
     return s;
   }
+  
+  public ArrayList<SpellAbility> getSpells()
+  {
+	ArrayList<SpellAbility> s  = new ArrayList<SpellAbility>(spellAbility);  
+	ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
+    
+    for (SpellAbility sa : s)
+    {
+    	if (sa.isSpell() )
+    		res.add(sa);
+    }
+    return res;
+  }
+  
+  public ArrayList<SpellAbility> getBasicSpells()
+  {
+	ArrayList<SpellAbility> s  = new ArrayList<SpellAbility>(spellAbility);  
+	ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
+    
+    for (SpellAbility sa : s)
+    {
+    	if (sa.isSpell() && !sa.isFlashBackAbility() && !sa.isBuyBackAbility())
+    		res.add(sa);
+    }
+    return res;
+  }
+
 
   //shield = regeneration
   public void setShield(int n) {nShield = n;}

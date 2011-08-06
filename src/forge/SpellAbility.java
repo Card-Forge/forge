@@ -23,6 +23,7 @@ public abstract class SpellAbility
   private boolean spell;
   private boolean tapAbility;
   private boolean buyBackAbility = false; //false by default
+  private boolean flashBackAbility = false;
 
   private Input beforePayMana;
   private Input afterResolve;
@@ -168,5 +169,11 @@ public void execute(Object o) {}};
 
 	public void setCancelCommand(Command cancelCommand) {
 		this.cancelCommand = cancelCommand;
+	}
+	public void setFlashBackAbility(boolean flashBackAbility) {
+		this.flashBackAbility = flashBackAbility;
+	}
+	public boolean isFlashBackAbility() {
+		return flashBackAbility;
 	}
 }

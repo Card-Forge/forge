@@ -328,7 +328,7 @@ public class CardFactory_Creatures {
 	         a2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a2));
 	       }//*************** END ************ END **************************
 
-	    
+	    /*
 		  //*************** START *********** START **************************
 	    else if(cardName.equals("Street Wraith"))
 	       {
@@ -375,6 +375,7 @@ public class CardFactory_Creatures {
      	     a1.setStackDescription(card +" Cycling: Draw a card");
 	    
 	       }//*************** END ************ END **************************
+	    */
 
 	    //*************** START *********** START **************************
 	    else if(cardName.equals("Street Wraith"))
@@ -498,7 +499,7 @@ public class CardFactory_Creatures {
 	              if (c.getKeyword().contains("Lifelink"))
 	            	  GameActionUtil.executeLifeLinkEffects(c,n);
 
-                  CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
+                  CardList cl = CardFactoryUtil.getAurasEnchanting(c, "Guilty Conscience");
         		  for (Card crd : cl)
         		  {
         			   GameActionUtil.executeGuiltyConscienceEffects(c, crd, n);
@@ -2275,7 +2276,7 @@ public class CardFactory_Creatures {
 			public void execute()
 	        {
 	          if(card.getController().equals(Constant.Player.Human))
-	            AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreaturePlayer(ability, true));
+	            AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
 	          else
 	          {
 	            CardList list = CardFactoryUtil.AI_getHumanCreature(3, card, true);
@@ -6727,7 +6728,7 @@ public class CardFactory_Creatures {
 	      card.addSpellAbility(ability);
 	      ability.setDescription("tap: "+ cardName +" deals 1 damage to target creature or player.");
 
-	      ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true));
+	      ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
 	    }//*************** END ************ END **************************
 
 
@@ -6796,7 +6797,7 @@ public class CardFactory_Creatures {
 	      card.addSpellAbility(ability);
 	      ability.setDescription("tap: " +cardName + " deals 2 damage to target creature or player and 3 damage to you.");
 
-	      ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability,true));
+	      ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability,true,false));
 	    }//*************** END ************ END **************************
 
 
@@ -7331,7 +7332,7 @@ public class CardFactory_Creatures {
 	  			}
 	            });
 	            
-	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, all, "Destroy target creature or enchantment.", true));
+	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, all, "Choose target creature or enchantment.", true));
 	          }
 	        };
 	        ability.setBeforePayMana(runtime);
@@ -9269,7 +9270,7 @@ public class CardFactory_Creatures {
 	          {
 	            AllZone.GameAction.sacrifice(card);
 	          }
-	        }, true));
+	        }, true, false));
 	      }//*************** END ************ END **************************
 
 	      //*************** START *********** START **************************
@@ -11572,7 +11573,7 @@ public class CardFactory_Creatures {
 	        card.addSpellAbility(ability);
 	        ability.setDescription("1 R, Sacrifice a goblin: Siege-Gang Commander deals 2 damage to target creature or player .");
 	        ability.setStackDescription("Siege-Gang Commander deals 2 damage to target creature or player");
-	        ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true));
+	        ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
 	  	}//*************** END ************ END **************************
 	    
 	    
@@ -13399,7 +13400,7 @@ public class CardFactory_Creatures {
 	    }//*************** END ************ END **************************
 	    
 	  //*************** START *********** START **************************
-	    else if(cardName.equals("Dream Stalker"))
+	    else if(cardName.equals("Dream Stalker") || cardName.equals("Kor Skyfisher"))
 	    {
 	      final SpellAbility ability = new Ability(card, "0")
 	      {
@@ -18219,7 +18220,7 @@ public class CardFactory_Creatures {
 		          {
 		            AllZone.GameAction.sacrifice(card);
 		          }
-		        }, true));
+		        }, true, false));
 		      }//*************** END ************ END **************************
 	       
 	          //*************** START *********** START **************************

@@ -1239,19 +1239,20 @@ private int getDifferentLand(CardList list, String land)
   
   public void playCardNoCost(Card c)
   {
-	    SpellAbility[] choices = canPlaySpellAbility(c.getSpellAbility());
+	    //SpellAbility[] choices = (SpellAbility[]) c.getSpells().toArray();
+	    ArrayList<SpellAbility> choices = c.getBasicSpells();
 	    SpellAbility sa;
 	/*
 	 System.out.println(choices.length);
 	 for(int i = 0; i < choices.length; i++)
 	     System.out.println(choices[i]);
 	*/
-	    if(choices.length == 0)
+	    if(choices.size() == 0)
 	      return;
-	    else if(choices.length == 1)
-	      sa = choices[0];
+	    else if(choices.size() == 1)
+	      sa = (SpellAbility)choices.get(0);
 	    else
-	      sa = (SpellAbility) AllZone.Display.getChoiceOptional("Choose", choices);
+	      sa = (SpellAbility) AllZone.Display.getChoiceOptional("Choose", choices.toArray());
 	
 	    if(sa == null)
 	      return;
@@ -1263,11 +1264,21 @@ private int getDifferentLand(CardList list, String land)
   {
 	if (sa.getBeforePayMana() == null){
 		AllZone.Stack.add(sa);
-		if (sa.isTapAbility())
-			sa.getSourceCard().tap();
+		
+		/*
+		if (sa.getAfterPayMana() != null)
+	    	AllZone.InputControl.setInput(sa.getAfterPayMana());
+	    else
+	    {
+	        AllZone.Stack.add(sa);
+	        AllZone.InputControl.setInput(new ComputerAI_StackNotEmpty());
+	    }
+	    */
 	}
-	else
+	else {
+		sa.getBeforePayMana().setFree(true);
 		AllZone.InputControl.setInput(sa.getBeforePayMana());
+	}
   }
   
   public void playSpellAbility(SpellAbility sa)

@@ -139,8 +139,82 @@ public class GameActionUtil
 		playCard_Enchantress_Draw(c);
 		playCard_Mold_Adder(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
+		
+		playCard_Cascade(c);
+		
 	}
 	
+	public static void playCard_Cascade(Card c)
+	{
+
+		if (c.getKeyword().contains("Cascade") || c.getName().equals("Bituminous Blast"))
+		{
+			final String controller = c.getController();
+			final PlayerZone lib = AllZone.getZone(Constant.Zone.Library, controller);
+			final Card cascCard = c;
+			
+			final Ability ability = new Ability(c, "0")
+			{
+				public void resolve()
+				{
+					CardList topOfLibrary = new CardList(lib.getCards());
+					CardList revealed = new CardList();
+					
+					if (topOfLibrary.size() == 0)
+						return;
+		
+					Card cascadedCard = null;
+					Card crd;
+					int count = 0;
+					while (cascadedCard == null)
+					{
+						crd = topOfLibrary.get(count++);
+						revealed.add(crd);
+						lib.remove(crd);
+						if ((!crd.isLand() && CardUtil.getConvertedManaCost(crd.getManaCost()) < CardUtil.getConvertedManaCost(cascCard.getManaCost()) )) 
+							cascadedCard = crd;
+						
+						if (count == topOfLibrary.size() ) 
+							break;
+						
+					}//while
+					AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
+					
+					if (cascadedCard != null) {
+						revealed.remove(cascadedCard);
+						
+						if (cascadedCard.getController().equals(Constant.Player.Human))
+						{
+							AllZone.GameAction.playCardNoCost(cascadedCard);
+						}
+						else
+						{
+							ArrayList<SpellAbility> choices = cascadedCard.getBasicSpells();
+						    
+						    for (SpellAbility sa : choices )
+						    {
+						    	if (sa.canPlayAI())
+						    	{
+						    		ComputerUtil.playStackFree(sa);
+						    		break;
+						    	}
+						    }
+						}
+						
+					}				
+					revealed.shuffle();
+					for (Card bottom : revealed)
+					{
+						lib.add(bottom);
+					}
+				}
+			};
+			ability.setStackDescription(c + " - Cascade.");
+			AllZone.Stack.add(ability);
+			
+		}
+	}
+
 	public static void playCard_Emberstrike_Duo(Card c)
 	{
 		final String controller = c.getController();

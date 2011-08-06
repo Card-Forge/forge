@@ -3,6 +3,8 @@ public abstract class Input implements java.io.Serializable
 {
 	private static final long serialVersionUID = -6539552513871194081L;
 
+	private boolean isFree = false;
+	
 	//showMessage() is always the first method called
     public void showMessage() {AllZone.Display.showMessage("Blank Input");}
     
@@ -37,4 +39,12 @@ public abstract class Input implements java.io.Serializable
     final public void stopSetNext(Input in) {stop(); AllZone.InputControl.setInput(in);}
     
     public String toString() {return "blank";}//returns the Input name like "EmptyStack"
+
+	public void setFree(boolean isFree) {
+		this.isFree = isFree;
+	}
+
+	public boolean isFree() {
+		return isFree;
+	}
 }

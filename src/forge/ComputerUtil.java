@@ -64,6 +64,20 @@ private static Random random = new Random();
 	  
   }
   
+  final static public void playStackFree(SpellAbility sa)
+  {
+	  if (AllZone.GameAction.isCardInZone(sa.getSourceCard(),AllZone.Computer_Hand))
+		  AllZone.Computer_Hand.remove(sa.getSourceCard());
+	  
+	  
+	  if (sa.getSourceCard().getKeyword().contains("Draw a card."))
+		      	AllZone.GameAction.drawCard(sa.getSourceCard().getController());
+		  
+	  AllZone.Stack.add(sa);
+
+	  
+  }
+  
   final static public void playNoStack(SpellAbility sa)
   {
     if(canPayCost(sa))
