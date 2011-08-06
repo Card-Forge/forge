@@ -3472,8 +3472,22 @@ public class CardFactoryUtil {
                 getNumberOfManaSymbolsControlledByColor(sq[1], cardController), m);
         
         // Count$Hellbent.<numHB>.<numNotHB>
-        if(sq[0].contains("Hellbent")) if(myHand.size() <= 1) return doXMath(Integer.parseInt(sq[1]), m); // Hellbent
-        else return doXMath(Integer.parseInt(sq[2]), m); // not Hellbent
+        if(sq[0].contains("Hellbent"))
+        {
+        	if(myHand.size() <= 1) 
+        		return doXMath(Integer.parseInt(sq[1]), m); // Hellbent
+        	else
+        		return doXMath(Integer.parseInt(sq[2]), m); // not Hellbent
+        }
+        
+        if (sq[0].contains("Threshold"))
+        {
+        	if (myYard.size() >= 7)
+        		return doXMath(Integer.parseInt(sq[1]), m); // Have Threshold
+        	else
+        		return doXMath(Integer.parseInt(sq[2]), m); // not Threshold
+        }
+        	
         
         // Count$CardPower
         if(sq[0].contains("CardPower")) return doXMath(c.getNetAttack(), m);
