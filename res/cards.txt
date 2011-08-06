@@ -1,3 +1,14 @@
+Mana Tithe
+W
+Instant
+Counter target spell unless its controller pays 1.
+
+Miscalculation
+1 U
+Instant
+Counter target spell unless its controller pays 2.
+Cycling:2
+
 Eyeblight's Ending
 2 B
 Tribal Instant Elf
@@ -27,7 +38,7 @@ Counter target spell unless its controller pays 4.
 Runeboggle
 2 U
 Instant
-Counter target spell unless its controller pays 1.
+Counter target spell unless its controller pays 1. Draw a card.
 Cantrip
 
 Spell Snip

@@ -18,6 +18,8 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+mana_tithe.jpg		http://www.wizards.com/global/images/magic/general/mana_tithe.jpg
+miscalculation.jpg		http://www.wizards.com/global/images/magic/general/miscalculation.jpg
 eyeblights_ending.jpg		http://www.wizards.com/global/images/magic/general/eyeblights_ending.jpg
 collective_restraint.jpg		http://www.wizards.com/global/images/magic/general/collective_restraint.jpg
 force_spike.jpg		http://www.wizards.com/global/images/magic/general/force_spike.jpg

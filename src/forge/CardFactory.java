@@ -9490,9 +9490,9 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
-  //*************** START *********** START **************************
+    //*************** START *********** START **************************
     else if(cardName.equals("Mana Leak") || cardName.equals("Convolute") || cardName.equals("Daze") || cardName.equals("Force Spike") || 
-    		cardName.equals("Runeboggle") || cardName.equals("Spell Snip"))
+    		cardName.equals("Runeboggle") || cardName.equals("Spell Snip") || cardName.equals("Mana Tithe") || cardName.equals("Miscalculation"))
     {
       SpellAbility spell = new Spell(card)
       {
@@ -9500,7 +9500,9 @@ public class CardFactory implements NewConstants {
 		public void resolve()
         {
 		  String manaCost = "1";
-		  if (cardName.equals("Mana Leak"))
+		  if (cardName.equals("Miscalculation"))
+			  manaCost = "2";
+		  else if (cardName.equals("Mana Leak"))
 			  manaCost = "3";
 		  else if (cardName.equals("Convolute"))
 			  manaCost = "4";
@@ -9623,6 +9625,11 @@ public class CardFactory implements NewConstants {
 	      bounce.setBeforePayMana(bounceIslands);
 	      card.addSpellAbility(bounce);
       }//if Daze
+      else	// This is Chris' Evil hack to get the Cycling cards to give us a choose window with text for the SpellAbility
+      {
+        spell.setDescription(card.getText());
+        card.setText("");
+      }
     }//*************** END ************ END **************************
     
 
