@@ -8667,7 +8667,7 @@ spDamageTgtCP:3
 Ghostfire
 2 R
 Instant
-no text
+Ghostfire is colorless.
 spDamageTgtCP:3
 Ghostfire is colorless.
 

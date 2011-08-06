@@ -6489,7 +6489,7 @@ public class CardFactory_Creatures {
 	                if (AllZone.GameAction.isCardInPlay(creature[0]))
 	                {
 	                  creature[0].removeExtrinsicKeyword("Flying");
-	                  creature[0].removeExtrinsicKeyword(tgtName + " is blue.");
+	                  creature[0].removeIntrinsicKeyword(tgtName + " is blue.");
 	                  creature[0].setManaCost(origManaCost);
 	                  for (int i=0; i<6; i++)
 	                  {
@@ -6510,7 +6510,7 @@ public class CardFactory_Creatures {
 	              }
 	            }
 	            creature[0].addExtrinsicKeyword("Flying");
-	            creature[0].addExtrinsicKeyword(tgtName + " is blue.");
+	            creature[0].addIntrinsicKeyword(tgtName + " is blue.");
 	            AllZone.EndOfTurn.addUntil(EOT);
 	          }//if (card is in play)
 	        }//resolve()

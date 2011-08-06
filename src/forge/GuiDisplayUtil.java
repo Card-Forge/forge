@@ -92,6 +92,7 @@ public class GuiDisplayUtil implements NewConstants {
     
     public static Border getBorder(Card card) {
         Color color;
+/*
         if(card.isArtifact()) color = Color.gray;
         else if(CardUtil.getColor(card).equals(Constant.Color.Black) || card.getName().equals("Swamp")
                 || card.getName().equals("Bog")) color = Color.black;
@@ -108,8 +109,26 @@ public class GuiDisplayUtil implements NewConstants {
         if(CardUtil.getColors(card).size() != 1) {
             color = Color.orange;
         }
+*/
+        if(CardUtil.getColors(card).size() > 1)
+            color = Color.orange;
+          else if((CardUtil.getColor(card).equals(Constant.Color.Black) && (!card.getKeyword().contains(card.getName() + " is colorless.")))
+              || (card.getIntrinsicKeyword().contains(card.getName() + " is black."))) color = Color.black;
+          else if((CardUtil.getColor(card).equals(Constant.Color.Green) && (!card.getKeyword().contains(card.getName() + " is colorless.")))
+          	|| (card.getIntrinsicKeyword().contains(card.getName() + " is green."))) color = new Color(0, 220, 39);
+          else if((CardUtil.getColor(card).equals(Constant.Color.White) && (!card.getKeyword().contains(card.getName() + " is colorless.")))
+          	|| (card.getIntrinsicKeyword().contains(card.getName() + " is white."))) color = Color.white;
+          else if((CardUtil.getColor(card).equals(Constant.Color.Red) && (!card.getKeyword().contains(card.getName() + " is colorless.")))
+          	|| (card.getIntrinsicKeyword().contains(card.getName() + " is red."))) color = Color.red;
+          else if((CardUtil.getColor(card).equals(Constant.Color.Blue) && (!card.getKeyword().contains(card.getName() + " is colorless.")))
+          	|| (card.getIntrinsicKeyword().contains(card.getName() + " is blue."))) color = Color.blue;
+          else if(CardUtil.getColor(card).equals(Constant.Color.Colorless) || (card.getKeyword().contains(card.getName() + " is colorless.")))
+              color = Color.gray;
+          else color = new Color(200, 0, 230);	// If your card has a violet border, something is wrong
         
-        if(!card.isArtifact()) {
+//      if(!card.isArtifact()) {
+        
+        if(!CardUtil.getColor(card).equals(Constant.Color.Colorless) || (!card.getKeyword().contains(card.getName() + " is colorless."))) {
             int r = color.getRed();
             int g = color.getGreen();
             int b = color.getBlue();
