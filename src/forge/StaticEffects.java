@@ -56,6 +56,7 @@ public class StaticEffects
 		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash"});
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});
 		cardToEffectsList.put("Vexing Beetle", new String[] {"Vexing_Beetle"});
+		cardToEffectsList.put("Sejiri Merfolk", new String[] {"Sejiri_Merfolk"});
 		cardToEffectsList.put("Loam Lion", new String[] {"Loam_Lion"});
 		cardToEffectsList.put("Kird Ape", new String[] {"Kird_Ape"});
 		cardToEffectsList.put("Sedge Troll", new String[] {"Sedge_Troll"});

@@ -1,3 +1,9 @@
+Sejiri Merfolk
+1 U
+Creature Merfolk Soldier
+As long as you control a plains, Sejiri Merfolk has first strike and lifelink.
+2/1
+
 Windrider Eel
 3 U
 Creature Fish

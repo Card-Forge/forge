@@ -9643,6 +9643,44 @@ public class GameActionUtil {
                                                               return AllZone.GameAction.getPlayerLife(opp).getLife() <= 10;
                                                           }
                                                       };
+                                                      
+  public static Command Sejiri_Merfolk                   = new Command() {
+
+	  													private static final long serialVersionUID = 3624165284236103054L;
+
+														public void execute() {
+                                                              // get all creatures
+                                                              CardList list = new CardList();
+                                                              list.addAll(AllZone.Human_Play.getCards());
+                                                              list.addAll(AllZone.Computer_Play.getCards());
+                                                              list = list.getName("Sejiri Merfolk");
+                                                              
+                                                              for(int i = 0; i < list.size(); i++) {
+                                                                  Card c = list.get(i);
+                                                                  if(hasPlains(c)) {
+                                                                	  if (!c.getIntrinsicKeyword().contains("First Strike"))
+                                                                    	  c.addIntrinsicKeyword("First Strike");
+                                                                      if (!c.getIntrinsicKeyword().contains("Lifelink"))
+                                                                    	  c.addIntrinsicKeyword("Lifelink");
+                                                                  } else {
+                                                                	  c.removeIntrinsicKeyword("Lifelink");
+                                                                	  c.removeIntrinsicKeyword("First Strike");
+                                                                  }
+                                                              }
+                                                          }// execute()
+                                                          
+                                                          private boolean hasPlains(Card c) {
+                                                              PlayerZone play = AllZone.getZone(
+                                                                      Constant.Zone.Play, c.getController());
+                                                              
+                                                              CardList land = new CardList();
+                                                              land.addAll(play.getCards());
+                                                              
+                                                              land = land.getType("Plains");
+                                                              if(land.size() > 0) return true;
+                                                              else return false;
+                                                          }
+                                                      };
     
     public static Command Kird_Ape                    = new Command() {
                                                           private static final long serialVersionUID = 3448725650293971110L;
@@ -14481,6 +14519,7 @@ public class GameActionUtil {
         
         commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
         commands.put("Vexing_Beetle", Vexing_Beetle);
+        commands.put("Sejiri_Merfolk", Sejiri_Merfolk);
         commands.put("Kird_Ape", Kird_Ape);
         commands.put("Loam_Lion", Loam_Lion);
         commands.put("Sedge_Troll", Sedge_Troll);
