@@ -440,7 +440,7 @@ public class CombatUtil {
     		String parse = defender.getKeyword().get(KeywordPosition).toString();
     		String k[] = parse.split(":");
     		final String restrictions[] = k[1].split(",");
-    		if(attacker.isValidCard(restrictions)) return true;
+    		if(attacker.isValidCard(restrictions, defender.getController(), defender)) return true;
         }
         
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return false;
@@ -564,7 +564,7 @@ public class CombatUtil {
         	String parse = attacker.getKeyword().get(KeywordPosition).toString();
     		String k[] = parse.split(":");
     		final String restrictions[] = k[1].split(",");
-    		if(defender.isValidCard(restrictions)) return true;
+    		if(defender.isValidCard(restrictions,attacker.getController(),attacker)) return true;
         }
         
         if(defender.hasStartOfKeyword("Prevent all combat damage that would be dealt to") ||
@@ -2161,7 +2161,7 @@ public class CombatUtil {
     		String parse = b.getKeyword().get(KeywordPosition).toString();
     		String k[] = parse.split(":");
     		final String restrictions[] = k[1].split(",");
-    		if(a.isValidCard(restrictions)) {
+    		if(a.isValidCard(restrictions,b.getController(),b)) {
                 	final Card attacker = a;
                 	final Ability ability = new Ability(b, "0") {
                     	@Override
@@ -2197,7 +2197,7 @@ public class CombatUtil {
         	String parse = a.getKeyword().get(KeywordPosition).toString();
     		String k[] = parse.split(":");
     		final String restrictions[] = k[1].split(",");
-    		if(b.isValidCard(restrictions)) {
+    		if(b.isValidCard(restrictions,a.getController(),a)) {
                 final Card blocker = b;
                 final Ability ability = new Ability(a, "0") {
                     @Override

@@ -315,6 +315,7 @@ public class CardList implements Iterable<Card> {
         });
     } 
     
+    /*
     public CardList getValidCards(final String Restrictions[], final Card source) {
         return this.filter(new CardListFilter() {
             public boolean addCard(Card c) {
@@ -338,7 +339,7 @@ public class CardList implements Iterable<Card> {
             }
         });
     }//getValidCards
-    
+    */
     
     public CardList getEquipMagnets() {
     	return this.filter(new CardListFilter() {

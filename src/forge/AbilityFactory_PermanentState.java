@@ -87,10 +87,10 @@ public class AbilityFactory_PermanentState {
 		else{
 			CardList untapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
 			untapList = untapList.filter(AllZoneUtil.tapped);
-			untapList = untapList.getValidCards(tgt.getValidTgts(), source.getController());
+			untapList = untapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
 			// filter out enchantments and planeswalkers, their tapped state doesn't matter.
 			String[] tappablePermanents = {"Creature", "Land", "Artifact"}; 
-			untapList = untapList.getValidCards(tappablePermanents);
+			untapList = untapList.getValidCards(tappablePermanents, source.getController(), source);
 
 			if (untapList.size() == 0)
 				return false;
@@ -243,10 +243,10 @@ public class AbilityFactory_PermanentState {
 		else{
 			CardList tapList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
 			tapList = tapList.filter(AllZoneUtil.untapped);
-			tapList = tapList.getValidCards(tgt.getValidTgts(), source.getController());
+			tapList = tapList.getValidCards(tgt.getValidTgts(), source.getController(), source);
 			// filter out enchantments and planeswalkers, their tapped state doesn't matter.
 			String[] tappablePermanents = {"Creature", "Land", "Artifact"}; 
-			tapList = tapList.getValidCards(tappablePermanents);
+			tapList = tapList.getValidCards(tappablePermanents, source.getController(), source);
 
 			if (tapList.size() == 0)
 				return false;

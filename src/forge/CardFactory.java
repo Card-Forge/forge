@@ -975,7 +975,7 @@ public class CardFactory implements NewConstants {
                 		    	String dV = DiscardMethod.substring(dot + 1);
                 		    	String dValid[] = dV.split(",");
                 		    	
-                		    	dPChHand = dPHand.getValidCards(dValid);
+                		    	dPChHand = dPHand.getValidCards(dValid,card.getController(),card);
                 		    }
                 		    
 	                		if (card.getController().equals(AllZone.ComputerPlayer))
@@ -1196,13 +1196,13 @@ public class CardFactory implements NewConstants {
                 	}
                 	
                 	String fc[] = {"Creature"};
-                	l = l.getValidCards(fc);
+                	l = l.getValidCards(fc,card.getController(),card);
                 	
                 	if (Scope.length > 1)
                 	{
                 		String v = Scope[1]; 
                 		if (v.length() > 0)
-                			l = l.getValidCards(v.split(","));
+                			l = l.getValidCards(v.split(","),card.getController(),card);
                 	}
                 	
                 	return l;
@@ -1458,13 +1458,13 @@ public class CardFactory implements NewConstants {
             			}
             			
             			String fc[] = {"Creature"};
-            			l = l.getValidCards(fc);
+            			l = l.getValidCards(fc,card.getController(),card);
             			
             			if (Scope.length > 1)
             			{
             				String v = Scope[1]; 
             				if (v.length() > 0)
-            					l = l.getValidCards(v.split(","));
+            					l = l.getValidCards(v.split(","),card.getController(),card);
             			}
             			
             			return l;
@@ -2281,7 +2281,7 @@ public class CardFactory implements NewConstants {
                 	   	CardList human = new CardList(AllZone.Human_Play.getCards());
                 	   	CardList computer = new CardList(AllZone.Computer_Play.getCards());
                     
-                    	human = human.getValidCards(Tgts);
+                    	human = human.getValidCards(Tgts,card.getController(),card);
                         human = human.canBeDamagedBy(card);
                     	human = human.getNotKeyword("Indestructible");
                     	human = human.filter(new CardListFilter() {
@@ -2296,7 +2296,7 @@ public class CardFactory implements NewConstants {
                         if (!DmgPlayer[0] && AllZone.ComputerPlayer.getLife() < 7) humanvalue += CardListUtil.sumAttack(human); 
                         // in Low Life Emergency (and not hurting itself) X = X + total power of human creatures
                         
-                    	computer = computer.getValidCards(Tgts);
+                    	computer = computer.getValidCards(Tgts,card.getController(),card);
                     	computer = computer.canBeDamagedBy(card);
                     	computer = computer.getNotKeyword("Indestructible");
                     	computer = computer.filter(new CardListFilter() {
@@ -2321,7 +2321,7 @@ public class CardFactory implements NewConstants {
                         CardList all = new CardList();
                     	all.addAll(AllZone.Human_Play.getCards());
                     	all.addAll(AllZone.Computer_Play.getCards());
-                    	all = all.getValidCards(Tgts);
+                    	all = all.getValidCards(Tgts,card.getController(),card);
                     
                     	for(int i = 0; i < all.size(); i++) {
                         	if(CardFactoryUtil.canDamage(card, all.get(i))) all.get(i).addDamage(ndam, card);
@@ -2658,7 +2658,7 @@ public class CardFactory implements NewConstants {
                 CardList getTargets() {
                     CardList tmpList = new CardList();
                     tmpList.addAll(AllZone.Human_Play.getCards());
-                    tmpList = tmpList.getValidCards(Tgts);
+                    tmpList = tmpList.getValidCards(Tgts,card.getController(),card);
                     tmpList = tmpList.getTargetableCards(card);
                     
                     return tmpList;
@@ -2815,7 +2815,7 @@ public class CardFactory implements NewConstants {
                 CardList getTargets() {
                     CardList tmpList = new CardList();
                     tmpList.addAll(AllZone.Human_Play.getCards());
-                    tmpList = tmpList.getValidCards(Tgts);
+                    tmpList = tmpList.getValidCards(Tgts,card.getController(),card);
                     tmpList = tmpList.getTargetableCards(card);
                     
                     return tmpList;
@@ -2915,13 +2915,13 @@ public class CardFactory implements NewConstants {
                     Random r = new Random();
                 	                    
                     CardList hCards = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-                    hCards = hCards.getValidCards(Tgts);
+                    hCards = hCards.getValidCards(Tgts,card.getController(),card);
                     hCards = hCards.getTargetableCards(card);
                     if (hCards.size() > 0)
                     	return true;
                     
                     CardList cCards = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
-                    cCards = cCards.getValidCards(Tgts);
+                    cCards = cCards.getValidCards(Tgts,card.getController(),card);
                     cCards = cCards.getTargetableCards(card);
                     if (cCards.size() == 0)
                     	return true;
@@ -2971,9 +2971,9 @@ public class CardFactory implements NewConstants {
                     CardList hCards = new CardList(AllZone.Human_Play.getCards());
                     CardList cCards = new CardList(AllZone.Computer_Play.getCards());
                     
-                    hCards = hCards.getValidCards(Tgts);
+                    hCards = hCards.getValidCards(Tgts,card.getController(),card);
                     hCards = hCards.getTargetableCards(card);
-                    cCards = cCards.getValidCards(Tgts);
+                    cCards = cCards.getValidCards(Tgts,card.getController(),card);
                     cCards = cCards.getTargetableCards(card);
                     
                     if(hCards.size() > 0 || cCards.size() > 0) 
@@ -3109,7 +3109,7 @@ public class CardFactory implements NewConstants {
                     CardList human = new CardList(AllZone.Human_Play.getCards());
                     CardList computer = new CardList(AllZone.Computer_Play.getCards());
                     
-                    human = human.getValidCards(Tgts);
+                    human = human.getValidCards(Tgts,card.getController(),card);
                     human = human.getNotKeyword("Indestructible");
                     int humanvalue = CardListUtil.sumCMC(human);
                     humanvalue += human.size();
@@ -3117,7 +3117,7 @@ public class CardFactory implements NewConstants {
                     humanvalue += human.getType("Land").size();        // X = total converted mana cost + number of permanents + number of lands + total power of tokens (Human)
                     if (AllZone.ComputerPlayer.getLife() < 7) { humanvalue += CardListUtil.sumAttack(human); } // in Low Life Emergency X = X + total power of human creatures
 
-                    computer = computer.getValidCards(Tgts);
+                    computer = computer.getValidCards(Tgts,card.getController(),card);
                     computer = computer.getNotKeyword("Indestructible");
                     int computervalue = CardListUtil.sumCMC(computer);
                     computervalue += computer.size();
@@ -3134,7 +3134,7 @@ public class CardFactory implements NewConstants {
                     CardList all = new CardList();
                     all.addAll(AllZone.Human_Play.getCards());
                     all.addAll(AllZone.Computer_Play.getCards());
-                    all = all.getValidCards(Tgts);
+                    all = all.getValidCards(Tgts,card.getController(),card);
                     
                     CardListUtil.sortByIndestructible(all);
                     CardListUtil.sortByDestroyEffect(all);
@@ -3156,7 +3156,7 @@ public class CardFactory implements NewConstants {
 	                    CardList afterAll = new CardList();
 	                    afterAll.addAll(AllZone.Human_Play.getCards());
 	                    afterAll.addAll(AllZone.Computer_Play.getCards());
-	                    afterAll = afterAll.getValidCards(Tgts);
+	                    afterAll = afterAll.getValidCards(Tgts,card.getController(),card);
 	                    
 	                    ArrayList<Integer> slD = new ArrayList<Integer>();
 	                    for (int i=0; i<afterAll.size(); i++)
@@ -3429,13 +3429,13 @@ public class CardFactory implements NewConstants {
                     Random r = new Random();
                 	                    
                     CardList hCards = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-                    hCards = hCards.getValidCards(Tgts);
+                    hCards = hCards.getValidCards(Tgts,card.getController(),card);
                     hCards = hCards.getTargetableCards(card);
                     if (hCards.size() > 0)
                     	return true;
                     
                     CardList cCards = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
-                    cCards = cCards.getValidCards(Tgts);
+                    cCards = cCards.getValidCards(Tgts,card.getController(),card);
                     cCards = cCards.getTargetableCards(card);
                     if (cCards.size() == 0)
                     	return true;
@@ -3497,9 +3497,9 @@ public class CardFactory implements NewConstants {
         			CardList hCards = new CardList(AllZone.Human_Play.getCards());
         			CardList cCards = new CardList(AllZone.Computer_Play.getCards());
         			
-        			hCards = hCards.getValidCards(Tgts);
+        			hCards = hCards.getValidCards(Tgts,card.getController(),card);
         			hCards = hCards.getTargetableCards(card);
-        			cCards = cCards.getValidCards(Tgts);
+        			cCards = cCards.getValidCards(Tgts,card.getController(),card);
         			cCards = cCards.getTargetableCards(card);
         			
         			if (hCards.size() > 0 || cCards.size() > 0)
@@ -3612,7 +3612,7 @@ public class CardFactory implements NewConstants {
                     CardList human = new CardList(AllZone.Human_Play.getCards());
                     CardList computer = new CardList(AllZone.Computer_Play.getCards());
                     
-                    human = human.getValidCards(Tgts);
+                    human = human.getValidCards(Tgts,card.getController(),card);
                     int humanvalue = CardListUtil.sumCMC(human);
                     humanvalue += human.getType("Land").size();
                     humanvalue += CardListUtil.sumAttack(human.getTokens());        // X = total converted mana cost + number of lands c (Human)
@@ -3620,7 +3620,7 @@ public class CardFactory implements NewConstants {
                     if(Destination.equals("Hand")) humanvalue += CardListUtil.sumDefense(human.getTokens());  // if the Destination is Hand tokens are more important
                     if (AllZone.ComputerPlayer.getLife() < 7) { humanvalue += CardListUtil.sumAttack(human); } // in Low Life Emergency X = X + total power of human creatures
 
-                    computer = computer.getValidCards(Tgts);
+                    computer = computer.getValidCards(Tgts,card.getController(),card);
                     int computervalue = CardListUtil.sumCMC(computer);
                     computervalue += computer.getType("Land").size();
                     computervalue += CardListUtil.sumAttack(computer.getTokens());    // Y = total converted mana cost + number of lands + total power of tokens (Computer)
@@ -3637,7 +3637,7 @@ public class CardFactory implements NewConstants {
                     CardList all = new CardList();
                     all.addAll(AllZone.Human_Play.getCards());
                     all.addAll(AllZone.Computer_Play.getCards());
-                    all = all.getValidCards(Tgts);
+                    all = all.getValidCards(Tgts,card.getController(),card);
                     
                     for(int i = 0; i < all.size(); i++) {
                         Card c = all.get(i);
@@ -3868,7 +3868,7 @@ public class CardFactory implements NewConstants {
                 	Player player = card.getController();
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
                     CardList list = new CardList(grave.getCards());
-                    list = list.getValidCards(Tgts);
+                    list = list.getValidCards(Tgts,card.getController(),card);
                     
                     // AI will not use a Boggart Birth Rite to return a Boggart Birth Rite.
                     // In testing the AI targeted a Sage's Knowledge with a Deja Vu.
@@ -4032,7 +4032,7 @@ public class CardFactory implements NewConstants {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
                     CardList results = new CardList();
                     CardList choices = new CardList(grave.getCards());
-                    choices = choices.getValidCards(Tgts);
+                    choices = choices.getValidCards(Tgts,card.getController(),card);
                     
                     // AI will not use an Eternal Witness to return an Eternal Witness.
                     
@@ -6091,7 +6091,7 @@ public class CardFactory implements NewConstants {
 
         		CardList getTargets() {
         			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-        			tmpList = tmpList.getValidCards(Tgts);
+        			tmpList = tmpList.getValidCards(Tgts,card.getController(),card);
         			tmpList = tmpList.getTargetableCards(card);
         			tmpList = tmpList.filter(AllZoneUtil.untapped);
         			return tmpList;
@@ -6183,7 +6183,7 @@ public class CardFactory implements NewConstants {
 
         		private CardList getTargets() {
         			CardList tmpList = AllZoneUtil.getCardsInPlay();
-        			tmpList = tmpList.getValidCards(Tgts);
+        			tmpList = tmpList.getValidCards(Tgts,card.getController(),card);
         			tmpList = tmpList.getTargetableCards(card);
         			tmpList = tmpList.filter(AllZoneUtil.untapped);
         			return tmpList;
@@ -6274,7 +6274,7 @@ public class CardFactory implements NewConstants {
 				
         		private CardList getTargets() {
         			CardList tmpList = AllZoneUtil.getCardsInPlay();
-        			tmpList = tmpList.getValidCards(Tgts, card.getController());
+        			tmpList = tmpList.getValidCards(Tgts,card.getController(),card);
         			//I don't think this is targeted
         			//tmpList = tmpList.getTargetableCards(card);
         			//tmpList = tmpList.filter(AllZoneUtil.untapped);
@@ -6397,7 +6397,7 @@ public class CardFactory implements NewConstants {
 
         		CardList getTargets() {
         			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-        			tmpList = tmpList.getValidCards(Tgts, card.getController());
+        			tmpList = tmpList.getValidCards(Tgts,card.getController(),card);
         			tmpList = tmpList.getTargetableCards(card);
         			tmpList = tmpList.filter(AllZoneUtil.tapped);
         			return tmpList;
@@ -6487,7 +6487,7 @@ public class CardFactory implements NewConstants {
 
         		CardList getTargets() {
         			CardList tmpList = AllZoneUtil.getCardsInPlay();
-        			tmpList = tmpList.getValidCards(Tgts, card.getController());
+        			tmpList = tmpList.getValidCards(Tgts,card.getController(),card);
         			//I don't think this is targeted
         			//tmpList = tmpList.getTargetableCards(card);
         			//tmpList = tmpList.filter(AllZoneUtil.tapped);
@@ -9096,7 +9096,7 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     Card crd = getTargetCard();
                     // if it's not a valid target on resolution, spell fizzles
-                    if (crd == null || !AllZone.GameAction.isCardInPlay(crd) || !crd.isValidCard(Tgts))
+                    if (crd == null || !AllZone.GameAction.isCardInPlay(crd) || !crd.isValidCard(Tgts,card.getController(),card))
                     	return;
                     crd.addCounter(Counters.P1P1, 1);
                     

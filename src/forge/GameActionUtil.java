@@ -3791,7 +3791,7 @@ public class GameActionUtil {
 	private static CardList Defiler_of_Souls_getTargets(final Player player, Card card) {
 		CardList creats = AllZoneUtil.getCreaturesInPlay(player);
 		String mono[] = {"Creature.MonoColor"};
-		creats = creats.getValidCards(mono);
+		creats = creats.getValidCards(mono,player,card);
 		return creats;
 	}
 	
@@ -7287,7 +7287,7 @@ public class GameActionUtil {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
-                    if (peek[0].isValidCard(shareTypes)) {
+                    if (peek[0].isValidCard(shareTypes,k.getController(),k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -7359,7 +7359,7 @@ public class GameActionUtil {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
-                    if (peek[0].isValidCard(shareTypes)) {
+                    if (peek[0].isValidCard(shareTypes,k.getController(),k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -7447,7 +7447,7 @@ public class GameActionUtil {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
-                    if (peek[0].isValidCard(shareTypes)) {
+                    if (peek[0].isValidCard(shareTypes,k.getController(),k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -7536,7 +7536,7 @@ public class GameActionUtil {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
-                    if (peek[0].isValidCard(shareTypes)) {
+                    if (peek[0].isValidCard(shareTypes,k.getController(),k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -7620,7 +7620,7 @@ public class GameActionUtil {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
-                    if (peek[0].isValidCard(shareTypes)) {
+                    if (peek[0].isValidCard(shareTypes,k.getController(),k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -7688,12 +7688,12 @@ public class GameActionUtil {
                     String[] smallCreatures = { "Creature.toughnessLE2" };
                     
                     CardList humanCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
-                    humanCreatures = humanCreatures.getValidCards(smallCreatures);
+                    humanCreatures = humanCreatures.getValidCards(smallCreatures,k.getController(),k);
                     humanCreatures = humanCreatures.canBeDamagedBy(k);
                     humanCreatures = humanCreatures.getNotKeyword("Indestructible");
                     
                     CardList computerCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
-                    computerCreatures = computerCreatures.getValidCards(smallCreatures);
+                    computerCreatures = computerCreatures.getValidCards(smallCreatures,k.getController(),k);
                     computerCreatures = computerCreatures.canBeDamagedBy(k);
                     computerCreatures = computerCreatures.getNotKeyword("Indestructible");
                     
@@ -7701,7 +7701,7 @@ public class GameActionUtil {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
-                    if (peek[0].isValidCard(shareTypes)) {
+                    if (peek[0].isValidCard(shareTypes,k.getController(),k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -7781,7 +7781,7 @@ public class GameActionUtil {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
-                    if (peek[0].isValidCard(shareTypes)) {
+                    if (peek[0].isValidCard(shareTypes,k.getController(),k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -7859,7 +7859,7 @@ public class GameActionUtil {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
-                    if (peek[0].isValidCard(shareTypes)) {
+                    if (peek[0].isValidCard(shareTypes,k.getController(),k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -7931,7 +7931,7 @@ public class GameActionUtil {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
-                    if (peek[0].isValidCard(shareTypes)) {
+                    if (peek[0].isValidCard(shareTypes,k.getController(),k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -8001,7 +8001,7 @@ public class GameActionUtil {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
-                    if (peek[0].isValidCard(shareTypes)) {
+                    if (peek[0].isValidCard(shareTypes,k.getController(),k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -8092,7 +8092,7 @@ public class GameActionUtil {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
-                    if (peek[0].isValidCard(shareTypes)) {
+                    if (peek[0].isValidCard(shareTypes,k.getController(),k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -8162,7 +8162,7 @@ public class GameActionUtil {
                     // We do not want to slow down the pace of the game by asking too many questions.
                     // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
-                    if (peek[0].isValidCard(shareTypes)) {
+                    if (peek[0].isValidCard(shareTypes,k.getController(),k)) {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
@@ -9496,7 +9496,7 @@ public class GameActionUtil {
 				public void resolve() {
 					CardList handList = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, player);
 					CardList playList = AllZoneUtil.getCardsInZone(Constant.Zone.Play, player);
-					playList = playList.getValidCards("Permanents".split(","));
+					playList = playList.getValidCards("Permanents".split(","),source.getController(),source);
 					playList.remove(source);
 					
 					if (playList.size() == 0 && handList.size() == 0)

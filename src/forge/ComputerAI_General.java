@@ -53,7 +53,7 @@ public class ComputerAI_General implements Computer {
                     if (buffedcard.getSVar("BuffedBy").length() > 0) {
                             String buffedby = buffedcard.getSVar("BuffedBy");
                             String bffdby[] = buffedby.split(",");
-                            if (c.isValidCard(bffdby)) return true;
+                            if (c.isValidCard(bffdby,c.getController(),c)) return true;
                     }       
                 }//BuffedBy
 
@@ -63,7 +63,7 @@ public class ComputerAI_General implements Computer {
                     if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
                             String buffedby = buffedcard.getSVar("AntiBuffedBy");
                             String bffdby[] = buffedby.split(",");
-                            if (c.isValidCard(bffdby)) return true;
+                            if (c.isValidCard(bffdby,c.getController(),c)) return true;
                     }       
                 }//AntiBuffedBy
 

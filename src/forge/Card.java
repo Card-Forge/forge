@@ -2237,6 +2237,7 @@ public class Card extends MyObservable {
         return false;
     }
     
+    /*
     // This takes a player and a card argument for YouCtrl and Other
     public boolean isValidCard(String Restris[], Player You, Card source) {
     	
@@ -2351,16 +2352,16 @@ public class Card extends MyObservable {
             }
         }
         return isValidCard(Restriction);
-    }
+    }*/
     
     
     // Takes an array of arguments like Permanent.Blue+withFlying, only one of them has to be true
-    public boolean isValidCard(final String Restrictions[]) {
+    public boolean isValidCard(final String Restrictions[], final Player You, final Card source) {
     	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
 
         for(int i = 0; i < Restrictions.length; i++) {
-        	if(isValid(Restrictions[i])) return true;
+        	if(isValid(Restrictions[i],You,source)) return true;
         }
         return false;
         
@@ -2368,7 +2369,7 @@ public class Card extends MyObservable {
     
     
     // Takes an argument like Permanent.Blue+withFlying
-    public boolean isValid(final String Restriction) {
+    public boolean isValid(final String Restriction, final Player You, final Card source) {
     	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
         if (Restriction.equals("False")) return false;
@@ -2386,13 +2387,13 @@ public class Card extends MyObservable {
                 final String excR = incR[1];
                 String exR[] = excR.split("\\+"); // Exclusive Restrictions are ...
                 for(int j = 0; j < exR.length; j++)
-                    if(hasProperty(exR[j]) == false) return false;
+                    if(hasProperty(exR[j],You,source) == false) return false;
             }
             return true;
     }//isValidCard(String Restriction)
 
     // Takes arguments like Blue or withFlying
-	public boolean hasProperty(String Property) {
+	public boolean hasProperty(String Property, Player You, Card source) {
 		if (Property.contains("White") || // ... Card colors
                 Property.contains("Blue") ||
                 Property.contains("Black") ||
@@ -2419,6 +2420,15 @@ public class Card extends MyObservable {
              	if (!Property.startsWith("non") && (CardUtil.getColors(this).size() > 1 || isColorless())) return false;
              }
              
+             else if (Property.contains("YouCtrl") && !getController().isPlayer(You)) return false;
+             else if (Property.contains("YouDontCtrl") && getController().isPlayer(You)) return false;
+		
+             else if (Property.contains("Other") && this.equals(source)) return false;
+             else if (Property.contains("Self") && !this.equals(source)) return false;
+		
+             else if (Property.contains("Attached") && !this.equipping.contains(source) && !this.enchanting.contains(source)) return false;
+			
+				
              else if (Property.contains("with")) // ... Card keywords
              {
               	if (Property.startsWith("without") && getKeyword().contains(Property.substring(7))) return false;
@@ -2478,7 +2488,7 @@ public class Card extends MyObservable {
                  }
              	
              	if (Property.substring(z).equals("X"))
-             		x = CardFactoryUtil.xCount(this, getSVar("X"));
+             		x = CardFactoryUtil.xCount(source, getSVar("X"));
              	else
              		x = Integer.parseInt(Property.substring(z));
              	
@@ -2490,7 +2500,7 @@ public class Card extends MyObservable {
              {
             	int number = 0;
               	if (Property.substring(10,11).equals("X"))
-              		number = CardFactoryUtil.xCount(this, getSVar("X"));
+              		number = CardFactoryUtil.xCount(source, getSVar("X"));
              	else
              		number = Integer.parseInt(Property.substring(10,11));
               	

@@ -137,8 +137,8 @@ public class Generate2ColorDeck
 		CardList Cr2 = CL2.getType("Creature");
 		
 		String ISE[] = {"Instant", "Sorcery", "Enchantment", "Planeswalker"};
-		CardList Sp1 = CL1.getValidCards(ISE);
-		CardList Sp2 = CL2.getValidCards(ISE);
+		CardList Sp1 = CL1.getValidCards(ISE,null,null);
+		CardList Sp2 = CL2.getValidCards(ISE,null,null);
 
 		// final card pools
 		CardList Cr12 = new CardList();

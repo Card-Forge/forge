@@ -65,10 +65,11 @@ public class PhaseUtil {
 	        	String parse = ca.getKeyword().get(KeywordPosition).toString();
 	    		String k[] = parse.split(":");
 	    		final String restrictions[] = k[1].split(",");
+	    		final Card card = ca;
 				list = list.filter(new CardListFilter() {
 		    		public boolean addCard(Card c)
 		    		{
-		    			return !c.isValidCard(restrictions);
+		    			return !c.isValidCard(restrictions,card.getController(),card);
 		    		} // filter out cards that should not untap
 		    	});
 			}

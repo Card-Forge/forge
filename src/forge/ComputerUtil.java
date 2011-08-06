@@ -245,7 +245,7 @@ public class ComputerUtil
 		{
 			PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
 			CardList typeList = new CardList(play.getCards());
-			typeList = typeList.getValidCards(cost.getTapXType().split(","));
+			typeList = typeList.getValidCards(cost.getTapXType().split(","),sa.getActivatingPlayer() ,sa.getSourceCard());
 			
 			if (cost.getTap())
 				typeList.remove(sa.getSourceCard());
@@ -291,7 +291,7 @@ public class ComputerUtil
     		else{
     			if (!discType.equals("Any") && !discType.equals("Random")){
     				String validType[] = discType.split(",");
-    				handList = handList.getValidCards(validType);
+    				handList = handList.getValidCards(validType,sa.getActivatingPlayer() ,sa.getSourceCard());
     			}
 	    		if (discAmount > handList.size()){
 	    			// not enough cards in hand to pay
@@ -305,7 +305,7 @@ public class ComputerUtil
 			if (!cost.getSacThis()){
 			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
 			    CardList typeList = new CardList(play.getCards());
-			    typeList = typeList.getValidCards(cost.getSacType().split(","));
+			    typeList = typeList.getValidCards(cost.getSacType().split(","),sa.getActivatingPlayer() ,sa.getSourceCard());
 			    Card target = sa.getTargetCard();
 				if (target != null && target.getController().equals(AllZone.ComputerPlayer)) // don't sacrifice the card we're pumping
 					  typeList.remove(target);
@@ -322,7 +322,7 @@ public class ComputerUtil
 			if (!cost.getExileThis()){
 			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
 			    CardList typeList = new CardList(play.getCards());
-			    typeList = typeList.getValidCards(cost.getExileType().split(","));
+			    typeList = typeList.getValidCards(cost.getExileType().split(","),sa.getActivatingPlayer() ,sa.getSourceCard());
 			    Card target = sa.getTargetCard();
 				if (target != null && target.getController().equals(AllZone.ComputerPlayer)) // don't exile the card we're pumping
 					  typeList.remove(target);
@@ -339,7 +339,7 @@ public class ComputerUtil
 			if (!cost.getReturnThis()){
 			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
 			    CardList typeList = new CardList(play.getCards());
-			    typeList = typeList.getValidCards(cost.getReturnType().split(","));
+			    typeList = typeList.getValidCards(cost.getReturnType().split(","),sa.getActivatingPlayer() ,sa.getSourceCard());
 			    Card target = sa.getTargetCard();
 				if (target != null && target.getController().equals(AllZone.ComputerPlayer)) // don't bounce the card we're pumping
 					  typeList.remove(target);
@@ -621,7 +621,7 @@ public class ComputerUtil
   static public Card getCardPreference(Card activate, String pref, CardList typeList){
 	     String[] prefValid = activate.getSVar("AIPreference").split("\\$");
 	     if (prefValid[0].equals(pref)){
-	        CardList prefList = typeList.getValidCards(prefValid[1].split(","));
+	        CardList prefList = typeList.getValidCards(prefValid[1].split(","),activate.getController() ,activate);
 	        if (prefList.size() != 0){
 	           prefList.shuffle();
 	           return prefList.get(0);
@@ -647,7 +647,7 @@ public class ComputerUtil
   static public Card chooseSacrificeType(String type, Card activate, Card target){
       PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
-      typeList = typeList.getValidCards(type.split(","));
+      typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
 	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target)) // don't sacrifice the card we're pumping
 		  typeList.remove(target);
 	  
@@ -670,7 +670,7 @@ public class ComputerUtil
   static public Card chooseTapType(String type, Card activate, boolean tap, int index){
 	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
-      typeList = typeList.getValidCards(type.split(","));
+      typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
 	  
       //is this needed?
       typeList = typeList.filter(new CardListFilter()
@@ -694,7 +694,7 @@ public class ComputerUtil
   static public Card chooseReturnType(String type, Card activate, Card target){
       PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
-      typeList = typeList.getValidCards(type.split(","));
+      typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
 	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target)) // don't bounce the card we're pumping
 		  typeList.remove(target);
 	  

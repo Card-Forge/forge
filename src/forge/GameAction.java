@@ -198,7 +198,7 @@ public class GameAction {
     public boolean AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
         CardList hand = new CardList();
         hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
-        CardList tHand = hand.getValidCards(uTypes);
+        CardList tHand = hand.getValidCards(uTypes,sa.getActivatingPlayer(),sa.getSourceCard());
         
         if(tHand.size() >= numDiscard) {
             CardListUtil.sortCMC(tHand);

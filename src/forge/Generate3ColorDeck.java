@@ -150,9 +150,9 @@ public class Generate3ColorDeck
 		CardList Cr3 = CL3.getType("Creature");
 		
 		String ISE[] = {"Instant", "Sorcery", "Enchantment", "Planeswalker"};
-		CardList Sp1 = CL1.getValidCards(ISE);
-		CardList Sp2 = CL2.getValidCards(ISE);
-		CardList Sp3 = CL3.getValidCards(ISE);
+		CardList Sp1 = CL1.getValidCards(ISE,null,null);
+		CardList Sp2 = CL2.getValidCards(ISE,null,null);
+		CardList Sp3 = CL3.getValidCards(ISE,null,null);
 
 		// final card pools
 		CardList Cr123 = new CardList();

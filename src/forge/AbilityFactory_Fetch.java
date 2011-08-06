@@ -221,7 +221,7 @@ public class AbilityFactory_Fetch {
 
 	private static CardList filterListByType(CardList list, HashMap<String,String> params, String type){
 		if (params.containsKey(type))
-			list = list.getValidCards(params.get(type).split(","));
+			list = list.getValidCards(params.get(type).split(","),null,null);
 		return list;
 	}
 	
@@ -491,7 +491,7 @@ public class AbilityFactory_Fetch {
 			tgt.resetTargets();
 			 // target loop
 			CardList list = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
-			list = list.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer);
+			list = list.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, af.getHostCard());
 			 
 			if (list.size() == 0)
 				return false;

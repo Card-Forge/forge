@@ -49,7 +49,7 @@ public class Ability_Triggered extends Ability implements Command {
     }
     
     public boolean triggerFor(Card c) {
-        return !(new CardList(c)).getValidCards(restrictions).isEmpty();
+        return !(new CardList(c)).getValidCards(restrictions,c.getController(),c).isEmpty();
     }
     
     public boolean triggerOnZoneChange(String sourceZone, String destinationZone) {

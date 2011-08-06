@@ -2443,7 +2443,7 @@ public class CardFactoryUtil {
             allCards.addAll(AllZone.Human_Play.getCards());
             allCards.addAll(AllZone.Computer_Play.getCards());
             
-            CardList choices = allCards.getValidCards(Tgts);
+            CardList choices = allCards.getValidCards(Tgts,sa.getActivatingPlayer(),sa.getSourceCard());
             boolean free = false;
             if(this.isFree()) free = true;
             stopSetNext(CardFactoryUtil.input_targetSpecific(sa, choices, message, true, free));
@@ -3099,7 +3099,7 @@ public class CardFactoryUtil {
                 CardList list = new CardList();
                 PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                 list.addAll(zone.getCards());
-                list = list.getValidCards(Tgts);
+                list = list.getValidCards(Tgts,card.getController(),card);
                 return list;
             }
         };// Input
@@ -3542,7 +3542,7 @@ public class CardFactoryUtil {
                 if(kw.startsWith("Protection:")) { //uses isValidCard
                 	String characteristic = kw.split(":")[1];
                 	String characteristics[] = characteristic.split(",");
-                	if(card.isValidCard(characteristics)) return true;
+                	if(card.isValidCard(characteristics,card.getController(),card)) return true;
                 }
                 
             }
@@ -4114,7 +4114,7 @@ public class CardFactoryUtil {
         	if (d[0].contains("Type"))
         	{
         		String dd[] = d[0].split("\\.");
-        		ut = ut.getValidCards(dd);
+        		ut = ut.getValidCards(dd,cardController,Src);
         	}
         	
         	for (int i=0; i<ut.size(); i++)

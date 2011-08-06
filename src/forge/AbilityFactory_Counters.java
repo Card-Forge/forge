@@ -236,7 +236,7 @@ public class AbilityFactory_Counters {
 		});
 		
 		if (abTgt != null){
-			list = list.getValidCards(abTgt.getValidTgts());
+			list = list.getValidCards(abTgt.getValidTgts(),source.getController(),source);
 
 			if (list.size() == 0)
 				return false;
