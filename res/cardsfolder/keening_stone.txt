@@ -1,7 +1,7 @@
 Name:Keening Stone
 ManaCost:6
 Types:Artifact
-Text:5, tap: Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in that player's graveyard.
+Text:no text
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keening_stone.jpg
 SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/219.jpg

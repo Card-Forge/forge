@@ -8195,7 +8195,8 @@ public class CardFactory implements NewConstants {
       //*************** START *********** START **************************
       else if(cardName.equals("Isochron Scepter"))
       {
-    	  final Ability_Tap freeCast = new Ability_Tap(card, "2")
+    	  Ability_Cost abCost = new Ability_Cost("2 T", cardName, true);
+    	  final Ability_Activated freeCast = new Ability_Activated(card, abCost, null)
           {
 
 			private static final long serialVersionUID = 4455819149429678456L;
@@ -8249,7 +8250,7 @@ public class CardFactory implements NewConstants {
                 return false;
 			}
           };
-          freeCast.setDescription("2, Tap: You may copy the exiled card. If you do, you may cast the copy without paying its mana cost");
+          freeCast.setDescription(abCost+"You may copy the exiled card. If you do, you may cast the copy without paying its mana cost");
           freeCast.setStackDescription("Copy the exiled card and cast the copy without paying its mana cost.");
           
           final Input exile = new Input() {
@@ -8420,8 +8421,6 @@ public class CardFactory implements NewConstants {
 
         			CardList lands = new CardList(grave.getCards());
         			lands = lands.filter(basicLands);
-        			//this should probably be card.getController().equals(AllZone.HumanPlayer) instead of player
-        			//if(player.equals(AllZone.HumanPlayer)) {
         			if(card.getController().equals(AllZone.HumanPlayer)){ 
         				//now, select up to four lands
         				int end = -1;
@@ -8490,7 +8489,9 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Grindstone")) {
-        	Ability_Tap ab1 = new Ability_Tap(card, "3") {
+        	Target target = new Target("Select target player", new String[] {"Player"});
+        	Ability_Cost abCost = new Ability_Cost("3 T", cardName, true);
+        	Ability_Activated ab1 = new Ability_Activated(card, abCost, target) {
 				private static final long serialVersionUID = -6281219446216L;
 
 				@Override
@@ -8540,7 +8541,7 @@ public class CardFactory implements NewConstants {
 				}
         	};
         	ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-        	ab1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ab1));
+        	ab1.setDescription(abCost+"Put the top two cards of target player's library into that player's graveyard. If both cards share a color, repeat this process.");
         	card.addSpellAbility(ab1);
         }//*************** END ************ END **************************
         
@@ -8552,7 +8553,9 @@ public class CardFactory implements NewConstants {
         	 * library into his or her graveyard, where X is the number of
         	 * cards in that player's graveyard.
         	 */
-        	Ability_Tap ab1 = new Ability_Tap(card, "5") {
+        	Target target = new Target("Select target player", new String[] {"Player"});
+        	Ability_Cost abCost = new Ability_Cost("5 T", cardName, true);
+        	Ability_Activated ab1 = new Ability_Activated(card, abCost, target) {
 				private static final long serialVersionUID = -6282104343089446216L;
 
 				@Override
@@ -8570,14 +8573,16 @@ public class CardFactory implements NewConstants {
         		}
         	};
         	ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-        	ab1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ab1));
+        	ab1.setDescription(abCost+"Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in that player's graveyard.");
         	card.addSpellAbility(ab1);
         }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
         else if(cardName.equals("Glasses of Urza")) {
-            final Ability_Tap ability = new Ability_Tap(card, "0") {
+        	Target target = new Target("Select target player", new String[] {"Player"});
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -3857979945891501990L;
 
                 @Override
@@ -8600,7 +8605,7 @@ public class CardFactory implements NewConstants {
 
             };//SpellAbility
 
-            ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+            ability.setDescription(abCost+"Look at target player's hand.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 

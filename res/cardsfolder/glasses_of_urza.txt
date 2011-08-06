@@ -1,7 +1,7 @@
 Name:Glasses of Urza
 ManaCost:1
 Types:Artifact
-Text:tap: Look at target player's hand.
+Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glasses_of_urza.jpg
