@@ -102,7 +102,7 @@ public class Target {
 		String prompt;
 		
 		if (parse.equals("CP")){
-			valid = "Creature,Planeswalker,Player";
+			valid = "Creature,Planeswalker.YouDontCtrl,Player";
 			prompt = "Select target creature, planeswalker, or player";
 		}
 		else if (parse.equals("C")){
@@ -110,7 +110,7 @@ public class Target {
 			prompt = "Select target creature";
 		}
 		else if (parse.equals("P")){
-			valid = "Planeswalker,Player";
+			valid = "Planeswalker.YouDontCtrl,Player";
 			prompt = "Select target planeswalker or player";
 		}
 		else{
