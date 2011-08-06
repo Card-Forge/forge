@@ -6,8 +6,11 @@ import forge.gui.GuiUtils;
 import forge.properties.NewConstants;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-import java.awt.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 public abstract class QuestAbstractBazaarStall extends JPanel implements NewConstants {
     private static final long serialVersionUID = -4147745071116906043L;
@@ -16,6 +19,7 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
     ImageIcon icon;
 
 
+    private JLabel creditLabel = new JLabel();
     private JPanel inventoryPanel = new JPanel();
 
     protected QuestData questData = AllZone.QuestData;
@@ -33,7 +37,6 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
         this.removeAll();
         
         JLabel stallNameLabel;
-        JLabel creditLabel;
 
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
@@ -42,7 +45,7 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
         stallNameLabel.setFont(new Font("sserif", Font.BOLD, 22));
         stallNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        creditLabel = new JLabel("Credits: " + questData.getCredits());
+        creditLabel.setText("Credits: " + questData.getCredits());
         creditLabel.setFont(new Font("sserif", 0, 14));
 
         JTextArea fluffArea = new JTextArea(fluff);
@@ -77,54 +80,25 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
         layout.setConstraints(creditLabel, constraints);
         this.add(creditLabel);
 
-        java.util.List<QuestAbstractBazaarItem> stallItems = populateItems();
+        constraints.gridy = 3;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.insets = new Insets(10,5,10,5);
+        constraints.weighty = 1;
+        constraints.weightx = GridBagConstraints.REMAINDER;
 
-        if (stallItems == null || stallItems.size() == 0) {
-            //TODO: Get stall-specific fluff in here.
-            constraints.gridy = 3;
-            constraints.anchor = GridBagConstraints.NORTHWEST;
-            constraints.fill = GridBagConstraints.BOTH;
-            constraints.insets = new Insets(10,5,10,5);
-            JLabel noSaleLabel = new JLabel("This stall does not offer anything useful for purchase.");
-            layout.setConstraints(noSaleLabel, constraints);
-            this.add(noSaleLabel);
-            constraints.gridy++;
-            constraints.weighty = 1;
-            JLabel emptyLabel = new JLabel();
-            layout.setConstraints(emptyLabel, constraints);
-            this.add(emptyLabel);
-        }
+        populateInventory(populateItems());
 
-        else {
-            constraints.gridy=3;
-            constraints.insets = new Insets(10, 5, 10, 5);
-            JLabel saleLabel = new JLabel("The following items are for sale:");
-
-            layout.setConstraints(saleLabel, constraints);
-            this.add(saleLabel);
-
-            constraints.insets = new Insets(10, 5, 10, 5);
-
-            constraints.anchor = GridBagConstraints.NORTHWEST;
-            constraints.fill = GridBagConstraints.HORIZONTAL;
-            constraints.weighty = 1;
-            constraints.weightx = GridBagConstraints.REMAINDER;
-            constraints.fill = GridBagConstraints.BOTH;
-            constraints.gridy++;
-
-            populateInventory(stallItems);
-
-            inventoryPanel.setBorder(new LineBorder(Color.ORANGE, 2));
-
-
-            JScrollPane scrollPane = new JScrollPane(inventoryPanel);
-            layout.setConstraints(scrollPane, constraints);
-            this.add(scrollPane);
-        }
+        JScrollPane scrollPane = new JScrollPane(inventoryPanel);
+        scrollPane.setBorder(new EmptyBorder(0,0,0,0));
+        layout.setConstraints(scrollPane, constraints);
+        this.add(scrollPane);
+    
     }
 
     private void populateInventory(java.util.List<QuestAbstractBazaarItem> stallItems) {
-        inventoryPanel = new JPanel();
+        inventoryPanel.removeAll();
+
         GridBagLayout innerLayout = new GridBagLayout();
         inventoryPanel.setLayout(innerLayout);
         GridBagConstraints innerConstraints =
@@ -140,14 +114,26 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
                         0,
                         0);
 
-        for (QuestAbstractBazaarItem item : stallItems) {
-            JPanel itemPanel = item.getItemPanel();
+        JLabel purchaseLabel = new JLabel();
 
-            innerLayout.setConstraints(itemPanel, innerConstraints);
-            inventoryPanel.add(itemPanel);
+        if (stallItems.size() == 0){
+
+            purchaseLabel.setText("The merchant does not have anything useful for sale");
+            inventoryPanel.add(purchaseLabel);
             innerConstraints.gridy++;
         }
 
+        else{
+
+            innerConstraints.insets = new Insets(5,20,5,10);
+            for (QuestAbstractBazaarItem item : stallItems) {
+                JPanel itemPanel = item.getItemPanel();
+
+                innerLayout.setConstraints(itemPanel, innerConstraints);
+                inventoryPanel.add(itemPanel);
+                innerConstraints.gridy++;
+            }
+        }
         innerConstraints.weighty = 1;
         JLabel fillLabel = new JLabel();
 
@@ -166,7 +152,14 @@ public abstract class QuestAbstractBazaarStall extends JPanel implements NewCons
         return stallName;
     }
 
-    public void updateItems() {
-        this.initUI();
+    public void updateItems(){
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                populateInventory(populateItems());
+                creditLabel.setText("Credits: " + questData.getCredits());
+                inventoryPanel.invalidate();
+                inventoryPanel.repaint();
+            }
+        });
     }
 }
