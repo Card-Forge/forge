@@ -428,6 +428,23 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(4, 0));
 		}
+		else if (id == 14)  // Ancient Battlefield
+		{
+			CardList humanList = new CardList();
+			String cardsInPlay[] = {"Glasses of Urza", "Blight Sickle"};
+			
+			for (int i = 0; i < 2; i ++)
+			{
+				Card c = AllZone.CardFactory.getCard(cardsInPlay[i], Constant.Player.Human);
+				humanList.add(c);
+			}
+			qa.setHuman(humanList);
+			
+			qa.addCompy("Bad Moon");
+			qa.addCompy("Wall of Brambles");
+			
+			qa.setCardRewardList(pack.getRare(4));
+		}
 			
 	}
 	

@@ -128,4 +128,14 @@ Four multi-colored rares
 300
 noIcon
 
+14
+Ancient Battlefield
+You visit an ancient battlefield at midnight. It is overgrown and dark. You trip on a root, utter a curse and wish that you could see.
+Hard
+Not Repeatable
+50
+Four random rares
+250
+noIcon
+
 End
