@@ -2,22 +2,22 @@ package forge.quest.quests;
 
 import forge.*;
 import forge.error.ErrorViewer;
+import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.QuestAbstractPanel;
 import forge.quest.QuestFrame;
 import forge.quest.main.QuestMainPanel;
 
 import javax.swing.*;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 
-public class Gui_Quest_Assignments extends JFrame implements NewConstants{
+public class QuestQuestsPanel extends QuestAbstractPanel{
 	
 	private static final long serialVersionUID = 2409591658245091210L;
 
@@ -32,32 +32,17 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     
     private Deck 			  hDeck;
 
-    private ReadQuest_Assignment read;
+    private QuestQuestsReader read;
     
-    public Gui_Quest_Assignments(Deck humanDeck) {
+    public QuestQuestsPanel(QuestFrame mainFrame) {
+        super(mainFrame);
         try {
             jbInit();
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
-        
-        hDeck = humanDeck;
 
         setup();
-
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
-        setSize(1024, 768);
-        this.setResizable(false);
-        Dimension screen = getToolkit().getScreenSize();
-        Rectangle bounds = getBounds();
-        bounds.width = 1024;
-        bounds.height = 768;
-        bounds.x = (screen.width - bounds.width) / 2;
-        bounds.y = (screen.height - bounds.height) / 2;
-        setBounds(bounds);
-        
-        
     }
     
     //only do this ONCE:
@@ -77,7 +62,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
             }
         });
         
-    	read = new ReadQuest_Assignment(ForgeProps.getFile(QUEST.QUESTS), questData);
+    	read = new QuestQuestsReader(ForgeProps.getFile(NewConstants.QUEST.QUESTS), questData);
     	read.run();
     	
     	ArrayList<Quest_Assignment> questsToDisplay = new ArrayList<Quest_Assignment>();
@@ -172,12 +157,11 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
             
             buttonGroup.add(radio);
             
-            this.getContentPane().add(radio);
-            this.getContentPane().add(description);
-            this.getContentPane().add(difficulty);
-            this.getContentPane().add(repeatable);
-            this.getContentPane().add(reward);
-            //this.getContentPane().add(iconLabel);
+            this.add(radio);
+            this.add(description);
+            this.add(difficulty);
+            this.add(repeatable);
+            this.add(reward);
             
             y+=80;
     	}//for
@@ -190,9 +174,9 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setText("Quests");
         titleLabel.setBounds(new Rectangle(400, 5, 300, 60));
-        ImageIcon icon = getIcon("MapIcon.png");
+        ImageIcon icon = GuiUtils.getIconFromFile("MapIcon.png");
         titleLabel.setIcon(icon);
-        this.getContentPane().setLayout(null);
+        this.setLayout(null);
         
         //String fileName = "LeafIconSmall.png";
     	//ImageIcon icon = getIcon(fileName);
@@ -203,15 +187,15 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
         quitButton.setText("Quit");
         quitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                quitButton_actionPerformed();
+                mainFrame.showMainPane();
             }
         });
 
 
         //jPanel2.add(quitButton, null);
-        this.getContentPane().add(startQuestButton, null);
-        this.getContentPane().add(titleLabel, null);
-        this.getContentPane().add(quitButton,null);
+        this.add(startQuestButton, null);
+        this.add(titleLabel, null);
+        this.add(quitButton,null);
     }
     
     void startQuestButton_actionPerformed(ActionEvent e) throws Exception {
@@ -259,22 +243,15 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
 	    						   selectedQuest.getComputerLife(), selectedQuest);
 	    
 	    AllZone.Display.setVisible(true);
-        dispose();
-    }
-    
-    private ImageIcon getIcon(String fileName)
-    {
-    	File base = ForgeProps.getFile(IMAGE_ICON);
-    	File file = new File(base, fileName);
-    	ImageIcon icon = new ImageIcon(file.toString());
-    	return icon;
-    }
-    
-    void quitButton_actionPerformed() {
-        dispose();
-        new QuestFrame();
-
+        mainFrame.dispose();
     }
 
+    @Override
+    public void refreshState() {
+    }
+
+    public void setDeck(Deck deck) {
+        this.hDeck = deck;
+    }
 }
 

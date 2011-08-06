@@ -4,7 +4,6 @@ import forge.*;
 import forge.gui.GuiUtils;
 import forge.quest.QuestAbstractPanel;
 import forge.quest.QuestFrame;
-import forge.quest.quests.Gui_Quest_Assignments;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -26,8 +25,6 @@ import java.util.List;
 //AllZone.QuestData should be set by Gui_QuestOptions
 public class QuestMainPanel extends QuestAbstractPanel {
     private QuestData questData;
-
-    private QuestFrame mainFrame;
 
     JLabel creditsLabel = new JLabel();
     JLabel lifeLabel = new JLabel();
@@ -52,8 +49,8 @@ public class QuestMainPanel extends QuestAbstractPanel {
     private static final String NO_DECKS_AVAILABLE = "No decks available";
 
     public QuestMainPanel(QuestFrame mainFrame) {
+        super(mainFrame);
         questData = AllZone.QuestData;
-        this.mainFrame = mainFrame;
 
         initUI();
     }
@@ -388,7 +385,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }//deck editor button
 
     void showBazaar() {
-        mainFrame.showPane(QuestFrame.BAZAAR_PANEL);
+        mainFrame.showBazaarPane();
     }
 
     void showCardShop() {
@@ -495,9 +492,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
             questData.setSelectedPet(pet.toString());
         }
 
-        forge.quest.quests.Gui_Quest_Assignments g = new Gui_Quest_Assignments(human);
-        g.setVisible(true);
-        mainFrame.dispose();
+        mainFrame.showQuestsPane(human);
     }
 
     class OpponentAdapter extends MouseAdapter {

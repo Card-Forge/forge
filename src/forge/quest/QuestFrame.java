@@ -6,6 +6,7 @@ import forge.QuestData;
 import forge.gui.GuiUtils;
 import forge.quest.bazaar.QuestBazaarPanel;
 import forge.quest.main.QuestMainPanel;
+import forge.quest.quests.QuestQuestsPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -24,6 +25,7 @@ public class QuestFrame extends JFrame {
 
     public static final String MAIN_PANEL = "Main";
     public static final String BAZAAR_PANEL = "Bazaar";
+    private static final String QUESTS_PANEL = "Quests";
 
     Map<String, QuestAbstractPanel> subPanelMap = new HashMap<String, QuestAbstractPanel>();
 
@@ -43,6 +45,10 @@ public class QuestFrame extends JFrame {
         visiblePanel.add(newPanel, BAZAAR_PANEL);
         subPanelMap.put(BAZAAR_PANEL, newPanel);
 
+        newPanel = new QuestQuestsPanel(this);
+        visiblePanel.add(newPanel, QUESTS_PANEL);
+        subPanelMap.put(QUESTS_PANEL, newPanel);
+
 
         this.getContentPane().setLayout(new BorderLayout());
         this.getContentPane().add(visiblePanel, BorderLayout.CENTER);
@@ -61,10 +67,26 @@ public class QuestFrame extends JFrame {
 
 
 
-    public void showPane(String paneName){
+    private void showPane(String paneName){
         subPanelMap.get(paneName).refreshState();
         questLayout.show(visiblePanel, paneName);
     }
+
+    public void showMainPane(){
+        showPane(MAIN_PANEL);
+    }
+
+    public void showBazaarPane(){
+        showPane(BAZAAR_PANEL);
+    }
+
+    public void showQuestsPane(forge.Deck deck){
+        QuestQuestsPanel questsPanel = (QuestQuestsPanel) subPanelMap.get(QUESTS_PANEL);
+        questsPanel.setDeck(deck);
+        
+        showPane(QUESTS_PANEL);
+    }
+
 
     public void returnToMainMenu() {
         QuestData.saveData(AllZone.QuestData);

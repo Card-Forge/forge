@@ -17,7 +17,6 @@ import java.util.List;
 public class QuestBazaarPanel extends QuestAbstractPanel{
 	private static final long serialVersionUID = 1418913010051869222L;
 	
-	QuestFrame mainFrame;
     static List<QuestAbstractBazaarStall> stallList = new ArrayList<QuestAbstractBazaarStall>();
 
     JPanel buttonPanel = new JPanel(new BorderLayout());
@@ -30,7 +29,7 @@ public class QuestBazaarPanel extends QuestAbstractPanel{
     CardLayout stallLayout = new CardLayout();
 
     public QuestBazaarPanel(QuestFrame mainFrame) {
-        this.mainFrame = mainFrame;
+        super(mainFrame);
         this.setLayout(new BorderLayout());
 
         stallList = new ArrayList<QuestAbstractBazaarStall>();
@@ -100,7 +99,7 @@ public class QuestBazaarPanel extends QuestAbstractPanel{
         quitButton.setSize(max);
         quitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                QuestBazaarPanel.this.mainFrame.showPane(QuestFrame.MAIN_PANEL);
+                QuestBazaarPanel.this.mainFrame.showMainPane();
             }
         });
 
