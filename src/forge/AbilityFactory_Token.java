@@ -1,5 +1,7 @@
 package forge;
 
+import java.util.HashMap;
+
 public class AbilityFactory_Token extends AbilityFactory {
 	private AbilityFactory AF = null;
 	
@@ -13,18 +15,56 @@ public class AbilityFactory_Token extends AbilityFactory {
 	private String tokenToughness;
 	private String tokenImage;
 	
-	public SpellAbility getAbility(final AbilityFactory af,final String numTokens,final String name,final String[] types,final String owner,final String[] colors,final String power,final String toughness,final String[] keywords,final String image)
-	{
+	public AbilityFactory_Token(final AbilityFactory af) {
 		AF = af;
+		
+		HashMap<String,String> mapParams = af.getMapParams();
+		String numTokens,numPower,numToughness,image;
+		String[] keywords;
+		
+		if(!mapParams.get("TokenAmount").matches("[0-9][0-9]?")) //It's an X-value.
+			numTokens = AF.getHostCard().getSVar(mapParams.get("TokenAmount"));
+		else
+			numTokens = mapParams.get("TokenAmount");
+		
+		if(!mapParams.get("TokenPower").matches("[0-9][0-9]?"))
+			numPower = AF.getHostCard().getSVar(mapParams.get("TokenPower"));
+		else
+			numPower = mapParams.get("TokenPower");
+		
+		if(!mapParams.get("TokenToughness").matches("[0-9][0-9]?"))
+			numToughness = AF.getHostCard().getSVar(mapParams.get("TokenToughness"));
+		else
+			numToughness = mapParams.get("TokenToughness");
+		
+		if(mapParams.containsKey("TokenKeywords")) {
+			keywords = mapParams.get("TokenKeywords").split("<>");
+		}
+		else {
+			keywords = new String[0];
+		}
+		
+		if(mapParams.containsKey("TokenImage")) {
+			image = mapParams.get("TokenImage");
+		}
+		else {
+			image = "";
+		}
+		
 		tokenAmount = numTokens;
-		tokenName = name;
-		tokenTypes = types;
-		tokenOwner = owner;
-		tokenColors = colors;
-		tokenPower = power;
-		tokenToughness = toughness;
+		tokenName = mapParams.get("TokenName");
+		tokenTypes = mapParams.get("TokenTypes").split(",");
+		tokenOwner = mapParams.get("TokenOwner");
+		tokenColors = mapParams.get("TokenColors").split(",");
+		tokenPower = numPower;
+		tokenToughness = numToughness;
 		tokenKeywords = keywords;
 		tokenImage = image;
+	}
+	
+	public SpellAbility getAbility()
+	{
+		
 		
 		final SpellAbility abToken = new Ability_Activated(AF.getHostCard(),AF.getAbCost(),AF.getAbTgt())
 		{
@@ -55,19 +95,8 @@ public class AbilityFactory_Token extends AbilityFactory {
 		return abToken;
 	}
 	
-	public SpellAbility getSpell(final AbilityFactory af,final String numTokens,final String name,final String[] types,final String owner,final String[] colors,final String power,final String toughness,final String[] keywords,final String image)
-	{
-		AF = af;
-		tokenAmount = numTokens;
-		tokenName = name;
-		tokenTypes = types;
-		tokenOwner = owner;
-		tokenColors = colors;
-		tokenPower = power;
-		tokenToughness = toughness;
-		tokenKeywords = keywords;
-		tokenImage = image;
-		
+	public SpellAbility getSpell()
+	{		
 		final SpellAbility spToken = new Spell(AF.getHostCard(),AF.getAbCost(),AF.getAbTgt())
 		{
 			private static final long serialVersionUID = -8041427947613029670L;
