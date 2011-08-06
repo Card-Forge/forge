@@ -4,7 +4,7 @@ Types:Creature Zombie Barbarian
 Text:no text
 PT:3/1
 K:Cycling:1 B
-A:AB$Retrieve|Cost$1 B Discard<1/Any>|Destination$Hand|ActivatingZone$Graveyard|ActivatingPhases$Upkeep|PlayerTurn$True|Return Undead Gladiator from your graveyard to your hand. Activate this ability only during your upkeep.
+A:AB$Retrieve|Cost$1 B Discard<1/Any>|Destination$Hand|ActivatingZone$Graveyard|ActivatingPhases$Upkeep|PlayerTurn$True|SpellDescription$Return Undead Gladiator from your graveyard to your hand. Activate this ability only during your upkeep.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_gladiator.jpg
 End
