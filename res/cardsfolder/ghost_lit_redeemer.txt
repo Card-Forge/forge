@@ -2,7 +2,7 @@ Name:Ghost-Lit Redeemer
 ManaCost:W
 Types:Creature Spirit
 Text:(NOTE: "Channel" not implemented.)
-K:abGainLife W T:1
+K:abGainLife W T:2
 PT:1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74082.jpg
