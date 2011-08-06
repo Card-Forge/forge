@@ -1,3 +1,9 @@
+AEther Flash
+2 R R
+Enchantment
+no text
+WheneverKeyword:EntersBattleField:Type/Creature:Play:Damage/2:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a creature enters the battlefield, Aether Flash deals 2 damage to it.
+
 Close Quarters
 2 R R
 Enchantment
@@ -56,12 +62,6 @@ no text
 Trample
 WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/7:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Pelakka Wurm enters the battlefield, you gain 7 life.
 WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Pelakka Wurm is put into a graveyard from the battlefield, draw a card.
-
-Aether Flash
-2 R R
-Enchantment
-no text
-WheneverKeyword:EntersBattleField:Type/Creature:Play:Damage/2:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a creature enters the battlefield, Aether Flash deals 2 damage to it.
 
 Nettle Sentinel
 G
