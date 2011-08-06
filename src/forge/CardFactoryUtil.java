@@ -342,6 +342,7 @@ public class CardFactoryUtil {
         if (c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) value -= 50;
         if (c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) value -= 50;
         if (c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) value -= 50;
+        if (c.hasKeyword("At the beginning of the end step, shuffle CARDNAME.")) value -= 50;
         if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) value -= 20;
         if (c.hasStartOfKeyword("At the beginning of your upkeep, destroy CARDNAME unless you pay")) value -= 20;
         if (c.hasStartOfKeyword("At the beginning of your upkeep, sacrifice CARDNAME unless you pay")) value -= 20;
