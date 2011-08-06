@@ -839,6 +839,108 @@ class CardFactory_Equipment {
             
         } //*************** END ************ END **************************
         
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Sword of Body and Mind")) {
+            final Ability equip = new Ability(card, "2") {
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                        if(card.isEquipping()) {
+                            Card crd = card.getEquipping().get(0);
+                            if(crd.equals(getTargetCard())) return;
+                            
+                            card.unEquipCard(crd);
+                        }
+                        card.equipCard(getTargetCard());
+                    }
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.Phase.getActivePlayer().equals(card.getController())
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2"));
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return getCreature().size() != 0 && !card.isEquipping();
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
+                    setTargetCard(target);
+                }
+                
+                CardList getCreature() {
+                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
+                                    && CardFactoryUtil.canTarget(card, c)
+                                    && (!c.getKeyword().contains("Defender"));
+                        }
+                    });
+                    // list.remove(card);      // if mana-only cost, allow self-target
+                    
+                    // is there at least 1 Loxodon Punisher to target
+                    
+                    CardList equipMagnetList = list.getName("Loxodon Punisher");
+                    if (equipMagnetList.size() != 0) {
+                        return equipMagnetList;
+                    }
+                    
+                    return list;
+                }//getCreature()
+                
+                
+            };//equip ability
+            
+            Command onEquip = new Command() {
+                
+				private static final long serialVersionUID = 4792252563711300648L;
+
+				public void execute() {
+                    if(card.isEquipping()) {
+                        Card crd = card.getEquipping().get(0);
+                        crd.addSemiPermanentAttackBoost(2);
+                        crd.addSemiPermanentDefenseBoost(2);
+                        crd.addExtrinsicKeyword("Protection from green");
+                        crd.addExtrinsicKeyword("Protection from blue");
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEquip = new Command() {
+                
+				private static final long serialVersionUID = 6204739827947031589L;
+
+				public void execute() {
+                    if(card.isEquipping()) {
+                        Card crd = card.getEquipping().get(0);
+                        crd.addSemiPermanentAttackBoost(-2);
+                        crd.addSemiPermanentDefenseBoost(-2);
+                        crd.removeExtrinsicKeyword("Protection from red");
+                        crd.removeExtrinsicKeyword("Protection from blue");
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            equip.setBeforePayMana(CardFactoryUtil.input_equipCreature(equip));
+            equip.setDescription("Equip: 2");
+            card.addSpellAbility(equip);
+            
+            card.addEquipCommand(onEquip);
+            card.addUnEquipCommand(onUnEquip);
+            
+        } //*************** END ************ END **************************
+        
         if (shouldEquip(card) != -1) {
             int n = shouldEquip(card);
             if (n != -1) {

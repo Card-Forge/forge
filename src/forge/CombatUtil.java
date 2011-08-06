@@ -750,7 +750,10 @@ public class CombatUtil {
 	        			GameActionUtil.executeSwordOfFireAndIceEffects(equip);
 	        		}
 	        		if(c.getDealtCombatDmgToOppThisTurn() && equip.getName().equals("Sword of Light and Shadow")) {
-	        			GameActionUtil.executeSwordOfLightandShadowEffects(equip);
+	        			GameActionUtil.executeSwordOfLightAndShadowEffects(equip);
+	        		}
+	        		if(c.getDealtCombatDmgToOppThisTurn() && equip.getName().equals("Sword of Body and Mind")) {
+	        			GameActionUtil.executeSwordOfBodyAndMindEffects(equip);
 	        		}
 	        	}
 	        }//isEquipped && getNetAttack > 0

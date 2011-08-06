@@ -1,3 +1,9 @@
+Sword of Body and Mind
+3
+Artifact Equipment
+Equipped creature gets +2/+2 and has protection from green and from blue. Whenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.
+SVar:Rarity:Rare
+
 Desecrated Earth
 4 B
 Sorcery

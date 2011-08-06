@@ -4932,7 +4932,7 @@ public class GameActionUtil {
 	    }
 	}
 	
-	public static void executeSwordOfLightandShadowEffects(Card source) {
+	public static void executeSwordOfLightAndShadowEffects(Card source) {
 		final Card src = source;
 		final Ability ability = new Ability(src, "0") {
 			@Override
@@ -4987,6 +4987,34 @@ public class GameActionUtil {
         
 		ability.setStackDescription("Sword of Light and Shadow - You gain 3 life and you may return up to one target creature card from your graveyard to your hand" );
 		res.execute();
+	}
+	
+	public static void executeSwordOfBodyAndMindEffects(Card source)
+	{
+		final Card src = source;
+		final Ability ability = new Ability(src, "0") {
+			@Override
+			public void resolve() {
+				String opponent = AllZone.GameAction.getOpponent(src.getController());
+				
+				CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", src, "G",
+						new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
+				
+				
+				CardList lib = AllZoneUtil.getPlayerCardsInLibrary(opponent);
+				int max = lib.size();
+				if (max > 10)
+					max = 10;
+				
+				for (int i=0;i<max;i++)
+					AllZone.GameAction.moveToGraveyard(lib.get(i));
+				
+				//AllZone.GameAction.getPlayerLife(src.getController()).addLife(3);
+			}
+		}; // ability
+
+		ability.setStackDescription("Sword of Body and Mind - put a 2/2 green Wolf creature token onto the battlefield and opponent puts the top ten cards of his or her library into his or her graveyard. " );
+		AllZone.Stack.add(ability);
 	}
 	
     //this is for cards like Sengir Vampire
