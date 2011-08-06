@@ -248,7 +248,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Pebbles Flintstone 3", "hard", "WU Meekstone deck with Meekstone, Marble Titan and creatures with vigilance");
 //        addToDeckList("Phoenix 3", "hard", "R Burn");
         addToDeckList("Picard 3", "hard", "WUG Elf deck with elf lords");
-        addToDeckList("Pinky and the Brain 3", "hard", "WB Royal Assassin deck with WoG, Damnation, Liliana Vess and Beacon of Unrest");
+        addToDeckList("Pinky and the Brain 2", "medium", "WB Royal Assassin deck with white tap abilities");
 //        addToDeckList("Predator 2", "medium", "WG Purity Ramp deck");
 //        addToDeckList("Predator 3", "hard", "UG Beastmaster Ascension deck");
         addToDeckList("Professor X 3", "hard", "WUB Esper Artifacts deck with Master of Etherium and Esper Stormblade");
