@@ -177,12 +177,15 @@ public class Gui_WinLose extends JFrame {
     void quitButton_actionPerformed(ActionEvent e) {
         //are we on a quest?
         if(AllZone.QuestData == null) new Gui_NewGame();
-        else {
+        else { //Quest
             WinLose winLose = Constant.Runtime.WinLose;
             QuestData quest = AllZone.QuestData;
             
             if(winLose.getWin() == 2) quest.addWin();
             else quest.addLost();
+            
+            //System.out.println("QuestData cardpoolsize:" + AllZone.QuestData.getCardpool().size());
+            AllZone.QuestData.clearShopList();
             
             if(quest.shouldAddCards(winLose.didWinRecently())) {
                 quest.addCards();
@@ -193,6 +196,14 @@ public class Gui_WinLose extends JFrame {
                 quest.addAdditionalCards();
                 JOptionPane.showMessageDialog(null, "You have won a random rare.");
             }
+            
+            if (winLose.didWinRecently())
+            {
+            	long creds = quest.getCreditsToAdd();
+            	JOptionPane.showMessageDialog(null, "You have earned " + creds + " credits.");
+            	
+            }
+            
             winLose.reset();
             
             QuestData.saveData(quest);

@@ -23,9 +23,10 @@ public class QuestData_State implements Serializable {
     private static final long serialVersionUID = 7007940230351051937L;
     
     int                       rankIndex, win, lost;
+    long					  credits;
     String                    difficulty;
     
-    ArrayList<String>         cardPool;
+    ArrayList<String>         cardPool, shopList;
     HashMap<String, Deck>     myDecks, aiDecks;
     
     private Object readResolve() throws ObjectStreamException {
@@ -39,6 +40,6 @@ public class QuestData_State implements Serializable {
         for(Entry<String, Deck> deck:this.aiDecks.entrySet()) {
             aiDecks.put(deck.getKey(), deck.getValue().migrate());
         }
-        return new forge.QuestData_State(rankIndex, win, lost, difficulty, cardPool, myDecks, aiDecks);
+        return new forge.QuestData_State(rankIndex, win, lost, credits, difficulty, cardPool, shopList, myDecks, aiDecks);
     }
 }

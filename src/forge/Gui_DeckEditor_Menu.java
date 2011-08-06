@@ -67,6 +67,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
     private final DeckIO         boosterDeckIO     = deckIO;
     
     private boolean              isDeckSaved;
+
     private String               currentDeckName;
     private String               currentGameType;
     
@@ -256,6 +257,12 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         });
         
     }//setupSortMenu()
+    
+    public void populateShop(CardList shop, CardList owned)
+    {
+    	
+    	deckDisplay.updateDisplay(shop, owned);
+    }
     
     public void newConstructed() {
         if(debugPrint) System.out.println("New Constructed");
@@ -942,6 +949,11 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         isDeckSaved = in_isDeckSaved;
         
         deckDisplay.setTitle("Deck Editor : " + currentDeckName);
+    }
+    
+    public void setTitle(String s)
+    {
+    	deckDisplay.setTitle(s);
     }
     
     public String getDeckName() {

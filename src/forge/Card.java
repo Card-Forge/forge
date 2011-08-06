@@ -14,6 +14,8 @@ public class Card extends MyObservable {
     private static int                   nextUniqueNumber;
     private int                          uniqueNumber                      = nextUniqueNumber++;
     
+    private long						 value;
+    
 
     //private Collection keyword   = new TreeSet();
     //private ArrayList<String> keyword = new ArrayList<String>();
@@ -1466,6 +1468,15 @@ public class Card extends MyObservable {
         return uniqueNumber;
     }
     
+    public void setValue(long n)
+    {
+    	value = n;
+    }
+    
+    public long getValue()
+    {
+    	return value;
+    }
     @Override
     public boolean equals(Object o) {
         if(o instanceof Card) {

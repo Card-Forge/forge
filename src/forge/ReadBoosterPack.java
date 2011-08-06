@@ -13,9 +13,6 @@ import forge.properties.NewConstants;
 
 
 public class ReadBoosterPack implements NewConstants {
-//  final private String commonFilename   = Constant.IO.baseDir +"data/common.txt";
-//  final private String uncommonFilename = Constant.IO.baseDir +"data/uncommon.txt";
-//  final private String rareFilename     = Constant.IO.baseDir +"data/rare.txt";
     
     final private static String comment = "//";
     
@@ -25,7 +22,6 @@ public class ReadBoosterPack implements NewConstants {
     private CardList     commonList;
     private CardList     uncommonList;
     private CardList     rareList;
-    
     
     public static void main(String[] args) {
         //testing
@@ -138,6 +134,34 @@ public class ReadBoosterPack implements NewConstants {
                     + pack.size());
         
         return pack;
+    }
+    
+    public CardList getShopCards(int numberWins)
+    {
+    	CardList list = new CardList();
+    	
+    	int numberRares = 1 + numberWins / 15;
+    	if (numberRares > 10 )
+    		numberRares = 10;
+    	
+    	for (int i=0;i<numberRares;i++)
+    		list.add(getRandomCard(rareList));
+    	
+    	int numberUncommons = 3 + numberWins/10;
+    	if (numberUncommons > 20)
+    		numberUncommons = 20;
+    	
+    	for(int i = 0; i < numberUncommons; i++)
+            list.add(getRandomCard(uncommonList));
+    	
+    	int numberCommons = 5 + numberWins/5;
+    	if (numberCommons > 35)
+    		numberCommons = 35;
+    	
+    	for(int i = 0; i < numberCommons; i++)
+            list.add(getRandomCard(commonList));
+    	
+    	return list;
     }
     
     //return CardList of 5 or 6 cards, one for each color and maybe an artifact

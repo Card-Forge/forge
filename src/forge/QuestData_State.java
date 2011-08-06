@@ -24,9 +24,10 @@ public class QuestData_State implements Serializable {
     private static final long serialVersionUID = 7007940230351051937L;
     
     int                       rankIndex, win, lost;
+    long 					  credits;
     String                    difficulty;
     
-    ArrayList<String>         cardPool;
+    ArrayList<String>         cardPool, shopList;
     Map<String, Deck>         myDecks, aiDecks;
     
     public QuestData_State() {}
@@ -35,12 +36,14 @@ public class QuestData_State implements Serializable {
      * This constructor is used by QestData_State in the default package to create a replacement object for the
      * obsolete class.
      */
-    public QuestData_State(int rankIndex, int win, int lost, String difficulty, ArrayList<String> cardPool, Map<String, Deck> myDecks, Map<String, Deck> aiDecks) {
+    public QuestData_State(int rankIndex, int win, int lost, long credits, String difficulty, ArrayList<String> cardPool, ArrayList<String> shopList, Map<String, Deck> myDecks, Map<String, Deck> aiDecks) {
         this.rankIndex = rankIndex;
         this.win = win;
         this.lost = lost;
+        this.credits = credits;
         this.difficulty = difficulty;
         this.cardPool = cardPool;
+        this.shopList = shopList;
         this.myDecks = myDecks;
         this.aiDecks = aiDecks;
     }

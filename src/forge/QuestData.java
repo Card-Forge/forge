@@ -50,6 +50,8 @@ public class QuestData implements NewConstants {
     private int                   win;
     private int                   lost;
     
+    private long				  credits;
+    
     private String                difficulty;
     
 
@@ -63,6 +65,7 @@ public class QuestData implements NewConstants {
     //holds String card names
     private ArrayList<String>     cardPool        = new ArrayList<String>();
     private ArrayList<String>     newCardList     = new ArrayList<String>();
+    private ArrayList<String> 	  shopList		  = new ArrayList<String>();
     
     private QuestData_BoosterPack boosterPack     = new QuestData_BoosterPack();
     
@@ -128,6 +131,7 @@ public class QuestData implements NewConstants {
         
         //because cardPool already has basic land added to it
         cardPool.addAll(list);
+        credits = 250;
     }
     
     
@@ -210,9 +214,11 @@ public class QuestData implements NewConstants {
             
             data.win = state.win;
             data.lost = state.lost;
+            data.credits = state.credits;
             data.rankIndex = state.rankIndex;
             data.difficulty = state.difficulty;
             
+            data.shopList = state.shopList;
             data.cardPool = state.cardPool;
             data.myDecks = state.myDecks;
             data.aiDecks = state.aiDecks;
@@ -232,6 +238,22 @@ public class QuestData implements NewConstants {
     public ArrayList<String> getCardpool() {
         //make a copy so the internal ArrrayList cannot be changed externally
         return new ArrayList<String>(cardPool);
+    }
+    
+    public ArrayList<String> getShopList() {
+    	if (shopList != null)
+    		return new ArrayList<String>(shopList);
+    	else 
+    		return null;
+    }
+    
+    public void setShopList(ArrayList<String> list)
+    {
+    	shopList = list;
+    }
+    
+    public void clearShopList() {
+    	shopList.clear();
     }
     
     //rename - removeDeck, addDeck
@@ -348,12 +370,60 @@ public class QuestData implements NewConstants {
         
         cardPool.addAll(newCards);
         //getAddedCards() uses newCardList
-        
 
         newCardList.addAll(newCards);
-        
     }
     
+    public void addCard(Card c)
+    {
+    	cardPool.add(c.getName());
+    }
+    
+    public void removeCard(Card c)
+    {
+    	
+    	String s = c.getName();
+    	if (!cardPool.contains(s))
+    		return;
+    	
+    	for(int i=0;i<cardPool.size();i++)
+    	{
+    		String str = cardPool.get(i);
+    		if (str.equals(s)){
+    			cardPool.remove(i);
+    			break;
+    		}
+    	}
+    }
+    
+    public void addCardToShopList(Card c)
+    {
+    	shopList.add(c.getName());
+    }
+    
+    public void removeCardFromShopList(Card c)
+    {
+    	String s = c.getName();
+    	if (!shopList.contains(s))
+    		return;
+    	
+    	for(int i=0;i<shopList.size();i++)
+    	{
+    		String str = shopList.get(i);
+    		if (str.equals(s)){
+    			shopList.remove(i);
+    			break;
+    		}
+    	}
+    }
+    
+    public long getCreditsToAdd()
+    {
+    	long creds = (long) (10 + (0.2 * win));
+    	this.addCredits(creds);
+    	
+    	return creds;
+    }
     //gets all of the cards that are in the cardpool
     public ArrayList<String> getCards() {
         //copy CardList in order to keep private variables private
@@ -406,6 +476,19 @@ public class QuestData implements NewConstants {
         return lost;
     }
     
+    public void addCredits(long c)
+    {
+    	credits+=c;
+    }
+    
+    public void subtractCredits(long c)
+    {
+    	credits-=c;
+    }
+    
+    public long getCredits() {
+    	return credits;
+    }
     //should be called first, because the difficultly won't change
     public String getDifficulty() {
         return difficulty;
@@ -426,7 +509,7 @@ public class QuestData implements NewConstants {
         return rankArray[rankIndex];
     }
     
-    //add cards after a certain number of wins or loses
+    //add cards after a certain number of wins or losses
     public boolean shouldAddCards(boolean didWin) {
         int n = addCardsArray[convertDifficultyToIndex()];
         
@@ -482,10 +565,12 @@ public class QuestData implements NewConstants {
             QuestData_State state = new QuestData_State();
             state.win = q.win;
             state.lost = q.lost;
+            state.credits = q.credits;
             state.difficulty = q.difficulty;
             state.rankIndex = q.rankIndex;
             
             state.cardPool = q.cardPool;
+            state.shopList = q.shopList;
             state.myDecks = q.myDecks;
             state.aiDecks = q.aiDecks;
             

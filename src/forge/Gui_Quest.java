@@ -35,10 +35,12 @@ public class Gui_Quest extends JFrame {
     private JLabel            difficultlyLabel   = new JLabel();
     private JLabel            winLostLabel       = new JLabel();
     private JLabel            rankLabel          = new JLabel();
+    private JLabel			  creditsLabel	     = new JLabel();
     @SuppressWarnings("unused")
     // border1
     private Border            border1;
     private TitledBorder      titledBorder1;
+    private JButton 		  cardShopButton	 = new JButton();
     private JButton           deckEditorButton   = new JButton();
     private JPanel            jPanel2            = new JPanel();
     private JButton           playGameButton     = new JButton();
@@ -73,7 +75,7 @@ public class Gui_Quest extends JFrame {
         //center window on the screen
         Dimension screen = this.getToolkit().getScreenSize();
         setBounds(screen.width / 4, 50, //position
-                500, 540); //size
+                500, 610); //size
         
         //if user closes this window, go back to "Quest Options" screen
         this.addWindowListener(new WindowAdapter() {
@@ -87,6 +89,7 @@ public class Gui_Quest extends JFrame {
         //set labels
         difficultlyLabel.setText(questData.getDifficulty());
         rankLabel.setText(questData.getRank());
+        creditsLabel.setText("Credits: " + questData.getCredits());
         
         String s = questData.getWin() + " wins / " + questData.getLost() + " losses";
         winLostLabel.setText(s);
@@ -121,7 +124,7 @@ public class Gui_Quest extends JFrame {
         difficultlyLabel.setBounds(new Rectangle(1, 52, 453, 41));
         difficultlyLabel.setFont(new java.awt.Font("Dialog", 0, 25));
         difficultlyLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        winLostLabel.setText("23 wins / 10 loses");
+        winLostLabel.setText("23 wins / 10 losses");
         winLostLabel.setBounds(new Rectangle(1, 130, 453, 43));
         winLostLabel.setFont(new java.awt.Font("Dialog", 0, 25));
         winLostLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -130,7 +133,21 @@ public class Gui_Quest extends JFrame {
         rankLabel.setBounds(new Rectangle(1, 93, 453, 37));
         rankLabel.setFont(new java.awt.Font("Dialog", 0, 25));
         rankLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        deckEditorButton.setBounds(new Rectangle(291, 123, 142, 38));
+        creditsLabel.setBounds(new Rectangle(1, 170, 453, 37));
+        //creditsLabel.setText("Credits: 1000");
+        creditsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        creditsLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        
+        cardShopButton.setBounds(new Rectangle(291, 100, 142, 38));
+        cardShopButton.setFont(new java.awt.Font("Dialog", 0, 18));
+        cardShopButton.setText("Card Shop");
+        cardShopButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cardShopButton_actionPerformed(e);
+            }
+        });
+        
+        deckEditorButton.setBounds(new Rectangle(291, 148, 142, 38));
         deckEditorButton.setFont(new java.awt.Font("Dialog", 0, 18));
         deckEditorButton.setText("Deck Editor");
         deckEditorButton.addActionListener(new java.awt.event.ActionListener() {
@@ -139,9 +156,9 @@ public class Gui_Quest extends JFrame {
             }
         });
         jPanel2.setBorder(titledBorder1);
-        jPanel2.setBounds(new Rectangle(39, 173, 441, 173));
+        jPanel2.setBounds(new Rectangle(39, 223, 441, 198));
         jPanel2.setLayout(null);
-        playGameButton.setBounds(new Rectangle(150, 446, 161, 37));
+        playGameButton.setBounds(new Rectangle(150, 516, 161, 37));
         playGameButton.setFont(new java.awt.Font("Dialog", 0, 18));
         playGameButton.setText("Play Game");
         playGameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -150,33 +167,35 @@ public class Gui_Quest extends JFrame {
             }
         });
         oppTwoRadio.setText("Bob");
-        oppTwoRadio.setBounds(new Rectangle(15, 50, 397, 41));
+        oppTwoRadio.setBounds(new Rectangle(15, 75, 250, 41));
         oppOneRadio.setSelected(true);
         oppOneRadio.setText("Sam");
-        oppOneRadio.setBounds(new Rectangle(15, 18, 392, 33));
+        oppOneRadio.setBounds(new Rectangle(15, 53, 250, 33));
         oppThreeRadio.setText("Generated Deck");
-        oppThreeRadio.setBounds(new Rectangle(15, 91, 406, 25));
+        oppThreeRadio.setBounds(new Rectangle(15, 116, 250, 25));
         jLabel5.setText("Your Deck:");
-        jLabel5.setBounds(new Rectangle(15, 126, 125, 29));
-        deckComboBox.setBounds(new Rectangle(98, 127, 185, 29));
+        jLabel5.setBounds(new Rectangle(15, 151, 125, 29));
+        deckComboBox.setBounds(new Rectangle(98, 152, 185, 29));
         smoothLandCheckBox.setText("Stack AI land");
-        smoothLandCheckBox.setBounds(new Rectangle(154, 385, 153, 21));
+        smoothLandCheckBox.setBounds(new Rectangle(154, 455, 153, 21));
         //smoothLandCheckBox.setSelected(true);
         resizeCheckbox.setText("Resizable Game Area");
-        resizeCheckbox.setBounds(new Rectangle(154, 354, 156, 24));
+        resizeCheckbox.setBounds(new Rectangle(154, 424, 156, 24));
         millLoseCheckBox.setText("Milling = Loss Condition");
-        millLoseCheckBox.setBounds(new Rectangle(154, 414, 165, 25));
+        millLoseCheckBox.setBounds(new Rectangle(154, 484, 165, 25));
         
         //resizeCheckbox.setSelected(true);
         this.getContentPane().add(rankLabel, null);
         this.getContentPane().add(jLabel1, null);
         this.getContentPane().add(difficultlyLabel, null);
         this.getContentPane().add(winLostLabel, null);
+        this.getContentPane().add(creditsLabel,null);
         jPanel2.add(jLabel5, null);
         jPanel2.add(deckComboBox, null);
         jPanel2.add(oppOneRadio, null);
         jPanel2.add(oppTwoRadio, null);
         jPanel2.add(oppThreeRadio, null);
+        jPanel2.add(cardShopButton, null);
         jPanel2.add(deckEditorButton, null);
         this.getContentPane().add(playGameButton, null);
         this.getContentPane().add(smoothLandCheckBox, null);
@@ -207,6 +226,26 @@ public class Gui_Quest extends JFrame {
         
         this.dispose();
     }//deck editor button
+    
+    void cardShopButton_actionPerformed(ActionEvent e) {
+        Command exit = new Command() {
+			private static final long serialVersionUID = 8567193482568076362L;
+
+			public void execute() {
+                //saves all deck data
+                QuestData.saveData(AllZone.QuestData);
+                
+                new Gui_Quest();
+            }
+        };
+        
+        Gui_CardShop g = new Gui_CardShop(questData);
+        
+        g.show(exit);
+        g.setVisible(true);
+        
+        this.dispose();
+    }//card shop button
     
     void playGameButton_actionPerformed(ActionEvent e) {
         Object check = deckComboBox.getSelectedItem();
