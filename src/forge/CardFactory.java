@@ -8156,7 +8156,7 @@ public class CardFactory implements NewConstants {
             ability.setDescription("G, Sacrifice Lifespark Spellbomb: Target land becomes a 3/3 Creature until end of turn. It is still a land.");
             
         }//*************** END ************ END **************************
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Necrogen Spellbomb")) {
         	Ability_Cost abCost = new Ability_Cost("B Sac<1/CARDNAME>", cardName, true);
@@ -8192,7 +8192,7 @@ public class CardFactory implements NewConstants {
             ability.setDescription("B, Sacrifice Necrogen Spellbomb: Target player discards a card.");
             card.addSpellAbility(ability);
         } //*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sensei's Divining Top")) {
