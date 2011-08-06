@@ -1,3 +1,5 @@
+mana_pool.jpg	http://img215.imageshack.us/img215/4192/manapool.jpg
+morph.jpg	http://img215.imageshack.us/img215/7918/morph.jpg
 forest.jpg	http://mtgpics.chutography.com/UG/Forest.full.jpg
 forest1.jpg	http://mtgpics.chutography.com/9E/Forest1.full.jpg
 forest2.jpg	http://mtgpics.chutography.com/10E/Forest2.full.jpg

@@ -20,6 +20,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -91,6 +92,8 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     private Action            COMPUTER_GRAVEYARD_ACTION;
     private Action            COMPUTER_REMOVED_ACTION;
     private Action            CONCEDE_ACTION;
+    public String cardN;
+    public String cOwner;
     
     public GuiDisplay3() {
         setupActions();
@@ -502,6 +505,14 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         else this.cdArea.setText(tokenText + counterText);
         
         cdPanel.setBorder(GuiDisplayUtil.getBorder(c));
+        
+        if(c.getOwner()=="Computer" && c.isFaceDown()==true){
+        	cardN = "morph";
+        }else{
+        	cardN = c.getName();
+        }
+        
+        
         
         //picture
         picturePanel.removeAll();
@@ -1041,6 +1052,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         
         picturePanel.setLayout(new BoxLayout(picturePanel, BoxLayout.Y_AXIS));
         picturePanel.setBackground(c1);
+        picturePanel.addMouseListener(new CustomListener());
         pane.add(new ExternalPanel(picturePanel), "picture");
     }
     
@@ -1085,7 +1097,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     //JPanel playerHandPanel = new BackgroundPanel("bg2.jpg");
     JPanel                          cdPanel             = new JPanel();
     //JPanel    picturePanel        = new JPanel();
-    JPanel                          picturePanel        = new JPanel();
+   public  JPanel                          picturePanel        = new JPanel();
     JLabel                          oppLifeLabel        = new JLabel();
     JLabel                          playerLifeLabel     = new JLabel();
     JLabel                          cdLabel1            = new JLabel();
@@ -1151,9 +1163,73 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
             concede();
         }
     }
+    
+    
+    public class CustomListener implements MouseListener {
+
+        public void mouseClicked(MouseEvent e) {
+        	        	
+        }
+
+        public void mouseEntered(MouseEvent e) { 
+        	       	
+        	if (picturePanel.getComponentCount()!=0){
+        				cardN= GuiDisplayUtil.cleanString(cardN);		        		
+		        	    cardN = cardN+".jpg"; 
+		        	
+        			 if(GuiDisplayUtil.IsPictureHQExists(cardN)){    
+        				int cWidth = 0;
+						try {
+							cWidth = GuiDisplayUtil.getPictureHQwidth(cardN);
+						} catch (IOException e2) {
+							
+							e2.printStackTrace();
+						}
+        				int cHeight = 0;
+						try {
+							cHeight = GuiDisplayUtil.getPictureHQheight(cardN);
+						} catch (IOException e2) {
+							
+							e2.printStackTrace();
+						}
+        		 
+						if(cWidth>=312 &&cHeight >=445){ 
+							
+							GUI_PictureHQ hq = new GUI_PictureHQ(GuiDisplay3.this,cardN);
+						try {
+							hq.letsGo(GuiDisplay3.this, cardN);
+							cardN = cardN.substring(0, cardN.length()-4);
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						}
+							
+        		}}
+      	
+        }
+
+        public void mouseExited(MouseEvent e) {             
+            
+        }
+
+        public void mousePressed(MouseEvent e) {             
+             
+        }
+
+        public void mouseReleased(MouseEvent e) {           
+             
+        }
+   }
+    
+    
+    
 }
 
 //very hacky
+
+
+
+
 
 
 class Gui_MultipleBlockers3 extends JFrame {
@@ -1275,4 +1351,7 @@ class Gui_MultipleBlockers3 extends JFrame {
             if(guiDisplay != null) guiDisplay.updateCardDetail(c);
         }
     }
+    
+   
+    
 }

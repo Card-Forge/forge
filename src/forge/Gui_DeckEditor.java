@@ -729,7 +729,22 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay {
         				cardN= GuiDisplayUtil.cleanString(cardN);		        		
 		        	    cardN = cardN+".jpg";    
         			 if(GuiDisplayUtil.IsPictureHQExists(cardN)){    
-        		    
+        				 int cWidth = 0;
+ 						try {
+ 							cWidth = GuiDisplayUtil.getPictureHQwidth(cardN);
+ 						} catch (IOException e2) {
+ 							// TODO Auto-generated catch block
+ 							e2.printStackTrace();
+ 						}
+         				int cHeight = 0;
+ 						try {
+ 							cHeight = GuiDisplayUtil.getPictureHQheight(cardN);
+ 						} catch (IOException e2) {
+ 							// TODO Auto-generated catch block
+ 							e2.printStackTrace();
+ 						}
+         		 
+         			if(cWidth>=312 &&cHeight >=445){ 
 					GUI_PictureHQ hq = new GUI_PictureHQ(Gui_DeckEditor.this,cardN);
 					try {
 						hq.letsGo(Gui_DeckEditor.this, cardN);
@@ -739,7 +754,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay {
 					}
 					}
 					
-        		}
+        		}}
       	
         }
 

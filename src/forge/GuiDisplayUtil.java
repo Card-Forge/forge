@@ -210,9 +210,11 @@ public class GuiDisplayUtil implements NewConstants {
         
 
         if(file.exists()) {
-        	
-        	
-            return new PicturePanelResize(file);
+        	if(filename.equals("morph.jpg")) {     	
+            return new PicturePanel(file);
+        	}else{
+        	return new PicturePanelResize(file);	
+        	}
         } else {
             JPanel p = new JPanel();
             
