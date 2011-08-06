@@ -5312,8 +5312,9 @@ public class CardFactory implements NewConstants {
             ability.setDescription("G, Sacrifice Lifespark Spellbomb: Target land becomes a 3/3 Creature until end of turn. It is still a land.");            
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
-        else if(cardName.equals("Chalice of the Void")) {
+        else if(cardName.equals("Chalice of the Void") || cardName.equals("Chimeric Mass")) {
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -7679939432259603542L;
                 
