@@ -265,13 +265,9 @@ public class Phase extends MyObservable
         
 	    else if (phase.equals(Constant.Phase.Combat_End))
         {
-			if (!inCombat()){
-				AllZone.Phase.setNeedToNextPhase(true);
-			}
-			else{
-				AllZone.EndOfCombat.executeUntil();
-				AllZone.EndOfCombat.executeAt();
-			}
+	    	// End Combat always happens
+			AllZone.EndOfCombat.executeUntil();
+			AllZone.EndOfCombat.executeAt();
         }
 
 	    else if(phase.equals(Constant.Phase.End_Of_Turn)) {
