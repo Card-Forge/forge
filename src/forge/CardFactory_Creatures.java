@@ -6089,8 +6089,9 @@ public class CardFactory_Creatures {
                 
 
                 CardList getRadiance(Card c) {
-                    String color = CardUtil.getColor(c);
-                    if(color.equals(Constant.Color.Colorless)) {
+                	//String color = CardUtil.getColor(c);
+                    //if(color.equals(Constant.Color.Colorless)) {
+                	if(CardUtil.getColors(c).contains(Constant.Color.Colorless)) {
                         CardList list = new CardList();
                         list.add(c);
                         return list;
