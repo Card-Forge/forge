@@ -1,0 +1,8 @@
+Name:Stalking Tiger
+ManaCost:3 G
+Types:Creature Cat
+Text:no text
+PT:3/3
+K:CARDNAME can't be blocked by more than one creature.
+SVar:Rarity:Common
+End

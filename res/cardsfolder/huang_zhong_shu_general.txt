@@ -1,0 +1,8 @@
+Name:Huang Zhong, Shu General
+ManaCost:2 W W
+Types:Legendary Creature Human Soldier
+Text:no text
+PT:2/3
+K:CARDNAME can't be blocked by more than one creature.
+SVar:Rarity:Rare
+End

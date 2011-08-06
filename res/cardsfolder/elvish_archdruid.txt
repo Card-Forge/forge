@@ -4,7 +4,7 @@ Types:Creature Elf Druid
 Text:no text
 PT:2/2
 K:tap: add G to your mana pool for each Elf you control.
-K:stPumpAll:Creature.Elfk+Other+YouCtrl:1/1:No Condition:Other Elf creatures you control get +1/+1.
+K:stPumpAll:Creature.Elf+Other+YouCtrl:1/1:No Condition:Other Elf creatures you control get +1/+1.
 SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
