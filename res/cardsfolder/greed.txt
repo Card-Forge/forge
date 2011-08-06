@@ -1,0 +1,8 @@
+Name:Greed
+ManaCost:3 B
+Types:Enchantment
+Text:no text
+K:abDrawCards B PayLife<2>:1:Draw a card.:Greed - draw a card
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/greed.jpg
+End
