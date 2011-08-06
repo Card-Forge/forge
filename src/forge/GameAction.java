@@ -1595,7 +1595,6 @@ public class GameAction {
                         				if(Whenever_Go(F_card,F_k) == true) 
                         					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
                         						//this might not work:
-                        						//AllZone.GameAction.discard(F_TargetPlayer[F_Target],F_Amount[0], Ability);
                         						F_TargetPlayer[F_Target].discard(F_Amount[0], Ability, false);
       			                      }
 

@@ -37,7 +37,6 @@ public class CardFactory_Sorceries {
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
                     Card[] c = hand.getCards();
                     for(int i = 0; i < c.length; i++) {
-                        //AllZone.GameAction.discard(c[i]);
                     	hand.remove(c[i]);
                     	library.add(c[i], 0);
                     }
@@ -2307,12 +2306,8 @@ public class CardFactory_Sorceries {
                     
                     //technically should let the user discard one card at a time
                     //in case graveyard order matters
-                    //for(int i = 0; i < n; i++)
-                      //  AllZone.GameAction.discardRandom(player, this);
                     player.discard(n, this, true);
                     
-                    //for(int i = 0; i < n; i++)
-                      //  AllZone.GameAction.drawCard(player);
                     player.drawCards(n);
                 }
                 
@@ -6304,8 +6299,8 @@ public class CardFactory_Sorceries {
         			}
            			}
         			/*else { //computer
-        				AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, numCards);
-        				AllZone.GameAction.removeFromGame(card);
+        				card.getControler().discardRandom(numCards);
+        				AllZone.GameAction.exile(card);
         				CardList grave = AllZoneUtil.getPlayerGraveyard(card.getController());
         				for(int i = 1; i <= numCards; i ++) {
         					Card t1 = CardFactoryUtil.AI_getBestCreature(grave);

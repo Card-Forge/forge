@@ -3926,12 +3926,6 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     int discard = ((Integer) countZubera.execute()).intValue();
                     getTargetPlayer().discard(discard, this, false);
-                    
-                    //if(AllZone.HumanPlayer.equals(getTargetPlayer())) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(discard, this));
-                    //else {
-                     //   for(int i = 0; i < discard; i++)
-                      //      AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
-                    //}
                 }//resolve()
             };//SpellAbility
             

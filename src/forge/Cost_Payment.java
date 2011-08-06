@@ -289,7 +289,6 @@ public class Cost_Payment {
     		int discAmount = cost.getDiscardAmount();
     		
     		if (cost.getDiscardThis()){
-    			//AllZone.GameAction.discard(card, ability);
     			card.getController().discard(card, ability);
     			payDiscard = true;
     		}
@@ -513,11 +512,9 @@ public class Cost_Payment {
     		int discAmount = cost.getDiscardAmount();
     		
     		if (cost.getDiscardThis()){
-    			//AllZone.GameAction.discard(card, ability);
     			card.getController().discard(card, ability);
     		}
     		else if (discType.equals("Hand")){
-    			//AllZone.GameAction.discardHand(card.getController(), ability);
     			card.getController().discardHand(ability);
     		}
     		else{

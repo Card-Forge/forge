@@ -3980,7 +3980,7 @@ public class CardFactory_Instants {
                     for(Card c:list) {
                         AllZone.GameAction.sacrifice(c);
                     }
-                    card.getController().discardRandom(handList.size(), this);
+                    card.getController().discardHand(this);
                     
                     getTargetPlayer().loseLife(5, card);
                 }
@@ -4009,7 +4009,7 @@ public class CardFactory_Instants {
                 {
                     AllZone.GameAction.sacrifice(c);
                 }
-                AllZone.GameAction.discardRandom(card.getController(), handList.size());
+                card.getController().discardHand(sa);
             }
               
             };

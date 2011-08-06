@@ -1697,7 +1697,6 @@ public class GameActionUtil {
 							});
 							for(int j = 0; j < discard.size(); j++) {
 								Card choice = discard.get(j);
-								//AllZone.GameAction.discard(choice, this);
 								choice.getController().discard(choice, this);
 							}
 						} //resolve
@@ -7682,20 +7681,6 @@ public class GameActionUtil {
 				public void resolve() {
 					AllZone.ComputerPlayer.discard(this);
 					AllZone.HumanPlayer.discard(this);
-					/*PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-
-					CardList cardsInHand = new CardList(hand.getCards());
-
-					if(cardsInHand.size() > 0) {
-						Object o = AllZone.Display.getChoiceOptional("Select Card to discard",
-								cardsInHand.toArray());
-						Card c = (Card) o;
-						c.getController().discard(c, this);
-					}
-
-					AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
-					*/
-
 				}
 			}; // ability
 			ability.setStackDescription("Cunning Lethemancer - Everyone discards a card.");
@@ -11138,20 +11123,8 @@ public class GameActionUtil {
 			final Ability ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					PlayerZone Play = AllZone.getZone(Constant.Zone.Battlefield, player);
-					CardList hondlist = new CardList();
-					hondlist.addAll(Play.getCards());
-					hondlist = hondlist.getType("Shrine");
-					
-					opponent.discard(hondlist.size(), this, false);
-					/*
-					for(int j = 0; j < hondlist.size(); j++) {
-						if(opponent.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-						else {
-							AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
-						}
-					}
-					*/
+					CardList shrineList = AllZoneUtil.getPlayerTypeInPlay(player, "Shrine");
+					opponent.discard(shrineList.size(), this, false);
 				}
 			};// ability
 			
