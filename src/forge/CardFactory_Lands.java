@@ -3526,6 +3526,44 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Grove of the Burnwillows")) {
+        	
+            final Ability_Mana ability1 = new Ability_Mana(card, "tap, your opponent gains 1 life: add G") {
+				private static final long serialVersionUID = 5290938125518969678L;
+               
+                @Override
+                public void resolve() {
+                    AllZone.GameAction.gainLife(Constant.Player.Computer, 1);
+                    super.resolve();
+                }
+                
+                @Override
+				public String mana() {
+					return "G";
+            	}
+            };
+            
+            final Ability_Mana ability2 = new Ability_Mana(card, "tap, your opponent gains 1 life: add R") {
+				private static final long serialVersionUID = 5290938125518969689L;
+               
+                @Override
+                public void resolve() {
+                    AllZone.GameAction.gainLife(Constant.Player.Computer, 1);
+                    super.resolve();
+                }
+                
+                @Override
+				public String mana() {
+					return "R";
+            	}
+            };
+
+            card.addSpellAbility(ability1);
+            card.addSpellAbility(ability2);      
+        }//*************** END ************ END **************************
+
 
         //*************** START *********** START **************************
         if(cardName.equals("Kjeldoran Outpost")) {

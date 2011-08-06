@@ -1763,7 +1763,152 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(leavesPlay);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Crater Hellion")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList creatures = new CardList();
+                    
+                    creatures.addAll(hPlay.getCards());
+                    creatures.addAll(cPlay.getCards());
+                    creatures = creatures.getType("Creature");
+                    
+                    for(int i = 0; i < creatures.size(); i++) {
+                        Card crd = creatures.get(i);
+                        if(CardFactoryUtil.canDamage(card, crd) && !crd.equals(card)) crd.addDamage(4, card);
+                    }
 
+                }
+            };
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = 9072052875006010512L;
+                
+                public void execute() {
+                    ability.setStackDescription(card.getName() + " deals 4 damage to each other creature.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+            
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Magma Giant")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList creatures = new CardList();
+                    
+                    creatures.addAll(hPlay.getCards());
+                    creatures.addAll(cPlay.getCards());
+                    creatures = creatures.getType("Creature");
+                    
+                    for(int i = 0; i < creatures.size(); i++) {
+                        Card crd = creatures.get(i);
+                        if(CardFactoryUtil.canDamage(card, crd)) crd.addDamage(2, card);
+                    }
+        			AllZone.GameAction.addDamage(Constant.Player.Computer, card, 2);
+        			AllZone.GameAction.addDamage(Constant.Player.Human, card, 2);
+                }
+            };
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = 9072052875006010499L;
+                
+                public void execute() {
+                    ability.setStackDescription(card.getName() + " deals 2 damage to each creature and each player.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+            
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Thunder Dragon")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                	
+      				CardList all = new CardList();
+                      all.addAll(AllZone.Human_Play.getCards());
+                      all.addAll(AllZone.Computer_Play.getCards());
+                      all = all.filter(new CardListFilter()
+                      {
+                      	public boolean addCard(Card c)
+                      	{
+                      		return c.isCreature() && !c.getKeyword().contains("Flying") &&
+                      			   CardFactoryUtil.canDamage(card, c);
+                      	}
+                      });
+                      
+                      for(int i = 0; i < all.size(); i++)
+                          	all.get(i).addDamage(3, card);
+                      
+                }
+            };
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = 9072052875006010434L;
+                
+                public void execute() {
+                    ability.setStackDescription(card.getName() + " deals 3 damage to each creature without flying.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+            
+        }//*************** END ************ END **************************
+
+        //*************** START *********** START **************************
+        else if(cardName.equals("Cloudthresher")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+
+      				CardList all = new CardList();
+                      all.addAll(AllZone.Human_Play.getCards());
+                      all.addAll(AllZone.Computer_Play.getCards());
+                      all = all.filter(new CardListFilter()
+                      {
+                      	public boolean addCard(Card c)
+                      	{
+                      		return c.isCreature() && c.getKeyword().contains("Flying") &&
+                      			   CardFactoryUtil.canDamage(card, c);
+                      	}
+                      });
+                      
+                      for(int i = 0; i < all.size(); i++)
+                          	all.get(i).addDamage(2, card);
+                      
+                      AllZone.GameAction.addDamage(Constant.Player.Human, card, 2);
+                      AllZone.GameAction.addDamage(Constant.Player.Computer, card, 2);
+
+                }
+            };
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = 9072052875006010410L;
+                
+                public void execute() {
+                    ability.setStackDescription(card.getName() + " deals 2 damage to each creature with flying and each player.");
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+            
+            card.addSpellAbility(new Spell_Evoke(card, "2 G G") {
+                private static final long serialVersionUID = 5061298336319833911L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+            });
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Mulldrifter")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -8034,6 +8179,33 @@ public class CardFactory_Creatures {
             ability.setDescription("Sacrifice Mogg Fanatic: Mogg Fanatic deals 1 damage to target creature or player.");
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, new Command() {
                 private static final long serialVersionUID = 8283052965865884779L;
+                
+                public void execute() {
+                    AllZone.GameAction.sacrifice(card);
+                }
+            }, true, false));
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Bloodfire Colossus")) {
+            final Ability ability = new Ability(card, "R") {
+                
+                @Override
+                public void resolve() {
+        			int damage = 6;
+        			CardList all = AllZoneUtil.getCreaturesInPlay();
+        			for(Card c:all) {
+        				AllZone.GameAction.addDamage(c, card, damage);
+        			}
+        			AllZone.GameAction.addDamage(Constant.Player.Computer, card, damage);
+        			AllZone.GameAction.addDamage(Constant.Player.Human, card, damage);
+                }//resolve()
+            };//SpellAbility
+            
+            card.addSpellAbility(ability);
+            ability.setDescription("R: Sacrifice Bloodfire Colossus, Bloodfire Colossus deals 6 damage to each creature and each player.");
+            ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, new Command() {
+                private static final long serialVersionUID = 8283052965865884889L;
                 
                 public void execute() {
                     AllZone.GameAction.sacrifice(card);
@@ -14665,6 +14837,43 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Feral Hydra")) { 
+
+            SpellAbility spell = new Spell_Permanent(card) {
+                private static final long serialVersionUID = -11489323319L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    return super.canPlay() && 4 <= ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(card.getManaCost());
+                }
+            };
+             card.clearSpellAbility();
+             card.addSpellAbility(spell);
+            
+            final SpellAbility ability = new Ability(card, "3") {
+                @Override
+                public void resolve() {
+                	card.addCounter(Counters.P1P1,1);
+                }//resolve()
+            };
+            
+            ability.setDescription("3: put a +1/+1 counter on Feral Hydra. ");
+            ability.setStackDescription("Feral Hydra gets a +1/+1 counter. ");
+            card.addSpellAbility(ability);
+  
+            Command intoPlay = new Command() {
+                
+                private static final long serialVersionUID = 2559021590L;
+                
+                public void execute() {
+                	int XCounters = card.getXManaCostPaid();
+                	card.addCounter(Counters.P1P1, XCounters);
+
+                }//execute()
+            };//Command
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
         else if(cardName.equals("Shifting Wall") || cardName.equals("Maga, Traitor to Mortals")
@@ -14708,6 +14917,7 @@ public class CardFactory_Creatures {
                         	AllZone.Stack.add(ability);
                         }
                 	} 
+
                 }//execute()
             };//Command
             card.addComesIntoPlayCommand(intoPlay);
@@ -14820,6 +15030,212 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Spitting Hydra")) {      
+            SpellAbility spell = new Spell_Permanent(card) {
+                private static final long serialVersionUID = -11489323314L;
+                
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            final Ability ability = new Ability(card, "1 R") {
+                
+                @Override
+                public boolean canPlay() {
+                    return card.getCounters(Counters.P1P1) > 0 && super.canPlay();
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return getCreature().size() != 0;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    if(AllZone.Human_Life.getLife() < card.getCounters(Counters.P1P1)) setTargetPlayer(Constant.Player.Human);
+                    else {
+                        CardList list = getCreature();
+                        list.shuffle();
+                        setTargetCard(list.get(0));
+                    }
+                    card.subtractCounter(Counters.P1P1, 1); 
+                }//chooseTargetAI()
+                
+                CardList getCreature() {
+                    //toughness of 1
+                    CardList list = CardFactoryUtil.AI_getHumanCreature(1, card, true);
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return (1 == c.getKillDamage());
+                        }
+                    });
+                    return list;
+                }//getCreature()
+                
+                @Override
+                public void resolve() {
+                    if(getTargetCard() != null) {
+                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,
+                                card);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1,card);
+                }//resolve()
+                
+            };//SpellAbility
+            Input target = new Input() {
+                
+                private static final long serialVersionUID = 4246601245231656L;
+                
+                @Override
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select creature or player to target: ");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectPlayer(String player) {
+                	ability.setTargetPlayer(player);
+                	card.subtractCounter(Counters.P1P1, 1);
+                    AllZone.Stack.add(ability);
+                    stopSetNext(new ComputerAI_StackNotEmpty());	
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    if(AllZone.GameAction.isCardInZone(c, Hplay) || AllZone.GameAction.isCardInZone(c, Cplay)) {
+                    	card.subtractCounter(Counters.P1P1, 1);
+                    	ability.setTargetCard(c);
+                        AllZone.Stack.add(ability);
+                        stopSetNext(new ComputerAI_StackNotEmpty());
+                    }
+                }//selectCard()
+            };//Input
+            card.addSpellAbility(ability);
+            ability.setAfterPayMana(target);
+            Command intoPlay = new Command() {
+                
+                private static final long serialVersionUID = 255901529244894L;
+                
+                public void execute() {
+                    card.addCounter(Counters.P1P1, 4);                   
+                }//execute()
+            };//Command
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Molten Hydra")) {
+            
+            final Ability ability1 = new Ability(card, "1 R R") {
+                
+                @Override
+                public void resolve() {
+                	card.addCounter(Counters.P1P1,1);
+                }//resolve()
+                
+            };//SpellAbility
+            
+            ability1.setDescription("1 R R: put a +1/+1 counter on Molten Hydra. ");
+            ability1.setStackDescription("Molten Hydra gets a +1/+1 counter. ");
+            card.addSpellAbility(ability1);
+        	
+            final Ability_Tap ability2 = new Ability_Tap(card,"0") {
+                private static final long serialVersionUID = 2626619319289064289L;
+                
+                @Override
+                public boolean canPlay() {
+                    return card.getCounters(Counters.P1P1) > 0 && super.canPlay();
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return getCreature().size() != 0;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    if(AllZone.Human_Life.getLife() < card.getCounters(Counters.P1P1)) setTargetPlayer(Constant.Player.Human);
+                    else {
+                        CardList list = getCreature();
+                        list.shuffle();
+                        setTargetCard(list.get(0));
+                    }
+             //   card.subtractCounter(Counters.P1P1, total); 
+                }//chooseTargetAI()
+                
+                CardList getCreature() {
+
+                    //toughness of 1
+                    CardList list = CardFactoryUtil.AI_getHumanCreature(card.getCounters(Counters.P1P1), card, true);
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                        	int total = card.sumAllCounters();
+                            return (total >= c.getKillDamage());
+                        }
+                    });
+                    return list;
+                }//getCreature()
+                
+                @Override
+                public void resolve() {
+                	int total = card.sumAllCounters();
+                    if(getTargetCard() != null) {
+                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(total,
+                                card);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(total,card);
+                   card.subtractCounter(Counters.P1P1,total);
+                }//resolve()
+            };//SpellAbility
+            
+        Input target = new Input() {
+                
+                private static final long serialVersionUID = 4246601245231656L;
+                
+                @Override
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select creature or player to target: ");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectPlayer(String player) {
+                	ability2.setTargetPlayer(player);
+                    AllZone.Stack.add(ability2);
+                    stopSetNext(new ComputerAI_StackNotEmpty());
+                	//card.subtractCounter(Counters.P1P1, total);
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    if(AllZone.GameAction.isCardInZone(c, Hplay) || AllZone.GameAction.isCardInZone(c, Cplay)) {
+                    	ability2.setTargetCard(c);
+                        AllZone.Stack.add(ability2);
+                        stopSetNext(new ComputerAI_StackNotEmpty());
+                    	//card.subtractCounter(Counters.P1P1, total);
+                    }
+                }//selectCard()
+            };//Input
+
+            card.addSpellAbility(ability2);
+            ability2.setBeforePayMana(target);
+            ability2.setDescription("Tap: Remove all +1/+1 counters and deal damage equal to number of counters " +
+            		"removed to target creature or player.");
+            ability2.setStackDescription("Molten Hydra deals damage to number of counters on it to target creature or player.");
+        }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
         else if(cardName.equals("Auramancer") || cardName.equals("Monk Idealist")) {
