@@ -7596,7 +7596,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getCreature().size() != 0;
+                    return (getCreature().size() > 0);
                 }
                 
                 @Override
@@ -7609,6 +7609,11 @@ public class CardFactory implements NewConstants {
                 CardList getCreature() {
                     CardList list = new CardList(AllZone.Computer_Hand.getCards());
                     list = list.getType("Creature");
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return (c.getCMC() > 4);
+                        }
+                    });
                     return list;
                 }
                 
