@@ -6,4 +6,5 @@ K:stAnimateAll:Land:1/1:Creature:no colors:No Condition:All lands are 1/1 creatu
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/living_plane.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/107.jpg
 End

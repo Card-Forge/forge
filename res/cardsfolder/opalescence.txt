@@ -6,4 +6,5 @@ K:stAnimateAll:Enchantment.nonAura+Other:Count$CardManaCost/Count$CardManaCost:C
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opalescence.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/13.jpg
 End
