@@ -29,6 +29,7 @@ public class GameActionUtil {
 		upkeep_Drop_of_Honey();
 		upkeep_Genesis();
 		upkeep_Phyrexian_Arena();
+		upkeep_Fallen_Empires_Storage_Lands();
 		upkeep_Master_of_the_Wild_Hunt();
 		upkeep_Carnophage();
 		upkeep_Sangrophage();
@@ -9167,6 +9168,20 @@ public class GameActionUtil {
 			player.subtractLife(1,F_card);
 
 			AllZone.GameAction.checkStateEffects();
+		}
+	}// upkeep_Phyrexian_Arena
+	
+	private static void upkeep_Fallen_Empires_Storage_Lands() {
+		final Player player = AllZone.Phase.getActivePlayer();
+
+		CardList all = AllZoneUtil.getPlayerCardsInPlay(player, "Bottomless Vault");
+		all.add(AllZoneUtil.getPlayerCardsInPlay(player, "Dwarven Hold"));
+		all.add(AllZoneUtil.getPlayerCardsInPlay(player, "Hollow Trees"));
+		all.add(AllZoneUtil.getPlayerCardsInPlay(player, "Icatian Store"));
+		all.add(AllZoneUtil.getPlayerCardsInPlay(player, "Sand Silos"));
+		
+		for(Card land:all) {
+			if(land.isTapped()) land.addCounter(Counters.STORAGE, 1);
 		}
 	}// upkeep_Phyrexian_Arena
 

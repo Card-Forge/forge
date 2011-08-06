@@ -3618,6 +3618,75 @@ class CardFactory_Lands {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+      //*************** START ************ START **************************
+        else if(cardName.equals("Bottomless Vault") || cardName.equals("Dwarven Hold")
+        		|| cardName.equals("Hollow Trees") || cardName.equals("Icatian Store")
+        		|| cardName.equals("Sand Silos")) {
+        	final int[] num = new int[1];
+        	String shortTemp = "";
+        	if(cardName.equals("Bottomless Vault")) shortTemp = "B";
+        	if(cardName.equals("Dwarven Hold")) shortTemp = "R";
+        	if(cardName.equals("Hollow Trees")) shortTemp = "G";
+        	if(cardName.equals("Icatian Store")) shortTemp = "W";
+        	if(cardName.equals("Sand Silos")) shortTemp = "U";
+        	
+        	final String shortString = shortTemp;
+        	StringBuilder desc = new StringBuilder();
+        	desc.append("tap, Remove any number of storage counters from ");
+        	desc.append(cardName);
+        	desc.append(": Add ");
+        	desc.append(shortString);
+        	desc.append(" to your mana pool for each charge counter removed this way.");
+            
+            final Ability_Mana addMana = new Ability_Mana(card, desc.toString()) {
+				private static final long serialVersionUID = -7805885635696245285L;
+
+				@Override
+                public void undo() {
+                    card.addCounter(Counters.STORAGE, num[0]);
+                    card.untap();
+                }
+                
+                //@Override
+                public String mana() {
+                	String mana = "";
+                	for(int i = 0; i < num[0]; i++) {
+                		mana += shortString;
+                		mana += " ";
+                	}
+                    return mana.trim();
+                }
+                
+                @Override
+                public void resolve() {
+                    card.subtractCounter(Counters.STORAGE, num[0]);
+                    card.tap();
+                    super.resolve();
+                }
+            };
+            
+            Input runtime = new Input() {
+				private static final long serialVersionUID = -4990369861806627183L;
+
+				@Override
+                public void showMessage() {
+					num[0] = card.getCounters(Counters.STORAGE);
+                	String[] choices = new String[num[0]+1];
+                	for(int j=0;j<=num[0];j++) {
+                		choices[j] = ""+j;
+                	}
+                    String answer = (String)(AllZone.Display.getChoiceOptional(
+                            "Storage counters to remove", choices));
+                    num[0] = Integer.parseInt(answer);
+                    AllZone.Stack.add(addMana);
+                    stop();
+                }
+            };
+            
+            addMana.setBeforePayMana(runtime);
+            card.addSpellAbility(addMana);
+        }//*************** END ************ END **************************
+        
         return card;
     }
     

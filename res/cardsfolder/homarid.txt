@@ -6,5 +6,5 @@ PT:2/2
 K:etbCounter:TIDE:1  
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:CustomCounter.TIDE/1:Self:ASAP:No_Condition:ControllerUpkeep:At the beginning of your upkeep, put a tide counter on CARDNAME.
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Homarid.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/homarid.jpg
 End

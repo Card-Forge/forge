@@ -1,0 +1,10 @@
+Name:Icatian Store
+ManaCost:no cost
+Types:Land
+Text:At the beginning of your upkeep, if CARDNAME is tapped, put a storage counter on it.
+K:CARDNAME enters the battlefield tapped.
+K:You may choose not to untap CARDNAME during your untap step.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_store.jpg
+End
