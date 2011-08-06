@@ -4,7 +4,7 @@ Types:Creature Elf Druid
 Text:no text
 PT:1/1
 K:stSetPT:1:1:LevelGE1:1:2:LevelGE5:1:4:LEVEL 1-4 1/2 tap: Add G G to your mana pool. LEVEL 5+ 1/4 Elves you control have "Tap: Add G G to your mana pool."
-K:stPumpSelf:Creature.countersGE1LEVEL:0/0/SVar=Mana:No Condition:no text
+K:stPumpSelf:Creature.countersGE1LEVEL:0/0/SVar=Mana:isPresent Creature.Self+countersGE1LEVEL+countersLT5LEVEL:no text
 K:stPumpAll:Elf.YouCtrl:0/0/SVar=Mana:isPresent Creature.countersGE5LEVEL+Self:no text
 K:Level up:1 G
 K:maxLevel:5

@@ -5582,69 +5582,7 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability));
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if (cardName.equals("Kargan Dragonlord"))
-        {
-        	Cost abCost = new Cost("R", cardName, true);
-        	
-	        final SpellAbility ability = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = -2252408767635375616L;
 
-				@Override
-	            public boolean canPlayAI() {
-	                
-	                if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) return false;
-	                
-	                setTargetCard(card);
-	                    
-	                if((card.hasSickness() && (!card.getKeyword().contains("Haste"))) ) return false;
-	                else {
-	                	Random r = MyRandom.random;
-	                    if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) return CardFactoryUtil.AI_doesCreatureAttack(card);
-	                }
-	                return false;
-	            }
-	            
-	            @Override
-	            public boolean canPlay() {
-	                return card.getCounters(Counters.LEVEL) >= 8 && super.canPlay();
-	            }
-	            
-	            @Override
-	            public void resolve() {
-	                if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
-	                    final Card[] creature = new Card[1];
-	                    creature[0] = card;
-	                    
-	                    final Command EOT = new Command() {
-	                        
-							private static final long serialVersionUID = 3161373279207630319L;
-
-							public void execute() {
-	                            if(AllZone.GameAction.isCardInPlay(creature[0])) {
-	                                creature[0].addTempAttackBoost(-1);
-	                            }
-	                        }
-	                    };
-	                    
-	                    creature[0].addTempAttackBoost(1);
-
-	                    card.setAbilityUsed(card.getAbilityUsed() + 1);
-	                    AllZone.EndOfTurn.addUntil(EOT);
-	                }//if (card is in play)
-	            }//resolve()
-	        };//SpellAbility
-	        
-	        ability.setDescription("R: Kargan Dragonlord gets +1/+0 until end of turn. (LEVEL 8+)");
-	        //ability.setStackDescription(stDesc[0]);
-	        
-	        ability.setTargetCard(card);
-	        card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
           else if(cardName.equals("Sutured Ghoul")) {
         	  final int[] numCreatures = new int[1];
