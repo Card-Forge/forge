@@ -20,6 +20,7 @@ import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 import javax.swing.AbstractButton;
@@ -68,6 +69,33 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
     
     private JOptionPane              dlg;
     private JButton                  close;
+    
+    private long times[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private int tptr = 0;
+    private long lTime = System.currentTimeMillis();
+    private int getAverageTimePerCard() {
+    	int aTime = 0;
+    	int nz = 10;
+    	
+    	if (tptr > 9)
+    		tptr = 0;
+    	
+    	times[tptr] = System.currentTimeMillis() - lTime;
+    	lTime = System.currentTimeMillis();
+    	    	
+    	int tTime = 0;
+    	for (int i=0; i<10; i++) {
+    		tTime += times[i];
+    		if (times[i] == 0)
+    			nz--;
+    	}
+    	aTime = tTime / nz;
+    	
+    	tptr++;
+    	
+    	return aTime;
+    }
+    
     
     private Gui_DownloadSetPictures_LQ(mCard[] c) {
         this.cards = c;
@@ -120,7 +148,8 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
         p0.add(bar);
         bar.setStringPainted(true);
         //bar.setString(ForgeProps.getLocalized(BAR_BEFORE_START));
-        bar.setString(String.format(ForgeProps.getLocalized(card == cards.length? BAR_CLOSE:BAR_WAIT), this.card, cards.length));
+        bar.setString(card + "/" + cards.length);
+        //bar.setString(String.format(ForgeProps.getLocalized(card == cards.length? BAR_CLOSE:BAR_WAIT), this.card, cards.length));
         Dimension d = bar.getPreferredSize();
         d.width = 300;
         bar.setPreferredSize(d);
@@ -152,6 +181,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
     
     private void update(int card) {
         this.card = card;
+        
         final class Worker implements Runnable{
 			private int card;
 			Worker(int card){
@@ -160,9 +190,39 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
 
 			public void run() {
 		        fireStateChanged();
-		        bar.setString(String.format(ForgeProps.getLocalized(card == cards.length? BAR_CLOSE:BAR_WAIT), card,
-		                cards.length));
-		        System.out.println(card + "/" + cards.length);
+		        
+		        StringBuilder sb = new StringBuilder();
+		        
+		        int a = getAverageTimePerCard();
+		        
+		        if (card != cards.length) {
+			        sb.append(card + "/" + cards.length + " - ");
+		        	
+			        long t2Go = (cards.length - card) * a;
+	
+			        boolean secOnly = true;
+			        if (t2Go > 3600000) {
+			        	sb.append(String.format("%02d:", t2Go / 3600000));
+			        	t2Go = t2Go % 3600000;
+			        	secOnly = false;
+			        }
+			        if (t2Go > 60000) {
+			        	sb.append(String.format("%02d:", t2Go / 60000));
+			        	t2Go = t2Go % 60000;
+			        	secOnly = false;
+			        }
+			        if (!secOnly)
+			        	sb.append(String.format("%02d remaining.", t2Go / 1000));
+			        else
+			        	sb.append(String.format("0:%02d remaining.", t2Go / 1000));
+		        }
+		        else
+		        	sb.append(String.format(ForgeProps.getLocalized(BAR_CLOSE), card, cards.length));
+		        
+		        bar.setString(sb.toString());
+		        //bar.setString(String.format(ForgeProps.getLocalized(card == cards.length? BAR_CLOSE:BAR_WAIT), card,
+		        //        cards.length));
+		        System.out.println(card + "/" + cards.length + " - " + a);
 			}
 		};
 		EventQueue.invokeLater(new Worker(card));
@@ -188,6 +248,8 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
         BufferedOutputStream out;
         
         File base = ForgeProps.getFile(IMAGE_BASE);
+        
+        Random r = new Random();
         
         Proxy p = null;
         if(type == 0) p = Proxy.NO_PROXY;
@@ -264,9 +326,10 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
                 }
                 
                 // pause
+                
                 try
                 {
-	                Thread.sleep(2442);
+	                Thread.sleep(r.nextInt(1000) + 420);
                 }
                 catch (InterruptedException e)
                 {
@@ -332,7 +395,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
 	    					imgFN = CardUtil.buildFilename(c);
 	    					if (imgFN.equals("none") || (!imgFN.contains(SC3) && !imgFN.contains(SC2)))
 	    					{
-    							String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + n + ".full.jpg";
+    							String fn = GuiDisplayUtil.cleanStringMWS(c.getName()) + k + ".full.jpg";
     							CList.add(new mCard(SC3 + "/" + fn, URLBase + SC2 + "/" + Base64Coder.encodeString(fn, true), SC3));
 	    					}    							
 	    				}
