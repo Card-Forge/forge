@@ -10423,6 +10423,9 @@ public class GameActionUtil {
 		}
 	};
 
+	
+	
+	
 	public static Command Dakkon                      = new Command() {
 
 		private static final long serialVersionUID = 6863244333398587274L;
@@ -10475,6 +10478,50 @@ public class GameActionUtil {
 			return swamps.size();
 		}
 	};
+	
+	public static Command Vampire_Nocturnus                       = new Command() {
+
+		private static final long serialVersionUID = 666334034902503917L;
+		CardList                  gloriousAnthemList = new CardList();
+
+		public void execute() {
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for(int i = 0; i < list.size(); i++) {
+				c = list.get(i);
+				c.addSemiPermanentAttackBoost(-2);
+				c.addSemiPermanentDefenseBoost(-1);
+				c.removeExtrinsicKeyword("Flying");
+			}
+
+			// add +1/+1 to cards
+			list.clear();
+			PlayerZone[] zone = getZone("Vampire Nocturnus");
+
+			// for each zone found add +1/+1 to each card
+			for(int outer = 0; outer < zone.length; outer++) {
+				CardList creature = new CardList(
+						zone[outer].getCards());
+				creature = creature.getType("Vampire");
+
+				for(int i = 0; i < creature.size(); i++) {
+					c = creature.get(i);
+					if (CardFactoryUtil.getTopCard(c) != null)
+					{
+						if(CardUtil.getColors(CardFactoryUtil.getTopCard(c)).contains(
+								Constant.Color.Black)) {
+							c.addSemiPermanentAttackBoost(2);
+							c.addSemiPermanentDefenseBoost(1);
+							c.addExtrinsicKeyword("Flying");
+							gloriousAnthemList.add(c);
+						}
+					}//topCard!=null
+				}// for inner
+			}// for outer
+		}// execute()
+	}; // Vampire Nocturnus
+	
 
 	public static Command Dauntless_Dourbark          = new Command() {
 
@@ -15876,6 +15923,7 @@ public class GameActionUtil {
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Champions_Drake", Champions_Drake);
 		
+		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("People_of_the_Woods", People_of_the_Woods);
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);

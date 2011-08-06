@@ -68,6 +68,7 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Champion's Drake", new String[] {"Champions_Drake"});
 		cardToEffectsList.put("Soulsurge Elemental", new String[] {"Soulsurge_Elemental"});
+		cardToEffectsList.put("Vampire Nocturnus", new String[]{"Vampire_Nocturnus"});
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});
 		cardToEffectsList.put("Gaea's Avenger", new String[] {"Gaeas_Avenger"});
 		cardToEffectsList.put("People of the Woods", new String[] {"People_of_the_Woods"});

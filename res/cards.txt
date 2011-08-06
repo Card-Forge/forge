@@ -1,3 +1,10 @@
+Vampire Nocturnus
+1 B B B
+Creature Vampire
+As long as the top card of your library is black, Vampire Nocturnus and other Vampire creatures you control get +2/+1 and have flying.
+3/3
+Play with the top card of your library revealed.
+
 Goblin Spy
 R
 Creature Goblin
