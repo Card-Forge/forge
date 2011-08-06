@@ -138,6 +138,10 @@ public class GameAction {
     		return moveTo(AllZone.getZone(Constant.Zone.Exile, c.getOwner()), c);
     	}
     	
+    	if(c.hasKeyword("If CARDNAME is put into a graveyard this turn, its controller gets a poison counter.")) {
+    		c.getController().addPoisonCounters(1);
+    	}
+    	
     	if (AllZoneUtil.isCardInPlay("Planar Void")) {
     		CardList pVoids = AllZoneUtil.getCardsInPlay("Planar Void");
     		for(int i = 0; i < pVoids.size(); i++) {
