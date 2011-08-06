@@ -585,7 +585,71 @@ public class CardFactory implements NewConstants {
                 	{
                 		AllZone.GameAction.discardHand(discardingPlayer);
                 	}
-                	
+                	else if (DiscardMethod.startsWith("RevealYouChoose"))
+                	{
+                    	PlayerZone pzH = AllZone.getZone(Constant.Zone.Hand, discardingPlayer);
+                    	if (pzH.size() != 0)
+                    	{
+                		    CardList dPHand = new CardList(pzH.getCards());
+                		    CardList dPChHand = new CardList(dPHand.toArray());
+                		    
+                		    if (DiscardMethod.contains("/"))	// Restrict card choices
+                		    {
+                		    	int dot = DiscardMethod.indexOf("/");
+                		    	String dV = DiscardMethod.substring(dot + 1);
+                		    	String dValid[] = dV.split(",");
+                		    	
+                		    	dPChHand = dPHand.getValidCards(dValid);
+                		    }
+                		    
+	                		if (card.getController().equals(Constant.Player.Computer))
+	                		{
+	                			//AI
+	                			for (int i=0; i<nCards; i++)
+	                			{
+		                			if (dPChHand.size() > 0)
+		                			{
+		                				CardList dChoices = new CardList();
+			                				                			
+			                			if (DiscardMethod.contains("Creature") && !DiscardMethod.contains("nonCreature"))
+			                				dChoices.add(CardFactoryUtil.AI_getBestCreature(dPChHand));
+			                			
+		                				CardListUtil.sortByTextLen(dPChHand);
+		                				dChoices.add(dPChHand.get(0));
+		                				
+		                				CardListUtil.sortCMC(dPChHand);
+		                				dChoices.add(dPChHand.get(0));
+			                			
+			                			Card dC = dChoices.get(CardUtil.getRandomIndex(dChoices));
+		                				dPChHand.remove(dC);
+		                				
+		                				CardList dCs = new CardList();
+		                				dCs.add(dC);
+		                				AllZone.Display.getChoiceOptional("Computer has chosen", dCs.toArray());
+		                				
+			                			AllZone.GameAction.discard(dC);
+		                			}
+	                			}
+	                		}
+	                		else
+	                		{
+	                			//human
+	                			AllZone.Display.getChoiceOptional("Revealed computer hand", dPHand.toArray());
+	                			
+	                			for (int i=0; i<nCards; i++)
+	                			{
+	                				if (dPChHand.size() > 0)
+	                				{
+		                				Card dC = AllZone.Display.getChoice("Choose a card to be discarded", dPChHand.toArray());
+		                				
+		                				dPChHand.remove(dC);
+		                				AllZone.GameAction.discard(dC);
+	                				}
+	                			}
+	                		}
+                    	}
+                	}
+
                 	if (!Drawback[0].equals("none"))
                 	{
                 		CardFactoryUtil.doDrawBack(Drawback[0], nCards, card.getController(), AllZone.GameAction.getOpponent(card.getController()), discardingPlayer, card, card);
