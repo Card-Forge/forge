@@ -135,6 +135,12 @@ public abstract class Player extends MyObservable{
 				this.updateObservers();
 				GameActionUtil.executeLifeGainEffects(this, lifeGain, source);
 			}
+			
+			//Run triggers
+			HashMap<String,Object> runParams = new HashMap<String,Object>();
+			runParams.put("Player", this);
+			runParams.put("LifeAmount", lifeGain);
+			AllZone.TriggerHandler.runTrigger("LifeGained", runParams);
 		}
 		else System.out.println("Player - trying to gain negative or 0 life");
 
@@ -254,7 +260,7 @@ public abstract class Player extends MyObservable{
 	        HashMap<String,Object> runParams = new HashMap<String,Object>();
 	        runParams.put("DamageSource", source);
 	        runParams.put("DamageTarget",this);
-	        
+	        runParams.put("DamageAmount",damageToDo);
 	        AllZone.TriggerHandler.runTrigger("DamageDone", runParams);
         }
 	}

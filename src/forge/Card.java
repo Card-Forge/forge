@@ -941,13 +941,6 @@ public class Card extends MyObservable {
                 sb.append("\r\n");
             }
             
-            // Triggered abilities
-            for(Trigger trig : triggers)
-            {
-            	System.out.println("Adding triggerdesc");
-            	sb.append(trig.getMapParams().get("TriggerDescription").replace("CARDNAME", getName()) + "\r\n");
-            }
-            
             // Add SpellAbilities
             SpellAbility[] sa = getSpellAbility();
             for (int i = 0; i < sa.length; i++) {
@@ -1048,6 +1041,12 @@ public class Card extends MyObservable {
         sb.append("\r\n");
         sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
         sb.append("\r\n");
+        
+        // Triggered abilities
+        for(Trigger trig : triggers)
+        {
+        	sb.append(trig.toString() + "\r\n");
+        }
 
         SpellAbility[] sa = getSpellAbility();
         for(int i = 0; i < sa.length; i++) {
@@ -2885,6 +2884,13 @@ public class Card extends MyObservable {
             	if (isCreature())
             		GameActionUtil.executeCombatDamageToCreatureEffects(source, this, damageToAdd);
             	GameActionUtil.executeCombatDamageEffects(source, damageToAdd);
+            	
+            	//Run triggers
+                HashMap<String,Object> runParams = new HashMap<String,Object>();
+                runParams.put("DamageSource", source);
+                runParams.put("DamageTarget",this);
+                runParams.put("DamageAmount", damageToAdd);
+                AllZone.TriggerHandler.runTrigger("DamageDone", runParams);
             }
         	map.put(source, damageToAdd);
         }
@@ -3086,6 +3092,13 @@ public class Card extends MyObservable {
         damageToAdd = preventDamage(damageToAdd, source, false);
         
         addDamageAfterPrevention(damageToAdd,source);
+        
+        //Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("DamageSource", source);
+        runParams.put("DamageTarget", this);
+        runParams.put("DamageAmount", damageToAdd);
+        AllZone.TriggerHandler.runTrigger("DamageDone", runParams);
     }
     
     public void addDamageWithoutPrevention(final int damageIn, final Card source) {
@@ -3121,13 +3134,6 @@ public class Card extends MyObservable {
         	wither = true;
         
         GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
-        
-        //Run triggers
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("DamageSource", source);
-        runParams.put("DamageTarget",this);
-        
-        AllZone.TriggerHandler.runTrigger("DamageDone", runParams);
         
         if(AllZoneUtil.isCardInPlay(this) && wither) addCounterFromNonEffect(Counters.M1M1, damageToAdd);
         if(AllZoneUtil.isCardInPlay(this) && !wither) damage += damageToAdd;
