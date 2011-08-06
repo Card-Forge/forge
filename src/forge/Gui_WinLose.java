@@ -329,16 +329,27 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     	for (int i : winTurns)
     	{
     		System.out.println("Quest, won by turn:" + i);
-    		if (i != 0)
-    		{
-        		if (i == 1)
-        			creds += qdPrefs.getMatchRewardWinFirst();
-    			else if (i <= 5)
-    				creds += qdPrefs.getMatchRewardWinByFifth();
-    			else if (i <= 10)
-    				creds += qdPrefs.getMatchRewardWinByTen();
-    			else if (i <= 15)
-    				creds += qdPrefs.getMatchRewardWinByFifteen();
+			
+    		if (i != 0){
+    			int turnCredits = 0;
+    			
+        		if (i == 1){
+        			sb.append("Won in one turn!");
+        			turnCredits += qdPrefs.getMatchRewardWinFirst();
+        		}
+    			else if (i <= 5){
+    				sb.append("Won by turn 5!");
+    				turnCredits += qdPrefs.getMatchRewardWinByFifth();
+    			}
+    			else if (i <= 10){
+    				sb.append("Won by turn 10!");
+    				turnCredits += qdPrefs.getMatchRewardWinByTen();
+    			}
+    			else if (i <= 15){
+    				sb.append("Won by turn 15!");
+    				turnCredits += qdPrefs.getMatchRewardWinByFifteen();
+    			}
+        		sb.append(" Bonus: <b>+").append(turnCredits).append(" credits</b>.<br>");
     		}
     	}
     	
