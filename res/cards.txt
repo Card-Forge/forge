@@ -2,13 +2,13 @@ Burning Fields
 4 R
 Sorcery
 no text
-spDamageTgtOpp:5
+spDamageTgtOpp:5:Burning Fields deals 5 damage to target opponent.:Burning Fields - deals 5 damage
 
 Searing Flesh
 6 R
 Sorcery
 no text
-spDamageTgtOpp:7
+spDamageTgtOpp:7:Searing Flesh deals 7 damage to target opponent.:Searing Flesh - deals 7 damage
 
 Kiss of Death
 4 B B
