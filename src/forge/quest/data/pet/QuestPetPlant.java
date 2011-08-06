@@ -140,5 +140,11 @@ public class QuestPetPlant extends QuestPetAbstract {
     public void onPurchase() {
         AllZone.QuestData.getPetManager().addPlantLevel();
     }
-    
+
+    @Override
+    public boolean isAvailableForPurchase() {
+        QuestPetPlant plant = (QuestPetPlant) AllZone.QuestData.getPetManager().getPlant();
+
+        return plant == null || plant.getLevel() < plant.getMaxLevel();
+    }
 }
