@@ -10246,6 +10246,12 @@ public class GameActionUtil {
   	      		String Requirements = SpecialConditions.replaceAll("isValid ", "");
   	      		if (!SourceCard.isValid(Requirements, SourceCard.getController(), SourceCard)) return false;
   	      	}
+  	      	if(SpecialConditions.contains("isYourTurn")) {
+  	      		if( !AllZone.Phase.isPlayerTurn(SourceCard.getController()) ) return false;
+  	      	}
+  	      	if(SpecialConditions.contains("notYourTurn")) {
+  	      		if( !AllZone.Phase.isPlayerTurn(SourceCard.getController().getOpponent()) ) return false;
+  	      	}
   	      	return true;
 			
 		}
