@@ -1,7 +1,7 @@
 Name:Lodestone Bauble
 ManaCost:0
 Types:Artifact
-Text:tap, 1: Sacrifice Lodestone Bauble: Put up to four target basic land cards from a player's graveyard on top of his or her library in any order. That player draws a card at the beginning of the next turn's upkeep.
+Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lodestone_bauble.jpg

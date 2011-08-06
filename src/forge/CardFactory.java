@@ -8315,7 +8315,9 @@ public class CardFactory implements NewConstants {
         	 * turn's upkeep.
         	 */
 
-        	final Ability_Tap ability = new Ability_Tap(card, "1") {
+        	Ability_Cost abCost = new Ability_Cost("1 T Sac<1/CARDNAME>", cardName, true);
+        	Target target = new Target("Select target player", new String[]{"Player"});
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
         		private static final long serialVersionUID = -6711849408085138636L;
 
         		@Override
@@ -8336,7 +8338,7 @@ public class CardFactory implements NewConstants {
         			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
 
         			CardList lands = new CardList(grave.getCards());
-        			lands = lands.filter(basicLands);
+        			lands = lands.filter(AllZoneUtil.basicLands);
         			if(card.getController().equals(AllZone.HumanPlayer)){ 
         				//now, select up to four lands
         				int end = -1;
@@ -8366,8 +8368,7 @@ public class CardFactory implements NewConstants {
         					lib.add(list.get(i), i);
         				}
         			}
-        			//now, sacrifice Lodestone Bauble
-        			AllZone.GameAction.sacrifice(card);
+        			
         			/*
         			 * TODO - this draw is at End of Turn.  It should be at the beginning of next
         			 * upkeep when a mechanism is in place
@@ -8385,21 +8386,12 @@ public class CardFactory implements NewConstants {
         		private CardList getComputerLands() {
         			CardList list = new CardList(AllZone.Computer_Graveyard.getCards());
         			//probably no need to sort the list...
-        			return list.filter(basicLands);
+        			return list.filter(AllZoneUtil.basicLands);
         		}
-
-        		private CardListFilter basicLands = new CardListFilter() {
-        			public boolean addCard(Card c) {
-        				//the isBasicLand() check here may be sufficient...
-        				return c.isLand() && c.isBasicLand();
-        			}
-        		};
-
         	};//ability
 
-        	//ability.setStackDescription("Put up to 4 basic lands from target player's graveyeard to the top of their library.  Draw a card at beginning of next upkeep.");
+        	ability.setDescription(abCost+"Put up to four target basic land cards from a player's graveyard on top of his or her library in any order. That player draws a card at the beginning of the next turn's upkeep.");
         	card.addSpellAbility(ability);
-        	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
      
         
