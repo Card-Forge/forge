@@ -1,7 +1,7 @@
 Name:Skinwing
 ManaCost:4
 Types:Artifact Equipment
-Text:no text
+Text:Equipped creature gets +2/+2 and has flying.
 K:eqPump 6:+2/+2/Flying
 K:Living Weapon
 SVar:Rarity:Uncommon
