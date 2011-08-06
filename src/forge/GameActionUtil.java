@@ -15080,6 +15080,7 @@ public class GameActionUtil {
 
 	}; //Mortivore
 
+	/*
 	public static Command Cognivore                   = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
 
@@ -15104,7 +15105,8 @@ public class GameActionUtil {
 		}
 
 	}; //Cognivore
-
+	*/
+	/*
 	public static Command Cantivore                   = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
 
@@ -15126,6 +15128,7 @@ public class GameActionUtil {
 		}
 
 	}; //Cantivore
+	*/
 
 	public static Command Lhurgoyf                    = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
@@ -16388,11 +16391,11 @@ public class GameActionUtil {
 		commands.put("Bloodghast", Bloodghast);
 		commands.put("Broodwarden", Broodwarden);
 		
-		commands.put("Cantivore", Cantivore);
+		//commands.put("Cantivore", Cantivore);
 		commands.put("Caravan_Escort", Caravan_Escort);
 		commands.put("Champions_Drake", Champions_Drake);
 		commands.put("Coat_of_Arms", Coat_of_Arms);	
-		commands.put("Cognivore", Cognivore);
+		//commands.put("Cognivore", Cognivore);
 		commands.put("Conspiracy", Conspiracy);
 		commands.put("Covetous_Dragon", Covetous_Dragon);
 		commands.put("Crowd_of_Cinders", Crowd_of_Cinders);

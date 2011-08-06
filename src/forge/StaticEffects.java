@@ -33,11 +33,11 @@ public class StaticEffects
 		//cardToEffectsList.put("Broodstar", new String[] {"Master_of_Etherium"});
 		cardToEffectsList.put("Broodwarden", new String[] {"Broodwarden"});
 		
-		cardToEffectsList.put("Cantivore", new String[] {"Cantivore"});
+		//cardToEffectsList.put("Cantivore", new String[] {"Cantivore"});
 		cardToEffectsList.put("Caravan Escort", new String[] {"Caravan_Escort"});
 		cardToEffectsList.put("Champion's Drake", new String[] {"Champions_Drake"});
 		cardToEffectsList.put("Coat of Arms", new String[] {"Coat_of_Arms"});
-		cardToEffectsList.put("Cognivore", new String[] {"Cognivore"});
+		//cardToEffectsList.put("Cognivore", new String[] {"Cognivore"});
 		cardToEffectsList.put("Conspiracy", new String[] {"Conspiracy"});
 		cardToEffectsList.put("Covetous Dragon", new String[] {"Covetous_Dragon"});
 		cardToEffectsList.put("Crowd of Cinders", new String[] {"Crowd_of_Cinders"});
