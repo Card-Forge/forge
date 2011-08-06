@@ -17865,12 +17865,57 @@ public class CardFactory_Creatures {
 	               }
 	            };//SpellAbility
 	            card.addSpellAbility(a1);
-	            a1.setDescription("3, tap: Target player puts the top two cards of his or her library into his or her graveyard.");
+	            a1.setDescription("U, tap: Target player puts the top two cards of his or her library into his or her graveyard.");
 	            a1.setStackDescription("Player puts the top two cards of his or her library into his or her graveyard");
 	            a1.setBeforePayMana(new Input_PayManaCost(a1));
 	            a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
 	          }//*************** END ************ END **************************
 
+		     //*************** START *********** START **************************
+	          else if(cardName.equals("Cathartic Adept"))
+	          {
+	            final SpellAbility a1 = new Ability_Tap(card, "0")
+	            {
+					private static final long serialVersionUID = 2359247592519063187L;
+
+					public void resolve()
+	                {
+	                       String player = getTargetPlayer();
+	                       
+	                       PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	                       PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+	                       CardList libList = new CardList(lib.getCards());
+
+	                       int max = 1;
+	                       if (libList.size() < 1)
+	                          max = libList.size();
+	                       
+	                       for (int i=0;i<max;i++)
+	                       {
+	                          Card c = libList.get(i);
+	                          lib.remove(c);
+	                          grave.add(c);
+	                       }
+	               
+	               }
+	             
+	             
+	               public boolean canPlayAI()
+	               {
+	                  String player = getTargetPlayer();
+	                   PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	                   CardList libList = new CardList(lib.getCards());
+	                   return libList.size() > 0;
+	               }
+	            };//SpellAbility
+	            card.addSpellAbility(a1);
+	            a1.setDescription("tap: Target player puts the top card of his or her library into his or her graveyard.");
+	            a1.setStackDescription("Player puts the top card of his or her library into his or her graveyard");
+	            a1.setBeforePayMana(new Input_PayManaCost(a1));
+	            a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
+	          }//*************** END ************ END **************************
+
+	       
 	       	  //*************** START *********** START **************************
 	          else if (cardName.equals("Meddling Mage"))
 	          {

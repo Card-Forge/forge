@@ -18,6 +18,7 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+cathartic_adept.jpg         http://www.wizards.com/global/images/magic/general/cathartic_adept.jpg
 timbermaw_larva.jpg         http://www.wizards.com/global/images/magic/general/timbermaw_larva.jpg
 ghastlord_of_fugue.jpg      http://www.wizards.com/global/images/magic/general/ghastlord_of_fugue.jpg
 quietus_spike.jpg           http://www.wizards.com/global/images/magic/general/quietus_spike.jpg

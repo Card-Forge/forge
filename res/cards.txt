@@ -1,3 +1,9 @@
+Cathartic Adept
+U
+Creature Human Wizard
+no text
+1/1
+
 Timbermaw Larva
 3 G
 Creature Beast
