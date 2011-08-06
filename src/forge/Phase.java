@@ -7,6 +7,9 @@ import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Spell_Permanent;
+
 public class Phase extends MyObservable
 {
 	private int phaseIndex;
@@ -18,9 +21,7 @@ public class Phase extends MyObservable
     static int	   PlayerCreatureSpellCount;   
     static int	   ComputerSpellCount;
     static int	   ComputerCreatureSpellCount;
-    private static boolean	   Sac_Dauntless_Escort;
-    private static boolean	   Sac_Dauntless_Escort_Comp;
-    
+
     //Not sure these should be here but I can't think of a better place
     private static ArrayList<Integer> ManaDrain_BonusMana_Human = new ArrayList<Integer>();
     private static ArrayList<Integer> ManaDrain_BonusMana_AI = new ArrayList<Integer>();
@@ -594,21 +595,6 @@ public class Phase extends MyObservable
 		
 		return sb.toString();
 	}
-	
-	public static boolean canPlayDuringCombat() {
-		String phase = AllZone.Phase.getPhase();
-		ArrayList<String> validPhases = new ArrayList<String>();
-		validPhases.add(Constant.Phase.Combat_Begin);
-		validPhases.add(Constant.Phase.Combat_Declare_Attackers);
-		validPhases.add(Constant.Phase.Combat_Declare_Attackers_InstantAbility);
-		validPhases.add(Constant.Phase.Combat_Declare_Blockers);
-		validPhases.add(Constant.Phase.Combat_Declare_Blockers_InstantAbility);
-		validPhases.add(Constant.Phase.Combat_FirstStrikeDamage);
-		validPhases.add(Constant.Phase.Combat_Damage);
-		validPhases.add(Constant.Phase.Combat_End);
-		
-		return validPhases.contains(phase);
-	}
 
     public static void main(String args[]) {
         Phase phase = new Phase();
@@ -618,20 +604,22 @@ public class Phase extends MyObservable
         }
     }
 
-	public static void setSacDauntlessEscort(boolean sac_Dauntless_Escort) {
-		Sac_Dauntless_Escort = sac_Dauntless_Escort;
-	}
+	public static void increaseSpellCount(SpellAbility sp){
+		StormCount++;
 
-	public static boolean isSacDauntlessEscort() {
-		return Sac_Dauntless_Escort;
-	}
-
-	public static void setSacDauntlessEscortAI(boolean sac_Dauntless_Escort_Comp) {
-		Sac_Dauntless_Escort_Comp = sac_Dauntless_Escort_Comp;
-	}
-
-	public static boolean isSacDauntlessEscortAI() {
-		return Sac_Dauntless_Escort_Comp;
+		if (sp.getActivatingPlayer().isHuman()) {
+			PlayerSpellCount++;
+			if (sp instanceof Spell_Permanent && sp.getSourceCard().isCreature()) {
+				PlayerCreatureSpellCount++;
+			}
+		} 
+		
+		else {
+			ComputerSpellCount++;
+			if (sp instanceof Spell_Permanent && sp.getSourceCard().isCreature()) {
+				Phase.ComputerCreatureSpellCount++;
+			}
+		}
 	}
 
 	public static void setStormCount(int stormCount) {

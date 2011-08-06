@@ -5336,7 +5336,6 @@ public class GameActionUtil {
 		Valor.execute();
 		Brawn.execute();
 		Filth.execute();
-		Dauntless_Escort.execute();
 
 		Sacrifice_NoIslands.execute();
 		Sacrifice_NoForests.execute();
@@ -6454,78 +6453,6 @@ public class GameActionUtil {
 				}
 			}
 		}// execute()
-	};
-	
-	public static Command Dauntless_Escort = new Command() {
-		private static final long serialVersionUID = -2201201455269804L;
-		CardList  old = new CardList();	
-		public void execute() {
-
-			// Human Activates Dauntless Escort
-			PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.HumanPlayer);
-			CardList PlayerCreatureList = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
-			PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.ComputerPlayer);
-			CardList opponentCreatureList = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
-			if(Phase.isSacDauntlessEscort() == true) {
-				if(PlayerCreatureList.size() != 0) {
-					for(int i = 0; i < PlayerCreatureList.size(); i++) {
-						Card c = PlayerCreatureList.get(i);
-						c.removeExtrinsicKeyword("Indestructible");	
-						c.addExtrinsicKeyword("Indestructible");
-					}
-				}
-				if(opponentCreatureList.size() != 0) {
-					for(int i = 0; i < opponentCreatureList.size(); i++) {
-						Card c = opponentCreatureList.get(i);
-						if(c.getOwner().isHuman()) {
-							if(old.size() == 0) {
-								c.removeExtrinsicKeyword("Indestructible");	 
-								old.add(c);              			
-							}
-							for(int x = 0; x < old.size(); x++) {
-								if(old.get(x) == c) break;
-								c.removeExtrinsicKeyword("Indestructible");	 
-								old.add(c);
-							}
-						}
-					}
-				}
-			}            
-
-			// Computer Activates Dauntless Escort
-			PlayerPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.ComputerPlayer);
-			PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
-			PlayerCreatureList = PlayerCreatureList.getType("Creature");
-			opponentPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.HumanPlayer);
-			opponentCreatureList = new CardList(opponentPlayZone.getCards());
-			opponentCreatureList = opponentCreatureList.getType("Creature");
-			if(Phase.isSacDauntlessEscortAI() == true) {
-				if(PlayerCreatureList.size() != 0) {
-					for(int i = 0; i < PlayerCreatureList.size(); i++) {
-						Card c = PlayerCreatureList.get(i);
-						c.removeExtrinsicKeyword("Indestructible");	
-						c.addExtrinsicKeyword("Indestructible");
-					}
-				}
-				if(opponentCreatureList.size() != 0) {
-					for(int i = 0; i < opponentCreatureList.size(); i++) {
-						Card c = opponentCreatureList.get(i);
-						if(c.getOwner().isComputer()) {
-							if(old.size() == 0) {
-								c.removeExtrinsicKeyword("Indestructible");	 
-								old.add(c);              			
-							}
-							for(int x = 0; x < old.size(); x++) {
-								if(old.get(x) == c) break;
-								c.removeExtrinsicKeyword("Indestructible");	 
-								old.add(c);
-							}
-						}
-					}
-				}            
-			} 			
-		}// execute()
-
 	};
 
 	public static Command Liu_Bei                     = new Command() {

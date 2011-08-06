@@ -1480,57 +1480,6 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Dauntless Escort")) {
-        	final SpellAbility ability = new Ability(card, "0") {
-        		@Override
-        		public boolean canPlayAI() {
-			        PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-			        CardList PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
-			        PlayerCreatureList = PlayerCreatureList.getType("Creature");
-					PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-			        CardList opponentCreatureList = new CardList(opponentPlayZone.getCards());
-			        opponentCreatureList = opponentCreatureList.getType("Creature");
-                    return ((PlayerCreatureList.size() + 1 > 2* opponentCreatureList.size() + 1) && (Phase.isSacDauntlessEscortAI() == false) && (AllZone.Phase.getPhase().equals(Constant.Phase.Main1))) ;
-        		}
-               
-                final Command untilEOT = new Command() {
-                    private static final long serialVersionUID = 2701248867610L;
-                    
-                    public void execute() {
-                        if(card.getController().isHuman()) {
-                        	Phase.setSacDauntlessEscort(false);
-                        	} else {
-                        	Phase.setSacDauntlessEscortAI(false);  
-                        	}
-    			        PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-    			        CardList PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
-    			        PlayerCreatureList = PlayerCreatureList.getType("Creature");
-        				if(PlayerCreatureList.size() != 0) {
-        	                for(int i = 0; i < PlayerCreatureList.size(); i++) {
-        	                	Card c = PlayerCreatureList.get(i);
-        	                    c.removeExtrinsicKeyword("Indestructible");				
-        				}
-        					}
-                    }
-                };
-        		@Override
-        		public void resolve() {
-                    AllZone.GameAction.sacrifice(card);
-                    if(card.getController().isHuman()) {
-                    	Phase.setSacDauntlessEscort(true);
-                    }
-                    else Phase.setSacDauntlessEscortAI(true);	
-
-                    AllZone.EndOfTurn.addUntil(untilEOT);
-        		}
-        	};
-        	card.addSpellAbility(ability);
-            ability.setStackDescription("Sacrifice Dauntless Escort: Creatures you control are indestructible this turn.");
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Wojek Embermage")) {
         	Cost abCost = new Cost("T", cardName, true);

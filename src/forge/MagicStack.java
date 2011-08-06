@@ -29,13 +29,7 @@ public class MagicStack extends MyObservable {
 	private boolean frozen = false;
     private boolean bResolving = false;
     private boolean splitSecondOnStack = false;
-
-	private Object StormCount;
-	private Object PlayerSpellCount;
-	private Object PlayerCreatureSpellCount;
-	private Object ComputerSpellCount;
-	private Object ComputerCreatureSpellCount;
-
+    
 	public boolean isFrozen() {
 		return frozen;
 	}
@@ -106,8 +100,7 @@ public class MagicStack extends MyObservable {
 	}
 
 	public void clearFrozen() {
-		// TODO: frozen triggered abilities and undoable costs have nasty
-		// consequences
+		// TODO: frozen triggered abilities and undoable costs have nasty consequences
 		frozen = false;
 		frozenStack.clear();
 	}
@@ -691,20 +684,8 @@ public class MagicStack extends MyObservable {
 		this.updateObservers();
 		
 		if (sp.isSpell() && !sp.getSourceCard().isCopiedSpell()) {
-			Phase.setStormCount(Phase.getStormCount() + 1);
-			if (sp.getSourceCard().getController().isHuman()) {
-				Phase.PlayerSpellCount = Phase.PlayerSpellCount + 1;
-				if (sp.getSourceCard().isCreature()) {
-					Phase.PlayerCreatureSpellCount = Phase.PlayerCreatureSpellCount + 1;
-				}
-			} 
-			
-			else {
-				Phase.ComputerSpellCount = Phase.ComputerSpellCount + 1;
-				if (sp.getSourceCard().isCreature()) {
-					Phase.ComputerCreatureSpellCount = Phase.ComputerCreatureSpellCount + 1;
-				}
-			}
+			Phase.increaseSpellCount(sp);
+		
 			// attempt to counter human spell 
 
 			GameActionUtil.executePlayCardEffects(sp);
@@ -887,47 +868,7 @@ public class MagicStack extends MyObservable {
 		return a;
 	}
 
-	public void setStormCount(Object stormCount) {
-		StormCount = stormCount;
-	}
-
-	public Object getStormCount() {
-		return StormCount;
-	}
-
-	public void setPlayerCreatureSpellCount(Object playerCreatureSpellCount) {
-		PlayerCreatureSpellCount = playerCreatureSpellCount;
-	}
-
-	public Object getPlayerCreatureSpellCount() {
-		return PlayerCreatureSpellCount;
-	}
-
-	public void setPlayerSpellCount(Object playerSpellCount) {
-		PlayerSpellCount = playerSpellCount;
-	}
-
-	public Object getPlayerSpellCount() {
-		return PlayerSpellCount;
-	}
-
-	public void setComputerSpellCount(Object computerSpellCount) {
-		ComputerSpellCount = computerSpellCount;
-	}
-
-	public Object getComputerSpellCount() {
-		return ComputerSpellCount;
-	}
-
-	public void setComputerCreatureSpellCount(Object computerCreatureSpellCount) {
-		ComputerCreatureSpellCount = computerCreatureSpellCount;
-	}
-
-	public Object getComputerCreatureSpellCount() {
-		return ComputerCreatureSpellCount;
-	}
-
-    public boolean hasSimultaneousStackEntries()
+	public boolean hasSimultaneousStackEntries()
     {
         return simultaneousStackEntryList.size() > 0;
     }
@@ -935,21 +876,10 @@ public class MagicStack extends MyObservable {
     public void addSimultaneousStackEntry(SpellAbility sa)
     {
         simultaneousStackEntryList.add(sa);
-        /*
-        *Debug output.
-        System.out.println("STO add! Size:" + simultaneousStackEntryList.size());
-        */
     }
 
     public void chooseOrderOfSimultaneousStackEntryAll()
     {
-        /*
-        *Debug output.
-        if(simultaneousStackEntryList.size() > 0)
-        {
-            System.out.println("STO run! Size:" + simultaneousStackEntryList.size());
-        }
-        */
         chooseOrderOfSimultaneousStackEntry(AllZone.Phase.getPlayerTurn());
         chooseOrderOfSimultaneousStackEntry(AllZone.Phase.getPlayerTurn().getOpponent());
     }
@@ -1014,7 +944,7 @@ public class MagicStack extends MyObservable {
             if(activePlayerSAs.get(0).isTrigger())
                 AllZone.GameAction.playSpellAbility(activePlayerSAs.get(0));
             else
-            add(activePlayerSAs.get(0));
+            	add(activePlayerSAs.get(0));
             //AllZone.GameAction.playSpellAbility(activePlayerSAs.get(0));
         }
     }
