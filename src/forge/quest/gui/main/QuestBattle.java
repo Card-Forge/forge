@@ -236,17 +236,23 @@ public class QuestBattle extends QuestSelectablePanel {
         QuestData questData = AllZone.QuestData;
         String[] opponentNames = questData.getOpponents();
         for (String opponentName : opponentNames) {
-            try {
+
                 String oppIconName = opponentName.substring(0, opponentName.length() - 1).trim() + ".jpg";
                 ImageIcon icon = GuiUtils.getIconFromFile(oppIconName);
 
+            try {
                 opponentList.add(new QuestBattle(opponentName,
                         nameDeckMap.get(opponentName).difficulty,
                         nameDeckMap.get(opponentName).description,
                         icon));
             }
             catch (NullPointerException e) {
-                System.out.println("Caught NPE, Fix me:" + opponentName);
+                System.out.println("Invalid Deck, Fix me:" + opponentName);
+                opponentList.add(new QuestBattle(opponentName,
+                        "<<Unknown>>",
+                        "<<Unknown>>",
+                        icon));
+
             }
         }
 

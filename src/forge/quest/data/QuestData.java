@@ -163,7 +163,7 @@ public class QuestData {
     public String[] getOpponents(List<String> aiDeck) {
         Collections.shuffle(aiDeck);
 
-        return new String[]{aiDeck.get(0).toString(), aiDeck.get(1).toString(), aiDeck.get(2).toString()};
+        return new String[]{aiDeck.get(0), aiDeck.get(1), aiDeck.get(2)};
 
     }
 
@@ -173,8 +173,8 @@ public class QuestData {
         //remove any blank lines
         ArrayList<String> noBlankLines = new ArrayList<String>();
         String s;
-        for (int i = 0; i < list.size(); i++) {
-            s = list.get(i).toString().trim();
+        for (String aList : list) {
+            s = aList.trim();
             if (!s.equals("")) {
                 noBlankLines.add(s);
             }
@@ -188,12 +188,9 @@ public class QuestData {
         }
 
 
-        for (int i = 0; i < list.size(); i++)
-            /*if(!aiDecks.contains(list.get(i).toString())) ErrorViewer.showError(new Exception(),
-                    "QuestDataOld : readFile() error, file %s contains the invalid ai deck name: %s", file,
-                    list.get(i));*/ {
-            if (!aiDecks.contains(list.get(i).toString())) {
-                aiDecks.add(list.get(i).toString());
+        for (String aList : list) {
+            if (!aiDecks.contains(aList)) {
+                aiDecks.add(aList);
             }
         }
 
