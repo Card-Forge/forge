@@ -18,8 +18,9 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+callous_giant.jpg           http://www.wizards.com/global/images/magic/general/callous_giant.jpg
 underworld_dreams.jpg       http://www.wizards.com/global/images/magic/general/underworld_dreams.jpg
-phytohydra.jpg 				http://www.wizards.com/global/images/magic/general/phytohyrda.jpg
+phytohydra.jpg 				http://www.magickartenmarkt.de/img/cards/Ravnica_City_of_Guilds/phytohydra.jpg
 lichenthrope.jpg			http://www.wizards.com/global/images/magic/general/lichenthrope.jpg
 feast_of_flesh.jpg		    http://www.wizards.com/global/images/magic/general/feast_of_flesh.jpg
 first_volley.jpg		    http://www.wizards.com/global/images/magic/general/first_volley.jpg
@@ -59,11 +60,11 @@ ballynock_cohort.jpg        http://www.wizards.com/global/images/magic/general/b
 gelectrode.jpg              http://www.wizards.com/global/images/magic/general/gelectrode.jpg
 rathi_trapper.jpg           http://www.wizards.com/global/images/magic/general/rathi_trapper.jpg
 hollow_dogs.jpg             http://www.wizards.com/global/images/magic/general/hollow_dogs.jpg
-lurking_nightstalker.jpg    http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=6557
+lurking_nightstalker.jpg    http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/lurking_nightstalker.jpg
 vicious_kavu.jpg            http://www.wizards.com/global/images/magic/general/vicious_kavu.jpg
 ravenous_skirge.jpg         http://www.wizards.com/global/images/magic/general/ravenous_skirge.jpg
-wei_ambush_force.jpg        http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=10557
-charging_bandits.jpg        http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4212
+wei_ambush_force.jpg        http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/wei_ambush_force.jpg
+charging_bandits.jpg        http://www.magickartenmarkt.de/img/cards/Portal/charging_bandits.jpg
 knotvine_paladin.jpg        http://www.wizards.com/global/images/magic/general/knotvine_paladin.jpg
 witch_maw_nephilim.jpg      http://www.wizards.com/global/images/magic/general/witch_maw_nephilim.jpg
 scalpelexis.jpg             http://www.wizards.com/global/images/magic/general/scalpelexis.jpg
