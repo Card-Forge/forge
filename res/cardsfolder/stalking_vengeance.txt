@@ -8,5 +8,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X
 SVar:X:Triggered$CardPower
 SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dissension.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_vengeance.jpg
 End
