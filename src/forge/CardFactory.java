@@ -735,6 +735,10 @@ public class CardFactory implements NewConstants {
                             
                             if(!c.isToken()) {
                                 Card newCard = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
+                                
+                                newCard.setCurSetCode(c.getCurSetCode());
+                                newCard.setImageFilename(c.getImageFilename());
+                                
                                 hand.add(newCard);
                             }
                         }

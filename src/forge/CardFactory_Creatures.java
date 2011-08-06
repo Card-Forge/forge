@@ -357,7 +357,7 @@ public class CardFactory_Creatures {
                          
                          for (int i=0;i<multiplier;i++)
                          {
-	                                         	
+	                        //TODO: Use central copy methods
 	                        Card copy;
 	                        if(!getTargetCard().isToken()) {
 	                            //CardFactory cf = new CardFactory("cards.txt");
@@ -406,7 +406,8 @@ public class CardFactory_Creatures {
 	                            copy.addIntrinsicKeyword("Haste");
 	                        }
 	                        
-	                        
+	                        copy.setCurSetCode(getTargetCard().getCurSetCode());
+	                        copy.setImageFilename(getTargetCard().getImageFilename());
 	                        
 	                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 	                        play.add(copy);
@@ -10569,6 +10570,10 @@ public class CardFactory_Creatures {
                         
                         if(!c.isToken()) {
                             Card newCard = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
+                            
+                            newCard.setCurSetCode(c.getCurSetCode());
+                            newCard.setImageFilename(c.getImageFilename());
+                            
                             hand.add(newCard);
                         }
                     }
