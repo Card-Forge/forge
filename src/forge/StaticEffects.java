@@ -170,10 +170,7 @@ public class StaticEffects
 		cardToEffectsList.put("Sun Quan, Lord of Wu", new String[] {"Sun_Quan"});
 		cardToEffectsList.put("Kinsbaile Cavalier", new String[] {"Kinsbaile_Cavalier"});
 		cardToEffectsList.put("Wren's Run Packmaster", new String[] {"Wrens_Run_Packmaster"});
-		
-		cardToEffectsList.put("Sliver Legion", new String[] {"Sliver_Legion"});
 		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
-		
 		cardToEffectsList.put("Marrow-Gnawer", new String[] {"Marrow_Gnawer"});
 		cardToEffectsList.put("Mul Daya Channelers", new String[] {"Mul_Daya_Channelers"});
 		cardToEffectsList.put("Joiner Adept", new String[] {"Joiner_Adept"});

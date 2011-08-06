@@ -1,8 +1,10 @@
 Name:Sliver Legion
 ManaCost:W U B R G
 Types:Legendary Creature Sliver
-Text:All Sliver creatures get +1/+1 for each other Sliver in play.
+Text:no text
 PT:7/7
+K:stPumpAll:Creature.Sliver:X/X:no Condition:All Sliver creatures get +1/+1 for each other Sliver on the battlefield.
+SVar:X:Count$Valid Sliver.Other
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136146.jpg

@@ -13564,50 +13564,6 @@ public class GameActionUtil {
 		}// execute()
 	};
 
-	public static Command Sliver_Legion               = new Command() {
-		private static final long serialVersionUID   = -4564640511791858445L;
-
-		CardList                  gloriousAnthemList = new CardList();
-		int                       pump               = 0;
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-pump);
-				c.addSemiPermanentDefenseBoost(-pump);
-			}
-
-			// add +pump/+pump to cards
-			list.clear();
-			//PlayerZone[] zone = getZone("Sliver Legion");
-
-			// get all Slivers
-			CardList allSliver = AllZoneUtil.getTypeInPlay("Sliver");
-			pump = allSliver.size() - 1;  //it's for each *other* Sliver in play
-			
-			//slapshot5 - outer loop not needed.  This applies to *all* Slivers
-			// for each zone found add +pump/+pump to each card
-			/*
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Sliver");
-				*/
-
-				for(int i = 0; i < allSliver.size(); i++) {
-					c = allSliver.get(i);
-					c.addSemiPermanentAttackBoost(pump);
-					c.addSemiPermanentDefenseBoost(pump);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			//}// for outer
-		}// execute()
-	}; // Sliver_Legion
-
 	public static Command Serra_Avatar                = new Command() {
 		private static final long serialVersionUID = -7560281839252561370L;
 
@@ -19899,13 +19855,6 @@ public class GameActionUtil {
 
 		commands.put("Rolling_Stones", Rolling_Stones);
 		commands.put("Kinsbaile_Cavalier", Kinsbaile_Cavalier);
-		
-		////////////////////
-
-		commands.put("Sliver_Legion", Sliver_Legion);
-		
-		///////////////////
-		
 		commands.put("Meddling_Mage", Meddling_Mage);
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
