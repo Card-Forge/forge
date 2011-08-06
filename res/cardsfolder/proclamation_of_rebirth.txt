@@ -1,0 +1,9 @@
+Name:Proclamation of Rebirth
+ManaCost:2 W
+Types:Sorcery
+Text:no text
+A:SP$Retrieve | Cost$ 2 W | TargetMin$ 0 | TargetMax$ 3 | Destination$ Battlefield | TgtPrompt$ Choose target creature card with converted mana cost 1 or less in your graveyard | ValidTgts$ Creature.cmcLE1+YouCtrl | SpellDescription$ Return up to three target creature cards with converted mana cost 1 or less from your graveyard to the battlefield.
+A:AB$Retrieve | Cost$ 5 W | ActivatingZone$ Hand | Destination$ Battlefield | TgtPrompt$ Choose target creature card with converted mana cost 1 or less in your graveyard | ValidTgts$ Creature.cmcLE1+YouCtrl | ActivationLimit$ 1 | PlayerTurn$ True | ActivatingPhases$ Upkeep | PrecostDesc$Forecast - |SpellDescription$ Return target creature card with converted mana cost 1 or less from your graveyard to the battlefield. (Activate this ability only during your upkeep and only once each turn.)
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/proclamation_of_rebirth.jpg
+End
