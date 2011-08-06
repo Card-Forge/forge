@@ -113,8 +113,11 @@ public class GameAction {
         */
     }
     
+    @Deprecated
     public void mill(Player player, int n)
     {
+    	player.mill(n);
+    	/*
     	CardList lib = AllZoneUtil.getPlayerCardsInLibrary(player);
 		
         int max = Math.min(n, lib.size());
@@ -122,6 +125,7 @@ public class GameAction {
         for(int i = 0; i < max; i++) {
             AllZone.GameAction.moveToGraveyard(lib.get(i));
         }
+        */
     }
     
     /*

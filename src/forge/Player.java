@@ -393,6 +393,16 @@ public abstract class Player extends MyObservable{
     
     public abstract void discardUnless(int num, String uType, SpellAbility sa);
     
+    public void mill(int n) {
+    	CardList lib = AllZoneUtil.getPlayerCardsInLibrary(this);
+
+    	int max = Math.min(n, lib.size());
+
+    	for(int i = 0; i < max; i++) {
+    		AllZone.GameAction.moveToGraveyard(lib.get(i));
+    	}
+    }
+    
     public abstract void handToLibrary(final int numToLibrary, String libPos);
     
     ////////////////////////////////
