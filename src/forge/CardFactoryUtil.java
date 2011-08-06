@@ -978,7 +978,7 @@ public class CardFactoryUtil
 	    	  list = list.filter(new CardListFilter()
 	    	  {
 				public boolean addCard(Card c) {
-					return (c.getType().contains("Mercenary") || c.getKeyword().contains("Changeling")) && c.isPermanent() ;
+					return ( (c.getType().contains("Mercenary") || c.getKeyword().contains("Changeling")) ) && c.isPermanent() ;
 				}  
 	    	  });
 	    	  
@@ -1082,7 +1082,7 @@ public class CardFactoryUtil
 	    	  list = list.filter(new CardListFilter()
 	    	  {
 				public boolean addCard(Card c) {
-					return (c.getType().contains("Rebel") || c.getKeyword().contains("Changeling")) && c.isPermanent() ;
+					return ( (c.getType().contains("Rebel") || c.getKeyword().contains("Changeling"))) && c.isPermanent() ;
 				}  
 	    	  });
 	    	  

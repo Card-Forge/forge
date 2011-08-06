@@ -1,5 +1,6 @@
 package forge;
-    import java.util.*;
+
+import java.util.*;
 
     //@SuppressWarnings("unused") // java.util.*
 	public class InputControl extends MyObservable implements java.io.Serializable
@@ -182,6 +183,36 @@ package forge;
            }
            else if(phase.equals(Constant.Phase.End_Of_Turn))
            {
+        	  System.out.println("Cache size: " + ImageCache.cache.size());
+        	  
+        	  CardList visibleCards = new CardList();
+        	  PlayerZone hPlay = AllZone.Human_Play;
+        	  PlayerZone hand = AllZone.Human_Hand;
+        	  PlayerZone cPlay = AllZone.Computer_Play;
+        	  
+        	  visibleCards.addAll(hPlay.getCards());
+        	  visibleCards.addAll(hand.getCards());
+        	  visibleCards.addAll(cPlay.getCards());
+        	  
+        	  ArrayList<String> list = new ArrayList<String>();
+        	  
+        	  Iterator<String> iter = ImageCache.cache.keySet().iterator();
+        	  while(iter.hasNext()) {
+        			String cardName = iter.next();	
+        			if ( !(cardName.startsWith("Swamp") || cardName.startsWith("Mountain") || cardName.startsWith("Island")
+        				|| cardName.startsWith("Plains") || cardName.startsWith("Forest")) &&
+        				visibleCards.getImageName(cardName).size() == 0 ) {
+        				list.add(cardName);
+        			}
+        	  }
+        	  
+        	  for (String s : list)
+        	  {
+        		ImageCache.cache.remove(s);
+  				System.out.println("Removing " + s + " from cache.");
+        	  }
+        	  
+        	  
               if(AllZone.Display.stopEOT())
                 return new Input_EOT();
               else

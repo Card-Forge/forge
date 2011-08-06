@@ -102,6 +102,17 @@ public class CardList implements Iterable<Card>
 
 	return c;
     }
+    
+    public CardList getImageName(String name)
+    {
+		CardList c = new CardList();
+	
+		for(int i = 0; i < size(); i++)
+		    if(getCard(i).getImageName().equals(name))
+			c.add(getCard(i));
+	
+		return c;
+    }
     //cardType is like "Land" or "Goblin", returns a new CardList that is a subset of current CardList
     public CardList getType(String cardType)
     {

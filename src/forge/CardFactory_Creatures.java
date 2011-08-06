@@ -3747,12 +3747,10 @@ public class CardFactory_Creatures {
 	          return false;
 	        }
 	        //because this card has Flash
-	        public boolean canPlay() 
+	        public boolean canPlay()
 	        {
-	        	if (!AllZone.GameAction.isCardInPlay(card))
-	        		return true;
-	        	else
-	        		return false;
+	        	return AllZone.GameAction.isCardInZone(card, AllZone.Human_Hand) ||
+	   					AllZone.GameAction.isCardInZone(card, AllZone.Computer_Hand);
 	        }
 	      });
 	    }//*************** END ************ END **************************

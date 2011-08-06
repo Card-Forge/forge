@@ -584,7 +584,17 @@ public class CombatUtil
 		PlayerZone play = AllZone.getZone(c);
 		CardList clist = new CardList(play.getCards());
 		clist = clist.getName("Umezawa's Jitte");
-		Card jitte = clist.get(0);
+		Card jitte;
+		if(clist.size() > 0)
+			jitte = clist.get(0);
+		else //jitte belongs to opponent
+		{
+			PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(c.getController()));
+			CardList crdList = new CardList(oppPlay.getCards());
+			crdList.getName("Umezawa's Jitte");
+			jitte = crdList.get(0);
+		}
+		
 		jitte.addCounter(Counters.CHARGE, 2);
 	  }
   }

@@ -219,7 +219,7 @@
       <object class="java.awt.Rectangle"> 
        <int>254</int> 
        <int>0</int> 
-       <int>902</int> 
+       <int>926</int> 
        <int>827</int> 
       </object> 
      </void> 
@@ -230,7 +230,7 @@
          <object class="java.awt.Rectangle"> 
           <int>254</int> 
           <int>0</int> 
-          <int>902</int> 
+          <int>926</int> 
           <int>147</int> 
          </object> 
         </void> 
@@ -251,7 +251,7 @@
          <object class="java.awt.Rectangle"> 
           <int>254</int> 
           <int>147</int> 
-          <int>902</int> 
+          <int>926</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -266,7 +266,7 @@
          <object class="java.awt.Rectangle"> 
           <int>254</int> 
           <int>157</int> 
-          <int>902</int> 
+          <int>926</int> 
           <int>169</int> 
          </object> 
         </void> 
@@ -287,7 +287,7 @@
          <object class="java.awt.Rectangle"> 
           <int>254</int> 
           <int>326</int> 
-          <int>902</int> 
+          <int>926</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -302,8 +302,8 @@
          <object class="java.awt.Rectangle"> 
           <int>254</int> 
           <int>336</int> 
-          <int>902</int> 
-          <int>154</int> 
+          <int>926</int> 
+          <int>187</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -322,8 +322,8 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>254</int> 
-          <int>490</int> 
-          <int>902</int> 
+          <int>523</int> 
+          <int>926</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -337,9 +337,9 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>254</int> 
-          <int>500</int> 
-          <int>902</int> 
-          <int>178</int> 
+          <int>533</int> 
+          <int>926</int> 
+          <int>145</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -359,7 +359,7 @@
          <object class="java.awt.Rectangle"> 
           <int>254</int> 
           <int>678</int> 
-          <int>902</int> 
+          <int>926</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -374,7 +374,7 @@
          <object class="java.awt.Rectangle"> 
           <int>254</int> 
           <int>688</int> 
-          <int>902</int> 
+          <int>926</int> 
           <int>139</int> 
          </object> 
         </void> 
@@ -408,7 +408,7 @@
     <object class="org.jdesktop.swingx.MultiSplitLayout$Divider"> 
      <void property="bounds"> 
       <object class="java.awt.Rectangle"> 
-       <int>1156</int> 
+       <int>1180</int> 
        <int>0</int> 
        <int>10</int> 
        <int>827</int> 
@@ -423,9 +423,9 @@
     <object id="MultiSplitLayout$Split3" class="org.jdesktop.swingx.MultiSplitLayout$Split"> 
      <void property="bounds"> 
       <object class="java.awt.Rectangle"> 
-       <int>1166</int> 
+       <int>1190</int> 
        <int>0</int> 
-       <int>274</int> 
+       <int>250</int> 
        <int>827</int> 
       </object> 
      </void> 
@@ -434,9 +434,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Leaf"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>1166</int> 
+          <int>1190</int> 
           <int>0</int> 
-          <int>274</int> 
+          <int>250</int> 
           <int>409</int> 
          </object> 
         </void> 
@@ -455,9 +455,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Divider"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>1166</int> 
+          <int>1190</int> 
           <int>409</int> 
-          <int>274</int> 
+          <int>250</int> 
           <int>10</int> 
          </object> 
         </void> 
@@ -470,9 +470,9 @@
        <object class="org.jdesktop.swingx.MultiSplitLayout$Leaf"> 
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
-          <int>1166</int> 
+          <int>1190</int> 
           <int>419</int> 
-          <int>274</int> 
+          <int>250</int> 
           <int>408</int> 
          </object> 
         </void> 

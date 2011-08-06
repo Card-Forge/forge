@@ -1882,17 +1882,15 @@ class CardFactory_Equipment {
 				}
 	        };
 	        
-	        boost.setDescription("Remove a charge counter from Umezawa's Jitte: Equipped creature gets +2/+2 until end of turn.");
-	        boost.setStackDescription(cardName + " - Equipped creature gets +2/+2 untin end of turn.");
+	       boost.setDescription("Remove a charge counter from Umezawa's Jitte: Equipped creature gets +2/+2 until end of turn.");
+	       boost.setStackDescription(cardName + " - Equipped creature gets +2/+2 untin end of turn.");
 	        
-	       
 	       equip.setBeforePayMana(runtime);
 	       equip.setDescription("Equip: 2");
 	       card.addSpellAbility(equip);
 	       card.addSpellAbility(boost);
 	       card.addSpellAbility(negBoost);
 	       card.addSpellAbility(gainLife);
-	       
 
 	    } //*************** END ************ END **************************
 	    
