@@ -185,6 +185,7 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Peel from Reality")) {
             final Card[] target = new Card[2];
@@ -333,46 +334,6 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("About Face") || cardName.equals("Inside Out") || cardName.equals("Transmutation") || cardName.equals("Twisted Image")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -5744842090293911111L;
-                
-                @Override
-                public void resolve() {
-                    //in case ability is played twice
-                    final int[] oldAttack = new int[1];
-                    final int[] oldDefense = new int[1];
-                    
-                    final Card card[] = new Card[1];
-                    card[0] = getTargetCard();
-                    
-                    oldAttack[0] = card[0].getBaseAttack();
-                    oldDefense[0] = card[0].getBaseDefense();
-                    
-                    card[0].setBaseAttack(oldDefense[0]);
-                    card[0].setBaseDefense(oldAttack[0]);
-                    
-                    //EOT
-                    final Command untilEOT = new Command() {
-                        private static final long serialVersionUID = 7236360479349324099L;
-                        
-                        public void execute() {
-                            card[0].setBaseAttack(oldAttack[0]);
-                            card[0].setBaseDefense(oldDefense[0]);
-                        }
-                    };
-                    
-                    AllZone.EndOfTurn.addUntil(untilEOT);
-                }//resolve()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
-		*/
 
         //*************** START *********** START **************************
         else if(cardName.equals("Crib Swap")) {
@@ -427,63 +388,8 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Entomb")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 4724906962713222211L;
-                
-                @Override
-                public void resolve() {
-                	Player player = card.getController();
-                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
-                    else computerResolve();
-                }
-                
-                public void humanResolve() {
-                    Object check = AllZone.Display.getChoiceOptional("Select card",
-                            AllZone.Human_Library.getCards());
-                    if(check != null) {
-                        PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                        AllZone.GameAction.moveTo(grave, (Card) check);
-                    }
-                    AllZone.HumanPlayer.shuffle();
-                }
-                
-                public void computerResolve() {
-                    Card[] library = AllZone.Computer_Library.getCards();
-                    CardList list = new CardList(library);
-                    
-
-                    //pick best creature
-                    Card c = CardFactoryUtil.AI_getBestCreature(list);
-                    if(c == null) c = library[0];
-                    //System.out.println("comptuer picked - " +c);
-                    AllZone.Computer_Library.remove(c);
-                    AllZone.Computer_Graveyard.add(c);
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    
-                    return library.getCards().length != 0;
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList creature = new CardList();
-                    creature.addAll(AllZone.Computer_Library.getCards());
-                    creature = creature.getType("Creature");
-                    return creature.size() != 0;
-                }
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        */
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Beacon of Destruction")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 6653675303299939465L;
@@ -519,62 +425,6 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Whispers of the Muse")) {
-            final SpellAbility spell_one = new Spell(card) {
-                
-                private static final long serialVersionUID = 8341386638247535343L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                	card.getController().drawCard();
-                }//resolve()
-            };//SpellAbility
-            
-            final SpellAbility spell_two = new Spell(card) {
-                
-                private static final long serialVersionUID = -131686114078716307L;
-                
-                @Override
-                public void resolve() {
-                	card.getController().drawCard();
-                    done();
-                }//resolve()
-                
-                void done() {
-                    //return card to the hand
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    AllZone.GameAction.moveTo(hand, card);
-                }
-            };//SpellAbility
-            spell_two.setManaCost("5 U");
-            spell_two.setAdditionalManaCost("5");
-            
-            spell_one.setDescription("Draw a card.");
-            
-            StringBuilder sb1 = new StringBuilder();
-            sb1.append(cardName).append(" - ").append(card.getController()).append(" draws a card.");
-            spell_one.setStackDescription(sb1.toString());
-            
-            spell_two.setDescription("Buyback 5 (You may pay an additional 5 as you cast this spell. If you do, put this card into your hand as it resolves.)");
-            
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(cardName).append(" - (Buyback) ").append(card.getController()).append(" draws a card.");
-            spell_two.setStackDescription(sb2.toString());
-            spell_two.setIsBuyBackAbility(true);
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell_one);
-            card.addSpellAbility(spell_two);
-            
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sprout Swarm")) {
@@ -610,7 +460,6 @@ public class CardFactory_Instants {
             
             spell_one.setDescription("Put a 1/1 green Saproling token into play.");
             spell_two.setDescription("Buyback 3 (You may pay an additional 3 as you cast this spell. If you do, put this card into your hand as it resolves.)");
-            // spell_two.setDescription("Buyback 3 - Pay 4G, put this card into your hand as it resolves.");
             
             spell_one.setStackDescription("Sprout Swarm - Put a 1/1 green Saproling token into play");
             spell_two.setStackDescription("Sprout Swarm - Buyback, Put a 1/1 green Saproling token into play");
@@ -622,115 +471,6 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell_two);
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Ensnare")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -5170378205496330425L;
-                
-                @Override
-                public void resolve() {
-                    CardList creats = AllZoneUtil.getCreaturesInPlay();
-                    for(int i = 0; i < creats.size(); i++)
-                        creats.get(i).tap();
-                }//resolve()
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };
-            spell.setDescription("Tap all creatures.");
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - Tap all creatures");
-            spell.setStackDescription(sb.toString());
-            
-            final SpellAbility bounce = new Spell(card) {
-                private static final long serialVersionUID = 6331598238749406160L;
-                
-                @Override
-                public void resolve() {
-                    CardList creats = AllZoneUtil.getCreaturesInPlay();
-                    for(int i = 0; i < creats.size(); i++)
-                        creats.get(i).tap();
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    CardList list = new CardList(play.getCards());
-                    list = list.getType("Island");
-                    return list.size() >= 2;
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-            };
-            bounce.setDescription("You may return two Islands you control to their owner's hand rather than pay Ensnare's mana cost.");
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(card.getName()).append(" - Tap all creatures.");
-            bounce.setStackDescription(sb2.toString());
-            
-            bounce.setManaCost("0");
-            
-            final Input bounceIslands = new Input() {
-                private static final long serialVersionUID = -8511915834608321343L;
-                int                       stop             = 2;
-                int                       count            = 0;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select an Island");
-                    ButtonUtil.disableAll();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    if(c.getType().contains("Island") && zone.is(Constant.Zone.Battlefield)) {
-                        AllZone.GameAction.moveToHand(c);
-                        
-                        count++;
-                        if(count == stop) {
-                            AllZone.Stack.add(bounce);
-                            stop();
-                        }
-                    }
-                }//selectCard()
-            };
-            
-            bounce.setBeforePayMana(bounceIslands);
-            
-            Command bounceIslandsAI = new Command() {
-                private static final long serialVersionUID = 6399831162328201755L;
-                
-                public void execute() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    CardList list = new CardList(play.getCards());
-                    list = list.getType("Island");
-                    //TODO: sort by tapped
-                    
-                    for(int i = 0; i < 2; i++) {
-                        AllZone.GameAction.moveToHand(list.get(i));
-                    }
-                }
-            };
-            
-            bounce.setBeforePayManaAI(bounceIslandsAI);
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(bounce);
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        */
-
         
         //*************** START *********** START **************************
         else if(cardName.equals("Astral Steel")) {
@@ -823,7 +563,8 @@ public class CardFactory_Instants {
         	spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END ************************** 
         
-      //*************** START *********** START **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Reaping the Graves")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -57014445262924814L;
@@ -974,14 +715,11 @@ public class CardFactory_Instants {
             spell_two.setAdditionalManaCost("3");
             
             spell_one.setDescription("Copy target instant or sorcery spell. You may choose new targets for the copy.");
-            // spell_one.setStackDescription(cardName + " - " + card.getController() + "Copies " + spell_one.getTargetCard());
             StringBuilder sbOne = new StringBuilder();
             sbOne.append(cardName).append(" - ").append(card.getController()).append(" Copies ").append(spell_one.getTargetCard());
             spell_one.setStackDescription(sbOne.toString());
             
-            // spell_two.setDescription("Buyback 3 - Pay 4 R R , put this card into your hand as it resolves.");
             spell_two.setDescription("Buyback 3 (You may pay an additional 3 as you cast this spell. If you do, put this card into your hand as it resolves.)");
-            // spell_two.setStackDescription(cardName + " - (Buyback) " + card.getController() + "Copies " + spell_two.getTargetCard());
             StringBuilder sbTwo = new StringBuilder();
             sbTwo.append(cardName).append(" - (Buyback) ").append(card.getController()).append(" Copies ").append(spell_two.getTargetCard());
             
@@ -1345,15 +1083,7 @@ public class CardFactory_Instants {
                 @Override
                 public void resolve() {
                 	card.getController().drawCards(1);
-                    CardList count = new CardList();
-                    count.addAll(AllZone.Human_Graveyard.getCards());
-                    count.addAll(AllZone.Computer_Graveyard.getCards());
-                    count = count.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.getName().equals("Accumulated Knowledge");
-                        }
-                    });
-                    
+                	CardList count = AllZoneUtil.getCardsInGraveyard("Accumulated Knowledge");
                     card.getController().drawCards(count.size());
                 }
             };
@@ -1420,9 +1150,7 @@ public class CardFactory_Instants {
                         });
                         
                         //get all creatures
-                        CardList list = new CardList();
-                        list.addAll(AllZone.Human_Battlefield.getCards());
-                        list.addAll(AllZone.Computer_Battlefield.getCards());
+                        CardList list = AllZoneUtil.getCardsInPlay();
                         
                         list = list.getName(getTargetCard().getName());
                         list.remove(getTargetCard());
@@ -1441,7 +1169,6 @@ public class CardFactory_Instants {
                                     crd.addTempDefenseBoost(2);
                                 }
                             });
-                            //list.get(i).addDamage(2);
                         }
                         
                     }//in play?
