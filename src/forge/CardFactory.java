@@ -8023,7 +8023,6 @@ public class CardFactory implements NewConstants {
                 }
             };
             ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            //ab1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ab1));
             ab1.setDescription(abCost+"Target player loses the game.");
             card.addSpellAbility(ab1);
         }//*************** END ************ END **************************
@@ -8119,41 +8118,6 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
             
         }//*************** END ************ END **************************
-        
-       /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Thopter Foundry")) {
-
-            Ability_Cost abCost = new Ability_Cost("1 Sac<1/Artifact.nonToken>", cardName, true);
-            final SpellAbility ability = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = 1L;
-
-                @Override
-                public boolean canPlayAI() {
-                    String phase = AllZone.Phase.getPhase();
-                    return phase.equals(Constant.Phase.Main2);
-                }
-                
-                @Override
-                public void resolve() {
-                    makeToken();
-                    card.getController().gainLife(1, card);
-                }//resolve
-                
-                public void makeToken() {
-                    CardFactoryUtil.makeToken("Thopter", "U 1 1 Thopter", getActivatingPlayer(), "U", new String[] {
-                            "Artifact", "Creature", "Thopter"}, 1, 1, new String[] {"Flying"});
-                }
-            };
-            
-            card.addSpellAbility(ability);
-            ability.setDescription("1, Sacrifice a nontoken artifact: Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.");
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - Put a 1/1 blue Thopter artifact creature token with flying onto the battlefield. You gain 1 life.");
-            ability.setStackDescription(sb.toString());
-        }//*************** END ************ END **************************
-        */
 
         
         //*************** START *********** START **************************
@@ -8165,7 +8129,6 @@ public class CardFactory implements NewConstants {
 
                 @Override
                 public void resolve() {
-                    //System.out.println("Turn: " + AllZone.Phase.getTurn());
                     AllZone.Phase.addExtraTurn(card.getController());
                 }
             };
@@ -8177,32 +8140,7 @@ public class CardFactory implements NewConstants {
             
             ability.setDescription("Tap: Take an extra turn after this one.");
         }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Serpent Generator")) {
-            final SpellAbility ability = new Ability_Tap(card, "4") {
-                private static final long serialVersionUID = 8428205362391909464L;
-                
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken(
-                            "Snake",
-                            "C 1 1 Snake",
-                            card.getController(),
-                            "",
-                            new String[] {"Artifact", "Creature", "Snake"},
-                            1,
-                            1,
-                            new String[] {"Whenever this creature deals damage to a player, that player gets a poison counter."});
-                }
-            };
-            ability.setStackDescription("Put a 1/1 colorless Snake artifact creature token onto the battlefield. This creature has \"Whenever this creature deals damage to a player, that player gets a poison counter.\"");
-            ability.setDescription("4, Tap: Put a 1/1 colorless Snake artifact creature token onto the battlefield. This creature has \"Whenever this creature deals damage to a player, that player gets a poison counter.\" (A player with ten or more poison counters loses the game.)");
-            card.addSpellAbility(ability);
-            
-        }//*************** END ************ END **************************
-                       
+                 
         
         //*************** START *********** START **************************
         else if(cardName.equals("Illusions of Grandeur")) {
