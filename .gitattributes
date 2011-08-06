@@ -4358,6 +4358,7 @@ res/cardsfolder/sandsower.txt -text svneol=native#text/plain
 res/cardsfolder/sandstone_needle.txt -text svneol=native#text/plain
 res/cardsfolder/sandstone_warrior.txt -text svneol=native#text/plain
 res/cardsfolder/sandstorm.txt -text svneol=native#text/plain
+res/cardsfolder/sandstorm_eidolon.txt -text svneol=native#text/plain
 res/cardsfolder/sangrite_backlash.txt -text svneol=native#text/plain
 res/cardsfolder/sangrite_surge.txt -text svneol=native#text/plain
 res/cardsfolder/sangrophage.txt -text svneol=native#text/plain
