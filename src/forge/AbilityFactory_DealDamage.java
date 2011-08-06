@@ -133,7 +133,8 @@ import java.util.Random;
 
 			@Override
 			public boolean chkAI_Drawback() {
-				return doCanPlayAI(this);
+				// Make sure there is a valid target
+				return damageTargetAI(this);
 			}
 
 			@Override
@@ -215,9 +216,8 @@ import java.util.Random;
         }
 
         private boolean doCanPlayAI(SpellAbility saMe)
-        {
-           int damage = getNumDamage(saMe);
-            
+        {           
+        	int damage = getNumDamage(saMe);
            boolean rr = AF.isSpell();
            
            // temporarily disabled until better AI
@@ -247,52 +247,78 @@ import java.util.Random;
                   rr = true;
             }
            
-            Target tgt = AF.getAbTgt();
-            // AI handle multi-targeting?
-            tgt.resetTargets();
-           // target loop
-          while(tgt.getNumTargeted() < tgt.getMaxTargets()){
-               // TODO: Consider targeting the planeswalker
-               if(tgt.canTgtCreatureAndPlayer()) {
-
-                   if(shouldTgtP(damage)) {
-                      tgt.addTarget(AllZone.HumanPlayer);
-                       continue;
-                   }
-                  
-                   Card c = chooseTgtC(damage);
-                   if(c != null) {
-                      tgt.addTarget(c);
-                       continue;
-                   }
-               }
-              
-               if(tgt.canTgtPlayer() || TgtOpp) {
-                  tgt.addTarget(AllZone.HumanPlayer);
-                   continue;
-               }
-              
-               if(tgt.canTgtCreature()) {
-                   Card c = chooseTgtC(damage);
-                   if(c != null) {
-                      tgt.addTarget(c);
-                       continue;
-                   }
-               }
-               // fell through all the choices, no targets left?
-             if (tgt.getNumTargeted() < tgt.getMinTargets() || tgt.getNumTargeted() == 0){
-                tgt.resetTargets();
-                return false;
-             }
-             else{
-                // todo is this good enough? for up to amounts?
-                break;
-             }
-          }
+            boolean bFlag = damageTargetAI(saMe);
+            if (!bFlag)
+            	return false;
            
+          Ability_Sub subAb = saMe.getSubAbility();
+          if (subAb != null)
+        	  rr &= subAb.chkAI_Drawback();
             return rr;
            
         }
+        
+	private boolean damageTargetAI(SpellAbility saMe) {
+		int damage = getNumDamage(saMe);
+		Target tgt = AF.getAbTgt();
+		// AI handle multi-targeting?
+		if (tgt == null){
+			if (AF.getMapParams().containsKey("Affected")){
+        	   String affected = AF.getMapParams().get("Affected");
+        	   if (affected.equals("You"))
+        		   // todo: when should AI not use an SA like Psionic Blast?
+        		   ;
+        	   else if (affected.equals("Self"))
+        		   // todo: when should AI not use an SA like Orcish Artillery?
+        		   ;
+           }
+		   return true;
+		}
+		
+		
+		tgt.resetTargets();
+
+		// target loop
+		while (tgt.getNumTargeted() < tgt.getMaxTargets()) {
+			// TODO: Consider targeting the planeswalker
+			if (tgt.canTgtCreatureAndPlayer()) {
+
+				if (shouldTgtP(damage)) {
+					tgt.addTarget(AllZone.HumanPlayer);
+					continue;
+				}
+
+				Card c = chooseTgtC(damage);
+				if (c != null) {
+					tgt.addTarget(c);
+					continue;
+				}
+			}
+
+			if (tgt.canTgtPlayer() || TgtOpp) {
+				tgt.addTarget(AllZone.HumanPlayer);
+				continue;
+			}
+
+			if (tgt.canTgtCreature()) {
+				Card c = chooseTgtC(damage);
+				if (c != null) {
+					tgt.addTarget(c);
+					continue;
+				}
+			}
+			// fell through all the choices, no targets left?
+			if (tgt.getNumTargeted() < tgt.getMinTargets()
+					|| tgt.getNumTargeted() == 0) {
+				tgt.resetTargets();
+				return false;
+			} else {
+				// todo is this good enough? for up to amounts?
+				break;
+			}
+		}
+		return true;
+	}
        
         private String damageStackDescription(AbilityFactory af, SpellAbility sa){
           // when damageStackDescription is called, just build exactly what is happening

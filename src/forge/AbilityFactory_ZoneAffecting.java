@@ -86,8 +86,7 @@ public class AbilityFactory_ZoneAffecting {
 
 			@Override
 			public boolean chkAI_Drawback() {
-				// TODO Auto-generated method stub
-				return true;
+				return drawTargetAI(af);
 			}
 			
 		};
@@ -125,7 +124,6 @@ public class AbilityFactory_ZoneAffecting {
 		Target tgt = af.getAbTgt();
 		Card source = sa.getSourceCard();
 		Ability_Cost abCost = af.getAbCost();
-		HashMap<String,String> params = af.getMapParams();
 		
 		if (abCost != null){
 			// AI currently disabled for these costs
@@ -143,14 +141,37 @@ public class AbilityFactory_ZoneAffecting {
 			}
 			
 		}
+			
+		boolean bFlag = drawTargetAI(af);
+		
+		if (!bFlag)
+			return false;
+		
+		ArrayList<Player> players = tgt.getTargetPlayers();
+		if (tgt != null && players.size() > 0 && players.get(0).equals(AllZone.HumanPlayer))
+			return true;
+		
+		Random r = new Random();
+		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+		
+		// some other variables here, like handsize vs. maxHandSize
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+        	randomReturn &= subAb.chkAI_Drawback();
+		return randomReturn;
+	}
+	
+	public static boolean drawTargetAI(AbilityFactory af){
+		Target tgt = af.getAbTgt();
+		HashMap<String,String> params = af.getMapParams();
+		// todo: handle deciding what X would be around here for Braingeyser type cards	
+		int numCards = 1;
+		if (params.containsKey("NumCards"))
+			numCards = Integer.parseInt(params.get("NumCards"));
 		
 		if (tgt != null){
 			tgt.resetTargets();
-			
-			// todo: handle deciding what X would be around here for Braingeyser type cards
-			int numCards = 1;
-			if (params.containsKey("NumCards"))
-				numCards = Integer.parseInt(params.get("NumCards"));
 			
 			if (!AllZone.HumanPlayer.cantLose() && numCards >= AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.HumanPlayer).size()){
 				// Deck the Human? DO IT!
@@ -165,13 +186,13 @@ public class AbilityFactory_ZoneAffecting {
 			
 			tgt.addTarget(AllZone.ComputerPlayer);
 		}
-		
-		Random r = new Random();
-		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
-		
-		// some other variables here, like handsize vs. maxHandSize
-
-		return randomReturn;
+		else{
+			if (numCards >= AllZoneUtil.getCardsInZone(Constant.Zone.Library, AllZone.ComputerPlayer).size()){
+				// Don't deck yourself
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public static void drawResolve(final AbilityFactory af, final SpellAbility sa){
