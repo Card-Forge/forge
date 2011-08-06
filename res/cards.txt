@@ -1,3 +1,10 @@
+Kor Firewalker
+W W
+Creature Kor Soldier
+Whenever a player casts a red spell, you may gain 1 life.
+2/2
+Protection from red
+
 Kjeldoran Outpost
 no cost
 Land
