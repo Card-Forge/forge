@@ -1,0 +1,8 @@
+Name:Denizen of the Deep
+ManaCost:6 U U
+Types:Creature Serpent
+Text:When CARDNAME enters the battlefield, return each other creature you control to its owner's hand.
+PT:11/11
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/denizen_of_the_deep.jpg
+End

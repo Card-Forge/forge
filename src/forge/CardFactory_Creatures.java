@@ -13474,6 +13474,37 @@ public class CardFactory_Creatures {
 
         	card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
+        
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Denizen of the Deep")) {
+            final SpellAbility returnAll = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay(card.getController());
+                    creatures.remove(card);
+                    for(Card c:creatures) {
+                    	AllZone.GameAction.moveToHand(c);
+                    }
+                }
+            };
+            
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = 7181675096954076868L;
+
+				public void execute() {
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(cardName).append(" - ");
+                	sb.append("return each other creature you control to its owner's hand.");
+                	returnAll.setStackDescription(sb.toString());
+                    
+                    AllZone.Stack.add(returnAll);
+                }
+            };
+            
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
                
         
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
