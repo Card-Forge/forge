@@ -1,0 +1,10 @@
+Name:Evil Eye of Urborg
+ManaCost:4 B
+Types:Creature Eye
+Text:no text
+PT:6/3
+K:stPumpAll:Creature.nonEye.YouCtrl:0/0/HIDDEN CARDNAME can't attack.:No condition:Non-Eye creatures you control can't attack.
+K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/evil_eye_of_urborg.jpg
+End
