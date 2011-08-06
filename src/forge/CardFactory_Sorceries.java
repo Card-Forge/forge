@@ -4534,7 +4534,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************        
         
-
+        /*
         //*************** START *********** START **************************
         if(cardName.equals("Glimpse the Unthinkable") || cardName.equals("Tome Scour")) {
             final SpellAbility spell = new Spell(card) {
@@ -4558,7 +4558,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         if(cardName.equals("Traumatize")) {
