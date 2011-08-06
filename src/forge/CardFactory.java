@@ -5787,6 +5787,7 @@ public class CardFactory implements NewConstants {
         			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
         			tmpList = tmpList.getValidCards(Tgts);
         			tmpList = tmpList.getTargetableCards(card);
+        			tmpList = tmpList.filter(AllZoneUtil.tapped);
         			return tmpList;
         		}
 
@@ -5876,6 +5877,7 @@ public class CardFactory implements NewConstants {
         			CardList tmpList = AllZoneUtil.getCardsInPlay();
         			tmpList = tmpList.getValidCards(Tgts);
         			tmpList = tmpList.getTargetableCards(card);
+        			tmpList = tmpList.filter(AllZoneUtil.tapped);
         			return tmpList;
         		}
 
@@ -5975,6 +5977,7 @@ public class CardFactory implements NewConstants {
         			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
         			tmpList = tmpList.getValidCards(Tgts);
         			tmpList = tmpList.getTargetableCards(card);
+        			tmpList = tmpList.filter(AllZoneUtil.untapped);
         			return tmpList;
         		}
 
@@ -8568,7 +8571,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Voltaic Key")) {
             final Ability_Tap ability = new Ability_Tap(card, "1") {
@@ -8615,7 +8618,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
             
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START ************ START **************************
         else if(cardName.equals("Ashnod's Transmogrant")) {

@@ -2,6 +2,7 @@ Name:Voltaic Key
 ManaCost:1
 Types:Artifact
 Text:no text
+K:abUntapTgt 1 T:Artifact:Untap target artifact.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voltaic_key.jpg

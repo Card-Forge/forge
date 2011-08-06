@@ -1790,7 +1790,7 @@ class CardFactory_Lands {
             
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Wirewood Lodge")) {
             final Ability_Tap ability = new Ability_Tap(card, "G") {
@@ -1846,6 +1846,7 @@ class CardFactory_Lands {
             ability.setBeforePayMana(runtime);
             
         }//*************** END ************ END **************************
+        */
         
         /*
         //*************** START *********** START **************************
