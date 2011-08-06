@@ -2,7 +2,7 @@ Name:Feeding Frenzy
 ManaCost:2 B
 Types:Instant
 Text:no text
-K:spPumpTgtCurse:-X/-X:Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.
+A:SP$Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.
 SVar:X:Count$NumType.Zombie
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
