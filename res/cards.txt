@@ -1,3 +1,95 @@
+Elfhame Palace
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add W
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elfhame_palace.jpg
+
+Forbidden Orchard
+no cost
+Land
+Whenever you tap Forbidden Orchard for mana, put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_orchard.jpg
+
+Graypelt Refuge
+no cost
+Land
+Graypelt Refuge enters the battlefield tapped. When Graypelt Refuge enters the battlefield, you gain 1 life.
+tap: add W
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_refuge.jpg
+
+Harabaz Druid
+1 G
+Creature Human Druid Ally
+no text
+0/1
+tap: add W to your mana pool for each Ally you control.
+tap: add U to your mana pool for each Ally you control.
+tap: add B to your mana pool for each Ally you control.
+tap: add R to your mana pool for each Ally you control.
+tap: add G to your mana pool for each Ally you control.
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/harabaz_druid.jpg
+
+Jungle Shrine
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add W
+tap: add R
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_shrine.jpg
+
+Mox Diamond
+0
+Artifact
+If Mox Diamond would come into play, you may discard a land card instead. If you do, put Mox Diamond into play. If you don't, put it into its owner's graveyard.
+tap: add W
+tap: add U
+tap: add B
+tap: add R
+tap: add G
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mox_diamond.jpg
+
+Noble Hierarch
+G
+Creature Human Druid
+no text
+0/1
+tap: add W
+tap: add U
+tap: add G
+Exalted
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_hierarch.jpg
+
+Obelisk of Bant
+3
+Artifact
+no text
+tap: add W
+tap: add U
+tap: add G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_bant.jpg
+
 Arcane Sanctum
 no cost
 Land
@@ -8794,16 +8886,6 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elephant_ambush.jpg
 
-Elfhame Palace
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add G
-tap: add W
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elfhame_palace.jpg
-
 Elite Cat Warrior
 2 G
 Creature Cat Warrior
@@ -10905,18 +10987,6 @@ abPump G Sac-Forest:+2/+2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foratog.jpg
 
-Forbidden Orchard
-no cost
-Land
-Whenever you tap Forbidden Orchard for mana, put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.
-tap: add W
-tap: add B
-tap: add U
-tap: add R
-tap: add G
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/forbidden_orchard.jpg
-
 Forbidding Watchtower
 no cost
 Land
@@ -12931,15 +13001,6 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_hunter.jpg
 
-Graypelt Refuge
-no cost
-Land
-Graypelt Refuge enters the battlefield tapped. When Graypelt Refuge enters the battlefield, you gain 1 life.
-tap: add G
-tap: add W
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_refuge.jpg
-
 Grayscaled Gharial
 U
 Creature Crocodile
@@ -13522,21 +13583,6 @@ StaticEffect:Play:All Permanents:Keyword/Shroud:Type.Artifact:All artifacts have
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hannas_custody.jpg
-
-Harabaz Druid
-1 G
-Creature Human Druid Ally
-no text
-0/1
-tap: add W to your mana pool for each Ally you control.
-tap: add B to your mana pool for each Ally you control.
-tap: add U to your mana pool for each Ally you control.
-tap: add R to your mana pool for each Ally you control.
-tap: add G to your mana pool for each Ally you control.
-SVar:RemAIDeck:True
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harabaz_druid.jpg
 
 Harbor Guardian
 2 W U
@@ -15892,17 +15938,6 @@ no text
 CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4302.jpg
-
-Jungle Shrine
-no cost
-Land
-no text
-Comes into play tapped.
-tap: add R
-tap: add G
-tap: add W
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jungle_shrine.jpg
 
 Jungle Troll
 1 R G
@@ -20001,19 +20036,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mouth_of_ronom.jpg
 
-Mox Diamond
-0
-Artifact
-If Mox Diamond would come into play, you may discard a land card instead. If you do, put Mox Diamond into play. If you don't, put it into its owner's graveyard.
-tap: add W
-tap: add B
-tap: add U
-tap: add R
-tap: add G
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mox_diamond.jpg
-
 Mox Emerald
 0
 Artifact
@@ -20910,18 +20932,6 @@ eqPump 3:+2/+0/First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/no_dachi.jpg
 
-Noble Hierarch
-G
-Creature Human Druid
-no text
-0/1
-tap: add G
-tap: add W
-tap: add U
-Exalted
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_hierarch.jpg
-
 Noble Panther
 1 G W
 Creature Cat
@@ -21109,16 +21119,6 @@ Landfall
 SVar:BuffedBy:Land
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ob_nixilis_the_fallen.jpg
-
-Obelisk of Bant
-3
-Artifact
-no text
-tap: add G
-tap: add U
-tap: add W
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_bant.jpg
 
 Obelisk of Esper
 3
