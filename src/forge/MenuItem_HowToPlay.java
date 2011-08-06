@@ -117,9 +117,9 @@ public class MenuItem_HowToPlay extends JMenuItem implements NewConstants.LANG.H
         
         s.append("Abilities").append(newLine);
         s.append("There are three kinds of abilities: Activated, Triggered, and Static.").append(newLine);
-        s.append("1.  Activated abilities contain a colon that separates cost and effect, these can be played any time you could play an instant.  An example is Elvish Piper's ability.  That cost also contains the tap symbol.  For creatures only, abilities containing the tap- or untap symbol can be played starting the turn after the creature came into play.  Another common cost for an activated ability is sacrificing the card.  You do that by putting it into your graveyard.  Such abilities can only be played once.")
+        s.append("1.  Activated abilities contain a colon that separates cost and effect, these can be played any time you could play an instant.  An example is Elvish Piper's ability.  That cost also contains the tap symbol.  For creatures only, abilities containing the tap- or untap symbol can be played starting the turn after the creature entered the battlefield.  Another common cost for an activated ability is sacrificing the card.  You do that by putting it into your graveyard.  Such abilities can only be played once.")
         		.append(newLine);
-        s.append("2.  Triggered abilities aren't played, they simply trigger when their condition occurs.  An example is Angel of Mercy: You don't play the ability, but gain 3 life when it comes into play.")
+        s.append("2.  Triggered abilities aren't played, they simply trigger when their condition occurs.  An example is Angel of Mercy: You don't play the ability, but gain 3 life when it enters the battlefield.")
         		.append(newLine);
         s.append("3.  Static abilities are neither played, nor do they trigger.  They still have an effect for as long as they are in play.  An example is Glorious Anthem.  There is no condition or cost, your creatures are just stronger.\r\n\r\n\r\n");
         

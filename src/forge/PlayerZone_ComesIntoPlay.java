@@ -92,7 +92,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             if(c.isCreature() && (c.getType().contains("Elf")) || c.getKeyword().contains("Changeling")) {
             	CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Elvish Vanguard");
                 
-            	//not for the Elvish Vanguard coming into play now
+            	//not for the Elvish Vanguard coming onto the battlefield now
             	list.remove(c);
                 for(Card var:list) {
                 	final Card crd = var;
@@ -149,7 +149,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             }
             
             if(c.isLand()) {
-                //System.out.println("A land just came into play: " + c.getName());
+                //System.out.println("A land was just put onto the battlefield: " + c.getName());
                 
                 CardList list = new CardList(play.getCards());
                 CardList graveList = new CardList(grave.getCards());

@@ -17,7 +17,7 @@ public class Spell_Evoke extends Spell_Permanent {
         
         StringBuilder sb = new StringBuilder();
         sb.append("Evoke ").append(manaCost);
-        sb.append(" - Sacrifice this creature when it comes into play.");
+        sb.append(" - Sacrifice this creature when it enters the battlefield.");
         this.setDescription(sb.toString());
     }
     

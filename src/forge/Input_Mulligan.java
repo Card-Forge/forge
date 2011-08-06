@@ -58,31 +58,31 @@ public class Input_Mulligan extends Input {
         PlayerZone HHand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
         for(int i = 0; i < HHandList.size() ; i++) {
         	if(HHandList.get(i).getName().startsWith("Leyline")) {
-            String[] choices = {"Yes", "No"};
-            Object q = null;
-            q = AllZone.Display.getChoiceOptional("Put " + HHandList.get(i).getName() + " into play?", choices);
-            if(q == null || q.equals("No"));
-            else {
-            	HPlay.add(HHandList.get(i));
-            	HHand.remove(HHandList.get(i));
-            }
-        }
+        		String[] choices = {"Yes", "No"};
+        		Object q = null;
+        		q = AllZone.Display.getChoiceOptional("Put " + HHandList.get(i).getName() + " onto the battlefield?", choices);
+        		if(q == null || q.equals("No"));
+        		else {
+        			HPlay.add(HHandList.get(i));
+        			HHand.remove(HHandList.get(i));
+        		}
+        	}
         }
         CardList CHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
         PlayerZone CPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
         PlayerZone CHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
         for(int i = 0; i < CHandList.size() ; i++) {
         	if(CHandList.get(i).getName().startsWith("Leyline") && (AllZoneUtil.getCardsInPlay("Leyline of Singularity").size() == 0)) {
-            	CPlay.add(CHandList.get(i));
-            	CHand.remove(CHandList.get(i));
-            	AllZone.GameAction.checkStateEffects();
+        		CPlay.add(CHandList.get(i));
+        		CHand.remove(CHandList.get(i));
+        		AllZone.GameAction.checkStateEffects();
+        	}
+
         }
-    	
-    }
         if(AllZone.GameAction.Start_Cut == true && !(HHandList.contains(AllZone.GameAction.HumanCut) 
         		|| CHandList.contains(AllZone.GameAction.ComputerCut)))  {
-        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer),AllZone.GameAction.HumanCut);
-        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer),AllZone.GameAction.ComputerCut);
+        	AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer),AllZone.GameAction.HumanCut);
+        	AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer),AllZone.GameAction.ComputerCut);
         }
         AllZone.GameAction.checkStateEffects();
         Phase.GameBegins = 1;

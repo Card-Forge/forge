@@ -341,7 +341,7 @@ public abstract class SpellAbility {
     }
     
     //setDescription() includes mana cost and everything like
-    //"G, tap: put target creature from your hand into play"
+    //"G, tap: put target creature from your hand onto the battlefield"
     public void setDescription(String s) {
         description = s;
     }
