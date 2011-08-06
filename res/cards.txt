@@ -1,3 +1,280 @@
+Eladamri, Lord of Leaves
+G G
+Legendary Creature Elf Warrior
+Other Elf creatures have forestwalk. Other Elves have shroud. 
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamri_lord_of_leaves.jpg
+
+Eldrazi Monument
+5
+Artifact
+Creatures you control get +1/+1, have flying, and are indestructible. At the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_monument.jpg
+
+Elvish Archdruid
+1 G G
+Creature Elf Druid
+Other Elf creatures you control get +1/+1.
+2/2
+tap: add G to your mana pool for each Elf you control.
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_archdruid.jpg
+
+Elvish Champion
+1 G G
+Creature Elf
+Other Elf creatures get +1/+1 and have forestwalk.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_champion.jpg
+
+Fervor
+2 R
+Enchantment
+Creatures you control have haste.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fervor.jpg
+
+Field Marshal
+1 W W
+Creature Human Soldier
+Other Soldiers get +1/+1 and have first strike.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/field_marshal.jpg
+
+Flowstone Surge
+1 R
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:PTBonus/1/-1:Type.Creature:Creatures you control get +1/-1.
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_surge.jpg
+
+Gaea's Anthem
+1 G G
+Enchantment
+Creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122367.jpg
+
+Glen Elendra Liege
+1 UB UB UB
+Creature Faerie Knight
+no text
+2/3
+Flying
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.blue!NotSelf:Other blue creatures you control get +1/+1.
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.black!NotSelf:Other black creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glen_elendra_liege.jpg
+
+Glorious Anthem
+1 W W
+Enchantment
+Creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83106.jpg
+
+Goblin Chieftain
+1 R R
+Creature Goblin
+Other Goblin creatures you control get +1/+1 and have haste.
+2/2
+Haste
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_chieftain.jpg
+
+Goblin King
+1 R R
+Creature Goblin
+Other Goblin creatures get +1/+1 and have mountainwalk.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_king.jpg
+
+Goblin Warchief
+1 R R
+Creature Goblin 
+Goblin spells you cast cost 1 less to cast. Goblin creatures you control have haste.
+2/2
+CostChange:Player:Less:1:Spell:All:Goblin:NoSpecial
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warchief.jpg
+
+Honor of the Pure
+1 W
+Enchantment
+White creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_of_the_pure.jpg
+
+Imperious Perfect
+2 G
+Creature Elf Warrior
+All Elf creatures you control get +1/+1
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/imperious_perfect.jpg
+
+Intimidation
+2 B B B
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:Keyword/Fear:Type.Creature:Creatures you control have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/intimidation.jpg
+
+Jacques le Vert
+1 W G R
+Legendary Creature Human Warrior
+Green creatures you control get +0/+2.
+3/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jacques_le_vert.jpg
+
+Kavu Monarch
+2 R R
+Creature Kavu
+no text
+3/3
+StaticEffect:Play:All Permanents:Keyword/Trample:Type.Creature!Type.Kavu:Kavu creatures have trample.
+WheneverKeyword:EntersBattleField:Type/Kavu:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another Kavu enters the battlefield, put a +1/+1 counter on Kavu Monarch.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_monarch.jpg
+
+Kaysa
+3 G G
+Legendary Creature Elf Druid
+All green creatures you control get +1/+1.
+2/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kaysa.jpg
+
+Kinsbaile Cavalier
+3 W
+Creature Kithkin Knight
+Knight creatures you control have double strike.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kinsbaile_cavalier.jpg
+
+Knight Exemplar
+1 W W
+Creature Human Knight
+Other Knight creatures you control get +1/+1 and are indestructible.
+2/2
+First Strike
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_exemplar.jpg
+
+Knighthood
+2 W
+Enchantment
+Creatures you control have first strike.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/knighthood.jpg
+
+Kobold Overlord
+1 R
+Creature Kobold
+Kobold creatures you control have first strike.
+1/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_overlord.jpg
+
+Kobold Taskmaster
+1 R
+Creature Kobold
+no text
+1/2
+StaticEffect:Play:Permanents you Control:PTBonus/1/0:Type.Creature!Type.Kobold!NotSelf:Other Kobold creatures you control get +1/+0.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_taskmaster.jpg
+
+Kobold Drill Sergeant
+1 R
+Creature Kobold Soldier
+no text
+1/2
+StaticEffect:Play:Permanents you Control:PTBonus/0/1!Keyword/Trample:Type.Creature!Type.Kobold!NotSelf:Other Kobold creatures you control get +0/+1 and have trample.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_drill_sergeant.jpg
+
+Kongming, "Sleeping Dragon"
+2 W W
+Legendary Creature Human Advisor
+Other creatures you control get +1/+1.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kongming_sleeping_dragon.jpg
+
+Levitation
+2 U U
+Enchantment
+Creatures you control have flying.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/levitation.jpg
+
+Long-Forgotten Gohei
+3
+Artifact
+Arcane spells you cast cost 1 less to cast.
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!Type.Spirit:Spirit creatures you control get +1/+1.
+CostChange:Player:Less:1:Spell:All:Arcane:NoSpecial
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/long_forgotten_gohei.jpg
+
+Lord of Atlantis
+U U
+Creature Merfolk
+Other Merfolk creatures get +1/+1 and have islandwalk.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_atlantis.jpg
+
+Lord of the Undead
+1 B B
+Creature Zombie
+Other Zombie creatures get +1/+1.
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_undead.jpg
+
 Akroma's Memorial
 7
 Legendary Artifact
@@ -1224,15 +1501,6 @@ Elven Lyre
 Artifact
 no text
 abPumpTgt 1 T Sac-CARDNAME:+2/+2
-
-Long-Forgotten Gohei
-3
-Artifact
-Arcane spells you cast cost 1 less to cast.
-StaticEffect:Play:Permanents you Control:PTBonus/1/1:Type.Creature!Type.Spirit:Spirit creatures you control get +1/+1.
-CostChange:Player:Less:1:Spell:All:Arcane:NoSpecial
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/long_forgotten_gohei.jpg
 
 Path of Anger's Flame
 2 R
@@ -9291,14 +9559,6 @@ Lifelink
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/el_hajjaj.jpg
 
-Eladamri, Lord of Leaves
-G G
-Legendary Creature Elf Warrior
-Other Elf creatures have forestwalk. Other Elves have shroud. 
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamri_lord_of_leaves.jpg
-
 Eladamri's Call
 G W
 Instant
@@ -9314,13 +9574,6 @@ Enchant creature
 enPump:+10/+10/Trample & Annihilator 2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_conscription.jpg
-
-Eldrazi Monument
-5
-Artifact
-Creatures you control get +1/+1, have flying, and are indestructible. At the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_monument.jpg
 
 Elephant Ambush
 2 G G
@@ -9399,16 +9652,6 @@ TypeCycling:Forest:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_aberration.jpg
 
-Elvish Archdruid
-1 G G
-Creature Elf Druid
-Other Elf creatures you control get +1/+1.
-2/2
-tap: add G to your mana pool for each Elf you control.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_archdruid.jpg
-
 Elvish Archers
 1 G
 Creature Elf Archer
@@ -9417,14 +9660,6 @@ no text
 First Strike
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_archers.jpg
-
-Elvish Champion
-1 G G
-Creature Elf
-Other Elf creatures get +1/+1 and have forestwalk.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_champion.jpg
 
 Elvish Farmer
 1 G
@@ -10450,13 +10685,6 @@ Whenever a creature you control attacks, it gets +2/+2 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fervent_charge.jpg
 
-Fervor
-2 R
-Enchantment
-Creatures you control have haste.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fervor.jpg
-
 Festering Wound
 1 B
 Enchantment Aura
@@ -10501,14 +10729,6 @@ Tribal Sorcery Giant
 You gain 10 life. Then if you have more life than an opponent, put a 5/5 white Giant Warrior creature token into play.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feudkillers_verdict.jpg
-
-Field Marshal
-1 W W
-Creature Human Soldier
-Other Soldiers get +1/+1 and have first strike.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/field_marshal.jpg
 
 Fiery Fall
 5 R
@@ -11139,15 +11359,6 @@ spPumpTgt:+1/-1/Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_strike.jpg
 
-Flowstone Surge
-1 R
-Enchantment
-no text
-StaticEffect:Play:Permanents you Control:PTBonus/1/-1:Type.Creature:Creatures you control get +1/-1.
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_surge.jpg
-
 Flowstone Thopter
 7
 Artifact Creature Thopter
@@ -11670,13 +11881,6 @@ Noncreature spells with converted mana cost 4 or greater can't be cast. Noncreat
 2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaddock_teeg.jpg
-
-Gaea's Anthem
-1 G G
-Enchantment
-Creatures you control get +1/+1.
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122367.jpg
 
 Gaea's Avenger
 1 G G
@@ -12243,17 +12447,6 @@ TypeCycling:Basic:1 W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gleam_of_resistance.jpg
 
-Glen Elendra Liege
-1 UB UB UB
-Creature Faerie Knight
-no text
-2/3
-Flying
-StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.blue!NotSelf:Other blue creatures you control get +1/+1.
-StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.black!NotSelf:Other black creatures you control get +1/+1.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glen_elendra_liege.jpg
-
 Glimmerdust Nap
 2 U
 Enchantment Aura
@@ -12345,13 +12538,6 @@ Reach
 CARDNAME can block only creatures with flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gloomwidow.jpg
-
-Glorious Anthem
-1 W W
-Enchantment
-Creatures you control get +1/+1.
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83106.jpg
 
 Glorious Charge
 1 W
@@ -12542,15 +12728,6 @@ Haste
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83109.jpg
 
-Goblin Chieftain
-1 R R
-Creature Goblin
-Other Goblin creatures you control get +1/+1 and have haste.
-2/2
-Haste
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_chieftain.jpg
-
 Goblin Deathraiders
 B R
 Creature Goblin Warrior
@@ -12601,14 +12778,6 @@ no text
 2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p4/en-us/card25486.jpg
-
-Goblin King
-1 R R
-Creature Goblin
-Other Goblin creatures get +1/+1 and have mountainwalk.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_king.jpg
 
 Goblin Lackey
 R
@@ -12868,15 +13037,6 @@ spDamageTgtP:X:Goblin War Strike deals damage equal to the number of Goblins you
 SVar:X:Count$TypeYouCtrl.Goblin
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_strike.jpg
-
-Goblin Warchief
-1 R R
-Creature Goblin 
-Goblin spells you cast cost 1 less to cast. Goblin creatures you control have haste.
-2/2
-CostChange:Player:Less:1:Spell:All:Goblin:NoSpecial
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warchief.jpg
 
 Godless Shrine
 no cost
@@ -14378,13 +14538,6 @@ abPump W:+0/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_guard.jpg
 
-Honor of the Pure
-1 W
-Enchantment
-White creatures you control get +1/+1.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_of_the_pure.jpg
-
 Hooded Kavu
 2 R
 Creature Kavu
@@ -14969,14 +15122,6 @@ Creature Lizard
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130634.jpg
 
-Imperious Perfect
-2 G
-Creature Elf Warrior
-All Elf creatures you control get +1/+1
-1/1
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/imperious_perfect.jpg
-
 Implements of Sacrifice
 2
 Artifact
@@ -15281,14 +15426,6 @@ no text
 spPumpTgt:+2/+4:Drawback$UntapTgt:Untap target creature. It gets +2/+4 until end of turn.:Insprit - Untap target creature. It gets +2/+4 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84552.jpg
-
-Intimidation
-2 B B B
-Enchantment
-no text
-StaticEffect:Play:Permanents you Control:Keyword/Fear:Type.Creature:Creatures you control have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/intimidation.jpg
 
 Into Thin Air
 5 U
@@ -15602,14 +15739,6 @@ no text
 WheneverKeyword:CastSpell/Controller:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:No Special Condition:When you cast a spell, return Jackalope Herd to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jackalope_herd.jpg
-
-Jacques le Vert
-1 W G R
-Legendary Creature Human Warrior
-Green creatures you control get +0/+2.
-3/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jacques_le_vert.jpg
 
 Jade Leech
 2 G G
@@ -16257,24 +16386,6 @@ abPump U:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_glider.jpg
 
-Kavu Monarch
-2 R R
-Creature Kavu
-no text
-3/3
-StaticEffect:Play:All Permanents:Keyword/Trample:Type.Creature!Type.Kavu:Kavu creatures have trample.
-WheneverKeyword:EntersBattleField:Type/Kavu:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another Kavu enters the battlefield, put a +1/+1 counter on Kavu Monarch.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_monarch.jpg
-
-Kaysa
-3 G G
-Legendary Creature Elf Druid
-All green creatures you control get +1/+1.
-2/3
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kaysa.jpg
-
 Kazandu Refuge
 no cost
 Land
@@ -16545,14 +16656,6 @@ Kinsbaile Borderguard comes into play with a +1/+1 counter on it for each other 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kinsbaile_borderguard.jpg
 
-Kinsbaile Cavalier
-3 W
-Creature Kithkin Knight
-Knight creatures you control have double strike.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kinsbaile_cavalier.jpg
-
 Kird Ape
 R
 Creature Ape
@@ -16693,15 +16796,6 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card13099.jpg
 
-Knight Exemplar
-1 W W
-Creature Human Knight
-Other Knight creatures you control get +1/+1 and are indestructible.
-2/2
-First Strike
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_exemplar.jpg
-
 Knight of Cliffhaven
 1 W
 Creature Kor Knight
@@ -16784,13 +16878,6 @@ First Strike
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_white_orchid.jpg
 
-Knighthood
-2 W
-Enchantment
-Creatures you control have first strike.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/knighthood.jpg
-
 Knotvine Mystic
 W R G
 Creature Elf Druid
@@ -16817,32 +16904,6 @@ no text
 WheneverKeyword:PermanentIntoGraveyard:Type/Goblin:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a Goblin you control is put into a graveyard from the battlefield, you may put a +1/+1 counter on Knucklebone Witch.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knucklebone_witch.jpg
-
-Kobold Drill Sergeant
-1 R
-Creature Kobold Soldier
-no text
-1/2
-StaticEffect:Play:Permanents you Control:PTBonus/0/1!Keyword/Trample:Type.Creature!Type.Kobold!NotSelf:Other Kobold creatures you control get +0/+1 and have trample.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_drill_sergeant.jpg
-
-Kobold Overlord
-1 R
-Creature Kobold
-Kobold creatures you control have first strike.
-1/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_overlord.jpg
-
-Kobold Taskmaster
-1 R
-Creature Kobold
-no text
-1/2
-StaticEffect:Play:Permanents you Control:PTBonus/1/0:Type.Creature!Type.Kobold!NotSelf:Other Kobold creatures you control get +1/+0.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_taskmaster.jpg
 
 Kobolds of Kher Keep
 0
@@ -16889,14 +16950,6 @@ Bushido 5
 Indestructible
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/konda_lord_of_eiganjo.jpg
-
-Kongming, "Sleeping Dragon"
-2 W W
-Legendary Creature Human Advisor
-Other creatures you control get +1/+1.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kongming_sleeping_dragon.jpg
 
 Kor Cartographer
 3 W
@@ -17406,13 +17459,6 @@ Enchant creature
 enPump:Swampwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leshracs_rite.jpg
-
-Levitation
-2 U U
-Enchantment
-Creatures you control have flying.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/levitation.jpg
 
 Ley Druid
 2 G
@@ -17928,14 +17974,6 @@ abPump B:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/looming_shade.jpg
 
-Lord of Atlantis
-U U
-Creature Merfolk
-Other Merfolk creatures get +1/+1 and have islandwalk.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_atlantis.jpg
-
 Lord of Extinction
 3 B G
 Creature Elemental
@@ -17943,14 +17981,6 @@ Lord of Extinction's power and toughness are each equal to the number of cards i
 1/1
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_extinction.jpg
-
-Lord of the Undead
-1 B B
-Creature Zombie
-Other Zombie creatures get +1/+1.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_undead.jpg
 
 Lorescale Coatl
 1 G U
