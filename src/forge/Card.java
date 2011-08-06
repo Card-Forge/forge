@@ -2625,7 +2625,11 @@ public class Card extends MyObservable {
     	reduce = reduce || getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.");
     	reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.");
 		reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME.");
-    	return reduce;
+    	
+		//more specific prevents here:
+		reduce = reduce || (getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
+            		&& source.isCreature() && source.isArtifact());
+		return reduce;
     }
     
     public void addDamage(HashMap<Card, Integer> sourcesMap) {

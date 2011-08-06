@@ -3313,44 +3313,8 @@ public class CardFactoryUtil {
     public static boolean canDamage(Card spell, Card receiver) {
         //this is for untargeted damage spells, such as Pestilence, Pyroclasm, Tremor, etc. 
         //and also combat damage?
-        ArrayList<String> list = receiver.getKeyword();
-        
+    	
         if(hasProtectionFrom(spell,receiver)) return false;
-        
-        String kw = "";
-        for(int i = 0; i < list.size(); i++) {
-            kw = list.get(i);
-            
-            if(kw.equals("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
-            		&& spell.isCreature() && spell.isArtifact()) return false;
-            
-            /* taken care of by hasProtectionFrom
-            if(kw.equals("Protection from white") && spell.isWhite()) return false;
-            if(kw.equals("Protection from blue") && spell.isBlue()) return false;
-            if(kw.equals("Protection from black") && spell.isBlack()) return false;
-            if(kw.equals("Protection from red") && spell.isRed()) return false;
-            if(kw.equals("Protection from green") && spell.isGreen()) return false;
-            
-            if(kw.equals("Protection from creatures") && spell.isCreature()) return false;
-            
-            if(kw.equals("Protection from artifacts") && spell.isArtifact()) return false;
-            
-            if(kw.equals("Protection from Dragons")
-                    && (spell.getType().contains("Dragon") || spell.getKeyword().contains("Changeling"))) return false;
-            if(kw.equals("Protection from Demons")
-                    && (spell.getType().contains("Demon") || spell.getKeyword().contains("Changeling"))) return false;
-            if(kw.equals("Protection from Goblins")
-                    && (spell.getType().contains("Goblin") || spell.getKeyword().contains("Changeling"))) return false;
-            if(kw.equals("Protection from Clerics")
-                    && (spell.getType().contains("Cleric") || spell.getKeyword().contains("Changeling"))) return false;
-            
-            if(kw.equals("Protection from enchantments") && spell.getType().contains("Enchantment")) return false;
-            
-            if(kw.equals("Protection from everything")) return false;
-            
-            if(kw.equals("Protection from colored spells") && !spell.isPermanent() && isColored(spell) ) return false;
-            */
-        }
         
         return true;
         
