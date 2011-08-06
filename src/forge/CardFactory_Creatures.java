@@ -683,7 +683,8 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         */
-
+        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Sengir Autocrat")) {
             Command leavesPlay = new Command() {
@@ -697,6 +698,7 @@ public class CardFactory_Creatures {
             };//Command
             card.addLeavesPlayCommand(leavesPlay);
         }//*************** END ************ END **************************
+        */
         
         /* Converteded to AF Trigger
         //*************** START *********** START **************************
