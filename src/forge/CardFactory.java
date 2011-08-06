@@ -2999,8 +2999,13 @@ public class CardFactory implements NewConstants {
         } // etbLoseLife
         
 
+        /*
+         *  We have three cards which can not be converted to AF_SP$DestroyAll at this time:
+         *  Fracturing Gust
+         *  Multani's Decree
+         *  Righteous Fury
+         */
         // Generic destroy all card
-        /* Cards converted to AF_DestroyAll
         if(hasKeyword(card, "spDestroyAll") != -1) {
             int n = hasKeyword(card, "spDestroyAll");
             
@@ -3018,23 +3023,23 @@ public class CardFactory implements NewConstants {
             
             if (k.length > 2)
             {
-            	if (k[2].equals("NoRegen"))
-            		NoRegen[0] = true;
-            	
-            	else if (k[2].startsWith("Drawback$"))
-            		Drawback[0] = k[2];
-            	            	
-            	if (k.length > 3)
-            	{
-            		if (k[3].startsWith("Drawback$"))
-            			Drawback[0] = k[3];
-            	}
-            	
-            	if (!Drawback[0].equals("none"))
-            	{
-            		String kk[] = Drawback[0].split("\\$");
+                 if (k[2].equals("NoRegen"))
+                      NoRegen[0] = true;
+                 
+                 else if (k[2].startsWith("Drawback$"))
+                      Drawback[0] = k[2];
+                                  
+                 if (k.length > 3)
+                 {
+                      if (k[3].startsWith("Drawback$"))
+                           Drawback[0] = k[3];
+                 }
+                 
+                 if (!Drawback[0].equals("none"))
+                 {
+                      String kk[] = Drawback[0].split("\\$");
                     Drawback[0] = kk[1];
-            	}
+                 }
             }
             
             card.clearSpellAbility();
@@ -3044,8 +3049,11 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Play.getCards());
-                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    // CardList human = new CardList(AllZone.Human_Play.getCards());
+                    // CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    
+                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
                     
                     human = human.getValidCards(Tgts,card.getController(),card);
                     human = human.getNotKeyword("Indestructible");
@@ -3064,14 +3072,18 @@ public class CardFactory implements NewConstants {
                     
                     // the computer will play the spell if Y < X - 3
                     return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
-                    		(computervalue < humanvalue - 3);
+                              (computervalue < humanvalue - 3);
                 }
 
                 @Override
                 public void resolve() {
                     CardList all = new CardList();
-                    all.addAll(AllZone.Human_Play.getCards());
-                    all.addAll(AllZone.Computer_Play.getCards());
+                    // all.addAll(AllZone.Human_Play.getCards());
+                    // all.addAll(AllZone.Computer_Play.getCards());
+                    
+                    all.addAll(AllZone.Human_Battlefield.getCards());
+                    all.addAll(AllZone.Computer_Battlefield.getCards());
+                    
                     all = all.getValidCards(Tgts,card.getController(),card);
                     
                     CardListUtil.sortByIndestructible(all);
@@ -3080,33 +3092,37 @@ public class CardFactory implements NewConstants {
                     for(int i = 0; i < all.size(); i++) {
                         Card c = all.get(i);
                         if(NoRegen[0])
-                        	AllZone.GameAction.destroyNoRegeneration(c);
+                             AllZone.GameAction.destroyNoRegeneration(c);
                         else
-                        	AllZone.GameAction.destroy(c);
+                             AllZone.GameAction.destroy(c);
                         
                     }
                     
                     if (!Drawback[0].equals("none"))
                     {
-                    	// drawbacks for DestroyAll spells usually involve the
-                    	// number of permanents that were actually destroyed
-                    	int nDestroyed = 0;
-	                    CardList afterAll = new CardList();
-	                    afterAll.addAll(AllZone.Human_Play.getCards());
-	                    afterAll.addAll(AllZone.Computer_Play.getCards());
-	                    afterAll = afterAll.getValidCards(Tgts,card.getController(),card);
-	                    
-	                    ArrayList<Integer> slD = new ArrayList<Integer>();
-	                    for (int i=0; i<afterAll.size(); i++)
-	                    	slD.add(afterAll.get(i).getUniqueNumber());
-	                    
-	                    for (int i=0; i<all.size(); i++)
-	                    {
-	                    	if (!slD.contains(all.get(i).getUniqueNumber()))
-	                    		nDestroyed++;
-	                    }
-	                    Log.error("nDestroyed: " + nDestroyed);
-	                    CardFactoryUtil.doDrawBack(Drawback[0], nDestroyed, card.getController(), card.getController().getOpponent(), null, card, null, this);
+                         // drawbacks for DestroyAll spells usually involve the
+                         // number of permanents that were actually destroyed
+                         int nDestroyed = 0;
+                         CardList afterAll = new CardList();
+                         // afterAll.addAll(AllZone.Human_Play.getCards());
+                         // afterAll.addAll(AllZone.Computer_Play.getCards());
+                         
+                         afterAll.addAll(AllZone.Human_Battlefield.getCards());
+                         afterAll.addAll(AllZone.Computer_Battlefield.getCards());
+                         
+                         afterAll = afterAll.getValidCards(Tgts,card.getController(),card);
+                         
+                         ArrayList<Integer> slD = new ArrayList<Integer>();
+                         for (int i=0; i<afterAll.size(); i++)
+                              slD.add(afterAll.get(i).getUniqueNumber());
+                         
+                         for (int i=0; i<all.size(); i++)
+                         {
+                              if (!slD.contains(all.get(i).getUniqueNumber()))
+                                   nDestroyed++;
+                         }
+                         Log.error("nDestroyed: " + nDestroyed);
+                         CardFactoryUtil.doDrawBack(Drawback[0], nDestroyed, card.getController(), card.getController().getOpponent(), null, card, null, this);
                     }
                 }// resolve()
 
@@ -3118,7 +3134,6 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spDstryAll);            
 
         }//spDestroyAll
-        */
 
 /*
         // Generic bounce target card
