@@ -40,19 +40,11 @@ public class PlayerLife extends MyObservable implements java.io.Serializable
     public void subtractLife(int life2, Card SourceCard)
     {
     	life -= life2;
-    	//unnecessary (I think?), since the addDamage methods in GameAction already check this:
-    	/*
-    	Object[] DealsDamage_Whenever_Parameters = new Object[3];
-    	DealsDamage_Whenever_Parameters[0] = player;
-    	DealsDamage_Whenever_Parameters[2] = SourceCard;
-    	AllZone.GameAction.CheckWheneverKeyword(playerCard, "DealsDamage", DealsDamage_Whenever_Parameters);
-    	*/
     	this.updateObservers();
     }
 
     public void payLife(int life2)	// change this to subtractLife
     {
-    	life -= life2;
-    	this.updateObservers();
+    	subtractLife(life2, null);
     }
 }

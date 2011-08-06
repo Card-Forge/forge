@@ -1,0 +1,9 @@
+Name:Necrogen Censer
+ManaCost:3
+Types:Artifact
+Text:no text
+K:etbCounter:CHARGE:2
+K:abLoseLifeTgt T SubCounter<1/CHARGE>:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogen_censer.jpg
+End
