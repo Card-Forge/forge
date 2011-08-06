@@ -1276,6 +1276,7 @@ res/cardsfolder/death_baron.txt -text svneol=native#text/plain
 res/cardsfolder/death_bomb.txt -text svneol=native#text/plain
 res/cardsfolder/death_cloud.txt -text svneol=native#text/plain
 res/cardsfolder/death_cultist.txt -text svneol=native#text/plain
+res/cardsfolder/death_denied.txt svneol=native#text/plain
 res/cardsfolder/death_grasp.txt -text svneol=native#text/plain
 res/cardsfolder/death_mutation.txt -text svneol=native#text/plain
 res/cardsfolder/death_of_a_thousand_stings.txt -text svneol=native#text/plain
