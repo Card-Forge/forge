@@ -327,7 +327,7 @@ public class TriggerHandler {
 			//All tests passed, execute ability.
 			if(regtrig instanceof Trigger_TapsForMana) {
 			     Ability_Mana abMana = (Ability_Mana)runParams.get("Ability_Mana");
-			     abMana.setUndoable(false);
+			     if(null != abMana) abMana.setUndoable(false);
 			}
 			
 			AbilityFactory AF = new AbilityFactory();
