@@ -1334,7 +1334,7 @@ public class Card extends MyObservable {
     public ArrayList<String> getType() {
         return new ArrayList<String>(type);
     }
-    
+
     public void setPrevType(ArrayList<String> a) {
         prevType = new ArrayList<String>(a);
     }
@@ -1886,4 +1886,21 @@ public class Card extends MyObservable {
 		
 		return false;
 	}
+
+    //usable to check for changelings
+    public boolean isType(String cardType) {
+        if (type.contains(cardType)
+                    || ((isCreature() || (isTribal() && !cardType.equals("Creature")))
+                            && !cardType.equals("Legendary") && !cardType.equals("Planeswalker")
+                            && !cardType.equals("Basic") && !cardType.equals("Enchantment")
+                            && !cardType.equals("Land") && !cardType.equals("Sorcery")
+                            && !cardType.equals("Instant") && !cardType.equals("Artifact")
+                            && !cardType.equals("Snow") && !cardType.equals("Arcane")
+                            && !cardType.equals("Equipment") && !cardType.equals("Aura")
+                            && !cardType.equals("Plains") && !cardType.equals("Mountain")
+                            && !cardType.equals("Island") && !cardType.equals("Forest")
+                            && !cardType.equals("Swamp") && getKeyword().contains("Changeling"))) return true;
+        return false;
+    }
+
 }
