@@ -6936,7 +6936,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             ability.setDescription("tap: Regenerate another target Goblin.");
             
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility(ability));
+            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility_NoTargetSelf(ability));
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -20761,7 +20761,45 @@ public class CardFactory_Creatures {
             });
 
         }//*************** END ************ END **************************
-        
+
+        //*************** START *********** START **************************
+          else if(cardName.equals("Overgrown Battlement")) {
+              final Ability_Mana ability = new Ability_Mana(card,"tap: add G to your mana pool for each creature with defender you control.") {
+     
+  				private static final long serialVersionUID = 422282090183907L;
+
+  				@Override
+                  public String mana() {
+                      String res = "";
+                      
+                      CardList cl = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+                      
+                      cl = cl.filter(new CardListFilter() {
+
+                      	public boolean addCard(Card c)
+                      	{
+                      		return c.hasKeyword("Defender");
+                      	}
+                      	
+                      });
+                      
+                      for(int i=0;i<cl.size();i++)
+                      {
+                      	res = res + "G ";
+                      }
+                      
+                      if(!res.equals(""))
+                      {
+                      	res = res.substring(0,res.length()-1);
+                      }
+                      
+                      return res;
+                  }//mana()                
+                  
+              };//Ability_Mana
+
+              card.addSpellAbility(ability);
+          }//*************** END ************ END **************************         
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

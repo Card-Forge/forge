@@ -1,3 +1,19 @@
+Overgrown Battlement
+1 G
+Creature Wall
+no text
+0/4
+Defender
+SVar:Rarity:Common
+
+Smokespew Invoker
+2 B
+Creature Zombie Mutant
+no text
+3/1
+abPumpTgt 7 B:-3/-3
+SVar:Rarity:Common
+
 Elvish Vanguard
 1 G
 Creature Elf
