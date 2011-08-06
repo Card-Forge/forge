@@ -1,3 +1,9 @@
+Deglamer
+1 G
+Instant
+Choose target artifact or enchantment. Its owner shuffles it into his or her library.
+spBounceTgt:Artifact,Enchantment:ShuffleIntoLibrary
+
 Celestial Purge
 1 W
 Instant

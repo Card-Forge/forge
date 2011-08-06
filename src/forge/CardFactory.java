@@ -2236,6 +2236,10 @@ public class CardFactory implements NewConstants {
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         	if(getTargetCard().isToken()) AllZone.getZone(getTargetCard()).remove(getTargetCard());
                         	else {  if(Destination.equals("TopofLibrary")) AllZone.GameAction.moveToTopOfLibrary(getTargetCard());
+					else if(Destination.equals("ShuffleIntoLibrary")) {
+							AllZone.GameAction.moveToTopOfLibrary(getTargetCard());
+							AllZone.GameAction.shuffle(getTargetCard().getOwner());
+					}
 					else if(Destination.equals("Exile")) AllZone.GameAction.removeFromGame(getTargetCard()); 
 					else if(Destination.equals("Hand")) {
                             			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
