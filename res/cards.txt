@@ -37,157 +37,157 @@ Basilisk Collar
 1
 Artifact Equipment
 Equipped creature has deathtouch and lifelink.
-VanillaEquipment:0:0:2:Deathtouch:Lifelink:none
+eqPump 2:0/0/Deathtouch & Lifelink
 
 Behemoth Sledge
 1 G W
 Artifact Equipment
 Equipped creature gets +2/+2 and has lifelink and trample.
-VanillaEquipment:2:2:3:Lifelink:Trample:none
+eqPump 3:2/2/Lifelink & Trample
 
 Blight Sickle
 2
 Artifact Equipment
 Equipped creature gets +1/+0 and has wither.
-VanillaEquipment:1:0:2:Wither:none:none
+eqPump 2:1/0/Wither
 
 Bone Saw
 0
 Artifact Equipment
 Equipped creature gets +1/+0.
-VanillaEquipment:1:0:1:none:none:none
+eqPump 1:1/0
 
 Bonesplitter
 1
 Artifact Equipment
 Equipped creature gets +2/+0.
-VanillaEquipment:2:0:1:none:none:none
+eqPump 1:2/0
 
 Fireshrieker
 3
 Artifact Equipment
 Equipped creature has double strike.
-VanillaEquipment:0:0:2:Double Strike:none:none
+eqPump 2:0/0/Double Strike
 
 Gorgon Flail
 2
 Artifact Equipment
 Equipped creature gets +1/+1 and has deathtouch.
-VanillaEquipment:1:1:2:Deathtouch:none:none
+eqPump 2:1/1/Deathtouch
 
 Kitesail
 2
 Artifact Equipment
 Equipped creature gets +1/+0 and has flying.
-VanillaEquipment:1:0:2:Flying:none:none
+eqPump 2:1/0/Flying
 
 Leonin Scimitar
 1
 Artifact Equipment
 Equipped creature gets +1/+1.
-VanillaEquipment:1:1:1:none:none:none
+eqPump 1:1/1
 
 Lightning Greaves
 2
 Artifact Equipment
 Equipped creature has haste and shroud.
-VanillaEquipment:0:0:0:Haste:Shroud:none
+eqPump 0:0/0/Haste & Shroud
 
 Loxodon Warhammer
 3
 Artifact Equipment
 Equipped creature gets +3/+0 and has lifelink and trample.
-VanillaEquipment:3:0:3:Trample:Lifelink:none
+eqPump 3:3/0/Trample & Lifelink
 
 Mask of Riddles
 U B
 Artifact Equipment
 Equipped creature has fear. Whenever equipped creature deals combat damage to a player, you may draw a card. 
-VanillaEquipment:0:0:2:Fear:none:none
+eqPump 2:0/0/Fear
 
 Neurok Hoversail
 1
 Artifact Equipment
 Equipped creature has flying.
-VanillaEquipment:0:0:2:Flying:none:none
+eqPump 2:0/0/Flying
 
 No-Dachi
 2
 Artifact Equipment
 Equipped creature gets +2/+0 and has first strike.
-VanillaEquipment:2:0:3:First Strike:none:none
+eqPump 3:2/0/First Strike
 
 Peregrine Mask
 1
 Artifact Equipment
 Equipped creature has defender, flying, and first strike.
-VanillaEquipment:0:0:2:Defender:Flying:First Strike
+eqPump 2:0/0/Defender & Flying & First Strike
 
 Quietus Spike
 3
 Artifact Equipment
 Equipped creature has deathtouch. Whenever equipped creature deals combat damage to a player, that player loses half his or her life, rounded up.
-VanillaEquipment:0:0:3:Deathtouch:none:none
+eqPump 3:0/0/Deathtouch
 
 Runed Stalactite
 1
 Artifact Equipment
 Equipped creature gets +1/+1 and is every creature type.
-VanillaEquipment:1:1:2:Changeling:none:none
+eqPump 2:1/1/Changeling
 
 Shuko
 1
 Artifact Equipment
 Equipped creature gets +1/+0.
-VanillaEquipment:1:0:0:none:none:none
+eqPump 0:1/0
 
 Slagwurm Armor
 1
 Artifact Equipment
 Equipped creature gets +0/+6.
-VanillaEquipment:0:6:3:none:none:none
+eqPump 3:0/6
 
 Spidersilk Net
 0
 Artifact Equipment
 Equipped creature gets +0/+2 and has reach.
-VanillaEquipment:0:2:2:Reach:none:none
+eqPump 2:0/2/Reach
 
 Trailblazer's Boots
 2
 Artifact Equipment
 Equipped creature has nonbasic landwalk.
-VanillaEquipment:0:0:2:Nonbasic landwalk:none:none
+eqPump 2:0/0/Nonbasic landwalk
 
 Trusty Machete
 1
 Artifact Equipment
 Equipped creature gets +2/+1.
-VanillaEquipment:2:1:2:none:none:none
+eqPump 2:2/1
 
 Vulshok Battlegear
 3
 Artifact Equipment
 Equipped creature gets +3/+3.
-VanillaEquipment:3:3:3:none:none:none
+eqPump 3:3/3
 
 Vulshok Gauntlets
 2
 Artifact Equipment
 Equipped creature gets +4/+2 and doesn't untap during its controller's untap step.
-VanillaEquipment:4:2:3:This card doesn't untap during your untap step.:none:none
+eqPump 3:4/2/This card doesn't untap during your untap step.
 
 Vulshok Morningstar
 2
 Artifact Equipment
 Equipped creature gets +2/+2.
-VanillaEquipment:2:2:2:none:none:none
+eqPump 2:2/2
 
 Whispersilk Cloak
 3
 Artifact Equipment
-Equipped creature is unblockable. Equipped creature has shroud.
-VanillaEquipment:0:0:2:Unblockable:Shroud:none
+Equipped creature is unblockable and has shroud.
+eqPump 2:0/0/Unblockable & Shroud
 
 Bloodcurdling Scream
 X B

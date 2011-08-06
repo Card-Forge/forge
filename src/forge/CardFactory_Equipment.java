@@ -10,7 +10,9 @@ class CardFactory_Equipment {
     public static int shouldEquip(Card c) {
         ArrayList<String> a = c.getKeyword();
         for(int i = 0; i < a.size(); i++)
-            if(a.get(i).toString().startsWith("VanillaEquipment")) return i;
+        	
+        	// Keyword renamed to eqPump, was VanillaEquipment
+            if(a.get(i).toString().startsWith("eqPump")) return i;
         
         return -1;
     }
@@ -1897,21 +1899,38 @@ class CardFactory_Equipment {
                 card.removeIntrinsicKeyword(parse);
                 
                 String k[] = parse.split(":");
-                final String P = k[1];
-                final String T = k[2];
-                final String manacost = k[3];
-                final String Ab1 = k[4];
-                final String Ab2 = k[5];
-                final String Ab3 = k[6]; //quantity of keyword abilities could be modified	          
+                String kk[] = k[1].split("/");
+                String tmpCost;
+                tmpCost = k[0].substring(6);
+                
+                final String manacost = tmpCost.trim();
+                final String P = kk[0].trim();
+                final String T = kk[1].trim();
                 final int Power = Integer.parseInt(P);
                 final int Tough = Integer.parseInt(T);
+
+                String tempAb1 = "none";
+                String tempAb2 = "none";
+                String tempAb3 = "none";
+                
+                if (kk.length > 2) // then there is at least one keyword ability to assign
+                {
+                	String kkk[] = kk[2].split("&");
+                	tempAb1 = kkk[0].trim();
+                	if (kkk.length > 1) tempAb2 = kkk[1].trim();
+                	if (kkk.length > 2) tempAb3 = kkk[2].trim(); //quantity of keyword abilities could be modified
+                }
+                
+                final String Ab1 = tempAb1;
+                final String Ab2 = tempAb2;
+                final String Ab3 = tempAb3;
                 
                 card.addSpellAbility(CardFactoryUtil.vanila_equip(card, Power, Tough, Ab1, Ab2, Ab3, manacost));
                 card.addEquipCommand(CardFactoryUtil.vanila_onequip(card, Power, Tough, Ab1, Ab2, Ab3, manacost));
                 card.addUnEquipCommand(CardFactoryUtil.vanila_unequip(card, Power, Tough, Ab1, Ab2, Ab3, manacost));
                 
             }
-        }//VanillaEquipment
+        }// eqPump (was VanillaEquipment)
         
         return card;
     }
