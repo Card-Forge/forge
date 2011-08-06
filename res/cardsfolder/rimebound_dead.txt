@@ -3,7 +3,8 @@ ManaCost:B
 Types:Snow Creature Skeleton
 Text:no text
 PT:1/1
-A:AB$Regenerate | Cost$ S | SpellDescription$ Regenerate CARDNAME.
+A:AB$ Regenerate | Cost$ S | SpellDescription$ Regenerate CARDNAME.
+SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimebound_dead.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/69.jpg
