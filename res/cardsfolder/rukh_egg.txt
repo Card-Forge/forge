@@ -1,5 +1,5 @@
 Name:Rukh Egg
-ManaCost:2 R
+ManaCost:3 R
 Types:Creature Bird
 Text:no text
 PT:0/3
