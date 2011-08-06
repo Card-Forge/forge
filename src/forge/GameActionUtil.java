@@ -4725,7 +4725,6 @@ public class GameActionUtil {
 				|| c.getName().equals("Slith Predator")) playerCombatDamage_Slith(c);
 		else if (c.getName().equals("Arcbound Slith"))
 			playerCombatDamage_Arcbound_Slith(c);
-		else if(c.getName().equals("Oros, the Avenger")) playerCombatDamage_Oros(c);
 		else if(c.getName().equals("Rootwater Thief")) playerCombatDamage_Rootwater_Thief(c);
 		else if(c.getName().equals("Treva, the Renewer")) playerCombatDamage_Treva(c);
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
@@ -4873,11 +4872,7 @@ public class GameActionUtil {
 		opponent.addPoisonCounters(n);
 	}
 
-	private static void playerCombatDamage_Oros(Card c) {
-		SpellAbility[] sa = c.getSpellAbility();
-		if(c.getController().equals(AllZone.HumanPlayer)) AllZone.GameAction.playSpellAbility(sa[1]);
-		else ComputerUtil.playNoStack(sa[1]);
-	}
+	
 	/*
 	private static void playerCombatDamage_Dimir_Cutpurse(Card c) {
 		final Player player = c.getController();

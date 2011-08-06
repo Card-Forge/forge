@@ -5106,34 +5106,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Oros, the Avenger")) {
-            final Ability ability2 = new Ability(card, "2 W") {
-                @Override
-                public void resolve() {
-                    CardList cards = AllZoneUtil.getCreaturesInPlay();
-                    
-                    for(int i = 0; i < cards.size(); i++) {
-                        if(!(cards.get(i)).isWhite()) {
-                            cards.get(i).addDamage(3, card);
-                        }
-                    }
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    //this is set to false, since it should only TRIGGER
-                    return false;
-                }
-            };// ability2
-            //card.clearSpellAbility();
-            card.addSpellAbility(ability2);
-            
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(card.getName()).append(" - deals 3 damage to each nonwhite creature.");
-            ability2.setStackDescription(sb2.toString());
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Treva, the Renewer")) {
