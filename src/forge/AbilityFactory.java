@@ -672,7 +672,7 @@ public class AbilityFactory {
 			SpellAbility parent = findParentsTargetedCard(sa);
 			cards.addAll(parent.getTarget().getTargetCards());
 		}
-
+		
 		if (c != null)
 			cards.add(c);
 		
@@ -718,37 +718,8 @@ public class AbilityFactory {
 		ArrayList<Object> objects = new ArrayList<Object>();
 		String defined = (def == null) ? "Self" : def;
 		
-		if (defined.equals("Targeted")){
-			SpellAbility parent = sa;
-			do{
-				parent = ((Ability_Sub)parent).getParent();
-			}while(parent.getTarget() == null || parent.getTarget().getTargets().size() == 0);
-			
-			objects.addAll(parent.getTarget().getTargets());
-		}
-		else{
-			// Player checks
-			if (defined.equals("You") || defined.equals("Each"))
-				objects.add(sa.getActivatingPlayer());
-			
-			if (defined.equals("Opponent") || defined.equals("Each"))
-				objects.add(sa.getActivatingPlayer().getOpponent());
-
-			// Card checks
-			Card c = null;
-
-			if (defined.equals("Self"))
-				c = card;
-			
-			if (defined.equals("Equipped"))
-				c = card.getEquippingCard();
-
-			if (defined.equals("Enchanted"))
-				c = card.getEnchantingCard();
-			
-			if (c != null)
-				objects.add(c);
-		}
+		objects.addAll(getDefinedPlayers(card, defined, sa));
+		objects.addAll(getDefinedCards(card, defined, sa));
 		return objects;
 	}
 	
