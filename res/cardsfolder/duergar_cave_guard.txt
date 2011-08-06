@@ -4,7 +4,7 @@ Types:Creature Dwarf Warrior
 Text:no text
 PT:1/3
 K:Wither
-K:abPump RW:+1/+0
+A:AB$Pump | Cost$ RW | NumAtt$ +1 | SpellDescription$ Duergar Cave-Guard gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duergar_cave_guard.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/51.jpg

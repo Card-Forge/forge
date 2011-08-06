@@ -4,7 +4,7 @@ Types:Artifact Creature Gargoyle
 Text:no text
 PT:1/2
 K:Flying
-K:abPump B:+2/-1
+A:AB$Pump | Cost$ B | NumAtt$ +2 | NumDef$ -1 | SpellDescription$ Darklit Gargoyle gets +2/-1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darklit_gargoyle.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/7.jpg

@@ -4,7 +4,7 @@ Types:Creature Shade
 Text:no text
 PT:2/2
 K:Haste
-K:abPump B:+1/+1
+A:AB$Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Crypt Ripper gets +1/+1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_ripper.jpg
 SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/85.jpg

@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 Text:no text
 PT:4/4
 K:abTapTgt 3 W:Creature:Tap target creature.
-K:abPump 3 W:+0/+5
+A:AB$Pump | Cost$ 3 W | NumDef$ +5 | SpellDescription$ Crowd Favorites gets +0/+5 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crowd_favorites.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/15.jpg

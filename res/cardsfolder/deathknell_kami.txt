@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:0/1
 K:Flying
-K:abPump 2:+1/+1/At the beginning of the end step, sacrifice CARDNAME.
+A:AB$Pump | Cost$ 2 | NumAtt$ +1 | NumDef$ +1 | KW$ At the beginning of the end step, sacrifice CARDNAME. | SpellDescription$ Deathknell Kami gets +1/+1 until end of turn. Sacrifice it at the beginning of the next end step.
 K:Soulshift:1
 SVar:RemAIDeck:True
 SVar:Rarity:Common
