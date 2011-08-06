@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Creature Golem
 Text:no text
 PT:0/0
-A:AB$Retrieve|Cost$SubCounter<1/P1P1>|TgtPrompt$Choose target artifact card in your graveyard|ValidTgts$Artifact.YouCtrl|Destination$Library|SpellDescription$Put target artifact card from your graveyard on top of your library.
+A:AB$Retrieve | Cost$ SubCounter<1/P1P1> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Destination$ Library | SpellDescription$ Put target artifact card from your graveyard on top of your library.
 K:Modular 2
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

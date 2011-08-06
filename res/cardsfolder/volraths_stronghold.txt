@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Legendary Land
 Text:no text
 K:tap: add 1
-A:AB$Retrieve|Cost$1 B T|TgtPrompt$Choose target creature card in your graveyard|ValidTgts$Creature.YouCtrl|Destination$Library|SpellDescription$Put target creature card from your graveyard on top of your library.
+A:AB$Retrieve | Cost$ 1 B T | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Destination$ Library | SpellDescription$ Put target creature card from your graveyard on top of your library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_stronghold.jpg
 End

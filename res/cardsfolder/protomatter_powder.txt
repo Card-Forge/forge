@@ -2,7 +2,7 @@ Name:Protomatter Powder
 ManaCost:2 U
 Types:Artifact
 Text:no text
-A:AB$Retrieve|Cost$4 W T Sac<1/CARDNAME>|TgtPrompt$Choose target artifact card in your graveyard|ValidTgts$Artifact.YouCtrl|Destination$Battlefield|SpellDescription$Return target artifact card from your graveyard to the battlefield.
+A:AB$Retrieve | Cost$ 4 W T Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Destination$ Battlefield | SpellDescription$ Return target artifact card from your graveyard to the battlefield.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/protomatter_powder.jpg

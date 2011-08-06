@@ -7,7 +7,7 @@ K:Flying
 K:First Strike
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may gain 1 life.
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, if Firemane Angel is in your graveyard, you may gain 1 life.
-A:AB$Retrieve|Cost$6 R R W W|Destination$Battlefield|ActivatingZone$Graveyard|PlayerTurn$True|ActivatingPhases$Upkeep|SpellDescription$Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
+A:AB$Retrieve | Cost$ 6 R R W W | Destination$ Battlefield | ActivatingZone$ Graveyard | PlayerTurn$ True | ActivatingPhases$ Upkeep | SpellDescription$ Return Firemane Angel from your graveyard to the battlefield. Activate this ability only during your upkeep.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firemane_angel.jpg
 End

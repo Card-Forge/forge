@@ -5,7 +5,7 @@ Text:no text
 PT:5/5
 K:Flying
 K:TypeCycling:Plains:2
-A:AB$Retrieve|Cost$3 W W|Destination$Hand|ActivatingZone$Graveyard|ActivatingPhases$Upkeep|PlayerTurn$True|SpellDescription$Return Eternal Dragon from your graveyard to your hand. Activate this ability only during your upkeep.
+A:AB$Retrieve | Cost$ 3 W W | Destination$ Hand | ActivatingZone$ Graveyard | ActivatingPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Return Eternal Dragon from your graveyard to your hand. Activate this ability only during your upkeep.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_dragon.jpg
 End

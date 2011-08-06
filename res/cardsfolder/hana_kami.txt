@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Spirit
 Text:no text
 PT:1/1
-A:AB$Retrieve|Cost$1 G Sac<1/CARDNAME>|TgtPrompt$Choose target Arcane card in your graveyard|ValidTgts$Arcane|Destination$Hand|SpellDescription$Return target Arcane card from your graveyard to your hand.
+A:AB$Retrieve | Cost$ 1 G Sac<1/CARDNAME> | TgtPrompt$ Choose target Arcane card in your graveyard | ValidTgts$ Arcane | Destination$ Hand | SpellDescription$ Return target Arcane card from your graveyard to your hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hana_kami.jpg

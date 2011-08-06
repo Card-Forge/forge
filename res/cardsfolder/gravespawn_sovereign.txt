@@ -3,7 +3,7 @@ ManaCost:4 B B
 Types:Creature Zombie
 Text:no text
 PT:3/3
-A:AB$Retrieve|Cost$T tapXType<5/Zombie>|TgtPrompt$Choose target creature card in a graveyard|GainControl$True|ValidTgts$Creature|Destination$Battlefield|PlayerTurn$True|ActivatingPhases$Upkeep|SpellDescription$Put target creature card from a graveyard onto the battlefield under your control.
+A:AB$Retrieve | Cost$ T tapXType<5/Zombie> | TgtPrompt$ Choose target creature card in a graveyard | GainControl$ True | ValidTgts$ Creature | Destination$ Battlefield | PlayerTurn$ True | ActivatingPhases$ Upkeep | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravespawn_sovereign.jpg
