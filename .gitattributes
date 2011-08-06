@@ -1818,6 +1818,7 @@ res/cardsfolder/elvish_lyrist.txt -text svneol=native#text/plain
 res/cardsfolder/elvish_pathcutter.txt -text svneol=native#text/plain
 res/cardsfolder/elvish_piper.txt -text svneol=native#text/plain
 res/cardsfolder/elvish_ranger.txt -text svneol=native#text/plain
+res/cardsfolder/elvish_scout.txt svneol=native#text/plain
 res/cardsfolder/elvish_scrapper.txt -text svneol=native#text/plain
 res/cardsfolder/elvish_skysweeper.txt -text svneol=native#text/plain
 res/cardsfolder/elvish_spirit_guide.txt -text svneol=native#text/plain
