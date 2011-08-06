@@ -1,0 +1,9 @@
+Name:Azorius Guildmage
+ManaCost:WU WU
+Types:Creature Vedalken Wizard
+Text:no text
+A:AB$Tap | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.  
+A:AB$Counter|Cost$2 U|Type$Ability|SpellDescription$Counter target activated ability.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_guildmage.jpg
+End
