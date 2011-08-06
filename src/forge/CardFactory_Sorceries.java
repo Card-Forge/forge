@@ -8003,7 +8003,9 @@ public class CardFactory_Sorceries {
 				            
 				        }//if
 			        } else {
-			        	Card c = CardFactoryUtil.AI_getBestCreature(new CardList(library.getCards()));
+			        	CardList greenlist = new CardList(library.getCards());
+			        	greenlist = greenlist.getType("Creature").getColor("G");
+			        	Card c = CardFactoryUtil.AI_getBestCreature(greenlist);
 			        	if(c != null) {
 				            list.remove(c);
 				            library.remove(c);
