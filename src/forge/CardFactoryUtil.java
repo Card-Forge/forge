@@ -820,6 +820,7 @@ public class CardFactoryUtil
 		return morph_up;
 	  
   }
+/*
   public static SpellAbility spellability_spDamageP(final Card sourceCard, final String dmg)
   {
       final int damage = Integer.parseInt(dmg);
@@ -943,6 +944,7 @@ public class CardFactoryUtil
    DamageCP.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(DamageCP, true));
    return DamageCP;
   }//spellability_DamageCP
+ */
   
   public static SpellAbility ability_Merc_Search(final Card sourceCard, String cost) 
   {
