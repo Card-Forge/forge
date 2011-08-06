@@ -1,8 +1,8 @@
 Name:Wallop
 ManaCost:1 G
 Types:Sorcery
-Text:Destroy target creature with flying.
-K:spDestroyTgt:Creature.Blue+withFlying,Creature.Black+withFlying
+Text:no text
+A:SP$Destroy | Cost$ 1 G | ValidTgts$ Creature.Blue+withFlying,Creature.Black+withFlying | TgtPrompt$ Select target blue or black creature with flying | SpellDescription$ Destroy target creature with flying.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wallop.jpg

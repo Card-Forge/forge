@@ -1,8 +1,8 @@
 Name:Vengeance
 ManaCost:3 W
 Types:Sorcery
-Text:Destroy target tapped creature.
-K:spDestroyTgt:Creature.tapped
+Text:no text
+A:SP$Destroy | Cost$ 3 W | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeance.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/28.jpg
