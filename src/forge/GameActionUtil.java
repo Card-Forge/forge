@@ -5107,11 +5107,31 @@ public class GameActionUtil {
     }
 
     //not restricted to just combat damage:
-    public static void executePlayerDamageEffects(String player, Card c, int damage, boolean isCombatDamage)
+    public static void executePlayerDamageEffects(String player, Card c, final int damage, boolean isCombatDamage)
     {
     	if (damage > 0)
     	{
     		CardList playerPerms = AllZoneUtil.getPlayerCardsInPlay(player);
+    		
+    		/*
+    		 * Darien, King of Kjeldor - 
+    		 * Whenever you're dealt damage, you may put that many 1/1 white
+    		 * Soldier creature tokens onto the battlefield.
+    		 */
+    		if( playerPerms.getName("Darien, King of Kjeldor").size() > 0) {
+    			CardList dariens = playerPerms.getName("Darien, King of Kjeldor");
+    			for(Card crd:dariens) {
+    				final Card darien = crd;
+    				SpellAbility ability = new Ability(darien, "0") {
+    					public void resolve() {
+    						for(int i = 0; i < damage; i++)
+    							CardFactoryUtil.makeToken11WSoldier(darien.getController());
+    					}
+    				};
+    				ability.setStackDescription(darien.getName()+" - "+darien.getController()+" puts "+damage+" Soldier tokens in play.");
+    				AllZone.Stack.add(ability);
+    			}
+    		}
     		if (playerPerms.getName("Dissipation Field").size() > 0)  {  
     			CardList disFields = playerPerms.getName("Dissipation Field");
     			for (int i=0;i<disFields.size();i++) {
@@ -5156,7 +5176,7 @@ public class GameActionUtil {
 			else if(c.getName().equals("Thieving Magpie")|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
 			else if(c.getName().equals("Warren Instigator")) playerCombatDamage_Warren_Instigator(c);
 			else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
-				playerCombatDamage_Whirling_Dervish(c); 
+				playerCombatDamage_Whirling_Dervish(c);
 	    	
 	    	if (isCombatDamage)
 	    		c.setDealtCombatDmgToOppThisTurn(true);

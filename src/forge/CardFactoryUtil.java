@@ -4456,6 +4456,9 @@ public class CardFactoryUtil {
     public static CardList makeTokenSaproling(String controller) {
     	return makeToken("Saproling", "G 1 1 Saproling", controller, "G", new String[] {"Creature", "Saproling"}, 1, 1, new String[] {""});
     }
+    public static CardList makeToken11WSoldier(String controller) {
+    	return makeToken("Soldier", "W 1 1 Soldier", controller, "W", new String[] {"Creature", "Soldier"}, 1, 1, new String[] {""});
+    }
     
     public static CardList makeToken(String name, String imageName, String controller, String manaCost, String[] types, int baseAttack, int baseDefense, String[] intrinsicKeywords) {
         CardList list = new CardList();
