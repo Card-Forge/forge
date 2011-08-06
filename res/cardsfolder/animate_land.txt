@@ -1,9 +1,10 @@
 Name:Animate Land
 ManaCost:G
 Types:Instant
-Text:Until end of turn, target land is 3/3 creature that's still a land.
+Text:no text
+A:SP$Animate | Cost$ G | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 3 | Toughness$ 3 | Types$ Creature | SpellDescription$ Until end of turn, target land becomes a 3/3 creature that's still a land.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/ne/en-us/card21377.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/animate_land.jpg
 SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/101.jpg
 End

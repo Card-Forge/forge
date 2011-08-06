@@ -1132,62 +1132,6 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Animate Land")) {
-            final Card[] target = new Card[1];
-            final Command untilEOT = new Command() {
-                private static final long serialVersionUID = -3359299797188942353L;
-                
-                public void execute() {
-                    if(AllZone.GameAction.isCardInPlay(target[0])) {
-                        target[0].removeType("Creature");
-                    }
-                }
-            };
-            
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 4890851927124377327L;
-                
-                @Override
-                public void resolve() {
-                    target[0] = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0])) {
-                        target[0].addType("Creature");
-                        target[0].setBaseAttack(3);
-                        target[0].setBaseDefense(3);
-                        
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }//resolve()
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                    /* all this doesnt work, computer will not attack with the animated land
-
-                    //does the computer have any land in play?
-                    CardList land = new CardList(AllZone.Computer_Play.getCards());
-                    land = land.getType("Land");
-                    land = land.filter(new CardListFilter()
-                    {
-                      public boolean addCard(Card c)
-                      {
-                              //checks for summoning sickness, and is not tapped
-                        return CombatUtil.canAttack(c);
-                      }
-                    });
-                    return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
-                    */
-                }
-            };//SpellAbility
-            // spell.setChooseTargetAI(CardFactoryUtil.AI_targetType("Land", AllZone.Computer_Play));
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "Land"));
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
           
         
         //*************** START *********** START **************************
