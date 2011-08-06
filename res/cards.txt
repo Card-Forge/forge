@@ -1,3 +1,14 @@
+Abyssal Persecutor
+2 B B
+Creature Demon
+You can't win the game and your opponents can't lose the game.
+6/6
+Flying
+Trample
+SVar:RemAIDeck:True
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_persecutor.jpg
+
 Clout of the Dominus
 UR
 Enchantment Aura
@@ -472,16 +483,6 @@ no text
 WheneverKeyword:DiscardsCard:ControllingPlayer_Opponent:Play:KeywordPumpEOT/Fear!StatsPumpEOT/2/2:Self!Self:ASAP:No_Condition:No Special Condition:Whenever an opponent discards a card, Abyssal Nocturnus gets +2/+2 and gains fear until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_nocturnus.jpg
-
-Abyssal Persecutor
-2 B B
-Creature Demon
-You can't win the game and your opponents can't lose the game.
-6/6
-Flying
-Trample
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_persecutor.jpg
 
 Abyssal Specter
 2 B B
