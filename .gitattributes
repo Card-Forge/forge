@@ -5485,6 +5485,7 @@ res/cardsfolder/snow_covered_plains.txt -text svneol=native#text/plain
 res/cardsfolder/snow_covered_swamp.txt -text svneol=native#text/plain
 res/cardsfolder/snow_devil.txt -text svneol=native#text/plain
 res/cardsfolder/snow_fortress.txt svneol=native#text/plain
+res/cardsfolder/snow_hound.txt -text svneol=native#text/plain
 res/cardsfolder/soaring_hope.txt svneol=native#text/plain
 res/cardsfolder/soaring_seacliff.txt svneol=native#text/plain
 res/cardsfolder/sokenzan_bruiser.txt -text svneol=native#text/plain
