@@ -19,6 +19,17 @@ abstract public class Ability_Tap extends SpellAbility implements java.io.Serial
     public boolean canPlay() {
         Card card = getSourceCard();
         
+        CardList Pithing = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+		Pithing.add(AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer));
+		Pithing = Pithing.getName("Pithing Needle");
+		Pithing = Pithing.filter(new CardListFilter() {
+			public boolean addCard(Card c){
+				return c.getSVar("PithingTarget").equals(c.getName());
+			}
+		});
+		
+		if(Pithing.size() != 0) return false;
+        
         if(AllZone.GameAction.isCardInPlay(card) && card.isUntapped()) {
             if(card.isFaceDown()) return false;
             if(card.isCreature() == true) {

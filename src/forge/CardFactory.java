@@ -12205,6 +12205,68 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
       //*************** START *********** START **************************
+        else if(cardName.equals("Pithing Needle")) {
+        	final CardFactory factory = this;
+        	final SpellAbility ability = new Ability_Static(card, "0") {
+                @Override
+                public void resolve() {
+                	 final String[] input = new String[1];
+                	 CardList allCards = factory.getAllCards();
+                	 input[0] = "";
+                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    	while(input[0] == "")
+                    	{
+                    		input[0] = JOptionPane.showInputDialog(null, "Which source?", "Pick a card",JOptionPane.QUESTION_MESSAGE);
+                        
+                    		
+                        	CardList cards = allCards.filter(new CardListFilter() {
+                        		public boolean addCard(Card c) {
+                        			//System.out.print("Comparing \"" + c.getName().toLowerCase() + "\" to \"" + input[0] + "\": ");
+                        			//System.out.println((c.getName().toLowerCase().equals(input[0].toLowerCase())));
+                        			return c.getName().toLowerCase().equals(input[0].toLowerCase());
+                        		}
+                        	});
+                        	
+                        	if(cards.size() == 0) {
+                        		input[0] = "";
+                        	}
+                        	else {
+                        		input[0] = cards.get(0).getName();
+                        	}
+                    	}
+                        //TODO: some more input validation, case-sensitivity, etc.
+                        
+                    } else {
+                        //AI CODE WILL EVENTUALLY GO HERE!
+                    }
+                    card.setSVar("PithingTarget", input[0]);
+                    card.setChosenType(input[0]);
+                }
+            };//ability
+            ability.setStackDescription("As Pithing Needle enters the battlefield, name a card.");
+        	Command intoPlay = new Command() {
+
+				private static final long serialVersionUID = 2266471224097876143L;
+
+				public void execute() {
+        			AllZone.Stack.add(ability);
+        		}
+        	};
+        	
+        	Command leavesPlay = new Command() {
+
+				private static final long serialVersionUID = 7079781778752377760L;
+
+				public void execute() {
+        			card.setSVar("Pithing Target", "");
+        		}
+        	};
+        	
+        	card.addComesIntoPlayCommand(intoPlay);
+        	card.addLeavesPlayCommand(leavesPlay);
+        }//*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
         else if(cardName.equals("Candelabra of Tawnos")) {
         	/*
         	 * X, Tap: Untap X target lands.
