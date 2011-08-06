@@ -1,3 +1,33 @@
+Arrogant Wurm
+3 G G
+Creature Wurm
+no text
+4/4
+Trample
+Madness:2 G
+
+Basking Rootwalla
+G
+Creature Lizard
+Play this ability only once each turn.
+1/1
+abPump 1 G:+2/+2
+Madness:0
+
+Ichor Slick
+2 B
+Sorcery
+no text
+Madness:3 B
+
+Reckless Wurm
+3 R R
+Creature Wurm
+no text
+4/4
+Trample
+Madness:2 R
+
 Vedalken Heretic
 U G
 Creature Vedalken Rogue
@@ -21339,13 +21369,6 @@ Trample
 Haste
 At the beginning of the end step, sacrifice CARDNAME.
 
-Reckless Wurm
-3 R R
-Creature Wurm
-(NOTE: "Madness" not implemented.)
-4/4
-Trample
-
 Force of Savagery
 2 G
 Creature Elemental
@@ -21461,11 +21484,6 @@ Instant
 no text
 spDamageTgtC:X:Drawback$YouGainLife/X:Tendrils of Corruption deals X damage to target creature and you gain X life, where X is the number of Swamps you control.:Tendrils of Corruption - deals damage and you gain life.
 SVar:X:Count$TypeYouCtrl.Swamp
-
-Ichor Slick
-2 B
-Sorcery
-(NOTE: "Madness" is not implemented.)
 
 Lucent Liminid
 3 W W

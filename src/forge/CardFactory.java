@@ -3425,6 +3425,20 @@ public class CardFactory implements NewConstants {
                 card.setUnearth(true);
             }
         }//unearth
+        
+        if(hasKeyword(card, "Madness") != -1) {
+            int n = hasKeyword(card, "Madness");
+            if(n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                //card.removeIntrinsicKeyword(parse);
+                
+                String k[] = parse.split(":");
+                final String manacost = k[1];
+
+                card.setMadness(true);
+                card.setMadnessCost(k[1]);
+            }
+        }//madness
 
         if(hasKeyword(card, "Devour") != -1) {
             int n = hasKeyword(card, "Devour");

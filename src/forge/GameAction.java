@@ -134,9 +134,12 @@ public class GameAction {
     	AllZone.GameAction.CheckWheneverKeyword(c,"DiscardsCard",null);
         discard_nath(c);
         discard_megrim(c);
-        moveToGraveyard(c);
-        if(CardFactoryUtil.getCards("Necropotence", c.getOwner()).size() > 0) 
+        if(CardFactoryUtil.getCards("Necropotence", c.getOwner()).size() > 0){	// necro disrupts madness
         	removeFromGame(c);
+        	return;
+        }
+        discard_madness(c);
+        moveToGraveyard(c);
     }
     
     public void discardRandom(String player, int numDiscard) {
@@ -396,6 +399,43 @@ public class GameAction {
         	ability.setStackDescription(megrim.getName()+" - deals 2 damage to "+owner);
         	AllZone.Stack.add(ability);
         }
+    }
+    
+    public void discard_madness(Card c) {
+    	// Whenever a card with madness is discarded, you may cast it for it's madness cost
+    	if (!c.hasMadness())
+    		return;
+
+    	final Card madness = c;
+    	final Ability cast = new Ability(madness, madness.getMadnessCost()) {
+    		@Override
+    		public void resolve() {
+    			//moveToHand(madness);
+    			if (madness.getOwner().equals("Human"))
+    				AllZone.Human_Graveyard.remove(madness);
+    			else
+    				AllZone.Computer_Graveyard.remove(madness);
+    			playCardNoCost(madness);
+    			System.out.println("Madness cost paid");
+    		}
+    	};
+    	cast.setStackDescription(madness.getName()+" - Cast via Madness");
+    	
+    	final Ability activate = new Ability(madness, "0") {
+    		@Override
+    		public void resolve() {
+    			// pay madness cost here.
+    			if (cast.getManaCost().equals("0"))
+    				AllZone.Stack.add(cast);
+    			else if (madness.getOwner().equals("Human"))
+    				AllZone.InputControl.setInput(new Input_PayManaCost(cast));
+    			else 	// computer will ALWAYS pay a madness cost if he has the mana.
+    				ComputerUtil.playStack(cast);	
+    		}
+    	};
+        
+        activate.setStackDescription(madness.getName() + " - Discarded. Pay Madness Cost?");
+    	AllZone.Stack.add(activate);
     }
     
     //do this during combat damage:

@@ -73,6 +73,8 @@ public class Card extends MyObservable {
     private boolean 					 unearth						   = false;
     private boolean 					 unearthed;
     
+    private boolean						 madness						   = false;
+    
     private int                          exaltedMagnitude                  = 0;
     
     private int                          baseAttack;
@@ -113,6 +115,7 @@ public class Card extends MyObservable {
     private String                       tabernacleUpkeepCost              = "";
     private String                       magusTabernacleUpkeepCost         = "";
     private String                       echoCost                          = "";
+    private String						 madnessCost					   = "";
     private String                       chosenType                        = "";
     private String                       chosenColor                       = "";
     private String                       namedCard                         = "";
@@ -1779,6 +1782,22 @@ public class Card extends MyObservable {
     public void setUnearthed(boolean b)
     {
     	unearthed = b;
+    }
+    
+    public boolean hasMadness() {
+        return madness;
+    }
+    
+    public void setMadness(boolean b) {
+    	madness = b;
+    }
+    
+    public String getMadnessCost() {
+        return madnessCost;
+    }
+    
+    public void setMadnessCost(String cost) {
+    	madnessCost = cost;
     }
     
     public void setKicked(boolean b) {
