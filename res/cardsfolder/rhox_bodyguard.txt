@@ -4,6 +4,7 @@ Types:Creature Rhino Monk Soldier
 Text:When CARDNAME enters the battlefield, you gain 3 life.
 PT:2/3
 K:Exalted
+K:etbGainLife:3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_bodyguard.jpg
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/122.jpg

@@ -4,6 +4,7 @@ Types:Creature Angel
 Text:When CARDNAME enters the battlefield, you gain 3 life.
 PT:3/3
 K:Flying
+K:etbGainLife:3
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82992.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/1.jpg

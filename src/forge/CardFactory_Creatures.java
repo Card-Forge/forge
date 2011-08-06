@@ -917,31 +917,6 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Angel of Mercy") || cardName.equals("Rhox Bodyguard") || cardName.equals("Tireless Missionaries")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.getController().gainLife(3, card);
-                }
-            };//SpellAbility
-            
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 6457889481637587581L;
-                
-                public void execute() {
-                	
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getName()).append(" - ").append(card.getController()).append(" gains 3 life");
-                	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Rukh Egg")) {
