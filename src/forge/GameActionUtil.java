@@ -7338,57 +7338,6 @@ public class GameActionUtil {
 		 }// for
 		}//library.size()>0
 	}// upkeep_Winnower_Patrol()
-
-	private static void upkeep_Nightshade_Schemers() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		final Player opponent = player.getOpponent();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Nightshade Schemers");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			if(library.size() <= 0) {
-				return;
-			}
-			// System.out.println("top of deck: " + library.get(i).getName());
-			String creatureType = library.get(0).getType().toString();
-			String cardName = library.get(0).getName();
-			final Card F_card = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-
-					String creatureType = library.get(0).getType().toString();
-
-					if(creatureType.contains("Faerie") || creatureType.contains("Wizard")
-							|| library.get(0).getKeyword().contains("Changeling")) {
-						opponent.loseLife(2, F_card);
-					}
-
-				}// resolve()
-			};// Ability
-			if(creatureType.contains("Faerie") || creatureType.contains("Wizard")) {
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("Nightshade Schemers - ").append(player).append(" reveals: ");
-				sb.append(cardName).append(", and ").append(opponent).append(" loses 2 life.");
-				ability.setStackDescription(sb.toString());
-			}
-			else {
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append("Nightshade Schemers - ").append(player);
-				sb.append(" reveals top card: ").append(cardName).append(".");
-				ability.setStackDescription(sb.toString());
-			}
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Nightshade_Schemers()
 	
 	private static void upkeep_Benthic_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -7411,6 +7360,7 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Benthic_Djinn()   
+	
 	
     /////////////////////////
     // Start of Kinship cards
@@ -7571,6 +7521,73 @@ public class GameActionUtil {
     }// upkeep_Leaf_Crowned_Elder()
     
     
+    private static void upkeep_Nightshade_Schemers() {
+        final Player player = AllZone.Phase.getPlayerTurn();
+        CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Nightshade Schemers");
+        final Player opponent = player.getOpponent();
+        
+        if (kinship.size() == 0)
+            return;
+        
+        final String[] shareTypes = { "Faerie", "Wizard" };
+        final Card[] prevCardShown = { null };
+        final Card peek[] = { null };
+        
+        for (final Card k : kinship) {
+            Ability ability = new Ability(k, "0") {    // change to triggered abilities when ready
+                @Override
+                public void resolve() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    if (library.size() <= 0)
+                        return;
+                    
+                    peek[0] = library.get(0);
+                    boolean wantOpponentLoseLife = false;
+                    
+                    // We assume that both players will want to peek, ask if they want to reveal.
+                    // We do not want to slow down the pace of the game by asking too many questions.
+                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
+                    
+                    if (peek[0].isValidCard(shareTypes)) {
+                        if (player.isHuman()) {
+                            StringBuilder question = new StringBuilder();
+                            question.append("Your top card is ").append(peek[0].getName());
+                            question.append(". Reveal card and opponent loses 2 life?");
+                            if (showYesNoDialog(k, question.toString())) {
+                                wantOpponentLoseLife = true;
+                            }
+                        }
+                        // player isComputer()
+                        else {
+                            String title = "Computer reveals";
+                            revealTopCard(title);
+                            wantOpponentLoseLife = true;
+                        }
+                    } else if (player.isHuman()) {
+                        String title = "Your top card is";
+                        revealTopCard(title);
+                    }
+                    if (wantOpponentLoseLife)
+                        opponent.loseLife(2, k);
+                }// resolve()
+                
+                private void revealTopCard(String title) {
+                    if (peek[0] != prevCardShown[0]) {
+                        AllZone.Display.getChoice(title, peek[0]);
+                        prevCardShown[0] = peek[0];
+                    }
+                }// revealTopCard()
+            };// ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Nightshade Schemers - ").append(player);
+            sb.append(" triggers Kinship");
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Nightshade_Schemers()
+    
+    
     private static void upkeep_Wandering_Graybeard() {
         final Player player = AllZone.Phase.getPlayerTurn();
         CardList kinship = AllZoneUtil.getPlayerCardsInPlay(player, "Wandering Graybeard");
@@ -7661,7 +7678,7 @@ public class GameActionUtil {
                     
                     // We assume that both players will want to peek, ask if they want to reveal.
                     // We do not want to slow down the pace of the game by asking too many questions.
-                    // Dialogs ouside of the Ability appear at the previous end of turn phase !!!
+                    // Dialogs outside of the Ability appear at the previous end of turn phase !!!
                     
                     if (peek[0].isValidCard(shareTypes)) {
                         if (player.isHuman()) {
