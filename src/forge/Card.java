@@ -2018,6 +2018,9 @@ public class Card extends MyObservable {
                     	r = r && (isTapped());
                     else if (exR[j].startsWith("untapped"))
                     	r = r && (isUntapped());
+
+                    else if (exR[j].startsWith("enteredBattlefieldThisTurn"))
+                    	r = r && (getTurnInZone() == AllZone.Phase.getTurn());
                     
                     else if (exR[j].startsWith("enchanted"))
                     	r = r && (isEnchanted());

@@ -1,3 +1,39 @@
+Cradle to Grave
+1 B
+Instant
+Destroy target nonblack creature that entered the battlefield this turn.
+spDestroyTgt:Creature.nonBlack+enteredBattlefieldThisTurn
+SVar:RemAIDeck:True
+
+Vendetta
+B
+Instant
+Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
+spDestroyTgt:Creature.nonBlack:NoRegen:Drawback$YouLoseLife/dX
+SVar:dX:Count$TgtCardToughness
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vendetta.jpg
+
+Sever Soul
+3 B B
+Sorcery
+Destroy target nonblack creature. It can't be regenerated. You gain life equal to its toughness.
+spDestroyTgt:Creature.nonBlack:NoRegen:Drawback$YouGainLife/dX
+SVar:dX:Count$TgtCardToughness
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sever_soul.jpg
+
+Poison Arrow
+4 B B
+Sorcery
+Destroy target nonblack creature. You gain 3 life.
+spDestroyTgt:Creature.nonBlack:Drawback$YouGainLife/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/poison_arrow.jpg
+
 Glasses of Urza
 1
 Artifact
@@ -22888,15 +22924,6 @@ Suspend:4:1 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plunder.jpg
 
-Poison Arrow
-4 B B
-Sorcery
-Destroy target nonblack creature. You gain 3 life.
-spDestroyTgt:Creature.nonblack:Drawback$YouGainLife/3
-SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/poison_arrow.jpg
-
 Poison the Well
 2 BR BR
 Sorcery
@@ -26657,16 +26684,6 @@ spDrawCards:1:Draw a card.:Serum Visions - draw a card.
 Scry 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serum_visions.jpg
-
-Sever Soul
-3 B B
-Sorcery
-Destroy target nonblack creature. It can't be regenerated. You gain life equal to its toughness.
-spDestroyTgt:Creature.nonblack:NoRegen:Drawback$YouGainLife/dX
-SVar:dX:Count$TgtCardToughness
-SVar:PlayMain1:TRUE
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sever_soul.jpg
 
 Severed Legion
 1 B B
@@ -33368,16 +33385,6 @@ no text
 abPump 1 B B:-3/-0/Forestwalk
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veldrane_of_sengir.jpg
-
-Vendetta
-B
-Instant
-Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
-spDestroyTgt:Creature.nonblack:NoRegen:Drawback$YouLoseLife/dX
-SVar:dX:Count$TgtCardToughness
-SVar:PlayMain1:TRUE
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vendetta.jpg
 
 Vendilion Clique
 1 U U
