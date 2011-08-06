@@ -10,7 +10,7 @@ class CardFactory_Planeswalkers {
     public static Card getCard(final Card card, String cardName, String owner) {
         //*************** START *********** START **************************
         if(cardName.equals("Elspeth, Knight-Errant")) {
-            //computer only plays ability 1 and 3, gain life and put X\X token into play
+            //computer only plays ability 1 and 3, put 1/1 Soldier in play and make everything indestructible
             final int turn[] = new int[1];
             turn[0] = -1;
             
@@ -2899,6 +2899,8 @@ class CardFactory_Planeswalkers {
                 }
             };
             ability4.setDescription("-12: Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.");
+            ability4.setStackDescription(card2
+                    + " - Exile all cards from target player's library, then that player shuffles his or her hand into his or her library.");
             ability4.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability4));
             ability4.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card2.addSpellAbility(ability4);
