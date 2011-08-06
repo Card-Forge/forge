@@ -6083,10 +6083,6 @@ public class GameActionUtil {
 				public void resolve() {
 					opponent.discard(this);
 					player.drawCard();
-					
-					//if(opponent.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-					//else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
-
 				}
 			};// ability2
 			
@@ -6397,9 +6393,6 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					opponent.discard(this);
-					//if(opponent.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
-					//else AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this); // Should be changed to wise discard  
-
 				}
 			};// ability2
 			
@@ -6641,7 +6634,6 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					opp[0] = crd.getController().getOpponent();
-					//AllZone.GameAction.discardHand(opp[0], this);
 					opp[0].discardHand(this);
 				}
 			};
@@ -10113,7 +10105,6 @@ public class GameActionUtil {
 
 							@Override
 							public void resolve() {
-								//if (c.getController().equals(player))
 								player.addDamage(1, F_card);
 							}
 						};
@@ -10284,10 +10275,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Bitterblossom() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Bitterblossom");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Bitterblossom");
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
