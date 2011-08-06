@@ -2,6 +2,7 @@
 package forge.error;
 
 
+import static forge.properties.ForgeProps.*;
 import static java.awt.event.InputEvent.*;
 import static java.awt.event.KeyEvent.*;
 import static javax.swing.JOptionPane.*;
@@ -27,7 +28,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
-import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 
@@ -109,11 +109,10 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         
         //Button is not modified, String gets the automatic listener to hide the dialog 
         Object[] options = {
-                new JButton(new SaveAction(area)), ForgeProps.getLocalized(BUTTON_CLOSE),
-                new JButton(new ExitAction())};
+                new JButton(new SaveAction(area)), getLocalized(BUTTON_CLOSE), new JButton(new ExitAction())};
         JOptionPane pane = new JOptionPane(new JScrollPane(area), ERROR_MESSAGE, DEFAULT_OPTION, null, options,
                 options[1]);
-        JDialog dlg = pane.createDialog(null, ForgeProps.getLocalized(TITLE));
+        JDialog dlg = pane.createDialog(null, getLocalized(TITLE));
         dlg.setResizable(true);
         dlg.setVisible(true);
         dlg.dispose();
@@ -126,7 +125,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         if(message != null) System.err.println(message);
         ex.printStackTrace();
         
-        pw.printf(ForgeProps.getLocalized(MESSAGE), ForgeProps.getProperty(FORUM), ForgeProps.getProperty(MAIL),
+        pw.printf(getLocalized(MESSAGE), getProperty(FORUM), getProperty(MAIL), getProperty(VERSION),
                 message != null? message:ex.getMessage());
         ex.printStackTrace(pw);
     }
@@ -137,8 +136,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
     private static void printError(PrintWriter pw, String message) {
         System.err.println(message);
         
-        pw.printf(ForgeProps.getLocalized(MESSAGE), ForgeProps.getProperty(FORUM), ForgeProps.getProperty(MAIL),
-                message);
+        pw.printf(getLocalized(MESSAGE), getProperty(FORUM), getProperty(MAIL), getProperty(VERSION), message);
         Map<Thread, StackTraceElement[]> traces = Thread.getAllStackTraces();
         for(Entry<Thread, StackTraceElement[]> e:traces.entrySet()) {
             pw.println();
@@ -158,7 +156,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         private JTextArea           area;
         
         public SaveAction(JTextArea area) {
-            super(ForgeProps.getLocalized(BUTTON_SAVE));
+            super(getLocalized(BUTTON_SAVE));
             putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(VK_S, CTRL_DOWN_MASK));
             this.area = area;
         }
@@ -181,7 +179,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
                 bw.write(area.getText());
                 bw.close();
             } catch(IOException ex) {
-                showError(ex, ForgeProps.getLocalized(ERRORS.SAVE_MESSAGE));
+                showError(ex, getLocalized(ERRORS.SAVE_MESSAGE));
             }
         }
     }
@@ -191,7 +189,7 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         private static final long serialVersionUID = 276202595758381626L;
         
         public ExitAction() {
-            super(ForgeProps.getLocalized(BUTTON_EXIT));
+            super(getLocalized(BUTTON_EXIT));
         }
         
         
@@ -205,11 +203,11 @@ public class ErrorViewer implements NewConstants, NewConstants.LANG.ErrorViewer 
         private static final long serialVersionUID = 5638147106706803363L;
         
         public ShowAllThreadsAction() {
-            super(ForgeProps.getLocalized(SHOW_ERROR));
+            super(getLocalized(SHOW_ERROR));
         }
         
         public void actionPerformed(ActionEvent e) {
-            showErrorAllThreads(ForgeProps.getLocalized(ERRORS.SHOW_MESSAGE));
+            showErrorAllThreads(getLocalized(ERRORS.SHOW_MESSAGE));
         }
     }
 }

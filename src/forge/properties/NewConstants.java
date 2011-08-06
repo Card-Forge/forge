@@ -19,6 +19,7 @@ public interface NewConstants {
     //General properties
     public static final String MAIL          = "program/mail";
     public static final String FORUM         = "program/forum";
+    public static final String VERSION       = "program/version";
     
     public static final String DECKS         = "decks";
     public static final String BOOSTER_DECKS = "booster-decks";
