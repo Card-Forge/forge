@@ -764,7 +764,7 @@ public class AbilityFactory_ChangeZone {
 	     }
 		 
 		 if(destination.equals("Exile")){
-			 sb.append("Exile ").append(targetname);
+			 sb.append("Exile").append(targetname);
 			 if (origin.equals("Graveyard"))
 				 sb.append(fromGraveyard);
 		 }
