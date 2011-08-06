@@ -1,0 +1,13 @@
+Name:Stoic Ephemera
+ManaCost:2 W
+Types:Creature Spirit
+Text:no text
+PT:5/5
+K:Defender
+K:Flying
+T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | IsPresent$ Card.blocking+Self | PresentZone$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME blocks, sacrifice it at end of combat.
+SVar:TrigSac:AB$Sacrifice | Cost$ 0
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stoic_ephemera.jpg
+End
+
