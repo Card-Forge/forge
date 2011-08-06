@@ -747,8 +747,7 @@ public class GameAction {
             PlayerZone grave = AllZone.getZone(c);
             grave.remove(c);
         	
-        	Card crd = new Card();
-        	crd = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
+        	Card crd = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
         	ownerPlay.add(crd);
         	
         	crd.addCounter(Counters.M1M1, 1);

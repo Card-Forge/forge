@@ -2598,7 +2598,7 @@ public class CardFactory_Creatures {
                         else PlayLand = AllZone.GameInfo.getComputerCanPlayNumberOfLands();
                         
                     return (AllZone.GameAction.isCardInZone(card, play) && library.get(0).getType().contains("Land") && PlayLand > 0) 
-                    && (AllZone.Stack.size() == 0) && AllZone.GameAction.getLastPlayerToDraw() == card.getController();
+                    && (AllZone.Stack.size() == 0) && AllZone.GameAction.getLastPlayerToDraw().equals(card.getController());
                 }
             }; 
             ability.setStackDescription(card.getController() + " - plays land from top of library.");           

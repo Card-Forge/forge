@@ -156,9 +156,8 @@ public class ComputerUtil
     {
        land.remove(sa.getSourceCard());
     }
-    ManaCost cost = new ManaCost(sa.getManaCost());
  // Beached - Delete old
-    cost = AllZone.GameAction.GetSpellCostChange(sa);
+    ManaCost cost = AllZone.GameAction.GetSpellCostChange(sa);
     if(cost.isPaid())
         return true;
  // Beached - Delete old
@@ -229,8 +228,7 @@ public class ComputerUtil
     {
        land.remove(sa.getSourceCard());
     }
-    ManaCost cost = new ManaCost(sa.getManaCost());
-    cost = AllZone.GameAction.GetSpellCostChange(sa);
+    ManaCost cost = AllZone.GameAction.GetSpellCostChange(sa);
     // Beached - Delete old
     if(cost.isPaid())
         return;

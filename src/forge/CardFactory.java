@@ -17152,10 +17152,10 @@ public class CardFactory implements NewConstants {
                         CardList DoublingSeasons = new CardList(play.getCards());
                         DoublingSeasons = DoublingSeasons.getName("Doubling Season");
                         PlayerZone_ComesIntoPlay.SimultaneousEntry = true;      
-                        double Count = DoublingSeasons.size();
-                        Count = 5 * Math.pow(2,Count);
+                        int Count = DoublingSeasons.size();
+                        Count = 5 * (int)Math.pow(2,Count);
                         for(int i = 0; i < Count; i++) {
-                        	if(i + 1== Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;                 
+                        	if(i + 1 == Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;                 
                         Card Copy = copyCardintoNew(getTargetCard());
                         Copy.setToken(true);
                         Copy.setController(card.getController());
