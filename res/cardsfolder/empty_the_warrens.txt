@@ -2,6 +2,7 @@ Name:Empty the Warrens
 ManaCost:3 R
 Types:Sorcery
 Text:Put two 1/1 red Goblin creature tokens into play.
+K:spMakeToken<>2<>Goblin<>R 1 1 Goblin<>Controller<>R<>Creature;Goblin<>1<>1<>None
 K:Storm
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/empty_the_warrens.jpg

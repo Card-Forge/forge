@@ -1121,6 +1121,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell); 
         }*/ //*************** END ************ END **************************
        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Empty the Warrens")) {
             SpellAbility spell = new Spell(card) {
@@ -1140,7 +1141,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+        */
         
 
         
