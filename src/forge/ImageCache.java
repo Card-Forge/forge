@@ -3,7 +3,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
@@ -86,6 +86,8 @@ public class ImageCache implements NewConstants {
          * Put to cache.
          */
 
+        //currently doesn't work:
+        /*
         if (cache.size() >= 35) {
 			int count = 10;
 			ArrayList<String> imgNames = new ArrayList<String>(count);
@@ -98,6 +100,7 @@ public class ImageCache implements NewConstants {
 			for (String imgName : imgNames)
 				cache.remove(imgName);
         }
+        */
         
         cache.put(name, resized);
         

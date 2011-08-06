@@ -979,14 +979,14 @@ public class Card extends MyObservable
   public ArrayList<String> getExtrinsicKeyword() {return new ArrayList<String>(extrinsicKeyword);}
   public void setExtrinsicKeyword(ArrayList<String> a) {extrinsicKeyword = new ArrayList<String>(a); this.updateObservers();}
   public void addExtrinsicKeyword(String s) {
-	  if(!getKeyword().contains(s)){
+	  //if(!getKeyword().contains(s)){
 		  if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s)
 		  {
 			  private static final long serialVersionUID = 221124403788942412L;
 		  });
 		  else extrinsicKeyword.add(s);
-		  }
-	  }
+	 //}
+  }
   public void removeExtrinsicKeyword(String s) {extrinsicKeyword.remove(s); this.updateObservers();}
   public int getExtrinsicKeywordSize() {return extrinsicKeyword.size(); }
   
