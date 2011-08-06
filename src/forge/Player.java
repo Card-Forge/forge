@@ -243,9 +243,14 @@ public abstract class Player extends MyObservable{
 	public int preventDamage(final int damage, Card source, boolean isCombat) {
     	int restDamage = damage;
     	
-    	if( preventAllDamageToPlayer(source, false)) {
-    		restDamage = 0;
+    	if( preventAllDamageToPlayer(source, isCombat)) {
+    		return 0;
         }
+    	
+    	if (AllZoneUtil.isCardInPlay("Spirit of Resistance", this) && !source.getController().equals(this)
+    			&& restDamage > 0) restDamage = restDamage - 1;
+    	if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell() 
+    			&& restDamage > 0) restDamage = restDamage - 1;
     	
     	if(restDamage >= preventNextDamage) {
     		restDamage = restDamage - preventNextDamage;

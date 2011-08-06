@@ -1968,6 +1968,10 @@ public class Card extends MyObservable {
         return !(isInstant() || isSorcery() || isImmutable());
     }
     
+    public boolean isSpell() {
+        return (isInstant() || isSorcery());
+    }
+    
     public boolean isCreature() {
         return type.contains("Creature");
     }
@@ -2789,9 +2793,12 @@ public class Card extends MyObservable {
     public int preventDamage(final int damage, Card source, boolean isCombat) {
     	int restDamage = damage;
     	
-    	if( preventAllDamageToCard(source, false)) {
+    	if( preventAllDamageToCard(source, isCombat)) {
     		restDamage = 0;
         }
+    	
+    	if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell() 
+    			&& restDamage > 0) restDamage = restDamage - 1;
     	
     	if(restDamage >= preventNextDamage) {
     		restDamage = restDamage - preventNextDamage;

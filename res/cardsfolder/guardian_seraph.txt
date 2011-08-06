@@ -1,0 +1,9 @@
+Name:Guardian Seraph
+ManaCost:2 W W
+Types:Creature Angel
+Text:If a source an opponent controls would deal damage to you, prevent 1 of that damage.
+PT:3/4
+K:Flying
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_seraph.jpg
+End

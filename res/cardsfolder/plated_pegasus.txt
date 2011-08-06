@@ -1,0 +1,10 @@
+Name:Plated Pegasus
+ManaCost:2 W
+Types:Creature Pegasus
+Text:If a spell would deal damage to a creature or player, prevent 1 damage that spell would deal to that creature or player.
+PT:1/2
+K:Flash
+K:Flying
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_pegasus.jpg
+End
