@@ -12552,16 +12552,28 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -4018162972761688814L;
                 
                 public void execute() {
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard,
-                            AllZone.GameAction.getOpponent(card.getController()));
-                    CardList gravecards = new CardList(grave.getCards());
+//                  PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard,
+//                          AllZone.GameAction.getOpponent(card.getController()));
+//                  CardList gravecards = new CardList(grave.getCards());
+                	
+                	PlayerZone hYard = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+                	PlayerZone cYard = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+                	CardList gravecards = new CardList();
+                	String title;
+                	
+                	gravecards.addAll(cYard.getCards());
+                	if (gravecards.isEmpty()) {
+                		gravecards.addAll(hYard.getCards());
+                		title = "Choose your card";
+                	} else {
+                		title = "Choose compy's card";
+                	}
                     
                     //System.out.println("size of grave: " + gravecards.size());
                     
                     if(gravecards.size() > 0) {
                         if(card.getController().equals("Human")) {
-                            Object o = AllZone.Display.getChoiceOptional(
-                                    "Select a card in opponent's graveyard to remove", gravecards.toArray());
+                            Object o = AllZone.Display.getChoiceOptional(title, gravecards.toArray());
                             if(o != null) {
                                 Card removedCard = (Card) o;
                                 AllZone.GameAction.removeFromGame(removedCard);
