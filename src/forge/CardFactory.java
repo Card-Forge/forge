@@ -10315,59 +10315,58 @@ public class CardFactory implements NewConstants {
         
        
         //*************** START *********** START **************************
-        else if(cardName.equals("Bottle of Suleiman")) {
-           /*
-            * Sacrifice Bottle of Suleiman: Flip a coin. If you lose the flip,
-            * Bottle of Suleiman deals 5 damage to you. If you win the flip,
-            * put a 5/5 colorless Djinn artifact creature token with flying
-            * onto the battlefield.
-            */
-        	Ability_Cost abCost = new Ability_Cost("1 Sac<1/CARDNAME>", cardName, true);
-           final SpellAbility ability = new Ability_Activated(card, abCost, null) {
-             private static final long serialVersionUID = -5741302550353410000L;
-             
-             @Override
-             public boolean canPlayAI() {
-                 //PlayerLife life = AllZone.GameAction.getPlayerLife(AllZone.ComputerPlayer);
-                 if( AllZone.ComputerPlayer.getLife() > 10 ) {
-                    return true;
-                 }
-                 CardList play = new CardList(AllZone.Computer_Play.getCards());
-                 play = play.getType("Creature");
-                 if( play.size() == 0 ) {
-                    return true;
-                 }
-                 return false;
-              }
-             
-             @Override
-              public void resolve() {
-                 final Player player = AllZone.Phase.getActivePlayer();
-                 String choice = "";
-                 String choices[] = {"heads","tails"};
-                 boolean flip = MyRandom.percentTrue(50);
-                 if(card.getController().equals(AllZone.HumanPlayer)) {
-                    choice = (String) AllZone.Display.getChoice("Choose one", choices);
-                 }
-                 else {
-                    choice = choices[MyRandom.random.nextInt(2)];
-                 }
+      	else if(cardName.equals("Bottle of Suleiman")) {
+      		/*
+      		 * Sacrifice Bottle of Suleiman: Flip a coin. If you lose the flip,
+      		 * Bottle of Suleiman deals 5 damage to you. If you win the flip,
+      		 * put a 5/5 colorless Djinn artifact creature token with flying
+      		 * onto the battlefield.
+      		 */
+      		Ability_Cost abCost = new Ability_Cost("1 Sac<1/CARDNAME>", cardName, true);
+      		final SpellAbility ability = new Ability_Activated(card, abCost, null) {
+      			private static final long serialVersionUID = -5741302550353410000L;
 
-                 if( (flip == true && choice.equals("heads")) ||   (flip == false && choice.equals("tails"))) {
-                    JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Win! - "+player+" puts a 5/5 Flying Djinn in play.", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
-                    CardFactoryUtil.makeToken("Djinn", "C 5 5 Djinn", card.getController(), "", new String[] {"Creature", "Artifact", "Djinn"}, 5, 5, new String[] {"Flying"});
-                 }
-                 else{
-                    JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Lose - Bottle does 5 damage to "+player+".", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
-                    card.getController().addDamage(5, card);
-                 }
-              }
-           };//SpellAbility
+      			@Override
+      			public boolean canPlayAI() {
+      				if( AllZone.ComputerPlayer.getLife() > 10 ) {
+      					return true;
+      				}
+      				CardList play = new CardList(AllZone.Computer_Play.getCards());
+      				play = play.getType("Creature");
+      				if( play.size() == 0 ) {
+      					return true;
+      				}
+      				return false;
+      			}
 
-           card.addSpellAbility(ability);
-           ability.setDescription("1, Sacrifice Bottle of Suleiman: Flip a coin.  Win: Put 5/5 Djinn in play.  Lose: Does 5 damage to you.");
-           ability.setStackDescription("Bottle of Suleiman - flip a coin");
-        }//*************** END ************ END **************************
+      			@Override
+      			public void resolve() {
+      				final Player player = AllZone.Phase.getActivePlayer();
+      				String choice = "";
+      				String choices[] = {"heads","tails"};
+      				boolean flip = MyRandom.percentTrue(50);
+      				if(card.getController().equals(AllZone.HumanPlayer)) {
+      					choice = (String) AllZone.Display.getChoice("Choose one", choices);
+      				}
+      				else {
+      					choice = choices[MyRandom.random.nextInt(2)];
+      				}
+
+      				if( (flip == true && choice.equals("heads")) ||   (flip == false && choice.equals("tails"))) {
+      					JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Win! - "+player+" puts a 5/5 Flying Djinn in play.", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
+      					CardFactoryUtil.makeToken("Djinn", "C 5 5 Djinn", card.getController(), "", new String[] {"Creature", "Artifact", "Djinn"}, 5, 5, new String[] {"Flying"});
+      				}
+      				else{
+      					JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Lose - Bottle does 5 damage to "+player+".", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
+      					card.getController().addDamage(5, card);
+      				}
+      			}
+      		};//SpellAbility
+
+      		card.addSpellAbility(ability);
+      		ability.setDescription("1, Sacrifice Bottle of Suleiman: Flip a coin.  Win: Put 5/5 Djinn in play.  Lose: Does 5 damage to you.");
+      		ability.setStackDescription("Bottle of Suleiman - flip a coin");
+      	}//*************** END ************ END **************************
         
       
         //*************** START *********** START **************************
@@ -11508,6 +11507,45 @@ public class CardFactory implements NewConstants {
             };
             draw.setStackDescription(cardName+" - discard 1 at random, the draw 2 cards.");
             card.addSpellAbility(draw);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Sorcerer's Strongbox")) {
+        	/*
+        	 * 2, Tap: Flip a coin. If you win the flip, sacrifice Sorcerer's
+        	 * Strongbox and draw three cards.
+        	 */
+        	Ability_Cost abCost = new Ability_Cost("2 T", cardName, true);
+        	final SpellAbility ability = new Ability_Activated(card, abCost, null) {
+        		private static final long serialVersionUID = 5152381570537520053L;
+
+        		@Override
+        		public void resolve() {
+        			final Player player = AllZone.Phase.getActivePlayer();
+        			String choice = "";
+        			String choices[] = {"heads","tails"};
+        			boolean flip = MyRandom.percentTrue(50);
+        			if(card.getController().equals(AllZone.HumanPlayer)) {
+        				choice = (String) AllZone.Display.getChoice("Choose one", choices);
+        			}
+        			else {
+        				choice = choices[MyRandom.random.nextInt(2)];
+        			}
+
+        			if( (flip == true && choice.equals("heads")) ||   (flip == false && choice.equals("tails"))) {
+        				JOptionPane.showMessageDialog(null, card.getName()+" - Win! - "+player+" draws 3 cards.", card.getName(), JOptionPane.PLAIN_MESSAGE);
+        				AllZone.GameAction.sacrifice(card);
+        				player.drawCards(3);
+        			}
+        			else{
+        				JOptionPane.showMessageDialog(null, card.getName()+" - Lose.", card.getName(), JOptionPane.PLAIN_MESSAGE);
+        			}
+        		}
+        	};//SpellAbility
+
+        	card.addSpellAbility(ability);
+        	ability.setDescription(abCost+"Flip a coin. If you win the flip, sacrifice Sorcerer's Strongbox and draw three cards.");
+        	ability.setStackDescription(card.getName()+" - flip a coin");
         }//*************** END ************ END **************************
 
         return postFactoryKeywords(card);

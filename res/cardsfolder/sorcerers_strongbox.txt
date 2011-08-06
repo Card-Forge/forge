@@ -1,0 +1,7 @@
+Name:Sorcerer's Strongbox
+ManaCost:4
+Types:Artifact
+Text:no text
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sorcerers_strongbox.jpg
+End
