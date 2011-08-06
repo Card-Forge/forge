@@ -18343,6 +18343,8 @@ public class CardFactory_Creatures {
 
         		@Override
         		public boolean canPlayAI() {
+        			
+        			//Dark Depths:
         			CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer, "Dark Depths");
         			list = list.filter(new CardListFilter(){
         				public boolean addCard(Card crd)
@@ -18356,6 +18358,22 @@ public class CardFactory_Creatures {
         				setTargetCard(list.get(0));
         				return true;
         			}
+        			
+        			//Get rid of Planeswalkers:
+        			list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+        			list = list.filter(new CardListFilter(){
+        				public boolean addCard(Card crd)
+        				{
+        					return crd.isPlaneswalker() && crd.getCounters(Counters.LOYALTY) >= 5;
+        				}
+        			});
+        			
+        			if (list.size()>0)
+        			{
+        				setTargetCard(list.get(0));
+        				return true;
+        			}
+        			
         			return false;
         		}
         		
