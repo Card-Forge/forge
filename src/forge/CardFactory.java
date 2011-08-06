@@ -3329,6 +3329,7 @@ public class CardFactory implements NewConstants {
         			}
         		}
         	}; //saBounceTgt
+        	saBounceTgt.setActivatingPlayer(card.getController());
         	saBounceTgt.setStackDescription(card.getName() + " - bounce target.");
         	
         	// when the card enters the battlefield, enable the human to target
