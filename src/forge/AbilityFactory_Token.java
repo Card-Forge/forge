@@ -11,8 +11,9 @@ public class AbilityFactory_Token extends AbilityFactory {
 	private String[] tokenKeywords;
 	private String tokenPower;
 	private String tokenToughness;
+	private String tokenImage;
 	
-	public SpellAbility getAbility(final AbilityFactory af,final String numTokens,final String name,final String[] types,final String owner,final String[] colors,final String power,final String toughness,final String[] keywords)
+	public SpellAbility getAbility(final AbilityFactory af,final String numTokens,final String name,final String[] types,final String owner,final String[] colors,final String power,final String toughness,final String[] keywords,final String image)
 	{
 		AF = af;
 		tokenAmount = numTokens;
@@ -23,6 +24,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 		tokenPower = power;
 		tokenToughness = toughness;
 		tokenKeywords = keywords;
+		tokenImage = image;
 		
 		final SpellAbility abToken = new Ability_Activated(AF.getHostCard(),AF.getAbCost(),AF.getAbTgt())
 		{
@@ -53,7 +55,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 		return abToken;
 	}
 	
-	public SpellAbility getSpell(final AbilityFactory af,final String numTokens,final String name,final String[] types,final String owner,final String[] colors,final String power,final String toughness,final String[] keywords)
+	public SpellAbility getSpell(final AbilityFactory af,final String numTokens,final String name,final String[] types,final String owner,final String[] colors,final String power,final String toughness,final String[] keywords,final String image)
 	{
 		AF = af;
 		tokenAmount = numTokens;
@@ -64,6 +66,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 		tokenPower = power;
 		tokenToughness = toughness;
 		tokenKeywords = keywords;
+		tokenImage = image;
 		
 		final SpellAbility spToken = new Spell(AF.getHostCard(),AF.getAbCost(),AF.getAbTgt())
 		{
@@ -158,8 +161,13 @@ public class AbilityFactory_Token extends AbilityFactory {
 				colorDesc = "C";
 			}
 		}
-		
-		imageName += colorDesc + " " + tokenPower + " " + tokenToughness + " " + tokenName;
+		if(tokenImage.equals("")) {			
+			
+			imageName += colorDesc + " " + tokenPower + " " + tokenToughness + " " + tokenName;
+		}
+		else {
+			imageName = tokenImage;
+		}
 		System.out.println("AF_Token imageName = " + imageName);
 		
 		for(char c : colorDesc.toCharArray()) {

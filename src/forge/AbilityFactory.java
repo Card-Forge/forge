@@ -299,7 +299,7 @@ public class AbilityFactory {
 		if(API.equals("Token")){
 			AbilityFactory_Token AFT = new AbilityFactory_Token();
 			
-			String numTokens,numPower,numToughness;
+			String numTokens,numPower,numToughness,image;
 			String[] keywords;
 			
 			if(!mapParams.get("TokenAmount").matches("[0-9][0-9]?")) //It's an X-value.
@@ -324,10 +324,17 @@ public class AbilityFactory {
 				keywords = new String[0];
 			}
 			
+			if(mapParams.containsKey("TokenImage")) {
+				image = mapParams.get("TokenImage");
+			}
+			else {
+				image = "";
+			}
+			
 			if(isAb)
-				SA = AFT.getAbility(this, numTokens, mapParams.get("TokenName"), mapParams.get("TokenTypes").split(","), mapParams.get("TokenOwner"), mapParams.get("TokenColors").split(","), numPower, numToughness, keywords );
+				SA = AFT.getAbility(this, numTokens, mapParams.get("TokenName"), mapParams.get("TokenTypes").split(","), mapParams.get("TokenOwner"), mapParams.get("TokenColors").split(","), numPower, numToughness, keywords, image);
 			if(isSp)
-				SA = AFT.getSpell(this, numTokens, mapParams.get("TokenName"), mapParams.get("TokenTypes").split(","), mapParams.get("TokenOwner"), mapParams.get("TokenColors").split(","), numPower, numToughness, keywords);
+				SA = AFT.getSpell(this, numTokens, mapParams.get("TokenName"), mapParams.get("TokenTypes").split(","), mapParams.get("TokenOwner"), mapParams.get("TokenColors").split(","), numPower, numToughness, keywords, image);
 		}
 		
 		if (API.equals("GainControl")) {
