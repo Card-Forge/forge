@@ -1,0 +1,8 @@
+Name:Congregation at Dawn
+ManaCost:G G W
+Types:Instant
+Text:no text
+A:SP$ChangeZone | Cost$ G G W | Origin$ Library | Destination$ Library|LibraryPosition$ 0 | ChangeType$ Creature | ChangeNum$ 3 | SpellDescription$ Search your library for up to three creature cards and reveal them.  Shuffle you library, then put those cards on top of it in any order.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/congregation_at_dawn.jpg
+End
