@@ -202,7 +202,7 @@ class CardFactory_Planeswalkers {
                     card2.addCounterFromNonEffect(Counters.LOYALTY, 1);
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card2, "W", new String[] {
+                    CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card2.getController(), "W", new String[] {
                             "Creature", "Soldier"}, 1, 1, new String[] {""});
                 }
                 
@@ -960,7 +960,7 @@ class CardFactory_Planeswalkers {
                     
                     //Create token
                     int n = card.getController().getLife();
-                    CardFactoryUtil.makeToken("Avatar", "W N N Avatar", card2, "W", new String[] {
+                    CardFactoryUtil.makeToken("Avatar", "W N N Avatar", card2.getController(), "W", new String[] {
                             "Creature", "Avatar"}, n, n,
                             new String[] {"This creature's power and toughness are each equal to your life total"});
                 }
@@ -1688,7 +1688,7 @@ class CardFactory_Planeswalkers {
                     card2.subtractCounter(Counters.LOYALTY, 1);
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", card2, "G", new String[] {
+                    CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", card2.getController(), "G", new String[] {
                             "Creature", "Beast"}, 3, 3, new String[] {""});
                 }
                 
@@ -2693,7 +2693,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     for(int i = 0; i < 5; i++)
-                        CardFactoryUtil.makeToken("Dragon", "R 4 4 Dragon", card2, "R", new String[] {
+                        CardFactoryUtil.makeToken("Dragon", "R 4 4 Dragon", card2.getController(), "R", new String[] {
                                 "Creature", "Dragon"}, 4, 4, new String[] {"Flying"});
                 }
                 
@@ -3058,7 +3058,7 @@ class CardFactory_Planeswalkers {
                     Card target = getTargetCard();
                     AllZone.GameAction.sacrifice(target);
                     //in makeToken, use target for source, so it goes into the correct Zone
-                    CardFactoryUtil.makeToken("Dragon", "R 5 5 Dragon", target, "", new String[] {"Creature", "Dragon"}, 5, 5, new String[] {"Flying"});
+                    CardFactoryUtil.makeToken("Dragon", "R 5 5 Dragon", target.getController(), "", new String[] {"Creature", "Dragon"}, 5, 5, new String[] {"Flying"});
                     
                 }//resolve()
                 
@@ -3317,7 +3317,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     for (int i=0;i<3;i++)
-                    	CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card2, "W", new String[] {
+                    	CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card2.getController(), "W", new String[] {
                             "Creature", "Soldier"}, 1, 1, new String[] {""});
                 }
                 

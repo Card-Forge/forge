@@ -631,8 +631,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Rat", "B 1 1 Rat", card, "B", new String[] {"Creature", "Rat"}, 1,
-                            1, new String[] {""});
+                    CardFactoryUtil.makeToken11BRat(card.getController());
                 }//resolve()
             };//SpellAbility
             
@@ -641,8 +640,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Rat", "B 1 1 Rat", card, "B", new String[] {"Creature", "Rat"}, 1,
-                            1, new String[] {""});
+                    CardFactoryUtil.makeToken11BRat(card.getController());
                     
                     //return card to the hand
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
@@ -1780,7 +1778,7 @@ public class CardFactory_Sorceries {
                 }//resolve()
                 
                 void makeToken() {
-                    CardFactoryUtil.makeToken("Giant Warrior", "W 5 5 Giant Warrior", card, "W", new String[] {
+                    CardFactoryUtil.makeToken("Giant Warrior", "W 5 5 Giant Warrior", card.getController(), "W", new String[] {
                             "Creature", "Giant", "Warrior"}, 5, 5, new String[] {""});
                 }//makeToken()
                 
@@ -2451,7 +2449,7 @@ public class CardFactory_Sorceries {
                     for(int i = 0; i < c.length; i++) {
                         if(c[i].isCreature()) {
                             AllZone.GameAction.destroyNoRegeneration(c[i]);
-                            CardFactoryUtil.makeToken("Spirit", "W 1 1 Spirit", c[i], "W", new String[] {
+                            CardFactoryUtil.makeToken("Spirit", "W 1 1 Spirit", c[i].getController(), "W", new String[] {
                                     "Creature", "Spirit"}, 1, 1, new String[] {"Flying"});
                         }
                     }
@@ -2474,7 +2472,7 @@ public class CardFactory_Sorceries {
                     all.addAll(AllZone.Computer_Play.getCards());
                 	int Soldiers = card.getXManaCostPaid();
                 	for(int i = 0; i < Soldiers; i++) {
-                    CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card, "W", new String[] {
+                    CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card.getController(), "W", new String[] {
                             "Creature", "Soldier"}, 1, 1, new String[] {""}); 
                 	}
                 	if(Soldiers >= 5) {
@@ -3129,7 +3127,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", card, "G",
+                    CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", card.getController(), "G",
                             new String[] {"Creature", "Beast"}, 3, 3, new String[] {""});
                     
                     //return card to hand if necessary
@@ -3335,7 +3333,7 @@ public class CardFactory_Sorceries {
                 }
                 
                 public void makeToken() {
-                    CardFactoryUtil.makeToken("Bear", "G 2 2 Bear", card, "G", new String[] {"Creature", "Bear"},
+                    CardFactoryUtil.makeToken("Bear", "G 2 2 Bear", card.getController(), "G", new String[] {"Creature", "Bear"},
                             2, 2, new String[] {""});
                 }//resolve()
             };//SpellAbility
@@ -4394,7 +4392,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     for(int i = 0; i < 6; i++) {
-                        CardFactoryUtil.makeToken("Kor Soldier", "W 1 1 Kor Soldier", card, "W", new String[] {
+                        CardFactoryUtil.makeToken("Kor Soldier", "W 1 1 Kor Soldier", card.getController(), "W", new String[] {
                                 "Creature", "Kor", "Soldier"}, 1, 1, new String[] {""});
                     }//for
                 }//resolve()
@@ -4411,7 +4409,7 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     card.setKicked(true);
                     for(int i = 0; i < 12; i++) {
-                        CardFactoryUtil.makeToken("Kor Soldier", "W 1 1 Kor Soldier", card, "W", new String[] {
+                        CardFactoryUtil.makeToken("Kor Soldier", "W 1 1 Kor Soldier", card.getController(), "W", new String[] {
                                 "Creature", "Kor", "Soldier"}, 1, 1, new String[] {""});
                     }//for
                 }//resolve()
@@ -5005,11 +5003,11 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Snake", "G 1 1 Snake", card, "G",
+                    CardFactoryUtil.makeToken("Snake", "G 1 1 Snake", card.getController(), "G",
                             new String[] {"Creature", "Snake"}, 1, 1, new String[] {""});
-                    CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card, "G", new String[] {"Creature", "Wolf"},
+                    CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card.getController(), "G", new String[] {"Creature", "Wolf"},
                             2, 2, new String[] {""});
-                    CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", card, "G", new String[] {
+                    CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", card.getController(), "G", new String[] {
                             "Creature", "Elephant"}, 3, 3, new String[] {""});
                 }//resolve()
             };
@@ -5388,7 +5386,8 @@ public class CardFactory_Sorceries {
           
           public void makeToken()
           {
-             CardFactoryUtil.makeToken("Insect", "G 1 1 Insect", card, "G", new String[]{"Creature", "Insect"}, 1, 1, new String[] {""});
+             CardFactoryUtil.makeToken("Insect", "G 1 1 Insect", card.getController(), "G", 
+            		 new String[]{"Creature", "Insect"}, 1, 1, new String[] {""});
           }
           };
           card.clearSpellAbility();
@@ -6003,7 +6002,7 @@ public class CardFactory_Sorceries {
                 	for(int i = 0; i < c.length; i++) {
                         if(c[i].isCreature()) {
                             AllZone.GameAction.sacrifice(c[i]);
-                            CardFactoryUtil.makeToken("Hellion", "R 4 4 hellion", c[i], "R", new String[] {
+                            CardFactoryUtil.makeToken("Hellion", "R 4 4 hellion", c[i].getController(), "R", new String[] {
                                     "Creature", "Hellion"}, 4, 4, new String[] {""});
                         }
                     }
@@ -6207,7 +6206,7 @@ public class CardFactory_Sorceries {
         				times = 3;
         			for (int i=0;i<times;i++)
         			{
-	        			cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "", new String[] {
+	        			cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(), "", new String[] {
 								"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
 	        			for (Card crd:cl)
 	        				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
@@ -6231,7 +6230,7 @@ public class CardFactory_Sorceries {
 					AllZone.GameAction.searchLibraryBasicLand(card.getController(), 
 							Constant.Zone.Play, true);
 					
-					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "", new String[] {
+					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(), "", new String[] {
 							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
         			for (Card crd:cl)
         				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));

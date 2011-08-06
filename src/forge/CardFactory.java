@@ -6883,7 +6883,7 @@ public class CardFactory implements NewConstants {
                         
                         @Override
                         public void resolve() {
-                            CardFactoryUtil.makeToken(t, in, card, col, new String[] {"Creature", t}, 1, 1,
+                            CardFactoryUtil.makeToken(t, in, card.getController(), col, new String[] {"Creature", t}, 1, 1,
                                     new String[] {""});
                         }
                         
@@ -7502,7 +7502,7 @@ public class CardFactory implements NewConstants {
         		@Override
         		public void resolve() { 
         				for(int i = 0; i < card.getCounters(Counters.VERSE); i++) {
-                            CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", card, "G", new String[] {
+                            CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", card.getController(), "G", new String[] {
                                     "Creature", "Beast"}, 3, 3, new String[] {""});
         				}
         			AllZone.GameAction.sacrifice(card);
@@ -7789,7 +7789,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                     card.subtractCounter(Counters.HOOFPRINT, 4);
-                    CardFactoryUtil.makeToken("Elemental", "W 4 4 Elemental", card, "W", new String[] {
+                    CardFactoryUtil.makeToken("Elemental", "W 4 4 Elemental", card.getController(), "W", new String[] {
                             "Creature", "Elemental"}, 4, 4, new String[] {"Flying"});
                 }
                 
@@ -9703,7 +9703,7 @@ public class CardFactory implements NewConstants {
                 }//resolve
                 
                 public void makeToken() {
-                    CardFactoryUtil.makeToken("Thopter", "U 1 1 Thopter", card, "U", new String[] {
+                    CardFactoryUtil.makeToken("Thopter", "U 1 1 Thopter", card.getController(), "U", new String[] {
                             "Artifact", "Creature", "Thopter"}, 1, 1, new String[] {"Flying"});
                 }
             };
@@ -9800,7 +9800,7 @@ public class CardFactory implements NewConstants {
                     CardFactoryUtil.makeToken(
                             "Snake",
                             "C 1 1 Snake",
-                            card,
+                            card.getController(),
                             "",
                             new String[] {"Artifact", "Creature", "Snake"},
                             1,
@@ -10142,7 +10142,7 @@ public class CardFactory implements NewConstants {
 
                  if( (flip == true && choice.equals("heads")) ||   (flip == false && choice.equals("tails"))) {
                     JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Win! - "+player+" puts a 5/5 Flying Djinn in play.", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
-                    CardFactoryUtil.makeToken("Djinn", "C 5 5 Djinn", card, "", new String[] {"Creature", "Artifact", "Djinn"}, 5, 5, new String[] {"Flying"});
+                    CardFactoryUtil.makeToken("Djinn", "C 5 5 Djinn", card.getController(), "", new String[] {"Creature", "Artifact", "Djinn"}, 5, 5, new String[] {"Flying"});
                  }
                  else{
                     JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Lose - Bottle does 5 damage to "+player+".", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);

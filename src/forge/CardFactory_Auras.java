@@ -115,7 +115,7 @@ class CardFactory_Auras {
                 @Override
                 public void resolve() {
                     //makeToken();
-                	CardFactoryUtil.makeToken("Caribou", "W 0 1 Caribou", spell.getTargetCard(), "W", new String[] {
+                	CardFactoryUtil.makeToken("Caribou", "W 0 1 Caribou", spell.getTargetCard().getController(), "W", new String[] {
                         "Creature", "Caribou"}, 0, 1, new String[] {""});
                 }
                 /*
@@ -347,7 +347,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                	CardFactoryUtil.makeToken("Drake", "GU 2 2 Drake", spell.getTargetCard(), "G U", new String[] {
+                	CardFactoryUtil.makeToken("Drake", "GU 2 2 Drake", spell.getTargetCard().getController(), "G U", new String[] {
                         "Creature", "Drake"}, 2, 2, new String[] {"Flying"});
                 	//makeToken();
                 }
@@ -485,7 +485,7 @@ class CardFactory_Auras {
                 @Override
                 public void resolve() {
                     //makeToken();
-                	CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", spell.getTargetCard(), "G", new String[] {
+                	CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", spell.getTargetCard().getController(), "G", new String[] {
                             "Creature", "Squirrel"}, 1, 1, new String[] {""});
                 }
             

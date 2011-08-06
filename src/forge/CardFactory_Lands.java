@@ -1374,7 +1374,7 @@ class CardFactory_Lands {
                     
                     if(card.getCounters(Counters.ICE) == 0) 
                     {CardFactoryUtil.makeToken("Marit Lage",
-                            "B 20 20 Marit Lage", card, "B", new String[] {"Legendary", "Creature", "Avatar"}, 20,
+                            "B 20 20 Marit Lage", card.getController(), "B", new String[] {"Legendary", "Creature", "Avatar"}, 20,
                             20, new String[] {"Flying", "Indestructible"});
                     	AllZone.GameAction.sacrifice(card);
                     }
@@ -1398,7 +1398,7 @@ class CardFactory_Lands {
                 public void resolve() {
                     if(card.getCounters(Counters.ICE) == 0) {
                     CardFactoryUtil.makeToken("Marit Lage",
-                            "B 20 20 Marit Lage", card, "B", new String[] {"Legendary", "Creature", "Avatar"}, 20,
+                            "B 20 20 Marit Lage", card.getController(), "B", new String[] {"Legendary", "Creature", "Avatar"}, 20,
                             20, new String[] {"Flying", "Indestructible"});
                     }
                     AllZone.GameAction.sacrifice(card);  
@@ -2055,7 +2055,7 @@ class CardFactory_Lands {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Spirit", "C 1 1 Spirit", card, "", new String[] {
+                    CardFactoryUtil.makeToken("Spirit", "C 1 1 Spirit", card.getController(), "", new String[] {
                             "Creature", "Spirit"}, 1, 1, new String[] {""});
                 }//resolve()
             };//Ability

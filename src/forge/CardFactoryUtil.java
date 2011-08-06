@@ -11,8 +11,6 @@ import java.util.Map.Entry;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.Constant.Zone;
-
 
 public class CardFactoryUtil {
     private static Random random = new Random();
@@ -4438,6 +4436,10 @@ public class CardFactoryUtil {
     }
     public static CardList makeToken11WSoldier(Player controller) {
     	return makeToken("Soldier", "W 1 1 Soldier", controller, "W", new String[] {"Creature", "Soldier"}, 1, 1, new String[] {""});
+    }
+    
+    public static CardList makeToken11BRat(Player controller) {
+    	return makeToken("Rat", "B 1 1 Rat", controller, "B", new String[] {"Creature", "Rat"}, 1, 1, new String[] {""});
     }
     
     public static CardList makeToken(String name, String imageName, Player controller, String manaCost, String[] types, int baseAttack, int baseDefense, String[] intrinsicKeywords) {
