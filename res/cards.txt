@@ -1,3 +1,16 @@
+Multani's Decree
+3 G
+Sorcery
+Destroy all enchantments. You gain 2 life for each enchantment destroyed this way.
+spDestroyAll:Enchantment:Drawback$GainLifeYou/X.Times.2
+
+Righteous Fury
+4 W W
+Sorcery
+Destroy all tapped creatures. You gain 2 life for each creature destroyed this way.
+spDestroyAll:Creature.tapped:Drawback$GainLifeYou/X.Times.2
+SVar:PlayMain1:TRUE
+
 Steady Progress
 2 U
 Instant
