@@ -1445,6 +1445,7 @@ res/cardsfolder/despoil.txt -text svneol=native#text/plain
 res/cardsfolder/despondency.txt -text svneol=native#text/plain
 res/cardsfolder/despotic_scepter.txt -text svneol=native#text/plain
 res/cardsfolder/destructive_force.txt -text svneol=native#text/plain
+res/cardsfolder/destructive_urge.txt -text svneol=native#text/plain
 res/cardsfolder/devastate.txt svneol=native#text/plain
 res/cardsfolder/devastation.txt -text svneol=native#text/plain
 res/cardsfolder/devoted_druid.txt -text svneol=native#text/plain
