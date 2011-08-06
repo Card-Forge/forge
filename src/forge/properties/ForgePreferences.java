@@ -22,13 +22,18 @@ public class ForgePreferences extends Preferences {
 	public CardSizeType cardSize;
 	public boolean cardOverlay;
 	public boolean scaleLargerThanOriginal;
+	
 	// Phases
 	public boolean bAIUpkeep;
 	public boolean bAIDraw;
 	public boolean bAIEOT;
+	public boolean bAIBeginCombat;
+	public boolean bAIEndCombat;
 	public boolean bHumanUpkeep;
 	public boolean bHumanDraw;
 	public boolean bHumanEOT;
+	public boolean bHumanBeginCombat;
+	public boolean bHumanEndCombat;
 
 	private List<SavePreferencesListener> saveListeners = new ArrayList<SavePreferencesListener>();
 	private final String fileName;
@@ -67,9 +72,13 @@ public class ForgePreferences extends Preferences {
 		bAIUpkeep = getBoolean("phase.ai.upkeep", true);
 		bAIDraw = getBoolean("phase.ai.draw", true);
 		bAIEOT = getBoolean("phase.ai.eot", true);
+		bAIBeginCombat = getBoolean("phase.ai.beginCombat", true);
+		bAIEndCombat = getBoolean("phase.ai.endCombat", true);
 		bHumanUpkeep = getBoolean("phase.human.upkeep", true);
 		bHumanDraw = getBoolean("phase.human.draw", true);
 		bHumanEOT = getBoolean("phase.human.eot", true);
+		bHumanBeginCombat = getBoolean("phase.human.beginCombat", true);
+		bHumanEndCombat = getBoolean("phase.human.endCombat", true);
 	}
 
 	public void save () throws Exception{
@@ -93,9 +102,13 @@ public class ForgePreferences extends Preferences {
 		set("phase.ai.upkeep", bAIUpkeep);
 		set("phase.ai.draw", bAIDraw);
 		set("phase.ai.eot", bAIEOT);
+		set("phase.ai.beginCombat", bAIBeginCombat);
+		set("phase.ai.endCombat", bAIEndCombat);
 		set("phase.human.upkeep", bHumanUpkeep);
 		set("phase.human.draw", bHumanDraw);
 		set("phase.human.eot", bHumanEOT);
+		set("phase.human.beginCombat", bHumanBeginCombat);
+		set("phase.human.endCombat", bHumanEndCombat);
 		
 		try {
 			FileOutputStream stream = new FileOutputStream(fileName);

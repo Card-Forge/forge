@@ -190,10 +190,10 @@ public class Phase extends MyObservable
 	    }
         
 	    else if(phase.equals(Constant.Phase.Combat_Begin)){
-	    	if (turn.isHuman() || ComputerUtil.getPossibleAttackers().size() > 0) {
-	            AllZone.Combat.verifyCreaturesInPlay();
+	    	if (AllZone.Display.stopAtPhase(turn, phase)){
+	    		AllZone.Combat.verifyCreaturesInPlay();
 	            CombatUtil.showCombat();
-		    }
+	    	}
             else {
                 this.setNeedToNextPhase(true);
             }
@@ -298,7 +298,7 @@ public class Phase extends MyObservable
         
 	    else if (phase.equals(Constant.Phase.Combat_End))
         {
-			if (!inCombat()){
+			if (!inCombat() || !AllZone.Display.stopAtPhase(turn, phase)){
 				AllZone.Phase.setNeedToNextPhase(true);
 			}
 			else{

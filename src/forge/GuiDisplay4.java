@@ -190,8 +190,10 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         JMenuItem aiLabel = new JMenuItem("Computer");
         JMenuItem humanLabel = new JMenuItem("Human");
         
-        Component[] objPhases = { aiLabel, GuiDisplay4.cbAIUpkeep , GuiDisplay4.cbAIDraw , GuiDisplay4.cbAIEndOfTurn, new JSeparator(), 
-        						humanLabel, GuiDisplay4.cbHumanUpkeep, GuiDisplay4.cbHumanDraw, GuiDisplay4.cbHumanEndOfTurn };
+        Component[] objPhases = { aiLabel, GuiDisplay4.cbAIUpkeep, GuiDisplay4.cbAIDraw, GuiDisplay4.cbAIBeginCombat, 
+        						GuiDisplay4.cbAIEndCombat, GuiDisplay4.cbAIEndOfTurn, new JSeparator(), 
+        						humanLabel, GuiDisplay4.cbHumanUpkeep, GuiDisplay4.cbHumanDraw, GuiDisplay4.cbHumanBeginCombat, 
+        						GuiDisplay4.cbHumanEndCombat, GuiDisplay4.cbHumanEndOfTurn };
         
         for(Component cmp:objPhases) {
             gamePhases.add(cmp);
@@ -1020,6 +1022,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
         }
     }
    
+    // ********** Phase stuff in Display ******************
     public boolean stopAtPhase(Player turn, String phase) {
     	if (turn.isComputer()){
     		if (phase.equals(Constant.Phase.End_Of_Turn))
@@ -1028,6 +1031,10 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     			return cbAIUpkeep.isSelected();
     		else if (phase.equals(Constant.Phase.Draw))
     			return cbAIDraw.isSelected();
+    		else if (phase.equals(Constant.Phase.Combat_Begin))
+    			return cbAIBeginCombat.isSelected();
+    		else if (phase.equals(Constant.Phase.Combat_End))
+    			return cbAIEndCombat.isSelected();
     	}
     	else{
     		if (phase.equals(Constant.Phase.End_Of_Turn))
@@ -1036,6 +1043,10 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     			return cbHumanUpkeep.isSelected();
     		else if (phase.equals(Constant.Phase.Draw))
     			return cbHumanDraw.isSelected();
+    		else if (phase.equals(Constant.Phase.Combat_Begin))
+    			return cbHumanBeginCombat.isSelected();
+    		else if (phase.equals(Constant.Phase.Combat_End))
+    			return cbHumanEndCombat.isSelected();
     	}
     	return false;
     }
@@ -1046,9 +1057,14 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     	cbAIUpkeep.setSelected(fp.bAIUpkeep);
     	cbAIDraw.setSelected(fp.bAIDraw);
     	cbAIEndOfTurn.setSelected(fp.bAIEOT);
+		cbAIBeginCombat.setSelected(fp.bAIBeginCombat);
+		cbAIEndCombat.setSelected(fp.bAIEndCombat);
+    	
     	cbHumanUpkeep.setSelected(fp.bHumanUpkeep);
     	cbHumanDraw.setSelected(fp.bHumanDraw);
     	cbHumanEndOfTurn.setSelected(fp.bHumanEOT);
+		cbHumanBeginCombat.setSelected(fp.bHumanBeginCombat);
+		cbHumanEndCombat.setSelected(fp.bHumanEndCombat);
 
     	return true;
     }
@@ -1059,9 +1075,14 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     	fp.bAIUpkeep = cbAIUpkeep.isSelected();
     	fp.bAIDraw = cbAIDraw.isSelected();
     	fp.bAIEOT = cbAIEndOfTurn.isSelected();
+    	fp.bAIBeginCombat = cbAIBeginCombat.isSelected();
+    	fp.bAIEndCombat = cbAIEndCombat.isSelected();
+    	
     	fp.bHumanUpkeep = cbHumanUpkeep.isSelected();
     	fp.bHumanDraw = cbHumanDraw.isSelected();
     	fp.bHumanEOT = cbHumanEndOfTurn.isSelected();
+    	fp.bHumanBeginCombat = cbHumanBeginCombat.isSelected();
+    	fp.bHumanEndCombat = cbHumanEndCombat.isSelected();
     	
     	return true;
     }
@@ -1072,9 +1093,16 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
     public static JCheckBoxMenuItem cbAIUpkeep		       = new JCheckBoxMenuItem("Upkeep", true);
     public static JCheckBoxMenuItem cbAIDraw		       = new JCheckBoxMenuItem("Draw", true);
     public static JCheckBoxMenuItem cbAIEndOfTurn	       = new JCheckBoxMenuItem("End of Turn", true);
+    public static JCheckBoxMenuItem cbAIBeginCombat		   = new JCheckBoxMenuItem("Begin Combat", true);
+    public static JCheckBoxMenuItem cbAIEndCombat	       = new JCheckBoxMenuItem("End Combat", true); 
+    
     public static JCheckBoxMenuItem cbHumanUpkeep		   = new JCheckBoxMenuItem("Upkeep", true);
     public static JCheckBoxMenuItem cbHumanDraw			   = new JCheckBoxMenuItem("Draw", true);
     public static JCheckBoxMenuItem cbHumanEndOfTurn	   = new JCheckBoxMenuItem("End of Turn", true);
+    public static JCheckBoxMenuItem cbHumanBeginCombat	   = new JCheckBoxMenuItem("Begin Combat", true);
+    public static JCheckBoxMenuItem cbHumanEndCombat	   = new JCheckBoxMenuItem("End Combat", true); 
+    
+    // ********** End of Phase stuff in Display ******************
     
    
     JXMultiSplitPane                pane                     = new JXMultiSplitPane();
