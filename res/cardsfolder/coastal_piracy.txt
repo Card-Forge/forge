@@ -1,0 +1,8 @@
+Name:Coastal Piracy
+ManaCost:2 U U
+Types:Enchantment
+Text:no text
+K:WheneverKeyword:DealsCombatDamage/Opponent:Type/Creature:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a creature you control deals combat damage to an opponent, you may draw a card.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_piracy.jpg
+End

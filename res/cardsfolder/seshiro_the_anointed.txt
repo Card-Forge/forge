@@ -1,0 +1,10 @@
+Name:Seshiro the Anointed
+ManaCost:4 G G
+Types:Legendary Creature Snake Monk
+Text:no text
+PT:3/4
+K:stPumpAll:Creature.Snake+Other+YouCtrl:2/2:No Condition:Other Snake creatures you control get +2/+2.
+K:WheneverKeyword:DealsCombatDamage/Opponent:Type/Snake:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a Snake you control deals combat damage to a player, you may draw a card.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seshiro_the_anointed.jpg
+End
