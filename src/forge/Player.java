@@ -220,6 +220,7 @@ public abstract class Player extends MyObservable{
 	
 	public boolean preventAllDamageToPlayer(final Card source, final boolean isCombat) {
 		boolean reduce = false;
+		
     	if(isCombat) {
     		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.");
     		reduce = reduce || source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME.");
@@ -243,14 +244,44 @@ public abstract class Player extends MyObservable{
 	public int preventDamage(final int damage, Card source, boolean isCombat) {
     	int restDamage = damage;
     	
+    	if (AllZoneUtil.isCardInPlay("Purity", this)) {
+    		gainLife(restDamage,null);
+    		restDamage = 0;
+    	}
+    	
     	if( preventAllDamageToPlayer(source, isCombat)) {
     		return 0;
         }
     	
     	if (AllZoneUtil.isCardInPlay("Spirit of Resistance", this) && !source.getController().equals(this)
     			&& restDamage > 0) restDamage = restDamage - 1;
-    	if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell() 
-    			&& restDamage > 0) restDamage = restDamage - 1;
+    	
+    	if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell() && restDamage > 0) restDamage = restDamage - 1;
+    	
+    	if (AllZoneUtil.isCardInPlay("Sphere of Purity", this) && source.isArtifact() && restDamage > 0) 
+    		restDamage = restDamage - 1;
+    	
+    	if (AllZoneUtil.isCardInPlay("Sphere of Duty", this) && source.isGreen()) {
+			if (restDamage > 1) restDamage = restDamage - 2;
+			else restDamage = 0;
+    	}
+    	if (AllZoneUtil.isCardInPlay("Sphere of Grace", this) && source.isBlack()) {
+			if (restDamage > 1) restDamage = restDamage - 2;
+			else restDamage = 0;
+    	}
+    	if (AllZoneUtil.isCardInPlay("Sphere of Law", this) && source.isRed()) {
+			if (restDamage > 1) restDamage = restDamage - 2;
+			else restDamage = 0;
+    	}
+    	if (AllZoneUtil.isCardInPlay("Sphere of Reason", this) && source.isBlue()) {
+			if (restDamage > 1) restDamage = restDamage - 2;
+			else restDamage = 0;
+    	}
+    	if (AllZoneUtil.isCardInPlay("Sphere of Truth", this) && source.isWhite()) {
+			if (restDamage > 1) restDamage = restDamage - 2;
+			else restDamage = 0;
+    	}
+
     	
     	if(restDamage >= preventNextDamage) {
     		restDamage = restDamage - preventNextDamage;

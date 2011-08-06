@@ -1,0 +1,8 @@
+Name:Sphere of Purity
+ManaCost:3 W
+Types:Enchantment
+Text:If an artifact source would deal damage to you, prevent 1 of that damage.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_purity.jpg
+End
