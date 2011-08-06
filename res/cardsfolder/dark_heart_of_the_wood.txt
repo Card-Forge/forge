@@ -1,0 +1,8 @@
+Name:Dark Heart of the Wood
+ManaCost:B G
+Types:Enchantment
+Text:no text
+K:abGainLife Sac<1/Forest>:3
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_heart_of_the_wood.jpg
+End
