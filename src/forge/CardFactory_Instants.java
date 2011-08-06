@@ -628,14 +628,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    CardList creats = new CardList();
-                    creats.addAll(AllZone.Human_Battlefield.getCards());
-                    creats.addAll(AllZone.Computer_Battlefield.getCards());
-                    creats = creats.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature();
-                        }
-                    });
+                    CardList creats = AllZoneUtil.getCreaturesInPlay();
                     for(int i = 0; i < creats.size(); i++)
                         creats.get(i).tap();
                 }//resolve()
@@ -655,14 +648,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    CardList creats = new CardList();
-                    creats.addAll(AllZone.Human_Battlefield.getCards());
-                    creats.addAll(AllZone.Computer_Battlefield.getCards());
-                    creats = creats.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature();
-                        }
-                    });
+                    CardList creats = AllZoneUtil.getCreaturesInPlay();
                     for(int i = 0; i < creats.size(); i++)
                         creats.get(i).tap();
                 }
@@ -750,15 +736,7 @@ public class CardFactory_Instants {
                 
                 @Override                
                 public boolean canPlay() {
-                	Player player = AllZone.Phase.getPlayerTurn();
-                	Player opponent = player.getOpponent();
-                    PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-            		PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Battlefield, opponent);                  
-                    CardList start = new CardList(PlayerPlayZone.getCards());
-                    CardList start2 = new CardList(opponentPlayZone.getCards());
-                    final CardList list = start.getType("Creature");
-                    final CardList list2 = start2.getType("Creature");
-                    return (list.size() + list2.size() > 0);
+                    return AllZoneUtil.getCreaturesInPlay().size() > 0;
                 }
                 
                 public boolean canPlayAI() {
@@ -821,24 +799,24 @@ public class CardFactory_Instants {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Scattershot")) {
-           final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 74777841291969L;
-                
-                @Override                           
-                public boolean canPlayAI() {
-                    return false;
-                }      
-                @Override
-                public void resolve() {
+        	final SpellAbility spell = new Spell(card) {
+        		private static final long serialVersionUID = 74777841291969L;
 
-                    if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,card);
-                    }
-                    };
-           };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
+        		@Override                           
+        		public boolean canPlayAI() {
+        			return false;
+        		}      
+        		@Override
+        		public void resolve() {
+
+        			if(getTargetCard() != null) {
+        				if(AllZone.GameAction.isCardInPlay(getTargetCard())
+        						&& CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1, card);
+        			}
+        		};
+        	};
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
         	spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END ************************** 
         
@@ -1857,7 +1835,6 @@ public class CardFactory_Instants {
                             AllZone.Computer_Library.add(top);
                         }
                     }
-                    // AllZone.GameAction.drawCard(card.getController());
                 }//computerResolve()
                 
                 public void humanResolve() {
@@ -1877,14 +1854,13 @@ public class CardFactory_Instants {
                             library.add(top);
                         }
                     }//if
-                    // AllZone.GameAction.drawCard(card.getController());
                 }//resolve()
             };
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Worldly Tutor")) {
             SpellAbility spell = new Spell(card) {
@@ -1941,6 +1917,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        */
         
         
         //*************** START *********** START **************************
