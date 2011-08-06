@@ -703,9 +703,7 @@ public class AbilityFactory_ChangeZone {
 		 String pronoun = tgts.size() > 1 ? " their " : " its ";
 
 		 String fromGraveyard = " from the graveyard";
-		 
-		 // TODO: can Destination be Graveyard in any of these cases?
-		 
+
 		 if (destination.equals("Battlefield")){
 			 sb.append("Put").append(targetname);
 			 if (origin.equals("Graveyard"))
@@ -719,11 +717,12 @@ public class AbilityFactory_ChangeZone {
         	sb.append(".");
 		 }
 		 
-		 if(destination.equals("Hand"))
+		 if(destination.equals("Hand")){
 			 sb.append("Return").append(targetname);
 			 if (origin.equals("Graveyard"))
 				 sb.append(fromGraveyard);
 			 sb.append(" to").append(pronoun).append("owners hand.");
+		 }
 		 
 	     if (destination.equals("Library")){
 	    	 if (params.containsKey("Shuffle")){	// for things like Gaea's Blessing
@@ -749,14 +748,20 @@ public class AbilityFactory_ChangeZone {
 	     }
 		 
 		 if(destination.equals("Exile")){
-			 sb.append("Exile").append(targetname);
+			 sb.append("Exile ").append(targetname);
+			 if (origin.equals("Graveyard"))
+				 sb.append(fromGraveyard);
+		 }
+		 
+		 if(destination.equals("Graveyard")){
+			 sb.append("Put").append(targetname);
+			 sb.append(" from ").append(origin);
+			 sb.append(" into").append(pronoun).append("owner's graveyard.");
 		 }
 		 
 		 Ability_Sub abSub = sa.getSubAbility();
 		 if (abSub != null) {
 		 	sb.append(abSub.getStackDescription());
-			 if (origin.equals("Graveyard"))
-				 sb.append(fromGraveyard);
 		 }
 		 
 		 return sb.toString();
@@ -778,6 +783,8 @@ public class AbilityFactory_ChangeZone {
 			tgtCards.add(knownDetermineDefined(sa, params.get("Defined"), origin));
 		}
 
+		Card targetCard = tgtCards.get(0);
+		
 		for(Card tgtC : tgtCards){
 			PlayerZone originZone = AllZone.getZone(tgtC);
 			if (!originZone.is(origin))
@@ -830,7 +837,7 @@ public class AbilityFactory_ChangeZone {
 			else{
 				String DrawBack = af.getMapParams().get("SubAbility");
 				Card card = sa.getSourceCard();
-				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, targetCard, sa);
 			}
 		}
 	}
