@@ -2,7 +2,7 @@ Name:Chimeric Staff
 ManaCost:4
 Types:Artifact
 Text:no text
-A:AB$Animate | Cost$ X | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Construct | SpellDescription$ CARDNAME becomes an X/X Construct artifact creature until end of turn.
+A:AB$ Animate | Cost$ X | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Construct | SpellDescription$ CARDNAME becomes an X/X Construct artifact creature until end of turn.
 SVar:X:Count$xPaid
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chimeric_staff.jpg
