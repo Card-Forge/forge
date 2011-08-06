@@ -6011,10 +6011,12 @@ public class CardFactory implements NewConstants {
         	card.setSVar("PlayMain1", "TRUE");
         }//End abTapAll
         
-     // Generic untap target ___ activated ability
-        //abUntapTgt {Ability_Cost}:{Valid Targets}:{Description}
-        if (hasKeyword(card, "abUntapTgt") != -1)
-        {
+        /*
+         *  Generic untap target ___ activated ability
+         *  
+         *  syntax: abUntapTgt {Ability_Cost}:{Valid Targets}:{Description}
+         */
+        if (hasKeyword(card, "abUntapTgt") != -1) {
         	int n = hasKeyword(card, "abUntapTgt");
 
         	String parse = card.getKeyword().get(n).toString();
@@ -6101,7 +6103,7 @@ public class CardFactory implements NewConstants {
         				tgtC.untap();
         			}
         		}
-        	}; //AbTapTgt
+        	}; //AbUntapTgt
 
         	AbUntapTgt.setDescription(abDesc[0]);
         	card.addSpellAbility(AbUntapTgt);
