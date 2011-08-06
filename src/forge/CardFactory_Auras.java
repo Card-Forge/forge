@@ -47,7 +47,7 @@ class CardFactory_Auras {
         return -1;
     }
     
-    public static Card getCard(final Card card, String cardName, Player owner) {
+    public static Card getCard(final Card card, final String cardName, Player owner) {
     	
     	Command standardUnenchant = new Command() {
 			private static final long serialVersionUID = 3938247133551483568L;
@@ -1636,11 +1636,11 @@ class CardFactory_Auras {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Take Possession")) {	
+        else if(cardName.equals("Take Possession") || cardName.equals("Volition Reins")) {	
             final Player[] prevController = new Player[1];
             prevController[0] = null;
-            
-            Ability_Cost cost = new Ability_Cost("5 U U", cardName, false);
+            String costString = cardName.equals("Volition Reins") ? "3 U U U" : "5 U U";
+            Ability_Cost cost = new Ability_Cost(costString, cardName, false);
             Target tgt = new Target("Select target Permanent", "Permanent".split(","));
             
             final SpellAbility spell = new Spell(card, cost, tgt) {
@@ -1662,7 +1662,10 @@ class CardFactory_Auras {
                     prevController[0] = c.getController();
                     AllZone.GameAction.moveToPlay(card);
                 	c.attachCard(card);
-                	AllZone.GameAction.changeController(new CardList(c), c.getController(), card.getController());     
+                	AllZone.GameAction.changeController(new CardList(c), c.getController(), card.getController()); 
+                	if(cardName.equals("Volition Reins")) {
+                		if(c.isTapped()) c.untap();
+                	}
                 }//resolve()
             };
             
