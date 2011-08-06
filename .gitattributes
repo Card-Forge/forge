@@ -355,6 +355,7 @@ src/com/cloudgarden/layout/AnchorLayout.java -text svneol=native#text/plain
 src/com/esotericsoftware/minlog/Log.java svneol=native#text/plain
 src/forge/Ability.java svneol=native#text/plain
 src/forge/Ability_Activated.java svneol=native#text/plain
+src/forge/Ability_Cost.java -text svneol=native#text/plain
 src/forge/Ability_Hand.java svneol=native#text/plain
 src/forge/Ability_Mana.java -text svneol=native#text/plain
 src/forge/Ability_Reflected_Mana.java svneol=native#text/plain

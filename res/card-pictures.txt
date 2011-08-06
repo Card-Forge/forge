@@ -3856,3 +3856,15 @@ erase.jpg		http://www.wizards.com/global/images/magic/general/erase.jpg
 ionas_judgment.jpg		http://www.wizards.com/global/images/magic/general/ionas_judgment.jpg
 wipe_clean.jpg		http://www.wizards.com/global/images/magic/general/wipe_clean.jpg
 deja_vu.jpg		http://serv3.tcgimages.eu/img/cards/Portal/deja_vu.jpg
+unyaro_bees.jpg		http://www.wizards.com/global/images/magic/general/unyaro_bees.jpg
+ticking_gnomes.jpg		http://www.wizards.com/global/images/magic/general/ticking_gnomes.jpg
+shock_troops.jpg		http://www.wizards.com/global/images/magic/general/shock_troops.jpg
+ember_hauler.jpg		http://www.wizards.com/global/images/magic/general/ember_hauler.jpg
+aeolipile.jpg		http://www.wizards.com/global/images/magic/general/aeolipile.jpg
+blasting_station.jpg		http://www.wizards.com/global/images/magic/general/blasting_station.jpg
+blood_rites.jpg		http://www.wizards.com/global/images/magic/general/blood_rites.jpg
+keldon_necropolis.jpg		http://www.wizards.com/global/images/magic/general/keldon_necropolis.jpg
+orcish_bloodpainter.jpg		http://www.wizards.com/global/images/magic/general/orcish_bloodpainter.jpg
+orcish_mechanics.jpg		http://www.wizards.com/global/images/magic/general/orcish_mechanics.jpg
+scorched_rusalka.jpg		http://www.wizards.com/global/images/magic/general/scorched_rusalka.jpg
+tar_pitcher.jpg		http://www.wizards.com/global/images/magic/general/tar_pitcher.jpg

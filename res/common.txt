@@ -1734,3 +1734,7 @@ Sage's Knowledge
 Erase
 Iona's Judgment
 Wipe Clean
+Shock Troops
+Aeolipile
+Orcish Bloodpainter
+Orcish Mechanics

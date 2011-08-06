@@ -951,30 +951,7 @@ public class CardFactory implements NewConstants {
                 if(Tgt[0]) tmpCost = k[0].substring(9);
                 else tmpCost = k[0].substring(6);
                 
-                final boolean sacCost[] = {false};
-                boolean sacFirstCost = false;
-                final String sacType[] = {""};
-                boolean sacThis = false;
-                
-                if(tmpCost.contains("Sac-")) {
-                	sacCost[0] = true;
-                	int sacPos = tmpCost.indexOf("Sac-");
-                	sacType[0] = tmpCost.substring(sacPos).replace("Sac-", "").trim();
-                	sacThis =  (sacType[0].equals("CARDNAME"));
-                    tmpCost = tmpCost.substring(0,sacPos-1).trim();
-                    sacFirstCost = (tmpCost.length() == 0);
-                }                
-                
-                boolean tapCost = false;
-                boolean tapFirstCost = false;
-                
-                if(tmpCost.contains("T")) {
-                    tapCost = true;
-                    tmpCost = tmpCost.replace("T", "");
-                    tmpCost = tmpCost.trim();
-                    tapFirstCost = tmpCost.length() == 0;
-                }
-                final String manaCost = tmpCost.trim();
+                final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName());
                 
                 final int NumAttack[] = {-1138};
                 final String AttackX[] = {"none"};
@@ -1111,33 +1088,13 @@ public class CardFactory implements NewConstants {
                 }
                 
                 if(!d.equals("none")) {
-                    StringBuilder abCost = new StringBuilder();
-                    abCost.append(manaCost);
-                    if (tapCost){
-                    	if (tapFirstCost)
-                    		abCost.append("T");
-                    	else
-                    		abCost.append(", t");
-                    	abCost.append("ap");
-                    }
-                    if (sacCost[0]){
-                    	if (sacFirstCost)
-                    		abCost.append("S");
-                    	else
-                    		abCost.append(", s");
-                    	abCost.append("acrifice ");
-                    	if (!sacThis)
-                    		abCost.append("a ");
-                    	abCost.append(sacType[0]);
-                    }
-                    abCost.append(": ");
-                    
-                    spDesc[0] = abCost + d;
+                    spDesc[0] = abCost.toString() + d;
                     stDesc[0] = d;
                 }
                 
-                if(!tapCost) {
-                    final SpellAbility ability = new Ability_Activated(card, manaCost) {
+                // start ability here:
+                if(!abCost.getTap()) {
+                    final SpellAbility ability = new Ability_Activated(card, abCost.getMana()) {
                         private static final long serialVersionUID = -1118592153328758083L;
                         
                         private int               defense;
@@ -1161,7 +1118,7 @@ public class CardFactory implements NewConstants {
                         
                         @Override
                         public boolean canPlayAI() {
-                        	if (sacCost[0]) return false;
+                        	if (abCost.getSacCost()) return false;
                         	
                             defense = getNumDefense();
                             keyword = Keyword[0];
@@ -1226,7 +1183,7 @@ public class CardFactory implements NewConstants {
                                     return false;
                                 }
                             });
-                            if (sacCost[0] && sacType[0].equals("CARDNAME"))	// if sacrifice <this>, don't self-target
+                            if (abCost.getSacCost() && abCost.getSacThis())	// if sacrifice <this>, don't self-target
                             	list.remove(card);
                             return list;
                         }//getCreatures()
@@ -1286,15 +1243,15 @@ public class CardFactory implements NewConstants {
                     
                     if(Tgt[0] == true) ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
                     else ability.setTargetCard(card);
-                    if(sacCost[0]){
-                    	if (sacType[0].equals("CARDNAME")) 
+                    if(abCost.getSacCost()){
+                    	if (abCost.getSacThis()) 
                     		ability.setAfterPayMana(CardFactoryUtil.input_sacrificeThis(ability));
                     	else 	
-                    		ability.setAfterPayMana(CardFactoryUtil.input_sacrificeType(ability, sacType[0], "Sacrifice a "+sacType[0]));
+                    		ability.setAfterPayMana(CardFactoryUtil.input_sacrificeType(ability, abCost.getSacType(), abCost.sacString(true)));
                     }
                     card.addSpellAbility(ability);
                 }
-                if(tapCost) {
+                else{
                     final SpellAbility ability = new Ability_Tap(card) {
                         private static final long serialVersionUID = 5252594757468128739L;
                         
@@ -1319,7 +1276,7 @@ public class CardFactory implements NewConstants {
                         
                         @Override
                         public boolean canPlayAI() {
-                        	if (sacCost[0]) return false;
+                        	if (abCost.getSacCost()) return false;
                             defense = getNumDefense();
                             keyword = Keyword[0];
                             
@@ -1428,14 +1385,14 @@ public class CardFactory implements NewConstants {
                     
                     if(Tgt[0] == true) ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
                     else ability.setTargetCard(card);
-                    if(sacCost[0]){
-                    	if (sacType[0].equals("CARDNAME") || sacType[0].equals(card.getName())) 
+                    if(abCost.getSacCost()){
+                    	if (abCost.getSacThis()) 
                     		ability.setAfterPayMana(CardFactoryUtil.input_sacrificeThis(ability));
                     	else 	
-                    		ability.setAfterPayMana(CardFactoryUtil.input_sacrificeType(ability, sacType[0], "Sacrifice a "+sacType[0]));
+                    		ability.setAfterPayMana(CardFactoryUtil.input_sacrificeType(ability, abCost.getSacType(), abCost.sacString(true)));
                     }
                     
-                    if(!tapFirstCost && !sacFirstCost) ability.setManaCost(manaCost);
+                    if(!abCost.hasNoManaCost()) ability.setManaCost(abCost.getMana());
                     
                     card.addSpellAbility(ability);
                 }
@@ -1734,31 +1691,7 @@ public class CardFactory implements NewConstants {
                     tmpCost = k[0].substring(12);
                 }
                 
-                final boolean sacCost[] = {false};
-                boolean sacFirstCost = false;
-                final String sacType[] = {""};
-                
-                if(tmpCost.contains("Sac-")) {
-                	sacCost[0] = true;
-                	int sacPos = tmpCost.indexOf("Sac-");
-                	sacType[0] = tmpCost.substring(sacPos).replace("Sac-", "").trim();
-                    tmpCost = tmpCost.substring(0,sacPos-1).trim();
-                    sacFirstCost = (tmpCost.length() == 0);
-                }
-                
-                boolean tapCost = false;
-                boolean tapFirstCost = false;
-                
-                if(tmpCost.contains("T")) {
-                    tapCost = true;
-                    tmpCost = tmpCost.replace("T", "");
-                    tmpCost = tmpCost.trim();
-                    tapFirstCost = (tmpCost.length() == 0);
-                }
-                
-                if (tmpCost == "") tmpCost = "0";	// this doesn't seem to do anything
-                
-                final String manaCost = tmpCost;
+                final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName());
                 
                 final int NumDmg[] = {-1};
                 final String NumDmgX[] = {"none"};
@@ -1798,31 +1731,12 @@ public class CardFactory implements NewConstants {
                     stDesc[0] = card.getName() + " -" + sb.toString();
                 }
                 
-                StringBuilder abCost = new StringBuilder();
-                abCost.append(manaCost);
-                if (tapCost){
-                	if (tapFirstCost)
-                		abCost.append("T");
-                	else
-                		abCost.append(", t");
-                	abCost.append("ap");
-                }
-                if (sacCost[0]){
-                	if (sacFirstCost)
-                		abCost.append("S");
-                	else
-                		abCost.append(", s");
-                	abCost.append("acrifice a ");
-                	abCost.append(sacType[0]);
-                }
-                abCost.append(": ");
-                
-                spDesc[0] = abCost + spDesc[0];
+                spDesc[0] = abCost.toString() + spDesc[0];
                            
              // Damage ability starts here
-                if(!tapCost) {
+                if(!abCost.getTap()) {
                 	// adDamage starts here
-                    final SpellAbility abDamage = new Ability_Activated(card, manaCost) {
+                    final SpellAbility abDamage = new Ability_Activated(card, abCost.getMana()) {
                         private static final long serialVersionUID = -7560349014757367722L;
                         
                         private int               damage;
@@ -1886,7 +1800,7 @@ public class CardFactory implements NewConstants {
                         
                         @Override
                         public boolean canPlayAI() {
-                        	if (sacCost[0])	 return false;
+                        	if (abCost.getSacCost())	 return false;
                             damage = getNumDamage();
                             
                             Random r = new Random(); // prevent run-away activations 
@@ -1953,17 +1867,19 @@ public class CardFactory implements NewConstants {
                     
 
                     if(TgtCP[0] == true) 
-                    	abDamage.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(abDamage, true, sacFirstCost));
+                    	abDamage.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(abDamage, true, abCost.hasNoManaCost()));
                     else if(TgtCreature[0] == true) abDamage.setBeforePayMana(CardFactoryUtil.input_targetCreature(abDamage));
                     else if(TgtPlayer[0] == true) abDamage.setBeforePayMana(CardFactoryUtil.input_targetPlayer(abDamage));
                     
-                    if (sacCost[0])
-	                    abDamage.setAfterPayMana(CardFactoryUtil.input_sacrificeType(abDamage, sacType[0], "Sacrifice a "+sacType[0]));
-                	     
+                    if(abCost.getSacCost()){
+                    	if (abCost.getSacThis()) 
+                    		abDamage.setAfterPayMana(CardFactoryUtil.input_sacrificeThis(abDamage));
+                    	else 	
+                    		abDamage.setAfterPayMana(CardFactoryUtil.input_sacrificeType(abDamage, abCost.getSacType(), abCost.sacString(true)));
+                    }
                     
                     card.addSpellAbility(abDamage);
                 }//!tapCost
-                
                 else {	//tapCost
                     final SpellAbility abDamage = new Ability_Tap(card) {
                         private static final long serialVersionUID = -7960649024757327722L;
@@ -2029,7 +1945,7 @@ public class CardFactory implements NewConstants {
                         
                         @Override
                         public boolean canPlayAI() {
-                        	if (sacCost[0])	return false;
+                        	if (abCost.getSacCost())	return false;
                             damage = getNumDamage();
                             
                             boolean na = false;
@@ -2098,10 +2014,14 @@ public class CardFactory implements NewConstants {
                     else if(TgtCreature[0] == true) abDamage.setBeforePayMana(CardFactoryUtil.input_targetCreature(abDamage));
                     else if(TgtPlayer[0] == true) abDamage.setBeforePayMana(CardFactoryUtil.input_targetPlayer(abDamage));
                     
-                    if (sacCost[0])
-	                    abDamage.setAfterPayMana(CardFactoryUtil.input_sacrificeType(abDamage, sacType[0], "Sacrifice a "+sacType[0]));
-                	
-                    if(!tapFirstCost && !sacFirstCost) abDamage.setManaCost(manaCost);
+                    if(abCost.getSacCost()){
+                    	if (abCost.getSacThis()) 
+                    		abDamage.setAfterPayMana(CardFactoryUtil.input_sacrificeThis(abDamage));
+                    	else 	
+                    		abDamage.setAfterPayMana(CardFactoryUtil.input_sacrificeType(abDamage, abCost.getSacType(), abCost.sacString(true)));
+                    }
+                    
+                    if(!abCost.hasNoManaCost()) abDamage.setManaCost(abCost.getMana());
                     
                     card.addSpellAbility(abDamage);
                 }//tapCost
