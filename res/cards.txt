@@ -1,3 +1,10 @@
+Invisibility
+U U
+Enchantment Aura
+Enchanted creature can't be blocked except by Walls.
+Enchant creature
+enPump:CARDNAME can't be blocked except by Walls.
+
 Bog Rats
 B
 Creature Rat
