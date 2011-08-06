@@ -2,7 +2,7 @@ Name:Hideous End
 ManaCost:1 B B
 Types:Instant
 Text:Destroy target nonblack creature. Its controller loses 2 life.
-K:spDestroyTgt:Creature.Nonblack:Drawback$LoseLifeTgtCtrlr/2
+K:spDestroyTgt:Creature.nonBlack:Drawback$LoseLifeTgtCtrlr/2
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hideous_end.jpg
