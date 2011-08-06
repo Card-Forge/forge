@@ -1,0 +1,47 @@
+BasicLandPercentage=35
+
+[Group MaxCnt=4 Percentage=15]
+Ballyrush Banneret
+Kinsbaile Borderguard
+Wizened Cenn
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Figure of Destiny
+Apothecary Initiate
+Goldmeadow Dodger
+Goldmeadow Harrier
+Mosquito Guard
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Patrol Signaler
+Amrou Kithkin
+Amrou Scout
+Knight of Meadowgrain
+Mistmeadow Skulk
+Order of the Golden Cricket
+Somnomancer
+[/Group]
+
+[Group MaxCnt=4 Percentage=14]
+Kithkin Harbinger
+Amrou Seekers
+Ballynock Cohort
+Ballynock Cohort
+Burrenton Bombardier
+Preeminent Captain
+[/Group]
+
+[Group MaxCnt=3 Percentage=12]
+Ballynock Trapper
+Barrenton Cragtreads
+Kinsbaile Cavalier
+Kithkin Rabble
+Kithkin Rabble
+Plover Knights
+Springjack Shepherd
+Thistledown Liege
+[/Group]
+
+End
