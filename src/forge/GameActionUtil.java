@@ -3160,11 +3160,6 @@ public class GameActionUtil {
 		else if(c.getName().equals("Treva, the Renewer")) playerCombatDamage_Treva(c);
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
 		
-		/* Converteded to AF Trigger
-		else if(c.getName().equals("Doomsday Specter")) opponent_Discard_You_Choose(c);
-		else if(c.getName().equals("Silent Specter")) opponent_Discard(c, 2);
-		 */
-		
 		else if(c.isEnchantedBy("Celestial Mantle")) execute_Celestial_Mantle( c);
 		
 		//Unused variable
@@ -3209,32 +3204,8 @@ public class GameActionUtil {
 				target_Opponent_Lose_Life(player, gain, bond);
 			}
 		}
-		
-		if(AllZoneUtil.isCardInPlay("Ageless Entity", player)) {
-			CardList entities = AllZoneUtil.getPlayerCardsInPlay(player, "Ageless Entity");
-			for(Card entity:entities) {
-				card_Add_Counters(entity, Counters.P1P1, gain, false);
-			}
-		}
 
 	}//executeLifeGainEffects
-	
-	private static void card_Add_Counters(final Card card, final Counters type, final int num, final boolean may) {
-		//should be triggered
-		Ability addCounters = new Ability(card, "0") {
-			public void resolve() {
-				card.addCounter(type, num);
-			}
-		};
-		addCounters.setStackDescription(card.getName()+" - Put "+num+" "+type.getName()+" counters on "+card+".");
-		String mayString = "Put "+num+" "+type.getName()+" counters on "+card+"?";
-		if(!may || card.getController().isComputer()) {
-			AllZone.Stack.add(addCounters);
-		}
-		else if(GameActionUtil.showYesNoDialog(card, mayString)) {
-			AllZone.Stack.add(addCounters);
-		}
-	}
 	
 	private static void target_Opponent_Lose_Life(final Player player, final int loss, final Card source) {
 		//should be triggered
