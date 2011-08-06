@@ -339,6 +339,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Albert Einstein 3	hard	Stronger version of the above deck");
         sb.append("\r\n");
+        sb.append("Bamm Bamm Rubble 1	easy   	Sloth's easy domain deck, creatures and spells with the Domain ability");
+        sb.append("\r\n");
         sb.append("Barney Rubble 1   	easy   	Sloth's Sovereigns of Lost Alara deck with walls and auras");
         sb.append("\r\n");
         sb.append("Barney Rubble 2   	medium   	Sloth's Sovereigns of Lost Alara deck with walls and auras");
