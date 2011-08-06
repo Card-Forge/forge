@@ -716,7 +716,7 @@ class CardFactory_Equipment {
                 }
             };
 
-            final Trigger myTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ TrigOverride | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, put a +1/+1 counter on equipped creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.",card);
+            final Trigger myTrigger = TriggerHandler.parseTrigger("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigOverride | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, put a +1/+1 counter on equipped creature. If equipped creature is a Vampire, put two +1/+1 counters on it instead.",card);
             myTrigger.setOverridingAbility(triggeredAbility);
 
             card.addTrigger(myTrigger);
