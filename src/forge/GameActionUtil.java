@@ -2326,7 +2326,7 @@ public class GameActionUtil {
 	    	}
 	    	int amount = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it.");
             
-            for(int i=0 ; i < amount ; i++)
+            for(int i=1 ; i < amount ; i++)
                 AllZone.Stack.addSimultaneousStackEntry(ability); AllZone.Stack.addSimultaneousStackEntry(ability);
         }
         
