@@ -2721,25 +2721,6 @@ public class GameActionUtil {
     public static void executeCombatDamageEffects(final Card source, int damage) {
     	
     	if (damage <= 0) return;
-    	
-        if(source.getKeyword().contains("Whenever CARDNAME deals combat damage, you gain that much life.")) {
-			final int life = damage;
-			final Player player = source.getController();
-			
-	    	Ability ability = new Ability(source, "0") {
-	    		@Override
-	    		public void resolve() {
-	    			player.gainLife(life, source);
-	    		}
-	    	};
-	    	StringBuilder sb = new StringBuilder();
-	        sb.append(source.getName()+" - ").append(player).append(" gains ").append(life).append(" life");
-	        ability.setStackDescription(sb.toString());
-        	int amount = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage, you gain that much life.");
-	        
-	        for(int i=0 ; i < amount ; i++)
-	        	AllZone.Stack.add(ability);
-        }
         
         /*if(source.isEquipped()) {
         	ArrayList<Card> equips = source.getEquippedBy();
