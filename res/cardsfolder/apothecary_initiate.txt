@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Kithkin Cleric
 Text:no text
 PT:1/1
-K:WheneverKeyword:CastSpell/Any:Color/white:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:PayMana/1:No Special Condition:Whenever a player casts a white spell, you may pay {1}. If you do, you gain 1 life.
+K:WheneverKeyword:CastSpell/Any:Color/white:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:PayMana/1:No Special Condition:Whenever a player casts a white spell, you may pay 1. If you do, you gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apothecary_initiate.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/1.jpg
