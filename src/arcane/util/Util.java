@@ -65,28 +65,12 @@ public class Util {
 		}
 	}
 
-	static public void sleep (int millis) {
-		try {
-			Thread.sleep(millis);
-		} catch (InterruptedException ignored) {
-		}
-	}
-
 	static public boolean classExists (String className) {
 		try {
 			Class.forName(className);
 			return true;
 		} catch (ClassNotFoundException ex) {
 			return false;
-		}
-	}
-
-	static public void wait (Object lock) {
-		synchronized (lock) {
-			try {
-				lock.wait();
-			} catch (InterruptedException ex) {
-			}
 		}
 	}
 
