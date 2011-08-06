@@ -2319,6 +2319,79 @@ class CardFactory_Lands {
         	card.addSpellAbility(mana);
         }//*************** END ************ END **************************
         
+        
+        //*************** START ************ START **************************
+        else if(cardName.equals("Calciform Pools") || cardName.equals("Dreadship Reef") ||
+        		cardName.equals("Fungal Reaches")  || cardName.equals("Molten Slagheap") ||
+        		cardName.equals("Saltcrusted Steppe")) {
+        	/*
+        	 * tap, Remove X storage counters from Calciform Pools: Add X mana in any combination of W and/or U to your mana pool.
+        	 */
+        	final int[] num = new int[1];
+        	final int[] split = new int[1];
+        	
+        	String pTemp = "";
+        	String sTemp = "";
+        	if(cardName.equals("Calciform Pools")) { pTemp = "W"; sTemp = "U"; }
+        	if(cardName.equals("Dreadship Reef")) { pTemp = "U"; sTemp = "B"; }
+        	if(cardName.equals("Fungal Reaches")) { pTemp = "R"; sTemp = "G"; }
+        	if(cardName.equals("Molten Slagheap")) { pTemp = "B"; sTemp = "R"; }
+        	if(cardName.equals("Saltcrusted Steppe")) { pTemp = "G"; sTemp = "W"; }
+        	
+        	final String primary = pTemp;
+        	final String secondary = sTemp;
+        	
+        	final Ability_Mana addMana = new Ability_Mana(card, "tap, Remove X storage counters from "+cardName+": Add X mana in any combination of "+primary+" and/or "+secondary+" to your mana pool.") {
+				private static final long serialVersionUID = 7177960799748450242L;
+
+				//@Override
+                public String mana() {
+                	StringBuilder mana = new StringBuilder();
+                	for(int i = 0; i < split[0]; i++) {
+                		mana.append(primary).append(" ");
+                	}
+                	for(int j = 0; j < num[0] - split[0]; j++) {
+                		mana.append(secondary).append(" ");
+                	}
+                    return mana.toString().trim();
+                }
+                
+                @Override
+                public void resolve() {
+                    card.subtractCounter(Counters.STORAGE, num[0]);
+                    card.tap();
+                    super.resolve();
+                }
+            };
+            
+            Input runtime = new Input() {
+				private static final long serialVersionUID = -8808673510875540608L;
+
+				@Override
+                public void showMessage() {
+					num[0] = card.getCounters(Counters.STORAGE);
+                	String[] choices = new String[num[0]+1];
+                	for(int j=0;j<=num[0];j++) {
+                		choices[j] = ""+j;
+                	}
+                    String answer = (String)(AllZone.Display.getChoiceOptional(
+                            "Storage counters to remove", choices));
+                    num[0] = Integer.parseInt(answer);
+                    
+                    String splitNum = (String)(AllZone.Display.getChoiceOptional(
+                            "Number of "+primary+" to add", choices));
+                    split[0] = Integer.parseInt(splitNum);
+                    if(num[0] > 0 || split[0] > 0) {
+                    	AllZone.Stack.add(addMana);
+                    }
+                    stop();
+                }
+            };
+            
+            addMana.setBeforePayMana(runtime);
+            card.addSpellAbility(addMana);
+        }//*************** END ************ END **************************
+        
         return card;
     }
     
