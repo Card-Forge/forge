@@ -153,9 +153,20 @@ public class Spell_Permanent extends Spell {
         		return false;
     	}
     	
+    	CardList listShimmerMyr = new CardList(AllZone.getZone(Constant.Zone.Battlefield, perm.getController()).getCards());
+    	listShimmerMyr = listShimmerMyr.filter(new CardListFilter() {
+
+			public boolean addCard(Card c) {
+				return c.getName().equals("Shimmer Myr");
+			}
+    		
+    	});
+    	
         return super.canPlay()
                 || (getSourceCard().getKeyword().contains("Flash") && !AllZone.GameAction.isCardInPlay(getSourceCard())
-                    && !getSourceCard().isUnCastable());
+                    && !getSourceCard().isUnCastable())
+                || ((perm.getType().contains("Artifact") && listShimmerMyr.size() != 0) && !AllZone.GameAction.isCardInPlay(getSourceCard())
+                        && !getSourceCard().isUnCastable());
     }
     
     @Override
