@@ -38,6 +38,13 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+death_grasp.jpg		http://www.wizards.com/global/images/magic/general/death_grasp.jpg
+stroke_of_genius.jpg		http://www.wizards.com/global/images/magic/general/stroke_of_genius.jpg
+braingeyser.jpg		http://www.wizards.com/global/images/magic/general/braingeyser.jpg
+fault_line.jpg		http://www.wizards.com/global/images/magic/general/fault_line.jpg
+earthquake.jpg		http://www.wizards.com/global/images/magic/general/earthquake.jpg
+rolling_earthquake.jpg		http://www.wizards.com/global/images/magic/general/rolling_earthquake.jpg
+hurricane.jpg		http://www.wizards.com/global/images/magic/general/hurricane.jpg
 helix_pinnacle.jpg		http://www.wizards.com/global/images/magic/general/helix_pinnacle.jpg
 quag_vampires.jpg		http://www.wizards.com/global/images/magic/general/quag_vampires.jpg
 skitter_of_lizards.jpg		http://www.wizards.com/global/images/magic/general/skitter_of_lizards.jpg
