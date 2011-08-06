@@ -1439,10 +1439,9 @@ public class GameAction {
     		
         	if (sa.isKickerAbility()) {
                 Command paid1 = new Command() {
-                    
-    				private static final long serialVersionUID = 1L;
+					private static final long serialVersionUID = -6531785460264284794L;
 
-    				public void execute() {
+					public void execute() {
                         AllZone.Stack.add(sa);
                     }
                 };

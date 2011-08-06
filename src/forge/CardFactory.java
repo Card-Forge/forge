@@ -10506,9 +10506,23 @@ public class CardFactory implements NewConstants {
                         spell.setTargetCard((Card) o);
                         if(this.isFree()) 
                         {
+                        	// WARNING: Read this before copying!
+                        	// When we have an 'if (this.isFree())' in most input objects,
+                        	// it's inside 'selectCard' not 'showMessage', and the usual 
+                        	// order is 
+                        	//   AllZone.Stack.add(spell);
+                        	//   stop();
+                        	// Here, we had to reverse the order of those two lines, or 
+                        	// else the dialog for Regrowth would get put up twice 
+                        	// when the card was played from Cascade. I think this 
+                        	// has to do with when showMessage() is called versus 
+                        	// selectCard().
+                        	// This appears to be the only place we use this pattern. Be
+                        	// careful when copying this code, and test your card with
+                        	// Cascade or Isochron Scepter.
                         	this.setFree(false);
-                        	AllZone.Stack.add(spell);
                         	stop();
+                        	AllZone.Stack.add(spell);
                     	} 
                         else
                         	stopSetNext(new Input_PayManaCost(spell));
