@@ -1,7 +1,7 @@
 Name:Sower of Temptation
 ManaCost:2 U U
 Types:Creature Faerie Wizard
-Text:When Sower of Temptation comes into play, gain control of target creature as long as Sower of Temptation remains in play.
+Text:When CARDNAME enters the battlefield, gain control of target creature for as long as CARDNAME remains on the battlefield.
 PT:2/2
 K:Flying
 SVar:Rarity:Rare
