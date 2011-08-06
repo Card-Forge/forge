@@ -14241,7 +14241,7 @@ public class CardFactory_Creatures {
         }
         //*************** END ************ END **************************
                 
-        
+        /*
         //*************** START *********** START **************************
         if(cardName.equals("Jund Battlemage")) {
             final SpellAbility ability = new Ability_Tap(card, "G") {
@@ -14286,11 +14286,12 @@ public class CardFactory_Creatures {
             ability2.setStackDescription(card.getName() + " - Opponent loses 1 life.");
             
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         if(cardName.equals("Lich Lord of Unx")) {
-            final SpellAbility ability = new Ability_Tap(card, "U B") {
+            /*
+        	final SpellAbility ability = new Ability_Tap(card, "U B") {
                 private static final long serialVersionUID = 8909297504020264315L;
                 
                 @Override
@@ -14303,7 +14304,7 @@ public class CardFactory_Creatures {
             ability.setDescription("U B, Tap: Put a 1/1 blue and black Zombie Wizard creature token onto the battlefield.");
             ability.setStackDescription(card.getName() + " - " + card.getController()
                     + "puts a 1/1 blue and black Zombie Wizard creature token onto the battlefield.");
-            
+            */
             final Ability ability2 = new Ability(card, "U U B B") {
                 @Override
                 public boolean canPlayAI() {
@@ -14334,7 +14335,7 @@ public class CardFactory_Creatures {
             ability2.setDescription("U U B B: Target player loses X life and puts the top X cards of his or her library into his or her graveyard, where X is the number of Zombies you control.");
             ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
             
-            card.addSpellAbility(ability);
+            //card.addSpellAbility(ability);
             card.addSpellAbility(ability2);         
         }//*************** END ************ END **************************
         
