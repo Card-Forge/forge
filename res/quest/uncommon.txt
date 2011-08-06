@@ -38,6 +38,7 @@ Ardent Plea
 Armored Galleon
 Armored Griffin
 Arrogant Vampire
+Artisan of Kozilek
 Ashen Monstrosity
 Ashenmoor Gouger
 Aspect of Mongoose
@@ -74,6 +75,7 @@ Black Ward
 Blade Sliver
 Blasted Landscape
 Blaze
+Blight
 Bloated Toad
 Blood Knight
 Bloodbraid Elf
@@ -244,6 +246,7 @@ Feldon's Cane
 Femeref Archers
 Feral Animist
 Feral Lightning
+Festering Wound
 Fighting Drake
 Filigree Sages
 Fire Bowman
@@ -321,6 +324,7 @@ Goldmeadow Lookout
 Goliath Spider
 Gorgon Flail
 Granite Shard
+Grave Defiler
 Graypelt Refuge
 Greater Forgeling
 Green Ward
@@ -447,6 +451,7 @@ Leshrac's Rite
 Levitation
 Ley Druid
 Library of Alexandria
+Lifetap
 Lightkeeper of Emeria
 Lightning Greaves
 Lightning Helix
@@ -578,6 +583,7 @@ Ramosian Commander
 Ramosian Revivalist
 Ranger en-Vec
 Rathi Fiend
+Reanimate
 Rebuild
 Reckless Wurm
 Red Ward
@@ -756,6 +762,7 @@ Thundering Giant
 Thwart
 Tidings
 Tigereye Cameo
+Time of Heroes
 Tinker
 Tobias Andrion
 Tolaria West
@@ -789,6 +796,7 @@ Urza's Factory
 Uthden Troll
 Valor
 Valorous Charge
+Vampire Hexmage
 Vampire Nighthawk
 Vampiric Embrace
 Vampiric Feast
@@ -833,6 +841,7 @@ Wall of Stone
 Wall of Swords
 Wall of Tears
 Wall of Water
+Wanderlust
 Waning Wurm
 War Chariot
 Warthog

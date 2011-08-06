@@ -104,6 +104,7 @@ Cascade Bluffs
 Cateran Overlord
 Cateran Slaver
 Celestial Colonnade
+Cemetery Reaper
 Chainer, Dementia Master
 Chameleon Colossus
 Chandra Nalaar
@@ -197,6 +198,7 @@ Elvish Vanguard
 Emeria Angel
 Emeria, the Sky Ruin
 Emmessi Tome
+Emrakul, the Aeons Torn
 Enchantress's Presence
 Endless Cockroaches
 Energizer
@@ -381,6 +383,7 @@ Legacy Weapon
 Lhurgoyf
 Lich Lord of Unx
 Lichenthrope
+Lifeblood
 Lighthouse Chronologist
 Lightning Angel
 Lightning Dragon
@@ -391,6 +394,7 @@ Livonya Silone
 Lodestone Bauble
 Lord of Atlantis
 Lord of Extinction
+Lord of the Undead
 Lotus Cobra
 Lotus Guardian
 Loxodon Gatekeeper
@@ -411,6 +415,7 @@ Magus of the Moat
 Magus of the Tabernacle
 Mahamoti Djinn
 Malakir Bloodwitch
+Mana Vault
 Marble Titan
 March of Souls
 Maro
@@ -486,6 +491,7 @@ Obliterate
 Oboro, Palace in the Clouds
 Obsidian Fireheart
 Okina, Temple to the Grandfathers
+Old Man of the Sea
 Oran-Rief, the Vastwood
 Order of Whiteclay
 Orgg
@@ -565,6 +571,7 @@ Rootbound Crag
 Rootwater Thief
 Rorix Bladewing
 Royal Assassin
+Rubinia Soulsinger
 Rugged Prairie
 Ryusei, the Falling Star
 Sabertooth Nishoba
@@ -631,6 +638,7 @@ Spawnwrithe
 Spectral Force
 Spectral Lynx
 Sphinx of Jwar Isle
+Sphinx of Magosi
 Sphinx of the Steel Wind
 Spiritmonger
 Spiritual Guardian
@@ -692,6 +700,7 @@ Threads of Disloyalty
 Thriss, Nantuko Primus
 Tidal Kraken
 Timber Protector
+Time Elemental
 Time Stretch
 Time Vault
 Time Walk

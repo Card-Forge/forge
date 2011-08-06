@@ -269,6 +269,7 @@ Crookshank Kobolds
 Cruel Edict
 Crumble
 Crypt Ripper
+Curse of Chains
 Cursed Flesh
 Cursed Ronin
 Cylian Elf
@@ -405,6 +406,7 @@ Eye of Nowhere
 Eyeblight's Ending
 Faceless Butcher
 Fallen Askari
+Fallen Cleric
 False Defeat
 False Summoning
 Fangren Hunter
@@ -549,6 +551,7 @@ Gray Ogre
 Graypelt Hunter
 Grayscaled Gharial
 Great Furnace
+Greater Mossdog
 Greel's Caress
 Griffin Sentinel
 Grixis Grimblade
@@ -802,6 +805,7 @@ Mons's Goblin Raiders
 Monstrous Carabid
 Monstrous Growth
 Moonglove Changeling
+Moonglove Extract
 Moonglove Winnower
 Moonwing Moth
 Moor Fiend
@@ -947,6 +951,7 @@ Promised Kannushi
 Prophetic Prism
 Protective Bubble
 Prowling Nightstalker
+Psychic Venom
 Pulse Tracker
 Putrid Leech
 Pygmy Pyrosaur
@@ -1178,6 +1183,7 @@ Soltari Foot Soldier
 Sootfeather Flock
 Soothing Balm
 Soul's Attendant
+Sound the Call
 Southern Elephant
 Spark Spray
 Sparksmith
@@ -1192,6 +1198,7 @@ Spineless Thug
 Spiraling Embers
 Spire Barrage
 Spire Owl
+Spirit Shackle
 Spitting Earth
 Spitting Gourna
 Sporecap Spider
