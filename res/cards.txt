@@ -1,3 +1,13 @@
+Earthquake
+X R
+Sorcery
+no text
+
+Rolling Earthquake
+X R
+Sorcery
+no text
+
 Hurricane
 X G
 Sorcery

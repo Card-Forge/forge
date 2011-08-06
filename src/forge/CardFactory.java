@@ -16875,6 +16875,74 @@ public class CardFactory implements NewConstants {
     	  card.addSpellAbility(spell);
       } 
       //*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+      else if (cardName.equals("Earthquake") || cardName.equals("Rolling Earthquake"))
+      {
+    	  final String[] keyword = new String[1];
+    	  
+    	  if (cardName.equals("Earthquake"))
+    		  keyword[0] = "Flying";
+    	  else
+    		  keyword[0] = "Horsemanship";
+    	  
+    	  final SpellAbility spell = new Spell(card)
+    	  {
+			private static final long serialVersionUID = 2208504534888870597L;
+			public void resolve()
+    		{
+				int damage = card.getXManaCostPaid();
+				CardList all = new CardList();
+                all.addAll(AllZone.Human_Play.getCards());
+                all.addAll(AllZone.Computer_Play.getCards());
+                all = all.filter(new CardListFilter()
+                {
+                	public boolean addCard(Card c)
+                	{
+                		return c.isCreature() && !c.getKeyword().contains(keyword[0]) &&
+                			   CardFactoryUtil.canDamage(card, c);
+                	}
+                });
+                
+                for(int i = 0; i < all.size(); i++)
+                    	all.get(i).addDamage(card.getXManaCostPaid(), card);
+                
+                AllZone.GameAction.addDamage(Constant.Player.Human, damage);
+                AllZone.GameAction.addDamage(Constant.Player.Computer, damage);
+                
+    			card.setXManaCostPaid(0);
+    		}
+			public boolean canPlayAI()
+			{
+				final int maxX = ComputerUtil.getAvailableMana().size() - 1;
+				
+				if (AllZone.Human_Life.getLife() <= maxX)
+					return true;
+				
+				CardListFilter filter = new CardListFilter(){
+					public boolean addCard(Card c)
+					{
+						return c.isCreature() && !c.getKeyword().contains(keyword) &&
+							   CardFactoryUtil.canDamage(card, c) && maxX >= (c.getNetDefense() + c.getDamage());
+					}
+				};
+				
+				CardList human = new CardList(AllZone.Human_Play.getCards());
+			    human = human.filter(filter);
+			    
+			    CardList comp = new CardList(AllZone.Computer_Play.getCards());
+			    comp = comp.filter(filter);
+			    
+			    return human.size() > (comp.size() + 2) && AllZone.Computer_Life.getLife() > maxX + 3;
+			}
+    	  };
+    	  spell.setDescription(cardName + " deals X damage to each creature without "+ keyword[0]+" and each player.");
+    	  spell.setStackDescription(card + " - deals X damage to each creature without " +keyword[0] +" and each player.");
+    	  
+    	  card.clearSpellAbility();
+    	  card.addSpellAbility(spell);
+      } 
+      //*************** END ************ END **************************
     
       //*************** START *********** START **************************
       else if(cardName.equals("Helix Pinnacle"))
