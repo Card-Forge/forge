@@ -11083,6 +11083,7 @@ public class CardFactory implements NewConstants {
         c.setManaCost(sim.getManaCost());
         c.addColor(sim.getManaCost());
         c.setSVars(sim.getSVars());
+        c.setIntrinsicAbilities(sim.getIntrinsicAbilities());
         
         return c;
     }// copyStats()
