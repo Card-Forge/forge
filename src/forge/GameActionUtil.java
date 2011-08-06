@@ -12,6 +12,8 @@ public class GameActionUtil {
 	public static void executeUpkeepEffects() {
 		AllZone.Stack.freezeStack();
 		upkeep_removeDealtDamageToOppThisTurn();
+		upkeep_Braid_Of_Fire();
+		
 		upkeep_UpkeepCost(); //sacrifice unless upkeep cost is paid
 		upkeep_DestroyUpkeepCost(); //destroy unless upkeep cost is paid
 		upkeep_DamageUpkeepCost(); //deal damage unless upkeep cost is paid
@@ -3093,9 +3095,8 @@ public class GameActionUtil {
 		AllZone.InputControl.setResolving(bResolving);
 	}
 	
-	
 	private static void upkeep_removeDealtDamageToOppThisTurn() {
-		// todo: this should happen in the cleanup phase
+		// TODO: this should happen in the cleanup phase
 		// resets the status of attacked/blocked this turn
 		Player player = AllZone.Phase.getPlayerTurn();
 		Player opp = player.getOpponent();
@@ -3112,6 +3113,42 @@ public class GameActionUtil {
 		}
 	}
 
+	private static void upkeep_Braid_Of_Fire(){
+		final Player player = AllZone.Phase.getPlayerTurn();
+
+		CardList braids = AllZoneUtil.getPlayerCardsInPlay(player, "Braid of Fire");
+		
+		for(int i = 0; i < braids.size(); i++) {
+			final Card c = braids.get(i);
+
+			final StringBuilder sb = new StringBuilder();
+			sb.append("Cumulative Upkeep for ").append(c).append("\n");
+			final Ability upkeepAbility = new Ability(c, c.getUpkeepCost()) {
+				@Override
+				public void resolve() {
+					c.addCounter(Counters.AGE, 1);
+					if (player.isComputer()){
+						// AI can't handle this yet without manapool
+						AllZone.GameAction.sacrifice(c);
+					}
+					else if (GameActionUtil.showYesNoDialog(c, sb.toString())){
+						int ageCounters = c.getCounters(Counters.AGE);
+						for(int i = 0; i < ageCounters; i++)
+							AllZone.ManaPool.addManaToFloating("R", c);
+					}
+					else{
+						AllZone.GameAction.sacrifice(c);
+					}
+						
+				}
+			};
+			upkeepAbility.setStackDescription(sb.toString());
+			
+			AllZone.Stack.add(upkeepAbility);
+		}
+	}
+	
+	
 	public static void upkeep_TabernacleUpkeepCost() {
 		Player player = AllZone.Phase.getPlayerTurn();
 

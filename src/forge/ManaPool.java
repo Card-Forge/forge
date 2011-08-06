@@ -411,29 +411,47 @@ public class ManaPool extends Card {
         return res.toArray(new String[0]);
     }
     
+    private ManaCost subtractMultiple(String[] cost, ManaCost m){
+        for(String s:cost){
+        	if (isEmpty())
+        		break;
+        	
+        	int num = 1;
+        	try{
+        		num = Integer.parseInt(s); 
+        	}
+        	catch(NumberFormatException e){
+        		// Not an integer, that's fine
+        	}
+        	
+        	for(int i = 0; i < num; i++){
+            	if (isEmpty())
+            		break;
+            		
+            	m = subtractOne(m, s);
+        	}
+        }
+    	return m;
+    }
+    
     public ManaCost subtractMana(ManaCost m, Ability_Mana... mAbilities) {
         if(mAbilities.length == 0) {
         	// paying from Mana Pool
             if(m.isPaid() || isEmpty()) return m;
 
             String[] cost = formatMana(m.toString());
-            for(String s:cost)
-            	if (!isEmpty())
-            		m = subtractOne(m, s);
-            return m;
+            return subtractMultiple(cost, m);
         }
         
         // paying via Mana Abilities
         for(Ability_Mana mability:mAbilities) {
             paidAbilities.add(mability);
-            if(null != formatMana(mability)) {
-            	for(String s:formatMana(mability)) {
-            		if(s.equals("")) 
-            			continue; // some sort of glitch
-            		m = subtractOne(m, s);
-            	}
-            }
+            String[] cost = formatMana(mability);
+            m = subtractMultiple(cost, m);
         }
+        
+        // is omnath block necessary here?
+        
         //Omnath, Locus of Mana Pump Trigger
         if(Phase.GameBegins == 1) {
 	    	CardList omnathList = AllZoneUtil.getPlayerCardsInPlay(owner, "Omnath, Locus of Mana");

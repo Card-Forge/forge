@@ -1,0 +1,8 @@
+Name:Braid of Fire
+ManaCost:1 R
+Types:Enchantment
+Text:Cumulative upkeep-Add R to your mana pool. 
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/braid_of_fire.jpg
+SVar:RemAIDeck:True
+End

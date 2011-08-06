@@ -9785,25 +9785,8 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-            		// Win / Lose
-            		final Player player = getTargetPlayer();
-            		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-            		PlayerZone OpplayZone = AllZone.getZone(Constant.Zone.Play, player.getOpponent());
-            		CardList Platinumlist = new CardList(OpplayZone.getCards());
-            		Platinumlist = Platinumlist.getName("Platinum Angel");
-            		CardList Abyssallist = new CardList(playZone.getCards());
-            		Abyssallist = Abyssallist.getName("Abyssal Persecutor");
-            		if(Platinumlist.size() == 0 && Abyssallist.size() == 0) {
-                    getTargetPlayer().setLife(0, card);
-            		
-                    if (getTargetPlayer().equals(AllZone.ComputerPlayer)) {
-	                    int gameNumber = 0;
-	                    if (Constant.Runtime.WinLose.getWin()==1)
-	                    	gameNumber = 1;
-	                    Constant.Runtime.WinLose.setWinMethod(gameNumber,"Door to Nothingness");
-                    }
+                    getTargetPlayer().altLoseConditionMet("Door to Nothingness");
                 }
-            }
                 
                 @Override
                 public boolean canPlayAI() {
