@@ -1495,120 +1495,6 @@ class CardFactory_Lands {
         
         /*
         //*************** START *********** START **************************
-        else if(cardName.equals("Wirewood Lodge")) {
-            final Ability_Tap ability = new Ability_Tap(card, "G") {
-                private static final long serialVersionUID = -4352872789672871590L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    
-                    final Card[] target = new Card[1];
-                    
-
-                    target[0] = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(target[0])
-                            && target[0].isTapped()
-                            && (target[0].getType().contains("Elf") || target[0].getKeyword().contains(
-                                    "Changeling")) && CardFactoryUtil.canTarget(card, target[0])) {
-                        target[0].untap();
-                    }
-                }
-            };
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -6822924521729238991L;
-                
-                @Override
-                public void showMessage() {
-                    CardList choice = new CardList();
-                    choice.addAll(AllZone.Human_Play.getCards());
-                    choice.addAll(AllZone.Computer_Play.getCards());
-                    
-                    choice = choice.getType("Elf");
-                    choice = choice.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (c.isTapped());
-                        }
-                    });
-                    
-                    //System.out.println("size of choice: " + choice.size());
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice, "Select target Elf", true,
-                            false));
-                }
-            };
-            
-            ability.setDescription("G, tap: Untap target Elf.");
-            ability.setStackDescription(card.getName() + " - untaps target elf.");
-            
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-            
-        }//*************** END ************ END **************************
-        */
-        
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Deserted Temple")) {
-            final Ability_Tap ability = new Ability_Tap(card, "1") {
-
-				private static final long serialVersionUID = -3463896908132386453L;
-
-				@Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    
-                    final Card[] target = new Card[1];
-                    
-
-                    target[0] = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(target[0])
-                            && target[0].isTapped()
-                            && (target[0].getType().contains("Land")) && CardFactoryUtil.canTarget(card, target[0])) {
-                        target[0].untap();
-                    }
-                }
-            };
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -6822924521729238991L;
-                
-                @Override
-                public void showMessage() {
-                    CardList choice = new CardList();
-                    choice.addAll(AllZone.Human_Play.getCards());
-                    choice.addAll(AllZone.Computer_Play.getCards());
-                    
-                    choice = choice.getType("Land");
-                    choice = choice.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (c.isTapped());
-                        }
-                    });
-                    
-                    //System.out.println("size of choice: " + choice.size());
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice, "Select target Land", true,
-                            false));
-                }
-            };
-            
-            ability.setDescription("1, tap: Untap target land.");
-            
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-            
-        }//*************** END ************ END **************************
-        */
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Academy Ruins")) {
             final Ability_Tap ability = new Ability_Tap(card, "1 U") {
                 private static final long serialVersionUID = -1322368528417127121L;
@@ -1785,6 +1671,7 @@ class CardFactory_Lands {
             
             
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Oboro, Palace in the Clouds")) {
