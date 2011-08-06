@@ -1,0 +1,70 @@
+BasicLandPercentage=10
+
+[Group MaxCnt=4 Percentage=23]
+Jungle Shrine
+Arid Mesa
+Wooded Foothills
+Windswept Heath
+[/Group]
+
+[Group MaxCnt=4 Percentage=22]
+Aura Gnarlid
+Kor Spiritdancer
+Rabid Wombat
+Uril, the Miststalker
+[/Group]
+
+[Group MaxCnt=2 Percentage=9]
+Totem-Guide Hartebeest
+Troll Ascetic
+Sacred Wolf
+Silhana Ledgewalker
+Slippery Bogle
+Taoist Hermit
+Zuo Ci, the Mocking Sage
+[/Group]
+
+[Group MaxCnt=3 Percentage=10]
+Dust Corona
+Holy Strength
+Hyena Umbra
+Rancor
+Spider Umbra
+[/Group]
+
+[Group MaxCnt=3 Percentage=10]
+Agility
+Brilliant Halo
+Eland Umbra
+Goblin War Paint
+Hero's Resolve
+Inviolability
+Nimbus Wings
+Squee's Embrace
+Strength of Isolation
+Treetop Bracers
+Volcanic Strength
+[/Group]
+
+[Group MaxCnt=3 Percentage=12]
+Ancestral Mask
+Armadillo Cloak
+Asha's Favor
+Battle Mastery
+Boar Umbra
+Fencer's Magemark
+Guardian's Magemark
+Lightning Talons
+Tiger Claws
+Snake Umbra
+Unquestioned Authority
+[/Group]
+
+[Group MaxCnt=1 Percentage=3]
+Mammoth Umbra
+Serra's Embrace
+Epic Proportions
+[/Group]
+
+
+End
