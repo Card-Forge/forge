@@ -23,6 +23,8 @@ public class Input_Mulligan extends Input {
     
     @Override
     public void selectButtonCancel() {
+    	AllZone.GameInfo.setHumanMulliganedToZero(false);
+    	
         Card[] hand = AllZone.Human_Hand.getCards();
         for(int i = 0; i < hand.length; i++) {
             AllZone.Human_Library.add(hand[i]);
@@ -34,6 +36,7 @@ public class Input_Mulligan extends Input {
         
         
         int newHand = hand.length - 1;
+        
         AllZone.GameInfo.addHumanNumberOfTimesMulliganed(1);
         
         //System.out.println("Mulliganed this turn:" + AllZone.GameInfo.getHumanNumberOfTimesMulliganed());

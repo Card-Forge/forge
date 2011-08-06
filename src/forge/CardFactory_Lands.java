@@ -940,6 +940,7 @@ class CardFactory_Lands {
                             return c.getType().contains(land1[0]) || c.getType().contains(land2[0]);
                         }
                     });
+                    
                     if(super.canPlay() && list.size() > 0 && AllZone.GameAction.isCardInPlay(card)) return true;
                     else return false;
                     
@@ -963,6 +964,12 @@ class CardFactory_Lands {
                             return c.getType().contains(land1[0]) || c.getType().contains(land2[0]);
                         }
                     });
+                    
+                    
+                    CardListUtil.sortBySelectable(full, land1[0]);
+                    
+                    for (Card c:full)
+                    	System.out.println(c);
                     
                     Object o = AllZone.Display.getChoiceOptional("Choose a " + land1[0] + " or " + land2[0],
                             full.toArray());

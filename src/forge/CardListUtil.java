@@ -208,6 +208,27 @@ public class CardListUtil
 	  list.sort(com);
   }
   
+  public static void sortBySelectable(CardList list, String type)
+  {
+	  final String t = type;
+	  Comparator<Card> com = new Comparator<Card>()
+	  {
+	      public int compare(Card a, Card b)
+	      {
+	        if( a.getType().contains(t) && b.getType().contains(t))
+	          return 0;
+	        else if(a.getKeyword().contains(t))
+	          return 1;
+	        else if(b.getKeyword().contains(t))
+	          return -1;
+
+	        return 0;
+	     }
+	   };
+	   list.sort(com);
+  }
+  
+  
   //Sorts from high to low
   public static void sortCMC(CardList list)
   {
