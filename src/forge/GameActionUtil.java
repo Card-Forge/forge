@@ -2170,49 +2170,7 @@ public class GameActionUtil {
 	        
 	        AllZone.Stack.add(ability2);
     	}
-    	
-        if( source.hasStartOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature")) {
-        	final Card damagedCard = affected;
-        	final Ability ability = new Ability(source, "0") {
-            	@Override
-            	public void resolve() { AllZone.GameAction.destroy(damagedCard); }
-        	};
-        
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(source).append(" - destroy damaged creature.");
-        	ability.setStackDescription(sb.toString());
-        	
-        	final Ability abilityWithoutRegen = new Ability(source, "0") {
-            	@Override
-            	public void resolve() { AllZone.GameAction.destroyNoRegeneration(damagedCard); }
-        	};
-        
-        	sb = new StringBuilder();
-        	sb.append(source).append(" - destroy damaged creature. It can't be regenerated");
-        	abilityWithoutRegen.setStackDescription(sb.toString());
-        
-        	int amountWithoutRegeneration = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature. It can't be regenerated.");
-        	int amountWithRegeneration = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature.");
-        	
-	        for(int i=0 ; i < amountWithRegeneration ; i++)
-	        	AllZone.Stack.add(ability);
-	        for(int i=0 ; i < amountWithoutRegeneration ; i++)
-	        	AllZone.Stack.add(abilityWithoutRegen);
-        
-        	final Command atEOC = new Command() {
-            	private static final long serialVersionUID = 3789617910009764326L;
-            
-            	public void execute() {
-            		if(AllZone.GameAction.isCardInPlay(damagedCard)) AllZone.Stack.add(ability);
-            	}
-        	};
-        	int amount = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.");
-	        
-	        for(int i=0 ; i < amount ; i++)
-	        	AllZone.EndOfCombat.addAt(atEOC);
-        }//Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.
 	}
-	
 	
 	//not restricted to combat damage, restricted to dealing damage to creatures
 	public static void executeDamageToCreatureEffects(final Card source, final Card affected, int damage) {

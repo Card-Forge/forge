@@ -207,7 +207,7 @@ public class CardFactoryUtil {
     }
     
     
-//The AI doesn't really pick the best artifact, just the most expensive.
+    //The AI doesn't really pick the best artifact, just the most expensive.
     public static Card AI_getBestArtifact(CardList list) {
         CardList all = list;
         all = all.getType("Artifact");
@@ -235,7 +235,7 @@ public class CardFactoryUtil {
     }
     
     public static CardList AI_getHumanArtifact(final Card spell, boolean targeted) {
-        CardList artifact = new CardList(AllZone.Human_Battlefield.getCards());
+        CardList artifact = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
         artifact = artifact.getType("Artifact");
         if(targeted) {
             artifact = artifact.filter(new CardListFilter() {
@@ -248,7 +248,7 @@ public class CardFactoryUtil {
     }
     
     public static CardList AI_getHumanEnchantment(final Card spell, boolean targeted) {
-        CardList enchantment = new CardList(AllZone.Human_Battlefield.getCards());
+        CardList enchantment = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
         enchantment = enchantment.getType("Enchantment");
         if(targeted) {
             enchantment = enchantment.filter(new CardListFilter() {
@@ -318,8 +318,6 @@ public class CardFactoryUtil {
         
         //Other good keywords
         if (c.hasKeyword("Deathtouch") && power > 0) value += 25;
-        if (c.hasStartOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature") 
-        		&& power > 0) value += 24;
         value += c.getAmountOfKeyword("Exalted") * 15;
         if (c.hasKeyword("First Strike") && !c.hasKeyword("Double Strike") && power > 0) value += 15;
         if (c.hasKeyword("Lifelink")) value += power * 10;

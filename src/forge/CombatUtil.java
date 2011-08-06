@@ -1014,8 +1014,6 @@ public class CombatUtil {
         
         if(defender.getKeyword().contains("Double Strike") ) {
             if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
-            if(defender.hasStartOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature") 
-            		&& defenderDamage > 0 && !attacker.getKeyword().contains("Indestructible")) return true;
             if(defenderDamage >= attackerLife) return true;
             
             //Attacker may kill the blocker before he can deal normal (secondary) damage
@@ -1038,8 +1036,6 @@ public class CombatUtil {
             }
             
             if(defender.getKeyword().contains("Deathtouch") && defenderDamage > 0) return true;
-            if(defender.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.") 
-            		&& defenderDamage > 0) return true;
                 
             return defenderDamage >= attackerLife;
             
@@ -1091,8 +1087,6 @@ public class CombatUtil {
         
         if(attacker.getKeyword().contains("Double Strike") ) {
             if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
-            if(attacker.hasStartOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature") 
-            		&& attackerDamage > 0 && !defender.getKeyword().contains("Indestructible")) return true;
             if(attackerDamage >= defenderLife) return true;
             
             //Attacker may kill the blocker before he can deal normal (secondary) damage
@@ -1115,8 +1109,6 @@ public class CombatUtil {
             }
             
             if(attacker.getKeyword().contains("Deathtouch") && attackerDamage > 0) return true;
-            if(attacker.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.") 
-            		&& attackerDamage > 0) return true;
                 
             return attackerDamage >= defenderLife;
             

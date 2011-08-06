@@ -2954,12 +2954,12 @@ public class Card extends MyObservable {
     				return maxDamage + 1;
     	}
     	else
-	        if(source.getKeyword().contains("Deathtouch")
-	        		|| source.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, destroy that creature"))
+	        if(source.getKeyword().contains("Deathtouch")) {
 	        	for(int i=1; i <= maxDamage; i++) {
 	        		if (predictDamage(i, source, isCombat) > 0)
 	        			return i;
 	        	}
+	        }
         
     	for(int i=1; i <= maxDamage;i++) {
     		if (noPrevention){
