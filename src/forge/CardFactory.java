@@ -9827,10 +9827,12 @@ public class CardFactory implements NewConstants {
                 public boolean canPlayAI() {
                     CardList human = new CardList(AllZone.Human_Play.getCards());
                     CardList computer = new CardList(AllZone.Computer_Play.getCards());
-                    
+
                     human = human.getType("Creature");
+                    human = human.getNotKeyword("Indestructible");
                     computer = computer.getType("Creature");
-                    
+                    computer = computer.getNotKeyword("Indestructible"); 
+                   
                     // the computer will at least destroy 2 more human creatures
                     return computer.size() < human.size() - 1
                             || (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty());
@@ -10016,7 +10018,9 @@ public class CardFactory implements NewConstants {
                     CardList computer = new CardList(AllZone.Computer_Play.getCards());
                     
                     human = human.getType("Creature");
+                    human = human.getNotKeyword("Indestructible");
                     computer = computer.getType("Creature");
+                    computer = computer.getNotKeyword("Indestructible");
                     
                     // the computer will at least destroy 2 more human creatures
                     return computer.size() < human.size() - 1
@@ -10052,7 +10056,9 @@ public class CardFactory implements NewConstants {
                     CardList computer = new CardList(AllZone.Computer_Play.getCards());
                     
                     human = human.getType("Creature");
+                    human = human.getNotKeyword("Indestructible");
                     computer = computer.getType("Creature");
+                    computer = computer.getNotKeyword("Indestructible");
                     
                     // the computer will at least destroy 2 more human creatures
                     return computer.size() < human.size() - 1
@@ -21496,8 +21502,10 @@ public class CardFactory implements NewConstants {
         			//same basic AI as Wrath of God, Damnation, Consume the Meek, etc.
         			CardList human = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
         			human = human.filter(colorless);
+        			human = human.getNotKeyword("Indestructible");
         			CardList computer = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
         			computer = computer.filter(colorless);
+        			computer = computer.getNotKeyword("Indestructible");
 
         			Log.debug("All is Dust", "Current phase:" + AllZone.Phase.getPhase());
         			// the computer will at least destroy 2 more human permanents
