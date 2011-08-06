@@ -1931,6 +1931,7 @@ public class CardFactory_Creatures {
                     AllZone.GameAction.exile(card);
                 }
             };//SpellAbility
+            
             Command destroy = new Command() {
                 private static final long serialVersionUID = 8044338194100037815L;
                 
@@ -1957,12 +1958,17 @@ public class CardFactory_Creatures {
                     //AllZone.GameAction.gainLife(c.getController(), 3);
                     c.getController().gainLife(3);
                 }
-            };
+            };//SpellAbility
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 6457889481637587581L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName() + " - " + card.getController() + " gains 3 life");
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - ").append(card.getController()).append(" gains 3 life");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -1978,10 +1984,11 @@ public class CardFactory_Creatures {
                             4, 4, new String[] {"Flying"});
                 }
             }; //ability
-            ability.setStackDescription(cardName
-                    + " - Put a 4/4 red Bird creature token with flying onto the battlefield.");
             
-
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" - Put a 4/4 red Bird creature token with flying onto the battlefield.");
+            ability.setStackDescription(sb.toString());
+            
             final Command createBird = new Command() {
                 private static final long serialVersionUID = 2856638426932227407L;
                 
@@ -2032,7 +2039,10 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 8957338395786245312L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName() + " - choose: 3/3, 2/2 flying, 1/6 defender");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - choose: 3/3, 2/2 flying, 1/6 defender");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2055,8 +2065,11 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -3016651104325305186L;
                 
                 public void execute() {
-                    ability.setStackDescription("Phyrexian Gargantua - " + card.getController()
-                            + " draws 2 cards and loses 2 life");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append("Phyrexian Gargantua - ").append(card.getController());
+                	sb.append(" draws 2 cards and loses 2 life");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2075,12 +2088,16 @@ public class CardFactory_Creatures {
                     card.getController().drawCard();
                 }//resolve()
             };//SpellAbility
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -4808204528319094292L;
                 
                 public void execute() {
-                    ability.setStackDescription("Phyrexian Rager - " + card.getController()
-                            + " draws 1 card and loses 1 life");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append("Phyrexian Rager - ").append(card.getController());
+                	sb.append(" draws 1 card and loses 1 life");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2097,13 +2114,17 @@ public class CardFactory_Creatures {
                     card.getController().subtractLife(3,card);
                 }//resolve()
             };//SpellAbility
+            
             Command intoPlay = new Command() {
                 
                 private static final long serialVersionUID = -6954568998599730697L;
                 
                 public void execute() {
-                    ability.setStackDescription("Cao Ren, Wei Commander - " + card.getController()
-                            + " loses 3 life");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append("Cao Ren, Wei Commander - ").append(card.getController());
+                	sb.append(" loses 3 life");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2116,13 +2137,16 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {}
-            };
+            };//SpellAbility
+            
             Command destroy = new Command() {
                 private static final long serialVersionUID = -3009968608543593584L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName() + " - " + card.getOwner()
-                            + " creatures have Trample.");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - ").append(card.getOwner()).append(" creatures have Trample.");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2135,13 +2159,17 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {}
-            };
+            };//SpellAbility
+            
             Command destroy = new Command() {
                 private static final long serialVersionUID = -3009968608543593584L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName() + " - " + card.getOwner()
-                            + " creatures have Swampwalk.");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - ").append(card.getOwner());
+                	sb.append(" creatures have Swampwalk.");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2238,21 +2266,23 @@ public class CardFactory_Creatures {
                     }//for
 				}//resolve
                 
-                
                 @Override
                 public boolean canPlay() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     
                     return AllZone.GameAction.isCardInZone(card, grave);                   
                 }
-                
-            };
+            };//Ability
 
             card.addSpellAbility(ability);
             ability.setFlashBackAbility(true);
             card.setUnearth(true);
             ability.setDescription("2 W: Creatures you control gain protection from the color of your choice until end of turn. Activate this ability only if Glory is in your graveyard.");
-            ability.setStackDescription(card.getName() + " - Creatures " + card.getController() + " controls gain protection from the color of his/her choice until end of turn");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Creatures ").append(card.getController());
+            sb.append(" controls gain protection from the color of his/her choice until end of turn");
+            ability.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
         
@@ -2261,13 +2291,17 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {}
-            };
+            };//SpellAbility
+            
             Command destroy = new Command() {
                 private static final long serialVersionUID = 1707519783018941582L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName() + " - " + card.getOwner()
-                            + " creatures have Haste.");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - ").append(card.getOwner());
+                	sb.append(" creatures have Haste.");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2280,13 +2314,17 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {}
-            };
+            };//SpellAbility
+            
             Command destroy = new Command() {
                 private static final long serialVersionUID = -3009968608543593584L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName() + " - " + card.getOwner()
-                            + " creatures have First Strike.");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - ").append(card.getOwner());
+                	sb.append(" creatures have First Strike.");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2300,12 +2338,16 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {}
             };
+            
             Command destroy = new Command() {
                 private static final long serialVersionUID = 340877499423908818L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName() + " - " + card.getOwner()
-                            + " creatures have Flying.");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - ").append(card.getOwner());
+                	sb.append(" creatures have Flying.");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2327,13 +2369,18 @@ public class CardFactory_Creatures {
                     card.getController().gainLife(5);
                 }
             };
+            
             Command destroy = new Command() {
                 private static final long serialVersionUID = -2648843419728951661L;
                 
                 public void execute() {
                 	Player opponent = card.getController().getOpponent();
-                    ability.setStackDescription("Kokusho, the Evening Star - " + opponent + " loses 5 life and "
-                            + card.getController() + " gains 5 life");
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append("Kokusho, the Evening Star - ").append(opponent).append(" loses 5 life and ");
+                	sb.append(card.getController()).append(" gains 5 life");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2360,8 +2407,10 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -7121390569051656027L;
                 
                 public void execute() {
-                    ability.setStackDescription("Symbiotic Elf - " + card.getController()
-                            + " puts two 1/1 tokens into play ");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append("Symbiotic Elf - ").append(card.getController()).append(" puts two 1/1 tokens into play");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2389,8 +2438,10 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -7121390569051656127L;
                 
                 public void execute() {
-                    ability.setStackDescription("Mongrel Pack - " + card.getController()
-                            + " puts four 1/1 tokens onto the battlefield. ");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append("Mongrel Pack - ").append(card.getController()).append(" puts four 1/1 tokens onto the battlefield.");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2415,8 +2466,9 @@ public class CardFactory_Creatures {
                     
                     hand.remove(card);
                     library.add(card, 0);
-                }
-            };
+                }//resolve()
+            };//SpellAbility
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 160195797163952303L;
                 
@@ -2432,6 +2484,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Kemuri-Onna")) {
             final SpellAbility ability = new Ability(card, "0") {
+            	
                 @Override
                 public void resolve() {
                     Player opponent = card.getController().getOpponent();
@@ -2440,12 +2493,16 @@ public class CardFactory_Creatures {
                     AllZone.GameAction.discardRandom(opponent, this);
                 }//resolve()
             };//SpellAbility
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -6451753440468941341L;
                 
                 public void execute() {
                     Player opponent = card.getController().getOpponent();
-                    ability.setStackDescription(card.getName() + " - " + opponent + " discards a card");
+                    
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName()).append(" - ").append(opponent).append(" discards a card");
+                    ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
                 }
@@ -2498,8 +2555,11 @@ public class CardFactory_Creatures {
                         
                     return (AllZone.GameAction.isCardInZone(card, play) && library.get(0).getType().contains("Land") && canPlayLand);
                 }
-            }; 
-            ability.setStackDescription(card.getController() + " - plays land from top of library.");           
+            };//SpellAbility
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getController()).append(" - plays land from top of library.");
+            ability.setStackDescription(sb.toString());
             card.addSpellAbility(ability);           
         }//*************** END ************ END **************************
 
@@ -2507,6 +2567,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Highway Robber") || cardName.equals("Dakmor Ghoul")) {
             final SpellAbility ability = new Ability(card, "0") {
+            	
                 @Override
                 public void resolve() {
                     Player opponent = card.getController().getOpponent();
@@ -2516,13 +2577,17 @@ public class CardFactory_Creatures {
                     //AllZone.GameAction.gainLife(card.getController(), 2);
                     card.getController().gainLife(2);
                 }
-            };
+            };//SpellAbility
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 321989007584083996L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName() + " - " + card.getController()
-                            + " gains 2 life and opponent loses 2 life.");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - ").append(card.getController());
+                	sb.append(" gains 2 life and opponent loses 2 life.");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2550,11 +2615,15 @@ public class CardFactory_Creatures {
                     card.getController().subtractLife(3,card);
                 }
             };
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 2334517567512130479L;
                 
                 public void execute() {
-                    ability.setStackDescription("Serpent Warrior - " + card.getController() + " loses 3 life");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append("Serpent Warrior - ").append(card.getController()).append(" loses 3 life");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2575,18 +2644,21 @@ public class CardFactory_Creatures {
                     return 8 < AllZone.ComputerPlayer.getLife();
                 }
             };
+            
             Command intoPlay = new Command() {
-                
                 private static final long serialVersionUID = -221296021551561668L;
                 
                 public void execute() {
-                    ability.setStackDescription("Eviscerator - " + card.getController() + " loses 5 life");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append("Eviscerator - ").append(card.getController()).append(" loses 5 life");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
-            
             card.clearSpellAbility();
+            
             card.addSpellAbility(new Spell_Permanent(card) {
                 private static final long serialVersionUID = 7053381164164384390L;
                 
@@ -2601,6 +2673,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Foul Imp")) {
             final SpellAbility ability = new Ability(card, "0") {
+            	
                 @Override
                 public void resolve() {
                     card.getController().subtractLife(2,card);
@@ -2610,12 +2683,16 @@ public class CardFactory_Creatures {
                 public boolean canPlayAI() {
                     return 4 < AllZone.ComputerPlayer.getLife();
                 }
-            };
+            };//SpellAbility
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -5371716833341661084L;
                 
                 public void execute() {
-                    ability.setStackDescription("Foul Imp - " + card.getController() + " loses 2 life");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append("Foul Imp - ").append(card.getController()).append(" loses 2 life");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2666,15 +2743,19 @@ public class CardFactory_Creatures {
                     }//else
                 }//resolve()
             };//SpellAbility
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 9202753910259054021L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getController()
-                            + " sacrifices Drekavac unless he discards a non-creature card");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getController()).append(" sacrifices Drekavac unless he discards a non-creature card");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
+            
             SpellAbility spell = new Spell_Permanent(card) {
                 private static final long serialVersionUID = -2940969025405788931L;
                 
@@ -2707,19 +2788,23 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Minotaur Explorer")) {
             final SpellAbility ability = new Ability(card, "0") {
+            	
                 @Override
                 public void resolve() {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     if(hand.getCards().length == 0) AllZone.GameAction.sacrifice(card);
                     else AllZone.GameAction.discardRandom(card.getController(), this);
                 }
-            };
+            };//SpellAbility
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = 4986114285467649619L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getController()
-                            + " - discards at random or sacrifices Minotaur Explorer");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getController()).append(" - discards at random or sacrifices Minotaur Explorer");
+                	ability.setStackDescription(sb.toString());
+                    
                     AllZone.Stack.add(ability);
                 }
             };
