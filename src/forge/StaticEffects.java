@@ -47,7 +47,6 @@ public class StaticEffects
 		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
 		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"The_Tabernacle_at_Pendrell_Vale"});
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});
-		cardToEffectsList.put("Vexing Beetle", new String[] {"Vexing_Beetle"});
 		
 		cardToEffectsList.put("Windwright Mage", new String[] {"Windwright_Mage"});
 		cardToEffectsList.put("Wolf", new String[] {"Sound_the_Call_Wolf"});

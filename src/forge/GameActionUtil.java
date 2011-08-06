@@ -9961,39 +9961,6 @@ public class GameActionUtil {
 			} 			
 		}// execute()
 
-	}; 
-
-	public static Command Vexing_Beetle               = new Command() {
-
-		private static final long serialVersionUID = 4599996155083227853L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Vexing Beetle");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				if(!oppHasCreature(c)) {
-					c.setBaseAttack(6);
-					c.setBaseDefense(6);
-				} else {
-					c.setBaseAttack(3);
-					c.setBaseDefense(3);
-				}
-			}
-		}// execute()
-
-		private boolean oppHasCreature(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Battlefield,
-					c.getController().getOpponent());
-
-			CardList creats = new CardList();
-			creats.addAll(play.getCards());
-
-			creats = creats.getType("Creature");
-			if(creats.size() > 0) return true;
-			else return false;
-		}
 	};
 
 	public static Command Liu_Bei                     = new Command() {
@@ -11021,7 +10988,6 @@ public class GameActionUtil {
 		commands.put("Tarmogoyf", Tarmogoyf);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);
-		commands.put("Vexing_Beetle", Vexing_Beetle);
 		commands.put("Windwright_Mage", Windwright_Mage);
 		
 		///The commands above are in alphabetical order by cardname.
