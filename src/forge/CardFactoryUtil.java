@@ -3624,7 +3624,7 @@ public class CardFactoryUtil {
         // Count$Hellbent.<numHB>.<numNotHB>
         if(sq[0].contains("Hellbent"))
         {
-        	if(myHand.size() <= 1) 
+        	if(myHand.size() <= 0) 
         		return doXMath(Integer.parseInt(sq[1]), m); // Hellbent
         	else
         		return doXMath(Integer.parseInt(sq[2]), m); // not Hellbent
