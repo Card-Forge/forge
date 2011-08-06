@@ -208,6 +208,7 @@ public class CardListUtil
 	  list.sort(com);
   }
   
+  //Sorts from high to low
   public static void sortCMC(CardList list)
   {
      Comparator<Card> com = new Comparator<Card>()

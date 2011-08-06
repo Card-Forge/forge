@@ -14249,7 +14249,6 @@ public class CardFactory implements NewConstants {
                     CardList list = getArtEnchantments();
                     if(list.size() > 0) {
                         CardListUtil.sortCMC(list);
-                        list.reverse();
                         setTargetCard(list.get(0));
                         AllZone.GameAction.sacrifice(card);
                     }
@@ -17289,6 +17288,7 @@ public class CardFactory implements NewConstants {
         			{
         				CardListUtil.sortAttackLowFirst(compCreats);
         				CardListUtil.sortCMC(compCreats);
+        				compCreats.reverse();
         				for (int i=0; i < compCreats.size()-humCreats.size();i++)
         					AllZone.GameAction.sacrifice(compCreats.get(i));
         			}

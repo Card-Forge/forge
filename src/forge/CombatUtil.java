@@ -780,37 +780,48 @@ public class CombatUtil {
         AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
             
         	//Annihilator:
-        	ArrayList<String> kws = c.getKeyword();
-        	Pattern p = Pattern.compile("Annihilator [0-9]+");
-        	Matcher m;
-        	for (String key : kws)
+        	if (!c.getCreatureAttackedThisCombat())
         	{
-        		m = p.matcher(key);
-        		if (m.find())
-        		{
-        			String k[] = key.split(" ");
-                    final int a = Integer.valueOf(k[1]);
-                    final Card crd = c;
-                    
-                    final Ability ability = new Ability(c, "0")
-                    {
-                    	public void resolve()
-                    	{
-                    		if (crd.getController().equals(Constant.Player.Human))
-                    		{
-                    			//comp sacks
-                    		}
-                    		else
-                    		{
-                    			AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanents(a));
-                    		}
-                    			
-                    	}
-                    };
-                    ability.setStackDescription("");
-                    AllZone.Stack.add(ability);
-        		}
-        	}
+	        	ArrayList<String> kws = c.getKeyword();
+	        	Pattern p = Pattern.compile("Annihilator [0-9]+");
+	        	Matcher m;
+	        	for (String key : kws)
+	        	{
+	        		m = p.matcher(key);
+	        		if (m.find())
+	        		{
+	        			String k[] = key.split(" ");
+	                    final int a = Integer.valueOf(k[1]);
+	                    final Card crd = c;
+	                    
+	                    final Ability ability = new Ability(c, "0")
+	                    {
+	                    	public void resolve()
+	                    	{
+	                    		if (crd.getController().equals(Constant.Player.Human))
+	                    		{
+	                    			CardList list = new CardList(AllZone.Computer_Play.getCards());
+	                    			CardListUtil.sortCMC(list);
+	                    			list.reverse();
+	                    			int max = list.size();
+	                    			if (max>a)
+	                    				max = a;
+	                    			
+	                    			for (int i=0;i<max;i++)
+	                    				AllZone.GameAction.sacrifice(list.get(i));
+	                    		}
+	                    		else
+	                    		{
+	                    			AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanents(a));
+	                    		}
+	                    			
+	                    	}
+	                    };
+	                    ability.setStackDescription("Annihilator - Defending player sacrifices " + a + " permanents.");
+	                    AllZone.Stack.add(ability);
+	        		} //find
+	        	} //for
+        	}//creatureAttacked
         	//Annihilator
         	
             //Beastmaster Ascension
