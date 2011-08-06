@@ -42,7 +42,6 @@ import forge.properties.NewConstants;
 public class ImageCache implements NewConstants {
     private static final Map<String, BufferedImage> imageCache;
     private static final Pattern                    FULL_SIZE = Pattern.compile("(.*)#(\\d+.\\d+)");
-    
     private static final String                     TOKEN     = "#Token", NORMAL = "#Normal", TAPPED = "#Tapped";
     
     public static boolean scaleLargerThanOriginal = true;
@@ -78,11 +77,15 @@ public class ImageCache implements NewConstants {
                             key = key.substring(0, key.length() - TOKEN.length());
                             path = ForgeProps.getFile(IMAGE_TOKEN);
                         } else path = ForgeProps.getFile(IMAGE_BASE);
-                        File file = new File(path, key + ".jpg");
+                        
+                        File file = null;
+                        file = new File(path, key + ".jpg");
                         if(!file.exists()) {
                         	//DEBUG
                             //System.out.println("File not found, no image created: " + file);
-                            return null;
+                            //return null;
+                        	//String newKey = getKey()
+                        	
                         }
                         BufferedImage image = ImageUtil.getImage(file);
                         return image;
@@ -172,12 +175,30 @@ public class ImageCache implements NewConstants {
     /**
      * Returns the map key for a card, without any suffixes for the image size.
      */
-    private static String getKey(Card card) {
+    private static String getKey(Card card) { return getKey(card, "Set"); }
+    
+    private static String getKey(Card card, String option) {
         String key = GuiDisplayUtil.cleanString(card.getImageName());
         //if(card.isBasicLand() && card.getRandomPicture() != 0) key += card.getRandomPicture();
-        if (!card.getCurSetCode().equals(""))
+        File path = null;
+        String tkn = "";
+        if (card.isToken() && !card.isCopiedToken())
+        {
+        	path = ForgeProps.getFile(IMAGE_TOKEN);
+        	tkn = TOKEN;
+        }
+        else
+        	path = ForgeProps.getFile(IMAGE_BASE);
+        
+        if (!card.getCurSetCode().equals("") && option.equals("Set"))
         {
         	key = card.getCurSetCode() + "/" + key;
+        	
+        	File f = new File(path, key + ".jpg");
+        	if (!f.exists())
+        	{
+        		return getKey(card, "Original");
+        	}
         }
         else
         {
@@ -185,8 +206,10 @@ public class ImageCache implements NewConstants {
         	if (n > 0)
         		key += n;
         }
+        
+        key += tkn;
 //        key = GuiDisplayUtil.cleanString(key);
-        if(card.isToken() && !card.isCopiedToken()) key += TOKEN;
+        
         return key;
     }
     

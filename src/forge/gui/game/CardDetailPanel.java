@@ -105,7 +105,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
         if(card.isPlaneswalker()) cdLabel4.setText("Assigned Damage: " + card.getTotalAssignedDamage());
         
-        cdLabel5.setText("Card ID  " + card.getUniqueNumber());
+        cdLabel5.setText("Card ID  " + card.getUniqueNumber() + " " + card.getCurSetCode());
         
 
         //fill the card text
