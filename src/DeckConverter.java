@@ -14,7 +14,6 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import forge.Deck;
 import forge.DeckIO;
 import forge.NewDeckIO;
 import forge.properties.ForgeProps;
@@ -46,8 +45,8 @@ public class DeckConverter {
         System.out.println("migrating deck file...");
         
         DeckIO odio = new OldDeckIO(oldDecks);
-        List<Deck> deckList = new ArrayList<Deck>(Arrays.asList(odio.getDecks()));
-        Map<String, Deck[]> boosterMap = odio.getBoosterDecks();
+        List<forge.Deck> deckList = new ArrayList<forge.Deck>(Arrays.asList(odio.getDecks()));
+        Map<String, forge.Deck[]> boosterMap = odio.getBoosterDecks();
         System.out.println("Decks found:");
         System.out.printf("\t%d normal decks%n", deckList.size());
         System.out.printf("\t%d booster decks%n", boosterMap.size());
@@ -63,5 +62,30 @@ public class DeckConverter {
         ndio.close();
         
         JOptionPane.showMessageDialog(null, "Your deck file was successfully migrated!");
+    }
+    
+    /**
+     * 
+     */
+    public static Object toForgeDeck(Object o) {
+        if(o instanceof forge.Deck) {
+            //a single new-type deck
+            return o;
+        } else if(o instanceof forge.Deck[]) {
+            //a new-type booster deck
+            Deck d = (Deck) o;
+            return d.migrate();
+        } else if(o instanceof Deck) {
+            // an old type deck
+            Deck d = (Deck) o;
+            return d.migrate();
+        } else if(o instanceof Deck[]) {
+            Deck[] d = (Deck[]) o;
+            forge.Deck[] result = new forge.Deck[d.length];
+            for(int i = 0; i < d.length; i++) {
+                result[i] = d[i].migrate();
+            }
+            return result;
+        } else throw new IllegalArgumentException();
     }
 }

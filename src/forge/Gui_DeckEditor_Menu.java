@@ -438,6 +438,12 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
             check = in.readObject();
             
+            //deck migration - this is a little hard to read, because i can't just plainly reference a class in the
+            //default package
+            Class<?> deckConverterClass = Class.forName("DeckConverter");
+            //invoke public static Object toForgeDeck(Object o) of DeckConverter
+            check = deckConverterClass.getDeclaredMethod("toForgeDeck", Object.class).invoke(null, check);
+            
             in.close();
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
