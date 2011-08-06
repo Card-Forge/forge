@@ -2,7 +2,7 @@ Name:Fire Tempest
 ManaCost:5 R R
 Types:Sorcery
 Text:no text
-K:spDamageAll:Player,Creature:5:Fire Tempest deals 5 damage to each creature and each player.
+K:spDamageAll:Player,Creature:6:Fire Tempest deals 6 damage to each creature and each player.
 K:SVar:Rarity:Rare
 K:SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/fire_tempest.jpg
 End
