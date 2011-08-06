@@ -10151,13 +10151,21 @@ public class GameActionUtil {
 					String Keywords[] = Keyword[2].split(" & ");
 					for(int j = 0; j < Keywords.length; j++) {
 						String keyword = Keywords[j];
-						if(keyword.startsWith("ABSVar=")) {
-							String ability = source.getSVar(keyword.split("SVar=")[1]);
-			        		AbilityFactory AF = new AbilityFactory();
-			        		SpellAbility sa = AF.getAbility(ability, affectedCard);
-			        		sa.setType("Temporary");
+						if(keyword.startsWith("SVar=")) {
+							String sVar = source.getSVar(keyword.split("SVar=")[1]);
+							if (sVar.startsWith("AB")) { // grant the ability
+								AbilityFactory AF = new AbilityFactory();
+								SpellAbility sa = AF.getAbility(sVar, affectedCard);
+								sa.setType("Temporary");
 			        		
-			        		affectedCard.addSpellAbility(sa);
+								affectedCard.addSpellAbility(sa);
+							}/*
+							else if (sVar.startsWith("Mode")){ // grant a Trigger
+								affectedCard.addTrigger(TriggerHandler.parseTrigger(sVar, affectedCard));							
+							}*/
+							else { // Copy this SVar
+								affectedCard.setSVar(keyword.split("SVar=")[1], sVar);								
+							}
 						}
 						else affectedCard.addExtrinsicKeyword(keyword);
 					}
@@ -10198,13 +10206,16 @@ public class GameActionUtil {
 				String Keywords[] = Keyword[2].split(" & ");
 				for(int j = 0; j < Keywords.length; j++) {
 					String keyword = Keywords[j];
-					if(keyword.startsWith("ABSVar=")) {
-						SpellAbility[] spellAbility = affectedCard.getSpellAbility();
-						for(SpellAbility s : spellAbility)
-				    	{
-				    		if (s.getType().equals("Temporary"))
-				    			affectedCard.removeSpellAbility(s);
-				    	}
+					if(keyword.startsWith("SVar=")) {
+						String sVar = source.getSVar(keyword.split("SVar=")[1]);
+						if (sVar.startsWith("AB")) { // remove granted abilities
+							SpellAbility[] spellAbility = affectedCard.getSpellAbility();
+							for(SpellAbility s : spellAbility)
+							{
+								if (s.getType().equals("Temporary"))
+									affectedCard.removeSpellAbility(s);
+							}
+						}
 					}
 					affectedCard.removeExtrinsicKeyword(keyword);
 				}

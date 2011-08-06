@@ -3363,6 +3363,7 @@ res/cardsfolder/magma_jet.txt -text svneol=native#text/plain
 res/cardsfolder/magma_mine.txt -text svneol=native#text/plain
 res/cardsfolder/magma_phoenix.txt -text svneol=native#text/plain
 res/cardsfolder/magma_rift.txt -text svneol=native#text/plain
+res/cardsfolder/magma_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/magma_spray.txt -text svneol=native#text/plain
 res/cardsfolder/magma_vein.txt -text svneol=native#text/plain
 res/cardsfolder/magmaw.txt svneol=native#text/plain

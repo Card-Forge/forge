@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Sliver
 Text:no text
 PT:1/1
-K:stPumpAll:Sliver:0/0/ABSVar=Pump:no Condition:All Slivers have "2: Regenerate this permanent."
+K:stPumpAll:Sliver:0/0/SVar=Pump:no Condition:All Slivers have "2: Regenerate this permanent."
 SVar:Pump:AB$Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
