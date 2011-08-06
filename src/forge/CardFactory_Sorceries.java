@@ -184,6 +184,49 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+	
+	//*************** START *********** START **************************
+        else if(cardName.equals("Identity Crisis")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 42470566751344693L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    Player player = getTargetPlayer();
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+                    CardList libList = new CardList(lib.getCards());
+                    return libList.size() > 0;
+                }
+                
+                @Override
+                public void resolve() {
+                    Player player = getTargetPlayer();
+                    
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+                    PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, player);
+                    CardList handList = new CardList(hand.getCards());
+                    CardList graveList = new CardList(grave.getCards());
+                    
+                    int max = handList.size();
+                    for(int i = 0; i < max; i++) {
+                        Card c = handList.get(i);
+                        hand.remove(c);
+                        exiled.add(c);
+                    }
+                    int grv = graveList.size();
+                    for(int i = 0; i < grv; i++) {
+                        Card c = graveList.get(i);
+                        grave.remove(c);
+                        exiled.add(c);
+                    }
+                }
+            };//SpellAbility
+            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+
         
         //*************** START *********** START **************************
         else if(cardName.equals("Do or Die")) {
