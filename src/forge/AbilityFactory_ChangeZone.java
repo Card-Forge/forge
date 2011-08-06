@@ -345,7 +345,7 @@ public class AbilityFactory_ChangeZone {
 				return;
 		}
 		else{
-			player = sa.getActivatingPlayer();
+			player = AllZone.HumanPlayer;
 		}
 
 		String origin = params.get("Origin");
@@ -415,7 +415,7 @@ public class AbilityFactory_ChangeZone {
 				return;
 		}
 		else{
-			player = sa.getActivatingPlayer();
+			player = AllZone.ComputerPlayer;
 		}
 		
 		String origin = params.get("Origin");
