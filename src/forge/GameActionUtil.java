@@ -9257,12 +9257,8 @@ public class GameActionUtil {
 	}// Teferi_Puzzle_Box
 
 	private static void draw_Overbeing_of_Myth(Player player) {
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-		list = list.getName("Overbeing of Myth");
-
-		AllZone.GameAction.drawCards(player, list.size());
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Overbeing of Myth");
+		player.drawCards(list.size());
 	}// Overbeing_of_Myth()
 
 	private static void draw_Mana_Vault(final Player player){

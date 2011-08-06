@@ -19,7 +19,7 @@ public class Input_Draw extends Input {
     		return;
     	}
     	
-    	AllZone.GameAction.drawCard(playerTurn);
+    	playerTurn.drawCard();
         GameActionUtil.executeDrawStepEffects();
         
         if(AllZone.Phase.getPhase().equals(Constant.Phase.Draw)) {

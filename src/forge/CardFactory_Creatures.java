@@ -18822,7 +18822,7 @@ public class CardFactory_Creatures {
         		@Override
         		public void resolve() {
         			final Player player = card.getController();
-        			AllZone.GameAction.drawCards(player, 1);
+        			player.drawCards(1);
         			card.addCounter(Counters.P1P1, 1);
         		}   
         	};

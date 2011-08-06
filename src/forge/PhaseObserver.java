@@ -33,7 +33,7 @@ public class PhaseObserver implements Observer
       }
       //TODO: computer needs to draw a card
       if(AllZone.Phase.getTurn() > 1)
-        AllZone.GameAction.drawCard(player);
+        player.drawCard();
     }
 
     else if(AllZone.Phase.is(Constant.Phase.Combat_Declare_Blockers, AllZone.HumanPlayer) &&

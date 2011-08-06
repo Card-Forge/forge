@@ -6167,8 +6167,8 @@ public class CardFactory_Sorceries {
 				@Override
         		public void resolve() {
         			//each player draws three cards
-        			AllZone.GameAction.drawCards(AllZone.ComputerPlayer, 3);
-        			AllZone.GameAction.drawCards(AllZone.HumanPlayer, 3);
+        			AllZone.ComputerPlayer.drawCards(3);
+        			AllZone.HumanPlayer.drawCards(3);
         			
         			//now, each player discards 3 cards at random
         			AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, 3, this);
@@ -7838,7 +7838,7 @@ public class CardFactory_Sorceries {
                     //islands
                     int max = Math.min(numIslands, AllZoneUtil.getPlayerCardsInLibrary(player).size());
                     if(max > 0) {
-                    	AllZone.GameAction.drawCards(player, max);
+                    	player.drawCards(max);
                     	if(player.equals(AllZone.HumanPlayer)) {
                     		AllZone.InputControl.setInput(CardFactoryUtil.input_discard(max, this));
                     	}
@@ -7946,7 +7946,7 @@ public class CardFactory_Sorceries {
                     // Shuffle library
                     AllZone.GameAction.shuffle(player);
                     
-                    AllZone.GameAction.drawCards(player, handSize);
+                    player.drawCards(handSize);
                 }
                 
                 // Simple, If computer has two or less playable cards remaining in hand play Winds of Change
