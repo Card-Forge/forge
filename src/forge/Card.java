@@ -1205,7 +1205,8 @@ public class Card extends MyObservable {
     public int getNetDefense() {
         int total = getBaseDefense();
         total += getTempDefenseBoost() + getSemiPermanentDefenseBoost() + getOtherDefenseBoost()
-                + getCounters(Counters.P1P1) - getCounters(Counters.M1M1) - getCounters(Counters.P0M1);
+                + getCounters(Counters.P1P1) - getCounters(Counters.M1M1) - getCounters(Counters.P0M1)
+                - (2*getCounters(Counters.P0M2));
         return total;
     }
     

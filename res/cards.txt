@@ -1,3 +1,9 @@
+Spirit Shackle
+B B
+Enchantment Aura
+Whenever enchanted creature becomes tapped, put a -0/-2 counter on it.
+Enchant Creature Curse
+
 Curse of Chains
 1 WU
 Enchantment Aura

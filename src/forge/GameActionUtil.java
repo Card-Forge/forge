@@ -215,6 +215,26 @@ public class GameActionUtil {
 				}
 			}
 		}//end Blight
+		
+		/*
+		 * Whenever enchanted creature becomes tapped, put a -0/-2 counter on it.
+		 */
+		if(c.isEnchantedBy("Spirit Shackle")) {
+			final ArrayList<Card> cards = c.getEnchantedBy();
+			for(Card card:cards) {
+				final Card enchantedCard = c;
+				if(card.getName().equals("Spirit Shackle")) {
+					Ability ability = new Ability(card, "0") {
+						@Override
+						public void resolve() {
+							enchantedCard.addCounter(Counters.P0M2, 1);
+						}
+					};//Ability
+					ability.setStackDescription(card.getName()+" - enchanted creature gets a -0/-2 counter.");
+					AllZone.Stack.add(ability);
+				}
+			}
+		}//end Spirit Shackle
 
 	}//end executeTapSideEffects()
 
