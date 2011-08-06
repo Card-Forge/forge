@@ -1,0 +1,11 @@
+Name:Spincrusher
+ManaCost:2
+Types:Artifact Creature Construct
+Text:no text
+PT:0/2
+K:WheneverKeyword:Blocks:Self:Play:+1+1 Counters/1:Self:ASAP:No_Condition:No Special Condition:Whenever Spincrusher blocks, put a +1/+1 counter on it.
+K:abPump SubCounter<1/P1P1>:Unblockable
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spincrusher.jpg
+End
