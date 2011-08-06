@@ -1042,7 +1042,18 @@ public class CardFactory_Instants {
                 private static final long serialVersionUID = 7699412574052780825L;
                     
                 public void execute() {
-                	card.getController().gainLife(2, card);
+                    
+                    Player player = card.getController();
+                    
+                    if (player.isHuman()) {
+                        String question = "Gain 2 life?";
+                        if (GameActionUtil.showYesNoDialog(card, question)) {
+                            player.gainLife(2, card);
+                        }
+                    }
+                    // player is computer
+                    else
+                        player.gainLife(2, card);
                 }
             });
         }//*************** END ************ END **************************
