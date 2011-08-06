@@ -1,8 +1,9 @@
 Name:Fungusaur
 ManaCost:3 G
 Types:Creature Fungus Lizard
-Text:Whenever Fungusaur is dealt damage, put a +1/+1 counter on it.
+Text:no text
 PT:2/2
+K:Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungusaur.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/250.jpg

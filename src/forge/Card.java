@@ -2933,7 +2933,7 @@ public class Card extends MyObservable {
         	AllZone.Stack.add(ability2);
         }
         
-        if(this.getName().equals("Fungusaur")) {
+        if(getKeyword().contains("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.")) {
         	Ability ability2 = new Ability(this, "0") {
         		@Override
         		public void resolve() {
@@ -2942,7 +2942,7 @@ public class Card extends MyObservable {
         	}; // ability2
         	
         	StringBuilder sb2 = new StringBuilder();
-        	sb2.append(this.getName()).append(" - gets a +1/+1 counter");
+        	sb2.append(getName()).append(" - gets a +1/+1 counter");
         	ability2.setStackDescription(sb2.toString());
         	
         	AllZone.Stack.add(ability2);
@@ -2965,7 +2965,7 @@ public class Card extends MyObservable {
 	    	ability.setStackDescription(sb.toString());
 	    	ability2.setStackDescription(sb.toString());
 	    	
-	    	if(this.getKeyword().contains("When CARDNAME is dealt damage, destroy it. It can't be regenerated."))
+	    	if(getKeyword().contains("When CARDNAME is dealt damage, destroy it. It can't be regenerated."))
 	    		AllZone.Stack.add(ability2);
 	    	else AllZone.Stack.add(ability);
         }
