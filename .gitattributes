@@ -6694,6 +6694,7 @@ res/cardsfolder/war_torch_goblin.txt -text svneol=native#text/plain
 res/cardsfolder/wargate.txt svneol=native#text/plain
 res/cardsfolder/warlords_axe.txt -text svneol=native#text/plain
 res/cardsfolder/warmth.txt -text svneol=native#text/plain
+res/cardsfolder/warning.txt -text svneol=native#text/plain
 res/cardsfolder/warp_artifact.txt -text svneol=native#text/plain
 res/cardsfolder/warpath_ghoul.txt -text svneol=native#text/plain
 res/cardsfolder/warped_devotion.txt -text svneol=native#text/plain
