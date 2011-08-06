@@ -253,7 +253,7 @@ public class AbilityFactory_CounterMagic {
 		else if(destination.equals("Exile")) {
 			AllZone.GameAction.exile(tgtSA.getSourceCard());
 		}
-		else if(destination.equals("Topdeck")) {
+		else if(destination.equals("TopDeck")) {
 			AllZone.GameAction.moveToTopOfLibrary(tgtSA.getSourceCard());
 		}
 		else if(destination.equals("Hand")) {
