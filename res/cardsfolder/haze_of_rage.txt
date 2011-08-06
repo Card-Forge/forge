@@ -2,7 +2,7 @@ Name:Haze of Rage
 ManaCost:1 R
 Types:Sorcery
 Text:no text
-A:SP$PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+A:SP$ PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
 SVar:Buyback:2
 K:Storm
 SVar:Rarity:Uncommon

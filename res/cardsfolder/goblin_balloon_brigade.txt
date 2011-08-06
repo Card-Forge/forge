@@ -3,7 +3,7 @@ ManaCost:R
 Types:Creature Goblin Warrior
 Text:no text
 PT:1/1
-A:AB$Pump | Cost$ R | KW$ Flying | SpellDescription$ Goblin Balloon Brigade gains flying until end of turn.
+A:AB$ Pump | Cost$ R | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84540.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/154.jpg
