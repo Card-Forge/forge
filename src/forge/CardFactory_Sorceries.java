@@ -2942,6 +2942,8 @@ public class CardFactory_Sorceries {
         				}
         			};
         			AllZone.EndOfTurn.addUntil(untilEOT);
+        			
+        			thePlayer.drawCard();
         		}
         	};
         	card.clearSpellAbility();

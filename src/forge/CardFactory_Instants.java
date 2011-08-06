@@ -1345,6 +1345,9 @@ public class CardFactory_Instants {
         				else {
         					getTargetCard().tap();
         				}
+        				
+        				if (cardName.equals("Twitch"))
+        					getActivatingPlayer().drawCard();
         			}
         		}
         	};//SpellAbility

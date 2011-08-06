@@ -1027,9 +1027,7 @@ public class Card extends MyObservable {
             
             // Draw a card. + Changeling + CARDNAME can't be countered. + Cascade
             for (int i = 0; i < kw.size(); i++) {
-                if ((kw.get(i).contains("Draw a card.") && !sb.toString().contains("Draw a card."))
-                		|| (kw.get(i).contains("Draw a card at the beginning of the next turn's upkeep.") && !sb.toString().contains("Draw a card at the beginning of the next turn's upkeep."))
-                        || (kw.get(i).contains("Changeling") && !sb.toString().contains("Changeling")) 
+                if ((kw.get(i).contains("Changeling") && !sb.toString().contains("Changeling")) 
                         || (kw.get(i).contains("CARDNAME can't be countered.") && !sb.toString().contains("CARDNAME can't be countered.")) 
                         || (kw.get(i).contains("Cascade") && !sb.toString().contains("Cascade"))) {
                     sb.append(kw.get(i)).append("\r\n");
@@ -1047,18 +1045,7 @@ public class Card extends MyObservable {
                 }
                 sb.append(")\r\n");
             }
-            
-            // Scry
-            if(!sb.toString().contains("Scry")) for(int i = 0; i < getKeyword().size(); i++) {
-                String k = getKeyword().get(i);
-                if(k.startsWith("Scry")) {
-                    String kk[] = k.split(" ");
-                    sb.append("Scry ");
-                    sb.append(kk[1]);
-                    sb.append(" (To scry X, look at the top X cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)\r\n");
-                }
-            }
-            
+             
             while (sb.toString().endsWith("\r\n")) {
                 sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);
             }

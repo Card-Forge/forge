@@ -664,20 +664,6 @@ public class MagicStack extends MyObservable {
 				AbilityFactory.HandleRemembering(sa.getAbilityFactory());
 			}
 			sa.resolve();
-
-			if (sa.getSourceCard().getKeyword().contains("Draw a card.")
-					&& !(sa.getSourceCard().getKeyword().contains("Ripple:4") && sa.isAbility()))
-				sa.getSourceCard().getController().drawCard();
-			  if (sa.getSourceCard().getKeyword().contains("Draw a card at the beginning of the next turn's upkeep."))
-				  sa.getSourceCard().getController().addSlowtripList(sa.getSourceCard());
-
-			for (int i = 0; i < sa.getSourceCard().getKeyword().size(); i++) {
-				String k = sa.getSourceCard().getKeyword().get(i);
-				if (k.startsWith("Scry")) {
-					String kk[] = k.split(" ");
-					sa.getSourceCard().getController().scry(Integer.parseInt(kk[1]));
-				}
-			}
 		} else {
 			// TODO: Spell fizzles, what's the best way to alert player?
 			Log.debug(source.getName() + " ability fizzles.");
