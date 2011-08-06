@@ -6985,10 +6985,7 @@ public class GameActionUtil {
 				
 					@Override
 					public void resolve(){
-						final String[] choices = {"Yes", "No"};
-						Object o = AllZone.Display.getChoice("Untap Mana Vault?", choices);
-						String choice = (String) o;
-						if(choice.equals("Yes")) {
+						if(GameActionUtil.showYesNoDialog(thisVault, "Untap "+thisVault.getName()+"?")) {
 							//prompt for pay mana cost, then untap
 							final SpellAbility untap = new Ability(thisVault, "4") {
 								@Override
@@ -7005,7 +7002,7 @@ public class GameActionUtil {
 						}
 					}
 				};
-				vaultChoice.setStackDescription("Mana Vault - Untap during Upkeep?");
+				vaultChoice.setStackDescription(thisVault.getName()+" - Untap during Upkeep?");
 				AllZone.Stack.add(vaultChoice);
 			}
 		}
