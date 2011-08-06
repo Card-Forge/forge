@@ -2271,7 +2271,7 @@ public class Card extends MyObservable {
                 if (!getController().isPlayer(You)) {
                 	st = "False"; 								//False restriction entries in the array will return false
                  }
-                st = Restriction[i].replaceAll(".YouCtrl", "");
+                else st = Restriction[i].replaceAll(".YouCtrl", "");
                 Restriction[i] = st;
             }
             else if (Restriction[i].contains("YouDontCtrl"))
@@ -2279,7 +2279,7 @@ public class Card extends MyObservable {
                 if (getController().isPlayer(You)) {
                 	st = "False"; 								//False restriction entries in the array will return false
                 }
-                st = Restriction[i].replaceAll(".YouDontCtrl", "");
+                else st = Restriction[i].replaceAll(".YouDontCtrl", "");
                 Restriction[i] = st;
             }
         }
@@ -2288,7 +2288,7 @@ public class Card extends MyObservable {
     
     
     // Takes an array of arguments like Permanent.Blue+withFlying, only one of them has to be true
-    public boolean isValidCard(String Restrictions[]) {
+    public boolean isValidCard(final String Restrictions[]) {
     	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
 
@@ -2301,7 +2301,7 @@ public class Card extends MyObservable {
     
     
     // Takes an argument like Permanent.Blue+withFlying
-    public boolean isValid(String Restriction) {
+    public boolean isValid(final String Restriction) {
     	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
         if (Restriction.equals("False")) return false;
