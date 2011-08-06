@@ -207,7 +207,7 @@ public class AbilityFactory_Regenerate {
 				private static final long serialVersionUID = 1922050611313909200L;
 
 				public void execute() {
-					tgtC.setShield(0);
+					tgtC.resetShield();
 				}
 			};
 			

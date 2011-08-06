@@ -411,7 +411,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Shu Soldier-Farmers") || cardName.equals("Staunch Defenders")
                 || cardName.equals("Spiritual Guardian") || cardName.equals("Teroh's Faithful")
-                || cardName.equals("Jedit's Dragoons") || cardName.equals("Loxodon Hierarch")
+                || cardName.equals("Jedit's Dragoons") 
                 || cardName.equals("Lone Missionary") || cardName.equals("Obstinate Baloth")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -437,7 +437,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Loxodon Hierarch")) {
-            final Ability ability = new Ability(card, "G W") {
+        	Ability_Cost abCost = new Ability_Cost("G W Sac<1/CARDNAME>", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
                 @Override
                 public boolean canPlayAI() {
                     return false;
@@ -462,20 +463,11 @@ public class CardFactory_Creatures {
             };//SpellAbility
             
             card.addSpellAbility(ability);
-            ability.setDescription("GW, Sacrifice Loxodon Hierarch: Regenerate each creature you control.");
+            ability.setDescription(abCost+"Regenerate each creature you control.");
             
             StringBuilder sb = new StringBuilder();
             sb.append(cardName).append(" regenerate each of ").append(card.getController()).append("'s creatures.");
             ability.setStackDescription(sb.toString());
-            
-            ability.setBeforePayMana(new Input_PayManaCost_Ability(ability.getManaCost(), new Command() {
-                private static final long serialVersionUID = -8594393519904006680L;
-                
-                public void execute() {
-                    AllZone.GameAction.sacrifice(card);
-                    AllZone.Stack.add(ability);
-                }
-            }));
         }//*************** END ************ END **************************
 
         

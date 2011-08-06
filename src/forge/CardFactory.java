@@ -2904,6 +2904,40 @@ public class CardFactory implements NewConstants {
             }
         } // etbDestoryTgt
         
+        // Generic enters the battlefield gain life
+        if (hasKeyword(card, "etbGainLife") != -1) {
+        	int n = hasKeyword(card, "etbGainLife");
+
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+
+        	String k[] = parse.split(":");
+
+        	final int num = Integer.parseInt(k[1]);
+
+        	// performs the gain
+        	final SpellAbility etbGainLifeAbility = new Ability(card, "0") {
+        		@Override
+        		public void resolve() {
+        			card.getController().gainLife(num, card);
+        		}
+        	};
+
+        	// when the card enters the battlefield
+        	Command etbGainLife = new Command() {
+        		private static final long serialVersionUID = 8963603672963783322L;
+
+        		public void execute() {
+        			StringBuilder sb = new StringBuilder();
+        			sb.append(card.getController()).append(" gains "+num+" life");
+        			etbGainLifeAbility.setStackDescription(sb.toString());
+
+        			AllZone.Stack.add(etbGainLifeAbility);
+        		}
+        	};
+        	card.addComesIntoPlayCommand(etbGainLife);
+        } // etbGainLife
+        
 
         // Generic destroy all card
         /* Cards converted to AF_DestroyAll
