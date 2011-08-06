@@ -1,0 +1,8 @@
+Name:Bone Flute
+ManaCost:3
+Types:Artifact
+Text:no text
+K:abAllPump 2 T:All:-1/0:All creatures get -1/-0 until end of turn.:Bone Flute - all creatures get -1/-0 until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_flute.jpg
+End
