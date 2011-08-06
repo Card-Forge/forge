@@ -60,6 +60,9 @@ public class CombatUtil {
 					&& blocker.getKeyword().contains("CARDNAME can't block creatures with power greater than CARDNAME's power.")) return false;
         	if (attacker.getNetAttack() >= blocker.getNetDefense()
         			&& blocker.getKeyword().contains("CARDNAME can't block creatures with power equal to or greater than CARDNAME's toughness.")) return false;
+        	if (attacker.getKeyword().contains("Creatures with power less than CARDNAME's power can't block it.") &&
+        			attacker.getNetAttack() > blocker.getNetAttack()) return false;
+        		
         	
         }// hasKeyword CARDNAME can't block creatures with power ...
         

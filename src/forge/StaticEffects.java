@@ -83,6 +83,7 @@ public class StaticEffects
 		cardToEffectsList.put("Werebear", new String[] {"Werebear"});
 		cardToEffectsList.put("Divinity of Pride", new String[] {"Divinity_of_Pride"});
 		cardToEffectsList.put("Yavimaya Enchantress", new String[] {"Yavimaya_Enchantress"});
+		cardToEffectsList.put("Aura Gnarlid", new String[] {"Aura_Gnarlid"} );
 		cardToEffectsList.put("Knight of the Reliquary", new String[] {"Knight_of_the_Reliquary"});
 		cardToEffectsList.put("Zuberi, Golden Feather", new String[] {"Zuberi"});
 		cardToEffectsList.put("Loxodon Punisher", new String[] {"Loxodon_Punisher"});
@@ -132,6 +133,7 @@ public class StaticEffects
 		cardToEffectsList.put("Kongming, \"Sleeping Dragon\"", new String[] {"Kongming"});
 		cardToEffectsList.put("Radiant, Archangel", new String[] {"Radiant_Archangel"});
 		cardToEffectsList.put("Castle", new String[] {"Castle"});
+		cardToEffectsList.put("Giant Tortoise", new String[] {"Giant_Tortoise"});
 		cardToEffectsList.put("Castle Raptors", new String[] {"Castle_Raptors"});
 		cardToEffectsList.put("Darksteel Forge", new String[] {"Darksteel_Forge"} );
 		cardToEffectsList.put("Levitation", new String[] {"Levitation"});
@@ -180,7 +182,6 @@ public class StaticEffects
 		cardToEffectsList.put("Meddling Mage", new String[] {"Meddling_Mage"});
 		cardToEffectsList.put("Gaddock Teeg", new String[] {"Gaddock_Teeg"});
 		cardToEffectsList.put("Iona, Shield of Emeria", new String[] {"Iona_Shield_of_Emeria"});
-		cardToEffectsList.put("Giant Tortoise",new String[] {"Giant_Tortoise"});
 		cardToEffectsList.put("Kor Duelist", new String[] {"Kor_Duelist"});
 		cardToEffectsList.put("Keldon Warlord", new String[] {"Keldon_Warlord"});
 	}

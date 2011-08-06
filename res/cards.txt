@@ -1,3 +1,10 @@
+Aura Gnarlid
+2 G
+Creature Beast
+Aura Gnarlid gets +1/+1 for each Aura on the battlefield.
+2/2
+Creatures with power less than CARDNAME's power can't block it.
+
 Lull
 1 G
 Instant
