@@ -4816,6 +4816,7 @@ res/cardsfolder/reach_through_mists.txt -text svneol=native#text/plain
 res/cardsfolder/reality_spasm.txt svneol=native#text/plain
 res/cardsfolder/reality_strobe.txt svneol=native#text/plain
 res/cardsfolder/reanimate.txt -text svneol=native#text/plain
+res/cardsfolder/reap_and_sow.txt svneol=native#text/plain
 res/cardsfolder/reaper_king.txt svneol=native#text/plain
 res/cardsfolder/reaping_the_graves.txt -text svneol=native#text/plain
 res/cardsfolder/reaping_the_rewards.txt -text svneol=native#text/plain
