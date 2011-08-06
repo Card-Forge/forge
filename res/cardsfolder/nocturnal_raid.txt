@@ -2,7 +2,7 @@ Name:Nocturnal Raid
 ManaCost:2 B B
 Types:Instant
 Text:no text
-K:spAllPump:All/Black:+2/+0:Black creatures get +2/+0 until end of turn.:Nocturnal Raid - Black creatures get +2/+0 until EOT
+K:spAllPump:All/Creature.Black:+2/+0:Black creatures get +2/+0 until end of turn.:Nocturnal Raid - Black creatures get +2/+0 until EOT
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card25633.jpg
 End
