@@ -20,7 +20,7 @@ forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiv
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
 molimo_maro_sorcerer.jpg    http://www.wizards.com/global/images/magic/general/molimo_maro_sorcerer.jpg
 maro.jpg                    http://www.wizards.com/global/images/magic/general/maro.jpg
-multani_maro_morcerer.jpg   http://www.wizards.com/global/images/magic/general/multani_maro_morcerer.jpg
+multani_maro_sorcerer.jpg   http://www.wizards.com/global/images/magic/general/multani_maro_sorcerer.jpg
 meddling_mage.jpg	 		http://www.wizards.com/global/images/magic/general/meddling_mage.jpg
 gravelgill_duo.jpg          http://www.wizards.com/global/images/magic/general/gravelgill_duo.jpg
 safehold_duo.jpg            http://www.wizards.com/global/images/magic/general/safehold_duo.jpg
