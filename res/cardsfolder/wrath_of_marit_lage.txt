@@ -1,8 +1,10 @@
 Name:Wrath of Marit Lage
 ManaCost:3 U U
 Types:Enchantment
-Text:When Wrath of Marit Lage enters the battlefield, tap all red creatures.\r\nRed creatures don't untap during their controllers' untap steps.
+Text:Red creatures don't untap during their controllers' untap steps.
 K:Permanents don't untap during their controllers' untap steps:Creature.Red
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all red creatures.
+SVar:TrigTapAll:AB$TapAll | Cost$ 0 | ValidCards$ Creature.Red
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrath_of_marit_lage.jpg

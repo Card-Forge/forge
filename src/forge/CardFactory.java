@@ -6876,36 +6876,6 @@ public class CardFactory implements NewConstants {
         
         
         //*************** START *********** START **************************
-        else if (cardName.equals("Wrath of Marit Lage")) {
-        	/*
-        	 * When Wrath of Marit Lage enters the battlefield, tap all red creatures.
-        	 */
-        	final Ability comesIntoPlayAbility = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                	CardList red = AllZoneUtil.getCreaturesInPlay();
-                	red = red.filter(AllZoneUtil.red);
-                	for(Card c:red) c.tap();
-                }//resolve()
-            }; //comesIntoPlayAbility
-            
-            Command intoPlay = new Command() {
-				private static final long serialVersionUID = -8002808964908985221L;
-
-				public void execute() {
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - tap all red creatures.");
-					comesIntoPlayAbility.setStackDescription(sb.toString());
-                	
-                	AllZone.Stack.add(comesIntoPlayAbility);
-                }
-            };
-            
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Time Bomb")){
         	/*
         	 * 1, Tap, Sacrifice Time Bomb: Time Bomb deals damage equal
