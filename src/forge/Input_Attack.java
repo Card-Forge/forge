@@ -12,16 +12,18 @@ public void showMessage()
     CardList creats = new CardList(play.getCards());
     creats = creats.getType("Creature");
     
-    for (int i = 0;i<creats.size(); i++)
-    {
-    	Card c = creats.get(i);
-    	if (CombatUtil.canAttack(c) && c.getKeyword().contains("This card attacks each turn if able."))
-    	{
-    		
-    		AllZone.Combat.addAttacker(c);
-    		if (!c.getKeyword().contains("Vigilance"))
-    				c.tap();
-    	}
+    if (getPlaneswalker() == null) { 
+	    for (int i = 0;i<creats.size(); i++)
+	    {
+	    	Card c = creats.get(i);
+	    	if (CombatUtil.canAttack(c) && c.getKeyword().contains("This card attacks each turn if able."))
+	    	{
+	    		
+	    		AllZone.Combat.addAttacker(c);
+	    		if (!c.getKeyword().contains("Vigilance"))
+	    				c.tap();
+	    	}
+	    }
     }
   }
   public void selectButtonOK()

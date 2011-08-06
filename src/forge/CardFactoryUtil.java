@@ -3151,9 +3151,10 @@ public class CardFactoryUtil
 		return list;
   }
     
-  public static void makeToken(String name, String imageName, Card source, String manaCost, String[] types, int baseAttack, int baseDefense,
+  public static CardList makeToken(String name, String imageName, Card source, String manaCost, String[] types, int baseAttack, int baseDefense,
 		   					   String[] intrinsicKeywords)
   {
+	  CardList list = new CardList();
 	  Card c = new Card();
 	  c.setName(name);
 	  c.setImageName(imageName);
@@ -3174,7 +3175,20 @@ public class CardFactoryUtil
 		  c.addIntrinsicKeyword(kw);
 	  
 	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, source.getController());
-      play.add(c);
+      
+	  int multiplier = 1;
+	  int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", source.getController()).size();
+	  if (doublingSeasons > 0)
+		  multiplier = (int) Math.pow(2, doublingSeasons);
+
+	  for (int i=0;i<multiplier;i++) {
+		  Card temp = CardFactory.copyStats(c);
+		  temp.setToken(true);
+		  play.add(temp);
+		  list.add(temp);
+	  }
+	  return list;
+	  
   }
   
   //may return null

@@ -823,7 +823,7 @@ public class CardFactory implements NewConstants {
 
         card.addSpellAbility(a1);
 
-        String Desc = new String();
+        String Desc = "";
         Desc = "Regenerate " + cardName;
 
         a1.setDescription(manacost + ": " + Desc);
@@ -14013,10 +14013,14 @@ public class CardFactory implements NewConstants {
           return AllZone.Phase.getPhase().equals(Constant.Phase.Main1);
         }
 
-
         public void resolve()
         {
-          final Card[] token = new Card[3];
+          int multiplier = 1;
+  		  int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
+  		  if (doublingSeasons > 0)
+  			  multiplier = (int) Math.pow(2, doublingSeasons);
+
+          final Card[] token = new Card[3*multiplier];
           final Command atEOT = new Command()
           {
 			private static final long serialVersionUID = -1928884889370422828L;
@@ -14062,69 +14066,6 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-    
-    
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Inspirit"))
-    {
-      SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -601100008975177639L;
-		
-		public boolean canPlayAI()
-        {
-          return getAttacker() != null;
-        }
-        public void chooseTargetAI()
-        {
-          setTargetCard(getAttacker());
-        }
-        public Card getAttacker()
-        {
-          //target creature that is going to attack
-          Combat c = ComputerUtil.getAttackers();
-          Card[] att = c.getAttackers();
-          if(att.length != 0)
-            return att[0];
-          else
-            return null;
-        }//getAttacker()
-        public void resolve()
-        {
-          final Card[] target = new Card[1];
-          final Command untilEOT = new Command()
-          {
-			private static final long serialVersionUID = -3197321199337917886L;
-
-			public void execute()
-            {
-              if(AllZone.GameAction.isCardInPlay(target[0]))
-              {
-                target[0].addTempAttackBoost(-2);
-                target[0].addTempDefenseBoost(-4);
-              }
-            }
-          };
-
-          target[0] = getTargetCard();
-          if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
-          {
-            target[0].addTempAttackBoost(2);
-            target[0].addTempDefenseBoost(4);
-
-            target[0].untap();
-
-            AllZone.EndOfTurn.addUntil(untilEOT);
-          }
-        }//resolve()
-      };
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-*/
-
 
     //*************** START *********** START **************************
     else if(cardName.equals("Animate Land"))
@@ -17187,7 +17128,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
   }//getCard2
 	   
 	// copies stats like attack, defense, etc..
-	private Card copyStats(Object o) {
+	public static Card copyStats(Object o) {
 		Card sim = (Card) o;
 		Card c = new Card();
 

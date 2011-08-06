@@ -1030,31 +1030,8 @@ class CardFactory_Lands {
 	           	 card.subtractCounter(Counters.ICE, 1);
 	           	 
 	           	 if (card.getCounters(Counters.ICE) == 0)
-	           	 {
-	   	             PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-	   	
-	   	             //make token
-	   	             Card c = new Card();
-	   	
-	   	             c.setOwner(card.getController());
-	   	             c.setController(card.getController());
-	   	
-	   	             c.setName("Marit Lage");
-	   	             c.setName("B 20 20 Marit Lage");
-	   	             c.setManaCost("B");
-	   	             c.setToken(true);
-	   	
-	   	             c.addType("Legendary");
-	   	             c.addType("Creature");
-	   	             c.addType("Avatar");
-	   	             c.addIntrinsicKeyword("Flying");
-	   	             c.addExtrinsicKeyword("Indestructible");
-	   	             c.setBaseAttack(20);
-	   	             c.setBaseDefense(20);
-	   	
-	   	             play.add(c);
-	   	             AllZone.GameAction.sacrifice(card);
-	           	 }// if counters == 0
+	   	             CardFactoryUtil.makeToken("Marit Lage", "B 20 20 Marit Lage", card, "B", new String[] {"Legendary", "Creature", "Avatar"}, 20, 20, new String[] {"Flying", "Indestructible"} );
+
 	              }
 	            };
 	            ability.setDescription("Dark Depths enters the battlefield with ten ice counters on it.\r\n\r\n3: Remove an ice counter from Dark Depths.\r\n\r\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.");
@@ -1694,30 +1671,8 @@ class CardFactory_Lands {
 	   		  
 	   		  public void resolve()
 	   		  {
-	   			  String player = card.getController();
 	   			  AllZone.GameAction.sacrifice(card);
-	   			  
-	   			  PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-
-	   	          //make token
-	   	          Card c = new Card();
-
-	   	          c.setOwner(card.getController());
-	   	          c.setController(card.getController());
-
-	   	          c.setName("Gargoyle");
-	   	          c.setImageName("C 3 4 Gargoyle");
-	   	          c.setManaCost("1");
-	   	          c.setToken(true);
-
-	   	          c.addType("Artifact");
-	   	          c.addType("Creature");
-	   	          c.addType("Gargoyle");
-	   	          c.setBaseAttack(3);
-	   	          c.setBaseDefense(4);
-	   	          c.addIntrinsicKeyword("Flying");
-
-	   	          play.add(c);
+	   			  CardFactoryUtil.makeToken("Gargoyle", "C 3 4 Gargoyle", card, "", new String[] {"Artifact", "Creature", "Gargoyle"}, 3, 4, new String[] {"Flying"} );
 	   		  }
 	   	  };
 	   	  
@@ -1725,12 +1680,6 @@ class CardFactory_Lands {
 	   	  ability.setStackDescription(card.getName() + " - Put a 3/4 colorless Gargoyle artifact creature token with flying onto the battlefield.");
 	   	  
 	   	  card.addSpellAbility(ability);
-	   	  
-	   	  //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
-	   	  //anyway, this does the trick:
-	   	  //card.removeIntrinsicKeyword("tap: add 1");
-	   	  //card.setText(card.getSpellText() +  "\r\n5, tap, sacrifice Gargoyle Castle: Put a 3/4 colorless Gargoyle artifact creature token with flying onto the battlefield.");
-	   	  //card.addIntrinsicKeyword("tap: add 1");
 	   	  
 	     }//*************** END ************ END **************************
 	     
@@ -1751,27 +1700,7 @@ class CardFactory_Lands {
 	   		  
 	   		  public void resolve()
 	   		  {
-	   			  String player = card.getController();
-	   			  
-	   			  PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-
-	   	          //make token
-	   	          Card c = new Card();
-
-	   	          c.setOwner(card.getController());
-	   	          c.setController(card.getController());
-
-	   	          c.setName("Kobolds of Kher Keep");
-	   	          c.setImageName("R 0 1 Kobolds of Kher Keep");
-	   	          c.setManaCost("R");
-	   	          c.setToken(true);
-
-	   	          c.addType("Creature");
-	   	          c.addType("Kobold");
-	   	          c.setBaseAttack(0);
-	   	          c.setBaseDefense(1);
-
-	   	          play.add(c);
+	   			  CardFactoryUtil.makeToken("Kobolds of Kher Keep", "R 0 1 Kobolds of Kher Keep", card, "R", new String[] {"Creature", "Kobold"}, 0, 1, new String[] {""} );
 	   		  }
 	   	  };
 	   	  
@@ -1805,27 +1734,7 @@ class CardFactory_Lands {
 	   		  
 	   		  public void resolve()
 	   		  {
-	   			  String player = card.getController();
-	   			  
-	   			  PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-
-	   	          //make token
-	   	          Card c = new Card();
-
-	   	          c.setOwner(card.getController());
-	   	          c.setController(card.getController());
-
-	   	          c.setName("Saproling");
-	   	          c.setImageName("G 1 1 Saproling");
-	   	          c.setManaCost("G");
-	   	          c.setToken(true);
-
-	   	          c.addType("Creature");
-	   	          c.addType("Saproling");
-	   	          c.setBaseAttack(1);
-	   	          c.setBaseDefense(1);
-
-	   	          play.add(c);
+	   			  CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {"Creature", "Saproling"}, 1, 1, new String[] {""} );
 	   		  }
 	   	  };
 	   	  
@@ -1850,26 +1759,7 @@ class CardFactory_Lands {
 	         {
 	           public void resolve()
 	           {
-	        	    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-	        	    
-	        	   Card c = new Card();
-	              
-	              c.setOwner(card.getController());
-	              c.setController(card.getController());
-
-	              c.setManaCost("1");
-	              c.setToken(true);
-	             
-	              c.setName("Spirit");
-	              c.setImageName("C 1 1 Spirit");
-	              
-	              c.addType("Creature");
-	              c.addType("Spirit");
-	              c.setBaseAttack(1);
-	              c.setBaseDefense(1);
-	              
-	              play.add(c);
-	    	      
+	        	   CardFactoryUtil.makeToken("Spirit", "C 1 1 Spirit", card, "", new String[] {"Creature", "Spirit"}, 1, 1, new String[] {""} );
 	           }//resolve()
 	         };//Ability
 	    	 
@@ -2254,28 +2144,7 @@ class CardFactory_Lands {
               
                public void resolve()
                {
-                  String player = card.getController();
-                 
-                  PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-
-                    //make token
-                    Card c = new Card();
-
-                    c.setOwner(card.getController());
-                    c.setController(card.getController());
-
-                    c.setName("Assembly-Worker");
-                    c.setImageName("c 2 2 Assembly-Worker");
-                    c.setManaCost("");
-                    c.setToken(true);
-                   
-                    c.addType("Artifact");
-                    c.addType("Creature");
-                    c.addType("Assembly-Worker");
-                    c.setBaseAttack(2);
-                    c.setBaseDefense(2);
-
-                    play.add(c);
+                  	CardFactoryUtil.makeToken("Assembly-Worker", "C 2 2 Assembly-Worker", card, "C", new String[] {"Artiface", "Creature", "Assembly-Worker"}, 2, 2, new String[] {""} );
                }
             };
            

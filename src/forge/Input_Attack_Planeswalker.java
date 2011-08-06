@@ -7,6 +7,23 @@ public class Input_Attack_Planeswalker extends Input
   {
     ButtonUtil.enableOnlyOK();
     AllZone.Display.showMessage("Planeswalker Declare Attackers:\r\nSelect creatures that you want to attack " +AllZone.pwCombat.getPlaneswalker());
+    
+    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+    CardList creats = new CardList(play.getCards());
+    creats = creats.getType("Creature");
+    CardList attackers = new CardList(AllZone.Combat.getAttackers());
+    
+	for (int i = 0;i<creats.size(); i++)
+	{
+	   	Card c = creats.get(i);
+	   	if (CombatUtil.canAttack(c) && c.getKeyword().contains("This card attacks each turn if able.")
+	   		&& !attackers.contains(c))
+	   	{
+	   		AllZone.pwCombat.addAttacker(c);
+	   		if (!c.getKeyword().contains("Vigilance"))
+	   				c.tap();
+	   	}
+	}
   }
   public void selectButtonOK()
   {

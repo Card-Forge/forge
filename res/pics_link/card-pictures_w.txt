@@ -126,7 +126,7 @@ watchdog.jpg	http://[server]/TE/Watchdog.full.jpg
 watcher_sliver.jpg	http://[server]/TSP/Watcher%20Sliver.full.jpg
 watchwing_scarecrow.jpg	http://[server]/SHM/Watchwing%20Scarecrow.full.jpg
 watchwolf.jpg	http://[server]/RAV/Watchwolf.full.jpg
-water_elemental.jpg	http://[server]/4E/Water%20Elemental.full.jpg
+water_elemental.jpg	http://[server]/B/Water%20Elemental.full.jpg
 water_gun_balloon_game.jpg	http://[server]/UNH/Water%20Gun%20Balloon%20Game.full.jpg
 water_wurm.jpg	http://[server]/DK/Water%20Wurm.full.jpg
 waterfront_bouncer.jpg	http://[server]/MM/Waterfront%20Bouncer.full.jpg

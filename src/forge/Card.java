@@ -189,14 +189,19 @@ public class Card extends MyObservable
   
   public void addCounter(Counters counterName, int n)
   {
+	  int multiplier = 1;
+	  int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", this.getController()).size();
+	  if (doublingSeasons > 0)
+		  multiplier = (int) Math.pow(2, doublingSeasons);
+
 	  if(counters.containsKey(counterName))
 	  {
-		  Integer aux = counters.get(counterName) + n;
+		  Integer aux = counters.get(counterName) + (multiplier * n);
 		  counters.put(counterName,aux);
 	  }
 	  else
 	  {
-		  counters.put(counterName, Integer.valueOf(n));
+		  counters.put(counterName, Integer.valueOf(multiplier * n));
 	  }
 	  this.updateObservers();
   }

@@ -20,7 +20,7 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.addCounter(Counters.LOYALTY, 4);
+	      card2.setCounter(Counters.LOYALTY, 4);
 	
 	      card2.setOwner(owner);
 	      card2.setController(owner);
@@ -182,24 +182,7 @@ class CardFactory_Planeswalkers {
 	          card2.addCounter(Counters.LOYALTY, 1);
 	          turn[0] = AllZone.Phase.getTurn();
 	          
-	          Card c = new Card();
-	
-	          c.setOwner(card2.getController());
-	          c.setController(card2.getController());
-	
-	          c.setManaCost("W");
-	          c.setToken(true);
-	          
-	          c.setImageName("W 1 1 Soldier");
-	          c.setName("Soldier");
-	          c.addType("Creature");
-	          c.addType("Soldier");
-	          c.setBaseAttack(1);
-	          c.setBaseDefense(1);
-	          //AllZone.GameAction.getPlayerLife(card.getController()).addLife(2);
-	          
-	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
-	          play.add(c);
+	          CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card2, "W", new String[]{"Creature", "Soldier"}, 1, 1, new String[] {""});
 	        }
 	        public boolean canPlayAI()
 	        {
@@ -271,7 +254,7 @@ class CardFactory_Planeswalkers {
 	           AllZone.GameAction.checkStateEffects();
 	         }
 	       };
-	       card2.addCounter(Counters.LOYALTY, 2);
+	       card2.setCounter(Counters.LOYALTY, 2);
 	
 	       card2.setOwner(owner);
 	       card2.setController(owner);
@@ -521,7 +504,7 @@ class CardFactory_Planeswalkers {
 	           AllZone.GameAction.checkStateEffects();
 	         }
 	       };
-	       card2.addCounter(Counters.LOYALTY, 5);
+	       card2.setCounter(Counters.LOYALTY, 5);
 	
 	       card2.setOwner(owner);
 	       card2.setController(owner);
@@ -869,7 +852,7 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.addCounter(Counters.LOYALTY, 4);
+	      card2.setCounter(Counters.LOYALTY, 4);
 	
 	      card2.setOwner(owner);
 	      card2.setController(owner);
@@ -974,27 +957,10 @@ class CardFactory_Planeswalkers {
 	          card2.subtractCounter(Counters.LOYALTY, 6);
 	          turn[0] = AllZone.Phase.getTurn();
 	
-	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
-	
 	          //Create token
-	          Card c = new Card();
-	
-	          c.setOwner(card2.getController());
-	          c.setController(card2.getController());
-	
-	          c.setImageName("W N N Avatar");
-	          c.setName("Avatar");
-	          c.setManaCost("W");
-	          c.setToken(true);
-	
-	          c.addType("Creature");
-	          c.addType("Avatar");
-	          c.setBaseAttack(AllZone.GameAction.getPlayerLife(card.getController()).getLife());
-	          c.setBaseDefense(AllZone.GameAction.getPlayerLife(card.getController()).getLife());
-	
-	          c.addIntrinsicKeyword("This creature's power and toughness are each equal to your life total.");
-	
-	          play.add(c);
+	          int n = AllZone.GameAction.getPlayerLife(card.getController()).getLife();
+	          CardFactoryUtil.makeToken("Avatar", "W N N Avatar", card2, "W", new String[]{"Creature", "Avatar"}, n, n, 
+	        		  					new String[] {"This creature's power and toughness are each equal to your life total"});
 	        }
 	        public boolean canPlay()
 	        {
@@ -1108,7 +1074,7 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.addCounter(Counters.LOYALTY, 5);
+	      card2.setCounter(Counters.LOYALTY, 5);
 
 	      card2.setOwner(owner);
 	      card2.setController(owner);
@@ -1355,7 +1321,7 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.addCounter(Counters.LOYALTY, 6);
+	      card2.setCounter(Counters.LOYALTY, 6);
 
 	      card2.setOwner(owner);
 	      card2.setController(owner);
@@ -1623,7 +1589,7 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.addCounter(Counters.LOYALTY,3);
+	      card2.setCounter(Counters.LOYALTY,3);
 
 	      card2.setOwner(owner);
 	      card2.setController(owner);
@@ -1722,31 +1688,9 @@ class CardFactory_Planeswalkers {
 	        {
 	          card2.subtractCounter(Counters.LOYALTY,1);
 	          turn[0] = AllZone.Phase.getTurn();
-
-	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
-	          play.add(getToken());
-	        }
-	        Card getToken()
-	        {
-	          Card c = new Card();
-
-	          c.setOwner(card.getController());
-	          c.setController(card.getController());
 	          
-	          c.setImageName("G 3 3 Beast");
-	          c.setName("Beast");
-	          c.setManaCost("G");
-	          c.setToken(true);
-	          //c.addKeyword("Token");
-
-	          c.addType("Creature");
-	          c.addType("Beast");
-	          c.setBaseAttack(3);
-	          c.setBaseDefense(3);
-
-	          return c;
-	        }//makeToken()
-
+	          CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", card2, "G", new String[]{"Creature", "Beast"}, 3, 3, new String[] {""});
+	        }
 	        public boolean canPlay()
 	        {
 	          return  AllZone.getZone(card2).is(Constant.Zone.Play) &&
@@ -1894,7 +1838,7 @@ class CardFactory_Planeswalkers {
 		          AllZone.GameAction.checkStateEffects();
 		        }
 		      };
-		      card2.addCounter(Counters.LOYALTY,3);
+		      card2.setCounter(Counters.LOYALTY,3);
 
 		      card2.setOwner(owner);
 		      card2.setController(owner);
@@ -2034,7 +1978,7 @@ class CardFactory_Planeswalkers {
 		          AllZone.GameAction.checkStateEffects();
 		        }
 		      };
-		      card2.addCounter(Counters.LOYALTY, 3);
+		      card2.setCounter(Counters.LOYALTY, 3);
 
 		      card2.setOwner(owner);
 		      card2.setController(owner);
@@ -2269,7 +2213,7 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.addCounter(Counters.LOYALTY,4);
+	      card2.setCounter(Counters.LOYALTY,4);
 
 	      card2.setOwner(owner);
 	      card2.setController(owner);
@@ -2581,7 +2525,7 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.addCounter(Counters.LOYALTY,4);
+	      card2.setCounter(Counters.LOYALTY,4);
 
 	      card2.setOwner(owner);
 	      card2.setController(owner);
@@ -2767,34 +2711,9 @@ class CardFactory_Planeswalkers {
 	          card2.subtractCounter(Counters.LOYALTY, 6);
 	          turn[0] = AllZone.Phase.getTurn();
 
-	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
 	          for (int i=0;i<5;i++)
-	          {
-	        	  play.add(getToken());
-	          }
-	          
+	        	  CardFactoryUtil.makeToken("Dragon", "R 4 4 Dragon", card2, "W", new String[]{"Creature", "Dragon"}, 4, 4, new String[] {"Flying"}); 
 	        }
-	        Card getToken()
-	        {
-	          Card c = new Card();
-
-	          c.setOwner(card2.getController());
-	          c.setController(card2.getController());
-	          
-	          c.setImageName("R 4 4 Dragon");
-	          c.setName("Dragon");
-	          c.setManaCost("R");
-	          c.setToken(true);
-
-	          c.addType("Creature");
-	          c.addType("Dragon");
-	          c.setBaseAttack(4);
-	          c.setBaseDefense(4);
-	          c.addIntrinsicKeyword("Flying");
-	
-	          return c;
-	        }//makeToken()
-
 	        public boolean canPlay()
 	        {
 	          return  AllZone.getZone(card2).is(Constant.Zone.Play) &&
@@ -2817,9 +2736,6 @@ class CardFactory_Planeswalkers {
 	      
 	      return card2;
 	    }//*************** END ************ END **************************
-	    
-	    
-	    
 	    
 	    return card;
 	}

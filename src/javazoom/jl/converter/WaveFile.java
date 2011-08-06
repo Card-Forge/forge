@@ -58,7 +58,7 @@ public class WaveFile extends RiffFile
    }
 
 
-	class WaveFormat_Chunk
+	static class WaveFormat_Chunk
 	{
    		public RiffChunkHeader         header;
    		public WaveFormat_ChunkData    data;

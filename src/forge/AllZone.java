@@ -96,6 +96,7 @@ public class AllZone implements NewConstants {
     	player = "Human"; 
     	System.out.println("Evil hack");
     }
+
 	Object o = map.get(zone + player);
 	if(o == null)
 	    throw new RuntimeException("AllZone : getZone() invalid parameters " +zone +" " +player);

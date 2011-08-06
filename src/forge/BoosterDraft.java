@@ -12,9 +12,9 @@ public interface BoosterDraft
 class BoosterDraft_1 implements BoosterDraft
 {
   private final BoosterDraftAI draftAI = new BoosterDraftAI();
-  private final int nPlayers = 8;
+  private static final int nPlayers = 8;
   private static final int boosterPackSize = 15;
-  private final int stopCount = boosterPackSize * 3;//should total of 45
+  private static final int stopCount = boosterPackSize * 3;//should total of 45
 
   private int currentCount = 0;
   private CardList[] pack;//size 8
