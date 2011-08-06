@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
@@ -30,6 +31,7 @@ public class ReadPriceList implements NewConstants {
     private HashMap<String, Long> readFile(File file) {
         BufferedReader in;
         HashMap<String, Long> map = new HashMap<String, Long>();
+        Random r = new Random();
         try {
         	
             in = new BufferedReader(new FileReader(file));
@@ -46,6 +48,22 @@ public class ReadPriceList implements NewConstants {
                     
                     try {
                         long val = Long.parseLong(price.trim());
+
+                        if(!(name.equals("Plains") || name.equals("Island") || name.equals("Swamp") || name.equals("Mountain") || name.equals("Forest") ||
+                        	 name.equals("Snow-Covered Plains") || name.equals("Snow-Covered Island") || name.equals("Snow-Covered Swamp") || name.equals("Snow-Covered Mountain") || name.equals("Snow-Covered Forest") ))
+                        {                        
+	                        float ff = 0;
+	                        if (r.nextInt(100) < 90)	// +/- 10%
+	                        	ff = (float) r.nextInt(10) * (float) .01;
+	                        else						// +/- 50%
+	                        	ff = (float) r.nextInt(50) * (float) .01;
+	                        
+	                        if (r.nextInt(100) < 50) // -ff%
+	                        	val = (long) ((float) val * ((float) 1 - ff));
+	                        else		 // +ff%
+	                        	val = (long) ((float) val * ((float) 1 + ff));
+                        }
+                        
                         map.put(name, val);
                      } catch (NumberFormatException nfe) {
                         System.out.println("NumberFormatException: " + nfe.getMessage());
