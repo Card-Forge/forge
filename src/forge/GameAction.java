@@ -3744,12 +3744,7 @@ public class GameAction {
     {
     	//addDamage(player, source, damage);
     	if (source.getKeyword().contains("Infect"))
-        {
-        	if(player.equals(Constant.Player.Human)) 
-				AllZone.Human_PoisonCounter.addPoisonCounters(damage);
-			else
-				AllZone.Computer_PoisonCounter.addPoisonCounters(damage);
-        }
+    		addPoison(player, damage);
         else
         	getPlayerLife(player).subtractLife(damage,source);
     	
@@ -3760,12 +3755,7 @@ public class GameAction {
     
     public void addDamage(String player, Card source, int damage) {
         if (source.getKeyword().contains("Infect"))
-        {
-        	if(player.equals(Constant.Player.Human)) 
-				AllZone.Human_PoisonCounter.addPoisonCounters(damage);
-			else
-				AllZone.Computer_PoisonCounter.addPoisonCounters(damage);
-        }
+        	addPoison(player, damage);
         else
         	getPlayerLife(player).subtractLife(damage,source);
          
@@ -3778,6 +3768,21 @@ public class GameAction {
         
         GameActionUtil.executePlayerDamageEffects(player, source, damage, false);
     }
+    
+    public void addPoison(String player, int poison)
+    {
+    	if(player.equals(Constant.Player.Human)) 
+    		AllZone.Human_PoisonCounter.addPoisonCounters(poison);
+    	else
+    		AllZone.Computer_PoisonCounter.addPoisonCounters(poison);
+	}
+    public int getPoison(String player)
+    {
+    	if(player.equals(Constant.Player.Human)) 
+    		return AllZone.Human_PoisonCounter.getPoisonCounters();
+    	else
+    		return AllZone.Computer_PoisonCounter.getPoisonCounters();
+	}
     
     public void searchLibraryLand(String type, String player, String Zone1, boolean tapLand) {
     	searchLibraryTwoLand(type, player, Zone1, tapLand, "", false);

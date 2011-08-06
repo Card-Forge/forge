@@ -8397,6 +8397,47 @@ public class CardFactory_Sorceries {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Leeches")) {
+        	/*
+        	 * Target player loses all poison counters.
+        	 * Leeches deals that much damage to that player.
+        	 */
+        	SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 8555498267738686288L;
+
+				@Override
+        		public void resolve() {
+        			int counters = AllZone.GameAction.getPoison(getTargetPlayer());
+        			AllZone.GameAction.addDamage(getTargetPlayer(), card, counters);
+        			AllZone.GameAction.addPoison(getTargetPlayer(), -counters);
+        		}// resolve()
+
+        		@Override
+        		public boolean canPlayAI() {
+        			PlayerLife compLife = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
+        			PlayerLife humanLife = AllZone.GameAction.getPlayerLife(Constant.Player.Human);
+        			int humanPoison = AllZone.GameAction.getPoison(Constant.Player.Human);
+        			int compPoison = AllZone.GameAction.getPoison(Constant.Player.Computer);
+        			
+        			if(humanLife.getLife() <= humanPoison ) {
+        				setTargetPlayer(Constant.Player.Human);
+        				return true;
+        			}
+        			
+        			if( (2*(11 - compPoison) < compLife.getLife() || compPoison > 7) && compPoison < compLife.getLife() - 2) {
+        				setTargetPlayer(Constant.Player.Computer);
+        				return true;
+        			}
+        			
+        			return false;
+        		}
+        	};// SpellAbility
+        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }// *************** END ************ END **************************
+
 /* Converted to keyword        
         //*************** START *********** START **************************
         else if(cardName.equals("Fabricate")) {

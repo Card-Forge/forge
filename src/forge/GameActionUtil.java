@@ -5233,7 +5233,9 @@ public class GameActionUtil {
 			sb.append(c);
 			sb.append(" - Poisonous: ");
 			sb.append(AllZone.GameAction.getOpponent(c.getController()));
-			sb.append(" gets poison counters.");
+			sb.append(" gets ");
+			sb.append(poison);
+			sb.append(" poison counters.");
 
 			ability.setStackDescription(sb.toString());
 			ArrayList<String> keywords = c.getKeyword();
