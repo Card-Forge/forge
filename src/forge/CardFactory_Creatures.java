@@ -8149,6 +8149,133 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Psychatog")) {
+            final Command untilEOT = new Command() {
+
+				private static final long serialVersionUID = -280983229935814313L;
+
+				public void execute() {
+                    card.addTempAttackBoost(-1);
+                    card.addTempDefenseBoost(-1);
+                }
+            };
+
+            final Ability ability = new Ability(card, "0") {
+                @Override
+                public boolean canPlayAI() {
+                    Card[] hand = AllZone.Computer_Hand.getCards();
+                    return CardFactoryUtil.AI_doesCreatureAttack(card) && (hand.length > 2);
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    AllZone.GameAction.discardRandom(Constant.Player.Computer);
+                }
+                
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(card)) {
+                        card.addTempAttackBoost(1);
+                        card.addTempDefenseBoost(1);
+                        
+                        AllZone.EndOfTurn.addUntil(untilEOT);
+                    }
+                }//resolve()
+                
+                public boolean canPlay()
+                {
+                	return super.canPlay() && AllZoneUtil.getPlayerHand(card.getController()).size() >= 1;
+                }
+            };//SpellAbility
+            
+
+            Input runtime = new Input() {
+				private static final long serialVersionUID = -1987380648014917445L;
+
+				@Override
+                public void showMessage() {
+                    ability.setStackDescription(card + " gets +1/+1 until EOT.");
+                    stopSetNext(CardFactoryUtil.input_discard(ability, 1));
+                }
+            };
+            
+            
+            final Ability ability2 = new Ability(card, "0") {
+                @Override
+                public boolean canPlayAI() {
+                    Card[] grave = AllZone.Computer_Graveyard.getCards();
+                    return CardFactoryUtil.AI_doesCreatureAttack(card) && (grave.length >= 2);
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                	if (AllZone.Computer_Graveyard.getCards().length >=2) {
+                		AllZone.GameAction.removeFromGame(AllZone.Computer_Graveyard.getCards()[0]);
+                		AllZone.GameAction.removeFromGame(AllZone.Computer_Graveyard.getCards()[0]);
+                	}
+                }
+                
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(card)) {
+                        card.addTempAttackBoost(1);
+                        card.addTempDefenseBoost(1);
+                        
+                        AllZone.EndOfTurn.addUntil(untilEOT);
+                    }
+                }//resolve()
+                
+                public boolean canPlay()
+                {
+                	return super.canPlay() && AllZoneUtil.getPlayerGraveyard(card.getController()).size() >= 2;
+                }
+            };//SpellAbility
+            
+            Input runtime2 = new Input() {
+
+				private static final long serialVersionUID = 8243511353958609599L;
+
+				@Override
+                public void showMessage() {
+					CardList list = new CardList(AllZone.Human_Graveyard.getCards());
+					if (list.size() < 2)
+						stop();
+					else {
+						Object o = AllZone.Display.getChoice("Choose first card to exile", list.toArray());
+						if (o!=null)
+						{
+							Card c1 = (Card)o;
+							AllZone.GameAction.removeFromGame(c1);
+							list.remove(c1);
+							
+							o = AllZone.Display.getChoice("Choose second card to exile", list.toArray());
+							if (o!=null)
+							{
+								
+								Card c2 = (Card)o;
+								AllZone.GameAction.removeFromGame(c2);
+	
+								AllZone.Stack.add(ability2);
+							}
+						}
+					}
+					stop();
+                }
+            };
+            
+            ability.setStackDescription(card + " gets +1/+1 until end of turn.");
+            ability.setDescription("Discard a card: Psychatog gets +1/+1 until end of turn.");
+            ability.setBeforePayMana(runtime);
+            
+            ability2.setStackDescription(card + " gets +1/+1 until end of turn.");
+            ability2.setDescription("Exile two cards from your graveyard: Psychatog gets +1/+1 until end of turn.");
+            ability2.setBeforePayMana(runtime2);
+            
+            card.addSpellAbility(ability);
+            card.addSpellAbility(ability2);
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Hell-Bent Raider")) {
             final Command untilEOT = new Command() {
