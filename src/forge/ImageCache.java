@@ -49,10 +49,11 @@ public class ImageCache implements NewConstants {
         imageCache = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
             public BufferedImage apply(String key) {
                 try {
-                    
-                    System.out.printf("Currently %d %s in the cache%n", imageCache.size(),
-                            imageCache.size() == 1? "image":"images");
-                    System.out.printf("New Image for key: %s%n", key);
+                    //DEBUG
+                    /*System.out.printf("Currently %d %s in the cache%n", imageCache.size(),
+                            imageCache.size() == 1? "image":"images");*/
+                	//DEBUG
+                    //System.out.printf("New Image for key: %s%n", key);
                     if(key.endsWith(NORMAL)) {
                         //normal
                         key = key.substring(0, key.length() - NORMAL.length());
@@ -77,14 +78,16 @@ public class ImageCache implements NewConstants {
                         } else path = ForgeProps.getFile(IMAGE_BASE);
                         File file = new File(path, key + ".jpg");
                         if(!file.exists()) {
-                            System.out.println("File not found, no image created: " + file);
+                        	//DEBUG
+                            //System.out.println("File not found, no image created: " + file);
                             return null;
                         }
                         BufferedImage image = ImageUtil.getImage(file);
                         return image;
                     }
                 } catch(Exception ex) {
-                    System.err.println("Exception, no image created");
+                	//DEBUG
+                    //System.err.println("Exception, no image created");
                     if(ex instanceof ComputationException) throw (ComputationException) ex;
                     else throw new ComputationException(ex);
                 }
