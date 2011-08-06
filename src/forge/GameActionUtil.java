@@ -8187,7 +8187,6 @@ public class GameActionUtil {
 		 * At the beginning of your upkeep, if you have exactly 50 or more life, you win the game.
 		 */
 		final Player player = AllZone.Phase.getActivePlayer();
-		//PlayerLife life = AllZone.GameAction.getPlayerLife(player);
 		
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Test of Endurance");
 		
@@ -8196,7 +8195,6 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					Player opponent = player.getOpponent();
-					//PlayerLife oppLife = AllZone.GameAction.getPlayerLife(opponent);
 
 					if (opponent.equals(AllZone.ComputerPlayer)) {
 						int gameNumber = 0;
@@ -8235,7 +8233,6 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					Player opponent = player.getOpponent();
-					//PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
 					
 					if (opponent.equals(AllZone.ComputerPlayer)) {
 						int gameNumber = 0;
@@ -8265,7 +8262,6 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.addDamage(player, F_card, 2);
 					player.addDamage(2, F_card);
 				}
 			};
@@ -8303,7 +8299,6 @@ public class GameActionUtil {
 							@Override
 							public void resolve() {
 								//if (c.getController().equals(player))
-								//AllZone.GameAction.addDamage(player, F_card, 1);
 								player.addDamage(1, F_card);
 							}
 						};
@@ -8320,7 +8315,6 @@ public class GameActionUtil {
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 
 		CardList list = new CardList(playZone.getCards());
-		//list = list.getName("Cursed Land");
 		list = list.filter(new CardListFilter() {
 
 			public boolean addCard(Card c) {
@@ -8374,10 +8368,7 @@ public class GameActionUtil {
 
 			final Player mostLands = mostLandsPlayer;
 
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Greener Pastures");
+			CardList list = AllZoneUtil.getCardsInPlay("Greener Pastures");
 
 			Ability ability;
 
