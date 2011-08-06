@@ -1897,6 +1897,7 @@ res/cardsfolder/electric_eel.txt svneol=native#text/plain
 res/cardsfolder/electrolyze.txt -text svneol=native#text/plain
 res/cardsfolder/electropotence.txt -text svneol=native#text/plain
 res/cardsfolder/elemental_augury.txt -text svneol=native#text/plain
+res/cardsfolder/elemental_mastery.txt -text svneol=native#text/plain
 res/cardsfolder/elephant_ambush.txt -text svneol=native#text/plain
 res/cardsfolder/elephant_graveyard.txt -text svneol=native#text/plain
 res/cardsfolder/elephant_guide.txt svneol=native#text/plain
