@@ -6354,27 +6354,62 @@ public class CardFactory_Creatures {
 	        }//getCreature()
 	        public void resolve()
 	        {
-	          if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
+	          if (AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
 	          {
 	            final Card[] creature = new Card[1];
+	            
+	            creature[0] = getTargetCard();
+	            final String origManaCost = creature[0].getManaCost();
+	            final String tgtName = creature[0].getName();
+	            final String[] creatureIsColor = {tgtName + " is black.", tgtName + " is blue.", tgtName + " is green.",
+	            	                    	tgtName + " is red.", tgtName + " is white.", tgtName + " is colorless."};
+	            final boolean[] colorFlag = {false, false, false, false, false, false};
+  	            
+	            for (int i=0; i<6; i++)
+	            {
+	              if (creature[0].getIntrinsicKeyword().contains(creatureIsColor[i]))
+	              {
+	                colorFlag[i] = true;
+	              }
+	            }
+	            
 	            final Command EOT = new Command()
 	            {
-					private static final long serialVersionUID = -1899153704584793548L;
+				  private static final long serialVersionUID = -1899153704584793548L;
 
-				public void execute()
+				  public void execute()
 	              {
-	                if(AllZone.GameAction.isCardInPlay(creature[0]))
+	                if (AllZone.GameAction.isCardInPlay(creature[0]))
+	                {
 	                  creature[0].removeExtrinsicKeyword("Flying");
+	                  creature[0].removeExtrinsicKeyword(tgtName + " is blue.");
+	                  creature[0].setManaCost(origManaCost);
+	                  for (int i=0; i<6; i++)
+	                  {
+	                    if (colorFlag[i])
+	                    {
+	                      creature[0].addIntrinsicKeyword(creatureIsColor[i]);
+	                    }
+	                  }
+	                }
 	              }
 	            };
-	            creature[0] = getTargetCard();
+	            creature[0].setManaCost(Integer.toString(CardUtil.getConvertedManaCost(origManaCost)));
+	            for (int i=0; i<6; i++)
+	            {
+	              if (colorFlag[i])
+	              {
+	                creature[0].removeIntrinsicKeyword(creatureIsColor[i]);
+	              }
+	            }
 	            creature[0].addExtrinsicKeyword("Flying");
+	            creature[0].addExtrinsicKeyword(tgtName + " is blue.");
 	            AllZone.EndOfTurn.addUntil(EOT);
 	          }//if (card is in play)
 	        }//resolve()
 	      };//SpellAbility
 	      card.addSpellAbility(ability);
-	      ability.setDescription("U, tap: Target creature gains flying.");
+	      ability.setDescription("U, tap: Target creature gains flying and becomes blue until end of turn.");
 
 	      ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
 	    }//*************** END ************ END **************************

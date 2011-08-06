@@ -14536,7 +14536,7 @@ Flying
 Disciple of Kangee
 2 W
 Creature Wizard
-(NOTE: " and becomes blue until end of turn." not implemented)
+no text
 2/2
 
 Swords to Plowshares
