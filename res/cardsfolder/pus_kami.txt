@@ -1,0 +1,10 @@
+Name:Pus Kami
+ManaCost:6 B
+Types:Creature Spirit
+Text:no text
+PT:3/3
+A:AB$Destroy | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
+K:Soulshift:6
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pus_kami.jpg
+End

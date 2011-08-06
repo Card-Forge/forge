@@ -1,0 +1,9 @@
+Name:Phyrexian Reclamation
+ManaCost:1 B
+Types:Enchantment
+Text:no text
+A:AB$ChangeZone | Cost$ 1 B PayLife<2> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target creature card from your graveyard to your hand.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_reclamation.jpg
+End
