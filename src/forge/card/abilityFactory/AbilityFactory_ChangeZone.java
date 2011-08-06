@@ -620,9 +620,14 @@ public class AbilityFactory_ChangeZone {
         			c = CardFactoryUtil.AI_getCheapestPermanent(fetchList, af.getHostCard(), false);
         	}
         	else{
+        		//Don't fetch another tutor with the same name
+            	if (origin.equals("Library") && !fetchList.getNotName(card.getName()).isEmpty())
+            		fetchList = fetchList.getNotName(card.getName());
+            	
         		fetchList.shuffle();
         		c = fetchList.get(0);
         	}
+
 
         	fetched.add(c);
         	fetchList.remove(c);
