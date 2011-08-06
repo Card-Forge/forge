@@ -7,7 +7,16 @@ public class Target {
 	public boolean canTgtCreature() { return tgtCreature; }
 	
 	public boolean canTgtCreaturePlayer() { return tgtCreature && tgtPlayer; }
-	public boolean doesTarget() { return tgtCreature || tgtPlayer; }
+	public boolean doesTarget() { return tgtCreature || tgtPlayer || tgtValid; }
+	
+	private boolean tgtValid = false;
+	private String ValidTgts[];
+	private String vtSelection = "";
+	public boolean canTgtValid() { return tgtValid; }
+	public String[] getValidTgts() { return ValidTgts; }
+	public void setValidTgts(String vTgts[]) { ValidTgts = vTgts; }
+	public String getVTSelection() { return vtSelection; }
+	public void setVTSelection(String vtSelStr) { vtSelection = vtSelStr; }
 	
 	private int minTargets = 0;
 	public int getMinTargets() { return minTargets; }
@@ -31,6 +40,9 @@ public class Target {
 			if (tgtSplit[0].contains("P"))	// player
 				tgtPlayer = true;
 			//todo add Opponent and other permanent types
+			
+			if (tgtSplit[0].contains("V")) // valid
+				tgtValid = true;
 			
 			if (tgtSplit.length != 3){
 				minTargets = 1;

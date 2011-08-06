@@ -55,6 +55,8 @@ public class Target_Selection {
 				changeInput.stopSetNext(targetCreature(ability, this, req));
 	        else if(target.canTgtPlayer()) 
 	        	changeInput.stopSetNext(targetPlayer(ability, this, req));
+	        else if (target.canTgtValid())
+	        	changeInput.stopSetNext(CardFactoryUtil.input_targetValid(ability, target.getValidTgts(), target.getVTSelection()));
 	        return false;
 		}
 		
