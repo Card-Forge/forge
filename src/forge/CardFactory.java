@@ -6093,14 +6093,32 @@ public class CardFactory implements NewConstants {
         // AbilityFactory cards
         ArrayList<String> IA = card.getIntrinsicAbilities();
         if (IA.size() > 0)
-        {       	
+        {
         	if (card.isInstant() || card.isSorcery())
         		card.clearSpellAbility();
         	
-        	for (int i=0; i<IA.size(); i++){
-            	AbilityFactory AF = new AbilityFactory();
-        		card.addSpellAbility(AF.getAbility(IA.get(i), card));
+        	for (int i=0; i<IA.size(); i++)
+        	{
+        		AbilityFactory AF = new AbilityFactory();
+        		SpellAbility sa = AF.getAbility(IA.get(i), card);
+        		
+        		card.addSpellAbility(sa);
+        		
+        		String bbCost = card.getSVar("Buyback"); 
+        		if (!bbCost.equals(""))
+        		{
+        			SpellAbility bbSA = sa.copy();
+        			bbSA.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
+                    sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                    bbSA.setDescription(sb.toString());
+                    bbSA.setIsBuyBackAbility(true);
+                                        
+                    card.addSpellAbility(bbSA);
+        		}
         	}
+        		
 
         }
 
