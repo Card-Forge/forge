@@ -15,6 +15,13 @@ public class AbilityFactory_Token extends AbilityFactory {
 	private String tokenToughness;
 	private String tokenImage;
 	
+	private Ability_Sub subAbAF = null;
+    private boolean hasSubAbAF = false;
+    private String subAbStr = "none";
+    private boolean hasSubAbStr = false;
+    
+    public Ability_Sub getSubAbility() { return subAbAF; }
+	
 	public AbilityFactory_Token(final AbilityFactory af) {
 		AF = af;
 		
@@ -60,6 +67,26 @@ public class AbilityFactory_Token extends AbilityFactory {
 		tokenToughness = numToughness;
 		tokenKeywords = keywords;
 		tokenImage = image;
+		
+		if(AF.hasSubAbility())
+        {
+           String sSub = AF.getMapParams().get("SubAbility");
+           
+           if (sSub.startsWith("SVar="))
+              sSub = AF.getHostCard().getSVar(sSub.split("=")[1]);
+           
+           if (sSub.startsWith("DB$"))
+           {
+              AbilityFactory afDB = new AbilityFactory();
+              subAbAF = (Ability_Sub)afDB.getAbility(sSub, AF.getHostCard());
+              hasSubAbAF = true;
+           }
+           else
+           {
+              subAbStr = sSub;
+              hasSubAbStr = true;
+           }
+        }
 	}
 	
 	public SpellAbility getAbility()
@@ -123,6 +150,31 @@ public class AbilityFactory_Token extends AbilityFactory {
 		};
 		
 		return spToken;
+	}
+	
+	public SpellAbility getDrawback()
+    {
+		final SpellAbility dbDealDamage = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+			private static final long serialVersionUID = 7239608350643325111L;
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return true;
+			}
+
+			@Override
+			public String getStackDescription() {
+				return doStackDescription();
+			}
+
+			@Override
+			public void resolve() {
+				doResolve(this);
+			}
+
+		}; // Spell
+
+		return dbDealDamage;
 	}
 	
 	private String doStackDescription() {

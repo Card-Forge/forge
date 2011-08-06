@@ -341,6 +341,10 @@ public class AbilityFactory {
 				SA = AFT.getAbility();
 			if(isSp)
 				SA = AFT.getSpell();
+			if(isDb)
+				SA = AFT.getDrawback();
+			if(hasSubAbility())
+				SA.setSubAbility(getSubAbility());
 		}
 		
 		if (API.equals("GainControl")) {
