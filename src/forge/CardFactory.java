@@ -4872,20 +4872,6 @@ public class CardFactory implements NewConstants {
             }
         }//Morph
         
-        if(hasKeyword(card, "Flashback") != -1) {
-            int n = hasKeyword(card, "Flashback");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                //card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                
-                final String manacost = k[1];
-                
-                card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, manacost, "0"));
-            }
-        }//flashback
-        
         if(hasKeyword(card, "Unearth") != -1) {
             int n = hasKeyword(card, "Unearth");
             if(n != -1) {
@@ -6534,6 +6520,27 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(SpUntapTgt);
         	card.setSVar("PlayMain1", "TRUE");
         }//End spUntapTgt
+        
+        if (hasKeyword(card, "Flashback") != -1) {
+            int n = hasKeyword(card, "Flashback");
+            if (n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                //card.removeIntrinsicKeyword(parse);
+                
+                final String lifeCost[] = {"0"};
+                
+                String k[] = parse.split(":");
+                String cost[] = k[1].split(",");
+                final String manaCost = cost[0];
+                
+                if (cost.length > 1) {
+                    lifeCost[0] = cost[1];
+                }
+                
+                card.setFlashback(true);
+                card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, manaCost, lifeCost[0]));
+            }
+        }//flashback
 
         
         //**************************************************
