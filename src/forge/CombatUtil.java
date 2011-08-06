@@ -2400,32 +2400,7 @@ public class CombatUtil {
                 player.drawCards(numCards);
             }
         }// if Saprazzan Heir or Drelnoch or Chambered Nautilus was blocked
-        */
-        if(b.getName().equals("Frostweb Spider") && (a.getKeyword().contains("Flying"))) {
-            final Card spider = b;
-            
-            final Ability ability = new Ability(b, "0") {
-                @Override
-                public void resolve() {
-                    spider.addCounter(Counters.P1P1, 1);
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(spider).append(" - gets a +1/+1 counter.");
-            ability.setStackDescription(sb.toString());
-            
-            final Command atEOC = new Command() {
-                private static final long serialVersionUID = 6617320324660612694L;
-                
-                public void execute() {
-                    if(AllZone.GameAction.isCardInPlay(spider)) AllZone.Stack.add(ability);
-                }
-            };
-            
-            AllZone.EndOfCombat.addAt(atEOC);
-        }//Frostweb Spider
-        
+        */        
         
         else if (b.getName().equals("Alaborn Zealot") || b.getName().equals("Loyal Sentry")) {
         	final Card blocker = b; 
