@@ -14,6 +14,7 @@ Aesthir Glider
 Agent of Stromgald
 Aggressive Urge
 Agility
+Air Bladder
 Airborne Aid
 Akki Drillmaster
 Akrasan Squire
@@ -53,6 +54,7 @@ Armadillo Cloak
 Armored Pegasus
 Armorer Guildmage
 Arnjlot's Ascent
+Artifact Ward
 Ascending Aven
 Asha's Favor
 Ashcoat Bear
@@ -116,6 +118,7 @@ Blistering Barrier
 Blistering Dieflyn
 Blockade Runner
 Bloodrock Cyclops
+Bloodshed Fever
 Blossoming Wreath
 Bog Imp
 Bog Initiate
@@ -130,6 +133,7 @@ Bonesplitter Sliver
 Boomerang
 Border Guard
 Border Patrol
+Borderland Ranger
 Boreal Centaur
 Boreal Druid
 Boreal Griffin
@@ -158,6 +162,7 @@ Burst of Speed
 Cackling Flames
 Cackling Imp
 Cadaverous Knight
+Cagemail
 Caller of Gales
 Cancel
 Canopy Spider
@@ -200,6 +205,7 @@ Cinder Pyromancer
 Cinderbones
 Clay Statue
 Cliff Threader
+Clinging Darkness
 Cloak of Feathers
 Cloak of Mists
 Cloud Elemental
@@ -240,7 +246,9 @@ Crimson Acolyte
 Crimson Kobolds
 Crookshank Kobolds
 Cruel Edict
+Crumble
 Crypt Ripper
+Cursed Flesh
 Cursed Ronin
 Cylian Elf
 Dakmor Bat
@@ -269,6 +277,7 @@ Defender of Law
 Defiant Elf
 Defiant Falcon
 Deft Duelist
+Dehydration
 Delirium Skeins
 Demolish
 Demystify
@@ -300,6 +309,7 @@ Drake Hatchling
 Dream Cache
 Dream Stalker
 Dreg Reaver
+Dregscape Zombie
 Drelnoch
 Drift of Phantasms
 Drifter il-Dal
@@ -342,6 +352,7 @@ Emerald Dragonfly
 Emerald Oryx
 Empty the Warrens
 Enclave Elite
+Enfeeblement
 Enslaved Scout
 Erratic Explosion
 Esper Cormorants
@@ -351,6 +362,7 @@ Essence Warden
 Eternal Warrior
 Eternity Snare
 Ethercaste Knight
+Etherium Abomination
 Exclude
 Exhume
 Expunge
@@ -364,6 +376,7 @@ Fangren Hunter
 Fear
 Feast of Flesh
 Feast of the Unicorn
+Feebleness
 Femeref Knight
 Femeref Scouts
 Feral Shadow
@@ -444,6 +457,7 @@ Giant Spider
 Giant Strength
 Giant Warthog
 Gibbering Kami
+Gift of Granite
 Glimmering Angel
 Glintwing Invoker
 Glorious Charge
@@ -492,6 +506,7 @@ Gray Ogre
 Graypelt Hunter
 Grayscaled Gharial
 Great Furnace
+Greel's Caress
 Griffin Sentinel
 Grixis Grimblade
 Grizzled Leotau
@@ -552,6 +567,7 @@ Igneous Pouncer
 Illusionary Forces
 Illusionary Wall
 Immaculate Magistrate
+Immolation
 Imperial Edict
 Imperious Perfect
 Impulse
@@ -568,6 +584,7 @@ Ior Ruin Expedition
 Ire of Kaminari
 Iron Myr
 Iron Will
+Ironclaw Orcs
 Ironroot Treefolk
 Izzet Boilerworks
 Izzet Signet
@@ -590,6 +607,7 @@ Kabira Crossroads
 Kabuto Moth
 Kami of Ancient Law
 Kami of Empty Graves
+Kathari Screecher
 Kavu Climber
 Kavu Glider
 Keen-Eyed Archers
@@ -627,6 +645,7 @@ Launch
 Lava Axe
 Lava Spike
 Lay Waste
+Leaden Fists
 Leaden Myr
 Leaf Dancer
 Leaf Gilder
@@ -634,6 +653,7 @@ Leap
 Leaping Lizard
 Leonin Scimitar
 Life Burst
+Lifelink
 Lifespark Spellbomb
 Lightning Blast
 Lightning Bolt
@@ -665,6 +685,7 @@ Macetail Hystrodon
 Magefire Wings
 Mageta's Boon
 Maggot Carrier
+Maggot Therapy
 Magnify
 Makindi Shieldmate
 Malachite Golem
@@ -764,6 +785,7 @@ Nomadic Elf
 Norwood Archers
 Norwood Ranger
 Nourish
+Oakenform
 Oakgnarl Warrior
 Obelisk of Bant
 Obelisk of Esper
@@ -802,6 +824,7 @@ Pacifism
 Pale Recluse
 Pallid Mycoderm
 Panther Warriors
+Paralyzing Grasp
 Parapet Watchers
 Path of Anger's Flame
 Pearled Unicorn
@@ -836,6 +859,7 @@ Predator's Strike
 Preemptive Strike
 Prickly Boggart
 Priest of Titania
+Primal Frenzy
 Primal Plasma
 Prismatic Lens
 Prodigal Pyromancer
@@ -904,6 +928,7 @@ Ridgeline Rager
 Riding Red Hare
 Righteous Avengers
 Rimebound Dead
+Riot Spikes
 Rip-Clan Crasher
 Rishadan Airship
 River Boa
@@ -938,6 +963,7 @@ Sakura-Tribe Elder
 Sanctum Plowbeast
 Sandbar Merfolk
 Sandstone Warrior
+Sangrite Backlash
 Sangrophage
 Savage Hunger
 Scaled Wurm
@@ -987,6 +1013,7 @@ Shatterskull Giant
 Shield Sphere
 Shield Wall
 Shield of Duty and Reason
+Shielding Plax
 Shimmering Grotto
 Shinka Gatekeeper
 Shivan Zombie
@@ -999,6 +1026,7 @@ Shu Cavalry
 Shu Elite Infantry
 Shu Foot Soldiers
 Shu Grain Caravan
+Sicken
 Sickle Ripper
 Sidewinder Sliver
 Siege Mastodon
@@ -1077,6 +1105,7 @@ Spring of Eternal Peace
 Sprout
 Sprout Swarm
 Squall Drifter
+Squee's Embrace
 Squire
 Squirming Mass
 Stampeding Rhino
@@ -1161,7 +1190,9 @@ Tome Scour
 Tor Giant
 Torch Drake
 Torii Watchward
+Torment
 Tormented Angel
+Torpor Dust
 Tortoise Formation
 Touch of Brilliance
 Touch of Invisibility
@@ -1186,11 +1217,13 @@ Trokin High Guard
 Tuktuk Grunts
 Tundra Wolves
 Twisted Abomination
+Twisted Experiment
 Tyrranax
 Uktabi Drake
 Uktabi Efreet
 Umara Raptor
 Uncontrollable Anger
+Undead Leotau
 Unholy Strength
 Unmake
 Unnatural Speed
@@ -1236,10 +1269,12 @@ Viridian Acolyte
 Viridian Joiner
 Virtuous Charge
 Virulent Sliver
+Viscera Dragger
 Viscerid Deepwalker
 Viscid Lemures
 Vision Skeins
 Vital Surge
+Vithian Stinger
 Vodalian Merchant
 Vodalian Soldiers
 Vodalian Zombie
@@ -1343,6 +1378,7 @@ Zap
 Zealous Guardian
 Zendikar Farguide
 Zephyr Falcon
+Zephyr Net
 Zephyr Sprite
 Zhalfirin Knight
 Zodiac Dog

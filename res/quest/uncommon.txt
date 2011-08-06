@@ -62,6 +62,7 @@ Bestial Menace
 Bituminous Blast
 Black Knight
 Black Vise
+Black Ward
 Blade Sliver
 Blasted Landscape
 Blaze
@@ -70,6 +71,7 @@ Blood Knight
 Bloodbraid Elf
 Bloodcurdling Scream
 Bloodstone Cameo
+Blue Ward
 Body of Jukai
 Bog Wraith
 Boggart Harbinger
@@ -113,12 +115,14 @@ Chambered Nautilus
 Changeling Berserker
 Changeling Hero
 Changeling Titan
+Channel the Suns
 Char-Rumbler
 Charcoal Diamond
 Charging Bandits
 Charging Troll
 Chilling Apparition
 Cinder Storm
+City of Brass
 Cleanfall
 Clear
 Cloud Djinn
@@ -128,6 +132,7 @@ Composite Golem
 Concentrate
 Control Magic
 Control of the Court
+Copper Tablet
 Corrupt Court Official
 Corrupt Eunuchs
 Council of Advisors
@@ -168,6 +173,7 @@ Desperate Charge
 Devour in Shadow
 Diabolic Machine
 Diabolic Tutor
+Diamond Valley
 Dimir Guildmage
 Dingus Staff
 Dismiss
@@ -206,6 +212,7 @@ Faerie Conclave
 Faerie Harbinger
 Faerie Swarm
 Fallen Angel
+Fallowsage
 Fanatical Fever
 Fecundity
 Feedback Bolt
@@ -218,6 +225,7 @@ Fire Diamond
 Fire Drake
 Fire Imp
 Fire-Belly Changeling
+Fire-Field Ogre
 Firefly
 Firescreamer
 Fireshrieker
@@ -226,6 +234,7 @@ Flame Spirit
 Flamekin Harbinger
 Flamekin Spitfire
 Flametongue Kavu
+Flashfires
 Fledgling Mawcor
 Fleetfoot Panther
 Flow of Ideas
@@ -283,6 +292,7 @@ Gorgon Flail
 Granite Shard
 Graypelt Refuge
 Greater Forgeling
+Green Ward
 Greenweaver Druid
 Grixis Battlemage
 Grizzly Fate
@@ -303,6 +313,7 @@ Heartwood Shard
 Heartwood Treefolk
 Hedge Troll
 Hedron Crab
+Hellspark Elemental
 Henge Guardian
 Henge of Ramos
 Heroes' Reunion
@@ -360,6 +371,7 @@ Kami of Old Stone
 Kami of the Palace Fields
 Kami of the Tended Garden
 Karakas
+Karma
 Karoo Meerkat
 Karplusan Strider
 Kasimir the Lone Wolf
@@ -385,12 +397,14 @@ Knighthood
 Knotvine Mystic
 Koskun Keep
 Lady Orca
+Lance
 Land Tax
 Landbind Ritual
 Lava Flow
 Leafdrake Roost
 Leatherback Baloth
 Leonin Skyhunter
+Leshrac's Rite
 Levitation
 Ley Druid
 Library of Alexandria
@@ -470,6 +484,7 @@ Pavel Maliki
 Peach Garden Oath
 Pendelhaven
 Penumbra Kavu
+People of the Woods
 Peregrine Drake
 Peregrine Mask
 Perimeter Captain
@@ -517,6 +532,7 @@ Ranger en-Vec
 Rathi Fiend
 Rebuild
 Reckless Wurm
+Red Ward
 Regrowth
 Relentless Rats
 Remand
@@ -569,6 +585,7 @@ Sensei's Divining Top
 Sentinels of Glen Elendra
 Serra's Blessing
 Serra's Embrace
+Shambling Remains
 Shatterstorm
 Shepherd of the Lost
 Shimmering Barrier
@@ -663,6 +680,7 @@ Telim'Tor's Darts
 Tempest Drake
 Tempest of Light
 The Lady of the Mountain
+The Rack
 Thief of Hope
 Thieving Magpie
 Thirst for Knowledge
@@ -702,6 +720,7 @@ Umbral Mantle
 Undercity Shade
 Underworld Dreams
 Undying Rage
+Unquestioned Authority
 Unseen Walker
 Unyaro Bee Sting
 Urborg Drake
@@ -711,6 +730,7 @@ Uthden Troll
 Valor
 Valorous Charge
 Vampire Nighthawk
+Vampiric Embrace
 Vampiric Feast
 Vedalken Mastermind
 Vedalken Plotter
@@ -750,6 +770,7 @@ Wall of Pine Needles
 Wall of Razors
 Wall of Stone
 Wall of Swords
+Wall of Tears
 Wall of Water
 Waning Wurm
 War Chariot
@@ -758,6 +779,7 @@ Wasp Lancer
 Wasteland
 Watchwolf
 Water Elemental
+Web
 Wei Elite Companions
 Whip Sergeant
 Whipcorder
@@ -765,12 +787,14 @@ Whirling Dervish
 Whispers of the Muse
 White Knight
 White Shield Crusader
+White Ward
 Wild Ox
 Wildfire Emissary
 Wilt-Leaf Cavaliers
 Wind Dancer
 Windreaper Falcon
 Windstorm
+Wings of Aesthir
 Winter's Grasp
 Wirewood Hivemaster
 Wirewood Lodge

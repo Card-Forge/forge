@@ -197,6 +197,7 @@ Ethersworn Adjudicator
 Evacuation
 Eviscerator
 Exalted Angel
+Exotic Orchard
 Exploration
 Fable of Wolf and Owl
 Fastbond
@@ -227,6 +228,7 @@ Force of Savagery
 Forced Fruition
 Gaddock Teeg
 Gaea's Anthem
+Gaea's Avenger
 Gaea's Cradle
 Gargoyle Castle
 Garruk Wildspeaker
@@ -241,6 +243,7 @@ Glimpse the Unthinkable
 Glint-Eye Nephilim
 Global Ruin
 Glorious Anthem
+Goblin Assault
 Goblin Charbelcher
 Goblin Chieftain
 Goblin Guide
@@ -272,6 +275,7 @@ Hatching Plans
 Haunting Echoes
 Heartmender
 Helix Pinnacle
+Hell's Thunder
 Hell-Bent Raider
 Helldozer
 Hellkite Overlord
@@ -308,6 +312,7 @@ Isamaru, Hound of Konda
 Jace Beleren
 Jace, the Mind Sculptor
 Jacques le Vert
+Jandor's Saddlebags
 Jayemdae Tome
 Jedit Ojanen of Efrava
 Jenara, Asura of War
@@ -506,6 +511,7 @@ Ravages of War
 Raven Guild Master
 Reach of Branches
 Reckless Embermage
+Reflecting Pool
 Reki, the History of Kamigawa
 Retribution of the Meek
 Reya Dawnbringer
@@ -543,6 +549,7 @@ Scute Mob
 Sea Gate Loremaster
 Searing Wind
 Sedge Troll
+Sedraxis Specter
 Seizan, Perverter of Truth
 Sek'Kuar, Deathkeeper
 Sengir Vampire
