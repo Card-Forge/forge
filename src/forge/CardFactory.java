@@ -1988,64 +1988,6 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spDraw);
         }//spDrawCards
         
-        /*
-        //Spell gain life lose life cards (like Soul Feast)
-        if(hasKeyword(card, "spLoseLifeGainLife") != -1) {
-            int n = hasKeyword(card, "spLoseLifeGainLife");
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final String lfdmg = k[1];
-                
-                final String spDesc[] = {"none"};
-                final String stDesc[] = {"none"};
-                
-                if(k.length > 2) spDesc[0] = k[2];
-                if(k.length > 3) stDesc[0] = k[3];
-                
-                final SpellAbility spell = new Spell(card) {
-                    private static final long serialVersionUID = -8361697584661592092L;
-                    
-                    @Override
-                    public void resolve() {
-                        final int n = Integer.parseInt(lfdmg);
-                        
-                        AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(n);
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                        life.addLife(n);
-                    }//resolve()
-                };//SpellAbility
-                
-                spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-                spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-                
-                if(spDesc[0].equals("none")) // create the card description
-                {
-                    spDesc[0] = ("Target player loses " + lfdmg + " life and you gain " + lfdmg + " life.");
-                }
-                
-                if(stDesc[0].equals("none")) // create the card stack description
-                {
-                    stDesc[0] = (card.getName() + " - target loses life and you gain life.");
-                }
-                
-                spell.setDescription(spDesc[0]);
-                spell.setStackDescription(stDesc[0]);
-                
-                card.clearSpellAbility();
-                card.addSpellAbility(spell);
-                
-                if(cardName.equals("Absorb Vis")) {
-                    card.addSpellAbility(CardFactoryUtil.ability_typecycle(card, "1 B", "Basic"));
-                }
-                
-                return card;
-            }
-        }// spLoseLifeGainLife
-        */
-        
         if (hasKeyword(card, "spLoseLife") != -1)
         {
            int n = hasKeyword(card, "spLoseLife");
@@ -11796,7 +11738,9 @@ public class CardFactory implements NewConstants {
             ability.setDescription("U, Sacrifice AEther Spellbomb: Return target creature to its owner's hand.");
             card.addSpellAbility(ability);
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
-        }
+        }//*************** END ************ END **************************
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Lifespark Spellbomb")) {
             final SpellAbility ability = new Ability_Activated(card, "G") {
@@ -12852,7 +12796,7 @@ public class CardFactory implements NewConstants {
             ability.setStackDescription(card.getName() + " - Draw two cards.");
             
             card.addSpellAbility(ability);
-        }
+        }//*************** END ************ END **************************
 
 
         //*************** START *********** START **************************
@@ -15049,29 +14993,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         
-        
-/*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Urza's Blueprints")) {
-            final SpellAbility ability = new Ability_Tap(card, "0") {
-                private static final long serialVersionUID = -1802481790805608497L;
                 
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.Phase.getPhase().equals(Constant.Phase.Main1);
-                }
-                
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
-                }
-            };//SpellAbility
-            card.addSpellAbility(ability);
-            ability.setDescription("tap: Draw a card.");
-            ability.setStackDescription(card.getName() + " - draw a card.");
-        }//*************** END ************ END **************************
-*/
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Illusions of Grandeur")) {
