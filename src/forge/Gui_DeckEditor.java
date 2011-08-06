@@ -536,10 +536,12 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         Rectangle bounds = getBounds();
         Dimension screen = getToolkit().getScreenSize();
         int maxWidth;
-        if (screen.width >= 1400)
+        
+        if (screen.width >= 1400) {
             maxWidth = 1400;
-        else
+        } else {
             maxWidth = screen.width;
+        }
         bounds.width = maxWidth;
         bounds.height = screen.height;
         
@@ -587,11 +589,11 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         border2 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
         titledBorder2 = new TitledBorder(border2, "Deck");
         this.getContentPane().setLayout(null);
-        String toolTip = "Click on the column name (like name or color) to sort the cards";
+        String tableToolTip = "Click on the column name (like name or color) to sort the cards";
         jScrollPane1.setBorder(titledBorder1);
-        jScrollPane1.setToolTipText(toolTip);
+        jScrollPane1.setToolTipText(tableToolTip);
         jScrollPane2.setBorder(titledBorder2);
-        jScrollPane2.setToolTipText(toolTip);
+        jScrollPane2.setToolTipText(tableToolTip);
         //removeButton.setIcon(upIcon);
         if(!Gui_NewGame.useLAFFonts.isSelected()) removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
         removeButton.setText("Remove from Deck");
@@ -611,14 +613,14 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         
         /*CHOPPIC*/
         filterButton.setText("Apply Filter");
+        filterButton.setToolTipText("Pressing the \"return\" key will activate this button");
         filterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	filterButton_actionPerformed(e);
             }
         });
-        /*CHOPPIC*/
-        
         if (!Gui_NewGame.useLAFFonts.isSelected()) filterButton.setFont(new java.awt.Font("Dialog", 0, 13));
+        /*CHOPPIC*/
         
         clearFilterButton.setText("Clear Filter");
         clearFilterButton.addActionListener(new java.awt.event.ActionListener() {
