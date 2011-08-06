@@ -6161,6 +6161,7 @@ src/forge/AbilityFactory_Pump.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Regenerate.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Sacrifice.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Token.java -text svneol=native#text/plain
+src/forge/AbilityFactory_Turns.java -text svneol=native#text/plain
 src/forge/AbilityFactory_ZoneAffecting.java -text svneol=native#text/plain
 src/forge/Ability_Activated.java svneol=native#text/plain
 src/forge/Ability_Cost.java -text svneol=native#text/plain

@@ -435,6 +435,15 @@ public class AbilityFactory {
 				SA = c.getSpellCounter(this);
 		}
 		
+		if (API.equals("AddTurn")){
+			if (isAb)
+				SA = AbilityFactory_Turns.createAbilityAddTurn(this);
+			else if (isSp)
+				SA = AbilityFactory_Turns.createSpellAddTurn(this);
+			else if (isDb)
+				SA = AbilityFactory_Turns.createDrawbackAddTurn(this);
+		}
+		
 		if (SA == null)
 			throw new RuntimeException("AbilityFactory : SpellAbility was not created. Did you add the API section?");
 
