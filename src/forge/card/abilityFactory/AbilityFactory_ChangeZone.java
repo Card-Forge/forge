@@ -1347,7 +1347,13 @@ public class AbilityFactory_ChangeZone {
 				return false;
 		}
 		else if (origin.equals("Graveyard")){
-
+			Target tgt = af.getAbTgt();
+			if (tgt != null){
+				if(AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer).isEmpty())
+					return false;
+				tgt.resetTargets();
+				tgt.addTarget(AllZone.HumanPlayer);
+			}
 		}
 		else if (origin.equals("Exile")){
 
