@@ -28,16 +28,24 @@ public class ComputerUtil
       {
     	
         if(all[i].isSpell() && AllZone.GameAction.isCardInZone(all[i].getSourceCard(),AllZone.Computer_Hand))
-          AllZone.Computer_Hand.remove(all[i].getSourceCard());
+        	AllZone.Computer_Hand.remove(all[i].getSourceCard());
 
-        if(all[i] instanceof Ability_Tap)
-          all[i].getSourceCard().tap();
-
-        payManaCost(all[i]);
-        all[i].chooseTargetAI();
-        all[i].getBeforePayManaAI().execute();
-        all[i].setActivatingPlayer(Constant.Player.Computer);
-        AllZone.Stack.add(all[i]);
+        Ability_Cost cost = all[i].getPayCosts();
+        
+        if (cost == null){
+	        if(all[i] instanceof Ability_Tap)
+	        	all[i].getSourceCard().tap();
+	
+	        payManaCost(all[i]);
+	        all[i].chooseTargetAI();
+	        all[i].getBeforePayManaAI().execute();
+	        all[i].setActivatingPlayer(Constant.Player.Computer);
+	        AllZone.Stack.add(all[i]);
+        }
+        else{
+        	Cost_Payment pay = new Cost_Payment(cost, all[i]);
+        	pay.payComputerCosts();
+        }
 
         return false;
       }
@@ -95,6 +103,7 @@ public class ComputerUtil
         sa.getSourceCard().tap();
       
       payManaCost(sa);
+      // todo(sol): if sa has targets, if all of them are invalid, counter the spell
       sa.resolve();
 
       if (sa.getSourceCard().getKeyword().contains("Draw a card."))
@@ -177,7 +186,7 @@ public class ComputerUtil
  // Beached - Delete old
     ManaCost cost = AllZone.GameAction.GetSpellCostChange(sa);
     if(cost.isPaid())
-        return true;
+        return canPayAdditionalCosts(sa);
  // Beached - Delete old
     ArrayList<String> colors;
 
@@ -198,12 +207,38 @@ public class ComputerUtil
 
          if(cost.isPaid()) {
             //System.out.println("Cost is paid.");
-            return true;
+            return canPayAdditionalCosts(sa);
          }
       }
     }
     return false;
   }//canPayCost()
+  
+  static public boolean canPayAdditionalCosts(SpellAbility sa)
+  {
+	  Ability_Cost cost = sa.getPayCosts();
+	  if (cost == null)
+		  return true;
+	  
+	  // check additional costs.
+	  if (cost.getSacCost()){
+		  // if there's a sacrifice in the cost, just because we can Pay it doesn't mean we want to. 
+		  if (!cost.getSacThis()){
+			  String type = cost.getSacType();
+		      PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+		      CardList typeList = new CardList(play.getCards());
+		      typeList = typeList.getType(type);
+		      Card target = sa.getTargetCard();
+			  if (target != null && target.getController().equals(Constant.Player.Computer)) // don't sacrifice the card we're pumping
+				  typeList.remove(target);
+			  return typeList.size() > 0;
+		  }
+		  else if (cost.getSacThis() && AllZone.GameAction.isCardInPlay(sa.getSourceCard()))
+			  return false;
+	  }
+	  
+	  return true;
+  }
   
   static public boolean canPayCost(String cost)
   {
@@ -424,6 +459,20 @@ public class ComputerUtil
 	    AllZone.GameInfo.incrementComputerPlayedLands();
   }
   
+  static public Card chooseSacrificeType(String type, Card activate, Card target){
+      PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+      CardList typeList = new CardList(play.getCards());
+      typeList = typeList.getType(type);
+	  if (target != null && target.getController().equals(Constant.Player.Computer) && typeList.contains(target)) // don't sacrifice the card we're pumping
+		  typeList.remove(target);
+	  
+	  if (typeList.size() == 0)
+		  return null;
+	  
+      CardListUtil.sortAttackLowFirst(typeList);
+	  return typeList.get(0);
+  }
+
   static public void untapDraw()
   {
     AllZone.GameAction.drawCard(Constant.Player.Computer);

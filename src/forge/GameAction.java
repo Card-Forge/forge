@@ -3365,27 +3365,35 @@ public class GameAction {
     }//GetSpellCostChange
     
     public void playSpellAbility(SpellAbility sa) {
-    	ManaCost manaCost = new ManaCost(sa.getManaCost());
     	sa.setActivatingPlayer(Constant.Player.Human);
-    	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-    		manaCost = new ManaCost("0"); 
-    	} else {
-    		manaCost = GetSpellCostChange(sa);    		
-    	}      
-        if(manaCost.isPaid() && sa.getBeforePayMana() == null) {
-        	if (sa.getAfterPayMana() == null){
-	        	CardList HHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human).getCards());
-	        	if(HHandList.contains(sa.getSourceCard())) AllZone.Human_Hand.remove(sa.getSourceCard());
-	            AllZone.Stack.add(sa);
-	            if(sa.isTapAbility() && !sa.wasCancelled()) sa.getSourceCard().tap();
-	            if(sa.isUntapAbility()) sa.getSourceCard().untap();
-	            return;
-        	}
-        	else
-        		AllZone.InputControl.setInput(sa.getAfterPayMana());
-        }
-        else if(sa.getBeforePayMana() == null) AllZone.InputControl.setInput(new Input_PayManaCost(sa));
-        else AllZone.InputControl.setInput(sa.getBeforePayMana());
+    	if (sa.getPayCosts() != null){
+    		Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
+    		payment.payCost();
+    	}
+    	else{
+	    	ManaCost manaCost = new ManaCost(sa.getManaCost());
+	    	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+	    		manaCost = new ManaCost("0"); 
+	    	} else {
+	    		manaCost = GetSpellCostChange(sa);    		
+	    	}      
+	        if(manaCost.isPaid() && sa.getBeforePayMana() == null) {
+	        	if (sa.getAfterPayMana() == null){
+		        	CardList HHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human).getCards());
+		        	if(HHandList.contains(sa.getSourceCard())) AllZone.Human_Hand.remove(sa.getSourceCard());
+		            AllZone.Stack.add(sa);
+		            if(sa.isTapAbility() && !sa.wasCancelled()) sa.getSourceCard().tap();
+		            if(sa.isUntapAbility()) sa.getSourceCard().untap();
+		            return;
+	        	}
+	        	else
+	        		AllZone.InputControl.setInput(sa.getAfterPayMana());
+	        }
+	        else if(sa.getBeforePayMana() == null) 
+	        	AllZone.InputControl.setInput(new Input_PayManaCost(sa));
+	        else 
+	        	AllZone.InputControl.setInput(sa.getBeforePayMana());
+    	}
     }
     
     public SpellAbility[] canPlaySpellAbility(SpellAbility[] sa) {

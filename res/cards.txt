@@ -773,7 +773,7 @@ Creature Human Soldier Scout
 no text
 1/1
 First Strike
-abPumpTgt W:First Strike
+abPumpTgtC W:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/advance_scout.jpg
 
@@ -927,7 +927,7 @@ Agent of Shauku
 Creature Human Mercenary
 no text
 1/1
-abPumpTgt 1 B Sac-Land:+2/+0
+abPumpTgtC 1 B Sac-Land:+2/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_shauku.jpg
 
@@ -1022,7 +1022,7 @@ Akki Drillmaster
 Creature Goblin Shaman
 no text
 2/2
-abPumpTgt T:Haste
+abPumpTgtC T:Haste
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74393.jpg
 
@@ -1709,7 +1709,7 @@ Antler Skulkin
 Artifact Creature Scarecrow
 no text
 3/3
-abPumpTgt 2:Persist
+abPumpTgtC 2:Persist
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/antler_skulkin.jpg
 
@@ -2081,11 +2081,11 @@ Armored Guardian
 Creature Cat Soldier
 no text
 2/5
-abPumpTgt 1 W W:Protection from white
-abPumpTgt 1 W W:Protection from blue
-abPumpTgt 1 W W:Protection from black
-abPumpTgt 1 W W:Protection from red
-abPumpTgt 1 W W:Protection from green
+abPumpTgtC 1 W W:Protection from white
+abPumpTgtC 1 W W:Protection from blue
+abPumpTgtC 1 W W:Protection from black
+abPumpTgtC 1 W W:Protection from red
+abPumpTgtC 1 W W:Protection from green
 abPump 1 U U:Shroud
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_guardian.jpg
@@ -2104,8 +2104,8 @@ R
 Creature Human Wizard
 no text
 1/1
-abPumpTgt B T:+1/+0
-abPumpTgt G T:+0/+1
+abPumpTgtC B T:+1/+0
+abPumpTgtC G T:+0/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armorer_guildmage.jpg
 
@@ -2123,7 +2123,7 @@ Arnjlot's Ascent
 Enchantment
 no text
 Cumulative upkeep:U
-abPumpTgt 1:Flying:Target creature gains flying until end of turn.
+abPumpTgtC 1:Flying:Target creature gains flying until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arnjlots_ascent.jpg
 
@@ -2401,7 +2401,7 @@ Auriok Bladewarden
 Creature Human Soldier
 no text
 1/1
-abPumpTgt T:+X/+X:Target creature get +X/+X until end of turn, where X is Auriok Bladewarden's power.
+abPumpTgtC T:+X/+X:Target creature get +X/+X until end of turn, where X is Auriok Bladewarden's power.
 SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_bladewarden.jpg
@@ -2833,8 +2833,8 @@ Bant Battlemage
 Creature Human Wizard
 no text
 2/2
-abPumpTgt G T:Trample
-abPumpTgt U T:Flying
+abPumpTgtC G T:Trample
+abPumpTgtC U T:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_battlemage.jpg
 
@@ -3076,7 +3076,7 @@ Creature Wall
 no text
 1/3
 Defender
-abPumpTgt T:Haste
+abPumpTgtC T:Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_rampart.jpg
 
@@ -3597,8 +3597,8 @@ Blighted Shaman
 Creature Human Cleric Shaman
 no text
 1/1
-abPumpTgt T Sac-Land:+1/+1
-abPumpTgt T Sac-Creature:+2/+2
+abPumpTgtC T Sac-Land:+1/+1
+abPumpTgtC T Sac-Creature:+2/+2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_shaman.jpg
 
@@ -4184,8 +4184,8 @@ RW RW
 Creature Human Wizard
 no text
 2/2
-abPumpTgt 1 R:Haste
-abPumpTgt 1 W:First Strike
+abPumpTgtC 1 R:Haste
+abPumpTgtC 1 W:First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_guildmage.jpg
 
@@ -4861,7 +4861,7 @@ U
 Creature Merfolk Wizard
 no text
 1/1
-abPumpTgt 1 U T:Flying
+abPumpTgtC 1 U T:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caller_of_gales.jpg
 
@@ -4991,7 +4991,7 @@ Captive Flame
 2 R
 Enchantment 
 no text
-abPumpTgt R:+1/+0
+abPumpTgtC R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/captive_flame.jpg
 
@@ -5236,7 +5236,7 @@ Creature Human
 no text
 1/4
 WheneverKeyword:Attacks:Self:Play:StatsPumpEOT/1/-2:Self:ASAP:No_Condition:No Special Condition:Whenever Cave People attacks, it gets +1/-2 until end of turn.
-abPumpTgt 1 R R T:Mountainwalk.
+abPumpTgtC 1 R R T:Mountainwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cave_people.jpg
 
@@ -5424,7 +5424,7 @@ U
 Creature Merfolk Wizard
 no text
 1/1
-abPumpTgt R T:+2/+0
+abPumpTgtC R T:+2/+0
 G, tap: add W
 G, tap: add U
 G, tap: add B
@@ -5663,7 +5663,7 @@ G
 Creature Spirit
 no text
 1/1
-abPumpTgt 0 Sac-CARDNAME:+1/+1
+abPumpTgtC 0 Sac-CARDNAME:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_thorns.jpg
 
@@ -6563,7 +6563,7 @@ Artifact Creature Wall
 no text
 0/4
 Defender
-abPumpTgt T:+0/+4
+abPumpTgtC T:+0/+4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crenellated_wall.jpg
 
@@ -6581,7 +6581,7 @@ Creature Human Cleric
 no text
 1/1
 Protection from red
-abPumpTgt W:Protection from red
+abPumpTgtC W:Protection from red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_acolyte.jpg
 
@@ -7205,7 +7205,7 @@ Dauthi Embrace
 2 B
 Enchantment
 no text
-abPumpTgt B B:Shadow
+abPumpTgtC B B:Shadow
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_embrace.jpg
 
@@ -7253,7 +7253,7 @@ Dauthi Trapper
 Creature Dauthi Minion
 no text
 1/1 
-abPumpTgt T:Shadow
+abPumpTgtC T:Shadow
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_trapper.jpg
 
@@ -7381,7 +7381,7 @@ Creature Angel
 no text
 5/7
 Flying
-abPumpTgt W W:Indestructible
+abPumpTgtC W W:Indestructible
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathless_angel.jpg
 
@@ -7424,7 +7424,7 @@ Creature Zombie Fungus
 At the beginning of your upkeep, put a spore counter on Deathspore Thallid.
 1/1
 Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
-abPumpTgt 0 Sac-Saproling:-1/-1
+abPumpTgtC 0 Sac-Saproling:-1/-1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathspore_thallid.jpg
 
@@ -8966,7 +8966,7 @@ Elven Lyre
 2
 Artifact
 no text
-abPumpTgt 1 T Sac-CARDNAME:+2/+2
+abPumpTgtC 1 T Sac-CARDNAME:+2/+2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_lyre.jpg
 
@@ -9070,7 +9070,7 @@ G
 Creature Elf
 no text
 1/1
-abPumpTgt G:Trample
+abPumpTgtC G:Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_herder.jpg
 
@@ -9563,7 +9563,7 @@ Ethereal Usher
 Creature Spirit
 no text
 2/3
-abPumpTgt U T:Unblockable
+abPumpTgtC U T:Unblockable
 Transmute:1 U U
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethereal_usher.jpg
@@ -10806,7 +10806,7 @@ Flowstone Overseer
 Creature Beast
 no text
 4/4
-abPumpTgt R R:+1/-1
+abPumpTgtC R R:+1/-1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_overseer.jpg
 
@@ -10879,7 +10879,7 @@ Flying Carpet
 4
 Artifact
 no text
-abPumpTgt 2 T:Flying
+abPumpTgtC 2 T:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flying_carpet.jpg
 
@@ -11355,7 +11355,7 @@ Fyndhorn Bow
 2
 Artifact
 no text
-abPumpTgt 3 T:First Strike
+abPumpTgtC 3 T:First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fyndhorn_bow.jpg
 
@@ -11632,7 +11632,7 @@ Ghitu War Cry
 2 R
 Enchantment 
 no text
-abPumpTgt R:+1/+0
+abPumpTgtC R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghitu_war_cry.jpg
 
@@ -11678,7 +11678,7 @@ Ghost Warden
 Creature Spirit
 no text
 1/1
-abPumpTgt T:+1/+1
+abPumpTgtC T:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96901.jpg
 
@@ -12486,7 +12486,7 @@ Goblin Rimerunner
 Snow Creature Goblin Warrior
 no text
 2/2
-abPumpTgt T:CARDNAME can't block.
+abPumpTgtC T:CARDNAME can't block.
 abPump S:Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_rimerunner.jpg
@@ -12542,7 +12542,7 @@ R
 Creature Goblin
 no text
 1/1
-abPumpTgt 0 Sac-Goblin:+1/+1
+abPumpTgtC 0 Sac-Goblin:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_sledder.jpg
 
@@ -12844,7 +12844,7 @@ G
 Creature Human Wizard
 no text
 1/1
-abPumpTgt W T:First Strike
+abPumpTgtC W T:First Strike
 abDamageTgtCP R T:1:Drawback$DamageYou/1:Granger Guildmage deals 1 damage to target creature or player and 1 damage to you.:Granger Guildmage - damage creature or player and you.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granger_guildmage.jpg
@@ -13135,7 +13135,7 @@ Creature Human Wizard
 no text
 2/2
 abDrawCards U T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Grixis Battlemage - draw a card and discard a card
-abPumpTgt R T:CARDNAME can't block.:Target creature can't block this turn.:Grixis Battlemage - target creature cannot block this turn
+abPumpTgtC R T:CARDNAME can't block.:Target creature can't block this turn.:Grixis Battlemage - target creature cannot block this turn
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grixis_battlemage.jpg
 
@@ -13212,7 +13212,7 @@ RG RG
 Creature Human Shaman
 no text
 2/2
-abPumpTgt 3 G:+2/+2
+abPumpTgtC 3 G:+2/+2
 abDamageTgtP 3 R Sac-Land:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_guildmage.jpg
@@ -13545,7 +13545,7 @@ Creature Efreet
 no text
 2/2
 Flying
-abPumpTgt 1 U U:Flying
+abPumpTgtC 1 U U:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harmattan_efreet.jpg
 
@@ -13778,8 +13778,8 @@ Heartwood Shard
 3
 Artifact
 no text
-abPumpTgt 3 T:Trample
-abPumpTgt G T:Trample
+abPumpTgtC 3 T:Trample
+abPumpTgtC G T:Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartwood_shard.jpg
 
@@ -14656,7 +14656,7 @@ W
 Creature Human Cleric
 no text
 1/1
-abPumpTgt 1 W W:+1/+1
+abPumpTgtC 1 W W:+1/+1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_priest.jpg
 
@@ -14665,7 +14665,7 @@ W
 Creature Human Soldier Scout
 no text
 1/1
-abPumpTgt 1 T:First Strike
+abPumpTgtC 1 T:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_scout.jpg
 
@@ -15312,7 +15312,7 @@ Iron Lance
 2
 Artifact
 no text
-abPumpTgt 3 T:First Strike
+abPumpTgtC 3 T:First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_lance.jpg
 
@@ -15426,7 +15426,7 @@ Ivy Dancer
 Creature Dryad Shaman
 no text
 1/2
-abPumpTgt T:Forestwalk
+abPumpTgtC T:Forestwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivy_dancer.jpg
 
@@ -15462,7 +15462,7 @@ Jabari's Banner
 2
 Artifact
 no text
-abPumpTgt 1 T:Flanking
+abPumpTgtC 1 T:Flanking
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jabaris_banner.jpg
 
@@ -15545,7 +15545,7 @@ Jamuraan Lion
 Creature Cat
 no text
 3/1
-abPumpTgt W T:CARDNAME can't block.
+abPumpTgtC W T:CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jamuraan_lion.jpg
 
@@ -15925,7 +15925,7 @@ Creature Spirit
 no text
 1/2
 Flying
-abPumpTgt T:+1/+2
+abPumpTgtC T:+1/+2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card79105.jpg
 
@@ -18334,8 +18334,9 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_cof
 Magus of the Disk
 2 W W
 Creature Human Wizard
-Magus of the Disk comes into play tapped.
+no text
 2/4
+CARDNAME enters the battlefield tapped.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card126298.jpg
 
@@ -18760,7 +18761,7 @@ Artifact Creature Masticore
 Choose and discard a card during your upkeep, or sacrifice Masticore.
 4/4
 RegenerateMe:2
-abDamageTgtC2:1
+abDamageTgtC 2:1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/masticore.jpg
 
@@ -19463,7 +19464,7 @@ R
 Creature Goblin
 no text
 1/1
-abPumpTgt 0 Sac-Goblin:+1/+1
+abPumpTgtC 0 Sac-Goblin:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mogg_raider.jpg
 
@@ -19782,11 +19783,11 @@ W
 Creature Human Cleric
 no text
 1/1
-abPumpTgt T:Protection from black
-abPumpTgt T:Protection from blue
-abPumpTgt T:Protection from green
-abPumpTgt T:Protection from red
-abPumpTgt T:Protection from white
+abPumpTgtC T:Protection from black
+abPumpTgtC T:Protection from blue
+abPumpTgtC T:Protection from green
+abPumpTgtC T:Protection from red
+abPumpTgtC T:Protection from white
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mother_of_runes.jpg
 
@@ -20164,7 +20165,7 @@ Nantuko Disciple
 Creature Insect Druid
 no text
 2/2
-abPumpTgt G T:+2/+2
+abPumpTgtC G T:+2/+2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_disciple.jpg
 
@@ -20265,7 +20266,7 @@ Naya Battlemage
 Creature Human Shaman
 no text
 2/2
-abPumpTgt R T:+2/+0
+abPumpTgtC R T:+2/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_battlemage.jpg
 
@@ -20313,7 +20314,7 @@ Need for Speed
 R
 Enchantment
 no text
-abPumpTgt 0 Sac-Land:Haste
+abPumpTgtC 0 Sac-Land:Haste
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/need_for_speed.jpg
 
@@ -20465,7 +20466,8 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_hoversail
 Nevinyrral's Disk
 4
 Artifact
-Nevinyrral's Disk comes into play tapped.
+no text
+CARDNAME enters the battlefield tapped.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3803.jpg
 
@@ -20746,7 +20748,7 @@ Noble Steeds
 2 W
 Enchantment
 no text
-abPumpTgt 1 W:First Strike
+abPumpTgtC 1 W:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_steeds.jpg
 
@@ -20998,7 +21000,7 @@ Creature Human Cleric
 no text
 1/1
 Protection from black
-abPumpTgt W:Protection from black
+abPumpTgtC W:Protection from black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obsidian_acolyte.jpg
 
@@ -22104,8 +22106,8 @@ Phyrexian Plaguelord
 Creature Carrier
 no text
 4/4
-abPumpTgt T Sac-CARDNAME:-4/-4
-abPumpTgt 0 Sac-Creature:-1/-1
+abPumpTgtC T Sac-CARDNAME:-4/-4
+abPumpTgtC 0 Sac-Creature:-1/-1
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_plaguelord.jpg
@@ -22270,7 +22272,7 @@ Creature Faerie
 no text
 1/1
 Flying
-abPumpTgt G G G T:Flying
+abPumpTgtC G G G T:Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pixie_queen.jpg
 
@@ -22296,7 +22298,7 @@ B
 Creature Spirit
 no text
 1/1
-abPumpTgt B Sac-Creature:-1/-1
+abPumpTgtC B Sac-Creature:-1/-1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plagued_rusalka.jpg
@@ -22501,7 +22503,7 @@ Power Armor
 4
 Artifact
 Domain
-abPumpTgt 3 T:+X/+X:Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
+abPumpTgtC 3 T:+X/+X:Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
 SVar:X:Count$Domain
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_armor.jpg
@@ -22510,7 +22512,7 @@ Power Matrix
 4
 Artifact
 no text
-abPumpTgt T:+1/+1/Flying & First Strike & Trample
+abPumpTgtC T:+1/+1/Flying & First Strike & Trample
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_matrix.jpg
 
@@ -23966,7 +23968,7 @@ Restless Bones
 Creature Skeleton
 no text
 1/1
-abPumpTgt 3 B T:Swampwalk
+abPumpTgtC 3 B T:Swampwalk
 RegenerateMe:1 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/restless_bones.jpg
@@ -25218,7 +25220,7 @@ Scale of Chiss-Goria
 Artifact
 Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
 Flash
-abPumpTgt T:+0/+1
+abPumpTgtC T:+0/+1
 CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scale_of_chiss_goria.jpg
@@ -25637,7 +25639,7 @@ Seal of Strength
 G
 Enchantment
 no text
-abPumpTgt 0 Sac-CARDNAME:+3/+3
+abPumpTgtC 0 Sac-CARDNAME:+3/+3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_strength.jpg
 
@@ -25737,7 +25739,7 @@ GW
 Creature Elf Shaman
 no text
 1/1
-abPumpTgt 2 G W:+3/+3:Drawback$UntapTgt:Target creature gets +3/+3 until end of turn. Untap that creature.
+abPumpTgtC 2 G W:+3/+3:Drawback$UntapTgt:Target creature gets +3/+3 until end of turn. Untap that creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seedcradle_witch.jpg
 
@@ -26151,8 +26153,8 @@ U
 Creature Human Wizard
 no text
 1/1
-abPumpTgt W T:First Strike
-abPumpTgt B T:+1/+0
+abPumpTgtC W T:First Strike
+abPumpTgtC B T:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaper_guildmage.jpg
 
@@ -26212,7 +26214,7 @@ W
 Creature Human Soldier
 no text
 1/1
-abPumpTgt 0 Sac-CARDNAME:+0/+4
+abPumpTgtC 0 Sac-CARDNAME:+0/+4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shield_mate.jpg
 
@@ -26885,7 +26887,7 @@ no cost
 Land
 no text
 tap: add 1
-abPumpTgt R G T:+1/+1/Trample
+abPumpTgtC R G T:+1/+1/Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skarrg_the_rage_pits.jpg
 
@@ -27386,7 +27388,7 @@ Smokespew Invoker
 Creature Zombie Mutant
 no text
 3/1
-abPumpTgt 7 B:-3/-3
+abPumpTgtC 7 B:-3/-3
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smokespew_invoker.jpg
@@ -28898,11 +28900,11 @@ Stormscape Master
 Creature Human Wizard
 no text
 2/2
-abPumpTgt W W T:Protection from white.
-abPumpTgt W W T:Protection from blue.
-abPumpTgt W W T:Protection from black.
-abPumpTgt W W T:Protection from red.
-abPumpTgt W W T:Protection from green.
+abPumpTgtC W W T:Protection from white.
+abPumpTgtC W W T:Protection from blue.
+abPumpTgtC W W T:Protection from black.
+abPumpTgtC W W T:Protection from red.
+abPumpTgtC W W T:Protection from green.
 abLoseLifeTgt B B T:2:Drawback$YouGainLife/2:Target player loses 2 life and you gain 2 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormscape_master.jpg
@@ -29237,7 +29239,7 @@ no cost
 Land
 no text
 tap: add 1
-abPumpTgt 2 R W T:Double Strike
+abPumpTgtC 2 R W T:Double Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunhome_fortress_of_the_legion.jpg
 
@@ -29426,7 +29428,7 @@ Sustenance
 1 G
 Enchantment
 no text
-abPumpTgt 1 Sac-Land:+1/+1
+abPumpTgtC 1 Sac-Land:+1/+1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sustenance.jpg
@@ -30229,7 +30231,7 @@ Creature Fungus
 At the beginning of your upkeep, put a spore counter on Thallid Germinator.
 2/2
 Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
-abPumpTgt 0 Sac-Saproling:+1/+1
+abPumpTgtC 0 Sac-Saproling:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thallid_germinator.jpg
 
@@ -30445,7 +30447,7 @@ G
 Creature Human Wizard
 no text
 1/1
-abPumpTgt R T:First Strike
+abPumpTgtC R T:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_apprentice.jpg
 
@@ -30464,11 +30466,11 @@ Creature Human Wizard
 no text
 2/2
 abDamageTgtC R R T:2
-abPumpTgt W W T:Protection from white
-abPumpTgt W W T:Protection from blue
-abPumpTgt W W T:Protection from black
-abPumpTgt W W T:Protection from red
-abPumpTgt W W T:Protection from green
+abPumpTgtC W W T:Protection from white
+abPumpTgtC W W T:Protection from blue
+abPumpTgtC W W T:Protection from black
+abPumpTgtC W W T:Protection from red
+abPumpTgtC W W T:Protection from green
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_master.jpg
 
@@ -30641,7 +30643,7 @@ Thriss, Nantuko Primus
 Legendary Creature Insect Druid
 no text
 5/5
-abPumpTgt G T:+5/+5
+abPumpTgtC G T:+5/+5
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thriss_nantuko_primus.jpg
 
@@ -30705,7 +30707,7 @@ Creature Human Wizard
 no text
 1/1
 abLoseLifeTgt B T:1
-abPumpTgt G T:+1/+1
+abPumpTgtC G T:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderscape_apprentice.jpg
 
@@ -30829,7 +30831,7 @@ Timberwatch Elf
 Creature Elf
 no text
 1/2
-abPumpTgt T:+X/+X:Target creature get +X/+X until end of turn, where X is the number of Elves on the battlefield.
+abPumpTgtC T:+X/+X:Target creature get +X/+X until end of turn, where X is the number of Elves on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Elf
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card45121.jpg
@@ -31029,7 +31031,7 @@ Tooth of Chiss-Goria
 Artifact
 Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
 Flash
-abPumpTgt T:+1/+0
+abPumpTgtC T:+1/+0
 CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tooth_of_chiss_goria.jpg
@@ -31189,7 +31191,7 @@ Tower of Champions
 4
 Artifact
 no text
-abPumpTgt 8 T:+6/+6
+abPumpTgtC 8 T:+6/+6
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_champions.jpg
 
@@ -31214,7 +31216,7 @@ no cost
 Land
 no text
 tap: add 1
-abPumpTgt 1 T:Protection from artifacts
+abPumpTgtC 1 T:Protection from artifacts
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_the_magistrate.jpg
 
@@ -31605,7 +31607,7 @@ Legendary Creature Human Wizard
 no text
 2/2
 Flying
-abPumpTgt R G T:+2/+2
+abPumpTgtC R G T:+2/+2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tuknir_deathlock.jpg
 
@@ -31992,7 +31994,7 @@ Creature Dryad
 no text
 1/1
 Forestwalk
-abPumpTgt 1 G G:Forestwalk
+abPumpTgtC 1 G G:Forestwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unseen_walker.jpg
 
@@ -32129,7 +32131,7 @@ Ursapine
 Creature Beast
 no text
 3/3
-abPumpTgt G:+1/+1
+abPumpTgtC G:+1/+1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ursapine.jpg
 
@@ -32802,7 +32804,7 @@ Viridian Lorebearers
 Creature Elf Shaman
 no text
 3/3
-abPumpTgt 3 G T:+X/+X:Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
+abPumpTgtC 3 G T:+X/+X:Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
 SVar:X:Count$TypeOppCtrl.Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_lorebearers.jpg
@@ -32915,7 +32917,7 @@ Creature Fungus
 At the beginning of your upkeep, put a spore counter on Vitaspore Thallid.
 1/1
 Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
-abPumpTgt 0 Sac-Saproling:Haste
+abPumpTgtC 0 Sac-Saproling:Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitaspore_thallid.jpg
 
@@ -33642,7 +33644,7 @@ War Chariot
 3
 Artifact
 no text
-abPumpTgt 3 T:Trample
+abPumpTgtC 3 T:Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_chariot.jpg
 
@@ -33845,7 +33847,7 @@ G
 Creature Elf
 no text
 1/1
-abPumpTgt T:Forestwalk
+abPumpTgtC T:Forestwalk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weatherseed_elf.jpg
 
@@ -33991,7 +33993,7 @@ Whip Sergeant
 Creature Human Soldier
 no text
 2/1
-abPumpTgt R:Haste
+abPumpTgtC R:Haste
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whip_sergeant.jpg
 
@@ -34243,7 +34245,7 @@ Wildheart Invoker
 Creature Elf Shaman
 no text
 4/3
-abPumpTgt 8:+5/+5/Trample
+abPumpTgtC 8:+5/+5/Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wildheart_invoker.jpg
 
@@ -34316,7 +34318,7 @@ Creature Faerie
 no text
 1/1
 Flying
-abPumpTgt T:Flying
+abPumpTgtC T:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_dancer.jpg
 
@@ -34883,7 +34885,7 @@ Wyluli Wolf
 Creature Wolf
 no text
 1/1
-abPumpTgt T:+1/+1
+abPumpTgtC T:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wyluli_wolf.jpg
 

@@ -1,6 +1,25 @@
 package forge;
 
 public class Ability_Cost {
+	private boolean tgtPlayer = false;
+	public boolean canTgtPlayer() { return tgtPlayer; }
+	private boolean tgtCreature = false;
+	public boolean canTgtCreature() { return tgtCreature; }
+	
+	public boolean canTgtCreaturePlayer() { return tgtCreature && tgtPlayer; }
+	public boolean doesTarget() { return tgtCreature || tgtPlayer; }
+	
+	private int minTargets = 0;
+	public int getMinTargets() { return minTargets; }
+	private int maxTargets = 0;
+	public int getMaxTargets() { return maxTargets; }
+	// add array of targets here?
+	
+	private int numTargeted = 0;
+	public int getNumTargeted() { return numTargeted; }
+	public void incrementTargets() { numTargeted++; }
+	public void resetTargets() { numTargeted = 0; }
+	
 	private boolean sacCost = false;
 	public boolean getSacCost() { return sacCost; }
 	private String sacType = "";	// <type> or CARDNAME
@@ -25,7 +44,35 @@ public class Ability_Cost {
 	
 	public Ability_Cost(String parse, String cardName)
 	{
+		// when adding new costs for cost string, place them here
 		name = cardName;
+		
+		if (parse.contains("Tgt")){
+			// Tgt{C}{P}{/<MinTargets>/<MaxTargets>} 
+			int tgtPos = parse.indexOf("Tgt");
+			int endTgt = parse.indexOf(" ");
+			//System.out.println(cardName);
+			String tgtStr = parse.substring(tgtPos, endTgt);
+			parse = parse.substring(endTgt+1);
+			tgtStr = tgtStr.replace("Tgt", "");
+			String[] tgtSplit = tgtStr.split("/");
+			
+			if (tgtSplit[0].contains("C"))
+				tgtCreature = true;
+			if (tgtSplit[0].contains("P"))
+				tgtPlayer = true;
+			//todo(sol) add Opp
+			
+			if (tgtSplit.length != 3){
+				minTargets = 1;
+				maxTargets = 1;
+			}
+			else{
+				minTargets = Integer.parseInt(tgtSplit[1]);
+				maxTargets = Integer.parseInt(tgtSplit[2]);
+			}
+		}
+		
         if(parse.contains("Sac-")) {
         	sacCost = true;
         	int sacPos = parse.indexOf("Sac-");
@@ -40,7 +87,7 @@ public class Ability_Cost {
             parse = parse.trim();
         }
         manaCost = parse.trim();
-        if (manaCost == "")
+        if (manaCost.equals(""))
         	manaCost = "0";
 	}
 	
@@ -99,4 +146,18 @@ public class Ability_Cost {
 		return cost.toString();
 	}
 	
+	public String targetString()
+	{
+		String tgt = "";
+		if (tgtCreature)
+			tgt += "creature";
+		if (tgtPlayer && !tgt.equals(""))
+			tgt += " or ";
+		if (tgtPlayer)
+			tgt += "player";
+		
+		tgt += ".";
+		
+		return "target " + tgt;
+	}
 }

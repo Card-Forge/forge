@@ -1039,6 +1039,12 @@ public class Card extends MyObservable {
         return sickness;
     }
     
+    public boolean isSick() {
+        if(getKeyword().contains("Haste")) return false;
+        
+        return sickness && isCreature();
+    }
+    
     public void setRarity(String s) {
         rarity = s;
     }

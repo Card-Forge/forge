@@ -39,6 +39,8 @@ public abstract class SpellAbility {
     private Input           afterResolve;
     private Input           afterPayMana;
     
+    protected Ability_Cost	payCosts		   = null;
+    
     private Command         cancelCommand      = Command.Blank;
     private Command         beforePayManaAI    = Command.Blank;
     
@@ -226,6 +228,14 @@ public abstract class SpellAbility {
     
     public void setAfterPayMana(Input in) {
         afterPayMana = in;
+    }
+    
+    public Ability_Cost getPayCosts() {
+    	return payCosts;
+    }
+    
+    public void setPayCosts(Ability_Cost abCost) {
+    	payCosts = abCost;
     }
     
     public Input getAfterResolve() {
