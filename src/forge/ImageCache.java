@@ -117,6 +117,11 @@ public class ImageCache implements NewConstants {
         return getImage(key + "#" + scale);
     }
     
+    public static BufferedImage getOriginalImage(Card card) {
+        String key = (card.isFaceDown() && card.getController() == Constant.Player.Computer)? "Morph":getKey(card);
+        return getImage(key);
+    }
+    
     /**
      * Returns the Image corresponding to the key
      */

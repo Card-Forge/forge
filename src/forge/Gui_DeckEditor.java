@@ -3,14 +3,19 @@ package forge;
 
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -28,9 +33,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.MouseInputListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileFilter;
@@ -97,6 +104,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     
     private CardDetailPanel   detail               = new CardDetailPanel(null);
     private CardPicturePanel  picture              = new CardPicturePanel(null);
+    private JPanel            glassPane;
     
     @Override
     public void setTitle(String message) {
@@ -322,7 +330,56 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     }//show(Command)
     
     private void addListeners() {
-
+        MouseInputListener l = new MouseInputListener() {
+            public void mouseReleased(MouseEvent e) {
+                redispatchMouseEvent(e);
+            }
+            
+            public void mousePressed(MouseEvent e) {
+                redispatchMouseEvent(e);
+            }
+            
+            public void mouseExited(MouseEvent e) {
+                redispatchMouseEvent(e);
+            }
+            
+            public void mouseEntered(MouseEvent e) {
+                redispatchMouseEvent(e);
+            }
+            
+            public void mouseClicked(MouseEvent e) {
+                redispatchMouseEvent(e);
+            }
+            
+            public void mouseMoved(MouseEvent e) {
+                redispatchMouseEvent(e);
+            }
+            
+            public void mouseDragged(MouseEvent e) {
+                redispatchMouseEvent(e);
+            }
+            
+            private void redispatchMouseEvent(MouseEvent e) {
+                Container content = getContentPane();
+                Point glassPoint = e.getPoint();
+                Point contentPoint = SwingUtilities.convertPoint(glassPane, glassPoint, content);
+                
+                Component component = SwingUtilities.getDeepestComponentAt(content, contentPoint.x, contentPoint.y);
+                if(component == null || !SwingUtilities.isDescendingFrom(component, picture)) {
+                    glassPane.setVisible(false);
+                }
+            }
+        };
+        
+        glassPane.addMouseMotionListener(l);
+        glassPane.addMouseListener(l);
+        
+        picture.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                if(picture.getCard() != null) glassPane.setVisible(true);
+            }
+        });
     }//addListeners()
     
     private void setup() {
@@ -625,6 +682,18 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         this.getContentPane().add(redCheckBox, null);
         this.getContentPane().add(greenCheckBox, null);
         this.getContentPane().add(colorlessCheckBox, null);
+        
+        glassPane = new JPanel() {
+            private static final long serialVersionUID = 7394924497724994317L;
+            
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                Image image = ImageCache.getOriginalImage(picture.getCard());
+                g.drawImage(image, glassPane.getWidth() - image.getWidth(null), glassPane.getHeight()
+                        - image.getHeight(null), null);
+            }
+        };
+        setGlassPane(glassPane);
     }
     
     void addButton_actionPerformed(ActionEvent e) {
