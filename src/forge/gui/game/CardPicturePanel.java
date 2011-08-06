@@ -13,7 +13,6 @@ import java.awt.Insets;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import arcane.ui.ScaledImagePanel;
@@ -48,7 +47,6 @@ public class CardPicturePanel extends JPanel implements CardContainer {
         panel.setScalingBlur(false);
         panel.setScalingType(ScalingType.bicubic);
         panel.setScalingMultiPassType(MultipassType.none);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         
         addComponentListener(new ComponentAdapter() {
             @Override

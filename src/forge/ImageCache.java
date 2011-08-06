@@ -31,12 +31,12 @@ import forge.properties.NewConstants;
  * The keys are the following:
  * <ul>
  * <li>Keys start with the file name, extension is skipped</li>
+ * <li>The key without suffix belongs to the unmodified image from the file</li>
  * <li>If the key belongs to a token, "#Token" is appended</li>
  * <li>If the key belongs to the unrotated image, "#Normal" is appended</li>
  * <li>If the key belongs to the rotated image, "#Tapped" is appended</li>
  * <li>If the key belongs to the large preview image, "#<i>scale</i>" is appended, where scale is a double
  * precision floating point number</li>
- * <li>The key without suffix belongs to the unmodified image from the file</li>
  * </ul>
  */
 public class ImageCache implements NewConstants {
@@ -84,7 +84,7 @@ public class ImageCache implements NewConstants {
                         return image;
                     }
                 } catch(Exception ex) {
-                    System.out.println("Exception, no image created");
+                    System.err.println("Exception, no image created");
                     if(ex instanceof ComputationException) throw (ComputationException) ex;
                     else throw new ComputationException(ex);
                 }
@@ -111,9 +111,8 @@ public class ImageCache implements NewConstants {
         if(original == null) return null;
         
         double scale = min((double) width / original.getWidth(), (double) height / original.getHeight());
-        //TODO here would be the place to limit the scaling, scaling option in menu ?
-        if(scale > 1)
-        	scale = 1;
+        //here would be the place to limit the scaling, scaling option in menu ?
+        if(scale > 1) scale = 1;
         
         return getImage(key + "#" + scale);
     }
@@ -187,11 +186,11 @@ public class ImageCache implements NewConstants {
 //        at.translate(srcHeight, 0);
 //        at.rotate(PI / 2);
         double scale = min((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
-
+        
         BufferedImage image = new BufferedImage(tgtWidth, tgtHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) image.getGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2d.drawImage(scale < 0.5 ?  ImageUtil.getBlurredImage(original, 3, 1.0f) : original, at, null);
+        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 3, 1.0f):original, at, null);
         g2d.dispose();
         return image;
     }
@@ -211,11 +210,11 @@ public class ImageCache implements NewConstants {
         at.rotate(Math.PI / 2);
         
         double scale = min((double) tgtWidth / srcWidth, (double) tgtHeight / srcHeight);
-
+        
         BufferedImage image = new BufferedImage(tgtHeight, tgtWidth, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) image.getGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2d.drawImage(scale < 0.5 ?  ImageUtil.getBlurredImage(original, 3, 1.0f) : original, at, null);
+        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 3, 1.0f):original, at, null);
         g2d.dispose();
         return image;
     }
@@ -233,7 +232,7 @@ public class ImageCache implements NewConstants {
                 (int) (original.getHeight() * scale), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) image.getGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g2d.drawImage(scale < 0.5 ?  ImageUtil.getBlurredImage(original, 3, 1.0f) : original, at, null);
+        g2d.drawImage(scale < 0.5? ImageUtil.getBlurredImage(original, 3, 1.0f):original, at, null);
         g2d.dispose();
         return image;
     }
