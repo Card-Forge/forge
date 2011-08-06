@@ -362,7 +362,8 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                     }
                     //right click:
                     if(e.isMetaDown()) {
-                        if(att.contains(cardPanel.getCard()) && (inputControl.input instanceof Input_Attack))  {
+                        if(att.contains(cardPanel.getCard()) && (inputControl.input instanceof Input_Attack) 
+                        		&& !cardPanel.getCard().getKeyword().contains("CARDNAME attacks each turn if able."))  {
                             cardPanel.getCard().untap();
                             AllZone.Combat.removeFromCombat(cardPanel.getCard());
                         }
