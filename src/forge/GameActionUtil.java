@@ -175,7 +175,6 @@ public class GameActionUtil {
 			Ability ability = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.addDamage(player, crd, 1);
 					player.addDamage(1, crd);
 				}
 			};// Ability
@@ -195,7 +194,6 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						//Lifeblood controller (opponent in this case) gains 1 life
-						//AllZone.GameAction.gainLife(opponent, 1);
 						opponent.gainLife(1);
 					}
 				};//Ability
@@ -208,6 +206,9 @@ public class GameActionUtil {
 			}//for
 		}//end Lifeblood
 		
+		/*
+		 * Whenever a Forest an opponent controls becomes tapped, you gain 1 life.
+		 */
 		if(c.getType().contains("Forest")) {
 			final Player opponent = c.getController().getOpponent();
 			final CardList lifetaps = AllZoneUtil.getPlayerCardsInPlay(opponent, "Lifetap");
@@ -216,7 +217,6 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						//Lifetap controller (opponent in this case) gains 1 life
-						//AllZone.GameAction.gainLife(opponent, 1);
 						opponent.gainLife(1);
 					}
 				};//Ability
@@ -293,7 +293,6 @@ public class GameActionUtil {
 					Ability ability = new Ability(card, "0") {
 						@Override
 						public void resolve() {
-							//AllZone.GameAction.addDamage(activePlayer, source, 2);
 							activePlayer.addDamage(2, source);
 						}
 					};//Ability
@@ -319,7 +318,6 @@ public class GameActionUtil {
 					Ability ability = new Ability(card, "0") {
 						@Override
 						public void resolve() {
-							//AllZone.GameAction.addDamage(activePlayer, source, 2);
 							activePlayer.addDamage(2, source);
 						}
 					};//Ability
@@ -371,7 +369,6 @@ public class GameActionUtil {
 				Ability ability = new Ability(decree, "0") {
 					@Override
 					public void resolve() {
-						//AllZone.GameAction.addDamage(source.getController(), crd, 1);
 						source.getController().addDamage(1, crd);
 					}
 				};//Ability
@@ -2489,14 +2486,7 @@ public class GameActionUtil {
 	}
 
 	public static void playCard_Standstill(Card c) {
-		PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-		PlayerZone cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-
-		CardList list = new CardList();
-		list.addAll(hplay.getCards());
-		list.addAll(cplay.getCards());
-
-		list = list.getName("Standstill");
+		CardList list = AllZoneUtil.getCardsInPlay("Standstill");
 
 		for(int i = 0; i < list.size(); i++) {
 			final Player drawer = c.getController().getOpponent();
@@ -2524,14 +2514,7 @@ public class GameActionUtil {
 	}
 
 	public static void playCard_Memory_Erosion(Card c) {
-		PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-		PlayerZone cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-
-		CardList list = new CardList();
-		list.addAll(hplay.getCards());
-		list.addAll(cplay.getCards());
-
-		list = list.getName("Memory Erosion");
+		CardList list = AllZoneUtil.getCardsInPlay("Memory Erosion");
 
 		for(int i = 0; i < list.size(); i++) {
 			final Card card = list.get(i);
@@ -2572,14 +2555,7 @@ public class GameActionUtil {
 	}
 
 	public static void playCard_SolKanar(Card c) {
-		PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-		PlayerZone cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-
-		CardList list = new CardList();
-		list.addAll(hplay.getCards());
-		list.addAll(cplay.getCards());
-
-		list = list.getName("Sol'kanar the Swamp King");
+		CardList list = AllZoneUtil.getCardsInPlay("Sol'kanar the Swamp King");
 
 		if(list.size() > 0 && c.isBlack()) {
 			final Card card = list.get(0);
@@ -2588,7 +2564,6 @@ public class GameActionUtil {
 			Ability ability2 = new Ability(card, "0") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.gainLife(controller, 1);
 					controller.gainLife(1);
 				}
 			}; // ability2
@@ -2604,10 +2579,7 @@ public class GameActionUtil {
 	}
 
     public static void playCard_Enchantress_Draw(Card c) {
-
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-        CardList list = new CardList();
-        list.addAll(play.getCards());
+        CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController());
 
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card crd) {
@@ -2670,13 +2642,8 @@ public class GameActionUtil {
     }// playCard_Enchantress_Draw()
 
 	public static void playCard_Gilt_Leaf_Archdruid(Card c) {
-
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Gilt-Leaf Archdruid");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Gilt-Leaf Archdruid");
+		
 		if(c.getType().contains("Druid") || c.getKeyword().contains("Changeling")) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(0);
@@ -2701,12 +2668,8 @@ public class GameActionUtil {
 	}
 
 	public static void playCard_Reki(Card c) {
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Reki, the History of Kamigawa");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Reki, the History of Kamigawa");
+		
 		if(c.getType().contains("Legendary")) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(0);
@@ -2714,7 +2677,6 @@ public class GameActionUtil {
 				Ability ability2 = new Ability(card, "0") {
 					@Override
 					public void resolve() {
-						// draws a card
 						card.getController().drawCard();
 					}
 				}; // ability2
@@ -2731,13 +2693,8 @@ public class GameActionUtil {
 	}
 
 	public static void playCard_Vedalken_Archmage(Card c) {
-
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Vedalken Archmage");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Vedalken Archmage");
+		
 		if(c.getType().contains("Artifact")) {
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(0);
@@ -2745,7 +2702,6 @@ public class GameActionUtil {
 				Ability ability2 = new Ability(card, "0") {
 					@Override
 					public void resolve() {
-						// draws a card
 						card.getController().drawCard();
 					}
 				}; // ability2
@@ -17018,90 +16974,7 @@ public class GameActionUtil {
 
 	}; //Merfolk_Sovereign_Other
 	*/
-	/*
-	public static Command Lord_of_Atlantis_Pump       = new Command() {
-
-		private static final long serialVersionUID   = -2128898623878576243L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-				c.removeExtrinsicKeyword("Islandwalk");
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Lord of Atlantis");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Merfolk");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isCreature()
-							&& !c.getName().equals(
-									"Lord of Atlantis")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						c.addExtrinsicKeyword("Islandwalk");
-						gloriousAnthemList.add(c);
-					}
-
-				} // for
-			} // for
-
-		}// execute()
-
-	}; //Lord_of_Atlantis_Pump 
-
-	public static Command Lord_of_Atlantis_Other      = new Command() {
-
-		private static final long serialVersionUID = -8294068492084097409L;
-		int                       otherLords       = 0;
-
-		private int countOtherLords() {
-			PlayerZone hPlay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.HumanPlayer);
-			PlayerZone cPlay = AllZone.getZone(
-					Constant.Zone.Play, AllZone.ComputerPlayer);
-			CardList lords = new CardList();
-			lords.addAll(hPlay.getCards());
-			lords.addAll(cPlay.getCards());
-			lords = lords.getName("Lord of Atlantis");
-			return lords.size() - 1;
-
-		}
-
-		public void execute() {
-
-
-			CardList creature = AllZoneUtil.getCardsInPlay("Lord of Atlantis");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				otherLords = countOtherLords();
-				c.setOtherAttackBoost(otherLords);
-				c.setOtherDefenseBoost(otherLords);
-				if(!c.getOtherExtrinsicKeyword().contains(
-						"Islandwalk")
-						&& otherLords > 0) c.addOtherExtrinsicKeyword("Islandwalk");
-				else if (c.getOtherExtrinsicKeyword().contains("Islandwalk") && otherLords == 0)
-					c.removeOtherExtrinsicKeyword("Islandwalk");
-
-			}// for inner
-		}// execute()
-
-	}; //Lord_of_Atlantis_Other
-	*/
+	
 	/*
 	public static Command Field_Marshal_Pump          = new Command() {
 		private static final long serialVersionUID   = -2429608928111507712L;
@@ -20967,8 +20840,6 @@ public class GameActionUtil {
 		//commands.put("Veteran_Armorsmith_Other", Veteran_Armorsmith_Other);
 		//commands.put("Merfolk_Sovereign_Pump", Merfolk_Sovereign_Pump);
 		//commands.put("Merfolk_Sovereign_Other", Merfolk_Sovereign_Other);
-		//commands.put("Lord_of_Atlantis_Pump", Lord_of_Atlantis_Pump);
-		//commands.put("Lord_of_Atlantis_Other", Lord_of_Atlantis_Other);
 		//commands.put("Timber_Protector_Pump", Timber_Protector_Pump);
 		//commands.put("Timber_Protector_Other", Timber_Protector_Other);
 		//commands.put("Goblin_Chieftain_Pump", Goblin_Chieftain_Pump);
