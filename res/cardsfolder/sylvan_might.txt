@@ -2,7 +2,7 @@ Name:Sylvan Might
 ManaCost:1 G
 Types:Instant
 Text:no text
-A:SP$Pump | Cost$ 1 G | Tgt$ TgtC | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn.
+A:SP$Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +2/+2 and gains trample until end of turn.
 K:Flashback:2 G G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_might.jpg

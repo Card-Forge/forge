@@ -2,7 +2,7 @@ Name:Fevered Strength
 ManaCost:2 B
 Types:Instant
 Text:no text
-A:SP$Pump | Cost$ 2 B | Tgt$ TgtC | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
+A:SP$Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
 K:Draw a card at the beginning of the next turn's upkeep.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fevered_strength.jpg
