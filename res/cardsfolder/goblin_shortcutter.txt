@@ -8,4 +8,5 @@ SVar:TrigCanNotBlock:AB$Pump | Cost$ 0 | ValidTgts$ Creature | KW$ HIDDEN CARDNA
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_shortcutter.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/128.jpg
 End

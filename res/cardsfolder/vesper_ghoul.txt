@@ -10,4 +10,5 @@ A:AB$Mana | Cost$ T PayLife<1> | Produced$ R | SpellDescription$ Add R to your m
 A:AB$Mana | Cost$ T PayLife<1> | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vesper_ghoul.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/57.jpg
 End

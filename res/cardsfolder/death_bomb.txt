@@ -7,4 +7,5 @@ SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_bomb.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/41.jpg
 End

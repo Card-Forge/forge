@@ -9,4 +9,5 @@ SVar:TrigChange:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_zombie.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/113.jpg
 End

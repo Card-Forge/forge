@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN CARDNAME's power an
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/calcite_snapper.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/25.jpg
 End

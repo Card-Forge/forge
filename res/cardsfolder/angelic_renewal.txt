@@ -6,4 +6,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigReturn:AB$ChangeZone | Cost$ Sac<1/CARDNAME> | Defined$ Triggered | Origin$ Graveyard | Destination$ Battlefield
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_renewal.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/120.jpg
 End

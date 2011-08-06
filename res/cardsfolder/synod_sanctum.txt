@@ -6,4 +6,5 @@ A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Choose 
 A:AB$ ChangeZone | Cost$ 2 Sac<1/CARDNAME> | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SpellDescription$ Return all cards exiled with CARDNAME to the battlefield under your control.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/synod_sanctum.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/252.jpg
 End

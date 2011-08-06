@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigFlying:AB$Pump | Cost$ 0 | Defined$ Self | KW$ Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Geyser_glider.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/124.jpg
 End

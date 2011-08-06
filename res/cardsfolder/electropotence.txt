@@ -7,4 +7,5 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | NumDmg$
 SVar:Damage:Triggered$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/electropotence.jpg
+SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/122.jpg
 End

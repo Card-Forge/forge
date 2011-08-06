@@ -11,4 +11,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | 
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slithery_stalker.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/84.jpg
 End

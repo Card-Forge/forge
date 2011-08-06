@@ -7,4 +7,5 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Optional$ 
 SVar:TrigSearch:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Forest | ChangeNum$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunting_cheetah.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/138.jpg
 End

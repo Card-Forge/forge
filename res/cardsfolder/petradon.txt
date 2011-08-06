@@ -11,4 +11,5 @@ SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | 
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petradon.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/108.jpg
 End

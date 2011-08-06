@@ -9,4 +9,5 @@ SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | ValidTgts$ Player | LifeAmount$ NumAll
 SVar:NumAllies:Count$Valid Ally.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hagra_diabolist.jpg
 SVar:Rarity:Uncommon
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/95.jpg
 End

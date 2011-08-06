@@ -7,4 +7,5 @@ K:Flashback:1 R PayLife<3>
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flash_of_defiance.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/99.jpg
 End

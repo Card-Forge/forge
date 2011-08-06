@@ -10,4 +10,5 @@ SVar:MaxTgts:Count$Valid Artifact,Creature,Land
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malicious_advice.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/114.jpg
 End

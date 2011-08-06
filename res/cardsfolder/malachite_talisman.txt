@@ -7,4 +7,5 @@ SVar:TrigUntap:AB$Untap | Cost$ 3 | ValidTgts$ Permanent | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/malachite_talisman.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/303.jpg
 End

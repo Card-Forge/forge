@@ -8,4 +8,5 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Optional$ 
 SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.YouCtrl | Cost$ 0
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charnelhoard_wurm.jpg
+SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/100.jpg
 End

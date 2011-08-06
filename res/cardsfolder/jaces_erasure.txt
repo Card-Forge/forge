@@ -6,4 +6,5 @@ T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Optional$ 
 SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player to mill
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_erasure.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/59.jpg
 End
