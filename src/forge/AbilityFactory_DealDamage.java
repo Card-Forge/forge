@@ -30,7 +30,6 @@ public class AbilityFactory_DealDamage {
 			@Override
 			public boolean canPlayAI() {
 				return doCanPlayAI(this);
-
 			}
 
 			@Override
@@ -86,7 +85,7 @@ public class AbilityFactory_DealDamage {
 			@Override
 			public boolean chkAI_Drawback() {
 				// Make sure there is a valid target
-				return damageTargetAI(this);
+				return damageDrawback(this);
 			}
 
 			@Override
@@ -148,9 +147,34 @@ public class AbilityFactory_DealDamage {
 		return AbilityFactory.calculateAmount(saMe.getSourceCard(), damage, saMe);
 	}
 
+	private boolean damageDrawback(SpellAbility sa){
+		Card source = sa.getSourceCard();
+		int dmg;
+		if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			dmg = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(dmg));
+		}
+		else
+			dmg = getNumDamage(sa);
+		return damageTargetAI(sa, dmg);
+	}
+	
 	private boolean doCanPlayAI(SpellAbility saMe)
-	{           
-		int dmg = getNumDamage(saMe);
+	{   
+		if (!ComputerUtil.canPayCost(saMe))
+			return false;
+		
+		Card source = saMe.getSourceCard();
+		
+		int dmg = 0;
+		if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			dmg = ComputerUtil.determineLeftoverMana(saMe);
+			source.setSVar("PayX", Integer.toString(dmg));
+		}
+		else
+			dmg = getNumDamage(saMe);
 		boolean rr = AF.isSpell();
 
 		// temporarily disabled until better AI
@@ -168,14 +192,13 @@ public class AbilityFactory_DealDamage {
 				return false;
 		}
 
-		if (!ComputerUtil.canPayCost(saMe))
-			return false;
-
-		// TODO handle proper calculation of X values based on Cost
-
-		// todo(sol): this should also happen if Stuffy is going to die
-		if(AF.getHostCard().getName().equals("Stuffy Doll") && AllZone.Phase.is(Constant.Phase.End_Of_Turn, AllZone.HumanPlayer)) {
-			return true;
+		if(source.getName().equals("Stuffy Doll")){
+			// Now stuffy sits around for blocking
+			// todo(sol): this should also happen if Stuffy is going to die
+			if (AllZone.Phase.is(Constant.Phase.End_Of_Turn, AllZone.HumanPlayer))
+				return true;
+			else 
+				return false;
 		}
 
 		if (AF.isAbility())
@@ -185,15 +208,32 @@ public class AbilityFactory_DealDamage {
 				rr = true;
 		}
 
-		boolean bFlag = damageTargetAI(saMe);
+		boolean bFlag = damageTargetAI(saMe, dmg);
 		if (!bFlag)
 			return false;
 
+		if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")){
+			// If I can kill my target by paying less mana, do it
+			Target tgt = saMe.getTarget();
+			if (tgt != null){
+				int actualPay = 0;
+				boolean noPrevention = AF.getMapParams().containsKey("NoPrevention");
+				ArrayList<Card> cards = tgt.getTargetCards();
+				for(Card c : cards){
+					int adjDamage = c.getEnoughDamageToKill(dmg, source, false, noPrevention);
+					if (adjDamage > actualPay)
+						actualPay = adjDamage;
+				}
+				
+				source.setSVar("PayX", Integer.toString(actualPay));
+			}
+		}
+		
+		
 		Ability_Sub subAb = saMe.getSubAbility();
 		if (subAb != null)
 			rr &= subAb.chkAI_Drawback();
 		return rr;
-
 	}
 
 	private boolean shouldTgtP(SpellAbility sa, int d, final boolean noPrevention) {
@@ -244,7 +284,9 @@ public class AbilityFactory_DealDamage {
 				int restDamage = d;
 				if (!noPrevention)
 					restDamage = c.predictDamage(d,AF.getHostCard(),false);
-				else restDamage = pl.staticReplaceDamage(restDamage, AF.getHostCard(), false);
+				else 
+					restDamage = c.staticReplaceDamage(restDamage, AF.getHostCard(), false);
+				
 				// will include creatures already dealt damage
 				return c.getKillDamage() <= restDamage && c.getShield() == 0 &&
 					!c.getKeyword().contains("Indestructible") && !(c.getSVar("SacMe").length() > 0);
@@ -273,8 +315,7 @@ public class AbilityFactory_DealDamage {
 		return null;
 	}
 
-	private boolean damageTargetAI(SpellAbility saMe) {
-		int dmg = getNumDamage(saMe);
+	private boolean damageTargetAI(SpellAbility saMe, int dmg) {
 		Target tgt = AF.getAbTgt();
 
 		if (tgt == null)
@@ -395,7 +436,16 @@ public class AbilityFactory_DealDamage {
 		if (!ComputerUtil.canPayCost(sa) && !mandatory)
 			return false;
 
-		int dmg = getNumDamage(sa);
+		Card source = sa.getSourceCard();
+		int dmg;
+		if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			dmg = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(dmg));
+		}
+		else
+			dmg = getNumDamage(sa);
+		
 		Target tgt = sa.getTarget();
 		if(tgt == null) {
 			// If it's not mandatory check a few things
@@ -406,7 +456,22 @@ public class AbilityFactory_DealDamage {
 		else{
 			if (!damageChoosingTargets(sa, tgt, dmg, mandatory) && !mandatory)
 				return false;
+			
+			if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")){
+				// If I can kill my target by paying less mana, do it
+				int actualPay = 0;
+				boolean noPrevention = AF.getMapParams().containsKey("NoPrevention");
+				ArrayList<Card> cards = tgt.getTargetCards();
+				for(Card c : cards){
+					int adjDamage = c.getEnoughDamageToKill(dmg, source, false, noPrevention);
+					if (adjDamage > actualPay)
+						actualPay = adjDamage;
+				}
+				
+				source.setSVar("PayX", Integer.toString(actualPay));
+			}		
 		}
+
 
 		if (sa.getSubAbility() != null)
 			return sa.getSubAbility().doTrigger(mandatory);

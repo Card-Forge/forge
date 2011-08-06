@@ -3318,14 +3318,7 @@ public class CardFactoryUtil {
         sq = l[0].split("\\.");
         
         if(sq[0].contains("xPaid")) {
-        	if (c.getController().isHuman()) {
-        		return c.getXManaCostPaid();
-        	}
-        	else {
-        		int dam = ComputerUtil.getAvailableMana().size()- CardUtil.getConvertedManaCost(c);
-        		if (dam < 0) dam = 0;
-        		return dam;
-        	}
+        	return c.getXManaCostPaid();
         }
         
         if(sq[0].contains("xLifePaid")) {

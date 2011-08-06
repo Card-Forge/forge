@@ -174,6 +174,7 @@ public class ComputerUtil
   static public boolean canPayCost(SpellAbility sa)
   {
 	  Card card = sa.getSourceCard();
+
 	  CardList land = getAvailableMana();
 
 	  if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
@@ -185,16 +186,16 @@ public class ComputerUtil
 
 	  ManaCost cost = new ManaCost(mana);
 
-	  /*
 	  // Tack xMana Payments into mana here if X is a set value
 	  if (sa.getPayCosts() != null && cost.xcounter > 0){
 		  String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X"; 
 		  // For Count$xPaid set PayX in the AFs then use that here
 		  // Else calculate it as appropriate.
-		  int manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.xcounter;
-		  cost.increaseColorlessMana(manaToAdd);
+		  if (!card.getSVar(xSvar).equals("")){
+			  int manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.xcounter;
+			  cost.increaseColorlessMana(manaToAdd);
+		  }
 	  }
-	  */
 
 	  cost = AllZone.GameAction.getSpellCostChange(sa, cost);
 	  if(cost.isPaid())
@@ -222,6 +223,51 @@ public class ComputerUtil
 	  }
 	  return false;
   }//canPayCost()
+  
+  static public int determineLeftoverMana(SpellAbility sa){
+	  // This function should mostly be called to determine how much mana AI has leftover to pay X costs
+	  // This function is basically getAvailableMana.size() - sa.getConvertedManaCost()
+	  // Except in the future the AI can hopefully use mana sources that provided more than a single mana
+
+	  int xMana = 0;
+	  boolean paid = false;
+
+	  CardList land = getAvailableMana();
+
+	  if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
+	  {
+		  land.remove(sa.getSourceCard());
+	  }
+
+	  ManaCost cost = new ManaCost(sa.getManaCost());
+	  cost = AllZone.GameAction.getSpellCostChange(sa, cost);
+	  paid = cost.isPaid();
+
+	  ArrayList<String> colors;
+
+	  for(int i = 0; i < land.size(); i++)
+	  {
+		  colors = getColors(land.get(i));
+		  int j;
+		  for(j =0; j < colors.size(); j++)
+		  {			  
+			  if (paid){
+				  j = colors.size();
+				  break;
+			  }
+			  if(cost.isNeeded(colors.get(j)))
+			  {
+				  cost.payMana(colors.get(j));
+				  paid = cost.isPaid();
+				  break;
+			  }
+		  }
+		  if (j == colors.size())	// Cost either paid, or this card doesn't produce a "needed" color
+			  xMana++;
+	  }
+	  
+	  return xMana; 
+  }
   
   static public boolean canPayAdditionalCosts(SpellAbility sa)
   {
@@ -402,7 +448,6 @@ public class ComputerUtil
     return false;
   }//canPayCost()
 
-
   static public void payManaCost(SpellAbility sa)
   {
 	  CardList land = getAvailableMana();
@@ -419,16 +464,21 @@ public class ComputerUtil
 
 	  Card card = sa.getSourceCard();
 	  // Tack xMana Payments into mana here if X is a set value
-	  /*
 	  if (sa.getPayCosts() != null && cost.xcounter > 0){
 		  String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X"; 
 		  // For Count$xPaid set PayX in the AFs then use that here
 		  // Else calculate it as appropriate.
-		  int manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.xcounter;
+		  int manaToAdd = 0;
+		  if (xSvar.equals("PayX")){
+			  manaToAdd = Integer.parseInt(card.getSVar(xSvar));
+		  }
+		  else{
+			  manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.xcounter;
+		  }
+		  
 		  cost.increaseColorlessMana(manaToAdd);
 		  card.setXManaCostPaid(manaToAdd);
 	  }
-	  */
 
 	  // Beached - Delete old
 	  if(cost.isPaid())
