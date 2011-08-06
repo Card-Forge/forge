@@ -2,12 +2,12 @@ package forge;
 import java.util.*;
 
 public class PlayerZoneUtil
-{
+{	
   public static boolean containsCardType(PlayerZone zone, String cardType)
   {
     return (getCardType(zone, cardType).size() > 0);
   }
-
+  
   public static ArrayList<Card> getCardType(PlayerZone zone, String cardType)
   {
     Card c;
@@ -16,11 +16,12 @@ public class PlayerZoneUtil
     for(int i = 0; i < zone.size(); i++)
     {
       c = zone.get(i);
-      if(c.getType().contains(cardType) /*|| c.getKeyword().contains("Changeling")*/ )
+      if(c.isType(cardType))
         list.add(c);
     }
     return list;
   }
+
   public static ArrayList<Card> getUntappedCreatures(PlayerZone zone)
   {
     ArrayList<Card> all = getCardType(zone, "Creature");
@@ -32,6 +33,7 @@ public class PlayerZoneUtil
 
     return untapped;
   }
+
   static public boolean isCardInZone(PlayerZone pz, Card card)
   {
     if(card == null)
