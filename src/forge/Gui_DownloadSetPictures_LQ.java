@@ -284,7 +284,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
     	//Log.error("AllCards.size: " + AllCards.size());
     	
     	//File imgBase = ForgeProps.getFile(NewConstants.IMAGE_BASE);
-    	String URLBase = "http://cardforge.org/fp/";
+    	String URLBase = "http://cardforge.org/fpics/";
     	String imgFN = "";
     	
     	for (int i=0; i<AllCards.size(); i++)
