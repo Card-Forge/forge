@@ -120,7 +120,17 @@ public class CardFactory implements NewConstants {
         return getCard2(cardName, owner);
     }
     
-    //self-targeted power and/or toughness pumping abilities
+    private final int hasKeyword(Card c, String k)
+    {
+    	ArrayList<String> a = c.getKeyword();
+    	for (int i = 0; i < a.size(); i++)
+    		if (a.get(i).toString().startsWith(k))
+    			return i;
+
+    	return -1;
+    }
+    
+/*    //self-targeted power and/or toughness pumping abilities
     //-1 means "PTPump" is not found
     //any other int means that "PTPump" was found in the Card keyword
     private final int shouldPTPumpCard(Card c)
@@ -361,7 +371,7 @@ public class CardFactory implements NewConstants {
        
        return -1;
    }
-    
+*/    
     private final int shouldManaAbility(Card c){
         ArrayList<String> a = c.getIntrinsicKeyword();
         for (int i = 0; i < a.size(); i++)
@@ -404,9 +414,9 @@ public class CardFactory implements NewConstants {
 
   //Creatures with simple, self-targeted mana-activated keyword adding abilities
     //-1 means not found
-    while(shouldKPumpCard(card) != -1)
+    while(hasKeyword(card, "KPump") != -1)
     {
-      int n = shouldKPumpCard(card);
+      int n = hasKeyword(card, "KPump");
       if(n != -1)
       {
         String parse = card.getKeyword().get(n).toString();
@@ -484,9 +494,9 @@ public class CardFactory implements NewConstants {
       //pumping abilities
       //is the card  "self pumper" like Furnace Whelp - this card gets +1/+1 until end of turn?
       //-1 means not found
-      while(shouldPTPumpCard(card) != -1)
+      while (hasKeyword(card, "PTPump") != -1)
       {
-        int n = shouldPTPumpCard(card);
+        int n = hasKeyword(card, "PTPump");
         if(n != -1)
         {
           String parse = card.getKeyword().get(n).toString();
@@ -583,9 +593,9 @@ public class CardFactory implements NewConstants {
       //pumping plus keyword adding abilities
       //is the card  "self pumper" like Furnance Whelp - this card gets +1/+1 until end of turn?
       //-1 means not found
-      while(shouldPTKPumpCard(card) != -1)
+      while(hasKeyword(card, "PTKPump") != -1)
       {
-        int n = shouldPTKPumpCard(card);
+        int n = hasKeyword(card, "PTKPump");
         if(n != -1)
         {
           String parse = card.getKeyword().get(n).toString();
@@ -682,9 +692,9 @@ public class CardFactory implements NewConstants {
     //Creatures with simple, targeted keyword adding abilities
       // costs may include "T" to indicate a tap cost
       //-1 means not found
-      while(shouldTgtKPumpCard(card) != -1)
+      while(hasKeyword(card, "TgtKPump") != -1)
       {
-        int n = shouldTgtKPumpCard(card);
+        int n = hasKeyword(card, "TgtKPump");
         if(n != -1)
         {
           String parse = card.getKeyword().get(n).toString();
@@ -958,9 +968,9 @@ public class CardFactory implements NewConstants {
     
     //Creatures with self-regenerate abilities
     //-1 means keyword "RegenerateMe" not found
-    while (shouldRegenerateMe(card) != -1)
+    while (hasKeyword(card, "RegenerateMe") != -1)
     {
-      int n = shouldRegenerateMe(card);
+      int n = hasKeyword(card, "RegenerateMe");
       if (n != -1)
       {
         String parse = card.getKeyword().get(n).toString();
@@ -1051,9 +1061,9 @@ public class CardFactory implements NewConstants {
     } //while - card has more RegenerateMe - Jungle Troll has two Regenerate keywords
 
 
-    if (shouldUntap(card) != -1)
+    if (hasKeyword(card, "Untap") != -1)
     {
-    	int n = shouldUntap(card);
+    	int n = hasKeyword(card, "Untap");
     	if (n != -1)
     	{
     		String parse = card.getKeyword().get(n).toString();
@@ -1066,9 +1076,9 @@ public class CardFactory implements NewConstants {
     	}
     }
     
-    if (shouldSporeSaproling(card) != -1)
+    if (hasKeyword(card, "Remove three spore counters") != -1)
     {
-      int n = shouldSporeSaproling(card);
+      int n = hasKeyword(card, "Remove three spore counters");
       if (n != -1)
       {
     	String parse = card.getKeyword().get(n).toString();
@@ -1078,9 +1088,9 @@ public class CardFactory implements NewConstants {
       }
     }//Spore Saproling
     
-    if (shouldSpDamageTgt(card)  != -1)
+    if (hasKeyword(card, "spDamageTgt")  != -1)
     {
-       int n = shouldSpDamageTgt(card);
+       int n = hasKeyword(card, "spDamageTgt");
        if (n != -1)
        {
           String parse = card.getKeyword().get(n).toString();
@@ -1312,9 +1322,9 @@ public class CardFactory implements NewConstants {
 
     
     //Spell damage cards  CP means Computer and Player (like shock, Lightning Bolt)
-    if (shouldSpDamageCP(card)  != -1)
+    if (hasKeyword(card, "spDamageCP")  != -1)
     {
-       int n = shouldSpDamageCP(card);
+       int n = hasKeyword(card, "spDamageCP");
        if (n != -1)
        {
           String parse = card.getKeyword().get(n).toString();
@@ -1330,9 +1340,9 @@ public class CardFactory implements NewConstants {
        }
     }
     
-    if (shouldSpDamageP(card) != -1)
+    if (hasKeyword(card, "spDamageP") != -1)
     {
-       int n = shouldSpDamageP(card);
+       int n = hasKeyword(card, "spDamageP");
        if (n != -1)
        {
           String parse = card.getKeyword().get(n).toString();
@@ -1347,9 +1357,9 @@ public class CardFactory implements NewConstants {
        }
     }//SpDamageP
     
-    if (shouldAbDamageCP(card) != -1)
+    if (hasKeyword(card, "abDamageCP") != -1)
     {
-       int n = shouldAbDamageCP(card);
+       int n = hasKeyword(card, "abDamageCP");
        if (n != -1)
        {
           String parse = card.getKeyword().get(n).toString();
@@ -1530,9 +1540,9 @@ public class CardFactory implements NewConstants {
     }//AbDamageCP
     
     
-    while (shouldAbTgtPTPumpCard(card) != -1)
+    while (hasKeyword(card, "abTgtPTPump") != -1)
     {
-     int n = shouldAbTgtPTPumpCard(card);
+     int n = hasKeyword(card, "abTgtPTPump");
      if (n != -1)
      {
         String parse = card.getKeyword().get(n).toString();
@@ -1795,9 +1805,9 @@ public class CardFactory implements NewConstants {
     }//while
     
     // Generic destroy target card
-    if (shouldSpDestroyTgt(card) != -1)
+    if (hasKeyword(card, "spDestroyTgt") != -1)
     {
-       int n = shouldSpDestroyTgt(card);
+       int n = hasKeyword(card, "spDestroyTgt");
        
        String parse = card.getKeyword().get(n).toString();
         card.removeIntrinsicKeyword(parse);
@@ -1916,9 +1926,9 @@ public class CardFactory implements NewConstants {
         card.addSpellAbility(spDstryTgt);
     }//spDestroyTgt
     
-    if (shouldSpDrawCards(card) != -1)
+    if (hasKeyword(card, "spDrawCards") != -1)
     {
-       int n = shouldSpDrawCards(card);
+       int n = hasKeyword(card, "spDrawCards");
        String parse = card.getKeyword().get(n).toString();
         card.removeIntrinsicKeyword(parse);
        
@@ -2039,9 +2049,9 @@ public class CardFactory implements NewConstants {
     }//spDrawCards
 
   //Spell gain life lose life cards (like Soul Feast)
-    if (shouldSpLoseLifeGainLife(card)  != -1)
+    if (hasKeyword(card, "spLoseLifeGainLife")  != -1)
     {
-       int n = shouldSpLoseLifeGainLife(card);
+       int n = hasKeyword(card, "spLoseLifeGainLife");
        if (n != -1)
        {
            String parse = card.getKeyword().get(n).toString();
@@ -2076,9 +2086,9 @@ public class CardFactory implements NewConstants {
        }
     }// spLoseLifeGainLife
     
-    if (shouldRebelSearch(card) != -1)
+    if (hasKeyword(card, "SearchRebel") != -1)
     {
-      int n = shouldRebelSearch(card);
+      int n = hasKeyword(card, "SearchRebel");
       if (n != -1)
       {
     	String parse = card.getKeyword().get(n).toString();
@@ -2091,9 +2101,9 @@ public class CardFactory implements NewConstants {
       }
     }//Rebel search
     
-    if (shouldMercSearch(card) != -1)
+    if (hasKeyword(card, "SearchMerc") != -1)
     {
-      int n = shouldMercSearch(card);
+      int n = hasKeyword(card, "SearchMerc");
       if (n != -1)
       {
     	String parse = card.getKeyword().get(n).toString();
@@ -2106,9 +2116,9 @@ public class CardFactory implements NewConstants {
       }
     }//Merc search
     
-    if (shouldMorph(card) != -1)
+    if (hasKeyword(card, "Morph") != -1)
     {
-      int n = shouldMorph(card);
+      int n = hasKeyword(card, "Morph");
       if (n != -1)
       {
     	card.setPrevIntrinsicKeyword(card.getIntrinsicKeyword());
@@ -2130,9 +2140,9 @@ public class CardFactory implements NewConstants {
       }
     }//Morph
 
-    if (shouldFlashback(card) != -1)
+    if (hasKeyword(card, "Flashback") != -1)
     {
-      int n = shouldFlashback(card);
+      int n = hasKeyword(card, "Flashback");
       if (n != -1)
       {
     	String parse = card.getKeyword().get(n).toString();
@@ -2149,9 +2159,9 @@ public class CardFactory implements NewConstants {
     
 
     
-    if (shouldDevour(card) != -1)
+    if (hasKeyword(card, "Devour") != -1)
     {
-      int n = shouldDevour(card);
+      int n = hasKeyword(card, "Devour");
       if (n != -1)
       {
     	
@@ -2282,9 +2292,9 @@ public class CardFactory implements NewConstants {
       }
     }//Devour
     
-    while (shouldModular(card) != -1)
+    while (hasKeyword(card, "Modular") != -1)
     {
-       int n = shouldModular(card);
+       int n = hasKeyword(card, "Modular");
        if (n != -1)
        {
           String parse = card.getKeyword().get(n).toString();
@@ -2355,9 +2365,9 @@ public class CardFactory implements NewConstants {
         
     }//while shouldModular
     
-    if (shouldSpellbomb(card) != -1)
+    if (hasKeyword(card, "1, Sacrifice " + card.getName() + ": Draw a card.") != -1)
     {
-      int n = shouldSpellbomb(card);
+      int n = hasKeyword(card, "1, Sacrifice " + card.getName() + ": Draw a card.");
       if (n != -1)
       {
     	String parse = card.getKeyword().get(n).toString();
@@ -2368,9 +2378,9 @@ public class CardFactory implements NewConstants {
     }//Spellbomb
     
     // Generic target creature pump
-    if (shouldSpPumpTgt(card) != -1)
+    if (hasKeyword(card, "spPumpTgt") != -1)
     {
-       int n = shouldSpPumpTgt(card);
+       int n = hasKeyword(card, "spPumpTgt");
        
        String parse = card.getKeyword().get(n).toString();
        card.removeIntrinsicKeyword(parse);
@@ -2496,9 +2506,9 @@ public class CardFactory implements NewConstants {
        card.addSpellAbility(spPump);
     }
     
-    if (shouldSpRaiseDead(card)  != -1)
+    if (hasKeyword(card, "spRaiseDead")  != -1)
     {
-       int n = shouldSpRaiseDead(card);
+       int n = hasKeyword(card, "spRaiseDead");
        if (n != -1)
        {
           String parse = card.getKeyword().get(n).toString();
@@ -16416,9 +16426,9 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     
     // Cards with Cycling abilities
     // -1 means keyword "Cycling" not found
-    if (shouldCycle(card) != -1)
+    if (hasKeyword(card, "Cycling") != -1)
     {
-      int n = shouldCycle(card);
+      int n = hasKeyword(card, "Cycling");
       if (n != -1)
       {
         String parse = card.getKeyword().get(n).toString();
