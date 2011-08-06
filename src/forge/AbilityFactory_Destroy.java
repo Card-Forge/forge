@@ -116,10 +116,13 @@ public class AbilityFactory_Destroy {
 			final HashMap<String,String> params = af.getMapParams();
 			
 			final boolean noRegen = params.containsKey("NoRegen");
-		
+			
 			@Override
 			public String getStackDescription(){
-				return destroyAllStackDescription(af, this, noRegen);
+				if(params.containsKey("SpellDescription"))
+					return AF.getHostCard().getName() + " - " + params.get("SpellDescription");
+				else
+					return destroyAllStackDescription(af, this, noRegen);
 			}
 			
 			public boolean canPlay(){
