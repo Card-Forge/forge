@@ -1,0 +1,9 @@
+Name:Thrull Champion
+ManaCost:4 B
+Types:Creature Thrull
+Text:no text
+PT:2/2
+A:AB$GainControl|Cost$T|ValidTgts$Creature.Thrull|TgtPrompt$Select target Thrull.|LoseControl$LoseControl,LeavesPlay|SpellDescription$Gain control of target Thrull for as long as you control CARDNAME.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thrull_champion.jpg
+End
