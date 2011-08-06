@@ -9,4 +9,5 @@ A:AB$Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenName$ Saproling |
 A:AB$Regenerate | Cost$ Sac<1/Saproling>  | ValidTgts$ Fungus | TgtPrompt$ Select target fungus. | SpellDescription$ Regenerate target Fungus
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savage_thallid.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/213.jpg
 End

@@ -7,4 +7,5 @@ SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Triggered | CounterType$ 
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mighty_emergence.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/137.jpg
 End

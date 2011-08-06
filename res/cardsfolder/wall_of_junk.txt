@@ -8,5 +8,5 @@ T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | IsPresent$ Card.block
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_junk.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/315.jpg
 End
-
