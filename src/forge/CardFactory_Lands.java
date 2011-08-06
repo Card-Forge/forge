@@ -1485,57 +1485,7 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Magosi, the Waterveil")) {
-        	/*
-        	 * Magosi, the Waterveil enters the battlefield tapped.
-        	 * Tap: Add Blue to your mana pool.
-        	 * Blue, Tap: Put an eon counter on Magosi, the Waterveil. Skip your next turn.
-        	 * Tap, Remove an eon counter from Magosi, the Waterveil and return it to its 
-        	 * owner's hand: Take an extra turn after this one.
-        	 */
-
-        	Ability_Cost skipCost = new Ability_Cost("U T", card.getName(), true);
-        	final SpellAbility skipTurn = new Ability_Activated(card, skipCost, null){
-				private static final long serialVersionUID = -2404286785963486611L;
-
-				@Override
-        		public void resolve() {
-					Player player = card.getController();
-        			card.addCounter(Counters.EON, 1);
-        			AllZone.Phase.addExtraTurn(player.getOpponent());                 
-        		}
-        	};//skipTurn
-        	
-        	Ability_Cost extraCost = new Ability_Cost("T SubCounter<1/EON> Return<1/CARDNAME>", card.getName(), true);
-        	final SpellAbility extraTurn = new Ability_Activated(card, extraCost, null){
-				private static final long serialVersionUID = -2599252144246080154L;
-
-				@Override
-        		public void resolve() {
-        			AllZone.Phase.addExtraTurn(getActivatingPlayer());
-        		}
-        	};//extraTurn
-        	
-        	StringBuilder sbDesc = new StringBuilder();
-        	sbDesc.append("U, tap: Put an eon counter on ").append(card.getName()).append(". Skip your next turn.");
-        	skipTurn.setDescription(sbDesc.toString());
-        	StringBuilder sbStack = new StringBuilder();
-        	sbStack.append(card.getName()).append(" - add an Eon counter and skip you next turn.");
-        	skipTurn.setStackDescription(sbStack.toString());
-        	card.addSpellAbility(skipTurn);
-        	
-        	StringBuilder sbDesc2 = new StringBuilder();
-        	sbDesc2.append(extraCost.toString());
-        	sbDesc2.append("Take an extra turn after this one.");
-        	extraTurn.setDescription(sbDesc2.toString());
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(card.getName()).append(" - Take an extra turn after this one.");
-        	extraTurn.setStackDescription(sb.toString());
-        	card.addSpellAbility(extraTurn);
-        }//*************** END ************ END **************************
-        
+                
         
         //*************** START ************ START **************************
         else if(cardName.equals("Bottomless Vault") || cardName.equals("Dwarven Hold")
