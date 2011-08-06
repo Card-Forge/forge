@@ -71,7 +71,6 @@ public class GameActionUtil {
 		upkeep_Cunning_Lethemancer();
 		upkeep_Shapeshifter();
 		upkeep_Vesuvan_Doppelganger_Keyword();
-		
 		upkeep_Ink_Dissolver();
 		upkeep_Kithkin_Zephyrnaut();
 		upkeep_Leaf_Crowned_Elder();
@@ -137,9 +136,7 @@ public class GameActionUtil {
 
 		upkeep_Copper_Tablet();
 		upkeep_Sulfuric_Vortex();
-		upkeep_Power_Surge();
-		upkeep_Ivory_Tower();		
-		
+		upkeep_Power_Surge();	
 		upkeep_AI_Aluren(); 
 		// experimental, AI abuse aluren
 		
@@ -7558,30 +7555,7 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Convalescence()
 
-	private static void upkeep_Ivory_Tower() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Ivory Tower");
-
-		for(Card tower:list) {
-			final Card source = tower;
-			final Ability ability = new Ability(tower, "0") {
-				public void resolve() {
-					int numCards = AllZoneUtil.getPlayerHand(player).size();
-					if( numCards > 4 ) {
-						player.gainLife(numCards - 4, source);
-					}
-				}
-			};//Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Ivory Tower - " ).append(player).append(" gains 1 life for each card > 4");
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}//for
-	}//upkeep_Ivory Tower()
-	
+		
 	/*
 	 * At the beginning of your upkeep, if there are four or more creatures
 	 * on the battlefield, sacrifice Planar Collapse and destroy all creatures.
