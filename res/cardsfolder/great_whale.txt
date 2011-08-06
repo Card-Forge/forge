@@ -1,7 +1,7 @@
 Name:Great Whale
 ManaCost:5 U U
 Types:Creature Whale
-Text:no text
+Text:When Great Whale enters the battlefield, untap up to 7 lands.
 PT:5/5
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/great_whale.jpg

@@ -1,7 +1,7 @@
 Name:Palinchron
 ManaCost:5 U U
 Types:Creature Illusion
-Text:no text
+Text:When Palinchron enters the battlefield, untap up to 7 lands.
 PT:4/5
 K:Flying
 SVar:Rarity:Rare
