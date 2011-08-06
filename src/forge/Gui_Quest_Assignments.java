@@ -1,29 +1,18 @@
 package forge;
 
+import forge.error.ErrorViewer;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
+
+import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-
-import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
-
-import forge.error.ErrorViewer;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 
 public class Gui_Quest_Assignments extends JFrame implements NewConstants{
 	
@@ -55,15 +44,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
         
         setup();
 
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.addWindowListener(new WindowAdapter()
-		{
-			@Override
-			public void windowClosed(WindowEvent e)
-			{
-				Gui_Quest_Assignments.this.this_windowClosing(e);
-			}
-		});
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         
         setSize(1024, 768);
         this.setResizable(false);
@@ -303,10 +284,6 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     	
         dispose();
     }
-    
-    void this_windowClosing(WindowEvent e) {
-		questGui.setVisible(true);
-    }
-    
+
 }
 
