@@ -12015,48 +12015,6 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; //Goblin Assault               
-	
-	/*
-	public static Command Mobilization                = new Command() {
-		
-		private static final long serialVersionUID   = 2005579284163773044L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-		/*
-			String keyword = "Vigilance";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Mobilization");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Soldier");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-			
-		}// execute()
-		
-	}; //mobilization
-	*/
 
 	public static Command That_Which_Was_Taken        = new Command() {
 		private static final long serialVersionUID   = -4142514935709694293L;
@@ -13825,10 +13783,6 @@ public class GameActionUtil {
 
 		public void execute()
 		{
-			/* CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Nirkana Cutthroat"); */
 			CardList list = AllZoneUtil.getCardsInPlay("Nirkana Cutthroat");
 
 			for (Card c:list)
@@ -14032,10 +13986,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Korlash, Heir to Blackblade");
+			CardList list = AllZoneUtil.getCardsInPlay("Korlash, Heir to Blackblade");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -14045,10 +13996,7 @@ public class GameActionUtil {
 		}// execute()
 
 		private int countSwamps(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList swamps = new CardList(play.getCards());
-			swamps = swamps.getType("Swamp");
+			CardList swamps = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Swamp");
 			return swamps.size();
 		}
 	};
@@ -14291,10 +14239,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Gaea's Avenger");
+			CardList list = AllZoneUtil.getCardsInPlay("Gaea's Avenger");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -14316,27 +14261,14 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 1987554325573387864L;
 
 		public void execute() {
-			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("People of the Woods");
+			CardList list = AllZoneUtil.getCardsInPlay("People of the Woods");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
 				c.setBaseAttack(1);
-				c.setBaseDefense(countForests(c));
+				c.setBaseDefense(AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Forest").size());
 			}
-
 		}// execute()
-
-		private int countForests(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList forests = new CardList(play.getCards());
-			forests = forests.getType("Forest");
-			return forests.size();
-		}
 	};
 	
 	public static Command Old_Man_of_the_Sea = new Command() {
@@ -14481,10 +14413,7 @@ public class GameActionUtil {
 
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Kird Ape");
+			CardList list = AllZoneUtil.getCardsInPlay("Kird Ape");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -14499,14 +14428,8 @@ public class GameActionUtil {
 		}// execute()
 
 		private boolean hasForest(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-
-			CardList land = new CardList();
-			land.addAll(play.getCards());
-
-			land = land.getType("Forest");
-			if(land.size() > 0) return true;
+			CardList forests = AllZoneUtil.getPlayerTypeInPlay(c.getController(), "Forest");
+			if(forests.size() > 0) return true;
 			else return false;
 		}
 	};
@@ -18716,7 +18639,7 @@ public class GameActionUtil {
 			}
 			old.clear();
 
-			CardList list = getCard("Giant Tortoise");
+			CardList list = AllZoneUtil.getCardsInPlay("Giant Tortoise");
 			for(int i = 0; i < list.size(); i++) {
 				c = list.get(i);
 				// only add boost if card is untapped
@@ -18726,16 +18649,7 @@ public class GameActionUtil {
 				}
 			}// for
 		}// execute()
-
-		CardList getCard(String name) {
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName(name);
-			return list;
-		}// getCard()
 	}; // Giant_Tortoise
-
 
 	public static Command Radiant_Archangel           = new Command() {
 		private static final long serialVersionUID = -7086544305058527889L;
