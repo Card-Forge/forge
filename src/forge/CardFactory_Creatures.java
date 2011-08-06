@@ -17341,6 +17341,162 @@ public class CardFactory_Creatures {
 			      card.addLeavesPlayCommand(commandLeavesPlay);
 		    	  
 		      }//*************** END ************ END **************************
+	       
+	       	  //*************** START *********** START **************************
+	          else if(cardName.equals("Assembly-Worker"))
+	          {
+	            final SpellAbility[] a2 = new SpellAbility[1];
+	            final Command eot2 = new Command()
+	              {
+	               private static final long serialVersionUID = 6180724472470740160L;
+
+	               public void execute()
+	                {
+	                  Card c = a2[0].getTargetCard();
+	                  if(AllZone.GameAction.isCardInPlay(c))
+	                  {
+	                    c.addTempAttackBoost(-1);
+	                    c.addTempDefenseBoost(-1);
+	                                         }
+	                }
+	              };
+
+	            a2[0] = new Ability_Tap(card)
+	            {
+	            private static final long serialVersionUID = 3561450525225198222L;
+
+	            public boolean canPlayAI()
+	              {
+	                return getAttacker() != null;
+	              }
+	              public void chooseTargetAI()
+	              {
+	                setTargetCard(getAttacker());
+	              }
+	              public Card getAttacker()
+	              {
+	                //target creature that is going to attack
+	                Combat c = ComputerUtil.getAttackers();
+	                CardList att = new CardList(c.getAttackers());
+	                att.remove(card);
+	                att.shuffle();
+
+	                if(att.size() != 0)
+	                  return att.get(0);
+	                else
+	                  return null;
+	              }//getAttacker()
+
+	              public void resolve()
+	              {
+	                Card c = a2[0].getTargetCard();
+	                if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card,c) )
+	                {
+	                  c.addTempAttackBoost(1);
+	                  c.addTempDefenseBoost(1);
+	                  AllZone.EndOfTurn.addUntil(eot2);
+	                }
+	              }//resolve()
+	            };//SpellAbility
+	            card.addSpellAbility(a2[0]);
+	            a2[0].setDescription("tap: Target Assembly-Worker creature gets +1/+1 until end of turn.");
+
+
+	            @SuppressWarnings("unused") // target unused
+	         final Input target = new Input()
+	            {
+	             private static final long serialVersionUID = 8913477363141356082L;
+	            
+	             public void showMessage()
+	              {
+	                ButtonUtil.enableOnlyCancel();
+	                AllZone.Display.showMessage("Select Assembly-Worker to get +1/+1");
+	              }
+	              public void selectCard(Card c, PlayerZone zone)
+	              {
+	               if(!CardFactoryUtil.canTarget(card, c)){
+	                     AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+	               }
+	               else if(c.isCreature() && c.getType().contains("Assembly-Worker"))
+	               {
+	                  card.tap();
+	                  AllZone.Human_Play.updateObservers();
+
+	                  a2[0].setTargetCard(c);//since setTargetCard() changes stack description
+	                  a2[0].setStackDescription(c +" gets +1/+1 until EOT");
+
+	                  AllZone.InputControl.resetInput();
+	                  AllZone.Stack.add(a2[0]);
+	                }
+	              }//selectCard()
+	              public void selectButtonCancel()
+	              {
+	                card.untap();
+	                stop();
+	              }
+	            };//Input target
+	            a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Assembly-Worker"));
+
+	          }//*************** END ************ END **************************
+	       
+	     //*************** START *********** START **************************
+	          else if(cardName.equals("Wood Elves"))
+	          {
+	            final SpellAbility ability = new Ability(card, "0")
+	            {
+	              public void resolve()
+	              {
+	                Card c = card;
+	                String player = c.getController();
+	                //PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
+	                //life.addLife(2);
+	                PlayerZone lib = AllZone.getZone(Constant.Zone.Library,
+	                        player);
+	                 
+
+	                  CardList lands = new CardList(lib.getCards());
+	                  lands = lands.getType("Forest");
+
+	                  if (player.equals("Human") && lands.size() > 0)
+	                  {
+	                       Object o = AllZone.Display
+	                              .getChoiceOptional(
+	                                    "Pick a forest card to put into play",
+	                                    lands.toArray());
+	                        if (o != null)
+	                        {
+	                           Card card = (Card) o;
+	                           lib.remove(card);
+	                           AllZone.Human_Play.add(card);
+	                         //  card.tap();
+	                           lands.remove(card);
+	                           AllZone.GameAction.shuffle(player);
+	                        }
+	                     } // player equals human
+	               else if (player.equals("Computer") && lands.size() > 0)
+	               {
+	                  Card card = lands.get(0);
+	                  lib.remove(card);
+	                  // hand.add(card);
+	                  AllZone.Computer_Play.add(card);
+	               //   card.tap();
+	                  lands.remove(card);
+	                  AllZone.GameAction.shuffle(player);
+	               }
+	              }
+	            };
+	            Command intoPlay = new Command()
+	            {
+	            private static final long serialVersionUID = 1832932499373431651L;
+
+	            public void execute()
+	              {
+	                ability.setStackDescription(card.getController() +" searches his library for a Forest card to put that card into play.");
+	                AllZone.Stack.add(ability);
+	              }
+	            };
+	            card.addComesIntoPlayCommand(intoPlay);
+	          }//*************** END ************ END **************************
 	      
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found

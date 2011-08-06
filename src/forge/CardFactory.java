@@ -12510,17 +12510,21 @@ public class CardFactory implements NewConstants {
         	  
           }
                
-          if(nonCreatureCards.size() == 0)
-            return;
+          if(cards.size() == 0)
+              return;
 
           //human chooses
           if(card.getController().equals(Constant.Player.Human))
           {
         	AllZone.Display.getChoice("Revealing hand", cards.toArray());
+        	if(nonCreatureCards.size() == 0)
+                 return;
             choice = (Card) AllZone.Display.getChoice("Choose", nonCreatureCards.toArray());
           }
           else//computer chooses
           {
+        	if(nonCreatureCards.size() == 0)
+               return;
             choice = CardUtil.getRandom(nonCreatureCards.toArray());
           }
 
@@ -12580,21 +12584,24 @@ public class CardFactory implements NewConstants {
         	  {
         		  //System.out.println("ostracize: " + cards.get(i).getType());
         		  creatureCards.add(cards.get(i));
-        	  }
-        		 
+        	  }		 
           }
                
-          if(creatureCards.size() == 0)
+          if(cards.size() == 0)
             return;
 
           //human chooses
           if(card.getController().equals(Constant.Player.Human))
           {
         	AllZone.Display.getChoice("Revealing hand", cards.toArray());
+        	if(creatureCards.size() == 0)
+                return;
             choice = (Card) AllZone.Display.getChoice("Choose", creatureCards.toArray());
           }
           else//computer chooses
           {
+        	if(creatureCards.size() == 0)
+               return;
             choice = CardUtil.getRandom(creatureCards.toArray());
           }
 
@@ -17205,6 +17212,279 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	        }//resolve()
 	      };
 	      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+	      card.clearSpellAbility();
+	      card.addSpellAbility(spell);
+	    }//*************** END ************ END **************************
+	  
+	//*************** START *********** START **************************
+	    else if (cardName.equals("Millstone"))
+	    {
+	       Ability_Tap ab1 = new Ability_Tap(card, "2")
+	       {
+
+	            private static final long serialVersionUID = 42470566751344693L;
+
+	               public boolean canPlayAI()
+	               {
+	                   String player = getTargetPlayer();
+	                   PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	                   CardList libList = new CardList(lib.getCards());
+	                   return libList.size() > 0;
+	               }
+
+	               public void resolve()
+	               {
+	                    String player = getTargetPlayer();
+	                    
+	                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+	                    CardList libList = new CardList(lib.getCards());
+
+	                    int max = 2;
+	                    if (libList.size() < 2)
+	                       max = libList.size();
+	                    
+	                    for (int i=0;i<max;i++)
+	                    {
+	                       Card c = libList.get(i);
+	                       lib.remove(c);
+	                       grave.add(c);
+	                    }
+	               }
+	       };
+	       ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+	       ab1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ab1));
+	       ab1.setDescription("2, tap: Target player puts the top two cards of his or her library into his or her graveyard.");
+	       card.addSpellAbility(ab1);
+	    }//*************** END ************ END **************************
+	  
+	  
+	//*************** START *********** START **************************
+	    else if(cardName.equals("Path to Exile"))
+	    {
+	      SpellAbility spell = new Spell(card)
+	      {
+	      private static final long serialVersionUID = 4752934806606319269L;
+	      
+	      public void resolve()
+	        {
+	          if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
+	          {
+	            //add life
+	            String player = getTargetCard().getController();
+	          //  PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+	           // life.addLife(getTargetCard().getNetAttack());
+	           PlayerZone lib = AllZone.getZone(Constant.Zone.Library,
+	                  player);
+	            
+
+	            CardList lands = new CardList(lib.getCards());
+	            lands = lands.getType("Basic");
+
+	            if (player.equals("Human") && lands.size() > 0)
+	            {
+	               String[] choices =
+	               { "Yes", "No" };
+	               Object choice = AllZone.Display.getChoice(
+	                     "Search fo Basic Land?", choices);
+	               if (choice.equals("Yes"))
+	               {
+	                  Object o = AllZone.Display
+	                        .getChoiceOptional(
+	                              "Pick a basic land card to put into play",
+	                              lands.toArray());
+	                  if (o != null)
+	                  {
+	                     Card card = (Card) o;
+	                     lib.remove(card);
+	                     AllZone.Human_Play.add(card);
+	                     card.tap();
+	                     lands.remove(card);
+	                     AllZone.GameAction.shuffle(player);
+	                  }
+	               }// if choice yes
+	            } // player equals human
+	         else if (player.equals("Computer") && lands.size() > 0)
+	         {
+	            Card card = lands.get(0);
+	            lib.remove(card);
+	            // hand.add(card);
+	            AllZone.Computer_Play.add(card);
+	            card.tap();
+	            lands.remove(card);
+	            AllZone.GameAction.shuffle(player);
+	         }
+	            //remove card from play
+	            AllZone.GameAction.removeFromGame(getTargetCard());
+	          }
+	        }//resolve()
+	        public boolean canPlayAI()
+	        {
+	          CardList creature = new CardList(AllZone.Human_Play.getCards());
+	          creature = creature.getType("Creature");
+	          creature = creature.filter(new CardListFilter()
+	          {
+	         public boolean addCard(Card c) {
+	            return CardFactoryUtil.canTarget(card,c);
+	         }   
+	          });
+	          return creature.size() != 0 && (AllZone.Phase.getTurn() > 4);
+	        }
+	        public void chooseTargetAI()
+	        {
+	          CardList play = new CardList(AllZone.Human_Play.getCards());
+	          Card target = CardFactoryUtil.AI_getBestCreature(play, card);
+	          setTargetCard(target);
+	        }
+	      };
+	      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+
+	      card.clearSpellAbility();
+	      card.addSpellAbility(spell);
+	    }//*************** END ************ END **************************
+	  
+	  
+	//*************** START *********** START **************************
+	    if (cardName.equals("Traumatize"))
+	    {
+	      final SpellAbility spell = new Spell(card)
+	      {
+	      private static final long serialVersionUID = 42470566751344693L;
+
+	        public boolean canPlayAI()
+	        {
+	            String player = getTargetPlayer();
+	            PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	            CardList libList = new CardList(lib.getCards());
+	            return libList.size() > 0;
+	        }
+
+	        public void resolve()
+	        {
+	             String player = getTargetPlayer();
+	            
+	             PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	             PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+	             CardList libList = new CardList(lib.getCards());
+
+	             int max = libList.size()/2 ;
+	            
+	             for (int i=0;i<max;i++)
+	             {
+	                Card c = libList.get(i);
+	                lib.remove(c);
+	                grave.add(c);
+	             }
+	        }
+	      };//SpellAbility
+	      spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+	      card.clearSpellAbility();
+	      card.addSpellAbility(spell);
+	    }//*************** END ************ END **************************
+	    
+	    
+	  //*************** START *********** START **************************
+	    if (cardName.equals("Mind Funeral"))
+	    {
+	      final SpellAbility spell = new Spell(card)
+	      {
+	      private static final long serialVersionUID = 42470566751344693L;
+
+	        public boolean canPlayAI()
+	        {
+	            String player = getTargetPlayer();
+	            PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	            CardList libList = new CardList(lib.getCards());
+	            return libList.size() > 0;
+	        }
+
+	        public void resolve()
+	        {
+	             String player = getTargetPlayer();
+	            
+	             PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	             PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+	             CardList libList = new CardList(lib.getCards());
+
+	             int max = libList.size();
+	             int prev = 0 ;
+	             int count = 0;
+	             int total =0;
+	             int once = 0;
+	            
+	             for (int i=0;i<max;i++)
+	             {
+	                Card c = libList.get(i);
+	                if (c.getType().contains("Land"))
+	                {
+	                   if (prev == 1) count= count + 1;
+	                   else count = 1;
+	                   prev=1;
+	                }
+	                else prev=0;
+	                if (count == 4) once = once +1;
+	                if (once == 1 && count == 4) total=i;
+	             }
+	                          
+	             for (int i=0;i<total+1;i++)
+	             {
+	                Card c = libList.get(i);
+	                lib.remove(c);
+	                grave.add(c);
+	             }
+	        }
+	      };//SpellAbility
+	      spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+	      card.clearSpellAbility();
+	      card.addSpellAbility(spell);
+	    }//*************** END ************ END **************************
+	    
+	    
+	  //*************** START *********** START **************************
+	    if (cardName.equals("Haunting Echoes"))
+	    {
+	      final SpellAbility spell = new Spell(card)
+	      {
+	      private static final long serialVersionUID = 42470566751344693L;
+
+	        public boolean canPlayAI()
+	        {
+	            String player = getTargetPlayer();
+	            PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	            CardList libList = new CardList(lib.getCards());
+	            return libList.size() > 0;
+	        }
+
+	        public void resolve()
+	        {
+	             String player = getTargetPlayer();
+	            
+	             PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	             PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+	             PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+	             CardList libList = new CardList(lib.getCards());
+	             CardList grvList = new CardList(grave.getCards());
+
+	             int max = libList.size();
+	             int grv = grvList.size();
+	            
+	           for (int j=0;j < grv;j++)
+	           {
+	             Card g = grvList.get(j);       
+	             for (int i=0;i<max;i++)
+	              {
+	                Card c = libList.get(i);
+	                if ( c.getName().equals(g.getName()) && ! g.getType().contains("Basic") )    
+	                 {   lib.remove(c);
+	                        exiled.add(c);
+	                 }
+	              }
+	             if ( ! g.getType().contains("Basic") ) {grave.remove(g);
+	                                                    exiled.add(g);}
+	           }
+	        }
+	      };//SpellAbility
+	      spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
 	      card.clearSpellAbility();
 	      card.addSpellAbility(spell);
 	    }//*************** END ************ END **************************

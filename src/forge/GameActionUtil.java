@@ -1479,6 +1479,8 @@ public class GameActionUtil
 			landfall_Ior_Ruin_Expedition(c);
 		else if (c.getName().equals("Lotus Cobra"))
 			landfall_Lotus_Cobra(c);
+		else if (c.getName().equals("Hedron Crab"))
+			landfall_Hedron_Crab(c);
 	}
 	
 	private static boolean showLandfallDialog(Card c)
@@ -1660,6 +1662,47 @@ public class GameActionUtil
 		}
 			
 	}
+	
+	private static void landfall_Hedron_Crab(Card c)
+	{
+	      //final Card crd = c;
+	      final Ability ability = new Ability(c, "0")
+	      {
+	         public void resolve()
+	         {
+	             String player = getTargetPlayer();
+	                
+	                PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+	                CardList libList = new CardList(lib.getCards());
+
+	                int max = 3;
+	                if (libList.size() < 3)
+	                   max = libList.size();
+	                
+	                for (int i=0;i<max;i++)
+	                {
+	                   Card c = libList.get(i);
+	                   lib.remove(c);
+	                   grave.add(c);
+	                }
+	         }         
+	      };
+	      
+	      //ability.setStackDescription(c.getName() + " - Landfall: " + c.getController() + "  puts the top three cards of his or her library into his or her graveyard.");
+	      //ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+	      
+	      if (c.getController().equals(Constant.Player.Human)) {
+	    	  AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
+	    	  //AllZone.Stack.add(ability);
+	      }
+	      
+	      else if (c.getController().equals(Constant.Player.Computer)) {
+	    	  ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+	    	  AllZone.Stack.add(ability);
+	         
+	      }
+	   }//landfall_Hedron_Crab
 
 	public static void executeLifeLinkEffects(Card c)
 	{
@@ -10071,6 +10114,43 @@ public class GameActionUtil
 			return whitePermanents.size();
 		}
 	};
+	
+
+	public static Command Lhurgoyf = new Command()
+   {
+      private static final long serialVersionUID = -8778902687347191964L;
+      public void execute()
+      {
+         // get all creatures
+         CardList list = new CardList();
+         list.addAll(AllZone.Human_Play.getCards());
+         list.addAll(AllZone.Computer_Play.getCards());
+         list = list.getName("Lhurgoyf");
+
+         for (int i = 0; i < list.size(); i++)
+         {
+            Card c = list.get(i);
+            c.setBaseAttack(countCreatures());
+            c.setBaseDefense(c.getBaseAttack()+1);
+         }
+      }
+      private int countCreatures()
+      {
+         PlayerZone compGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+         PlayerZone humGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+         CardList list = new CardList();
+         list.addAll(compGrave.getCards());
+         list.addAll(humGrave.getCards());
+         list = list.filter(new CardListFilter(){
+            public boolean addCard(Card c) {
+               return c.isCreature();
+            }
+         });
+         return list.size();
+      }
+         
+   };//Lhurgoyf
+
 
 	public static Command Nightmare = new Command()
 	{
@@ -11662,6 +11742,7 @@ public class GameActionUtil
 		commands.put("Uril", Uril);
 		commands.put("Rabid_Wombat", Rabid_Wombat);
 		commands.put("Kithkin_Rabble", Kithkin_Rabble);
+		commands.put("Lhurgoyf", Lhurgoyf);
 		commands.put("Nightmare", Nightmare);
 		commands.put("Aven_Trailblazer", Aven_Trailblazer);
 		commands.put("Rakdos_Pit_Dragon", Rakdos_Pit_Dragon);

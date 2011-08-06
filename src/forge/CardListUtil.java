@@ -14,16 +14,13 @@ public class CardListUtil
   }
 
   //the higher the defense the better
-  @SuppressWarnings("unchecked") // Comparator needs <type>
-public static void sortDefense(CardList list)
-  {
-    Comparator com = new Comparator()
-    {
-      public int compare(Object a1, Object b1)
-      {
-        Card a = (Card)a1;
-        Card b = (Card)b1;
 
+  public static void sortDefense(CardList list)
+  {
+    Comparator<Card> com = new Comparator<Card>()
+    {
+      public int compare(Card a, Card b)
+      {
         return b.getNetDefense() - a.getNetDefense();
       }
     };
@@ -31,15 +28,12 @@ public static void sortDefense(CardList list)
   }//sortDefense()
 
   //the higher the attack the better
-  @SuppressWarnings("unchecked") // Comparator needs type
-public static void sortAttack(CardList list)
+  public static void sortAttack(CardList list)
   {
-    Comparator com = new Comparator()
+    Comparator<Card> com = new Comparator<Card>()
     {
-      public int compare(Object a1, Object b1)
+      public int compare(Card a, Card b)
       {
-        Card a = (Card)a1;
-        Card b = (Card)b1;
         
         if (CombatUtil.isDoranInPlay())
         	return b.getNetDefense() - a.getNetDefense();
@@ -52,16 +46,12 @@ public static void sortAttack(CardList list)
 
 
   //the lower the attack the better
-  @SuppressWarnings("unchecked") // Comparator needs <type>
-public static void sortAttackLowFirst(CardList list)
+  public static void sortAttackLowFirst(CardList list)
   {
-    Comparator com = new Comparator()
+    Comparator<Card> com = new Comparator<Card>()
     {
-      public int compare(Object a1, Object b1)
+      public int compare(Card a, Card b)
       {
-        Card a = (Card)a1;
-        Card b = (Card)b1;
-        
         if (CombatUtil.isDoranInPlay())
         	return a.getNetDefense() - b.getNetDefense();
         else
@@ -78,16 +68,12 @@ public static void sortAttackLowFirst(CardList list)
   }//sortNonFlyingFirst
 
   //the creature with flying are better
-  @SuppressWarnings("unchecked") // Comparator needs <type>
-public static void sortFlying(CardList list)
+  public static void sortFlying(CardList list)
   {
-    Comparator com = new Comparator()
+    Comparator<Card> com = new Comparator<Card>()
     {
-      public int compare(Object a1, Object b1)
+      public int compare(Card a, Card b)
       {
-        Card a = (Card)a1;
-        Card b = (Card)b1;
-
         if(a.getKeyword().contains("Flying") && b.getKeyword().contains("Flying"))
           return 0;
         else if(a.getKeyword().contains("Flying"))
@@ -101,16 +87,33 @@ public static void sortFlying(CardList list)
     list.sort(com);
   }//sortFlying()
   
-  @SuppressWarnings("unchecked") // Comparator needs <type>
+  //sort by keyword
+  public static void sortByKeyword(CardList list, String kw)
+  {
+	final String keyword = kw;
+    Comparator<Card> com = new Comparator<Card>()
+    {
+      public int compare(Card a, Card b)
+      {
+        if(a.getKeyword().contains(keyword) && b.getKeyword().contains(keyword))
+          return 0;
+        else if(a.getKeyword().contains(keyword))
+          return -1;
+        else if(b.getKeyword().contains(keyword))
+          return 1;
+
+        return 0;
+      }
+    };
+    list.sort(com);
+  }//sortByKeyword()
+  
   public static void sortCMC(CardList list)
   {
-     Comparator com = new Comparator()
+     Comparator<Card> com = new Comparator<Card>()
      {
-        public int compare(Object a1, Object b1)
+        public int compare(Card a, Card b)
         {
-           Card a = (Card)a1;
-           Card b = (Card)b1;
-           
            int cmcA = CardUtil.getConvertedManaCost(a.getManaCost());
            int cmcB = CardUtil.getConvertedManaCost(b.getManaCost());
            

@@ -567,6 +567,100 @@ class CardFactory_Lands {
 	   	  };
 
 	         a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
+	         
+	         final SpellAbility[] a2 = new SpellAbility[1];
+	            final Command eot2 = new Command()
+	              {
+	               private static final long serialVersionUID = 6180724472470740160L;
+
+	               public void execute()
+	                {
+	                  Card c = a2[0].getTargetCard();
+	                  if(AllZone.GameAction.isCardInPlay(c))
+	                  {
+	                    c.addTempAttackBoost(-1);
+	                    c.addTempDefenseBoost(-1);
+	                  }
+	                }
+	              };
+
+	            a2[0] = new Ability_Tap(card)
+	            {
+	            private static final long serialVersionUID = 3561450520225198222L;
+
+	            public boolean canPlayAI()
+	              {
+	                return getAttacker() != null;
+	              }
+	              public void chooseTargetAI()
+	              {
+	                setTargetCard(getAttacker());
+	              }
+	              public Card getAttacker()
+	              {
+	                //target creature that is going to attack
+	                Combat c = ComputerUtil.getAttackers();
+	                CardList att = new CardList(c.getAttackers());
+	                att.remove(card);
+	                att.shuffle();
+
+	                if(att.size() != 0)
+	                  return att.get(0);
+	                else
+	                  return null;
+	              }//getAttacker()
+
+	              public void resolve()
+	              {
+	                Card c = a2[0].getTargetCard();
+	                if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card,c) )
+	                {
+	                  c.addTempAttackBoost(1);
+	                  c.addTempDefenseBoost(1);
+
+	                  AllZone.EndOfTurn.addUntil(eot2);
+	                }
+	              }//resolve()
+	            };//SpellAbility
+	            card.addSpellAbility(a2[0]);
+	            a2[0].setDescription("tap: Target Assembly-Worker gets +1/+1 until end of turn.");
+
+
+	            @SuppressWarnings("unused") // target unused
+	            final Input target = new Input()
+	            {
+	             private static final long serialVersionUID = 8913477363141356082L;
+	            
+	             public void showMessage()
+	              {
+	                ButtonUtil.enableOnlyCancel();
+	                AllZone.Display.showMessage("Select Assembly-Worker to get +1/+1");
+	              }
+	              public void selectCard(Card c, PlayerZone zone)
+	              {
+	               if(!CardFactoryUtil.canTarget(card, c)){
+	                     AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+	               }
+	               else if(c.isCreature() && c.getType().contains("Assembly-Worker"))
+	               {
+	                  card.tap();
+	                  AllZone.Human_Play.updateObservers();
+
+	                  a2[0].setTargetCard(c);//since setTargetCard() changes stack description
+	                  a2[0].setStackDescription(c +" gets +1/+1 until EOT");
+
+	                  AllZone.InputControl.resetInput();
+	                  AllZone.Stack.add(a2[0]);
+	                }
+	              }//selectCard()
+	              public void selectButtonCancel()
+	              {
+	                card.untap();
+	                stop();
+	              }
+	            };//Input target
+	            a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Assembly-Worker"));
+	         
 	       }//*************** END ************ END **************************
 	       
 	       //*************** START *********** START **************************
@@ -1946,7 +2040,585 @@ class CardFactory_Lands {
 
 	          return card;
 	       }//*************** END ************ END **************************
-		
+	       
+	     //*************** START *********** START **************************
+	          else if(cardName.equals("Spawning Pool"))
+	          {
+
+	             final Command untilEOT = new Command()
+	             {
+	             private static final long serialVersionUID = -451839437837081897L;
+
+	             public void execute()
+	               {
+	                 card.setShield(0);
+	               }
+	             };
+
+	             final SpellAbility a2 = new Ability(card, "B")
+	             {
+	               public boolean canPlayAI() {return false;}
+
+	               public void resolve()
+	               {
+	                 card.addShield();
+	                 AllZone.EndOfTurn.addUntil(untilEOT);
+	               }
+	             };//SpellAbility
+	                         a2.setDescription("B: Regenerate Spawning Pool.");
+	             a2.setStackDescription("Regenerate Spawning Pool");
+
+	             a2.setBeforePayMana(new Input_PayManaCost(a2));
+
+	            final Command eot1 = new Command()
+	            {
+	            private static final long serialVersionUID = -8535770979347971863L;
+
+	            public void execute()
+	              {
+	                Card c = card;
+
+	                c.setBaseAttack(0);
+	                c.setBaseDefense(0);
+	                c.removeType("Creature");
+	                c.removeType("Skeleton");
+	                c.setManaCost("");
+	                c.removeSpellAbility(a2);
+	                
+	              }
+	            };
+
+	            final SpellAbility a1 = new Ability(card, "1 B")
+	            {
+	              public boolean canPlayAI()
+	              {
+	                return ! card.getType().contains("Creature");
+	              }
+	              public void resolve()
+	              {
+	                Card c = card;
+
+	                c.setBaseAttack(1);
+	                c.setBaseDefense(1);
+	                c.setManaCost("B");
+
+	                //to prevent like duplication like "Creature Creature"
+	                  boolean hasRegen = false;
+	                  SpellAbility[] sas = card.getSpellAbility();
+	                  for (SpellAbility sa : sas)
+	                  {
+	                     if(sa.toString().equals("B: Regenerate Spawning Pool.")) //this is essentially ".getDescription()"
+	                        hasRegen = true;
+	                  }
+	                  if (!hasRegen){  card.addSpellAbility(a2);
+	                                }
+	                  if(!c.getType().contains("Creature"))
+	                    c.addType("Creature");
+	                  if(!c.getType().contains("Skeleton"))
+	                    c.addType("Skeleton");
+	                AllZone.EndOfTurn.addUntil(eot1);
+	              }
+	            };//SpellAbility
+
+	            
+	            card.clearSpellKeepManaAbility();
+	            card.addSpellAbility(a1);
+	            a1.setStackDescription(card +" becomes a 1/1 skeleton creature with B: regenerate this creature until EOT");
+	            a1.setDescription("1B: Spawning Pool becomes a 1/1 skeleton creature with B: regenerate this creature until end of the turn.  It's still a land.");
+	            Command paid1 = new Command() {
+	            	private static final long serialVersionUID = -6800983290478844750L;
+	            
+	            	public void execute() {AllZone.Stack.add(a1);}
+	           };
+	            a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
+	          }//*************** END ************ END **************************
+	       
+       		//*************** START *********** START **************************
+             else if(cardName.equals("Shizo, Death's Storehouse"))
+             {
+               final SpellAbility[] a2 = new SpellAbility[1];
+               final Command eot2 = new Command()
+                 {
+                  private static final long serialVersionUID = 6180724472470740160L;
+
+                  public void execute()
+                   {
+                     Card c = a2[0].getTargetCard();
+                     if(AllZone.GameAction.isCardInPlay(c))
+                     {
+                       c.removeIntrinsicKeyword("Fear");
+                                            }
+                   }
+                 };
+
+               a2[0] = new Ability_Tap(card, "B")
+               {
+               private static final long serialVersionUID = 3561450520225198222L;
+
+               public boolean canPlayAI()
+                 {
+                   return getAttacker() != null;
+                 }
+                 public void chooseTargetAI()
+                 {
+                   setTargetCard(getAttacker());
+                 }
+                 public Card getAttacker()
+                 {
+                   //target creature that is going to attack
+                   Combat c = ComputerUtil.getAttackers();
+                   CardList att = new CardList(c.getAttackers());
+                   att.remove(card);
+                   att.shuffle();
+
+                   if(att.size() != 0)
+                     return att.get(0);
+                   else
+                     return null;
+                 }//getAttacker()
+
+                 public void resolve()
+                 {
+                   Card c = a2[0].getTargetCard();
+                   if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card,c) )
+                   {
+                       if(!c.getIntrinsicKeyword().contains("Fear"))
+                             c.addIntrinsicKeyword("Fear");
+                    
+                     AllZone.EndOfTurn.addUntil(eot2);
+                   }
+                 }//resolve()
+               };//SpellAbility
+               card.addSpellAbility(a2[0]);
+               a2[0].setDescription("B, tap: Target legendary creature gains fear until end of turn.");
+
+
+               @SuppressWarnings("unused") // target unused
+            final Input target = new Input()
+               {
+                private static final long serialVersionUID = 8913477363141356082L;
+               
+                public void showMessage()
+                 {
+                   ButtonUtil.enableOnlyCancel();
+                   AllZone.Display.showMessage("Select egendary creature to get fear");
+                 }
+                 public void selectCard(Card c, PlayerZone zone)
+                 {
+                  if(!CardFactoryUtil.canTarget(card, c)){
+                        AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+                  }
+                  else if(c.isCreature() && c.getType().contains("Legendary"))
+                  {
+                     card.tap();
+                     AllZone.Human_Play.updateObservers();
+
+                     a2[0].setTargetCard(c);//since setTargetCard() changes stack description
+                     a2[0].setStackDescription(c +" gets fear until EOT");
+
+                     AllZone.InputControl.resetInput();
+                     AllZone.Stack.add(a2[0]);
+                   }
+                 }//selectCard()
+                 public void selectButtonCancel()
+                 {
+                   card.untap();
+                   stop();
+                 }
+               };//Input target
+               a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Legendary"));
+
+             }//*************** END ************ END **************************
+	
+     //*************** START *********** START **************************
+         if(cardName.equals("Novijen, Heart of Progress"))
+         {
+            card.clearSpellKeepManaAbility();
+            
+            final CardListFilter targets = new CardListFilter()
+            {
+
+               public boolean addCard(Card c) {
+                  return AllZone.GameAction.isCardInPlay(c) && c.isCreature()
+                     && c.getTurnInZone() == AllZone.Phase.getTurn();     
+               }
+            };
+            Ability_Tap ability = new Ability_Tap(card,"G U")
+            {
+               private static final long serialVersionUID = 1416258136308898492L;
+
+               CardList inPlay = new CardList();
+               public boolean canPlayAI()
+               {
+                  if(!(AllZone.Phase.getPhase().equals(Constant.Phase.Main1)
+                    && AllZone.Phase.getActivePlayer().equals(Constant.Player.Computer)))
+                     return false;
+                  inPlay.clear();
+                  inPlay.addAll(AllZone.Computer_Play.getCards());
+                  return (inPlay.filter(targets).size() > 1);
+               }
+               public void resolve() {
+                  inPlay.clear();
+                  inPlay.addAll(AllZone.Human_Play.getCards());
+                  inPlay.addAll(AllZone.Computer_Play.getCards());
+                  for(Card targ : inPlay.filter(targets))
+                     targ.addCounter(Counters.P1P1, 1);
+               }
+            };
+            ability.setDescription("tap: Put a +1/+1 counter on each creature that entered the battlefield this turn.");
+            ability.setStackDescription("Put a +1/+1 counter on each creature that entered the battlefield this turn.");
+            card.addSpellAbility(ability);
+         }
+         //*************** END ************ END **************************
+         
+       //*************** START *********** START **************************
+         else if(cardName.equals("Urza's Factory"))
+         {
+            final Ability_Tap ability = new Ability_Tap(card, "7")
+            {
+             private static final long serialVersionUID = 1781653158406511188L;
+
+             public boolean canPlay()
+               {
+                  if (AllZone.GameAction.isCardInPlay(card))
+                     return true;
+                  else
+                     return false;
+               }
+              
+               public void resolve()
+               {
+                  String player = card.getController();
+                 
+                  PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+
+                    //make token
+                    Card c = new Card();
+
+                    c.setOwner(card.getController());
+                    c.setController(card.getController());
+
+                    c.setName("Assembly-Worker");
+                    c.setImageName("c 2 2 Assembly-Worker");
+                    c.setManaCost("");
+                    c.setToken(true);
+                   
+                    c.addType("Artifact");
+                    c.addType("Creature");
+                    c.addType("Assembly-Worker");
+                    c.setBaseAttack(2);
+                    c.setBaseDefense(2);
+
+                    play.add(c);
+               }
+            };
+           
+            ability.setDescription("7, tap: Put a 2/2 colorless Assembly-Worker artifact creature token onto the battlefield.");
+            ability.setStackDescription(card.getName() + " - Put a 2/2 colorless Assembly-Worker artifact creature token onto the battlefield.");
+           
+            card.addSpellAbility(ability);
+           
+            //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
+            //anyway, this does the trick:
+            //card.removeIntrinsicKeyword("tap: add 1");
+            card.setText(card.getSpellText() +  "\r\n  Put a 2/2 colorless Assembly-Worker artifact creature token onto the battlefield.");
+            //card.addIntrinsicKeyword("tap: add 1");
+           
+         }//*************** END ************ END **************************
+         
+       //*************** START *********** START **************************
+         else if(cardName.equals("Goblin Burrows"))
+         {
+           final SpellAbility[] a2 = new SpellAbility[1];
+           final Command eot2 = new Command()
+             {
+              private static final long serialVersionUID = 6180724472470740160L;
+
+              public void execute()
+               {
+                 Card c = a2[0].getTargetCard();
+                 if(AllZone.GameAction.isCardInPlay(c))
+                 {
+                   c.addTempAttackBoost(-2);
+                                        }
+               }
+             };
+
+           a2[0] = new Ability_Tap(card, "1 R")
+           {
+           private static final long serialVersionUID = 3561450520225198222L;
+
+           public boolean canPlayAI()
+             {
+               return getAttacker() != null;
+             }
+             public void chooseTargetAI()
+             {
+               setTargetCard(getAttacker());
+             }
+             public Card getAttacker()
+             {
+               //target creature that is going to attack
+               Combat c = ComputerUtil.getAttackers();
+               CardList att = new CardList(c.getAttackers());
+               att.remove(card);
+               att.shuffle();
+
+               if(att.size() != 0)
+                 return att.get(0);
+               else
+                 return null;
+             }//getAttacker()
+
+             public void resolve()
+             {
+               Card c = a2[0].getTargetCard();
+               if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card,c) )
+               {
+                 c.addTempAttackBoost(2);
+                
+                 AllZone.EndOfTurn.addUntil(eot2);
+               }
+             }//resolve()
+           };//SpellAbility
+           card.addSpellAbility(a2[0]);
+           a2[0].setDescription("1 R, tap: Target Goblin gets +2/+0 until end of turn.");
+
+
+           @SuppressWarnings("unused") // target unused
+        final Input target = new Input()
+           {
+            private static final long serialVersionUID = 8913477363141356082L;
+           
+            public void showMessage()
+             {
+               ButtonUtil.enableOnlyCancel();
+               AllZone.Display.showMessage("Select Goblin to get +2/+0");
+             }
+             public void selectCard(Card c, PlayerZone zone)
+             {
+              if(!CardFactoryUtil.canTarget(card, c)){
+                    AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+              }
+              else if(c.isCreature() && c.getType().contains("Goblin"))
+              {
+                 card.tap();
+                 AllZone.Human_Play.updateObservers();
+
+                 a2[0].setTargetCard(c);//since setTargetCard() changes stack description
+                 a2[0].setStackDescription(c +" gets +2/+0 until EOT");
+
+                 AllZone.InputControl.resetInput();
+                 AllZone.Stack.add(a2[0]);
+               }
+             }//selectCard()
+             public void selectButtonCancel()
+             {
+               card.untap();
+               stop();
+             }
+           };//Input target
+           a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Goblin"));
+
+         }//*************** END ************ END **************************
+         
+       //*************** START *********** START **************************
+         else if(cardName.equals("Skarrg, the Rage Pits"))
+         {
+           final SpellAbility[] a2 = new SpellAbility[1];
+           final Command eot2 = new Command()
+             {
+              private static final long serialVersionUID = 6180724472470740160L;
+
+              public void execute()
+               {
+                 Card c = a2[0].getTargetCard();
+                 if(AllZone.GameAction.isCardInPlay(c))
+                 {
+                   c.addTempAttackBoost(-1);
+                   c.addTempDefenseBoost(-1);
+                   c.removeIntrinsicKeyword("Trample");
+                                        }
+               }
+             };
+
+           a2[0] = new Ability_Tap(card, "G R")
+           {
+           private static final long serialVersionUID = 3561450520225198222L;
+
+           public boolean canPlayAI()
+             {
+               return getAttacker() != null;
+             }
+             public void chooseTargetAI()
+             {
+               setTargetCard(getAttacker());
+             }
+             public Card getAttacker()
+             {
+               //target creature that is going to attack
+               Combat c = ComputerUtil.getAttackers();
+               CardList att = new CardList(c.getAttackers());
+               att.remove(card);
+               att.shuffle();
+
+               if(att.size() != 0)
+                 return att.get(0);
+               else
+                 return null;
+             }//getAttacker()
+
+             public void resolve()
+             {
+               Card c = a2[0].getTargetCard();
+               if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card,c) )
+               {
+                 c.addTempAttackBoost(1);
+                 c.addTempDefenseBoost(1);
+                 c.addIntrinsicKeyword("Trample");
+                 AllZone.EndOfTurn.addUntil(eot2);
+               }
+             }//resolve()
+           };//SpellAbility
+           card.addSpellAbility(a2[0]);
+           a2[0].setDescription("G R, tap: Target creature gets +1/+1 and gains trample until end of turn.");
+
+
+           @SuppressWarnings("unused") // target unused
+           final Input target = new Input()
+           {
+            private static final long serialVersionUID = 8913477363141356082L;
+           
+            public void showMessage()
+             {
+               ButtonUtil.enableOnlyCancel();
+               AllZone.Display.showMessage("Select Creature to get +1/+1 and trample");
+             }
+             public void selectCard(Card c, PlayerZone zone)
+             {
+              if(!CardFactoryUtil.canTarget(card, c)){
+                    AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+              }
+              else if(c.isCreature())
+              {
+                 card.tap();
+                 AllZone.Human_Play.updateObservers();
+
+                 a2[0].setTargetCard(c);//since setTargetCard() changes stack description
+                 a2[0].setStackDescription(c +" gets +1/+1 and trample until EOT");
+
+                 AllZone.InputControl.resetInput();
+                 AllZone.Stack.add(a2[0]);
+               }
+             }//selectCard()
+             public void selectButtonCancel()
+             {
+               card.untap();
+               stop();
+             }
+           };//Input target
+           a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Creature"));
+
+         }//*************** END ************ END **************************
+         
+       //*************** START *********** START **************************
+         else if(cardName.equals("Daru Encampment"))
+         {
+           final SpellAbility[] a2 = new SpellAbility[1];
+           final Command eot2 = new Command()
+             {
+              private static final long serialVersionUID = 6180724472470740160L;
+
+              public void execute()
+               {
+                 Card c = a2[0].getTargetCard();
+                 if(AllZone.GameAction.isCardInPlay(c))
+                 {
+                   c.addTempAttackBoost(-1);
+                   c.addTempDefenseBoost(-1);
+                                        }
+               }
+             };
+
+           a2[0] = new Ability_Tap(card, "W")
+           {
+           private static final long serialVersionUID = 3561450520225198222L;
+
+           public boolean canPlayAI()
+             {
+               return getAttacker() != null;
+             }
+             public void chooseTargetAI()
+             {
+               setTargetCard(getAttacker());
+             }
+             public Card getAttacker()
+             {
+               //target creature that is going to attack
+               Combat c = ComputerUtil.getAttackers();
+               CardList att = new CardList(c.getAttackers());
+               att.remove(card);
+               att.shuffle();
+
+               if(att.size() != 0)
+                 return att.get(0);
+               else
+                 return null;
+             }//getAttacker()
+
+             public void resolve()
+             {
+               Card c = a2[0].getTargetCard();
+               if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card,c) )
+               {
+                 c.addTempAttackBoost(1);
+                 c.addTempDefenseBoost(1);
+                
+                 AllZone.EndOfTurn.addUntil(eot2);
+               }
+             }//resolve()
+           };//SpellAbility
+           card.addSpellAbility(a2[0]);
+           a2[0].setDescription("W, tap: Target Soldier gets +1/+1 until end of turn.");
+
+
+           @SuppressWarnings("unused") // target unused
+        final Input target = new Input()
+           {
+            private static final long serialVersionUID = 8913477363141356082L;
+           
+            public void showMessage()
+             {
+               ButtonUtil.enableOnlyCancel();
+               AllZone.Display.showMessage("Select Soldier to get +1/+1");
+             }
+             public void selectCard(Card c, PlayerZone zone)
+             {
+              if(!CardFactoryUtil.canTarget(card, c)){
+                    AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+              }
+              else if(c.isCreature() && c.getType().contains("Soldier"))
+              {
+                 card.tap();
+                 AllZone.Human_Play.updateObservers();
+
+                 a2[0].setTargetCard(c);//since setTargetCard() changes stack description
+                 a2[0].setStackDescription(c +" gets +1/+1 until EOT");
+
+                 AllZone.InputControl.resetInput();
+                 AllZone.Stack.add(a2[0]);
+               }
+             }//selectCard()
+             public void selectButtonCancel()
+             {
+               card.untap();
+               stop();
+             }
+           };//Input target
+           a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Soldier"));
+
+         }//*************** END ************ END **************************
+         
 		return card;
 	}
 	

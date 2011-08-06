@@ -1,3 +1,96 @@
+Haunting Echoes
+3 B B
+Sorcery
+Remove all cards in target player's graveyard other than basic land cards from the game.  Search that player's library for all cards with the same name as cards removed this way, and remove them from the game. Then that player shuffles his or her library.
+
+Daru Encampment
+no cost
+Land
+no text
+tap: add 1
+
+Skarrg, the Rage Pits
+no cost
+Land
+no text
+tap: add 1
+
+Goblin Burrows
+no cost
+Land
+no text
+tap: add 1
+
+Urza's Factory
+no cost
+Land Urza's
+no text
+tap: add 1
+
+Hedron Crab
+U
+Creature Crab
+Landfall - Whenever a land enters the battlefield under your control, target player puts the top three cards of his or her library into his or her graveyard.
+0/2
+Landfall
+
+Mind Funeral
+1 U B
+Sorcery
+Target opponent reveals cards from the top of his or her library until four land cards are revealed. That player puts all cards revealed this way into his or her graveyard.
+
+Traumatize
+3 U U
+Sorcery
+Target player puts the top half of his or her library, rounded down, into his or her graveyard.
+
+Path to Exile
+W
+Instant
+Exile target creature. Its controller may search his or her library for a basic land card, put that card onto the battlefield tapped, then shuffle his or her library.
+
+Millstone
+2
+Artifact
+no text
+
+Wood Elves
+2 G
+Creature Elf Scout
+When Wood Elves comes into play, search your library for a Forest card and put that card into play.  Then shuffle your library.
+1/1
+
+Assembly-Worker
+3
+Artifact Creature Assembly-Worker
+no text
+2/2
+
+Lhurgoyf
+2 G G
+Creature Lhurgoyf
+Lhurgoyf's power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1.
+0/1
+
+Novijen, Heart of Progress
+no cost
+Land
+no text
+tap: add 1
+
+Shizo, Death's Storehouse
+no cost
+Legendary Land
+no text
+tap: add B
+
+Spawning Pool
+no cost
+Land
+no text
+Comes into play tapped.
+tap: add B
+
 Laquatus's Champion
 4 B B
 Creature Nightmare Horror
