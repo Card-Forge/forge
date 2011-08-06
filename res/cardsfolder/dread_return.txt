@@ -1,0 +1,9 @@
+Name:Dread Return
+ManaCost:2 B B
+Types:Sorcery
+Text:no text
+A:SP$Retrieve | Cost$ 2 B B | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+A:SP$Retrieve | Cost$ Sac<3/Creature> | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Flashback$ True | CostDesc$ Flashback-Sacrifice three creatures. | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_return.jpg
+End

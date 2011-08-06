@@ -1296,6 +1296,7 @@ res/cardsfolder/dread.txt -text svneol=native#text/plain
 res/cardsfolder/dread_drone.txt -text svneol=native#text/plain
 res/cardsfolder/dread_of_night.txt -text svneol=native#text/plain
 res/cardsfolder/dread_reaper.txt -text svneol=native#text/plain
+res/cardsfolder/dread_return.txt -text svneol=native#text/plain
 res/cardsfolder/dread_slag.txt -text svneol=native#text/plain
 res/cardsfolder/dread_specter.txt -text svneol=native#text/plain
 res/cardsfolder/dread_statuary.txt -text svneol=native#text/plain
