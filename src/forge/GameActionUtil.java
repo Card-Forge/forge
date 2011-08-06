@@ -491,7 +491,6 @@ public class GameActionUtil {
 		playCard_Thief_of_Hope(c);
 		playCard_Infernal_Kirin(c);
 		playCard_Cloudhoof_Kirin(c);
-		playCard_Bounteous_Kirin(c);
 		playCard_Emberstrike_Duo(c);		
 		playCard_Gravelgill_Duo(c);
 		playCard_Safehold_Duo(c);
@@ -1726,57 +1725,7 @@ public class GameActionUtil {
 
 	}//Cloudhoof Kirin
 
-	public static void playCard_Bounteous_Kirin(Card c) {
-		final Player controller = c.getController();
-
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Bounteous Kirin");
-
-		if(list.size() > 0) {
-			if(c.isType("Spirit") || c.getType().contains("Arcane")) {
-				for(int i = 0; i < list.size(); i++) {
-					final Card card = list.get(i);
-					final int converted = CardUtil.getConvertedManaCost(c.getManaCost());
-					Ability ability2 = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							final Player target;
-							if(card.getController().isHuman()) {
-								String[] choices = {"Yourself", "Opponent", "None"};
-								Object choice = GuiUtils.getChoice("Choose target player", choices);
-								if(choice.equals("Opponent")) {
-									target = AllZone.ComputerPlayer; // check for target of spell/abilities should be here
-								}// if choice yes
-								else if(!choice.equals("None")) target = AllZone.HumanPlayer; // check for target of spell/abilities should be here
-								else target = null;
-							} else target = AllZone.ComputerPlayer; // check for target of spell/abilities should be here						
-							if(!(null == target)) {
-								target.gainLife(converted, card);
-							}
-								
-						} //resolve
-					}; //ability
-					ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-					ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - ").append(c.getController());
-					sb.append(" played a Spirit or Arcane spell, target player may gain ");
-					sb.append(converted).append(" life.");
-					ability2.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability2);
-				}
-			}//if
-		}
-
-	}//Bounteous Kirin
-
-
+	
 	public static void playCard_Shorecrasher_Mimic(Card c) {
 		final Player controller = c.getController();
 
