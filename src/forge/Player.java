@@ -135,7 +135,12 @@ public abstract class Player extends MyObservable{
 			newLifeSet = true;
 			this.updateObservers();
 		}
-		else System.out.println("Player - trying to lose positive or 0 life");
+		else if(toLose == 0) {
+			//Rule 118.4
+			//this is for players being able to pay 0 life
+			//nothing to do
+		}
+		else System.out.println("Player - trying to lose positive life");
 		return newLifeSet;
 	}
 	
@@ -159,11 +164,11 @@ public abstract class Player extends MyObservable{
 	
 	public boolean payLife(int lifePayment, Card source) {
     	
-		if(lifePayment > 0 && AllZoneUtil.isCardInPlay("Platinum Emperion",this)) return false;
+		//rule 118.8
     	if (lifePayment <= life){
-    		subtractLife(lifePayment);
-    		return true;
+    		return loseLife(lifePayment, source);
     	}
+    	
     	return false;
 	}
 	
@@ -383,12 +388,27 @@ public abstract class Player extends MyObservable{
     	doDiscard(c, sa);
     }
     
-    public void doDiscard(Card c, SpellAbility sa) {
+    public void doDiscard(final Card c, final SpellAbility sa) {
     	if (sa!= null){
     		;
     	}
     	
     	AllZone.GameAction.CheckWheneverKeyword(c,"DiscardsCard",null);
+    	
+    	/* work in progress - slapshot5
+    	//Psychic Purge
+    	if(c.getName().equals("Psychic Purge")) {
+    		if(!sa.getSourceCard().getController().equals(this)) {
+    			SpellAbility ability = new Ability(c, "") {
+    				public void resolve() {
+    					sa.getSourceCard().getController().loseLife(5, c);
+    				}
+    			};
+    			ability.setStackDescription(c.getName()+" - "+
+    					sa.getSourceCard().getController()+" loses 5 life.");
+    			AllZone.Stack.add(ability);
+    		}
+    	} */
     	
         AllZone.GameAction.discard_nath(c);
         AllZone.GameAction.discard_megrim(c);
