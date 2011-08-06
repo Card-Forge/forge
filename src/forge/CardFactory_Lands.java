@@ -353,6 +353,7 @@ class CardFactory_Lands {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Vivid Crag") || cardName.equals("Vivid Creek") || cardName.equals("Vivid Grove")
         		|| cardName.equals("Vivid Marsh") || cardName.equals("Vivid Meadow")){
@@ -465,7 +466,7 @@ class CardFactory_Lands {
             
             card.setReflectableMana("WUBRG");
             card.addSpellAbility(tendo);
-            tendo.setDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
+            tendo.setDescription("tap, remove a charge counter: Add one mana of any color to your mana pool");
             tendo.setStackDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
         }//*************** END ************ END **************************
         
@@ -845,32 +846,6 @@ class CardFactory_Lands {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Oboro, Palace in the Clouds")) {
-            final Ability ability = new Ability(card, "1") {
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    AllZone.GameAction.moveTo(hand, card);
-                }
-            };
-            
-            ability.setDescription("1: Return Oboro, Palace in the Clouds to your hand.");
-            StringBuilder sb = new StringBuilder();
-            sb.append("Return ").append(card.getName()).append(" to your hand.");
-            ability.setStackDescription(sb.toString());
-            
-            card.addSpellAbility(ability);
-            
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Gods' Eye, Gate to the Reikai")) {
             
             final Ability ability = new Ability(card, "0") {
@@ -894,6 +869,7 @@ class CardFactory_Lands {
             
             card.addDestroyCommand(makeToken);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Flagstones of Trokair")) {
