@@ -298,6 +298,8 @@ public class Card extends MyObservable {
     public void subtractCounter(Counters counterName, int n) {
         if(counters.containsKey(counterName)) {
             Integer aux = counters.get(counterName) - n;
+            if (aux < 0)
+            	aux = 0;
             counters.put(counterName, aux);
             this.updateObservers();
         }
