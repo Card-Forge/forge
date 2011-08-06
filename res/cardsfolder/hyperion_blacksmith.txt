@@ -3,8 +3,8 @@ ManaCost:1 R R
 Types:Creature Human Artificer
 Text:no text
 PT:2/2
-K:abTapTgt T:Artifact+YouDontCtrl:Tap target artifact you don't control.
-A:AB$Untap | Cost$ T | ValidTgts$ Artifact+YouDontCtrl | TgtPrompt$ Select target artifact you don't control | SpellDescription$ You may tap or untap target artifact an opponent controls.
+A:AB$Tap | Cost$ T | ValidTgts$ Artifact+YouDontCtrl | TgtPrompt$ Select target artifact you don't control | SpellDescription$ Tap target artifact you don't control.
+A:AB$Untap | Cost$ T | ValidTgts$ Artifact+YouDontCtrl | TgtPrompt$ Select target artifact you don't control | SpellDescription$ Unap target artifact you don't control.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hyperion_blacksmith.jpg

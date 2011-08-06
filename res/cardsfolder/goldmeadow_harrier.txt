@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Kithkin Soldier
 Text:no text
 PT:1/1
-K:abTapTgt W T:Creature:Tap target creature.
+A:AB$Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Lorwyn/goldmeadow_harrier.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/17.jpg

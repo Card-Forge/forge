@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:2/3
 K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, untap Innocence Kami.
-K:abTapTgt W T:Creature:Tap target creature.
+A:AB$Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/innocence_kami.jpg

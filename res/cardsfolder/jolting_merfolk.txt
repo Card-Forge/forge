@@ -4,7 +4,7 @@ Types:Creature Merfolk
 Text:no text
 PT:2/2
 K:Fading:4
-K:abTapTgt SubCounter<1/FADE>:Creature:Tap target creature.
+A:AB$Tap | Cost$ SubCounter<1/FADE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jolting_merfolk.jpg
