@@ -196,6 +196,14 @@ public class AbilityFactory {
 			}
 		}
 		
+		if (API.equals("GainLife")){
+			if (isAb)
+				SA = AbilityFactory_AlterLife.createAbilityGainLife(this);
+			if (isSp){
+				SA = AbilityFactory_AlterLife.createSpellGainLife(this);
+			}
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
         if (hasSpDesc)

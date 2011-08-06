@@ -1,0 +1,10 @@
+Name:Faith Healer
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:1/1
+A:AB$GainLife|Cost$Sac<1/Enchantment>|LifeAmount$X|SpellDescription$You gain life equal to the sacrificed enchantment's converted mana cost.
+SVar:X:Sacrificed$CardManaCost
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/faith_healer.jpg
+End

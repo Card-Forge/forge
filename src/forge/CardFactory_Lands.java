@@ -3277,54 +3277,6 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Diamond Valley")) {
-        	/*
-        	 * Tap, Sacrifice a creature: You gain life equal to the
-        	 * sacrificed creature's toughness.
-        	 */
-            final Ability_Tap ability = new Ability_Tap(card, "0") {
-                private static final long serialVersionUID = -6589125674356046586L;
-               
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
-                    if(AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer).size() > 0
-                    		&& AllZone.Computer_Life.getLife() < 5 )
-                    	setTargetCard(CardFactoryUtil.AI_getBestCreature(list, card));
-                   
-                    return list.size() > 0;
-                }
-               
-                @Override
-                public void resolve() {
-                	Card c = getTargetCard();
-
-                	if(c != null && c.isCreature()) {
-                		AllZone.GameAction.gainLife(c.getController(), c.getNetDefense());
-                		AllZone.GameAction.sacrifice(c);
-                	}
-                }
-            };
-           
-            Input runtime = new Input() {
-               
-                private static final long serialVersionUID = -7649177692384343204L;
-               
-                @Override
-                public void showMessage() {
-                	final String player = card.getController();
-                	CardList choice = AllZoneUtil.getCreaturesInPlay(player);
-                   
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice,
-                            "Select target creature:", true, false));
-                }
-            };
-
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Phyrexian Tower")) {
             final Ability_Mana ability = new Ability_Mana(card, "tap, Sacrifice a creature: Add B B") {
 				private static final long serialVersionUID = 5290938125518969674L;
