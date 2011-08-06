@@ -1,3 +1,48 @@
+Admonition Angel
+3 W W W
+Creature Angel
+(NOTE: This spell is rather buggy and should not be used at this time.)
+6/6
+Flying
+WheneverKeyword:EntersBattleField:Type/Land:Play:MoveFrom-Play-Exiled:NormalInput/Specific/NonType.Land/NotSelf:ASAP:Yes_No:Initiator - OwnedByController!AttachTarget:Landfall - Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.
+WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.
+SVar:RemAIDeck:True
+SVar:BuffedBy:Land
+SVar:RemAIDeck:True
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/admonition_angel.jpg
+
+Ageless Entity
+3 G G
+Creature Elemental
+(NOTE: This spell is rather buggy and should not be used at this time.)
+4/4
+WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/Life_Gained:Self:ASAP:No_Condition:No Special Condition:Whenever you gain life, put that many +1/+1 counters on Ageless Entity.
+SVar:RemAIDeck:True
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ageless_entity.jpg
+
+Ajani's Pridemate
+1 W
+Creature Cat Soldier
+(NOTE: This spell is rather buggy and should not be used at this time.)
+2/2
+WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/1:Self:ASAP:Yes_No:No Special Condition:Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.
+SVar:RemAIDeck:True
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_pridemate.jpg
+
+Petravark
+3 R
+Creature Nightmare Beast
+(NOTE: This spell is rather buggy and should not be used at this time.)
+2/2
+WheneverKeyword:EntersBattleField:Self:Play:MoveFrom-Play-Exiled:NormalInput/Specific/Type.Land:ASAP:Yes_No:AttachTarget:When Petravark enters the battlefield, exile target land.
+WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Petravark leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SVar:RemAIDeck:True
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/petravark.jpg
+
 Hellfire
 2 B B B
 Sorcery
@@ -1005,19 +1050,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adarkar_wastes.jpg
 
-Admonition Angel
-3 W W W
-Creature Angel
-no text
-6/6
-Flying
-WheneverKeyword:EntersBattleField:Type/Land:Play:MoveFrom-Play-Exiled:NormalInput/Specific/NonType.Land/NotSelf:ASAP:Yes_No:Initiator - OwnedByController!AttachTarget:Landfall - Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.
-WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.
-SVar:RemAIDeck:True
-SVar:BuffedBy:Land
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/admonition_angel.jpg
-
 Adun Oakenshield
 G R B
 Legendary Creature Human Knight
@@ -1164,15 +1196,6 @@ Flash
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/affa_guard_hound.jpg
 
-Ageless Entity
-3 G G
-Creature Elemental
-no text
-4/4
-WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/Life_Gained:Self:ASAP:No_Condition:No Special Condition:Whenever you gain life, put that many +1/+1 counters on Ageless Entity.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ageless_entity.jpg
-
 Agent of Masks
 3 W B
 Creature Human Advisor
@@ -1267,15 +1290,6 @@ no text
 WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_mantra.jpg
-
-Ajani's Pridemate
-1 W
-Creature Cat Soldier
-no text
-2/2
-WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/1:Self:ASAP:Yes_No:No Special Condition:Whenever you gain life, you may put a +1/+1 counter on Ajani's Pridemate.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_pridemate.jpg
 
 Akki Drillmaster
 2 R
@@ -22666,16 +22680,6 @@ Deathtouch
 abPump 2 R:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilent_kathari.jpg
-
-Petravark
-3 R
-Creature Nightmare Beast
-no text
-2/2
-WheneverKeyword:EntersBattleField:Self:Play:MoveFrom-Play-Exiled:NormalInput/Specific/Type.Land:ASAP:Yes_No:AttachTarget:When Petravark enters the battlefield, exile target land.
-WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Petravark leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/petravark.jpg
 
 Pewter Golem
 5
