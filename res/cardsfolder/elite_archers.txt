@@ -3,7 +3,8 @@ ManaCost:5 W
 Types:Creature Human Soldier Archer
 Text:no text
 PT:3/3
-K:abDamageTgtV T:3:Creature.attacking,Creature.blocking:Elite Archers deals 3 damage to target attacking or blocking creature.
+#K:abDamageTgtV T:3:Creature.attacking,Creature.blocking:Elite Archers deals 3 damage to target attacking or blocking creature.
+A:AB$DealDamage | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | NumDmg$ 3 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elite_archers.jpg

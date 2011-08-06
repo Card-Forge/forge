@@ -3,7 +3,8 @@ ManaCost:1 W
 Types:Creature Human Soldier
 Text:no text
 PT:2/1
-K:abDamageTgtV Sac<1/CARDNAME>:2:Creature.attacking,Creature.blocking:Expendable Troops deals 2 damage to target attacking or blocking creature.
+#K:abDamageTgtV Sac<1/CARDNAME>:2:Creature.attacking,Creature.blocking:Expendable Troops deals 2 damage to target attacking or blocking creature.
+A:AB$DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.attacking,Creature.blocking | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/expendable_troops.jpg

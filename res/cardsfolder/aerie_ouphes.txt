@@ -4,7 +4,8 @@ Types:Creature Ouphe
 Text:no text
 PT:3/3
 K:Persist
-K:abDamageTgtV Sac<1/CARDNAME>:X:Creature.withFlying:Aerie Ouphes deals damage equal to its power to target creature with flying.
+#K:abDamageTgtV Sac<1/CARDNAME>:X:Creature.withFlying:Aerie Ouphes deals damage equal to its power to target creature with flying.
+A:AB$DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.withFlying | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to it's power to target creature with flying.
 SVar:X:Count$CardPower
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aerie_ouphes.jpg

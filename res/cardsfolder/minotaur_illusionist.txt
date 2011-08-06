@@ -3,8 +3,10 @@ ManaCost:3 U R
 Types:Creature Minotaur Wizard
 Text:no text
 PT:3/4
-K:abPump 1 U:Shroud
-K:abDamageTgtC 1 R Sac<1/CARDNAME>:X:Minotaur Illusionist deals damage equal to its power to target creature.
+#K:abPump 1 U:Shroud
+#K:abDamageTgtC 1 R Sac<1/CARDNAME>:X:Minotaur Illusionist deals damage equal to its power to target creature.
+A:AB$Pump | Cost$ 1 U | KW$ Shroud | SpellDescription$ CARDNAME has Shroud until end of turn.
+A:AB$DealDamage | Cost$ 1 R Sac<1/CARDNAME> | Tgt$ TgtC | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature.
 SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minotaur_illusionist.jpg

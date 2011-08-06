@@ -4,7 +4,8 @@ Types:Creature Zombie Beast
 Text:no text
 PT:3/3
 K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on Deathbringer Thoctar.
-K:abDamageTgtCP SubCounter<1/P1P1>:1
+#K:abDamageTgtCP SubCounter<1/P1P1>:1
+A:AB$DealDamage | Cost$ SubCounter<1/P1P1> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathbringer_thoctar.jpg
 SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/36.jpg

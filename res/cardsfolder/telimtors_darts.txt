@@ -2,7 +2,8 @@ Name:Telim'Tor's Darts
 ManaCost:2
 Types:Artifact
 Text:no text
-K:abDamageTgtP 2 T:1
+#K:abDamageTgtP 2 T:1
+A:AB$DealDamage | Cost$ 2 T | Tgt$ TgtP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telimtors_darts.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/286.jpg

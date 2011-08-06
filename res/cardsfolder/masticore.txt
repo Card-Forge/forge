@@ -4,7 +4,8 @@ Types:Artifact Creature Masticore
 Text:Choose and discard a card during your upkeep, or sacrifice Masticore.
 PT:4/4
 A:AB$Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
-K:abDamageTgtC 2:1
+#K:abDamageTgtC 2:1
+A:AB$DealDamage | Cost$ 2 | Tgt$ TgtC | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/masticore.jpg
 SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/134.jpg

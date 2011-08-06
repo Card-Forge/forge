@@ -2,7 +2,8 @@ Name:Rod of Ruin
 ManaCost:4
 Types:Artifact
 Text:no text
-K:abDamageTgtCP 3 T:1
+#K:abDamageTgtCP 3 T:1
+A:AB$DealDamage | Cost$ 3 T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rod_of_ruin.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/312.jpg

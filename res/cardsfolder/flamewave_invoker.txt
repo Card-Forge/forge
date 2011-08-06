@@ -3,7 +3,8 @@ ManaCost:2 R
 Types:Creature Goblin Mutant
 Text:no text
 PT:2/2
-K:abDamageTgtP 7 R:5
+#K:abDamageTgtP 7 R:5
+A:AB$DealDamage | Cost$ 7 R | Tgt$ TgtP | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flamewave_invoker.jpg
 SetInfo:LGN|Common|http://magiccards.info/scans/en/le/92.jpg

@@ -2,7 +2,8 @@ Name:Kyren Negotiations
 ManaCost:2 R R
 Types:Enchantment
 Text:no text
-K:abDamageTgtP tapXType<1/Creature>:1
+#K:abDamageTgtP tapXType<1/Creature>:1
+A:AB$DealDamage | Cost$ tapXType<1/Creature> | Tgt$ TgtP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kyren_negotiations.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/198.jpg

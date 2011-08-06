@@ -3,7 +3,8 @@ ManaCost:no cost
 Types:Snow Land
 Text:no text
 K:tap: add 1
-K:abDamageTgtC 4 S T Sac<1/CARDNAME>:4
+#K:abDamageTgtC 4 S T Sac<1/CARDNAME>:4
+A:AB$DealDamage | Cost$ 4 S T Sac<1/CARDNAME> | Tgt$ TgtC | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mouth_of_ronom.jpg

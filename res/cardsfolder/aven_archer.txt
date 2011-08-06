@@ -4,7 +4,8 @@ Types:Creature Bird Soldier Archer
 Text:no text
 PT:2/2
 K:Flying
-K:abDamageTgtV 2 W T:2:Creature.attacking,Creature.blocking:Aven Archer deals 2 damage to target attacking or blocking creature.
+#K:abDamageTgtV 2 W T:2:Creature.attacking,Creature.blocking:Aven Archer deals 2 damage to target attacking or blocking creature.
+A:AB$DealDamage | Cost$ 2 W T | ValidTgts$Creature.attacking,Creature.blocking | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_archer.jpg

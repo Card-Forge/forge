@@ -3,7 +3,8 @@ ManaCost:4
 Types:Artifact Creature Construct
 Text:no text
 PT:2/3
-K:abDamageTgtV T:1:Creature.withFlying:Grapeshot Catapult deals 1 damage to target creature with flying.
+#K:abDamageTgtV T:1:Creature.withFlying:Grapeshot Catapult deals 1 damage to target creature with flying.
+A:AB$DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature with flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grapeshot_catapult.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/375.jpg

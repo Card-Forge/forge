@@ -3,7 +3,8 @@ ManaCost:3
 Types:Artifact Creature Soldier
 Text:no text
 PT:1/3
-K:abDamageTgtV 1 W Sac<1/CARDNAME>:3:Creature.attacking,Creature.blocking:Soldier Replica deals 3 damage to target attacking or blocking creature.
+#K:abDamageTgtV 1 W Sac<1/CARDNAME>:3:Creature.attacking,Creature.blocking:Soldier Replica deals 3 damage to target attacking or blocking creature.
+A:AB$DealDamage | Cost$ 1 W Sac<1/CARDNAME> | ValidTgts$ Creature.attacking,Creature.blocking | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target attacking or blocking creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldier_replica.jpg

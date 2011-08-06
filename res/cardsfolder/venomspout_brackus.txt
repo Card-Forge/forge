@@ -3,7 +3,8 @@ ManaCost:6 G
 Types:Creature Beast
 Text:no text
 PT:5/5
-K:abDamageTgtV 1 G T:5:Creature.attacking+withFlying,Creature.blocking+withFlying:Venomspout Brackus deals 5 damage to target attacking or blocking creature with flying.
+#K:abDamageTgtV 1 G T:5:Creature.attacking+withFlying,Creature.blocking+withFlying:Venomspout Brackus deals 5 damage to target attacking or blocking creature with flying.
+A:AB$DealDamage | Cost$ 1 G T | ValidTgts$ Creature.attacking+withFlying,Creature.blocking+withFlying | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target attacking or blocking creature with flying.
 K:Morph:3 G G
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

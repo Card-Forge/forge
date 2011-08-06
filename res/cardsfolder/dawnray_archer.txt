@@ -4,7 +4,8 @@ Types:Creature Human Archer
 Text:no text
 PT:1/1
 K:Exalted
-K:abDamageTgtV W T:1:Creature.attacking,Creature.blocking:Dawnray Archer deals 1 damage to target attacking or blocking creature.
+#K:abDamageTgtV W T:1:Creature.attacking,Creature.blocking:Dawnray Archer deals 1 damage to target attacking or blocking creature.
+A:AB$DealDamage | Cost$ W T | ValidTgts$ Creature.attacking,Creature.blocking | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target attacking or blocking creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dawnray_archer.jpg

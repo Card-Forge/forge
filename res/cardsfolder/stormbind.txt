@@ -2,7 +2,8 @@ Name:Stormbind
 ManaCost:1 R G
 Types:Enchantment
 Text:no text
-K:abDamageTgtCP 2 Discard<1/Random>:2
+#K:abDamageTgtCP 2 Discard<1/Random>:2
+A:AB$DealDamage | Cost$ 2 Discard<1/Random> | Tgt$ TgtCP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormbind.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/102.jpg

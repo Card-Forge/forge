@@ -3,7 +3,8 @@ ManaCost:1 R G
 Types:Creature Centaur Archer
 Text:no text
 PT:3/2
-K:abDamageTgtV T:1:Creature.withFlying:Centaur Archer deals 1 damage to target creature with flying.
+#K:abDamageTgtV T:1:Creature.withFlying:Centaur Archer deals 1 damage to target creature with flying.
+A:AB$DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_archer.jpg
 SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/360.jpg

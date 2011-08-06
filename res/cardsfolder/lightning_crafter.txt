@@ -3,7 +3,8 @@ ManaCost:3 R
 Types:Creature Goblin Shaman
 Text:no text
 PT:3/3
-K:abDamageTgtCP T:3
+#K:abDamageTgtCP T:3
+A:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lightning_crafter.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/93.jpg

@@ -2,7 +2,8 @@ Name:Blasting Station
 ManaCost:3
 Types:Artifact
 Text:no text
-K:abDamageTgtCP T Sac<1/Creature>:1
+#K:abDamageTgtCP T Sac<1/Creature>:1
+A:AB$DealDamage | Cost$ T Sac<1/Creature> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 K:WheneverKeyword:EntersBattleField:Type/Creature:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever a creature enters the battlefield, you may untap Blasting Station.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
