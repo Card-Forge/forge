@@ -1,8 +1,8 @@
 Name:Swords to Plowshares
 ManaCost:W
 Types:Instant
-Text:Exile target creature. Its controller gains life equal to its power.
-K:spBounceTgt:Creature:Exile:Drawback$TgtCtrlrGainLife/dX
+Text:no text
+A:SP$Bounce|Cost$W|ValidTgts$Creature|TgtPrompt$Select target creature|Destination$Exile|SpellDescription$Exile target creature. Its controller gains life equal to its power.|SubAbility$TgtCtrlrGainLife/dX
 SVar:dX:Count$TgtCardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/br/en-us/card21172.jpg

@@ -1,8 +1,8 @@
 Name:Snap
 ManaCost:1 U
 Types:Instant
-Text:Return target creature to its owner's hand. Untap up to two lands.
-K:spBounceTgt:Creature:Hand:Drawback$YouUntapUpTo/2/Land
+Text:no text
+A:SP$Bounce|Cost$1 U|ValidTgts$Creature|TgtPrompt$Select target creature|Destination$Hand|SpellDescription$Return target creature to its owner's hand. Untap up to two lands.|SubAbility$YouUntapUpTo/2/Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snap.jpg
 End

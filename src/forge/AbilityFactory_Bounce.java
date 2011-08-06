@@ -95,6 +95,8 @@ public class AbilityFactory_Bounce {
 					 
 					 if (destination.equals("TopofLibrary"))
                          sb.append("Top of Library");
+					 else if (destination.equals("BottomofLibrary"))
+						 sb.append("Bottom of Library");
                      else
 					     sb.append(destination);
 
