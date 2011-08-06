@@ -4598,8 +4598,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.mill(getTargetPlayer(),
-                    		(cardName.equals("Glimpse the Unthinkable")) ? 10 : 5);
+                	getTargetPlayer().mill((cardName.equals("Glimpse the Unthinkable")) ? 10 : 5);
                 }
             };//SpellAbility
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -5605,7 +5604,7 @@ public class CardFactory_Sorceries {
 
         		public void resolve()
         		{
-        			AllZone.GameAction.mill(getTargetPlayer(),card.getXManaCostPaid());
+        			getTargetPlayer().mill(card.getXManaCostPaid());
         			
         			card.getController().gainLife(card.getXManaCostPaid(), card);
         			

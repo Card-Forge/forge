@@ -10069,7 +10069,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.mill(getTargetPlayer(), millCards);
+                    getTargetPlayer().mill(millCards);
                 }
             };
             ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -10631,8 +10631,7 @@ public class CardFactory implements NewConstants {
         		@Override
         		public void resolve() {
         			Player player = getTargetPlayer();
-        			AllZone.GameAction.mill(player,
-        					AllZone.getZone(Constant.Zone.Graveyard, player).size());
+        			player.mill(AllZone.getZone(Constant.Zone.Graveyard, player).size());
         		}
         	};
         	ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());

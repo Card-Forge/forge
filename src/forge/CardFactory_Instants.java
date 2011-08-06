@@ -1470,16 +1470,12 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void chooseTargetAI() {
-                    
                     setTargetPlayer(AllZone.HumanPlayer);
-                    
                 }//chooseTargetAI()
                 
                 @Override
                 public void resolve() {
-                    
-                    AllZone.GameAction.mill(getTargetPlayer(),3);
-                    
+                    getTargetPlayer().mill(3);
                 }//resolve()
             };//SpellAbility
             

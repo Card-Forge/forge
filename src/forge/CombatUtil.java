@@ -1737,7 +1737,7 @@ public class CombatUtil {
             }//Preeminent Captain
             
             else if(c.getName().equals("Nemesis of Reason") && !c.getCreatureAttackedThisCombat()) {
-                AllZone.GameAction.mill( c.getController().getOpponent(),10);
+                c.getController().getOpponent().mill(10);
             }//Nemesis of Reason
             
             else if(c.getName().equals("Novablast Wurm") && !c.getCreatureAttackedThisCombat()) {

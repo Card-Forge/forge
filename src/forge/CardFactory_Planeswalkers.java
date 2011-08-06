@@ -1864,7 +1864,7 @@ class CardFactory_Planeswalkers {
                     card2.subtractCounter(Counters.LOYALTY, 10);
                     
                     turn[0] = AllZone.Phase.getTurn();
-                    AllZone.GameAction.mill(getTargetPlayer(),20);
+                    getTargetPlayer().mill(20);
                     
                 }//resolve()
                 

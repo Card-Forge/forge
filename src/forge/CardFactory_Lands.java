@@ -2578,7 +2578,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.mill(getTargetPlayer(),1);
+                    getTargetPlayer().mill(1);
                 }
             };
             ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
