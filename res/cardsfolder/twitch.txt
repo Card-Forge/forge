@@ -1,5 +1,5 @@
 Name:Twitch
-ManaCost:U
+ManaCost:2 U
 Types:Instant
 Text:You may tap or untap target artifact, creature, or land.
 K:Draw a card.
