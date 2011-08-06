@@ -121,7 +121,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Endora 3", "hard", "WG Enchantress deck with enchantments and cards with enchantment effects");
         addToDeckList("Eomer 2", "medium", "Mono W flanking deck");
         
-        addToDeckList("Fat Albert 1", "easy", "WUBRG Winter Orb deck with Keldon Warlord and mana Elves/Slivers");
+        addToDeckList("Fat Albert 1", "easy", "WBRG Winter Orb deck with Keldon Warlord and mana Elves/Slivers");
         addToDeckList("Fat Albert 2", "medium", "WUBRG Winter Orb deck with Keldon Warlord and mana Elves/Slivers");
         addToDeckList("Fat Albert 3", "hard", "UG Winter Orb deck with Kalonian Behemoth and mana Elves/Slivers");
 //        addToDeckList("Fin Fang Foom 1", "easy", "B Artifact");
