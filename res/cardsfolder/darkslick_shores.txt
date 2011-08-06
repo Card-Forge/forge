@@ -1,0 +1,10 @@
+Name:Darkslick Shores
+ManaCost:no cost
+Types:Land
+text:Darkslick Shores enters the battlefield tapped unless you control two or fewer other lands.
+K:tap: add B
+K:tap: add U
+K:CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
+SVar:Rarity:Rare
+SVar:Pcture:http://www.wizards.com/global/images/magic/general/darkslick_shores.jpg
+End

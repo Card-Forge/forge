@@ -1,0 +1,10 @@
+Name:Blackcleave Cliffs
+ManaCost:no cost
+Types:Land
+text:Blackcleave Cliffs enters the battlefield tapped unless you control two or fewer other lands.
+K:tap: add B
+K:tap: add R
+K:CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
+SVar:Rarity:Rare
+SVar:Pcture:http://www.wizards.com/global/images/magic/general/blackcleave_cliffs.jpg
+End
