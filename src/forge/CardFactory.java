@@ -16644,11 +16644,16 @@ public class CardFactory implements NewConstants {
                     CardList grvList = new CardList(grave.getCards());
                     CardList fullHand = new CardList(hand.getCards());
                     Card[] handChoices = removeLand(hand.getCards());
+                    
                     if(fullHand.size() > 0 && card.getController().equals(Constant.Player.Human)) AllZone.Display.getChoice(
                             "Revealing hand", fullHand.toArray());
+                    
+                    if (handChoices.length == 0)
+                    	return;
+                    
                     if(card.getController().equals(Constant.Player.Human)) {
                         choice = AllZone.Display.getChoice("Choose", handChoices);
-                    } else//computer chooses
+                    } else //computer chooses
                     {
                         choice = CardUtil.getRandom(handChoices);
                     }
