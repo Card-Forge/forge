@@ -5800,45 +5800,7 @@ public class CardFactory_Creatures {
             
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
-        
 
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Mad Auntie")) {
-            final Card[] creature = new Card[1];
-            final Command EOT = new Command() {
-                private static final long serialVersionUID = -5143708900761432510L;
-                
-                public void execute() {
-                    if(AllZone.GameAction.isCardInPlay(creature[0])) {
-                        creature[0].setShield(0);
-                    }
-                }
-            };
-            
-            final Ability_Tap ability = new Ability_Tap(card) {
-                private static final long serialVersionUID = -1280855188535819509L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        getTargetCard().addShield();
-                        AllZone.EndOfTurn.addUntil(EOT);
-                    }
-                }//resolve()
-            };//SpellAbility
-            card.addSpellAbility(ability);
-            ability.setDescription("tap: Regenerate another target Goblin.");
-            
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility_NoTargetSelf(ability));
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Adarkar Valkyrie")) {
@@ -5858,8 +5820,8 @@ public class CardFactory_Creatures {
         
                             if(grave != null && AllZone.GameAction.isCardInZone(target[0], grave)) {
                                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                                target[0].setController(card.getController());
                                 AllZone.GameAction.moveTo(play, target[0]);
+                                target[0].setController(card.getController());
                             }
                         }
                     });

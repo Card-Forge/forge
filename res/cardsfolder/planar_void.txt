@@ -1,8 +1,7 @@
 Name:Planar Void
 ManaCost:B
 Types:Enchantment
-Text:no text
-K:WheneverKeyword:PermanentIntoGraveyard:Any:Play:MoveFrom-Graveyard-Exiled:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever another card is put into a graveyard from anywhere, exile that card.
+Text:Whenever another card is put into a graveyard from anywhere, exile that card.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_void.jpg
