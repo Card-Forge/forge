@@ -517,10 +517,10 @@ public class ComputerUtil_Block2
 	  if (attackers.size() == 0)
 		  return combat;
 	   
-	  CardList attackersLeft = attackers; //keeps track of all currently unblocked attackers
+	  CardList attackersLeft = new CardList(attackers.toArray()); //keeps track of all currently unblocked attackers
 	  CardList blockedButUnkilled = new CardList(); //keeps track of all blocked attackers that currently wouldn't be destroyed
 	  CardList tramplingAttackers = new CardList();
-	  CardList blockersLeft = possibleBlockers; //keeps track of all unassigned blockers
+	  CardList blockersLeft = new CardList(possibleBlockers.toArray()); //keeps track of all unassigned blockers
 	  CardList blockers = new CardList();
 	  CardList safeBlockers = new CardList();
 	  CardList killingBlockers = new CardList();
@@ -548,7 +548,7 @@ public class ComputerUtil_Block2
 	  for(int i = 0; i < attackersWithLure.size(); i++) {
 		  attacker = attackersWithLure.get(i);
 		  for(int j = 0; j < possibleBlockers.size(); j++) {
-			  b = possibleBlockers.get(i);
+			  b = possibleBlockers.get(j);
 			  if(CombatUtil.canBlock(attacker, b)) canBlockAttackerWithLure.add(b);
 		  }
 	  }
@@ -704,7 +704,7 @@ public class ComputerUtil_Block2
 				  safeBlockers = blockers.getKeyword("First Strike");
 				  safeBlockers.addAll(blockers.getKeyword("Double Strike").toArray());
 			  }
-			  else safeBlockers = blockers;
+			  else safeBlockers = new CardList(blockers.toArray());
 			  
 			  for(int j = 0; j < safeBlockers.size(); j++) {
 				  blocker = safeBlockers.get(j);
