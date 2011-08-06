@@ -3241,8 +3241,9 @@ public class GameAction {
     		{
     			payment = new Cost_Payment(sa.getPayCosts(),sa);
     		}
-    		
-    		payment.changeCost();
+
+            if(!sa.isTrigger())
+    		    payment.changeCost();
     		
     		SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
     		req.fillRequirements();
@@ -3282,8 +3283,9 @@ public class GameAction {
     	if (sa.getPayCosts() != null){
     		Target_Selection ts = new Target_Selection(sa.getTarget(),sa);
     		Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
-    		
-    		payment.changeCost();
+
+            if(!sa.isTrigger())
+    		    payment.changeCost();
     		
     		SpellAbility_Requirements req = new SpellAbility_Requirements(sa, ts, payment);
     		req.setSkipStack(true);

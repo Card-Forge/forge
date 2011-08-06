@@ -330,6 +330,7 @@ public class TriggerHandler {
 				    sa[0] = AF.getAbility(host.getSVar(trigParams.get("Execute")), host);
                 }
 			}
+            sa[0].setTrigger(true);
             regtrig.setTriggeringObjects(host);
 
 			sa[0].setActivatingPlayer(host.getController());
