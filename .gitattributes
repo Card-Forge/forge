@@ -3198,6 +3198,7 @@ res/cardsfolder/joiner_adept.txt -text svneol=native#text/plain
 res/cardsfolder/jokulhaups.txt -text svneol=native#text/plain
 res/cardsfolder/jolraels_centaur.txt -text svneol=native#text/plain
 res/cardsfolder/jolraels_favor.txt svneol=native#text/plain
+res/cardsfolder/jolt.txt -text svneol=native#text/plain
 res/cardsfolder/jolting_merfolk.txt -text svneol=native#text/plain
 res/cardsfolder/joraga_bard.txt -text svneol=native#text/plain
 res/cardsfolder/joraga_treespeaker.txt -text svneol=native#text/plain
