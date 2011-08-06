@@ -1,3 +1,8 @@
+Parallel Evolution
+3 G G
+Sorcery
+no text
+
 Quicksilver Amulet
 4
 Artifact
@@ -16045,11 +16050,6 @@ Acorn Harvest
 3 G
 Sorcery
 no text
-
-Parallel Evolution
-3 G G
-Sorcery
-For each creature token on the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.
 
 Beast Attack
 2 G G G
