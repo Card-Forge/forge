@@ -3488,7 +3488,7 @@ public class CardFactory implements NewConstants {
 	            }
 	            else {
 	            	sb.append("You may ").append(abCost.toStringAlt());
-	            	sb.append(" rather than pay ").append(card.getName()).append("'s mana cost");
+	            	sb.append(" rather than pay ").append(card.getName()).append("'s mana cost.");
 	            }
 	            
 	            altCostSA.setDescription(sb.toString());

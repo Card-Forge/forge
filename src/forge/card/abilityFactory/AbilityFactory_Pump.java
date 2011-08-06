@@ -867,6 +867,9 @@ public class AbilityFactory_Pump {
     	if(params.containsKey("SpellDescription")) {
     		desc = params.get("SpellDescription");
     	}
+    	else if(params.containsKey("PumpAllDescription")) {
+    		desc = params.get("PumpAllDescription");
+    	}
 
     	/*
     	if (sa instanceof Ability_Sub)
