@@ -65,7 +65,7 @@ public class QuestBattleManager {
         int index = AllZone.QuestData.getDifficultyIndex();
 
         if (AllZone.QuestData.getWin() < AllZone.QuestData.getPreferences().getWinsForMediumAI(index)) {
-            return new String[]{getOpponent(easyAIDecks,0),getOpponent(easyAIDecks,1),getOpponent(veasyAIDecks,2)};
+            return new String[]{getOpponent(easyAIDecks,0),getOpponent(easyAIDecks,1),getOpponent(easyAIDecks,2)};
         }
         
         if (AllZone.QuestData.getWin() == AllZone.QuestData.getPreferences().getWinsForMediumAI(index)) {
