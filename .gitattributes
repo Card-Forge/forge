@@ -6148,6 +6148,7 @@ src/forge/Gui_DeckEditor_Menu.java svneol=native#text/plain
 src/forge/Gui_DownloadPictures.java svneol=native#text/plain
 src/forge/Gui_DownloadPictures_LQ.java -text svneol=native#text/plain
 src/forge/Gui_DownloadPrices.java -text svneol=native#text/plain
+src/forge/Gui_DownloadSetPictures_LQ.java -text svneol=native#text/plain
 src/forge/Gui_ElixirShop.java -text svneol=native#text/plain
 src/forge/Gui_Gear.java -text svneol=native#text/plain
 src/forge/Gui_Library.java -text svneol=native#text/plain
