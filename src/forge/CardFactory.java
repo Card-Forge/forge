@@ -17429,6 +17429,133 @@ public class CardFactory implements NewConstants {
            ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Creature"));
         }//Jandor's Saddlebags
         //****************END*******END***********************
+        
+        //*************** START *********** START **************************
+
+        else if(cardName.equals("Reinforcements")) {
+           /* Put up to three target creature cards from your
+            * graveyard on top of your library.
+            */
+           final SpellAbility spell = new Spell(card) {
+             private static final long serialVersionUID = 4075591356690396548L;
+             
+             CardList getComputerCreatures()
+             {
+                 CardList list = new CardList(AllZone.Computer_Graveyard.getCards());
+                 list = list.getType("Creature");
+                 
+                 //put biggest attack creats first
+                 if (list.size()>0)
+                	 CardListUtil.sortAttack(list);
+                 
+                 return list;
+             }
+             
+             @Override
+              public boolean canPlayAI() {
+                 return getComputerCreatures().size() >= 3;
+              }
+             @Override
+              public void resolve() {
+                 String player = card.getController();
+                 PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+                 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+
+                 CardList creatures = new CardList(grave.getCards());
+                 creatures = creatures.filter(new CardListFilter() {
+                         public boolean addCard(Card c) {
+                             return c.isCreature();
+                         }
+                     });
+                 if (player.equals(Constant.Player.Human))
+                 {
+	                 //now, select three creatures
+	                 int end = -1;
+	                 end = Math.min(creatures.size(), 3);
+	                 for(int i = 1; i <= end; i++) {
+	                    String Title = "Put on top of library: ";
+	                    if(i == 2) Title = "Put second from top of library: ";
+	                    if(i == 3) Title = "Put third from top of library: ";
+	                    Object o = AllZone.Display.getChoiceOptional(Title, creatures.toArray());
+	                    if(o == null) break;
+	                    Card c_1 = (Card) o;
+	                    creatures.remove(c_1); //remove from the display list
+	                    grave.remove(c_1); //remove from graveyard
+	                    lib.add(c_1, i - 1);
+	                 }
+                 }
+                 else //Computer
+                 {
+                	 CardList list = getComputerCreatures();
+                	 int max = list.size();
+                	 
+                	 if (max > 3)
+                		 max = 3;
+                	 
+                	 for (int i=0;i<max;i++)
+                	 {
+                		 grave.remove(list.get(i));
+                		 lib.add(list.get(i), i);
+                	 }
+                 }
+                 
+              }
+           };//spell
+           card.clearSpellAbility();
+           card.addSpellAbility(spell);
+        }
+        //*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Riding the Dilu Horse"))
+        {
+        	SpellAbility spell = new Spell(card)
+        	{
+        		private static final long serialVersionUID = -620930445462994580L;
+
+
+        		public boolean canPlayAI()
+        		{
+        			PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+
+        			CardList list = new CardList(play.getCards());
+        			list = list.filter(new CardListFilter()
+        			{
+        				public boolean addCard(Card c)
+        				{
+        					return c.isCreature() && !c.getKeyword().contains("Horsemanship") && !c.getKeyword().contains("Defender");
+        				}
+        			});
+        			if (list.size() > 0) {
+        				Card c = CardFactoryUtil.AI_getBestCreature(list, card);
+        				setTargetCard(c);
+        				return true;
+        			}
+        			return false;
+        		}
+
+        		public void resolve()
+        		{
+        			final Card[] target = new Card[1];
+
+
+        			target[0] = getTargetCard();
+        			if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
+        			{
+        				target[0].addTempAttackBoost(2);
+        				target[0].addTempDefenseBoost(2);
+        				target[0].addExtrinsicKeyword("Horsemanship");
+      		  
+        				//String s = target[0].getText();
+        				target[0].setText("(+2/+2 and Horsemanship from " +card+")");
+        			}
+        		}//resolve()
+        	};
+	        spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+	        card.clearSpellAbility();
+	        card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+
 
         
         // Cards with Cycling abilities

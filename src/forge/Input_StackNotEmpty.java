@@ -46,9 +46,6 @@ public class Input_StackNotEmpty extends Input implements java.io.Serializable {
                 AllZone.GameAction.scry(sa.getSourceCard().getController(), Integer.parseInt(kk[1]));
             }
         }
-        
-        //check them twice, sometimes creatures will survive when they shouldn't
-        AllZone.GameAction.checkStateEffects();
         AllZone.GameAction.checkStateEffects();
         
         //special consideration for "Beacon of Unrest" and other "Beacon" cards

@@ -1,3 +1,8 @@
+Riding the Dilu Horse
+2 G
+Sorcery
+no text
+
 Mogg Jailer
 1 R
 Creature Goblin
@@ -4405,12 +4410,6 @@ R
 Creature Human Soldier Archer
 no text
 1/1
-
-Riding the Dilu Horse
-2 G
-Sorcery
-no text
-spPumpTgt:+2/+2/Horsemanship
 
 Magus of the Coffers
 4 B
