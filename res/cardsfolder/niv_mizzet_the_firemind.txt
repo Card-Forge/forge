@@ -4,7 +4,7 @@ Types:Legendary Creature Dragon Wizard
 Text:no text
 PT:4/4
 K:Flying
-A:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you draw a card, CARDNAME deals 1 damage to target creature or player.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ 1
 SVar:Rarity:Rare
