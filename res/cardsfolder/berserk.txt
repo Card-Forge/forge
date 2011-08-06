@@ -2,6 +2,7 @@ Name:Berserk
 ManaCost:G
 Types:Instant
 Text:Cast Berserk only before the combat damage step.\r\nTarget creature gains trample and gets +X/+0 until end of turn, where X is its power. At the beginning of the next end step, destroy that creature if it attacked this turn.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/berserk.jpg
 End
