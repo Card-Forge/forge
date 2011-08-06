@@ -1,0 +1,10 @@
+Name:Hand of Emrakul
+ManaCost:9
+Types:Creature Eldrazi
+Text:no text
+PT:7/7
+K:Annihilator 1
+SVar:AltCost:Sac<4/Eldrazi.Spawn>$You may sacrifice four Eldrazi Spawn rather than pay Hand of Emrakul's mana cost.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hand_of_emrakul.jpg
+End
