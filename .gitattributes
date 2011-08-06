@@ -3867,6 +3867,7 @@ res/cardsfolder/lavaborn_muse.txt svneol=native#text/plain
 res/cardsfolder/lavaclaw_reaches.txt -text svneol=native#text/plain
 res/cardsfolder/lavafume_invoker.txt -text svneol=native#text/plain
 res/cardsfolder/lavalanche.txt -text svneol=native#text/plain
+res/cardsfolder/lavamancers_skill.txt -text svneol=native#text/plain
 res/cardsfolder/lawbringer.txt -text svneol=native#text/plain
 res/cardsfolder/lay_bare.txt -text svneol=native#text/plain
 res/cardsfolder/lay_of_the_land.txt -text svneol=native#text/plain
