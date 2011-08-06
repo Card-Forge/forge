@@ -684,7 +684,11 @@ public class GameAction {
         
 
         c.destroy();
-        if(c.isEquipped()) skullClamp_destroy(c);
+        if(c.isEquipped()){	// when equipped creature goes to the grave here.
+        	// Deathrender & Oathkeeper, Takeno's Daisho have similar triggers to Skullclamp
+        	skullClamp_destroy(c);
+        	c.unEquipAllCards();
+        }
         
         //destroy card effects:
         PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
