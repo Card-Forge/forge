@@ -180,6 +180,7 @@ public class StaticEffects
 		cardToEffectsList.put("Meddling Mage", new String[] {"Meddling_Mage"});
 		cardToEffectsList.put("Gaddock Teeg", new String[] {"Gaddock_Teeg"});
 		cardToEffectsList.put("Iona, Shield of Emeria", new String[] {"Iona_Shield_of_Emeria"});
+		cardToEffectsList.put("Giant Tortoise",new String[] {"Giant_Tortoise"});
 	}
 	
 	public HashMap<String, String[]> getCardToEffectsList()
