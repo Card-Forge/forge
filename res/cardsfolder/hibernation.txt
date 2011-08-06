@@ -1,8 +1,8 @@
 Name:Hibernation
 ManaCost:2 U
 Types:Instant
-Text:Return all green permanents to their owners' hands.
-K:spBounceAll:Permanent.Green:Hand
+Text:no text
+A:SP$ChangeZoneAll | Cost$ 2 U | ChangeType$ Permanent.Green | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all green permanents to their owners' hands.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hibernation.jpg
