@@ -1,3 +1,17 @@
+Demigod of Revenge
+BR BR BR BR BR
+Creature Spirit Avatar
+When you cast Demigod of Revenge, return all cards named Demigod of Revenge from your graveyard to the battlefield.
+5/4
+Flying
+Haste
+
+Augury Adept
+1 WU WU
+Creature Kithkin Wizard
+Whenever Augury Adept deals combat damage to a player, reveal the top card of your library and put that card into your hand. You gain life equal to its converted mana cost.
+2/2
+
 Crypt of Agadeem
 no cost
 Land

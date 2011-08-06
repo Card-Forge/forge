@@ -18,6 +18,8 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+demigod_of_revenge.jpg      http://www.wizards.com/global/images/magic/general/demigod_of_revenge.jpg
+augury_adept.jpg            http://www.wizards.com/global/images/magic/general/augury_adept.jpg
 crypt_of_agadeem.jpg        http://www.wizards.com/global/images/magic/general/crypt_of_agadeem.jpg
 traumatic_visions.jpg       http://www.wizards.com/global/images/magic/general/traumatic_visions.jpg
 fiery_fall.jpg              http://www.wizards.com/global/images/magic/general/fiery_fall.jpg

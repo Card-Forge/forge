@@ -90,6 +90,7 @@ public class GameActionUtil
 		Card c = sa.getSourceCard();
 		
 		playCard_Dovescape(c); //keep this one top
+		playCard_Demigod_of_Revenge(c);
 		playCard_Emberstrike_Duo(c);
 		playCard_Gravelgill_Duo(c);
 		playCard_Safehold_Duo(c);
@@ -558,6 +559,40 @@ public class GameActionUtil
 			
 
 	}//Thistledown Duo
+	
+	public static void playCard_Demigod_of_Revenge(Card c)
+	{
+					
+			if (c.getName().equals("Demigod of Revenge"))
+			{
+						Ability ability2 = new Ability(c, "0")
+						{
+							public void resolve()
+							{
+								PlayerZone Grave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.Phase.getActivePlayer());
+								PlayerZone Play = AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getActivePlayer());
+				                CardList evildead = new CardList();
+				                evildead.addAll(Grave.getCards());
+				                evildead = evildead.filter(new CardListFilter(){
+				                    public boolean addCard(Card card) {
+				                       return (card.getName().contains("Demigod of Revenge"));
+				                    }
+				                 });
+				                for (int i=0;i<evildead.size();i++)
+				                {
+				                  Card c = evildead.get(i);
+				                  Grave.remove(c);
+				                  Play.add(c);
+				                }			
+							}							
+						}; // ability2
+						ability2.setStackDescription(c.getName() + " - "
+								+ c.getController() + " casts Demigod of Revenge, returns all cards named Demigod of Revenge from your graveyard to the battlefield.");
+						AllZone.Stack.add(ability2);
+		
+				}//if					
+	}// Demigod of Revenge
+	
 	public static void playCard_Shorecrasher_Mimic(Card c)
 	{
 		final String controller = c.getController();
@@ -2982,6 +3017,8 @@ public class GameActionUtil
 			playerCombatDamage_Shadowmage_Infiltrator(c);
 		else if (c.getName().equals("Goblin Lackey"))
 			playerCombatDamage_Goblin_Lackey(c);
+		else if (c.getName().equals("Augury Adept"))
+			playerCombatDamage_Augury_Adept(c);
 		else if (c.getName().equals("Warren Instigator"))
 			playerCombatDamage_Warren_Instigator(c);
 		else if (c.getName().equals("Guiltfeeder"))
@@ -3451,6 +3488,39 @@ public class GameActionUtil
 
 	}
 
+	private static void playerCombatDamage_Augury_Adept(Card c)
+	{
+		final String player = c.getController();
+
+
+		if (c.getNetAttack() > 0)
+		{
+			Ability ability2 = new Ability(c, "0")
+			{
+				public void resolve()
+				{
+					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+		             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+		             if (lib.size() > 0 ) {
+	                	CardList cl = new CardList();
+				    	cl.add(lib.get(0));
+				    	AllZone.Display.getChoiceOptional("Top card", cl.toArray());
+	                                     };
+		            Card top = lib.get(0);
+		            AllZone.GameAction.getPlayerLife(player).addLife(CardUtil.getConvertedManaCost(top.getManaCost()));
+		            hand.add(top);
+		            lib.remove(top);
+		            	                                  
+				}
+			};// ability2
+
+			ability2.setStackDescription(c.getName() + " - " + player
+					+ " reveals the top card of his library and put that card into his hand. He gain life equal to its converted mana cost.");
+			AllZone.Stack.add(ability2);
+		}
+
+	}
+	
 	private static void playerCombatDamage_Hypnotic_Specter(Card c)
 	{
 		final String player = c.getController();
