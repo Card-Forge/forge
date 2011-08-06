@@ -83,7 +83,7 @@ barkhide_mauler.jpg	http://[server]/ON/Barkhide%20Mauler.full.jpg
 barkshell_blessing.jpg	http://[server]/SHM/Barkshell%20Blessing.full.jpg
 barktooth_warbeard.jpg	http://[server]/LG/Barktooth%20Warbeard.full.jpg
 barls_cage.jpg	http://[server]/DK/Barl's%20Cage.full.jpg
-baron_sengir.jpg	http://[server]/OV/Baron%20Sengir.full.jpg
+baron_sengir.jpg	http://[server]/HL/Baron%20Sengir.full.jpg
 barrel_down_sokenzan.jpg	http://[server]/SOK/Barrel%20Down%20Sokenzan.full.jpg
 barreling_attack.jpg	http://[server]/MI/Barreling%20Attack.full.jpg
 barren_glory.jpg	http://[server]/FUT/Barren%20Glory.full.jpg
