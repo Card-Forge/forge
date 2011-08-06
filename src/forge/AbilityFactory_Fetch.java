@@ -89,8 +89,11 @@ public class AbilityFactory_Fetch {
 	            		AllZone.Human_Hand.add(c);         			//move to hand
 	            	else if (destination.equals("Library")) 
 	                	AllZone.Human_Library.add(c, libraryPosition); //move to top of library
-	            	else if (destination.equals("Battlefield")) 
+	            	else if (destination.equals("Battlefield")){
 	                	AllZone.getZone(Constant.Zone.Play, player).add(c); //move to battlefield
+	                	if (params.containsKey("Tapped"))
+	                		c.tap();
+	            	}
 	            }
 	            else
 	            	break;
