@@ -1,0 +1,12 @@
+Name:Gempalm Strider
+ManaCost:1 G
+Types:Creature Elf
+Text:no text
+PT:2/2
+K:Cycling:2 G G
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When you cycle CARDNAME, Elf creatures get +2/+2 until end of turn.
+SVar:TrigPumpAll:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.Elf | NumAtt$ +2 | NumDef$ +2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gempalm_strider.jpg
+SVar:Rarity:Uncommon
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/127.jpg
+End
