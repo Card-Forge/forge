@@ -1002,7 +1002,7 @@ public class CardFactoryUtil {
         };
         
         morph_down.setManaCost("3");
-        morph_down.setDescription("You may play this face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.");
+        //morph_down.setDescription("(You may cast this face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)");
         morph_down.setStackDescription("Morph - Creature 2/2");
         
         return morph_down;
@@ -1044,7 +1044,8 @@ public class CardFactoryUtil {
         
         morph_up.setManaCost(cost);
         StringBuilder sb = new StringBuilder();
-        sb.append("Morph ").append(cost).append(" - turn this card face up.");
+        sb.append("Morph ").append(cost);
+        sb.append(" (You may cast this face down as a 2/2 creature for 3. Turn it face up any time for its morph cost.)");
         morph_up.setDescription(sb.toString());
         
         StringBuilder sbStack = new StringBuilder();
