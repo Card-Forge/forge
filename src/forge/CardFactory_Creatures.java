@@ -10462,7 +10462,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Lichenthrope")) {
         	final Card newCard = new Card()
@@ -10491,7 +10491,7 @@ public class CardFactory_Creatures {
             return newCard;
         }//*************** END ************ END **************************
         
-
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Phytohydra")) {
             final Card newCard = new Card() {
@@ -10519,7 +10519,7 @@ public class CardFactory_Creatures {
             
             return newCard;
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Callous Giant")) {
@@ -12053,8 +12053,7 @@ public class CardFactory_Creatures {
     	        		AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(), Constant.Zone.Hand, false, Constant.Zone.Hand, false);
     	        	}
     	        };
-    	        card.addDestroyCommand(destroy);
-        	    
+    	        card.addDestroyCommand(destroy);   	    
         }//*************** END ************ END **************************
        
         

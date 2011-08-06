@@ -5372,6 +5372,8 @@ public class GameActionUtil {
 	//not restricted to combat damage, not restricted to dealing damage to creatures/players
 	public static void executeDamageDealingEffects(final Card source, int damage) {
 		
+		if (damage <= 0) return;
+		
         if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
         
         if(source.getKeyword().contains("Whenever CARDNAME deals damage, you gain that much life.")) {
@@ -5420,6 +5422,8 @@ public class GameActionUtil {
 	//effects restricted to combat damage but not to dealing to creatures/players
     public static void executeCombatDamageEffects(final Card source, int damage) {
     	
+    	if (damage <= 0) return;
+    	
         if(source.getKeyword().contains("Whenever CARDNAME deals combat damage, you gain that much life.")) {
 			final int life = damage;
 			final Player player = source.getController();
@@ -5455,6 +5459,8 @@ public class GameActionUtil {
 	
 	//restricted to combat damage and dealing damage to creatures
 	public static void executeCombatDamageToCreatureEffects(final Card source, final Card affected, int damage) {
+		
+		if (damage <= 0) return;
 		
         if(source.getKeyword().contains("Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.")) {
 			
@@ -5535,6 +5541,8 @@ public class GameActionUtil {
 	
 	//not restricted to combat damage, restricted to dealing damage to creatures
 	public static void executeDamageToCreatureEffects(final Card source, final Card affected, int damage) {
+		
+		if (damage <= 0) return;
 		
 		final Player player = affected.getController();
 		
@@ -5836,123 +5844,126 @@ public class GameActionUtil {
     //not restricted to just combat damage, restricted to players
     public static void executeDamageToPlayerEffects(final Player player, final Card c, final int damage)
     {
-    	if (damage > 0)
-    	{
-        	Object[] DealsDamage_Whenever_Parameters = new Object[3];
-        	DealsDamage_Whenever_Parameters[2] = c;
-        	DealsDamage_Whenever_Parameters[0] = player;
-        	AllZone.GameAction.checkWheneverKeyword(c, "DealsDamage/Player", DealsDamage_Whenever_Parameters);
-        	if(!c.getController().equals(player))
-        		AllZone.GameAction.checkWheneverKeyword(c, "DealsDamage/Opponent", DealsDamage_Whenever_Parameters);
-        	
-    		CardList playerPerms = AllZoneUtil.getPlayerCardsInPlay(player);
-    		
-    		/*
-    		 * Backfire - Whenever enchanted creature deals damage to you, Backfire
-    		 * deals that much damage to that creature's controller.
-    		 */
-    		if(c.isEnchanted()) {
-    			final String auraName = "Backfire";
-    			
-    	        CardList auras = new CardList(c.getEnchantedBy().toArray());
-    			auras = auras.getName(auraName);
-    	        
-    			if(auras.size() > 0) {
-    				for(Card aura:auras) {
-    					final Card source = aura;
-    					Ability ability = new Ability(source, "0") {
-    						@Override
-    						public void resolve() {
-    							c.getController().addDamage(damage, source);
-    						}
-    					};
-    					
-    					StringBuilder sb = new StringBuilder();
-    					sb.append(source.getName()).append(" - deals ").append(damage);
-    					sb.append(" damage to ").append(c.getController());
-    					ability.setStackDescription(sb.toString());
-    					
-    					AllZone.Stack.add(ability);
-    				}
-    			}//auras > 0
-    		}//end c.isEnchanted()
-    		
-    		/*
-    		 * Darien, King of Kjeldor - 
-    		 * Whenever you're dealt damage, you may put that many 1/1 white
-    		 * Soldier creature tokens onto the battlefield.
-    		 */
-    		if( playerPerms.getName("Darien, King of Kjeldor").size() > 0) {
-    			CardList dariens = playerPerms.getName("Darien, King of Kjeldor");
-    			for(Card crd:dariens) {
-    				final Card darien = crd;
-    				SpellAbility ability = new Ability(darien, "0") {
-    					public void resolve() {
-    						for(int i = 0; i < damage; i++)
-    							CardFactoryUtil.makeToken11WSoldier(darien.getController());
-    					}
-    				};
-    				
-    				StringBuilder sb = new StringBuilder();
-    				sb.append(darien.getName()).append(" - ").append(darien.getController());
-    				sb.append(" puts ").append(damage).append(" Soldier tokens onto the battlefield.");
-    				ability.setStackDescription(sb.toString());
-    				
-    				AllZone.Stack.add(ability);
-    			}
-    		}
-    		if (playerPerms.getName("Dissipation Field").size() > 0)  {  
-    			CardList disFields = playerPerms.getName("Dissipation Field");
-    			for (int i=0;i<disFields.size();i++) {
-    				Card crd = disFields.get(i);
-    				playerDamage_Dissipation_Field(c, crd);
-    			}
-    		}
-    		if (c.isCreature() && (playerPerms.getName("Dread").size() > 0 || playerPerms.getName("No Mercy").size() > 0))
-    		{
-    			CardList l = playerPerms.filter(new CardListFilter()
-    			{
-    				public boolean addCard(Card crd)
-    				{
-    					return crd.getName().equals("Dread") || crd.getName().equals("No Mercy");
-    				}
-    			});
-    			for (Card crd:l)
-    				playerDamage_No_Mercy(c, crd);
-    		}
-    		if (playerPerms.getName("Farsight Mask").size() > 0)    		
-    		{
-    			final Card c1 = c;
-    			CardList l = playerPerms.filter(new CardListFilter()
-    			{
-    				public boolean addCard(Card crd)
-    				{
-    					return crd.getName().equals("Farsight Mask") && crd.isUntapped() && !c1.getController().equals(crd.getController());
-    				}
-    			});
-    			for (Card crd:l)
-    				playerDamage_Farsight_Mask(player, c, crd);
-    		}
-    		
-	    	if(c.getKeyword().contains("Whenever this creature deals damage to a player, that player gets a poison counter."))
-				playerCombatDamage_PoisonCounter(c, 1);
-	    
-	    	if(c.getName().equals("Marsh Viper")) playerCombatDamage_PoisonCounter(c, 2);
-	    	else if(c.getName().equals("Abyssal Specter")) playerCombatDamage_Abyssal_Specter(c);
-	    	else if(c.getName().equals("Silent Specter")) playerCombatDamage_Silent_Specter(c);
-	    	else if(c.getName().equals("Nicol Bolas")) playerCombatDamage_Nicol_Bolas(c);
-			else if(c.getName().equals("Goblin Lackey")) playerCombatDamage_Goblin_Lackey(c);
-			else if(c.getName().equals("Thieving Magpie")|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
-			else if(c.getName().equals("Warren Instigator")) playerCombatDamage_Warren_Instigator(c);
-			else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
-				playerCombatDamage_Whirling_Dervish(c);
-	    	
-	    	if (player.isPlayer(AllZone.HumanPlayer)) c.setDealtDmgToHumanThisTurn(true);
-	    	if (player.isPlayer(AllZone.ComputerPlayer)) c.setDealtDmgToComputerThisTurn(true);
-    	}
+    	if (damage <= 0) return;
+    	
+    	Object[] DealsDamage_Whenever_Parameters = new Object[3];
+    	DealsDamage_Whenever_Parameters[2] = c;
+    	DealsDamage_Whenever_Parameters[0] = player;
+    	AllZone.GameAction.checkWheneverKeyword(c, "DealsDamage/Player", DealsDamage_Whenever_Parameters);
+    	if(!c.getController().equals(player))
+    		AllZone.GameAction.checkWheneverKeyword(c, "DealsDamage/Opponent", DealsDamage_Whenever_Parameters);
+    	
+		CardList playerPerms = AllZoneUtil.getPlayerCardsInPlay(player);
+		
+		/*
+		 * Backfire - Whenever enchanted creature deals damage to you, Backfire
+		 * deals that much damage to that creature's controller.
+		 */
+		if(c.isEnchanted()) {
+			final String auraName = "Backfire";
+			
+	        CardList auras = new CardList(c.getEnchantedBy().toArray());
+			auras = auras.getName(auraName);
+	        
+			if(auras.size() > 0) {
+				for(Card aura:auras) {
+					final Card source = aura;
+					Ability ability = new Ability(source, "0") {
+						@Override
+						public void resolve() {
+							c.getController().addDamage(damage, source);
+						}
+					};
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(source.getName()).append(" - deals ").append(damage);
+					sb.append(" damage to ").append(c.getController());
+					ability.setStackDescription(sb.toString());
+					
+					AllZone.Stack.add(ability);
+				}
+			}//auras > 0
+		}//end c.isEnchanted()
+		
+		/*
+		 * Darien, King of Kjeldor - 
+		 * Whenever you're dealt damage, you may put that many 1/1 white
+		 * Soldier creature tokens onto the battlefield.
+		 */
+		if( playerPerms.getName("Darien, King of Kjeldor").size() > 0) {
+			CardList dariens = playerPerms.getName("Darien, King of Kjeldor");
+			for(Card crd:dariens) {
+				final Card darien = crd;
+				SpellAbility ability = new Ability(darien, "0") {
+					public void resolve() {
+						for(int i = 0; i < damage; i++)
+							CardFactoryUtil.makeToken11WSoldier(darien.getController());
+					}
+				};
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(darien.getName()).append(" - ").append(darien.getController());
+				sb.append(" puts ").append(damage).append(" Soldier tokens onto the battlefield.");
+				ability.setStackDescription(sb.toString());
+				
+				AllZone.Stack.add(ability);
+			}
+		}
+		if (playerPerms.getName("Dissipation Field").size() > 0)  {  
+			CardList disFields = playerPerms.getName("Dissipation Field");
+			for (int i=0;i<disFields.size();i++) {
+				Card crd = disFields.get(i);
+				playerDamage_Dissipation_Field(c, crd);
+			}
+		}
+		if (c.isCreature() && (playerPerms.getName("Dread").size() > 0 || playerPerms.getName("No Mercy").size() > 0))
+		{
+			CardList l = playerPerms.filter(new CardListFilter()
+			{
+				public boolean addCard(Card crd)
+				{
+					return crd.getName().equals("Dread") || crd.getName().equals("No Mercy");
+				}
+			});
+			for (Card crd:l)
+				playerDamage_No_Mercy(c, crd);
+		}
+		if (playerPerms.getName("Farsight Mask").size() > 0)    		
+		{
+			final Card c1 = c;
+			CardList l = playerPerms.filter(new CardListFilter()
+			{
+				public boolean addCard(Card crd)
+				{
+					return crd.getName().equals("Farsight Mask") && crd.isUntapped() && !c1.getController().equals(crd.getController());
+				}
+			});
+			for (Card crd:l)
+				playerDamage_Farsight_Mask(player, c, crd);
+		}
+		
+    	if(c.getKeyword().contains("Whenever this creature deals damage to a player, that player gets a poison counter."))
+			playerCombatDamage_PoisonCounter(c, 1);
+    
+    	if(c.getName().equals("Marsh Viper")) playerCombatDamage_PoisonCounter(c, 2);
+    	else if(c.getName().equals("Abyssal Specter")) playerCombatDamage_Abyssal_Specter(c);
+    	else if(c.getName().equals("Silent Specter")) playerCombatDamage_Silent_Specter(c);
+    	else if(c.getName().equals("Nicol Bolas")) playerCombatDamage_Nicol_Bolas(c);
+		else if(c.getName().equals("Goblin Lackey")) playerCombatDamage_Goblin_Lackey(c);
+		else if(c.getName().equals("Thieving Magpie")|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
+		else if(c.getName().equals("Warren Instigator")) playerCombatDamage_Warren_Instigator(c);
+		else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
+			playerCombatDamage_Whirling_Dervish(c);
+    	
+    	if (player.isPlayer(AllZone.HumanPlayer)) c.setDealtDmgToHumanThisTurn(true);
+    	if (player.isPlayer(AllZone.ComputerPlayer)) c.setDealtDmgToComputerThisTurn(true);
     }
+    
     //restricted to combat damage, restricted to players
 	public static void executeCombatDamageToPlayerEffects(Card c, final int damage) {
+		
+		if (damage <= 0) return;
+		
 		// Whenever Keyword
     	Object[] DealsDamage_Whenever_Parameters = new Object[3];
     	DealsDamage_Whenever_Parameters[0] = c.getController().getOpponent();

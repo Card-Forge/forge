@@ -2843,9 +2843,10 @@ public class Card extends MyObservable {
             list.add(source);
             int damageToAdd = entry.getValue();
             
+        	damageToAdd = replaceDamage(damageToAdd, source, true);
             damageToAdd = preventDamage(damageToAdd, source, true);
             
-            if( damageToAdd != 0 ) {
+            if( damageToAdd > 0 ) {
             	if (isCreature())
             		GameActionUtil.executeCombatDamageToCreatureEffects(source, this, damageToAdd);
             	GameActionUtil.executeCombatDamageEffects(source, damageToAdd);
@@ -2935,6 +2936,23 @@ public class Card extends MyObservable {
     	return restDamage;
     }
     
+    public int replaceDamage(final int damage, Card source, boolean isCombat) {
+    	
+    	int restDamage = damage;
+    	
+    	if(getName().equals("Phytohydra")) {
+    		addCounter(Counters.P1P1, restDamage);
+    		return 0;
+    	}
+    	
+    	if(getName().equals("Lichenthrope")) {
+    		addCounter(Counters.M1M1, restDamage);
+    		return 0;
+    	}
+    	
+    	return restDamage;
+    }
+    
     public void addDamage(HashMap<Card, Integer> sourcesMap) {
         for(Entry<Card, Integer> entry : sourcesMap.entrySet()) {
         	addDamageWithoutPrevention(entry.getValue(), entry.getKey()); // damage prevention is already checked!
@@ -2946,6 +2964,7 @@ public class Card extends MyObservable {
         
         if(!CardFactoryUtil.canDamage(source, this)) return;
         
+    	damageToAdd = replaceDamage(damageToAdd, source, false);
         damageToAdd = preventDamage(damageToAdd, source, false);
         
         addDamageWithoutPrevention(damageToAdd,source);
@@ -2954,6 +2973,8 @@ public class Card extends MyObservable {
     public void addDamageWithoutPrevention(final int damageIn, final Card source) {
     	int damageToAdd = damageIn;
     	boolean wither = false;
+    	
+    	damageToAdd = replaceDamage(damageToAdd, source, false);
     	
         if( damageToAdd == 0 ) return;  //Rule 119.8
         

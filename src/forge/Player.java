@@ -194,7 +194,9 @@ public abstract class Player extends MyObservable{
 	
 	public void addDamage(final int damage, final Card source) {
 		int damageToDo = damage;
-    	damageToDo = preventDamage(damageToDo,source,false);
+		
+		damageToDo = replaceDamage(damageToDo, source, false);
+    	damageToDo = preventDamage(damageToDo, source, false);
 		
 		addDamageWithoutPrevention(damageToDo,source);
 	}
@@ -202,17 +204,9 @@ public abstract class Player extends MyObservable{
 	public void addDamageWithoutPrevention(final int damage, final Card source) {
 		int damageToDo = damage;
 		
-		if( AllZoneUtil.isCardInPlay("Crumbling Sanctuary")) {
-			for(int i = 0; i < damageToDo; i++) {
-				CardList lib = AllZoneUtil.getPlayerCardsInLibrary(this);
-				if(lib.size() > 0) {
-					AllZone.GameAction.exile(lib.get(0));
-				}
-			}
-			//return so things like Lifelink, etc do not trigger.  This is a replacement effect I think.
-			return;
-		}
-		else if( source.getKeyword().contains("Infect") ) {
+    	damageToDo = replaceDamage(damageToDo, source, false);
+    	
+		if( source.getKeyword().contains("Infect") ) {
         	addPoisonCounters(damageToDo);
         }
         else {
@@ -222,9 +216,10 @@ public abstract class Player extends MyObservable{
         	//rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
         	loseLife(damageToDo, source);
         }
-        	
-        GameActionUtil.executeDamageDealingEffects(source, damageToDo);
-        GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
+        if ( damageToDo > 0 ) {
+	        GameActionUtil.executeDamageDealingEffects(source, damageToDo);
+	        GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
+        }
 	}
 	
 	//This should be also usable by the AI to forecast an effect (so it must not change the game state) 
@@ -290,6 +285,24 @@ public abstract class Player extends MyObservable{
 		return restDamage;
 	}
 	
+	public int replaceDamage(final int damage, Card source, boolean isCombat) {
+    	
+    	int restDamage = damage;
+    	
+    	if( AllZoneUtil.isCardInPlay("Crumbling Sanctuary")) {
+			for(int i = 0; i < restDamage; i++) {
+				CardList lib = AllZoneUtil.getPlayerCardsInLibrary(this);
+				if(lib.size() > 0) {
+					AllZone.GameAction.exile(lib.get(0));
+				}
+			}
+			//return so things like Lifelink, etc do not trigger.  This is a replacement effect I think.
+			return 0;
+		}
+    	
+    	return restDamage;
+    }
+	
 	public int preventDamage(final int damage, Card source, boolean isCombat) {
 		
     	if(AllZoneUtil.isCardInPlay("Leyline of Punishment")) return damage;
@@ -304,7 +317,6 @@ public abstract class Player extends MyObservable{
     	
     	restDamage = staticDamagePrevention(restDamage, source, isCombat);
 
-    	
     	if(restDamage >= preventNextDamage) {
     		restDamage = restDamage - preventNextDamage;
     		preventNextDamage = 0;
@@ -323,13 +335,16 @@ public abstract class Player extends MyObservable{
     public void addCombatDamage(final int damage, final Card source) {
     	
     	int damageToDo = damage;
-    	damageToDo = preventDamage(damageToDo,source,true);
+    	
+    	damageToDo = replaceDamage(damageToDo, source, true);
+    	damageToDo = preventDamage(damageToDo, source, true);
     	
     	addDamageWithoutPrevention(damageToDo, source);   //damage prevention is already checked
     	
-    	//GameActionUtil.executePlayerDamageEffects(player, source, damage, true);
-    	GameActionUtil.executeCombatDamageToPlayerEffects(source, damageToDo);
-    	GameActionUtil.executeCombatDamageEffects(source, damageToDo);
+    	if ( damageToDo > 0 ) {
+    		GameActionUtil.executeCombatDamageToPlayerEffects(source, damageToDo);
+    		GameActionUtil.executeCombatDamageEffects(source, damageToDo);
+    	}
     }
 	
 	//////////////////////////
