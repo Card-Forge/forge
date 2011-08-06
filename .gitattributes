@@ -498,6 +498,7 @@ src/forge/KeyListenerTest.java -text svneol=native#text/plain
 src/forge/ListProperties.java -text svneol=native#text/plain
 src/forge/MP3Player.java -text svneol=native#text/plain
 src/forge/MagicStack.java svneol=native#text/plain
+src/forge/Mana.java -text svneol=native#text/plain
 src/forge/ManaCost.java -text svneol=native#text/plain
 src/forge/ManaPool.java svneol=native#text/plain
 src/forge/Mana_Part.java svneol=native#text/plain
