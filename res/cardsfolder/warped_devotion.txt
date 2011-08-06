@@ -2,11 +2,8 @@ Name:Warped Devotion
 ManaCost:2 B
 Types:Enchantment
 Text:no text
-#God, this way of splitting stuff up is so hacky... where's Defined$TriggeredOwner when you need it? -PA
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Permanent.YouOwn | TriggerZones$ Battlefield | Execute$ TrigYouDiscard | TriggerDescription$ Whenever a permanent is returned to a player's hand, that player discards a card.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Permanent.YouDontOwn | TriggerZones$ Battlefield | Execute$ TrigOppDiscard | Secondary$ True | TriggerDescription$ Whenever a permanent is returned to a player's hand, that player discards a card.
-SVar:TrigYouDiscard:AB$Discard | Cost$ 0 | NumCards$ 1 | Mode$ TgtChoose | Defined$ You
-SVar:TrigOppDiscard:AB$Discard | Cost$ 0 | NumCards$ 1 | Mode$ TgtChoose | Defined$ Opponent
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Permanent | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever a permanent is returned to a player's hand, that player discards a card.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | NumCards$ 1 | Mode$ TgtChoose | Defined$ TriggeredController
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warped_devotion.jpg
