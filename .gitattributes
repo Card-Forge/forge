@@ -4196,6 +4196,7 @@ res/cardsfolder/stolen_grain.txt -text svneol=native#text/plain
 res/cardsfolder/stomper_cub.txt -text svneol=native#text/plain
 res/cardsfolder/stomping_ground.txt -text svneol=native#text/plain
 res/cardsfolder/stone_calendar.txt -text svneol=native#text/plain
+res/cardsfolder/stone_giant.txt -text svneol=native#text/plain
 res/cardsfolder/stone_golem.txt -text svneol=native#text/plain
 res/cardsfolder/stone_kavu.txt -text svneol=native#text/plain
 res/cardsfolder/stone_rain.txt -text svneol=native#text/plain

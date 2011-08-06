@@ -1,0 +1,9 @@
+Name:Stone Giant
+ManaCost:2 R R
+Types:Creature Giant
+Text:no text
+PT:3/4
+SVar:Rarity:Uncommon
+SVar:RemAIDeck:True
+End
+#Uses card-specific code!
