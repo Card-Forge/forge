@@ -343,7 +343,9 @@ public class GenerateConstructedMultiColorDeck
 
   private CardList filterBadCards(CardList list, int colors)
   {
-    //remove "bad" and multi-colored cards
+    /**
+     *  remove "bad" and multi-colored cards
+     */
     final ArrayList<String> remove = new ArrayList<String>();
     remove.add("Sarcomite Myr");
     remove.add("Force of Savagery");
@@ -363,7 +365,7 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Incendiary Command");
     remove.add("Memnarch");
     remove.add("Plague Wind");
-    remove.add("Klaas, Elf Friend");
+    // remove.add("Klaas, Elf Friend");
     remove.add("Delirium Skeins");
 
     remove.add("Undying Beast");
@@ -372,22 +374,33 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Blinding Light");
     remove.add("Hymn to Tourach");
     
-    //cards that slow the computer down
-    
+    /**
+     *  cards that slow the computer down:
+     */
     // remove.add("Anger");
     // remove.add("Brawn");
     // remove.add("Valor");
     // remove.add("Wonder");
     
-    //not fully implemented:
+    /**
+     *  cards that have bugs"
+     */
+    remove.add("Admonition Angel");
+    remove.add("AEther Flash");
+    remove.add("Battle Strain");
+    remove.add("Ancestral Vision");
     
-    // remove.add("Aether Membrane");
+    /**
+     *  not fully implemented:
+     */
     remove.add("Arashi, the Sky Asunder");
+    // remove.add("Aether Membrane");
     // remove.add("Hand of Cruelty");
     // remove.add("Hand of Honor");
     
-    //useless, or combo cards:
-    
+    /**
+     *  useless, or combo cards:
+     */
     remove.add("Aluren");
     remove.add("Conspiracy");
     remove.add("Crucible of Fire");
@@ -401,9 +414,13 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Hatching Plans");
     remove.add("Sensation Gorger");
     remove.add("Time Elemental");
+    remove.add("Thran Quarry");
+    remove.add("Glimmervoid");
+    remove.add("Parallel Evolution");
     
-    //semi useless
-    
+    /**
+     *  semi useless:
+     */
     remove.add("Wren's Run Packmaster");
     remove.add("Nova Chaser");
     remove.add("Supreme Exemplar");
@@ -411,24 +428,25 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Sylvan Messenger");
     remove.add("Tromp the Domains");
     remove.add("Legacy Weapon");
-      
-    //cards the AI cannot play (effectively):
     
+    /**
+     *  cards the AI cannot play (effectively):
+     */
     remove.add("Necropotence");
     remove.add("Yawgmoth's Bargain");
     remove.add("Sensei's Divining Top");
     remove.add("Standstill");
-    //remove.add("Counterspell");
-    //remove.add("Exclude");
-    //remove.add("False Summoning");
-    //remove.add("Essence Scatter");
-    //remove.add("Preemptive Strike");
-    //remove.add("Punish Ignorance");
-    //remove.add("Remand");
-    //remove.add("Mystic Snake");
-    //remove.add("Absorb");
-    //remove.add("Undermine");
-    //remove.add("Overwhelming Intellect");
+    // remove.add("Counterspell");
+    // remove.add("Exclude");
+    // remove.add("False Summoning");
+    // remove.add("Essence Scatter");
+    // remove.add("Preemptive Strike");
+    // remove.add("Punish Ignorance");
+    // remove.add("Remand");
+    // remove.add("Mystic Snake");
+    // remove.add("Absorb");
+    // remove.add("Undermine");
+    // remove.add("Overwhelming Intellect");
     remove.add("AEther Vial");
     remove.add("Covetous Dragon");
     remove.add("Terramorphic Expanse");
@@ -441,64 +459,204 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Solidarity");
     remove.add("Steadfastness");
     remove.add("Tortoise Formation");
+    remove.add("Icy Manipulator");
+    remove.add("Chalice of the Void");
+    remove.add("Political Trickery");
+    remove.add("Vedalken Plotter");
     
-    //manapool stuff:
-    remove.add("Dark Ritual");
-    remove.add("Seething Song");
-    remove.add("Sol Ring");
-    remove.add("Gaea's Cradle");
-    remove.add("Priest of Titania");
-    remove.add("Tolarian Academy");
-    remove.add("Serra's Sanctum");
-    remove.add("Basalt Monolith");
-    remove.add("Grim Monolith");
-    remove.add("Black Lotus");
-    remove.add("Composite Golem");
-    remove.add("Thran Dynamo");
-    remove.add("Elvish Archdruid");
-    remove.add("Sunglasses of Urza");
-    remove.add("Ceta Discple");
+    remove.add("Fog");
+    remove.add("Holy Day");
+    remove.add("Respite");
+    remove.add("Moment's Peace");
+    remove.add("Lull");
+    remove.add("Angelsong");
+    remove.add("Darkness");
+    
+    /**
+     *  Win condition cards:
+     */
+    remove.add("Barren Glory");
+    remove.add("Near-Death Experience");
+    remove.add("Epic Struggle");
+    
+    /**
+     *  Symmetrical effects:
+     */
+    remove.add("Terra Eternal");
+    remove.add("Aysen Highway");
+    remove.add("Hidden Path");
+    remove.add("Day of Destiny");
+    remove.add("Hanna's Custody");
+    
+    /**
+     *  Harmful effects:
+     */
+    remove.add("Flowstone Surge");
+    remove.add("Urborg Shambler");
+    remove.add("Stronghold Taskmaster");
+    
+    /**
+     *  Fetchlands:
+     */
+    remove.add("Tectonic Edge");
+    remove.add("Wooded Foothills");
+    remove.add("Windswept Heath");
+    remove.add("Polluted Delta");
+    remove.add("Flooded Strand");
+    remove.add("Bloodstained Mire");
+    remove.add("Verdant Catacombs");
+    remove.add("Scalding Tarn");
+    remove.add("Misty Rainforest");
+    remove.add("Marsh Flats");
+    remove.add("Arid Mesa");
+    
+    /**
+     *  Painlands:
+     */
+    remove.add("Adarkar Wastes");
+    remove.add("Brushland");
+    remove.add("Karplusan Forest");
+    remove.add("Sulfurous Springs");
+    remove.add("Underground River");
+    remove.add("Battlefield Forge");
+    remove.add("Caves of Koilos");
+    remove.add("Llanowar Wastes");
+    remove.add("Shivan Reef");
+    remove.add("Yavimaya Coast");
+    remove.add("Salt Flats");
+    remove.add("Pine Barrens");
+    remove.add("Skyshroud Forest");
+    remove.add("Caldera Lake");
+    remove.add("Scabland");
+    
+    /**
+     *  Filter Lands:
+     */
+    remove.add("An-Havva Township");
+    remove.add("Aysen Abbey");
+    remove.add("Cascade Bluffs");
+    remove.add("Castle Sengir");
+    remove.add("Crystal Quarry");
+    remove.add("Darkwater Catacombs");
+    remove.add("Fetid Heath");
+    remove.add("Fire-Lit Thicket");
+    remove.add("Flooded Grove");
+    remove.add("Graven Cairns");
+    remove.add("Henge of Ramos");
+    remove.add("Koskun Keep");
+    remove.add("Mossfire Valley");
+    remove.add("Mystic Gate");
+    remove.add("Rugged Prairie");
+    remove.add("School of the Unseen");
+    remove.add("Shadowblood Ridge");
+    remove.add("Shimmering Grotto");
+    remove.add("Skycloud Expanse");
+    remove.add("Sungrass Prairie");
+    remove.add("Sunken Ruins");
+    remove.add("Twilight Mire");
+    remove.add("Wizards' School");
+    remove.add("Wooded Bastion");
+    
+    /**
+     *  manapool stuff:
+     */
     remove.add("Agent of Stromgald");
+    remove.add("Ancient Spring");
+    remove.add("Ancient Tomb");
     remove.add("Apprentice Wizard");
+    remove.add("Azorius Chancery");
     remove.add("Azorius Signet");
+    remove.add("Basal Thrull");
+    remove.add("Basalt Monolith");
+    remove.add("Black Lotus");
+    remove.add("Blood Vassal");
     remove.add("Bog Initiate");
+    remove.add("Boros Garrison");
     remove.add("Boros Signet");
+    remove.add("Cabal Coffers");
     remove.add("Celestial Prism");
+    remove.add("Ceta Discple");
+    remove.add("Chromatic Star");
+    remove.add("Coal Golem");
+    remove.add("Composite Golem");
+    remove.add("Crosis's Attendant");
+    remove.add("Crystal Vein");
+    remove.add("Darigaaz's Attendant");
+    remove.add("Dark Ritual");
+    remove.add("Dimir Aqueduct");
     remove.add("Dimir Signet");
+    remove.add("Dreamstone Hedron");
+    remove.add("Dromar's Attendant");
+    remove.add("Dwarven Ruins");
+    remove.add("Ebon Stronghold");
+    remove.add("Elvish Archdruid");
+    remove.add("Everflowing Chalice");
+    remove.add("Eye of Ramos");
     remove.add("Fire Sprites");
+    // remove.add("Forbidden Orchard");
     remove.add("Fyndhorn Elder");
+    remove.add("Gaea's Cradle");
+    remove.add("Geothermal Crevice");
     remove.add("Gilded Lotus");
+    remove.add("Golgari Rot Farm");
     remove.add("Golgari Signet");
     remove.add("Greenweaver Druid");
+    remove.add("Grim Monolith");
     remove.add("Gruul Signet");
+    remove.add("Gruul Turf");
+    remove.add("Harabaz Druid");
+    remove.add("Havenwood Battleground");
+    remove.add("Heart of Ramos");
     remove.add("Helionaut");
+    remove.add("Horn of Ramos");
+    remove.add("Implements of Sacrifice");
+    remove.add("Irrigation Ditch");
+    remove.add("Izzet Boilerworks");
     remove.add("Izzet Signet");
+    remove.add("Kaleidostone");
     remove.add("Knotvine Mystic");
+    remove.add("Lotus Bloom");
+    remove.add("Lotus Cobra");
+    remove.add("Magus of the Coffers");
     remove.add("Mana Cylix");
     remove.add("Mana Prism");
+    remove.add("Mana Vault");
+    remove.add("Morgue Toad");
     remove.add("Nantuko Elder");
     remove.add("Nomadic Elf");
     remove.add("Orochi Leafcaller");
+    remove.add("Orzhov Basilica");
     remove.add("Orzhov Signet");
+    remove.add("Priest of Titania");
     remove.add("Prismatic Lens");
+    remove.add("Pyretic Ritual");
+    remove.add("Rakdos Carnarium");
     remove.add("Rakdos Signet");
+    remove.add("Rith's Attendant");
+    remove.add("Rofellos, Llanowar Emissary");
+    remove.add("Ruins of Trokair");
     remove.add("Sea Scryer");
+    remove.add("Seething Song");
+    remove.add("Selesnya Sanctuary");
     remove.add("Selesnya Signet");
+    remove.add("Serra's Sanctum");
+    remove.add("Simic Growth Chamber");
     remove.add("Simic Signet");
     remove.add("Sisay's Ring");
+    remove.add("Skull of Ramos");
     remove.add("Skyshroud Elf");
+    remove.add("Sol Ring");
+    remove.add("Sulfur Vent");
+    remove.add("Sunglasses of Urza");
+    remove.add("Svyelunite Temple");
+    remove.add("Thran Dynamo");
+    remove.add("Tinder Farm");
+    remove.add("Tolarian Academy");
+    remove.add("Tooth of Ramos");
+    remove.add("Treva's Attendant");
     remove.add("Ur-Golem's Eye");
     remove.add("Viridian Acolyte");
     remove.add("Worn Powerstone");
-    remove.add("Mana Vault");
-    remove.add("Tooth of Ramos");
-    remove.add("Skull of Ramos");
-    remove.add("Horn of Ramos");
-    remove.add("Heart of Ramos");
-    remove.add("Eye of Ramos");
-    remove.add("Forbidden Orchard");
-    remove.add("Everflowing Chalice");
-    remove.add("Pyretic Ritual");
    
     
     final ArrayList<Card> goodLand = new ArrayList<Card>();
