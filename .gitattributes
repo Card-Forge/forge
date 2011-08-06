@@ -5996,7 +5996,6 @@ src/forge/Input_Cleanup.java svneol=native#text/plain
 src/forge/Input_Mulligan.java svneol=native#text/plain
 src/forge/Input_NoCost_TapAbility.java svneol=native#text/plain
 src/forge/Input_PassPriority.java -text svneol=native#text/plain
-src/forge/Input_PayCostMana.java -text svneol=native#text/plain
 src/forge/Input_PayManaCost.java svneol=native#text/plain
 src/forge/Input_PayManaCostUtil.java svneol=native#text/plain
 src/forge/Input_PayManaCost_Ability.java svneol=native#text/plain

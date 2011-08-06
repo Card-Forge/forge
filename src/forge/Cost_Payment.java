@@ -205,7 +205,7 @@ public class Cost_Payment {
 		}
 		
 		if (!payMana /*&& !cost.hasNoManaCost()*/){		// pay mana here
-			changeInput.stopSetNext(new Input_PayCostMana(this));
+			changeInput.stopSetNext(input_payMana(getAbility(), this));
 			return false;
 		}
 		
@@ -528,10 +528,79 @@ public class Cost_Payment {
 	
 	
 	
-
+	// ******************************************************************************
 	// *********** Inputs used by Cost_Payment below here ***************************
-	// 
+	// ******************************************************************************
 	
+	public static Input input_payMana(final SpellAbility sa, final Cost_Payment payment){
+		final ManaCost manaCost;
+	    
+        if(Phase.GameBegins == 1)  {
+        	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
+                	manaCost = new ManaCost("0"); 
+        	} else {
+    		    String mana = payment.getCost().getMana();
+        		manaCost = new ManaCost(mana);
+        	}
+        }
+        else
+        {
+        	manaCost = new ManaCost(sa.getManaCost());
+        }
+        
+		Input payMana = new Input(){
+			private ManaCost            mana = manaCost;
+		    private static final long  serialVersionUID = 3467312982164195091L;
+		    
+		    private final String       originalManaCost = payment.getCost().getMana();
+	        
+		    private void resetManaCost() {
+		    	mana = new ManaCost(originalManaCost);
+		    }
+		    
+		    @Override
+		    public void selectCard(Card card, PlayerZone zone) {
+		    	// prevent cards from tapping themselves if ability is a tapability, although it should already be tapped
+		        if(sa.getSourceCard().equals(card) && sa.isTapAbility()) {
+		            return;
+		        }
+		        boolean canUse = false;
+		        for(Ability_Mana am:card.getManaAbility())
+		            canUse |= am.canPlay();
+		        mana = Input_PayManaCostUtil.tapCard(card, mana);
+		        showMessage();
+		        
+		        if(mana.isPaid()) 
+		        	done();
+		    }
+		    
+		    private void done() {
+		    	resetManaCost();
+		    	payment.setPayMana(true);
+		    	stop();
+		    	payment.payCost();
+		    }
+		    
+		    @Override
+		    public void selectButtonCancel() {
+		        resetManaCost();
+		        payment.setCancel(true);
+		        payment.payCost();
+		        AllZone.Human_Play.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
+		        stop();
+		    }
+		    
+		    @Override
+		    public void showMessage() {
+		        ButtonUtil.enableOnlyCancel();
+		        AllZone.Display.showMessage("Pay Mana Cost: " + mana.toString());
+		        if(mana.isPaid()) 
+		        	done(); 
+		    }
+		};
+	    return payMana;
+	}
+
 	public static Input input_payXMana(final int numX, final SpellAbility sa, final Cost_Payment payment){
 		Input payX = new Input(){
 			private static final long serialVersionUID = -6900234444347364050L;
