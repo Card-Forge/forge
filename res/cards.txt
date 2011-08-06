@@ -1,3 +1,79 @@
+Painter's Servant
+2
+Artifact Creature Scarecrow
+As Painter's Servant enters the battlefield, choose a color.\r\nAll cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
+1/3
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/painters_servant.jpg
+
+Phantom Centaur
+2 G G
+Creature Centaur Spirit
+Phantom Centaur enters the battlefield with three +1/+1 counters on it.\r\nIf damage would be dealt to Phantom Centaur, prevent that damage. Remove a +1/+1 counter from Phantom Centaur.
+2/0
+Protection from black
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_centaur.jpg
+
+Phylactery Lich
+B B B
+Creature Zombie
+As Phylactery Lich enters the battlefield, put a phylactery counter on an artifact you control.\r\nWhen you control no permanents with phylactery counters on them, sacrifice Phylactery Lich.
+5/5
+Indestructible
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phylactery_lich.jpg
+
+Pillory of the Sleepless
+1 W B
+Enchantment Aura
+Enchanted creature can't attack or block.\r\nEnchanted creature has "At the beginning of your upkeep, you lose 1 life."
+Enchant creature
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pillory_of_the_sleepless.jpg
+
+Pyre Zombie
+1 B R
+Creature Zombie
+no text
+2/1
+abDamageTgtCP 1 R R Sac-CARDNAME:2
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/1 B B:ControllerUpkeep:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay 1 B B. If you do, return Pyre Zombie from your graveyard to your hand.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_zombie.jpg
+
+Oblivion Ring
+2 W
+Enchantment
+When Oblivion Ring comes into play, remove another target nonland permanent from the game.\r\nWhen Oblivion Ring leaves play, return the removed card to play under its owner's control.
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139414.jpg
+
+Omnath, Locus of Mana
+2 G
+Legendary Creature Elemental
+Green mana doesn't empty from your mana pool as steps and phases end.\r\nOmnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.
+1/1
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/omnath_locus_of_mana.jpg
+
+Oracle of Mul Daya
+3 G
+Creature Elf Shaman
+You may play an additional land on each of your turns.\r\nYou may play the top card of your library if it's a land card.
+2/2
+Play with the top card of your library revealed.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oracle_of_mul_daya.jpg
+
+Overbeing of Myth
+GU GU GU GU GU
+Creature Spirit Avatar
+Overbeing of Myth's power and toughness are each equal to the number of cards in your hand.\r\nAt the beginning of your draw step, draw an additional card.
+1/1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/overbeing_of_myth.jpg
+
 Cateran Summons
 B
 Sorcery
@@ -21504,13 +21580,6 @@ CARDNAME can't be countered.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obliterate.jpg
 
-Oblivion Ring
-2 W
-Enchantment
-When Oblivion Ring comes into play, remove another target nonland permanent from the game. When Oblivion Ring leaves play, return the removed card to play under its owner's control.
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139414.jpg
-
 Oboro, Palace in the Clouds
 no cost
 Legendary Land
@@ -21683,14 +21752,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/omen.jpg
 
-Omnath, Locus of Mana
-2 G
-Legendary Creature Elemental
-Green mana doesn't empty from your mana pool as steps and phases end. Omnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.
-1/1
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/omnath_locus_of_mana.jpg
-
 Ondu Cleric
 1 W
 Creature Kor Cleric Ally
@@ -21762,15 +21823,6 @@ Look at the top card of your library. You may put that card on the bottom of you
 Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22988.jpg
-
-Oracle of Mul Daya
-3 G
-Creature Elf Shaman
-You may play an additional land on each of your turns. You may play the top card of your library if it's a land card.
-2/2
-Play with the top card of your library revealed.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oracle_of_mul_daya.jpg
 
 Oran-Rief Survivalist
 1 G
@@ -22053,14 +22105,6 @@ Exalted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/outrider_of_jhess.jpg
 
-Overbeing of Myth
-GU GU GU GU GU
-Creature Spirit Avatar
-Overbeing of Myth's power and toughness are each equal to the number of cards in your hand. At the beginning of your draw step, draw an additional card.
-1/1
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/overbeing_of_myth.jpg
-
 Overgrown Battlement
 1 G
 Creature Wall
@@ -22156,14 +22200,6 @@ Enchant creature
 enPumpCurse:CARDNAME can't attack or block.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pacifism.jpg
-
-Painter's Servant
-2
-Artifact Creature Scarecrow
-As Painter's Servant enters the battlefield, choose a color. All cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
-1/3
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/painters_servant.jpg
 
 Paladin en-Vec
 1 W W
@@ -22581,15 +22617,6 @@ Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_forces.jpg
 
-Phantom Centaur
-2 G G
-Creature Centaur Spirit
-Phantom Centaur enters the battlefield with three +1/+1 counters on it. If damage would be dealt to Phantom Centaur, prevent that damage. Remove a +1/+1 counter from Phantom Centaur.
-2/0
-Protection from black
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_centaur.jpg
-
 Phantom Monster
 3 U
 Creature Phantasm
@@ -22628,15 +22655,6 @@ Fear
 Cumulative upkeep:B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phobian_phantasm.jpg
-
-Phylactery Lich
-B B B
-Creature Zombie
-As Phylactery Lich enters the battlefield, put a phylactery counter on an artifact you control. When you control no permanents with phylactery counters on them, sacrifice Phylactery Lich.
-5/5
-Indestructible
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phylactery_lich.jpg
 
 Phyrexian Arena
 1 B B
@@ -22782,14 +22800,6 @@ no text
 2/4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pillarfield_ox.jpg
-
-Pillory of the Sleepless
-1 W B
-Enchantment Aura
-Enchanted creature can't attack or block. Enchanted creature has "At the beginning of your upkeep, you lose 1 life."
-Enchant creature
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pillory_of_the_sleepless.jpg
 
 Pincher Beetles
 2 G
@@ -23593,16 +23603,6 @@ Haste
 abPump R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_charger.jpg
-
-Pyre Zombie
-1 B R
-Creature Zombie
-no text
-2/1
-abDamageTgtCP 1 R R Sac-CARDNAME:2
-WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/1 B B:ControllerUpkeep:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay {1}{B}{B}. If you do, return Pyre Zombie from your graveyard to your hand.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_zombie.jpg
 
 Pyretic Ritual
 1 R
