@@ -15812,6 +15812,21 @@ public class GameActionUtil {
 
 	};
 	
+	public static Command Plague_Rats = new Command() {
+		private static final long serialVersionUID = 2333292591304646698L;
+
+		public void execute() {
+
+			CardList rats =AllZoneUtil.getCardsInPlay("Plague Rats");
+			for(Card rat:rats) {
+				rat.setBaseAttack(rats.size());
+				rat.setBaseDefense(rats.size());
+
+			}
+		}// execute()
+
+	};//Plague_Rats
+	
 	public static Command Squirrel_Mob_Other       = new Command() {
 		
 		private static final long serialVersionUID = 5483285906091676339L;
@@ -20972,6 +20987,7 @@ public class GameActionUtil {
 		commands.put("Umbra_Stalker", Umbra_Stalker);
 		commands.put("Primalcrux", Primalcrux);
 		commands.put("Homarid", Homarid);
+		commands.put("Plague_Rats", Plague_Rats);
 		
 		//System.out.println("size of commands: " + commands.size());
 

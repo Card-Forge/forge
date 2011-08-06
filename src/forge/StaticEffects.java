@@ -231,6 +231,7 @@ public class StaticEffects
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});
 		cardToEffectsList.put("Primalcrux",new String[] {"Primalcrux"});
 		cardToEffectsList.put("Homarid", new String[] {"Homarid"});
+		cardToEffectsList.put("Plague Rats", new String[] {"Plague_Rats"});
 	}
 	
 	public HashMap<String, String[]> getCardToEffectsList()

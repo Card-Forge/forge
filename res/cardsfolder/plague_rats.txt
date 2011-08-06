@@ -1,0 +1,9 @@
+Name:Plague Rats
+ManaCost:2 B
+Types:Creature Rat
+Text:Plague Rats's power and toughness are each equal to the number of creatures named Plague Rats on the battlefield.
+PT:1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_rats.jpg
+End
