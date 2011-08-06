@@ -910,6 +910,120 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
+
+       //*************** START *********** START **************************
+        else if(cardName.equals("Glory")) {
+            final Ability ability = new Ability(card, "2 W") {
+				private static final long serialVersionUID = -79984345642451L;
+				
+				@Override
+                public boolean canPlayAI() {
+                    return getAttacker() != null;
+                }
+				
+				public Card getAttacker() {
+                    // target creatures that is going to attack
+                    Combat c = ComputerUtil.getAttackers();
+                    Card[] att = c.getAttackers();
+
+                    // Effect best used on at least a couple creatures
+                    if (att.length > 1) {
+                        return att[0];
+                    } else return null;
+                }//getAttacker()
+				
+				String getKeywordBoost() {
+					String theColor = getChosenColor();
+					return "Protection from " + theColor;
+                }//getKeywordBoost()
+				
+				String getChosenColor() {
+					// Choose color for protection in Brave the Elements
+					String color = "";
+					if (card.getController().equals(AllZone.HumanPlayer)) {
+
+						String[] colors = Constant.Color.Colors;
+						colors[colors.length-1] = null;
+
+						Object o = GuiUtils.getChoice("Choose color", colors);
+						color = (String)o;
+					}
+					else {
+						PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
+						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
+						CardList list = new CardList();
+						list.addAll(lib.getCards());
+						list.addAll(hand.getCards());
+
+						if (list.size() > 0) {  
+							String mpcolor = CardFactoryUtil.getMostProminentColor(list);
+							if (!mpcolor.equals(""))
+								color = mpcolor;
+							else
+								color = "black";
+						}
+						else  {
+							color = "black";
+						}
+					}
+					return color;
+				} // getChosenColor
+				
+				@Override
+				public void resolve() {
+					final String kboost = getKeywordBoost();
+					
+					CardList list = new CardList();
+					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                    list.addAll(play.getCards());
+                    
+                    for (int i = 0; i < list.size(); i++) {
+                        final Card[] target = new Card[1];
+                        target[0] = list.get(i);
+                        
+                        final Command untilEOT = new Command() {
+							private static final long serialVersionUID = 6308754740309909072L;
+
+							public void execute() {
+                                if (AllZone.GameAction.isCardInPlay(target[0])) {
+                                	target[0].removeExtrinsicKeyword(kboost);
+                                }
+                            }
+                        };//Command
+                        
+                        if (AllZone.GameAction.isCardInPlay(target[0]) && 
+                        		!target[0].getKeyword().contains(kboost)) {
+                            target[0].addExtrinsicKeyword(kboost);
+                            
+                            AllZone.EndOfTurn.addUntil(untilEOT);
+                        }//if
+                    }//for
+				}//resolve
+                
+                @Override
+                public boolean canPlay() {
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    
+                    return AllZone.GameAction.isCardInZone(card, grave);                   
+                }
+            };//Ability
+
+            card.addSpellAbility(ability);
+            ability.setFlashBackAbility(true);
+            card.setUnearth(true);
+            
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("2 W: Creatures you control gain protection from the color of your choice ");
+            sbDesc.append("until end of turn. Activate this ability only if Glory is in your graveyard.");
+            ability.setDescription(sbDesc.toString());
+            
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card.getName()).append(" - Creatures ").append(card.getController());
+            sbStack.append(" controls gain protection from the color of his/her choice until end of turn");
+            ability.setStackDescription(sbStack.toString());
+        }//*************** END ************ END **************************
+
+
         
         //*************** START *********** START **************************
         else if(cardName.equals("Anger")) {
