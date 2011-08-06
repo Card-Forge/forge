@@ -579,10 +579,13 @@ class CardFactory_Lands {
                     //target creature that is going to attack
                     Combat c = ComputerUtil.getAttackers();
                     CardList att = new CardList(c.getAttackers());
+                    att = att.getType("Assembly-Worker");    // Should return only Assembly-Workers
                     att.remove(card);
                     att.shuffle();
                     
-                    if(att.size() != 0) return att.get(0);
+                    if (att.size() != 0 && 
+                       (AllZone.Phase.getPhase().equals(Constant.Phase.Main1)) && 
+                        CardFactoryUtil.canTarget(card, att.get(0))) return att.get(0);
                     else return null;
                 }//getAttacker()
                 
