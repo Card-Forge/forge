@@ -687,7 +687,7 @@ public class Card extends MyObservable {
     	sb.append(this.getAbilityText());
     	String NonAbilityText = getNonAbilityText();
     	if (NonAbilityText.length() > 0) {
-    		sb.append("\r\n \r\nNon ability characteristics: \r\n");
+    		sb.append("\r\n \r\nNon ability features: \r\n");
     		sb.append(NonAbilityText);
     	}
     	
@@ -2356,12 +2356,12 @@ public class Card extends MyObservable {
     
     
     // Takes an array of arguments like Permanent.Blue+withFlying, only one of them has to be true
-    public boolean isValidCard(final String Restrictions[], final Player You, final Card source) {
+    public boolean isValidCard(final String Restrictions[], final Player sourceController, final Card source) {
     	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
 
         for(int i = 0; i < Restrictions.length; i++) {
-        	if(isValid(Restrictions[i],You,source)) return true;
+        	if(isValid(Restrictions[i],sourceController,source)) return true;
         }
         return false;
         
@@ -2369,7 +2369,7 @@ public class Card extends MyObservable {
     
     
     // Takes an argument like Permanent.Blue+withFlying
-    public boolean isValid(final String Restriction, final Player You, final Card source) {
+    public boolean isValid(final String Restriction, final Player sourceController, final Card source) {
     	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
         if (Restriction.equals("False")) return false;
@@ -2387,13 +2387,13 @@ public class Card extends MyObservable {
                 final String excR = incR[1];
                 String exR[] = excR.split("\\+"); // Exclusive Restrictions are ...
                 for(int j = 0; j < exR.length; j++)
-                    if(hasProperty(exR[j],You,source) == false) return false;
+                    if(hasProperty(exR[j],sourceController,source) == false) return false;
             }
             return true;
     }//isValidCard(String Restriction)
 
     // Takes arguments like Blue or withFlying
-	public boolean hasProperty(String Property, final Player You, final Card source) {
+	public boolean hasProperty(String Property, final Player sourceController, final Card source) {
 		if (Property.contains("White") || // ... Card colors
                 Property.contains("Blue") ||
                 Property.contains("Black") ||
@@ -2408,28 +2408,35 @@ public class Card extends MyObservable {
 					else
 						if (!CardUtil.getColors(this).contains(Property.toLowerCase())) return false;
  			}
-             else if (Property.contains("MultiColor")) // ... Card is multicolored
-             {
-            	 if (Property.startsWith("non") && (CardUtil.getColors(this).size() > 1)) return false;
-                 if (!Property.startsWith("non") && (CardUtil.getColors(this).size() <= 1)) return false;
-             }
+		else if (Property.contains("MultiColor")) // ... Card is multicolored
+        {
+			if (Property.startsWith("non") && (CardUtil.getColors(this).size() > 1)) return false;
+			if (!Property.startsWith("non") && (CardUtil.getColors(this).size() <= 1)) return false;
+        }
  			
-             else if (Property.contains("MonoColor")) // ... Card is monocolored
-             {
-              	if (Property.startsWith("non") && (CardUtil.getColors(this).size() == 1 && !isColorless())) return false;
-             	if (!Property.startsWith("non") && (CardUtil.getColors(this).size() > 1 || isColorless())) return false;
-             }
+        else if (Property.contains("MonoColor")) // ... Card is monocolored
+        {
+        	if (Property.startsWith("non") && (CardUtil.getColors(this).size() == 1 && !isColorless())) return false;
+        	if (!Property.startsWith("non") && (CardUtil.getColors(this).size() > 1 || isColorless())) return false;
+        }
              
-             else if (Property.startsWith("YouCtrl")) { if (!getController().isPlayer(You)) return false; }
-             else if (Property.startsWith("YouDontCtrl")) { if (getController().isPlayer(You)) return false; }
+        else if (Property.startsWith("YouCtrl")) { if (!getController().isPlayer(sourceController)) return false; }
+        else if (Property.startsWith("YouDontCtrl")) { if (getController().isPlayer(sourceController)) return false; }
+        else if (Property.startsWith("YouOwn")) { if (!getOwner().isPlayer(sourceController)) return false; }
+        else if (Property.startsWith("YouDontOwn")) { if (getOwner().isPlayer(sourceController)) return false; }
 		
-             else if (Property.startsWith("Other")) { if(this.equals(source)) return false; }
-             else if (Property.startsWith("Self")) { if(!this.equals(source)) return false; }
+        else if (Property.startsWith("ControllerControls")) { 
+        	String type = Property.substring(18);
+        	CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, sourceController).getCards());
+        	if (list.getType(type).isEmpty()) return false; 
+        }
 		
-             else if (Property.startsWith("Attached")) {
-            	 if (!equipping.contains(source) && !enchanting.contains(source)) return false;
-             }
-             else if (Property.startsWith("SharesColorWith")) { if(!sharesColorWith(source)) return false; }
+        else if (Property.startsWith("Other")) { if(this.equals(source)) return false; }
+        else if (Property.startsWith("Self")) { if(!this.equals(source)) return false; }
+		
+        else if (Property.startsWith("Attached")) {
+        	if (!equipping.contains(source) && !enchanting.contains(source)) return false; }
+        else if (Property.startsWith("SharesColorWith")) { if(!sharesColorWith(source)) return false; }
 				
              else if (Property.startsWith("with")) // ... Card keywords
              {
