@@ -18337,7 +18337,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Vampire Hexmage")) {
         	/*
-        	 * TODO - replace this code with correct code
+        	 * Sacrifice Vampire Hexmage: Remove all counters from target permanent.
         	 */
         	final SpellAbility ability = new Ability(card, "0") {
 
