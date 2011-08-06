@@ -4700,7 +4700,8 @@ This card can't be countered.
 Dismiss
 2 U U 
 Instant
-Counter target spell. Draw a card.
+Counter target spell.
+Draw a card.
 
 Bog Tatters
 4 B
@@ -7431,7 +7432,8 @@ When Monk Realist comes into play, destroy target enchantment.
 Brainbite
 2 U B
 Sorcery
-Target opponent reveals his or her hand. You choose a card from it. That player discards that card. Draw a card.
+Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
+Draw a card.
 
 Fable of Wolf and Owl
 3 GU GU GU
@@ -14523,7 +14525,8 @@ Look at the top four cards of your library. Put one of them into your hand and t
 Repulse
 2 U
 Instant
-Return target creature to its owner's hand. Draw a card.
+Return target creature to its owner's hand.
+Draw a card.
 
 Echoing Truth
 1 U
@@ -15190,7 +15193,8 @@ Search target opponent's library for a creature card and put that card into play
 Remand
 1 U
 Instant
-Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard. Draw a card.
+Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard.
+Draw a card.
 
 Counterspell
 U U
@@ -15205,7 +15209,8 @@ Return target permanent to its owner's hand.
 Opt
 U
 Instant
-Look at the top card of your library. You may put that card on the bottom of your library. Draw a card.
+Look at the top card of your library. You may put that card on the bottom of your library.
+Draw a card.
 
 Remove Soul
 1 U
@@ -15448,7 +15453,8 @@ Tap all nonwhite creatures.
 Reviving Dose
 2 W
 Instant
-You gain 3 life. Draw a card.
+You gain 3 life.
+Draw a card.
 
 Angelic Blessing
 2 W
@@ -16342,7 +16348,8 @@ Search your library for a creature card, reveal that card, and put it into your 
 Exclude
 2 U
 Instant
-Counter target creature spell. Draw a Card.
+Counter target creature spell.
+Draw a card.
 
 Gerrard's Verdict
 W B

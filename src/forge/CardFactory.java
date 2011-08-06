@@ -5764,7 +5764,7 @@ public class CardFactory implements NewConstants {
           PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
           life.addLife(3);
 
-          AllZone.GameAction.drawCard(card.getController());
+          // AllZone.GameAction.drawCard(card.getController());
         }
       };
       card.clearSpellAbility();
@@ -7783,7 +7783,7 @@ public class CardFactory implements NewConstants {
           Card[] handChoices = removeLand(hand.getCards());
 
           if(handChoices.length == 0){
-        	  AllZone.GameAction.drawCard(card.getController());
+        	  // AllZone.GameAction.drawCard(card.getController());
         	  return;
           }
             
@@ -9647,7 +9647,7 @@ public class CardFactory implements NewConstants {
           AllZone.GameAction.moveTo(hand, sa.getSourceCard());
 
           //draw card
-          AllZone.GameAction.drawCard(card.getController());
+          // AllZone.GameAction.drawCard(card.getController());
         }
         public boolean canPlay()
         {
@@ -9822,7 +9822,7 @@ public class CardFactory implements NewConstants {
               PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
               AllZone.GameAction.moveTo(hand, getTargetCard());
             }
-            AllZone.GameAction.drawCard(card.getController());
+            // AllZone.GameAction.drawCard(card.getController());
           }//if
         }//resolve()
       };//SpellAbility
@@ -10264,7 +10264,7 @@ public class CardFactory implements NewConstants {
               AllZone.Computer_Library.add(top);
             }
           }
-          AllZone.GameAction.drawCard(card.getController());
+          // AllZone.GameAction.drawCard(card.getController());
         }//computerResolve()
         public void humanResolve()
         {
@@ -10285,7 +10285,7 @@ public class CardFactory implements NewConstants {
               library.add(top);
             }
           }//if
-          AllZone.GameAction.drawCard(card.getController());
+          // AllZone.GameAction.drawCard(card.getController());
         }//resolve()
       };
       card.clearSpellAbility();
@@ -11907,7 +11907,7 @@ public class CardFactory implements NewConstants {
         {
           SpellAbility sa = AllZone.Stack.pop();
           AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-		  AllZone.GameAction.drawCard(card.getController());
+		  // AllZone.GameAction.drawCard(card.getController());
         }
         public boolean canPlay()
         {
@@ -12003,7 +12003,7 @@ public class CardFactory implements NewConstants {
           SpellAbility sa = AllZone.Stack.pop();
           AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
 
-          AllZone.GameAction.drawCard(card.getController());
+          // AllZone.GameAction.drawCard(card.getController());
 
         }
         public boolean canPlay()
