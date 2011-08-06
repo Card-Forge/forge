@@ -1,0 +1,9 @@
+Name:Asceticism
+ManaCost:3 G G
+Types:Enchantment
+Text:no text
+K:stPumpAll:Creature.YouCtrl:0/0/HIDDEN CARDNAME can't be the target of spells or abilities your opponents control.:No Condition:Creatures you control can't be the target of spells or abilities your opponents control.
+A:AB$Regenerate|Cost$1 G|Tgt$TgtC|SpellDescription$Regenerate target creature.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/asceticism.jpg
+End
