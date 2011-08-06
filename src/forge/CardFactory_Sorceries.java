@@ -2119,25 +2119,26 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void chooseTargetAI() {
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    if(zone != null) {
-                    CardList creature = new CardList();
-                    creature.addAll(zone.getCards());
-                    creature.addAll(AllZone.getZone(Constant.Zone.Battlefield, card.getController().getOpponent()).getCards());
-                    creature = creature.getType("Creature"); 
-                    creature = creature.filter(new CardListFilter() {
-						public boolean addCard(Card card) {
-							return (!card.getType().contains("Legendary"));
-						}
-					});
-                    if(creature.size() > 0) {
-                    Card biggest = creature.get(0);
-                    for(int i = 0; i < creature.size(); i++)
-                        if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
-                    		setTargetCard(biggest);
-                    }
-                    }
+                	PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                	if(zone != null) {
+                		CardList creature = new CardList();
+                		creature.addAll(zone.getCards());
+                		creature.addAll(AllZone.getZone(Constant.Zone.Battlefield, card.getController().getOpponent()).getCards());
+                		creature = creature.getType("Creature"); 
+                		creature = creature.filter(new CardListFilter() {
+                			public boolean addCard(Card card) {
+                				return (!card.getType().contains("Legendary"));
+                			}
+                		});
+                		if(creature.size() > 0) {
+                			Card biggest = creature.get(0);
+                			for(int i = 0; i < creature.size(); i++)
+                				if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
+                			setTargetCard(biggest);
+                		}
+                	}
                 }
+                
                 @Override
                 public void resolve() {
 
@@ -2208,24 +2209,25 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void chooseTargetAI() {
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    if(zone != null) {
-                    CardList creature = new CardList();
-                    creature.addAll(zone.getCards());
-                    creature = creature.getType("Creature"); 
-                    creature = creature.filter(new CardListFilter() {
-						public boolean addCard(Card card) {
-							return (!card.getType().contains("Legendary"));
-						}
-					});
-                    if(creature.size() > 0) {
-                    Card biggest = creature.get(0);
-                    for(int i = 0; i < creature.size(); i++)
-                        if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
-                    		setTargetCard(biggest);
-                    }
-                    }
+                	PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                	if(zone != null) {
+                		CardList creature = new CardList();
+                		creature.addAll(zone.getCards());
+                		creature = creature.getType("Creature"); 
+                		creature = creature.filter(new CardListFilter() {
+                			public boolean addCard(Card card) {
+                				return (!card.getType().contains("Legendary"));
+                			}
+                		});
+                		if(creature.size() > 0) {
+                			Card biggest = creature.get(0);
+                			for(int i = 0; i < creature.size(); i++)
+                				if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
+                			setTargetCard(biggest);
+                		}
+                	}
                 }
+                
                 @Override
                 public void resolve() {
                 	card.setKicked(true);
@@ -2257,7 +2259,7 @@ public class CardFactory_Sorceries {
                 			
                 			Copy.setToken(true);
                 			Copy.setController(card.getController());
-                			AllZone.GameAction.moveToPlay(Copy);
+                			AllZone.GameAction.moveToPlay(Copy, card.getController());
                 		}    
                 	}            
                 }//resolve()
@@ -2664,7 +2666,7 @@ public class CardFactory_Sorceries {
         
 
 
-	//*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if (cardName.equals("Lavalanche"))
         {
         	final SpellAbility spell = new Spell(card)
@@ -3278,6 +3280,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Strategic Planning")) {
