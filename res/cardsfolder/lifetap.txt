@@ -2,6 +2,7 @@ Name:Lifetap
 ManaCost:U U
 Types:Enchantment
 Text:Whenever a Forest an opponent controls becomes tapped, you gain 1 life.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifetap.jpg
 End

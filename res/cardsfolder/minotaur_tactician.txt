@@ -1,0 +1,12 @@
+Name:Minotaur Tactician
+ManaCost:3 R
+Types:Creature Minotaur
+Text:no text
+PT:1/1
+K:Haste
+K:stPumpSelf:Creature:1/1:isPresent Creature.White+YouCtrl:Minotaur Tactician gets +1/+1 as long as you control a white creature.
+K:stPumpSelf:Creature:1/1:isPresent Creature.Blue+YouCtrl:Minotaur Tactician gets +1/+1 as long as you control a blue creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/minotaur_tactician.jpg
+End
