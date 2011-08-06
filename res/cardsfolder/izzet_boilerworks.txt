@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 K:Izzet Boilerworks enters the battlefield tapped.
 K:When Izzet Boilerworks enters the battlefield, return a land you control to its owner's hand.
-A:AB$Mana|Cost$T|Produced$U R|SpellDescription$Add U R to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U R | SpellDescription$ Add U R to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_boilerworks.jpg

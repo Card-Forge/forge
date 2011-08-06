@@ -4,7 +4,7 @@ Types:Creature Elf Archer
 Text:no text
 PT:*/*
 K:stSetPT:Count$Valid Elf.YouCtrl:Count$Valid Elf.YouCtrl:CARDNAME's power and toughness are each equal to the number of Elves you control.
-A:AB$DealDamage|Cost$T|ValidTgts$Creature.withFlying|TgtPrompt$Select target creature with flying|NumDmg$X|SpellDescription$CARDNAME deals damage equal to its power to target creature with flying.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to target creature with flying.
 SVar:X:Count$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
