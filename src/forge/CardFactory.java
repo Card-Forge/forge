@@ -6433,7 +6433,11 @@ public class CardFactory implements NewConstants {
 
 				@Override
         		public boolean canPlayAI() {
-					Player player = getTargetPlayer();
+					Player player = AllZone.HumanPlayer;
+					if (!player.canTarget(card))
+						return false;
+					
+					setTargetPlayer(AllZone.HumanPlayer);
         			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
         			CardList libList = new CardList(lib.getCards());
         			return libList.size() > 0;
@@ -6445,7 +6449,7 @@ public class CardFactory implements NewConstants {
         			player.mill(AllZone.getZone(Constant.Zone.Graveyard, player).size());
         		}
         	};
-        	ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+
         	ab1.setDescription(abCost+"Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in that player's graveyard.");
         	card.addSpellAbility(ab1);
         }//*************** END ************ END **************************
