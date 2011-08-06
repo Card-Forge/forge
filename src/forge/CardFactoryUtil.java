@@ -3324,6 +3324,19 @@ public class CardFactoryUtil {
         	return AllZone.ManaPool.getAmountOfColor(color);
         }
         
+        if(l[0].contains("Attached")) {
+        	String type = l[0].substring(8);
+        	int sum = 0;
+        	for(Card attached : c.getAttachedCards())
+        	{
+        		if(attached.isValid(type, c.getController(), c))
+        		{
+        			sum++;
+        		}
+        	}
+        	return sum;
+        }
+        
         // count valid cards on the battlefield
         if(l[0].contains("Valid")) {
         	String restrictions = l[0].replace("Valid ", "");
