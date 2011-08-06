@@ -280,7 +280,8 @@ class CardFactory_Auras {
             spell.setBeforePayMana(runtime2);
         }//*************** END ************ END **************************
         */
-
+        
+        /* Converted to generic aura and trigger + AF
         //*************** START *********** START **************************
         if(cardName.equals("Leafdrake Roost")) {
             
@@ -289,10 +290,10 @@ class CardFactory_Auras {
                 private static final long serialVersionUID = -4695012002471107694L;
                 
                 @Override
-                /*
-                 * The computer will now place this aura on unenchanted lands, but
-                 * it will tap an enchanted land for mana to produce the token.
-                 */
+                //
+                // The computer will now place this aura on unenchanted lands, but
+                // it will tap an enchanted land for mana to produce the token.
+                //
                 
                 public boolean canPlayAI() {
 
@@ -403,9 +404,10 @@ class CardFactory_Auras {
             };
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-
+        */
+        
         //*************** START *********** START **************************
-        else if(cardName.equals("Squirrel Nest")) {
+        if(cardName.equals("Squirrel Nest")) {
             
             final SpellAbility spell = new Spell(card) {
                 
