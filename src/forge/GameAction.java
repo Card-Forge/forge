@@ -1461,20 +1461,17 @@ public class GameAction {
         if(equipment.size() == 0) return;
         
         final Card crd = c;
-        
-        final Ability draw = new Ability(crd, "0") {
-            @Override
-            public void resolve() {
-                String s = crd.getOwner();
-                //System.out.println("owner of " + crd.getName() + " = " + s);
-                AllZone.GameAction.drawCard(s);
-                AllZone.GameAction.drawCard(s);
-            }
-        };
-        draw.setStackDescription("Skullclamp - " + c.getController() + " draws 2 cards (" + c.getName() + ").");
-        
         for(int i = 0; i < equipment.size(); i++) {
-            AllZone.Stack.add(draw);
+        	final Card skullclamp = equipment.get(i);
+        	final Ability draw = new Ability(crd, "0") {
+        		@Override
+        		public void resolve() {
+        			String player = skullclamp.getController();
+        			AllZone.GameAction.drawCards(player, 2);
+        		}
+        	};//Ability
+        	draw.setStackDescription("Skullclamp - " + skullclamp.getController() + " draws 2 cards (" + c.getName() + ").");
+        	AllZone.Stack.add(draw);
         }
         
     }
