@@ -3880,7 +3880,15 @@ public class CardFactory implements NewConstants {
                         PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                         list.addAll(play.getCards());
                         
-                        if(cardName.equals("Nature's Cloak")) list = list.getColor("G");
+                        if(cardName.equals("Nature's Cloak")) { 
+                        	list = list.filter(new CardListFilter()
+                        	{
+                        		public boolean addCard(Card c)
+                        		{
+                        			return CardUtil.getColors(c).contains(Constant.Color.Green);
+                        		}
+                        	});
+                        }
                     }
                     
                     if(cardName.equals("Magnify") || // All Creatures in Play
@@ -17599,6 +17607,32 @@ public class CardFactory implements NewConstants {
        
        spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
+        
+        
+      //*****************************START*******************************
+        if(cardName.equals("Icy Manipulator")) {
+           /* The Rules state that this can target a tapped card, but it won't do anything */
+           
+           final Ability_Tap ability = new Ability_Tap(card, "1") {
+			private static final long serialVersionUID = 6349074398830621348L;
+			public boolean canPlayAI() {
+                 return false;
+              }
+              public void chooseTargetAI() {
+                 //setTargetCard(c);
+              }//chooseTargetAI()
+              public void resolve() {
+                 if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
+                    getTargetCard().tap();
+                 }
+              }
+           };//SpellAbility
+           
+           card.addSpellAbility(ability);
+           ability.setDescription("1, tap: Tap target artifact, creature or land.");
+           ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Artifact;Creature;Land"));
+        }//end Icy Manipulator
+        //****************END*******END***********************
 
         
         // Cards with Cycling abilities

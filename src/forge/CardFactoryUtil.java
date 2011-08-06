@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
+import java.util.StringTokenizer;
 
 
 public class CardFactoryUtil {
@@ -1611,6 +1612,7 @@ public class CardFactoryUtil {
     }//input_discard()
     
 
+    /*
     //cardType is like "Creature", "Land", "Artifact", "Goblin", "Legendary"
     //cardType can also be "All", which will allow any permanent to be selected
     public static Input input_targetType(final SpellAbility spell, final String cardType) {
@@ -1642,7 +1644,55 @@ public class CardFactoryUtil {
         };
         return target;
     }//input_targetType()
+    */
     
+    //****************copied from input_targetType*****************
+    //cardType is like "Creature", "Land", "Artifact", "Goblin", "Legendary", ";"-delimited
+    //cardType can also be "All", which will allow any permanent to be selected
+    public static Input input_targetType(final SpellAbility spell, final String cardTypeList) {
+       Input target = new Input() {
+		private static final long serialVersionUID = 6443658187985259709L;
+		public void showMessage() {
+             StringTokenizer st = new StringTokenizer(cardTypeList, ";");
+             if(cardTypeList.equals("All")) {
+                AllZone.Display.showMessage("Select target permanent");
+             }
+             else {
+                String toDisplay = "";
+                toDisplay += "Select target ";
+                while( st.hasMoreTokens() ) {
+                   toDisplay += st.nextToken();
+                   if( st.hasMoreTokens() ) {
+                      toDisplay += " or ";
+                   }
+                }
+                AllZone.Display.showMessage( toDisplay );
+             }
+             ButtonUtil.enableOnlyCancel();
+          }
+          public void selectButtonCancel() {stop();}
+          public void selectCard(Card card, PlayerZone zone) {
+             boolean foundCardType = false;
+             StringTokenizer st = new StringTokenizer(cardTypeList, ";");
+             if( cardTypeList.equals("All") ) {
+                foundCardType = true;
+             } else {
+                while( st.hasMoreTokens() ) {
+                   if( card.getType().contains( st.nextToken() )) {
+                      foundCardType = true;
+                   }
+                }
+             }
+             if( foundCardType && zone.is(Constant.Zone.Play)) {
+                spell.setTargetCard(card);
+                stopSetNext(new Input_PayManaCost(spell));
+             }
+          }
+       };
+       return target;
+    }//input_targetType()
+    //***************end copy******************
+
 
     public static Input input_targetCreature(final SpellAbility spell) {
         return input_targetCreature(spell, Command.Blank);
