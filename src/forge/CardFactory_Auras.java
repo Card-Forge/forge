@@ -1253,10 +1253,24 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if (cardName.equals("Entangling Vines") || cardName.equals("Glimmerdust Nap")) {
+        else if (cardName.equals("Entangling Vines") || cardName.equals("Glimmerdust Nap") || 
+        		 cardName.equals("Melancholy") || cardName.equals("Mystic Restraints") || 
+       		     cardName.equals("Roots") || cardName.equals("Thirst")) {
             
             final SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = 843412563175285562L;
+				
+				// for flash, which is not working through the keyword for some reason
+				// if not flash then limit to main 1 and 2 on controller's turn and card in hand
+				@Override
+	            public boolean canPlay() {
+	                return (card.getKeyword().contains("Flash") && (AllZone.GameAction.isCardInZone(card, AllZone.Human_Hand) || 
+	                        AllZone.GameAction.isCardInZone(card, AllZone.Computer_Hand))
+	                            || 
+	                       (! card.getKeyword().contains("Flash") && (card.getController().equals(AllZone.Phase.getActivePlayer()) &&
+	                       (AllZone.GameAction.isCardInZone(card, AllZone.Human_Hand) || AllZone.GameAction.isCardInZone(card, AllZone.Computer_Hand)) && 
+	                       (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2)))));
+	            }
 
                 @Override
                 public boolean canPlayAI() {
@@ -1264,16 +1278,34 @@ class CardFactory_Auras {
                 	CardList list = new CardList(AllZone.Human_Play.getCards());    // Target human creature
                 	list = list.filter(new CardListFilter() {
                 		public boolean addCard(Card c) {
-                			return c.isCreature() && c.isTapped() && CardFactoryUtil.canTarget(card, c) && 
+                			return c.isCreature() && CardFactoryUtil.canTarget(card, c) && 
                 			      !c.getKeyword().contains("CARDNAME doesn't untap during your untap step.");
                 		}
                 	});
+                	
+                	if (card.getKeyword().contains("Enchant tapped creature")) {
+                		list = list.filter(new CardListFilter() {
+                    		public boolean addCard(Card c) {
+                    			return c.isTapped();
+                    		}
+                    	});
+                	}
+                	
+                	if (card.getKeyword().contains("Enchant creature without flying")) {
+                		list = list.filter(new CardListFilter() {
+                    		public boolean addCard(Card c) {
+                    			return ! c.getKeyword().contains("Flying");
+                    		}
+                    	});
+                	}
                     
                     if (list.isEmpty()) {
                     	return false;
                     } else {
                     	CardListUtil.sortAttack(list);
-                        CardListUtil.sortFlying(list);
+                    	if (! card.getKeyword().contains("Enchant creature without flying")) {
+                    		CardListUtil.sortFlying(list);
+                    	}
                         setTargetCard(list.get(0));
                     }
                     return true;
@@ -1286,8 +1318,12 @@ class CardFactory_Auras {
                     
                     Card c = getTargetCard();
                     
-                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
-                    
+                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    	if (card.getKeyword().contains("When CARDNAME enters the battlefield, tap enchanted creature.")) {
+                    		c.tap();
+                    	}
+                    	card.enchantCard(c);
+                    }
                 }//resolve()
             };//SpellAbility
             card.clearSpellAbility();
@@ -1340,11 +1376,31 @@ class CardFactory_Auras {
                     creatures.addAll(hum.getCards());
                     creatures = creatures.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && c.isTapped() && CardFactoryUtil.canTarget(card, c);
+                            return c.isCreature() && CardFactoryUtil.canTarget(card, c);
                         }
                     });
                     
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(spell, creatures, "Select target tapped creature", true, false));
+                    String instruction = "Select target creature";
+                    
+                    if (card.getKeyword().contains("Enchant tapped creature")) {
+                    	instruction = "Select target tapped creature";
+                        creatures = creatures.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return c.isTapped();
+                            }
+                        });
+                    }
+                    
+                    if (card.getKeyword().contains("Enchant creature without flying")) {
+                    	instruction = "Select target creature without flying";
+                        creatures = creatures.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return ! c.getKeyword().contains("Flying");
+                            }
+                        });
+                    }
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(spell, creatures, instruction, true, false));
                 }
             };
             card.addEnchantCommand(onEnchant);

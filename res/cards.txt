@@ -1,3 +1,34 @@
+Melancholy
+2 B
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant creature
+At the beginning of your upkeep, sacrifice Melancholy unless you pay:B
+When CARDNAME enters the battlefield, tap enchanted creature.
+
+Mystic Restraints
+2 U U
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Flash
+Enchant creature
+When CARDNAME enters the battlefield, tap enchanted creature.
+
+Roots
+3 G
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant creature without flying
+When CARDNAME enters the battlefield, tap enchanted creature.
+
+Thirst
+2 U
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant creature
+At the beginning of your upkeep, sacrifice Thirst unless you pay:U
+When CARDNAME enters the battlefield, tap enchanted creature.
+
 Death Cultist
 B
 Creature Human Wizard
