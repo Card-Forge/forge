@@ -294,9 +294,9 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Spock 2", "medium", "G Elf singleton deck with several Winnower Patrol and Wolf-Skull Shaman");
 //        addToDeckList("Starfire 2", "medium", "Incarnations deck");
 //        addToDeckList("Starfire 3", "hard", "Incarnations deck");
-        addToDeckList("Storm 1", "easy", "WBR Lifelink deck with Phyrexian Arena");
-        addToDeckList("Storm 2", "medium", "WBRG Lifelink deck with Phyrexian Arena");
-        addToDeckList("Storm 3", "hard", "WUBRG Lifelink deck with Phyrexian Arena");
+        addToDeckList("Storm 1", "easy", "WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant");
+        addToDeckList("Storm 2", "medium", "WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant");
+        addToDeckList("Storm 3", "hard", "WBG Lifegain deck with Ajani's Pridemate and Serra Ascendant");
 //        addToDeckList("Superboy 3", "hard", "R Artifact deck");
         addToDeckList("Superman 1", "easy", "WUBRG Slivers deck with Raise Dead and Breath of Life");
         addToDeckList("Superman 2", "medium", "WUBRG Slivers deck with Zombify and Tribal Flames");
