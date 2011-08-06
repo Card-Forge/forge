@@ -1,3 +1,19 @@
+Iona, Shield of Emeria
+6 W W W
+Legendary Creature Angel
+As Iona, Shield of Emeria enters the battlefield, choose a color.\r\nYour opponents can't cast spells of the chosen color.
+7/7
+Flying
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/iona_shield_of_emeria.jpg
+
+Harrow
+2 G
+Instant
+As an additional cost to cast Harrow, sacrifice a land.\r\nSearch your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/harrow.jpg
+
 Cradle to Grave
 1 B
 Instant
@@ -38,8 +54,8 @@ Glasses of Urza
 1
 Artifact
 tap: Look at target player's hand.
-SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glasses_of_urza.jpg
 
 Gaddock Teeg
@@ -13741,13 +13757,6 @@ WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:TapPermanent:NormalInput/Cre
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harrier_griffin.jpg
 
-Harrow
-2 G
-Instant
-As an additional cost to cast Harrow, sacrifice a land. Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harrow.jpg
-
 Haru-Onna
 3 G
 Creature Spirit
@@ -15464,15 +15473,6 @@ Enchant creature
 enPump:CARDNAME can't be blocked except by Walls.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invisibility.jpg
-
-Iona, Shield of Emeria
-6 W W W
-Legendary Creature Angel
-As Iona, Shield of Emeria enters the battlefield, choose a color. Your opponents can't cast spells of the chosen color.
-7/7
-Flying
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/iona_shield_of_emeria.jpg
 
 Iona's Judgment
 4 W
