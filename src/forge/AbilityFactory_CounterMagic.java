@@ -467,7 +467,7 @@ public class AbilityFactory_CounterMagic {
 	}
 
 	private static boolean matchSpellAbility(Card srcCard, SpellAbility sa, String[] splitRestrictions, String[] splitTargetRestrictions, String targetType) {
-		boolean result = false;
+		boolean result = true;
 		
 		if(targetType.equals("Spell")) {
 			if(sa.isAbility()) {
@@ -490,6 +490,7 @@ public class AbilityFactory_CounterMagic {
 		
 		if(splitTargetRestrictions != null)
 		{
+			result = false;
 			if(sa.getTarget() != null)
 			{
 				for(Object o : sa.getTarget().getTargets())
