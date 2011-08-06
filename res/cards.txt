@@ -987,7 +987,7 @@ Azorius Signet
 2
 Artifact
 no text
-1,tap: add W U
+1,tap: add WU
 
 Bog Initiate
 B
@@ -1000,7 +1000,7 @@ Boros Signet
 2
 Artifact
 no text
-1,tap: add W R
+1,tap: add WR
 
 Celestial Prism
 3
@@ -1016,7 +1016,7 @@ Dimir Signet
 2
 Artifact
 no text
-1,tap: add U B
+1,tap: add UB
 
 Fire Sprites
 1 G
@@ -1031,36 +1031,36 @@ Fyndhorn Elder
 Creature Elf Druid
 no text
 1/1
-tap: add G G
+tap: add GG
 
 Gilded Lotus
 5
 Artifact
 no text
-tap: add W W W
-tap: add U U U
-tap: add B B B
-tap: add R R R
-tap: add G G G
+tap: add WWW
+tap: add UUU
+tap: add BBB
+tap: add RRR
+tap: add GGG
 
 Golgari Signet
 2
 Artifact
 no text
-1,tap: add B G
+1,tap: add BG
 
 Greenweaver Druid
 2 G
 Creature Elf Druid
 no text
 1/1
-tap: add G G
+tap: add GG
 
 Gruul Signet
 2
 Artifact
 no text
-1,tap: add R G
+1,tap: add RG
 
 Helionaut
 2 W
@@ -1078,14 +1078,14 @@ Izzet Signet
 2
 Artifact
 no text
-1,tap: add U R
+1,tap: add UR
 
 Knotvine Mystic
 W R G
 Creature Elf Druid
 no text
 2/2
-1, tap: add W R G
+1, tap: add WRG
 
 Mana Cylix
 1
@@ -1113,7 +1113,7 @@ Nantuko Elder
 Creature Elf Druid
 no text
 1/2
-tap: add 1 G
+tap: add 1G
 
 Nomadic Elf
 1 G
@@ -1140,7 +1140,7 @@ Orzhov Signet
 2
 Artifact
 no text
-1,tap: add W B
+1,tap: add WB
 
 Prismatic Lens
 2
@@ -1157,7 +1157,7 @@ Rakdos Signet
 2
 Artifact
 no text
-1,tap: add B R
+1,tap: add BR
 
 Sea Scryer
 1 U
@@ -1171,13 +1171,13 @@ Selesnya Signet
 2
 Artifact
 no text
-1,tap: add W G
+1,tap: add WG
 
 Simic Signet
 2
 Artifact
 no text
-1,tap: add U G
+1,tap: add UG
 
 Sisay's Ring
 4
@@ -1241,9 +1241,9 @@ no cost
 Land
 no text
 tap: add 1
-UR,tap: add U U
-UR,tap: add U R
-UR,tap: add R R
+UR,tap: add UU
+UR,tap: add UR
+UR,tap: add RR
 
 Castle Sengir
 no cost
@@ -1259,49 +1259,48 @@ no cost
 Land
 no text
 tap: add 1
-5,tap: add W U B R G
+5,tap: add WUBRG
 
 Darkwater Catacombs
 no cost
 Land
-1,tap: add U B
-1,tap: add U B
+1,tap: add UB
 
 Fetid Heath
 no cost
 Land
 no text
 tap: add 1
-WB,tap: add W W
-WB,tap: add W B
-WB,tap: add B B
+WB,tap: add WW
+WB,tap: add WB
+WB,tap: add BB
 
 Fire-Lit Thicket
 no cost
 Land
 no text
 tap: add 1
-RG,tap: add R R
-RG,tap: add R G
-RG,tap: add G G
+RG,tap: add RR
+RG,tap: add RG
+RG,tap: add GG
 
 Flooded Grove
 no cost
 Land
 no text
 tap: add 1
-UG,tap: add U U
-UG,tap: add U G
-UG,tap: add G G
+UG,tap: add UU
+UG,tap: add UG
+UG,tap: add GG
 
 Graven Cairns
 no cost
 Land
 no text
 tap: add 1
-BR,tap: add B B
-BR,tap: add B R
-BR,tap: add R R
+BR,tap: add BB
+BR,tap: add BR
+BR,tap: add RR
 
 Henge of Ramos
 no cost
@@ -1326,26 +1325,26 @@ tap: add 1
 Mossfire Valley
 no cost
 Land
-1,tap: add R G
-1,tap: add R G
+1,tap: add RG
+1,tap: add RG
 
 Mystic Gate
 no cost
 Land
 no text
 tap: add 1
-WU,tap: add W W
-WU,tap: add W U
-WU,tap: add U U
+WU,tap: add WW
+WU,tap: add WU
+WU,tap: add UU
 
 Rugged Prairie
 no cost
 Land
 no text
 tap: add 1
-WR,tap: add W W
-WR,tap: add W R
-WR,tap: add R R
+WR,tap: add WW
+WR,tap: add WR
+WR,tap: add RR
 
 School of the Unseen
 no cost
@@ -1361,8 +1360,8 @@ tap: add 1
 Shadowblood Ridge
 no cost
 Land
-1,tap: add B R
-1,tap: add B R
+1,tap: add BR
+1,tap: add BR
 
 Shimmering Grotto
 no cost
@@ -1378,32 +1377,31 @@ tap: add 1
 Skycloud Expanse
 no cost
 Land
-1,tap: add W U
-1,tap: add W U
+1,tap: add WU
+1,tap: add WU
 
 Sungrass Prairie
 no cost
 Land
-1,tap: add W G
-1,tap: add W G
+1,tap: add WG
 
 Sunken Ruins
 no cost
 Land
 no text
 tap: add 1
-UB,tap: add U U
-UB,tap: add U B
-UB,tap: add B B
+UB,tap: add UU
+UB,tap: add UB
+UB,tap: add BB
 
 Twilight Mire
 no cost
 Land
 no text
 tap: add 1
-BG,tap: add B B
-BG,tap: add B G
-BG,tap: add G G
+BG,tap: add BB
+BG,tap: add BG
+BG,tap: add GG
 
 Wizards' School
 no cost
@@ -1419,9 +1417,9 @@ no cost
 Land
 no text
 tap: add 1
-WG,tap: add W W
-WG,tap: add W G
-WG,tap: add G G
+WG,tap: add WW
+WG,tap: add WG
+WG,tap: add GG
 
 Whispersilk Cloak
 3

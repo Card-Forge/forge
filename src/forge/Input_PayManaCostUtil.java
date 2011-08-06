@@ -16,13 +16,12 @@ public class Input_PayManaCostUtil
     	if(manaCost.isNeeded(color))
     		cneeded+=getColor2(color);
     Iterator<Ability_Mana> it = abilities.iterator();//you can't remove unneded abilitie inside a for(am:abilities) loop :(
-    if (!cneeded.contains("1"))
-    	while(it.hasNext())
-    	{
-    		Ability_Mana ma = it.next();
-    		if (!ma.canPlay()){ it.remove(); continue;}
-    		if (!canMake(ma, cneeded)) it.remove();
-    	}
+    while(it.hasNext())
+    {
+    	Ability_Mana ma = it.next();
+    	if (!ma.canPlay()) it.remove();
+    	else if (!canMake(ma, cneeded)) it.remove();
+    }
     if(abilities.isEmpty())
     	return manaCost;
     //String color;

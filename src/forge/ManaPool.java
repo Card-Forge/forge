@@ -216,13 +216,15 @@ public class ManaPool extends Card
 		}
 	}
 
-	public static String[] getManaParts(Ability_Mana manaAbility){return getManaParts(manaAbility.Mana());}//wrapper
+	public static String[] getManaParts(Ability_Mana manaAbility){return getManaParts(manaAbility.Mana(), true);}//wrapper
 	public static String[] getManaParts(String Mana_2)//turns "G G" -> {"G","G"}, "2 UG"->"{"2","U/G"}, "B W U R G" -> {"B","W","U","R","G"}, etc.
+		{return getManaParts(Mana_2, false);}
+	public static String[] getManaParts(String Mana_2, boolean parsed)
 	{
 		String Mana=Mana_2;
 		//if (Mana.isEmpty()) return null;
 		if (Mana.trim().equals("")) return null;
-		Mana=oraclize(Mana);
+		if(!parsed) Mana=oraclize(Mana);
 		try
 		{
 			String[] Colorless = {Integer.parseInt(Mana)+""};
@@ -322,7 +324,10 @@ public class ManaPool extends Card
 		}
 		else
 		{
-			if (Mana.equals("1"))
+
+			if (Mana.equals("S"))
+				manaCost = smp.subtractOne(manaCost, "1");
+			else if (Mana.equals("1") || !Character.isDigit(Mana.charAt(0)))
 			{
 				if (containsColor('1')>0 && manaCost.isNeeded(Constant.Color.Colorless))
 				{
@@ -339,10 +344,10 @@ public class ManaPool extends Card
 					if(!Mana.equals("1"))
 					{
 						choices.clear();
-						if(containsColor(Mana.charAt(3))>0)
-							choices.add(getColor(Mana.charAt(3) + ""));
-						if(Mana.charAt(1) == '2' ? choices.isEmpty() : containsColor(Mana.charAt(1))>0)
-							choices.add(getColor(Mana.charAt(1) + ""));
+						if(containsColor(Mana.charAt(2))>0)
+							choices.add(getColor(Mana.charAt(2) + ""));
+						if(Mana.charAt(1) == '2' ? choices.isEmpty() : containsColor(Mana.charAt(0))>0)
+							choices.add(getColor(Mana.charAt(0) + ""));
 					}
 					if (isSnow() && manaCost.isNeeded("S")) choices.add(0, Constant.Color.Snow);
 					Iterator<String> it = choices.iterator();
@@ -359,8 +364,6 @@ public class ManaPool extends Card
 					else manaCost=subtractOne(manaCost,getColor2(chosen));
 				}
 			}
-			else if (Mana.equals("S"))
-				manaCost = smp.subtractOne(manaCost, "1");
 			else
 			{
 				int cless;
