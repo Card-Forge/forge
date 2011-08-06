@@ -396,7 +396,11 @@ public class CardFactory_Creatures {
                     newCard.addDamage(1, newCard);
                 }
             };//SpellAbility
-            ability.setDescription(abilCost.toString() + "Stuffy Doll deals 1 damage to itself.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(abilCost.toString()).append("Stuffy Doll deals 1 damage to itself.");
+            ability.setDescription(sb.toString());
+            
             ability.setStackDescription("Stuffy Doll - deals 1 damage to itself.");
             
             newCard.addSpellAbility(new Spell_Permanent(newCard));
@@ -675,7 +679,12 @@ public class CardFactory_Creatures {
                 }
             };//Input
             ability.setStackDescription("Kiki-Jiki - copy card.");
-            ability.setDescription("tap: Put a token into play that's a copy of target nonlegendary creature you control. That creature token has haste. Sacrifice it at end of turn.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("tap: Put a token into play that's a copy of target nonlegendary creature you control. ");
+            sb.append("That creature token has haste. Sacrifice it at end of turn.");
+            ability.setDescription(sb.toString());
+            
             ability.setBeforePayMana(runtime);
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -1108,10 +1117,14 @@ public class CardFactory_Creatures {
             };
             ability.setBeforePayMana(removeCard);
             
-            ability.setDescription("Grandeur - Discard another card named Baru, Fist of Krosa: Put an X/X green Wurm creature token into play, where X is the number of lands that you control.");
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - put X/X token into play.");
-            ability.setStackDescription(sb.toString());
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Grandeur - Discard another card named Baru, Fist of Krosa: Put an X/X ");
+            sbDesc.append("green Wurm creature token into play, where X is the number of lands that you control.");
+            ability.setDescription(sbDesc.toString());
+            
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(cardName).append(" - put X/X token into play.");
+            ability.setStackDescription(sbStack.toString());
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -2277,12 +2290,16 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             ability.setFlashBackAbility(true);
             card.setUnearth(true);
-            ability.setDescription("2 W: Creatures you control gain protection from the color of your choice until end of turn. Activate this ability only if Glory is in your graveyard.");
             
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - Creatures ").append(card.getController());
-            sb.append(" controls gain protection from the color of his/her choice until end of turn");
-            ability.setStackDescription(sb.toString());
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("2 W: Creatures you control gain protection from the color of your choice ");
+            sbDesc.append("until end of turn. Activate this ability only if Glory is in your graveyard.");
+            ability.setDescription(sbDesc.toString());
+            
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card.getName()).append(" - Creatures ").append(card.getController());
+            sbStack.append(" controls gain protection from the color of his/her choice until end of turn");
+            ability.setStackDescription(sbStack.toString());
         }//*************** END ************ END **************************
         
         
@@ -5938,7 +5955,12 @@ public class CardFactory_Creatures {
             };//Input - target
             
             card.addSpellAbility(ability);
-            ability.setDescription("W, tap: Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library. Play this ability only if an opponent controls more lands than you.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("W, tap: Search your library for a land card, reveal it, and put it into your hand. ");
+            sb.append("Then shuffle your library. Play this ability only if an opponent controls more lands than you.");
+            ability.setDescription(sb.toString());
+            
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
@@ -6400,8 +6422,11 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             card.addSpellAbility(ability);
-            ability.setDescription("tap: Target creature other than " + cardName
-                    + " becomes 0/2 until end of turn.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("tap: Target creature other than ").append(cardName).append(" becomes 0/2 until end of turn.");
+            ability.setDescription(sb.toString());
+            
             //this ability can target "this card" when it shouldn't be able to
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility_NoTargetSelf(ability));
         }//*************** END ************ END **************************
@@ -7175,7 +7200,11 @@ public class CardFactory_Creatures {
             };
             
             card.addSpellAbility(ability);
-            ability.setDescription("tap: When target creature other than Adarkar Valkyrie is put into a graveyard this turn, return that card to play under your control.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("tap: When target creature other than Adarkar Valkyrie is put into a ");
+            sb.append("graveyard this turn, return that card to play under your control.");
+            ability.setDescription(sb.toString());
             
             ability.setBeforePayMana(targetInput);
         }//*************** END ************ END **************************
@@ -7707,10 +7736,14 @@ public class CardFactory_Creatures {
                 
             };
             
-            ability.setDescription("1 R R: Put a blaze counter on target land without a blaze counter on it. For as long as that land has a blaze counter on it, it has \"At the beginning of your upkeep, this land deals 1 damage to you.\" (The land continues to burn after Obsidian Fireheart has left the battlefield.)");
+            StringBuilder sb = new StringBuilder();
+            sb.append("1 R R: Put a blaze counter on target land without a blaze counter on it. ");
+            sb.append("For as long as that land has a blaze counter on it, it has \"At the beginning of your upkeep, ");
+            sb.append("this land deals 1 damage to you.\" (The land continues to burn after Obsidian Fireheart has left the battlefield.)");
+            ability.setDescription(sb.toString());
+            
             ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Land"));
             card.addSpellAbility(ability);
-            
         }// *************** END ************ END **************************
         
         
@@ -9013,7 +9046,10 @@ public class CardFactory_Creatures {
             };//SpellAbility
             
             card.addSpellAbility(ability);
-            ability.setDescription(abCost.toString() + "Bloodfire Colossus deals 6 damage to each creature and each player.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(abCost.toString()).append("Bloodfire Colossus deals 6 damage to each creature and each player.");
+            ability.setDescription(sb.toString());
         }//*************** END ************ END **************************
         
         
@@ -9091,7 +9127,12 @@ public class CardFactory_Creatures {
             };//Input
             
             card.addSpellAbility(ability);
-            ability.setDescription("Sacrifice Goblin Skycutter: Goblin Skycutter deals 2 damage to target creature with flying. That creature loses flying until end of turn.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Sacrifice Goblin Skycutter: Goblin Skycutter deals 2 damage to target ");
+            sb.append("creature with flying. That creature loses flying until end of turn.");
+            ability.setDescription(sb.toString());
+            
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
@@ -9183,8 +9224,16 @@ public class CardFactory_Creatures {
             };//SpellAbility
 
             card.addSpellAbility(ability);
-            ability.setDescription("Sacrifice Sakura-Tribe Elder: Search your library for a basic land card, put that card into play tapped, then shuffle your library.");
-            ability.setStackDescription("Search your library for a basic land card, put that card into play tapped, then shuffle your library.");
+            
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Sacrifice Sakura-Tribe Elder: Search your library for a basic ");
+            sbDesc.append("land card, put that card into play tapped, then shuffle your library.");
+            ability.setDescription(sbDesc.toString());
+            
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append("Search your library for a basic land card, put that ");
+            sbStack.append("card into play tapped, then shuffle your library.");
+            ability.setStackDescription(sbStack.toString());
         }//*************** END ************ END **************************
         
 
@@ -9638,7 +9687,12 @@ public class CardFactory_Creatures {
             };//SpellAbility
             
             card.addSpellAbility(ability);
-            ability.setDescription("W, tap, Discard a card: Put a 1/1 white Kithkin Soldier creature token named Goldmeadow Harrier into play with \"W, tap target creature.\"");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("W, tap, Discard a card: Put a 1/1 white Kithkin Soldier creature token ");
+            sb.append("named Goldmeadow Harrier into play with \"W, tap target creature.\"");
+            ability.setDescription(sb.toString());
+            
             ability.setStackDescription("Goldmeadow Lookout - Put a 1/1 token into play");
             ability.setBeforePayMana(new Input_PayManaCost_Ability("W", new Command() {
                 private static final long serialVersionUID = 8621733943286161557L;
@@ -10935,7 +10989,12 @@ public class CardFactory_Creatures {
             };//ability
             
             card.addSpellAbility(ability);
-            ability.setDescription("R, tap, Sacrifice a creature other than Brion Stoutarm: Brion Stoutarm deals damage equal to the sacrificed creature's power to target player.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("R, tap, Sacrifice a creature other than Brion Stoutarm: Brion Stoutarm ");
+            sb.append("deals damage equal to the sacrificed creature's power to target player.");
+            ability.setDescription(sb.toString());
+            
             ability.setStackDescription("Brion Stoutarm deals damage equal to sacrificed creature's power");
         }//*************** END ************ END **************************
         
@@ -11305,7 +11364,8 @@ public class CardFactory_Creatures {
             };
             ability.setBeforePayMana(runtime);
             StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append("\r\n").append("tap, Sacrifice a Forest or Plains: Search your library for a land card, put it into play, then shuffle your library.");
+            sbDesc.append("\r\n").append("tap, Sacrifice a Forest or Plains: Search your library ");
+            sbDesc.append("for a land card, put it into play, then shuffle your library.");
             ability.setDescription(sbDesc.toString());
             
             StringBuilder sbStack = new StringBuilder();
@@ -12458,11 +12518,15 @@ public class CardFactory_Creatures {
             };//Input
             
             card.addSpellAbility(ability);
-            ability.setDescription("U, tap, Return an artifact you control to its owner's hand: You may put an artifact card from your hand onto the battlefield.");
             
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append("You may put an artifact card from your hand onto the battlefield");
-            ability.setStackDescription(sb.toString());
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("U, tap, Return an artifact you control to its owner's hand: ");
+            sbDesc.append("You may put an artifact card from your hand onto the battlefield.");
+            ability.setDescription(sbDesc.toString());
+            
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card).append("You may put an artifact card from your hand onto the battlefield");
+            ability.setStackDescription(sbStack.toString());
             
             ability.setAfterPayMana(target);
         }//*************** END ************ END **************************
@@ -13914,9 +13978,14 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             
-          
             card.addSpellAbility(ability);
-            ability.setDescription("Tap: Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Tap: Tap all untapped Wolf creatures you control. Each Wolf tapped ");
+            sb.append("this way deals damage equal to its power to target creature. That creature deals ");
+            sb.append("damage equal to its power divided as its controller chooses among any number of those Wolves.");
+            ability.setDescription(sb.toString());
+            
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
         
@@ -14859,7 +14928,11 @@ public class CardFactory_Creatures {
                 }
             };// ability3
             
-            ability3.setDescription("RW RW RW RW RW RW: If Figure of Destiny is a Warrior, it becomes an 8/8 Kithkin Spirit Warrior Avatar with flying and first strike. ");
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("RW RW RW RW RW RW: If Figure of Destiny is a Warrior, it becomes ");
+            sbDesc.append("an 8/8 Kithkin Spirit Warrior Avatar with flying and first strike.");
+            ability3.setDescription(sbDesc.toString());
+            
             ability3.setStackDescription("Figure of Destiny becomes an 8/8 Kithkin Spirit Warrior Avatar with flying and first strike.");
             card.addSpellAbility(ability3);
             
@@ -15010,7 +15083,11 @@ public class CardFactory_Creatures {
                 
             };
             
-            ability2.setDescription("U U B B: Target player loses X life and puts the top X cards of his or her library into his or her graveyard, where X is the number of Zombies you control.");
+            StringBuilder sb = new StringBuilder();
+            sb.append("U U B B: Target player loses X life and puts the top X cards of his or her library ");
+            sb.append("into his or her graveyard, where X is the number of Zombies you control.");
+            ability2.setDescription(sb.toString());
+            
             ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
             
             //card.addSpellAbility(ability);
@@ -15438,11 +15515,14 @@ public class CardFactory_Creatures {
             };
             
             card.addSpellAbility(a2);
-            a2.setDescription("Sacrifice a creature: Put a +1/+1 counter on " + card.getName() + ".");
             
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(card.getName()).append(" gets a +1/+1 counter.");
-            a2.setStackDescription(sb2.toString());
+            StringBuilder sbDesc = new StringBuilder();
+            sbDesc.append("Sacrifice a creature: Put a +1/+1 counter on ").append(card.getName()).append(".");
+            a2.setDescription(sbDesc.toString());
+            
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card.getName()).append(" gets a +1/+1 counter.");
+            a2.setStackDescription(sbStack.toString());
             
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
@@ -15971,8 +16051,12 @@ public class CardFactory_Creatures {
 
             card.addSpellAbility(ability2);
             ability2.setBeforePayMana(target);
-            ability2.setDescription("Tap: Remove all +1/+1 counters and deal damage equal to number of counters " +
-            		"removed to target creature or player.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Tap: Remove all +1/+1 counters and deal damage equal to number of counters ");
+            sb.append("removed to target creature or player.");
+            ability2.setDescription(sb.toString());
+            
             ability2.setStackDescription("Molten Hydra deals damage to number of counters on it to target creature or player.");
         }//*************** END ************ END **************************
         
@@ -17053,7 +17137,12 @@ public class CardFactory_Creatures {
             };//SpellAbility
             
             card.addSpellAbility(ability);
-            ability.setDescription("Sacrifice Fire Bowman: Fire Bowman deals 1 damage to target creature or player. Activate this ability only during your turn, before attackers are declared.");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Sacrifice Fire Bowman: Fire Bowman deals 1 damage to target creature or player. ");
+            sb.append("Activate this ability only during your turn, before attackers are declared.");
+            ability.setDescription(sb.toString());
+            
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, new Command() {
                 
                 private static final long serialVersionUID = -3283051501556347775L;
@@ -20308,9 +20397,9 @@ public class CardFactory_Creatures {
             sbDesc.append("flying and each player. Any player may activate this ability");
             ability.setDescription(sbDesc.toString());
             
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" deals 1 damage to each flying creature and each player.");
-            ability.setStackDescription(sb.toString());
+            StringBuilder sbStack = new StringBuilder();
+            sbStack.append(card).append(" deals 1 damage to each flying creature and each player.");
+            ability.setStackDescription(sbStack.toString());
             
             ability.getRestrictions().setAnyPlayer(true);
             card.addSpellAbility(ability);
@@ -20453,7 +20542,7 @@ public class CardFactory_Creatures {
                 }//canPlayAI()
             };//SpellAbility
             card.addSpellAbility(ability);
-            ability.setDescription("W U, tap: Put a bribery counter on target creature you don't control.  Its controller draws a card.");
+            ability.setDescription("W U, tap: Put a bribery counter on target creature you don't control. Its controller draws a card.");
             
             ability.setBeforePayMana(new Input()
             {
@@ -20969,7 +21058,11 @@ public class CardFactory_Creatures {
         			return creats.size() != 0 && super.canPlay();
         		}
         	};
-        	ability.setDescription(abCost+"Regenerate target creature.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(abCost).append("Regenerate target creature.");
+        	ability.setDescription(sb.toString());
+        	
         	card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
         
