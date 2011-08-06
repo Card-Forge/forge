@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Creature Gnome
 Text:no text
 PT:1/3
-K:abGainLife Sac<1/CARDNAME>:3
+A:AB$GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bottle_gnomes.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/148.jpg

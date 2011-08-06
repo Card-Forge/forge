@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 Text:no text
 K:Untap:1
-K:abGainLife 2 T:1
+A:AB$GainLife | Cost$ 2 T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 K:abTapTgt 4 T:Creature:Tap target creature.
 A:AB$Draw | Cost$ 5 T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Rare

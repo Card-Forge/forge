@@ -4,7 +4,7 @@ Types:Creature Spike
 Text:no text
 PT:0/0
 K:Spike 2
-K:abGainLife SubCounter<1/P1P1>:2
+A:AB$GainLife | Cost$ SubCounter<1/P1P1> | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_feeder.jpg
 SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/68.jpg
