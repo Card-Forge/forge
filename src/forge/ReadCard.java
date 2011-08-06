@@ -158,7 +158,7 @@ public class ReadCard implements Runnable, NewConstants {
             	
             	else if (s.startsWith("SetInfo:"))
             	{
-            		String t = s.substring(4);
+            		String t = s.substring(8);
             		c.addSet(new SetInfo(t));
             	}
             	

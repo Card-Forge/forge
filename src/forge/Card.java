@@ -7,10 +7,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Map.Entry;
 
 import com.esotericsoftware.minlog.Log;
-
 
 public class Card extends MyObservable {
     private static int                   nextUniqueNumber;
@@ -2799,6 +2799,7 @@ public class Card extends MyObservable {
         }
     }
     private ArrayList<SetInfo> Sets = new ArrayList<SetInfo>();
+    private String curSetCode = "";
     
     public void addSet(SetInfo sInfo)
     {
@@ -2814,4 +2815,31 @@ public class Card extends MyObservable {
     {
     	Sets = siList;
     }
+    
+    public void setCurSetCode(String setCode) {
+    	curSetCode = setCode;
+    }
+    
+    public String getCurSetCode() {
+    	return curSetCode;
+    }
+    
+    public void setRandomSetCode() {
+    	if (Sets.size() < 1)
+    		return;
+    	
+    	Random r = new Random();
+    	SetInfo si = Sets.get(r.nextInt(Sets.size()));
+    	
+    	curSetCode = si.Code;
+    }
+    
+    public String getSetImageName(String setCode) {
+    	return "/" + setCode + "/" + getImageName();
+    }
+    
+    public String getCurSetImage() {
+    	return getSetImageName(curSetCode); 
+    }
+    
 }//end Card class

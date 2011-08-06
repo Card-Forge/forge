@@ -173,13 +173,19 @@ public class ImageCache implements NewConstants {
      * Returns the map key for a card, without any suffixes for the image size.
      */
     private static String getKey(Card card) {
-        String key = card.getImageName();
+        String key = GuiDisplayUtil.cleanString(card.getImageName());
         //if(card.isBasicLand() && card.getRandomPicture() != 0) key += card.getRandomPicture();
-        int n = card.getRandomPicture();
-        if (n > 0)
-        	key += n;
-        
-        key = GuiDisplayUtil.cleanString(key);
+        if (!card.getCurSetCode().equals(""))
+        {
+        	key = card.getCurSetCode() + "/" + key;
+        }
+        else
+        {
+        	int n = card.getRandomPicture();
+        	if (n > 0)
+        		key += n;
+        }
+//        key = GuiDisplayUtil.cleanString(key);
         if(card.isToken() && !card.isCopiedToken()) key += TOKEN;
         return key;
     }

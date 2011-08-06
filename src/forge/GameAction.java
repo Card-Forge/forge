@@ -2381,6 +2381,9 @@ public class GameAction {
                 	n = Integer.parseInt(PC);
                 if (n > 1)
                     card.setRandomPicture(generator.nextInt(n));
+                if (card.getSets().size() > 0)
+                	card.setRandomSetCode();
+
                     //System.out.println("human random number:" + card.getRandomPicture());
                 //}
                 
