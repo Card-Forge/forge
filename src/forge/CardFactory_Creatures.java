@@ -5046,7 +5046,7 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Goldmeadow Lookout")) {
-        	final Ability_Cost lookCost = new Ability_Cost("W T Discard<1/Any>", card.getName(), true);
+        	final Ability_Cost lookCost = new Ability_Cost("W T Discard<1/Card>", card.getName(), true);
         	final SpellAbility ability = new Ability_Activated(card, lookCost, null){
                 private static final long serialVersionUID = -8413409735529340094L;
                 
@@ -10470,7 +10470,7 @@ public class CardFactory_Creatures {
             	}
             };
         	
-        	final Ability_Cost abCost = new Ability_Cost("Discard<2/Any>", cardName, true);
+        	final Ability_Cost abCost = new Ability_Cost("Discard<2/Card>", cardName, true);
         	final Ability_Activated toExile = new Ability_Activated(card, abCost, null) {
 				private static final long serialVersionUID = 7850843970664800204L;
 

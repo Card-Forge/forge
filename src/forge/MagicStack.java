@@ -699,7 +699,7 @@ public class MagicStack extends MyObservable {
 		{}	// don't send to graveyard if the spell is using an ability
 
 		// If Spell and still on the Stack then let it goto the graveyard or replace its own movement
-		else if ((source.isInstant() || source.isSorcery()) && 
+		else if (!source.isCopiedSpell() && (source.isInstant() || source.isSorcery()) && 
 				AllZone.getZone(source).is(Constant.Zone.Stack)){
 			if (source.getReplaceMoveToGraveyard().size() == 0)
 				AllZone.GameAction.moveToGraveyard(source);

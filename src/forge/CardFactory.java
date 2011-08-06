@@ -5759,7 +5759,7 @@ public class CardFactory implements NewConstants {
         //*************** START *********** START **************************
         else if(cardName.equals("Volrath's Dungeon")) {
         	
-        	Ability_Cost dungeonCost = new Ability_Cost("Discard<1/Any>", cardName, true);
+        	Ability_Cost dungeonCost = new Ability_Cost("Discard<1/Card>", cardName, true);
         	Target dungeonTgt = new Target("Volrath's Dungeon - Target player" , "player".split(","));
         	
             final SpellAbility dungeon = new Ability_Activated(card, dungeonCost, dungeonTgt){
