@@ -8813,7 +8813,7 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
-        
+        /* Converted to AF
         //*************** START *********** START **************************
         else if(cardName.equals("Staff of Domination")) {
 
@@ -8858,7 +8858,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability3);
        
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Goblin Charbelcher")) {
