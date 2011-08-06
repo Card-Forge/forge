@@ -2,8 +2,8 @@ Name:Centaur Garden
 ManaCost:no cost
 Types:Land
 Text:no text
-A:AB$Mana|Cost$T|Produced$G|SubAbility$SVar=DBPain|SpellDescription$Add G to your mana pool. CARDNAME deals 1 damage to you.
-A:AB$Pump | Cost$ G T Sac<1/CARDNAME> | Tgt$TgtC | NumAtt$3 | NumDef$3 |Threshold$True|PrecostDesc$ Threshold - | SpellDescription$ Target creature gets +3/+3 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
+A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ SVar=DBPain | SpellDescription$ Add G to your mana pool. CARDNAME deals 1 damage to you.
+A:AB$ Pump | Cost$ G T Sac<1/CARDNAME> | Tgt$ TgtC | NumAtt$ 3 | NumDef$ 3 | Threshold$ True | PrecostDesc$ Threshold - | SpellDescription$ Target creature gets +3/+3 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
 SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
