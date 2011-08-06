@@ -3575,7 +3575,7 @@ public class CardFactory_Sorceries {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Regrowth")) {
+        else if(cardName.equals("Regrowth") || cardName.equals("Elven Cache")) {
         	// added cousin Reclaim since 90% of the code is shared
             final SpellAbility spell = new Spell(card) {
                 

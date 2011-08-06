@@ -1,3 +1,9 @@
+Elven Cache
+2 G G
+Sorcery
+Return target card from your graveyard to your hand.
+SVar:Rarity:Common
+
 Thran Quarry
 no cost
 Land
