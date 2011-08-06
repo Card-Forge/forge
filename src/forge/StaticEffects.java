@@ -95,7 +95,6 @@ public class StaticEffects
 		cardToEffectsList.put("Aura Gnarlid", new String[] {"Aura_Gnarlid"} );
 		cardToEffectsList.put("Kor Spiritdancer", new String[] {"Kor_Spiritdancer"});
 		cardToEffectsList.put("Knight of the Reliquary", new String[] {"Knight_of_the_Reliquary"});
-		cardToEffectsList.put("Zuberi, Golden Feather", new String[] {"Zuberi"});
 		cardToEffectsList.put("Loxodon Punisher", new String[] {"Loxodon_Punisher"});
 		cardToEffectsList.put("Goblin Gaveleer", new String[] {"Goblin_Gaveleer"});
 		cardToEffectsList.put("Master of Etherium", new String[] {"Master_of_Etherium", "Master_of_Etherium_Pump", "Master_of_Etherium_Other"});
@@ -157,7 +156,6 @@ public class StaticEffects
 		cardToEffectsList.put("Steely Resolve", new String[] {"Steely_Resolve"});
 		cardToEffectsList.put("That Which Was Taken", new String[] {"That_Which_Was_Taken"});
 		cardToEffectsList.put("Rolling Stones", new String[] {"Rolling_Stones"});
-		cardToEffectsList.put("Sun Quan, Lord of Wu", new String[] {"Sun_Quan"});
 		cardToEffectsList.put("Kinsbaile Cavalier", new String[] {"Kinsbaile_Cavalier"});
 		cardToEffectsList.put("Wren's Run Packmaster", new String[] {"Wrens_Run_Packmaster"});
 		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});

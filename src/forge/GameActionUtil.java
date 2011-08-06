@@ -13283,41 +13283,7 @@ public class GameActionUtil {
 		}// execute()
 	};
 	
-	public static Command Sun_Quan                    = new Command() {
-
-		private static final long serialVersionUID   = -2379786355503597363L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Horsemanship";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Sun Quan, Lord of Wu");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	}; //Sun Quan
-
+	
 	public static Command Kinsbaile_Cavalier          = new Command() {
 		private static final long serialVersionUID   = -4124745123035715658L;
 
@@ -15895,11 +15861,7 @@ public class GameActionUtil {
 		int                       artifacts        = 0;
 
 		public void execute() {
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Phylactery Lich");
+			CardList creature = AllZoneUtil.getCardsInPlay("Phylactery Lich");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -15932,11 +15894,7 @@ public class GameActionUtil {
 		int                       enchantments     = 0;
 
 		public void execute() {
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Tethered Griffin");
+			CardList creature = AllZoneUtil.getCardsInPlay("Tethered Griffin");
 
 			for(int i = 0; i < creature.size(); i++) {
 				Card c = creature.get(i);
@@ -15964,9 +15922,7 @@ public class GameActionUtil {
 		private static final long serialVersionUID = 8669404698350637963L;
 
 		public void execute() {
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
+			CardList list = AllZoneUtil.getCardsInPlay();
 
 			list = list.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
@@ -15990,9 +15946,7 @@ public class GameActionUtil {
 		int                       islands          = 0;
 
 		public void execute() {
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
+			CardList creature = AllZoneUtil.getCardsInPlay();
 
 			creature = creature.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
@@ -16085,48 +16039,6 @@ public class GameActionUtil {
 			}
 
 		}//execute()
-	};
-
-	public static Command Zuberi                      = new Command() {
-		private static final long serialVersionUID   = -6283266522827930762L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Zuberi, Golden Feather");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Griffin");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isCreature()
-							&& !c.getName().equals(
-									"Zuberi, Golden Feather")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						gloriousAnthemList.add(c);
-					}
-
-				} // for
-			} // for
-
-		}// execute()
-
-
 	};
 
 	public static Command Master_of_Etherium_Other    = new Command() {
@@ -19125,7 +19037,6 @@ public class GameActionUtil {
 		
 		commands.put("Yavimaya_Enchantress", Yavimaya_Enchantress);
 		
-		commands.put("Zuberi", Zuberi);
 		commands.put("Zulaport_Enforcer", Zulaport_Enforcer);
 		
 		///The commands above are in alphabetical order by cardname.  The cammands.put() below need to be filed above
@@ -19209,8 +19120,6 @@ public class GameActionUtil {
 		
 		commands.put("Goblin_Warchief", Goblin_Warchief);	
 		commands.put("Undead_Warchief", Undead_Warchief);
-		
-		commands.put("Sun_Quan", Sun_Quan);
 
 		commands.put("Rolling_Stones", Rolling_Stones);
 		commands.put("Kinsbaile_Cavalier", Kinsbaile_Cavalier);
