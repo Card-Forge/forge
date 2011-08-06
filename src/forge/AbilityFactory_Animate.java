@@ -133,8 +133,7 @@ public class AbilityFactory_Animate {
 			sb.append(keywords.get(i));
 			if(i < (keywords.size() - 1)) sb.append(" and ");
 		}
-		//sb.append(types)
-		//sb.append(keywords)
+		//sb.append(abilities)
 		//sb.append(triggers)
 		if(!permanent) {
 			if(params.containsKey("UntilEndOfCombat")) sb.append(" until end of combat.");
@@ -230,18 +229,22 @@ public class AbilityFactory_Animate {
 	private static void animateResolve(final AbilityFactory af, final SpellAbility sa) {
 		HashMap<String,String> params = af.getMapParams();
 		Card source = sa.getSourceCard();
+		Card host = af.getHostCard();
 		String db = params.get("SubAbility");
 
 		//AF specific params
 		int power = Integer.parseInt(params.get("Power"));
 		int toughness = Integer.parseInt(params.get("Toughness"));
+		
 		boolean permanent = params.containsKey("Permanent") ? true : false;
+		
 		ArrayList<String> types = new ArrayList<String>(Arrays.asList(params.get("Types").split(",")));
+		
 		final ArrayList<String> keywords = new ArrayList<String>();
 		if(params.containsKey("Keywords")) keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
+		
 		ArrayList<String> colors = new ArrayList<String>();
 		if(params.containsKey("Colors")) colors.addAll(Arrays.asList(params.get("Colors").split(",")));
-
 		String colorDesc = "";
 		for(String col : colors) {
 			if(col.equals("White")) {
@@ -264,6 +267,10 @@ public class AbilityFactory_Animate {
 			}
 		}
 		final String finalDesc = colorDesc;
+		
+		//abilities to add to the animated being
+		ArrayList<String> abilities = new ArrayList<String>();
+		if(params.containsKey("Abilities")) abilities.addAll(Arrays.asList(params.get("Abilities").split(",")));
 
 		Target tgt = af.getAbTgt();
 		ArrayList<Card> tgts;
@@ -271,16 +278,27 @@ public class AbilityFactory_Animate {
 			tgts = tgt.getTargetCards();
 		else
 			tgts = AbilityFactory.getDefinedCards(source, params.get("Defined"), sa);
+		
 		for(final Card c : tgts){
 			//final ArrayList<Card_Color> originalColors = c.getColor();
 			final ArrayList<String> originalTypes = c.getType();
+			
 			final long timestamp = doAnimate(c, power, toughness, types, finalDesc, keywords);
+			final ArrayList<SpellAbility> actualAbilities= new ArrayList<SpellAbility>();
+			if(abilities.size() > 0){
+				for(String s : abilities) {
+					String actualAbility = host.getSVar(s);
+					SpellAbility grantedAbility = af.getAbility(actualAbility, c);
+					actualAbilities.add(grantedAbility);
+					c.addSpellAbility(grantedAbility);
+				}
+			}
 
 			final Command unactivate = new Command() {
 				private static final long serialVersionUID = -5861759814760561373L;
 
 				public void execute() {
-					doUnanimate(c, originalTypes, finalDesc, keywords, timestamp);
+					doUnanimate(c, originalTypes, finalDesc, keywords, actualAbilities, timestamp);
 				}
 			};
 
@@ -320,7 +338,7 @@ public class AbilityFactory_Animate {
 		return timestamp;
 	}
 
-	private static void doUnanimate(Card c, ArrayList<String> originalTypes, String colorDesc, ArrayList<String> originalKeywords, long timestamp) {
+	private static void doUnanimate(Card c, ArrayList<String> originalTypes, String colorDesc, ArrayList<String> originalKeywords, ArrayList<SpellAbility> actualAbilities, long timestamp) {
 		c.setBaseAttack(0);
 		c.setBaseDefense(0);
 
@@ -334,6 +352,10 @@ public class AbilityFactory_Animate {
 		for(String k : originalKeywords) {
 			//TODO - may want to look at saving off intrinsic and extrinsic separately and add back that way
 			c.removeIntrinsicKeyword(k);
+		}
+		
+		for(SpellAbility sa : actualAbilities) {
+			c.removeSpellAbility(sa);
 		}
 
 		//any other unanimate cleanup
