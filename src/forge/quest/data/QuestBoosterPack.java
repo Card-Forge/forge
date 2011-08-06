@@ -4,7 +4,9 @@ import forge.CardList;
 import forge.Constant;
 import forge.properties.NewConstants;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
 public class QuestBoosterPack implements NewConstants {
@@ -33,9 +35,7 @@ public class QuestBoosterPack implements NewConstants {
     		if (i != 2)
     			started.add(Constant.Color.Colorless);
 
-    	   	for(String s : Constant.Color.onlyColors){
-    	   		started.add(s);
-    	    }
+            started.addAll(Arrays.asList(Constant.Color.onlyColors));
     	}
     		
     	if (standardPool){
