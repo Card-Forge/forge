@@ -2,12 +2,15 @@ Abraham Lincoln 3
 [general]
 constructed
 [main]
-4 Plateau
-2 Island
-2 Plains
-3 Mountain
-4 Tundra
-4 Volcanic Island
+3 Plateau
+2 Flooded Strand
+3 Arid Mesa
+1 Island
+1 Plains
+1 Mountain
+2 Tundra
+3 Volcanic Island
+3 Scalding Tarn
 1 Mox Ruby
 1 Mox Sapphire
 1 Mox Pearl
@@ -24,7 +27,7 @@ constructed
 1 Flying Men
 1 Silver Knight
 1 Lantern Kami
-1 Hobgoblin Dragoon
+1 Firemane Angel
 1 Granite Gargoyle
 1 Disenchant
 1 Tremor
