@@ -1,0 +1,9 @@
+Name:Skull Fracture
+ManaCost:B
+Types:Sorcery
+Text:no text
+A:SP$Discard|Cost$B|ValidTgts$Player|NumCards$1|Mode$TgtChoose|SpellDescription$Target player discards a card.
+K:Flashback:3 B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_fracture.jpg
+End

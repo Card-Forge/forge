@@ -4153,6 +4153,7 @@ res/cardsfolder/skulking_fugitive.txt -text svneol=native#text/plain
 res/cardsfolder/skulking_ghost.txt -text svneol=native#text/plain
 res/cardsfolder/skulking_knight.txt -text svneol=native#text/plain
 res/cardsfolder/skull_catapult.txt -text svneol=native#text/plain
+res/cardsfolder/skull_fracture.txt -text svneol=native#text/plain
 res/cardsfolder/skull_of_orm.txt -text svneol=native#text/plain
 res/cardsfolder/skull_of_ramos.txt -text svneol=native#text/plain
 res/cardsfolder/skullclamp.txt -text svneol=native#text/plain
