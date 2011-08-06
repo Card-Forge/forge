@@ -1860,6 +1860,8 @@ public class CardFactoryUtil
         {
           this.setFree(false);
           AllZone.Stack.add(spell);
+          if (spell.isTapAbility())
+        	  spell.getSourceCard().tap();
           stop();
         }
         else
