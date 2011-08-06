@@ -582,6 +582,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_Animate.createDrawbackAnimate(this);
 		}
 		
+		if (API.equals("Effect")){
+			if(isAb)
+				SA = AbilityFactory_Effect.createAbilityEffect(this);
+			else if(isSp)
+				SA = AbilityFactory_Effect.createSpellEffect(this);
+			else if(isDb)
+				SA = AbilityFactory_Effect.createDrawbackEffect(this);
+		}
+		
 		if (SA == null)
 			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Looking for API: "+API);
 

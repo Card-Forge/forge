@@ -37,8 +37,6 @@ public abstract class Player extends MyObservable{
 	protected int numDrawnThisTurn = 0;
 	protected CardList slowtripList = new CardList();
 	
-	protected Card channelCard = null;
-	
 	public Player(String myName) {
 		this(myName, 20, 0);
 	}
@@ -1040,24 +1038,7 @@ public abstract class Player extends MyObservable{
     public static int getHandSizeStamp() {
        return NextHandSizeStamp++;
     }
-    
-    /////////////////
-    //
-    //	for using the card Channel
-    //
-    /////////////////
-    public void setChannelCard(Card c) {
-    	channelCard = c;
-    }
-    
-    public boolean canChannel() {
-    	return null != channelCard;
-    }
-    
-    public Card getChannelCard() {
-    	return channelCard;
-    }
-    
+ 
     public int getMaxLandsToPlay(){
     	return maxLandsToPlay;
     }

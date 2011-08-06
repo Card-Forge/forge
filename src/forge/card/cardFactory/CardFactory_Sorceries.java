@@ -4281,42 +4281,7 @@ public class CardFactory_Sorceries {
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Channel")) {
-        	/*
-        	 * Until end of turn, any time you could activate a mana ability, you
-        	 * may pay 1 life. If you do, add 1 to your mana pool.
-        	 */
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 4113684767236269830L;
-
-				@Override
-                public boolean canPlayAI() {
-					//AI currently has no mana pool
-                    return false;
-                }
                 
-                @Override
-                public void resolve() {
-                	getActivatingPlayer().setChannelCard(card);
-                	final Command untilEOT = new Command() {
-						private static final long serialVersionUID = 6608218813784831252L;
-
-						public void execute() {
-                            getActivatingPlayer().setChannelCard(null);
-                        }
-                    };//Command
-                    AllZone.EndOfTurn.addUntil(untilEOT);
-                }//resolve()
-            };//SpellAbility
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Choking Sands")) {

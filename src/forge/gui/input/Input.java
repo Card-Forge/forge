@@ -3,10 +3,8 @@ package forge.gui.input;
 
 import forge.AllZone;
 import forge.Card;
-import forge.GameActionUtil;
 import forge.Player;
 import forge.PlayerZone;
-import forge.card.spellability.Ability_Mana;
 
 
 public abstract class Input implements java.io.Serializable {
@@ -21,18 +19,7 @@ public abstract class Input implements java.io.Serializable {
     
     public void selectCard(Card c, PlayerZone zone) {}
     
-    public void selectPlayer(final Player player) {
-    	if(player.canChannel()) {
-    		Card channel = player.getChannelCard();
-    		if (GameActionUtil.showYesNoDialog(channel, "Pay 1 life?")) {
-    			player.payLife(1, channel);
-    			Ability_Mana abMana = new Ability_Mana(channel, "0", "1") {
-    				private static final long serialVersionUID = -2182129023960978132L;
-    			};
-    			abMana.produceMana();
-    		}
-    	}
-    }
+    public void selectPlayer(final Player player) { }
     
     public void selectButtonOK() {}
     
