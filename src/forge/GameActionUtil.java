@@ -50,6 +50,7 @@ public class GameActionUtil {
 		upkeep_Land_Tax();
 		upkeep_Mana_Vault();
 		upkeep_Feedback();
+		upkeep_Farmstead();
 		upkeep_Unstable_Mutation();
 		upkeep_Warp_Artifact();
 		upkeep_Soul_Bleed();
@@ -7072,6 +7073,51 @@ public class GameActionUtil {
         	}
         }//list > 0
     }//upkeep_Unstable_Mutation()
+	
+	private static void upkeep_Farmstead() {
+		final String auraName = "Farmstead";
+		final Player player = AllZone.Phase.getPlayerTurn();
+
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
+		list = list.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				return c.isEnchantedBy(auraName);
+			}
+		});
+
+		for(final Card land:list) {
+			CardList auras = new CardList(land.getEnchantedBy().toArray());
+			auras = auras.getName(auraName);
+			for(int i = 0; i < auras.size(); i++) {
+				Ability ability = new Ability(land, "0") {
+					@Override
+					public void resolve() {
+						if(GameActionUtil.showYesNoDialog(land, "Pay W W, and gain 1 life?")) {
+							//prompt for pay mana cost
+							final SpellAbility gain = new Ability(land, "W W") {
+								@Override
+								public void resolve() {
+									land.getController().gainLife(1, land);
+								}
+							};//Ability
+
+							StringBuilder sb = new StringBuilder();
+							sb.append(land).append(" - gain 1 life.");
+							gain.setStackDescription(sb.toString());
+
+							AllZone.GameAction.playSpellAbility(gain);
+						}
+					}
+				};
+
+				StringBuilder sb = new StringBuilder();
+				sb.append(land.getName()).append(" -  activate Life gain ability?");
+				ability.setStackDescription(sb.toString());
+
+				AllZone.Stack.add(ability);
+			}
+		}
+	}//upkeep_Farmstead()
 	
 	private static void upkeep_Warp_Artifact() {
 		final String auraName = "Warp Artifact";
