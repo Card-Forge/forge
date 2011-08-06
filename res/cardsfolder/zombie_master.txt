@@ -1,0 +1,12 @@
+Name:Zombie Master
+ManaCost:1 B B
+Types:Creature Zombie
+Text:no text
+PT:2/2
+K:stPumpAll:Zombie.Creature+Other:0/0/Swampwalk:no Condition:Other Zombie creatures have swampwalk.
+K:stPumpAll:Zombie.Other:0/0/SVar=Pump:no Condition:Other Zombies have "B: Regenerate this permanent."
+SVar:Pump:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_master.jpg
+End
