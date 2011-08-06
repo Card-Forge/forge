@@ -11240,10 +11240,12 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Candelabra of Tawnos")) {
+        else if(cardName.equals("Candelabra of Tawnos") || cardName.equals("Mishra's Helix")) {
         	/*
-        	 * X, Tap: Untap X target lands.
+        	 * X, Tap: Untap/Tap X target lands.
         	 */
+        	
+        	final String action = cardName.equals("Candelabra of Tawnos") ? "untap" : "tap";
         	
         	//no reason this should never be enough targets
         	final Card[] target = new Card[100];
@@ -11259,7 +11261,8 @@ public class CardFactory implements NewConstants {
         				if(AllZone.GameAction.isCardInPlay(target[i])
         						&& CardFactoryUtil.canTarget(card, target[i])
         						&& null != target[i]) {
-        					target[i].untap();
+        					if(cardName.equals("Candelabra of Tawnos")) target[i].untap();
+        					else target[i].tap();
         				}
         			}
         		}//resolve()
@@ -11271,7 +11274,7 @@ public class CardFactory implements NewConstants {
         				sb.append(target[i]).append(",");
         			}
         			sb.append("]");
-        			System.out.println("Candelabra of Tawnos: "+sb.toString());
+        			System.out.println(cardName+": "+sb.toString());
         		}
         		
         	};//SpellAbility
@@ -11281,7 +11284,7 @@ public class CardFactory implements NewConstants {
 
 				@Override
         		public void showMessage() {
-        			AllZone.Display.showMessage("Select target lands to untap.  Currently, "+getNumTargets()+" targets.  Click OK when done.");
+        			AllZone.Display.showMessage("Select target lands to "+action+".  Currently, "+getNumTargets()+" targets.  Click OK when done.");
         		}
 				
 				private int getNumTargets() {
@@ -11340,8 +11343,8 @@ public class CardFactory implements NewConstants {
         	///////////////////////////////////////
         	/////////////////////////////////////
 
-        	ability.setDescription("X, tap: "+"Untap X target lands.");
-        	ability.setStackDescription(card.getName()+" - Untap X target lands.");
+        	ability.setDescription("X, tap: "+action+" X target lands.");
+        	ability.setStackDescription(card.getName()+" - "+action+" X target lands.");
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
