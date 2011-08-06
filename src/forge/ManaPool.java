@@ -359,7 +359,7 @@ public class ManaPool extends Card {
                 res.add(s);
                 if(clessString.trim().equals("")) continue;
                 try {
-                    Colorless += Integer.parseInt(clessString);
+                    Colorless += Integer.parseInt(clessString.trim());
                 } catch(NumberFormatException ex) {
                     throw new RuntimeException(
                             "Mana_Pool.getManaParts : Error, sum of noncolor mana parts is not a number - "
