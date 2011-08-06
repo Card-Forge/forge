@@ -113,4 +113,18 @@ public class AllZone implements NewConstants {
 	
 		return (PlayerZone)o;
     }
+
+    public static void resetZoneMoveTracking()
+    {
+        ((DefaultPlayerZone)Human_Command).resetCardsAddedThisTurn();
+        ((DefaultPlayerZone)Human_Library).resetCardsAddedThisTurn();
+        ((DefaultPlayerZone)Human_Hand).resetCardsAddedThisTurn();
+        ((DefaultPlayerZone)Human_Battlefield).resetCardsAddedThisTurn();
+        ((DefaultPlayerZone)Human_Graveyard).resetCardsAddedThisTurn();
+        ((DefaultPlayerZone)Computer_Command).resetCardsAddedThisTurn();
+        ((DefaultPlayerZone)Computer_Library).resetCardsAddedThisTurn();
+        ((DefaultPlayerZone)Computer_Hand).resetCardsAddedThisTurn();
+        ((DefaultPlayerZone)Computer_Battlefield).resetCardsAddedThisTurn();
+        ((DefaultPlayerZone)Computer_Graveyard).resetCardsAddedThisTurn();
+    }
 }//AllZone

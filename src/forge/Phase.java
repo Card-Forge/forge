@@ -294,8 +294,6 @@ public class Phase extends MyObservable
             
         }
 
-
-        
         //This line fixes Combat Damage triggers not going off when they should
         AllZone.Stack.unfreezeStack();
 
@@ -385,6 +383,8 @@ public class Phase extends MyObservable
     
     private Player handleNextTurn() {
     	Player nextTurn = extraTurns.isEmpty() ?  getPlayerTurn().getOpponent() : extraTurns.pop();
+
+        AllZone.resetZoneMoveTracking();
     	
     	return skipTurnTimeVault(nextTurn);
 	}

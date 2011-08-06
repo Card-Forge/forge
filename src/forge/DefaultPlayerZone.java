@@ -12,6 +12,9 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
   private Player player;
   private boolean update = true;
 
+  private CardList cardsAddedThisTurn = new CardList();
+  private ArrayList<String> cardsAddedThisTurnSource = new ArrayList<String>();
+
   public DefaultPlayerZone(String zone, Player inPlayer)
   {
     zoneName = zone;
@@ -26,7 +29,21 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     */
 	  
     Card c = (Card)o;
-    
+
+    cardsAddedThisTurn.add(c);
+    System.out.print("Added card to " + getZoneName() + " From ");
+    if(AllZone.getZone(c) != null)
+    {
+      System.out.print(AllZone.getZone(c).getZoneName());
+      cardsAddedThisTurnSource.add(AllZone.getZone(c).getZoneName());
+    }
+    else
+    {
+      System.out.print("None");
+      cardsAddedThisTurnSource.add("None");
+    }
+    System.out.println(".Size: " + (cards.size()+1));
+
     if (is("Graveyard")
     	&& c.getKeyword().contains("When CARDNAME is put into a graveyard from anywhere, reveal CARDNAME and shuffle it into its owner's library instead."))
     {
@@ -86,6 +103,21 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
   public void addOnce(Object o)
   {
 	  Card c = (Card)o;
+
+      cardsAddedThisTurn.add(c);
+      System.out.print("Added card to " + getZoneName() + " From ");
+      if(AllZone.getZone(c) != null)
+      {
+        System.out.print(AllZone.getZone(c).getZoneName());
+        cardsAddedThisTurnSource.add(AllZone.getZone(c).getZoneName());
+      }
+      else
+      {
+        System.out.print("None");
+        cardsAddedThisTurnSource.add("None");
+      }
+      System.out.println(".Size: " + (cards.size()+1));
+
 	  c.addObserver(this);
 	  
 	  cards.add((Card)c);
@@ -97,6 +129,20 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
   }
   public void add(Card c, int index)
   {
+    cardsAddedThisTurn.add(c);
+    System.out.print("Added card to " + getZoneName() + " From ");
+    if(AllZone.getZone(c) != null)
+    {
+      System.out.print(AllZone.getZone(c).getZoneName());
+      cardsAddedThisTurnSource.add(AllZone.getZone(c).getZoneName());
+    }
+    else
+    {
+      System.out.print("None");
+      cardsAddedThisTurnSource.add("None");
+    }
+    System.out.println(".Size: " + (cards.size()+1));
+
     cards.add(index, c);
     c.setTurnInZone(AllZone.Phase.getTurn());
     update();
@@ -165,4 +211,25 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
 	  sb.append(zoneName);
 	  return sb.toString();
   }
+
+    public CardList getCardsAddedThisTurn(String origin)
+    {
+        System.out.print("Request cards put into " + getZoneName() + " from " + origin + ".Amount: ");
+        CardList ret = new CardList();
+        for(int i=0;i<cardsAddedThisTurn.size();i++)
+        {
+            if(origin.equals(cardsAddedThisTurnSource.get(i)) || origin.equals("Any"))
+            {
+                ret.add(cardsAddedThisTurn.get(i));
+            }
+        }
+        System.out.println(ret.size());
+        return ret;
+    }
+
+    public void resetCardsAddedThisTurn()
+    {
+        cardsAddedThisTurn.clear();
+        cardsAddedThisTurnSource.clear();
+    }
 }

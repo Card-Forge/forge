@@ -55,17 +55,6 @@ public class GameAction {
         	c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.");
         	return moveTo(removed, c);
         }
-        
-        if(prev != null){
-        	if (prev.is(Constant.Zone.Battlefield) && c.isCreature())
-                AllZone.Combat.removeFromCombat(c);
-        	prevName = prev.getZoneName();
-        	prev.remove(c);
-        }
-        else{
-        	// things that were just created will not have zones!
-        	//System.out.println(c.getName() + " " + zone.getZoneName());
-        }
 
         // Don't add the Token, unless it's moving to the battlefield
         if (!c.isToken() || zone.is(Constant.Zone.Battlefield)){
@@ -77,8 +66,19 @@ public class GameAction {
 	        if (lastKnownInfo.wasSuspendCast())			// these probably can be moved back to SubtractCounters
 	        	c = addSuspendTriggers(c);
 
-        	// todo: if zone is battlefied and prevZone is battlefield, temporarily disable enters battlefield triggers
-        	zone.add(c);
+            if(prev != null)
+            {
+        	    if(prev.equals(zone))
+                    AllZone.TriggerHandler.suppressMode("ChangesZone");
+            }
+
+            zone.add(c);
+
+            if(prev != null)
+            {
+                if(prev.equals(zone))
+                   AllZone.TriggerHandler.clearSuppression("ChangesZone");
+            }
         }
         
         if (zone.is(Constant.Zone.Battlefield) && c.isAura()){
@@ -90,7 +90,18 @@ public class GameAction {
         //{
         	//Other characteristics should be cleared here also.
         //	c.clearRemembered();
-        //}	
+        //}
+
+        if(prev != null){
+        	if (prev.is(Constant.Zone.Battlefield) && c.isCreature())
+                AllZone.Combat.removeFromCombat(c);
+        	prevName = prev.getZoneName();
+        	prev.remove(c);
+        }
+        else{
+        	// things that were just created will not have zones!
+        	//System.out.println(c.getName() + " " + zone.getZoneName());
+        }
         
         //Run triggers        
         HashMap<String,Object> runParams = new HashMap<String,Object>();

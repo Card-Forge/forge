@@ -11,28 +11,7 @@ import java.util.Map.Entry;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.AllZone;
-import forge.AllZoneUtil;
-import forge.ButtonUtil;
-import forge.Card;
-import forge.CardList;
-import forge.CardListFilter;
-import forge.CardListUtil;
-import forge.CardUtil;
-import forge.Card_Color;
-import forge.Combat;
-import forge.CombatUtil;
-import forge.Command;
-import forge.CommandArgs;
-import forge.ComputerUtil;
-import forge.Constant;
-import forge.Counters;
-import forge.GameAction;
-import forge.GameActionUtil;
-import forge.MyRandom;
-import forge.Phase;
-import forge.Player;
-import forge.PlayerZone;
+import forge.*;
 import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Mana;
@@ -3527,6 +3506,41 @@ public class CardFactoryUtil {
         		return doXMath(Integer.parseInt(sq[1]), m);
         	else
         		return doXMath(Integer.parseInt(sq[2]), m); // not Main Phase
+        }
+
+        //Count$ThisTurnEntered <ZoneDestination> <ZoneOrigin> <Valid>
+        //or
+        //Count$ThisTurnEntered <ZoneDestination <Valid>
+        if(sq[0].startsWith("ThisTurnEntered"))
+        {
+            String[] workingCopy = sq[0].split(" ");
+            String destination,origin,validFilter;
+
+            destination = workingCopy[1];
+            if(workingCopy[2].equals("from"))
+            {
+                origin = workingCopy[3];
+                validFilter = workingCopy[4];
+            }
+            else
+            {
+                origin = "Any";
+                validFilter = workingCopy[2];
+            }
+
+            final String[] valid = validFilter.split(",");
+            final Card csource = c;
+            CardList res = ((DefaultPlayerZone)AllZone.getZone(destination, AllZone.HumanPlayer)).getCardsAddedThisTurn(origin);
+            res.add(((DefaultPlayerZone)AllZone.getZone(destination, AllZone.ComputerPlayer)).getCardsAddedThisTurn(origin));
+
+            res.filter(new CardListFilter() {
+               public boolean addCard(Card csubject)
+               {
+                   return csubject.isValidCard(valid,csource.getController(),csource);
+               }
+            });
+
+            return doXMath(res.size(),m);
         }
         
         //Generic Zone-based counting
