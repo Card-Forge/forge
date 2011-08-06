@@ -1311,41 +1311,6 @@ public class CardFactory_Instants {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Machinate")) {
-        	/* 
-        	 * Look at the top X cards of your library, where X is the number
-        	 * of artifacts you control. Put one of those cards into your hand
-        	 * and the rest on the bottom of your library in any order.
-        	 */
-        	final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 5559004016728325736L;
-
-				@Override
-        		public void resolve() {
-					Player player = card.getController();
-        			CardList artifacts = AllZoneUtil.getPlayerCardsInPlay(player);
-        			artifacts = artifacts.getType("Artifact");
-        			AllZoneUtil.rearrangeTopOfLibrary(card, player, artifacts.size(), false);
-        		}
-
-        		@Override
-        		public boolean canPlayAI() {
-        			//basically the same reason as Sensei's Diving Top
-        			return false;
-        		}
-        	};//spell
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(cardName).append(" - Rearrange the top X cards in your library in any order.");
-        	spell.setStackDescription(sb.toString());
-        	
-        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
-        	card.clearFirstSpellAbility();
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Demonic Consultation")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 1481101852928051519L;
