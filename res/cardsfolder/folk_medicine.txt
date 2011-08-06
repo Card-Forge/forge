@@ -2,7 +2,7 @@ Name:Folk Medicine
 ManaCost:2 G
 Types:Instant
 Text:no text
-K:spGainLife:X:You gain 1 life for each creature you control.:Folk Medicine - player gains X life
+A:SP$GainLife | Cost$ 2 G | LifeAmount$ X | SpellDescription$ You gain 1 life for each creature you control.
 SVar:X:Count$TypeYouCtrl.Creature
 K:Flashback:1 W
 SVar:Rarity:Common

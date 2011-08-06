@@ -2,7 +2,7 @@ Name:Presence of the Wise
 ManaCost:2 W W
 Types:Sorcery
 Text:no text
-K:spGainLife:X:You gain 2 life for each card in your hand.:Presence of the Wise - player gains X life
+A:SP$GainLife | Cost$ 2 W W | LifeAmount$ X | SpellDescription$ You gain 2 life for each card in your hand.
 SVar:X:Count$CardsInYourHand/Times.2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/presence_of_the_wise.jpg
