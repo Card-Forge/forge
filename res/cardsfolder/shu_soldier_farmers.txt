@@ -5,6 +5,5 @@ Text:When Shu Soldier-Farmers comes into play, you gain 4 life.
 PT:2/4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/shu_soldier_farmers.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/27.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/27.jpg
 End

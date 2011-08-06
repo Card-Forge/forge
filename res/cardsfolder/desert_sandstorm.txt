@@ -6,5 +6,4 @@ K:spDamageAll:Creature:1:Desert Sandstorm deals 1 damage to each creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_sandstorm.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/107.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/107.jpg
 End

@@ -5,8 +5,7 @@ Text:no text
 A:SP$Bounce | Cost$ 1 U U | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Destination$ Hand | SpellDescription$ Return two target creatures to their owners' hands.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undo.jpg
-SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/59.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/59.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/58.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po2/59.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/47.jpg
 End

@@ -8,6 +8,5 @@ K:WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/-4:ControllingPlayer_Se
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_spirit.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/170.jpg
-SetInfo:P02|Rare|http://magiccards.info/scans/en/po2/30.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/po2/30.jpg
+SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/30.jpg
 End

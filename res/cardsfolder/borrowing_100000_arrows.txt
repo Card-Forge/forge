@@ -7,6 +7,5 @@ SVar:X:Count$TypeOppCtrlTapped.Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/borrowing_100000_arrows.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/35.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/35.jpg
 End

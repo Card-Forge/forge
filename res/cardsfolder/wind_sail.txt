@@ -6,7 +6,6 @@ A:SP$Pump | Cost$ 1 U | TargetMin$ 1 | TargetMax$ 2 | KW$ Flying | ValidTgts$ Cr
 SVar:Rarity:Common
 #SVar:Picture:http://www.wizards.com/global/images/magic/general/wind_sail.jpg
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=21076&type=card
-SetInfo:P02|Common|http://magiccards.info/scans/en/po2/60.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/60.jpg
 SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/62.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po2/60.jpg
 End

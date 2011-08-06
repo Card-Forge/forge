@@ -4,9 +4,8 @@ Types:Sorcery
 Text:Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sleight_of_hand.jpg
-SetInfo:P02|Common|http://magiccards.info/scans/en/po2/46.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/46.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/51.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po2/46.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/99.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/98.jpg
 End

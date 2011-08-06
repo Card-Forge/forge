@@ -5,10 +5,10 @@ Text:no text
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthquake.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/148.jpg
-SetInfo:P02|Rare|http://magiccards.info/scans/en/po2/94.jpg
+SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/94.jpg
 SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/207.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/180.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/po2/94.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/129.jpg
 SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/134.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/173.jpg
 SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/147.jpg

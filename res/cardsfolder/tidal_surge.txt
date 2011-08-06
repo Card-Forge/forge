@@ -6,8 +6,8 @@ A:SP$Tap | Cost$ 1 U | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target cr
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_surge.jpg
-SetInfo:P02|Common|http://magiccards.info/scans/en/po2/56.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/56.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/102.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po2/56.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/75.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/46.jpg
 End

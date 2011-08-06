@@ -39,7 +39,7 @@ def initSets():
 	
 	# Portal
 	allSets['Portal'] = 'POR'
-	allSets['Portal Second Age'] = 'P02'
+	allSets['Portal Second Age'] = 'PO2'
 	allSets['Portal Three Kingdoms'] = 'PTK'
 	
 	# Starter

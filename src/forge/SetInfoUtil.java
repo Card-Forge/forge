@@ -27,7 +27,7 @@ public class SetInfoUtil {
 		{"TE", "TMP", "Tempest"},
 		{"SH", "STH", "Stronghold"},
 		{"EX", "EXO", "Exodus"},
-		{"P2", "P02", "Portal Second Age"},
+		{"P2", "PO2", "Portal Second Age"},
 		{"US", "USG", "Urza's Saga"},
 		{"UL", "ULG", "Urza's Legacy"},
 		{"6E", "6ED", "Classic (Sixth Edition)"},

@@ -6,6 +6,5 @@ PT:2/2
 K:WheneverKeyword:isUnblocked:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Abyssal Nightstalker attacks and isn't blocked, defending player discards a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/abyssal_nightstalker.jpg
-SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/1.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po2/1.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/1.jpg
 End

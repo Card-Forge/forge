@@ -5,7 +5,7 @@ Text:no text
 A:SP$Counter | Cost$ 1 U U | Type$ Spell | CounterValid$ Creature,Sorcery | SpellDescription$ Counter target creature or sorcery spell.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_denial.jpg
-SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/41.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/49.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/41.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/49.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/62.jpg
 End

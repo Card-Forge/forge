@@ -6,6 +6,5 @@ A:SP$DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:X:Count$TypeYouCtrl.Mountain
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rockslide_ambush.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/121.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/121.jpg
 End

@@ -7,7 +7,7 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/path_of_peace.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/29.jpg
-SetInfo:P02|Common|http://magiccards.info/scans/en/po2/138.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/138.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/21.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po2/138.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/183.jpg
 End

@@ -6,7 +6,6 @@ PT:1/1
 K:Reach
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84665.jpg
-SetInfo:P02|Common|http://magiccards.info/scans/en/po2/88.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po2/88.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/88.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/275.jpg
 End

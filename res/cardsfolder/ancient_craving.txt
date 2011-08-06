@@ -6,5 +6,5 @@ A:SP$Draw | Cost$ 3 B | NumCards$ 3 | SpellDescription$ You draw three cards and
 SVar:DB:DB$LoseLife | LifeAmount$ 3
 SVar:Rarity:Rare
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/ancient_craving.jpg
-SetInfo:P02|Rare|http://magiccards.info/scans/en/po2/2.jpg
+SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/2.jpg
 End

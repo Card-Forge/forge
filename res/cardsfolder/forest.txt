@@ -37,7 +37,7 @@ SetInfo:7ED|Land|http://magiccards.info/scans/en/7e/328.jpg
 SetInfo:MMQ|Land|http://magiccards.info/scans/en/mm/347.jpg
 SetInfo:ALA|Land|http://magiccards.info/scans/en/ala/246.jpg
 SetInfo:M11|Land|http://magiccards.info/scans/en/m11/246.jpg
-SetInfo:P02|Land|http://magiccards.info/scans/en/po2/151.jpg
+SetInfo:PO2|Land|http://magiccards.info/scans/en/po2/151.jpg
 SetInfo:LRW|Land|http://magiccards.info/scans/en/lw/298.jpg
 SetInfo:2ED|Land|http://magiccards.info/scans/en/un/280.jpg
 End

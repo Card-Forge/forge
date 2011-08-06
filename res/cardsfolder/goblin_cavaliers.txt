@@ -5,7 +5,6 @@ Text:no text
 PT:3/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20214.jpg
-SetInfo:P02|Common|http://magiccards.info/scans/en/po2/95.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/95.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/98.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po2/95.jpg
 End

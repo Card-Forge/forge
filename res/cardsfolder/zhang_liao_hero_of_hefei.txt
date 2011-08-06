@@ -6,6 +6,5 @@ PT:3/3
 K:WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Zhang Liao, Hero of Hefei deals damage to an opponent, that opponent discards a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhang_liao_hero_of_hefei.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/p3k/96.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/96.jpg
 End

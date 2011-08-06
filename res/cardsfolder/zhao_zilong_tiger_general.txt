@@ -7,6 +7,5 @@ K:Horsemanship
 K:WheneverKeyword:Blocks:Self:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever Zhao Zilong, Tiger General blocks, it gets +1/+1 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhao_zilong_tiger_general.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/p3k/33.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/33.jpg
 End

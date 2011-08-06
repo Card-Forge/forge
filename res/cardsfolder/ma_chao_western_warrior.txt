@@ -7,6 +7,5 @@ K:Horsemanship
 K:WheneverKeyword:Attack - Alone:Self:Play:KeywordPumpEOT/Unblockable:Self:ASAP:No_Condition:No Special Condition:Whenever Ma Chao, Western Warrior attacks alone, it's unblockable this combat.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ma_chao_western_warrior.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/p3k/116.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/116.jpg
 End

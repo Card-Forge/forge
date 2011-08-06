@@ -7,6 +7,5 @@ K:Horsemanship
 K:WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Wei Night Raiders deals damage to an opponent, that player discards a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wei_night_raiders.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/89.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/89.jpg
 End

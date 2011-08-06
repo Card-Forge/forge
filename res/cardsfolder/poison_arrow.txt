@@ -6,6 +6,5 @@ A:SP$Destroy | Cost$ 4 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select ta
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/poison_arrow.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/80.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/80.jpg
 End

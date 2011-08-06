@@ -10,7 +10,8 @@ SetInfo:LEB|Common|http://magiccards.info/scans/en/be/31.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/157.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/40.jpg
 SetInfo:POR|Common|http://magiccards.info/scans/en/po/30.jpg
-SetInfo:P02|Common|http://magiccards.info/scans/en/po2/26.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/156.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/26.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/152.jpg
 SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/32.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/53.jpg

@@ -8,8 +8,7 @@ SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6592.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/228.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/225.jpg
 SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/220.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po2/118.jpg
-SetInfo:P02|Common|http://magiccards.info/scans/en/po2/118.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/118.jpg
 SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/211.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/99.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/121.jpg

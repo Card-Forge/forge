@@ -5,6 +5,5 @@ Text:no text
 K:spAllPump:YouCtrl:+1/+1:Creatures you control get +1/+1 until end of turn.:Virtuous Charge - Creatures get +1/+1 until EOT
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10596.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/29.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/29.jpg
 End

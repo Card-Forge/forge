@@ -6,5 +6,4 @@ A:SP$DealDamage | Cost$ 1 R | Tgt$ TgtCP | NumDmg$ 3 | SpellDescription$ Fire Am
 SVar:Rarity:Common
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/fire_ambush.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/111.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/111.jpg
 End

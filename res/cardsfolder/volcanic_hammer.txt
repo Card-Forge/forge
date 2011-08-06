@@ -7,8 +7,8 @@ SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6593.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/231.jpg
 SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/226.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po2/119.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/160.jpg
 SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/226.jpg
-SetInfo:P02|Common|http://magiccards.info/scans/en/po2/119.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/119.jpg
 SetInfo:S99|Common|http://magiccards.info/scans/en/st/123.jpg
 End

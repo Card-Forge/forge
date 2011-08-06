@@ -6,6 +6,5 @@ PT:3/2
 K:Horsemanship
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xiahou_dun_the_one_eyed.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/p3k/92.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/92.jpg
 End

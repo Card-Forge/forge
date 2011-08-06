@@ -6,5 +6,4 @@ A:SP$Discard | Cost$ 2 B | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deception.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/73.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/73.jpg
 End

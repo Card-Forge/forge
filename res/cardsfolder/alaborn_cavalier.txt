@@ -6,6 +6,5 @@ PT:2/2
 K:WheneverKeyword:Attacks:Self:Play:TapPermanent:NormalInput/Creature:ASAP:Yes_No:No Special Condition:Whenever Alaborn Cavalier attacks, you may tap target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/alaborn_cavalier.jpg
-SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/121.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po2/121.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/121.jpg
 End

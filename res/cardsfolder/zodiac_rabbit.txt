@@ -6,6 +6,5 @@ PT:1/1
 K:Forestwalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10582.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/162.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/162.jpg
 End

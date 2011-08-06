@@ -5,6 +5,5 @@ Text:no text
 PT:1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loyal_retainers.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/12.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/12.jpg
 End

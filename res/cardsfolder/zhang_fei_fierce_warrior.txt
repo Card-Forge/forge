@@ -7,6 +7,5 @@ K:Vigilance
 K:Horsemanship
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zhang_fei_fierce_warrior.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/p3k/32.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/32.jpg
 End

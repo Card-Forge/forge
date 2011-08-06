@@ -6,6 +6,5 @@ PT:2/3
 K:Horsemanship
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wu_elite_cavalry.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/58.jpg
 SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/58.jpg
 End

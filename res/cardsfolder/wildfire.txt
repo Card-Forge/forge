@@ -5,8 +5,7 @@ Text:Each player sacrifices four lands. Wildfire deals 4 damage to each creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wildfire.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/228.jpg
-SetInfo:P02|Rare|http://magiccards.info/scans/en/po2/120.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/po2/120.jpg
+SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/120.jpg
 SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/228.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/228.jpg
 End

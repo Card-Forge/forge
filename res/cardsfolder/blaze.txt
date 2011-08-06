@@ -9,9 +9,9 @@ SVar:Picture:http://www.wizards.com/global/images/magic/general/blaze.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/177.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/102.jpg
 SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/175.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/102.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/122.jpg
 SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/175.jpg
 SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/190.jpg
-SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/91.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/91.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/168.jpg
 End

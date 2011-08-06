@@ -8,6 +8,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/theft_of_dreams.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/49.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po2/55.jpg
-SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/55.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/73.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/55.jpg
 End

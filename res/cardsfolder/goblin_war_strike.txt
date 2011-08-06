@@ -6,7 +6,6 @@ A:SP$DealDamage | Cost$ R | Tgt$ TgtP | NumDmg$ X | SpellDescription$ Goblin War
 SVar:X:Count$TypeYouCtrl.Goblin
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_strike.jpg
-SetInfo:P02|Common|http://magiccards.info/scans/en/po2/105.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/105.jpg
 SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/96.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po2/105.jpg
 End

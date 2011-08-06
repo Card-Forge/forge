@@ -8,5 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 #SVar:Picture:http://www.wizards.com/global/images/magic/general/renewing_touch.jpg
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=20357&type=card
-SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/83.jpg
+SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/83.jpg
 End

@@ -6,5 +6,4 @@ K:spDamageAll:Player,Creature:3:Famine deals 3 damage to each creature and each 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/famine.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/75.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/75.jpg
 End

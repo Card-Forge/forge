@@ -7,5 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 #SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage.jpg
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=6622&type=card
-SetInfo:P02|Common|http://magiccards.info/scans/en/po2/85.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/85.jpg
 End

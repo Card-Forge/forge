@@ -7,6 +7,5 @@ K:stPumpAll:Creature.Green+Other+YouCtrl:1/1:No Condition:Other green creatures 
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meng_huo_barbarian_king.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/p3k/142.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/142.jpg
 End

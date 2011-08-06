@@ -6,7 +6,6 @@ A:SP$DestroyAll | Cost$ 4 W W | ValidCards$ Creature.tapped | SubAbility$ GainLi
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal_Second_Age/righteous_fury.jpg
-SetInfo:P02|Rare|http://magiccards.info/scans/en/po2/141.jpg
+SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/141.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/23.jpg
-SetInfo:POR|Rare|http://magiccards.info/scans/en/po2/141.jpg
 End

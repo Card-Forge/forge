@@ -6,6 +6,5 @@ A:SP$Bounce | Cost$ U | ValidTgts$ Creature.attacking | TgtPrompt$ Select target
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/champions_victory.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/39.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/39.jpg
 End

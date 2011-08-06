@@ -6,6 +6,5 @@ PT:3/2
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6524.jpg
-SetInfo:P02|Common|http://magiccards.info/scans/en/po2/48.jpg
-SetInfo:POR|Common|http://magiccards.info/scans/en/po2/48.jpg
+SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/48.jpg
 End

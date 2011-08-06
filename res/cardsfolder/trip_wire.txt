@@ -6,6 +6,5 @@ A:SP$Destroy | Cost$ 2 G | ValidTgts$ Creature.withHorsemanship | TgtPrompt$ Sel
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trip_wire.jpg
-SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/156.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/156.jpg
 End
