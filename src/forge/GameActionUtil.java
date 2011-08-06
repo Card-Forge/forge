@@ -4855,50 +4855,6 @@ public class GameActionUtil {
 		AllZone.Stack.add(ability);
 	}
 
-	public static void executeGrvDestroyCardEffects(Card c, Card destroyed) {
-		if(c.getName().contains("Bridge from Below") && destroyed.getController().equals(c.getController())
-				&& !destroyed.isToken() && destroyed.isCreature()) destroyCreature_Bridge_from_Below_maketoken(c, destroyed);
-		if(c.getName().contains("Bridge from Below") && !destroyed.getController().equals(c.getController()) && destroyed.isCreature()) destroyCreature_Bridge_from_Below_remove(c);
-	}
-
-	private static void destroyCreature_Bridge_from_Below_maketoken(Card c, Card destroyed) {
-		final Card crd = c;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", crd.getController(), "B", new String[] {"Creature", "Zombie"},
-						2, 2, new String[] {""});
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Bridge from Below - ").append(c.getController());
-		sb.append("puts a 2/2 black Zombie creature token onto the battlefield.");
-		ability.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability);
-	}
-
-	private static void destroyCreature_Bridge_from_Below_remove(Card c) {
-		final Card crd = c;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				PlayerZone grv = AllZone.getZone(Constant.Zone.Graveyard, crd.getController());
-				PlayerZone exile = AllZone.getZone(Constant.Zone.Exile, crd.getController());
-				grv.remove(crd);
-				exile.add(crd);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Bridge from Below - ").append(c.getController()).append(" exile Bridge from Below.");
-		ability.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability);
-	}
-
-
 	//***LANDS END HERE***
 
 	//***ENCHANTMENTS START HERE***
@@ -8891,7 +8847,7 @@ public class GameActionUtil {
             Ability ability = new Ability(list.get(0), "0") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.moveToHand(nether);
+                    AllZone.GameAction.moveToPlay(nether);
                 }
             };
 

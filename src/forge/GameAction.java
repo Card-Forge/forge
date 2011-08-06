@@ -2041,14 +2041,10 @@ public class GameAction {
                 return false;
             }
         });
-        
-        CardList bridge = AllZoneUtil.getCardsInGraveyard("Bridge from Below");
-        
+
         checkWheneverKeyword(c, "PermanentIntoGraveyard",null);
         for(int i = 0; i < list.size(); i++)
             GameActionUtil.executeDestroyCardEffects(list.get(i), c);
-        for(int i = 0; i < bridge.size(); i++)
-            GameActionUtil.executeGrvDestroyCardEffects(bridge.get(i), c);
         
         if(persist) {
         	final Card persistCard = newCard;

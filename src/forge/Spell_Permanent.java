@@ -166,8 +166,7 @@ public class Spell_Permanent extends Spell {
         //check on legendary
         if(card.getType().contains("Legendary")) {
         	CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-            if (list.containsName(card.getName()) /*&&
-            	!getSourceCard().getName().equals("Flagstones of Trokair")*/)
+            if (list.containsName(card.getName()))
             	return false;
         }
         if(card.getType().contains("Planeswalker")) {

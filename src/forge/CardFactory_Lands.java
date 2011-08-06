@@ -641,59 +641,7 @@ class CardFactory_Lands {
             card.addDestroyCommand(makeToken);
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Flagstones of Trokair")) {
-            
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    
-                    CardList plains = new CardList(lib.getCards());
-                    plains = plains.getType("Plains");
-                    
-                    if(card.getController().equals(AllZone.ComputerPlayer)) {
-                        if(plains.size() > 0) {
-                            Card c = plains.get(0);
-                            lib.remove(c);
-                            play.add(c);
-                            c.tap();
-                            
-                        }
-                    } else // human
-                    {
-                        if(plains.size() > 0) {
-                            Object o = GuiUtils.getChoiceOptional(
-                                    "Select plains card to put onto the battlefield tapped: ", plains.toArray());
-                            if(o != null) {
-                                Card c = (Card) o;
-                                lib.remove(c);
-                                play.add(c);
-                                c.tap();
-                            }
-                        }
-                    }
-                    card.getController().shuffle();
-                }//resolve()
-            };//Ability
-            
-            Command fetchPlains = new Command() {
-                
-                private static final long serialVersionUID = 5991465998493672076L;
-                
-                public void execute() {
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getName()).append(" - search library for a plains card and put it onto the battlefield tapped.");
-                	ability.setStackDescription(sb.toString());
-                    AllZone.Stack.add(ability);
-                }
-            };
-            
-            card.addDestroyCommand(fetchPlains);
-        }//*************** END ************ END **************************
-        
+
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mutavault")) {
