@@ -1,3 +1,11 @@
+Bad Moon
+1 B
+Enchantment
+Black creatures get +1/+1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bad_moon.jpg
+
 Whirlwind
 2 G G
 Sorcery
@@ -4150,13 +4158,6 @@ Instant
 no text
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/back_to_nature.jpg
-
-Bad Moon
-1 B
-Enchantment
-Black creatures get +1/+1
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bad_moon.jpg
 
 Badlands
 no cost
