@@ -56,7 +56,8 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
     //TODO: Make this ordering permanent
     private static String lastUsedDeck;
-    private JButton zeppelinButton;
+    private JButton zeppelinButton = new JButton("<html>Launch<br>Zeppelin</html>",
+            GuiUtils.getResizedIcon(GuiUtils.getIconFromFile("ZeppelinIcon.png"), 40, 40));
 
     public QuestMainPanel(QuestFrame mainFrame) {
         super(mainFrame);
@@ -66,7 +67,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
     }
 
     private void initUI() {
-
+        refresh();
         this.setLayout(new BorderLayout(5, 5));
         JPanel centerPanel = new JPanel(new BorderLayout());
         this.add(centerPanel, BorderLayout.CENTER);
@@ -82,7 +83,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         centerPanel.add(nextMatchPanel, BorderLayout.CENTER);
         this.setBorder(new EmptyBorder(5, 5, 5, 5));
-        refresh();
         
     }
 
@@ -186,7 +186,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
         panel.add(Box.createVerticalGlue());
 
         if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY)) {
-
             panel.add(this.lifeLabel);
             this.lifeLabel.setFont(new Font(FontConstants.DIALOG, Font.BOLD, 14));
             this.lifeLabel.setIcon(GuiUtils.getResizedIcon(GuiUtils.getIconFromFile("Life.png"), 30, 30));
@@ -313,8 +312,6 @@ public class QuestMainPanel extends QuestAbstractPanel {
             fantasyPanel.add(petPanel, BorderLayout.WEST);
             petPanel.setMaximumSize(petPanel.getPreferredSize());
             petPanel.setAlignmentX(LEFT_ALIGNMENT);
-
-            this.zeppelinButton = new JButton("<html>Launch<br>Zeppelin</html>", GuiUtils.getResizedIcon(GuiUtils.getIconFromFile("ZeppelinIcon.png"), 40, 40));
 
             zeppelinButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent actionEvent) {
@@ -483,6 +480,12 @@ public class QuestMainPanel extends QuestAbstractPanel {
         nextMatchPanel.setLayout(nextMatchLayout);
         nextMatchPanel.add(createBattlePanel(), BATTLES);
         nextMatchPanel.add(createQuestPanel(), QUESTS);
+        if (isShowingQuests){
+            this.nextMatchLayout.show(nextMatchPanel, QUESTS);
+        }
+        else{
+            this.nextMatchLayout.show(nextMatchPanel, BATTLES);
+        }
     }
 
     private int nextQuestInWins() {
@@ -555,7 +558,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         //TODO: This is a temporary hack to see if the image cache affects the heap usage significantly.
         ImageCache.clear();
-        
+
         QuestItemZeppelin zeppelin = (QuestItemZeppelin) questData.getInventory().getItem("Zeppelin");
         zeppelin.setZeppelinUsed(false);
         questData.randomizeOpponents();
@@ -591,6 +594,8 @@ public class QuestMainPanel extends QuestAbstractPanel {
             setupBattle(humanDeck);
         }
 
+        AllZone.QuestData.saveData();
+        
         AllZone.Display.setVisible(true);
         mainFrame.dispose();
     }
@@ -642,12 +647,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
     void showQuests() {
         if (isShowingQuests) {
-            this.nextMatchLayout.show(nextMatchPanel, BATTLES);
             isShowingQuests = false;
             questButton.setText("Quests");
         }
         else {
-            this.nextMatchLayout.show(nextMatchPanel, QUESTS);
             isShowingQuests = true;
             questButton.setText("Battles");
         }
