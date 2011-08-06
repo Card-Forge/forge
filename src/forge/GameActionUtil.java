@@ -2953,6 +2953,8 @@ public class GameActionUtil
 				destroyCreature_Dauthi_Ghoul(c, destroyed);
 			else if (c.getName().equals("Soulcatcher") && destroyed.getKeyword().contains("Flying"))
 				destroyCreature_Soulcatcher(c, destroyed);
+			else if (c.getName().equals("Prowess of the Fair") && destroyed.getType().contains("Elf") && !destroyed.isToken() && !c.equals(destroyed) && destroyed.getController().equals(c.getController()) )
+	            destroyCreature_Prowess_of_the_Fair(c, destroyed);
 			else if (c.getName().equals("Fecundity"))
 				destroyCreature_Fecundity(c, destroyed);
 			else if (c.getName().equals("Moonlit Wake"))
@@ -3021,6 +3023,50 @@ public class GameActionUtil
 		ability.setStackDescription("Soulcatcher - gets a +1/+1 counter.");
 		if (AllZone.GameAction.isCardInPlay(c))
 			AllZone.Stack.add(ability);
+	}
+	
+	private static void destroyCreature_Prowess_of_the_Fair(Card c, Card destroyed)
+	{
+		final Card crd = c;
+		final Card crd2 = c;
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				String player = crd.getController();
+				if (player.equals(Constant.Player.Human)) {
+					if (showDialog(crd2))
+						makeToken();
+				}
+				else
+					makeToken();
+			}
+			public void makeToken()
+			{
+				String player = crd.getController();
+				 Card c = new Card();
+
+	        	  c.setName("Elf Warrior");
+	  	          c.setImageName("G 1 1 Elf Warrior");
+
+	  	          c.setOwner(player);
+	  	          c.setController(player);
+
+	  	          c.setManaCost("G");
+	  	          c.setToken(true);
+	  	         
+	  	          c.addType("Creature");
+	  	          c.addType("Elf");
+	  	          c.addType("Warrior");
+	  	          c.setBaseAttack(1);
+	  	          c.setBaseDefense(1);
+
+	  	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+	  	          play.add(c);
+			}
+		};
+		ability.setStackDescription("Prowess of the Fair - " + c.getController() +" may put a 1/1 green Elf Warrior creature token onto the battlefield.");
+		AllZone.Stack.add(ability);
 	}
 	
 	private static void destroyCreature_Fecundity(Card c, Card destroyed)

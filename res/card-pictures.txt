@@ -18,6 +18,7 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+prowess_of_the_fair.jpg     http://www.wizards.com/global/images/magic/general/prowess_of_the_fair.jpg
 abomination.jpg             http://www.wizards.com/global/images/magic/general/abomination.jpg
 time_warp.jpg				http://www.wizards.com/global/images/magic/general/time_warp.jpg
 deadly_grub.jpg             http://www.wizards.com/global/images/magic/general/deadly_grub.jpg
