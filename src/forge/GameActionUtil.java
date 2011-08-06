@@ -6733,74 +6733,84 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Wolf_Skull_Shaman()
 
-	private static void upkeep_Leaf_Crowned_Elder() {
-		final String player = AllZone.Phase.getActivePlayer();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Leaf-Crowned Elder");
+    private static void upkeep_Leaf_Crowned_Elder() {
+        final String player = AllZone.Phase.getActivePlayer();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			if(library.size() <= 0) {
-				return;
-			}
-			// System.out.println("top of deck: " + library.get(i).getName());
-			String creatureType = library.get(0).getType().toString();
-			String cardName = library.get(0).getName();
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName("Leaf-Crowned Elder");
 
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+        Ability ability;
+        for (int i = 0; i < list.size(); i++) {
+            if (library.size() <= 0) return;
 
-					String creatureType = library.get(0).getType().toString();
+            String creatureType = library.get(0).getType().toString();
+            String cardName = library.get(0).getName();
 
-					if(creatureType.contains("Treefolk") || creatureType.contains("Shaman")
-							|| library.get(0).getKeyword().contains("Changeling")) {
-						if(player.equals(Constant.Player.Human)) {
-							String[] choices = {"Yes", "No"};
-							Object q = null;
+            ability = new Ability(list.get(i), "0") {
+                @Override
+                public void resolve() {
+                    
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+                    String creatureType = library.get(0).getType().toString();
 
-							StringBuilder sb = new StringBuilder();
-							sb.append("Play ");
-							sb.append(library.get(0).toString());
-							sb.append(" without paying its mana cost?");
+                    if (creatureType.contains("Treefolk") 
+                            || creatureType.contains("Shaman")
+                            || library.get(0).getKeyword().contains("Changeling")) {
+                        
+                        if (player.equals(Constant.Player.Human)) {
+                            
+                            String title = "Leaf-Crowned Elder - Ability";
+                            StringBuilder message = new StringBuilder();
+                            message.append("Play ").append(library.get(0).getName()).append(" without paying its mana cost?");
+                            
+                            int choice = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.YES_NO_OPTION);
+                            
+                            if (choice == JOptionPane.YES_OPTION) {
+                                
+                                Card c = library.get(0);
+                                AllZone.GameAction.playCardNoCost(c);
+                                library.remove(c);
+                            }
+                        } else {
+                            
+                            Card c = library.get(0);
+                            ArrayList<SpellAbility> choices = c.getBasicSpells();
 
-							q = AllZone.Display.getChoiceOptional(sb.toString(), choices);
-
-							if(q == null || q.equals("No")) ;
-							else {
-								Card c = library.get(0);
-								AllZone.GameAction.playCardNoCost(c);
-								library.remove(c);
-							}
-						} else {
-							Card c = library.get(0);
-							ArrayList<SpellAbility> choices = c.getBasicSpells();
-
-							for(SpellAbility sa:choices) {
-								if(sa.canPlayAI()) {
-									ComputerUtil.playStackFree(sa);
-									break;
-								}
-							}
-							library.remove(c);
-							//play.add(c);
-						}
-					}
-
-				}// resolve()
-			};// Ability
-			if(creatureType.contains("Treefolk") || creatureType.contains("Shaman")) ability.setStackDescription("Leaf-Crowned Elder - "
-					+ player + " reveals: " + cardName + ".");
-			else ability.setStackDescription("Leaf-Crowned Elder - " + player + " reveals top card: " + cardName
-					+ ".");
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Leaf_Crowned_Elder()
+                            for(SpellAbility sa:choices) {
+                                if(sa.canPlayAI()) {
+                                    ComputerUtil.playStackFree(sa);
+                                    break;
+                                }
+                            }
+                            library.remove(c);
+                            //play.add(c);
+                        }
+                    }
+                }// resolve()
+            };// Ability
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Leaf-Crowned Elder - ").append(player);
+            
+            if (creatureType.contains("Treefolk") 
+                    || creatureType.contains("Shaman") 
+                    || library.get(0).getKeyword().contains("Changeling")) {
+                
+                sb.append(" reveals: ").append(cardName);
+                sb.append(", and may play that card without paying its mana cost.");
+                
+            } else {
+                
+                sb.append(" reveals top card: ").append(cardName).append(".");
+            }
+            ability.setStackDescription(sb.toString());
+            AllZone.Stack.add(ability);
+        }// for
+    }// upkeep_Leaf_Crowned_Elder()
+	
 	
     private static void upkeep_Ink_Dissolver() {
         final String player = AllZone.Phase.getActivePlayer();
