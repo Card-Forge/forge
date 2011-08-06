@@ -1321,6 +1321,7 @@ res/cardsfolder/death_speakers.txt -text svneol=native#text/plain
 res/cardsfolder/death_stroke.txt -text svneol=native#text/plain
 res/cardsfolder/death_ward.txt -text svneol=native#text/plain
 res/cardsfolder/deathbringer_thoctar.txt -text svneol=native#text/plain
+res/cardsfolder/deathforge_shaman.txt -text svneol=native#text/plain
 res/cardsfolder/deathgazer.txt -text svneol=native#text/plain
 res/cardsfolder/deathgreeter.txt -text svneol=native#text/plain
 res/cardsfolder/deathgrip.txt -text svneol=native#text/plain
