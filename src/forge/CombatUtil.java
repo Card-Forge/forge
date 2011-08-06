@@ -46,11 +46,85 @@ public class CombatUtil {
 		return true;
 	}
 	
+	public static boolean canBeBlocked(Card attacker) {
+    	
+        if(attacker == null) return true;
+        
+        if(attacker.getKeyword().contains("Unblockable")) return false;
+        
+        if (attacker.getKeyword().contains("CARDNAME can't be blocked by more than one creature.") 
+        		&& AllZone.Combat.getBlockers(attacker).size() > 0)  return false;
+        
+        //Landwalk
+        if (!AllZoneUtil.isCardInPlay("Staff of the Ages")) { //"Creatures with landwalk abilities can be blocked as though they didn't have those abilities."
+        	PlayerZone blkPZ = AllZone.getZone(Constant.Zone.Play, attacker.getController().getOpponent());
+        	CardList blkCL = new CardList(blkPZ.getCards());
+        	CardList temp = new CardList();
+        
+	        if(attacker.getKeyword().contains("Plainswalk")) {
+	            temp = blkCL.getType("Plains");
+	            if(!AllZoneUtil.isCardInPlay("Lord Magnus") 
+	            		&& !AllZoneUtil.isCardInPlay("Great Wall")
+	            		&& !temp.isEmpty()) return false;
+	        }
+	        
+	        if(attacker.getKeyword().contains("Islandwalk")) {
+	            temp = blkCL.getType("Island");
+	            if(!AllZoneUtil.isCardInPlay("Undertow") 
+	            		&& !AllZoneUtil.isCardInPlay("Gosta Dirk")
+	            		&& !temp.isEmpty()) return false;
+	        }
+	        
+	        if(attacker.getKeyword().contains("Swampwalk")) {
+	            temp = blkCL.getType("Swamp");
+	            if(!AllZoneUtil.isCardInPlay("Ur-drago") 
+	            		&& !AllZoneUtil.isCardInPlay("Quagmire")
+	            		&& !temp.isEmpty()) return false;
+	        }
+	        
+	        if(attacker.getKeyword().contains("Mountainwalk")) {
+	            temp = blkCL.getType("Mountain");
+	            if(!AllZoneUtil.isCardInPlay("Crevasse") 
+	            		&& !temp.isEmpty()) return false;
+	        }
+	        
+	        if(attacker.getKeyword().contains("Forestwalk")) {
+	            temp = blkCL.getType("Forest");
+	            if(!AllZoneUtil.isCardInPlay("Lord Magnus")
+	            		&& !AllZoneUtil.isCardInPlay("Deadfall")
+	            		&& !AllZoneUtil.isCardInPlay("Staff of the Ages")
+	            		&& !temp.isEmpty()) return false;
+	        }
+	        
+	        if(attacker.getKeyword().contains("Legendary landwalk")) {
+	            temp = blkCL.filter(new CardListFilter() {
+	                public boolean addCard(Card c) {
+	                    return c.isLand() && c.getType().contains("Legendary");
+	                }
+	            });
+	            if(!temp.isEmpty()) return false;
+	        }
+	        
+	        if(attacker.getKeyword().contains("Nonbasic landwalk")) {
+	            temp = blkCL.filter(new CardListFilter() {
+	                public boolean addCard(Card c) {
+	                    return c.isLand() && !c.isBasicLand();
+	                }
+	            });
+	            if(!temp.isEmpty()) return false;
+	        }
+        }
+        
+        return true;
+	}
+        
+	
     public static boolean canBlock(Card attacker, Card blocker) {
     	
         if(attacker == null || blocker == null) return false;
     	
     	if (canBlock(blocker) == false) return false;
+    	if (canBeBlocked(attacker) == false) return false;
         
         if(CardFactoryUtil.hasProtectionFrom(blocker,attacker)) return false;
         
@@ -143,75 +217,11 @@ public class CombatUtil {
         
         }// hasKeyword CARDNAME can't be blocked by creatures with power ...
 
-        PlayerZone blkPZ = AllZone.getZone(Constant.Zone.Play, blocker.getController());
-        CardList blkCL = new CardList(blkPZ.getCards());
-        CardList temp = new CardList();
-        
-        if(attacker.getKeyword().contains("Plainswalk")) {
-            temp = blkCL.getType("Plains");
-            if(!AllZoneUtil.isCardInPlay("Lord Magnus") 
-            		&& !AllZoneUtil.isCardInPlay("Great Wall")
-            		&& !AllZoneUtil.isCardInPlay("Staff of the Ages")
-            		&& !temp.isEmpty()) return false;
-        }
-        
-        if(attacker.getKeyword().contains("Islandwalk")) {
-            temp = blkCL.getType("Island");
-            if(!AllZoneUtil.isCardInPlay("Undertow") 
-            		&& !AllZoneUtil.isCardInPlay("Gosta Dirk")
-            		&& !AllZoneUtil.isCardInPlay("Staff of the Ages")
-            		&& !temp.isEmpty()) return false;
-        }
-        
-        if(attacker.getKeyword().contains("Swampwalk")) {
-            temp = blkCL.getType("Swamp");
-            if(!AllZoneUtil.isCardInPlay("Ur-drago") 
-            		&& !AllZoneUtil.isCardInPlay("Quagmire")
-            		&& !AllZoneUtil.isCardInPlay("Staff of the Ages")
-            		&& !temp.isEmpty()) return false;
-        }
-        
-        if(attacker.getKeyword().contains("Mountainwalk")) {
-            temp = blkCL.getType("Mountain");
-            if(!AllZoneUtil.isCardInPlay("Crevasse") 
-            		&& !AllZoneUtil.isCardInPlay("Staff of the Ages")
-            		&& !temp.isEmpty()) return false;
-        }
-        
-        if(attacker.getKeyword().contains("Forestwalk")) {
-            temp = blkCL.getType("Forest");
-            if(!AllZoneUtil.isCardInPlay("Lord Magnus")
-            		&& !AllZoneUtil.isCardInPlay("Deadfall")
-            		&& !AllZoneUtil.isCardInPlay("Staff of the Ages")
-            		&& !temp.isEmpty()) return false;
-        }
-        
-        if(attacker.getKeyword().contains("Legendary landwalk")) {
-            temp = blkCL.filter(new CardListFilter() {
-                public boolean addCard(Card c) {
-                    return c.isLand() && c.getType().contains("Legendary");
-                }
-            });
-            if(!temp.isEmpty() && !AllZoneUtil.isCardInPlay("Staff of the Ages")) return false;
-        }
-        
-        if(attacker.getKeyword().contains("Nonbasic landwalk")) {
-            temp = blkCL.filter(new CardListFilter() {
-                public boolean addCard(Card c) {
-                    return c.isLand() && !c.isBasicLand();
-                }
-            });
-            if(!temp.isEmpty() && !AllZoneUtil.isCardInPlay("Staff of the Ages")) return false;
-        }
-        
-
         if(blocker.getKeyword().contains("CARDNAME can block only creatures with flying.")
                 && !attacker.getKeyword().contains("Flying")) return false;
         
         if (attacker.getKeyword().contains("CARDNAME can't be blocked by creatures with flying.")
         		&& blocker.getKeyword().contains("Flying")) return false;
-        
-        if(attacker.getKeyword().contains("Unblockable")) return false;
         
         if(attacker.getKeyword().contains("Flying")) {
             if(!blocker.getKeyword().contains("Flying")
@@ -232,9 +242,7 @@ public class CombatUtil {
         }
         
         if(attacker.getKeyword().contains("Fear")) {
-            if(!blocker.getType().contains("Artifact")
-                    && !blocker.isBlack() /*&&
-                        !CardUtil.getColors(blocker).contains(Constant.Color.Colorless) */) //should not include colorless, right?
+            if(!blocker.getType().contains("Artifact") && !blocker.isBlack())
             return false;
         }
         
@@ -285,9 +293,6 @@ public class CombatUtil {
         
         if (attacker.getKeyword().contains("CARDNAME can't be blocked except by Walls and/or creatures with flying.") && 
         		!(blocker.isType("Wall") || blocker.getKeyword().contains("Flying"))) return false;
-        
-        if (attacker.getKeyword().contains("CARDNAME can't be blocked by more than one creature.") 
-        		&& AllZone.Combat.getBlockers(attacker).size() > 0)  return false;
         
         return true;
     }//canBlock()

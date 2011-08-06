@@ -79,7 +79,8 @@ public class ComputerUtil_Block2
    {
 	   CardList list = new CardList();
 	      for(int i = 0; i < possibleBlockers.size(); i++)
-	         if(CombatUtil.canBlock(attacker, possibleBlockers.get(i)) && (attacker.hasFirstStrike() || attacker.hasDoubleStrike()))
+	         if(CombatUtil.canBlock(attacker, possibleBlockers.get(i)) && 
+	        		 (possibleBlockers.get(i).hasFirstStrike() || possibleBlockers.get(i).hasDoubleStrike()))
 	            list.add(possibleBlockers.get(i));
 
 	   return list;
