@@ -84,12 +84,10 @@ public class GameActionUtil {
 		upkeep_Seizan_Perverter_of_Truth();
 		upkeep_Sleeper_Agent();
 		upkeep_Pillory_of_the_Sleepless();
-		upkeep_Creakwood_Liege();
 		upkeep_Mirror_Sigil_Sergeant();
 		upkeep_Verdant_Force();
 		upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
 		upkeep_Goblin_Assault();
-		upkeep_Nut_Collector();
 		
 		// Win / Lose	
 		//final Player player = AllZone.Phase.getPlayerTurn();
@@ -7119,33 +7117,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Goblin_Assault()
-	
-	private static void upkeep_Nut_Collector() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Nut Collector");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card crd = list.get(i);
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", crd.getController(), "G", new String[] {
-							"Creature", "Squirrel"}, 1, 1, new String[] {""});
-				}// resolve()
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Nut Collector - ").append(player);
-			sb.append(" puts a 1/1 green Squirrel creature token onto the battlefield.");
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Nut_Collector()
 
 	private static void upkeep_Masticore() {
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -7763,42 +7734,6 @@ public class GameActionUtil {
 			}
 		}
 	}// upkeep_Vampire_Lacerator
-	
-    private static void upkeep_Creakwood_Liege() {
-        final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-        CardList list = new CardList(playZone.getCards());
-        list = list.getName("Creakwood Liege");
-
-        Ability ability;
-        for (int i = 0; i < list.size(); i++) {
-            final Card crd = list.get(i);
-            ability = new Ability(list.get(i), "0") {
-                @Override
-                public void resolve() {
-                    
-                    if (player.equals(AllZone.HumanPlayer)) {
-                        String question = "Put a 1/1 black and green Worm creature token onto the battlefield?";
-                        if (showYesNoDialog(crd, question)) {
-                            CardFactoryUtil.makeToken("Worm", "BG 1 1 Worm", crd.getController(), "BG", 
-                                    new String[] {"Creature", "Worm"}, 1, 1, new String[] {""});
-                        }
-                    } else {
-                        CardFactoryUtil.makeToken("Worm", "BG 1 1 Worm", crd.getController(), "BG", 
-                                new String[] {"Creature", "Worm"}, 1, 1, new String[] {""});
-                    }
-                }// resolve()
-            };// Ability
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append("Creakwood Liege - ").append(player);
-            sb.append(" puts a 1/1 Green Black Worm creature token onto the battlefield.");
-            ability.setStackDescription(sb.toString());
-
-            AllZone.Stack.add(ability);
-        }// for
-    }// upkeep_Creakwood_Liege
 	
 	private static void upkeep_Mirror_Sigil_Sergeant()
 	{
