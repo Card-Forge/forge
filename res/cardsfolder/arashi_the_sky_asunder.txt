@@ -1,8 +1,10 @@
 Name:Arashi, the Sky Asunder
 ManaCost:3 G G
 Types:Legendary Creature Spirit
-Text:(NOTE: "X G, tap: Arashi, the Sky Asunder deals X damage to target creature with flying." not implemented.) (NOTE: "Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
+Text:(NOTE: "Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
 PT:5/5
+A:AB$DealDamage | Cost$X G T | ValidTgts$Creature.withFlying | TgtPrompt$Select target flying creature. | NumDmg$X | SpellDescription$CARDNAME deals X damage to target creature with flying.
+SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card87333.jpg
