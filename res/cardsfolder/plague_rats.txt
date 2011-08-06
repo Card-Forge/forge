@@ -4,6 +4,7 @@ Types:Creature Rat
 Text:Plague Rats's power and toughness are each equal to the number of creatures named Plague Rats on the battlefield.
 PT:1/1
 SVar:PlayMain1:TRUE
+SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plague_rats.jpg
 SetInfo:LEA|Common|http://magiccards.info/scans/en/al/30.jpg
