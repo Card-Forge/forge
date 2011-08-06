@@ -143,30 +143,22 @@ public class Spell_Permanent extends Spell {
     
     @Override
     public boolean canPlay() {
-    	if(AllZone.Stack.isSplitSecondOnStack()) return false;
+    	Card source = getSourceCard();
+    	if(AllZone.Stack.isSplitSecondOnStack() || source.isUnCastable()) return false;
     	
-    	Card perm = getSourceCard();
+
     	Player turn = AllZone.Phase.getPlayerTurn();
-    	
-    	if(perm.getName().equals("Serra Avenger")) {
-        	if (turn.equals(perm.getController()) && turn.getTurn() <= 3)
+
+    	if(source.getName().equals("Serra Avenger")) {
+        	if (turn.equals(source.getController()) && turn.getTurn() <= 3)
         		return false;
     	}
     	
-    	CardList listShimmerMyr = new CardList(AllZone.getZone(Constant.Zone.Battlefield, perm.getController()).getCards());
-    	listShimmerMyr = listShimmerMyr.filter(new CardListFilter() {
-
-			public boolean addCard(Card c) {
-				return c.getName().equals("Shimmer Myr");
-			}
-    		
-    	});
+    	CardList shimmerMyrs = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Shimmer Myr");
+    	boolean shimmering = source.isArtifact() && shimmerMyrs.size() > 0;
     	
-        return super.canPlay()
-                || (getSourceCard().getKeyword().contains("Flash") && !AllZone.GameAction.isCardInPlay(getSourceCard())
-                    && !getSourceCard().isUnCastable())
-                || ((perm.getType().contains("Artifact") && listShimmerMyr.size() != 0) && !AllZone.GameAction.isCardInPlay(getSourceCard())
-                        && !getSourceCard().isUnCastable());
+    	// Flash handled by super.canPlay
+        return super.canPlay() || shimmering;
     }
     
     @Override
