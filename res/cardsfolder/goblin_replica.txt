@@ -1,0 +1,9 @@
+Name:Goblin Replica
+ManaCost:3
+Types:Artifact Creature Goblin
+Text:no text
+PT:2/2
+K:abDestroyTgtV 3 R Sac<1/CARDNAME>:Artifact:Destory target artifact.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_replica.jpg
+End

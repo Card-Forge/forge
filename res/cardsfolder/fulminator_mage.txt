@@ -1,0 +1,9 @@
+Name:Fulminator Mage
+ManaCost:1 BR BR
+Types:Creature Elemental Shaman
+Text:no text
+PT:2/2
+K:abDestroyTgtV Sac<1/CARDNAME>:Land.nonBasic:Destroy target nonbasic land.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/fulminator_mage.jpg
+End

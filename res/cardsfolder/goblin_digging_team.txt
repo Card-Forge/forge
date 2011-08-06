@@ -1,0 +1,9 @@
+Name:Goblin Digging Team
+ManaCost:R
+Types:Creature Goblin
+Text:no text
+PT:1/1
+K:abDestroyTgtV Sac<1/CARDNAME>:Wall:Destroy target Wall.
+K:SVar:Rarity:
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_digging_team.jpg
+End
