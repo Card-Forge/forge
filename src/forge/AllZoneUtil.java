@@ -204,6 +204,18 @@ public class AllZoneUtil {
 		return cards;
 	}
 	
+	/**
+	 * answers the question "is a certain, specific card in this player's graveyard?"
+	 * 
+	 * @param player the player's hand to check
+	 * @param card the specific card to look for
+	 * @return true if the card is present in this player's hand; false otherwise
+	 */
+	
+	public static boolean isCardInPlayerGraveyard(Player player, Card card) {
+		return PlayerZoneUtil.isCardInZone(AllZone.getZone(Constant.Zone.Graveyard, player), card);
+	}
+	
 	//////// HAND
 	
 	/**

@@ -397,6 +397,22 @@ public class ComputerUtil
 				return false;
 		}
 		
+		if (cost.getExileFromGraveCost()){
+			if (!cost.getExileFromGraveThis()){
+			    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
+			    CardList typeList = new CardList(grave.getCards());
+			    typeList = typeList.getValidCards(cost.getExileFromGraveType().split(","),sa.getActivatingPlayer() ,sa.getSourceCard());
+			    Card target = sa.getTargetCard();
+				if (target != null && target.getController().equals(AllZone.ComputerPlayer)) // don't exile the card we're pumping
+					  typeList.remove(target);
+				
+				if (cost.getExileFromGraveAmount() > typeList.size())
+					return false;
+			}
+			else if (cost.getExileFromGraveThis() && !AllZoneUtil.isCardInPlayerGraveyard(card.getController(), card))
+				return false;
+		}
+		
 		if (cost.getReturnCost()){
 			  // if there's a return in the cost, just because we can Pay it doesn't mean we want to. 
 			if (!cost.getReturnThis()){
@@ -689,8 +705,22 @@ public class ComputerUtil
 	  PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
       CardList typeList = new CardList(hand.getCards());
       typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
-	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target)) // don't sacrifice the card we're pumping
-		  typeList.remove(target);
+	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target)) 
+		  typeList.remove(target);	// don't exile the card we're pumping
+	  
+	  if (typeList.size() == 0)
+		  return null;
+	  
+      CardListUtil.sortAttackLowFirst(typeList);
+	  return typeList.get(0);
+  }
+  
+  static public Card chooseExileFromGraveType(String type, Card activate, Card target){
+	  PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
+      CardList typeList = new CardList(grave.getCards());
+      typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
+	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target))
+		  typeList.remove(target);	// don't exile the card we're pumping
 	  
 	  if (typeList.size() == 0)
 		  return null;

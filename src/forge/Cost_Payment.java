@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import forge.gui.GuiUtils;
+
 public class Cost_Payment {
 	private Ability_Cost cost = null;
 	private SpellAbility ability = null;
@@ -28,6 +30,7 @@ public class Cost_Payment {
 	private boolean paySac;
 	private boolean payExile;
 	private boolean payExileFromHand;
+	private boolean payExileFromGrave;
 	private boolean payLife;
 	private boolean payDiscard;
 	private boolean payTapXType;
@@ -48,6 +51,7 @@ public class Cost_Payment {
 	public void setPaySac(boolean bSac){	paySac = bSac;	}
 	public void setPayExile(boolean bExile) { payExile = bExile; }
 	public void setPayExileFromHand(boolean bExileFromHand) { payExileFromHand = bExileFromHand; }
+	public void setPayExileFromGrave(boolean bExileFromGrave) { payExileFromGrave = bExileFromGrave; }
 	public void setPayTapXType(boolean bTapX) { payTapXType = bTapX; }
 	public void setPayReturn(boolean bReturn){	payReturn = bReturn; }
 	
@@ -64,6 +68,7 @@ public class Cost_Payment {
 		paySac = !cost.getSacCost();
 		payExile = !cost.getExileCost();
 		payExileFromHand = !cost.getExileFromHandCost();
+		payExileFromGrave = !cost.getExileFromGraveCost();
 		payLife = !cost.getLifeCost();
 		payDiscard = !cost.getDiscardCost();
 		payTapXType = !cost.getTapXTypeCost();
@@ -182,6 +187,18 @@ public class Cost_Payment {
 					return false;
 			}
 			else if (!AllZoneUtil.isCardInPlayerHand(card.getController(), card))
+				return false;
+		}
+		
+		if (cost.getExileFromGraveCost()){
+			if (!cost.getExileFromGraveThis()){
+			    CardList typeList = AllZoneUtil.getPlayerGraveyard(card.getController());
+			    
+			    typeList = typeList.getValidCards(cost.getExileFromGraveType().split(";"),ability.getActivatingPlayer() ,ability.getSourceCard()); 
+				if (typeList.size() < cost.getExileFromGraveAmount())
+					return false;
+			}
+			else if (!AllZoneUtil.isCardInPlayerGraveyard(card.getController(), card))
 				return false;
 		}
 		
@@ -361,6 +378,14 @@ public class Cost_Payment {
     		return false;
     	}
 		
+		if (!payExileFromGrave && cost.getExileFromGraveCost()){					// exile stuff here
+    		if (cost.getExileFromGraveThis())
+    			setInput(exileFromGraveThis(ability, this));
+    		else
+    			setInput(exileFromGraveType(ability, cost.getExileFromGraveType(), this));
+    		return false;
+    	}
+		
 		if (!payReturn && cost.getReturnCost()){					// return stuff here
     		if (cost.getReturnThis())
     			setInput(returnThis(ability, this));
@@ -378,7 +403,7 @@ public class Cost_Payment {
 		// if you add a new Cost type add it here
 		return (payTap && payUntap && payMana && payXMana && paySubCounter && payAddCounter &&
 				paySac && payExile && payLife && payDiscard && payTapXType && payReturn &&
-				payExileFromHand);
+				payExileFromHand && payExileFromGrave);
 	}
 	
 	public void resetUndoList(){
@@ -438,6 +463,7 @@ public class Cost_Payment {
     	// make sure ComputerUtil.canPayAdditionalCosts() is updated so the AI knows if they can Pay the cost
     	ArrayList<Card> sacCard = new ArrayList<Card>();
     	ArrayList<Card> exileCard = new ArrayList<Card>();
+    	ArrayList<Card> exileFromGraveCard = new ArrayList<Card>();
     	ArrayList<Card> tapXCard = new ArrayList<Card>();
     	ArrayList<Card> returnCard = new ArrayList<Card>();
     	ability.setActivatingPlayer(AllZone.ComputerPlayer);
@@ -467,6 +493,20 @@ public class Cost_Payment {
     		}
     		
 	    	if (exileCard.size() != cost.getExileAmount()){
+	    		System.out.println("Couldn't find a valid card to exile for: "+card.getName());
+	    		return;
+	    	}
+    	}
+    	
+    	if (cost.getExileFromGraveCost()){
+    		if (cost.getExileFromGraveThis())
+    			exileFromGraveCard.add(card);
+    		else{
+    			for(int i = 0; i < cost.getExileFromGraveAmount(); i++)
+    				exileFromGraveCard.add(ComputerUtil.chooseExileFromGraveType(cost.getExileFromGraveType(), card, ability.getTargetCard()));
+    		}
+    		
+	    	if (exileFromGraveCard.size() != cost.getExileFromGraveAmount()){
 	    		System.out.println("Couldn't find a valid card to exile for: "+card.getName());
 	    		return;
 	    	}
@@ -569,6 +609,11 @@ public class Cost_Payment {
 		
 		if (cost.getExileCost()){
 			for(Card c : exileCard)
+				AllZone.GameAction.exile(c);
+		}
+		
+		if (cost.getExileFromGraveCost()){
+			for(Card c : exileFromGraveCard)
 				AllZone.GameAction.exile(c);
 		}
 		
@@ -948,6 +993,38 @@ public class Cost_Payment {
         return target;
     }//input_exile()
     
+    public static Input exileFromGraveThis(final SpellAbility spell, final Cost_Payment payment) {
+        Input target = new Input() {
+			private static final long serialVersionUID = 6237561876518762902L;
+
+			@Override
+            public void showMessage() {
+            	Card card = spell.getSourceCard();
+                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlayerGraveyard(card.getController(), card)) {
+        			StringBuilder sb = new StringBuilder();
+        			sb.append(card.getName());
+        			sb.append(" - Exile?");
+        			Object[] possibleValues = {"Yes", "No"};
+                	Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",  
+                			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                			null, possibleValues, possibleValues[0]);
+                    if(choice.equals(0)) {
+                    	payment.setPayExileFromGrave(true);
+                    	AllZone.GameAction.exile(card);
+                    	stop();
+                    	payment.payCost();
+                    }
+                    else{
+                    	payment.setCancel(true);
+                    	stop();
+                    	payment.payCost();
+                    }
+                }
+            }
+        };
+        return target;
+    }//input_exile()
+    
     public static Input exileType(final SpellAbility sa, final String type, final Cost_Payment payment){
         Input target = new Input() {
 			private static final long serialVersionUID = 1403915758082824694L;
@@ -1069,7 +1146,137 @@ public class Cost_Payment {
             }
         };
         return target;
-    }//exileType()
+    }//exileFromHandType()
+    
+    public static Input exileFromGraveType(final SpellAbility spell, final String type, final Cost_Payment payment){
+        Input target = new Input() {
+			private static final long serialVersionUID = 734256837615635021L;
+
+			@Override
+            public void showMessage() {
+            	//Card card = spell.getSourceCard();
+        		CardList typeList;
+                int nNeeded = payment.getCost().getExileFromGraveAmount();
+                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, spell.getSourceCard().getController());
+                typeList = new CardList(grave.getCards());
+                typeList = typeList.getValidCards(type.split(";"),spell.getActivatingPlayer() ,spell.getSourceCard());
+                
+                for (int i=0; i < nNeeded; i++) {
+                    if (typeList.size() == 0) 
+                    	cancel();
+                        
+                    Object o = GuiUtils.getChoiceOptional("Select a card", typeList.toArray());
+                    
+                    if (o != null) {
+                        Card c = (Card) o;
+                        typeList.remove(c);
+                    	AllZone.GameAction.exile(c);
+                    	if (i == nNeeded) done();
+                    }
+                }
+			}
+			
+            @Override
+            public void selectButtonCancel() {
+            	cancel();
+            }
+			
+            public void done(){
+            	payment.setPayExileFromGrave(true);
+            	stop();
+            	payment.payCost();
+            }
+            
+            public void cancel(){
+            	payment.setCancel(true);
+            	stop();
+            	payment.payCost();
+            }
+        };
+        return target;
+    }//exileFromGraveType()
+                    /*    
+                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlayerGraveyard(card.getController(), card)) {
+        			StringBuilder sb = new StringBuilder();
+        			sb.append(card.getName());
+        			sb.append(" - Exile?");
+        			Object[] possibleValues = {"Yes", "No"};
+                	Object choice = JOptionPane.showOptionDialog(null, sb.toString(), card.getName() + " - Cost",  
+                			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                			null, possibleValues, possibleValues[0]);
+                    if(choice.equals(0)) {
+                    	payment.setPayExileFromGrave(true);
+                    	AllZone.GameAction.exile(card);
+                    	stop();
+                    	payment.payCost();
+                    }
+                    else{
+                    	payment.setCancel(true);
+                    	stop();
+                    	payment.payCost();
+                    }
+                }
+            }
+        };
+        return target;
+    }//input_exile()
+    }
+		private CardList typeList;
+        private int nNeeded = payment.getCost().getExileFromGraveAmount();
+            
+            @Override
+            public void showMessage() {
+            	StringBuilder msg = new StringBuilder("Exile ");
+            	int nLeft = nNeeded - nExiles;
+            	msg.append(nLeft).append(" ");
+            	msg.append(type);
+            	if (nLeft > 1){
+            		msg.append("s");
+            	}
+            	msg.append(" from your graveyard");
+            	
+                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, spell.getSourceCard().getController());
+                typeList = new CardList(grave.getCards());
+                typeList = typeList.getValidCards(type.split(";"),spell.getActivatingPlayer() ,spell.getSourceCard());
+                AllZone.Display.showMessage(msg.toString());
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+            	cancel();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(typeList.contains(card)) {
+                	nExiles++;
+                	AllZone.GameAction.exile(card);
+                	typeList.remove(card);
+                    //in case nothing else to exile
+                    if(nExiles == nNeeded) 
+                    	done();
+                    else if (typeList.size() == 0)	// this really shouldn't happen
+                    	cancel();
+                    else
+                    	showMessage();
+                }
+            }
+            
+            public void done(){
+            	payment.setPayExileFromGrave(true);
+            	stop();
+            	payment.payCost();
+            }
+            
+            public void cancel(){
+            	payment.setCancel(true);
+            	stop();
+            	payment.payCost();
+            }
+        };
+        return target;
+    }//exileFromGraveType()*/
     
     public static Input input_tapXCost(final int nCards, final String cardType, final CardList cardList, SpellAbility sa, final Cost_Payment payment) {
         //final SpellAbility sp = sa;

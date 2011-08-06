@@ -31,6 +31,15 @@ public class Ability_Cost {
 	public boolean getExileFromHandThis() { return exileFromHandThis; }
 	private int exileFromHandAmount = 0;
 	public int getExileFromHandAmount() { return exileFromHandAmount; }
+	
+	private boolean exileFromGraveCost = false;
+	public boolean getExileFromGraveCost() { return exileFromGraveCost; }
+	private String exileFromGraveType = "";	// <type> or CARDNAME
+	public String getExileFromGraveType() { return exileFromGraveType; }
+	private boolean exileFromGraveThis = false;
+	public boolean getExileFromGraveThis() { return exileFromGraveThis; }
+	private int exileFromGraveAmount = 0;
+	public int getExileFromGraveAmount() { return exileFromGraveAmount; }
     
 	private boolean tapCost = false;
 	public boolean getTap() { return tapCost; } 
@@ -202,6 +211,17 @@ public class Ability_Cost {
         	exileFromHandThis = (exileFromHandType.equals("CARDNAME"));
         }
         
+        String exileFromGraveStr = "ExileFromGrave<";
+        if(parse.contains(exileFromGraveStr)) {
+        	exileFromGraveCost = true;
+        	String[] splitStr = abCostParse(parse, exileFromGraveStr, 2);
+        	parse = abUpdateParse(parse, exileFromGraveStr);
+        	
+        	exileFromGraveAmount = Integer.parseInt(splitStr[0]);
+        	exileFromGraveType = splitStr[1];
+        	exileFromGraveThis = (exileFromGraveType.equals("CARDNAME"));
+        }
+        
         String returnStr = "Return<";
         if(parse.contains(returnStr)) {
         	returnCost = true;
@@ -279,7 +299,7 @@ public class Ability_Cost {
 	}
 
 	public boolean isUndoable() {
-		return !(sacCost || exileCost || exileFromHandCost || tapXTypeCost || discardCost ||
+		return !(sacCost || exileCost || exileFromHandCost || exileFromGraveCost || tapXTypeCost || discardCost ||
 				returnCost || lifeCost) && hasNoXManaCost() && hasNoManaCost();
 	}
 	
@@ -361,6 +381,11 @@ public class Ability_Cost {
 		
 		if(exileFromHandCost) {
 			cost.append(exileFromHandString(first));
+			first = false;
+		}
+		
+		if(exileFromGraveCost) {
+			cost.append(exileFromGraveString(first));
 			first = false;
 		}
 		
@@ -486,6 +511,11 @@ public class Ability_Cost {
 			first = false;
 		}
 		
+		if (exileFromGraveCost){
+			cost.append(exileFromGraveString(first));
+			first = false;
+		}
+		
 		if (returnCost){
 			cost.append(returnString(first));
 			first = false;
@@ -592,6 +622,27 @@ public class Ability_Cost {
 		else {
 			cost.append(convertIntAndTypeToWords(exileFromHandAmount, exileFromHandType));
 			cost.append(" from your hand");
+		}
+		return cost.toString();
+	}
+	
+	public String exileFromGraveString(boolean first) {
+		StringBuilder cost = new StringBuilder();
+		if(first) {
+			if(isAbility)
+				cost.append("Exile ");
+			else
+				cost.append("exile ");
+		}
+		else {
+			cost.append(", exile ");
+		}
+		
+		if(exileType.equals("CARDNAME"))
+			cost.append(name);
+		else {
+			cost.append(convertIntAndTypeToWords(exileFromGraveAmount, exileFromGraveType));
+			cost.append(" from your graveyard");
 		}
 		return cost.toString();
 	}
