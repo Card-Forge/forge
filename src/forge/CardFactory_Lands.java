@@ -394,52 +394,6 @@ class CardFactory_Lands {
             a1.setDescription("3 B G: Until end of turn, Svogthos, the Restless Tomb becomes a black and green Plant Zombie creature with This creature's power and toughness are each equal to the number of creature cards in your graveyard. It's still a land.");
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Raging Ravine")) {
-        	final long[] timeStamp = new long[1];
-            
-            final SpellAbility a1 = new Ability(card, "2 R G") {
-                @Override
-                public boolean canPlayAI() {
-                    return !card.hasSickness() && super.canPlayAI();
-                }
-                
-                @Override
-                public void resolve() {
-                    Card c = card;
-                    String[] types = { "Creature", "Elemental"};
-                    String[] keywords = { };
-                    
-                    timeStamp[0] = CardFactoryUtil.activateManland(c, 3, 3, types, keywords, "R G");
-                    
-                    // this keyword stacks, so we can't put it through the activate
-                    c.addIntrinsicKeyword("Whenever this creature attacks, put a +1/+1 counter on it.");
-                    
-                    final Command eot1 = new Command() {
-                        private static final long serialVersionUID = -2632172918887247003L;
-                        long stamp = timeStamp[0];
-                        public void execute() {
-                            Card c = card;
-                            
-                            String[] types = { "Creature", "Elemental"};
-                            String[] keywords = { "Whenever this creature attacks, put a +1/+1 counter on it." };
-                            CardFactoryUtil.revertManland(c, types, keywords, "R G", stamp);
-                        }
-                    };
-                    
-                    AllZone.EndOfTurn.addUntil(eot1);
-                }
-            };//SpellAbility
-            
-            card.clearSpellKeepManaAbility();
-            card.addSpellAbility(a1);
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\"");
-            a1.setStackDescription(sb.toString());
-            a1.setDescription("2 R G: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land.");
-        }//*************** END ************ END **************************
-        
  
         //*************** START *********** START **************************
         else if(cardName.equals("Lotus Vale")) {
