@@ -1,7 +1,7 @@
 Name:Sensation Gorger
 ManaCost:1 R R
 Types:Creature Goblin Shaman
-Text:At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Sensation Gorger, you may reveal it. If you do, each player discards his or her hand and draws four cards.
+Text:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Sensation Gorger, you may reveal it. If you do, each player discards his or her hand and draws four cards.
 PT:2/2
 K:SVar:RemAIDeck:True
 K:SVar:Rarity:Rare

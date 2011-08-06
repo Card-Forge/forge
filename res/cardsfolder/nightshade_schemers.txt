@@ -1,7 +1,7 @@
 Name:Nightshade Schemers
 ManaCost:4 B
 Types:Creature Faerie Wizard
-Text:At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Nightshade Schemers, you may reveal it. If you do, each opponent loses 2 life.
+Text:Kinship - At the beginning of your upkeep, you may look at the top card of your library. If it shares a creature type with Nightshade Schemers, you may reveal it. If you do, each opponent loses 2 life.
 PT:3/2
 K:Flying
 K:SVar:Rarity:Uncommon
