@@ -3,7 +3,6 @@ ManaCost:2
 Types:Artifact
 Text:no text
 K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:CustomCounter.KI/1:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Baku Altar.
-#K:abMakeToken 2 T SubCounter<1/KI><>1<>Spirit<>C 1 1 Spirit<>Controller<>1<>Creature;Spirit<>1<>1<><>Put a 1/1 colorless Spirit creature token onto the battlefield.
 A:AB$Token | Cost$ 2 T SubCounter<1/KI> | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ Controller | SpellDescription$ Put a 1/1 colorless Spirit creature token onto the battlefield.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
