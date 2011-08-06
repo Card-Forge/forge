@@ -1,141 +1,3 @@
-No Mercy
-2 B B
-Enchantment
-Whenever a creature deals damage to you, destroy it.
-SVar:Rarity:Rare
-
-Farsight Mask
-5
-Artifact
-Whenever a source an opponent controls deals damage to you, if Farsight Mask is untapped, you may draw a card.
-SVar:Rarity:Uncommon
-
-Dread
-3 B B B
-Creature Elemental Incarnation
-Whenever a creature deals damage to you, destroy it.
-6/6
-Fear
-When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
-SVar:Rarity:Rare
-
-Dissipation Field
-2 U U
-Enchantment
-Whenever a permanent deals damage to you, return it to its owner's hand.
-SVar:Rarity:Rare
-
-Long-Term Plans
-2 U
-Instant
-Search your library for a card, shuffle your library, then put that card third from the top.
-spTutor:Card:ThirdFromTopOfLibrary
-SVar:RemAIDeck:True
-
-Personal Tutor
-U
-Sorcery
-Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
-spTutor:Sorcery:TopOfLibrary
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/personal_tutor.jpg
-
-Fabricate
-2 U
-Sorcery
-Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.
-spTutor:Artifact:Hand
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fabricate.jpg
-
-Mystical Tutor
-U
-Instant
-Search your library for an instant or sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
-spTutor:Instant,Sorcery:TopOfLibrary
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mystical_tutor.jpg
-
-Enlightened Tutor
-W
-Instant
-Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
-spTutor:Artifact,Enchantment:TopOfLibrary
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/enlightened_tutor.jpg
-
-Crib Swap
-2 W
-Tribal Instant Shapeshifter
-Remove target creature from the game. Its controller puts a 1/1 colorless Shapeshifter creature token into play.
-Changeling
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crib_swap.jpg
-
-Nameless Inversion
-1 B
-Tribal Instant Shapeshifter
-Target creature gets +3/-3 until end of turn.
-Changeling
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_inversion.jpg
-
-Wings of Velis Vel
-1 U
-Tribal Instant Shapeshifter
-Target creature becomes 4/4 and gains flying until end of turn.
-Changeling
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_velis_vel.jpg
-
-Necropotence
-B B B
-Enchantment
-Skip your draw step.\r\nIf you would discard a card from your hand, remove that card from the game instead.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/necropotence.jpg
-
-Nesting Wurm
-4 G G
-Creature Wurm
-no text
-4/3
-Trample
-When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nesting_wurm.jpg
-
-Noxious Hatchling
-3 BG
-Creature Elemental
-Noxious Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.\r\nWhenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
-6/6
-Wither
-SVar:BuffedBy:Spell.Black,Spell.Green
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Noxious_Hatchling.jpg
-
-Nyxathid
-1 B B
-Creature Elemental
-As Nyxathid comes into play, choose an opponent.\r\nNyxathid gets -1/-1 for each card in the chosen player's hand.
-7/7
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nyxathid.jpg
-
-Siren's Call
-U
-Instant
-Cast Siren's Call only during an opponent's turn, before attackers are declared.\r\nCreatures the active player controls attack this turn if able.\r\nAt the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sirens_call.jpg
-
 Abandoned Outpost
 no cost
 Land
@@ -6445,6 +6307,14 @@ abPumpTgtC T:+0/+4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crenellated_wall.jpg
 
+Crib Swap
+2 W
+Tribal Instant Shapeshifter
+Remove target creature from the game. Its controller puts a 1/1 colorless Shapeshifter creature token into play.
+Changeling
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crib_swap.jpg
+
 Crimson Acolyte
 1 W
 Creature Human Cleric
@@ -8064,6 +7934,12 @@ spCounter:Spell:None:Exile:None
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dissipate.jpg
 
+Dissipation Field
+2 U U
+Enchantment
+Whenever a permanent deals damage to you, return it to its owner's hand.
+SVar:Rarity:Rare
+
 Distress
 B B
 Sorcery
@@ -8353,6 +8229,16 @@ tap: add U
 tap: add B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drake_skull_cameo.jpg
+
+Dread
+3 B B B
+Creature Elemental Incarnation
+Whenever a creature deals damage to you, destroy it.
+6/6
+Fear
+When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dread.jpg
 
 Dread Drone
 4 B
@@ -9449,6 +9335,15 @@ As Engineered Plague comes into play, choose a creature type.\r\nAll creatures o
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/engineered_plague.jpg
 
+Enlightened Tutor
+W
+Instant
+Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
+spTutor:Artifact,Enchantment:TopOfLibrary
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/enlightened_tutor.jpg
+
 Enlisted Wurm
 4 G W
 Creature Wurm
@@ -9931,6 +9826,15 @@ SVar:BuffedBy:Spell.Green,Spell.Blue
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fable_of_wolf_and_owl.jpg
 
+Fabricate
+2 U
+Sorcery
+Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.
+spTutor:Artifact:Hand
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fabricate.jpg
+
 Faceless Butcher
 2 B B
 Creature Nightmare Horror
@@ -10068,6 +9972,13 @@ no text
 Trample
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card46115.jpg
+
+Farsight Mask
+5
+Artifact
+Whenever a source an opponent controls deals damage to you, if Farsight Mask is untapped, you may draw a card.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/farsight_mask.jpg
 
 Fastbond
 G
@@ -18320,6 +18231,15 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/long_forgotten_gohei.jpg
 
+Long-Term Plans
+2 U
+Instant
+Search your library for a card, shuffle your library, then put that card third from the top.
+spTutor:Card:ThirdFromTopOfLibrary
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/long_term_plans.jpg
+
 Longbow Archer
 W W
 Creature Human Soldier Archer
@@ -20648,6 +20568,15 @@ Flash
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
 
+Mystical Tutor
+U
+Instant
+Search your library for an instant or sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
+spTutor:Instant,Sorcery:TopOfLibrary
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mystical_tutor.jpg
+
 Mythic Proportions
 4 G G G
 Enchantment Aura
@@ -20674,6 +20603,14 @@ no text
 Protection from artifacts
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nacatl_savage.jpg
+
+Nameless Inversion
+1 B
+Tribal Instant Shapeshifter
+Target creature gets +3/-3 until end of turn.
+Changeling
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_inversion.jpg
 
 Nantuko Disciple
 3 G
@@ -20836,6 +20773,14 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necrogenesis.jpg
 
+Necropotence
+B B B
+Enchantment
+Skip your draw step.\r\nIf you would discard a card from your hand, remove that card from the game instead.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/necropotence.jpg
+
 Need for Speed
 R
 Enchantment
@@ -20936,6 +20881,16 @@ When Nest Invader enters the battlefield, put a 0/1 colorless Eldrazi Spawn crea
 2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nest_invader.jpg
+
+Nesting Wurm
+4 G G
+Creature Wurm
+no text
+4/3
+Trample
+When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nesting_wurm.jpg
 
 Nether Horror
 3 B
@@ -21262,6 +21217,13 @@ eqPump 3:+2/+0/First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/no_dachi.jpg
 
+No Mercy
+2 B B
+Enchantment
+Whenever a creature deals damage to you, destroy it.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/no_mercy.jpg
+
 Noble Hierarch
 G
 Creature Human Druid
@@ -21374,6 +21336,16 @@ tap: add 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/novijen_heart_of_progress.jpg
 
+Noxious Hatchling
+3 BG
+Creature Elemental
+Noxious Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.\r\nWhenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
+6/6
+Wither
+SVar:BuffedBy:Spell.Black,Spell.Green
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Noxious_Hatchling.jpg
+
 Nullmage Shepherd
 3 G
 Creature Elf Shaman
@@ -21389,6 +21361,14 @@ At the beginning of your upkeep, you may put a 1/1 green Squirrel creature token
 1/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nut_collector.jpg
+
+Nyxathid
+1 B B
+Creature Elemental
+As Nyxathid comes into play, choose an opponent.\r\nNyxathid gets -1/-1 for each card in the chosen player's hand.
+7/7
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nyxathid.jpg
 
 Oakenform
 2 G
@@ -22503,6 +22483,15 @@ Sorcery
 Target opponent reveals his or her hand. You choose a card from it. That player shuffles that card into his or her library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perish_the_thought.jpg
+
+Personal Tutor
+U
+Sorcery
+Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
+spTutor:Sorcery:TopOfLibrary
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/personal_tutor.jpg
 
 Persuasion
 3 U U
@@ -27738,6 +27727,14 @@ Flying
 WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sire_of_the_storm.jpg
+
+Siren's Call
+U
+Instant
+Cast Siren's Call only during an opponent's turn, before attackers are declared.\r\nCreatures the active player controls attack this turn if able.\r\nAt the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sirens_call.jpg
 
 Sisay's Ring
 4
@@ -35789,6 +35786,14 @@ Enchant creature
 enPump:+1/+3/Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_hope.jpg
+
+Wings of Velis Vel
+1 U
+Tribal Instant Shapeshifter
+Target creature becomes 4/4 and gains flying until end of turn.
+Changeling
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_velis_vel.jpg
 
 Winnower Patrol
 2 G
