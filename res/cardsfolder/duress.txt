@@ -2,7 +2,7 @@ Name:Duress
 ManaCost:B
 Types:Sorcery
 Text:no text
-K:spDiscardOpp:RevealYouChoose/Artifact.nonCreature.nonLand,Enchantment.nonCreature,Instant,Planeswalker,Sorcery:1:Target opponent reveals his or her hand. Choose a noncreature, nonland card from it. That player discards that card.:Duress - opponent reveals hand and discards a card
+K:spDiscardOpp:RevealYouChoose/Artifact.nonCreature+nonLand,Enchantment.nonCreature,Instant,Planeswalker,Sorcery:1:Target opponent reveals his or her hand. Choose a noncreature, nonland card from it. That player discards that card.:Duress - opponent reveals hand and discards a card
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duress.jpg
 End
