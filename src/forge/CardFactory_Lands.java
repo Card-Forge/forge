@@ -59,11 +59,11 @@ class CardFactory_Lands {
 
         //*************** START *********** START **************************
         //Ravinca Dual Lands
-        else if(cardName.equals("Blood Crypt") || cardName.equals("Breeding Pool") || cardName.equals("Godless Shrine")
-                || cardName.equals("Hallowed Fountain") || cardName.equals("Overgrown Tomb")
-                || cardName.equals("Sacred Foundry") || cardName.equals("Steam Vents")
-                || cardName.equals("Stomping Ground") || cardName.equals("Temple Garden")
-                || cardName.equals("Watery Grave")) {
+        else if (  cardName.equals("Blood Crypt")    || cardName.equals("Breeding Pool") 
+                || cardName.equals("Godless Shrine") || cardName.equals("Hallowed Fountain") 
+                || cardName.equals("Overgrown Tomb") || cardName.equals("Sacred Foundry") 
+                || cardName.equals("Steam Vents")    || cardName.equals("Stomping Ground") 
+                || cardName.equals("Temple Garden")  || cardName.equals("Watery Grave")) {
             //if this isn't done, computer plays more than 1 copy
             //card.clearSpellAbility();
             card.clearSpellKeepManaAbility();
@@ -72,7 +72,7 @@ class CardFactory_Lands {
                 private static final long serialVersionUID = 7352127748114888255L;
                 
                 public void execute() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) humanExecute();
+                    if (card.getController().equals(AllZone.HumanPlayer)) humanExecute();
                     else computerExecute();
                 }
                 
@@ -87,11 +87,16 @@ class CardFactory_Lands {
                 
                 public void humanExecute() {
                     int life = card.getController().getLife();
-                    if(2 < life) {
-                        String[] choices = {"Yes", "No"};
-                        Object o = AllZone.Display.getChoice("Pay 2 life?", choices);
-                        if(o.equals("Yes")) AllZone.HumanPlayer.loseLife(2, card);
-                        else tapCard();
+                    if (2 < life) {
+                        
+                        StringBuilder question = new StringBuilder();
+                        question.append("Pay 2 life? If you don't, ").append(card.getName());
+                        question.append(" enters the battlefield tapped.");
+                        
+                        if (GameActionUtil.showYesNoDialog(card, question.toString())) {
+                            AllZone.HumanPlayer.loseLife(2, card);
+                        } else tapCard();
+                        
                     }//if
                     else tapCard();
                 }//execute()
@@ -101,6 +106,7 @@ class CardFactory_Lands {
                 }
             });
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Kabira Crossroads")) {
