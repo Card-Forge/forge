@@ -1,8 +1,9 @@
 Name:Field Marshal
 ManaCost:1 W W
 Types:Creature Human Soldier
-Text:Other Soldiers get +1/+1 and have first strike.
+Text:no text
 PT:2/2
+K:stPumpAll:Creature.Soldier+Other:1/1/First Strike:No Condition:Other Soldier creatures get +1/+1 and have first strike.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/field_marshal.jpg

@@ -1,8 +1,9 @@
 Name:Merfolk Sovereign
 ManaCost:1 U U
 Types:Creature Merfolk
-Text:Other Merfolk creatures you control get +1/+1.
+Text:no text
 PT:2/2
+K:stPumpAll:Creature.Merfolk+Other+YouCtrl:1/1:No Condition:Other Merfolk creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_sovereign.jpg

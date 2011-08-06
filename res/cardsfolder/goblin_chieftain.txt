@@ -1,9 +1,10 @@
 Name:Goblin Chieftain
 ManaCost:1 R R
 Types:Creature Goblin
-Text:Other Goblin creatures you control get +1/+1 and have haste.
+Text:no text
 PT:2/2
 K:Haste
+K:stPumpAll:Creature.Goblin+Other+YouCtrl:1/1/Haste:No Condition:Other goblin creatures you control get +1/+1 and have haste.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Goblin
 SVar:Rarity:Rare

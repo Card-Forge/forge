@@ -122,13 +122,13 @@ public class StaticEffects
 		cardToEffectsList.put("Captain of the Watch", new String[] {"Captain_of_the_Watch_Pump", "Captain_of_the_Watch_Other"});
 		//cardToEffectsList.put("Veteran Armorsmith", new String[] {"Veteran_Armorsmith_Pump", "Veteran_Armorsmith_Other"});
 		cardToEffectsList.put("Veteran Swordsmith", new String[] {"Veteran_Swordsmith_Pump", "Veteran_Swordsmith_Other"});
-		cardToEffectsList.put("Timber Protector", new String[] {"Timber_Protector_Pump", "Timber_Protector_Other"});
-		cardToEffectsList.put("Goblin Chieftain", new String[] {"Goblin_Chieftain_Pump", "Goblin_Chieftain_Other"});
+		//cardToEffectsList.put("Timber Protector", new String[] {"Timber_Protector_Pump", "Timber_Protector_Other"});
+		//cardToEffectsList.put("Goblin Chieftain", new String[] {"Goblin_Chieftain_Pump", "Goblin_Chieftain_Other"});
 		//cardToEffectsList.put("Goblin King", new String[] {"Goblin_King_Pump", "Goblin_King_Other"});
 		cardToEffectsList.put("Merfolk Sovereign", new String[] {"Merfolk_Sovereign_Pump", "Merfolk_Sovereign_Other"});
 		//cardToEffectsList.put("Lord of Atlantis", new String[] {"Lord_of_Atlantis_Pump","Lord_of_Atlantis_Other"});
 		cardToEffectsList.put("Elvish Champion", new String[] {"Elvish_Champion_Pump","Elvish_Champion_Other"});
-		cardToEffectsList.put("Field Marshal", new String[] {"Field_Marshal_Pump", "Field_Marshal_Other"});
+		//cardToEffectsList.put("Field Marshal", new String[] {"Field_Marshal_Pump", "Field_Marshal_Other"});
 		cardToEffectsList.put("Death Baron", new String[] {"Death_Baron_Pump","Death_Baron_Other"});
 		cardToEffectsList.put("Lovisa Coldeyes", new String[] {"Lovisa_Coldeyes_Pump"});
 		cardToEffectsList.put("Aven Brigadier", new String[] {"Aven_Brigadier_Soldier_Pump", "Aven_Brigadier_Bird_Pump", "Aven_Brigadier_Other"});
