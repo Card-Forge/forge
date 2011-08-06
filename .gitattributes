@@ -6,11 +6,58 @@
 /delete-me.txt svneol=native#text/plain
 /forge.properties svneol=native#text/plain
 res/AllTokens.txt -text svneol=native#text/plain
-res/all-decks2 -text svneol=unset#unset
 res/booster-decks -text svneol=unset#unset
 res/card-pictures.txt -text svneol=native#text/plain
 res/cards.txt -text svneol=native#text/plain
 res/common.txt -text svneol=native#text/plain
+res/decks/draft-1.bdk/0.dck -text
+res/decks/draft-1.bdk/1.dck -text
+res/decks/draft-1.bdk/2.dck -text
+res/decks/draft-1.bdk/3.dck -text
+res/decks/draft-1.bdk/4.dck -text
+res/decks/draft-1.bdk/5.dck -text
+res/decks/draft-1.bdk/6.dck -text
+res/decks/draft-1.bdk/7.dck -text
+res/decks/draft-2.bdk/0.dck -text
+res/decks/draft-2.bdk/1.dck -text
+res/decks/draft-2.bdk/2.dck -text
+res/decks/draft-2.bdk/3.dck -text
+res/decks/draft-2.bdk/4.dck -text
+res/decks/draft-2.bdk/5.dck -text
+res/decks/draft-2.bdk/6.dck -text
+res/decks/draft-2.bdk/7.dck -text
+res/decks/llll.bdk/0.dck -text
+res/decks/llll.bdk/1.dck -text
+res/decks/llll.bdk/2.dck -text
+res/decks/llll.bdk/3.dck -text
+res/decks/llll.bdk/4.dck -text
+res/decks/llll.bdk/5.dck -text
+res/decks/llll.bdk/6.dck -text
+res/decks/llll.bdk/7.dck -text
+res/decks/now.bdk/0.dck -text
+res/decks/now.bdk/1.dck -text
+res/decks/now.bdk/2.dck -text
+res/decks/now.bdk/3.dck -text
+res/decks/now.bdk/4.dck -text
+res/decks/now.bdk/5.dck -text
+res/decks/now.bdk/6.dck -text
+res/decks/now.bdk/7.dck -text
+res/decks/now3.bdk/0.dck -text
+res/decks/now3.bdk/1.dck -text
+res/decks/now3.bdk/2.dck -text
+res/decks/now3.bdk/3.dck -text
+res/decks/now3.bdk/4.dck -text
+res/decks/now3.bdk/5.dck -text
+res/decks/now3.bdk/6.dck -text
+res/decks/now3.bdk/7.dck -text
+res/decks/now99.bdk/0.dck -text
+res/decks/now99.bdk/1.dck -text
+res/decks/now99.bdk/2.dck -text
+res/decks/now99.bdk/3.dck -text
+res/decks/now99.bdk/4.dck -text
+res/decks/now99.bdk/5.dck -text
+res/decks/now99.bdk/6.dck -text
+res/decks/now99.bdk/7.dck -text
 res/gui/display_layout.xml svneol=native#text/xml
 res/gui/gui.properties svneol=native#text/plain
 res/lang/de.properties svneol=native#text/plain
