@@ -1,0 +1,8 @@
+Name:Anvil of Bogardan
+ManaCost:2
+Types:Artifact
+Text:Players have no maximum hand size.\r\nAt the beginning of each player's draw step, that player draws an additional card, then discards a card.
+K:HandSize = INF All
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/anvil_of_bogardan.jpg
+End

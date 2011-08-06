@@ -182,6 +182,7 @@ public class GameActionUtil {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		draw_Teferi_Puzzle_Box(player);
 		draw_Howling_Mine(player);
+		draw_Anvil_of_Bogardan(player);
 		draw_Spiteful_Visions(player);
 		draw_Kami_Crescent_Moon(player);
 		draw_Font_of_Mythos(player);
@@ -10943,6 +10944,15 @@ public class GameActionUtil {
 			if( list.getCard(i).isUntapped() ) {
 				player.drawCard();
 			}
+		}
+	}// Howling_Mine()
+	
+	private static void draw_Anvil_of_Bogardan(Player player) {
+		CardList list = AllZoneUtil.getCardsInPlay("Anvil of Bogardan");
+
+		for(int i = 0; i < list.size(); i++){
+				player.drawCard();
+				player.discard(null);
 		}
 	}// Howling_Mine()
 	
