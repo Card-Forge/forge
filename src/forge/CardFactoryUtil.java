@@ -1831,6 +1831,26 @@ public class CardFactoryUtil
 	  
   }
   
+  public static boolean controlsAnotherColoredCreature(Card c,String color)
+  {
+	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+	  
+	  final Card crd = c;
+	  final String col = color;
+	  CardList list = new CardList(play.getCards());
+	  list = list.filter(new CardListFilter()
+	  {
+
+		public boolean addCard(Card c) {
+			return !c.equals(crd) && c.isCreature() && CardUtil.getColors(c).contains(col);
+		}
+	  
+	  });
+	  
+	  return list.size() >= 1;
+	  
+  }
+  
   public static int getNumberOfManaSymbolsControlledByColor(String colorAbb, String player)
   {
 	  PlayerZone play = AllZone.getZone(Constant.Zone.Play,player);

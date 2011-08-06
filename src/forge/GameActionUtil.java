@@ -108,6 +108,7 @@ public class GameActionUtil
 		playCard_Witch_Maw_Nephilim(c);
 		playCard_Forced_Fruition(c);
 		playCard_Gelectrode(c);
+		playCard_Ballynock_Trapper(c);
 		playCard_Standstill(c);
 		playCard_Memory_Erosion(c);
 		playCard_SolKanar(c);
@@ -1282,6 +1283,50 @@ public class GameActionUtil
 					}
 			}				
 	}// Gelectrode
+
+	public static void playCard_Ballynock_Trapper(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Ballynock Trapper");
+
+		if (list.size() > 0 && CardUtil.getColors(c).contains(Constant.Color.White)){
+						
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								
+								  if (card.getController().equals("Human"))
+						            {
+						               String[] choices =
+						               { "Yes", "No" };
+						               Object choice = AllZone.Display.getChoice(
+						                     "Untap Ballynock Trapper?", choices);
+						               if (choice.equals("Yes")) {
+									card.untap();}
+						            }
+								  if (card.getController().equals("Computer")) {card.untap();}
+							}
+							
+						}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played an instant or sorcery spell, you may untap Gelectrode.");
+						AllZone.Stack.add(ability2);
+					}
+			}				
+	}// Ballynock Trapper
 
 	
     public static void playCard_Forced_Fruition(Card c)
@@ -10122,6 +10167,201 @@ public class GameActionUtil
 	
 	};//Naya_Hushblade
 	
+	public static Command Ballynock_Cohort = new Command()
+	{
+
+		private static final long serialVersionUID = 5895665460018262987L;
+
+		public void execute()
+		{
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Ballynock Cohort");
+			
+			if (list.size() > 0)
+			{
+				//Card crd = list.get(0); //unused
+				
+				for (int i = 0; i < list.size(); i++)
+				{
+					
+					Card c = list.get(i);
+					if (CardFactoryUtil.controlsAnotherColoredCreature(c, "white")){
+						c.setBaseAttack(3);
+						c.setBaseDefense(3);
+						
+					}
+					else
+					{
+						c.setBaseAttack(2);
+						c.setBaseDefense(2);
+						
+					}
+								
+				}
+			}
+		}// execute()
+	
+	};//Ballynock Cohort
+
+	public static Command Ashenmoor_Cohort = new Command()
+	{
+
+		private static final long serialVersionUID = 5895665460018262987L;
+
+		public void execute()
+		{
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Ashenmoor Cohort");
+			
+			if (list.size() > 0)
+			{
+				//Card crd = list.get(0); //unused
+				
+				for (int i = 0; i < list.size(); i++)
+				{
+					
+					Card c = list.get(i);
+					if (CardFactoryUtil.controlsAnotherColoredCreature(c, "black")){
+						c.setBaseAttack(5);
+						c.setBaseDefense(4);
+						
+					}
+					else
+					{
+						c.setBaseAttack(4);
+						c.setBaseDefense(3);
+						
+					}
+								
+				}
+			}
+		}// execute()
+	
+	};//Ashenmoor Cohort
+	
+	public static Command Briarberry_Cohort = new Command()
+	{
+
+		private static final long serialVersionUID = 5895665460018262987L;
+
+		public void execute()
+		{
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Briarberry Cohort");
+			
+			if (list.size() > 0)
+			{
+				//Card crd = list.get(0); //unused
+				
+				for (int i = 0; i < list.size(); i++)
+				{
+					
+					Card c = list.get(i);
+					if (CardFactoryUtil.controlsAnotherColoredCreature(c, "blue")){
+						c.setBaseAttack(2);
+						c.setBaseDefense(2);
+						
+					}
+					else
+					{
+						c.setBaseAttack(1);
+						c.setBaseDefense(1);
+						
+					}
+								
+				}
+			}
+		}// execute()
+	
+	};//Briarberry Cohort
+	
+	public static Command Crabapple_Cohort = new Command()
+	{
+
+		private static final long serialVersionUID = 5895665460018262987L;
+
+		public void execute()
+		{
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Crabapple Cohort");
+			
+			if (list.size() > 0)
+			{
+				//Card crd = list.get(0); //unused
+				
+				for (int i = 0; i < list.size(); i++)
+				{
+					
+					Card c = list.get(i);
+					if (CardFactoryUtil.controlsAnotherColoredCreature(c, "green")){
+						c.setBaseAttack(5);
+						c.setBaseDefense(5);
+						
+					}
+					else
+					{
+						c.setBaseAttack(4);
+						c.setBaseDefense(4);
+						
+					}
+								
+				}
+			}
+		}// execute()
+	
+	};//Crabapple Cohort
+	
+	public static Command Mudbrawler_Cohort = new Command()
+	{
+
+		private static final long serialVersionUID = 5895665460018262987L;
+
+		public void execute()
+		{
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Mudbrawler Cohort");
+			
+			if (list.size() > 0)
+			{
+				//Card crd = list.get(0); //unused
+				
+				for (int i = 0; i < list.size(); i++)
+				{
+					
+					Card c = list.get(i);
+					if (CardFactoryUtil.controlsAnotherColoredCreature(c, "red")){
+						c.setBaseAttack(2);
+						c.setBaseDefense(2);
+						
+					}
+					else
+					{
+						c.setBaseAttack(1);
+						c.setBaseDefense(1);
+						
+					}
+								
+				}
+			}
+		}// execute()
+	
+	};//Mudbrawler Cohort
+
 	
 	public static Command Werebear = new Command()
 	{
@@ -14042,6 +14282,11 @@ public class GameActionUtil
 		commands.put("Grixis_Grimblade", Grixis_Grimblade);
 		commands.put("Jund_Hackblade", Jund_Hackblade);
 		commands.put("Naya_Hushblade", Naya_Hushblade);
+		commands.put("Ballynock_Cohort", Ballynock_Cohort);
+		commands.put("Ashenmoor_Cohort", Ashenmoor_Cohort);
+		commands.put("Briarberry_Cohort", Briarberry_Cohort);
+		commands.put("Crabapple_Cohort", Crabapple_Cohort);
+		commands.put("Mudbrawler_Cohort", Mudbrawler_Cohort);
 		commands.put("Nimble_Mongoose", Nimble_Mongoose);
 		commands.put("Werebear", Werebear);
 		commands.put("Divinity_of_Pride", Divinity_of_Pride);

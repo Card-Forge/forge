@@ -1,3 +1,49 @@
+Ashenmoor Cohort
+5 B
+Creature Elemental Warrior
+Ashenmoor Cohort gets +1/+1 as long as you control another black creature.
+4/3
+
+Ballynock Cohort
+2 W
+Creature Kithkin Soldier
+Ballynock Cohort gets +1/+1 as long as you control another white creature.
+2/2
+First Strike
+
+Briarberry Cohort
+1 U
+Creature Faerie Soldier
+Briarberry Cohort gets +1/+1 as long as you control another blue creature.
+1/1
+Flying
+
+Crabapple Cohort
+4 G
+Creature Treefolk Warrior
+Crabapple Cohort gets +1/+1 as long as you control another green creature.
+4/4
+
+Mudbrawler Cohort
+1 R
+Creature Goblin Warrior
+Mudbrawler Cohort gets +1/+1 as long as you control another red creature.
+1/1
+Haste
+
+Ballynock Trapper
+3 W
+Creature Kithkin Soldier
+Whenever you cast a white spell, you may untap Ballynock Trapper.
+2/2
+
+Antler Skulkin
+5
+Artifact Creature Scarecrow
+no text
+3/3
+TgtKPump 2:Persist
+
 Gelectrode
 1 U R
 Creature Weird

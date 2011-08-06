@@ -10027,7 +10027,7 @@ public class CardFactory_Creatures {
 	    	}//*************** END ************ END **************************
 	      
 	      //*************** START *********** START **************************
-	      if (cardName.equals("Minister of Impediments"))
+	      if (cardName.equals("Minister of Impediments") ||  cardName.equals("Ballynock Trapper"))
 	      {
 	      	final SpellAbility ability = new Ability_Tap(card, "0")
 	          {
