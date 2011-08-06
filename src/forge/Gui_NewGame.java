@@ -678,6 +678,11 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         else
         	prompt += "Computer ";
         prompt += "Deck";
+        //hacky needs redesign, because you don't know what display will be used
+        if(AllZone.Display == null){
+        	if(newGuiCheckBox.isSelected()) AllZone.Display = new GuiDisplay4();
+            else AllZone.Display = new GuiDisplay3();
+        }
         Object o = AllZone.Display.getChoice(prompt, decks.toArray());
     	
         if (o.toString().equals(decks.get(0)))
