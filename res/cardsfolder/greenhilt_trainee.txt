@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greenhilt_trainee.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/112.jpg
 End

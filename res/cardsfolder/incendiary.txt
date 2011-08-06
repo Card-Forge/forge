@@ -10,4 +10,5 @@ SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Tgt$TgtCP | NumDmg$ X
 SVar:X:Count$CardCounters.FUSE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incendiary.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/89.jpg
 End
