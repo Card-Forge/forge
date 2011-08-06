@@ -6872,15 +6872,14 @@ public class CardFactory implements NewConstants {
         		if (!bbCost.equals(""))
         		{
         			SpellAbility bbSA = sa.copy();
-        			String newCost = CardUtil.addManaCosts(card.getManaCost(), bbCost);
-        			bbSA.setManaCost(newCost);
-        			if (bbSA.payCosts != null)
-        				bbSA.payCosts.setMana(newCost);	// abCost value needs to be increased for paying spells
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
-                    sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
-                    bbSA.setDescription(sb.toString());
-                    bbSA.setIsBuyBackAbility(true);
+        			   String newCost = CardUtil.addManaCosts(card.getManaCost(), bbCost);
+        			   if (bbSA.payCosts != null)
+        			      bbSA.payCosts = new Ability_Cost(newCost, sa.getSourceCard().getName(), false); // create new abCost
+        			   StringBuilder sb = new StringBuilder();
+        			   sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
+        			   sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
+        			   bbSA.setDescription(sb.toString());
+        			   bbSA.setIsBuyBackAbility(true);
                                         
                     card.addSpellAbility(bbSA);
         		}

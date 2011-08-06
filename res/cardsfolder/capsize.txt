@@ -1,8 +1,8 @@
 Name:Capsize
 ManaCost:1 U U
 Types:Instant
-Text:Return target permanent to its owner's hand.
-K:spBounceTgt:Permanent:Hand
+Text:no text
+A:SP$Bounce|Cost$1 U U|ValidTgts$Permanent|TgtPrompt$Select target permanent|Destination$Hand|SpellDescription$Return target permanent to its owner's hand.
 SVar:Buyback:3
 SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
