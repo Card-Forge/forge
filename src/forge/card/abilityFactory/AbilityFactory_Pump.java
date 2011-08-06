@@ -862,16 +862,24 @@ public class AbilityFactory_Pump {
     
     private String pumpAllStackDescription(AbilityFactory af, SpellAbility sa){
     	StringBuilder sb = new StringBuilder();
-    	String name = af.getHostCard().getName();
 
     	String desc = "";
     	if(params.containsKey("SpellDescription")) {
     		desc = params.get("SpellDescription");
     	}
 
+    	/*
     	if (sa instanceof Ability_Sub)
-    		sb.append(name).append(" -");
-    	sb.append(" ").append(desc);
+    		sb.append(" ").append(desc);
+    	sb.append(name).append(" -");
+    	*/
+    	
+    	if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+    	sb.append(desc);
+    	
 
     	Ability_Sub abSub = sa.getSubAbility();
     	if (abSub != null) {
