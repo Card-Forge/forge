@@ -194,7 +194,9 @@ import java.util.Random;
                     // will include creatures already dealt damage
                     return c.isCreature() && ((c.getNetDefense() + c.getDamage()) <= d)
                             && CardFactoryUtil.canTarget(AF.getHostCard(), c)
-                            && !c.reduceDamageToZero(AF.getHostCard(),false);
+                            && !c.reduceDamageToZero(AF.getHostCard(),false)
+                            && !c.getKeyword().contains("Indestructible")
+                            && !(c.getSVar("SacMe").length() > 0);
                 }
             });
            
@@ -220,15 +222,16 @@ import java.util.Random;
            
            // temporarily disabled until better AI
            if (AF.getAbCost().getSacCost())    {
-               if(AllZone.HumanPlayer.getLife() - damage > 0) // only if damage from this spell would kill the human
+               if(AllZone.HumanPlayer.getLife() - damage > 0) // only if damage from this ability would kill the human
         	   return false;
            }
            if (AF.getAbCost().getSubCounter())  {
-               if(AllZone.HumanPlayer.getLife() - damage > 0) // only if damage from this spell would kill the human
+        	   // +1/+1 counters only if damage from this ability would kill the human, otherwise ok
+               if(AllZone.HumanPlayer.getLife() - damage > 0 || !AF.getAbCost().getCounterType().equals(Counters.P1P1))
         	   return false;
            }
            if (AF.getAbCost().getLifeCost())    {
-               if(AllZone.HumanPlayer.getLife() - damage > 0) // only if damage from this spell would kill the human
+               if(AllZone.HumanPlayer.getLife() - damage > 0) // only if damage from this ability would kill the human
         	   return false;
            }
            
