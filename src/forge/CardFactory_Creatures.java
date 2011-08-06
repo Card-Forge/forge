@@ -17482,6 +17482,41 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Phyrexian War Beast")) {
+           /* When Phyrexian War Beast leaves the battlefield, sacrifice a land
+            * and Phyrexian War Beast deals 1 damage to you.
+            */
+           final Ability ability = new Ability(card, "0") {
+              private static final long serialVersionUID = -3829801813561677938L;
+
+              public void resolve() {
+                 Card c = getTargetCard();
+                 AllZone.GameAction.sacrifice(c);
+                 AllZone.GameAction.addDamage(card.getController(), 1, card);
+              }
+           };
+
+           final Command sacrificeLandAndOneDamage = new Command() {
+              private static final long serialVersionUID = -1793348608291550952L;
+
+              public void execute() {
+                 String player = card.getController();
+                 ability.setStackDescription(card.getName() + " - does 1 damage to "+player +" and sacrifice one land.");
+                 //AllZone.Stack.add(ability);
+                 //probably want to check that there are lands in play
+                 
+                 PlayerZone play = AllZone.getZone(Constant.Zone.Play,player);
+                 CardList choice = new CardList(play.getCards());
+                 choice  = choice.getType("Land");
+                 AllZone.InputControl.setInput(CardFactoryUtil.input_sacrifice(ability,choice,"Select a land to sacrifice"));                
+              }
+           };
+           
+           card.addLeavesPlayCommand(sacrificeLandAndOneDamage);
+        }//*************** END ************ END **************************
+
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

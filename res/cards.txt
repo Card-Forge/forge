@@ -1,3 +1,9 @@
+Phyrexian War Beast
+3
+Artifact Creature Beast
+When Phyrexian War Beast leaves the battlefield, sacrifice a land and Phyrexian War Beast deals 1 damage to you.
+3/4
+
 Ulamog's Crusher
 8
 Creature Eldrazi
