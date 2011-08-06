@@ -2,7 +2,7 @@ Name:Rampant Growth
 ManaCost:1 G
 Types:Sorcery
 Text:no text
-A:SP$Fetch|Cost$1 G|Destination$Battlefield|FetchType$Land.Basic|Tapped$True|FetchNum$1|SpellDescription$Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
+A:SP$Fetch | Cost$ 1 G | Destination$ Battlefield | FetchType$ Land.Basic | Tapped$ True | FetchNum$ 1 | SpellDescription$ Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rampant_growth.jpg
 End

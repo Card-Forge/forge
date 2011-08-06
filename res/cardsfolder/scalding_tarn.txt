@@ -2,7 +2,7 @@ Name:Scalding Tarn
 ManaCost:no cost
 Types:Land
 Text:no text
-A:AB$Fetch|Cost$T PayLife<1> Sac<1/CARDNAME>|Destination$Battlefield|FetchType$Island,Mountain|FetchNum$1|SpellDescription$Search your library for a Island or Mountain card and put it onto the battlefield. Then shuffle your library.
+A:AB$Fetch | Cost$ T PayLife<1> Sac<1/CARDNAME> | Destination$ Battlefield | FetchType$ Island,Mountain | FetchNum$ 1 | SpellDescription$ Search your library for a Island or Mountain card and put it onto the battlefield. Then shuffle your library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scalding_tarn.jpg
 End

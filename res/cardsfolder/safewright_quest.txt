@@ -2,7 +2,7 @@ Name:Safewright Quest
 ManaCost:GW
 Types:Sorcery
 Text:Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.
-A:SP$Fetch|Cost$GW|Destination$Hand|FetchType$Forest,Plains|FetchNum$1|SpellDescription$Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.
+A:SP$Fetch | Cost$ GW | Destination$ Hand | FetchType$ Forest,Plains | FetchNum$ 1 | SpellDescription$ Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safewright_quest.jpg
 End
