@@ -16910,7 +16910,7 @@ public class GameActionUtil {
 
 	}; //Goblin_Chieftain_Other
 
-
+	/*
 	public static Command Goblin_King_Pump            = new Command() {
 
 		private static final long serialVersionUID   = -2128898623878576243L;
@@ -16987,7 +16987,8 @@ public class GameActionUtil {
 		}// execute()
 
 	}; //Goblin_King_Other
-
+	*/
+	
 	public static Command Merfolk_Sovereign_Pump      = new Command() {
 
 		private static final long serialVersionUID   = -8250416279767429585L;
@@ -21008,8 +21009,8 @@ public class GameActionUtil {
 		commands.put("Timber_Protector_Other", Timber_Protector_Other);
 		commands.put("Goblin_Chieftain_Pump", Goblin_Chieftain_Pump);
 		commands.put("Goblin_Chieftain_Other", Goblin_Chieftain_Other);
-		commands.put("Goblin_King_Pump", Goblin_King_Pump);
-		commands.put("Goblin_King_Other", Goblin_King_Other);
+		//commands.put("Goblin_King_Pump", Goblin_King_Pump);
+		//commands.put("Goblin_King_Other", Goblin_King_Other);
 		commands.put("Field_Marshal_Pump", Field_Marshal_Pump);
 		commands.put("Field_Marshal_Other", Field_Marshal_Other);
 		commands.put("Death_Baron_Pump", Death_Baron_Pump);
