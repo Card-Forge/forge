@@ -3403,7 +3403,8 @@ public class GameActionUtil {
 		if(c.getName().equals("Rampaging Baloths")) landfall_Rampaging_Baloths(c);
 		else if(c.getName().equals("Emeria Angel")) landfall_Emeria_Angel(c);
 		else if(c.getName().equals("Ob Nixilis, the Fallen")) landfall_Ob_Nixilis(c);
-		else if(c.getName().equals("Ior Ruin Expedition")) landfall_Ior_Ruin_Expedition(c);
+		else if(c.getName().equals("Ior Ruin Expedition")
+				|| c.getName().equals("Khalni Heart Expedition")) landfall_AddQuestCounter(c);
 		else if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
 		else if(c.getName().equals("Hedron Crab")) landfall_Hedron_Crab(c);
 		else if(c.getName().equals("Bloodghast")) landfall_Bloodghast(c);
@@ -3514,7 +3515,7 @@ public class GameActionUtil {
 		} else if(c.getController().equals(Constant.Player.Computer)) AllZone.Stack.add(ability);
 	}
 
-	private static void landfall_Ior_Ruin_Expedition(Card c) {
+	private static void landfall_AddQuestCounter(Card c) {
 		final Card crd = c;
 		Ability ability = new Ability(c, "0") {
 			@Override

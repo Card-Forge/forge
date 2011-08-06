@@ -10511,7 +10511,7 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                 	// Look for two basic lands: one goes into play tapped, one
                 	// goes into your hand
-                	AllZone.GameAction.SearchLibraryTwoBasicLand(card.getController(),
+                	AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(),
                 			Constant.Zone.Play, true, 
                 			Constant.Zone.Hand, false);
                 }
@@ -13298,6 +13298,36 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
+        //*************** START *********** START **************************
+        if(cardName.equals("Khalni Heart Expedition")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public boolean canPlay() {
+                    return card.getCounters(Counters.QUEST) >= 3 && AllZone.GameAction.isCardInPlay(card)
+                            && !AllZone.Stack.getSourceCards().contains(card);//in play and not already activated(Sac cost problems)
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return (AllZone.Computer_Library.size() > 0);
+                }
+                
+                @Override
+                public void resolve() {
+                	// Sacrifice this first, otherwise the land search triggers 
+                	// the landfall ability
+                    AllZone.GameAction.sacrifice(getSourceCard());
+
+                	// Put two basic lands into play tapped
+                	AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(),
+                			Constant.Zone.Play, true, Constant.Zone.Play, true);
+                }
+            };
+            ability.setDescription("Remove three quest counters from Khalni Heart Expedition and sacrifice it: search your library for two basic lands and put them onto the battlefield tapped.");
+            ability.setStackDescription(card.getName() + " - Search for land.");
+            
+            card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
         else if(cardName.equals("Earthcraft")) {
@@ -17609,7 +17639,7 @@ public class CardFactory implements NewConstants {
 
 				@Override
                 public void resolve() {
-					AllZone.GameAction.SearchLibraryBasicLand(card.getController(), 
+					AllZone.GameAction.searchLibraryBasicLand(card.getController(), 
 							Constant.Zone.Play, true);
 				}
                 
@@ -17634,7 +17664,7 @@ public class CardFactory implements NewConstants {
 				@Override
                 public void resolve() {
 					// Put two lands into play, tapped
-					AllZone.GameAction.SearchLibraryTwoBasicLand(card.getController(), 
+					AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(), 
 							Constant.Zone.Play, false, 
 							Constant.Zone.Play, false);
                 } // resolve

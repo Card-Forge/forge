@@ -1586,24 +1586,24 @@ public class GameAction {
         
     }
     
-    public void SearchLibraryBasicLand(String player, String Zone1, boolean tapLand) {
-    	SearchLibraryTwoBasicLand(player, Zone1, tapLand, "", false);
+    public void searchLibraryBasicLand(String player, String Zone1, boolean tapLand) {
+    	searchLibraryTwoBasicLand(player, Zone1, tapLand, "", false);
     }
 
-	public void SearchLibraryTwoBasicLand(String player,
+	public void searchLibraryTwoBasicLand(String player,
 			String Zone1, boolean tapFirstLand, 
 			String Zone2, boolean tapSecondLand) {
         
         if(player.equals(Constant.Player.Human)) {
-        	HumanSearchTwoBasicLand(Zone1, tapFirstLand, Zone2, tapSecondLand);
+        	humanSearchTwoBasicLand(Zone1, tapFirstLand, Zone2, tapSecondLand);
         } else {
-        	AISearchTwoBasicLand(Zone1, tapFirstLand, Zone2, tapSecondLand);
+        	aiSearchTwoBasicLand(Zone1, tapFirstLand, Zone2, tapSecondLand);
         }
         
         AllZone.GameAction.shuffle(player);
     }
     
-    private void AISearchTwoBasicLand(String Zone1, boolean tapFirstLand,
+    private void aiSearchTwoBasicLand(String Zone1, boolean tapFirstLand,
     		String Zone2, boolean tapSecondLand) {
         CardList land = new CardList(AllZone.Computer_Library.getCards());
         land = land.getType("Basic");
@@ -1633,7 +1633,7 @@ public class GameAction {
         }
     }
 
-    private void HumanSearchTwoBasicLand(String Zone1, boolean tapFirstLand, String Zone2, boolean tapSecondLand) {
+    private void humanSearchTwoBasicLand(String Zone1, boolean tapFirstLand, String Zone2, boolean tapSecondLand) {
         PlayerZone firstZone = AllZone.getZone(Zone1, Constant.Player.Human);
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
         
