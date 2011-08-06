@@ -1147,7 +1147,7 @@ public class GameActionUtil {
                         AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
                         
                         for(int j = 0; j < cl.size() * cmc; j++) {
-                            CardFactoryUtil.makeToken("Bird", "WU 1 1 Bird", card, "W U", new String[] {
+                            CardFactoryUtil.makeToken("Bird", "WU 1 1 Bird", sa.getSourceCard().getController(), "W U", new String[] {
                                     "Creature", "Bird"}, 1, 1, new String[] {"Flying"});
                         }
                         

@@ -7411,7 +7411,14 @@ public class CardFactory implements NewConstants {
                     if((!CardUtil.getColors(card).contains(Constant.Color.White)) && card.isCreature()
                             && zone.is(Constant.Zone.Play)) {
                         spell.setTargetCard(card);
-                        stopSetNext(new Input_PayManaCost(spell));
+                        if (this.isFree())
+                        {
+                        	this.setFree(false);
+                            AllZone.Stack.add(spell);
+                            stop();
+                        }
+                        else
+                        	stopSetNext(new Input_PayManaCost(spell));
                     }
                 }
             };//SpellAbility - target

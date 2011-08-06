@@ -7848,16 +7848,12 @@ public class CardFactory_Creatures {
                     
                     if(c.isEmpty()) return false;
                     
-                    if(2 <= c.get(0).getNetAttack() && c.get(0).getKeyword().contains("Flying")) {
-                        setTargetCard(c.get(0));
+                    if( c.get(0).getNetAttack() >= 2 && c.get(0).getKeyword().contains("Flying"))
                         return true;
-                    }
                     
                     CardListUtil.sortAttack(c);
-                    if(4 <= c.get(0).getNetAttack()) {
-                        setTargetCard(c.get(0));
+                    if(4 <= c.get(0).getNetAttack())
                         return true;
-                    }
                     
                     return false;
                 }
