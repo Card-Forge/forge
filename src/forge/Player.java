@@ -165,7 +165,7 @@ public abstract class Player extends MyObservable{
 	
 	public boolean canGainLife() {
 		if(AllZoneUtil.isCardInPlay("Sulfuric Vortex") || AllZoneUtil.isCardInPlay("Leyline of Punishment") || 
-				AllZoneUtil.isCardInPlay("Platinum Emperion", this)) return false;
+				AllZoneUtil.isCardInPlay("Platinum Emperion", this) || AllZoneUtil.isCardInPlay("Forsaken Wastes")) return false;
 		return true;
 	}
 	
