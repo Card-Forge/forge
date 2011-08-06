@@ -230,6 +230,27 @@ public class CardListUtil
 	   list.sort(com);
   }
   
+  public static void sortByTextLen(CardList list)
+  {
+	  Comparator<Card> com = new Comparator<Card>()
+	  {
+		  public int compare(Card a, Card b)
+		  {
+			  int aLen = a.getText().length();
+			  int bLen = b.getText().length();
+			  
+			  if (aLen == bLen)
+				  return 0;
+			  else if (aLen > bLen)
+				  return 1;
+			  else if (bLen > aLen)
+				  return -1;
+			
+			  return 0;
+		  }
+	  };
+	  list.sort(com);
+  }
   
   //Sorts from high to low
   public static void sortCMC(CardList list)
