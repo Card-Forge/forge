@@ -58,6 +58,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
     private static String lastUsedDeck;
     private JButton zeppelinButton = new JButton("<html>Launch<br>Zeppelin</html>",
             GuiUtils.getResizedIcon(GuiUtils.getIconFromFile("ZeppelinIcon.png"), 40, 40));
+    private JPanel zeppelinPanel = new JPanel();
 
     public QuestMainPanel(QuestFrame mainFrame) {
         super(mainFrame);
@@ -268,7 +269,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
         if (questData.getMode().equals(forge.quest.data.QuestData.FANTASY)) {
             JPanel fantasyPanel = new JPanel();
-            fantasyPanel.setLayout(new BoxLayout(fantasyPanel, BoxLayout.X_AXIS));
+            fantasyPanel.setLayout(new BorderLayout());
 
             JPanel petPanel = new JPanel();
             petPanel.setLayout(new BoxLayout(petPanel, BoxLayout.X_AXIS));
@@ -298,6 +299,9 @@ public class QuestMainPanel extends QuestAbstractPanel {
                     }
                 }
             });
+            this.petComboBox.setMaximumSize(
+                    new Dimension(Integer.MAX_VALUE, 
+                    (int) this.petCheckBox.getPreferredSize().getHeight()));
             petPanel.add(this.petComboBox);
 
             this.plantBox.addActionListener(new ActionListener() {
@@ -308,10 +312,10 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
             GuiUtils.addGap(petPanel, 10);
             petPanel.add(this.plantBox);
-
-            fantasyPanel.add(petPanel, BorderLayout.WEST);
             petPanel.setMaximumSize(petPanel.getPreferredSize());
             petPanel.setAlignmentX(LEFT_ALIGNMENT);
+
+            fantasyPanel.add(petPanel, BorderLayout.WEST);
 
             zeppelinButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent actionEvent) {
@@ -324,9 +328,9 @@ public class QuestMainPanel extends QuestAbstractPanel {
             });
 
             zeppelinButton.setMaximumSize(zeppelinButton.getPreferredSize());
+            zeppelinPanel.setLayout(new BorderLayout());
 
-            GuiUtils.addExpandingHorizontalSpace(fantasyPanel);
-            fantasyPanel.add(zeppelinButton);
+            fantasyPanel.add(zeppelinPanel, BorderLayout.EAST);
             fantasyPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
             matchPanel.add(fantasyPanel);
         }
@@ -452,7 +456,13 @@ public class QuestMainPanel extends QuestAbstractPanel {
             this.plantBox.setSelected(questData.getPetManager().shouldPlantBeUsed());
 
             QuestItemZeppelin zeppelin = (QuestItemZeppelin) questData.getInventory().getItem("Zeppelin");
-            if (zeppelin.getLevel() > 0 && !zeppelin.hasBeenUsed()){
+
+            if (zeppelin.getLevel() > 0){
+                zeppelinPanel.removeAll();
+                zeppelinPanel.add(zeppelinButton,BorderLayout.CENTER);
+            }
+
+            if (!zeppelin.hasBeenUsed()){
                 zeppelinButton.setEnabled(true);
             }
             else{
