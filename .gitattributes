@@ -7707,7 +7707,6 @@ src/forge/CommandArgs.java svneol=native#text/plain
 src/forge/CommandList.java svneol=native#text/plain
 src/forge/CommandReturn.java svneol=native#text/plain
 src/forge/Computer.java svneol=native#text/plain
-src/forge/ComputerAI_Burn.java svneol=native#text/plain
 src/forge/ComputerAI_Burn2.java svneol=native#text/plain
 src/forge/ComputerAI_General.java -text svneol=native#text/plain
 src/forge/ComputerAI_Input.java svneol=native#text/plain
