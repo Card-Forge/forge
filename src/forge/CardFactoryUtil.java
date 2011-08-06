@@ -3622,6 +3622,8 @@ public class CardFactoryUtil {
         else if(s[0].contains("Twice")) return num * 2;
         else if(s[0].contains("HalfUp")) return (int) (Math.ceil(num / 2.0));
         else if(s[0].contains("HalfDown")) return (int) (Math.floor(num / 2.0));
+        else if(s[0].contains("ThirdUp")) return (int) (Math.ceil(num / 3.0));
+        else if(s[0].contains("ThirdDown")) return (int) (Math.floor(num / 3.0));
         else if(s[0].contains("Negative")) return num * -1;
         else if(s[0].contains("Times")) return num * Integer.parseInt(s[1]);
         else return num;
