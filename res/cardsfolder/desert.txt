@@ -3,6 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
+A:AB$DealDamage|Cost$T|ValidTgts$Creature.attacking|TgtPrompt$Select target attacking Creature|NumDmg$1|ActivatingPhases$EndCombat|SpellDescription$Desert deals 1 damage to target attacking creature. Activate this ability only during the end of combat step.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desert.jpg
 End
