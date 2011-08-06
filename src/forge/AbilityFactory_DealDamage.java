@@ -609,10 +609,8 @@ public class AbilityFactory_DealDamage {
     		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 
     		 // evaluate both lists and pass only if human creatures are more valuable
-    		 if (humanlist.getNotType("Creature").size() == 0 && computerlist.getNotType("Creature").size() == 0) {
-    			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
-    				 return false;
-    		 }
+			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
+				 return false;
 
     		 Ability_Sub subAb = sa.getSubAbility();
     		 if (subAb != null)
