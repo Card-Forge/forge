@@ -1,7 +1,7 @@
 Name:Archon of Justice
 ManaCost:3 W W
 Types:Creature Archon
-Text:When Archon of Justic is put into a graveyard from play, remove target permanent from the game.
+Text:When Archon of Justice is put into a graveyard from the battlefield, exile target permanent.
 PT:4/4
 K:Flying
 SVar:Rarity:Rare
