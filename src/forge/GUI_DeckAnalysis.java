@@ -871,7 +871,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JTable getJTable1() {
 		if(jTable1 == null) {
 			DefaultTableModel dm = new DefaultTableModel();
-			 dm.setDataVector(new Object[][] { {  }}, new Object[] { "Card", "Qty","1st","2nd","3rd","4st","5st","6st","7st" });
+			 dm.setDataVector(new Object[][] { {  }}, new Object[] { "Card", "Qty","1st","2nd","3rd","4th","5th","6th","7th" });
 
 			jTable1 = new JTable(dm);
 			CardList rList = new CardList();		
@@ -986,10 +986,10 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jTable1.getColumn("1st").setMaxWidth(50);
 			jTable1.getColumn("2nd").setMaxWidth(50);
 			jTable1.getColumn("3rd").setMaxWidth(50);
-			jTable1.getColumn("4st").setMaxWidth(50);
-			jTable1.getColumn("5st").setMaxWidth(50);
-			jTable1.getColumn("6st").setMaxWidth(50);
-			jTable1.getColumn("7st").setMaxWidth(50);		
+			jTable1.getColumn("4th").setMaxWidth(50);
+			jTable1.getColumn("5th").setMaxWidth(50);
+			jTable1.getColumn("6th").setMaxWidth(50);
+			jTable1.getColumn("7th").setMaxWidth(50);		
 			jTable1.setRowHeight(18);
 			jTable1.setPreferredSize(new java.awt.Dimension(576, 18 *dm.getRowCount()+3 ));
 		}
