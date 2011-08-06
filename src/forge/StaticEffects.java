@@ -51,7 +51,7 @@ public class StaticEffects
 		//cardToEffectsList.put("Faerie Swarm", new String[] {"Faerie_Swarm"});
 		
 		cardToEffectsList.put("Gaddock Teeg", new String[] {"Gaddock_Teeg"});
-		cardToEffectsList.put("Gaea's Avenger", new String[] {"Gaeas_Avenger"});
+		//cardToEffectsList.put("Gaea's Avenger", new String[] {"Gaeas_Avenger"});
 		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
 		cardToEffectsList.put("Goblin Assault", new String[] {"Goblin_Assault"});
 		cardToEffectsList.put("Goblin Gaveleer", new String[] {"Goblin_Gaveleer"});

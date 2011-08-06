@@ -13915,7 +13915,7 @@ public class GameActionUtil {
 			return opp.getLife() <= 10;
 		}
 	};
-
+	/*
 	public static Command Gaeas_Avenger                   = new Command() {
 		private static final long serialVersionUID = 1987511098173387864L;
 
@@ -13937,7 +13937,7 @@ public class GameActionUtil {
 			return artifacts.size();
 		}
 	};
-
+	*/
 	/*
 	public static Command People_of_the_Woods                   = new Command() {
 		private static final long serialVersionUID = 1987554325573387864L;
@@ -16283,7 +16283,7 @@ public class GameActionUtil {
 		//commands.put("Faerie_Swarm", Faerie_Swarm);
 		
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
-		commands.put("Gaeas_Avenger", Gaeas_Avenger);
+		//commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
 		commands.put("Goblin_Assault", Goblin_Assault);
 		commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
