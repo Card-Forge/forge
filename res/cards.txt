@@ -1,3 +1,25 @@
+Unquestioned Authority
+2 W
+Enchantment Aura
+Enchanted creature has protection from creatures.
+Enchant creature
+enPump:Protection from creatures
+When this card comes into play, draw a card.
+
+Vampiric Embrace
+2 B B
+Enchantment Aura
+Enchanted creature gets +2/+2 and has flying. Whenever a creature dealt damage by enchanted creature this turn is put into a graveyard, put a +1/+1 counter on that creature.
+Enchant creature
+enPump:+2/+2/Flying & Whenever a creature dealt damage by this card this turn is put into a graveyard, put a +1/+1 counter on this card.
+
+Web
+G
+Enchantment Aura
+Enchanted creature gets +0/+2 and has reach.
+Enchant creature
+enPump:+0/+2/Reach
+
 Primal Frenzy
 G
 Enchantment Aura
@@ -4921,6 +4943,7 @@ W
 Enchantment Aura
 Enchanted creature has protection from black and from red.
 Enchant creature
+enPump:Protection from black & Protection from red
 
 Benalish Heralds
 3 W
@@ -4950,8 +4973,9 @@ no text
 Maniacal Rage
 1 R
 Enchantment Aura
-Enchanted creature gets +2/+2 and this creature cannot block.
+Enchanted creature gets +2/+2 and can't block.
 Enchant creature
+enPump:+2/+2/This creature cannot block
 
 Scavenged Weaponry
 2 B
@@ -5995,6 +6019,7 @@ Protective Bubble
 Enchantment Aura
 Enchanted creature is unblockable and has shroud.
 Enchant creature
+enPump:Unblockable & Shroud
 
 Diplomatic Immunity
 1 U

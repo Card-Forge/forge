@@ -1545,6 +1545,8 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Protective Bubble")) {
             final SpellAbility spell = new Spell(card) {
@@ -1633,6 +1635,8 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Zephid's Embrace")) {
@@ -3968,6 +3972,8 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Maniacal Rage")) {
             final SpellAbility spell = new Spell(card) {
@@ -4060,7 +4066,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+*/
         
 /*
         //*************** START *********** START **************************
@@ -4640,7 +4646,7 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
 */
         
-
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Mask of Law and Grace")) {
             final SpellAbility spell = new Spell(card) {
@@ -4731,7 +4737,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+*/
         
 /*
         //*************** START *********** START **************************
