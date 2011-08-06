@@ -7213,7 +7213,7 @@ public class GameActionUtil {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("Dark Confidant - ").append(player).append(" loses ").append(convertedManaCost);
-			sb.append(" life and draws top card(").append(cardName).append(").");
+			sb.append(" life and draws top card (").append(cardName).append(").");
 			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
