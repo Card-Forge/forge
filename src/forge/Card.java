@@ -2883,4 +2883,12 @@ public class Card extends MyObservable {
     	return getSetImageName(curSetCode); 
     }
     
+    public String getCurSetRarity() {
+    	for (int i=0; i<Sets.size(); i++)
+    		if (Sets.get(i).Code.equals(curSetCode))
+    			return Sets.get(i).Rarity;
+    	
+    	return "";
+    }
+    
 }//end Card class
