@@ -277,6 +277,14 @@ public class Phase extends MyObservable
         
 	    else if(phase.equals(Constant.Phase.Cleanup)){
 	    	AllZone.Phase.getPlayerTurn().setAssignedDamage(0);
+	    	
+	    	//Reset Damage received map
+	    	CardList list = AllZoneUtil.getCardsInPlay();
+			for(Card c:list) {
+				c.resetReceivedDamageFromThisTurn();
+				c.resetDealtDamageToThisTurn();
+			}
+
 	    	AllZone.EndOfTurn.executeUntil();
 	    	CardList cHand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
 	    	CardList hHand = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
