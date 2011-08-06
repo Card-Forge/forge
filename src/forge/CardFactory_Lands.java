@@ -2982,38 +2982,30 @@ class CardFactory_Lands {
               private static final long serialVersionUID = 6175830918425915833L;
               final Player player = card.getController();
               public void execute() {
-                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                 CardList plains = new CardList(play.getCards());
-                 plains = plains.getType("Plains");
+                 CardList plains = AllZoneUtil.getPlayerTypeInPlay(player, "Plains");
 
                  if( player.equals(AllZone.ComputerPlayer)) {
                     if( plains.size() > 0 ) {
                        CardList tappedPlains = new CardList(plains.toArray());
-                       tappedPlains = tappedPlains.filter(new CardListFilter() {
-                          public boolean addCard(Card c) {
-                             return c.isTapped();
-                          }
-                       });
+                       tappedPlains = tappedPlains.filter(AllZoneUtil.tapped);
+                       //if any are tapped, sacrifice it
+                       //else sacrifice random
                        if( tappedPlains.size() > 0 ) {
                           AllZone.GameAction.sacrifice(tappedPlains.get(0));
                        }
                        else {
                           AllZone.GameAction.sacrifice(plains.get(0));
                        }
-                       //if any are tapped, sacrifice it
-                       //else sacrifice random
                     }
                     else {
                        AllZone.GameAction.sacrifice(card);
                     }
                  }
                  else { //this is the human resolution
-                    //this works with correct input
-                    //really, what I want is Cancel to sacrifice Kjeldoran Outpost
                     Input target = new Input() {
                        private static final long serialVersionUID = 6653677835621129465L;
                        public void showMessage() {
-                          AllZone.Display.showMessage("Kjeldoran Outpost - Select one plains to sacrifice");
+                          AllZone.Display.showMessage(cardName+" - Select one plains to sacrifice");
                           ButtonUtil.enableOnlyCancel();
                        }
                        public void selectButtonCancel() {
