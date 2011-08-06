@@ -7371,7 +7371,8 @@ public class CardFactory implements NewConstants {
         //*************** START *********** START **************************
         else if(cardName.equals("Sensei's Divining Top")) {
             //ability2: Draw card, and put divining top on top of library
-            final SpellAbility ability2 = new Ability_Tap(card, "0") {
+        	Ability_Cost abCost2 = new Ability_Cost("T", cardName, true);
+            final Ability_Activated ability2 = new Ability_Activated(card, abCost2, null) {
                 private static final long serialVersionUID = -2523015092351744208L;
                 
                 @Override
@@ -7395,7 +7396,7 @@ public class CardFactory implements NewConstants {
                     else return false;
                 }//canPlay()
             };//SpellAbility ability2
-            
+            /*
             ability2.setBeforePayMana(new Input() {
                 private static final long serialVersionUID = -4773496833654414458L;
                 
@@ -7405,11 +7406,15 @@ public class CardFactory implements NewConstants {
                     stop();
                 }//showMessage()
             });
+            */
             
 
             //ability (rearrange top 3 cards) :
-            final SpellAbility ability1 = new Ability(card, "1") {
-                @Override
+            Ability_Cost abCost = new Ability_Cost("1", cardName, true);
+            final Ability_Activated ability1 = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = -4520707446274449995L;
+
+				@Override
                 public void resolve() {
                 	Player player = card.getController();
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
@@ -7448,21 +7453,17 @@ public class CardFactory implements NewConstants {
                     if(AllZone.getZone(card).is(Constant.Zone.Battlefield)) return true;
                     else return false;
                 }//canPlay()
-            };//SpellAbility ability1
+            };//ability1
             
 
-            ability1.setDescription("1: Look at the top three cards of your library, then put them back in any order.");
-            ability1.setStackDescription("Sensei's Divining Top - rearrange top 3 cards");
+            ability1.setDescription(abCost+"Look at the top three cards of your library, then put them back in any order.");
+            ability1.setStackDescription(cardName+" - rearrange top 3 cards");
             card.addSpellAbility(ability1);
-            ability1.setBeforePayMana(new Input_PayManaCost(ability1));
             
-            ability2.setDescription("tap: Draw a card, then put Sensei's Divining Top on top of its owner's library.");
-            ability2.setStackDescription("Sensei's Divining Top - draw a card, then put back on owner's library");
-            ability2.setBeforePayMana(new Input_NoCost_TapAbility((Ability_Tap) ability2));
+            ability2.setDescription(abCost2+"Draw a card, then put Sensei's Divining Top on top of its owner's library.");
+            ability2.setStackDescription(cardName+" - draw a card, then put back on owner's library");
             card.addSpellAbility(ability2);
-            
-        }
-        //*************** END ************ END **************************
+        }//*************** END ************ END **************************
 
         
         //*************** START *********** START **************************
@@ -7476,8 +7477,7 @@ public class CardFactory implements NewConstants {
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
-        }
-        //*************** END ************ END **************************     
+        }//*************** END ************ END **************************     
 
         
         //*************** START *********** START **************************
@@ -7979,7 +7979,8 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Goblin Charbelcher")) {
-            final Ability_Tap ability = new Ability_Tap(card, "3") {
+        	Ability_Cost abCost = new Ability_Cost("3 T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target("TgtCP")) {
                 private static final long serialVersionUID = -840041589720758423L;
                 
                 @Override
@@ -8019,15 +8020,14 @@ public class CardFactory implements NewConstants {
             };
             
             StringBuilder sb = new StringBuilder();
-            sb.append("3, tap: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal ");
+            sb.append(abCost);
+            sb.append("Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal ");
             sb.append("to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, ");
             sb.append("Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.");
             ability.setDescription(sb.toString());
 
             ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
             card.addSpellAbility(ability);
-            
         }//*************** END ************ END **************************
 
         
