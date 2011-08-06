@@ -50,8 +50,12 @@ public class Input_Untap extends Input
 
     for(int i = 0; i < c.length; i++)
     {
-      if(!c[i].getKeyword().contains("This card does not untap during your untap phase."))
+      if(!c[i].getKeyword().contains("This card doesn't untap during your untap step.") && 
+    	 !c[i].getKeyword().contains("This card doesn't untap during your next untap step."))
     	  c[i].untap();
+      else
+    	  c[i].removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
+
     }
   }//regularUntap()
 }

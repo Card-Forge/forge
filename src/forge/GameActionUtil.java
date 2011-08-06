@@ -1089,6 +1089,195 @@ public class GameActionUtil
 		}
 	}
 	
+	public static void executeDestroyCardEffects(Card c, Card destroyed)
+	{
+		if (destroyed.isCreature())
+			executeDestroyCreatureCardEffects(c, destroyed);
+		else if (destroyed.isLand())
+			executeDestroyLandCardEffects(c, destroyed);
+	}
+	
+	private static boolean showDialog(Card c)
+	{
+		String[] choices = { "Yes", "No" };
+    	  
+		Object q = null;
+
+		q = AllZone.Display.getChoiceOptional("Use " + c.getName() + " effect?", choices);
+
+		if (q == null || q.equals("No"))
+			return false;
+		else
+			return true;
+	}
+	
+	
+	//***CREATURES START HERE***
+	
+	public static void executeDestroyCreatureCardEffects(Card c, Card destroyed)
+	{
+		//if (AllZone.GameAction.isCardInPlay(c)){
+			if (c.getName().equals("Goblin Sharpshooter"))
+				destroyCreature_Goblin_Sharpshooter(c, destroyed);
+			else if (c.getName().equals("Dingus Staff"))
+				destroyCreature_Dingus_Staff(c, destroyed);
+			else if (c.getName().equals("Dauthi Ghoul") && destroyed.getKeyword().contains("Shadow"))
+				destroyCreature_Dauthi_Ghoul(c, destroyed);
+			else if (c.getName().equals("Soulcatcher") && destroyed.getKeyword().contains("Flying"))
+				destroyCreature_Soulcatcher(c, destroyed);
+			else if (c.getName().equals("Fecundity"))
+				destroyCreature_Fecundity(c, destroyed);
+			else if (c.getName().equals("Moonlit Wake"))
+				destroyCreature_Moonlit_Wake(c, destroyed);
+			else if (c.getName().equals("Proper Burial"))
+				destroyCreature_Proper_Burial(c, destroyed);
+		//}
+	}
+	
+	//***
+	
+	private static void destroyCreature_Goblin_Sharpshooter(Card c, Card destroyed)
+	{
+		//not using stack for this one
+		if (AllZone.GameAction.isCardInPlay(c) && c.isTapped())
+			c.untap();
+	}
+	
+	private static void destroyCreature_Dingus_Staff(Card c, Card destroyed)
+	{
+		final Card crd = destroyed;
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				String player = crd.getController();
+				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+				life.subtractLife(2);
+			}
+		};
+		ability.setStackDescription("Dingus Staff - Deals 2 damage to " +destroyed.getController() +".");
+		AllZone.Stack.add(ability);
+	}
+	
+	private static void destroyCreature_Dauthi_Ghoul(Card c, Card destroyed)
+	{
+		final Card crd = c;
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				if (AllZone.GameAction.isCardInPlay(crd))
+					crd.addCounter(Counters.P1P1, 1);
+			}
+		};
+		if (AllZone.GameAction.isCardInPlay(c))
+			ability.setStackDescription("Dauthi Ghoul - gets a +1/+1 counter.");
+		AllZone.Stack.add(ability);
+	}
+	
+	private static void destroyCreature_Soulcatcher(Card c, Card destroyed)
+	{
+		final Card crd = c;
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				if (AllZone.GameAction.isCardInPlay(crd))
+					crd.addCounter(Counters.P1P1, 1);
+			}
+		};
+		
+		ability.setStackDescription("Soulcatcher - gets a +1/+1 counter.");
+		if (AllZone.GameAction.isCardInPlay(c))
+			AllZone.Stack.add(ability);
+	}
+	
+	private static void destroyCreature_Fecundity(Card c, Card destroyed)
+	{
+		final Card crd = destroyed;
+		final Card crd2 = c;
+
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				String player = crd.getController();
+				if (player.equals(Constant.Player.Human)) {
+					if (showDialog(crd2))
+						AllZone.GameAction.drawCard(player);
+				}
+				else
+					AllZone.GameAction.drawCard(player); //computer
+			}
+		};
+		ability.setStackDescription("Fecundity - " + destroyed.getController() + " may draw a card.");
+		
+		AllZone.Stack.add(ability);
+	}
+	
+	private static void destroyCreature_Moonlit_Wake(Card c, Card destroyed)
+	{
+		final Card crd = c;
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				String player = crd.getController();
+				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+				life.addLife(1);
+			}
+		};
+		ability.setStackDescription("Moonlit Wake - " + c.getController() +" gains 1 life.");
+		AllZone.Stack.add(ability);
+	}
+	
+	private static void destroyCreature_Proper_Burial(Card c, Card destroyed)
+	{
+		final Card crd = c;
+		final Card crd2 = destroyed;
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				String player = crd.getController();
+				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+				life.addLife(crd2.getNetDefense());
+			}
+		};
+		ability.setStackDescription("Proper Burial - " + c.getController() +" gains " + destroyed.getNetDefense() +" life.");
+		AllZone.Stack.add(ability);
+	}
+	
+	//***CREATURES END HERE***
+	
+	//***LANDS START HERE***
+	
+	public static void executeDestroyLandCardEffects(Card c, Card destroyed)
+	{
+		if (c.getName().equals("Dingus Egg"))
+			destroyLand_Dingus_Egg(c, destroyed);
+	}
+	
+	//***
+	
+	private static void destroyLand_Dingus_Egg(Card c, Card destroyed)
+	{
+		final Card crd = destroyed;
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				String player = crd.getController();
+				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+				life.subtractLife(2);
+			}
+		};
+		ability.setStackDescription("Dingus Egg - Deals 2 damage to " +destroyed.getController() +".");
+		AllZone.Stack.add(ability);
+	}
+	
+	
+	//***LANDS END HERE***
 	
 	public static void executeLandfallEffects(Card c)
 	{

@@ -5445,6 +5445,109 @@ class CardFactory_Auras {
 
 		  spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
 		}//*************** END ************ END **************************
+		
+		//*************** START *********** START **************************
+		if(cardName.equals("Eternity Snare"))
+		{
+		  final SpellAbility spell = new Spell(card)
+		  {
+			  
+			private static final long serialVersionUID = -1241918879720338838L;
+			public boolean canPlayAI()
+		    {
+		      CardList list = new CardList(AllZone.Human_Play.getCards());
+		      list = list.filter(new CardListFilter()
+		      {
+				public boolean addCard(Card c) {
+					return c.isCreature() && !c.getKeyword().contains("Vigilance");
+				}  
+		      });
+		      
+		      if(list.isEmpty())
+		       return false;
+
+		      //else
+		      CardListUtil.sortAttack(list);
+		      CardListUtil.sortFlying(list);
+
+		      for (int i=0;i<list.size();i++) {
+		         if (CardFactoryUtil.canTarget(card, list.get(i)))
+		         {
+		            setTargetCard(list.get(i));
+		            return true;
+		         }
+		      }
+		      return false;
+		    }//canPlayAI()
+		    public void resolve()
+		    {
+		      PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+		      play.add(card);
+		     
+		      Card c = getTargetCard();
+		     
+		      if(AllZone.GameAction.isCardInPlay(c)  && CardFactoryUtil.canTarget(card, c) )
+		      {
+		         card.enchantCard(c);
+		         System.out.println("Enchanted: " +getTargetCard());
+		      }
+		    }//resolve()
+		  };//SpellAbility
+		  card.clearSpellAbility();
+		  card.addSpellAbility(spell);
+
+		  Command onEnchant = new Command()
+		  {   
+
+			private static final long serialVersionUID = -5795220371369091411L;
+
+			public void execute()
+		      {
+		         if (card.isEnchanting())
+		         {
+			          Card crd = card.getEnchanting().get(0);
+			          crd.addExtrinsicKeyword("This card doesn't untap during its controller's untap step.");
+		         }
+		      }//execute()
+		  };//Command
+
+
+		  Command onUnEnchant = new Command()
+		  {   
+			private static final long serialVersionUID = -3856817134400315080L;
+
+			public void execute()
+		      {
+		         if (card.isEnchanting())
+		         {
+		            Card crd = card.getEnchanting().get(0);
+		            crd.removeExtrinsicKeyword("This card doesn't untap during its controller's untap step.");
+		         }
+		     
+		      }//execute()
+		   };//Command
+		   
+		   Command onLeavesPlay = new Command()
+		   {
+
+			private static final long serialVersionUID = 8243327573672256317L;
+
+			public void execute()
+		    {
+		         if (card.isEnchanting())
+		         {
+		            Card crd = card.getEnchanting().get(0);
+		            card.unEnchantCard(crd);
+		         }
+		    }
+		   };
+
+		  card.addEnchantCommand(onEnchant);
+		  card.addUnEnchantCommand(onUnEnchant);
+		  card.addLeavesPlayCommand(onLeavesPlay);
+
+		  spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+		}//*************** END ************ END **************************
 
 		
 	    return card;

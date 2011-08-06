@@ -1,3 +1,71 @@
+Dingus Egg
+4
+Artifact
+no text
+Whenever a land is put into a graveyard from the battlefield, Dingus Egg deals 2 damage to that land's controller.
+
+Dingus Staff
+4
+Artifact
+no text
+Whenever a creature is put into a graveyard from the battlefield, Dingus Egg deals 2 damage to that creature's controller.
+
+Proper Burial
+3 W
+Enchantment
+no text
+Whenever a creature you control is put into a graveyard from the battlefield, you gain life equal to that creature's toughness.
+
+Moonlit Wake
+2 W
+Enchantment
+no text
+Whenever a creature is put into a graveyard from the battlefield, you gain 1 life.
+
+Fecundity
+2 G
+Enchantment
+no text
+Whenever a creature is put into a graveyard from the battlefield, that creature's controller may draw a card.
+
+Goblin Sharpshooter
+2 R
+Creature Goblin
+no text
+1/1
+abDamageCP T:1
+This card doesn't untap during your untap step.
+Whenever a creature is put into a graveyard from the battlefield, untap Goblin Sharpshooter.
+
+Soulcatcher
+1 W
+Creature Bird Soldier
+no text
+1/1
+Whenever a creature with flying is put into a graveyard from the battlefield, put a +1/+1 counter on Soulcatcher.
+Flying
+
+Dauthi Ghoul
+1 B
+Creature Dauthi Zombie
+no text
+1/1
+Whenever a creature with shadow is put into a graveyard from the battlefield, put a +1/+1 counter on Dauthi Ghoul.
+Shadow
+
+Eternity Snare
+4 U
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+When this card comes into play, draw a card.
+Enchant creature
+
+Elvish Hunter
+1 G
+Creature Elf Archer
+no text
+1/1
+
 Merfolk Looter
 1 U
 Creature Merfolk Rogue
@@ -3669,7 +3737,7 @@ Basalt Monolith
 3
 Artifact
 no text
-This card does not untap during your untap phase.
+This card doesn't untap during your untap step.
 Untap:3
 tap: add 3
 
@@ -3677,7 +3745,7 @@ Grim Monolith
 2
 Artifact
 no text
-This card does not untap during your untap phase.
+This card doesn't untap during your untap step.
 Untap:4
 tap: add 3
 

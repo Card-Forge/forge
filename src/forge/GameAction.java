@@ -512,6 +512,28 @@ private Card getCurrentCard(int ID)
     if (c.isEquipped())
     	skullClamp_destroy(c);
     
+    //destroy card effects:
+    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+    
+    CardList list = new CardList();
+    list.addAll(comp.getCards());
+    list.addAll(hum.getCards());
+    list = list.filter(new CardListFilter(){
+		public boolean addCard(Card c) {
+			ArrayList<String> keywords = c.getKeyword();
+			for (String kw : keywords)
+			{
+				if (kw.startsWith("Whenever") && kw.contains(" put into a graveyard from the battlefield,"))
+					return true;
+			}
+			return false;
+		}
+    });
+    
+    for (int i=0;i<list.size();i++)
+    	GameActionUtil.executeDestroyCardEffects(list.get(i), c);	
+    
     if (persist){
     	c.setDamage(0);
     	c.untap();
@@ -573,6 +595,7 @@ private Card getCurrentCard(int ID)
 			  GameActionUtil.executeVampiricEffects(crd);
 		  }
     }
+    
     this.sacrificeDestroy(c);
   }
   
