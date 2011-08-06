@@ -3278,7 +3278,30 @@ public class GameAction {
                           	k[3] = String.valueOf(PlayerList.size());   		
                  	}
                  	String[] Numbers = new String[Max];
-                 	if(!"WUGRB".contains(k[3])) {
+                 	if("X".equals(k[3])) {
+						for(int no = 0; no < Max; no ++) Numbers[no] = String.valueOf(no);
+						String Number_ManaCost = " ";
+						if(Mana.toString().length() == 1) {
+							Number_ManaCost = Mana.toString().substring(0, 1);
+						}
+						else if(Mana.toString().length() == 0) {
+							Number_ManaCost = "0"; // Should Never Occur
+						}
+						else {
+							Number_ManaCost = Mana.toString().substring(0, 2);
+						}
+						Number_ManaCost = Number_ManaCost.trim();
+						for(int check = 0; check < Max; check ++) {
+							if(Number_ManaCost.equals(Numbers[check])) {
+								int xValue = CardFactoryUtil.xCount(originalCard, originalCard.getSVar("X"));
+								//if((spell.isXCost()) || (spell.isMultiKicker()) && (check - Integer.valueOf(k[3])) < 0) XBonus = XBonus - check + Integer.valueOf(k[3]);
+								Mana = Mana.replaceFirst(String.valueOf(check),String.valueOf(check + xValue));
+							}
+							if(Mana.equals("")) Mana = "0";
+							manaCost = new ManaCost(Mana);	
+						}
+					}
+                 	else if(!"WUGRB".contains(k[3])) {
                  	for(int no = 0; no < Max; no ++) Numbers[no] = String.valueOf(no);
                  	String Number_ManaCost = " ";
              		if(Mana.toString().length() == 1) Number_ManaCost = Mana.toString().substring(0, 1);
@@ -3399,7 +3422,30 @@ public class GameAction {
                          	}
 
                      	String[] Numbers = new String[Max];
-                     	if(!"WUGRB".contains(k[3])) {
+                     	if("X".equals(k[3])) {
+							for(int no = 0; no < Max; no ++) Numbers[no] = String.valueOf(no);
+							String Number_ManaCost = " ";
+							if(Mana.toString().length() == 1) {
+								Number_ManaCost = Mana.toString().substring(0, 1);
+							}
+							else if(Mana.toString().length() == 0) {
+								Number_ManaCost = "0"; // Should Never Occur
+							}
+							else {
+								Number_ManaCost = Mana.toString().substring(0, 2);
+							}
+							Number_ManaCost = Number_ManaCost.trim();
+							for(int check = 0; check < Max; check ++) {
+								if(Number_ManaCost.equals(Numbers[check])) {
+									int xValue = CardFactoryUtil.xCount(originalCard, originalCard.getSVar("X"));
+									//if((spell.isXCost()) || (spell.isMultiKicker()) && (check - Integer.valueOf(k[3])) < 0) XBonus = XBonus - check + Integer.valueOf(k[3]);
+									Mana = Mana.replaceFirst(String.valueOf(check),String.valueOf(check - xValue));
+								}
+								if(Mana.equals("")) Mana = "0";
+								manaCost = new ManaCost(Mana);	
+							}
+						}
+                     	else if(!"WUGRB".contains(k[3])) {
                      	for(int no = 0; no < Max; no ++) Numbers[no] = String.valueOf(no);
                      	String Number_ManaCost = " ";
                  		if(Mana.toString().length() == 1) Number_ManaCost = Mana.toString().substring(0, 1);
