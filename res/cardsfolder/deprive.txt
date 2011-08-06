@@ -1,0 +1,9 @@
+Name:Deprive
+ManaCost:U U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ U U Return<1/Land.YouCtrl> | Type$ Spell | Destination$ Graveyard | SpellDescription$ Counter target spell.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deprive.jpg
+End
