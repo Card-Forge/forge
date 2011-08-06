@@ -913,6 +913,9 @@ public class AbilityFactory_ChangeZone {
 	}
 	
 	private static boolean changeKnownUnpreferredTarget(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!mandatory)
+			return false;
+		
 		HashMap<String,String> params = af.getMapParams();
 		Card source = sa.getSourceCard();
 		String origin = params.get("Origin");
@@ -921,6 +924,7 @@ public class AbilityFactory_ChangeZone {
 
 		CardList list = AllZoneUtil.getCardsInZone(origin);
 		list = list.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, source);
+		
 		
 		// Narrow down the list:
 		if (origin.equals("Battlefield")){
