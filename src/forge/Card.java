@@ -1108,7 +1108,7 @@ public class Card extends MyObservable {
     public ArrayList<Ability_Mana> getAIPlayableMana() {
         ArrayList<Ability_Mana> res = new ArrayList<Ability_Mana>();
     	for(Ability_Mana am:getManaAbility())
-    		if(am.isBasic() && !res.contains(am)) {
+    		if(am.isBasic() && am.isUndoable() && !res.contains(am)) {
     			res.add(am);
     		} else if (am.isReflectedMana() && !res.contains(am)) {
     			res.add(am);
