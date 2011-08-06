@@ -7142,6 +7142,8 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility_NoTargetSelf(ability));
         }//*************** END ************ END **************************
         
+        
+/* /* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
         else if (cardName.equals("Intrepid Hero")) {
             //tap ability - no cost - target creature
@@ -7213,6 +7215,8 @@ public class CardFactory_Creatures {
             
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Tetsuo Umezawa")) {
