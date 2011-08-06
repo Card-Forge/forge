@@ -5,7 +5,6 @@ package forge;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import javax.swing.JOptionPane;
 
 
 class CardFactory_Auras {
@@ -619,7 +618,12 @@ class CardFactory_Auras {
                 public boolean canPlayAI() {
                     CardList list = new CardList(AllZone.Human_Play.getCards());
                     list = list.getType("Land");
-                    
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return !c.getType().contains("Island");
+                        }
+                    });
+                
                     if(list.isEmpty()) return false;
                     
                     setTargetCard(list.get(0));
@@ -695,7 +699,7 @@ class CardFactory_Auras {
                         	for(int i = 0; i < Abilities.length; i++) {
                             	crd.addSpellAbility(Abilities[i]);	
                             	}
-                        	JOptionPane.showMessageDialog(null, Abilities, "", JOptionPane.INFORMATION_MESSAGE);
+
 
                         	// Restoring the card gives it the abilities from the copied card. This card is not in play and has no counters and thus the Dark Depths Error
                         }   
