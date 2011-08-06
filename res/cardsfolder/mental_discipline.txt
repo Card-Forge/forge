@@ -1,0 +1,9 @@
+Name:Mental Discipline
+ManaCost:1 U U
+Types:Enchantment
+Text:no text
+K:abDrawCards 1 U Discard<1/Any>:1:Draw a card.:Mental Discipline - Controller draws a card.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mental_discipline.jpg
+End
