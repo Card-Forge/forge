@@ -2509,7 +2509,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     ability.setStackDescription("Mongrel Pack - " + card.getController()
-                            + " puts four 1/1 tokens into play ");
+                            + " puts four 1/1 tokens onto the battlefield. ");
                     AllZone.Stack.add(ability);
                 }
             };
@@ -7742,45 +7742,6 @@ public class CardFactory_Creatures {
             a2.setStackDescription(card + " deals 6 damage to each other creature with flying.");
             a2.setDescription("1 R: Scourge of Kher Ridges deals 6 damage to each creature with flying.");
             card.addSpellAbility(a2);
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Thalakos Drifters")) {
-            
-            final Ability ability = new Ability(card, "0") {
-            	
-                @Override
-                public void resolve() {
-                    final Command untilEOT = new Command() {
-                        private static final long serialVersionUID = -8494294720368174013L;
-                        
-                        public void execute() {
-                            card.removeIntrinsicKeyword("Shadow");
-                        }
-                    };
-                    
-                    if(AllZone.GameAction.isCardInPlay(card)) {
-                        card.addIntrinsicKeyword("Shadow");
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }//resolve()
-                
-            };//SpellAbility
-            
-
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -4302220760957471033L;
-                
-                @Override
-                public void showMessage() {
-                    stopSetNext(CardFactoryUtil.input_discard(ability, 1));
-                    
-                }
-            };
-            ability.setStackDescription(card + " gains shadow until EOT.");
-            ability.setDescription("Discard a card: Thalakos Drifters gain shadow until EOT.");
-            card.addSpellAbility(ability);
-            ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************

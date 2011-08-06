@@ -5986,10 +5986,11 @@ public class GameActionUtil {
 		player[0] = c.getController();
 		final String[] opponent = new String[1];
 
-		if(c.getNetAttack() > 0) {
+		if(c.getNetAttack() > 0 && !c.isFaceDown()) {
 			Ability ability = new Ability(c, "0") {
 				@Override
 				public void resolve() {
+					
                     PlayerZone Ohand = AllZone.getZone(Constant.Zone.Hand, AllZone.GameAction.getOpponent(player[0]));
                     Card h[] = Ohand.getCards();
                     Card[] handChoices = Ohand.getCards();
@@ -6020,6 +6021,7 @@ public class GameActionUtil {
                     j++;
                     
                     }
+                    
 				}
 			};// ability
 			opponent[0] = AllZone.GameAction.getOpponent(player[0]);
