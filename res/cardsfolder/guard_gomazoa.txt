@@ -1,5 +1,5 @@
 Name:Guard Gomazoa
-ManaCost:2 B
+ManaCost:2 U
 Types:Creature Jellyfish
 Text:no text
 PT:1/3
