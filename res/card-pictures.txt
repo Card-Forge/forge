@@ -38,6 +38,16 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+aerathi_berserker.jpg			http://www.wizards.com/global/images/magic/general/aerathi_berserker.jpg
+balduvian_war_makers.jpg		http://www.wizards.com/global/images/magic/general/balduvian_war_makers.jpg
+chromium.jpg					http://www.wizards.com/global/images/magic/general/chromium.jpg
+craw_giant.jpg					http://www.wizards.com/global/images/magic/general/craw_giant.jpg
+frost_giant.jpg					http://www.wizards.com/global/images/magic/general/frost_giant.jpg
+horrible_hordes.jpg				http://www.wizards.com/global/images/magic/general/horrible_hordes.jpg
+hunding_gjornersen.jpg			http://www.wizards.com/global/images/magic/general/hunding_gjornersen.jpg
+marhault_elsdragon.jpg			http://www.wizards.com/global/images/magic/general/marhault_elsdragon.jpg
+teekas_dragon.jpg				http://www.wizards.com/global/images/magic/general/teekas_dragon.jpg
+wolverine_pack.jpg				http://www.wizards.com/global/images/magic/general/wolverine_pack.jpg
 binding_grasp.jpg		http://www.wizards.com/global/images/magic/general/binding_grasp.jpg
 mind_harness.jpg		http://www.wizards.com/global/images/magic/general/mind_harness.jpg
 persuasion.jpg		http://www.wizards.com/global/images/magic/general/persuasion.jpg

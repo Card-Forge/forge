@@ -1,3 +1,79 @@
+AErathi Berserker
+2 R R R
+Creature Human Berserker
+no text
+2/4
+Rampage 3
+
+Balduvian War-Makers
+4 R
+Creature Human Barbarian
+no text
+3/3
+Haste
+Rampage 1
+
+Chromium
+2 W W U U B B
+Legendary Creature Elder Dragon
+no text
+7/7
+Flying
+Rampage 2
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:W U B
+
+Craw Giant
+3 G G G G
+Creature Giant
+no text
+6/4
+Trample
+Rampage 2
+
+Frost Giant
+3 R R R
+Creature Giant
+no text
+4/4
+Rampage 2
+
+Horrible Hordes
+3
+Artifact Creature Spirit
+no text
+2/2
+Rampage 1
+
+Hunding Gjornersen
+3 U U W
+Legendary Creature Human Warrior
+no text
+5/4
+Rampage 1
+
+Marhault Elsdragon
+3 G R R
+Legendary Creature Elf Warrior
+no text
+4/6
+Rampage 1
+
+Teeka's Dragon
+9
+Artifact Creature Dragon
+no text
+5/5
+Flying
+Trample
+Rampage 4
+
+Wolverine Pack
+2 G G
+Creature Wolverine
+no text
+2/4
+Rampage 2
+
 Binding Grasp
 3 U
 Enchantment Aura

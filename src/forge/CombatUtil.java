@@ -1727,6 +1727,26 @@ public class CombatUtil {
                 AllZone.Stack.add(ab);
         }
         
+        ////////////////////Rampage
+        //not sure why this is "not" - but I copied from Bushido...
+        if(!a.getCreatureGotBlockedThisCombat()) {
+        	ArrayList<String> keywords = a.getKeyword();
+        	Pattern p = Pattern.compile("Rampage [0-9]+");
+        	Matcher m;
+        	for (String keyword : keywords) {
+        		m = p.matcher(keyword);
+        		if (m.find()){
+        			String k[] = keyword.split(" ");
+        			final int magnitude = Integer.valueOf(k[1]);
+        			final int numBlockers = AllZone.Combat.getBlockers(a).size();
+        			if(numBlockers > 1) {
+        				executeRampageAbility(a, magnitude, numBlockers);
+        			}
+        		} //find
+        	}
+        }
+        ////////////////////END Rampage
+        
         if(a.getKeyword().contains("Flanking") && !b.getKeyword().contains("Flanking")) {
             int flankingMagnitude = 0;
             String kw = "";
@@ -2054,5 +2074,50 @@ public class CombatUtil {
             AllZone.Stack.add(ability3);
         }
     }
+    
+    /////////////////////////Rampage
+    /**
+     * executes rampage abilities for a given card
+     * 
+     * @param c the card to add rampage bonus to
+     * @param magnitude the magnitude of rampage (ie Rampage 2 means magnitude should be 2)
+     * @param numBlockers - the number of creatures blocking this rampaging creature
+     */
+    private static void executeRampageAbility(Card c, int magnitude, int numBlockers) {
+    	//TODO - possibly can get magnitude from Keyword on the Card here
+    	final Card crd = c;
+    	final int pump = magnitude;
+    	Ability ability;
+
+    	//numBlockers -1 since it is for every creature beyond the first
+    	for(int i = 0; i < numBlockers - 1; i++) {
+    		ability = new Ability(c, "0") {
+    			@Override
+    			public void resolve() {
+    				final Command untilEOT = new Command() {
+    					private static final long serialVersionUID = -3215615538474963181L;
+
+    					public void execute() {
+    						if(AllZone.GameAction.isCardInPlay(crd)) {
+    							crd.addTempAttackBoost(-pump);
+    							crd.addTempDefenseBoost(-pump);
+    						}
+    					}
+    				};//Command
+
+    				if(AllZone.GameAction.isCardInPlay(crd)) {
+    					crd.addTempAttackBoost(pump);
+    					crd.addTempDefenseBoost(pump);
+
+    					AllZone.EndOfTurn.addUntil(untilEOT);
+    				}
+    			}//resolve
+
+    		};//ability
+    		ability.setStackDescription(c + " - (Rampage) gets +"+pump+"/+"+pump+" until EOT.");
+    		AllZone.Stack.add(ability);
+    	}
+    }
+    /////////////////////////END Rampage
     
 }//Class CombatUtil
