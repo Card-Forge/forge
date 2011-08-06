@@ -14545,7 +14545,7 @@ public class GameActionUtil {
 		}
 	};
 	
-	
+	/*
     public static Command Goblin_Gaveleer            = new Command() {
 		
         private static final long serialVersionUID = -9039509574117844271L;
@@ -14566,6 +14566,7 @@ public class GameActionUtil {
 			return equipment.size();
 		}
 	};// Goblin_Gaveleer
+	*/
 	/*
 	public static Command Uril                        = new Command() {
 		private static final long serialVersionUID = 8168928048322850517L;
@@ -16261,7 +16262,7 @@ public class GameActionUtil {
 		//commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
 		//commands.put("Goblin_Assault", Goblin_Assault);
-		commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
+		//commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
 		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
 		commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
 		
