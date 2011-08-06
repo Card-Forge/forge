@@ -589,6 +589,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Seabiscuit 3	 	hard	Some Fear creatures, Garza Zol, Plague Queen + draw card & control spells");
         sb.append("\r\n");
+        sb.append("Secret Squirrel 3	hard	Dennis' squirrel deck, Squirrel Mob + Deranged Hermit + Coat of Arms + Nut Collector");
+        sb.append("\r\n");
         sb.append("Sherlock Holmes 1	easy	Some Forestwalk creatures, Damnation + pump spells");
         sb.append("\r\n");
         sb.append("Sherlock Holmes 2	medium	Some Forestwalk creatures, gain life + threat removal spells");
