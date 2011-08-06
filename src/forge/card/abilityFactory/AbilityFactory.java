@@ -613,6 +613,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_Reveal.createDrawbackDig(this);
 		}
 		
+		if (API.equals("Shuffle")){
+			if (isAb)
+				SA = AbilityFactory_ZoneAffecting.createAbilityShuffle(this);
+			else if (isSp)
+				SA = AbilityFactory_ZoneAffecting.createSpellShuffle(this);
+			else if (isDb)
+				SA = AbilityFactory_ZoneAffecting.createDrawbackShuffle(this);
+		}
+		
 		if (SA == null)
 			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Looking for API: "+API);
 

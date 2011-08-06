@@ -2,6 +2,7 @@ package forge.card.abilityFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 import forge.AllZone;
@@ -1065,5 +1066,201 @@ public class AbilityFactory_ZoneAffecting {
 		// todo: check for some extra things
 		return true;
 	}// discardCheckDrawbackAI()
+	
+	//**********************************************************************
+	//******************************* Shuffle ******************************
+	//**********************************************************************
+
+	public static SpellAbility createAbilityShuffle(final AbilityFactory af) {
+		final SpellAbility abShuffle = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = -1245185178904838198L;
+
+			@Override
+			public String getStackDescription() {
+				return shuffleStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return shuffleCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				shuffleResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return shuffleTrigger(af, this, mandatory);
+			}
+
+		};
+		return abShuffle;
+	}
+
+	public static SpellAbility createSpellShuffle(final AbilityFactory af) {
+		final SpellAbility spShuffle = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
+			private static final long serialVersionUID = 589035800601547559L;
+
+			@Override
+			public String getStackDescription() {
+				return shuffleStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return shuffleCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				shuffleResolve(af, this);
+			}
+
+		};
+		return spShuffle;
+	}
+
+	public static SpellAbility createDrawbackShuffle(final AbilityFactory af) {
+		final SpellAbility dbShuffle = new Ability_Sub(af.getHostCard(), af.getAbTgt()) {
+			private static final long serialVersionUID = 5974307947494280639L;
+
+			@Override
+			public String getStackDescription() {
+				// when getStackDesc is called, just build exactly what is happening
+				return shuffleStackDescription(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				shuffleResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return shuffleTargetAI(af, this, false, false);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return shuffleTrigger(af, this, mandatory);
+			}
+
+		};
+		return dbShuffle;
+	}
+
+	private static String shuffleStackDescription(AbilityFactory af, SpellAbility sa) {
+		StringBuilder sb = new StringBuilder();
+
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+
+		if (tgtPlayers.size() > 0){
+			Iterator<Player> it = tgtPlayers.iterator();
+			while(it.hasNext()) {
+				sb.append(it.next().getName());
+				if(it.hasNext()) sb.append(" and ");
+			}
+		}
+		else {
+			sb.append("Error - no target players for RevealHand. ");
+		}
+		sb.append(" shuffle");
+		if(tgtPlayers.size() > 1) sb.append(" their libraries");
+		else sb.append("s his or her library");
+		sb.append(".");
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null){
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
+	}
+
+	private static boolean shuffleCanPlayAI(final AbilityFactory af, SpellAbility sa) {
+		//not really sure when the compy would use this; maybe only after a human
+		// deliberately put a card on top of their library
+		return false;
+		/*
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+
+		Card source = sa.getSourceCard();
+
+		Random r = MyRandom.random;
+		boolean randomReturn = r.nextFloat() <= Math.pow(.667, source.getAbilityUsed()+1);
+
+		if (AbilityFactory.playReusable(sa))
+			randomReturn = true;
+
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			randomReturn &= subAb.chkAI_Drawback();
+		return randomReturn;
+		*/
+	}
+
+	private static boolean shuffleTargetAI(AbilityFactory af, SpellAbility sa, boolean primarySA, boolean mandatory) {
+		return false;
+	}// revealHandTargetAI()
+
+	private static boolean shuffleTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory) {
+		if (!ComputerUtil.canPayCost(sa))	// If there is a cost payment
+			return false;
+
+		if (!shuffleTargetAI(af, sa, false, mandatory))
+			return false;
+
+		// check SubAbilities DoTrigger?
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			return abSub.doTrigger(mandatory);
+		}
+
+		return true;
+	}
+
+	private static void shuffleResolve(final AbilityFactory af, final SpellAbility sa) {
+		Card host = af.getHostCard();
+		HashMap<String,String> params = af.getMapParams();
+		boolean optional = params.containsKey("Optional");
+
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+
+		for(Player p : tgtPlayers) {
+			if (tgt == null || p.canTarget(af.getHostCard())) {
+				if(optional && sa.getActivatingPlayer().isHuman() && !GameActionUtil.showYesNoDialog(host, "Have "+p+" shuffle?")) {
+					; //do nothing
+				}
+				else {
+					p.shuffle();
+				}
+			}
+		}
+
+		if(af.hasSubAbility()) {
+			Ability_Sub abSub = sa.getSubAbility();
+			if(abSub != null) abSub.resolve();
+		}
+	}
 	
 }//end class AbilityFactory_ZoneAffecting
