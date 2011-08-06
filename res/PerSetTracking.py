@@ -40,6 +40,7 @@ with open(pathToMtgData) as mtgdata :
                         if not hasFetchedCardName :
                                 tmpName = line
                                 tmpName = tmpName.rstrip()
+                                tmpName = tmpName.replace("AE", "Ae")
                                 hasFetchedCardName = True
                         if line == "\n" :
                                 mtgDataCards[tmpName] = prevline.rstrip()
@@ -71,8 +72,13 @@ for currentSet in setCodes :
         if currentSet == 'UNH' or currentSet == 'UGL' : continue #skip Unhinged and Unglued since they are only counting basic lands anyway
         #if currentSet == 'VG1' or currentSet == 'VG2' or currentSet == 'VG3' : continue
         #if currentSet == 'VG4' or currentSet == 'VGO' or currentSet == 'VG ' : continue
+        #if currentSet == 'FVD' or currentSet == 'FVE' or currentSet == 'FVR' : continue
         #if currentSet == 'SDC' or currentSet == 'AST' or currentSet == 'DKM' : continue
-        #if currentSet == 'ATH' or currentSet == 'MBS' : continue
+        #if currentSet == 'BTD' or currentSet == 'ARC' or currentSet == 'COM' : continue
+        #if currentSet == 'CHR' or currentSet == 'MED' or currentSet == 'H09' : continue
+        #if currentSet == 'ME2' or currentSet == 'ME3' or currentSet == 'ME4' : continue
+        #if currentSet == 'ATH' or currentSet == 'HOP' or currentSet == 'BRB' : continue
+        #if currentSet == 'EVG' or currentSet == 'GVL' or currentSet == 'JVC' : continue
         for card in mtgDataCards.keys() :
                 if mtgDataCards[card].count(currentSet) > 0 :
                         if card in forgeCards :
