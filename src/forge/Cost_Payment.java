@@ -56,8 +56,9 @@ public class Cost_Payment {
 		payDiscard = !cost.getDiscardCost();
 		payTapXType = !cost.getTapXTypeCost();
 	}
-	
-    public boolean canPayAdditionalCosts(){
+    
+	public static boolean canPayAdditionalCosts(Ability_Cost cost, SpellAbility ability){
+		final Card card = ability.getSourceCard();
     	if (cost.getTap() && (card.isTapped() || card.isSick()))
     		return false;
     	

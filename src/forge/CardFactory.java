@@ -1816,8 +1816,7 @@ public class CardFactory implements NewConstants {
                     
                     @Override
                     public boolean canPlay() {
-                    	Cost_Payment pay = new Cost_Payment(abCost, this);
-                        return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                        return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
                     }
                     
                     private CardList getCreatures() {
@@ -2460,8 +2459,7 @@ public class CardFactory implements NewConstants {
                     
                     @Override
                     public boolean canPlay(){
-                    	Cost_Payment pay = new Cost_Payment(abCost, this);
-                        return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                        return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
                     }
                     
                     @Override
@@ -2804,8 +2802,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlay(){
-                	Cost_Payment pay = new Cost_Payment(abCost, this);
-                    return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                    return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
                 }
 
                 
@@ -3829,8 +3826,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
 				public boolean canPlay(){
-                	Cost_Payment pay = new Cost_Payment(abCost, this);
-                    return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                    return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
 				}
                 
                 @Override
@@ -4503,8 +4499,7 @@ public class CardFactory implements NewConstants {
 					}
 					
 					public boolean canPlay(){
-                    	Cost_Payment pay = new Cost_Payment(abCost, this);
-                        return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                        return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
 					}
 					 
 					public boolean canPlayAI()
@@ -4871,12 +4866,12 @@ public class CardFactory implements NewConstants {
                 }
             });//ComesIntoPlayCommand
             
-            final SpellAbility ability = new Ability(card, cost.getMana()) {
-                
-                @Override
+            final Ability_Activated ability = new Ability_Activated(card, cost, tgt) {
+				private static final long serialVersionUID = -1680422554249396500L;
+
+				@Override
                 public boolean canPlay() {
-                	Cost_Payment pay = new Cost_Payment(cost, this);
-                	return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                	return (Cost_Payment.canPayAdditionalCosts(cost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
                 }//canPlay()
                 
                 @Override
@@ -4918,9 +4913,7 @@ public class CardFactory implements NewConstants {
             sb.append("Put a +1/+1 counter from ").append(card.getName()).append(" on target creature.");
             
             ability.setStackDescription(sb.toString());
-            ability.setDescription("2, Remove a +1/+1 counter: Put a +1/+1 counter on target creature");
-            ability.setPayCosts(cost);
-            ability.setTarget(tgt);
+            ability.setDescription(cost.toString() + " Put a +1/+1 counter on target creature");
             
             card.addSpellAbility(ability);
         } // if Spike
@@ -5649,8 +5642,7 @@ public class CardFactory implements NewConstants {
 				
 				@Override
 				public boolean canPlay(){
-					Cost_Payment pay = new Cost_Payment(abCost, this);
-					return !card.isSick() && (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+					return Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay();
 				}
         		
 				@Override
@@ -5800,8 +5792,7 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public boolean canPlay() {
-        			Cost_Payment pay = new Cost_Payment(abCost, this);
-        			return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        			return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
         		}
 
         		@Override
@@ -5890,8 +5881,7 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public boolean canPlay() {
-        			Cost_Payment pay = new Cost_Payment(abCost, this);
-        			return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        			return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
         		}
 
         		@Override
@@ -5990,8 +5980,7 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public boolean canPlay() {
-        			Cost_Payment pay = new Cost_Payment(abCost, this);
-        			return (pay.canPayAdditionalCosts() && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        			return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
         		}
 
         		@Override
