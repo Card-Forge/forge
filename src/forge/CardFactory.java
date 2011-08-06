@@ -7090,82 +7090,6 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
 
-        /*
-            //*************** START *********** START **************************
-            else if(cardName.equals("Saltblast"))
-            {
-              final SpellAbility spell = new Spell(card)
-              {
-        		private static final long serialVersionUID = -8701870029034823295L;
-        		
-        		Card check;
-                public boolean canPlayAI()
-                {
-                  check = getFlying();
-                  return check != null;
-                }
-                public void chooseTargetAI()
-                {
-                  Card c = getFlying();
-                  if((c == null) || (! check.equals(c)))
-                    throw new RuntimeException(card +" error in chooseTargetAI() - Card c is " +c +",  Card check is " +check);
-
-                  setTargetCard(c);
-                }//chooseTargetAI()
-
-                //uses "damage" variable
-                Card getFlying()
-                {
-                  CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-                  for(int i = 0; i < flying.size(); i++)
-                    if(!CardUtil.getColors(flying.get(i)).contains(Constant.Color.White))
-                  {
-                      return flying.get(i);
-                  }
-                  return null;
-                }
-
-                public void resolve()
-                {
-                  if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
-                  {
-                    Card c = getTargetCard();
-
-                    if(AllZone.GameAction.isCardInPlay(c))
-                      AllZone.GameAction.destroy(c);
-                  }
-                }//resolve()
-              };//SpellAbility
-              card.clearSpellAbility();
-              card.addSpellAbility(spell);
-
-              //target
-              Input target = new Input()
-              {
-        		private static final long serialVersionUID = 6040042391157137555L;
-        		
-        		public void showMessage()
-                {
-                  AllZone.Display.showMessage("Select target non-white permanent for " +spell.getSourceCard());
-                  ButtonUtil.enableOnlyCancel();
-                }
-                public void selectButtonCancel() {stop();}
-                public void selectCard(Card card, PlayerZone zone)
-                {
-                  if((!CardUtil.getColors(card).contains(Constant.Color.White)) &&
-                     zone.is(Constant.Zone.Play))
-                  {
-                    spell.setTargetCard(card);
-                    stopSetNext(new Input_PayManaCost(spell));
-                  }
-                }
-              };//SpellAbility - target
-
-              spell.setBeforePayMana(target);
-            }//*************** END ************ END **************************
-        */
-
-
         //*************** START *********** START **************************
         else if(cardName.equals("Firebolt")) {
             final SpellAbility spell = new Spell(card) {
@@ -7304,48 +7228,6 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
 
-        /*
-            //*************** START *********** START **************************
-            else if(cardName.equals("Spark Spray"))
-            {
-              final SpellAbility spell = new Spell(card)
-              {
-        		private static final long serialVersionUID = 6619448976712515187L;
-
-        		public void chooseTargetAI()
-                {
-                  setStackDescription("Spark Spray cycling - Computer draws a card");
-                }//chooseTargetAI()
-
-                public void resolve()
-                {
-                  if(card.getController().equals(Constant.Player.Computer))
-                  {
-                    AllZone.GameAction.drawCard(Constant.Player.Computer);
-                    return;
-                  }
-
-                  if(getTargetCard() != null)
-                  {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
-                    {
-                      Card c = getTargetCard();
-                      c.addDamage(1, card);
-                    }
-                  }
-                  else
-                    AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
-                }
-              };//SpellAbility
-              spell.setDescription("Spark Spray deals 1 damage to target creature or player.");
-              card.clearSpellAbility();
-
-              card.addSpellAbility(spell);
-              card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "R"));
-
-              spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell,true));
-            }//*************** END ************ END **************************
-        */
 
 
         //*************** START *********** START **************************
@@ -12607,136 +12489,6 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
 
-        /*
-            //*************** START *********** START **************************
-            else if(cardName.equals("Gerrard's Command"))
-            {
-              SpellAbility spell = new Spell(card)
-              {
-        		private static final long serialVersionUID = 3128602006949603902L;
-        		
-        		public boolean canPlayAI()
-                {
-                  return getAttacker() != null;
-                }
-                public void chooseTargetAI()
-                {
-                  setTargetCard(getAttacker());
-                }
-                public Card getAttacker()
-                {
-                	//target creature that is going to attack
-                  Combat c = ComputerUtil.getAttackers();
-                  Card[] att = c.getAttackers();
-                  if(att.length != 0)
-                    return att[0];
-                  else
-                    return null;
-                }//getAttacker()
-                public void resolve()
-                {
-                  final Card[] target = new Card[1];
-                  final Command untilEOT = new Command()
-                  {
-        			private static final long serialVersionUID = -650846106294962607L;
-
-        			public void execute()
-                    {
-                      if(AllZone.GameAction.isCardInPlay(target[0]))
-                      {
-                        target[0].addTempAttackBoost(-3);
-                        target[0].addTempDefenseBoost(-3);
-                      }
-                    }
-                  };
-
-                  target[0] = getTargetCard();
-                  if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
-                  {
-                    target[0].addTempAttackBoost(3);
-                    target[0].addTempDefenseBoost(3);
-                    target[0].untap();
-                                
-                    AllZone.EndOfTurn.addUntil(untilEOT);
-                  }
-                }//resolve()
-              };
-              spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-              card.clearSpellAbility();
-              card.addSpellAbility(spell);
-            }//*************** END ************ END **************************
-        */
-
-        /*
-            //*************** START *********** START **************************
-            else if(cardName.equals("Brute Force"))
-            {
-              SpellAbility spell = new Spell(card)
-              {
-        		private static final long serialVersionUID = 4733538427752827505L;
-
-        		public boolean canPlayAI()
-                {
-                  return getAttacker() != null;
-                }
-                public void chooseTargetAI()
-                {
-                  setTargetCard(getAttacker());
-                }
-                public Card getAttacker()
-                {
-                	//target creature that is going to attack
-                  Combat c = ComputerUtil.getAttackers();
-                  //Card[] att = c.getAttackers();
-                  
-                  CardList list = new CardList();
-                  list.addAll(c.getAttackers());
-                  list = list.filter(new CardListFilter()
-                  {
-
-        			public boolean addCard(Card c) {
-        				return CardFactoryUtil.canTarget(card, c);
-        			}
-                	  
-                  });
-                  
-                  if(list.size() != 0)
-                    return list.get(0);
-                  else
-                    return null;
-                }//getAttacker()
-                public void resolve()
-                {
-                  final Card[] target = new Card[1];
-                  final Command untilEOT = new Command()
-                  {
-        			private static final long serialVersionUID = 8299648917436556370L;
-
-        			public void execute()
-                    {
-                      if(AllZone.GameAction.isCardInPlay(target[0]))
-                      {
-                        target[0].addTempAttackBoost(-3);
-                        target[0].addTempDefenseBoost(-3);
-                      }
-                    }
-                  };
-
-                  target[0] = getTargetCard();
-                  if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]) )
-                  {
-                    target[0].addTempAttackBoost(3);
-                    target[0].addTempDefenseBoost(3);
-
-                    AllZone.EndOfTurn.addUntil(untilEOT);
-                  }
-                }//resolve()
-              };
-              spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-              card.clearSpellAbility();
-              card.addSpellAbility(spell);
-            }//*************** END ************ END **************************
-        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Nameless Inversion")) {
@@ -12785,78 +12537,6 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Tromp the Domains")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 1523193367625798058L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getAttacker() != null;
-                }
-                
-                public Card getAttacker() {
-                    //target creature that is going to attack
-                    Combat c = ComputerUtil.getAttackers();
-                    Card[] att = c.getAttackers();
-                    if(att.length != 0) return att[0];
-                    else return null;
-                }//getAttacker()
-                
-                int countLandTypes() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    CardList land = new CardList(play.getCards());
-                    
-                    String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp"};
-                    int count = 0;
-                    
-                    for(int i = 0; i < basic.length; i++) {
-                        CardList c = land.getType(basic[i]);
-                        if(!c.isEmpty()) count++;
-                    }
-                    
-                    return count;
-                }//countLandTypes()
-                
-                @Override
-                public void resolve() {
-                    
-                    final int boost = countLandTypes();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    CardList list = new CardList(play.getCards());
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        final Card[] target = new Card[1];
-                        target[0] = list.get(i);
-                        
-                        final Command untilEOT = new Command() {
-                            private static final long serialVersionUID = -4207130279969069542L;
-                            
-                            public void execute() {
-                                if(AllZone.GameAction.isCardInPlay(target[0])) {
-                                    target[0].addTempAttackBoost(-boost);
-                                    target[0].addTempDefenseBoost(-boost);
-                                    
-                                    target[0].removeExtrinsicKeyword("Trample");
-                                }
-                            }
-                        };//Command
-                        
-                        if(AllZone.GameAction.isCardInPlay(target[0])) {
-                            target[0].addTempAttackBoost(boost);
-                            target[0].addTempDefenseBoost(boost);
-                            
-                            target[0].addExtrinsicKeyword("Trample");
-                            
-                            AllZone.EndOfTurn.addUntil(untilEOT);
-                        }//if
-                    }//for
-                }//resolve()
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Titanic Ultimatum")) {
             SpellAbility spell = new Spell(card) {
@@ -12916,7 +12596,6 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
         else if(cardName.equals("Primal Boost")) {
             SpellAbility spell = new Spell(card) {
@@ -12973,75 +12652,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
             //card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2 G"));
         }//*************** END ************ END **************************
-        
 
-        /*
-            //*************** START *********** START **************************
-            else if(cardName.equals("Wildsize"))
-            {
-              SpellAbility spell = new Spell(card)
-              {
-        		private static final long serialVersionUID = -4558777579924787035L;
-
-        		public boolean canPlayAI()
-                {
-                  return getAttacker() != null;
-                }
-                public void chooseTargetAI()
-                {
-                  setTargetCard(getAttacker());
-                }
-                public Card getAttacker()
-                {
-                  //target creature that is going to attack
-                  Combat c = ComputerUtil.getAttackers();
-
-                  CardList list = new CardList(c.getAttackers());
-                  CardListUtil.sortFlying(list);
-
-                  Card[] att = list.toArray();
-                  if(att.length != 0)
-                    return att[0];
-                  else
-                    return null;
-                }//getAttacker()
-
-                public void resolve()
-                {
-                  final Card[] target = new Card[1];
-                  final Command untilEOT = new Command()
-                  {
-        			private static final long serialVersionUID = -8390763209393328399L;
-
-        			public void execute()
-                    {
-                      if(AllZone.GameAction.isCardInPlay(target[0]))
-                      {
-                        target[0].addTempAttackBoost(-2);
-                        target[0].addTempDefenseBoost(-2);
-
-                        target[0].removeExtrinsicKeyword("Trample");
-                      }
-                    }
-                  };
-
-                  target[0] = getTargetCard();
-                  if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
-                  {
-                    target[0].addTempAttackBoost(2);
-                    target[0].addTempDefenseBoost(2);
-                    target[0].addExtrinsicKeyword("Trample");
-
-                    AllZone.EndOfTurn.addUntil(untilEOT);
-                    AllZone.GameAction.drawCard(card.getController());
-                  }
-                }//resolve()
-              };
-              spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-              card.clearSpellAbility();
-              card.addSpellAbility(spell);
-            }//*************** END ************ END **************************
-        */
 
 
         //*************** START *********** START **************************
@@ -13935,27 +13546,6 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         
-/*
-            //*************** START *********** START **************************
-            else if(cardName.equals("Scepter of Insight"))
-            {
-             final SpellAbility ability = new Ability_Tap(card, "3 U")
-             {
-        		private static final long serialVersionUID = -3567474686431369541L;
-
-        		public boolean canPlayAI() {return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);}
-
-                 public void resolve()
-                 {
-                	 AllZone.GameAction.drawCard(card.getController());
-                 }
-                 
-              };//SpellAbility
-              card.addSpellAbility(ability);
-              ability.setDescription("3 U, tap: Draw a card.");
-              ability.setStackDescription(card.getName() + " - draw a card.");
-            }//*************** END ************ END **************************
-*/
         
         
         //*************** START *********** START **************************
