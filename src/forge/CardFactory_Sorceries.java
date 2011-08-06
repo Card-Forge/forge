@@ -2836,7 +2836,6 @@ public class CardFactory_Sorceries {
                 
                 public void humanResolve() {
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     
                     CardList list = new CardList();
                     for(int i = 0; i < 5 && i < library.getCards().length; i++)
@@ -3215,75 +3214,6 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);           
         }//*************** END ************ END **************************
-      
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Cruel Tutor") || cardName.equals("Imperial Seal")) {
-            SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -948983382014193129L;
-
-				@Override
-                public boolean canPlayAI() {
-                    int life = AllZone.ComputerPlayer.getLife();
-                    if(4 < AllZone.Phase.getTurn() && AllZone.Computer_Library.size() > 0 && life >= 4) return true;
-                    else return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    Player player = card.getController();
-                    if(player.isHuman()) humanResolve();
-                    else computerResolve();
-                }
-                
-                public void computerResolve() {
-                    //TODO: somehow select a good noncreature card for AI
-                    CardList creature = new CardList(AllZone.Computer_Library.getCards());
-                    creature = creature.getType("Creature");
-                    if(creature.size() != 0) {
-                        Card c = CardFactoryUtil.AI_getBestCreature(creature);
-                        
-                        if(c == null) {
-                            creature.shuffle();
-                            c = creature.get(0);
-                        }
-                        
-                        card.getController().shuffle();
-                        
-                        //move to top of library
-                        AllZone.Computer_Library.remove(c);
-                        AllZone.Computer_Library.add(c, 0);
-                        
-                        //lose 2 life
-                        AllZone.ComputerPlayer.loseLife(2, card);
-                    }
-                }//computerResolve()
-                
-                public void humanResolve() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    
-                    CardList list = new CardList(library.getCards());
-                    
-                    if(list.size() != 0) {
-                        Object o = AllZone.Display.getChoiceOptional("Select a card", list.toArray());
-                        
-                        card.getController().shuffle();
-                        if(o != null) {
-                            //put card on top of library
-                            library.remove(o);
-                            library.add((Card) o, 0);
-                        }
-                        //lose 2 life
-                        AllZone.HumanPlayer.loseLife(2, card);
-                    }//if
-                    
-
-                }//resolve()
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Invincible Hymn")) {

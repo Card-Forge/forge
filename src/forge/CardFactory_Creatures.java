@@ -1278,7 +1278,7 @@ public class CardFactory_Creatures {
                     	//randomly move card from hand to top of library
                     	int index = MyRandom.random.nextInt(hand.size());
                     	Card c = hand.get(index);
-                    	AllZone.GameAction.moveToTopOfLibrary(c);
+                    	AllZone.GameAction.moveToLibrary(c);
                     }
                     else {
                     	if(hand.size() > 0) {
@@ -1294,7 +1294,7 @@ public class CardFactory_Creatures {
 								@Override
                     			public void selectCard(Card c, PlayerZone p) {
                     				if(p.is(Constant.Zone.Hand, opponent)) {
-                    					AllZone.GameAction.moveToTopOfLibrary(c);
+                    					AllZone.GameAction.moveToLibrary(c);
                     					stop();
                     				}
                     			}

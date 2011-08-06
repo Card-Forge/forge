@@ -742,8 +742,7 @@ class CardFactory_Planeswalkers {
                         card.getController().shuffle();
                         
                         //move to top of library
-                        AllZone.Computer_Library.remove(c);
-                        AllZone.Computer_Library.add(c, 0);
+                        AllZone.GameAction.moveToLibrary(c);
                     }
                 }//computerResolve()
                 

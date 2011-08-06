@@ -231,7 +231,7 @@ public class AIPlayer extends Player{
 	
 	protected void clashMoveToTopOrBottom(Card c) {
 		//computer just puts the card back until such time it can make a smarter decision
-		AllZone.GameAction.moveToTopOfLibrary(c);
+		AllZone.GameAction.moveToLibrary(c);
 	}
 	
 }//end AIPlayer class

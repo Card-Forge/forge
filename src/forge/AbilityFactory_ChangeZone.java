@@ -338,7 +338,6 @@ public class AbilityFactory_ChangeZone {
 		
 		fetchList = filterListByType(fetchList, params, "ChangeType", sa);
 
-        PlayerZone origZone = AllZone.getZone(origin, player);
         PlayerZone destZone = AllZone.getZone(destination, player);
         
         int changeNum = params.containsKey("ChangeNum") ? Integer.parseInt(params.get("ChangeNum")) : 1;
@@ -350,7 +349,6 @@ public class AbilityFactory_ChangeZone {
             Object o = AllZone.Display.getChoiceOptional("Select a card", fetchList.toArray());
             
             if (o != null) {
-                origZone.remove(o);
                 Card c = (Card) o;
                 fetchList.remove(c);
 
@@ -408,7 +406,6 @@ public class AbilityFactory_ChangeZone {
 		
         String destination = params.get("Destination");
 		
-        PlayerZone origZone = AllZone.getZone(origin, player);
         PlayerZone destZone = AllZone.getZone(destination, player);
 
         String type = params.get("ChangeType");
@@ -453,7 +450,6 @@ public class AbilityFactory_ChangeZone {
         	player.shuffle();
         
         for(Card c : fetched){
-        	origZone.remove(c);
         	if (destination.equals("Library")){
             	int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
             	AllZone.GameAction.moveToLibrary(c, libraryPos);
@@ -818,29 +814,19 @@ public class AbilityFactory_ChangeZone {
 	        	if (!CardFactoryUtil.canTarget(sa.getSourceCard(), tgtC))
 	        		continue;
 	        }
-	         
-	        originZone.remove(tgtC);
-	    	
+
 	    	Player pl = player;
 	    	if (!destination.equals("Battlefield"))
 	    		pl = tgtC.getOwner();
 	    	
-	    	if (tgtC.isToken())	// todo: moveTo should handle the isToken check
-	    		continue;
-	    	
 	    	if (destination.equals("Library")){
 	    		// library position is zero indexed
 	    		int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;        
- 
-	           PlayerZone library = AllZone.getZone(Constant.Zone.Library, pl);
-	           
-	           if (libraryPosition == -1)
-	        	   libraryPosition = library.size();
-	           
-	           AllZone.GameAction.moveToLibrary(tgtC, libraryPosition);
 
-	           if (params.containsKey("Shuffle"))	// for things like Gaea's Blessing
-	        	   player.shuffle();
+	    		AllZone.GameAction.moveToLibrary(tgtC, libraryPosition);
+
+	    		if (params.containsKey("Shuffle"))	// for things like Gaea's Blessing
+	    			player.shuffle();
 	    	}
 	    	else{
 		    	if (destination.equals("Battlefield")){

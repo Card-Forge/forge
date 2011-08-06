@@ -1560,16 +1560,15 @@ public class CardFactory_Instants {
                 	Player player = card.getController();
                     if(player.isHuman()) humanResolve();
                     else computerResolve();
+                    player.drawCard();
                 }
                 
                 public void computerResolve() {
                     //if top card of library is a land, put it on bottom of library
                     if(AllZone.Computer_Library.getCards().length != 0) {
                         Card top = AllZone.Computer_Library.get(0);
-                        if(top.isLand()) {
-                            AllZone.Computer_Library.remove(top);
-                            AllZone.Computer_Library.add(top);
-                        }
+                        if(top.isLand()) 
+                        	AllZone.GameAction.moveToBottomOfLibrary(top);
                     }
                 }//computerResolve()
                 
@@ -1580,81 +1579,18 @@ public class CardFactory_Instants {
                     if(library.getCards().length != 0) {
                         Card top = library.get(0);
                         
-                        Object o = top;
-                        while(o instanceof Card)
-                            o = AllZone.Display.getChoice("Do you want draw this card?", new Object[] {
-                                    top, "Yes", "No"});
-                        
-                        if(o.toString().equals("No")) {
-                            library.remove(top);
-                            library.add(top);
-                        }
-                    }//if
-                }//resolve()
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Worldly Tutor")) {
-            SpellAbility spell = new Spell(card) {
-                
-				private static final long serialVersionUID = -2388471137292697028L;
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("Put ").append(top.getName()).append(" on the Bottom of your Library?");
 
-				@Override
-                public boolean canPlayAI() {
-                    return 6 < AllZone.Phase.getTurn();
-                }
-                
-                @Override
-                public void resolve() {
-                	Player player = card.getController();
-                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
-                    else computerResolve();
-                }
-                
-                public void computerResolve() {
-                    CardList creature = new CardList(AllZone.Computer_Library.getCards());
-                    creature = creature.getType("Creature");
-                    if(creature.size() != 0) {
-                        Card c = creature.get(0);
-                        card.getController().shuffle();
-                        
-                        //move to top of library
-                        AllZone.Computer_Library.remove(c);
-                        AllZone.Computer_Library.add(c, 0);
-                        
-                        CardList list = new CardList();
-                        list.add(c);
-                        AllZone.Display.getChoiceOptional("Computer picked:", list.toArray());
-                    }
-                }//computerResolve()
-                
-                public void humanResolve() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    
-                    CardList list = new CardList(library.getCards());
-                    list = list.getType("Creature");
-                    
-                    if(list.size() != 0) {
-                        Object o = AllZone.Display.getChoiceOptional("Select a creature", list.toArray());
-                        
-                        card.getController().shuffle();
-                        if(o != null) {
-                            //put creature on top of library
-                            library.remove(o);
-                            library.add((Card) o, 0);
-                        }
+                        if (GameActionUtil.showYesNoDialog(top, sb.toString()))
+                            AllZone.GameAction.moveToBottomOfLibrary(top);
                     }//if
                 }//resolve()
             };
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        */
-        
+
         
         //*************** START *********** START **************************
         else if(cardName.equals("Wrap in Vigor")) {
@@ -1877,11 +1813,8 @@ public class CardFactory_Instants {
                         //pick best creature
                         Card c = CardFactoryUtil.AI_getBestCreature(list);
                         if(c == null) c = list.get(0);
-                        AllZone.Computer_Library.remove(c);
-                        AllZone.Computer_Hand.add(c);
-                        CardList cl = new CardList();
-                        cl.add(c);
-                        AllZone.Display.getChoiceOptional("Computer picked:", cl.toArray());
+                        AllZone.GameAction.moveToHand(c);
+                        AllZone.Display.getChoiceOptional("Computer picked:", c);
                     }
                 }
                 
@@ -2075,6 +2008,7 @@ public class CardFactory_Instants {
                 	Player player = card.getController();
                     if(player.equals(AllZone.HumanPlayer)) humanResolve();
                     else computerResolve();
+                    player.shuffle();
                 }
                 
                 public void humanResolve() {
@@ -2109,48 +2043,35 @@ public class CardFactory_Instants {
                     
                     Card choice = selectedCards.get(MyRandom.random.nextInt(2)); //comp randomly selects one of the three cards
                     
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    library.remove(choice);
-                    hand.add(choice);
-                    
                     selectedCards.remove(choice);
-                    Card toGrave1 = selectedCards.get(0);
-                    Card toGrave2 = selectedCards.get(1);
-                    library.remove(toGrave1);
-                    library.remove(toGrave2);
-                    selectedCards.remove(toGrave2);
-                    selectedCards.remove(toGrave2);
+                    AllZone.GameAction.moveToHand(choice);
                     
-                    grave.add(toGrave1);
-                    grave.add(toGrave2);
-                    
-                    AllZone.HumanPlayer.shuffle();
+                    for(Card trash : selectedCards)
+                    	AllZone.GameAction.moveToGraveyard(trash);
                 }
                 
                 public void computerResolve() {
-                    Card[] library = AllZone.Computer_Library.getCards();
-                    CardList list = new CardList(library);
+                    CardList list = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
                     CardList selectedCards = new CardList();
                     
                     //pick best creature
                     Card c = CardFactoryUtil.AI_getBestCreature(list);
                     if(c == null) {
-                        c = library[0];
+                        c = list.get(0);
                     }
                     list.remove(c);
                     selectedCards.add(c);
                     
                     c = CardFactoryUtil.AI_getBestCreature(list);
                     if(c == null) {
-                        c = library[0];
+                    	c = list.get(0);
                     }
                     list.remove(c);
                     selectedCards.add(c);
                     
                     c = CardFactoryUtil.AI_getBestCreature(list);
                     if(c == null) {
-                        c = library[0];
+                    	c = list.get(0);
                     }
                     list.remove(c);
                     selectedCards.add(c);
@@ -2161,15 +2082,10 @@ public class CardFactory_Instants {
                     Card choice = (Card) o;
                     
                     selectedCards.remove(choice);
-                    AllZone.Computer_Library.remove(choice);
-                    AllZone.Computer_Hand.add(choice);
+                    AllZone.GameAction.moveToHand(choice);
                     
-                    AllZone.Computer_Library.remove(selectedCards.get(0));
-                    AllZone.Computer_Library.remove(selectedCards.get(1));
-                    
-                    AllZone.Computer_Graveyard.add(selectedCards.get(0));
-                    AllZone.Computer_Graveyard.add(selectedCards.get(1));
-                    
+                    for(Card trash : selectedCards)
+                    	AllZone.GameAction.moveToGraveyard(trash);
                 }
                 
                 @Override
@@ -3494,7 +3410,7 @@ public class CardFactory_Instants {
         				Object o = AllZone.Display.getChoice(prompt[i], choices.toArray());
 						Card c1 = (Card)o;
 						if(i == 0) AllZone.GameAction.moveToHand(c1);
-						else if(i == 1) AllZone.GameAction.moveToTopOfLibrary(c1);
+						else if(i == 1) AllZone.GameAction.moveToLibrary(c1);
 						else if(i == 2) AllZone.GameAction.moveToBottomOfLibrary(c1);
 						
 						choices.remove(c1);

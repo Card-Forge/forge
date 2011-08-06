@@ -1301,8 +1301,7 @@ public class CombatUtil {
                                 enchantments.toArray());
                         if(o != null) {
                             Card crd = (Card) o;
-                            library.remove(crd);
-                            play.add(crd);
+                            AllZone.GameAction.moveToPlay(crd);
                             
                             if(crd.isAura()) {
                                 Object obj = null;
@@ -1344,8 +1343,7 @@ public class CombatUtil {
                         });
                         if(enchantments.size() > 0) {
                             Card card = CardFactoryUtil.AI_getBestEnchantment(enchantments, c, false);
-                            library.remove(card);
-                            play.add(card);
+                            AllZone.GameAction.moveToPlay(card);
                             c.getController().shuffle();
                             //we have to have cards like glorious anthem take effect immediately:
                             GameActionUtil.executeCardStateEffects();
@@ -1367,23 +1365,19 @@ public class CombatUtil {
                                 creatures.toArray());
                         if(o != null) {
                             Card card = (Card) o;
-                            grave.remove(card);
-                            play.add(card);
+                            AllZone.GameAction.moveToPlay(card);
                             
                             card.tap();
                             AllZone.Combat.addAttacker(card);
-                            //the card that gets put onto the battlefield tapped and attacking might trigger another ability:
-                            //however, this turns out to be incorrect rules-wise
-                            //checkDeclareAttackers(card); 
                         }
                     } else if(c.getController().isComputer()) {
                         Card card = CardFactoryUtil.AI_getBestCreature(creatures);
-                        grave.remove(card);
-                        play.add(card);
-                        
-                        card.tap();
-                        AllZone.Combat.addAttacker(card);
-                        //checkDeclareAttackers(card);
+                        if (card != null){
+	                        AllZone.GameAction.moveToPlay(card);
+	                        
+	                        card.tap();
+	                        AllZone.Combat.addAttacker(card);
+                        }
                     }
                     
                 } //if (creatures.size() > 0) 
@@ -1774,7 +1768,6 @@ public class CombatUtil {
             else if(c.getName().equals("Preeminent Captain") && !c.getCreatureAttackedThisCombat()) {
                 System.out.println("Preeminent Captain Attacks");
                 PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getController());
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
                 
                 CardList soldiers = new CardList(hand.getCards());
                 soldiers = soldiers.getType("Soldier");
@@ -1785,25 +1778,22 @@ public class CombatUtil {
                                 soldiers.toArray());
                         if(o != null) {
                             Card card = (Card) o;
-                            hand.remove(card);
-                            play.add(card);
+                            AllZone.GameAction.moveToPlay(card);
                             
                             card.tap();
                             AllZone.Combat.addAttacker(card);
-                            //the card that gets put onto the battlefield tapped and attacking might trigger another ability:
-                            //however, this turns out to be incorrect rules-wise
-                            //checkDeclareAttackers(card); 
+
                             card.setCreatureAttackedThisCombat(true);
                         }
                     } else if(c.getController().equals(AllZone.ComputerPlayer)) {
-                        Card card = soldiers.get(0);
-                        hand.remove(card);
-                        play.add(card);
-                        
-                        card.tap();
-                        AllZone.Combat.addAttacker(card);
-                        //checkDeclareAttackers(card);
-                        card.setCreatureAttackedThisCombat(true);
+                        Card card = CardFactoryUtil.AI_getBestCreature(soldiers);
+                        if (card != null){
+	                        AllZone.GameAction.moveToPlay(card);
+	                        
+	                        card.tap();
+	                        AllZone.Combat.addAttacker(card);
+	                        card.setCreatureAttackedThisCombat(true);
+                        }
                     }
                     
                 } //if (creatures.size() > 0) 
@@ -1940,21 +1930,19 @@ public class CombatUtil {
                 Player player = c.getController();
                 
                 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-                PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+
                 if(lib.size() > 0) {
                     CardList cl = new CardList();
                     cl.add(lib.get(0));
                     AllZone.Display.getChoiceOptional("Top card", cl.toArray());
-                };
-                Card top = lib.get(0);
-                if(top.getType().contains("Creature")) {
-                    player.gainLife(top.getBaseDefense(), c);
-                    player.loseLife(top.getBaseAttack(), c);
-                    hand.add(top);
-                    lib.remove(top);
-                };
-                
-
+	                Card top = lib.get(0);
+	                if(top.getType().contains("Creature")) {
+	                    player.gainLife(top.getBaseDefense(), c);
+	                    player.loseLife(top.getBaseAttack(), c);
+	
+	                    AllZone.GameAction.moveToHand(top);
+	                }
+                }
             }//Sapling of Colfenor
             
             else if(c.getName().equals("Goblin Guide") && !c.getCreatureAttackedThisCombat()) {
@@ -2360,11 +2348,7 @@ public class CombatUtil {
         } else if(a.getName().equals("Quagmire Lamprey")) {
             b.addCounter(Counters.M1M1, 1);
         } else if(a.getName().equals("Elven Warhounds")) {
-            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, b.getController());
-            PlayerZone library = AllZone.getZone(Constant.Zone.Library, b.getController());
-            
-            play.remove(b);
-            library.add(b, 0);
+        	AllZone.GameAction.moveToLibrary(b);
         } else if((a.getName().equals("Silkenfist Order") || a.getName().equals("Silkenfist Fighter"))
                 && !a.getCreatureBlockedThisCombat()) {
             a.untap();

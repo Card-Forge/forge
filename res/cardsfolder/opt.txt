@@ -1,8 +1,7 @@
 Name:Opt
 ManaCost:U
 Types:Instant
-Text:Look at the top card of your library. You may put that card on the bottom of your library.
-K:Draw a card.
+Text:Look at the top card of your library. You may put that card on the bottom of your library. Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22988.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/64.jpg

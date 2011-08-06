@@ -138,7 +138,7 @@ public class HumanPlayer extends Player{
     		AllZone.GameAction.moveToBottomOfLibrary(c);
     	}
     	else{
-    		AllZone.GameAction.moveToTopOfLibrary(c);
+    		AllZone.GameAction.moveToLibrary(c);
     	}
 	}
 	

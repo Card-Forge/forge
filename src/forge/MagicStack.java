@@ -503,7 +503,7 @@ public class MagicStack extends MyObservable {
 						}
 						else
 						{
-							AllZone.GameAction.moveToTopOfLibrary(revealed);
+							AllZone.GameAction.moveToLibrary(revealed);
 						}
 					}
 					else
@@ -532,7 +532,7 @@ public class MagicStack extends MyObservable {
 						}
 						else
 						{
-							AllZone.GameAction.moveToTopOfLibrary(revealed);
+							AllZone.GameAction.moveToLibrary(revealed);
 						}
 					}
 					else

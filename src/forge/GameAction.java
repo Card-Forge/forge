@@ -45,29 +45,26 @@ public class GameAction {
         else{
         	//System.out.println(c.getName() + " " + zone.getZoneName());
         }
-        
-        Card moving;
-        if (!c.isToken() && p != null && p.is(Constant.Zone.Battlefield) && !zone.is(Constant.Zone.Battlefield)){
-        	// If a nontoken card is moving from the Battlefield, to non-Battlefield zone copy it
-        	moving = AllZone.CardFactory.copyCard(c); 
-        }
-        else{
-        	moving = c;
-        }
+        Card moving = c;
+        if (!c.isToken()){
+	        
+	     // If a nontoken card is moving from the Battlefield, to non-Battlefield zone copy it
+	        if (p != null && p.is(Constant.Zone.Battlefield) && !zone.is(Constant.Zone.Battlefield))
+	        	moving = AllZone.CardFactory.copyCard(c);         
+	
+	        moving.setUnearthed(c.isUnearthed());	// this might be unnecessary
+	        if (c.wasSuspendCast())			// these probably can be moved back to SubtractCounters
+	        	moving = addSuspendTriggers(moving);
 
-        moving.setUnearthed(c.isUnearthed());	// this might be unnecessary
-        if (c.wasSuspendCast()){				// these probably can be moved back to SubtractCounters
-        	moving = addSuspendTriggers(moving);
+        	// todo: if zone is battlefied and prevZone is battlefield, temporarily disable enters battlefield triggers
+        	zone.add(moving);
         }
-
-        // todo: if zone is battlefied and prevZone is battlefield, temporarily disable enters battlefield triggers
-        zone.add(moving);
         
         //Run triggers        
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         // Should the MovedCard be the LKI, aka the original card that came in, not the card that's leaving?
-        // runParams.put("MovedCard", c);
-        runParams.put("MovedCard",moving);
+        runParams.put("MovedCard", c);
+        //runParams.put("MovedCard",moving);
         runParams.put("Origin", prevZone);
         runParams.put("Destination", zone.getZoneName());
         AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
@@ -193,14 +190,9 @@ public class GameAction {
     }
     
     public void moveToBottomOfLibrary(Card c) {
-    	int pos = AllZoneUtil.getPlayerCardsInLibrary(c.getOwner()).size();
-    	moveToLibrary(c, pos);
+    	moveToLibrary(c, -1);
     }
-    
-    public void moveToTopOfLibrary(Card c) {
-    	moveToLibrary(c, 0);
-    }
-    
+
     public void moveToLibrary(Card c) {
     	moveToLibrary(c, 0);
     }
@@ -211,6 +203,9 @@ public class GameAction {
         
         if(p != null) p.remove(c);
         if(!c.isToken()) c = AllZone.CardFactory.copyCard(c);
+        
+        if (libPosition == -1)
+        	libPosition = library.getCards().length;
         
         library.add(c, libPosition);
     }
@@ -3311,9 +3306,8 @@ public class GameAction {
             Card firstLand = land.remove(0);
             if (tapFirstLand)
             	firstLand.tap();
-            
-            firstZone.add(firstLand);
-            AllZone.Computer_Library.remove(firstLand);
+
+            AllZone.GameAction.moveTo(firstZone, firstLand);
             
             //branch 3
             if(Zone2.trim().length() != 0 && (land.size() != 0)) {
@@ -3321,8 +3315,7 @@ public class GameAction {
                 Card secondLand = land.remove(0);
                 if (tapSecondLand)
                 	secondLand.tap();
-                secondZone.add(secondLand);
-                AllZone.Computer_Library.remove(secondLand);
+                AllZone.GameAction.moveTo(secondZone, secondLand);
             }
         }
     }

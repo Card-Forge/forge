@@ -7049,28 +7049,20 @@ public class GameActionUtil {
 	}// upkeep_CheckEmptyDeck_Lose
 
 	private static void upkeep_AI_Aluren() {
-		PlayerZone AIHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
-		PlayerZone AIPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+		CardList alurens = AllZoneUtil.getCardsInPlay("Aluren");
+		if (alurens.size() == 0)
+			return;
+		
+		CardList inHand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
+		inHand = inHand.getType("Creature");
+		CardList playable = new CardList();
 
-		CardList list = AllZoneUtil.getCardsInPlay("Aluren");
+		for(Card c : inHand)
+			if(CardUtil.getConvertedManaCost(c.getManaCost()) <= 3) 
+				playable.add(c);
 
-		CardList creatures = new CardList();
-
-		for(int i = 0; i < AIHand.size(); i++) {
-			if(AIHand.get(i).getType().contains("Creature")
-					&& CardUtil.getConvertedManaCost(AIHand.get(i).getManaCost()) <= 3) creatures.add(AIHand.get(i));
-		}
-
-		if(list.size() > 0 && creatures.size() > 0) {
-			for(int i = 0; i < creatures.size(); i++) {
-				Card c = creatures.getCard(i);
-				AIHand.remove(c);
-				AIPlay.add(c);
-				c.setSickness(true);
-
-			}
-		}
-
+		for(Card c : playable)
+			AllZone.GameAction.playSpellAbilityForFree(c.getSpellPermanent());
 	}
 
     private static void upkeep_Land_Tax() {
@@ -11253,7 +11245,7 @@ public class GameActionUtil {
 						                		//card stays in hand
 						                	}
 						                	else {
-						                		AllZone.GameAction.moveToTopOfLibrary(card);
+						                		AllZone.GameAction.moveToLibrary(card);
 						                	}
 						                	stop();
 						                	////////////////////////////////////

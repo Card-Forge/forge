@@ -3358,10 +3358,10 @@ public class CardFactory implements NewConstants {
         				else
         				{
         					if (Destination.equals("TopofLibrary"))
-        						AllZone.GameAction.moveToTopOfLibrary(tgtC);
+        						AllZone.GameAction.moveToLibrary(tgtC);
         					else if (Destination.equals("ShuffleIntoLibrary"))
         					{
-        						AllZone.GameAction.moveToTopOfLibrary(tgtC);
+        						AllZone.GameAction.moveToLibrary(tgtC);
         						tgtC.getOwner().shuffle();
         					}
         					else if (Destination.equals("Exile"))
@@ -3538,10 +3538,10 @@ public class CardFactory implements NewConstants {
                         Card c = all.get(i);
                         if(c.isToken()) AllZone.getZone(c).remove(c);
                         else {  
-					if(Destination.equals("TopofLibrary")) AllZone.GameAction.moveToTopOfLibrary(c);
+					if(Destination.equals("TopofLibrary")) AllZone.GameAction.moveToLibrary(c);
 					else if(Destination.equals("BottomofLibrary")) AllZone.GameAction.moveToBottomOfLibrary(c);
 					else if(Destination.equals("ShuffleIntoLibrary")) {
-							AllZone.GameAction.moveToTopOfLibrary(c);
+							AllZone.GameAction.moveToLibrary(c);
 							c.getOwner().shuffle();
 						}
 					else if(Destination.equals("Exile")) AllZone.GameAction.exile(c); 
@@ -3906,7 +3906,7 @@ public class CardFactory implements NewConstants {
                             }
                             else if (Destination.equals("TopofLibrary")) {
                                 // PlayerZone zone = AllZone.getZone(Constant.Zone.Play, player);
-                                AllZone.GameAction.moveToTopOfLibrary(c);
+                                AllZone.GameAction.moveToLibrary(c);
                             }
                         }
                     }// for
@@ -5867,7 +5867,7 @@ public class CardFactory implements NewConstants {
                 	Player player = card.getController();
                     
                     player.drawCard();
-                    AllZone.GameAction.moveToTopOfLibrary(card); //move divining top to top of library
+                    AllZone.GameAction.moveToLibrary(card); //move divining top to top of library
                     card.untap();
                     
                 }
@@ -6107,7 +6107,7 @@ public class CardFactory implements NewConstants {
     	                Object discard = AllZone.Display.getChoice("Select Card to place on top of library.", targetHand.toArray());
     	                
                         Card card = (Card)discard;
-                        AllZone.GameAction.moveToTopOfLibrary(card);
+                        AllZone.GameAction.moveToLibrary(card);
                     }
                     else if (target == AllZone.ComputerPlayer){
                     	AllZone.ComputerPlayer.handToLibrary(1, "Top");
@@ -7800,7 +7800,7 @@ public class CardFactory implements NewConstants {
         						while(exiled.size() > 0) {
         							Object o = AllZone.Display.getChoice("Put a card on top of your library.", exiled.toArray());
         							Card c1 = (Card)o;
-        							AllZone.GameAction.moveToTopOfLibrary(c1);
+        							AllZone.GameAction.moveToLibrary(c1);
         							exiled.remove(c1);
         						}
         						
