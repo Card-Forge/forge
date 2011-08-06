@@ -351,6 +351,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Bela Lugosi 3   		hard   	Rares' Vampire deck, B creatures, little to no spells");
         sb.append("\r\n");
+        sb.append("Betty Rubble 3		hard   	Indicatie's Summer Bloom deck with mods, features Plant + Eldrazi Spawn tokens");
+        sb.append("\r\n");
         sb.append("Blackbeard 3		hard	Soldiers with Preeminent Captain, WoG and Armageddon");
         sb.append("\r\n");
         sb.append("Boba Fett 3		hard	Dragons, Chandra Nalaar, Crucible of Fire and Dragon Roost");
