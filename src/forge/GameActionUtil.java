@@ -93,9 +93,9 @@ public class GameActionUtil {
 		
 		upkeep_Oversold_Cemetery();
 		upkeep_Nether_Spirit();
-		upkeep_Nettletooth_Djinn();
-		upkeep_Fledgling_Djinn();
-		upkeep_Juzam_Djinn();
+		//upkeep_Nettletooth_Djinn();
+		//upkeep_Fledgling_Djinn();
+		//upkeep_Juzam_Djinn();
 		upkeep_Grinning_Demon();
 		upkeep_Moroii();
 		upkeep_Vampire_Lacerator();
@@ -8929,7 +8929,8 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Dragon_Broodmother()
-
+	
+	/*
 	private static void upkeep_Serendib_Efreet() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
@@ -8954,7 +8955,7 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Serendib_Efreet()
-
+	
 	private static void upkeep_Nettletooth_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
@@ -8979,6 +8980,7 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Nettletooth_Djinn()
+	*/
 	
 	private static void draw_Howling_Mine(Player player) {
 		CardList list = AllZoneUtil.getCardsInPlay("Howling Mine");
@@ -9522,7 +9524,8 @@ public class GameActionUtil {
 			}
 		}// for
 	}// upkeep_Grinning_Demon()
-
+	
+	/*
 	private static void upkeep_Juzam_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Juzam Djinn");
@@ -9569,6 +9572,7 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Fledgling_Djinn()
+	*/
 	
     private static void upkeep_Creakwood_Liege() {
         final Player player = AllZone.Phase.getPlayerTurn();
