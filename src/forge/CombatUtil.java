@@ -505,7 +505,7 @@ public class CombatUtil {
        int sum = 0;
  	  for(int i = 0; i < attackers.size(); i++) {
  		  Card a = attackers.get(i);
- 		  if (!a.hasKeyword("Infect")) sum += attacked.staticDamagePrevention(getAttack(a), a, true);
+ 		  if (!a.hasKeyword("Infect")) sum += attacked.predictDamage(getAttack(a), a, true);
  	  }
 
        return sum;
@@ -517,7 +517,7 @@ public class CombatUtil {
        int sum = 0;
  	  for(int i = 0; i < attackers.size(); i++) {
  		  Card a = attackers.get(i);
- 		  int damage = attacked.staticDamagePrevention(getAttack(a), a, true);
+ 		  int damage = attacked.predictDamage(getAttack(a), a, true);
  		  if (a.hasKeyword("Infect")) sum += damage;
  		  if (a.hasKeyword("Poisonous") && damage > 0) sum += a.getKeywordMagnitude("Poisonous");
  	  }
@@ -599,9 +599,9 @@ public class CombatUtil {
         }
         
         // consider static Damage Prevention
-        defenderDamage = attacker.staticDamagePrevention(defenderDamage, defender, true);
+        defenderDamage = attacker.predictDamage(defenderDamage, defender, true);
         
-        if (defender.hasKeyword("Double Strike")) defenderDamage += attacker.staticDamagePrevention(defenderDamage, defender, true);
+        if (defender.hasKeyword("Double Strike")) defenderDamage += attacker.predictDamage(defenderDamage, defender, true);
         
         return defenderDamage;
     }
@@ -681,9 +681,9 @@ public class CombatUtil {
             attackerDamage = attacker.getNetDefense() + attBushidoMagnitude;
         }
         
-        // consider static Damage Prevention
-        defenderDamage = attacker.staticDamagePrevention(defenderDamage, defender, true);
-        attackerDamage = defender.staticDamagePrevention(attackerDamage, attacker, true);
+        // consider Damage Prevention/Replacement
+        defenderDamage = attacker.predictDamage(defenderDamage, defender, true);
+        attackerDamage = defender.predictDamage(attackerDamage, attacker, true);
         
         int defenderLife = defender.getKillDamage() - flankingMagnitude + defBushidoMagnitude;
         int attackerLife = attacker.getKillDamage() + attBushidoMagnitude;
@@ -763,9 +763,9 @@ public class CombatUtil {
             attackerDamage = attacker.getNetDefense() + attBushidoMagnitude;
         }
         
-        // consider static Damage Prevention
-        defenderDamage = attacker.staticDamagePrevention(defenderDamage, defender, true);
-        attackerDamage = defender.staticDamagePrevention(attackerDamage, attacker, true);
+        // consider Damage Prevention/Replacement
+        defenderDamage = attacker.predictDamage(defenderDamage, defender, true);
+        attackerDamage = defender.predictDamage(attackerDamage, attacker, true);
         
         int defenderLife = defender.getKillDamage() - flankingMagnitude + defBushidoMagnitude;
         int attackerLife = attacker.getKillDamage() + attBushidoMagnitude;

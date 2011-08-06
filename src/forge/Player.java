@@ -229,6 +229,16 @@ public abstract class Player extends MyObservable{
         }
 	}
 	
+    public int predictDamage(final int damage, final Card source, final boolean isCombat) {
+    	
+    	int restDamage = damage;
+    	
+    	restDamage = staticReplaceDamage(restDamage, source, isCombat);
+    	restDamage = staticDamagePrevention(restDamage, source, isCombat);
+    	
+    	return restDamage;
+    }
+	
 	//This should be also usable by the AI to forecast an effect (so it must not change the game state) 
 	public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
 		
@@ -292,13 +302,22 @@ public abstract class Player extends MyObservable{
 		return restDamage;
 	}
 	
-	public int replaceDamage(final int damage, Card source, boolean isCombat) {
+	//This should be also usable by the AI to forecast an effect (so it must not change the game state)
+	public int staticReplaceDamage(final int damage, Card source, boolean isCombat) {
     	
     	int restDamage = damage;
     	
     	if( AllZoneUtil.isCardInPlay("Furnace of Rath")) {
-			
-    		restDamage += restDamage;
+			int amount = AllZoneUtil.getCardsInPlay("Furnace of Rath").size();
+			for (int i = 0; i < amount;i++)
+				restDamage += restDamage;
+		}
+    	
+    	if( AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell()) {
+    		int amount = AllZoneUtil.getCardsInPlay("Benevolent Unicorn").size();
+			for (int i = 0; i < amount;i++)
+				if ( restDamage > 0 )	
+					restDamage -= 1;
 		}
     	
     	if( AllZoneUtil.isCardInPlay("Divine Presence") && restDamage > 3) {
@@ -310,6 +329,13 @@ public abstract class Player extends MyObservable{
 			
     		restDamage = 2;
 		}
+    	
+    	return restDamage;
+    }
+	
+	public int replaceDamage(final int damage, Card source, boolean isCombat) {
+    	
+    	int restDamage = staticReplaceDamage(damage, source, isCombat);
     	
     	if( AllZoneUtil.isCardInPlay("Crumbling Sanctuary")) {
 			for(int i = 0; i < restDamage; i++) {

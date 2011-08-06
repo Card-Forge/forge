@@ -2859,6 +2859,17 @@ public class Card extends MyObservable {
         }
     }
     
+    //This function helps the AI calculate the actual amount of damage an effect would deal
+    public int predictDamage(final int damage, final Card source, final boolean isCombat) {
+    	
+    	int restDamage = damage;
+    	
+    	restDamage = staticReplaceDamage(restDamage, source, isCombat);
+    	restDamage = staticDamagePrevention(restDamage, source, isCombat);
+    	
+    	return restDamage;
+    }
+    
 	//This should be also usable by the AI to forecast an effect (so it must not change the game state) 
 	public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
 		
@@ -2900,8 +2911,12 @@ public class Card extends MyObservable {
     		if((AllZoneUtil.isCardInPlay("Light of Sanction", player) && source.getController().isPlayer(player)))
     			return 0;
     	
-    		if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell() 
-    			&& restDamage > 0) restDamage = restDamage - 1;
+    		if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell()&& restDamage > 0) {
+        		int amount = AllZoneUtil.getCardsInPlay("Plated Pegasus").size();
+				for (int i = 0; i < amount;i++)
+					if ( restDamage > 0 )	
+						restDamage -= 1;
+    		}
     		
     		if (isType("Cleric") && AllZoneUtil.isCardInPlay("Daunting Defender", player))
     			restDamage = restDamage - AllZoneUtil.getPlayerCardsInPlay(player, "Daunting Defender").size();
@@ -2946,13 +2961,22 @@ public class Card extends MyObservable {
     	return restDamage;
     }
     
-    public int replaceDamage(final int damage, Card source, boolean isCombat) {
+	//This should be also usable by the AI to forecast an effect (so it must not change the game state)
+    public int staticReplaceDamage(final int damage, Card source, boolean isCombat) {
     	
     	int restDamage = damage;
     	
     	if( AllZoneUtil.isCardInPlay("Furnace of Rath")) {
-			
-    		restDamage += restDamage;
+			int amount = AllZoneUtil.getCardsInPlay("Furnace of Rath").size();
+			for (int i = 0; i < amount;i++)
+				restDamage += restDamage;
+		}
+    	
+    	if( AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell() && isCreature() ) {
+    		int amount = AllZoneUtil.getCardsInPlay("Benevolent Unicorn").size();
+			for (int i = 0; i < amount;i++)
+				if ( restDamage > 0 )	
+					restDamage -= 1;
 		}
     	
     	if( AllZoneUtil.isCardInPlay("Divine Presence") && restDamage > 3) {
@@ -2961,9 +2985,22 @@ public class Card extends MyObservable {
 		}
     	
     	if(getName().equals("Phytohydra")) {
+    		return 0;
+    	}
+    	
+    	return restDamage;
+    }
+    
+    public int replaceDamage(final int damage, Card source, boolean isCombat) {
+    	
+    	int restDamage = damage;
+    	
+    	if(getName().equals("Phytohydra")) {
     		addCounter(Counters.P1P1, restDamage);
     		return 0;
     	}
+    	
+    	restDamage = staticReplaceDamage(restDamage, source, isCombat);
     	
     	if(getName().equals("Lichenthrope")) {
     		addCounter(Counters.M1M1, restDamage);

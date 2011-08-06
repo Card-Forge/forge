@@ -1,0 +1,9 @@
+Name:Forethought Amulet
+ManaCost:5
+Types:Artifact
+Text:If an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage to you instead.
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 3
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/forethought_amulet.jpg
+End
