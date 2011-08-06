@@ -1,0 +1,9 @@
+Name:Folk of An-Havva
+ManaCost:G
+Types:Creature Human
+Text:no text
+PT:1/1
+K:WheneverKeyword:Blocks:Self:Play:StatsPumpEOT/2/0:Self:ASAP:No_Condition:No Special Condition:Whenever CARDNAME blocks, it gets +2/+0 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/folk_of_an_havva.jpg
+End
