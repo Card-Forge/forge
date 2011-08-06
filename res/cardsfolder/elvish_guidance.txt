@@ -9,4 +9,5 @@ SVar:X:Count$Valid Elf
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_guidance.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/255.jpg
 End

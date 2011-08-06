@@ -9,4 +9,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodcloaker.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/134.jpg
 End

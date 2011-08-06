@@ -7,4 +7,5 @@ K:Morph:Return<1/Bird>
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raven_guild_initiate.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/46.jpg
 End

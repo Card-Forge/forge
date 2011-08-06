@@ -8,4 +8,5 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ EnchantedController | TriggerZ
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | SacValid$ Card.AttachedBy | Defined$ TriggeredPlayer | SacMessage$ enchanted creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lingering_death.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/69.jpg
 End

@@ -7,4 +7,5 @@ SVar:X:Count$MaxCMCYouCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rush_of_knowledge.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/49.jpg
 End

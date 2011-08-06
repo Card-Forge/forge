@@ -6,4 +6,5 @@ A:AB$ Mana | Cost$ T | Produced$ 2 | IsPresent$ Land.YouCtrl | PresentCompare$ G
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_of_the_false_god.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/143.jpg
 End

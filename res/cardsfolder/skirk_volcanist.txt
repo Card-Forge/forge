@@ -11,4 +11,5 @@ SVar:DBDamage3:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ target
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_volcanist.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/104.jpg
 End

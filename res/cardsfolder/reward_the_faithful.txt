@@ -6,4 +6,5 @@ A:SP$ GainLife | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player |
 SVar:X:Count$MaxCMCYouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reward_the_faithful.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/22.jpg
 End

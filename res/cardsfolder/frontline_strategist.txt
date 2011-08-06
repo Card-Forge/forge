@@ -9,4 +9,5 @@ SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.nonSoldier | KW$ HI
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frontline_strategist.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/15.jpg
 End

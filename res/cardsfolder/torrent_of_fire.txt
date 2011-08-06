@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select 
 SVar:X:Count$MaxCMCYouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/torrent_of_fire.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/107.jpg
 End
