@@ -3,6 +3,8 @@ ManaCost:3 G
 Types:Creature Elf Shaman
 Text:no text
 PT:2/2
+A:AB$PutCounter | Cost$ T | Tgt$ TgtC | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Put a +1/+1 counter on target creature for each Elf you control.
+SVar:X:Count$Valid Elf.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immaculate_magistrate.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/219.jpg
