@@ -798,7 +798,7 @@ public class AbilityFactory_ZoneAffecting {
 			sb.append("discards (");
 		
 		if(mode.equals("Hand"))
-			sb.append("Hand");
+			sb.append("his or her hand");
 		else 
 			sb.append(AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa));
 			
