@@ -3768,7 +3768,7 @@ public class GameActionUtil {
 			};//sacrificeCreature
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append(eve.getName()).append(" - remove a scream counter and return creatures to play.");
+			sb.append(eve.getName()).append(" - remove a scream counter and return creatures to the battlefield.");
 			hallow.setStackDescription(sb.toString());
 			if(AllZone.GameAction.isCardExiled(eve)) {
 				AllZone.Stack.add(hallow);
@@ -5895,7 +5895,7 @@ public class GameActionUtil {
     				
     				StringBuilder sb = new StringBuilder();
     				sb.append(darien.getName()).append(" - ").append(darien.getController());
-    				sb.append(" puts ").append(damage).append(" Soldier tokens in play.");
+    				sb.append(" puts ").append(damage).append(" Soldier tokens onto the battlefield.");
     				ability.setStackDescription(sb.toString());
     				
     				AllZone.Stack.add(ability);
@@ -8807,7 +8807,7 @@ public class GameActionUtil {
 						}
 					}
 				};// Ability
-				ability.setStackDescription("Debtors' Knell returns creature from graveyard to play");
+				ability.setStackDescription("Debtors' Knell returns creature from graveyard to the battlefield.");
 				AllZone.Stack.add(ability);
 			}//for
 		} // if creatures > 0
@@ -8942,7 +8942,7 @@ public class GameActionUtil {
 				}
 
 			};// Ability
-			ability.setStackDescription("Reya returns creature from graveyard back to play");
+			ability.setStackDescription("Reya returns creature from graveyard to the battlefield.");
 			AllZone.Stack.add(ability);
 		} // if creatures > 0
 	} // reya
@@ -12859,14 +12859,14 @@ public class GameActionUtil {
 			// Holds Wirewood_Hivemaster's in play
 			CardList hivemasterList = current.getName("Wirewood Hivemaster");
 
-			// Holds Wirewood_Hivemaster's that are new to play
+			// Holds Wirewood_Hivemaster's that are new the battlefield
 			CardList newHivemaster = new CardList();
 
-			// Go through the list of Wirewood_Hivemaster's in play
+			// Go through the list of Wirewood_Hivemaster's on the battlefield
 			for(int i = 0; i < hivemasterList.size(); i++) {
 				Card c = hivemasterList.get(i);
 
-				// Check to see which Wirewood_Hivemaster's in play are new
+				// Check to see which Wirewood_Hivemaster's on the battlefield are new
 				if(!wirewood.contains(c)) {
 					newHivemaster.add(c);
 					hivemasterList.remove(c);

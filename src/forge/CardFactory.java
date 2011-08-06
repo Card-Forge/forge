@@ -5310,7 +5310,7 @@ public class CardFactory implements NewConstants {
                             }
                         }//resolve()
                     };//SpellAbility
-                    ability.setStackDescription("Oblivion Ring - returning permanent to play.");
+                    ability.setStackDescription("Oblivion Ring - returning permanent to the battlefield.");
                     AllZone.Stack.add(ability);
                 }//execute()
             };//Command
@@ -5399,7 +5399,7 @@ public class CardFactory implements NewConstants {
                         }//resolve()
                     };//SpellAbility
                     StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - returning creature to play");
+                    sb.append(card.getName()).append(" - returning creature to the battlefield");
                     ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -5703,7 +5703,7 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = 4511445425867383336L;
                 
                 public void execute() {
-                    //put cards removed by Necropotence into player's hand
+                    //put cards removed by Necropotence into the player's hand
                     if(necroCards.size() > 0) {
                         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                         
@@ -7352,7 +7352,7 @@ public class CardFactory implements NewConstants {
         					}//if
         				}//resolve()
         			};//SpellAbility
-        			ability.setStackDescription("Journey To Nowhere - returning creature to play.");
+        			ability.setStackDescription("Journey To Nowhere - returning creature to the battlefield.");
         			AllZone.Stack.add(ability);
         		}//execute()
         	};//Command

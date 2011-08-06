@@ -818,10 +818,10 @@ public class CardFactory_Creatures {
             };//SpellAbility
             a1.makeUntapAbility();
             card.addSpellAbility(a1);
-            a1.setDescription("1 W W, Untap:  Return target creature card with converted mana cost 3 or less from your graveyard to play.");
+            a1.setDescription("1 W W, Untap:  Return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.");
             
             StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - return target creature card with converted mana cost 3 or less from your graveyard to play.");
+            sb.append(card.getName()).append(" - return target creature card with converted mana cost 3 or less from your graveyard to the battlefield.");
             a1.setStackDescription(sb.toString());
             
             a1.setBeforePayMana(new Input_PayManaCost(a1));
@@ -3633,7 +3633,7 @@ public class CardFactory_Creatures {
                     };//SpellAbility
                     
                     StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - returning creature to play");
+                    sb.append(card.getName()).append(" - returning creature to the battlefield");
                     ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -3756,7 +3756,7 @@ public class CardFactory_Creatures {
                             }
                         }//resolve()
                     };//SpellAbility
-                    ability.setStackDescription("Faceless Butcher - returning creature to play");
+                    ability.setStackDescription("Faceless Butcher - returning creature to the battlefield");
                     AllZone.Stack.add(ability);
                 }//execute()
             };//Command
@@ -4849,7 +4849,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -2433442359225521472L;
                 
                 public void execute() {
-                    AllZone.Stack.add(new Ability(card, "0", "Adarkar Valkyrie - Return " + target[0] + " from graveyard to play") {
+                    AllZone.Stack.add(new Ability(card, "0", "Adarkar Valkyrie - Return " + target[0] + " from graveyard to the battlefield") {
                         @Override
                         public void resolve() {
                             PlayerZone grave = AllZone.getZone(target[0]);
@@ -4901,7 +4901,7 @@ public class CardFactory_Creatures {
             
             StringBuilder sb = new StringBuilder();
             sb.append("tap: When target creature other than Adarkar Valkyrie is put into a ");
-            sb.append("graveyard this turn, return that card to play under your control.");
+            sb.append("graveyard this turn, return that card to the battlefield under your control.");
             ability.setDescription(sb.toString());
         }//*************** END ************ END **************************
         
@@ -11455,7 +11455,7 @@ public class CardFactory_Creatures {
 
 				public void execute() {
 					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - return up to 2 creatures with power < 2 from graveyard to play.");
+					sb.append(card.getName()).append(" - return up to 2 creatures with power < 2 from graveyard to the battlefield.");
 					ability.setStackDescription(sb.toString());
 					
         			AllZone.Stack.add(ability);

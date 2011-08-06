@@ -223,7 +223,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 	};
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(source).append(" - ").append(seedLand.getController());
-                	sb.append(" puts a 1/1 green Snake token in play");
+                	sb.append(" puts a 1/1 green Snake token onto the battlefield.");
                 	ability.setStackDescription(sb.toString());
                 	
                 	AllZone.Stack.add(ability);

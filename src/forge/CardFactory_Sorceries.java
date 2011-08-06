@@ -1274,7 +1274,7 @@ public class CardFactory_Sorceries {
 	                    	  int Spells = Pile1.size();
 	                    	  for( int i = 0; i < Spells; i++) {
 	                    		  if(stop2 == false) {
-	                    			  Object check = AllZone.Display.getChoiceOptional("Select spells to play in reserve order: ", Pile1.toArray());
+	                    			  Object check = AllZone.Display.getChoiceOptional("Select spells to play in reverse order: ", Pile1.toArray());
 	                    			  if(check != null) {
 	                    				  if(((Card) check).isLand() == true) {
 	                    					  if(CardFactoryUtil.canHumanPlayLand()) {
@@ -1296,7 +1296,7 @@ public class CardFactory_Sorceries {
 	                    	  int Spells = Pile2.size();
 	                    	  for( int i = 0; i < Spells; i++) {
 	                    		  if(stop2 == false) {
-	                    			  Object check = AllZone.Display.getChoiceOptional("Select spells to play in reserve order: ", Pile2.toArray());
+	                    			  Object check = AllZone.Display.getChoiceOptional("Select spells to play in reverse order: ", Pile2.toArray());
 	                    			  if(check != null) {
 	                    				  if(((Card) check).isLand() == true) {
 	                    					  if(CardFactoryUtil.canHumanPlayLand()) {
@@ -1367,7 +1367,7 @@ public class CardFactory_Sorceries {
                         }
                         
                         if(dragons.size() != 0) {
-                            Object o = AllZone.Display.getChoiceOptional("Select an Dragon to put onto the battlefield", dragons.toArray());
+                            Object o = AllZone.Display.getChoiceOptional("Select a Dragon to put onto the battlefield", dragons.toArray());
                             
                             card.getController().shuffle();
                             if(o != null) {
