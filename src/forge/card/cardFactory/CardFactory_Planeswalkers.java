@@ -1037,7 +1037,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return card.getCounters(Counters.LOYALTY) < 13 && AllZone.Human_Library.size() > 2;
+                    return card.getCounters(Counters.LOYALTY) < 12 && AllZone.Human_Library.size() > 2;
                 }
                 
                 @Override
@@ -1125,6 +1125,11 @@ class CardFactory_Planeswalkers {
                 }//resolve()
                 
                 @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
                 public boolean canPlay() {
                     return card.getCounters(Counters.LOYALTY) >= 1
                             && AllZone.getZone(card).is(Constant.Zone.Battlefield)
@@ -1167,7 +1172,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlayAI() {
                     int libSize = AllZone.Human_Library.size();
                     int handSize = AllZone.Human_Hand.size();
-                    return libSize > 10 && (libSize > handSize);
+                    return libSize > 0 && (libSize >= handSize);
                 }
                 
                 @Override
