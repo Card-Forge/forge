@@ -977,13 +977,13 @@ public class GameAction {
                            	if(Conditions[y].contains("Type") && !Conditions[y].contains("OneTypeOfMany")) {
                                 String TypeParse = Conditions[y];                
                                 String Type[] = TypeParse.split("/");
-                                for(int z = 0; z < Type.length - 1; z++) if(!(c.getType()).contains(Type[z + 1])) k[4] = "Null";     		
+                                for(int z = 0; z < Type.length - 1; z++) if(!c.isType(Type[z + 1])) k[4] = "Null";     		
                                      	}
                            	if(Conditions[y].contains("OneTypeOfMany")) {
                            		boolean Nullified = true;
                                 String TypeParse = Conditions[y];                
                                 String Type[] = TypeParse.split("/");
-                                for(int z = 0; z < Type.length - 1; z++) if((c.getType()).contains(Type[z + 1])) Nullified = false;   
+                                for(int z = 0; z < Type.length - 1; z++) if(c.isType(Type[z + 1])) Nullified = false;   
                                 if(Nullified == true) k[4] = "Null";
                                      	}
                            	if(Conditions[y].contains("Color")) {
