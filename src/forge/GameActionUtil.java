@@ -4362,7 +4362,6 @@ public class GameActionUtil {
 			playerCombatDamage_PoisonCounter(c, 1);
     
     	if(c.getName().equals("Nicol Bolas")) playerCombatDamage_Nicol_Bolas(c);
-		else if(c.getName().equals("Thieving Magpie")|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
 		else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
 			playerCombatDamage_Whirling_Dervish(c);
 		else if(AllZoneUtil.isCardInPlay("Living Artifact", player)) execute_Living_Artifact(player, damage);
@@ -4479,16 +4478,9 @@ public class GameActionUtil {
         }//isEquipped
 
 		
-		//if(c.getName().equals("Dimir Cutpurse")) playerCombatDamage_Dimir_Cutpurse(c);
 		if(c.getName().equals("Ghastlord of Fugue")) playerCombatDamage_Ghastlord_of_Fugue(c);
 		else if(c.getName().equals("Garza Zol, Plague Queen")) playerCombatDamage_May_draw(c);
-		else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c); 
-		//else if(c.getName().equals("Guul Draz Specter")) opponent_Discard(c, 1);
-		//else if(c.getName().equals("Chilling Apparition")) opponent_Discard(c, 1);
-		//else if(c.getName().equals("Sedraxis Specter")) opponent_Discard(c, 1);
-		//else if(c.getName().equals("Headhunter")) opponent_Discard(c, 1);
-		//else if(c.getName().equals("Riptide Pilferer")) opponent_Discard(c, 1);
-		else if(c.getName().equals("Shadowmage Infiltrator")) playerCombatDamage_Shadowmage_Infiltrator(c);
+		else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c);
 		else if(c.getName().equals("Augury Adept")) playerCombatDamage_Augury_Adept(c);
 		else if(c.getName().equals("Spawnwrithe")) playerCombatDamage_Spawnwrithe(c);
 		else if(c.getName().equals("Glint-Eye Nephilim") || c.getName().equals("Cold-Eyed Selkie")) playerCombatDamage_Glint_Eye_Nephilim(c);
@@ -4645,29 +4637,6 @@ public class GameActionUtil {
 		final Player opponent = c.getController().getOpponent();
 		opponent.addPoisonCounters(n);
 	}
-
-	
-	/*
-	private static void playerCombatDamage_Dimir_Cutpurse(Card c) {
-		final Player player = c.getController();
-		final Player opponent = player.getOpponent();
-
-		if(c.getNetAttack() > 0) {
-			Ability ability2 = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					opponent.discard(this);
-					player.drawCard();
-				}
-			};// ability2
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - ").append(player).append(" draws a card, opponent discards a card");
-			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
-		}
-	}*/
 	
 	private static void playerDamage_Dissipation_Field(final Card c, final Card crd)
 	{
@@ -5044,31 +5013,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}
 	}//nicol bolas
-
-	private static void playerCombatDamage_Shadowmage_Infiltrator(Card c) {
-		//Player player = c.getController();
-		final Player[] player = new Player[1];
-		final Card crd = c;
-
-
-		if(c.getNetAttack() > 0) {
-			Ability ability2 = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					player[0] = crd.getController();
-					player[0].drawCard();
-				}
-			};// ability2
-
-			player[0] = c.getController();
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - ").append(player[0]).append(" draws a card.");
-			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
-		}
-	}
 
 	private static void playerCombatDamage_Augury_Adept(Card c) {
 		final Player[] player = new Player[1];
