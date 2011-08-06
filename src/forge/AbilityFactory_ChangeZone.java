@@ -825,7 +825,9 @@ public class AbilityFactory_ChangeZone {
 	           if (libraryPosition == -1)
 	        	   libraryPosition = library.size();
 	           
-	           library.add(tgtC, libraryPosition); //move to library
+	           Card cardCopy = AllZone.CardFactory.copyCard(tgtC);
+	           
+	           library.add(cardCopy, libraryPosition); //move to library
 	           
 	           if (params.containsKey("Shuffle"))	// for things like Gaea's Blessing
 	        	   player.shuffle();
