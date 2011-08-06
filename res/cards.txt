@@ -1,3 +1,14 @@
+Dovescape
+3 WU WU WU
+Enchantment
+Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell’s converted mana cost.
+
+Lurking Informant
+1 UB
+Creature Human Rogue
+no text
+1/2
+
 Belligerent Hatchling
 3 RW
 Creature Elemental

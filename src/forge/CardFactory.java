@@ -17430,50 +17430,48 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	    {
 	      final SpellAbility spell = new Spell(card)
 	      {
-	      private static final long serialVersionUID = 42470566751344693L;
+			private static final long serialVersionUID = 42470566751344693L;
 
 	        public boolean canPlayAI()
 	        {
-	            String player = getTargetPlayer();
-	            PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-	            CardList libList = new CardList(lib.getCards());
-	            return libList.size() > 0;
+	        	 String player = getTargetPlayer();
+	        	 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	        	 CardList libList = new CardList(lib.getCards());
+	        	 return libList.size() > 0;
 	        }
 
 	        public void resolve()
 	        {
-	             String player = getTargetPlayer();
-	            
-	             PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-	             PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-	             CardList libList = new CardList(lib.getCards());
+	        	  String player = getTargetPlayer();
+		          
+		          PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+		          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+		          CardList libList = new CardList(lib.getCards());
 
-	             int max = libList.size();
-	             int prev = 0 ;
-	             int count = 0;
-	             int total =0;
-	             int once = 0;
-	            
-	             for (int i=0;i<max;i++)
-	             {
-	                Card c = libList.get(i);
-	                if (c.getType().contains("Land"))
-	                {
-	                   if (prev == 1) count= count + 1;
-	                   else count = 1;
-	                   prev=1;
-	                }
-	                else prev=0;
-	                if (count == 4) once = once +1;
-	                if (once == 1 && count == 4) total=i;
-	             }
-	                          
-	             for (int i=0;i<total+1;i++)
-	             {
-	                Card c = libList.get(i);
-	                lib.remove(c);
-	                grave.add(c);
-	             }
+		          int max = libList.size();
+		          int prev = 0 ;
+		          int count = 0;
+		          int total =0;
+		          
+		          
+		          for (int i=0;i<max;i++)
+		          {
+		        	  Card c = libList.get(i);
+		        	  if (c.getType().contains("Land"))
+		        	  {
+		        		  count= count + 1;
+		        		  if (count == 4 && prev==0) total=i;
+		        		  if (count == 4) prev=1;
+		        		  
+		        	  }
+		          }
+		        		          
+		          for (int i=0;i<total+1;i++)
+		          {
+		        	  Card c = libList.get(i);
+		        	  lib.remove(c);
+		        	  grave.add(c);
+		          }
 	        }
 	      };//SpellAbility
 	      spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));

@@ -83,6 +83,7 @@ public class GameActionUtil
 		// card gets played
 		// (called in MagicStack.java)
 		Card c = sa.getSourceCard();
+		playCard_Dovescape(c);
 		playCard_Belligerent_Hatchling(c);
 		playCard_Voracious_Hatchling(c);
 		playCard_Sturdy_Hatchling(c);
@@ -102,6 +103,63 @@ public class GameActionUtil
 		playCard_Mold_Adder(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
 	}
+	
+	public static void playCard_Dovescape(Card c)
+	   {
+	      PlayerZone hplay = AllZone.getZone(Constant.Zone.Play,
+	            Constant.Player.Human);
+	      PlayerZone cplay = AllZone.getZone(Constant.Zone.Play,
+	            Constant.Player.Computer);
+
+	      CardList list = new CardList();
+	      list.addAll(hplay.getCards());
+	      list.addAll(cplay.getCards());
+	        int cmc = CardUtil.getConvertedManaCost(c.getManaCost());
+	      list = list.getName("Dovescape");
+	      if ( ! c.getType().contains("Creature") && list.size()>0 ) {
+	   
+	         
+	         final Card card = list.get(0);
+
+	         Ability ability2 = new Ability(card, "0")
+	         {
+	            public void resolve()
+	            {
+	               SpellAbility sa = AllZone.Stack.pop();
+	               
+	                   AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+	         
+	            }
+	         }; // ability2
+
+	         ability2.setStackDescription("Dovescape Ability");
+	         AllZone.Stack.add(ability2);
+	   
+	      for (int j = 0; j < list.size()*cmc; j++)
+	      {
+	         Card crd = new Card();
+	            String controller = c.getController();
+	         crd.setOwner(controller);
+	         crd.setController(controller);
+	         
+	         crd.setName("Bird");
+	         crd.setImageName("WU 1 1 Bird");
+	         crd.setManaCost("WU");
+	         crd.setToken(true);
+
+	         crd.addType("Creature");
+	         crd.addType("Bird");
+	         crd.addIntrinsicKeyword("Flying");
+
+	         crd.setBaseAttack(1);
+	         crd.setBaseDefense(1);
+
+	         PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+	         play.add(crd);
+	      }
+	      }
+	   } // Dovescape
+	
 	public static void playCard_Belligerent_Hatchling(Card c)
 	{
 		final String controller = c.getController();

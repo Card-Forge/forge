@@ -16,30 +16,7 @@ public class CardFactory_Creatures {
 
 	public static Card getCard(final Card card, String cardName, String owner, CardFactory cf)
 	{
-		//*************** START *********** START **************************
-	    else if(cardName.equals("Belligerent Hatchling") || cardName.equals("Noxious Hatchling")
-	    		||cardName.equals("Shrewd Hatchling") ||cardName.equals("Sturdy Hatchling")
-	    		 || cardName.equals("Voracious Hatchling"))
-	    {
-	      final SpellAbility ability = new Ability(card, "0")
-	      {
-	        public void resolve()
-	        {
-	        	 card.addCounter(Counters.M1M1, 4); 
-	        }//resolve()
-	      };//SpellAbility
-	      Command intoPlay = new Command()
-	      {
-			private static final long serialVersionUID = 4757054648163014149L;
-
-			public void execute()
-	        {
-	          AllZone.Stack.add(ability);
-	        }
-	      };
-	      ability.setStackDescription(cardName + "enters the battlefield with four -1/-1 counters on it.");
-	      card.addComesIntoPlayCommand(intoPlay);
-	    }//*************** END ************ END **************************
+		
 	    
 		//*************** START *********** START **************************
 	    if(cardName.equals("Filthy Cur"))
@@ -77,8 +54,97 @@ public class CardFactory_Creatures {
 	      return newCard;
 	    }//*************** END ************ END **************************
 
+	  //*************** START *********** START **************************
+	    else if(cardName.equals("Belligerent Hatchling") || cardName.equals("Noxious Hatchling")
+	    		||cardName.equals("Shrewd Hatchling") ||cardName.equals("Sturdy Hatchling")
+	    		 || cardName.equals("Voracious Hatchling"))
+	    {
+	      final SpellAbility ability = new Ability(card, "0")
+	      {
+	        public void resolve()
+	        {
+	        	 card.addCounter(Counters.M1M1, 4); 
+	        }//resolve()
+	      };//SpellAbility
+	      Command intoPlay = new Command()
+	      {
+			private static final long serialVersionUID = 4757054648163014149L;
 
+			public void execute()
+	        {
+	          AllZone.Stack.add(ability);
+	        }
+	      };
+	      ability.setStackDescription(cardName + "enters the battlefield with four -1/-1 counters on it.");
+	      card.addComesIntoPlayCommand(intoPlay);
+	    }//*************** END ************ END **************************
 
+		  //*************** START *********** START **************************
+	    else if(cardName.equals("Lurking Informant"))
+	       {
+	         final SpellAbility a1 = new Ability_Tap(card, "2")
+	         {
+	            private static final long serialVersionUID = 1446529067071763245L;
+	             public void resolve()
+	           {
+	                    String player = getTargetPlayer();
+	                    
+	                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+	                    CardList libList = new CardList(lib.getCards());
+	                    Card c = libList.get(0);
+	                    String[] choices = {"Yes", "No"};
+	                    if(card.getController().equals(Constant.Player.Human)) 
+	                    {
+	                         Object o = AllZone.Display.getChoice("Mill " + c.getName() + " ?" , choices);
+	                         if(o.equals("Yes"))
+	                           {lib.remove(c);
+	                            grave.add(c);
+	                           }
+	                    }
+	                    else {
+	                    CardList landlist = new CardList();
+	                   landlist.addAll(AllZone.Human_Play.getCards());
+	                   // i have no better idea how AI could use it then letting draw unneeded lands
+	                   // this part will be good place to use card values lists or card values deck info 
+	                   if (countLands(card) > 5 && !c.getType().contains("Land")) 
+	                                  {
+	                                      lib.remove(c);
+	                                         grave.add(c);
+	                                  }
+	                  if (countLands(card) <= 5)
+	                                      {
+	                                   lib.remove(c);
+	                                   grave.add(c);
+	                                      }
+	                    }
+	                   
+	            
+	           }
+	             private int countLands(Card c)
+	           {
+	              PlayerZone play = AllZone.getZone(Constant.Zone.Play, c
+	                    .getController());
+	              CardList lands = new CardList(play.getCards());
+	              lands = lands.getType("Land");
+	              return lands.size();
+	           } 
+	           
+	           public boolean canPlayAI()
+	           {
+	               String player = getTargetPlayer();
+	                PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	                CardList libList = new CardList(lib.getCards());
+	                return libList.size() > 0;
+	           }
+	         };//SpellAbility
+	         card.addSpellAbility(a1);
+	         a1.setDescription("2, tap: Look at the top card of target player's library. You may put that card into that player's graveyard.");
+	         a1.setStackDescription("Lurking Informant ability");
+	         a1.setBeforePayMana(new Input_PayManaCost(a1));
+	         a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
+	       }//*************** END ************ END **************************
+	    
 	    //*************** START *********** START **************************
 	    else if(cardName.equals("Shinka Gatekeeper"))
 	    {
