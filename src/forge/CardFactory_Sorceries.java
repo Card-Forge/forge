@@ -1449,30 +1449,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Wheel of Fortune")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -7707418370887790709L;
-                
-                @Override
-                public void resolve() {
-                    discardDraw7(AllZone.HumanPlayer);
-                    discardDraw7(AllZone.ComputerPlayer);
-                }//resolve()
-                
-                void discardDraw7(Player player) {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                    Card[] c = hand.getCards();
-                    for(int i = 0; i < c.length; i++)
-                        c[i].getController().discard(c[i], this);
-                    
-                    player.drawCards(7);
-                }
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-
         
         //*************** START *********** START **************************
         else if(cardName.equals("Amnesia")) {
