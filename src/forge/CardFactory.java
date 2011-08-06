@@ -6693,13 +6693,18 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                     String s = getTargetPlayer();
-                    setStackDescription("Necrogen Spellbomb - " + s + " discards a card");
+                    
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Necrogen Spellbomb - ").append(s).append(" discards a card");
+                    setStackDescription(sb.toString());
+                    // setStackDescription("Necrogen Spellbomb - " + s + " discards a card");
+                    
                     if(Constant.Player.Computer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
                     else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
                     AllZone.GameAction.sacrifice(getSourceCard());
                 }//resolve()
             };//SpellAbility
-            ability.setDescription("B, Sacrifice Necrogen Spellbomb: Target player discards a card");
+            ability.setDescription("B, Sacrifice Necrogen Spellbomb: Target player discards a card.");
             ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
             card.addSpellAbility(ability);
         } //*************** END ************ END **************************
@@ -8132,8 +8137,11 @@ public class CardFactory implements NewConstants {
                 }
             };//SpellAbility
             
-            ability2.setDescription("2, tap: You gain 1 life");
-            ability2.setStackDescription(cardName + " - You gain 1 life.");
+            ability2.setDescription("2, tap: You gain 1 life.");
+            // ability2.setStackDescription(cardName + " - You gain 1 life.");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(cardName).append(" - You gain 1 life.");
+            ability2.setStackDescription(sb2.toString());
             
             final SpellAbility ability3 = new Ability_Tap(card, "3") {
                 private static final long serialVersionUID = 1125696151526415705L;
@@ -8211,7 +8219,10 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             
             ability5.setDescription("5, tap: Draw a card.");
-            ability5.setStackDescription(card.getName() + " - draw a card.");
+            // ability5.setStackDescription(card.getName() + " - draw a card.");
+            StringBuilder sb5 = new StringBuilder();
+            sb5.append(card.getName()).append(" - draw a card.");
+            ability5.setStackDescription(sb5.toString());
             
             card.addSpellAbility(ability2);
             card.addSpellAbility(ability3);

@@ -386,7 +386,7 @@ class CardFactory_Equipment {
                     }
                 }
             };//Input
-            negBoost.setDescription("Remove a charge counter from Umezawa's Jitte: Target creature gets -1/-1 until end of turn");
+            negBoost.setDescription("Remove a charge counter from Umezawa's Jitte: Target creature gets -1/-1 until end of turn.");
             negBoost.setBeforePayMana(target);
             
 

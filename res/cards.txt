@@ -1,3 +1,46 @@
+Glimmervoid
+no cost
+Land
+At the beginning of the end step, if you control no artifacts, sacrifice CARDNAME.
+tap: add W
+tap: add B
+tap: add U
+tap: add R
+tap: add G
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmervoid.jpg
+
+Mana Drain
+U U
+Instant
+Counter target spell. At the beginning of your next main phase, add X to your mana pool, where X is that spell's converted mana cost.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_drain.jpg
+
+Primal Bellow
+G
+Instant
+no text
+spPumpTgt:+X/+X:Target creature gets +1/+1 until end of turn for each Forest you control.:Primal Bellow - Target creature gets +X/+X until end of turn
+SVar:X:Count$TypeYouCtrl.Forest
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_bellow.jpg
+
+Thran Quarry
+no cost
+Land
+At the beginning of the end step, if you control no creatures, sacrifice CARDNAME.
+tap: add W
+tap: add B
+tap: add U
+tap: add R
+tap: add G
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_quarry.jpg
+
 Angel of Despair
 3 W W B B
 Creature Angel
@@ -12206,19 +12249,6 @@ abPump U:Shroud
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmering_angel.jpg
 
-Glimmervoid
-no cost
-Land
-At the beginning of the end step, if you control no artifacts, sacrifice CARDNAME
-tap: add W
-tap: add B
-tap: add U
-tap: add R
-tap: add G
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glimmervoid.jpg
-
 Glimpse the Unthinkable
 U B
 Sorcery
@@ -18723,14 +18753,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_cylix.jpg
 
-Mana Drain
-U U
-Instant
-Counter target spell. At the beginning of your next main phase, add X to your mana pool, where X is that spell's converted mana cost
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_drain.jpg
-
 Mana Leak
 1 U
 Instant
@@ -22983,15 +23005,6 @@ tap: add G to your mana pool for each Elf on the battlefield.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/priest_of_titania.jpg
-
-Primal Bellow
-G
-Instant
-no text
-spPumpTgt:+X/+X:Target creature gets +1/+1 until end of turn for each Forest you control:Primal Bellow - Target creature gets +X/+X until end of turn
-SVar:X:Count$TypeYouCtrl.Forest
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_bellow.jpg
 
 Primal Boost
 2 G
@@ -31215,19 +31228,6 @@ no text
 StaticEffect:Play:Self:PTBonus/2/2!Keyword/Flying!Keyword/First Strike!Keyword/Trample:enchanted:As long as Thran Golem is enchanted, it gets +2/+2 and has flying, first strike, and trample.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_golem.jpg
-
-Thran Quarry
-no cost
-Land
-At the beginning of the end step, if you control no creatures, sacrifice CARDNAME
-tap: add W
-tap: add B
-tap: add U
-tap: add R
-tap: add G
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_quarry.jpg
 
 Thran War Machine
 4
