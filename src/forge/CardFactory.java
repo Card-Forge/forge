@@ -7831,48 +7831,6 @@ public class CardFactory implements NewConstants {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("AEther Spellbomb")) {
-        	Ability_Cost abCost = new Ability_Cost("U Sac<1/CARDNAME>", cardName, true);
-        	String[] valid = {"Creature"};
-        	Target abTgt = new Target("Target a creature to bounce", valid);
-            final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt) {
-				private static final long serialVersionUID = 1L;
-
-				@Override
-                public boolean canPlay() {
-                    return AllZone.GameAction.isCardInPlay(card);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList humanPlay = new CardList(AllZone.Human_Battlefield.getCards());
-                    humanPlay = humanPlay.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && CardFactoryUtil.canTarget(card, c);
-                        }
-                    });
-                    if(humanPlay.size() > 0) setTargetCard(CardFactoryUtil.AI_getBestCreature(humanPlay));
-                    return ((AllZone.Computer_Hand.size() > 2) && (getTargetCard() != null));
-                }
-                
-                @Override
-                public void resolve() {
-                    final Card[] target = new Card[1];
-                    target[0] = getTargetCard();
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, target[0].getOwner());
-                    
-                    if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0])) {
-                        if(!target[0].isToken()) AllZone.GameAction.moveTo(hand, target[0]);
-                        else AllZone.getZone(target[0]).remove(target[0]);
-                    }
-                }//resolve()
-            };//SpellAbility
-            ability.setDescription("U, Sacrifice AEther Spellbomb: Return target creature to its owner's hand.");
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Lifespark Spellbomb")) {
         	Ability_Cost abCost = new Ability_Cost("G Sac<1/CARDNAME>", cardName, true);
         	String[] valid = {"Land"};
