@@ -16309,6 +16309,157 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+      
+        //********************Start********Start***********************
+        else if(cardName.equals("Living Death"))
+        {
+           final SpellAbility spell = new Spell(card)
+           {
+              private static final long serialVersionUID = -7657135492744579098L;
+              
+              public void resolve()
+              {   //grab make 4 creature lists: human_play, human_graveyard, computer_play, computer_graveyard
+                 CardList human_play = new CardList();
+                 human_play.addAll(AllZone.Human_Play.getCards());
+                 human_play = human_play.filter(new CardListFilter()
+                 {
+                    public boolean addCard(Card c) { return c.isCreature(); }
+                 });
+                 CardList human_graveyard = new CardList();
+                 human_graveyard.addAll(AllZone.Human_Graveyard.getCards());
+                 human_graveyard = human_graveyard.filter(new CardListFilter()
+                 {
+                    public boolean addCard(Card c) { return c.isCreature(); }
+                 });
+                 CardList computer_play = new CardList();
+                 computer_play.addAll(AllZone.Computer_Play.getCards());
+                 computer_play = computer_play.filter(new CardListFilter()
+                 {
+                    public boolean addCard(Card c) { return c.isCreature(); }
+                 });
+                 CardList computer_graveyard = new CardList();
+                 computer_graveyard.addAll(AllZone.Computer_Graveyard.getCards());
+                 computer_graveyard = computer_graveyard.filter(new CardListFilter()
+                 {
+                    public boolean addCard(Card c) { return c.isCreature(); }
+                 });
+                           
+                 Card c = new Card();
+                 Iterator<Card> it = human_play.iterator();
+                 while(it.hasNext())
+                 {
+                    c = it.next();
+                    AllZone.GameAction.moveTo(AllZone.Human_Play,c);
+                    AllZone.GameAction.moveTo(AllZone.Human_Graveyard,c);
+                 }
+                 
+                 it = human_graveyard.iterator();
+                 while(it.hasNext())
+                 {
+                    c = it.next();
+                    AllZone.GameAction.moveTo(AllZone.Human_Graveyard,c);
+                    AllZone.GameAction.moveTo(AllZone.Human_Play,c);
+                 }
+                 
+                 it = computer_play.iterator();
+                 while(it.hasNext())
+                 {
+                    c = it.next();
+                    AllZone.GameAction.moveTo(AllZone.Computer_Play,c);
+                    AllZone.GameAction.moveTo(AllZone.Computer_Graveyard,c);
+                 }
+                 
+                 it = computer_graveyard.iterator();
+                 while(it.hasNext())
+                 {
+                    c = it.next();
+                    AllZone.GameAction.moveTo(AllZone.Computer_Graveyard,c);
+                    AllZone.GameAction.moveTo(AllZone.Computer_Play,c);
+                 }
+                 
+              }//resolve
+           };//spellability
+           card.clearSpellAbility();
+            card.addSpellAbility(spell);
+         }//*********************END**********END***********************
+        
+      //*************** START *********** START **************************
+      else if(cardName.equals("Exhume"))
+      {
+    	  final SpellAbility spell = new Spell(card)
+          {
+			private static final long serialVersionUID = 8073863864604364654L;
+
+			public void resolve()
+    		{
+				
+				  PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+  			      PlayerZone computerPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+				
+    			  PlayerZone humanGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+    			  PlayerZone computerGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+    			  
+    			  CardList humanList = new CardList(humanGrave.getCards());
+    			  humanList = humanList.getType("Creature");
+    			  CardList computerList = new CardList(computerGrave.getCards());
+    			  computerList = computerList.getType("Creature");
+    			  
+    			  Card c;
+    			  if (humanList.size() > 0)
+    			  {
+    				  Object check = AllZone.Display.getChoiceOptional("Select creature to Exhume", humanList.toArray());
+    				  if (check!=null)
+    				  {
+    					  c = (Card)check;
+    					  humanGrave.remove(c);
+    					  humanPlay.add(c);
+    				  }
+    				  
+    			  }
+    			  
+    			  if (computerList.size() > 0)
+    			  {
+    				  c = CardFactoryUtil.AI_getBestCreature(computerList);
+    				  if (c != null)
+    				  {
+    					  computerGrave.remove(c);
+    					  computerPlay.add(c);
+    				  }
+    				  else
+    				  {
+    					  computerGrave.remove(computerList.get(0));
+    					  computerPlay.add(computerList.get(0));
+    				  }
+    			  }
+    			  
+    		  }
+    		  
+    		  public boolean canPlayAI()
+    		  {   
+  			      PlayerZone humanGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+  			      PlayerZone computerGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+				
+    			  CardList humanList = new CardList(humanGrave.getCards());
+    			  humanList = humanList.getType("Creature");
+    			  CardList computerList = new CardList(computerGrave.getCards());
+    			  computerList = computerList.getType("Creature");
+    			  
+    			  if (computerList.size() > 0)
+    			  {
+    				  if (humanList.size() == 0)
+    					  return true;
+    				  
+    				  return CardFactoryUtil.AI_getBestCreature(computerList).getNetAttack() > 
+    				  		 CardFactoryUtil.AI_getBestCreature(humanList).getNetAttack();
+    			  }
+    			  return false;
+    		  }
+          };
+          card.clearSpellAbility();
+          card.addSpellAbility(spell);
+        
+      }
+      //*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

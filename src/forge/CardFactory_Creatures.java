@@ -17064,6 +17064,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     AllZone.GameAction.sacrificeCreature(getTargetPlayer(), this);
+                    card.setKicked(false);
                 }
             };
             

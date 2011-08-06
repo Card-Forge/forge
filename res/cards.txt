@@ -1,3 +1,13 @@
+Exhume
+1 B
+Sorcery
+Each player puts a creature card from his or her graveyard onto the battlefield.
+
+Living Death
+3 B B
+Sorcery
+Each player exiles all creature cards from his or her graveyard, then sacrifices all creatures he or she controls, then puts all cards he or she exiled this way onto the battlefield.
+
 Join the Ranks
 3 W
 Instant
