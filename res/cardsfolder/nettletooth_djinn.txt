@@ -5,4 +5,5 @@ Text:At the beginning of your upkeep, Nettletooth Djinn deals 1 damage to you.
 PT:4/4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nettletooth_djinn.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/130.jpg
 End

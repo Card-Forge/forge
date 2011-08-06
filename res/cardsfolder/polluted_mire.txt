@@ -7,4 +7,5 @@ K:tap: add B
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/polluted_mire.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/323.jpg
 End

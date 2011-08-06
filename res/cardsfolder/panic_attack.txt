@@ -5,4 +5,8 @@ Text:no text
 A:SP$Pump | Cost$ 2 R | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ 3 | KW$ CARDNAME can't block. | IsCurse$ True | TgtPrompt$ Select target creature. | SpellDescription$ Up to three target creatures can't block this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panic_attack.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/209.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/150.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/98.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/207.jpg
 End

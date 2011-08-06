@@ -5,4 +5,5 @@ Text:Destroy target artifact or creature. It can't be regenerated.
 K:spDestroyTgt:Artifact,Creature:NoRegen
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrefy.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/221.jpg
 End

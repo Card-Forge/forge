@@ -5,4 +5,5 @@ Text:People of the Woods's toughness is equal to the number of Forests you contr
 PT:1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/people_of_the_woods.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/46.jpg
 End

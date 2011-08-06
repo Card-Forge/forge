@@ -5,4 +5,5 @@ Text:Equipped creature has flying.
 K:eqPump 2:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_hoversail.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/218.jpg
 End

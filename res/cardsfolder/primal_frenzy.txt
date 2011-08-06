@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_frenzy.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/262.jpg
 End

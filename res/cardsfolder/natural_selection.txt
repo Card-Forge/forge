@@ -5,4 +5,6 @@ Text:Look at the top 3 cards of target player's library and put them back in any
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_selection.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/121.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/121.jpg
 End

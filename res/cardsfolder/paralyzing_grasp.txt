@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPumpCurse:CARDNAME doesn't untap during your untap step.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paralyzing_grasp.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/58.jpg
 End

@@ -5,4 +5,5 @@ Text:When Nest Invader enters the battlefield, put a 0/1 colorless Eldrazi Spawn
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nest_invader.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/201.jpg
 End

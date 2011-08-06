@@ -5,4 +5,5 @@ Text:Green mana doesn't empty from your mana pool as steps and phases end.\r\nOm
 PT:1/1
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/omnath_locus_of_mana.jpg
+SetInfo:WWK|Mythic|http://magiccards.info/scans/en/wwk/109.jpg
 End

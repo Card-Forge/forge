@@ -7,4 +7,5 @@ K:etbReturnTgt:1/MayReturn:Sorcery.Red:Hand
 K:etbReturnTgt:1/MayReturn:Instant.Blue:Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nucklavee.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/110.jpg
 End

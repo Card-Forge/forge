@@ -6,4 +6,6 @@ K:Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ponder.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/68.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/79.jpg
 End

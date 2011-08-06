@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Target opponent reveals his or her hand. You choose a card from it. That player shuffles that card into his or her library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perish_the_thought.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/123.jpg
 End

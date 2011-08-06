@@ -6,4 +6,5 @@ PT:2/2
 K:abPump WU:+0/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parapet_watchers.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/45.jpg
 End

@@ -7,4 +7,5 @@ K:Flying
 K:abPump 1 B:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightwing_shade.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/109.jpg
 End

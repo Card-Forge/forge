@@ -8,4 +8,6 @@ K:abPump W:First Strike
 K:abPump W W:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_white_shield.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/325.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/270.jpg
 End

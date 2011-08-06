@@ -5,4 +5,5 @@ Text:As Primal Plasma comes into play, it becomes your choice of a 3/3 creature,
 PT:3/3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card124757.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/59.jpg
 End

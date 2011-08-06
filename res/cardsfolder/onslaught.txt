@@ -6,4 +6,5 @@ K:WheneverKeyword:CastSpell/Controller:Type/Creature:Play:TapPermanent:NormalInp
 SVar:BuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/onslaught.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/92.jpg
 End

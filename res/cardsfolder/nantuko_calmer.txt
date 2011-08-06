@@ -7,4 +7,5 @@ K:abDestroyTgtV G T Sac<1/CARDNAME>:Enchantment:Destroy target enchantment.
 K:stPumpSelf:Creature:1/1:Threshold:Threshold - Nantuko Calmer gets +1/+1 as long as seven or more cards are in your graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_calmer.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/132.jpg
 End

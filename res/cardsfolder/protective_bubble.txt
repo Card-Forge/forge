@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:HIDDEN Unblockable & Shroud
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/protective_bubble.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/80.jpg
 End

@@ -7,4 +7,5 @@ K:Wither
 SVar:BuffedBy:Spell.Black,Spell.Green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Noxious_Hatchling.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/124.jpg
 End

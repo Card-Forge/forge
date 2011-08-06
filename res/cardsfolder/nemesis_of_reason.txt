@@ -5,4 +5,5 @@ Text:Whenever Nemesis of Reason attacks, defending player puts the top ten cards
 PT:3/7
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nemesis_of_reason.jpg
+SetInfo:ARB|Rare|http://magiccards.info/scans/en/arb/28.jpg
 End

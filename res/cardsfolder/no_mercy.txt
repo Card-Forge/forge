@@ -4,4 +4,5 @@ Types:Enchantment
 Text:Whenever a creature deals damage to you, destroy it.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/no_mercy.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/56.jpg
 End

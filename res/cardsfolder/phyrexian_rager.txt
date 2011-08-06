@@ -5,4 +5,6 @@ Text:When Phyrexian Rager comes into play, you draw a card and you lose 1 life.
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27660.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/49.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/167.jpg
 End

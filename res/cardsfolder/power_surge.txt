@@ -5,4 +5,8 @@ Text:At the beginning of each player's upkeep, Power Surge deals X damage to tha
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_surge.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/169.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/169.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/234.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/168.jpg
 End

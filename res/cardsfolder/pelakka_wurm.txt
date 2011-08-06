@@ -8,4 +8,5 @@ K:WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/7:ControllingPlayer_Sel
 K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Pelakka Wurm is put into a graveyard from the battlefield, draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pelakka_wurm.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/204.jpg
 End

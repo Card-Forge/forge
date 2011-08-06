@@ -7,4 +7,5 @@ K:Vigilance
 K:TypeCycling:Plains:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_templar.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/19.jpg
 End

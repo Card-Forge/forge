@@ -7,4 +7,5 @@ K:CARDNAME doesn't untap during your untap step.
 K:Untap:1 S
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_ironfoot.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/139.jpg
 End

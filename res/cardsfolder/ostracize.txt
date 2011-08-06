@@ -5,4 +5,6 @@ Text:no text
 K:spDiscardOpp:RevealYouChoose/Creature:1:Target opponent reveals his or her hand. Choose a creature card from it. That player discards that card.:Ostracize - opponent reveals hand and discards a card
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ostracize.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/57.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/153.jpg
 End

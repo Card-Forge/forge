@@ -7,4 +7,5 @@ K:Flying
 K:abPumpTgtC G G G T:Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pixie_queen.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/110.jpg
 End

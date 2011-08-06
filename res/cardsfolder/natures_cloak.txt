@@ -6,4 +6,6 @@ K:spAllPump:YouCtrl/Green:Forestwalk:Green creatures you control gain forestwalk
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=20222&type=card
+SetInfo:S99|Rare|http://magiccards.info/scans/en/st/135.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/103.jpg
 End

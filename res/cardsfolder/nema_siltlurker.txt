@@ -5,4 +5,5 @@ Text:no text
 PT:3/5
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nema_siltlurker.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/200.jpg
 End

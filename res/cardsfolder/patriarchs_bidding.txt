@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Each player chooses a creature type. Each player returns all creature cards of a type chosen this way from his or her graveyard to the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patriarchs_bidding.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/161.jpg
 End

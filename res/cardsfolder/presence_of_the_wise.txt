@@ -6,4 +6,5 @@ K:spGainLife:X:You gain 2 life for each card in your hand.:Presence of the Wise 
 SVar:X:Count$CardsInYourHand/Times.2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/presence_of_the_wise.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/23.jpg
 End

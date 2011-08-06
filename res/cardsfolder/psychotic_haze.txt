@@ -7,4 +7,5 @@ K:Madness:1 B
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychotic_haze.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/76.jpg
 End

@@ -4,7 +4,8 @@ Types:Legendary Creature Treefolk
 Text:no text
 PT:4/5
 #K:abMakeToken 2 G<>1<>Saproling<>G 1 1 Saproling<>Controller<>G<>Creature;Saproling<>1<>1<>None<>put a 1/1 green Saproling creature token onto the battlefield.
-A:AB$Token | Cost$ 2 G | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling |TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.  
+A:AB$Token | Cost$ 2 G | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling |TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nemata_grove_guardian.jpg
+SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/85.jpg
 End

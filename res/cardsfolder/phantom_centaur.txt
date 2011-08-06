@@ -6,4 +6,5 @@ PT:2/0
 K:Protection from black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_centaur.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/127.jpg
 End

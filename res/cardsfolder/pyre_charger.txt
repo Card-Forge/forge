@@ -7,4 +7,5 @@ K:Haste
 K:abPump R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_charger.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/103.jpg
 End

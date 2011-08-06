@@ -6,4 +6,5 @@ K:WheneverKeyword:PermanentIntoGraveyard:Any:Play:MoveFrom-Graveyard-Exiled:Init
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_void.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/149.jpg
 End

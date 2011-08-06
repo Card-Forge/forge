@@ -6,4 +6,5 @@ K:spPumpTgtCurse:+3/-3
 K:Changeling
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_inversion.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/128.jpg
 End

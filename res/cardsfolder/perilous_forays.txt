@@ -6,4 +6,5 @@ A:AB$Fetch | Cost$ 1 Sac<1/Creature> | Destination$ Battlefield | FetchType$ Lan
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perilous_forays.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/176.jpg
 End

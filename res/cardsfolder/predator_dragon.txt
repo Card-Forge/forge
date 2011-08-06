@@ -8,4 +8,5 @@ K:Haste
 K:Devour:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predator_dragon.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/109.jpg
 End

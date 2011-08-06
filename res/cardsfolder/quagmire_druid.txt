@@ -6,4 +6,5 @@ PT:2/2
 K:abDestroyTgtV G T Sac<1/Creature>:Enchantment:Destroy target enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quagmire_druid.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/51.jpg
 End

@@ -6,4 +6,5 @@ K:abPumpTgtC G Discard<1/Any>:+2/+2
 K:abPumpTgtC G Sac<1/CARDNAME>:+2/+2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/narcissism.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/134.jpg
 End

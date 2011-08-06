@@ -6,4 +6,5 @@ PT:1/1
 K:abAddReflectedMana:Color:Opp
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_explorer.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/90.jpg
 End

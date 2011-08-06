@@ -7,4 +7,5 @@ K:Defender
 K:WheneverKeyword:Blocks:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Psychic Membrane blocks, you may draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_membrane.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/46.jpg
 End

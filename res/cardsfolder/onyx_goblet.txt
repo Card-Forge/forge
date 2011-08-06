@@ -5,4 +5,5 @@ Text:no text
 K:abLoseLifeTgt T:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/onyx_goblet.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/81.jpg
 End

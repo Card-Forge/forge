@@ -6,4 +6,5 @@ K:spDestroyTgt:Land:Drawback$DamageTgtCtrlr/2
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/poison_the_well.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/193.jpg
 End

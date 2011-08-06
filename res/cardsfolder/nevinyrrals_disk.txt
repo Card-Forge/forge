@@ -6,4 +6,9 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$DestroyAll | Cost$ 1 T | ValidCards$ Artifact,Creature,Enchantment | SpellDescription$ Destroy all artifacts, creatures, and enchantments.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3803.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/391.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/268.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/267.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/356.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/267.jpg
 End

@@ -7,4 +7,5 @@ K:Enchant Artifact
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_artifact.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/55.jpg
 End

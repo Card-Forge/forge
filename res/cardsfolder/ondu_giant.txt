@@ -5,4 +5,5 @@ Text:When Ondu Giant enters the battlefield, you may search your library for a b
 PT:2/4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ondu_giant.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/202.jpg
 End

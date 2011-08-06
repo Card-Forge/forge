@@ -7,4 +7,5 @@ K:Fear
 K:CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card80521.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/128.jpg
 End

@@ -5,4 +5,5 @@ Text:Destroy target artifact creature or black creature. It can't be regenerated
 K:spDestroyTgt:Creature.Artifact,Creature.Black:NoRegen
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/purge.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/12.jpg
 End

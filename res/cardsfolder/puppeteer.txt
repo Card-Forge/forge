@@ -7,4 +7,8 @@ K:abTapTgt U T:Creature:Tap target creature.
 K:abUntapTgt U T:Creature:Untap target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puppeteer.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/94.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/97.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/91.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/98.jpg
 End

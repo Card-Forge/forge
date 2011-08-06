@@ -7,4 +7,5 @@ K:Flying
 K:CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139456.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/132.jpg
 End

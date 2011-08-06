@@ -8,4 +8,5 @@ K:stPumpAll:Creature.Other+YouCtrl:0/2/Vigilance:No Condition:Other creatures yo
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oathsworn_giant.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/27.jpg
 End

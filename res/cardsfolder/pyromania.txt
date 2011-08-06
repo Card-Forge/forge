@@ -6,4 +6,5 @@ K:abDamageTgtCP 1 R Discard<1/Random>:1
 K:abDamageTgtCP 1 R Sac<1/CARDNAME>:1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyromania.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/112.jpg
 End

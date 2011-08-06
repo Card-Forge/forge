@@ -5,4 +5,6 @@ Text:Whenever a player casts an enchantment spell, counter it.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/presence_of_the_master.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/32.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/200.jpg
 End

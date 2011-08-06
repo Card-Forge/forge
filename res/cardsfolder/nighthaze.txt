@@ -6,4 +6,5 @@ K:spPumpTgt:Swampwalk
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nighthaze.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/118.jpg
 End

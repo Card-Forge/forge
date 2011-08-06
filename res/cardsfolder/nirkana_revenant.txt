@@ -6,4 +6,5 @@ PT:4/4
 K:abPump B:+1/+1
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nirkana_revenant.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/120.jpg
 End

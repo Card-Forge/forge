@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Self:Play:Damage/1:NormalInput/Player:ASAP:N
 K:tap: add B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piranha_marsh.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/222.jpg
 End

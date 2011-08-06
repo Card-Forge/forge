@@ -8,4 +8,5 @@ SVar:AntiBuffedBy:Spell
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_recluse.jpg
+SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/113.jpg
 End

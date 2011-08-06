@@ -8,4 +8,5 @@ K:stPumpSelf:Creature:X/X:Threshold:Threshold - Nantuko Blightcutter gets +1/+1 
 SVar:X:Count$Valid Permanent.Black+YouDontCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_blightcutter.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/131.jpg
 End

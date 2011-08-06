@@ -7,4 +7,5 @@ K:Fear
 K:WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Order of Yawgmoth deals damage to a player, that player discards a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_yawgmoth.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/144.jpg
 End

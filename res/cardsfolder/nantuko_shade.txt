@@ -6,4 +6,6 @@ PT:2/1
 K:abPump B:+1/+1
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/tor/en-us/card35053.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/106.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/74.jpg
 End

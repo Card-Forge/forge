@@ -6,4 +6,6 @@ K:StaticEffect:Play:Permanents you Control:Keyword/Trample:Type.Creature:Creatur
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_rage.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/62.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/286.jpg
 End

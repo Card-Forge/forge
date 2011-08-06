@@ -7,4 +7,5 @@ K:Flying
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/qumulox.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/35.jpg
 End

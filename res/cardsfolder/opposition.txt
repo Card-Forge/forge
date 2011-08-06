@@ -6,4 +6,6 @@ K:abTapTgt tapXType<1/Creature>:Artifact,Creature,Land:Tap target artifact, crea
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opposition.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/40.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/92.jpg
 End

@@ -5,4 +5,5 @@ Text:Equipped creature gets +2/+0 and has first strike.
 K:eqPump 3:+2/+0/First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/no_dachi.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/264.jpg
 End

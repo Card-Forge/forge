@@ -6,4 +6,5 @@ PT:2/2
 A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_monitor.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/64.jpg
 End

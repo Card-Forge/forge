@@ -10,4 +10,5 @@ K:G: add R
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orochi_leafcaller.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/234.jpg
 End

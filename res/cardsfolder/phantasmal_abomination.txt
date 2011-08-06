@@ -8,4 +8,5 @@ K:When CARDNAME becomes the target of a spell or ability, sacrifice it.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_abomination.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/80.jpg
 End

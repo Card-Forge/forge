@@ -5,4 +5,5 @@ Text:At the beginning of your upkeep, you may put a 1/1 green Squirrel creature 
 PT:1/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nut_collector.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/259.jpg
 End

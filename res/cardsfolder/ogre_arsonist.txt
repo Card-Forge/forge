@@ -6,4 +6,6 @@ PT:3/3
 K:etbDestroyTgt:Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_arsonist.jpg
+SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/110.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po2/110.jpg
 End

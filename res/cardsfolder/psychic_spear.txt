@@ -6,4 +6,5 @@ K:spDiscardTgt:RevealYouChoose/Creature.Spirit,Instant.Arcane,Sorcery.Arcane:1:T
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_spear.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/78.jpg
 End

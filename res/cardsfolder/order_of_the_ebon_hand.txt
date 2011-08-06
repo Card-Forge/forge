@@ -8,4 +8,5 @@ K:abPump B:First Strike
 K:abPump B B:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_ebon_hand.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/25.jpg
 End

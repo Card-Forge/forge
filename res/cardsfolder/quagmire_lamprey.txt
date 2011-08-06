@@ -5,4 +5,5 @@ Text:Whenever Quagmire Lamprey becomes blocked by a creature, put a -1/-1 counte
 PT:1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quagmire_lamprey.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/154.jpg
 End

@@ -11,4 +11,5 @@ K:1 G: add G
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nomadic_elf.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/200.jpg
 End

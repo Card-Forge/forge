@@ -6,7 +6,5 @@ A:SP$Token | Cost$ 3 W U | TokenAmount$ X | TokenName$ Bird | TokenTypes$ Creatu
 SVar:X:Count$Domain
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ordered_migration.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/258.jpg
 End
-#
-# K:spMakeToken<>X<>Bird<>U 1 1 Bird<>Controller<>U<>Creature;Bird<>1<>1<>Flying
-#

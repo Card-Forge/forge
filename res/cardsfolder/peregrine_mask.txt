@@ -5,4 +5,5 @@ Text:Equipped creature has defender, flying, and first strike.
 K:eqPump 2:Defender & Flying & First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/peregrine_mask.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/268.jpg
 End

@@ -6,4 +6,5 @@ PT:2/3
 K:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5671.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/88.jpg
 End

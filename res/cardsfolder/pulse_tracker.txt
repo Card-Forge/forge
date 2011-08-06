@@ -5,4 +5,5 @@ Text:Whenever Pulse Tracker attacks, each opponent loses 1 life.
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulse_tracker.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/62.jpg
 End

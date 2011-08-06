@@ -6,4 +6,5 @@ PT:2/2
 K:abTapTgt W T:Creature:Tap target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ostiary_thrull.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/55.jpg
 End

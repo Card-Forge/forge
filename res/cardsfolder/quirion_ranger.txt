@@ -7,4 +7,5 @@ A:AB$Untap | Cost$ Return<1/Forest> | Tgt$ TgtC | ActivationLimit$ 1 | SpellDesc
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quirion_ranger.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/67.jpg
 End

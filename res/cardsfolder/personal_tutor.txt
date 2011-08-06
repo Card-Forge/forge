@@ -6,4 +6,5 @@ A:SP$Fetch | Cost$ U | Destination$ Sorcery | LibraryPosition$ 0 | FetchType$ Ar
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/personal_tutor.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/65.jpg
 End

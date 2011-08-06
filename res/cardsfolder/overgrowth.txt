@@ -6,4 +6,7 @@ K:Enchant Land
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/overgrowth.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/61.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/262.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/283.jpg
 End

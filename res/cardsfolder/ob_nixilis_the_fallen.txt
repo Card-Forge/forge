@@ -7,4 +7,5 @@ K:Landfall
 SVar:BuffedBy:Land
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ob_nixilis_the_fallen.jpg
+SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/107.jpg
 End

@@ -8,4 +8,5 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pennon_blade.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/221.jpg
 End

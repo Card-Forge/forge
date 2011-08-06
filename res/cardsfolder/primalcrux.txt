@@ -6,4 +6,5 @@ PT:1/1
 K:Trample
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primalcrux.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/73.jpg
 End

@@ -6,4 +6,5 @@ PT:5/3
 K:abPump B R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pavel_maliki.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/288.jpg
 End

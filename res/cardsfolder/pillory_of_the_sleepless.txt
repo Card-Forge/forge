@@ -5,4 +5,5 @@ Text:Enchanted creature can't attack or block.\r\nEnchanted creature has "At the
 K:Enchant creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pillory_of_the_sleepless.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/125.jpg
 End

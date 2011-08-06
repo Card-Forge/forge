@@ -5,4 +5,5 @@ Text:no text
 PT:2/4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nullmage_shepherd.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/174.jpg
 End

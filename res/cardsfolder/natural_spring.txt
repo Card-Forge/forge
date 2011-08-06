@@ -5,4 +5,10 @@ Text:no text
 K:spGainLifeTgt:8
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_spring.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/133.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po2/74.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/257.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/281.jpg
+SetInfo:P02|Common|http://magiccards.info/scans/en/po2/74.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/134.jpg
 End

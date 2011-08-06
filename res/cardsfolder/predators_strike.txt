@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:+3/+3/Trample
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predators_strike.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/128.jpg
 End

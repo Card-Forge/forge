@@ -7,4 +7,5 @@ K:tap: add R
 K:tap: add G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obelisk_of_naya.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/216.jpg
 End

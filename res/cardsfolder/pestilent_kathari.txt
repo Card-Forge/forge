@@ -8,4 +8,5 @@ K:Deathtouch
 K:abPump 2 R:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilent_kathari.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/50.jpg
 End

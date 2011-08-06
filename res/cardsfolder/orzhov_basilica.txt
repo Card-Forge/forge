@@ -8,4 +8,5 @@ K:Tap: add W B
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_basilica.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/161.jpg
 End

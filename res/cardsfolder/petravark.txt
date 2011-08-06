@@ -8,4 +8,5 @@ K:WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCa
 SVar:RemAIDeck:True
 SVar:Rarity:None
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petravark.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/109.jpg
 End

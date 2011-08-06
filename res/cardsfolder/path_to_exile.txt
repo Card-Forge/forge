@@ -4,4 +4,5 @@ Types:Instant
 Text:Exile target creature. Its controller may search his or her library for a basic land card, put that card onto the battlefield tapped, then shuffle his or her library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/path_to_exile.jpg
+SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/15.jpg
 End

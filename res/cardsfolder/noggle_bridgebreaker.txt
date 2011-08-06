@@ -6,4 +6,5 @@ PT:4/3
 K:When CARDNAME enters the battlefield, return a land you control to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noggle_bridgebreaker.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/107.jpg
 End

@@ -4,4 +4,5 @@ Types:Planeswalker - Nissa
 Text:no text
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nissa_revane.jpg
+SetInfo:ZEN|Mythic|http://magiccards.info/scans/en/zen/170.jpg
 End

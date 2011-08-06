@@ -5,4 +5,12 @@ Text:Destroy target artifact or enchantment.
 K:spDestroyTgt:Artifact,Enchantment
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/naturalize.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/270.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/258.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/199.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/141.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/186.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/195.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/275.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/282.jpg
 End

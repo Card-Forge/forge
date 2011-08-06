@@ -8,4 +8,9 @@ K:When you control no Islands, sacrifice CARDNAME.
 K:abDamageTgtCP T:1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pirate_ship.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/109.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/71.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/72.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/91.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/71.jpg
 End

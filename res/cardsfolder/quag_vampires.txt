@@ -7,4 +7,5 @@ K:Swampwalk
 K:Multikicker 1 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quag_vampires.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/63.jpg
 End

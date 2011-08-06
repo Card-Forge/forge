@@ -6,4 +6,5 @@ K:Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/omen.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/63.jpg
 End

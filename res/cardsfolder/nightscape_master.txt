@@ -1,4 +1,4 @@
-Name:Nightscape Master 
+Name:Nightscape Master
 ManaCost:2 B B
 Types:Creature Zombie Wizard
 Text:no text
@@ -7,4 +7,5 @@ A:AB$Bounce | Cost$ U U T | ValidTgts$ Creature | TgtPrompt$ Select target Creat
 K:abDamageTgtC R R T:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightscape_master.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/113.jpg
 End

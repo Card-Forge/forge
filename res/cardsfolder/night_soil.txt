@@ -5,4 +5,5 @@ Text:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/night_soil.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/80.jpg
 End

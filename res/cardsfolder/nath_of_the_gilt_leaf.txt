@@ -5,4 +5,5 @@ Text:At the beginning of your upkeep, you may have target opponent discard a car
 PT:4/4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nath_of_the_gilt_leaf.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/250.jpg
 End

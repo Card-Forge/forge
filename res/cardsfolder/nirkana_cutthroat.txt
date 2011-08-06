@@ -7,4 +7,5 @@ K:Level up:2 B
 K:maxLevel:3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nirkana_cutthroat.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/119.jpg
 End

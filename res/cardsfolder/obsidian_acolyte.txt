@@ -7,4 +7,5 @@ K:Protection from black
 K:abPumpTgtC W:Protection from black
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obsidian_acolyte.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/22.jpg
 End

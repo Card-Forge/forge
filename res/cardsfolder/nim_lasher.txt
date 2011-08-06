@@ -8,4 +8,5 @@ SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_lasher.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/71.jpg
 End

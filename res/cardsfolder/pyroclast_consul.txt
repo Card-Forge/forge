@@ -6,4 +6,5 @@ PT:3/3
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyroclast_consul.jpg
+SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/96.jpg
 End

@@ -6,4 +6,5 @@ PT:5/4
 K:tap: add U
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1675.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/289.jpg
 End

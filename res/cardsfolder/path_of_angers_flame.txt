@@ -5,4 +5,5 @@ Text:no text
 K:spAllPump:YouCtrl:+2/+0:Creatures you control get +2/+0 until end of turn.:Path of Anger's Flame - Creatures get +2/+0 until EOT
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card74179.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/109.jpg
 End

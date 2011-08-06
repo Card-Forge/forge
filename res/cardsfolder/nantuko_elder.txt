@@ -7,4 +7,5 @@ K:tap: add 1 G
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_elder.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/254.jpg
 End

@@ -6,4 +6,7 @@ PT:1/1
 K:Whenever this creature deals damage to a player, that player gets a poison counter.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pit_scorpion.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/49.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/37.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/28.jpg
 End

@@ -6,4 +6,5 @@ K:abPumpTgtC 3 T:+X/+X:Target creature gets +1/+1 until end of turn for each bas
 SVar:X:Count$Domain
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_armor.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/309.jpg
 End

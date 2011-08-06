@@ -5,4 +5,5 @@ Text:At the beginning of your upkeep, if Nether Spirit is the only creature card
 PT:2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_spirit.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/149.jpg
 End

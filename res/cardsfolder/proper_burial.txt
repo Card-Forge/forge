@@ -5,4 +5,5 @@ Text:no text
 K:Whenever a creature you control is put into a graveyard from the battlefield, you gain life equal to that creature's toughness.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/proper_burial.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/16.jpg
 End

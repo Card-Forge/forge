@@ -7,4 +7,5 @@ K:Flying
 K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MakeToken-Spirit-W-3-3-Flying-/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever you cast a Spirit or Arcane spell, put a 3/3 white Spirit creature token with flying onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oyobi_who_split_the_heavens.jpg
+SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/18.jpg
 End

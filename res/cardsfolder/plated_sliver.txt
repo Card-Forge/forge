@@ -6,4 +6,5 @@ PT:1/1
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_sliver.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/19.jpg
 End

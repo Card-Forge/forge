@@ -6,4 +6,5 @@ PT:1/1
 K:Fear
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prickly_boggart.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/74.jpg
 End

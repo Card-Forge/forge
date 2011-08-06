@@ -6,4 +6,7 @@ PT:3/3
 K:Reach
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card21054.jpg
+SetInfo:P02|Common|http://magiccards.info/scans/en/po2/76.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/137.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po2/76.jpg
 End

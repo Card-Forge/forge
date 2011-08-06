@@ -5,4 +5,10 @@ Text:Whenever enchanted land becomes tapped, Psychic Venom deals 2 damage to tha
 K:Enchant Land Curse
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_venom.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/76.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/113.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/96.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/91.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/76.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/76.jpg
 End

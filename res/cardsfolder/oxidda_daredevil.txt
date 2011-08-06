@@ -7,4 +7,6 @@ K:abPump Sac<1/Artifact>:Haste
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oxidda_daredevil.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/100.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/100.jpg
 End

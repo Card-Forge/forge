@@ -5,4 +5,6 @@ Text:When Oblivion Ring comes into play, remove another target nonland permanent
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139414.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/34.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/20.jpg
 End

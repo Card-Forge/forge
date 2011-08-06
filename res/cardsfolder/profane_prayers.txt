@@ -6,4 +6,5 @@ K:spDamageTgtCP::Drawback$GainLifeYou/X:Profane Prayers deals X damage to target
 SVar:X:Count$TypeYouCtrl.Cleric
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/profane_prayers.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/162.jpg
 End

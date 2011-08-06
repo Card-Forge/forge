@@ -6,4 +6,5 @@ PT:3/3
 K:abDamageTgtCP 2 Discard<1/Random>:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_shaman.jpg
+SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/91.jpg
 End

@@ -7,4 +7,5 @@ K:CARDNAME doesn't untap during your untap step.
 K:WheneverKeyword:CastSpell/Controller:Color/green:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a green spell, you may untap Nettle Sentinel.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nettle_sentinel.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/71.jpg
 End

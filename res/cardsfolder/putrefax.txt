@@ -10,4 +10,6 @@ K:At the beginning of the end step, sacrifice CARDNAME.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrefax.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/126.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/126.jpg
 End

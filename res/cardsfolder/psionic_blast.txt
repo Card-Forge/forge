@@ -5,4 +5,6 @@ Text:no text
 K:spDamageTgtCP:4:Drawback$DamageYou/2:Psionic Blast deals 4 damage to target creature or player and 2 damage to you.:Psionic Blast - deals 4 damage and 2 damage to you.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108812.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/75.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/75.jpg
 End

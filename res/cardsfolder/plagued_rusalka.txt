@@ -7,4 +7,5 @@ K:abPumpTgtC B Sac<1/Creature>:-1/-1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plagued_rusalka.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/56.jpg
 End

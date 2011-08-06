@@ -6,4 +6,6 @@ PT:3/3
 K:abPump B:+1/+1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primeval_shambler.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/156.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/152.jpg
 End

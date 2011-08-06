@@ -7,4 +7,5 @@ A:AB$Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.faceDown | TgtPromp
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nosy_goblin.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/220.jpg
 End

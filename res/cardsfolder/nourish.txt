@@ -5,4 +5,5 @@ Text:no text
 K:spGainLife:6
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nourish.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/78.jpg
 End

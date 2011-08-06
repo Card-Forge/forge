@@ -4,4 +4,6 @@ Types:Sorcery
 Text:Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way.
 SVar:Rarity:Rare
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/overwhelming_forces.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/p3k/79.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/79.jpg
 End

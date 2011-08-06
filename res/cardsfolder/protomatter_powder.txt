@@ -6,4 +6,5 @@ A:AB$Retrieve | Cost$ 4 W T Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/protomatter_powder.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/53.jpg
 End

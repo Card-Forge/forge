@@ -5,4 +5,5 @@ Text:no text
 K:abPumpTgtC 1 W:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_steeds.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/140.jpg
 End

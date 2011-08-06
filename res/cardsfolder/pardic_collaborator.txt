@@ -7,4 +7,5 @@ K:First Strike
 K:abPump B:+1/+1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_collaborator.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/106.jpg
 End

@@ -6,4 +6,5 @@ K:Dredge 2
 K:spDiscardOpp:RevealYouChoose:1:Target opponent reveals his or her hand. You choose a card from it. That player discards that card.:Nightmare Void - opponent reveals hand and discards a card
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightmare_void.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/100.jpg
 End

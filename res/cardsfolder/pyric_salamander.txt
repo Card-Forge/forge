@@ -7,4 +7,5 @@ K:abPump R:+1/+0/At the beginning of the end step, sacrifice CARDNAME.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyric_salamander.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/187.jpg
 End
