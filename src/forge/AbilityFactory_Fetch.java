@@ -496,7 +496,16 @@ public class AbilityFactory_Fetch {
 		if(tgt != null) {
 			tgt.resetTargets();
 			 // target loop
+			
 			CardList list = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
+			
+			 //if possible take best card from all graveyards
+			if(destination.equals("Battlefield") && params.containsKey("GainControl")) 
+				list.add(AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer));
+			
+			//If the destination is Exile consider only the human graveyard
+			if(destination.equals("Exile")) list = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
+			
 			list = list.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, af.getHostCard());
 			 
 			if (list.size() == 0)
@@ -611,6 +620,9 @@ public class AbilityFactory_Fetch {
 	        		tgtC.tap();
 	        	if (params.containsKey("GainControl"))
 	        		tgtC.setController(sa.getActivatingPlayer());
+	    	}
+	    	else if (destination.equals("Exile")){
+	    		AllZone.getZone(Constant.Zone.Removed_From_Play, player).add(tgtC);
 	    	}
 		}
 		String DrawBack = af.getMapParams().get("SubAbility");

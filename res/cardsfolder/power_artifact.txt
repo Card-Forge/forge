@@ -4,6 +4,7 @@ Types:Enchantment Aura
 Text:Enchanted artifact's activated abilities cost 2 less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana.
 K:CostChange:Player:Less:2:Enchanted:All:Artifact:TargetInPlay
 K:Enchant Artifact
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/power_artifact.jpg
 End
