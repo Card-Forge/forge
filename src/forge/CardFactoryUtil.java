@@ -236,7 +236,7 @@ public class CardFactoryUtil {
         {
            int curCMC = CardUtil.getConvertedManaCost(all.get(i).getManaCost());
            
-           if (curCMC > bigCMC)
+           if (curCMC >= bigCMC)
            {
               bigCMC = curCMC;
               biggest = all.get(i);
