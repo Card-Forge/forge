@@ -6,4 +6,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Black+YouDontCtrl | Origin$ Any | Destinat
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/compost.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/102.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/235.jpg
 End

@@ -10,4 +10,5 @@ SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warbreak_trumpeter.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/116.jpg
 End

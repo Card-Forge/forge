@@ -10,4 +10,5 @@ K:Level up:1 R
 K:maxLevel:6
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_shatterskull_pass.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/156.jpg
 End

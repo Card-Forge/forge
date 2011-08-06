@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marker_beetles.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/112.jpg
 End

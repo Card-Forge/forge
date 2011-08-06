@@ -14,4 +14,5 @@ SVar:Y:Count$Valid Permanent.nonDemon+YouDontCtrl/HalfUp
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_the_defiler.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/129.jpg
 End
