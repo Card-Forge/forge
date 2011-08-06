@@ -206,7 +206,7 @@ public class AbilityFactory_CounterMagic {
 					if(isOptional) {
 						if(Target == AllZone.HumanPlayer) {
 							if(AllZone.Display.getChoice("Do you want to discard" + SplitActionParams[0] + "card(s)?","Yes","No").equals("Yes")) {
-								Target.discard(Integer.parseInt(SplitActionParams[0]), sa);
+								Target.discard(Integer.parseInt(SplitActionParams[0]), sa, true);
 							}
 						}
 						else {
@@ -214,7 +214,7 @@ public class AbilityFactory_CounterMagic {
 						}
 					}
 					else {
-						Target.discard(Integer.parseInt(SplitActionParams[0]), sa);
+						Target.discard(Integer.parseInt(SplitActionParams[0]), sa, true);
 					}
 				}
 				else if(ActionID.equals("LoseLife")) {

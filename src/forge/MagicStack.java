@@ -8,6 +8,7 @@ public class MagicStack extends MyObservable {
 	private ArrayList<SpellAbility> stack = new ArrayList<SpellAbility>();
 	private ArrayList<SpellAbility> frozenStack = new ArrayList<SpellAbility>();
 	private boolean frozen = false;
+    private boolean bResolving = false;
 
 	private Object StormCount;
 	private Object PlayerSpellCount;
@@ -53,6 +54,9 @@ public class MagicStack extends MyObservable {
 		frozen = false;
 		frozenStack.clear();
 	}
+	
+    public void setResolving(boolean b) { bResolving = b; }
+    public boolean getResolving() { return bResolving; }
 
 	public void add(SpellAbility sp, boolean useX) {
 		if (!useX)
@@ -476,7 +480,7 @@ public class MagicStack extends MyObservable {
 		// Resolving the Stack
 		GuiDisplayUtil.updateGUI();
 		this.freezeStack();	// freeze the stack while we're in the middle of resolving
-		AllZone.InputControl.setResolving(true);
+		setResolving(true);
 		
 		SpellAbility sa = AllZone.Stack.pop();
 		
@@ -550,10 +554,11 @@ public class MagicStack extends MyObservable {
 				source.replaceMoveToGraveyard();
 		}
 
-		AllZone.InputControl.setResolving(false);
-		this.unfreezeStack(); // unfreeze the stack once we're done resolving
-		sa.resetSacrificedCost();
-		sa.resetDiscardedCost();
+		// After SA resolves we have to do a handful of things
+		setResolving(false);
+		this.unfreezeStack(); 
+		sa.resetOnceResolved();
+
 		AllZone.GameAction.checkStateEffects();
 		
 		AllZone.Phase.setNeedToNextPhase(false);

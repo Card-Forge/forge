@@ -86,23 +86,29 @@ public class AbilityFactory_Sacrifice {
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		
 		Target tgt = af.getAbTgt();
-		if (tgt == null){
-			return sa.toString();
-		}
+		ArrayList<Player> tgts;
+		if (tgt != null)
+			tgts = tgt.getTargetPlayers();
+		else
+			tgts = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+		
 		String valid = af.getMapParams().get("SacValid");
 		String num = af.getMapParams().get("Amount");
 		num = (num == null) ? "1" : num;
 		int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 		
-
-		for(Player p : tgt.getTargetPlayers())
+		for(Player p : tgts)
 			sb.append(p.getName()).append(" ");
 		
 		String msg = af.getMapParams().get("SacMessage");
 		if (msg == null)
 			msg = valid;
 		
-		sb.append("Sacrifices ").append(amount).append(" ").append(msg);
+		sb.append("Sacrifices ").append(amount).append(" ").append(msg).append(".");
+		
+		Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null)
+        	sb.append(abSub.getStackDescription());
 		
 		return sb.toString();
 	}
@@ -184,35 +190,16 @@ public class AbilityFactory_Sacrifice {
 		Card card = sa.getSourceCard();
 		String DrawBack = params.get("SubAbility");
 		
-		// Expand Fog keyword here depending on what we need out of it.
+		// Expand Sacrifice keyword here depending on what we need out of it.
 		String num = params.containsKey("Amount") ? params.get("Amount") : "1";
 		int amount = AbilityFactory.calculateAmount(card, num, sa);
 		
 		Target tgt = af.getAbTgt();
-		ArrayList<Object> tgts;
-		if (tgt != null){
-			tgts = tgt.getTargets();
-		}
-		else{
-			tgts = new ArrayList<Object>();
-			String defined = params.get("Defined");
-			if (defined == null)	// Self
-				tgts.add(sa.getActivatingPlayer());
-			else{
-				if (defined.equals("Each")){
-					tgts.add(sa.getActivatingPlayer());
-					tgts.add(sa.getActivatingPlayer().getOpponent());
-				}
-				else if (defined.equals("Targeted")){
-					SpellAbility parent;
-					do{
-						parent = ((Ability_Sub)sa).getParent();
-					}while(parent.getTarget() == null && parent.getTarget().getTargetPlayers().size() == 0);
-					
-					tgts.addAll(parent.getTarget().getTargetPlayers());
-				}
-			}
-		}
+		ArrayList<Player> tgts;
+		if (tgt != null)
+			tgts = tgt.getTargetPlayers();
+		else
+			tgts = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		String valid = params.get("SacValid");
 		
@@ -222,14 +209,12 @@ public class AbilityFactory_Sacrifice {
 		
 		msg = "Sacrifice a " + msg;
 		
-		for(Object o : tgts){
-			Player p = (Player)o;
+		for(Player p : tgts){
 			if (p.isComputer())
 				sacrificeAI(p, amount, valid, sa);
 			else
 				sacrificeHuman(p, amount, valid, sa, msg);
 		}
-		
 		
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
@@ -253,7 +238,8 @@ public class AbilityFactory_Sacrifice {
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(p);
 		list = list.getValidCards(valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 		
-		AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanentsFromList(amount, list, message));
+		// todo: Wait for Input to finish before moving on with the rest of Resolution
+		AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanentsFromList(amount, list, message), true);
 	}
 	
 }

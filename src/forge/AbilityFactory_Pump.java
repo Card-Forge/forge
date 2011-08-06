@@ -221,7 +221,6 @@ public class AbilityFactory_Pump {
             if(r.nextFloat() > chance)
             	return false;
     	}
-    	//if (bPumpEquipped && card.getEquippingCard() == null) return false;
     	
     	if (!ComputerUtil.canPayCost(sa))
     		return false;
@@ -238,40 +237,30 @@ public class AbilityFactory_Pump {
         if(AllZone.Phase.is(Constant.Phase.Main2)) return false;
         
         if(AF.getAbTgt() == null || !AF.getAbTgt().doesTarget()) {
-        	Card card = null;
-			String defined = params.get("Defined");
-			if (defined == null || defined.equals("Self"))
-				// default to Self
-				card = hostCard;
-			else if (defined.equals("Equipped")){
-				card = hostCard.getEquippingCard();
+        	ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+
+        	if (cards.size() == 0)
+        		return false;
+        	// todo: cards List may only return 1 card currently, but might have more later
+        	// when this happens we need to expand AI to consider if its ok for everything?
+			for(Card card : cards){      
+				// todo: if AI doesn't control Card and Pump is a Curse, than maybe use? 
+	            if((card.getNetDefense() + defense > 0) && (!card.hasAnyKeyword(Keywords))) {
+	            	if(card.hasSickness() && Keywords.contains("Haste")) 
+	            		return true;
+	            	else if (card.hasSickness() ^ Keywords.contains("Haste"))
+	                    return false;
+	            	else if (hostCard.equals(card)){
+	                    Random r = new Random();
+	                    if(r.nextFloat() <= Math.pow(.6667, activations)) 
+	                    	return CardFactoryUtil.AI_doesCreatureAttack(card) && !sa.getPayCosts().getTap();
+	                }
+	            	else{
+	            		Random r = new Random();
+	                    return (r.nextFloat() <= Math.pow(.6667, activations));
+	            	}
+	            }
 			}
-			else if (defined.equals("Enchanted")){
-				card = hostCard.getEnchantingCard();
-			}
-			else if (defined.equals("Targeted")){
-				// todo: Use Target of parent ability
-			}
-			
-			if (card == null)
-				return false;
-            
-			// todo: if AI doesn't control Card and Pump is a Curse, than maybe use? 
-            if((card.getNetDefense() + defense > 0) && (!card.hasAnyKeyword(Keywords))) {
-            	if(card.hasSickness() && Keywords.contains("Haste")) 
-            		return true;
-            	else if (card.hasSickness() ^ Keywords.contains("Haste"))
-                    return false;
-            	else if (hostCard.equals(card)){
-                    Random r = new Random();
-                    if(r.nextFloat() <= Math.pow(.6667, activations)) 
-                    	return CardFactoryUtil.AI_doesCreatureAttack(card) && !sa.getPayCosts().getTap();
-                }
-            	else{
-            		Random r = new Random();
-                    return (r.nextFloat() <= Math.pow(.6667, activations));
-            	}
-            }
         }
         else
         	return doTgtAI(sa);
@@ -375,37 +364,17 @@ public class AbilityFactory_Pump {
 		Target tgt = AF.getAbTgt();
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
-		else{
-			tgtCards = new ArrayList<Card>();
-			Card c;
-			String defined = params.get("Defined");
-			if (defined == null || defined.equals("Self"))
-				// default to Self
-				tgtCards.add(hostCard);
-			else if (defined.equals("Equipped")){
-				c = hostCard.getEquippingCard();
-				if (c != null)
-					tgtCards.add(c);
-			}
-			else if (defined.equals("Enchanted")){
-				c = hostCard.getEnchantingCard();
-				if (c != null)
-					tgtCards.add(c);
-			}
-			else if (defined.equals("Targeted")){
-				// todo: Use Target of parent ability
-			}
-		}
+		else
+			tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 	     
 		if (sa instanceof Ability_Sub)
 			sb.append(" ");
 		else
 			sb.append(name).append(" - ");
 		
-		 for(Card c : tgtCards){
-			 sb.append(c.getName());
-			 sb.append(" ");
-		 }
+		 for(Card c : tgtCards)
+			 sb.append(c.getName()).append(" ");
+
 	     final int atk = getNumAttack(sa);
 	     final int def = getNumDefense(sa);
 	     
@@ -421,14 +390,11 @@ public class AbilityFactory_Pump {
 		     sb.append(" ");
 	     }
 
-		if(Keywords.size() > 0)
+		for (int i=0; i<Keywords.size(); i++)
 		{
-			for (int i=0; i<Keywords.size(); i++)
-			{
-				if (!Keywords.get(i).equals("none"))
-					sb.append(Keywords.get(i)).append(" ");
-			}
-	    }
+			if (!Keywords.get(i).equals("none"))
+				sb.append(Keywords.get(i)).append(" ");
+		}
 		 
 		if (!params.containsKey("Permanent"))
 			sb.append("until end of turn.");
@@ -448,27 +414,8 @@ public class AbilityFactory_Pump {
 		Target tgt = AF.getAbTgt();
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
-		else{
-			tgtCards = new ArrayList<Card>();
-			Card c;
-			String defined = params.get("Defined");
-			if (defined == null || defined.equals("Self"))
-				// default to Self
-				tgtCards.add(hostCard);
-			else if (defined.equals("Equipped")){
-				c = hostCard.getEquippingCard();
-				if (c != null)
-					tgtCards.add(c);
-			}
-			else if (defined.equals("Enchanted")){
-				c = hostCard.getEnchantingCard();
-				if (c != null)
-					tgtCards.add(c);
-			}
-			else if (defined.equals("Targeted")){
-				// todo: Use Target of parent ability
-			}
-		}
+		else
+			tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 
 		int size = tgtCards.size();
 		for(int j = 0; j < size; j++){
@@ -487,15 +434,13 @@ public class AbilityFactory_Pump {
     
 	        tgtC.addTempAttackBoost(a);
 	        tgtC.addTempDefenseBoost(d);
-	        if(Keywords.size() > 0)
-	        {
-	        	for (int i=0; i<Keywords.size(); i++)
-	        	{
-	        		if (!Keywords.get(i).equals("none"))
-	        			tgtC.addExtrinsicKeyword(Keywords.get(i));
-	        	}
-	        }
-	        
+
+        	for (int i=0; i<Keywords.size(); i++)
+        	{
+        		if (!Keywords.get(i).equals("none"))
+        			tgtC.addExtrinsicKeyword(Keywords.get(i));
+        	}
+
 	        if (!params.containsKey("Permanent")){
 	        	// If not Permanent, remove Pumped at EOT
 		        final Command untilEOT = new Command() {

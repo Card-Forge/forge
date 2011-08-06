@@ -1,5 +1,6 @@
 package forge;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class InputControl extends MyObservable implements java.io.Serializable {
@@ -8,23 +9,41 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     private Input             input;
     static int                n                = 0;
     private Stack<Input>      inputStack       = new Stack<Input>();
-    
-    private boolean bResolving = false;
-    public void setResolving(boolean b) { bResolving = b; }
-    public boolean getResolving() { return bResolving; }
-    
+    private LinkedList<Input> resolvingQueue 	= new LinkedList<Input>();
+
     // todo: needs a bit more work to allow mana abilities to put Inputs "on hold" while they are paid and then reinstuted
-    
+
     public void setInput(final Input in) {
-        if(bResolving || !(input == null || input instanceof Input_PassPriority)) 
+    	if(AllZone.Stack.getResolving() || !(input == null || input instanceof Input_PassPriority)) 
         	inputStack.add(in);
         else 
         	input = in;
         updateObservers();
     }
-
+    
+    public void setInput(final Input in, boolean bAddToResolving) {
+    	// Make this
+    	if (!bAddToResolving){
+    		setInput(in);
+    		return;
+    	}
+    	resolvingQueue.add(in);	
+        updateObservers();
+    }
+    
+    private void changeInput(final Input in){
+    	input = in;
+        updateObservers();
+    }
+    
     public Input getInput(){
     	return input;
+    }
+    
+    public void clearInput() {
+        input = null;
+        resolvingQueue.clear();
+        inputStack.clear();
     }
     
     public void resetInput() {
@@ -43,15 +62,26 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         final Player playerTurn = AllZone.Phase.getPlayerTurn();
         final Player priority = AllZone.Phase.getPriorityPlayer();
 
-        if (bResolving){
+        // todo: this resolving portion needs more work, but fixes Death Cloud issues 
+		if (resolvingQueue.size() > 0) {
+			if (input != null) {
+				return input;
+			}
+
+			// if an SA is resolving, only change input for something that is part of the resolving SA
+			changeInput(resolvingQueue.poll());
+			return input;
+		}
+
+	    if (AllZone.Stack.getResolving())
         	return null;
-        }
+
         
         if (input != null)
         	return input;
 
         else if(inputStack.size() > 0) {		// incoming input to Control
-            setInput(inputStack.pop());
+        	changeInput(inputStack.pop());
             return input;
         }
         

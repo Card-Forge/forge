@@ -86,7 +86,7 @@ public class AIPlayer extends Player{
 	///
 	////////////////////////////////
 	
-	public CardList discard(final int num, final SpellAbility sa) {
+	public CardList discard(final int num, final SpellAbility sa, boolean duringResolution) {
 		int max = AllZoneUtil.getPlayerHand(this).size();
 		max = Math.min(max, num);
 		CardList discarded = new CardList();
@@ -128,7 +128,7 @@ public class AIPlayer extends Player{
             tHand.get(0).getController().discard(tHand.get(0), sa);  //this got changed to doDiscard basically
             return;
         }
-        AllZone.ComputerPlayer.discard(num, sa);
+        AllZone.ComputerPlayer.discard(num, sa, false);
 	}
 	
 	public void handToLibrary(final int numToLibrary, final String libPosIn) {

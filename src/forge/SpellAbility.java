@@ -294,6 +294,14 @@ public abstract class SpellAbility {
     	discardedCards = null;
     }
     
+    public void resetOnceResolved(){
+    	resetDiscardedCost();
+    	resetSacrificedCost();
+
+    	if (chosenTarget != null)
+    		chosenTarget.resetTargets();
+    }
+    
     public Input getAfterResolve() {
         return afterResolve;
     }

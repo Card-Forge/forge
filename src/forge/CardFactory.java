@@ -471,7 +471,7 @@ public class CardFactory implements NewConstants {
             							{
             								if(AllZone.Display.getChoice("Do you want to discard" + SplitActionParams[0] + "card(s)?","Yes","No").equals("Yes"))
             								{
-            									Target.discard(Integer.parseInt(SplitActionParams[0]),this);
+            									Target.discard(Integer.parseInt(SplitActionParams[0]),this, false);
             								}
             							}
             							else
@@ -480,7 +480,7 @@ public class CardFactory implements NewConstants {
             						}
             						else
             						{
-    	        						Target.discard(Integer.parseInt(SplitActionParams[0]), this);
+    	        						Target.discard(Integer.parseInt(SplitActionParams[0]), this, false);
             						}
             					}
             					else if(ActionID.equals("LoseLife"))

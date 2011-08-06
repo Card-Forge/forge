@@ -3967,7 +3967,7 @@ public class CardFactoryUtil {
                 }
                 if(d[2].contains("AtRandom")) dbPlayer.discardRandom(X, sa);
             } 
-            else dbPlayer.discard(X, sa); //AllZone.GameAction.discard(dbPlayer, X, sa);
+            else dbPlayer.discard(X, sa, false); //AllZone.GameAction.discard(dbPlayer, X, sa);
         }
         
         if(d[0].contains("HandToLibrary")) dbPlayer.handToLibrary(X, d[2]); //AllZone.GameAction.handToLibrary(dbPlayer, X, d[2]);

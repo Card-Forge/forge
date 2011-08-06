@@ -75,9 +75,11 @@ public class HumanPlayer extends Player{
 		return dredged;
 	}
 	
-	public CardList discard(final int num, final SpellAbility sa) {
-		AllZone.InputControl.setInput(CardFactoryUtil.input_discard(num, sa));
-		return new CardList();
+	public CardList discard(final int num, final SpellAbility sa, boolean duringResolution) {
+		AllZone.InputControl.setInput(CardFactoryUtil.input_discard(num, sa), duringResolution);
+		
+		// why is CardList returned?
+		return new CardList();	
 	}
 	
 	public void discardUnless(int num, String uType, SpellAbility sa) {

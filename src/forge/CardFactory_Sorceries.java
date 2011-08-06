@@ -2377,7 +2377,7 @@ public class CardFactory_Sorceries {
                     //in case graveyard order matters
                     //for(int i = 0; i < n; i++)
                       //  AllZone.GameAction.discardRandom(player, this);
-                    player.discard(n, this);
+                    player.discard(n, this, true);
                     
                     //for(int i = 0; i < n; i++)
                       //  AllZone.GameAction.drawCard(player);
@@ -3006,8 +3006,8 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                	AllZone.ComputerPlayer.discard(3, this);
-                	AllZone.HumanPlayer.discard(3, this);
+                	AllZone.ComputerPlayer.discard(3, this, false);
+                	AllZone.HumanPlayer.discard(3, this, false);
                 }//resolve()
             };
             card.clearSpellAbility();
@@ -5215,11 +5215,11 @@ public class CardFactory_Sorceries {
         			
         			if (compHand.size() > humHand.size())
         			{
-        				AllZone.ComputerPlayer.discard(handDiff, this);
+        				AllZone.ComputerPlayer.discard(handDiff, this, false);
         			}
         			else if (humHand.size() > compHand.size())
         			{
-        				AllZone.HumanPlayer.discard(handDiff, this);
+        				AllZone.HumanPlayer.discard(handDiff, this, false);
         			}
         			
         			//Creatures:
@@ -7416,53 +7416,6 @@ public class CardFactory_Sorceries {
                 }//removeLand()
                 
             };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Death Cloud")) {
-        	/*
-        	 * Each player loses X life, then discards X cards,
-        	 * then sacrifices X creatures, then sacrifices X lands.
-        	 */
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -544591650750401074L;
-
-				@Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                	Player player = card.getController();
-                	Player opp = player.getOpponent();
-                	
-                	int x = card.getXManaCostPaid();
-                	
-                	opp.loseLife(x, card);
-                	player.loseLife(x, card);
-                	
-                	opp.discard(x, this);
-                	player.discard(x, this);
-                	
-                	for(int i = 0; i < x; i++) opp.sacrificeCreature();
-                	for(int i = 0; i < x; i++) player.sacrificeCreature();
-                	
-                	for(int i = 0; i < x; i++) {
-                		CardList lands = AllZoneUtil.getPlayerLandsInPlay(opp);
-                		opp.sacrificePermanent("Select a land to sacrifice", lands);
-                	}
-                	
-                	for(int i = 0; i < x; i++) {
-                		CardList lands = AllZoneUtil.getPlayerLandsInPlay(player);
-                		player.sacrificePermanent("Select a land to sacrifice", lands);
-                	}
-                }//resolve()
-            };//SpellAbility
-            
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************

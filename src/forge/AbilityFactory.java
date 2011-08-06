@@ -1,5 +1,6 @@
 package forge;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AbilityFactory {
@@ -484,6 +485,7 @@ public class AbilityFactory {
         return restrict;
 	}
 	
+	// Utility functions used by the AFs
 	public static int calculateAmount(Card card, String amount, SpellAbility ability){
 		// amount can be anything, not just 'X' as long as sVar exists
 		
@@ -522,5 +524,58 @@ public class AbilityFactory {
 		}
 
 		return Integer.parseInt(amount) * multiplier;
+	}
+	
+	public static ArrayList<Card> getDefinedCards(Card hostCard, String def, SpellAbility sa){
+		ArrayList<Card> cards = new ArrayList<Card>();
+		String defined = (def == null) ? "Self" : def;
+		
+		Card c = null; 
+		
+		if (defined == null || defined.equals("Self"))	// default to Self
+			c = hostCard;
+		
+		else if (defined.equals("Equipped"))
+			c = hostCard.getEquippingCard();
+
+		else if (defined.equals("Enchanted"))
+			c = hostCard.getEnchantingCard();
+
+		else if (defined.equals("Targeted")){
+			SpellAbility parent;
+			do{
+				parent = ((Ability_Sub)sa).getParent();
+			}while(parent.getTarget() == null && parent.getTarget().getTargetCards().size() == 0);
+			
+			cards.addAll(parent.getTarget().getTargetCards());
+		}
+
+		if (c != null)
+			cards.add(c);
+		
+		return cards;
+	}
+	
+	
+	public static ArrayList<Player> getDefinedPlayers(Card card, String def, SpellAbility sa){
+		ArrayList<Player> players = new ArrayList<Player>();
+		String defined = (def == null) ? "Self" : def;
+		
+		players = new ArrayList<Player>();
+		if (defined.equals("Targeted")){
+			SpellAbility parent;
+			do{
+				parent = ((Ability_Sub)sa).getParent();
+			}while(parent.getTarget() == null && parent.getTarget().getTargetPlayers().size() == 0);
+			
+			players.addAll(parent.getTarget().getTargetPlayers());
+		}
+		else{
+			if (defined.equals("Self") || defined.equals("Each"))
+				players.add(sa.getActivatingPlayer());
+			if (defined.equals("Each"))
+				players.add(sa.getActivatingPlayer().getOpponent());
+		}
+		return players;
 	}
 }

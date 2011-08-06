@@ -456,7 +456,7 @@ public class GameAction {
     
     public void checkStateEffects() {
     	// sol(10/29) added for Phase updates, state effects shouldn't be checked during Spell Resolution
-    	if (AllZone.InputControl.getResolving()) 
+    	if (AllZone.Stack.getResolving()) 
     		return;
     	
         JFrame frame = (JFrame) AllZone.Display;
@@ -1501,7 +1501,7 @@ public class GameAction {
                         					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
                         						//this might not work:
                         						//AllZone.GameAction.discard(F_TargetPlayer[F_Target],F_Amount[0], Ability);
-                        						F_TargetPlayer[F_Target].discard(F_Amount[0], Ability);
+                        						F_TargetPlayer[F_Target].discard(F_Amount[0], Ability, false);
       			                      }
 
     			                      }
@@ -2293,7 +2293,7 @@ public class GameAction {
         AllZone.Computer_Play.reset();
         AllZone.Computer_Removed.reset();
         
-        AllZone.InputControl.resetInput();
+        AllZone.InputControl.clearInput();
         
         AllZone.StaticEffects.reset();
         StaticEffectKeywordReset = true;

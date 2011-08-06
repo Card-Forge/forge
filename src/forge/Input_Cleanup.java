@@ -44,7 +44,7 @@ public class Input_Cleanup extends Input {
     	
     	if (AllZone.ComputerPlayer.getMaxHandSize() != -1){
     		int numDiscards = size - AllZone.ComputerPlayer.getMaxHandSize(); 
-    		AllZone.ComputerPlayer.discard(numDiscards, null);
+    		AllZone.ComputerPlayer.discard(numDiscards, null, false);
     	}
         CombatUtil.removeAllDamage();
         

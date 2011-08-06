@@ -111,7 +111,6 @@ import java.util.Random;
 		return dbDealDamage;
 	}
 
-       
         private int getNumDamage(SpellAbility saMe) {
             return AbilityFactory.calculateAmount(saMe.getSourceCard(), damage, saMe);
         }

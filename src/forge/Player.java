@@ -469,10 +469,10 @@ public abstract class Player extends MyObservable{
 	///
 	////////////////////////////////
     
-    public abstract CardList discard(final int num, final SpellAbility sa);
+    public abstract CardList discard(final int num, final SpellAbility sa, boolean duringResolution);
     
     public CardList discard(final SpellAbility sa) {
-    	return discard(1, sa);
+    	return discard(1, sa, false);
     }
     
     public void discard(Card c, SpellAbility sa) {

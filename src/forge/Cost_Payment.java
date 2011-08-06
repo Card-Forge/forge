@@ -517,7 +517,7 @@ public class Cost_Payment {
 	    				AllZone.GameAction.AI_discardNumType(discAmount, validType, ability);
 	    			}
 	    			else{
-	    				AllZone.ComputerPlayer.discard(discAmount, ability);
+	    				AllZone.ComputerPlayer.discard(discAmount, ability, false);
 	    			}
     			}
     		}

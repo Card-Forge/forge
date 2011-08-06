@@ -239,7 +239,7 @@ class CardFactory_Planeswalkers {
                     
                     opponent.addDamage(7, card);
                     
-                    opponent.discard(7, this);
+                    opponent.discard(7, this, false);
                     
                     CardList permsToSac = new CardList();
                     CardList oppPermTempList = new CardList(play.getCards());

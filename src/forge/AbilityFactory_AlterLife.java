@@ -7,6 +7,10 @@ import java.util.Random;
 public class AbilityFactory_AlterLife {
 	// An AbilityFactory subclass for Gaining, Losing, or Setting Life totals.
 	
+	// *************************************************************************
+	// ************************* GAIN LIFE *************************************
+	// *************************************************************************
+	
 	public static SpellAbility createAbilityGainLife(final AbilityFactory AF){
 
 		final SpellAbility abGainLife = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
@@ -112,6 +116,116 @@ public class AbilityFactory_AlterLife {
 		};
 		return dbGainLife;
 	}
+
+	public static String gainLifeStackDescription(AbilityFactory af, SpellAbility sa){
+		StringBuilder sb = new StringBuilder();
+		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
+
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+		
+		for(Player player : tgtPlayers)
+			sb.append(player).append(" ");
+		
+		sb.append("gains ").append(amount).append(" life.");
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
+	}
+	
+	public static boolean gainLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){
+		Random r = new Random();
+		Ability_Cost abCost = sa.getPayCosts();
+		final Card source = sa.getSourceCard();
+		int life = AllZone.ComputerPlayer.getLife();
+
+		if (abCost != null){
+			// AI currently disabled for these costs
+			if (abCost.getSacCost()){
+				if (amountStr.contains("X"))
+					return false;
+				if (life > 4)
+					return false;
+			}
+			if (abCost.getLifeCost() && life > 5)	 return false;
+			if (abCost.getDiscardCost() && life > 5) return false;
+			
+			if (abCost.getSubCounter() && life > 7){
+				// A card has a 25% chance per counter to be able to pass through here
+				// 4+ counters will always pass. 0 counters will never
+				int currentNum = source.getCounters(abCost.getCounterType());
+				double percent = .25 * (currentNum / abCost.getCounterNum());
+				if (percent <= r.nextFloat())
+					return false;
+			}
+		}
+		
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		// TODO handle proper calculation of X values based on Cost and what would be paid
+		//final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
+		
+		 // prevent run-away activations - first time will always return true
+		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+		 
+		 Target tgt = sa.getTarget();
+		 
+		 if (sa.getTarget() != null){
+			 tgt.resetTargets();
+			 sa.getTarget().addTarget(AllZone.ComputerPlayer);
+		 }
+
+		 return ((r.nextFloat() < .6667) && chance);
+	}
+	
+	public static void gainLifeResolve(final AbilityFactory af, final SpellAbility sa, int lifeAmount){
+		HashMap<String,String> params = af.getMapParams();
+		Card card = af.getHostCard();
+		
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+		
+		for(Player p : tgtPlayers)
+			if (tgt == null || p.canTarget(af.getHostCard()))
+				p.gainLife(lifeAmount, sa.getSourceCard());
+		
+		
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+	     	   abSub.resolve();
+	        }
+			else{
+				String DrawBack = params.get("SubAbility");
+				if (af.hasSubAbility())
+					 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), tgtPlayers.get(0), card, null, sa);
+			}
+		}
+	}
+	
+	// *************************************************************************
+	// ************************* LOSE LIFE *************************************
+	// *************************************************************************
 	
 	public static SpellAbility createAbilityLoseLife(final AbilityFactory AF){
 		final SpellAbility abLoseLife = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
@@ -217,8 +331,8 @@ public class AbilityFactory_AlterLife {
 		};
 		return dbLoseLife;
 	}
-
-	public static String gainLifeStackDescription(AbilityFactory af, SpellAbility sa){
+	
+	static String loseLifeStackDescription(AbilityFactory af, SpellAbility sa) {
 		StringBuilder sb = new StringBuilder();
 		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
 
@@ -227,10 +341,17 @@ public class AbilityFactory_AlterLife {
 		else
 			sb.append(" ");
 
-		String player = "You gain ";
-		if (af.getAbTgt() != null)
-			player = sa.getTargetPlayer() + " gains ";
-		sb.append(player).append(amount).append(" life.");
+		ArrayList<Player> tgtPlayers;
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+
+		for(Player player : tgtPlayers)
+			sb.append(player).append(" ");
+
+		sb.append("loses ").append(amount).append(" life.");
 
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null) {
@@ -238,107 +359,6 @@ public class AbilityFactory_AlterLife {
 		}
 
 		return sb.toString();
-	}
-	
-	static String loseLifeStackDescription(AbilityFactory af, SpellAbility sa){
-		 StringBuilder sb = new StringBuilder();
-		 int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
-	
-		 Player player = sa.getActivatingPlayer();
-	
-			if (!(sa instanceof Ability_Sub))
-				sb.append(sa.getSourceCard().getName()).append(" - ");
-			else
-				sb.append(" ");
-		 
-		 if (af.getAbTgt() != null)
-			 player = sa.getTargetPlayer();
-		 sb.append(player).append(" loses ").append(amount).append(" life.");
-	
-		Ability_Sub abSub = sa.getSubAbility();
-		if (abSub != null) {
-			sb.append(abSub.getStackDescription());
-		}
-		 
-		 return sb.toString();
-	}
-	
-	public static boolean gainLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){
-		Random r = new Random();
-		Ability_Cost abCost = sa.getPayCosts();
-		final Card source = sa.getSourceCard();
-		int life = AllZone.ComputerPlayer.getLife();
-
-		if (abCost != null){
-			// AI currently disabled for these costs
-			if (abCost.getSacCost()){
-				if (amountStr.contains("X"))
-					return false;
-				if (life > 4)
-					return false;
-			}
-			if (abCost.getLifeCost() && life > 5)	 return false;
-			if (abCost.getDiscardCost() && life > 5) return false;
-			
-			if (abCost.getSubCounter() && life > 7){
-				// A card has a 25% chance per counter to be able to pass through here
-				// 4+ counters will always pass. 0 counters will never
-				int currentNum = source.getCounters(abCost.getCounterType());
-				double percent = .25 * (currentNum / abCost.getCounterNum());
-				if (percent <= r.nextFloat())
-					return false;
-			}
-		}
-		
-		if (!ComputerUtil.canPayCost(sa))
-			return false;
-		
-		// TODO handle proper calculation of X values based on Cost and what would be paid
-		//final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
-		
-		 // prevent run-away activations - first time will always return true
-		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
-		 
-		 Target tgt = sa.getTarget();
-		 
-		 if (sa.getTarget() != null){
-			 tgt.resetTargets();
-			 sa.getTarget().addTarget(AllZone.ComputerPlayer);
-		 }
-
-		 return ((r.nextFloat() < .6667) && chance);
-	}
-	
-	public static void gainLifeResolve(final AbilityFactory af, final SpellAbility sa, int lifeAmount){
-		HashMap<String,String> params = af.getMapParams();
-		Card card = af.getHostCard();
-		
-		ArrayList<Player> tgtPlayers;
-
-		Target tgt = af.getAbTgt();
-		if (tgt != null)
-			tgtPlayers = tgt.getTargetPlayers();
-		else{
-			tgtPlayers = new ArrayList<Player>();
-			tgtPlayers.add(sa.getActivatingPlayer());
-		}
-		
-		for(Player p : tgtPlayers)
-			if (tgt == null || p.canTarget(af.getHostCard()))
-				p.gainLife(lifeAmount, sa.getSourceCard());
-		
-		
-		if (af.hasSubAbility()){
-			Ability_Sub abSub = sa.getSubAbility();
-			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-			else{
-				String DrawBack = params.get("SubAbility");
-				if (af.hasSubAbility())
-					 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), tgtPlayers.get(0), card, null, sa);
-			}
-		}
 	}
 	
 	public static boolean loseLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){
@@ -395,10 +415,8 @@ public class AbilityFactory_AlterLife {
 		Target tgt = af.getAbTgt();
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
-		else{
-			tgtPlayers = new ArrayList<Player>();
-			tgtPlayers.add(sa.getActivatingPlayer());
-		}
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 		
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard()))
@@ -416,4 +434,11 @@ public class AbilityFactory_AlterLife {
 			}
 		}	
 	}
+	
+	// *************************************************************************
+	// ************************** SET LIFE *************************************
+	// *************************************************************************
+	// todo: Setting one or both players life
+	// cards like Invincible Hymn, Blessed Wind
+	// <Blah>'s life total Becomes <Y>
 }

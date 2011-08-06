@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class AbilityFactory_ZoneAffecting {
+	
+	//**********************************************************************
+	//******************************* DRAW *********************************
+	//**********************************************************************
 	public static SpellAbility createAbilityDraw(final AbilityFactory AF){
 		final SpellAbility abDraw = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
 			private static final long serialVersionUID = 5445572699000471299L;
@@ -94,7 +98,6 @@ public class AbilityFactory_ZoneAffecting {
 	}
 	
 	public static String drawStackDescription(AbilityFactory af, SpellAbility sa){
-		Player player = af.getAbTgt() == null ? sa.getActivatingPlayer() : sa.getTargetPlayer(); 
 		StringBuilder sb = new StringBuilder();
 		
 		if (!(sa instanceof Ability_Sub))
@@ -102,19 +105,22 @@ public class AbilityFactory_ZoneAffecting {
 		else
 			sb.append(" ");
 		
-		String defined = af.getMapParams().get("Defined");
-		if (defined != null){
-			if (defined.equals("Each"))
-				sb.append("Each player");
-		}
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
 		else
-			sb.append(player.toString());
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+		
+		for(Player p : tgtPlayers)
+			sb.append(p.toString()).append(" ");
 
         int numCards = 1;
         if (af.getMapParams().containsKey("NumCards"))
         	numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa);
 		
-		sb.append(" draws (").append(numCards).append(")");
+		sb.append("draws (").append(numCards).append(")");
 		
 		if (af.getMapParams().containsKey("NextUpkeep"))
 			sb.append(" at the beginning of the next upkeep");
@@ -245,15 +251,8 @@ public class AbilityFactory_ZoneAffecting {
 		Target tgt = af.getAbTgt();
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
-		else{
-			String defined = params.containsKey("Defined") ? params.get("Defined") : "Self";
-			
-			tgtPlayers = new ArrayList<Player>();
-			if (defined.equals("Self") || defined.equals("Each"))
-				tgtPlayers.add(sa.getActivatingPlayer());
-			if (defined.equals("Each"))
-				tgtPlayers.add(sa.getActivatingPlayer().getOpponent());
-		}
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 		
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard())){
@@ -278,8 +277,9 @@ public class AbilityFactory_ZoneAffecting {
 		}
 	}
 	
-	
-	// ******************** MILL ****************************
+	//**********************************************************************
+	//******************************* MILL *********************************
+	//**********************************************************************
 	
 	public static SpellAbility createAbilityMill(final AbilityFactory AF){
 		final SpellAbility abMill = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
@@ -373,20 +373,29 @@ public class AbilityFactory_ZoneAffecting {
 	
 	public static String millStackDescription(SpellAbility sa, AbilityFactory af){
 		// when getStackDesc is called, just build exactly what is happening
-		Player player = af.getAbTgt() == null ? sa.getActivatingPlayer() : sa.getTargetPlayer(); 
 		StringBuilder sb = new StringBuilder();
+		
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 		
 		if (!(sa instanceof Ability_Sub))
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		else
 			sb.append(" ");
 		
+		for(Player p : tgtPlayers)
+			sb.append(p.toString()).append(" ");
+		
 		sb.append("Mills ");
 		int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa);
 		sb.append(numCards);
 		sb.append(" Card(s) from ");
-		sb.append(player.toString());
-		sb.append("'s library.");
+		sb.append(" library.");
 		
 		Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null){
@@ -475,10 +484,8 @@ public class AbilityFactory_ZoneAffecting {
 		Target tgt = af.getAbTgt();
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
-		else{
-			tgtPlayers = new ArrayList<Player>();
-			tgtPlayers.add(sa.getActivatingPlayer());
-		}
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard()))
@@ -517,7 +524,7 @@ public class AbilityFactory_ZoneAffecting {
 	
 	//Examples:
 	//A:SP$Discard | Cost$B | Tgt$TgtP | NumCards$2 | Mode$Random | SpellDescription$<...>
-	//A:AB$Discard | Cost$U | Opponent$True | Mode$RevealYouChoose | NumCards$X | SpellDescription$<...>
+	//A:AB$Discard | Cost$U | ValidTgts$ Opponent | Mode$RevealYouChoose | NumCards$X | SpellDescription$<...>
 	
 	public static SpellAbility createAbilityDiscard(final AbilityFactory AF) {
 		final SpellAbility abDraw = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
@@ -626,7 +633,6 @@ public class AbilityFactory_ZoneAffecting {
 		Card source = sa.getSourceCard();
 		HashMap<String,String> params = af.getMapParams();
 
-		boolean opp = params.containsKey("Opponent");
 		String mode = params.get("Mode");
 
 		ArrayList<Player> tgtPlayers;
@@ -634,93 +640,83 @@ public class AbilityFactory_ZoneAffecting {
 		Target tgt = af.getAbTgt();
 		if (tgt != null)
 			tgtPlayers = tgt.getTargetPlayers();
-		else{
-			tgtPlayers = new ArrayList<Player>();
-			
-			Player activator = sa.getActivatingPlayer();
-
-			/*
-			 * This may need to check that the opponent can be targeted.
-			 * I think, ideally, this is handled by something like ValidTgts$Player.Opponent
-			 * actually, canTarget is checked slightly below here...
-			 */
-			if (opp)
-				tgtPlayers.add(activator.getOpponent());
-			else
-				tgtPlayers.add(activator);
-		}
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 
 		for(Player p : tgtPlayers)
 			if (tgt == null || p.canTarget(af.getHostCard())) {	
 				if(mode.equals("Hand")) {
 					p.discardHand(sa);
+					continue;
 				}
-				else {
-					int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
-					if(mode.equals("Random")) {
-						p.discardRandom(numCards, sa);
+				
+				int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+				
+				if(mode.equals("Random")) {
+					p.discardRandom(numCards, sa);
+				}
+				
+				else if(mode.equals("TgtChoose")) {
+					if(params.containsKey("UnlessType")) {
+						p.discardUnless(numCards, params.get("UnlessType"), sa);
 					}
-					if(mode.equals("TgtChoose")) {
-						if(params.containsKey("UnlessType")) {
-							p.discardUnless(numCards, params.get("UnlessType"), sa);
+					else p.discard(numCards, sa, true);
+				}
+
+				else if(mode.equals("RevealYouChoose")) {
+					// Is Reveal you choose right? I think the wrong player is being used?
+					PlayerZone pzH = AllZone.getZone(Constant.Zone.Hand, p);
+					if(pzH.size() != 0) {
+						CardList dPHand = new CardList(pzH.getCards());
+						CardList dPChHand = new CardList(dPHand.toArray());
+
+						if (params.containsKey("DiscardValid")) {	// Restrict card choices
+							String[] dValid = params.get("DiscardValid").split(",");
+							dPChHand = dPHand.getValidCards(dValid,source.getController(),source);
 						}
-						else p.discard(numCards, sa);
-					}
 
-					if(mode.equals("RevealYouChoose")) {
-						PlayerZone pzH = AllZone.getZone(Constant.Zone.Hand, p);
-						if(pzH.size() != 0) {
-							CardList dPHand = new CardList(pzH.getCards());
-							CardList dPChHand = new CardList(dPHand.toArray());
-
-							if (params.containsKey("DiscardValid")) {	// Restrict card choices
-								String[] dValid = params.get("DiscardValid").split(",");
-								dPChHand = dPHand.getValidCards(dValid,source.getController(),source);
-							}
-
-							if(source.getController().isComputer()){
-								//AI
-								for(int i = 0; i < numCards; i++) {
-									if (dPChHand.size() > 0){
-										CardList dChoices = new CardList();
-										if(params.containsKey("DiscardValid")) {
-											String dValid = params.get("DiscardValid");
-											if (dValid.contains("Creature") && !dValid.contains("nonCreature")) {
-												Card c = CardFactoryUtil.AI_getBestCreature(dPChHand);
-												if (c!=null)
-													dChoices.add(CardFactoryUtil.AI_getBestCreature(dPChHand));
-											}
+						if(source.getController().isComputer()){
+							//AI
+							for(int i = 0; i < numCards; i++) {
+								if (dPChHand.size() > 0){
+									CardList dChoices = new CardList();
+									if(params.containsKey("DiscardValid")) {
+										String dValid = params.get("DiscardValid");
+										if (dValid.contains("Creature") && !dValid.contains("nonCreature")) {
+											Card c = CardFactoryUtil.AI_getBestCreature(dPChHand);
+											if (c!=null)
+												dChoices.add(CardFactoryUtil.AI_getBestCreature(dPChHand));
 										}
-
-
-										CardListUtil.sortByTextLen(dPChHand);
-										dChoices.add(dPChHand.get(0));
-
-										CardListUtil.sortCMC(dPChHand);
-										dChoices.add(dPChHand.get(0));
-
-										Card dC = dChoices.get(CardUtil.getRandomIndex(dChoices));
-										dPChHand.remove(dC);
-
-										CardList dCs = new CardList();
-										dCs.add(dC);
-										AllZone.Display.getChoiceOptional("Computer has chosen", dCs.toArray());
-
-										AllZone.ComputerPlayer.discard(dC, sa);
 									}
+
+
+									CardListUtil.sortByTextLen(dPChHand);
+									dChoices.add(dPChHand.get(0));
+
+									CardListUtil.sortCMC(dPChHand);
+									dChoices.add(dPChHand.get(0));
+
+									Card dC = dChoices.get(CardUtil.getRandomIndex(dChoices));
+									dPChHand.remove(dC);
+
+									CardList dCs = new CardList();
+									dCs.add(dC);
+									AllZone.Display.getChoiceOptional("Computer has chosen", dCs.toArray());
+
+									AllZone.ComputerPlayer.discard(dC, sa); // is this right?
 								}
 							}
-							else {
-								//human
-								AllZone.Display.getChoiceOptional("Revealed computer hand", dPHand.toArray());
+						}
+						else {
+							//human
+							AllZone.Display.getChoiceOptional("Revealed computer hand", dPHand.toArray());
 
-								for(int i = 0; i < numCards; i++) {
-									if (dPChHand.size() > 0) {
-										Card dC = AllZone.Display.getChoice("Choose a card to be discarded", dPChHand.toArray());
+							for(int i = 0; i < numCards; i++) {
+								if (dPChHand.size() > 0) {
+									Card dC = AllZone.Display.getChoice("Choose a card to be discarded", dPChHand.toArray());
 
-										dPChHand.remove(dC);
-										AllZone.HumanPlayer.discard(dC, sa);
-									}
+									dPChHand.remove(dC);
+									AllZone.HumanPlayer.discard(dC, sa); // is this right?
 								}
 							}
 						}
@@ -744,46 +740,47 @@ public class AbilityFactory_ZoneAffecting {
 	private static String discardStackDescription(AbilityFactory af, SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		String mode = params.get("Mode");
-		Player player;
-		if(af.getAbTgt() == null) {
-			player = sa.getActivatingPlayer();
-			
-			if(params.containsKey("Opponent")) {
-				player = player.getOpponent();
-			}
-		}
-		else {
-			player = sa.getTargetPlayer();
-		}
 		StringBuilder sb = new StringBuilder();
+		
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 		
 		if (!(sa instanceof Ability_Sub))
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		else
 			sb.append(" ");
 		
-		sb.append(player.toString());
+		for(Player p : tgtPlayers)
+			sb.append(p.toString()).append(" ");
 		
-		if(mode.equals("RevealYouChoose")) sb.append(" reveals his or her hand.");
-		if(mode.equals("RevealYouChoose")) sb.append("  You choose (");
-		else sb.append(" discards (");
+		if(mode.equals("RevealYouChoose")) 
+			sb.append("reveals his or her hand.").append("  You choose (");
+		else 
+			sb.append("discards (");
 		
-		if(mode.equals("Hand")) {
+		if(mode.equals("Hand"))
 			sb.append("Hand");
-		}
-		else sb.append(af.getMapParams().get("NumCards"));
+		else 
+			sb.append(AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa));
 			
 		sb.append(")");
-		if(mode.equals("RevealYouChoose")) sb.append(" to discard");
+		
+		if(mode.equals("RevealYouChoose")) 
+			sb.append(" to discard");
 		
 		if(mode.equals("Random"))
 			sb.append(" at random.");
-		else sb.append(".");
+		else 
+			sb.append(".");
 		
 		Ability_Sub abSub = sa.getSubAbility();
-        if (abSub != null){
+        if (abSub != null)
         	sb.append(abSub.getStackDescription());
-        }
 		
 		return sb.toString();
 	}
@@ -837,10 +834,15 @@ public class AbilityFactory_ZoneAffecting {
 		if (!bFlag)
 			return false;
 		*/
+		ArrayList<Player> players;
 		if (tgt != null){
-			ArrayList<Player> players = tgt.getTargetPlayers();
+			players = tgt.getTargetPlayers();
 			if (players.size() > 0 && players.get(0).equals(AllZone.HumanPlayer))
 				return true;
+		}
+		else{
+			// todo: take Each or Self into account differently
+			// players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
 		}
 		
 		Random r = new Random();
@@ -857,8 +859,12 @@ public class AbilityFactory_ZoneAffecting {
 	private static boolean discardTargetAI(AbilityFactory af) {
 		Target tgt = af.getAbTgt();
 		if(tgt!= null) {
-			tgt.addTarget(AllZone.HumanPlayer);
-			return true;
+			if (AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.HumanPlayer).size() > 0 &&
+					AllZone.HumanPlayer.canTarget(af.getHostCard())){
+				tgt.addTarget(AllZone.HumanPlayer);
+				return true;
+			}
+			return false;
 		}
 		return false;
 	}// discardTargetAI()

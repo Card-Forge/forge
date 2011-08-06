@@ -3111,10 +3111,10 @@ public class GameActionUtil {
 
 	public static void payManaDuringAbilityResolve(String message, String manaCost, Command paid, Command unpaid){
 		// temporarily disable the Resolve flag, so the user can payMana for the resolving Ability
-		boolean bResolving = AllZone.InputControl.getResolving();
-		AllZone.InputControl.setResolving(false);
+		boolean bResolving = AllZone.Stack.getResolving();
+		AllZone.Stack.setResolving(false);
 		AllZone.InputControl.setInput(new Input_PayManaCost_Ability(message, manaCost, paid, unpaid));
-		AllZone.InputControl.setResolving(bResolving);
+		AllZone.Stack.setResolving(bResolving);
 	}
 	
 	private static void upkeep_removeDealtDamageToOppThisTurn() {
@@ -11025,7 +11025,7 @@ public class GameActionUtil {
 					hondlist.addAll(Play.getCards());
 					hondlist = hondlist.getType("Shrine");
 					
-					opponent.discard(hondlist.size(), this);
+					opponent.discard(hondlist.size(), this, false);
 					/*
 					for(int j = 0; j < hondlist.size(); j++) {
 						if(opponent.equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
