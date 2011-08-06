@@ -17605,11 +17605,11 @@ public class CardFactory implements NewConstants {
              }
           };//input
        
-       spell.setBeforePayMana(target);
+        spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
         
-      //*****************************START*******************************
+        //*****************************START*******************************
         if(cardName.equals("Icy Manipulator")) {
            /* The Rules state that this can target a tapped card, but it won't do anything */
            
@@ -17636,7 +17636,7 @@ public class CardFactory implements NewConstants {
 
         
         //*************** START *********** START **************************
-        if(cardName.equals("Mind Twist")) {
+        if(cardName.equals("Mind Twist") || cardName.equals("Mind Shatter")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 42470566751344693L;
                 
