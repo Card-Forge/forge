@@ -491,7 +491,7 @@ public class QuestUtil {
 		        c.setImageName("G 0 1 Sheep");
 		        
 		        c.setController(Constant.Player.Human);
-		        c.setOwner(Constant.Player.Computer);
+		        c.setOwner(Constant.Player.Human);
 		        
 		        c.setManaCost("G");
 		        c.setToken(true);
@@ -526,13 +526,27 @@ public class QuestUtil {
 		{
 			CardList humanList = new CardList();
 			
-			Card c = AllZone.CardFactory.getCard("Wall of Spears", Constant.Player.Human);
-			humanList.add(c);
+			Card crd = AllZone.CardFactory.getCard("Wall of Spears", Constant.Player.Human);
+			humanList.add(crd);
 			
 			for (int i=0;i<3;i++)
 			{
-				c = CardFactoryUtil.makeToken("Citizen", "W 1 1 Citizen", Constant.Player.Human, "W", 
-													new String[] {"Creature","Citizen"}, 1, 1, new String[]{""}).get(0);
+				Card c = new Card();
+		        c.setName("Citizen");
+		        c.setImageName("W 1 1 Citizen");
+		        
+		        c.setController(Constant.Player.Human);
+		        c.setOwner(Constant.Player.Human);
+		        
+		        c.setManaCost("W");
+		        c.setToken(true);
+		        
+		        c.addType("Creature");
+		        c.addType("Citizen");
+		        
+		        c.setBaseAttack(1);
+		        c.setBaseDefense(1);
+				
 				humanList.add(c);
 			}
 			
@@ -563,9 +577,24 @@ public class QuestUtil {
 			CardList humanList = new CardList();
 			for (int i = 0; i < 3; i ++)
 			{
-				Card c = CardFactoryUtil.makeToken("Soldier Ally", "W 1 1 Soldier Ally", Constant.Player.Human, "W", 
-							new String[] {"Creature", "Soldier", "Ally"}, 1, 1, new String[] {""}).get(0);
-
+				Card c = new Card();
+		        c.setName("Soldier Ally");
+		        c.setImageName("W 1 1 Soldier Ally");
+		        
+		        c.setController(Constant.Player.Human);
+		        c.setOwner(Constant.Player.Human);
+		        
+		        c.setManaCost("W");
+		        c.setToken(true);
+		        
+		        c.addType("Creature");
+		        c.addType("Soldier");
+		        c.addType("Ally");
+		        
+		        c.setBaseAttack(1);
+		        c.setBaseDefense(1);
+			
+				
 				humanList.add(c);
 			}
 			qa.setHuman(humanList);
