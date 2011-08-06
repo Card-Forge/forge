@@ -1,8 +1,8 @@
 Name:Deathgrip
 ManaCost:B B
 Types:Enchantment
-Text:B B: Counter target green spell.
-A:AB$Counter|Cost$B B|Type$Spell|CounterValid$Card.Green|SpellDescription$Counter target green spell.
+Text:no text
+A:AB$Counter | Cost$ B B | Type$ Spell | CounterValid$ Card.Green | SpellDescription$ Counter target green spell.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathgrip.jpg

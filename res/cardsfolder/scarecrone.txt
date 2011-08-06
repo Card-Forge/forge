@@ -1,6 +1,6 @@
 Name:Scarecrone
 ManaCost:3
-Types:Artifact Scarecrow
+Types:Artifact Creature Scarecrow
 Text:no text
 PT:1/2
 A:AB$Draw | Cost$ 1 T Sac<1/Scarecrow> | NumCards$ 1 | SpellDescription$ Draw a card.

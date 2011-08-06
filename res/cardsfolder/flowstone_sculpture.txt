@@ -1,7 +1,7 @@
 Name:Flowstone Sculpture
 ManaCost:6
-Types:Artifact Creature
-Text:2, Discard a card: put a +1/+1 counter on Flowstone Sculpture or Flowstone Sculpture gains flying, first strike or trample.
+Types:Artifact Creature Shapeshifter
+Text:no text
 PT:4/4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_sculpture.jpg
