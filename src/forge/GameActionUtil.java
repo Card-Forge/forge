@@ -3337,7 +3337,6 @@ public class GameActionUtil {
 		else if(c.getName().equals("Joraga Bard")) ally_BoostUntilEOT(c, "Vigilance");
 		else if(c.getName().equals("Seascape Aerialist")) ally_BoostUntilEOT(c, "Flying");
 		else if(c.getName().equals("Ondu Cleric")) ally_Ondu_Cleric(c);
-		else if(c.getName().equals("Kazuul Warlord")) ally_Kazuul_Warlord(c);
 
 	}
 
@@ -3486,34 +3485,6 @@ public class GameActionUtil {
 		else if(c.getController().equals(AllZone.ComputerPlayer)) AllZone.Stack.add(ability);
 	}
 
-	private static void ally_Kazuul_Warlord(Card c) {
-		final Card crd = c;
-
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, crd.getController());
-				CardList list = new CardList(play.getCards());
-				list = list.getType("Ally");
-
-				for(Card ally:list) {
-					ally.addCounter(Counters.P1P1, 1);
-				}
-			}
-		};// Ability
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(c.getName()).append(" - Ally: put a +1/+1 counter on each Ally creature you control.");
-		ability.setStackDescription(sb.toString());
-
-		if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showAllyDialog(c)) AllZone.Stack.add(ability);
-		}
-
-		else if(c.getController().equals(AllZone.ComputerPlayer)) AllZone.Stack.add(ability);
-	}
-
-
 	public static void executeDestroyCardEffects(Card c, Card destroyed) {
 		if(destroyed.isCreature()) executeDestroyCreatureCardEffects(c, destroyed);
 		if(destroyed.isLand()) executeDestroyLandCardEffects(c, destroyed);
@@ -3536,7 +3507,6 @@ public class GameActionUtil {
     }
     
     public static void showInfoDialg(String message) {
-    	//AllZone.Display.setCard(c); // c doesn't exist here!
     	JOptionPane.showMessageDialog(null, message);
     }
     
