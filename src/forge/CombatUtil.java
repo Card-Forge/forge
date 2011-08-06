@@ -2129,24 +2129,6 @@ public class CombatUtil {
         	AllZone.GameAction.moveToLibrary(b);
         }
         
-        else if (b.getName().equals("Alaborn Zealot") || b.getName().equals("Loyal Sentry")) {
-        	final Card blocker = b; 
-        	final Card attacker = a;
-        	final Ability ability = new Ability(b, "0") {
-        		@Override
-        		public void resolve() {
-        			AllZone.GameAction.destroy(attacker);
-        			AllZone.GameAction.destroy(blocker);
-        		}
-        	};
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(b).append(" - destroy blocked creature and itself.");
-        	ability.setStackDescription(sb.toString());
-        	
-        	AllZone.Stack.add(ability);
-        }
-        
         a.setCreatureGotBlockedThisCombat(true);
     }
     
