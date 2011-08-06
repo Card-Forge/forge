@@ -136,8 +136,24 @@ public class GameActionUtil {
 			ability.setStackDescription("Fallowsage - draw a card");
 			AllZone.Stack.add(ability);
 		}//end Fallowsage
+		
+		if(c.getType().contains("Mountain")) {
+			final String opponent = AllZone.GameAction.getOpponent(c.getController());
+			final CardList lifebloods = AllZoneUtil.getPlayerCardsInPlay(opponent, "Lifeblood");
+			for(Card lifeblood:lifebloods) {
+				Ability ability = new Ability(lifeblood, "0") {
+					@Override
+					public void resolve() {
+						//Lifeblood controller (opponent in this case) gains 1 life
+						AllZone.GameAction.addLife(opponent, 1);
+					}
+				};//Ability
+				ability.setStackDescription(lifeblood.getName()+" - Mountain was tapped, "+opponent+" gains 1 life.");
+				AllZone.Stack.add(ability);
+			}//for
+		}
 
-	}
+	}//end executeTapSideEffects()
 
 
 	public static void executePlayCardEffects(SpellAbility sa) {
