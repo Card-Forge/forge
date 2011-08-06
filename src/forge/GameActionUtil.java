@@ -3527,9 +3527,40 @@ public class GameActionUtil {
     
     public static void executePlayerCombatDamageEffects(Card c) {
         
-        if(c.getKeyword().contains(
-                "Whenever this creature deals damage to a player, that player gets a poison counter.")) playerCombatDamage_PoisonCounter(
-                c, 1);
+        if(c.getKeyword().contains("Whenever this creature deals damage to a player, that player gets a poison counter.")) 
+        	playerCombatDamage_PoisonCounter(c, 1);
+        
+        if (c.getKeyword().contains("Poisonous 1"))
+        {
+        	final Card crd = c;
+        	Ability ability = new Ability(c, "0")
+        	{
+        		public void resolve()
+        		{
+        			final String player = crd.getController();
+        	        final String opponent = AllZone.GameAction.getOpponent(player);
+        	        
+        	        if(opponent.equals(Constant.Player.Human)) 
+        	        	AllZone.Human_PoisonCounter.addPoisonCounters(1);
+        	        else
+        	        	AllZone.Computer_PoisonCounter.addPoisonCounters(1);
+        		}
+        	};
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(c);
+        	sb.append(" - Poisonous 1: ");
+        	sb.append(AllZone.GameAction.getOpponent(c.getController()));
+        	sb.append(" gets a poison counter.");
+        	
+        	ability.setStackDescription(sb.toString());
+        	ArrayList<String> keywords = c.getKeyword();
+        	
+        	for (int i=0;i<keywords.size();i++)
+        	{
+        		AllZone.Stack.add(ability);
+        	}
+        }
         
         if(c.getName().equals("Marsh Viper")) playerCombatDamage_PoisonCounter(c, 2);
         else if(c.getName().equals("Hypnotic Specter")) playerCombatDamage_Hypnotic_Specter(c);
@@ -8265,6 +8296,40 @@ public class GameActionUtil {
                                                                   for(int i = 0; i < creature.size(); i++) {
                                                                       c = creature.get(i);
                                                                       c.addExtrinsicKeyword(keyword);
+                                                                      
+                                                                      gloriousAnthemList.add(c);
+                                                                  }// for inner
+                                                              }// for outer
+                                                          }// execute()
+                                                      };
+                                                      
+    public static Command Virulent_Sliver           = new Command() {
+														private static final long serialVersionUID = 2755343097020369210L;
+														CardList                  gloriousAnthemList = new CardList();
+                                                          
+                                                          public void execute() {
+                                                              String keyword = "Poisonous 1";
+                                                              
+                                                              CardList list = gloriousAnthemList;
+                                                              Card c;
+                                                              // reset all cards in list - aka "old" cards
+                                                              for(int i = 0; i < list.size(); i++) {
+                                                                  c = list.get(i);
+                                                                  c.removeExtrinsicKeyword(keyword);
+                                                              }
+                                                              
+                                                              list.clear();
+                                                              PlayerZone[] zone = getZone("Virulent Sliver");
+                                                              
+                                                              for(int outer = 0; outer < zone.length; outer++) {
+                                                                  CardList creature = new CardList();
+                                                                  creature.addAll(AllZone.Human_Play.getCards());
+                                                                  creature.addAll(AllZone.Computer_Play.getCards());
+                                                                  creature = creature.getType("Sliver");
+                                                                  
+                                                                  for(int i = 0; i < creature.size(); i++) {
+                                                                      c = creature.get(i);
+                                                                      c.addStackingExtrinsicKeyword(keyword);
                                                                       
                                                                       gloriousAnthemList.add(c);
                                                                   }// for inner
@@ -14346,6 +14411,7 @@ public class GameActionUtil {
         commands.put("Fury_Sliver", Fury_Sliver);
         commands.put("Plated_Sliver", Plated_Sliver);
         commands.put("Crystalline_Sliver", Crystalline_Sliver);
+        commands.put("Virulent_Sliver", Virulent_Sliver);
         commands.put("Sidewinder_Sliver", Sidewinder_Sliver);
         commands.put("Essence_Sliver", Essence_Sliver);
         commands.put("Sinew_Sliver", Sinew_Sliver);

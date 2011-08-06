@@ -1,3 +1,9 @@
+Virulent Sliver
+G
+Creature Sliver
+All Sliver creatures have poisonous 1.
+1/1
+
 Armistice
 2 W
 Enchantment
