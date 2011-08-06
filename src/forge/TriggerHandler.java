@@ -236,12 +236,15 @@ public class TriggerHandler {
 			AbilityFactory AF = new AbilityFactory();
 			
 			final SpellAbility[] sa = new SpellAbility[1];
+			Card host = AllZoneUtil.getCardState(regtrig.getHostCard());
+			
 			sa[0] = regtrig.getOverridingAbility();
 			if(sa[0] == null)
 			{
-				sa[0] = AF.getAbility(regtrig.getHostCard().getSVar(trigParams.get("Execute")), regtrig.getHostCard(),regtrig.getTriggeringCard(runParams));
+				sa[0] = AF.getAbility(host.getSVar(trigParams.get("Execute")), host, regtrig.getTriggeringCard(runParams));
 			}
-			sa[0].setActivatingPlayer(regtrig.getHostCard().getController());
+
+			sa[0].setActivatingPlayer(host.getController());
 			if(sa[0].getStackDescription().equals(""))
 			{
 				sa[0].setStackDescription(sa[0].toString());
@@ -250,13 +253,13 @@ public class TriggerHandler {
 			{				
 				if(trigParams.get("Optional").equals("True"))
 				{
-					decider[0] = regtrig.getHostCard().getController();
+					decider[0] = host.getController();
 					if (sa[0].getTarget() != null)
 						sa[0].getTarget().setMandatory(false);
 				}
 				else if(trigParams.get("Optional").equals("OpponentDecides"))
 				{
-					decider[0] = regtrig.getHostCard().getController().getOpponent();
+					decider[0] = host.getController().getOpponent();
 				}				
 			}
 			else
@@ -750,7 +753,7 @@ public class TriggerHandler {
 					}
 					
 					//sa[0].resolve();
-					if(sa[0].getSourceCard().getController().equals(AllZone.HumanPlayer))
+					if(sa[0].getSourceCard().getController().isHuman())
 					{
 						AllZone.GameAction.playSpellAbility_NoStack(sa[0],true);
 					}
@@ -763,7 +766,7 @@ public class TriggerHandler {
 			};
 			wrapperAbility.setTrigger(true);
 			
-			if(regtrig.getHostCard().getController().equals(AllZone.HumanPlayer))
+			if(host.getController().isHuman())
 			{
 				AllZone.GameAction.playSpellAbility(wrapperAbility);
 			}
