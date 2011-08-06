@@ -1,5 +1,5 @@
 Name:Benthicore
-ManaCost:U 6
+ManaCost:6 U
 Types:Creature Elemental
 Text:no text
 PT:5/5
