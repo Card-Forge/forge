@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="res/lib/napkinlaf-1.2.jar"/>
-	<classpathentry kind="lib" path="res/lib/napkinlaf-swingset-1.2.jar"/>
 	<classpathentry kind="lib" path="res/lib/nimrodlf.jar"/>
 	<classpathentry kind="lib" path="res/lib/substance.jar"/>
 	<classpathentry kind="lib" path="res/lib/java-image-scaling-0.8.4.jar"/>

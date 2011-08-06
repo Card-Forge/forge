@@ -30,7 +30,6 @@ res/lib/java-image-scaling-0.8.4.jar -text svneol=unset#unset
 res/lib/jl1.0.1.jar -text svneol=unset#unset
 res/lib/miglayout-3.7.3.1-swing.jar -text svneol=unset#unset
 res/lib/napkinlaf-1.2.jar -text svneol=unset#unset
-res/lib/napkinlaf-swingset-1.2.jar -text svneol=unset#unset
 res/lib/nimrodlf.jar -text svneol=unset#unset
 res/lib/substance.jar -text svneol=unset#unset
 res/main.properties svneol=native#text/plain
