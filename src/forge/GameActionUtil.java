@@ -89,7 +89,7 @@ public class GameActionUtil {
 		upkeep_Barren_Glory();
 		upkeep_Felidar_Sovereign();
 
-		upkeep_Convalescence();
+		// upkeep_Convalescence();
 		upkeep_Convalescent_Care();
 		upkeep_Ancient_Runes();
 		upkeep_Karma();
@@ -4410,6 +4410,7 @@ public class GameActionUtil {
 		}// if
 	}// upkeep_Karma()
 	
+	/* Converted to trigger and AF
 	private static void upkeep_Convalescence() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Convalescence");
@@ -4434,6 +4435,7 @@ public class GameActionUtil {
 			}
 		}// for
 	}// upkeep_Convalescence()
+	*/
 
 	private static void upkeep_Convalescent_Care() {
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -4465,7 +4467,7 @@ public class GameActionUtil {
             }
 
 		}// for
-	}// upkeep_Convalescence()
+	}// upkeep_Convalescence_Care()
 	
 	private static void upkeep_Dega_Sanctuary() {
 		final Player player = AllZone.Phase.getPlayerTurn();
