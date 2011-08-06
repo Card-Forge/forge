@@ -2692,6 +2692,21 @@ public class Card extends MyObservable {
         	AllZone.Stack.add(ability2);
         }
         
+        if(this.getName().equals("Fungusaur")) {
+        	Ability ability2 = new Ability(this, "0") {
+        		@Override
+        		public void resolve() {
+        			addCounter(Counters.P1P1, 1);
+        		}
+        	}; // ability2
+        	
+        	StringBuilder sb2 = new StringBuilder();
+        	sb2.append(this.getName()).append(" - gets a +1/+1 counter");
+        	ability2.setStackDescription(sb2.toString());
+        	
+        	AllZone.Stack.add(ability2);
+        }
+        
         if(source.getKeyword().contains("Deathtouch") && this.isCreature()) {
             AllZone.GameAction.destroy(this);
             //AllZone.Combat.removeFromCombat(card);
