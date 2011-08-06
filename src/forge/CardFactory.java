@@ -17795,62 +17795,60 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Hurkyl's Recall")) {
-            /*
-             * Return all artifacts target player owns to his or her hand.
-             */
-             SpellAbility spell = new Spell(card) {
-             private static final long serialVersionUID = -4098702062413878046L;
-             
-             @Override
-             public boolean canPlayAI() {
-                PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
-                CardList humanArts = new CardList(humanPlay.getCards());
-                humanArts = humanArts.getType("Artifact");
-                if(humanArts.size() > 0) {
-                   return true;
-                }
-                else {
-                   return false;
-                }
-             }//canPlayAI
-             
-             @Override
-             public void chooseTargetAI() {
-                 setTargetPlayer(Constant.Player.Human);
-              }//chooseTargetAI()
-             
-             @Override
-                 public void resolve() {
-                    String player = getTargetPlayer();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                    final String opponent = AllZone.GameAction.getOpponent(player);
-                    PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play, opponent);
-                     CardList artifacts = new CardList(play.getCards());
-                     artifacts.addAll(oppPlay.getCards());
-                     artifacts = artifacts.getType("Artifact");
-                    
-                     for(int i = 0; i < artifacts.size(); i++) {
-                        Card thisArtifact = artifacts.get(i);
-                        //if is token, remove token from play, else return artifact to hand
-                        if(thisArtifact.getOwner().equals(player)) {
-                           if(thisArtifact.isToken()) {
-                              play.remove(thisArtifact);
-                           }
-                           else {
-                              AllZone.GameAction.moveTo(hand, thisArtifact);
-                           }
-                        }
-                     }
-                 }//resolve()
-             };
-             card.clearSpellAbility();
-             card.addSpellAbility(spell);
-             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-         }//*************** END ************ END **************************
-        
-        
-        
+        	/*
+        	 * Return all artifacts target player owns to his or her hand.
+        	 */
+        	SpellAbility spell = new Spell(card) {
+        		private static final long serialVersionUID = -4098702062413878046L;
+
+        		@Override
+        		public boolean canPlayAI() {
+        			PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+        			CardList humanArts = new CardList(humanPlay.getCards());
+        			humanArts = humanArts.getType("Artifact");
+        			if(humanArts.size() > 0) {
+        				return true;
+        			}
+        			else {
+        				return false;
+        			}
+        		}//canPlayAI
+
+        		@Override
+        		public void chooseTargetAI() {
+        			setTargetPlayer(Constant.Player.Human);
+        		}//chooseTargetAI()
+
+        		@Override
+        		public void resolve() {
+        			String player = getTargetPlayer();
+        			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+        			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+        			final String opponent = AllZone.GameAction.getOpponent(player);
+        			PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play, opponent);
+        			CardList artifacts = new CardList(play.getCards());
+        			artifacts.addAll(oppPlay.getCards());
+        			artifacts = artifacts.getType("Artifact");
+
+        			for(int i = 0; i < artifacts.size(); i++) {
+        				Card thisArtifact = artifacts.get(i);
+        				//if is token, remove token from play, else return artifact to hand
+        				if(thisArtifact.getOwner().equals(player)) {
+        					if(thisArtifact.isToken()) {
+        						play.remove(thisArtifact);
+        					}
+        					else {
+        						AllZone.GameAction.moveTo(hand, thisArtifact);
+        					}
+        				}
+        			}
+        		}//resolve()
+        	};
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+        }//*************** END ************ END **************************
+
         //*************** START *********** START **************************
         else if(cardName.equals("Fracturing Gust")) {
            /*
