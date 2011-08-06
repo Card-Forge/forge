@@ -4000,6 +4000,9 @@ public class GameActionUtil {
 		 * you may pay 2G. If you do, return target creature card from your 
 		 * graveyard to your hand.
 		 */
+		
+		// The ordering is a bit off, it should be: trigger, add ability, resolve, pay mana, if paid, return creature.
+		
 		final Player player = AllZone.Phase.getPlayerTurn();
 		final CardList grave = AllZoneUtil.getPlayerGraveyard(player, "Genesis");
 
@@ -4014,6 +4017,7 @@ public class GameActionUtil {
 				};
 				@Override
 				public void resolve() {
+					// should check if Genesis is still there
 					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 					PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 					if(player.equals(AllZone.HumanPlayer) && grave.size() > 0) {
@@ -4035,24 +4039,21 @@ public class GameActionUtil {
 				}
 			};
 
-			final Command unpaidCommand = new Command() {
-				private static final long serialVersionUID = 8969863703446141914L;
-
-				public void execute() {
-					;
-				}
-			};
-
 			final Command paidCommand = new Command() {
 				private static final long serialVersionUID = -5102763277280782548L;
 
 				public void execute() {
-					
+					/*
 					StringBuilder sb = new StringBuilder();
 					sb.append(c.getName()).append(" - return 1 creature from your graveyard to your hand");
 					ability.setStackDescription(sb.toString());
-					
+
 					AllZone.Stack.add(ability);
+					*/
+					
+					// Resolve through the Command, since it shouldn't hit the stack again. 
+					// Not a great solution, but not terrible
+					ability.resolve();
 				}
 			};
 
@@ -4061,8 +4062,21 @@ public class GameActionUtil {
 				String[] choices = {"Yes", "No"};
 				Object choice = AllZone.Display.getChoice("Use Genesis?", choices);
 				if(choice.equals("Yes")) {
-					GameActionUtil.payManaDuringAbilityResolve("Pay cost for " + c + "\r\n", ability.getManaCost(), 
-							paidCommand, unpaidCommand);
+					Ability pay = new Ability(c, "0"){
+						public void resolve() {
+							if (AllZone.getZone(c).is(Constant.Zone.Graveyard)){
+								GameActionUtil.payManaDuringAbilityResolve("Pay cost for " + c + "\r\n", ability.getManaCost(), 
+										paidCommand, Command.Blank);
+							}
+							else{
+								System.out.println("Genesis no longer in graveyard");
+							}
+							
+						}
+					};
+					pay.setStackDescription("Genesis - Upkeep Ability");
+					
+					AllZone.Stack.add(pay);
 				}
 			} else //computer
 			{
