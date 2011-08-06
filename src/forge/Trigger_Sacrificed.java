@@ -10,6 +10,14 @@ public class Trigger_Sacrificed extends Trigger {
 
 	@Override
 	public boolean performTest(HashMap<String, Object> runParams) {
+		if(mapParams.containsKey("ValidPlayer"))
+		{
+			if(!matchesValid(runParams.get("Player"),mapParams.get("ValidPlayer").split(","),hostCard))
+			{
+				System.out.println("Test failed: Discarding player not valid.");
+				return false;
+			}
+		}
 		if(mapParams.containsKey("ValidCard"))
 		{
 			if(!((Card)runParams.get("Sacrificed")).isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard))

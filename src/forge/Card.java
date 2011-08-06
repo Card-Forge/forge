@@ -2717,6 +2717,10 @@ public class Card extends MyObservable {
              else if (Property.startsWith("notblocking")) { if(isBlocking())  return false;}
 		
              else if (Property.startsWith("blocked")) { if(!AllZone.Combat.isBlocked(this))  return false;}
+        
+             else if (Property.startsWith("kicked")) { if(!isKicked()) return false; }
+        
+             else if (Property.startsWith("notkicked")) { if(isKicked()) return false; }
  			
              else if(Property.startsWith("non")) // ... Other Card types
              	{ if(isType(Property.substring(3))) return false;}
