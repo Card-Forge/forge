@@ -4,7 +4,7 @@ Types:Artifact Creature Golem
 Text:no text
 PT:3/2
 K:CARDNAME doesn't untap during your untap step.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigUntap | TriggerDescription$ Whenever an artifact enters the battlefield, you may untap CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other | IsPresent$ Card.Self+tapped | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigUntap | TriggerDescription$ Whenever an artifact enters the battlefield, you may untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battered_golem.jpg

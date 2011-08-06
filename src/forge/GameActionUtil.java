@@ -379,30 +379,6 @@ public class GameActionUtil {
 		 * Mesmeric Orb - Whenever a permanent becomes untapped, that permanent's
 		 * controller puts the top card of his or her library into his or her graveyard.
 		 */
-		if(c.isPermanent()) {
-			final Player controller = c.getController();
-			final CardList orbs = AllZoneUtil.getCardsInPlay("Mesmeric Orb");
-			for(Card orb:orbs) {
-				Ability ability = new Ability(orb, "0") {
-					@Override
-					public void resolve() {
-						CardList lib = AllZoneUtil.getPlayerCardsInLibrary(controller);
-						if(lib.size() >0) {
-							AllZone.GameAction.moveToGraveyard(lib.get(0));
-						}
-					}
-				};//Ability
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(orb.getName()).append(" - ").append(c).append(" was untapped, ");
-				sb.append(controller).append(" puts top card of library into graveyard.");
-				ability.setStackDescription(sb.toString());
-				
-				if(AllZoneUtil.getPlayerCardsInLibrary(controller).size() > 0) {
-					AllZone.Stack.add(ability);
-				}
-			}//for
-		}//end Mesmeric Orb
 		
 		/*
 		 * Wake Thrasher - Whenever a permanent you control becomes untapped,
