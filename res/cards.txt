@@ -1,3 +1,38 @@
+Dragon Tyrant
+8 R R
+Creature Dragon
+no text
+6/6
+Flying
+Trample
+Double Strike
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:R R R R
+abPump R:+1/+0
+
+Chaosphere
+2 R
+World Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/CARDNAME can block only creatures with flying.:Type.Creature!with.Flying:Creatures with flying can block only creatures with flying.
+StaticEffect:Play:All Permanents:Keyword/Reach:Type.Creature!without.Flying:Creatures without flying have reach. (They can block creatures with flying.)
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+
+Dense Canopy
+1 G
+Enchantment
+no text
+StaticEffect:Play:All Permanents:Keyword/CARDNAME can block only creatures with flying.:Type.Creature!with.Flying:Creatures with flying can block only creatures with flying.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+
+Seething Pathblazer
+2 R
+Creature Elemental Warrior
+no text
+2/2
+abPump 0 Sac-Elemental:+2/+0/First Strike
+
 Abandoned Outpost
 no cost
 Land
