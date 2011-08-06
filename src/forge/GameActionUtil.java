@@ -3302,6 +3302,7 @@ public class GameActionUtil {
 			if(c.getCreatureGotBlockedThisCombat()) c.setCreatureGotBlockedThisCombat(false);
 
 			c.resetReceivedDamageFromThisTurn();
+			c.resetDealtDamageToThisTurn();
 		}
 		
 		AllZone.GameInfo.setAssignedFirstStrikeDamageThisCombat(false);

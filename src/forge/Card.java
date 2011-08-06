@@ -45,6 +45,7 @@ public class Card extends MyObservable {
     private ArrayList<Card>				rememberedCards						= new ArrayList<Card>();
     
     private HashMap<Card, Integer>       receivedDamageFromThisTurn        = new HashMap<Card, Integer>();
+    private HashMap<Card, Integer>		 dealtDamageToThisTurn			   = new HashMap<Card, Integer>();
     private HashMap<Card, Integer>       assignedDamageHashMap             = new HashMap<Card, Integer>();
     
     private boolean                      unCastable;
@@ -2609,7 +2610,11 @@ public class Card extends MyObservable {
         else if (Property.startsWith("Attached")) {
         	if (!equipping.contains(source) && !enchanting.contains(source)) return false; }
 
-
+        else if (Property.startsWith("DamagedBy")) {
+        	if(!receivedDamageFromThisTurn.containsKey(source)) return false; }
+        else if (Property.startsWith("Damaged")) {
+        	if(!dealtDamageToThisTurn.containsKey(source)) return false; }
+        
         else if (Property.startsWith("SharesColorWith")) { if(!sharesColorWith(source)) return false; }
 				
          else if (Property.startsWith("with")) // ... Card keywords
@@ -2832,8 +2837,8 @@ public class Card extends MyObservable {
         receivedDamageFromThisTurn.put(c, damage);
     }
     
-    public void setReceivedDamageFromThisTurn(HashMap<Card, Integer> receivedDamageFromThisTurn) {
-        this.receivedDamageFromThisTurn = receivedDamageFromThisTurn;
+    public void setReceivedDamageFromThisTurn(HashMap<Card, Integer> receivedDamageList) {
+        receivedDamageFromThisTurn = receivedDamageList;
     }
     
     public HashMap<Card, Integer> getReceivedDamageFromThisTurn() {
@@ -2842,6 +2847,22 @@ public class Card extends MyObservable {
     
     public void resetReceivedDamageFromThisTurn() {
         receivedDamageFromThisTurn.clear();
+    }
+    
+    public void addDealtDamageToThisTurn(Card c, int damage) {
+    	dealtDamageToThisTurn.put(c, damage);
+    }
+    
+    public void setDealtDamageToThisTurn(HashMap<Card, Integer> dealtDamageList) {
+    	dealtDamageToThisTurn = dealtDamageList;
+    }
+    
+    public HashMap<Card, Integer> getDealtDamageToThisTurn() {
+        return dealtDamageToThisTurn;
+    }
+    
+    public void resetDealtDamageToThisTurn() {
+    	dealtDamageToThisTurn.clear();
     }
     
     //how much damage is enough to kill the creature (for AI)
@@ -3186,6 +3207,7 @@ public class Card extends MyObservable {
         Log.debug("Adding " + damageToAdd + " damage to " + getName());
         
         addReceivedDamageFromThisTurn(source, damageToAdd);
+        source.addDealtDamageToThisTurn(this, damageToAdd);
         
         GameActionUtil.executeDamageDealingEffects(source, damageToAdd);
         
