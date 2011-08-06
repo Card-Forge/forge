@@ -486,8 +486,7 @@ public class GameActionUtil {
 		playCard_Halcyon_Glaze(c);
 		playCard_Thief_of_Hope(c);
 		playCard_Infernal_Kirin(c);
-		playCard_Cloudhoof_Kirin(c);	
-		playCard_Gravelgill_Duo(c);
+		playCard_Cloudhoof_Kirin(c);
 		playCard_Safehold_Duo(c);
 		playCard_Tattermunge_Duo(c);
 		playCard_Thistledown_Duo(c);
@@ -1016,85 +1015,6 @@ public class GameActionUtil {
 			}
 		}
 	}
-
-	public static void playCard_Gravelgill_Duo(Card c) {
-		final Player controller = c.getController();
-
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Gravelgill Duo");
-
-		if(list.size() > 0) {
-			if(c.isBlue()) {
-				for(int i = 0; i < list.size(); i++) {
-					final Card card = list.get(i);
-					final Command untilEOT = new Command() {
-						private static final long serialVersionUID = -4569751606008597903L;
-
-						public void execute() {
-							if(AllZone.GameAction.isCardInPlay(card)) {
-								card.addTempAttackBoost(-1);
-								card.addTempDefenseBoost(-1);
-
-
-							}
-						}
-					};
-
-					Ability ability2 = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							card.addTempAttackBoost(1);
-							card.addTempDefenseBoost(1);
-							AllZone.EndOfTurn.addUntil(untilEOT);
-						}
-					}; // ability2
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - ").append(c.getController());
-					sb.append(" played a blue spell, Gravelgill Duo gets +1/+1 until end of turn.");
-					ability2.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability2);
-				}
-			}//if
-		}
-
-		if(c.isBlack()) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
-				final Command untilEOT = new Command() {
-					private static final long serialVersionUID = -4569751606008597903L;
-
-					public void execute() {
-						if(AllZone.GameAction.isCardInPlay(card)) {
-							card.removeIntrinsicKeyword("Fear");
-
-						}
-					}
-				};
-
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						if(!card.getIntrinsicKeyword().contains("Fear")) card.addIntrinsicKeyword("Fear");
-						AllZone.EndOfTurn.addUntil(untilEOT);
-					}
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" played a black spell, Emberstrike Duo gains fear until end of turn.");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-			}
-		}//if
-
-	}//Gravelgill Duo
 	
 	public static void playCard_Chalice_of_the_Void(Card c) {
 		CardList list = AllZoneUtil.getCardsInPlay();
