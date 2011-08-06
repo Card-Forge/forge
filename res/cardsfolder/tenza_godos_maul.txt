@@ -5,7 +5,7 @@ Text:Equipped creature gets +1/+1.
 K:eqPump 1:+1/+1
 K:stPumpEquipped:Creature.Legendary:2/2:No Condition:As long as it's legendary, it gets an additional +2/+2.
 K:stPumpEquipped:Creature.Red:0/0/Trample:No Condition:As long as it's red, it has trample.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tenza_godos_maul.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/271.jpg
