@@ -1,3 +1,29 @@
+Dakmor Plague
+3 B B
+Sorcery
+no text
+spDamageAll:Player,Creature:3:Dakmor Plague deals 3 damage to each creature and each player.
+
+Dry Spell
+1 B
+Sorcery
+no text
+spDamageAll:Player,Creature:1:Dry Spell deals 1 damage to each creature and each player.
+
+Famine
+3 B B
+Sorcery
+no text
+spDamageAll:Player,Creature:3:Famine deals 3 damage to each creature and each player.
+
+Psychotic Haze
+2 B B
+Instant
+no text
+spDamageAll:Player,Creature:1:Psychotic Haze deals 1 damage to each creature and each player.
+Madness:1 B
+SVar:RemAIDeck:True
+
 Chain Reaction
 2 R R
 Sorcery
