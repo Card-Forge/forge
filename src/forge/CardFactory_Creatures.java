@@ -5747,8 +5747,62 @@ public class CardFactory_Creatures {
           };//Input target
           ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
-        
          */
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Mindwrack Liege")) {
+            final SpellAbility ability = new Ability(card, "UR UR UR UR") {
+                private static final long serialVersionUID = 3978560192382921056L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    return getCreature().size() != 0;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    card.tap();
+                    Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
+                    setTargetCard(target);
+                }
+                
+                CardList getCreature() {
+                    CardList list = new CardList(AllZone.Computer_Hand.getCards());
+                    list = list.getType("Creature");
+                    CardList list2 = list.getColor("Blue");
+                    list2.add(list.getColor("Red"));
+                    return list2;
+                }
+                
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    
+                    if(AllZone.GameAction.isCardInZone(c, hand)) {
+                        hand.remove(c);
+                        play.add(c);
+                    }
+                }
+            };
+            
+            ability.setBeforePayMana(new Input() {
+                private static final long serialVersionUID = -1038409328463518290L;
+                
+                @Override
+                public void showMessage() {
+                    String controller = card.getController();
+                    CardList creats = new CardList(AllZone.getZone(Constant.Zone.Hand, controller).getCards());
+                    creats = creats.getType("Creature");
+                    CardList creats2 = creats.getColor("U");
+                    creats2.add(creats.getColor("R"));      
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, creats2, "Select a creature", false,
+                            false));
+                }
+            });
+            card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
         else if(cardName.equals("Weathered Wayfarer")) {
