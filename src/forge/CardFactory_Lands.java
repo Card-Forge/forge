@@ -1988,7 +1988,9 @@ class CardFactory_Lands {
             };
             
             ability.setDescription("1: Return Oboro, Palace in the Clouds to your hand.");
-            ability.setStackDescription("Return " + card.getName() + " to your hand.");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Return ").append(card.getName()).append(" to your hand.");
+            ability.setStackDescription(sb.toString());
             
             card.addSpellAbility(ability);
             
@@ -2088,7 +2090,9 @@ class CardFactory_Lands {
                 private static final long serialVersionUID = 2339209292936869322L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName() + " - put a 1/1 Spirit creature token into play");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - put a 1/1 Spirit creature token into play");
+                	ability.setStackDescription(sb.toString());
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2138,8 +2142,9 @@ class CardFactory_Lands {
                 private static final long serialVersionUID = 5991465998493672076L;
                 
                 public void execute() {
-                    ability.setStackDescription(card.getName()
-                            + " - search library for a plains card and put it into play tapped.");
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(card.getName()).append(" - search library for a plains card and put it into play tapped.");
+                	ability.setStackDescription(sb.toString());
                     AllZone.Stack.add(ability);
                 }
             };
@@ -2173,7 +2178,6 @@ class CardFactory_Lands {
                             String[] types = { "Creature" };
                             String[] keywords = { "Changeling" };
                             CardFactoryUtil.revertManland(c, types, keywords, "", stamp);
-
                         }
                     };
                     
@@ -2184,7 +2188,9 @@ class CardFactory_Lands {
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
             a1.setDescription("1: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.");
-            a1.setStackDescription(card + " becomes a 2/2 creature with changeling until EOT");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" becomes a 2/2 creature with changeling until EOT");
+            a1.setStackDescription(sb.toString());
             
             Command paid1 = new Command() {
                 private static final long serialVersionUID = -601119544294387668L;
@@ -2269,12 +2275,12 @@ class CardFactory_Lands {
                 }
             };//SpellAbility
             
-
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card
-                    + " becomes a 1/1 skeleton creature with B: regenerate this creature until EOT");
-            a1.setDescription("1B: Spawning Pool becomes a 1/1 skeleton creature with B: regenerate this creature until end of the turn.  It's still a land.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" becomes a 1/1 skeleton creature with B: regenerate this creature until EOT");
+            a1.setStackDescription(sb.toString());
+            a1.setDescription("1B: Spawning Pool becomes a 1/1 skeleton creature with B: regenerate this creature until end of the turn. It's still a land.");
             Command paid1 = new Command() {
                 private static final long serialVersionUID = -6800983290478844750L;
                 
@@ -2790,8 +2796,10 @@ class CardFactory_Lands {
             };
             
             ability.setDescription("2, tap: Add B to your mana pool for each for each black creature card in your graveyard.");
-            ability.setStackDescription(cardName
-                    + " adds B to your mana pool for each black creature card in your graveyard.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName).append(" adds B to your mana pool for each black creature card in your graveyard.");
+            ability.setStackDescription(sb.toString());
+            
             //card.clearSpellAbility();
             //card.setText(card.getText() +  ability.toString());
             card.addSpellAbility(ability);
@@ -2882,8 +2890,9 @@ class CardFactory_Lands {
             
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card
-                    + " becomes a black and green Plant Zombie creature with power and toughness each equal to the number of creature cards in your graveyard until EOT");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" becomes a black and green Plant Zombie creature with power and toughness each equal to the number of creature cards in your graveyard until EOT");
+            a1.setStackDescription(sb.toString());            
             a1.setDescription("3 B G: Until end of turn, Svogthos, the Restless Tomb becomes a black and green Plant Zombie creature with This creature's power and toughness are each equal to the number of creature cards in your graveyard. It's still a land.");
         }//*************** END ************ END **************************
         
@@ -2924,8 +2933,11 @@ class CardFactory_Lands {
             
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card + " becomes a 2/1 creature with first strike until EOT");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" becomes a 2/1 creature with first strike until EOT");
+            a1.setStackDescription(sb.toString());
             a1.setDescription("1 R: Ghitu Encampment becomes a 2/1 red Warrior creature with first strike until end of turn. It's still a land.");
+            
             Command paid1 = new Command() {
                 private static final long serialVersionUID = -6800983290478844750L;
                 
@@ -2957,8 +2969,11 @@ class CardFactory_Lands {
             
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card + " becomes a 3/3 Elemental artifact creature that's still a land.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" becomes a 3/3 Elemental artifact creature that's still a land.");
+            a1.setStackDescription(sb.toString());            
             a1.setDescription("6: Stalking Stones becomes a 3/3 Elemental artifact creature that's still a land. (This effect lasts indefinitely.)");
+            
             Command paid1 = new Command() {
                 private static final long serialVersionUID = -6800983290478844750L;
                 
@@ -3028,8 +3043,9 @@ class CardFactory_Lands {
             
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card
-                    + " - until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance.");
+            a1.setStackDescription(sb.toString());
             a1.setDescription("3 W U: Until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance. It's still a land.");
         }//*************** END ************ END **************************
         
@@ -3123,6 +3139,7 @@ class CardFactory_Lands {
                 }
 
             };//SpellAbility
+            
             final Command comesIntoPlay = new Command() {
 				private static final long serialVersionUID = 4245563898487609274L;
 
@@ -3135,8 +3152,9 @@ class CardFactory_Lands {
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
             card.addComesIntoPlayCommand(comesIntoPlay);
-            a1.setStackDescription(card
-                    + " - until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with {X}: This creature gets +X/+0 until end of turn.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with {X}: This creature gets +X/+0 until end of turn.");
+            a1.setStackDescription(sb.toString());
             a1.setDescription("1 B R: Until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with {X}: This creature gets +X/+0 until end of turn. It's still a land.");
         }//*************** END ************ END **************************
         
@@ -3175,8 +3193,9 @@ class CardFactory_Lands {
             
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card
-                    + " - until end of turn, Stirring Wildwood becomes a 3/4 green and white Elemental creature with reach.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - until end of turn, Stirring Wildwood becomes a 3/4 green and white Elemental creature with reach.");
+            a1.setStackDescription(sb.toString());
             a1.setDescription("1 G W: Until end of turn, Stirring Wildwood becomes a 3/4 green and white Elemental creature with reach. It's still a land.");
         }//*************** END ************ END **************************
         
@@ -3215,8 +3234,9 @@ class CardFactory_Lands {
             
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card
-                    + " - Until end of turn, Creeping Tar Pit becomes a 3/2 blue and black Elemental creature and is unblockable.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - Until end of turn, Creeping Tar Pit becomes a 3/2 blue and black Elemental creature and is unblockable.");
+            a1.setStackDescription(sb.toString());
             a1.setDescription("1 U B: Until end of turn, Creeping Tar Pit becomes a 3/2 blue and black Elemental creature and is unblockable. It's still a land.");
         }//*************** END ************ END **************************
         
@@ -3260,8 +3280,9 @@ class CardFactory_Lands {
             
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card
-                    + " - until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\"");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\"");
+            a1.setStackDescription(sb.toString());
             a1.setDescription("2 R G: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land.");
         }//*************** END ************ END **************************
         
@@ -3301,8 +3322,9 @@ class CardFactory_Lands {
             
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card
-                    + " - until end of turn,  becomes a 4/2 Golem artifact creature until end of turn.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - until end of turn, becomes a 4/2 Golem artifact creature until end of turn.");
+            a1.setStackDescription(sb.toString());
             a1.setDescription("4: Until end of turn, becomes a 4/2 Golem artifact creature until end of turn. It's still a land.");
         }//*************** END ************ END **************************
         
@@ -3487,7 +3509,10 @@ class CardFactory_Lands {
         			AllZone.Stack.add(ability);
         		}
         	};
-        	ability.setStackDescription(cardName + " - Rearrange the top 3 cards in your library in any order.");
+        	
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(cardName).append(" - Rearrange the top 3 cards in your library in any order.");
+        	ability.setStackDescription(sb.toString());
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
@@ -3587,13 +3612,21 @@ class CardFactory_Lands {
 					return card.getCounters(Counters.EON) > 0;
 				}
         	};//extraTurn
-
-        	skipTurn.setDescription("U, tap: Put an eon counter on "+card.getName()+". Skip your next turn.");
-        	skipTurn.setStackDescription(card.getName()+" - add an Eon counter and skip you next turn.");
+        	
+        	StringBuilder sbDesc = new StringBuilder();
+        	sbDesc.append("U, tap: Put an eon counter on ").append(card.getName()).append(". Skip your next turn.");
+        	skipTurn.setDescription(sbDesc.toString());
+        	StringBuilder sbStack = new StringBuilder();
+        	sbStack.append(card.getName()).append(" - add an Eon counter and skip you next turn.");
+        	skipTurn.setStackDescription(sbStack.toString());
         	card.addSpellAbility(skipTurn);
         	
-        	extraTurn.setDescription("tap, Remove an eon counter from "+card.getName()+" and return it to its owner's hand: Take an extra turn after this one.");
-        	extraTurn.setStackDescription(card.getName()+" - return this card to its owner's hand.  Take an extra turn after this one.");
+        	StringBuilder sbDesc2 = new StringBuilder();
+        	sbDesc2.append("tap, Remove an eon counter from ").append(card.getName()).append(" and return it to its owner's hand: Take an extra turn after this one.");
+        	extraTurn.setDescription(sbDesc2.toString());
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(card.getName()).append(" - return this card to its owner's hand. Take an extra turn after this one.");
+        	extraTurn.setStackDescription(sb.toString());
         	card.addSpellAbility(extraTurn);
         	
         	skipTurn.setBeforePayMana(new Input_PayManaCost(skipTurn));
