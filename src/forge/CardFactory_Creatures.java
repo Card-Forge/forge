@@ -8500,7 +8500,8 @@ public class CardFactory_Creatures {
                     Card c = getTargetCard();
                     movedCreature[0] = c;
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if(AllZone.GameAction.isCardInPlay(card) && AllZone.GameAction.isCardInPlay(c) && 
+                    		CardFactoryUtil.canTarget(card, c)) {
                         //set summoning sickness
                         if(c.getKeyword().contains("Haste")) {
                             c.setSickness(false);
