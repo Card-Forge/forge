@@ -71,6 +71,7 @@ public class AbilityFactory_Regenerate {
 		if(CardFactoryUtil.AI_isMainPhase()) {
 			CardList play = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
 			for(Card card:play) {
+				if(card.getShield() > 0) return false;
 				if(CardFactoryUtil.AI_doesCreatureAttack(card)) {
 					//"Fuzzy logic" to determine if using a regenerate ability might be helpful because
 					//we can't wait to decide to play this ability during combat, like the human can
