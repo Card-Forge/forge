@@ -1324,46 +1324,6 @@ public class CardFactory_Instants {
         	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
-  
-        //*****************************START*******************************
-        else if(cardName.equals("Twiddle") || cardName.equals("Twitch")) {
-        	/*
-        	 * You may tap or untap target artifact, creature, or land.
-        	 */
-        	String cost = cardName.equals("Twiddle") ? "U" : "2 U";
-        	Ability_Cost abCost = new Ability_Cost(cost, cardName, false);
-        	Target t = new Target(card, "Select target artifact, creature, or land", "Artifact,Creature,Land".split(","));
-        	final SpellAbility spell = new Spell(card, abCost, t) {
-				private static final long serialVersionUID = 8126471702898625866L;
-				
-				public boolean canPlayAI() {
-        			return false;
-        		}
-        		public void chooseTargetAI() {
-        			//setTargetCard(c);
-        		}//chooseTargetAI()
-        		public void resolve() {
-        			Card target = getTargetCard();
-        			if(AllZone.GameAction.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
-        				if(card.getController().isHuman()) {
-        					String[] tapOrUntap = new String[] {"Tap", "Untap"};
-        					Object z = GuiUtils.getChoice("Tap or Untap?", tapOrUntap);
-        					boolean tap = (z.equals("Tap")) ? true : false;
-        					
-        					if(tap) target.tap();
-        					else target.untap();
-        				}
-        				
-        				if (cardName.equals("Twitch"))
-        					getActivatingPlayer().drawCard();
-        			}
-        		}
-        	};//SpellAbility
-        	
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);		
-        }//****************END*******END***********************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Storm Seeker") || cardName.equals("Sudden Impact")) {
