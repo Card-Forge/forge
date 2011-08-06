@@ -1,0 +1,8 @@
+Name:City of Traitors
+ManaCost:no cost
+Types:Land
+Text:When you play another land, sacrifice CARDNAME.
+K:tap: add 2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/city_of_traitors.jpg
+End

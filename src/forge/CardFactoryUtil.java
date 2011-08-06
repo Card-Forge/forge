@@ -4520,6 +4520,8 @@ public class CardFactoryUtil {
     
     public static void playLandEffects(Card c){
     	final Player player = c.getController();
+    	CardList cityOfTraitors = AllZoneUtil.getPlayerCardsInPlay(player, "City of Traitors");
+    	cityOfTraitors.remove(c);
     	boolean extraLand;
     	if (player.equals(AllZone.HumanPlayer)){
     		extraLand = AllZone.GameInfo.humanPlayedFirstLandThisTurn();
@@ -4538,6 +4540,19 @@ public class CardFactoryUtil {
 	                }
 	            };
 	            ability.setStackDescription("Fastbond - Deals 1 damage to you.");
+	            AllZone.Stack.add(ability);
+	        }
+        }
+		
+		if(cityOfTraitors.size() > 0) {
+	        for(final Card city : cityOfTraitors){
+	            SpellAbility ability = new Ability(city, "0") {
+	                @Override
+	                public void resolve() {
+	                	AllZone.GameAction.sacrifice(city);
+	                }
+	            };
+	            ability.setStackDescription(city.getName()+" - sacrifice "+city.getName());
 	            AllZone.Stack.add(ability);
 	        }
         }
