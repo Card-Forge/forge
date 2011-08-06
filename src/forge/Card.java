@@ -42,6 +42,8 @@ public class Card extends MyObservable {
     private ArrayList<Ability_Mana>      manaAbility                       = new ArrayList<Ability_Mana>();
     private ArrayList<Card_Color>		 cardColor						   = new ArrayList<Card_Color>();
     
+    private ArrayList<Card>				rememberedCards						= new ArrayList<Card>();
+    
     private HashMap<Card, Integer>       receivedDamageFromThisTurn        = new HashMap<Card, Integer>();
     private HashMap<Card, Integer>       assignedDamageHashMap             = new HashMap<Card, Integer>();
     
@@ -174,6 +176,21 @@ public class Card extends MyObservable {
     //CardFactory.SSP_canPlay(Card) uses these variables
     
     private int                          abilityUsed;                                                           //How many times has this ability been used?
+    
+    public void addRemembered(Card c)
+    {
+    	rememberedCards.add(c);
+    }
+    
+    public ArrayList<Card> getRemembered()
+    {
+    	return rememberedCards;
+    }
+    
+    public void clearRemembered()
+    {
+    	rememberedCards.clear();
+    }
     
     public void addTrigger(Trigger t)
     {
@@ -1066,6 +1083,17 @@ public class Card extends MyObservable {
             if (start < 0 || start >= sb.length())
                 break;
             sb.replace(start, start+4, "\r\n");
+        }
+        
+        //Remembered cards
+        if(rememberedCards.size() > 0)
+	        sb.append("Remembered: \r\n");
+        for(Card c : rememberedCards)
+        {
+        	sb.append(c.getName() + "(");
+        	sb.append(c.getUniqueNumber());
+        	sb.append(")");
+        	sb.append("\r\n");
         }
         
         return sb.toString().replaceAll("CARDNAME", getName()).trim();

@@ -643,6 +643,10 @@ public class MagicStack extends MyObservable {
 					}
 				});
 			}
+			if(sa.getAbilityFactory() != null)
+			{
+				AbilityFactory.HandleRemembering(sa.getAbilityFactory());
+			}
 			sa.resolve();
 
 			if (sa.getSourceCard().getKeyword().contains("Draw a card.")

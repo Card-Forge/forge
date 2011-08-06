@@ -655,6 +655,10 @@ public class AbilityFactory {
 					list = new CardList();
 					list.add(ability.getTriggeringCard());
 				}
+				else if (calcX[0].startsWith("Remembered")) {
+					list = new CardList();
+					list.add(card.getRemembered().get(0));
+				}
 				else
 					return 0;
 				
@@ -694,6 +698,9 @@ public class AbilityFactory {
 		
 		else if (defined.equals("Triggered"))
 			c = sa.getTriggeringCard();
+		
+		else if (defined.equals("Remembered"))
+			cards.addAll(hostCard.getRemembered());
 		
 		if (c != null)
 			cards.add(c);
@@ -766,5 +773,23 @@ public class AbilityFactory {
 		}while(parent.getTarget() == null || parent.getTarget().getTargetCards().size() == 0);
 		
 		return parent;
+	}
+	
+	public static void HandleRemembering(AbilityFactory AF)
+	{
+		if(!AF.getMapParams().containsKey("RememberTargets"))
+		{
+			return;
+		}
+		
+		if(AF.getMapParams().containsKey("ForgetOtherTargets"))
+		{
+			AF.getHostCard().clearRemembered();
+		}
+		
+		for(Card c : AF.getAbTgt().getTargetCards())
+		{
+			AF.getHostCard().addRemembered(c);
+		}
 	}
 }

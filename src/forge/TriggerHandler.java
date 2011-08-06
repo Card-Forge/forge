@@ -227,9 +227,19 @@ public class TriggerHandler {
 			}
 			if(trigParams.containsKey("Optional"))
 			{
+				Player decider = null;
 				if(trigParams.get("Optional").equals("True"))
 				{
-					if(regtrig.getHostCard().getController().equals(AllZone.HumanPlayer))
+					decider = regtrig.getHostCard().getController();
+				}
+				else if(trigParams.get("Optional").equals("OpponentDecides"))
+				{
+					decider = regtrig.getHostCard().getController().getOpponent();
+				}
+				
+				if(decider != null)
+				{
+					if(decider.equals(AllZone.HumanPlayer))
 					{
 						StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
 						buildQuestion.append(regtrig.getHostCard().getName()).append("(").append(regtrig.getHostCard().getUniqueNumber()).append(")?");

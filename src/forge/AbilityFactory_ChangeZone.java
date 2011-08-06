@@ -674,7 +674,7 @@ public class AbilityFactory_ChangeZone {
 		}
 		else{
 			// non-targeted retrieval
-			Card retrieval = null;
+			CardList retrieval = null;
 			if (af.getMapParams().containsKey("Defined")){
 				// add hooks into AF_Defined function
 				retrieval = knownDetermineDefined(sa, params.get("Defined"), origin);
@@ -683,7 +683,7 @@ public class AbilityFactory_ChangeZone {
 			if (retrieval == null)
 				return false;
 			
-			if (retrieval == source){
+			if (retrieval.get(0) == source){
 				if (origin.equals("Graveyard")){
 					// return this card from graveyard: cards like Hammer of Bogardan
 					// in general this is cool, but we should add some type of restrictions
@@ -731,7 +731,10 @@ public class AbilityFactory_ChangeZone {
 		 else{
 			 // otherwise add self to list and go from there
 			 tgts = new ArrayList<Card>();
-			 tgts.add(knownDetermineDefined(sa, params.get("Defined"), origin));
+			 for(Card c : knownDetermineDefined(sa, params.get("Defined"), origin))
+			 {
+				 tgts.add(c);
+			 }
 		 }
 		 
 		 for(Card c : tgts)
@@ -819,7 +822,10 @@ public class AbilityFactory_ChangeZone {
 			tgtCards = tgt.getTargetCards();
 		else{
 			tgtCards = new ArrayList<Card>();
-			tgtCards.add(knownDetermineDefined(sa, params.get("Defined"), origin));
+			for(Card c : knownDetermineDefined(sa, params.get("Defined"), origin))
+			{
+				tgtCards.add(c);
+			}
 		}
 
 		Card targetCard = tgtCards.get(0);
@@ -855,9 +861,13 @@ public class AbilityFactory_ChangeZone {
 		        		tgtC.tap();
 		        	if (params.containsKey("GainControl"))
 		        		tgtC.setController(sa.getActivatingPlayer());
+		        	
+		        	AllZone.GameAction.moveTo(AllZone.getZone(destination, tgtC.getOwner()),tgtC);
 		    	}
-
-		    	AllZone.GameAction.moveTo(AllZone.getZone(destination, pl), tgtC);
+		    	else
+		    	{
+		    		AllZone.GameAction.moveTo(AllZone.getZone(destination, pl), tgtC);
+		    	}
 	    	}
 		}
 
@@ -876,18 +886,22 @@ public class AbilityFactory_ChangeZone {
 	}
 	
 	// **************************** Known Utility **************************************
-	private static Card knownDetermineDefined(SpellAbility sa, String defined, String origin){
+	private static CardList knownDetermineDefined(SpellAbility sa, String defined, String origin){
 		// todo: this function should return a ArrayList<Card> and then be handled by the callees
 		CardList grave = AllZoneUtil.getCardsInZone(origin, sa.getActivatingPlayer());
+		CardList ret = new CardList();
 		
 		if (defined != null && defined.equals("Top")){
 			// the "top" of the graveyard, is the last to be added to the graveyard list?
 			if (grave.size() == 0)
 				return null;
-			return grave.get(grave.size()-1);
+			ret.add(grave.get(grave.size()-1));
+			
+			return ret;
 		}
 		
-		return AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa).get(0);
+		ret.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa).toArray());
+		return ret;
 	}
 
 	// *************************************************************************************

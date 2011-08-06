@@ -67,6 +67,13 @@ public class GameAction {
         	// todo: add attachment code here
         }
         
+        if (!zone.is(Constant.Zone.Battlefield))
+        {
+        	//Other characteristics should be cleared here also.
+        	c.setTapped(false);
+        	c.clearRemembered();
+        }	
+        
         //Run triggers        
         HashMap<String,Object> runParams = new HashMap<String,Object>();
 
