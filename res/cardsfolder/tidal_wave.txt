@@ -1,9 +1,8 @@
 Name:Tidal Wave
 ManaCost:2 U
 Types:Instant
-Text:Put a 5/5 blue Wall creature token with defender onto the battlefield. Sacrifice it at the beginning of the next end step.
-#K:spMakeToken<>1<>Wall<>U 5 5 Wall<>Controller<>U<>Creature;Wall<>3<>1<>Defender;At the beginning of the end step, sacrifice CARDNAME.
-A:SP$Token | Cost$ 2 U | TokenAmount$ 1 | TokenName$ Wall | TokenTypes$ Creature,Wall | TokenOwner$ Controller | TokenColors$ Blue | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Defender<>At the beginning of the end step, sacrifice CARDNAME.
+Text:no text
+A:SP$Token | Cost$ 2 U | TokenAmount$ 1 | TokenName$ Wall | TokenTypes$ Creature,Wall | TokenOwner$ Controller | TokenColors$ Blue | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Defender<>At the beginning of the end step, sacrifice CARDNAME.|SpellDescription$Put a 5/5 blue Wall creature token with defender onto the battlefield. Sacrifice it at the beginning of the next end step.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tidal_wave.jpg

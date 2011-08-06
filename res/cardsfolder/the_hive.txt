@@ -2,7 +2,6 @@ Name:The Hive
 ManaCost:5
 Types:Artifact
 Text:no text
-#K:abMakeToken 5 T<>1<>Wasp<>C 1 1 Wasp<>Controller<>1<>Artifact;Creature;Insect<>1<>1<>Flying<>Put a 1/1 colorless Insect artifact creature token with flying named Wasp onto the battlefield.
 A:AB$Token | Cost$ 5 T | TokenAmount$ 1 | TokenName$ Wasp | TokenTypes$ Artifact,Creature,Insect | TokenOwner$ Controller | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put a 1/1 colorless Insect artifact creature token with flying named Wasp onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_hive.jpg

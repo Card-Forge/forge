@@ -1,9 +1,8 @@
 Name:Waylay
 ManaCost:2 W
 Types:Instant
-Text:Put three 2/2 white Knight creature tokens onto the battlefield. Exile them at the beginning of the next cleanup step.
-#K:spMakeToken<>3<>Knight<>W 2 2 Knight<>Controller<>W<>Creature;Knight<>2<>2<>At the beginning of the end step, exile CARDNAME.
-A:SP$Token | Cost$ 2 W | TokenAmount$ 3 | TokenName$ Knight | TokenTypes$ Creature,Knight | TokenOwner$ Controller | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ At the beginning of the end step, exile CARDNAME.
+Text:no text
+A:SP$Token | Cost$ 2 W | TokenAmount$ 3 | TokenName$ Knight | TokenTypes$ Creature,Knight | TokenOwner$ Controller | TokenColors$ White | TokenPower$ 2 | TokenToughness$ 2 | TokenKeywords$ At the beginning of the end step, exile CARDNAME.|SpellDescription$Put three 2/2 white Knight creature tokens onto the battlefield. Exile them at the beginning of the next cleanup step.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/waylay.jpg

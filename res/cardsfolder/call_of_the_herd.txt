@@ -2,7 +2,6 @@ Name:Call of the Herd
 ManaCost:2 G
 Types:Sorcery
 Text:Put a 3/3 green Elephant creature token onto the battlefield.
-#K:spMakeToken<>1<>Elephant<>G 3 3 Elephant<>Controller<>G<>Creature;Elephant<>3<>3<>None
 A:SP$Token | Cost$ 2 G | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenOwner$ Controller
 K:Flashback:3 G
 SVar:Rarity:Rare
