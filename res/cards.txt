@@ -1,10 +1,26 @@
+Crib Swap
+2 W
+Tribal Instant Shapeshifter
+Remove target creature from the game. Its controller puts a 1/1 colorless Shapeshifter creature token into play.
+Changeling
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crib_swap.jpg
+
 Nameless Inversion
 1 B
 Tribal Instant Shapeshifter
-Changeling.\r\nTarget creature gets +3/-3 until end of turn.
+Target creature gets +3/-3 until end of turn.
 Changeling
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_inversion.jpg
+
+Wings of Velis Vel
+1 U
+Tribal Instant Shapeshifter
+Target creature becomes 4/4 and gains flying until end of turn.
+Changeling
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_velis_vel.jpg
 
 Necropotence
 B B B
@@ -6358,14 +6374,6 @@ Defender
 abPumpTgtC T:+0/+4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crenellated_wall.jpg
-
-Crib Swap
-2 W
-Tribal Instant Shapeshifter
-Changeling\r\nRemove target creature from the game. Its controller puts a 1/1 colorless Shapeshifter creature token into play.
-Changeling
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crib_swap.jpg
 
 Crimson Acolyte
 1 W
@@ -35740,14 +35748,6 @@ Enchant creature
 enPump:+1/+3/Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_hope.jpg
-
-Wings of Velis Vel
-1 U
-Tribal Instant Shapeshifter
-Changeling. Target creature becomes 4/4 and gains flying until end of turn.
-Changeling
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wings_of_velis_vel.jpg
 
 Winnower Patrol
 2 G

@@ -564,6 +564,11 @@ public class Card extends MyObservable {
             String s = getSpellText();
             StringBuilder sb = new StringBuilder();
             
+            // Changeling - we want this to appear above the spellText
+            if (getKeyword().contains("Changeling")) {
+                sb.append("Changeling\r\n\r\n");
+            }
+            
             // Give spellText line breaks for easier reading
             sb.append(s.replaceAll("\\\\r\\\\n", "\r\n"));
             
