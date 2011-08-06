@@ -198,23 +198,23 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     {
     	StringBuilder sb = new StringBuilder();
     	if (questData.getWolfPetLevel() < 4) {
-	    	if (questData.getWolfPetLevel() == 0)
+	    	if (questData.getWolfPetLevel() == 1)
 	    		sb.append("1/1");
-	    	else if (questData.getWolfPetLevel() == 1)
+	    	else if (questData.getWolfPetLevel() == 2)
 	    		sb.append("1/2");
-	    	else if (questData.getWolfPetLevel() <= 3)
+	    	else if (questData.getWolfPetLevel() >= 3)
 	    		sb.append("2/2");
 	    	
 	    	sb.append(" Wolf Pet (current level ");
 	    	sb.append(questData.getWolfPetLevel());
     	} //getWolfPetLevel < 4
-    	else if (questData.getCrocPetLevel() < 4)
+    	else if (questData.getCrocPetLevel() <= 4)
     	{
-    		if (questData.getCrocPetLevel() == 0)
+    		if (questData.getCrocPetLevel() == 1)
 	    		sb.append("1/1");
-	    	else if (questData.getCrocPetLevel() == 1)
+	    	else if (questData.getCrocPetLevel() == 2)
 	    		sb.append("2/1");
-	    	else if (questData.getCrocPetLevel() <= 3)
+	    	else if (questData.getCrocPetLevel() >= 3)
 	    		sb.append("3/1");
 
 	    	sb.append(" Croc Pet (current level ");
@@ -222,6 +222,9 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     	}
     	
     	sb.append("/4)");
+    	if (questData.getWolfPetLevel() == 0)
+    		return "";
+    		
     	return sb.toString();
     }
     
