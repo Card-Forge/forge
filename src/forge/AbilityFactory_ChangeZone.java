@@ -81,11 +81,16 @@ public class AbilityFactory_ChangeZone {
 	private static void setMiscellaneous(AbilityFactory af, SpellAbility sa){
 		// todo: if moving to or from Battlefield allow use in Main1?
 		HashMap<String,String> params = af.getMapParams();
-		if (af.getAbTgt() != null)
-			af.getAbTgt().setZone(params.get("Origin"));
+		String origin = params.get("Origin");
+		
+		Target tgt  = af.getAbTgt();
+		
+		// Don't set the zone if it targets a player
+		if (tgt != null && !tgt.canTgtPlayer())
+			af.getAbTgt().setZone(origin);
 		
 		if (!(sa instanceof Ability_Sub))
-			if (params.get("Origin").equals("Battlefield") || params.get("Destination").equals("Battlefield"))
+			if (origin.equals("Battlefield") || params.get("Destination").equals("Battlefield"))
 				af.getHostCard().setSVar("PlayMain1", "TRUE");
 	}
 	
