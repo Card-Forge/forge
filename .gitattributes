@@ -1693,6 +1693,7 @@ res/cardsfolder/diversionary_tactics.txt -text svneol=native#text/plain
 res/cardsfolder/divination.txt -text svneol=native#text/plain
 res/cardsfolder/divine_offering.txt -text svneol=native#text/plain
 res/cardsfolder/divine_presence.txt -text svneol=native#text/plain
+res/cardsfolder/divine_retribution.txt -text svneol=native#text/plain
 res/cardsfolder/divine_sacrament.txt -text svneol=native#text/plain
 res/cardsfolder/divine_transformation.txt -text svneol=native#text/plain
 res/cardsfolder/divine_verdict.txt -text svneol=native#text/plain
