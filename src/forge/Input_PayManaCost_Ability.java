@@ -19,6 +19,9 @@ public class Input_PayManaCost_Ability extends Input {
     // isPaid
     private boolean           isPaid;
     
+    //only used for X costs:
+    private boolean 		  showOnlyOKButton = false;
+    
     
     //for Abilities that don't tap
     public Input_PayManaCost_Ability(String manaCost, Command paid) {
@@ -43,6 +46,16 @@ public class Input_PayManaCost_Ability extends Input {
         manaCost = new ManaCost(originalManaCost);
         paidCommand = paidCommand_2;
         unpaidCommand = unpaidCommand_2;
+    }
+    
+    public Input_PayManaCost_Ability(String m, String manaCost_2, Command paidCommand_2, Command unpaidCommand_2, boolean showOKButton) {
+        originalManaCost = manaCost_2;
+        message = m;
+        
+        manaCost = new ManaCost(originalManaCost);
+        paidCommand = paidCommand_2;
+        unpaidCommand = unpaidCommand_2;
+        showOnlyOKButton = showOKButton;
     }
     
     
@@ -82,8 +95,19 @@ public class Input_PayManaCost_Ability extends Input {
     }
     
     @Override
+    public void selectButtonOK() {
+    	if (showOnlyOKButton)
+    	{
+    		unpaidCommand.execute();
+            stop();
+    	}
+    }
+    
+    @Override
     public void showMessage() {
-        ButtonUtil.enableOnlyCancel();
+    	ButtonUtil.enableOnlyCancel();
+        if (showOnlyOKButton)
+        	ButtonUtil.enableOnlyOK();
         AllZone.Display.showMessage(message + "Pay Mana Cost: \r\n" + manaCost.toString());
     }
     

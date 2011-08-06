@@ -49,13 +49,13 @@ public class MagicStack extends MyObservable
 	                    ability.resolve();
 	                    Card crd = sa.getSourceCard();
 	                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + crd.getName() + " (X=" +crd.getXManaCostPaid()+")\r\n",
-		                        ability.getManaCost(), this, unpaidCommand));
+		                        ability.getManaCost(), this, unpaidCommand, true));
 				}
 	          };
 			  
 			  if(sp.getSourceCard().getController().equals(Constant.Player.Human)) {
 	                AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Pay X cost for " + sp.getSourceCard().getName() + " (X=0)\r\n",
-	                        ability.getManaCost(), paidCommand, unpaidCommand));
+	                        ability.getManaCost(), paidCommand, unpaidCommand, true));
 	          } 
 			  else //computer
 	          {
