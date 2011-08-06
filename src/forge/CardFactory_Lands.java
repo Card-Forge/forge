@@ -896,6 +896,7 @@ class CardFactory_Lands {
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
         }//*************** END ************ END **************************
         
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Eye of Ugin")) {
             final Ability_Tap ability = new Ability_Tap(card, "7") {
@@ -971,7 +972,7 @@ class CardFactory_Lands {
              ability.setBeforePayMana(new Input_PayManaCost(ability));
              ability.setDescription("7, Tap: Search your library for a colorless creature card, reveal it, and put it into your hand. Then shuffle your library.");
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Wasteland") || cardName.equals("Tectonic Edge")) {
