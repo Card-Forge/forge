@@ -1,3 +1,44 @@
+Dark Depths
+no cost
+Legendary Snow Land
+Dark Depths enters the battlefield with ten ice counters on it.\r\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_depths.jpg
+
+Daru Warchief
+2 W W
+Creature Human Soldier
+Soldier spells you cast cost 1 less to cast.\r\nSoldier creatures you control get +1/+2.
+1/1
+CostChange:Player:Less:1:Spell:All:Soldier:NoSpecial
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_warchief.jpg
+
+Dauntless Dourbark
+3 G
+Creature Treefolk Warrior
+Dauntless Dourbark's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control.\r\nDauntless Dourbark has trample as long as you control another Treefolk.
+1/1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_dourbark.jpg
+
+Deranged Hermit
+3 G G
+Creature Elf
+When Deranged Hermit enters the battlefield, put four 1/1 green Squirrel creature tokens onto the battlefield.\r\nSquirrel creatures get +1/+1.
+1/1
+Echo:3 G G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deranged_hermit.jpg
+
+Doubling Season
+4 G
+Enchantment
+If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.\r\nIf an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_season.jpg
+
 Elspeth Tirel
 3 W W
 Planeswalker - Elspeth
@@ -6842,13 +6883,6 @@ At the beginning of your upkeep, reveal the top card of your library and put tha
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_confidant.jpg
 
-Dark Depths
-no cost
-Legendary Snow Land
-Dark Depths enters the battlefield with ten ice counters on it. When Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_depths.jpg
-
 Dark Hatchling
 4 B B
 Creature Horror
@@ -7009,24 +7043,6 @@ First Strike
 Morph:2 W W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_lancer.jpg
-
-Daru Warchief
-2 W W
-Creature Human Soldier
-Soldier spells you cast cost 1 less to cast. Soldier creatures you control get +1/+2.
-1/1
-CostChange:Player:Less:1:Spell:All:Soldier:NoSpecial
-SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_warchief.jpg
-
-Dauntless Dourbark
-3 G
-Creature Treefolk Warrior
-Dauntless Dourbark's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control. Dauntless Dourbark has trample as long as you control another Treefolk.
-1/1
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_dourbark.jpg
 
 Dauntless Escort
 1 W G
@@ -7530,15 +7546,6 @@ Cascade
 spBounceTgt:Permanent:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deny_reality.jpg
-
-Deranged Hermit
-3 G G
-Creature Elf
-When Deranged Hermit enters the battlefield, put four 1/1 green Squirrel creature tokens onto the battlefield. Squirrel creatures get +1/+1.
-1/1
-Echo:3 G G
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deranged_hermit.jpg
 
 Derelor
 3 B
@@ -8069,13 +8076,6 @@ no text
 spPumpTgt:Double Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/double_cleave.jpg
-
-Doubling Season
-4 G
-Enchantment
-If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead. If an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_season.jpg
 
 Douse in Gloom
 2 B
