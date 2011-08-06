@@ -1,4 +1,4 @@
-Name:Brush With Death
+Name:Brush with Death
 ManaCost:2 B
 Types:Sorcery
 Text:no text
