@@ -8826,7 +8826,7 @@ public class CardFactory_Creatures {
             }));
         }//*************** END ************ END **************************
         */
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Sliversmith")) {
             final Ability_Tap ability = new Ability_Tap(card, "1") {
@@ -8868,8 +8868,8 @@ public class CardFactory_Creatures {
                 }
             }));
         }//*************** END ************ END **************************
-        
-        
+        */
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Cloudseeder")) {
             final Ability_Tap ability = new Ability_Tap(card, "U") {
@@ -8912,7 +8912,7 @@ public class CardFactory_Creatures {
                 }
             }));
         }//*************** END ************ END **************************
-
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Goldmeadow Lookout")) {
@@ -9702,7 +9702,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Rhys the Redeemed")) {
-            final Ability_Tap tokenAbility1 = new Ability_Tap(card, "2 GW") {
+            /*
+        	final Ability_Tap tokenAbility1 = new Ability_Tap(card, "2 GW") {
                 private static final long serialVersionUID = 411298860775527337L;
                 
                 @Override
@@ -9729,7 +9730,7 @@ public class CardFactory_Creatures {
             tokenAbility1.setStackDescription(card.getName()
                     + " - Put a 1/1 green and white Elf Warrior creature token into play.");
             tokenAbility1.setBeforePayMana(new Input_PayManaCost(tokenAbility1));
-            
+            */
             /////////////////////////////////////////////////////////////////////
             
             final Ability_Tap copyTokens1 = new Ability_Tap(card, "4 GW GW") {
@@ -10082,7 +10083,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Siege-Gang Commander")) {
             
@@ -10192,7 +10193,7 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Siege-Gang Commander deals 2 damage to target creature or player");
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Brion Stoutarm")) {
@@ -12549,7 +12550,8 @@ public class CardFactory_Creatures {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Nemata, Grove Guardian")) {
-            final SpellAbility a1 = new Ability(card, "2 G") {
+            /*
+        	final SpellAbility a1 = new Ability(card, "2 G") {
                 @Override
                 public boolean canPlayAI() {
                     return MyRandom.random.nextBoolean();
@@ -12578,6 +12580,7 @@ public class CardFactory_Creatures {
                             "Creature", "Saproling"}, 1, 1, new String[] {""});
                 }//makeToken()
             };//SpellAbility
+            */
             
             final SpellAbility a2 = new Ability(card, "0") {
                 final Command eot1 = new Command() {
@@ -12711,10 +12714,10 @@ public class CardFactory_Creatures {
             		return list.size() > 1 && super.canPlay();
             	}
             };
-            a1.setDescription("2G: Put a 1/1 green Saproling creature token into play.");
-            a1.setStackDescription("Put a 1/1 Saproling into play.");
-            card.addSpellAbility(a1);
-            a1.setBeforePayMana(new Input_PayManaCost(a1));
+            //a1.setDescription("2G: Put a 1/1 green Saproling creature token into play.");
+            //a1.setStackDescription("Put a 1/1 Saproling into play.");
+            //card.addSpellAbility(a1);
+            //a1.setBeforePayMana(new Input_PayManaCost(a1));
             
             card.addSpellAbility(a2);
             a2.setDescription("Sacrifice a Saproling: Saproling creatures get +1/+1 until end of turn");
@@ -12923,7 +12926,7 @@ public class CardFactory_Creatures {
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Rakka Mar")) {
             final SpellAbility a1 = new Ability_Tap(card, "R") {
@@ -12950,8 +12953,8 @@ public class CardFactory_Creatures {
             
             a1.setBeforePayMana(new Input_PayManaCost(a1));
         }//*************** END ************ END **************************
-        
-        
+        */
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Tolsimir Wolfblood")) {
             final SpellAbility a1 = new Ability_Tap(card) {
@@ -12984,7 +12987,7 @@ public class CardFactory_Creatures {
             a1.setDescription("tap: Put a legendary 2/2 green and white Wolf creature token named Voja into play.");
             a1.setStackDescription("Put a 2/2 white green Legendary Wolf creature token named Voja into play.");
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         if(cardName.equals("Ranger of Eos")) {
