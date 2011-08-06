@@ -18,6 +18,7 @@ res/cardsScript.py -text svneol=native#text/x-python
 res/cardsfolder/abandoned_outpost.txt -text svneol=native#text/plain
 res/cardsfolder/abbey_gargoyles.txt -text svneol=native#text/plain
 res/cardsfolder/abomination.txt -text svneol=native#text/plain
+res/cardsfolder/aboshan_cephalid_emperor.txt -text svneol=native#text/plain
 res/cardsfolder/aboshans_desire.txt -text svneol=native#text/plain
 res/cardsfolder/absolute_grace.txt -text svneol=native#text/plain
 res/cardsfolder/absolute_law.txt -text svneol=native#text/plain
