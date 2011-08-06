@@ -417,6 +417,9 @@ public class PhaseUtil {
 		verifyCombat();
      	
     	AllZone.Stack.freezeStack();
+    	
+    	AllZone.Combat.setUnblocked();
+    	
     	CardList list = new CardList();
         list.addAll(AllZone.Combat.getAllBlockers().toArray());
 

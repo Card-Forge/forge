@@ -222,7 +222,8 @@ public class Combat {
 	}
 	
 	
-	public void setDefendingFirstStrikeDamage() {
+	public boolean setDefendingFirstStrikeDamage() {
+		boolean needsFirstStrike = false;
 		defendingDamageMap.clear();
 		CardList att = new CardList(getAttackers());
 		// sum unblocked attackers' power
@@ -235,10 +236,13 @@ public class Combat {
 					// if the creature has first strike or double strike do damage in the first strike combat phase
 					if (att.get(i).hasFirstStrike() || att.get(i).hasDoubleStrike()) {
 						addDefendingDamage(damageDealt, att.get(i));
+						needsFirstStrike = true;
 					}
 				}
 			}
 		} // for
+		
+		return needsFirstStrike;
 	}
 	
 
@@ -412,15 +416,27 @@ public class Combat {
 				removeFromCombat(all.get(i));
 	}// verifyCreaturesInPlay()
 
+	public void setUnblocked(){
+		CardList attacking = new CardList(getAttackers());
+		
+		for (Card attacker : attacking) {
+			CardList block = getBlockers(attacker);
+
+			if (block.size() == 0){
+				// this damage is assigned to a player by  setPlayerDamage()
+				addUnblockedAttacker(attacker);
+			}
+		}
+	}
+	
 	// set Card.setAssignedDamage() for all creatures in combat
 	// also assigns player damage by setPlayerDamage()
-	public void setAssignedFirstStrikeDamage() {
+	public boolean setAssignedFirstStrikeDamage() {
 		
-		setDefendingFirstStrikeDamage();
+		boolean needFirstStrike = setDefendingFirstStrikeDamage();
 
 		CardList block;
 		CardList attacking = new CardList(getAttackers());
-		
 		
 		for (int i = 0; i < attacking.size(); i++) {
 			
@@ -433,28 +449,29 @@ public class Combat {
 
 			for (Card b : block) {
 				if (b.hasFirstStrike() || b.hasDoubleStrike()) {
+					needFirstStrike = true;
 					int attack = b.getNetCombatDamage();
 					attacker.addAssignedDamage(attack, b);
 				}
 			}
-
+			
 			if (block.size() == 0){
-				// this damage is assigned to a player by  setPlayerDamage()
-				addUnblockedAttacker(attacker);
+				// this damage is assigned to a player by setDefendingFirstStrikeDamage()
 			}
-
+			
 			else if (attacker.hasFirstStrike() || attacker.hasDoubleStrike()) {
-				
+				needFirstStrike = true;
 				if (getAttackingPlayer().isHuman()) {// human attacks
 					if (attacker.getKeyword().contains("Trample") || block.size() > 1)
 						AllZone.Display.assignDamage(attacker, block, damageDealt);
 					else block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
 				}
 				else  {// computer attacks
-						distributeAIDamage(attacker, block, damageDealt);
+					distributeAIDamage(attacker, block, damageDealt);
 				}
 			}// if(hasFirstStrike || doubleStrike)
 		}// for
+		return needFirstStrike;
 	}// setAssignedFirstStrikeDamage()
 	
 	/*
@@ -506,8 +523,7 @@ public class Combat {
 			}
 
 			if (block.size() == 0){
-				// this damage is assigned to a player by setPlayerDamage()
-				addUnblockedAttacker(attacker);
+				// this damage is assigned to a player by setDefendingDamage()
 			}
 
 			else if (!attacker.hasFirstStrike() || attacker.hasDoubleStrike()) {

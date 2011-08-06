@@ -239,13 +239,17 @@ public class Phase extends MyObservable
 	    	else{
 	    		AllZone.Combat.verifyCreaturesInPlay();
 
-				AllZone.Combat.setAssignedFirstStrikeDamage();
+				// no first strikers, skip this step
+				if (!AllZone.Combat.setAssignedFirstStrikeDamage())		
+					AllZone.Phase.setNeedToNextPhase(true);
 				
-		    	if (!AllZone.GameInfo.isPreventCombatDamageThisTurn())
-		    		 Combat.dealAssignedDamage();
-		        
-		        AllZone.GameAction.checkStateEffects();
-		        CombatUtil.showCombat();
+				else{
+			    	if (!AllZone.GameInfo.isPreventCombatDamageThisTurn())
+			    		 Combat.dealAssignedDamage();
+			        
+			        AllZone.GameAction.checkStateEffects();
+			        CombatUtil.showCombat();
+				}
 	    	}
 	    }
 	    	
