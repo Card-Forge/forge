@@ -210,7 +210,23 @@ public class GuiDisplayUtil implements NewConstants {
         
 
         if(file.exists()) {
-        	if(filename.equals("morph.jpg")) {     	
+        	int cWidth = 0;
+        	int cHeight = 0;
+        	try {
+				cWidth = GuiDisplayUtil.getPictureHQwidth(filename);
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+        	
+			try {
+				cHeight = GuiDisplayUtil.getPictureHQheight(filename);
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+			
+        	if(cWidth<=312 || cHeight<=445) {     	
             return new PicturePanel(file);
         	}else{
         	return new PicturePanelResize(file);	
