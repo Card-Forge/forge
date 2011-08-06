@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 K:etbCounter:CHARGE:3
 A:AB$PutCounter | Cost$ U U T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
-K:abDrawCards 2 T SubCounter<1/CHARGE>:1:Draw a card.:Trigon of Thought - Controller draws a card.
+A:AB$Draw | Cost$ 2 T SubCounter<1/CHARGE> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trigon_of_thought.jpg
 End

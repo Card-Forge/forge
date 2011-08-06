@@ -2,7 +2,7 @@ Name:Treasure Trove
 ManaCost:2 U U
 Types:Enchantment
 Text:no text
-K:abDrawCards 2 U U:1:Draw a card.:Treasure Trove - draw a card
+A:AB$Draw | Cost$ 2 U U | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treasure_trove.jpg
 End

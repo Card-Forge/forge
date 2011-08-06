@@ -2,7 +2,7 @@ Name:Unfulfilled Desires
 ManaCost:1 U B
 Types:Enchantment
 Text:no text
-K:abDrawCards 1 PayLife<1>:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Unfulfilled Desires - Draw a card, then discard a card.
+A:AB$Draw | Cost$ 1 PayLife<1> | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ YouDiscard/1
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/unfulfilled_desires.jpg
