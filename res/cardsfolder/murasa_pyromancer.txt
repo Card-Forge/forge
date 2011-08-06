@@ -3,8 +3,7 @@ ManaCost:4 R R
 Types:Creature Human Shaman Ally
 Text:no text
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Optional$ True | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control,
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | Optional$ True | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ you may have CARDNAME deal damage to target creature equal to the number of Allies you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Ally.Other+YouCtrl | Optional$ True | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have CARDNAME deal damage to target creature equal to the number of Allies you control.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtC | NumDmg$ NumAllies | TgtPrompt$ Select a target creature.
 SVar:NumAllies:Count$Valid Ally.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murasa_pyromancer.jpg
