@@ -523,7 +523,10 @@ public class ComputerUtil_Block2
 	  CardList safeBlockers = new CardList();
 	  CardList killingBlockers = new CardList();
 	  CardList chumpBlockers = new CardList();
+	  
 	  int diff = AllZone.ComputerPlayer.getLife() * 2 + 5; //This is the minimal gain for an unnecessary trade 
+	  boolean lure =false;
+	  
 	  Card a = new Card();
 	  Card b = new Card();
 	  Card attacker = new Card();
@@ -536,6 +539,12 @@ public class ComputerUtil_Block2
 		  if(!CombatUtil.canBeBlocked(a)) { 
 			  attackersLeft.remove(a);
 		  }
+	  }
+	  
+	  // Lure effects (remove all other attackers)
+	  if(!attackers.getKeyword("All creatures able to block CARDNAME do so.").isEmpty()) {
+	  	attackers = attackers.getKeyword("All creatures able to block CARDNAME do so.");
+	  	lure = true;
 	  }
 	   
 	  if (attackersLeft.size() == 0)
@@ -640,7 +649,10 @@ public class ComputerUtil_Block2
 	 //Reinforce blockers blocking attackers with trample if life is still in danger
 	  if (CombatUtil.lifeInDanger(combat)) {
 		  tramplingAttackers = attackers.getKeyword("Trample");
-		  tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); 	//Don't make it worse 
+		  tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); 	//Don't make it worse
+		  tramplingAttackers = tramplingAttackers.
+		  	getKeywordsDontContain("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
+		  
 		  for(int i = 0; i < tramplingAttackers.size(); i++) {
 			  attacker = tramplingAttackers.get(i);
 			  chumpBlockers = getPossibleBlockers(attacker, blockersLeft);
@@ -658,7 +670,10 @@ public class ComputerUtil_Block2
 	  
 	  //Support blockers not destroying the attacker with more blockers to try to kill the attacker
 	  if (blockedButUnkilled.size() > 0) {
-		  CardList targetAttackers = blockedButUnkilled.getKeywordsDontContain("Rampage"); 	//Don't make it worse 
+		  CardList targetAttackers = blockedButUnkilled.getKeywordsDontContain("Rampage"); 	//Don't make it worse
+		  targetAttackers = targetAttackers.
+		  	getKeywordsDontContain("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
+		  
 		  for(int i = 0; i < targetAttackers.size(); i++) {
 			  attacker = targetAttackers.get(i);
 			  blockers = getPossibleBlockers(attacker, blockersLeft);
@@ -695,6 +710,21 @@ public class ComputerUtil_Block2
 			  		  combat.addBlocker(attacker, blocker);
 			  		  blockersLeft.remove(blocker);
 				  }
+			  }
+		  }
+	  }
+	  
+	  // assign blockers that have to block (if an attacker with lure attacks - all)
+	  if (!lure) blockersLeft = blockersLeft.getKeyword("CARDNAME blocks each turn if able.");
+	  if (!blockersLeft.isEmpty()) {
+		  attackersLeft.shuffle();
+		  for(int i = 0; i < attackersLeft.size(); i++) {
+			  attacker = attackersLeft.get(i);
+			  blockers = getPossibleBlockers(attacker, blockersLeft);
+			  for(int j = 0; j < blockers.size(); j++) {
+				  blocker = blockers.get(j);
+				  combat.addBlocker(attacker, blocker);
+				  blockersLeft.remove(blocker);
 			  }
 		  }
 	  }

@@ -28,7 +28,7 @@ public class Input_Block extends Input {
         	//Lure
         	CardList attackers = new CardList(AllZone.Combat.getAttackers());
         	for(Card attacker:attackers) {
-        		if(attacker.isEnchantedBy("Lure")) {
+        		if(attacker.hasKeyword("All creatures able to block CARDNAME do so.")) {
         			CardList bls = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
         			bls = bls.filter(AllZoneUtil.untapped);
         			for(Card bl:bls) {
