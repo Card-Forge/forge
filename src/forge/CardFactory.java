@@ -1033,7 +1033,7 @@ public class CardFactory implements NewConstants {
                    {
                       Card c = getTargetCard();
                       //c.addDamage(damage);
-                      AllZone.GameAction.addDamage(c, damage);
+                      AllZone.GameAction.addDamage(c, card, damage);
                       tgtP = c.getController();
                    }
                 }
@@ -1184,19 +1184,27 @@ public class CardFactory implements NewConstants {
                        if (card.getKeyword().contains("Wither"))
                     	   getTargetCard().addCounter(Counters.M1M1, dmg[0]);
                        else
-                    	   getTargetCard().addDamage(dmg[0]);
+                    	   getTargetCard().addDamage(dmg[0], card);
                        if (card.getKeyword().contains("Lifelink"))
                     	   GameActionUtil.executeLifeLinkEffects(card, dmg[0]);
-                       for(int i=0; i < CardFactoryUtil.hasNumberEnchantments(card, "Guilty Conscience"); i++)
-                    	   GameActionUtil.executeGuiltyConscienceEffects(card, dmg[0]);
+                       
+                       CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
+                	   for (Card c : cl)
+                	   {
+                		   GameActionUtil.executeGuiltyConscienceEffects(card, c, dmg[0]);
+                	   }
                      }
                    }
                    else {
                      AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(dmg[0]);
                      if (card.getKeyword().contains("Lifelink"))
                     	 GameActionUtil.executeLifeLinkEffects(card, dmg[0]);
-                     for(int i=0; i < CardFactoryUtil.hasNumberEnchantments(card, "Guilty Conscience"); i++)
-                  	   GameActionUtil.executeGuiltyConscienceEffects(card, dmg[0]);
+                     
+                     CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
+           		     for (Card c : cl)
+           		     {
+           			   GameActionUtil.executeGuiltyConscienceEffects(card, c, dmg[0]);
+           		     }
                    }
                  }//resolve()
                };//Ability_Activated
@@ -1232,11 +1240,15 @@ public class CardFactory implements NewConstants {
                        if (card.getKeyword().contains("Wither"))
                       	 getTargetCard().addCounter(Counters.M1M1, dmg[0]);
                        else
-                      	 getTargetCard().addDamage(dmg[0]);
+                      	 getTargetCard().addDamage(dmg[0], card);
                        if (card.getKeyword().contains("Lifelink"))
                     	   GameActionUtil.executeLifeLinkEffects(card, dmg[0]); 
-                       for(int i=0; i < CardFactoryUtil.hasNumberEnchantments(card, "Guilty Conscience"); i++)
-                    	   GameActionUtil.executeGuiltyConscienceEffects(card, dmg[0]);   
+                       
+                       CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
+             		   for (Card c : cl)
+             		   {
+             			   GameActionUtil.executeGuiltyConscienceEffects(card, c, dmg[0]);
+             		   }
                        
                      }
                    }
@@ -1244,8 +1256,13 @@ public class CardFactory implements NewConstants {
                      AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(dmg[0]);
                      if (card.getKeyword().contains("Lifelink"))
                     	 GameActionUtil.executeLifeLinkEffects(card, dmg[0]);
-                     for(int i=0; i < CardFactoryUtil.hasNumberEnchantments(card, "Guilty Conscience"); i++)
-                  	   GameActionUtil.executeGuiltyConscienceEffects(card, dmg[0]);
+
+                     CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
+           		     for (Card c : cl)
+           		     { 
+           			     GameActionUtil.executeGuiltyConscienceEffects(card, c, dmg[0]);
+           		     }
+                     
                      
                      card.setDealtDmgToOppThisTurn(true);
                    }
@@ -1282,19 +1299,28 @@ public class CardFactory implements NewConstants {
                        if (card.getKeyword().contains("Wither"))
                       	 getTargetCard().addCounter(Counters.M1M1, dmg[0]);
                        else
-                      	 getTargetCard().addDamage(dmg[0]);
+                      	 getTargetCard().addDamage(dmg[0], card);
                        if (card.getKeyword().contains("Lifelink"))
                     	   GameActionUtil.executeLifeLinkEffects(card, dmg[0]);
-                       for(int i=0; i < CardFactoryUtil.hasNumberEnchantments(card, "Guilty Conscience"); i++)
-                    	   GameActionUtil.executeGuiltyConscienceEffects(card, dmg[0]);
+                       
+                       CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
+             		   for (Card c : cl)
+             		   {
+             			   GameActionUtil.executeGuiltyConscienceEffects(card, c, dmg[0]);
+             		   }
                    	 }
                    }
                    else {
                      AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(dmg[0]);
                      if (card.getKeyword().contains("Lifelink"))
                     	 GameActionUtil.executeLifeLinkEffects(card, dmg[0]);
-                     for(int i=0; i < CardFactoryUtil.hasNumberEnchantments(card, "Guilty Conscience"); i++)
-                  	   GameActionUtil.executeGuiltyConscienceEffects(card, dmg[0]);
+                     
+
+                     CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
+           		     for (Card c : cl)
+           		     {
+           			    GameActionUtil.executeGuiltyConscienceEffects(card, c, dmg[0]);
+           		     }
                      
                      card.setDealtDmgToOppThisTurn(true);
                    }
@@ -1975,7 +2001,7 @@ public class CardFactory implements NewConstants {
 	      		  {
 	      			  Card crd = creatures.get(i);
 	      			  if (CardFactoryUtil.canDamage(card, crd))
-	      				  crd.addDamage(3);
+	      				  crd.addDamage(3, card);
 	      		  }
 		      	}
 	  				
@@ -2912,7 +2938,7 @@ public class CardFactory implements NewConstants {
 
           for(int i = 0; i < list.size(); i++){
         	  if (CardFactoryUtil.canDamage(card, list.get(i)))
-        		  list.get(i).addDamage(1);
+        		  list.get(i).addDamage(1, card);
           }
           
           AllZone.Human_Life.subtractLife(1);
@@ -2969,7 +2995,7 @@ public class CardFactory implements NewConstants {
 
           for(int i = 0; i < list.size(); i++) {
         	  if (CardFactoryUtil.canDamage(card, list.get(i)))
-        		  list.get(i).addDamage(1);
+        		  list.get(i).addDamage(1, card);
           }
         	  
           AllZone.Human_Life.subtractLife(1);
@@ -4260,7 +4286,7 @@ public class CardFactory implements NewConstants {
           list = list.getType("Creature");
 
           for(int i = 0; i < list.size(); i++)
-            list.get(i).addDamage(2);
+            list.get(i).addDamage(2, card);
         }//resolve()
       };
       card.clearSpellAbility();
@@ -5191,7 +5217,7 @@ public class CardFactory implements NewConstants {
 
           for(int i = 0; i < all.size(); i++)
             if(! all.get(i).getKeyword().contains("Flying") && CardFactoryUtil.canDamage(card,all.get(i)))
-              all.get(i).addDamage(1);
+              all.get(i).addDamage(1, card);
         }
       };
       card.clearSpellAbility();
@@ -5573,7 +5599,7 @@ public class CardFactory implements NewConstants {
           {
             if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
             {
-              getTargetCard().addDamage(5);
+              getTargetCard().addDamage(5, card);
               done();
             }
             else
@@ -6655,7 +6681,7 @@ public class CardFactory implements NewConstants {
           for(int i = 0; i < all.size(); i++)
           {
             if (CardFactoryUtil.canDamage(card,all.get(i)))
-        	  all.get(i).addDamage(2);
+        	  all.get(i).addDamage(2, card);
           }
         }
         public boolean canPlayAI()
@@ -6693,7 +6719,7 @@ public class CardFactory implements NewConstants {
           for(int i = 0; i < all.size(); i++)
           {
             if (CardFactoryUtil.canDamage(card,all.get(i)))
-        	  all.get(i).addDamage(2);
+        	  all.get(i).addDamage(2, card);
           }
           
           PlayerLife compLife = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
@@ -6750,7 +6776,7 @@ public class CardFactory implements NewConstants {
             	if (CardFactoryUtil.canDamage(card, all.get(i)))
             	{            		
             		all.get(i).setShield(0);
-            		all.get(i).addDamage(3);
+            		all.get(i).addDamage(3, card);
             	}
             }
 
@@ -7263,7 +7289,7 @@ public class CardFactory implements NewConstants {
         {
           if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
           {
-            getTargetCard().addDamage(2);
+            getTargetCard().addDamage(2, card);
             AllZone.GameAction.getPlayerLife(card.getController()).addLife(2);
           }
         }//resolve()
@@ -7508,7 +7534,7 @@ public class CardFactory implements NewConstants {
           if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()))
           {
             Card c = getTargetCard();
-            c.addDamage(damage);
+            c.addDamage(damage, card);
           }
         }//resolve()
       };//SpellAbility
@@ -7674,7 +7700,7 @@ public class CardFactory implements NewConstants {
             if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()))
             {
               Card c = getTargetCard();
-              c.addDamage(damage);
+              c.addDamage(damage, card);
             }
           }
           else
@@ -7744,7 +7770,7 @@ public class CardFactory implements NewConstants {
             if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()))
             {
               Card c = getTargetCard();
-              c.addDamage(damage);
+              c.addDamage(damage, card);
             }
           }
           else
@@ -7793,7 +7819,7 @@ public class CardFactory implements NewConstants {
             if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
             {
               Card c = getTargetCard();
-              c.addDamage(1);
+              c.addDamage(1, card);
             }
           }
           else
@@ -7862,7 +7888,7 @@ public class CardFactory implements NewConstants {
             if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
             {
               Card c = getTargetCard();
-              c.addDamage(damage);
+              c.addDamage(damage, card);
             }
           }
           else
@@ -8010,7 +8036,7 @@ public class CardFactory implements NewConstants {
             if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
             {
               Card c = getTargetCard();
-              c.addDamage(damage);
+              c.addDamage(damage, card);
             }
           }
           else
@@ -8098,7 +8124,7 @@ public class CardFactory implements NewConstants {
               javax.swing.JOptionPane.showMessageDialog(null, "Erratic Explosion causes " +damage +" to " +getTargetCard());
 
               Card c = getTargetCard();
-              c.addDamage(damage);
+              c.addDamage(damage, card);
             }
           }
           else
@@ -8203,7 +8229,7 @@ public class CardFactory implements NewConstants {
             if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
             {
               Card c = getTargetCard();
-              c.addDamage(damage);
+              c.addDamage(damage, card);
               AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
             }
           }
@@ -8313,7 +8339,7 @@ public class CardFactory implements NewConstants {
             if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()))
             {
               Card c = getTargetCard();
-              c.addDamage(damage);
+              c.addDamage(damage, card);
               AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
             }
           }
@@ -8726,9 +8752,12 @@ public class CardFactory implements NewConstants {
             list.addAll(AllZone.Computer_Play.getCards());
             list = list.getType("Creature");
 
-            for(int i = 0; i < list.size(); i++)
-              list.get(i).addDamage(2);
+            for(int i = 0; i < list.size(); i++) {
+              if (CardFactoryUtil.canDamage(card, list.get(i)))
+            	list.get(i).addDamage(2, card);
+            }
           }
+            
 
           //"Destroy target nonbasic land",
           if(userChoice.contains(cardChoice[2]))
@@ -9983,12 +10012,12 @@ public class CardFactory implements NewConstants {
           {
             public boolean addCard(Card c)
             {
-              return c.isCreature() && c.getKeyword().contains("Flying");
+              return c.isCreature() && c.getKeyword().contains("Flying") && CardFactoryUtil.canDamage(card, c);
             }
           });
 
           for(int i = 0; i < list.size(); i++)
-            list.get(i).addDamage(4);
+            list.get(i).addDamage(4, card);
         }//resolve()
 
         public boolean canPlayAI() {return CardFactoryUtil.AI_getHumanCreature("Flying", card, false).size() != 0;}
@@ -10923,7 +10952,7 @@ public class CardFactory implements NewConstants {
           if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
           {
             int n = countSwamps();
-            getTargetCard().addDamage(n);
+            getTargetCard().addDamage(n, card);
 
             PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
             life.addLife(n);
@@ -12694,7 +12723,7 @@ public class CardFactory implements NewConstants {
             if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()))
             {
               Card c = getTargetCard();
-              c.addDamage(damage);
+              c.addDamage(damage, card);
             }
           }
           else
@@ -13410,7 +13439,7 @@ public class CardFactory implements NewConstants {
         if(getTargetCard() != null)
         {
           if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
-            getTargetCard().addDamage(2);
+            getTargetCard().addDamage(2, card);
         }
         else
           AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2);
@@ -15880,7 +15909,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     	            {
     	                Card c = getTargetCard();
     	                //c.addDamage(damage);
-    	                AllZone.GameAction.addDamage(c, 5);
+    	                AllZone.GameAction.addDamage(c, card, 5);
     	            }
     	          }
     	          else
@@ -16297,7 +16326,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
           if(getTargetCard() != null)
           {
             if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
-              getTargetCard().addDamage(2);
+              getTargetCard().addDamage(2, card);
           }
           else
             AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2);
@@ -16591,7 +16620,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		      if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
 		      {
 		        Card c = getTargetCard();
-		        c.addDamage(damage);
+		        c.addDamage(damage, card);
 		        AllZone.GameAction.getPlayerLife(card.getController()).addLife(damage);
 		      }
 		    }
@@ -16742,7 +16771,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		          {
 		            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()))
 		            {
-		            	getTargetCard().addDamage(damage);
+		            	getTargetCard().addDamage(damage, card);
 		            }
 		          }
 		          else

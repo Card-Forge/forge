@@ -14,7 +14,7 @@ class CardFactory_Planeswalkers {
 	
 	      final Card card2 = new Card()
 	      {
-	        public void addDamage(int n)
+	        public void addDamage(int n, Card source)
 	        {
 	          subtractCounter(Counters.LOYALTY, n);
 	          AllZone.GameAction.checkStateEffects();
@@ -265,7 +265,7 @@ class CardFactory_Planeswalkers {
 	
 	       final Card card2 = new Card()
 	       {
-	         public void addDamage(int n)
+	         public void addDamage(int n, Card source)
 	         {
 	           subtractCounter(Counters.LOYALTY, n);
 	           AllZone.GameAction.checkStateEffects();
@@ -518,7 +518,7 @@ class CardFactory_Planeswalkers {
 	
 	       final Card card2 = new Card()
 	       {
-	         public void addDamage(int n)
+	    	 public void addDamage(int n, Card source)
 	         {
 	           subtractCounter(Counters.LOYALTY, n);
 	           AllZone.GameAction.checkStateEffects();
@@ -866,7 +866,7 @@ class CardFactory_Planeswalkers {
 	
 	      final Card card2 = new Card()
 	      {
-	        public void addDamage(int n)
+	        public void addDamage (int n, Card source)
 	        {
 	          subtractCounter(Counters.LOYALTY,n);
 	          AllZone.GameAction.checkStateEffects();
@@ -1107,7 +1107,7 @@ class CardFactory_Planeswalkers {
 
 	      final Card card2 = new Card()
 	      {
-	        public void addDamage(int n)
+	        public void addDamage(int n, Card source)
 	        {
 	          subtractCounter(Counters.LOYALTY,n);
 	          AllZone.GameAction.checkStateEffects();
@@ -1357,7 +1357,7 @@ class CardFactory_Planeswalkers {
 
 	      final Card card2 = new Card()
 	      {
-	        public void addDamage(int n)
+	        public void addDamage(int n, Card source)
 	        {
 	          subtractCounter(Counters.LOYALTY, n);
 	          AllZone.GameAction.checkStateEffects();
@@ -1387,7 +1387,7 @@ class CardFactory_Planeswalkers {
 	            {
 	              Card c = getTargetCard();
 	              if (CardFactoryUtil.canDamage(card2, c))
-	            	  c.addDamage(1);
+	            	  c.addDamage(1, card2);
 	            }
 	          }
 	          
@@ -1462,7 +1462,7 @@ class CardFactory_Planeswalkers {
 
 	          card2.subtractCounter(Counters.LOYALTY, damage2[0]);
 	          if (CardFactoryUtil.canDamage(card2, getTargetCard()))
-	        	  getTargetCard().addDamage(damage2[0]);
+	        	  getTargetCard().addDamage(damage2[0], card2);
 
 	          damage2[0] = 0;
 	        }//resolve()
@@ -1554,8 +1554,8 @@ class CardFactory_Planeswalkers {
 
 	          for(int i = 0; i < list.size(); i++)
 	          { 
-	        	  if (CardFactoryUtil.canDamage(card, list.get(i)))
-	        		  list.get(i).addDamage(10);
+	        	  if (CardFactoryUtil.canDamage(card2, list.get(i)))
+	        		  list.get(i).addDamage(10, card2);
 	          }
 	        }//resolve()
 	        public boolean canPlay()
@@ -1625,7 +1625,7 @@ class CardFactory_Planeswalkers {
 
 	      final Card card2 = new Card()
 	      {
-	        public void addDamage(int n)
+	        public void addDamage(int n, Card source)
 	        {
 	          subtractCounter(Counters.LOYALTY,n);
 	          AllZone.GameAction.checkStateEffects();
@@ -1896,7 +1896,7 @@ class CardFactory_Planeswalkers {
 
 		      final Card card2 = new Card()
 		      {
-		        public void addDamage(int n)
+		        public void addDamage(int n, Card source)
 		        {
 		          subtractCounter(Counters.LOYALTY,n);
 		          AllZone.GameAction.checkStateEffects();
@@ -2036,7 +2036,7 @@ class CardFactory_Planeswalkers {
 
 		      final Card card2 = new Card()
 		      {
-		        public void addDamage(int n)
+		        public void addDamage(int n, Card source)
 		        {
 		          subtractCounter(Counters.LOYALTY,n);
 		          AllZone.GameAction.checkStateEffects();
@@ -2162,7 +2162,7 @@ class CardFactory_Planeswalkers {
 		             if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card2, getTargetCard()))
 		             {
 		               Card c = getTargetCard();
-		               c.addDamage(damage);
+		               c.addDamage(damage, card2);
 		             }
 		           }
 		           else
@@ -2260,7 +2260,7 @@ class CardFactory_Planeswalkers {
 
 	      final Card card2 = new Card()
 	      {
-	        public void addDamage(int n)
+	        public void addDamage(int n, Card source)
 	        {
 	          subtractCounter(Counters.LOYALTY,n);
 	          AllZone.GameAction.checkStateEffects();
@@ -2572,7 +2572,7 @@ class CardFactory_Planeswalkers {
 
 	      final Card card2 = new Card()
 	      {
-	        public void addDamage(int n)
+	        public void addDamage(int n, Card source)
 	        {
 	          subtractCounter(Counters.LOYALTY,n);
 	          AllZone.GameAction.checkStateEffects();

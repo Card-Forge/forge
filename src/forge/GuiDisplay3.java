@@ -94,6 +94,8 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     private Action            CONCEDE_ACTION;
     public Card cCardHQ;  
     
+    //private CardList multiBlockers = new CardList();
+    
     public GuiDisplay3() {
         setupActions();
         initComponents();
@@ -122,6 +124,18 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     public void assignDamage(Card attacker, CardList blockers, int damage) {
         new Gui_MultipleBlockers3(attacker, blockers, damage, this);
     }
+    
+    /*
+    public void addAssignDamage(Card attacker, Card blocker, int damage)
+    {
+    	multiBlockers.add(blocker);
+    }
+    
+    public void addAssignDamage(Card attacker, int damage) {
+        //new Gui_MultipleBlockers3(attacker, blockers, damage, this);
+    	new Gui_MultipleBlockers3(attacker, multiBlockers, damage, this);
+    }
+    */
     
     private void setupActions() {
         HUMAN_GRAVEYARD_ACTION = new ZoneAction(AllZone.Human_Graveyard, HUMAN_GRAVEYARD);
@@ -416,9 +430,9 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         }
         
         if(c.isCreature()) cdLabel4.setText("Damage: " + c.getDamage() + " Assigned Damage: "
-                + c.getAssignedDamage());
+                + c.getTotalAssignedDamage());
         
-        if(c.isPlaneswalker()) cdLabel4.setText("Assigned Damage: " + c.getAssignedDamage());
+        if(c.isPlaneswalker()) cdLabel4.setText("Assigned Damage: " + c.getTotalAssignedDamage());
         
         String uniqueID = c.getUniqueNumber() + " ";
         cdLabel5.setText("Card ID  " + uniqueID);
@@ -1328,7 +1342,8 @@ class Gui_MultipleBlockers3 extends JFrame {
             //c.setAssignedDamage(c.getAssignedDamage() + 1);
             CardList cl = new CardList();
             cl.add(att);
-            AllZone.GameAction.setAssignedDamage(c, cl, c.getAssignedDamage() + 1);
+           
+            AllZone.GameAction.addAssignedDamage(c, att, /*c.getTotalAssignedDamage() +*/ 1);
             
             if(guiDisplay != null) guiDisplay.updateCardDetail(c);
         }

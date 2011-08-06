@@ -139,6 +139,11 @@ public class ComputerAI_Rats2 implements Computer
     	numberPlayLand += n;
     }
     
+    public void setNumberPlayLands(int n)
+    {
+    	numberPlayLand = n;
+    }
+    
     public void stack_not_empty() 
     {
 	  AllZone.InputControl.resetInput();

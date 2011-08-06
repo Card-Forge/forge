@@ -100,7 +100,7 @@ public class Gui_MultipleBlockers extends JFrame
       
       CardList cl = new CardList();
       cl.add(att);
-      AllZone.GameAction.setAssignedDamage(c, cl, c.getAssignedDamage() + 1);
+      AllZone.GameAction.addAssignedDamage(c, att, 1);
       //c.setAssignedDamage(c.getAssignedDamage() + 1);
 
       if(guiDisplay != null)

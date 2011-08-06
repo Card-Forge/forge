@@ -1,5 +1,7 @@
 package forge;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class Input_CombatDamage extends Input
 {
@@ -52,7 +54,9 @@ private void playerDamage(PlayerLife p)
 	if (player.equals("")) //this is a really bad hack, to allow raging goblin to attack on turn 1
 		player = Constant.Player.Computer;
 	PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-    life.subtractLife(AllZone.Combat.getDefendingDamage());
+    
+	life.subtractLife(AllZone.Combat.getTotalDefendingDamage());
+	
 
     //why???
     /*
@@ -117,8 +121,11 @@ private void playerDamage(PlayerLife p)
 	    		if (list.contains("Lifelink"))
 	    			GameActionUtil.executeLifeLinkEffects(attackers.getCard(i));
 	    		
-	    		for(int j=0; j < CardFactoryUtil.hasNumberEnchantments(attackers.getCard(i), "Guilty Conscience"); j++)
-	            	   GameActionUtil.executeGuiltyConscienceEffects(attackers.getCard(i));
+	    		CardList cl = CardFactoryUtil.getAurasEnchanting(attackers.getCard(i), "Guilty Conscience");
+		  		for (Card c : cl)
+		  		{
+		  		   GameActionUtil.executeGuiltyConscienceEffects(attackers.getCard(i), c);
+		  		}
 	    		
 	    		if(CardFactoryUtil.hasNumberEquipments(attackers.getCard(i), "Umezawa's Jitte") == 1 && attackers.get(i).getNetAttack() > 0)
 	    		{
@@ -167,8 +174,11 @@ private void playerDamage(PlayerLife p)
         		GameActionUtil.executeLifeLinkEffects(blockers.getCard(i));
             }
     		
-    		for(int j=0; j < CardFactoryUtil.hasNumberEnchantments(blockers.getCard(i), "Guilty Conscience"); j++)
-         	   GameActionUtil.executeGuiltyConscienceEffects(blockers.getCard(i));
+    		CardList cl = CardFactoryUtil.getAurasEnchanting(blockers.getCard(i), "Guilty Conscience");
+  		    for (Card c : cl)
+  		    {
+  			   GameActionUtil.executeGuiltyConscienceEffects(blockers.getCard(i), c);
+  		    }
     		
     		/*
 	    	ArrayList<String> list = blockers.getCard(i).getKeyword();
@@ -205,8 +215,11 @@ private void playerDamage(PlayerLife p)
     	   if (pwAttackers.getCard(i).getKeyword().contains("Lifelink"))
            GameActionUtil.executeLifeLinkEffects(pwAttackers.getCard(i));
     	   
-    	   for(int j=0; j < CardFactoryUtil.hasNumberEnchantments(pwAttackers.getCard(i), "Guilty Conscience"); j++)
-        	   GameActionUtil.executeGuiltyConscienceEffects(pwAttackers.getCard(i));
+    	   CardList cl = CardFactoryUtil.getAurasEnchanting(pwAttackers.getCard(i), "Guilty Conscience");
+ 		   for (Card c : cl)
+ 		   {
+ 			  GameActionUtil.executeGuiltyConscienceEffects(pwAttackers.getCard(i), c);
+ 		   }
     	   
         }
     }
@@ -219,8 +232,11 @@ private void playerDamage(PlayerLife p)
     	  if (pwBlockers.getCard(i).getKeyword().contains("Lifelink"))
     		  GameActionUtil.executeLifeLinkEffects(pwBlockers.getCard(i));
     	  
-    	  for(int j=0; j < CardFactoryUtil.hasNumberEnchantments(pwBlockers.getCard(i), "Guilty Conscience"); j++)
-       	   	GameActionUtil.executeGuiltyConscienceEffects(pwBlockers.getCard(i));
+    	  CardList cl = CardFactoryUtil.getAurasEnchanting(pwBlockers.getCard(i), "Guilty Conscience");
+		  for (Card c : cl)
+		  {
+			  GameActionUtil.executeGuiltyConscienceEffects(pwBlockers.getCard(i), c);
+		  }
     	  
         }
     }
@@ -242,12 +258,31 @@ private void playerDamage(PlayerLife p)
       c = all.get(i);
       //because this sets off Jackal Pup, and Filthly Cur damage ability
       //and the stack says "Jack Pup causes 0 damage to the Computer"
-      if(c.getAssignedDamage() != 0)
+      if(c.getTotalAssignedDamage() != 0)
       {
+    	  /*
         //c.addDamage(c.getAssignedDamage());
     	System.out.println("Calling addDamage for card " + c.getName());
     	AllZone.GameAction.addDamage(c, c.getAssignedDamage());
         c.setAssignedDamage(0);
+        
+        */
+    	//AllZone.GameAction.addDamage(c, c.getTotalAssignedDamage());
+    	
+    	HashMap<Card, Integer> assignedDamageMap = c.getAssignedDamageHashMap();
+    	HashMap<Card, Integer> damageMap = new HashMap<Card, Integer>();
+
+      	Iterator<Card> iter = assignedDamageMap.keySet().iterator();
+  		while(iter.hasNext()) {
+  			Card crd = iter.next();
+      		//AllZone.GameAction.addDamage(c, crd , assignedDamageMap.get(crd));
+  			damageMap.put(crd, assignedDamageMap.get(crd));
+  		}
+    	
+  		AllZone.GameAction.addDamage(c, damageMap);
+  		
+  		damageMap.clear();
+    	c.clearAssignedDamage();
       }
     }
   }//moveDamage()

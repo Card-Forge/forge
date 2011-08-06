@@ -9,7 +9,7 @@ import java.util.TreeSet;
 public class ComputerAI_General implements Computer {
     //private boolean          playLand = true;
 	//private int numberPlayLand = 1;
-	private int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
+	public int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
     private Collection<Card> playMain1Cards;
     
     @SuppressWarnings("unchecked")
@@ -311,6 +311,11 @@ public class ComputerAI_General implements Computer {
     public void addNumberPlayLands(int n)
     {
     	numberPlayLand += n;
+    }
+    
+    public void setNumberPlayLands(int n)
+    {
+    	numberPlayLand = n;
     }
     
     public void stack_not_empty() {

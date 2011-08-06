@@ -2736,7 +2736,12 @@ class CardFactory_Auras {
 			public boolean canPlayAI()
 		    {
 		      CardList list = new CardList(AllZone.Computer_Play.getCards());
-		      list = list.getType("Creature");
+		      list = list.filter(new CardListFilter(){
+		    	  public boolean addCard(Card c)
+		    	  {
+		    		  return c.isCreature() && c.getKeyword().contains("Flying");
+		    	  }
+		      });
 
 		      if(list.isEmpty())
 		       return false;
@@ -5661,7 +5666,6 @@ class CardFactory_Auras {
 	      final SpellAbility spell = new Spell(card)
 	      {
 
-
 			private static final long serialVersionUID = 142389375702113977L;
 	       
 	       public boolean canPlayAI()
@@ -5720,7 +5724,7 @@ class CardFactory_Auras {
 	                if(crd.getKeyword().contains("Flying"))
 	                {
 	                	badTarget[0] = false;
-	                	AllZone.GameAction.addDamage(crd, 2);
+	                	AllZone.GameAction.addDamage(crd, card, 2);
 	                	crd.removeIntrinsicKeyword("Flying");
 	                	crd.removeExtrinsicKeyword("Flying");
 	                }

@@ -31,6 +31,8 @@ import forge.properties.NewConstants;
 public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConstants {
     private static final long       serialVersionUID   = 8974795337536720207L;
     
+    //private CardList multiBlockers = new CardList();
+    
     private GuiInput                inputControl;
     public static JCheckBoxMenuItem eotCheckboxForMenu = new JCheckBoxMenuItem("Stop at End of Turn", false);
     
@@ -61,6 +63,15 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
         }
         super.setVisible(visible);
     }
+    /*
+    public void addAssignDamage(Card attacker, Card blocker, int damage) {
+    	multiBlockers.add(blocker);
+    }
+    
+    public void addAssignDamage(Card attacker, int damage) {
+        new Gui_MultipleBlockers(attacker, multiBlockers, damage, this);
+    }
+    */
     
     public void assignDamage(Card attacker, CardList blockers, int damage) {
         new Gui_MultipleBlockers(attacker, blockers, damage, this);
@@ -331,9 +342,9 @@ public class GuiDisplay2 extends javax.swing.JFrame implements Display, NewConst
         }
         
         if(c.isCreature()) cdLabel4.setText("Damage: " + c.getDamage() + " Assigned Damage: "
-                + c.getAssignedDamage());
+                + c.getTotalAssignedDamage());
         
-        if(c.isPlaneswalker()) cdLabel4.setText("Assigned Damage: " + c.getAssignedDamage());
+        if(c.isPlaneswalker()) cdLabel4.setText("Assigned Damage: " + c.getTotalAssignedDamage());
         
         String uniqueID = c.getUniqueNumber() + " ";
         cdLabel5.setText("Card ID  " + uniqueID);

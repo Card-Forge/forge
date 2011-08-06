@@ -88,6 +88,8 @@ public class GameActionUtil
 		// card gets played
 		// (called in MagicStack.java)
 		Card c = sa.getSourceCard();
+		
+		playCard_Dovescape(c); //keep this one top
 		playCard_Emberstrike_Duo(c);
 		playCard_Gravelgill_Duo(c);
 		playCard_Safehold_Duo(c);
@@ -98,7 +100,6 @@ public class GameActionUtil
 		playCard_Riverfall_Mimic(c);
 		playCard_Shorecrasher_Mimic(c);
 		playCard_Woodlurker_Mimic(c);
-		playCard_Dovescape(c);
 		playCard_Belligerent_Hatchling(c);
 		playCard_Voracious_Hatchling(c);
 		playCard_Sturdy_Hatchling(c);
@@ -831,8 +832,11 @@ public class GameActionUtil
 			}					
 
 	}//Woodlurker Mimic
+	
+	
 	public static void playCard_Dovescape(Card c)
 	   {
+		  final Card crd1 = c;
 	      PlayerZone hplay = AllZone.getZone(Constant.Zone.Play,
 	            Constant.Player.Human);
 	      PlayerZone cplay = AllZone.getZone(Constant.Zone.Play,
@@ -841,8 +845,9 @@ public class GameActionUtil
 	      CardList list = new CardList();
 	      list.addAll(hplay.getCards());
 	      list.addAll(cplay.getCards());
-	        int cmc = CardUtil.getConvertedManaCost(c.getManaCost());
+	      final int cmc = CardUtil.getConvertedManaCost(c.getManaCost());
 	      list = list.getName("Dovescape");
+	      final CardList cl = list;
 	      if ( ! c.getType().contains("Creature") && list.size()>0 ) {
 	   
 	         
@@ -852,40 +857,62 @@ public class GameActionUtil
 	         {
 	            public void resolve()
 	            {
-	               SpellAbility sa = AllZone.Stack.pop();
+	              
+	               SpellAbility sa = AllZone.Stack.peek();
 	               
-	               AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-	         
+	               if (sa.getSourceCard().equals(crd1)) {
+		               sa = AllZone.Stack.pop();
+		               
+		               AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+		               
+		               for (int j = 0; j < cl.size()*cmc; j++)
+		     	       { 
+		     	         Card crd = new Card();
+		     	         String controller = crd1.getController();
+		     	         crd.setOwner(controller);
+		     	         crd.setController(controller);
+		     	         
+		     	         crd.setName("Bird");
+		     	         crd.setImageName("WU 1 1 Bird");
+		     	         crd.setManaCost("WU");
+		     	         crd.setToken(true);
+	
+		     	         crd.addType("Creature");
+		     	         crd.addType("Bird");
+		     	         crd.addIntrinsicKeyword("Flying");
+	
+		     	         crd.setBaseAttack(1);
+		     	         crd.setBaseDefense(1);
+	
+		     	         PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		     	         play.add(crd);
+		     	      }
+		               
+		               
+		               /*
+		            	SpellAbility sa = AllZone.Stack.peek
+		            	if (!sa.getSourceCard().isCreature() && sa.isSpell())
+		            	{
+		            		
+		            	}
+		            	*/
+	               }
+	               else //TODO 
+	               {
+	            	   ;
+	               }
+	            	
+	            	
 	            }
 	         }; // ability2
 
 	         ability2.setStackDescription("Dovescape Ability");
 	         AllZone.Stack.add(ability2);
 	   
-	      for (int j = 0; j < list.size()*cmc; j++)
-	      {
-	         Card crd = new Card();
-	            String controller = c.getController();
-	         crd.setOwner(controller);
-	         crd.setController(controller);
-	         
-	         crd.setName("Bird");
-	         crd.setImageName("WU 1 1 Bird");
-	         crd.setManaCost("WU");
-	         crd.setToken(true);
-
-	         crd.addType("Creature");
-	         crd.addType("Bird");
-	         crd.addIntrinsicKeyword("Flying");
-
-	         crd.setBaseAttack(1);
-	         crd.setBaseDefense(1);
-
-	         PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
-	         play.add(crd);
-	      }
+	      
 	      }
 	   } // Dovescape
+	   
 	
 	public static void playCard_Belligerent_Hatchling(Card c)
 	{
@@ -1819,7 +1846,7 @@ public class GameActionUtil
 			        	  CardList oppCreatures = new CardList();
 			        	  for (int i=0;i<cards.size();i++)
 			        	  {
-			        		  if (cards.get(i).isPlaneswalker() || cards.get(i).isCreature())
+			        		  if (cards.get(i).isPlaneswalker() || cards.get(i).isCreature() && CardFactoryUtil.canTarget(crd, cards.get(i)))
 			        		  {
 			        			  oppCreatures.add(cards.get(i));
 			        		  }
@@ -1829,7 +1856,7 @@ public class GameActionUtil
 			        	  {
 			        		  Object o = AllZone.Display.getChoiceOptional("Pick target creature", oppCreatures.toArray());
 			        		  Card c = (Card)o;
-			        		  c.addDamage(1);
+			        		  c.addDamage(1, crd);
 			        	  }
 		        	  }
 		          }
@@ -1839,8 +1866,8 @@ public class GameActionUtil
 		        	
 			          if(getTargetCard() != null)
 			          {
-			            if(AllZone.GameAction.isCardInPlay(getTargetCard()))
-			              getTargetCard().addDamage(1);
+			            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(crd, getTargetCard()))
+			              getTargetCard().addDamage(1, crd);
 			          }
 			          else
 			            AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
@@ -2878,19 +2905,20 @@ public class GameActionUtil
 		AllZone.Stack.add(ability2);
 	}
 	
-	public static void executeGuiltyConscienceEffects(Card c)
+	public static void executeGuiltyConscienceEffects(Card c, Card source)
 	{
 		int pwr = c.getNetAttack();
 		if (CombatUtil.isDoranInPlay())
 			pwr = c.getNetDefense();
 		final int damage = pwr;
+		final Card src = source;
 		
 		final Card crd = c;
 		Ability ability2 = new Ability(c, "0")
 		{
 			public void resolve()
 			{
-				crd.addDamage(damage);
+				crd.addDamage(damage, src);
 			}
 		}; // ability2
 
@@ -2898,15 +2926,16 @@ public class GameActionUtil
 		AllZone.Stack.add(ability2);
 	}
 	
-	public static void executeGuiltyConscienceEffects(Card c, int n)
+	public static void executeGuiltyConscienceEffects(Card c, Card source, int n)
 	{
 		final int damage = n;
 		final Card crd = c;
+		final Card src = source;
 		Ability ability2 = new Ability(c, "0")
 		{
 			public void resolve()
 			{
-				crd.addDamage(damage);
+				crd.addDamage(damage, src);
 			}
 		}; // ability2
 
@@ -6198,7 +6227,7 @@ public class GameActionUtil
 			        		  
 			        		  Object o = AllZone.Display.getChoiceOptional("Pick target creature", oppCreatures.toArray());
 			        		  Card c = (Card)o;
-			        		  c.addDamage(hondlist.size());
+			        		  c.addDamage(hondlist.size(), card);
 			        	  }
 		        	  }
 		          }
@@ -6215,7 +6244,7 @@ public class GameActionUtil
 			          if(targetc != null)
 			          {
 			            if(AllZone.GameAction.isCardInPlay(targetc))
-			            	targetc.addDamage(hondlist.size());
+			            	targetc.addDamage(hondlist.size(), card);
 			          }
 			          else
 			            AllZone.GameAction.getPlayerLife(Constant.Player.Human).subtractLife(hondlist.size());
@@ -10393,14 +10422,13 @@ public class GameActionUtil
 			// for each zone found add +1/+1 to each card
 			for (int outer = 0; outer < zone.length; outer++)
 			{
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
+				CardList creature = new CardList(zone[outer].getCards());
+
 				creature = creature.filter(new CardListFilter()
 				{
 					public boolean addCard(Card c)
 					{
-						return c.getType().equals("Treefolk") || c.getType().equals("Forest") || c.getKeyword().contains("Changeling");
+						return c.getType().contains("Treefolk") || c.getType().contains("Forest") || c.getKeyword().contains("Changeling");
 					}
 				});
 
@@ -10415,7 +10443,7 @@ public class GameActionUtil
 						c.addExtrinsicKeyword("Indestructible");
 						gloriousAnthemList.add(c);
 					}
-					else if (c.getKeyword().contains("Forest"))
+					else if (c.getType().contains("Forest"))
 					{
 						c.addExtrinsicKeyword("Indestructible");
 					}

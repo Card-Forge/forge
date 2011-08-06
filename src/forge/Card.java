@@ -29,6 +29,7 @@ public class Card extends MyObservable
   private ArrayList<Ability_Mana> manaAbility = new ArrayList<Ability_Mana>();
   
   private HashMap<Card, Integer> receivedDamageFromThisTurn = new HashMap<Card, Integer>();
+  private HashMap<Card, Integer> assignedDamageHashMap = new HashMap<Card, Integer>();
 
   private boolean unCastable;
   private boolean tapped;
@@ -55,7 +56,7 @@ public class Card extends MyObservable
   private int baseDefense;
    
   private int damage;
-  private int assignedDamage;
+
   private int nShield;
   private int turnInZone;
  
@@ -483,7 +484,14 @@ public class Card extends MyObservable
   public void setRarity(String s) {rarity = s;}
   public String getRarity()          {return rarity;}
 
-  public void addDamage(int n) 
+  
+  public void addDamage(int n, CardList sources)
+  {
+	  for(Card source : sources)
+		  this.addDamage(n, source);
+  }
+  
+  public void addDamage(int n, Card source) 
   {
 	  if (this.getName().equals("Cho-Manno, Revolutionary"))
 		  n = 0;
@@ -497,8 +505,42 @@ public class Card extends MyObservable
   }
   public int getDamage()          {return damage;}
 
-  public void setAssignedDamage(int n) {assignedDamage = n;}
-  public int  getAssignedDamage()         {return assignedDamage;}
+  /*public void setAssignedDamage(int n)
+  {
+	  assignedDamage = n;
+  }*/
+  
+  public void addAssignedDamage(int n, Card source) 
+  {
+	  System.out.println(this + " - was assigned " + n +" damage, by " +source);
+	  if (!assignedDamageHashMap.containsKey(source))
+		  assignedDamageHashMap.put(source, n);
+	  else 
+	  {
+		  assignedDamageHashMap.put(source, assignedDamageHashMap.get(source)+n);
+	  }
+  }
+  //public void setAssignedDamage(int n) {assignedDamage = n;}
+  public void clearAssignedDamage()
+  {
+	  assignedDamageHashMap.clear();
+  }
+  public int getTotalAssignedDamage()         
+  {
+	  int total = 0;
+	  
+	  Collection<Integer> c = assignedDamageHashMap.values();
+	  
+	  Iterator<Integer> itr = c.iterator();
+	  while(itr.hasNext())
+		  total+=itr.next();
+	  
+	  return total;
+  }
+  public HashMap<Card, Integer> getAssignedDamageHashMap()
+  {
+	  return assignedDamageHashMap;
+  }
 
   public void setImageName(String s) { imageName = s; }
   public String getImageName() 

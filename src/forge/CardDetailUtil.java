@@ -32,7 +32,7 @@ public class CardDetailUtil
     }
 
     if(card.isCreature())
-        label[3].setText("Damage: " +card.getDamage() +" Assigned Damage: " +card.getAssignedDamage());
+        label[3].setText("Damage: " +card.getDamage() +" Assigned Damage: " +card.getTotalAssignedDamage());
 
     String uniqueID = card.getUniqueNumber() +" ";
     label[4].setText("Card ID  " +uniqueID);

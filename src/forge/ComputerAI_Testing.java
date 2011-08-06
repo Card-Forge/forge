@@ -64,4 +64,9 @@ public class ComputerAI_Testing implements Computer
     {
     	numberPlayLand += n;
     }
+    
+    public void setNumberPlayLands(int n)
+    {
+    	numberPlayLand = n;
+    }
 }

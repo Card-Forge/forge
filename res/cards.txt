@@ -1,3 +1,16 @@
+Dromad Purebred
+4 W
+Creature Camel Beast
+Whenever Dromad Purebred is dealt damage, you gain 1 life.
+1/5
+
+Swans of Bryn Argoll
+2 WU WU
+Creature Bird Spirit
+If a source would deal damage to Swans of Bryn Argoll, prevent that damage. The source's controller draws cards equal to the damage prevented this way.
+4/3
+Flying
+
 Honden of Infinite Rage
 2 R
 Legendary Enchantment Shrine

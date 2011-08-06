@@ -174,6 +174,11 @@ public class ComputerAI_Burn2 implements Computer {
     	numberPlayLand += n;
     }
     
+    public void setNumberPlayLands(int n)
+    {
+    	numberPlayLand = n;
+    }
+    
     public void stack_not_empty() {
         //same as Input.stop() method
         //ends the method

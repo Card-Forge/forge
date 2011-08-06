@@ -7,9 +7,11 @@ public class CombatPlaneswalker
   //value is CardList of blockers
   private Map<Card,CardList> map = new HashMap<Card,CardList>();
   private Set<Card> blocked = new HashSet<Card>();
+  private HashMap<Card, Integer> defendingFirstStrikeDamageMap = new HashMap<Card, Integer>();
+  private HashMap<Card, Integer> defendingDamageMap = new HashMap<Card, Integer>();
 
-  private int attackingDamage;
-  private int defendingDamage;
+  //private int attackingDamage;
+  //private int defendingDamage;
 
   private String attackingPlayer;
   private String defendingPlayer;
@@ -25,8 +27,8 @@ public class CombatPlaneswalker
     map.clear();
     blocked.clear();
 
-    attackingDamage = 0;
-    defendingDamage = 0;
+    defendingFirstStrikeDamageMap.clear();
+    defendingDamageMap.clear();
 
     attackingPlayer = "";
     defendingPlayer = "";
@@ -41,20 +43,51 @@ public class CombatPlaneswalker
   public String getDefendingPlayer() {return defendingPlayer;}
 
   //relates to defending player damage
-  public int getDefendingDamage() {return defendingDamage;}
+  public int getTotalDefendingDamage()         
+  {
+	  int total = 0;
+	  
+	  Collection<Integer> c = defendingDamageMap.values();
+	  
+	  Iterator<Integer> itr = c.iterator();
+	  while(itr.hasNext())
+		  total+=itr.next();
+	  
+	  return total;
+  }
+  
   public void setDefendingDamage()
   {
-    defendingDamage = 0;
-    CardList att = new CardList(getAttackers());
-    //sum unblocked attackers' power
-    for(int i = 0; i < att.size(); i++)
-      if(! isBlocked(att.get(i)))
-        defendingDamage += att.get(i).getNetAttack();
-  }
-  public void addDefendingDamage(int n) {defendingDamage += n;}
+        defendingDamageMap.clear();
+        CardList att = new CardList(getAttackers());
+        //sum unblocked attackers' power
+        for(int i = 0; i < att.size(); i++) {
+          if(! isBlocked(att.get(i))) {
+           int damageDealt = att.get(i).getNetAttack();
+             if (CombatUtil.isDoranInPlay())
+                damageDealt = att.get(i).getNetDefense();
 
+             //if the creature has first strike do not do damage in the normal combat phase
+             //if(att.get(i).hasSecondStrike())
+                addDefendingDamage(damageDealt, att.get(i));
+          }
+      }
+  }
+
+  public void addDefendingDamage(int n, Card source) 
+  {
+	  if (!defendingDamageMap.containsKey(source))
+		  defendingDamageMap.put(source, n);
+	  else 
+	  {
+		  defendingDamageMap.put(source, defendingDamageMap.get(source)+n);
+	  }
+  }
+
+  /*//Needed ??
   public void addAttackingDamage(int n) {attackingDamage += n;}
   public int getAttackingDamage() {return attackingDamage;}
+  */
 
   public void addAttacker(Card c) {map.put(c, new CardList());}
   public void resetAttackers()    {map.clear();}
@@ -132,42 +165,63 @@ public class CombatPlaneswalker
     {
       block = getBlockers(attacking.get(i));
 
+      
       //attacker always gets all blockers' attack
-      AllZone.GameAction.setAssignedDamage(attacking.get(i), block, CardListUtil.sumAttack(block));
+      for (Card b : block) {
+    	  int attack =  b.getNetAttack();
+     	  if (CombatUtil.isDoranInPlay())
+     		 attack = b.getNetDefense();
+    	  AllZone.GameAction.addAssignedDamage(attacking.get(i), b, attack);
+      }
       //attacking.get(i).setAssignedDamage(CardListUtil.sumAttack(block));
       if(block.size() == 0)//this damage is assigned to a player by setPlayerDamage()
         ;
       else if(block.size() == 1)
       {
-        block.get(0).setAssignedDamage(attacking.get(i).getNetAttack());
+        block.get(0).addAssignedDamage(attacking.get(i).getNetAttack(), attacking.get(i));
 
         //trample
         int trample = attacking.get(i).getNetAttack() - block.get(0).getNetDefense();
+        if (CombatUtil.isDoranInPlay())
+        {
+        	trample = attacking.get(i).getNetDefense() - block.get(0).getNetDefense();
+        }
         if(attacking.get(i).getKeyword().contains("Trample") && 0 < trample)
-          this.addDefendingDamage(trample);
+          this.addDefendingDamage(trample, attacking.get(i));
 
+        /*
         trample = block.get(0).getNetAttack() - attacking.get(i).getNetDefense();
         if(block.get(0).getKeyword().contains("Trample") && 0 < trample)
           this.addAttackingDamage(trample);
+          */
 
       }//1 blocker
       else if(getAttackingPlayer().equals(Constant.Player.Computer))
       {
-        setAssignedDamage(block, attacking.get(i).getNetAttack());
+    	for (Card b : block)
+    		addAssignedDamage(b, attacking.get(i), attacking.get(i).getNetAttack());
       }
       else//human
       {
         GuiDisplay2 gui = (GuiDisplay2) AllZone.Display;
+        //gui.assignDamage(attacking.get(i), block.get(0), attacking.get(i).getNetAttack());
         gui.assignDamage(attacking.get(i), block, attacking.get(i).getNetAttack());
       }
     }//for
 
-    planeswalker.setAssignedDamage(defendingDamage);
-    defendingDamage = 0;
+    Iterator<Card> iter = defendingDamageMap.keySet().iterator();
+	  while(iter.hasNext()) {
+		Card crd = iter.next();
+		planeswalker.addAssignedDamage(defendingDamageMap.get(crd), crd);
+	  }
+	  
+	  defendingDamageMap.clear();
+
 
   }//assignDamage()
-  private void setAssignedDamage(CardList list, int damage)
+  private void addAssignedDamage(Card b, Card a, int damage)
   {
+	/*
     CardListUtil.sortAttack(list);
     Card c;
     for(int i = 0; i < list.size(); i++)
@@ -179,6 +233,16 @@ public class CombatPlaneswalker
         c.setAssignedDamage(c.getKillDamage());
       }
     }//for
+    */
+	if (b.getKillDamage() <= damage)
+	{
+		damage -= b.getKillDamage();
+        b.addAssignedDamage(b.getKillDamage(), a);
+	}
+	
+	  
+	  
+	  
   }//assignDamage()
 }
 

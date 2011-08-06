@@ -16,4 +16,6 @@ public interface Display {
 
     //assigns combat damage, used by Combat.setAssignedDamage()
     public void assignDamage(Card attacker, CardList blockers, int damage);
+    //public void addAssignDamage(Card attacker, Card blocker, int damage);
+    //public void addAssignDamage(Card attacker, int damage);
 }

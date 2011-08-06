@@ -247,7 +247,7 @@ package forge;
           all.addAll(AllZone.Human_Play.getCards());
           all = all.filter(new CardListFilter(){
 			public boolean addCard(Card c) {
-				return c.isCreature() && c.getAssignedDamage() > 0;
+				return c.isCreature() && c.getTotalAssignedDamage() > 0;
 			}
         	  
           });

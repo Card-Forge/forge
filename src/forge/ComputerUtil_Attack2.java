@@ -245,23 +245,7 @@ import java.util.*;
 	  
 	  return list.size();
   }
-
-       public void assignDamage(CardList list, int damage)
-       {
-          CardListUtil.sortAttack(list);
-          
-          int kill;
-          for(int i = 0; i < list.size(); i++)
-          {
-             kill = list.get(i).getKillDamage();
-             if(kill <= damage)
-             {
-                damage -= kill;
-                list.get(i).setAssignedDamage(kill);
-             }
-          }
-       }//assignDamage()
-       
+    
        public int getAttack(Card c)
        {
           int n = c.getNetAttack();

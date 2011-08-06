@@ -18,6 +18,8 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+dromad_purebred.jpg			http://www.wizards.com/global/images/magic/general/dromad_purebred.jpg
+swans_of_bryn_argoll.jpg	http://www.wizards.com/global/images/magic/general/swans_of_bryn_argoll.jpg
 earthbind.jpg		http://www.wizards.com/global/images/magic/general/earthbind.jpg
 honden_of_cleansing_fire.jpg http://www.wizards.com/global/images/magic/general/honden_of_cleansing_fire.jpg
 honden_of_infinite_rage.jpg http://www.wizards.com/global/images/magic/general/honden_of_infinite_rage.jpg

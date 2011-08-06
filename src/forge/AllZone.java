@@ -17,6 +17,7 @@ public class AllZone implements NewConstants {
     public static final NameChanger              NameChanger        = new NameChanger();
     
     public static EndOfTurn                      EndOfTurn          = new EndOfTurn();
+    public static EndOfCombat					 EndOfCombat		= new EndOfCombat();
     public static final CardFactory              CardFactory        = new CardFactory(ForgeProps.getFile(CARDS));
     
     public static final Phase                    Phase              = new Phase();

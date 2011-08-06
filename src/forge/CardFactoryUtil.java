@@ -1915,6 +1915,27 @@ public class CardFactoryUtil
 	  
   }
   
+  //returns a CardList of all auras named e enchanting Card c
+  public static CardList getAurasEnchanting(Card c, String e)
+  {
+	  CardList list = new CardList();
+	  if (!c.isEnchanted())
+		  return list;
+	  
+	  final String enchantmentName = e;
+	  CardList cl = new CardList(c.getEnchantedBy().toArray());
+	  cl = cl.filter(new CardListFilter()
+	  {
+		public boolean addCard(Card c) {
+			return c.getName().equals(enchantmentName);
+		}
+		  
+	  });
+	  
+	  return cl;
+	  
+  }
+  
   //returns the number of equipments named "e" card c is equipped by
   public static int hasNumberEquipments(Card c, String e)
   {

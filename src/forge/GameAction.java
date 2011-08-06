@@ -1,5 +1,6 @@
 package forge;
 import java.util.*;
+
 import javax.swing.*;
 
 
@@ -812,7 +813,10 @@ private Card getCurrentCard(int ID)
 //    AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
 	System.gc(); //garbage collection... does it make a difference though?
 	lastPlayerToDraw = Constant.Player.Human;
-		
+	
+	Input_Main.canPlayNumberOfLands = 1;
+	AllZone.Computer.getComputer().setNumberPlayLands(1);
+	
     AllZone.Computer_Life.setLife(20);
     AllZone.Human_Life.setLife(20);
 
@@ -1214,55 +1218,45 @@ private int getDifferentLand(CardList list, String land)
 
   }
   
-  public void setAssignedDamage(Card card, CardList sourceCards, int damage)
+  public void addAssignedDamage(Card card, Card sourceCard, int damage)
   {
 	  if (damage < 0)
 		  damage = 0;
 	  
 	  int assignedDamage = damage;
-	  if (sourceCards.size() == 1)
-	  {
-		  Card sourceCard = sourceCards.get(0);
-		  card.addReceivedDamageFromThisTurn(sourceCard, damage);
-		  if (card.getKeyword().contains("Protection from white") && CardUtil.getColors(sourceCard).contains(Constant.Color.White))
-			  assignedDamage = 0;
-		  if (card.getKeyword().contains("Protection from blue") && CardUtil.getColors(sourceCard).contains(Constant.Color.Blue))
-			  assignedDamage = 0;
-		  if (card.getKeyword().contains("Protection from black") && CardUtil.getColors(sourceCard).contains(Constant.Color.Black))
-			  assignedDamage = 0;
-		  if (card.getKeyword().contains("Protection from red") && CardUtil.getColors(sourceCard).contains(Constant.Color.Red))
-			  assignedDamage = 0;
-		  if (card.getKeyword().contains("Protection from green") && CardUtil.getColors(sourceCard).contains(Constant.Color.Green))
-			  assignedDamage = 0;
-		  
-		  if (card.getKeyword().contains("Protection from creatures") && sourceCard.isCreature())
-			  assignedDamage = 0;
-		  if (card.getKeyword().contains("Protection from everything"))
-			  assignedDamage = 0;
-		  if (card.getKeyword().contains("Protection from artifacts") && sourceCard.isArtifact())
-			  assignedDamage = 0;
-		  
-		  if (card.getKeyword().contains("Protection from Dragons") && sourceCard.getType().contains("Dragon"))
-			  assignedDamage = 0;
-		  if (card.getKeyword().contains("Protection from Demons") && sourceCard.getType().contains("Demon"))
-			  assignedDamage = 0;
-		  if (card.getKeyword().contains("Protection from Goblins") && sourceCard.getType().contains("Goblin"))
-			  assignedDamage = 0;
-		  
-		  if (card.getKeyword().contains("Protection from enchantments") && sourceCard.getType().contains("Enchantment"))
-			  assignedDamage = 0;
-	  }
-	  else //got blocked by multiple blockers
-	  {
-		  for(int i=0;i<sourceCards.size();i++)
-		  {
-			  Card sourceCard = sourceCards.get(i); //blocker number i
-			  card.addReceivedDamageFromThisTurn(sourceCard, sourceCard.getNetAttack());
-		  }
-	  }
-	  card.setAssignedDamage(assignedDamage);
+	  card.addReceivedDamageFromThisTurn(sourceCard, damage);
+	  if (card.getKeyword().contains("Protection from white") && CardUtil.getColors(sourceCard).contains(Constant.Color.White))
+		  assignedDamage = 0;
+	  if (card.getKeyword().contains("Protection from blue") && CardUtil.getColors(sourceCard).contains(Constant.Color.Blue))
+		  assignedDamage = 0;
+	  if (card.getKeyword().contains("Protection from black") && CardUtil.getColors(sourceCard).contains(Constant.Color.Black))
+		  assignedDamage = 0;
+	  if (card.getKeyword().contains("Protection from red") && CardUtil.getColors(sourceCard).contains(Constant.Color.Red))
+		  assignedDamage = 0;
+	  if (card.getKeyword().contains("Protection from green") && CardUtil.getColors(sourceCard).contains(Constant.Color.Green))
+		  assignedDamage = 0;
+	  
+	  if (card.getKeyword().contains("Protection from creatures") && sourceCard.isCreature())
+		  assignedDamage = 0;
+	  if (card.getKeyword().contains("Protection from everything"))
+		  assignedDamage = 0;
+	  if (card.getKeyword().contains("Protection from artifacts") && sourceCard.isArtifact())
+		  assignedDamage = 0;
+	  
+	  if (card.getKeyword().contains("Protection from Dragons") && sourceCard.getType().contains("Dragon"))
+		  assignedDamage = 0;
+	  if (card.getKeyword().contains("Protection from Demons") && sourceCard.getType().contains("Demon"))
+		  assignedDamage = 0;
+	  if (card.getKeyword().contains("Protection from Goblins") && sourceCard.getType().contains("Goblin"))
+		  assignedDamage = 0;
+	  
+	  if (card.getKeyword().contains("Protection from enchantments") && sourceCard.getType().contains("Enchantment"))
+		  assignedDamage = 0;
+
+	  card.addAssignedDamage(assignedDamage, sourceCard);
 	  
 	  System.out.println("***");
+	  /*
 	  if(sourceCards.size() > 1)
 		  System.out.println("(MULTIPLE blockers):");
 	  System.out.println("Assigned " + damage + " damage to " + card);
@@ -1270,12 +1264,85 @@ private int getDifferentLand(CardList list, String land)
 		  System.out.println(sourceCards.get(i).getName() + " assigned damage to " + card.getName());
 	  }
 	  System.out.println("***");
+	  */
   }
   
-  public void addDamage(Card card, int damage)
+  public void addDamage(Card card, HashMap<Card,Integer> map)
+  {
+	  int totalDamage = 0;
+	  CardList list = new CardList();
+	  
+	  Iterator<Card> iter = map.keySet().iterator();
+	  while(iter.hasNext()) {
+			Card source = iter.next();
+			list.add(source);
+			int damage = map.get(source);
+			int damageToAdd = damage;
+    		//AllZone.GameAction.addDamage(c, crd , assignedDamageMap.get(crd));
+			
+			  if (source.getKeyword().contains("Wither"))
+			  {
+				  damageToAdd = 0;
+				  card.addCounter(Counters.M1M1, damage);
+			  }  
+			  if (source.getName().equals("Spiritmonger") || source.getName().equals("Mirri the Cursed"))
+			  {
+				  	final Card thisCard = source;
+					Ability ability2 = new Ability(source, "0")
+					{
+						public void resolve()
+						{
+							thisCard.addCounter(Counters.P1P1, 1);
+						}
+					}; // ability2
+
+					ability2.setStackDescription(source.getName() + " - gets a +1/+1 counter");
+					AllZone.Stack.add(ability2);
+			  }
+			  if (source.getKeyword().contains("Deathtouch"))
+			  {
+				  AllZone.GameAction.destroy(card);
+				  AllZone.Combat.removeFromCombat(card);
+			  }
+			  
+			  totalDamage += damageToAdd;
+	  }
+	  
+	  if (isCardInPlay(card))
+		  card.addDamage(totalDamage, list);
+	  
+  }
+  
+  public void addDamage(Card card, Card source, int damage)
   {
 	  int damageToAdd = damage;
+	  if (source.getKeyword().contains("Wither"))
+	  {
+		  damageToAdd = 0;
+		  card.addCounter(Counters.M1M1, damage);
+	  }  
+	  if (source.getName().equals("Spiritmonger") || source.getName().equals("Mirri the Cursed"))
+	  {
+		  	final Card thisCard = source;
+			Ability ability2 = new Ability(source, "0")
+			{
+				public void resolve()
+				{
+					thisCard.addCounter(Counters.P1P1, 1);
+				}
+			}; // ability2
+
+			ability2.setStackDescription(source.getName() + " - gets a +1/+1 counter");
+			AllZone.Stack.add(ability2);
+	  }
+	  if (source.getKeyword().contains("Deathtouch"))
+	  {
+		  AllZone.GameAction.destroy(card);
+		  AllZone.Combat.removeFromCombat(card);
+	  }
+	  
 	  //System.out.println("size of sources: " + card.getReceivedDamageFromThisTurn().size());
+	  /*
 	  if (card.getReceivedDamageFromThisTurn().size() >= 1)
 	  { 
 		  for (Card c : card.getReceivedDamageFromThisTurn().keySet() ) {	
@@ -1311,10 +1378,12 @@ private int getDifferentLand(CardList list, String land)
 				  }
 			  }
 		  }
+		  
 	  }
+	  */
 	  System.out.println("Adding " + damageToAdd + " damage to " + card.getName());
 	  if (isCardInPlay(card))
-		  card.addDamage(damageToAdd);
+		  card.addDamage(damageToAdd, source);
   }
   
   /*

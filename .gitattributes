@@ -120,6 +120,7 @@ src/forge/DeckIO.java svneol=native#text/plain
 src/forge/DefaultPlayerZone.java svneol=native#text/plain
 src/forge/Display.java svneol=native#text/plain
 src/forge/DownloadDeck.java -text svneol=native#text/plain
+src/forge/EndOfCombat.java -text svneol=native#text/plain
 src/forge/EndOfTurn.java svneol=native#text/plain
 src/forge/ExternalPanel.java svneol=native#text/plain
 src/forge/FileUtil.java -text svneol=native#text/plain
