@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigTapOrUntap:AB$TapOrUntap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/esper_sojourners.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/107.jpg
 End

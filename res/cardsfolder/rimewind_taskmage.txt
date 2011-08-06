@@ -7,4 +7,5 @@ A:AB$TapOrUntap | Cost$ 1 T | ValidTgts$ Permanent | TgtPrompt$ Select target pe
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimewind_taskmage.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/44.jpg
 End

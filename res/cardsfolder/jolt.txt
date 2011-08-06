@@ -7,4 +7,5 @@ SVar:DBDraw:AB$Draw | Defined$ You | NumCards$ 1 | NextUpkeep$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jolt.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/70.jpg
 End

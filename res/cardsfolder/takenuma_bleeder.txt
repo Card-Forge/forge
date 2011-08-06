@@ -8,4 +8,5 @@ T:Mode$ Blocks | ValidCard$ Card.Self | IsPresent$ Card.Demon+YouCtrl | PresentC
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/takenuma_bleeder.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/86.jpg
 End

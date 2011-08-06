@@ -8,4 +8,5 @@ SVar:DBExileOpp:DB$ChangeZone | Defined$ Opponent | Origin$ Hand | Destination$ 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_swords.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/60.jpg
 End

@@ -8,4 +8,5 @@ T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigDamage | CombatDamage
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X
 SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Uncommon
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/25.jpg
 End

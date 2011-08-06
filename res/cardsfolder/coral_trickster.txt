@@ -8,4 +8,5 @@ T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigTapOrUntap | TriggerDes
 SVar:TrigTapOrUntap:AB$TapOrUntap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_trickster.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/54.jpg
 End

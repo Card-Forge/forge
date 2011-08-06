@@ -6,4 +6,5 @@ A:AB$ Pump | Cost$ T | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ X | TgtPr
 SVar:X:Count$Valid Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cauldron_of_souls.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/248.jpg
 End

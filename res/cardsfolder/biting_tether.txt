@@ -8,4 +8,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | Tri
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Enchanted | CounterType$ M1M1 | CounterNum$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/biting_tether.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/29.jpg
 End
