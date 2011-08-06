@@ -92,8 +92,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     private Action            COMPUTER_GRAVEYARD_ACTION;
     private Action            COMPUTER_REMOVED_ACTION;
     private Action            CONCEDE_ACTION;
-    public String cardN;
-    public String cOwner;
+    public Card cCardHQ;  
     
     public GuiDisplay3() {
         setupActions();
@@ -505,13 +504,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         else this.cdArea.setText(tokenText + counterText);
         
         cdPanel.setBorder(GuiDisplayUtil.getBorder(c));
-        
-        if(c.getOwner()=="Computer" && c.isFaceDown()==true){
-        	cardN = "morph";
-        }else{
-        	cardN = c.getName();
-        }
-        
+        cCardHQ = c;       
         
         
         //picture
@@ -1174,37 +1167,37 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         public void mouseEntered(MouseEvent e) { 
         	       	
         	if (picturePanel.getComponentCount()!=0){
-        				cardN= GuiDisplayUtil.cleanString(cardN);		        		
-		        	    cardN = cardN+".jpg"; 
-		        	
-        			 if(GuiDisplayUtil.IsPictureHQExists(cardN)){    
+        			if(cCardHQ.isFaceDown()==true && cCardHQ.getOwner()=="Computer"){
+        			return;	
+        			}else{
+        			 if(GuiDisplayUtil.IsPictureHQExists(cCardHQ)){    
         				int cWidth = 0;
 						try {
-							cWidth = GuiDisplayUtil.getPictureHQwidth(cardN);
+							cWidth = GuiDisplayUtil.getPictureHQwidth(cCardHQ);
 						} catch (IOException e2) {
 							
 							e2.printStackTrace();
 						}
         				int cHeight = 0;
 						try {
-							cHeight = GuiDisplayUtil.getPictureHQheight(cardN);
+							cHeight = GuiDisplayUtil.getPictureHQheight(cCardHQ);
 						} catch (IOException e2) {
 							
 							e2.printStackTrace();
 						}
         		 
+						
 						if(cWidth>=312 &&cHeight >=445){ 
 							
-							GUI_PictureHQ hq = new GUI_PictureHQ(GuiDisplay3.this,cardN);
+							GUI_PictureHQ hq = new GUI_PictureHQ(GuiDisplay3.this,cCardHQ);
 						try {
-							hq.letsGo(GuiDisplay3.this, cardN);
-							cardN = cardN.substring(0, cardN.length()-4);
+							hq.letsGo(GuiDisplay3.this, cCardHQ);							
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
 						}
 							
-        		}}
+        		}}}
       	
         }
 

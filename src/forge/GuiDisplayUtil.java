@@ -18,6 +18,7 @@ import javax.imageio.*;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -210,27 +211,31 @@ public class GuiDisplayUtil implements NewConstants {
         
 
         if(file.exists()) {
-        	int cWidth = 0;
-        	int cHeight = 0;
-        	try {
-				cWidth = GuiDisplayUtil.getPictureHQwidth(filename);
-			} catch (IOException e) {
+	        if(c.isFaceDown()){
+	        	 return new PicturePanel(file);     	
+	        }else{
+	        	int cWidth = 0;
+	        	int cHeight = 0;
+	        	try {
+					cWidth = GuiDisplayUtil.getPictureHQwidth(c);
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+	        	
+				try {
+					cHeight = GuiDisplayUtil.getPictureHQheight(c);
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
 				
-				e.printStackTrace();
-			}
-        	
-			try {
-				cHeight = GuiDisplayUtil.getPictureHQheight(filename);
-			} catch (IOException e) {
-				
-				e.printStackTrace();
-			}
-			
-        	if(cWidth<=312 || cHeight<=445) {     	
-            return new PicturePanel(file);
-        	}else{
-        	return new PicturePanelResize(file);	
-        	}
+	        	if(cWidth<=312 || cHeight<=445) {     	
+	            return new PicturePanel(file);
+	        	}else{
+	        	return new PicturePanelResize(file);	
+	        	}
+	        	}
         } else {
             JPanel p = new JPanel();
             
@@ -249,27 +254,52 @@ public class GuiDisplayUtil implements NewConstants {
     }//getPicture()
     
     
-    public static JPanel getPictureHQ(String c) {
-    	File file = new File(ForgeProps.getFile(IMAGE_BASE), c);
+    public static JPanel getPictureHQ(Card c) {
+    	
+    	String loc = "";
+        if (c.isToken()== false)
+        	loc = IMAGE_BASE;
+        else
+        	loc = IMAGE_TOKEN;
+        String filename = GuiDisplayUtil.cleanString(c.getImageName()) + ".jpg";
+        File file = new File(ForgeProps.getFile(loc), filename);
     	return new PicturePanel(file);
     }
     
 
     
-    public static int getPictureHQheight(String c) throws IOException{
-    	File file = new File(ForgeProps.getFile(IMAGE_BASE), c);    	  	
+    public static int getPictureHQheight(Card c) throws IOException{
+    	String loc = "";
+        if (c.isToken()== false)
+        	loc = IMAGE_BASE;
+        else
+        	loc = IMAGE_TOKEN;
+        String filename = GuiDisplayUtil.cleanString(c.getImageName()) + ".jpg";
+        File file = new File(ForgeProps.getFile(loc), filename); 	  	
     	BufferedImage a = ImageIO.read(file);
     	return a.getHeight();
     }
     
-    public static int getPictureHQwidth(String c) throws IOException{
-    	File file = new File(ForgeProps.getFile(IMAGE_BASE), c);    	  	
+    public static int getPictureHQwidth(Card c) throws IOException{
+    	String loc = "";
+        if (c.isToken()== false)
+        	loc = IMAGE_BASE;
+        else
+        	loc = IMAGE_TOKEN;
+        String filename = GuiDisplayUtil.cleanString(c.getImageName()) + ".jpg";
+        File file = new File(ForgeProps.getFile(loc), filename);	  	
     	BufferedImage a = ImageIO.read(file);
     	return a.getWidth();
     }
     
-    public static boolean IsPictureHQExists(String c) {
-    	File file = new File(ForgeProps.getFile(IMAGE_BASE), c);
+    public static boolean IsPictureHQExists(Card c) {
+    	String loc = "";
+        if (c.isToken()== false)
+        	loc = IMAGE_BASE;
+        else
+        	loc = IMAGE_TOKEN;
+        String filename = GuiDisplayUtil.cleanString(c.getImageName()) + ".jpg";
+        File file = new File(ForgeProps.getFile(loc), filename);
     	if(file.exists()){
     		return true;
     	}

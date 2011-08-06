@@ -92,7 +92,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay {
     
     private CardList          top;
     private CardList          bottom;
-    public String cardN;
+    public Card cCardHQ; 
     
     public static void main(String[] args) {
 
@@ -399,7 +399,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay {
         //change card name if needed
         c = AllZone.CardFactory.copyCard(c);
         if(AllZone.NameChanger.shouldChangeCardName()) c = AllZone.NameChanger.changeCard(c);
-        cardN = c.getName();
+        cCardHQ = c; 
         CardDetailUtil.updateCardDetail(c, cdTextArea, cardDetailPanel, picturePanel, new JLabel[] {
                 cdLabel1, cdLabel2, cdLabel3, cdLabel4, cdLabel5});
     }
@@ -726,29 +726,28 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay {
         public void mouseEntered(MouseEvent e) { 
         	       	
         	if (picturePanel.getComponentCount()!=0){
-        				cardN= GuiDisplayUtil.cleanString(cardN);		        		
-		        	    cardN = cardN+".jpg";    
-        			 if(GuiDisplayUtil.IsPictureHQExists(cardN)){    
+        				   
+        			 if(GuiDisplayUtil.IsPictureHQExists(cCardHQ)){    
         				 int cWidth = 0;
  						try {
- 							cWidth = GuiDisplayUtil.getPictureHQwidth(cardN);
+ 							cWidth = GuiDisplayUtil.getPictureHQwidth(cCardHQ);
  						} catch (IOException e2) {
  							// TODO Auto-generated catch block
  							e2.printStackTrace();
  						}
          				int cHeight = 0;
  						try {
- 							cHeight = GuiDisplayUtil.getPictureHQheight(cardN);
+ 							cHeight = GuiDisplayUtil.getPictureHQheight(cCardHQ);
  						} catch (IOException e2) {
  							// TODO Auto-generated catch block
  							e2.printStackTrace();
  						}
          		 
          			if(cWidth>=312 &&cHeight >=445){ 
-					GUI_PictureHQ hq = new GUI_PictureHQ(Gui_DeckEditor.this,cardN);
+					GUI_PictureHQ hq = new GUI_PictureHQ(Gui_DeckEditor.this,cCardHQ);
 					try {
-						hq.letsGo(Gui_DeckEditor.this, cardN);
-						cardN = cardN.substring(0, cardN.length()-4);
+						hq.letsGo(Gui_DeckEditor.this, cCardHQ);
+						
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}

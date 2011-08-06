@@ -28,7 +28,7 @@ public class GUI_PictureHQ extends JDialog
 	
  
 
-  public GUI_PictureHQ(JFrame frame, String c) 
+  public GUI_PictureHQ(JFrame frame, Card c) 
     { 
 	 super(frame); 
 	  this.setUndecorated(true);
@@ -41,16 +41,15 @@ public class GUI_PictureHQ extends JDialog
     	getContentPane().add(jPanelPictureHQ, BorderLayout.CENTER);
         jPanelPictureHQ.setBorder(BorderFactory.createEtchedBorder());;
        	jPanelPictureHQ.removeAll();
-    	jPanelPictureHQ.add(GuiDisplayUtil.getPictureHQ(c));
-    	jPanelPictureHQ.revalidate();
+       	jPanelPictureHQ.add(GuiDisplayUtil.getPictureHQ(c));
+        jPanelPictureHQ.revalidate();
     	jPanelPictureHQ.addMouseListener(new CustomListener());
-    	
-    }
+       	}
 
     pack();
   }
 
-  public void letsGo(JFrame frame, String c) throws IOException 
+  public void letsGo(JFrame frame, Card c) throws IOException 
   { 
     GUI_PictureHQ trayWindow = new GUI_PictureHQ(frame, c);
     int heightHQ = GuiDisplayUtil.getPictureHQheight(c);
