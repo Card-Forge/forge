@@ -3059,7 +3059,8 @@ public class CardFactory implements NewConstants {
         
 
         //*************** START *********** START **************************
-        if(cardName.equals("Burst of Speed") || cardName.equals("Chorus of Woe")
+        if(cardName.equals("Brave the Elements")
+        		|| cardName.equals("Burst of Speed") || cardName.equals("Chorus of Woe")
                 || cardName.equals("Dance of Shadows") || cardName.equals("Desperate Charge")
                 || cardName.equals("Glorious Charge") || cardName.equals("Kjeldoran War Cry")
                 || cardName.equals("Magnify") || cardName.equals("Nature's Cloak")
@@ -3089,7 +3090,8 @@ public class CardFactory implements NewConstants {
                         return att[0];
                         else return null;
                     }
-                    if(cardName.equals("Burst of Speed") || cardName.equals("Chorus of Woe")
+                    if(cardName.equals("Brave the Elements")
+                    		|| cardName.equals("Burst of Speed") || cardName.equals("Chorus of Woe")
                             || cardName.equals("Desperate Charge") || cardName.equals("Glorious Charge")
                             || cardName.equals("Kjeldoran War Cry") || cardName.equals("Magnify")
                             || cardName.equals("Nature's Cloak") || cardName.equals("Nocturnal Raid")
@@ -3149,6 +3151,10 @@ public class CardFactory implements NewConstants {
                 }//getToughBoost()
                 
                 String getKeywordBoost() {
+                	if(cardName.equals("Brave the Elements"))  {
+             		   String theColor = getChosenColor();
+            		   return "Protection from " + theColor;
+            	   }
                     if(cardName.equals("Burst of Speed")) return "Haste";
                     
                     if(cardName.equals("Overrun") || cardName.equals("Tromp the Domains")) return "Trample";
@@ -3164,6 +3170,40 @@ public class CardFactory implements NewConstants {
                     return "None";
                 }//getKeywordBoost()
                 
+                String getChosenColor() {
+                   // Choose color for protection in Brave the Elements
+             	   String color = "";
+             	   if (card.getController().equals(Constant.Player.Human)) {
+
+             		   String[] colors = Constant.Color.Colors;
+             		   colors[colors.length-1] = null;
+
+             		   Object o = AllZone.Display.getChoice("Choose color", colors);
+             		   color = (String)o;
+             	   }
+             	   else
+             	   {
+             		   PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
+             		   PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+             		   CardList list = new CardList();
+             		   list.addAll(lib.getCards());
+             		   list.addAll(hand.getCards());
+
+             		   if (list.size() > 0)
+             		   {  
+             			   String mpcolor = CardFactoryUtil.getMostProminentColor(list);
+             			   if (!mpcolor.equals(""))
+             				   color = mpcolor;
+             			   else
+             				   color = "black";
+             		   }
+             		   else 
+             		   {
+             			   color = "black";
+             		   }
+             	   }
+             	   return color;
+                } // getChosenColor
                 int getTtDBoost() // Tromp the Domains - +1/+1 for each basic land you control
                 {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
@@ -3201,9 +3241,9 @@ public class CardFactory implements NewConstants {
                     
                     CardList list = new CardList();
                     
-                    if(cardName.equals("Burst of Speed")
-                            || // Creatures "you" Control
-                            cardName.equals("Chorus of Woe") || cardName.equals("Dance of Shadows")
+                    if(cardName.equals("Brave the Elements") // Creatures "you" Control
+                    		|| cardName.equals("Burst of Speed") 
+                            || cardName.equals("Chorus of Woe") || cardName.equals("Dance of Shadows")
                             || cardName.equals("Desperate Charge") || cardName.equals("Glorious Charge")
                             || cardName.equals("Kjeldoran War Cry") || cardName.equals("Nature's Cloak")
                             || cardName.equals("Overrun") || cardName.equals("Path of Anger's Flame")
@@ -3224,6 +3264,15 @@ public class CardFactory implements NewConstants {
                         			return CardUtil.getColors(c).contains(Constant.Color.Green);
                         		}
                         	});
+                        } else if(cardName.equals("Brave the Elements")) {
+                     	   // White creatures you control
+                            list = list.filter(new CardListFilter()
+                            {
+                               public boolean addCard(Card c)
+                               {
+                                  return CardUtil.getColors(c).contains(Constant.Color.White);
+                               }
+                            });
                         }
                     }
                     
