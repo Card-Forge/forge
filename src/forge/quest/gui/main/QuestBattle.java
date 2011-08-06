@@ -25,9 +25,9 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Abraham Lincoln 3", "hard", "WUR flying creatures with Flamebreak and Earthquake");
         addToDeckList("Albert Einstein 2", "medium", "Garruk Wildspeaker, W+G creatures with Needle Storm and Retribution of the Meek");
         addToDeckList("Albert Einstein 3", "hard", "Garruk Wildspeaker, W+G creatures with Needle Storm and Retribution of the Meek");
-//        addToDeckList("Aquaman 1", "easy", "WU Singleton");
-//        addToDeckList("Aquaman 2", "medium", "WU Caw-Blade");
-//        addToDeckList("Aquaman 3", "hard", "WU Caw-Blade Constructed");
+        addToDeckList("Aquaman 1", "easy", "WU Singleton");
+        addToDeckList("Aquaman 2", "medium", "WU Caw-Blade");
+        addToDeckList("Aquaman 3", "hard", "WU Caw-Blade");
         addToDeckList("Aragorn 2", "medium", "WBRG Landfall deck");
 //        addToDeckList("Ash 1", "easy", "WB Singleton");
 //        addToDeckList("Ash 2", "medium", "WB Singleton ");
