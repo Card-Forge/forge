@@ -90,7 +90,7 @@ public class AbilityFactory_Pump {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return pumpPlayAI(this);
+				return pumpTriggerAI(AF, this, mandatory);
 			}
             
             
@@ -124,7 +124,7 @@ public class AbilityFactory_Pump {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return doDrawbackAI(this);
+				return pumpTriggerAI(AF, this, mandatory);
 			}
         };//SpellAbility
         
@@ -139,7 +139,7 @@ public class AbilityFactory_Pump {
     	return AbilityFactory.calculateAmount(hostCard, numDefense, sa);
     }
 
-    private CardList getPumpCreatures() {
+    private CardList getPumpCreatures(int defense, int attack) {
     	
         final boolean kHaste = Keywords.contains("Haste");
         final boolean kSize = Keywords.size() > 0;
@@ -153,26 +153,24 @@ public class AbilityFactory_Pump {
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 boolean hSick = c.hasSickness();
-                boolean cTgt = CardFactoryUtil.canTarget(hostCard, c);
+                if (!CardFactoryUtil.canTarget(hostCard, c))
+                	return false;
             	
                 if(hSick && kHaste) 
-                    return cTgt;
+                    return true;
                     
-                boolean cAtt = CardFactoryUtil.AI_doesCreatureAttack(c);
+                boolean toAttack = CardFactoryUtil.AI_doesCreatureAttack(c) && AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers);
+                boolean combatant = (AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Attackers) && (c.isBlocking() || AllZone.Combat.isAttacking(c))); 
                 boolean hKW = c.hasAnyKeyword(KWs);
                 
-                return (cAtt && cTgt && (kSize && !hKW) && !(!hSick && kHaste)); //Don't add duplicate keywords
-                    
-                //return false;
+                return ((toAttack  || combatant) && (kSize && !hKW)); //Don't add duplicate keywords
             }
         });
         return list;
     }
     
-    private CardList getCurseCreatures(SpellAbility sa)
+    private CardList getCurseCreatures(SpellAbility sa, final int defense, int attack)
     {
-    	final int defense = getNumDefense(sa);
-    	
     	CardList list = new CardList(AllZone.Human_Battlefield.getCards());
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) { 
@@ -241,15 +239,13 @@ public class AbilityFactory_Pump {
     	if (AllZone.Stack.size() == 0 && !AllZone.Phase.inCombat()){
     		// Instant-speed pumps should not be cast outside of combat when the stack is empty
     		if (!AF.isCurse()){
-	    		if (sa.isSpell() && !hostCard.isSorcery())
-	    			return false;
-	    		else if (sa.isAbility() && !restrict.getSorcerySpeed())
-	    			return false;
+    			if (!AbilityFactory.isSorcerySpeed(sa))
+    				return false;
     		}
     	}
     	else if (AllZone.Stack.size() > 0){
     		// todo: pump something only if the top thing on the stack will kill it via damage
-    		
+    		// or if top thing on stack will pump it/enchant it and I want to kill it
     		return false;
     	}
     	
@@ -260,14 +256,42 @@ public class AbilityFactory_Pump {
     		return false;
 		}
     	
-        int defense = getNumDefense(sa);
+    	Card source = sa.getSourceCard();
+    	if (source.getSVar("X").equals("Count$xPaid"))
+    		source.setSVar("PayX", "");
+    	
+    	int defense;
+		if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			int xPay = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(xPay));
+			defense = xPay;
+		}
+		else
+			defense = getNumDefense(sa);
+
+    	int attack;
+		if (numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			String toPay = source.getSVar("PayX");
+			
+			if (toPay.equals("")){
+				int xPay = ComputerUtil.determineLeftoverMana(sa);
+				source.setSVar("PayX", Integer.toString(xPay));
+				attack = xPay;
+			}
+			else
+				attack = Integer.parseInt(toPay);
+		}
+		else
+			attack = getNumAttack(sa);
         
         if(AF.getAbTgt() == null || !AF.getAbTgt().doesTarget()) {
         	ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 
         	if (cards.size() == 0)
         		return false;
-        	// todo: cards List may only return 1 card currently, but might have more later
+
         	// when this happens we need to expand AI to consider if its ok for everything?
 			for(Card card : cards){      
 				// todo: if AI doesn't control Card and Pump is a Curse, than maybe use? 
@@ -289,15 +313,13 @@ public class AbilityFactory_Pump {
 			}
         }
         else
-        	return doTgtAI(sa);
+        	return doTgtAI(sa, defense, attack);
         
         return false;
     }
 
-    private boolean doTgtAI(SpellAbility sa)
+    private boolean doTgtAI(SpellAbility sa, int defense, int attack)
     {
-        int defense = getNumDefense(sa);
-        
         String curPhase = AllZone.Phase.getPhase();
         if(curPhase.equals(Constant.Phase.Main2) && !(AF.isCurse() && defense < 0))
         	return false;
@@ -306,9 +328,9 @@ public class AbilityFactory_Pump {
 		tgt.resetTargets();
 		CardList list;
         if (AF.isCurse())  // Curse means spells with negative effect
-        	list = getCurseCreatures(sa);
+        	list = getCurseCreatures(sa, defense, attack);
         else
-        	list = getPumpCreatures();
+        	list = getPumpCreatures(defense, attack);
 		
         list = list.getValidCards(tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
         
@@ -372,12 +394,57 @@ public class AbilityFactory_Pump {
         return true;
     }
     
+    private boolean pumpTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+    	
+		Card source = sa.getSourceCard();
+		
+    	int defense;
+		if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")){
+			defense = Integer.parseInt(source.getSVar("PayX"));
+		}
+		else
+			defense = getNumDefense(sa);
+
+    	int attack;
+		if (numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")){
+			attack = Integer.parseInt(source.getSVar("PayX"));
+		}
+		else
+			attack = getNumAttack(sa);
+		
+    	if (sa.getTarget() == null){
+    		if (mandatory)
+    			return true;
+    		
+    		
+    	}
+    	else{
+    		return doTgtAI(sa, defense, attack);
+    	}
+    	
+    	return true;
+    }
+    
     private boolean doDrawbackAI(SpellAbility sa)
     {
+    	Card source = sa.getSourceCard();
+    	int defense;
+		if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")){
+			defense = Integer.parseInt(source.getSVar("PayX"));
+		}
+		else
+			defense = getNumDefense(sa);
+
+    	int attack;
+		if (numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")){
+			attack = Integer.parseInt(source.getSVar("PayX"));
+		}
+		else
+			attack = getNumAttack(sa);
+    	
     	 if(AF.getAbTgt() == null || !AF.getAbTgt().doesTarget()) {
-    		 int defense = getNumDefense(sa);
-    		 
-    		 
     		 if (hostCard.isCreature()){
     			 if (!hostCard.hasKeyword("Indestructible") && hostCard.getNetDefense() + defense <= hostCard.getDamage())
     				 return false;
@@ -386,7 +453,7 @@ public class AbilityFactory_Pump {
     		 }
     	 }
     	 else
-    		 return doTgtAI(sa);
+    		 return doTgtAI(sa, defense, attack);
     	 
     	return true; 
     }
@@ -551,9 +618,8 @@ public class AbilityFactory_Pump {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return pumpAllCanPlayAI(this);
+				return pumpAllTriggerAI(AF, this, mandatory);
 			}
-            
             
         };//SpellAbility
 
@@ -601,7 +667,7 @@ public class AbilityFactory_Pump {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				return chkPumpAllDrawbackAI(this);
+				return pumpAllTriggerAI(AF, this, mandatory);
 			}
         };//SpellAbility
         
@@ -610,13 +676,9 @@ public class AbilityFactory_Pump {
     
     private boolean pumpAllCanPlayAI(SpellAbility sa) {
     	String valid = "";
-    	boolean isCurse = false;
     	
     	if(params.containsKey("ValidCards")) {
 			valid = params.get("ValidCards");
-    	}
-    	if(params.containsKey("IsCurse")) {
-    		isCurse = true;
     	}
     	
     	CardList comp = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
@@ -624,7 +686,7 @@ public class AbilityFactory_Pump {
     	CardList human = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
     	human = human.getValidCards(valid,hostCard.getController(), hostCard);
     	
-    	if(isCurse) {
+    	if(AF.isCurse()) {
     		return human.size() > comp.size();
     	}
     	else return comp.size() > human.size();
@@ -697,7 +759,14 @@ public class AbilityFactory_Pump {
         
     }
     
-
+    private boolean pumpAllTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		// todo: add targeting consideration such as "Creatures target player controls gets"
+    	
+    	return true;
+    }
 
     private boolean chkPumpAllDrawbackAI(SpellAbility sa) {
     	return true;
@@ -712,8 +781,9 @@ public class AbilityFactory_Pump {
     		desc = params.get("SpellDescription");
     	}
 
-    	sb.append(name).append(" - ");
-    	sb.append(desc);
+    	if (sa instanceof Ability_Sub)
+    		sb.append(name).append(" -");
+    	sb.append(" ").append(desc);
 
     	Ability_Sub abSub = sa.getSubAbility();
     	if (abSub != null) {
