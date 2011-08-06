@@ -4410,6 +4410,7 @@ res/cardsfolder/skeletal_snake.txt -text svneol=native#text/plain
 res/cardsfolder/skeletal_wurm.txt -text svneol=native#text/plain
 res/cardsfolder/skeleton_ship.txt -text svneol=native#text/plain
 res/cardsfolder/skinrender.txt -text svneol=native#text/plain
+res/cardsfolder/skirk_fire_marshal.txt -text svneol=native#text/plain
 res/cardsfolder/skirk_outrider.txt -text svneol=native#text/plain
 res/cardsfolder/skirk_prospector.txt -text svneol=native#text/plain
 res/cardsfolder/skirk_shaman.txt -text svneol=native#text/plain
