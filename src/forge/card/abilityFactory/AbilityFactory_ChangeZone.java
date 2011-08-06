@@ -161,10 +161,10 @@ public class AbilityFactory_ChangeZone {
 		String origin = params.get("Origin");
 		
 		if (isHidden(origin, params.containsKey("Hidden")))
-			return changeHiddenTrigger(af, sa, mandatory);
+			return changeHiddenTriggerAI(af, sa, mandatory);
 		
 		else if (isKnown(origin))
-			return changeKnownOriginTrigger(af, sa, mandatory);
+			return changeKnownOriginTriggerAI(af, sa, mandatory);
 		
 		return false;
 	}
@@ -207,6 +207,7 @@ public class AbilityFactory_ChangeZone {
 		HashMap<String,String> params = af.getMapParams();
         //String destination = params.get("Destination");
         String origin = params.get("Origin");
+		String destination = params.get("Destination");
 		
 		if (abCost != null){
 			// AI currently disabled for these costs
@@ -244,26 +245,30 @@ public class AbilityFactory_ChangeZone {
 		}
 		
 		for(Player p : pDefined){
+			CardList list = new CardList();
 			if (origin.equals("Hand")){
-				CardList hand = AllZoneUtil.getPlayerHand(p);
-				if (hand.size() == 0)
+				list = AllZoneUtil.getPlayerHand(p);
+				if (list.size() == 0)
 					return false;
-
-				if (p.isComputer()){
-					if (params.containsKey("ChangeType")){
-						hand = filterListByType(hand, params, "ChangeType", sa);
-						if (hand.size() == 0)
-							return false;
-					}
-				}
-				// TODO: add some more improvements based on Destination and Type
+			}
+			else if (origin.equals("Graveyard")){
+				list = AllZoneUtil.getPlayerGraveyard(p);
+				if (list.size() == 0)
+					return false;
 			}
 			else if (origin.equals("Library")){
-				CardList library = AllZoneUtil.getPlayerCardsInLibrary(p);
-				if (library.size() == 0)
+				list = AllZoneUtil.getPlayerCardsInLibrary(p);
+				if (list.size() == 0)
 					return false;
-				
-				// TODO: add some more improvements based on Destination and Type
+			}
+			if (p.isComputer() && !list.isEmpty() && 
+					(destination.equals("Hand") || destination.equals("Battlefield") || 
+							(destination.equals("Graveyard") && origin.equals("Library")))){
+				if (params.containsKey("ChangeType")){
+					list = filterListByType(list, params, "ChangeType", sa);
+					if (list.size() == 0)
+						return false;
+				}
 			}
 			else if (origin.equals("Sideboard")){
 				// todo: once sideboard is added
@@ -294,7 +299,7 @@ public class AbilityFactory_ChangeZone {
 		return true;
 	}
 	
-	private static boolean changeHiddenTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
+	private static boolean changeHiddenTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
 		// Fetching should occur fairly often as it helps cast more spells, and have access to more mana
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
@@ -951,7 +956,7 @@ public class AbilityFactory_ChangeZone {
 		return true;
 	}
 	
-	private static boolean changeKnownOriginTrigger(AbilityFactory af, SpellAbility sa, boolean mandatory){
+	private static boolean changeKnownOriginTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 		
