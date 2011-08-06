@@ -1226,7 +1226,7 @@ public class CardFactoryUtil {
         return transmute;
     }//ability_transmute()
     
-    public static SpellAbility vanila_equip(final Card sourceCard, final int Power, final int Tough, final String Ab1, final String Ab2, final String Ab3, final String Manacost) {
+    public static SpellAbility eqPump_Equip(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, final String Manacost) {
         final Ability equip = new Ability(sourceCard, Manacost) {
             private static final long serialVersionUID = -4960704261761785512L;
             
@@ -1297,20 +1297,24 @@ public class CardFactoryUtil {
         
         equip.setDescription("Equip: " + Manacost);
         return equip;
-    }//vanila_equip()
+    }//eqPump_Equip() ( was vanila_equip() )
     
-    public static Command vanila_onequip(final Card sourceCard, final int Power, final int Tough, final String Ab1, final String Ab2, final String Ab3, final String Manacost) {
+    public static Command eqPump_onEquip(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, final String Manacost) {
         
         Command onEquip = new Command() {
             
             private static final long serialVersionUID = 8130682765214560887L;
             
             public void execute() {
-                if(sourceCard.isEquipping()) {
+                if (sourceCard.isEquipping()) {
                     Card crd = sourceCard.getEquipping().get(0);
-                    if(!(Ab1.equals ("none")) && (!crd.getKeyword().contains(Ab1))) crd.addExtrinsicKeyword(Ab1);	//fixed, "none" will not be assigned as a keyword
-                    if(!(Ab2.equals ("none")) && (!crd.getKeyword().contains(Ab2))) crd.addExtrinsicKeyword(Ab2);	//prevent Flying, Flying
-                    if(!(Ab3.equals ("none")) && (!crd.getKeyword().contains(Ab3))) crd.addExtrinsicKeyword(Ab3);
+                    
+                    for(int i = 0; i < extrinsicKeywords.length; i ++)
+                    {
+                    	if (! (extrinsicKeywords[i].equals ("none")) && (! crd.getKeyword().contains(extrinsicKeywords[i])))    // prevent Flying, Flying
+                    		   crd.addExtrinsicKeyword(extrinsicKeywords[i]);
+                    }
+                    
                     crd.addSemiPermanentAttackBoost(Power);
                     crd.addSemiPermanentDefenseBoost(Tough);
                 }
@@ -1319,9 +1323,9 @@ public class CardFactoryUtil {
         
 
         return onEquip;
-    }//vanila_onequip()
+    }//eqPump_onEquip ( was vanila_onequip() )
     
-    public static Command vanila_unequip(final Card sourceCard, final int Power, final int Tough, final String Ab1, final String Ab2, final String Ab3, final String Manacost) {
+    public static Command eqPump_unEquip(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, final String Manacost) {
         
         Command onUnEquip = new Command() {
             
@@ -1331,13 +1335,10 @@ public class CardFactoryUtil {
                 if(sourceCard.isEquipping()) {
                     Card crd = sourceCard.getEquipping().get(0);
                     
-                    //if(!(Ab1 == "none")) crd.removeExtrinsicKeyword(Ab1);
-                    //if(!(Ab2 == "none")) crd.removeExtrinsicKeyword(Ab2);
-                    //if(!(Ab3 == "none")) crd.removeExtrinsicKeyword(Ab3);
-                    
-                    crd.removeExtrinsicKeyword(Ab1);	//no longer a need to test for a keyword named "none"
-                    crd.removeExtrinsicKeyword(Ab2);
-                    crd.removeExtrinsicKeyword(Ab3);
+                    for (int i = 0; i < extrinsicKeywords.length; i ++)
+                    {
+                    	crd.removeExtrinsicKeyword(extrinsicKeywords[i]);
+                    }
                     
                     crd.addSemiPermanentAttackBoost(-1 * Power);
                     crd.addSemiPermanentDefenseBoost(-1 * Tough);
@@ -1348,7 +1349,7 @@ public class CardFactoryUtil {
         };//Command
         
         return onUnEquip;
-    }//vanila_unequip()
+    }//eqPump_unEquip ( was vanila_unequip() )
     
     public static Command entersBattleFieldWithCounters(final Card c, final Counters type, final int n) {
         Command addCounters = new Command() {

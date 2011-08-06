@@ -1904,30 +1904,31 @@ class CardFactory_Equipment {
                 tmpCost = k[0].substring(6);
                 
                 final String manacost = tmpCost.trim();
-                final String P = kk[0].trim();
-                final String T = kk[1].trim();
-                final int Power = Integer.parseInt(P);
-                final int Tough = Integer.parseInt(T);
-
-                String tempAb1 = "none";
-                String tempAb2 = "none";
-                String tempAb3 = "none";
                 
-                if (kk.length > 2) // then there is at least one keyword ability to assign
+                for (int i = 0; i < 2; i ++)
                 {
-                	String kkk[] = kk[2].split("&");
-                	tempAb1 = kkk[0].trim();
-                	if (kkk.length > 1) tempAb2 = kkk[1].trim();
-                	if (kkk.length > 2) tempAb3 = kkk[2].trim(); //quantity of keyword abilities could be modified
+                	if (kk[i].matches("[\\+\\-][0-9]")) kk[i] =kk[i].replace("+", "");
                 }
                 
-                final String Ab1 = tempAb1;
-                final String Ab2 = tempAb2;
-                final String Ab3 = tempAb3;
+                final int Power = Integer.parseInt(kk[0].trim());
+                final int Tough = Integer.parseInt(kk[1].trim());
+
+                String extrinsicKeywords[] = {"none"};    // for equips with no keywords to add
                 
-                card.addSpellAbility(CardFactoryUtil.vanila_equip(card, Power, Tough, Ab1, Ab2, Ab3, manacost));
-                card.addEquipCommand(CardFactoryUtil.vanila_onequip(card, Power, Tough, Ab1, Ab2, Ab3, manacost));
-                card.addUnEquipCommand(CardFactoryUtil.vanila_unequip(card, Power, Tough, Ab1, Ab2, Ab3, manacost));
+                if (kk.length > 2)    // then there is at least one extrinsic keyword to assign
+                {
+                	String kkk[] = kk[2].split("&");
+                	extrinsicKeywords = new String[kkk.length];
+                	                	
+                	for (int i = 0; i < kkk.length; i ++)
+                    {
+                		extrinsicKeywords[i] = kkk[i].trim();
+                    }
+                }
+                
+                card.addSpellAbility(CardFactoryUtil.eqPump_Equip(card, Power, Tough, extrinsicKeywords, manacost));
+                card.addEquipCommand(CardFactoryUtil.eqPump_onEquip(card, Power, Tough, extrinsicKeywords, manacost));
+                card.addUnEquipCommand(CardFactoryUtil.eqPump_unEquip(card, Power, Tough, extrinsicKeywords, manacost));
                 
             }
         }// eqPump (was VanillaEquipment)
