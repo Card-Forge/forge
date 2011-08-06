@@ -12602,9 +12602,9 @@ public class GameActionUtil {
 					if(a.get(x).toString().startsWith("stSetPT")) {
 						String parse = card.getKeyword().get(x).toString();
 						String k[] = parse.split(":");
-						for(int z = 0; z < k.length; z++) {
+						/*for(int z = 0; z < k.length; z++) {
 							System.out.println("k["+z+"]: "+k[z]);
-						}
+						}*/
 						if(k.length < 2) {
 							System.out.println("Error in stSetPT for: "+card.getName());
 						}
