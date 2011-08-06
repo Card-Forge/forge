@@ -564,15 +564,20 @@ public class GameAction {
 	        
 	        //Make sure all equipment stops equipping previously equipped creatures that have left play.
 	        CardList equip = AllZoneUtil.getCardsInPlay();
-	        equip = equip.filter(AllZoneUtil.equipment);
-	        
+
+	        //don't filter, so we catch cases where a card loses the subtype "Equipment"
+	        //equip = equip.filter(AllZoneUtil.equipment);
+
 	        Iterator<Card> iter = equip.iterator();
 	        while(iter.hasNext()) {
-	            c = iter.next();
-	            if(c.isEquipping()) {
-	                Card equippedCreature = c.getEquipping().get(0);
-	                if(!AllZoneUtil.isCardInPlay(equippedCreature)) c.unEquipCard(equippedCreature);
-	            }
+	        	c = iter.next();
+	        	if(c.isEquipping()) {
+	        		Card equippedCreature = c.getEquipping().get(0);
+	        		if(!AllZoneUtil.isCardInPlay(equippedCreature)) c.unEquipCard(equippedCreature);
+
+	        		//make sure any equipment that has become a creature stops equipping
+	        		if(c.isCreature()) c.unEquipCard(equippedCreature);
+	        	}
 	        }//while iter.hasNext()
         }//for q=0;q<2
         
