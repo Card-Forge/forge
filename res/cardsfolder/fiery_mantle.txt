@@ -1,0 +1,11 @@
+Name:Fiery Mantle
+ManaCost:1 R
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+K:enPump:+0/+0
+A:AB$Pump | Cost$ R | Defined$ Enchanted | NumAtt$ +1 | SpellDescription$ Enchanted creature gets +1/+0 until end of turn.
+K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_mantle.jpg
+End

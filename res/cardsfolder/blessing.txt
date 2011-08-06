@@ -1,0 +1,10 @@
+Name:Blessing
+ManaCost:W W
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+K:enPump:+0/+0
+A:AB$Pump | Cost$ W | Defined$ Enchanted | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Enchanted creature gets +1/+1 until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blessing.jpg
+End

@@ -1,0 +1,11 @@
+Name:Fallen Ideal
+ManaCost:2 B
+Types:Enchantment Aura
+Text:Enchanted creature has flying.
+K:Enchant creature
+K:enPump:Flying
+A:AB$Pump | Cost$ Sac<1/Creature> | Defined$ Enchanted | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Enchanted creature gets +2/+1 until end of turn.
+K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fallen_ideal.jpg
+End
