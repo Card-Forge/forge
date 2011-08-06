@@ -295,7 +295,7 @@ public class Cost_Payment {
 	}
 
 	public boolean isAllPaid(){
-		return (payTap && payUntap && payMana && paySubCounter && paySac && payLife && payDiscard && payTapXType && payReturn);
+		return (payTap && payUntap && payMana && paySubCounter && paySac && payExile && payLife && payDiscard && payTapXType && payReturn);
 	}
 	
 	public void cancelPayment(){
@@ -459,7 +459,7 @@ public class Cost_Payment {
 		}
 		
 		if (cost.getExileCost()){
-			for(Card c : sacCard)
+			for(Card c : exileCard)
 				AllZone.GameAction.exile(c);
 		}
 		
