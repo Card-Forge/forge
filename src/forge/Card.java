@@ -58,7 +58,8 @@ public class Card extends MyObservable {
     private boolean                      creatureBlockedThisCombat         = false;
     private boolean                      creatureGotBlockedThisCombat      = false;
     //private boolean                    dealtCombatDmgToOppThisTurn       = false;
-    private boolean                      dealtDmgToOppThisTurn             = false;
+    private boolean                      dealtDmgToHumanThisTurn           = false;
+    private boolean                      dealtDmgToComputerThisTurn        = false;
     private boolean						 sirenAttackOrDestroy			   = false;
     private boolean                      exaltedBonus                      = false;
     private boolean                      faceDown                          = false;
@@ -271,12 +272,20 @@ public class Card extends MyObservable {
     	return false;
     }
     
-    public void setDealtDmgToOppThisTurn(boolean b) {
-        dealtDmgToOppThisTurn = b;
+    public void setDealtDmgToHumanThisTurn(boolean b) {
+        dealtDmgToHumanThisTurn = b;
     }
     
-    public boolean getDealtDmgToOppThisTurn() {
-        return dealtDmgToOppThisTurn;
+    public boolean getDealtDmgToHumanThisTurn() {
+        return dealtDmgToHumanThisTurn;
+    }
+    
+    public void setDealtDmgToComputerThisTurn(boolean b) {
+        dealtDmgToComputerThisTurn = b;
+    }
+    
+    public boolean getDealtDmgToComputerThisTurn() {
+        return dealtDmgToComputerThisTurn;
     }
     
     public void setSirenAttackOrDestroy(boolean b) {
@@ -2443,8 +2452,9 @@ public class Card extends MyObservable {
              	{ if(!isFaceDown()) return false;}
              else if (Property.startsWith("enteredBattlefieldThisTurn"))
              	{ if(!(getTurnInZone() == AllZone.Phase.getTurn())) return false;}
-             else if (Property.startsWith("dealtDamageToYouThisTurn"))
-          	{ if(!(dealtDmgToOppThisTurn && !getController().isPlayer(sourceController))) return false;}
+             else if (Property.startsWith("dealtDamageToYouThisTurn")){
+            	 if(!(dealtDmgToHumanThisTurn && getController().isPlayer(AllZone.ComputerPlayer))
+            			 && !(dealtDmgToComputerThisTurn && getController().isPlayer(AllZone.HumanPlayer))) return false;}
              
              else if (Property.startsWith("enchanted"))
              	{ if(!isEnchanted()) return false;}
@@ -2643,7 +2653,7 @@ public class Card extends MyObservable {
     //the amount of damage needed to kill the creature
     public int getKillDamage() {
     	int killDamage = getNetDefense() + preventNextDamage - getDamage();
-        if(killDamage > preventNextDamage && getKeyword().contains("When CARDNAME is dealt damage, destroy it.")) killDamage = 1 + preventNextDamage;
+        if(killDamage > preventNextDamage && hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) killDamage = 1 + preventNextDamage;
         
         return killDamage;
     }

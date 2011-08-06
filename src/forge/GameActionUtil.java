@@ -3131,7 +3131,8 @@ public class GameActionUtil {
 		for(int i = 0; i < list.size(); i++) {
 			Card c = list.get(i);
 			//c.setDealtCombatDmgToOppThisTurn(false);
-			c.setDealtDmgToOppThisTurn(false);
+			c.setDealtDmgToHumanThisTurn(false);
+			c.setDealtDmgToComputerThisTurn(false);
 		}
 	}
 
@@ -5876,7 +5877,8 @@ public class GameActionUtil {
 			else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
 				playerCombatDamage_Whirling_Dervish(c);
 	    	
-	    	if (!c.getController().isPlayer(player)) c.setDealtDmgToOppThisTurn(true);
+	    	if (player.isPlayer(AllZone.HumanPlayer)) c.setDealtDmgToHumanThisTurn(true);
+	    	if (player.isPlayer(AllZone.ComputerPlayer)) c.setDealtDmgToComputerThisTurn(true);
     	}
     }
     //restricted to combat damage, restricted to players
