@@ -1,8 +1,8 @@
 Name:Artifact Mutation
 ManaCost:R G
 Types:Instant
-Text:Destroy target artifact. It can't be regenerated. Put X 1/1 green Saproling creature tokens onto the battlefield, where X is that artifact's converted mana cost.
-K:spDestroyTgt:Artifact:NoRegen:Drawback$MakeToken<>X<>Saproling<>G 1 1 Saproling<>Controller<>G<>Creature;Saproling<>1<>1<>None
+Text:no text
+A:SP$Destroy | Cost$ R G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | NoRegen$ True | SpellDescription$ Destroy target artifact. It can't be regenerated. Put X 1/1 green Saproling creature tokens onto the battlefield, where X is that artifact's converted mana cost. | SubAbility$ MakeToken<>X<>Saproling<>G 1 1 Saproling<>Controller<>G<>Creature;Saproling<>1<>1<>None
 #X will be the Converted Mana Cost of the target of Mutation
 SVar:X:Count$CardManaCost
 SVar:Rarity:Rare

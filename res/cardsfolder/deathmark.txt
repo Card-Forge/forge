@@ -1,8 +1,8 @@
 Name:Deathmark
 ManaCost:B
 Types:Sorcery
-Text:Destroy target green or white creature.
-K:spDestroyTgt:Creature.Green,Creature.White
+Text:no text
+A:SP$Destroy | Cost$ B | ValidTgts$ Creature.Green,Creature.White | TgtPrompt$ Select target green or white creature | SpellDescription$ Destroy target green or white creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathmark.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/91.jpg

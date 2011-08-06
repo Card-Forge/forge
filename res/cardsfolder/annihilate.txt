@@ -1,8 +1,8 @@
 Name:Annihilate
 ManaCost:3 B B
 Types:Instant
-Text:Destroy target nonblack creature. It can't be regenerated.
-K:spDestroyTgt:Creature.nonBlack:NoRegen
+Text:no text
+A:SP$Destroy | Cost$ 3 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
 K:Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/annihilate.jpg

@@ -1,8 +1,8 @@
 Name:Allay
 ManaCost:1 W
 Types:Instant
-Text:Destroy target enchantment.
-K:spDestroyTgt:Enchantment
+Text:no text
+A:SP$Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:Buyback:3
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common

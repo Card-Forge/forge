@@ -1,8 +1,8 @@
 Name:Dark Offering
 ManaCost:4 B B
 Types:Sorcery
-Text:Destroy target nonblack creature. You gain 3 life.
-K:spDestroyTgt:Creature.Nonblack:Drawback$YouGainLife/3
+Text:no text
+A:SP$Destroy | Cost$ 4 B B | ValidTgts$ Creature.Nonblack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature. You gain 3 life.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/dark_offering.jpg

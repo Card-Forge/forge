@@ -1,8 +1,8 @@
 Name:Crumble
 ManaCost:G
 Types:Instant
-Text:Destroy target artifact. It can't be regenerated. That artifact's controller gains life equal to its converted mana cost.
-K:spDestroyTgt:Artifact:NoRegen:Drawback$GainLifeTgtCtrlr/dX
+Text:no text
+A:SP$Destroy | Cost$ G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | NoRegen$ True | SubAbility$ GainLifeTgtCtrlr/dX | SpellDescription$ Destroy target artifact. It can't be regenerated. That artifact's controller gains life equal to its converted mana cost.
 SVar:dX:Count$TgtCardManaCost
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crumble.jpg

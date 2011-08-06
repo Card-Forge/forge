@@ -1,8 +1,8 @@
 Name:Break Asunder
 ManaCost:2 G G
 Types:Sorcery
-Text:Destroy target artifact or enchantment.
-K:spDestroyTgt:Artifact,Enchantment
+Text:no text
+A:SP$Destroy | Cost$ 2 G G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/break_asunder.jpg
