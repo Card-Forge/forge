@@ -32,6 +32,13 @@ public class GameAction {
         //Card lastKnownInfo = getLastKnownInformation(c);
         Card lastKnownInfo = c;
         
+        if(c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.") &&
+        		!zone.is(Constant.Zone.Exile)) {
+        	PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
+        	c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.");
+        	return moveTo(removed, c);
+        }
+        
         if(prev != null){
         	if (prev.is(Constant.Zone.Battlefield) && c.isCreature())
                 AllZone.Combat.removeFromCombat(c);
@@ -262,6 +269,12 @@ public class GameAction {
     public Card moveToLibrary(Card c, int libPosition){
         PlayerZone p = AllZone.getZone(c);
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getOwner());
+        
+        if(c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")) {
+        	PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
+        	c.removeExtrinsicKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.");
+        	return moveTo(removed, c);
+        }
         
         if(p != null) p.remove(c);
         
