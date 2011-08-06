@@ -2,7 +2,8 @@ Name:Dragon Fodder
 ManaCost:1 R
 Types:Sorcery
 Text:Put two 1/1 red Goblin creature tokens onto the battlefield.
-K:spMakeToken<>2<>Goblin<>R 1 1 Goblin<>Controller<>R<>Creature;Goblin<>1<>1<>None
+#K:spMakeToken<>2<>Goblin<>R 1 1 Goblin<>Controller<>R<>Creature;Goblin<>1<>1<>None
+A:SP$Token|Cost$1 R|TokenAmount$2|TokenName$Goblin|TokenTypes$Creature,Goblin|TokenOwner$Controller|TokenColors$Red|TokenPower$1|TokenToughness$1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_fodder.jpg
 End

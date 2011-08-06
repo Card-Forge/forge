@@ -2,7 +2,8 @@ Name:Roar of the Wurm
 ManaCost:6 G
 Types:Sorcery
 Text:Put a 6/6 green Wurm creature token onto the battlefield.
-K:spMakeToken<>1<>Wurm<>G 6 6 Wurm<>Controller<>G<>Creature;Wurm<>6<>6<>None
+#K:spMakeToken<>1<>Wurm<>G 6 6 Wurm<>Controller<>G<>Creature;Wurm<>6<>6<>None
+A:SP$Token|Cost$6 G|TokenAmount$1|TokenName$Wurm|TokenTypes$Creature,Wurm|TokenOwner$Controller|TokenColors$Green|TokenPower$6|TokenToughness$6
 K:Flashback:3 G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roar_of_the_wurm.jpg

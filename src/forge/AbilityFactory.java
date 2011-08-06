@@ -296,6 +296,40 @@ public class AbilityFactory {
 			}
 		}
 		
+		if(API.equals("Token")){
+			AbilityFactory_Token AFT = new AbilityFactory_Token();
+			
+			String numTokens,numPower,numToughness;
+			String[] keywords;
+			
+			if(!mapParams.get("TokenAmount").matches("[0-9][0-9]?")) //It's an X-value.
+				numTokens = getHostCard().getSVar(mapParams.get("TokenAmount"));
+			else
+				numTokens = mapParams.get("TokenAmount");
+			
+			if(!mapParams.get("TokenPower").matches("[0-9][0-9]?"))
+				numPower = getHostCard().getSVar(mapParams.get("TokenPower"));
+			else
+				numPower = mapParams.get("TokenPower");
+			
+			if(!mapParams.get("TokenToughness").matches("[0-9][0-9]?"))
+				numToughness = getHostCard().getSVar(mapParams.get("TokenToughness"));
+			else
+				numToughness = mapParams.get("TokenToughness");
+			
+			if(mapParams.containsKey("TokenKeywords")) {
+				keywords = mapParams.get("TokenKeywords").split("<>");
+			}
+			else {
+				keywords = new String[0];
+			}
+			
+			if(isAb)
+				SA = AFT.getAbility(this, numTokens, mapParams.get("TokenName"), mapParams.get("TokenTypes").split(","), mapParams.get("TokenOwner"), mapParams.get("TokenColors").split(","), numPower, numToughness, keywords );
+			if(isSp)
+				SA = AFT.getSpell(this, numTokens, mapParams.get("TokenName"), mapParams.get("TokenTypes").split(","), mapParams.get("TokenOwner"), mapParams.get("TokenColors").split(","), numPower, numToughness, keywords);
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
         if (hasSpDesc)

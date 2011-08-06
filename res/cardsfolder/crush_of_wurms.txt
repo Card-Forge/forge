@@ -2,7 +2,8 @@ Name:Crush of Wurms
 ManaCost:6 G G G
 Types:Sorcery
 Text:Put three 6/6 green Wurm creature tokens onto the battlefield.
-K:spMakeToken<>3<>Wurm<>G 6 6 Wurm<>Controller<>G<>Creature;Wurm<>6<>6<>None
+#K:spMakeToken<>3<>Wurm<>G 6 6 Wurm<>Controller<>G<>Creature;Wurm<>6<>6<>None
+A:SP$Token|Cost$6 G G G|TokenAmount$3|TokenName$Wurm|TokenColors$Green|TokenTypes$Creature,Wurm|TokenOwner$Controller|TokenPower$6|TokenToughness$6
 K:Flashback:9 G G G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crush_of_wurms.jpg

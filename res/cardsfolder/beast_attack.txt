@@ -2,7 +2,8 @@ Name:Beast Attack
 ManaCost:2 G G G
 Types:Instant
 Text:Put a 4/4 green Beast creature token onto the battlefield.
-K:spMakeToken<>1<>Beast<>G 4 4 Beast<>Controller<>G<>Creature;Beast<>4<>4<>None
+#K:spMakeToken<>1<>Beast<>G 4 4 Beast<>Controller<>G<>Creature;Beast<>4<>4<>None
+A:SP$Token|Cost$2 G G G|TokenAmount$1|TokenName$Beast|TokenTypes$Creature,Beast|TokenColors$Green|TokenOwner$Controller|TokenPower$4|TokenToughness$4
 K:Flashback:2 G G G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_attack.jpg

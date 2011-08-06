@@ -2,7 +2,8 @@ Name:Ordered Migration
 ManaCost:3 W U
 Types:Sorcery
 Text:Domain — Put a 1/1 blue Bird creature token with flying onto the battlefield for each basic land type among lands you control.
-K:spMakeToken<>X<>Bird<>U 1 1 Bird<>Controller<>U<>Creature;Bird<>1<>1<>Flying
+#K:spMakeToken<>X<>Bird<>U 1 1 Bird<>Controller<>U<>Creature;Bird<>1<>1<>Flying
+A:SP$Token|Cost$3 W U|TokenAmount$X|TokenName$Bird|TokenTypes$Creature,Bird|TokenOwner$Controller|TokenColors$Blue|TokenPower$1|TokenToughness$1|TokenKeywords$Flying
 SVar:X:Count$Domain
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ordered_migration.jpg

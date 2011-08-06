@@ -2,7 +2,8 @@ Name:Sosuke's Summons
 ManaCost:2 G
 Types:Sorcery
 Text:Put two 1/1 green Snake creature tokens onto the battlefield.\r\nWhenever a nontoken Snake enters the battlefield under your control, you may return Sosuke's Summons from your graveyard to your hand.
-K:spMakeToken<>2<>Snake<>G 1 1 Snake<>Controller<>G<>Creature;Snake<>1<>1<>None
+#K:spMakeToken<>2<>Snake<>G 1 1 Snake<>Controller<>G<>Creature;Snake<>1<>1<>None
+A:SP$Token|Cost$2 G|TokenAmount$2|TokenName$Snake|TokenTypes$Creature,Snake|TokenOwner$Controller|TokenColors$Green|TokenPower$1|TokenToughness$1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sosukes_summons.jpg
 End

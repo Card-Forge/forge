@@ -2,7 +2,8 @@ Name:Reach of Branches
 ManaCost:4 G
 Types:Tribal Instant Treefolk
 Text:Put a 2/5 green Treefolk Shaman creature token into play.
-K:spMakeToken<>1<>Treefolk Shaman<>G 2 5 Treefolk Shaman<>Controller<>G<>Creature;Treefolk;Shaman<>2<>5<>None
+#K:spMakeToken<>1<>Treefolk Shaman<>G 2 5 Treefolk Shaman<>Controller<>G<>Creature;Treefolk;Shaman<>2<>5<>None
+A:SP$Token|Cost$4 G|TokenAmount$1|TokenName$Treefolk Shaman|TokenTypes$Creature,Treefolk,Shaman|TokenOwner$Controller|TokenColors$Green|TokenPower$2|TokenToughness$5
 K:WheneverKeyword:EntersBattleField:Type/Forest:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a Forest enters the battlefield under your control, you may return Reach of Branches from your graveyard to your hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_of_branches.jpg
