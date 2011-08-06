@@ -66,6 +66,7 @@ Napoleon 3
 Ned Flanders 3
 Neo 3
 Newton 3
+Odin 3
 Pebbles Flintstone 3
 Picard 3
 Professor X 3

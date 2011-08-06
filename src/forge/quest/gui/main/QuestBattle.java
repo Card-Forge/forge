@@ -240,7 +240,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Neo 3", "hard", "RG deck with Groundbreaker and other attack once then sacrifice at EoT creatures");
         addToDeckList("Newton 3", "hard", "WB Relentless Rats deck with Thrumming Stone, Vindicate and Swords to Plowshares");
         
-//        addToDeckList("Odin 3", "hard", "WR Standard deck");
+        addToDeckList("Odin 3", "hard", "WU deck with Thistledown Liege and Grand Arbiter Augustin IV");
 //        addToDeckList("Owlman 2", "medium", "U Ebony Owl deck");
 //        addToDeckList("Owlman 3", "hard", "B Control Standard deck");
         
