@@ -97,7 +97,7 @@ public class QuestData_Prefs implements Serializable {
 					setMatchRewardNoLosses(split[1]);
 				else if (split[0].equals("matchRewardAltWinBonus"))
 					setMatchRewardAltWinBonus(split[1]);
-				else if (split[0].equals("macthRewardWinOnFirstTurn"))
+				else if (split[0].equals("matchRewardWinOnFirstTurn"))
 					setMatchRewardWinFirst(split[1]);
 				else if (split[0].equals("matchRewardWinByTurnFive"))
 					setMatchRewardWinByFifth(split[1]);
