@@ -10543,6 +10543,7 @@ public class CardFactory implements NewConstants {
         			else {
         				//not implemented for AI
         			}
+        			if (!CardUtil.isCreatureType(chosenType)) chosenType = "";
         			card.setChosenType(chosenType);
                 }//resolve()
             }; //comesIntoPlayAbility

@@ -5,6 +5,7 @@ Text:no text
 K:Enchant creature
 K:enPump:+0/+0
 K:stPumpEnchanted:Creature.untapped:0/0/Shroud:No Condition:Enchanted creature has shroud as long as it's untapped. (It can't be the target of spells or abilities.)
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_cloak.jpg
 End
