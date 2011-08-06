@@ -6879,13 +6879,9 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = 7202704600935499188L;
                 
                 public void execute() {
-                	int player = 0;
-                	if(card.getController().isHuman()) {
-                		player = AllZone.HumanPlayer.getLife();
-                	} else {
-                		player = AllZone.ComputerPlayer.getLife();               		
-                	}
-                	card.addCounter(Counters.CHARGE, player);
+                	int n = card.getController().getLife();
+                	if (n > 0)
+                		card.addCounter(Counters.CHARGE, n);
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);          
@@ -7159,29 +7155,6 @@ public class CardFactory implements NewConstants {
             
             enchantment.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchantment));
         }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Test Destroy")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 6637283804612570910L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.destroy(getTargetCard());
-                }//resolve()
-            };
-            
-            card.clearSpellAbility();
-            spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "All"));
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Take Possession")) {

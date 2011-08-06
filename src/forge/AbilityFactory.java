@@ -393,6 +393,9 @@ public class AbilityFactory {
 
 		// *********************************************
 		// set universal properties of the SpellAbility
+		
+		SA.setAbilityFactory(this);
+		
 		if(hasSubAbility())
 			SA.setSubAbility(getSubAbility());
 		
@@ -503,22 +506,27 @@ public class AbilityFactory {
 				return 0;
 			
 			if (calcX[0].startsWith("Count"))
-			{
 				return CardFactoryUtil.xCount(card, calcX[1]) * multiplier;
-			}
-			else if (ability != null && calcX[0].startsWith("Sacrificed"))
-			{
-				return CardFactoryUtil.handlePaid(ability.getSacrificedCost(), calcX[1]) * multiplier;
-			}
-			else if (ability != null && calcX[0].startsWith("Discarded"))
-			{
-				return CardFactoryUtil.handlePaid(ability.getDiscardedCost(), calcX[1]) * multiplier;
-			}
-			else if (ability != null && calcX[0].startsWith("Targeted"))
-			{
-				CardList list = new CardList(ability.getTarget().getTargetCards().toArray());
+
+			else if (ability != null){
+				CardList list;
+				
+				if (calcX[0].startsWith("Sacrificed"))
+					list = findRootAbility(ability).getSacrificedCost();
+				
+				else if (calcX[0].startsWith("Discarded"))
+					list = findRootAbility(ability).getDiscardedCost();
+				
+				else if (calcX[0].startsWith("Targeted")){
+					SpellAbility saTargeting = (ability.getTarget() == null) ?  findParentsTargetedCard(ability) : ability;
+					list = new CardList(saTargeting.getTarget().getTargetCards().toArray());
+				}
+				else
+					return 0;
+				
 				return CardFactoryUtil.handlePaid(list, calcX[1]) * multiplier;
 			}
+			
 			else
 				return 0;
 		}
@@ -542,11 +550,7 @@ public class AbilityFactory {
 			c = hostCard.getEnchantingCard();
 
 		else if (defined.equals("Targeted")){
-			SpellAbility parent;
-			do{
-				parent = ((Ability_Sub)sa).getParent();
-			}while(parent.getTarget() == null && parent.getTarget().getTargetCards().size() == 0);
-			
+			SpellAbility parent = findParentsTargetedCard(sa);
 			cards.addAll(parent.getTarget().getTargetCards());
 		}
 
@@ -577,5 +581,26 @@ public class AbilityFactory {
 				players.add(sa.getActivatingPlayer().getOpponent());
 		}
 		return players;
+	}
+	
+	public static SpellAbility findRootAbility(SpellAbility sa){
+		if (!(sa instanceof Ability_Sub))
+			return sa;
+		
+		SpellAbility parent = sa;
+		do{
+			parent = ((Ability_Sub)parent).getParent();
+		}while(parent instanceof Ability_Sub);
+		
+		return parent;
+	}
+	
+	public static SpellAbility findParentsTargetedCard(SpellAbility sa){
+		SpellAbility parent;
+		do{
+			parent = ((Ability_Sub)sa).getParent();
+		}while(parent.getTarget() == null && parent.getTarget().getTargetCards().size() == 0);
+		
+		return parent;
 	}
 }
