@@ -2653,7 +2653,7 @@ class CardFactory_Planeswalkers {
         
 
         //*************** START *********** START **************************
-        if(cardName.equals("Jace, the Mind Sculptor")) {
+        else if(cardName.equals("Jace, the Mind Sculptor")) {
             final int turn[] = new int[1];
             turn[0] = -1;
             
