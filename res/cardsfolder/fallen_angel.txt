@@ -4,6 +4,7 @@ Types:Creature Angel
 Text:no text
 PT:3/3
 K:Flying
+A:AB$Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ CARDNAME gets +2/+1 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallen_angel.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/133.jpg

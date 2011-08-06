@@ -3,6 +3,7 @@ ManaCost:2 B
 Types:Creature Zombie Insect
 Text:no text
 PT:2/2
+A:AB$Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_husk.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/159.jpg
