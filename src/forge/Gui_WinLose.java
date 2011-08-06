@@ -84,7 +84,11 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         if((winLose.countWinLose() == 3) || (winLose.getWin() == 2) || (winLose.getLose() == 2)) {
 //      editDeckButton.setEnabled(false);
             continueButton.setEnabled(false);
+            quitButton.grabFocus();
         }
+        
+        if (winLose.getWin()==2)
+        	restartButton.setEnabled(false);
         
         //show Wins and Loses
         statsLabel.setText("Won: " + winLose.getWin() + ", Lost: " + winLose.getLose());
@@ -235,6 +239,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             
             if (winLose.didWinRecently())
             {
+            	
             	long creds = quest.getCreditsToAdd(winLose);
             	String s = getWinText(creds, winLose);
             	            	

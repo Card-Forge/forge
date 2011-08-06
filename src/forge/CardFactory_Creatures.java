@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
@@ -1097,17 +1098,33 @@ public class CardFactory_Creatures {
                     
                     if (swamp.size() > 0)
                     {
-	                    List<Card> selection = AllZone.Display.getChoices("Select up to two swamps", swamp.toArray());
-	                    
-	                    for(int i = 0; i < selection.size(); i++) {
-	                        if (i == 2)
-	                        	break;
-	                    	Card c = selection.get(i);
-	                        
-	                        library.remove(c);
-	                        play.add(c);
-	                        c.tap();
+                    	if (card.getController().equals(Constant.Player.Human))
+                    	{
+		                    List<Card> selection = AllZone.Display.getChoices("Select up to two swamps", swamp.toArray());
+		                    
+		                    for(int i = 0; i < selection.size(); i++) {
+		                        if (i == 2)
+		                        	break;
+		                    	Card c = selection.get(i);
+		                        
+		                        library.remove(c);
+		                        play.add(c);
+		                        c.tap();
+		                    }
 	                    }
+                    	else
+                    	{
+                    		Card c = swamp.get(0);
+                    		play.add(c);
+                    		c.tap();
+                    		swamp.remove(c);
+                    		if (swamp.size() > 0) {
+                    			c = swamp.get(0);
+                    			play.add(c);
+                    			c.tap();
+                    			
+                    		}
+                    	}
                     }
                     
                     for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
@@ -2210,8 +2227,6 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
                     life.subtractLife(3);
-                    
-                    AllZone.GameAction.drawCard(card.getController());
                 }//resolve()
             };//SpellAbility
             Command intoPlay = new Command() {
@@ -16179,6 +16194,7 @@ public class CardFactory_Creatures {
             final Card newCard = new Card() {
                 @Override
                 public void addDamage(HashMap<Card, Integer> map) {
+                	final HashMap<Card, Integer> m = map;
                     final Ability ability = new Ability(card, "0") {
                         @Override
                         public void resolve() {
@@ -16188,6 +16204,10 @@ public class CardFactory_Creatures {
                     };
                     ability.setStackDescription(card.getName() + " - " + card.getController() + " gains 1 life.");
                     AllZone.Stack.add(ability);
+                    
+                    for(Entry<Card, Integer> entry : m.entrySet()) {
+                        this.addDamage(entry.getValue(), entry.getKey());
+                    }
                     
                 }
             };

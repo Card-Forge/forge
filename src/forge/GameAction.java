@@ -454,6 +454,7 @@ public class GameAction {
         
         Card c;
         Iterator<Card> it = creature.iterator();
+        
         while(it.hasNext()) {
             c = it.next();
             
