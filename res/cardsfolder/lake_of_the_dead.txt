@@ -6,4 +6,5 @@ K:tap: add B
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lake_of_the_dead.jpg
+SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/185.jpg
 End

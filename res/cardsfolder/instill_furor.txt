@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPumpCurse:+0/+0/At the beginning of your end step, sacrifice this creature unless it attacked this turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/instill_furor.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/134.jpg
 End

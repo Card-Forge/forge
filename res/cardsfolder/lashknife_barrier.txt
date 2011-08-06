@@ -6,4 +6,5 @@ K:When CARDNAME enters the battlefield, draw a card.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lashknife_barrier.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/9.jpg
 End

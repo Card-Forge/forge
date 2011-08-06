@@ -9,4 +9,5 @@ A:AB$Regenerate | Cost$ 1 G | Defined$ Enchanted | SpellDescription$ Regenerate 
 #TODO - check rarity on this
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jolraels_favor.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/116.jpg
 End

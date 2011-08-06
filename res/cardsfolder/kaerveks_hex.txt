@@ -6,4 +6,5 @@ A:SP$DamageAll | Cost$ 3 B | NumDmg$ 1 | ValidCards$ Creature.nonBlack | ValidDe
 SVar:DBDamageAll:DB$DamageAll | NumDmg$ 1 | ValidCards$ Creature.Green | ValidDescription$ each green creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaerveks_hex.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/28.jpg
 End

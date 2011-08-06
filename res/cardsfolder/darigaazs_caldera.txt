@@ -7,4 +7,5 @@ K:tap: add R
 K:tap: add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaazs_caldera.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/137.jpg
 End

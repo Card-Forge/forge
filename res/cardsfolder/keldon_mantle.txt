@@ -10,4 +10,5 @@ A:AB$Pump | Cost$ G | Defined$ Enchanted | KW$ Trample | SpellDescription$ Encha
 #TODO - check rarity on this
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_mantle.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/65.jpg
 End

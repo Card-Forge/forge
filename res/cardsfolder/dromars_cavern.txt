@@ -7,4 +7,5 @@ K:tap: add U
 K:tap: add B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dromars_cavern.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/138.jpg
 End

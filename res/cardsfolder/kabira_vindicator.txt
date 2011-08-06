@@ -10,4 +10,5 @@ K:Level up:2 W
 K:maxLevel:5
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kabira_vindicator.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/28.jpg
 End

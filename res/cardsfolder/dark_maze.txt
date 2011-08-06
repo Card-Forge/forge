@@ -8,4 +8,6 @@ A:AB$Pump | Cost$ 0 | KW$ HIDDEN CARDNAME can attack as though it didn't have de
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_maze.jpg
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/30.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/80.jpg
 End

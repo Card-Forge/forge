@@ -6,4 +6,5 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 3
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forethought_amulet.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/221.jpg
 End

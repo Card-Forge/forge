@@ -6,4 +6,7 @@ PT:3/1
 A:AB$Regenerate|Cost$B|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_dead.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/32.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/140.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/25.jpg
 End
