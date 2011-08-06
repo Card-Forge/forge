@@ -1,0 +1,8 @@
+Name:Great Whale
+ManaCost:5 U U
+Types:Creature Whale
+Text:no text
+PT:5/5
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/great_whale.jpg
+End

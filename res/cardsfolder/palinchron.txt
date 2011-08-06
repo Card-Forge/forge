@@ -1,0 +1,9 @@
+Name:Palinchron
+ManaCost:5 U U
+Types:Creature Illusion
+Text:no text
+PT:4/5
+K:Flying
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/palinchron.jpg
+End
