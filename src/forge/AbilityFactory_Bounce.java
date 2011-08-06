@@ -179,8 +179,10 @@ public class AbilityFactory_Bounce {
 				}
 				
 				Card choice = null;
-				if (list.getNotType("Creature").size() == 0)
+				if (list.getNotType("Creature").size() == 0 && destination != "Exile")
 					choice = CardFactoryUtil.AI_getBestCreatureToBounce(list); //if the targets are only creatures, take the best
+				if (list.getNotType("Creature").size() == 0 && destination == "Exile")
+					choice = CardFactoryUtil.AI_getBestCreature(list); //if the targets are only creatures, take the best
 				else 
 					choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), true);
 				

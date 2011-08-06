@@ -14735,7 +14735,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Magus of the Disk")) {
             SpellAbility summoningSpell = new Spell_Permanent(card) {
@@ -14803,7 +14803,7 @@ public class CardFactory_Creatures {
             ability.setDescription("1, tap: Destroy all artifacts, creatures, and enchantments.");
             ability.setStackDescription("Destroy all artifacts, creatures, and enchantments.");
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Stern Judge")) {

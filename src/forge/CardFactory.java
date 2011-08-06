@@ -6709,6 +6709,7 @@ public class CardFactory implements NewConstants {
         }
         //*************** END ************ END *************************
         
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Nevinyrral's Disk")) {
             SpellAbility summoningSpell = new Spell_Permanent(card) {
@@ -6777,7 +6778,7 @@ public class CardFactory implements NewConstants {
             ability.setDescription("1, tap: Destroy all artifacts, creatures, and enchantments.");
             ability.setStackDescription("Destroy all artifacts, creatures, and enchantments.");
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Conspiracy") || cardName.equals("Cover of Darkness")
