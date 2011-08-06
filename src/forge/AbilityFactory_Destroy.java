@@ -144,6 +144,45 @@ public class AbilityFactory_Destroy {
 		return spDestroyAll;
 	}
 	
+	public static SpellAbility createDrawbackDestroyAll(final AbilityFactory AF){
+		final SpellAbility dbDestroyAll = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -242160421677518351L;
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+			
+			final boolean noRegen = params.containsKey("NoRegen");
+			
+			@Override
+			public String getStackDescription(){
+				if(params.containsKey("SpellDescription"))
+					return AF.getHostCard().getName() + " - " + params.get("SpellDescription");
+				else
+					return destroyAllStackDescription(af, this, noRegen);
+			}
+			
+			public boolean canPlay(){
+				// super takes care of AdditionalCosts
+				return super.canPlay();	
+			}
+			
+			public boolean canPlayAI() {
+				return destroyAllCanPlayAI(af, this, noRegen);
+			}
+			
+			@Override
+			public void resolve() {
+				destroyAllResolve(af, this, noRegen);
+			}
+			
+			@Override
+			public boolean chkAI_Drawback() {
+				return true;
+			}
+			
+		};
+		return dbDestroyAll;
+	}
+	
 	public static boolean destroyCanPlayAI(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
 		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
 		Random r = new Random();

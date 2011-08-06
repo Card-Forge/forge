@@ -433,6 +433,8 @@ public class AbilityFactory {
 				SA = AbilityFactory_Destroy.createAbilityDestroyAll(this);
 			else if (isSp)
 				SA = AbilityFactory_Destroy.createSpellDestroyAll(this);
+			else if (isDb)
+				SA = AbilityFactory_Destroy.createDrawbackDestroyAll(this);
 		}
 		
 		if (API.equals("Mana")){
