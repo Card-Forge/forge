@@ -4,6 +4,7 @@ Types:Enchantment
 Text:no text
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U U
 K:stPumpAll:Creature.Blue:1/1:No Condition:Blue creatures get +1/+1.
+SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunken_city.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/35.jpg
