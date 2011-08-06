@@ -13293,6 +13293,27 @@ public class CardFactory_Creatures {
 
 				@Override
                 public void resolve() {
+					
+					if (card.getController().equals(AllZone.ComputerPlayer)) {
+						
+						CardList AICreatures = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+						CardList PlayerCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+						if (!AICreatures.isEmpty()) {
+							
+							copyTarget[0] = AICreatures.iterator().next();
+							
+						}
+						
+						else if (!PlayerCreatures.isEmpty()) {
+							
+							copyTarget[0] = PlayerCreatures.iterator().next();
+							
+						}
+						
+					}
+					
+					if (copyTarget[0] != null) {
+					
                     cloned[0] = cfact.getCard(copyTarget[0].getName(), card.getController());
                     cloned[0].setCloneOrigin(card.getName());
                     cloned[0].addLeavesPlayCommand(leaves);
@@ -13300,6 +13321,9 @@ public class CardFactory_Creatures {
                     cloned[0].setImageFilename(copyTarget[0].getImageFilename());
                     PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(cloned[0]);
+                    
+					}
+                    
                 }
             };//SpellAbility
             
@@ -13360,6 +13384,27 @@ public class CardFactory_Creatures {
 
 				@Override
                 public void resolve() {
+					
+					if (card.getController().equals(AllZone.ComputerPlayer)) {
+						
+						CardList AICreatures = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+						CardList PlayerCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+						if (!AICreatures.isEmpty()) {
+							
+							copyTarget[0] = AICreatures.iterator().next();
+							
+						}
+						
+						else if (!PlayerCreatures.isEmpty()) {
+							
+							copyTarget[0] = PlayerCreatures.iterator().next();
+							
+						}
+						
+					}
+					
+					if (copyTarget[0] != null) {
+					
                     cloned[0] = cfact.getCard(copyTarget[0].getName(), card.getController());
                     cloned[0].setCloneOrigin(card.getName());
                     cloned[0].addLeavesPlayCommand(leaves);
@@ -13367,6 +13412,9 @@ public class CardFactory_Creatures {
                     cloned[0].setBaseAttack(7);
                     PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(cloned[0]);
+                    
+					}
+                    
                 }
             };//SpellAbility
             
