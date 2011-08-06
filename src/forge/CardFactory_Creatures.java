@@ -16446,6 +16446,33 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Shapeshifter")) {
+        	Command intoPlay = new Command() {
+				private static final long serialVersionUID = 5447692676152380940L;
+
+				public void execute() {
+					int num = 0;
+					if(card.getController().isHuman()) {
+						String[] choices = new String[7];
+						for(int j = 0; j < 7; j++) {
+							choices[j] = ""+j;
+						}
+						String answer = (String)(AllZone.Display.getChoiceOptional(
+								card.getName()+" - Choose a number", choices));
+						num = Integer.parseInt(answer);
+					}
+					else {
+						num = 3;
+					}
+					card.setBaseAttack(num);
+					card.setBaseDefense(7-num);
+				}
+        	};
+
+        	card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {

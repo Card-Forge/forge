@@ -71,6 +71,7 @@ public class GameActionUtil {
 		upkeep_Nath();
 		upkeep_Anowon();
 		upkeep_Cunning_Lethemancer();
+		upkeep_Shapeshifter();
 		
 		upkeep_Ink_Dissolver();
 		upkeep_Kithkin_Zephyrnaut();
@@ -10037,6 +10038,35 @@ public class GameActionUtil {
 			}
 		}//list > 0
 	}//cursed land
+	
+	private static void upkeep_Shapeshifter() {
+		final Player player = AllZone.Phase.getPlayerTurn();
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Shapeshifter");
+
+		for(final Card c:list) {
+			SpellAbility ability = new Ability(c, "0") {
+				@Override
+				public void resolve() {
+					int num = 0;
+					if(player.isHuman()) {
+						String[] choices = new String[7];
+						for(int j = 0; j < 7; j++) {
+							choices[j] = ""+j;
+						}
+						String answer = (String)(AllZone.Display.getChoiceOptional(c.getName()+" - Choose a number", choices));
+						num = Integer.parseInt(answer);
+					}
+					else {
+						num = 3;
+					}
+					c.setBaseAttack(num);
+					c.setBaseDefense(7-num);
+				}
+			};
+			ability.setStackDescription(c.getName()+" - choose a new number");
+			AllZone.Stack.add(ability);
+		}//foreach(Card)
+	}//upkeep_Shapeshifter
 
 	private static void upkeep_Pillory_of_the_Sleepless() {
 		final Player player = AllZone.Phase.getPlayerTurn();
