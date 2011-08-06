@@ -16976,6 +16976,7 @@ public class GameActionUtil {
 
 	}; //Merfolk_Sovereign_Other
 
+	/*
 	public static Command Lord_of_Atlantis_Pump       = new Command() {
 
 		private static final long serialVersionUID   = -2128898623878576243L;
@@ -17058,7 +17059,7 @@ public class GameActionUtil {
 		}// execute()
 
 	}; //Lord_of_Atlantis_Other
-
+	*/
 
 	public static Command Field_Marshal_Pump          = new Command() {
 		private static final long serialVersionUID   = -2429608928111507712L;
@@ -20916,8 +20917,8 @@ public class GameActionUtil {
 		commands.put("Veteran_Armorsmith_Other", Veteran_Armorsmith_Other);
 		commands.put("Merfolk_Sovereign_Pump", Merfolk_Sovereign_Pump);
 		commands.put("Merfolk_Sovereign_Other", Merfolk_Sovereign_Other);
-		commands.put("Lord_of_Atlantis_Pump", Lord_of_Atlantis_Pump);
-		commands.put("Lord_of_Atlantis_Other", Lord_of_Atlantis_Other);
+		//commands.put("Lord_of_Atlantis_Pump", Lord_of_Atlantis_Pump);
+		//commands.put("Lord_of_Atlantis_Other", Lord_of_Atlantis_Other);
 		commands.put("Timber_Protector_Pump", Timber_Protector_Pump);
 		commands.put("Timber_Protector_Other", Timber_Protector_Other);
 		commands.put("Goblin_Chieftain_Pump", Goblin_Chieftain_Pump);
