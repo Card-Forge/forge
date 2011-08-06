@@ -4633,6 +4633,10 @@ public class GameActionUtil {
         else return false;
     }
     
+    public static void showInfoDialg(String message) {
+    	JOptionPane.showMessageDialog(null, message);
+    }
+    
     public static boolean flipACoin(Player caller, Card source) {
     	String choice = "";
     	String choices[] = {"heads","tails"};

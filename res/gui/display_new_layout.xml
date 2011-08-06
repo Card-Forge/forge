@@ -100,7 +100,7 @@
           <int>0</int> 
           <int>489</int> 
           <int>197</int> 
-          <int>159</int> 
+          <int>147</int> 
          </object> 
         </void> 
         <void property="name"> 
@@ -119,7 +119,7 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
-          <int>648</int> 
+          <int>636</int> 
           <int>197</int> 
           <int>5</int> 
          </object> 
@@ -134,9 +134,9 @@
         <void property="bounds"> 
          <object class="java.awt.Rectangle"> 
           <int>0</int> 
-          <int>653</int> 
+          <int>641</int> 
           <int>197</int> 
-          <int>182</int> 
+          <int>194</int> 
          </object> 
         </void> 
         <void property="name"> 

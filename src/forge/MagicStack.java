@@ -432,6 +432,95 @@ public class MagicStack extends MyObservable {
 			}
 		}
 		
+		//Lurking Predators
+		if(sp.isSpell())
+		{
+			CardListFilter filter = new CardListFilter() {
+				public boolean addCard(Card c)
+				{
+					return c.getName().equals("Lurking Predators");
+				}
+			};
+			
+			CardList lurkingPredators = new CardList();
+			if(sp.getSourceCard().getController() == AllZone.HumanPlayer)
+			{
+				lurkingPredators.add(new CardList(AllZone.Computer_Battlefield.getCards()));
+			}
+			else
+			{
+				lurkingPredators.add(new CardList(AllZone.Human_Battlefield.getCards()));
+			}
+			
+			lurkingPredators = lurkingPredators.filter(filter);
+			
+			for(int i=0;i<lurkingPredators.size();i++)
+			{
+				StringBuilder revealMsg = new StringBuilder("");
+				if(lurkingPredators.get(i).getController() == AllZone.HumanPlayer)
+				{
+					revealMsg.append("You reveal: ");
+					if(AllZone.Human_Library.size() == 0)
+					{
+						revealMsg.append("Nothing!");
+						GameActionUtil.showInfoDialg(revealMsg.toString());
+						continue;
+					}
+					Card revealed = AllZone.Human_Library.get(0);
+					AllZone.Human_Library.remove(0);
+					revealMsg.append(revealed.getName());
+					if(!revealed.isType("Creature"))
+					{
+						revealMsg.append("\n\rPut it on the bottom of your library?");
+						if(GameActionUtil.showYesNoDialog(lurkingPredators.get(i), revealMsg.toString()))
+						{
+							AllZone.GameAction.moveToBottomOfLibrary(revealed);
+						}
+						else
+						{
+							AllZone.GameAction.moveToTopOfLibrary(revealed);
+						}
+					}
+					else
+					{
+						GameActionUtil.showInfoDialg(revealMsg.toString());
+						AllZone.GameAction.moveToPlay(revealed);
+					}
+				}
+				else
+				{
+					revealMsg.append("Computer reveals: ");
+					if(AllZone.Computer_Library.size() == 0)
+					{
+						revealMsg.append("Nothing!");
+						GameActionUtil.showInfoDialg(revealMsg.toString());
+						continue;
+					}
+					Card revealed = AllZone.Computer_Library.get(0);
+					AllZone.Computer_Library.remove(0);
+					revealMsg.append(revealed.getName());
+					if(!revealed.isType("Creature"))
+					{
+						GameActionUtil.showInfoDialg(revealMsg.toString());
+						if(lurkingPredators.size() > i)
+						{
+							AllZone.GameAction.moveToBottomOfLibrary(revealed);
+						}
+						else
+						{
+							AllZone.GameAction.moveToTopOfLibrary(revealed);
+						}
+					}
+					else
+					{
+						GameActionUtil.showInfoDialg(revealMsg.toString());
+						AllZone.GameAction.moveToPlay(revealed);
+					}
+					
+				}
+			}
+		}
+		
 		if (sp.getTargetCard() != null)
 			CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());
 	}
