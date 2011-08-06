@@ -1147,6 +1147,29 @@ public class CombatUtil
 
 	      }//Nemesis of Reason
 		  
+		  else if(c.getName().equals("Sapling of Colfenor") && !c.getCreatureAttackedThisTurn())
+		  {
+			     String player =  c.getController();
+			    
+	             
+	             PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+	             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+	             if (lib.size() > 0 ) {
+                	CardList cl = new CardList();
+			    	cl.add(lib.get(0));
+			    	AllZone.Display.getChoiceOptional("Top card", cl.toArray());
+                                     };
+	            Card top = lib.get(0);
+	            if (top.getType().contains("Creature")) 
+	                                                  {
+	            	AllZone.GameAction.getPlayerLife(player).addLife(top.getBaseDefense());
+	            	AllZone.GameAction.getPlayerLife(player).subtractLife(top.getBaseAttack());
+	            	hand.add(top);
+	            	lib.remove(top);
+	            	                                  };
+	            	                                  
+
+		  }//Sapling of Colfenor
 		  c.setCreatureAttackedThisTurn(true);
 		  
 	  }//if Phase = declare attackers
