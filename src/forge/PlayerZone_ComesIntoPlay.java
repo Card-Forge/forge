@@ -218,6 +218,30 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 	
                 	AllZone.Stack.add(ability);
                 }
+                
+                CardList les = AllZoneUtil.getPlayerCardsInPlay(c.getOwner().getOpponent(), "Land Equilibrium");
+                final Card lesLand = c;
+                if(les.size() > 0) {
+                	final Card source = les.get(0);
+                	SpellAbility ability = new Ability(source, "") {
+                		@Override
+                		public void resolve() {
+                			CardList lands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
+                			lesLand.getOwner().sacrificePermanent(source.getName()+" - Select a land to sacrifice", lands);
+                		}
+                	};
+                	StringBuilder sb = new StringBuilder();
+                	sb.append(source).append(" - ");
+                	sb.append(tisLand.getController()).append(" sacrifices a land.");
+                	ability.setStackDescription(sb.toString());
+                	CardList pLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
+                	CardList oLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner().getOpponent());
+                	//(pLands - 1) because this land is in play, and the ability is before it is in play
+                	if(oLands.size() <= (pLands.size() - 1)) {
+                		AllZone.Stack.add(ability);
+                	}
+                }
+                
             }//isLand()
             
             //hack to make tokens trigger ally effects:
