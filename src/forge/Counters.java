@@ -16,6 +16,7 @@ package forge;
 public enum Counters {
     AGE(),
     BLAZE(),
+    BRIBERY(),
     CHARGE(),
     DIVINITY(),
     FADE(),
