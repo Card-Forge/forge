@@ -154,7 +154,6 @@ public class Spell_Permanent extends Spell {
         		return false;
     	}
     
-    	
     	// Flash handled by super.canPlay
         return super.canPlay();
     }

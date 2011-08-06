@@ -10263,6 +10263,8 @@ public class GameActionUtil {
       			if(Keyword_Details.length >= 2 && Keyword_Details[2].contains("Flash")) {
       				Cards_inZone.addAll(AllZone.Human_Hand.getCards());
       				Cards_inZone.addAll(AllZone.Computer_Hand.getCards());
+      				Cards_inZone.addAll(AllZone.Human_Graveyard.getCards());
+      				Cards_inZone.addAll(AllZone.Computer_Graveyard.getCards());
       			}
       			//hack for Molten Disaster
       			/*
@@ -11034,7 +11036,7 @@ public class GameActionUtil {
 			
 			for(int i = 0; i < size; i++) {
 				Card c = creature.get(i);
-				if(phylacteryExists(c) && c.getFinishedEnteringBF()) {
+				if(!phylacteryExists(c) && c.getFinishedEnteringBF()) {
 					AllZone.GameAction.sacrifice(c);
 				}
 			}
