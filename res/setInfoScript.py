@@ -135,8 +135,9 @@ def initSets():
 	
 	# Scars of Mirrodin
 	allSets['Scars of Mirrodin'] = 'SOM'
-	allSets['Mirrodin Beseiged'] = 'MBS'
-	#allSets['Unknown Mirrodin Set']
+	allSets['Mirrodin Besieged'] = 'MBS'
+	#allSets['Mirrodin Pure'] = 'MPR'
+	#allSets['New Phyrexia'] = 'NPX'
 	
 def addSets(card):
 	html = getURL('http://magiccards.info/query?q=!'+card.name)
