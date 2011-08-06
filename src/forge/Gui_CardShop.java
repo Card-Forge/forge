@@ -521,6 +521,26 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
             
             creditsLabel.setText("Total credits: " + questData.getCredits());
             
+            //remove sold cards from all decks:
+            ArrayList<String> deckNames = questData.getDeckNames();
+            for (String deckName:deckNames)
+            {
+            	Deck deck = questData.getDeck(deckName);
+            	if (deck.getMain().contains(c.getName()))
+            	{
+            		//count occurences:
+            		int cardPoolCount = 0;
+            		ArrayList<String> cpList = questData.getCards();
+            		while(cpList.contains(c.getName()))
+            		{
+            			cpList.remove(cpList.indexOf(c.getName()));
+            			cardPoolCount++;
+            		}
+            		if (cardPoolCount < 4)
+            			deck.removeMain(c);
+            	}
+            }
+            
             //3 conditions" 0 cards left, select the same row, select next row
             int size = bottomModel.getRowCount();
             if(size != 0) {

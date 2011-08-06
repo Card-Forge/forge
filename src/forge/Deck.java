@@ -95,6 +95,15 @@ public class Deck implements java.io.Serializable {
         return main.remove(index).toString();
     }
     
+    public void removeMain(Card c)
+    {
+    	if (main.contains(c.getName()))
+    	{
+    		int i = main.indexOf(c.getName());
+    		main.remove(i);
+    	}
+    }
+    
     public void addSideboard(String cardName) {
         sideboard.add(cardName);
     }

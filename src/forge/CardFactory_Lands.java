@@ -138,7 +138,7 @@ class CardFactory_Lands {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    c.tap();
+                    //c.tap();
                     PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
                     life.addLife(1);
                 }
