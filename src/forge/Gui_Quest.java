@@ -397,6 +397,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Fat Albert 3   		hard  	Winter Orb, Keldon Warlord, mana Elves/Slivers + several 6/6 creatures");
         sb.append("\r\n");
+        sb.append("Fred FLintstone 3   		hard  	Reasontg's Predator's Garden deck with mods, featuring Lorescale Coatl");
+        sb.append("\r\n");
         sb.append("Frodo 1		easy	New, Apthaven's AI Zoo Easy, some creature removal");
         sb.append("\r\n");
         sb.append("Frodo 2		medium	New, Apthaven's AI Zoo Medium, some creature removal + Glorious Anthem");
