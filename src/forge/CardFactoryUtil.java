@@ -3565,7 +3565,10 @@ public class CardFactoryUtil {
         // "Named <CARDNAME> in all graveyards" - Count$NamedAllYards.<CARDNAME>
         
         if(sq[0].contains("Named")) {
-            someCards = someCards.filter(new CardListFilter() {
+            if (sq[1].equals("CARDNAME"))
+            	sq[1] = c.getName();
+            
+        	someCards = someCards.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
                     if(c.getName().equals(sq[1])) return true;
                     
