@@ -1620,6 +1620,94 @@ public class CombatUtil {
                 }
             }//Novablast Wurm
             
+            else if(c.getName().equals("Lorthos, the Tidemaker") && !c.getCreatureAttackedThisCombat()) {
+            	final Card[] Targets = new Card[8];
+            	final int[] index = new int[1];
+	                final Ability ability = new Ability(c, "8") {
+	                    @Override
+	                    public void resolve() {
+	                    	for(int i = 0; i < 8; i++) {
+	                    		if(Targets[i] != null) {
+                       	 Targets[i].tap();
+                    	 if(!Targets[i].hasKeyword("This card doesn't untap during your next untap step.")) {
+                    		 Targets[i].addExtrinsicKeyword("This card doesn't untap during your next untap step.");
+                    	 }
+	                    		}
+	                    	}
+	                    }
+                };
+                final Command unpaidCommand = new Command() {                   
+                    private static final long serialVersionUID = -6483124208343935L;                  
+                    public void execute() {
+                    }
+                };
+                
+                final Command paidCommand = new Command() {
+                    private static final long serialVersionUID = -83034517601871955L;
+                    
+                    public void execute() {
+                        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                        final CardList all = new CardList();
+                    	all.addAll(Hplay.getCards());
+                    	all.addAll(Cplay.getCards());
+                        for(int i = 0; i < 8; i++) {
+                       	 AllZone.InputControl.setInput(CardFactoryUtil.Lorthos_input_targetPermanent(ability , all , i ,new Command() {
+                       	
+                             private static final long serialVersionUID = -328305150127775L;
+                             
+                             public void execute() {
+                            	 all.remove(ability.getTargetCard());
+                            	 Targets[index[0]] = ability.getTargetCard();
+                                 index[0]++;                                
+                            	 }
+                         }));
+                        } 
+                    	AllZone.Stack.add(ability);
+                    }
+                };
+                ability.setStackDescription(c.getName() + " - taps up to 8 target permanents.");
+        		CardList Silence = AllZoneUtil.getPlayerCardsInPlay(AllZone.GameAction.getOpponent(c.getController())); 		
+        		Silence = Silence.getName("Linvala, Keeper of Silence");
+        		if(Silence.size() == 0) {
+                if(c.getController().equals(Constant.Player.Human)) {
+                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Activate " + c.getName() + "'s ability: " + "\r\n",
+                            ability.getManaCost(), paidCommand, unpaidCommand));
+                } else //computer
+                {
+                    if(ComputerUtil.canPayCost(ability)) {
+                    	ComputerUtil.playNoStack(ability);
+                        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                        final CardList all = new CardList();
+                    	all.addAll(Hplay.getCards());
+                    	CardList Creats = all.getType("Creature");
+                    	CardListUtil.sortAttack(Creats);
+                    	for(int i = 0; i < Creats.size(); i++) {
+                    		if(index[0] < 8 && CardFactoryUtil.canTarget(ability, Creats.get(i))) {
+                    		Targets[index[0]] = Creats.get(i);
+                    		index[0]++;
+                    	}
+                    	}
+                    	CardList Land = all.getType("Land");
+                    	for(int i = 0; i < Land.size(); i++) {
+                    		if(index[0] < 8 && CardFactoryUtil.canTarget(ability, Land.get(i))) {
+                    		Targets[index[0]] = Land.get(i);
+                    		index[0]++;
+                    	}
+                    	}  
+                    	CardList Artifacts = all.getType("Artifact");
+                    	for(int i = 0; i < Artifacts.size(); i++) {
+                    		if(index[0] < 8 && CardFactoryUtil.canTarget(ability, Artifacts.get(i))) {
+                    		Targets[index[0]] = Artifacts.get(i);
+                    		index[0]++;
+                    	}
+                    	} 
+                    	AllZone.Stack.add(ability);
+                    }
+                }
+        		} // Silenced
+            }// Lorthos, the Tidemaker
+            
             else if(c.getName().equals("Sapling of Colfenor") && !c.getCreatureAttackedThisCombat()) {
                 String player = c.getController();
                 
