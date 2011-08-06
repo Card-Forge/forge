@@ -54,6 +54,7 @@ public class GenerateThemeDeck
 		
 		String s = "";
 		int BLandPercentage = 0;
+		boolean Testing = false;
 		
 		// read theme file
 		String tFileName = "res/quest/themes/" + ThemeName + ".thm";
@@ -102,8 +103,11 @@ public class GenerateThemeDeck
         		Groups.add(G);
         	}
         	
-        	if (s.equals("BasicLandPercentage"))
+        	if (s.startsWith("BasicLandPercentage"))
         		BLandPercentage = Integer.parseInt(s.substring("BasicLandPercentage".length() + 1));
+        	
+        	if (s.equals("Testing"))
+        		Testing = true;
         	
         	s = readLine();
         }
@@ -250,7 +254,8 @@ public class GenerateThemeDeck
 		}
 		
 		tmpDeck += "DeckSize:" + tDeck.size() + "\n";
-		ErrorViewer.showError(tmpDeck);
+		if (Testing)
+			ErrorViewer.showError(tmpDeck);
 
 		return tDeck;
 	}
@@ -267,23 +272,23 @@ public class GenerateThemeDeck
         }
     }//readLine(Card)
 
+    class CCnt
+    {
+    	public String Color;
+    	public int Count;
+    	
+    	public CCnt(String clr, int cnt)
+    	{
+    		Color = clr;
+    		Count = cnt;
+    	}
+    }
+
+    class Grp
+    {
+    	public ArrayList<String> Cardnames = new ArrayList<String>();
+    	public int MaxCnt;
+    	public int Percentage;
+    }
 }
 
-class CCnt
-{
-	public String Color;
-	public int Count;
-	
-	public CCnt(String clr, int cnt)
-	{
-		Color = clr;
-		Count = cnt;
-	}
-}
-
-class Grp
-{
-	public ArrayList<String> Cardnames = new ArrayList<String>();
-	public int MaxCnt;
-	public int Percentage;
-}

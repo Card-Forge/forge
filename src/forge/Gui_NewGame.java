@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -520,6 +521,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             boolean humanGenerateMulti3 = human.equals("Generate 3-Color Deck");
             boolean humanGenerateMulti5 = human.equals("Generate 5-Color Gold Deck");
             boolean humanGenerateTheme = human.equals("Generate Theme Deck");
+            boolean humanGenerate2Color = human.equals("Generate 2 Color Deck");
             boolean humanRandom = human.equals("Random");
             if(humanGenerate) {
                 if(constructed) Constant.Runtime.HumanDeck[0] = generateConstructedDeck();
@@ -530,6 +532,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 if(constructed) Constant.Runtime.HumanDeck[0] = generateConstructed5ColorDeck();
             } else if (humanGenerateTheme) {
             	if (constructed) Constant.Runtime.HumanDeck[0] = generateConstructedThemeDeck();
+            } else if (humanGenerate2Color) {
+            	if (constructed) Constant.Runtime.HumanDeck[0] = generate2ColorDeck("H");
             } else if(humanRandom) {
                 Constant.Runtime.HumanDeck[0] = getRandomDeck(getDecks(format));
                 JOptionPane.showMessageDialog(null, String.format("You are using deck: %s",
@@ -543,6 +547,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             boolean computerGenerateMulti3 = computer.equals("Generate 3-Color Deck");
             boolean computerGenerateMulti5 = computer.equals("Generate 5-Color Gold Deck");
             boolean computerGenerateTheme = computer.equals("Generate Theme Deck");
+            boolean computerGenerate2Color = computer.equals("Generate 2 Color Deck");
             
             boolean computerRandom = computer.equals("Random");
             if(computerGenerate) {
@@ -554,6 +559,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 if(constructed) Constant.Runtime.ComputerDeck[0] = generateConstructed5ColorDeck();
             } else if (computerGenerateTheme) {
             	if (constructed) Constant.Runtime.ComputerDeck[0] = generateConstructedThemeDeck();
+            } else if (computerGenerate2Color) {
+            	if (constructed) Constant.Runtime.ComputerDeck[0] = generate2ColorDeck("C");
             } else if(computerRandom) {
                 Constant.Runtime.ComputerDeck[0] = getRandomDeck(getDecks(format));
                 JOptionPane.showMessageDialog(null, String.format("The computer is using deck: %s",
@@ -637,6 +644,43 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     	return deck;
     }
     
+    private Deck generate2ColorDeck(String p)
+    {
+    	ArrayList<String> colors = new ArrayList<String>();
+    	colors.add("White");
+    	colors.add("Blue");
+    	colors.add("Black");
+    	colors.add("Red");
+    	colors.add("Green");
+    	
+    	Object c1 = null, c2 = null;
+    	if (p.equals("H"))
+    	{
+    		c1 = AllZone.Display.getChoice("Select first color.", colors.toArray());
+    	
+    		colors.remove(c1);
+    	
+    		c2 = AllZone.Display.getChoice("Select second color.", colors.toArray());
+    	}
+    	else if (p.equals("C"))
+    	{
+    		Random r = new Random();
+    		c1 = colors.get(r.nextInt(colors.size()));
+    		colors.remove(c1);
+    		c2 = colors.get(r.nextInt(colors.size()));
+    	}
+    	Generate2ColorDeck gen = new Generate2ColorDeck(c1.toString(), c2.toString());
+    	CardList d = gen.get2ColorDeck(60);
+    	
+    	Deck deck = new Deck(Constant.GameType.Constructed);
+    	
+    	for (int i=0; i<d.size(); i++)
+    		deck.addMain(d.get(i).getName());
+    	
+    	return deck;
+
+    }
+    
     void singleRadioButton_actionPerformed(ActionEvent e) {
         Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
         updateDeckComboBoxes();
@@ -664,6 +708,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             
             humanComboBox.addItem("Generate Theme Deck");
             computerComboBox.addItem("Generate Theme Deck");
+            
+            humanComboBox.addItem("Generate 2 Color Deck");
+            computerComboBox.addItem("Generate 2 Color Deck");
             
             humanComboBox.addItem("Random");
             computerComboBox.addItem("Random");
