@@ -11196,16 +11196,7 @@ public class GameActionUtil {
 							KeywordsActive++;		
 						}
      	     			
-						// Special Conditions
-						boolean SpecialConditionsMet = true;
-						CardList SpecialConditionsCardList = new CardList();
-						if(k[4].contains("CardsInHandMore")) {
-							SpecialConditionsCardList.clear();
-							String Condition = k[4].split("/")[1];
-							SpecialConditionsCardList.addAll(AllZone.getZone(Constant.Zone.Hand, card.getController()).getCards());
-							if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) SpecialConditionsMet = false;
-						}
-						if(SpecialConditionsMet) {
+						if(SpecialConditionsMet(card, k[4])) {
 							boolean ActivatedAlready = false;
 							// JOptionPane.showMessageDialog(null, ANCount + " " + CKeywords, "", JOptionPane.INFORMATION_MESSAGE); 
 							for(int y = 0; y < max; y++) {
@@ -11283,30 +11274,6 @@ public class GameActionUtil {
 					}
 				}
 			}
-			// For each effect .....
-			/*
-			for(int a =0; a < Keyword.length;a++) {
-			int Count = list.size();
-			// .... For each card that needs the bonus, add the bonus
-				for(int i = 0; i < Count; i++) {
-					if(a + 1 == Keyword.length && !Keyword[a].contains("SetPT")) old[ANumber].add(list.get(i)); // Only store the card when it has all the bonuses added
-					if(Keyword[a].contains("PTBonus")) {
-						list.get(i).addSemiPermanentAttackBoost(Integer.valueOf(Keyword[a].split("/")[1]));
-						list.get(i).addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[a].split("/")[2]));
-					}
-					/*else if(Keyword[a].contains("SetPT")) {
-						//old[ANumber].remove(list.get(i)); //hack, make sure the card is not in the "old" list if there's a setPT 
-						// -9001 is a failsafe number, It will be used when a card only has a SetPT bonus which only affects 
-						// cards with either a Power or Toughness bonus, but not both. NOT TESTED
-						int[] SetPTAmounts = SetPTBonus(SourceCard, Keyword_Details);
-						if(SetPTAmounts[0] != -9001) list.get(i).setBaseAttack(SetPTAmounts[0]);
-						if(SetPTAmounts[0] != -9001) list.get(i).setBaseDefense(SetPTAmounts[1]);
-					}
-			else if(Keyword[a].contains("Keyword")) {
-				list.get(i).addExtrinsicKeyword(Keyword[a].replaceFirst("Keyword/", ""));
-			 }
-			}
-			}*/
 		}
 		
 		void removeKeyword(CardList list , Card Source,int ANumber, int AbilityNumber, String LastKnownController) {
@@ -11357,13 +11324,23 @@ public class GameActionUtil {
 		
     	// Special Conditions
 		boolean SpecialConditionsMet(Card SourceCard, String SpecialConditions) {
-  	      	CardList SpecialConditionsCardList = new CardList();
+  	      	
   	      	if(SpecialConditions.contains("CardsInHandMore")) {
+  	      			CardList SpecialConditionsCardList = new CardList();
 	      			SpecialConditionsCardList.clear();
 	      			String Condition = SpecialConditions.split("/")[1];
 	      			SpecialConditionsCardList.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
 	      			if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) return false;
   	      	}
+  	      	if(SpecialConditions.contains("Threshold")) {
+  	      		PlayerZone pYard = AllZone.getZone(Constant.Zone.Graveyard, SourceCard.getController());
+  	      		if (pYard.size() < 7) return false;
+  	      	}
+  	      	if(SpecialConditions.contains("Hellbent")) {
+  	      		CardList Handcards = new CardList();
+  	      		Handcards.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
+	      		if (Handcards.size() > 0) return false;
+	      	}
   	      	return true;
 			
 		}
