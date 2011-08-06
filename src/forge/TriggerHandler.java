@@ -58,7 +58,7 @@ public class TriggerHandler {
 			ret = new Trigger_ChangesZone(mapParams,host);
 		}
 		else if(mode.equals("CounterAdded")) {
-			ret = new Trigger_CounterAdded(mapParams,host);
+			ret = new Trigger_CounterAdded(mapParams, host);
 		}
 		else if(mode.equals("Cycled"))
 		{
@@ -115,6 +115,9 @@ public class TriggerHandler {
 		else if(mode.equals("TurnFaceUp"))
 		{
 			ret = new Trigger_TurnFaceUp(mapParams,host);
+		}
+		else if(mode.equals("Unequip")) {
+			ret = new Trigger_Unequip(mapParams, host);
 		}
 		else if(mode.equals("Untaps"))
 		{

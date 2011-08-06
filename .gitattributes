@@ -8082,6 +8082,7 @@ src/forge/Trigger_Shuffled.java -text svneol=native#text/plain
 src/forge/Trigger_SpellAbilityCast.java -text svneol=native#text/plain
 src/forge/Trigger_Taps.java -text svneol=native#text/plain
 src/forge/Trigger_TurnFaceUp.java -text svneol=native#text/plain
+src/forge/Trigger_Unequip.java -text svneol=native#text/plain
 src/forge/Trigger_Untaps.java -text svneol=native#text/plain
 src/forge/UndoCommand.java svneol=native#text/plain
 src/forge/Wait.java svneol=native#text/plain
