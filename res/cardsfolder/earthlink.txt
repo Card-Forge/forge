@@ -1,9 +1,9 @@
 Name:Earthlink
-ManaCost:3 B R G
+ManaCost:1
 Types:Enchantment
-Text:no text
+Text:no text3 B R G
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ TrigSac | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, that creature's controller sacrifices a land.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, that creature's controller sacrifices a land.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ TriggeredController
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthlink.jpg
