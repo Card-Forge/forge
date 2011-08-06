@@ -1812,8 +1812,10 @@ public class CardFactoryUtil {
 			
 			@Override
             public boolean canPlayAI() {
-                return false;
-            }
+				return false;
+				// Suspend currently not functional for the AI, 
+				// seems to be an issue with regaining Priority after Suspension
+			}
             
             @Override
             public void resolve() {

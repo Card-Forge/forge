@@ -385,7 +385,8 @@ public class Card extends MyObservable {
 
 					c.addComesIntoPlayCommand(intoPlay);
 					AllZone.GameAction.playCardNoCost(c);
-					AllZone.getZone(c).remove(c);
+					if (AllZone.getZone(c) != null)
+						AllZone.getZone(c).remove(c);
 				}
 			}
             this.updateObservers();
@@ -895,7 +896,7 @@ public class Card extends MyObservable {
         sb.append("\r\n");
         sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
         sb.append("\r\n");
-        
+
         SpellAbility[] sa = getSpellAbility();
         for(int i = 0; i < sa.length; i++) {
             //presumes the first SpellAbility added to this card, is the "main" spell
@@ -1939,7 +1940,7 @@ public class Card extends MyObservable {
 			private static final long serialVersionUID = -3032496855034700637L;
         });
         else 
-        	otherExtrinsicKeyword.add((getName().trim().length()==0 ? s :s.replaceAll(getName(), "CARDNAME")));
+        otherExtrinsicKeyword.add((getName().trim().length()==0 ? s :s.replaceAll(getName(), "CARDNAME")));
         //}
     }
     
