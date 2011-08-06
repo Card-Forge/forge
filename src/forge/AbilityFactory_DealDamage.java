@@ -660,10 +660,14 @@ public class AbilityFactory_DealDamage {
 
 		String validP = "";
 
-		//TODO: X may be something different than X paid
-		final int maxX = ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(source);
-		final int dmg = params.get("NumDmg").equals("X") ? maxX : getNumDamage(sa);
-
+		int dmg;
+		if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			dmg = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(dmg));
+		}
+		else
+			dmg = getNumDamage(sa);
 
 		if(params.containsKey("ValidPlayers"))
 			validP = params.get("ValidPlayers");
@@ -692,6 +696,7 @@ public class AbilityFactory_DealDamage {
 			return false;
 		/////
 
+		// todo: if damage is dependant on mana paid, maybe have X be human's max life
 		//Don't kill yourself
 		if (validP.contains("Each") 
 				&& AllZone.ComputerPlayer.getLife() <= AllZone.ComputerPlayer.predictDamage(dmg, source, false))
@@ -749,8 +754,14 @@ public class AbilityFactory_DealDamage {
 		final HashMap<String,String> params = af.getMapParams();
 		String validP = "";
 
-		int maxX = ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(source);
-		final int dmg = params.get("NumDmg").equals("X") ? maxX : getNumDamage(sa);
+		int dmg;
+		if (damage.equals("X") && source.getSVar(damage).equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			dmg = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(dmg));
+		}
+		else
+			dmg = getNumDamage(sa);
 
 		if(params.containsKey("ValidPlayers"))
 			validP = params.get("ValidPlayers");
@@ -785,6 +796,8 @@ public class AbilityFactory_DealDamage {
 			}
 		}while(false);
 
+		
+		
 		if (sa.getSubAbility() != null)
 			return sa.getSubAbility().doTrigger(mandatory);
 
