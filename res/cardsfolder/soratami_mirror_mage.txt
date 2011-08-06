@@ -7,4 +7,5 @@ K:Flying
 A:AB$ChangeZone | Cost$ 3 Return<3/Land> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_mirror_mage.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/88.jpg
 End

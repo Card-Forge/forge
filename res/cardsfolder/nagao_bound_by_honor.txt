@@ -8,4 +8,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescripti
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Samurai+YouCtrl | NumAtt$ +1 | NumDef$ +1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_general.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/36.jpg
 End

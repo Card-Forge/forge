@@ -6,4 +6,5 @@ PT:1/1
 A:AB$Pump | Cost$ Sac<1/Land> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Shroud | SpellDescription$ Target creature you control gains shroud until end of turn. (It can't be the target of spells or abilities.)
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_safekeeper.jpg
+SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/133.jpg
 End

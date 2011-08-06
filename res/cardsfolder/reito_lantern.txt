@@ -6,4 +6,5 @@ A:AB$ChangeZone | Cost$ 3 | ValidTgts$ Card | TgtPrompt$ Select target card in a
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reito_lantern.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/267.jpg
 End
