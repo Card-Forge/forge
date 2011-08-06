@@ -1,7 +1,7 @@
 Name:Primalcrux
 ManaCost:G G G G G G
 Types:Creature Elemental
-Text:Chroma — Primalcrux's power and toughness are each equal to the number of green mana symbols in the mana costs of permanents you control.
+Text:Chroma - Primalcrux's power and toughness are each equal to the number of green mana symbols in the mana costs of permanents you control.
 PT:1/1
 K:Trample
 SVar:Rarity:Rare

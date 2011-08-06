@@ -1,7 +1,7 @@
 Name:Sanity Grinding
 ManaCost:U U U
 Types:Sorcery
-Text:Chroma — Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of his or her library into his or her graveyard. Then put the cards you revealed this way on the bottom of your library in any order.
+Text:Chroma - Reveal the top ten cards of your library. For each blue mana symbol in the mana costs of the revealed cards, target opponent puts the top card of his or her library into his or her graveyard. Then put the cards you revealed this way on the bottom of your library in any order.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanity_grinding.jpg
 End

@@ -1,7 +1,7 @@
 Name:Umbra Stalker
 ManaCost:4 B B B
 Types:Creature Elemental
-Text:Chroma — Umbra Stalker's power and toughness are each equal to the number of black mana symbols in the mana costs of cards in your graveyard.
+Text:Chroma - Umbra Stalker's power and toughness are each equal to the number of black mana symbols in the mana costs of cards in your graveyard.
 PT:1/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/umbra_stalker.jpg
