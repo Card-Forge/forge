@@ -4300,31 +4300,7 @@ public class CardFactory_Sorceries {
         		}
         	});
         }//*************** END ************ END **************************
-        
-      
-        //*************** START *********** START **************************
-        else if(cardName.equals("Research the Deep")) {
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -3031317284608505865L;
 
-				@Override
-                public void resolve() {
-                    card.getController().drawCard();
-                    if(card.getController().clashWithOpponent(card)) {
-                    	win();
-                    }
-                }//resolve()
-                
-                void win() {
-                    AllZone.GameAction.moveToHand(card);
-                }
-            };
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Biorhythm")) {
         	final SpellAbility spell = new Spell(card) {

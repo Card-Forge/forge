@@ -415,11 +415,9 @@ class CardFactory_Equipment {
 					String[] types = new String[] { "Creature" , "Germ" };
 					String[] keywords = new String[0];
 					CardList germs = CardFactoryUtil.makeToken("Germ", "B 0 0 Germ", card.getController(), "B", types, 1, 1, keywords);
-					
-					SpellAbility[] equipSA = card.getSpellAbility();
-					SpellAbility specSA = equipSA[equipSA.length-1];
-					specSA.setTargetCard(germs.get(0));
-					specSA.resolve();
+
+                    germs.get(0).equipCard(card);
+
 					for(Card c : germs)
 					{
 						c.setBaseAttack(0);

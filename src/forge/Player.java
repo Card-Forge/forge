@@ -1088,7 +1088,7 @@ public abstract class Player extends MyObservable{
     	 * 
     	 * Clash you win or win you don't.  There is no tie.
     	 */
-    	Player player = AllZone.Phase.getPlayerTurn();
+    	Player player = source.getController();
     	Player opponent = player.getOpponent();
     	String lib = Constant.Zone.Library;
     	

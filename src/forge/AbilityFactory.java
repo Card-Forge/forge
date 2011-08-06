@@ -548,6 +548,16 @@ public class AbilityFactory {
 			else if (isDb)
 				SA = AbilityFactory_Turns.createDrawbackAddTurn(this);
 		}
+
+        if (API.equals("Clash")){
+            if(isAb)
+                SA = AbilityFactory_Clash.getAbility(this);
+            else if (isSp)
+                SA = AbilityFactory_Clash.getSpell(this);
+            else if(isDb)
+                SA = AbilityFactory_Clash.getDrawback(this);
+
+        }
 		
 		if(API.equals("Animate")) {
 			if(isAb)
