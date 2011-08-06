@@ -1,0 +1,10 @@
+Name:Voracious Cobra
+ManaCost:2 R G
+Types:Creature Snake
+Text:no text
+PT:2/2
+K:First Strike
+K:Whenever CARDNAME deals combat damage to a creature, destroy that creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/voracious_cobra.jpg
+End
