@@ -20556,6 +20556,33 @@ public class CardFactory implements NewConstants {
 
         } //*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Nature's Lore")) {
+            SpellAbility spell = new Spell(card) {
+
+				private static final long serialVersionUID = -6598323179507468746L;
+
+				@Override
+                public void resolve() {
+					AllZone.GameAction.searchLibraryLand("Forest", card.getController(), 
+							Constant.Zone.Play, false);
+				}
+                
+                public boolean canPlayAI()
+                {
+                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                	CardList list = new CardList(library.getCards());
+                	list = list.getType("Forest");
+                	return list.size() > 0;
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            String desc = "Search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.";
+            spell.setStackDescription(desc);
+            spell.setDescription(desc);
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Natural Selection")) {
