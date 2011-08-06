@@ -4184,6 +4184,7 @@ res/cardsfolder/swirling_sandstorm.txt -text svneol=native#text/plain
 res/cardsfolder/sword_of_body_and_mind.txt -text svneol=native#text/plain
 res/cardsfolder/sword_of_fire_and_ice.txt -text svneol=native#text/plain
 res/cardsfolder/sword_of_light_and_shadow.txt -text svneol=native#text/plain
+res/cardsfolder/sword_of_the_chosen.txt -text svneol=native#text/plain
 res/cardsfolder/sword_of_the_meek.txt -text svneol=native#text/plain
 res/cardsfolder/sword_of_vengeance.txt -text svneol=native#text/plain
 res/cardsfolder/swords_to_plowshares.txt -text svneol=native#text/plain
@@ -5335,6 +5336,7 @@ res/quest/themes/Flying[!!-~]WU.thm -text
 res/quest/themes/Goblins[!!-~]BR.thm -text
 res/quest/themes/Goblins[!!-~]R.thm -text
 res/quest/themes/Indestructibility[!!-~]WB.thm -text
+res/quest/themes/Legends[!!-~]WG.thm -text
 res/quest/themes/Mono[!!-~]Black.thm -text
 res/quest/themes/Multicolor[!!-~]BG.thm -text
 res/quest/themes/Multicolor[!!-~]RG.thm -text
