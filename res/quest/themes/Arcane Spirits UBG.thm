@@ -9,26 +9,48 @@ Polluted Delta
 Misty Rainforest
 [/Group]
 
-[Group MaxCnt=4 Percentage=13]
+[Group MaxCnt=3 Percentage=5]
+Baku Altar
+Guardian of Solitude
+Loam Dweller
+[/Group]
+
+[Group MaxCnt=3 Percentage=16]
+Kami of the Hunt
+Kami of the Waning Moon
+Long-Forgotten Gohei
+Long-Forgotten Gohei
 Long-Forgotten Gohei
 Thief of Hope
+Thief of Hope
+Thief of Hope
+[/Group]
+
+[Group MaxCnt=2 Percentage=5]
+Infernal Kirin
+Infernal Kirin
+Jade Idol
+Kodama of the South Tree
+Kodama of the South Tree
+Kodama of the South Tree
+[/Group]
+
+[Group MaxCnt=2 Percentage=4]
+Briarknit Kami
+Cloudhoof Kirin
+Fiddlehead Kami
+Kodama of the Center Tree
 [/Group]
 
 [Group MaxCnt=1 Percentage=5]
 Bounteous Kirin
-Cloudhoof Kirin
-Infernal Kirin
-[/Group]
-
-[Group MaxCnt=3 Percentage=12]
-Baku Altar
+Kyoki, Sanity's Eclipse
 Orbweaver Kumo
-Kami of the Hunt
 Scaled Hulk
 Sire of the Storm
 [/Group]
 
-[Group MaxCnt=4 Percentage=5]
+[Group MaxCnt=4 Percentage=4]
 Eye of Nowhere
 Eye of Nowhere
 Reach Through Mists
@@ -44,34 +66,31 @@ Waking Nightmare
 [/Group]
 
 [Group MaxCnt=3 Percentage=4]
+Gibbering Kami
 Joyous Respite
+Kami of Empty Graves
+Kami of the Tended Garden
 Uproot
+[/Group]
+
+[Group MaxCnt=3 Percentage=3]
 Dance of Shadows
 Death of a Thousand Stings
+Forked-Branch Garami
+Harbinger of Spring
 Ribbons of the Reikai
 Strength of Cedars
 Three Tragedies
-[/Group]
-
-[Group MaxCnt=3 Percentage=5]
-Gibbering Kami
-Kami of Empty Graves
-Kami of the Tended Garden
-Lifespinner
-Rootrunner
-Waking Nightmare
-[/Group]
-
-[Group MaxCnt=3 Percentage=4]
-Body of Jukai
-Forked-Branch Garami
-Harbinger of Spring
-Honden of Life's Web
-Kami of Lunacy
-Nightsoil Kami
-Thousand-legged Kami
 Venerable Kumo
 [/Group]
 
+[Group MaxCnt=2 Percentage=2]
+Body of Jukai
+Crawling Filth
+Kami of Lunacy
+Nightsoil Kami
+Pull Under
+Thousand-legged Kami
+[/Group]
 
 End
