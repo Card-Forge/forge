@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+journey_to_nowhere.jpg		http://www.wizards.com/global/images/magic/general/journey_to_nowhere.jpg
 dwarven_demolition_team.jpg		http://www.wizards.com/global/images/magic/general/dwarven_demolition_team.jpg
 oracle_of_mul_daya.jpg		http://www.wizards.com/global/images/magic/general/oracle_of_mul_daya.jpg
 roiling_terrain.jpg		http://www.wizards.com/global/images/magic/general/roiling_terrain.jpg	

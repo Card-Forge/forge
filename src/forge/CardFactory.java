@@ -22242,7 +22242,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         if(cardName.equals("Life from the Loam")) {
             final SpellAbility spell = new Spell(card) {
 
@@ -22336,17 +22336,9 @@ public class CardFactory implements NewConstants {
             };
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-            
-
         }//*************** END ************ END **************************
         
-        
-        
-        
-        
-        
-        
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if (cardName.equals("Natural Order")){
             final SpellAbility spell = new Spell(card) {
 
@@ -22431,7 +22423,8 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(runtime);
 
         } //*************** END ************ END **************************
-      //*************** START *********** START **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Tormod's Crypt")) {
         	/*
         	 * Tap, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.
@@ -22469,14 +22462,186 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Journey To Nowhere")) {
+
+        	final CommandReturn getPerm = new CommandReturn() {
+        		public Object execute() {
+        			//get all creatures
+        			CardList tempList = new CardList();
+        			tempList.addAll(AllZone.Human_Play.getCards());
+        			tempList.addAll(AllZone.Computer_Play.getCards());
+
+        			CardList list = new CardList();
+
+        			for(int i = 0; i < tempList.size(); i++) {
+        				if(tempList.get(i).isPermanent() && tempList.get(i).isCreature()
+        						&& CardFactoryUtil.canTarget(card, tempList.get(i))) list.add(tempList.get(i));
+        			}//for
+
+        			//remove "this card"
+        			list.remove(card);
+
+        			return list;
+
+        		}//execute
+        	};//CommandReturn
+
+        	final SpellAbility abilityComes = new Ability(card, "0") {
+
+        		@Override
+        		public void resolve() {
+        			if(AllZone.GameAction.isCardInPlay(getTargetCard())
+        					&& CardFactoryUtil.canTarget(card, getTargetCard())) {
+        				AllZone.GameAction.removeFromGame(getTargetCard());
+        			}//if
+        		}//resolve()
+        	};//abilityComes
+
+        	final Input inputComes = new Input() {
+        		private static final long serialVersionUID = -3613946694360326887L;
+
+        		@Override
+        		public void showMessage() {
+        			CardList choice = (CardList) getPerm.execute();
+
+        			stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice,
+        					"Select target creature to remove from the game", true, false));
+        			ButtonUtil.disableAll();//to disable the Cancel button
+        		}//showMessage
+        	};//inputComes
+        	
+        	Command commandComes = new Command() {
+        		private static final long serialVersionUID = -6250376920501373535L;
+
+        		public void execute() {
+        			CardList perm = (CardList) getPerm.execute();
+        			String s = card.getController();
+        			if(perm.size() == 0) return;
+        			else if(s.equals(Constant.Player.Human)) AllZone.InputControl.setInput(inputComes);
+        			else //computer
+        			{
+        				Card target;
+
+        				//try to target human creature
+        				CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+        				target = CardFactoryUtil.AI_getBestCreature(human);//returns null if list is empty
+
+        				// try to target human permanent
+        				if(target == null) {
+        					int convertedCost = 0;
+        					CardList tempList = new CardList();
+        					tempList.addAll(AllZone.Human_Play.getCards());
+
+        					for(int i = 0; i < tempList.size(); i++) {
+        						if(tempList.get(i).isPermanent()
+        								&& !tempList.get(i).isLand()
+        								&& CardFactoryUtil.canTarget(card, tempList.get(i))
+        								&& (CardUtil.getConvertedManaCost(tempList.get(i).getManaCost()) > convertedCost)) {
+        							target = tempList.get(i);
+        							convertedCost = CardUtil.getConvertedManaCost(tempList.get(i).getManaCost());
+        						}//if
+        					}//for
+        				}//if
+
+        				//target something cheaper (manacost 0?) instead:
+        				if(target == null) {
+        					CardList humanPerms = new CardList();
+        					humanPerms.addAll(AllZone.Human_Play.getCards());
+        					humanPerms = humanPerms.filter(new CardListFilter() {
+        						public boolean addCard(Card c) {
+        							return c.isPermanent() && !c.isLand() && CardFactoryUtil.canTarget(card, c);
+        						}
+        					});
+
+        					if(humanPerms.size() > 0) target = humanPerms.get(0);
+        				}//if
+
+        				if(target == null) {
+        					//must target computer creature
+        					CardList computer = new CardList(AllZone.Computer_Play.getCards());
+        					computer = computer.getType("Creature");
+        					computer.remove(card);
+
+        					computer.shuffle();
+        					if(computer.size() != 0) target = computer.get(0);
+        					else target = card;
+        				}//if
+
+        				abilityComes.setTargetCard(target);
+        				AllZone.Stack.add(abilityComes);
+        			}//else
+        		}//execute()
+        	};//CommandComes
+
+        	Command commandLeavesPlay = new Command() {
+        		private static final long serialVersionUID = 6997038208952910355L;
+
+        		public void execute() {
+        			Object o = abilityComes.getTargetCard();
+        			if(o == null || ((Card) o).isToken() || !AllZone.GameAction.isCardRemovedFromGame((Card) o)) return;
+
+        			SpellAbility ability = new Ability(card, "0") {
+
+        				@Override
+        				public void resolve() {
+        					//copy card to reset card attributes like attack and defense
+        					Card c = abilityComes.getTargetCard();
+        					if(!c.isToken()) {
+        						c = AllZone.CardFactory.dynamicCopyCard(c);
+        						c.setController(c.getOwner());
+
+        						PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+        						PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
+        						removed.remove(c);
+        						if (c.isTapped()) c.untap();
+
+        						play.add(c);
+
+        					}//if
+        				}//resolve()
+        			};//SpellAbility
+        			ability.setStackDescription("Journey To Nowhere - returning creature to play.");
+        			AllZone.Stack.add(ability);
+        		}//execute()
+        	};//Command
+
+        	card.addComesIntoPlayCommand(commandComes);
+        	card.addLeavesPlayCommand(commandLeavesPlay);
+
+        	card.setSVar("PlayMain1", "TRUE");
+
+        	card.clearSpellAbility();
+		
+        	card.addSpellAbility(new Spell_Permanent(card) {
+        		private static final long serialVersionUID = -3250095291930182087L;
+
+        		@Override
+        		public boolean canPlayAI() {
+        			Object o = getPerm.execute();
+        			if(o == null) return false;
+
+        			CardList cList = new CardList(AllZone.Human_Play.getCards());
+        			cList = cList.filter(new CardListFilter() {
+        				public boolean addCard(Card crd) {
+        					return CardFactoryUtil.canTarget(card, crd) && crd.isCreature();
+        				}
+        			});
+
+        			CardList cl = (CardList) getPerm.execute();
+					return (o != null) && cList.size() > 0 && cl.size() > 0 && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
+        		}//canPlayAI
+        	});//addSpellAbility
+        }//*************** END ************ END **************************
         
-      //*************** START ********** START *************************
+        //*************** START ********** START *************************
         if (cardName.equals("Finest Hour") || cardName.equals("Gaea's Anthem") ||
         		cardName.equals("Glorious Anthem"))  
         	// no card factory code, cards handled elsewhere, 
         {
         	card.setSVar("PlayMain1", "TRUE");
-        }//*************** END ************ END **************************        
+        }//*************** END ************ END ************************** 
+        
 
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
