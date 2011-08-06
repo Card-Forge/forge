@@ -1,15 +1,19 @@
 BasicLandPercentage=37
 
-[Group MaxCnt=3 Percentage=36]
-Loxodon Punisher
-Stoneforge Mystic
+[Group MaxCnt=4 Percentage=20]
 Auriok Glaivemaster
 Kitesail Apprentice
 Kor Duelist
 Leonin Den-Guard
+Sunspear Shikari
+Stoneforge Mystic
+[/Group]
+
+[Group MaxCnt=2 Percentage=16]
+Kemba, Kha Regent
+Loxodon Punisher
 Myr Adapter
 Skyhunter Cub
-Sunspear Shikari
 Steelshaper Apprentice
 Raksha Golden Cub
 [/Group]
