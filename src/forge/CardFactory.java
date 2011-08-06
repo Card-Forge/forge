@@ -19515,6 +19515,9 @@ public class CardFactory implements NewConstants {
 			
 			public boolean canPlay()
 			{
+				if (!super.canPlay())
+					return false;
+				
 				if (getSourceCard().getAttachedCards().length > 0)
 				{
 					Card c = copyCard(getSourceCard().getAttachedCards()[0]);
