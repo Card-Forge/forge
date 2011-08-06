@@ -2,7 +2,7 @@ Name:Fallow Earth
 ManaCost:2 G
 Types:Sorcery
 Text:
-A:SP$ChangeZone | Cost$ 2 G | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination$ TopofLibrary | SpellDescription$ Put target land on top of its owner's library.
+A:SP$ChangeZone | Cost$ 2 G | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination $ Library | LibraryPosition$ 0 | SpellDescription$ Put target land on top of its owner's library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallow_earth.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/227.jpg

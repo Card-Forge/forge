@@ -682,7 +682,7 @@ public class AbilityFactory_ChangeZone {
 		 sb.append(host.getName()).append(" - ");
 		 
 		String destination = params.get("Destination");
-		String origin = params.get("Destination");
+		String origin = params.get("Origin");
 		 
 		 StringBuilder sbTargets = new StringBuilder();
 

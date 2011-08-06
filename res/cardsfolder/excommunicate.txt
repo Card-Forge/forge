@@ -2,7 +2,7 @@ Name:Excommunicate
 ManaCost:2 W
 Types:Instant
 Text:no text
-A:SP$ChangeZone | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ TopofLibrary | SpellDescription$ Put target creature on top of its owner's library.
+A:SP$ChangeZone | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination $ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature on top of its owner's library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/excommunicate.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/14.jpg
