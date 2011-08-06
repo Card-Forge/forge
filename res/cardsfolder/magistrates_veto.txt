@@ -6,4 +6,5 @@ K:stPumpAll:Creature.White,Creature.Blue:0/0/HIDDEN CARDNAME can't block.:No Con
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magistrates_veto.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/204.jpg
 End

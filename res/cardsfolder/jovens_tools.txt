@@ -5,4 +5,6 @@ Text:no text
 A:AB$Pump | Cost$ 4 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't be blocked except by Walls. | SpellDescription$ Target creature can't be blocked this turn except by Walls.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/133.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/386.jpg
 End

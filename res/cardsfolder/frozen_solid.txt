@@ -6,4 +6,6 @@ K:Enchant creature
 K:enPumpCurse:HIDDEN CARDNAME doesn't untap during your untap step.& HIDDEN When CARDNAME is dealt damage, destroy it.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frozen_solid.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/36.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/35.jpg
 End

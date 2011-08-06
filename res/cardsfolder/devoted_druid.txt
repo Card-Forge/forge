@@ -7,4 +7,5 @@ K:tap: add G
 A:AB$Untap | Cost$ AddCounter<1/M1M1> | SpellDescription$ Untap CARDNAME.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/110.jpg
 End

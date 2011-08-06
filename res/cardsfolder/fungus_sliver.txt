@@ -7,4 +7,5 @@ K:stPumpAll:Creature.Sliver:0/0/Whenever CARDNAME is dealt damage, put a +1/+1 c
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungus_sliver.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/195.jpg
 End

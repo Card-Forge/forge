@@ -5,4 +5,6 @@ Text:no text
 K:stPumpAll:Creature.YouCtrl:0/0/HIDDEN Whenever CARDNAME deals damage, you gain that much life.:No Condition:Whenever a creature you control deals combat damage, you gain that much life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_purpose.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/31.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/32.jpg
 End

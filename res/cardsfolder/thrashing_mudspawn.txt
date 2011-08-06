@@ -7,4 +7,5 @@ K:Whenever CARDNAME is dealt damage, you lose that much life.
 K:Morph:1 B B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thrashing_mudspawn.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/177.jpg
 End

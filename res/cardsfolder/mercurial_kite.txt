@@ -7,4 +7,5 @@ K:Flying
 K:Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mercurial_kite.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/39.jpg
 End

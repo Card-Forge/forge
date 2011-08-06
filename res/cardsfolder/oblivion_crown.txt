@@ -8,4 +8,5 @@ A:AB$Pump | Cost$ Discard<1/Any> | Defined$ Enchanted | NumAtt$ +1 | NumDef$ +1 
 K:Flash
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oblivion_crown.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/73.jpg
 End

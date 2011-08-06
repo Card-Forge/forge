@@ -5,4 +5,5 @@ Text:no text
 PT:2/3
 K:CARDNAME can't be blocked by more than one creature.
 SVar:Rarity:Rare
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/8.jpg
 End

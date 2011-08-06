@@ -6,4 +6,7 @@ PT:1/1
 K:Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_berserker.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/110.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/237.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/260.jpg
 End

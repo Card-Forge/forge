@@ -6,4 +6,5 @@ A:SP$Pump | Cost$ 1 B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wicked_reward.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/25.jpg
 End

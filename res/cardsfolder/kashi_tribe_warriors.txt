@@ -6,4 +6,5 @@ PT:2/4
 K:Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kashi_tribe_warriors.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/221.jpg
 End

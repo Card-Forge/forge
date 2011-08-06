@@ -8,4 +8,5 @@ K:Flying
 A:AB$Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME attacks each turn if able. | SpellDescription$ Target creature attacks this turn if able.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/160.jpg
 End

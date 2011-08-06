@@ -7,4 +7,5 @@ K:enPump:+0/+0
 A:AB$Pump | Cost$ B | Defined$ Enchanted | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ This creature gets +1/+1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midnight_covenant.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/125.jpg
 End

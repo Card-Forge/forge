@@ -6,4 +6,5 @@ PT:4/5
 K:stPumpAll:Creature.Black:0/0/HIDDEN CARDNAME can't block.:No Condition:Black creatures can't block.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorjaw_oni.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/87.jpg
 End

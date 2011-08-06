@@ -8,4 +8,5 @@ A:AB$Pump | Cost$ Sac<1/Creature> | Defined$ Enchanted | NumAtt$ +2 | NumDef$ +1
 K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fallen_ideal.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/109.jpg
 End

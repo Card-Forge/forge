@@ -7,4 +7,5 @@ K:Enchant creature
 K:enPumpCurse:HIDDEN Whenever CARDNAME is dealt damage, you lose that much life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ragged_veins.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/139.jpg
 End

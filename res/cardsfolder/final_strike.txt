@@ -7,4 +7,5 @@ SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/final_strike.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/16.jpg
 End

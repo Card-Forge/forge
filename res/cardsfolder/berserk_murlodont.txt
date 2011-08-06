@@ -6,4 +6,5 @@ PT:3/3
 K:stPumpAll:Beast:0/0/HIDDEN Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.:no Condition:Whenever a Beast becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/berserk_murlodont.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/117.jpg
 End

@@ -6,4 +6,5 @@ K:CARDNAME enters the battlefield tapped.
 K:etbCounter:DEPLETION:2
 SVar:Rarity:Common
 SVar:Picture:http://wizards.com/global/images/magic/general/saprazzan_skerry.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/328.jpg
 End

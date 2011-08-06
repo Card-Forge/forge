@@ -7,4 +7,5 @@ K:stPumpAll:Snake.Legendary.YouCtrl:0/0/Shroud:no Condition:Legendary Snakes you
 K:Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kashi_tribe_elite.jpg
+SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/135.jpg
 End
