@@ -2735,7 +2735,7 @@ public class Card extends MyObservable {
 		
              else if (Property.startsWith("blocked")) { if(!AllZone.Combat.isBlocked(this))  return false;}
         
-             else if (Property.startsWith("unblocked")) { if(AllZone.Combat.isBlocked(this))  return false;}
+             else if (Property.startsWith("unblocked")) { if(!AllZone.Combat.isUnblocked(this))  return false;}
         
              else if (Property.startsWith("kicked")) { if(!isKicked()) return false; }
         
