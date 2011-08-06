@@ -1,5 +1,5 @@
 Deadly Grub
-B
+2 B
 Creature Insect
 When Deadly Grub is put into a graveyard from the battlefield, if it had no time counters on it, put a 6/1 green Insect creature token with shroud onto the battlefield. (It can’t be the target of spells or abilities.)
 3/1

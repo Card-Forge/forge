@@ -1493,6 +1493,24 @@ public class CardFactoryUtil
 	  
       public void execute()
       {
+    	  AllZone.Stack.add(soul_desc(sourceCard, Manacost));
+          }
+      
+    };
+
+    return Soulshift;
+  }//ability_Soulshift()
+
+  public static SpellAbility soul_desc(final Card sourceCard, final String Manacost)
+  {
+    final SpellAbility desc = new Ability_Hand(sourceCard, "0")
+    {
+	  private static final long serialVersionUID = -4960704261761785512L;
+
+	  public boolean canPlay() {return false;}
+	  
+      public void resolve()
+      {
     	  PlayerZone lib = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
           PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, sourceCard.getController());
                  
@@ -1539,29 +1557,12 @@ public class CardFactoryUtil
             	lib.remove(choice);
                 hand.add(choice);}
             }
-          }
-      
-    };
-
-    return Soulshift;
-  }//ability_Soulshift()
-
-  public static SpellAbility soul_desc(final Card sourceCard, final String Manacost)
-  {
-    final SpellAbility desc = new Ability_Hand(sourceCard, "0")
-    {
-	  private static final long serialVersionUID = -4960704261761785512L;
-
-	  public boolean canPlay() {return false;}
-	  
-      public void resolve()
-      {
       }
     };
     desc.setDescription("Soulshift "  + Manacost +" - When this permanent is put into a graveyard from play, you may return target Spirit card with converted mana cost " + Manacost + "or less from your graveyard to your hand.");
+    desc.setStackDescription(sourceCard.getName() + " - Soulshift " + Manacost);
     return desc;
   }//soul_desc()
-
   
   //CardList choices are the only cards the user can successful select
   public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, final boolean targeted)

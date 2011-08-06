@@ -5693,7 +5693,8 @@ public class GameActionUtil
 	}
 
 	private static void upkeep_Vanishing()
-	{	
+	{
+		
 		final String player = AllZone.Phase.getActivePlayer();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList(playZone.getCards());
@@ -5714,16 +5715,26 @@ public class GameActionUtil
 		{
 			for (int i = 0; i < list.size(); i++)
 			{
-				Card card = list.get(i);
-				card.setCounter(Counters.AGE,
+				final Card card = list.get(i);
+				Ability ability = new Ability(card, "0")
+				{
+					public void resolve()
+					{
+				        card.setCounter(Counters.AGE,
 						card.getCounters(Counters.AGE) - 1);
-				if (card.getCounters(Counters.AGE) <= 0)
+				    if (card.getCounters(Counters.AGE) <= 0)
 				{
 					AllZone.GameAction.sacrifice(card);
 				}
-			}
+					}
+				};   // ability
+				ability.setStackDescription(card.getName() + " - Vanishing - remove a time counter from it. When the last is removed, sacrifice it.)");
+				AllZone.Stack.add(ability);
+				
+					}
 		}
 	}
+
 	
 	private static void upkeep_Aven_Riftwatcher()
 	{
