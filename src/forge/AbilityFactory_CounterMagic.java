@@ -143,6 +143,7 @@ public class AbilityFactory_CounterMagic {
                     
                     public void execute() {
                     	removeFromStack(tgtSA,sa);
+                    	if(params.containsKey("PowerSink")) doPowerSink(AllZone.HumanPlayer);
                     }
                 };
                 
@@ -153,6 +154,7 @@ public class AbilityFactory_CounterMagic {
                     if(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
                     else {
                         removeFromStack(tgtSA,sa);
+                        if(params.containsKey("PowerSink")) doPowerSink(AllZone.ComputerPlayer);
                     }
                 }
                 doExtraActions(tgtSA,sa);
@@ -180,6 +182,21 @@ public class AbilityFactory_CounterMagic {
 		//reset tgts
 		tgt[0] = null;
 		
+	}
+	
+	private void doPowerSink(Player p) {
+		//get all lands with mana abilities
+		CardList lands = AllZoneUtil.getPlayerLandsInPlay(p);
+		lands = lands.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				return c.getManaAbility().size() > 0;
+			}
+		});
+		//tap them
+		for(Card c:lands) c.tap();
+		
+		//empty mana pool
+		if(p.isHuman()) AllZone.ManaPool.clearPool();
 	}
 
 	private String counterStackDescription(AbilityFactory af, SpellAbility sa){
