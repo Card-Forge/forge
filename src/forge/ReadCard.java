@@ -10,7 +10,6 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
 
-
 public class ReadCard implements Runnable, NewConstants {
     private BufferedReader  in;
     private ArrayList<Card> allCards = new ArrayList<Card>();
@@ -76,14 +75,7 @@ public class ReadCard implements Runnable, NewConstants {
             
 
             s = readLine();
-            if(!s.equals("no cost")) {
-            	c.setManaCost(s);
-            	//c.setBaseColors(c.getColorsBasedOnManaCost());
-            }
-            else {
-            	//c.setBaseColors(new ArrayList<Color>());
-            }
-            //c.setColors(c.getBaseColors());
+            if(!s.equals("no cost")) c.setManaCost(s);
             
             s = readLine();
             addTypes(c, s);
