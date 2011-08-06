@@ -9055,7 +9055,77 @@ public class GameActionUtil {
 		}// execute()
 
 	};
-
+	
+    public static Command Akromas_Memorial                = new Command() {
+        
+        private static final long serialVersionUID   = -670715429635395830L;
+        CardList                  gloriousAnthemList = new CardList();
+       
+        public void execute() {
+            String keyword1 = "Flying";
+            String keyword2 = "First Strike";
+            String keyword3 = "Vigilance";
+            String keyword4 = "Trample";
+            String keyword5 = "Haste";
+            String keyword6 = "Protection from Black";
+            String keyword7 = "Protection from Red";
+            CardList list = gloriousAnthemList;
+            Card c;
+            // reset all cards in list - aka "old" cards
+            for(int i = 0; i < list.size(); i++) {
+                c = list.get(i);
+                c.removeExtrinsicKeyword(keyword1);
+                c.removeExtrinsicKeyword(keyword2);
+                c.removeExtrinsicKeyword(keyword3);
+                c.removeExtrinsicKeyword(keyword4);
+                c.removeExtrinsicKeyword(keyword5);
+                c.removeExtrinsicKeyword(keyword6);
+                c.removeExtrinsicKeyword(keyword7);
+            }
+           
+            list.clear();
+            PlayerZone[] zone = getZone("Akroma's Memorial");
+           
+            for(int outer = 0; outer < zone.length; outer++) {
+                CardList creature = new CardList(
+                        zone[outer].getCards());
+                creature = creature.getType("Creature");
+               
+                for(int i = 0; i < creature.size(); i++) {
+                    c = creature.get(i);
+                    if(!c.getKeyword().contains(keyword1)) {
+                        c.addExtrinsicKeyword(keyword1);
+                        gloriousAnthemList.add(c);
+                    }
+                    if(!c.getKeyword().contains(keyword2)) {
+                        c.addExtrinsicKeyword(keyword2);
+                        gloriousAnthemList.add(c);
+                    }
+                    if(!c.getKeyword().contains(keyword3)) {
+                        c.addExtrinsicKeyword(keyword3);
+                        gloriousAnthemList.add(c);
+                    }
+                    if(!c.getKeyword().contains(keyword4)) {
+                        c.addExtrinsicKeyword(keyword4);
+                        gloriousAnthemList.add(c);
+                    }
+                    if(!c.getKeyword().contains(keyword5)) {
+                        c.addExtrinsicKeyword(keyword5);
+                        gloriousAnthemList.add(c);
+                    }
+                    if(!c.getKeyword().contains(keyword6)) {
+                        c.addExtrinsicKeyword(keyword6);
+                        gloriousAnthemList.add(c);
+                    }
+                    if(!c.getKeyword().contains(keyword7)) {
+                        c.addExtrinsicKeyword(keyword7);
+                        gloriousAnthemList.add(c);
+                    }
+                }// for inner
+            }// for outer
+        }// execute()
+    };
+    
 	public static Command Levitation                  = new Command() {
 
 		private static final long serialVersionUID   = -6707183535529395830L;
@@ -17274,6 +17344,7 @@ public class GameActionUtil {
 		commands.put("Giant_Tortoise", Giant_Tortoise);
 
 		commands.put("Darksteel_Forge", Darksteel_Forge);
+		commands.put("Akromas_Memorial", Akromas_Memorial);
 		commands.put("Levitation", Levitation);
 		commands.put("Knighthood", Knighthood);
 		commands.put("Absolute_Law", Absolute_Law);

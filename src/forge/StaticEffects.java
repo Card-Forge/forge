@@ -160,6 +160,7 @@ public class StaticEffects
 		cardToEffectsList.put("Giant Tortoise", new String[] {"Giant_Tortoise"});
 		cardToEffectsList.put("Castle Raptors", new String[] {"Castle_Raptors"});
 		cardToEffectsList.put("Darksteel Forge", new String[] {"Darksteel_Forge"} );
+		cardToEffectsList.put("Akroma's Memorial", new String[] {"Akromas_Memorial"});
 		cardToEffectsList.put("Levitation", new String[] {"Levitation"});
 		cardToEffectsList.put("Knighthood", new String[] {"Knighthood"});
 		cardToEffectsList.put("Absolute Law", new String[] {"Absolute_Law"});
