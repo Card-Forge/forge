@@ -202,7 +202,7 @@ public class Spell_Permanent extends Spell {
             	return false;
         }
 
-        if(!(AllZone.ComputerPlayer.getLife() > (loseLifeAmount+3))) {
+        if(loseLifeAmount > 0 && AllZone.ComputerPlayer.getLife() <= (loseLifeAmount+3)) {
     		return false;
     	}
         
