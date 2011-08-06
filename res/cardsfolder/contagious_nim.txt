@@ -1,4 +1,4 @@
-Name:Contagiuos Nim
+Name:Contagious Nim
 ManaCost:2 B
 Types:Creature Zombie
 Text:no text
