@@ -23,7 +23,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 
 		Card c = (Card) o;
 		
-		if (CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact() ))
+		if (trigger && CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact() ))
 			c.tap();
 		
 		//cannot use addComesIntoPlayCommand - trigger might be set to false;
@@ -53,6 +53,9 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 			
 			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
 			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
+			
+			if (CardFactoryUtil.getCards("Amulet of Vigor", c.getController()).size() > 0 && c.isTapped())
+				c.untap();
 			
 			if (c.isLand())
 			{
@@ -242,7 +245,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 			Command com = GameActionUtil.commands.get(effect);
 			com.execute();
 		}
-		
 		
 	}
 
