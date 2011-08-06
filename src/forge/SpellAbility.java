@@ -28,7 +28,8 @@ public abstract class SpellAbility
   private Input afterResolve;
   private Input afterPayMana;
   
-  private Command cancelCommand = null;
+  private Command cancelCommand = Command.Blank;
+  private Command beforePayManaAI = Command.Blank;
 
   private CommandArgs randomTarget = new CommandArgs() {
   
@@ -89,11 +90,14 @@ public void execute(Object o) {}};
 
   public void setSourceCard(Card c) {sourceCard=c;}
   public Card getSourceCard()  {return sourceCard;}
-
+  
+  public Command getBeforePayManaAI() 		 { return beforePayManaAI; }
+  public void setBeforePayManaAI(Command c)  { beforePayManaAI = c; }
+  
   //begin - Input methods
   public Input getBeforePayMana()            {return beforePayMana;}
   public void  setBeforePayMana(Input in) {beforePayMana = in; }
-
+  
   public Input getAfterPayMana()            {return afterPayMana;}
   public void  setAfterPayMana(Input in) {afterPayMana = in;}
 

@@ -67,7 +67,8 @@ public class WaveFileObuffer extends Obuffer
 	
 	outWave = new WaveFile();
 	
-    int rc = outWave.OpenForWrite (FileName,freq,(short)16,(short)channels);
+    @SuppressWarnings("unused")
+	int rc = outWave.OpenForWrite (FileName,freq,(short)16,(short)channels);
   }
 
   /**
@@ -86,8 +87,10 @@ public class WaveFileObuffer extends Obuffer
   public void write_buffer(int val)
   {
 	  
-    int k = 0;
-    int rc = 0;
+    @SuppressWarnings("unused")
+	int k = 0;
+    @SuppressWarnings("unused")
+	int rc = 0;
     
 	rc = outWave.WriteData(buffer, bufferp[0]);
 	// REVIEW: handle RiffFile errors. 

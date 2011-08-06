@@ -466,6 +466,7 @@ public class RiffFile
    /**
     * Error Messages.
 	*/
+   @SuppressWarnings("unused")
    private String DDCRET_String(int retcode)
    {
    	 switch ( retcode )
@@ -484,6 +485,7 @@ public class RiffFile
    /**
     * Fill the header.
 	*/
+   @SuppressWarnings("deprecation")
    public static int FourCC(String ChunkName)
    {
       byte[] p = {0x20,0x20,0x20,0x20};

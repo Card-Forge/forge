@@ -73,6 +73,12 @@ private Card getCurrentCard(int ID)
     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
     moveTo(grave, c);
   }
+  
+  public void moveToHand(Card c)
+  {
+	  PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
+	  moveTo(hand, c);
+  }
 
   public void moveToTopOfLibrary(Card c)
   {

@@ -3477,8 +3477,6 @@ public class CardFactory implements NewConstants {
      card.addSpellAbility(spell);
    }//*************** END ************ END **************************
     
-    
- 
 
 
     //contributed code
@@ -4167,147 +4165,6 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(ability);
     }//*************** END ************ END **************************
 
-
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Terror"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = 8809370679594989382L;
-		
-		public boolean canPlayAI()
-        {
-          return (getCreature().size() != 0) && (AllZone.Phase.getTurn() > 4);
-        }
-        public void chooseTargetAI()
-        {
-          Card best = CardFactoryUtil.AI_getBestCreature(getCreature());
-          setTargetCard(best);
-        }
-        CardList getCreature()
-        {
-          CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
-          list = list.filter(new CardListFilter()
-          {
-            public boolean addCard(Card c)
-            {
-              return (! CardUtil.getColors(c).contains(Constant.Color.Black)) &&
-                     (! c.getType().contains("Artifact"))                     &&
-                     (2 < c.getNetAttack());
-            }
-          });
-          return list;
-        }//getCreature()
-        public void resolve()
-        {
-          if (AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()))
-        	  AllZone.GameAction.destroyNoRegeneration(getTargetCard());
-        }//resolve()
-      };
-
-      Input runtime = new Input()
-      {
-		private static final long serialVersionUID = -1750678113925588670L;
-
-		public void showMessage()
-        {
-          CardList choice = new CardList();
-          choice.addAll(AllZone.Human_Play.getCards());
-          choice.addAll(AllZone.Computer_Play.getCards());
-
-          choice = choice.getType("Creature");
-          choice = choice.filter(new CardListFilter()
-          {
-            public boolean addCard(Card c)
-            {
-              return (! CardUtil.getColors(c).contains(Constant.Color.Black)) &&
-                     (! c.getType().contains("Artifact"));
-            }
-          });
-
-          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, choice, "Select target non-artifact, non-black creature to destroy.", true));
-        }
-      };
-
-      card.clearSpellAbility();
-      spell.setBeforePayMana(runtime);
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-*/
-
-
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Expunge"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = 5773953475935635628L;
-		
-		public boolean canPlayAI()
-        {
-          return (getCreature().size() != 0) && (AllZone.Phase.getTurn() > 4);
-        }
-        public void chooseTargetAI()
-        {
-          Card best = CardFactoryUtil.AI_getBestCreature(getCreature());
-          setTargetCard(best);
-        }
-        CardList getCreature()
-        {
-          CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
-          list = list.filter(new CardListFilter()
-          {
-            public boolean addCard(Card c)
-            {
-              return (! CardUtil.getColors(c).contains(Constant.Color.Black)) &&
-                     (! c.getType().contains("Artifact"))                     &&
-                     (2 < c.getNetAttack());
-            }
-          });
-          return list;
-        }//getCreature()
-        public void resolve()
-        {
-          AllZone.GameAction.destroyNoRegeneration(getTargetCard());
-        }//resolve()
-      };
-
-      Input runtime = new Input()
-      {
-		private static final long serialVersionUID = 3015711791310250186L;
-
-		public void showMessage()
-        {
-          CardList choice = new CardList();
-          choice.addAll(AllZone.Human_Play.getCards());
-          choice.addAll(AllZone.Computer_Play.getCards());
-
-          choice = choice.getType("Creature");
-          choice = choice.filter(new CardListFilter()
-          {
-            public boolean addCard(Card c)
-            {
-              return (! CardUtil.getColors(c).contains(Constant.Color.Black)) &&
-                     (! c.getType().contains("Artifact"));
-            }
-          });
-
-          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, choice, "Select target non-artifact, non-black creature to destroy.", true));
-        }
-      };
-
-      card.clearSpellAbility();
-      spell.setBeforePayMana(runtime);
-
-      spell.setDescription(card.getText());
-      card.addSpellAbility(spell);
-
-
-      card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2"));
-    }//*************** END ************ END **************************
-*/
 
 
     //*************** START *********** START **************************
@@ -7907,65 +7764,6 @@ public class CardFactory implements NewConstants {
       spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
     }//*************** END ************ END **************************
 
-
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Douse in Gloom"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = 7134826062024728943L;
-
-		public boolean canPlayAI()
-        {
-          CardList c = getCreature();
-          if(c.isEmpty())
-            return false;
-          else
-          {
-            setTargetCard(c.get(0));
-            return true;
-          }
-        }//canPlayAI()
-        CardList getCreature()
-        {
-          CardList out = new CardList();
-          CardList list = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-          list.shuffle();
-
-          for(int i = 0; i < list.size(); i++)
-            if((list.get(i).getNetAttack() >= 2) && (list.get(i).getNetDefense() <= 2))
-              out.add(list.get(i));
-
-          //in case human player only has a few creatures in play, target anything
-          if(out.isEmpty() &&
-              0 < CardFactoryUtil.AI_getHumanCreature(2, card, true).size() &&
-             3 > CardFactoryUtil.AI_getHumanCreature(card, true).size())
-          {
-            out.addAll(CardFactoryUtil.AI_getHumanCreature(2, card, true).toArray());
-            CardListUtil.sortFlying(out);
-          }
-          return out;
-        }//getCreature()
-
-
-        public void resolve()
-        {
-          if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
-          {
-            getTargetCard().addDamage(2, card);
-            AllZone.GameAction.getPlayerLife(card.getController()).addLife(2);
-          }
-        }//resolve()
-      };
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-    }//*************** END ************ END **************************
-*/
-
-
     //*************** START *********** START **************************
     else if(cardName.equals("Echoing Decay"))
     {
@@ -8499,244 +8297,6 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Cackling Flames"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = 2635417318395677454L;
-		
-		int damage = 3;
-        Card check;
-        public boolean canPlayAI()
-        {
-          if(AllZone.Human_Life.getLife() <= damage)
-            return true;
-
-          check = getFlying();
-          return check != null;
-        }
-        public void chooseTargetAI()
-        {
-          if(AllZone.Human_Life.getLife() <= damage)
-          {
-            setTargetPlayer(Constant.Player.Human);
-            return;
-          }
-
-          Card c = getFlying();
-          if((c == null) || (! check.equals(c)))
-            throw new RuntimeException(card +" error in chooseTargetAI() - Card c is " +c +",  Card check is " +check);
-
-          setTargetCard(c);
-        }//chooseTargetAI()
-
-        //uses "damage" variable
-        Card getFlying()
-        {
-          CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-          for(int i = 0; i < flying.size(); i++)
-            if(flying.get(i).getNetDefense() <= damage)
-              return flying.get(i);
-
-          return null;
-        }
-
-        public void resolve()
-        {
-          int damage = getDamage();
-
-          if(getTargetCard() != null)
-          {
-            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
-            {
-              Card c = getTargetCard();
-              c.addDamage(damage, card);
-            }
-          }
-          else
-            AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
-        }
-        int getDamage()
-        {
-          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-          if(hand.size() == 0)
-            return 5;
-
-          return 3;
-        }
-      };//SpellAbility
-      card.clearSpellAbility();
-
-      card.addSpellAbility(spell);
-
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell,true));
-    }//*************** END ************ END **************************
-*/
-    
-/*
-  //*************** START *********** START **************************
-    else if(cardName.equals("Mob Justice"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-
-		private static final long serialVersionUID = -671093248575416927L;
-		
-		public boolean canPlayAI()
-        {
-          int damage = countControlledCreatures(Constant.Player.Computer);
-
-          if(AllZone.Human_Life.getLife() <= damage || damage >= 4)
-            return true;
-          
-          PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
-          CardList hand = new CardList(compHand.getCards());
-          
-          if (hand.size() >= 8)
-        	return true;
-          
-          return false;
-        }
-        public void chooseTargetAI()
-        {
-          setTargetPlayer(Constant.Player.Human);
-        }//chooseTargetAI()
-
-        public void resolve()
-        {
-        	int damage = countControlledCreatures(card.getController());
-            AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
-        }
-        //count basic lands you control
-        int countControlledCreatures(String player)
-        {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-          CardList creatures = new CardList(play.getCards());
-          creatures = creatures.getType("Creature");
-
-          return creatures.size();
-        }//countControlledCreatures();
-
-      };//SpellAbility
-      card.clearSpellAbility();
-
-      card.addSpellAbility(spell);
-
-      spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-    }//*************** END ************ END **************************
-*/
-
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Tribal Flames"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -9055422004395136061L;
-		
-		Card check;
-        public boolean canPlayAI()
-        {
-          int damage = countLandTypes();
-
-          if(AllZone.Human_Life.getLife() <= damage)
-            return true;
-          
-          PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
-          CardList hand = new CardList(compHand.getCards());
-          
-          if (hand.size() >= 8)
-        	return true;
-
-          check = getFlying();
-          return check != null;
-        }
-        public void chooseTargetAI()
-        {
-          int damage = countLandTypes();
-
-          if(AllZone.Human_Life.getLife() <= damage)
-          {
-            setTargetPlayer(Constant.Player.Human);
-            return;
-          }
-          
-          PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
-          CardList hand = new CardList(compHand.getCards());
-          
-          if(getFlying() == null && hand.size() >= 7 ) //not 8, since it becomes 7 when getting cast
-          {
-        	  setTargetPlayer(Constant.Player.Human);
-        	  return;
-          }
-
-          Card c = getFlying();
-          if((c == null) || (! check.equals(c)))
-            throw new RuntimeException(card +" error in chooseTargetAI() - Card c is " +c +",  Card check is " +check);
-
-          setTargetCard(c);
-        }//chooseTargetAI()
-
-        //uses "damage" variable
-        Card getFlying()
-        {
-          int damage = countLandTypes();
-
-          CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-          for(int i = 0; i < flying.size(); i++)
-            if(flying.get(i).getNetDefense() <= damage)
-              return flying.get(i);
-
-          return null;
-        }
-
-
-        public void resolve()
-        {
-          int damage = countLandTypes();
-
-          if(getTargetCard() != null)
-          {
-            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
-            {
-              Card c = getTargetCard();
-              c.addDamage(damage, card);
-            }
-          }
-          else
-            AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
-        }
-        //count basic lands you control
-        int countLandTypes()
-        {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          CardList land = new CardList(play.getCards());
-
-          String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp"};
-          int count = 0;
-
-          for(int i = 0; i < basic.length; i++)
-          {
-            CardList c = land.getType(basic[i]);
-            if(! c.isEmpty())
-              count++;
-          }
-
-          return count;
-        }//countLandTypes()
-
-      };//SpellAbility
-      card.clearSpellAbility();
-
-      card.addSpellAbility(spell);
-
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell,true));
-    }//*************** END ************ END **************************
-*/
-    
-
     //*************** START *********** START **************************
     else if(cardName.equals("Erratic Explosion"))
     {
@@ -8827,230 +8387,6 @@ public class CardFactory implements NewConstants {
 
       spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true));
     }//*************** END ************ END **************************
-
-  
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Char"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -1379875309204771345L;
-		
-		int damage = 4;
-        Card check;
-        public boolean canPlayAI()
-        {
-          if(AllZone.Computer_Life.getLife() < 2)
-            return false;
-
-          if(AllZone.Human_Life.getLife() <= damage)
-            return true;
-          
-          PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
-          CardList hand = new CardList(compHand.getCards());
-          
-          if (hand.size() >= 8)
-        	return true;
-
-          check = getFlying();
-          return check != null;
-        }
-        public void chooseTargetAI()
-        {
-          if(AllZone.Human_Life.getLife() <= damage)
-          {
-            setTargetPlayer(Constant.Player.Human);
-            return;
-          }
-          
-          PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
-          CardList hand = new CardList(compHand.getCards());
-          
-          if(getFlying() == null && hand.size() >= 7 ) //not 8, since it becomes 7 when getting cast
-          {
-        	  setTargetPlayer(Constant.Player.Human);
-        	  return;
-          }
-
-          Card c = getFlying();
-          if((c == null) || (! check.equals(c)))
-            throw new RuntimeException(card +" error in chooseTargetAI() - Card c is " +c +",  Card check is " +check);
-
-          setTargetCard(c);
-        }//chooseTargetAI()
-
-        //uses "damage" variable
-        Card getFlying()
-        {
-          CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-          for(int i = 0; i < flying.size(); i++)
-            if(flying.get(i).getNetDefense() <= damage)
-              return flying.get(i);
-
-          return null;
-        }
-        public void resolve()
-        {
-          if(getTargetCard() != null)
-          {
-            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
-            {
-              Card c = getTargetCard();
-              c.addDamage(damage, card);
-              AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
-            }
-          }
-          else
-          {
-            AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
-            AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
-          }
-
-        }
-      };//SpellAbility
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-
-      Input target = new Input()
-      {
-		private static final long serialVersionUID = -7645439029870010010L;
-		
-		public void showMessage()
-        {
-          AllZone.Display.showMessage("Select target Creature, Player or Planeswalker");
-          ButtonUtil.enableOnlyCancel();
-        }
-        public void selectButtonCancel() {stop();}
-        public void selectCard(Card card, PlayerZone zone)
-        {
-          if((card.isCreature() || card.isPlaneswalker())&& zone.is(Constant.Zone.Play))
-          {
-            spell.setTargetCard(card);
-            stopSetNext(new Input_PayManaCost(spell));
-          }
-        }//selectCard()
-        public void selectPlayer(String player)
-        {
-          spell.setTargetPlayer(player);
-          stopSetNext(new Input_PayManaCost(spell));
-        }
-      };
-      spell.setBeforePayMana(target);
-    }//*************** END ************ END **************************
-*/
-
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Psionic Blast"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -5315747587330795963L;
-		
-		int damage = 4;
-        Card check;
-        public boolean canPlayAI()
-        {
-          if(AllZone.Computer_Life.getLife() <= 2)
-            return false;
-
-          if(AllZone.Human_Life.getLife() <= damage)
-            return true;
-          
-          PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
-          CardList hand = new CardList(compHand.getCards());
-          
-          if (hand.size() >= 8)
-        	return true;
-
-          check = getFlying();
-          return check != null;
-        }
-        public void chooseTargetAI()
-        {
-          if(AllZone.Human_Life.getLife() <= damage)
-          {
-            setTargetPlayer(Constant.Player.Human);
-            return;
-          }
-          
-          PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
-          CardList hand = new CardList(compHand.getCards());
-          
-          if(getFlying() == null && hand.size() >= 7 ) //not 8, since it becomes 7 when getting cast
-          {
-        	  setTargetPlayer(Constant.Player.Human);
-        	  return;
-          }
-
-          Card c = getFlying();
-          if((c == null) || (! check.equals(c)))
-            throw new RuntimeException(card +" error in chooseTargetAI() - Card c is " +c +",  Card check is " +check);
-
-          setTargetCard(c);
-        }//chooseTargetAI()
-
-        //uses "damage" variable
-        Card getFlying()
-        {
-          CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-          for(int i = 0; i < flying.size(); i++)
-            if(flying.get(i).getNetDefense() <= damage)
-              return flying.get(i);
-
-          return null;
-        }
-        public void resolve()
-        {
-          if(getTargetCard() != null)
-          {
-            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()))
-            {
-              Card c = getTargetCard();
-              c.addDamage(damage, card);
-              AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
-            }
-          }
-          else
-          {
-            AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
-            AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
-          }
-
-        }
-      };//SpellAbility
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-
-      Input target = new Input()
-      {
-		private static final long serialVersionUID = -3883369136409452222L;
-		
-		public void showMessage()
-        {
-          AllZone.Display.showMessage("Select target Creature, Player or Planeswalker");
-          ButtonUtil.enableOnlyCancel();
-        }
-        public void selectButtonCancel() {stop();}
-        public void selectCard(Card card, PlayerZone zone)
-        {
-          if((card.isCreature() || card.isPlaneswalker())&& zone.is(Constant.Zone.Play))
-          {
-            spell.setTargetCard(card);
-            stopSetNext(new Input_PayManaCost(spell));
-          }
-        }//selectCard()
-        public void selectPlayer(String player)
-        {
-          spell.setTargetPlayer(player);
-          stopSetNext(new Input_PayManaCost(spell));
-        }
-      };
-      spell.setBeforePayMana(target);
-    }//*************** END ************ END **************************
-*/
-
 
     //*************** START *********** START **************************
     else if(cardName.equals("Hidetsugu's Second Rite"))
@@ -11609,56 +10945,6 @@ public class CardFactory implements NewConstants {
       card.setFlashback(true);
     }//*************** END ************ END **************************
 
-    
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Tendrils of Corruption"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -618587752177627111L;
-
-		public boolean canPlayAI()
-        {
-          CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
-          return 0 < human.size();
-        }//canPlayAI()
-
-        public void chooseTargetAI()
-        {
-          CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
-          CardListUtil.sortAttack(human);
-          setTargetCard(human.get(0));
-        }
-
-        public void resolve()
-        {
-          if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
-          {
-            int n = countSwamps();
-            getTargetCard().addDamage(n, card);
-
-            PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-            life.addLife(n);
-          }
-        }//resolve()
-
-        int countSwamps()
-        {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          CardList list = new CardList(play.getCards());
-          list = list.getType("Swamp");
-          return list.size();
-        }
-      };//SpellAbility
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-*/
-
-
     //*************** START *********** START **************************
     else if(cardName.equals("Ichor Slick"))
     {
@@ -13345,110 +12631,6 @@ public class CardFactory implements NewConstants {
 
       spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
     }//*************** END ************ END **************************
-    
-  
-/*
-  //*************** START *********** START **************************
-    else if(cardName.equals("Lightning Helix"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-        private static final long serialVersionUID = -2880908876263802588L;
-		int damage = 3;
-        Card check;
-        public boolean canPlayAI()
-        {
-          if(AllZone.Human_Life.getLife() <= damage)
-            return true;
-          
-          PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
-          CardList hand = new CardList(compHand.getCards());
-          
-          if (hand.size() >= 8)
-        	return true;
-
-          check = getFlying();
-          return check != null;
-        }
-        public void chooseTargetAI()
-        {
-          if(AllZone.Human_Life.getLife() <= damage)
-          {
-            setTargetPlayer(Constant.Player.Human);
-            return;
-          }
-
-          Card c = getFlying();
-          if((c == null) || (! check.equals(c)))
-            throw new RuntimeException(card +" error in chooseTargetAI() - Card c is " +c +",  Card check is " +check);
-
-          if (c == null) {
-        	  setTargetPlayer(Constant.Player.Human);
-        	  return;
-          }
-          setTargetCard(c);
-        }//chooseTargetAI()
-
-        //uses "damage" variable
-        Card getFlying()
-        {
-          CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-          for(int i = 0; i < flying.size(); i++)
-            if(flying.get(i).getNetDefense() <= damage)
-              return flying.get(i);
-
-          return null;
-        }
-
-        public void resolve()
-        {
-          if(getTargetCard() != null)
-          {
-            if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()))
-            {
-              Card c = getTargetCard();
-              c.addDamage(damage, card);
-            }
-          }
-          else
-            AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
-          AllZone.GameAction.getPlayerLife(card.getController()).addLife(3);
-          
-        }
-      };//SpellAbility
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-
-      Input target = new Input()
-      {
-		private static final long serialVersionUID = -924544537419004913L;
-		public void showMessage()
-        {
-          AllZone.Display.showMessage("Select target Creature, Player or Planeswalker");
-          ButtonUtil.enableOnlyCancel();
-        }
-        public void selectButtonCancel() {stop();}
-        public void selectCard(Card card, PlayerZone zone)
-        {
-          if(!CardFactoryUtil.canTarget(spell, card)){
-          	  AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-          }
-          else if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Play))
-          {
-            spell.setTargetCard(card);
-            stopSetNext(new Input_PayManaCost(spell));
-          }
-        }//selectCard()
-        public void selectPlayer(String player)
-        {
-          spell.setTargetPlayer(player);
-          stopSetNext(new Input_PayManaCost(spell));
-        }
-      };
-      spell.setBeforePayMana(target);
-    }//*************** END ************ END **************************
-*/
-    
   
   //*************** START *********** START **************************
     else if(cardName.equals("Hoofprints of the Stag")) 
@@ -13651,42 +12833,7 @@ public class CardFactory implements NewConstants {
     	ability.setBeforePayMana(runtime);
     
     }//*************** END ************ END **************************
-
-  /*
-  //*************** START *********** START **************************
-    else if (cardName.equals("Acridian"))
-    {
-    	final String player = card.getController();
-
-	  	final Ability echo = new Ability(card, "1 G")
-	  	{
-	  		public void resolve()
-	  		{
-	  			card.setEchoPaid(true);
-	  			System.out.println("set echo to true");
-	  		}
-	  		public boolean canPlay()
-	  		{
-	  			//this is set to false, since it should only TRIGGER
-	  			return false;
-	  		}
-	  	};// ability2
-	  	//card.clearSpellAbility();
-	  	card.addSpellAbility(echo);
-	  	echo.setStackDescription(card.getName() + " - " + player + " paid echo.");
-	  	
-	  	Command paid = new Command() {public void execute() {AllZone.Stack.add(echo);}};
-	  	
-	  	//echo.setBeforePayMana(new Input_PayManaCost_Ability(echo.getManaCost(), paid));
-	  	echo.setAfterPayMana(new Input_PayManaCost_Ability(echo.getManaCost(), paid));
-		
-	  	
-   }//*************** END ************ END **************************
-
-	*/
-
   
-    
     
   //*************** START *********** START **************************  
   else if(cardName.equals("Hatching Plans"))
@@ -15653,209 +14800,6 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
     
-    
-/*
-  //*************** START *********** START **************************
-    else if(cardName.equals("Shatter"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -8518902112426882210L;
-		
-		public boolean canPlayAI()
-        {
-          return (getArtifact().size() != 0) && (AllZone.Phase.getTurn() > 4);
-        }
-        public void chooseTargetAI()
-        {
-         if(getArtifact().size() != 0){
-            Card bestArtifact = CardFactoryUtil.AI_getBestArtifact(getArtifact());
-            setTargetCard(bestArtifact);
-         }
-        }//getEnchantment()
-        CardList getArtifact()
-        {
-           CardList list = CardFactoryUtil.AI_getHumanArtifact(card, true);
-           return list;
-        }//getArtifact()
-        public void resolve()
-        {
-          AllZone.GameAction.destroy(getTargetCard());
-        }//resolve()
-      };
-
-      Input runtime = new Input()
-      {
-		private static final long serialVersionUID = 7950082427462078698L;
-
-		public void showMessage()
-        {
-         //Display all artifacts in play
-         //Allow human player to select which one to destroy
-          CardList allCards = new CardList();
-          allCards.addAll(AllZone.Human_Play.getCards());
-          allCards.addAll(AllZone.Computer_Play.getCards());
-
-          //get artifacts
-          CardList allArtifacts = allCards.getType("Artifact");
-          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, allArtifacts, "Select target Artifact to destroy.",true));
-      
-        }
-      };
-
-      card.clearSpellAbility();
-      spell.setBeforePayMana(runtime);
-      card.addSpellAbility(spell);
-      }//*************** END ************ END **************************
-*/
-    
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Disenchant") || cardName.equals("Naturalize"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = 6231507037766815249L;
-		
-		public boolean canPlayAI()
-        {
-          return (getEnchantment().size() != 0 || getArtifact().size() != 0) && (AllZone.Phase.getTurn() > 4);
-        }
-        public void chooseTargetAI()
-        {
-          if(getEnchantment().size() != 0)
-          {
-            Card bestEnchantment = CardFactoryUtil.AI_getBestEnchantment(getEnchantment(), card, true);
-            if(getArtifact().size() != 0){
-              Card bestArtifact = CardFactoryUtil.AI_getBestArtifact(getArtifact());
-              if(CardUtil.getConvertedManaCost(bestArtifact.getManaCost()) > CardUtil.getConvertedManaCost(bestEnchantment.getManaCost())){
-                setTargetCard(bestArtifact);
-              }
-              else{
-                setTargetCard(bestEnchantment);
-              }
-            }
-            else{
-              setTargetCard(bestEnchantment);
-            }
-          }
-          else if(getArtifact().size() != 0){
-            Card bestArtifact = CardFactoryUtil.AI_getBestArtifact(getArtifact());
-            setTargetCard(bestArtifact);
-          }
-
-        }
-        CardList getEnchantment()
-        {
-          CardList list = CardFactoryUtil.AI_getHumanEnchantment(card, true);
-          list = list.filter(new CardListFilter()
-          {
-			public boolean addCard(Card c) {
-				return !c.getKeyword().contains("Indestructible");
-			}  
-          });
-          return list;
-        }//getEnchantment()
-        CardList getArtifact()
-        {
-          CardList list = CardFactoryUtil.AI_getHumanArtifact(card, true);
-          list = list.filter(new CardListFilter()
-          {
-			public boolean addCard(Card c) {
-				return !c.getKeyword().contains("Indestructible");
-			}  
-          });
-          return list;
-        }//getArtifact()
-        public void resolve()
-        {
-          //AllZone.GameAction.destroyNoRegeneration(getTargetCard());
-          AllZone.GameAction.destroy(getTargetCard());
-        
-        }//resolve()
-      };
-
-      Input runtime = new Input()
-      {
-    	private static final long serialVersionUID = -1212213052029735882L;
-
-		public void showMessage()
-        {
-          //Display all artifacts and enchantments in play
-          //Allow human player to select which one to destroy
-          CardList allCards = new CardList();
-          allCards.addAll(AllZone.Human_Play.getCards());
-          allCards.addAll(AllZone.Computer_Play.getCards());
-
-          //get enchantments and get artifacts
-          CardList allEnchantments = allCards.getType("Enchantment");
-          CardList allArtifacts = allCards.getType("Artifact");
-
-          //put enchantments and artifacts in same cardList to display
-          CardList allEnchantmentsAndArtifacts = allEnchantments;
-          allEnchantmentsAndArtifacts.addAll(allArtifacts.toArray());
-
-
-          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, allEnchantmentsAndArtifacts, "Select target Enchantment or Artifact to destroy.", true));
-        }
-      };
-
-      card.clearSpellAbility();
-      spell.setBeforePayMana(runtime);
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-*/
-    
-/*
-  //*************** START *********** START **************************
-    else if(cardName.equals("Demystify"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -4045818747862804365L;
-		
-		public boolean canPlayAI()
-        {
-          return (getEnchantment().size() != 0) && (AllZone.Phase.getTurn() > 4);
-        }
-        public void chooseTargetAI()
-        {
-          Card best = CardFactoryUtil.AI_getBestEnchantment(getEnchantment(), card,  true);
-          setTargetCard(best);
-        }
-        CardList getEnchantment()
-        {
-          CardList list = CardFactoryUtil.AI_getHumanEnchantment(card, true);
-          return list;
-        }//getCreature()
-        public void resolve()
-        {
-          AllZone.GameAction.destroyNoRegeneration(getTargetCard());
-        }//resolve()
-      };
-
-      Input runtime = new Input()
-      {
-		private static final long serialVersionUID = 746063168471322007L;
-
-		public void showMessage()
-        {
-          CardList choice = new CardList();
-          choice.addAll(AllZone.Human_Play.getCards());
-          choice.addAll(AllZone.Computer_Play.getCards());
-
-          choice = choice.getType("Enchantment");
-
-          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, choice, "Select target Enchantment to destroy.",true));
-        }
-      };
-
-      card.clearSpellAbility();
-      spell.setBeforePayMana(runtime);
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-*/
-
 
     //*************** START *********** START **************************
     else if(cardName.equals("Animate Land"))
@@ -17254,87 +16198,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 
       spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
     }//*************** END ************ END **************************
-    
-    
-/*
-  //*************** START *********** START **************************
-	if(cardName.equals("Corrupt"))
-	{
-
-		final SpellAbility spell = new Spell(card)
-		{
-		  private static final long serialVersionUID = 335838994716307031L;
-		
-		  Card check;
-		  public boolean canPlayAI()
-		  {
-		    if(AllZone.Human_Life.getLife() <= countSwamps(card))
-		      return true;
-		
-		    check = getFlying();
-		    return check != null;
-		  }
-		  
-		  public int countSwamps(Card c)
-		  {
-				PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-				CardList swamps = new CardList(play.getCards());
-				swamps = swamps.getType("Swamp");
-				return swamps.size();
-		  }
-		  
-		  public void chooseTargetAI()
-		  {
-		    if(AllZone.Human_Life.getLife() <= 12) //12? mebbe 15? 
-		    {
-		      setTargetPlayer(Constant.Player.Human);
-		      return;
-		    }
-		
-		    Card c = getFlying();
-		    if((c == null) || (! check.equals(c)))
-		      throw new RuntimeException(card +" error in chooseTargetAI() - Card c is " +c +",  Card check is " +check);
-		
-		    setTargetCard(c);
-		  }//chooseTargetAI()
-		
-		//uses "damage" variable
-		  Card getFlying()
-		  {
-		    CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
-		    for(int i = 0; i < flying.size(); i++)
-		      if(flying.get(i).getNetDefense() <= countSwamps(card))
-		        return flying.get(i);
-		
-		    return null;
-		  }
-		
-		  public void resolve()
-		  {
-			int damage = countSwamps(card);
-		    if(getTargetCard() != null)
-		    {
-		      if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
-		      {
-		        Card c = getTargetCard();
-		        c.addDamage(damage, card);
-		        AllZone.GameAction.getPlayerLife(card.getController()).addLife(damage);
-		      }
-		    }
-		    else {
-		      AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
-		      AllZone.GameAction.getPlayerLife(card.getController()).addLife(damage);
-		    }
-		  }//resolve()
-		};//SpellAbility
-		card.clearSpellAbility();
-		card.addSpellAbility(spell);
-		
-		spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell,true));
-	}//*************** END ************ END **************************
-*/
-	
-	
+  
 	//*************** START *********** START **************************
 	else if (cardName.equals("Staff of Domination"))
 	{
@@ -17767,38 +16631,6 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
 
-	/*
-	//*************** START *********** START **************************
-    else if (cardName.equals("Time Walk"))
-	{
-    	final SpellAbility spell = new Spell(card)
-    	{
-			private static final long serialVersionUID = 8634822208146060381L;
-
-			public void resolve() {
-				final Command atEOT = new Command()
-		          {
-
-					private static final long serialVersionUID = -8380743460207665203L;
-
-					public void execute()
-		            {
-						AllZone.Phase.setPhase(Constant.Phase.Untap, card.getController());
-						int turn = AllZone.Phase.getTurn();		
-						//System.out.println("Turn: " +turn);
-						AllZone.Phase.setTurn(++turn);
-		              
-		            }
-		          };
-		          String opponent = AllZone.GameAction.getOpponent(AllZone.Phase.getActivePlayer());
-		          AllZone.GameAction.setLastPlayerToDraw(opponent);
-		          AllZone.EndOfTurn.addLast(atEOT);
-			}
-    	};
-    	card.clearSpellAbility();
-    	card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-	*/
 	
 	//*************** START *********** START **************************
     else if (cardName.equals("Time Walk") || cardName.equals("Temporal Manipulation") || cardName.equals("Capture of Jingzhou"))
@@ -18623,6 +17455,96 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		    	  spell.setBeforePayMana(runtime);
 		    	  
 		    	  card.clearSpellAbility();
+		    	  card.addSpellAbility(spell);
+		      }//*************** END ************ END **************************
+		    
+		      //*************** START *********** START **************************
+		      else if(cardName.equals("Gush"))
+		      {
+		    	  final SpellAbility spell = new Spell(card)
+		    	  {
+    				private static final long serialVersionUID = 8881817765689776033L;
+
+					public void resolve()					
+		    		{
+		    			  AllZone.GameAction.drawCard(card.getController());
+		    			  AllZone.GameAction.drawCard(card.getController());
+		    		}
+		    	  };
+		    	  spell.setDescription("Draw two cards.");
+		    	  spell.setStackDescription(card.getName() + " - Draw two cards.");
+		    	  
+		    	  final SpellAbility bounce = new Spell(card)
+		    	  {
+					private static final long serialVersionUID = 1950742710354343569L;
+
+					public void resolve()
+		    		{
+		    			  AllZone.GameAction.drawCard(card.getController());
+		    			  AllZone.GameAction.drawCard(card.getController());
+		    		}
+					public boolean canPlay()
+					{
+						PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+						CardList list = new CardList(play.getCards());
+						list = list.getType("Island");
+						return list.size() >= 2;
+					}
+					
+		    	  };
+		    	  bounce.setDescription("You may return two Islands you control to their owner's hand rather than pay Gush's mana cost.");
+		    	  bounce.setStackDescription(card.getName() + " - Draw two cards.");
+		    	  bounce.setManaCost("0");
+		    	  
+		    	  final Input bounceIslands = new Input()
+			      {
+					private static final long serialVersionUID = 3124427514142382129L;
+					int stop = 2;
+			        int count = 0;
+
+			        public void showMessage()
+			        {
+			          AllZone.Display.showMessage("Select an Island");
+			          ButtonUtil.disableAll();
+			        }
+			        public void selectButtonCancel() {stop();}
+			        public void selectCard(Card c, PlayerZone zone)
+			        {
+			          if(c.getType().contains("Island") && zone.is(Constant.Zone.Play))
+			          {
+			            AllZone.GameAction.moveToHand(c);
+			        	  
+			            count++;
+			            if(count == stop)
+			              stop();
+			          }
+			        }//selectCard()
+			      };
+			      
+			      bounce.setBeforePayMana(bounceIslands);
+			      
+			      Command bounceIslandsAI = new Command()
+			      {
+					private static final long serialVersionUID = 235908265780575226L;
+
+					public void execute()
+			    	  {
+			    		  PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			    		  CardList list = new CardList(play.getCards());
+			    		  list = list.getType("Island");
+			    		  //TODO: sort by tapped
+			    		  
+			    		  for (int i=0;i<2;i++)
+			    		  {
+			    			  AllZone.GameAction.moveToHand(list.get(i));
+			    		  }  
+			    	  }
+			      };
+		    	  
+			      bounce.setBeforePayManaAI(bounceIslandsAI);
+			      
+		    	  card.clearSpellAbility();
+		    	  card.addSpellAbility(bounce);
 		    	  card.addSpellAbility(spell);
 		      }//*************** END ************ END **************************
 		    

@@ -62,6 +62,7 @@ public abstract class AudioDeviceFactory
 	 * @param name		The name of the class to load.
 	 * @return			A newly-created instance of the audio device class.
 	 */
+	@SuppressWarnings("unchecked")
 	protected AudioDevice instantiate(ClassLoader loader, String name)
 		throws ClassNotFoundException, 
 			   IllegalAccessException, 

@@ -108,9 +108,27 @@ public class Phase extends MyObservable
     	String player = getActivePlayer();
     	String opponent = AllZone.GameAction.getOpponent(player);
     	
+    	if (player.equals(Constant.Player.Computer))
+    		computerExtraTurns--;
+    	else
+    		humanExtraTurns--;
+    	
     	AllZone.GameAction.setLastPlayerToDraw(opponent);
     	setPhase(Constant.Phase.Untap, player);
     	
+    }
+    else if ((is(Constant.Phase.Cleanup, Constant.Player.Computer) && humanExtraTurns < 0 ) || 
+        	(is(Constant.Phase.Cleanup, Constant.Player.Human) && computerExtraTurns < 0 ) )
+    {
+    	String player = getActivePlayer();
+    	String opp = AllZone.GameAction.getOpponent(player);
+    	if (player.equals(Constant.Player.Computer))
+    		humanExtraTurns++;
+    	else
+    		computerExtraTurns++;
+    	
+    	AllZone.GameAction.setLastPlayerToDraw(opp);
+    	setPhase(Constant.Phase.Untap, player);
     }
     else
     {
@@ -124,18 +142,22 @@ public class Phase extends MyObservable
     if (is(Constant.Phase.Untap, Constant.Player.Human))
     {
       turn++;
+      /*
       if (humanExtraTurns > 0)
     	  humanExtraTurns--;
       else if(humanExtraTurns < 0)
     	  humanExtraTurns++;
+    	  */
     }
     else if (is(Constant.Phase.Untap, Constant.Player.Computer))
     {
       turn++;
+      /*
       if (computerExtraTurns > 0)
     	  computerExtraTurns--;
       else if(computerExtraTurns < 0)
     	  computerExtraTurns++;
+    	  */
     }
     
     //for debugging: System.out.println(getPhase());
@@ -186,6 +208,14 @@ public class Phase extends MyObservable
 		  humanExtraTurns++;
 	  else
 		  computerExtraTurns++;
+  }
+  
+  public void subtractExtraTurn(String player)
+  {
+	  if (player.equals(Constant.Player.Human))
+		  humanExtraTurns--;
+	  else
+		  computerExtraTurns--;
   }
   
   public int getExtraTurns(String player)

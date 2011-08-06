@@ -45,7 +45,9 @@ public class AdvancedPlayer
 	/** Has the player been closed? */
 	private boolean closed = false;
 	/** Has the player played back all frames from the stream? */
+	@SuppressWarnings("unused")
 	private boolean complete = false;
+	@SuppressWarnings("unused")
 	private int lastPosition = 0;
 	/** Listener for the playback process */
 	private PlaybackListener listener;

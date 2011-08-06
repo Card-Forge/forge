@@ -2999,7 +2999,7 @@ public class CardFactory_Creatures {
 
 			public void execute()
 	        {
-	          ability.setStackDescription("Highway Robber - " +card.getController() +" gains 2 life and opponent loses 2 life.");
+	          ability.setStackDescription(card.getName() + " - " +card.getController() +" gains 2 life and opponent loses 2 life.");
 	          AllZone.Stack.add(ability);
 	        }
 	      };
@@ -13965,7 +13965,6 @@ public class CardFactory_Creatures {
 	  //*************** START *********** START **************************
 	    else if(cardName.equals("Fallen Angel"))
 	    {
-	      
 	      final SpellAbility a2 = new Ability(card, "0")
 	      {
 	        final Command eot1 = new Command()
@@ -19211,23 +19210,49 @@ public class CardFactory_Creatures {
 		      return newCard;
 		  }//*************** END ************ END **************************
 	       
-	       /*
-	      else if (cardName.equals("Acridian"))
+	       
+	     //*************** START *********** START **************************
+	      else if (cardName.equals("Chronatog"))
 	      {
-	    	  card.setEchoCost(card.getManaCost());
 	    	  
-	    	  final Command intoPlay = new Command()
-	    	  {
-				private static final long serialVersionUID = 8930023870127082001L;
+	    	  final Command untilEOT = new Command()
+		      {
+				private static final long serialVersionUID = 6926430725410883578L;
 
-				public void execute() {
-	    			  card.addIntrinsicKeyword("(Echo unpaid)");
+				public void execute()
+		        {
+		          if(AllZone.GameAction.isCardInPlay(card))
+		          {
+		            card.addTempAttackBoost(-3);
+		            card.addTempDefenseBoost(-3);
+		          }
+		        }
+		      };
+
+	    	  final Ability ability = new Ability(card, "0")
+	    	  {
+	    		  public void resolve()
+	    		  {
+    		          if(AllZone.GameAction.isCardInPlay(card))
+    		          {
+    		            card.addTempAttackBoost(3);
+    		            card.addTempDefenseBoost(3);
+    		            AllZone.EndOfTurn.addUntil(untilEOT);
+    		            
+    		            AllZone.Phase.subtractExtraTurn(card.getController());
+    		          }
+	    		  }
+	    		  
+	    		  public boolean canPlayAI()
+	    		  {
+	    			  return false;
 	    		  }
 	    	  };
-	    	  card.addComesIntoPlayCommand(intoPlay);
-	      }
-	      */
-	       
+	    	  ability.setStackDescription(card.getName() + " gets +3/+3 until end of turn, " +card.getController() + " skips his/her next turn.");
+	    	  ability.setDescription("0: Chronatog gets +3/+3 until end of turn. You skip your next turn. Activate this ability only once each turn.");
+	    	  
+	    	  card.addSpellAbility(ability);
+	      }//*************** END ************ END **************************
 	       
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found
@@ -19334,33 +19359,7 @@ public class CardFactory_Creatures {
 	        }
 	      }//echo
 	      
-	      /*
-	      if (hasKeyword(card, "Upkeep") != -1)
-	      {
-	        int n = hasKeyword(card, "Upkeep");
-	        if (n != -1)
-	        {
-	          String parse = card.getKeyword().get(n).toString();
-	          card.removeIntrinsicKeyword(parse);
-
-	          String k[] = parse.split(":");
-	          final String manacost = k[1];
-	          card.addIntrinsicKeyword("At the beginning of your upkeep, sacrifice " + card.getName() + " unless you pay " + manacost+".");
-	          
-	          final Command intoPlay = new Command()
-	    	  {
-				private static final long serialVersionUID = 925179072354331141L;
-
-				public void execute() {
-	    			  card.setUpkeepCost(manacost);
-	    		}
-	    	  };
-	    	  card.addComesIntoPlayCommand(intoPlay);
-	          
-	        }
-	      }//upkeep
-	      */
-	      
+	      	      
 		 return card;
 	}
 }

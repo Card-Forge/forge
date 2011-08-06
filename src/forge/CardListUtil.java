@@ -150,6 +150,26 @@ public class CardListUtil
 	   list.sort(com);
   }
   
+  public static void sortByTapped(CardList list)
+  {
+	  Comparator<Card> com = new Comparator<Card>()
+	  {
+	      public int compare(Card a, Card b)
+	      {
+	    	
+	        if( a.isTapped() && b.isTapped())
+	          return 0;
+	        else if(a.isTapped())
+	          return 1;
+	        else if(b.isTapped())
+	          return -1;
+
+	        return 0;
+	     }
+	   };
+	   list.sort(com);
+  }
+  
   
   public static void sortCMC(CardList list)
   {

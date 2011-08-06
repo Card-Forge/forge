@@ -271,6 +271,7 @@ public class Decoder implements DecoderErrors
 		float scalefactor = 32700.0f;
 		
 		int mode = header.mode();
+		@SuppressWarnings("unused")
 		int layer = header.layer();
 		int channels = mode==Header.SINGLE_CHANNEL ? 1 : 2;
 

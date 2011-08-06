@@ -57,6 +57,7 @@ final class BitReserve
 	
 	private int 					offset, totbit, buf_byte_idx;
 	private final int[] 			buf = new int[BUFSIZE];
+	@SuppressWarnings("unused")
 	private int 					buf_bit_idx;
 	
    BitReserve()

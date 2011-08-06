@@ -37,6 +37,7 @@ private static Random random = new Random();
 
         payManaCost(all[i]);
         all[i].chooseTargetAI();
+        all[i].getBeforePayManaAI().execute();
         AllZone.Stack.add(all[i]);
 
         return false;

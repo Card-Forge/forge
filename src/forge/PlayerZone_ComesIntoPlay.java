@@ -18,10 +18,13 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 		if (o == null)
 			throw new RuntimeException(
 					"PlayerZone_ComesInto Play : add() object is null");
-
+		
 		super.add(o);
 
 		Card c = (Card) o;
+		
+		if (CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact() ))
+			c.tap();
 		
 		//cannot use addComesIntoPlayCommand - trigger might be set to false;
 		if (c.getName().equals("Exploration")) {
@@ -160,8 +163,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 				AllZone.Stack.add(ability);
 			}
 		}
-		
-
 		
 		/*
 		for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {

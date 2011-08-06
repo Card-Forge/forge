@@ -223,6 +223,9 @@ public class CardFactoryUtil
     {"Wild Aesthir",  	  new Integer(1)},
     {"Viashino Slaughtermaster", new Integer(1)},
     {"Twinblade Slasher", new Integer(1)},
+    {"Boreal Centaur", new Integer(1)},
+    {"Knight of the Skyward Eye", new Integer(1)},
+    {"Chronatog", new Integer(1)},
 
     {"Phyrexian Battleflies"   , new Integer(2)},
     {"Pit Imp"                 , new Integer(2)},
@@ -2095,6 +2098,22 @@ public class CardFactoryUtil
 	  
 	  return list.size() >= 1;
 	  
+  }
+  
+  public static boolean oppHasKismet(String player)
+  {
+	  String opp = AllZone.GameAction.getOpponent(player);
+	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, opp);
+	  CardList list = new CardList(play.getCards());
+	  list = list.filter(new CardListFilter()
+	  {
+		  public boolean addCard(Card c)
+		  {
+			  return c.getName().equals("Kismet") || c.getName().equals("Frozen AEther") ||
+			  		 c.getName().equals("Loxodon Gatekeeper");
+		  }
+	  });
+	  return list.size() > 0;
   }
   
   public static int getNumberOfManaSymbolsControlledByColor(String colorAbb, String player)
