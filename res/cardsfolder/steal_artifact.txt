@@ -1,0 +1,9 @@
+Name:Steal Artifact
+ManaCost:2 U U
+Types:Enchantment Aura
+Text:You control enchanted artifact.
+K:Enchant artifact
+K:enControlArtifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steal_artifact.jpg
+End

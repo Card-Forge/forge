@@ -34,6 +34,16 @@ class CardFactory_Auras {
         return -1;
     }
     
+    private static int shouldControlArtifact(Card c) {
+        ArrayList<String> a = c.getKeyword();
+        for (int i = 0; i < a.size(); i++) {
+            if (a.get(i).toString().startsWith("enControlArtifact")) return i;
+            //if(a.get(i).toString().startsWith("enControlLand")) return i;
+        }
+        
+        return -1;
+    }
+    
     public static Card getCard(final Card card, String cardName, Player owner) {
     	
     	Command standardUnenchant = new Command() {
@@ -2400,6 +2410,150 @@ class CardFactory_Auras {
                         });
                         
                         stopSetNext(CardFactoryUtil.input_targetSpecific(spell, creatures, "Select target creature", true, false));
+                    }
+                };
+                
+                card.setSVar("PlayMain1", "TRUE");
+                
+                card.addEnchantCommand(onEnchant);
+                card.addUnEnchantCommand(onUnEnchant);
+                card.addLeavesPlayCommand(onLeavesPlay);
+                
+                spell.setBeforePayMana(runtime);
+            }// SpellAbility spell
+        }// enControlCreature
+        
+        /*
+         *  For Control Magic type of auras (targeting Land, Artifact, Enchantment)
+         */
+        if (shouldControlArtifact(card) != -1) {
+            int n = shouldControlArtifact(card);
+            if (n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                card.removeIntrinsicKeyword(parse);
+                
+                /*
+                 *  I borrowed this code from Control Magic aura code
+                 */
+                final SpellAbility spell = new Spell(card) {
+
+					@Override
+                    public boolean canPlayAI() {
+						
+						if(!super.canPlayAI()) return false;
+						
+                        CardList tgts = CardFactoryUtil.AI_getHumanArtifact(card, true);
+                        CardListUtil.sortAttack(tgts);
+                        CardListUtil.sortFlying(tgts);
+                        
+                        if (tgts.isEmpty()) return false;
+                                                
+                        else {
+                            setTargetCard(tgts.get(0));
+                            return true;
+                        }
+                    }//canPlayAI()
+                    
+                    @Override
+                    public void resolve() {
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                        play.add(card);
+                        
+                        Card c = getTargetCard();
+                        
+                        if (AllZone.GameAction.isCardInPlay(c) 
+                        		&& CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
+                        
+                    }//resolve()
+                };//SpellAbility
+                card.clearSpellAbility();
+                card.addSpellAbility(spell);
+                
+                Command onEnchant = new Command() {
+
+					public void execute() {
+                        if(card.isEnchanting()) {
+                            Card crd = card.getEnchanting().get(0);
+                            //set summoning sickness
+                            if(crd.getKeyword().contains("Haste")) {
+                                crd.setSickness(false);
+                            } else {
+                                crd.setSickness(true);
+                            }
+                            
+                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
+                            
+                            PlayerZone from = AllZone.getZone(crd);
+                            from.remove(crd);
+                            
+                            crd.setController(card.getController());
+                            
+                            PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                            to.add(crd);
+                            
+                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                        }
+                    }//execute()
+                };//Command
+                
+                Command onUnEnchant = new Command() {
+
+					public void execute() {
+                        if(card.isEnchanting()) {
+                            Card crd = card.getEnchanting().get(0);
+                            if(AllZone.GameAction.isCardInPlay(crd)) {
+                                if(crd.getKeyword().contains("Haste")) {
+                                    crd.setSickness(false);
+                                } else {
+                                    crd.setSickness(true);
+                                }
+                                
+                                ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
+                                
+                                PlayerZone from = AllZone.getZone(crd);
+                                from.remove(crd);
+                                
+                                AllZone.Combat.removeFromCombat(crd);
+                                
+                                Player opp = crd.getController().getOpponent();
+                                crd.setController(opp);
+                                
+                                PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, opp);
+                                to.add(crd);
+                                
+                                ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
+                            }
+                        }
+                        
+                    }//execute()
+                };//Command
+                
+                Command onLeavesPlay = new Command() {
+
+					public void execute() {
+                        if(card.isEnchanting()) {
+                            Card crd = card.getEnchanting().get(0);
+                            card.unEnchantCard(crd);
+                        }
+                    }
+                };//Command
+                
+                Input runtime = new Input() {
+
+                    @Override
+                    public void showMessage() {
+                        CardList perms = AllZoneUtil.getCardsInPlay();
+                        perms = perms.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return c.isArtifact()  && CardFactoryUtil.canTarget(card, c);
+                            }
+                        });
+                        
+                        stopSetNext(CardFactoryUtil.input_targetSpecific(spell, perms, "Select target artifact", true, false));
                     }
                 };
                 

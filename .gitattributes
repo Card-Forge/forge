@@ -4528,6 +4528,7 @@ res/cardsfolder/staunch_defenders.txt -text svneol=native#text/plain
 res/cardsfolder/steadfast_guard.txt -text svneol=native#text/plain
 res/cardsfolder/steadfastness.txt -text svneol=native#text/plain
 res/cardsfolder/steady_progress.txt -text svneol=native#text/plain
+res/cardsfolder/steal_artifact.txt -text svneol=native#text/plain
 res/cardsfolder/steam_blast.txt -text svneol=native#text/plain
 res/cardsfolder/steam_frigate.txt -text svneol=native#text/plain
 res/cardsfolder/steam_spitter.txt -text svneol=native#text/plain
