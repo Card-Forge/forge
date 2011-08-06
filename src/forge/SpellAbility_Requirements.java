@@ -23,7 +23,7 @@ public class SpellAbility_Requirements {
 			fromZone.remove(c);
 		}
 		
-		if (select.getTgt().doesTarget()){
+		if (select.doesTarget()){
 			select.setRequirements(this);
 			select.chooseTargets();
 		}
@@ -39,7 +39,7 @@ public class SpellAbility_Requirements {
 				fromZone.add(ability.getSourceCard());
 			}
 			
-			select.getTgt().resetTargets();
+			select.resetTargets();
 			return;
 		}
 		startPaying();
@@ -58,8 +58,8 @@ public class SpellAbility_Requirements {
 				// add back to hand
 				fromZone.add(ability.getSourceCard());
 			}
-			if (select.getTgt().doesTarget())
-				select.getTgt().resetTargets();
+			if (select != null)
+				select.resetTargets();
 			
 			payment.cancelPayment();
 		}
@@ -69,6 +69,6 @@ public class SpellAbility_Requirements {
 		AllZone.ManaPool.clearPay(false);
 		AllZone.Stack.add(ability);
 		if (select != null)
-			select.getTgt().resetTargets();
+			select.resetTargets();
 	}
 }

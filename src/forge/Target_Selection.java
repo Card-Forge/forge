@@ -27,6 +27,17 @@ public class Target_Selection {
 		card = sa.getSourceCard();
 	}
 	
+	public boolean doesTarget(){
+		if (target == null)
+			return false;
+		return target.doesTarget();
+	}
+	
+	public void resetTargets(){
+		if (target != null)
+			target.resetTargets();
+	}
+	
 	public boolean chooseTargets(){
 		// if not enough targets chosen, reset and cancel Ability
 		if (bCancel || bDoneTarget && target.getNumTargeted() < target.getMinTargets()){
