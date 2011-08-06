@@ -1300,7 +1300,7 @@ public class CardFactoryUtil {
                 setTargetCard(target);
             }
             
-            CardList getCreature() {
+            CardList getCreature() {    // build list and do some pruning
                 CardList list = new CardList(AllZone.Computer_Play.getCards());
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
@@ -1311,6 +1311,28 @@ public class CardFactoryUtil {
                     }
                 });
                 // list.remove(card);      // if mana-only cost, allow self-target
+                
+                // is there at least 1 Loxodon Punisher to target
+                
+                CardList equipMagnetList = list.getName("Loxodon Punisher");
+                if (equipMagnetList.size() != 0 && Tough >= -1) {    // we want Loxodon Punisher to gain at least +1 toughness
+                	return equipMagnetList;
+                }
+                
+                if (Power == 0 && Tough == 0) {    // This aura is keyword only
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c){
+                            ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
+                            for (String s:extKeywords) {
+                                if (!c.getKeyword().contains(s))
+                                    return true;    // We want to give a new keyword
+                            }
+                                //no new keywords:
+                                return false;
+                        }
+                    });
+                }
+                
                 return list;
             }//getCreature()
             
