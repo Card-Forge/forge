@@ -1,0 +1,8 @@
+Name:Kyren Negotiations
+ManaCost:2 R R
+Types:Enchantment
+Text:no text
+K:abDamageTgtP tapXType<1/Creature>:1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kyren_negotiations.jpg
+End
