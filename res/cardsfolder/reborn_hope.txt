@@ -1,8 +1,11 @@
 Name:Reborn Hope
 ManaCost:G W
 Types:Sorcery
-Text:Return target multicolored card from your graveyard to your hand.
-K:spReturnTgt:1:Card.MultiColor:Hand
+Text:no text
+A:SP$Retrieve | Cost$ G W | Destination$ Hand | TgtPrompt$ Choose target multicolored card in your graveyard | ValidTgts$ Card.MultiColor+YouCtrl | SpellDescription$ Return target multicolored card from your graveyard to your hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reborn_hope.jpg
 End
+#
+#K:spReturnTgt:1:Card.MultiColor:Hand
+#

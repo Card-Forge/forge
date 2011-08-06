@@ -1,8 +1,11 @@
 Name:Breath of Life
 ManaCost:3 W
 Types:Sorcery
-Text:Return target creature card from your graveyard to the battlefield.
-K:spReturnTgt:1:Creature:Battlefield
+Text:no text
+A:SP$Retrieve | Cost$ 3 W | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card13112.jpg
 End
+#
+#K:spReturnTgt:1:Creature:Battlefield
+#
