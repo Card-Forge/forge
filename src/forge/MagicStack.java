@@ -492,7 +492,7 @@ public class MagicStack extends MyObservable {
 						continue;
 					}
 					Card revealed = AllZone.Human_Library.get(0);
-					AllZone.Human_Library.remove(0);
+
 					revealMsg.append(revealed.getName());
 					if(!revealed.isType("Creature"))
 					{
@@ -522,7 +522,6 @@ public class MagicStack extends MyObservable {
 						continue;
 					}
 					Card revealed = AllZone.Computer_Library.get(0);
-					AllZone.Computer_Library.remove(0);
 					revealMsg.append(revealed.getName());
 					if(!revealed.isType("Creature"))
 					{

@@ -2818,19 +2818,20 @@ public class CardFactory_Sorceries {
                     
                     for(int i = 0; i < 5 && i < limit; i++) {
                         top.add(AllZone.Computer_Library.get(0));
-                        AllZone.Computer_Library.remove(0);
                     }
                     
                     //put creature card in hand, if there is one
                     CardList creature = top.getType("Creature");
-                    if(creature.size() != 0) {
-                        AllZone.Computer_Hand.add(creature.get(0));
-                        top.remove(creature.get(0));
+                    if(creature.size() > 0) {
+                    	Card best = CardFactoryUtil.AI_getBestCreature(creature);
+                        top.remove(best);
+                    	AllZone.GameAction.moveToHand(best);
                     }
                     
                     //put cards on bottom of library
                     for(int i = 0; i < top.size(); i++)
-                        AllZone.Computer_Library.add(top.get(i));
+                    	AllZone.GameAction.moveToBottomOfLibrary(top.get(i));
+                    
                 }//computerResolve()
                 
                 public void humanResolve() {
@@ -2844,15 +2845,14 @@ public class CardFactory_Sorceries {
                     //optional, select a creature
                     Object o = AllZone.Display.getChoiceOptional("Select a creature", list.toArray());
                     if(o != null && ((Card) o).isCreature()) {
-                        AllZone.GameAction.moveTo(hand, (Card) o);
                         list.remove((Card) o);
+                        AllZone.GameAction.moveToHand((Card) o);
                     }
                     
                     //put remaining cards on the bottom of the library
-                    for(int i = 0; i < list.size(); i++) {
-                        library.remove(list.get(i));
-                        library.add(list.get(i));
-                    }
+                    for(int i = 0; i < list.size(); i++)
+                    	AllZone.GameAction.moveToBottomOfLibrary(list.get(i));
+
                 }//resolve()
             };
             card.clearSpellAbility();

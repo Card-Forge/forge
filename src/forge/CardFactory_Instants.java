@@ -1432,28 +1432,24 @@ public class CardFactory_Instants {
                     CardList top = new CardList();
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
                     
-                    Card c;
                     int j = 4;
                     if(library.size() < 4) j = library.size();
                     for(int i = 0; i < j; i++) {
-                        c = library.get(0);
-                        library.remove(0);
-                        top.add(c);
+                        top.add(library.get(0));
                     }
                     
-                    if(top.size() >= 1) {
+                    if(top.size() > 0) {
                         //let user get choice
                         Card chosen = AllZone.Display.getChoice("Choose a card to put into your hand",
                                 top.toArray());
                         top.remove(chosen);
                         
                         //put card in hand
-                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                        hand.add(chosen);
+                        AllZone.GameAction.moveToHand(chosen);
                         
                         //add cards to bottom of library
                         for(int i = 0; i < top.size(); i++)
-                            library.add(top.get(i));
+                        	AllZone.GameAction.moveToBottomOfLibrary(top.get(i));
                     }
                 }//resolve()
             };//SpellAbility

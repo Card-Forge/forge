@@ -180,7 +180,7 @@ public class AIPlayer extends Player{
 	protected void doScry(final CardList topN, final int N) {
 		int num = N;
 		for(int i = 0; i < num; i++) {
-            boolean b = false;
+            boolean bottom = false;
             if(topN.get(i).getType().contains("Basic")) {
                 CardList bl = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                 bl = bl.filter(new CardListFilter() {
@@ -191,8 +191,7 @@ public class AIPlayer extends Player{
                     }
                 });
                 
-                if(bl.size() > 5) // if control more than 5 Basic land, probably don't need more
-                b = true;
+                bottom = bl.size() > 5; // if control more than 5 Basic land, probably don't need more
             } else if(topN.get(i).getType().contains("Creature")) {
                 CardList cl = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
                 cl = cl.filter(new CardListFilter() {
@@ -203,20 +202,21 @@ public class AIPlayer extends Player{
                     }
                 });
                 
-                if(cl.size() > 5) // if control more than 5 Creatures, probably don't need more
-                b = true;
+                bottom = cl.size() > 5;  // if control more than 5 Creatures, probably don't need more
             }
-            if(b == true) {
-                AllZone.Computer_Library.add(topN.get(i));
-                topN.remove(i);
+            if(bottom) {
+            	Card c = topN.get(i);
+            	AllZone.GameAction.moveToBottomOfLibrary(c);
+                topN.remove(c);
             }
         }
         num = topN.size();
-        if(num > 0) for(int i = 0; i < num; i++) // put the rest on top in random order
+        for(int i = 0; i < num; i++) // put the rest on top in random order
         {
             Random rndm = new Random();
             int r = rndm.nextInt(topN.size());
-            AllZone.Computer_Library.add(topN.get(r), 0);
+            Card c = topN.get(r);
+            AllZone.GameAction.moveToLibrary(c);
             topN.remove(r);
         }
 	}

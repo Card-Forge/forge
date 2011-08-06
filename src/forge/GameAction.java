@@ -192,14 +192,13 @@ public class GameAction {
         return moveTo(play, c);
     }
     
+    public void moveToBottomOfLibrary(Card c) {
+    	int pos = AllZoneUtil.getPlayerCardsInLibrary(c.getOwner()).size();
+    	moveToLibrary(c, pos);
+    }
+    
     public void moveToTopOfLibrary(Card c) {
-        PlayerZone p = AllZone.getZone(c);
-        PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getOwner());
-        
-        if(p != null) p.remove(c);
-        if(!c.isToken()) c = AllZone.CardFactory.copyCard(c);
-        
-        library.add(c, 0);
+    	moveToLibrary(c, 0);
     }
     
     public void moveToLibrary(Card c) {
@@ -215,20 +214,7 @@ public class GameAction {
         
         library.add(c, libPosition);
     }
-    
-    /**
-     * moves a card from whichever Zone it's in to the bottom of its owner's library
-     * 
-     * @param c the card to move
-     */
-    public void moveToBottomOfLibrary(Card c) {
-    	PlayerZone p = AllZone.getZone(c);
-    	PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
-    	if( p != null ) p.remove(c);
-    	if(!c.isToken()) lib.add(c);
-    }
-    
-    
+
     public boolean AI_discardNumType(int numDiscard, String[] uTypes, SpellAbility sa) {
         CardList hand = new CardList();
         hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());

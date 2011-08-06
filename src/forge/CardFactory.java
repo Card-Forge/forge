@@ -5713,8 +5713,12 @@ public class CardFactory implements NewConstants {
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
                     
                     if(library.size() != 0) {
-                        Card c = library.get(0);
-                        library.remove(0);
+                    	Card c = library.get(0);
+                    	library.remove(c);
+                    	
+                    	// TODO: Necro really exiles face down, but for now we'll just do it this way
+                    	// c.setIsFaceDown(true);
+                    	// AllZone.GameAction.exile(c);
                         necroCards.add(c); //add card to necro so that it goes into hand at end of turn
                         AllZone.EndOfTurn.addAt(necro);
                     }

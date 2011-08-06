@@ -530,20 +530,20 @@ public abstract class Player extends MyObservable{
 	
 	public void drawCards(int n) {
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, this);
-		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, this);
+
 		for(int i = 0; i < n; i++) {
 			// todo: any draw replacements would go here, not just Dredge
 			if(getDredge().size() == 0 || !dredge()) {
-				doDraw(library, hand);
+				doDraw(library);
 			}
 		}
 	}
 	
-	private void doDraw(PlayerZone library, PlayerZone hand) {
+	private void doDraw(PlayerZone library) {
 		if(library.size() != 0) {
 			Card c = library.get(0);
-			library.remove(0);
-			hand.add(c);
+			AllZone.GameAction.moveToHand(c);
+
 			setLastDrawnCard(c);
 			c.setDrawnThisTurn(true);
 			numDrawnThisTurn++;
@@ -740,7 +740,6 @@ public abstract class Player extends MyObservable{
         numScry = Math.min(numScry, library.size());
         for(int i = 0; i < numScry; i++) {
             topN.add(library.get(0));
-            library.remove(0);
         }
         doScry(topN, topN.size());
     }

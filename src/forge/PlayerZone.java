@@ -19,7 +19,6 @@ interface IPlayerZone
 
   public Card get(int index);
   public void remove(Object o);
-  public void remove(int index);
 
   public void setCards(Card c[]);
   public Card[] getCards();

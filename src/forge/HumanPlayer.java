@@ -102,23 +102,23 @@ public class HumanPlayer extends Player{
 	protected void doScry(final CardList topN, final int N) {
 		int num = N;
 		for(int i = 0; i < num; i++) {
-            Object o;
-            o = AllZone.Display.getChoiceOptional("Put on bottom of library.",topN.toArray());
+            Object o = AllZone.Display.getChoiceOptional("Put on bottom of library.",topN.toArray());
             if(o != null) {
                 Card c = (Card) o;
                 topN.remove(c);
-                AllZone.Human_Library.add(c);
-            } else // no card chosen for the bottom
-            break;
+                AllZone.GameAction.moveToBottomOfLibrary(c);
+            } 
+            else // no card chosen for the bottom
+            	break;
         }
         num = topN.size();
-        if(num > 0) for(int i = 0; i < num; i++) {
+        for(int i = 0; i < num; i++) {
             Object o;
             o = AllZone.Display.getChoice("Put on top of library.", topN.toArray());
             if(o != null) {
                 Card c = (Card) o;
                 topN.remove(c);
-                AllZone.Human_Library.add(c, 0);
+                AllZone.GameAction.moveToLibrary(c);
             }
             // no else - a card must have been chosen
         }
