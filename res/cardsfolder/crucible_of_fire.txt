@@ -1,7 +1,8 @@
 Name:Crucible of Fire
 ManaCost:3 R
 Types:Enchantment
-Text:Dragon creatures you control get +3/+3.
+Text:no text
+K:stPumpAll:Creature.Dragon+YouCtrl:3/3:No Condition:Dragon creatures you control get +3/+3.
 SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare

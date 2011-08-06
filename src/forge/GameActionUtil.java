@@ -15818,42 +15818,6 @@ public class GameActionUtil {
 	}; // Brawn
 **/
 	
-	public static Command Crucible_of_Fire            = new Command() {
-		private static final long serialVersionUID   = 3620025773676030026L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-3);
-				c.addSemiPermanentDefenseBoost(-3);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Crucible of Fire");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Dragon");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(3);
-					c.addSemiPermanentDefenseBoost(3);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Crucible of Fire
-	
 	public static Command Time_of_Heroes        = new Command() {
 		private static final long serialVersionUID = 2490232366851007733L;
 		CardList                  gloriousAnthemList = new CardList();
@@ -16277,7 +16241,6 @@ public class GameActionUtil {
 		commands.put("Conspiracy", Conspiracy);
 		commands.put("Covetous_Dragon", Covetous_Dragon);
 		commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
-		commands.put("Crucible_of_Fire", Crucible_of_Fire);
 		
 		commands.put("Dakkon_Blackblade", Dakkon_Blackblade);
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
