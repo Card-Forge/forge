@@ -223,11 +223,17 @@ public class AbilityFactory_Token extends AbilityFactory {
 		}
 		
 		boolean haste = false;
-		for(String kw:tokenKeywords)
+		boolean oneShot =false;
+		for(String kw:tokenKeywords) {
 			if (kw.equals("Haste")) haste = true;
+			if (kw.equals("At the beginning of the end step, exile CARDNAME.")
+					|| kw.equals("At the beginning of the end step, sacrifice CARDNAME.")) oneShot = true;
+		}
 			
 		//Don't generate tokens without haste before main 2 if possible
 		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !haste && !params.containsKey("ActivatingPhases"))
+        	return false;
+		if(AllZone.Phase.isAfter(Constant.Phase.Combat_Begin) && oneShot)
         	return false;
 
 		// TODO: if i don't have enough blockers and my token can block one of the unblocked creatures
