@@ -4744,7 +4744,8 @@ public class GameActionUtil {
 		}; // ability2
 
 		ability2.setStackDescription("Guilty Conscience deals " + damage + " damage to " + c.getName());
-		AllZone.Stack.add(ability2);
+		if (damage >= 0)
+			AllZone.Stack.add(ability2);
 	}
 
 	public static void executeGuiltyConscienceEffects(Card c, Card source, int n) {
