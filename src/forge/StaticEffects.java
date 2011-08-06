@@ -219,7 +219,7 @@ public class StaticEffects
 		cards.addAll(playerZone.getCards());
 		cards.addAll(computerZone.getCards());
 		
-		/*
+		
 		System.out.println("== Start add state effects ==");
 		for (int i=0;i<cards.size();i++)
 		{
@@ -234,6 +234,6 @@ public class StaticEffects
 			}
 		}
 		System.out.println("== End add state effects ==");
-		*/
+		
 	}
 }

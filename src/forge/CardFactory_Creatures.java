@@ -2161,7 +2161,9 @@ public class CardFactory_Creatures {
 	      {
 	        public void resolve()
 	        {
-	          CardFactoryUtil.makeToken("Angel", "B 3 3 Angel", card, "B", new String[]{"Creature", "Angel"}, 3, 3, new String[] {"Flying"});
+	          CardFactoryUtil.makeToken("Angel", "B 3 3 Angel", AllZone.GameAction.getOpponent(card.getController()),
+	        		  					"B", new String[]{"Creature", "Angel"}, 3, 3, new String[] {"Flying"});
+	          
 
 	          //remove this card from the graveyard and from the game
 
