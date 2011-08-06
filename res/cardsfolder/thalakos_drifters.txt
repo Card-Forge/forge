@@ -1,8 +1,9 @@
 Name:Thalakos Drifters
 ManaCost:2 U U
-Types:Creature Townsfolk
+Types:Creature Thalakos
 Text:no text
 PT:3/3
+K:abPump Discard<1/Any>:Shadow
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_drifters.jpg
 End

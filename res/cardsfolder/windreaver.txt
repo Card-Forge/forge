@@ -7,5 +7,6 @@ K:Flying
 K:abPump W:Vigilance
 K:abPump W:+0/+1
 SVar:Rarity:Rare
+SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windreaver.jpg
 End
