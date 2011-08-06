@@ -3,7 +3,7 @@ ManaCost:3 B G
 Types:Creature Beast
 Text:Whenever Spiritmonger deals damage to a creature, put a +1/+1 counter on Spiritmonger.
 PT:6/6
-K:RegenerateMe:B
+A:AB$Regenerate|Cost$B|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritmonger.jpg
 End

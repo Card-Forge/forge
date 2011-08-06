@@ -4,7 +4,7 @@ Types:Creature Shapeshifter
 Text:no text
 PT:1/1
 K:Changeling
-K:RegenerateMe:1 B
+A:AB$Regenerate|Cost$1 B|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_changeling.jpg
 End

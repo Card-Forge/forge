@@ -4,7 +4,7 @@ Types:Legendary Creature Elemental
 Text:no text
 PT:8/5
 K:Trample
-K:RegenerateMe:G
+A:AB$Regenerate|Cost$G|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39860.jpg
 End

@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:Flying
 K:Infect
-K:RegenerateMe:B B
+A:AB$Regenerate|Cost$B B|SpellDescription$Regenerate CARDNAME.
 K:abPump B:Haste
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skithiryx_the_blight_dragon.jpg

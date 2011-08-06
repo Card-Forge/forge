@@ -4,7 +4,7 @@ Types:Creature Cat Spirit
 Text:no text
 PT:2/1
 K:Protection from green
-K:RegenerateMe:B
+A:AB$Regenerate|Cost$B|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_lynx.jpg
 End

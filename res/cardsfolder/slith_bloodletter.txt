@@ -3,7 +3,7 @@ ManaCost:B B
 Types:Creature Slith
 Text:Whenever Slith Bloodletter deals combat damage to a player, put a +1/+1 counter on it.
 PT:1/1
-K:RegenerateMe:1 B
+A:AB$Regenerate|Cost$1 B|SpellDescription$Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_bloodletter.jpg
 End
