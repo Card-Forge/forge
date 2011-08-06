@@ -1,0 +1,10 @@
+Name:Pteron Ghost
+ManaCost:1 W
+Types:Creature Spirit
+Text:no text
+PT:1/1
+K:Flying
+A:AB$Regenerate|Cost$Sac<1/CARDNAME>|ValidTgts$Artifact|TgtPrompt$Select target artifact.|SpellDescription$Regenerate target artifact.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pteron_ghost.jpg
+End
