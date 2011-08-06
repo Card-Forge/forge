@@ -70,7 +70,8 @@ public class Input_Untap extends Input {
     	{
     		public boolean addCard(Card c)
     		{
-    			if( isWinterOrbInEffect() && c.isLand() ) return false;
+    			if( (isWinterOrbInEffect() && c.isLand()) ||
+    					(isMunghaWurmInEffect()[0] && c.isLand())) return false;
     			return true;
     		}
     	});
@@ -119,8 +120,8 @@ public class Input_Untap extends Input {
     		else c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
 
     	}
-    	if( isWinterOrbInEffect() ) {
-    		if( AllZone.Phase.getActivePlayer().equals(Constant.Player.Computer) ) {
+    	if( isWinterOrbInEffect() || isMunghaWurmInEffect()[0] || isMunghaWurmInEffect()[1]) {
+    		if( AllZone.Phase.getActivePlayer().equals(Constant.Player.Computer) || isMunghaWurmInEffect()[1] ) {
     			//search for lands the computer has and only untap 1
     			CardList landList = AllZoneUtil.getPlayerLandsInPlay(Constant.Player.Computer);
     			landList = landList.filter(AllZoneUtil.tapped);
@@ -129,10 +130,11 @@ public class Input_Untap extends Input {
     			}
     		}
     		else {
+    				
     			Input target = new Input() {
     				private static final long serialVersionUID = 6653677835629939465L;
     				public void showMessage() {
-    					AllZone.Display.showMessage("Winter Orb - Select one tapped land to untap");
+    					AllZone.Display.showMessage("Select one tapped land to untap");
     					ButtonUtil.enableOnlyCancel();
     				}
     				public void selectButtonCancel() {stop();}
@@ -148,7 +150,7 @@ public class Input_Untap extends Input {
     			if( landList.size() > 0 ) {
     				AllZone.InputControl.setInput(target);
     			}
-
+    			
     		}
     	}
     	if( AllZoneUtil.isCardInPlay("Damping Field") ) {
@@ -228,6 +230,29 @@ public class Input_Untap extends Input {
     		}
     	}
     	return false;
+    }
+    
+    private boolean[] isMunghaWurmInEffect() {
+    	
+    	CardList all = AllZoneUtil.getCardsInPlay("Mungha Wurm");
+    	
+    	boolean[] HumanAI = new boolean[]{false,false};
+    	
+    	int i = 0;
+    	
+    	while (i < all.size()) {
+    		Card c = all.get(i);
+    		if (c.getController().equals(Constant.Player.Human)) {
+    			HumanAI[0] = true;
+    		} 
+    		
+    		else if (c.getController().equals(Constant.Player.Computer)) {
+    			HumanAI[1] = true;
+    		}
+    		i++;
+    	}
+    	
+    	return HumanAI;
     }
     
     private ArrayList<String> getAnZerrinRuinsTypes() {
