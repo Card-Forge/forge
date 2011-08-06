@@ -10293,7 +10293,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END ************************** 
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Selenia Dark Angel")) {
+        else if(cardName.equals("Selenia, Dark Angel")) {
             
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -10315,8 +10315,8 @@ public class CardFactory_Creatures {
             }; 
             
             card.addSpellAbility(ability);
-            ability.setStackDescription(card.getController() + " returns Selenia Dark Angel back to owner's hand.");
-            ability.setDescription("Pay 2 life: return Selenia Dark Angel to its owner's hand.");
+            ability.setStackDescription(card.getController() + " returns Selenia, Dark Angel back to owner's hand.");
+            ability.setDescription("Pay 2 life: return Selenia, Dark Angel to its owner's hand.");
             
         }//*************** END ************ END ************************** 
         

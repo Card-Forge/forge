@@ -1,6 +1,6 @@
-Name:Selenia Dark Angel
+Name:Selenia, Dark Angel
 ManaCost:3 W B
-Types:Creature Angel
+Types:Legendary Creature Angel
 Text:no text
 PT:3/3
 K:Flying
