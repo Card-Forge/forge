@@ -4648,18 +4648,7 @@ public class GameActionUtil {
     		return false;
     	}
     }
-/*
-    private static boolean showDialog(Card c) {
-        String[] choices = {"Yes", "No"};
 
-        Object q = null;
-
-        q = AllZone.Display.getChoiceOptional("Use " + c.getName() + " effect?", choices);
-
-        if(q == null || q.equals("No")) return false;
-        else return true;
-    }
-*/
     //***CREATURES START HERE***
 
 	public static void executeDestroyCreatureCardEffects(Card c, Card destroyed) {
