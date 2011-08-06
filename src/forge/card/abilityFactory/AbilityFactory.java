@@ -777,7 +777,7 @@ public class AbilityFactory {
 					return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
 				}
 				
-				CardList list;
+				CardList list = new CardList();
 				if (calcX[0].startsWith("Sacrificed"))
 					list = findRootAbility(ability).getSacrificedCost();
 				
@@ -793,18 +793,20 @@ public class AbilityFactory {
 				
 				else if (calcX[0].startsWith("Targeted")){
 					Target t = ability.getTarget();
-					ArrayList<Object> all = t.getTargets();
-					if(!all.isEmpty() && all.get(0) instanceof SpellAbility) {
-						SpellAbility saTargeting = (t == null) ?  findParentsTargetedSpellAbility(ability) : ability;
-						list = new CardList();
-						ArrayList<SpellAbility> sas = saTargeting.getTarget().getTargetSAs();
-						for(SpellAbility sa : sas) {
-							list.add(sa.getSourceCard());
+					if(null != t) {
+						ArrayList<Object> all = t.getTargets();
+						if(!all.isEmpty() && all.get(0) instanceof SpellAbility) {
+							SpellAbility saTargeting = findParentsTargetedSpellAbility(ability);
+							list = new CardList();
+							ArrayList<SpellAbility> sas = saTargeting.getTarget().getTargetSAs();
+							for(SpellAbility sa : sas) {
+								list.add(sa.getSourceCard());
+							}
 						}
-					}
-					else {
-						SpellAbility saTargeting = (t == null) ?  findParentsTargetedCard(ability) : ability;
-						list = new CardList(saTargeting.getTarget().getTargetCards().toArray());
+						else {
+							SpellAbility saTargeting = findParentsTargetedCard(ability);
+							list = new CardList(saTargeting.getTarget().getTargetCards().toArray());
+						}
 					}
 				}
 				else if (calcX[0].startsWith("Triggered")) {
