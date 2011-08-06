@@ -1,7 +1,7 @@
 Name:Ryusei, the Falling Star
 ManaCost:5 R
 Types:Legendary Creature Dragon Spirit
-Text:When Ryusei, the Falling Star is put into a graveyard from play, it deals 5 damage to each creature without flying.
+Text:no text
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, it deals 5 damage to each creature without flying.
