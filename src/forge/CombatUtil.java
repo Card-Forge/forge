@@ -44,9 +44,6 @@ public class CombatUtil {
 		
         if(blocker.getKeyword().contains("CARDNAME can't block.") || blocker.getKeyword().contains("CARDNAME can't attack or block.")) 
         	return false;
-		/*
-        if (blocker.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
-        	return false; */
         
         CardList kulrath = AllZoneUtil.getCardsInPlay("Kulrath Knight");
         if (kulrath.size() > 0)
@@ -381,8 +378,15 @@ public class CombatUtil {
     	return canAttack(c);
     }
     
-    //can a creature attack at all?
+    //can a creature attack at the moment?
     public static boolean canAttack(Card c) {
+    	if(c.isTapped() || (c.isSick() && !c.isEnchantedBy("Instill Energy"))) return false;
+    	
+    	return canAttackNextTurn(c);
+    }
+    
+    //can a creature attack if untapped and without summoning sickness?
+    public static boolean canAttackNextTurn(Card c) {
     	if (!c.isCreature()) return false;
     	
         if(AllZoneUtil.isCardInPlay("Peacekeeper")) return false;
@@ -400,7 +404,8 @@ public class CombatUtil {
            }
         }
         
-        if (hasKeyword) {    // The keyword "CARDNAME can't attack if defending player controls an untapped creature with power" ... is present
+        // The keyword "CARDNAME can't attack if defending player controls an untapped creature with power" ... is present
+        if (hasKeyword) {    
             String tmpString = c.getKeyword().get(keywordPosition).toString();
             final String asSeparateWords[]  = tmpString.trim().split(" ");
             
@@ -443,8 +448,10 @@ public class CombatUtil {
             if(allislands.size() < 5) return false;
         }
         
-        if(c.isTapped() || (c.isSick() && !c.isEnchantedBy("Instill Energy"))
-                || AllZoneUtil.isCardInPlay("Blazing Archon", c.getController().getOpponent()) 
+        //The creature won't untap next turn
+        if(c.isTapped() && !PhaseUtil.canUntap(c)) return false;
+        
+        if(AllZoneUtil.isCardInPlay("Blazing Archon", c.getController().getOpponent()) 
                 || c.getKeyword().contains("CARDNAME can't attack.")
                 || c.getKeyword().contains("CARDNAME can't attack or block.")
                 || (AllZoneUtil.isCardInPlay("Reverence", c.getController().getOpponent()) && c.getNetAttack() < 3))
@@ -453,10 +460,6 @@ public class CombatUtil {
         if(c.getKeyword().contains("Defender") && !c.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
         	return false;
         }
-        
-        /*
-        if (c.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
-        	return false; */
         
         if (AllZoneUtil.isCardInPlay("Ensnaring Bridge")) {
         	int limit = Integer.MAX_VALUE;
@@ -492,6 +495,7 @@ public class CombatUtil {
 
         return true;
     }//canAttack()
+    
     
     public static int getTotalFirstStrikeBlockPower(Card attacker, Player player)
     {

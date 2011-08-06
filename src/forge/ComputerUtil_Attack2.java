@@ -237,21 +237,9 @@ public class ComputerUtil_Attack2 {
            int candidateCounterAttackDamage = 0;
            int candidateTotalBlockDamage = 0;
            for(Card pCard:playerCreatures){
-               // if the creature can attack add it to counter attackers list
-               // if the creature can't attack but has summoning sickness assume it can next turn
-               // will the card be able to untap next turn?
-               boolean wasTapped = false;
-               boolean wasSick = false;
-
-               if(pCard.isTapped() && PhaseUtil.canUntap(pCard)){
-                   wasTapped = true;
-                   pCard.untap();
-               }
-               if(pCard.isSick()){
-                   wasSick = true;
-                   pCard.setSickness(false);
-               }
-               if(CombatUtil.canAttack(pCard)){
+        	   
+               // if the creature can attack next turn add it to counter attackers list
+               if(CombatUtil.canAttackNextTurn(pCard)){
                    nextTurnAttackers.add(pCard);
                    if(pCard.getNetCombatDamage() > 0){
                        candidateCounterAttackDamage += pCard.getNetCombatDamage();
@@ -259,8 +247,6 @@ public class ComputerUtil_Attack2 {
                        playerForces += 1; // player forces they might use to attack
                    }
                }
-               if(wasTapped){pCard.tap();}
-               if(wasSick){pCard.setSickness(true);}
                // increment player forces that are relevant to an attritional attack - includes walls
                if(CombatUtil.canBlock(pCard)){playerForcesForAttritionalAttack += 1;}
            }
