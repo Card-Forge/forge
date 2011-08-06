@@ -10150,6 +10150,53 @@ public class GameActionUtil {
 		}// execute
 	}; // Undead Warchief
 	
+	public static Command Coat_of_Arms                 = new Command() {
+		private static final long serialVersionUID   = 583505612126735693L;
+
+		CardList                  gloriousAnthemList = new CardList();
+
+		public void execute() {
+			CardList list = gloriousAnthemList;
+			// reset all cards in list - aka "old" cards
+			for(int i2 = 0; i2 < list.size(); i2++) {
+					list.get(i2).addSemiPermanentAttackBoost(-1);
+					list.get(i2).addSemiPermanentDefenseBoost(-1);
+				}
+			// add +1/+1 to cards
+			list.clear();
+			PlayerZone[] zone = getZone("Coat of Arms");
+
+			// for each zone found add +1/+1 to each card
+			for(int outer = 0; outer < zone.length; outer++) {
+				CardList creature = new CardList(
+						zone[outer].getCards());
+
+				for(int i = 0; i < creature.size(); i++) {
+					final Card crd = creature.get(i);
+					CardList Type = new CardList(zone[outer].getCards());
+					Type = Type.filter(new CardListFilter() {
+	                    public boolean addCard(Card card) {
+	                        return !card.equals(crd) && card.isCreature() && !crd.getName().equals("Mana Pool");
+	                    }
+	                });
+					for(int x = 0; x < Type.size(); x++) {
+						for(int x2 = 0; x2 < Type.get(x).getType().size(); x2++) {
+						if(crd.getType().contains(Type.get(x).getType().get(x2))) {
+						if(Type.get(x).getType().get(x2).equals("Creature") || Type.get(x).getType().get(x2).equals("Legendary") 
+								|| Type.get(x).getType().get(x2).equals("Artifact") ) {						
+						} else {
+						crd.addSemiPermanentAttackBoost(1);
+						crd.addSemiPermanentDefenseBoost(1);
+						gloriousAnthemList.add(crd);
+						}
+						}
+						}
+				}
+				}// for inner
+			}// for outer
+		}// execute
+	}; // Coat of Arms
+	
 	public static Command Daru_Warchief           = new Command() {
 		private static final long serialVersionUID   = 5835056455026735693L;
 
@@ -18915,6 +18962,7 @@ public class GameActionUtil {
 		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
 		commands.put("Goblin_Warchief", Goblin_Warchief);	
 		commands.put("Undead_Warchief", Undead_Warchief);
+		commands.put("Coat_of_Arms", Coat_of_Arms);	
 		commands.put("Daru_Warchief", Daru_Warchief);
 		commands.put("Levitation", Levitation);
 		commands.put("Knighthood", Knighthood);

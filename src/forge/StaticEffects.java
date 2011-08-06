@@ -166,6 +166,7 @@ public class StaticEffects
 		cardToEffectsList.put("Leyline of Singularity", new String[] {"Leyline_of_Singularity"});
 		cardToEffectsList.put("Goblin Warchief", new String[] {"Goblin_Warchief"});
 		cardToEffectsList.put("Undead Warchief", new String[] {"Undead_Warchief"});
+		cardToEffectsList.put("Coat of Arms", new String[] {"Coat_of_Arms"});
 		cardToEffectsList.put("Levitation", new String[] {"Levitation"});
 		cardToEffectsList.put("Knighthood", new String[] {"Knighthood"});
 		cardToEffectsList.put("Absolute Law", new String[] {"Absolute_Law"});
