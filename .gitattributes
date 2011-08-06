@@ -7088,6 +7088,7 @@ res/cardsfolder/zof_shade.txt -text svneol=native#text/plain
 res/cardsfolder/zombie_goliath.txt -text svneol=native#text/plain
 res/cardsfolder/zombie_infestation.txt -text svneol=native#text/plain
 res/cardsfolder/zombie_master.txt svneol=native#text/plain
+res/cardsfolder/zombie_musher.txt svneol=native#text/plain
 res/cardsfolder/zombie_outlander.txt -text svneol=native#text/plain
 res/cardsfolder/zombify.txt -text svneol=native#text/plain
 res/cardsfolder/zuberi_golden_feather.txt -text svneol=native#text/plain
