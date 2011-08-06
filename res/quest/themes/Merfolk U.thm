@@ -1,0 +1,61 @@
+BasicLandPercentage=35
+
+[Group MaxCnt=4 Percentage=20]
+Coralhelm Commander
+Lord of Atlantis
+Merfolk Sovereign
+Stonybrook Banneret
+Tidal Courier
+[/Group]
+
+[Group MaxCnt=4 Percentage=5]
+Manta Riders
+Merfolk of the Pearl Trident
+Sandbar Merfolk
+Skywatcher Adept
+[/Group]
+
+[Group MaxCnt=4 Percentage=13]
+Coral Merfolk
+Deeptread Merrow
+Halimar Wavewatch
+Inkfathom Infiltrator
+Maritime Guard
+Merfolk Assassin
+Riptide Pilferer
+River Merfolk
+Saprazzan Heir
+Vodalian Soldiers
+[/Group]
+
+[Group MaxCnt=4 Percentage=13]
+Ambassador Laquatus
+Cold-Eyed Selkie
+Enclave Elite
+Merfolk Seer
+Rootwater Commando
+Rootwater Hunter
+Scroll Thief
+Seasinger
+Shoreline Raider
+Wake Thrasher
+Wistful Selkie
+[/Group]
+
+[Group MaxCnt=3 Percentage=9]
+Seahunter
+Fallowsage
+Merfolk Seastalkers
+Merrow Harbinger
+Merrow Levitator
+Wanderbrine Rootcutters
+[/Group]
+
+[Group MaxCnt=2 Percentage=5]
+Deepchannel Mentor
+Empress Galina
+Frostwind Invoker
+Gravelgill Axeshark
+[/Group]
+
+End
