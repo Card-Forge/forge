@@ -1,7 +1,7 @@
 Name:Werebear
 ManaCost:1 G
 Types:Creature Human Bear Druid
-Text:Threshold - Werebear gets +3/+3 as long as seven or more cards are in your graveyard.
+Text:no text
 PT:1/1
 K:tap: add G
 K:stPumpSelf:Creature:3/3:Threshold:Threshold Ñ Werebear gets +3/+3 as long as seven or more cards are in your graveyard.
