@@ -273,6 +273,8 @@ public class AbilityFactory_Animate {
 		
 		final ArrayList<String> types = new ArrayList<String>();
 		if(params.containsKey("Types")) types.addAll(Arrays.asList(params.get("Types").split(",")));
+		System.out.println("Params: "+params);
+		System.out.println("Got the following types from params: "+types);
 		
 		final ArrayList<String> keywords = new ArrayList<String>();
 		if(params.containsKey("Keywords")) keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
@@ -337,8 +339,9 @@ public class AbilityFactory_Animate {
 			final ArrayList<SpellAbility> addedAbilities= new ArrayList<SpellAbility>();
 			if(abilities.size() > 0){
 				for(String s : abilities) {
+					AbilityFactory newAF = new AbilityFactory();
 					String actualAbility = host.getSVar(s);
-					SpellAbility grantedAbility = af.getAbility(actualAbility, c);
+					SpellAbility grantedAbility = newAF.getAbility(actualAbility, c);
 					addedAbilities.add(grantedAbility);
 					c.addSpellAbility(grantedAbility);
 				}
@@ -384,6 +387,7 @@ public class AbilityFactory_Animate {
 		if (toughness != -1) c.setBaseDefense(toughness);
 
 		if(null != af && af.getMapParams().containsKey("OverwriteTypes")) c.clearAllTypes();
+		System.out.println("Animate types to add: "+types);
 		for(String r : types) {
 			// if the card doesn't have that type, add it
 			if (!c.getType().contains(r))
@@ -402,7 +406,7 @@ public class AbilityFactory_Animate {
 		return timestamp;
 	}
 
-	private static void doUnanimate(Card c, int originalPower, int originalToughness, ArrayList<String> originalTypes, String colorDesc, ArrayList<String> originalKeywords, ArrayList<SpellAbility> actualAbilities, ArrayList<Trigger> addedTriggers, long timestamp) {
+	private static void doUnanimate(Card c, int originalPower, int originalToughness, ArrayList<String> originalTypes, String colorDesc, ArrayList<String> originalKeywords, ArrayList<SpellAbility> addedAbilities, ArrayList<Trigger> addedTriggers, long timestamp) {
 		c.setBaseAttack(originalPower);
 		c.setBaseDefense(originalToughness);
 
@@ -421,7 +425,7 @@ public class AbilityFactory_Animate {
 			c.removeIntrinsicKeyword(k);
 		}
 		
-		for(SpellAbility sa : actualAbilities) {
+		for(SpellAbility sa : addedAbilities) {
 			c.removeSpellAbility(sa);
 		}
 		
