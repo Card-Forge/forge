@@ -112,7 +112,7 @@ class CardFactory_Equipment {
 		    
 	    	equip.setBeforePayMana(runtime);
 	    	
-	    	equip.setDescription("Equip: 2");
+	    	equip.setDescription("Equip: 0");
 	    	card.addSpellAbility(equip);
 	    	
 	    	card.addEquipCommand(onEquip);
@@ -1381,7 +1381,7 @@ class CardFactory_Equipment {
 	       
 	       equip.setBeforePayMana(CardFactoryUtil.input_targetCreature(equip));
 	       
-	       equip.setDescription("Equip: 1");
+	       equip.setDescription("Equip: 0");
 	       card.addSpellAbility(equip);
 	       
 	       card.addEquipCommand(onEquip);
