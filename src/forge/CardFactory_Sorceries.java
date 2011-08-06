@@ -4084,27 +4084,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Flame Rift")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -6008296722680155321L;
-                
-                @Override
-                public void resolve() {
-                	AllZone.HumanPlayer.addDamage(4, card);
-                	AllZone.ComputerPlayer.addDamage(4, card);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.ComputerPlayer.getLife() > 7 && AllZone.HumanPlayer.getLife() < 7;
-                }
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
                 
         //*************** START *********** START **************************
         else if(cardName.equals("Donate")) {
