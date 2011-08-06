@@ -1087,7 +1087,7 @@ class CardFactory_Lands {
         */
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Wasteland") || cardName.equals("Strip Mine") || cardName.equals("Tectonic Edge")) {
+        else if(cardName.equals("Wasteland") || /* cardName.equals("Strip Mine") || */ cardName.equals("Tectonic Edge")) {
         	
         	final CardListFilter landFilter = new CardListFilter() {
                 public boolean addCard(Card c) {
