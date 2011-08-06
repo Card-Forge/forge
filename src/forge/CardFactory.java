@@ -3170,8 +3170,8 @@ public class CardFactory implements NewConstants {
             
         }//while shouldModular
         
-        if(hasKeyword(card, "1, Sacrifice " + card.getName() + ": Draw a card.") != -1) {
-            int n = hasKeyword(card, "1, Sacrifice " + card.getName() + ": Draw a card.");
+        if(hasKeyword(card, "1, Sacrifice CARNAME: Draw a card.") != -1) {
+            int n = hasKeyword(card, "1, Sacrifice CARDNAME: Draw a card.");
             if(n != -1) {
                 String parse = card.getKeyword().get(n).toString();
                 card.removeIntrinsicKeyword(parse);
