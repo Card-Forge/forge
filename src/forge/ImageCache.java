@@ -45,6 +45,8 @@ public class ImageCache implements NewConstants {
     
     private static final String                     TOKEN     = "#Token", NORMAL = "#Normal", TAPPED = "#Tapped";
     
+    public static boolean scaleLargerThanOriginal = true;
+    
     static {
         imageCache = new MapMaker().softValues().makeComputingMap(new Function<String, BufferedImage>() {
             public BufferedImage apply(String key) {
@@ -115,7 +117,7 @@ public class ImageCache implements NewConstants {
         
         double scale = min((double) width / original.getWidth(), (double) height / original.getHeight());
         //here would be the place to limit the scaling, scaling option in menu ?
-        if(scale > 1) scale = 1;
+        if(scale > 1 && !scaleLargerThanOriginal) scale = 1;
         
         return getImage(key + "#" + scale);
     }

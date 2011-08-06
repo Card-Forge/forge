@@ -20,6 +20,7 @@ public class ForgePreferences extends Preferences {
 	public int maxStackSize;
 	public CardSizeType cardSize;
 	public boolean cardOverlay;
+	public boolean scaleLargerThanOriginal;
 
 	private List<SavePreferencesListener> saveListeners = new ArrayList<SavePreferencesListener>();
 	private final String fileName;
@@ -47,6 +48,7 @@ public class ForgePreferences extends Preferences {
 		cardSize = CardSizeType.valueOf(get("card.images.size", "medium"));
 		stackOffset = StackOffsetType.valueOf(get("stack.offset", "tiny"));
 		maxStackSize = getInt("stack.max.size", 3);
+		scaleLargerThanOriginal = getBoolean("card.scale.larger.than.original", true);
 	}
 
 	public void save () throws Exception{
@@ -63,7 +65,7 @@ public class ForgePreferences extends Preferences {
 		set("card.images.size", cardSize);
 		set("stack.offset", stackOffset);
 		set("stack.max.size", maxStackSize);
-
+		set("card.scale.larger.than.original", scaleLargerThanOriginal);
 		for (SavePreferencesListener listeners : saveListeners)
 			listeners.savePreferences();
 

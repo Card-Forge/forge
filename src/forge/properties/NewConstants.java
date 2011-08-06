@@ -278,6 +278,7 @@ public interface NewConstants {
                     public static final String TITLE = "%s/NewGame/options/title";
                     public static final String FONT = "%s/NewGame/options/font";
                     public static final String CARD_OVERLAY = "%s/NewGame/options/cardOverlay";
+					public static final String CARD_SCALE = "%s/NewGame/options/cardScale";
                     
                     public static interface GENERATE {
                         public static final String TITLE            = "%s/NewGame/options/generate/title";

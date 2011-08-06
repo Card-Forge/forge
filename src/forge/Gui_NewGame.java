@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedOutputStream;
@@ -111,6 +112,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                                                                  ForgeProps.getLocalized(MENU_BAR.OPTIONS.FONT));
     public static JCheckBoxMenuItem cardOverlay          = new JCheckBoxMenuItem(
             													 ForgeProps.getLocalized(MENU_BAR.OPTIONS.CARD_OVERLAY));
+    public static JCheckBoxMenuItem cardScale          = new JCheckBoxMenuItem(
+			                                                     ForgeProps.getLocalized(MENU_BAR.OPTIONS.CARD_SCALE));
     private JButton                 questButton          = new JButton();
     
     private Action                  LOOK_AND_FEEL_ACTION = new LookAndFeelAction(this);
@@ -142,6 +145,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         	smoothLandCheckBox.setSelected(preferences.stackAiLand);
         	millLoseCheckBox.setSelected(preferences.millingLossCondition);
         	cardOverlay.setSelected(preferences.cardOverlay);
+        	ImageCache.scaleLargerThanOriginal = preferences.scaleLargerThanOriginal;
+        	cardScale.setSelected(preferences.scaleLargerThanOriginal);
         	CardStackOffsetAction.set(preferences.stackOffset);
         	CardStackAction.setVal(preferences.maxStackSize);
         	CardSizesAction.set(preferences.cardSize);
@@ -149,14 +154,19 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
 			Log.error("Error loading preferences");
 		}
         
-        try {
-        	if(preferences.laf.equals(""))
-        		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        	else
-        		UIManager.setLookAndFeel(preferences.laf);
-        } catch(Exception ex) {
-            ErrorViewer.showError(ex);
-        }
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			public void run() {
+		        try {
+		        	if(preferences.laf.equals(""))
+		        		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		        	else
+		        		UIManager.setLookAndFeel(preferences.laf);
+		        } catch(Exception ex) {
+		            ErrorViewer.showError(ex);
+		        }
+			}
+		});
         
         try {
             //deck migration - this is a little hard to read, because i can't just plainly reference a class in the
@@ -255,6 +265,13 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         optionsMenu.add(useLAFFonts);
         optionsMenu.addSeparator();
         optionsMenu.add(cardOverlay);
+        optionsMenu.add(cardScale);
+        
+        cardScale.addActionListener(new ActionListener() {			
+			public void actionPerformed(ActionEvent arg0) {
+				ImageCache.scaleLargerThanOriginal = cardScale.isSelected();			
+			}
+		});
         
         JMenuBar bar = new JMenuBar();
         bar.add(menu);
@@ -954,6 +971,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
 			preferences.stackAiLand = smoothLandCheckBox.isSelected();
 			preferences.millingLossCondition = millLoseCheckBox.isSelected();
 			preferences.cardOverlay = cardOverlay.isSelected();
+			preferences.scaleLargerThanOriginal = ImageCache.scaleLargerThanOriginal;
 			preferences.save();
 		} catch (Exception ex) {
 			int result = JOptionPane.showConfirmDialog(this,
