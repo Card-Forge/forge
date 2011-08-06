@@ -1,0 +1,7 @@
+Name:Khabal Ghoul
+ManaCost:2 B
+Types:Creature Ghoul
+Text:no text
+PT:1/1
+K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on Khabal Ghoul.
+SVar:Rarity:Uncommon

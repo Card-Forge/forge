@@ -1,0 +1,8 @@
+Name:Sunhome Enforcer
+ManaCost:2 R W
+Types:Creature Giant Soldier
+Text:no text
+PT:2/4
+K:Lifelink
+K:abPump 1 R:+1/+0
+SVar:Rarity:Uncommon
