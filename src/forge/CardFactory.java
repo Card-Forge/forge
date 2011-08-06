@@ -4820,7 +4820,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
-
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Angelic Blessing"))
     {
@@ -4881,10 +4881,10 @@ public class CardFactory implements NewConstants {
 
       spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
     }//*************** END ************ END **************************
+*/
 
 
-
-//*************** START *********** START **************************
+    //*************** START *********** START **************************
     else if (cardName.equals("Molten Rain"))
 	{
 		final SpellAbility spell = new Spell(card)
@@ -14047,8 +14047,8 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
-
-//*************** START *********** START **************************
+/*
+    //*************** START *********** START **************************
     else if(cardName.equals("Brute Force"))
     {
       SpellAbility spell = new Spell(card)
@@ -14116,6 +14116,7 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
+*/
 
 
     //*************** START *********** START **************************
@@ -14391,7 +14392,9 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
       //card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2 G"));
     }//*************** END ************ END **************************
-
+    
+    
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Wildsize"))
     {
@@ -14457,8 +14460,10 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-
-  //*************** START *********** START **************************
+*/
+    
+    
+    //*************** START *********** START **************************
     else if(cardName.equals("Feral Lightning"))
     {
       SpellAbility spell = new Spell(card)
@@ -16762,6 +16767,8 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	    	card.addSpellAbility(spell);    
 	  	}//*************** END ************ END **************************
 	  
+	  
+/*
 	  	//*************** START *********** START **************************
 	    else if(cardName.equals("Riding the Dilu Horse"))
 	    {
@@ -16810,8 +16817,10 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	      card.clearSpellAbility();
 	      card.addSpellAbility(spell);
 	    }//*************** END ************ END **************************
+*/
 	  
-	//*************** START *********** START **************************
+	  
+	    //*************** START *********** START **************************
 	    else if (cardName.equals("Millstone"))
 	    {
 	       Ability_Tap ab1 = new Ability_Tap(card, "2")

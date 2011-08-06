@@ -1104,7 +1104,7 @@ VanillaEquipment:0:6:3:none:none:none
 Cinder Pyromancer
 2 R
 Creature Elemental Shaman
-Whenever you cast a red spell, you may untap Cinder Pyromancer.
+Whenever you cast a red spell, you may untap Cinder Pyromancer. (NOTE: This card can mistakenly damage either a player or a creature.)
 0/1
 abDamageCP T:1
 
@@ -1927,6 +1927,7 @@ Riding the Dilu Horse
 2 G
 Sorcery
 Target creature gets +2/+2 and gains horsemanship.
+spPumpTgt:+2/+2/Horsemanship
 
 Magus of the Coffers
 4 B
@@ -5111,6 +5112,7 @@ Wildsize
 Instant
 Target creature gets +2/+2 and gains trample until end of turn. Draw a card.
 spPumpTgt:+2/+2/Trample
+Cantrip
 
 Biomantic Mastery
 4 UG UG UG
@@ -14167,6 +14169,7 @@ Brute Force
 R
 Instant
 Target creature gets +3/+3 until end of turn.
+spPumpTgt:+3/+3
 
 Primal Clay
 4
@@ -15282,6 +15285,7 @@ Angelic Blessing
 2 W
 Sorcery
 Target creature gets +3/+3 and gains flying until end of turn.
+spPumpTgt:+3/+3/Flying
 
 Life Burst
 1 W
