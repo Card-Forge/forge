@@ -1516,25 +1516,16 @@ public class GameActionUtil {
 
 	}//Thistledown Duo
 
-	public static void playCard_Demigod_of_Revenge(Card c) {
-
+	public static void playCard_Demigod_of_Revenge(final Card c) {
+		// not enough boom stick references in this block of code
 		if(c.getName().equals("Demigod of Revenge")) {
 			Ability ability2 = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-					PlayerZone Grave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.Phase.getPlayerTurn());
-					PlayerZone Play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.Phase.getPlayerTurn());
-					CardList evildead = new CardList();
-					evildead.addAll(Grave.getCards());
-					evildead = evildead.filter(new CardListFilter() {
-						public boolean addCard(Card card) {
-							return (card.getName().contains("Demigod of Revenge"));
-						}
-					});
-					for(int i = 0; i < evildead.size(); i++) {
-						Card c = evildead.get(i);
-						Grave.remove(c);
-						Play.add(c);
+					CardList evildead = AllZoneUtil.getPlayerGraveyard(c.getController(), "Demigod of Revenge");
+
+					for(Card c : evildead){
+						AllZone.GameAction.moveToPlay(c);
 					}
 				}
 			}; // ability2
@@ -1737,20 +1728,8 @@ public class GameActionUtil {
 								else if(!choice.equals("None")) target = AllZone.HumanPlayer; // check for target of spell/abilities should be here
 								else target = null;
 							} else target = AllZone.HumanPlayer; // check for target of spell/abilities should be here						
-							if(!(null == target)) {
-								PlayerZone lib = AllZone.getZone(Constant.Zone.Library, target);
-								PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, target);
-								CardList libList = new CardList(lib.getCards());
-
-								int max = converted;
-
-								if(libList.size() < max) max = libList.size();
-
-								for(int i = 0; i < max; i++) {
-									Card c = libList.get(i);
-									lib.remove(c);
-									grave.add(c);
-								}
+							if(null != target) {
+								target.mill(converted);
 							} //if
 						} //resolve
 					}; //ability
