@@ -2725,8 +2725,19 @@ public class CardFactoryUtil
     
      String d[] = DB.split("/");
      int X;
-     if (d[1].equals("X"))
+     if (d[1].contains("X"))
+     {
         X = nDB;
+        if (d[1].contains("."))
+        {
+        	String dd[] = d[1].split("\\.");
+        	ArrayList<String> ddd = new ArrayList<String>();
+        	for (int i=1; i<dd.length; i++)
+        		ddd.add(dd[i]);
+        	
+        	X = doXMath(X, ddd.toArray(new String [3]));
+        }
+     }
      else
         X = Integer.parseInt(d[1]);
     
