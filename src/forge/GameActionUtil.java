@@ -11514,6 +11514,10 @@ public class GameActionUtil {
 		 */
 		
 		private static final long serialVersionUID = -7853346190458174501L;
+		private ArrayList<StaticEffect> storage = new ArrayList<StaticEffect>();
+			// storage stores the source card and the cards it gave its bonus to
+		
+		/*
 		int						  max			  		 = 100;
 		CardList[]                old            		 = new CardList[max];
 		CardList[]                next             	 	 = new CardList[max];
@@ -11521,9 +11525,61 @@ public class GameActionUtil {
 		String[] 				  InfoStorage	   		 = new String[max];
 		int						  KeywordsActive		 = 0;
 		int						  ActivationNumber	     = 0;
-
+		*/
+		
 		public void execute() {
+			
+			// remove all static effects
+			for (int i = 0; i < storage.size(); i++) {
+	    		removeStaticEffect(storage.get(i));
+	    	}
+			
+			//clear the list
+			storage = new ArrayList<StaticEffect>();
+			
+			//Gather Cards on the Battlefield with the stPump Keyword
+			PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+			PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+			CardList cards_WithKeyword = new CardList();
+			
+			cards_WithKeyword.add(new CardList(Hplay.getCards()));
+			cards_WithKeyword.add(new CardList(Cplay.getCards()));
+			cards_WithKeyword.getKeywordsContain("stPump");
+			
+			for (int i = 0; i < cards_WithKeyword.size(); i++) {
+	    		Card cardWithKeyword = cards_WithKeyword.get(i);
+	            ArrayList<String> keywords = cardWithKeyword.getKeyword();
+	            
+	            for (int j = 0; j < keywords.size(); j++) {
+	            	String keyword = keywords.get(j);
+	            	
+	            	if(keyword.startsWith("stPump")) {
+	            		StaticEffect se = new StaticEffect(); 	//create a new StaticEffect
+	            		se.setSource(cardWithKeyword);
+	            		se.setKeywordNumber(j);
+	            		se.setXValue(0); 						//ToDo
+	            		
+	            		//get the affected cards
+						String k[] = keyword.split(":");    
+						
+						if(SpecialConditionsMet(cardWithKeyword, k[3])) { //special Conditions are Threshold, etc.
+						
+							final String affected = k[1];			
+							final String specific[] = affected.split(",");
+							CardList affectedCards = AffectedCards(cardWithKeyword, k); // options are All, Other, Self. etc.
+							affectedCards = affectedCards.getValidCards(specific, cardWithKeyword.getController(), cardWithKeyword);
+	      				
+							addStaticEffects(affectedCards,k[2],j); //give the boni to the affected cards
+							se.setAffectedCards(affectedCards);
+							storage.add(se); // store the information
+						}
+	            	}
+	            }
+	    	}
+			
+			
 			// Initialize Variables
+			/*
 			if(old[0] == null) {
 				for(int i = 0; i < max; i++) {
 					old[i] = new CardList();
@@ -11536,6 +11592,7 @@ public class GameActionUtil {
 			// Reset Variables at Start of Game
 			if(AllZone.GameAction.StaticEffectKeywordReset) {
 				AllZone.GameAction.StaticEffectKeywordReset = false;
+				
 				for(int i = 0; i < max; i++)	{
 					old[i] = new CardList();
 					next[i] = new CardList();
@@ -11553,10 +11610,6 @@ public class GameActionUtil {
 							removeKeyword(old[i],CardsWithKeyword.get(z),i,Integer.valueOf(InfoSplit[1]),InfoSplit[2]);
 				}
 				// Gather Cards in Play and Graveyards with the Keyword
-				PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-				PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-            
-				CardList Cards_WithKeyword = new CardList();
 				Cards_WithKeyword.add(new CardList(Hplay.getCards()));
 				Cards_WithKeyword.add(new CardList(Cplay.getCards()));
 				Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
@@ -11621,9 +11674,27 @@ public class GameActionUtil {
 						}
 					}
 				}
-			}
+			}*/
 		}// execute()
-
+		
+		void addStaticEffects(CardList affectedCards, String Keyword_Details, int xValue) {
+			
+			String[] Keyword = Keyword_Details.replace("+","").split("/");
+			
+			for(int i = 0; i < affectedCards.size(); i++) {
+				Card affectedCard = affectedCards.get(i);
+				affectedCard.addSemiPermanentAttackBoost(Integer.valueOf(Keyword[0]));
+				affectedCard.addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[1]));
+				if (Keyword.length > 2) {
+					String Keywords[] = Keyword[2].split(" & ");
+					for(int j = 0; j < Keywords.length; j++) {
+						affectedCard.addExtrinsicKeyword(Keywords[j]);
+					}
+				}
+			}
+		}
+		
+		/*
 		void addKeyword(Card SourceCard, int ANumber, String[] Keyword_Details) {
 			// Initialize Variables
 			next[ANumber].clear();
@@ -11662,7 +11733,33 @@ public class GameActionUtil {
 				}
 			}
 		}
+		*/
 		
+		void removeStaticEffect(StaticEffect se) {
+			Card Source = se.getSource();
+			CardList affected = se.getAffectedCards();
+			int KeywordNumber = se.getKeywordNumber();
+			int xValue = se.getXValue();
+            String parse = Source.getKeyword().get(KeywordNumber).toString();                
+            String k[] = parse.split(":");
+			for(int i = 0; i < affected.size(); i++) {
+				removeStaticEffect(affected.get(i),k,xValue);
+			}	
+		}
+		
+		void removeStaticEffect(Card affectedCard, String[] Keyword_Details, int xValue) {
+			String[] Keyword = Keyword_Details[2].replace("+","").split("/");
+			affectedCard.addSemiPermanentAttackBoost(Integer.valueOf(Keyword[0]) * -1);
+			affectedCard.addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[1]) * -1);
+			if (Keyword.length > 2) {
+				String Keywords[] = Keyword[2].split(" & ");
+				for(int j = 0; j < Keywords.length; j++) {
+					affectedCard.removeExtrinsicKeyword(Keywords[j]);
+				}
+			}
+		}
+		
+		/*
 		void removeKeyword(CardList list , Card Source,int ANumber, int AbilityNumber, String LastKnownController) {
 			// Initialize Variables
             String parse = Source.getKeyword().get(AbilityNumber).toString();                
@@ -11716,6 +11813,7 @@ public class GameActionUtil {
 				}
 			}
 		}
+		*/
 		
     	// Special Conditions
 		boolean SpecialConditionsMet(Card SourceCard, String SpecialConditions) {
