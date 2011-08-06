@@ -7068,21 +7068,12 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public void resolve() {
-                		CardList cardsInGrave = new CardList(AllZone.Human_Graveyard.getCards());
                 		input[0] = "";
                 		while(input[0] == "") {
                 			input[0] = JOptionPane.showInputDialog(null, "Which creature type?", "Pick type",
                                 JOptionPane.QUESTION_MESSAGE);
                 			if(input[0] == null) break;
                         	if(!CardUtil.isCreatureType(input[0])) input[0] = "";
-                			/*
-                        	CardList matchingCardsInGrave = cardsInGrave.filter(new CardListFilter() {
-                				public boolean addCard(Card c) {
-                					return c.getType().contains(input[0]);
-                				}
-                			});
-                			if(matchingCardsInGrave.size() == 0) input[0] = "";
-                        	*/
                         	//TODO: some more input validation, case-sensitivity, etc.
                         
                         	input[0] = input[0].trim(); //this is to prevent "cheating", and selecting multiple creature types,eg "Goblin Soldier"
