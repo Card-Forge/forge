@@ -1,3 +1,9 @@
+Eye of Ugin
+no cost
+Legendary Land
+Colorless Eldrazi spells you cast cost 2 less to cast.
+CostChange:Player:Less:2:Spell:colorless:Eldrazi:NoSpecial
+
 Edgewalker
 1 W B 
 Creature Human Cleric

@@ -19,7 +19,7 @@ public class Input_PayManaCost extends Input {
     private final SpellAbility spell;
    
     public Input_PayManaCost(SpellAbility sa) {
-        originalManaCost = sa.getSourceCard().getManaCost();
+        originalManaCost = sa.getManaCost();
         originalCard = sa.getSourceCard();
             
         spell = sa;

@@ -824,6 +824,80 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Eye of Ugin")) {
+            final Ability_Tap ability = new Ability_Tap(card, "7") {
+                private static final long serialVersionUID = 54417412481917927L;
+
+                @Override
+                public boolean canPlayAI() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+                    CardList list = new CardList(library.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardUtil.getColors(c).contains(Constant.Color.Colorless)  && c.isCreature();
+                        }
+                    });
+                    if(super.canPlay() && list.size() > 0 && AllZone.GameAction.isCardInPlay(card)) return true;
+                    else return false;                  
+                }//canPlay()
+                
+                @Override
+                public void resolve() {
+                    if(card.getController().equals(Constant.Player.Human)) humanResolve();
+                    else computerResolve();
+                }
+                
+                public void computerResolve() {
+                    CardList library = new CardList(AllZone.Computer_Library.getCards());
+                    library = library.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardUtil.getColors(c).contains(Constant.Color.Colorless) && c.isCreature();
+                        }
+                    });
+                    
+                    if(library.isEmpty()) return;
+                    CardListUtil.sortAttack(library);
+                    Card target = null;
+                    if(target == null) target = library.get(0);                  
+                    AllZone.Computer_Library.remove(target);
+                    AllZone.Computer_Hand.add(target);                 
+                    AllZone.GameAction.shuffle(Constant.Player.Computer);
+                    JOptionPane.showMessageDialog(null, "The Computer searched for: " + target.getName(), "", JOptionPane.INFORMATION_MESSAGE);
+                }//computerResolve()
+                
+                public void humanResolve() {
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    
+                    CardList librarylist = new CardList(AllZone.Human_Library.getCards());
+                    librarylist = librarylist.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardUtil.getColors(c).contains(Constant.Color.Colorless) && c.isCreature();
+                        }
+                    });
+                    if(librarylist.size() > 0) {
+                    Object o = AllZone.Display.getChoiceOptional("Choose a colorless creature card: ", librarylist.toArray());
+                    if(o != null) {
+                        Card target = (Card) o;
+                        
+                        library.remove(target);
+                        hand.add(target);
+                    }
+                    } else {
+                    	JOptionPane.showMessageDialog(null, "No more suitable cards in Library", "", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    AllZone.GameAction.shuffle(card.getController());
+                }//resolve()
+             };//SpellAbility
+
+
+             card.addSpellAbility(ability);
+             ability.setStackDescription(card.getController() + " - searches their library for a colorless creature card, reveals it, and put it into your hand. Then shuffle your library.");
+             ability.setBeforePayMana(new Input_PayManaCost(ability));
+             ability.setDescription("7, Tap: Search your library for a colorless creature card, reveal it, and put it into your hand. Then shuffle your library.");
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Terramorphic Expanse") || cardName.equals("Evolving Wilds")) {
             //tap sacrifice
             final Ability_Tap ability = new Ability_Tap(card, "0") {
