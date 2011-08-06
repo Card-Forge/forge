@@ -1,0 +1,9 @@
+Name:Etherium Astrolabe
+ManaCost:2 U
+Types:Artifact
+Text:no text
+K:Flash
+K:abDrawCards B T Sac<1/Artifact>:1:Draw a card.:Etherium Astrolabe - Controller draws a card.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/etherium_astrolabe.jpg
+End
