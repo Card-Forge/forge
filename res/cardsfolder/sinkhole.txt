@@ -1,8 +1,8 @@
 Name:Sinkhole
 ManaCost:B B
 Types:Sorcery
-Text:Destroy target land.
-K:spDestroyTgt:Land
+Text:no text
+A:SP$Destroy | Cost$ B B | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sinkhole.jpg
 SetInfo:LEB|Common|http://magiccards.info/scans/en/be/38.jpg

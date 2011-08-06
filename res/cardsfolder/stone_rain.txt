@@ -1,8 +1,8 @@
 Name:Stone Rain
 ManaCost:2 R
 Types:Sorcery
-Text:Destroy target land.
-K:spDestroyTgt:Land
+Text:no text
+A:SP$Destroy | Cost$ 2 R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_rain.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/225.jpg

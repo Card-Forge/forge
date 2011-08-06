@@ -1,8 +1,8 @@
 Name:Terashi's Verdict
 ManaCost:1 W
 Types:Instant Arcane
-Text:Destroy target attacking creature with power 3 or less.
-K:spDestroyTgt:Creature.powerLE3+attacking
+Text:no text
+A:SP$Destroy | Cost$ 1 W | ValidTgts$ Creature.powerLE3+attacking | TgtPrompt$ Select target attacking creature with power 3 or less | SpellDescription$ Destroy target attacking creature with power 3 or less.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terashis_verdict.jpg

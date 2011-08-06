@@ -1,8 +1,8 @@
 Name:Shatter
 ManaCost:1 R
 Types:Instant
-Text:Destroy target Artifact.
-K:spDestroyTgt:Artifact
+Text:no text
+A:SP$Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shatter.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/220.jpg

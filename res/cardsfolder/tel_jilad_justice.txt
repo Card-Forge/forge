@@ -1,8 +1,8 @@
 Name:Tel-Jilad Justice
 ManaCost:1 G
 Types:Instant
-Text:Destroy target artifact.
-K:spDestroyTgt:Artifact
+Text:no text
+A:SP$Destroy | Cost$ 1 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 K:Scry 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_justice.jpg

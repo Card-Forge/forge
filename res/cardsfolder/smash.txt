@@ -1,8 +1,8 @@
 Name:Smash
 ManaCost:2 R
 Types:Instant
-Text:Destroy target artifact.
-K:spDestroyTgt:Artifact
+Text:no text
+A:SP$Destroy | Cost$ 2 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smash.jpg

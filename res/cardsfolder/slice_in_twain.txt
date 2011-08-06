@@ -1,8 +1,8 @@
 Name:Slice in Twain
 ManaCost:2 G G
 Types:Instant
-Text:Destroy target artifact or enchantment.
-K:spDestroyTgt:Artifact,Enchantment
+Text:no text
+A:SP$Destroy | Cost$ 2 G G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 K:Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slice_in_twain.jpg
