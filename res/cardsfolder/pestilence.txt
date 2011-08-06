@@ -1,7 +1,10 @@
 Name:Pestilence
 ManaCost:2 B B
 Types:Enchantment
-Text:At the beginning of the end step, if no creatures are on the battlefield, sacrifice CARDNAME.
+Text:no text
+T:Mode$ Phase | Phase$ End Of Turn | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if no creatures are on the battlefield, sacrifice CARDNAME. 
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
+A:AB$ DamageAll | Cost$ B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5619.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/147.jpg
