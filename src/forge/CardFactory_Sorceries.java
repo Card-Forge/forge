@@ -1618,23 +1618,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Delirium Skeins")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 7901561313373975648L;
-                
-                @Override
-                public void resolve() {
-                	AllZone.ComputerPlayer.discard(3, this, false);
-                	AllZone.HumanPlayer.discard(3, this, false);
-                }//resolve()
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
+       
 
         //*************** START *********** START **************************
         else if(cardName.equals("Ichor Slick")) {
