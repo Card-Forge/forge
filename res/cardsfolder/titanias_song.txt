@@ -1,0 +1,13 @@
+Name:Titania's Song
+ManaCost:3 G
+Types:Enchantment
+Text:no text
+K:stAnimateAll:Artifact.nonCreature:Count$CardManaCost/Count$CardManaCost:Creature:no colors:Overwrite:No condition:Each noncreature artifact loses its abilities and becomes an artifact creature with power and toughness each equal to its converted mana cost.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ If CARDNAME leaves the battlefield, this effect continues until end of turn.  
+SVar:TrigEffect:AB$ Effect | Cost$ 0 | Name$ Titania's Song Effect | Keywords$ KWAnimateAll
+SVar:KWAnimateAll:stAnimateAll:Artifact.nonCreature:Count$CardManaCost/Count$CardManaCost:Creature:no colors:Overwrite:No condition:Each noncreature artifact loses its abilities and becomes an artifact creature with power and toughness each equal to its converted mana cost.
+SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/titanias_song.jpg
+End
