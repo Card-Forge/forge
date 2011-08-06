@@ -263,6 +263,7 @@ public class GameActionUtil {
         playCard_Storm(c);
 
 		playCard_Dovescape(c); //keep this one top
+		playCard_Vengevine(c);
 		playCard_Demigod_of_Revenge(c);
 		playCard_Halcyon_Glaze(c);
 		playCard_Thief_of_Hope(c);
@@ -418,73 +419,111 @@ public class GameActionUtil {
 	
 	
 	
-	public static void playCard_Cascade(Card c) {
+	public static void playCard_Cascade(final Card c) {
+		Command Cascade = new Command() {
+			private static final long serialVersionUID = -845154812215847505L;
+			public void execute() {
+				final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+						Constant.Player.Human);
+				final PlayerZone comp = AllZone.getZone(Constant.Zone.Play,
+						Constant.Player.Computer);
 
-		if(c.getKeyword().contains("Cascade") || c.getName().equals("Bituminous Blast")) //keyword gets cleared for Bitumonous Blast
-		{
-			final String controller = c.getController();
-			final PlayerZone lib = AllZone.getZone(Constant.Zone.Library, controller);
-			final Card cascCard = c;
+				CardList Human_Nexus = new CardList();
+				CardList Computer_Nexus = new CardList();
+				Human_Nexus.addAll(play.getCards());
+				Computer_Nexus.addAll(comp.getCards());
 
-			final Ability ability = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					CardList topOfLibrary = new CardList(lib.getCards());
-					CardList revealed = new CardList();
-
-					if(topOfLibrary.size() == 0) return;
-
-					Card cascadedCard = null;
-					Card crd;
-					int count = 0;
-					while(cascadedCard == null) {
-						crd = topOfLibrary.get(count++);
-						revealed.add(crd);
-						lib.remove(crd);
-						if((!crd.isLand() && CardUtil.getConvertedManaCost(crd.getManaCost()) < CardUtil.getConvertedManaCost(cascCard.getManaCost()))) cascadedCard = crd;
-
-						if(count == topOfLibrary.size()) break;
-
-					}//while
-						AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
-
-					if(cascadedCard != null && !cascadedCard.isUnCastable()) {
-
-						if(cascadedCard.getController().equals(Constant.Player.Human)) {
-							String[] choices = {"Yes", "No"};
-
-							Object q = null;
-
-							q = AllZone.Display.getChoiceOptional("Cast " + cascadedCard.getName() + "?", choices);
-							if(q != null) {
-								if(q.equals("Yes")) {
-									AllZone.GameAction.playCardNoCost(cascadedCard);
-									revealed.remove(cascadedCard);
-								}
-							}
-						} else //computer
+				Human_Nexus = Human_Nexus.getName("Maelstrom Nexus");
+				Computer_Nexus = Computer_Nexus.getName("Maelstrom Nexus");
+				if (Human_Nexus.size() > 0){
+					if (Phase.PlayerSpellCount == 1)
+					{
+						for (int i=0;i<Human_Nexus.size();i++)
 						{
-							ArrayList<SpellAbility> choices = cascadedCard.getBasicSpells();
+							DoCascade(c);
+						}
+					}
+						}
+				if (Computer_Nexus.size() > 0){
+					if (Phase.ComputerSpellCount == 1)
+					{
+						for (int i=0;i<Computer_Nexus.size();i++)
+						{ 
+							DoCascade(c);
+						}
+					}
+						}
+				if(c.getKeyword().contains("Cascade") || c.getName().equals("Bituminous Blast")) //keyword gets cleared for Bitumonous Blast
+				{
+				DoCascade(c);	
+				}
+			}// execute()
 
-							for(SpellAbility sa:choices) {
-								if(sa.canPlayAI()) {
-									ComputerUtil.playStackFree(sa);
-									revealed.remove(cascadedCard);
-									break;
+			void DoCascade(Card c) {
+				final String controller = c.getController();
+				final PlayerZone lib = AllZone.getZone(Constant.Zone.Library, controller);
+				final Card cascCard = c;
+
+				final Ability ability = new Ability(c, "0") {
+					@Override
+					public void resolve() {
+						CardList topOfLibrary = new CardList(lib.getCards());
+						CardList revealed = new CardList();
+
+						if(topOfLibrary.size() == 0) return;
+
+						Card cascadedCard = null;
+						Card crd;
+						int count = 0;
+						while(cascadedCard == null) {
+							crd = topOfLibrary.get(count++);
+							revealed.add(crd);
+							lib.remove(crd);
+							if((!crd.isLand() && CardUtil.getConvertedManaCost(crd.getManaCost()) < CardUtil.getConvertedManaCost(cascCard.getManaCost()))) cascadedCard = crd;
+
+							if(count == topOfLibrary.size()) break;
+
+						}//while
+							AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
+
+						if(cascadedCard != null && !cascadedCard.isUnCastable()) {
+
+							if(cascadedCard.getController().equals(Constant.Player.Human)) {
+								String[] choices = {"Yes", "No"};
+
+								Object q = null;
+
+								q = AllZone.Display.getChoiceOptional("Cast " + cascadedCard.getName() + "?", choices);
+								if(q != null) {
+									if(q.equals("Yes")) {
+										AllZone.GameAction.playCardNoCost(cascadedCard);
+										revealed.remove(cascadedCard);
+									}
+								}
+							} else //computer
+							{
+								ArrayList<SpellAbility> choices = cascadedCard.getBasicSpells();
+
+								for(SpellAbility sa:choices) {
+									if(sa.canPlayAI()) {
+										ComputerUtil.playStackFree(sa);
+										revealed.remove(cascadedCard);
+										break;
+									}
 								}
 							}
 						}
+						revealed.shuffle();
+						for(Card bottom:revealed) {
+							lib.add(bottom);
+						}
 					}
-					revealed.shuffle();
-					for(Card bottom:revealed) {
-						lib.add(bottom);
-					}
-				}
-			};
-			ability.setStackDescription(c + " - Cascade.");
-			AllZone.Stack.add(ability);
-
-		}
+				};
+				ability.setStackDescription(c + " - Cascade.");
+				AllZone.Stack.add(ability);
+			}
+		};
+		Cascade.execute();
 	}
 	
 	public static void playCard_Storm(Card c) {
@@ -869,6 +908,45 @@ public class GameActionUtil {
 			};
 			Storm.setStackDescription(c + " - Storm.");
 			AllZone.Stack.add(Storm);			
+		}
+	}
+	
+	public static void playCard_Vengevine(Card c) {
+		if (Phase.PlayerCreatureSpellCount == 2 || Phase.ComputerCreatureSpellCount == 2)
+		{
+		final String controller = c.getController();
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, controller);
+		CardList list = new CardList();
+		list.addAll(grave.getCards());
+		list = list.getName("Vengevine");
+		if(list.size() > 0) {
+				for(int i = 0; i < list.size(); i++) {
+					final Card card = list.get(i);
+					Ability ability = new Ability(card, "0") {
+						@Override
+						public void resolve() {
+				        	if(controller == "Human"){
+					    		String[] choices = {"Yes", "No"};
+					    		Object q = null;
+					    		q = AllZone.Display.getChoiceOptional("Return Vengevine from the graveyard", choices);
+					    		if(q.equals("Yes")) {
+				                    if(AllZone.GameAction.isCardInZone(card, grave)) {
+				                        AllZone.GameAction.moveTo(play, card);
+				                    }
+					    		}
+				        	} else {
+			                    if(AllZone.GameAction.isCardInZone(card, grave)) {
+			                        AllZone.GameAction.moveTo(play, card);
+			                    }
+				        	}
+						}
+					}; // ability
+
+					ability.setStackDescription(card.getName() + " - " + "Whenever you cast a spell, if it's the second creature spell you cast this turn, you may return Vengevine from your graveyard to the battlefield.");
+					AllZone.Stack.add(ability);
+			}//if
+		}
 		}
 	}
 	

@@ -5,6 +5,10 @@ public class MagicStack extends MyObservable
 {
   private ArrayList<SpellAbility> stack = new ArrayList<SpellAbility>();
   private Object StormCount;
+  private Object PlayerSpellCount;
+  private Object PlayerCreatureSpellCount;   
+  private Object ComputerSpellCount;
+  private Object ComputerCreatureSpellCount;
   
   public void reset()
   {
@@ -140,6 +144,17 @@ public class MagicStack extends MyObservable
     if(sp.isSpell())
     {
    	    Phase.StormCount = Phase.StormCount + 1;
+   	    if(sp.getSourceCard().getController() == "Human") {
+   	   	    Phase.PlayerSpellCount = Phase.PlayerSpellCount + 1; 
+   	   	    if(sp.getSourceCard().isCreature() == true) {
+   	   	   	    Phase.PlayerCreatureSpellCount = Phase.PlayerCreatureSpellCount + 1;   	    	
+   	   	    }
+   	   	    } else {
+   	   	    Phase.ComputerSpellCount = Phase.ComputerSpellCount + 1;
+   	   	    if(sp.getSourceCard().isCreature() == true) {
+   	   	    Phase.ComputerCreatureSpellCount = Phase.ComputerCreatureSpellCount + 1;
+   	   	    }
+   	   	    }
     	//attempt to counter human spell
     	if (sp.getSourceCard().getController().equals(Constant.Player.Human) &&
     		CardFactoryUtil.isCounterable(sp.getSourceCard()) )
@@ -181,4 +196,36 @@ public class MagicStack extends MyObservable
 	  public Object getStormCount() {
 	  	return StormCount;
 	  }
-}
+	  public void setPlayerCreatureSpellCount(Object playerCreatureSpellCount) {
+			PlayerCreatureSpellCount = playerCreatureSpellCount;
+		}
+
+		public Object getPlayerCreatureSpellCount() {
+			return PlayerCreatureSpellCount;
+		}
+
+		public void setPlayerSpellCount(Object playerSpellCount) {
+			PlayerSpellCount = playerSpellCount;
+		}
+
+		public Object getPlayerSpellCount() {
+			return PlayerSpellCount;
+		}
+
+		public void setComputerSpellCount(Object computerSpellCount) {
+			ComputerSpellCount = computerSpellCount;
+		}
+
+		public Object getComputerSpellCount() {
+			return ComputerSpellCount;
+		}
+
+		public void setComputerCreatureSpellCount(Object computerCreatureSpellCount) {
+			ComputerCreatureSpellCount = computerCreatureSpellCount;
+		}
+
+		public Object getComputerCreatureSpellCount() {
+			return ComputerCreatureSpellCount;
+		}
+		}
+
