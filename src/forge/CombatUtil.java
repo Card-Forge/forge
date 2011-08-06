@@ -425,7 +425,7 @@ public class CombatUtil {
         	return false;
         
         if(c.getKeyword().contains("Defender") && !(c.isType("Wall") && AllZoneUtil.isCardInPlay("Rolling Stones")) &&
-        		(!(c.isType("Wall") && c.isEnchantedBy("Animate Wall")))) {
+        		(!(c.isType("Wall") && c.isEnchantedBy("Animate Wall"))) && !c.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
         	return false;
         }
         
