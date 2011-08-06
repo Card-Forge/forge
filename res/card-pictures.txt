@@ -3855,3 +3855,4 @@ caustic_rain.jpg		http://www.wizards.com/global/images/magic/general/caustic_rai
 erase.jpg		http://www.wizards.com/global/images/magic/general/erase.jpg
 ionas_judgment.jpg		http://www.wizards.com/global/images/magic/general/ionas_judgment.jpg
 wipe_clean.jpg		http://www.wizards.com/global/images/magic/general/wipe_clean.jpg
+deja_vu.jpg		http://serv3.tcgimages.eu/img/cards/Portal/deja_vu.jpg
