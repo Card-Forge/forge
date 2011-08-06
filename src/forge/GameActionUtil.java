@@ -14729,7 +14729,7 @@ public class GameActionUtil {
 			return equipment.size();
 		}
 	};// Goblin_Gaveleer
-
+	/*
 	public static Command Uril                        = new Command() {
 		private static final long serialVersionUID = 8168928048322850517L;
 
@@ -14750,7 +14750,7 @@ public class GameActionUtil {
 			return auras.size();
 		}
 	};
-
+	*/
 
 	public static Command Kithkin_Rabble              = new Command() {
 		private static final long serialVersionUID = 6686690505949642328L;
@@ -16497,7 +16497,7 @@ public class GameActionUtil {
 		commands.put("Transcendent_Master", Transcendent_Master);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);
-		commands.put("Uril", Uril);
+		//commands.put("Uril", Uril);
 		
 		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
 		commands.put("Vexing_Beetle", Vexing_Beetle);

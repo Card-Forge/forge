@@ -131,7 +131,7 @@ public class StaticEffects
 		cardToEffectsList.put("Transcendent Master", new String[]{"Transcendent_Master"});
 		
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});
-		cardToEffectsList.put("Uril, the Miststalker", new String[] {"Uril"});
+		//cardToEffectsList.put("Uril, the Miststalker", new String[] {"Uril"});
 		
 		cardToEffectsList.put("Vampire Nocturnus", new String[]{"Vampire_Nocturnus"});
 		cardToEffectsList.put("Vexing Beetle", new String[] {"Vexing_Beetle"});
