@@ -2265,8 +2265,6 @@ class CardFactory_Auras {
 						if(!super.canPlayAI()) return false;
 						
                         CardList tgts = CardFactoryUtil.AI_getHumanCreature(card, true);
-                        CardListUtil.sortAttack(tgts);
-                        CardListUtil.sortFlying(tgts);
                         
                         /*
                          *  This is a new addition and is used
@@ -2278,13 +2276,6 @@ class CardFactory_Auras {
                         			return CardUtil.getConvertedManaCost(c.getManaCost()) <= 2;
                         		}
                         	});
-                        	if (tgts.isEmpty()) return false;
-                        	else {
-                        		CardListUtil.sortAttack(tgts);
-                                CardListUtil.sortFlying(tgts);
-                        		setTargetCard(tgts.get(0));
-                        		return true;
-                        	}
                         }
                         
                         /*
@@ -2300,17 +2291,12 @@ class CardFactory_Auras {
                         }
                         
                         if (tgts.isEmpty()) return false;
-                                                
-                        if (2 <= tgts.get(0).getNetAttack() 
-                        		&& tgts.get(0).getKeyword().contains("Flying")) {
-                            setTargetCard(tgts.get(0));
-                            return true;
-                        }
                         
-                        CardListUtil.sortAttack(tgts);
-                        if (4 <= tgts.get(0).getNetAttack()) {
-                            setTargetCard(tgts.get(0));
-                            return true;
+                        Card target = CardFactoryUtil.AI_getBestCreature(tgts);
+                                                
+                        if (CardFactoryUtil.evaluateCreature(target) >= 160) {
+                        	setTargetCard(target);
+                        	return true;
                         }
                         
                         /*
@@ -2318,10 +2304,9 @@ class CardFactory_Auras {
                          *  Do we want the AI to hold these auras when
                          *  losing game and at a creature disadvatange
                          */
-                        if (3 <= tgts.get(0).getNetAttack() 
-                        		&& AllZone.HumanPlayer.getLife() > AllZone.ComputerPlayer.getLife()) {
-                            setTargetCard(tgts.get(0));
-                            return true;
+                        if (CardFactoryUtil.evaluateCreature(target) >= 130 && 5 > AllZone.ComputerPlayer.getLife()) {
+                        	setTargetCard(target);
+                        	return true;
                         }
                         
                         return false;

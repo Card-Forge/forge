@@ -122,7 +122,7 @@ public class EndOfTurn implements java.io.Serializable
 
     	}
     	if(c.getName().equals("Erg Raiders") && !c.getCreatureAttackedThisTurn() &&
-    			!(c.getTurnInZone() == AllZone.Phase.getTurn()) && AllZone.Phase.isPlayerTurn(c.getController())) {
+    			!c.isSick() && AllZone.Phase.isPlayerTurn(c.getController())) {
     		final Card raider = c;
     		final SpellAbility change = new Ability(raider, "0") {
     			@Override

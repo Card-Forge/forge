@@ -144,9 +144,11 @@ public class GameAction {
         //so "enters the battlefield" abilities don't trigger
         
         for(Card c : list){
+        	int turnInZone = c.getTurnInZone();
         	oldBattlefield.remove(c);
         	c.setController(newController);
         	newBattlefield.add(c);
+        	c.setTurnInZone(turnInZone); // The number of turns in the zone should not change
         	if (c.isCreature())
         		AllZone.Combat.removeFromCombat(c);
         }
