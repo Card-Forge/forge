@@ -391,6 +391,9 @@ public class AbilityFactory {
         
         if (mapParams.containsKey("ActivationLimit"))
         	SA.getRestrictions().setActivationLimit(Integer.parseInt(mapParams.get("ActivationLimit")));
+        
+        if(mapParams.containsKey("ActivationNumberSacrifice"))
+        	SA.getRestrictions().setActivationNumberSacrifice(Integer.parseInt(mapParams.get("ActivationNumberSacrifice")));
 
         if (mapParams.containsKey("ActivatingPhases"))
         	SA.getRestrictions().setActivatePhases(mapParams.get("ActivatingPhases"));

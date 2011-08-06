@@ -98,6 +98,12 @@ public class AbilityFactory_Pump {
             	if (!ComputerUtil.canPayCost(this))
             		return false;
             	
+            	//don't risk sacrificing a creature just to pump it
+            	if(this.getRestrictions().getActivationNumberSacrifice() != -1 &&
+        				this.getRestrictions().getNumberTurnActivations() >= (this.getRestrictions().getActivationNumberSacrifice() - 1)) {
+            		return false;
+        		}
+            	
                 int defense = getNumDefense(this);
                 
                 if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) return false;

@@ -77,6 +77,10 @@ public class SpellAbility_Requirements {
 	
 	public void addAbilityToStack(){
 		ability.getRestrictions().abilityActivated();
+		if(ability.getRestrictions().getActivationNumberSacrifice() != -1 &&
+				ability.getRestrictions().getNumberTurnActivations() >= ability.getRestrictions().getActivationNumberSacrifice()) {
+			ability.getSourceCard().addExtrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+		}
 		AllZone.ManaPool.clearPay(false);
 		AllZone.Stack.addAndUnfreeze(ability);
 	}

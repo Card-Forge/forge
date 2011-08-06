@@ -62,17 +62,31 @@ public class SpellAbility_Restriction {
 	
 	private int activationLimit = -1;
 	private int numberTurnActivations = 0;
+	private int activationNumberSacrifice = -1;
 	
 	public void setActivationLimit(int limit){
 		activationLimit = limit;
 	}
 	
+	
 	public void abilityActivated(){
 		numberTurnActivations++;
 	}
 	
+	public int getNumberTurnActivations() {
+		return numberTurnActivations;
+	}
+	
 	public void resetTurnActivations(){
 		numberTurnActivations = 0;
+	}
+	
+	public void setActivationNumberSacrifice(int num) {
+		activationNumberSacrifice = num;
+	}
+	
+	public int getActivationNumberSacrifice() {
+		return activationNumberSacrifice;
 	}
 	
 	private ArrayList<String> activatePhases = new ArrayList<String>();
@@ -136,6 +150,9 @@ public class SpellAbility_Restriction {
 		
 		if (activationLimit != -1 && numberTurnActivations >= activationLimit)
 			return false;
+		
+		/*if( activationNumberSacrifice != -1 && numberTurnActivations >= (activationNumberSacrifice - 1))
+			return false;*/
 		
 		if (activatePhases.size() > 0){
 			boolean isPhase = false;
