@@ -2779,29 +2779,19 @@ public class CardFactory implements NewConstants {
             
             final boolean NoRegen[] = {false};
             final String Drawback[] = {"none"};
-            final String spDesc[] = {"none"};
-            final String stDesc[] = {"none"};
             
-            if (k.length > 2)
+            if (k.length > 3)
             {
             	if (k[3].equals("NoRegen"))
             		NoRegen[0] = true;
             	
             	else if (k[3].startsWith("Drawback$"))
             		Drawback[0] = k[3];
-            	
-            	else
-            		spDesc[0] = k[3];
-            	
-            	if (k.length > 3)
+            	            	
+            	if (k.length > 4)
             	{
             		if (k[4].startsWith("Drawback$"))
             			Drawback[0] = k[4];
-            		else 
-            			spDesc[0] = k[4];
-            		
-            		if (k.length > 4)
-            			stDesc[0] = k[5];
             	}
             	
             	if (!Drawback[0].equals("none"))
@@ -2912,16 +2902,8 @@ public class CardFactory implements NewConstants {
             
             spDstryTgt.setBeforePayMana(InGetTarget);
             
-            if (spDesc[0].equals("none"))
-            {
-            	spDstryTgt.setDescription(card.getText());
-            	card.setText("");
-            }
-            else
-            	spDstryTgt.setDescription(spDesc[0]);
-            
-            if (!stDesc[0].equals("none"))
-            	spDstryTgt.setStackDescription(stDesc[0]);
+            spDstryTgt.setDescription(card.getSpellText());
+            card.setText("");
             
             card.addSpellAbility(spDstryTgt);
             
@@ -2993,6 +2975,9 @@ public class CardFactory implements NewConstants {
 
             }; //SpDstryAll
             
+            spDstryAll.setDescription(card.getSpellText());
+            card.setText("");
+            
             card.addSpellAbility(spDstryAll);            
 
         }//spDestroyAll
@@ -3014,7 +2999,7 @@ public class CardFactory implements NewConstants {
             String tmpDesc = card.getText().substring(15);
             int i = tmpDesc.indexOf(".");
             tmpDesc = tmpDesc.substring(0, i);
-            final String Selec = "Select a target";
+            final String Selec = "Select a target " + tmpDesc + " to return.";
             
             final String Destination = k[2];
             
@@ -3117,7 +3102,7 @@ public class CardFactory implements NewConstants {
             card.setSVar("PlayMain1", "TRUE");
             
             spBnceTgt.setBeforePayMana(InGetTarget);
-            spBnceTgt.setDescription(card.getText());
+            spBnceTgt.setDescription(card.getSpellText());
             card.setText("");
             card.addSpellAbility(spBnceTgt);
             
@@ -3204,6 +3189,9 @@ public class CardFactory implements NewConstants {
                 }// resolve()
 
             }; //SpBnceAll
+            
+            spBnceAll.setDescription(card.getSpellText());
+            card.setText("");
             
             card.addSpellAbility(spBnceAll);            
 
