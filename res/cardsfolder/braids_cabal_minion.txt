@@ -4,7 +4,7 @@ Types:Legendary Creature Human Minion
 Text:no text
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacYou | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices an artifact, creature or land.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSacOpp | Secondary$ True | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices an artifact, creature or land. 
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSacOpp | Secondary$ True | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices an artifact, creature or land.
 SVar:TrigSacYou:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature,Artifact,Land | Defined$ You | ChangeNum$ 1 | SpellDescription$ Sacrifice an artifact, creature or land.
 SVar:TrigSacOpp:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature,Artifact,Land | Defined$ Opponent | ChangeNum$ 1 | SpellDescription$ Sacrifice an artifact, creature or land.
 SVar:RemAIDeck:True
