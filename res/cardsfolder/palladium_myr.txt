@@ -1,0 +1,8 @@
+Name:Palladium Myr
+ManaCost:3
+Types:Artifact Creature Myr
+Textno text
+K:tap: add 2
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+End
