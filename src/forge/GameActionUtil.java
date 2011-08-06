@@ -11953,7 +11953,7 @@ public class GameActionUtil {
 							
 							int x = 0;
 		            		if (k[2].contains("X")) 
-		                 		x = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("X"));
+		                 		x = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("X").split("\\$")[1]);
 		                 	se.setXValue(x);	
 		            		
 							addStaticEffects(affectedCards,k[2],x); //give the boni to the affected cards
