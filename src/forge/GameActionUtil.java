@@ -8907,60 +8907,6 @@ public class GameActionUtil {
 		}// for
 	}// upkeep_Mycoloth()
 	
-	/*
-	private static void upkeep_Luminous_Angel() {
-		final Player player = AllZone.Phase.getActivePlayer();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Luminous Angel");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card card = list.get(i);
-			ability = new Ability(card, "0") {
-				@Override
-				public void resolve() {
-					int multiplier = 1;
-					int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
-					if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
-					for(int i = 0; i < multiplier; i++)
-						makeToken();
-
-				}// resolve()
-
-				public void makeToken() {
-
-					final Card c = new Card();
-
-					c.setOwner(card.getController());
-					c.setController(card.getController());
-
-					c.setName("Spirit");
-					c.setImageName("W 1 1 Spirit");
-					c.setManaCost("W");
-					c.setToken(true);
-
-					c.addType("Creature");
-					c.addType("Spirit");
-
-					c.addIntrinsicKeyword("Flying");
-
-					c.setBaseAttack(1);
-					c.setBaseDefense(1);
-					
-					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-					play.add(c);
-
-				}
-			};// Ability
-			ability.setStackDescription("Luminous Angel - put a 1/1 white Spirit token into play.");
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Luminous_Angel()
-	 */
-	
 	private static void upkeep_Verdant_Force() {
 		//final Player player = AllZone.Phase.getActivePlayer();
 		PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
@@ -8976,10 +8922,11 @@ public class GameActionUtil {
 			ability = new Ability(card, "0") {
 				@Override
 				public void resolve() {
-					int multiplier = 1;
-					int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
-					if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
-					for(int i = 0; i < multiplier; i++)
+					//Doubling Season is handled in CardFactoryUtil.makeToken
+					//int multiplier = 1;
+					//int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
+					//if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
+					//for(int i = 0; i < multiplier; i++)
 						makeToken();
 
 				}// resolve()
