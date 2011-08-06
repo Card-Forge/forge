@@ -7,7 +7,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.math.BigDecimal;
-import com.cloudgarden.layout.AnchorConstraint;
+import java.util.Arrays;
+
 import com.cloudgarden.layout.AnchorLayout;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
@@ -16,10 +17,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -44,6 +49,10 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JLabel jLabelFiveMana;
 	private JLabel jLabelFourMana;
 	private JLabel jLabelThreeMana;
+	private JLabel jLabel1;
+	private JScrollPane jScrollPane1;
+	private JTable jTable1;
+	private JPanel jPanel5;
 	private JButton jButtonRegenerate;
 	private JLabel jLabel4;
 	private JSeparator jSeparator4;
@@ -84,18 +93,18 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	public GUI_DeckAnalysis(JFrame g, TableModel  tb) {
 		super(g);		
 		tModel = tb;
+		
 		jF=g;
 		initGUI();		
 	}
 	
 	private void initGUI() {
 		try {
-			
-			AnchorLayout thisLayout = new AnchorLayout();
-		getContentPane().setLayout(thisLayout);
+
+		getContentPane().setLayout(null);
 			setVisible(true);
 			int wWidth = 600;
-			int wHeight = 300;
+			int wHeight = 600;
 			this.setPreferredSize(new java.awt.Dimension(wWidth, wHeight));
 		
 			Dimension screen = getToolkit().getScreenSize();
@@ -107,50 +116,41 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			pack();
 			this.setIconImage(null);
 			this.addWindowListener(new WListener());
-			getContentPane().add(getJButton1(), new AnchorConstraint(875, 992, 953, 758, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			getContentPane().add(getJLabel1xx(), new AnchorConstraint(27, 783, 80, 9, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			getContentPane().add(getJButtonOk(), new AnchorConstraint(875, 642, 983, 354, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			getContentPane().add(getJPanel1(), new AnchorConstraint(102, 243, 852, 10, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			getContentPane().add(getJPanel2(), new AnchorConstraint(102, 490, 852, 258, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			getContentPane().add(getJPanel3(), new AnchorConstraint(102, 741, 852, 507, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			getContentPane().add(getJPanel4(), new AnchorConstraint(102, 992, 852, 758, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+			getContentPane().add(getJButton1());
+			getContentPane().add(getJLabel1xx());
+			getContentPane().add(getJButtonOk());
+			getContentPane().add(getJPanel1());
+			getContentPane().add(getJPanel2());
+			getContentPane().add(getJPanel3());
+			getContentPane().add(getJPanel4());
+			getContentPane().add(getJPanel5());
+			getContentPane().add( getJLabel1xxxxx());
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	
 
-	
-	
-	/*
-	private ButtonGroup getButtonGroup1() {
-		if(buttonGroup1 == null) {
-			buttonGroup1 = new ButtonGroup();
-		}
-		return buttonGroup1;
-	}
-	*/
 	
 	private JPanel getJPanel1() {
 		if(jPanel1 == null) {
 			jPanel1 = new JPanel();
-			AnchorLayout jPanel1Layout = new AnchorLayout();
-			jPanel1.setPreferredSize(new java.awt.Dimension(138, 201));
-			jPanel1.setLayout(jPanel1Layout);
+
+			jPanel1.setLayout(null);
 			jPanel1.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 			jPanel1.setBackground(new java.awt.Color(192,192,192));
-			jPanel1.add(getJLabel1(), new AnchorConstraint(155, 986, 223, 73, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel1.add(getJSeparator1(), new AnchorConstraint(107, 987, 139, 12, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel1.add(getJLabel2(), new AnchorConstraint(-20, 990, 123, 16, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel1.add(getJLabel3(), new AnchorConstraint(258, 988, 328, 74, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel1.add(getJLabel4(), new AnchorConstraint(366, 988, 437, 74, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel1.add(getJLabel5(), new AnchorConstraint(475, 988, 546, 74, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel1.add(getJLabel6(), new AnchorConstraint(578, 988, 649, 74, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel1.add(getJLabel7(), new AnchorConstraint(687, 988, 752, 74, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel1.add(getJLabel8(), new AnchorConstraint(796, 996, 855, 74, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel1.add(getJLabel1x(), new AnchorConstraint(904, 988, 964, 74, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+			jPanel1.setBounds(5, 35, 137, 203);
+			jPanel1.add(getJLabel1());
+			jPanel1.add(getJSeparator1());
+			jPanel1.add(getJLabel2());
+			jPanel1.add(getJLabel3());
+			jPanel1.add(getJLabel4());
+			jPanel1.add(getJLabel5());
+			jPanel1.add(getJLabel6());
+			jPanel1.add(getJLabel7());
+			jPanel1.add(getJLabel8());
+			jPanel1.add(getJLabel1x());
 		}
 		return jPanel1;
 	}
@@ -163,6 +163,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jLabel2.setFont(new java.awt.Font("Segoe UI",0,14));
 			jLabel2.setPreferredSize(new java.awt.Dimension(152, 39));
 			jLabel2.setLayout(null);
+			jLabel2.setBounds(2, -3, 135, 26);
 		}
 		return jLabel2;
 	}
@@ -173,6 +174,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			//AnchorLayout jSeparator1Layout = new AnchorLayout();
 			jSeparator1.setPreferredSize(new java.awt.Dimension(117, 6));
 			jSeparator1.setLayout(null);
+			jSeparator1.setBounds(1, 20, 136, 5);
 		}
 		return jSeparator1;
 	}
@@ -180,11 +182,9 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JButton getJButtonOk() {
 		if(jButtonOk == null) {
 			jButtonOk = new JButton();
-			AnchorLayout jButtonOkLayout = new AnchorLayout();
-			//AnchorLayout jButtonOkLayout = new AnchorLayout();
-			jButtonOk.setLayout(jButtonOkLayout);
+			jButtonOk.setLayout(null);
 			jButtonOk.setText("OK");
-			jButtonOk.setPreferredSize(new java.awt.Dimension(171, 29));
+			jButtonOk.setBounds(206, 536, 168, 31);
 			jButtonOk.addMouseListener(new CustomListener());
 		}
 		return jButtonOk;
@@ -193,32 +193,30 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JLabel getJLabel1() {
 		if(jLabelBlack == null) {
 			jLabelBlack = new JLabel();
-	//		AnchorLayout jLabel1Layout = new AnchorLayout();
 			jLabelBlack.setText("Black:");
 			jLabelBlack.setPreferredSize(new java.awt.Dimension(105, 12));
 			jLabelBlack.setLayout(null);
+			jLabelBlack.setBounds(10, 28, 127, 13);
 		}
 		return jLabelBlack;
 	}
 	
 	private JLabel getJLabel3() {
 		if(jLabelBlue == null) {
-			jLabelBlue = new JLabel();
-	//		AnchorLayout jLabel3Layout = new AnchorLayout();
+			jLabelBlue = new JLabel();	
 			jLabelBlue.setText("Blue:");
-			jLabelBlue.setPreferredSize(new java.awt.Dimension(117, 13));
 			jLabelBlue.setLayout(null);
+			jLabelBlue.setBounds(10, 50, 127, 13);
 		}
 		return jLabelBlue;
 	}
 	
 	private JLabel getJLabel4() {
 		if(jLabelGreen == null) {
-			jLabelGreen = new JLabel();
-	//		AnchorLayout jLabel4Layout = new AnchorLayout();
+			jLabelGreen = new JLabel();	
 			jLabelGreen.setText("Green:");
-			jLabelGreen.setPreferredSize(new java.awt.Dimension(117, 13));
 			jLabelGreen.setLayout(null);
+			jLabelGreen.setBounds(10, 72, 127, 13);
 		}
 		return jLabelGreen;
 	}
@@ -228,8 +226,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jLabelRed = new JLabel();
 	//		AnchorLayout jLabel5Layout = new AnchorLayout();
 			jLabelRed.setText("Red:");
-			jLabelRed.setPreferredSize(new java.awt.Dimension(117, 13));
 			jLabelRed.setLayout(null);
+			jLabelRed.setBounds(10, 94, 127, 14);
 		}
 		return jLabelRed;
 	}
@@ -239,8 +237,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jLabelWhite = new JLabel();
 	//		AnchorLayout jLabel6Layout = new AnchorLayout();
 			jLabelWhite.setText("White:");
-			jLabelWhite.setPreferredSize(new java.awt.Dimension(117, 13));
 			jLabelWhite.setLayout(null);
+			jLabelWhite.setBounds(10, 116, 127, 13);
 		}
 		return jLabelWhite;
 	}
@@ -250,8 +248,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jLabelMultiColor = new JLabel();
 	//		AnchorLayout jLabel7Layout = new AnchorLayout();
 			jLabelMultiColor.setText("Multicolor:");
-			jLabelMultiColor.setPreferredSize(new java.awt.Dimension(117, 12));
 			jLabelMultiColor.setLayout(null);
+			jLabelMultiColor.setBounds(10, 138, 127, 12);
 		}
 		return jLabelMultiColor;
 	}
@@ -261,8 +259,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jLabelColorless = new JLabel();
 	//		AnchorLayout jLabel8Layout = new AnchorLayout();
 			jLabelColorless.setText("Colorless:");
-			jLabelColorless.setPreferredSize(new java.awt.Dimension(118, 11));
 			jLabelColorless.setLayout(null);
+			jLabelColorless.setBounds(10, 160, 128, 11);
 		}
 		return jLabelColorless;
 	}
@@ -271,8 +269,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelLand == null) {
 			jLabelLand = new JLabel();
 			jLabelLand.setText("Land: ");
-			jLabelLand.setPreferredSize(new java.awt.Dimension(117, 11));
 			jLabelLand.setLayout(null);
+			jLabelLand.setBounds(10, 182, 129, 10);
 		}
 		return jLabelLand;
 	}
@@ -282,8 +280,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jLabelTotal = new JLabel();
 	//		AnchorLayout jLabel1Layout = new AnchorLayout();
 			jLabelTotal.setText("Information about deck:");
-			jLabelTotal.setPreferredSize(new java.awt.Dimension(460, 14));
 			jLabelTotal.setLayout(null);
+			jLabelTotal.setBounds(5, 0, 454, 35);
 		}
 		return jLabelTotal;
 	}
@@ -291,20 +289,20 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JPanel getJPanel2() {
 		if(jPanel2 == null) {
 			jPanel2 = new JPanel();
-			AnchorLayout jPanel2Layout = new AnchorLayout();
+			
 			jPanel2.setBackground(new java.awt.Color(192,192,192));
-			jPanel2.setPreferredSize(new java.awt.Dimension(138, 201));
 			jPanel2.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-			jPanel2.setLayout(jPanel2Layout);
-			jPanel2.add(getJLabel1xxx(), new AnchorConstraint(155, 986, 223, 73, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel2.add(getJSeparator2(), new AnchorConstraint(107, 987, 139, 12, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel2.add(getJLabel3x(), new AnchorConstraint(-20, 990, 123, 16, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel2.add(getJLabel4x(), new AnchorConstraint(279, 987, 350, 77, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel2.add(getJLabel5x(), new AnchorConstraint(404, 987, 475, 77, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel2.add(getJLabel6x(), new AnchorConstraint(529, 987, 600, 77, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel2.add(getJLabel7x(), new AnchorConstraint(654, 987, 725, 77, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel2.add(getJLabel8x(), new AnchorConstraint(779, 987, 845, 77, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel2.add(getJLabel10(), new AnchorConstraint(904, 988, 964, 74, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+			jPanel2.setLayout(null);
+			jPanel2.setBounds(153, 35, 137, 203);
+			jPanel2.add(getJLabel1xxx());
+			jPanel2.add(getJSeparator2());
+			jPanel2.add(getJLabel3x());
+			jPanel2.add(getJLabel4x());
+			jPanel2.add(getJLabel5x());
+			jPanel2.add(getJLabel6x());
+			jPanel2.add(getJLabel7x());
+			jPanel2.add(getJLabel8x());
+			jPanel2.add(getJLabel10());
 		}
 		return jPanel2;
 	}
@@ -315,6 +313,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jLabelArtifact.setText("Artifact:");
 			jLabelArtifact.setPreferredSize(new java.awt.Dimension(105,12));
 			jLabelArtifact.setLayout(null);
+			jLabelArtifact.setBounds(10, 28, 127, 13);
 		}
 		return jLabelArtifact;
 	}
@@ -324,6 +323,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jSeparator2 = new JSeparator();
 			jSeparator2.setPreferredSize(new java.awt.Dimension(117,6));
 			jSeparator2.setLayout(null);
+			jSeparator2.setBounds(1, 20, 136, 5);
 		}
 		return jSeparator2;
 	}
@@ -336,6 +336,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jLabel3.setFont(new java.awt.Font("Segoe UI",0,14));
 			jLabel3.setPreferredSize(new java.awt.Dimension(152,39));
 			jLabel3.setLayout(null);
+			jLabel3.setBounds(2, -3, 135, 26);
 		}
 		return jLabel3;
 	}
@@ -344,8 +345,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelCreature == null) {
 			jLabelCreature = new JLabel();
 			jLabelCreature.setText("Creature:");
-			jLabelCreature.setPreferredSize(new java.awt.Dimension(111, 13));
 			jLabelCreature.setLayout(null);
+			jLabelCreature.setBounds(10, 53, 127, 13);
 		}
 		return jLabelCreature;
 	}
@@ -354,8 +355,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelEnchant == null) {
 			jLabelEnchant = new JLabel();
 			jLabelEnchant.setText("Enchant:");
-			jLabelEnchant.setPreferredSize(new java.awt.Dimension(111, 13));
 			jLabelEnchant.setLayout(null);
+			jLabelEnchant.setBounds(10, 79, 127, 13);
 		}
 		return jLabelEnchant;
 	}
@@ -364,8 +365,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelInstant == null) {
 			jLabelInstant = new JLabel();
 			jLabelInstant.setText("Instant:");
-			jLabelInstant.setPreferredSize(new java.awt.Dimension(111, 13));
 			jLabelInstant.setLayout(null);
+			jLabelInstant.setBounds(10, 105, 127, 14);
 		}
 		return jLabelInstant;
 	}
@@ -374,8 +375,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelLandType == null) {
 			jLabelLandType = new JLabel();
 			jLabelLandType.setText("Land:");
-			jLabelLandType.setPreferredSize(new java.awt.Dimension(111, 13));
 			jLabelLandType.setLayout(null);
+			jLabelLandType.setBounds(10, 130, 127, 13);
 		}
 		return jLabelLandType;
 	}
@@ -384,8 +385,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelPlaneswalker == null) {
 			jLabelPlaneswalker = new JLabel();
 			jLabelPlaneswalker.setText("Planeswalker:");
-			jLabelPlaneswalker.setPreferredSize(new java.awt.Dimension(111, 12));
 			jLabelPlaneswalker.setLayout(null);
+			jLabelPlaneswalker.setBounds(10, 156, 127, 13);
 		}
 		return jLabelPlaneswalker;
 	}
@@ -394,29 +395,28 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelSorcery == null) {
 			jLabelSorcery = new JLabel();
 			jLabelSorcery.setText("Sorcery:");
-			jLabelSorcery.setPreferredSize(new java.awt.Dimension(117,11));
 			jLabelSorcery.setLayout(null);
+			jLabelSorcery.setBounds(10, 182, 127, 11);
 		}
 		return jLabelSorcery;
 	}
 	
 	private JPanel getJPanel3() {
 		if(jPanel3 == null) {
-			jPanel3 = new JPanel();
-			AnchorLayout jPanel3Layout = new AnchorLayout();
+			jPanel3 = new JPanel();			
 			jPanel3.setBackground(new java.awt.Color(192,192,192));
-			jPanel3.setPreferredSize(new java.awt.Dimension(139, 201));
 			jPanel3.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-			jPanel3.setLayout(jPanel3Layout);
-			jPanel3.add(getJLabel1xxxx(), new AnchorConstraint(155, 986, 223, 73, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel3.add(getJSeparator3(), new AnchorConstraint(107, 987, 139, 12, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel3.add(getJLabel4xx(), new AnchorConstraint(-20, 990, 123, 16, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel3.add(getJLabel5xx(), new AnchorConstraint(279, 987, 350, 77, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel3.add(getJLabel6xx(), new AnchorConstraint(404, 987, 475, 77, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel3.add(getJLabel7xx(), new AnchorConstraint(529, 987, 600, 77, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel3.add(getJLabel8xx(), new AnchorConstraint(654, 987, 725, 77, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel3.add(getJLabel9(), new AnchorConstraint(779, 987, 845, 77, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel3.add(getJLabel10x(), new AnchorConstraint(904, 988, 964, 74, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+			jPanel3.setLayout(null);
+			jPanel3.setBounds(302, 35, 137, 203);
+			jPanel3.add(getJLabel1xxxx());
+			jPanel3.add(getJSeparator3());
+			jPanel3.add(getJLabel4xx());
+			jPanel3.add(getJLabel5xx());
+			jPanel3.add(getJLabel6xx());
+			jPanel3.add(getJLabel7xx());
+			jPanel3.add(getJLabel8xx());
+			jPanel3.add(getJLabel9());
+			jPanel3.add(getJLabel10x());
 		}
 		return jPanel3;
 	}
@@ -427,6 +427,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jLabelZeroMana.setText("Zero mana:");
 			jLabelZeroMana.setPreferredSize(new java.awt.Dimension(105,12));
 			jLabelZeroMana.setLayout(null);
+			jLabelZeroMana.setBounds(10, 28, 127, 13);
 		}
 		return jLabelZeroMana;
 	}
@@ -436,6 +437,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jSeparator3 = new JSeparator();
 			jSeparator3.setPreferredSize(new java.awt.Dimension(117,6));
 			jSeparator3.setLayout(null);
+			jSeparator3.setBounds(1, 20, 136, 5);
 		}
 		return jSeparator3;
 	}
@@ -448,6 +450,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jLabelManaCost.setFont(new java.awt.Font("Segoe UI",0,14));
 			jLabelManaCost.setPreferredSize(new java.awt.Dimension(152,39));
 			jLabelManaCost.setLayout(null);
+			jLabelManaCost.setBounds(2, -3, 135, 26);
 		}
 		return jLabelManaCost;
 	}
@@ -456,8 +459,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelOneMana == null) {
 			jLabelOneMana = new JLabel();
 			jLabelOneMana.setText("One mana:");
-			jLabelOneMana.setPreferredSize(new java.awt.Dimension(111,13));
 			jLabelOneMana.setLayout(null);
+			jLabelOneMana.setBounds(10, 53, 127, 13);
 		}
 		return jLabelOneMana;
 	}
@@ -466,8 +469,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelTwoMana == null) {
 			jLabelTwoMana = new JLabel();
 			jLabelTwoMana.setText("Two mana:");
-			jLabelTwoMana.setPreferredSize(new java.awt.Dimension(111,13));
 			jLabelTwoMana.setLayout(null);
+			jLabelTwoMana.setBounds(10, 79, 127, 13);
 		}
 		return jLabelTwoMana;
 	}
@@ -476,8 +479,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelThreeMana == null) {
 			jLabelThreeMana = new JLabel();
 			jLabelThreeMana.setText("Three mana:");
-			jLabelThreeMana.setPreferredSize(new java.awt.Dimension(111,13));
 			jLabelThreeMana.setLayout(null);
+			jLabelThreeMana.setBounds(10, 105, 127, 14);
 		}
 		return jLabelThreeMana;
 	}
@@ -486,8 +489,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelFourMana == null) {
 			jLabelFourMana = new JLabel();
 			jLabelFourMana.setText("Four mana:");
-			jLabelFourMana.setPreferredSize(new java.awt.Dimension(111,13));
 			jLabelFourMana.setLayout(null);
+			jLabelFourMana.setBounds(10, 130, 127, 13);
 		}
 		return jLabelFourMana;
 	}
@@ -496,8 +499,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelFiveMana == null) {
 			jLabelFiveMana = new JLabel();
 			jLabelFiveMana.setText("Five mana:");
-			jLabelFiveMana.setPreferredSize(new java.awt.Dimension(111,12));
 			jLabelFiveMana.setLayout(null);
+			jLabelFiveMana.setBounds(10, 156, 127, 13);
 		}
 		return jLabelFiveMana;
 	}
@@ -506,8 +509,8 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 		if(jLabelSixMana == null) {
 			jLabelSixMana = new JLabel();
 			jLabelSixMana.setText("Six and more:");
-			jLabelSixMana.setPreferredSize(new java.awt.Dimension(117,11));
 			jLabelSixMana.setLayout(null);
+			jLabelSixMana.setBounds(10, 182, 127, 11);
 		}
 		return jLabelSixMana;
 	}
@@ -515,6 +518,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	private JList getJList1() {
 		CardList rList = new CardList();
 		rList=tModel.getCards();
+		
     	rList.shuffle();    	
     	ListModel jList1Model;
 		if (jListFirstHand==null){
@@ -556,29 +560,28 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			}
 				
 	
-			//		AnchorLayout jList1Layout = new AnchorLayout();
 			jListFirstHand.setModel(jList1Model);
-			jListFirstHand.setPreferredSize(new java.awt.Dimension(135, 173));
 			jListFirstHand.setLayout(null);
 			jListFirstHand.setBackground(new java.awt.Color(192,192,192));
 			jListFirstHand.setSelectionBackground(new java.awt.Color(192,192,192));
 			jListFirstHand.setSelectionForeground(new java.awt.Color(0,0,0));
-			jListFirstHand.setFixedCellHeight(25);
-		
+			jListFirstHand.setFixedCellHeight(24);
+			jListFirstHand.setBounds(2, 21, 133, 167);
+
 		return jListFirstHand;
 	}
 	
 	private JPanel getJPanel4() {
 		if(jPanel4 == null) {
-			jPanel4 = new JPanel();
-			AnchorLayout jPanel4Layout = new AnchorLayout();
+			jPanel4 = new JPanel();			
 			jPanel4.setBackground(new java.awt.Color(192,192,192));
-			jPanel4.setPreferredSize(new java.awt.Dimension(139, 201));
 			jPanel4.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-			jPanel4.setLayout(jPanel4Layout);
-			jPanel4.add(getJSeparator4(), new AnchorConstraint(104, 989, 140, 3, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel4.add(getJLabel4xxx(), new AnchorConstraint(2, 989, 108, 17, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel4.add(getJList1(), new AnchorConstraint(116, 989, 977, 17, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+			jPanel4.setLayout(null);
+			jPanel4.setBounds(451, 35, 137, 202);
+			jPanel4.add(getJSeparator4());
+			jPanel4.add(getJLabel4xxx());
+			jPanel4.add(getJList1());
+			jPanel4.add(getJButton1());
 		}else{
 			jPanel4.removeAll();
 			AnchorLayout jPanel4Layout = new AnchorLayout();
@@ -586,9 +589,10 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jPanel4.setPreferredSize(new java.awt.Dimension(139, 201));
 			jPanel4.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 			jPanel4.setLayout(jPanel4Layout);
-			jPanel4.add(getJSeparator4(), new AnchorConstraint(104, 989, 140, 3, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel4.add(getJLabel4xxx(), new AnchorConstraint(2, 989, 108, 17, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-			jPanel4.add(getJList1(), new AnchorConstraint(116, 989, 977, 17, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+			jPanel4.add(getJSeparator4());
+			jPanel4.add(getJLabel4xxx());
+			jPanel4.add(getJList1());
+			jPanel4.add(getJButton1());
 		}	
 		return jPanel4;
 		
@@ -599,6 +603,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jSeparator4 = new JSeparator();
 			jSeparator4.setPreferredSize(new java.awt.Dimension(138, 8));
 			jSeparator4.setLayout(null);
+			jSeparator4.setBounds(0, 19, 137, 7);
 		}
 		return jSeparator4;
 	}
@@ -611,20 +616,21 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 			jLabel4.setFont(new java.awt.Font("Segoe UI",0,14));
 			jLabel4.setPreferredSize(new java.awt.Dimension(136, 24));
 			jLabel4.setLayout(null);
+			jLabel4.setBounds(2, 0, 135, 20);
 		}
 		return jLabel4;
 	}
 	
 	private JButton getJButton1() {
-		CardList rList = new CardList();
+		CardList rList = new CardList();		
 		rList=tModel.getCards();
 		if(jButtonRegenerate == null) {
 			if(rList.size()>=40){
-			jButtonRegenerate = new JButton();
-	//		AnchorLayout jButton1Layout = new AnchorLayout();
+			jButtonRegenerate = new JButton();	
 			jButtonRegenerate.setLayout(null);
 			jButtonRegenerate.setText("Regenerate hand");
 			jButtonRegenerate.setPreferredSize(new java.awt.Dimension(139, 21));
+			jButtonRegenerate.setBounds(2, 189, 133, 13);
 			jButtonRegenerate.addActionListener(new java.awt.event.ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
 	            	jButtonRegenerate_actionPerformed(e);
@@ -632,6 +638,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 	        });
 			}else{
 			jButtonRegenerate = new JButton();
+			jButtonRegenerate.setBounds(2, 189, 133, 13);
 			jButtonRegenerate.setVisible(false);
 			}
 		}
@@ -837,15 +844,176 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 
 	void jButtonRegenerate_actionPerformed(ActionEvent e) {
 		getContentPane().removeAll();
-		getContentPane().add(getJButton1(), new AnchorConstraint(875, 992, 953, 758, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-		getContentPane().add(getJLabel1xx(), new AnchorConstraint(27, 783, 80, 9, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-		getContentPane().add(getJButtonOk(), new AnchorConstraint(875, 642, 983, 354, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-		getContentPane().add(getJPanel1(), new AnchorConstraint(102, 243, 852, 10, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-		getContentPane().add(getJPanel2(), new AnchorConstraint(102, 490, 852, 258, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-		getContentPane().add(getJPanel3(), new AnchorConstraint(102, 741, 852, 507, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
-		getContentPane().add(getJPanel4(), new AnchorConstraint(102, 992, 852, 758, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
+		getContentPane().add(getJPanel5());
+		getContentPane().add(getJLabel1xx());
+		getContentPane().add(getJButtonOk());
+		getContentPane().add(getJPanel1());
+		getContentPane().add(getJPanel2());
+		getContentPane().add(getJPanel3());
+		getContentPane().add(getJPanel4());
+		getContentPane().add(getJPanel5());
+		getContentPane().add(getJLabel1xxxxx());		
 		getContentPane().repaint();
 		
 	}
 	
+	private JPanel getJPanel5() {
+		if(jPanel5 == null) {
+			jPanel5 = new JPanel();
+			jPanel5.setLayout(null);
+			jPanel5.setBounds(5, 262, 583, 270);
+			jPanel5.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+			jPanel5.add(getJScrollPane1());
+		}
+		return jPanel5;
+	}
+	
+	private JTable getJTable1() {
+		if(jTable1 == null) {
+			DefaultTableModel dm = new DefaultTableModel();
+			 dm.setDataVector(new Object[][] { {  }}, new Object[] { "Card", "Qty","1st","2st","3st","4st","5st","6st","7st" });
+
+			jTable1 = new JTable(dm);
+			CardList rList = new CardList();		
+			rList=tModel.getCards();
+			String[] cardsName =new String[rList.size()];
+			int cCount;
+			float fCount;
+			float firstTurnF, secondTurnF, thirdTurnF, fourthTurnF, fivethTurnF, sixthTurnF, seventhTurnF;
+		
+			for (int i=0; i<rList.size(); i++){
+				cardsName[i] = rList.getCard(i).getName();
+			}
+			Arrays.sort (cardsName);
+			jTable1.setValueAt("Few cards.", 0, 0);
+			
+			if(rList.size()>=40){
+				jTable1.setValueAt(cardsName[0], 0, 0);
+				cCount = 1;
+					for (int i=1; i< cardsName.length;i++ ){
+						if(cardsName[i]==cardsName[i-1]){
+							cCount = cCount+1;
+							
+						}else
+						{
+							dm.addRow(new Object[][]{{}});
+							jTable1.setValueAt(cardsName[i], dm.getRowCount()-1, 0);
+							jTable1.setValueAt(cCount, dm.getRowCount()-2, 1);
+							fCount= cCount;
+							
+							firstTurnF = fCount/rList.size();
+							BigDecimal firstTurn = new BigDecimal(firstTurnF*100);
+							firstTurn = firstTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(firstTurn.toString() + " %", dm.getRowCount()-2, 2);
+							
+							secondTurnF = (1-firstTurnF)*fCount/(rList.size() - 1)+firstTurnF;
+							BigDecimal secondTurn = new BigDecimal(secondTurnF*100);
+							secondTurn = secondTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(secondTurn.toString() + " %", dm.getRowCount()-2, 3);
+							
+							thirdTurnF = (1-secondTurnF)*fCount/(rList.size() - 2)+secondTurnF;
+							BigDecimal thirdTurn = new BigDecimal(thirdTurnF*100);
+							thirdTurn = thirdTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(thirdTurn.toString() + " %", dm.getRowCount()-2, 4);
+							
+							fourthTurnF = (1-thirdTurnF)*fCount/(rList.size() - 3)+thirdTurnF;
+							BigDecimal fourthTurn = new BigDecimal(fourthTurnF*100);
+							fourthTurn = fourthTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(fourthTurn.toString() + " %", dm.getRowCount()-2, 5);
+							
+							fivethTurnF = (1-fourthTurnF)*fCount/(rList.size() - 4)+fourthTurnF;
+							BigDecimal fivethTurn = new BigDecimal(fivethTurnF*100);
+							fivethTurn = fivethTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(fivethTurn.toString() + " %", dm.getRowCount()-2, 6);
+							
+							sixthTurnF = (1-fivethTurnF)*fCount/(rList.size() - 5)+fivethTurnF;
+							BigDecimal sixthTurn = new BigDecimal(sixthTurnF*100);
+							sixthTurn = sixthTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(sixthTurn.toString() + " %", dm.getRowCount()-2, 7);
+							
+							seventhTurnF = (1-sixthTurnF)*fCount/(rList.size() - 6)+sixthTurnF;
+							BigDecimal seventhTurn = new BigDecimal(seventhTurnF*100);
+							seventhTurn = seventhTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(seventhTurn.toString() + " %", dm.getRowCount()-2, 8);
+							
+							cCount=1;
+						}
+						if(i==cardsName.length-1){
+						    jTable1.setValueAt(cCount, dm.getRowCount()-1, 1);
+						    fCount= cCount;
+							
+						    firstTurnF = fCount/rList.size();
+							BigDecimal firstTurn = new BigDecimal(firstTurnF*100);
+							firstTurn = firstTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(firstTurn.toString() + " %", dm.getRowCount()-1, 2);
+							
+							secondTurnF = (1-firstTurnF)*fCount/(rList.size() - 1)+firstTurnF;
+							BigDecimal secondTurn = new BigDecimal(secondTurnF*100);
+							secondTurn = secondTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(secondTurn.toString() + " %", dm.getRowCount()-1, 3);
+							
+							thirdTurnF = (1-secondTurnF)*fCount/(rList.size() - 2)+secondTurnF;
+							BigDecimal thirdTurn = new BigDecimal(thirdTurnF*100);
+							thirdTurn = thirdTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(thirdTurn.toString() + " %", dm.getRowCount()-1, 4);
+							
+							fourthTurnF = (1-thirdTurnF)*fCount/(rList.size() - 3)+thirdTurnF;
+							BigDecimal fourthTurn = new BigDecimal(fourthTurnF*100);
+							fourthTurn = fourthTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(fourthTurn.toString() + " %", dm.getRowCount()-1, 5);
+							
+							fivethTurnF = (1-fourthTurnF)*fCount/(rList.size() - 4)+fourthTurnF;
+							BigDecimal fivethTurn = new BigDecimal(fivethTurnF*100);
+							fivethTurn = fivethTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(fivethTurn.toString() + " %", dm.getRowCount()-1, 6);
+							
+							sixthTurnF = (1-fivethTurnF)*fCount/(rList.size() - 5)+fivethTurnF;
+							BigDecimal sixthTurn = new BigDecimal(sixthTurnF*100);
+							sixthTurn = sixthTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(sixthTurn.toString() + " %", dm.getRowCount()-1, 7);
+							
+							seventhTurnF = (1-sixthTurnF)*fCount/(rList.size() - 6)+sixthTurnF;
+							BigDecimal seventhTurn = new BigDecimal(seventhTurnF*100);
+							seventhTurn = seventhTurn.setScale(1, BigDecimal.ROUND_HALF_UP);
+							jTable1.setValueAt(seventhTurn.toString() + " %", dm.getRowCount()-1, 8);
+						    
+						}
+						
+					}
+			}
+					
+			jTable1.getColumn("Qty").setMaxWidth(50);
+			jTable1.getColumn("1st").setMaxWidth(50);
+			jTable1.getColumn("2st").setMaxWidth(50);
+			jTable1.getColumn("3st").setMaxWidth(50);
+			jTable1.getColumn("4st").setMaxWidth(50);
+			jTable1.getColumn("5st").setMaxWidth(50);
+			jTable1.getColumn("6st").setMaxWidth(50);
+			jTable1.getColumn("7st").setMaxWidth(50);		
+			jTable1.setRowHeight(18);
+			jTable1.setPreferredSize(new java.awt.Dimension(576, 18 *dm.getRowCount()+3 ));
+		}
+		return jTable1;
+	}
+	
+	private JScrollPane getJScrollPane1() {
+		if(jScrollPane1 == null) {
+			jScrollPane1 = new JScrollPane();
+			jScrollPane1.setBounds(2, 2, 582, 268);
+			jScrollPane1.setSize(580, 268);
+			jScrollPane1.setViewportView(getJTable1());
+		}
+		return jScrollPane1;
+	}
+	
+	private JLabel getJLabel1xxxxx() {
+		if(jLabel1 == null) {
+			jLabel1 = new JLabel();
+			jLabel1.setText("Probability of drawing current card:");
+			jLabel1.setLayout(null);
+			jLabel1.setBounds(7, 237, 447, 25);
+		}
+		return jLabel1;
+	}
+
 }
