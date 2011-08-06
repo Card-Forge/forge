@@ -8358,7 +8358,7 @@ public class CardFactory_Creatures {
             destroy.setBeforePayMana(CardFactoryUtil.input_targetCreature(destroy));
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Marrow-Gnawer")) {
             final Player player = card.getController();
@@ -8449,6 +8449,7 @@ public class CardFactory_Creatures {
             
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
+        */
         
         
         //*************** START *********** START **************************

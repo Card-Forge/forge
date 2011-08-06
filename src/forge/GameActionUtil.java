@@ -11674,44 +11674,7 @@ public class GameActionUtil {
 		}// execute()
 	}; // Muscles_Sliver
 	
-	public static Command Marrow_Gnawer               = new Command() {
-		private static final long serialVersionUID   = -2500490393763095527L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Fear";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Marrow-Gnawer");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Rat");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Marrow-Gnawer
-
 	
-
 	public static Command Gemhide_Sliver              = new Command() {
 		private static final long serialVersionUID   = -2941784982910968772L;
 
@@ -16362,7 +16325,6 @@ public class GameActionUtil {
 		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		//commands.put("Maro", Maro);
-		commands.put("Marrow_Gnawer", Marrow_Gnawer);
 		//commands.put("Master_of_Etherium", Master_of_Etherium);
 		commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
 		commands.put("Matca_Rioters", Matca_Rioters);
