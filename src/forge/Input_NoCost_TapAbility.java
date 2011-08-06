@@ -20,9 +20,12 @@ public class Input_NoCost_TapAbility extends Input {
             if (ability.getAfterPayMana() == null)
             {
             	AllZone.Stack.add(ability);
+            	AllZone.InputControl.resetInput();
             }
             else
             	stopSetNext(ability.getAfterPayMana());
         }
+        else
+        	AllZone.InputControl.resetInput();
     }
 }
