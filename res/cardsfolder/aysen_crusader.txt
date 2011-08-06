@@ -1,0 +1,9 @@
+Name:Aysen Crusader
+ManaCost:2 W W
+Types:Creature Human Knight
+Text:no text
+PT:2+*/2+*
+K:stSetPT:Count$Valid Soldier.YouCtrl,Warrior.YouCtrl/Plus.2:Count$Valid Soldier.YouCtrl,Warrior.YouCtrl/Plus.2:CARDNAME's power and toughness are each equal to 2 plus the number of Soldiers and Warriors you control.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aysen_crusader.jpg
+End
