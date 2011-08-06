@@ -15478,9 +15478,12 @@ public class GameActionUtil {
 		public void execute() {
 			CardList list = AllZoneUtil.getCardsInPlay("Old Man of the Sea");
 			for(Card oldman:list) {
-				if(null != oldman.getOldManTarget()) {
-					if(oldman.getNetAttack() < oldman.getOldManTarget().getNetAttack()) {
-						oldman.getOldManReleaseCommand().execute();
+				if(!oldman.getGainControlTargets().isEmpty()) {
+					if(oldman.getNetAttack() < oldman.getGainControlTargets().get(0).getNetAttack()) {
+						for(Command c:oldman.getGainControlReleaseCommands()) {
+							c.execute();
+						}
+						oldman.clearGainControlReleaseCommands();
 					}
 				}
 			}

@@ -111,7 +111,9 @@ public class PhaseUtil {
     					}
     				}
     				else {  //computer
-    					//computer probably doesn't want to untap based on this ability...
+    					//if it is controlling something by staying tapped, leave it tapped
+    					//if not, untap it
+    					if(!(c.getGainControlTargets().size() > 0)) c.untap();
     				}
     			}
     		}

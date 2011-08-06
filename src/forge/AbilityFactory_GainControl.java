@@ -89,42 +89,42 @@ public class AbilityFactory_GainControl {
 	}
 
 	public SpellAbility getAbility() {
-        
-        	final SpellAbility abControl = new Ability_Activated(hostCard, AF.getAbCost(), AF.getAbTgt()) {
-				private static final long serialVersionUID = -4384705198674678831L;
 
-				@Override
-    			public boolean canPlay(){
-    				return super.canPlay();
-    			}
+		final SpellAbility abControl = new Ability_Activated(hostCard, AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = -4384705198674678831L;
 
-    			@Override
-    			public boolean canPlayAI() {
-    				return doTgtAI(this);
-    			}
+			@Override
+			public boolean canPlay(){
+				return super.canPlay();
+			}
 
-    			@Override
-    			public void resolve() {
-    				doResolve(this);
-    				hostCard.setAbilityUsed(hostCard.getAbilityUsed() + 1);
-    			}
-    			
-    			@Override
-    			public String getStackDescription(){
-    				 StringBuilder sb = new StringBuilder();
-    				 String name = AF.getHostCard().getName();
-    				 sb.append(name).append(" - gain control of ");
-    				 Card tgt = getTargetCard();
-    				 if (tgt != null) {
-    					 if(tgt.isFaceDown()) sb.append("Morph");
-    					 else sb.append(tgt.getName());
-    				 }
-    				 return sb.toString();
-    			}
-    		};//Ability_Activated
+			@Override
+			public boolean canPlayAI() {
+				return doTgtAI(this);
+			}
 
-    		return abControl;
-    	}
+			@Override
+			public void resolve() {
+				doResolve(this);
+				hostCard.setAbilityUsed(hostCard.getAbilityUsed() + 1);
+			}
+
+			@Override
+			public String getStackDescription(){
+				StringBuilder sb = new StringBuilder();
+				String name = AF.getHostCard().getName();
+				sb.append(name).append(" - gain control of ");
+				Card tgt = getTargetCard();
+				if (tgt != null) {
+					if(tgt.isFaceDown()) sb.append("Morph");
+					else sb.append(tgt.getName());
+				}
+				return sb.toString();
+			}
+		};//Ability_Activated
+
+		return abControl;
+	}
 
 
     private boolean doTgtAI(SpellAbility sa) {
@@ -155,7 +155,7 @@ public class AbilityFactory_GainControl {
         
         
         
-		while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
+		while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) { 
 			Card t = null;
 			for(Card c:list) {
 	        	if(c.isCreature()) hasCreature = true;
@@ -212,6 +212,7 @@ public class AbilityFactory_GainControl {
 			
 			//Card c = getTargetCard();
             movedCards[j] = tgtC;
+            hostCard.addGainControlTarget(tgtC);
             
             if(AllZone.GameAction.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(hostCard, tgtC)) {
                 //set summoning sickness
@@ -274,6 +275,10 @@ public class AbilityFactory_GainControl {
 	            	hostCard.addChangeControllerCommand(getDestroyCommand(j));
 	            }
             }
+            
+            //for Old Man of the Sea - 0 is hardcoded since it only allows 1 target
+            hostCard.clearGainControlReleaseCommands();
+            hostCard.addGainControlReleaseCommand(getLoseControlCommand(0));
         
 		}//end foreach target
 		
@@ -324,6 +329,7 @@ public class AbilityFactory_GainControl {
 
     		public void execute() {
     			Card c = movedCards[i];
+    			//ArrayList<Card> c = hostCard.getGainControlTargets();
 
     			if(AllZone.GameAction.isCardInPlay(c)) {
     				((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
@@ -356,6 +362,8 @@ public class AbilityFactory_GainControl {
     				((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
     				((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
     			}//if
+    			hostCard.clearGainControlTargets();
+    			hostCard.clearGainControlReleaseCommands();
     		}//execute()
     	};
     	

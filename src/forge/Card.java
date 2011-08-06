@@ -130,8 +130,8 @@ public class Card extends MyObservable {
     private String                       namedCard                         = "";
     private String						 topCardName					   = "";
     private String						 reflectableMana				   = "";
-    private Card						oldManTarget;
-    private Command						oldManReleaseCommand;
+    private ArrayList<Card>				gainControlTargets					= new ArrayList<Card>();	
+    private ArrayList<Command>			gainControlReleaseCommands			= new ArrayList<Command>();;
     
 
     private ArrayList<Ability_Triggered>  zcTriggers                        = new ArrayList<Ability_Triggered>();
@@ -656,23 +656,58 @@ public class Card extends MyObservable {
     }
     
     /**
+     * get a list of Cards this card has gained control of
      * 
-     * @return
+     * used primarily with AbilityFactory_GainControl
+     * 
+     * @return a list of cards this card has gained control of
      */
-    public Card getOldManTarget() {
-    	return oldManTarget;
+    public ArrayList<Card> getGainControlTargets() {
+    	return gainControlTargets;
     }
     
-    public void setOldManTarget(Card c) {
-    	oldManTarget = c;
+    /**
+     * add a Card to the list of Cards this card has gained control of
+     * 
+     * used primarily with AbilityFactory_GainControl
+     */
+    public void addGainControlTarget(Card c) {
+    	gainControlTargets.add(c);
     }
     
-    public Command getOldManReleaseCommand() {
-    	return oldManReleaseCommand;
+    /**
+     * clear the list of Cards this card has gained control of
+     * 
+     * used primarily with AbilityFactory_GainControl
+     */
+    public void clearGainControlTargets() {
+    	gainControlTargets.clear();
     }
     
-    public void setOldManReleaseCommand(Command c) {
-    	oldManReleaseCommand = c;
+    /**
+     * get the commands to be executed to lose control of Cards this
+     * card has gained control of
+     * 
+     * used primarily with AbilityFactory_GainControl (Old Man of the Sea specifically)
+     */
+    public ArrayList<Command> getGainControlReleaseCommands() {
+    	return gainControlReleaseCommands;
+    }
+    
+    /**
+     * set a command to be executed to lose control of Cards this
+     * card has gained control of
+     * 
+     * used primarily with AbilityFactory_GainControl (Old Man of the Sea specifically)
+     * 
+     * @param c the Command to be executed
+     */
+    public void addGainControlReleaseCommand(Command c) {
+    	gainControlReleaseCommands.add(c);
+    }
+    
+    public void clearGainControlReleaseCommands() {
+    	gainControlReleaseCommands.clear();
     }
     
     public String getSpellText() {
