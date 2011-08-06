@@ -7542,7 +7542,7 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlay() {
                     CardList choice = (CardList) getCreature.execute();
-                    return choice.size() > 0;
+                    return choice.size() > 0 && super.canPlay();
                 }
                 
                 @Override

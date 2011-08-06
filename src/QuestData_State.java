@@ -23,9 +23,9 @@ public class QuestData_State implements Serializable {
     private static final long serialVersionUID = 7007940230351051937L;
     
     int                       rankIndex, win, lost;
-    int 				      plantLevel, wolfPetLevel, life, estatesLevel, questsPlayed;
+    int 				      plantLevel, wolfPetLevel, crocPetLevel, life, estatesLevel, questsPlayed;
     long					  credits;
-    String                    difficulty, mode;
+    String                    difficulty, mode, selectedPet;
     
 
     ArrayList<Integer>		  availableQuests, completedQuests;
@@ -43,6 +43,6 @@ public class QuestData_State implements Serializable {
         for(Entry<String, Deck> deck:this.aiDecks.entrySet()) {
             aiDecks.put(deck.getKey(), deck.getValue().migrate());
         }
-        return new forge.QuestData_State(rankIndex, win, lost, plantLevel, wolfPetLevel, life, estatesLevel, questsPlayed, availableQuests, completedQuests,credits, difficulty, mode, cardPool, shopList, myDecks, aiDecks);
+        return new forge.QuestData_State(rankIndex, win, lost, plantLevel, wolfPetLevel, crocPetLevel, selectedPet, life, estatesLevel, questsPlayed, availableQuests, completedQuests,credits, difficulty, mode, cardPool, shopList, myDecks, aiDecks);
     }
 }

@@ -23,16 +23,16 @@ public class Gui_PetShop extends JFrame implements NewConstants{
 	private JFrame 			  shopsGUI;
 	private JLabel            titleLabel         = new JLabel();
 	
-	private JLabel 			  wolfPetDescLabel   = new JLabel();
-	private JLabel			  wolfPetStatsLabel  = new JLabel();
-	private JLabel 			  wolfPetPriceLabel  = new JLabel();
-	private JLabel 			  wolfPetIconLabel   = new JLabel();
+	private JLabel 			  petDescLabel   	 = new JLabel();
+	private JLabel			  petStatsLabel  	 = new JLabel();
+	private JLabel 			  petPriceLabel  	 = new JLabel();
+	private JLabel 			  petIconLabel   	 = new JLabel();
 	
 	private JLabel			  creditsLabel       = new JLabel();
 	
-	private ImageIcon		  wolfPetIcon		 = new ImageIcon();
+	private ImageIcon		  petIcon			 = new ImageIcon();
 	    
-	private JButton           buyWolfPetButton   = new JButton();
+	private JButton           buyPetButton   	 = new JButton();
     private JButton			  quitButton 	  	 = new JButton();
     
     private QuestData 		  questData 	 	 = AllZone.QuestData;
@@ -64,10 +64,9 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     private void setup() {
     	//String fileName = "LeafIconSmall.png";
     	//ImageIcon icon = getIcon(fileName);
-    	buyWolfPetButton.setBounds(new Rectangle(10, 297, 120, 50));
-    	buyWolfPetButton.setText(getButtonText("Wolf"));
-    	//buyPlantButton.setIcon(icon);
-    	buyWolfPetButton.addActionListener(new java.awt.event.ActionListener() {
+    	buyPetButton.setBounds(new Rectangle(10, 297, 120, 50));
+    	
+    	buyPetButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
 					buyPetButton_actionPerformed(e);
@@ -108,12 +107,43 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     	}
     	else if (questData.getWolfPetLevel() == 3)
     	{
-    		sb.append("Gives Flanking to your Wolf.<br>");
+    		sb.append("Gives Flanking to your wolf.<br>");
     		sb.append("<u><b>Level 4</b></u>: 2/2 Flanking<br>");
     	}
-    	else
+    	else if (questData.getWolfPetLevel() >= 4)
     	{
-    		sb.append("Wolf Level Maxed out.<br>");
+    		//sb.append("Wolf Level Maxed out.<br>");
+    		
+    		if (questData.getCrocPetLevel() == 0)
+    		{
+    			sb.append("With its razor sharp teeth, this swamp-dwelling monster is extremely dangerous.");
+    			sb.append("Crikey mate!<br><br>");
+        		sb.append("<u><b>Level 1</b></u>: 1/1<br>");
+        		sb.append("<u><b>Next Level</b></u>: 2/1<br>");
+        		sb.append("<u><b>Can learn</b></u>: Swampwalk");
+    		}
+    		else if (questData.getCrocPetLevel() == 1)
+    		{
+    			sb.append("Improve the attack power of your croc.<br>");
+        		sb.append("<u><b>Level 2</b></u>: 2/1<br>");
+        		sb.append("<u><b>Next Level</b></u>: 3/1<br>");
+        		sb.append("<u><b>Can learn</b></u>: Swampwalk");
+    		}
+    		else if (questData.getCrocPetLevel() == 2)
+    		{
+    			sb.append("Improve the attack power of your croc.<br>");
+        		sb.append("<u><b>Level 3</b></u>: 3/1<br>");
+        		sb.append("<u><b>Next Level</b></u>: 3/1 Swampwalk<br>");
+    		}
+    		else if (questData.getCrocPetLevel() == 3)
+    		{
+    			sb.append("Gives Swampwalk to your croc.<br>");
+        		sb.append("<u><b>Level 4</b></u>: 3/1 Swampwalk<br>");
+    		}
+    		else if (questData.getCrocPetLevel() >= 4)
+    		{
+    			sb.append("Croc Level Maxed out.<br>");
+    		}
     	}
     	
     	sb.append("</html>");
@@ -131,6 +161,17 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     		l = 500;
     	else if (questData.getWolfPetLevel() == 3)
     		l = 550;
+    	else if (questData.getWolfPetLevel() >= 4)
+    	{
+    		if (questData.getCrocPetLevel() == 0)
+    			l = 250;
+    		else if (questData.getCrocPetLevel() == 1)
+    			l = 300;
+    		else if (questData.getCrocPetLevel() == 2)
+    			l = 450;
+    		else if (questData.getCrocPetLevel() == 3)
+    			l = 600;
+    	}
     	return l;
     }
     
@@ -143,23 +184,43 @@ public class Gui_PetShop extends JFrame implements NewConstants{
 	    	else
 	    		s = "Train " + pet;
     	}
+    	else if (pet.equals("Croc"))
+    	{
+    		if (questData.getCrocPetLevel() == 0)
+	    		s = "Buy " + pet;
+	    	else
+	    		s = "Train " + pet;
+    	}
     	return s;
     }
     
-    private String getWolfStats()
+    private String getPetStats()
     {
     	StringBuilder sb = new StringBuilder();
-    	if (questData.getWolfPetLevel() == 0)
-    		sb.append("1/1");
-    	else if (questData.getWolfPetLevel() == 1)
-    		sb.append("1/2");
-    	else if (questData.getWolfPetLevel() == 2)
-    		sb.append("2/2");
-    	else /*if (questData.getWolfPetLevel() == 3)*/
-    		sb.append("2/2");
+    	if (questData.getWolfPetLevel() < 4) {
+	    	if (questData.getWolfPetLevel() == 0)
+	    		sb.append("1/1");
+	    	else if (questData.getWolfPetLevel() == 1)
+	    		sb.append("1/2");
+	    	else if (questData.getWolfPetLevel() <= 3)
+	    		sb.append("2/2");
+	    	
+	    	sb.append(" Wolf Pet (current level ");
+	    	sb.append(questData.getWolfPetLevel());
+    	} //getWolfPetLevel < 4
+    	else if (questData.getCrocPetLevel() < 4)
+    	{
+    		if (questData.getCrocPetLevel() == 0)
+	    		sb.append("1/1");
+	    	else if (questData.getCrocPetLevel() == 1)
+	    		sb.append("2/1");
+	    	else if (questData.getCrocPetLevel() <= 3)
+	    		sb.append("3/1");
+
+	    	sb.append(" Croc Pet (current level ");
+	    	sb.append(questData.getCrocPetLevel());
+    	}
     	
-    	sb.append(" Wolf Pet (current level ");
-    	sb.append(questData.getWolfPetLevel());
     	sb.append("/4)");
     	return sb.toString();
     }
@@ -167,14 +228,27 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     private String getImageString()
     {
     	String s = "";
-    	if (questData.getWolfPetLevel() == 0)
-    		s = "g_1_1_wolf_pet_small.jpg";
-    	else if (questData.getWolfPetLevel() == 1)
-    		s = "g_1_2_wolf_pet_small.jpg";
-    	else if (questData.getWolfPetLevel() == 2)
-    		s = "g_2_2_wolf_pet_small.jpg";
-    	else if (questData.getWolfPetLevel() == 3)
-    		s = "g_2_2_wolf_pet_flanking_small.jpg";
+    	if (questData.getWolfPetLevel() < 4) {
+	    	if (questData.getWolfPetLevel() == 0)
+	    		s = "g_1_1_wolf_pet_small.jpg";
+	    	else if (questData.getWolfPetLevel() == 1)
+	    		s = "g_1_2_wolf_pet_small.jpg";
+	    	else if (questData.getWolfPetLevel() == 2)
+	    		s = "g_2_2_wolf_pet_small.jpg";
+	    	else if (questData.getWolfPetLevel() == 3)
+	    		s = "g_2_2_wolf_pet_flanking_small.jpg";
+    	}
+    	else if (questData.getCrocPetLevel() < 4)
+    	{
+    		if (questData.getCrocPetLevel() == 0)
+	    		s = "b_1_1_crocodile_pet_small.jpg";
+	    	else if (questData.getCrocPetLevel() == 1)
+	    		s = "b_2_1_crocodile_pet_small.jpg";
+	    	else if (questData.getCrocPetLevel() == 2)
+	    		s = "b_3_1_crocodile_pet_small.jpg";
+	    	else if (questData.getCrocPetLevel() == 3)
+	    		s = "b_3_1_crocodile_pet_swampwalk_small.jpg";
+    	}
     	
     	return s;
     }
@@ -186,31 +260,36 @@ public class Gui_PetShop extends JFrame implements NewConstants{
         titleLabel.setBounds(new Rectangle(150, 5, 198, 60));
         this.getContentPane().setLayout(null);
         
-        wolfPetStatsLabel.setFont(new Font("sserif", Font.BOLD, 12));
-        wolfPetStatsLabel.setText(getWolfStats());
-        wolfPetStatsLabel.setBounds(new Rectangle(10, 65, 200, 15));
+        petStatsLabel.setFont(new Font("sserif", Font.BOLD, 12));
+        petStatsLabel.setText(getPetStats());
+        petStatsLabel.setBounds(new Rectangle(10, 65, 200, 15));
         
-        wolfPetDescLabel.setFont(new Font("sserif", 0, 12));
-        wolfPetDescLabel.setText(getDesc());
-        wolfPetDescLabel.setBounds(new Rectangle(10, 80, 300, 150));
+        petDescLabel.setFont(new Font("sserif", 0, 12));
+        petDescLabel.setText(getDesc());
+        petDescLabel.setBounds(new Rectangle(10, 80, 300, 150));
         
-        wolfPetPriceLabel.setFont(new Font("sserif", 0, 12));
-        wolfPetPriceLabel.setText("<html><b><u>Price</u></b>: " + getPrice() + " credits</html>");
-        wolfPetPriceLabel.setBounds(new Rectangle(10, 230, 150, 15));
+        petPriceLabel.setFont(new Font("sserif", 0, 12));
+        petPriceLabel.setText("<html><b><u>Price</u></b>: " + getPrice() + " credits</html>");
+        petPriceLabel.setBounds(new Rectangle(10, 230, 150, 15));
         
         creditsLabel.setFont(new Font("sserif", 0, 12));
         creditsLabel.setText("Credits: " + questData.getCredits());
         creditsLabel.setBounds(new Rectangle(10, 265, 150, 15));
         
-        wolfPetIcon = getIcon(getImageString());
-        wolfPetIconLabel.setText("");
-        wolfPetIconLabel.setIcon(wolfPetIcon);
-        wolfPetIconLabel.setBounds(new Rectangle(280, 65, 201, 280));
-        wolfPetIconLabel.setIconTextGap(0);
+        petIcon = getIcon(getImageString());
+        petIconLabel.setText("");
+        petIconLabel.setIcon(petIcon);
+        petIconLabel.setBounds(new Rectangle(280, 65, 201, 280));
+        petIconLabel.setIconTextGap(0);
         
-    	buyWolfPetButton.setEnabled(true);
-    	if (questData.getCredits() < getPrice() || questData.getWolfPetLevel() >= 4)
-    		buyWolfPetButton.setEnabled(false);
+        if (questData.getWolfPetLevel() < 4)
+    		buyPetButton.setText(getButtonText("Wolf"));
+    	else if (questData.getCrocPetLevel() < 4)
+    		buyPetButton.setText(getButtonText("Croc"));
+        
+    	buyPetButton.setEnabled(true);
+    	if (questData.getCredits() < getPrice() || questData.getCrocPetLevel() >= 4)
+    		buyPetButton.setEnabled(false);
        
         quitButton.setBounds(new Rectangle(140, 297, 120, 50));
         quitButton.setText("Quit");
@@ -222,12 +301,12 @@ public class Gui_PetShop extends JFrame implements NewConstants{
 
 
         //jPanel2.add(quitButton, null);
-        this.getContentPane().add(buyWolfPetButton, null);
+        this.getContentPane().add(buyPetButton, null);
         this.getContentPane().add(titleLabel, null);
-        this.getContentPane().add(wolfPetStatsLabel, null);
-        this.getContentPane().add(wolfPetDescLabel, null);
-        this.getContentPane().add(wolfPetIconLabel, null);
-        this.getContentPane().add(wolfPetPriceLabel, null);
+        this.getContentPane().add(petStatsLabel, null);
+        this.getContentPane().add(petDescLabel, null);
+        this.getContentPane().add(petIconLabel, null);
+        this.getContentPane().add(petPriceLabel, null);
         this.getContentPane().add(creditsLabel, null);
         this.getContentPane().add(quitButton,null);
     }
@@ -249,7 +328,12 @@ public class Gui_PetShop extends JFrame implements NewConstants{
     
     void buyPetButton_actionPerformed(ActionEvent e) throws Exception {
     	questData.subtractCredits(getPrice());
-    	questData.addWolfPetLevel();
+    	
+    	if (questData.getWolfPetLevel() < 4)
+    		questData.addWolfPetLevel();
+    	else if (questData.getCrocPetLevel() < 4)
+    		questData.addCrocPetLevel();
+    		
     	QuestData.saveData(questData);
     	jbInit();
     }

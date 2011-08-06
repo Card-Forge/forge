@@ -55,11 +55,13 @@ public class Gui_Quest extends JFrame implements NewConstants{
     private JPanel            jPanel2            = new JPanel();
     private JButton           playGameButton     = new JButton();
     private JButton 		  questsButton		 = new JButton();
+    
     private JRadioButton      oppTwoRadio        = new JRadioButton();
     private JRadioButton      oppOneRadio        = new JRadioButton();
     private JRadioButton      oppThreeRadio      = new JRadioButton();
     private JLabel            jLabel5            = new JLabel();
     private JComboBox         deckComboBox       = new JComboBox();
+    private JComboBox		  petComboBox		 = new JComboBox();
     private ButtonGroup       oppGroup           = new ButtonGroup();
     private static JCheckBox  smoothLandCheckBox = new JCheckBox("", true);
     private static JCheckBox  resizeCheckbox     = new JCheckBox("", true);
@@ -126,6 +128,13 @@ public class Gui_Quest extends JFrame implements NewConstants{
             deckComboBox.addItem(list.get(i));
         
         if(Constant.Runtime.HumanDeck[0] != null) deckComboBox.setSelectedItem(Constant.Runtime.HumanDeck[0].getName());
+        
+        if ("Fantasy".equals(questData.getMode()))
+        {
+        	
+        }
+        
+        
     }//setup()
     
     private void jbInit() throws Exception {
@@ -170,7 +179,11 @@ public class Gui_Quest extends JFrame implements NewConstants{
         //if (questData.getMode().equals("Fantasy"))
         if ("Fantasy".equals(questData.getMode()))
         {
-
+        	//petComboBox.removeAll();
+        	ArrayList<String> petList = QuestUtil.getPetNames(questData);
+        	for (int i=0;i<petList.size();i++)
+        		petComboBox.addItem(petList.get(i));
+        	
             lifeLabel.setBounds(new Rectangle(1, 195, 499, 15));
             lifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
             lifeLabel.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -235,6 +248,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         jLabel5.setText("Your Deck:");
         jLabel5.setBounds(new Rectangle(15, 151, 125, 29));
         deckComboBox.setBounds(new Rectangle(98, 152, 185, 29));
+        petComboBox.setBounds(new Rectangle(291, 16, 142, 38));
         smoothLandCheckBox.setText("Stack AI land");
         smoothLandCheckBox.setBounds(new Rectangle(154, 455, 153, 21));
         //smoothLandCheckBox.setSelected(true);
@@ -252,6 +266,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         jPanel2.add(jLabel5, null);
         this.getContentPane().add(infoButton, null);
         jPanel2.add(deckComboBox, null);
+        jPanel2.add(petComboBox, null);
         jPanel2.add(oppOneRadio, null);
         jPanel2.add(oppTwoRadio, null);
         jPanel2.add(oppThreeRadio, null);
@@ -600,6 +615,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         	AllZone.GameAction.newGame(human, computer);
         else
         {
+        	Object pet = petComboBox.getSelectedItem();
+        	if (pet != null)
+        	{
+        		//System.out.println("Selected Pet:" +pet.toString());
+        		questData.setSelectedPet(pet.toString());
+        	}
         	CardList hCl = QuestUtil.getHumanPlantAndPet(questData);
         	int hLife = QuestUtil.getLife(questData);
             AllZone.GameAction.newGame(human, computer, hCl, new CardList(), hLife, 20, null);

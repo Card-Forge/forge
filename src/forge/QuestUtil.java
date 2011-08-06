@@ -34,8 +34,10 @@ public class QuestUtil {
 	{
 		CardList list = new CardList();
 		
-		if (qd.getWolfPetLevel() > 0)
+		if (qd.getSelectedPet().equals("Wolf") && qd.getWolfPetLevel() > 0)
 			list.add(getWolfPetToken(qd.getWolfPetLevel()));
+		else if (qd.getSelectedPet().equals("Croc") && qd.getCrocPetLevel() > 0)
+			list.add(getCrocPetToken(qd.getCrocPetLevel()));
 		
 		if (qd.getPlantLevel() > 0) 
 			list.add(getPlantToken(qd.getPlantLevel()));
@@ -206,6 +208,72 @@ public class QuestUtil {
         return c;
 	}//getWolfPetToken
 	
+	public static Card getCrocPetToken(int level)
+	{
+		String imageName = "";
+		int baseAttack = 0;
+		int baseDefense = 0;
+		
+		if (level == 1)
+		{
+			imageName = "B 1 1 Crocodile Pet";
+			baseDefense = 1;
+			baseAttack = 1;
+		}
+		else if (level == 2)
+		{
+			imageName = "B 2 1 Crocodile Pet";
+			baseDefense = 1;
+			baseAttack = 2;
+		}
+		else if (level == 3)
+		{
+			imageName = "G 3 1 Crocodile Pet";
+			baseDefense = 1;
+			baseAttack = 3;
+		}
+		else if (level == 4)
+		{
+			imageName = "G 3 1 Crocodile Pet Swampwalk";
+			baseDefense = 1;
+			baseAttack = 3;
+		}
+		
+
+        Card c = new Card();
+        c.setName("Crocodile Pet");
+        
+        c.setImageName(imageName);
+        
+        c.setController(Constant.Player.Human);
+        c.setOwner(Constant.Player.Human);
+        
+        c.setManaCost("B");
+        c.setToken(true);
+
+        c.addType("Creature");
+        c.addType("Crocodile");
+        c.addType("Pet");
+        
+        if (level >= 4)
+        	c.addIntrinsicKeyword("Swampwalk");
+        
+        c.setBaseAttack(baseAttack);
+        c.setBaseDefense(baseDefense);
+        
+        return c;
+	}//getCrocPetToken
+	
+	public static ArrayList<String> getPetNames(QuestData questData)
+	{
+		ArrayList<String> list = new ArrayList<String>();
+		if (questData.getWolfPetLevel() > 0)
+			list.add("Wolf");
+		if (questData.getCrocPetLevel() > 0)
+			list.add("Croc");
+		return list;
+	}
+	
 	public static void setupQuest(Quest_Assignment qa)
 	{
 		/*
@@ -291,7 +359,29 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(4, 4));			
 		}
+		else if (id == 10)
+		{
+			CardList humanList = new CardList();
+			
+			Card c = AllZone.CardFactory.getCard("Wall of Spears", Constant.Player.Human);
+			humanList.add(c);
+			
+			for (int i=0;i<3;i++)
+			{
+				c = CardFactoryUtil.makeToken("Citizen", "W 1 1 Citizen", Constant.Player.Human, "W", 
+													new String[] {"Creature","Citizen"}, 1, 1, new String[]{""}).get(0);
+				humanList.add(c);
+			}
+			
+			qa.setHuman(humanList);
+			
+			for (int i=0;i<3;i++)
+				qa.addCompy("Scathe Zombies");
+			qa.addCompy("Mass of Ghouls");
+			
+			qa.setCardRewardList(pack.getRare(4, 2));	
+		}
+			
 	}
-	
 	
 }//QuestUtil

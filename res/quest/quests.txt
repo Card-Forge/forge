@@ -88,4 +88,14 @@ Four green rares
 225
 leafIconSmall.png
 
+10
+Zombie Attack!
+The village of Haven is getting attacked by the Zombie horde! Protect the village.
+Hard
+Not Repeatable
+50
+Four black rares
+200
+blackOrbSmall.png
+
 End
