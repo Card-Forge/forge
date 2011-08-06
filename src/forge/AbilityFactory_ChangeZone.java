@@ -80,8 +80,15 @@ public class AbilityFactory_ChangeZone {
 		return dbChangeZone;
 	}
 	
+	public static boolean isHidden(String origin, boolean hiddenOverride){
+		return (hiddenOverride || origin.equals("Library") || origin.equals("Hand") || origin.equals("Sideboard"));
+	}
+	
+	public static boolean isKnown(String origin){
+		return (origin.equals("Graveyard") || origin.equals("Exile") || origin.equals("Battlefield"));
+	}
+	
 	private static void setMiscellaneous(AbilityFactory af, SpellAbility sa){
-		// todo: if moving to or from Battlefield allow use in Main1?
 		HashMap<String,String> params = af.getMapParams();
 		String origin = params.get("Origin");
 		
@@ -100,12 +107,12 @@ public class AbilityFactory_ChangeZone {
 		HashMap<String,String> params = af.getMapParams();
 		String origin = params.get("Origin");
 
-		if (origin.equals("Library") || origin.equals("Hand") || origin.equals("Sideboard")){
+		if (isHidden(origin, params.containsKey("Hidden")))
 			return changeHiddenOriginCanPlayAI(af, sa);
-		}
-		else if (origin.equals("Graveyard") || origin.equals("Exile") || origin.equals("Battlefield")){
+		
+		else if (isKnown(origin))
 			return changeKnownOriginCanPlayAI(af, sa);
-		}
+		
 		return false;
 	}
 	
@@ -113,42 +120,44 @@ public class AbilityFactory_ChangeZone {
 		HashMap<String,String> params = af.getMapParams();
 		String origin = params.get("Origin");
 
-		if (origin.equals("Library") || origin.equals("Hand") || origin.equals("Sideboard")){
+		if (isHidden(origin, params.containsKey("Hidden")))
 			return changeHiddenOriginPlayDrawbackAI(af, sa);
-		}
-		else if (origin.equals("Graveyard") || origin.equals("Exile") || origin.equals("Battlefield")){
+		
+		else if (isKnown(origin))
 			return changeKnownOriginPlayDrawbackAI(af, sa);
-		}
+		
 		return false;
 	}
 	
 	private static String changeZoneDescription(AbilityFactory af, SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		String origin = params.get("Origin");
-		if (origin.equals("Library") || origin.equals("Hand") || origin.equals("Sideboard")){
+		
+		if (isHidden(origin, params.containsKey("Hidden")))
 			return changeHiddenOriginStackDescription(af, sa);
-		}
-		else if (origin.equals("Graveyard") || origin.equals("Exile") || origin.equals("Battlefield")){
+		
+		else if (isKnown(origin))
 			return changeKnownOriginStackDescription(af, sa);
-		}
-
+		
 		return "";
 	}
 	
 	private static void changeZoneResolve(AbilityFactory af, SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		String origin = params.get("Origin");
-		if (origin.equals("Library") || origin.equals("Hand") || origin.equals("Sideboard")){
+		
+		if (isHidden(origin, params.containsKey("Hidden")))
 			changeHiddenOriginResolve(af, sa);
-		}
-		else if (origin.equals("Graveyard") || origin.equals("Exile") || origin.equals("Battlefield")){
+		
+		else if (isKnown(origin))
 			changeKnownOriginResolve(af, sa);
-		}
 	}
 
 	// *************************************************************************************
-	// ************ Hidden Origin (Library/Hand/Sideboard) *********************************
+	// ************ Hidden Origin (Library/Hand/Sideboard/Non-targetd other) ***************
 	// ******* Hidden origin cards are chosen on the resolution of the spell ***************
+	// ******* It is possible for these to have Destination of Battlefield *****************
+	// ****** Example: Cavern Harpy where you don't choose the card until resolution *******
 	// *************************************************************************************
 	
 	private static boolean changeHiddenOriginCanPlayAI(AbilityFactory af, SpellAbility sa){
@@ -253,9 +262,10 @@ public class AbilityFactory_ChangeZone {
 		 String destination = params.get("Destination");
 		 
 		 String type = params.containsKey("ChangeType") ? params.get("ChangeType") : "";
+		 int num = params.containsKey("ChangeNum") ? Integer.parseInt(params.get("ChangeNum")) : 1;
 		 
 		 if (origin.equals("Library")){
-			 sb.append("Search your library for ").append(params.get("ChangeNum")).append(" ").append(type).append(" and ");
+			 sb.append("Search your library for ").append(num).append(" ").append(type).append(" and ");
 			 
 			 if (params.get("ChangeNum").equals("1"))
 				 sb.append("put that card ");
@@ -279,9 +289,7 @@ public class AbilityFactory_ChangeZone {
 			 sb.append("Then shuffle your library.");
 		 }
 		 else if (origin.equals("Hand")){
-			 
-			 
-			 sb.append("Put ").append(params.get("ChangeNum")).append(" ").append(type).append(" card(s) from your hand ");
+			 sb.append("Put ").append(num).append(" ").append(type).append(" card(s) from your hand ");
 			 
 			 if (destination.equals("Battlefield"))
 				 sb.append("onto the battlefield.");
@@ -295,6 +303,12 @@ public class AbilityFactory_ChangeZone {
 				 
 				 sb.append(" of your library.");
 			 }
+		 }
+		 else if (origin.equals("Battlefield")){
+			 // todo: Expand on this Description as more cards use it
+			 // for the non-targeted SAs when you choose what is returned on resolution
+			 sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
+			 sb.append(" to your ").append(destination);
 		 }
 		 
 		 Ability_Sub abSub = sa.getSubAbility();
@@ -338,7 +352,7 @@ public class AbilityFactory_ChangeZone {
         String destination = params.get("Destination");
 		
 		CardList fetchList = AllZoneUtil.getCardsInZone(origin, player);
-        if (destination.equals("Library"))
+        if (origin.equals("Library"))	// Look at whole library before moving onto choosing a card
         	GuiUtils.getChoice(af.getHostCard().getName() + " - Looking at " + origin, fetchList.toArray());
 		
 		fetchList = filterListByType(fetchList, params, "ChangeType", sa);
@@ -367,9 +381,9 @@ public class AbilityFactory_ChangeZone {
                     AllZone.GameAction.moveToLibrary(c, libraryPos);
                 }
                 else {
-                	AllZone.GameAction.moveTo(destZone, c);
                     if (destination.equals("Battlefield") && params.containsKey("Tapped"))
                         c.tap();
+                	AllZone.GameAction.moveTo(destZone, c);
                 }
             }
         }
@@ -459,11 +473,12 @@ public class AbilityFactory_ChangeZone {
             	int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
             	AllZone.GameAction.moveToLibrary(c, libraryPos);
         	}
-        	else
-        		AllZone.GameAction.moveTo(destZone, c);
+        	else{
+            	if (destination.equals("Battlefield") && params.containsKey("Tapped"))
+            		c.tap();
         	
-        	if (destination.equals("Battlefield") && params.containsKey("Tapped"))
-        		c.tap();
+        		AllZone.GameAction.moveTo(destZone, c);
+        	}
         }
         
         if (!destination.equals("Battlefield") && !type.equals("Card")){
@@ -693,7 +708,6 @@ public class AbilityFactory_ChangeZone {
 		
 		return true;
 	}
-	
 	
 	private static String changeKnownOriginStackDescription(AbilityFactory af, SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
