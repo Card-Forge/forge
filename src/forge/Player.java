@@ -762,7 +762,7 @@ public abstract class Player extends MyObservable{
         PlayerZone library = AllZone.getZone(Constant.Zone.Library, this);
         numScry = Math.min(numScry, library.size());
         for(int i = 0; i < numScry; i++) {
-            topN.add(library.get(0));
+            topN.add(library.get(i));
         }
         doScry(topN, topN.size());
     }
