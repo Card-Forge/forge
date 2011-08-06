@@ -1,0 +1,9 @@
+Name:Angelic Shield
+ManaCost:W U
+Types:Enchantment
+Text:no text
+K:stPumpAll:Creature.YouCtrl:0/1:No Condition:Creatures you control get +0/+1.  
+A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_shield.jpg
+End
