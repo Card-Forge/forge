@@ -2446,7 +2446,6 @@ public class CardFactory_Instants {
             sb.append(card.getName()).append(" adds R R R to your mana pool");
             spell.setStackDescription(sb.toString());
             
-            // spell.setStackDescription(cardName + " adds R R R to your mana pool");
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
@@ -2526,130 +2525,6 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
             
             card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Thwart")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 6549506712141125977L;
-                
-                @Override
-                public void resolve() {
-                    SpellAbility sa = AllZone.Stack.pop();
-                    AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    Player opponent = card.getController().getOpponent();
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard());
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };
-            spell.setDescription("Counter target spell.");
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - Counter target spell.");
-            spell.setStackDescription(sb.toString());
-            
-            final SpellAbility bounce = new Spell(card) {
-                private static final long serialVersionUID = -8310299673731730438L;
-                
-                @Override
-                public void resolve() {
-                    SpellAbility sa = AllZone.Stack.pop();
-                    AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    Player opponent = card.getController().getOpponent();
-                    SpellAbility sa = AllZone.Stack.peek();
-                    
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    CardList list = new CardList(play.getCards());
-                    list = list.getType("Island");
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard()) && list.size() >= 3;
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-            };
-            bounce.setDescription("You may return three Islands you control to their owner's hand rather than pay Thwart's mana cost.");
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(card.getName()).append(" - Counter target spell.");
-            bounce.setStackDescription(sb2.toString());            
-            bounce.setManaCost("0");
-            
-            final Input bounceIslands = new Input() {
-                private static final long serialVersionUID = 3124427514142382129L;
-                int                       stop             = 3;
-                int                       count            = 0;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select an Island");
-                    ButtonUtil.disableAll();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    if(c.getType().contains("Island") && zone.is(Constant.Zone.Battlefield)) {
-                        AllZone.GameAction.moveToHand(c);
-                        
-                        count++;
-                        if(count == stop) {
-                            AllZone.Stack.add(bounce);
-                            stop();
-                        }
-                    }
-                }//selectCard()
-            };
-            
-            bounce.setBeforePayMana(bounceIslands);
-            
-            Command bounceIslandsAI = new Command() {
-                private static final long serialVersionUID = 8250154784542733353L;
-                
-                public void execute() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    CardList list = new CardList(play.getCards());
-                    list = list.getType("Island");
-                    //TODO: sort by tapped
-                    
-                    for(int i = 0; i < 3; i++) {
-                        AllZone.GameAction.moveToHand(list.get(i));
-                    }
-                }
-            };
-            
-            bounce.setBeforePayManaAI(bounceIslandsAI);
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(bounce);
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
