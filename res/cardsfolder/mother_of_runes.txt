@@ -3,11 +3,11 @@ ManaCost:W
 Types:Creature Human Cleric
 Text:no text
 PT:1/1
-K:abPumpTgtC T:Protection from black
-K:abPumpTgtC T:Protection from blue
-K:abPumpTgtC T:Protection from green
-K:abPumpTgtC T:Protection from red
-K:abPumpTgtC T:Protection from white
+A:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from white | SpellDescription$ Target creature you control gains protection from white until end of turn.
+A:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from black | SpellDescription$ Target creature you control gains protection from black until end of turn.
+A:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from blue | SpellDescription$ Target creature you control gains protection from blue until end of turn.
+A:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from red | SpellDescription$ Target creature you control gains protection from red until end of turn.
+A:AB$Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Protection from green | SpellDescription$ Target creature you control gains protection from green until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mother_of_runes.jpg
 SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/14.jpg

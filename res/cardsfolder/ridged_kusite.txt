@@ -3,7 +3,7 @@ ManaCost:B
 Types:Creature Horror Spellshaper
 Text:no text
 PT:1/1
-K:abPumpTgtC 1 B T Discard<1/Any>:+1/+0/First Strike
+A:AB$Pump | Cost$ 1 B T Discard<1/Any> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ First Strike | SpellDescription$ Target creature gets +1/+0 and gains first strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ridged_kusite.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/78.jpg

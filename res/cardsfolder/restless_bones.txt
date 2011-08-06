@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Skeleton
 Text:no text
 PT:1/1
-K:abPumpTgtC 3 B T:Swampwalk
+A:AB$Pump | Cost$ 3 B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Swampwalk | SpellDescription$ Target creature gains swampwalk until end of turn.
 A:AB$Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/restless_bones.jpg
