@@ -1,3 +1,12 @@
+Inferno Titan
+4 R R
+Creature Giant
+no text
+6/6
+abPump R:+1/+0
+WheneverKeyword:EntersBattleField:Self:Play:Damage/3:InputType - CreatureORPlayer:ASAP:No_Condition:MultipleTargets:Whenever Inferno Titan enters the battlefield
+WheneverKeyword:Attacks:Self:Play:Damage/3:InputType - CreatureORPlayer:ASAP:No_Condition:MultipleTargets:or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
+
 Sylvan Ranger
 1 G
 Creature Elf Scout

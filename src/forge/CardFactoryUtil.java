@@ -2551,6 +2551,45 @@ public class CardFactoryUtil {
         return target;
     }//input_MasteroftheWildHunt_input_targetCreature()
     
+    public static Input input_MultitargetCreatureOrPlayer(final SpellAbility spell, final int i, final int i_max,final Command paid) {
+        Input target = new Input() {
+        	
+            private static final long serialVersionUID = -1779224307654698954L;
+            
+            @Override
+            public void showMessage() {
+            	if(GameAction.MultiTarget_Cancelled == true) stop();
+            	if(i == 0) AllZone.Display.showMessage("Select target creature or player: " + (i_max) + " more damage to deal");
+            	else AllZone.Display.showMessage("Select target creature or player: " + (i) + " more damage to deal");
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+            	GameAction.MultiTarget_Cancelled = true;
+                stop();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Play)
+                        && (canTarget(spell, card))) {
+                    spell.setTargetCard(card);
+                    paid.execute();
+                    stop();  
+                }
+            }//selectCard()
+            
+            @Override
+            public void selectPlayer(String player) {
+                spell.setTargetPlayer(player);
+                paid.execute();
+                stop();  
+            }
+
+        };
+        return target;
+    }//input_MultitargetCreatureOrPlayer()
+    
     public static Input Lorthos_input_targetPermanent(final SpellAbility spell, final CardList choices, final int i, final Command paid) {
         Input target = new Input() {
         	

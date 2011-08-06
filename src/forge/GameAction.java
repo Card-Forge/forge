@@ -663,6 +663,40 @@ public class GameAction {
     }
     
     // Whenever Keyword
+    public void CheckWheneverKeyword(Card Triggering_Card,String Event) { 
+		CardList Cards_In_Play = new CardList();
+ 		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+ 		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+ 		Cards_In_Play = Cards_In_Play.filter(new CardListFilter() {
+             public boolean addCard(Card c) {
+                 if(c.getKeyword().toString().contains("WheneverKeyword")) return true;
+                 return false;
+             }
+         });
+ 		boolean Triggered = false;
+ 		for(int i = 0; i < Cards_In_Play.size() ; i++) {	
+ 		if(Triggered == false) {	
+ 			Card card = Cards_In_Play.get(i);
+ 		        ArrayList<String> a = card.getKeyword();
+ 		        int WheneverKeywords = 0;
+ 		        int WheneverKeyword_Number[] = new int[a.size()];
+ 		        for(int x = 0; x < a.size(); x++)
+ 		            if(a.get(x).toString().startsWith("WheneverKeyword")) {
+ 		            	WheneverKeyword_Number[WheneverKeywords] = x;
+ 		            	WheneverKeywords = WheneverKeywords + 1;
+ 		            }
+ 		        for(int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
+                 String parse = card.getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
+                 String k[] = parse.split(":");
+                 if((k[1].equals(Event))) {
+                	 RunWheneverKeyword(Triggering_Card, Event); // Beached
+                	 Triggered = true;
+                 }
+ 		        }
+ 		}
+ 		}	
+    }
+	static boolean MultiTarget_Cancelled = false;
     public void RunWheneverKeyword(Card c, String Event) {   	
  		CardList Cards_In_Play = new CardList();
  		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
@@ -675,7 +709,7 @@ public class GameAction {
          });
  		for(int i = 0; i < Cards_In_Play.size() ; i++) {	
  			Card card = Cards_In_Play.get(i);
- 			final Card crd = card;
+ 			final Card F_card = card;
  		        ArrayList<String> a = card.getKeyword();
  		        int WheneverKeywords = 0;
  		        int WheneverKeyword_Number[] = new int[a.size()];
@@ -689,8 +723,13 @@ public class GameAction {
                  String k[] = parse.split(":");
                  final String F_k[] = k;
                  if((k[1].equals("PermanentIntoGraveyard")) && Event.equals("PermanentIntoGraveyard")
-                	 || (k[1].equals("BeginningOfEndStep")) && Event.equals("BeginningOfEndStep"))
+                	 || (k[1].equals("BeginningOfEndStep")) && Event.equals("BeginningOfEndStep")
+                	 || (k[1].equals("Attacks")) && Event.equals("Attacks")
+                	 || (k[1].equals("EntersBattleField")) && Event.equals("EntersBattleField"))
                 		 {      
+                    if(k[2].contains("Self")) {
+                    	if(!card.equals(c)) k[4] = "Null";    
+                        }
                    	if(k[2].contains("Type")) {
                         String TypeParse = k[2];                
                         String Type[] = TypeParse.split("/");
@@ -709,30 +748,35 @@ public class GameAction {
                   	if(k[8].contains("ControllerEndStep")) {
                         if(!getLastPlayerToDraw().equals(card.getController())) k[4] = "Null";	
                  	}
-                  	     		
+                  	
+                  	// Targets
+        			String TargetPlayer = "";
+    				if(k[5].equals("ControllingPlayer_Self")) TargetPlayer = card.getController();
+    				final String F_TargetPlayer = TargetPlayer;
+    				Card TargetCard = null;
+    				final Card Destroyed = c;
+    				if(k[5].equals("Self")) TargetCard = F_card;
+    				final Card F_TargetCard = TargetCard;
+                  	
                 		// +1 +1 Counters
                 		if(k[4].contains("+1+1 Counters")) {
-            				Card Target = null;
-            				final Card Destroyed = c;
-            				if(k[5].equals("Self")) Target = crd;
-            				final Card F_Target = Target;
                             String AmountParse = k[4];                
                             String S_Amount = AmountParse.split("/")[1];
                             int I_Amount = 0;
                             if(S_Amount.equals("Power")) I_Amount = Destroyed.getNetAttack();
                             else I_Amount = Integer.valueOf(S_Amount);
                         final int F_Amount = I_Amount;
-                		Ability ability = new Ability(Target, "0") {
+                		Ability ability = new Ability(F_TargetCard, "0") {
                 			@Override
                 			public void resolve() {
                 				boolean Go = true;
                         		if(F_k[3].equals("Play")) {
-                        			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, F_Target.getController());
-                            		if(AllZone.GameAction.isCardInZone(F_Target,Required_Zone)) {
+                        			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, F_TargetCard.getController());
+                            		if(AllZone.GameAction.isCardInZone(F_TargetCard,Required_Zone)) {
                 				if(F_k[7].equals("Yes_No")) {
-    				        	if(F_Target.getController().equals("Human")) {
+    				        	if(F_TargetCard.getController().equals("Human")) {
     					        	Object[] possibleValues = {"Yes", "No"};
-    					        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + F_Target.getName(),F_Target.getName() + " Ability", 
+    					        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + F_TargetCard.getName(),F_TargetCard.getName() + " Ability", 
     					        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
     					        			null, possibleValues, possibleValues[0]);
     			                      if(q.equals(1)) {
@@ -740,24 +784,21 @@ public class GameAction {
     				                    }
     				        	}
                 				}
-			                      if(Go == true) if(AllZone.GameAction.isCardInPlay(F_Target)) F_Target.addCounter(Counters.P1P1, F_Amount);
+			                      if(Go == true) if(AllZone.GameAction.isCardInPlay(F_TargetCard)) F_TargetCard.addCounter(Counters.P1P1, F_Amount);
                 			}
                         		}
                 			}
                 		};
-                		ability.setStackDescription(Target.getName() + " - gets " + F_Amount + " +1/+1 counters.");
+                		ability.setStackDescription(F_TargetCard.getName() + " - gets " + F_Amount + " +1/+1 counters.");
                 		if(k[3].equals("Play")) {
-                			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, Target.getController());
-                    		if(AllZone.GameAction.isCardInZone(Target,Required_Zone)) {
+                			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, F_TargetCard.getController());
+                    		if(AllZone.GameAction.isCardInZone(F_TargetCard,Required_Zone)) {
                     			if(k[6].equals("ASAP")) AllZone.Stack.add(ability);
                     		}
                 		}
                 	}
                 		// Gain Life
                 		if(k[4].contains("ModifyLife")) {
-                			String Target = "";
-            				if(k[5].equals("ControllingPlayer_Self")) Target = card.getController();
-            				final String F_Target = Target;
                             String AmountParse = k[4];                
                             String S_Amount = AmountParse.split("/")[1];
                             int I_Amount = 0;
@@ -769,12 +810,12 @@ public class GameAction {
                     			public void resolve() {
                     				boolean Go = true;
                             		if(F_k[3].equals("Play")) {
-                            			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, F_Target);
-                                		if(AllZone.GameAction.isCardInZone(crd,Required_Zone)) {
+                            			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, F_TargetPlayer);
+                                		if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
                     				if(F_k[7].equals("Yes_No")) {
-        				        	if(F_Target.equals("Human")) {
+        				        	if(F_TargetPlayer.equals("Human")) {
         					        	Object[] possibleValues = {"Yes", "No"};
-        					        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + crd.getName(),crd.getName() + " Ability", 
+        					        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + F_card.getName(),F_card.getName() + " Ability", 
         					        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
         					        			null, possibleValues, possibleValues[0]);
         			                      if(q.equals(1)) {
@@ -782,8 +823,8 @@ public class GameAction {
         				                    }
         				        	}
                     				}
-    			                      if(Go == true) if(AllZone.GameAction.isCardInPlay(crd)) {
-    			          				PlayerLife life = AllZone.GameAction.getPlayerLife(F_Target);
+    			                      if(Go == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
+    			          				PlayerLife life = AllZone.GameAction.getPlayerLife(F_TargetPlayer);
     			        				if(F_Amount > -1) life.addLife(F_Amount);
     			        				else life.subtractLife(F_Amount * -1);
     			                      }
@@ -791,14 +832,104 @@ public class GameAction {
                             		}
                     			}
                     		};
-                    		ability.setStackDescription(crd + " - " + crd.getController() + ((F_Amount > -1)? " gains " + F_Amount:"") + ((F_Amount <= -1)? " loses " + F_Amount * -1:"") + " life.");
+                    		ability.setStackDescription(F_card + " - " + F_card.getController() + ((F_Amount > -1)? " gains " + F_Amount:"") + ((F_Amount <= -1)? " loses " + F_Amount * -1:"") + " life.");
                     		if(k[3].equals("Play")) {
-                    			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, Target);
-                        		if(AllZone.GameAction.isCardInZone(crd,Required_Zone)) {
+                    			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, F_TargetPlayer);
+                        		if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
                         			if(k[6].equals("ASAP")) AllZone.Stack.add(ability);
                         		}
                     		}
                             
+                		}
+                		// Deal Damage
+                		if(k[4].contains("Damage")) {
+                            String AmountParse = k[4];                
+                            String S_Amount = AmountParse.split("/")[1];
+                            int I_Amount = 0;
+                            if(S_Amount.equals("Some random condition not implemented yet")) I_Amount = 2;
+                            else I_Amount = Integer.valueOf(S_Amount);
+                            
+                            int Multiple_Targets = 1;
+                            if(k[8].contains("MultipleTargets")) {
+                            	Multiple_Targets = I_Amount;
+                            	I_Amount = 1;
+                            }
+                            final int F_Multiple_Targets = Multiple_Targets; 
+                            final int F_Amount = I_Amount;
+                        	final Object[] Targets = new Object[Multiple_Targets];
+                        	final int[] index = new int[1];
+            	                final Ability ability = new Ability(c, "0") {
+            	                    @Override
+                            			public void resolve() {
+                            				boolean Go = true;
+                                    		if(F_k[3].equals("Play")) {
+                                    			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, F_card.getController());
+                                        		if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
+                            				if(F_k[7].equals("Yes_No")) {
+                				        	if(F_card.getController().equals("Human")) {
+                					        	Object[] possibleValues = {"Yes", "No"};
+                					        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + F_card.getName(),F_card.getName() + " Ability", 
+                					        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                					        			null, possibleValues, possibleValues[0]);
+                			                      if(q.equals(1)) {
+                			                    	  Go = false;
+                				                    }
+                				        	}
+                            				}
+            			                      if(Go == true) if(AllZone.GameAction.isCardInPlay(F_card)) {
+            			                    	  if(F_card.getController().equals(Constant.Player.Human)) {
+            			                    	  for(int z = 0; z < Targets.length; z++) {
+            			                    		  if(!(Targets[z].equals(Constant.Player.Human) || Targets[z].equals(Constant.Player.Computer))) {
+            			                              if(AllZone.GameAction.isCardInPlay((Card) Targets[z])
+            			                                      && CardFactoryUtil.canTarget(F_card, (Card) Targets[z])) {
+            			                                  Card c = (Card) Targets[z];
+            			                                  AllZone.GameAction.addDamage(c, F_card, F_Amount);
+            			                              }
+            			                          } else {
+            			                             AllZone.GameAction.addDamage( (String) Targets[z], F_Amount);
+            			                          }
+            			                      }
+            			                      }
+            			                    	  if(F_card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.addDamage(Constant.Player.Human, F_Amount*F_Multiple_Targets);
+                            			}
+                                        		}
+                                    		}
+                            			}
+                            };
+                           
+                            final Command paidCommand = new Command() {
+                                private static final long serialVersionUID = -83034517601871955L;
+                                
+                                public void execute() {
+                                	MultiTarget_Cancelled = false;
+                                    for(int i = 0; i < F_Multiple_Targets; i++) {
+                                   	 AllZone.InputControl.setInput(CardFactoryUtil.input_MultitargetCreatureOrPlayer(ability , i , F_Amount*F_Multiple_Targets,new Command() {
+                                   	
+                                         private static final long serialVersionUID = -328305150127775L;
+                                         
+                                         public void execute() {
+                                        	 Targets[index[0]] = ability.getTargetPlayer(); 
+                                        	 if(Targets[index[0]] == null) Targets[index[0]] = ability.getTargetCard();
+                                             index[0]++;                               
+                                        	 }
+                                     }));
+                                    } 
+                                	AllZone.Stack.add(ability);
+                                }
+                            };
+                    		ability.setStackDescription(F_card.getName() + " - deals " + F_Amount*F_Multiple_Targets + " damage divided among one, two, or three target creatures and/or players.");
+                            
+                    		if(k[3].equals("Play")) {
+                    			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, F_card.getController());
+                        		if(AllZone.GameAction.isCardInZone(F_card,Required_Zone)) {
+                        			if(k[6].equals("ASAP")) {
+                        				if(k[5].equals("InputType - CreatureORPlayer") && card.getController().equals(Constant.Player.Human)) {
+                        					paidCommand.execute();
+                        				}
+                            if(k[5].equals("InputType - CreatureORPlayer") && card.getController().equals(Constant.Player.Computer)) AllZone.Stack.add(ability);
+                        			}
+                        		}
+                    		}
                 		}
                 		 }       	
  		        }
@@ -862,7 +993,7 @@ public class GameAction {
             }
         });
         
-        RunWheneverKeyword(c, "PermanentIntoGraveyard"); 
+        CheckWheneverKeyword(c, "PermanentIntoGraveyard"); 
         for(int i = 0; i < list.size(); i++)
             GameActionUtil.executeDestroyCardEffects(list.get(i), c);
         for(int i = 0; i < grv.size(); i++)
