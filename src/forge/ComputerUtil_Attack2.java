@@ -265,7 +265,7 @@ public class ComputerUtil_Attack2 {
 
    public int countExaltedBonus(Player player)
    {
-      PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+      PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
       CardList list = new CardList();
       list.addAll(play.getCards());
       list = list.filter(new CardListFilter(){

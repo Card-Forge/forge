@@ -138,7 +138,7 @@ public class AbilityFactory_Pump {
         	KWpump = Keywords.toArray(new String[Keywords.size()]);
         final String KWs[] = KWpump;
     	
-        CardList list = new CardList(AllZone.Computer_Play.getCards());
+        CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
         list = list.getType("Creature");
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
@@ -163,7 +163,7 @@ public class AbilityFactory_Pump {
     {
     	final int defense = getNumDefense(sa);
     	
-    	CardList list = new CardList(AllZone.Human_Play.getCards());
+    	CardList list = new CardList(AllZone.Human_Battlefield.getCards());
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) { 
                     	return CardFactoryUtil.canTarget(hostCard, c) && c.isCreature(); 

@@ -137,7 +137,7 @@ public class AbilityFactory_Counters {
 		
 		Player player = af.isCurse() ? AllZone.HumanPlayer : AllZone.ComputerPlayer;
 		
-		list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
+		list = new CardList(AllZone.getZone(Constant.Zone.Battlefield, player).getCards());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				return CardFactoryUtil.canTarget(source, c);
@@ -266,7 +266,7 @@ public class AbilityFactory_Counters {
 		
 		Player player = af.isCurse() ? AllZone.HumanPlayer : AllZone.ComputerPlayer;
 		
-		list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
+		list = new CardList(AllZone.getZone(Constant.Zone.Battlefield, player).getCards());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				return CardFactoryUtil.canTarget(source, c);

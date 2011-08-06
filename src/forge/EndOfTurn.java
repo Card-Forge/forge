@@ -21,8 +21,8 @@ public class EndOfTurn implements java.io.Serializable
 	  
     //Pyrohemia and Pestilence
     CardList all = new CardList();
-    all.addAll(AllZone.Human_Play.getCards());
-    all.addAll(AllZone.Computer_Play.getCards());
+    all.addAll(AllZone.Human_Battlefield.getCards());
+    all.addAll(AllZone.Computer_Battlefield.getCards());
 
     CardList creature = all.getType("Creature");
 
@@ -130,19 +130,19 @@ public class EndOfTurn implements java.io.Serializable
     			@Override
     			public void resolve() {
     				if(AllZone.GameAction.isCardInPlay(vale)) {
-    					((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+    					((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
                         
                         vale.setController(vale.getController().getOpponent());
                         
                         PlayerZone from = AllZone.getZone(vale);
                         from.remove(vale);
                         
-                        PlayerZone to = AllZone.getZone(Constant.Zone.Play, vale.getController());
+                        PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, vale.getController());
                         to.add(vale);
                         
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
                         vale.removeExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
     				}
     			}

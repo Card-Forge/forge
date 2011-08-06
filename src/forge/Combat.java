@@ -599,8 +599,8 @@ public class Combat {
         
         //get all attackers and blockers
         CardList check = new CardList();
-        check.addAll(AllZone.Human_Play.getCards());
-        check.addAll(AllZone.Computer_Play.getCards());
+        check.addAll(AllZone.Human_Battlefield.getCards());
+        check.addAll(AllZone.Computer_Battlefield.getCards());
         
         CardList all = check.getType("Creature");
         

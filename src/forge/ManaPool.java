@@ -504,7 +504,7 @@ public class ManaPool extends Card {
         //Omnath, Locus of Mana Pump Trigger
         if(Phase.GameBegins == 1) {
             CardList Omnath_Human = new CardList();
-            PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);                   
+            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);                   
             Omnath_Human.addAll(play.getCards());
             Omnath_Human = Omnath_Human.getName("Omnath, Locus of Mana"); 
             if(Omnath_Human.size() > 0) {

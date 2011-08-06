@@ -37,15 +37,15 @@ class CardFactory_Lands {
                     if(!(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getPlayerTurn().equals(
                             AllZone.ComputerPlayer))) return false;
                     inPlay.clear();
-                    inPlay.addAll(AllZone.Computer_Play.getCards());
+                    inPlay.addAll(AllZone.Computer_Battlefield.getCards());
                     return (inPlay.filter(targets).size() > 1) && super.canPlayAI();
                 }
                 
                 @Override
                 public void resolve() {
                     inPlay.clear();
-                    inPlay.addAll(AllZone.Human_Play.getCards());
-                    inPlay.addAll(AllZone.Computer_Play.getCards());
+                    inPlay.addAll(AllZone.Human_Battlefield.getCards());
+                    inPlay.addAll(AllZone.Computer_Battlefield.getCards());
                     for(Card targ:inPlay.filter(targets))
                         targ.addCounter(Counters.P1P1, 1);
                 }
@@ -190,7 +190,7 @@ class CardFactory_Lands {
 
                 } else {
                     CardList creature = new CardList();
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);             
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);             
                     if(zone != null) {
                     creature.addAll(zone.getCards());
                     creature = creature.getType("Creature"); 
@@ -212,7 +212,7 @@ class CardFactory_Lands {
                     	
                     }
                     }
-                    PlayerZone Hzone = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);  
+                    PlayerZone Hzone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);  
                     if(zone != null) {
                         CardList creature2 = new CardList();
                         creature2.addAll(Hzone.getCards());
@@ -266,7 +266,7 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     CardList creats = new CardList(
-                            AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+                            AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
                     creats = creats.getType("Creature");
                     StringBuilder sb = new StringBuilder();
                     sb.append(card.getName()).append(" - target creature you control gains protection from the color of your choice until end of turn");
@@ -826,8 +826,8 @@ class CardFactory_Lands {
 
 				@Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList creatures = new CardList();
                     creatures.addAll(comp.getCards());
                     creatures.addAll(hum.getCards());
@@ -1021,7 +1021,7 @@ class CardFactory_Lands {
 
             	public void selectButtonCancel() {stop();}
             	public void selectCard(Card c, PlayerZone zone) {
-            		if(zone.is(Constant.Zone.Play)) {
+            		if(zone.is(Constant.Zone.Battlefield)) {
             			if((c.isLand() && card.getName().equals("Strip Mine")) ||
             					(!c.isBasicLand() && (card.getName().equals("Wasteland") || card.getName().equals("Tectonic Edge")))) {
             			card.tap(); //tapping Strip Mine
@@ -1177,8 +1177,8 @@ class CardFactory_Lands {
                 @Override
                 public void showMessage() {
                     CardList choice = new CardList();
-                    choice.addAll(AllZone.Human_Play.getCards());
-                    choice.addAll(AllZone.Computer_Play.getCards());
+                    choice.addAll(AllZone.Human_Battlefield.getCards());
+                    choice.addAll(AllZone.Computer_Battlefield.getCards());
                     
                     choice = choice.getType("Creature");
                     choice = choice.filter(new CardListFilter() {
@@ -1489,7 +1489,7 @@ class CardFactory_Lands {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
                     
                     CardList plains = new CardList(lib.getCards());
@@ -1742,8 +1742,8 @@ class CardFactory_Lands {
             	
 				@Override
 			    public void showMessage() {
-					PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-			        PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+					PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+			        PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
 			        CardList legendaryCreats = new CardList();
 			        legendaryCreats.addAll(comp.getCards());
 			        legendaryCreats.addAll(hum.getCards());
@@ -1819,15 +1819,15 @@ class CardFactory_Lands {
                     if(!(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getPlayerTurn().equals(
                             AllZone.ComputerPlayer))) return false;
                     inPlay.clear();
-                    inPlay.addAll(AllZone.Computer_Play.getCards());
+                    inPlay.addAll(AllZone.Computer_Battlefield.getCards());
                     return (inPlay.filter(targets).size() > 1) && super.canPlayAI();
                 }
                 
                 @Override
                 public void resolve() {
                     inPlay.clear();
-                    inPlay.addAll(AllZone.Human_Play.getCards());
-                    inPlay.addAll(AllZone.Computer_Play.getCards());
+                    inPlay.addAll(AllZone.Human_Battlefield.getCards());
+                    inPlay.addAll(AllZone.Computer_Battlefield.getCards());
                     for(Card targ:inPlay.filter(targets))
                         targ.addCounter(Counters.P1P1, 1);
                 }
@@ -1944,8 +1944,8 @@ class CardFactory_Lands {
 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList creatures = new CardList();
                     creatures.addAll(comp.getCards());
                     creatures.addAll(hum.getCards());
@@ -2072,8 +2072,8 @@ class CardFactory_Lands {
 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList creatures = new CardList();
                     creatures.addAll(comp.getCards());
                     creatures.addAll(hum.getCards());
@@ -2388,7 +2388,7 @@ class CardFactory_Lands {
             final SpellAbility X_ability = new Ability(card, "0") {
                 @Override
                 public boolean canPlayAI() {
-					PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+					PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
 			        CardList opponentCreatureList = new CardList(opponentPlayZone.getCards());
 			        opponentCreatureList = opponentCreatureList.getType("Creature");
       			  int n = ComputerUtil.getAvailableMana().size() - 1;
@@ -2695,7 +2695,7 @@ class CardFactory_Lands {
                 public void showMessage() {
                     CardList choice = new CardList();
                     final Player player = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
                     choice.addAll(play.getCards());
 
                     choice = choice.getType("Creature");
@@ -2772,7 +2772,7 @@ class CardFactory_Lands {
         						stop();
         					}
         					public void selectCard(Card c, PlayerZone zone) {
-        						if(c.isLand() && zone.is(Constant.Zone.Play) && c.isUntapped()) {
+        						if(c.isLand() && zone.is(Constant.Zone.Battlefield) && c.isUntapped()) {
         							AllZone.GameAction.sacrifice(c);
         							if(paid[0] < 1) {
         								paid[0]++;
@@ -2835,7 +2835,7 @@ class CardFactory_Lands {
                     	   stop();
                        }
                        public void selectCard(Card c, PlayerZone zone) {
-                          if(c.isLand() && zone.is(Constant.Zone.Play) && c.getType().contains("Plains")) {
+                          if(c.isLand() && zone.is(Constant.Zone.Battlefield) && c.getType().contains("Plains")) {
                              AllZone.GameAction.sacrifice(c);
                              stop();
                           }
@@ -2855,7 +2855,7 @@ class CardFactory_Lands {
                private static final long serialVersionUID = 6175830918425915833L;
                final Player player = card.getController();
                public void execute() {
-                  PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                  PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                   CardList plains = new CardList(play.getCards());
                   plains = plains.getType("Land");
                   plains = plains.getTapState("Untapped");
@@ -2878,7 +2878,7 @@ class CardFactory_Lands {
                   }
                   else { //this is the human resolution
                      final int[] paid = {0};
-                     if ((new CardList(AllZone.Human_Play.getCards())
+                     if ((new CardList(AllZone.Human_Battlefield.getCards())
                      .getType("Land").getTapState("Untapped").size() < 2))
                     	{
                     	 AllZone.GameAction.sacrifice(card);
@@ -2895,7 +2895,7 @@ class CardFactory_Lands {
                      	   stop();
                         }
                         public void selectCard(Card c, PlayerZone zone) {
-                           if(c.isLand() && zone.is(Constant.Zone.Play) && c.isUntapped()) {
+                           if(c.isLand() && zone.is(Constant.Zone.Battlefield) && c.isUntapped()) {
                               AllZone.GameAction.sacrifice(c);
                               if(paid[0] < 1){
                             	  paid[0]++;

@@ -158,8 +158,8 @@ public class CardFactory implements NewConstants {
     final public Card copyCardintoNew(Card in) {
         
     	Card out = getCard(in.getName(), in.getOwner());
-        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
         CardList all = AllZone.CardFactory.getAllCards();
         CardList tokens = new CardList(Hplay.getCards());
         tokens.add(new CardList(Cplay.getCards()));
@@ -322,7 +322,7 @@ public class CardFactory implements NewConstants {
         		
         		public void execute()
         		{
-        			PlayerZone pzICtrl = AllZone.getZone(Constant.Zone.Play, card.getOwner());
+        			PlayerZone pzICtrl = AllZone.getZone(Constant.Zone.Battlefield, card.getOwner());
         			CardList clICtrl = new CardList(pzICtrl.getCards());
         			
         			boolean fnd = false;
@@ -700,8 +700,8 @@ public class CardFactory implements NewConstants {
                     
             	public void execute() {
                     CardList CardsinPlay = new CardList();
-              		CardsinPlay.addAll(AllZone.Human_Play.getCards());
-              		CardsinPlay.addAll(AllZone.Computer_Play.getCards());
+              		CardsinPlay.addAll(AllZone.Human_Battlefield.getCards());
+              		CardsinPlay.addAll(AllZone.Computer_Battlefield.getCards());
               		CardsinPlay = CardsinPlay.getType("World");
               		CardsinPlay = CardsinPlay.filter(new CardListFilter() {
         				public boolean addCard(Card c) {
@@ -744,7 +744,7 @@ public class CardFactory implements NewConstants {
                     private static final long serialVersionUID = 2045940121508110423L;
                     
                     public void execute() {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                         CardList choice = new CardList(play.getCards()).getType("Land");
                         if (!choice.isEmpty()) {
                         	AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, choice,
@@ -1203,11 +1203,11 @@ public class CardFactory implements NewConstants {
                 	CardList l = new CardList();
                 	
                 	if (Scope[0].contains("YouCtrl"))
-                		l.addAll(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+                		l.addAll(AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
                 	
                 	if (Scope[0].contains("All")) {
-                		l.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-                		l.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+                		l.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
+                		l.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
                 	}
                 	
                 	String fc[] = {"Creature"};
@@ -1465,11 +1465,11 @@ public class CardFactory implements NewConstants {
             			CardList l = new CardList();
             			
             			if (Scope[0].contains("YouCtrl"))
-            				l.addAll(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+            				l.addAll(AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
             			
             			if (Scope[0].contains("All")) {
-            				l.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-            				l.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+            				l.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
+            				l.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
             			}
             			
             			String fc[] = {"Creature"};
@@ -2072,12 +2072,12 @@ public class CardFactory implements NewConstants {
                     
                     Card chooseTgtC() {
                         // Combo alert!!
-                        PlayerZone compy = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                        PlayerZone compy = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                         CardList cPlay = new CardList(compy.getCards());
                         if(cPlay.size() > 0) for(int i = 0; i < cPlay.size(); i++)
                             if(cPlay.get(i).getName().equals("Stuffy Doll")) return cPlay.get(i);
                         
-                        PlayerZone human = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                        PlayerZone human = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                         CardList hPlay = new CardList(human.getCards());
                         hPlay = hPlay.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
@@ -2300,8 +2300,8 @@ public class CardFactory implements NewConstants {
                     	if (DmgPlayer[0] && AllZone.HumanPlayer.getLife() <= ndam && AllZone.ComputerPlayer.getLife() > ndam) 
                     		return true;											// The AI will kill the human if possible
                     	
-                	   	CardList human = new CardList(AllZone.Human_Play.getCards());
-                	   	CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                	   	CardList human = new CardList(AllZone.Human_Battlefield.getCards());
+                	   	CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
                     
                     	human = human.getValidCards(Tgts,card.getController(),card);
                         human = human.canBeDamagedBy(card);
@@ -2341,8 +2341,8 @@ public class CardFactory implements NewConstants {
                         int ndam = getNumDam();
                        
                         CardList all = new CardList();
-                    	all.addAll(AllZone.Human_Play.getCards());
-                    	all.addAll(AllZone.Computer_Play.getCards());
+                    	all.addAll(AllZone.Human_Battlefield.getCards());
+                    	all.addAll(AllZone.Computer_Battlefield.getCards());
                     	all = all.getValidCards(Tgts,card.getController(),card);
                     
                     	for(int i = 0; i < all.size(); i++) {
@@ -2943,13 +2943,13 @@ public class CardFactory implements NewConstants {
                 {
                     Random r = new Random();
                 	                    
-                    CardList hCards = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
+                    CardList hCards = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
                     hCards = hCards.getValidCards(Tgts,card.getController(),card);
                     hCards = hCards.getTargetableCards(card);
                     if (hCards.size() > 0)
                     	return super.canPlayAI();
                     
-                    CardList cCards = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+                    CardList cCards = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
                     cCards = cCards.getValidCards(Tgts,card.getController(),card);
                     cCards = cCards.getTargetableCards(card);
                     if (cCards.size() == 0)
@@ -2997,8 +2997,8 @@ public class CardFactory implements NewConstants {
                 
                 public void execute() 
                 {
-                    CardList hCards = new CardList(AllZone.Human_Play.getCards());
-                    CardList cCards = new CardList(AllZone.Computer_Play.getCards());
+                    CardList hCards = new CardList(AllZone.Human_Battlefield.getCards());
+                    CardList cCards = new CardList(AllZone.Computer_Battlefield.getCards());
                     
                     hCards = hCards.getValidCards(Tgts,card.getController(),card);
                     hCards = hCards.getTargetableCards(card);
@@ -3459,13 +3459,13 @@ public class CardFactory implements NewConstants {
                 {
                     Random r = new Random();
                 	                    
-                    CardList hCards = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
+                    CardList hCards = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
                     hCards = hCards.getValidCards(Tgts,card.getController(),card);
                     hCards = hCards.getTargetableCards(card);
                     if (hCards.size() > 0)
                     	return super.canPlayAI();
                     
-                    CardList cCards = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+                    CardList cCards = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
                     cCards = cCards.getValidCards(Tgts,card.getController(),card);
                     cCards = cCards.getTargetableCards(card);
                     if (cCards.size() == 0)
@@ -3525,8 +3525,8 @@ public class CardFactory implements NewConstants {
         		
         		public void execute()
         		{
-        			CardList hCards = new CardList(AllZone.Human_Play.getCards());
-        			CardList cCards = new CardList(AllZone.Computer_Play.getCards());
+        			CardList hCards = new CardList(AllZone.Human_Battlefield.getCards());
+        			CardList cCards = new CardList(AllZone.Computer_Battlefield.getCards());
         			
         			hCards = hCards.getValidCards(Tgts,card.getController(),card);
         			hCards = hCards.getTargetableCards(card);
@@ -3643,8 +3643,8 @@ public class CardFactory implements NewConstants {
                 	
                 	if(!super.canPlayAI()) return false;
                 	
-                    CardList human = new CardList(AllZone.Human_Play.getCards());
-                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
                     
                     human = human.getValidCards(Tgts,card.getController(),card);
                     int humanvalue = CardListUtil.sumCMC(human);
@@ -3669,8 +3669,8 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                     CardList all = new CardList();
-                    all.addAll(AllZone.Human_Play.getCards());
-                    all.addAll(AllZone.Computer_Play.getCards());
+                    all.addAll(AllZone.Human_Battlefield.getCards());
+                    all.addAll(AllZone.Computer_Battlefield.getCards());
                     all = all.getValidCards(Tgts,card.getController(),card);
                     
                     for(int i = 0; i < all.size(); i++) {
@@ -4040,7 +4040,7 @@ public class CardFactory implements NewConstants {
                                 AllZone.GameAction.moveTo(zone, c);
                             }
                             else if (Destination.equals("Battlefield")) {
-                                PlayerZone zone = AllZone.getZone(Constant.Zone.Play, player);
+                                PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, player);
                                 AllZone.GameAction.moveTo(zone, c);
                             }
                             else if (Destination.equals("TopofLibrary")) {
@@ -5197,8 +5197,8 @@ public class CardFactory implements NewConstants {
                                 card.getController().drawCard();
                             }
                         } else if(card.getName().equals("Caldera Hellion")) {
-                            PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-                            PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                            PlayerZone hPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+                            PlayerZone cPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                             CardList creatures = new CardList();
                             
                             creatures.addAll(hPlay.getCards());
@@ -5226,7 +5226,7 @@ public class CardFactory implements NewConstants {
                     
                     public void execute() {
                         
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                         CardList creats = new CardList(play.getCards());
                         creats = creats.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
@@ -5257,7 +5257,7 @@ public class CardFactory implements NewConstants {
                                     count++;
                                 }
                                 //is this needed?
-                                AllZone.Computer_Play.updateObservers();
+                                AllZone.Computer_Battlefield.updateObservers();
                             }
                             numCreatures[0] = count;
                         }
@@ -5311,7 +5311,7 @@ public class CardFactory implements NewConstants {
                     public void execute() {
                         // Target as Modular is Destroyed
                         if(card.getController().equals(AllZone.ComputerPlayer)) {
-                            CardList choices = new CardList(AllZone.Computer_Play.getCards()).filter(new CardListFilter() {
+                            CardList choices = new CardList(AllZone.Computer_Battlefield.getCards()).filter(new CardListFilter() {
                                 public boolean addCard(Card c) {
                                     return c.isCreature() && c.isArtifact();
                                 }
@@ -5385,7 +5385,7 @@ public class CardFactory implements NewConstants {
                 }//chooseTargetAI()
                 
                 CardList getCreature() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isCreature() 
@@ -6636,8 +6636,8 @@ public class CardFactory implements NewConstants {
             SpellAbility ability = new Ability(card, "R") {
                 @Override
                 public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Play.getCards());
-                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
                     
                     human = human.getType("Creature");
                     computer = computer.getType("Creature");
@@ -6672,8 +6672,8 @@ public class CardFactory implements NewConstants {
                 public boolean canPlayAI() {
                     //get all creatures
                     CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
+                    list.addAll(AllZone.Human_Battlefield.getCards());
+                    list.addAll(AllZone.Computer_Battlefield.getCards());
                     list = list.getType("Creature");
                     
                     return 0 < list.size();
@@ -6692,8 +6692,8 @@ public class CardFactory implements NewConstants {
             SpellAbility ability = new Ability(card, "B") {
                 @Override
                 public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Play.getCards());
-                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
                     
                     human = human.getType("Creature");
                     computer = computer.getType("Creature");
@@ -6705,8 +6705,8 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     //get all creatures
                     CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
+                    list.addAll(AllZone.Human_Battlefield.getCards());
+                    list.addAll(AllZone.Computer_Battlefield.getCards());
                     list = list.getType("Creature");
                     
                     for(int i = 0; i < list.size(); i++) {
@@ -6735,8 +6735,8 @@ public class CardFactory implements NewConstants {
                 public boolean canPlayAI() {
                     //get all creatures
                     CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
+                    list.addAll(AllZone.Human_Battlefield.getCards());
+                    list.addAll(AllZone.Computer_Battlefield.getCards());
                     list = list.getType("Creature");
                     
                     return 0 < list.size();
@@ -6917,8 +6917,8 @@ public class CardFactory implements NewConstants {
                 public Object execute() {
                     //get all creatures
                     CardList tempList = new CardList();
-                    tempList.addAll(AllZone.Human_Play.getCards());
-                    tempList.addAll(AllZone.Computer_Play.getCards());
+                    tempList.addAll(AllZone.Human_Battlefield.getCards());
+                    tempList.addAll(AllZone.Computer_Battlefield.getCards());
                     
                     CardList list = new CardList();
                     
@@ -6976,7 +6976,7 @@ public class CardFactory implements NewConstants {
                         if(target == null) {
                             int convertedCost = 0;
                             CardList tempList = new CardList();
-                            tempList.addAll(AllZone.Human_Play.getCards());
+                            tempList.addAll(AllZone.Human_Battlefield.getCards());
                             
                             for(int i = 0; i < tempList.size(); i++) {
                                 if(tempList.get(i).isPermanent()
@@ -6992,7 +6992,7 @@ public class CardFactory implements NewConstants {
                         //target something cheaper (manacost 0?) instead:
                         if(target == null) {
                             CardList humanPerms = new CardList();
-                            humanPerms.addAll(AllZone.Human_Play.getCards());
+                            humanPerms.addAll(AllZone.Human_Battlefield.getCards());
                             humanPerms = humanPerms.filter(new CardListFilter() {
                                 public boolean addCard(Card c) {
                                     return c.isPermanent() && !c.isLand() && CardFactoryUtil.canTarget(card, c);
@@ -7004,7 +7004,7 @@ public class CardFactory implements NewConstants {
                         
                         if(target == null) {
                             //must target computer creature
-                            CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                            CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
                             computer = computer.getType("Creature");
                             computer.remove(card);
                             
@@ -7033,8 +7033,8 @@ public class CardFactory implements NewConstants {
                                 c = AllZone.CardFactory.dynamicCopyCard(c);
                                 c.setController(c.getOwner());
                                 
-                                PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getOwner());
-                                PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
+                                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
+                                PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
                                 removed.remove(c);
                                 if (c.isTapped())
                                 	c.untap();
@@ -7062,7 +7062,7 @@ public class CardFactory implements NewConstants {
                     Object o = getPerm.execute();
                     if(o == null) return false;
                     
-                    CardList cList = new CardList(AllZone.Human_Play.getCards());
+                    CardList cList = new CardList(AllZone.Human_Battlefield.getCards());
             		cList = cList.filter(new CardListFilter()
             		{
             			public boolean addCard(Card crd)
@@ -7092,7 +7092,7 @@ public class CardFactory implements NewConstants {
                         
                         //put permanent into play
                         Card c = getSourceCard();
-                        AllZone.getZone(Constant.Zone.Play, c.getController()).add(c);
+                        AllZone.getZone(Constant.Zone.Battlefield, c.getController()).add(c);
                     }
                 }//resolve()
                 
@@ -7156,7 +7156,7 @@ public class CardFactory implements NewConstants {
                                 c = AllZone.CardFactory.copyCard(c);
                                 c.setController(c.getOwner());
                                 
-                                PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+                                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
                                 play.add(c);
                             }
                         }//resolve()
@@ -7199,17 +7199,17 @@ public class CardFactory implements NewConstants {
                     Card c = getTargetCard();
                     c.setController(card.getController());
                     
-                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
                     
                     PlayerZone from = AllZone.getZone(c);
-                    PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     from.remove(c);
                     to.add(c);
                     
-                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
                     
                 }//resolve()
             };
@@ -7249,7 +7249,7 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     Card c = getTargetCard();
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     if(AllZone.GameAction.isCardInZone(c, hand)) {
                         hand.remove(c);
@@ -7345,7 +7345,7 @@ public class CardFactory implements NewConstants {
                 
                 CardList getPerms() {
                     CardList list = new CardList();
-                    list.addAll(AllZone.Computer_Play.getCards());
+                    list.addAll(AllZone.Computer_Battlefield.getCards());
                     list = list.filter(new CardListFilter(){
                     	public boolean addCard(Card c)
                     	{
@@ -7373,7 +7373,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
-                    if(zone.is(Constant.Zone.Play) && c != card)//cannot target self
+                    if(zone.is(Constant.Zone.Battlefield) && c != card)//cannot target self
                     {
                         ability.setTargetCard(c);
                         stopSetNext(new Input_PayManaCost(ability));
@@ -7679,7 +7679,7 @@ public class CardFactory implements NewConstants {
                     }
                     
                     return card.getCounters(Counters.HOOFPRINT) >= 4
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && AllZone.Phase.getPlayerTurn().equals(card.getController());
                 }//canPlay()
                 
@@ -7744,7 +7744,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.getType("Creature");
                     if(list.size() > 0) {
                         setTargetCard(CardFactoryUtil.AI_getBestCreature(list));
@@ -7778,7 +7778,7 @@ public class CardFactory implements NewConstants {
                 	Player player = card.getController();
                     
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
                     
                     //converted[0] = card.getCounters(Counters.CHARGE);
                     //System.out.println("converted: " + converted[0]);
@@ -7841,7 +7841,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList humanPlay = new CardList(AllZone.Human_Play.getCards());
+                    CardList humanPlay = new CardList(AllZone.Human_Battlefield.getCards());
                     humanPlay = humanPlay.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isCreature() && CardFactoryUtil.canTarget(card, c);
@@ -7883,7 +7883,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList land = new CardList(AllZone.Computer_Play.getCards());
+                    CardList land = new CardList(AllZone.Computer_Battlefield.getCards());
                     land = land.getType("Land");
                     CardList basic = land.getType("Basic");
                     if(basic.size() < 3) return false;
@@ -7960,7 +7960,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlay() {
-                    if(AllZone.getZone(card).is(Constant.Zone.Play)) return true;
+                    if(AllZone.getZone(card).is(Constant.Zone.Battlefield)) return true;
                     else return false;
                 }//canPlay()
             };//SpellAbility ability2
@@ -8014,7 +8014,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlay() {
-                    if(AllZone.getZone(card).is(Constant.Zone.Play)) return true;
+                    if(AllZone.getZone(card).is(Constant.Zone.Battlefield)) return true;
                     else return false;
                 }//canPlay()
             };//SpellAbility ability1
@@ -8066,7 +8066,7 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     Card c = getTargetCard();
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     if(AllZone.GameAction.isCardInZone(c, hand)) {
                         hand.remove(c);
@@ -8156,7 +8156,7 @@ public class CardFactory implements NewConstants {
                     Player opponent = card.getController().getOpponent();
                     SpellAbility sa = AllZone.Stack.peek();
                     
-                    if(AllZone.getZone(card).is(Constant.Zone.Play) && sa.isSpell()
+                    if(AllZone.getZone(card).is(Constant.Zone.Battlefield) && sa.isSpell()
                             && opponent.equals(sa.getSourceCard().getController())
                             && CardFactoryUtil.isCounterable(sa.getSourceCard())) return true;
                     else return false;
@@ -8183,7 +8183,7 @@ public class CardFactory implements NewConstants {
                     
                     //String player = card.getController();
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     
                     if(hand.size() == 0) return;
                     
@@ -8217,7 +8217,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlay() {
-                    if(AllZone.getZone(card).is(Constant.Zone.Play)) return true;
+                    if(AllZone.getZone(card).is(Constant.Zone.Battlefield)) return true;
                     else return false;
                 }//canPlay()
             };//SpellAbility ability1
@@ -8358,7 +8358,7 @@ public class CardFactory implements NewConstants {
 
                 	// Put two basic lands into play tapped
                 	AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(),
-                			Constant.Zone.Play, true, Constant.Zone.Play, true);
+                			Constant.Zone.Battlefield, true, Constant.Zone.Battlefield, true);
                 }
             };
             StringBuilder sbDesc = new StringBuilder();
@@ -8459,8 +8459,8 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone compPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    PlayerZone humPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone compPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+                    PlayerZone humPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     
                     CardList compCreats = new CardList(compPlay.getCards());
                     compCreats = compCreats.getType("Creature");
@@ -8503,7 +8503,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards()).filter(new CardListFilter() {
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards()).filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return !c.isArtifact() && c.isCreature();
                         }
@@ -8627,7 +8627,7 @@ public class CardFactory implements NewConstants {
                 
                 CardList getArtEnchantments() {
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList list = new CardList(play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -8654,8 +8654,8 @@ public class CardFactory implements NewConstants {
                     //card.addSpellAbility(ability);
                     //ability.setDescription("Sacrifice " + cardName + ": destroy target artifact or enchantment.");
                     
-                    PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-                    PlayerZone cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+                    PlayerZone cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                     CardList choices = new CardList();
                     choices.addAll(hplay.getCards());
                     choices.addAll(cplay.getCards());
@@ -8753,7 +8753,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public boolean canPlayAI() {
                     if(AllZone.HumanPlayer.getLife() <= 5) return true;
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
                     
                     CardList playList = new CardList(play.getCards());
@@ -8767,8 +8767,8 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     CardList list = new CardList(play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -9120,7 +9120,7 @@ public class CardFactory implements NewConstants {
               public void selectCard(Card c, PlayerZone zone) {
                   if(zone.is(Constant.Zone.Hand) && c.isInstant() && CardUtil.getConvertedManaCost(c) <= 2)
                   {
-                      AllZone.GameAction.moveTo(AllZone.Human_Removed, c);
+                      AllZone.GameAction.moveTo(AllZone.Human_Exile, c);
                       card.attachCard(c);
                       stop();
                   }
@@ -9151,7 +9151,7 @@ public class CardFactory implements NewConstants {
                       CardListUtil.sortCMC(list);
                       list.reverse();
                       Card c = list.get(0);
-                      AllZone.GameAction.moveTo(AllZone.Computer_Removed, c);
+                      AllZone.GameAction.moveTo(AllZone.Computer_Exile, c);
                       card.attachCard(c);
                   }//else
               }//resolve()
@@ -9207,7 +9207,7 @@ public class CardFactory implements NewConstants {
       				if( AllZone.ComputerPlayer.getLife() > 10 ) {
       					return true;
       				}
-      				CardList play = new CardList(AllZone.Computer_Play.getCards());
+      				CardList play = new CardList(AllZone.Computer_Battlefield.getCards());
       				play = play.getType("Creature");
       				if( play.size() == 0 ) {
       					return true;
@@ -9776,8 +9776,8 @@ public class CardFactory implements NewConstants {
         		public Object execute() {
         			//get all creatures
         			CardList tempList = new CardList();
-        			tempList.addAll(AllZone.Human_Play.getCards());
-        			tempList.addAll(AllZone.Computer_Play.getCards());
+        			tempList.addAll(AllZone.Human_Battlefield.getCards());
+        			tempList.addAll(AllZone.Computer_Battlefield.getCards());
 
         			CardList list = new CardList();
 
@@ -9838,7 +9838,7 @@ public class CardFactory implements NewConstants {
         				if(target == null) {
         					int convertedCost = 0;
         					CardList tempList = new CardList();
-        					tempList.addAll(AllZone.Human_Play.getCards());
+        					tempList.addAll(AllZone.Human_Battlefield.getCards());
 
         					for(int i = 0; i < tempList.size(); i++) {
         						if(tempList.get(i).isPermanent()
@@ -9854,7 +9854,7 @@ public class CardFactory implements NewConstants {
         				//target something cheaper (manacost 0?) instead:
         				if(target == null) {
         					CardList humanPerms = new CardList();
-        					humanPerms.addAll(AllZone.Human_Play.getCards());
+        					humanPerms.addAll(AllZone.Human_Battlefield.getCards());
         					humanPerms = humanPerms.filter(new CardListFilter() {
         						public boolean addCard(Card c) {
         							return c.isPermanent() && !c.isLand() && CardFactoryUtil.canTarget(card, c);
@@ -9866,7 +9866,7 @@ public class CardFactory implements NewConstants {
 
         				if(target == null) {
         					//must target computer creature
-        					CardList computer = new CardList(AllZone.Computer_Play.getCards());
+        					CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
         					computer = computer.getType("Creature");
         					computer.remove(card);
 
@@ -9898,8 +9898,8 @@ public class CardFactory implements NewConstants {
         						c = AllZone.CardFactory.dynamicCopyCard(c);
         						c.setController(c.getOwner());
 
-        						PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getOwner());
-        						PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
+        						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
+        						PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
         						removed.remove(c);
         						if (c.isTapped()) c.untap();
 
@@ -9928,7 +9928,7 @@ public class CardFactory implements NewConstants {
         			Object o = getPerm.execute();
         			if(o == null) return false;
 
-        			CardList cList = new CardList(AllZone.Human_Play.getCards());
+        			CardList cList = new CardList(AllZone.Human_Battlefield.getCards());
         			cList = cList.filter(new CardListFilter() {
         				public boolean addCard(Card crd) {
         					return CardFactoryUtil.canTarget(card, crd) && crd.isCreature();

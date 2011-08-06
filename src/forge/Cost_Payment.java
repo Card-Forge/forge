@@ -81,7 +81,7 @@ public class Cost_Payment {
     		return false;
     	
 		if (cost.getTapXTypeCost()){
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 			CardList typeList = new CardList(play.getCards());
 			    
 			typeList = typeList.getValidCards(cost.getTapXType().split(","),ability.getActivatingPlayer() ,ability.getSourceCard());
@@ -148,7 +148,7 @@ public class Cost_Payment {
     	
 		if (cost.getSacCost()){
 			if (!cost.getSacThis()){
-			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 			    CardList typeList = new CardList(play.getCards());
 			    
 			    typeList = typeList.getValidCards(cost.getSacType().split(","),ability.getActivatingPlayer() ,ability.getSourceCard()); 
@@ -173,7 +173,7 @@ public class Cost_Payment {
 		
 		if (cost.getReturnCost()){
 			if (!cost.getReturnThis()){
-			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 			    CardList typeList = new CardList(play.getCards());
 			    
 			    typeList = typeList.getValidCards(cost.getReturnType().split(","),ability.getActivatingPlayer() ,ability.getSourceCard()); 
@@ -235,7 +235,7 @@ public class Cost_Payment {
 		}
 		
 		if (!payTapXType && cost.getTapXTypeCost()){
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
             CardList typeList = new CardList(play.getCards());
             typeList = typeList.getValidCards(cost.getTapXType().split(","),ability.getActivatingPlayer() ,ability.getSourceCard());
             
@@ -619,7 +619,7 @@ public class Cost_Payment {
 		        resetManaCost();
 		        payment.setCancel(true);
 		        payment.payCost();
-		        AllZone.Human_Play.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
+		        AllZone.Human_Battlefield.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
 		        stop();
 		    }
 		    
@@ -673,7 +673,7 @@ public class Cost_Payment {
 		    public void selectButtonCancel() {
 		        payment.setCancel(true);
 		        payment.payCost();
-		        AllZone.Human_Play.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
+		        AllZone.Human_Battlefield.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
 		        stop();
 		    }
 		    
@@ -796,7 +796,7 @@ public class Cost_Payment {
             		msg.append("s");
             	}
             	
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, spell.getSourceCard().getController());
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, spell.getSourceCard().getController());
                 typeList = new CardList(play.getCards());
                 typeList = typeList.getValidCards(type.split(","),spell.getActivatingPlayer() ,spell.getSourceCard());
                 AllZone.Display.showMessage(msg.toString());
@@ -890,7 +890,7 @@ public class Cost_Payment {
             		msg.append("s");
             	}
             	
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, spell.getSourceCard().getController());
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, spell.getSourceCard().getController());
                 typeList = new CardList(play.getCards());
                 typeList = typeList.getValidCards(type.split(","),spell.getActivatingPlayer() ,spell.getSourceCard());
                 AllZone.Display.showMessage(msg.toString());
@@ -956,7 +956,7 @@ public class Cost_Payment {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if(zone.is(Constant.Zone.Play) && cardList.contains(card) && card.isUntapped() ) {
+                if(zone.is(Constant.Zone.Battlefield) && cardList.contains(card) && card.isUntapped() ) {
                 	// send in CardList for Typing
                     card.tap();
                     payTapXTypeTappedList.add(card);
@@ -1036,7 +1036,7 @@ public class Cost_Payment {
             		msg.append("s");
             	}
             	
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, spell.getSourceCard().getController());
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, spell.getSourceCard().getController());
                 typeList = new CardList(play.getCards());
                 typeList = typeList.getValidCards(type.split(","),spell.getActivatingPlayer() ,spell.getSourceCard());
                 AllZone.Display.showMessage(msg.toString());

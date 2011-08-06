@@ -81,9 +81,10 @@ public interface Constant {
         public static final String Hand              = "Hand";
         public static final String Library           = "Library";
         public static final String Graveyard         = "Graveyard";
-        public static final String Play              = "Play";
-        public static final String Removed_From_Play = "Removed from play";
-        //public static final String Stack             = "Stack";
+        public static final String Battlefield       = "Battlefield";
+        public static final String Exile 			 = "Exile";
+        public static final String Command           = "Command";
+        public static final String Stack             = "Stack";
     }
 
     public interface Color {

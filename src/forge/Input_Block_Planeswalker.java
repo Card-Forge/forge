@@ -66,7 +66,7 @@ public class Input_Block_Planeswalker extends Input {
         //is attacking?
         if(CardUtil.toList(AllZone.pwCombat.getAttackers()).contains(card)) {
             currentAttacker = card;
-        } else if(zone.is(Constant.Zone.Play, AllZone.HumanPlayer) && card.isCreature() && card.isUntapped()
+        } else if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && card.isCreature() && card.isUntapped()
                 && CombatUtil.canBlock(currentAttacker, card)) {
             if(currentAttacker != null && (!allBlocking.contains(card))) {
                 allBlocking.add(card);

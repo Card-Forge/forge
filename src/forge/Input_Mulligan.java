@@ -54,7 +54,7 @@ public class Input_Mulligan extends Input {
     void end() {
         ButtonUtil.reset();
         CardList HHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer).getCards());
-        PlayerZone HPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+        PlayerZone HPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
         PlayerZone HHand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
         for(int i = 0; i < HHandList.size() ; i++) {
         	if(HHandList.get(i).getName().startsWith("Leyline")) {
@@ -69,7 +69,7 @@ public class Input_Mulligan extends Input {
         }
         }
         CardList CHandList = new CardList(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
-        PlayerZone CPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+        PlayerZone CPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
         PlayerZone CHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
         for(int i = 0; i < CHandList.size() ; i++) {
         	if(CHandList.get(i).getName().startsWith("Leyline") && (AllZoneUtil.getCardsInPlay("Leyline of Singularity").size() == 0)) {

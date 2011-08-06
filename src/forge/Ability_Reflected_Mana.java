@@ -125,7 +125,7 @@ public class Ability_Reflected_Mana extends Ability_Mana {
 		// Build the list of cards to search for mana colors
 		// First, add all the cards owned by the target player and sort out non-lands
     	CardList cl = new CardList();
-    	cl.addAll(AllZone.getZone(Constant.Zone.Play,player).getCards());
+    	cl.addAll(AllZone.getZone(Constant.Zone.Battlefield,player).getCards());
     	cl = cl.getType("Land");
     	
 		// Narrow down the card list to only non-reflected lands
@@ -158,7 +158,7 @@ public class Ability_Reflected_Mana extends Ability_Mana {
 		getManaFromCardList(cl, colorsPlayerCanProduce, colorsToLookFor);
 		if (addOtherPlayerLands) {
 			cl.clear();
-			cl.addAll(AllZone.getZone(Constant.Zone.Play,player.getOpponent()).getCards());
+			cl.addAll(AllZone.getZone(Constant.Zone.Battlefield,player.getOpponent()).getCards());
 			cl = cl.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return c.isLand() && !c.isReflectedLand();

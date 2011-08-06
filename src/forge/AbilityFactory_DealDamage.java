@@ -132,7 +132,7 @@ import java.util.Random;
        
         private Card chooseTgtC(final int d, final boolean noPrevention) {
            
-            PlayerZone human = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+            PlayerZone human = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
             CardList hPlay = new CardList(human.getCards());
             hPlay = hPlay.filter(new CardListFilter() {
                 public boolean addCard(Card c) {

@@ -93,7 +93,7 @@ public class Target_Selection {
 						choices.remove(c);
 				}
 				
-				if (zone.equals(Constant.Zone.Play)){
+				if (zone.equals(Constant.Zone.Battlefield)){
 		            boolean canTargetPlayer = false;
 		            boolean canTargetOpponent = false;
 		            for(String s : Tgts){

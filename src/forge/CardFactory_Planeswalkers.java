@@ -61,7 +61,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                     
                     return 0 < card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                     
@@ -105,7 +105,7 @@ class CardFactory_Planeswalkers {
                     emblem.setController(card.getController());
                     emblem.setOwner(card.getOwner());
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(emblem);
                     
                     //AllZone.GameAction.checkStateEffects();
@@ -119,7 +119,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlay() {
                     return 8 <= card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -175,7 +175,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlay() {
                     return 0 < card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -234,7 +234,7 @@ class CardFactory_Planeswalkers {
                     Player player = card.getController();
                     Player opponent = player.getOpponent();
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, opponent);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opponent);
                     CardList oppPerms = new CardList(play.getCards());
                     
                     opponent.addDamage(7, card);
@@ -288,7 +288,7 @@ class CardFactory_Planeswalkers {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     return 9 <= card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -332,19 +332,19 @@ class CardFactory_Planeswalkers {
                             c.setSickness(true);
                         }
                         
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
                         
                         PlayerZone from = AllZone.getZone(c);
                         from.remove(c);
                         
                         c.setController(card.getController());
                         
-                        PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                         to.add(c);
                         
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
                     }//if
                     
 
@@ -384,7 +384,7 @@ class CardFactory_Planeswalkers {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     return 2 < card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                     
@@ -438,7 +438,7 @@ class CardFactory_Planeswalkers {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     return 0 < card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -451,7 +451,7 @@ class CardFactory_Planeswalkers {
                 }//chooseTargetAI()
                 
                 Card getNonCreaturePermanent() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     int highestCost = 0;
                     Card bestCard = null;
                     CardList nonCreaturePermanents = new CardList(play.getCards());
@@ -532,9 +532,9 @@ class CardFactory_Planeswalkers {
                 		Player player = card.getController();
                 		CardList creatures;
                 		if(player.equals(AllZone.HumanPlayer)) {
-                			creatures = new CardList(AllZone.Human_Play.getCards());
+                			creatures = new CardList(AllZone.Human_Battlefield.getCards());
                 		} else {
-                			creatures = new CardList(AllZone.Computer_Play.getCards());
+                			creatures = new CardList(AllZone.Computer_Battlefield.getCards());
                 		}
                 		
                 		creatures = creatures.getType("Creature");
@@ -556,9 +556,9 @@ class CardFactory_Planeswalkers {
                     Player player = card.getController();
                     CardList creatures;
                     if(player.equals(AllZone.HumanPlayer)) {
-                        creatures = new CardList(AllZone.Human_Play.getCards());
+                        creatures = new CardList(AllZone.Human_Battlefield.getCards());
                     } else {
-                        creatures = new CardList(AllZone.Computer_Play.getCards());
+                        creatures = new CardList(AllZone.Computer_Battlefield.getCards());
                     }
                     
                     creatures = creatures.getType("Creature");
@@ -581,7 +581,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                     
                     return 0 < card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                     
@@ -620,7 +620,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlay() {
                     return 6 <= card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -671,7 +671,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlay() {
                     return 0 < card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -773,7 +773,7 @@ class CardFactory_Planeswalkers {
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
                     
                     return 2 <= card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && 1 < library.size()
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
@@ -809,7 +809,7 @@ class CardFactory_Planeswalkers {
                     list.addAll(AllZone.Computer_Graveyard.getCards());
                     list = list.getType("Creature");
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     PlayerZone grave = null;
                     Card c = null;
                     for(int i = 0; i < list.size(); i++) {
@@ -827,7 +827,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlay() {
                     return 8 <= card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -883,7 +883,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlay() {
                     return 0 < card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -965,7 +965,7 @@ class CardFactory_Planeswalkers {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }
@@ -994,7 +994,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public void selectCard(Card card, PlayerZone zone) {
-                    if(card.isPlaneswalker() && zone.is(Constant.Zone.Play) &&
+                    if(card.isPlaneswalker() && zone.is(Constant.Zone.Battlefield) &&
                        CardFactoryUtil.canTarget(card, card)) {
                         ability1.setTargetCard(card);
                         //stopSetNext(new Input_PayManaCost(ability1));
@@ -1039,7 +1039,7 @@ class CardFactory_Planeswalkers {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }
@@ -1108,7 +1108,7 @@ class CardFactory_Planeswalkers {
                     
                     getTargetPlayer().addDamage(10, card);
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, getTargetPlayer());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, getTargetPlayer());
                     CardList list = new CardList(play.getCards());
                     list = list.getType("Creature");
                     
@@ -1126,7 +1126,7 @@ class CardFactory_Planeswalkers {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && 7 < card.getCounters(Counters.LOYALTY)
                             && Phase.canCastSorcery(card.getController());
@@ -1203,7 +1203,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     //only computer uses the stack
-                    CardList tapped = new CardList(AllZone.Computer_Play.getCards());
+                    CardList tapped = new CardList(AllZone.Computer_Battlefield.getCards());
                     tapped = tapped.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isLand() && c.isTapped();
@@ -1222,7 +1222,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -1240,7 +1240,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
-                    if(c.isLand() && zone.is(Constant.Zone.Play) && CardFactoryUtil.canTarget(card, c)) {
+                    if(c.isLand() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c)) {
                         count++;
                         c.untap();
                     }
@@ -1284,7 +1284,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && 0 < card.getCounters(Counters.LOYALTY)
                             && Phase.canCastSorcery(card.getController());
@@ -1292,7 +1292,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList c = new CardList(AllZone.Computer_Play.getCards());
+                    CardList c = new CardList(AllZone.Computer_Battlefield.getCards());
                     c = c.getType("Creature");
                     return c.size() < 4;
                 }
@@ -1331,7 +1331,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     final int boost = 3;
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     CardList list = new CardList(play.getCards());
                     @SuppressWarnings("unused")
                     // c
@@ -1368,7 +1368,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && 3 < card.getCounters(Counters.LOYALTY)
                             && Phase.canCastSorcery(card.getController());
@@ -1376,7 +1376,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList c = new CardList(AllZone.Computer_Play.getCards());
+                    CardList c = new CardList(AllZone.Computer_Battlefield.getCards());
                     c = c.getType("Creature");
                     return c.size() >= 4 && AllZone.Phase.getPhase().equals(Constant.Phase.Main1)
                             && AllZone.Phase.getPlayerTurn().equals(card.getController());
@@ -1435,7 +1435,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                	CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
+                	CardList list = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
                 	list = list.filter(new CardListFilter()
                 	{
                 		public boolean addCard(Card c)
@@ -1459,7 +1459,7 @@ class CardFactory_Planeswalkers {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     return 0 < card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -1548,7 +1548,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && card.getCounters(Counters.LOYALTY) >= 2
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
@@ -1574,7 +1574,7 @@ class CardFactory_Planeswalkers {
                 public void selectCard(Card card, PlayerZone zone) {
                     if(!CardFactoryUtil.canTarget(ability2, card)) {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    } else if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Play)) {
+                    } else if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Battlefield)) {
                         ability2.setTargetCard(card);
                         //stopSetNext(new Input_PayManaCost(ability2));
                         AllZone.Stack.add(ability2);
@@ -1603,7 +1603,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     Player player = getTargetPlayer();
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
                     CardList land = new CardList(play.getCards());
                     land = land.getType("Land");
                     
@@ -1615,7 +1615,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone pz = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone pz = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList land = new CardList(pz.getCards());
                     land = land.getType("Land");
                     
@@ -1625,7 +1625,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && card.getCounters(Counters.LOYALTY) >= 7
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
@@ -1658,7 +1658,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     //only computer uses the stack
-                    CardList tapped = new CardList(AllZone.Computer_Play.getCards());
+                    CardList tapped = new CardList(AllZone.Computer_Battlefield.getCards());
                     tapped = tapped.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isArtifact() && c.isTapped() && CardFactoryUtil.canTarget(card, c);
@@ -1677,7 +1677,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -1695,7 +1695,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
-                    if(c.isArtifact() && zone.is(Constant.Zone.Play) && CardFactoryUtil.canTarget(card, c)) {
+                    if(c.isArtifact() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c)) {
                         count++;
                         c.untap();
                     }
@@ -1744,7 +1744,7 @@ class CardFactory_Planeswalkers {
                     card.subtractCounter(Counters.LOYALTY, dam);
                     
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     CardList list = new CardList(lib.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -1773,7 +1773,7 @@ class CardFactory_Planeswalkers {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }
@@ -1801,7 +1801,7 @@ class CardFactory_Planeswalkers {
                     
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     CardList list = new CardList(play.getCards());
                     list = list.getType("Artifact");
                     CardList creatures = list.filter(new CardListFilter() {
@@ -1886,7 +1886,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && card.getCounters(Counters.LOYALTY) >= 5
                             && Phase.canCastSorcery(card.getController());
@@ -1894,7 +1894,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                     CardList list = new CardList(play.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -1933,7 +1933,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     final int boost = 1;
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     CardList list = new CardList(play.getCards());
                     list = list.getType("Creature");
                     
@@ -1968,7 +1968,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -2019,8 +2019,8 @@ class CardFactory_Planeswalkers {
                     
                     target[0].setController(controllerEOT[0]);
                     
-                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
                     
                     //moveTo() makes a new card, so you don't have to remove "Haste"
                     //AllZone.GameAction.moveTo(playEOT[0], target[0]);
@@ -2029,8 +2029,8 @@ class CardFactory_Planeswalkers {
                     target[0].untap();
                     target[0].removeExtrinsicKeyword("Haste");
                     
-                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
                 }//execute()
             };//Command
             
@@ -2050,16 +2050,16 @@ class CardFactory_Planeswalkers {
                         //set the controller
                         getTargetCard().setController(card.getController());
                         
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
                         
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                         play.add(getTargetCard());
                         temp[0] = play;
                         orig[0].remove(getTargetCard());
                         
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
                         
 
                         getTargetCard().untap();
@@ -2076,7 +2076,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && card.getCounters(Counters.LOYALTY) >= 2
                             && Phase.canCastSorcery(card.getController());
@@ -2100,7 +2100,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && card.getCounters(Counters.LOYALTY) >= 6
                             && Phase.canCastSorcery(card.getController());
@@ -2158,7 +2158,7 @@ class CardFactory_Planeswalkers {
                         }
                     } else //compy
                     {
-                        PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                        PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                         CardList land = new CardList(humanPlay.getCards());
                         land = land.getType("Land");
                         
@@ -2178,7 +2178,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -2233,7 +2233,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -2263,7 +2263,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlay() {
                     return card.getCounters(Counters.LOYALTY) >= 1
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }
@@ -2310,7 +2310,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlay() {
                     return card.getCounters(Counters.LOYALTY) >= 12
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }
@@ -2378,7 +2378,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                 	//looks like standard Planeswalker stuff...
                 	//maybe should check if library is empty, or 1 card?
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -2409,7 +2409,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                     CardList creatures = new CardList(play.getCards());
                     creatures = creatures.filter(new CardListFilter() {
                     	public boolean addCard(Card c) {
@@ -2421,7 +2421,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public void chooseTargetAI() {
-                	PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                	PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                     CardList cards = new CardList(play.getCards());
                     //avoid targeting the dragon tokens we just put in play...
                     cards = cards.filter(new CardListFilter() {
@@ -2436,7 +2436,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && card.getCounters(Counters.LOYALTY) >= 2
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
@@ -2458,7 +2458,7 @@ class CardFactory_Planeswalkers {
                     
                     final Player target = getTargetPlayer();
                     final Player player = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
                     CardList dragons = new CardList(play.getCards());
                     dragons = dragons.filter(new CardListFilter() {
                     	public boolean addCard(Card c) {
@@ -2477,7 +2477,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlayAI() {
                     setTargetPlayer(AllZone.HumanPlayer);
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                     CardList dragons = new CardList(play.getCards());
                     dragons = dragons.filter(new CardListFilter() {
                     	public boolean addCard(Card c) {
@@ -2489,7 +2489,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && card.getCounters(Counters.LOYALTY) >= 4
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
@@ -2548,7 +2548,7 @@ class CardFactory_Planeswalkers {
                 public boolean canPlay() {
                     
                     return 0 < card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                     
@@ -2572,7 +2572,7 @@ class CardFactory_Planeswalkers {
                     emblem.setController(card.getController());
                     emblem.setOwner(card.getOwner());
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(emblem);
                     
                     //AllZone.GameAction.checkStateEffects();
@@ -2586,7 +2586,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlay() {
                     return 5 <= card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -2696,7 +2696,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlay() {
                     return 0 < card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -2707,7 +2707,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     CardList lands = new CardList();
                     lands.addAll(play.getCards());
@@ -2763,7 +2763,7 @@ class CardFactory_Planeswalkers {
 
 							public void execute() {
                                  if(AllZone.GameAction.isCardExiled(c)) {
-                                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+                                     PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
                                 	 AllZone.GameAction.moveTo(play, c);
                                  }
                              }//execute()
@@ -2820,7 +2820,7 @@ class CardFactory_Planeswalkers {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     return 0 < card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()
@@ -2833,8 +2833,8 @@ class CardFactory_Planeswalkers {
                 @Override
                 public void showMessage() {
                     CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
+                    list.addAll(AllZone.Human_Battlefield.getCards());
+                    list.addAll(AllZone.Computer_Battlefield.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isPermanent() && c.getOwner().equals(AllZone.HumanPlayer) 
@@ -2881,7 +2881,7 @@ class CardFactory_Planeswalkers {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && card.getCounters(Counters.LOYALTY) >= 1
                             && Phase.canCastSorcery(card.getController());
@@ -2932,7 +2932,7 @@ class CardFactory_Planeswalkers {
                     emblem.setController(card.getController());
                     emblem.setOwner(card.getOwner());
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(emblem);
                     
                     /*
@@ -2948,7 +2948,7 @@ class CardFactory_Planeswalkers {
                 @Override
                 public boolean canPlay() {
                     return 8 <= card.getCounters(Counters.LOYALTY)
-                            && AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && turn[0] != AllZone.Phase.getTurn()
                             && Phase.canCastSorcery(card.getController());
                 }//canPlay()

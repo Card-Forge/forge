@@ -118,8 +118,8 @@ public class GameActionUtil {
 		
 		// Win / Lose	
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		PlayerZone OpplayZone = AllZone.getZone(Constant.Zone.Play, player.getOpponent());
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
+		PlayerZone OpplayZone = AllZone.getZone(Constant.Zone.Battlefield, player.getOpponent());
 		CardList Platinumlist = new CardList(OpplayZone.getCards());
 		Platinumlist = Platinumlist.getName("Platinum Angel");
 		CardList Abyssallist = new CardList(playZone.getCards());
@@ -664,7 +664,7 @@ public class GameActionUtil {
 				Card crd = getTargetCard();
 				if (crd!=null) {
 					if(AllZone.GameAction.isCardInZone(crd, grave)) {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, crd.getController());
                         AllZone.GameAction.moveTo(play, crd);
                     }
 				}
@@ -683,9 +683,9 @@ public class GameActionUtil {
 		Command Cascade = new Command() {
 			private static final long serialVersionUID = -845154812215847505L;
 			public void execute() {
-				final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield,
 						AllZone.HumanPlayer);
-				final PlayerZone comp = AllZone.getZone(Constant.Zone.Play,
+				final PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield,
 						AllZone.ComputerPlayer);
 
 				CardList Human_Nexus = new CardList();
@@ -793,9 +793,9 @@ public class GameActionUtil {
 		Command Ripple = new Command() {
 			private static final long serialVersionUID = -845154812215847505L;
 			public void execute() {
-				final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield,
 						AllZone.HumanPlayer);
-				final PlayerZone comp = AllZone.getZone(Constant.Zone.Play,
+				final PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield,
 						AllZone.ComputerPlayer);
 
 				CardList Human_ThrummingStone = new CardList();
@@ -923,7 +923,7 @@ public class GameActionUtil {
 		if (c.isCreature() == true && (Phase.PlayerCreatureSpellCount == 2 || Phase.ComputerCreatureSpellCount == 2))
 		{
 		final Player controller = c.getController();
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 		final PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, controller);
 		CardList list = new CardList();
 		list.addAll(grave.getCards());
@@ -985,7 +985,7 @@ public class GameActionUtil {
 		
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1025,7 +1025,7 @@ public class GameActionUtil {
 	{
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1085,8 +1085,8 @@ public class GameActionUtil {
 				@Override
                 public void showMessage() {
                     CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
+                    list.addAll(AllZone.Human_Battlefield.getCards());
+                    list.addAll(AllZone.Computer_Battlefield.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isPermanent() && CardFactoryUtil.canTarget(card, c);
@@ -1112,7 +1112,7 @@ public class GameActionUtil {
 	public static void playCard_Emberstrike_Duo(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1189,7 +1189,7 @@ public class GameActionUtil {
 	public static void playCard_Gravelgill_Duo(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1295,7 +1295,7 @@ public class GameActionUtil {
 	public static void playCard_Safehold_Duo(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1372,7 +1372,7 @@ public class GameActionUtil {
 	public static void playCard_Tattermunge_Duo(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1448,7 +1448,7 @@ public class GameActionUtil {
 	public static void playCard_Thistledown_Duo(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1530,7 +1530,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					PlayerZone Grave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.Phase.getPlayerTurn());
-					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getPlayerTurn());
+					PlayerZone Play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.Phase.getPlayerTurn());
 					CardList evildead = new CardList();
 					evildead.addAll(Grave.getCards());
 					evildead = evildead.filter(new CardListFilter() {
@@ -1560,7 +1560,7 @@ public class GameActionUtil {
 	public static void playCard_Halcyon_Glaze(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1614,7 +1614,7 @@ public class GameActionUtil {
 	public static void playCard_Thief_of_Hope(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1660,7 +1660,7 @@ public class GameActionUtil {
 	public static void playCard_Infernal_Kirin(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1720,7 +1720,7 @@ public class GameActionUtil {
 	public static void playCard_Cloudhoof_Kirin(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1781,7 +1781,7 @@ public class GameActionUtil {
 	public static void playCard_Bounteous_Kirin(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1832,7 +1832,7 @@ public class GameActionUtil {
 	public static void playCard_Shorecrasher_Mimic(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1882,7 +1882,7 @@ public class GameActionUtil {
 	public static void playCard_Battlegate_Mimic(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1932,7 +1932,7 @@ public class GameActionUtil {
 	public static void playCard_Nightsky_Mimic(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -1982,7 +1982,7 @@ public class GameActionUtil {
 	public static void playCard_Riverfall_Mimic(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2032,7 +2032,7 @@ public class GameActionUtil {
 	public static void playCard_Woodlurker_Mimic(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2082,8 +2082,8 @@ public class GameActionUtil {
 
 	public static void playCard_Dovescape(Card c) {
 		final Card crd1 = c;
-		PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-		PlayerZone cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+		PlayerZone hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+		PlayerZone cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
 
 		CardList list = new CardList();
 		list.addAll(hplay.getCards());
@@ -2139,7 +2139,7 @@ public class GameActionUtil {
 	public static void playCard_Belligerent_Hatchling(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2196,7 +2196,7 @@ public class GameActionUtil {
 	public static void playCard_Noxious_Hatchling(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2253,7 +2253,7 @@ public class GameActionUtil {
 	public static void playCard_Sturdy_Hatchling(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2310,7 +2310,7 @@ public class GameActionUtil {
 	public static void playCard_Voracious_Hatchling(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2367,7 +2367,7 @@ public class GameActionUtil {
 	public static void playCard_Witch_Maw_Nephilim(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2411,7 +2411,7 @@ public class GameActionUtil {
 	public static void playCard_Gelectrode(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2454,7 +2454,7 @@ public class GameActionUtil {
     public static void playCard_Cinder_Pyromancer(Card c) {
         final Player controller = c.getController();
 
-        final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+        final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
         CardList list = new CardList();
         list.addAll(play.getCards());
@@ -2488,8 +2488,8 @@ public class GameActionUtil {
     }// Cinder_Pyromancer
 
 	public static void playCard_Forced_Fruition(Card c) {
-		PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-		PlayerZone cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+		PlayerZone hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+		PlayerZone cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
 
 		CardList list = new CardList();
 		list.addAll(hplay.getCards());
@@ -2753,7 +2753,7 @@ public class GameActionUtil {
 
 	public static void playCard_Sigil_of_the_Empty_Throne(Card c) {
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2783,7 +2783,7 @@ public class GameActionUtil {
 	}
 
 	public static void playCard_Merrow_Levitator(Card c) {
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
 
 
 		CardList list = new CardList();
@@ -2814,7 +2814,7 @@ public class GameActionUtil {
 
 	public static void playCard_Primordial_Sage(Card c) {
 
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2846,7 +2846,7 @@ public class GameActionUtil {
 	public static void playCard_Quirion_Dryad(Card c) {
 		Player controller = c.getController();
 
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2879,7 +2879,7 @@ public class GameActionUtil {
 	public static void playCard_Mold_Adder(Card c) {
 		Player opponent = c.getController().getOpponent();
 
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, opponent);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opponent);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2914,7 +2914,7 @@ public class GameActionUtil {
 	public static void playCard_Fable_of_Wolf_and_Owl(Card c) {
 		final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -3039,7 +3039,7 @@ public class GameActionUtil {
 	}
 
 	public static void drawCardTriggered_Underworld_Dreams(Player player) {
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player.getOpponent());
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player.getOpponent());
 		CardList list = new CardList(playZone.getCards());
 		final Player player_d = player;
 		list = list.getName("Underworld Dreams");
@@ -3083,7 +3083,7 @@ public class GameActionUtil {
 	}
 
 	public static void drawCardTriggered_Lorescale_Coatl(Player player) {
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		CardList list = new CardList(playZone.getCards());
 
 		list = list.getName("Lorescale Coatl");
@@ -3095,7 +3095,7 @@ public class GameActionUtil {
 	}
 
 	public static void drawCardTriggered_Hoofprints_of_the_Stag(Player player) {
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		CardList list = new CardList(playZone.getCards());
 
 		list = list.getName("Hoofprints of the Stag");
@@ -3121,7 +3121,7 @@ public class GameActionUtil {
 		// resets the status of attacked/blocked this turn
 		Player player = AllZone.Phase.getPlayerTurn();
 		Player opp = player.getOpponent();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, opp);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opp);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -3649,7 +3649,7 @@ public class GameActionUtil {
 								public void selectCard(Card selected, PlayerZone zone) {
 									//probably need to restrict by controller also
 									if(selected.isCreature() && !selected.isArtifact() && CardFactoryUtil.canTarget(abyss, selected)
-											&& zone.is(Constant.Zone.Play) && zone.getPlayer().equals(AllZone.HumanPlayer)) {
+											&& zone.is(Constant.Zone.Battlefield) && zone.getPlayer().equals(AllZone.HumanPlayer)) {
 										AllZone.GameAction.destroyNoRegeneration(selected);
 										stop();
 									}
@@ -3797,7 +3797,7 @@ public class GameActionUtil {
 							public void selectCard(Card selected, PlayerZone zone) {
 								//probably need to restrict by controller also
 								if(selected.isCreature() && CardUtil.getColors(selected).size() == 1 && !selected.isColorless() 
-										&& zone.is(Constant.Zone.Play) && zone.getPlayer().equals(AllZone.HumanPlayer)) {
+										&& zone.is(Constant.Zone.Battlefield) && zone.getPlayer().equals(AllZone.HumanPlayer)) {
 									AllZone.GameAction.sacrificeDestroy(selected);
 									stop();
 								}
@@ -3857,7 +3857,7 @@ public class GameActionUtil {
 							}
 							public void selectCard(Card artifact, PlayerZone zone) {
 								//probably need to restrict by controller also
-								if(artifact.isArtifact() && zone.is(Constant.Zone.Play)
+								if(artifact.isArtifact() && zone.is(Constant.Zone.Battlefield)
 										&& zone.getPlayer().equals(AllZone.HumanPlayer)) {
 									AllZone.GameAction.sacrifice(artifact);
 									stop();
@@ -4138,7 +4138,7 @@ public class GameActionUtil {
 				private static final long serialVersionUID = 4820011390853920644L;
 				@Override
 					public void resolve() {
-						PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 						PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 						CardList playerLand = AllZoneUtil.getPlayerLandsInPlay(player);
 						
@@ -4174,7 +4174,7 @@ public class GameActionUtil {
 					final Ability pay = new Ability(c, "0") {
 						private static final long serialVersionUID = 4820011440853920644L;
 						public void resolve() {
-							if (AllZone.getZone(c).is(Constant.Zone.Play)) {
+							if (AllZone.getZone(c).is(Constant.Zone.Battlefield)) {
 								GameActionUtil.payManaDuringAbilityResolve("Pay cost for " + c + "\r\n", noPay.getManaCost(), Command.Blank, Command.Blank);
 							}
 						} //end resolve()
@@ -4216,7 +4216,7 @@ public class GameActionUtil {
     public static void endOfTurn_Wall_Of_Reverence()
     {
         final Player player = AllZone.Phase.getPlayerTurn();
-        final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
         CardList list = new CardList(playZone.getCards());
         list = list.getName("Wall of Reverence");
 
@@ -4272,7 +4272,7 @@ public class GameActionUtil {
 	public static void endOfTurn_Predatory_Advantage()
 	{
 		final Player player = AllZone.Phase.getPlayerTurn();
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player.getOpponent());
+		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player.getOpponent());
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Predatory Advantage");
 		for (int i = 0; i < list.size(); i++) {
@@ -4287,7 +4287,7 @@ public class GameActionUtil {
 	{
 		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, opponent);
+		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, opponent);
 		CardList list = new CardList(playZone.getCards());
 		
 		list = list.filter(new CardListFilter()
@@ -4336,7 +4336,7 @@ public class GameActionUtil {
 	
 	public static void controlNoTypeSacrifice(String name, String type, Player player)
 	{
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		CardList list = new CardList(playZone.getCards());
 
 		CardList nameList = list.getName(name);
@@ -4382,7 +4382,7 @@ public class GameActionUtil {
 	public static void removeAttackedBlockedThisTurn() {
 		// resets the status of attacked/blocked this turn
 		Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -4473,7 +4473,7 @@ public class GameActionUtil {
 
 		else if(c.getController().equals(AllZone.ComputerPlayer)) {
 
-			PlayerZone cPlay = AllZone.Computer_Play;
+			PlayerZone cPlay = AllZone.Computer_Battlefield;
 			CardList list = new CardList();
 			list.addAll(cPlay.getCards());
 
@@ -4497,7 +4497,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
+				PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, crd.getController());
 				CardList list = new CardList(play.getCards());
 				list = list.getType("Ally");
 
@@ -4544,7 +4544,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
+				PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, crd.getController());
 				CardList allies = new CardList(play.getCards());
 				allies = allies.getType("Ally");
 				crd.getController().gainLife(allies.size(), c);
@@ -4568,7 +4568,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
+				PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, crd.getController());
 				CardList list = new CardList(play.getCards());
 				list = list.getType("Ally");
 
@@ -4834,7 +4834,7 @@ public class GameActionUtil {
 			@Override
 			public void resolve() {
 				PlayerZone grv = AllZone.getZone(Constant.Zone.Graveyard, crd.getController());
-				PlayerZone exile = AllZone.getZone(Constant.Zone.Removed_From_Play, crd.getController());
+				PlayerZone exile = AllZone.getZone(Constant.Zone.Exile, crd.getController());
 				grv.remove(crd);
 				exile.add(crd);
 			}
@@ -5212,7 +5212,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
+				PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, crd.getController());
 				PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, crd.getController());
 
 				if(AllZone.GameAction.isCardInZone(crd, grave)) {
@@ -5241,7 +5241,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
+				PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, crd.getController());
 				CardList plants = new CardList(play.getCards());
 				plants = plants.filter(new CardListFilter() {
 					public boolean addCard(Card card) {
@@ -5271,7 +5271,7 @@ public class GameActionUtil {
 		Card biggest = null;
 		if(c.getController() == AllZone.ComputerPlayer) {
 			CardList vessels = new CardList();
-			PlayerZone zone = AllZone.getZone(Constant.Zone.Play, c.getController());
+			PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
 			if(zone != null) {
 				vessels.addAll(zone.getCards());
 				vessels = vessels.getName("Eternity Vessel");
@@ -5302,7 +5302,7 @@ public class GameActionUtil {
 			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
 		} else if(c.getController().equals(AllZone.ComputerPlayer)) {
 			CardList Hexmages = new CardList();
-			PlayerZone zone = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+			PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
 			if(zone != null) {
 				Hexmages.addAll(zone.getCards());
 				Hexmages = Hexmages.getName("Vampire Hexmage");
@@ -6092,7 +6092,7 @@ public class GameActionUtil {
 
 					//check for no cards in hand on resolve
 					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
-					PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, opponent);
+					PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, opponent);
 					Card[] handChoices = removeLand(hand.getCards());
 
 					if(handChoices.length == 0) return;
@@ -6234,7 +6234,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, opponent);
-					PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, opponent);
+					PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, opponent);
 					CardList libList = new CardList(lib.getCards());
 
 					int max = 10;
@@ -6347,7 +6347,7 @@ public class GameActionUtil {
 				public void resolve() {
 
 					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, opponent);
-					PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, opponent);
+					PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, opponent);
 					CardList libList = new CardList(lib.getCards());
 					int count = 0;
 					int broken = 0;
@@ -6469,7 +6469,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 
 					CardList goblins = new CardList(hand.getCards());
 					//goblins = goblins.getType("Goblin");
@@ -6517,7 +6517,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 
 					CardList goblins = new CardList(hand.getCards());
 					//goblins = goblins.getType("Goblin");
@@ -6782,7 +6782,7 @@ public class GameActionUtil {
 
 	private static void upkeep_AI_Aluren() {
 		PlayerZone AIHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
-		PlayerZone AIPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+		PlayerZone AIPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
 
 		CardList list = AllZoneUtil.getCardsInPlay("Aluren");
 
@@ -6807,12 +6807,12 @@ public class GameActionUtil {
 
 	private static void upkeep_Land_Tax() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Land Tax");
 
-		PlayerZone oppPlayZone = AllZone.getZone(Constant.Zone.Play, player.getOpponent());
+		PlayerZone oppPlayZone = AllZone.getZone(Constant.Zone.Battlefield, player.getOpponent());
 
 		CardList self = new CardList(playZone.getCards());
 		CardList opp = new CardList(oppPlayZone.getCards());
@@ -6946,7 +6946,7 @@ public class GameActionUtil {
 	private static void upkeep_Feedback() {
 		final String auraName = "Feedback";
         final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
         
         CardList list = new CardList(playZone.getCards());
         list = list.filter(new CardListFilter() {
@@ -7021,7 +7021,7 @@ public class GameActionUtil {
 	private static void upkeep_Warp_Artifact() {
 		final String auraName = "Warp Artifact";
         final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
         
         CardList list = new CardList(playZone.getCards());
         list = list.filter(new CardListFilter() {
@@ -7059,7 +7059,7 @@ public class GameActionUtil {
 	private static void upkeep_Soul_Bleed() {
 		final String auraName = "Soul Bleed";
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.filter(AllZoneUtil.enchanted);
@@ -7093,7 +7093,7 @@ public class GameActionUtil {
 	private static void upkeep_Wanderlust() {
 		final String auraName = "Wanderlust";
         final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
         
         CardList list = new CardList(playZone.getCards());
         list = list.filter(new CardListFilter() {
@@ -7131,7 +7131,7 @@ public class GameActionUtil {
 	private static void upkeep_Curse_of_Chains() {
 		final String auraName = "Curse of Chains";
         final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
         
         CardList list = new CardList(playZone.getCards());
         list = list.filter(new CardListFilter() {
@@ -7170,7 +7170,7 @@ public class GameActionUtil {
 	private static void upkeep_Festering_Wound_Counter() {
 		final String auraName = "Festering Wound";
         final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
         
         CardList list = new CardList(playZone.getCards());
         list = list.getName(auraName);
@@ -7200,7 +7200,7 @@ public class GameActionUtil {
 	private static void upkeep_Festering_Wound_Damage() {
 		final String auraName = "Festering Wound";
         final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
         
         CardList list = new CardList(playZone.getCards());
         list = list.filter(new CardListFilter() {
@@ -7324,7 +7324,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Dragonmaster_Outcast() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Dragonmaster Outcast");
@@ -7379,7 +7379,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Scute_Mob() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Scute Mob");
@@ -7408,7 +7408,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Sporesower_Thallid() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Sporesower Thallid");
@@ -7419,7 +7419,7 @@ public class GameActionUtil {
 				Ability ability = new Ability(list.get(i), "0") {
 					@Override
 					public void resolve() {
-						PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 						CardList fungi = new CardList(play.getCards());
 						fungi = fungi.getType("Fungus");
@@ -7438,7 +7438,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Lichenthrope() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.filter(new CardListFilter()
@@ -7472,7 +7472,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Heartmender() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Heartmender");
@@ -7483,7 +7483,7 @@ public class GameActionUtil {
 				Ability ability = new Ability(list.get(i), "0") {
 					@Override
 					public void resolve() {
-						PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 						CardList creats = new CardList(play.getCards());
 						creats = creats.filter(new CardListFilter() {
@@ -7510,7 +7510,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Ratcatcher() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
 		CardList creatures = new CardList(library.getCards());
@@ -7561,7 +7561,7 @@ public class GameActionUtil {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
 
-		PlayerZone zone1 = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone zone1 = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(zone1.getCards());
 		list = list.getName("Nath of the Gilt-Leaf");
@@ -7592,8 +7592,8 @@ public class GameActionUtil {
 			Ability ability = new Ability(list.get(0), "0") {
 				@Override
 				public void resolve() {
-					PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-					PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+					PlayerZone hPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+					PlayerZone cPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
 					CardList choices = new CardList(hPlay.getCards());
 
 					CardListFilter filter = new CardListFilter() {
@@ -7619,7 +7619,7 @@ public class GameActionUtil {
 	private static void upkeep_Cunning_Lethemancer() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 
-		PlayerZone zone1 = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone zone1 = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(zone1.getCards());
 		list = list.getName("Cunning Lethemancer");
@@ -7655,7 +7655,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Benthic_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Benthic Djinn");
@@ -8636,7 +8636,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Dark_Confidant() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -8679,7 +8679,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Debtors_Knell() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
 		PlayerZone oppGrave = AllZone.getZone(Constant.Zone.Graveyard, player.getOpponent());
 
@@ -8699,7 +8699,7 @@ public class GameActionUtil {
 						PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
 						PlayerZone oppGrave = AllZone.getZone(Constant.Zone.Graveyard,
 								player.getOpponent());
-						PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+						PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 						CardList creatures = new CardList();
 						creatures.addAll(grave.getCards());
@@ -8736,7 +8736,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Emeria() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 
 		CardList creatures = new CardList(graveyard.getCards());
@@ -8754,7 +8754,7 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-						PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+						PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 						CardList creatures = new CardList(graveyard.getCards());
 						creatures = creatures.getType("Creature");
@@ -8826,7 +8826,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Reya() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 
 		CardList creatures = new CardList(graveyard.getCards());
@@ -8840,7 +8840,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-					PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+					PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 					CardList creatures = new CardList(graveyard.getCards());
 					creatures = creatures.getType("Creature");
@@ -8869,7 +8869,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Wort() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 
 		CardList creatures = new CardList(graveyard.getCards());
@@ -8917,7 +8917,7 @@ public class GameActionUtil {
 	private static void upkeep_Nether_Spirit() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		final PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList all = new CardList(graveyard.getCards());
 		all = all.getType("Creature");
@@ -8953,7 +8953,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Spore_Counters() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getType("Creature");
@@ -8975,7 +8975,7 @@ public class GameActionUtil {
 	public static void upkeep_Suspend() {
 		Player player = AllZone.Phase.getPlayerTurn();
 
-		PlayerZone exile = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+		PlayerZone exile = AllZone.getZone(Constant.Zone.Exile, player);
 		CardList list = new CardList();
 		list.addAll(exile.getCards());
 		//list = list.getType("Creature");
@@ -8996,7 +8996,7 @@ public class GameActionUtil {
 	private static void upkeep_Vanishing() {
 
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		CardList list = new CardList(playZone.getCards());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
@@ -9026,7 +9026,7 @@ public class GameActionUtil {
 	private static void upkeep_Fading() {
 
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		CardList list = new CardList(playZone.getCards());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
@@ -9061,10 +9061,10 @@ public class GameActionUtil {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
 
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		// check if opponent has 3 or more creatures in play
-		PlayerZone opponentZone = AllZone.getZone(Constant.Zone.Play, opponent);
+		PlayerZone opponentZone = AllZone.getZone(Constant.Zone.Battlefield, opponent);
 		CardList opponentList = new CardList(opponentZone.getCards());
 		opponentList = opponentList.getType("Creature");
 
@@ -9092,7 +9092,7 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-						PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 
 						// sacrifice Defense of the Heart
 						AllZone.GameAction.sacrifice(card);
@@ -9164,7 +9164,7 @@ public class GameActionUtil {
 	            	   //String opponent = player.getOpponent();
 	            	   CardList libraryList = AllZoneUtil.getPlayerCardsInLibrary(player);
 	            	   //PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-	            	   PlayerZone battlefield = AllZone.getZone(Constant.Zone.Play, player);
+	            	   PlayerZone battlefield = AllZone.getZone(Constant.Zone.Battlefield, player);
 	            	   boolean oathFlag = true;
 
 	            	   if (AllZoneUtil.compareTypeAmountInPlay(player, "Creature") < 0){
@@ -9356,7 +9356,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Convalescent_Care() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Convalescent Care");
@@ -9671,7 +9671,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Klass() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList elf = new CardList(playZone.getCards());
 		elf = elf.getType("Elf");
@@ -9698,7 +9698,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Felidar_Sovereign() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Felidar Sovereign");
@@ -9723,7 +9723,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Battle_of_Wits() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		PlayerZone libraryZone = AllZone.getZone(Constant.Zone.Library, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -9777,7 +9777,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Epic_Struggle() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Epic Struggle");
@@ -9808,7 +9808,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Helix_Pinnacle() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Helix Pinnacle");
@@ -9887,7 +9887,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Barren_Glory() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		PlayerZone handZone = AllZone.getZone(Constant.Zone.Hand, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -9906,7 +9906,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					CardList handList = AllZoneUtil.getCardsInZone(Constant.Zone.Hand, player);
-					CardList playList = AllZoneUtil.getCardsInZone(Constant.Zone.Play, player);
+					CardList playList = AllZoneUtil.getCardsInZone(Constant.Zone.Battlefield, player);
 					playList = playList.getValidCards("Permanents".split(","),source.getController(),source);
 					playList.remove(source);
 					
@@ -9925,7 +9925,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Sleeper_Agent() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Sleeper Agent");
@@ -9948,7 +9948,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Cursed_Land() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		//list = list.getName("Cursed Land");
@@ -9986,7 +9986,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Pillory_of_the_Sleepless() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.filter(new CardListFilter() {
@@ -10024,8 +10024,8 @@ public class GameActionUtil {
 
 	private static void upkeep_Greener_Pastures() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		PlayerZone oppPlayZone = AllZone.getZone(Constant.Zone.Play, player.getOpponent());
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
+		PlayerZone oppPlayZone = AllZone.getZone(Constant.Zone.Battlefield, player.getOpponent());
 
 		CardList self = new CardList(playZone.getCards());
 		CardList opp = new CardList(oppPlayZone.getCards());
@@ -10066,7 +10066,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Bitterblossom() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Bitterblossom");
@@ -10093,7 +10093,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Goblin_Assault() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Goblin Assault");
@@ -10120,7 +10120,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Awakening_Zone() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Awakening Zone");
@@ -10149,7 +10149,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Nut_Collector() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Nut Collector");
@@ -10176,7 +10176,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Masticore() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Masticore");
@@ -10236,7 +10236,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Eldrazi_Monument() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Eldrazi Monument");
@@ -10283,7 +10283,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Blaze_Counters() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList blaze = new CardList(playZone.getCards());
 		blaze = blaze.filter(new CardListFilter() {
@@ -10312,7 +10312,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Mycoloth() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		final int[] number = new int[1];
 
 		CardList list = new CardList(playZone.getCards());
@@ -10349,8 +10349,8 @@ public class GameActionUtil {
 	
 	private static void upkeep_Verdant_Force() {
 		//final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-		PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+		PlayerZone hPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+		PlayerZone cPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
 
 		CardList list = new CardList(hPlay.getCards());
 		list.addAll(cPlay.getCards());
@@ -10438,7 +10438,7 @@ public class GameActionUtil {
 
 						public void execute() {
 
-							PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+							PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 							CardList creatsToSac = new CardList();
 							CardList creats = new CardList(play.getCards());
 							creats = creats.filter(new CardListFilter() {
@@ -10493,7 +10493,7 @@ public class GameActionUtil {
 					c.addSpellAbility(devour);
 					c.addComesIntoPlayCommand(intoPlay);
 
-					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 					play.add(c);
 
 				}
@@ -10506,7 +10506,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Bringer_of_the_Green_Dawn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Bringer of the Green Dawn");
@@ -10546,7 +10546,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Bringer_of_the_Blue_Dawn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Bringer of the Blue Dawn");
@@ -10558,7 +10558,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Bringer_of_the_White_Dawn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 
 		CardList list = new CardList(playZone.getCards());
@@ -10581,7 +10581,7 @@ public class GameActionUtil {
 							if(q == null || q.equals("No")) return;
 							if(q.equals("Yes")) {
 								PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-								PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+								PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 								CardList arts = new CardList(graveyard.getCards());
 								arts = arts.getType("Artifact");
@@ -10599,7 +10599,7 @@ public class GameActionUtil {
 
 						else if(player.equals(AllZone.ComputerPlayer)) {
 							PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-							PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+							PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 							CardList arts = new CardList(graveyard.getCards());
 							arts = arts.getType("Artifact");
@@ -10625,7 +10625,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Serendib_Efreet() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Serendib Efreet");
@@ -10650,7 +10650,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Nettletooth_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Nettletooth Djinn");
@@ -10858,7 +10858,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Carnophage() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -10882,7 +10882,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Sangrophage() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -10906,7 +10906,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Phyrexian_Arena() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -10938,7 +10938,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Master_of_the_Wild_Hunt() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -10953,7 +10953,7 @@ public class GameActionUtil {
 	
 	private static void upkeep_Honden_of_Seeing_Winds() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -10961,7 +10961,7 @@ public class GameActionUtil {
 		list = list.getName("Honden of Seeing Winds");
 
 		for(int i = 0; i < list.size(); i++) {
-			PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
+			PlayerZone Play = AllZone.getZone(Constant.Zone.Battlefield, player);
 			CardList hondlist = new CardList();
 			hondlist.addAll(Play.getCards());
 			hondlist = hondlist.getType("Shrine");
@@ -10972,7 +10972,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Honden_of_Cleansing_Fire() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -10984,7 +10984,7 @@ public class GameActionUtil {
 			final Ability ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
+					PlayerZone Play = AllZone.getZone(Constant.Zone.Battlefield, player);
 					CardList hondlist = new CardList();
 					hondlist.addAll(Play.getCards());
 					hondlist = hondlist.getType("Shrine");
@@ -11004,7 +11004,7 @@ public class GameActionUtil {
 	private static void upkeep_Honden_of_Nights_Reach() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		final Player opponent = player.getOpponent();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -11015,7 +11015,7 @@ public class GameActionUtil {
 			final Ability ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
+					PlayerZone Play = AllZone.getZone(Constant.Zone.Battlefield, player);
 					CardList hondlist = new CardList();
 					hondlist.addAll(Play.getCards());
 					hondlist = hondlist.getType("Shrine");
@@ -11045,13 +11045,13 @@ public class GameActionUtil {
 
 	private static void upkeep_Honden_of_Infinite_Rage() {
 		final Player controller = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
 
 		list = list.getName("Honden of Infinite Rage");
-		PlayerZone Play = AllZone.getZone(Constant.Zone.Play, controller);
+		PlayerZone Play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 		CardList hondlist = new CardList();
 		hondlist.addAll(Play.getCards());
 		hondlist = hondlist.getType("Shrine");
@@ -11063,13 +11063,13 @@ public class GameActionUtil {
 
 				@Override
 				public void resolve() {
-					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, controller);
+					PlayerZone Play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 					CardList hondlist = new CardList();
 					hondlist.addAll(Play.getCards());
 					hondlist = hondlist.getType("Shrine");
 					if(controller.equals(AllZone.HumanPlayer)) {
 						Player opp = controller.getOpponent();
-						PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play, opp);
+						PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Battlefield, opp);
 
 						String[] choices = {"Yes", "No, target a creature instead"};
 
@@ -11128,7 +11128,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Honden_of_Lifes_Web() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -11140,7 +11140,7 @@ public class GameActionUtil {
 			final Ability ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
+					PlayerZone Play = AllZone.getZone(Constant.Zone.Battlefield, player);
 					CardList hondlist = new CardList();
 					hondlist.addAll(Play.getCards());
 					hondlist = hondlist.getType("Shrine");
@@ -11197,7 +11197,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Vampire_Lacerator() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -11264,7 +11264,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Fledgling_Djinn() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Fledgling Djinn");
@@ -11289,7 +11289,7 @@ public class GameActionUtil {
 	
     private static void upkeep_Creakwood_Liege() {
         final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
         CardList list = new CardList(playZone.getCards());
         list = list.getName("Creakwood Liege");
@@ -11485,7 +11485,7 @@ public class GameActionUtil {
 						player);
 				zone[2] = AllZone.getZone(
 						Constant.Zone.Graveyard, player);
-				zone[3] = AllZone.getZone(Constant.Zone.Play,
+				zone[3] = AllZone.getZone(Constant.Zone.Battlefield,
 						player);
 
 				for(int outer = 0; outer < zone.length; outer++) {
@@ -11713,8 +11713,8 @@ public class GameActionUtil {
 			// for each zone found add +1/+1 to each card
 			for(int outer = 0; outer < zone.length && outer < 1; outer++) {
 				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
+				creature.addAll(AllZone.Human_Battlefield.getCards());
+				creature.addAll(AllZone.Computer_Battlefield.getCards());
 				creature = creature.getType("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
@@ -11881,7 +11881,7 @@ public class GameActionUtil {
 			CardList Akroma_Zone = new CardList();
         	for(int i = 0; i < Akroma_List.size(); i++) {
         		Akroma_Zone.clear();
-				Akroma_Zone.addAll(AllZone.getZone(Constant.Zone.Play, Akroma_List.get(i).getController()).getCards());	
+				Akroma_Zone.addAll(AllZone.getZone(Constant.Zone.Battlefield, Akroma_List.get(i).getController()).getCards());	
         	}
         	CardList List_Copy = new CardList();
         	List_Copy.add(list);
@@ -11988,8 +11988,8 @@ public class GameActionUtil {
 						removeKeyword(old[i],CardsWithKeyword.get(z),i,Integer.valueOf(InfoSplit[1]),InfoSplit[2]);
 			}
 			// Gather Cards in Play and Graveyards with the Keyword
-            PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-            PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+            PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+            PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
             PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
             PlayerZone Cgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
             
@@ -12280,14 +12280,14 @@ public class GameActionUtil {
 			**/
 			CardList Cards_inZone = new CardList();
       		if(Keyword_Details[2].equals("All Permanents")) {
-	      		Cards_inZone.addAll(AllZone.Human_Play.getCards());
-	      		Cards_inZone.addAll(AllZone.Computer_Play.getCards());
+	      		Cards_inZone.addAll(AllZone.Human_Battlefield.getCards());
+	      		Cards_inZone.addAll(AllZone.Computer_Battlefield.getCards());
 	      		}
 	      		if(Keyword_Details[2].equals("Permanents you Control")) {
-		      		Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Play, SourceCard.getController()).getCards());
+		      		Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Battlefield, SourceCard.getController()).getCards());
 		      		}
 	      		if(Keyword_Details[2].equals("Permanents your Opponents Control")) {
-		      		Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Play, SourceCard.getController().getOpponent()).getCards());
+		      		Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Battlefield, SourceCard.getController().getOpponent()).getCards());
 		      		}
 	      		if(Keyword_Details[2].equals("ControllerCardsInHand")) {
 		      		Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
@@ -12302,33 +12302,33 @@ public class GameActionUtil {
 	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Graveyard, SourceCard.getController().getOpponent()).getCards());
 		      		}
 	      		if(Keyword_Details[2].equals("ControllerAllCards") || Keyword_Details[2].equals("AllCards")) {
-	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Play, SourceCard.getController()).getCards());
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Battlefield, SourceCard.getController()).getCards());
 	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
 	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Graveyard, SourceCard.getController()).getCards());
 	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Library, SourceCard.getController()).getCards());
-	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Removed_From_Play, SourceCard.getController()).getCards());
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Exile, SourceCard.getController()).getCards());
 		      		}
 	      		if(Keyword_Details[2].equals("OpponentAllCards") || Keyword_Details[2].equals("AllCards")) {
-	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Play, SourceCard.getController().getOpponent()).getCards());
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Battlefield, SourceCard.getController().getOpponent()).getCards());
 	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController().getOpponent()).getCards());
 	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Graveyard, SourceCard.getController().getOpponent()).getCards());
 	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Library, SourceCard.getController().getOpponent()).getCards());
-	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Removed_From_Play, SourceCard.getController().getOpponent()).getCards());
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Exile, SourceCard.getController().getOpponent()).getCards());
 		      		}
 	      		if(Keyword_Details[2].equals("Self")) {
 		      		Cards_inZone.add(SourceCard);
 		      		}
 	      		if(Keyword_Details[2].equals("Enchanted Permanent")) {
 	      			CardList CardsinPlay = new CardList();
-	      			CardsinPlay.addAll(AllZone.Human_Play.getCards());
-	      			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
+	      			CardsinPlay.addAll(AllZone.Human_Battlefield.getCards());
+	      			CardsinPlay.addAll(AllZone.Computer_Battlefield.getCards());
 		      		for(int i = 0; i < CardsinPlay.size(); i++)
 		      		if(CardsinPlay.get(i).getEnchantedBy().contains(SourceCard)) Cards_inZone.add(CardsinPlay.get(i));
 		      		}
 	      		if(Keyword_Details[2].equals("Eqiupped Permanent")) {
 	      			CardList CardsinPlay = new CardList();
-	      			CardsinPlay.addAll(AllZone.Human_Play.getCards());
-	      			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
+	      			CardsinPlay.addAll(AllZone.Human_Battlefield.getCards());
+	      			CardsinPlay.addAll(AllZone.Computer_Battlefield.getCards());
 		      		for(int i = 0; i < CardsinPlay.size(); i++)
 		      		if(CardsinPlay.get(i).getEquippedBy().contains(SourceCard)) Cards_inZone.add(CardsinPlay.get(i));
 		      		}
@@ -12418,8 +12418,8 @@ public class GameActionUtil {
 			storage = new ArrayList<StaticEffect>();
 			
 			//Gather Cards on the Battlefield with the stPump Keyword
-			PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-			PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+			PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+			PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
 			CardList cards_WithKeyword = new CardList();
 			
 			cards_WithKeyword.add(new CardList(Hplay.getCards()));
@@ -12570,7 +12570,7 @@ public class GameActionUtil {
 	      		if (Handcards.size() > 0) return false;
 	      	}
   	      	if(SpecialConditions.contains("Metalcraft")) {
-  	      		PlayerZone play = AllZone.getZone(Constant.Zone.Play, SourceCard.getController());
+  	      		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, SourceCard.getController());
   	      		CardList CardsinPlay = new CardList(play.getCards());
       			CardsinPlay = CardsinPlay.getType("Artifact");
 	      		if (CardsinPlay.size() < 3) return false;
@@ -12578,8 +12578,8 @@ public class GameActionUtil {
   	      	if(SpecialConditions.contains("isPresent")) { // is a card of a certain type/color present?
   	    	  	String Requirements = SpecialConditions.replaceAll("isPresent ", "");
     			CardList CardsinPlay = new CardList();
-      			CardsinPlay.addAll(AllZone.Human_Play.getCards());
-      			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
+      			CardsinPlay.addAll(AllZone.Human_Battlefield.getCards());
+      			CardsinPlay.addAll(AllZone.Computer_Battlefield.getCards());
       			String Conditions[] = Requirements.split(",");
       			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController(), SourceCard);
 	      		if (CardsinPlay.isEmpty()) return false;
@@ -12587,8 +12587,8 @@ public class GameActionUtil {
   	      	if(SpecialConditions.contains("isNotPresent")) { // is no card of a certain type/color present?
   	      		String Requirements = SpecialConditions.replaceAll("isNotPresent ", "");
     			CardList CardsinPlay = new CardList();
-      			CardsinPlay.addAll(AllZone.Human_Play.getCards());
-      			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
+      			CardsinPlay.addAll(AllZone.Human_Battlefield.getCards());
+      			CardsinPlay.addAll(AllZone.Computer_Battlefield.getCards());
       			String Conditions[] = Requirements.split(",");
       			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController(), SourceCard);
 	      		if (!CardsinPlay.isEmpty()) return false;
@@ -12619,8 +12619,8 @@ public class GameActionUtil {
 				Cards_inZone.add(SourceCard);
 			}
       		if(Range.equals("All")) {
-      			Cards_inZone.addAll(AllZone.Human_Play.getCards());
-      			Cards_inZone.addAll(AllZone.Computer_Play.getCards());
+      			Cards_inZone.addAll(AllZone.Human_Battlefield.getCards());
+      			Cards_inZone.addAll(AllZone.Computer_Battlefield.getCards());
       		}
       		if(Range.equals("Enchanted")) {
       			if (SourceCard.getEnchanting().size() > 0)
@@ -12656,14 +12656,14 @@ public class GameActionUtil {
 			// for each zone found add +1/+1 to each card
 			for(int outer = 0; outer < zone.length; outer++) {
 				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
+				creature.addAll(AllZone.Human_Battlefield.getCards());
+				creature.addAll(AllZone.Computer_Battlefield.getCards());
 
 				for(int i = 0; i < creature.size(); i++) {
 					final Card crd = creature.get(i);
 					CardList Type = new CardList();
-					Type.addAll(AllZone.Human_Play.getCards());
-					Type.addAll(AllZone.Computer_Play.getCards());
+					Type.addAll(AllZone.Human_Battlefield.getCards());
+					Type.addAll(AllZone.Computer_Battlefield.getCards());
 					Type = Type.filter(new CardListFilter() {
 	                    public boolean addCard(Card card) {
 	                        return !card.equals(crd) && card.isCreature() && !crd.getName().equals("Mana Pool");
@@ -12703,8 +12703,8 @@ public class GameActionUtil {
 
 			if(AllZoneUtil.isCardInPlay("Leyline of Singularity")) {
 				CardList NonLand = new CardList();
-				NonLand.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-				NonLand.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+				NonLand.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
+				NonLand.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
 				
 				NonLand = NonLand.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
@@ -12725,8 +12725,8 @@ public class GameActionUtil {
 				}
 				} else {
     				CardList NonLand = new CardList();
-    				NonLand.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-    				NonLand.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+    				NonLand.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
+    				NonLand.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
     				
     				NonLand = NonLand.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
@@ -12911,8 +12911,8 @@ public class GameActionUtil {
 
 			if(zone.length > 0) {
 				CardList cards = new CardList();
-				cards.addAll(AllZone.Human_Play.getCards());
-				cards.addAll(AllZone.Computer_Play.getCards());
+				cards.addAll(AllZone.Human_Battlefield.getCards());
+				cards.addAll(AllZone.Computer_Battlefield.getCards());
 
 				for(int i = 0; i < cards.size(); i++) {
 					c = cards.get(i);
@@ -13115,8 +13115,8 @@ public class GameActionUtil {
 		public void execute() {
 			// get all Forests
 			CardList all = new CardList();
-			all.addAll(AllZone.Human_Play.getCards());
-			all.addAll(AllZone.Computer_Play.getCards());
+			all.addAll(AllZone.Human_Battlefield.getCards());
+			all.addAll(AllZone.Computer_Battlefield.getCards());
 			CardList current = all.getType("Forest");
 
 			for(int outer = 0; outer < current.size(); outer++) {
@@ -13130,7 +13130,7 @@ public class GameActionUtil {
 
 						CardList all = new CardList(
 								AllZone.getZone(
-										Constant.Zone.Play,
+										Constant.Zone.Battlefield,
 										c.getController()).getCards());
 
 						all = all.filter(new CardListFilter() {
@@ -13177,8 +13177,8 @@ public class GameActionUtil {
 		public void execute() {
 			// get all creatures
 			CardList current = new CardList();
-			current.addAll(AllZone.Human_Play.getCards());
-			current.addAll(AllZone.Computer_Play.getCards());
+			current.addAll(AllZone.Human_Battlefield.getCards());
+			current.addAll(AllZone.Computer_Battlefield.getCards());
 			current = current.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return !c.isToken()
@@ -14043,10 +14043,10 @@ public class GameActionUtil {
 		public void execute() {
 
 			// Human Activates Dauntless Escort
-	        PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Play,AllZone.HumanPlayer);
+	        PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.HumanPlayer);
 	        CardList PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
 	        PlayerCreatureList = PlayerCreatureList.getType("Creature");
-			PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play,AllZone.ComputerPlayer);
+			PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.ComputerPlayer);
 	        CardList opponentCreatureList = new CardList(opponentPlayZone.getCards());
 	        opponentCreatureList = opponentCreatureList.getType("Creature");
 			if(Phase.Sac_Dauntless_Escort == true) {
@@ -14078,10 +14078,10 @@ public class GameActionUtil {
 
 
 			// Computer Activates Dauntless Escort
-	        PlayerPlayZone = AllZone.getZone(Constant.Zone.Play,AllZone.ComputerPlayer);
+	        PlayerPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.ComputerPlayer);
 	        PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
 	        PlayerCreatureList = PlayerCreatureList.getType("Creature");
-			opponentPlayZone = AllZone.getZone(Constant.Zone.Play,AllZone.HumanPlayer);
+			opponentPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.HumanPlayer);
 	        opponentCreatureList = new CardList(opponentPlayZone.getCards());
 	        opponentCreatureList = opponentCreatureList.getType("Creature");
 			if(Phase.Sac_Dauntless_Escort_Comp == true) {
@@ -14134,7 +14134,7 @@ public class GameActionUtil {
 
 		private boolean oppHasCreature(Card c) {
 			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play,
+					Constant.Zone.Battlefield,
 					c.getController().getOpponent());
 
 			CardList creats = new CardList();
@@ -14201,7 +14201,7 @@ public class GameActionUtil {
 
 		private boolean getsBonus(Card c) {
 			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
+					Constant.Zone.Battlefield, c.getController());
 
 			CardList list = new CardList();
 			list.addAll(play.getCards());
@@ -14298,7 +14298,7 @@ public class GameActionUtil {
 
 		private int countArtifacts(Card c) {
 			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
+					Constant.Zone.Battlefield, c.getController());
 			CardList artifacts = new CardList(play.getCards());
 			artifacts = artifacts.getType("Artifact");
 			return artifacts.size();
@@ -14325,7 +14325,7 @@ public class GameActionUtil {
 
 		private int countArtifacts(Card c) {
 			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
+					Constant.Zone.Battlefield, c.getController());
 			CardList artifacts = new CardList(play.getCards());
 			artifacts = artifacts.filter(new CardListFilter()
 			{
@@ -14358,7 +14358,7 @@ public class GameActionUtil {
 
 		private int countEnchantments(Card c) {
 			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
+					Constant.Zone.Battlefield, c.getController());
 			CardList enchantments = new CardList(play.getCards());
 			enchantments = enchantments.getType("Enchantment");
 			return enchantments.size();
@@ -14417,7 +14417,7 @@ public class GameActionUtil {
 
 		private int countIslands(Card c) {
 			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
+					Constant.Zone.Battlefield, c.getController());
 			CardList islands = new CardList(play.getCards());
 			islands = islands.getType("Island");
 			return islands.size();
@@ -15289,7 +15289,7 @@ public class GameActionUtil {
 
 		void addSwampwalk(Player player) {
 			next.clear();
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 			CardList playlist = new CardList(play.getCards());
 			playlist = playlist.getType("Creature");
 			for(int i = 0; i < playlist.size(); i++) {
@@ -15307,7 +15307,7 @@ public class GameActionUtil {
 			CardList list = new CardList(grave.getCards());
 
 			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, player);
+					Constant.Zone.Battlefield, player);
 			CardList lands = new CardList(play.getCards());
 			lands = lands.getType("Swamp");
 
@@ -15356,7 +15356,7 @@ public class GameActionUtil {
 
 		void addFirstStrike(Player player) {
 			next.clear();
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 			CardList playlist = new CardList(play.getCards());
 			playlist = playlist.getType("Creature");
 			for(int i = 0; i < playlist.size(); i++) {
@@ -15374,7 +15374,7 @@ public class GameActionUtil {
 			CardList list = new CardList(grave.getCards());
 
 			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, player);
+					Constant.Zone.Battlefield, player);
 			CardList lands = new CardList(play.getCards());
 			lands = lands.getType("Plains");
 
@@ -15423,7 +15423,7 @@ public class GameActionUtil {
 
 		void addHaste(Player player) {
 			next.clear();
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 			CardList playlist = new CardList(play.getCards());
 			playlist = playlist.getType("Creature");
 			for(int i = 0; i < playlist.size(); i++) {
@@ -15441,7 +15441,7 @@ public class GameActionUtil {
 			CardList list = new CardList(grave.getCards());
 
 			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, player);
+					Constant.Zone.Battlefield, player);
 			CardList lands = new CardList(play.getCards());
 			lands = lands.getType("Mountain");
 
@@ -15490,7 +15490,7 @@ public class GameActionUtil {
 
 		void addFlying(Player player) {
 			next.clear();
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 			CardList playlist = new CardList(play.getCards());
 			playlist = playlist.getType("Creature");
 			for(int i = 0; i < playlist.size(); i++) {
@@ -15508,7 +15508,7 @@ public class GameActionUtil {
 			CardList list = new CardList(grave.getCards());
 
 			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, player);
+					Constant.Zone.Battlefield, player);
 			CardList lands = new CardList(play.getCards());
 			lands = lands.getType("Island");
 
@@ -15557,7 +15557,7 @@ public class GameActionUtil {
 
 		void addTrample(Player player) {
 			next.clear();
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 			CardList playlist = new CardList(play.getCards());
 			playlist = playlist.getType("Creature");
 			for(int i = 0; i < playlist.size(); i++) {
@@ -15575,7 +15575,7 @@ public class GameActionUtil {
 			CardList list = new CardList(grave.getCards());
 
 			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, player);
+					Constant.Zone.Battlefield, player);
 			CardList lands = new CardList(play.getCards());
 			lands = lands.getType("Forest");
 
@@ -16096,8 +16096,8 @@ public class GameActionUtil {
 
 			list.clear();
 
-			PlayerZone cplay = AllZone.Computer_Play;
-			PlayerZone hplay = AllZone.Human_Play;
+			PlayerZone cplay = AllZone.Computer_Battlefield;
+			PlayerZone hplay = AllZone.Human_Battlefield;
 
 			CardList cl = new CardList();
 			cl.addAll(cplay.getCards());

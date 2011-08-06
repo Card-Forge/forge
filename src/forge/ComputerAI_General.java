@@ -47,7 +47,7 @@ public class ComputerAI_General implements Computer {
             	
                 if(c.isCreature() && (c.getKeyword().contains("Haste")) || c.getKeyword().contains("Exalted")) return true;
 
-                CardList buffed = new CardList(AllZone.Computer_Play.getCards()); //get all cards the computer controls with BuffedBy
+                CardList buffed = new CardList(AllZone.Computer_Battlefield.getCards()); //get all cards the computer controls with BuffedBy
                 for(int j = 0; j < buffed.size(); j++) {
                     Card buffedcard = buffed.get(j);
                     if (buffedcard.getSVar("BuffedBy").length() > 0) {
@@ -57,7 +57,7 @@ public class ComputerAI_General implements Computer {
                     }       
                 }//BuffedBy
 
-                CardList antibuffed = new CardList(AllZone.Human_Play.getCards()); //get all cards the human controls with AntiBuffedBy
+                CardList antibuffed = new CardList(AllZone.Human_Battlefield.getCards()); //get all cards the human controls with AntiBuffedBy
                 for(int k = 0; k < antibuffed.size(); k++) {
                     Card buffedcard = antibuffed.get(k);
                     if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
@@ -89,10 +89,10 @@ public class ComputerAI_General implements Computer {
         });
         CardList all = new CardList();
         all.addAll(hand.toArray());
-        all.addAll(AllZone.Computer_Play.getCards());
+        all.addAll(AllZone.Computer_Battlefield.getCards());
         
         CardList humanPlayable = new CardList();
-        humanPlayable.addAll(AllZone.Human_Play.getCards());
+        humanPlayable.addAll(AllZone.Human_Battlefield.getCards());
         humanPlayable = humanPlayable.filter(new CardListFilter()
         {
           public boolean addCard(Card c)
@@ -111,7 +111,7 @@ public class ComputerAI_General implements Computer {
         //Card list of all cards to consider
         CardList all = new CardList();
         all.addAll(AllZone.Computer_Hand.getCards());
-        all.addAll(AllZone.Computer_Play.getCards());
+        all.addAll(AllZone.Computer_Battlefield.getCards());
         all.addAll(CardFactoryUtil.getFlashbackCards(AllZone.ComputerPlayer).toArray());
         
         // Prevent the computer from summoning Ball Lightning type creatures during main phase 2
@@ -125,7 +125,7 @@ public class ComputerAI_General implements Computer {
         });
         
         CardList humanPlayable = new CardList();
-        humanPlayable.addAll(AllZone.Human_Play.getCards());
+        humanPlayable.addAll(AllZone.Human_Battlefield.getCards());
         humanPlayable = humanPlayable.filter(new CardListFilter()
         {
           public boolean addCard(Card c)
@@ -141,12 +141,12 @@ public class ComputerAI_General implements Computer {
     private SpellAbility[] getOtherPhases(){
         CardList all = new CardList();
         all.addAll(AllZone.Computer_Hand.getCards());
-        all.addAll(AllZone.Computer_Play.getCards());
+        all.addAll(AllZone.Computer_Battlefield.getCards());
         all.addAll(CardFactoryUtil.getFlashbackCards(AllZone.ComputerPlayer).toArray());
 
         
         CardList humanPlayable = new CardList();
-        humanPlayable.addAll(AllZone.Human_Play.getCards());
+        humanPlayable.addAll(AllZone.Human_Battlefield.getCards());
         humanPlayable = humanPlayable.filter(new CardListFilter()
         {
           public boolean addCard(Card c)
@@ -205,7 +205,7 @@ public class ComputerAI_General implements Computer {
             Log.debug("Computer just assigned " + att[i].getName() + " as an attacker.");
         }
         
-        AllZone.Computer_Play.updateObservers();
+        AllZone.Computer_Battlefield.updateObservers();
         CombatUtil.showCombat();
         
         AllZone.Phase.setNeedToNextPhase(true);

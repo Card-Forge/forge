@@ -96,7 +96,7 @@ public class Input_PayManaCost extends Input {
     public void selectButtonCancel() {
         resetManaCost();
         AllZone.ManaPool.unpaid();
-        AllZone.Human_Play.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
+        AllZone.Human_Battlefield.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap
         
         stop();
     }

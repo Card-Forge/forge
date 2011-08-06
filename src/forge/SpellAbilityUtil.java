@@ -40,7 +40,7 @@ public class SpellAbilityUtil
     
     static public CardList getAvailableMana(Player player)
     {
-	PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+	PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 	CardList all = new CardList(play.getCards());
 	CardList mana = all.filter(new CardListFilter()
 	{

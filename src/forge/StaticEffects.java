@@ -174,9 +174,9 @@ public class StaticEffects
 	public void rePopulateStateBasedList()
 	{
 		reset();
-		PlayerZone playerZone = AllZone.getZone(Constant.Zone.Play,
+		PlayerZone playerZone = AllZone.getZone(Constant.Zone.Battlefield,
 				AllZone.HumanPlayer);
-		PlayerZone computerZone = AllZone.getZone(Constant.Zone.Play,
+		PlayerZone computerZone = AllZone.getZone(Constant.Zone.Battlefield,
 				AllZone.ComputerPlayer);
 
 		CardList cards = new CardList();

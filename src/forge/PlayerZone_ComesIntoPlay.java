@@ -69,7 +69,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             c.comesIntoPlay();
             AllZone.GameAction.checkWheneverKeyword(c,"EntersBattleField",null);
             
-            PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
             PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
             
             //Amulet of Vigor
@@ -323,7 +323,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         }
         
         PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
         CardList meek = new CardList(grave.getCards());
         
         meek = meek.getName("Sword of the Meek");

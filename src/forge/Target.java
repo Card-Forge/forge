@@ -19,7 +19,7 @@ public class Target {
 	public boolean isMaxTargetsChosen(Card c, SpellAbility sa) 	{ return getMaxTargets(c, sa) == numTargeted; }
 	public boolean isMinTargetsChosen(Card c, SpellAbility sa) 	{ return getMinTargets(c, sa) <= numTargeted; }
 	
-	private String tgtZone = Constant.Zone.Play;
+	private String tgtZone = Constant.Zone.Battlefield;
 	public void setZone(String tZone) { tgtZone = tZone; }
 	public String getZone() { return tgtZone; }
 	

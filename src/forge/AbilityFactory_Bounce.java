@@ -133,7 +133,7 @@ public class AbilityFactory_Bounce {
 		final Card source = sa.getSourceCard();
 		CardList list;
 		
-		list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
+		list = new CardList(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
 		list = list.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
 				return CardFactoryUtil.canTarget(source, c);

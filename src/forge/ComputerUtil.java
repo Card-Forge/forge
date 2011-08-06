@@ -140,12 +140,12 @@ public class ComputerUtil
   static public SpellAbility[] getSpellAbility()
   {
     CardList all = new CardList();
-    all.addAll(AllZone.Computer_Play.getCards());
+    all.addAll(AllZone.Computer_Battlefield.getCards());
     all.addAll(AllZone.Computer_Hand.getCards());
     all.addAll(CardFactoryUtil.getGraveyardActivationCards(AllZone.ComputerPlayer).toArray());
     
     CardList humanPlayable = new CardList();
-    humanPlayable.addAll(AllZone.Human_Play.getCards());
+    humanPlayable.addAll(AllZone.Human_Battlefield.getCards());
     humanPlayable = humanPlayable.filter(new CardListFilter()
     {
       public boolean addCard(Card c)
@@ -243,7 +243,7 @@ public class ComputerUtil
     	
 		if (cost.getTapXTypeCost())
 		{
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
 			CardList typeList = new CardList(play.getCards());
 			typeList = typeList.getValidCards(cost.getTapXType().split(","),sa.getActivatingPlayer() ,sa.getSourceCard());
 			
@@ -307,7 +307,7 @@ public class ComputerUtil
 		if (cost.getSacCost()){
 			  // if there's a sacrifice in the cost, just because we can Pay it doesn't mean we want to. 
 			if (!cost.getSacThis()){
-			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
 			    CardList typeList = new CardList(play.getCards());
 			    typeList = typeList.getValidCards(cost.getSacType().split(","),sa.getActivatingPlayer() ,sa.getSourceCard());
 			    Card target = sa.getTargetCard();
@@ -324,7 +324,7 @@ public class ComputerUtil
 		if (cost.getExileCost()){
 			  // if there's an exile in the cost, just because we can Pay it doesn't mean we want to. 
 			if (!cost.getExileThis()){
-			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
 			    CardList typeList = new CardList(play.getCards());
 			    typeList = typeList.getValidCards(cost.getExileType().split(","),sa.getActivatingPlayer() ,sa.getSourceCard());
 			    Card target = sa.getTargetCard();
@@ -341,7 +341,7 @@ public class ComputerUtil
 		if (cost.getReturnCost()){
 			  // if there's a return in the cost, just because we can Pay it doesn't mean we want to. 
 			if (!cost.getReturnThis()){
-			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
 			    CardList typeList = new CardList(play.getCards());
 			    typeList = typeList.getValidCards(cost.getReturnType().split(","),sa.getActivatingPlayer() ,sa.getSourceCard());
 			    Card target = sa.getTargetCard();
@@ -493,7 +493,7 @@ public class ComputerUtil
 
   static public CardList getAvailableMana()
   {
-    CardList list = new CardList(AllZone.Computer_Play.getCards());
+    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
     CardList mana = list.filter(new CardListFilter()
     {
       public boolean addCard(Card c)
@@ -559,7 +559,7 @@ public class ComputerUtil
   static public void playLand(Card land, PlayerZone zone)
   {
 	    zone.remove(land);
-	    AllZone.Computer_Play.add(land);
+	    AllZone.Computer_Battlefield.add(land);
 	    CardFactoryUtil.playLandEffects(land);
 	    AllZone.GameInfo.incrementComputerPlayedLands();
   }
@@ -649,7 +649,7 @@ public class ComputerUtil
 	  }
   
   static public Card chooseSacrificeType(String type, Card activate, Card target){
-      PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+      PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
       typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
 	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target)) // don't sacrifice the card we're pumping
@@ -672,7 +672,7 @@ public class ComputerUtil
   }
   
   static public Card chooseTapType(String type, Card activate, boolean tap, int index){
-	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+	  PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
       typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
 	  
@@ -696,7 +696,7 @@ public class ComputerUtil
   }
   
   static public Card chooseReturnType(String type, Card activate, Card target){
-      PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+      PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
       CardList typeList = new CardList(play.getCards());
       typeList = typeList.getValidCards(type.split(","),activate.getController() ,activate);
 	  if (target != null && target.getController().equals(AllZone.ComputerPlayer) && typeList.contains(target)) // don't bounce the card we're pumping
@@ -711,7 +711,7 @@ public class ComputerUtil
 
   static public CardList getPossibleAttackers()
   {
-	  CardList list = new CardList(AllZone.Computer_Play.getCards());
+	  CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
 	  list = list.filter(new CardListFilter()
 	  {
 		public boolean addCard(Card c) {
@@ -723,14 +723,14 @@ public class ComputerUtil
   static public Combat getAttackers()
   {
     ComputerUtil_Attack2 att = new ComputerUtil_Attack2(
-        AllZone.Computer_Play.getCards(),
-        AllZone.Human_Play.getCards()   ,  AllZone.HumanPlayer.getLife());
+        AllZone.Computer_Battlefield.getCards(),
+        AllZone.Human_Battlefield.getCards()   ,  AllZone.HumanPlayer.getLife());
 
     return att.getAttackers();
   }
   static public Combat getBlockers()
   {
-    CardList blockers = new CardList(AllZone.Computer_Play.getCards());
+    CardList blockers = new CardList(AllZone.Computer_Battlefield.getCards());
 
     return ComputerUtil_Block2.getBlockers(AllZone.Combat, blockers);
   }

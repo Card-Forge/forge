@@ -86,7 +86,7 @@ public class ComputerAI_Burn2 implements Computer {
         for(int i = 0; i < att.length; i++)
             att[i].tap();
         
-        AllZone.Computer_Play.updateObservers();
+        AllZone.Computer_Battlefield.updateObservers();
         
         CombatUtil.showCombat();
         

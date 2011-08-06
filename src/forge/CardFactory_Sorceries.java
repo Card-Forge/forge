@@ -92,8 +92,8 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Play.getCards());
-                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
                     
                     human = human.getType("Creature");
                     computer = computer.getType("Creature");
@@ -109,8 +109,8 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     //get all creatures
                     CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
+                    list.addAll(AllZone.Human_Battlefield.getCards());
+                    list.addAll(AllZone.Computer_Battlefield.getCards());
                     list = list.getType("Creature");
                     
                     for(int i = 0; i < list.size(); i++) {
@@ -163,7 +163,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetType("Land", AllZone.Human_Play));
+            spell.setChooseTargetAI(CardFactoryUtil.AI_targetType("Land", AllZone.Human_Battlefield));
             spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "Land"));
         }// *************** END ************ END **************************
         
@@ -225,7 +225,7 @@ public class CardFactory_Sorceries {
                         }
                     }
                     
-                    if(c.isPermanent() && zone.is(Constant.Zone.Play)) {
+                    if(c.isPermanent() && zone.is(Constant.Zone.Battlefield)) {
                         target[index[0]] = c;
                         index[0]++;
                         showMessage();
@@ -280,8 +280,8 @@ public class CardFactory_Sorceries {
                     Card crd1 = target[1];
                     
                     if(crd0 != null && crd1 != null) {
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
                         
                         PlayerZone from0 = AllZone.getZone(crd0);
                         from0.remove(crd0);
@@ -291,14 +291,14 @@ public class CardFactory_Sorceries {
                         crd0.setController(card.getController().getOpponent());
                         crd1.setController(card.getController());
                         
-                        PlayerZone to0 = AllZone.getZone(Constant.Zone.Play,
+                        PlayerZone to0 = AllZone.getZone(Constant.Zone.Battlefield,
                                 card.getController().getOpponent());
                         to0.add(crd0);
-                        PlayerZone to1 = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        PlayerZone to1 = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                         to1.add(crd1);
                         
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
                     }
                     
                 }//resolve()
@@ -331,7 +331,7 @@ public class CardFactory_Sorceries {
                     if(index[0] == 1 && c.getController().equals(card.getController())) return;
                     
 
-                    if(c.isLand() && zone.is(Constant.Zone.Play) && CardFactoryUtil.canTarget(card, c)) {
+                    if(c.isLand() && zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c)) {
                         target[index[0]] = c;
                         index[0]++;
                         showMessage();
@@ -496,7 +496,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, getTargetPlayer());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, getTargetPlayer());
                     CardList list = new CardList(play.getCards());
                     list = list.getType("Creature");
                     
@@ -592,16 +592,16 @@ public class CardFactory_Sorceries {
 
                 		target.setController(controllerEOT.get(i));
 
-                		((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                		((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                		((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                		((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
 
                 		newZone[0].remove(target);
                 		orig.get(i).add(target);
                 		target.untap();
                 		target.removeExtrinsicKeyword("Haste");
 
-                		((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                		((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                		((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                		((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
                 		i++;
                 	}
                 }//execute()
@@ -613,7 +613,7 @@ public class CardFactory_Sorceries {
 				@Override
                 public void resolve() {
                 	CardList creatures = AllZoneUtil.getCreaturesInPlay();
-                	newZone[0] = AllZone.getZone(Constant.Zone.Play, card.getController());;
+                	newZone[0] = AllZone.getZone(Constant.Zone.Battlefield, card.getController());;
                 	int i = 0;
                 	for(Card target:creatures) {
                 		if(AllZone.GameAction.isCardInPlay(target)) {
@@ -624,14 +624,14 @@ public class CardFactory_Sorceries {
                 			//set the controller
                 			target.setController(card.getController());
 
-                			((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                			((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                			((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                			((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
                 			
                 			newZone[0].add(target);
                 			orig.get(i).remove(target);
 
-                			((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                			((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                			((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                			((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
 
                 			target.untap();
                 			target.addExtrinsicKeyword("Haste");
@@ -669,7 +669,7 @@ public class CardFactory_Sorceries {
                         
                         //card changes zones
                         AllZone.getZone(c).remove(c);
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                         play.add(c);
                         
                         //shuffle card back into the library
@@ -843,7 +843,7 @@ public class CardFactory_Sorceries {
                     Player player = card.getController();
                     AllZone.Display.showMessage("Sacrifice a Creature: ");
                     ButtonUtil.enableOnlyCancel();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController().getOpponent());                   
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController().getOpponent());                   
                     CardList creature2 = new CardList();
                     creature2.addAll(play.getCards());
                     creature2 = creature2.getType("Creature");                   
@@ -948,7 +948,7 @@ public class CardFactory_Sorceries {
                     PlayerZone Lib = AllZone.getZone(Constant.Zone.Library, card.getController());
                     CardList Deck = new CardList();
                     Deck.addAll(Lib.getCards()); 
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, opponent);                   
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opponent);                   
                     CardList creature = new CardList();
                     creature.addAll(play.getCards());
                     creature = creature.getType("Creature"); 
@@ -1005,7 +1005,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void chooseTargetAI() {
                     //target basic land that Human only has 1 or 2 in play
-                    CardList land = new CardList(AllZone.Human_Play.getCards());
+                    CardList land = new CardList(AllZone.Human_Battlefield.getCards());
                     land = land.getType("Land");
                     
                     Card target = null;
@@ -1034,7 +1034,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList land = new CardList(AllZone.Human_Play.getCards());
+                    CardList land = new CardList(AllZone.Human_Battlefield.getCards());
                     land = land.getType("Land");
                     return land.size() != 0;
                 }
@@ -1061,7 +1061,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void chooseTargetAI() {
                     //target basic land that Human only has 1 or 2 in play
-                    CardList land = new CardList(AllZone.Human_Play.getCards());
+                    CardList land = new CardList(AllZone.Human_Battlefield.getCards());
                     land = land.getType("Land");
                     
                     Card target = null;
@@ -1090,7 +1090,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList land = new CardList(AllZone.Human_Play.getCards());
+                    CardList land = new CardList(AllZone.Human_Battlefield.getCards());
                     land = land.getType("Land");
                     return land.size() != 0;
                 }
@@ -1109,8 +1109,8 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     Player player = card.getController();
-					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
+			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Exile, player);
 					Card[] Attached = card.getAttachedCards(); 
 					RFG.remove(Attached[0]);
 	                play.add(Attached[0]);
@@ -1158,7 +1158,7 @@ public class CardFactory_Sorceries {
 						if(c.isLand() == true) {
 		   					if(CardFactoryUtil.canHumanPlayLand()) {
 		   					// todo(sol): would prefer this in GameAction.playLand somehow
-		    					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+		    					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 				                play.add(c);
 				                card.unattachCard(c);
 				                CardFactoryUtil.playLandEffects(c);
@@ -1212,7 +1212,7 @@ public class CardFactory_Sorceries {
                 
                 public void execute() {
 					Player player = AllZone.Phase.getPlayerTurn();
-					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
+					PlayerZone Play = AllZone.getZone(Constant.Zone.Battlefield, player);
 					Card Minds_D = card;
 					if(player.isHuman()) card.getController().shuffle();
                 		CardList MindsList = new CardList(Play.getCards());
@@ -1227,7 +1227,7 @@ public class CardFactory_Sorceries {
         			        Card c = null;
         			        if(libList.size() > 0) {
         			        	c = libList.get(0);
-            			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+            			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Exile, player);
                                 AllZone.GameAction.moveTo(RFG, c);
                                 Minds_D.attachCard(c); 
         			        }
@@ -1239,7 +1239,7 @@ public class CardFactory_Sorceries {
                                     
                                     public void execute() {
                                     	Player player = AllZone.Phase.getPlayerTurn();
-                    					PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
                     			        	play.remove(Minds);
                                             }
                                 };
@@ -1289,7 +1289,7 @@ public class CardFactory_Sorceries {
                     
                 	}
                 	
-			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play, Player);   
+			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Exile, Player);   
 			        PlayerZone Library = AllZone.getZone(Constant.Zone.Library, Player);  
                     for(int i = 0; i < GraveandLibrary.size(); i++) AllZone.GameAction.moveTo(RFG,GraveandLibrary.get(i));
                     for(int i = 0; i < NewLibrary.size(); i++) AllZone.GameAction.moveTo(Library,NewLibrary.get(i));
@@ -1322,7 +1322,7 @@ public class CardFactory_Sorceries {
                     //check for no cards in hand on resolve
                     PlayerZone Library = AllZone.getZone(Constant.Zone.Library, card.getController());
                     CardList Lib = new CardList(Library.getCards());
-                    PlayerZone Exile = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+                    PlayerZone Exile = AllZone.getZone(Constant.Zone.Exile, card.getController());
                     CardList cards = new CardList();
                     CardList Exiled = new CardList();
                     if(Lib.size() == 0) {
@@ -1434,7 +1434,7 @@ public class CardFactory_Sorceries {
 	                          if(check != null) {
 	              	  					if(((Card) check).isLand() == true) {
 	              	  	   					if(CardFactoryUtil.canHumanPlayLand()) {
-		              	    					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+		              	    					PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
 		              	    					GameAction.playLand((Card)check, play);
 	              	  	   					} else {
 	              	  	   					JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
@@ -1456,7 +1456,7 @@ public class CardFactory_Sorceries {
 	                          if(check != null) {
             	  					if(((Card) check).isLand() == true) {
             	  	   					if(CardFactoryUtil.canHumanPlayLand()) {
-            	  	   						PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+            	  	   						PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
             	  	   						GameAction.playLand((Card)check, play);
             	  	   					} else {
             	  	   					JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
@@ -1529,7 +1529,7 @@ public class CardFactory_Sorceries {
                             if(o != null) {
                                 //put card in hand
                                 AllZone.Human_Library.remove(o);
-                                AllZone.Human_Play.add((Card) o);
+                                AllZone.Human_Battlefield.add((Card) o);
                             }
                         }//if
                     	
@@ -1550,7 +1550,7 @@ public class CardFactory_Sorceries {
                             card.getController().shuffle();
                             //move to hand
                             AllZone.Computer_Library.remove(c);
-                            AllZone.Computer_Play.add(c);
+                            AllZone.Computer_Battlefield.add(c);
                             
                             CardList l = new CardList();
                             l.add(c);
@@ -1611,10 +1611,10 @@ public class CardFactory_Sorceries {
                     	}
                     };
                     
-                    CardList humCreats = new CardList(AllZone.Human_Play.getCards());
+                    CardList humCreats = new CardList(AllZone.Human_Battlefield.getCards());
                     humCreats = humCreats.filter(filter);
                     
-                    CardList compCreats = new CardList(AllZone.Computer_Play.getCards());
+                    CardList compCreats = new CardList(AllZone.Computer_Battlefield.getCards());
                     compCreats = compCreats.filter(filter);
                     
                     return humCreats.size() > compCreats.size();
@@ -1624,8 +1624,8 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     CardList all = new CardList();
-                    all.addAll(AllZone.Human_Play.getCards());
-                    all.addAll(AllZone.Computer_Play.getCards());
+                    all.addAll(AllZone.Human_Battlefield.getCards());
+                    all.addAll(AllZone.Computer_Battlefield.getCards());
                     all = all.getType("Creature");
                     
                     for(int i = 0; i < all.size(); i++)
@@ -1714,9 +1714,9 @@ public class CardFactory_Sorceries {
                     for(int i = 0; i < all.size(); i++)
                         if(all.get(i).getName().equals(c.getName())) {
                             if(player.equals(AllZone.HumanPlayer)) {
-                                AllZone.GameAction.moveTo(AllZone.Human_Removed, all.get(i));
+                                AllZone.GameAction.moveTo(AllZone.Human_Exile, all.get(i));
                             } else {
-                                AllZone.GameAction.moveTo(AllZone.Computer_Removed, all.get(i));
+                                AllZone.GameAction.moveTo(AllZone.Computer_Exile, all.get(i));
                             }
                         }
                 }//remove()
@@ -1791,8 +1791,8 @@ public class CardFactory_Sorceries {
                         if(!getTargetCard().isFaceDown()) {
                             //get all creatures
                             CardList list = new CardList();
-                            list.addAll(AllZone.Human_Play.getCards());
-                            list.addAll(AllZone.Computer_Play.getCards());
+                            list.addAll(AllZone.Human_Battlefield.getCards());
+                            list.addAll(AllZone.Computer_Battlefield.getCards());
                             
                             list = list.getName(getTargetCard().getName());
                             list.remove(getTargetCard());
@@ -1822,7 +1822,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void selectCard(Card card, PlayerZone zone) {
-                    if(zone.is(Constant.Zone.Play) && !card.isLand()) {
+                    if(zone.is(Constant.Zone.Battlefield) && !card.isLand()) {
                         spell.setTargetCard(card);
                         if(this.isFree()) {
                             this.setFree(false);
@@ -1956,7 +1956,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+                    PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, card.getController());
                     
                     if(getTargetCard() != null) {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
@@ -2108,7 +2108,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+                    PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, card.getController());
                     
                     if (getTargetCard() != null) {
                         if (AllZone.GameAction.isCardInPlay(getTargetCard())
@@ -2236,8 +2236,8 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    change(AllZone.Human_Play, card.getController());
-                    change(AllZone.Computer_Play, card.getController());
+                    change(AllZone.Human_Battlefield, card.getController());
+                    change(AllZone.Computer_Battlefield, card.getController());
                 }
                 
                 public void change(PlayerZone play, Player owner) {
@@ -2265,8 +2265,8 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     CardList all = new CardList();
-                    all.addAll(AllZone.Human_Play.getCards());
-                    all.addAll(AllZone.Computer_Play.getCards());
+                    all.addAll(AllZone.Human_Battlefield.getCards());
+                    all.addAll(AllZone.Computer_Battlefield.getCards());
                 	int Soldiers = card.getXManaCostPaid();
                 	for(int i = 0; i < Soldiers; i++) {
                     CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card.getController(), "W", new String[] {
@@ -2282,8 +2282,8 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Play.getCards());
-                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
                     
                     human = human.getType("Creature");
                     computer = computer.getType("Creature");
@@ -2346,8 +2346,8 @@ public class CardFactory_Sorceries {
                     //"Destroy target nonbasic land",
         			for(int i = 0; i <card.getChoices().size(); i++) {
         				if(card.getChoice(i).equals(cardChoice[2])) {
-        			        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-        			        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+        			        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+        			        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
         			     //   CardList all = AllZone.CardFactory.getAllCards();
         			        CardList all = new CardList(Hplay.getCards());
         			        all.add(new CardList(Cplay.getCards()));
@@ -2425,7 +2425,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
-                    if(c.isLand() && zone.is(Constant.Zone.Play) && !c.getType().contains("Basic")) {
+                    if(c.isLand() && zone.is(Constant.Zone.Battlefield) && !c.getType().contains("Basic")) {
                     	if(card.isCopiedSpell()) card.getChoiceTargets().remove(0);
                         m_land[0] = c;
                         spell.setTargetCard(c);
@@ -2492,8 +2492,8 @@ public class CardFactory_Sorceries {
                     
                     //get all
                     CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
+                    list.addAll(AllZone.Human_Battlefield.getCards());
+                    list.addAll(AllZone.Computer_Battlefield.getCards());
                     
                     CardList land = list.getType("Land");
                     CardList basicLand = list.getType("Basic");
@@ -2554,7 +2554,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     Player opponent = card.getController().getOpponent();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, opponent);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opponent);
                     
                     CardList all = new CardList(play.getCards());
                     all = all.getType("Creature");
@@ -2567,7 +2567,7 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Play.getCards());
+                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
                     
                     human = human.getType("Creature");
                     human = human.getNotKeyword("Indestructible");                    
@@ -2591,7 +2591,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     Player opponent = card.getController().getOpponent();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, opponent);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opponent);
                     
                     CardList all = new CardList(play.getCards());
                     all = all.getType("Creature");
@@ -2605,7 +2605,7 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Play.getCards());
+                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
                     
                     human = human.getType("Creature");
                     human = human.getNotKeyword("Indestructible");                    
@@ -2706,7 +2706,7 @@ public class CardFactory_Sorceries {
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, opponent);
                     
                     Card c = selectedCard;
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     //need to set controller before adding it to "play"
                     c.setController(card.getController());
@@ -2890,8 +2890,8 @@ public class CardFactory_Sorceries {
                     
                     //return card to hand if necessary
                     Player opponent = card.getController().getOpponent();
-                    PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play, opponent);
-                    PlayerZone myPlay = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Battlefield, opponent);
+                    PlayerZone myPlay = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     CardList oppList = new CardList(oppPlay.getCards());
                     CardList myList = new CardList(myPlay.getCards());
@@ -2919,11 +2919,11 @@ public class CardFactory_Sorceries {
                 @Override
                 public boolean canPlayAI() {
                     CardList humTokenCreats = new CardList();
-                    humTokenCreats.addAll(AllZone.Human_Play.getCards());
+                    humTokenCreats.addAll(AllZone.Human_Battlefield.getCards());
                     humTokenCreats = getTokenCreats(humTokenCreats);
                     
                     CardList compTokenCreats = new CardList();
-                    compTokenCreats.addAll(AllZone.Computer_Play.getCards());
+                    compTokenCreats.addAll(AllZone.Computer_Battlefield.getCards());
                     compTokenCreats = getTokenCreats(compTokenCreats);
                     
                     return compTokenCreats.size() > humTokenCreats.size();
@@ -2943,8 +2943,8 @@ public class CardFactory_Sorceries {
                 
                     // for each play zone add a copy of each creature token card
                     CardList AllTokenCreatures = new CardList();
-                    AllTokenCreatures.addAll(AllZone.Human_Play.getCards());
-                    AllTokenCreatures.addAll(AllZone.Computer_Play.getCards());
+                    AllTokenCreatures.addAll(AllZone.Human_Battlefield.getCards());
+                    AllTokenCreatures.addAll(AllZone.Computer_Battlefield.getCards());
                     
                     AllTokenCreatures = getTokenCreats(AllTokenCreatures);
                     
@@ -3073,7 +3073,7 @@ public class CardFactory_Sorceries {
                 public void selectCard(Card card, PlayerZone zone) {
                     if(!CardFactoryUtil.canTarget(spell, card)) {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    } else if(card.isCreature() && zone.is(Constant.Zone.Play)) {
+                    } else if(card.isCreature() && zone.is(Constant.Zone.Battlefield)) {
                         spell.setTargetCard(card);
                         if(this.isFree()) 
                         {
@@ -3173,7 +3173,7 @@ public class CardFactory_Sorceries {
                 	// Look for two basic lands: one goes into play tapped, one
                 	// goes into your hand
                 	AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(),
-                			Constant.Zone.Play, true, 
+                			Constant.Zone.Battlefield, true, 
                 			Constant.Zone.Hand, false);
                 }
                 
@@ -3209,7 +3209,7 @@ public class CardFactory_Sorceries {
                     //Vector<?> computerBasic = new Vector();
                     
                     //figure out which basic land types the computer has
-                    CardList land = new CardList(AllZone.Computer_Play.getCards()).getType("Land");
+                    CardList land = new CardList(AllZone.Computer_Battlefield.getCards()).getType("Land");
                     String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp"};
                     
                     for(int i = 0; i < basic.length; i++) {
@@ -3275,13 +3275,13 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
-                    if(c.isLand() && zone.is(Constant.Zone.Play)
+                    if(c.isLand() && zone.is(Constant.Zone.Battlefield)
                             && c.getController().equals(AllZone.HumanPlayer)
                             /*&& c.getName().equals(humanBasic.get(count))*/
                             && c.getType().contains(humanBasic.get(count)) 
                             /*&& !saveList.contains(c) */) {
                         //get all other basic[count] lands human player controls and add them to target
-                        PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                        PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                         CardList land = new CardList(humanPlay.getCards()).getType("Land");
                         CardList cl = land.getType(humanBasic.get(count));
                         cl = cl.filter(new CardListFilter()
@@ -3329,7 +3329,7 @@ public class CardFactory_Sorceries {
                     countBase[0] = 0;
                     //figure out which basic land types the human has
                     //put those in an set to use later
-                    CardList land = new CardList(AllZone.Human_Play.getCards());
+                    CardList land = new CardList(AllZone.Human_Battlefield.getCards());
                     String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp"};
                     
                     for(int i = 0; i < basic.length; i++) {
@@ -3652,8 +3652,8 @@ public class CardFactory_Sorceries {
                 public boolean canPlay() {
                     Player oppPlayer = card.getController().getOpponent();
                     
-                    PlayerZone selfZone = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    PlayerZone oppZone = AllZone.getZone(Constant.Zone.Play, oppPlayer);
+                    PlayerZone selfZone = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                    PlayerZone oppZone = AllZone.getZone(Constant.Zone.Battlefield, oppPlayer);
                     
                     CardList self = new CardList(selfZone.getCards());
                     CardList opp = new CardList(oppZone.getCards());
@@ -3694,8 +3694,8 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone cPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     
                     CardList hList = new CardList(hPlay.getCards());
                     CardList cList = new CardList(cPlay.getCards());
@@ -3731,7 +3731,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList hList = new CardList(hPlay.getCards());
                     hList = hList.getType("Creature");
                     return hList.size() > 0;
@@ -3757,7 +3757,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone hPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList hList = new CardList(hPlay.getCards());
                     hList = hList.getType("Creature");
                     return hList.size() > 0;
@@ -3766,7 +3766,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+                    PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, card.getController());
                     
                     getTargetPlayer().sacrificeCreature();
                     
@@ -3792,7 +3792,7 @@ public class CardFactory_Sorceries {
                 private static final long serialVersionUID = -2902112019334177L;
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     Card biggest = null;
                     if(zone != null) {
                     CardList creature = new CardList();
@@ -3814,11 +3814,11 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void chooseTargetAI() {
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     if(zone != null) {
                     CardList creature = new CardList();
                     creature.addAll(zone.getCards());
-                    creature.addAll(AllZone.getZone(Constant.Zone.Play, card.getController().getOpponent()).getCards());
+                    creature.addAll(AllZone.getZone(Constant.Zone.Battlefield, card.getController().getOpponent()).getCards());
                     creature = creature.getType("Creature"); 
                     creature = creature.filter(new CardListFilter() {
 						public boolean addCard(Card card) {
@@ -3838,7 +3838,7 @@ public class CardFactory_Sorceries {
 
                 if(AllZone.GameAction.isCardInPlay(getTargetCard())
                         && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     PlayerZone_ComesIntoPlay.SimultaneousEntry = true;      
                     double Count = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
                     for(int i = 0; i < Count; i++) {
@@ -3863,7 +3863,7 @@ public class CardFactory_Sorceries {
                 private static final long serialVersionUID = 13762512058673590L;
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     Card biggest = null;
                     if(zone != null) {
                     CardList creature = new CardList();
@@ -3885,7 +3885,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void chooseTargetAI() {
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     if(zone != null) {
                     CardList creature = new CardList();
                     creature.addAll(zone.getCards());
@@ -3908,7 +3908,7 @@ public class CardFactory_Sorceries {
                 	card.setKicked(true);
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                         PlayerZone_ComesIntoPlay.SimultaneousEntry = true;
                         int Count = 5 * AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
                         for(int i = 0; i < Count; i++) {
@@ -3995,7 +3995,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlay() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     CardList list = new CardList(play.getCards());
                     list = list.getType("Artifact");
                     
@@ -4004,7 +4004,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
                     
                     CardList playList = new CardList(play.getCards());
@@ -4034,7 +4034,7 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     Card c = getTargetCard();
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
                     
                     if(AllZone.GameAction.isCardInPlay(c)) {
@@ -4086,7 +4086,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void showMessage() {
                     CardList choice = new CardList();
-                    choice.addAll(AllZone.Human_Play.getCards());
+                    choice.addAll(AllZone.Human_Battlefield.getCards());
                     choice = choice.getType("Artifact");
                     
                     boolean free = false;
@@ -4266,7 +4266,7 @@ public class CardFactory_Sorceries {
                     
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+                    PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, player);
                     CardList libList = new CardList(lib.getCards());
                     CardList grvList = new CardList(grave.getCards());
                     
@@ -4309,7 +4309,7 @@ public class CardFactory_Sorceries {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+                    PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, player);
                     CardList libList = new CardList(lib.getCards());
                     CardList grvList = new CardList(grave.getCards());
                     CardList fullHand = new CardList(hand.getCards());
@@ -4400,7 +4400,7 @@ public class CardFactory_Sorceries {
                     
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    PlayerZone exiled = AllZone.getZone(Constant.Zone.Removed_From_Play, player);
+                    PlayerZone exiled = AllZone.getZone(Constant.Zone.Exile, player);
                     CardList handList = new CardList(hand.getCards());
                     CardList graveList = new CardList(grave.getCards());
                     
@@ -4456,20 +4456,20 @@ public class CardFactory_Sorceries {
                     
                     if(c != null && AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         if(!c.isAura()) {
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
                             
                             PlayerZone from = AllZone.getZone(c);
                             from.remove(c);
                             
                             c.setController(card.getController().getOpponent());
                             
-                            PlayerZone to = AllZone.getZone(Constant.Zone.Play,
+                            PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield,
                                     card.getController().getOpponent());
                             to.add(c);
                             
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
                         } else //Aura
                         {
                             c.setController(card.getController().getOpponent());
@@ -4479,7 +4479,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.getName("Illusions of Grandeur");
                     
                     if(list.size() > 0) {
@@ -4495,7 +4495,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     
                     CardList perms = new CardList();
                     perms.addAll(play.getCards());
@@ -4551,7 +4551,7 @@ public class CardFactory_Sorceries {
               public void resolve()
               {   //grab make 4 creature lists: human_play, human_graveyard, computer_play, computer_graveyard
                  CardList human_play = new CardList();
-                 human_play.addAll(AllZone.Human_Play.getCards());
+                 human_play.addAll(AllZone.Human_Battlefield.getCards());
                  human_play = human_play.filter(new CardListFilter()
                  {
                     public boolean addCard(Card c) { return c.isCreature(); }
@@ -4563,7 +4563,7 @@ public class CardFactory_Sorceries {
                     public boolean addCard(Card c) { return c.isCreature(); }
                  });
                  CardList computer_play = new CardList();
-                 computer_play.addAll(AllZone.Computer_Play.getCards());
+                 computer_play.addAll(AllZone.Computer_Battlefield.getCards());
                  computer_play = computer_play.filter(new CardListFilter()
                  {
                     public boolean addCard(Card c) { return c.isCreature(); }
@@ -4580,7 +4580,7 @@ public class CardFactory_Sorceries {
                  while(it.hasNext())
                  {
                     c = it.next();
-                    AllZone.GameAction.moveTo(AllZone.Human_Play,c);
+                    AllZone.GameAction.moveTo(AllZone.Human_Battlefield,c);
                     AllZone.GameAction.moveTo(AllZone.Human_Graveyard,c);
                  }
                  
@@ -4589,14 +4589,14 @@ public class CardFactory_Sorceries {
                  {
                     c = it.next();
                     AllZone.GameAction.moveTo(AllZone.Human_Graveyard,c);
-                    AllZone.GameAction.moveTo(AllZone.Human_Play,c);
+                    AllZone.GameAction.moveTo(AllZone.Human_Battlefield,c);
                  }
                  
                  it = computer_play.iterator();
                  while(it.hasNext())
                  {
                     c = it.next();
-                    AllZone.GameAction.moveTo(AllZone.Computer_Play,c);
+                    AllZone.GameAction.moveTo(AllZone.Computer_Battlefield,c);
                     AllZone.GameAction.moveTo(AllZone.Computer_Graveyard,c);
                  }
                  
@@ -4605,7 +4605,7 @@ public class CardFactory_Sorceries {
                  {
                     c = it.next();
                     AllZone.GameAction.moveTo(AllZone.Computer_Graveyard,c);
-                    AllZone.GameAction.moveTo(AllZone.Computer_Play,c);
+                    AllZone.GameAction.moveTo(AllZone.Computer_Battlefield,c);
                  }
                  
               }//resolve
@@ -4624,8 +4624,8 @@ public class CardFactory_Sorceries {
 			public void resolve()
     		{
 				
-				  PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-  			      PlayerZone computerPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+				  PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+  			      PlayerZone computerPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
 				
     			  PlayerZone humanGrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
     			  PlayerZone computerGrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
@@ -4734,8 +4734,8 @@ public class CardFactory_Sorceries {
       		{
   				int damage = card.getXManaCostPaid();
   				CardList all = new CardList();
-                  all.addAll(AllZone.Human_Play.getCards());
-                  all.addAll(AllZone.Computer_Play.getCards());
+                  all.addAll(AllZone.Human_Battlefield.getCards());
+                  all.addAll(AllZone.Computer_Battlefield.getCards());
                   all = all.filter(new CardListFilter()
                   {
                   	public boolean addCard(Card c)
@@ -4768,10 +4768,10 @@ public class CardFactory_Sorceries {
   					}
   				};
   				
-  				CardList humanFliers = new CardList(AllZone.Human_Play.getCards());
+  				CardList humanFliers = new CardList(AllZone.Human_Battlefield.getCards());
   			    humanFliers = humanFliers.filter(filter);
   			    
-  			    CardList compFliers = new CardList(AllZone.Computer_Play.getCards());
+  			    CardList compFliers = new CardList(AllZone.Computer_Battlefield.getCards());
   			    compFliers = compFliers.filter(filter);
   			    
   			    return humanFliers.size() > (compFliers.size() + 2) && AllZone.ComputerPlayer.getLife() > maxX + 3;
@@ -4808,8 +4808,8 @@ public class CardFactory_Sorceries {
       		{
   				int damage = card.getXManaCostPaid();
   				CardList all = new CardList();
-                  all.addAll(AllZone.Human_Play.getCards());
-                  all.addAll(AllZone.Computer_Play.getCards());
+                  all.addAll(AllZone.Human_Battlefield.getCards());
+                  all.addAll(AllZone.Computer_Battlefield.getCards());
                   all = all.filter(new CardListFilter()
                   {
                   	public boolean addCard(Card c)
@@ -4842,10 +4842,10 @@ public class CardFactory_Sorceries {
   					}
   				};
   				
-  				CardList human = new CardList(AllZone.Human_Play.getCards());
+  				CardList human = new CardList(AllZone.Human_Battlefield.getCards());
   			    human = human.filter(filter);
   			    
-  			    CardList comp = new CardList(AllZone.Computer_Play.getCards());
+  			    CardList comp = new CardList(AllZone.Computer_Battlefield.getCards());
   			    comp = comp.filter(filter);
   			    
   			    return human.size() > (comp.size() + 2) && AllZone.ComputerPlayer.getLife() > maxX + 3;
@@ -4876,7 +4876,7 @@ public class CardFactory_Sorceries {
 
         		public void resolve()
         		{
-        			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+        			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
         			CardList land = new CardList(play.getCards());
         			land = land.getType("Forest");
         			makeToken();
@@ -4911,8 +4911,8 @@ public class CardFactory_Sorceries {
       		{
   				int damage = card.getXManaCostPaid();
   				CardList all = new CardList();
-                  all.addAll(AllZone.Human_Play.getCards());
-                  all.addAll(AllZone.Computer_Play.getCards());
+                  all.addAll(AllZone.Human_Battlefield.getCards());
+                  all.addAll(AllZone.Computer_Battlefield.getCards());
                   all = all.filter(new CardListFilter()
                   {
                   	public boolean addCard(Card c)
@@ -4945,10 +4945,10 @@ public class CardFactory_Sorceries {
   					}
   				};
   				
-  				CardList human = new CardList(AllZone.Human_Play.getCards());
+  				CardList human = new CardList(AllZone.Human_Battlefield.getCards());
   			    human = human.filter(filter);
   			    
-  			    CardList comp = new CardList(AllZone.Computer_Play.getCards());
+  			    CardList comp = new CardList(AllZone.Computer_Battlefield.getCards());
   			    comp = comp.filter(filter);
   			    
   			    return human.size() > (comp.size() + 2) && AllZone.ComputerPlayer.getLife() > maxX + 3;
@@ -4972,8 +4972,8 @@ public class CardFactory_Sorceries {
 			public void resolve()
       		{
   				CardList all = new CardList();
-                  all.addAll(AllZone.Human_Play.getCards());
-                  all.addAll(AllZone.Computer_Play.getCards());
+                  all.addAll(AllZone.Human_Battlefield.getCards());
+                  all.addAll(AllZone.Computer_Battlefield.getCards());
                   all = all.filter(new CardListFilter()
                   {
                   	public boolean addCard(Card c)
@@ -4999,10 +4999,10 @@ public class CardFactory_Sorceries {
   					}
   				};
   				
-  				CardList humanAll = new CardList(AllZone.Human_Play.getCards());
+  				CardList humanAll = new CardList(AllZone.Human_Battlefield.getCards());
   			    humanAll = humanAll.filter(filter);
   			    
-  			    CardList compAll = new CardList(AllZone.Computer_Play.getCards());
+  			    CardList compAll = new CardList(AllZone.Computer_Battlefield.getCards());
   			    compAll = compAll.filter(filter);
   			    
   			    return humanAll.size() > (compAll.size() + 2);
@@ -5064,7 +5064,7 @@ public class CardFactory_Sorceries {
   				int damage = card.getXManaCostPaid();
   				
   				Player player = getTargetPlayer();
-  				PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+  				PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
                   CardList list = new CardList(play.getCards());
                   
                   list = list.filter(new CardListFilter()
@@ -5098,7 +5098,7 @@ public class CardFactory_Sorceries {
   					}
   				};
   				
-  				CardList killableCreatures = new CardList(AllZone.Human_Play.getCards());
+  				CardList killableCreatures = new CardList(AllZone.Human_Battlefield.getCards());
   				killableCreatures = killableCreatures.filter(filter);
   				
   				return (killableCreatures.size() >= 2);    // kill at least two of the human's creatures
@@ -5162,9 +5162,9 @@ public class CardFactory_Sorceries {
 				public void resolve()
         		{
 					//Lands:
-					CardList humLand = new CardList(AllZone.Human_Play.getCards());
+					CardList humLand = new CardList(AllZone.Human_Battlefield.getCards());
         			humLand = humLand.getType("Land");
-        			CardList compLand = new CardList(AllZone.Computer_Play.getCards());
+        			CardList compLand = new CardList(AllZone.Computer_Battlefield.getCards());
         			compLand = compLand.getType("Land");
         			
         			if (compLand.size() > humLand.size())
@@ -5194,9 +5194,9 @@ public class CardFactory_Sorceries {
         			}
         			
         			//Creatures:
-        			CardList humCreats = new CardList(AllZone.Human_Play.getCards());
+        			CardList humCreats = new CardList(AllZone.Human_Battlefield.getCards());
         			humCreats = humCreats.getType("Creature");
-        			CardList compCreats = new CardList(AllZone.Computer_Play.getCards());
+        			CardList compCreats = new CardList(AllZone.Computer_Battlefield.getCards());
         			compCreats = compCreats.getType("Creature");
         				
         			if (compCreats.size() > humCreats.size())
@@ -5217,15 +5217,15 @@ public class CardFactory_Sorceries {
         		public boolean canPlayAI()
         		{
         			int diff = 0;
-        			CardList humLand = new CardList(AllZone.Human_Play.getCards());
+        			CardList humLand = new CardList(AllZone.Human_Battlefield.getCards());
         			humLand = humLand.getType("Land");
-        			CardList compLand = new CardList(AllZone.Computer_Play.getCards());
+        			CardList compLand = new CardList(AllZone.Computer_Battlefield.getCards());
         			compLand = compLand.getType("Land");
         			diff += humLand.size() - compLand.size();
         			
-        			CardList humCreats = new CardList(AllZone.Human_Play.getCards());
+        			CardList humCreats = new CardList(AllZone.Human_Battlefield.getCards());
         			humCreats = humCreats.getType("Creature");
-        			CardList compCreats = new CardList(AllZone.Computer_Play.getCards());
+        			CardList compCreats = new CardList(AllZone.Computer_Battlefield.getCards());
         			compCreats = compCreats.getType("Creature");
         			diff += 1.5 * (humCreats.size() - compCreats.size());
         			
@@ -5286,7 +5286,7 @@ public class CardFactory_Sorceries {
 
         		public boolean canPlayAI()
         		{
-        			PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+        			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
 
         			CardList list = new CardList(play.getCards());
         			list = list.filter(new CardListFilter()
@@ -5452,7 +5452,7 @@ public class CardFactory_Sorceries {
                 }
                 
                 private CardList getCreatures(Player player) {
-                	PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                	PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
                 	CardList creatures = new CardList();
                 	creatures.addAll(play.getCards());
                 	creatures = creatures.filter(new CardListFilter() {
@@ -5681,7 +5681,7 @@ public class CardFactory_Sorceries {
 				@Override
                 public void resolve() {
 					AllZone.GameAction.searchLibraryBasicLand(card.getController(), 
-							Constant.Zone.Play, true);
+							Constant.Zone.Battlefield, true);
 					
 					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(), "", new String[] {
 							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
@@ -6041,7 +6041,7 @@ public class CardFactory_Sorceries {
                                 AllZone.GameAction.exile(tgt);
                             } else {
                                 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, tgt.getOwner());
-                                PlayerZone play = AllZone.getZone(Constant.Zone.Play, tgt.getController());
+                                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, tgt.getController());
                                 play.remove(tgt);
                                 if (lib.size() > 0) {
                                     lib.add(tgt, 1); //add second from top if lib not empty
@@ -6066,7 +6066,7 @@ public class CardFactory_Sorceries {
                 }//chooseTargetAI()
                 
                 CardList getHumanCreatures() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    CardList list = new CardList(AllZone.Human_Battlefield.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isCreature() 
@@ -6245,7 +6245,7 @@ public class CardFactory_Sorceries {
         				}
         			}
 
-        			if(c.isCreature() && zone.is(Constant.Zone.Play)) {
+        			if(c.isCreature() && zone.is(Constant.Zone.Battlefield)) {
         				target[index[0]] = c;
         				index[0]++;
         				showMessage();
@@ -6346,7 +6346,7 @@ public class CardFactory_Sorceries {
                     PlayerZone grave = AllZone.getZone(c);
                     
                     if(AllZone.GameAction.isCardInZone(c, grave) && c.isCreature()) {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                         AllZone.GameAction.moveTo(play, c);
                         c.setController(card.getController());
                     }
@@ -6509,7 +6509,7 @@ public class CardFactory_Sorceries {
                     
                     if(threshold.size() >= 7) {
                         if(AllZone.GameAction.isCardInZone(c, grave)) {
-                            PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                             AllZone.GameAction.moveTo(play, c);
                         }
                     }
@@ -6613,11 +6613,11 @@ public class CardFactory_Sorceries {
         		{
         			int number = getNum();
         			
-        			CardList cPlay = new CardList(AllZone.Computer_Play.getCards());
+        			CardList cPlay = new CardList(AllZone.Computer_Battlefield.getCards());
         			CardList cLands = cPlay.getType("Land");
         			CardList cCreatures = cPlay.getType("Creature");
         			
-        			CardList hPlay = new CardList(AllZone.Human_Play.getCards());
+        			CardList hPlay = new CardList(AllZone.Human_Battlefield.getCards());
         			CardList hLands = hPlay.getType("Land");
         			CardList hCreatures = hPlay.getType("Creature");
         			
@@ -6654,17 +6654,17 @@ public class CardFactory_Sorceries {
         			Player actPlayer = card.getController();
         			Player oppPlayer = actPlayer.getOpponent();
         			
-        			CardList aPlay = new CardList(AllZone.getZone(Constant.Zone.Play, actPlayer).getCards());
+        			CardList aPlay = new CardList(AllZone.getZone(Constant.Zone.Battlefield, actPlayer).getCards());
         			CardList aLands = null;
         			CardList aCreatures = aPlay.getType("Creature");
         			
-        			CardList oPlay = new CardList(AllZone.getZone(Constant.Zone.Play, oppPlayer).getCards());
+        			CardList oPlay = new CardList(AllZone.getZone(Constant.Zone.Battlefield, oppPlayer).getCards());
         			CardList oLands = null;
         			CardList oCreatures = oPlay.getType("Creature");
 
         			for (int i=0; i<number; i++)
         			{
-        				aPlay = new CardList(AllZone.getZone(Constant.Zone.Play, actPlayer).getCards());
+        				aPlay = new CardList(AllZone.getZone(Constant.Zone.Battlefield, actPlayer).getCards());
         				aLands = aPlay.getType("Land");
         				if(aLands.size()>0) 
         					actPlayer.sacrificePermanent("Select a Land to sacrifice", aLands);
@@ -6672,7 +6672,7 @@ public class CardFactory_Sorceries {
         			
         			for (int i=0; i<number; i++)
         			{
-        				oPlay = new CardList(AllZone.getZone(Constant.Zone.Play, oppPlayer).getCards());
+        				oPlay = new CardList(AllZone.getZone(Constant.Zone.Battlefield, oppPlayer).getCards());
         				oLands = oPlay.getType("Land");
         				if(oLands.size()>0) 
         					oppPlayer.sacrificePermanent("Select a land to sacrifice", oLands);
@@ -6759,7 +6759,7 @@ public class CardFactory_Sorceries {
                         if(input[0] != "")
                         {
                         	PlayerZone humanGrave = AllZone.getZone(Constant.Zone.Graveyard,AllZone.HumanPlayer);
-                            PlayerZone humanBattlefield = AllZone.getZone(Constant.Zone.Play,AllZone.HumanPlayer);
+                            PlayerZone humanBattlefield = AllZone.getZone(Constant.Zone.Battlefield,AllZone.HumanPlayer);
                             for(Card c:humanGrave.getCards())
                             {
                             	
@@ -6772,7 +6772,7 @@ public class CardFactory_Sorceries {
                         }
                         
                         PlayerZone computerGrave = AllZone.getZone(Constant.Zone.Graveyard,AllZone.ComputerPlayer);
-                        PlayerZone computerBattlefield = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                        PlayerZone computerBattlefield = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                         for(Card c:computerGrave.getCards())
                         {
                             if(c.isType(input[1]))
@@ -6866,7 +6866,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void selectCard(Card c, PlayerZone zone) {
-                    if(!c.isArtifact() && c.isCreature() && zone.is(Constant.Zone.Play)) {
+                    if(!c.isArtifact() && c.isCreature() && zone.is(Constant.Zone.Battlefield)) {
                         target[index[0]] = c;
                         index[0]++;
                         showMessage();
@@ -6921,17 +6921,17 @@ public class CardFactory_Sorceries {
                     Card c = getTargetCard();
                     c.setController(card.getController());
                     
-                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
                     
                     PlayerZone from = AllZone.getZone(c);
-                    PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     from.remove(c);
                     to.add(c);
                     
-                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                    ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                    ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
                     
                 }//resolve()
             };

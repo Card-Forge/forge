@@ -10,7 +10,7 @@ public class SpellAbility_Restriction {
 	// The CanPlay function will use these values to determine if the current game state is ok with these restrictions
 	
 	// default values for Sorcery speed abilities
-	private String activateZone = Constant.Zone.Play;
+	private String activateZone = Constant.Zone.Battlefield;
 
 	public void setActivateZone(String zone){
 		activateZone = zone;

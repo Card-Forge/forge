@@ -390,7 +390,7 @@ public class CardFactoryUtil {
     }
     
     public static CardList AI_getHumanArtifact(final Card spell, boolean targeted) {
-        CardList artifact = new CardList(AllZone.Human_Play.getCards());
+        CardList artifact = new CardList(AllZone.Human_Battlefield.getCards());
         artifact = artifact.getType("Artifact");
         if(targeted) {
             artifact = artifact.filter(new CardListFilter() {
@@ -403,7 +403,7 @@ public class CardFactoryUtil {
     }
     
     public static CardList AI_getHumanEnchantment(final Card spell, boolean targeted) {
-        CardList enchantment = new CardList(AllZone.Human_Play.getCards());
+        CardList enchantment = new CardList(AllZone.Human_Battlefield.getCards());
         enchantment = enchantment.getType("Enchantment");
         if(targeted) {
             enchantment = enchantment.filter(new CardListFilter() {
@@ -627,7 +627,7 @@ public class CardFactoryUtil {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Play)
+                if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Battlefield)
                         && (!targeted || canTarget(spell, card))) {
                     spell.setTargetCard(card);
                     done();
@@ -714,7 +714,7 @@ public class CardFactoryUtil {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if(!card.isCreature() && zone.is(Constant.Zone.Play)) {
+                if(!card.isCreature() && zone.is(Constant.Zone.Battlefield)) {
                     spell.setTargetCard(card);
                     done();
                 }
@@ -752,7 +752,7 @@ public class CardFactoryUtil {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if(card.isPermanent() && zone.is(Constant.Zone.Play)) {
+                if(card.isPermanent() && zone.is(Constant.Zone.Battlefield)) {
                     spell.setTargetCard(card);
                     done();
                 }
@@ -890,7 +890,7 @@ public class CardFactoryUtil {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if(zone.equals(AllZone.Human_Play) && list.contains(card)) {
+                if(zone.equals(AllZone.Human_Battlefield) && list.contains(card)) {
                     AllZone.GameAction.sacrifice(card);
                     n++;
                     list.remove(card);
@@ -1073,7 +1073,7 @@ public class CardFactoryUtil {
             public void resolve() {
                 PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
                 //PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, sourceCard.getController());
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, sourceCard.getController());
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sourceCard.getController());
                 
                 grave.remove(sourceCard);
                 play.add(sourceCard);
@@ -1178,7 +1178,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
                 
                 //card.setName("Morph");
                 sourceCard.setIsFaceDown(true);
@@ -1306,7 +1306,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, sourceCard.getController());
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, sourceCard.getController());
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sourceCard.getController());
                 
                 CardList mercs = new CardList();
                 CardList list = new CardList(lib.getCards());
@@ -1401,7 +1401,7 @@ public class CardFactoryUtil {
             public void resolve() {
                 
                 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, sourceCard.getController());
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, sourceCard.getController());
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sourceCard.getController());
                 
                 CardList rebels = new CardList();
                 CardList list = new CardList(lib.getCards());
@@ -1430,7 +1430,7 @@ public class CardFactoryUtil {
                         if(rebel.isAura()) {
                             Object obj = null;
                             if(rebel.getKeyword().contains("Enchant creature")) {
-                                PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                                PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                                 CardList creats = new CardList(play.getCards());
                                 creats.addAll(oppPlay.getCards());
                                 creats = creats.getType("Creature");
@@ -1702,7 +1702,7 @@ public class CardFactoryUtil {
             // An animated artifact equipmemt can't equip a creature
             @Override
             public boolean canPlay() {
-                return AllZone.getZone(sourceCard).is(Constant.Zone.Play) 
+                return AllZone.getZone(sourceCard).is(Constant.Zone.Battlefield) 
                         && !sourceCard.isCreature() 
                         && Phase.canCastSorcery(sourceCard.getController());
             }
@@ -1720,7 +1720,7 @@ public class CardFactoryUtil {
             }
             
             CardList getCreature() {
-                CardList list = new CardList(AllZone.Computer_Play.getCards());
+                CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
                         return c.isCreature() 
@@ -1767,7 +1767,7 @@ public class CardFactoryUtil {
             public void showMessage() {
                 //get all creatures you control
                 CardList list = new CardList();
-                list.addAll(AllZone.Human_Play.getCards());
+                list.addAll(AllZone.Human_Battlefield.getCards());
                 list = list.getType("Creature");
                 
                 stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip",
@@ -1858,7 +1858,7 @@ public class CardFactoryUtil {
             }// CanPlay (for auras with Flash)
 			
             public boolean canPlayAI() {
-                CardList list = new CardList(AllZone.Computer_Play.getCards());
+                CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                 list = list.getType("Creature");
                 
                 if (list.isEmpty()) return false;
@@ -1866,7 +1866,7 @@ public class CardFactoryUtil {
                 //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                 
                 if (Tough >= -1) {    // we want Rabid Wombat or a Uril, the Miststalker to gain at least +1 toughness
-                    CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
+                    CardList auraMagnetList = new CardList(AllZone.Computer_Battlefield.getCards());
                     auraMagnetList = auraMagnetList.getEnchantMagnets();
                     
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
@@ -1918,7 +1918,7 @@ public class CardFactoryUtil {
             }//canPlayAI()
 
 			public void resolve() {
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, sourceCard.getController());
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sourceCard.getController());
                 play.add(sourceCard);
                 
                 Card c = getTargetCard();
@@ -2063,7 +2063,7 @@ public class CardFactoryUtil {
             }// CanPlay (for auras with Flash)
 			
             public boolean canPlayAI() {
-                CardList list = new CardList(AllZone.Human_Play.getCards());    // Target human creature
+                CardList list = new CardList(AllZone.Human_Battlefield.getCards());    // Target human creature
                 list = list.getType("Creature");
                 
                 if (list.isEmpty()) return false;
@@ -2131,7 +2131,7 @@ public class CardFactoryUtil {
             }//canPlayAI()
 
 			public void resolve() {
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, sourceCard.getController());
+                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, sourceCard.getController());
                 play.add(sourceCard);
                 
                 Card c = getTargetCard();
@@ -2288,8 +2288,8 @@ public class CardFactoryUtil {
         @Override
         public void showMessage() {
             CardList allCards = new CardList();
-            allCards.addAll(AllZone.Human_Play.getCards());
-            allCards.addAll(AllZone.Computer_Play.getCards());
+            allCards.addAll(AllZone.Human_Battlefield.getCards());
+            allCards.addAll(AllZone.Computer_Battlefield.getCards());
             
             CardList choices = allCards.getValidCards(Tgts,sa.getActivatingPlayer(),sa.getSourceCard());
             boolean free = false;
@@ -2384,7 +2384,7 @@ public class CardFactoryUtil {
 	        public void showMessage() {
 	            //get all creatures you control
 	            CardList list = new CardList();
-	            list.addAll(AllZone.Human_Play.getCards());
+	            list.addAll(AllZone.Human_Battlefield.getCards());
 	            list = list.getType("Creature");
 	            
 	            stopSetNext(input_targetSpecific(equip, list,
@@ -2562,7 +2562,7 @@ public class CardFactoryUtil {
         		  AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
         	  }
         	  
-        	  else if( foundCardType && zone.is(Constant.Zone.Play)) {
+        	  else if( foundCardType && zone.is(Constant.Zone.Battlefield)) {
                 spell.setTargetCard(card);
                 if(spell.getManaCost().equals("0") || this.isFree())//for "sacrifice this card" abilities
                 {
@@ -2603,7 +2603,7 @@ public class CardFactoryUtil {
             public void selectCard(Card card, PlayerZone zone) {
                 if(!canTarget(spell, card)) {
                     AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                } else if(card.isCreature() && zone.is(Constant.Zone.Play)) {
+                } else if(card.isCreature() && zone.is(Constant.Zone.Battlefield)) {
                     spell.setTargetCard(card);
                     done();
                 }
@@ -2647,7 +2647,7 @@ public class CardFactoryUtil {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if(card.isCreature() && zone.is(Constant.Zone.Play) && canTarget(spell, card)) {
+                if(card.isCreature() && zone.is(Constant.Zone.Battlefield) && canTarget(spell, card)) {
                     spell.setTargetCard(card);
                     spell.getSourceCard().tap();
                     AllZone.Stack.add(spell);
@@ -2679,7 +2679,7 @@ public class CardFactoryUtil {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if(card.isCreature() && zone.is(Constant.Zone.Play) && canTarget(spell, card)
+                if(card.isCreature() && zone.is(Constant.Zone.Battlefield) && canTarget(spell, card)
                 		&& card.getKeyword().contains(keyword)) {
                     spell.setTargetCard(card);
                     spell.getSourceCard().tap();
@@ -2739,7 +2739,7 @@ public class CardFactoryUtil {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Play)
+                if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Battlefield)
                         && (canTarget(spell, card))) {
                     spell.setTargetCard(card);
                     paid.execute();
@@ -2779,7 +2779,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(Card card, PlayerZone zone) {
             	if(choices.size() == 0) stop();
-                if(card.isPermanent() && zone.is(Constant.Zone.Play) && canTarget(spell, card) && choices.contains(card)) {
+                if(card.isPermanent() && zone.is(Constant.Zone.Battlefield) && canTarget(spell, card) && choices.contains(card)) {
                     spell.setTargetCard(card);
                     paid.execute();
                         stop();                  
@@ -2809,7 +2809,7 @@ public class CardFactoryUtil {
                 if(card == spell.getSourceCard()) {
                     AllZone.Display.showMessage("You must select a target creature other than "
                             + spell.getSourceCard().getName());
-                } else if(card.isCreature() && zone.is(Constant.Zone.Play)
+                } else if(card.isCreature() && zone.is(Constant.Zone.Battlefield)
                         && !card.getKeyword().contains("Shroud")) {
                     spell.setTargetCard(card);
                     spell.getSourceCard().tap();
@@ -2972,7 +2972,7 @@ public class CardFactoryUtil {
 	        
 	        @Override
 	        public void selectCard(Card card2, PlayerZone zone) {
-	            if(card2.isCreature() && card2.isArtifact() && zone.is(Constant.Zone.Play)
+	            if(card2.isCreature() && card2.isArtifact() && zone.is(Constant.Zone.Battlefield)
 	                    && CardFactoryUtil.canTarget(ability, card)) {
 	            	ability.setTargetCard(card2);
 	            	ability.setStackDescription("Put " + card.getCounters(Counters.P1P1)
@@ -2987,7 +2987,7 @@ public class CardFactoryUtil {
     
     
     public static CardList AI_getHumanCreature(final Card spell, boolean targeted) {
-        CardList creature = new CardList(AllZone.Human_Play.getCards());
+        CardList creature = new CardList(AllZone.Human_Battlefield.getCards());
         creature = creature.getType("Creature");
         if(targeted) {
             creature = creature.filter(new CardListFilter() {
@@ -3000,7 +3000,7 @@ public class CardFactoryUtil {
     }
     
     public static CardList AI_getHumanCreature(final String keyword, final Card spell, final boolean targeted) {
-        CardList creature = new CardList(AllZone.Human_Play.getCards());
+        CardList creature = new CardList(AllZone.Human_Battlefield.getCards());
         creature = creature.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 if(targeted) return c.isCreature() && c.getKeyword().contains(keyword) && canTarget(spell, c);
@@ -3011,7 +3011,7 @@ public class CardFactoryUtil {
     }//AI_getHumanCreature()
     
     public static CardList AI_getHumanCreature(final int toughness, final Card spell, final boolean targeted) {
-        CardList creature = new CardList(AllZone.Human_Play.getCards());
+        CardList creature = new CardList(AllZone.Human_Battlefield.getCards());
         creature = creature.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 if(targeted) return c.isCreature() && (c.getNetDefense() <= toughness) && canTarget(spell, c);
@@ -3022,7 +3022,7 @@ public class CardFactoryUtil {
     }//AI_getHumanCreature()
     
     public static CardList AI_getHumanCreature(final boolean lower, final int manaCost, final Card spell, final boolean targeted) {
-        CardList creature = new CardList(AllZone.Human_Play.getCards());
+        CardList creature = new CardList(AllZone.Human_Battlefield.getCards());
         creature = creature.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 if(targeted && lower) return c.isCreature()
@@ -3045,7 +3045,7 @@ public class CardFactoryUtil {
             public void execute(Object o) {
                 SpellAbility sa = (SpellAbility) o;
                 
-                CardList creature = new CardList(AllZone.Human_Play.getCards());
+                CardList creature = new CardList(AllZone.Human_Battlefield.getCards());
                 creature = creature.getType("Creature");
                 Card c = getRandomCard(creature);
                 
@@ -3110,8 +3110,8 @@ public class CardFactoryUtil {
     
     public static int getNumberOfPermanentsByColor(String color) {
         CardList cards = new CardList();
-        cards.addAll(AllZone.Human_Play.getCards());
-        cards.addAll(AllZone.Computer_Play.getCards());
+        cards.addAll(AllZone.Human_Battlefield.getCards());
+        cards.addAll(AllZone.Computer_Battlefield.getCards());
         
         CardList coloredPerms = new CardList();
         
@@ -3130,7 +3130,7 @@ public class CardFactoryUtil {
     }
     
     public static boolean controlsAnotherMulticoloredPermanent(Card c) {
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
         
         final Card crd = c;
         
@@ -3148,7 +3148,7 @@ public class CardFactoryUtil {
     }
     
     public static boolean controlsAnotherColoredCreature(Card c, String color) {
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
         
         final Card crd = c;
         final String col = color;
@@ -3167,7 +3167,7 @@ public class CardFactoryUtil {
     
     public static boolean oppHasKismet(Player player) {
         Player opp = player.getOpponent();
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, opp);
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opp);
         CardList list = new CardList(play.getCards());
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
@@ -3285,7 +3285,7 @@ public class CardFactoryUtil {
     	}
     	else{
 	    	// If an Aura's target is removed before it resolves, the Aura fizzles
-	    	if (source.isAura() && !AllZone.getZone(target).is(Constant.Zone.Play))
+	    	if (source.isAura() && !AllZone.getZone(target).is(Constant.Zone.Battlefield))
 	    		return false;
     	}
     	
@@ -3311,7 +3311,7 @@ public class CardFactoryUtil {
         
         PlayerZone zone = AllZone.getZone(target);
         // if zone is null, it means its on the stack 
-        if (zone == null || !zone.is(Constant.Zone.Play)){	
+        if (zone == null || !zone.is(Constant.Zone.Battlefield)){	
         	// targets not in play, can normally be targeted
         	return true;
         }
@@ -3528,8 +3528,8 @@ public class CardFactoryUtil {
         Player cardController = c.getController();
         Player oppController = cardController.getOpponent();
         
-        PlayerZone myField = AllZone.getZone(Constant.Zone.Play, cardController);
-        PlayerZone opField = AllZone.getZone(Constant.Zone.Play, oppController);
+        PlayerZone myField = AllZone.getZone(Constant.Zone.Battlefield, cardController);
+        PlayerZone opField = AllZone.getZone(Constant.Zone.Battlefield, oppController);
         
         PlayerZone myYard = AllZone.getZone(Constant.Zone.Graveyard, cardController);
         PlayerZone opYard = AllZone.getZone(Constant.Zone.Graveyard, oppController);
@@ -3984,13 +3984,13 @@ public class CardFactoryUtil {
         {
         	CardList ut = new CardList();
         	if (d[0].contains("YouCtrl"))
-        		ut.addAll(AllZone.getZone(Constant.Zone.Play, dbPlayer).getCards());
+        		ut.addAll(AllZone.getZone(Constant.Zone.Battlefield, dbPlayer).getCards());
         	else if (d[0].contains("OppCtrl"))
-        		ut.addAll(AllZone.getZone(Constant.Zone.Play, Opp).getCards());
+        		ut.addAll(AllZone.getZone(Constant.Zone.Battlefield, Opp).getCards());
         	else
         	{
-        		ut.addAll(AllZone.getZone(Constant.Zone.Play, dbPlayer).getCards());
-        		ut.addAll(AllZone.getZone(Constant.Zone.Play, Opp).getCards());
+        		ut.addAll(AllZone.getZone(Constant.Zone.Battlefield, dbPlayer).getCards());
+        		ut.addAll(AllZone.getZone(Constant.Zone.Battlefield, Opp).getCards());
         	}
         	if (d[0].contains("Type"))
         	{
@@ -4009,7 +4009,7 @@ public class CardFactoryUtil {
         		AllZone.InputControl.setInput(CardFactoryUtil.input_UntapUpToNType(n, d[2]));
         	else
         	{
-                CardList list = new CardList(AllZone.Computer_Play.getCards());
+                CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                 list = list.getType(d[2]);
                 list = list.getTapState("Tapped");
                 
@@ -4084,7 +4084,7 @@ public class CardFactoryUtil {
             
             @Override
             public void selectCard(Card card, PlayerZone zone) {
-                if(card.isLand() && zone.is(Constant.Zone.Play)) {
+                if(card.isLand() && zone.is(Constant.Zone.Battlefield)) {
                     card.untap();
                     count++;
                     if(count == stop) stop();
@@ -4165,13 +4165,13 @@ public class CardFactoryUtil {
         String s = "";
         //TODO, take into account what human has
         
-        PlayerZone humanPlayZone = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+        PlayerZone humanPlayZone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
         PlayerZone humanLibZone = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
         
         CardList humanPlay = new CardList(humanPlayZone.getCards());
         CardList humanLib = new CardList(humanLibZone.getCards());
         
-        PlayerZone compPlayZone = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+        PlayerZone compPlayZone = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
         PlayerZone compLibZone = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
         PlayerZone compHandZone = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
         
@@ -4238,7 +4238,7 @@ public class CardFactoryUtil {
     
     public static int countBasicLandTypes(Player player) {
         String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp"};
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
         CardList list = new CardList(play.getCards());
         int count = 0;
         
@@ -4252,7 +4252,7 @@ public class CardFactoryUtil {
     public static String getPropagandaCost(Card c) {
         String s = "";
         
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController().getOpponent());
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController().getOpponent());
         CardList list = new CardList(play.getCards());
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
@@ -4275,7 +4275,7 @@ public class CardFactoryUtil {
     }
     
     public static int getUsableManaSources(Player player) {
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
         CardList list = new CardList(play.getCards());
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
@@ -4341,7 +4341,7 @@ public class CardFactoryUtil {
         for(String kw:intrinsicKeywords)
             c.addIntrinsicKeyword(kw);
         
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
         
         int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(controller);
         for(int i = 0; i < multiplier; i++) {

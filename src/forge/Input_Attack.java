@@ -10,7 +10,7 @@ public class Input_Attack extends Input {
         ButtonUtil.enableOnlyOK();
         AllZone.Display.showMessage("Declare Attackers: Select creatures that you want to attack with");
         
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
         CardList creats = new CardList(play.getCards());
         creats = creats.getType("Creature");
         
@@ -43,7 +43,7 @@ public class Input_Attack extends Input {
     //return Computer's planeswalker if there is one
     //just returns 1, does not return multiple planeswalkers
     private Card getPlaneswalker() {
-        CardList c = new CardList(AllZone.Computer_Play.getCards());
+        CardList c = new CardList(AllZone.Computer_Battlefield.getCards());
         c = c.getType("Planeswalker");
         
         if(c.isEmpty()) return null;
@@ -53,13 +53,13 @@ public class Input_Attack extends Input {
     
     @Override
     public void selectCard(Card card, PlayerZone zone) {
-        if(zone.is(Constant.Zone.Play, AllZone.HumanPlayer) && card.isCreature() && card.isUntapped()
+        if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && card.isCreature() && card.isUntapped()
                 && CombatUtil.canAttack(card)) {
             
             if(!card.getKeyword().contains("Vigilance")) {
                 card.tap();
                 //otherwise cards stay untapped, not sure why this is needed but it works
-                AllZone.Human_Play.updateObservers();
+                AllZone.Human_Battlefield.updateObservers();
             }
             AllZone.Combat.addAttacker(card);
             

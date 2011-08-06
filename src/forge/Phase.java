@@ -364,7 +364,7 @@ public class Phase extends MyObservable
 	        if (list.size() == 1){
 	        	AllZone.GameAction.checkWheneverKeyword(list.get(0), "Attack - Alone", null);
 	            Player attackingPlayer = AllZone.Combat.getAttackingPlayer();
-	            PlayerZone play = AllZone.getZone(Constant.Zone.Play, attackingPlayer);
+	            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, attackingPlayer);
 	            CardList exalted = new CardList(play.getCards());
 	            exalted = exalted.filter(new CardListFilter() {
 	                public boolean addCard(Card c) {
@@ -531,7 +531,7 @@ public class Phase extends MyObservable
     
     public void resetAttackedThisCombat(Player player) {
         // resets the status of attacked/blocked this phase
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
         
         CardList list = new CardList();
         list.addAll(play.getCards());

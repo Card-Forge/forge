@@ -38,13 +38,13 @@ public class Spell_Permanent extends Spell {
     	
         //check on legendary
         if(card.getType().contains("Legendary")) {
-        	CardList list = new CardList(AllZone.Computer_Play.getCards());
+        	CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
             if (list.containsName(card.getName()) /*&&
             	!getSourceCard().getName().equals("Flagstones of Trokair")*/)
             	return false;
         }
         if(card.getType().contains("Planeswalker")) {
-        	CardList list = new CardList(AllZone.Computer_Play.getCards());
+        	CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
         	list = list.getType("Planeswalker");
         	
         	for (int i=0;i<list.size();i++)
@@ -58,7 +58,7 @@ public class Spell_Permanent extends Spell {
         	}
         }
         if(card.getType().contains("World")) {
-        	CardList list = new CardList(AllZone.Computer_Play.getCards());
+        	CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
         	list = list.getType("World");
         	if(list.size() > 0) return false;
         }
@@ -72,7 +72,7 @@ public class Spell_Permanent extends Spell {
     @Override
     public void resolve() {
         Card c = getSourceCard();
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
         play.add(c);
     }
 }

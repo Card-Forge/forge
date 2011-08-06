@@ -41,7 +41,7 @@ class CardFactory_Equipment {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && Phase.canCastSorcery(card.getController())
                             && super.canPlay();
                 }
@@ -61,7 +61,7 @@ class CardFactory_Equipment {
                 }
                 
                 CardList getCreature() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isCreature() 
@@ -143,7 +143,7 @@ class CardFactory_Equipment {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && AllZone.Phase.getPlayerTurn().equals(card.getController())
                             && !AllZone.Phase.getPhase().equals("End of Turn")
                             && !AllZone.Phase.getPhase().equals(
@@ -250,7 +250,7 @@ class CardFactory_Equipment {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && Phase.canCastSorcery(getSourceCard().getController())
                             && super.canPlay();
                 }
@@ -269,7 +269,7 @@ class CardFactory_Equipment {
                 }
                 
                 CardList getCreature() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isCreature() 
@@ -324,7 +324,7 @@ class CardFactory_Equipment {
         		//not changed
         		@Override
         		public boolean canPlay() {
-        			return AllZone.getZone(card).is(Constant.Zone.Play)
+        			return AllZone.getZone(card).is(Constant.Zone.Battlefield)
         					&& Phase.canCastSorcery(card.getController())
         					&& super.canPlay();
         		}
@@ -346,7 +346,7 @@ class CardFactory_Equipment {
 
         		//not changed
         		CardList getCreature() {
-        			CardList list = new CardList(AllZone.Computer_Play.getCards());
+        			CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
         			list = list.filter(new CardListFilter() {
         				public boolean addCard(Card c) {
         					return c.isCreature() 
@@ -428,7 +428,7 @@ class CardFactory_Equipment {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && Phase.canCastSorcery(getSourceCard().getController())
                             && super.canPlay();
                 }
@@ -447,7 +447,7 @@ class CardFactory_Equipment {
                 }
                 
                 CardList getCreature() {    // build list and do some pruning
-                	CardList list = new CardList(AllZone.Computer_Play.getCards());
+                	CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                 	list = list.filter(new CardListFilter() {
                 		public boolean addCard(Card c) {
                 			return c.isCreature() 
@@ -515,7 +515,7 @@ class CardFactory_Equipment {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && Phase.canCastSorcery(getSourceCard().getController())
                             && super.canPlay();
                 }
@@ -534,7 +534,7 @@ class CardFactory_Equipment {
                 }
                 
                 CardList getCreature() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isCreature() 
@@ -616,7 +616,7 @@ class CardFactory_Equipment {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && Phase.canCastSorcery(getSourceCard().getController())
                             && super.canPlay();
                 }
@@ -635,7 +635,7 @@ class CardFactory_Equipment {
                 }
                 
                 CardList getCreature() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isCreature() 
@@ -719,7 +719,7 @@ class CardFactory_Equipment {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                    return AllZone.getZone(card).is(Constant.Zone.Battlefield)
                             && AllZone.Phase.getPlayerTurn().equals(card.getController())
                             && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
                             && super.canPlay();
@@ -739,7 +739,7 @@ class CardFactory_Equipment {
                 }
                 
                 CardList getCreature() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isCreature() 

@@ -270,7 +270,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 Object o = playerLandPanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
                     CardContainer cardPanel = (CardContainer) o;
-                    inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
+                    inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Battlefield);
                 }
             }
         });
@@ -281,7 +281,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 Object o = playerCreaturePanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
                     CardContainer cardPanel = (CardContainer) o;
-                    inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
+                    inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Battlefield);
                 }
             }
         });
@@ -306,7 +306,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 Object o = oppLandPanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
                     CardContainer cardPanel = (CardContainer) o;
-                    inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Play);
+                    inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Battlefield);
                 }
             }
         });
@@ -318,7 +318,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 Object o = oppCreaturePanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
                     CardContainer cardPanel = (CardContainer) o;
-                    inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Play);
+                    inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Battlefield);
                 }
             }
         });
@@ -454,19 +454,19 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
         //END, self hand
         
         //self play (land)
-        AllZone.Human_Play.addObserver(new Observer() {
+        AllZone.Human_Battlefield.addObserver(new Observer() {
             public void update(Observable a, Object b) {
                 //PlayerZone pZone = (PlayerZone)a; //unused
                 JPanel p = playerLandPanel;
                 p.removeAll();
                 
-                Card[] c = AllZone.Human_Play.getCards();
+                Card[] c = AllZone.Human_Battlefield.getCards();
                 
                 //change card names
                 if(AllZone.NameChanger.shouldChangeCardName()) {
-                    AllZone.Human_Play.setUpdate(false);
+                    AllZone.Human_Battlefield.setUpdate(false);
                     c = AllZone.NameChanger.changeCard(c);
-                    AllZone.Human_Play.setUpdate(true);
+                    AllZone.Human_Battlefield.setUpdate(true);
                 }
                 
                 GuiDisplayUtil.setupLandPanel(p, c);
@@ -475,24 +475,24 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 p.repaint();
             }
         });
-        AllZone.Human_Play.updateObservers();
+        AllZone.Human_Battlefield.updateObservers();
         //END - self play (only land)
         
 
         //self play (no land)
-        AllZone.Human_Play.addObserver(new Observer() {
+        AllZone.Human_Battlefield.addObserver(new Observer() {
             public void update(Observable a, Object b) {
                 //PlayerZone pZone = (PlayerZone)a; //unused
                 JPanel p = playerCreaturePanel;
                 p.removeAll();
                 
-                Card[] c = AllZone.Human_Play.getCards();
+                Card[] c = AllZone.Human_Battlefield.getCards();
                 
                 //change card names
                 if(AllZone.NameChanger.shouldChangeCardName()) {
-                    AllZone.Human_Play.setUpdate(false);
+                    AllZone.Human_Battlefield.setUpdate(false);
                     c = AllZone.NameChanger.changeCard(c);
-                    AllZone.Human_Play.setUpdate(true);
+                    AllZone.Human_Battlefield.setUpdate(true);
                 }
                 
                 GuiDisplayUtil.setupNoLandPanel(p, c);
@@ -501,24 +501,24 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 p.repaint();
             }
         });
-        AllZone.Human_Play.updateObservers();
+        AllZone.Human_Battlefield.updateObservers();
         //END - self play (no land)
         
 
         //computer play (no land)
-        AllZone.Computer_Play.addObserver(new Observer() {
+        AllZone.Computer_Battlefield.addObserver(new Observer() {
             public void update(Observable a, Object b) {
                 //PlayerZone pZone = (PlayerZone)a; //unused
                 JPanel p = oppCreaturePanel;
                 p.removeAll();
                 
-                Card[] c = AllZone.Computer_Play.getCards();
+                Card[] c = AllZone.Computer_Battlefield.getCards();
                 
                 //change card names
                 if(AllZone.NameChanger.shouldChangeCardName()) {
-                    AllZone.Computer_Play.setUpdate(false);
+                    AllZone.Computer_Battlefield.setUpdate(false);
                     c = AllZone.NameChanger.changeCard(c);
-                    AllZone.Computer_Play.setUpdate(true);
+                    AllZone.Computer_Battlefield.setUpdate(true);
                 }
                 
                 GuiDisplayUtil.setupNoLandPanel(p, c);
@@ -527,23 +527,23 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 p.repaint();
             }
         });
-        AllZone.Computer_Play.updateObservers();
+        AllZone.Computer_Battlefield.updateObservers();
         //END - computer play (no land)
         
         //computer play (land)
-        AllZone.Computer_Play.addObserver(new Observer() {
+        AllZone.Computer_Battlefield.addObserver(new Observer() {
             public void update(Observable a, Object b) {
                 //PlayerZone pZone = (PlayerZone)a; //unused
                 JPanel p = oppLandPanel;
                 p.removeAll();
                 
-                Card[] c = AllZone.Computer_Play.getCards();
+                Card[] c = AllZone.Computer_Battlefield.getCards();
                 
                 //change card names
                 if(AllZone.NameChanger.shouldChangeCardName()) {
-                    AllZone.Computer_Play.setUpdate(false);
+                    AllZone.Computer_Battlefield.setUpdate(false);
                     c = AllZone.NameChanger.changeCard(c);
-                    AllZone.Computer_Play.setUpdate(true);
+                    AllZone.Computer_Battlefield.setUpdate(true);
                 }
                 
                 GuiDisplayUtil.setupLandPanel(p, c);
@@ -552,7 +552,7 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
                 p.repaint();
             }
         });
-        AllZone.Computer_Play.updateObservers();
+        AllZone.Computer_Battlefield.updateObservers();
         //END - computer play (only land)
         
     }//addObservers()

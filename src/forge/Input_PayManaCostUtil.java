@@ -185,7 +185,7 @@ public class Input_PayManaCostUtil
          } 
          }
          	// High Tide Code
-     	AllZone.Human_Play.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
+     	AllZone.Human_Battlefield.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
      	return manaCost;	
      }
 

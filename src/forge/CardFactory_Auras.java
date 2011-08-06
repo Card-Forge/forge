@@ -68,7 +68,7 @@ class CardFactory_Auras {
                 
                 public boolean canPlayAI() {
 
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isLand() 
@@ -87,7 +87,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -158,7 +158,7 @@ class CardFactory_Auras {
             final SpellAbility a2 = new Ability(card, "0") {
                 @Override
                 public void chooseTargetAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                     CardList saps = new CardList(play.getCards());
                     saps = saps.filter(new CardListFilter() {
                         
@@ -189,7 +189,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
                     CardList cars = new CardList(play.getCards());
                     cars = cars.filter(new CardListFilter() {
                         
@@ -212,7 +212,7 @@ class CardFactory_Auras {
                 @Override
                 public void showMessage() {
                     CardList cars = new CardList(
-                            AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+                            AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards());
                     cars = cars.getType("Caribou");
                     
                     stopSetNext(CardFactoryUtil.input_targetSpecific(a2, cars, "Select a Caribou to sacrifice.",
@@ -237,7 +237,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList land = new CardList();
                     land.addAll(hum.getCards());
                     land = land.filter(new CardListFilter() {
@@ -268,7 +268,7 @@ class CardFactory_Auras {
                 
                 public boolean canPlayAI() {
 
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isLand() 
@@ -287,7 +287,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -367,8 +367,8 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList land = new CardList();
                     land.addAll(comp.getCards());
                     land.addAll(hum.getCards());
@@ -395,7 +395,7 @@ class CardFactory_Auras {
                 @Override
                 public boolean canPlayAI() {
                 	
-                	CardList list = new CardList(AllZone.Computer_Play.getCards());
+                	CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                 	list = list.filter(new CardListFilter() {
                 	    public boolean addCard(Card c) {
                 	        return c.isLand() 
@@ -414,7 +414,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -492,8 +492,8 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList land = new CardList();
                     land.addAll(comp.getCards());
                     land.addAll(hum.getCards());
@@ -541,7 +541,7 @@ class CardFactory_Auras {
                 			|| card.getName().equals("Phantasmal Terrain")) {
                 		String[] LandTypes = new String[] { "Plains","Island","Swamp","Mountain","Forest"};
                     	HashMap<String,Integer> humanLandCount = new HashMap<String,Integer>();
-            			CardList humanlands = new CardList(AllZone.Human_Play.getCards());
+            			CardList humanlands = new CardList(AllZone.Human_Battlefield.getCards());
             			humanlands = humanlands.getType("Land");
             			humanlands = humanlands.filter(new CardListFilter() {
                         	public boolean addCard(Card c) {
@@ -580,7 +580,7 @@ class CardFactory_Auras {
             			
             			NewType[0] = LandTypes[minAt];
                 	}
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    CardList list = new CardList(AllZone.Human_Battlefield.getCards());
                     list = list.getType("Land");
                     list = list.getNotType(NewType[0]); // Don't enchant lands that already have the type
                     if(list.isEmpty()) return false;
@@ -608,7 +608,7 @@ class CardFactory_Auras {
                 			NewType[0] = AllZone.Display.getChoice("Select land type.", "Plains","Island","Swamp","Mountain","Forest");
                 		}
                 	}
-                	PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                	PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -747,8 +747,8 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList land = new CardList();
                     land.addAll(comp.getCards());
                     land.addAll(hum.getCards());
@@ -774,7 +774,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    CardList list = new CardList(AllZone.Human_Battlefield.getCards());
                     list = list.getType("Land");
                     
                     if(list.isEmpty()) return false;
@@ -785,7 +785,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -817,8 +817,8 @@ class CardFactory_Auras {
                 
                 @Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList land = new CardList();
                     land.addAll(comp.getCards());
                     land.addAll(hum.getCards());
@@ -852,7 +852,7 @@ class CardFactory_Auras {
                 	/*
                 	 *  AI targets computer artifact but not artifact equipment
                 	 */
-                	CardList list = new CardList(AllZone.Computer_Play.getCards());
+                	CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                 	list = list.filter(new CardListFilter() {
                 		public boolean addCard(Card c) {
                 			return !c.isCreature() 
@@ -874,7 +874,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -932,8 +932,8 @@ class CardFactory_Auras {
 				// Can't allow an artifact equipment that is equipping a creature to become animated
 				@Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList artifacts = new CardList();
                     artifacts.addAll(comp.getCards());
                     artifacts.addAll(hum.getCards());
@@ -969,7 +969,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    CardList list = new CardList(AllZone.Human_Battlefield.getCards());
                     list = list.getType("Creature").getKeyword("Flying");
                     if(list.isEmpty()) return false;
                     
@@ -992,7 +992,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -1065,7 +1065,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    CardList list = new CardList(AllZone.Human_Battlefield.getCards());
                     list = list.getType("Creature");
                     
                     if(list.isEmpty()) return false;
@@ -1086,7 +1086,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -1154,14 +1154,14 @@ class CardFactory_Auras {
                 @Override
                 public boolean canPlayAI() {
                     
-                    CardList stuffy = new CardList(AllZone.Computer_Play.getCards());
+                    CardList stuffy = new CardList(AllZone.Computer_Battlefield.getCards());
                     stuffy = stuffy.getName("Stuffy Doll");
                     
                     if(stuffy.size() > 0) {
                         setTargetCard(stuffy.get(0));
                         return true;
                     } else {
-                        CardList list = new CardList(AllZone.Human_Play.getCards());
+                        CardList list = new CardList(AllZone.Human_Battlefield.getCards());
                         list = list.getType("Creature");
                         
                         if(list.isEmpty()) return false;
@@ -1185,7 +1185,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -1210,14 +1210,14 @@ class CardFactory_Auras {
                 
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.getType("Creature");
                     
                     if (list.isEmpty()) return false;
                     
                     //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                     
-                    CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
+                    CardList auraMagnetList = new CardList(AllZone.Computer_Battlefield.getCards());
                     auraMagnetList = auraMagnetList.getEnchantMagnets();
                     
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
@@ -1247,7 +1247,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -1316,14 +1316,14 @@ class CardFactory_Auras {
 
 				@Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.getType("Creature");
                     
                     if (list.isEmpty()) return false;
                     
                     //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                     
-                    CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
+                    CardList auraMagnetList = new CardList(AllZone.Computer_Battlefield.getCards());
                     auraMagnetList = auraMagnetList.getEnchantMagnets();
                     
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
@@ -1352,7 +1352,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -1420,14 +1420,14 @@ class CardFactory_Auras {
 
 				@Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.getType("Creature");
                     
                     if (list.isEmpty()) return false;
                     
                     //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                     
-                    CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
+                    CardList auraMagnetList = new CardList(AllZone.Computer_Battlefield.getCards());
                     auraMagnetList = auraMagnetList.getEnchantMagnets();
                     
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
@@ -1462,7 +1462,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -1582,7 +1582,7 @@ class CardFactory_Auras {
 
         		@Override
         		public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
          
                     // Animate Dead got destroyed before its ability resolved
                     if (!AllZone.GameAction.isCardInZone(card, play))	
@@ -1628,7 +1628,7 @@ class CardFactory_Auras {
         		public void resolve() {
                     Card c = targetC[0];
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     if(AllZone.GameAction.isCardInZone(c, play)) {
                         c.addSemiPermanentAttackBoost(+1);
@@ -1643,7 +1643,7 @@ class CardFactory_Auras {
 				public void execute() {
                     Card c = targetC[0];
                     
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     if(AllZone.GameAction.isCardInZone(c, play))
                     	AllZone.Stack.add(detach);
@@ -1671,14 +1671,14 @@ class CardFactory_Auras {
 
 				@Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                     list = list.getType("Creature");
                     
                     if (list.isEmpty()) return false;
                     
                     //else (is there a Rabid Wombat or a Uril, the Miststalker to target?)
                     
-                    CardList auraMagnetList = new CardList(AllZone.Computer_Play.getCards());
+                    CardList auraMagnetList = new CardList(AllZone.Computer_Battlefield.getCards());
                     auraMagnetList = auraMagnetList.getEnchantMagnets();
                     
                     if (! auraMagnetList.isEmpty()) {    // AI has a special target creature(s) to enchant
@@ -1712,7 +1712,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -1788,7 +1788,7 @@ class CardFactory_Auras {
                 	
                 	if(!super.canPlayAI()) return false;
                 	
-                	CardList list = new CardList(AllZone.Human_Play.getCards());    // Target human creature
+                	CardList list = new CardList(AllZone.Human_Battlefield.getCards());    // Target human creature
                 	list = list.filter(new CardListFilter() {
                 		public boolean addCard(Card c) {
                 			return c.isCreature() && CardFactoryUtil.canTarget(card, c) && 
@@ -1826,7 +1826,7 @@ class CardFactory_Auras {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -1882,8 +1882,8 @@ class CardFactory_Auras {
 
 				@Override
                 public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     CardList creatures = new CardList();
                     creatures.addAll(comp.getCards());
                     creatures.addAll(hum.getCards());
@@ -1964,7 +1964,7 @@ class CardFactory_Auras {
 
         		@Override
         		public void resolve() {
-        			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+        			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     play.add(card);
                     
                     Card c = getTargetCard();
@@ -2168,7 +2168,7 @@ class CardFactory_Auras {
                     
                     @Override
                     public void selectCard(Card card, PlayerZone zone) {
-                        if(card.isLand() && zone.is(Constant.Zone.Play)) {
+                        if(card.isLand() && zone.is(Constant.Zone.Battlefield)) {
                             card.untap();
                             count++;
                             if(count == stop) stop();
@@ -2181,7 +2181,7 @@ class CardFactory_Auras {
                     public void resolve() {
                         if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(untap);
                         else {
-                            CardList list = new CardList(AllZone.Computer_Play.getCards());
+                            CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
                             list = list.filter(new CardListFilter() {
                                 public boolean addCard(Card c) {
                                     return c.isLand() && c.isTapped();
@@ -2283,7 +2283,7 @@ class CardFactory_Auras {
                     
                     @Override
                     public void resolve() {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                         play.add(card);
                         
                         Card c = getTargetCard();
@@ -2309,19 +2309,19 @@ class CardFactory_Auras {
                                 crd.setSickness(true);
                             }
                             
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
                             
                             PlayerZone from = AllZone.getZone(crd);
                             from.remove(crd);
                             
                             crd.setController(card.getController());
                             
-                            PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
+                            PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                             to.add(crd);
                             
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
                         }
                     }//execute()
                 };//Command
@@ -2339,8 +2339,8 @@ class CardFactory_Auras {
                                     crd.setSickness(true);
                                 }
                                 
-                                ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                                ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
                                 
                                 PlayerZone from = AllZone.getZone(crd);
                                 from.remove(crd);
@@ -2350,11 +2350,11 @@ class CardFactory_Auras {
                                 Player opp = crd.getController().getOpponent();
                                 crd.setController(opp);
                                 
-                                PlayerZone to = AllZone.getZone(Constant.Zone.Play, opp);
+                                PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, opp);
                                 to.add(crd);
                                 
-                                ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                                ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
                             }
                         }
                         
@@ -2383,8 +2383,8 @@ class CardFactory_Auras {
 
                     @Override
                     public void showMessage() {
-                        PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                        PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
+                        PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
+                        PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                         CardList creatures = new CardList();
                         creatures.addAll(comp.getCards());
                         creatures.addAll(hum.getCards());

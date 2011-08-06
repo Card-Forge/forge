@@ -59,7 +59,7 @@ public class GameAction {
     	final PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getOwner());
 
     	if (AllZoneUtil.isCardInPlay("Leyline of the Void", c.getOwner().getOpponent())) {
-    		moveTo(AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner()), c);
+    		moveTo(AllZone.getZone(Constant.Zone.Exile, c.getOwner()), c);
     		return;
     	}
     	
@@ -72,7 +72,7 @@ public class GameAction {
 						@Override
 						public void resolve() {
 							if(AllZone.GameAction.isCardInZone(c, grave))
-								moveTo(AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner()), c);
+								moveTo(AllZone.getZone(Constant.Zone.Exile, c.getOwner()), c);
 						}
 		
 					};// Ability
@@ -160,7 +160,7 @@ public class GameAction {
     }
     
     public void moveToPlay(Card c) {
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
         moveTo(play, c);
     }
     
@@ -405,7 +405,7 @@ public class GameAction {
         final Player owner = discardedCard.getOwner();
         final Player opponent = owner.getOpponent();
         
-        PlayerZone opponentZone = AllZone.getZone(Constant.Zone.Play, opponent);
+        PlayerZone opponentZone = AllZone.getZone(Constant.Zone.Battlefield, opponent);
         CardList opponentList = new CardList(opponentZone.getCards());
         
         for(int i = 0; i < opponentList.size(); i++) {
@@ -424,7 +424,7 @@ public class GameAction {
     		c.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(c, Counters.P1P1, 2));
         */
     	PlayerZone hand = AllZone.getZone(c);
-    	PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+    	PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
     	//moveTo(play, c);
     	hand.remove(c);
     	play.add(c);
@@ -579,8 +579,8 @@ public class GameAction {
 	        GameActionUtil.stPump.execute();
 	        
 	        //System.out.println("checking state effects");
-	        ArrayList<Card> creature = PlayerZoneUtil.getCardType(AllZone.Computer_Play, "Creature");
-	        creature.addAll(PlayerZoneUtil.getCardType(AllZone.Human_Play, "Creature"));
+	        ArrayList<Card> creature = PlayerZoneUtil.getCardType(AllZone.Computer_Battlefield, "Creature");
+	        creature.addAll(PlayerZoneUtil.getCardType(AllZone.Human_Battlefield, "Creature"));
 	        
 	        Card c;
 	        Iterator<Card> it = creature.iterator();
@@ -610,8 +610,8 @@ public class GameAction {
 	        }//while it.hasNext()
 	        
 	
-	        ArrayList<Card> enchantments = PlayerZoneUtil.getCardType(AllZone.Computer_Play, "Enchantment");
-	        enchantments.addAll(PlayerZoneUtil.getCardType(AllZone.Human_Play, "Enchantment"));
+	        ArrayList<Card> enchantments = PlayerZoneUtil.getCardType(AllZone.Computer_Battlefield, "Enchantment");
+	        enchantments.addAll(PlayerZoneUtil.getCardType(AllZone.Human_Battlefield, "Enchantment"));
 	        
 	        Iterator<Card> iterate = enchantments.iterator();
 	        while(iterate.hasNext()) {
@@ -634,8 +634,8 @@ public class GameAction {
 	        }//while iterate.hasNext()
 	        
 	        //Make sure all equipment stops equipping previously equipped creatures that have left play.
-	        ArrayList<Card> equip = PlayerZoneUtil.getCardType(AllZone.Computer_Play, "Equipment");
-	        equip.addAll(PlayerZoneUtil.getCardType(AllZone.Human_Play, "Equipment"));
+	        ArrayList<Card> equip = PlayerZoneUtil.getCardType(AllZone.Computer_Battlefield, "Equipment");
+	        equip.addAll(PlayerZoneUtil.getCardType(AllZone.Human_Battlefield, "Equipment"));
 	        
 	        Iterator<Card> iter = equip.iterator();
 	        while(iter.hasNext()) {
@@ -761,12 +761,12 @@ public class GameAction {
     public void checkWheneverKeyword(Card Triggering_Card,String Event, Object[] Custom_Parameters) {
     	checkStateEffects();
     	
-        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
         PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
         PlayerZone Cgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
-        PlayerZone HRFG = AllZone.getZone(Constant.Zone.Removed_From_Play, AllZone.HumanPlayer);
-        PlayerZone CRFG = AllZone.getZone(Constant.Zone.Removed_From_Play, AllZone.ComputerPlayer);
+        PlayerZone HRFG = AllZone.getZone(Constant.Zone.Exile, AllZone.HumanPlayer);
+        PlayerZone CRFG = AllZone.getZone(Constant.Zone.Exile, AllZone.ComputerPlayer);
         
  		CardList Cards_WithKeyword = new CardList();
         Cards_WithKeyword.add(new CardList(Hplay.getCards()));
@@ -823,12 +823,12 @@ public class GameAction {
 		int Custom_Strings_Count = 0;
 		boolean Stop = false;
 		for(int i = 0; i < Custom_Strings.length; i++) Custom_Strings[i] = "Null";
-        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
+        PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
+        PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
         PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.HumanPlayer);
         PlayerZone Cgrave = AllZone.getZone(Constant.Zone.Graveyard, AllZone.ComputerPlayer);
-        PlayerZone HRFG = AllZone.getZone(Constant.Zone.Removed_From_Play, AllZone.HumanPlayer);
-        PlayerZone CRFG = AllZone.getZone(Constant.Zone.Removed_From_Play, AllZone.ComputerPlayer);
+        PlayerZone HRFG = AllZone.getZone(Constant.Zone.Exile, AllZone.HumanPlayer);
+        PlayerZone CRFG = AllZone.getZone(Constant.Zone.Exile, AllZone.ComputerPlayer);
         
  		CardList Cards_WithKeyword = new CardList();
         Cards_WithKeyword.add(new CardList(Hplay.getCards()));
@@ -942,9 +942,9 @@ public class GameAction {
                         PlayerZone[] Required_Zones = new PlayerZone[1];
                         	if(Zones.equals("Hand")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Hand, card.getController());
                         	if(Zones.equals("Graveyard")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                        	if(Zones.equals("Play") || Zones.equals("Any")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        	if(Zones.equals("Play") || Zones.equals("Any")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                         	if(Zones.contains("Library")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Library, card.getController());
-                        	if(Zones.contains("Exiled")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+                        	if(Zones.contains("Exiled")) Required_Zones[0] = AllZone.getZone(Constant.Zone.Exile, card.getController());
                         //	if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, card.getController());
                         	final PlayerZone Required_Zone = Required_Zones[0]; 
                         	final String F_Zones = Zones;
@@ -1082,7 +1082,7 @@ public class GameAction {
                            else if(S_Amount[b+1].contains("ControlledAmountType")) {
                         	   final String[] TypeSplit =  AmountParse.split("/");
                         		CardList Cards_WithAllTypes = new CardList();
-                        		Cards_WithAllTypes.add(new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards()));
+                        		Cards_WithAllTypes.add(new CardList(AllZone.getZone(Constant.Zone.Battlefield, card.getController()).getCards()));
                         		Cards_WithAllTypes = Cards_WithAllTypes.filter(new CardListFilter() {
                                      public boolean addCard(Card c) {
                                     	 for(int z = 0; z < TypeSplit.length - 1; z++)
@@ -1143,8 +1143,8 @@ public class GameAction {
                    		            		AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(F_SpellAbility, GetTargetsCommand));
                    		            	else {
                    		            		CardList PossibleTargets = new CardList();	
-                   		            		PossibleTargets.addAll(AllZone.Human_Play.getCards());
-                   		            		PossibleTargets.addAll(AllZone.Computer_Play.getCards());
+                   		            		PossibleTargets.addAll(AllZone.Human_Battlefield.getCards());
+                   		            		PossibleTargets.addAll(AllZone.Computer_Battlefield.getCards());
                    		            		PossibleTargets = PossibleTargets.getType("Creature");
                    		            		if(Whenever_AI_GoodEffect(F_k)) {
                    		            			PossibleTargets = PossibleTargets.filter(new CardListFilter() {
@@ -1191,8 +1191,8 @@ public class GameAction {
                    		            	}
                    		            if(WhichInput.contains("Specific")) {
                    		      		CardList Cards_inPlay = new CardList();
-                   		      		Cards_inPlay.addAll(AllZone.Human_Play.getCards());
-                   		      		Cards_inPlay.addAll(AllZone.Computer_Play.getCards());
+                   		      		Cards_inPlay.addAll(AllZone.Human_Battlefield.getCards());
+                   		      		Cards_inPlay.addAll(AllZone.Computer_Battlefield.getCards());
                    		      		final String[] Specific = F_k[5].split("/");
                    		      		final int[] Restriction_Count = new int[1]; 
                    		      		for(int i = 0; i < Specific.length - 2;i++) {
@@ -1673,9 +1673,9 @@ public class GameAction {
                             for(int z = 0; z < ZoneConditions.length; z++) {
                              if(ZoneConditions[z].equals("Hand")) PZones[z] = AllZone.getZone(Constant.Zone.Hand, card.getController());
                              if(ZoneConditions[z].equals("Graveyard")) PZones[z] = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                             if(ZoneConditions[z].equals("Play")) PZones[z] = AllZone.getZone(Constant.Zone.Play, card.getController());
+                             if(ZoneConditions[z].equals("Play")) PZones[z] = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                              if(ZoneConditions[z].contains("Library")) PZones[z] = AllZone.getZone(Constant.Zone.Library, card.getController());
-                             if(ZoneConditions[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+                             if(ZoneConditions[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Exile, card.getController());
                           // if(ZoneConditions[z].contains("Sideboard")) PZones[z] = AllZone.getZone(Constant.Zone.Sideboard, card.getController());
                             }
                     			Command Proper_resolve = new Command() {
@@ -1789,16 +1789,16 @@ public class GameAction {
         PlayerZone[] Required_Zone = new PlayerZone[2];
     	if(Zone[1].contains("Hand")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Hand, Target.getController());
     	if(Zone[1].contains("Graveyard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Graveyard, Target.getController());
-    	if(Zone[1].contains("Play") || Zones.equals("Any")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Play, Target.getController());
+    	if(Zone[1].contains("Play") || Zones.equals("Any")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Battlefield, Target.getController());
     	if(Zone[1].contains("Library")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Library, Target.getController());
-    	if(Zone[1].contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Removed_From_Play, Target.getController());
+    	if(Zone[1].contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Exile, Target.getController());
     //	if(Zone[1].contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Target.getController());
     	
         	if(Zone[2].contains("Hand")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Hand, Target.getController());
         	if(Zone[2].contains("Graveyard")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Graveyard, Target.getController());
-        	if(Zone[2].contains("Play") || Zones.equals("Any")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Play, Target.getController());
+        	if(Zone[2].contains("Play") || Zones.equals("Any")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Battlefield, Target.getController());
         	if(Zone[2].contains("Library")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Library, Target.getController());
-        	if(Zone[2].contains("Exiled")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Removed_From_Play, Target.getController());
+        	if(Zone[2].contains("Exiled")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Exile, Target.getController());
         //	if(Zone[2].contains("Sideboard")) Required_Zone[1] = AllZone.getZone(Constant.Zone.Sideboard, Target.getController());
 
 		return Required_Zone;
@@ -1809,8 +1809,8 @@ public class GameAction {
         if(Keyword_Details[5].contains("All") && Keyword_Details[4] != "Null") {
      	   final String[] AllTargets = Keyword_Details[5].split("/"); 
 	      		
-	      		Cards_inPlay.addAll(AllZone.Human_Play.getCards());
-	      		Cards_inPlay.addAll(AllZone.Computer_Play.getCards());
+	      		Cards_inPlay.addAll(AllZone.Human_Battlefield.getCards());
+	      		Cards_inPlay.addAll(AllZone.Computer_Battlefield.getCards());
 	      		for(int i2 = 0; i2 < AllTargets.length - 1;i2++) {
 	      		final int[] Restriction_Count = new int[1]; 
 	      			if(AllTargets[i2+1].contains("Type.")) {
@@ -1903,9 +1903,9 @@ public class GameAction {
     				SearchZone[z] = Search[z+1];
     				if(SearchZone[z].equals("Hand")) PZones[z] = AllZone.getZone(Constant.Zone.Hand, Zone_Owner);
     				if(SearchZone[z].equals("Graveyard")) PZones[z] = AllZone.getZone(Constant.Zone.Graveyard, Zone_Owner);
-    				if(SearchZone[z].equals("Play")) PZones[z] = AllZone.getZone(Constant.Zone.Play, Zone_Owner);
+    				if(SearchZone[z].equals("Play")) PZones[z] = AllZone.getZone(Constant.Zone.Battlefield, Zone_Owner);
     				if(SearchZone[z].contains("Library") && SearchLib) PZones[z] = AllZone.getZone(Constant.Zone.Library, Zone_Owner);
-    				if(SearchZone[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Removed_From_Play, Zone_Owner);
+    				if(SearchZone[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Exile, Zone_Owner);
     				// if(ZoneConditions[z].contains("Sideboard")) PZones[z] = AllZone.getZone(Constant.Zone.Sideboard, Zone_Owner);
     				if(PZones[z] != null) {
     					SearchBase.addAll(PZones[z].getCards());
@@ -2024,7 +2024,7 @@ public class GameAction {
 		if(Keyword_Details[7].contains("SacrificeType")) {
             String PayAmountParse = Keyword_Details[7];                
             S_Amount = PayAmountParse.split("/")[1];
-            PlayerZone play = AllZone.getZone(Constant.Zone.Play, Source.getController());
+            PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, Source.getController());
             CardList choice = new CardList(play.getCards());
             choice = choice.getType(S_Amount);
         if(Source.getController().equals(AllZone.HumanPlayer)) {
@@ -2047,9 +2047,9 @@ public class GameAction {
         PlayerZone[] Required_Zone = new PlayerZone[1];
         	if(Zones.equals("Hand")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Hand, Source.getController());
         	if(Zones.equals("Graveyard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Graveyard, Source.getController());
-        	if(Zones.equals("Play") || Zones.equals("Any")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Play, Source.getController());
+        	if(Zones.equals("Play") || Zones.equals("Any")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Battlefield, Source.getController());
         	if(Zones.contains("Library")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Library, Source.getController());
-        	if(Zones.contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Removed_From_Play, Source.getController());
+        	if(Zones.contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Exile, Source.getController());
         //	if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Source.getController());
         	
     		if(AllZone.GameAction.isCardInZone(Source,Required_Zone[0]) || Zones.equals("Any")) {
@@ -2086,9 +2086,9 @@ public class GameAction {
         PlayerZone[] Required_Zone = new PlayerZone[1];
         	if(Zones.equals("Hand")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Hand, Source.getController());
         	if(Zones.equals("Graveyard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Graveyard, Source.getController());
-        	if(Zones.equals("Play") || Zones.equals("Any")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Play, Source.getController());
+        	if(Zones.equals("Play") || Zones.equals("Any")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Battlefield, Source.getController());
         	if(Zones.contains("Library")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Library, Source.getController());
-        	if(Zones.contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Removed_From_Play, Source.getController());
+        	if(Zones.contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Exile, Source.getController());
         //	if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Source.getController());
         	
     		if(AllZone.GameAction.isCardInZone(Source,Required_Zone[0]) || Zones.equals("Any")) {	
@@ -2158,7 +2158,7 @@ public class GameAction {
             GameActionUtil.executeGrvDestroyCardEffects(bridge.get(i), c);
         
         if(persist) {
-        	PlayerZone ownerPlay = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+        	PlayerZone ownerPlay = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
         	
         	c = moveTo(ownerPlay, c);
         	c.addCounter(Counters.M1M1, 1);
@@ -2262,7 +2262,7 @@ public class GameAction {
     	if(AllZone.GameAction.isCardExiled(c)) return;
 
     	PlayerZone zone = AllZone.getZone(c); //could be hand, grave, play, ...
-    	PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
+    	PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
 
     	if (zone != null)	// for suspend
     		zone.remove(c);
@@ -2271,14 +2271,14 @@ public class GameAction {
     
     public void removeUnearth(Card c)
     {
-    	PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
+    	PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
     	removed.add(c);
     }
     
     //is this card a permanent that is in play?
     public boolean isCardInPlay(Card c) {
-        return PlayerZoneUtil.isCardInZone(AllZone.Computer_Play, c)
-                || PlayerZoneUtil.isCardInZone(AllZone.Human_Play, c);
+        return PlayerZoneUtil.isCardInZone(AllZone.Computer_Battlefield, c)
+                || PlayerZoneUtil.isCardInZone(AllZone.Human_Battlefield, c);
     }
     
     public boolean isCardInGrave(Card c) {
@@ -2287,8 +2287,8 @@ public class GameAction {
     }
     
     public boolean isCardExiled(Card c) {
-        return PlayerZoneUtil.isCardInZone(AllZone.Computer_Removed, c)
-                || PlayerZoneUtil.isCardInZone(AllZone.Human_Removed, c);
+        return PlayerZoneUtil.isCardInZone(AllZone.Computer_Exile, c)
+                || PlayerZoneUtil.isCardInZone(AllZone.Human_Exile, c);
     }
     
     /**
@@ -2314,7 +2314,7 @@ public class GameAction {
     
     //removes all damage from player's creatures
     public void removeDamage(Player player) {
-        PlayerZone p = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerZone p = AllZone.getZone(Constant.Zone.Battlefield, player);
         ArrayList<Card> a = PlayerZoneUtil.getCardType(p, "Creature");
         Card c[] = CardUtil.toCard(a);
         for(int i = 0; i < c.length; i++)
@@ -2335,13 +2335,13 @@ public class GameAction {
 
         for (Card c : human)
         {
-        	AllZone.Human_Play.add(c);
+        	AllZone.Human_Battlefield.add(c);
         	c.setSickness(true);
         }
          
         for (Card c: computer)
         {
-        	AllZone.Computer_Play.add(c);
+        	AllZone.Computer_Battlefield.add(c);
         	c.setSickness(true);
         }
         Constant.Quest.fantasyQuest[0] = true;
@@ -2373,14 +2373,14 @@ public class GameAction {
         AllZone.Human_Graveyard.reset();
         AllZone.Human_Hand.reset();
         AllZone.Human_Library.reset();
-        AllZone.Human_Play.reset();
-        AllZone.Human_Removed.reset();
+        AllZone.Human_Battlefield.reset();
+        AllZone.Human_Exile.reset();
         
         AllZone.Computer_Graveyard.reset();
         AllZone.Computer_Hand.reset();
         AllZone.Computer_Library.reset();
-        AllZone.Computer_Play.reset();
-        AllZone.Computer_Removed.reset();
+        AllZone.Computer_Battlefield.reset();
+        AllZone.Computer_Exile.reset();
         
         AllZone.InputControl.clearInput();
         
@@ -2496,7 +2496,7 @@ public class GameAction {
 
         ManaPool mp = AllZone.ManaPool;
         mp.setImageFilename("mana_pool");
-        AllZone.Human_Play.add(mp);
+        AllZone.Human_Battlefield.add(mp);
         //ButtonUtil.reset();
 
         AllZone.InputControl.setInput(new Input_Mulligan());
@@ -2751,8 +2751,8 @@ public class GameAction {
     //if Card had the type "Aura" this method would always return true, since local enchantments are always attached to something
     //if Card is "Equipment", returns true if attached to something
     public boolean isAttachee(Card c) {
-        CardList list = new CardList(AllZone.Computer_Play.getCards());
-        list.addAll(AllZone.Human_Play.getCards());
+        CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
+        list.addAll(AllZone.Human_Battlefield.getCards());
         
         for(int i = 0; i < list.size(); i++) {
             CardList check = new CardList(list.getCard(i).getAttachedCards());
@@ -2808,7 +2808,7 @@ public class GameAction {
     {
     	if (CardFactoryUtil.canHumanPlayLand()){
 	    	zone.remove(land);
-			AllZone.Human_Play.add(land);
+			AllZone.Human_Battlefield.add(land);
 			CardFactoryUtil.playLandEffects(land);
 			AllZone.GameInfo.incrementHumanPlayedLands();
     	}
@@ -2913,7 +2913,7 @@ public class GameAction {
          } else if(originalCard.getName().equals("Avatar of Fury")) {
  			Player player = AllZone.Phase.getPlayerTurn();
  			Player opponent = player.getOpponent();
- 	        PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Play, opponent); 
+ 	        PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Battlefield, opponent); 
  	        CardList OpponentLand = new CardList(OpponentPlay.getCards());	   
  	        OpponentLand = OpponentLand.getType("Land");
  	        if(OpponentLand.size() >= 7) {
@@ -2922,10 +2922,10 @@ public class GameAction {
          } else if(originalCard.getName().equals("Avatar of Might")) {
  			Player player = AllZone.Phase.getPlayerTurn();
  			Player opponent = player.getOpponent();
- 	        PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Play, player); 
+ 	        PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Battlefield, player); 
  	        CardList PlayerCreature = new CardList(PlayerPlay.getCards());	   
  	        PlayerCreature = PlayerCreature.getType("Creature");
- 	        PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Play, opponent); 
+ 	        PlayerZone OpponentPlay = AllZone.getZone(Constant.Zone.Battlefield, opponent); 
  	        CardList OpponentCreature = new CardList(OpponentPlay.getCards());	   
  	        OpponentCreature = OpponentCreature.getType("Creature");
  	        if(OpponentCreature.size() - PlayerCreature.size() >= 4) {
@@ -2937,8 +2937,8 @@ public class GameAction {
          // Get Cost Reduction
          if(Phase.GameBegins == 1) { // Remove GameBegins from Phase and into The starting game code
  		CardList Cards_In_Play = new CardList();
- 		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
- 		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+ 		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
+ 		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
  		Cards_In_Play = Cards_In_Play.filter(new CardListFilter() {
              public boolean addCard(Card c) {
                  if(c.getKeyword().toString().contains("CostChange")) return true;
@@ -2947,7 +2947,7 @@ public class GameAction {
          });
  		Cards_In_Play.add(originalCard);
  		String Mana = manaCost.toString();
- 		CardList Player_Play = new CardList(AllZone.getZone(Constant.Zone.Play, sa.getSourceCard().getController()).getCards());
+ 		CardList Player_Play = new CardList(AllZone.getZone(Constant.Zone.Battlefield, sa.getSourceCard().getController()).getCards());
  		CardList Player_Hand = new CardList(AllZone.getZone(Constant.Zone.Hand, sa.getSourceCard().getController()).getCards());
         int XBonus = 0;
  		int Max = 25;
@@ -3035,7 +3035,7 @@ public class GameAction {
                           String spilt = k[7];                
                           String color_spilt[] = spilt.split("/");  
                           	k[7] = color_spilt[1];	
-                          	PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Play, originalCard.getController()); 
+                          	PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Battlefield, originalCard.getController()); 
                           	CardList PlayerList = new CardList(PlayerPlay.getCards());	   
                           	PlayerList = PlayerList.getType(k[7]);
                           	k[3] = String.valueOf(PlayerList.size());   		
@@ -3184,7 +3184,7 @@ public class GameAction {
       	                            String spilt = k[7];                
       	                            String color_spilt[] = spilt.split("/");  
       	                            	k[7] = color_spilt[1];	
-      	                            	PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Play, originalCard.getController()); 
+      	                            	PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Battlefield, originalCard.getController()); 
       	                            	CardList PlayerList = new CardList(PlayerPlay.getCards());	   
       	                            	PlayerList = PlayerList.getType(k[7]);
       	                            	k[3] = String.valueOf(PlayerList.size());    		
@@ -3268,7 +3268,7 @@ public class GameAction {
          }
          if(originalCard.getName().equals("Khalni Hydra") && spell.isSpell() == true) {
  			Player player = AllZone.Phase.getPlayerTurn();
- 	        PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Play, player); 
+ 	        PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Battlefield, player); 
  	        CardList PlayerCreature = new CardList(PlayerPlay.getCards());	   
  	        PlayerCreature = PlayerCreature.getType("Creature");
  	        PlayerCreature = PlayerCreature.filter(new CardListFilter() {

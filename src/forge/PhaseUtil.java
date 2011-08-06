@@ -7,7 +7,7 @@ public class PhaseUtil {
 	public static void handleUntap(){
 
 		Player turn = AllZone.Phase.getPlayerTurn();
-        PlayerZone p = AllZone.getZone(Constant.Zone.Play, turn);
+        PlayerZone p = AllZone.getZone(Constant.Zone.Battlefield, turn);
         Card[] c = p.getCards();
         
         AllZone.Phase.turnReset();
@@ -38,14 +38,14 @@ public class PhaseUtil {
         AllZone.GameAction.resetActivationsPerTurn();
         
         //otherwise land seems to stay tapped when it is really untapped
-        AllZone.Human_Play.updateObservers();
+        AllZone.Human_Battlefield.updateObservers();
         
         AllZone.Phase.setNeedToNextPhase(true);
 	}
 	
     private static void doUntap()
     {
-    	PlayerZone p = AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getPlayerTurn());
+    	PlayerZone p = AllZone.getZone(Constant.Zone.Battlefield, AllZone.Phase.getPlayerTurn());
     	CardList list = new CardList(p.getCards());
     	
     	for(Card c : list) {
@@ -56,8 +56,8 @@ public class PhaseUtil {
     	}
     	
     	CardList allp = new CardList();
-    	allp.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-		allp.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards()); 
+    	allp.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
+		allp.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards()); 
     	
 		for(Card ca : allp) {
 			if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {
@@ -151,7 +151,7 @@ public class PhaseUtil {
     				}
     				public void selectButtonCancel() {stop();}
     				public void selectCard(Card c, PlayerZone zone) {
-    					if(c.isLand() && zone.is(Constant.Zone.Play) && c.isTapped()) {
+    					if(c.isLand() && zone.is(Constant.Zone.Battlefield) && c.isTapped()) {
     						c.untap();
     						stop();
     					}
@@ -182,7 +182,7 @@ public class PhaseUtil {
     				}
     				public void selectButtonCancel() {stop();}
     				public void selectCard(Card c, PlayerZone zone) {
-    					if(c.isArtifact() && zone.is(Constant.Zone.Play) 
+    					if(c.isArtifact() && zone.is(Constant.Zone.Battlefield) 
     							&& c.getController().equals(AllZone.HumanPlayer)) {
     						c.untap();
     						stop();
@@ -214,7 +214,7 @@ public class PhaseUtil {
     				}
     				public void selectButtonCancel() {stop();}
     				public void selectCard(Card c, PlayerZone zone) {
-    					if(c.isCreature() && zone.is(Constant.Zone.Play) 
+    					if(c.isCreature() && zone.is(Constant.Zone.Battlefield) 
     							&& c.getController().equals(AllZone.HumanPlayer)) {
     						c.untap();
     						stop();

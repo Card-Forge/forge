@@ -138,7 +138,7 @@ public class AbilityFactory_Regenerate {
 					if(CardUtil.getConvertedManaCost(HandList.getCard(i).getManaCost()) > hCMC) hCMC = CardUtil.getConvertedManaCost(HandList.getCard(
 							i).getManaCost());
 
-				CardList LandList = new CardList(AllZone.getZone(Constant.Zone.Play,
+				CardList LandList = new CardList(AllZone.getZone(Constant.Zone.Battlefield,
 						AllZone.ComputerPlayer).getCards());
 				LandList = LandList.getType("Land");
 

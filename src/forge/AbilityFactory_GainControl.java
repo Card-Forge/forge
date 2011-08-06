@@ -222,8 +222,8 @@ public class AbilityFactory_GainControl {
                     tgtC.setSickness(true);
                 }
                 
-                ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
                 
                 //tgtC.setSickness(true);
                 tgtC.setController(hostCard.getController());
@@ -231,7 +231,7 @@ public class AbilityFactory_GainControl {
                 PlayerZone from = AllZone.getZone(tgtC);
                 from.remove(tgtC);
                 
-                PlayerZone to = AllZone.getZone(Constant.Zone.Play, tgtC.getController());
+                PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, tgtC.getController());
                 to.add(tgtC);
                 
                 if(bUntap) tgtC.untap();
@@ -242,8 +242,8 @@ public class AbilityFactory_GainControl {
 					}
 				}
                 
-                ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
             }
 			
 			
@@ -333,8 +333,8 @@ public class AbilityFactory_GainControl {
     			if(null == c) return;
 
     			if(AllZone.GameAction.isCardInPlay(c)) {
-    				((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-    				((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+    				((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
+    				((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
 
     				c.setSickness(true);
     				c.setController(c.getController().getOpponent());
@@ -349,7 +349,7 @@ public class AbilityFactory_GainControl {
     				CardList pwlist = new CardList(AllZone.pwCombat.getAttackers());
     				if(pwlist.contains(c)) AllZone.pwCombat.removeFromCombat(c);
 
-    				PlayerZone to = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+    				PlayerZone to = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
     				to.add(c);
     				
     				if(bTapOnLose) c.tap();
@@ -360,8 +360,8 @@ public class AbilityFactory_GainControl {
     					}
     				}
 
-    				((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-    				((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+    				((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(true);
+    				((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(true);
     			}//if
     			hostCard.clearGainControlTargets();
     			hostCard.clearGainControlReleaseCommands();

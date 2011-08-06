@@ -26,21 +26,21 @@ public class Run {
         //AllZone.Computer_Play.add(AllZone.CardFactory.getCard("Dauthi Marauder", AllZone.ComputerPlayer));
         
 
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Deeptread Merrow", AllZone.HumanPlayer));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Vampire Bats", AllZone.HumanPlayer));
+        AllZone.Human_Battlefield.add(AllZone.CardFactory.getCard("Deeptread Merrow", AllZone.HumanPlayer));
+        AllZone.Human_Battlefield.add(AllZone.CardFactory.getCard("Vampire Bats", AllZone.HumanPlayer));
         
         //AllZone.Human_Hand.add(AllZone.CardFactory.getCard("Soul Feast", AllZone.HumanPlayer));
         
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Plains", AllZone.HumanPlayer));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Plains", AllZone.HumanPlayer));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer));
+        AllZone.Human_Battlefield.add(AllZone.CardFactory.getCard("Plains", AllZone.HumanPlayer));
+        AllZone.Human_Battlefield.add(AllZone.CardFactory.getCard("Plains", AllZone.HumanPlayer));
+        AllZone.Human_Battlefield.add(AllZone.CardFactory.getCard("Forest", AllZone.HumanPlayer));
         
 
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", AllZone.HumanPlayer));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", AllZone.HumanPlayer));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
-        AllZone.Human_Play.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
+        AllZone.Human_Battlefield.add(AllZone.CardFactory.getCard("Island", AllZone.HumanPlayer));
+        AllZone.Human_Battlefield.add(AllZone.CardFactory.getCard("Island", AllZone.HumanPlayer));
+        AllZone.Human_Battlefield.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
+        AllZone.Human_Battlefield.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
+        AllZone.Human_Battlefield.add(AllZone.CardFactory.getCard("Swamp", AllZone.HumanPlayer));
         
         /*
             AllZone.Human_Play.add(AllZone.CardFactory.getCard("Island", AllZone.HumanPlayer));

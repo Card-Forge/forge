@@ -904,8 +904,8 @@ public class GuiDisplayUtil implements NewConstants {
     }
     
     static void updateGUI() {
-        AllZone.Computer_Play.updateObservers();
-        AllZone.Human_Play.updateObservers();
+        AllZone.Computer_Battlefield.updateObservers();
+        AllZone.Human_Battlefield.updateObservers();
         AllZone.Human_Hand.updateObservers();
     }
 }

@@ -36,7 +36,7 @@ public class ComputerAI_Rats2 implements Computer
 	if(random.nextBoolean() || AllZone.ComputerPlayer.getLife() < 10)
 	{
 	    //presumes all creatures the Computer owns are the same size, because they are Relentless Rats
-	    Card block[] = CardUtil.toCard(PlayerZoneUtil.getUntappedCreatures(AllZone.Computer_Play));
+	    Card block[] = CardUtil.toCard(PlayerZoneUtil.getUntappedCreatures(AllZone.Computer_Battlefield));
 	    Card att[] = AllZone.Combat.getAttackers();
 	    int blockIndex = 0;
 	    
@@ -60,8 +60,8 @@ public class ComputerAI_Rats2 implements Computer
     
     public void declare_attackers()
     {
-	Card[] a = CardUtil.toCard(PlayerZoneUtil.getUntappedCreatures(AllZone.Computer_Play));
-	Card[] b = CardUtil.toCard(PlayerZoneUtil.getUntappedCreatures(AllZone.Human_Play));	
+	Card[] a = CardUtil.toCard(PlayerZoneUtil.getUntappedCreatures(AllZone.Computer_Battlefield));
+	Card[] b = CardUtil.toCard(PlayerZoneUtil.getUntappedCreatures(AllZone.Human_Battlefield));	
 //for(int i = 0; i <a.length; i++)
 //    System.out.println(a[i].getAttack());
 	

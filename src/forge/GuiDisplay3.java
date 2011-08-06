@@ -139,8 +139,8 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
 
     private void setupActions() {
         HUMAN_GRAVEYARD_ACTION = new ZoneAction(AllZone.Human_Graveyard, HUMAN_GRAVEYARD);
-        HUMAN_REMOVED_ACTION = new ZoneAction(AllZone.Human_Removed, HUMAN_REMOVED);
-        HUMAN_FLASHBACK_ACTION = new ZoneAction(AllZone.Human_Removed, HUMAN_FLASHBACK) {
+        HUMAN_REMOVED_ACTION = new ZoneAction(AllZone.Human_Exile, HUMAN_REMOVED);
+        HUMAN_FLASHBACK_ACTION = new ZoneAction(AllZone.Human_Exile, HUMAN_FLASHBACK) {
             
             private static final long serialVersionUID = 8120331222693706164L;
             
@@ -162,7 +162,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
             }
         };
         COMPUTER_GRAVEYARD_ACTION = new ZoneAction(AllZone.Computer_Graveyard, COMPUTER_GRAVEYARD);
-        COMPUTER_REMOVED_ACTION = new ZoneAction(AllZone.Computer_Removed, COMPUTER_REMOVED);
+        COMPUTER_REMOVED_ACTION = new ZoneAction(AllZone.Computer_Exile, COMPUTER_REMOVED);
         CONCEDE_ACTION = new ConcedeAction();
     }
     
@@ -384,7 +384,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                         }
                     }
                     
-                    inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
+                    inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Battlefield);
                     
                 }
             }
@@ -428,7 +428,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                         
                     }
 
-                    else inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);
+                    else inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Battlefield);
                 }
             }
         });
@@ -457,7 +457,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                 Object o = oppLandPanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
                     CardContainer cardPanel = (CardContainer) o;
-                    inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Play);
+                    inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Battlefield);
                 }
             }
         });
@@ -470,7 +470,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                 Object o = oppCreaturePanel.getComponentAt(e.getPoint());
                 if(o instanceof CardPanel) {
                     CardContainer cardPanel = (CardContainer) o;
-                    inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Play);
+                    inputControl.selectCard(cardPanel.getCard(), AllZone.Computer_Battlefield);
                 }
             }
         });
@@ -496,7 +496,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                     playerGraveValue.setText("" + AllZone.Human_Graveyard.getCards().length);
                     playerLibraryValue.setText("" + AllZone.Human_Library.getCards().length);
                     playerFBValue.setText("" + CardFactoryUtil.getGraveyardActivationCards(AllZone.HumanPlayer).size());
-                    playerRemovedValue.setText("" + AllZone.Human_Removed.getCards().length);
+                    playerRemovedValue.setText("" + AllZone.Human_Exile.getCards().length);
                     
                 }
             };
@@ -512,7 +512,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                     oppHandValue.setText("" + AllZone.Computer_Hand.getCards().length);
                     oppGraveValue.setText("" + AllZone.Computer_Graveyard.getCards().length);
                     oppLibraryValue.setText("" + AllZone.Computer_Library.getCards().length);
-                    oppRemovedValue.setText("" + AllZone.Computer_Removed.getCards().length);
+                    oppRemovedValue.setText("" + AllZone.Computer_Exile.getCards().length);
                 }
             };
             AllZone.Computer_Hand.addObserver(o);
@@ -632,66 +632,66 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         //END, self hand
         
         //self play (land)
-        AllZone.Human_Play.addObserver(new Observer() {
+        AllZone.Human_Battlefield.addObserver(new Observer() {
             public void update(Observable a, Object b) {
                 //PlayerZone pZone = (PlayerZone) a; //unused
                 JPanel p = playerLandPanel;
                 p.removeAll();
                 
-                GuiDisplayUtil.setupLandPanel(p, AllZone.Human_Play.getCards());
+                GuiDisplayUtil.setupLandPanel(p, AllZone.Human_Battlefield.getCards());
                 p.revalidate();
                 p.repaint();
             }
         });
-        AllZone.Human_Play.updateObservers();
+        AllZone.Human_Battlefield.updateObservers();
         //END - self play (only land)
         
 
         //self play (no land)
-        AllZone.Human_Play.addObserver(new Observer() {
+        AllZone.Human_Battlefield.addObserver(new Observer() {
             public void update(Observable a, Object b) {
                 //PlayerZone pZone = (PlayerZone) a; //unused
                 JPanel p = playerCreaturePanel;
                 p.removeAll();
                 
-                GuiDisplayUtil.setupNoLandPanel(p, AllZone.Human_Play.getCards());
+                GuiDisplayUtil.setupNoLandPanel(p, AllZone.Human_Battlefield.getCards());
                 p.revalidate();
                 p.repaint();
             }
         });
-        AllZone.Human_Play.updateObservers();
+        AllZone.Human_Battlefield.updateObservers();
         //END - self play (no land)
         
 
         //computer play (no land)
-        AllZone.Computer_Play.addObserver(new Observer() {
+        AllZone.Computer_Battlefield.addObserver(new Observer() {
             public void update(Observable a, Object b) {
                 //PlayerZone pZone = (PlayerZone) a; //unused
                 JPanel p = oppCreaturePanel;
                 p.removeAll();
                 
-                GuiDisplayUtil.setupNoLandPanel(p, AllZone.Computer_Play.getCards());
+                GuiDisplayUtil.setupNoLandPanel(p, AllZone.Computer_Battlefield.getCards());
                 
                 p.revalidate();
                 p.repaint();
             }
         });
-        AllZone.Computer_Play.updateObservers();
+        AllZone.Computer_Battlefield.updateObservers();
         //END - computer play (no land)
         
         //computer play (land)
-        AllZone.Computer_Play.addObserver(new Observer() {
+        AllZone.Computer_Battlefield.addObserver(new Observer() {
             public void update(Observable a, Object b) {
                 //PlayerZone pZone = (PlayerZone) a; //unused
                 JPanel p = oppLandPanel;
                 p.removeAll();
                 
-                GuiDisplayUtil.setupLandPanel(p, AllZone.Computer_Play.getCards());
+                GuiDisplayUtil.setupLandPanel(p, AllZone.Computer_Battlefield.getCards());
                 p.revalidate();
                 p.repaint();
             }
         });
-        AllZone.Computer_Play.updateObservers();
+        AllZone.Computer_Battlefield.updateObservers();
         //END - computer play (only land)
         
     }//addObservers()

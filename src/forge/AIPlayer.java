@@ -144,7 +144,7 @@ public class AIPlayer extends Player{
 			hand.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards());
 
 			CardList blIP = new CardList();
-			blIP.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+			blIP.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
 			blIP = blIP.getType("Basic");
 			if(blIP.size() > 5) {
 				CardList blIH = hand.getType("Basic");
@@ -184,7 +184,7 @@ public class AIPlayer extends Player{
             boolean b = false;
             if(topN.get(i).getType().contains("Basic")) {
                 CardList bl = new CardList(
-                        AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+                        AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
                 bl = bl.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
                         if(c.getType().contains("Basic")) return true;
@@ -197,7 +197,7 @@ public class AIPlayer extends Player{
                 b = true;
             } else if(topN.get(i).getType().contains("Creature")) {
                 CardList cl = new CardList(
-                        AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards());
+                        AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
                 cl = cl.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
                         if(c.getType().contains("Creature")) return true;
