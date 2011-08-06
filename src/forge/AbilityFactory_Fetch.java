@@ -82,6 +82,7 @@ public class AbilityFactory_Fetch {
 	            
 	            if(o != null) {
 	            	AllZone.Human_Library.remove(o);
+	                AllZone.GameAction.shuffle(player);
 	            	Card c = (Card) o;
 	            	library.remove(c);
 	            	if (destination.equals("Hand")) 
@@ -95,7 +96,6 @@ public class AbilityFactory_Fetch {
 	            	break;
 	        }//if
         }
-        AllZone.GameAction.shuffle(player);
 	}
 	
 	private static void doFetchAI(AbilityFactory af, String player){
@@ -125,24 +125,24 @@ public class AbilityFactory_Fetch {
 	        		c = library.get(0);
 
             	AllZone.Computer_Library.remove(c);
+                AllZone.GameAction.shuffle(player);
             	library.remove(c);
-            	if (destination.equals("Hand")) {
+            	if (destination.equals("Hand")&& !type.equals("Card")) {
                     	CardList l = new CardList();
                     	l.add(c);
-                    	AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
+                    	AllZone.Display.getChoiceOptional(af.getHostCard().getName() + " - Computer picked:", l.toArray());
             		AllZone.Computer_Hand.add(c);
             	}//move to hand
             	else if (destination.equals("Battlefield")) 
                 	AllZone.getZone(Constant.Zone.Play, player).add(c); //move to battlefield
-            	else if (destination.equals("Library")) {
+            	else if (destination.equals("Library") && !type.equals("Card")) {
                 	CardList l = new CardList();
                 	l.add(c);
-                	AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
+                	AllZone.Display.getChoiceOptional(af.getHostCard().getName() + " - Computer picked:", l.toArray());
                 	AllZone.Computer_Library.add(c, libraryPosition); 
             	}//move to top of library
 	        }//if
         }
-        AllZone.GameAction.shuffle(player);
 	}
 
 	private static boolean fetchCanPlayAI(SpellAbility sa, AbilityFactory af){
