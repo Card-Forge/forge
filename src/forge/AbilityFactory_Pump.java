@@ -117,10 +117,10 @@ public class AbilityFactory_Pump {
             		// all the other tests still need to pass if a counter will be removed
             		Counters count = AF.getAbCost().getCounterType();
             		double chance = .66;
-            		if (count.equals("P1P1")){	// 10% chance to remove +1/+1 to pump
+            		if (count.equals(Counters.P1P1)){	// 10% chance to remove +1/+1 to pump
             			chance = .1;
             		}
-            		else if (count.equals("CHARGE")){ // 50% chance to remove +1/+1 to pump
+            		else if (count.equals(Counters.CHARGE)){ // 50% chance to remove +1/+1 to pump
             			chance = .5;
             		}
                     Random r = new Random();
