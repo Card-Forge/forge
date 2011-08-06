@@ -154,7 +154,7 @@ public class AbilityFactory_GainControl {
         	return false;
         
         // Don't steal something if I can't Attack without, or prevent it from blocking at least
-        if (lose.contains("EOT") && AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Blockers))
+        if (lose != null && lose.contains("EOT") && AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Blockers))
         	return false;
         
 		while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) { 
