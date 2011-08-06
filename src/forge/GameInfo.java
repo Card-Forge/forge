@@ -2,6 +2,8 @@ package forge;
 
 import java.util.ArrayList;
 
+import forge.card.mana.ManaCost;
+
 public class GameInfo {
 	private boolean computerStartedThisGame = false;
 	

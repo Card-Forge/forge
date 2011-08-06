@@ -2,6 +2,8 @@ package forge;
 
 import java.util.EnumSet;
 
+import forge.card.mana.ManaCost;
+
 public enum Color {
 	Colorless(0),
 	White(1),

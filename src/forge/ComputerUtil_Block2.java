@@ -3,6 +3,8 @@ package forge;
 
 import java.util.ArrayList;
 
+import forge.card.cardFactory.CardFactoryUtil;
+
 
 public class ComputerUtil_Block2
 {

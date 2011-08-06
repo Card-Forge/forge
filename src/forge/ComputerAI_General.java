@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.SpellAbility;
+
 
 public class ComputerAI_General implements Computer {
 

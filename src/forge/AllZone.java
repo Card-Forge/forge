@@ -1,6 +1,10 @@
 package forge;
 
 
+import forge.card.cardFactory.CardFactory;
+import forge.card.mana.ManaPool;
+import forge.card.trigger.TriggerHandler;
+import forge.gui.input.InputControl;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 

@@ -2,12 +2,18 @@
 package forge;
 
 
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
 import forge.gui.ForgeAction;
 import forge.gui.GuiUtils;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPanel;
 import forge.gui.game.CardPicturePanel;
+import forge.gui.input.Input_Attack;
+import forge.gui.input.Input_Block;
+import forge.gui.input.Input_PayManaCost;
+import forge.gui.input.Input_PayManaCost_Ability;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;

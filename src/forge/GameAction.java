@@ -2,7 +2,24 @@
 package forge;
 
 
+import forge.card.cardFactory.CardFactory;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.mana.ManaCost;
+import forge.card.mana.ManaPool;
+import forge.card.spellability.Ability;
+import forge.card.spellability.Ability_Static;
+import forge.card.spellability.Cost;
+import forge.card.spellability.Cost_Payment;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbility_Requirements;
+import forge.card.spellability.Target_Selection;
+import forge.card.trigger.Trigger;
+import forge.deck.generate.GenerateConstructedDeck;
 import forge.gui.GuiUtils;
+import forge.gui.input.Input_Mulligan;
+import forge.gui.input.Input_PayManaCost;
+import forge.gui.input.Input_PayManaCost_Ability;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 
@@ -201,7 +218,7 @@ public class GameAction {
 					};
 								
 		    		String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover")).split(":")[1];
-		    		Ability_Cost abCost = new Ability_Cost(recoverCost,recoverable.getName(),false);
+		    		Cost abCost = new Cost(recoverCost,recoverable.getName(),false);
 		    		abRecover.setPayCosts(abCost);
 		    					
 		    		StringBuilder question = new StringBuilder("Recover ");
@@ -735,7 +752,7 @@ public class GameAction {
     	}	
     }
     
-	static boolean MultiTarget_Cancelled = false;
+	private static boolean MultiTarget_Cancelled = false;
 	public void runWheneverKeyword(Card c, String Event, Object[] Custom_Parameters) { 
 		/**
 		 * Custom_Parameters Info: 
@@ -1041,7 +1058,7 @@ public class GameAction {
 								private static final long serialVersionUID = -83034517601871955L;
 
 								public void execute() {
-									MultiTarget_Cancelled = false;
+									setMultiTargetCancelled(false);
 									for(int i = 0; i < F_Multiple_Targets; i++) {
 										AllZone.InputControl.setInput(CardFactoryUtil.input_MultitargetCreatureOrPlayer(F_SpellAbility , i , F_Amount[0]*F_Multiple_Targets,new Command() {
 
@@ -2228,7 +2245,7 @@ public class GameAction {
         Constant.Quest.fantasyQuest[0] = true;
     }
     
-    boolean Start_Cut = false;
+    private boolean Start_Cut = false;
     boolean StaticEffectKeywordReset = true;
     public void newGame(Deck humanDeck, Deck computerDeck) {
 //    AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
@@ -2405,7 +2422,7 @@ public class GameAction {
         if (Constant.Runtime.matchState.countWinLose() == 0)
         {
         	// New code to determine who goes first. Delete this if it doesn't work properly
-	        if(Start_Cut) 
+	        if(isStartCut()) 
 	        	seeWhoPlaysFirst();
 	        else 
 	        	seeWhoPlaysFirst_CoinToss();
@@ -2424,7 +2441,7 @@ public class GameAction {
         AllZone.Human_Battlefield.add(mp);
 
         AllZone.InputControl.setInput(new Input_Mulligan());
-        Phase.GameBegins = 1;
+        Phase.setGameBegins(1);
     }//newGame()
     
     //this is where the computer cheats
@@ -2586,8 +2603,8 @@ public class GameAction {
         }
 	}//seeWhoPlaysFirst_CoinToss()
     
-    Card HumanCut = null;
-    Card ComputerCut = null;   
+    private Card HumanCut = null;
+    private Card ComputerCut = null;   
     
     public void seeWhoPlaysFirst() {
 
@@ -2611,7 +2628,7 @@ public class GameAction {
 	        if(Starter_Determined == true) break;
 	        
 	        if(HLibrary.size() > 0) 
-	        	HumanCut = HLibrary.get(MyRandom.random.nextInt(HLibrary.size()));
+	        	setHumanCut(HLibrary.get(MyRandom.random.nextInt(HLibrary.size())));
 	        else {
 	        	computerStartsGame();
 	        	JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_MANA_COST) + "\r\n" + ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
@@ -2619,26 +2636,26 @@ public class GameAction {
 	        }
 	        
 	        if(CLibrary.size() > 0) 
-	        	ComputerCut = CLibrary.get(MyRandom.random.nextInt(CLibrary.size()));
+	        	setComputerCut(CLibrary.get(MyRandom.random.nextInt(CLibrary.size())));
 	        else {
 	        	JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_MANA_COST) + "\r\n" + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
 	        	return;
 	        }
 	        
 	        Cut_Count = Cut_Count + 1;	
-	        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer),AllZone.GameAction.HumanCut);
-	        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer),AllZone.GameAction.ComputerCut);
+	        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer),AllZone.GameAction.getHumanCut());
+	        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer),AllZone.GameAction.getComputerCut());
 	        
 	        StringBuilder sb = new StringBuilder();
-	        sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_CUT) + HumanCut.getName() + " (" + HumanCut.getManaCost() + ")" + "\r\n");
-	        sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_CUT) + ComputerCut.getName()  + " (" + ComputerCut.getManaCost() + ")" + "\r\n");
+	        sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_CUT) + getHumanCut().getName() + " (" + getHumanCut().getManaCost() + ")" + "\r\n");
+	        sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_CUT) + getComputerCut().getName()  + " (" + getComputerCut().getManaCost() + ")" + "\r\n");
 	        sb.append("\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n");
-	        if(CardUtil.getConvertedManaCost(ComputerCut.getManaCost()) > CardUtil.getConvertedManaCost(HumanCut.getManaCost())){
+	        if(CardUtil.getConvertedManaCost(getComputerCut().getManaCost()) > CardUtil.getConvertedManaCost(getHumanCut().getManaCost())){
 	        	computerStartsGame();
 	        	JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
 	        	return;
 	        } 
-	        else if(CardUtil.getConvertedManaCost(ComputerCut.getManaCost()) < CardUtil.getConvertedManaCost(HumanCut.getManaCost())) {
+	        else if(CardUtil.getConvertedManaCost(getComputerCut().getManaCost()) < CardUtil.getConvertedManaCost(getHumanCut().getManaCost())) {
 	        	JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
 	        	return;
 	        } 
@@ -2856,7 +2873,7 @@ public class GameAction {
     	} // isSpell
 
     	// Get Cost Reduction
-    	if(Phase.GameBegins == 1) { // Remove GameBegins from Phase and into The starting game code
+    	if(Phase.getGameBegins() == 1) { // Remove GameBegins from Phase and into The starting game code
     		CardList Cards_In_Play = new CardList();
     		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer).getCards());
     		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).getCards());
@@ -3218,7 +3235,7 @@ public class GameAction {
     		Cost_Payment payment = null;
     		if(sa.getPayCosts() == null)
     		{
-    			payment = new Cost_Payment(new Ability_Cost("0",sa.getSourceCard().getName(),sa.isAbility()), sa);
+    			payment = new Cost_Payment(new Cost("0",sa.getSourceCard().getName(),sa.isAbility()), sa);
     		}
     		else
     		{
@@ -3480,4 +3497,36 @@ public class GameAction {
             }
         }//for
     }
+
+	public static void setMultiTargetCancelled(boolean multiTarget_Cancelled) {
+		MultiTarget_Cancelled = multiTarget_Cancelled;
+	}
+
+	public static boolean isMultiTargetCancelled() {
+		return MultiTarget_Cancelled;
+	}
+
+	public void setComputerCut(Card computerCut) {
+		ComputerCut = computerCut;
+	}
+
+	public Card getComputerCut() {
+		return ComputerCut;
+	}
+
+	public void setStartCut(boolean start_Cut) {
+		Start_Cut = start_Cut;
+	}
+
+	public boolean isStartCut() {
+		return Start_Cut;
+	}
+
+	public void setHumanCut(Card humanCut) {
+		HumanCut = humanCut;
+	}
+
+	public Card getHumanCut() {
+		return HumanCut;
+	}
 }

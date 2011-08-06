@@ -30,6 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 
+import forge.deck.generate.GenerateConstructedDeck;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
 import forge.properties.ForgeProps;

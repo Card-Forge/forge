@@ -3,6 +3,8 @@ import java.util.HashMap;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.cardFactory.CardFactoryUtil;
+
 
 public class StaticEffects
 {

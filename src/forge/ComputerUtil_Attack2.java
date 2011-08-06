@@ -3,6 +3,8 @@ package forge;
 import java.util.ArrayList;
 import java.util.Random;
 
+import forge.card.cardFactory.CardFactoryUtil;
+
 //doesHumanAttackAndWin() uses the global variable AllZone.ComputerPlayer
 public class ComputerUtil_Attack2 {
 	

@@ -1,7 +1,10 @@
 
 package forge;
 
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.SpellAbility;
 import forge.gui.GuiUtils;
+import forge.gui.input.Input;
 
 
 public class HumanPlayer extends Player{

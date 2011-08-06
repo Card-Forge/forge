@@ -1,12 +1,16 @@
 
 package forge;
 
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.Ability;
+import forge.card.spellability.SpellAbility;
+
 public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
     private static final long serialVersionUID = 5750837078903423978L;
     
     private boolean           trigger          = true;
     private boolean           leavesTrigger    = true;
-	static boolean SimultaneousEntry = false; // For Cards with Multiple Token Entry. Only Affects Allies at the moment.
+	private static boolean SimultaneousEntry = false; // For Cards with Multiple Token Entry. Only Affects Allies at the moment.
 	static int SimultaneousEntryCounter = 1; // For Cards with Multiple Token Entry. Only Affects Allies at the moment.
     
     public PlayerZone_ComesIntoPlay(String zone, Player player) {
@@ -322,4 +326,12 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         trigger = b;
         leavesTrigger = b;
     }
+
+	public static void setSimultaneousEntry(boolean simultaneousEntry) {
+		SimultaneousEntry = simultaneousEntry;
+	}
+
+	public static boolean isSimultaneousEntry() {
+		return SimultaneousEntry;
+	}
 }

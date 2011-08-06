@@ -9,6 +9,10 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.Ability;
+import forge.card.spellability.SpellAbility;
+
 
 public abstract class Player extends MyObservable{
 	protected String name;

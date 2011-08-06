@@ -7,7 +7,21 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
+import forge.card.abilityFactory.AbilityFactory;
+import forge.card.cardFactory.CardFactory;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.Ability;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.Ability_Static;
+import forge.card.spellability.Cost;
+import forge.card.spellability.Spell;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
+import forge.gui.input.Input;
+import forge.gui.input.Input_PayManaCostUtil;
+import forge.gui.input.Input_PayManaCost_Ability;
 
 
 public class GameActionUtil {
@@ -390,7 +404,7 @@ public class GameActionUtil {
 		Card source = sa.getSourceCard();
 		if(!source.isCopiedSpell() && source.getKeyword().contains("Storm"))
 		{		
-			int StormNumber  = Phase.StormCount - 1;		
+			int StormNumber  = Phase.getStormCount() - 1;		
 			for(int i = 0; i < StormNumber; i++)
 				AllZone.CardFactory.copySpellontoStack(source, source, sa, true);   	
 		}
@@ -5962,7 +5976,7 @@ public class GameActionUtil {
 					}
 					
 					if(!hasAbility) {
-						Ability_Cost abCost = new Ability_Cost("T", c.getName(), true);
+						Cost abCost = new Cost("T", c.getName(), true);
 						Target target = new Target(c,"TgtCP");
 						final Ability_Activated ability = new Ability_Activated(c, abCost, target)
 					    {
@@ -6705,7 +6719,7 @@ public class GameActionUtil {
 			PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.ComputerPlayer);
 			CardList opponentCreatureList = new CardList(opponentPlayZone.getCards());
 			opponentCreatureList = opponentCreatureList.getType("Creature");
-			if(Phase.Sac_Dauntless_Escort == true) {
+			if(Phase.isSacDauntlessEscort() == true) {
 				if(PlayerCreatureList.size() != 0) {
 					for(int i = 0; i < PlayerCreatureList.size(); i++) {
 						Card c = PlayerCreatureList.get(i);
@@ -6738,7 +6752,7 @@ public class GameActionUtil {
 			opponentPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.HumanPlayer);
 			opponentCreatureList = new CardList(opponentPlayZone.getCards());
 			opponentCreatureList = opponentCreatureList.getType("Creature");
-			if(Phase.Sac_Dauntless_Escort_Comp == true) {
+			if(Phase.isSacDauntlessEscortAI() == true) {
 				if(PlayerCreatureList.size() != 0) {
 					for(int i = 0; i < PlayerCreatureList.size(); i++) {
 						Card c = PlayerCreatureList.get(i);
@@ -7180,7 +7194,7 @@ public class GameActionUtil {
 		CardList                  next             = new CardList();
 
 		public void execute() {
-			if(Phase.GameBegins == 1) {
+			if(Phase.getGameBegins() == 1) {
 			// reset creatures
 			removeSwampwalk(old);
 
@@ -7247,7 +7261,7 @@ public class GameActionUtil {
 		CardList                  next             = new CardList();
 
 		public void execute() {
-			if(Phase.GameBegins == 1) {
+			if(Phase.getGameBegins() == 1) {
 			// reset creatures
 			removeFirstStrike(old);
 
@@ -7314,7 +7328,7 @@ public class GameActionUtil {
 		CardList                  next             = new CardList();
 
 		public void execute() {
-			if(Phase.GameBegins == 1) {
+			if(Phase.getGameBegins() == 1) {
 			// reset creatures
 			removeHaste(old);
 
@@ -7381,7 +7395,7 @@ public class GameActionUtil {
 		CardList                  next             = new CardList();
 
 		public void execute() {
-			if(Phase.GameBegins == 1) {
+			if(Phase.getGameBegins() == 1) {
 			// reset creatures
 			removeFlying(old);
 
@@ -7448,7 +7462,7 @@ public class GameActionUtil {
 		CardList                  next             = new CardList();
 
 		public void execute() {
-			if(Phase.GameBegins == 1) {
+			if(Phase.getGameBegins() == 1) {
 			// reset creatures
 			removeTrample(old);
 

@@ -12,6 +12,15 @@ import java.util.Map.Entry;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.cardFactory.CardFactory;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.mana.ManaCost;
+import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.Ability_Triggered;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Spell_Permanent;
+import forge.card.trigger.Trigger;
+
 public class Card extends MyObservable {
     private static int                   nextUniqueNumber;
     private int                          uniqueNumber                      = nextUniqueNumber++;

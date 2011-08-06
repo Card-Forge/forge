@@ -4,6 +4,8 @@ import java.util.Comparator;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.cardFactory.CardFactoryUtil;
+
 public class CardListUtil
 {
   public static CardList filterToughness(CardList in, int atLeastToughness)

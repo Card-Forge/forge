@@ -12,21 +12,21 @@ public class Phase extends MyObservable
 	private int phaseIndex;
 	private int turn;
 
-	static int	 	GameBegins = 0;
-    static int	   StormCount;
-    static CardList		HighTides = new CardList();
+	private static int	 	GameBegins = 0;
+    private static int	   StormCount;
+    private static CardList		HighTides = new CardList();
     static int	   PlayerSpellCount;
     static int	   PlayerCreatureSpellCount;   
     static int	   ComputerSpellCount;
     static int	   ComputerCreatureSpellCount;
-    static boolean	   Sac_Dauntless_Escort;
-    static boolean	   Sac_Dauntless_Escort_Comp;
+    private static boolean	   Sac_Dauntless_Escort;
+    private static boolean	   Sac_Dauntless_Escort_Comp;
     
     //Not sure these should be here but I can't think of a better place
-    static ArrayList<Integer> ManaDrain_BonusMana_Human = new ArrayList<Integer>();
-    static ArrayList<Integer> ManaDrain_BonusMana_AI = new ArrayList<Integer>();
-    static CardList ManaDrain_Source_Human = new CardList();
-    static CardList ManaDrain_Source_AI = new CardList();
+    private static ArrayList<Integer> ManaDrain_BonusMana_Human = new ArrayList<Integer>();
+    private static ArrayList<Integer> ManaDrain_BonusMana_AI = new ArrayList<Integer>();
+    private static CardList ManaDrain_Source_Human = new CardList();
+    private static CardList ManaDrain_Source_AI = new CardList();
     
     private Stack<Player> extraTurns = new Stack<Player>();
     
@@ -136,7 +136,7 @@ public class Phase extends MyObservable
         resetPriority();
         bPhaseEffects = true;
         needToNextPhase = false;
-        GameBegins = 0;
+        setGameBegins(0);
         phaseIndex = 0;
         extraTurns.clear();
         nCombatsThisTurn = 0;
@@ -147,8 +147,8 @@ public class Phase extends MyObservable
     }
     
     public void turnReset(){
-    	StormCount = 0;
-    	HighTides.clear();
+    	setStormCount(0);
+    	getHighTides().clear();
         PlayerSpellCount = 0;
         PlayerCreatureSpellCount = 0;   
         ComputerSpellCount = 0;
@@ -178,22 +178,22 @@ public class Phase extends MyObservable
 	    	// TODO: Move the function to Player class, and use gainManaDrainMana() instead
 	    	// turn.gainManaDrainMana();
 	    	
-	    	if (turn.isHuman() && Phase.ManaDrain_BonusMana_Human.size() != 0){
-	        	for(int i=0;i<Phase.ManaDrain_BonusMana_Human.size();i++)
-	        		AllZone.ManaPool.addManaToFloating(Integer.toString(Phase.ManaDrain_BonusMana_Human.get(i)), Phase.ManaDrain_Source_Human.get(i) );
+	    	if (turn.isHuman() && Phase.getManaDrain_BonusMana_Human().size() != 0){
+	        	for(int i=0;i<Phase.getManaDrain_BonusMana_Human().size();i++)
+	        		AllZone.ManaPool.addManaToFloating(Integer.toString(Phase.getManaDrain_BonusMana_Human().get(i)), Phase.getManaDrain_Source_Human().get(i) );
 	        	
-	        	Phase.ManaDrain_BonusMana_Human.clear();
-	        	Phase.ManaDrain_Source_Human.clear();
+	        	Phase.getManaDrain_BonusMana_Human().clear();
+	        	Phase.getManaDrain_Source_Human().clear();
 	    	}
 	    	
-	        if(turn.isComputer() && Phase.ManaDrain_BonusMana_AI.size() != 0){
+	        if(turn.isComputer() && Phase.getManaDrain_BonusMana_AI().size() != 0){
 	        	//for(int i=0;i<Phase.ManaDrain_BonusMana_AI.size();i++)
 	        	//	AllZone.ManaPool.addManaToFloating(Integer.toString(Phase.ManaDrain_BonusMana_AI.get(i)), Phase.ManaDrain_Source_AI.get(i) );
 
 	        	// Mana is currently lost for AI. The above commented code was adding to the Human's mana pool
 	        	
-	        	Phase.ManaDrain_BonusMana_AI.clear();
-	        	Phase.ManaDrain_Source_AI.clear();
+	        	Phase.getManaDrain_BonusMana_AI().clear();
+	        	Phase.getManaDrain_Source_AI().clear();
 	        }
 	    }
         
@@ -602,4 +602,78 @@ public class Phase extends MyObservable
             phase.nextPhase();
         }
     }
+
+	public static void setSacDauntlessEscort(boolean sac_Dauntless_Escort) {
+		Sac_Dauntless_Escort = sac_Dauntless_Escort;
+	}
+
+	public static boolean isSacDauntlessEscort() {
+		return Sac_Dauntless_Escort;
+	}
+
+	public static void setSacDauntlessEscortAI(boolean sac_Dauntless_Escort_Comp) {
+		Sac_Dauntless_Escort_Comp = sac_Dauntless_Escort_Comp;
+	}
+
+	public static boolean isSacDauntlessEscortAI() {
+		return Sac_Dauntless_Escort_Comp;
+	}
+
+	public static void setStormCount(int stormCount) {
+		StormCount = stormCount;
+	}
+
+	public static int getStormCount() {
+		return StormCount;
+	}
+
+	public static void setHighTides(CardList highTides) {
+		HighTides = highTides;
+	}
+
+	public static CardList getHighTides() {
+		return HighTides;
+	}
+
+	public static void setManaDrain_BonusMana_Human(
+			ArrayList<Integer> manaDrain_BonusMana_Human) {
+		ManaDrain_BonusMana_Human = manaDrain_BonusMana_Human;
+	}
+
+	public static ArrayList<Integer> getManaDrain_BonusMana_Human() {
+		return ManaDrain_BonusMana_Human;
+	}
+
+	public static void setManaDrain_Source_Human(CardList manaDrain_Source_Human) {
+		ManaDrain_Source_Human = manaDrain_Source_Human;
+	}
+
+	public static CardList getManaDrain_Source_Human() {
+		return ManaDrain_Source_Human;
+	}
+
+	public static void setManaDrain_BonusMana_AI(
+			ArrayList<Integer> manaDrain_BonusMana_AI) {
+		ManaDrain_BonusMana_AI = manaDrain_BonusMana_AI;
+	}
+
+	public static ArrayList<Integer> getManaDrain_BonusMana_AI() {
+		return ManaDrain_BonusMana_AI;
+	}
+
+	public static void setManaDrain_Source_AI(CardList manaDrain_Source_AI) {
+		ManaDrain_Source_AI = manaDrain_Source_AI;
+	}
+
+	public static CardList getManaDrain_Source_AI() {
+		return ManaDrain_Source_AI;
+	}
+
+	public static void setGameBegins(int gameBegins) {
+		GameBegins = gameBegins;
+	}
+
+	public static int getGameBegins() {
+		return GameBegins;
+	}
 }

@@ -3,6 +3,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import forge.card.abilityFactory.AbilityFactory;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.mana.ManaCost;
+import forge.card.spellability.Ability;
+import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.Cost;
+import forge.card.spellability.Cost_Payment;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Target;
+
 
 public class ComputerUtil
 {
@@ -30,7 +40,7 @@ public class ComputerUtil
 	    		if(sa.isSpell() && !source.isCopiedSpell())
 	    			AllZone.GameAction.moveToStack(source);
 		
-		        Ability_Cost cost = sa.getPayCosts();
+		        Cost cost = sa.getPayCosts();
 		        Target tgt = sa.getTarget();
 		        
 		        if (cost == null){
@@ -187,12 +197,12 @@ public class ComputerUtil
 	  ManaCost cost = new ManaCost(mana);
 
 	  // Tack xMana Payments into mana here if X is a set value
-	  if (sa.getPayCosts() != null && cost.xcounter > 0){
+	  if (sa.getPayCosts() != null && cost.getXcounter() > 0){
 		  String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X"; 
 		  // For Count$xPaid set PayX in the AFs then use that here
 		  // Else calculate it as appropriate.
 		  if (!card.getSVar(xSvar).equals("")){
-			  int manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.xcounter;
+			  int manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.getXcounter();
 			  cost.increaseColorlessMana(manaToAdd);
 		  }
 	  }
@@ -272,7 +282,7 @@ public class ComputerUtil
   static public boolean canPayAdditionalCosts(SpellAbility sa)
   {
 	  	// Add additional cost checks here before attempting to activate abilities
-		Ability_Cost cost = sa.getPayCosts();
+		Cost cost = sa.getPayCosts();
 		if (cost == null)
 			return true;
 	  	Card card = sa.getSourceCard();
@@ -480,7 +490,7 @@ public class ComputerUtil
 
 	  Card card = sa.getSourceCard();
 	  // Tack xMana Payments into mana here if X is a set value
-	  if (sa.getPayCosts() != null && cost.xcounter > 0){
+	  if (sa.getPayCosts() != null && cost.getXcounter() > 0){
 		  String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X"; 
 		  // For Count$xPaid set PayX in the AFs then use that here
 		  // Else calculate it as appropriate.
@@ -489,7 +499,7 @@ public class ComputerUtil
 			  manaToAdd = Integer.parseInt(card.getSVar(xSvar));
 		  }
 		  else{
-			  manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.xcounter;
+			  manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.getXcounter();
 		  }
 		  
 		  cost.increaseColorlessMana(manaToAdd);
@@ -833,7 +843,7 @@ public class ComputerUtil
 	  Arrays.sort(sa, c);
   }//sortSpellAbilityByCost()
   
-	static void sacrificePermanents(int amount, CardList list) {
+	static public void sacrificePermanents(int amount, CardList list) {
 		// used in Annihilator and AF_Sacrifice
 		int max = list.size();
 		if (max > amount)

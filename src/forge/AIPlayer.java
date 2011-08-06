@@ -3,6 +3,9 @@ package forge;
 
 import java.util.Random;
 
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.SpellAbility;
+
 
 public class AIPlayer extends Player{
 	

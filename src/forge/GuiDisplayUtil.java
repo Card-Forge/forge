@@ -21,6 +21,9 @@ import javax.swing.event.MouseInputAdapter;
 
 import arcane.ui.PlayArea;
 import arcane.ui.util.Animation;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.mana.ManaPool;
+import forge.card.spellability.Ability_Mana;
 import forge.gui.game.CardPanel;
 import forge.properties.NewConstants;
 
@@ -913,7 +916,7 @@ public class GuiDisplayUtil implements NewConstants {
         p.repaint();
     }
     
-    static void updateGUI() {
+    public static void updateGUI() {
         AllZone.Computer_Battlefield.updateObservers();
         AllZone.Human_Battlefield.updateObservers();
         AllZone.Human_Hand.updateObservers();

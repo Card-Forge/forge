@@ -2,6 +2,10 @@ package forge;
 
 import java.util.ArrayList;
 
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Cost;
+import forge.card.spellability.SpellAbility;
+
 @Deprecated
 @SuppressWarnings("deprecation")
 public class QuestUtil {
@@ -146,7 +150,7 @@ public class QuestUtil {
         if (level == 6)
         {
         	final Card crd = c;
-        	Ability_Cost abCost = new Ability_Cost("T", crd.getName(), true);
+        	Cost abCost = new Cost("T", crd.getName(), true);
         	final SpellAbility ability = new Ability_Activated(crd, abCost, null){
 				private static final long serialVersionUID = 7546242087593613719L;
 

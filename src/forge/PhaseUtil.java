@@ -2,6 +2,9 @@ package forge;
 
 import java.util.ArrayList;
 
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.gui.input.Input;
+
 public class PhaseUtil {
 	// ******* UNTAP PHASE *****
 	private static boolean skipUntap(Player p) {

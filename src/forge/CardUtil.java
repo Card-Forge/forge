@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import forge.card.mana.ManaCost;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.SpellAbilityList;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 

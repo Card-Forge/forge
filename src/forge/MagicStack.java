@@ -6,6 +6,19 @@ import java.util.Iterator;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.abilityFactory.AbilityFactory;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.mana.ManaCost;
+import forge.card.spellability.Ability;
+import forge.card.spellability.Ability_Mana;
+import forge.card.spellability.Ability_Static;
+import forge.card.spellability.Ability_Triggered;
+import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Spell_Permanent;
+import forge.card.spellability.Target;
+import forge.gui.input.Input;
+import forge.gui.input.Input_PayManaCost_Ability;
+
 public class MagicStack extends MyObservable {
 	private ArrayList<SpellAbility> stack = new ArrayList<SpellAbility>();
 	private ArrayList<SpellAbility> frozenStack = new ArrayList<SpellAbility>();
@@ -253,7 +266,7 @@ public class MagicStack extends MyObservable {
 					push(sp);
 				}
 				
-				else if (sp.payCosts != null){
+				else if (sp.getPayCosts() != null){
 					push(sp);
 				}
 				
@@ -602,7 +615,7 @@ public class MagicStack extends MyObservable {
 		this.updateObservers();
 		
 		if (sp.isSpell() && !sp.getSourceCard().isCopiedSpell()) {
-			Phase.StormCount = Phase.StormCount + 1;
+			Phase.setStormCount(Phase.getStormCount() + 1);
 			if (sp.getSourceCard().getController() == AllZone.HumanPlayer) {
 				Phase.PlayerSpellCount = Phase.PlayerSpellCount + 1;
 				if (sp.getSourceCard().isCreature()) {

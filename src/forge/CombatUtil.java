@@ -9,11 +9,16 @@ import java.util.regex.Pattern;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.abilityFactory.AbilityFactory;
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.Ability;
+import forge.card.trigger.Trigger;
 import forge.gui.GuiUtils;
+import forge.gui.input.Input_PayManaCost_Ability;
 
 
 public class CombatUtil {
-	static boolean Lorthos_Cancelled;
+	private static boolean Lorthos_Cancelled;
 	
 	
 	//can the creature block given the combat state?
@@ -1781,7 +1786,7 @@ public class CombatUtil {
         		CardList Silence = AllZoneUtil.getPlayerCardsInPlay(c.getController().getOpponent()); 		
         		Silence = Silence.getName("Linvala, Keeper of Silence");
         		if(Silence.size() == 0) {
-        			Lorthos_Cancelled = false;
+        			setLorthosCancelled(false);
                 if(c.getController().equals(AllZone.HumanPlayer)) {
                     AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Activate " + c.getName() + "'s ability: " + "\r\n",
                             ability.getManaCost(), paidCommand, unpaidCommand));
@@ -2403,5 +2408,15 @@ public class CombatUtil {
     		AllZone.Stack.add(ability);
     	}
     }
+
+
+	public static void setLorthosCancelled(boolean lorthos_Cancelled) {
+		Lorthos_Cancelled = lorthos_Cancelled;
+	}
+
+
+	public static boolean isLorthosCancelled() {
+		return Lorthos_Cancelled;
+	}
     
 }//Class CombatUtil

@@ -266,7 +266,7 @@ public class Gui_DownloadSetPictures_LQ extends DefaultBoundedRangeModel impleme
                 // pause
                 try
                 {
-	                Thread.sleep(2442);
+	                Thread.sleep(150);
                 }
                 catch (InterruptedException e)
                 {

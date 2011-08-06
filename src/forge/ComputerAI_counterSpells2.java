@@ -2,6 +2,9 @@ package forge;
 
 import java.util.ArrayList;
 
+import forge.card.cardFactory.CardFactoryUtil;
+import forge.card.spellability.SpellAbility;
+
 public class ComputerAI_counterSpells2 {
 	
 	public static ArrayList<String> KeywordedCounterspells = new ArrayList<String>();

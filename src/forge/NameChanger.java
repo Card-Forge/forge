@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.Map.Entry;
 
+import forge.card.spellability.SpellAbility;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;

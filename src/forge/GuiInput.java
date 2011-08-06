@@ -5,6 +5,8 @@ package forge;
 import java.util.Observable;
 import java.util.Observer;
 
+import forge.gui.input.Input;
+
 
 public class GuiInput extends MyObservable implements Observer {
     Input input;

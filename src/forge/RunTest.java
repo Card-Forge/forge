@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import forge.card.cardFactory.CardFactory;
+import forge.card.mana.ManaCost;
+import forge.gui.input.Input_PayManaCostUtil;
+
 public class RunTest
 {
     //@SuppressWarnings("unchecked") // HashSet needs <type>

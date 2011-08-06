@@ -4,6 +4,7 @@ package forge;
 
 import java.util.ArrayList;
 
+import forge.card.cardFactory.CardFactoryUtil;
 import forge.gui.GuiUtils;
 
 /**

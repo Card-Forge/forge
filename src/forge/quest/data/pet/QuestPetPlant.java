@@ -1,6 +1,9 @@
 package forge.quest.data.pet;
 
 import forge.*;
+import forge.card.spellability.Ability_Activated;
+import forge.card.spellability.Cost;
+import forge.card.spellability.SpellAbility;
 import forge.quest.data.bazaar.QuestStallManager;
 
 public class QuestPetPlant extends QuestPetAbstract {
@@ -56,7 +59,7 @@ public class QuestPetPlant extends QuestPetAbstract {
             petCard.addIntrinsicKeyword("Deathtouch");
 
 
-        	Ability_Cost abCost = new Ability_Cost("T", petCard.getName(), true);
+        	Cost abCost = new Cost("T", petCard.getName(), true);
         	final SpellAbility ability = new Ability_Activated(petCard, abCost, null){
 				private static final long serialVersionUID = 7546242087593613719L;
 

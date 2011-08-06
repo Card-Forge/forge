@@ -3,6 +3,8 @@ package forge;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.gui.input.Input;
+
 
 public class ComputerAI_Input extends Input {
     private static final long serialVersionUID = -3091338639571662216L;

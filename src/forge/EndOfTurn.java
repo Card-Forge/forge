@@ -1,5 +1,8 @@
 package forge;
 
+import forge.card.spellability.Ability;
+import forge.card.spellability.SpellAbility;
+
 //handles "until end of turn" and "at end of turn" commands from cards
 public class EndOfTurn implements java.io.Serializable
 {

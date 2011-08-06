@@ -3,6 +3,13 @@ package forge;
 import arcane.ui.util.ManaSymbols;
 import arcane.util.MultiplexOutputStream;
 import com.esotericsoftware.minlog.Log;
+
+import forge.deck.generate.Generate2ColorDeck;
+import forge.deck.generate.Generate3ColorDeck;
+import forge.deck.generate.GenerateConstructedDeck;
+import forge.deck.generate.GenerateConstructedMultiColorDeck;
+import forge.deck.generate.GenerateSealedDeck;
+import forge.deck.generate.GenerateThemeDeck;
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
 import forge.gui.GuiUtils;

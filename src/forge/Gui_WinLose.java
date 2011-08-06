@@ -117,7 +117,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     private void setup() {
     	AllZone.GameInfo.clearColorChanges();
         QuestMatchState winLose = Constant.Runtime.matchState;
-        Phase.GameBegins = 0;
+        Phase.setGameBegins(0);
         //3 is the match length, 3 is the number of games
         //disable buttons if match is up, or human player won 2 or lost 2 games already
         if((winLose.countWinLose() == 3) || (winLose.getWin() == 2) || (winLose.getLose() == 2)) {
