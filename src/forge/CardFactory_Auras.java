@@ -15,6 +15,14 @@ class CardFactory_Auras {
         return -1;
     }
     
+    public static int shouldEnchant(Card c) {
+        ArrayList<String> a = c.getKeyword();
+        for (int i = 0; i < a.size(); i++)
+            if (a.get(i).toString().startsWith("enPump")) return i;
+        
+        return -1;
+    }
+    
     public static Card getCard(final Card card, String cardName, String owner) {
         
 
@@ -5234,7 +5242,58 @@ class CardFactory_Auras {
                 card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
                 card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
             }
-        }//Vanishing		
+        }//Vanishing
+
+        if (shouldEnchant(card) != -1) {
+            int n = shouldEnchant(card);
+            if (n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                card.removeIntrinsicKeyword(parse);
+                
+                String k[] = parse.split(":");
+                String keywordsUnsplit = "";
+                String extrinsicKeywords[] = {"none"};    // for equips with no keywords to add
+
+                int Power = 0;
+                int Tough = 0;
+                
+                String ptk[] = k[1].split("/");
+                
+                if (ptk.length == 1)     // keywords in first cell
+                {
+                	keywordsUnsplit = ptk[0];
+                }
+                
+                else    // parse the power/toughness boosts in first two cells
+                {
+                    for (int i = 0; i < 2; i ++)
+                    {
+                        if (ptk[i].matches("[\\+\\-][0-9]")) ptk[i] =ptk[i].replace("+", "");
+                    }
+                    Power = Integer.parseInt(ptk[0].trim());
+                    Tough = Integer.parseInt(ptk[1].trim());
+                    
+                    if (ptk.length > 2)     // keywords in third cell
+                        keywordsUnsplit = ptk[2];
+                }
+                
+                if (keywordsUnsplit.length() > 0)    // then there is at least one extrinsic keyword to assign
+                {
+                    String tempKwds[] = keywordsUnsplit.split("&");
+                    extrinsicKeywords = new String[tempKwds.length];
+                    
+                    for (int i = 0; i < tempKwds.length; i ++)
+                    {
+                        extrinsicKeywords[i] = tempKwds[i].trim();
+                    }
+                }
+
+                card.addSpellAbility(CardFactoryUtil.enPump_Enchant(card, Power, Tough, extrinsicKeywords));
+                card.addEnchantCommand(CardFactoryUtil.enPump_onEnchant(card, Power, Tough, extrinsicKeywords));
+                card.addUnEnchantCommand(CardFactoryUtil.enPump_unEnchant(card, Power, Tough, extrinsicKeywords));
+                card.addLeavesPlayCommand(CardFactoryUtil.enPump_LeavesPlay(card, Power, Tough, extrinsicKeywords));
+            }
+        }// enPump
         
         return card;
     }

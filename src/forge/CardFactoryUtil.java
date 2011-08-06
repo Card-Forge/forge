@@ -1387,6 +1387,112 @@ public class CardFactoryUtil {
         return onUnEquip;
     }//eqPump_unEquip ( was vanila_unequip() )
     
+    public static SpellAbility enPump_Enchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords) {
+        final SpellAbility enchant = new Spell(sourceCard) {
+			private static final long serialVersionUID = -8259560434384053776L;
+			
+            public boolean canPlayAI() {
+                CardList list = new CardList(AllZone.Computer_Play.getCards());
+                list = list.getType("Creature");
+                
+                if (list.isEmpty()) return false;
+                
+                //else
+                CardListUtil.sortAttack(list);
+                CardListUtil.sortFlying(list);
+                
+                for (int i = 0; i < list.size(); i++) {
+                    if (CardFactoryUtil.canTarget(sourceCard, list.get(i))) {
+                        setTargetCard(list.get(i));
+                        return true;
+                    }
+                }
+                return false;
+            }//canPlayAI()
+
+			public void resolve() {
+                PlayerZone play = AllZone.getZone(Constant.Zone.Play, sourceCard.getController());
+                play.add(sourceCard);
+                
+                Card c = getTargetCard();
+                
+                if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(sourceCard, c)) {
+                	sourceCard.enchantCard(c);
+                    //System.out.println("Enchanted: " +getTargetCard());
+                }
+            }//resolve()
+        };//enchant ability
+        sourceCard.clearSpellAbility();
+        enchant.setBeforePayMana(CardFactoryUtil.input_targetCreature(enchant));
+//      enchant.setDescription("Test");
+        
+		return enchant;
+    }//enPump_Enchant()
+    
+    public static Command enPump_onEnchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords) {
+    	
+        Command onEnchant = new Command() {
+            
+			private static final long serialVersionUID = -357890638647936585L;
+
+			public void execute() {
+                if (sourceCard.isEnchanting()) {
+                    Card crd = sourceCard.getEnchanting().get(0);
+                    
+                    for(int i = 0; i < extrinsicKeywords.length; i ++) {
+                    	if (! (extrinsicKeywords[i].equals ("none")) && (! crd.getKeyword().contains(extrinsicKeywords[i])))    // prevent Flying, Flying
+                    		   crd.addExtrinsicKeyword(extrinsicKeywords[i]);
+                    }
+                    
+                    crd.addSemiPermanentAttackBoost(Power);
+                    crd.addSemiPermanentDefenseBoost(Tough);
+                }
+            }//execute()
+        };//Command
+        
+        return onEnchant;
+    }//enPump_onEnchant
+    
+    public static Command enPump_unEnchant(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords) {
+        
+    	Command onUnEnchant = new Command() {
+            
+			private static final long serialVersionUID = -7121856650546173401L;
+
+			public void execute() {
+                if (sourceCard.isEnchanting()) {
+                    Card crd = sourceCard.getEnchanting().get(0);
+                    
+                    for (int i = 0; i < extrinsicKeywords.length; i ++) {
+                    	crd.removeExtrinsicKeyword(extrinsicKeywords[i]);
+                    }
+                    
+                    crd.addSemiPermanentAttackBoost(-1 * Power);
+                    crd.addSemiPermanentDefenseBoost(-1 * Tough);
+                }
+            }//execute()
+        };//Command
+        
+        return onUnEnchant;
+    }//enPump_unEnchant
+    
+    public static Command enPump_LeavesPlay(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords) {
+    	
+    	Command onLeavesPlay = new Command() {
+    		
+			private static final long serialVersionUID = -924212760053167271L;
+
+			public void execute() {
+                if(sourceCard.isEnchanting()) {
+                    Card crd = sourceCard.getEnchanting().get(0);
+                    sourceCard.unEnchantCard(crd);
+                }
+            }//execute()
+    	};//Command
+    	
+    	return onLeavesPlay;
+    }
+    
     public static Command entersBattleFieldWithCounters(final Card c, final Counters type, final int n) {
         Command addCounters = new Command() {
             private static final long serialVersionUID = 4825430555490333062L;
