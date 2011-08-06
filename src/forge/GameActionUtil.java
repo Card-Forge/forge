@@ -2522,18 +2522,6 @@ public class GameActionUtil {
 				playerDamage_Dissipation_Field(c, crd);
 			}
 		}
-		if (c.isCreature() && (playerPerms.getName("Dread").size() > 0 || playerPerms.getName("No Mercy").size() > 0))
-		{
-			CardList l = playerPerms.filter(new CardListFilter()
-			{
-				public boolean addCard(Card crd)
-				{
-					return crd.getName().equals("Dread") || crd.getName().equals("No Mercy");
-				}
-			});
-			for (Card crd:l)
-				playerDamage_No_Mercy(c, crd);
-		}
 		if (playerPerms.getName("Farsight Mask").size() > 0)    		
 		{
 			final Card c1 = c;
@@ -2733,25 +2721,6 @@ public class GameActionUtil {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("Dissipation Field - returns ").append(c).append(" back to owner's hand.");
-		ability.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability);
-	}
-	
-	private static void playerDamage_No_Mercy(final Card c, final Card crd)
-	{		
-		Ability ability = new Ability(crd,"0")
-		{
-			public void resolve() {
-				if (AllZone.GameAction.isCardInPlay(c))
-				{
-					AllZone.GameAction.destroy(c);
-				}
-			}	
-		};// Ability
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append(crd).append(" - destroys ").append(c).append(".");
 		ability.setStackDescription(sb.toString());
 		
 		AllZone.Stack.add(ability);
