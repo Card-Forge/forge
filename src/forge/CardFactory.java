@@ -2577,7 +2577,9 @@ public class CardFactory implements NewConstants {
             }
         }//abDamageTgt
 
+        
         // Generic destroy target card
+        /* Converted cards to AF_SP$Destroy
         if(hasKeyword(card, "spDestroyTgt") != -1) {
             int n = hasKeyword(card, "spDestroyTgt");
             
@@ -2718,6 +2720,7 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(bbDstryTgt);
              }
          }//spDestroyTgt
+        */
         
         // Generic destroy target ___ activated ability
         if (hasKeyword(card, "abDestroyTgtV") != -1)
