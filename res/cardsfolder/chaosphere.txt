@@ -2,7 +2,7 @@ Name:Chaosphere
 ManaCost:2 R
 Types:World Enchantment
 Text:no text
-K:stPumpAll:Creature.withFlying:0/0/CARDNAME can block only creatures with flying.:No Condition:Creatures with flying can block only creatures with flying.
+K:stPumpAll:Creature.withFlying:0/0/HIDDEN CARDNAME can block only creatures with flying.:No Condition:Creatures with flying can block only creatures with flying.
 K:stPumpAll:Creature.withoutFlying:0/0/Reach:No Condition:Creatures without flying have reach. (They can block creatures with flying.)
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True

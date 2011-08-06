@@ -25,7 +25,7 @@ public class Card extends MyObservable {
     private ArrayList<String>            intrinsicKeyword                  = new ArrayList<String>();
     private ArrayList<String>            extrinsicKeyword                  = new ArrayList<String>();
     private ArrayList<String>			 otherExtrinsicKeyword			   = new ArrayList<String>();
-    private ArrayList<String>			 HiddenExtrinsicKeyword			   = new ArrayList<String>();
+    private ArrayList<String>			 HiddenExtrinsicKeyword			   = new ArrayList<String>();		//Hidden keywords won't be displayed on the card
     private ArrayList<String>            prevIntrinsicKeyword              = new ArrayList<String>();
     private ArrayList<Card>              attached                          = new ArrayList<Card>();
     private ArrayList<Card>              equippedBy                        = new ArrayList<Card>();             //which equipment cards are equipping this card?
@@ -1819,6 +1819,7 @@ public class Card extends MyObservable {
     }
     
     //keywords are like flying, fear, first strike, etc...
+    // Hidden keywords will be left out
     public ArrayList<String> getUnhiddenKeyword() {
         ArrayList<String> a1 = new ArrayList<String>(getIntrinsicKeyword());
         ArrayList<String> a2 = new ArrayList<String>(getExtrinsicKeyword());

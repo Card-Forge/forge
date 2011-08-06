@@ -2,7 +2,7 @@ Name:Dense Canopy
 ManaCost:1 G
 Types:Enchantment
 Text:no text
-K:stPumpAll:Creature.withFlying:0/0/CARDNAME can block only creatures with flying.:No Condition:Creatures with flying can block only creatures with flying.
+K:stPumpAll:Creature.withFlying:0/0/HIDDEN CARDNAME can block only creatures with flying.:No Condition:Creatures with flying can block only creatures with flying.
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

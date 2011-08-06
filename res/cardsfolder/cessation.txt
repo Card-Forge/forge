@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Enchantment Aura
 Text:Enchanted creature can't attack.
 K:Enchant creature
-K:enPumpCurse:CARDNAME can't attack.
+K:enPumpCurse:HIDDEN CARDNAME can't attack.
 K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cessation.jpg

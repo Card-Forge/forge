@@ -2,7 +2,7 @@ Name:Trailblazer
 ManaCost:2 G G
 Types:Instant
 Text:no text
-K:spPumpTgt:Unblockable
+K:spPumpTgt:HIDDEN Unblockable:Target creature is unblockable this turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trailblazer.jpg
 End

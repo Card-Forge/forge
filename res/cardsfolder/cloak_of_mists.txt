@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Enchantment Aura
 Text:Enchanted creature is unblockable.
 K:Enchant creature
-K:enPump:Unblockable
+K:enPump:HIDDEN Unblockable
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloak_of_mists.jpg
 End
