@@ -436,9 +436,16 @@ public class GuiDisplayUtil implements NewConstants {
         }//else
     }//getPicture()
     
+    public static PicturePanel getPictureHQ(Card c) {
+    	return new PicturePanel(getPictureHQFile(c));
+    }
     
-    public static JPanel getPictureHQ(Card c) {
-    	
+    /**
+     * Get picture location
+     * @param c card to return picture location for
+     * @return File
+     */
+    public static File getPictureHQFile(Card c) {
     	String loc = "";
         if (c.isToken()== false)
         	loc = IMAGE_BASE;
@@ -446,10 +453,8 @@ public class GuiDisplayUtil implements NewConstants {
         	loc = IMAGE_TOKEN;
         String filename = GuiDisplayUtil.cleanString(c.getImageName()) + ".jpg";
         File file = new File(ForgeProps.getFile(loc), filename);
-    	return new PicturePanel(file);
+        return file;
     }
-    
-
     
     public static int getPictureHQheight(Card c) throws IOException{
     	String loc = "";

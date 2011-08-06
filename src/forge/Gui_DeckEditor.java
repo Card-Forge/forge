@@ -106,6 +106,7 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
     private CardList          bottom;
     public Card cCardHQ; 
     private static File       previousDirectory = null;
+    private GUI_PictureHQ hq;
     
     public static void main(String[] args) {
 
@@ -869,8 +870,8 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
 
         public void mouseEntered(MouseEvent e) { 
         	       	
-        	if (picturePanel.getComponentCount()!=0){
-        				   
+        	if (picturePanel.getComponentCount()!=0){        		
+        			 
         			 if(GuiDisplayUtil.IsPictureHQExists(cCardHQ)){    
         				 int cWidth = 0;
  						try {
@@ -887,14 +888,15 @@ public class Gui_DeckEditor extends JFrame implements CardDetail, DeckDisplay, N
  							e2.printStackTrace();
  						}
          		 
-         			if(cWidth>=312 &&cHeight >=445){ 
-					GUI_PictureHQ hq = new GUI_PictureHQ(Gui_DeckEditor.this,cCardHQ);
-					try {
-						hq.letsGo(Gui_DeckEditor.this, cCardHQ);
-						
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
+         			if(cWidth>=312 &&cHeight >=445){
+         				if (hq == null) {
+         					hq = new GUI_PictureHQ(Gui_DeckEditor.this,cCardHQ);
+         				}
+						try {
+							hq.letsGo(Gui_DeckEditor.this, cCardHQ);						
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 					}
 					
         		}}
