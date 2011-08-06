@@ -8,4 +8,5 @@ T:Mode$AttackerUnblocked | ValidCard$ Card.Self | OptionalDecider$ You | Execute
 SVar:TrigDiscard:AB$Discard | Cost$ Sac<1/CARDNAME> | Defined$ Opponent | NumCards$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_mindripper.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/19.jpg
 End

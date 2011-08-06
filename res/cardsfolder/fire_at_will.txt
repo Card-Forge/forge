@@ -7,4 +7,5 @@ SVar:DBDamage2:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature.attacking,Creature.
 SVar:DBDamage3:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ target attacking or blocking creature (3) | NumDmg$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_at_will.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/140.jpg
 End

@@ -8,4 +8,5 @@ A:AB$ ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Libr
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grazing_kelpie.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/153.jpg
 End
