@@ -1745,6 +1745,7 @@ public class CardFactory implements NewConstants {
             else
             {
             	StringBuilder sb = new StringBuilder();
+            	sb.append(card.getName());
             	sb.append(" deals " + NumDmg[0] + " damage to target ");
 
             	if (TgtCP[0])
@@ -1753,17 +1754,16 @@ public class CardFactory implements NewConstants {
             		sb.append("creature.");
             	else if (TgtPlayer[0])
             		sb.append("player.");
-            	
-                if (tapOnlyCost == true)
-                    spDesc[0] = "Tap: " + card.getName() + sb.toString();
-                 else if (tapCost == true)
-                    spDesc[0] = manaCost + ", tap: " + card.getName() + sb.toString();
-                 else
-                    spDesc[0] = manaCost + ": " + card.getName() + sb.toString();
-
+            	 spDesc[0] = sb.toString();
                  stDesc[0] = card.getName() + " -" + sb.toString();
             }
-            
+            if (tapOnlyCost == true)
+                spDesc[0] = "Tap: " + spDesc[0];
+             else if (tapCost == true)
+                spDesc[0] = manaCost + ", tap: " + spDesc[0];
+             else
+                spDesc[0] = manaCost + ": " + spDesc[0];
+
             if (! tapCost)
             {
             	final SpellAbility abDamage = new Ability_Activated(card, manaCost)
@@ -2701,6 +2701,231 @@ public class CardFactory implements NewConstants {
         card.addSpellAbility(spDstryTgt);
     }//spDestroyTgt
     
+    while (hasKeyword(card, "abDrawCards") != -1)
+    {
+    	int n = hasKeyword(card, "abDrawCards");
+    	String parse = card.getKeyword().get(n).toString();
+    	card.removeIntrinsicKeyword(parse);
+    	
+    	String k[] = parse.split(":");
+    	
+    	final boolean Tgt[] = {false};
+    	Tgt[0] = k[0].contains("Tgt");
+    	
+        String tmpCost = new String("");
+        
+        if (Tgt[0])
+        	tmpCost = k[0].substring(14);
+        
+        else
+           	tmpCost = k[0].substring(11);
+    	
+        boolean tapCost = false;
+        boolean tapOnlyCost = false;
+       
+        if (tmpCost.contains("T"))
+        {
+           tapCost = true;
+           tmpCost = tmpCost.replace("T", "");
+           tmpCost = tmpCost.trim();
+           if (tmpCost.length() == 0)
+              tapOnlyCost = true;
+        }
+       
+        final String manaCost = tmpCost;
+    	
+    	final int NumCards[] = {-1};
+        final String NumCardsX[] = {"none"};
+
+        if (k[1].matches("X"))
+        {
+        	String x = card.getSVar(k[1]);
+        	if (x.startsWith("Count$"))
+        	{
+        		String kk[] = x.split("\\$");
+        		NumCardsX[0] = kk[1]; 
+        	}
+        }
+        else if (k[1].matches("[0-9][0-9]?"))
+           NumCards[0] = Integer.parseInt(k[1]);
+       
+        // drawbacks and descriptions
+        final String DrawBack[] = {"none"};
+        final String spDesc[] = {"none"};
+        final String stDesc[] = {"none"};
+        if (k.length > 2)
+        {
+           if (k[2].contains("Drawback$"))
+           {
+              String kk[] = k[2].split("\\$");
+              DrawBack[0] = kk[1];
+              if (k.length > 3)
+                 spDesc[0] = k[3];
+              if (k.length > 4)
+                 stDesc[0] = k[4];
+           }
+           else
+           {
+              if (k.length > 2)
+                 spDesc[0] = k[2];
+              if (k.length > 3)
+                 stDesc[0] = k[3];
+           }
+        }
+        if (tapOnlyCost == true)
+            spDesc[0] = "Tap: " + spDesc[0];
+         else if (tapCost == true)
+            spDesc[0] = manaCost + ", tap: " + spDesc[0];
+         else
+            spDesc[0] = manaCost + ": " + spDesc[0];
+
+       
+        if (! tapCost)
+        {
+        	final SpellAbility abDraw = new Ability_Activated(card, manaCost)
+        	{
+                private static final long serialVersionUID = -206739246009089196L;
+
+                private int ncards;
+                
+                public int getNumCards()
+                {
+                   if (NumCards[0] != -1)
+                      return NumCards[0];
+
+                   if (! NumCardsX[0].equals("none"))
+                      return CardFactoryUtil.xCount(card, NumCardsX[0]);
+                  
+                   return 0;
+                }
+
+                public boolean canPlayAI()
+                {
+                   ncards = getNumCards();
+                   int h = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).size();
+                   int hl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human).size();
+                   int cl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).size();
+                   
+                   Random r = new Random();
+                   
+                   // prevent run-away activations - first time will always return true
+                   boolean rr = false;
+                   if (r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed()))
+                	   rr = true;
+
+
+                   if (((hl - ncards) < 2) && Tgt[0])	// attempt to deck the human
+                   {
+                      setTargetPlayer(Constant.Player.Human);
+                      return true && rr;
+                   }
+                  
+                   if (((h + ncards) <= 7) && !((cl - ncards) < 1) && (r.nextInt(10) > 4))
+                   {
+                      setTargetPlayer(Constant.Player.Computer);
+                      return true && rr;
+                   }
+                  
+                   return false;
+                }
+
+                public void resolve()
+                {
+                   ncards = getNumCards();
+
+                   String TgtPlayer = card.getController();
+                   if (Tgt[0])
+                      TgtPlayer = getTargetPlayer();
+
+                   for (int i=0; i < ncards; i++)
+                      AllZone.GameAction.drawCard(TgtPlayer);
+
+                   if (! DrawBack[0].equals("none"))
+                      CardFactoryUtil.doDrawBack(DrawBack[0], ncards, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
+                }
+        	};
+        	
+        	abDraw.setDescription(spDesc[0]);
+        	abDraw.setStackDescription(stDesc[0]);
+        	
+        	if (Tgt[0] == true)
+        		abDraw.setBeforePayMana(CardFactoryUtil.input_targetPlayer(abDraw));
+        		
+        	card.addSpellAbility(abDraw);
+        }//!tapCost
+        
+        if (tapCost)
+        {
+        	final SpellAbility abDraw = new Ability_Tap(card)
+        	{
+                private static final long serialVersionUID = -2149577241283487990L;
+
+                private int ncards;
+                
+                public int getNumCards()
+                {
+                   if (NumCards[0] != -1)
+                      return NumCards[0];
+
+                   if (! NumCardsX[0].equals("none"))
+                      return CardFactoryUtil.xCount(card, NumCardsX[0]);
+                  
+                   return 0;
+                }
+
+                public boolean canPlayAI()
+                {
+                   ncards = getNumCards();
+                   int h = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).size();
+                   int hl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human).size();
+                   int cl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).size();
+                   
+                   Random r = new Random();
+
+                   if (((hl - ncards) < 2) && Tgt[0])	// attempt to deck the human if possible
+                   {
+                      setTargetPlayer(Constant.Player.Human);
+                      return true;
+                   }
+                  
+                   if (((h + ncards) <= 7) && !((cl - ncards) < 1) && (r.nextInt(10) > 4))
+                   {
+                      setTargetPlayer(Constant.Player.Computer);
+                      return true;
+                   }
+                  
+                   return false;
+                }
+
+                public void resolve()
+                {
+                   ncards = getNumCards();
+
+                   String TgtPlayer = card.getController();
+                   if (Tgt[0])
+                      TgtPlayer = getTargetPlayer();
+
+                   for (int i=0; i < ncards; i++)
+                      AllZone.GameAction.drawCard(TgtPlayer);
+
+                   if (! DrawBack[0].equals("none"))
+                      CardFactoryUtil.doDrawBack(DrawBack[0], ncards, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
+                }
+        	};
+        	
+        	abDraw.setDescription(spDesc[0]);
+        	abDraw.setStackDescription(stDesc[0]);
+        	
+        	if (!tapOnlyCost)
+        		abDraw.setManaCost(manaCost);
+        	
+        	if (Tgt[0] == true)
+        		abDraw.setBeforePayMana(CardFactoryUtil.input_targetPlayer(abDraw));
+        		
+        	card.addSpellAbility(abDraw);
+        }//tapCost
+    }
+    
     if (hasKeyword(card, "spDrawCards") != -1)
     {
        int n = hasKeyword(card, "spDrawCards");
@@ -2776,9 +3001,9 @@ public class CardFactory implements NewConstants {
               int cl = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).size();
               Random r = new Random();
 
-              if (((hl - ncards) < 2) && Tgt[0])
+              if (((hl - ncards) < 2) && Tgt[0])	// attempt to deck the human if possible
               {
-                 setTargetPlayer(Constant.Player.Computer);
+                 setTargetPlayer(Constant.Player.Human);
                  return true;
               }
              
@@ -15364,7 +15589,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
     }//*************** END ************ END **************************
     
-  //*************** START *********** START **************************
+/*  //*************** START *********** START **************************
     else if(cardName.equals("Scepter of Insight"))
     {
      final SpellAbility ability = new Ability_Tap(card, "3 U")
@@ -15383,7 +15608,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       ability.setDescription("3 U, tap: Draw a card.");
       ability.setStackDescription(card.getName() + " - draw a card.");
     }//*************** END ************ END **************************
-    
+*/    
   //*************** START *********** START **************************
     else if(cardName.equals("Innocent Blood"))
     {
