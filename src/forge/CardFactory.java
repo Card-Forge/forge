@@ -2490,7 +2490,7 @@ public class CardFactory implements NewConstants {
                     
                     // the computer will play the spell if Y < X - 3
                     return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
-                    		(computer.size() < human.size() - 3);
+                    		(computervalue < humanvalue - 3);
                 }
 
                 @Override

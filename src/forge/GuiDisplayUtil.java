@@ -896,7 +896,7 @@ public class GuiDisplayUtil implements NewConstants {
         	} 
         	else toPanel.attachedToPanel = null;
         	
-        	toPanel.setText(toPanel.gameCard);
+        	toPanel.setCard(toPanel.gameCard);
         }
         p.invalidate();
         p.repaint();

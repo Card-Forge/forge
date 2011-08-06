@@ -7438,8 +7438,7 @@ public class CardFactory_Creatures {
                     CardList TopCreatures = TopCards;
                     if(card.getController().equals(Constant.Player.Human)) {
                         if(TopCards.size()  > 0) {
-						@SuppressWarnings("unused")
-						Object o = AllZone.Display.getChoice(
+						AllZone.Display.getChoice(
                                 "Look at the top five cards: ", TopCards.toArray());
                         TopCreatures = TopCreatures.filter(new CardListFilter() {
                             public boolean addCard(Card c) {
@@ -20434,11 +20433,11 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlayAI() {
 					//todo(sol) setting up some AI for next go through
-					CardList human = new CardList(AllZone.Human_Play.getCards());
-					CardList computer = new CardList(AllZone.Computer_Play.getCards());
+					//CardList human = new CardList(AllZone.Human_Play.getCards());
+					//CardList computer = new CardList(AllZone.Computer_Play.getCards());
 					  
-					human = human.getType("Creature").getKeyword("Flying");
-					computer = computer.getType("Creature").getKeyword("Flying");
+					//human = human.getType("Creature").getKeyword("Flying");
+					//computer = computer.getType("Creature").getKeyword("Flying");
                 	
 					//int compLife = AllZone.Computer_Life.getLife();
 					//int humanLife = AllZone.Human_Life.getLife();
