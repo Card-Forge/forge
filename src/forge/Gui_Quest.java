@@ -433,6 +433,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Frodo 3		hard	New, Apthaven's AI Zoo Hard, more creature removal + Glorious Anthems");
         sb.append("\r\n");
+	sb.append("Galadriel 2		medium	Amulet of Vigor, green mana ramp, time vault and Howl of the Night Pack");
+        sb.append("\r\n");
         sb.append("Genghis Khan 1	easy	Mana Elves + Birds + Armageddon, Llanowar Behemoth");
         sb.append("\r\n");
         sb.append("Genghis Khan 2	medium	Mana Elves + Birds + Armageddon, Llanowar Behemoth");
