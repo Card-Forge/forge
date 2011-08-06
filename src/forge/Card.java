@@ -2900,6 +2900,7 @@ public class Card extends MyObservable {
         
     public void addDamageWithoutPrevention(final int damageIn, final Card source) {
     	int damageToAdd = damageIn;
+    	boolean wither = false;
     	
         if( damageToAdd == 0 ) return;  //Rule 119.8
         
@@ -2915,14 +2916,13 @@ public class Card extends MyObservable {
         	return;
         }
         
+        if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect"))) 
+        	wither = true;
+        
         GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
         
-        if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && this.isCreature()) {
-        	this.addCounterFromNonEffect(Counters.M1M1, damageToAdd);
-        	damageToAdd = 0;
-        }
-        
-        if(AllZoneUtil.isCardInPlay(this)) damage += damageToAdd;
+        if(AllZoneUtil.isCardInPlay(this) && wither) addCounterFromNonEffect(Counters.M1M1, damageToAdd);
+        if(AllZoneUtil.isCardInPlay(this) && !wither) damage += damageToAdd;
         
     }
     private ArrayList<SetInfo> Sets = new ArrayList<SetInfo>();
