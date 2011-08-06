@@ -47,6 +47,7 @@ public class GameActionUtil {
 		upkeep_Honden_of_Nights_Reach();
 		upkeep_Honden_of_Infinite_Rage();
 		upkeep_Vensers_Journal();
+		upkeep_Dega_Sanctuary();
 		upkeep_Land_Tax();
 		upkeep_Tangle_Wire();
 		upkeep_Mana_Vault();
@@ -9551,6 +9552,34 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}//for
 	}//upkeep_Vensers_Journal()
+	
+	private static void upkeep_Dega_Sanctuary() {
+		final Player player = AllZone.Phase.getPlayerTurn();
+
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Dega Sanctuary");
+
+		for(Card sanc:list) {
+			final Card source = sanc;
+			final Ability ability = new Ability(source, "0") {
+				public void resolve() {
+					int gain = 0;
+					CardList play = AllZoneUtil.getPlayerCardsInPlay(player);
+					CardList black = play.filter(AllZoneUtil.black);
+					CardList red = play.filter(AllZoneUtil.red);
+					if(black.size() > 0 && red.size() > 0) gain = 4;
+					else if(black.size() > 0 || red.size() > 0) gain = 2;
+					player.gainLife(gain, source);
+				}
+			};//Ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(source.getName()).append(" - ");
+			sb.append("if you control a black or red permanent, you gain 2 life. If you control a black permanent and a red permanent, you gain 4 life instead.");
+			ability.setStackDescription(sb.toString());
+
+			AllZone.Stack.add(ability);
+		}//for
+	}//upkeep_Dega_Sanctuary()
 
 	private static void upkeep_The_Rack() {
 		final Player player = AllZone.Phase.getPlayerTurn();
