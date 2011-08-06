@@ -124,4 +124,9 @@ public class HumanPlayer extends Player{
         }
 	}
 	
+	public void sacrificePermanent(String prompt, CardList choices) {
+		Input in = CardFactoryUtil.input_sacrificePermanent(choices, prompt);
+        AllZone.InputControl.setInput(in);
+	}
+	
 }//end HumanPlayer class

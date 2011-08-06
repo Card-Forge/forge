@@ -498,6 +498,9 @@ public abstract class Player extends MyObservable{
     public boolean isFirstTurn() { return bFirstTurn; }
     public void setFirstTurn(boolean b) { bFirstTurn = b; }
     
+    ////////////////////////////////
+    public abstract void sacrificePermanent(String prompt, CardList choices);
+    
 	////////////////////////////////
 	//
 	// generic Object overrides

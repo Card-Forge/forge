@@ -615,11 +615,13 @@ public class GameAction {
     }
     
     private void destroyLegendaryCreatures() {
-        ArrayList<Card> a = PlayerZoneUtil.getCardType(AllZone.Human_Play, "Legendary");
-        a.addAll(PlayerZoneUtil.getCardType(AllZone.Computer_Play, "Legendary"));               
+        //ArrayList<Card> a = PlayerZoneUtil.getCardType(AllZone.Human_Play, "Legendary");
+        //a.addAll(PlayerZoneUtil.getCardType(AllZone.Computer_Play, "Legendary"));  
+        CardList a = AllZoneUtil.getTypeInPlay("Legendary");
 
         while(!a.isEmpty() && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
-            ArrayList<Card> b = getCardsNamed(a, (a.get(0)).getName());
+            //ArrayList<Card> b = getCardsNamed(a, (a.get(0)).getName());
+        	CardList b = AllZoneUtil.getCardsInPlay(a.get(0).getName());
             a.remove(0);
             if(1 < b.size()) {
                 for(int i = 0; i < b.size(); i++)
@@ -651,6 +653,7 @@ public class GameAction {
         this.sacrificePermanent(player, sa, list);
     }
     
+    /*
     public void sacrificePermanent(Player player, String prompt, CardList choices) {
         if(choices.size() > 0) {
             if(player.isHuman()) {
@@ -665,6 +668,7 @@ public class GameAction {
             }
         }
     }
+    */
     
     public void sacrificePermanent(Player player, SpellAbility sa, CardList choices) {
         if(choices.size() > 0) {
@@ -2541,6 +2545,7 @@ public class GameAction {
         return library.toArray();
     }//smoothComputerManaCurve()
     
+    /*
     @SuppressWarnings("unused")
     // getComputerLand
     private CardList getComputerLand(CardList in) {
@@ -2553,6 +2558,7 @@ public class GameAction {
         
         return land;
     }//getComputerLand()
+    */
     
     //non-basic lands are removed, because the computer doesn't seem to
     //effectively used them very well

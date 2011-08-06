@@ -224,4 +224,12 @@ public class AIPlayer extends Player{
         }
 	}
 	
+	public void sacrificePermanent(String prompt, CardList choices) {
+		CardListUtil.sortDefense(choices);
+        choices.reverse();
+        CardListUtil.sortAttackLowFirst(choices);
+        Card c = choices.get(0);
+        AllZone.GameAction.sacrificeDestroy(c);
+	}
+	
 }//end AIPlayer class
