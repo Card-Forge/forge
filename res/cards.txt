@@ -1,3 +1,149 @@
+An-Havva Inn
+1 G G
+Sorcery
+no text
+spGainLife:X:You gain X plus 1 life, where X is the number of green creatures on the battlefield.:An-Havva Inn - player gains X life
+SVar:X:Count$GreenTypeOnBattlefield.Creature/Plus.1
+
+Angel's Mercy
+2 W W
+Instant
+no text
+spGainLife:7
+
+Bargain
+2 W
+Sorcery
+no text
+spGainLife:7:Drawback$OppDrawCard/1:Target opponent draws a card. You gain 7 life.:Bargain - opponent draws a card and you gain 7 life
+
+Blossoming Wreath
+G
+Instant
+no text
+spGainLife:X:You gain life equal to the number of creature cards in your graveyard.:Blossoming Wreath - player gains X life
+SVar:X:Count$TypeInYourYard.Creature
+
+Bountiful Harvest
+4 G
+Sorcery
+no text
+spGainLife:X:You gain 1 life for each land you control.:Bountiful Harvest - player gains X life
+SVar:X:Count$TypeYouControl.Land
+
+Congregate
+3 W
+Instant
+no text
+spGainLifeTgt:X:Target player gains 2 life for each creature on the battlefield.:Congregate - target player gains X life
+SVar:X:Count$TypeOnBattlefield.Creature/Times.2
+
+Fruition
+G
+Sorcery
+no text
+spGainLife:X:You gain 1 life for each Forest on the battlefield.:Fruition - player gains X life
+SVar:X:Count$TypeOnBattlefield.Forest
+
+Gerrard's Wisdom
+2 W W
+Sorcery
+no text
+spGainLife:X:You gain 2 life for each card in your hand.:Gerrard's Wisdom - player gains X life
+SVar:X:Count$CardsInYourHand/Times.2
+
+Heroes' Reunion
+W G
+Instant
+no text
+spGainLifeTgt:7
+
+Invigorating Falls
+2 G G
+Sorcery
+no text
+spGainLife:X:You gain life equal to the number of creature cards in all graveyards.:Invigorating Falls - player gains X life
+SVar:X:Count$TypeInAllYards.Creature
+
+Joyous Respite
+3 G
+Sorcery Arcane
+no text
+spGainLife:X:You gain 1 life for each land you control.:Joyous Respite - player gains X life
+SVar:X:Count$TypeYouCtrl.Land
+
+Kiss of the Amesha
+4 W U
+Sorcery
+no text
+spGainLifeTgt:7:Drawback$TgtDrawCards/2:Target player gains 7 life and draws two cards.:Kiss of the Amesha - target player gains 7 life and draws 2 cards
+
+Landbind Ritual
+3 W W
+Sorcery
+no text
+spGainLife:X:You gain 2 life for each Plains you control.:Landbind Ritual - player gains X life
+SVar:X:Count$TypeYouCtrl.Plains
+
+Natural Spring
+3 G G
+Sorcery
+no text
+spGainLifeTgt:8
+
+Peach Garden Oath
+W
+Sorcery
+no text
+spGainLife:X:You gain 2 life for each creature you control.:Peach Garden Oath - player gains X life
+SVar:X:Count$TypeYouCtrl.Creature/Times.2
+
+Presence of the Wise
+2 W W
+Sorcery
+no text
+spGainLife:X:You gain 2 life for each card in your hand.:Presence of the Wise - player gains X life
+SVar:X:Count$CardsInYourHand/Times.2
+
+Renewing Dawn
+1 W
+Sorcery
+no text
+spGainLife:X:You gain 2 life for each Mountain target opponent controls.:Renewing Dawn - player gains X life
+SVar:X:Count$TypeOppCtrl.Mountain/Times.2
+
+Soothing Balm
+1 W
+Instant
+no text
+spGainLifeTgt:5
+
+Spring of Eternal Peace
+3 G G
+Sorcery
+no text
+spGainLife:8
+
+Starlight
+1 W
+Sorcery
+no text
+spGainLife:X:You gain life for each black creature target opponent controls.:Starlight - player gains X life
+SVar:X:Count$BlackTypeOppCtrl.Creature/Times.3
+
+Sylvan Bounty
+5 G
+Instant
+no text
+spGainLifeTgt:8
+TypeCycling:Basic:1 G
+
+Vital Surge
+1 G
+Instant Arcane
+no text
+spGainLife:3
+
 Kongming, "Sleeping Dragon"
 2 W W
 Legendary Creature Human Advisor
