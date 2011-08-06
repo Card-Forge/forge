@@ -1,0 +1,47 @@
+BasicLandPercentage=22
+
+[Group MaxCnt=4 Percentage=13]
+Underground Sea
+Polluted Delta
+[/Group]
+
+[Group MaxCnt=4 Percentage=30]
+Hedron Crab
+Hedron Crab
+Tome Scour
+Tome Scour
+Cathartic Adept
+Ray of Erasure
+Duskmantle, House of Shadow
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Brain Freeze
+Glimpse the Unthinkable
+Glimpse the Unthinkable
+Millstone
+Millstone
+[/Group]
+
+[Group MaxCnt=2 Percentage=8]
+Ambassador Laquatus
+Jace Beleren
+Mind Funeral
+Drowner of Secrets
+[/Group]
+
+[Group MaxCnt=3 Percentage=8]
+Psychic Drain
+Soratami Mindsweeper
+Vedalken Entrancer
+Traumatize
+Traumatize
+[/Group]
+
+[Group MaxCnt=2 Percentage=4]
+Keening Stone
+Tower of Murmurs
+[/Group]
+
+
+End
