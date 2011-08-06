@@ -2,7 +2,7 @@ Name:Primal Bellow
 ManaCost:G
 Types:Instant
 Text:no text
-K:spPumpTgt:+X/+X:Target creature gets +1/+1 until end of turn for each Forest you control.:Primal Bellow - Target creature gets +X/+X until end of turn
+A:SP$Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +1/+1 until end of turn for each Forest you control.
 SVar:X:Count$TypeYouCtrl.Forest
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_bellow.jpg
