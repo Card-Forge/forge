@@ -2664,6 +2664,7 @@ res/cardsfolder/goblin_swine_rider.txt svneol=native#text/plain
 res/cardsfolder/goblin_taskmaster.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_trenches.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_tunneler.txt -text svneol=native#text/plain
+res/cardsfolder/goblin_turncoat.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_war_buggy.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_war_paint.txt -text svneol=native#text/plain
 res/cardsfolder/goblin_war_strike.txt -text svneol=native#text/plain
