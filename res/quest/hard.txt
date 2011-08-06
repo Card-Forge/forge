@@ -69,7 +69,6 @@ Jack Sparrow 3
 James Bond 3
 James T Kirk 3
 Jason Todd 3
-Jay Flash 3
 Joe Kidd 3
 Jon Stewart 3
 Kang 3
@@ -107,7 +106,6 @@ R2-D2 3
 Radiant 3
 Ras Al Ghul 3
 Raven 3
-Red Skull 3
 Robin 3
 Rocky 3
 Rogue 3
@@ -131,7 +129,6 @@ Thugs 3
 Treebeard 3
 Uncle Owen 3
 Vampire 3
-Werewolf 3
 White Knight 3
 Wilma Flintstone 3
 Wolverine 3

@@ -125,7 +125,6 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Fin Fang Foom 1", "easy", "B Artifact");
         addToDeckList("Fin Fang Foom 2", "medium", "G Infect");
         addToDeckList("Fin Fang Foom 3", "hard", "GB Infect");
-        addToDeckList("Flash 2", "medium", "RU Urzatron ");
         addToDeckList("Fred Flintstone 3", "hard", "Reasontg's Predator's Garden deck with mods, featuring Lorescale Coatl");
         addToDeckList("Frodo 1", "easy", "New, Apthaven's AI Zoo Easy, some creature removal");
         addToDeckList("Frodo 2", "medium", "New, Apthaven's AI Zoo Medium, some creature removal + Glorious Anthem");
@@ -155,7 +154,6 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Green Arrow 2", "medium", "G Anti-Air");
         addToDeckList("Green Arrow 3", "hard", "G Angry Large Monsters");
         addToDeckList("Green Lantern 3", "hard", "Nicol Bolas, Planeswalker + threat removal and several creatures");
-        addToDeckList("Gunslinger 2", "medium", "UR Trade Routes");
         addToDeckList("Gunslinger 3", "hard", "WGRB Cascade");
         
         addToDeckList("Han Solo 3", "hard", "WG enchantments deck with Sigil of the Empty Throne");
@@ -187,7 +185,6 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("James Bond 3", "hard", "gohongohon's Hard WGR Agro");
         addToDeckList("James T Kirk 3", "hard", "Rares 40 card black discard deck + Liliana Vess");
         addToDeckList("Jason Todd 3", "hard", "GBR Sacrifice");
-        addToDeckList("Jay Flash 3", "hard", "RB Cycling");
         addToDeckList("Joe Kidd 1", "easy", "Voracious Hatchling, Nightsky Mimic, no planeswalkers + a few WB spells");
         addToDeckList("Joe Kidd 2", "medium", "Voracious Hatchling, Nightsky Mimic, no planeswalkers + some WB spells");
         addToDeckList("Joe Kidd 3", "hard", "Voracious Hatchling, Nightsky Mimic, no planeswalkers + many WB spells");
@@ -209,10 +206,8 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Kojak 1", "easy", "Mono blue deck with Sunken City, Inundate, counterspells and bounce");
         addToDeckList("Kojak 2", "medium", "Mono blue deck with Sunken City, Inundate, counterspells and bounce");
         addToDeckList("Kojak 3", "hard", "Mono blue deck with Sunken City, Inundate, counterspells and bounce");
-        addToDeckList("Krypto 2", "medium", "GW Midrange");
         addToDeckList("Krypto 3", "hard", "GUB Standard Constructed");
         
-        addToDeckList("Lex 2", "medium", "UB Horobi");
         addToDeckList("Lex 3", "hard", "Ninjas!");
         addToDeckList("Link 3", "hard", "GUR Standard Constructed");
         addToDeckList("Lisa Simpson 3", "hard", "GW deck, creates tokens which are devoured by Skullmulcher and Gluttonous Slime");
@@ -263,7 +258,6 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Raven 2", "medium", "Birds!");
         addToDeckList("Raven 3", "hard", " Possessed Birds!");
         addToDeckList("Red Skull 2", "medium", "BR Metalcraft");
-        addToDeckList("Red Skull 3", "hard", "UB Standard");
         addToDeckList("Robin 2", "medium", "G Big Green");
         addToDeckList("Robin 3", "hard", "GW Standard");
         addToDeckList("Rocky 1", "easy", "Pro red, Flamebreak + Tremor + Pyroclasm but no Pyrohemia");
@@ -287,7 +281,6 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Sentinel 2", "medium", "WB Token");
         addToDeckList("Sentinel 3", "hard", "WB Token");
         addToDeckList("Shelob 1", "easy", "G Reach");
-        addToDeckList("Shelob 2", "medium", "UB Zombies");
         addToDeckList("Sherlock Holmes 1", "easy", "Mono green deck, Baru, Fist of Krosa + land fetch + some buff cards.");
         addToDeckList("Sherlock Holmes 2", "medium", "Mono green deck, Baru, Fist of Krosa + lots of good green creatures.");
         addToDeckList("Sherlock Holmes 3", "hard", "Mono green deck, Baru, Fist of Krosa + lots of great green creatures.");
@@ -328,7 +321,6 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         addToDeckList("Vampire 3", "hard", "Vampire Constructed");
         
         addToDeckList("Werewolf 2", "medium", "UGB Fungal Shambler");
-        addToDeckList("Werewolf 3", "hard", "UB Constructed");
         addToDeckList("White Knight 1", "easy", "W Common Knights");
         addToDeckList("White Knight 2", "medium", "Singleton Knights");
         addToDeckList("White Knight 3", "hard", "Knights Standard");
