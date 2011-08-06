@@ -257,7 +257,7 @@ public class TriggerHandler {
 		
 		HashMap<String,String> trigParams = regtrig.getMapParams();
 		final Player[] decider = new Player[1];
-		final boolean isOptional = false;
+		//final boolean isOptional = false;
 
 		if(mode.equals(trigParams.get("Mode")))
 		{
@@ -320,7 +320,12 @@ public class TriggerHandler {
 				{
 					mand = false;
 					decider[0] = host.getController().getOpponent();
-				}				
+				}
+				else if(trigParams.get("Optional").equals("TriggeredControllerDecides")) {
+					mand = false;
+					//decider[0] = sa[0].getTriggeringCard().getController();
+					decider[0] = ((Card)regtrig.getRunParams().get("Card")).getController();
+				}
 			}
 			else
 			{

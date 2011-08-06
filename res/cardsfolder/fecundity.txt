@@ -2,7 +2,8 @@ Name:Fecundity
 ManaCost:2 G
 Types:Enchantment
 Text:no text
-K:Whenever a creature is put into a graveyard from the battlefield, that creature's controller may draw a card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDraw | Optional$ TriggeredControllerDecides | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, that creature's controller may draw a card.
+SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fecundity.jpg
