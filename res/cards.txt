@@ -12,7 +12,7 @@ Target player takes an extra turn after this one.
 Deadly Grub
 2 B
 Creature Insect
-When Deadly Grub is put into a graveyard from the battlefield, if it had no time counters on it, put a 6/1 green Insect creature token with shroud onto the battlefield. (It can’t be the target of spells or abilities.)
+When Deadly Grub is put into a graveyard from the battlefield, if it had no time counters on it, put a 6/1 green Insect creature token with shroud onto the battlefield. (It can't be the target of spells or abilities.)
 3/1
 Vanishing:3
 
@@ -553,7 +553,7 @@ Traumatic Visions
 3 U U
 Instant
 Counter target spell.
-TypeCycling:Basic:1 B
+TypeCycling:Basic:1 U
 
 Fiery Fall
 5 R
