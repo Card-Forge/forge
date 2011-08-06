@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact
 Text:You have no maximum hand size.
 K:HandSize = INF Self
-T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you gain 1 life for each card in your hand.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you gain 1 life for each card in your hand.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ X
 SVar:X:Count$InYourHand
 SVar:Rarity:Rare
