@@ -3259,7 +3259,7 @@ public class CardFactory implements NewConstants {
             
         }//while shouldModular
         
-        if(hasKeyword(card, "1, Sacrifice CARNAME: Draw a card.") != -1) {
+        if(hasKeyword(card, "1, Sacrifice CARDNAME: Draw a card.") != -1) {
             int n = hasKeyword(card, "1, Sacrifice CARDNAME: Draw a card.");
             if(n != -1) {
                 String parse = card.getKeyword().get(n).toString();
@@ -17634,6 +17634,31 @@ public class CardFactory implements NewConstants {
         }//end Icy Manipulator
         //****************END*******END***********************
 
+        
+        //*************** START *********** START **************************
+        if(cardName.equals("Mind Twist")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 42470566751344693L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    return AllZone.Human_Hand.size() > 1;
+                }
+                
+                @Override
+                public void resolve() {
+                    String target = getTargetPlayer();
+                    for (int i =0; i<card.getXManaCostPaid();i++)
+                    	AllZone.GameAction.discardRandom(target);
+                }
+            };//SpellAbility
+            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

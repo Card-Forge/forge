@@ -217,6 +217,15 @@ public class GenerateConstructedDeck
     remove.add("Solidarity");
     remove.add("Steadfastness");
     remove.add("Tortoise Formation");
+    remove.add("Icy Manipulator");
+    
+    remove.add("Fog");
+    remove.add("Holy Day");
+    remove.add("Respite");
+    remove.add("Moment's Peace");
+    remove.add("Lull");
+    remove.add("Angelsong");
+    remove.add("Darkness");
     
     //manapool stuff:
     remove.add("Dark Ritual");

@@ -85,9 +85,9 @@ public class GameActionUtil {
         upkeep_Blaze_Counters();
         upkeep_Dark_Confidant(); // keep this one semi-last
         
+        upkeep_BlackVise(); 
         upkeep_Ivory_Tower();
-        upkeep_BlackVice(); // keep this one last, since it happens at the end
-        // of the upkeep.
+
         upkeep_Howling_Mine(); // keep this one even laster, since it would
         // cause black vise to do an extra point of
         // damage if black vise was in play
@@ -3475,6 +3475,8 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }
         
+        AllZone.GameAction.checkStateEffects();
+        
     }//landfall_Bloodghast
     
     private static void landfall_Avenger_of_Zendikar(Card c) {
@@ -5711,7 +5713,7 @@ public class GameActionUtil {
     // upkeep in MTG forge.
     // So Black Vise's effects happen at the beginning of the upkeep instead of
     // at the end.
-    private static void upkeep_BlackVice() {
+    private static void upkeep_BlackVise() {
         // sanity check. If a player has <= 4 cards black vise does nothing.
         final String player = AllZone.Phase.getActivePlayer();
         final int playerHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
