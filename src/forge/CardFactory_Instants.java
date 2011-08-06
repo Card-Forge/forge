@@ -3412,12 +3412,6 @@ public class CardFactory_Instants {
              *  that player controls that didn't attack this turn. Ignore this effect
              *  for each creature the player didn't control continuously since the
              *  beginning of the turn.
-             *  
-             *  Note: I cheated a bit - they are destroyed at the end of combat since
-             *  the getCreatureAttackedThisCombat is cleared at the end of combat, and
-             *  as far as I know, this info is not available at EndOfTurn
-             *  
-             *  TODO - add getCreatureAttackedThisTurn function
              */
             final SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = -5746330758531799264L;
@@ -3458,7 +3452,7 @@ public class CardFactory_Instants {
 							for(Card creature:creatures) {
 								//System.out.println("Siren's Call - EOT - "+creature.getName() +" flag: "+creature.getSirenAttackOrDestroy());
 								//System.out.println("Siren's Call - EOT - "+creature.getName() +" attacked?: "+creature.getCreatureAttackedThisCombat());
-								if(creature.getSirenAttackOrDestroy() && !creature.getCreatureAttackedThisCombat()) {
+								if(creature.getSirenAttackOrDestroy() && !creature.getCreatureAttackedThisTurn()) {
 									if(AllZone.GameAction.isCardInPlay(creature)) {
 										//System.out.println("Siren's Call - destroying "+creature.getName());
 										//this should probably go on the stack
@@ -3469,7 +3463,7 @@ public class CardFactory_Instants {
 							}
                         }//execute
                     };//Command
-                    AllZone.EndOfCombat.addAt(atEOT);
+                    AllZone.EndOfTurn.addAt(atEOT);
                 }//resolve
             };//SpellAbility
             
