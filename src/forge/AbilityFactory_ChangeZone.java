@@ -673,20 +673,20 @@ public class AbilityFactory_ChangeZone {
 				// AI Targeting 
 				Card choice = null;
 
-				if (CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false).isCreature() 
-						&& (destination.equals("Battlefield") || origin.equals("Battlefield")))
-	        		choice = CardFactoryUtil.AI_getBestCreatureToBounce(list); //if a creature is most expensive take the best
-	        	else if (destination.equals("Battlefield") || origin.equals("Battlefield"))
-	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
-	        	else{
-					// todo: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
-	        		if (list.size() > 0){
+				if (!list.isEmpty()){
+					if (CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false).isCreature() 
+							&& (destination.equals("Battlefield") || origin.equals("Battlefield")))
+		        		choice = CardFactoryUtil.AI_getBestCreatureToBounce(list); //if a creature is most expensive take the best
+		        	else if (destination.equals("Battlefield") || origin.equals("Battlefield"))
+		        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
+		        	else{
+						// todo: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
 		        		list.shuffle();
 		        		choice = list.get(0);
-	        		}
-	        	}
+		        	}
+				}
 				if (choice == null){	// can't find anything left
-					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
+					if (tgt.getNumTargeted() == 0 || tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)){
 						tgt.resetTargets();
 						return false;
 					}
