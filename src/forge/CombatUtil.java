@@ -284,10 +284,6 @@ public class CombatUtil {
                     && !blocker.getKeyword().contains("CARDNAME can block creatures with flying.")
                     && !blocker.getKeyword().contains("Reach")) return false;
         }
-        
-        if(attacker.getKeyword().contains("CARDNAME can't be blocked except by creatures with flying.")
-                && !blocker.getKeyword().contains("Flying")) return false;
-        
 
         if(attacker.getKeyword().contains("Horsemanship")) {
             if(!blocker.getKeyword().contains("Horsemanship")) return false;
@@ -324,35 +320,14 @@ public class CombatUtil {
             if(CardUtil.getColors(blocker).contains(Constant.Color.Green)) return false;
         }
         
-        if(attacker.getKeyword().contains("CARDNAME can't be blocked except by artifact creatures and/or white creatures.")) {
-            if(!blocker.getType().contains("Artifact")
-                    && !blocker.isWhite()) return false;
-        }
-        
         if(attacker.getKeyword().contains("CARDNAME can't be blocked by artifact creatures.")) {
         	if(blocker.isArtifact() && blocker.isCreature())
         		return false;
         }
         
-        if(attacker.getName().equals("Skirk Shaman")) {
-            if(!blocker.getType().contains("Artifact")
-                    && !blocker.isRed()) return false;
-        }
-        
-        if(attacker.getKeyword().contains("CARDNAME can't be blocked except by black creatures.")) {
-        	if(!blocker.isBlack())return false; 
-        }
-        
-        if(attacker.getKeyword().contains("CARDNAME can't be blocked except by blue creatures.")) {
-        	if(!blocker.isBlue())return false; 
-        }
-        
         if (attacker.getKeyword().contains("CARDNAME can't be blocked by Walls.") && blocker.isType("Wall")) return false;
         
         if (attacker.getKeyword().contains("CARDNAME can't be blocked except by Walls.") && !blocker.isType("Wall")) return false;
-        
-        if (attacker.getKeyword().contains("CARDNAME can't be blocked except by Walls and/or creatures with flying.") && 
-        		!(blocker.isType("Wall") || blocker.getKeyword().contains("Flying"))) return false;
         
         return true;
     }//canBlock()

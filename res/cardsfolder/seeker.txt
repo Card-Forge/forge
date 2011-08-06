@@ -3,6 +3,7 @@ ManaCost:2 W W
 Types:Enchantment Aura
 Text:Enchanted creature can't be blocked except by artifact creatures and/or white creatures.
 K:Enchant creature
+K:enPump:HIDDEN CantBeBlockedBy Creature.nonArtifact+nonWhite
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seeker.jpg
 SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/299.jpg

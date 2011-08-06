@@ -1284,9 +1284,7 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
-        //************************************************************************
-        // This card can't be converted to keyword, problem with keyword parse   *
-        //*************** START *********** START ********************************
+        /*
         else if(cardName.equals("Seeker")) {
             final SpellAbility spell = new Spell(card) {
 
@@ -1387,6 +1385,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+        */
         
         //******************************************************************
         // This card can't be converted to keyword, problem with Lifelink  *
