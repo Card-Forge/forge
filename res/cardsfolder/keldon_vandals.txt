@@ -1,10 +1,11 @@
 Name:Keldon Vandals
 ManaCost:2 R
 Types:Creature Human Rogue
-Text:When Keldon Vandals enters the battlefield, destroy target artifact.
+Text:no text
 PT:4/1
 K:Echo:2 R
-K:etbDestroyTgt:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_vandals.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/91.jpg

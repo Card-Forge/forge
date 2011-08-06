@@ -1,9 +1,10 @@
 Name:Dakmor Lancer
 ManaCost:4 B B
 Types:Creature Human Knight
-Text:When Dakmor Lancer enters the battlefield, destroy target nonblack creature.
+Text:no text
 PT:3/3
-K:etbDestroyTgt:Creature.nonBlack
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonblack creature.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dakmor_lancer.jpg
 SetInfo:S99|Rare|http://magiccards.info/scans/en/st/71.jpg

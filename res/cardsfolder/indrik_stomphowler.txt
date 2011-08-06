@@ -1,9 +1,10 @@
 Name:Indrik Stomphowler
 ManaCost:4 G
 Types:Creature Beast
-Text:When Indrik Stomphowler enters the battlefield, destroy target artifact or enchantment.
+Text:no text
 PT:4/4
-K:etbDestroyTgt:Artifact,Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact or enchantment.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indrik_stomphowler.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/86.jpg

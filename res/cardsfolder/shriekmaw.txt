@@ -1,10 +1,11 @@
 Name:Shriekmaw
 ManaCost:4 B
 Types:Creature Elemental
-Text:When Shriekmaw enters the battlefield, destroy target nonartifact, nonblack creature.
+Text:no text
 PT:3/2
 K:Fear
-K:etbDestroyTgt:Creature.nonArtifact+nonBlack
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonartifact, nonblack creature.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$ Select target nonartifact, nonblack creature.
 SVar:Evoke:1 B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekmaw.jpg
