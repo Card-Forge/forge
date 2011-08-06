@@ -2258,12 +2258,13 @@ public class CombatUtil {
 		HashMap<String, Object> runParams = new HashMap<String,Object>();
 		runParams.put("Attacker",a);
 		runParams.put("Blocker",b);
-		AllZone.TriggerHandler.runTrigger("AttackerBlocked", runParams);
 		AllZone.TriggerHandler.runTrigger("Blocks", runParams);
     	
-        if(!a.getCreatureGotBlockedThisCombat()) { 
+        if(!a.getCreatureGotBlockedThisCombat()) {
         	
-    		AllZone.GameAction.checkWheneverKeyword(a,"BecomesBlocked",null);
+    		AllZone.TriggerHandler.runTrigger("AttackerBlocked", runParams);
+        	
+    		//AllZone.GameAction.checkWheneverKeyword(a,"BecomesBlocked",null); No longer needed
     	
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
