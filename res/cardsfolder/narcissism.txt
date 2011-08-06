@@ -2,8 +2,8 @@ Name:Narcissism
 ManaCost:2 G
 Types:Enchantment
 Text:no text
-K:abPumpTgtC G Discard<1/Any>:+2/+2
-K:abPumpTgtC G Sac<1/CARDNAME>:+2/+2
+A:AB$Pump | Cost$ G Discard<1/Any> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
+A:AB$Pump | Cost$ G Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/narcissism.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/134.jpg

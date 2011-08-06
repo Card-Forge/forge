@@ -2,7 +2,7 @@ Name:Jabari's Banner
 ManaCost:2
 Types:Artifact
 Text:no text
-K:abPumpTgtC 1 T:Flanking
+A:AB$Pump | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flanking | SpellDescription$ Target creature gains flanking until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jabaris_banner.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/150.jpg
