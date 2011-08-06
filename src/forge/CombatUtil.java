@@ -936,7 +936,7 @@ public class CombatUtil {
         	
         	//Run triggers
         	HashMap<String,Object> runParams = new HashMap<String,Object>();
-        	runParams.put("Attacker", c);
+        	runParams.put("Card", c);
         	AllZone.TriggerHandler.runTrigger("Attacks", runParams);
         	
         	//Annihilator:
@@ -1949,7 +1949,7 @@ public class CombatUtil {
     	
     	//Run triggers
     	HashMap<String,Object> runParams = new HashMap<String,Object>();
-    	runParams.put("Attacker", c);
+    	runParams.put("Card", c);
     	AllZone.TriggerHandler.runTrigger("AttackerUnblocked", runParams);
     	
         if(c.getName().equals("Guiltfeeder")) {

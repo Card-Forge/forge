@@ -28,6 +28,10 @@ public class Trigger_Untaps extends Trigger {
 	public Trigger getCopy() {
 		return new Trigger_Untaps(mapParams,hostCard);
 	}
-
 	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return (Card)runParams.get("Card");
+	}
 }

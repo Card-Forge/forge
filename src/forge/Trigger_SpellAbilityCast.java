@@ -103,4 +103,10 @@ public class Trigger_SpellAbilityCast extends Trigger {
 	public Trigger getCopy() {
 		return new Trigger_SpellAbilityCast(mapParams,hostCard);
 	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return ((SpellAbility)runParams.get("CastSA")).getSourceCard();
+	}
 }

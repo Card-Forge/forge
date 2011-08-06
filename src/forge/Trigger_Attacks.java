@@ -49,4 +49,10 @@ public class Trigger_Attacks extends Trigger {
 	public Trigger getCopy() {
 		return new Trigger_Attacks(mapParams,hostCard);
 	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return (Card)runParams.get("Attacker");
+	}
 }

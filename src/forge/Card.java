@@ -1328,7 +1328,7 @@ public class Card extends MyObservable {
         
         //Run triggers
         HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("Morpher", this);
+        runParams.put("Card", this);
         AllZone.TriggerHandler.runTrigger("TurnFaceUp", runParams);
     }
     

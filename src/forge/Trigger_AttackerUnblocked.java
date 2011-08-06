@@ -25,4 +25,10 @@ public class Trigger_AttackerUnblocked extends Trigger {
 	public Trigger getCopy() {
 		return new Trigger_AttackerUnblocked(mapParams,hostCard);
 	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return (Card)runParams.get("Attacker");
+	}
 }

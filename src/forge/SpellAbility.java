@@ -26,6 +26,8 @@ public abstract class SpellAbility {
     private Card            targetCard;
     private Card            sourceCard;
     
+    private Card			triggeringCard		= null;
+    
     private CardList        targetList;
     
     private boolean         spell;
@@ -116,6 +118,16 @@ public abstract class SpellAbility {
     
     public void setManaCost(String cost) {
         manaCost = cost;
+    }
+    
+    public Card getTriggeringCard()
+    {
+    	return triggeringCard;
+    }
+    
+    public void setTriggeringCard(Card c)
+    {
+    	triggeringCard = c;
     }
     
     public String getAdditionalManaCost() {

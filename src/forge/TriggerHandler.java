@@ -205,7 +205,7 @@ public class TriggerHandler {
 			sa[0] = regtrig.getOverridingAbility();
 			if(sa[0] == null)
 			{
-				sa[0] = AF.getAbility(regtrig.getHostCard().getSVar(trigParams.get("Execute")), regtrig.getHostCard());
+				sa[0] = AF.getAbility(regtrig.getHostCard().getSVar(trigParams.get("Execute")), regtrig.getHostCard(),regtrig.getTriggeringCard(runParams));
 			}
 			sa[0].setActivatingPlayer(regtrig.getHostCard().getController());
 			if(sa[0].getStackDescription().equals(""))

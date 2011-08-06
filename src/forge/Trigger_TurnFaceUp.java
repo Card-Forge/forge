@@ -12,7 +12,7 @@ public class Trigger_TurnFaceUp extends Trigger {
 	public boolean performTest(HashMap<String, Object> runParams) {
 		if(mapParams.containsKey("ValidCard"))
 		{
-			if(!matchesValid(runParams.get("Morpher"),mapParams.get("ValidCard").split(","),hostCard))
+			if(!matchesValid(runParams.get("Card"),mapParams.get("ValidCard").split(","),hostCard))
 			{	
 				return false;
 			}
@@ -24,5 +24,11 @@ public class Trigger_TurnFaceUp extends Trigger {
 	@Override
 	public Trigger getCopy() {
 		return new Trigger_TurnFaceUp(mapParams,hostCard);
+	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return (Card)runParams.get("Card");
 	}
 }

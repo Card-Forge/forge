@@ -74,7 +74,7 @@ public class GameAction {
         //Run triggers        
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         // Should the MovedCard be the LKI, aka the original card that came in, not the card that's leaving?
-        runParams.put("MovedCard", c);
+        runParams.put("Card", c);
         //runParams.put("MovedCard",moving);
         runParams.put("Origin", prevZone);
         runParams.put("Destination", zone.getZoneName());
@@ -570,7 +570,7 @@ public class GameAction {
         
         //Run triggers
         HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("Sacrificed", c);
+        runParams.put("Card", c);
         AllZone.TriggerHandler.runTrigger("Sacrificed", runParams);
     }
     

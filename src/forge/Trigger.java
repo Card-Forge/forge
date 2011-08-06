@@ -190,4 +190,6 @@ public abstract class Trigger {
 	public abstract boolean performTest(HashMap<String,Object> runParams);
 	
 	public abstract Trigger getCopy();
+	
+	public abstract Card getTriggeringCard(HashMap<String,Object> runParams);
 }

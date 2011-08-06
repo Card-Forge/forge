@@ -28,4 +28,10 @@ public class Trigger_Taps extends Trigger {
 	public Trigger getCopy() {
 		return new Trigger_Taps(mapParams,hostCard);
 	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return (Card)runParams.get("Card");
+	}
 }

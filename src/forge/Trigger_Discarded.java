@@ -36,4 +36,10 @@ public class Trigger_Discarded extends Trigger {
 	public Trigger getCopy() {
 		return new Trigger_Discarded(mapParams,hostCard);
 	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return (Card)runParams.get("Card");
+	}
 }

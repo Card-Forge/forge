@@ -559,7 +559,7 @@ public abstract class Player extends MyObservable{
 			
 			//Run triggers
 			HashMap<String,Object> runParams = new HashMap<String,Object>();
-			runParams.put("Drawn", c);
+			runParams.put("Card", c);
 			AllZone.TriggerHandler.runTrigger("Drawn", runParams);
 		}
 		//lose:

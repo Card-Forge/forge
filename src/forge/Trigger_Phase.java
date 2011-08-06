@@ -31,4 +31,10 @@ public class Trigger_Phase extends Trigger {
 	public Trigger getCopy() {
 		return new Trigger_Phase(mapParams,hostCard);
 	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return null;
+	}
 }

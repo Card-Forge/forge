@@ -33,4 +33,10 @@ public class Trigger_Blocks extends Trigger {
 	public Trigger getCopy() {
 		return new Trigger_Blocks(mapParams,hostCard);
 	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return (Card)runParams.get("Blocker");
+	}
 }

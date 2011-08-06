@@ -35,7 +35,7 @@ public class Trigger_ChangesZone extends Trigger {
 		
 		if(mapParams.containsKey("ValidCard"))
 		{
-			Card moved = (Card)runParams.get("MovedCard");
+			Card moved = (Card)runParams.get("Card");
 			if(!moved.isValidCard(mapParams.get("ValidCard").split(","), hostCard.getController(), hostCard))
 			{
 				return false;
@@ -48,5 +48,11 @@ public class Trigger_ChangesZone extends Trigger {
 	@Override
 	public Trigger getCopy() {
 		return new Trigger_ChangesZone(mapParams,hostCard);
+	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return (Card)runParams.get("Card");
 	}
 }

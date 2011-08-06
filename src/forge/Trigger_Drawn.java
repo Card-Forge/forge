@@ -10,7 +10,7 @@ public class Trigger_Drawn extends Trigger {
 
 	@Override
 	public boolean performTest(HashMap<String, Object> runParams) {
-		Card draw = ((Card)runParams.get("Drawn"));
+		Card draw = ((Card)runParams.get("Card"));
 
 		if(mapParams.containsKey("ValidCard"))
 		{
@@ -25,5 +25,11 @@ public class Trigger_Drawn extends Trigger {
 	@Override
 	public Trigger getCopy() {
 		return new Trigger_Drawn(mapParams,hostCard);
+	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return (Card)runParams.get("Card");
 	}
 }

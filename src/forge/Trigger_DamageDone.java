@@ -55,4 +55,10 @@ public class Trigger_DamageDone extends Trigger {
 	public Trigger getCopy() {
 		return new Trigger_DamageDone(mapParams,hostCard);
 	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return null;
+	}
 }

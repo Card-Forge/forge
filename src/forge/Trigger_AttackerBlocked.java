@@ -32,4 +32,10 @@ public class Trigger_AttackerBlocked extends Trigger {
 	public Trigger getCopy() {
 		return new Trigger_AttackerBlocked(mapParams,hostCard);
 	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return (Card)runParams.get("Attacker");
+	}
 }

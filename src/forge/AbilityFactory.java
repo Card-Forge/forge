@@ -80,10 +80,15 @@ public class AbilityFactory {
 	{
 		return hasSpDesc;
 	}
-
+	
 	//*******************************************************
 	
-	public SpellAbility getAbility(String abString, Card hostCard){
+	public SpellAbility getAbility(String abString,Card hostCard)
+	{
+		return getAbility(abString,hostCard,null);
+	}
+	
+	public SpellAbility getAbility(String abString, Card hostCard,Card triggeringCard){
 		
 		SpellAbility SA = null;
 		
@@ -515,6 +520,7 @@ public class AbilityFactory {
         	SA.setStackDescription(hostCard.getName());
         
         SA.setRestrictions(buildRestrictions(SA));
+        SA.setTriggeringCard(triggeringCard);
         
         return SA;
 	}
@@ -636,6 +642,10 @@ public class AbilityFactory {
 					SpellAbility saTargeting = (ability.getTarget() == null) ?  findParentsTargetedCard(ability) : ability;
 					list = new CardList(saTargeting.getTarget().getTargetCards().toArray());
 				}
+				else if (calcX[0].startsWith("Triggering")) {
+					list = new CardList();
+					list.add(ability.getTriggeringCard());
+				}
 				else
 					return 0;
 				
@@ -672,6 +682,9 @@ public class AbilityFactory {
 			SpellAbility parent = findParentsTargetedCard(sa);
 			cards.addAll(parent.getTarget().getTargetCards());
 		}
+		
+		else if (defined.equals("Triggering"))
+			c = sa.getTriggeringCard();
 		
 		if (c != null)
 			cards.add(c);

@@ -26,4 +26,10 @@ public class Trigger_LifeLost extends Trigger {
 	public Trigger getCopy() {
 		return new Trigger_LifeLost(mapParams,hostCard);
 	}
+	
+	@Override
+	public Card getTriggeringCard(HashMap<String,Object> runParams)
+	{
+		return null;
+	}
 }
