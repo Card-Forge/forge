@@ -4,4 +4,5 @@ Types:Instant
 Text:Counter target spell that targets you or a permanent you control.\r\nDraw a card.
 K:spCounter:Spell:Targets(My,My-Land,My-Creature,My-Artifact,My-Enchantment,My-Planeswalker):Graveyard:My-Draw(1)
 SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hindering_light.jpg
 End

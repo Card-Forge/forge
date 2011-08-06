@@ -4,4 +4,5 @@ Types:Instant
 Text:Counter target spell. Look at the top four cards of your library, then put them back in any order.
 K:spCounter:Spell:None:Graveyard:My-RearrangeTopOfLibrary(4)
 SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/discombobulate.jpg
 End

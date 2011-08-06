@@ -4,4 +4,5 @@ Types:Instant
 Text:Counter target spell. Look at its controller's hand.
 K:spCounter:Spell:None:Graveyard:None:CC-RevealHand()
 SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lay_bare.jpg
 End
