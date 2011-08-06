@@ -1,9 +1,0 @@
-Name:Battle Growth
-ManaCost:G
-Types:Instant
-Text:no text
-A:SP$PutCounter|Cost$G|CounterType$P1P1|Tgt$TgtC|CounterNum$1|SpellDescription$Put 1 +1/+1 counter on target creature.
-SVar:RemAIDeck:True
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_growth.jpg
-End
