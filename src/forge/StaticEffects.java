@@ -200,7 +200,7 @@ public class StaticEffects
 		cardToEffectsList.put("Madrush Cyclops", new String[] {"Madrush_Cyclops"});
 		cardToEffectsList.put("Rolling Stones", new String[] {"Rolling_Stones"});
 		cardToEffectsList.put("Sun Quan, Lord of Wu", new String[] {"Sun_Quan"});
-		cardToEffectsList.put("Kobold Overlord", new String[] {"Kobold_Overlord"});
+		//cardToEffectsList.put("Kobold Overlord", new String[] {"Kobold_Overlord"});
 		cardToEffectsList.put("Kinsbaile Cavalier", new String[] {"Kinsbaile_Cavalier"});
 		cardToEffectsList.put("Wren's Run Packmaster", new String[] {"Wrens_Run_Packmaster"});
 		cardToEffectsList.put("Sliver Legion", new String[] {"Sliver_Legion"});
@@ -223,7 +223,7 @@ public class StaticEffects
 		cardToEffectsList.put("Reflex Sliver", new String[] {"Reflex_Sliver"});
 		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
 		cardToEffectsList.put("Blade Sliver", new String[] {"Blade_Sliver"});
-		cardToEffectsList.put("Battering Sliver", new String[] {"Battering_Sliver"});
+		//cardToEffectsList.put("Battering Sliver", new String[] {"Battering_Sliver"});
 		cardToEffectsList.put("Marrow-Gnawer", new String[] {"Marrow_Gnawer"});
 		cardToEffectsList.put("Mul Daya Channelers", new String[] {"Mul_Daya_Channelers"});
 		cardToEffectsList.put("Joiner Adept", new String[] {"Joiner_Adept"});

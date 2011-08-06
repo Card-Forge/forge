@@ -1,8 +1,9 @@
 Name:Battering Sliver
 ManaCost:5 R
 Types:Creature Sliver
-Text:All Sliver creatures have trample.
+Text:no text
 PT:4/4
+K:stPumpAll:Creature.Sliver:0/0/Trample:No Condiion:All Sliver creatures have trample.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_sliver.jpg

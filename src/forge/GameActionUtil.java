@@ -6921,10 +6921,8 @@ public class GameActionUtil {
 		list = list.getName("Winnower Patrol");
 
 		// final Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			if(library.size() <= 0) {
-				return;
-			}
+		if(library.size() > 0) {
+		 for(int i = 0; i < list.size(); i++) {
 			// System.out.println("top of deck: " + library.get(i).getName());
 			String creatureType = library.get(0).getType().toString();
 			String cardName = library.get(0).getName();
@@ -6971,7 +6969,8 @@ public class GameActionUtil {
 					+ ".");
 
 			AllZone.Stack.add(ability);
-		}// for
+		 }// for
+		}//library.size()>0
 	}// upkeep_Winnower_Patrol()
 
 	private static void upkeep_Nightshade_Schemers() {
@@ -10073,7 +10072,8 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; //Rolling Stones
-
+	
+	/*
 	public static Command Kobold_Overlord             = new Command() {
 		private static final long serialVersionUID   = 4620370378774187573L;
 
@@ -10108,6 +10108,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	};
+	*/
 	
 	public static Command Mul_Daya_Channelers          = new Command() {
 		private static final long serialVersionUID   = -2543659953307485051L;
@@ -10254,7 +10255,8 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Muscles_Sliver
-
+	
+	/*
 	public static Command Battering_Sliver            = new Command() {
 		private static final long serialVersionUID   = -2214824705109236342L;
 
@@ -10291,7 +10293,8 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Blade Sliver
-
+	*/
+	
 	public static Command Marrow_Gnawer               = new Command() {
 		private static final long serialVersionUID   = -2500490393763095527L;
 
@@ -13481,6 +13484,7 @@ public class GameActionUtil {
 			old = current;
 		}// execute()
 	}; // essence warden
+	
 	public static Command Soul_Warden                 = new Command() {
 		private static final long serialVersionUID = 5099736949744748496L;
 
@@ -21159,7 +21163,7 @@ public class GameActionUtil {
 		commands.put("Sun_Quan", Sun_Quan);
 
 		commands.put("Rolling_Stones", Rolling_Stones);
-		commands.put("Kobold_Overlord", Kobold_Overlord);
+		//commands.put("Kobold_Overlord", Kobold_Overlord);
 		commands.put("Kinsbaile_Cavalier", Kinsbaile_Cavalier);
 		commands.put("Wrens_Run_Packmaster", Wrens_Run_Packmaster);
 
@@ -21187,7 +21191,7 @@ public class GameActionUtil {
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
 
 		commands.put("Blade_Sliver", Blade_Sliver);
-		commands.put("Battering_Sliver", Battering_Sliver);
+		//commands.put("Battering_Sliver", Battering_Sliver);
 
 		commands.put("Marrow_Gnawer", Marrow_Gnawer);
 

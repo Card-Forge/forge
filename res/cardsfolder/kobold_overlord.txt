@@ -1,8 +1,10 @@
 Name:Kobold Overlord
 ManaCost:1 R
 Types:Creature Kobold
-Text:Kobold creatures you control have first strike.
+Text:no text
 PT:1/2
+K:First Strike
+K:stPumpAll:Creature.Kobold+Other+YouCtrl:0/0/First Strike:No Condiion:Other Kobold creatures you control have first strike.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_overlord.jpg
