@@ -2838,7 +2838,7 @@ class CardFactory_Planeswalkers {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isPermanent() && c.getOwner().equals(AllZone.HumanPlayer) 
-                            	   && CardFactoryUtil.canTarget(card, c) && !c.equals(card);
+                            	   && CardFactoryUtil.canTarget(card, c);
                         }
                     });
                     
