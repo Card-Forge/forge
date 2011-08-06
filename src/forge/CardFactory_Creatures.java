@@ -8432,106 +8432,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Master Transmuter")) {
-            final Ability_Tap ability = new Ability_Tap(card, "U") {
-                
-                private static final long serialVersionUID = -9076784333448226913L;
-                
-                @Override
-                public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    CardList artifacts = new CardList(hand.getCards());
-                    artifacts = artifacts.getType("Artifact");
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional(
-                                "Select artifact to put onto the battlefield: ", artifacts.toArray());
-                        if(o != null) {
-                            Card c = (Card) o;
-                            hand.remove(c);
-                            play.add(c);
-                        }
-                    } else {
-                        //CardList arts = new CardList(play.getCards());
-                        //arts = arts.getType("Artifact");
-                        
-                        Card c = getTargetCard();
-                        AllZone.GameAction.moveTo(hand, c);
-                        
-                        Card crd = CardFactoryUtil.AI_getMostExpensivePermanent(artifacts, card, false);
-                        hand.remove(crd);
-                        play.add(crd);
-                        
-                    }
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    
-                    CardList handArts = new CardList(hand.getCards());
-                    handArts = handArts.getType("Artifact");
-                    
-                    CardList playArts = new CardList(play.getCards());
-                    playArts = playArts.getType("Artifact");
-                    
-                    if(handArts.size() > 0 && playArts.size() > 0) {
-                        
-                        if(CardUtil.getConvertedManaCost(CardFactoryUtil.AI_getCheapestPermanent(playArts, card,
-                                false).getManaCost()) < CardUtil.getConvertedManaCost(CardFactoryUtil.AI_getMostExpensivePermanent(
-                                handArts, card, false).getManaCost())) {
-                            setTargetCard(CardFactoryUtil.AI_getCheapestPermanent(playArts, card, false));
-                            return true;
-                        }
-                        
-                    }
-                    return false;
-                }
-            };
-            
-            Input target = new Input() {
-                
-                private static final long serialVersionUID = 4246650335595231655L;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select artifact to return to hand");
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    if(c.isArtifact() && AllZone.GameAction.isCardInZone(c, play)) {
-                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                        
-                        AllZone.GameAction.moveTo(hand, c);
-                        AllZone.Stack.add(ability);
-                        stop();
-                    }
-                }//selectCard()
-            };//Input
-            
-            card.addSpellAbility(ability);
-            
-            StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append("U, tap, Return an artifact you control to its owner's hand: ");
-            sbDesc.append("You may put an artifact card from your hand onto the battlefield.");
-            ability.setDescription(sbDesc.toString());
-            
-            StringBuilder sbStack = new StringBuilder();
-            sbStack.append(card).append("You may put an artifact card from your hand onto the battlefield");
-            ability.setStackDescription(sbStack.toString());
-            
-            ability.setAfterPayMana(target);
-        }//*************** END ************ END **************************
+        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Cromat")) {
@@ -10009,21 +9910,6 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Lich Lord of Unx")) {
-            /*
-        	final SpellAbility ability = new Ability_Tap(card, "U B") {
-                private static final long serialVersionUID = 8909297504020264315L;
-                
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Zombie Wizard", "UB 1 1 Zombie Wizard", card, "UB", new String[] {
-                            "Creature", "Zombie", "Wizard"}, 1, 1, new String[] {""});
-                }//resolve()
-            };
-            
-            ability.setDescription("U B, Tap: Put a 1/1 blue and black Zombie Wizard creature token onto the battlefield.");
-            ability.setStackDescription(card.getName() + " - " + card.getController()
-                    + "puts a 1/1 blue and black Zombie Wizard creature token onto the battlefield.");
-            */
             final Ability ability2 = new Ability(card, "U U B B") {
                 @Override
                 public boolean canPlayAI() {
@@ -10057,8 +9943,6 @@ public class CardFactory_Creatures {
             ability2.setDescription(sb.toString());
             
             ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
-            
-            //card.addSpellAbility(ability);
             card.addSpellAbility(ability2);         
         }//*************** END ************ END **************************
         
@@ -10255,30 +10139,6 @@ public class CardFactory_Creatures {
         }
         //*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Magus of the Library")) {
-            final Ability_Tap ability2 = new Ability_Tap(card) {
-                private static final long serialVersionUID = 6567685794684744457L;
-                
-                @Override
-                public boolean canPlay() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    return hand.getCards().length == 7 && super.canPlay();
-                }
-                
-                @Override
-                public void resolve() {
-                	getActivatingPlayer().drawCard();
-                }
-            };//SpellAbility
-            card.addSpellAbility(ability2);
-            ability2.setDescription("tap: Draw a card. Play this ability only if you have exactly 7 cards in hand.");
-            ability2.setStackDescription("Magus of the Library - draw a card.");
-            ability2.setBeforePayMana(new Input_NoCost_TapAbility(ability2));
-            
-        }//*************** END ************ END **************************
-
         
         //*************** START *********** START **************************
         else if(cardName.equals("Stern Judge")) {
@@ -10581,19 +10441,6 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Molten Hydra")) {
-            
-            final Ability ability1 = new Ability(card, "1 R R") {
-                
-                @Override
-                public void resolve() {
-                	card.addCounter(Counters.P1P1,1);
-                }//resolve()
-                
-            };//SpellAbility
-            
-            ability1.setDescription("1 R R: put a +1/+1 counter on Molten Hydra. ");
-            ability1.setStackDescription("Molten Hydra gets a +1/+1 counter. ");
-            card.addSpellAbility(ability1);
         	
             final Ability_Tap ability2 = new Ability_Tap(card,"0") {
                 private static final long serialVersionUID = 2626619319289064289L;
@@ -10616,7 +10463,6 @@ public class CardFactory_Creatures {
                         list.shuffle();
                         setTargetCard(list.get(0));
                     }
-             //   card.subtractCounter(Counters.P1P1, total); 
                 }//chooseTargetAI()
                 
                 CardList getCreature() {
@@ -10690,77 +10536,6 @@ public class CardFactory_Creatures {
             ability2.setStackDescription("Molten Hydra deals damage to number of counters on it to target creature or player.");
         }//*************** END ************ END **************************
 
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Windreaver")) {
-            final SpellAbility a1 = new Ability(card, "U") {
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
-                    
-                    AllZone.getZone(card).remove(card);
-                    hand.add(card);
-                    
-                    if(card.isToken()) AllZone.getZone(card).remove(card);
-                    else AllZone.GameAction.moveTo(hand, card);
-                    
-                }
-            };//a1
-            
-            //card.clearSpellAbility();
-            card.addSpellAbility(a1);
-            
-            StringBuilder sb1 = new StringBuilder();
-            sb1.append(card.getController()).append(" returns Windreaver back to its owner's hand.");
-            a1.setStackDescription(sb1.toString());
-            
-            a1.setDescription("U: return Windreaver to its owner's hand.");
-            
-            final SpellAbility a2 = new Ability(card, "U") {
-                
-                @Override
-                public void resolve() {
-
-                	
-                    final Command EOT = new Command() {
-                        private static final long serialVersionUID = 6437163765161964445L;
-                        
-                        public void execute() {
-                      	  
-                            int power = card.getNetAttack();
-                            int tough = card.getNetDefense();
-                            card.addTempAttackBoost(tough - power);
-                            card.addTempDefenseBoost(power - tough);
-                            
-                      	  }
-                        
-                        };
-
-                        if(AllZone.GameAction.isCardInPlay(card)) {
-                            int power = card.getNetAttack();
-                            int tough = card.getNetDefense();
-                            card.addTempAttackBoost(tough - power);
-                            card.addTempDefenseBoost(power - tough);
-                            AllZone.EndOfTurn.addUntil(EOT);
-                        }
-                	
-                }
-            };//a2
-
-            card.addSpellAbility(a2);
-            
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(card.getController()).append(" switches Windreaver's power and toughness until EOT.");
-            a2.setStackDescription(sb2.toString());
-            
-            a2.setDescription("U: Switch Windreaver's power and toughness until end of turn. ");
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Academy Rector")) {
@@ -11679,136 +11454,6 @@ public class CardFactory_Creatures {
             };//CommandComes
             
             card.addComesIntoPlayCommand(commandComes);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Assembly-Worker")) {
-            final SpellAbility[] a2 = new SpellAbility[1];
-            final Command eot2 = new Command() {
-                private static final long serialVersionUID = 6180724472470740160L;
-                
-                public void execute() {
-                    Card c = a2[0].getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        c.addTempAttackBoost(-1);
-                        c.addTempDefenseBoost(-1);
-                    }
-                }
-            };
-            
-            a2[0] = new Ability_Tap(card) {
-                private static final long serialVersionUID = 3561450525225198222L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getAttacker() != null;
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    setTargetCard(getAttacker());
-                }
-                
-                /*
-                 *  getAttacker() will now filter out non-Assembly-Worker and non-Changelings
-                 */
-                
-                public Card getAttacker() {
-                    //target creature that is going to attack
-                    Combat attackers = ComputerUtil.getAttackers();
-                    CardList list = new CardList(attackers.getAttackers());
-                    list = list.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return CardFactoryUtil.canTarget(card, c) && 
-                            (c.getType().contains("Assembly-Worker") || c.getKeyword().contains("Changeling"));
-                    	}
-                    });
-//                  list = list.getType("Assembly-Worker");    // Should return only Assembly-Workers
-                    list.remove(card);
-                    list.shuffle();
-                    
-                    if (list.size() != 0 && 
-                       (AllZone.Phase.getPhase().equals(Constant.Phase.Main1)) && 
-                        CardFactoryUtil.canTarget(card, list.get(0))) return list.get(0);
-                    else return null;
-                }//getAttacker()
-                
-                @Override
-                public void resolve() {
-                    Card c = a2[0].getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        c.addTempAttackBoost(1);
-                        c.addTempDefenseBoost(1);
-                        AllZone.EndOfTurn.addUntil(eot2);
-                    }
-                }//resolve()
-            };//SpellAbility
-            card.addSpellAbility(a2[0]);
-            a2[0].setDescription("tap: Target Assembly-Worker creature gets +1/+1 until end of turn.");
-            
-            /*
-            @SuppressWarnings("unused") // target unused
-            inal Input target = new Input()
-            {
-             private static final long serialVersionUID = 8913477363141356082L;
-            
-             public void showMessage()
-              {
-                ButtonUtil.enableOnlyCancel();
-                AllZone.Display.showMessage("Select Assembly-Worker to get +1/+1");
-              }
-              public void selectCard(Card c, PlayerZone zone)
-              {
-               if(!CardFactoryUtil.canTarget(card, c)){
-                     AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-               }
-               else if(c.isCreature() && c.getType().contains("Assembly-Worker"))
-               {
-                  card.tap();
-                  AllZone.Human_Play.updateObservers();
-
-                  a2[0].setTargetCard(c);//since setTargetCard() changes stack description
-                  a2[0].setStackDescription(c +" gets +1/+1 until EOT");
-
-                  AllZone.InputControl.resetInput();
-                  AllZone.Stack.add(a2[0]);
-                }
-              }//selectCard()
-              public void selectButtonCancel()
-              {
-                card.untap();
-                stop();
-              }
-            };//Input target
-            */
-            
-            /*
-             *  This input method will allow the human to select both Assembly-Workers and Changelings
-             */
-            Input runtime = new Input() {
-				private static final long serialVersionUID = -2520339470741575052L;
-
-				@Override
-                public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    CardList creatures = new CardList();
-                    creatures.addAll(comp.getCards());
-                    creatures.addAll(hum.getCards());
-                    creatures = creatures.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && CardFactoryUtil.canTarget(card, c) && 
-                                  (c.getType().contains("Assembly-Worker") || c.getKeyword().contains("Changeling"));
-                        }
-                    });
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(a2[0], creatures, "Select target Assembly-Worker", true, false));
-                }
-            };//Input target
-            a2[0].setBeforePayMana(runtime);
-            
-//          a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Assembly-Worker"));     
         }//*************** END ************ END **************************
         
         
