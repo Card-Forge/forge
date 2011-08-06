@@ -217,7 +217,7 @@ public class Input_CombatDamage extends Input {
 
                     damageMap.put(crd, entry.getValue());
                 }
-                AllZone.GameAction.addCombatDamage(c, damageMap);
+                c.addCombatDamage(damageMap);
                 
                 AllZone.GameAction.checkWinLoss();
                 

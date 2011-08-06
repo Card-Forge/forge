@@ -269,24 +269,7 @@ public class Card extends MyObservable {
     
     public boolean getSirenAttackOrDestroy() {
     	return sirenAttackOrDestroy;
-    }
-    
-    public void addReceivedDamageFromThisTurn(Card c, int damage) {
-        receivedDamageFromThisTurn.put(c, damage);
-    }
-    
-    public void setReceivedDamageFromThisTurn(HashMap<Card, Integer> receivedDamageFromThisTurn) {
-        this.receivedDamageFromThisTurn = receivedDamageFromThisTurn;
-    }
-    
-    public HashMap<Card, Integer> getReceivedDamageFromThisTurn() {
-        return receivedDamageFromThisTurn;
-    }
-    
-    public void resetReceivedDamageFromThisTurn() {
-        receivedDamageFromThisTurn.clear();
-    }
-    
+    }    
     
     public boolean getSacrificeAtEOT() {
         return sacrificeAtEOT || getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME.");
@@ -492,11 +475,6 @@ public class Card extends MyObservable {
     
     public int getNetPTCounters() {
         return getCounters(Counters.P1P1) - getCounters(Counters.M1M1);
-    }
-    
-    //the amount of damage needed to kill the creature
-    public int getKillDamage() {
-        return getNetDefense() - getDamage();
     }
     
     public int getTurnInZone() {
@@ -1292,77 +1270,7 @@ public class Card extends MyObservable {
     }
     
     
-    public void addDamage(HashMap<Card, Integer> sourcesMap) {
-        for(Entry<Card, Integer> entry : sourcesMap.entrySet()) {
-            this.addDamage(entry.getValue(), entry.getKey());
-        }
-        
-        /*
-        Iterator<Card> iter = sourcesMap.keySet().iterator();
-        while(iter.hasNext()) {
-        	Card source = iter.next();	
-        	int damage = sourcesMap.get(source);
-        	
-        	this.addDamage(damage, source);
-        }
-        */
-        //for(Card source : sources)
-        //	  this.addDamage(n, source);
-        
-    }
     
-    public void addDamage(int n, Card source) {
-        Log.debug("addDamage called on " + this + " for " + n + " damage.");
-        if(this.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) n = 0;
-        //setDamage(getDamage() + n);
-        
-        if(CardFactoryUtil.canDamage(source, this)) {
-            damage += n;
-        }
-    }
-    
-    public void setDamage(int n) {
-        if(this.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) n = 0;
-        damage = n;
-    }
-    
-    public int getDamage() {
-        return damage;
-    }
-    
-    /*public void setAssignedDamage(int n)
-    {
-      assignedDamage = n;
-    }*/
-
-    public void addAssignedDamage(int n, Card source) {
-        Log.debug(this + " - was assigned " + n + " damage, by " + source);
-        if(!assignedDamageHashMap.containsKey(source)) assignedDamageHashMap.put(source, n);
-        else {
-            assignedDamageHashMap.put(source, assignedDamageHashMap.get(source) + n);
-        }
-    }
-    
-    //public void setAssignedDamage(int n) {assignedDamage = n;}
-    public void clearAssignedDamage() {
-        assignedDamageHashMap.clear();
-    }
-    
-    public int getTotalAssignedDamage() {
-        int total = 0;
-        
-        Collection<Integer> c = assignedDamageHashMap.values();
-        
-        Iterator<Integer> itr = c.iterator();
-        while(itr.hasNext())
-            total += itr.next();
-        
-        return total;
-    }
-    
-    public HashMap<Card, Integer> getAssignedDamageHashMap() {
-        return assignedDamageHashMap;
-    }
     
     public void setImageName(String s) {
         imageName = s;
@@ -2511,5 +2419,203 @@ public class Card extends MyObservable {
         blockers.add(AllZone.pwCombat.getAllBlockers());
      	return blockers.contains(this);
 	}
+	
+	///////////////////////////
+	//
+	// Damage code
+	//
+	//////////////////////////
+	
+	//all damage to cards is now handled in Card.java, no longer AllZone.GameAction...
+	public void addReceivedDamageFromThisTurn(Card c, int damage) {
+        receivedDamageFromThisTurn.put(c, damage);
+    }
+    
+    public void setReceivedDamageFromThisTurn(HashMap<Card, Integer> receivedDamageFromThisTurn) {
+        this.receivedDamageFromThisTurn = receivedDamageFromThisTurn;
+    }
+    
+    public HashMap<Card, Integer> getReceivedDamageFromThisTurn() {
+        return receivedDamageFromThisTurn;
+    }
+    
+    public void resetReceivedDamageFromThisTurn() {
+        receivedDamageFromThisTurn.clear();
+    }
+    
+  //the amount of damage needed to kill the creature
+    public int getKillDamage() {
+        return getNetDefense() - getDamage();
+    }
+    
+    public void addDamage(HashMap<Card, Integer> sourcesMap) {
+        for(Entry<Card, Integer> entry : sourcesMap.entrySet()) {
+            this.addCardDamage(entry.getValue(), entry.getKey());
+        }
+    }
+    
+    public void addDamage(int damageIn, Card source) {
+        int damageToAdd = damageIn;
+        if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && isCreature()) {
+            damageToAdd = 0;
+            addCounter(Counters.M1M1, damage);
+        }
+        if(source.getName().equals("Spiritmonger")) {
+            final Card thisCard = source;
+            Ability ability2 = new Ability(source, "0") {
+                @Override
+                public void resolve() {
+                    thisCard.addCounter(Counters.P1P1, 1);
+                }
+            }; // ability2
+            
+            ability2.setStackDescription(source.getName() + " - gets a +1/+1 counter");
+            AllZone.Stack.add(ability2);
+        }
+        
+        if(source.getKeyword().contains("Deathtouch") && isCreature()) {
+            AllZone.GameAction.destroy(this);
+            AllZone.Combat.removeFromCombat(this);
+        }
+        
+        Log.debug("Adding " + damageToAdd + " damage to " + getName());
+        if(AllZoneUtil.isCardInPlay(this)) {
+        	addCardDamage(damageToAdd, source);
+        }
+        
+        if(source.getKeyword().contains("Lifelink") && CardFactoryUtil.canDamage(source, this)) GameActionUtil.executeLifeLinkEffects(source, damageToAdd);
+        
+        CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
+        for(Card c:cl) {
+            GameActionUtil.executeGuiltyConscienceEffects(source, c, damageToAdd);
+        }
+        
+    }
+    
+    private void addCardDamage(int n, Card source) {
+    	Log.debug("addDamage called on " + this + " for " + n + " damage.");
+        if(this.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) n = 0;
+        
+        if(CardFactoryUtil.canDamage(source, this)) {
+            damage += n;
+        }
+    }
+    
+    public void setDamage(int n) {
+        if(this.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME.")) n = 0;
+        damage = n;
+    }
+    
+    public int getDamage() {
+        return damage;
+    }
+    
+    public void addAssignedDamage(int n, Card source) {
+        Log.debug(this + " - was assigned " + n + " damage, by " + source);
+        if(!assignedDamageHashMap.containsKey(source)) assignedDamageHashMap.put(source, n);
+        else {
+            assignedDamageHashMap.put(source, assignedDamageHashMap.get(source) + n);
+        }
+    }
+    
+    
+    public void addGameActionAssignedDamage(int damage, Card sourceCard) {
+        if(damage < 0) damage = 0;
+        
+        int assignedDamage = damage;
+        addReceivedDamageFromThisTurn(sourceCard, damage);
+        
+        if(!CardFactoryUtil.canDamage(sourceCard, this)) assignedDamage = 0;
+
+        addAssignedDamage(assignedDamage, sourceCard);
+        
+        Log.debug("***");
+        /*
+        if(sourceCards.size() > 1)
+          System.out.println("(MULTIPLE blockers):");
+        System.out.println("Assigned " + damage + " damage to " + card);
+        for (int i=0;i<sourceCards.size();i++){
+          System.out.println(sourceCards.get(i).getName() + " assigned damage to " + card.getName());
+        }
+        System.out.println("***");
+        */
+    }
+    
+    //public void setAssignedDamage(int n) {assignedDamage = n;}
+    public void clearAssignedDamage() {
+        assignedDamageHashMap.clear();
+    }
+    
+    public int getTotalAssignedDamage() {
+        int total = 0;
+        
+        Collection<Integer> c = assignedDamageHashMap.values();
+        
+        Iterator<Integer> itr = c.iterator();
+        while(itr.hasNext())
+            total += itr.next();
+        
+        return total;
+    }
+    
+    public HashMap<Card, Integer> getAssignedDamageHashMap() {
+        return assignedDamageHashMap;
+    }
+    
+    public void addCombatDamage(HashMap<Card, Integer> map) {
+        
+    	if (getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.") ||
+    		getKeyword().contains("Prevent all combat damage that would be dealt to CARDNAME."))
+    		return;
+
+    	//int totalDamage = 0;
+        CardList list = new CardList();
+        
+        
+        for(Entry<Card, Integer> entry : map.entrySet()){
+            Card source = entry.getKey();
+            list.add(source);
+            int damage = entry.getValue();
+            int damageToAdd = damage;
+            
+            if (source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
+        			|| source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME."))
+            	damageToAdd = 0;
+            else {
+	            if((source.getKeyword().contains("Wither") || source.getKeyword().contains("Infect")) && isCreature()) {
+	                damageToAdd = 0;
+	                addCounter(Counters.M1M1, damage);
+	            }
+	            if(isCreature() && (source.getName().equals("Spiritmonger") || source.getName().equals("Mirri the Cursed")) ) {
+	                final Card thisCard = source;
+	                Ability ability2 = new Ability(source, "0") {
+	                    @Override
+	                    public void resolve() {
+	                        thisCard.addCounter(Counters.P1P1, 1);
+	                    }
+	                }; // ability2
+	                
+	                ability2.setStackDescription(source.getName() + " - gets a +1/+1 counter");
+	                AllZone.Stack.add(ability2);
+	            }
+	            if(source.getKeyword().contains("Deathtouch") && isCreature()) {
+	                AllZone.GameAction.destroy(this);
+	                AllZone.Combat.removeFromCombat(this);
+	            }
+            }
+	        map.put(source, damageToAdd);
+        }
+        
+        if(AllZoneUtil.isCardInPlay(this)) {
+        	addDamage(map);
+        }
+        
+        for(Entry<Card, Integer> entry : map.entrySet()){
+        	Card source = entry.getKey();
+        	CombatUtil.executeCombatDamageEffects(source);
+        }
+    }
+    
+    
 
 }

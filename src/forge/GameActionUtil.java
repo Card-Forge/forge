@@ -10928,7 +10928,7 @@ public class GameActionUtil {
 					          if(getTargetCard() != null)
 					          {
 					            if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(c, getTargetCard()) )
-					            	AllZone.GameAction.addDamage(getTargetCard(), c, 1);
+					            	getTargetCard().addDamage(1, c);
 					          }
 					          else {
 					        	  //AllZone.GameAction.addDamage(getTargetPlayer(), c, 1);

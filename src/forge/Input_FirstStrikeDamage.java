@@ -169,11 +169,10 @@ public class Input_FirstStrikeDamage extends Input {
                 
                 for(Entry<Card, Integer> entry : assignedDamageMap.entrySet()){
                     Card crd = entry.getKey();
-                    //AllZone.GameAction.addDamage(c, crd , entry.getValue());
                     damageMap.put(crd, entry.getValue());
                 }
                 
-                AllZone.GameAction.addCombatDamage(c, damageMap);
+                c.addCombatDamage(damageMap);
                 
                 AllZone.GameAction.checkWinLoss();
                 
