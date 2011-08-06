@@ -5868,7 +5868,7 @@ public class CardFactory_Sorceries {
         }
         //*************** END ************ END **************************
           
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Goblin Offensive"))
         {
@@ -5902,6 +5902,7 @@ public class CardFactory_Sorceries {
       	  card.addSpellAbility(spell);
         }
         //*************** END ************ END **************************
+        */
           
                 
         //*************** START *********** START **************************
