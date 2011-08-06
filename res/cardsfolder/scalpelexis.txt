@@ -1,7 +1,7 @@
 Name:Scalpelexis
 ManaCost:4 U
 Types:Creature Beast
-Text:Whenever Scalpelexis deals combat damage to a player, that player removes the top four cards of his or her library from the game. If two or more of those cards have the same name, repeat this process.
+Text:Whenever CARDNAME deals combat damage to a player, that player exiles the top four cards of his or her library. If two or more of those cards have the same name, repeat this process.
 PT:1/5
 K:Flying
 SVar:Rarity:Rare

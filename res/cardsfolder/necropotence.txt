@@ -1,7 +1,7 @@
 Name:Necropotence
 ManaCost:B B B
 Types:Enchantment
-Text:Skip your draw step.\r\nIf you would discard a card from your hand, remove that card from the game instead.
+Text:Skip your draw step.\r\nWhenever you discard a card, exile that card from your graveyard.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necropotence.jpg

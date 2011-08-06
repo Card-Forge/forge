@@ -1,7 +1,7 @@
 Name:Raven Guild Master
 ManaCost:1 U U
 Types:Creature Human Wizard Mutant
-Text:Whenever Raven Guild Master deals combat damage to a player, that player removes the top ten cards of his or her library from the game.
+Text:Whenever CARDNAME deals combat damage to a player, that player exiles the top ten cards of his or her library.
 PT:1/1
 K:Morph:2 U U
 SVar:Rarity:Rare
