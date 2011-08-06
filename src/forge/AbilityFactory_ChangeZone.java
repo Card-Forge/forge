@@ -637,8 +637,10 @@ public class AbilityFactory_ChangeZone {
 	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
 	        	else{
 					// todo: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
-	        		list.shuffle();
-	        		choice = list.get(0);
+	        		if (list.size() > 0){
+		        		list.shuffle();
+		        		choice = list.get(0);
+	        		}
 	        	}
 				if (choice == null){	// can't find anything left
 					if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
