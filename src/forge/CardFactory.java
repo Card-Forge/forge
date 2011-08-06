@@ -956,8 +956,10 @@ public class CardFactory implements NewConstants {
            if (Tgt[0] == true)
               sbD.append("Target creature gains ");
            else
+           {
               sbD.append(cardName);
               sbD.append(" gains ");
+           }
           
            sbD.append(Keyword[0]);
            sbD.append(" until end of turn.");

@@ -1,3 +1,43 @@
+Flamewave Invoker
+2 R
+Creature Goblin Mutant
+no text
+2/2
+abDamageTgtP 7 R:5
+
+Granite Shard
+3
+Artifact
+no text
+abDamageTgtCP 3 T:1
+abDamageTgtCP R T:1
+
+Storm Spirit
+3 W U G
+Creature Elemental Spirit
+no text
+3/3
+Flying
+abDamageTgtC T:2
+
+Telim'Tor's Darts
+2
+Artifact
+no text
+abDamageTgtP 2 T:1
+
+Thornscape Master
+2 G G
+Creature Human Wizard
+no text
+2/2
+abDamageTgtC R R T:2
+abPumpTgt W W T:Protection from white
+abPumpTgt W W T:Protection from blue
+abPumpTgt W W T:Protection from black
+abPumpTgt W W T:Protection from red
+abPumpTgt W W T:Protection from green
+
 Silverstorm Samurai
 4 W W
 Creature Fox Samurai
