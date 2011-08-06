@@ -16959,7 +16959,9 @@ public class CardFactory implements NewConstants {
     			  int n = Math.max(1, Math.min((int)Math.ceil((100-getSourceCard().getCounters(Counters.TOWER))/m),
     					           ComputerUtil.getAvailableMana().size())) ;
     			  setManaCost(n + "");
-    			  return m*n <=20;
+    			  return !(new CardList(AllZone.Computer_Hand.getCards()).containsName("Doubling Season") && n>=5 )
+    			  			&&  m*n >= Math.min(20, 100 - getSourceCard().getCounters(Counters.TOWER));
+    			  //Persuming if AI cast the Pinnacle, it has green mana
     		  }
     	  };
     	  ability.setBeforePayMana(new Input()
