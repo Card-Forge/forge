@@ -7935,6 +7935,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
     
     
+/*
   //*************** START *********** START **************************
     else if(cardName.equals("Mob Justice"))
     {
@@ -7985,6 +7986,7 @@ public class CardFactory implements NewConstants {
 
       spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
     }//*************** END ************ END **************************
+*/
 
 
     //*************** START *********** START **************************
@@ -8186,6 +8188,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
   
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Char"))
     {
@@ -8294,6 +8297,7 @@ public class CardFactory implements NewConstants {
       };
       spell.setBeforePayMana(target);
     }//*************** END ************ END **************************
+*/
 
 
     //*************** START *********** START **************************
@@ -12699,7 +12703,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
     
   
-    
+/*
   //*************** START *********** START **************************
     else if(cardName.equals("Lightning Helix"))
     {
@@ -12799,6 +12803,7 @@ public class CardFactory implements NewConstants {
       };
       spell.setBeforePayMana(target);
     }//*************** END ************ END **************************
+*/
     
   
   //*************** START *********** START **************************

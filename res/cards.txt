@@ -5915,7 +5915,8 @@ no text
 Mob Justice
 1 R
 Sorcery
-Mob Justice deals damage to target player equal to the number of creatures you control.
+no text
+spDamageTgtP:Count$TypeYouCtrl.Creature:Mob Justice deals damage to target player equal to the number of creatures you control.:Mob Justice - deals damage to player.
 
 Grizzly Fate
 3 G G
@@ -14617,7 +14618,8 @@ When Flametongue Kavu comes into play, it deals 4 damage to target creature.
 Char
 2 R
 Instant
-Char deals 4 damage to target creature or player and 2 damage to you.
+no text
+spDamageTgtCP:4:Drawback$DamageYou/2:Char deals 4 damage to target creature or player and 2 damage to you.:Char deals 4 damage.
 
 Phyrexian Hulk
 6
@@ -16578,7 +16580,8 @@ At the beginning of your upkeep, you may look at the top card of your library. I
 Lightning Helix
 R W
 Instant
-Lightning Helix deals 3 damage to target creature or player and you gain 3 life.
+no text
+spDamageTgtCP:3:Drawback$YouGainLife/3:Lightning Helix deals 3 damage to target creature or player and you gain 3 life.:Lightning Helix - deals 3 damage and you gain 3 life.
 
 Maggot Carrier
 B
