@@ -1316,7 +1316,8 @@ public class Card extends MyObservable {
     }
     
     public void addIntrinsicKeyword(String s) {/*if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s){}); else*/
-        intrinsicKeyword.add((getName().isEmpty() ? s :s.replaceAll(getName(), "CARDNAME")));
+        if (s.trim().length()!=0)
+        	intrinsicKeyword.add((getName().trim().length()== 0 ? s :s.replaceAll(getName(), "CARDNAME")));
     }
     
     public void removeIntrinsicKeyword(String s) {
@@ -1342,7 +1343,8 @@ public class Card extends MyObservable {
         if(s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s) {
             private static final long serialVersionUID = 221124403788942412L;
         });
-        else extrinsicKeyword.add((getName().isEmpty() ? s :s.replaceAll(getName(), "CARDNAME")));
+        else 
+        	extrinsicKeyword.add((getName().trim().length()==0 ? s :s.replaceAll(getName(), "CARDNAME")));
         //}
     }
     

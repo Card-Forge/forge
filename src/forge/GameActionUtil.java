@@ -14137,8 +14137,7 @@ public class GameActionUtil {
                                                                   
                                                                   for(int i = 0; i < creature.size(); i++) {
                                                                       c = creature.get(i);
-                                                                      if(((c.getText().equals("") || c.getText().trim().equals("Token")) && c.getKeyword().size() == 0)
-                                                                              || c.isFaceDown()) {
+                                                                      if((( c.getText().trim().equals("") || c.isFaceDown()) && c.getKeyword().size() == 0)) {
                                                                           c.addSemiPermanentAttackBoost(2);
                                                                           c.addSemiPermanentDefenseBoost(2);
                                                                           
