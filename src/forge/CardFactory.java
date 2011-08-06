@@ -6975,7 +6975,8 @@ public class CardFactory implements NewConstants {
                     //only use this card if creatures power is greater than 2
                     CardList list = new CardList(AllZone.Human_Play.getCards());
                     for(int i = 0; i < list.size(); i++)
-                        if(2 < list.get(i).getNetAttack() && AllZone.Phase.getPhase().equals(Constant.Phase.Main1)) 
+                        if(2 < list.get(i).getNetAttack() && AllZone.Phase.getPhase().equals(Constant.Phase.Main1) &&
+                           CardFactoryUtil.canTarget(card, list.get(i))) 
                         	return true;
                     
                     return false;
