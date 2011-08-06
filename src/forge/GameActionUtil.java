@@ -11818,13 +11818,15 @@ public class GameActionUtil {
 		}// execute()
 	}; //Goblin Assault               
 	
-
+	/*
 	public static Command Mobilization                = new Command() {
+		
 		private static final long serialVersionUID   = 2005579284163773044L;
 
 		CardList                  gloriousAnthemList = new CardList();
 
 		public void execute() {
+		/*
 			String keyword = "Vigilance";
 
 			CardList list = gloriousAnthemList;
@@ -11852,8 +11854,11 @@ public class GameActionUtil {
 					}
 				}// for inner
 			}// for outer
+			
 		}// execute()
+		
 	}; //mobilization
+	*/
 
 	public static Command That_Which_Was_Taken        = new Command() {
 		private static final long serialVersionUID   = -4142514935709694293L;
@@ -20553,7 +20558,7 @@ public class GameActionUtil {
 		commands.put("Absolute_Grace", Absolute_Grace);
 		commands.put("Tabernacle", Tabernacle);
 		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
-		commands.put("Mobilization", Mobilization);
+		//commands.put("Mobilization", Mobilization);
 		commands.put("Serras_Blessing", Serras_Blessing);
 		commands.put("Cover_of_Darkness", Cover_of_Darkness);
 		commands.put("Steely_Resolve", Steely_Resolve);

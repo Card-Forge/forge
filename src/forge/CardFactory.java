@@ -6175,7 +6175,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         */
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Mobilization")) {
             final SpellAbility ability = new Ability(card, "2 W") {
@@ -6190,7 +6190,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
             
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Centaur Glade")) {

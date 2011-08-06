@@ -1,7 +1,9 @@
 Name:Mobilization
 ManaCost:2 W
 Types:Enchantment
-Text:Soldier creatures have vigilance.
+Text:no text
+K:abMakeToken 2 W<>1<>Soldier<>W 1 1 Soldier<>Controller<>W<>Creature;Soldier<>1<>1<>None<>Put a 1/1 white Soldier creature token onto the battlefield.
+K:stPumpAll:Creature.Soldier:0/0/Vigilance:No Condition:Soldier creatures have vigilance.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mobilization.jpg
 End
