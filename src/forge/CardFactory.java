@@ -17941,7 +17941,7 @@ public class CardFactory implements NewConstants {
 
                  if( (flip == true && choice.equals("heads")) ||   (flip == false && choice.equals("tails"))) {
                     JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Win! - "+player+" puts a 5/5 Flying Djinn in play.", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
-                    CardFactoryUtil.makeToken("Djinn", "", card, "0", new String[] {"Creature", "Artifact", "Djinn"}, 5, 5, new String[] {"Flying"});
+                    CardFactoryUtil.makeToken("Djinn", "C 5 5 Djinn", card, "", new String[] {"Creature", "Artifact", "Djinn"}, 5, 5, new String[] {"Flying"});
                  }
                  else{
                     JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Lose - Bottle does 5 damage to "+player+".", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
