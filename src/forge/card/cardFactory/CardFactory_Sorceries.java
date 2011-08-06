@@ -446,9 +446,8 @@ public class CardFactory_Sorceries {
                     			if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
                     		c2 = biggest;
                     	}
-                    }
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController()); 	                        
-                    if(AllZone.GameAction.isCardInZone(c2, grave)) {
+                    }	                        
+                    if(AllZoneUtil.isCardInPlayerGraveyard(card.getController(), c2)) {
                         AllZone.GameAction.moveToHand(c2);
                     }
 					// Player Draws 3 Cards
@@ -3524,20 +3523,18 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public void resolve() {
-                    CardList threshold = new CardList();
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    threshold.addAll(grave.getCards());
+                    CardList threshold = AllZoneUtil.getPlayerGraveyard(card.getController());
                     Card c = getTargetCard();
                     
                     if(threshold.size() >= 7) {
-                        if(AllZone.GameAction.isCardInZone(c, grave)) {
+                        if(AllZoneUtil.isCardInPlayerGraveyard(card.getController(), c)) {
                             PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                             AllZone.GameAction.moveTo(play, c);
                         }
                     }
                     
                     else {
-                        if(AllZone.GameAction.isCardInZone(c, grave)) {
+                        if(AllZoneUtil.isCardInPlayerGraveyard(card.getController(), c)) {
                             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                             AllZone.GameAction.moveTo(hand, c); 
                         }

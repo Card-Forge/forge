@@ -409,9 +409,7 @@ public class GameActionUtil {
 		{
 		final Player controller = c.getController();
 		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-		final PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, controller);
-		CardList list = new CardList();
-		list.addAll(grave.getCards());
+		CardList list = AllZoneUtil.getPlayerGraveyard(controller);
 		list = list.getName("Vengevine");
 		if(list.size() > 0) {
 				for(int i = 0; i < list.size(); i++) {
@@ -419,18 +417,18 @@ public class GameActionUtil {
 					Ability ability = new Ability(card, "0") {
 						@Override
 						public void resolve() {
-				        	if(controller == AllZone.HumanPlayer){
+				        	if(controller.isHuman()){
 					        	Object[] possibleValues = {"Yes", "No"};
 					        	Object q = JOptionPane.showOptionDialog(null, "Return Vengevine from the graveyard?", "Vengevine Ability", 
 					        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
 					        			null, possibleValues, possibleValues[0]);
 			                      if(q.equals(0)) {
-				                    if(AllZone.GameAction.isCardInZone(card, grave)) {
+				                    if(AllZoneUtil.isCardInPlayerGraveyard(controller, card)) {
 				                        AllZone.GameAction.moveTo(play, card);
 				                    }
 					    		}
 				        	} else {
-			                    if(AllZone.GameAction.isCardInZone(card, grave)) {
+			                    if(AllZoneUtil.isCardInPlayerGraveyard(controller, card)) {
 			                        AllZone.GameAction.moveTo(play, card);
 			                    }
 				        	}
@@ -2339,10 +2337,9 @@ public class GameActionUtil {
 			public void resolve() {
 				Card target = getTargetCard();
 				if(target != null){
-					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, src.getController());
-                    if(AllZone.GameAction.isCardInZone(getTargetCard(), grave)) {
+                    if(AllZoneUtil.isCardInPlayerGraveyard(src.getController(), target)) {
                         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, src.getController());
-                        AllZone.GameAction.moveTo(hand, getTargetCard());
+                        AllZone.GameAction.moveTo(hand, target);
                     }
 				}
 				
@@ -2354,15 +2351,8 @@ public class GameActionUtil {
              private static final long serialVersionUID = -7433708170033536384L;
              
              public void execute() {
-                 PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, src.getController());
-                 CardList list = new CardList(grave.getCards());
-                 
-                 list = list.filter(new CardListFilter() {
-                     public boolean addCard(Card crd) {
-                         return crd.isCreature();
-                     }
-                 });
-                 // list = list.getType("Creature");
+                 CardList list = AllZoneUtil.getPlayerGraveyard(src.getController());
+                 list = list.filter(AllZoneUtil.creatures);
                  
                  if(list.isEmpty()) {
                      AllZone.Stack.addSimultaneousStackEntry(ability);

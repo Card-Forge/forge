@@ -888,12 +888,10 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlay() {
-                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
-                
                 ArrayList<Card> spellsOnStack = AllZone.Stack.getSourceCards();
                 Card sourceCard = this.getSourceCard();
                 
-                return AllZone.GameAction.isCardInZone(sourceCard, grave) && !spellsOnStack.contains(sourceCard)
+                return AllZoneUtil.isCardInPlayerGraveyard(sourceCard.getController(), sourceCard) && !spellsOnStack.contains(sourceCard)
                         && (sourceCard.isInstant() || Phase.canCastSorcery(sourceCard.getController()));
                 
             }

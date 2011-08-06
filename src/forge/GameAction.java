@@ -188,7 +188,7 @@ public class GameAction {
 		    		Ability ability = new Ability(pVoid, "0") {
 						@Override
 						public void resolve() {
-							if(AllZone.GameAction.isCardInZone(voidingCard, grave))
+							if(AllZoneUtil.isCardInZone(grave, voidingCard))
 								moveTo(AllZone.getZone(Constant.Zone.Exile, voidingCard.getOwner()), voidingCard);
 						}
 		
@@ -2024,7 +2024,7 @@ public class GameAction {
     	if(Zones.contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Exile, Source.getController());
     	//if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Source.getController());
 
-    	if(AllZone.GameAction.isCardInZone(Source,Required_Zone[0]) || Zones.equals("Any")) {
+    	if(AllZoneUtil.isCardInZone(Required_Zone[0], Source) || Zones.equals("Any")) {
     		if(Keyword_Details[7].equals("Yes_No")) {
     			if(Source.getController().equals(AllZone.HumanPlayer)) {
     				Object[] possibleValues = {"Yes", "No"};
@@ -2063,7 +2063,7 @@ public class GameAction {
 			if(Zones.contains("Exiled")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Exile, Source.getController());
 			//if(Zones.contains("Sideboard")) Required_Zone[0] = AllZone.getZone(Constant.Zone.Sideboard, Source.getController());
 
-			if(AllZone.GameAction.isCardInZone(Source,Required_Zone[0]) || Zones.equals("Any")) {	
+			if(AllZoneUtil.isCardInZone(Required_Zone[0], Source) || Zones.equals("Any")) {	
 				if(Keyword_Details[6].equals("ASAP")) {
 					if(Keyword_Details[5].equals("InputType - CreatureORPlayer") && Source.getController().equals(AllZone.HumanPlayer)) {
 						paidCommand.execute();
@@ -2189,6 +2189,7 @@ public class GameAction {
 		}
     }
     
+    @Deprecated
     public boolean isCardInZone(Card card, PlayerZone p) {
         ArrayList<Card> list = new ArrayList<Card>(Arrays.asList(p.getCards()));
         return list.contains(card);
@@ -2687,16 +2688,16 @@ public class GameAction {
         SpellAbility[] abilities = canPlaySpellAbility(c.getSpellAbility());
         ArrayList<String> choices = new ArrayList<String>();
         
-        if(c.isLand() && isCardInZone(c, AllZone.Human_Hand) && AllZone.HumanPlayer.canPlayLand()) 
-        		choices.add("Play land");
-        
+        if(c.isLand() && AllZoneUtil.isCardInZone(AllZone.Human_Hand, c) && AllZone.HumanPlayer.canPlayLand()) 
+        	choices.add("Play land");
+
         for(SpellAbility sa:abilities) {
         	// for uncastables like lotus bloom, check if manaCost is blank
         	sa.setActivatingPlayer(AllZone.HumanPlayer);
-            if(sa.canPlay() && (!sa.isSpell() || !sa.getManaCost().equals(""))) {
-                choices.add(sa.toString());
-                map.put(sa.toString(), sa);
-            }
+        	if(sa.canPlay() && (!sa.isSpell() || !sa.getManaCost().equals(""))) {
+        		choices.add(sa.toString());
+        		map.put(sa.toString(), sa);
+        	}
         }
         
         String choice;

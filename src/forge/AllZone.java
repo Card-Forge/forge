@@ -99,7 +99,7 @@ public class AllZone implements NewConstants {
 		{
 		    p = (PlayerZone)it.next();
 	
-		    if(GameAction.isCardInZone(c, p))
+		    if(AllZoneUtil.isCardInZone(p, c))
 		    	return p;
 		}
 		return null;

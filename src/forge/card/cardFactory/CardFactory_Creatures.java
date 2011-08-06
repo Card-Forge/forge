@@ -424,9 +424,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    
-                    return AllZone.GameAction.isCardInZone(card, grave);                   
+                    return AllZoneUtil.isCardInPlayerGraveyard(card.getController(), card);                   
                 }
             };//Ability
 
@@ -525,14 +523,14 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-				// TODO: change to static ability?
+                	// TODO: change to static ability?
                 	CardList library = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
                 	if(library.size() == 0)
                 		return;
-                    
-                    Card top = library.get(0);
-                    if(top.isLand()) 
-                    	card.getController().playLand(top);
+
+                	Card top = library.get(0);
+                	if(top.isLand()) 
+                		card.getController().playLand(top);
                 }//resolve()
                 
                 @Override
@@ -542,7 +540,7 @@ public class CardFactory_Creatures {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());                                      
                     boolean canPlayLand = card.getController().canPlayLand();
                         
-                    return (AllZone.GameAction.isCardInZone(card, play) && library.get(0).isLand() && canPlayLand);
+                    return (AllZoneUtil.isCardInZone(play, card) && library.get(0).isLand() && canPlayLand);
                 }
             };//SpellAbility
             
@@ -1606,7 +1604,7 @@ public class CardFactory_Creatures {
                             PlayerZone grave = AllZone.getZone(target[0]);
                             //checks to see if card is still in the graveyard
         
-                            if(grave != null && AllZone.GameAction.isCardInZone(target[0], grave)) {
+                            if(grave != null && AllZoneUtil.isCardInZone(grave, target[0])) {
                                 PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                                 target[0].setController(card.getController());
                                 AllZone.GameAction.moveTo(play, target[0]);
@@ -2323,7 +2321,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     Card c = null;
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
+                    if(card.getController().isHuman()) {
                         Object o = GuiUtils.getChoiceOptional("Select Elemental", getCreatures());
                         c = (Card) o;
                         
@@ -2331,9 +2329,7 @@ public class CardFactory_Creatures {
                         c = getAIElemental();
                     }
                     
-                    PlayerZone grave = AllZone.getZone(c);
-                    
-                    if(AllZone.GameAction.isCardInZone(c, grave)) {
+                    if(AllZoneUtil.isCardInPlayerGraveyard(card.getController(), c)) {
                         PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
                         AllZone.GameAction.moveTo(play, c);
                     }

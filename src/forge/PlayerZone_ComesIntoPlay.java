@@ -23,8 +23,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         
         super.add(o);
         
-        Card c = (Card) o;
-        //final Player player = c.getController();
+        final Card c = (Card) o;
+        final Player player = c.getController();
         
         if(trigger && ((CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact()))
         		|| (AllZoneUtil.isCardInPlay("Urabrask the Hidden",c.getController().getOpponent()) && c.isCreature())
@@ -121,27 +121,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 	}
                 }
                 
-                /* Converted to AF trigger
-                CardList seeds = AllZoneUtil.getCardsInPlay("Seed the Land");
-                final Card seedLand = c;
-                for(Card seed:seeds) {
-                	final Card source = seed;
-                	SpellAbility ability = new Ability(source, "") {
-                		@Override
-                		public void resolve() {
-                			CardFactoryUtil.makeToken("Snake", "G 1 1 Snake", seedLand.getController(),
-                					"G", new String[] {"Creature", "Snake"}, 1, 1, new String[] {});
-                		}
-                	};
-                	StringBuilder sb = new StringBuilder();
-                	sb.append(source).append(" - ").append(seedLand.getController());
-                	sb.append(" puts a 1/1 green Snake token onto the battlefield.");
-                	ability.setStackDescription(sb.toString());
-                	
-                	AllZone.Stack.add(ability);
-                }
-                */
-                
                 //Tectonic Instability
                 CardList tis = AllZoneUtil.getCardsInPlay("Tectonic Instability");
                 final Card tisLand = c;
@@ -206,31 +185,29 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         if(meek.size() > 0 && c.isCreature() && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
             for(int i = 0; i < meek.size(); i++) {
                 final Card crd = meek.get(i);
-                final Card creat = c;
-                final PlayerZone graveZone = grave;
 
                 Ability ability = new Ability(meek.get(i), "0") {
                     @Override
                     public void resolve() {
-                        if(crd.getController().equals(AllZone.HumanPlayer)) {
-                            if(GameActionUtil.showYesNoDialog(crd, "Attach " + crd + " to " + creat + "?")) {
-                            	if(AllZone.GameAction.isCardInZone(crd, graveZone)
-                                        && AllZoneUtil.isCardInPlay(creat) && creat.isCreature()
-                                        && creat.getNetAttack() == 1 && creat.getNetDefense() == 1) {
+                        if(crd.getController().isHuman()) {
+                            if(GameActionUtil.showYesNoDialog(crd, "Attach " + crd + " to " + c + "?")) {
+                            	if(AllZoneUtil.isCardInPlayerGraveyard(player, crd)
+                                        && AllZoneUtil.isCardInPlay(c) && c.isCreature()
+                                        && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
                                     AllZone.GameAction.moveToPlay(crd);
                                     
-                                    crd.equipCard(creat);
+                                    crd.equipCard(c);
                                 }
                             }
                             
                         } else //computer
                         {
-                            if(AllZone.GameAction.isCardInZone(crd, graveZone)
-                                    && AllZoneUtil.isCardInPlay(creat) && creat.isCreature()
-                                    && creat.getNetAttack() == 1 && creat.getNetDefense() == 1) {
+                            if(AllZoneUtil.isCardInPlayerGraveyard(player, crd)
+                                    && AllZoneUtil.isCardInPlay(c) && c.isCreature()
+                                    && c.getNetAttack() == 1 && c.getNetDefense() == 1) {
                             	AllZone.GameAction.moveToPlay(crd);
                                 
-                                crd.equipCard(creat);
+                                crd.equipCard(c);
                             }
                         }
                     }
