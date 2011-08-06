@@ -47,5 +47,6 @@ public class Trigger_AttackerBlocked extends Trigger {
 	{
         c.setTriggeringObject("Attacker",runParams.get("Attacker"));
         c.setTriggeringObject("Blocker",runParams.get("Blocker"));
+        c.setTriggeringObject("NumBlockers", runParams.get("NumBlockers"));
 	}
 }

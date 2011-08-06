@@ -827,7 +827,13 @@ public class CombatUtil {
 							String att = abilityParams.get("NumAtt");
 							if (att.startsWith("+"))
 								att = att.substring(1);
-							power += Integer.parseInt(att);
+							try {
+								power += Integer.parseInt(att);
+							}
+							catch(NumberFormatException nfe) {
+								//can't parse the number (X for example)
+								power += 0;
+							}
 						}
         		}
 			}
@@ -859,7 +865,13 @@ public class CombatUtil {
 							String def = abilityParams.get("NumDef");
 							if (def.startsWith("+"))
 								def = def.substring(1);
-							toughness += Integer.parseInt(def);
+							try{
+								toughness += Integer.parseInt(def);
+							}
+							catch(NumberFormatException nfe) {
+								//can't parse the number (X for example)
+								toughness += 0;
+							}
 						}
         		}
 			}
@@ -1952,7 +1964,9 @@ public class CombatUtil {
 		AllZone.TriggerHandler.runTrigger("Blocks", runParams);
     	
         if(!a.getCreatureGotBlockedThisCombat()) {
+        	final int blockers = AllZone.Combat.getBlockers(a).size();
         	
+        	runParams.put("NumBlockers", blockers);
     		AllZone.TriggerHandler.runTrigger("AttackerBlocked", runParams);
         	
     		//AllZone.GameAction.checkWheneverKeyword(a,"BecomesBlocked",null); No longer needed
@@ -1960,7 +1974,7 @@ public class CombatUtil {
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
             
-            final int blockers = AllZone.Combat.getBlockers(a).size();
+            
             
         	if(a.getKeyword().contains(
         			"Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.")) {
