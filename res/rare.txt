@@ -238,6 +238,7 @@ Flowstone Mauler
 Flowstone Overseer
 Flowstone Wyvern
 Font of Mythos
+Forbidden Orchard
 Force of Nature
 Force of Savagery
 Forced Fruition
@@ -351,6 +352,7 @@ Juzam Djinn
 Kaervek's Spite
 Kalonian Behemoth
 Kamahl, Pit Fighter
+Kargan Dragonlord
 Karmic Guide
 Kaysa
 Kazandu Tuskcaller
@@ -520,6 +522,7 @@ Plateau
 Plated Slagwurm
 Political Trickery
 Polluted Delta
+Power Matrix
 Predator Dragon
 Preeminent Captain
 Primal Clay
@@ -739,6 +742,7 @@ Ursapine
 Urza's Blueprints
 Utopia Tree
 Vaevictis Asmadi
+Valakut, the Molten Pinnacle
 Vampire Nocturnus
 Vampiric Tutor
 Vedalken Archmage

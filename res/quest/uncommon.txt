@@ -101,6 +101,7 @@ Brave the Elements
 Brawn
 Briarhorn
 Brilliant Plan
+Broodwarden
 Bull Cerodon
 Bull Hippo
 Buried Alive
@@ -169,6 +170,7 @@ Curse of Wizardry
 Cursed Land
 Daggerclaw Imp
 Dakmor Ghoul
+Dakmor Salvage
 Dance of Shadows
 Dancing Scimitar
 Darigaaz's Attendant
@@ -492,6 +494,7 @@ Mistral Charger
 Mogg Fanatic
 Mogg Jailer
 Mold Adder
+Moldervine Cloak
 Moon Sprite
 Moonlit Wake
 Moroii
@@ -586,6 +589,7 @@ Ranger en-Vec
 Rathi Fiend
 Reanimate
 Rebuild
+Recall
 Reckless Wurm
 Red Ward
 Regrowth
@@ -626,6 +630,7 @@ Savage Twister
 Scalebane's Elite
 Scarland Thrinax
 School of the Unseen
+Scornful AEther-Lich
 Scragnoth
 Screeching Harpy
 Sea Spirit

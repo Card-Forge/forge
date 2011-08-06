@@ -400,6 +400,7 @@ Ethercaste Knight
 Etherium Abomination
 Exclude
 Exhume
+Expedition Map
 Explore
 Expunge
 Eye of Nowhere
