@@ -43,26 +43,24 @@ public class GameAction {
         	p.remove(c);
         }
         
-        // Store if this card was Unearthed to reenable flag after the Copy is created
-        boolean unearthed = c.isUnearthed();
-        
         //create new Card, which resets stats and anything that might have changed during play
-        // Todo: Debug this, Persist doesn't seem to be getting it's damage cleared away 
-        if(!c.isToken()) 
-        	c = AllZone.CardFactory.copyCard(c);
+        Card moving = c.isToken() ? c : AllZone.CardFactory.copyCard(c);
+
+        moving.setUnearthed(c.isUnearthed());
+        if (c.wasSuspendCast()){
+        	moving = addSuspendTriggers(moving);
+        }
         
-        c.setUnearthed(unearthed);
-        
-        zone.add(c);
+        zone.add(moving);
         
         //Run triggers        
         HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("MovedCard",c);
+        runParams.put("MovedCard",moving);
         runParams.put("Origin", prevZone);
         runParams.put("Destination", zone.getZoneName());
         AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
         
-        return c;
+        return moving;
     }
     
     //card can be anywhere like in Hand or in Play
@@ -584,6 +582,37 @@ public class GameAction {
         
         sacrificeDestroy(c);
     }
+    
+    public Card addSuspendTriggers(final Card c){
+		c.setSVar("HasteFromSuspend", "True");
+		
+		Command intoPlay = new Command() {
+			private static final long serialVersionUID = -4514610171270596654L;
+
+			public void execute() {
+				if(AllZone.GameAction.isCardInPlay(c) && c.isCreature()) 
+					c.addExtrinsicKeyword("Haste");
+			}//execute()
+		};
+
+		c.addComesIntoPlayCommand(intoPlay);
+		
+		Command loseControl = new Command() {
+			private static final long serialVersionUID = -4514610171270596654L;
+
+			public void execute() {
+				if (c.getSVar("HasteFromSuspend").equals("True")){
+					c.setSVar("HasteFromSuspend", "False");
+					c.removeExtrinsicKeyword("Haste");
+				}
+			}//execute()
+		};
+		
+		c.addChangeControllerCommand(loseControl);
+		c.addLeavesPlayCommand(loseControl);
+    	return c;
+    }
+    
     
     // Whenever Keyword
     public void checkWheneverKeyword(Card Triggering_Card,String Event, Object[] Custom_Parameters) {

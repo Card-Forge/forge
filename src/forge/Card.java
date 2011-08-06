@@ -473,39 +473,9 @@ public class Card extends MyObservable {
 					final Card c = this;
 					
 					c.setSuspendCast(true);
-
-					// TODO(sol): haste should wear off when player loses control. need to figure out where to add that.
-					c.setSVar("HasteFromSuspend", "True");
-					
-					Command intoPlay = new Command() {
-						private static final long serialVersionUID = -4514610171270596654L;
-
-						public void execute() {
-							c.setSuspendCast(false);
-							if(AllZone.GameAction.isCardInPlay(c) && c.isCreature()) 
-								c.addExtrinsicKeyword("Haste");
-						}//execute()
-					};
-
-					c.addComesIntoPlayCommand(intoPlay);
-					
-					Command loseControl = new Command() {
-						private static final long serialVersionUID = -4514610171270596654L;
-
-						public void execute() {
-							if (c.getSVar("HasteFromSuspend").equals("True")){
-								c.setSVar("HasteFromSuspend", "False");
-								c.removeExtrinsicKeyword("Haste");
-							}
-						}//execute()
-					};
-					
-					c.addChangeControllerCommand(loseControl);
-					c.addLeavesPlayCommand(loseControl);
-					
+					// set activating player for base spell ability
+					c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
 					AllZone.GameAction.playCardNoCost(c);
-					if (AllZone.getZone(c) != null)
-						AllZone.getZone(c).remove(c);
 				}
 			}
             this.updateObservers();
