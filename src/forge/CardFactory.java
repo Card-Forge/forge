@@ -2557,13 +2557,43 @@ public class CardFactory implements NewConstants {
             // non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
             //non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
             final String Tgts[] = Targets.split(",");
-            
-            String tmpDesc = card.getText().substring(15);
-            int i = tmpDesc.indexOf(".");
-            tmpDesc = tmpDesc.substring(0, i);
-            final String Selec = "Select a target " + tmpDesc + " to return.";
-            
+                        
             final String Destination = k[2];
+            
+            final String Drawback[] = {"none"};
+            if (k.length > 3)
+            {
+            	if (k[3].contains("Drawback$"))
+            		Drawback[0] = k[3];
+            }
+            
+            final String Selec[] = {"Select a target "};
+            String tgtType = "";
+            if (Destination.equals("Hand"))
+            {
+                tgtType = card.getSpellText().substring("Return target ".length());
+                int i = tgtType.indexOf(" to its owner's hand.");
+                tgtType = tgtType.substring(0, i);
+                Selec[0] += tgtType + " to return.";
+            }
+            else if (Destination.equals("Exile"))
+            {
+            	tgtType = card.getSpellText().substring("Exile target ".length());
+            	int i = tgtType.indexOf(".");
+            	tgtType = tgtType.substring(0, i);
+            	Selec[0] += tgtType + " to exile.";
+            }
+            else if (Destination.equals("TopofLibrary"))
+            {
+            	tgtType = card.getSpellText().substring("Put target ".length());
+            	int i = tgtType.indexOf(" on top of its owner's library.");
+            	tgtType = tgtType.substring(0, i);
+            	Selec[0] += tgtType + " to put on top of the library.";
+            }
+            else
+            {
+            	Selec[0] = card.getSpellText();
+            }
             
             card.clearSpellAbility();
             
@@ -2616,50 +2646,40 @@ public class CardFactory implements NewConstants {
                 }
                 
                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        	if(getTargetCard().isToken()) AllZone.getZone(getTargetCard()).remove(getTargetCard());
-                        	else {  if(Destination.equals("TopofLibrary")) AllZone.GameAction.moveToTopOfLibrary(getTargetCard());
-					else if(Destination.equals("ShuffleIntoLibrary")) {
-							AllZone.GameAction.moveToTopOfLibrary(getTargetCard());
-							AllZone.GameAction.shuffle(getTargetCard().getOwner());
-					}
-					else if(Destination.equals("Exile")) AllZone.GameAction.removeFromGame(getTargetCard()); 
-					else if(Destination.equals("Hand")) {
-                            			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
-                           	 		AllZone.GameAction.moveTo(hand, getTargetCard());
-					}
-				}
-                        }
-
-                    
+                public void resolve()
+                {
+                   Card tgtC = getTargetCard();
+                   
+            	   if(AllZone.GameAction.isCardInPlay(tgtC)
+                            && CardFactoryUtil.canTarget(card, tgtC)) 
+                    {
+                    	if(getTargetCard().isToken())
+                    		AllZone.getZone(tgtC).remove(tgtC);
+                    	else 
+                    	{  
+                    		if(Destination.equals("TopofLibrary"))
+                    			AllZone.GameAction.moveToTopOfLibrary(tgtC);
+                    		else if(Destination.equals("ShuffleIntoLibrary"))
+                    		{
+                    			AllZone.GameAction.moveToTopOfLibrary(tgtC);
+                    			AllZone.GameAction.shuffle(tgtC.getOwner());
+                    		}
+                    		else if(Destination.equals("Exile"))
+                    			AllZone.GameAction.removeFromGame(tgtC); 
+                    		else if(Destination.equals("Hand"))
+                    		{
+                        		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, tgtC.getOwner());
+                       	 		AllZone.GameAction.moveTo(hand, tgtC);
+                    		}
+                    	}
+                    	
+                    	if (!Drawback[0].equals("none"))
+                    		CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtC.getController(), card, tgtC);
+                    }
                 }
             }; //SpBnceTgt
 
-		Input InGetTarget = CardFactoryUtil.input_targetValid(spBnceTgt, Tgts, Selec);
-            	/*new Input() {
-                private static final long serialVersionUID = -152897134770L;
-                
-                @Override
-                public void showMessage() {
-                    CardList allCards = new CardList();
-                    allCards.addAll(AllZone.Human_Play.getCards());
-                    allCards.addAll(AllZone.Computer_Play.getCards());
-                    / *allCards.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (CardFactoryUtil.canTarget(card, c));
-                        }
-                    });* ///Input_targetSpecific already checks for this
-                    
-                    CardList choices = allCards.getValidCards(Tgts);
-                    boolean free = false;
-                    if(this.isFree()) free = true;
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(spBnceTgt, choices, Selec, true, free));
-                }
-            };*///InGetTarget
-            
-            //card.clearSpellAbility();
+            Input InGetTarget = CardFactoryUtil.input_targetValid(spBnceTgt, Tgts, Selec[0]);
             
             card.setSVar("PlayMain1", "TRUE");
             
@@ -2676,7 +2696,7 @@ public class CardFactory implements NewConstants {
                bbBnceTgt.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
                bbBnceTgt.setIsBuyBackAbility(true);
                
-               bbBnceTgt.setBeforePayMana(CardFactoryUtil.input_targetValid(bbBnceTgt, Tgts, Selec));
+               bbBnceTgt.setBeforePayMana(CardFactoryUtil.input_targetValid(bbBnceTgt, Tgts, Selec[0]));
                
                card.addSpellAbility(bbBnceTgt);
             }
