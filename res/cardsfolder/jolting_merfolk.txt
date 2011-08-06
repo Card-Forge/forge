@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Creature Merfolk
 Text:no text
 PT:2/2
-K:Fading 4
+K:Fading:4
 K:abTapTgt SubCounter<1/FADE>:Creature:Tap target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jolting_merfolk.jpg
