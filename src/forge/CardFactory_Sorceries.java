@@ -58,7 +58,7 @@ public class CardFactory_Sorceries {
                     }
                     
                     // Shuffle library
-                    AllZone.GameAction.shuffle(player);
+                    player.shuffle();
                     
                     // Draw seven cards
                     player.drawCards(7);
@@ -532,12 +532,11 @@ public class CardFactory_Sorceries {
                         PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                         AllZone.GameAction.moveTo(hand, (Card) check);
                     }
-                    AllZone.GameAction.shuffle(AllZone.HumanPlayer);
+                    AllZone.HumanPlayer.shuffle();
                     
                     //lose 3 life
                     if(cardName.equals("Grim Tutor")) {
                         Player player = AllZone.HumanPlayer;
-                        //PlayerLife life = AllZone.GameAction.getPlayerLife(player);
                         player.subtractLife(3,card);
                     }
                 }
@@ -549,14 +548,12 @@ public class CardFactory_Sorceries {
                     //pick best creature
                     Card c = CardFactoryUtil.AI_getBestCreature(list);
                     if(c == null) c = library[0];
-                    //System.out.println("comptuer picked - " +c);
                     AllZone.Computer_Library.remove(c);
                     AllZone.Computer_Hand.add(c);
                     
                     //lose 3 life
                     if(cardName.equals("Grim Tutor")) {
                         Player player = AllZone.ComputerPlayer;
-                        //PlayerLife life = AllZone.GameAction.getPlayerLife(player);
                         player.subtractLife(3,card);
                     }
                 }
@@ -867,7 +864,7 @@ public class CardFactory_Sorceries {
                         //shuffle card back into the library
                         PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
                         library.add(card);
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                     }
                 }//resolve()
                 
@@ -1407,7 +1404,7 @@ public class CardFactory_Sorceries {
 					Player player = AllZone.Phase.getActivePlayer();
 					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
 					Card Minds_D = card;
-					if(player.isHuman()) AllZone.GameAction.shuffle(card.getController());
+					if(player.isHuman()) card.getController().shuffle();
                 		CardList MindsList = new CardList(Play.getCards());
                 		MindsList = MindsList.getName("Mind's Desire");
                 		MindsList.remove(card);
@@ -1719,7 +1716,7 @@ public class CardFactory_Sorceries {
                         if(dragons.size() != 0) {
                             Object o = AllZone.Display.getChoiceOptional("Select an Dragon to put onto the battlefield", dragons.toArray());
                             
-                            AllZone.GameAction.shuffle(card.getController());
+                            card.getController().shuffle();
                             if(o != null) {
                                 //put card in hand
                                 AllZone.Human_Library.remove(o);
@@ -1741,7 +1738,7 @@ public class CardFactory_Sorceries {
                         if(dragons.size() != 0) {
                             CardListUtil.sortAttack(dragons);
                             Card c = dragons.get(0);
-                            AllZone.GameAction.shuffle(card.getController());
+                            card.getController().shuffle();
                             //move to hand
                             AllZone.Computer_Library.remove(c);
                             AllZone.Computer_Play.add(c);
@@ -2956,7 +2953,7 @@ public class CardFactory_Sorceries {
                     play.add(c);
                     
 
-                    AllZone.GameAction.shuffle(opponent);
+                    opponent.shuffle();
                 }//resolve()
             };
             
@@ -3079,7 +3076,7 @@ public class CardFactory_Sorceries {
                     creature = creature.getType("Creature");
                     if(creature.size() != 0) {
                         Card c = creature.get(0);
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         
                         //move to top of library
                         AllZone.Computer_Library.remove(c);
@@ -3100,7 +3097,7 @@ public class CardFactory_Sorceries {
                     if(list.size() != 0) {
                         Object o = AllZone.Display.getChoiceOptional("Select a creature", list.toArray());
                         
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         if(o != null) {
                             //put creature on top of library
                             library.remove(o);
@@ -3825,7 +3822,7 @@ public class CardFactory_Sorceries {
                         library.add(g[i], 0);
                     }
                     // Shuffle library
-                    AllZone.GameAction.shuffle(player);;
+                    player.shuffle();;
                 }
                 
                 @Override
@@ -3939,16 +3936,14 @@ public class CardFactory_Sorceries {
                             c = creature.get(0);
                         }
                         
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         
                         //move to top of library
                         AllZone.Computer_Library.remove(c);
                         AllZone.Computer_Library.add(c, 0);
                         
                         //lose 2 life
-                        Player player = AllZone.ComputerPlayer;
-                        //PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        player.subtractLife(2,card);
+                        AllZone.ComputerPlayer.subtractLife(2,card);
                     }
                 }//computerResolve()
                 
@@ -3960,16 +3955,14 @@ public class CardFactory_Sorceries {
                     if(list.size() != 0) {
                         Object o = AllZone.Display.getChoiceOptional("Select a card", list.toArray());
                         
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         if(o != null) {
                             //put card on top of library
                             library.remove(o);
                             library.add((Card) o, 0);
                         }
                         //lose 2 life
-                        Player player = AllZone.HumanPlayer;
-                        //PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-                        player.subtractLife(2,card);
+                        AllZone.HumanPlayer.subtractLife(2,card);
                     }//if
                     
 
@@ -4480,7 +4473,7 @@ public class CardFactory_Sorceries {
                                 Card crd = CardFactoryUtil.AI_getBestArtifact(list);
                                 lib.remove(crd);
                                 play.add(crd);
-                                AllZone.GameAction.shuffle(AllZone.ComputerPlayer);
+                                AllZone.ComputerPlayer.shuffle();
                             }
                         } else //human
                         {
@@ -4499,22 +4492,12 @@ public class CardFactory_Sorceries {
                                     play.add(crd);
                                     
                                 }
-                                AllZone.GameAction.shuffle(AllZone.HumanPlayer);
+                                AllZone.HumanPlayer.shuffle();
                             }
                         }
                     }//if isCardInPlay
                 }
             };
-            /*
-            final Command sac = new Command()
-            {
-            	private static final long serialVersionUID = -8925816099640324876L;
-
-            	public void execute() {
-            		AllZone.GameAction.sacrifice(spell.getTargetCard());
-            	}
-            };
-            */
 
             Input runtime = new Input() {
                 private static final long serialVersionUID = -4653972223582155502L;
@@ -5365,7 +5348,7 @@ public class CardFactory_Sorceries {
               // shuffle back into library
             PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
             library.add(card);
-            AllZone.GameAction.shuffle(card.getController());
+            card.getController().shuffle();
             
             }//resolve()
           
@@ -6135,7 +6118,7 @@ public class CardFactory_Sorceries {
         					lib.add(toLib);
         				}
         			}
-        			AllZone.GameAction.shuffle(target);
+        			target.shuffle();
         		}
 
         		@Override
@@ -6255,7 +6238,7 @@ public class CardFactory_Sorceries {
         					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
         					AllZone.GameAction.moveTo(grave, (Card) check);
         				}
-        				AllZone.GameAction.shuffle(AllZone.HumanPlayer);
+        				AllZone.HumanPlayer.shuffle();
         			}
         		} // humanResolve
         		
@@ -7933,7 +7916,7 @@ public class CardFactory_Sorceries {
                     }
                     
                     // Shuffle library
-                    AllZone.GameAction.shuffle(player);
+                    player.shuffle();
                     
                     player.drawCards(handSize);
                 }

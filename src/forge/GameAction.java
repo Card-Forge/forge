@@ -4,7 +4,6 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,7 +12,6 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import com.esotericsoftware.minlog.Log;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 
@@ -1898,86 +1896,86 @@ public class GameAction {
     }
     
     Card[] Search (Card Source, Card Initiator ,String[] Keyword_Details, final String[] Custom_Strings) {
-        String SearchDescription = " ";
-        boolean SearchLib = true;
-        if(Keyword_Details[7].contains("Choice_Instant-SearchLibrary")) {
-    	    	if(Source.getController().equals(AllZone.HumanPlayer)) {
-    	        	Object[] possibleValues = {"Yes", "No"};
-    	        	Object q = JOptionPane.showOptionDialog(null, "Search Libraries?",Source.getName() + " F_SpellAbility", 
-    	        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-    	        			null, possibleValues, possibleValues[0]);
-    	              if(q.equals(1)) {
-    	            	  SearchLib = false;
-    	                }
-    			}	
-        }
-        int Target_Conditions = 1;
-        String TargetParse = Keyword_Details[5];                
-        String Targets[] = TargetParse.split("!");
-        Target_Conditions = Targets.length;
-        Player Zone_Owner = Source.getController();
-        Card SearchedCard[] = new Card[Target_Conditions];
-            for(int y = 0; y < Target_Conditions; y++) {       			
-		if(Targets[y].contains("SearchShuffle") /** && Keyword_Details[4] != "Null" **/) {
-			if(Targets[y].contains("OSearchShuffle")) {
-				Zone_Owner = Source.getController().getOpponent();
-				SearchDescription = SearchDescription + "Opponent's ";
-			}
-			else Zone_Owner = Source.getController();
-            String SearchParse = Targets[y];  
-            String Search[] = SearchParse.split("/");
-            String[] SearchZone = new String[Search.length - 1];
-            PlayerZone[] PZones = new PlayerZone[SearchZone.length];    
-            CardList SearchBase = new CardList();
-            for(int z = 0; z < PZones.length; z++) {
-             SearchZone[z] = Search[z+1];
-             if(SearchZone[z].equals("Hand")) PZones[z] = AllZone.getZone(Constant.Zone.Hand, Zone_Owner);
-             if(SearchZone[z].equals("Graveyard")) PZones[z] = AllZone.getZone(Constant.Zone.Graveyard, Zone_Owner);
-             if(SearchZone[z].equals("Play")) PZones[z] = AllZone.getZone(Constant.Zone.Play, Zone_Owner);
-             if(SearchZone[z].contains("Library") && SearchLib) PZones[z] = AllZone.getZone(Constant.Zone.Library, Zone_Owner);
-             if(SearchZone[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Removed_From_Play, Zone_Owner);
-          // if(ZoneConditions[z].contains("Sideboard")) PZones[z] = AllZone.getZone(Constant.Zone.Sideboard, Zone_Owner);
-             if(PZones[z] != null) {
-             SearchBase.addAll(PZones[z].getCards());
-             SearchDescription = SearchDescription + SearchZone[z] + " ";
-             }
-             if(z + 2 < PZones.length && PZones[z] != null) SearchDescription = SearchDescription + ", ";
-             else if(z + 2 == PZones.length) SearchDescription = SearchDescription + "and ";
-            }
-            
-            @SuppressWarnings("unused")
-			Object check2 = AllZone.Display.getChoiceOptional("View" + SearchDescription,
-            		SearchBase.toArray());
-            if(Search[0].contains("SearchShuffle_SameName")) SearchBase = SearchBase.getName(Initiator.getName());
-            if(Search[0].contains("SearchShuffle_Type")) {
-            	for(int TypeRestrict = 0; TypeRestrict < Custom_Strings.length; TypeRestrict ++) {
-            	if(Custom_Strings[TypeRestrict].startsWith("Type")) SearchBase = SearchBase.getType(Custom_Strings[TypeRestrict].replaceFirst("Type", ""));
-            	if(Custom_Strings[TypeRestrict].startsWith("Color")) {
-            		final int Number = TypeRestrict;
-            		SearchBase = SearchBase.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            if(CardUtil.getColors(c).contains(Custom_Strings[Number].replaceFirst("Color", ""))) return true;
-                            return false;
-                        }
-                    });
-            	}
-            }
-            }
-            if(SearchBase.size() != 0) {
-                Object check = AllZone.Display.getChoiceOptional("Select a Suitable Card",
-                		SearchBase.toArray());
-                if(check != null) {
-                    SearchedCard[y] = (Card) check;
-                    if(SearchLib) AllZone.GameAction.shuffle(((Card) check).getController());
-                }                      
-            } else {
-            	JOptionPane.showMessageDialog(null, "No suitable cards in" + SearchDescription, "", JOptionPane.INFORMATION_MESSAGE);
-            	if(SearchLib && Targets[y].contains("OSearchShuffle")) AllZone.GameAction.shuffle(Source.getController().getOpponent());
-            	else if(SearchLib) AllZone.GameAction.shuffle((Source.getController()));
-            }
-		}
-            }
-            return SearchedCard;
+    	String SearchDescription = " ";
+    	boolean SearchLib = true;
+    	if(Keyword_Details[7].contains("Choice_Instant-SearchLibrary")) {
+    		if(Source.getController().equals(AllZone.HumanPlayer)) {
+    			Object[] possibleValues = {"Yes", "No"};
+    			Object q = JOptionPane.showOptionDialog(null, "Search Libraries?",Source.getName() + " F_SpellAbility", 
+    					JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+    					null, possibleValues, possibleValues[0]);
+    			if(q.equals(1)) {
+    				SearchLib = false;
+    			}
+    		}	
+    	}
+    	int Target_Conditions = 1;
+    	String TargetParse = Keyword_Details[5];                
+    	String Targets[] = TargetParse.split("!");
+    	Target_Conditions = Targets.length;
+    	Player Zone_Owner = Source.getController();
+    	Card SearchedCard[] = new Card[Target_Conditions];
+    	for(int y = 0; y < Target_Conditions; y++) {       			
+    		if(Targets[y].contains("SearchShuffle") /** && Keyword_Details[4] != "Null" **/) {
+    			if(Targets[y].contains("OSearchShuffle")) {
+    				Zone_Owner = Source.getController().getOpponent();
+    				SearchDescription = SearchDescription + "Opponent's ";
+    			}
+    			else Zone_Owner = Source.getController();
+    			String SearchParse = Targets[y];  
+    			String Search[] = SearchParse.split("/");
+    			String[] SearchZone = new String[Search.length - 1];
+    			PlayerZone[] PZones = new PlayerZone[SearchZone.length];    
+    			CardList SearchBase = new CardList();
+    			for(int z = 0; z < PZones.length; z++) {
+    				SearchZone[z] = Search[z+1];
+    				if(SearchZone[z].equals("Hand")) PZones[z] = AllZone.getZone(Constant.Zone.Hand, Zone_Owner);
+    				if(SearchZone[z].equals("Graveyard")) PZones[z] = AllZone.getZone(Constant.Zone.Graveyard, Zone_Owner);
+    				if(SearchZone[z].equals("Play")) PZones[z] = AllZone.getZone(Constant.Zone.Play, Zone_Owner);
+    				if(SearchZone[z].contains("Library") && SearchLib) PZones[z] = AllZone.getZone(Constant.Zone.Library, Zone_Owner);
+    				if(SearchZone[z].contains("Exiled")) PZones[z] = AllZone.getZone(Constant.Zone.Removed_From_Play, Zone_Owner);
+    				// if(ZoneConditions[z].contains("Sideboard")) PZones[z] = AllZone.getZone(Constant.Zone.Sideboard, Zone_Owner);
+    				if(PZones[z] != null) {
+    					SearchBase.addAll(PZones[z].getCards());
+    					SearchDescription = SearchDescription + SearchZone[z] + " ";
+    				}
+    				if(z + 2 < PZones.length && PZones[z] != null) SearchDescription = SearchDescription + ", ";
+    				else if(z + 2 == PZones.length) SearchDescription = SearchDescription + "and ";
+    			}
+
+    			@SuppressWarnings("unused")
+    			Object check2 = AllZone.Display.getChoiceOptional("View" + SearchDescription,
+    					SearchBase.toArray());
+    			if(Search[0].contains("SearchShuffle_SameName")) SearchBase = SearchBase.getName(Initiator.getName());
+    			if(Search[0].contains("SearchShuffle_Type")) {
+    				for(int TypeRestrict = 0; TypeRestrict < Custom_Strings.length; TypeRestrict ++) {
+    					if(Custom_Strings[TypeRestrict].startsWith("Type")) SearchBase = SearchBase.getType(Custom_Strings[TypeRestrict].replaceFirst("Type", ""));
+    					if(Custom_Strings[TypeRestrict].startsWith("Color")) {
+    						final int Number = TypeRestrict;
+    						SearchBase = SearchBase.filter(new CardListFilter() {
+    							public boolean addCard(Card c) {
+    								if(CardUtil.getColors(c).contains(Custom_Strings[Number].replaceFirst("Color", ""))) return true;
+    								return false;
+    							}
+    						});
+    					}
+    				}
+    			}
+    			if(SearchBase.size() != 0) {
+    				Object check = AllZone.Display.getChoiceOptional("Select a Suitable Card",
+    						SearchBase.toArray());
+    				if(check != null) {
+    					SearchedCard[y] = (Card) check;
+    					if(SearchLib) ((Card) check).getController().shuffle();
+    				}                      
+    			} else {
+    				JOptionPane.showMessageDialog(null, "No suitable cards in" + SearchDescription, "", JOptionPane.INFORMATION_MESSAGE);
+    				if(SearchLib && Targets[y].contains("OSearchShuffle")) Source.getController().getOpponent().shuffle();
+    				else if(SearchLib) Source.getController().shuffle();
+    			}
+    		}
+    	}
+    	return SearchedCard;
     }
     
     String[] Search_Description(Card Initiator ,String[] Keyword_Details, final String[] Custom_Strings) {
@@ -2244,7 +2242,7 @@ public class GameAction {
         else if(c.getName().equals("Guan Yu, Sainted Warrior")) {
             PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getOwner());
             moveTo(library, c);
-            AllZone.GameAction.shuffle(c.getOwner());
+            c.getOwner().shuffle();
         }
     }//sacrificeDestroy()
     
@@ -2468,45 +2466,6 @@ public class GameAction {
                 || PlayerZoneUtil.isCardInZone(AllZone.Human_Removed, c);
     }
     
-    //TODO: shuffling seems to change a card's unique number but i'm not 100% sure
-    @Deprecated
-    public void shuffle(Player player) {
-    	player.shuffle();
-    	/*
-        PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-        Card c[] = library.getCards();
-        
-        if(c.length <= 1) return;
-        
-        ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(c));
-        //overdone but wanted to make sure it was really random
-        Random random = new Random();
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        
-        Object o;
-        for(int i = 0; i < list.size(); i++) {
-            o = list.remove(random.nextInt(list.size()));
-            list.add(random.nextInt(list.size()), o);
-        }
-        
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        Collections.shuffle(list, random);
-        
-
-        list.toArray(c);
-        library.setCards(c);
-        */
-    }//shuffle
-    
     /**
      * prompts Human to see if a target player's library should be shuffled.  This should
      * only be called when the choice is made by the Human (target can be either), then
@@ -2519,7 +2478,7 @@ public class GameAction {
 		Object o = AllZone.Display.getChoice("Shuffle "+player+"'s library?", choices);
 		String myChoice = (String) o;
 		if(myChoice.equals("Yes")) {
-			AllZone.GameAction.shuffle(player);
+			player.shuffle();
 		}
     }
     
@@ -2665,7 +2624,7 @@ public class GameAction {
         }//end re-numbering
         
         for(int i = 0; i < 100; i++)
-            this.shuffle(AllZone.HumanPlayer);
+            AllZone.HumanPlayer.shuffle();
         
         //do this instead of shuffling Computer's deck
         boolean smoothLand = Constant.Runtime.Smooth[0];
@@ -2675,7 +2634,7 @@ public class GameAction {
             AllZone.Computer_Library.setCards(c);
         } else {
             AllZone.Computer_Library.setCards(AllZone.Computer_Library.getCards());
-            	this.shuffle(AllZone.ComputerPlayer);
+            	AllZone.ComputerPlayer.shuffle();
         }
      
         // Only cut/coin toss if it's the first game of the match
@@ -3564,7 +3523,7 @@ public class GameAction {
         	aiSearchTwoLand(type, Zone1, tapFirstLand, Zone2, tapSecondLand);
         }
         
-        AllZone.GameAction.shuffle(player);
+        player.shuffle();
 		
 	}
 	public void searchLibraryTwoBasicLand(Player player,
