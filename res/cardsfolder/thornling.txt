@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 A:AB$Pump | Cost$ G | KW$ Haste | SpellDescription$ Thornling gains haste until end of turn.
 A:AB$Pump | Cost$ G | KW$ Trample | SpellDescription$ Thornling gains trample until end of turn.
-A:AB$Pump | Cost$ G | KW$ Indestructible | SpellDescription$ Thornling is indestructible this turn.
+A:AB$Pump | Cost$ G | KW$ HIDDEN Indestructible | SpellDescription$ Thornling is indestructible this turn.
 A:AB$Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ Thornling gets +1/-1 until end of turn.
 A:AB$Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ Thornling gets -1/+1 until end of turn.
 SVar:Rarity:Mythic
