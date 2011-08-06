@@ -1993,59 +1993,6 @@ public class CardFactory_Sorceries {
             card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-   
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sleight of Hand")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 5608200094037045828L;
-                
-                @Override
-                public boolean canPlay() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    if(library.size() >= 1 && super.canPlay()) return true;
-                    else return false;
-                    
-                }
-                
-                @Override
-                public void resolve() {
-                    CardList lib = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
-                    
-                    if (lib.size() == 0)
-                    	return;
-                    
-                    if (lib.size() == 1){
-                    	AllZone.GameAction.moveToHand(lib.get(0));
-                    	return;
-                    }
-                    
-                    CardList topTwo = new CardList();
-                    topTwo.add(lib.get(0));
-                    topTwo.add(lib.get(1));
-                    
-                    Card toHand = null;
-                    if(card.getController().isHuman()) {
-                        Object o = GuiUtils.getChoice("Select card to put in hand: ",
-                                topTwo.toArray());
-                        
-                        toHand = (Card) o;
-                    } 
-                    else{
-                    	toHand = CardUtil.getRandom(topTwo.toArray());
-                    }    
-                    topTwo.remove(toHand);
-                    AllZone.GameAction.moveToHand(toHand);
-                    
-                    for(Card c : topTwo)	// Unnecessary for Sleight of Hand, but will be useful for other things
-                    	AllZone.GameAction.moveToBottomOfLibrary(c);
-                }
-            };
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);           
-        }//*************** END ************ END **************************
 
         
         //*************** START *********** START **************************
