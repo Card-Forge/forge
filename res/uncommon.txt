@@ -27,6 +27,7 @@ An-Havva Inn
 An-Havva Township
 Anaconda
 Ancient Runes
+Ancient Tomb
 Angel of Light
 Angel of Mercy
 Angelic Benediction
@@ -578,6 +579,7 @@ Obsianus Golem
 Ogre Taskmaster
 Ogre's Cleaver
 Opportunity
+Orbweaver Kumo
 Orchard Warden 
 Orcish Artillery
 Orcish Cannoneers

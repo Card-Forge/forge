@@ -111,6 +111,7 @@ Battle Hurda
 Battle Rampart
 Battle-Mad Ronin
 Battlegate Mimic
+Battlewand Oak
 Bay Falcon
 Bayou Dragonfly
 Bear Cub
@@ -714,6 +715,7 @@ Kabuto Moth
 Kaleidostone
 Kami of Ancient Law
 Kami of Empty Graves
+Kami of the Hunt
 Kathari Screecher
 Kavu Climber
 Kavu Glider
@@ -907,6 +909,7 @@ Nema Siltlurker
 Nessian Courser
 Nest Invader
 Nether Horror
+Nettle Sentinel
 Neurok Hoversail
 Nezumi Cutthroat
 Nezumi Ronin
@@ -1139,6 +1142,7 @@ Sangrite Backlash
 Sangrophage
 Savage Hunger
 Scale of Chiss-Goria
+Scaled Hulk
 Scaled Wurm
 Scare Tactics
 Scarwood Goblins
