@@ -3835,6 +3835,7 @@ res/cardsfolder/lifeblood.txt -text svneol=native#text/plain
 res/cardsfolder/lifeforce.txt -text svneol=native#text/plain
 res/cardsfolder/lifegift.txt -text svneol=native#text/plain
 res/cardsfolder/lifelink.txt -text svneol=native#text/plain
+res/cardsfolder/lifes_finale.txt -text svneol=native#text/plain
 res/cardsfolder/lifesmith.txt -text svneol=native#text/plain
 res/cardsfolder/lifespark_spellbomb.txt -text svneol=native#text/plain
 res/cardsfolder/lifespinner.txt -text svneol=native#text/plain

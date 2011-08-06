@@ -294,7 +294,13 @@ public class AbilityFactory_ChangeZone {
 	private static boolean changeHiddenOriginPlayDrawbackAI(AbilityFactory af, SpellAbility sa){
 		// if putting cards from hand to library and parent is drawing cards
 		// make sure this will actually do something:
-		
+		Target tgt = af.getAbTgt();
+		if(tgt != null && tgt.canTgtPlayer()) {
+			if (af.isCurse())
+				tgt.addTarget(AllZone.HumanPlayer);
+			else
+				tgt.addTarget(AllZone.ComputerPlayer);
+		}
 		
 		return true;
 	}
