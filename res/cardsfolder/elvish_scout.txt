@@ -8,5 +8,5 @@ SVar:DBPump:DB$Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN Prevent all comba
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_scout.jpg
-SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/75.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/75.jpg|3
 End
