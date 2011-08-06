@@ -160,8 +160,7 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     Card c = getTargetCard();
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        if(!c.getType().contains("Basic")) AllZone.GameAction.getPlayerLife(c.getController()).subtractLife(
-                                2,card);
+                        if(!c.getType().contains("Basic")) AllZone.GameAction.addDamage(c.getController(), card, 2);
                         AllZone.GameAction.destroy(c);
                     }
                     
@@ -980,18 +979,16 @@ public class CardFactory_Sorceries {
                 }      
                 @Override
                 public void resolve() {
-                    String player = card.getController();
-                    
-                    if(player == "Human"){
-                    if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1,card);
-                    } else AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(card.getController())).subtractLife(1,card);
+                	if(getTargetCard() != null) {
+                		if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                				&& CardFactoryUtil.canTarget(card, getTargetCard()))
+                			getTargetCard().addDamage(1,card);
+                	} else AllZone.GameAction.addDamage(getTargetPlayer(), card, 1);
             };
            };
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
         	spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
         }//*************** END ************ END ************************** 
         
@@ -1017,8 +1014,8 @@ public class CardFactory_Sorceries {
                             handChoices[i] = null;
                         }
                         AllZone.Display.getChoice("Random card", handChoices);
-                        AllZone.GameAction.getPlayerLife(opponent).subtractLife(
-                                CardUtil.getConvertedManaCost(choice.getManaCost()),card);
+                        AllZone.GameAction.addDamage(opponent, card, 
+                        		CardUtil.getConvertedManaCost(choice.getManaCost()));
                     }                                   
                 }//resolve()
             };
@@ -1198,8 +1195,8 @@ public class CardFactory_Sorceries {
                         AllZone.GameAction.destroy(getTargetCard());
                         CardList Grave = new CardList(AllZone.getZone(Constant.Zone.Graveyard, getTargetCard().getController()).getCards());
                         int Damage = (Grave.getType("Land")).size();
-                        AllZone.GameAction.getPlayerLife(getTargetCard().getController()).subtractLife(Damage,card);
-				}
+                        AllZone.GameAction.addDamage(getTargetCard().getController(), card, Damage);
+                    }
 				}
                 @Override
                 public void chooseTargetAI() {
@@ -1490,7 +1487,7 @@ public class CardFactory_Sorceries {
 			        PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play, Player);   
 			        PlayerZone Library = AllZone.getZone(Constant.Zone.Library, Player);  
                     for(int i = 0; i < GraveandLibrary.size(); i++) AllZone.GameAction.moveTo(RFG,GraveandLibrary.get(i));
-                    AllZone.GameAction.moveTo(RFG,card); // Not sure if Doomsday is supposed to be exiled
+                    //AllZone.GameAction.moveTo(RFG,card); // Not sure if Doomsday is supposed to be exiled
                     for(int i = 0; i < NewLibrary.size(); i++) AllZone.GameAction.moveTo(Library,NewLibrary.get(i));
                 	
                     //lose half life
@@ -1832,9 +1829,8 @@ public class CardFactory_Sorceries {
                                 all.get(i).addDamage(3, card);
                             }
                         }
-                    
-                    AllZone.Human_Life.subtractLife(3,card);
-                    AllZone.Computer_Life.subtractLife(3,card);
+                    AllZone.GameAction.addDamage(Constant.Player.Human, card, 3);
+                    AllZone.GameAction.addDamage(Constant.Player.Computer, card, 3);
                 }
             };
             card.clearSpellAbility();
@@ -2189,7 +2185,7 @@ public class CardFactory_Sorceries {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
+                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
                 }
             };//SpellAbility
             
@@ -2252,7 +2248,7 @@ public class CardFactory_Sorceries {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
+                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
                     
                     grave.remove(card);
                     removed.add(card);
@@ -2333,7 +2329,7 @@ public class CardFactory_Sorceries {
                     } else {
                         javax.swing.JOptionPane.showMessageDialog(null, "Erratic Explosion causes " + damage
                                 + " to " + getTargetPlayer());
-                        AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
+                        AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
                     }
                 }
                 
@@ -2457,7 +2453,7 @@ public class CardFactory_Sorceries {
         			for(int i = 0; i <card.getChoices().size(); i++) {
         				if(card.getChoice(i).equals(cardChoice[0])) {
         					setTargetPlayer(card.getChoiceTarget(0)); 
-        					AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(4,card);
+        					AllZone.GameAction.addDamage(getTargetPlayer(), card, 4);
         				}
         			}
 
@@ -5097,8 +5093,8 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    AllZone.Human_Life.subtractLife(4,card);
-                    AllZone.Computer_Life.subtractLife(4,card);
+                	AllZone.GameAction.addDamage(Constant.Player.Human, card, 4);
+                	AllZone.GameAction.addDamage(Constant.Player.Computer, card, 4);
                 }
                 
                 @Override
@@ -7816,8 +7812,7 @@ public class CardFactory_Sorceries {
                         	AllZone.GameAction.removeFromGame(c);
                     }
                     
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
-                    life.subtractLife(5,card);
+                    AllZone.GameAction.addDamage(card.getController(), card, 5);
                 }//resolve()
             };//SpellAbility
             
