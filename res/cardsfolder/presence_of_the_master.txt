@@ -1,0 +1,8 @@
+Name:Presence of the Master
+ManaCost:3 W
+Types:Enchantment
+Text:Whenever a player casts an enchantment spell, counter it.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/presence_of_the_master.jpg
+End
