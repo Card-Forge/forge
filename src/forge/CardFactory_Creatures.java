@@ -20049,6 +20049,7 @@ public class CardFactory_Creatures {
 				{
 					//AI will only use this when there's creatures in human's graveyard:
 					CardList humanList = AllZoneUtil.getPlayerGraveyard(Constant.Player.Human);
+					humanList = humanList.getType("Creature");
 					return humanList.size()>0;
 				}
         	};
