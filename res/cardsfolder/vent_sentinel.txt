@@ -1,0 +1,11 @@
+Name:Vent Sentinel
+ManaCost:3 R
+Types:Creature Elemental
+Text:no text
+PT:2/4
+K:Defender
+K:abDamageTgtP 1 R T:X:Vent Sentinel deals damage to target player equal to the number of creatures with defender you control.
+SVar:X:Count$Valid Creature.withDefender+YouCtrl
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vent_sentinel.jpg
+End

@@ -1,0 +1,10 @@
+Name:Typhoon
+ManaCost:2 G
+Types:Sorcery
+Text:no text
+K:spDamageTgtOpp:X:Typhoon deals damage to each opponent equal to the number of Islands that player controls.
+SVar:X:Count$Valid Island.YouDontCtrl
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/typhoon.jpg
+End
