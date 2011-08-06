@@ -6191,7 +6191,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         */
-
+        /* converted to keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Centaur Glade")) {
             final SpellAbility ability = new Ability(card, "2 G G") {
@@ -6205,7 +6205,7 @@ public class CardFactory implements NewConstants {
             ability.setStackDescription("Centaur Glade - Put a 3/3 token into play.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Oblivion Ring")) {
@@ -7038,7 +7038,7 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Goblin Trenches")) {
             final String player = card.getController();
@@ -7139,7 +7139,7 @@ public class CardFactory implements NewConstants {
             ability.setBeforePayMana(runtime);
             
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************  
         else if(cardName.equals("Hatching Plans")) {
@@ -7147,9 +7147,9 @@ public class CardFactory implements NewConstants {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.drawCard(card.getController());
-                    AllZone.GameAction.drawCard(card.getController());
-                    AllZone.GameAction.drawCard(card.getController());
+                    AllZone.GameAction.drawCards(card.getController(), 3);
+                    //AllZone.GameAction.drawCard(card.getController());
+                    //AllZone.GameAction.drawCard(card.getController());
                 }
             };
             
