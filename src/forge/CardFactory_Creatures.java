@@ -8692,7 +8692,6 @@ public class CardFactory_Creatures {
             }));
         }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
         else if(cardName.equals("Cloudseeder")) {
             final Ability_Tap ability = new Ability_Tap(card, "U") {
@@ -8702,7 +8701,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     CardFactoryUtil.makeToken("Cloud Sprite", "U 1 1 Cloud Sprite", card, "U", new String[] {
                             "Creature", "Faerie"}, 1, 1, new String[] {
-                            "Flying", "This creature can block only creatures with flying."});
+                            "Flying", "CARDNAME can block only creatures with flying."});
                     
                     //computer discards here, todo: should discard when ability put on stack
                     if(card.getController().equals(Constant.Player.Computer)) AllZone.GameAction.discardRandom(Constant.Player.Computer);
@@ -8723,7 +8722,7 @@ public class CardFactory_Creatures {
             };//SpellAbility
             
             card.addSpellAbility(ability);
-            ability.setDescription("U, tap, Discard a card: Put a 1/1 blue Sprite creature token named Cloud Sprite into play with flying and \"this creature can block only creatures with flying\".");
+            ability.setDescription("U, tap, Discard a card: Put a 1/1 blue Sprite creature token named Cloud Sprite into play with flying and \"Cloud Sprite can block only creatures with flying.\".");
             ability.setStackDescription("Cloudseeker - Put a 1/1 token into play");
             ability.setBeforePayMana(new Input_PayManaCost_Ability("U", new Command() {
                 private static final long serialVersionUID = 7707504858274558816L;
@@ -8735,7 +8734,6 @@ public class CardFactory_Creatures {
                 }
             }));
         }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Goldmeadow Lookout")) {

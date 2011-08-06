@@ -1,3 +1,141 @@
+Air Bladder
+U
+Enchantment Aura
+Enchanted creature has flying and can block only creatures with flying.
+Enchant creature
+enPump:Flying & CARDNAME can block only creatures with flying.
+
+Ascending Aven
+2 U U
+Creature Bird Soldier
+no text
+3/2
+Flying
+CARDNAME can block only creatures with flying.
+Morph:2 U
+
+Battlefield Percher
+3 B B
+Creature Bird
+no text
+2/2
+Flying
+CARDNAME can block only creatures with flying.
+abPump 1 B:+1/+1
+
+Belbe's Percher
+2 B
+Creature Bird
+no text
+2/2
+Flying
+CARDNAME can block only creatures with flying.
+
+Cloud Djinn
+5 U
+Creature Djinn
+no text
+5/4
+Flying
+CARDNAME can block only creatures with flying.
+
+Cloud Dragon
+5 U
+Creature Illusion Dragon
+no text
+5/4
+Flying
+CARDNAME can block only creatures with flying.
+
+Cloud Elemental
+2 U
+Creature Elemental
+no text
+2/3
+Flying
+CARDNAME can block only creatures with flying.
+
+Cloud Pirates
+U
+Creature Human Pirate
+no text
+1/1
+Flying
+CARDNAME can block only creatures with flying.
+
+Cloud Spirit
+2 U
+Creature Spirit
+no text
+3/1
+Flying
+CARDNAME can block only creatures with flying.
+
+Cloud Sprite
+U
+Creature Faerie
+no text
+1/1
+Flying
+CARDNAME can block only creatures with flying.
+
+Gloomwidow
+2 G
+Creature Spider
+no text
+3/3
+Reach
+CARDNAME can block only creatures with flying.
+
+Hoverguard Observer
+2 U U
+Creature Drone
+no text
+3/3
+Flying
+CARDNAME can block only creatures with flying.
+
+Rishadan Airship
+2 U
+Creature Human Pirate
+no text
+3/1
+Flying
+CARDNAME can block only creatures with flying.
+
+Stormcloud Djinn
+4 U
+Creature Djinn
+no text
+3/3
+Flying
+CARDNAME can block only creatures with flying.
+abPump R R:+2/+0:Drawback$DamageYou/1:Stormcloud Djinn gets +2/+0 until end of turn and deals 1 damage to you.
+
+Stratozeppelid
+4 U
+Creature Beast
+no text
+4/4
+Flying
+CARDNAME can block only creatures with flying.
+
+Stronghold Zeppelin
+2 U U
+Creature Human
+no text
+3/3
+Flying
+CARDNAME can block only creatures with flying.
+
+Welkin Tern
+1 U
+Creature Bird
+no text
+2/1
+Flying
+CARDNAME can block only creatures with flying.
+
 Eternity Vessel
 6
 Artifact
@@ -3497,13 +3635,6 @@ Enchanted creature gets +3/+3.
 Enchant creature
 enPump:+3/+3
 
-Air Bladder
-U
-Enchantment Aura
-Enchanted creature has flying and can block only creatures with flying.
-Enchant creature
-enPump:Flying & This creature can block only creatures with flying.
-
 Gift of Granite
 W
 Enchantment Aura
@@ -5932,15 +6063,6 @@ Creature Elf Shaman
 no text
 1/1
 abPumpTgt 2 G W:+3/+3:Drawback$UntapTgt:Target creature gets +3/+3 until end of turn. Untap that creature.
-
-Stormcloud Djinn
-4 U
-Creature Djinn
-no text
-3/3
-Flying
-This creature can block only creatures with flying.
-abPump R R:+2/+0:Drawback$DamageYou/1:Stormcloud Djinn gets +2/+0 until end of turn and deals 1 damage to you.
 
 Timberwatch Elf
 2 G
@@ -9582,14 +9704,6 @@ Vastwood Gorger
 Creature Wurm
 no text
 5/6
-
-Welkin Tern
-1 U
-Creature Bird
-no text
-2/1
-Flying
-This creature can block only creatures with flying.
 
 Zendikar Farguide
 4 G
@@ -13425,15 +13539,6 @@ Creature Kithkin Soldier
 Kinsbaile Borderguard comes into play with a +1/+1 counter on it for each other Kithkin you control. When Kinsbaile Borderguard is put into a graveyard from play, put a 1/1 white Kithkin Soldier creature token into play for each counter on it.
 1/1
 
-Ascending Aven
-2 U U
-Creature Bird Soldier
-no text
-3/2
-Flying
-This creature can block only creatures with flying.
-Morph:2 U
-
 Battering Craghorn
 2 R R
 Creature Goat Beast
@@ -14541,15 +14646,6 @@ no text
 Flying
 First Strike
 
-Battlefield Percher
-3 B B
-Creature Bird
-no text
-2/2
-Flying
-This creature can block only creatures with flying.
-abPump 1 B:+1/+1
-
 Benalish Knight
 2 W
 Creature Human Knight
@@ -14618,14 +14714,6 @@ no text
 1/1
 Flying
 abPump G G:First Strike
-
-Gloomwidow
-2 G
-Creature Spider
-no text
-3/3
-Reach
-This creature can block only creatures with flying.
 
 Goblin Berserker
 3 R
@@ -21017,14 +21105,6 @@ no text
 Flying
 Vigilance
 
-Belbe's Percher
-2 B
-Creature Bird
-no text
-2/2
-Flying
-This creature can block only creatures with flying.
-
 Blistering Barrier
 2 R
 Creature Wall
@@ -21046,54 +21126,6 @@ no text
 5/5
 Vigilance
 Haste
-
-Cloud Djinn
-5 U
-Creature Djinn
-no text
-5/4
-Flying
-This creature can block only creatures with flying.
-
-Cloud Dragon
-5 U
-Creature Illusion Dragon
-no text
-5/4
-Flying
-This creature can block only creatures with flying.
-
-Cloud Elemental
-2 U
-Creature Elemental
-no text
-2/3
-Flying
-This creature can block only creatures with flying.
-
-Cloud Pirates
-U
-Creature Human Pirate
-no text
-1/1
-Flying
-This creature can block only creatures with flying.
-
-Cloud Spirit
-2 U
-Creature Spirit
-no text
-3/1
-Flying
-This creature can block only creatures with flying.
-
-Cloud Sprite
-U
-Creature Faerie
-no text
-1/1
-Flying
-This creature can block only creatures with flying.
 
 Copper Myr
 2
@@ -21157,14 +21189,6 @@ Artifact Creature Myr
 no text
 1/1
 tap: add W
-
-Hoverguard Observer
-2 U U
-Creature Drone
-no text
-3/3
-Flying
-This creature can block only creatures with flying.
 
 Incurable Ogre
 3 R
@@ -21277,14 +21301,6 @@ no text
 2/2
 Haste
 
-Rishadan Airship
-2 U
-Creature Human Pirate
-no text
-3/1
-Flying
-This creature can block only creatures with flying.
-
 Royal Falcon
 1 W
 Creature Bird
@@ -21320,22 +21336,6 @@ no text
 2/2
 tap: add G
 Vigilance
-
-Stratozeppelid
-4 U
-Creature Beast
-no text
-4/4
-Flying
-This creature can block only creatures with flying.
-
-Stronghold Zeppelin
-2 U U
-Creature Human
-no text
-3/3
-Flying
-This creature can block only creatures with flying.
 
 Tower Gargoyle
 1 W U B

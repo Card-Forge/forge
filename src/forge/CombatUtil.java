@@ -155,7 +155,7 @@ public class CombatUtil {
         }
         
 
-        if(blocker.getKeyword().contains("This creature can block only creatures with flying.")
+        if(blocker.getKeyword().contains("CARDNAME can block only creatures with flying.")
                 && !attacker.getKeyword().contains("Flying")) return false;
         
         if (attacker.getKeyword().contains("CARDNAME can't be blocked by creatures with flying.")
