@@ -53,6 +53,8 @@ pine_barrens.jpg		http://www.wizards.com/global/images/magic/general/pine_barren
 skyshroud_forest.jpg		http://www.wizards.com/global/images/magic/general/skyshroud_forest.jpg
 caldera_lake.jpg		http://www.wizards.com/global/images/magic/general/caldera_lake.jpg
 scabland.jpg			http://www.wizards.com/global/images/magic/general/scabland.jpg
+grand_coliseum.jpg			http://www.wizards.com/global/images/magic/general/grand_coliseum.jpg
+elves_of_deep_shadow.jpg	http://www.wizards.com/global/images/magic/general/elves_of_deep_shadow.jpg
 talisman_of_dominance.jpg	http://www.wizards.com/global/images/magic/general/talisman_of_dominance.jpg
 talisman_of_impulse.jpg		http://www.wizards.com/global/images/magic/general/talisman_of_impulse.jpg	
 talisman_of_indulgence.jpg	http://www.wizards.com/global/images/magic/general/talisman_of_indulgence.jpg

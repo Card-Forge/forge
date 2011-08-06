@@ -1,3 +1,22 @@
+Grand Coliseum
+no cost
+Land
+no text
+tap: add 1
+paintap:1:W
+paintap:1:U
+paintap:1:B
+paintap:1:R
+paintap:1:G
+Comes into play tapped.
+
+Elves of Deep Shadow
+G
+Creature Elf Druid
+no text
+1/1
+paintap:1:B
+
 Adarkar Wastes
 no cost
 Land
