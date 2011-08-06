@@ -5613,7 +5613,18 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             ability.setDescription("1: Target creature you control becomes 7/7 until end of turn.");
             //this ability can target "this card" when it shouldn't be able to
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+            ability.setBeforePayMana(new Input() {
+                private static final long serialVersionUID = -7903295056497483023L;
+                
+                @Override
+                public void showMessage() {
+                    String player = card.getController();
+                    CardList targets = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards()); 
+                    targets = targets.getType("Creature");
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, targets,
+                            "Select a creature you control", true, false));
+                }
+            });
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
