@@ -19,6 +19,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -114,6 +115,14 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
                 c.setRarity(pack.getRarity(cardName));
             }
             
+            String PC = c.getSVar("PicCount");
+            Random r = new Random();
+            int n = 0;
+            if (PC.matches("[0-9][0-9]?"))
+            	n = Integer.parseInt(PC);
+            if (n > 1)
+                c.setRandomPicture(r.nextInt(n));
+            
         	if (c.getCurSetCode().equals(""))
         	{
         		c.setCurSetCode(c.getMostRecentSet());
@@ -132,7 +141,15 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
             // add rarity to card if this is a sealed card pool
             if(!customMenu.getGameType().equals(Constant.GameType.Constructed)) c.setRarity(pack.getRarity(c.getName()));
 
-        	if (c.getCurSetCode().equals(""))
+            String PC = c.getSVar("PicCount");
+            Random r = new Random();
+            int n = 0;
+            if (PC.matches("[0-9][0-9]?"))
+            	n = Integer.parseInt(PC);
+            if (n > 1)
+                c.setRandomPicture(r.nextInt(n));
+            
+            if (c.getCurSetCode().equals(""))
         	{
         		c.setCurSetCode(c.getMostRecentSet());
         		c.setImageFilename(CardUtil.buildFilename(c));

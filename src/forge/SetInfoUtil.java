@@ -166,7 +166,7 @@ public class SetInfoUtil {
 	
 	public static String getMostRecentSet(ArrayList<SetInfo> alSI)
 	{
-		int mostRecent = 0;
+		int mostRecent = -1;
 		
 		for (int i=0; i<alSI.size(); i++)
 		{
@@ -186,7 +186,10 @@ public class SetInfoUtil {
 			
 		}
 		
-		return sets[mostRecent][1];
+		if (mostRecent > -1)
+			return sets[mostRecent][1];
+		
+		return "";
 	}
 
 }

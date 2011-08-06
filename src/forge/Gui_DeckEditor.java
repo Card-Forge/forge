@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -150,7 +151,17 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 filteredOut = filterByType(c);
             }
             
-        	if (c.getCurSetCode().equals(""))
+            String PC = c.getSVar("PicCount");
+            Random r = new Random();
+            int n = 0;
+            if (!PC.equals("")) {
+	            if (PC.matches("[0-9][0-9]?"))
+	            	n = Integer.parseInt(PC);
+	            if (n > 1)
+	                c.setRandomPicture(r.nextInt(n));
+            }
+            
+            if (c.getCurSetCode().equals(""))
         	{
         		c.setCurSetCode(c.getMostRecentSet());
         		c.setImageFilename(CardUtil.buildFilename(c));
@@ -169,7 +180,17 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
             // add rarity to card if this is a sealed card pool
             if(!customMenu.getGameType().equals(Constant.GameType.Constructed)) c.setRarity(pack.getRarity(c.getName()));
             
-        	if (c.getCurSetCode().equals(""))
+            String PC = c.getSVar("PicCount");
+            Random r = new Random();
+            int n = 0;
+            if (!PC.equals("")) {
+	            if (PC.matches("[0-9][0-9]?"))
+	            	n = Integer.parseInt(PC);
+	            if (n > 1)
+	                c.setRandomPicture(r.nextInt(n));
+            }
+            
+            if (c.getCurSetCode().equals(""))
         	{
         		c.setCurSetCode(c.getMostRecentSet());
         		c.setImageFilename(CardUtil.buildFilename(c));

@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -505,6 +506,14 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         for(int i = 0; i < list.size(); i++) {
             c = list.get(i);
             c.setRarity(pack.getRarity(c.getName()));
+            
+            String PC = c.getSVar("PicCount");
+            Random r = new Random();
+            int n = 0;
+            if (PC.matches("[0-9][0-9]?"))
+            	n = Integer.parseInt(PC);
+            if (n > 1)
+                c.setRandomPicture(r.nextInt(n));
             
             if (c.getCurSetCode().equals(""))
             {
