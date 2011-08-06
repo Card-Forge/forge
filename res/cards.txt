@@ -57,7 +57,7 @@ no text
 1/2
 tap, Sacrifice CARDNAME: Add B B to your mana pool.
 
-Archeological Dig
+Archaeological Dig
 no cost
 Land
 no text
