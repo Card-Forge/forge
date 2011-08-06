@@ -10290,53 +10290,45 @@ public class CardFactory implements NewConstants {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Funeral Charm")) {
+        else if (cardName.equals("Funeral Charm")) {
+            
             //discard
             final SpellAbility spell_one = new Spell(card) {
                 private static final long serialVersionUID = 8273875515630095127L;
                 
                 @Override
                 public boolean canPlayAI() {
+
                     setTargetPlayer(Constant.Player.Human);
-                    return MyRandom.random.nextBoolean();
+                    PlayerZone humanHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+                    
+                    return (humanHand.size() >= 1);
                 }
                 
                 @Override
                 public void resolve() {
-                    if(Constant.Player.Computer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer());
+                    if (Constant.Player.Computer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer());
                     else AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
                 }//resolve()
             };//SpellAbility
+            
             spell_one.setDescription("Target player discards a card.");
             spell_one.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell_one));
-            
-
+  
             //creature gets +2/-1
             final SpellAbility spell_two = new Spell(card) {
                 private static final long serialVersionUID = -4554812851052322555L;
                 
-                
                 @Override
                 public boolean canPlayAI() {
-                    CardList list = new CardList(ComputerUtil.getAttackers().getAttackers());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return 1 < c.getNetDefense();
-                        }
-                    });
-                    
-                    list.shuffle();
-                    if(list.size() > 0) setTargetCard(list.get(0));
-                    
-                    return (list.size() > 0) && MyRandom.random.nextBoolean();
+                    return false;
                 }
-                
                 
                 @Override
                 public void resolve() {
                     final Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         c.addTempAttackBoost(2);
                         c.addTempDefenseBoost(-1);
                         
@@ -10355,9 +10347,42 @@ public class CardFactory implements NewConstants {
             spell_two.setDescription("Target creature gets +2/-1 until end of turn.");
             spell_two.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell_two));
             
+            //creature gets swampwalk
+            final SpellAbility spell_three = new Spell(card) {
+                private static final long serialVersionUID = -8455677074284271852L;
+
+                @Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                    final Card c = getTargetCard();
+                    
+                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c) && !c.getKeyword().contains("Swampwalk")) {
+                        c.addExtrinsicKeyword("Swampwalk");
+                        
+                        Command until = new Command() {
+                            private static final long serialVersionUID = 1452395016805444249L;
+
+                            public void execute() {
+                                if (AllZone.GameAction.isCardInPlay(c)) {
+                                    c.removeExtrinsicKeyword("Swampwalk");
+                                }
+                            }
+                        };//Command
+                        AllZone.EndOfTurn.addUntil(until);
+                    }//if card in play?
+                }//resolve()
+            };//SpellAbility
+            spell_three.setDescription("Target creature gains swampwalk until end of turn.");
+            spell_three.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell_three));
+            
             card.clearSpellAbility();
             card.addSpellAbility(spell_one);
             card.addSpellAbility(spell_two);
+            card.addSpellAbility(spell_three);
         }//*************** END ************ END **************************
         
 

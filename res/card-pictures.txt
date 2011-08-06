@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+rampant_growth.jpg		http://www.wizards.com/global/images/magic/general/rampant_growth.jpg
 kjeldoran_outpost.jpg		http://www.wizards.com/global/images/magic/general/kjeldoran_outpost.jpg
 kor_firewalker.jpg     http://www.wizards.com/global/images/magic/general/kor_firewalker.jpg
 lone_missionary.jpg		http://www.wizards.com/global/images/magic/general/lone_missionary.jpg
