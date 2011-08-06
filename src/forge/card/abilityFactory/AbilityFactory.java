@@ -878,8 +878,20 @@ public class AbilityFactory {
 						}
 					}
 					else {
-						//TODO - this may needs edits to handle SpellAbility defineds?
-						list = new CardList(findParentsTargetedCard(ability).getTarget().getTargetCards().toArray());
+						SpellAbility parent = findParentsTargetedCard(ability);
+						
+						ArrayList<Object> all =  parent.getTarget().getTargets();
+						if(!all.isEmpty() && all.get(0) instanceof SpellAbility) {
+							list = new CardList();
+							ArrayList<SpellAbility> sas = parent.getTarget().getTargetSAs();
+							for(SpellAbility sa : sas) {
+								list.add(sa.getSourceCard());
+							}
+						}
+						else {
+							SpellAbility saTargeting = findParentsTargetedCard(ability);
+							list = new CardList(saTargeting.getTarget().getTargetCards().toArray());
+						}
 					}
 				}
 				else if (calcX[0].startsWith("Triggered")) {

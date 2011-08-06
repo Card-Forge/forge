@@ -860,45 +860,6 @@ public class CardFactory_Instants {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Overwhelming Intellect")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -8825219868732813877L;
-                
-                @Override
-                public void resolve() {
-                    SpellAbility sa = AllZone.Stack.pop();
-                    AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
-                    
-                    int convertedManaCost = CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost());
-                    for(int i = 0; i < convertedManaCost; i++) {
-                    	card.getController().drawCard();
-                    }
-                    
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.Stack.size() == 0) return false;
-                    
-                    //see if spell is on stack and that opponent played it
-                    Player opponent = card.getController().getOpponent();
-                    SpellAbility sa = AllZone.Stack.peek();
-                    return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
-                            && sa.getSourceCard().getType().contains("Creature")
-                            && CardFactoryUtil.isCounterable(sa.getSourceCard());
-                    
-
-                }
-            };
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Banishing Knack")) {
             SpellAbility spell = new Spell(card) {
