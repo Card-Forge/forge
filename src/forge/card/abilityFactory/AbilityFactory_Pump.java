@@ -158,10 +158,12 @@ public class AbilityFactory_Pump {
     	return AbilityFactory.calculateAmount(hostCard, numDefense, sa);
     }
 
-    private CardList getPumpCreatures(final int defense, int attack) {
+    private CardList getPumpCreatures(final int defense, final int attack) {
     	
         final boolean kHaste = Keywords.contains("Haste");
-        final boolean kSize = Keywords.size() > 0;
+        final boolean evasive = (Keywords.contains("Flying") || Keywords.contains("Horsemanship") || 
+        		Keywords.contains("HIDDEN Unblockable"));
+        final boolean kSize = !Keywords.get(0).equals("none");
         String KWpump[] = {"none"};
         if (!Keywords.get(0).equals("none"))
         	KWpump = Keywords.toArray(new String[Keywords.size()]);
@@ -175,23 +177,48 @@ public class AbilityFactory_Pump {
                 
                 if (c.getNetDefense() + defense <= 0) //don't kill the creature
                 	return false;
-            	
-                //give haste to creatures that can attack
-                if(c.hasSickness() && kHaste && AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer) && CombatUtil.canAttackNextTurn(c))
-                    return true;
-                    
-                //will the creature attack (only relevant for sorcery speed)
-                boolean toAttack = CardFactoryUtil.AI_doesCreatureAttack(c) && AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers);
-                //is the creature in combat (and the opponent has made its choices)
-                boolean combatant = (c.isBlocking()
-                		|| (AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Blockers) && AllZone.Combat.isAttacking(c)));
-                //if the life of the computer is in danger, try to pump potential blockers before declaring blocks
-                boolean emergencyBlock = (CombatUtil.lifeInDanger(AllZone.Combat) 
-                		&& AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Attackers) && CombatUtil.canBlock(c, AllZone.Combat));
+                
                 //Don't add duplicate keywords
                 boolean hKW = c.hasAnyKeyword(KWs);
+                if (kSize && hKW) return false;
+            	
+                //give haste to creatures that could attack with it
+                if(c.hasSickness() && kHaste && AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer) && CombatUtil.canAttackNextTurn(c)
+                		&& AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers))
+                    return true;
                 
-                return ((toAttack  || combatant || emergencyBlock) && (kSize && !hKW)); 
+                //give evasive keywords to creatures that can attack
+                if(evasive && AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer) && CombatUtil.canAttack(c) 
+                		&& AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers) && c.getNetCombatDamage()>0)
+                    return true;
+                    
+                //will the creature attack (only relevant for sorcery speed)?
+                if (CardFactoryUtil.AI_doesCreatureAttack(c) && AllZone.Phase.isBefore(Constant.Phase.Combat_Declare_Attackers)
+                		&& AllZone.Phase.isPlayerTurn(AllZone.ComputerPlayer))
+                	return true;
+                
+                //is the creature blocking and unable to destroy the attacker or would be destroyed itself?
+                if (c.isBlocking() && (CombatUtil.blockerWouldBeDestroyed(c) 
+                		|| CombatUtil.attackerWouldBeDestroyed(AllZone.Combat.getAttackerBlockedBy(c))))
+                	return true;
+                
+                //is the creature unblocked and the spell will pump its power?
+                if (AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Blockers) && AllZone.Combat.isAttacking(c)
+                		&& AllZone.Combat.isUnblocked(c) && attack > 0)
+                	return true;
+                
+                //is the creature in blocked and the blocker would survive
+                if (AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Blockers) && AllZone.Combat.isAttacking(c)
+                		&& AllZone.Combat.isBlocked(c)
+                		&& CombatUtil.blockerWouldBeDestroyed(AllZone.Combat.getBlockers(c).get(0)))
+                	return true;
+                
+                //if the life of the computer is in danger, try to pump potential blockers before declaring blocks
+                if (CombatUtil.lifeInDanger(AllZone.Combat) && AllZone.Phase.isAfter(Constant.Phase.Combat_Declare_Attackers) 
+                		&& CombatUtil.canBlock(c, AllZone.Combat) && AllZone.Phase.isPlayerTurn(AllZone.HumanPlayer))
+                	return true;
+                
+                return false; 
             }
         });
         return list;
@@ -264,7 +291,7 @@ public class AbilityFactory_Pump {
     	SpellAbility_Restriction restrict = sa.getRestrictions();
     	
     	// Phase Restrictions
-    	if (AllZone.Stack.size() == 0 && !AllZone.Phase.inCombat()){
+    	if (AllZone.Stack.size() == 0 && AllZone.Phase.isBefore(Constant.Phase.Combat_Begin)){
     		// Instant-speed pumps should not be cast outside of combat when the stack is empty
     		if (!AF.isCurse()){
     			if (!AbilityFactory.isSorcerySpeed(sa))
@@ -376,7 +403,7 @@ public class AbilityFactory_Pump {
         
 		while(tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)){ 
 			Card t = null;
-			boolean goodt = false;
+			//boolean goodt = false;
 			
 			if (list.isEmpty()){
 				if (tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa) || tgt.getNumTargeted() == 0){
@@ -392,6 +419,7 @@ public class AbilityFactory_Pump {
 				}
 			}
 			
+			/*Not needed
 			if (AF.isCurse()){
 				t = CardFactoryUtil.AI_getBestCreature(list);
 				goodt = true;
@@ -402,12 +430,11 @@ public class AbilityFactory_Pump {
         			if((t.getNetDefense() + defense) > t.getDamage()) goodt = true;
         			else list.remove(t);
         		}
-	        }
+	        }*/
 	        
-	        if(goodt){
-	        	tgt.addTarget(t);
-	        	list.remove(t);
-	        }
+			t = CardFactoryUtil.AI_getBestCreature(list);
+	        tgt.addTarget(t);
+	        list.remove(t);
 		}
         
         return true;
