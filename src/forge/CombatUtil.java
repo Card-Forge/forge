@@ -217,7 +217,7 @@ public class CombatUtil {
         }
         
         if(attacker.getKeyword().contains("Intimidate")) {
-            if(!blocker.getType().contains("Artifact") && !CardFactoryUtil.sharesColorWith(attacker, blocker)) return false;
+            if(!blocker.getType().contains("Artifact") && !attacker.sharesColorWith(blocker)) return false;
         }
         
         if(attacker.getName().equals("Barrenton Cragtreads")) {

@@ -2476,6 +2476,16 @@ public class Card extends MyObservable {
 		return CardUtil.getColors(this).contains(Constant.Color.Colorless);
 	}
 	
+	public boolean sharesColorWith(final Card c1) {
+		boolean shares = false;
+		shares = shares || (isBlack() && c1.isBlack());
+		shares = shares || (isBlue() && c1.isBlue());
+		shares = shares || (isGreen() && c1.isGreen());
+		shares = shares || (isRed() && c1.isRed());
+		shares = shares || (isWhite() && c1.isWhite());
+		return shares;
+	}
+	
 	public boolean isAttacking() {
 		CardList attackers = new CardList(AllZone.Combat.getAttackers());
         attackers.addAll(AllZone.pwCombat.getAttackers());
@@ -2633,6 +2643,8 @@ public class Card extends MyObservable {
 				&& source.isArtifact());
 		reduce = reduce || (getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by creatures.")
 				&& source.isCreature());
+		reduce = reduce || (this.isCreature() && source.isCreature() && 
+				AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this));
 		return reduce;
     }
     

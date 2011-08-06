@@ -6503,13 +6503,10 @@ public class CardFactory_Creatures {
                     CardList sameColor = new CardList();
                     
                     //get all creatures
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
-                    list = list.getType("Creature");
+                    CardList list = AllZoneUtil.getCreaturesInPlay();
                     
                     for(int i = 0; i < list.size(); i++)
-                        if(CardFactoryUtil.sharesColorWith(list.get(i), c)) sameColor.add(list.get(i));
+                        if(list.get(i).sharesColorWith(c)) sameColor.add(list.get(i));
                     
                     return sameColor;
                 }
