@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Sliver
 Text:no text
 PT:3/3
-K:StaticEffect:Play:All Permanents:Keyword/Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.:Type.Sliver:All Sliver creatures have "Whenever a creature dealt damage by this creature this turn is put into a graveyard, put a +1/+1 counter on this creature."
+K:stPumpAll:Creature.Sliver:0/0/Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.:No Condition:All Sliver creatures have "Whenever a creature dealt damage by this creature this turn is put into a graveyard, put a +1/+1 counter on this creature."
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_sliver.jpg

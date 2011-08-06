@@ -12725,7 +12725,7 @@ public class GameActionUtil {
 						
 							final String affected = k[1];			
 							final String specific[] = affected.split(",");
-							CardList affectedCards = AffectedCards(cardWithKeyword, k); // options are All, Other, Self. etc.
+							CardList affectedCards = AffectedCards(cardWithKeyword, k); // options are All, Self, Enchanted etc.
 							affectedCards = affectedCards.getValidCards(specific, cardWithKeyword.getController(), cardWithKeyword);
 							se.setAffectedCards(affectedCards);
 							
@@ -12747,7 +12747,10 @@ public class GameActionUtil {
 			
 			int powerbonus = 0;
 			int toughnessbonus = 0;
-			String[] Keyword = Keyword_Details.replace("+","").split("/");
+			String[] Keyword = Keyword_Details.split("/",3);
+			
+			Keyword[0].replace("+","");
+			Keyword[1].replace("+","");
 			
 			if(!Keyword[0].contains("X")) powerbonus = Integer.valueOf(Keyword[0]);
 			else powerbonus = xValue; 		// the xCount takes places before
@@ -12784,7 +12787,10 @@ public class GameActionUtil {
 			
 			int powerbonus = 0;
 			int toughnessbonus = 0;
-			String[] Keyword = Keyword_Details[2].replace("+","").split("/");
+			String[] Keyword = Keyword_Details[2].split("/",3);
+			
+			Keyword[0].replace("+","");
+			Keyword[1].replace("+","");
 			
 			if(!Keyword[0].contains("X")) powerbonus = Integer.valueOf(Keyword[0]);
 			else powerbonus = xValue; 		
@@ -12878,6 +12884,7 @@ public class GameActionUtil {
 	      		Cards_inZone.addAll(AllZone.Computer_Play.getCards());
 	      		}
       		
+      		//no longer needed: use All with Other as restriction of ValidCard
       		if(Range.equals("Other")) {
       			Cards_inZone.addAll(AllZone.Human_Play.getCards());
 	      		Cards_inZone.addAll(AllZone.Computer_Play.getCards());
