@@ -1523,22 +1523,24 @@ public class CardFactoryUtil {
         return suspend;
     }//ability_suspend()
     
-    public static SpellAbility eqPump_Equip(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, final String Manacost) {
-        final Ability equip = new Ability(sourceCard, Manacost) {
+    public static SpellAbility eqPump_Equip(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, final Ability_Cost abCost) {
+        Target target = new Target(sourceCard, "Select target creature you control", "Creature.YouCtrl".split(","));
+    	final SpellAbility equip = new Ability_Activated(sourceCard, abCost, target) {
             private static final long serialVersionUID = -4960704261761785512L;
             
             @Override
             public void resolve() {
-                if (AllZone.GameAction.isCardInPlay(getTargetCard()) 
-                        && CardFactoryUtil.canTarget(sourceCard, getTargetCard())) {
+            	Card targetCard = getTargetCard();
+                if (AllZone.GameAction.isCardInPlay(targetCard) 
+                        && CardFactoryUtil.canTarget(sourceCard, targetCard)) {
                     
                     if (sourceCard.isEquipping()) {
                         Card crd = sourceCard.getEquipping().get(0);
-                        if (crd.equals(getTargetCard())) return;
+                        if (crd.equals(targetCard)) return;
                         
                         sourceCard.unEquipCard(crd);
                     }
-                    sourceCard.equipCard(getTargetCard());
+                    sourceCard.equipCard(targetCard);
                 }
             }
             
@@ -1602,7 +1604,7 @@ public class CardFactoryUtil {
                 return list;
             }//getCreature()
         };//equip ability
-        
+        /*
         Input runtime = new Input() {
             private static final long serialVersionUID = -6785656229070523470L;
             
@@ -1615,17 +1617,21 @@ public class CardFactoryUtil {
                         true, false));
             }
         };//Input
+        */
+        //equip.setBeforePayMana(runtime);
         
-        equip.setBeforePayMana(runtime);
+        String costDesc = abCost.toString();
+        //get rid of the ": " at the end
+        costDesc = costDesc.substring(0, costDesc.length() - 2);
         
         StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Equip: ").append(Manacost);
+        sbDesc.append("Equip - ").append(costDesc);
         equip.setDescription(sbDesc.toString());
         
         return equip;
     }//eqPump_Equip() ( was vanila_equip() )
     
-    public static Command eqPump_onEquip(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, final String Manacost) {
+    public static Command eqPump_onEquip(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, final Ability_Cost abCost) {
         
         Command onEquip = new Command() {
             
@@ -1651,7 +1657,7 @@ public class CardFactoryUtil {
         return onEquip;
     }//eqPump_onEquip ( was vanila_onequip() )
     
-    public static Command eqPump_unEquip(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, final String Manacost) {
+    public static Command eqPump_unEquip(final Card sourceCard, final int Power, final int Tough, final String[] extrinsicKeywords, final Ability_Cost abCost) {
         
         Command onUnEquip = new Command() {
             

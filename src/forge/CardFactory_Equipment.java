@@ -812,7 +812,8 @@ class CardFactory_Equipment {
                 String keywordsUnsplit = "";
                 String extrinsicKeywords[] = {"none"};    // for equips with no keywords to add
 
-                final String manaCost = tmpCost.trim();
+                //final String manaCost = tmpCost.trim();
+                final Ability_Cost abCost = new Ability_Cost(tmpCost.trim(), card.getName(), true);
                 int Power = 0;
                 int Tough = 0;
                 
@@ -849,9 +850,9 @@ class CardFactory_Equipment {
                     }
                 }
 
-                card.addSpellAbility(CardFactoryUtil.eqPump_Equip(card, Power, Tough, extrinsicKeywords, manaCost));
-                card.addEquipCommand(CardFactoryUtil.eqPump_onEquip(card, Power, Tough, extrinsicKeywords, manaCost));
-                card.addUnEquipCommand(CardFactoryUtil.eqPump_unEquip(card, Power, Tough, extrinsicKeywords, manaCost));
+                card.addSpellAbility(CardFactoryUtil.eqPump_Equip(card, Power, Tough, extrinsicKeywords, abCost));
+                card.addEquipCommand(CardFactoryUtil.eqPump_onEquip(card, Power, Tough, extrinsicKeywords, abCost));
+                card.addUnEquipCommand(CardFactoryUtil.eqPump_unEquip(card, Power, Tough, extrinsicKeywords, abCost));
                 
             }
         }// eqPump (was VanillaEquipment)
