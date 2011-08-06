@@ -1,3 +1,9 @@
+Viridian Joiner
+2 G
+Creature Elf Druid
+no text
+1/2
+
 Enclave Elite
 2 U
 Creature Merfolk Soldier

@@ -17252,6 +17252,27 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Viridian Joiner"))
+        {
+        	Ability_Mana ma = new Ability_Mana(card, "tap: add an amount of G to your mana pool equal to CARDNAME's power.")
+        	{
+        		/**
+				 * 
+				 */
+				private static final long serialVersionUID = 3818278127211421729L;
+
+				public String Mana()
+        		{
+        			StringBuilder sb = new StringBuilder();
+                    for(int i = 0; i < card.getNetAttack(); i++)
+                        sb.append('G');
+                    return sb.toString();
+        		}
+        	};
+        	card.addSpellAbility(ma);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {
