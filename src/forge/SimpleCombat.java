@@ -83,18 +83,24 @@ class SimpleCombat
     }//combatDamage()        
     public String toString()
     {
-	String s = "";
-	CardList attack = this.getAttackers();
-	CardList block;
-	for(int i = 0; i < attack.size(); i++)
-	{
-	    block = this.getBlockers(attack.get(i));
-	    if(block.isEmpty())
-		s +=attack.get(i) +" ";
-	    else
-		s += attack.get(i) +" - " +block.get(0) +" ";		
-	}
-	
-	return s;
+		StringBuilder sb = new StringBuilder();
+		CardList attack = this.getAttackers();
+		CardList block;
+		for(int i = 0; i < attack.size(); i++)
+		{
+		    block = this.getBlockers(attack.get(i));
+		    if(block.isEmpty()) {
+		    	sb.append(attack.get(i));
+		    	sb.append(" ");
+		    }
+		    else {
+		    	sb.append(attack.get(i));
+		    	sb.append(" - ");
+		    	sb.append(block.get(0));
+		    	sb.append(" ");
+		    }
+		}
+		
+		return sb.toString();
     }
 }//Combat

@@ -973,13 +973,12 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
     
     //only accepts numbers, letters or dashes up to 10 characters in length
     private String cleanString(String in) {
-        String out = "";
         char[] c = in.toCharArray();
         
+        StringBuilder sb = new StringBuilder();
         for(int i = 0; i < c.length && i < 20; i++)
-            if(Character.isLetterOrDigit(c[i]) || c[i] == '-') out += c[i];
-        
-        return out;
+            if(Character.isLetterOrDigit(c[i]) || c[i] == '-') sb.append(c[i]);
+        return sb.toString();
     }
     
     

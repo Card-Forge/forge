@@ -450,11 +450,8 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
     }
     
     private void jbInit() throws Exception {
-    	
-    	@SuppressWarnings("unused")
-		CardList stCardList=new CardList();
-    	
-        border1 = new EtchedBorder(EtchedBorder.RAISED, Color.white, new Color(148, 145, 140));
+
+    	border1 = new EtchedBorder(EtchedBorder.RAISED, Color.white, new Color(148, 145, 140));
         titledBorder1 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
                 "All Cards");
         border2 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));

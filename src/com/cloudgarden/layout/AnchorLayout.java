@@ -116,7 +116,7 @@ public class AnchorLayout implements LayoutManager2 {
 	 * @see org.eclipse.swt.widgets.Layout#layout(org.eclipse.swt.widgets.Composite, boolean)
 	 */
 	public void layoutContainer(Container container) {
-	    this.container = container;
+	    //this.container = container;
 		Component children[] = container.getComponents();
 		Rectangle rect = container.getBounds();
 		int width = rect.width;

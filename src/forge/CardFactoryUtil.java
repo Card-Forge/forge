@@ -95,7 +95,7 @@ public class CardFactoryUtil
     
      // if no non-basic lands, target the least represented basic land type
      String names[] = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
-     String sminBL = new String();
+     String sminBL = "";
      int iminBL = 20000; // hopefully no one will ever have more than 20000 lands of one type....
      int n = 0;
      for (int i = 0; i < 5; i++)
@@ -213,26 +213,26 @@ public class CardFactoryUtil
   //Object[1] has to be an Object like Integer and not just an int
   private static Object[][] AbilityLimits =
   {
-    {"Azimaet Drake"    , new Integer(1)},
-    {"Drake Hatchling"  , new Integer(1)},
-    {"Fire Drake"       , new Integer(1)},
-    {"Plated Rootwalla" , new Integer(1)},
-    {"Rootwalla"        , new Integer(1)},
-    {"Spitting Drake"   , new Integer(1)},
-    {"Ghor-Clan Bloodscale", new Integer(1)},
-    {"Wild Aesthir",  	  new Integer(1)},
-    {"Viashino Slaughtermaster", new Integer(1)},
-    {"Twinblade Slasher", new Integer(1)},
-    {"Boreal Centaur", new Integer(1)},
-    {"Knight of the Skyward Eye", new Integer(1)},
-    {"Chronatog", new Integer(1)},
+    {"Azimaet Drake"    , Integer.valueOf(1)},
+    {"Drake Hatchling"  , Integer.valueOf(1)},
+    {"Fire Drake"       , Integer.valueOf(1)},
+    {"Plated Rootwalla" , Integer.valueOf(1)},
+    {"Rootwalla"        , Integer.valueOf(1)},
+    {"Spitting Drake"   , Integer.valueOf(1)},
+    {"Ghor-Clan Bloodscale", Integer.valueOf(1)},
+    {"Wild Aesthir",  	  Integer.valueOf(1)},
+    {"Viashino Slaughtermaster", Integer.valueOf(1)},
+    {"Twinblade Slasher", Integer.valueOf(1)},
+    {"Boreal Centaur", Integer.valueOf(1)},
+    {"Knight of the Skyward Eye", Integer.valueOf(1)},
+    {"Chronatog", Integer.valueOf(1)},
 
-    {"Phyrexian Battleflies"   , new Integer(2)},
-    {"Pit Imp"                 , new Integer(2)},
-    {"Roterothopter"           , new Integer(2)},
-    {"Vampire Bats"            , new Integer(2)},
-    {"Fire-Belly Changeling"   , new Integer(2)},
-    {"Azusa, Lost but Seeking" , new Integer(2)}
+    {"Phyrexian Battleflies"   , Integer.valueOf(2)},
+    {"Pit Imp"                 , Integer.valueOf(2)},
+    {"Roterothopter"           , Integer.valueOf(2)},
+    {"Vampire Bats"            , Integer.valueOf(2)},
+    {"Fire-Belly Changeling"   , Integer.valueOf(2)},
+    {"Azusa, Lost but Seeking" , Integer.valueOf(2)}
   };
 
   public static boolean canUseAbility(Card card)
@@ -622,14 +622,8 @@ public class CardFactoryUtil
 				
 				SpellAbility[] sa = sourceCard.getSpellAbility();
 				
-				if (sourceCard.getController().equals(Constant.Player.Human)) {
-					//AllZone.GameAction.playSpellAbility(sa[0]);
-					AllZone.Stack.add(sa[0]);
-				}
-				else {
-					//ComputerUtil.playNoStack(sa[0]);
-					AllZone.Stack.add(sa[0]);
-				}
+				AllZone.Stack.add(sa[0]);
+				
 				grave.remove(sourceCard);
 				removed.add(sourceCard);
 				
@@ -2144,30 +2138,31 @@ public class CardFactoryUtil
 	  if (multiplier == 1)
 		  return manacost;
 	  
-	  String result = "";
 	  String tokenized[] = manacost.split("\\s");
+	  StringBuilder sb = new StringBuilder();
 	  
 	  if (Character.isDigit(tokenized[0].charAt(0))) //manacost starts with "colorless" number cost
 	  {
 		  int cost = Integer.parseInt(tokenized[0]);
 		  cost = multiplier * cost;
 		  tokenized[0] = "" + cost;
-		  result = result + " " + tokenized[0];
+		  sb.append(tokenized[0]);
 	  }
 	  else {
 		  for (int i=0; i<multiplier; i++)
 			  //tokenized[0] = tokenized[0] + " " + tokenized[0];
-		  	  result = result + " " + tokenized[0];
+			  sb.append(tokenized[0]);
 	  }
 	  
 	  for (int i=1;i<tokenized.length;i++){
 		  for (int j=0;j<multiplier;j++)
 		  {
 			  //tokenized[i] = tokenized[i] + " " + tokenized[i];
-			  result = result + " " + tokenized[i];
+			  sb.append(tokenized[0]);
 		  }
 	  }
 	  
+	  String result = sb.toString();
 	  result = result.trim();
 	  return result;
   }
@@ -2760,7 +2755,7 @@ public class CardFactoryUtil
      else
         X = Integer.parseInt(d[1]);
     
-     String dbPlayer = new String();
+     String dbPlayer = "";
      if (d[0].contains("You"))
         dbPlayer = cardController;
      else if (d[0].contains("Opp"))

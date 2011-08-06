@@ -6,7 +6,7 @@ public class ManaPool extends Card
 {
 	private ArrayList<Ability_Mana> used = new ArrayList<Ability_Mana>();
 	//boolean[] spendAsCless ={true,true,true,true,true,true};
-	boolean spendAll = true;
+	//boolean spendAll = true;
 /*	private int cIndex(String s)
 	{
 		//String c =(s.length()==1 ? s : Input_PayManaCostUtil.getColor2(s)); 
@@ -82,25 +82,30 @@ public class ManaPool extends Card
 	{
 		//empty = true;
 		String res=(isSnow() ? "Snow " : "") + "Mana available:\r\n";
-		if (isEmpty())res+="None\r\n";
+		StringBuilder sb = new StringBuilder();
+		sb.append(res);
+		if (isEmpty())sb.append("None\r\n");
 		//if(has[0]>0) {res+=Integer.toString(has[0]); empty = false;}
 		else for(char c : mcolors.toCharArray())//int j=0; j<colors.length();j++){char c=colors.charAt(j);
 		{
 			int n = containsColor(c);//has[cIndex(c+"")];
 			if(n == 0) continue;
-			if(c == '1') res += n;
+			if(c == '1') sb.append(n);
 			else
 			{
 				for(int i = 0; i< n ; i++)
-					res +=c;//(c+"");
+					sb.append(c);//(c+"");
 				//if (n > 0) {
-				res+="("+n/*(Integer.toString(n)*/+")";// empty = false;}
+				//res+="("+n/*(Integer.toString(n)*/+")";// empty = false;}
+				sb.append("(");
+				sb.append(n);
+				sb.append(")");
 			}
-			res += "\r\n";
+			sb.append("\r\n");
 		}
 		if(!isSnow())
-			res += smp.getText();
-		return res;
+			sb.append(smp.getText());
+		return sb.toString();
 	}
 	
 	public final static String colors = "WUBRG";
@@ -118,11 +123,11 @@ public class ManaPool extends Card
 	}
 	String sortContents(String mana)
 	{
-		String res = "";
+		StringBuilder sb = new StringBuilder();
 		for(char color : mcolors.toCharArray())
 			for(char c : mana.toCharArray())
-				if(c == color) res += c;
-		return res;
+				if(c == color) sb.append(c);
+		return sb.toString();
 	}
 	int containsColor(String color)
 	{
@@ -144,16 +149,16 @@ public class ManaPool extends Card
 	public static String oraclize(String manaCost){
 		//if(!manaCost.contains(" ")) return manaCost;
 		String[] parts = manaCost.split(" ");
-		String res="";
+		StringBuilder res = new StringBuilder();
 		for (String s : parts)
 		{
 			if (s.length()==2 && colors.contains(s.charAt(1) + "")) s=s.charAt(0)+"/"+s.charAt(1);
 			if (s.length()==3) s="(" + s + ")";
 			if (s.equals("S")) s="(S)";//for if/when we implement snow mana
 			if (s.equals("X")) s="(X)";//X costs?
-			res +=s;
+			res.append(s);
 		}		
-		return res;
+		return res.toString();
 	}
 	public ArrayList<String> getColors()
 	  {
@@ -275,7 +280,7 @@ public class ManaPool extends Card
 	{
 		if(mabilities.length == 0)
 		{
-			spendAll = true;//TODO:check something? GUI?
+			//spendAll = true;//TODO:check something? GUI?
 			if (m.isPaid() || ( isEmpty() && (isSnow() || smp.isEmpty()) ) )
 				return m;
 			else if (isEmpty()) return smp.subtractMana(m, mabilities);
@@ -359,7 +364,10 @@ public class ManaPool extends Card
 					chosen = choices.get(0);
 					if (choices.size()> 1)
 						chosen = (String)AllZone.Display.getChoiceOptional("Choose "+ (isSnow()? "snow " : "")+"mana to pay " + Mana, choices.toArray());
-					if (chosen == null) {spendAll = false; return manaCost;}
+					if (chosen == null) {
+						//spendAll = false;
+						return manaCost;
+					}
 					if(chosen.equals(Constant.Color.Snow))
 						manaCost.subtractMana(chosen);
 					else manaCost=subtractOne(manaCost,getColor2(chosen));

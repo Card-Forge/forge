@@ -126,9 +126,9 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     			if (!divider.equals(".")) divider=".";
     		while (copy.startsWith(":") || copy.startsWith(divider) ) copy=copy.substring(1);
     		String current=copy.substring(0, copy.indexOf(","));
-    		if (current.startsWith("Sacrifice a")){
+    		/*if (current.startsWith("Sacrifice a")){
     			
-    		}
+    		}*/
     		copy=copy.substring(current.length());
     	}
     }

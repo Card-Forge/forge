@@ -236,7 +236,7 @@ public class CombatPlaneswalker
     */
 	if (b.getKillDamage() <= damage)
 	{
-		damage -= b.getKillDamage();
+		//damage -= b.getKillDamage();
         b.addAssignedDamage(b.getKillDamage(), a);
 	}
 	

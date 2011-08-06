@@ -11,16 +11,16 @@ public class Input_PayManaCostUtil
     if(card instanceof ManaPool) return ((ManaPool)card).subtractMana(manaCost);
 	ArrayList<Ability_Mana> abilities = getManaAbilities(card);
 
-    String cneeded="";
+    StringBuilder cneeded = new StringBuilder();
     for(String color : Constant.Color.ManaColors)
     	if(manaCost.isNeeded(color))
-    		cneeded+=getColor2(color);
+    		cneeded.append(getColor2(color));
     Iterator<Ability_Mana> it = abilities.iterator();//you can't remove unneded abilitie inside a for(am:abilities) loop :(
     while(it.hasNext())
     {
     	Ability_Mana ma = it.next();
     	if (!ma.canPlay()) it.remove();
-    	else if (!canMake(ma, cneeded)) it.remove();
+    	else if (!canMake(ma, cneeded.toString())) it.remove();
     }
     if(abilities.isEmpty())
     	return manaCost;

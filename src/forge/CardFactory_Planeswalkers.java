@@ -1521,7 +1521,7 @@ class CardFactory_Planeswalkers {
 	          Object choice[] = new Object[size];
 
 	          for(int i = 0; i < choice.length; i++)
-	            choice[i] = new Integer(i + 1);
+	            choice[i] = Integer.valueOf(i + 1);
 
 	           Integer damage = (Integer) AllZone.Display.getChoice("Select X", choice);
 	           return damage.intValue();
@@ -2378,7 +2378,7 @@ class CardFactory_Planeswalkers {
 	          Object choice[] = new Object[size];
 
 	          for(int i = 0; i < choice.length; i++)
-	            choice[i] = new Integer(i);
+	            choice[i] = Integer.valueOf(i);
 
 	          Integer damage = (Integer) AllZone.Display.getChoice("Select X", choice);
 	          final int dam = damage.intValue();

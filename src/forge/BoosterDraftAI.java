@@ -190,7 +190,7 @@ public class BoosterDraftAI
 
     HashSet<Integer> set = new HashSet<Integer>();
     for(int i = 0; i < nDecks; i++)
-      set.add(new Integer(n[i]));
+      set.add(Integer.valueOf(n[i]));
 
     if(set.size() != nDecks)
       throw new RuntimeException("BoosterDraftAI : testColors error, numbers not unique");

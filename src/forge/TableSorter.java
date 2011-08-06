@@ -41,7 +41,7 @@ public class TableSorter implements Comparator, NewConstants
     ArrayList list = FileUtil.readFile(ForgeProps.getFile(CARDS));
    
     for(int i = 0; i < list.size(); i++)
-       map.put(list.get(i).toString().trim(), new Integer(i));
+       map.put(list.get(i).toString().trim(), Integer.valueOf(i));
     
     return map;
   }
@@ -54,8 +54,8 @@ public class TableSorter implements Comparator, NewConstants
 
     if(column == 0)//Qty
     {
-      aCom = new Integer(countCardName(a.getName(), all));
-      bCom = new Integer(countCardName(b.getName(), all));
+      aCom = Integer.valueOf(countCardName(a.getName(), all));
+      bCom = Integer.valueOf(countCardName(b.getName(), all));
     }
     else if (column == 1)//Name
     {
@@ -64,13 +64,13 @@ public class TableSorter implements Comparator, NewConstants
     }
     else if (column == 2)//Cost
     {
-      aCom = new Integer(CardUtil.getConvertedManaCost(a.getManaCost()));
-      bCom = new Integer(CardUtil.getConvertedManaCost(b.getManaCost()));
+      aCom = Integer.valueOf(CardUtil.getConvertedManaCost(a.getManaCost()));
+      bCom = Integer.valueOf(CardUtil.getConvertedManaCost(b.getManaCost()));
 
       if(a.isLand())
-        aCom = new Integer(-1);
+        aCom = Integer.valueOf(-1);
       if(b.isLand())
-        bCom = new Integer(-1);
+        bCom = Integer.valueOf(-1);
     }
     else if (column == 3)//Color
     {
@@ -122,15 +122,15 @@ public class TableSorter implements Comparator, NewConstants
   final private Integer getRarity(Card c)
   {
     if(c.getRarity().equals("Common"))
-      return new Integer(1);
+      return Integer.valueOf(1);
     else if(c.getRarity().equals("Uncommon"))
-      return new Integer(2);
+      return Integer.valueOf(2);
     else if(c.getRarity().equals("Rare"))
-      return new Integer(3);
+      return Integer.valueOf(3);
     else if(c.getRarity().equals("Land"))
-      return new Integer(4);
+      return Integer.valueOf(4);
     else
-      return new Integer(5);
+      return Integer.valueOf(5);
   }
 
   final public static String getColor(Card c)

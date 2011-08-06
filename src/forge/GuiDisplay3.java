@@ -475,37 +475,74 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         //if (c.getCounters(Counters.SPORE) != 0)
         //	cdLabel6.setText("Spore counters: " + c.getCounters(Counters.SPORE));
         
+        
         String tokenText = "";
         if(c.isToken()) tokenText = tokenText + "Token\r\n";
         
-        String counterText = "\r\n";
+        StringBuilder counterText = new StringBuilder();
+        counterText.append("\r\n");
         
-        if(c.getCounters(Counters.AGE) != 0) counterText = counterText + "Age counters: "
-                + c.getCounters(Counters.AGE) + "\r\n";
-        if(c.getCounters(Counters.BLAZE) != 0) counterText = counterText + "Blaze counters: "
-                + c.getCounters(Counters.BLAZE) + "\r\n";
-        if(c.getCounters(Counters.CHARGE) != 0) counterText = counterText + "Charge counters: "
-                + c.getCounters(Counters.CHARGE) + "\r\n";
-        if(c.getCounters(Counters.DIVINITY) != 0) counterText = counterText + "Divinity counters: "
-                + c.getCounters(Counters.DIVINITY) + "\r\n";
-        if(c.getCounters(Counters.FADE) != 0) counterText = counterText + "Fade counters: "
-                + c.getCounters(Counters.FADE) + "\r\n";
-        if(c.getCounters(Counters.HOOFPRINT) != 0) counterText = counterText + "Hoofprint counters: "
-                + c.getCounters(Counters.HOOFPRINT) + "\r\n";
-        if(c.getCounters(Counters.ICE) != 0) counterText = counterText + "Ice counters: "
-                + c.getCounters(Counters.ICE) + "\r\n";
-        if(c.getCounters(Counters.LOYALTY) != 0) counterText = counterText + "Loyalty counters: "
-                + c.getCounters(Counters.LOYALTY) + "\r\n";
-        if(c.getCounters(Counters.MANA) != 0) counterText = counterText + "Mana counters: "
-                + c.getCounters(Counters.MANA) + "\r\n";
-        if(c.getCounters(Counters.P0M1) != 0) counterText = counterText + "0/-1 counters: "
-                + c.getCounters(Counters.P0M1) + "\r\n";
+        if(c.getCounters(Counters.AGE) != 0) { 
+        	counterText.append("Age counters: "); 
+        	counterText.append(c.getCounters(Counters.AGE));
+        	counterText.append("\r\n");
+        }
+        if(c.getCounters(Counters.BLAZE) != 0) {
+        	counterText.append("Blaze counters: "); 
+        	counterText.append(c.getCounters(Counters.BLAZE));
+        	counterText.append("\r\n");
+        }
+        if(c.getCounters(Counters.CHARGE) != 0) {
+        	counterText.append("Charge counters: "); 
+        	counterText.append(c.getCounters(Counters.CHARGE));
+        	counterText.append("\r\n");
+        }
+        if(c.getCounters(Counters.DIVINITY) != 0) {
+        	counterText.append("Divinity counters: "); 
+        	counterText.append(c.getCounters(Counters.DIVINITY));
+        	counterText.append("\r\n");
+        }
+        if(c.getCounters(Counters.FADE) != 0) {
+        	counterText.append("Fade counters: "); 
+        	counterText.append(c.getCounters(Counters.FADE));
+        	counterText.append("\r\n");
+        }
+        if(c.getCounters(Counters.HOOFPRINT) != 0) {
+        	counterText.append("Hoofprint counters: "); 
+        	counterText.append(c.getCounters(Counters.HOOFPRINT));
+        	counterText.append("\r\n");
+        }
+        if(c.getCounters(Counters.ICE) != 0) {
+        	counterText.append("Ice counters: "); 
+        	counterText.append(c.getCounters(Counters.ICE));
+        	counterText.append("\r\n");	
+        }
+        if(c.getCounters(Counters.LOYALTY) != 0) {
+        	counterText.append("Loyalty counters: "); 
+        	counterText.append(c.getCounters(Counters.LOYALTY));
+        	counterText.append("\r\n");
+        }
+        if(c.getCounters(Counters.MANA) != 0){
+        	counterText.append("Mana counters: "); 
+        	counterText.append(c.getCounters(Counters.MANA));
+        	counterText.append("\r\n");
+        }
+        if(c.getCounters(Counters.P0M1) != 0) {
+        	counterText.append("+0/-1 counters: "); 
+        	counterText.append(c.getCounters(Counters.P0M1));
+        	counterText.append("\r\n");
+        }
         if(c.getNetPTCounters() != 0) { //+1/+1 and -1/-1 counters should cancel each other out:
-            if(c.getNetPTCounters() > 0) counterText = counterText + "+1/+1 counters: " + c.getNetPTCounters()
-                    + "\r\n";
+            if(c.getNetPTCounters() > 0) { 
+	            counterText.append("+1/+1 counters: "); 
+	        	counterText.append(c.getNetPTCounters());
+	        	counterText.append("\r\n");
+            }
             else {
                 int m1m1Counters = -1 * c.getNetPTCounters();
-                counterText = counterText + "-1/-1 counters: " + m1m1Counters + "\r\n";
+                counterText.append("-1/-1 counters: "); 
+            	counterText.append(m1m1Counters);
+            	counterText.append("\r\n");
             }
         }
         /*if (c.getCounters(Counters.P1P1) != 0)
@@ -513,10 +550,16 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         if (c.getCounters(Counters.M1M1) != 0)
          	counterText = counterText + "-1/-1 counters: " + c.getCounters(Counters.M1M1) + "\r\n";
         */
-        if(c.getCounters(Counters.QUEST) != 0) counterText = counterText + "Quest counters: "
-                + c.getCounters(Counters.QUEST) + "\r\n";
-        if(c.getCounters(Counters.SPORE) != 0) counterText = counterText + "Spore counters: "
-                + c.getCounters(Counters.SPORE) + "\r\n";
+        if(c.getCounters(Counters.QUEST) != 0) {
+        	counterText.append("Quest counters: "); 
+        	counterText.append(c.getCounters(Counters.QUEST));
+        	counterText.append("\r\n");
+        }
+        if(c.getCounters(Counters.SPORE) != 0) {
+        	counterText.append("Spore counters: "); 
+        	counterText.append(c.getCounters(Counters.SPORE));
+        	counterText.append("\r\n");
+        }
         
         String chosenTypeText = "";
         if(c.getChosenType() != "") chosenTypeText = "(chosen type: " + c.getChosenType() + ")";
@@ -531,13 +574,15 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         if(c.getEquipping().size() > 0) equippingText = "=Equipping " + c.getEquipping().get(0) + "=";
         
 
-        String equippedByText = "";
+        StringBuilder equippedByText = new StringBuilder();
         if(c.getEquippedBy().size() > 0) {
-            equippedByText = "=Equipped by " + c.getEquippedBy().get(0);
+            equippedByText.append("=Equipped by ");
+            equippedByText.append(c.getEquippedBy().get(0));
             for(int i = 1; i < c.getEquippedBy().size(); i++) {
-                equippedByText += ", " + c.getEquippedBy().get(i);
+            	equippedByText.append(", ");
+            	equippedByText.append(c.getEquippedBy().get(i));
             }
-            equippedByText += "=";
+            equippedByText.append("=");
         }
         
         String enchantingText = "";
@@ -545,22 +590,36 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
             enchantingText = "*Enchanting " + c.getEnchanting().get(0) + "*";
         }
         
-        String enchantedByText = "";
+        StringBuilder enchantedByText = new StringBuilder();
         if(c.getEnchantedBy().size() > 0) {
-            enchantedByText = "*Enchanted by " + c.getEnchantedBy().get(0);
+            enchantedByText.append("*Enchanted by ");
+            enchantedByText.append(c.getEnchantedBy().get(0));
             for(int i = 1; i < c.getEnchantedBy().size(); i++) {
-                enchantedByText += ", " + c.getEnchantedBy().get(i);
+                enchantedByText.append(", ");
+                enchantedByText.append(c.getEnchantedBy().get(i));
             }
-            enchantedByText += "*";
+            enchantedByText.append("*");
         }
         
         String uncastableText = "";
         if (c.isUnCastable())
         	uncastableText = "This card can't be cast.";
         
-        if(!c.isFaceDown()) this.cdArea.setText(tokenText + c.getText() + counterText + chosenTypeText
-                +chosenColorText + namedCardText + equippingText + equippedByText + enchantingText + enchantedByText + uncastableText);
-        else this.cdArea.setText(tokenText + counterText);
+        StringBuilder textBuilder = new StringBuilder();
+        textBuilder.append(tokenText);
+        textBuilder.append(c.getText());
+        textBuilder.append(counterText.toString());
+        textBuilder.append(chosenTypeText);
+        textBuilder.append(chosenColorText);
+        textBuilder.append(namedCardText);
+        textBuilder.append(equippingText);
+        textBuilder.append(equippedByText.toString());
+        textBuilder.append(enchantingText);
+        textBuilder.append(enchantedByText.toString());
+        textBuilder.append(uncastableText);
+        
+        if(!c.isFaceDown()) this.cdArea.setText(textBuilder.toString());
+        else this.cdArea.setText(tokenText + counterText.toString());
         
         cdPanel.setBorder(GuiDisplayUtil.getBorder(c));
         cCardHQ = c;       
@@ -580,7 +639,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         pic.setSize(300, 300);
         picturePanel.add(pic);
         picturePanel.revalidate();
-        System.gc();
+
     	*/
     	
     	current_picture = c.getImageName();

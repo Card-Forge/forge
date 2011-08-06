@@ -891,7 +891,7 @@ public class GUI_DeckAnalysis extends javax.swing.JDialog {
 				jTable1.setValueAt(cardsName[0], 0, 0);
 				cCount = 1;
 					for (int i=1; i< cardsName.length;i++ ){
-						if(cardsName[i]==cardsName[i-1]){
+						if(cardsName[i].equals(cardsName[i-1])){
 							cCount = cCount+1;
 							
 						}else

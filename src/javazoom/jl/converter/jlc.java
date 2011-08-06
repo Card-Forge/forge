@@ -119,9 +119,9 @@ public class jlc
 	  public boolean processArgs(String[] argv)
 	  {
 		 filename = null;
-		 @SuppressWarnings("unused")
-		 Crc16[] crc;
-		 crc = new Crc16[1];
+		
+		 //Crc16[] crc;
+		 //crc = new Crc16[1];
 	     int i;
 		 int argc = argv.length;
 

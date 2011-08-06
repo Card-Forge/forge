@@ -504,7 +504,7 @@ public class CombatUtil
 
     Card attack[] = AllZone.Combat.getAttackers();
     Card defend[] = null;
-    String display = "";
+    StringBuilder display = new StringBuilder();
     String attackerName = "";
     String blockerName = "";
 
@@ -516,7 +516,14 @@ public class CombatUtil
       attackerName = attack[i].getName();
       if (attack[i].isFaceDown())
     	  attackerName = "Morph";
-      display += attackerName +" (" +attack[i].getUniqueNumber() +") "  +attack[i].getNetAttack() +"/" +attack[i].getNetDefense()   +" is attacking \n";
+      display.append(attackerName);
+      display.append(" (");
+      display.append(attack[i].getUniqueNumber());
+      display.append(") ");
+      display.append(attack[i].getNetAttack());
+      display.append("/");
+      display.append(attack[i].getNetDefense());
+      display.append(" is attacking \n");
       
       defend = AllZone.Combat.getBlockers(attack[i]).toArray();
 
@@ -527,10 +534,20 @@ public class CombatUtil
     	blockerName = defend[inner].getName();
     	if(defend[inner].isFaceDown())
     		blockerName = "Morph";
-        display += "     " +blockerName  +" (" +defend[inner].getUniqueNumber()  +") "  +defend[inner].getNetAttack()  +"/" +defend[inner].getNetDefense()    +" is blocking \n";
+    	
+    	display.append("     ");
+    	display.append(blockerName);
+        display.append(" (");
+        display.append(defend[inner].getUniqueNumber());
+        display.append(") ");
+        display.append(defend[inner].getNetAttack());
+        display.append("/");
+        display.append(defend[inner].getNetDefense());
+        display.append(" is blocking \n");
+
       }
     }//while - loop through attackers
-    String s = display + getPlaneswalkerBlockers();
+    String s = display.toString() + getPlaneswalkerBlockers();
     AllZone.Display.showCombat(s.trim());
 
   }//showBlockers()
@@ -539,10 +556,10 @@ public class CombatUtil
   {
     Card attack[] = AllZone.pwCombat.getAttackers();
     Card defend[] = null;
-    String display = "";
+    StringBuilder display = new StringBuilder();
 
     if(attack.length != 0)
-      display = "Planeswalker Combat\r\n";
+      display.append("Planeswalker Combat\r\n");
 
     String attackerName = "";
     String blockerName = "";
@@ -554,8 +571,16 @@ public class CombatUtil
       attackerName = attack[i].getName();
          if (attack[i].isFaceDown())
        	  attackerName = "Morph";
-         
-      display += attackerName +" (" +attack[i].getUniqueNumber() +") "  +attack[i].getNetAttack() +"/" +attack[i].getNetDefense()   +" is attacking \n";
+     
+      display.append(attackerName);
+      display.append(" (");
+      display.append(attack[i].getUniqueNumber());
+      display.append(") ");
+      display.append(attack[i].getNetAttack());
+      display.append("/");
+      display.append(attack[i].getNetDefense());
+      display.append(" is attacking \n");   
+      //display += attackerName +" (" +attack[i].getUniqueNumber() +") "  +attack[i].getNetAttack() +"/" +attack[i].getNetDefense()   +" is attacking \n";
 
       defend = AllZone.pwCombat.getBlockers(attack[i]).toArray();
 
@@ -566,11 +591,22 @@ public class CombatUtil
       	blockerName = defend[inner].getName();
       	if(defend[inner].isFaceDown())
       		blockerName = "Morph";
-        display += "     " +blockerName  +" (" +defend[inner].getUniqueNumber()  +") "  +defend[inner].getNetAttack()  +"/" +defend[inner].getNetDefense()    +" is blocking \n";
+      	
+      	display.append("     ");
+    	display.append(blockerName);
+        display.append(" (");
+        display.append(defend[inner].getUniqueNumber());
+        display.append(") ");
+        display.append(defend[inner].getNetAttack());
+        display.append("/");
+        display.append(defend[inner].getNetDefense());
+        display.append(" is blocking \n");
+
+        //display += "     " +blockerName  +" (" +defend[inner].getUniqueNumber()  +") "  +defend[inner].getNetAttack()  +"/" +defend[inner].getNetDefense()    +" is blocking \n";
       }
     }//while - loop through attackers
 
-    return display;
+    return display.toString();
   }//getPlaneswalkerBlockers()
   
   public static void executeCombatDamageEffects(Card c)

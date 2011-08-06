@@ -20,9 +20,7 @@ import forge.properties.NewConstants;
 public class CardFactory implements NewConstants {
     // String cardname is the key, Card is the value
     private Map<String, Card> map       = new HashMap<String, Card>();
-    @SuppressWarnings("unused")
-    // random
-    private Random            random    = new Random();
+    
     private CardList          allCards  = new CardList();
     
     private HashSet<String>   removedCardList;
@@ -1650,7 +1648,7 @@ public class CardFactory implements NewConstants {
              public void resolve()
              {
                 damage = getNumDamage();
-                String tgtP = new String();
+                String tgtP = "";
                 
                 if (TgtOpp[0] == true)
                 	setTargetPlayer(AllZone.GameAction.getOpponent(card.getController()));
@@ -1996,7 +1994,7 @@ public class CardFactory implements NewConstants {
            final String manaCost = tmpCost;
            //System.out.println("manaCost is " + manaCost + " for " + card.getName());
          
-           String tmpDesc = new String();
+           String tmpDesc = "";
            tmpDesc = "Target creature gets ";
            if (attack[0] > 0)
                tmpDesc = tmpDesc + "+" + attack[0];
@@ -2244,7 +2242,7 @@ public class CardFactory implements NewConstants {
         String tmpDesc = card.getText().substring(15);
         int i = tmpDesc.indexOf(".");
         tmpDesc = tmpDesc.substring(0, i);
-        final String Selec = new String("Select target " + tmpDesc + " to destroy.");
+        final String Selec = "Select target " + tmpDesc + " to destroy.";
       
       final boolean NoRegen = (k.length == 3);
       
@@ -4519,8 +4517,6 @@ public class CardFactory implements NewConstants {
             	CardList tempList = new CardList();
                 tempList.addAll(AllZone.Human_Play.getCards());
                 
-                @SuppressWarnings("unused") // list
-				CardList list = new CardList();
                 for (int i=0;i<tempList.size();i++)
                 {
                 	if(tempList.get(i).isPermanent() && !tempList.get(i).isLand() && CardFactoryUtil.canTarget(card, tempList.get(i)) &&
@@ -12050,14 +12046,13 @@ public class CardFactory implements NewConstants {
     	 return false;
     	 //should check if computer has land in hand, or if computer has more basic land types than human.
        }
-       @SuppressWarnings("unchecked") // computerBasic
+
 	   public void resolve()
        {
     	 //add computer's lands to target
-    	 @SuppressWarnings("unused") // computerCountBasic
-		 int computerCountBase = 0;
-    	 @SuppressWarnings("unused") // computerBasic
-		 Vector<?> computerBasic = new Vector();
+    	
+		 //int computerCountBase = 0;
+		 //Vector<?> computerBasic = new Vector();
 
        //figure out which basic land types the computer has
        CardList land = new CardList(AllZone.Computer_Play.getCards());
@@ -15615,7 +15610,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
                     //list = list.getName("Mana Pool");
                     Card mp = AllZone.ManaPool;//list.getCard(0);
 
-                    String color = new String();
+                    String color = "";
                                         
                     Object o = AllZone.Display.getChoice("Choose mana color",Constant.Color.Colors);
                     color = (String)o;

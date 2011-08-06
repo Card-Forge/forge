@@ -191,19 +191,17 @@ public class GuiDisplayUtil implements NewConstants {
     public static String formatCardType(Card card) {
         
         ArrayList<String> list = card.getType();
-        String returnString = "";
-        String s;
+        StringBuilder sb = new StringBuilder();
+        String s = "";
         
         for(int i = 0; i < list.size(); i++) {
             s = list.get(i).toString();
+            sb.append(s);
             if(s.equals("Creature") || s.equals("Land")) {
-                s += " - ";
-            } else s += " ";
-            
-            returnString += s;
+                sb.append(" - ");
+            } else sb.append(" ");
         }
-        
-        return returnString;
+        return sb.toString();
     }
     
     public static ImageIcon getImageIcon(Card c)

@@ -28,9 +28,7 @@ public class ComputerAI_Burn2 implements Computer {
                     if(AllZone.Stack.size() == 0
                             && AllZone.Phase.is(Constant.Phase.Main1, Constant.Player.Computer)) {
                         SpellAbilityList list = null; //Move3.getBestMove();
-                        if(list.toString().trim().length() != 0) {
-//              System.out.println("Spell List - " +list);
-                        }
+
                         if(list.size() != 0) {
                             SpellAbility sa = list.get(0);
                             if(ComputerUtil.canPlay(sa) && sa.canPlay()) {

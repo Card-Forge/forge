@@ -170,7 +170,7 @@ class TableModel extends AbstractTableModel
   {
     switch(column)
     {
-      case 0: return new Integer(countQuantity(c));
+      case 0: return Integer.valueOf(countQuantity(c));
       case 1: return c.getName();
       case 2: return c.getManaCost();
       case 3: return TableSorter.getColor(c);

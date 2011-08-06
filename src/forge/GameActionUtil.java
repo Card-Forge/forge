@@ -1725,7 +1725,7 @@ public class GameActionUtil
             
             }
          }; // ability2
-            if (!(card.getController() == c.getController())) {
+            if (!(card.getController().equals(c.getController()))) {
          ability2.setStackDescription(card.getName() + " - "
                + c.getController() + " played a spell, " + drawer
                + " draws seven cards.");
@@ -1820,7 +1820,7 @@ public class GameActionUtil
 	            
 	            }
 	         }; // ability2
-	            if (!(card.getController() == c.getController())) {
+	            if (!(card.getController().equals(c.getController()))) {
 	         ability2.setStackDescription(card.getName() + " - "
 	               + c.getController() + " played a spell, " + drawer
 	               + " puts the top two cards of his or her library into his or her graveyard.");
@@ -3924,7 +3924,7 @@ public class GameActionUtil
 		{
 			public void resolve()
 			{
-				String color = new String();
+				String color = "";
                 
                 Object o = AllZone.Display.getChoice("Choose mana color",Constant.Color.Colors);
                 color = (String)o;

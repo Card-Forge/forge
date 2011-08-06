@@ -842,7 +842,7 @@ private Card getCurrentCard(int ID)
   public void newGame(Deck humanDeck, Deck computerDeck)
   {
 //    AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
-	System.gc(); //garbage collection... does it make a difference though?
+	//System.gc(); //garbage collection... does it make a difference though?
 	lastPlayerToDraw = Constant.Player.Human;
 	
 	Input_Main.canPlayNumberOfLands = 1;

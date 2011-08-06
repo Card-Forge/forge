@@ -37,18 +37,20 @@ public class SpellAbilityList
     }//execute()
     public String toString()
     {
-	String s = "";
-	for(int i = 0; i < size(); i++)
-	{
-	    s += get(i).getSourceCard().toString();
-	    s += " - ";
-	    s += get(i).getStackDescription();
-	    s += "\r\n";
-	}
-	return s;
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < size(); i++)
+		{
+			sb.append(get(i).getSourceCard().toString());
+			sb.append(" - ");
+			sb.append(get(i).getStackDescription());
+			sb.append("\r\n");
+		}
+		return sb.toString();
     }//toString()
     public boolean equals(Object o)
     {
-	return toString().equals(o.toString());
+    	if (o == null)
+    		return false;
+    	return toString().equals(o.toString());
     }
 }

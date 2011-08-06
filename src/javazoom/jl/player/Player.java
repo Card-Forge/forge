@@ -44,8 +44,7 @@ public class Player
 	/**
 	 * The current frame number. 
 	 */
-	@SuppressWarnings("unused")
-	private int frame = 0;
+	//private int frame = 0;
 	
 	/**
 	 * The MPEG audio bitstream. 

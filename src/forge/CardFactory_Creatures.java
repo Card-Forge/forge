@@ -5812,7 +5812,7 @@ public class CardFactory_Creatures {
 	            }
 	          });//CardListFilter()
 
-	          return new Integer(list.size());
+	          return Integer.valueOf(list.size());
 	        }
 	      };
 
@@ -5924,7 +5924,7 @@ public class CardFactory_Creatures {
 	                      (c.getType().contains("Zubera") || c.getKeyword().contains("Changeling") );
 	            }
 	          });//CardListFilter()
-	          return new Integer(list.size());
+	          return Integer.valueOf(list.size());
 	        }
 	      };//CommandReturn
 
@@ -5981,7 +5981,7 @@ public class CardFactory_Creatures {
 	                      (c.getType().contains("Zubera") || c.getKeyword().contains("Changeling") );
 	            }
 	          });//CardListFilter()
-	          return new Integer(list.size());
+	          return Integer.valueOf(list.size());
 	        }
 	      };//CommandReturn
 
@@ -6034,7 +6034,7 @@ public class CardFactory_Creatures {
 	                      (c.getType().contains("Zubera") || c.getKeyword().contains("Changeling") );
 	            }
 	          });//CardListFilter()
-	          return new Integer(list.size());
+	          return Integer.valueOf(list.size());
 	        }
 	      };//CommandReturn
 
@@ -6087,7 +6087,7 @@ public class CardFactory_Creatures {
 	                      (c.getType().contains("Zubera") || c.getKeyword().contains("Changeling") );
 	            }
 	          });//CardListFilter()
-	          return new Integer(list.size());
+	          return Integer.valueOf(list.size());
 	        }
 	      };//CommandReturn
 
@@ -12341,12 +12341,7 @@ public class CardFactory_Creatures {
 	        CardList creats = new CardList(play.getCards());
 	        creats = creats.getType("Creature");
 	        
-	        @SuppressWarnings("unused") // saps
-			CardList saps = new CardList();
-	        
 	        Card c = getTargetCard();
-	        @SuppressWarnings("unused") // hand
-			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
 	
 	        if(AllZone.GameAction.isCardInPlay(c))
 	        {
@@ -18250,7 +18245,7 @@ public class CardFactory_Creatures {
 		    		  public void resolve()
 		    		  {
 		    			  Card c = getTargetCard();
-		    			  String color = new String();
+		    			  String color = "";
 		    			  if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card,c)){
 	                          
 			                  Object o = AllZone.Display.getChoice("Choose mana color",Constant.Color.Colors);
@@ -18789,7 +18784,7 @@ public class CardFactory_Creatures {
 	        		  {
 	        			  if (card.getController().equals(Constant.Player.Human)) {
 
-	                          String color = new String();
+	                          String color = "";
 	                          String[] colors = Constant.Color.Colors;
 	                          colors[colors.length-1] = null;
 	                          
@@ -18987,11 +18982,12 @@ public class CardFactory_Creatures {
 	    			  creatures.addAll(hGrave.getCards());
 	    			  creatures.addAll(cGrave.getCards());
 	    			  creatures = creatures.getType("Creature");
-	    			  return creatures.size() > 0;
+	    			  return creatures.size() > 0 && super.canPlay();
 	    		  }
 	    		  
 	    	  };
-	    	  
+	    	  ability.setDescription(cardName + " - B B B, Pay 3 life: Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.");
+	    	  ability.setStackDescription(card + "Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.");
 	    	  card.addSpellAbility(ability);
 	    	  
 	    	  final Command leavesPlay = new Command()
@@ -19330,29 +19326,6 @@ public class CardFactory_Creatures {
 	          	  });
 	          	  return kithkin.size();
 	          	  
-	            }
-	            @SuppressWarnings("unused") // makeToken
-	  		  public void makeToken()
-	            {
-	          	  Card c = new Card();
-
-	                c.setOwner(card.getController());
-	                c.setController(card.getController());
-
-	                c.setName("Kithkin Soldier");
-	                c.setImageName("W 1 1 Kithkin Soldier");
-	                c.setManaCost("W");
-	                c.setToken(true);
-
-	                c.addType("Creature");
-	                c.addType("Kithkin");
-	                c.addType("Soldier");
-
-	                c.setBaseAttack(1);
-	                c.setBaseDefense(1);
-
-	                PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-	                play.add(c);
 	            }
 	          };
 	          Command intoPlay = new Command()

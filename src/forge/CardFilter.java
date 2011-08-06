@@ -101,7 +101,7 @@ public class CardFilter {
 			
 		}}
 		
-		if(name=="colorless"){
+		if(name.equals("colorless")){
 			for(int i=0;i<all.size();i++){
 			CardName = all.getCard(i);		
 			if(CardUtil.getColors(CardName).contains(Constant.Color.Colorless)==false)
@@ -179,7 +179,7 @@ public class CardFilter {
 			
 		}}
 		
-		if(name=="sorcery"){
+		if(name.equals("sorcery")){
 			for(int i=0;i<all.size();i++){
 			CardName = all.getCard(i);		
 			if(CardName.isSorcery()==false)

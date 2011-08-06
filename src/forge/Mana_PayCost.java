@@ -61,15 +61,17 @@ public class Mana_PayCost
   }
   public String toString()
   {
-    String s = "";
+    StringBuilder sb = new StringBuilder();
     ArrayList<Object> list = new ArrayList<Object>(manaPart);
     //need to reverse everything since the colored mana is stored first
     Collections.reverse(list);
 
-    for(int i = 0; i < list.size(); i++)
-      s = s +" " +list.get(i).toString();
+    for(int i = 0; i < list.size(); i++) {
+    	sb.append(" ");
+    	sb.append(list.get(i).toString());
+    } 
 
-    return s.trim();
+    return sb.toString().trim();
   }
 
   private ArrayList<Object> split(String cost)

@@ -45,10 +45,10 @@ public class AdvancedPlayer
 	/** Has the player been closed? */
 	private boolean closed = false;
 	/** Has the player played back all frames from the stream? */
-	@SuppressWarnings("unused")
-	private boolean complete = false;
-	@SuppressWarnings("unused")
-	private int lastPosition = 0;
+	
+	//private boolean complete = false;
+
+	//private int lastPosition = 0;
 	/** Listener for the playback process */
 	private PlaybackListener listener;
 
@@ -104,7 +104,7 @@ public class AdvancedPlayer
 //				System.out.println(audio.getPosition());
 				synchronized (this)
 				{
-					complete = (!closed);
+					//complete = (!closed);
 					close();
 				}
 
@@ -129,7 +129,7 @@ public class AdvancedPlayer
 			// this may fail, so ensure object state is set up before
 			// calling this method.
 			out.close();
-			lastPosition = out.getPosition();
+			//lastPosition = out.getPosition();
 			try
 			{
 				bitstream.close();

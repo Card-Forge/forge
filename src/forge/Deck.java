@@ -134,7 +134,7 @@ public class Deck implements java.io.Serializable {
 }
 
 
-class DeckSort implements Comparator<Object> {
+class DeckSort implements Comparator<Object>, java.io.Serializable {
     public int compare(Object a, Object b) {
         String a1 = ((Deck) a).getName();
         String b1 = ((Deck) b).getName();

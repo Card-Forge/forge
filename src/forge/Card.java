@@ -195,7 +195,7 @@ public class Card extends MyObservable
 	  }
 	  else
 	  {
-		  counters.put(counterName, new Integer(n));
+		  counters.put(counterName, Integer.valueOf(n));
 	  }
 	  this.updateObservers();
   }
@@ -220,7 +220,7 @@ public class Card extends MyObservable
   	}
 
   public void setCounter(Counters counterName, int n) {
-	  counters.put(counterName,new Integer(n));
+	  counters.put(counterName, Integer.valueOf(n));
 	  this.updateObservers();
   }
   
@@ -283,11 +283,15 @@ public class Card extends MyObservable
     if(isInstant() || isSorcery())
     {
       String s = getSpellText();
+      StringBuilder sb = new StringBuilder();
+      sb.append(s);
+      
       SpellAbility[] sa = getSpellAbility();
       for(int i = 0; i < sa.length; i++)
-        s += sa[i].toString() +"\r\n";
-
-      return s;
+        sb.append(sa[i].toString() + "\r\n");
+      
+      
+      return sb.toString();
     }
 
     String s = "";
