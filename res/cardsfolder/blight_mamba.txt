@@ -1,0 +1,10 @@
+Name:Blight Mamba
+ManaCost:1 G
+Types:Creature Snake
+Text:no text
+PT:1
+K:Infect
+K:RegenerateMe:1 G
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blight_mamba.jpg
+End
