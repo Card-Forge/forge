@@ -17723,6 +17723,57 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+
+        else if(cardName.equals("Natural Selection")) {
+           /* Look at the top 3 cards of target player's library and put them
+            * back in any order. You may have that player shuffle his or
+            * her library */
+
+           final SpellAbility spell = new Spell(card) {
+              private static final long serialVersionUID = 8649520296192617609L;
+              
+              @Override
+              public void resolve() {
+                 String player = getTargetPlayer();
+                 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+                 if(lib.size() < 3) return;
+                 CardList topThree =   new CardList();
+                 //show top 3 cards:
+                 topThree.add(lib.get(0));
+                 topThree.add(lib.get(1));
+                 topThree.add(lib.get(2));
+                 for(int i = 1; i <= 3; i++) {
+                    String Title = "Put on top: ";
+                    if(i == 2) Title = "Put second from top: ";
+                    if(i == 3) Title = "Put third from top: ";
+                    Object o = AllZone.Display.getChoiceOptional(Title, topThree.toArray());
+                    if(o == null) break;
+                    Card c_1 = (Card) o;
+                    topThree.remove(c_1);
+                    lib.remove(c_1);
+                    lib.add(c_1, i - 1);
+                 }
+                 String[] choices = new String[] {"Yes", "No"};
+                 Object o = AllZone.Display.getChoice("Shuffle target player's library?", choices);
+                 String myChoice = (String) o;
+                 if(myChoice.equals("Yes")) {
+                    AllZone.GameAction.shuffle(getTargetPlayer());
+                 }
+              }
+              @Override
+              public boolean canPlayAI() {
+                 //basically the same reason as Sensei's Diving Top
+                 return false;
+              }
+           };//spell
+           card.clearSpellAbility();
+           card.addSpellAbility(spell);
+           spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+        }
+        //*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

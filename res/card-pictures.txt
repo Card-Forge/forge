@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+natural_selection.jpg			http://www.wizards.com/global/images/magic/general/natural_selection.jpg
 epic_struggle.jpg		http://www.wizards.com/global/images/magic/general/epic_struggle.jpg
 reinforcements.jpg		http://www.wizards.com/global/images/magic/general/reinforcements.jpg
 rampant_growth.jpg		http://www.wizards.com/global/images/magic/general/rampant_growth.jpg

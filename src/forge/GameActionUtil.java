@@ -13626,6 +13626,42 @@ public class GameActionUtil {
                                                               return list;
                                                           }// getRaptor()
                                                       }; // Castle Raptors
+                                                      
+    public static Command Giant_Tortoise = new Command() {
+                                                          private static final long serialVersionUID = -8191148876633239167L;
+                                                          
+                                                          CardList old = new CardList();
+                                                          int pump = 3;
+
+                                                          public void execute() {
+                                                             Card c;
+                                                             // reset all previous cards stats
+                                                             for(int i = 0; i < old.size(); i++) {
+                                                                c = old.get(i);
+                                                                c.addSemiPermanentDefenseBoost(-pump);
+                                                             }
+                                                             old.clear();
+
+                                                             CardList list = getCard("Giant Tortoise");
+                                                             for(int i = 0; i < list.size(); i++) {
+                                                                c = list.get(i);
+                                                                // only add boost if card is untapped
+                                                                if(c.isUntapped()) {
+                                                                   c.addSemiPermanentDefenseBoost(pump);
+                                                                   old.add(c);
+                                                                }
+                                                             }// for
+                                                          }// execute()
+
+                                                          CardList getCard(String name) {
+                                                             CardList list = new CardList();
+                                                             list.addAll(AllZone.Human_Play.getCards());
+                                                             list.addAll(AllZone.Computer_Play.getCards());
+                                                             list = list.getName(name);
+                                                             return list;
+                                                          }// getCard()
+                                                       }; // Giant_Tortoise
+
                                                          
     public static Command Radiant_Archangel           = new Command() {
                                                           private static final long serialVersionUID = -7086544305058527889L;
@@ -15082,6 +15118,7 @@ public class GameActionUtil {
         commands.put("Radiant_Archangel", Radiant_Archangel);
         commands.put("Castle", Castle);
         commands.put("Castle_Raptors", Castle_Raptors);
+        commands.put("Giant_Tortoise", Giant_Tortoise);
         
         commands.put("Darksteel_Forge", Darksteel_Forge);
         commands.put("Levitation", Levitation);

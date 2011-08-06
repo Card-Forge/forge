@@ -1,3 +1,14 @@
+Natural Selection
+G
+Instant
+Look at the top 3 cards of target player's library and put them back in any order. You may have that player shuffle his or her library.
+
+Giant Tortoise
+1 U
+Creature Turtle
+As long as Giant Tortoise is untapped, it gets +0/+3.
+1/1
+
 Landbind Ritual
 3 W W
 Sorcery
