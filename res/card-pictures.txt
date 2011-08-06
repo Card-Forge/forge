@@ -38,6 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+crossbow_ambush.jpg		http://www.wizards.com/global/images/magic/general/crossbow_ambush.jpg
+magnetic_flux.jpg		http://www.wizards.com/global/images/magic/general/magnetic_flux.jpg
 call_to_glory.jpg		http://www.wizards.com/global/images/magic/general/call_to_glory.jpg
 flowstone_slide.jpg		http://www.wizards.com/global/images/magic/general/flowstone_slide.jpg
 gleam_of_resistance.jpg		http://www.wizards.com/global/images/magic/general/gleam_of_resistance.jpg

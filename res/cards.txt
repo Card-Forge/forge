@@ -1,3 +1,15 @@
+Crossbow Ambush
+G
+Instant
+no text
+spAllPump:YouCtrl:Reach:Creatures you control gain reach until end of turn.:Crossbow Ambush - Creatures gain reach until EOT
+
+Magnetic Flux
+2 U
+Instant
+no text
+spAllPump:YouCtrl/Artifact:Flying:Artifact creatures you control gain flying until end of turn.:Magnetic Flux - Creatures gain flying until EOT
+
 Call to Glory
 1 W
 Instant
