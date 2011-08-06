@@ -13,7 +13,6 @@ public class AbilityFactory_Turns {
 		final SpellAbility abAddTurn = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
 			private static final long serialVersionUID = -3526200766738015688L;
 			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
 		
 			@Override
 			public String getStackDescription(){
@@ -21,19 +20,17 @@ public class AbilityFactory_Turns {
 			}
 
 			public boolean canPlayAI() {
-				return addTurnCanPlayAI(af, this, params.get("NumTurns"));
+				return addTurnCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumTurns"), this);
-				addTurnResolve(af, this, amount);
+				addTurnResolve(af, this);
 			}
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return addTurnCanPlayAI(af, this, params.get("NumTurns"));
+				return addTurnTriggerAI(af, this, mandatory);
 			}
 			
 		};
@@ -44,7 +41,6 @@ public class AbilityFactory_Turns {
 		final SpellAbility spAddTurn = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
 			private static final long serialVersionUID = -3921131887560356006L;
 			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
 		
 			@Override
 			public String getStackDescription(){
@@ -56,13 +52,12 @@ public class AbilityFactory_Turns {
 				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
 				// then call xCount with that card to properly calculate the amount
 				// Or choosing how many to sacrifice 
-				return addTurnCanPlayAI(af, this, params.get("NumTurns"));
+				return addTurnCanPlayAI(af, this);
 			}
 			
 			@Override
 			public void resolve() {
-				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumTurns"), this);
-				addTurnResolve(af, this, amount);
+				addTurnResolve(af, this);
 			}
 			
 		};
@@ -73,7 +68,6 @@ public class AbilityFactory_Turns {
 		final SpellAbility dbAddTurn = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
 			private static final long serialVersionUID = -562517287448810951L;
 			final AbilityFactory af = AF;
-			final HashMap<String,String> params = af.getMapParams();
 		
 			@Override
 			public String getStackDescription(){
@@ -82,8 +76,7 @@ public class AbilityFactory_Turns {
 			
 			@Override
 			public void resolve() {
-				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumTurns"), this);
-				addTurnResolve(af, this, amount);
+				addTurnResolve(af, this);
 			}
 
 			@Override
@@ -93,8 +86,7 @@ public class AbilityFactory_Turns {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return addTurnTriggerAI(af, this, mandatory);
 			}
 			
 		};
@@ -140,38 +132,50 @@ public class AbilityFactory_Turns {
 		return sb.toString();
 	}
 	
-	private static boolean addTurnCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){
-		Ability_Cost abCost = sa.getPayCosts();
-		int life = AllZone.ComputerPlayer.getLife();
-
-		if (abCost != null){
-			// AI currently disabled for these costs
-			if (abCost.getSacCost()){
-				if (amountStr.contains("X"))
-					return false;
-				if (life > 4)
-					return false;
-			}
-			if (abCost.getLifeCost() && life > 50)	 return false;
-			if (abCost.getDiscardCost() && life > 50) return false;
-		}
-		
+	private static boolean addTurnCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
-		else {
-			Target tgt = sa.getTarget();
 
-			if (sa.getTarget() != null){
-				tgt.resetTargets();
-				sa.getTarget().addTarget(AllZone.ComputerPlayer);
-			}
-			return true;
+		Target tgt = sa.getTarget();
+
+		if (sa.getTarget() != null){
+			tgt.resetTargets();
+			sa.getTarget().addTarget(AllZone.ComputerPlayer);
 		}
+		else{
+			ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			for (Player p : tgtPlayers)
+				if (p.isHuman())
+					return false;
+			// not sure if the AI should be playing with cards that give the Human more turns.
+		}
+		return true;
 	}
 	
-	private static void addTurnResolve(final AbilityFactory af, final SpellAbility sa, int numTurns){
+	private static boolean addTurnTriggerAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory){
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+
+		Target tgt = sa.getTarget();
+
+		if (sa.getTarget() != null){
+			tgt.resetTargets();
+			sa.getTarget().addTarget(AllZone.ComputerPlayer);
+		}
+		else{
+			ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+			for (Player p : tgtPlayers)
+				if (p.isHuman() && !mandatory)
+					return false;
+			// not sure if the AI should be playing with cards that give the Human more turns.
+		}
+		return true;
+	}
+	
+	private static void addTurnResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
 		Card card = af.getHostCard();
+		int numTurns = AbilityFactory.calculateAmount(af.getHostCard(), params.get("NumTurns"), sa);
 		
 		ArrayList<Player> tgtPlayers;
 
@@ -188,7 +192,6 @@ public class AbilityFactory_Turns {
 				}
 			}
 		}
-		
 		
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
