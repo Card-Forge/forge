@@ -1,0 +1,9 @@
+Name:Kitchen Finks
+ManaCost:1 GW GW
+Types:Creature Ouphe
+Text:When Kitchen Finks comes into play, you gain 2 life.
+PT:3/2
+K:Persist
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kitchen_finks.jpg
+End

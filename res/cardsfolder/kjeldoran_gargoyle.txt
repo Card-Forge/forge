@@ -1,0 +1,11 @@
+Name:Kjeldoran Gargoyle
+ManaCost:5 W
+Types:Creature Gargoyle
+Text:no text
+PT:3/3
+K:Flying
+K:First Strike
+K:Lifelink
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_gargoyle.jpg
+End

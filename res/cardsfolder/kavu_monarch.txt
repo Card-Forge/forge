@@ -1,0 +1,12 @@
+Name:Kavu Monarch
+ManaCost:2 R R
+Types:Creature Kavu
+Text:no text
+PT:3/3
+K:StaticEffect:Play:All Permanents:Keyword/Trample:Type.Creature!Type.Kavu:Kavu creatures have trample.
+K:WheneverKeyword:EntersBattleField:Type/Kavu:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another Kavu enters the battlefield, put a +1/+1 counter on Kavu Monarch.
+K:SVar:PlayMain1:TRUE
+K:SVar:BuffedBy:Kavu
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_monarch.jpg
+End

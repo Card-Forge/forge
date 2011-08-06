@@ -1,0 +1,8 @@
+Name:Karplusan Strider
+ManaCost:3 G
+Types:Creature Yeti
+Text:(NOTE: "Karplusan Strider can't be the target of blue or black spells." not implemented.)
+PT:3/4
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/csp/en-us/card121214.jpg
+End

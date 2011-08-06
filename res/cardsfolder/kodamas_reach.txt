@@ -1,0 +1,7 @@
+Name:Kodama's Reach
+ManaCost:2 G
+Types:Sorcery Arcane
+Text:Search your library for two basic land cards, reveal those cards, and put one into play tapped and the other into your hand. Then shuffle your library.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50299.jpg
+End

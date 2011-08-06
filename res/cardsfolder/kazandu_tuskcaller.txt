@@ -1,0 +1,10 @@
+Name:Kazandu Tuskcaller
+ManaCost:1 G
+Types:Creature Human Shaman
+Text:no text
+PT:1/1
+K:Level up:1 G
+K:maxLevel:6
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_tuskcaller.jpg
+End

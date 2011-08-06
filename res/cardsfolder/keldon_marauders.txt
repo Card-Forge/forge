@@ -1,0 +1,11 @@
+Name:Keldon Marauders
+ManaCost:1 R
+Types:Creature Human Warrior
+Text:no text
+PT:3/3
+K:Vanishing:2
+K:WheneverKeyword:EntersBattleField:Self:Play:Damage/1:NormalInput/Player:ASAP:No_Condition:No Special Condition:When Keldon Marauders enters the battlefield, it deals 1 damage to target player.
+K:WheneverKeyword:LeavesBattleField:Self:Any:Damage/1:NormalInput/Player:ASAP:No_Condition:No Special Condition:When Keldon Marauders leaves the battlefield, it deals 1 damage to target player.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_marauders.jpg
+End

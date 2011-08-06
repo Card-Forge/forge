@@ -1,0 +1,9 @@
+Name:Kiki-Jiki, Mirror Breaker
+ManaCost:2 R R R
+Types:Legendary Creature Goblin Shaman
+Text:no text
+PT:2/2
+K:Haste
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50321.jpg
+End

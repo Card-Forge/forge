@@ -1,0 +1,9 @@
+Name:Kranioceros
+ManaCost:4 R
+Types:Creature Beast
+Text:no text
+PT:5/2
+K:abPump 1 W:+0/+3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kranioceros.jpg
+End

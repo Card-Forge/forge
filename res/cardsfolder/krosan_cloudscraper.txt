@@ -1,0 +1,10 @@
+Name:Krosan Cloudscraper
+ManaCost:7 G G G
+Types:Creature Beast Mutant
+Text:no text
+PT:13/13
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G G
+K:Morph:7 G G
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_cloudscraper.jpg
+End

@@ -1,0 +1,10 @@
+Name:Kargan Dragonlord
+ManaCost:R R
+Types:Creature Human Warrior
+Text:LEVEL 4-7 4/4 Flying LEVEL 8+ 8/8 Flying, Trample, R: Kargan Dragonlord gets +1/+0 until end of turn.
+PT:2/2
+K:Level up:R
+K:maxLevel:8
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kargan_dragonlord.jpg
+End

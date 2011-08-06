@@ -1,0 +1,10 @@
+Name:Kingfisher
+ManaCost:3 U
+Types:Creature Bird
+Text:no text
+PT:2/2
+K:Flying
+K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Kingfisher is put into a graveyard from the battlefield, draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kingfisher.jpg
+End

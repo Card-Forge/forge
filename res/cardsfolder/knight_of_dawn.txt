@@ -1,0 +1,14 @@
+Name:Knight of Dawn
+ManaCost:1 W W
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+K:First Strike
+K:abPump W W:Protection from black
+K:abPump W W:Protection from blue
+K:abPump W W:Protection from green
+K:abPump W W:Protection from red
+K:abPump W W:Protection from white
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_dawn.jpg
+End

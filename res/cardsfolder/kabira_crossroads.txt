@@ -1,0 +1,8 @@
+Name:Kabira Crossroads
+ManaCost:no cost
+Types:Land
+Text:Kabira Crossroads enters the battlefield tapped.\r\nWhen Kabira Crossroads enters the battlefield, you gain 2 life.
+K:tap: add W
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kabira_crossroads.jpg
+End

@@ -1,0 +1,10 @@
+Name:Kuro's Taken
+ManaCost:1 B
+Types:Creature Rat Samurai
+Text:no text
+PT:1/1
+K:Bushido 1
+K:RegenerateMe:1 B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kuros_taken.jpg
+End

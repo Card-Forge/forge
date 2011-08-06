@@ -1,0 +1,11 @@
+Name:Kitsune Dawnblade
+ManaCost:4 W
+Types:Creature Fox Samurai
+Text:no text
+PT:2/3
+K:Bushido 1
+K:WheneverKeyword:EntersBattleField:Self:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:No Special Condition:When Kitsune Dawnblade enters the battlefield, you may tap target creature.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_dawnblade.jpg
+End

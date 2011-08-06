@@ -1,0 +1,11 @@
+Name:Keldon Champion
+ManaCost:2 R R
+Types:Creature Human Barbarian
+Text:no text
+PT:3/2
+K:Haste
+K:Echo:2 R R
+K:WheneverKeyword:EntersBattleField:Self:Play:Damage/3:NormalInput/Player:ASAP:No_Condition:No Special Condition:When Keldon Champion enters the battlefield, it deals 3 damage to target player.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_champion.jpg
+End

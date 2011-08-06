@@ -1,0 +1,8 @@
+Name:Kami of the Crescent Moon
+ManaCost:U U
+Types:Legendary Creature Spirit
+Text:At the beginning of each player's draw step, that player draws an additional card.
+PT:1/3
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_crescent_moon.jpg
+End

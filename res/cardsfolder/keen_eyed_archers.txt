@@ -1,0 +1,9 @@
+Name:Keen-Eyed Archers
+ManaCost:2 W
+Types:Creature Elf Archer
+Text:no text
+PT:2/2
+K:Reach
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/keen_eyed_archers.jpg
+End

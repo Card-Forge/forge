@@ -1,0 +1,8 @@
+Name:Kird Ape
+ManaCost:R
+Types:Creature Ape
+Text:Kird Ape gets +1/+2 as long as you control a Forest.
+PT:1/1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kird_ape.jpg
+End

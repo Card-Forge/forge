@@ -1,0 +1,11 @@
+Name:Kami of the Palace Fields
+ManaCost:5 W
+Types:Creature Spirit
+Text:no text
+PT:3/2
+K:Flying
+K:First Strike
+K:Soulshift:5
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_palace_fields.jpg
+End

@@ -1,0 +1,8 @@
+Name:Kasimir the Lone Wolf
+ManaCost:4 W U
+Types:Legendary Creature Human Warrior
+Text:no text
+PT:5/3
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1663.jpg
+End

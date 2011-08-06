@@ -1,0 +1,10 @@
+Name:Kamahl, Pit Fighter
+ManaCost:4 R R
+Types:Legendary Creature Human Barbarian
+Text:no text
+PT:6/1
+K:Haste
+K:abDamageTgtCP T:3
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kamahl_pit_fighter.jpg
+End

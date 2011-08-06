@@ -1,0 +1,11 @@
+Name:Knight of Stromgald
+ManaCost:B B
+Types:Creature Human Knight
+Text:no text
+PT:2/1
+K:Protection from white
+K:abPump B:First Strike
+K:abPump B B:+1/+0
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_stromgald.jpg
+End

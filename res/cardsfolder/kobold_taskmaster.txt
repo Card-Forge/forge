@@ -1,0 +1,10 @@
+Name:Kobold Taskmaster
+ManaCost:1 R
+Types:Creature Kobold
+Text:no text
+PT:1/2
+K:StaticEffect:Play:Permanents you Control:PTBonus/1/0:Type.Creature!Type.Kobold!NotSelf:Other Kobold creatures you control get +1/+0.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_taskmaster.jpg
+End

@@ -1,0 +1,9 @@
+Name:Knight of the Skyward Eye
+ManaCost:1 W
+Types:Creature Human Knight
+Text:Play this ability only once each turn.
+PT:2/2
+K:abPump 3 G:+3/+3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_skyward_eye.jpg
+End

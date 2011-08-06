@@ -1,0 +1,8 @@
+Name:Kami of Old Stone
+ManaCost:3 W
+Types:Creature Spirit
+Text:no text
+PT:1/7
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83461.jpg
+End

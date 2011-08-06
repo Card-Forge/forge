@@ -1,0 +1,9 @@
+Name:Kazuul Warlord
+ManaCost:4 R
+Types:Creature Minotaur Warrior Ally
+Text:Whenever Kazuul Warlord or another Ally enters the battlefield under your control, you may put a +1/+1 counter on each Ally creature you control.
+PT:3/3
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kazuul_warlord.jpg
+End

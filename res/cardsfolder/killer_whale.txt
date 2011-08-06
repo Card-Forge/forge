@@ -1,0 +1,8 @@
+Name:Killer Whale
+ManaCost:3 U U
+Types:Creature Whale
+Text:no text
+PT:3/5
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/ex/en-us/card6065.jpg
+End

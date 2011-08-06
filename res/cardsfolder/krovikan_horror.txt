@@ -1,0 +1,9 @@
+Name:Krovikan Horror
+ManaCost:3 B
+Types:Creature Horror Spirit
+Text:no text
+PT:2/2
+K:abDamageTgtCP 1 Sac-Creature:1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_horror.jpg
+End

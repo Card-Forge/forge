@@ -1,0 +1,10 @@
+Name:Kitsune Loreweaver
+ManaCost:1 W
+Types:Creature Fox Cleric
+Text:no text
+PT:2/1
+K:abPump 1 W:+0/+X:Kitsune Loreweaver get +0/+X until end of turn, where X is the number of cards in your hand.
+K:SVar:X:Count$NumCardsInYourHand
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_loreweaver.jpg
+End

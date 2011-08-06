@@ -1,0 +1,10 @@
+Name:Kathari Screecher
+ManaCost:2 U
+Types:Creature Bird Soldier
+Text:no text
+PT:2/2
+K:Flying
+K:Unearth:2 U
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kathari_screecher.jpg
+End

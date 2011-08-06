@@ -1,0 +1,9 @@
+Name:Kongming, "Sleeping Dragon"
+ManaCost:2 W W
+Types:Legendary Creature Human Advisor
+Text:Other creatures you control get +1/+1.
+PT:2/2
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kongming_sleeping_dragon.jpg
+End

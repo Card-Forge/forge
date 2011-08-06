@@ -1,0 +1,8 @@
+Name:Kjeldoran Outpost
+ManaCost:no cost
+Types:Land
+Text:If Kjeldoran Outpost would enter the battlefield, sacrifice a Plains instead. If you do, put Kjeldoran Outpost onto the battlefield. If you don't, put it into its owner's graveyard.
+K:tap: add W
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_outpost.jpg
+End

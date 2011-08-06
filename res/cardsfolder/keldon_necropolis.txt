@@ -1,0 +1,9 @@
+Name:Keldon Necropolis
+ManaCost:no cost
+Types:Legendary Land
+Text:no text
+K:tap: add 1
+K:abDamageTgtCP 4 R T Sac-Creature:2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_necropolis.jpg
+End

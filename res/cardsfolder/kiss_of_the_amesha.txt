@@ -1,0 +1,8 @@
+Name:Kiss of the Amesha
+ManaCost:4 W U
+Types:Sorcery
+Text:no text
+K:spGainLifeTgt:7:Drawback$TgtDrawCards/2:Target player gains 7 life and draws two cards.:Kiss of the Amesha - target player gains 7 life and draws 2 cards
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kiss_of_the_amesha.jpg
+End

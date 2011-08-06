@@ -1,0 +1,10 @@
+Name:Kodama of the North Tree
+ManaCost:2 G G G
+Types:Legendary Creature Spirit
+Text:no text
+PT:6/4
+K:Trample
+K:Shroud
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card50488.jpg
+End

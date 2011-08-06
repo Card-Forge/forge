@@ -1,0 +1,9 @@
+Name:Kor Skyfisher
+ManaCost:1 W
+Types:Creature Kor Soldier
+Text:When Kor Skyfisher enters the battlefield, return a permanent you control to its owner's hand.
+PT:2/3
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_skyfisher.jpg
+End

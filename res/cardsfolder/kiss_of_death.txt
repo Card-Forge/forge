@@ -1,0 +1,8 @@
+Name:Kiss of Death
+ManaCost:4 B B
+Types:Sorcery
+Text:no text
+K:spDamageTgtOpp:4:Drawback$YouGainLife/4:Kiss of Death deals 4 damage to target opponent. You gain 4 life.:Kiss of Death - deals 4 damage; you gain 4 life.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/kiss_of_death.jpg
+End

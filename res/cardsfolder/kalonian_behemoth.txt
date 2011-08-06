@@ -1,0 +1,9 @@
+Name:Kalonian Behemoth
+ManaCost:5 G G
+Types:Creature Beast
+Text:no text
+PT:9/9
+K:Shroud
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kalonian_behemoth.jpg
+End

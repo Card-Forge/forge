@@ -1,0 +1,10 @@
+Name:Keldon Vandals
+ManaCost:2 R
+Types:Creature Human Rogue
+Text:When Keldon Vandals enters the battlefield, destroy target artifact.
+PT:4/1
+K:Echo:2 R
+K:etbDestroyTgt:Artifact
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_vandals.jpg
+End

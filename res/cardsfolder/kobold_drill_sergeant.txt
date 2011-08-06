@@ -1,0 +1,10 @@
+Name:Kobold Drill Sergeant
+ManaCost:1 R
+Types:Creature Kobold Soldier
+Text:no text
+PT:1/2
+K:StaticEffect:Play:Permanents you Control:PTBonus/0/1!Keyword/Trample:Type.Creature!Type.Kobold!NotSelf:Other Kobold creatures you control get +0/+1 and have trample.
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_drill_sergeant.jpg
+End

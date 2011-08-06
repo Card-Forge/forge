@@ -1,0 +1,8 @@
+Name:Kozilek's Predator
+ManaCost:3 G
+Types:Creature Eldrazi Drone
+Text:When Kozilek's Predator enters the battlefield, put two 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
+PT:3/3
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kozileks_predator.jpg
+End

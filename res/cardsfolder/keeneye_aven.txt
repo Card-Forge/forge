@@ -1,0 +1,10 @@
+Name:Keeneye Aven
+ManaCost:3 U
+Types:Creature Bird Soldier
+Text:no text
+PT:2/3
+K:Flying
+K:Cycling:2
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/keeneye_aven.jpg
+End

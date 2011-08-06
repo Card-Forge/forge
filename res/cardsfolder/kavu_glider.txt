@@ -1,0 +1,10 @@
+Name:Kavu Glider
+ManaCost:2 R
+Types:Creature Kavu
+Text:no text
+PT:2/1
+K:abPump W:+0/+1
+K:abPump U:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_glider.jpg
+End

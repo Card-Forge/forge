@@ -1,0 +1,11 @@
+Name:Kathari Remnant
+ManaCost:2 U B
+Types:Creature Bird Skeleton
+Text:no text
+PT:0/1
+K:Flying
+K:RegenerateMe:B
+K:Cascade
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kathari_remnant.jpg
+End
