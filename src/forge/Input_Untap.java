@@ -15,8 +15,8 @@ public class Input_Untap extends Input {
         for(int i = 0; i < c.length; i++)
             c[i].setSickness(false);
         
-        if(isMarbleTitanInPlay()) marbleUntap();
-        else if(!isStasisInPlay()) regularUntap();
+        //if(isMarbleTitanInPlay()) marbleUntap();
+        if(!isStasisInPlay()) doUntap();
         
         if (AllZone.Phase.getTurn() != 1)
             GameActionUtil.executeUpkeepEffects();
@@ -27,14 +27,6 @@ public class Input_Untap extends Input {
         //AllZone.Phase.nextPhase();
         //for debugging: System.out.println("need to nextPhase(Input_Untap) = true");
         AllZone.Phase.setNeedToNextPhase(true);
-    }
-    
-    private void marbleUntap() {
-        PlayerZone p = AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getActivePlayer());
-        Card[] c = p.getCards();
-        
-        for(int i = 0; i < c.length; i++)
-            if(c[i].getNetAttack() < 3) c[i].untap();
     }
     
     private boolean isMarbleTitanInPlay() //or Meekstone
@@ -66,16 +58,27 @@ public class Input_Untap extends Input {
         return all.size() > 0;
     }
     
-    
-    private void regularUntap() {
-        PlayerZone p = AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getActivePlayer());
-        Card[] c = p.getCards();
-        
-        for(int i = 0; i < c.length; i++) {
-            if(!c[i].getKeyword().contains("This card doesn't untap during your untap step.")
-                    && !c[i].getKeyword().contains("This card doesn't untap during your next untap step.")) c[i].untap();
-            else c[i].removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
+     
+    private void doUntap()
+    {
+    	PlayerZone p = AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getActivePlayer());
+        CardList list = new CardList(p.getCards());
+        list = list.filter(new CardListFilter()
+        {
+        	public boolean addCard(Card c)
+        	{
+        		if (isMarbleTitanInPlay())
+        			return c.getNetAttack() < 3;
+        			
+        		return true;
+        	}
+        });
+       
+        for(Card c : list) {
+            if(!c.getKeyword().contains("This card doesn't untap during your untap step.")
+                    && !c.getKeyword().contains("This card doesn't untap during your next untap step.")) c.untap();
+            else c.removeExtrinsicKeyword("This card doesn't untap during your next untap step.");
             
-        }
-    }//regularUntap()
+       }
+    }
 }

@@ -2403,7 +2403,8 @@ public class GameActionUtil {
             public boolean addCard(Card c) {
                 ArrayList<String> a = c.getKeyword();
                 for(int i = 0; i < a.size(); i++) {
-                    if(a.get(i).toString().startsWith("At the beginning of your upkeep, sacrifice " + c.getName())) {
+                    if(a.get(i).toString().startsWith("At the beginning of your upkeep, sacrifice " + c.getName()) ||
+                       a.get(i).toString().startsWith("At the beginning of your upkeep, sacrifice CARDNAME")) {
                         String k[] = a.get(i).toString().split(":");
                         c.setUpkeepCost(k[1]);
                         return true;
