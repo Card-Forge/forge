@@ -11,7 +11,6 @@ import java.util.HashMap;
 //			-Untap - source card becomes untapped
 //			-LoseControl - you lose control of source card
 //			-PowerGT - (not implemented yet for Old Man of the Sea)
-//	UntilEOT - set to True if this only lasts to end of turn (not implemented yet)
 //	AddKWs	- Keywords to add to the controlled card (as a "&"-separated list; like Haste, Sacrifice CARDNAME at EOT, any standard keyword)
 //  OppChoice - set to True if opponent chooses creature (for Preacher) - not implemented yet
 //	Untap	- set to True if target card should untap when control is taken
