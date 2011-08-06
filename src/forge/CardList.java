@@ -130,6 +130,16 @@ public class CardList implements Iterable<Card> {
         return c;
     }
     
+    //returns new subset of all the cards that have a different name
+    public CardList getNotName(String name) {
+        CardList c = new CardList();
+        
+        for(int i = 0; i < size(); i++)
+            if(!getCard(i).getName().equals(name)) c.add(getCard(i));
+        
+        return c;
+    }
+    
     public CardList getImageName(String name) {
         CardList c = new CardList();
         

@@ -13014,6 +13014,10 @@ public class CardFactory_Creatures {
                         }
                     } else //computer
                     {
+                    	if (powerTwoCreatures.getNotName("Imperial Recruiter").size() != 0) 
+                    	{
+                    		powerTwoCreatures = powerTwoCreatures.getNotName("Imperial Recruiter");
+                    	}
                         powerTwoCreatures.shuffle();
                         ability.setTargetCard(powerTwoCreatures.get(0));
                         AllZone.Stack.add(ability);
