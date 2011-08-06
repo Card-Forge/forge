@@ -10457,12 +10457,13 @@ public class GameActionUtil {
 			int Count = list.size();
 			// .... For each card that needs the bonus, add the bonus
 				for(int i = 0; i < Count; i++) {
-					if(a + 1 == Keyword.length) old[ANumber].add(list.get(i)); // Only store the card when it has all the bonuses added
+					if(a + 1 == Keyword.length && !Keyword[a].contains("SetPT")) old[ANumber].add(list.get(i)); // Only store the card when it has all the bonuses added
 					if(Keyword[a].contains("PTBonus")) {
-					list.get(i).addSemiPermanentAttackBoost(Integer.valueOf(Keyword[a].split("/")[1]));
-					list.get(i).addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[a].split("/")[2]));
-				}
-			else if(Keyword[a].contains("SetPT")) {
+						list.get(i).addSemiPermanentAttackBoost(Integer.valueOf(Keyword[a].split("/")[1]));
+						list.get(i).addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[a].split("/")[2]));
+					}
+					else if(Keyword[a].contains("SetPT")) {
+						//old[ANumber].remove(list.get(i)); //hack, make sure the card is not in the "old" list if there's a setPT 
 						// -9001 is a failsafe number, It will be used when a card only has a SetPT bonus which only affects 
 						// cards with either a Power or Toughness bonus, but not both. NOT TESTED
 						int[] SetPTAmounts = SetPTBonus(SourceCard, Keyword_Details);
@@ -16143,7 +16144,6 @@ public class GameActionUtil {
 				}
 			});
 			return barons.size() - 1;
-
 		}
 
 		public void execute() {
