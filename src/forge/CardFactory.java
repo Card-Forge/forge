@@ -7610,8 +7610,13 @@ public class CardFactory implements NewConstants {
                     }
                     
                     Card c = getFlying();
-                    if((c == null) || (!check.equals(c))) throw new RuntimeException(card
-                            + " error in chooseTargetAI() - Card c is " + c + ",  Card check is " + check);
+                    if((c == null) || (!check.equals(c))) {
+                    	c = getAnyCreature();
+                    	if (c == null) {
+                    		setTargetPlayer(Constant.Player.Human);
+                    		return;
+                    	}
+                    }
                     
                     setTargetCard(c);
                 }//chooseTargetAI()
@@ -7621,6 +7626,14 @@ public class CardFactory implements NewConstants {
                     CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
                     for(int i = 0; i < flying.size(); i++)
                         if(flying.get(i).getNetDefense() <= damage) return flying.get(i);
+                    
+                    return null;
+                }
+                
+                Card getAnyCreature() {
+                    CardList creatures = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    for(int i = 0; i < creatures.size(); i++)
+                        if(creatures.get(i).getNetDefense() <= damage) return creatures.get(i);
                     
                     return null;
                 }
