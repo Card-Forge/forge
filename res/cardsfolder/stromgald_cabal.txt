@@ -1,0 +1,10 @@
+Name:Stromgald Cabal
+ManaCost:1 B B
+Types:Creature Human Knight
+Text:no text
+PT:2/2
+A:AB$Counter | Cost$ T PayLife<1> | Type$ Spell | CounterValid$ Card.White | SpellDescription$ Counter target white spell.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stromgald_cabal.jpg
+End
