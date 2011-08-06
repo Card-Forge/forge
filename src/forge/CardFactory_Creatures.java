@@ -3501,6 +3501,97 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Phylactery Lich") ) {
+            final CommandReturn getArt = new CommandReturn() {
+                //get target card, may be null
+                public Object execute() {
+                    CardList art = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                    art = art.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isArtifact();
+                        }
+                    });
+                    
+                    CardList list = new CardList(art.toArray());                  
+                    if (list.isEmpty())	
+                    	return null;
+                    
+                    Card target = list.get(0);
+
+                    return target;
+                }//execute()
+            };//CommandReturn
+            
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && c.isArtifact()) {
+                    	c.addCounter(Counters.PHYLACTERY, 1);
+                    	card.setFinishedEnteringBF(true);
+                    }
+                }//resolve()
+            };//SpellAbility
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = -1601957445498569156L;
+
+				public void execute() {
+                    Input target = new Input() {
+
+						private static final long serialVersionUID = -806140334868210520L;
+
+						@Override
+                        public void showMessage() {
+                            AllZone.Display.showMessage("Select target artifact you control");
+                            ButtonUtil.disableAll();
+                        }
+                        
+                        @Override
+                        public void selectCard(Card card, PlayerZone zone) {
+                            if(card.isArtifact() && zone.is(Constant.Zone.Play) && card.getController().equals(Constant.Player.Human)) {
+                                ability.setTargetCard(card);
+                                AllZone.Stack.add(ability);
+                                stop();
+                            }
+                        }
+                    };//Input target
+                    
+
+                    if(card.getController().equals(Constant.Player.Human)) {
+                    	CardList artifacts = AllZoneUtil.getPlayerTypeInPlay(Constant.Player.Human, "Artifact");
+                        
+                        if(artifacts.size() != 0) AllZone.InputControl.setInput(target);
+
+                    } 
+                    else{ //computer
+                        Object o = getArt.execute();
+                        if(o != null)//should never happen, but just in case
+                        {
+                            ability.setTargetCard((Card) o);
+                            AllZone.Stack.add(ability);
+                        }
+                    }//else
+                }//execute()
+            };
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(new Spell_Permanent(card) {
+                
+				private static final long serialVersionUID = -1506199222879057809L;
+
+				@Override
+                public boolean canPlayAI() {
+                    Object o = getArt.execute();
+                    return (o != null) && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
+                }
+            });
+            
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Briarhorn")) {

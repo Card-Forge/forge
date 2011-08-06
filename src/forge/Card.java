@@ -62,6 +62,7 @@ public class Card extends MyObservable {
     private boolean                      reflectedLand                     = false;
     private boolean						 levelUp						   = false;
     private boolean						 bounceAtUntap					   = false;
+    private boolean						 finishedEnteringBF				   = false;
     
     private boolean                      firstStrike                       = false;
     private boolean                      doubleStrike                      = false;
@@ -271,6 +272,14 @@ public class Card extends MyObservable {
     
     public void setBounceAtUntap(boolean bounce) {
         this.bounceAtUntap = bounce;
+    }
+    
+    public boolean getFinishedEnteringBF() {
+        return finishedEnteringBF;
+    }
+    
+    public void setFinishedEnteringBF(boolean b) {
+        this.finishedEnteringBF = b;
     }
     
     public boolean hasFirstStrike() {

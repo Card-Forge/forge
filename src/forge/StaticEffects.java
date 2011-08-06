@@ -133,6 +133,7 @@ public class StaticEffects
 		cardToEffectsList.put("Aven Brigadier", new String[] {"Aven_Brigadier_Soldier_Pump", "Aven_Brigadier_Bird_Pump", "Aven_Brigadier_Other"});
 		cardToEffectsList.put("Scion of Oona", new String[] {"Scion_of_Oona_Pump", "Scion_of_Oona_Other"});
 		cardToEffectsList.put("Covetous Dragon", new String[] {"Covetous_Dragon"});
+		cardToEffectsList.put("Phylactery Lich", new String[]{"Phylactery_Lich"});
 		cardToEffectsList.put("Tethered Griffin", new String[] {"Tethered_Griffin"});
 		cardToEffectsList.put("Shared Triumph", new String[] {"Shared_Triumph"});
 		cardToEffectsList.put("Crucible of Fire", new String[] {"Crucible_of_Fire"});

@@ -27,6 +27,7 @@ public enum Counters {
     M1M1("-1/-1"),
     MANA(),
     MINING(),
+    PHYLACTERY,
     P0M1("+0/-1"),
     P0M2("+0/-2"),
     P1P1("+1/+1"),

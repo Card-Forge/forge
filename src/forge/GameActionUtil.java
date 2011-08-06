@@ -15862,8 +15862,43 @@ public class GameActionUtil {
 			artifacts = artifacts.getType("Artifact");
 			return artifacts.size();
 		}
+	};
+	
+	public static Command Phylactery_Lich             = new Command() {
 
+		private static final long serialVersionUID = -1606115081917467754L;
+		int                       artifacts        = 0;
 
+		public void execute() {
+			CardList creature = new CardList();
+			creature.addAll(AllZone.Human_Play.getCards());
+			creature.addAll(AllZone.Computer_Play.getCards());
+
+			creature = creature.getName("Phylactery Lich");
+
+			for(int i = 0; i < creature.size(); i++) {
+				Card c = creature.get(i);
+				artifacts = countArtifacts(c);
+				if(artifacts == 0 && c.getFinishedEnteringBF()) {
+					AllZone.GameAction.sacrifice(c);
+				}
+			}
+
+		}//execute()
+
+		private int countArtifacts(Card c) {
+			PlayerZone play = AllZone.getZone(
+					Constant.Zone.Play, c.getController());
+			CardList artifacts = new CardList(play.getCards());
+			artifacts = artifacts.filter(new CardListFilter()
+			{
+				public boolean addCard(Card crd)
+				{
+					return crd.isArtifact() && crd.getCounters(Counters.PHYLACTERY) > 0;
+				}
+			});
+			return artifacts.size();
+		}
 	};
 
 	public static Command Tethered_Griffin            = new Command() {
@@ -19244,6 +19279,7 @@ public class GameActionUtil {
 		commands.put("Scion_of_Oona_Other", Scion_of_Oona_Other);
 
 		commands.put("Covetous_Dragon", Covetous_Dragon);
+		commands.put("Phylactery_Lich", Phylactery_Lich);
 		commands.put("Tethered_Griffin", Tethered_Griffin);
 
 		commands.put("Shared_Triumph", Shared_Triumph);

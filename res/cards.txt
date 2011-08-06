@@ -1,3 +1,10 @@
+Phylactery Lich
+B B B
+Creature Zombie
+As Phylactery Lich enters the battlefield, put a phylactery counter on an artifact you control. When you control no permanents with phylactery counters on them, sacrifice Phylactery Lich.
+5/5
+Indestructible
+
 Soulcatcher
 1 W
 Creature Bird Soldier
@@ -9885,6 +9892,14 @@ Fecundity
 Enchantment
 no text
 Whenever a creature is put into a graveyard from the battlefield, that creature's controller may draw a card.
+
+Soulcatcher
+1 W
+Creature Bird Soldier
+no text
+1/1
+Whenever a creature with flying is put into a graveyard from the battlefield, put a +1/+1 counter on Soulcatcher.
+Flying
 
 Dauthi Ghoul
 1 B
