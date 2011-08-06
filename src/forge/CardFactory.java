@@ -4439,6 +4439,38 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         } // if Spike
         
+        int etbCounter = hasKeyword(card, "etbCounter");	// etbCounter:CounterType:CounterAmount
+        // enters the battlefield with CounterAmount of CounterType
+        if(etbCounter != -1) {
+            String parse = card.getKeyword().get(etbCounter).toString();
+            card.removeIntrinsicKeyword(parse);
+            
+            String p[] = parse.split(":");
+            final Counters counter = Counters.valueOf(p[1]);
+            final int numCounters = Integer.parseInt(p[2]);
+              
+            StringBuilder sb = new StringBuilder(card.getSpellText());
+            if (sb.length() != 0)
+            	sb.append("\n");
+            
+            sb.append(card.getName());
+            sb.append(" enters the battlefield with ");
+            sb.append(numCounters);
+            sb.append(" ");
+            sb.append(counter.getName());
+            sb.append(" counters on it.");
+            
+            card.setText(sb.toString());
+
+            card.addComesIntoPlayCommand(new Command() {
+                private static final long serialVersionUID = -2292898970576123040L;
+
+                public void execute() {
+                    card.addCounter(counter, numCounters);
+                }
+            });//ComesIntoPlayCommand
+        } // if etbCounter
+        
         
         if(hasKeyword(card, "1, Sacrifice CARDNAME: Draw a card.") != -1) {
             int n = hasKeyword(card, "1, Sacrifice CARDNAME: Draw a card.");
