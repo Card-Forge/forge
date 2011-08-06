@@ -1,0 +1,9 @@
+Name:Wurm's Tooth
+ManaCost:2
+Types:Artifact
+Text:no text
+K:WheneverKeyword:CastSpell/Any:Color/green:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever a player casts a green spell, you may gain 1 life.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wurms_tooth.jpg
+End

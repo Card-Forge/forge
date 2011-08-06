@@ -1,0 +1,9 @@
+Name:Crystal Rod
+ManaCost:1
+Types:Artifact
+Text:no text
+K:WheneverKeyword:CastSpell/Any:Color/blue:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:PayMana/1:No Special Condition:Whenever a player casts a blue spell, you may pay 1. If you do, you gain 1 life.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_rod.jpg
+End

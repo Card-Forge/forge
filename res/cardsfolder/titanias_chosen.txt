@@ -1,0 +1,10 @@
+Name:Titania's Chosen
+ManaCost:2 G
+Types:Creature Elf Archer
+Text:no text
+PT:1/1
+K:WheneverKeyword:CastSpell/Any:Color/green:Play:+1+1 Counters/1:Self:ASAP:Yes_No:No Special Condition:Whenever a player casts a green spell, put a +1/+1 counter on Titania's Chosen.
+SVar:BuffedBy:Spell.Green
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/titanias_chosen.jpg
+End

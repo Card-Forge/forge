@@ -1,0 +1,10 @@
+Name:Bog-Strider Ash
+ManaCost:3 G
+Types:Creature Treefolk Shaman
+Text:no text
+PT:2/4
+K:Swampwalk
+K:WheneverKeyword:CastSpell/Any:Type/Goblin:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:PayMana/G:No Special Condition:Whenever a player casts a Goblin spell, you may pay G. If you do, you gain 2 life.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_strider_ash.jpg
+End

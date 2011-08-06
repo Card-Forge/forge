@@ -1,0 +1,8 @@
+Name:Urza's Chalice
+ManaCost:1
+Types:Artifact
+Text:no text
+K:WheneverKeyword:CastSpell/Any:Type/Artifact:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:PayMana/1:No Special Condition:Whenever a player casts an artifact spell, you may pay 1. If you do, you gain 1 life.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_chalice.jpg
+End
