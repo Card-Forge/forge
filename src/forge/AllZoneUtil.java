@@ -1,6 +1,8 @@
 
 package forge;
 
+import java.util.ArrayList;
+
 /**
  * AllZoneUtil contains static functions used to get CardLists of various
  * cards in various zones.
@@ -282,6 +284,25 @@ public class AllZoneUtil {
 			return c.isArtifact();
 		}
 	};
+	
+	//////////////// getting all cards of a given color
+	
+	public static CardList getColorInPlay(final String color) {
+		CardList cards = getPlayerColorInPlay(Constant.Player.Computer, color);
+		cards.add(getPlayerColorInPlay(Constant.Player.Human, color));
+		return cards;
+	}
+	
+	public static CardList getPlayerColorInPlay(final String player, final String color) {
+		CardList cards = getPlayerCardsInPlay(player);
+		cards = cards.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				ArrayList<String> colorList = CardUtil.getColors(c);
+				return colorList.contains(color);
+			}
+		});
+		return cards;
+	}
 	
 	//zone manipulation, maybe be better off in GameAction.java...
 	/**

@@ -19354,6 +19354,41 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Guan Yu's 1,000-Li March")) {
+            SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -4623601047712563137L;
+
+				@Override
+                public void resolve() {
+                    CardList all = AllZoneUtil.getCreaturesInPlay();
+                    all = all.filter(AllZoneUtil.tapped);
+                    
+                    CardListUtil.sortByIndestructible(all);
+                    CardListUtil.sortByDestroyEffect(all);
+                    
+                    for(int i = 0; i < all.size(); i++) {
+                        Card c = all.get(i);
+                        AllZone.GameAction.destroy(c);
+                    }
+                }// resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList human = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+                    CardList computer = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
+
+                    // the computer will at least destroy 2 more human creatures
+                    return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
+                    		(computer.size() < human.size() - 1
+                            || (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty()));
+                }
+            };// SpellAbility
+            spell.setStackDescription(cardName+" - Destroy all tapped creatures.");
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }// *************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
