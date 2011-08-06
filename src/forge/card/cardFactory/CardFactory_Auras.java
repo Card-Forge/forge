@@ -1309,6 +1309,7 @@ class CardFactory_Auras {
                         player = AllZone.ComputerPlayer;
                     }
                     CardList list = AllZoneUtil.getPlayerTypeInPlay(player, type);
+                    list = list.filter(AllZoneUtil.getCanTargetFilter(card));
                     
                     if (list.isEmpty()) return false;
                     
