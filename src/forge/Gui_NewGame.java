@@ -104,6 +104,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private Action					CARD_STACK_ACTION    = new CardStackAction();
     private Action					CARD_STACK_OFFSET_ACTION = new CardStackOffsetAction();
     private Action                  ABOUT_ACTION         = new AboutAction();
+    private Action					DNLD_PRICES_ACTION	 = new DownloadPriceAction(); 
     
     public static void main(String[] args) {
         ExceptionHandler.registerErrorHandling();
@@ -216,7 +217,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     private void setupMenu() {
         Action[] actions = {
-                LOOK_AND_FEEL_ACTION, DOWNLOAD_ACTION, DOWNLOAD_ACTION_LQ, IMPORT_PICTURE, CARD_SIZES_ACTION, CARD_STACK_ACTION,
+                LOOK_AND_FEEL_ACTION, DNLD_PRICES_ACTION, DOWNLOAD_ACTION, DOWNLOAD_ACTION_LQ, IMPORT_PICTURE, CARD_SIZES_ACTION,
                 CARD_STACK_OFFSET_ACTION, ErrorViewer.ALL_THREADS_ACTION, ABOUT_ACTION};
         JMenu menu = new JMenu(ForgeProps.getLocalized(MENU.TITLE));
         for(Action a:actions)
@@ -741,6 +742,19 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 ErrorViewer.showError(ex);
             }
         }
+    }
+    
+    public static class DownloadPriceAction extends AbstractAction {
+    	private static final long serialVersionUID = 929877827872974298L;
+    	
+    	public DownloadPriceAction() {
+    		super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOADPRICE));
+    	}
+    	
+    	public void actionPerformed(ActionEvent e) {
+    		Gui_DownloadPrices gdp = new Gui_DownloadPrices();
+    		gdp.setVisible(true);
+    	}
     }
     
     public static class DownloadAction extends AbstractAction {
