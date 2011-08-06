@@ -9,4 +9,5 @@ A:AB$Regenerate | Cost$ R G G T | ValidTgts$ Creature.Black,Creature.Green | Tgt
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_healer.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/208.jpg
 End

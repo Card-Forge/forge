@@ -7,4 +7,5 @@ K:First Strike
 K:Whenever CARDNAME deals combat damage to a creature, destroy that creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voracious_cobra.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/288.jpg
 End

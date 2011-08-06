@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ 2 G | ValidTgts$ Creature.Green | TgtPrompt$ Select target gre
 PT:2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/willow_priestess.jpg
+SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/75.jpg
 End

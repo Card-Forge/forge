@@ -6,4 +6,5 @@ A:SP$Destroy | Cost$ 3 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifa
 A:SP$Destroy | Cost$ 4 R R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | Flashback$ True | CostDesc$ Flashback 4 R R | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bash_to_bits.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/176.jpg
 End

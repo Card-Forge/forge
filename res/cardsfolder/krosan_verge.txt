@@ -9,4 +9,5 @@ SVar:DBPlains:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Chang
 SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_verge.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/141.jpg
 End

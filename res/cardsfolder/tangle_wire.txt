@@ -6,4 +6,5 @@ K:Fading:4
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_wire.jpg
+SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/139.jpg
 End

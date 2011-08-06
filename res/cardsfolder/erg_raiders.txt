@@ -5,4 +5,8 @@ Text:At the beginning of your end step, if CARDNAME didn't attack this turn, CAR
 PT:2/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erg_raiders.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/20.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/17.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/19.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/3.jpg
 End

@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ 2 G | KW$ HIDDEN All creatures able to block CARDNAME do so. |
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortipede.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/96.jpg
 End

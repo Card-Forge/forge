@@ -7,4 +7,5 @@ A:AB$ChangeZone | Cost$ tapXType<5/Wizard> | Origin$ Library | Destination$ Exil
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/supreme_inquisitor.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/117.jpg
 End

@@ -6,4 +6,5 @@ A:SP$ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$
 A:SP$ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature.YouCtrl  | Flashback$ True | CostDesc$ Flashback 4 B | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morgue_theft.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/151.jpg
 End

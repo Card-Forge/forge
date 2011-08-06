@@ -7,4 +7,5 @@ K:enPump:+1/+1
 A:AB$Pump | Cost$ Sac<1/CARDNAME> | Defined$ Enchanted | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Enchanted creature gets +3/+3 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/briar_shield.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/63.jpg
 End

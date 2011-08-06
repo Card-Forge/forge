@@ -7,4 +7,5 @@ A:AB$ChangeZone | Cost$ 4 B Sac<1/Creature> | TgtPrompt$ Choose target creature 
 A:AB$PutCounter | Cost$ 4 G | Tgt$ TgtC | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golgari_guildmage.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/248.jpg
 End

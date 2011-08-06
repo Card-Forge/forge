@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPumpCurse:HIDDEN Prevent all damage that would be dealt by CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/muzzle.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/30.jpg
 End

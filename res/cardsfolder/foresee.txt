@@ -6,4 +6,6 @@ A:SP$Scry | Cost$ 3 U | ScryNum$ 4 |SpellDescription$ Scry 4, then draw two card
 SVar:DBDraw:DB$Draw | NumCards$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foresee.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/54.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/36.jpg
 End

@@ -8,4 +8,5 @@ SVar:DBSwamp:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ S
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_harvester.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/62.jpg
 End

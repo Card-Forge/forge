@@ -7,4 +7,5 @@ K:stSetPT:Count$Valid Creature.Red:Count$Valid Creature.Green:Yavimaya Kavu's po
 SVar:BuffedBy:Creature.Red,Creature.Green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_kavu.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/291.jpg
 End

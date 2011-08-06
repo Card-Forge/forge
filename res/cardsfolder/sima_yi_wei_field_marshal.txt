@@ -6,4 +6,5 @@ PT:*/4
 K:stSetPT:Count$Valid Swamp.YouCtrl:4:CARDNAME's power is equal to the number of Swamps you control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sima_yi_wei_field_marshal.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/82.jpg
 End

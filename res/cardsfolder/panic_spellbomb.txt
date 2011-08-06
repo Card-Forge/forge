@@ -6,4 +6,5 @@ A:AB$Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select ta
 K:WheneverKeyword:PermanentIntoGraveyard:Self:Any:DrawCards/1:ControllingPlayer_Self:ASAP:PayMana/R:No Special Condition:When Panic Spellbomb is put into a graveyard from the battlefield, you may pay R. If you do, draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panic_spellbomb.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/191.jpg
 End

@@ -6,4 +6,10 @@ K:Enchant Wall
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/animate_wall.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/186.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/281.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/254.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/1.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/185.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/185.jpg
 End

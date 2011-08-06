@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ Discard<1/Any> | KW$ Shroud & HIDDEN Unblockable | SpellDescri
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_inkshrouder.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/36.jpg
 End

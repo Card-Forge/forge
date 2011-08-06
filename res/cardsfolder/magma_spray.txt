@@ -6,4 +6,5 @@ A:SP$DealDamage | Cost$ R | Tgt$ TgtC | NumDmg$ 2 | SubAbility$ SVar=DB | SpellD
 SVar:DB:DB$Pump | KW$HIDDEN If CARDNAME would be put into a graveyard this turn, exile it instead. | Defined$Targeted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_spray.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/108.jpg
 End

@@ -6,4 +6,5 @@ A:SP$Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodscent.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/114.jpg
 End

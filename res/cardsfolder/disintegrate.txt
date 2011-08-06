@@ -7,4 +7,10 @@ SVar:X:Count$xPaid
 SVar:DB:DB$Pump | KW$CARDNAME can't be regenerated. & If CARDNAME would be put into a graveyard this turn, exile it instead. | Defined$Targeted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disintegrate.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/142.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/203.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/58.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/141.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/219.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/141.jpg
 End

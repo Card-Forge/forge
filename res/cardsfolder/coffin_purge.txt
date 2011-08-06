@@ -7,4 +7,5 @@ A:SP$ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coffin_purge.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/124.jpg
 End

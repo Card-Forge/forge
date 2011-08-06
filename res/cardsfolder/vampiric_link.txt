@@ -7,4 +7,5 @@ K:enPump:+0/+0
 K:Whenever enchanted creature deals damage, you gain that much life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_link.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/92.jpg
 End

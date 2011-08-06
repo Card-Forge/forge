@@ -6,4 +6,5 @@ A:SP$ChangeZone | Cost$ 3 G G | Origin$ Hand | Destination$ Battlefield | Change
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dramatic_entrance.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/111.jpg
 End

@@ -6,4 +6,5 @@ A:SP$Pump | Cost$ 1 G G | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taunting_challenge.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/152.jpg
 End

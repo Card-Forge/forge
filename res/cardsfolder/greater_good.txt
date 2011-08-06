@@ -8,4 +8,6 @@ SVar:X:Sacrificed$CardPower
 SVar:Rarity:Rare
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_good.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/257.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/245.jpg
 End

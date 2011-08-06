@@ -7,4 +7,5 @@ K:stSetPT:Count$Valid Rat:3:Pestilence Rats's power is equal to the number of ot
 SVar:BuffedBy:Rat
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilence_rats.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/45.jpg
 End

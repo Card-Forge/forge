@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ T | ValidTgts$ Creature | KW$ HIDDEN CARDNAME's power and toug
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_thaumaturgist.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/56.jpg
 End

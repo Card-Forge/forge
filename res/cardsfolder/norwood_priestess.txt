@@ -6,4 +6,5 @@ A:AB$ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType
 PT:1/1
 SVar:Rarity:Rare
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/norwood_priestess.jpg
+SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/77.jpg
 End

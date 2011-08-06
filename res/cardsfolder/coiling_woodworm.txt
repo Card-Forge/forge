@@ -6,4 +6,5 @@ PT:*/1
 K:stSetPT:Count$Valid Forest:1:Coiling Woodworm's power is equal to the number of Forests on the battlefield.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coiling_woodworm.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/103.jpg
 End

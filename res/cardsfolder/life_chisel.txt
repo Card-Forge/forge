@@ -7,4 +7,5 @@ SVar:X:Sacrificed$CardToughness
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/life_chisel.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/228.jpg
 End

@@ -8,4 +8,5 @@ K:Morph:2 U
 SVar:BuffedBy:Wizard
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_one.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/100.jpg
 End

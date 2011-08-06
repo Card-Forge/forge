@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ Discard<1/Artifact> | NumAtt$ +2 | NumDef$ +2 | SpellDescripti
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleshgrafter.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/51.jpg
 End

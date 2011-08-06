@@ -6,4 +6,5 @@ K:tap: add U
 K:tap: add B
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/secluded_glen.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/271.jpg
 End

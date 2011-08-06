@@ -6,4 +6,5 @@ PT:2/2
 K:stPumpSelf:Creature:0/0/HIDDEN Unblockable:isPresent Artifact.YouDontCtrl:CARDNAME is unblockable as long as defending player controls an artifact.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bouncing_beebles.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/28.jpg
 End

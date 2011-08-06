@@ -7,4 +7,12 @@ K:enPump:+0/+0
 K:Whenever enchanted creature deals damage, you gain that much life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_link.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/47.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/47.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/340.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/206.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/301.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/47.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/45.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/43.jpg
 End

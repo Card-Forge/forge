@@ -6,4 +6,7 @@ A:AB$ChangeZone | Cost$ B B PayLife<2> Sac<1/Swamp> | TgtPrompt$ Choose target c
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strands_of_night.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/24.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/156.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/165.jpg
 End

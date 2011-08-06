@@ -6,4 +6,8 @@ A:SP$DealDamage | Cost$ 1 R | Tgt$ TgtCP | NumDmg$ 3 | SubAbility$ SVar=DB | Spe
 SVar:DB:DB$Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ Targeted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incinerate.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/242.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/184.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/194.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/213.jpg
 End

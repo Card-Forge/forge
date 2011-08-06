@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ T | ValidTgts$ Creature | KW$ HIDDEN CARDNAME's power and toug
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_thaumaturgist.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/98.jpg
 End

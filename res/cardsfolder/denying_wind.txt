@@ -6,4 +6,5 @@ A:SP$ChangeZone | Cost$ 7 U U | Origin$ Library | Destination$ Exile | ValidTgts
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/denying_wind.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/32.jpg
 End

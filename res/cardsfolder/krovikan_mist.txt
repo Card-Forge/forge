@@ -8,4 +8,5 @@ K:stSetPT:Count$Valid Illusion:Count$Valid Illusion:Krovikan Mist's power and to
 SVar:BuffedBy:Illusion
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krovikan_mist.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/38.jpg
 End

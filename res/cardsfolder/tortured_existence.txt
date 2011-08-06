@@ -6,4 +6,5 @@ A:AB$ChangeZone | Cost$ B Discard<1/Any> | TgtPrompt$ Choose target creature car
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tortured_existence.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/24.jpg
 End

@@ -7,4 +7,5 @@ K:enPumpCurse:HIDDEN CARDNAME can't attack or block.
 A:AB$ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cage_of_hands.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/3.jpg
 End

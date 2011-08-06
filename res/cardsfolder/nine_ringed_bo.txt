@@ -7,4 +7,5 @@ SVar:DB:DB$Pump | KW$HIDDEN If CARDNAME would be put into a graveyard this turn,
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nine_ringed_bo.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/263.jpg
 End

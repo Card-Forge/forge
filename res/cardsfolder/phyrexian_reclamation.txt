@@ -6,4 +6,5 @@ A:AB$ChangeZone | Cost$ 1 B PayLife<2> | TgtPrompt$ Choose target creature card 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_reclamation.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/63.jpg
 End

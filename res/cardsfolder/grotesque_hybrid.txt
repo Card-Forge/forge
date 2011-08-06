@@ -7,4 +7,5 @@ K:Whenever CARDNAME deals combat damage to a creature destroy that creature. It 
 A:AB$Pump | Cost$ Discard<1/Any> | KW$ Flying & Protection from green & Protection from white | SpellDescription$ CARDNAME gains flying and protection from green and from white until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grotesque_hybrid.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/63.jpg
 End

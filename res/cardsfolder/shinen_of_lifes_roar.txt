@@ -8,4 +8,5 @@ A:AB$Pump | Cost$ 2 G G Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ S
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shinen_of_lifes_roar.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/149.jpg
 End

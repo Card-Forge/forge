@@ -7,4 +7,5 @@ K:enPumpCurse:HIDDEN At the beginning of your upkeep, sacrifice CARDNAME unless 
 K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slow_motion.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/42.jpg
 End

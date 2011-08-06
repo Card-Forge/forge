@@ -8,4 +8,5 @@ A:SP$Destroy | Cost$ W | ValidTgts$ Aura | TgtPrompt$ Select target Aura. | Spel
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hope_charm.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/108.jpg
 End

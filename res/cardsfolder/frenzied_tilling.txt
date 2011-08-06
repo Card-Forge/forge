@@ -6,4 +6,5 @@ A:SP$Destroy | Cost$ 3 R G | ValidTgts$ Land | TgtPrompt$ Select target land | S
 SVar:DBSearch:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frenzied_tilling.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/247.jpg
 End

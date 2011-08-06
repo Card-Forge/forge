@@ -7,4 +7,5 @@ A:AB$GainLife | Cost$ Sac<1/CARDNAME>| LifeAmount$ X | SpellDescription$ You gai
 SVar:X:Count$InYourYard.Elf
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_eulogist.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/205.jpg
 End

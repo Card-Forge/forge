@@ -7,4 +7,5 @@ K:Enchant creature
 K:enPumpCurse:Shadow & HIDDEN Prevent all damage that would be dealt by CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_isolation.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/43.jpg
 End

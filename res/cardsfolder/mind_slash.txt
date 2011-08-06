@@ -6,4 +6,6 @@ A:AB$Discard | Cost$ B Sac<1/CREATURE> | ValidTgts$ Opponent | SorcerySpeed$ Tru
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_slash.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/145.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/59.jpg
 End

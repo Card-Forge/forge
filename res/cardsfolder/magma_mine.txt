@@ -7,4 +7,5 @@ A:AB$DealDamage | Cost$ T Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ X | SpellDescri
 SVar:X:Count$CardCounters.PRESSURE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magma_mine.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/149.jpg
 End
