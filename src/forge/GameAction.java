@@ -526,6 +526,11 @@ public class GameAction {
     
     public void sacrifice(Card c) {
         sacrificeDestroy(c);
+        
+        //Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Sacrificed", c);
+        AllZone.TriggerHandler.runTrigger("Sacrificed", runParams);
     }
     
     public void destroyNoRegeneration(Card c) {

@@ -407,7 +407,7 @@ public class PhaseUtil {
         for(int i=0;i< list.size();i++)
         {        	
         	runParams.put("Attacker", list.get(i));
-        	AllZone.TriggerHandler.runTrigger("Battles", runParams);
+        	AllZone.TriggerHandler.runTrigger("Attacks", runParams);
         }
 	}
 	
@@ -469,7 +469,7 @@ public class PhaseUtil {
         	CardList blockList = AllZone.Combat.getBlockers(a);
         	for (Card b:blockList)
         	{
-        		runParams.put("Battler", b);
+        		runParams.put("Blocker", b);
         		AllZone.TriggerHandler.runTrigger("Blocks", runParams);
         	}
         }

@@ -13,9 +13,13 @@ public class TriggerHandler {
 		Trigger ret = null;
 		
 		String mode = mapParams.get("Mode");
-		if(mode.equals("Battles"))
+		if(mode.equals("Attacks"))
 		{
-			ret = new Trigger_Battles(mapParams,host);
+			ret = new Trigger_Attacks(mapParams,host);
+		}
+		else if(mode.equals("Blocks"))
+		{
+			ret = new Trigger_Blocks(mapParams,host);
 		}
 		else if(mode.equals("ChangesZone"))
 		{
@@ -40,6 +44,10 @@ public class TriggerHandler {
 		else if(mode.equals("Phase"))
 		{
 			ret = new Trigger_Phase(mapParams,host);
+		}
+		else if(mode.equals("Sacrificed"))
+		{
+			ret = new Trigger_Sacrificed(mapParams,host);
 		}
 		else if(mode.equals("SpellCast"))
 		{
