@@ -3112,11 +3112,11 @@ public class CardFactory implements NewConstants {
                     CardList computer = new CardList(AllZone.Computer_Play.getCards());
                     
                     human = human.getValidCards(Tgts);
-                    int humanvalue = sumCMC(human);
+                    int humanvalue = CardListUtil.sumCMC(human);
                     humanvalue += human.getType("Land").size();
                     humanvalue += human.getTokens().size() * 3;          // X = total converted mana cost + number of lands + 3 * number of tokens (Human)
                     computer = computer.getValidCards(Tgts);
-                    int computervalue = sumCMC(computer);
+                    int computervalue = CardListUtil.sumCMC(computer);
                     computervalue += computer.getType("Land").size();
                     computervalue += computer.getTokens().size() * 3;    // Y = total converted mana cost + number of lands + 3 * number of tokens (Computer)
                     
