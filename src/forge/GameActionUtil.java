@@ -8917,16 +8917,6 @@ public class GameActionUtil {
 			ability = new Ability(card, "0") {
 				@Override
 				public void resolve() {
-					//Doubling Season is handled in CardFactoryUtil.makeToken
-					//int multiplier = 1;
-					//int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
-					//if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
-					//for(int i = 0; i < multiplier; i++)
-						makeToken();
-
-				}// resolve()
-
-				public void makeToken() {
 					CardFactoryUtil.makeTokenSaproling(card.getController());
 				}
 			};// Ability
@@ -8951,9 +8941,7 @@ public class GameActionUtil {
 			ability = new Ability(card, "0") {
 				@Override
 				public void resolve() {
-					int multiplier = 1;
-					int doublingSeasons = AllZoneUtil.getPlayerCardsInPlay(card.getController(), "Doubling Season").size();
-					if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
+					int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
 					for(int i = 0; i < multiplier; i++)
 						makeToken();
 

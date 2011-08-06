@@ -4427,10 +4427,7 @@ public class CardFactoryUtil {
         
         PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
         
-        int multiplier = 1;
-        int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", controller).size();
-        if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
-        
+        int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(controller);
         for(int i = 0; i < multiplier; i++) {
             Card temp = CardFactory.copyStats(c);
             temp.setController(controller);
