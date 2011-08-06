@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Creature Merfolk Soldier
 Text:no text
 PT:3/3
-K:abPump 1 U Untap:Flying
+A:AB$Pump | Cost$ 1 U Untap | KW$ Flying | SpellDescription$ Merrow Wavebreakers gains flying until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_wavebreakers.jpg

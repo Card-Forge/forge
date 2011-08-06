@@ -3,7 +3,7 @@ ManaCost:1 G G
 Types:Creature Lizard
 Text:no text
 PT:2/3
-K:abPump 1 G:-0/-1/Flying
+A:AB$Pump | Cost$ 1 G | NumDef$ -1 | KW$ Flying | SpellDescription$ Leaping Lizard gains flying and gets -0/-1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leaping_lizard.jpg
 SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/63.jpg

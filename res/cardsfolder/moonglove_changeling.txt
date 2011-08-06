@@ -4,7 +4,7 @@ Types:Creature Shapeshifter
 Text:no text
 PT:2/2
 K:Changeling
-K:abPump B:Deathtouch
+A:AB$Pump | Cost$ B | KW$ Deathtouch | SpellDescription$ Moonglove Changeling gains deathtouch until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonglove_changeling.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/67.jpg

@@ -4,7 +4,7 @@ Types:Creature Bird
 Text:no text
 PT:1/1
 K:Flying
-K:abPump 1 W:+0/+1
+A:AB$Pump | Cost$ 1 W | NumDef$ +1 | SpellDescription$ Mesa Falcon gets +0/+1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mesa_falcon.jpg
 SetInfo:HML|Common|http://magiccards.info/scans/en/hl/112.jpg

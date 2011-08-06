@@ -4,8 +4,8 @@ Types:Creature Human Knight
 Text:no text
 PT:2/1
 K:Protection from black
-K:abPump W:First Strike
-K:abPump W W:+1/+0
+A:AB$Pump | Cost$ W | KW$ First Strike | SpellDescription$ Order of the White Shield gains first strike until end of turn.
+A:AB$Pump | Cost$ W W | NumAtt$ +1 | SpellDescription$ Order of the White Shield gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_white_shield.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/325.jpg

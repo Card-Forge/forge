@@ -4,10 +4,10 @@ Types:Creature Shapeshifter
 Text:no text
 PT:3/3
 K:Untap:U
-K:abPump U:Flying
-K:abPump U:Shroud
-K:abPump 1:+1/-1
-K:abPump 1:-1/+1
+A:AB$Pump | Cost$ U | KW$ Flying | SpellDescription$ Morphling gains flying until end of turn.
+A:AB$Pump | Cost$ U | KW$ Shroud | SpellDescription$ Morphling gains shroud until end of turn.
+A:AB$Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ Morphling gets +1/-1 until end of turn.
+A:AB$Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ +1 | SpellDescription$ Morphling gets -1/+1 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morphling.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/85.jpg

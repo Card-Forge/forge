@@ -4,8 +4,8 @@ Types:Creature Human Cleric Knight
 Text:no text
 PT:2/1
 K:Protection from black
-K:abPump W:First Strike
-K:abPump W W:+1/+0
+A:AB$Pump | Cost$ W | KW$ First Strike | SpellDescription$ Order of Leitbur gains first strike until end of turn.
+A:AB$Pump | Cost$ W W | NumAtt$ +1 | SpellDescription$ Order of Leitbur gets +1/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_leitbur.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/163.jpg
