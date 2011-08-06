@@ -36,8 +36,8 @@ class CardFactory_Lands {
                 }
                 
             };
-            Ability_Tap ability = new Ability_Tap(card) {
-                
+            Ability_Cost abCost = new Ability_Cost("T", card.getName(), true);
+            final SpellAbility ability = new Ability_Activated(card, abCost, null){                
                 private static final long serialVersionUID = 1416258136308898492L;
                 
                 CardList                  inPlay           = new CardList();
@@ -864,9 +864,6 @@ class CardFactory_Lands {
                 @Override
                 public boolean canPlayAI() {
                     return false;
-                    //it turns into a creature, but doesn't attack
-//	             return (! card.getKeyword().contains("Flying") &&
-//	                    (CardFactoryUtil.AI_getHumanCreature("Flying").isEmpty()));
                 }
                 
                 @Override
@@ -897,6 +894,7 @@ class CardFactory_Lands {
             sb.append(card).append(" - becomes a 2/2 creature until EOT");
             a1.setStackDescription(sb.toString());
             
+            // is this even needed?
             Command paid1 = new Command() {
                 private static final long serialVersionUID = -6767109002136516590L;
                 
@@ -906,103 +904,6 @@ class CardFactory_Lands {
             };
             
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
-            
-            final SpellAbility[] a2 = new SpellAbility[1];
-            final Command eot2 = new Command() {
-                private static final long serialVersionUID = 6180724472470740160L;
-                
-                public void execute() {
-                    Card c = a2[0].getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        c.addTempAttackBoost(-1);
-                        c.addTempDefenseBoost(-1);
-                    }
-                }
-            };
-            
-            a2[0] = new Ability_Tap(card) {
-                private static final long serialVersionUID = 3561450520225198222L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return getAttacker() != null;
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    setTargetCard(getAttacker());
-                }
-                
-                /*
-                 *  getAttacker() will now filter out non-Assembly-Workers and non-Changelings
-                 */
-                
-                public Card getAttacker() {
-                    //target creature that is going to attack
-                    Combat attackers = ComputerUtil.getAttackers();
-                    CardList list = new CardList(attackers.getAttackers());
-                    list = list.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return CardFactoryUtil.canTarget(card, c) && 
-                    		      (c.getType().contains("Assembly-Worker") || c.getKeyword().contains("Changeling"));
-                    	}
-                    });
-//                  list = list.getType("Assembly-Worker");    // Should return only Assembly-Workers
-                    list.remove(card);
-                    list.shuffle();
-                    
-                    if (list.size() != 0 && 
-                       (AllZone.Phase.getPhase().equals(Constant.Phase.Main1)) && 
-                        CardFactoryUtil.canTarget(card, list.get(0))) return list.get(0);
-                    else return null;
-                }//getAttacker()
-                
-                @Override
-                public void resolve() {
-                    Card c = a2[0].getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        c.addTempAttackBoost(1);
-                        c.addTempDefenseBoost(1);
-                        
-                        AllZone.EndOfTurn.addUntil(eot2);
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            /*
-             *  We add this input method and the human can now target both
-             *  Assembly-Workers and Changelings. And the Mishra's Factory
-             *  will now tap when this ability is used.
-             */
-            
-            Input runtime = new Input() {
-				private static final long serialVersionUID = 7047534805576787311L;
-
-				@Override
-                public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-                    CardList creatures = new CardList();
-                    creatures.addAll(comp.getCards());
-                    creatures.addAll(hum.getCards());
-                    creatures = creatures.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isCreature() && CardFactoryUtil.canTarget(card, c) && 
-                                  (c.getType().contains("Assembly-Worker") || c.getKeyword().contains("Changeling"));
-                        }
-                    });
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(a2[0], creatures, "Select target Assembly-Worker", true, false));
-                }// showMessage
-            };// Input runtime
-            
-            card.addSpellAbility(a2[0]);
-            a2[0].setDescription("tap: Target Assembly-Worker gets +1/+1 until end of turn.");
-            
-            a2[0].setBeforePayMana(runtime);
-            
-//          a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Assembly-Worker"));
-            
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -3505,7 +3406,8 @@ class CardFactory_Lands {
         	 * owner's hand: Take an extra turn after this one.
         	 */
 
-        	final Ability_Tap skipTurn = new Ability_Tap(card, "U") {
+        	Ability_Cost skipCost = new Ability_Cost("U T", card.getName(), true);
+        	final SpellAbility skipTurn = new Ability_Activated(card, skipCost, null){
 				private static final long serialVersionUID = -2404286785963486611L;
 
 				@Override
@@ -3516,21 +3418,14 @@ class CardFactory_Lands {
         		}
         	};//skipTurn
         	
-        	final Ability_Tap extraTurn = new Ability_Tap(card) {
+        	Ability_Cost extraCost = new Ability_Cost("T SubCounter<1/EON> Return<1/CARDNAME>", card.getName(), true);
+        	final SpellAbility extraTurn = new Ability_Activated(card, extraCost, null){
 				private static final long serialVersionUID = -2599252144246080154L;
 
 				@Override
         		public void resolve() {
-					Player player = card.getController();
-        			card.subtractCounter(Counters.EON, 1);
-        			AllZone.Phase.addExtraTurn(player);
-        			AllZone.GameAction.moveToHand(card);
+        			AllZone.Phase.addExtraTurn(getActivatingPlayer());
         		}
-				
-				@Override
-				public boolean canPlay() {
-					return card.getCounters(Counters.EON) > 0;
-				}
         	};//extraTurn
         	
         	StringBuilder sbDesc = new StringBuilder();
@@ -3542,14 +3437,13 @@ class CardFactory_Lands {
         	card.addSpellAbility(skipTurn);
         	
         	StringBuilder sbDesc2 = new StringBuilder();
-        	sbDesc2.append("tap, Remove an eon counter from ").append(card.getName()).append(" and return it to its owner's hand: Take an extra turn after this one.");
+        	sbDesc2.append(extraCost.toString());
+        	sbDesc2.append("Take an extra turn after this one.");
         	extraTurn.setDescription(sbDesc2.toString());
         	StringBuilder sb = new StringBuilder();
-        	sb.append(card.getName()).append(" - return this card to its owner's hand. Take an extra turn after this one.");
+        	sb.append(card.getName()).append(" - Take an extra turn after this one.");
         	extraTurn.setStackDescription(sb.toString());
         	card.addSpellAbility(extraTurn);
-        	
-        	skipTurn.setBeforePayMana(new Input_PayManaCost(skipTurn));
         }//*************** END ************ END **************************
         
         //*************** START ********** START *************************

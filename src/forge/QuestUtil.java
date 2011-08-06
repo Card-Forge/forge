@@ -140,7 +140,8 @@ public class QuestUtil {
         if (level == 6)
         {
         	final Card crd = c;
-        	final Ability_Tap ability = new Ability_Tap(crd) {
+        	Ability_Cost abCost = new Ability_Cost("T", crd.getName(), true);
+        	final SpellAbility ability = new Ability_Activated(crd, abCost, null){
 				private static final long serialVersionUID = 7546242087593613719L;
 
 				@Override

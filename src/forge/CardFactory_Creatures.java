@@ -9508,15 +9508,13 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Goldmeadow Lookout")) {
-            final Ability_Tap ability = new Ability_Tap(card, "G") {
+        	final Ability_Cost lookCost = new Ability_Cost("W T Discard<1/Any>", card.getName(), true);
+        	final SpellAbility ability = new Ability_Activated(card, lookCost, null){
                 private static final long serialVersionUID = -8413409735529340094L;
                 
                 @Override
                 public void resolve() {
                     makeToken();
-                    
-                    //computer discards here, todo: should discard when ability put on stack
-                    if(card.getController().equals(AllZone.ComputerPlayer)) AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, this);
                 }
                 
                 void makeToken() {
@@ -9524,7 +9522,9 @@ public class CardFactory_Creatures {
                     		card.getController(), "W", new String[] {"Creature", "Kithkin", "Soldier"}, 1, 1, new String[] {""});
                     
                     for(final Card c:cl) {
-                        final SpellAbility ability = new Ability_Tap(c, "W") {
+                    	final Ability_Cost abCost = new Ability_Cost("W T", c.getName(), true);
+                    	final Target tgt = new Target("TgtC");
+                    	final SpellAbility tokenAbility = new Ability_Activated(card, abCost, tgt){
                             private static final long serialVersionUID = -7327585136675896817L;
                             
                             @Override
@@ -9569,24 +9569,15 @@ public class CardFactory_Creatures {
                             }//canPlayAI
                         };//SpellAbility
                         c.addSpellAbility(new Spell_Permanent(c));
-                        c.addSpellAbility(ability);
-                        ability.setDescription("W, tap: Tap target creature.");
-                        ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+                        c.addSpellAbility(tokenAbility);
+                        tokenAbility.setDescription("W, tap: Tap target creature.");
                     }
                     
                 }//makeToken()
                 
                 @Override
-                public boolean canPlay() {
-                    Card c[] = AllZone.getZone(Constant.Zone.Hand, card.getController()).getCards();
-                    
-                    return super.canPlay() && (0 < c.length);
-                }
-                
-                @Override
                 public boolean canPlayAI() {
-                    boolean canDiscard = 0 < AllZone.Computer_Hand.getCards().length;
-                    return canPlay() && canDiscard && AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
+                    return super.canPlayAI() && AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
                 }
             };//SpellAbility
             
@@ -9594,19 +9585,10 @@ public class CardFactory_Creatures {
             
             StringBuilder sb = new StringBuilder();
             sb.append("W, tap, Discard a card: Put a 1/1 white Kithkin Soldier creature token ");
-            sb.append("named Goldmeadow Harrier into play with \"W, tap target creature.\"");
+            sb.append("named Goldmeadow Harrier into play with \"W, T: tap target creature.\"");
             ability.setDescription(sb.toString());
             
             ability.setStackDescription("Goldmeadow Lookout - Put a 1/1 token into play");
-            ability.setBeforePayMana(new Input_PayManaCost_Ability("W", new Command() {
-                private static final long serialVersionUID = 8621733943286161557L;
-                
-                public void execute() {
-                    card.tap();
-                    AllZone.InputControl.setInput(CardFactoryUtil.input_discard(ability));
-                    AllZone.Stack.add(ability);
-                }
-            }));
         }//*************** END ************ END **************************
         
         /*

@@ -2172,13 +2172,17 @@ public class Card extends MyObservable {
 	
     private String toMixedCase(String s)
     {
-    	String fc = "";
-    	String lcs = "";
+    	StringBuilder sb = new StringBuilder();
+    	// to handle hyphenated Types
+    	String[] types = s.split("-");
+    	for(int i = 0; i < types.length; i++){
+    		if (i != 0)
+    			sb.append("-");
+        	sb.append(types[i].substring(0,1).toUpperCase());
+        	sb.append(types[i].substring(1).toLowerCase());
+    	}
     	
-    	fc = s.substring(0,1).toUpperCase();
-    	lcs = s.substring(1).toLowerCase();
-    	
-    	return fc + lcs;
+    	return sb.toString();
     }	
 	
     //usable to check for changelings
