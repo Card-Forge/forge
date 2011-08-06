@@ -2116,6 +2116,7 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
+        /* keyworded
         //*************** START *********** START **************************
         else if(cardName.equals("Sunlance")) {
             final SpellAbility spell = new Spell(card) {
@@ -2198,7 +2199,7 @@ public class CardFactory_Sorceries {
             
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Firebolt")) {

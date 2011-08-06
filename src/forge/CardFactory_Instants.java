@@ -3031,7 +3031,7 @@ public class CardFactory_Instants {
                     self = self.getType("Land");
                     opp = opp.getType("Land");
                     
-                    return (self.size() < opp.size()) && super.canPlay();
+                    return (self.size() < opp.size()); // && super.canPlay();
                 }//oppoMoreLand()
                 
                 @Override
@@ -3052,7 +3052,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
+       /* converted to keyword
       //*************** START *********** START **************************
         else if(cardName.equals("Nameless Inversion")) {
             SpellAbility spell = new Spell(card) {
@@ -3100,7 +3100,7 @@ public class CardFactory_Instants {
             
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Primal Boost")) {
