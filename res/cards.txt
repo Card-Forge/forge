@@ -1,3 +1,20 @@
+Mawcor
+3 U U
+Creature Beast
+no text
+3/3
+Flying
+abDamageTgtCP T:1
+
+Pirate Ship
+4 U
+Creature Human Pirate
+no text
+4/3
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice CARDNAME.
+abDamageTgtCP T:1
+
 Dandan
 U U
 Creature Fish
@@ -11,14 +28,6 @@ Manta Ray
 Creature Fish
 Manta Ray can't be blocked except by blue creatures.
 3/3
-CARDNAME can't attack unless defending player controls an Island.
-When you control no Islands, sacrifice CARDNAME.
-
-Pirate Ship
-4 U
-Creature Human Pirate
-no text
-4/3
 CARDNAME can't attack unless defending player controls an Island.
 When you control no Islands, sacrifice CARDNAME.
 
@@ -18417,13 +18426,6 @@ Creature Illusion
 no text
 2/2
 Unblockable
-
-Mawcor
-3 U U
-Creature Beast
-no text
-3/3
-Flying
 
 Serendib Efreet
 2 U

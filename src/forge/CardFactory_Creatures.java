@@ -5556,7 +5556,8 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility(ability));
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Mawcor") || cardName.equals("Pirate Ship")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -5586,7 +5587,7 @@ public class CardFactory_Creatures {
             
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
         }//*************** END ************ END **************************
-        
+*/
                 
         
         //*************** START *********** START **************************
