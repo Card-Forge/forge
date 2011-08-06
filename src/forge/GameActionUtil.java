@@ -4244,7 +4244,7 @@ public class GameActionUtil {
             }//resolve()
 
         };
-        DamageTgt.setManaCost(new String("0"));
+        DamageTgt.setManaCost("0");
         DamageTgt.setStackDescription("Valakut, the Molten Pinnacle deals 3 damage to target creature or player.");
         if (valakutCard.getController() == Constant.Player.Human) {
         	AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreaturePlayer(DamageTgt, true, true));

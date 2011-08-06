@@ -292,22 +292,21 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
             if(!noCopies.containsName(c.getName())) noCopies.add(c);
         }
         
-
-        String text = "";
+        StringBuffer sb = new StringBuffer();
         String newLine = "\r\n";
         int count = 0;
         
-        text = all.size() + " Total Cards" + newLine + newLine;
+        sb.append(all.size()).append(" Total Cards").append(newLine).append(newLine);
         
         //creatures
-        text += all.getType("Creature").size() + " Creatures" + newLine;
-        text += "-------------" + newLine;
+        sb.append(all.getType("Creature").size()).append(" Creatures").append(newLine);
+        sb.append("-------------").append(newLine);
         
         for(int i = 0; i < noCopies.size(); i++) {
             Card c = noCopies.get(i);
             if(c.isCreature()) {
                 count = all.getName(c.getName()).size();
-                text += count + "x " + c.getName() + newLine;
+                sb.append(count).append("x ").append(c.getName()).append(newLine);
             }
         }
         
@@ -320,32 +319,32 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         count = all.filter(cf).size();
         
         //spells
-        text += newLine + count + " Spells" + newLine;
-        text += "----------" + newLine;
+        sb.append(newLine).append(count).append(" Spells").append(newLine);
+        sb.append("----------").append(newLine);
         
         for(int i = 0; i < noCopies.size(); i++) {
             Card c = noCopies.get(i);
             if(!(c.isCreature() || c.isLand())) {
                 count = all.getName(c.getName()).size();
-                text += count + "x " + c.getName() + newLine;
+                sb.append(count).append("x ").append(c.getName()).append(newLine);
             }
         }
         
         //land
-        text += newLine + all.getType("Land").size() + " Land" + newLine;
-        text += "--------" + newLine;
+        sb.append(newLine).append(all.getType("Land").size()).append(" Land").append(newLine);
+        sb.append("--------").append(newLine);
         
         for(int i = 0; i < noCopies.size(); i++) {
             Card c = noCopies.get(i);
             if(c.isLand()) {
                 count = all.getName(c.getName()).size();
-                text += count + "x " + c.getName() + newLine;
+                sb.append(count).append("x ").append(c.getName()).append(newLine);
             }
         }
         
-        text += newLine;
+        sb.append(newLine);
         
-        return text;
+        return sb.toString();
     }//getExportDeckText
     
     private void exportDeckText(String deckText, String filename) {
@@ -499,16 +498,16 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
                 Collections.sort(nameList);
                 
                 Deck deck;
-                String allText = "";
+                StringBuffer allText = new StringBuffer();
                 
                 for(int i = 0; i < nameList.size(); i++) {
                     deck = questData.ai_getDeck(nameList.get(i).toString());
-                    allText += deck.getName() + "\r\n";
-                    allText += getExportDeckText(deck);
-                    allText += "++++++++++++++++++++++++++++++++++++++++++++++++++++++ \r\n \r\n";
+                    allText.append(deck.getName()).append("\r\n");
+                    allText.append(getExportDeckText(deck));
+                    allText.append("++++++++++++++++++++++++++++++++++++++++++++++++++++++ \r\n \r\n");
                 }
                 
-                JTextArea area = new JTextArea(allText, 30, 30);
+                JTextArea area = new JTextArea(allText.toString(), 30, 30);
                 JOptionPane.showMessageDialog(null, new JScrollPane(area));
                 
             }//actionPerformed()
@@ -967,13 +966,13 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
     
     //only accepts numbers, letters or dashes up to 20 characters in length
     private String cleanString(String in) {
-        String out = "";
+        StringBuffer out = new StringBuffer();
         char[] c = in.toCharArray();
         
         for(int i = 0; i < c.length && i < 20; i++)
-            if(Character.isLetterOrDigit(c[i]) || c[i] == '-' || c[i] == '_' || c[i] == ' ') out += c[i];
+            if(Character.isLetterOrDigit(c[i]) || c[i] == '-' || c[i] == '_' || c[i] == ' ') out.append(c[i]);
         
-        return out;
+        return out.toString();
     }
     
     //if user cancels, returns ""

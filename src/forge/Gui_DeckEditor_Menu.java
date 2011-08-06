@@ -524,9 +524,11 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
             BufferedReader br = new BufferedReader(fr);
             String s = "";
             String z = "";
+            StringBuffer sb = new StringBuffer();
             while((z = br.readLine()) != null) {
-                s = s + z;
+                sb.append(z);
             }
+            s = sb.toString();
             br.close();
             int start = s.indexOf("MAIN DECK");
             int finish = s.indexOf("SIDEBOARD");
@@ -600,9 +602,9 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
                 
             }
             
-            String FalseCards = "";
+            StringBuffer falseCards = new StringBuffer();
             for(int i = 0; i < falseCount; i++) {
-                FalseCards = FalseCards + "\n" + falseName[i] + ",";
+                falseCards.append("\n").append(falseName[i]).append(",");
             }
             
 
@@ -612,7 +614,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
                 JOptionPane.showMessageDialog(null, "Deck downloads.", "Information",
                         JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Sorry, cards:" + FalseCards
+                JOptionPane.showMessageDialog(null, "Sorry, cards:" + falseCards
                         + "\nnot supported in this version MTGForge. \nDeck downloads without this cards.",
                         "Information", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -692,21 +694,21 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         }
         
 
-        String text = "";
+        StringBuffer text = new StringBuffer();
         String newLine = "\r\n";
         int count = 0;
         
-        text = all.size() + " Total Cards" + newLine + newLine;
+        text.append(all.size()).append(" Total Cards").append(newLine).append(newLine);
         
         //creatures
-        text += all.getType("Creature").size() + " Creatures" + newLine;
-        text += "-------------" + newLine;
+        text.append(all.getType("Creature").size()).append(" Creatures").append(newLine);
+        text.append("-------------").append(newLine);
         
         for(int i = 0; i < noCopies.size(); i++) {
             Card c = noCopies.get(i);
             if(c.isCreature()) {
                 count = all.getName(c.getName()).size();
-                text += count + "x " + c.getName() + newLine;
+                text.append(count).append("x ").append(c.getName()).append(newLine);
             }
         }
         
@@ -719,26 +721,26 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         count = all.filter(cf).size();
         
         //spells
-        text += newLine + count + " Spells" + newLine;
-        text += "----------" + newLine;
+        text.append(newLine).append(count).append(" Spells").append(newLine);
+        text.append("----------").append(newLine);
         
         for(int i = 0; i < noCopies.size(); i++) {
             Card c = noCopies.get(i);
             if(!(c.isCreature() || c.isLand())) {
                 count = all.getName(c.getName()).size();
-                text += count + "x " + c.getName() + newLine;
+                text.append(count).append("x ").append(c.getName()).append(newLine);
             }
         }
         
         //land
-        text += newLine + all.getType("Land").size() + " Land" + newLine;
-        text += "--------" + newLine;
+        text.append(newLine).append(all.getType("Land").size()).append(" Land").append(newLine);
+        text.append("--------").append(newLine);
         
         for(int i = 0; i < noCopies.size(); i++) {
             Card c = noCopies.get(i);
             if(c.isLand()) {
                 count = all.getName(c.getName()).size();
-                text += count + "x " + c.getName() + newLine;
+                text.append(count).append("x ").append(c.getName()).append(newLine);
             }
         }
         
@@ -748,7 +750,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         
         try {
             FileWriter writer = new FileWriter(filename + ".txt");
-            writer.write(text);
+            writer.write(text.toString());
             
             writer.flush();
             writer.close();

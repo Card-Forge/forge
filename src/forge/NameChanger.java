@@ -2,9 +2,9 @@ package forge;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.Map.Entry;
 
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
@@ -145,11 +145,8 @@ public class NameChanger implements NewConstants {
     @SuppressWarnings("unused")
     // printMap
     private void printMap(Map<String, String> map) {
-        Iterator<String> it = map.keySet().iterator();
-        String key;
-        for(int i = 0; i < 5; i++) {
-            key = it.next().toString();
-            System.out.println(key + " : " + map.get(key));
+        for(Entry<String, String> e:map.entrySet()) {
+            System.out.println(e.getKey() + " : " + e.getValue());
         }
     }
     

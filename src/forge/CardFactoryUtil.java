@@ -2337,15 +2337,15 @@ public class CardFactoryUtil {
                 AllZone.Display.showMessage("Select target permanent");
              }
              else {
-                String toDisplay = "";
-                toDisplay += "Select target ";
+                StringBuffer toDisplay = new StringBuffer();
+                toDisplay.append("Select target ");
                 while( st.hasMoreTokens() ) {
-                   toDisplay += st.nextToken();
+                   toDisplay.append(st.nextToken());
                    if( st.hasMoreTokens() ) {
-                      toDisplay += " or ";
+                      toDisplay.append(" or ");
                    }
                 }
-                AllZone.Display.showMessage( toDisplay );
+                AllZone.Display.showMessage( toDisplay.toString() );
              }
              ButtonUtil.enableOnlyCancel();
           }

@@ -22,14 +22,13 @@ public class ComputerAI_Burn2 implements Computer {
             }
         }
         Runnable run = new Runnable() {
-            @SuppressWarnings("null")
             public void run() {
                 synchronized(ComputerAI_Burn2.this) {
                     if(AllZone.Stack.size() == 0
                             && AllZone.Phase.is(Constant.Phase.Main1, Constant.Player.Computer)) {
                         SpellAbilityList list = null; //Move3.getBestMove();
 
-                        if(list.size() != 0) {
+                        if(list != null && list.size() != 0) {
                             SpellAbility sa = list.get(0);
                             if(ComputerUtil.canPlay(sa) && sa.canPlay()) {
                                 if(sa.isSpell()) {

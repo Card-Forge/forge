@@ -45,13 +45,16 @@ public class CardList implements Iterable<Card> {
         Collections.reverse(list);
     }
     
-    public boolean equals(CardList a) {
-        if(list.size() != a.size()) return false;
-        
-        for(int i = 0; i < list.size(); i++)
-            if(!list.get(i).equals(a.get(i))) return false;
-        
-        return true;
+    public boolean equals(Object a) {
+    	if(a instanceof CardList){
+    		CardList b = (CardList)a;
+	        if(list.size() != b.size()) return false;
+	        
+	        for(int i = 0; i < list.size(); i++)
+	            if(!list.get(i).equals(b.get(i))) return false;
+	        
+	        return true;
+    	} else return false;
     }
     
     //removes one copy of that card

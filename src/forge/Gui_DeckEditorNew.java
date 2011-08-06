@@ -701,12 +701,13 @@ public class Gui_DeckEditorNew extends JFrame implements CardContainer, NewConst
         int creature = deck.getType("Creature").size();
         int land = deck.getType("Land").size();
         
-        String show = "Total - " + total + ", Creatures - " + creature + ", Land - " + land;
+        StringBuffer show = new StringBuffer();
+        show.append("Total - ").append(total).append(", Creatures - ").append(creature).append(", Land - ").append(land);
         String[] color = Constant.Color.Colors;
         for(int i = 0; i < 5; i++)
-            show += ", " + color[i] + " - " + CardListUtil.getColor(deck, color[i]).size();
+        	show.append(", ").append(color[i]).append(" - ").append(CardListUtil.getColor(deck, color[i]).size());
         
-        return show;
+        return show.toString();
     }//getStats()
     
     public Card getCard() {

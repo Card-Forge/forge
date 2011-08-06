@@ -1849,9 +1849,9 @@ public class GameAction {
         boolean onlyOneLand = (Zone2.trim().length() == 0);
         String firstPrompt;
         if (onlyOneLand)
-        	firstPrompt = new String("Choose a land");
+        	firstPrompt = "Choose a land";
         else
-        	firstPrompt = new String("Choose first land");
+        	firstPrompt = "Choose first land";
         
         //branch 2
         Object o = AllZone.Display.getChoiceOptional(firstPrompt, list.toArray());
