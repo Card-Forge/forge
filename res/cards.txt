@@ -1,3 +1,10 @@
+Elven Riders
+3 G G
+Creature Elf
+no text
+3/3
+CARDNAME can't be blocked except by Walls and/or creatures with flying.
+
 Invisibility
 U U
 Enchantment Aura

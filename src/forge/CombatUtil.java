@@ -225,6 +225,9 @@ public class CombatUtil {
         
         if (attacker.getKeyword().contains("CARDNAME can't be blocked except by Walls.") && !blocker.getType().contains("Wall")) return false;
         
+        if (attacker.getKeyword().contains("CARDNAME can't be blocked except by Walls and/or creatures with flying.") && 
+        		!(blocker.getType().contains("Wall") || blocker.getKeyword().contains("Flying"))) return false;
+        
         return true;
     }//canBlock()
     
