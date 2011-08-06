@@ -689,11 +689,16 @@ class CardFactory_Auras {
 
 				@Override
                 public boolean canPlayAI() {
-                	
-                	CardList list = new CardList(AllZone.Computer_Play.getCards());    // Target computer artifact
+                	/*
+                	 *  AI targets computer artifact but not artifact equipment
+                	 */
+                	CardList list = new CardList(AllZone.Computer_Play.getCards());
                 	list = list.filter(new CardListFilter() {
                 		public boolean addCard(Card c) {
-                			return !c.isCreature() && CardFactoryUtil.canTarget(card, c) && c.isArtifact();
+                			return !c.isCreature() && 
+                				    CardFactoryUtil.canTarget(card, c) && 
+                				    c.isArtifact() && 
+                				   !c.getType().contains("Equipment");
                 		}
                 	});
                     
@@ -701,7 +706,6 @@ class CardFactory_Auras {
                     	return false;
                     } else {
                     	Card crd = CardFactoryUtil.AI_getBestArtifact(list);
-//                  	int cmc = CardUtil.getConvertedManaCost(crd);
                     	if (CardUtil.getConvertedManaCost(crd) >= 2) setTargetCard(crd);
                     	else return false;
                     }
