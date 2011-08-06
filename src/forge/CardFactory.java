@@ -22192,43 +22192,106 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if (cardName.equals("Oust")) {
-        	/*
-        	 * Put target creature into its owner's library second from the
-        	 * top. Its controller gains 3 life.
-        	 */
-        	final SpellAbility spell = new Spell(card){
-				private static final long serialVersionUID = 4305992990847699048L;
+            /*
+             * Put target creature into its owner's library second from the
+             * top. Its controller gains 3 life.
+             */
+            final SpellAbility spell = new Spell(card){
+                private static final long serialVersionUID = 4305992990847699048L;
 
-				@Override
-				public void resolve() {
-					Card c = getTargetCard();
-					if(null != c) {
-						PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
-						PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-						play.remove(c);
-						if (!c.isToken())
-							lib.add(c, 1); //add second from top
-						PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-						life.addLife(3);
-					}
-				}
-				
-				@Override
-        		public void chooseTargetAI() {
-        			CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
-        			setTargetCard(CardFactoryUtil.AI_getBestCreature(creatures));
-        		}//chooseTargetAI()
-				
-				@Override
-        		public boolean canPlayAI() {
-					return AllZoneUtil.getCreaturesInPlay(Constant.Player.Human).size() > 0;
-        		}
-        	};
-        	
-        	spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
+                @Override
+                public void resolve() {
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                    
+                        Card tgt = getTargetCard();
+                        if (null != tgt) {
+                            if (tgt.isToken()) {
+                                AllZone.GameAction.removeFromGame(tgt);
+                            } else {
+                                PlayerZone lib = AllZone.getZone(Constant.Zone.Library, tgt.getOwner());
+                                PlayerZone play = AllZone.getZone(Constant.Zone.Play, tgt.getController());
+                                play.remove(tgt);
+                                if (lib.size() > 0) {
+                                    lib.add(tgt, 1); //add second from top if lib not empty
+                                } else {
+                                    lib.add(tgt); //add to top if lib is empty
+                                }
+                            }//else
+                            PlayerLife life = AllZone.GameAction.getPlayerLife(tgt.getController());
+                            life.addLife(3);
+                        }
+                    }//if isCardInPlay() && canTarget()
+                }//resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                    return getHumanCreatures().size() != 0;
+                }//canPlayAI()
+                
+                @Override
+                public void chooseTargetAI() {
+                    Card best = CardFactoryUtil.AI_getBestCreature(getHumanCreatures());
+                    setTargetCard(best);
+                }//chooseTargetAI()
+                
+                CardList getHumanCreatures() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature() 
+                                    && c.getNetAttack() > 2 
+                                    && CardFactoryUtil.canTarget(card, c);
+                        }
+                    });
+                    return list;
+                }//getHumanCreature()
+            };//SpellAbility
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
+        
+/* CH added additional checks and AI to this code, see code block above
+        //*************** START *********** START **************************
+        else if (cardName.equals("Oust")) {
+            final SpellAbility spell = new Spell(card){
+                private static final long serialVersionUID = 4305992990847699048L;
+
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    if(null != c) {
+                        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+                        play.remove(c);
+                        if (!c.isToken())
+                            lib.add(c, 1); //add second from top
+                        PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
+                        life.addLife(3);
+                    }
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+                    setTargetCard(CardFactoryUtil.AI_getBestCreature(creatures));
+                }//chooseTargetAI()
+                
+                @Override
+                public boolean canPlayAI() {
+                    return AllZoneUtil.getCreaturesInPlay(Constant.Player.Human).size() > 0;
+                }
+            };
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Guan Yu's 1,000-Li March")) {
