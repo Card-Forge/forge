@@ -10,4 +10,6 @@ K:1, tap, Sacrifice CARDNAME: Add G to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chromatic_star.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/251.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/314.jpg
 End

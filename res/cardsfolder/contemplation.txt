@@ -5,4 +5,5 @@ Text:no text
 K:WheneverKeyword:CastSpell/Controller:None:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever you cast a spell, you gain 1 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contemplation.jpg
+SetInfo:STH|Uncommon|http://magiccards.info/scans/en/sh/104.jpg
 End

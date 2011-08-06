@@ -4,4 +4,5 @@ Types:Enchantment
 Text:As Cover of Darkness comes into play, choose a creature type.\r\nCreatures of the chosen type have fear.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cover_of_darkness.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/133.jpg
 End

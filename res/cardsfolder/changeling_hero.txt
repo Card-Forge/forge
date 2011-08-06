@@ -7,4 +7,5 @@ K:Changeling
 K:Lifelink
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/changeling_hero.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/9.jpg
 End

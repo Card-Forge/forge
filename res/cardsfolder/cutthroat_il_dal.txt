@@ -6,4 +6,5 @@ PT:4/1
 K:stPumpSelf:Creature:0/0/Shadow:Hellbent:Hellbent - Cutthroat il-Dal has shadow as long as you have no cards in hand. (It can block or be blocked by only creatures with shadow.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cutthroat_il_dal.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/64.jpg
 End

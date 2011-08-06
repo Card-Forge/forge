@@ -6,4 +6,5 @@ SVar:BuffedBy:Creature
 SVar:AntiBuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/concordant_crossroads.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/93.jpg
 End

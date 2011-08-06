@@ -6,4 +6,6 @@ PT:2/2
 K:etbReturnTgt:1/MayReturn:Land:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cartographer.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/107.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/232.jpg
 End

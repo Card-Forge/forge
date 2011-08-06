@@ -5,4 +5,5 @@ Text:If Charging Bandits attacks, it gets +2/+0 until the end of the turn.
 PT:3/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/charging_bandits.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/6.jpg
 End

@@ -7,4 +7,8 @@ K:abDamageTgtV T:1:Creature.attacking,Creature.blocking:Crossbow Infantry deals 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crossbow_infantry.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/15.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/16.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/12.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/12.jpg
 End

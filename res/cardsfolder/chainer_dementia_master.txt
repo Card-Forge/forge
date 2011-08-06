@@ -6,4 +6,5 @@ PT:3/3
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chainer_dementia_master.jpg
+SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/56.jpg
 End

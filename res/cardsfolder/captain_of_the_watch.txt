@@ -8,4 +8,5 @@ K:etbMakeToken<>3<>Soldier<>W 1 1 Soldier<>Controller<>W<>Creature;Soldier<>1<>1
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/captain_of_the_watch.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/6.jpg
 End

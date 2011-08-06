@@ -4,4 +4,6 @@ Types:Sorcery
 Text:Take an extra turn after this one.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/capture_of_jingzhou.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/p3k/38.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/38.jpg
 End

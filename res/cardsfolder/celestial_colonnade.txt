@@ -7,4 +7,5 @@ K:tap: add U
 K:Comes into play tapped.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_colonnade.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/133.jpg
 End

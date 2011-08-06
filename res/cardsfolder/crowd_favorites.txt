@@ -7,4 +7,5 @@ K:abTapTgt 3 W:Creature:Tap target creature.
 K:abPump 3 W:+0/+5
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crowd_favorites.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/15.jpg
 End

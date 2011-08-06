@@ -7,4 +7,5 @@ K:5, tap: add W U B R G
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_quarry.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/318.jpg
 End

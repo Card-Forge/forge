@@ -6,4 +6,5 @@ PT:2/2
 K:abPump W:+0/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_templar.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/5.jpg
 End

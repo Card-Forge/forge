@@ -5,4 +5,5 @@ Text:Whenever an opponent plays a spell, you may reveal the top card of your lib
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/counterbalance.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/31.jpg
 End

@@ -9,4 +9,9 @@ K:tap: add R
 K:tap: add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/city_of_brass.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/322.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/413.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/321.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/85.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/327.jpg
 End

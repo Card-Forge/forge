@@ -5,4 +5,5 @@ Text:At the beginning of each upkeep, tap enchanted creature.
 K:Enchant Creature Curse
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_chains.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/139.jpg
 End

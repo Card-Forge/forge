@@ -6,4 +6,5 @@ K:spGainLifeTgt:X:Target player gains 2 life for each creature on the battlefiel
 SVar:X:Count$TypeOnBattlefield.Creature/Times.2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/congregate.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/8.jpg
 End

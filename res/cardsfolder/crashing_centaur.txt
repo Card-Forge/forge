@@ -7,4 +7,5 @@ K:abPump G Discard<1/Any>:Trample
 K:stPumpSelf:Creature:2/2/Shroud:Threshold:Threshold - As long as seven or more cards are in your graveyard, Crashing Centaur gets +2/+2 and has shroud. (It can't be the target of spells or abilities.)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crashing_centaur.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/235.jpg
 End

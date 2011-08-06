@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Target opponent sacrifices a creature, discards three cards, then loses 5 life. You return a creature card from your graveyard to your hand, draw three cards, then gain 5 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_ultimatum.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/164.jpg
 End

@@ -6,4 +6,5 @@ PT:1/1
 K:abPumpTgtC Sac<1/CARDNAME>:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_thorns.jpg
+SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/123.jpg
 End

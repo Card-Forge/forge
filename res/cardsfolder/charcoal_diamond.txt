@@ -6,4 +6,7 @@ K:tap: add B
 K:Comes into play tapped.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charcoal_diamond.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/276.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/261.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/289.jpg
 End

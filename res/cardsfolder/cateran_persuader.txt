@@ -6,4 +6,5 @@ PT:2/1
 K:SearchMerc:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_persuader.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/124.jpg
 End

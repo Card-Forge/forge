@@ -4,4 +4,6 @@ Types:Artifact
 Text:At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/copper_tablet.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/240.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/239.jpg
 End

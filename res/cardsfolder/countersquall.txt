@@ -5,4 +5,5 @@ Text:Counter target noncreature spell. It's controller loses 2 life.
 K:spCounter:Spell:Type(Non-Creature):Graveyard:CC-LoseLife(2)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/countersquall.jpg
+SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/103.jpg
 End

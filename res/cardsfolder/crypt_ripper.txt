@@ -7,4 +7,5 @@ K:Haste
 K:abPump B:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_ripper.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/85.jpg
 End

@@ -5,4 +5,7 @@ Text:no text
 PT:2/1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5613.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/67.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/47.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/66.jpg
 End

@@ -7,4 +7,6 @@ K:Flying
 K:CARDNAME can block only creatures with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_spirit.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/48.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/26.jpg
 End

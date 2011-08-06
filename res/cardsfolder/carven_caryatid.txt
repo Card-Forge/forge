@@ -7,4 +7,5 @@ K:Defender
 K:When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carven_caryatid.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/155.jpg
 End

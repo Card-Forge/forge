@@ -6,4 +6,8 @@ K:spDestroyTgt:Artifact:NoRegen:Drawback$GainLifeTgtCtrlr/dX
 SVar:dX:Count$TgtCardManaCost
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crumble.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/149.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/98.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/123.jpg
+SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/62.jpg
 End

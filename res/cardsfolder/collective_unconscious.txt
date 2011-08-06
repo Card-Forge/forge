@@ -6,4 +6,6 @@ K:spDrawCards:X:Draw a card for each creature you control.:Collective Unconsciou
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/collective_unconscious.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/238.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/236.jpg
 End

@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Search your library for a card, then shuffle your library and put that card on top of it. You lose 2 life.
 SVar:Rarity:Rare
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/cruel_tutor.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/9.jpg
 End

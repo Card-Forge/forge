@@ -6,4 +6,5 @@ A:SP$Fetch | Cost$ B | Destination$ Hand | FetchType$ Mercenary | FetchNum$ 1 | 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_summons.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/126.jpg
 End

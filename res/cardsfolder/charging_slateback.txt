@@ -7,4 +7,5 @@ K:CARDNAME can't block.
 K:Morph:4 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/charging_slateback.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/194.jpg
 End

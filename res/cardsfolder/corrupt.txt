@@ -6,4 +6,8 @@ K:spDamageTgtCP:X:Drawback$YouGainLife/X:Corrupt deals damage equal to the numbe
 SVar:X:Count$TypeYouCtrl.Swamp
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupt.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/89.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/124.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/62.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/124.jpg
 End

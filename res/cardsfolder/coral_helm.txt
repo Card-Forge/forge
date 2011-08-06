@@ -6,4 +6,7 @@ K:abPumpTgtC 3 Discard<1/Random>:+2/+2
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_helm.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/359.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/328.jpg
+SetInfo:ATQ|Rare|http://magiccards.info/scans/en/aq/12.jpg
 End

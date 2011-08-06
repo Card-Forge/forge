@@ -7,4 +7,5 @@ A:SP$Token | Cost$ G | TokenAmount$ 1 | TokenName$ Squirrel | TokenColors$ Green
 K:Flashback:1 G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chatter_of_the_squirrel.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/233.jpg
 End

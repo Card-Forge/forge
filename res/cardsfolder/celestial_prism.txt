@@ -10,4 +10,8 @@ K:2, tap: add G
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_prism.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/236.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/239.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/322.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/235.jpg
 End

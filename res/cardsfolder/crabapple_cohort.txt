@@ -7,4 +7,5 @@ K:stPumpSelf:Creature:1/1:isPresent Creature.Green+Other+YouCtrl:CARDNAME gets +
 SVar:BuffedBy:Creature.Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crabapple_cohort.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/109.jpg
 End

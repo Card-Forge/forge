@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 #SVar:Picture:http://www.wizards.com/global/images/magic/general/command_of_unsummoning.jpg
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4255&type=card
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/49.jpg
 End

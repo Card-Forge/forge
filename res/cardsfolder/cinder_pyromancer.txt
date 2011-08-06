@@ -6,4 +6,5 @@ PT:0/1
 K:abDamageTgtP T:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_pyromancer.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/50.jpg
 End

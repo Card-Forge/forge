@@ -8,4 +8,5 @@ K:stPumpAll:Creature.Other+withFlanking+YouCtrl:0/0/Flanking:No Condition:Other 
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cavalry_master.jpg
+SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/6.jpg
 End

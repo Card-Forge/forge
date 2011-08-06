@@ -5,4 +5,5 @@ Text:Whenever Chambered Nautilus becomes blocked, you may draw a card.
 PT:2/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chambered_nautilus.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/64.jpg
 End

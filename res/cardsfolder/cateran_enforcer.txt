@@ -7,4 +7,5 @@ K:Fear
 K:SearchMerc:4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_enforcer.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/121.jpg
 End

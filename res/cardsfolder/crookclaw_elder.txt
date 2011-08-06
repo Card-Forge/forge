@@ -8,4 +8,5 @@ K:abDrawCards tapXType<2/Bird>:1:Draw a card.:Crookclaw Elder - draw a card
 K:abPumpTgtC tapXType<2/Wizard>:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crookclaw_elder.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/34.jpg
 End

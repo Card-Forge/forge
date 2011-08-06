@@ -6,4 +6,5 @@ K:spDamageAll:Player,Creature.withFlying:3:Claws of Wirewood deals 3 damage to e
 K:Cycling:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/claws_of_wirewood.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/114.jpg
 End

@@ -9,4 +9,5 @@ K:2, tap: add R
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/castle_sengir.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/138.jpg
 End

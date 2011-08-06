@@ -7,4 +7,7 @@ SVar:dX:Count$TgtCardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chastise.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/9.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/9.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/8.jpg
 End

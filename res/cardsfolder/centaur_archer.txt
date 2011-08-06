@@ -6,4 +6,5 @@ PT:3/2
 K:abDamageTgtV T:1:Creature.withFlying:Centaur Archer deals 1 damage to target creature with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_archer.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/360.jpg
 End

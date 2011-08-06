@@ -7,4 +7,5 @@ K:1, Sacrifice CARDNAME: Add U B R to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crosiss_attendant.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/300.jpg
 End

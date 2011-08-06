@@ -7,4 +7,5 @@ K:Double Strike
 K:abPump R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/char_rumbler.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/96.jpg
 End

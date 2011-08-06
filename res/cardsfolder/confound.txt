@@ -5,4 +5,5 @@ Text:Counter target spell that targets one or more creatures.\r\nDraw a card.
 K:spCounter:Spell:Targets(Creature):Graveyard:My-Draw(1)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/confound.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/22.jpg
 End

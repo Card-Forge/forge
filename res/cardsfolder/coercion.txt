@@ -5,4 +5,13 @@ Text:no text
 K:spDiscardOpp:RevealYouChoose:1:Target opponent reveals his or her hand. You choose a card from it. That player discards that card.:Coercion - opponent reveals hand and discards a card
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83034.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/122.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/7.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/70.jpg
+SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/6.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/70.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/118.jpg
+SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/4.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/119.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/69.jpg
 End

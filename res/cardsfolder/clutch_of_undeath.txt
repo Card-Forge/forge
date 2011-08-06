@@ -9,4 +9,5 @@ K:stPumpEnchanted:Creature.nonZombie:-3/-3:No Condition:no text
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clutch_of_undeath.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/61.jpg
 End

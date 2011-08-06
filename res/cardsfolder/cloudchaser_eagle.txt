@@ -7,4 +7,6 @@ K:Flying
 K:etbDestroyTgt:Enchantment
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudchaser_eagle.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/227.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/11.jpg
 End

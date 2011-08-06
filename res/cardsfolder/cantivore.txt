@@ -6,4 +6,5 @@ PT:1/1
 K:Vigilance
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cantivore.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/13.jpg
 End

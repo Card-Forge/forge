@@ -5,4 +5,6 @@ Text:no text
 PT:3/3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pr/en-us/card24574.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/66.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/31.jpg
 End

@@ -7,4 +7,5 @@ A:SP$Token | Cost$ 2 G | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Crea
 K:Flashback:3 G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_of_the_herd.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/231.jpg
 End

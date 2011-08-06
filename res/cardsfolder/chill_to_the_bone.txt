@@ -5,4 +5,5 @@ Text:Destroy target nonsnow creature.
 K:spDestroyTgt:Creature.nonSnow
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chill_to_the_bone.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/52.jpg
 End

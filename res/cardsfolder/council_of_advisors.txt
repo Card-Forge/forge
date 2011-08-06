@@ -6,4 +6,6 @@ PT:1/1
 K:When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/council_of_advisors.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/40.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/40.jpg
 End

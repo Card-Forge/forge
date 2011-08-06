@@ -7,4 +7,5 @@ K:Flying
 K:Haste
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5555.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/125.jpg
 End

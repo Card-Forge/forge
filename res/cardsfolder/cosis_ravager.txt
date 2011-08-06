@@ -6,4 +6,5 @@ PT:2/2
 K:WheneverKeyword:EntersBattleField:Type/Land:Play:Damage/1:NormalInput/Player:ASAP:Yes_No:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may have Cosi's Ravager deal 1 damage to target player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cosis_ravager.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/77.jpg
 End

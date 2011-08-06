@@ -6,4 +6,5 @@ PT:2/1
 K:WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Cackling Fiend enters the battlefield, each opponent discards a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cackling_fiend.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/121.jpg
 End

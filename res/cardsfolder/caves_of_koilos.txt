@@ -8,4 +8,7 @@ K:paintap:1:B
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caves_of_koilos.jpg
+SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/140.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/320.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/350.jpg
 End

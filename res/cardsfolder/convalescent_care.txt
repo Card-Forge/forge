@@ -4,4 +4,5 @@ Types:Enchantment
 Text:At the beginning of your upkeep, if you have 5 life or less, you gain 3 life and draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/convalescent_care.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/14.jpg
 End

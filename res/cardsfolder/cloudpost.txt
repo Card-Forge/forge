@@ -7,4 +7,5 @@ K:tap: add 1 to your mana pool for each Locus on the battlefield.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudpost.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/280.jpg
 End

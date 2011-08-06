@@ -7,4 +7,5 @@ K:Flying
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/gu/en-us/card11588.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/29.jpg
 End

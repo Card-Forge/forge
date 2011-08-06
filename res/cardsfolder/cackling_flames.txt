@@ -6,4 +6,5 @@ K:spDamageTgtCP:X:Cackling Flames deals 3 damage to target creature or player. H
 SVar:X:Count$Hellbent.5.3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card107258.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/59.jpg
 End

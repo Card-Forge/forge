@@ -8,4 +8,5 @@ A:SP$Pump | Cost$ R | ValidTgts$ Creature | KW$ Haste | TgtPrompt$ Select target
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_charm.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/163.jpg
 End

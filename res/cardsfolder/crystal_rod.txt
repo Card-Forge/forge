@@ -6,4 +6,12 @@ K:WheneverKeyword:CastSpell/Any:Color/blue:Play:ModifyLife/1:ControllingPlayer_S
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystal_rod.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/295.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/241.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/291.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/361.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/329.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/277.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/242.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/240.jpg
 End

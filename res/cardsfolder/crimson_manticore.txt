@@ -8,4 +8,7 @@ K:abDamageTgtV R T:1:Creature.attacking,Creature.blocking:Crimson Manticore deal
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_manticore.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/217.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/201.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/139.jpg
 End

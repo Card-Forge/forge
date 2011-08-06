@@ -7,4 +7,5 @@ K:Flanking
 A:AB$Regenerate | Cost$ 1 B B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cadaverous_knight.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/8.jpg
 End

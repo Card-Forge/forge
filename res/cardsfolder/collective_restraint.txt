@@ -4,4 +4,5 @@ Types:Enchantment
 Text:Domain - Creatures can't attack you unless their controller pays X for each creature he or she controls that's attacking you, where X is the number of basic land types among lands you control.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/collective_restraint.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/49.jpg
 End

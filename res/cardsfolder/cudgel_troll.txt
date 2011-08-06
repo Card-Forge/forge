@@ -6,4 +6,6 @@ PT:4/3
 A:AB$Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cudgel_troll.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/167.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/174.jpg
 End

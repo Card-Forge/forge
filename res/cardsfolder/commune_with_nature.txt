@@ -5,4 +5,6 @@ Text:Look at the top five cards of your library. You may reveal a creature card 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/commune_with_nature.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/204.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/256.jpg
 End

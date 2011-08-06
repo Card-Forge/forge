@@ -6,4 +6,5 @@ A:SP$Fetch | Cost$ G Sac<1/Land> | Destination$ Battlefield | FetchType$ Land | 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crop_rotation.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/98.jpg
 End

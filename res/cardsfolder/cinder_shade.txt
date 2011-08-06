@@ -8,4 +8,5 @@ K:abDamageTgtC R Sac<1/CARDNAME>:X:Cinder Shade deals damage equal to its power 
 SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_shade.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/240.jpg
 End

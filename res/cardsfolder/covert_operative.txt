@@ -6,4 +6,5 @@ PT:3/2
 K:Unblockable
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card30659.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/33.jpg
 End

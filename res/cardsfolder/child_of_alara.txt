@@ -6,4 +6,5 @@ PT:6/6
 K:Trample
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_alara.jpg
+SetInfo:CON|Mythic|http://magiccards.info/scans/en/cfx/101.jpg
 End

@@ -6,4 +6,5 @@ PT:2/3
 K:abPump 1 U:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cobalt_golem.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/157.jpg
 End

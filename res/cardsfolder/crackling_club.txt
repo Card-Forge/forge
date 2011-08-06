@@ -8,4 +8,5 @@ A:AB$DealDamage | Cost$ Sac<1/CARDNAME> | Tgt$C | NumDmg$1 | SpellDescription$ C
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crackling_club.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/93.jpg
 End

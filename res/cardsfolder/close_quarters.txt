@@ -5,4 +5,5 @@ Text:no text
 K:WheneverKeyword:BecomesBlocked:No_Initiator:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:Initiator - OwnedByController!SingleTarget:Whenever a creature you control becomes blocked, Close Quarters deals 1 damage to target creature or player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/close_quarters.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/184.jpg
 End

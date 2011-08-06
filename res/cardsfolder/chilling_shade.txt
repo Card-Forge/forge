@@ -7,4 +7,5 @@ K:Flying
 K:abPump S:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chilling_shade.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/53.jpg
 End

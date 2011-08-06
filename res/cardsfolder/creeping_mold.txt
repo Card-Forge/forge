@@ -5,4 +5,11 @@ Text:Destroy target artifact, enchantment or land.
 K:spDestroyTgt:Artifact,Enchantment,Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/creeping_mold.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/240.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/236.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/234.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/258.jpg
+SetInfo:VIS|Uncommon|http://magiccards.info/scans/en/vi/53.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/220.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/117.jpg
 End

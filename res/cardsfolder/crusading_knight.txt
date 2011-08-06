@@ -9,4 +9,5 @@ SVar:X:Count$Valid Swamp.YouDontCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crusading_knight.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/12.jpg
 End

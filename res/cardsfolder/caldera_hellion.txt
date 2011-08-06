@@ -6,4 +6,5 @@ PT:3/3
 K:Devour:1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caldera_hellion.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/95.jpg
 End

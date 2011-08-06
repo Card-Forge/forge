@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPumpCurse:-4/-1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clinging_darkness.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/80.jpg
 End

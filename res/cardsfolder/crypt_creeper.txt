@@ -7,4 +7,5 @@ A:AB$Retrieve | Cost$ Sac<1/CARDNAME> | Destination$ Exile | TgtPrompt$ Choose t
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_creeper.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/125.jpg
 End

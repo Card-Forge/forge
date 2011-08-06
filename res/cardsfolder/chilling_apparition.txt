@@ -6,4 +6,5 @@ PT:1/1
 A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chilling_apparition.jpg
+SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/59.jpg
 End

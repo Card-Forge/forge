@@ -5,4 +5,6 @@ Text:Enchanted land has "W W, Tap: Put a 0/1 white Caribou creature token onto t
 K:Enchant land you control
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caribou_range.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/290.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/235.jpg
 End

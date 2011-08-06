@@ -5,4 +5,5 @@ Text:no text
 A:SP$Bounce | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. Its controller draws a card. | SubAbility$ TgtCtrlrDraw/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_heel.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/32.jpg
 End

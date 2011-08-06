@@ -5,4 +5,5 @@ Text:At the beginning of your upkeep, each player discards a card.
 PT:2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_lethemancer.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/69.jpg
 End

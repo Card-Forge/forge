@@ -5,4 +5,5 @@ Text:Destroy all enchantments.
 K:spDestroyAll:Enchantment
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanfall.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/6.jpg
 End

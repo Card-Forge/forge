@@ -5,4 +5,6 @@ Text:When Civic Wayfinder enters the battlefield, you may search your library fo
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/civic_wayfinder.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/157.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/255.jpg
 End

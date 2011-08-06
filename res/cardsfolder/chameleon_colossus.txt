@@ -9,4 +9,5 @@ K:abPump 2 G G:+X/+X:Chameleon Colossus gets +X/+X until end of turn, where X is
 SVar:X:Count$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chameleon_colossus.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/116.jpg
 End

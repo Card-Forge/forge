@@ -7,4 +7,5 @@ K:Changeling
 K:Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/changeling_sentinel.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/6.jpg
 End

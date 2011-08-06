@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+1/+1/Mountainwalk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cave_sense.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/179.jpg
 End

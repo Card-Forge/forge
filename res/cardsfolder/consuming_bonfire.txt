@@ -6,4 +6,5 @@ A:SP$DealDamage | Cost$ 3 R R | ValidTgts$ Creature.nonElemental | NumDmg$ 4 | P
 A:SP$DealDamage | Cost$ 3 R R | ValidTgts$ Creature.Treefolk | NumDmg$ 7 | SpellDescription$ or CARDNAME deals 7 damage to target Treefolk creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consuming_bonfire.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/161.jpg
 End

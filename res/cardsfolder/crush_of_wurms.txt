@@ -7,4 +7,5 @@ A:SP$Token | Cost$ 6 G G G | TokenAmount$ 3 | TokenName$ Wurm | TokenColors$ Gre
 K:Flashback:9 G G G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crush_of_wurms.jpg
+SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/110.jpg
 End

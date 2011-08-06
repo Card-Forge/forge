@@ -9,4 +9,5 @@ SVar:X:Count$TypeYouCtrl.Mountain
 SVar:BuffedBy:Mountain
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/claws_of_valakut.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/75.jpg
 End

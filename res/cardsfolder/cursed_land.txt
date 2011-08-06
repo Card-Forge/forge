@@ -5,4 +5,9 @@ Text:At the beginning of the upkeep of enchanted land's controller, Cursed Land 
 K:Enchant land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_land.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/14.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/6.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/6.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/11.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/6.jpg
 End

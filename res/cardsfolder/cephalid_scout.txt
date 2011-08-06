@@ -7,4 +7,5 @@ K:Flying
 K:abDrawCards 2 U Sac<1/Land>:1:Draw a card.:Cephalid Scout - Controller draws a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_scout.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/74.jpg
 End

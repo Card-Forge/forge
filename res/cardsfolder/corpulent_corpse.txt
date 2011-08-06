@@ -7,4 +7,5 @@ K:Fear
 K:Suspend:5:B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpulent_corpse.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/98.jpg
 End

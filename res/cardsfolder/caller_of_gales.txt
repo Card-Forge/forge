@@ -6,4 +6,5 @@ PT:1/1
 K:abPumpTgtC 1 U T:Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/caller_of_gales.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/43.jpg
 End

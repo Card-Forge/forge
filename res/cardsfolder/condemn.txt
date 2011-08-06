@@ -7,4 +7,7 @@ SVar:dX:Count$TgtCardToughness
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/condemn.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/11.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/13.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/8.jpg
 End

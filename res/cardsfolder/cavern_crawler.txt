@@ -7,4 +7,5 @@ K:Mountainwalk
 K:abPump R:+1/-1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cavern_crawler.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/181.jpg
 End

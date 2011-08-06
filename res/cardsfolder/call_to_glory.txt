@@ -6,4 +6,5 @@ K:spAllPump:YouCtrl/Samurai:+1/+1:Drawback$UntapAllTypeYouCtrl.Creature:Untap al
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_glory.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/4.jpg
 End

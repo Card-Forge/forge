@@ -6,4 +6,5 @@ K:spPumpTgt:Flying
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloak_of_feathers.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/45.jpg
 End

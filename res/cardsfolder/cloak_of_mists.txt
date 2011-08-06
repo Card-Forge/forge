@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:HIDDEN Unblockable
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloak_of_mists.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/65.jpg
 End

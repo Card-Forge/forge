@@ -6,4 +6,5 @@ PT:1/1
 K:Islandwalk
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cold_eyed_selkie.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/149.jpg
 End

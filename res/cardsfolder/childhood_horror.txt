@@ -7,4 +7,5 @@ K:Flying
 K:stPumpSelf:Creature:2/2/CARDNAME can't block.:Threshold:Threshold - As long as seven or more cards are in your graveyard, Childhood Horror gets +2/+2 and can't block.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/childhood_horror.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/123.jpg
 End

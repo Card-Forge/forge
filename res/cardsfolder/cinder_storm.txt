@@ -5,4 +5,5 @@ Text:no text
 K:spDamageTgtCP:7
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_storm.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/93.jpg
 End

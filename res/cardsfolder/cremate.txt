@@ -6,4 +6,6 @@ A:SP$Retrieve | Cost$ B | Destination$ Exile | TgtPrompt$ Choose target card in 
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cremate.jpg
+SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/45.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/96.jpg
 End

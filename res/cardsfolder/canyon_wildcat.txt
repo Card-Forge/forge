@@ -6,4 +6,6 @@ PT:2/1
 K:Mountainwalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card45353.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/181.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/167.jpg
 End

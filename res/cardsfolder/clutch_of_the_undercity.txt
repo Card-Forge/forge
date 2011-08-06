@@ -6,4 +6,5 @@ A:SP$Bounce | Cost$ 1 U U B | ValidTgts$ Permanent | TgtPrompt$ Select target pe
 K:Transmute: 1 U B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clutch_of_the_undercity.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/197.jpg
 End

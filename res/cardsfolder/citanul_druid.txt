@@ -6,4 +6,5 @@ PT:1/1
 K:WheneverKeyword:CastSpell/Opponent:Type/Artifact:Play:+1+1 Counters/1:Self:ASAP:No_Condition:No Special Condition:Whenever an opponent casts an artifact spell, put a +1/+1 counter on Citanul Druid.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/citanul_druid.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/61.jpg
 End

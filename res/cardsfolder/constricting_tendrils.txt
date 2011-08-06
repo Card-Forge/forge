@@ -7,4 +7,5 @@ K:Cycling:2
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/constricting_tendrils.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/22.jpg
 End

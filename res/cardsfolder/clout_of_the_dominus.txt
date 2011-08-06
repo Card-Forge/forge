@@ -9,4 +9,5 @@ K:stPumpEnchanted:Creature.Red:1/1/Haste:No Condition:As long as enchanted creat
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clout_of_the_dominus.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/99.jpg
 End

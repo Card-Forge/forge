@@ -8,4 +8,5 @@ K:tap: add B
 K:tap: add R
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crumbling_necropolis.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/222.jpg
 End

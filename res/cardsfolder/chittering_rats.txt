@@ -5,4 +5,5 @@ Text:When Chittering Rats comes into play, target opponent randomly puts a card 
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card46096.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/39.jpg
 End

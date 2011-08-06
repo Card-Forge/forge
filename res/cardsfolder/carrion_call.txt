@@ -6,4 +6,6 @@ Text:Put two 1/1 green Insect creature tokens with infect onto the battlefield.
 A:SP$Token | Cost$ 3 G | TokenImage$ G 1 1 Insect Infect | TokenAmount$ 2 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Infect
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carrion_call.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/115.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/115.jpg
 End

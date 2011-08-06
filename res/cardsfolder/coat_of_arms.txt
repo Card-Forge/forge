@@ -5,4 +5,10 @@ Text:Each creature gets +1/+1 for each other creature on the battlefield that sh
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coat_of_arms.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/294.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/290.jpg
+SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/131.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/291.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/316.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/207.jpg
 End
