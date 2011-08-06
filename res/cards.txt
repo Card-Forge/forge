@@ -1,3 +1,46 @@
+Zodiac Dragon
+7 R R
+Legendary Creature Spirit
+no text
+8/8
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:Yes_No:No Special Condition:When Zodiac Dragon is put into your graveyard from the battlefield, you may return it to your hand.
+
+Rushwood Elemental
+G G G G G
+Creature Elemental
+no text
+4/4
+Trample
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:+1+1 Counters/1:Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may put a +1/+1 counter on Rushwood Elemental.
+
+Rumbling Slum
+1 R G G
+Creature Elemental
+no text
+5/5
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:ModifyLife/-1!ModifyLife/-1:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:ControllerUpkeep:At the beginning of your upkeep, Rumbling Slum deals 1 damage to each player.
+
+Kyren Sniper
+2 R
+Creature Goblin
+no text
+1/1
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:Damage/1:NormalInput/Player:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may have Kyren Sniper deal 1 damage to target player.
+
+Onslaught
+R
+Enchantment
+no text
+WheneverKeyword:CastSpell/Controller:Type/Creature:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:No Special Condition:Whenever you cast a creature spell, tap target creature.
+
+Soultether Golem
+2
+Artifact Creature Golem
+no text
+3/3
+WheneverKeyword:EntersBattleField:Type/Creature:Play:CustomCounter.TIME/1:Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another creature enters the battlefield under your control, put a time counter on Soultether Golem.
+Vanishing:1
+
 Recumbent Bliss
 2 W
 Enchantment Aura
@@ -39,7 +82,7 @@ Bushido 1
 WheneverKeyword:EntersBattleField:Self:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:No Special Condition:When Kitsune Dawnblade enters the battlefield, you may tap target creature.
 
 Somnomancer
-1 UW
+1 WU
 Creature Kithkin Wizard
 no text
 2/1
