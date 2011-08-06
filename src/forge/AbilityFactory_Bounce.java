@@ -20,34 +20,7 @@ public class AbilityFactory_Bounce {
 			@Override
 			public String getStackDescription(){
 			// when getStackDesc is called, just build exactly what is happening
-
-				 StringBuilder sb = new StringBuilder();
-				 String name = af.getHostCard().getName();
-				 String targetname = "";
-				 
-				
-				 Card tgt = getTargetCard();
-				 if (tgt != null)
-					 targetname = tgt.getName();
-				 else
-					 targetname = name;
-				 
-				 if(destination.equals("Hand"))
-					 sb.append(name).append(" - Return ").append(targetname).append(" to its owners hand.");
-				 
-				 if(destination.equals("TopofLibrary"))
-					 sb.append(name).append(" - Put ").append(targetname).append(" on top of its owner's library.");
-				 
-				 if(destination.equals("BottomofLibrary"))
-					 sb.append(name).append(" - Put ").append(targetname).append(" on the bottom of its owner's library.");
-				 
-				 if(destination.equals("ShuffleIntoLibrary"))
-					 sb.append(name).append(" - Shuffle ").append(targetname).append(" into its owner's library.");
-				 
-				 if(destination.equals("Exile"))
-					 sb.append(name).append(" - Exile ").append(targetname);
-				
-				 return sb.toString();
+				return bounceStackDescription(af, destination);
 			}
 			
 			public boolean canPlay(){
@@ -81,27 +54,8 @@ public class AbilityFactory_Bounce {
 			@Override
 			public String getStackDescription(){
 				// when getStackDesc is called, just build exactly what is happening
-
-					 StringBuilder sb = new StringBuilder();
-					 String name = af.getHostCard().getName();
-					 
-					 sb.append(name).append(" - Return ");
-					 
-					 ArrayList<Card> tgts = af.getAbTgt().getTargetCards();
-					 for(Card c : tgts)
-						 sb.append(c.getName()).append(" ");
-					 
-					 sb.append("to ");
-					 
-					 if (destination.equals("TopofLibrary"))
-                         sb.append("Top of Library");
-					 else if (destination.equals("BottomofLibrary"))
-						 sb.append("Bottom of Library");
-                     else
-					     sb.append(destination);
-
-					 return sb.toString();
-				}
+				return bounceStackDescription(af, destination);
+			}
 			
 			public boolean canPlay(){
 				// super takes care of AdditionalCosts
@@ -120,6 +74,43 @@ public class AbilityFactory_Bounce {
 			
 		};
 		return spBounce;
+	}
+	
+	public static String bounceStackDescription(AbilityFactory af, String destination){
+		 StringBuilder sb = new StringBuilder();
+		 Card host = af.getHostCard();
+		 
+		 sb.append(host.getName()).append(" - ");
+		 
+		 StringBuilder sbTargets = new StringBuilder();
+		 
+		 ArrayList<Card> tgts = af.getAbTgt().getTargetCards();
+		 if (tgts.size() == 0)
+			 tgts.add(af.getHostCard());
+		 
+		 for(Card c : tgts)
+			 sbTargets.append(" ").append(c.getName());
+		 
+		 String targetname = sbTargets.toString();
+		 
+		 String pronoun = tgts.size() > 1 ? " their " : " its ";
+		 
+		 if(destination.equals("Hand"))
+			 sb.append("Return").append(targetname).append(" to").append(pronoun).append("owners hand.");
+		 
+		 if(destination.equals("TopofLibrary"))
+			 sb.append("Put").append(targetname).append(" on top of").append(pronoun).append("owner's library.");
+		 
+		 if(destination.equals("BottomofLibrary"))
+			 sb.append("Put").append(targetname).append(" on the bottom of").append(pronoun).append("owner's library.");
+		 
+		 if(destination.equals("ShuffleIntoLibrary"))
+			 sb.append("Shuffle").append(targetname).append(" into").append(pronoun).append("owner's library.");
+		 
+		 if(destination.equals("Exile"))
+			 sb.append("Exile").append(targetname);
+		 
+		 return sb.toString();
 	}
 	
 	public static boolean bounceCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String destination){

@@ -322,7 +322,7 @@ public class AbilityFactory_Fetch {
 			AbilityFactory af = AF;
 			
 			public boolean canPlayAI(){
-				return fetchCanPlayAI(this, AF);
+				return retrieveCanPlayAI(this, AF);
 			}
 			
 			public boolean canPlay(){
@@ -330,6 +330,12 @@ public class AbilityFactory_Fetch {
 				// make sure there's a legal Target
 				
 				return super.canPlay();	
+			}
+			
+			@Override
+			public String getStackDescription(){
+			// when getStackDesc is called, just build exactly what is happening
+				return retrieveStackDescription(af, this);
 			}
 			
 			@Override
@@ -359,6 +365,12 @@ public class AbilityFactory_Fetch {
 			}
 			
 			@Override
+			public String getStackDescription(){
+			// when getStackDesc is called, just build exactly what is happening
+				return retrieveStackDescription(af, this);
+			}
+			
+			@Override
 			public void resolve() {
 				doRetrieve(af, this);
 			}		
@@ -366,6 +378,70 @@ public class AbilityFactory_Fetch {
 		if (spRetrieve.getTarget() != null && !AF.getMapParams().containsKey("TgtZone"))
 			spRetrieve.getTarget().setZone(Constant.Zone.Graveyard);
 		return spRetrieve;
+	}
+	
+	public static String retrieveStackDescription(AbilityFactory af, SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
+		String destination = params.get("Destination");
+		 StringBuilder sb = new StringBuilder();
+		 Card host = af.getHostCard();
+		 
+		 sb.append(host.getName()).append(" - ");
+		 
+		 if (params.containsKey("Defined"))
+			 return sb.toString() + params.get("SpellDescription");
+		 
+		 StringBuilder sbTargets = new StringBuilder();
+
+		 ArrayList<Card> tgts;
+		 if (af.getAbTgt() != null)
+			 tgts = af.getAbTgt().getTargetCards();
+		 else{
+			 // otherwise add self to list and go from there
+			 tgts = new ArrayList<Card>();
+			 tgts.add(af.getHostCard());
+		 }
+		 
+		 for(Card c : tgts)
+			 sbTargets.append(" ").append(c.getName());
+		 
+		 String targetname = sbTargets.toString();
+		 
+		 String pronoun = tgts.size() > 1 ? " their " : " its ";
+		 
+		 if (destination.equals("Battlefield")){
+			 sb.append("Put").append(targetname).append(" onto the battlefield");
+        	if (params.containsKey("Tapped"))
+        		sb.append(" tapped");
+        	if (params.containsKey("GainControl"))
+        		sb.append(" under your control");
+        	sb.append(".");
+		 }
+		 
+		 if(destination.equals("Hand"))
+			 sb.append("Return").append(targetname).append(" to").append(pronoun).append("owners hand.");
+		 
+	     if (destination.equals("Library")){
+	    	 if (params.containsKey("Shuffle"))	// for things like Gaea's Blessing
+	    		 sb.append("Shuffle").append(targetname).append(" into").append(pronoun).append("owner's library.");
+	    	 else{
+	 		 	int libraryPosition = 0;        // this needs to be zero indexed. Top = 0, Third = 2, -1 = Bottom
+			    if (params.containsKey("LibraryPosition"))
+			    	libraryPosition = Integer.parseInt(params.get("LibraryPosition"));
+			    
+			    if (libraryPosition == -1)
+			    	sb.append("Put").append(targetname).append(" on the bottom of").append(pronoun).append("owner's library.");
+			    else if (libraryPosition == 0)
+			    	sb.append("Put").append(targetname).append(" on top of").append(pronoun).append("owner's library.");
+			    else
+			    	sb.append("Put").append(targetname).append("").append(libraryPosition-1).append(" from the top of").append(pronoun).append("owner's library.");
+	    	 }
+	     }
+		 
+		 if(destination.equals("Exile"))
+			 sb.append(" - Exile").append(targetname);
+		 
+		 return sb.toString();
 	}
 	
 	private static Card retrieveDetermineDefined(String defined, Player player){
