@@ -2,7 +2,7 @@ Name:Elven Cache
 ManaCost:2 G G
 Types:Sorcery
 Text:Return target card from your graveyard to your hand.
-K:spReturnTgt:1:Artifact,Creature,Enchantment,Land,Instant,Sorcery:Hand
+K:spReturnTgt:1:Artifact,Creature,Enchantment,Land,Instant,Sorcery,Planeswalker:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_cache.jpg
 End

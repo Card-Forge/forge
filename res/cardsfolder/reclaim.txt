@@ -2,7 +2,7 @@ Name:Reclaim
 ManaCost:G
 Types:Instant
 Text:Put target card from your graveyard on top of your library.
-K:spReturnTgt:1:Artifact,Creature,Enchantment,Land,Instant,Sorcery:TopofLibrary
+K:spReturnTgt:1:Artifact,Creature,Enchantment,Land,Instant,Sorcery,Planeswalker:TopofLibrary
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reclaim.jpg
