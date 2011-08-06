@@ -1,8 +1,8 @@
-Name:Noble Purpose
-ManaCost:3 W W
+Name:Rite of Passage
+ManaCost:2 G
 Types:Enchantment
 Text:no text
-K:stPumpAll:Creature.YouCtrl:0/0/HIDDEN Whenever CARDNAME deals damage, you gain that much life.:No Condition:Whenever a creature you control is dealt damage, put a +1/+1 counter on it. (The damage is dealt before the counter is put on.)
+K:stPumpAll:Creature.YouCtrl:0/0/HIDDEN Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.:No Condition:Whenever a creature you control is dealt damage, put a +1/+1 counter on it. (The damage is dealt before the counter is put on.)
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rite_of_passage.jpg
 End
