@@ -1821,6 +1821,7 @@ res/cardsfolder/elven_fortress.txt -text svneol=native#text/plain
 res/cardsfolder/elven_lyre.txt -text svneol=native#text/plain
 res/cardsfolder/elven_palisade.txt -text svneol=native#text/plain
 res/cardsfolder/elven_riders.txt -text svneol=native#text/plain
+res/cardsfolder/elven_rite.txt -text svneol=native#text/plain
 res/cardsfolder/elven_warhounds.txt -text svneol=native#text/plain
 res/cardsfolder/elves_of_deep_shadow.txt -text svneol=native#text/plain
 res/cardsfolder/elvish_aberration.txt -text svneol=native#text/plain
