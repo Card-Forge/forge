@@ -18,7 +18,7 @@ public class Trigger_TapsUntaps extends Trigger {
 		{
 			if(!Action.equals(mapParams.get("Action")))
 			{
-				System.out.println("Test failed: Wrong action. (should be " + mapParams.get("Action") + "but was " + Action);
+				System.out.println("Test failed: Wrong action. (should be " + mapParams.get("Action") + " but was " + Action + ")");
 				return false;
 			}
 		}

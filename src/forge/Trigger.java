@@ -100,89 +100,50 @@ public abstract class Trigger {
 			}
 		}
 		
-		if(mapParams.containsKey("ControlsNoValid"))
-		{
-			for(Card c : AllZoneUtil.getCardsInZone(Constant.Zone.Battlefield, hostCard.getController()))
+		if (mapParams.containsKey("IsPresent")){
+			String sIsPresent = mapParams.get("IsPresent");
+			String presentCompare = "GE1";
+			if(mapParams.containsKey("PresentCompare"))
 			{
-				if(c.isValidCard(mapParams.get("ControlsNoValid").split(","), hostCard.getController(), hostCard))
-				{
-					System.out.println("Requirement failed: Controlled a forbidden permanent.");
-					return false;
-				}
+				presentCompare = mapParams.get("PresentCompare");
 			}
-		}
-		
-		if(mapParams.containsKey("ControlsValid"))
-		{
-			boolean foundValid = false;
-			for(Card c : AllZoneUtil.getCardsInZone(Constant.Zone.Battlefield, hostCard.getController()))
-			{
-				if(c.isValidCard(mapParams.get("ControlsValid").split(","), hostCard.getController(), hostCard))
-				{
-					foundValid = true;
-				}
-			}
+			CardList list = AllZoneUtil.getCardsInPlay();
 			
-			if(!foundValid)
+			list = list.getValidCards(sIsPresent.split(","), hostCard.getController(), hostCard);
+			
+			int right = 1;
+			String rightString = presentCompare.substring(2);
+			if(rightString.equals("X")) {
+				right = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
+			}
+			else {
+				right = Integer.parseInt(presentCompare.substring(2));
+			}
+			int left = list.size();
+			
+			if (!Card.compare(left, presentCompare, right))
 			{
-				System.out.println("Requirement failed: Did not control required permanent.");
+				System.out.println("Requirement failed: Required valid not present.");
 				return false;
 			}
+				
 		}
 		
-		if(mapParams.containsKey("RequireCounters"))
+		if(mapParams.containsKey("CardsIn"))
 		{
-			for(String counterOper : mapParams.get("RequireCounters").split(","))
+			for(String OCIOper : mapParams.get("OpponentCardsIn").split(","))
 			{
-				System.out.println(counterOper);
-				String[] splitCO = counterOper.split("\\.");
-				System.out.println(splitCO[0]);
-				System.out.println(splitCO[1]);
-				int amt = hostCard.getCounters(Counters.valueOf(splitCO[0]));
+				String[] splitOCIO = OCIOper.split("\\.");
+				Player player = splitOCIO[0].equals("You") ? hostCard.getController() : hostCard.getController().getOpponent();
+				int amt = AllZoneUtil.getCardsInZone(splitOCIO[1], player).size();
 				
-				String operator = splitCO[1].substring(0, 2);
-				String operand = splitCO[1].substring(2);
-				System.out.println("op:" + operator);
+				String operator = splitOCIO[2].substring(0,2);
+				int operand = Integer.parseInt(splitOCIO[2].substring(2));
 				
-				if(operator.equals("LT"))
+				if(!Card.compare(amt,operator,operand))
 				{
-					if(!(amt < Integer.parseInt(operand)))
-					{
-						System.out.println("Requirement failed: Did not have counters of type " + splitCO[0] + " of amount less than " + operand + ".");
-						return false;
-					}
-				}
-				else if(operator.equals("LE"))
-				{
-					if(!(amt <= Integer.parseInt(operand)))
-					{
-						System.out.println("Requirement failed: Did not have counters of type " + splitCO[0] + " of amount less than or equal to " + operand + ".");
-						return false;
-					}
-				}
-				if(operator.equals("EQ"))
-				{
-					if(!(amt == Integer.parseInt(operand)))
-					{
-						System.out.println("Requirement failed: Did not have counters of type " + splitCO[0] + " of amount equal to " + operand + ".");
-						return false;
-					}
-				}
-				else if(operator.equals("GE"))
-				{					
-					if(!(amt >= Integer.parseInt(operand)))
-					{
-						System.out.println("Requirement failed: Did not have counters of type " + splitCO[0] + " of amount greater than or equal to " + operand + ".");
-						return false;
-					}
-				}
-				else if(operator.equals("GT"))
-				{
-					if(!(amt > Integer.parseInt(operand)))
-					{
-						System.out.println("Requirement failed: Did not have counters of type " + splitCO[0] + " of amount greater than " + operand + ".");
-						return false;
-					}
+					System.out.println("Requirement failed: Required cards not present/too many cards present.");
+					return false;
 				}
 			}
 		}
