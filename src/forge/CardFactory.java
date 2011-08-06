@@ -18428,7 +18428,52 @@ public class CardFactory implements NewConstants {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if (cardName.equals("Perish the Thought")) {
+        	final SpellAbility spell = new Spell(card){
+        		private static final long serialVersionUID = -3317966427398220444L;
 
+        		@Override
+        		public void resolve() {
+        			String player = card.getController();
+        			String target = AllZone.GameAction.getOpponent(player);
+
+        			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, target);
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, target);
+
+        			CardList handList = new CardList(hand.getCards());
+
+        			//choose one card from it
+        			if(player.equals(Constant.Player.Human)){ 
+        				Object o = AllZone.Display.getChoice("Put into library", handList.toArray());
+        				//if(o == null) break;
+        				Card c_1 = (Card) o;
+        				if( c_1 != null ) {
+        					hand.remove(c_1);
+        					lib.add(c_1);
+        				}
+        			}
+        			else { //computer
+        				Card[] c = AllZone.getZone(Constant.Zone.Hand, target).getCards();
+        				if(c.length != 0) {
+        					Card toLib = CardUtil.getRandom(c);
+        					hand.remove(toLib);
+        					lib.add(toLib);
+        				}
+        			}
+        			AllZone.GameAction.shuffle(target);
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human).size() > 0;
+        		}
+        	};
+
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
