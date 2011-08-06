@@ -3364,10 +3364,10 @@ public class CardFactory_Creatures {
                     {
                         Card human = CardFactoryUtil.AI_getBestCreature(CardFactoryUtil.AI_getHumanCreature(card,
                                 true));
-                        ability.setTargetCard(human);
-                        
-
                         if(human == null) ability.setTargetCard(card);
+                        else
+                        	ability.setTargetCard(human);
+                        
                         
                         AllZone.Stack.add(ability);
                     }//else
