@@ -2784,6 +2784,8 @@ public class Card extends MyObservable {
             	 for(int i = 0; i < parse.length; i++) {
             		 System.out.println("parse["+i+"]: "+parse[i]);
             	 }*/
+            	 
+            	 // TODO: get a working regex out of this pattern so the amount of digits doesn't matter
             	int number = 0;
               	if (Property.substring(10,11).equals("X"))
               		number = CardFactoryUtil.xCount(source, getSVar("X"));

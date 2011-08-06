@@ -1930,31 +1930,7 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Door to Nothingness")) {
-        	Target target = new Target(card,"Select target player", new String[] {"Player"});
-        	Cost abCost = new Cost("G G R R B B U U W W T Sac<1/CARDNAME>", cardName, true);
-        	Ability_Activated ab1 = new Ability_Activated(card, abCost, target) {
-                
-                private static final long serialVersionUID = 6665327569823149191L;
-                
-                @Override
-                public void resolve() {
-                    getTargetPlayer().altLoseConditionMet("Door to Nothingness");
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return true;
-                }
-            };
-            ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            ab1.setDescription(abCost+"Target player loses the game.");
-            card.addSpellAbility(ab1);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Kaervek's Spite")) {

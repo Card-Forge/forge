@@ -591,6 +591,24 @@ public class AbilityFactory {
 				SA = AbilityFactory_Effect.createDrawbackEffect(this);
 		}
 		
+		if (API.equals("WinsGame")){
+			if(isAb)
+				SA = AbilityFactory_EndGameCondition.createAbilityWinsGame(this);
+			else if(isSp)
+				SA = AbilityFactory_EndGameCondition.createSpellWinsGame(this);
+			else if(isDb)
+				SA = AbilityFactory_EndGameCondition.createDrawbackWinsGame(this);
+		}
+		
+		if (API.equals("LosesGame")){
+			if(isAb)
+				SA = AbilityFactory_EndGameCondition.createAbilityLosesGame(this);
+			else if(isSp)
+				SA = AbilityFactory_EndGameCondition.createSpellLosesGame(this);
+			else if(isDb)
+				SA = AbilityFactory_EndGameCondition.createDrawbackLosesGame(this);
+		}
+		
 		if (SA == null)
 			throw new RuntimeException("AbilityFactory : SpellAbility was not created for "+hostCard.getName()+". Looking for API: "+API);
 

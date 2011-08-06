@@ -82,7 +82,6 @@ public class GameActionUtil {
 		// Checks for can't win or can't lose happen in Player.altWinConditionMet()
 		upkeep_Battle_of_Wits();
 		upkeep_Mortal_Combat();
-		upkeep_Epic_Struggle();
 		upkeep_Near_Death_Experience();
 		upkeep_Test_of_Endurance();
 		upkeep_Helix_Pinnacle();
@@ -4746,38 +4745,6 @@ public class GameActionUtil {
 
 		}// if
 	}// upkeep_Mortal Combat
-
-	private static void upkeep_Epic_Struggle() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Epic Struggle");
-
-		CardList creats = new CardList(playZone.getCards());
-		creats = creats.getType("Creature");
-
-		if(0 < list.size() && creats.size() >= 20) {
-			final Card source = list.get(0);
-			Ability ability = new Ability(source, "0") {
-				@Override
-				public void resolve() {
-					CardList creats = new CardList(playZone.getCards());
-					creats = creats.getType("Creature");
-					
-					if (creats.size() >= 20)
-						player.altWinConditionMet(source.getName());
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Epic Struggle - ").append(player).append(" wins the game");
-			ability.setStackDescription(sb.toString());
-
-            AllZone.Stack.addSimultaneousStackEntry(ability);
-
-		}// if
-	}// upkeep_Epic_Struggle
 
 	private static void upkeep_Helix_Pinnacle() {
 		final Player player = AllZone.Phase.getPlayerTurn();
