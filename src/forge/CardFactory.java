@@ -4868,8 +4868,8 @@ public class CardFactory implements NewConstants {
                 	return creatures.size() > 0;
                 }
             };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
+            card.clearFirstSpellAbility();
+            card.addFirstSpellAbility(spell);
         }
         //*************** END ************ END *************************
         
