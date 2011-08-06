@@ -1,0 +1,9 @@
+Name:Frenetic Raptor
+ManaCost:5 R
+Types:Creature Lizard Beast
+Text:no text
+PT:6/6
+K:stPumpAll:Beast:0/0/HIDDEN CARDNAME can't block.:No Condition:Beasts can't block.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/frenetic_raptor.jpg
+End
