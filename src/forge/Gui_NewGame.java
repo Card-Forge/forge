@@ -783,9 +783,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     public static class CardSizesAction extends AbstractAction {
         
         private static final long serialVersionUID = -2900235618450319571L;
-        private String[]          keys             = {"Tiny", "Small", "Medium", "Large"};
-        private int[]             widths           = {42, 63, 70, 93};
-        private int[]             heights          = {59, 88, 98, 130};
+        private String[]          keys             = {"Tiny", "Smaller", "Small", "Medium", "Large", "Huge"};
+        private int[]             widths           = {36, 42, 63, 70, 93,  120};
+        private int[]             heights          = {50, 59, 88, 98, 130, 168};
         
         public CardSizesAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_SIZES));
