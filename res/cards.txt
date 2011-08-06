@@ -1,3 +1,71 @@
+Undead Warchief
+2 B B
+Creature Zombie 
+Zombie spells you cast cost 1 less to cast.\r\nZombie creatures you control get +2/+1.
+1/1
+CostChange:Player:Less:1:Spell:All:Zombie:NoSpecial
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_warchief.jpg
+
+Vampiric Embrace
+2 B B
+Enchantment Aura
+Enchanted creature gets +2/+2 and has flying.\r\nWhenever a creature dealt damage by enchanted creature this turn is put into a graveyard, put a +1/+1 counter on that creature.
+Enchant creature
+enPump:+2/+2/Flying & Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_embrace.jpg
+
+Voracious Hatchling
+3 WB
+Creature Elemental
+Voracious Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling.\r\nWhenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.
+6/6
+Lifelink
+SVar:BuffedBy:Spell.White,Spell.Black
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Voracious_Hatchling.jpg
+
+Wispmare
+2 W
+Creature Elemental
+When Wispmare enters the battlefield, destroy target enchantment.
+1/3
+Flying
+etbDestroyTgt:Enchantment
+SVar:Evoke:W
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wispmare.jpg
+
+Witch-Maw Nephilim
+G W U B
+Creature Nephilim
+Whenever you play a spell, you may put two +1/+1 counters on Witch-Maw Nephilim.\r\nWhenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
+1/1
+SVar:BuffedBy:Spell
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_maw_nephilim.jpg
+
+Wren's Run Packmaster
+3 G
+Creature Elf Warrior
+Champion an Elf.\r\nEach Wolf you control has deathtouch.
+5/5
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wrens_run_packmaster.jpg
+
+Yavimaya's Embrace
+5 G U U
+Enchantment Aura
+You control enchanted creature.\r\nEnchanted creature gets +2/+2 and has trample.
+Enchant creature
+enPump:+2/+2/Trample
+enControlCreature
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimayas_embrace.jpg
+
 Tattermunge Duo
 2 RG
 Creature Goblin Warrior Shaman
@@ -32976,16 +33044,6 @@ Unearth:2 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_leotau.jpg
 
-Undead Warchief
-2 B B
-Creature Zombie 
-Zombie spells you cast cost 1 less to cast. Zombie creatures you control get +2/+1.
-1/1
-CostChange:Player:Less:1:Spell:All:Zombie:NoSpecial
-SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_warchief.jpg
-
 Undercity Shade
 4 B
 Creature Shade
@@ -33431,15 +33489,6 @@ Play with the top card of your library revealed.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_nocturnus.jpg
-
-Vampiric Embrace
-2 B B
-Enchantment Aura
-Enchanted creature gets +2/+2 and has flying. Whenever a creature dealt damage by enchanted creature this turn is put into a graveyard, put a +1/+1 counter on that creature.
-Enchant creature
-enPump:+2/+2/Flying & Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_embrace.jpg
 
 Vampiric Feast
 5 B B
@@ -34390,16 +34439,6 @@ no text
 1/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10483.jpg
-
-Voracious Hatchling
-3 WB
-Creature Elemental
-Voracious Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling. Whenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.
-6/6
-Lifelink
-SVar:BuffedBy:Spell.White,Spell.Black
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Voracious_Hatchling.jpg
 
 Vorosh, the Hunter
 3 G U B
@@ -35771,16 +35810,6 @@ WheneverKeyword:EntersBattleField:Type/Beast:Play:DrawCards/1:ControllingPlayer_
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_savage.jpg
 
-Wispmare
-2 W
-Creature Elemental
-When Wispmare enters the battlefield, destroy target enchantment.
-1/3
-etbDestroyTgt:Enchantment
-SVar:Evoke:W
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wispmare.jpg
-
 Wistful Selkie
 GU GU GU
 Creature Merfolk Wizard
@@ -35798,15 +35827,6 @@ spDrawCardsTgt:2:Drawback$TgtDiscard/4:Target player draws two cards, then disca
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wistful_thinking.jpg
-
-Witch-Maw Nephilim
-G W U B
-Creature Nephilim
-Whenever you play a spell, you may put two +1/+1 counters on Witch-Maw Nephilim. Whenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
-1/1
-SVar:BuffedBy:Spell
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_maw_nephilim.jpg
 
 Wit's End
 5 B B
@@ -36057,15 +36077,6 @@ spDiscardTgt:TgtChoose:2/UnlessDiscardType.Artifact:Target player discards two c
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrench_mind.jpg
 
-Wren's Run Packmaster
-3 G
-Creature Elf Warrior
-Champion an Elf. Each Wolf you control has deathtouch.
-5/5
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wrens_run_packmaster.jpg
-
 Wretched Anurid
 1 B
 Creature Zombie Frog Beast
@@ -36233,16 +36244,6 @@ no text
 Trample
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/bd/en-us/card26631.jpg
-
-Yavimaya's Embrace
-5 G U U
-Enchantment Aura
-You control enchanted creature. Enchanted creature gets +2/+2 and has trample.
-Enchant creature
-enPump:+2/+2/Trample
-enControlCreature
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimayas_embrace.jpg
 
 Yawgmoth's Bargain
 4 B B
