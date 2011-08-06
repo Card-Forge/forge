@@ -2,7 +2,7 @@ Name:Jalum Tome
 ManaCost:3
 Types:Artifact
 Text:no text
-K:abDrawCards 2 T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Jalum Tome - draw a card and discard a card
+A:AB$Draw | Cost$ 2 T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ YouDiscard/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jalum_tome.jpg
 End

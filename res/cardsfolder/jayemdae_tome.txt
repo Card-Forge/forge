@@ -2,7 +2,7 @@ Name:Jayemdae Tome
 ManaCost:4
 Types:Artifact
 Text:no text
-K:abDrawCards 4 T:1:Draw a card.:Jayemdae Tome - draw a card
+A:AB$Draw | Cost$ 4 T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jayemdae_tome.jpg
 End

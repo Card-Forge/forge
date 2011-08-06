@@ -2,9 +2,8 @@ Name:Jandor's Ring
 ManaCost:6
 Types:Artifact
 Text:no text
-K:abDrawCards 2 T Discard<1/LastDrawn>:1:Draw a card.:Jandor's Ring - Draw a card.
+A:AB$Draw | Cost$ 2 T Discard<1/LastDrawn> | NumCards$ 1 | SpellDescription$  Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jandors_ring.jpg
 End
-  
