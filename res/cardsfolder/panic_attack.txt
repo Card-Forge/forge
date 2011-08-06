@@ -3,4 +3,6 @@ ManaCost:2 R
 Types:Sorcery
 Text:no text
 A:SP$Pump|Cost$2 R|ValidTgts$Creature|TargetMin$1|TargetMax$3|KW$CARDNAME can't block.|TgtPrompt$Select target creature.|SpellDescription$Up to three target creatures can't block this turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/panic_attack.jpg
 End
