@@ -2409,48 +2409,48 @@ public class GameActionUtil {
         }
     }// Witch-Maw Nephilim
 
-	public static void playCard_Gelectrode(Card c) {
-		final Player controller = c.getController();
+    public static void playCard_Gelectrode(Card c) {
+        final Player controller = c.getController();
 
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
+        final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
 
-		CardList list = new CardList();
-		list.addAll(play.getCards());
+        CardList list = new CardList();
+        list.addAll(play.getCards());
 
-		list = list.getName("Gelectrode");
+        list = list.getName("Gelectrode");
 
-		if(list.size() > 0 && (c.getType().contains("Instant") || c.getType().contains("Sorcery")) && !c.isCopiedSpell()) {
+        if (list.size() > 0 && (c.getType().contains("Instant") || c.getType().contains("Sorcery")) && !c.isCopiedSpell()) {
 
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
+            for (int i = 0; i < list.size(); i++) {
+                final Card card = list.get(i);
 
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
+                Ability ability2 = new Ability(card, "0") {
+                    @Override
+                    public void resolve() {
 
-						if(card.getController().equals(AllZone.HumanPlayer)) {
-							String[] choices = {"Yes", "No"};
-							Object choice = AllZone.Display.getChoice("Untap Gelectrode?", choices);
-							if(choice.equals("Yes")) {
-								card.untap();
-							}
-						}
-						if(card.getController().equals(AllZone.ComputerPlayer)) {
-							card.untap();
-						}
-					}
+                        if (card.getController().equals(AllZone.HumanPlayer)) {
+                            String question = "You cast an instant or sorcery spell, will you untap Gelectrode?";
+                            
+                            if (GameActionUtil.showYesNoDialog(card, question)) {
+                                card.untap();
+                            }
+                        }
+                        if (card.getController().equals(AllZone.ComputerPlayer)) {
+                            card.untap();
+                        }
+                    }
 
-				}; // ability2
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" played an instant or sorcery spell, you may untap Gelectrode.");
-				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
-			}
-		}
-	}// Gelectrode
+                }; // ability2
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append(card.getName()).append(" - ").append(c.getController());
+                sb.append(" played an instant or sorcery spell and may untap Gelectrode.");
+                ability2.setStackDescription(sb.toString());
+                
+                AllZone.Stack.add(ability2);
+            }
+        }
+    }// Gelectrode
 
     public static void playCard_Cinder_Pyromancer(Card c) {
         final Player controller = c.getController();
