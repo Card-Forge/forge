@@ -389,6 +389,31 @@ public class Card extends MyObservable {
             if (aux < 0)
             	aux = 0;
             counters.put(counterName, aux);
+			if(counterName.equals(Counters.TIME) && aux == 0)
+			{
+				if(getKeyword().contains("Vanishing") && AllZone.GameAction.isCardInPlay(this))
+					AllZone.GameAction.sacrifice(this);
+				if(hasSuspend() && AllZone.GameAction.isCardRemovedFromGame(this))
+				{
+					final Card c = this;
+					
+					c.setSuspendCast(true);
+
+					// TODO(sol): haste should wear off when player loses control. need to figure out where to add that.
+					Command intoPlay = new Command() {
+						private static final long serialVersionUID = -4514610171270596654L;
+
+						public void execute() {
+							if(AllZone.GameAction.isCardInPlay(c) && c.isCreature()) 
+								c.addExtrinsicKeyword("Haste");
+						}//execute()
+					};
+
+					c.addComesIntoPlayCommand(intoPlay);
+					AllZone.GameAction.playCardNoCost(c);
+					AllZone.getZone(c).remove(c);
+				}
+			}
             this.updateObservers();
         }
     }
@@ -405,7 +430,9 @@ public class Card extends MyObservable {
     }
     
     public void setCounter(Counters counterName, int n) {
-        counters.put(counterName, Integer.valueOf(n));
+        if(getCounters(counterName) > 0)
+        	addCounter(counterName, n-getCounters(counterName));
+        else subtractCounter(counterName, getCounters(counterName) - n);
         this.updateObservers();
     }
     

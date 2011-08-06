@@ -3439,27 +3439,7 @@ public class GameActionUtil {
 		
 		for(final Card c : list){
 			int counters = c.getCounters(Counters.TIME);
-			if (counters > 0)
-			{
-				c.setCounter(Counters.TIME, counters-1);
-				if (counters == 1){
-					c.setSuspendCast(true);
-
-			        // todo(sol): haste should wear off when player loses control. need to figure out where to add that.
-			        Command intoPlay = new Command() {
-			            private static final long serialVersionUID = -4514610171270596654L;
-			            
-			            public void execute() {
-			            	if(AllZone.GameAction.isCardInPlay(c) && c.isCreature()) 
-			                    c.addExtrinsicKeyword("Haste");
-			            }//execute()
-			        };
-					
-					c.addComesIntoPlayCommand(intoPlay);
-					AllZone.GameAction.playCardNoCost(c);
-					exile.remove(c);
-				}
-			}
+			if (counters > 0) c.subtractCounter(Counters.TIME, 1);
 		}
 	}//suspend	
 
@@ -7598,10 +7578,7 @@ public class GameActionUtil {
 				Ability ability = new Ability(card, "0") {
 					@Override
 					public void resolve() {
-						card.setCounter(Counters.TIME, card.getCounters(Counters.TIME) - 1);
-						if(card.getCounters(Counters.TIME) <= 0) {
-							AllZone.GameAction.sacrifice(card);
-						}
+						card.subtractCounter(Counters.TIME, 1);
 					}
 				}; // ability
 				ability.setStackDescription(card.getName()
@@ -7639,7 +7616,7 @@ public class GameActionUtil {
 						if (fadeCounters <= 0)
 							AllZone.GameAction.sacrifice(card);
 						else
-							card.setCounter(Counters.FADE, fadeCounters - 1);
+							card.subtractCounter(Counters.FADE, 1);
 					}
 				}; // ability
 				ability.setStackDescription(card.getName()
