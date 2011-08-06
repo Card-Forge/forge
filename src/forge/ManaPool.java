@@ -88,7 +88,7 @@ public class ManaPool extends Card
 		{
 			int n = containsColor(c);//has[cIndex(c+"")];
 			if(n == 0) continue;
-			if(c == '1') res += c;
+			if(c == '1') res += n;
 			else
 			{
 				for(int i = 0; i< n ; i++)
@@ -317,7 +317,7 @@ public class ManaPool extends Card
 				if(!manaCost.isNeeded(Mana)) return manaCost;
 				manaCost.subtractMana(getColor(Mana));
 			}
-			has.replaceFirst(Mana, "");
+			has = has.replaceFirst(Mana, "");
 			paid+=Mana;
 		}
 		else
@@ -326,7 +326,7 @@ public class ManaPool extends Card
 			{
 				if (containsColor('1')>0 && manaCost.isNeeded(Constant.Color.Colorless))
 				{
-					has.replaceFirst("1", "");
+					has = has.replaceFirst("1", "");
 					paid+=Mana;//[0]++;
 					manaCost.subtractMana(Constant.Color.Colorless);
 					return manaCost;
@@ -377,7 +377,7 @@ public class ManaPool extends Card
 				else while(totalMana()>0 && cless>0)
 				{
 					cless--;
-					subtractOne("1");
+					manaCost=subtractOne(manaCost, "1");
 				}
 			}
 		}
