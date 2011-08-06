@@ -7,7 +7,7 @@ T:Mode$ SpellCast | ValidCard$ Card.Red+YouCtrl | TriggerZones$ Battlefield | Ex
 T:Mode$ SpellCast | ValidCard$ Card.Green+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPumpKW | TriggerDescription$ Whenever you cast a green spell, CARDNAME gains forestwalk until end of turn.  
 SVar:TrigPump11:AB$Pump | Cost$ 0 | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
 SVar:TrigPumpKW:AB$Pump | Cost$ 0 | KW$ Forestwalk | Defined$ Self
-SVar:BuffedBy:Spell.Red,Spell.Green
+SVar:BuffedBy:Card.Red,Card.Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_duo.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/218.jpg
