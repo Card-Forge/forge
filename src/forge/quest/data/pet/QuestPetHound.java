@@ -25,8 +25,8 @@ public class QuestPetHound extends QuestPetAbstract{
 
         if (level == 1)
 		{
-			petCard.setImageName("R 0 1 Hound Pet");
-            petCard.setBaseAttack(0);
+			petCard.setImageName("R 1 1 Hound Pet");
+            petCard.setBaseAttack(1);
             petCard.setBaseDefense(1);
 		}
 		else if (level == 2)
