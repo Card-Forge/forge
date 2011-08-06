@@ -327,6 +327,270 @@ public class CardFactory implements NewConstants {
         	});
         }
         if(hasKeyword(card,"spCounter") != -1) {
+    		ComputerAI_counterSpells2.KeywordedCounterspells.add(card.getName());
+
+    		String keyword = card.getKeyword().get(hasKeyword(card,"spCounter"));
+    		card.removeIntrinsicKeyword(keyword);
+    		String[] splitkeyword = keyword.split(":");
+            	
+            	final String targetType = splitkeyword[1];
+            	final String targetingRestrictions = splitkeyword[2];
+            	final String destination = splitkeyword[3];
+            	final String extraActions = splitkeyword[4];
+            	
+            	final String[] splitTargetingRestrictions = targetingRestrictions.split(" ");
+            	final String[] splitExtraActions = extraActions.split(" ");
+
+    		final SpellAbility[] tgt = new SpellAbility[1];
+    		final SpellAbility spell = new Spell(card) {
+
+				private static final long serialVersionUID = 229983950093253062L;
+
+				@Override
+    			public void resolve() {
+    				if(CardFactoryUtil.spCounter_MatchSpellAbility(tgt[0],splitTargetingRestrictions,targetType) && AllZone.Stack.contains(tgt[0]))
+    				{
+    					SpellAbility sa = tgt[0];
+    					AllZone.Stack.remove(tgt[0]);
+    					
+    					System.out.println("Send countered spell to " + destination);
+            			
+            				if(destination.equals("None") || targetType.contains("Ability")) //For Ability-targeting counterspells
+            				{
+            				
+            				}
+            				else if(destination.equals("Graveyard"))
+            				{
+            					AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+            				}
+            				else if(destination.equals("Exile"))
+            				{
+            					AllZone.GameAction.exile(sa.getSourceCard());
+            				}
+            				else if(destination.equals("Topdeck"))
+            				{
+            					AllZone.GameAction.moveToTopOfLibrary(sa.getSourceCard());
+            				}
+            				else if(destination.equals("Hand"))
+            				{
+            					AllZone.GameAction.moveToHand(sa.getSourceCard());
+            				}
+            				else if(destination.equals("BottomDeck"))
+            				{
+            					AllZone.GameAction.moveToBottomOfLibrary(sa.getSourceCard());
+            				}
+            				else if(destination.equals("Shuffle"))
+            				{
+            					AllZone.GameAction.moveToBottomOfLibrary(sa.getSourceCard());
+            					sa.getSourceCard().getController().shuffle();
+            				}
+            				else
+            				{
+            					throw new IllegalArgumentException("spCounter: Invalid Destination argument for card " + card.getName());
+            				}
+            				
+            				for(int ea = 0;ea<splitExtraActions.length;ea++)
+            				{
+            					boolean isOptional = false;
+
+            					if(splitExtraActions[0].equals("None"))
+            					{
+            						break;
+            					}
+            					String ActionID = splitExtraActions[ea].substring(0,splitExtraActions[ea].indexOf('('));
+            					
+            					Player Target = null;
+            				
+            					String ActionParams = splitExtraActions[ea].substring(splitExtraActions[ea].indexOf('(')+1);
+            					ActionParams = ActionParams.substring(0,ActionParams.length()-1);
+            				
+            					String[] SplitActionParams = ActionParams.split(",");
+            				
+            					System.out.println("Extra Action: " + ActionID);
+            					System.out.println("Parameters: " + ActionParams);
+            					
+            					if(ActionID.startsWith("My-"))
+            					{
+            						ActionID = ActionID.substring(3);
+            						Target = card.getController();
+            					}
+            					else if(ActionID.startsWith("Opp-"))
+            					{
+            						ActionID = ActionID.substring(4);
+            						Target = card.getController().getOpponent();
+            					}
+            					else if(ActionID.startsWith("CC-"))
+            					{
+            						ActionID = ActionID.substring(3);
+            						Target = sa.getSourceCard().getController();
+            					}
+
+    						if(ActionID.startsWith("May-"))
+    						{
+    							ActionID = ActionID.substring(4);
+    							isOptional = true;
+    						}
+            				
+            					if(ActionID.equals("Draw"))
+            					{
+    							if(isOptional)
+    							{
+    								if(Target == AllZone.HumanPlayer)
+    								{
+    									if(AllZone.Display.getChoice("Do you want to draw" + SplitActionParams[0] + "card(s)?","Yes","No").equals("Yes"))
+    									{
+    			        						Target.drawCards(Integer.parseInt(SplitActionParams[0]));
+    									}
+    								}
+    								else
+    								{//AI decision-making, only draws a card if it doesn't risk discarding it.
+    									if(AllZone.getZone(Constant.Zone.Hand,AllZone.ComputerPlayer).getCards().length < 7)
+    									{
+    			        						Target.drawCards(Integer.parseInt(SplitActionParams[0]));
+    									}
+    								}
+    							}
+    							else
+    							{
+    	        						Target.drawCards(Integer.parseInt(SplitActionParams[0]));
+    							}
+
+            					}
+            					else if(ActionID.equals("Discard"))
+            					{
+    							if(isOptional)
+    							{
+    								if(Target == AllZone.HumanPlayer)
+    								{
+    									if(AllZone.Display.getChoice("Do you want to discard" + SplitActionParams[0] + "card(s)?","Yes","No").equals("Yes"))
+    									{
+    			        						Target.discard(Integer.parseInt(SplitActionParams[0]),this);
+    									}
+    								}
+    								else
+    								{//AI decisionmaking. Should take Madness cards and the like into account in the future.Right now always refuses to discard.
+    								}
+    							}
+    							else
+    							{
+    	        						Target.discard(Integer.parseInt(SplitActionParams[0]), this);
+    							}
+            					}
+            					else if(ActionID.equals("LoseLife"))
+            					{
+    							if(isOptional)
+    							{
+    								if(Target == AllZone.HumanPlayer)
+    								{
+    									if(AllZone.Display.getChoice("Do you want to lose" + SplitActionParams[0] + "life?","Yes","No").equals("Yes"))
+    									{
+    			        						Target.loseLife(Integer.parseInt(SplitActionParams[0]), card);
+    									}
+    								}
+    								else
+    								{//AI decisionmaking. Not sure why one would ever want to agree to this, except for the rare case of Near-Death Experience+Ali Baba.
+    								}
+    							}
+    							else
+    							{
+    	        						Target.loseLife(Integer.parseInt(SplitActionParams[0]), card);
+    							}
+            						
+            					}
+            					else if(ActionID.equals("GainLife"))
+            					{
+    							if(isOptional)
+    							{
+    								if(Target == AllZone.HumanPlayer)
+    								{
+    									if(AllZone.Display.getChoice("Do you want to gain" + SplitActionParams[0] + "life?","Yes","No").equals("Yes"))
+    									{
+    			        						Target.gainLife(Integer.parseInt(SplitActionParams[0]), card);
+    									}
+    								}
+    								else
+    								{//AI decisionmaking. Not sure why one would ever want to decline this, except for the rare case of Near-Death Experience.
+    		        						Target.gainLife(Integer.parseInt(SplitActionParams[0]), card);
+    								}
+    							}
+    							else
+    							{
+    	        						Target.gainLife(Integer.parseInt(SplitActionParams[0]), card);
+    							}
+            					}
+            					else
+            					{
+            						throw new IllegalArgumentException("spCounter: Invalid Extra Action for card " + card.getName());
+            					}
+            				}
+    				}
+    			
+    			}//resolve()
+                    
+    			public boolean canPlay()
+    			{
+    				ArrayList<SpellAbility> choosables = new ArrayList<SpellAbility>();
+
+    				for(int i=0;i<AllZone.Stack.size();i++)
+    				{
+    					choosables.add(AllZone.Stack.peek(i));
+    				}
+
+    				for(int i=0;i<choosables.size();i++)
+    				{
+    					if(!CardFactoryUtil.spCounter_MatchSpellAbility(choosables.get(i),splitTargetingRestrictions,targetType))
+    					{
+    						choosables.remove(i);
+    					}
+    				}
+
+    				return choosables.size() > 0 && super.canPlay();
+    			}//canPlay()
+    		};//SpellAbility
+    		
+    		Input runtime = new Input() {
+                    
+				private static final long serialVersionUID = 5360660530175041997L;
+
+				@Override
+    			public void showMessage() {
+    				ArrayList<SpellAbility> choosables = new ArrayList<SpellAbility>();
+
+    				for(int i=0;i<AllZone.Stack.size();i++)
+    				{
+    					choosables.add(AllZone.Stack.peek(i));
+    				}
+
+    				for(int i=0;i<choosables.size();i++)
+    				{
+    					if(!CardFactoryUtil.spCounter_MatchSpellAbility(choosables.get(i),splitTargetingRestrictions,targetType) || choosables.get(i).getSourceCard().equals(card))
+    					{
+    						choosables.remove(i);
+    					}
+    				}
+    				HashMap<String,SpellAbility> map = new HashMap<String,SpellAbility>();
+
+    				for(SpellAbility sa : choosables)
+    				{
+    					map.put(sa.toString(),sa);
+    				}
+
+    				String[] choices = new String[map.keySet().size()];
+    				choices = map.keySet().toArray(choices);
+
+    				String madeChoice = AllZone.Display.getChoice("Select target spell.",choices);
+
+    				tgt[0] = map.get(madeChoice);
+    				System.out.println(tgt[0]);
+                    stopSetNext(new Input_PayManaCost(spell));
+    			}//showMessage()
+    		};//Input
+    		card.clearSpellAbility();
+    		card.addSpellAbility(spell);
+    		spell.setBeforePayMana(runtime);
+    	}//spCounter
+        /*
+        if(hasKeyword(card,"spCounter") != -1) {
         	//System.out.println("Processing spCounter for card " + card.getName());
         	ComputerAI_counterSpells2.KeywordedCounterspells.add(card.getName());
         	String keyword = card.getKeyword().get(hasKeyword(card,"spCounter"));
@@ -643,8 +907,7 @@ public class CardFactory implements NewConstants {
         	card.clearSpellAbility();
         	card.addSpellAbility(spCounterAbility);
         } //spCounter
-        
-        
+        */        
 
         // Support for using string variables to define Count$ for X or Y
         // Or just about any other String that a card object needs at any given time

@@ -21,6 +21,180 @@ public class CardFactoryUtil {
         else return "" + n;
     }
     
+    public static boolean spCounter_MatchSpellAbility(SpellAbility sa,String[] splitRestrictions,String targetType)
+    {
+    	boolean fullResult = true;
+        Card card = sa.getSourceCard();
+        			
+        if(targetType.equals("Spell"))
+        {
+        	if(sa.isAbility())
+        	{
+        		System.out.println(card.getName() + " can only counter spells, not abilities.");
+        		return false;
+        	}
+        }
+        else if(targetType.equals("Ability"))
+        {
+        	if(sa.isSpell())
+        	{
+        		System.out.println(card.getName() + " can only counter abilities, not spells.");
+        		return false;
+        	}
+        }
+        else if(targetType.equals("SpellOrAbility"))
+        {
+        	//Do nothing. This block is only for clarity and enforcing parameters.
+        }
+        else
+        {
+        	throw new IllegalArgumentException("Invalid target type for card " + card.getName());
+        }
+        			
+        for(int i=0;i<splitRestrictions.length;i++)
+        {
+        	boolean subResult = false;
+        	if(splitRestrictions[0].equals("None"))
+        	{
+        		return true;
+        	}
+        		
+        	String RestrictionID = splitRestrictions[i].substring(0,splitRestrictions[i].indexOf('('));
+	        String Parameters = splitRestrictions[i].substring(splitRestrictions[i].indexOf('(')+1);
+        	Parameters = Parameters.substring(0,Parameters.length()-1);
+        				
+	        String[] SplitParameters = Parameters.split(",");
+        				
+        	System.out.println(card.getName() + " currently checking restriction '" + RestrictionID + "'");
+        	if(RestrictionID.equals("Color"))
+        	{
+        		for(int p=0;p<SplitParameters.length;p++)
+        		{
+        			System.out.println("Parameter: " + SplitParameters[p]);
+        			if(SplitParameters[p].startsWith("Non-"))
+        			{
+        				subResult |= !CardUtil.getColors(card).contains(SplitParameters[p].substring(4).toLowerCase()); 
+        			}
+        			else
+        			{
+        				subResult |= CardUtil.getColors(card).contains(SplitParameters[p].toLowerCase());
+        			}
+        		}
+        	}
+        	else if(RestrictionID.equals("Type"))
+        	{
+        		for(int p=0;p<SplitParameters.length;p++)
+        		{
+        			System.out.println("Parameter: " + SplitParameters[p]);
+					if(SplitParameters[p].startsWith("Non-"))
+					{
+						System.out.println(SplitParameters[p].substring(4));
+						subResult |= !card.getType().contains(SplitParameters[p].substring(4));
+					}
+					else
+					{
+						subResult |= card.getType().contains(SplitParameters[p]);
+					}
+				}
+        	}
+        	else if(RestrictionID.equals("CMC"))
+			{
+				String mode = SplitParameters[0];
+				int value = Integer.parseInt(SplitParameters[1]);
+				System.out.println(mode);
+				System.out.println(Integer.toString(value));
+        					
+				if(mode.equals("<"))
+				{
+					subResult |= (CardUtil.getConvertedManaCost(card) < value);
+				}
+				else if(mode.equals(">"))
+				{
+					subResult |= (CardUtil.getConvertedManaCost(card) > value);
+				}
+				else if(mode.equals("=="))
+				{
+					subResult |= (CardUtil.getConvertedManaCost(card) == value);
+				}
+				else if(mode.equals("!="))
+				{
+ 					subResult |= (CardUtil.getConvertedManaCost(card) != value);
+				}
+				else if(mode.equals("<="))
+				{
+					subResult |= (CardUtil.getConvertedManaCost(card) <= value);
+				}
+				else if(mode.equals(">="))
+				{
+					subResult |= (CardUtil.getConvertedManaCost(card) >= value);
+				}        					
+				else
+				{
+					throw new IllegalArgumentException("spCounter: Invalid mode parameter to CMC restriction in card " + card.getName());
+				}
+			}
+			else if(RestrictionID.equals("Targets"))
+			{        		
+				if(sa.getTargetCard() == null)
+				{
+					return false;
+				}
+
+				for(int p=0;p<SplitParameters.length;p++)
+				{
+					System.out.println("Parameter: " + SplitParameters[p]);
+					if(SplitParameters[p].startsWith("My-")) //Targets my <type> permanent
+					{
+						if(sa.getTargetCard().getController() != card.getController())
+						{
+							return false;
+						}
+
+						if(SplitParameters[p].contains("Non-"))
+						{
+							subResult |= !sa.getTargetCard().getType().contains(SplitParameters[p].substring(7));
+						}
+	 					else
+	 					{
+	 						subResult |= (sa.getTargetCard().getType().contains(SplitParameters[p].substring(3)));
+						}
+					}
+					else if(SplitParameters[p].startsWith("Opp-")) //Targets opponent's <type> permanent
+					{
+						if(sa.getTargetCard().getController() == card.getController())
+  						{
+							return false;
+  						}
+        							
+						if(SplitParameters[p].contains("Non-"))
+						{
+							subResult |= !(sa.getTargetCard().getType().contains(SplitParameters[p].substring(8)));
+						}
+						else
+						{
+							subResult |= (sa.getTargetCard().getType().contains(SplitParameters[p].substring(4)));
+						}
+ 					}
+					else
+					{
+ 						if(SplitParameters[p].contains("Non-"))
+ 						{
+ 							subResult |= !(sa.getTargetCard().getType().contains(SplitParameters[p].substring(4)));
+						}
+ 						else
+						{
+							subResult |= (sa.getTargetCard().getType().contains(SplitParameters[p]));
+						}
+					}
+				}
+			}
+        	System.out.println("Sub: " + Boolean.toString(subResult));
+			fullResult &= subResult;
+        } //End Targeting parsing
+        System.out.println("Success: " + Boolean.toString(fullResult));
+		return fullResult;
+    }
+    
     public static Card AI_getMostExpensivePermanent(CardList list, final Card spell, boolean targeted) {
         CardList all = list;
         if(targeted) {

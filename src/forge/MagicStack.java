@@ -478,6 +478,16 @@ public class MagicStack extends MyObservable {
 	public SpellAbility peek() {
 		return peek(0);
 	}
+	
+	public void remove(SpellAbility sa) {
+		stack.remove(sa);
+		frozenStack.remove(sa);
+		this.updateObservers();
+	}
+
+	public boolean contains(SpellAbility sa) {
+		return stack.contains(sa);
+	}
 
 	public ArrayList<Card> getSourceCards() {
 		ArrayList<Card> a = new ArrayList<Card>();
