@@ -24,8 +24,8 @@ public class Input_Cleanup extends Input {
         if(n <= AllZone.HumanPlayer.getMaxHandSize() || AllZone.HumanPlayer.getMaxHandSize() == -1) {
             CombatUtil.removeAllDamage();
             
-            //for debugging: System.out.println("need to nextPhase(Input_Cleanup.showMessage(), n<=7) = true");
             AllZone.Phase.setNeedToNextPhase(true);
+            AllZone.Phase.nextPhase();	// todo: keep an eye on this code, see if we can get rid of it.
         }
     }
     
