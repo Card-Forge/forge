@@ -1,3 +1,14 @@
+Harabaz Druid
+1 G
+Creature Human Druid Ally
+no text
+0/1
+tap: add G to your mana pool for each Ally you control.
+tap: add W to your mana pool for each Ally you control.
+tap: add B to your mana pool for each Ally you control.
+tap: add U to your mana pool for each Ally you control.
+tap: add R to your mana pool for each Ally you control.
+
 Amulet of Vigor
 1
 Artifact
