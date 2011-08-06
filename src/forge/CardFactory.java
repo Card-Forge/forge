@@ -2881,23 +2881,41 @@ public class CardFactory implements NewConstants {
        
        if (ptk.length >= 2)
        {
-    	   if (ptk[0].length() <= 3)
+    	   if (ptk[0].matches("[\\+\\-][XY]"))
+    	   {
+    		   String xy  = card.getSVar(ptk[0].replaceAll("[\\+\\-]", ""));
+    		   if (xy.startsWith("Count$"))
+    		   {
+    			   String kk[] = xy.split("\\$");
+    			   AttackX[0] = kk[1];
+    			   
+    			   if (ptk[0].contains("-"))
+    				   if (AttackX[0].contains("/"))
+    					   AttackX[0].replace("/", "/Negative");
+    				   else
+    					   AttackX[0] += "/Negative";
+    		   }
+    	   }
+    	   else if (ptk[0].matches("[\\+\\-][0-9]"))
     		   NumAttack[0] = Integer.parseInt(ptk[0].replace("+", ""));
-    	   else
-    		   if (ptk[0].startsWith("Count$"))
+
+    	   if (ptk[1].matches("[\\+\\-][XY]"))
+    	   {
+    		   String xy = card.getSVar(ptk[1].replaceAll("[\\+\\-]", ""));
+    		   if (xy.startsWith("Count$"))
     		   {
-    			   String kk[] = ptk[0].split("\\$");
-    			   AttackX[0] = kk[1].replace("\\", "/");
+    			   String kk[] = xy.split("\\$");
+    			   DefenseX[0] = kk[1];
+    		   
+    			   if (ptk[1].contains("-"))
+    				   if (DefenseX[0].contains("/"))
+    					   DefenseX[0].replace("/", "/Negative");
+    				   else
+    					   DefenseX[0] += "/Negative";
     		   }
-    	   
-    	   if (ptk[1].length() <= 3)
+    	   }
+    	   else if(ptk[1].matches("[\\+\\-][0-9]"))
     		   NumDefense[0] = Integer.parseInt(ptk[1].replace("+", ""));
-    	   else
-    		   if (ptk[1].startsWith("Count$"))
-    		   {
-    			   String kk[] = ptk[1].split("\\$");
-    			   DefenseX[0] = kk[1].replace("\\", "/");
-    		   }
        }
        
        if (ptk.length == 3)
