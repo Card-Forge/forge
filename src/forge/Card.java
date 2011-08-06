@@ -60,6 +60,7 @@ public class Card extends MyObservable {
     private boolean                      kicked                            = false;
     private boolean                      reflectedLand                     = false;
     private boolean						 levelUp						   = false;
+    private boolean						 bounceAtUntap					   = false;
     
     private boolean                      firstStrike                       = false;
     private boolean                      doubleStrike                      = false;
@@ -260,6 +261,14 @@ public class Card extends MyObservable {
     
     public void setSacrificeAtEOT(boolean sacrificeAtEOT) {
         this.sacrificeAtEOT = sacrificeAtEOT;
+    }
+    
+    public boolean getBounceAtUntap() {
+        return bounceAtUntap;
+    }
+    
+    public void setBounceAtUntap(boolean bounce) {
+        this.bounceAtUntap = bounce;
     }
     
     public boolean hasFirstStrike() {

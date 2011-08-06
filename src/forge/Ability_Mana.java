@@ -108,6 +108,21 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         		}
         	});
         }
+        
+        if (sourceCard.getName().equals("Undiscovered Paradise"))
+        {
+        	final Card crd = sourceCard;
+        	runcommands.add(new Command() {
+				private static final long serialVersionUID = 1365329719980281985L;
+
+				public void execute()
+        		{
+					//  The computer can now use this card. A version of the 
+					//  line of code below was added to ComputerUtil.payManaCost()
+        			crd.setBounceAtUntap(true);
+        		}
+        	});
+        }
 
         if(isBasic())//lowers memory usage drastically
         {

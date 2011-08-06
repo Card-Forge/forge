@@ -1,3 +1,13 @@
+Undiscovered Paradise
+no cost
+Land
+Whenever you tap CARDNAME for mana, return it to it's owner's hand during the controller's next untap phase.
+tap: add W
+tap: add B
+tap: add U
+tap: add R
+tap: add G
+
 Ancient Runes
 2 R
 Enchantment

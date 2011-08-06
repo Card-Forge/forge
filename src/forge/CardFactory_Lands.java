@@ -343,15 +343,18 @@ class CardFactory_Lands {
                 
                 @Override
                 public void showMessage() {
-                	mine.choices_made[0] = Input_PayManaCostUtil.getShortColorString(AllZone.Display.getChoiceOptional(
-                            "Select a Color", Constant.Color.onlyColors));
-                	if (mine.choices_made[0] != null){
-                		AllZone.Stack.add(mine);
+                	if (card.isUntapped())
+                	{
+	                	mine.choices_made[0] = Input_PayManaCostUtil.getShortColorString(AllZone.Display.getChoiceOptional(
+	                            "Select a Color", Constant.Color.onlyColors));
+	                	if (mine.choices_made[0] != null){
+	                		AllZone.Stack.add(mine);
+	                	}
                 	}
                     stop();
                 }
             });
-            
+
             card.addSpellAbility(mine);
             mine.setDescription("Gemstone Mine - tap, remove a mining counter: Add one mana of any color to your mana pool");
             mine.setStackDescription("Gemstone Mine - tap, remove a mining counter: Add one mana of any color to your mana pool");
