@@ -2,7 +2,7 @@ Name:Enlightened Tutor
 ManaCost:W
 Types:Instant
 Text:no text
-A:SP$Fetch|Cost$W|Destination$TopOfLibrary|FetchType$Artifact,Enchantment|FetchNum$1|SpellDescription$Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
+A:SP$Fetch|Cost$W|Destination$Library|LibraryPosition$0|FetchType$Artifact,Enchantment|FetchNum$1|SpellDescription$Search your library for an artifact or enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enlightened_tutor.jpg
