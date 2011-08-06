@@ -6796,36 +6796,6 @@ public class CardFactory implements NewConstants {
                     }
                 }//canPlayAI()
             };//SpellAbility enchantment
-            
-            /*
-
-            @SuppressWarnings("unused") // target
-            final Input target = new Input()
-            {
-            private static final long serialVersionUID = -251660220889858176L;
-
-            //showMessage() is always the first method called
-            public void showMessage()
-            {
-              AllZone.Display.showMessage("Select creature to remove from the game (sorry no phasing yet).");
-              ButtonUtil.enableOnlyCancel();
-            }
-            public void selectButtonCancel() {stop();}
-
-            public void selectCard(Card c, PlayerZone zone)
-            {
-              if(!CardFactoryUtil.canTarget(enchantment, c)){
-                	  AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                }	
-              else if(zone.is(Constant.Zone.Play) && c.isCreature())
-              {
-            	enchantment.setTargetCard(c);
-
-            	stopSetNext(new Input_PayManaCost(enchantment));
-              }
-            }
-            };//Input target
-            */
 
             Command commandLeavesPlay = new Command() {
                 private static final long serialVersionUID = -2535098005246027777L;
@@ -7007,8 +6977,7 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) 
-                    	//c.addExtrinsicKeyword("Indestructible");
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c))
                     	c.addCounter(Counters.DIVINITY, 1);
                 }
                 
@@ -7303,11 +7272,11 @@ public class CardFactory implements NewConstants {
                 }
             };//SpellAbility
             
-            ability.setDescription("1 life: Set aside the top card of your library face down. At the end of your turn, put that card into your hand.");
+            ability.setDescription("Pay 1 life: Set aside the top card of your library face down. At the end of your turn, put that card into your hand.");
             
             StringBuilder sb = new StringBuilder();
             sb.append(card.getName());
-            sb.append(" - 1 life: Set aside the top card of your library face down. At the end of your turn, put that card into your hand.");
+            sb.append(" - Set aside the top card of your library face down. At the end of your turn, put that card into your hand.");
             ability.setStackDescription(sb.toString());
             
             card.addSpellAbility(ability);
@@ -8074,14 +8043,8 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlayAI() {
-                    PlayerZone compPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    PlayerZone humPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    
-                    CardList compCreats = new CardList(compPlay.getCards());
-                    compCreats = compCreats.getType("Creature");
-                    
-                    CardList humCreats = new CardList(humPlay.getCards());
-                    humCreats = humCreats.getType("Creature");
+                    CardList compCreats = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
+                    CardList humCreats = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
                     
                     //only play standstill if comp controls more creatures than human
                     //this needs some additional rules, maybe add all power + toughness and compare
@@ -8229,11 +8192,9 @@ public class CardFactory implements NewConstants {
                 @Override
                 public boolean canPlayAI() {
                     if(AllZone.HumanPlayer.getLife() <= 5) return true;
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
                     
-                    CardList playList = new CardList(play.getCards());
-                    CardList libList = new CardList(lib.getCards());
+                    CardList playList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+                    CardList libList = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
                     
                     playList = playList.getName("Academy Rector");
                     libList = libList.getName("Barren Glory");
@@ -8243,20 +8204,12 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    CardList list = new CardList(play.getCards());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return !c.getName().equals("Mana Pool");
-                        }
-                    });
-                    CardList handList = new CardList(hand.getCards());
+                    CardList play = AllZoneUtil.getPlayerCardsInPlay(card.getController());
                     
-                    for(Card c:list) {
+                    for(Card c:play) {
                         AllZone.GameAction.sacrifice(c);
                     }
-                    card.getController().discardRandom(handList.size(), this);
+                    card.getController().discardHand(this);
                     
                     getTargetPlayer().loseLife(5, card);
                 }
@@ -8265,32 +8218,6 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
-            /*
-            final Command sac = new Command(){
-            private static final long serialVersionUID = 1643946454479782123L;
-
-            public void execute() {
-            	PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-            	PlayerZone hand = AllZone.getZone(Constant.Zone.Play, card.getController());
-            	CardList list = new CardList(play.getCards());
-            	list = list.filter(new CardListFilter()
-            	{
-            		public boolean addCard(Card c) {
-            			return !c.getName().equals("Mana Pool");
-            		}
-            	});
-            	CardList handList = new CardList(hand.getCards());
-            	
-            	for (Card c : list)
-            	{
-            		AllZone.GameAction.sacrifice(c);
-            	}
-            	AllZone.GameAction.discardRandom(card.getController(), handList.size());
-            }
-              
-            };
-            */
-
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
