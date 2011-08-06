@@ -4866,7 +4866,8 @@ public class CardFactory_Creatures {
 
         //*************** START *********** START **************************
         else if (cardName.equals("Disciple of Kangee")) {
-            final SpellAbility ability = new Ability_Tap(card, "U") {
+        	Ability_Cost abCost = new Ability_Cost("U T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, new Target("TgtC")) {
                 private static final long serialVersionUID = -5169389637917649036L;
                 
                 @Override
@@ -4925,9 +4926,7 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             card.addSpellAbility(ability);
-            ability.setDescription("U, tap: Target creature gains flying and becomes blue until end of turn.");
-            
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+            ability.setDescription(abCost+"Target creature gains flying and becomes blue until end of turn.");
         }//*************** END ************ END **************************
 
         
@@ -5141,7 +5140,9 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sorceress Queen") || cardName.equals("Serendib Sorcerer")) {
-            final Ability_Tap ability = new Ability_Tap(card) {
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+        	Target target = new Target("Select target creature other than "+cardName, new String[] {"Creature.Other"});
+            final Ability_Activated ability = new Ability_Activated(card, abCost, target) {
                 private static final long serialVersionUID = -6853184726011448677L;
                 
                 @Override
@@ -5198,11 +5199,8 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             
             StringBuilder sb = new StringBuilder();
-            sb.append("tap: Target creature other than ").append(cardName).append(" becomes 0/2 until end of turn.");
+            sb.append(abCost).append("Target creature other than ").append(cardName).append(" becomes 0/2 until end of turn.");
             ability.setDescription(sb.toString());
-            
-            //this ability can target "this card" when it shouldn't be able to
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility_NoTargetSelf(ability));
         }//*************** END ************ END **************************
         
         
