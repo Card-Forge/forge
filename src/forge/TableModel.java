@@ -33,7 +33,7 @@ class TableModel extends AbstractTableModel {
     
     private CardContainer     cardDetail;
     //private String column[] = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "R", "AI"};
-    private String            column[]         = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "R", "Set"};
+    private String            column[]         = {"Qty", "Name", "Cost", "Color", "Type", "Stats", "R", "Set", "AI"};
     
     //used to resort(), used when addCard(Card) is called
     private int               recentSortedColumn;
@@ -93,7 +93,11 @@ class TableModel extends AbstractTableModel {
                 column.setMaxWidth(45);
                 column.setMinWidth(45);
             }
-            
+            else if(i == 8) {
+        	    column.setPreferredWidth(25); // AI
+        	    column.setMaxWidth(25);
+        	    column.setMinWidth(25);
+        	}
         }//for
         
         /*for(int j = 0; j < table.getColumnCount(); j++) {
@@ -229,7 +233,14 @@ class TableModel extends AbstractTableModel {
             	String SC = c.getCurSetCode();
             	if (!SC.equals(""))	
             		return SC;
-                
+            case 8:
+        		if (c.getSVar("RemAIDeck").equals("True"))
+        			return "No";
+        		else if (c.getSVar("RemRandomDeck").equals("True"))
+        			return "?";
+        		else
+        			return "";
+        		
             default:
                 return "error";
         }
