@@ -2,7 +2,7 @@ Name:Thirst for Knowledge
 ManaCost:2 U
 Types:Instant
 Text:no text
-K:spDrawCards:3:Drawback$YouDiscard/2/UnlessDiscardType.Artifact:Draw three cards. Then discard two cards unless you discard an artifact card.:Thirst for Knowledge - Draw 3 cards, then discard 2 cards unless you discard an artifact.
+A:SP$Draw | Cost$ 2 U | NumCards$ 3 | SpellDescription$ Draw three cards. Then discard two cards unless you discard an artifact card. | SubAbility$ YouDiscard/2/UnlessDiscardType.Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thirst_for_knowledge.jpg
 End
