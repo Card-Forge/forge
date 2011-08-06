@@ -1,5 +1,5 @@
 Name:Mageta the Lion
-ManaCost:2 W W
+ManaCost:3 W W
 Types:Legendary Creature Human Spellshaper
 Text:no text
 PT:3/3
