@@ -187,8 +187,14 @@ public abstract class Player extends MyObservable{
 	public void addDamage(final int damage, final Card source) {
 		int damageToDo = damage;
 		
-		if( preventAllDamageToPlayer(source, false) )
-        	damageToDo = 0;
+		if( preventAllDamageToPlayer(source, false))
+			damageToDo = 0;
+		
+		addDamageWithoutPrevention(damageToDo,source);
+	}
+	
+	public void addDamageWithoutPrevention(final int damage, final Card source) {
+		int damageToDo = damage;
 		
 		if( source.getKeyword().contains("Infect") ) {
         	addPoisonCounters(damageToDo);
@@ -237,11 +243,11 @@ public abstract class Player extends MyObservable{
     public int  getAssignedDamage()        		{	return assignedDamage; }
     
     public void addCombatDamage(final int damage, final Card source) {
+    	
     	int damageToDo = damage;
-    	if (source.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
-    			|| source.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME."))
-        	damageToDo = 0;
-        addDamage(damageToDo, source);
+    	if (preventAllDamageToPlayer(source,true)) damageToDo = 0;
+    	
+    	addDamageWithoutPrevention(damageToDo, source);   //damage prevention is already checked
     	
     	//GameActionUtil.executePlayerDamageEffects(player, source, damage, true);
     	GameActionUtil.executePlayerCombatDamageEffects(source);

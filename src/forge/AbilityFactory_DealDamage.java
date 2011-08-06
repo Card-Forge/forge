@@ -2,6 +2,7 @@
     package forge;
 
     import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
     public class AbilityFactory_DealDamage {
@@ -383,6 +384,9 @@ import java.util.Random;
         private void doResolve(SpellAbility saMe)
         {
             int damage = getNumDamage(saMe);
+            HashMap<String,String> params = AF.getMapParams();
+    		
+    		boolean noPrevention = params.containsKey("NoPrevention");
 
             ArrayList<Object> tgts = findTargets(saMe);
             boolean targeted = (AF.getAbTgt() != null) || TgtOpp;
@@ -395,13 +399,22 @@ import java.util.Random;
             for(Object o : tgts){
                if (o instanceof Card){
                    Card c = (Card)o;
-                   if(AllZone.GameAction.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(AF.getHostCard(), c)))
-                         c.addDamage(damage, AF.getHostCard());
+                   if(AllZone.GameAction.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(AF.getHostCard(), c))) {
+                	   if (noPrevention)
+                	   		c.addDamageWithoutPrevention(damage, AF.getHostCard());
+                	   else
+               	   			c.addDamage(damage, AF.getHostCard());
+                   }
+                         
                }
                else if (o instanceof Player){
                   Player p = (Player) o;
-                  if (!targeted || p.canTarget(AF.getHostCard()))
-                     p.addDamage(damage, AF.getHostCard());
+                  if (!targeted || p.canTarget(AF.getHostCard())) {
+               	   	if (noPrevention)
+           	   			p.addDamageWithoutPrevention(damage, AF.getHostCard());
+               	   	else
+          	   			p.addDamage(damage, AF.getHostCard());
+                  }
                }
             }
    

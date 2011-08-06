@@ -2780,23 +2780,28 @@ public class Card extends MyObservable {
 		// specific Cards
 		reduce = reduce || (this.isCreature() && source.isCreature() && 
 				AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this));
-		reduce = reduce || (isCombat && AllZoneUtil.isCardInPlay("Mark of Asylum", getController()));
+		reduce = reduce || (!isCombat && AllZoneUtil.isCardInPlay("Mark of Asylum", getController()));
 		reduce = reduce || (source.getController() == getController() && AllZoneUtil.isCardInPlay("Light of Sanction", getController()));
 		return reduce;
     }
     
     public void addDamage(HashMap<Card, Integer> sourcesMap) {
         for(Entry<Card, Integer> entry : sourcesMap.entrySet()) {
-            this.addDamage(entry.getValue(), entry.getKey());
+        	addDamageWithoutPrevention(entry.getValue(), entry.getKey()); // damage prevention is already checked!
         }
     }
     
     public void addDamage(final int damageIn, final Card source) {
         int damageToAdd = damageIn;
-        if( preventAllDamageToCard(source, false) ) {
+        if( preventAllDamageToCard(source, false)) {
         	damageToAdd = 0;
         }
+        addDamageWithoutPrevention(damageToAdd,source);
+    }
         
+    public void addDamageWithoutPrevention(final int damageIn, final Card source) {
+    	int damageToAdd = damageIn;
+    	
         if( damageToAdd == 0 ) return;  //Rule 119.8
         
         if(this.isPlaneswalker()) {
