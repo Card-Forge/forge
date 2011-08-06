@@ -8099,6 +8099,67 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Cursed Scroll")){
+        	/*
+        	 * 3, Tap: Name a card.  Reveal a card at random from your hand.  If it's the named card,
+        	 * Cursed Scroll deals 2 damage to target creature or player.
+        	 */
+        	Ability_Cost abCost = new Ability_Cost("3 T", cardName, true);
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, new Target("TgtCP")) {
+        		private static final long serialVersionUID = 7550743617522146304L;
+        		
+        		@Override
+        		public void resolve() {
+        			Player player = card.getController();
+        			String input = "";
+        			if(player.isHuman()) {
+                        input = JOptionPane.showInputDialog(null, "Name a card.", card.getName(), JOptionPane.QUESTION_MESSAGE);
+                    } else {
+                    	CardList hand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
+                    	if(!hand.isEmpty()) {
+                    		hand.shuffle();
+                    		input = hand.get(0).getName();
+                    	}
+                    }
+        			
+        			//reveal a card at random, and damage if it matches
+        			CardList hand = AllZoneUtil.getPlayerHand(card.getController());
+        			if(!hand.isEmpty()) {
+        				hand.shuffle();
+        				Card c = hand.get(0);
+        				JOptionPane.showMessageDialog(null, "Revealed card:\n"+c.getName(), card.getName(), JOptionPane.PLAIN_MESSAGE);
+        				if(input.equals(c.getName())) {
+        					if(null != getTargetCard()) {
+        						getTargetCard().addDamage(2, card);
+        					}
+        					else if(null != getTargetPlayer()) {
+        						getTargetPlayer().addDamage(2, card);
+        					}
+        				}
+        			}
+        			else {
+        				JOptionPane.showMessageDialog(null, "No cards to reveal.  Damage fail.", card.getName(), JOptionPane.PLAIN_MESSAGE);
+        			}
+        		}
+        		
+        		@Override
+        		public boolean canPlayAI() {
+        			return !AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer).isEmpty();
+        		}
+        	};
+
+        	StringBuilder sbStack = new StringBuilder();
+        	sbStack.append(card).append(" - Name a card.");
+        	ability.setStackDescription(sbStack.toString());
+        	
+        	ability.setDescription(abCost+"Name a card.  Reveal a card at random from your hand.  If it's the named card, CARDNAME deals 2 damage to target creature or player.");
+
+        	ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+        	card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
 
         return postFactoryKeywords(card);
     }//getCard2
