@@ -16957,6 +16957,81 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
     }//*************** END ************ END **************************
     
+  //*************** START *********** START **************************
+	if(cardName.equals("Corrupt"))
+	{
+
+		final SpellAbility spell = new Spell(card)
+		{
+		  private static final long serialVersionUID = 335838994716307031L;
+		
+		  Card check;
+		  public boolean canPlayAI()
+		  {
+		    if(AllZone.Human_Life.getLife() <= countSwamps(card))
+		      return true;
+		
+		    check = getFlying();
+		    return check != null;
+		  }
+		  
+		  public int countSwamps(Card c)
+		  {
+				PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+				CardList swamps = new CardList(play.getCards());
+				swamps = swamps.getType("Swamp");
+				return swamps.size();
+		  }
+		  
+		  public void chooseTargetAI()
+		  {
+		    if(AllZone.Human_Life.getLife() <= 12) //12? mebbe 15? 
+		    {
+		      setTargetPlayer(Constant.Player.Human);
+		      return;
+		    }
+		
+		    Card c = getFlying();
+		    if((c == null) || (! check.equals(c)))
+		      throw new RuntimeException(card +" error in chooseTargetAI() - Card c is " +c +",  Card check is " +check);
+		
+		    setTargetCard(c);
+		  }//chooseTargetAI()
+		
+		//uses "damage" variable
+		  Card getFlying()
+		  {
+		    CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
+		    for(int i = 0; i < flying.size(); i++)
+		      if(flying.get(i).getNetDefense() <= countSwamps(card))
+		        return flying.get(i);
+		
+		    return null;
+		  }
+		
+		  public void resolve()
+		  {
+			int damage = countSwamps(card);
+		    if(getTargetCard() != null)
+		    {
+		      if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
+		      {
+		        Card c = getTargetCard();
+		        c.addDamage(damage);
+		        AllZone.GameAction.getPlayerLife(card.getController()).addLife(damage);
+		      }
+		    }
+		    else {
+		      AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
+		      AllZone.GameAction.getPlayerLife(card.getController()).addLife(damage);
+		    }
+		  }//resolve()
+		};//SpellAbility
+		card.clearSpellAbility();
+		card.addSpellAbility(spell);
+		
+		spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell,true));
+	}//*************** END ************ END **************************
     
     
     // Cards with Cycling abilities

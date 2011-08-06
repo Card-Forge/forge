@@ -868,22 +868,23 @@ class CardFactory_Lands {
 	     	  final Ability_Tap ability = new Ability_Tap(card, "0")
 	     	  {
 
-	   		private static final long serialVersionUID = -6589125907956046586L;
+	     	  private static final long serialVersionUID = -6589125907956046586L;
 
-	   		public boolean canPlayAI()
-	     	      {
-	     	          CardList list = new CardList(AllZone.Human_Play.getCards());
-	     	          list = list.filter(new CardListFilter()
-	     	          {
-	   				public boolean addCard(Card c) {
-	   					return c.isCreature() && c.getKeyword().contains("Legendary");
-	   				} 
-	     	          });
-	     	          
-	     	          setTargetCard(CardFactoryUtil.AI_getBestCreature(list, card));
-	     	          
-	     	          return list.size() > 0;
-	     	      }
+	   		  public boolean canPlayAI()
+     	      {
+     	          CardList list = new CardList(AllZone.Human_Play.getCards());
+     	          list = list.filter(new CardListFilter()
+     	          {
+     	        	  public boolean addCard(Card c) {
+     	        		  return c.isCreature() && c.getKeyword().contains("Legendary");
+     	        	  } 
+     	          });
+     	          
+     	          if (list.size() > 0)
+     	        	  setTargetCard(CardFactoryUtil.AI_getBestCreature(list, card));
+     	          
+     	          return list.size() > 0;
+     	      }
 	     		  
 	     		  public void resolve()
 	     		  {
