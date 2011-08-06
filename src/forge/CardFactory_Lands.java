@@ -127,7 +127,9 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     card.tap();
-                    ability.setStackDescription(card.getName() + " - " + card.getController() + " gains 2 life");
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName()).append(" - ").append(card.getController()).append(" gains 2 life");
+                    ability.setStackDescription(sb.toString());
                     AllZone.Stack.add(ability);
                 }
             };
@@ -160,7 +162,9 @@ class CardFactory_Lands {
                     } else if(card.getController().equals(AllZone.ComputerPlayer)) {
                         ability.setTargetPlayer(AllZone.HumanPlayer);
                     }
-                    ability.setStackDescription(card.getName() + " - " + " Exile target player's graveyard.");
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName()).append(" - Exile target player's graveyard.");
+                    ability.setStackDescription(sb.toString());
                     AllZone.Stack.add(ability);
                 }
             };
@@ -276,7 +280,9 @@ class CardFactory_Lands {
                     CardList creats = new CardList(
                             AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
                     creats = creats.getType("Creature");
-                    a[0].setStackDescription(card.getName() + " - " + "target creature you control gains protection from the color of your choice until end of turn");
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName()).append(" - target creature you control gains protection from the color of your choice until end of turn");
+                    a[0].setStackDescription(sb.toString());
 		        	if(card.getController() == AllZone.HumanPlayer) {
 		        		AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(a[0], creats, "Select target creature you control", false, false));
 		        	} else {
@@ -495,7 +501,10 @@ class CardFactory_Lands {
                 
                 public void execute() {
                     card.tap();
-                    ability.setStackDescription(card.getName() + " - " + card.getController() + " gains 1 life");
+                    
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName()).append(" - ").append(card.getController()).append(" gains 1 life");
+                    ability.setStackDescription(sb.toString());
                     AllZone.Stack.add(ability);
                 }
             };
@@ -547,7 +556,9 @@ class CardFactory_Lands {
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
             a1.setDescription("1 U: Faerie Conclave becomes a 2/1 blue Faerie creature with flying until end of turn. It's still a land.");
-            a1.setStackDescription(card + " becomes a 2/1 creature with flying until EOT");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" becomes a 2/1 creature with flying until EOT");
+            a1.setStackDescription(sb.toString());
             
             Command paid1 = new Command() {
                 private static final long serialVersionUID = -601119544294387668L;
@@ -604,7 +615,9 @@ class CardFactory_Lands {
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
             a1.setDescription("1 W: Forbidding Watchtower becomes a 1/5 white Soldier creature until end of turn. It's still a land.");
-            a1.setStackDescription(card + " becomes a 1/5 creature until EOT");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" becomes a 1/5 creature until EOT");
+            a1.setStackDescription(sb.toString());
             
             Command paid1 = new Command() {
                 private static final long serialVersionUID = -7211256926392695778L;
@@ -660,7 +673,10 @@ class CardFactory_Lands {
             
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
-            a1.setStackDescription(card + " becomes a 3/3 creature with trample until EOT");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" becomes a 3/3 creature with trample until EOT");
+            a1.setStackDescription(sb.toString());
             a1.setDescription("1 G: Treetop Village becomes a 3/3 green Ape creature with trample until end of turn. It's still a land.");
             
             Command paid1 = new Command() {
@@ -707,7 +723,9 @@ class CardFactory_Lands {
             };//SpellAbility
             card.addSpellAbility(a1);
             a1.setDescription("1: Blinkmoth Nexus becomes a 1/1 Blinkmoth artifact creature with flying until end of turn. It's still a land.");
-            a1.setStackDescription(card + " becomes a 1/1 creature with flying until EOT");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" becomes a 1/1 creature with flying until EOT");
+            a1.setStackDescription(sb.toString());
             
             Command paid1 = new Command() {
                 private static final long serialVersionUID = -5122292582368202498L;
@@ -880,7 +898,9 @@ class CardFactory_Lands {
             };//SpellAbility
             card.addSpellAbility(a1);
             a1.setDescription("1: Mishra's Factory becomes a 2/2 Assembly-Worker artifact creature until end of turn. It's still a land.");
-            a1.setStackDescription(card + " - becomes a 2/2 creature until EOT");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card).append(" - becomes a 2/2 creature until EOT");
+            a1.setStackDescription(sb.toString());
             
             Command paid1 = new Command() {
                 private static final long serialVersionUID = -6767109002136516590L;
@@ -1056,10 +1076,12 @@ class CardFactory_Lands {
                     card.getController().shuffle();
                 }//resolve()
              };//SpellAbility
-
-
+             
              card.addSpellAbility(ability);
-             ability.setStackDescription(card.getController() + " - searches their library for a colorless creature card, reveals it, and put it into your hand. Then shuffle your library.");
+             
+             StringBuilder sb = new StringBuilder();
+             sb.append(card.getController()).append(" - searches their library for a colorless creature card, reveals it, and put it into your hand. Then shuffle your library.");
+             ability.setStackDescription(sb.toString());
              ability.setBeforePayMana(new Input_PayManaCost(ability));
              ability.setDescription("7, Tap: Search your library for a colorless creature card, reveal it, and put it into your hand. Then shuffle your library.");
         }//*************** END ************ END **************************
@@ -1378,8 +1400,6 @@ class CardFactory_Lands {
                             20, new String[] {"Flying", "Indestructible"});
                     	AllZone.GameAction.sacrifice(card);
                     }
-                    
-                    
                 }
             };
             final SpellAbility sacrifice = new Ability(card, "0") {
@@ -1406,7 +1426,9 @@ class CardFactory_Lands {
             };
             //ability.setDescription("Dark Depths enters the battlefield with ten ice counters on it.\r\n\r\n3: Remove an ice counter from Dark Depths.\r\n\r\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.");
             ability.setDescription("3: remove an Ice Counter.");
-            ability.setStackDescription(card.getName() + " - remove an ice counter.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - remove an ice counter.");
+            ability.setStackDescription(sb.toString());
             
             card.addSpellAbility(ability);
             sacrifice.setStackDescription("Sacrifice "+card.getName());
@@ -1522,7 +1544,6 @@ class CardFactory_Lands {
                                 target[0].addTempDefenseBoost(-2);
                             }
                         }
-                        
                     };
                     
                     target[0] = getTargetCard();
@@ -1559,7 +1580,9 @@ class CardFactory_Lands {
             };
             
             ability.setDescription("tap: Target 1/1 creature gets +1/+2 until end of turn.");
-            ability.setStackDescription(card.getName() + " - gives target creature +1/+2 until end of turn.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - gives target creature +1/+2 until end of turn.");
+            ability.setStackDescription(sb.toString());
             
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
@@ -1646,8 +1669,9 @@ class CardFactory_Lands {
             };
             
             ability.setDescription("G, tap: Target legendary creature gets +1/+1 until end of turn.");
-            ability.setStackDescription(card.getName()
-                    + " - gives target legendary creature +1/+1 until end of turn.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - gives target legendary creature +1/+1 until end of turn.");
+            ability.setStackDescription(sb.toString());
             
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
@@ -1816,7 +1840,6 @@ class CardFactory_Lands {
                             Card k = list.get(i);
                             arts.add(k);
                         }
-                        
                     }
                     
                     //pick best artifact
@@ -1850,8 +1873,9 @@ class CardFactory_Lands {
             };
             
             ability.setDescription("1 U, tap: Put target artifact card in your graveyard on top of your library.");
-            ability.setStackDescription(card.getName()
-                    + " - put artifact card in your graveyard on top of your library.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - put artifact card in your graveyard on top of your library.");
+            ability.setStackDescription(sb.toString());
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
@@ -1903,7 +1927,6 @@ class CardFactory_Lands {
                             Card k = list.get(i);
                             creats.add(k);
                         }
-                        
                     }
                     
                     //pick best artifact
@@ -1939,8 +1962,9 @@ class CardFactory_Lands {
             };
             
             ability.setDescription("1 B, tap: Put target creature card in your graveyard on top of your library.");
-            ability.setStackDescription(card.getName()
-                    + " - put creature card in your graveyard on top of your library.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - put creature card in your graveyard on top of your library.");
+            ability.setStackDescription(sb.toString());
             
             card.addSpellAbility(ability);
             
