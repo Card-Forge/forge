@@ -5377,6 +5377,7 @@ res/cardsfolder/screaming_fury.txt -text svneol=native#text/plain
 res/cardsfolder/screaming_seahawk.txt -text svneol=native#text/plain
 res/cardsfolder/screams_of_the_damned.txt svneol=native#text/plain
 res/cardsfolder/screeching_buzzard.txt -text svneol=native#text/plain
+res/cardsfolder/screeching_drake.txt svneol=native#text/plain
 res/cardsfolder/screeching_harpy.txt -text svneol=native#text/plain
 res/cardsfolder/screeching_silcaw.txt -text svneol=native#text/plain
 res/cardsfolder/screeching_sliver.txt svneol=native#text/plain
