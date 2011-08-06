@@ -1,3 +1,99 @@
+Maga, Traitor to Mortals
+X B B B
+Legendary Creature Human Wizard
+Maga, Traitor to Mortals enters the battlefield with X +1/+1 counters on it.\r\nWhen Maga enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.
+0/0
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/maga_traitor_to_mortals.jpg
+
+Mana Vault
+1
+Artifact
+At the beginning of your upkeep, you may pay 4. If you do, untap Mana Vault.\r\nAt the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.
+tap: add 3
+CARDNAME doesn't untap during your untap step.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_vault.jpg
+
+Mask of Riddles
+U B
+Artifact Equipment
+Equipped creature has fear.\r\nWhenever equipped creature deals combat damage to a player, you may draw a card. 
+eqPump 2:Fear
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_riddles.jpg
+
+Master of Etherium
+2 U
+Artifact Creature Vedalken Wizard
+Master of Etherium's power and toughness are each equal to the number of artifacts you control.\r\nOther artifact creatures you control get +1/+1.
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_etherium.jpg
+
+Meddling Mage
+U W
+Creature Human Wizard
+As Meddling Mage enters the battlefield, name a nonland card.\r\nThe named card can't be cast.
+2/2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/meddling_mage.jpg
+
+Momentous Fall
+2 G G
+Instant
+As an additional cost to cast Momentous Fall, sacrifice a creature.\r\nYou draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/momentous_fall.jpg
+
+Mul Daya Channelers
+1 G G
+Creature Elf Druid Shaman
+As long as the top card of your library is a creature card, Mul Daya Channelers gets +3/+3.\r\nAs long as the top card of your library is a land card, Mul Daya Channelers has "tap: Add two mana of any one color to your mana pool."
+2/2
+Play with the top card of your library revealed.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mul_daya_channelers.jpg
+
+Mycosynth Golem
+11
+Artifact Creature Golem
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\nArtifact creature spells you cast have affinity for artifacts. (They cost 1 less to cast for each artifact you control.)
+4/5
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+CostChange:Player:Less:1:Spell:All:Artifact/Creature:Affinity/Artifact/All Conditions
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_golem.jpg
+
+Mystic Snake
+1 G U U
+Creature Snake
+When Mystic Snake comes into play, counter target spell.
+2/2
+Flash
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
+
+Laquatus's Champion
+4 B B
+Creature Nightmare Horror
+When Laquatus's Champion enters the battlefield, target player loses 6 life.\r\nWhen Laquatus's Champion leaves the battlefield, that player gains 6 life.
+6/3
+RegenerateMe:B
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/laquatuss_champion.jpg
+
+Lichenthrope
+3 G G
+Creature Plant Fungus
+If damage would be dealt to Lichenthrope, put that many -1/-1 counters on it instead.\r\nAt the beginning of your upkeep, remove a -1/-1 counter from Lichenthrope
+5/5
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lichenthrope.jpg
+
 Dakmor Plague
 3 B B
 Sorcery
@@ -17473,15 +17569,6 @@ spCounter:Spell:None:Topdeck:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lapse_of_certainty.jpg
 
-Laquatus's Champion
-4 B B
-Creature Nightmare Horror
-When Laquatus's Champion enters the battlefield, target player loses 6 life. When Laquatus's Champion leaves the battlefield, that player gains 6 life.
-6/3
-RegenerateMe:B
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/laquatuss_champion.jpg
-
 Last Breath
 1 W
 Instant
@@ -17763,14 +17850,6 @@ no text
 2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lich_lord_of_unx.jpg
-
-Lichenthrope
-3 G G
-Creature Plant Fungus
-If damage would be dealt to Lichenthrope, put that many -1/-1 counters on it instead. At the beginning of your upkeep, remove a -1/-1 counter from Lichenthrope
-5/5
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lichenthrope.jpg
 
 Life Burst
 1 W
@@ -18593,14 +18672,6 @@ Destroy target nonland permanent and all other permanents with the same name as 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_pulse.jpg
 
-Maga, Traitor to Mortals
-X B B B
-Legendary Creature Human Wizard
-Maga, Traitor to Mortals enters the battlefield with X +1/+1 counters on it. When Maga enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.
-0/0
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/maga_traitor_to_mortals.jpg
-
 Magefire Wings
 U R
 Enchantment Aura
@@ -18852,16 +18923,6 @@ Counter target spell unless its controller pays 1.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_tithe.jpg
 
-Mana Vault
-1
-Artifact
-At the beginning of your upkeep, you may pay 4. If you do, untap Mana Vault. At the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.
-tap: add 3
-CARDNAME doesn't untap during your untap step.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_vault.jpg
-
 Manakin
 2
 Artifact Creature Construct
@@ -19060,14 +19121,6 @@ enPump:Protection from black & Protection from red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_law_and_grace.jpg
 
-Mask of Riddles
-U B
-Artifact Equipment
-Equipped creature has fear. Whenever equipped creature deals combat damage to a player, you may draw a card. 
-eqPump 2:Fear
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_riddles.jpg
-
 Masked Admirers
 2 G G
 Creature Elf Shaman
@@ -19112,15 +19165,6 @@ no text
 1/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_decoy.jpg
-
-Master of Etherium
-2 U
-Artifact Creature Vedalken Wizard
-Master of Etherium's power and toughness are each equal to the number of artifacts you control. Other artifact creatures you control get +1/+1.
-1/1
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_etherium.jpg
 
 Master of the Wild Hunt
 2 G G
@@ -19181,14 +19225,6 @@ When Meadowboon leaves play, put a +1/+1 counter on each creature you control.
 3/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meadowboon.jpg
-
-Meddling Mage
-U W
-Creature Human Wizard
-As Meddling Mage enters the battlefield, name a nonland card. The named card can't be cast.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/meddling_mage.jpg
 
 Meekstone
 1
@@ -19957,14 +19993,6 @@ Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molting_harpy.jpg
 
-Momentous Fall
-2 G G
-Instant
-As an additional cost to cast Momentous Fall, sacrifice a creature. You draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/momentous_fall.jpg
-
 Moment's Peace
 1 G
 Instant
@@ -20374,15 +20402,6 @@ Transmute:1 U U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/muddle_the_mixture.jpg
 
-Mul Daya Channelers
-1 G G
-Creature Elf Druid Shaman
-As long as the top card of your library is a creature card, Mul Daya Channelers gets +3/+3. As long as the top card of your library is a land card, Mul Daya Channelers has "tap: Add two mana of any one color to your mana pool."
-2/2
-Play with the top card of your library revealed.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mul_daya_channelers.jpg
-
 Mulldrifter
 4 U
 Creature Elemental
@@ -20491,16 +20510,6 @@ Devour:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoloth.jpg
 
-Mycosynth Golem
-11
-Artifact Creature Golem
-Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.) Artifact creature spells you cast have affinity for artifacts. (They cost 1 less to cast for each artifact you control.)
-4/5
-CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-CostChange:Player:Less:1:Spell:All:Artifact/Creature:Affinity/Artifact/All Conditions
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_golem.jpg
-
 Myr Enforcer
 7
 Artifact Creature Myr
@@ -20548,15 +20557,6 @@ Enchant creature
 When CARDNAME enters the battlefield, tap enchanted creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_restraints.jpg
-
-Mystic Snake
-1 G U U
-Creature Snake
-You may play Mystic Snake any time you could play an instant. When Mystic Snake comes into play, counter target spell.
-2/2
-Flash
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
 
 Mystical Tutor
 U
