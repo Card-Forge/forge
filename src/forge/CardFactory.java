@@ -4766,6 +4766,7 @@ public class CardFactory implements NewConstants {
         	}
         }// abLoseLife
         
+        /*
         if (hasKeyword(card, "spGainLife") != -1)
         {
         	int n = hasKeyword(card, "spGainLife");
@@ -4902,7 +4903,9 @@ public class CardFactory implements NewConstants {
                   }
         	}
         }//spGainLife
+        */
 
+        /*
         if (hasKeyword(card, "abGainLife") != -1)
         {
         	int n = hasKeyword(card, "abGainLife");
@@ -5048,7 +5051,7 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(abGainLife);
         	}
         }// abGainLife
-        
+        */
         
         if(hasKeyword(card, "SearchRebel") != -1) {
             int n = hasKeyword(card, "SearchRebel");
