@@ -7927,6 +7927,7 @@ public class CardFactory implements NewConstants {
     	
     	// todo: certain cards have two different kicker types, kicker will need to be written differently to handle this
     	// todo: kicker costs can only be mana right now i think?
+    	// todo: this kicker only works for pemanents. maybe we can create an optional cost class for buyback, kicker, that type of thing
     	int kicker = hasKeyword(card, "Kicker");
     	if (kicker != -1){
             final SpellAbility kickedSpell = new Spell(card) {
@@ -7937,12 +7938,6 @@ public class CardFactory implements NewConstants {
                     card.setKicked(true);
                     AllZone.GameAction.moveToPlay(card);
                 }
-                
-                @Override
-                public boolean canPlay() {
-                    return super.canPlay() && Phase.canCastSorcery(card.getController());
-                }
-                
             };
             String parse = card.getKeyword().get(kicker).toString();
             card.removeIntrinsicKeyword(parse);
@@ -7968,6 +7963,38 @@ public class CardFactory implements NewConstants {
             kickedSpell.setStackDescription(sb.toString());
             
             card.addSpellAbility(kickedSpell);
+    	}
+    	
+    	int evokeKeyword = hasKeyword(card, "Evoke");
+    	if (evokeKeyword != -1){
+            final SpellAbility evokedSpell = new Spell(card) {
+                private static final long serialVersionUID = -1598664196463358630L;
+                
+                @Override
+                public void resolve() {
+                	card.setEvoked(true);
+                    AllZone.GameAction.moveToPlay(card);
+                }
+            };
+            String parse = card.getKeyword().get(evokeKeyword).toString();
+            card.removeIntrinsicKeyword(parse);
+            
+            String k[] = parse.split(":");
+            final String evokedCost = k[1];
+
+            evokedSpell.setManaCost(evokedCost);
+            
+            StringBuilder desc = new StringBuilder();
+            desc.append("Evoke ").append(evokedCost);
+            desc.append(" (You may cast this spell for its evoke cost. If you do, when it enters the battlefield, sacrifice it.)");
+            
+            evokedSpell.setDescription(desc.toString());
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" (Evoked)");
+            evokedSpell.setStackDescription(sb.toString());
+            
+            card.addSpellAbility(evokedSpell);
     	}
     	
         if(hasKeyword(card, "Cycling") != -1) {

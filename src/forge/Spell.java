@@ -41,7 +41,7 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
     	if (!this.getRestrictions().canPlay(card, this))
     		return false;
         
-        return (card.isInstant() || Phase.canCastSorcery(card.getController()));
+        return (card.isInstant() || card.hasKeyword("Flash") || Phase.canCastSorcery(card.getController()));
     }//canPlay()
     
     @Override

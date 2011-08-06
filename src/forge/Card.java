@@ -68,6 +68,7 @@ public class Card extends MyObservable {
     private boolean                      faceDown                          = false;
     private boolean                      sacrificeAtEOT                    = false;
     private boolean                      kicked                            = false;
+    private boolean						 evoked							   = false;
     private boolean                      reflectedLand                     = false;
     private boolean						 levelUp						   = false;
     private boolean						 bounceAtUntap					   = false;
@@ -2716,6 +2717,8 @@ public class Card extends MyObservable {
              else if (Property.startsWith("kicked")) { if(!isKicked()) return false; }
         
              else if (Property.startsWith("notkicked")) { if(isKicked()) return false; }
+        
+             else if (Property.startsWith("evoked")) { if(!isEvoked()) return false; }
  			
              else if(Property.startsWith("non")) // ... Other Card types
              	{ if(isType(Property.substring(3))) return false;}
@@ -3261,5 +3264,13 @@ public class Card extends MyObservable {
     {
     	return ImageFilename;
     }
+
+	public void setEvoked(boolean evoked) {
+		this.evoked = evoked;
+	}
+
+	public boolean isEvoked() {
+		return evoked;
+	}
     
 }//end Card class
