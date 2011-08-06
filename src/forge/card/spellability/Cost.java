@@ -45,6 +45,15 @@ public class Cost {
 	public boolean getExileFromGraveThis() { return exileFromGraveThis; }
 	private int exileFromGraveAmount = 0;
 	public int getExileFromGraveAmount() { return exileFromGraveAmount; }
+	
+	private boolean exileFromTopCost = false;
+	public boolean getExileFromTopCost() { return exileFromTopCost; }
+	private String exileFromTopType = "";	// <type> or CARDNAME
+	public String getExileFromTopType() { return exileFromTopType; }
+	private boolean exileFromTopThis = false;
+	public boolean getExileFromTopThis() { return exileFromTopThis; }
+	private int exileFromTopAmount = 0;
+	public int getExileFromTopAmount() { return exileFromTopAmount; }
     
 	private boolean tapCost = false;
 	public boolean getTap() { return tapCost; } 
@@ -105,8 +114,8 @@ public class Cost {
 	public void setXMana(int xCost) { manaXCost = xCost; }
 	
 	public boolean isOnlyManaCost() {
-		return !sacCost && !exileCost && !exileFromHandCost && !exileFromGraveCost && !tapCost && !tapXTypeCost &&
-			!untapCost && !subtractCounterCost && !addCounterCost && !lifeCost && !discardCost && !returnCost;
+		return !sacCost && !exileCost && !exileFromHandCost && !exileFromGraveCost && !exileFromTopCost && !tapCost && 
+			!tapXTypeCost && !untapCost && !subtractCounterCost && !addCounterCost && !lifeCost && !discardCost && !returnCost;
 	}
 	
 	public String getTotalMana() { 
@@ -232,6 +241,17 @@ public class Cost {
         	exileFromGraveThis = (exileFromGraveType.equals("CARDNAME"));
         }
         
+        String exileFromTopStr = "ExileFromTop<";
+        if(parse.contains(exileFromTopStr)) {
+        	exileFromTopCost = true;
+        	String[] splitStr = abCostParse(parse, exileFromTopStr, 2);
+        	parse = abUpdateParse(parse, exileFromTopStr);
+        	
+        	exileFromTopAmount = Integer.parseInt(splitStr[0]);
+        	exileFromTopType = splitStr[1];
+        	exileFromTopThis = false;
+        }
+        
         String returnStr = "Return<";
         if(parse.contains(returnStr)) {
         	returnCost = true;
@@ -310,7 +330,7 @@ public class Cost {
 
 	public boolean isUndoable() {
 		return !(sacCost || exileCost || exileFromHandCost || exileFromGraveCost || tapXTypeCost || discardCost ||
-				returnCost || lifeCost) && hasNoXManaCost() && hasNoManaCost();
+				returnCost || lifeCost || exileFromTopCost) && hasNoXManaCost() && hasNoManaCost();
 	}
 	
 
@@ -396,6 +416,11 @@ public class Cost {
 		
 		if(exileFromGraveCost) {
 			cost.append(exileFromGraveString(first));
+			first = false;
+		}
+		
+		if(exileFromTopCost) {
+			cost.append(exileFromTopString(first));
 			first = false;
 		}
 		
@@ -526,6 +551,11 @@ public class Cost {
 			first = false;
 		}
 		
+		if( exileFromTopCost ) {
+			cost.append( exileFromTopString(first) );
+			first = false;
+		}
+		
 		if (returnCost){
 			cost.append(returnString(first));
 			first = false;
@@ -653,6 +683,32 @@ public class Cost {
 		else {
 			cost.append(convertIntAndTypeToWords(exileFromGraveAmount, exileFromGraveType));
 			cost.append(" from your graveyard");
+		}
+		return cost.toString();
+	}
+	
+	public String exileFromTopString(boolean first) {
+		StringBuilder cost = new StringBuilder();
+		if(first) {
+			if(isAbility)
+				cost.append("Exile ");
+			else
+				cost.append("exile ");
+		}
+		else {
+			cost.append(", Exile ");
+		}
+		
+		if(exileType.equals("CARDNAME"))
+			cost.append(name).append(" ");
+		else {
+			cost.append("the top");
+			if(exileFromTopAmount != 1) {
+				cost.append(convertIntAndTypeToWords(exileFromTopAmount, exileFromTopType));
+			}
+			cost.append(" card");
+			if(exileFromTopAmount != 1) cost.append("s");
+			cost.append(" of your library");
 		}
 		return cost.toString();
 	}

@@ -425,6 +425,21 @@ public class ComputerUtil
 				return false;
 		}
 		
+		if(cost.getExileFromTopCost()){
+			if(!cost.getExileFromTopThis()){
+			    CardList typeList = AllZoneUtil.getPlayerCardsInLibrary(AllZone.ComputerPlayer);
+			    typeList = typeList.getValidCards(cost.getExileFromTopType().split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+			    Card target = sa.getTargetCard();
+				if (target != null && target.getController().equals(AllZone.ComputerPlayer)) // don't exile the card we're pumping
+					  typeList.remove(target);
+				
+				if (cost.getExileFromTopAmount() > typeList.size())
+					return false;
+			}
+			else if (cost.getExileFromTopThis() && !AllZoneUtil.isCardInPlayerLibrary(card.getController(), card))
+				return false;
+		}
+		
 		if (cost.getReturnCost()){
 			  // if there's a return in the cost, just because we can Pay it doesn't mean we want to. 
 			if (!cost.getReturnThis()){
@@ -718,6 +733,10 @@ public class ComputerUtil
   
   static public CardList chooseExileFromGraveType(String type, Card activate, Card target, int amount){
 	  return chooseExileFrom(Constant.Zone.Graveyard, type, activate, target, amount);
+  }
+  
+  static public CardList chooseExileFromTopType(String type, Card activate, Card target, int amount){
+	  return chooseExileFrom(Constant.Zone.Library, type, activate, target, amount);
   }
   
   static public CardList chooseExileFrom(String zone, String type, Card activate, Card target, int amount){

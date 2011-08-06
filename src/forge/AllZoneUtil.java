@@ -245,6 +245,10 @@ public class AllZoneUtil {
 		return PlayerZoneUtil.isCardInZone(AllZone.getZone(Constant.Zone.Hand, player), card);
 	}
 	
+	public static boolean isCardInPlayerLibrary(Player player, Card card) {
+		return PlayerZoneUtil.isCardInZone(AllZone.getZone(Constant.Zone.Library, player), card);
+	}
+	
 	////////////// EXILE
 	
 	/**
