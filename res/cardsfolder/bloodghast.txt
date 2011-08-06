@@ -5,6 +5,7 @@ Text:Bloodghast has haste as long as an opponent has 10 or less life.\r\nLandfal
 PT:2/1
 K:CARDNAME can't block.
 K:Landfall
+SVar:SacMe:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodghast.jpg
 End

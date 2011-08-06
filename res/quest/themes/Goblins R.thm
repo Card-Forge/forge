@@ -19,72 +19,95 @@ Tarfire
 Reckless One
 Mogg War Marshal
 Siege-Gang Commander
-Goblin Guide
-Kiki-Jiki, Mirror Breaker
-Squee, Goblin Nabob
-Mudbutton Torchrunner
-Goblin Arsonist
+Mudbutton Clanger
 Goblin Marshal
-Goblin Sharpshooter
 [/Group]
 
-[Group MaxCnt=4 Percentage=19]
-Akki Raider
-Akki Underling
-Arms Dealer
-Battle Squadron
-Bloodmark Mentor
-Boggart Arsonists
-Boros Recruit
+[Group MaxCnt=4 Percentage=5]
 Crazed Goblin
-Dragon Fodder
-Ember Hauler
-Enslaved Scout
-Flamewave Invoker
+Boros Recruit
+Goblin Arsonist
+Goblin Arsonist
 Goblin Balloon Brigade
-Goblin Berserker
-Goblin Brigand
-Goblin Bully
-Goblin Cavaliers
-Goblin Chariot
 Goblin Digging Team
+Goblin Firestarter
 Goblin Gaveleer
-Goblin Glider
-Goblin Hero
-Goblin Medics
+Goblin Guide
 Goblin Mountaineer
-Goblin Mutant
 Goblin Patrol
-Goblin Piker
-Goblin Raider
-Goblin Roughrider
-Goblin Settler
-Goblin Sky Raider
-Goblin Spelunkers
-Goblin Striker
-Goblin War Buggy
-Hearthfire Hobgoblin
-Hobgoblin Dragoon
-Hulking Goblin
-Keeper of Kookus
-Kyren Glider
-Kyren Sniper
-Lavafume Invoker
 Mogg Fanatic
-Mogg Jailer
 Mogg Sentry
 Mons's Goblin Raiders
-Mudbrawler Cohort
 Raging Goblin
+Scuzzback Scrapper
+Spikeshot Elder
+Stream Hopper
+Tattermunge Maniac
+[/Group]
+
+[Group MaxCnt=4 Percentage=4]
+Akki Raider
+Akki Underling
+Bloodmark Mentor
+Bloodmark Mentor
+Ember Hauler
+Goblin Brigand
+Goblin Bully
+Goblin Glider
+Dragon Fodder
+Goblin Piker
+Goblin Raider
+Goblin Striker
+Goblin War Buggy
+Hulking Goblin
+Kyren Glider
+Mogg Jailer
+Mudbrawler Cohort
+Mudbrawler Cohort
 Rustrazor Butcher
+Utvara Scalper
+[/Group]
+
+[Group MaxCnt=4 Percentage=4]
+Arms Dealer
+Boggart Arsonists
+Boggart Ram-Gang
+Enslaved Scout
+Flamewave Invoker
+Goblin Artillery
+Goblin Cavaliers
+Goblin Chariot
+Goblin Hero
+Goblin Medics
+Goblin Roughrider
+Goblin Sharpshooter
+Goblin Sky Raider
+Goblin Spelunkers
+Hearthfire Hobgoblin
+Hobgoblin Dragoon
+Kyren Sniper
+Lavafume Invoker
+Mudbutton Torchrunner
 Skirk Shaman
 Slingshot Goblin
-Spikeshot Elder
 Spikeshot Goblin
-Stream Hopper
-Tar Pitcher
+Squee, Goblin Nabob
+Tattermunge Duo
 Tuktuk the Explorer
-Utvara Scalper
+[/Group]
+
+[Group MaxCnt=4 Percentage=4]
+Boartusk Liege
+Goblin Berserker
+Goblin Settler
+Murderous Redcap
+Tar Pitcher
+[/Group]
+
+[Group MaxCnt=1 Percentage=2]
+Battle Squadron
+Kiki-Jiki, Mirror Breaker
+Scuzzback Marauders
 [/Group]
 
 End

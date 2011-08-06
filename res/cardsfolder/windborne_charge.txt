@@ -1,0 +1,8 @@
+Name:Windborne Charge
+ManaCost:2 W W
+Types:Sorcery
+Text:no text
+A:SP$Pump|Cost$2 W W|TargetMin$2|TargetMax$2|KW$Flying|NumAtt$+2|NumDef$+2|ValidTgts$Creature|TgtPrompt$Select target Creature|SpellDescription$Two target creatures you control each get +2/+2 and gain flying until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/windborne_charge.jpg
+End
