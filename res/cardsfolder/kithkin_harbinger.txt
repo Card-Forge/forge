@@ -1,7 +1,7 @@
 Name:Kithkin Harbinger
 ManaCost:2 W
 Types:Creature Kithkin Wizard
-Text:When Kithkin Harbinger comes into play, you may search your library for a Kithkin card, reveal it, then shuffle your library and put that card on top of it.
+Text:When CARDNAME enters the battlefield, you may search your library for a Kithkin card, reveal it, then shuffle your library and put that card on top of it.
 PT:1/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_harbinger.jpg

@@ -1,7 +1,7 @@
 Name:Imperial Recruiter
 ManaCost:2 R
 Types:Creature Human Advisor
-Text:When Imperial Recruiter comes into play, search your library for a creature card with power 2 or less, reveal that card, and put it into your hand. Then shuffle your library.
+Text:When CARDNAME enters the battlefield, search your library for a creature card with power 2 or less, reveal it, and put it into your hand. Then shuffle your library.
 PT:1/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_recruiter.jpg

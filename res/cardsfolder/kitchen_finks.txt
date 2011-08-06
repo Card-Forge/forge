@@ -1,7 +1,7 @@
 Name:Kitchen Finks
 ManaCost:1 GW GW
 Types:Creature Ouphe
-Text:When Kitchen Finks comes into play, you gain 2 life.
+Text:When CARDNAME enters the battlefield, you gain 2 life.
 PT:3/2
 K:Persist
 SVar:Rarity:Uncommon

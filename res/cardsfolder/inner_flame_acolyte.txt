@@ -1,7 +1,7 @@
 Name:Inner-Flame Acolyte
 ManaCost:1 R R
 Types:Creature Elemental Shaman
-Text:When Inner-Flame Acolyte comes into play, target creature gets +2/+0 and gains haste until end of turn.
+Text:When CARDNAME enters the battlefield, target creature gets +2/+0 and gains haste until end of turn.
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inner_flame_acolyte.jpg

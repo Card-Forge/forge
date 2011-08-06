@@ -1,7 +1,7 @@
 Name:Jedit's Dragoons
 ManaCost:5 W
 Types:Creature Cat Soldier
-Text:When Jedit's Dragoons comes into play, you gain 4 life.
+Text:When CARDNAME enters the battlefield, you gain 4 life.
 PT:2/5
 K:Vigilance
 SVar:Rarity:Common

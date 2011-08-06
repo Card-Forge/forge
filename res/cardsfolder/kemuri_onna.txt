@@ -1,7 +1,7 @@
 Name:Kemuri-Onna
 ManaCost:4 B
 Types:Creature Spirit
-Text:When Kemuri-Onna comes into play, target player discards a card.
+Text:When CARDNAME enters the battlefield, target player discards a card.
 PT:3/3
 K:WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand.
 SVar:Rarity:Uncommon
