@@ -1,3 +1,43 @@
+Admonition Angel
+3 W W W
+Creature Angel
+no text
+6/6
+Flying
+WheneverKeyword:EntersBattleField:Type/Land:Play:MoveFrom-Play-Exiled:NormalInput/Specific/NonType.Land/NotSelf:ASAP:Yes_No:Initiator - OwnedByController!AttachTarget:Landfall — Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.
+WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.
+SVar:RemAIDeck:True
+
+AEther Flash
+2 R R
+Enchantment
+no text
+WheneverKeyword:EntersBattleField:Type/Creature:Play:Damage/2:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a creature enters the battlefield, AEther Flash deals 2 damage to it.
+SVar:RemAIDeck:True
+
+Ancestral Vision
+no cost
+Sorcery
+Ancestral Vision is blue. (Note: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
+CARDNAME is blue.
+Suspend:4:U
+spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
+SVar:RemAIDeck:True
+
+Arashi, the Sky Asunder
+3 G G
+Legendary Creature Spirit
+(NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying. Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
+5/5
+SVar:RemAIDeck:True
+
+Battle Strain
+1 R
+Enchantment
+no text
+WheneverKeyword:Blocks:No_Initiator:Play:Damage/1:ControllingPlayer_Initiator:ASAP:No_Condition:No Special Condition:Whenever a creature blocks, Battle Strain deals 1 damage to that creature's controller.
+SVar:RemAIDeck:True
+
 Amnesia
 3 U U U
 Sorcery
@@ -1460,14 +1500,6 @@ no text
 Shadow
 Suspend:2:1 U
 
-Ancestral Vision
-no cost
-Sorcery
-Ancestral Vision is blue. (Note: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
-CARDNAME is blue.
-Suspend:4:U
-spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
-
 Giant Dustwasp
 3 G G
 Creature Insect
@@ -2025,12 +2057,6 @@ Trample
 Modular 1
 WheneverKeyword:EntersBattleField:Type/Artifact:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another artifact enters the battlefield, put a +1/+1 counter on Arcbound Crusher.
 
-AEther Flash
-2 R R
-Enchantment
-no text
-WheneverKeyword:EntersBattleField:Type/Creature:Play:Damage/2:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a creature enters the battlefield, AEther Flash deals 2 damage to it.
-
 Close Quarters
 2 R R
 Enchantment
@@ -2460,15 +2486,6 @@ Protection from black
 Protection from red
 WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature enters the battlefield, you may gain 1 life.
 
-Admonition Angel
-3 W W W
-Creature Angel
-no text
-6/6
-Flying
-WheneverKeyword:EntersBattleField:Type/Land:Play:MoveFrom-Play-Exiled:NormalInput/Specific/NonType.Land/NotSelf:ASAP:Yes_No:Initiator - OwnedByController!AttachTarget:Landfall — Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.
-WheneverKeyword:LeavesBattleField:Self:Any:MoveFrom-Exiled-Play:All/AttachedCards:ASAP:No_Condition:No Special Condition:When Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.
-
 Midsummer Revel
 3 G G
 Enchantment
@@ -2559,12 +2576,6 @@ Enchantment
 no text
 WheneverKeyword:Attack - Alone:No_Initiator:Play:StatsPumpEOT/1/1:Initiating_Card:ASAP:No_Condition:Initiator - OwnedByController:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
 WheneverKeyword:Attack - Alone:No_Initiator:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:Initiator - OwnedByController:Whenever a creature you control attacks alone, you may tap target creature.
-
-Battle Strain
-1 R
-Enchantment
-no text
-WheneverKeyword:Blocks:No_Initiator:Play:Damage/1:ControllingPlayer_Initiator:ASAP:No_Condition:No Special Condition:Whenever a creature blocks, Battle Strain deals 1 damage to that creature's controller.
 
 Alley Grifters
 1 B B
@@ -23221,12 +23232,6 @@ Gift of Estates
 1 W
 Sorcery
 If an opponent controls more lands than you, search your library for up to three Plains cards and put them into your hand.
-
-Arashi, the Sky Asunder
-3 G G
-Legendary Creature Spirit
-(NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying. Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
-5/5
 
 Elvish Fury
 G
