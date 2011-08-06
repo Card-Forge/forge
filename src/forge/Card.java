@@ -1087,16 +1087,19 @@ public class Card extends MyObservable {
             }
             
             //Replicate
-            if(kw.contains("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
-            	if (sb.toString().endsWith("\r\n\r\n")) {
-                    sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);
+            for(String keyw : kw)
+            {
+                if(keyw.contains("Replicate") && !sb.toString().contains("you paid its replicate cost.")) {
+                    if (sb.toString().endsWith("\r\n\r\n")) {
+                        sb.delete(sb.lastIndexOf("\r\n"), sb.lastIndexOf("\r\n")+3);
+                    }
+                    sb.append(keyw);
+                    sb.append(" (When you cast this spell, copy it for each time you paid its replicate cost.");
+                    if (sb.toString().contains("Target") || sb.toString().contains("target")) {
+                        sb.append(" You may choose new targets for the copies.");
+                    }
+                    sb.append(")\r\n");
                 }
-                sb.append("Replicate ").append(spellAbility.get(0).getReplicateManaCost());
-                sb.append("(When you cast this spell, copy it for each time you paid its replicate cost.");
-                if (sb.toString().contains("Target") || sb.toString().contains("target")) {
-                    sb.append(" You may choose new targets for the copies.");
-                }
-                sb.append(")\r\n");
             }
              
             while (sb.toString().endsWith("\r\n")) {
