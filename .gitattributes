@@ -145,6 +145,7 @@ res/cardsfolder/angelic_benediction.txt -text svneol=native#text/plain
 res/cardsfolder/angelic_blessing.txt -text svneol=native#text/plain
 res/cardsfolder/angelic_chorus.txt -text svneol=native#text/plain
 res/cardsfolder/angelic_curator.txt -text svneol=native#text/plain
+res/cardsfolder/angelic_voices.txt -text svneol=native#text/plain
 res/cardsfolder/angelic_wall.txt -text svneol=native#text/plain
 res/cardsfolder/angels_mercy.txt -text svneol=native#text/plain
 res/cardsfolder/angelsong.txt -text svneol=native#text/plain

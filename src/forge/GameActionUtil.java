@@ -11426,6 +11426,15 @@ public class GameActionUtil {
       			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController());
 	      		if (CardsinPlay.isEmpty()) return false;
   	      	}
+  	      	if(SpecialConditions.contains("isNotPresent")) { // is a card of a certain type/color not present?
+  	    	  	SpecialConditions = SpecialConditions.replaceAll("isNotPresent ", "");
+    			CardList CardsinPlay = new CardList();
+      			CardsinPlay.addAll(AllZone.Human_Play.getCards());
+      			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
+      			String Conditions[] = SpecialConditions.split(",");
+      			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController());
+	      		if (!CardsinPlay.isEmpty()) return false;
+  	      	}
   	      	if(SpecialConditions.contains("isEquipped")) {
 	      		if (!SourceCard.isEquipped()) return false;
 	      	}
@@ -11468,11 +11477,6 @@ public class GameActionUtil {
       		if(Range.equals("Enchanted")) {
       			if (SourceCard.getEnchanting().size() > 0)
       				Cards_inZone.addAll(SourceCard.getEnchanting().toArray());
-	      			/*CardList CardsinPlay = new CardList();
-	      			CardsinPlay.addAll(AllZone.Human_Play.getCards());
-	      			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
-		      		for(int i = 0; i < CardsinPlay.size(); i++)
-		      		if(CardsinPlay.get(i).getEnchantedBy().contains(SourceCard)) Cards_inZone.add(CardsinPlay.get(i));*/
 	      	}
       		
       		if(Range.equals("Equipped")) {

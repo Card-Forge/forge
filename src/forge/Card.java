@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import forge.error.ErrorViewer;
 
 import com.esotericsoftware.minlog.Log;
 
