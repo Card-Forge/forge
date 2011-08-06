@@ -416,6 +416,7 @@ class CardFactory_Lands {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Tendo Ice Bridge")){
             final Ability_Mana tendo = new Ability_Mana(card, "tap, Remove a charge counter from CARDNAME: Add one mana of any color to your mana pool.") {
@@ -476,6 +477,7 @@ class CardFactory_Lands {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Graypelt Refuge") || cardName.equals("Sejiri Refuge")
@@ -542,7 +544,6 @@ class CardFactory_Lands {
                     AllZone.EndOfTurn.addUntil(eot1);
                 }
             };//SpellAbility
-//	      card.setManaCost("U");
             
             card.clearSpellKeepManaAbility();
             card.addSpellAbility(a1);
@@ -681,6 +682,7 @@ class CardFactory_Lands {
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Blinkmoth Nexus")) {
         	final long[] timeStamp = new long[1];
@@ -727,6 +729,7 @@ class CardFactory_Lands {
             };
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mishra's Factory")) {
@@ -850,7 +853,6 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         
-       
         //*************** START *********** START **************************
         else if(cardName.equals("Oboro, Palace in the Clouds")) {
             final Ability ability = new Ability(card, "1") {
@@ -1271,6 +1273,7 @@ class CardFactory_Lands {
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Stalking Stones")) {
             
@@ -1348,6 +1351,7 @@ class CardFactory_Lands {
             a1.setStackDescription(sb.toString());
             a1.setDescription("3 W U: Until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance. It's still a land.");
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Lavaclaw Reaches")) {
@@ -1457,6 +1461,7 @@ class CardFactory_Lands {
             a1.setStackDescription(sb.toString());
             a1.setDescription("1 B R: Until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with {X}: This creature gets +X/+0 until end of turn. It's still a land.");
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Stirring Wildwood")) {
@@ -1586,6 +1591,7 @@ class CardFactory_Lands {
             a1.setDescription("2 R G: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land.");
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Dread Statuary")) {
         	final long[] timeStamp = new long[1];
@@ -1627,6 +1633,7 @@ class CardFactory_Lands {
             a1.setStackDescription(sb.toString());
             a1.setDescription("4: Until end of turn, becomes a 4/2 Golem artifact creature until end of turn. It's still a land.");
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Phyrexian Tower")) {
@@ -1676,6 +1683,7 @@ class CardFactory_Lands {
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Grove of the Burnwillows")) {
         	
@@ -1712,6 +1720,7 @@ class CardFactory_Lands {
             card.addSpellAbility(ability1);
             card.addSpellAbility(ability2);      
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Lotus Vale")) {
@@ -1816,6 +1825,7 @@ class CardFactory_Lands {
            card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Scorched Ruins")) {
             final Command comesIntoPlay = new Command() {
@@ -1909,6 +1919,7 @@ class CardFactory_Lands {
         	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Island of Wak-Wak")) {
         	/*
@@ -1971,6 +1982,7 @@ class CardFactory_Lands {
             ability.setStackDescription(cardName+" - target creature's power becomes 0.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Magosi, the Waterveil")) {
@@ -2279,7 +2291,8 @@ class CardFactory_Lands {
             });
         }//*************** END ************ END **************************
         
-      //*************** START ************ START **************************
+        
+        //*************** START ************ START **************************
         else if(cardName.equals("Horizon Canopy")) {
         	/*
         	 * Tap, Pay 1 life: Add one W or G to your mana pool.
