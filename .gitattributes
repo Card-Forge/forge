@@ -4764,6 +4764,7 @@ res/cardsfolder/punishing_fire.txt svneol=native#text/plain
 res/cardsfolder/puppet_conjurer.txt svneol=native#text/plain
 res/cardsfolder/puppet_strings.txt -text svneol=native#text/plain
 res/cardsfolder/puppeteer.txt -text svneol=native#text/plain
+res/cardsfolder/puppeteer_clique.txt -text svneol=native#text/plain
 res/cardsfolder/purge.txt -text svneol=native#text/plain
 res/cardsfolder/purify.txt -text svneol=native#text/plain
 res/cardsfolder/purity.txt -text svneol=native#text/plain
