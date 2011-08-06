@@ -2,8 +2,8 @@ package forge;
 import static forge.error.ErrorViewer.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.TreeSet;
+// import java.util.Collection;
+// import java.util.TreeSet;
 
 
 public class ComputerAI_General implements Computer {
@@ -12,7 +12,7 @@ public class ComputerAI_General implements Computer {
 	//private int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
     //private Collection<Card> playMain1Cards;
         
-    @SuppressWarnings("unchecked")
+    // @SuppressWarnings("unchecked")
     // TreeSet type safety
     public ComputerAI_General() {
         //try to reduce the number of comparisons

@@ -90,7 +90,8 @@ public class Input_Cleanup extends Input {
                 + n + " cards in your hand - select a card to discard");
         
         //goes to the next phase
-        if(n <= 7) {
+        // if(n <= 7) {
+        if(n <= MaxHandSize || MaxHandSize == -1) {
             CombatUtil.removeAllDamage();
             
             //AllZone.Phase.nextPhase();

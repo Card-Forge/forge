@@ -38,6 +38,16 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+cursed_rack.jpg		http://www.wizards.com/global/images/magic/general/cursed_rack.jpg
+gnat_miser.jpg		http://www.wizards.com/global/images/magic/general/gnat_miser.jpg
+graceful_adept.jpg		http://www.wizards.com/global/images/magic/general/graceful_adept.jpg
+locust_miser.jpg		http://www.wizards.com/global/images/magic/general/locust_miser.jpg
+minamo_scrollkeeper.jpg		http://www.wizards.com/global/images/magic/general/minamo_scrollkeeper.jpg
+reliquary_tower.jpg		http://www.wizards.com/global/images/magic/general/reliquary_tower.jpg
+spellbook.jpg		http://www.wizards.com/global/images/magic/general/spellbook.jpg
+thought_devourer.jpg		http://www.wizards.com/global/images/magic/general/thought_devourer.jpg
+thought_eater.jpg		http://www.wizards.com/global/images/magic/general/thought_eater.jpg
+thought_nibbler.jpg		http://www.wizards.com/global/images/magic/general/thought_nibbler.jpg
 muddle_the_mixture.jpg		http://www.wizards.com/global/images/magic/general/muddle_the_mixture.jpg
 journey_to_nowhere.jpg		http://www.wizards.com/global/images/magic/general/journey_to_nowhere.jpg
 dwarven_demolition_team.jpg		http://www.wizards.com/global/images/magic/general/dwarven_demolition_team.jpg
