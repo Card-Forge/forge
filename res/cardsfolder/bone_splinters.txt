@@ -1,0 +1,9 @@
+Name:Bone Splinters
+ManaCost:B
+Types:Sorcery
+Text:no text
+A:SP$Destroy|Cost$B Sac<1/Creature>|ValidTgts$Creature|TgtPrompt$Select target creature|SpellDescription$Destroy target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_splinters.jpg
+End
