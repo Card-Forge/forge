@@ -1,0 +1,7 @@
+Name:Mortal Combat
+ManaCost:2 B B
+Types:Enchantment
+Text:At the beginning of your upkeep, if twenty or more creature cards are in your graveyard, you win the game.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mortal_combat.jpg
+End

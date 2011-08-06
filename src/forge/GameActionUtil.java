@@ -104,6 +104,7 @@ public class GameActionUtil {
 		Abyssallist = Abyssallist.getName("Abyssal Persecutor");
 		if(Platinumlist.size() == 0 && Abyssallist.size() == 0) {
 			upkeep_Battle_of_Wits();
+			upkeep_Mortal_Combat();
 			upkeep_Epic_Struggle();
 			upkeep_Near_Death_Experience();
 			upkeep_Test_of_Endurance();
@@ -8021,6 +8022,36 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// if
 	}// upkeep_Battle_of_Wits
+	
+	private static void upkeep_Mortal_Combat() {
+		final String player = AllZone.Phase.getActivePlayer();
+
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Mortal Combat");
+		CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+		grave = grave.filter(AllZoneUtil.creatures);
+
+		if(0 < list.size() && 20 <= grave.size()) {
+			Ability ability = new Ability(list.get(0), "0") {
+				@Override
+				public void resolve() {
+					String opponent = AllZone.GameAction.getOpponent(player);
+					PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
+
+					if (opponent.equals(Constant.Player.Computer)) {
+						int gameNumber = 0;
+						if (Constant.Runtime.WinLose.getWin()==1)
+							gameNumber = 1;
+						Constant.Runtime.WinLose.setWinMethod(gameNumber,"Mortal Combat");
+					}
+
+					life.setLife(0);
+				}
+			};// Ability
+
+			ability.setStackDescription("Mortal Combat - " + player + " wins the game");
+			AllZone.Stack.add(ability);
+		}// if
+	}// upkeep_Mortal Combat
 
 	private static void upkeep_Epic_Struggle() {
 		final String player = AllZone.Phase.getActivePlayer();

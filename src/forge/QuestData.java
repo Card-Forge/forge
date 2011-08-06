@@ -503,7 +503,8 @@ public class QuestData implements NewConstants {
     		if (s != null) {
 	    		if (s.equals("Poison Counters") || s.equals("Milled") || s.equals("Battle of Wits") || 
 	    			s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || s.equals("Epic Struggle") ||
-	    			s.equals("Door to Nothingness") || s.equals("Barren Glory") || s.equals("Near-Death Experience")) {
+	    			s.equals("Door to Nothingness") || s.equals("Barren Glory") || s.equals("Near-Death Experience") ||
+	    			s.equals("Mortal Combat")) {
 	    			creds += qdPrefs.getMatchRewardAltWinBonus();
 	    		}
     		}

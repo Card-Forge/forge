@@ -5,6 +5,7 @@ public class WinLose
   //Damage
   //Poison Counters	
   //Battle of Wits
+	//Mortal Combat
   //Milled
   //Felidar Sovereign
   //...
