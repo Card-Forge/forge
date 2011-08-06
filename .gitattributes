@@ -5235,6 +5235,7 @@ res/cardsfolder/riverfall_mimic.txt -text svneol=native#text/plain
 res/cardsfolder/rix_maadi_dungeon_palace.txt -text svneol=native#text/plain
 res/cardsfolder/roar_of_reclamation.txt svneol=native#text/plain
 res/cardsfolder/roar_of_the_wurm.txt -text svneol=native#text/plain
+res/cardsfolder/roaring_slagwurm.txt -text svneol=native#text/plain
 res/cardsfolder/robber_fly.txt -text svneol=native#text/plain
 res/cardsfolder/robe_of_mirrors.txt -text svneol=native#text/plain
 res/cardsfolder/roc_egg.txt -text svneol=native#text/plain
