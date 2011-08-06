@@ -1,6 +1,6 @@
 Name:Cephalid Retainer
 ManaCost:2 U U
-Types:Creature Sephalid
+Types:Creature Cephalid
 Text:no text
 PT:2/3
 A:AB$Tap | Cost$ U U | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | SpellDescription$ Tap target creature without flying.
