@@ -14700,6 +14700,112 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Apocalypse Hydra")) {      
+            SpellAbility spell = new Spell_Permanent(card) {
+                private static final long serialVersionUID = -11489323313L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    return super.canPlay() && 5 <= ComputerUtil.getAvailableMana().size() - 2;
+                }
+            };
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            final Ability ability = new Ability(card, "1 R") {
+                
+                @Override
+                public boolean canPlay() {
+                    return card.getCounters(Counters.P1P1) > 0 && super.canPlay();
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return getCreature().size() != 0;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    if(AllZone.Human_Life.getLife() < card.getCounters(Counters.P1P1)) setTargetPlayer(Constant.Player.Human);
+                    else {
+                        CardList list = getCreature();
+                        list.shuffle();
+                        setTargetCard(list.get(0));
+                    }
+                    card.subtractCounter(Counters.P1P1, 1); 
+                }//chooseTargetAI()
+                
+                CardList getCreature() {
+                    //toughness of 1
+                    CardList list = CardFactoryUtil.AI_getHumanCreature(1, card, true);
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return (1 == c.getKillDamage());
+                        }
+                    });
+                    return list;
+                }//getCreature()
+                
+                @Override
+                public void resolve() {
+                    if(getTargetCard() != null) {
+                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,
+                                card);
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
+                }//resolve()
+                
+            };//SpellAbility
+            Input target = new Input() {
+                
+                private static final long serialVersionUID = 4246601245231655L;
+                
+                @Override
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select creature or player to target: ");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectPlayer(String player) {
+                	ability.setTargetPlayer(player);
+                	card.subtractCounter(Counters.P1P1, 1);
+                    AllZone.Stack.add(ability);
+                    stopSetNext(new ComputerAI_StackNotEmpty());	
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    if(AllZone.GameAction.isCardInZone(c, Hplay) || AllZone.GameAction.isCardInZone(c, Cplay)) {
+                    	card.subtractCounter(Counters.P1P1, 1);
+                    	ability.setTargetCard(c);
+                        AllZone.Stack.add(ability);
+                        stopSetNext(new ComputerAI_StackNotEmpty());
+                    }
+                }//selectCard()
+            };//Input
+            card.addSpellAbility(ability);
+            ability.setAfterPayMana(target);
+            Command intoPlay = new Command() {
+                
+                private static final long serialVersionUID = 255901529244894L;
+                
+                public void execute() {
+                	int XCounters = card.getXManaCostPaid();
+                	if(XCounters >= 5) XCounters = 2 * XCounters;
+                    card.addCounter(Counters.P1P1, XCounters);                   
+                }//execute()
+            };//Command
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Auramancer")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -19055,6 +19161,17 @@ public class CardFactory_Creatures {
                 
             }
         }//level up
+        
+        if (card.getManaCost().contains("X"))
+        {
+        	SpellAbility sa = card.getSpellAbility()[0];
+    		sa.setIsXCost(true);
+    		
+        	if (card.getManaCost().startsWith("X X"))
+        		sa.setXManaCost("2");
+        	else if (card.getManaCost().startsWith("X"))
+        		sa.setXManaCost("1");
+        }//X
         
         return card;
     }

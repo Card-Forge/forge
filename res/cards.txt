@@ -1,3 +1,9 @@
+Apocalypse Hydra 
+X G R
+Creature Hydra
+Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it. 1 R, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to target creature or player.
+0/0
+
 Haze of Rage
 1 R
 Sorcery
