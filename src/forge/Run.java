@@ -1,4 +1,7 @@
 package forge;
+
+import forge.deck.Deck;
+
 public class Run {
     public static void main(String[] args) {
         AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());

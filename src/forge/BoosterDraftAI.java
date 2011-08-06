@@ -1,6 +1,10 @@
 package forge;
+
 import java.util.ArrayList;
 import java.util.Comparator;
+
+import forge.deck.Deck;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;

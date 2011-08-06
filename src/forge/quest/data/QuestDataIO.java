@@ -2,7 +2,7 @@ package forge.quest.data;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.mapper.MapperWrapper;
-import forge.Deck;
+import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;

@@ -2,6 +2,8 @@
 package forge;
 
 import com.esotericsoftware.minlog.Log;
+import forge.deck.Deck;
+import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -342,8 +344,8 @@ public class QuestData implements NewConstants {
     }
     
     public Deck ai_getDeckNewFormat(String deckName) {
-    	DeckIO deckIO = new NewDeckIO(ForgeProps.getFile(QUEST.DECKS), true);
-    	Deck aiDeck = deckIO.readDeck(deckName);
+    	DeckManager deckManager = new DeckManager(ForgeProps.getFile(QUEST.DECKS));
+    	Deck aiDeck = deckManager.readDeck(deckName);
     	return aiDeck;
     }
     

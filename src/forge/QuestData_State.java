@@ -9,6 +9,8 @@ package forge;
  */
 
 
+import forge.deck.Deck;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;

@@ -2,6 +2,7 @@
 package forge;
 
 
+import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;

@@ -2,6 +2,7 @@
 package forge;
 
 
+import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.gui.GuiUtils;
 import forge.quest.data.QuestBattleManager;
@@ -369,85 +370,83 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         
         return filter;
     }//getFileFilter()
-    
+
     private File getExportFilename() {
         //Object o = null; // unused
-        
+
         JFileChooser save = new JFileChooser(previousDirectory);
-        
+
         save.setDialogTitle("Export Deck Filename");
         save.setDialogType(JFileChooser.SAVE_DIALOG);
         save.addChoosableFileFilter(getFileFilter());
         save.setSelectedFile(new File(currentDeck.getName() + ".deck"));
-        
+
         int returnVal = save.showSaveDialog(null);
-        
+
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             File file = save.getSelectedFile();
             String check = file.getAbsolutePath();
-            
+
             previousDirectory = file.getParentFile();
-            
+
             if(check.endsWith(".deck")) return file;
             else return new File(check + ".deck");
         }
-        
+
         return null;
     }//getExportFilename()
-    
+
     private void importDeck(boolean isHumanDeck) {
         File file = getImportFilename();
-        
+
         if(file == null) return;
-        
+
         Object check = null;
-        
+
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
             check = in.readObject();
-            
+
             //deck migration - this is a little hard to read, because i can't just plainly reference a class in the
             //default package
             Class<?> deckConverterClass = Class.forName("DeckConverter");
             //invoke public static Object toForgeDeck(Object o) of DeckConverter
             check = deckConverterClass.getDeclaredMethod("toForgeDeck", Object.class).invoke(null, check);
-            
+
             in.close();
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("Gui_Quest_DeckEditor_Menu : importDeck() error, " + ex);
         }
-        
+
         Deck deck = (Deck) check;
-        
+
         deckDisplay.setTitle(deckEditorName + " - " + deck.getName());
-        
+
         CardList cardpool;
-        
+
         if(isHumanDeck) {
             questData.addDeck(deck);
-            
+
             //convert ArrayList of card names (Strings), into Card objects
             cardpool = new CardList();
             List<String> list = questData.getCardpool();
-            
-            for(int i = 0; i < list.size(); i++) {
-            	String cardName = list.get(i);
-            	String setCode = "";
-                if (cardName.contains("|"))
-                {
-                	String s[] = cardName.split("\\|",2);
-                	cardName = s[0];
-                	setCode = s[1];
+
+            for (String cardName : list) {
+                String setCode = "";
+                if (cardName.contains("|")) {
+                    String s[] = cardName.split("\\|", 2);
+                    cardName = s[0];
+                    setCode = s[1];
                 }
-            	
-            	cardpool.add(AllZone.CardFactory.getCard(cardName, null));
+
+                cardpool.add(AllZone.CardFactory.getCard(cardName, null));
             }
         } else {
             QuestBattleManager.addAIDeck(deck);
             cardpool = AllZone.CardFactory.getAllCards();
         }
-        
+
         //convert Deck main to CardList
         CardList deckList = new CardList();
         for(int i = 0; i < deck.countMain(); i++) {
@@ -459,30 +458,30 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
             	cardName = s[0];
             	setCode = s[1];
             }
-        	
+
         	deckList.add(AllZone.CardFactory.getCard(cardName, null));
         }
         //update gui
         deckDisplay.updateDisplay(cardpool, deckList);
-        
+
     }//importDeck()
-    
+
 
     private File getImportFilename() {
         JFileChooser chooser = new JFileChooser(previousDirectory);
-        
+
         chooser.addChoosableFileFilter(getFileFilter());
         int returnVal = chooser.showOpenDialog(null);
-        
+
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();
             previousDirectory = file.getParentFile();
             return file;
         }
-        
+
         return null;
     }//openFileDialog()
-    
+
     //edit the AI decks
     private void setupComputerMenu() {
         JMenuItem open = new JMenuItem("Open");

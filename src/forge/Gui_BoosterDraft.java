@@ -2,41 +2,25 @@
 package forge;
 
 
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.Random;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-
+import forge.deck.Deck;
+import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
 import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.event.*;
+import java.util.Random;
 
 
 public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConstants, NewConstants.LANG.Gui_BoosterDraft {
@@ -574,12 +558,11 @@ public class Gui_BoosterDraft extends JFrame implements CardContainer, NewConsta
         Deck[] all = {
                 human, computer[0], computer[1], computer[2], computer[3], computer[4], computer[5], computer[6]};
         
-//        DeckIO deckIO = new OldDeckIO(ForgeProps.getFile(BOOSTER_DECKS));
-        DeckIO deckIO = new NewDeckIO(ForgeProps.getFile(NEW_DECKS));
-        deckIO.writeBoosterDeck(all);
+        DeckManager deckManager = new DeckManager(ForgeProps.getFile(NEW_DECKS));
+        deckManager.writeBoosterDeck(all);
         
         //write file
-        deckIO.close();
+        deckManager.close();
         
         //close and open next screen
         dispose();

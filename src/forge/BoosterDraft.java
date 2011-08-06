@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import forge.gui.GuiUtils;
 
 
+import forge.deck.Deck;
+
 public interface BoosterDraft
 {
   public CardList nextChoice();

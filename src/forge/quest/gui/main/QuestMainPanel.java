@@ -2,6 +2,7 @@ package forge.quest.gui.main;
 
 
 import forge.*;
+import forge.deck.Deck;
 import forge.gui.ForgeFontConstants;
 import forge.gui.GuiUtils;
 import forge.quest.data.QuestBattleManager;

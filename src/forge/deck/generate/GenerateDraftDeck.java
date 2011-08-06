@@ -1,17 +1,11 @@
 package forge.deck.generate;
+
+import forge.*;
+import forge.deck.Deck;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import forge.AllZone;
-import forge.Card;
-import forge.CardList;
-import forge.CardListFilter;
-import forge.CardListUtil;
-import forge.CardUtil;
-import forge.Constant;
-import forge.Deck;
-import forge.ReadBoosterPack;
 
 public class GenerateDraftDeck
 {

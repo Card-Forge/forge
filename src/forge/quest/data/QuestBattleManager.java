@@ -1,6 +1,9 @@
 package forge.quest.data;
 
-import forge.*;
+import forge.AllZone;
+import forge.FileUtil;
+import forge.deck.Deck;
+import forge.deck.DeckManager;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -42,9 +45,7 @@ public class QuestBattleManager {
     }
 
     public static Deck getAIDeckNewFormat(String deckName) {
-        DeckIO deckIO = new NewDeckIO(ForgeProps.getFile(NewConstants.QUEST.DECKS), true);
-        Deck aiDeck = deckIO.readDeck(deckName);
-        return aiDeck;
+        return DeckManager.readDeck(deckName);
     }
 
     public static List<String> getAIDeckNames() {

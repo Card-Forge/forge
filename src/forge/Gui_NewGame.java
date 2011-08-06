@@ -3,13 +3,9 @@ package forge;
 import arcane.ui.util.ManaSymbols;
 import arcane.util.MultiplexOutputStream;
 import com.esotericsoftware.minlog.Log;
-
-import forge.deck.generate.Generate2ColorDeck;
-import forge.deck.generate.Generate3ColorDeck;
-import forge.deck.generate.GenerateConstructedDeck;
-import forge.deck.generate.GenerateConstructedMultiColorDeck;
-import forge.deck.generate.GenerateSealedDeck;
-import forge.deck.generate.GenerateThemeDeck;
+import forge.deck.Deck;
+import forge.deck.DeckManager;
+import forge.deck.generate.*;
 import forge.error.ErrorViewer;
 import forge.error.ExceptionHandler;
 import forge.gui.GuiUtils;
@@ -43,10 +39,10 @@ import java.util.*;
 public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LANG.Gui_NewGame {
     private static final long       serialVersionUID     = -2437047615019135648L;
 
-    private final DeckIO            deckIO               = new NewDeckIO(ForgeProps.getFile(NEW_DECKS));
+    private final DeckManager deckManager = new DeckManager(ForgeProps.getFile(NEW_DECKS));
     //with the new IO, there's no reason to use different instances
-    private final DeckIO            boosterDeckIO        = deckIO;
-    private ArrayList<Deck>         allDecks;
+    private final DeckManager boosterDeckManager = deckManager;
+    private List<Deck>         allDecks;
     private static Gui_DeckEditor   editor;
     
     private JLabel                  titleLabel           = new JLabel();
@@ -247,13 +243,10 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     
     // returns, ArrayList of Deck objects
-    private ArrayList<Deck> getDecks() {
-        ArrayList<Deck> list = new ArrayList<Deck>();
-        Deck[] deck = deckIO.getDecks();
-        for(int i = 0; i < deck.length; i++)
-            list.add(deck[i]);
+    private List<Deck> getDecks() {
+        List<Deck> list = new ArrayList<Deck>(deckManager.getDecks());
         
-        Collections.sort(list, new DeckSort());
+        Collections.sort(list);
         return list;
     }
     
@@ -545,7 +538,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 return;
             } else//load old draft
             {
-                Deck[] deck = boosterDeckIO.readBoosterDeck(human);
+                Deck[] deck = boosterDeckManager.readBoosterDeck(human);
                 int index = Integer.parseInt(computer);
                 
                 Constant.Runtime.HumanDeck[0] = deck[0];
@@ -583,7 +576,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 JOptionPane.showMessageDialog(null, String.format("You are using deck: %s",
                         Constant.Runtime.HumanDeck[0].getName()), "Deck Name", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                Constant.Runtime.HumanDeck[0] = deckIO.readDeck(human);
+                Constant.Runtime.HumanDeck[0] = deckManager.readDeck(human);
             }
             
 
@@ -610,7 +603,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 JOptionPane.showMessageDialog(null, String.format("The computer is using deck: %s",
                         Constant.Runtime.ComputerDeck[0].getName()), "Deck Name", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                Constant.Runtime.ComputerDeck[0] = deckIO.readDeck(computer);
+                Constant.Runtime.ComputerDeck[0] = deckManager.readDeck(computer);
             }
         }// else
         
@@ -894,7 +887,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         computerComboBox.removeAllItems();
         
         humanComboBox.addItem("New Draft");
-        Object[] key = boosterDeckIO.getBoosterDecks().keySet().toArray();
+        Object[] key = boosterDeckManager.getBoosterDecks().keySet().toArray();
         Arrays.sort(key);
         for(int i = 0; i < key.length; i++)
             humanComboBox.addItem(key[i]);

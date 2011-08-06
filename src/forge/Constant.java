@@ -2,6 +2,7 @@
 package forge;
 
 
+import forge.deck.Deck;
 import forge.quest.data.QuestMatchState;
 
 import javax.swing.*;
