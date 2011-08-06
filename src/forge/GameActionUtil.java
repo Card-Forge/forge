@@ -14697,7 +14697,7 @@ public class GameActionUtil {
 		}// execute()
 	}; // Crowd of Cinders
 	*/
-
+	/*
 	public static Command Faerie_Swarm                = new Command() {
 		private static final long serialVersionUID = 6686690505949642328L;
 
@@ -14718,7 +14718,7 @@ public class GameActionUtil {
 			return blue.size();
 		}
 	}; // Faerie Swarm
-
+	*/
 	/*
 	public static Command Drove_of_Elves              = new Command() {
 		private static final long serialVersionUID = 6686690505949642328L;
@@ -14763,7 +14763,7 @@ public class GameActionUtil {
 		}
 
 	}; //Multani, Maro-Sorcerer
-
+	/*
 	public static Command Molimo_Maro_Sorcerer        = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
 
@@ -14779,7 +14779,8 @@ public class GameActionUtil {
 		}
 
 	}; //Molimo, Maro-Sorcerer
-
+	*/
+	/*
 	public static Command Maro                        = new Command() {
 		private static final long serialVersionUID = -8778902687347191964L;
 
@@ -14793,7 +14794,7 @@ public class GameActionUtil {
 			}
 		}
 	}; //Maro
-	
+	*/
 	public static Command Masumaro_First_to_Live                       = new Command() {
 		private static final long serialVersionUID = -8778922687347191964L;
 
@@ -16321,7 +16322,7 @@ public class GameActionUtil {
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		commands.put("Emperor_Crocodile", Emperor_Crocodile);
 		
-		commands.put("Faerie_Swarm", Faerie_Swarm);
+		//commands.put("Faerie_Swarm", Faerie_Swarm);
 		
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);
@@ -16358,13 +16359,13 @@ public class GameActionUtil {
 		commands.put("Magnivore", Magnivore);
 		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
-		commands.put("Maro", Maro);
+		//commands.put("Maro", Maro);
 		commands.put("Marrow_Gnawer", Marrow_Gnawer);
 		//commands.put("Master_of_Etherium", Master_of_Etherium);
 		commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
 		commands.put("Matca_Rioters", Matca_Rioters);
 		commands.put("Meddling_Mage", Meddling_Mage);
-		commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
+		//commands.put("Molimo_Maro_Sorcerer", Molimo_Maro_Sorcerer);
 		commands.put("Mortivore", Mortivore);
 		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
 		commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);

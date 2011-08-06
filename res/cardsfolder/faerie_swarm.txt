@@ -1,9 +1,10 @@
 Name:Faerie Swarm
 ManaCost:3 U
 Types:Creature Faerie
-Text:Faerie Swarm's power and toughness are each equal to the number of blue permanents you control.
-PT:1/1
+Text:no text
+PT:*/*
 K:Flying
+K:stSetPT:Count$Valid Permanent.Blue+YouCtrl:Count$Valid Permanent.Blue+YouCtrl:Faerie Swarm's power and toughness are each equal to the number of blue permanents you control.
 SVar:BuffedBy:Permanent.Blue
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/faerie_swarm.jpg

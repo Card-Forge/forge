@@ -48,7 +48,7 @@ public class StaticEffects
 		//cardToEffectsList.put("Eldrazi Monument", new String[] {"Eldrazi_Monument"});
 		cardToEffectsList.put("Emperor Crocodile", new String[] {"Emperor_Crocodile"});
 		
-		cardToEffectsList.put("Faerie Swarm", new String[] {"Faerie_Swarm"});
+		//cardToEffectsList.put("Faerie Swarm", new String[] {"Faerie_Swarm"});
 		
 		cardToEffectsList.put("Gaddock Teeg", new String[] {"Gaddock_Teeg"});
 		cardToEffectsList.put("Gaea's Avenger", new String[] {"Gaeas_Avenger"});
@@ -84,13 +84,13 @@ public class StaticEffects
 		cardToEffectsList.put("Magnivore", new String[] {"Magnivore"});
 		cardToEffectsList.put("Magus of the Tabernacle", new String[] {"Magus_of_the_Tabernacle"});
 		cardToEffectsList.put("Maraxus of Keld", new String[] {"Maraxus_of_Keld"});
-		cardToEffectsList.put("Maro", new String[] {"Maro"});
+		//cardToEffectsList.put("Maro", new String[] {"Maro"});
 		cardToEffectsList.put("Marrow-Gnawer", new String[] {"Marrow_Gnawer"});
 		//cardToEffectsList.put("Master of Etherium", new String[] {"Master_of_Etherium"});
 		cardToEffectsList.put("Masumaro, First to Live", new String[] {"Masumaro_First_to_Live"});
 		cardToEffectsList.put("Matca Rioters", new String[] {"Matca_Rioters"});
 		cardToEffectsList.put("Meddling Mage", new String[] {"Meddling_Mage"});
-		cardToEffectsList.put("Molimo, Maro-Sorcerer", new String[] {"Molimo_Maro_Sorcerer"});
+		//cardToEffectsList.put("Molimo, Maro-Sorcerer", new String[] {"Molimo_Maro_Sorcerer"});
 		cardToEffectsList.put("Mortivore", new String[] {"Mortivore"});
 		cardToEffectsList.put("Mul Daya Channelers", new String[] {"Mul_Daya_Channelers"});
 		cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
