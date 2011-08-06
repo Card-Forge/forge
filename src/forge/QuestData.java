@@ -205,7 +205,7 @@ public class QuestData implements NewConstants {
             data.lost = state.lost;
             data.credits = state.credits;
             data.rankIndex = state.rankIndex;
-            data.difficulty = state.difficulty;           
+            data.difficulty = state.difficulty;
             
             data.mode = state.mode;
             if (data.mode == null)
@@ -737,6 +737,13 @@ public class QuestData implements NewConstants {
     	diffIndex = i;
     	difficulty = qdPrefs.getDifficulty(i);
     }
+    
+	public void setDifficultyIndex() {
+		String[] diffStr = qdPrefs.getDifficulty();
+		for(int i = 0; i < diffStr.length; i++)
+			if (difficulty.equals(diffStr[i]))
+				diffIndex = i;
+	}
     
     public String[] getDifficutlyChoices() {
         return qdPrefs.getDifficulty();
