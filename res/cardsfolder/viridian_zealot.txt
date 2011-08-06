@@ -3,6 +3,7 @@ ManaCost:G G
 Types:Creature Elf Warrior
 Text:no text
 PT:2/1
+K:abDestroyTgtV 1 G Sac<1/CARDNAME>:Artifact,Enchantment:Destroy target artifact or enchantment.
 K:SVar:Rarity:Rare
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_zealot.jpg
 End

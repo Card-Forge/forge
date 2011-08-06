@@ -6558,6 +6558,8 @@ public class CardFactory_Creatures {
             //ability.setAfterPayMana(target);
         }//*************** END ************ END **************************
         
+        
+/* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
         else if (cardName.equals("Royal Assassin")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -6633,6 +6635,8 @@ public class CardFactory_Creatures {
             ability.setDescription("tap: Destroy target tapped creature.");
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Giltspire Avenger")) {
@@ -6906,6 +6910,8 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        
+/* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
         else if (cardName.equals("Visara the Dreadful") || cardName.equals("Avatar of Woe")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -6947,6 +6953,8 @@ public class CardFactory_Creatures {
            
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Ethersworn Adjudicator")) {
@@ -17284,7 +17292,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
 */
         
-        
+/* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Viridian Zealot")) {
             final Ability ability = new Ability(card, "1 G") {
@@ -17357,7 +17365,7 @@ public class CardFactory_Creatures {
             });
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+*/
         
 /* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
