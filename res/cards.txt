@@ -1,3 +1,35 @@
+Fountain of Youth
+0
+Artifact
+no text
+abGainLife 2 T:1
+
+Marble Chalice
+2 W
+Artifact
+no text
+abGainLife T:1
+
+Mournful Zombie
+2 B
+Creature Zombie
+no text
+2/1
+abGainLifeTgt W T:1
+
+Starlight Invoker
+1 W
+Creature Human Cleric Mutant
+no text
+1/3
+abGainLife 7 W:5
+
+Tower of Eons
+4
+Artifact
+no text
+abGainLife 8 T:10
+
 An-Havva Inn
 1 G G
 Sorcery
