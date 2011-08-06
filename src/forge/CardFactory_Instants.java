@@ -391,43 +391,6 @@ public class CardFactory_Instants {
 
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Beacon of Destruction")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 6653675303299939465L;
-                
-                @Override
-                public void resolve() {
-                    if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                            getTargetCard().addDamage(5, card);
-                            done();
-                        } else AllZone.GameAction.moveToGraveyard(card);
-                    } else {
-                        getTargetPlayer().addDamage(5, card);
-                        done();
-                    }
-                }//resolve()
-                
-                void done() {
-                    //shuffle card back into the library
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    AllZone.GameAction.moveTo(library,card);
-                    card.getController().shuffle();
-                }
-            };
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHumanCreatureOrPlayer());
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
-            
-            card.setSVar("PlayMain1", "TRUE");
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Sprout Swarm")) {
             final SpellAbility spell_one = new Spell(card) {
                 private static final long serialVersionUID = -609007714604161377L;
@@ -3521,32 +3484,6 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Beacon of Immortality")) {
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -3200073459471937520L;
-
-				@Override
-                public void resolve() {
-                    Player p = getTargetPlayer();
-                    p.setLife(p.getLife()*2, card);
-                    done();
-                }//resolve()
-                
-                void done() {
-                    //shuffle card back into the library
-                    AllZone.GameAction.moveToLibrary(card);
-                    card.getController().shuffle();
-                }
-            };
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-
         
         //*************** START *********** START **************************
         else if(cardName.equals("Contagion")) {

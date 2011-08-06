@@ -107,11 +107,6 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
     cards.remove((Card)c);
     update();
   }
-  public void remove(int index)
-  {
-    cards.remove(index);
-    update();
-  }
   public void setCards(Card c[])
   {
     cards = new ArrayList<Card>(Arrays.asList(c));

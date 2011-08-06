@@ -85,7 +85,7 @@ public class AbilityFactory_ChangeZone {
 	}
 	
 	public static boolean isKnown(String origin){
-		return (origin.equals("Graveyard") || origin.equals("Exile") || origin.equals("Battlefield"));
+		return (origin.equals("Graveyard") || origin.equals("Exile") || origin.equals("Battlefield") || origin.equals("Stack"));
 	}
 	
 	private static void setMiscellaneous(AbilityFactory af, SpellAbility sa){
@@ -890,5 +890,5 @@ public class AbilityFactory_ChangeZone {
 		return AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa).get(0);
 	}
 
-
+	
 }

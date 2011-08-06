@@ -533,121 +533,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Beacon of Unrest")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -7614131436905786565L;
-                
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    PlayerZone grave = AllZone.getZone(c);
-                    
-                    if(AllZone.GameAction.isCardInZone(c, grave) && (c.isArtifact() || c.isCreature())) {
-                        //set the correct controller if needed
-                        c.setController(card.getController());
-                        
-                        //card changes zones
-                        AllZone.getZone(c).remove(c);
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                        play.add(c);
-                        
-                        //shuffle card back into the library
-                        PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                        library.add(card);
-                        card.getController().shuffle();
-                    }
-                }//resolve()
-                
-                @Override
-                public boolean canPlay() {
-                    return getCreaturesAndArtifacts().length != 0;
-                }
-                
-                public Card[] getCreaturesAndArtifacts() {
-                    CardList graveyardCards = new CardList();
-                    graveyardCards.addAll(AllZone.Human_Graveyard.getCards());
-                    graveyardCards.addAll(AllZone.Computer_Graveyard.getCards());
-                    
-                    CardList graveyardCreaturesAndArtifacts = graveyardCards.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isArtifact() || c.isCreature();
-                        }
-                    });
-                    
-                    return graveyardCreaturesAndArtifacts.toArray();
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    Card c[] = getCreaturesAndArtifacts();
-                    Card biggest = c[0];
-                    for(int i = 0; i < c.length; i++)
-                        if(biggest.getNetAttack() < c[i].getNetAttack()) biggest = c[i];
-                    
-                    setTargetCard(biggest);
-                }
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Input target = new Input() {
-                private static final long serialVersionUID = -83460850846474327L;
-                
-                @Override
-                public void showMessage() {
-                    Object check = GuiUtils.getChoiceOptional("Select creature", getCreaturesAndArtifacts());
-                    if(check != null) {
-                        spell.setTargetCard((Card) check);
-                        stopSetNext(new Input_PayManaCost(spell));
-                    } else stop();
-                }//showMessage()
-                
-                //duplicated from SpellAbility above ^^^^^^^^
-                public Card[] getCreaturesAndArtifacts() {
-                    CardList graveyardCards = new CardList();
-                    graveyardCards.addAll(AllZone.Human_Graveyard.getCards());
-                    graveyardCards.addAll(AllZone.Computer_Graveyard.getCards());
-                    
-                    CardList graveyardCreaturesAndArtifacts = graveyardCards.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isArtifact() || c.isCreature();
-                        }
-                    });
-                    
-                    return graveyardCreaturesAndArtifacts.toArray();
-                }
-            };//Input
-            spell.setBeforePayMana(target);
-        }//*************** END ************ END **************************
-        
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Grapeshot")) {
-        	final SpellAbility spell = new Spell(card) {
-        		private static final long serialVersionUID = 74155521291969L;
-
-        		@Override                           
-        		public boolean canPlayAI() {
-        			return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
-        		}      
-        		@Override
-        		public void resolve() {
-        			if(getTargetCard() != null) {
-        				if(AllZone.GameAction.isCardInPlay(getTargetCard())
-        						&& CardFactoryUtil.canTarget(card, getTargetCard()))
-        					getTargetCard().addDamage(1, card);
-        			} else getTargetPlayer().addDamage(1, card);
-        		};
-        	};
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        	spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-        	spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
-        }//*************** END ************ END ************************** 
-        */
+   
         
         //*************** START *********** START **************************
         else if(cardName.equals("Ignite Memories")) {
@@ -2217,10 +2103,9 @@ public class CardFactory_Sorceries {
                     myList = myList.getType("Creature");
                     
                     //if true, return card to hand
-                    if(myList.size() < oppList.size()) {
-                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                        hand.add(card);
-                    } else AllZone.GameAction.moveToGraveyard(card);
+                    if(myList.size() < oppList.size()) 
+                    	AllZone.GameAction.moveToHand(card);
+
                 }//resolve()
             };
             card.clearSpellAbility();
@@ -3819,41 +3704,6 @@ public class CardFactory_Sorceries {
       	  card.addSpellAbility(spell);
         } 
         //*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
-        else if (cardName.equals("Beacon of Creation"))
-        {
-        	SpellAbility spell = new Spell(card)
-        	{
-        		private static final long serialVersionUID = -2510951665205047650L;
-
-        		public void resolve()
-        		{
-        			PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-        			CardList land = new CardList(play.getCards());
-        			land = land.getType("Forest");
-        			makeToken();
-        			for(int i = 1; i < land.size(); i++)
-        				makeToken();
-
-        			// shuffle back into library
-        			PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-        			library.add(card);
-        			card.getController().shuffle();
-
-        		}//resolve()
-
-        		public void makeToken()
-        		{
-        			CardFactoryUtil.makeToken("Insect", "G 1 1 Insect", card.getController(), "G", 
-        					new String[]{"Creature", "Insect"}, 1, 1, new String[] {""});
-        		}
-        	};
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-          
         
         //*************** START *********** START **************************
         else if (cardName.equals("Savage Twister"))
@@ -6089,33 +5939,6 @@ public class CardFactory_Sorceries {
             spell.setDescription(abCost+"Destroy target non-Swamp land. If that land was nonbasic, Choking Sands deals 2 damage to the land's controller.");
         }//*************** END ************ END **************************
 
-      
-        //*************** START *********** START **************************
-        else if(cardName.equals("Beacon of Tomorrows")) {
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 6705046075033727413L;
-
-				@Override
-                public void resolve() {
-                    Player p = getTargetPlayer();
-                    AllZone.Phase.addExtraTurn(p);
-                    done();
-                }//resolve()
-                
-                void done() {
-                    //shuffle card back into the library
-                    AllZone.GameAction.moveToLibrary(card);
-                    card.getController().shuffle();
-                }
-            };
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if (cardName.equals("Decree of Justice")) { 
         	/*

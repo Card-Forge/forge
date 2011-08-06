@@ -4,7 +4,7 @@ Types:Creature Avatar
 Text:no text
 PT:*/*
 K:When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
-K:stSetPT:Count$InYourHand:Count$InYourHand:CARDNAME's power and toughness are each equal to your life total.
+K:stSetPT:Count$YourLifeTotal:Count$YourLifeTotal:CARDNAME's power and toughness are each equal to your life total.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_avatar.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/45.jpg
