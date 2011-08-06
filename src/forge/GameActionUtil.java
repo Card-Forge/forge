@@ -108,6 +108,7 @@ public class GameActionUtil
 		playCard_Witch_Maw_Nephilim(c);
 		playCard_Forced_Fruition(c);
 		playCard_Gelectrode(c);
+		playCard_Cinder_Pyromancer(c);
 		playCard_Ballynock_Trapper(c);
 		playCard_Standstill(c);
 		playCard_Memory_Erosion(c);
@@ -1284,6 +1285,50 @@ public class GameActionUtil
 			}				
 	}// Gelectrode
 
+	public static void playCard_Cinder_Pyromancer(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Cinder Pyromancer");
+
+		if (list.size() > 0 && CardUtil.getColors(c).contains(Constant.Color.Red) ){
+						
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);
+						
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+								
+								  if (card.getController().equals("Human"))
+						            {
+						               String[] choices =
+						               { "Yes", "No" };
+						               Object choice = AllZone.Display.getChoice(
+						                     "Untap Cinder Pyromancer?", choices);
+						               if (choice.equals("Yes")) {
+									card.untap();}
+						            }
+								  if (card.getController().equals("Computer")) {card.untap();}
+							}
+							
+						}; // ability2
+			
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a red spell, you may untap Cinder Pyromancer.");
+						AllZone.Stack.add(ability2);
+					}
+			}				
+	}// Cinder_Pyromancer
+	
 	public static void playCard_Ballynock_Trapper(Card c)
 	{
 		final String controller = c.getController();
@@ -1322,7 +1367,7 @@ public class GameActionUtil
 						}; // ability2
 			
 						ability2.setStackDescription(card.getName() + " - "
-								+ c.getController() + " played an instant or sorcery spell, you may untap Gelectrode.");
+								+ c.getController() + " played a white spell, you may untap Ballynock Trapper.");
 						AllZone.Stack.add(ability2);
 					}
 			}				

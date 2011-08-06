@@ -18,6 +18,7 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+cinder_pyromancer.jpg       http://www.wizards.com/global/images/magic/general/cinder_pyromancer.jpg
 antler_skulkin.jpg          http://www.wizards.com/global/images/magic/general/antler_skulkin.jpg
 ballynock_trapper.jpg       http://www.wizards.com/global/images/magic/general/ballynock_trapper.jpg
 mudbrawler_cohort.jpg       http://www.wizards.com/global/images/magic/general/mudbrawler_cohort.jpg

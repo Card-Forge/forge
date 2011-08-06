@@ -1,3 +1,10 @@
+Cinder Pyromancer
+2 R
+Creature Elemental Shaman
+Whenever you cast a red spell, you may untap Cinder Pyromancer.
+0/1
+abDamageCP T:1
+
 Ashenmoor Cohort
 5 B
 Creature Elemental Warrior
