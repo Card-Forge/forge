@@ -5038,7 +5038,8 @@ public class CardFactory implements NewConstants {
                     	if (NumDefense[0] < 0 && !list.isEmpty()) { // with spells that give -X/-X, compi will try to destroy a creature
                     		list = list.filter(new CardListFilter() {
                                 public boolean addCard(Card c) {
-                                    return (c.getKillDamage() <= -NumDefense[0]);
+                                	if (c.getNetDefense() <= -NumDefense[0] ) return true; // can kill indestructible creatures
+                                    return (c.getKillDamage() <= -NumDefense[0] && !c.hasKeyword("Indestructible"));
                                 }
                         	}); // leaves all creatures that will be destroyed
                     	} // -X/-X end
