@@ -415,7 +415,13 @@ public class Gui_WinLose extends JFrame implements NewConstants {
                 quest.addCards();
                 String fileName = "BookIcon.png";
                 ImageIcon icon = getIcon(fileName);
-                JOptionPane.showMessageDialog(null, "You have won new cards.", "", JOptionPane.INFORMATION_MESSAGE, icon );
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append("You have won the following new cards:\n");
+                for (int i=0; i<quest.getAddedCards().size(); i++)
+                	sb.append(quest.getAddedCards().get(i) + "\n");
+                
+                JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE, icon );
             }
             
             if (wonMatch){
