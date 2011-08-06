@@ -19205,10 +19205,9 @@ public class CardFactory implements NewConstants {
 				
 				@Override
         		public void resolve() {
-        			String player = getTargetPlayer();
+        			String player = card.getController();
         			AllZoneUtil.rearrangeTopOfLibrary(player, 3, false);
         			AllZone.GameAction.promptForShuffle(player);
-        			//AllZone.GameAction.drawCards(player, 1);
         		}
 				
         		@Override
@@ -19217,7 +19216,33 @@ public class CardFactory implements NewConstants {
         			return false;
         		}
         	};//spell
-        	spell.setStackDescription("Rearrange the top 3 cards in your library in any order.  You may shuffle you library.  Draw a card.");
+        	spell.setStackDescription(cardName+" - Rearrange the top 3 cards in your library in any order.  You may shuffle you library.  Draw a card.");
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Index")) {
+        	/* 
+        	 * Look at the top five cards of your library, then put them back
+        	 * in any order.
+        	 */
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -3175286661458692699L;
+
+				@Override
+        		public void resolve() {
+        			String player = card.getController();
+        			AllZoneUtil.rearrangeTopOfLibrary(player, 5, false);
+        		}
+				
+        		@Override
+        		public boolean canPlayAI() {
+        			//basically the same reason as Sensei's Diving Top
+        			return false;
+        		}
+        	};//spell
+        	spell.setStackDescription(cardName+" - Rearrange the top 5 cards in your library in any order.  You may shuffle you library.  Draw a card.");
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
