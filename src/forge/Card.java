@@ -447,6 +447,11 @@ public class Card extends MyObservable {
         return manaCost;
     }
     
+    public int getCMC()
+    {
+    	return CardUtil.getConvertedManaCost(manaCost);
+    }
+    
     public void setUpkeepCost(String s) {
         upkeepCost = s;
     }
@@ -1924,39 +1929,111 @@ public class Card extends MyObservable {
         	boolean r = true;
             String incR[] = Restrictions[i].split("\\."); // Inclusive restrictions are Card types
             
-            if (incR[0].equals("Spell") && isType("Land")) r = false;
-            if (incR[0].equals("Permanent") && (isType("Instant") || isType("Sorcery"))) r = false;
-            if(!incR[0].equals("Card") && !incR[0].equals("Spell") && !incR[0].equals("Permanent") && !(isType(incR[0]))) r = false; //Check for wrong type
+            if (incR[0].equals("Spell") && isType("Land"))
+            	r = false;
+            if (incR[0].equals("Permanent") && (isType("Instant") || isType("Sorcery")))
+            	r = false;
+            if(!incR[0].equals("Card") && !incR[0].equals("Spell") && !incR[0].equals("Permanent") && !(isType(incR[0])))
+            	r = false; //Check for wrong type
             
             if(incR.length > 1) {
                 final String excR = incR[1];
                 String exR[] = excR.split("\\+"); // Exclusive Restrictions are ...
                 for(int j = 0; j < exR.length; j++) {
-                			if(exR[j].contains("White")
-                                    || // ... Card colors
-                                    exR[j].contains("Blue") || exR[j].contains("Black") || exR[j].contains("Red")
-                                    || exR[j].contains("Green") || exR[j].contains("Colorless")) if(exR[j].startsWith("non")) r = r
-                                    && (!CardUtil.getColors(this).contains(exR[j].substring(3).toLowerCase()));
-                            else r = r && (CardUtil.getColors(this).contains(exR[j].toLowerCase()));
-                            else if(exR[j].contains("MultiColor")) // ... Card is multicolored
-                            if(exR[j].startsWith("non")) r = r && (CardUtil.getColors(this).size() == 1);
-                            else r = r && (CardUtil.getColors(this).size() > 1);
-                            else if(exR[j].contains("with")) // ... Card keywords
-                            if(exR[j].startsWith("without")) r = r
-                                    && (!getKeyword().contains(exR[j].substring(7)));
-                            else r = r && (getKeyword().contains(exR[j].substring(4)));
-                            else if(exR[j].startsWith("tapped")) r = r && (isTapped());
-                            else if(exR[j].startsWith("enchanted")) r = r && (isEnchanted());
-                            else if(exR[j].startsWith("unenchanted")) r = r && (!isEnchanted());
-                            else if(exR[j].startsWith("token")) r = r && (isToken());
-                            //TODO: converted mana cost
-                            //TODO: enchanting
-                            //TODO: counters
-                            else if(exR[j].startsWith("named")) //by name
-                            r = r && (getName().equals(exR[j].substring(6)));
-                            else if(exR[j].startsWith("non")) // ... Other Card types
-                            r = r && (!getType().contains(exR[j].substring(3)));
-                            else r = r && (getType().contains(exR[j]));
+        			if (exR[j].contains("White") || // ... Card colors
+                       exR[j].contains("Blue") ||
+                       exR[j].contains("Black") ||
+                       exR[j].contains("Red") ||
+                       exR[j].contains("Green") ||
+                       exR[j].contains("Colorless")) 
+        			{
+    					if(exR[j].startsWith("non"))
+    						r = r && (!CardUtil.getColors(this).contains(exR[j].substring(3).toLowerCase()));
+    					else
+    						r = r && (CardUtil.getColors(this).contains(exR[j].toLowerCase()));
+        			}
+                    else if (exR[j].contains("MultiColor")) // ... Card is multicolored
+                    {
+                    	if (exR[j].startsWith("non"))
+                    		r = r && (CardUtil.getColors(this).size() == 1);
+                    	else 
+                    		r = r && (CardUtil.getColors(this).size() > 1);
+                    }
+                    
+                    else if (exR[j].contains("with")) // ... Card keywords
+                    {
+                    	if (exR[j].startsWith("without")) 
+                    		r = r && (!getKeyword().contains(exR[j].substring(7)));
+                    	else 
+                    		r = r && (getKeyword().contains(exR[j].substring(4)));
+                    }
+                    
+                    else if (exR[j].startsWith("tapped"))
+                    	r = r && (isTapped());
+                    else if (exR[j].startsWith("untapped"))
+                    	r = r && (isUntapped());
+                    
+                    else if (exR[j].startsWith("enchanted"))
+                    	r = r && (isEnchanted());
+                    else if (exR[j].startsWith("unenchanted"))
+                    	r = r && (!isEnchanted());
+                    else if (exR[j].startsWith("enchanting"))
+                    	r = r && (isEnchanting());
+                    
+                    else if (exR[j].startsWith("token"))
+                    	r = r && (isToken());
+                    else if (exR[j].startsWith("nonToken"))
+                    	r = r && (!isToken());
+                    
+                    else if (exR[j].startsWith("power") || 	// 8/10
+                    		 exR[j].startsWith("toughness") ||
+                    		 exR[j].startsWith("cmc"))
+                    {
+                    	int x = 0;
+                    	int y = 0;
+                    	int z = 0;
+                    	
+                    	if (exR[j].startsWith("power") )
+                        {
+                        	z = 7;
+                        	y = getNetAttack();
+                        }
+                        else if (exR[j].startsWith("toughness"))
+                        {
+                        	z = 11;
+                        	y = getNetDefense();
+                        }
+                        else if (exR[j].startsWith("cmc"))
+                        {
+                        	z = 5;
+                        	y = getCMC();
+                        }
+                    	
+                    	if (exR[j].substring(z).equals("X"))
+                    		x = CardFactoryUtil.xCount(this, getSVar("X"));
+                    	else
+                    		x = Integer.parseInt(exR[j].substring(z));
+                    	
+                    	if (exR[j].contains("LT"))
+                    		r = r && (y < x);
+                    	else if (exR[j].contains("LE"))
+                    		r = r && (y <= x);
+                    	else if (exR[j].contains("EQ"))
+                    		r = r && (y == x);
+                    	else if (exR[j].contains("GE"))
+                    		r = r && (y >= x);
+                    	else if (exR[j].contains("GT"))
+                    		r = r && (y > x);
+                    }
+        			
+                    //TODO: enchanting
+                    //TODO: counters
+                    else if(exR[j].startsWith("named")) //by name
+                    	r = r && (getName().equals(exR[j].substring(6)));
+                    else if(exR[j].startsWith("non")) // ... Other Card types
+                    	r = r && (!getType().contains(exR[j].substring(3)));
+                    else
+                    	r = r && (getType().contains(exR[j]));
                }
             }
             if (r == true) return true;
