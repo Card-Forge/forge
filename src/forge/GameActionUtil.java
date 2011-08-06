@@ -7724,7 +7724,7 @@ public class GameActionUtil {
 		
 		final Player player = AllZone.Phase.getActivePlayer();
 
-		if (AllZoneUtil.CompareTypeAmountInPlay(player, "Creature") < 0){
+		if (AllZoneUtil.compareTypeAmountInPlay(player, "Creature") < 0){
 			for(int i = 0; i < oathList.size(); i++) {
 				Ability ability = new Ability(oathList.get(i), "0") {
 	               @Override
@@ -7735,7 +7735,7 @@ public class GameActionUtil {
 	            	   PlayerZone battlefield = AllZone.getZone(Constant.Zone.Play, player);
 	            	   boolean oathFlag = true;
 
-	            	   if (AllZoneUtil.CompareTypeAmountInPlay(player, "Creature") < 0){
+	            	   if (AllZoneUtil.compareTypeAmountInPlay(player, "Creature") < 0){
 		                      if(player == AllZone.HumanPlayer){
 			                      String[] choices = {"Yes", "No"};
 			                      Object q = null;
@@ -7783,7 +7783,7 @@ public class GameActionUtil {
 		
 		final Player player = AllZone.Phase.getActivePlayer();	
 		
-		if (AllZoneUtil.CompareTypeAmountInGraveyard(player, "Creature") > 0)
+		if (AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0)
 		{
 			for(int i = 0; i < oathList.size(); i++)
 			{
@@ -7794,7 +7794,7 @@ public class GameActionUtil {
 						PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 
-						if(AllZoneUtil.CompareTypeAmountInGraveyard(player, "Creature") > 0) {
+						if(AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0) {
 							if(player.equals(AllZone.HumanPlayer)) {
 								Object o = AllZone.Display.getChoiceOptional("Pick a creature to return to hand",
 										graveyardCreatures.toArray());

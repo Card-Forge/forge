@@ -402,7 +402,7 @@ public class AllZoneUtil {
 		if(shuffle) zone.getPlayer().shuffle();
 	}
 	
-	public static int CompareTypeAmountInPlay(final Player player, String type)
+	public static int compareTypeAmountInPlay(final Player player, String type)
 	{
 		// returns the difference between player's
 		Player opponent = player.getOpponent();
@@ -411,7 +411,7 @@ public class AllZoneUtil {
 		return (playerList.size() - opponentList.size());
 	}
 	
-	public static int CompareTypeAmountInGraveyard(final Player player, String type)
+	public static int compareTypeAmountInGraveyard(final Player player, String type)
 	{
 		// returns the difference between player's
 		Player opponent = player.getOpponent();
