@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import com.esotericsoftware.minlog.Log;
-
+import forge.error.ErrorViewer;
 
 
 public class Card extends MyObservable {
@@ -2452,6 +2452,22 @@ public class Card extends MyObservable {
              	if (!compare(y, Property, x))
              		return false;
              }
+			
+             else if (Property.startsWith("counters")) // syntax example: countersGE9 P1P1 or countersLT12TIME (greater number than 99 not supported)
+             {
+            	int number = 0;
+              	if (Property.substring(10,11).equals("X"))
+              		number = CardFactoryUtil.xCount(this, getSVar("X"));
+             	else
+             		number = Integer.parseInt(Property.substring(10,11));
+              	
+              	String type = Property.substring(11);
+              	String comparator = Property.substring(8,10); // comparator = EQ, LE, GE etc.
+             	int actualnumber = getCounters(Counters.getType(type));
+             	
+             	if (!compare(actualnumber, comparator, number))
+             		return false;
+             }
  			
              else if (Property.startsWith("attacking")) { if(!isAttacking())  return false;}
  			
@@ -2459,7 +2475,6 @@ public class Card extends MyObservable {
  			
              else if (Property.startsWith("blocking")) { if(!isBlocking())  return false;}
  			
-             //TODO: counters
              else if(Property.startsWith("named")) //by name
              	{ if(!getName().equals(Property.substring(5))) return false;}
              else if(Property.startsWith("non")) // ... Other Card types
