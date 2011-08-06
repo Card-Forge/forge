@@ -827,50 +827,53 @@ public class AbilityFactory_ChangeZone {
 				tgtCards.add(c);
 			}
 		}
+		Card targetCard = null;
+		if(tgtCards.size() != 0) 
+		{
 
-		Card targetCard = tgtCards.get(0);
-		
-		for(Card tgtC : tgtCards){
-			PlayerZone originZone = AllZone.getZone(tgtC);
-			// if Target isn't in the expected Zone, continue
-			if (!originZone.is(origin))
-				continue;
-	        
-	        if (tgt != null && origin.equals("Battlefield")){
-	        	// check targeting
-	        	if (!CardFactoryUtil.canTarget(sa.getSourceCard(), tgtC))
-	        		continue;
-	        }
+			targetCard = tgtCards.get(0);
+			
+			for(Card tgtC : tgtCards){
+				PlayerZone originZone = AllZone.getZone(tgtC);
+				// if Target isn't in the expected Zone, continue
+				if (!originZone.is(origin))
+					continue;
+		        
+		        if (tgt != null && origin.equals("Battlefield")){
+		        	// check targeting
+		        	if (!CardFactoryUtil.canTarget(sa.getSourceCard(), tgtC))
+		        		continue;
+		        }
 
-	    	Player pl = player;
-	    	if (!destination.equals("Battlefield"))
-	    		pl = tgtC.getOwner();
+		    	Player pl = player;
+		    	if (!destination.equals("Battlefield"))
+	    			pl = tgtC.getOwner();
 	    	
-	    	if (destination.equals("Library")){
-	    		// library position is zero indexed
-	    		int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;        
+	    		if (destination.equals("Library")){
+	    			// library position is zero indexed
+	    			int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;        
 
-	    		AllZone.GameAction.moveToLibrary(tgtC, libraryPosition);
+	    			AllZone.GameAction.moveToLibrary(tgtC, libraryPosition);
 
-	    		if (params.containsKey("Shuffle"))	// for things like Gaea's Blessing
-	    			player.shuffle();
-	    	}
-	    	else{
-		    	if (destination.equals("Battlefield")){
-		        	if (params.containsKey("Tapped"))
-		        		tgtC.tap();
-		        	if (params.containsKey("GainControl"))
-		        		tgtC.setController(sa.getActivatingPlayer());
+	    			if (params.containsKey("Shuffle"))	// for things like Gaea's Blessing
+	    				player.shuffle();
+	    		}
+	    		else{
+		    		if (destination.equals("Battlefield")){
+		        		if (params.containsKey("Tapped"))
+		        			tgtC.tap();
+		        		if (params.containsKey("GainControl"))
+		        			tgtC.setController(sa.getActivatingPlayer());
 		        	
-		        	AllZone.GameAction.moveTo(AllZone.getZone(destination, tgtC.getOwner()),tgtC);
-		    	}
-		    	else
-		    	{
-		    		AllZone.GameAction.moveTo(AllZone.getZone(destination, pl), tgtC);
-		    	}
-	    	}
+		        		AllZone.GameAction.moveTo(AllZone.getZone(destination, tgtC.getOwner()),tgtC);
+		    		}
+		    		else
+		    		{
+		    			AllZone.GameAction.moveTo(AllZone.getZone(destination, pl), tgtC);
+		    		}
+	    		}
+			}
 		}
-
 		
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
