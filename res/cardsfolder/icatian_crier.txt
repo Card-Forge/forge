@@ -4,7 +4,7 @@ Types:Creature Human Spellshaper
 Text:no text
 PT:1/1
 #K:abMakeToken 1 W T Discard<1/Any><>2<>Citizen<>W 1 1 Citizen<>Controller<>W<>Creature;Citizen<>1<>1<>None<>put two 1/1 white Citizen creature tokens onto the battlefield.
-A:AB$Token|Cost$1 W T Discard<1/Any>|TokenAmount$2|TokenName$Citizen|TokenTypes$Creature,Citizen|TokenOwner$Controller|TokenColors$White|TokenPower$1|TokenToughness$1|SpellDescription$Put two 1/1 white Citizen creature tokens onto the battlefield.
+A:AB$Token | Cost$ 1 W T Discard<1/Any> |TokenAmount$ 2 | TokenName$ Citizen | TokenTypes$ Creature,Citizen | TokenOwner$ Controller |TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put two 1/1 white Citizen creature tokens onto the battlefield.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_crier.jpg
 End

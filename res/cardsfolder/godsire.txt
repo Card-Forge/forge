@@ -5,7 +5,7 @@ Text:no text
 PT:8/8
 K:Vigilance
 #K:abMakeToken T<>1<>Beast<>RGW 8 8 Beast<>Controller<>R G W<>Creature;Beast<>8<>8<>None<>put an 8/8 Beast creature token that's red, green, and white onto the battlefield.
-A:AB$Token|Cost$T|TokenAmount$1|TokenName$Beast|TokenTypes$Creature,Beast|TokenOwner$Controller|TokenColors$White,Red,Green|TokenPower$8|TokenToughness$8|SpellDescription$Put an 8/8 Beast creature token that's red, green, and white onto the battlefield.
+A:AB$Token | Cost$ T | TokenAmount$ 1 | TokenName$ Beast | TokenTypes$ Creature,Beast | TokenOwner$ Controller | TokenColors$ White,Red,Green | TokenPower$ 8 | TokenToughness$ 8 | SpellDescription$ Put an 8/8 Beast creature token that's red, green, and white onto the battlefield.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/godsire.jpg
 End

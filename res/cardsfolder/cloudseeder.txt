@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 K:Flying
 #K:abMakeToken U T Discard<1/Any><>1<>Cloud Sprite<>U 1 1 Cloud Sprite<>Controller<>1<>Creature;Faerie<>1<>1<>Flying;CARDNAME can block only creatures with flying.<>Put a 1/1 blue Faerie creature token named Cloud Sprite onto the battlefield. It has flying and "Cloud Sprite can block only creatures with flying."
-A:AB$Token|Cost$U T Discard<1/Any>|TokenOwner$Controller|TokenAmount$1|TokenName$Cloud Sprite|TokenTypes$Creature,Faerie|TokenColors$Blue|TokenPower$1|TokenToughness$1|TokenKeywords$Flying<>CARDNAEM can block only creatures with flying.|SpellDescription$Put a 1/1 blue Faerie creature token named Cloud Sprite onto the battlefield. It has flying and "Cloud Sprite can block only creatures with flying."
+A:AB$Token | Cost$ U T Discard<1/Any> | TokenOwner$ Controller | TokenAmount$ 1 | TokenName$ Cloud Sprite | TokenTypes$ Creature,Faerie | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying<>CARDNAEM can block only creatures with flying. | SpellDescription$ Put a 1/1 blue Faerie creature token named Cloud Sprite onto the battlefield. It has flying and "Cloud Sprite can block only creatures with flying."
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card130309.jpg
 End
