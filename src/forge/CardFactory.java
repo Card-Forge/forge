@@ -3151,6 +3151,7 @@ public class CardFactory implements NewConstants {
                     humanvalue += human.getType("Land").size();
                     humanvalue += CardListUtil.sumAttack(human.getTokens()); 
                     humanvalue += CardListUtil.sumDefense(human.getTokens());        // X = total converted mana cost + number of lands + total power+toughness of tokens (Human)
+                    if (AllZone.Computer_Life.getLife() < 7) { humanvalue += CardListUtil.sumAttack(human); } // in Low Life Emergency X = X + total power of human creatures
                     computer = computer.getValidCards(Tgts);
                     int computervalue = CardListUtil.sumCMC(computer);
                     computervalue += computer.getType("Land").size();
@@ -12080,7 +12081,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+/* Keyworded
         //*************** START *********** START **************************
         else if(cardName.equals("Evacuation") || cardName.equals("Rebuild")) {
             SpellAbility spell = new Spell(card) {
@@ -12134,7 +12135,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+*/        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Deep Analysis")) {

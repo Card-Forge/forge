@@ -1,3 +1,20 @@
+Evacuation
+3 U U
+Instant
+Return all creatures to their owners' hands.
+spBounceAll:Creature:Hand
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/evacuation.jpg
+
+Rebuild
+2 U
+Instant
+Return all artifacts to their owners' hands.
+spBounceAll:Artifact:Hand
+Cycling:2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuild.jpg
+
 Cleanse
 2 W W
 Sorcery
@@ -9271,13 +9288,6 @@ Flying
 Untap:2 U
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ethersworn_adjudicator.jpg
-
-Evacuation
-3 U U
-Instant
-Return all creatures to their owners' hands.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/evacuation.jpg
 
 Everflowing Chalice
 0
@@ -23304,14 +23314,6 @@ Counter target spell that targets a permanent you control.
 spCounter:Spell:Targets(My-Creature,My-Land,My-Enchantment,My-Artifact,My-Planeswalker,My-Equipment):Graveyard:None
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuff_the_wicked.jpg
-
-Rebuild
-2 U
-Instant
-no text
-Cycling:2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rebuild.jpg
 
 Recall
 X X U
