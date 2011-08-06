@@ -1,3 +1,55 @@
+Tattermunge Duo
+2 RG
+Creature Goblin Warrior Shaman
+Whenever you cast a red spell, Tattermunge Duo gets +1/+1 until end of turn.\r\nWhenever you cast a green spell, Tattermunge Duo gains forestwalk until end of turn.
+2/3
+SVar:BuffedBy:Spell.Red,Spell.Green
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_duo.jpg
+
+Thelonite Hermit
+3 G
+Creature Elf Shaman
+Saproling creatures get +1/+1.\r\nWhen Thelonite Hermit is turned face up, put four 1/1 green Saproling creature tokens into play.
+1/1
+Morph:3 G G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thelonite_hermit.jpg
+
+Thistledown Duo
+2 WU
+Creature Kithkin Soldier Wizard
+Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn.\r\nWhenever you cast a blue spell, Thistledown Duo gains flying until end of turn.
+2/2
+SVar:BuffedBy:Spell.White,Spell.Blue
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_duo.jpg
+
+Thoughtcast
+4 U
+Sorcery
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\n
+spDrawCards:2:Draw two cards.:Thoughtcast - draw 2 cards.
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtcast.jpg
+
+Tinker
+2 U
+Sorcery
+As an additional cost to cast Tinker, sacrifice an artifact.\r\nSearch your library for an artifact card and put that card onto the battlefield. Then shuffle your library.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tinker.jpg
+
+Tolsimir Wolfblood
+4 G W
+Legendary Creature Elf Warrior
+Other green creatures you control get +1/+1.\r\nOther white creatures you control get +1/+1.
+3/4
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tolsimir_wolfblood.jpg
+
 Safehold Duo
 3 GW
 Creature Elf Warrior Shaman
@@ -30931,15 +30983,6 @@ RegenerateMe:B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tattered_drake.jpg
 
-Tattermunge Duo
-2 RG
-Creature Goblin Warrior Shaman
-Whenever you cast a red spell, Tattermunge Duo gets +1/+1 until end of turn. Whenever you cast a green spell, Tattermunge Duo gains forestwalk until end of turn.
-2/3
-SVar:BuffedBy:Spell.Red,Spell.Green
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_duo.jpg
-
 Tattermunge Maniac
 RG
 Creature Goblin Warrior
@@ -31389,15 +31432,6 @@ SVar:X:Count$TypeOppCtrlTapped.Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/theft_of_dreams.jpg
 
-Thelonite Hermit
-3 G
-Creature Elf Shaman
-Saproling creatures get +1/+1. When Thelonite Hermit is turned face up, put four 1/1 green Saproling creature tokens into play.
-1/1
-Morph:3 G G
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thelonite_hermit.jpg
-
 Thermal Blast
 4 R
 Instant
@@ -31459,15 +31493,6 @@ no text
 spDrawCards:3:Drawback$YouDiscard/2/UnlessDiscardType.Artifact:Draw three cards. Then discard two cards unless you discard an artifact card.:Thirst for Knowledge - Draw 3 cards, then discard 2 cards unless you discard an artifact.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thirst_for_knowledge.jpg
-
-Thistledown Duo
-2 WU
-Creature Kithkin Soldier Wizard
-Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn. Whenever you cast a blue spell, Thistledown Duo gains flying until end of turn.
-2/2
-SVar:BuffedBy:Spell.White,Spell.Blue
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_duo.jpg
 
 Thistledown Liege
 1 WU WU WU
@@ -31618,15 +31643,6 @@ Counter target spell with converted mana cost 4 or less.
 spCounter:Spell:CMC(<=,4):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtbind.jpg
-
-Thoughtcast
-4 U
-Sorcery
-Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.) 
-spDrawCards:2:Draw two cards.:Thoughtcast - draw 2 cards.
-CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtcast.jpg
 
 Thoughtcutter Agent
 U B
@@ -32022,13 +32038,6 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tinder_farm.jpg
 
-Tinker
-2 U
-Sorcery
-As an additional cost to cast Tinker, sacrifice an artifact. Search your library for an artifact card and put that card onto the battlefield. Then shuffle your library.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tinker.jpg
-
 Tireless Missionaries
 4 W
 Creature Human Cleric
@@ -32117,15 +32126,6 @@ tap: add U to your mana pool for each Artifact you control.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_academy.jpg
-
-Tolsimir Wolfblood
-4 G W
-Legendary Creature Elf Warrior
-Other green creatures you control get +1/+1. Other white creatures you control get +1/+1.
-3/4
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tolsimir_wolfblood.jpg
 
 Tome Scour
 U
