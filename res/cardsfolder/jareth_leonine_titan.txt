@@ -12,4 +12,5 @@ A:AB$Pump | Cost$ W | KW$ Protection from Green | SpellDescription$ CARDNAME gai
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 7 | NumDef$ 7
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jareth_leonine_titan.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/43.jpg
 End

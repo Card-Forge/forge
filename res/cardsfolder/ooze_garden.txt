@@ -6,4 +6,5 @@ A:AB$Token | Cost$ 1 G Sac<1/Creature.nonOoze> | TokenAmount$ 1 | TokenName$ Ooz
 SVar:X:Sacrificed$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ooze_garden.jpg
+SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/143.jpg
 End

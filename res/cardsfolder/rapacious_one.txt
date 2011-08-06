@@ -10,4 +10,5 @@ SVar:ABMana:AB$Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDes
 SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rapacious_one.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/162.jpg
 End
