@@ -1594,9 +1594,8 @@ public class CardFactoryUtil {
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
                         return c.isCreature() 
-                                && CardFactoryUtil.AI_doesCreatureAttack(c) 
+                                && CombatUtil.canAttackNextTurn(c)
                                 && CardFactoryUtil.canTarget(sourceCard, c) 
-                                && (!c.getKeyword().contains("Defender")) 
                                 && (c.getNetDefense() + Tough > 0);
                     }
                 });
