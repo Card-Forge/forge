@@ -21,19 +21,19 @@ public class QuestPetWolf extends QuestPetAbstract{
 
         if (level == 1)
 		{
-			petCard.setImageName("G 0 1 Wolf Pet");
+			petCard.setImageName("G 1 1 Wolf Pet");
             petCard.setBaseAttack(1);
             petCard.setBaseDefense(1);
 		}
 		else if (level == 2)
 		{
-            petCard.setImageName("G 1 1 Wolf Pet");
+            petCard.setImageName("G 2 1 Wolf Pet");
             petCard.setBaseAttack(2);
             petCard.setBaseDefense(1);
 		}
 		else if (level == 3)
 		{
-            petCard.setImageName("G 2 1 Wolf Pet");
+            petCard.setImageName("G 2 2 Wolf Pet");
             petCard.setBaseAttack(2);
             petCard.setBaseDefense(2);
 		}
