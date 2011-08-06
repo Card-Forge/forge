@@ -129,6 +129,9 @@ public class AbilityFactory_Fetch {
                 	if (params.containsKey("Tapped"))
                 		c.tap();
             	}
+            	else if(destination.equals("Graveyard")) {
+            		AllZone.getZone(Constant.Zone.Graveyard, player).add(c);
+            	}
             	else if (destination.equals("Exile"))	// Jester's Cap
             		AllZone.getZone(Constant.Zone.Exile, player).add(c);
 

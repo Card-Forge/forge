@@ -425,7 +425,7 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Entomb")) {
             final SpellAbility spell = new Spell(card) {
@@ -479,7 +479,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+        */
         
       //*************** START *********** START **************************
         else if(cardName.equals("Beacon of Destruction")) {
