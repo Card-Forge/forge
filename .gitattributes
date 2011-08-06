@@ -4316,6 +4316,7 @@ res/cardsfolder/nettling_curse.txt svneol=native#text/plain
 res/cardsfolder/neurok_commando.txt -text svneol=native#text/plain
 res/cardsfolder/neurok_hoversail.txt -text svneol=native#text/plain
 res/cardsfolder/neurok_invisimancer.txt -text svneol=native#text/plain
+res/cardsfolder/neurok_prodigy.txt -text svneol=native#text/plain
 res/cardsfolder/neurok_replica.txt svneol=native#text/plain
 res/cardsfolder/neurok_spy.txt -text svneol=native#text/plain
 res/cardsfolder/nevermaker.txt -text svneol=native#text/plain
