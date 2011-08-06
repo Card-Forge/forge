@@ -5670,7 +5670,7 @@ public class GameActionUtil {
 	
 
 	//moved to Card.addExtrinsicAbilities
-
+	/*
 	public static Command Joiner_Adept                = new Command() {
 		private static final long serialVersionUID   = -2543659953307485051L;
 
@@ -5733,7 +5733,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; // Muscles_Sliver
-	
+	*/
 	
 	public static Command Gemhide_Sliver              = new Command() {
 		private static final long serialVersionUID   = -2941784982910968772L;
