@@ -2341,6 +2341,8 @@ public class CardFactoryUtil {
         if(sq[0].contains("CardPower")) return doXMath(c.getNetAttack(), m);
         // Count$CardToughness
         if(sq[0].contains("CardToughness")) return doXMath(c.getNetDefense(), m);
+        // Count$CardManaCost
+        if(sq[0].contains("CardManaCost")) return doXMath(CardUtil.getConvertedManaCost(c), m);
         
         //Generic Zone-based counting
         // Count$QualityAndZones.Subquality

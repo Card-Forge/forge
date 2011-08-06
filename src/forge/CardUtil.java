@@ -188,6 +188,11 @@ public class CardUtil {
         return getConvertedManaCost(sa.getManaCost());
     }
     
+    static public int getConvertedManaCost(Card c)
+    {
+    	return getConvertedManaCost(c.getManaCost());
+    }
+    
     static public int getConvertedManaCost(String manaCost) {
         //see if the mana cost is all colorless, like "2", "0", or "12"
         
@@ -217,5 +222,14 @@ public class CardUtil {
         //the mana cost is all colored mana like "U" or "B B B"
         tok = new StringTokenizer(manaCost);
         return tok.countTokens();
+    }
+
+    static public Card getRelative(Card c, String relation)
+    {
+    	if(relation.equals("CARDNAME")) return c;
+    	else if(relation.startsWith("enchanted ")) return c.getEnchanting().get(0);
+    	else if(relation.startsWith("equipped ")) return c.getEquipping().get(0);
+    	//else if(relation.startsWith("target ")) return c.getTargetCard();
+    	else throw new IllegalArgumentException("Error at CardUtil.getRelative: " + relation + "is not a valid relation");
     }
 }
