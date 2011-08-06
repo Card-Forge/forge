@@ -1412,42 +1412,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Plague Wind")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 6008660207658995400L;
-                
-                @Override
-                public void resolve() {
-                    Player opponent = card.getController().getOpponent();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opponent);
-                    
-                    CardList all = new CardList(play.getCards());
-                    all = all.getType("Creature");
-                    
-                    for(int i = 0; i < all.size(); i++) {
-                        Card c = all.get(i);
-                        if(c.isCreature()) AllZone.GameAction.destroyNoRegeneration(c);
-                    }
-                }//resolve()
-
-                @Override
-                public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
-                    
-                    human = human.getType("Creature");
-                    human = human.getNotKeyword("Indestructible");                    
-                    
-                    // the computer will at least destroy 1 creature
-                    return !human.isEmpty();
-                }
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            card.setSVar("PlayMain1", "TRUE");
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Overwhelming Forces")) {
