@@ -2475,8 +2475,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
         
-        //TODO - fix this up for Player class conversion
-        /*
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Incendiary Command")) {
             //not sure what to call variables, so I just made up something
@@ -2501,18 +2500,20 @@ public class CardFactory_Sorceries {
                     //"Incendiary Command deals 4 damage to target player",
         			for(int i = 0; i <card.getChoices().size(); i++) {
         				if(card.getChoice(i).equals(cardChoice[0])) {
-        					setTargetPlayer(card.getChoiceTarget(0)); 
-        					AllZone.GameAction.addDamage(getTargetPlayer(), card, 4);
+        					if(card.getChoiceTarget(0).equals(AllZone.HumanPlayer.getName())) {
+        						setTargetPlayer(AllZone.HumanPlayer); 
+        					}
+        					else {
+        						setTargetPlayer(AllZone.ComputerPlayer);
+        					}
+        					getTargetPlayer().addDamage(4, card);
         				}
         			}
 
                     //"Incendiary Command deals 2 damage to each creature",
                     if(userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {
                         //get all creatures
-                        CardList list = new CardList();
-                        list.addAll(AllZone.Human_Play.getCards());
-                        list.addAll(AllZone.Computer_Play.getCards());
-                        list = list.getType("Creature");
+                        CardList list = AllZoneUtil.getCreaturesInPlay();
                         
 
                         for(int i = 0; i < list.size(); i++) {
@@ -2550,11 +2551,13 @@ public class CardFactory_Sorceries {
                     
                     //technically should let the user discard one card at a time
                     //in case graveyard order matters
-                    for(int i = 0; i < n; i++)
-                        AllZone.GameAction.discardRandom(player, this);
+                    //for(int i = 0; i < n; i++)
+                      //  AllZone.GameAction.discardRandom(player, this);
+                    player.discard(n, this);
                     
-                    for(int i = 0; i < n; i++)
-                        AllZone.GameAction.drawCard(player);
+                    //for(int i = 0; i < n; i++)
+                      //  AllZone.GameAction.drawCard(player);
+                    player.drawCards(n);
                 }
                 
                 @Override
@@ -2719,7 +2722,7 @@ public class CardFactory_Sorceries {
             card.setSpellWithChoices(true);
             spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
-        */
+        
         
 
 
