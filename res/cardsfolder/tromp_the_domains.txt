@@ -2,7 +2,7 @@ Name:Tromp the Domains
 ManaCost:5 G
 Types:Sorcery
 Text:no text
-K:spAllPump:YouCtrl:+X/+X/Trample:Domain - Until end of turn, creatures you control gain trample and get +1/+1 for each basic land type among lands you control.:Tromp the Domains - Creatures get +X/+X and gain trample until EOT
+A:SP$ PumpAll | Cost$ 5 G | ValidCards$ Creature.YouCtrl | NumAtt$ +X | NumDef$ +X | KW$ Trample | SpellDescription$ Domain - Until end of turn, creatures you control gain trample and get +1/+1 for each basic land type among lands you control.
 SVar:X:Count$Domain
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
