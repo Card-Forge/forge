@@ -794,18 +794,6 @@ public class CardFactory implements NewConstants {
         	}
         }
         
-        if (hasKeyword(card, "Replicate") != -1) {
-        	int n = hasKeyword(card, "Replicate");
-        	if (n!= -1) {
-        		String parse = card.getKeyword().get(n).toString();
-        		String k[] = parse.split("cate ");
-        	
-        		SpellAbility sa = card.getSpellAbility()[0];
-        		sa.setIsReplicate(true);
-        		sa.setReplicateManaCost(k[1]);
-        	}
-        }
-        
         /*
         //Creatures with self-regenerate abilities
         //-1 means keyword "RegenerateMe" not found
