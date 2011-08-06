@@ -546,27 +546,27 @@ public class CombatUtil {
     //Returns the damage unblocked attackers would deal
     private static int sumAttack(CardList attackers, Player attacked)
     {
-       int sum = 0;
- 	  for(int i = 0; i < attackers.size(); i++) {
- 		  Card a = attackers.get(i);
- 		  if (!a.hasKeyword("Infect")) sum += attacked.predictDamage(getAttack(a), a, true);
- 	  }
+    	int sum = 0;
+    	for(int i = 0; i < attackers.size(); i++) {
+    		Card a = attackers.get(i);
+    		if (!a.hasKeyword("Infect")) sum += attacked.predictDamage(getAttack(a), a, true);
+    	}
 
-       return sum;
+    	return sum;
     }
     
-  //Returns the number of poison counters unblocked attackers would deal
+    //Returns the number of poison counters unblocked attackers would deal
     private static int sumPoison(CardList attackers, Player attacked)
     {
-       int sum = 0;
- 	  for(int i = 0; i < attackers.size(); i++) {
- 		  Card a = attackers.get(i);
- 		  int damage = attacked.predictDamage(getAttack(a), a, true);
- 		  if (a.hasKeyword("Infect")) sum += damage;
- 		  if (a.hasKeyword("Poisonous") && damage > 0) sum += a.getKeywordMagnitude("Poisonous");
- 	  }
+    	int sum = 0;
+    	for(int i = 0; i < attackers.size(); i++) {
+    		Card a = attackers.get(i);
+    		int damage = attacked.predictDamage(getAttack(a), a, true);
+    		if (a.hasKeyword("Infect")) sum += damage;
+    		if (a.hasKeyword("Poisonous") && damage > 0) sum += a.getKeywordMagnitude("Poisonous");
+    	}
 
-       return sum;
+    	return sum;
     }
     
     //Checks if the life of the attacked Player/Planeswalker is in danger 
@@ -1239,17 +1239,6 @@ public class CombatUtil {
 	        	} //for
         	}//creatureAttacked
         	//Annihilator
-        	
-            //Beastmaster Ascension
-            if(!c.getCreatureAttackedThisCombat()) {
-                PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-                CardList list = new CardList(play.getCards());
-                list = list.getName("Beastmaster Ascension");
-                
-                for(Card var:list) {
-                    var.addCounter(Counters.QUEST, 1);
-                }
-            } //BMA
             
             /*
             //Fervent Charge

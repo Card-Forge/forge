@@ -1,7 +1,9 @@
 Name:Beastmaster Ascension
 ManaCost:2 G
 Types:Enchantment
-Text:Whenever a creature you control attacks, you may put a quest counter on Beastmaster Ascension.
+Text:no text
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPut | OptionalDecider$ You | TriggerDescription$ Whenever a creature you control attacks, you may put a quest counter on CARDNAME.
+SVar:TrigPut:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 K:stPumpAll:Creature.YouCtrl:5/5:isValid Permanent.countersGE7QUEST:As long as CARDNAME has seven or more quest counters on it, creatures you control get +5/+5.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
