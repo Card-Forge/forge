@@ -506,10 +506,10 @@ public class AbilityFactory_Fetch {
 	        // targeting check would go here, but shroud and protection doesn't matter in graveyards
 	        
 	    	grave.remove(tgtC);
-	    	AllZone.getZone(tgtC).remove(tgt);
+	    	AllZone.getZone(tgtC).remove(tgtC);
 	    	
 	    	if (destination.equals("Hand")) 
-	    		AllZone.getZone(Constant.Zone.Hand, player).add(tgt);         			//move to hand
+	    		AllZone.getZone(Constant.Zone.Hand, player).add(tgtC);         			//move to hand
 	    	else if (destination.equals("Library")){
 	           int libraryPosition = 0;        // this needs to be zero indexed. Top = 0, Third = 2, -1 = Bottom
 	           if (params.containsKey("LibraryPosition"))
@@ -524,7 +524,7 @@ public class AbilityFactory_Fetch {
 	        	   player.shuffle();
 	    	}
 	    	else if (destination.equals("Battlefield")){
-	        	AllZone.getZone(Constant.Zone.Play, player).add(tgt); //move to battlefield
+	        	AllZone.getZone(Constant.Zone.Play, player).add(tgtC); //move to battlefield
 	        	if (params.containsKey("Tapped"))
 	        		tgtC.tap();
 	        	if (params.containsKey("GainControl"))
