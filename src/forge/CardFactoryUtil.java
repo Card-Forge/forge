@@ -2784,7 +2784,16 @@ public class CardFactoryUtil
      String d[] = DB.split("/");
      int X = 0;
      if (d.length > 0)
-	     if (d[1].contains("X"))
+    	 if (d[1].matches("dX"))
+    	 {
+    		 String dX = Src.getSVar(d[1]);
+    		 if (dX.startsWith("Count$"))
+    		 {
+    			 String dd[] = dX.split("\\$");
+    			 X = xCount(Src, dd[1]);
+    		 }
+    	 }
+    	 else if (d[1].matches("X"))
 	     {
 	        X = nDB;
 	        if (d[1].contains("."))
@@ -2797,7 +2806,7 @@ public class CardFactoryUtil
 	        	X = doXMath(X, ddd.toArray(new String [3]));
 	        }
 	     }
-	     else
+	     else if (d[1].matches("[0-9][0-9]?"))
 	        X = Integer.parseInt(d[1]);
     
      String dbPlayer = "";
