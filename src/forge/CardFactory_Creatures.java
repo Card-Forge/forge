@@ -9975,10 +9975,31 @@ public class CardFactory_Creatures {
 	             public boolean canPlayAI() {return false;}
 	          };//SpellAbility
 	          card.addSpellAbility(ability);
+	          ability.setDescription("tap: Tap target creature.");
+	          ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+
+	    	}//*************** END ************ END **************************
+	      
+	      //*************** START *********** START **************************
+	      if (cardName.equals("Minister of Impediments"))
+	      {
+	      	final SpellAbility ability = new Ability_Tap(card, "0")
+	          {
+
+	  		   private static final long serialVersionUID = 4424848120984319655L;
+	  		   public void resolve()
+	             {
+	               Card c = getTargetCard();
+	               c.tap();
+	             }
+	             public boolean canPlayAI() {return false;}
+	          };//SpellAbility
+	          card.addSpellAbility(ability);
 	          ability.setDescription("W, tap: Tap target creature.");
 	          ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
 
 	    	}//*************** END ************ END **************************
+
 	      
 	    //*************** START *********** START **************************
 	      else if(cardName.equals("Silent Attendant"))
