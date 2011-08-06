@@ -1,0 +1,10 @@
+Name:Swarm of Rats
+ManaCost:1 B
+Types:Creature Rat
+Text:no text
+PT:*/1
+K:stSetPT:Count$Valid Rat.YouCtrl:1:Swarm of Rats's power is equal to the number of Rats you control.
+SVar:BuffedBy:Rat
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swarm_of_rats.jpg
+End
