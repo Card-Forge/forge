@@ -2,7 +2,7 @@ Name:Kindled Fury
 ManaCost:R
 Types:Instant
 Text:no text
-K:spPumpTgt:+1/+0/First Strike
+A:SP$Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ First Strike | SpellDescription$ Target creature gets +1/+0 and gains first strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kindled_fury.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/92.jpg

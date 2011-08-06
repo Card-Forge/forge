@@ -2,7 +2,7 @@ Name:Jump
 ManaCost:U
 Types:Instant
 Text:no text
-K:spPumpTgt:Flying
+A:SP$Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jump.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/59.jpg

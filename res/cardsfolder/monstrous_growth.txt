@@ -2,7 +2,7 @@ Name:Monstrous Growth
 ManaCost:1 G
 Types:Sorcery
 Text:no text
-K:spPumpTgt:+4/+4
+A:SP$Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +4 | SpellDescription$ Target creature gets +4/+4 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monstrous_growth.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/266.jpg

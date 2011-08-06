@@ -2,7 +2,7 @@ Name:Iron Will
 ManaCost:W
 Types:Instant
 Text:no text
-K:spPumpTgt:+0/+4
+A:SP$Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +4 | SpellDescription$ Target creature gets +0/+4 until end of turn.
 K:Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iron_will.jpg
