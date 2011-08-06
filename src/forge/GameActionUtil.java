@@ -15062,86 +15062,90 @@ public class GameActionUtil {
 
 	}; //Wizened Cenn Other
 	
-	public static Command Lord_of_the_Undead_Pump  = new Command() {
+    public static Command Lord_of_the_Undead_Pump  = new Command() {
 
-		private static final long serialVersionUID = 4866202925944860238L;
-		CardList                  gloriousAnthemList = new CardList();
+        private static final long serialVersionUID = 4866202925944860238L;
+        CardList                  gloriousAnthemList = new CardList();
 
-		public void execute() {
+        public void execute() {
 
-			CardList cList = gloriousAnthemList;
-			Card c;
+            CardList cList = gloriousAnthemList;
+            Card c;
 
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-			cList.clear();
-			PlayerZone[] zone = getZone("Lord of the Undead");
+            for(int i = 0; i < cList.size(); i++) {
+                c = cList.get(i);
+                c.addSemiPermanentAttackBoost(-1);
+                c.addSemiPermanentDefenseBoost(-1);
+            }
+            cList.clear();
+            PlayerZone[] zone = getZone("Lord of the Undead");
 
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Zombie");
+            // for each zone found add +1/+1 to each card
+            for(int outer = 0; outer < zone.length; outer++) {
+                // CardList creature = new CardList(zone[outer].getCards());
+                CardList creature = new CardList();
+                creature.addAll(AllZone.Human_Play.getCards());
+                creature.addAll(AllZone.Computer_Play.getCards());
+                creature = creature.getType("Zombie");
 
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.isCreature()
-							&& !c.getName().equals(
-									"Lord of the Undead")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						
-						gloriousAnthemList.add(c);
-					}
+                for(int i = 0; i < creature.size(); i++) {
+                    c = creature.get(i);
+                    if(c.isCreature()
+                            && !c.getName().equals("Lord of the Undead")) {
+                        c.addSemiPermanentAttackBoost(1);
+                        c.addSemiPermanentDefenseBoost(1);
+                        
+                        gloriousAnthemList.add(c);
+                    }
 
-				} // for
-			} // for
+                } // for
+            } // for
 
-		}// execute()
+        }// execute()
 
-	}; //Lord_of_the_Undead_
-	
-	public static Command Lord_of_the_Undead_Other  = new Command() {
+    }; //Lord_of_the_Undead_
+    
+    public static Command Lord_of_the_Undead_Other  = new Command() {
 
-		private static final long serialVersionUID = -6925991029956531314L;
-		int                       otherLords      = 0;
+        private static final long serialVersionUID = -6925991029956531314L;
+        int                       otherLords       = 0;
 
-		private int countOtherLords(Card c) {
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-			CardList capts = new CardList(play.getCards());
-			capts = capts.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.getName().equals(
-							"Lord of the Undead")
-							&& (c.getType().contains("Zombie") || c.getKeyword().contains(
-									"Changeling"));
-				}
-			});
-			return capts.size() - 1;
+        private int countOtherLords(Card c) {
+            // PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+            // CardList capts = new CardList(play.getCards());
+            PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+            PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+            CardList capts = new CardList();
+            capts.addAll(hPlay.getCards());
+            capts.addAll(cPlay.getCards());
+            capts = capts.filter(new CardListFilter() {
+                public boolean addCard(Card c) {
+                    return c.getName().equals("Lord of the Undead")
+                            && (c.getType().contains("Zombie") || c.getKeyword().contains("Changeling"));
+                }
+            });
+            return capts.size() - 1;
 
-		}
+        }
 
-		public void execute() {
+        public void execute() {
 
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
+            CardList creature = new CardList();
+            creature.addAll(AllZone.Human_Play.getCards());
+            creature.addAll(AllZone.Computer_Play.getCards());
 
-			creature = creature.getName("Lord of the Undead");
+            creature = creature.getName("Lord of the Undead");
 
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				otherLords = countOtherLords(c);
-				c.setOtherAttackBoost(otherLords);
-				c.setOtherDefenseBoost(otherLords);
+            for(int i = 0; i < creature.size(); i++) {
+                Card c = creature.get(i);
+                otherLords = countOtherLords(c);
+                c.setOtherAttackBoost(otherLords);
+                c.setOtherDefenseBoost(otherLords);
 
-			}// for inner
-		}// execute()
+            }// for inner
+        }// execute()
 
-	}; //Lord_of_the_Undead_Other
+    }; //Lord_of_the_Undead_Other
 	
 	public static Command Cemetery_Reaper_Pump  = new Command() {
 
