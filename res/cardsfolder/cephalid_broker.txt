@@ -6,4 +6,5 @@ PT:2/2
 A:AB$Draw | Cost$ T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player to draw two cards, then discard two cards | SpellDescription$ Target player draws two cards, then discards two cards. | SubAbility$ TgtDiscard/2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_broker.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/71.jpg
 End

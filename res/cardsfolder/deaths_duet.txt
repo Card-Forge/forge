@@ -5,4 +5,5 @@ Text:no text
 A:SP$Retrieve | Cost$ 2 B | Destination$ Hand | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return two target creature cards from your graveyard to your hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_duet.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/60.jpg
 End

@@ -8,4 +8,5 @@ K:Haste
 A:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ YouDiscard/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card132229.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/50.jpg
 End

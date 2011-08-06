@@ -5,4 +5,5 @@ Text:no text
 A:AB$Draw | Cost$ 1 U T Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ Draw two cards.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/couriers_capsule.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/37.jpg
 End

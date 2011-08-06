@@ -5,4 +5,5 @@ Text:Add R to your mana pool for each Goblin on the battlefield.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brightstone_ritual.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/191.jpg
 End

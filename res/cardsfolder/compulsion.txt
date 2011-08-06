@@ -7,4 +7,5 @@ A:AB$Draw | Cost$ 1 U Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a c
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/compulsion.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/34.jpg
 End

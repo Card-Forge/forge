@@ -6,4 +6,5 @@ A:SP$Retrieve | Cost$ 1 B | Destination$ Hand | TgtPrompt$ Choose target creatur
 SVar:Buyback:3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disturbed_burial.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/23.jpg
 End

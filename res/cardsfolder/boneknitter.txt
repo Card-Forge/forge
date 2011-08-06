@@ -7,4 +7,5 @@ A:AB$Regenerate | ValidTgts$ Zombie | TgtPrompt$ Select target Zombie. |Cost$ 1 
 K:Morph:2 B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boneknitter.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/128.jpg
 End

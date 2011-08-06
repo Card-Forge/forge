@@ -5,4 +5,5 @@ Text:no text
 A:SP$Draw | Cost$ 1 U | NumCards$ 2 | SpellDescription$ You draw two cards, then each other player draws a card. | SubAbility$ OppDraw/1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card31779.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/114.jpg
 End

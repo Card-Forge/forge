@@ -6,4 +6,5 @@ A:AB$Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a car
 K:abDamageTgtCP R Sac<1/CARDNAME>:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrite_spellbomb.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/232.jpg
 End

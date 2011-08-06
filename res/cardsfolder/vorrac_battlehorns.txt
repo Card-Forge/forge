@@ -5,4 +5,5 @@ Text:Equipped creature has trample and can't be blocked by more than one creatur
 K:eqPump 1:Trample & HIDDEN CARDNAME can't be blocked by more than one creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vorrac_battlehorns.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/271.jpg
 End

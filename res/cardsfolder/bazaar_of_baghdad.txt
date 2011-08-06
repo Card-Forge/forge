@@ -6,4 +6,5 @@ Text:no text
 A:AB$Draw | Cost$ T | NumCards$ 2 | SpellDescription$Draw two cards, then discard three cards. | SubAbility$ YouDiscard/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bazaar_of_baghdad.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/84.jpg
 End

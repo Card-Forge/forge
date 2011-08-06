@@ -7,4 +7,5 @@ A:AB$Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a car
 K:Dredge 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_shell_scarab.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/211.jpg
 End

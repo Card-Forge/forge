@@ -8,4 +8,5 @@ SVar:X:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/footbottom_feast.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/115.jpg
 End

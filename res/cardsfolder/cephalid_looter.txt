@@ -6,4 +6,5 @@ PT:2/1
 A:AB$Draw | Cost$ T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player to draw a card, then discard a card | SpellDescription$ Target player draws a card, then discards a card. | SubAbility$ TgtDiscard/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_looter.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/72.jpg
 End

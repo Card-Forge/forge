@@ -6,4 +6,5 @@ A:SP$Retrieve | Cost$ 4 B | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | Tg
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_uprising.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/53.jpg
 End

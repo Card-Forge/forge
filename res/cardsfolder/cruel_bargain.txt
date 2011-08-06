@@ -6,4 +6,5 @@ A:SP$Draw | Cost$ B B B | NumCards$ 4 | SpellDescription$ Draw four cards. You l
 SVar:dX:Count$YourLifeTotal/HalfUp
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4214.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/8.jpg
 End

@@ -6,4 +6,5 @@ A:AB$Pump | Cost$ 1 G | ValidTgts$ Creature.blocking | NumDef$ +1 | SpellDescrip
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elven_fortress.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/67.jpg
 End

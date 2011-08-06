@@ -8,4 +8,5 @@ K:Protection from white
 K:PreventAllDamageBy Creature.enchanted
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_putrid_flesh.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/41.jpg
 End

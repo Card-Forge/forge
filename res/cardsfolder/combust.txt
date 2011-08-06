@@ -7,4 +7,5 @@ A:SP$DealDamage | Cost$ 1 R | ValidTgts$ Creature.White,Creature.Blue | NumDmg$ 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/combust.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/130.jpg
 End

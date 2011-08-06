@@ -6,4 +6,5 @@ K:CostChange:Player:Less:2:Ability_Cycling:All:All:TargetInHand
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fluctuator.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/295.jpg
 End

@@ -6,4 +6,5 @@ A:SP$Retrieve | Cost$ G | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/false_mourning.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/134.jpg
 End

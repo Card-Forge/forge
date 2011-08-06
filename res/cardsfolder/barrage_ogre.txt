@@ -7,4 +7,5 @@ A:AB$DealDamage | Cost$ T Sac<1/Artifact> | Tgt$ CP | NumDmg$2 | SpellDescriptio
 SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrage_ogre.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/83.jpg
 End

@@ -7,4 +7,5 @@ K:Permanents don't untap during their controllers' untap steps:Creature.withFlyi
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_storm.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/248.jpg
 End

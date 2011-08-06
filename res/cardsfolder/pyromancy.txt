@@ -6,4 +6,5 @@ A:AB$DealDamage | Cost$ 3 Discard<1/Random> | Tgt$ TgtCP | NumDmg$ X | SpellDesc
 SVar:X:Discarded$CardManaCost
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyromancy.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/88.jpg
 End

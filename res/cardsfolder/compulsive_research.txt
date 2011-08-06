@@ -5,4 +5,5 @@ Text:no text
 A:SP$Draw | Cost$ 2 U | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player to draw three cards. Then that player discards two cards unless he or she discards a land card | SpellDescription$ Target player draws three cards. Then that player discards two cards unless he or she discards a land card | SubAbility$ TgtDiscard/2/UnlessDiscardType.Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/compulsive_research.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/40.jpg
 End

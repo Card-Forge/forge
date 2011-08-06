@@ -6,4 +6,5 @@ A:AB$Draw | Cost$ Return<1/CARDNAME> | NumCards$ 3 | SpellDescription$ Draw thre
 SVar:Rarity:Rare
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/attunement.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/61.jpg
 End

@@ -6,4 +6,5 @@ A:AB$Draw | Cost$ 1 U Discard<1/Any> | NumCards$ 1 | SpellDescription$ Draw a ca
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mental_discipline.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/37.jpg
 End

@@ -5,4 +5,5 @@ Text:no text
 A:SP$Draw | Cost$ 1 U | NumCards$ 2 | SpellDescription$ Each player draws two cards. | SubAbility$ OppDraw/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vision_skeins.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/36.jpg
 End

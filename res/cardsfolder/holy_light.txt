@@ -6,4 +6,5 @@ K:spAllPump:All/Creature.nonWhite:-1/-1:Nonwhite creatures get -1/-1 until end o
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/holy_light.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/83.jpg
 End

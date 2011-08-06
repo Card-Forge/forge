@@ -5,4 +5,5 @@ Text:no text
 A:SP$DealDamage | Cost$ 3 R R | Tgt$ TgtC | NumDmg$ 4 | NoPrevention$ True | SpellDescription$ Pinpoint Avalanche deals 4 damage to target creature. The damage can't be prevented.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pinpoint_avalanche.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/221.jpg
 End
