@@ -1,0 +1,9 @@
+Name:Soliton
+ManaCost:5
+Types:Artifact Creature Construct
+Text:no text
+PT:3/4
+K:Untap:U
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soliton.jpg
+End
