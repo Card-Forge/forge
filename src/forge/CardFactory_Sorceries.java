@@ -417,8 +417,7 @@ public class CardFactory_Sorceries {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Demonic Tutor") || cardName.equals("Diabolic Tutor")
-                || cardName.equals("Grim Tutor")) {
+        else if(cardName.equals("Grim Tutor")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 1481169060428051519L;
                 

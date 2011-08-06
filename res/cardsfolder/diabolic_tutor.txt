@@ -1,7 +1,8 @@
 Name:Diabolic Tutor
 ManaCost:2 B B
 Types:Sorcery
-Text:Search your library for a card and put that card into your hand. Then shuffle your library.
+Text:no text
+A:SP$ChangeZone | Cost$ 2 B B| Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | SpellDescription$ Search your library for a card and put that card into your hand. Then shuffle your library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_tutor.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/128.jpg
