@@ -11,15 +11,17 @@ import forge.gui.GuiUtils;
 //Destination - send countered spell to: (only applies to Spells; ignored for Abilities)
 //		-Graveyard (Default)
 //		-Exile
-//		-TopDeck
+//		-TopOfLibrary
 //		-Hand
-//		-BottomDeck
-//		-Shuffle
+//		-BottomOfLibrary
+//		-ShuffleIntoLibrary
+//UnlessCost - counter target spell unless it's controller pays this cost
+//PowerSink - true if the drawback type part of Power Sink should be used
 //ExtraActions - implemented exactly as spCounter used them (can probably be updated to SubAbility/Drawback), then this param is eliminated
 
 //Examples:
-//A:SP$Counter|Cost$1 G|Type$Ability|SpellDescription$Counter target activated ability.
-//A:AB$Counter|Cost$G G|Type$Spell|Destination$Exile|CounterValid$Color.Black|SpellDescription$xxxxx
+//A:SP$Counter | Cost$ 1 G | Type$ Ability | SpellDescription$ Counter target activated ability.
+//A:AB$Counter | Cost$ G G | Type$ Spell | Destination$ Exile | CounterValid$ Color.Black | SpellDescription$ xxxxx
 
 public class AbilityFactory_CounterMagic {
 
