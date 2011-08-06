@@ -299,12 +299,14 @@ public class NewDeckIO implements DeckIO {
                     out.close();
                 }
             }
+            /*
             //delete the files that were not written out: the decks that were deleted
             for(File file:files) {
                 for(int i = 0; i < 8; i++)
                     new File(file, i + ".dck").delete();
                 file.delete();
             }
+            */
         } catch(IOException ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("DeckIO : write() error, " + ex.getMessage());

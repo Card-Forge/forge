@@ -398,6 +398,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             }
         }//if
         
+        //refresh decks:
+        allDecks = getDecks();
+        
         editor.setVisible(true);
         dispose();
     }
