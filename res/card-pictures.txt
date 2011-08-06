@@ -38,6 +38,11 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+corrosive_mentor.jpg			http://www.wizards.com/global/images/magic/general/corrosive_mentor.jpg
+intimidation.jpg			http://www.wizards.com/global/images/magic/general/intimidation.jpg
+glen_elendra_liege.jpg			http://www.wizards.com/global/images/magic/general/glen_elendra_liege.jpg
+abyssal_nocturnus.jpg			http://www.wizards.com/global/images/magic/general/abyssal_nocturnus.jpg
+mindstab.jpg				http://www.wizards.com/global/images/magic/general/mindstab.jpg
 infiltrator_il_kor.jpg			http://www.wizards.com/global/images/magic/general/infiltrator_il_kor.jpg
 plunder.jpg				http://www.wizards.com/global/images/magic/general/plunder.jpg
 rift_bolt.jpg				http://www.wizards.com/global/images/magic/general/rift_bolt.jpg
