@@ -1062,6 +1062,7 @@ class CardFactory_Lands {
              ability.setDescription("7, Tap: Search your library for a colorless creature card, reveal it, and put it into your hand. Then shuffle your library.");
         }//*************** END ************ END **************************
         
+        /*keyworded
         //*************** START *********** START **************************
         else if(cardName.equals("Terramorphic Expanse") || cardName.equals("Evolving Wilds")) {
             //tap sacrifice
@@ -1071,12 +1072,12 @@ class CardFactory_Lands {
                 @Override
                 public boolean canPlayAI() {
                     return false;
-                    /*
+                    
                     //sacrifice Sakura-Tribe Elder if Human has any creatures
                     CardList list = new CardList(AllZone.Human_Play.getCards());
                     list = list.getType("Creature");
                     return list.size() != 0 && card.isUntapped();
-                    */
+                    
                 }
                 
                 @Override
@@ -1173,6 +1174,7 @@ class CardFactory_Lands {
             ability.setDescription("tap, Sacrifice " + card.getName() + ": Search your library for a basic land card and put it into play tapped. Then shuffle your library.");
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Wasteland") || cardName.equals("Strip Mine") || cardName.equals("Tectonic Edge")) {
