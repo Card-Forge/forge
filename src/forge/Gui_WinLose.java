@@ -188,7 +188,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     		if (s != null) {
 	    		if (s.equals("Poison Counters") || s.equals("Milled") || s.equals("Battle of Wits") || 
 	    			s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || s.equals("Epic Struggle") ||
-	    			s.equals("Door to Nothingness")) {
+	    			s.equals("Door to Nothingness") || s.equals("Barren Glory")) {
 	    			sb.append("Alternate win condition: ");
 	    			sb.append(s);
 	    			sb.append("! Bonus: +100 credits.\r\n");

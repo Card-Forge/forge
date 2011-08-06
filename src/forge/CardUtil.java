@@ -190,6 +190,8 @@ public class CardUtil {
     
     static public int getConvertedManaCost(Card c)
     {
+    	if (c.isToken() && !c.isCopiedToken())
+    		return 0;
     	return getConvertedManaCost(c.getManaCost());
     }
     

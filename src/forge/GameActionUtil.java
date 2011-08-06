@@ -6082,11 +6082,11 @@ public class GameActionUtil {
             Ability ability;
             
             for(int i = 0; i < list.size(); i++) {
-                final Card crd = list.get(i);
+                //final Card crd = list.get(i);
                 ability = new Ability(list.get(i), "0") {
                     @Override
                     public void resolve() {
-                        CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", crd, "G", new String[] {
+                        CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", mostLands, "G", new String[] {
                                 "Creature", "Saproling"}, 1, 1, new String[] {""});
                     }// resolve()
                 };// Ability

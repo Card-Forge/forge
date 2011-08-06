@@ -682,6 +682,7 @@ public class CardFactory_Creatures {
                             copy.setController(getTargetCard().getController());
                             
                             copy.setToken(true);
+                            copy.setCopiedToken(true);
                             
                             if(getTargetCard().isFaceDown()) {
                                 copy.setIsFaceDown(true);

@@ -171,7 +171,7 @@ public class ImageCache implements NewConstants {
         String key = card.getImageName();
         if(card.isBasicLand() && card.getRandomPicture() != 0) key += card.getRandomPicture();
         key = GuiDisplayUtil.cleanString(key);
-        if(card.isToken()) key += TOKEN;
+        if(card.isToken() && !card.isCopiedToken()) key += TOKEN;
         return key;
     }
     
