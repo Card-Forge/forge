@@ -3647,10 +3647,10 @@ public class CardFactory implements NewConstants {
         
         
         /**
-         *  Generic return target card(s) from graveyard to Hand or Battlefield cards
+         *  Generic return target card(s) from graveyard to Hand, Battlefield or Top of Library
          *  spReturnTgt:{Num Cards/Parameters}:{Type}:{To Zone}:{DrawBack}:{Spell Desc}
          *  
-         *  DrawBack and Buyback is not yet implemented.
+         *  DrawBack and X Count/Costs are not yet implemented.
          */
         if (hasKeyword(card, "spReturnTgt") != -1) {
             int n = hasKeyword(card, "spReturnTgt");
@@ -3693,8 +3693,6 @@ public class CardFactory implements NewConstants {
             if (k.length > 5) {
                 desc = k[5];
             }
-            
-            card.clearSpellAbility();
             
             final SpellAbility spRtrnTgt = new Spell(card) {
                 private static final long serialVersionUID = 7970018872459137897L;
@@ -3848,62 +3846,33 @@ public class CardFactory implements NewConstants {
                 }// getGraveyardList()
             };// spRtrnTgt
             
-            Input target = new Input() {
-                private static final long serialVersionUID = 816838038180106359L;
-                
-                @Override
-                public void showMessage() {
-                    
-                    CardList grave = getGraveyardList();
-                    CardList targets = new CardList();
-                    
-                    if (returnUpTo[0]) {
-                        for (int i = 0; i < numCardsToReturn; i++) {
-                            if (grave.size() > 0) {
-                                Object o = AllZone.Display.getChoiceOptional("Select a card", grave.toArray());
-                                if (o == null) break;
-                                Card c = (Card) o;
-                                targets.add(c);
-                                grave.remove(c);
-                            }
-                        }
-                        
-                    } else if (grave.size() > numCardsToReturn) {
-                        for (int i = 0; i < numCardsToReturn; i++) {
-                            Object o = AllZone.Display.getChoice("Select a card", grave.toArray());
-                            Card c = (Card) o;
-                            targets.add(c);
-                            grave.remove(c);
-                        }
-                        
-                    } else if (grave.size() == numCardsToReturn) {
-                        targets = grave;
-                    }
-                    
-                    if (targets.size() > 0) {
-                        spRtrnTgt.setTargetList(targets);
-                        stopSetNext(new Input_PayManaCost(spRtrnTgt));
-                    } else stop();
-                    
-                }// showMessage()
-                
-                public CardList getGraveyardList() {
-                    CardList list = new CardList();
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    list.addAll(zone.getCards());
-                    list = list.getValidCards(Tgts);
-                    return list;
-                }
-            };// Input
+            spRtrnTgt.setBeforePayMana(CardFactoryUtil.spReturnTgt_input_targetCards_InGraveyard(card, spRtrnTgt, returnUpTo[0], numCardsToReturn, Tgts));
             
             if (desc.length() > 0) {
                 spRtrnTgt.setDescription(desc);
             }
-            spRtrnTgt.setBeforePayMana(target);
+            
+            card.clearSpellAbility();
             card.addSpellAbility(spRtrnTgt);
             
             if (Destination.equals("Hand")) {
                 card.setSVar("PlayMain1", "TRUE");
+            }
+            
+            String bbCost = card.getSVar("Buyback");
+            if (!bbCost.equals("")) {
+                
+               SpellAbility bbRtrnTgt = spRtrnTgt.copy();
+               bbRtrnTgt.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+               
+               StringBuilder sb = new StringBuilder();
+               sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
+               sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
+               bbRtrnTgt.setDescription(sb.toString());
+               
+               bbRtrnTgt.setIsBuyBackAbility(true);
+               bbRtrnTgt.setBeforePayMana(CardFactoryUtil.spReturnTgt_input_targetCards_InGraveyard(card, bbRtrnTgt, returnUpTo[0], numCardsToReturn, Tgts));
+               card.addSpellAbility(bbRtrnTgt);
             }
         }// spReturnTgt
         

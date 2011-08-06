@@ -1060,6 +1060,7 @@ res/cardsfolder/disperse.txt -text svneol=native#text/plain
 res/cardsfolder/dissipate.txt -text svneol=native#text/plain
 res/cardsfolder/dissipation_field.txt -text svneol=native#text/plain
 res/cardsfolder/distress.txt -text svneol=native#text/plain
+res/cardsfolder/disturbed_burial.txt -text svneol=native#text/plain
 res/cardsfolder/dive_bomber.txt -text svneol=native#text/plain
 res/cardsfolder/divebomber_griffin.txt -text svneol=native#text/plain
 res/cardsfolder/diversionary_tactics.txt -text svneol=native#text/plain

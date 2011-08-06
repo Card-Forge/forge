@@ -3007,6 +3007,57 @@ public class CardFactoryUtil {
         return target;
     }//input_targetPlayer()
     
+    public static Input spReturnTgt_input_targetCards_InGraveyard(final Card card, final SpellAbility spell, final boolean UpTo, final int numCards, final String Tgts[]) {
+        Input target = new Input() {
+            private static final long serialVersionUID = 816838038180106359L;
+            
+            @Override
+            public void showMessage() {
+                
+                CardList grave = getGraveyardList();
+                CardList targets = new CardList();
+                
+                if (UpTo) {
+                    for (int i = 0; i < numCards; i++) {
+                        if (grave.size() > 0) {
+                            Object o = AllZone.Display.getChoiceOptional("Select a card", grave.toArray());
+                            if (o == null) break;
+                            Card c = (Card) o;
+                            targets.add(c);
+                            grave.remove(c);
+                        }
+                    }
+                    
+                } else if (grave.size() > numCards) {
+                    for (int i = 0; i < numCards; i++) {
+                        Object o = AllZone.Display.getChoice("Select a card", grave.toArray());
+                        Card c = (Card) o;
+                        targets.add(c);
+                        grave.remove(c);
+                    }
+                    
+                } else if (grave.size() == numCards) {
+                    targets = grave;
+                }
+                
+                if (targets.size() > 0) {
+                    spell.setTargetList(targets);
+                    stopSetNext(new Input_PayManaCost(spell));
+                } else stop();
+                
+            }// showMessage()
+            
+            public CardList getGraveyardList() {
+                CardList list = new CardList();
+                PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                list.addAll(zone.getCards());
+                list = list.getValidCards(Tgts);
+                return list;
+            }
+        };// Input
+        return target;
+    }//spReturnTgt_input_targetCards_InGraveyard()
+    
     public static CardList AI_getHumanCreature(final Card spell, boolean targeted) {
         CardList creature = new CardList(AllZone.Human_Play.getCards());
         creature = creature.getType("Creature");
