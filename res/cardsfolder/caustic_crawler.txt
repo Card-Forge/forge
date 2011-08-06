@@ -1,0 +1,10 @@
+Name:Caustic Crawler
+ManaCost:3 B B
+Types:Creature Insect
+Text:no text
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Optional$ True | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, you may have target creature get -1/-1 until end of turn.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | SpellDescription$ Put a -1/-1 counter on target creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Caustic_Crawler.jpg
+End
