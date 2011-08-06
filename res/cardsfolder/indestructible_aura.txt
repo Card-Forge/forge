@@ -6,4 +6,5 @@ A:AB$Pump | Cost$ W | KW$ HIDDEN Prevent all damage that would be dealt to CARDN
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/indestructible_aura.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/190.jpg
 End
