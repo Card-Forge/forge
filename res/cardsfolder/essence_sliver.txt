@@ -3,7 +3,9 @@ ManaCost:3 W
 Types:Creature Sliver
 Text:no text
 PT:3/3
-K:stPumpAll:Creature.Sliver:0/0/HIDDEN Whenever CARDNAME deals damage, you gain that much life.:no Condition:Whenever a Sliver deals damage, its controller gains that much life.
+T:Mode$ DamageDone | ValidSource$ Sliver | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Sliver deals damage, its controller gains that much life.
+SVar:TrigGain:AB$GainLife | Cost$ 0 | Defined$ TriggeredSourceController | LifeAmount$ X
+SVar:X:Count$TriggeredDamageAmount
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_sliver.jpg
