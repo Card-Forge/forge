@@ -635,6 +635,18 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spAllPump);
         	
         	card.setSVar("PlayMain1", "TRUE");
+        	
+            String bbCost = card.getSVar("Buyback");
+            if (!bbCost.equals(""))
+            {
+               SpellAbility bbAllPump = spAllPump.copy();
+               bbAllPump.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+               bbAllPump.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+               bbAllPump.setIsBuyBackAbility(true);
+                              
+               card.addSpellAbility(bbAllPump);
+            }
+
         }
         
         while(hasKeyword(card, "abPump") != -1) {
@@ -1324,6 +1336,25 @@ public class CardFactory implements NewConstants {
                 else if(TgtPlayer[0]) DamageTgt.setBeforePayMana(CardFactoryUtil.input_targetPlayer(DamageTgt));
                 
                 card.addSpellAbility(DamageTgt);
+                
+                String bbCost = card.getSVar("Buyback");
+                if (!bbCost.equals(""))
+                {
+                   SpellAbility bbDamageTgt = DamageTgt.copy();
+                   bbDamageTgt.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+                   bbDamageTgt.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                   bbDamageTgt.setIsBuyBackAbility(true);
+                   
+                   if (TgtCP[0] == true)
+                       bbDamageTgt.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(bbDamageTgt, true, false));
+                   else if (TgtCreature[0])
+                	   bbDamageTgt.setBeforePayMana(CardFactoryUtil.input_targetCreature(bbDamageTgt));
+                   else if (TgtPlayer[0])
+                	   bbDamageTgt.setBeforePayMana(CardFactoryUtil.input_targetPlayer(bbDamageTgt));
+                   
+                   card.addSpellAbility(bbDamageTgt);
+                }
+
             }
         }// spDamageTgt
         
@@ -1685,6 +1716,7 @@ public class CardFactory implements NewConstants {
             }
         }
         
+        // TODO: remove abDamageCP in favor of abDamageTgt
         if(hasKeyword(card, "abDamageCP") != -1) {
             int n = hasKeyword(card, "abDamageCP");
             if(n != -1) {
@@ -1987,6 +2019,20 @@ public class CardFactory implements NewConstants {
             spDstryTgt.setDescription(card.getText());
             card.setText("");
             card.addSpellAbility(spDstryTgt);
+            
+            String bbCost = card.getSVar("Buyback");
+            if (!bbCost.equals(""))
+            {
+               SpellAbility bbDstryTgt = spDstryTgt.copy();
+               bbDstryTgt.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+               bbDstryTgt.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+               bbDstryTgt.setIsBuyBackAbility(true);
+               
+               bbDstryTgt.setBeforePayMana(CardFactoryUtil.input_targetValid(bbDstryTgt, Tgts, Selec));
+               
+               card.addSpellAbility(bbDstryTgt);
+            }
+
         }//spDestroyTgt
         
         while(hasKeyword(card, "abDrawCards") != -1) {
@@ -2276,6 +2322,21 @@ public class CardFactory implements NewConstants {
             
             card.clearSpellAbility();
             card.addSpellAbility(spDraw);
+            
+            String bbCost = card.getSVar("Buyback");
+            if (!bbCost.equals(""))
+            {
+               SpellAbility bbDraw = spDraw.copy();
+               bbDraw.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+               bbDraw.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+               bbDraw.setIsBuyBackAbility(true);
+               
+               if (Tgt[0] == true)
+                   bbDraw.setBeforePayMana(CardFactoryUtil.input_targetPlayer(bbDraw));
+               
+               card.addSpellAbility(bbDraw);
+            }
+
         }//spDrawCards
         
         if (hasKeyword(card, "spLoseLife") != -1)
@@ -3502,6 +3563,20 @@ public class CardFactory implements NewConstants {
             
             card.clearSpellAbility();
             card.addSpellAbility(spPump);
+            
+            String bbCost = card.getSVar("Buyback");
+            if (!bbCost.equals(""))
+            {
+               SpellAbility bbPump = spPump.copy();
+               bbPump.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+               bbPump.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+               bbPump.setIsBuyBackAbility(true);
+               
+               bbPump.setBeforePayMana(CardFactoryUtil.input_targetCreature(bbPump));
+               
+               card.addSpellAbility(bbPump);
+            }
+
         }
         
         if(hasKeyword(card, "spRaiseDead") != -1) {
