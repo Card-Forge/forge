@@ -1568,29 +1568,7 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Ryusei, the Falling Star")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    CardList list = AllZoneUtil.getCreaturesInPlay();
-                    for(int i = 0; i < list.size(); i++)
-                        if(!list.get(i).getKeyword().contains("Flying")) list.get(i).addDamage(5, card);
-                }
-            };
-            Command destroy = new Command() {
-                private static final long serialVersionUID = -6585074939675844265L;
-                
-                public void execute() {
-                    AllZone.Stack.add(ability);
-                }
-            };
-            ability.setStackDescription("Ryusei, the Falling Star - deals 5 damage to each creature without flying");
-            card.addDestroyCommand(destroy);
-        }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
         else if(cardName.equals("Sleeper Agent")) {
             final SpellAbility ability = new Ability(card, "0") {
