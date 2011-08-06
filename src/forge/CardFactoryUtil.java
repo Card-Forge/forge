@@ -4010,9 +4010,7 @@ public class CardFactoryUtil {
             ArrayList<String> typeList = c.getType();
             
             for(String var:typeList) {
-                if(var.equals("Creature") || var.equals("Artifact") || var.equals("Land") || var.equals("Tribal")
-                        || var.equals("Enchantment") || var.equals("Legendary")) ;
-                else if(!map.containsKey(var)) map.put(var, 1);
+                if(CardUtil.isCreatureType(var) && !map.containsKey(var)) map.put(var, 1);
                 else {
                     map.put(var, map.get(var) + 1);
                 }
