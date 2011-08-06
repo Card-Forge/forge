@@ -275,7 +275,7 @@ public class AbilityFactory_CounterMagic {
 			return false;
 		
 		Card source = sa.getSourceCard();
-		if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")){
+		if (unlessCost != null && unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")){
 			int xPay = ComputerUtil.determineLeftoverMana(sa);
 			if (xPay == 0)	// todo: compare xPay to human's leftover mana
 				return false;
