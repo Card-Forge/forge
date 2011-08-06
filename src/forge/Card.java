@@ -2145,6 +2145,15 @@ public class Card extends MyObservable {
 		return false;
 	}
 	
+	public boolean hasAnyKeyword(ArrayList<String> keywords)
+	{
+		for (int i=0; i<keywords.size(); i++)
+			if (hasKeyword(keywords.get(i)))
+				return true;
+		
+		return false;
+	}
+	
 	//This counts the number of instances of a keyword a card has
 	public int getAmountOfKeyword(String k) {
 		int count = 0;

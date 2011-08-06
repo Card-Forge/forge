@@ -143,7 +143,7 @@ public class AbilityFactory_Pump {
                     //else 
                     creature = hostCard;
                     
-                    if((creature.getNetDefense() + defense > 0) && (!creature.hasAnyKeyword((String[]) Keywords.toArray()))) {
+                    if((creature.getNetDefense() + defense > 0) && (!creature.hasAnyKeyword(Keywords))) {
                     	if(creature.hasSickness() && Keywords.contains("Haste")) 
                     		return true;
                     	else if (creature.hasSickness() ^ Keywords.contains("Haste"))
