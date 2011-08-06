@@ -17939,6 +17939,133 @@ public class CardFactory implements NewConstants {
            ability.setDescription("1: Flip a coin.  Win: Put 5/5 Djinn in play.  Lose: Does 5 damage to you.");
            ability.setStackDescription("Bottle of Suleiman - flip a coin");
         }//*************** END ************ END **************************
+        
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Burst Lightning")) {
+            final SpellAbility spell = new Spell(card) {
+                
+				private static final long serialVersionUID = -5191461039745723331L;
+				int                       damage           = 2;
+                Card                      check;
+                
+                @Override
+                public boolean canPlayAI() {
+                    PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+                    CardList hand = new CardList(compHand.getCards());
+                    
+
+                    if(AllZone.Human_Life.getLife() <= damage) return AllZone.GameAction.isCardInZone(card,
+                            compHand);
+                    
+                    if(hand.size() >= 8) return true && AllZone.GameAction.isCardInZone(card, compHand);
+                    
+                    check = getFlying();
+                    return check != null && AllZone.GameAction.isCardInZone(card, compHand);
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    if(AllZone.Human_Life.getLife() <= damage) {
+                        setTargetPlayer(Constant.Player.Human);
+                        return;
+                    }
+                    
+                    Card c = getFlying();
+                    if((c == null) || (!check.equals(c))) throw new RuntimeException(card
+                            + " error in chooseTargetAI() - Card c is " + c + ",  Card check is " + check);
+                    
+                    setTargetCard(c);
+                }//chooseTargetAI()
+                
+                //uses "damage" variable
+                Card getFlying() {
+                    CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
+                    for(int i = 0; i < flying.size(); i++)
+                        if(flying.get(i).getNetDefense() <= damage) return flying.get(i);
+                    
+                    return null;
+                }
+                
+                @Override
+                public void resolve() {
+                    if(getTargetCard() != null) {
+                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                            Card c = getTargetCard();
+                            c.addDamage(damage, card);
+                        }
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
+                }
+            };//SpellAbility
+            
+            spell.setDescription("Burst Lightning deals 2 damage to target creature or player. If Burst Lightning was kicked, it deals 4 damage to that creature or player instead.");
+            
+            final SpellAbility kicker = new Spell(card) {
+
+				private static final long serialVersionUID = 7608486082373416819L;
+				int                       damage           = 4;
+                Card                      check;
+                
+                @Override
+                public boolean canPlayAI() {
+                    if(AllZone.Human_Life.getLife() <= damage) return true;
+                    
+                    check = getFlying();
+                    return check != null;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    if(AllZone.Human_Life.getLife() <= damage) {
+                        setTargetPlayer(Constant.Player.Human);
+                        return;
+                    }
+                    
+                    Card c = getFlying();
+                    if((c == null) || (!check.equals(c))) throw new RuntimeException(card
+                            + " error in chooseTargetAI() - Card c is " + c + ",  Card check is " + check);
+                    
+                    setTargetCard(c);
+                }//chooseTargetAI()
+                
+                //uses "damage" variable
+                Card getFlying() {
+                    CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
+                    for(int i = 0; i < flying.size(); i++)
+                        if(flying.get(i).getNetDefense() <= damage) return flying.get(i);
+                    
+                    return null;
+                }
+                
+                @Override
+                public void resolve() {
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+                    
+                    if(getTargetCard() != null) {
+                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                            Card c = getTargetCard();
+                            c.addDamage(damage, card);
+                        }
+                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage);
+                    
+                    grave.remove(card);
+                    removed.add(card);
+                    
+                }
+            };//flashback
+            kicker.setManaCost("4 R");
+            kicker.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(kicker, true, false));
+            kicker.setDescription("Kicker: 4");
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            card.addSpellAbility(kicker);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
+        }//*************** END ************ END **************************
 
         
         // Cards with Cycling abilities
