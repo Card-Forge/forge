@@ -415,7 +415,6 @@ public class MagicStack extends MyObservable {
 				else if (sp.isReplicate()){
 					// todo: convert multikicker/replicate support in abCost so this doesn't happen here
 					// X and multi and replicate are not supported yet
-					System.out.println("This spell is definitely replicate: "+sp.getSourceCard());
 				
 					final SpellAbility sa = sp;
 					final Ability ability = new Ability(sp.getSourceCard(), sp.getReplicateManaCost()) {
@@ -429,6 +428,9 @@ public class MagicStack extends MyObservable {
 
 						public void execute() {
 							push(sa);
+							for(int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
+								AllZone.CardFactory.copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), false);
+							}
 						}
 					};
 
