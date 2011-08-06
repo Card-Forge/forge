@@ -1,4 +1,4 @@
-Name:Krark_Clan Shaman
+Name:Krark-Clan Shaman
 ManaCost:R
 Types:Creature Goblin Shaman
 Text:no text
