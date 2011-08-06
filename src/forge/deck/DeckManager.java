@@ -32,7 +32,7 @@ public class DeckManager {
 
     private File deckDir;
     Map<String, Deck> deckMap;
-    Map<String, Deck[]> boosterMap;
+    Map<String, Deck[]> draftMap;
 
     public DeckManager(File deckDir) {
         if (deckDir == null) {
@@ -50,7 +50,7 @@ public class DeckManager {
                     throw new IOException("Directory can't be created");
                 }
                 this.deckMap = new HashMap<String, Deck>();
-                this.boosterMap = new HashMap<String, Deck[]>();
+                this.draftMap = new HashMap<String, Deck[]>();
                 readAllDecks();
             }
         } catch (IOException ex) {
@@ -65,7 +65,7 @@ public class DeckManager {
     }
 
     public boolean isUniqueDraft(String deckName) {
-        return !boosterMap.keySet().contains(deckName);
+        return !draftMap.keySet().contains(deckName);
     }
 
     public Deck getDeck(String deckName) {
@@ -86,34 +86,34 @@ public class DeckManager {
         deckMap.remove(deckName);
     }
 
-    public Deck[] getBoosterDeck(String deckName) {
-        if (!boosterMap.containsKey(deckName)) {
+    public Deck[] getDraftDeck(String deckName) {
+        if (!draftMap.containsKey(deckName)) {
             throw new RuntimeException(
-                    "DeckManager : getBoosterDeck() error, deck name not found - " + deckName);
+                    "DeckManager : getDraftDeck() error, deck name not found - " + deckName);
         }
 
-        return boosterMap.get(deckName);
+        return draftMap.get(deckName);
     }
 
-    public void addBoosterDeck(Deck[] deck) {
-        checkBoosterDeck(deck);
+    public void addDraftDeck(Deck[] deck) {
+        checkDraftDeck(deck);
 
-        boosterMap.put(deck[0].toString(), deck);
+        draftMap.put(deck[0].toString(), deck);
     }
 
-    public void deleteBoosterDeck(String deckName) {
-        if (!boosterMap.containsKey(deckName)) {
+    public void deleteDraftDeck(String deckName) {
+        if (!draftMap.containsKey(deckName)) {
             throw new RuntimeException(
-                    "DeckManager : deleteBoosterDeck() error, deck name not found - " + deckName);
+                    "DeckManager : deleteDraftDeck() error, deck name not found - " + deckName);
         }
 
-        boosterMap.remove(deckName);
+        draftMap.remove(deckName);
     }
 
-    private void checkBoosterDeck(Deck[] deck) {
+    private void checkDraftDeck(Deck[] deck) {
         if (deck == null || deck.length != 8 || deck[0].getName().equals("")
                 || (!deck[0].getDeckType().equals(Constant.GameType.Draft))) {
-            throw new RuntimeException("DeckManager : checkBoosterDeck() error, invalid deck");
+            throw new RuntimeException("DeckManager : checkDraftDeck() error, invalid deck");
         }
     }
 
@@ -122,8 +122,8 @@ public class DeckManager {
         return deckMap.values();
     }
 
-    public Map<String, Deck[]> getBoosterDecks() {
-        return new HashMap<String, Deck[]>(boosterMap);
+    public Map<String, Deck[]> getDraftDecks() {
+        return new HashMap<String, Deck[]>(draftMap);
     }
 
     public void close() {
@@ -133,7 +133,7 @@ public class DeckManager {
 
     public void readAllDecks() {
         deckMap.clear();
-        boosterMap.clear();
+        draftMap.clear();
 
         File[] files;
 
@@ -151,7 +151,7 @@ public class DeckManager {
                 d[i] = readDeck(new File(file, i + ".dck"));
             }
 
-            boosterMap.put(d[0].getName(), d);
+            draftMap.put(d[0].getName(), d);
         }
     }
 
@@ -290,7 +290,7 @@ public class DeckManager {
             files.addAll(asList(deckDir.listFiles(BDKFileFilter)));
 
             //save the files and remove them from the list
-            for (Entry<String, Deck[]> e : boosterMap.entrySet()) {
+            for (Entry<String, Deck[]> e : draftMap.entrySet()) {
                 File f = new File(deckDir, deriveFileName(e.getValue()[0].getName()) + ".bdk");
                 f.mkdir();
                 for (int i = 0; i < e.getValue().length; i++) {

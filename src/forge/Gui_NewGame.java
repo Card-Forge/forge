@@ -538,7 +538,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 return;
             } else//load old draft
             {
-                Deck[] deck = deckManager.getBoosterDeck(human);
+                Deck[] deck = deckManager.getDraftDeck(human);
                 int index = Integer.parseInt(computer);
                 
                 Constant.Runtime.HumanDeck[0] = deck[0];
@@ -893,7 +893,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         computerComboBox.removeAllItems();
         
         humanComboBox.addItem("New Draft");
-        Object[] key = deckManager.getBoosterDecks().keySet().toArray();
+        Object[] key = deckManager.getDraftDecks().keySet().toArray();
         Arrays.sort(key);
 
         for (Object aKey : key) {
