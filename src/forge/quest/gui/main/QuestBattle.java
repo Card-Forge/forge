@@ -110,7 +110,7 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Dr Fate 3", "hard", "UB Infect");
         addToDeckList("Dr No 3", "hard", "WUB Combo & Control deck with The Rack, Balance, Propaganda and discard spells");
         
-        addToDeckList("Electro 3", "hard", "WRG deck with Arashi, the Sky Asunder and Ball Lightning");
+        addToDeckList("Electro 3", "hard", "WRG Naya deck with creatures with power 5 or greater");
         addToDeckList("Elrond 1", "easy", "WG Aura deck with Rabid Wombat");
         addToDeckList("Elrond 2", "medium", "RGW Aura deck with Rabid Wombat");
         addToDeckList("Elrond 3", "hard", "RGW Aura deck with Kor Spiritdancer");
@@ -213,12 +213,12 @@ public class QuestBattle extends QuestSelectablePanel {
         
 //        addToDeckList("Lex 3", "hard", "Ninjas deck");
 //        addToDeckList("Link 3", "hard", "GUR Standard Constructed deck");
-        addToDeckList("Lisa Simpson 3", "hard", "WG Devour deck with tokens, Skullmulcher and Gluttonous Slime");
+        addToDeckList("Lisa Simpson 2", "medium", "WG Devour deck with tokens, Skullmulcher and Gluttonous Slime");
 //        addToDeckList("Lucifer 2", "medium", "W Sacrifice deck");
 //        addToDeckList("Lucifer 3", "hard", "W Sacrifice deck");
         addToDeckList("Luke Skywalker 3", "hard", "WU Rebels deck with Training Grounds");
         
-        addToDeckList("Maggie Simpson 3", "hard", "BRG jund deck with Sprouting Thrinax, Jund Hackblade and Bloodbraid Elf");
+        addToDeckList("Maggie Simpson 2", "medium", "BRG jund deck with Sprouting Thrinax, Jund Hackblade and Bloodbraid Elf");
         addToDeckList("Magneto 3", "hard", "B Shriekmaw deck with creature removal and re-animation");
         addToDeckList("Magnum 1", "easy", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
         addToDeckList("Magnum 2", "medium", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
