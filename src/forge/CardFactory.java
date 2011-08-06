@@ -164,7 +164,8 @@ public class CardFactory implements NewConstants {
     
     final public Card copyCardintoNew(Card in) {
         
-    	Card out = getCard(in.getName(), in.getOwner());
+    	Card out = copyStats(in);
+    	out.setOwner(in.getOwner());
         PlayerZone Hplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
         PlayerZone Cplay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
         CardList all = AllZone.CardFactory.getAllCards();

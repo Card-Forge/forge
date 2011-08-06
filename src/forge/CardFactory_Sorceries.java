@@ -2478,7 +2478,26 @@ public class CardFactory_Sorceries {
                 		double Count = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
                 		for(int i = 0; i < Count; i++) {       
                 			if(i + 1 == Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;
-                			Card Copy = AllZone.CardFactory.copyCardintoNew(getTargetCard());
+                			final Card Copy = AllZone.CardFactory.copyCardintoNew(getTargetCard());
+                			
+                			//Slight hack for copying stuff that has triggered abilities
+                			for(Trigger t : Copy.getTriggers())
+                			{
+                				AllZone.TriggerHandler.registerTrigger(t);
+                			}
+                			Copy.addLeavesPlayCommand(new Command() {
+
+								/**
+								 * 
+								 */
+								private static final long serialVersionUID = 1988240749380718859L;
+
+								public void execute() {
+									AllZone.TriggerHandler.removeAllFromCard(Copy);
+								}
+                				
+                			});
+                			
                 			Copy.setToken(true);
                 			Copy.setController(card.getController());
                 			AllZone.GameAction.moveToPlay(Copy);
@@ -2547,7 +2566,26 @@ public class CardFactory_Sorceries {
                 		int Count = 5 * AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
                 		for(int i = 0; i < Count; i++) {
                 			if(i + 1 == Count) PlayerZone_ComesIntoPlay.SimultaneousEntry = false;   
-                			Card Copy = AllZone.CardFactory.copyCardintoNew(getTargetCard());
+                			final Card Copy = AllZone.CardFactory.copyCardintoNew(getTargetCard());
+                			
+                			//Slight hack for copying stuff that has triggered abilities
+                			for(Trigger t : Copy.getTriggers())
+                			{
+                				AllZone.TriggerHandler.registerTrigger(t);
+                			}
+                			Copy.addLeavesPlayCommand(new Command() {
+
+								/**
+								 * 
+								 */
+								private static final long serialVersionUID = -3703289691606291059L;
+
+								public void execute() {
+									AllZone.TriggerHandler.removeAllFromCard(Copy);
+								}
+                				
+                			});
+                			
                 			Copy.setToken(true);
                 			Copy.setController(card.getController());
                 			AllZone.GameAction.moveToPlay(Copy);
