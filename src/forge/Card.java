@@ -2915,6 +2915,11 @@ public class Card extends MyObservable {
     	
     	int restDamage = damage;
     	
+    	if(getName().equals("Swans of Bryn Argoll")) {
+    		source.getController().drawCards(restDamage);
+    		return 0;
+    	}
+    	
     	restDamage = staticDamagePrevention(restDamage, source, isCombat);
     	
     	if(restDamage == 0) return 0;
@@ -2959,6 +2964,7 @@ public class Card extends MyObservable {
         }
     }
     
+    //This is for noncombat damage
     public void addDamage(final int damageIn, final Card source) {
         int damageToAdd = damageIn;
         

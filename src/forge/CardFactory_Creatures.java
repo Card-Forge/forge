@@ -10242,7 +10242,7 @@ public class CardFactory_Creatures {
             card.addLeavesPlayCommand(leavesPlay);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Swans of Bryn Argoll")) {
             final Card newCard = new Card() {
@@ -10286,7 +10286,7 @@ public class CardFactory_Creatures {
             
             return newCard;
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Dromad Purebred")) {
