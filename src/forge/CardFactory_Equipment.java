@@ -554,7 +554,9 @@ class CardFactory_Equipment {
 
 
         	Command onEquip = new Command() {
-        		public void execute() {
+				private static final long serialVersionUID = -5356474407155702171L;
+
+				public void execute() {
         			if(card.isEquipping()) {
         				Card crd = card.getEquipping().get(0);
         				int pump = CardUtil.getConvertedManaCost(crd.getManaCost());
@@ -566,7 +568,9 @@ class CardFactory_Equipment {
 
 
         	Command onUnEquip = new Command() {
-        		public void execute() {
+				private static final long serialVersionUID = 5196262972986079207L;
+
+				public void execute() {
         			if(card.isEquipping()) {
         				Card crd = card.getEquipping().get(0);
         				int pump = CardUtil.getConvertedManaCost(crd.getManaCost());
@@ -580,8 +584,9 @@ class CardFactory_Equipment {
 
 
         	Input runtime = new Input() {
-        		
-        		@Override
+				private static final long serialVersionUID = 6695915082103949795L;
+
+				@Override
         		public void showMessage() {
         			//get all creatures you control
         			CardList list = new CardList();
