@@ -193,7 +193,7 @@ public class AbilityFactory_Bounce {
          			AllZone.GameAction.shuffle(tgtC.getOwner());
          		}
          		else if(Destination.equals("Exile"))
-         			AllZone.GameAction.removeFromGame(tgtC); 
+         			AllZone.GameAction.exile(tgtC); 
          		else if(Destination.equals("Hand"))
          		{
              		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, tgtC.getOwner());

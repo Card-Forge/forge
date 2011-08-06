@@ -168,7 +168,7 @@ public class GameAction {
         discard_nath(c);
         discard_megrim(c);
         if(CardFactoryUtil.getCards("Necropotence", c.getOwner()).size() > 0){	// necro disrupts madness
-        	removeFromGame(c);
+        	exile(c);
         	return;
         }
         discard_madness(c);
@@ -2417,6 +2417,7 @@ public class GameAction {
         return true;
     }
     
+    /*
     //because originally, MTGForge didn't keep track of cards removed from the game.
     public void removeFromGame(Card c) {
         if(AllZone.GameAction.isCardRemovedFromGame(c)) return;
@@ -2428,17 +2429,23 @@ public class GameAction {
         	zone.remove(c);
         if(!c.isToken()) removed.add(c);
         
-    }
+    }*/
     
     /**
      * basically an alias for removeFromGame to bring the language in the code
      * to match the mechanics in Forge
-     * @param c
+     * @param c the card to be exiled
      */
-    
-    
     public void exile(Card c) {
-    	removeFromGame(c);
+    	//removeFromGame(c);
+    	if(AllZone.GameAction.isCardRemovedFromGame(c)) return;
+
+    	PlayerZone zone = AllZone.getZone(c); //could be hand, grave, play, ...
+    	PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
+
+    	if (zone != null)	// for suspend
+    		zone.remove(c);
+    	if(!c.isToken()) removed.add(c);
     }
     
     

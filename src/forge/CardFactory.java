@@ -3290,7 +3290,7 @@ public class CardFactory implements NewConstants {
                     			AllZone.GameAction.shuffle(tgtC.getOwner());
                     		}
                     		else if(Destination.equals("Exile"))
-                    			AllZone.GameAction.removeFromGame(tgtC); 
+                    			AllZone.GameAction.exile(tgtC); 
                     		else if(Destination.equals("Hand"))
                     		{
                         		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, tgtC.getOwner());
@@ -3453,7 +3453,7 @@ public class CardFactory implements NewConstants {
         						AllZone.GameAction.shuffle(tgtC.getOwner());
         					}
         					else if (Destination.equals("Exile"))
-        						AllZone.GameAction.removeFromGame(tgtC);
+        						AllZone.GameAction.exile(tgtC);
         					else if (Destination.equals("Hand"))
         						AllZone.GameAction.moveToHand(tgtC);
         				}
@@ -3628,7 +3628,7 @@ public class CardFactory implements NewConstants {
 							AllZone.GameAction.moveToTopOfLibrary(c);
 							AllZone.GameAction.shuffle(c.getOwner());
 						}
-					else if(Destination.equals("Exile")) AllZone.GameAction.removeFromGame(c); 
+					else if(Destination.equals("Exile")) AllZone.GameAction.exile(c); 
 					else if(Destination.equals("Hand")) {
                             			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getOwner());
                            	 		AllZone.GameAction.moveTo(hand, c);
@@ -7022,7 +7022,7 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        AllZone.GameAction.removeFromGame(getTargetCard());
+                        AllZone.GameAction.exile(getTargetCard());
                     }
                 }//resolve()
             };
@@ -7171,7 +7171,7 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        AllZone.GameAction.removeFromGame(getTargetCard());
+                        AllZone.GameAction.exile(getTargetCard());
                         
                         //put permanent into play
                         Card c = getSourceCard();
@@ -10509,7 +10509,7 @@ public class CardFactory implements NewConstants {
         			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
         			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
         			//exile Feldon's Cane
-        			AllZone.GameAction.removeFromGame(card);
+        			AllZone.GameAction.exile(card);
         			
         			for(Card c:grave) {
         				lib.add(c);
@@ -10648,7 +10648,7 @@ public class CardFactory implements NewConstants {
         			AllZone.GameAction.sacrifice(card);
         			
         			for(Card c:grave) {
-        				AllZone.GameAction.removeFromGame(c);
+        				AllZone.GameAction.exile(c);
         			}
         			AllZone.getZone(Constant.Zone.Graveyard, player).reset();
         			AllZone.GameAction.shuffle(player);
@@ -10698,7 +10698,7 @@ public class CardFactory implements NewConstants {
         		public void resolve() {
         			if(AllZone.GameAction.isCardInPlay(getTargetCard())
         					&& CardFactoryUtil.canTarget(card, getTargetCard())) {
-        				AllZone.GameAction.removeFromGame(getTargetCard());
+        				AllZone.GameAction.exile(getTargetCard());
         			}//if
         		}//resolve()
         	};//abilityComes

@@ -2574,7 +2574,7 @@ public class CombatUtil {
                 @Override
                 public void resolve() {
                 	if(attacker.isToken())
-                		AllZone.GameAction.removeFromGame(attacker);
+                		AllZone.GameAction.exile(attacker);
                 	else {
                 		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, attacker.getOwner());
                 		AllZone.GameAction.moveTo(hand, attacker);

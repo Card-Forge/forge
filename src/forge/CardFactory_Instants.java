@@ -438,7 +438,7 @@ public class CardFactory_Instants {
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                     	Player controller = getTargetCard().getController();
                     	
-                        AllZone.GameAction.removeFromGame(getTargetCard());
+                        AllZone.GameAction.exile(getTargetCard());
                         
                         CardFactoryUtil.makeToken("Shapeshifter", "C 1 1 Shapeshifter",
                                 controller, "", new String[] {"Creature", "Shapeshifter"}, 1,
@@ -1990,7 +1990,7 @@ public class CardFactory_Instants {
                     if(!getTargetCard().isFaceDown()) {
                         //bounce all permanents with the same name
                         for(int i = 0; i < sameName.size(); i++) {
-                            if(sameName.get(i).isToken()) AllZone.GameAction.removeFromGame(sameName.get(i));
+                            if(sameName.get(i).isToken()) AllZone.GameAction.exile(sameName.get(i));
                             else {
                                 PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, sameName.get(i).getOwner());
                                 AllZone.GameAction.moveTo(hand, sameName.get(i));
@@ -3362,7 +3362,7 @@ public class CardFactory_Instants {
                         PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                         
                         //remove card from play
-                        AllZone.GameAction.removeFromGame(getTargetCard());
+                        AllZone.GameAction.exile(getTargetCard());
                         
                         //Retrieve basic land
                         CardList lands = new CardList(lib.getCards());
@@ -3722,7 +3722,7 @@ public class CardFactory_Instants {
                 public void selectCard(Card c, PlayerZone zone) {
                     if(c.isBlue() && zone.is(Constant.Zone.Hand)
                             && !c.equals(card)) {
-                        AllZone.GameAction.removeFromGame(c);
+                        AllZone.GameAction.exile(c);
                         Player player = card.getController();
                         //AllZone.GameAction.getPlayerLife(player).subtractLife(1,card);
                         player.subtractLife(1, card);
@@ -4470,14 +4470,14 @@ public class CardFactory_Instants {
 							if(o == null) break;
 							Card c_1 = (Card) o;
 							graveList.remove(c_1); //remove from the display list
-							AllZone.GameAction.removeFromGame(c_1);
+							AllZone.GameAction.exile(c_1);
 						}
 					}
 					else { //Computer
 						//Random random = new Random();
 						for(int j = 0; j < X; j++) {
 							//int index = random.nextInt(X-j);
-							AllZone.GameAction.removeFromGame(graveList.get(j));
+							AllZone.GameAction.exile(graveList.get(j));
 						}
 					}
 
@@ -4600,7 +4600,7 @@ public class CardFactory_Instants {
                     
                     for(int i = 0; i < 7; i++) {
                         Card c = libList.get(i);
-                        AllZone.GameAction.removeFromGame(c);
+                        AllZone.GameAction.exile(c);
                     }
 
                     int max = libList.size();
@@ -4614,7 +4614,7 @@ public class CardFactory_Instants {
                             }
                             
                         } else if(stop == 0) {
-                            AllZone.GameAction.removeFromGame(c);
+                            AllZone.GameAction.exile(c);
                         }
                     }
                 }

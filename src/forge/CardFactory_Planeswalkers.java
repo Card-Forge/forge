@@ -2924,7 +2924,7 @@ class CardFactory_Planeswalkers {
                     CardList handList = new CardList(hand.getCards());
                     
                     for(Card c:libList)
-                        AllZone.GameAction.removeFromGame(c);
+                        AllZone.GameAction.exile(c);
                     
                     handList.shuffle();
                     for(Card c:handList) {

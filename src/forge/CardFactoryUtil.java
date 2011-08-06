@@ -1729,7 +1729,7 @@ public class CardFactoryUtil {
             
             @Override
             public void resolve() {
-            	AllZone.GameAction.removeFromGame(sourceCard);
+            	AllZone.GameAction.exile(sourceCard);
             	sourceCard.addCounter(Counters.TIME, suspendCounters);
             }
         };

@@ -34,7 +34,7 @@ public class CardFactory_Sorceries {
                     discardDraw7(AllZone.ComputerPlayer);
                     
                     if (cardName.equals("Time Reversal"))
-                    	AllZone.GameAction.removeFromGame(card);
+                    	AllZone.GameAction.exile(card);
                 }//resolve()
                 
                 void discardDraw7(Player player) {
@@ -6083,13 +6083,13 @@ public class CardFactory_Sorceries {
 							damage++;	// tally up how many cards removed
 							Card c_1 = (Card) o;
 							graveList.remove(c_1); //remove from the display list
-							AllZone.GameAction.removeFromGame(c_1);
+							AllZone.GameAction.exile(c_1);
 						}
 					}
 					else { //Computer
 						// it would be nice if the computer chose vanilla creatures over 
 						for(int j = 0; j < size; j++) {
-							AllZone.GameAction.removeFromGame(graveList.get(j));
+							AllZone.GameAction.exile(graveList.get(j));
 						}
 					}
 					tPlayer.addDamage(damage, card);
@@ -6578,7 +6578,7 @@ public class CardFactory_Sorceries {
                         Card tgt = getTargetCard();
                         if (null != tgt) {
                             if (tgt.isToken()) {
-                                AllZone.GameAction.removeFromGame(tgt);
+                                AllZone.GameAction.exile(tgt);
                             } else {
                                 PlayerZone lib = AllZone.getZone(Constant.Zone.Library, tgt.getOwner());
                                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, tgt.getController());
@@ -7450,7 +7450,7 @@ public class CardFactory_Sorceries {
                     for(int i = 0; i < target.length; i++) {
                         Card c = target[i];
                         if (AllZone.GameAction.isCardInPlay(c))
-                        	AllZone.GameAction.removeFromGame(c);
+                        	AllZone.GameAction.exile(c);
                     }
                     
                     card.getController().addDamage(5, card);

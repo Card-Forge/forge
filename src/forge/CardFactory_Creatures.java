@@ -1846,7 +1846,7 @@ public class CardFactory_Creatures {
                     
                     if(card.isToken()) return;
                     
-                    AllZone.GameAction.removeFromGame(card);
+                    AllZone.GameAction.exile(card);
                 }
             };//SpellAbility
             Command destroy = new Command() {
@@ -4430,7 +4430,7 @@ public class CardFactory_Creatures {
                         play.remove(getTargetCard());
                         removed.add(getTargetCard());
                         */
-                        AllZone.GameAction.removeFromGame(getTargetCard());
+                        AllZone.GameAction.exile(getTargetCard());
                     }
                 }//resolve()
             };
@@ -4558,7 +4558,7 @@ public class CardFactory_Creatures {
                         play.remove(getTargetCard());
                         removed.add(getTargetCard());
                         */
-                        AllZone.GameAction.removeFromGame(getTargetCard());
+                        AllZone.GameAction.exile(getTargetCard());
                     }
                 }//resolve()
             };
@@ -4685,7 +4685,7 @@ public class CardFactory_Creatures {
                         play.remove(getTargetCard());
                         removed.add(getTargetCard());
                         */
-                        AllZone.GameAction.removeFromGame(getTargetCard());
+                        AllZone.GameAction.exile(getTargetCard());
                     }
                 }//resolve()
             };
@@ -4849,7 +4849,7 @@ public class CardFactory_Creatures {
                         play.remove(getTargetCard());
                         removed.add(getTargetCard());
                         */
-                        AllZone.GameAction.removeFromGame(getTargetCard());
+                        AllZone.GameAction.exile(getTargetCard());
                     }
                 }//resolve()
             };
@@ -4981,7 +4981,7 @@ public class CardFactory_Creatures {
                         play.remove(getTargetCard());
                         removed.add(getTargetCard());
                         */
-                        AllZone.GameAction.removeFromGame(getTargetCard());
+                        AllZone.GameAction.exile(getTargetCard());
                     }
                 }//resolve()
             };
@@ -5533,7 +5533,7 @@ public class CardFactory_Creatures {
                 {
                 	if(zone.is(Constant.Zone.Hand) && !c.isLand())
                 	{
-                		AllZone.GameAction.removeFromGame(c);
+                		AllZone.GameAction.exile(c);
                 		chosen.push(c);
                 		AllZone.Stack.add(ability);
                         stopSetNext(new ComputerAI_StackNotEmpty());
@@ -8035,8 +8035,8 @@ public class CardFactory_Creatures {
                 @Override
                 public void chooseTargetAI() {
                 	if (AllZone.Computer_Graveyard.getCards().length >=2) {
-                		AllZone.GameAction.removeFromGame(AllZone.Computer_Graveyard.getCards()[0]);
-                		AllZone.GameAction.removeFromGame(AllZone.Computer_Graveyard.getCards()[0]);
+                		AllZone.GameAction.exile(AllZone.Computer_Graveyard.getCards()[0]);
+                		AllZone.GameAction.exile(AllZone.Computer_Graveyard.getCards()[0]);
                 	}
                 }
                 
@@ -8073,7 +8073,7 @@ public class CardFactory_Creatures {
 						if (o!=null)
 						{
 							Card c1 = (Card)o;
-							AllZone.GameAction.removeFromGame(c1);
+							AllZone.GameAction.exile(c1);
 							list.remove(c1);
 							
 							o = AllZone.Display.getChoice("Choose second card to exile", list.toArray());
@@ -8081,7 +8081,7 @@ public class CardFactory_Creatures {
 							{
 								
 								Card c2 = (Card)o;
-								AllZone.GameAction.removeFromGame(c2);
+								AllZone.GameAction.exile(c2);
 	
 								once = true;
 								AllZone.Stack.add(ability2);
@@ -9243,7 +9243,7 @@ public class CardFactory_Creatures {
                     list.addAll(AllZone.Human_Play.getCards());
                     list = list.getName("Stangg Twin");
                     
-                    if(list.size() == 1) AllZone.GameAction.removeFromGame(list.get(0));
+                    if(list.size() == 1) AllZone.GameAction.exile(list.get(0));
                 }
             });
             
@@ -11108,7 +11108,7 @@ public class CardFactory_Creatures {
                     if(getTargetCard() != null) {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                            AllZone.GameAction.removeFromGame(getTargetCard());
+                            AllZone.GameAction.exile(getTargetCard());
                         }
                     }
                 }
@@ -11901,11 +11901,11 @@ public class CardFactory_Creatures {
                             Object o = AllZone.Display.getChoiceOptional("Select card to remove: ",
                                     cards.toArray());
                             Card c = (Card) o;
-                            AllZone.GameAction.removeFromGame(c);
+                            AllZone.GameAction.exile(c);
                             AllZone.GameAction.shuffle(opponent);
                         } else {
                             Card c = lib.get(0);
-                            AllZone.GameAction.removeFromGame(c);
+                            AllZone.GameAction.exile(c);
                             AllZone.GameAction.shuffle(opponent);
                         }
                     }
@@ -12991,10 +12991,10 @@ public class CardFactory_Creatures {
                             Object o = AllZone.Display.getChoiceOptional(title, gravecards.toArray());
                             if(o != null) {
                                 Card removedCard = (Card) o;
-                                AllZone.GameAction.removeFromGame(removedCard);
+                                AllZone.GameAction.exile(removedCard);
                             }
                         } else {
-                            AllZone.GameAction.removeFromGame(gravecards.get(0));
+                            AllZone.GameAction.exile(gravecards.get(0));
                         }
                     }
                     
@@ -16222,7 +16222,7 @@ public class CardFactory_Creatures {
                                     }
                                 }
                             }
-                            AllZone.GameAction.removeFromGame(card);
+                            AllZone.GameAction.exile(card);
                         }
                     }//if human
                     else {
@@ -16239,7 +16239,7 @@ public class CardFactory_Creatures {
                             Card c = CardFactoryUtil.AI_getBestEnchantment(list, card, false);
                             lib.remove(c);
                             play.add(c);
-                            AllZone.GameAction.removeFromGame(card);
+                            AllZone.GameAction.exile(card);
                             
                         }
                     }
@@ -17601,7 +17601,7 @@ public class CardFactory_Creatures {
                     list = list.getType("Nightmare");
                     
                     for(Card c:list) {
-                        AllZone.GameAction.removeFromGame(c);
+                        AllZone.GameAction.exile(c);
                     }
                 }
                 
@@ -19238,7 +19238,7 @@ public class CardFactory_Creatures {
         			int max = Math.min(lib.size(), 10);
         			for(int i = 0; i < max; i++) {
         				//remove the top card 10 times
-        				AllZone.GameAction.removeFromGame(lib.get(0));
+        				AllZone.GameAction.exile(lib.get(0));
         			}
         			if(getTargetCard() != null) {
         				if(AllZone.GameAction.isCardInPlay(getTargetCard())
@@ -19262,7 +19262,7 @@ public class CardFactory_Creatures {
 
 				public void makeToken(Card c)
 				{
-					AllZone.GameAction.removeFromGame(c);
+					AllZone.GameAction.exile(c);
             		CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", card, "B", new String[] {
                             "Creature", "Zombie"}, 2, 2, new String[] {""});
 				}
@@ -20256,7 +20256,7 @@ public class CardFactory_Creatures {
 	                            for(int m = 0; m < selection.size(); m++) {
 	                            	intermSumPower += selection.get(m).getBaseAttack();
 	                            	intermSumToughness += selection.get(m).getBaseDefense();
-	                                AllZone.GameAction.removeFromGame(selection.get(m));
+	                                AllZone.GameAction.exile(selection.get(m));
 	                            }
                             }
                             
@@ -20268,7 +20268,7 @@ public class CardFactory_Creatures {
                                 if(c.getNetAttack() <= 2 && c.getNetDefense() <= 3) {
                                 	intermSumPower += c.getBaseAttack();
                                 	intermSumToughness += c.getBaseDefense();
-                                    AllZone.GameAction.removeFromGame(c);
+                                    AllZone.GameAction.exile(c);
                                     count++;
                                 }
                                 //is this needed?
