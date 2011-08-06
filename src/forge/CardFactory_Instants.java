@@ -4776,19 +4776,22 @@ public class CardFactory_Instants {
             private static final long serialVersionUID = 6940814538785932457L;
 
             @Override
-                public void resolve() {
-               final String player = AllZone.Phase.getActivePlayer();
-                    CardList all = new CardList();
-                    all.addAll(AllZone.Human_Play.getCards());
-                    all.addAll(AllZone.Computer_Play.getCards());
-                    all = all.filter(artAndEn);
-                   
-                    for(int i = 0; i < all.size(); i++) {
-                        Card c = all.get(i);
-                        AllZone.GameAction.destroy(c);
-                    }
-  				  AllZone.GameAction.getPlayerLife(player).addLife(all.size()*2);
-                }// resolve()
+            public void resolve() {
+            	final String player = AllZone.Phase.getActivePlayer();
+            	int numLifeToAdd = 0;
+            	CardList all = new CardList();
+            	all.addAll(AllZone.Human_Play.getCards());
+            	all.addAll(AllZone.Computer_Play.getCards());
+            	all = all.filter(artAndEn);
+
+            	for(int i = 0; i < all.size(); i++) {
+            		Card c = all.get(i);
+            		if(AllZone.GameAction.destroy(c)) {
+            			numLifeToAdd++;
+            		}
+            	}
+            	AllZone.GameAction.getPlayerLife(player).addLife(numLifeToAdd*2);
+            }// resolve()
                
                 @Override
                 public boolean canPlayAI() {

@@ -2261,15 +2261,15 @@ public class GameAction {
         }
     }//sacrificeDestroy()
     
-    public void destroy(Card c) {
+    public boolean destroy(Card c) {
         if(!AllZone.GameAction.isCardInPlay(c)
-                || (c.getKeyword().contains("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) return;        
+                || (c.getKeyword().contains("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) return false;        
         
         if(c.getShield() > 0) {
             c.subtractShield();
             c.setDamage(0);
             c.tap();
-            return;
+            return false;
         }
         //System.out.println("Card " + c.getName() + " is getting sent to GY, and this turn it got damaged by: ");
         for(Card crd:c.getReceivedDamageFromThisTurn().keySet()) {
@@ -2280,6 +2280,7 @@ public class GameAction {
         }
         
         this.sacrificeDestroy(c);
+        return true;
     }
     
     //because originally, MTGForge didn't keep track of cards removed from the game.
