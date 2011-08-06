@@ -206,7 +206,7 @@ public class CardFactory_Creatures {
                     Card c = getTargetCard();
                     
                     if(c.sumAllCounters() == 0) return;
-                    else if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    else if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         //zerker clean up:
                         for(Counters c_1:Counters.values())
                             if(c.getCounters(c_1) > 0) c.addCounter(c_1, c.getCounters(c_1));
@@ -407,13 +407,13 @@ public class CardFactory_Creatures {
 							private static final long serialVersionUID = 6308754740309909072L;
 
 							public void execute() {
-                                if (AllZone.GameAction.isCardInPlay(target[0])) {
+                                if (AllZoneUtil.isCardInPlay(target[0])) {
                                 	target[0].removeExtrinsicKeyword(kboost);
                                 }
                             }
                         };//Command
                         
-                        if (AllZone.GameAction.isCardInPlay(target[0]) && 
+                        if (AllZoneUtil.isCardInPlay(target[0]) && 
                         		!target[0].getKeyword().contains(kboost)) {
                             target[0].addExtrinsicKeyword(kboost);
                             
@@ -745,7 +745,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && c.isArtifact()) {
+                    if(AllZoneUtil.isCardInPlay(c) && c.isArtifact()) {
                     	c.addCounter(Counters.PHYLACTERY, 1);
                     	card.setFinishedEnteringBF(true);
                     }
@@ -903,7 +903,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     if(getTargetCard() == null || getTargetCard() == card) AllZone.GameAction.sacrifice(card);
                     
-                    else if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
+                    else if(AllZoneUtil.isCardInPlay(getTargetCard())) {
                         AllZone.GameAction.exile(getTargetCard());
                     }
                 }//resolve()
@@ -1095,7 +1095,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if (AllZone.GameAction.isCardInPlay(getTargetCard()) && 
+                    if (AllZoneUtil.isCardInPlay(getTargetCard()) && 
                     		CardFactoryUtil.canTarget(card, getTargetCard())) {
                         final Card[] creature = new Card[1];
                         final long timestamp;
@@ -1108,7 +1108,7 @@ public class CardFactory_Creatures {
                             private static final long serialVersionUID = -1899153704584793548L;
                             long stamp = timestamp;
                             public void execute() {
-                                if (AllZone.GameAction.isCardInPlay(creature[0])) {
+                                if (AllZoneUtil.isCardInPlay(creature[0])) {
                                     creature[0].removeExtrinsicKeyword("Flying");
                                     creature[0].removeColor("U", card, false, stamp);
                                 }
@@ -1148,7 +1148,7 @@ public class CardFactory_Creatures {
                           public void execute() {
                         	  
                         	  for(int x = 0; x < list.size(); x++) {
-                              if(AllZone.GameAction.isCardInPlay(list.get(x))) {
+                              if(AllZoneUtil.isCardInPlay(list.get(x))) {
                             	  list.get(x).setBaseAttack(originalAttack[x]);
                             	  list.get(x).setBaseDefense(originalDefense[x]);
                             	  list.get(x).removeExtrinsicKeyword("Changeling");
@@ -1233,7 +1233,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         final Card[] creature = new Card[1];
                         
@@ -1248,7 +1248,7 @@ public class CardFactory_Creatures {
                             private static final long serialVersionUID = 6437463765161964445L;
                             
                             public void execute() {
-                                if(AllZone.GameAction.isCardInPlay(creature[0])) {
+                                if(AllZoneUtil.isCardInPlay(creature[0])) {
                                     creature[0].setBaseAttack(originalAttack[0]);
                                     creature[0].setBaseDefense(originalDefense[0]);
                                 }
@@ -1363,7 +1363,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         final Card[] creature = new Card[1];
                         
@@ -1378,7 +1378,7 @@ public class CardFactory_Creatures {
                             private static final long serialVersionUID = 6437463765161964445L;
                             
                             public void execute() {
-                                if(AllZone.GameAction.isCardInPlay(creature[0])) {
+                                if(AllZoneUtil.isCardInPlay(creature[0])) {
                                     creature[0].setBaseAttack(originalAttack[0]);
                                     creature[0].setBaseDefense(originalDefense[0]);
                                 }
@@ -1555,7 +1555,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         CardList list = getRadiance(getTargetCard());
                         for(int i = 0; i < list.size(); i++) {
@@ -1632,7 +1632,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())) {
                         target[0] = getTargetCard();
                         
                         if (!target[0].isToken()){	// not necessary, but will help speed up stack resolution
@@ -1704,7 +1704,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         AllZone.GameAction.destroy(getTargetCard());
                         
@@ -1726,7 +1726,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && c.isLand() && (c.getCounters(Counters.BLAZE) == 0)) c.addCounter(
+                    if(AllZoneUtil.isCardInPlay(c) && c.isLand() && (c.getCounters(Counters.BLAZE) == 0)) c.addCounter(
                             Counters.BLAZE, 1);
                     
                 }
@@ -1784,7 +1784,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
+                    if(AllZoneUtil.isCardInPlay(card)) {
                         card.addTempAttackBoost(1);
                         card.addTempDefenseBoost(1);
                         if(card.getController().equals(AllZone.HumanPlayer)) {
@@ -1864,7 +1864,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
+                    if(AllZoneUtil.isCardInPlay(card)) {
                         if(card.getController().equals(AllZone.HumanPlayer)) {
                             String[] colors = Constant.Color.onlyColors;
                             
@@ -1929,7 +1929,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     Card c = getTargetCard();
-                    if(c != null && AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if(c != null && AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         c.addCounter(Counters.P1P1, 5);
                     }
                 }//resolve()
@@ -2041,7 +2041,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         getTargetCard().addDamage(2, card);
                         getTargetCard().removeIntrinsicKeyword("Flying");
@@ -2052,7 +2052,7 @@ public class CardFactory_Creatures {
                         private static final long serialVersionUID = -8889549737746466810L;
                         
                         public void execute() {
-                            if(AllZone.GameAction.isCardInPlay(getTargetCard())) getTargetCard().addIntrinsicKeyword(
+                            if(AllZoneUtil.isCardInPlay(getTargetCard())) getTargetCard().addIntrinsicKeyword(
                                     "Flying");
                         }
                     });
@@ -2149,7 +2149,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability1 = new Ability(card, "1 U U") {
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         Card crd = getTargetCard();
                         ArrayList<String> types = crd.getType();
@@ -2203,7 +2203,7 @@ public class CardFactory_Creatures {
                         private static final long serialVersionUID = 3367390368512271319L;
                         
                         public void execute() {
-                            if(AllZone.GameAction.isCardInPlay(card)) AllZone.GameAction.sacrifice(card);
+                            if(AllZoneUtil.isCardInPlay(card)) AllZone.GameAction.sacrifice(card);
                         }
                     });
                 }
@@ -2341,7 +2341,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return getCreatures().length != 0 && AllZone.GameAction.isCardInPlay(card) && super.canPlay();
+                    return getCreatures().length != 0 && AllZoneUtil.isCardInPlay(card) && super.canPlay();
                 }
                 
                 public Card[] getCreatures() {
@@ -2645,7 +2645,7 @@ public class CardFactory_Creatures {
                     if (wolves.size() == 0)
                     	return;
                     
-                    if (!(CardFactoryUtil.canTarget(card, target) && AllZone.GameAction.isCardInPlay(target)))
+                    if (!(CardFactoryUtil.canTarget(card, target) && AllZoneUtil.isCardInPlay(target)))
                     	return;
                     
                     for(Card c : wolves){
@@ -2746,7 +2746,7 @@ public class CardFactory_Creatures {
                     CardList sins = new CardList(graveyard.getCards());
                     sins = sins.getType("Assassin");
                     
-                    if(sins.size() > 0 && AllZone.GameAction.isCardInPlay(card)
+                    if(sins.size() > 0 && AllZoneUtil.isCardInPlay(card)
                             && CardFactoryUtil.canTarget(card, getTargetCard()) && super.canPlay()) return true;
                     else return false;
                     
@@ -2757,7 +2757,7 @@ public class CardFactory_Creatures {
                     CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
                     human = human.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return AllZone.GameAction.isCardInPlay(c);
+                            return AllZoneUtil.isCardInPlay(c);
                         }
                     });
                     
@@ -2793,7 +2793,7 @@ public class CardFactory_Creatures {
                             AllZone.GameAction.exile(crd);
                             
                             Card c = getTargetCard();
-                            if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                            if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                                 AllZone.GameAction.destroy(c);
                             }
                         } //if o!= null
@@ -2803,7 +2803,7 @@ public class CardFactory_Creatures {
                         AllZone.GameAction.exile(crd);
                         
                         Card c = getTargetCard();
-                        if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                             AllZone.GameAction.destroy(c);
                         }
                     }
@@ -2847,7 +2847,7 @@ public class CardFactory_Creatures {
                     
                     for(int i = 0; i < lands.size(); i++) {
                         Card land = lands.get(i);
-                        if(AllZone.GameAction.isCardInPlay(land)) {	// this really shouldn't fail in the middle of resolution
+                        if(AllZoneUtil.isCardInPlay(land)) {	// this really shouldn't fail in the middle of resolution
                             land.setController(activator);
                             
                             // i don't know how the code handles Sum Sickness so I'm leaving this
@@ -3218,7 +3218,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                 	int total = card.getCounters(Counters.P1P1);
                     if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                        if(AllZoneUtil.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(total,
                                 card);
                     } else getTargetPlayer().addDamage(total, card);
@@ -3345,7 +3345,7 @@ public class CardFactory_Creatures {
                                                 public void selectCard(Card card, PlayerZone zone) {
                                                     if (choices.contains(card)) {
                                                     
-                                                        if (AllZone.GameAction.isCardInPlay(card)) {
+                                                        if (AllZoneUtil.isCardInPlay(card)) {
                                                             c.enchantCard(card);
                                                             stop();
                                                         }
@@ -3497,7 +3497,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     Card c = getTargetCard();
                     String color = "";
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         
                         Object o = GuiUtils.getChoice("Choose mana color", Constant.Color.onlyColors);
                         color = (String) o;
@@ -3518,9 +3518,9 @@ public class CardFactory_Creatures {
                             private static final long serialVersionUID = 8630868536866681014L;
                             
                             public void execute() {
-                                //if(AllZone.GameAction.isCardInPlay(c))
+                                //if(AllZoneUtil.isCardInPlay(c))
                                 //  c.removeExtrinsicKeyword("Protection from "+color);
-                                if(AllZone.GameAction.isCardInPlay(crd)) {
+                                if(AllZoneUtil.isCardInPlay(crd)) {
                                     String[] colors = creatureMap.get(crd);
                                     for(String col:colors) {
                                         crd.removeExtrinsicKeyword("Protection from " + col);
@@ -3847,7 +3847,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 6926430725410883578L;
                 
                 public void execute() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
+                    if(AllZoneUtil.isCardInPlay(card)) {
                         card.addTempAttackBoost(-3);
                         card.addTempDefenseBoost(-3);
                     }
@@ -3860,7 +3860,7 @@ public class CardFactory_Creatures {
 
 				@Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
+                    if(AllZoneUtil.isCardInPlay(card)) {
                         card.addTempAttackBoost(3);
                         card.addTempDefenseBoost(3);
                         AllZone.EndOfTurn.addUntil(untilEOT);
@@ -3994,7 +3994,7 @@ public class CardFactory_Creatures {
                 public boolean canPlay() {
                     return super.canPlay() && AllZone.Phase.getPlayerTurn().equals(card.getController())
                             && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && !AllZone.GameAction.isCardInPlay(card);
+                            && !AllZoneUtil.isCardInPlay(card);
                 }
                 
             };
@@ -4050,7 +4050,7 @@ public class CardFactory_Creatures {
                 public boolean canPlay() {
                     return super.canPlay() && AllZone.Phase.getPlayerTurn().equals(card.getController())
                             && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && !AllZone.GameAction.isCardInPlay(card);
+                            && !AllZoneUtil.isCardInPlay(card);
                 }
                 
                 @Override
@@ -4649,7 +4649,7 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = 6743592637334556854L;
 
 				public void execute() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
+                    if(AllZoneUtil.isCardInPlay(card)) {
                         card.addTempAttackBoost(-2);
                         card.addTempDefenseBoost(-2);
                     }
@@ -4671,7 +4671,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
+                    if(AllZoneUtil.isCardInPlay(card)) {
                         card.addTempAttackBoost(2);
                         card.addTempDefenseBoost(2);
                         AllZone.EndOfTurn.addUntil(untilEOT);
@@ -4759,7 +4759,7 @@ public class CardFactory_Creatures {
                 	if(p.canTarget(card)) {
                 		p.setSkipNextUntap(true);
                 		for(Card c:targetPerms) {
-                    		if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    		if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                     			c.tap();
                     		}
                     	}
@@ -5298,7 +5298,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                 	final Card tgt = getTargetCard();
                 	final boolean[] win = new boolean[1];
-                    if (AllZone.GameAction.isCardInPlay(tgt) && CardFactoryUtil.canTarget(card, tgt)) {
+                    if (AllZoneUtil.isCardInPlay(tgt) && CardFactoryUtil.canTarget(card, tgt)) {
                     	if(GameActionUtil.flipACoin(card.getController(), card)) {
                     		tgt.addTempAttackBoost(2);
                     		win[0] = true;
@@ -5312,7 +5312,7 @@ public class CardFactory_Creatures {
 							private static final long serialVersionUID = -7905540871887278236L;
 
 							public void execute() {
-                                if (AllZone.GameAction.isCardInPlay(tgt)) {
+                                if (AllZoneUtil.isCardInPlay(tgt)) {
                                     if(win[0]) {
                                     	tgt.addTempAttackBoost(-2);
                                     }

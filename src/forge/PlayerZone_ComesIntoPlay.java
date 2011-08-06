@@ -215,7 +215,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                         if(crd.getController().equals(AllZone.HumanPlayer)) {
                             if(GameActionUtil.showYesNoDialog(crd, "Attach " + crd + " to " + creat + "?")) {
                             	if(AllZone.GameAction.isCardInZone(crd, graveZone)
-                                        && AllZone.GameAction.isCardInPlay(creat) && creat.isCreature()
+                                        && AllZoneUtil.isCardInPlay(creat) && creat.isCreature()
                                         && creat.getNetAttack() == 1 && creat.getNetDefense() == 1) {
                                     AllZone.GameAction.moveToPlay(crd);
                                     
@@ -226,7 +226,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                         } else //computer
                         {
                             if(AllZone.GameAction.isCardInZone(crd, graveZone)
-                                    && AllZone.GameAction.isCardInPlay(creat) && creat.isCreature()
+                                    && AllZoneUtil.isCardInPlay(creat) && creat.isCreature()
                                     && creat.getNetAttack() == 1 && creat.getNetDefense() == 1) {
                             	AllZone.GameAction.moveToPlay(crd);
                                 

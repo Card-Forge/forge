@@ -59,7 +59,7 @@ class CardFactory_Planeswalkers {
                         
                         public void execute() {
                             Card c = getTargetCard();
-                            if(AllZone.GameAction.isCardInPlay(c)) {
+                            if(AllZoneUtil.isCardInPlay(c)) {
                                 c.addTempAttackBoost(-3);
                                 c.addTempDefenseBoost(-3);
                                 c.removeExtrinsicKeyword("Flying");
@@ -68,7 +68,7 @@ class CardFactory_Planeswalkers {
                     };//Command
                     
                     Card c = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         c.addTempAttackBoost(3);
                         c.addTempDefenseBoost(3);
                         c.addExtrinsicKeyword("Flying");
@@ -456,7 +456,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     
                     if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                        if(AllZoneUtil.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             Card c = getTargetCard();
                             c.addDamage(1, card);
@@ -910,7 +910,7 @@ class CardFactory_Planeswalkers {
                     for(Card c:list) {
                         final Card[] art = new Card[1];
                         art[0] = c;
-                        if(AllZone.GameAction.isCardInPlay(art[0])) {
+                        if(AllZoneUtil.isCardInPlay(art[0])) {
                             if(c.isCreature()) {
                                 //Card crd = copyStats(art[0]);
                                 //tempCards[c.getUniqueNumber()] = crd;
@@ -1118,7 +1118,7 @@ class CardFactory_Planeswalkers {
                     turn[0] = AllZone.Phase.getTurn();
                     card.subtractCounter(Counters.LOYALTY, 1);
                     
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             AllZone.GameAction.moveToHand(getTargetCard());
                     }//if
@@ -1624,7 +1624,7 @@ class CardFactory_Planeswalkers {
                 public void resolve() {
                 	final Card c = getTargetCard();
                 	                	
-                	if (c != null && AllZone.GameAction.isCardInPlay(c)) 
+                	if (c != null && AllZoneUtil.isCardInPlay(c)) 
                 	{		
                 		 final Command eot = new Command() {
 
@@ -1734,13 +1734,13 @@ class CardFactory_Planeswalkers {
 							private static final long serialVersionUID = -7291011871465745495L;
 
 							public void execute() {
-                                if(AllZone.GameAction.isCardInPlay(target[0])) {
+                                if(AllZoneUtil.isCardInPlay(target[0])) {
                                     target[0].removeExtrinsicKeyword("Unblockable");
                                 }
                             }
                         };//Command
                         
-                        if(AllZone.GameAction.isCardInPlay(target[0])) {
+                        if(AllZoneUtil.isCardInPlay(target[0])) {
                             target[0].addExtrinsicKeyword("Unblockable");
                             AllZone.EndOfTurn.addUntil(untilEOT);
                         }//if

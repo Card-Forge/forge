@@ -290,7 +290,7 @@ public class AbilityFactory_Regenerate {
 				}
 			};
 			
-			if (AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(hostCard, tgtC))){
+			if (AllZoneUtil.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(hostCard, tgtC))){
 				tgtC.addShield();
 				AllZone.EndOfTurn.addUntil(untilEOT);
 			}

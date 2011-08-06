@@ -363,7 +363,7 @@ public class AbilityFactory_Destroy {
 		}
 
 		for(Card tgtC : tgtCards){
-			if(AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(card, tgtC))) {
+			if(AllZoneUtil.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(card, tgtC))) {
 				if(noRegen) 
 					AllZone.GameAction.destroyNoRegeneration(tgtC);
 				else

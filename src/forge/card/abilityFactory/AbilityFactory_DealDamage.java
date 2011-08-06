@@ -521,7 +521,7 @@ public class AbilityFactory_DealDamage {
 		for(Object o : tgts){
 			if (o instanceof Card){
 				Card c = (Card)o;
-				if(AllZone.GameAction.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(AF.getHostCard(), c))) {
+				if(AllZoneUtil.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(AF.getHostCard(), c))) {
 					if (noPrevention)
 						c.addDamageWithoutPrevention(dmg, source);
 					else

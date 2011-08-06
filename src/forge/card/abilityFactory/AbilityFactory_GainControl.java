@@ -250,7 +250,7 @@ public class AbilityFactory_GainControl {
             movedCards[j] = tgtC;
             hostCard.addGainControlTarget(tgtC);
             
-            if(AllZone.GameAction.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(hostCard, tgtC)) {
+            if(AllZoneUtil.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(hostCard, tgtC)) {
                 //set summoning sickness
                 if(tgtC.getKeyword().contains("Haste")) {
                     tgtC.setSickness(false);
@@ -351,7 +351,7 @@ public class AbilityFactory_GainControl {
     			//ArrayList<Card> c = hostCard.getGainControlTargets();
     			if(null == c) return;
 
-    			if(AllZone.GameAction.isCardInPlay(c)) {
+    			if(AllZoneUtil.isCardInPlay(c)) {
     				AllZone.GameAction.changeController(new CardList(c), c.getController(), c.getController().getOpponent());
 
     				c.setSickness(true);

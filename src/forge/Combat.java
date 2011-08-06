@@ -380,7 +380,7 @@ public class Combat {
 		all.addAll(getAllBlockers().toArray());
 
 		for (int i = 0; i < all.size(); i++)
-			if (!AllZone.GameAction.isCardInPlay(all.get(i)))
+			if (!AllZoneUtil.isCardInPlay(all.get(i)))
 				removeFromCombat(all.get(i));
 	}// verifyCreaturesInPlay()
 

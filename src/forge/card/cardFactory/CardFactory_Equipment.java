@@ -51,7 +51,7 @@ class CardFactory_Equipment {
 
 				@Override
                 public void resolve() {
-                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if (AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                     	
                         if (card.isEquipping()) {
@@ -78,7 +78,7 @@ class CardFactory_Equipment {
                     private static final long serialVersionUID = -8840812331316327448L;
                     
                     public void execute() {
-                        if(AllZone.GameAction.isCardInPlay(getSourceCard())) {
+                        if(AllZoneUtil.isCardInPlay(getSourceCard())) {
                             c.addTempAttackBoost(-2);
                             c.addTempDefenseBoost(-2);
                         }
@@ -156,7 +156,7 @@ class CardFactory_Equipment {
         		//not changed
         		@Override
         		public void resolve() {
-        			if (AllZone.GameAction.isCardInPlay(getTargetCard())
+        			if (AllZoneUtil.isCardInPlay(getTargetCard())
         					&& CardFactoryUtil.canTarget(card, getTargetCard())) {
         				
         				if (card.isEquipping()) {

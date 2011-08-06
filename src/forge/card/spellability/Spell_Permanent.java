@@ -44,7 +44,7 @@ public class Spell_Permanent extends Spell {
         public void resolve() {
             if(getTargetCard() == null || getTargetCard() == getSourceCard()) AllZone.GameAction.sacrifice(getSourceCard());
             
-            else if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
+            else if(AllZoneUtil.isCardInPlay(getTargetCard())) {
                 AllZone.GameAction.exile(getTargetCard());
             }
         }//resolve()

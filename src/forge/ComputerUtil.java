@@ -446,7 +446,7 @@ public class ComputerUtil
     	
 		if (cost.getSubCounter()){
 			Counters c = cost.getCounterType();
-			if (card.getCounters(c) - cost.getCounterNum() < 0 || !AllZone.GameAction.isCardInPlay(card)){
+			if (card.getCounters(c) - cost.getCounterNum() < 0 || !AllZoneUtil.isCardInPlay(card)){
 				return false;
 			}
 		}
@@ -502,7 +502,7 @@ public class ComputerUtil
 				if (cost.getSacAmount() > typeList.size())
 					return false;
 			}
-			else if (cost.getSacThis() && !AllZone.GameAction.isCardInPlay(card))
+			else if (cost.getSacThis() && !AllZoneUtil.isCardInPlay(card))
 				return false;
 		}
 		
@@ -519,7 +519,7 @@ public class ComputerUtil
 				if (cost.getExileAmount() > typeList.size())
 					return false;
 			}
-			else if (cost.getExileThis() && !AllZone.GameAction.isCardInPlay(card))
+			else if (cost.getExileThis() && !AllZoneUtil.isCardInPlay(card))
 				return false;
 		}
 		
@@ -584,7 +584,7 @@ public class ComputerUtil
 				if (cost.getReturnAmount() > typeList.size())
 					return false;
 			}
-			else if (!AllZone.GameAction.isCardInPlay(card))
+			else if (!AllZoneUtil.isCardInPlay(card))
 				return false;
 		}
 		

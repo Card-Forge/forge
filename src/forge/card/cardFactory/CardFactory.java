@@ -801,7 +801,7 @@ public class CardFactory implements NewConstants {
                     @Override
                     public boolean canPlay() {
                         return AllZone.Phase.getPlayerTurn().equals(card.getController()) && card.isFaceDown()
-                                && AllZone.GameAction.isCardInPlay(card);
+                                && AllZoneUtil.isCardInPlay(card);
                     }
                     
                 };//devour
@@ -1213,7 +1213,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         AllZone.GameAction.exile(getTargetCard());
                         
@@ -1287,7 +1287,7 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c))
+                    if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c))
                     	c.addCounter(Counters.DIVINITY, 1);
                 }
                 
@@ -1932,7 +1932,7 @@ public class CardFactory implements NewConstants {
                     GuiUtils.getChoiceOptional("Revealed cards:", revealed.toArray());
                     
                     if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                        if(AllZoneUtil.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             getTargetCard().addDamage(damage, card);
                         }
@@ -2477,7 +2477,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                 	Card target = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(target)
+                    if(AllZoneUtil.isCardInPlay(target)
                             && CardFactoryUtil.canTarget(card, target)) {
                     	target.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
                     }//is card in play?

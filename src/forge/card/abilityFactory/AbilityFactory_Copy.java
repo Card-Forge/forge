@@ -322,7 +322,7 @@ public class AbilityFactory_Copy {
 						public void resolve() {
 							//technically your opponent could steal the token
 							//and the token shouldn't be sacrificed
-							if(AllZone.GameAction.isCardInPlay(target[index])) {
+							if(AllZoneUtil.isCardInPlay(target[index])) {
 								if(params.get("AtEOT").equals("Sacrifice")) {
 									AllZone.GameAction.sacrifice(target[index]); //maybe do a setSacrificeAtEOT, but probably not.
 								}

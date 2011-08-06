@@ -955,7 +955,7 @@ public class CardFactoryUtil {
                     if(sa.getSourceCard().equals(sourceCard) && super.canPlay()) return false;
                 }
                 
-                if(sourceCard.getCounters(Counters.SPORE) >= 3 && AllZone.GameAction.isCardInPlay(sourceCard)) return true;
+                if(sourceCard.getCounters(Counters.SPORE) >= 3 && AllZoneUtil.isCardInPlay(sourceCard)) return true;
                 else return false;
             }
             
@@ -1008,7 +1008,7 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlay() {
                 return Phase.canCastSorcery(sourceCard.getController())
-                        && !AllZone.GameAction.isCardInPlay(sourceCard);
+                        && !AllZoneUtil.isCardInPlay(sourceCard);
             }
             
         };
@@ -1049,7 +1049,7 @@ public class CardFactoryUtil {
             public boolean canPlay() {
             	// unMorphing a card is a Special Action, and not affected by Linvala
             	return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown() 
-            			&& AllZone.GameAction.isCardInPlay(sourceCard);
+            			&& AllZoneUtil.isCardInPlay(sourceCard);
             }
             
         };//morph_up
@@ -1087,7 +1087,7 @@ public class CardFactoryUtil {
                     if(sa.getSourceCard().equals(sourceCard)) return false;
                 }
                 
-                if(AllZone.GameAction.isCardInPlay(sourceCard) && !sourceCard.hasSickness()
+                if(AllZoneUtil.isCardInPlay(sourceCard) && !sourceCard.hasSickness()
                         && !sourceCard.isTapped() && super.canPlay()) return true;
                 else return false;
             }
@@ -1176,7 +1176,7 @@ public class CardFactoryUtil {
                     if(sa.getSourceCard().equals(sourceCard)) return false;
                 }
                 
-                if(AllZone.GameAction.isCardInPlay(sourceCard) && !sourceCard.hasSickness()
+                if(AllZoneUtil.isCardInPlay(sourceCard) && !sourceCard.hasSickness()
                         && !sourceCard.isTapped() && super.canPlay()) return true;
                 else return false;
             }
@@ -1249,7 +1249,7 @@ public class CardFactoryUtil {
                             }
                             if(obj != null) {
                                 Card target = (Card) obj;
-                                if(AllZone.GameAction.isCardInPlay(target)) {
+                                if(AllZoneUtil.isCardInPlay(target)) {
                                     rebel.enchantCard(target);
                                 }
                             }
@@ -1558,7 +1558,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
             	Card targetCard = getTargetCard();
-                if (AllZone.GameAction.isCardInPlay(targetCard) 
+                if (AllZoneUtil.isCardInPlay(targetCard) 
                         && CardFactoryUtil.canTarget(sourceCard, targetCard)) {
                     
                     if (sourceCard.isEquipping()) {
@@ -1785,7 +1785,7 @@ public class CardFactoryUtil {
                 Card c = getTargetCard();
                 
                 // i think this is checked for already in fizzle?
-                if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(sourceCard, c)) {
+                if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(sourceCard, c)) {
                 	aura.enchantCard(c);
                 }
             }//resolve()
@@ -1982,7 +1982,7 @@ public class CardFactoryUtil {
 
                 Card c = getTargetCard();
                 
-                if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(sourceCard, c)) {
+                if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(sourceCard, c)) {
                 	aura.enchantCard(c);
                 }
             }//resolve()
@@ -4287,7 +4287,7 @@ public class CardFactoryUtil {
                             private static final long serialVersionUID = 3014846051064254493L;
                             
                             public void execute() {
-                                if(AllZone.GameAction.isCardInPlay(crd)) {
+                                if(AllZoneUtil.isCardInPlay(crd)) {
                                     crd.addTempAttackBoost(-1 * magnitude);
                                     crd.addTempDefenseBoost(-1 * magnitude);
                                 }
@@ -4539,7 +4539,7 @@ public class CardFactoryUtil {
     public static void checkTargetingEffects(SpellAbility sa, final Card c)
     {
     	
-    	//if (AllZone.GameAction.isCardInPlay(c)) 
+    	//if (AllZoneUtil.isCardInPlay(c)) 
     	//{
     	if (c.getKeyword().contains("When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.") 
     			|| (c.isCreature() && AllZoneUtil.isCardInPlay("Cowardice"))) {

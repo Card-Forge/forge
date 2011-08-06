@@ -125,13 +125,13 @@ public class CardFactory_Instants {
 							private static final long serialVersionUID = 6308754740309909072L;
 
 							public void execute() {
-                                if (AllZone.GameAction.isCardInPlay(target[0])) {
+                                if (AllZoneUtil.isCardInPlay(target[0])) {
                                 	target[0].removeExtrinsicKeyword(kboost);
                                 }
                             }
                         };//Command
                         
-                        if (AllZone.GameAction.isCardInPlay(target[0]) 
+                        if (AllZoneUtil.isCardInPlay(target[0]) 
                         		&& !target[0].getKeyword().contains(kboost)) {
                             target[0].addExtrinsicKeyword(kboost);
                             
@@ -597,7 +597,7 @@ public class CardFactory_Instants {
 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         final Card c = getTargetCard();
                         
@@ -699,7 +699,7 @@ public class CardFactory_Instants {
                 @Override
                 public void resolve() {
                     //if target card is not in play, just quit
-                    if(!AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(!AllZoneUtil.isCardInPlay(getTargetCard())
                             || !CardFactoryUtil.canTarget(card, getTargetCard())) return;
                     
                     //get all permanents
@@ -929,7 +929,7 @@ public class CardFactory_Instants {
                             setStackDescription(sb.toString());
                             
                             final Card target = getTargetCard();
-                            if(AllZone.GameAction.isCardInPlay(target)
+                            if(AllZoneUtil.isCardInPlay(target)
                                     && CardFactoryUtil.canTarget(creature, target)) {
                                 AllZone.GameAction.moveToHand(target);
                             }
@@ -1151,7 +1151,7 @@ public class CardFactory_Instants {
 
         		public void resolve()
         		{
-        			if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
+        			if(AllZoneUtil.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()) )
         			{
         				final Card c = getTargetCard();
 
@@ -1505,7 +1505,7 @@ public class CardFactory_Instants {
 								//System.out.println("Siren's Call - EOT - "+creature.getName() +" flag: "+creature.getSirenAttackOrDestroy());
 								//System.out.println("Siren's Call - EOT - "+creature.getName() +" attacked?: "+creature.getCreatureAttackedThisCombat());
 								if(creature.getSirenAttackOrDestroy() && !creature.getCreatureAttackedThisTurn()) {
-									if(AllZone.GameAction.isCardInPlay(creature)) {
+									if(AllZoneUtil.isCardInPlay(creature)) {
 										//System.out.println("Siren's Call - destroying "+creature.getName());
 										//this should probably go on the stack
 										AllZone.GameAction.destroy(creature);
@@ -1581,7 +1581,7 @@ public class CardFactory_Instants {
 						private static final long serialVersionUID = -3673524041113224182L;
 
 						public void execute() {
-                            if(AllZone.GameAction.isCardInPlay(target[0])) {
+                            if(AllZoneUtil.isCardInPlay(target[0])) {
                                 target[0].addTempAttackBoost(-x);
                                 target[0].removeExtrinsicKeyword("Trample");
                                 target[0].removeExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
@@ -1590,7 +1590,7 @@ public class CardFactory_Instants {
                     };
                     
                     
-                    if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0])) {
+                    if(AllZoneUtil.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0])) {
                         target[0].addTempAttackBoost(x);
                         target[0].addExtrinsicKeyword("Trample");
                         target[0].addExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
@@ -1672,7 +1672,7 @@ public class CardFactory_Instants {
                 @Override
                 public void resolve() {
                     for(Card c:targets) {
-                    	if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    	if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                     		AllZone.GameAction.exile(c);
                     	}//if isCardInPlay
                     }
@@ -1759,7 +1759,7 @@ public class CardFactory_Instants {
                     		}
                     	}
                     	else if(o instanceof Card) {
-                    		if(AllZone.GameAction.isCardInPlay((Card)o) && CardFactoryUtil.canTarget(card, (Card)o)) {
+                    		if(AllZoneUtil.isCardInPlay((Card)o) && CardFactoryUtil.canTarget(card, (Card)o)) {
                     			((Card)o).addDamage(dmg, card);
                     		}//if isCardInPlay
                     	}
@@ -1866,7 +1866,7 @@ public class CardFactory_Instants {
 
                     //"Return target Permanent to its owner's hand",
                     if(userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                        if(AllZoneUtil.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         	AllZone.GameAction.moveToHand(getTargetCard());
                         }
                     }
@@ -2093,7 +2093,7 @@ public class CardFactory_Instants {
 
         		@Override
         		public void resolve() {
-        			if(AllZone.GameAction.isCardInPlay(getTargetCard())
+        			if(AllZoneUtil.isCardInPlay(getTargetCard())
         					&& CardFactoryUtil.canTarget(card, getTargetCard())) {
         				Card c = getTargetCard();
         				c.addDamage(damage, card);

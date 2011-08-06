@@ -168,7 +168,7 @@ public class Cost_Payment {
 				if (typeList.size() < cost.getSacAmount())
 					return false;
 			}
-			else if (!AllZone.GameAction.isCardInPlay(card))
+			else if (!AllZoneUtil.isCardInPlay(card))
 				return false;
 		}
 		
@@ -180,7 +180,7 @@ public class Cost_Payment {
 				if (typeList.size() < cost.getExileAmount())
 					return false;
 			}
-			else if (!AllZone.GameAction.isCardInPlay(card))
+			else if (!AllZoneUtil.isCardInPlay(card))
 				return false;
 		}
 		
@@ -229,7 +229,7 @@ public class Cost_Payment {
 				if (typeList.size() < cost.getReturnAmount())
 					return false;
 			}
-			else if (!AllZone.GameAction.isCardInPlay(card))
+			else if (!AllZoneUtil.isCardInPlay(card))
 				return false;
 		}
     	
@@ -934,7 +934,7 @@ public class Cost_Payment {
             @Override
             public void showMessage() {
             	Card card = sa.getSourceCard();
-                if(card.getController().equals(AllZone.HumanPlayer) && AllZone.GameAction.isCardInPlay(card)) {
+                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
         			sb.append(" - Sacrifice?");
@@ -1088,7 +1088,7 @@ public class Cost_Payment {
 			@Override
             public void showMessage() {
             	Card card = sa.getSourceCard();
-                if(card.getController().equals(AllZone.HumanPlayer) && AllZone.GameAction.isCardInPlay(card)) {
+                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
         			sb.append(" - Exile?");
@@ -1492,7 +1492,7 @@ public class Cost_Payment {
             @Override
             public void showMessage() {
             	Card card = sa.getSourceCard();
-                if(card.getController().equals(AllZone.HumanPlayer) && AllZone.GameAction.isCardInPlay(card)) {
+                if(card.getController().equals(AllZone.HumanPlayer) && AllZoneUtil.isCardInPlay(card)) {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName());
         			sb.append(" - Return to Hand?");

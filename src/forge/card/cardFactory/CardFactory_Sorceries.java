@@ -55,7 +55,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     Card c = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         if(!c.getType().contains("Basic")) c.getController().addDamage(2, card);
                         AllZone.GameAction.destroy(c);
                     }
@@ -195,7 +195,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                     Card c = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         c.setBaseAttack(0);
                         c.setBaseDefense(4);
                         
@@ -313,7 +313,7 @@ public class CardFactory_Sorceries {
                 	int i = 0;
                 	for(Card target:targets) {
                 		//if card isn't in play, do nothing
-                		if(!AllZone.GameAction.isCardInPlay(target)) continue;
+                		if(!AllZoneUtil.isCardInPlay(target)) continue;
 
                 		AllZone.GameAction.changeController(new CardList(target), card.getController(), controllerEOT.get(i));
 
@@ -333,7 +333,7 @@ public class CardFactory_Sorceries {
                 	newZone[0] = AllZone.getZone(Constant.Zone.Battlefield, card.getController());;
                 	int i = 0;
                 	for(Card target:creatures) {
-                		if(AllZone.GameAction.isCardInPlay(target)) {
+                		if(AllZoneUtil.isCardInPlay(target)) {
                 			orig.add(i, AllZone.getZone(target));
                 			controllerEOT.add(i, target.getController());
                 			targets.add(i, target);
@@ -493,7 +493,7 @@ public class CardFactory_Sorceries {
 
 				@Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         AllZone.GameAction.destroy(getTargetCard());
                         CardList Grave = new CardList(AllZone.getZone(Constant.Zone.Graveyard, getTargetCard().getController()).getCards());
@@ -1100,7 +1100,7 @@ public class CardFactory_Sorceries {
 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         
                         AllZone.GameAction.destroy(getTargetCard());
@@ -1198,7 +1198,7 @@ public class CardFactory_Sorceries {
                     int damage = getDamage();
                     
                     if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                        if(AllZoneUtil.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             javax.swing.JOptionPane.showMessageDialog(null, "Erratic Explosion causes " + damage
                                     + " to " + getTargetCard());
@@ -1790,7 +1790,7 @@ public class CardFactory_Sorceries {
                     
                     //when this spell resolves all basic lands which were not selected are sacrificed.
                     for(int i = 0; i < target.size(); i++)
-                        if(AllZone.GameAction.isCardInPlay(target.get(i)) && !saveList.contains(target.get(i))) 
+                        if(AllZoneUtil.isCardInPlay(target.get(i)) && !saveList.contains(target.get(i))) 
                             AllZone.GameAction.sacrifice(target.get(i));
                 }//resolve()
             };//SpellAbility
@@ -2118,7 +2118,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
 
-                	if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                	if(AllZoneUtil.isCardInPlay(getTargetCard())
                 			&& CardFactoryUtil.canTarget(card, getTargetCard())) {
                 		PlayerZone_ComesIntoPlay.setSimultaneousEntry(true);      
                 		double Count = AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
@@ -2207,7 +2207,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                 	card.setKicked(true);
-                	if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                	if(AllZoneUtil.isCardInPlay(getTargetCard())
                 			&& CardFactoryUtil.canTarget(card, getTargetCard())) {
                 		PlayerZone_ComesIntoPlay.setSimultaneousEntry(true);
                 		int Count = 5 * AllZoneUtil.getDoublingSeasonMagnitude(card.getController());
@@ -2526,7 +2526,7 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     Card c = getTargetCard();
                     
-                    if(c != null && AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if(c != null && AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                     	// Donate should target both the player and the creature
                         if(!c.isAura()) {
                         	AllZone.GameAction.changeController(new CardList(c), c.getController(), c.getController().getOpponent());
@@ -3159,7 +3159,7 @@ public class CardFactory_Sorceries {
                     int damage = getDamage();
                     
                     if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                        if(AllZoneUtil.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             javax.swing.JOptionPane.showMessageDialog(null, cardName+" causes " + damage
                                     + " to " + getTargetCard());
@@ -3255,7 +3255,7 @@ public class CardFactory_Sorceries {
         				sb.append(cardName+" - Computer causes "+damage+" to:\n\n");
         				for(int i = 0; i < targets.size(); i++) {
         					Card target = targets.get(i);
-            				if(AllZone.GameAction.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
+            				if(AllZoneUtil.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
             					sb.append(target+"\n");
             				}
             			}
@@ -3269,7 +3269,7 @@ public class CardFactory_Sorceries {
         			}
         			for(int i = 0; i < targets.size(); i++) {
         				Card target = targets.get(i);
-        				if(AllZone.GameAction.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
+        				if(AllZoneUtil.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
         					//DEBUG
         					Log.debug("Fireball", "Fireball does "+damage+" to: "+target);
         					target.addDamage(damage, card);
@@ -3873,7 +3873,7 @@ public class CardFactory_Sorceries {
 							private static final long serialVersionUID = -2712661762676783458L;
 
 							public void execute() {
-                                if(AllZone.GameAction.isCardInPlay(c)) {
+                                if(AllZoneUtil.isCardInPlay(c)) {
                                     c.addTempAttackBoost(-x[0]);
                                     c.addTempDefenseBoost(-x[0]);
                                     c.removeExtrinsicKeyword("Trample");
@@ -3881,7 +3881,7 @@ public class CardFactory_Sorceries {
                             }
                         };//Command
                         
-                        if(AllZone.GameAction.isCardInPlay(c)) {
+                        if(AllZoneUtil.isCardInPlay(c)) {
                             c.addTempAttackBoost(x[0]);
                             c.addTempDefenseBoost(x[0]);
                             c.addExtrinsicKeyword("Trample");
@@ -4123,7 +4123,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         AllZone.GameAction.destroy(getTargetCard());
                         
@@ -4440,7 +4440,7 @@ public class CardFactory_Sorceries {
 										private static final long serialVersionUID = -6010783402521993651L;
 
 										public void execute() {
-                    		                if(AllZone.GameAction.isCardInPlay(c)) {
+                    		                if(AllZoneUtil.isCardInPlay(c)) {
                     		                	c.addTempAttackBoost(-1 * boost);
                     		                	c.addTempDefenseBoost(-1 * boost);
                     		                    	
@@ -4464,7 +4464,7 @@ public class CardFactory_Sorceries {
 									private static final long serialVersionUID = 986259855862338866L;
 
 									public void execute() {
-                        				if(AllZone.GameAction.isCardInPlay(c)) {
+                        				if(AllZoneUtil.isCardInPlay(c)) {
                         					c.removeExtrinsicKeyword("Fear");
                         				}
                         			}
@@ -4772,7 +4772,7 @@ public class CardFactory_Sorceries {
                 @Override
                 public void resolve() {
                 	Card tgt = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(tgt) && CardFactoryUtil.canTarget(card, tgt)) {
+                    if(AllZoneUtil.isCardInPlay(tgt) && CardFactoryUtil.canTarget(card, tgt)) {
                     	tgt.addDamage(5, card);
                     	CardList equipment = new CardList(tgt.getEquippedBy());
                     	for(Card eq : equipment) AllZone.GameAction.destroy(eq);

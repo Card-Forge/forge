@@ -518,7 +518,7 @@ public class GameAction {
 	            if(c.isEquipped()) {
 	                for(int i = 0; i < c.getEquippedBy().size(); i++) {
 	                    Card equipment = c.getEquippedBy().get(i);
-	                    if(!AllZone.GameAction.isCardInPlay(equipment)) {
+	                    if(!AllZoneUtil.isCardInPlay(equipment)) {
 	                        equipment.unEquipCard(c);
 	                    }
 	                }
@@ -547,7 +547,7 @@ public class GameAction {
 	            if(c.isAura()) {
 	                for(int i = 0; i < c.getEnchanting().size(); i++) {
 	                    Card perm = c.getEnchanting().get(i);
-	                    if(!AllZone.GameAction.isCardInPlay(perm)
+	                    if(!AllZoneUtil.isCardInPlay(perm)
 	                            || CardFactoryUtil.hasProtectionFrom(c, perm)
 	                            || ((c.getKeyword().contains("Enchant creature") || c.getKeyword().contains("Enchant tapped creature") ) 
 	                               && !perm.getType().contains("Creature"))
@@ -570,7 +570,7 @@ public class GameAction {
 	            c = iter.next();
 	            if(c.isEquipping()) {
 	                Card equippedCreature = c.getEquipping().get(0);
-	                if(!AllZone.GameAction.isCardInPlay(equippedCreature)) c.unEquipCard(equippedCreature);
+	                if(!AllZoneUtil.isCardInPlay(equippedCreature)) c.unEquipCard(equippedCreature);
 	            }
 	        }//while iter.hasNext()
         }//for q=0;q<2
@@ -647,7 +647,7 @@ public class GameAction {
     }
     
     public boolean destroyNoRegeneration(Card c) {
-        if(!AllZone.GameAction.isCardInPlay(c) || c.getKeyword().contains("Indestructible")) return false;
+        if(!AllZoneUtil.isCardInPlay(c) || c.getKeyword().contains("Indestructible")) return false;
         
         if (c.isEnchanted())
         {
@@ -705,7 +705,7 @@ public class GameAction {
 			private static final long serialVersionUID = -4514610171270596654L;
 
 			public void execute() {
-				if(AllZone.GameAction.isCardInPlay(c) && c.isCreature()) 
+				if(AllZoneUtil.isCardInPlay(c) && c.isCreature()) 
 					c.addExtrinsicKeyword("Haste");
 			}//execute()
 		};
@@ -1344,7 +1344,7 @@ public class GameAction {
 											private static final long serialVersionUID = 1497565871061029469L;
 
 											public void execute() {                                       	
-												if(AllZone.GameAction.isCardInPlay(F_card)) {
+												if(AllZoneUtil.isCardInPlay(F_card)) {
 													F_TargetCard[F_Target].addTempAttackBoost(- F_Amount[0]);
 													F_TargetCard[F_Target].addTempDefenseBoost(- F_Amount[1]);
 												}
@@ -1386,7 +1386,7 @@ public class GameAction {
 											private static final long serialVersionUID = 1497565871061029469L;
 
 											public void execute() {
-												if(AllZone.GameAction.isCardInPlay(F_card)) {
+												if(AllZoneUtil.isCardInPlay(F_card)) {
 													for(int i =0; i < F_S_Amount.length - 1; i++) {
 														F_card.removeIntrinsicKeyword(F_S_Amount[i + 1]);
 													}
@@ -1457,7 +1457,7 @@ public class GameAction {
 												}
 											} else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
 												for(int z = 0; z < Targets_Multi.length; z++) {
-													if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
+													if(AllZoneUtil.isCardInPlay((Card) Targets_Multi[z])
 															&& CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
 														Card c = (Card) Targets_Multi[z];
 														destroy(c);
@@ -1488,7 +1488,7 @@ public class GameAction {
 											}
 											else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
 												for(int z = 0; z < Targets_Multi.length; z++) {
-													if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
+													if(AllZoneUtil.isCardInPlay((Card) Targets_Multi[z])
 															&& CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
 														Card c = (Card) Targets_Multi[z];
 														c.tap();
@@ -1519,7 +1519,7 @@ public class GameAction {
 											}
 											else if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
 												for(int z = 0; z < Targets_Multi.length; z++) {
-													if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
+													if(AllZoneUtil.isCardInPlay((Card) Targets_Multi[z])
 															&& CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
 														Card c = (Card) Targets_Multi[z];
 														c.untap();
@@ -1714,7 +1714,7 @@ public class GameAction {
 												if(F_card.getController().equals(AllZone.HumanPlayer)) {
 													for(int z = 0; z < Targets_Multi.length; z++) {
 														if(!(Targets_Multi[z].equals(AllZone.HumanPlayer) || Targets_Multi[z].equals(AllZone.ComputerPlayer))) {
-															if(AllZone.GameAction.isCardInPlay((Card) Targets_Multi[z])
+															if(AllZoneUtil.isCardInPlay((Card) Targets_Multi[z])
 																	&& CardFactoryUtil.canTarget(F_card, (Card) Targets_Multi[z])) {
 																Card c = (Card) Targets_Multi[z];
 																c.addDamage(F_Amount[0], F_card);
@@ -2081,7 +2081,7 @@ public class GameAction {
     // Whenever Keyword
 	
    public boolean sacrificeDestroy(Card c) {
-        if(!isCardInPlay(c)) return false;
+        if(!AllZoneUtil.isCardInPlay(c)) return false;
 
         Player owner = c.getOwner();
         if (!(owner.isComputer() || owner.isHuman()))
@@ -2125,7 +2125,7 @@ public class GameAction {
     
    
     public boolean destroy(Card c) {
-        if(!AllZone.GameAction.isCardInPlay(c)
+        if(!AllZoneUtil.isCardInPlay(c)
                 || (c.getKeyword().contains("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) return false;        
         
         if(c.canBeShielded() && c.getShield() > 0) {
@@ -2171,16 +2171,6 @@ public class GameAction {
         }//totem armor
         
         return sacrificeDestroy(c);
-    }
-
-    //is this card a permanent that is in play?
-    public boolean isCardInPlay(Card c) {
-        return AllZoneUtil.isCardInPlay(c);
-    }
-    
-    public boolean isCardInGrave(Card c) {
-        return AllZoneUtil.isCardInZone(AllZone.Computer_Graveyard, c)
-                || AllZoneUtil.isCardInZone(AllZone.Human_Graveyard, c);
     }
     
     /**

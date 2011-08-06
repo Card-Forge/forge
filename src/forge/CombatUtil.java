@@ -1428,7 +1428,7 @@ public class CombatUtil {
                                 }
                                 if(obj != null) {
                                     Card target = (Card) obj;
-                                    if(AllZone.GameAction.isCardInPlay(target)) {
+                                    if(AllZoneUtil.isCardInPlay(target)) {
                                         crd.enchantCard(target);
                                     }
                                 }
@@ -1498,13 +1498,13 @@ public class CombatUtil {
                             private static final long serialVersionUID = -1703473800920781454L;
                             
                             public void execute() {
-                                if(AllZone.GameAction.isCardInPlay(charger)) {
+                                if(AllZoneUtil.isCardInPlay(charger)) {
                                     charger.removeIntrinsicKeyword("Trample");
                                 }
                             }
                         };//Command
                         
-                        if(AllZone.GameAction.isCardInPlay(charger)) {
+                        if(AllZoneUtil.isCardInPlay(charger)) {
                             charger.addIntrinsicKeyword("Trample");
                             
                             AllZone.EndOfTurn.addUntil(untilEOT);
@@ -1792,7 +1792,7 @@ public class CombatUtil {
                         private static final long serialVersionUID = 7662543891117427727L;
                         
                         public void execute() {
-                            if(AllZone.GameAction.isCardInPlay(blocker)) {
+                            if(AllZoneUtil.isCardInPlay(blocker)) {
                                 blocker.addTempAttackBoost(mag);
                                 blocker.addTempDefenseBoost(mag);
                             }
@@ -1800,7 +1800,7 @@ public class CombatUtil {
                     };//Command
                     
 
-                    if(AllZone.GameAction.isCardInPlay(blocker)) {
+                    if(AllZoneUtil.isCardInPlay(blocker)) {
                         blocker.addTempAttackBoost(-mag);
                         blocker.addTempDefenseBoost(-mag);
                         
@@ -1850,14 +1850,14 @@ public class CombatUtil {
                         private static final long serialVersionUID = 1497565871061029469L;
                         
                         public void execute() {
-                            if(AllZone.GameAction.isCardInPlay(crd)) {
+                            if(AllZoneUtil.isCardInPlay(crd)) {
                                 crd.addTempAttackBoost(-1);
                                 crd.addTempDefenseBoost(-1);
                             }
                         }
                     };//Command
                     
-                    if(AllZone.GameAction.isCardInPlay(crd)) {
+                    if(AllZoneUtil.isCardInPlay(crd)) {
                         crd.addTempAttackBoost(1);
                         crd.addTempDefenseBoost(1);
                         
@@ -1941,7 +1941,7 @@ public class CombatUtil {
 	                    	//enchantments = enchantments.getKeywordsDontContain("enPumpCurse");
 	                        Enchantment = CardFactoryUtil.AI_getBestEnchantment(enchantments,attacker, false);
 	                    }
-	                    if(Enchantment != null && AllZone.GameAction.isCardInPlay(attacker)){
+	                    if(Enchantment != null && AllZoneUtil.isCardInPlay(attacker)){
 	                    	AllZone.GameAction.moveToPlay(Enchantment);
 	                    	Enchantment.enchantCard(attacker);
 	                    }
@@ -1980,14 +1980,14 @@ public class CombatUtil {
     					private static final long serialVersionUID = -3215615538474963181L;
 
     					public void execute() {
-    						if(AllZone.GameAction.isCardInPlay(crd)) {
+    						if(AllZoneUtil.isCardInPlay(crd)) {
     							crd.addTempAttackBoost(-pump);
     							crd.addTempDefenseBoost(-pump);
     						}
     					}
     				};//Command
 
-    				if(AllZone.GameAction.isCardInPlay(crd)) {
+    				if(AllZoneUtil.isCardInPlay(crd)) {
     					crd.addTempAttackBoost(pump);
     					crd.addTempDefenseBoost(pump);
 

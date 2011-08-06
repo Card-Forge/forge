@@ -186,7 +186,7 @@ class CardFactory_Auras {
                     
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);                    
+                    if(AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);                    
                     
                 }//resolve()
             };//SpellAbility
@@ -355,7 +355,7 @@ class CardFactory_Auras {
                     
                     Card c = getTargetCard();
                     
-                    if (AllZone.GameAction.isCardInPlay(c) 
+                    if (AllZoneUtil.isCardInPlay(c) 
                     		&& CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
                     
                 }//resolve()
@@ -473,7 +473,7 @@ class CardFactory_Auras {
                     
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) 
+                    if(AllZoneUtil.isCardInPlay(c) 
                     		&& CardFactoryUtil.canTarget(card, c)) {
                         card.enchantCard(c);
                         Log.debug("Enchanted: " + getTargetCard());
@@ -567,7 +567,7 @@ class CardFactory_Auras {
                     
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) 
+                    if(AllZoneUtil.isCardInPlay(c) 
                     		&& CardFactoryUtil.canTarget(card, c)) {
                         card.enchantCard(c);
                         //System.out.println("Enchanted: " +getTargetCard());
@@ -666,7 +666,7 @@ class CardFactory_Auras {
                     
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) 
+                    if(AllZoneUtil.isCardInPlay(c) 
                     		&& CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
                 }//resolve()
             };//SpellAbility
@@ -728,7 +728,7 @@ class CardFactory_Auras {
                     
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) 
+                    if(AllZoneUtil.isCardInPlay(c) 
                     		&& CardFactoryUtil.canTarget(card, c)) {
                         card.enchantCard(c);
                         Log.debug("Enchanted: " + getTargetCard());
@@ -839,7 +839,7 @@ class CardFactory_Auras {
                     
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) 
+                    if(AllZoneUtil.isCardInPlay(c) 
                     		&& CardFactoryUtil.canTarget(card, c)) {
                         card.enchantCard(c);
                         Log.debug("Lifelink", "Enchanted: " + getTargetCard());
@@ -1061,7 +1061,7 @@ class CardFactory_Auras {
                 @Override
                 public void resolve() {
                     Card c = getTargetCard();
-                    if(!AllZone.GameAction.isCardInPlay(c))
+                    if(!AllZoneUtil.isCardInPlay(c))
                     	return; 
                     
                     prevController[0] = c.getController();
@@ -1080,7 +1080,7 @@ class CardFactory_Auras {
 				public void execute() {
                     if(card.isEnchanting()) {
                         Card crd = card.getEnchanting().get(0);
-                        if(AllZone.GameAction.isCardInPlay(crd)) {
+                        if(AllZoneUtil.isCardInPlay(crd)) {
                             if(crd.getKeyword().contains("Haste")) {
                                 crd.setSickness(false);
                             } else {
@@ -1168,7 +1168,7 @@ class CardFactory_Auras {
                     
                     Card c = getTargetCard();
                     
-                    if (AllZone.GameAction.isCardInPlay(c) 
+                    if (AllZoneUtil.isCardInPlay(c) 
                     		&& CardFactoryUtil.canTarget(card, c)) {
                         card.enchantCard(c);
                         Log.debug("Fear", "Enchanted: " + getTargetCard());
@@ -1282,7 +1282,7 @@ class CardFactory_Auras {
                     
                     Card c = getTargetCard();
                     
-                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                     	if (card.getKeyword().contains("When CARDNAME enters the battlefield, tap enchanted creature.")) {
                     		c.tap();
                     	}
@@ -1460,7 +1460,7 @@ class CardFactory_Auras {
                     AllZone.GameAction.moveToPlay(card);
                     
                     Card c = getTargetCard();
-                    if (AllZone.GameAction.isCardInPlay(c) 
+                    if (AllZoneUtil.isCardInPlay(c) 
                             && CardFactoryUtil.canTarget(card, c)) {
                         card.enchantCard(c);                  
                     }
@@ -1714,7 +1714,7 @@ class CardFactory_Auras {
                         
                         Card c = getTargetCard();
                         
-                        if (AllZone.GameAction.isCardInPlay(c) 
+                        if (AllZoneUtil.isCardInPlay(c) 
                         		&& CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
                         
                     }//resolve()
@@ -1752,7 +1752,7 @@ class CardFactory_Auras {
 					public void execute() {
                         if(card.isEnchanting()) {
                             Card crd = card.getEnchanting().get(0);
-                            if(AllZone.GameAction.isCardInPlay(crd)) {
+                            if(AllZoneUtil.isCardInPlay(crd)) {
                                 if(crd.getKeyword().contains("Haste")) {
                                     crd.setSickness(false);
                                 } else {
@@ -1856,7 +1856,7 @@ class CardFactory_Auras {
                         
                         Card c = getTargetCard();
                         
-                        if (AllZone.GameAction.isCardInPlay(c) 
+                        if (AllZoneUtil.isCardInPlay(c) 
                         		&& CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
                         
                     }//resolve()
@@ -1893,7 +1893,7 @@ class CardFactory_Auras {
 					public void execute() {
                         if(card.isEnchanting()) {
                             Card crd = card.getEnchanting().get(0);
-                            if(AllZone.GameAction.isCardInPlay(crd)) {
+                            if(AllZoneUtil.isCardInPlay(crd)) {
                                 if(crd.getKeyword().contains("Haste")) {
                                     crd.setSickness(false);
                                 } else {

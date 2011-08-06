@@ -92,7 +92,7 @@ class CardFactory_Lands {
 
         		public void execute() {
         			Card c = a[0].getTargetCard();
-        			if(AllZone.GameAction.isCardInPlay(c)) {
+        			if(AllZoneUtil.isCardInPlay(c)) {
         				String[] colors = creatureMap.get(c);
         				for(String col:colors) {
         					c.removeExtrinsicKeyword("Protection from " + col);
@@ -106,7 +106,7 @@ class CardFactory_Lands {
         			String Color = "";
 
         			if(card.getController() == AllZone.HumanPlayer){
-        				if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard())) {                     
+        				if(AllZoneUtil.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard())) {                     
         					Object o = GuiUtils.getChoice("Choose mana color", Constant.Color.onlyColors);
         					Color = (String) o;
         				}
@@ -121,7 +121,7 @@ class CardFactory_Lands {
         					{
         						public boolean addCard(Card c)
         						{
-        							return (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(a[0], c) && !c.hasKeyword("Defender"));
+        							return (AllZoneUtil.isCardInPlay(c) && CardFactoryUtil.canTarget(a[0], c) && !c.hasKeyword("Defender"));
         						}
         					});
         					Card biggest = null;
@@ -220,7 +220,7 @@ class CardFactory_Lands {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     
-                    if(card.getCounters(Counters.ICE) > 0 && AllZone.GameAction.isCardInPlay(card) && super.canPlay()) return true;
+                    if(card.getCounters(Counters.ICE) > 0 && AllZoneUtil.isCardInPlay(card) && super.canPlay()) return true;
                     else return false;
                 }
                 
@@ -246,7 +246,7 @@ class CardFactory_Lands {
             	//TODO - this should probably be a state effect
                 @Override
                 public boolean canPlay() {
-                    return card.getCounters(Counters.ICE) == 0 && AllZone.GameAction.isCardInPlay(card) && super.canPlay();
+                    return card.getCounters(Counters.ICE) == 0 && AllZoneUtil.isCardInPlay(card) && super.canPlay();
                 }
                 
                 @Override
@@ -283,7 +283,7 @@ class CardFactory_Lands {
             final CardListFilter targets = new CardListFilter() {
                 
                 public boolean addCard(Card c) {
-                    return AllZone.GameAction.isCardInPlay(c) && c.isCreature()
+                    return AllZoneUtil.isCardInPlay(c) && c.isCreature()
                             && c.getTurnInZone() == AllZone.Phase.getTurn();
                 }
             };

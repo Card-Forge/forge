@@ -226,7 +226,7 @@ public class AbilityFactory_Pump {
     
     private boolean pumpPlayAI(SpellAbility sa){
     	// if there is no target and host card isn't in play, don't activate
-    	if (AF.getAbTgt() == null && !AllZone.GameAction.isCardInPlay(hostCard)) 
+    	if (AF.getAbTgt() == null && !AllZoneUtil.isCardInPlay(hostCard)) 
     		return false;
     	
     	// temporarily disabled until AI is improved
@@ -615,7 +615,7 @@ public class AbilityFactory_Pump {
 			final Card tgtC = tgtCards.get(j);
 			
 			// only pump things in play
-			if (!AllZone.GameAction.isCardInPlay(tgtC))
+			if (!AllZoneUtil.isCardInPlay(tgtC))
 				continue;
 
 			// if pump is a target, make sure we can still target now
@@ -640,7 +640,7 @@ public class AbilityFactory_Pump {
 		            private static final long serialVersionUID = -42244224L;
 		            
 		            public void execute() {
-		                if(AllZone.GameAction.isCardInPlay(tgtC)) {
+		                if(AllZoneUtil.isCardInPlay(tgtC)) {
 		                	tgtC.addTempAttackBoost(-1 * a);
 		                	tgtC.addTempDefenseBoost(-1 * d);
 		                    
@@ -793,7 +793,7 @@ public class AbilityFactory_Pump {
 			final Card tgtC = c;
 			
 			// only pump things in play
-			if (!AllZone.GameAction.isCardInPlay(tgtC))
+			if (!AllZoneUtil.isCardInPlay(tgtC))
 				continue;
 			
 	        final int a = getNumAttack(sa);
@@ -813,7 +813,7 @@ public class AbilityFactory_Pump {
 					private static final long serialVersionUID = 5415795460189457660L;
 
 					public void execute() {
-		                if(AllZone.GameAction.isCardInPlay(tgtC)) {
+		                if(AllZoneUtil.isCardInPlay(tgtC)) {
 		                	tgtC.addTempAttackBoost(-1 * a);
 		                	tgtC.addTempDefenseBoost(-1 * d);
 		                    

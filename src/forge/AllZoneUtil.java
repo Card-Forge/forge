@@ -351,6 +351,10 @@ public class AllZoneUtil {
         return getCardsInExile().contains(c);
     }
 	
+	public static boolean isCardInGrave(Card c) {
+        return getCardsInGraveyard().contains(c);
+    }
+	
 	///Check if a certain card is in play
 	
 	public static boolean isCardInPlay(Card card) {

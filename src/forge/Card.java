@@ -577,7 +577,7 @@ public class Card extends MyObservable {
 			{
 				boolean hasVanish = CardFactory.hasKeyword(this, "Vanishing") != -1;
 
-				if(hasVanish && AllZone.GameAction.isCardInPlay(this))
+				if(hasVanish && AllZoneUtil.isCardInPlay(this))
 					AllZone.GameAction.sacrifice(this);
 				
 				if(hasSuspend() && AllZoneUtil.isCardExiled(this))

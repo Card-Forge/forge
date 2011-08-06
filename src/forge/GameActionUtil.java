@@ -490,7 +490,7 @@ public class GameActionUtil {
 				public void resolve()
 				{
 					Card target = getTargetCard();
-					if (CardFactoryUtil.canTarget(card, target) && AllZone.GameAction.isCardInPlay(target))
+					if (CardFactoryUtil.canTarget(card, target) && AllZoneUtil.isCardInPlay(target))
 						AllZone.GameAction.exile(target);
 				}
 				
@@ -2128,7 +2128,7 @@ public class GameActionUtil {
             	if (!checkValakutCondition(valakutCard, mtn))
             		return;
                 if(getTargetCard() != null) {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if(AllZoneUtil.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(valakutCard, getTargetCard())) getTargetCard().addDamage(3,
                             valakutCard);
                 } else {
@@ -2400,7 +2400,7 @@ public class GameActionUtil {
     public static void executeVampiricEffects(Card c) {
         ArrayList<String> a = c.getKeyword();
         for(int i = 0; i < a.size(); i++) {
-            if(AllZone.GameAction.isCardInPlay(c)
+            if(AllZoneUtil.isCardInPlay(c)
                     && a.get(i).toString().startsWith(
                             "Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put")) {
                 final Card thisCard = c;
@@ -2410,7 +2410,7 @@ public class GameActionUtil {
                     public void resolve() {
                     	Counters counter = Counters.P1P1;
                     	if(kw.contains("+2/+2")) counter = Counters.P2P2;
-                        if(AllZone.GameAction.isCardInPlay(thisCard)) thisCard.addCounter(counter, 1);
+                        if(AllZoneUtil.isCardInPlay(thisCard)) thisCard.addCounter(counter, 1);
                     }
                 }; // ability2
                 
@@ -2547,7 +2547,7 @@ public class GameActionUtil {
     			Ability ability = new Ability(zone, "0") {
     				@Override
     				public void resolve() {
-    					if(AllZone.GameAction.isCardInPlay(zone)) {
+    					if(AllZoneUtil.isCardInPlay(zone)) {
         					AllZone.GameAction.changeController(new CardList(zone), zone.getController(), c.getController());
     					}
     				}
@@ -5110,7 +5110,7 @@ public class GameActionUtil {
 						public boolean canPlay() {
 							return AllZone.Phase.getPlayerTurn().equals(card.getController())
 							&& card.isFaceDown() && !AllZone.Phase.getPhase().equals("End of Turn")
-							&& AllZone.GameAction.isCardInPlay(card);
+							&& AllZoneUtil.isCardInPlay(card);
 						}
 
 					};//devour
@@ -5678,7 +5678,7 @@ public class GameActionUtil {
 					        {
 					          if(getTargetCard() != null)
 					          {
-					            if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(c, getTargetCard()) )
+					            if(AllZoneUtil.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(c, getTargetCard()) )
 					            	getTargetCard().addDamage(1, c);
 					          }
 					          else {
