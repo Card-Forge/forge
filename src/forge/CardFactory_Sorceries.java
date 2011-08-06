@@ -7616,6 +7616,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Reanimate")) {
             final SpellAbility spell = new Spell(card) {
@@ -7636,28 +7637,18 @@ public class CardFactory_Sorceries {
                 }//resolve()
                 
                 @Override
-                public boolean canPlayAI() {
-                    return getCreatures().size() > 0;
-                }
-                
-                @Override
                 public boolean canPlay() {
                     return super.canPlay() && getCreatures().size() > 0;
                 }
                 
                 public CardList getCreatures() {
                     CardList creatures = AllZoneUtil.getCardsInGraveyard();
-                    creatures.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return CardFactoryUtil.canTarget(card, c) 
-                                    && c.getType().contains("Creature") 
-                                    /* && !c.getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME.") */ ;
-                        }
-                    });
-                    // The keyword filter above does not work, the one below does work.
-                    creatures = creatures.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+                    creatures.filter(AllZoneUtil.creatures);
+                    if (card.getController().equals("Computer")) {
+                        creatures = creatures.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+                    }
                     return creatures;
-                }//getCreatures()
+                }
                 
                 @Override
                 public void chooseTargetAI() {
@@ -7692,6 +7683,7 @@ public class CardFactory_Sorceries {
             };//Input
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Recall")) {
