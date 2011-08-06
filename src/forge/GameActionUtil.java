@@ -4084,43 +4084,44 @@ public class GameActionUtil {
 				}
 			};
 
-			//AllZone.Stack.add(ability);
-			if(c.getController().equals(AllZone.HumanPlayer)) {
-				String[] choices = {"Yes", "No"};
-				Object choice = AllZone.Display.getChoice("Use Genesis?", choices);
-				if(choice.equals("Yes")) {
-					Ability pay = new Ability(c, "0"){
-						public void resolve() {
-							if (AllZone.getZone(c).is(Constant.Zone.Graveyard)){
-								GameActionUtil.payManaDuringAbilityResolve("Pay cost for " + c + "\r\n", ability.getManaCost(), 
-										paidCommand, Command.Blank);
-							}
-							else{
-								System.out.println("Genesis no longer in graveyard");
-							}
-							
-						}
-					};
-					pay.setStackDescription("Genesis - Upkeep Ability");
-					
-					AllZone.Stack.add(pay);
-				}
-			} else //computer
-			{
-				if(ComputerUtil.canPayCost(ability)) {
-					ComputerUtil.payManaCost(ability);
-					StringBuilder sb = new StringBuilder();
-					sb.append(c.getName()).append(" - return 1 creature from your graveyard to your hand");
-					ability.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability);
-				}
-			}
-		}
-	}//upkeep_Genesis
+            //AllZone.Stack.add(ability);
+            if (c.getController().equals(AllZone.HumanPlayer)) {
+                String question = "Use Genesis to return target creature card from your graveyard to your hand?";
+                
+                if (GameActionUtil.showYesNoDialog(c, question)) {
+                    Ability pay = new Ability(c, "0"){
+                        public void resolve() {
+                            if (AllZone.getZone(c).is(Constant.Zone.Graveyard)){
+                                StringBuilder cost = new StringBuilder();
+                                cost.append("Pay cost for ").append(c).append("\r\n");
+                                GameActionUtil.payManaDuringAbilityResolve(cost.toString(), ability.getManaCost(), 
+                                        paidCommand, Command.Blank);
+                            }
+                            else {
+                                System.out.println("Genesis no longer in graveyard");
+                            }
+                        }
+                    };
+                    pay.setStackDescription("Genesis - Upkeep Ability");
+                    
+                    AllZone.Stack.add(pay);
+                }
+            } else //computer
+            {
+                if (ComputerUtil.canPayCost(ability)) {
+                    ComputerUtil.payManaCost(ability);
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(c.getName()).append(" - return 1 creature from your graveyard to your hand");
+                    ability.setStackDescription(sb.toString());
+                    
+                    AllZone.Stack.add(ability);
+                }
+            }
+        }
+    }//upkeep_Genesis
 	
 	
-//upkeep_Demonic_Hordes
+    //upkeep_Demonic_Hordes
 	
 	private static void upkeep_Demonic_Hordes() {
 		
