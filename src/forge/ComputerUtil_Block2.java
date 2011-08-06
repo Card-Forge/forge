@@ -560,7 +560,7 @@ public class ComputerUtil_Block2
 	  //Begin with the weakest blockers
 	  CardListUtil.sortAttackLowFirst(blockersLeft);
 	   
-	  CardList currentAttackers = attackersLeft;
+	  CardList currentAttackers = new CardList(attackersLeft.toArray());
 
 	  //first choose good blocks only
 	  for(int i = 0; i < attackersLeft.size(); i++) {
@@ -602,7 +602,7 @@ public class ComputerUtil_Block2
 		  }
 	  }
 	   
-	  attackersLeft = currentAttackers;
+	  attackersLeft = new CardList(currentAttackers.toArray());
 	  
 	  if(blockersLeft.size() == 0) return combat;
 	  
@@ -619,7 +619,7 @@ public class ComputerUtil_Block2
 			  }
 		  }
 	   
-	  attackersLeft = currentAttackers;
+	  attackersLeft = new CardList(currentAttackers.toArray());
 	   
 	  //choose necessary chump blocks if life is still in danger
 	  if (CombatUtil.lifeInDanger(combat))

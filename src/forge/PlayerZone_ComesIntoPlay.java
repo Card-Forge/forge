@@ -437,7 +437,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         
     }
     
-    public void setTrigger(boolean b) {
+    public void setTrigger(boolean b) {%
         trigger = b;
     }
     

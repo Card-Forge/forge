@@ -506,7 +506,7 @@ public class CombatUtil {
  	   int damage = 0;
  	   int poison = 0;
  	   CardList attackers = new CardList(combat.getAttackers());
- 	   CardList unblocked = new CardList(combat.getAttackers());
+ 	   CardList unblocked = new CardList();
  	   CardList blockers = new CardList();
  	   Card attacker = new Card();
  	   

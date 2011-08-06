@@ -181,8 +181,7 @@ public class MagicStack extends MyObservable {
 				String k[] = parse.split(":");
 				if (k[1].equals("ActualSpell")
 						&& ActualEffectTriggered == false) {
-					AllZone.GameAction.checkWheneverKeyword(sp.getSourceCard(),
-							"ActualSpell", null);
+					AllZone.GameAction.checkWheneverKeyword(sp.getSourceCard(),"ActualSpell", null);
 					sp.getSourceCard().removeIntrinsicKeyword(parse);
 					ActualEffectTriggered = true;
 				}
