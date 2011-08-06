@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.esotericsoftware.minlog.Log;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants.LANG.GameAction.GAMEACTION_TEXT;
 
 
 public class GameAction {
@@ -2374,10 +2376,10 @@ public class GameAction {
         //only allow dredge by the human for now
         //TODO - allow dredge by the computer (probably 50% of the time at random so compy doesn't mill itself
         if(player.isHuman() && 0 < getDredge().size()) {
-            String choices[] = {"Yes", "No"};
-            Object o = AllZone.Display.getChoice("Do you want to dredge?", choices);
+            String choices[] = {ForgeProps.getLocalized(GAMEACTION_TEXT.YES), ForgeProps.getLocalized(GAMEACTION_TEXT.NO)};
+            Object o = AllZone.Display.getChoice(ForgeProps.getLocalized(GAMEACTION_TEXT.WANT_DREDGE), choices);
             if(o.equals("Yes")) {
-                Card c = (Card) AllZone.Display.getChoice("Select card to dredge", getDredge().toArray());
+                Card c = (Card) AllZone.Display.getChoice(ForgeProps.getLocalized(GAMEACTION_TEXT.SELECT_DREDGE), getDredge().toArray());
                 
                 //might have to make this more sophisticated
                 //dredge library, put card in hand
@@ -2831,8 +2833,8 @@ public class GameAction {
     
     //decides who goes first when starting another game, used by newGame()
     public void seeWhoPlaysFirst_CoinToss() {
-    	Object[] possibleValues = {"Heads", "Tails" };
-    	Object q = JOptionPane.showOptionDialog(null, "Heads or Tails?", "Coin Toss to Start the Game", 
+    	Object[] possibleValues = {ForgeProps.getLocalized(GAMEACTION_TEXT.HEADS), ForgeProps.getLocalized(GAMEACTION_TEXT.TAILS)};
+    	Object q = JOptionPane.showOptionDialog(null, ForgeProps.getLocalized(GAMEACTION_TEXT.HEADS_OR_TAILS), ForgeProps.getLocalized(GAMEACTION_TEXT.COIN_TOSS), 
     			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
     			null, possibleValues, possibleValues[0]);
     	
@@ -2841,19 +2843,19 @@ public class GameAction {
     	String Computer_Flip = " ";
   //  	JOptionPane.showMessageDialog(null, q, "", JOptionPane.INFORMATION_MESSAGE);
     	if(q.equals(0)) {
-    		Human_Flip = "Heads";
-    		Computer_Flip = "Tails";
+    		Human_Flip = ForgeProps.getLocalized(GAMEACTION_TEXT.HEADS);
+    		Computer_Flip = ForgeProps.getLocalized(GAMEACTION_TEXT.TAILS);
     	}
     	else {
-    		Human_Flip = "Tails";
-    		Computer_Flip = "Heads";
+    		Human_Flip = ForgeProps.getLocalized(GAMEACTION_TEXT.TAILS);
+    		Computer_Flip = ForgeProps.getLocalized(GAMEACTION_TEXT.HEADS);
     	}
     	
         if((Flip == 0 && q.equals(0)) || (Flip == 1 && q.equals(1))) 
-        	JOptionPane.showMessageDialog(null, Human_Flip + "\r\n" + "Human Wins by Coin Toss", "", JOptionPane.INFORMATION_MESSAGE);
+        	JOptionPane.showMessageDialog(null, Human_Flip + "\r\n" + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_WIN), "", JOptionPane.INFORMATION_MESSAGE);
         else {
         	computerStartsGame();
-    		JOptionPane.showMessageDialog(null, Computer_Flip + "\r\n" +  "Computer Wins by Coin Toss", "", JOptionPane.INFORMATION_MESSAGE);
+    		JOptionPane.showMessageDialog(null, Computer_Flip + "\r\n" +  ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_WIN), "", JOptionPane.INFORMATION_MESSAGE);
         }
 	}//seeWhoPlaysFirst_CoinToss()
     
@@ -2885,14 +2887,14 @@ public class GameAction {
 	        	HumanCut = HLibrary.get(MyRandom.random.nextInt(HLibrary.size()));
 	        else {
 	        	computerStartsGame();
-	        	JOptionPane.showMessageDialog(null, "Human has no cards with a converted mana cost in library." + "\r\n" + "Computer Starts", "", JOptionPane.INFORMATION_MESSAGE);
+	        	JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_MANA_COST) + "\r\n" + ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
 	        	return;
 	        }
 	        
 	        if(CLibrary.size() > 0) 
 	        	ComputerCut = CLibrary.get(MyRandom.random.nextInt(CLibrary.size()));
 	        else {
-	        	JOptionPane.showMessageDialog(null, "Computer has no cards with a converted mana cost in library." + "\r\n" + "Human Starts", "", JOptionPane.INFORMATION_MESSAGE);
+	        	JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_MANA_COST) + "\r\n" + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
 	        	return;
 	        }
 	        
@@ -2901,34 +2903,34 @@ public class GameAction {
 	        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer),AllZone.GameAction.ComputerCut);
 	        
 	        StringBuilder sb = new StringBuilder();
-	        sb.append("Human cut his / her deck to : " + HumanCut.getName() + " (" + HumanCut.getManaCost() + ")" + "\r\n");
-	        sb.append("Computer cut his / her deck to : " + ComputerCut.getName()  + " (" + ComputerCut.getManaCost() + ")" + "\r\n");
+	        sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_CUT) + HumanCut.getName() + " (" + HumanCut.getManaCost() + ")" + "\r\n");
+	        sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_CUT) + ComputerCut.getName()  + " (" + ComputerCut.getManaCost() + ")" + "\r\n");
 	        sb.append("\r\n" + "Number of times the deck has been cut: " + Cut_Count + "\r\n");
 	        if(CardUtil.getConvertedManaCost(ComputerCut.getManaCost()) > CardUtil.getConvertedManaCost(HumanCut.getManaCost())){
 	        	computerStartsGame();
-	        	JOptionPane.showMessageDialog(null, sb + "Computer Starts", "", JOptionPane.INFORMATION_MESSAGE);
+	        	JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
 	        	return;
 	        } 
 	        else if(CardUtil.getConvertedManaCost(ComputerCut.getManaCost()) < CardUtil.getConvertedManaCost(HumanCut.getManaCost())) {
-	        	JOptionPane.showMessageDialog(null, sb + "Human Starts", "", JOptionPane.INFORMATION_MESSAGE);
+	        	JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
 	        	return;
 	        } 
 	        else{
-	        	sb.append("Equal Converted Mana Cost Cut" + "\r\n");
+	        	sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.EQUAL_CONVERTED_MANA) + "\r\n");
 	        	if (i == Cut_CountMax-1)
 	        	{
-	        		sb.append("Can't resolve starter by cut: Reverting to Coin Toss\r\n");
+	        		sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.RESOLVE_STARTER));
 	        	   	if(MyRandom.random.nextInt(2) == 1) 
-	        	   		JOptionPane.showMessageDialog(null,sb + "Human Wins by Coin Toss", "", JOptionPane.INFORMATION_MESSAGE);
+	        	   		JOptionPane.showMessageDialog(null,sb + ForgeProps.getLocalized(GAMEACTION_TEXT.HUMAN_WIN), "", JOptionPane.INFORMATION_MESSAGE);
 	        		else {
 	        			computerStartsGame();
-	        			JOptionPane.showMessageDialog(null,sb + "Computer Wins by Coin Toss", "", JOptionPane.INFORMATION_MESSAGE);
+	        			JOptionPane.showMessageDialog(null,sb + ForgeProps.getLocalized(GAMEACTION_TEXT.COMPUTER_WIN), "", JOptionPane.INFORMATION_MESSAGE);
 	        		}
 	        	   	return;
 	        	}
 	        	else
 	        	{
-	        		sb.append("Cutting Again.....");
+	        		sb.append(ForgeProps.getLocalized(GAMEACTION_TEXT.CUTTING_AGAIN));
 	        	}
 	        	JOptionPane.showMessageDialog(null,sb, "", JOptionPane.INFORMATION_MESSAGE);
 	        }
@@ -3663,7 +3665,7 @@ public class GameAction {
         }//if
         if ((list.size() == 0) || onlyOneLand) return;
         //branch 3
-        o = AllZone.Display.getChoiceOptional("Choose second land", list.toArray());
+        o = AllZone.Display.getChoiceOptional(ForgeProps.getLocalized(GAMEACTION_TEXT.CHOOSE_2ND_LAND), list.toArray());
         if(o != null) {
             PlayerZone secondZone = AllZone.getZone(Zone2, AllZone.HumanPlayer);
 

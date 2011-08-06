@@ -336,6 +336,34 @@ public interface NewConstants {
         	}
         }
         
+        public static interface GameAction {
+        	public static interface GAMEACTION_TEXT {
+        		public static final String HEADS	="%s/GameAction/heads";
+        		public static final String TAILS	="%s/GameAction/tails";
+        		public static final String HEADS_OR_TAILS	="%s/GameAction/heads_or_tails";
+        		public static final String COIN_TOSS	="%s/GameAction/coin_toss";
+        		public static final String HUMAN_WIN	="%s/GameAction/human_win";
+        		public static final String COMPUTER_WIN	="%s/GameAction/computer_win";
+        		public static final String COMPUTER_STARTS	="%s/GameAction/computer_starts";
+        		public static final String HUMAN_STARTS	="%s/GameAction/human_starts";
+        		public static final String HUMAN_MANA_COST ="%s/GameAction/human_mana_cost";
+        		public static final String COMPUTER_MANA_COST ="%s/GameAction/computer_mana_cost";
+        		public static final String COMPUTER_CUT	="%s/GameAction/computer_cut";
+        		public static final String HUMAN_CUT	="%s/GameAction/human_cut";
+        		public static final String CUT_NUMBER	="%s/GameAction/cut_number";
+        		public static final String RESOLVE_STARTER	="%s/GameAction/resolve_starter";
+        		public static final String EQUAL_CONVERTED_MANA	="%s/GameAction/equal_converted_mana";
+        		public static final String CUTTING_AGAIN	="%s/GameAction/cutting_again";
+        		public static final String YES	="%s/GameAction/yes";
+        		public static final String NO	="%s/GameAction/no";
+        		public static final String WANT_DREDGE	="%s/GameAction/want_dredge";
+        		public static final String SELECT_DREDGE	="%s/GameAction/select_dredge";
+        		public static final String CHOOSE_2ND_LAND	="%s/GameAction/choose_2nd_land";
+        		
+        		
+        		
+        	}
+        }
     }
 }
 
