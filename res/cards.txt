@@ -1,3 +1,10 @@
+Oracle of Mul Daya
+3 G
+Creature Elf Shaman
+You may play an additional land on each of your turns. You may play the top card of your library if it's a land card.
+2/2
+Play with the top card of your library revealed.
+
 Roiling Terrain
 2 R R
 Sorcery

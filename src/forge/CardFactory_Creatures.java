@@ -2412,7 +2412,47 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+  
+        //*************** START *********** START **************************
+        else if(cardName.equals("Oracle of Mul Daya")) {
+            final SpellAbility ability = new Ability(card, "0") {
+                private static final long serialVersionUID = 2902408812353813L;
+                
+                @Override
+                public void resolve() {
+                    CardList library = new CardList(AllZone.getZone(Constant.Zone.Library, card.getController()).getCards());
+                    if(library.size() > 0) {
+                    if(library.get(0).getType().contains("Land")) {
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        AllZone.GameAction.moveTo(play, library.get(0));
+                        if(card.getController() == Constant.Player.Human) {
+                        	AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
+                        	AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
+                        }
+                        else {
+                        	AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
+                        	AllZone.GameInfo.setComputerPlayedFirstLandThisTurn(true);
+                        }
+                    }
+                    }
+                }//resolve()
+                
+                @Override
+                public boolean canPlay() { 
+                    CardList library = new CardList(AllZone.getZone(Constant.Zone.Library, card.getController()).getCards());
+                    if(library.size() == 0) return false;
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());                                      
+                    int PlayLand = 0;
+                        if(card.getController() == Constant.Player.Human) PlayLand = AllZone.GameInfo.getHumanCanPlayNumberOfLands();
+                        else PlayLand = AllZone.GameInfo.getComputerCanPlayNumberOfLands();
+                        
+                    return (AllZone.GameAction.isCardInZone(card, play) && library.get(0).getType().contains("Land") && PlayLand > 0) 
+                    && (AllZone.Stack.size() == 0) && AllZone.GameAction.getLastPlayerToDraw() == card.getController();
+                }
+            }; 
+            ability.setStackDescription(card.getController() + " - plays land from top of library.");           
+            card.addSpellAbility(ability);           
+        }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
         else if(cardName.equals("Highway Robber") || cardName.equals("Dakmor Ghoul")) {

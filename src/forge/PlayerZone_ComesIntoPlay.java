@@ -35,6 +35,9 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         } else if(c.getName().equals("Azusa, Lost but Seeking")) {
             if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(2);
             else AllZone.GameInfo.addComputerCanPlayNumberOfLands(2);
+        } else if(c.getName().equals("Oracle of Mul Daya")) {
+            if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(1);
+            else AllZone.GameInfo.addComputerCanPlayNumberOfLands(1);
         } else if(c.getName().equals("Fastbond")) {
             if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(100);
             else AllZone.GameInfo.addComputerCanPlayNumberOfLands(100);
@@ -237,6 +240,9 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         } else if(c.getName().equals("Azusa, Lost but Seeking")) {
             if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(-2);
             else AllZone.GameInfo.addComputerCanPlayNumberOfLands(-2);
+        } else if(c.getName().equals("Oracle of Mul Daya")) {
+            if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
+            else AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
         } else if(c.getName().equals("Fastbond")) {
             if(c.getController().equals(Constant.Player.Human)) AllZone.GameInfo.addHumanCanPlayNumberOfLands(-100);
             else AllZone.GameInfo.addComputerCanPlayNumberOfLands(-100);

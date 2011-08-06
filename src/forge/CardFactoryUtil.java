@@ -216,7 +216,8 @@ public class CardFactoryUtil {
 
             {"Phyrexian Battleflies", Integer.valueOf(2)}, {"Pit Imp", Integer.valueOf(2)},
             {"Roterothopter", Integer.valueOf(2)}, {"Vampire Bats", Integer.valueOf(2)},
-            {"Fire-Belly Changeling", Integer.valueOf(2)}, {"Azusa, Lost but Seeking", Integer.valueOf(2)}};
+            {"Fire-Belly Changeling", Integer.valueOf(2)}, {"Azusa, Lost but Seeking", Integer.valueOf(2)},
+            {"Oracle of Mul Daya", Integer.valueOf(1)}}; 
     
     public static boolean canUseAbility(Card card) {
         int found = -1;
@@ -3686,13 +3687,14 @@ public class CardFactoryUtil {
         list = list.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 return c.getName().equals("Exploration") || c.getName().equals("Azusa, Lost but Seeking")
-                        || c.getName().equals("Fastbond");
+                || c.getName().equals("Fastbond") || c.getName().equals("Oracle of Mul Daya");
             }
         });
         
         for(Card var:list) {
             if(var.getName().equals("Exploration")) count++;
             else if(var.getName().equals("Azusa, Lost but Seeking")) count = count + 2;
+            else if(var.getName().equals("Oracle of Mul Daya")) count = count + 1;
             else if(var.getName().equals("Fastbond")) count = 100;
         }
         
