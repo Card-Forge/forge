@@ -3390,6 +3390,7 @@ res/cardsfolder/jungle_patrol.txt svneol=native#text/plain
 res/cardsfolder/jungle_shrine.txt -text svneol=native#text/plain
 res/cardsfolder/jungle_troll.txt -text svneol=native#text/plain
 res/cardsfolder/jungle_weaver.txt -text svneol=native#text/plain
+res/cardsfolder/jungle_wurm.txt -text svneol=native#text/plain
 res/cardsfolder/juniper_order_advocate.txt -text svneol=native#text/plain
 res/cardsfolder/juniper_order_druid.txt -text svneol=native#text/plain
 res/cardsfolder/juniper_order_ranger.txt -text svneol=native#text/plain
