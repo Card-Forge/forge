@@ -5838,6 +5838,7 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(intoPlay);
         }
         
+/*
         if(hasKeyword(card, "spMakeToken") != -1) {
         	int n = hasKeyword(card, "spMakeToken");
         	String parse = card.getKeyword().get(n).toString();
@@ -5889,7 +5890,9 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
             
         }//end MakeToken
+*/
         
+/*
         if(hasKeyword(card, "abMakeToken") != -1) {
         	int n = hasKeyword(card, "abMakeToken");
         	
@@ -5954,6 +5957,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(abMakeToken);
         	card.setSVar("PlayMain1", "TRUE");
         }// end abMakeToken keyword
+*/
         
         if(hasKeyword(card, "etbMakeToken") != -1) {
         	int n = hasKeyword(card, "etbMakeToken");
