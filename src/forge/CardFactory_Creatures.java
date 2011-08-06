@@ -6576,7 +6576,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(targetInput);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Imperious Perfect")) {
             //mana tap ability
@@ -6607,8 +6607,8 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Imperious Perfect - Put a 1/1 green Elf Warrior creature token into play.");
             ability.setBeforePayMana(new Input_PayManaCost(ability));
         }//*************** END ************ END **************************
-        
-
+        */
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Wall of Kelp")) {
             //mana tap ability
@@ -6639,7 +6639,7 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Wall of Kelp - Put a 0/1 blue Kelp Wall creature token with defender into play");
             ability.setBeforePayMana(new Input_PayManaCost(ability));
         }//*************** END ************ END **************************
- 
+        */
         
         //*************** START *********** START **************************
         if(cardName.equals("Mayael the Anima")) {
@@ -8668,7 +8668,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Llanowar Mentor")) {
             final Ability_Tap ability = new Ability_Tap(card, "G") {
@@ -8716,7 +8716,7 @@ public class CardFactory_Creatures {
                 }
             }));
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Sparkspitter")) {
