@@ -4,7 +4,7 @@ Types:Creature Drone
 Text:no text
 PT:2/2
 K:Flying
-K:abPump U:Shroud
+A:AB$Pump | Cost$ U | KW$ Shroud | SpellDescription$ Advanced Hoverguard gains shroud until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/advanced_hoverguard.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/22.jpg
