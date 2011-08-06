@@ -6105,6 +6105,7 @@ src/forge/Ability_Triggered.java svneol=native#text/plain
 src/forge/AllZone.java svneol=native#text/plain
 src/forge/AllZoneUtil.java -text svneol=native#text/plain
 src/forge/BackgroundPanel.java -text svneol=native#text/plain
+src/forge/Base64Coder.java -text svneol=native#text/plain
 src/forge/BoosterDraft.java svneol=native#text/plain
 src/forge/BoosterDraftAI.java svneol=native#text/plain
 src/forge/BoosterPack.java svneol=native#text/plain
