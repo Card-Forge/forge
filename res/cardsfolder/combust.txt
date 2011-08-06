@@ -1,0 +1,7 @@
+Name:Combust
+ManaCost:1 R
+Types:Instant
+Text:no text
+K:CARDNAME can't be countered.
+A:SP$DealDamage|Cost$1 R|ValidTgts$Creature.White,Creature.Blue|NumDmg$5|TgtPrompt$Select target white or blue creature.|SpellDescription$CARDNAME deals 5 damage to target white or blue creature.
+End
