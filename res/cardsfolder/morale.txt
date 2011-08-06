@@ -6,4 +6,6 @@ A:SP$PumpAll | Cost$ 1 W W | ValidCards$ Creature.attacking | NumAtt$ +1 | NumDe
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/morale.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/87.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/286.jpg
 End
