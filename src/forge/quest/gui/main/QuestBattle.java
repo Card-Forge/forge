@@ -108,25 +108,25 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Dr Fate 3", "hard", "UB Infect");
         addToDeckList("Dr No 3", "hard", "WUB Combo & Control deck with The Rack, Balance, Propaganda and discard spells");
         
-        addToDeckList("Electro 3", "hard", "Stormfront deck, Arashi, the Sky Asunder + Ball Lightning");
-        addToDeckList("Elrond 1", "easy", "GW Aura deck");
-        addToDeckList("Elrond 2", "medium", "RGW Aura deck");
-        addToDeckList("Elrond 3", "hard", "RGW Aura deck");
+        addToDeckList("Electro 3", "hard", "WRG deck with Arashi, the Sky Asunder and Ball Lightning");
+        addToDeckList("Elrond 1", "easy", "WG Aura deck with Rabid Wombat");
+        addToDeckList("Elrond 2", "medium", "RGW Aura deck with Rabid Wombat");
+        addToDeckList("Elrond 3", "hard", "RGW Aura deck with Kor Spiritdancer");
 //        addToDeckList("En Sabah Nur 2", "medium", "RUB Singleton");
 //        addToDeckList("En Sabah Nur 3", "hard", "UBR Standard Constructed");
-        addToDeckList("Endora 2", "medium", "Enchantress deck, enchantments + cards with enchantment effects");
-        addToDeckList("Endora 3", "hard", "Enchantress deck, enchantments + cards with enchantment effects");
+        addToDeckList("Endora 2", "medium", "WG Enchantress deck with enchantments and cards with enchantment effects");
+        addToDeckList("Endora 3", "hard", "WG Enchantress deck with enchantments and cards with enchantment effects");
         
-        addToDeckList("Fat Albert 1", "easy", "Winter Orb, Keldon Warlord, mana Elves/Slivers");
-        addToDeckList("Fat Albert 2", "medium", "Winter Orb, Keldon Warlord, mana Elves/Slivers");
-        addToDeckList("Fat Albert 3", "hard", "Winter Orb, Keldon Warlord, mana Elves/Slivers");
+        addToDeckList("Fat Albert 1", "easy", "WUBRG Winter Orb deck with Keldon Warlord and mana Elves/Slivers");
+        addToDeckList("Fat Albert 2", "medium", "WUBRG Winter Orb deck with Keldon Warlord and mana Elves/Slivers");
+        addToDeckList("Fat Albert 3", "hard", "UG Winter Orb deck with Kalonian Behemoth and mana Elves/Slivers");
 //        addToDeckList("Fin Fang Foom 1", "easy", "B Artifact");
 //        addToDeckList("Fin Fang Foom 2", "medium", "G Infect");
 //        addToDeckList("Fin Fang Foom 3", "hard", "GB Infect");
-        addToDeckList("Fred Flintstone 3", "hard", "Predator's Garden deck, featuring Lorescale Coatl");
-        addToDeckList("Frodo 1", "easy", "Zoo with some creature removal");
-        addToDeckList("Frodo 2", "medium", "Zoo with some creature removal + Glorious Anthem");
-        addToDeckList("Frodo 3", "hard", "Zoo with creature removal + Glorious Anthems");
+        addToDeckList("Fred Flintstone 3", "hard", "WUG deck with Phytohydra and Lorescale Coatl");
+        addToDeckList("Frodo 1", "easy", "WRG Zoo deck with some threat removal");
+        addToDeckList("Frodo 2", "medium", "WRG Zoo deck with some threat removal and Glorious Anthem");
+        addToDeckList("Frodo 3", "hard", "WRG Zoo deck with threat removal and Glorious Anthems");
         
         addToDeckList("Galadriel 2", "medium", "G Deck with Amulet of Vigor, mana ramp, Time Vault and Howl of the Night Pack");
         addToDeckList("Galahad 1", "easy", "WB Knight deck with Kinsbaile Cavalier and Knight Exemplar");
