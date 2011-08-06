@@ -1,3 +1,22 @@
+Surging AEther
+3 U
+Instant
+Return target permanent to its owner's hand.
+Ripple:4
+spBounceTgt:Permanent:Hand
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_aether.jpg
+
+Surging Sentinels
+2 W	
+Creature Human Soldier
+no text
+2/1
+First Strike
+Ripple:4
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_sentinels.jpg
+
 Iizuka the Ruthless
 3 R R
 Legendary Creature Human Samurai
@@ -28546,15 +28565,6 @@ Flanking
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/suqata_lancer.jpg
 
-Surging AEther
-3 U
-Instant
-Ripple:4, Return target permanent to its owner's hand.
-Ripple:4
-spBounceTgt:Permanent:Hand
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_aether.jpg
-
 Surging Dementia
 1 B
 Sorcery
@@ -28582,16 +28592,6 @@ enPump:+2/+2
 Ripple:4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_might.jpg
-
-Surging Sentinels
-2 W	
-Creature Human Soldier
-no text
-2/1
-First strike
-Ripple:4
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/surging_sentinels.jpg
 
 Surrakar Marauder
 1 B

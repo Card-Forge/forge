@@ -545,6 +545,24 @@ public class Card extends MyObservable {
             for(int i = 0; i < sa.length; i++)
                 sb.append(sa[i].toString() + "\r\n");
             
+            // Ripple
+            ArrayList<String> kw = getKeyword();
+            for (int i = 0; i < kw.size(); i++) {
+                if (kw.get(i).toString().startsWith("Ripple") && !sb.toString().contains("Ripple")) {
+                    if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
+                    sb.append(kw.get(i).toString()).append("\r\n");
+                }
+            }
+
+            // Madness
+            ArrayList<String> kw2 = getKeyword();
+            for (int i = 0; i < kw.size(); i++) {
+                if (kw2.get(i).toString().startsWith("Madness") && !sb.toString().contains("Madness")) {
+                    if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
+                    sb.append(kw2.get(i).toString()).append("\r\n");
+                }
+            }
+            
             // Cascade
             if (getKeyword().contains("Cascade") && !sb.toString().contains("Cascade")) {
                 if (sb.toString().endsWith(".") && !sb.toString().endsWith("\r\n")) sb.append("\r\n");
