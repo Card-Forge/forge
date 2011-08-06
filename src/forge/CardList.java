@@ -217,6 +217,14 @@ public class CardList implements Iterable<Card> {
         });
     }
     
+    public CardList canBeDamagedBy(final Card card) {
+        return this.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return CardFactoryUtil.canDamage(card, c);
+            }
+        });
+    }
+    
     public CardList filter(CardListFilter f) {
         CardList c = new CardList();
         for(int i = 0; i < size(); i++)

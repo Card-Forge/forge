@@ -2108,6 +2108,143 @@ public class CardFactory implements NewConstants {
             }
         }// spDamageTgt
 
+        
+        //Keyword for spells, that damage all creatures
+        if (hasKeyword(card, "spDamageAll") != -1)
+        {
+        	int n = hasKeyword(card, "spDamageAll");
+        	if (n != -1)
+        	{
+                String parse = card.getKeyword().get(n).toString();
+                card.removeIntrinsicKeyword(parse);
+                
+                final int NumDam[] = {-1};
+                final String NumDamX[] = {"none"};
+                final boolean DmgPlayer[] = {false};
+                
+                String k[] = parse.split(":");
+                String Targets = k[1]; // Artifact, Creature, Enchantment, Land, Permanent, White, Blue, Black, Red, Green, Colorless, MultiColor
+                // non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
+                //non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
+                if (Targets.startsWith("Player")) {
+                	Targets.replaceFirst("Player,", "");
+                	DmgPlayer[0] = true;
+                }											// if Players are affected they have to be at the start
+                final String Tgts[] = Targets.split(","); 
+
+                
+                  if (k[2].matches("X"))
+                  {
+                     String x = card.getSVar(k[2]);
+                     if (x.startsWith("Count$"))
+                     {
+                        String kk[] = x.split("\\$");
+                        NumDamX[0] = kk[1];
+                     }
+                  }
+                  else if (k[2].matches("[0-9][0-9]?"))
+                     NumDam[0] = Integer.parseInt(k[2]);
+                 
+                  // drawbacks and descriptions
+                  final String DrawBack[] = {"none"};
+                  final String spDesc[] = {"none"};
+                  if (k.length > 3)
+                  {
+                     if (k[3].contains("Drawback$"))
+                     {
+                    	 String kk[] = k[3].split("\\$");
+                    	 DrawBack[0] = kk[1];
+                    	 spDesc[0] = k[4];
+                     }
+                     else
+                    	 spDesc[0] = k[3];
+                  }
+                  else
+                	  spDesc[0] = "cardName deals " + NumDam[0] + " damage to each creature and player.";
+ 
+
+                  final SpellAbility spDmgAll = new Spell(card)
+                  {
+                  private static final long serialVersionUID = -2598054704232863475L;
+
+                   public int getNumDam()
+                   {
+                      if (NumDam[0] != -1)
+                         return NumDam[0];
+
+                      if (! NumDamX[0].equals("none"))
+                      return CardFactoryUtil.xCount(card, NumDamX[0]);
+                     
+                      return 0;
+                   }
+                   
+                   public boolean canPlayAI()
+                   {
+                	   	int ndam = getNumDam();
+                	   	
+                    	if (DmgPlayer[0] && AllZone.Human_Life.getLife() <= ndam && AllZone.Computer_Life.getLife() > ndam) 
+                    		return true;											// The AI will kill the human if possible
+                    	if (DmgPlayer[0] && AllZone.Computer_Life.getLife() <= ndam) 
+                    		return false;       									// The AI will not kill itself
+                    	
+                	   	CardList human = new CardList(AllZone.Human_Play.getCards());
+                	   	CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                    
+                    	human = human.getValidCards(Tgts);
+                        human = human.canBeDamagedBy(card);
+                    	human = human.getNotKeyword("Indestructible");
+                    	human = CardListUtil.filterToughness(human, ndam); // leaves all creatures that will be destroyed
+                        int humanvalue = CardListUtil.sumCMC(human);
+                        humanvalue += human.size();
+                        humanvalue += CardListUtil.sumAttack(human.getTokens());
+                        // X = total converted mana cost + number of permanents + total power of tokens (Human)
+                        if (!DmgPlayer[0] && AllZone.Computer_Life.getLife() < 7) humanvalue += CardListUtil.sumAttack(human); 
+                        // in Low Life Emergency (and not hurting itself) X = X + total power of human creatures
+                        
+                    	computer = computer.getValidCards(Tgts);
+                    	computer = computer.canBeDamagedBy(card);
+                    	computer = computer.getNotKeyword("Indestructible");
+                    	computer = CardListUtil.filterToughness(computer, ndam); // leaves all creatures that will be destroyed
+                        int computervalue = CardListUtil.sumCMC(computer);
+                        computervalue += computer.size();
+                        computervalue += CardListUtil.sumAttack(computer.getTokens()); 
+                        // Y = total converted mana cost + number of permanents + total power of tokens (Computer)
+
+                        // the computer will play the spell if Y < X - 3
+                        return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
+                        		(computervalue < humanvalue - 3);
+                   	}
+
+                  public void resolve()
+                    {
+                        int ndam = getNumDam();
+                       
+                        CardList all = new CardList();
+                    	all.addAll(AllZone.Human_Play.getCards());
+                    	all.addAll(AllZone.Computer_Play.getCards());
+                    	all = all.getValidCards(Tgts);
+                    
+                    	for(int i = 0; i < all.size(); i++) {
+                        	if(CardFactoryUtil.canDamage(card, all.get(i))) all.get(i).addDamage(ndam, card);
+                    	}
+                    	if (DmgPlayer[0] == true) {
+                    		AllZone.GameAction.addDamage(Constant.Player.Computer, card, ndam);
+                    		AllZone.GameAction.addDamage(Constant.Player.Human, card, ndam);
+                    	}
+                       // if (!DrawBack[0].equals("none"))
+                       //    CardFactoryUtil.doDrawBack(DrawBack[0], ndam, card.getController(), AllZone.GameAction.getOpponent(card.getController()), null, card, null);
+                     }//resolve()
+                  };//SpellAbility
+                 
+                  spDmgAll.setDescription(spDesc[0]);
+                  spDmgAll.setStackDescription(spDesc[0]);
+                 
+                  card.clearSpellAbility();
+                  card.addSpellAbility(spDmgAll);
+        	}
+        }//spDamageAll
+        
+        
         while(hasKeyword(card, "abDamage") != -1) {
             int n = hasKeyword(card, "abDamage");
             if(n != -1) {
