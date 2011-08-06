@@ -37,7 +37,7 @@ public class Input_PayManaCost extends Input {
             manaCost = new ManaCost("B B");   
 	        } else {
 	            manaCost = new ManaCost(sa.getManaCost());	        	
-	        }
+	        } // Avatar of Woe
         } else if(originalCard.getName().equals("Avatar of Will")) {
 			String player = AllZone.Phase.getActivePlayer();
 			String opponent = AllZone.GameAction.getOpponent(player);
@@ -47,7 +47,7 @@ public class Input_PayManaCost extends Input {
             manaCost = new ManaCost("U U");   
 	        } else {
 	            manaCost = new ManaCost(sa.getManaCost());	        	
-	        }
+	        } // Avatar of Will
         } else if(originalCard.getName().equals("Avatar of Fury")) {
 			String player = AllZone.Phase.getActivePlayer();
 			String opponent = AllZone.GameAction.getOpponent(player);
@@ -58,7 +58,7 @@ public class Input_PayManaCost extends Input {
             manaCost = new ManaCost("R R");   
 	        } else {
 	            manaCost = new ManaCost(sa.getManaCost());	        	
-	        }
+	        } // Avatar of Fury
         } else if(originalCard.getName().equals("Avatar of Might")) {
 			String player = AllZone.Phase.getActivePlayer();
 			String opponent = AllZone.GameAction.getOpponent(player);
@@ -72,11 +72,35 @@ public class Input_PayManaCost extends Input {
             manaCost = new ManaCost("G G");   
 	        } else {
 	            manaCost = new ManaCost(sa.getManaCost());	        	
+	        } // Avatar of Might
+        } else if(originalCard.getName().equals("Khalni Hydra")) {
+			String player = AllZone.Phase.getActivePlayer();
+	        PlayerZone PlayerPlay = AllZone.getZone(Constant.Zone.Play, player); 
+	        CardList PlayerCreature = new CardList(PlayerPlay.getCards());	   
+	        PlayerCreature = PlayerCreature.getType("Creature");
+	        PlayerCreature = PlayerCreature.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.isCreature() && CardUtil.getColors(c).contains(Constant.Color.Green);
+				}
+			});       
+	        String Mana = originalManaCost + " ";
+	        if(PlayerCreature.size() > 0) {
+                for(int i = 0; i < PlayerCreature.size(); i++) {
+                	Mana = Mana.replaceFirst("G ", "");	
+                }
+                Mana = Mana.trim();
+                if(Mana.equals("")) Mana = "0";
+	            manaCost = new ManaCost(Mana);
+	        } else {
+	            manaCost = new ManaCost(sa.getManaCost());	        	
 	        }
-        } else {
+        } // Khalni Hydra 
+        // For all other Spells
+        else {
         manaCost = new ManaCost(sa.getManaCost());
-        }
-    } else {
+        } 
+    } // isSpell
+        else {
     	manaCost = new ManaCost(sa.getManaCost());
     }
     }

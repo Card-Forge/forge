@@ -1,3 +1,10 @@
+Khalni Hydra
+G G G G G G G G
+Creature Hydra
+Khalni Hydra costs Green less to cast for each green creature you control.
+8/8
+Trample
+
 Drove of Elves
 3 G
 Creature Elf
