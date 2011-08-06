@@ -22244,9 +22244,7 @@ public class CardFactory implements NewConstants {
                 public boolean canPlay() {
                     PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
 
-                    return library.getCards().length > 6
-                        && AllZone.Phase.getActivePlayer().equals(card.getController())
-                        && !AllZone.Phase.getPhase().equals("End of Turn") && super.canPlay();
+                    return library.getCards().length > 6 && super.canPlay();
                 }
 
                 @Override
