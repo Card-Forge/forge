@@ -160,7 +160,7 @@ public class Target {
 	// These below functions are quite limited to the damage classes, we should find a way to move them into AF_DealDamage
 	public boolean canTgtPlayer() {
 		for(String s: ValidTgts){
-			if (s.equals("Player"))
+			if (s.equals("Player") || s.equals("Opponent"))
 				return true;
 		}
 		return false; 
