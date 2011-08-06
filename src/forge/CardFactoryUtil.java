@@ -1008,7 +1008,7 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlayAI() {
-                PlayerLife compLife = AllZone.GameAction.getPlayerLife("Computer");
+                PlayerLife compLife = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
                 int life = compLife.getLife();
                 
                 return (life > (loss + 2));

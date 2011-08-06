@@ -197,7 +197,7 @@ class CardFactory_Lands {
 
                 } else {
                     CardList creature = new CardList();
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Play, "Computer");             
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);             
                     if(zone != null) {
                     creature.addAll(zone.getCards());
                     creature = creature.getType("Creature"); 

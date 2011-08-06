@@ -3962,7 +3962,7 @@ public class CardFactory implements NewConstants {
                         if (Destination.equals("Hand")) AllZone.Computer_Hand.add(c);         			//move to hand
                         if (Destination.equals("TopOfLibrary")) AllZone.Computer_Library.add(c, 0); //move to top of library
                         if (Destination.equals("ThirdFromTopOfLibrary")) AllZone.Computer_Library.add(c, 2); //move to third from top of library
-                        if (Destination.equals("Battlefield")) AllZone.getZone(Constant.Zone.Play, "Computer").add(c); //move to battlezone
+                        if (Destination.equals("Battlefield")) AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).add(c); //move to battlezone
 
                         if (!Targets.startsWith("Card") && !Destination.equals("Battlefield")) {
                         	CardList l = new CardList();

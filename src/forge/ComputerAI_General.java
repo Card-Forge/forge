@@ -176,12 +176,12 @@ public class ComputerAI_General implements Computer {
                 if(c.isLand()) return false;
 
                 CardList Vengevines = new CardList();
-                Vengevines.addAll(AllZone.getZone(Constant.Zone.Graveyard, "Computer").getCards());       
+                Vengevines.addAll(AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer).getCards());       
                 Vengevines = Vengevines.getName("Vengevine");
                 if(Vengevines.size() > 0) {
                 CardList Creatures = new CardList();  
                 CardList Creatures2 = new CardList();       
-                Creatures.addAll(AllZone.getZone(Constant.Zone.Hand, "Computer").getCards());
+                Creatures.addAll(AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).getCards());
         		for(int i = 0; i < Creatures.size(); i++) {
         			if(Creatures.get(i).getType().contains("Creature") && CardUtil.getConvertedManaCost(Creatures.get(i).getManaCost()) <= 3) {
         				Creatures2.add(Creatures.get(i));

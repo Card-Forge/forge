@@ -2802,7 +2802,7 @@ public class CardFactory_Instants {
 
 				@Override
                 public boolean canPlayAI() {
-                    PlayerLife compLife = AllZone.GameAction.getPlayerLife("Computer");
+                    PlayerLife compLife = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
                     int life = compLife.getLife();
                     if(4 < AllZone.Phase.getTurn() && AllZone.Computer_Library.size() > 0 && life >= 4) return true;
                     else return false;
@@ -3377,7 +3377,7 @@ public class CardFactory_Instants {
                                 }
                             }// if choice yes
                         } // player equals human
-                        else if(player.equals("Computer") && lands.size() > 0) {
+                        else if(player.equals(Constant.Player.Computer) && lands.size() > 0) {
                             Card card = lands.get(0);
                             lib.remove(card);
                             // hand.add(card);
