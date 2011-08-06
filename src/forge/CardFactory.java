@@ -3071,6 +3071,7 @@ public class CardFactory implements NewConstants {
         
 
         // Generic destroy all card
+        /* Cards converted to AF_DestroyAll
         if(hasKeyword(card, "spDestroyAll") != -1) {
             int n = hasKeyword(card, "spDestroyAll");
             
@@ -3188,6 +3189,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spDstryAll);            
 
         }//spDestroyAll
+        */
 
 /*
         // Generic bounce target card
