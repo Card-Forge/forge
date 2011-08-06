@@ -3646,16 +3646,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
-                    CardList list = new CardList(play.getCards());
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return !c.getName().equals("Mana Pool");
-                        }
-                    });
-                    CardList handList = new CardList(hand.getCards());
-                    
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(card.getController());
                     for(Card c:list) {
                         AllZone.GameAction.sacrifice(c);
                     }
@@ -3667,33 +3658,6 @@ public class CardFactory_Instants {
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-            
-            /*
-            final Command sac = new Command(){
-            private static final long serialVersionUID = 1643946454479782123L;
-
-            public void execute() {
-                PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                PlayerZone hand = AllZone.getZone(Constant.Zone.Play, card.getController());
-                CardList list = new CardList(play.getCards());
-                list = list.filter(new CardListFilter()
-                {
-                    public boolean addCard(Card c) {
-                        return !c.getName().equals("Mana Pool");
-                    }
-                });
-                CardList handList = new CardList(hand.getCards());
-                
-                for (Card c : list)
-                {
-                    AllZone.GameAction.sacrifice(c);
-                }
-                card.getController().discardHand(sa);
-            }
-              
-            };
-            */
-
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
