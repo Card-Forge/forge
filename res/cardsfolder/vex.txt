@@ -1,7 +1,7 @@
 Name:Vex
 ManaCost:2 U
 Types:Instant
-Text:Counter target spell. Its controller draws a card.
+Text:Counter target spell. It's controller may draw a card.
 K:spCounter:Spell:None:Graveyard:CC-May-Draw(1)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vex.jpg
