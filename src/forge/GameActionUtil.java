@@ -166,6 +166,7 @@ public class GameActionUtil {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		draw_Teferi_Puzzle_Box(player);
 		draw_Howling_Mine(player);
+		draw_Rites_of_Flourishing(player);
 		draw_Anvil_of_Bogardan(player);
 		draw_Spiteful_Visions(player);
 		draw_Kami_Crescent_Moon(player);
@@ -9328,6 +9329,11 @@ public class GameActionUtil {
 		CardList list = AllZoneUtil.getCardsInPlay("Kami of the Crescent Moon");
 		player.drawCards(list.size());
 	}// Kami_Crescent_Moon()
+	
+	private static void draw_Rites_of_Flourishing(Player player) {
+		CardList list = AllZoneUtil.getCardsInPlay("Rites of Flourishing");
+		player.drawCards(list.size());
+	}// draw_Rites_of_Flourishing
 
 	private static void draw_Font_of_Mythos(Player player) {
 		CardList list = AllZoneUtil.getCardsInPlay("Font of Mythos");
