@@ -6,6 +6,6 @@ A:SP$DealDamage | Cost$ 2 B B Sac<1/Creature> | ValidTgts$ Opponent | NumDmg$ X 
 SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
-SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4222&type=card
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal/final_strike.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/16.jpg
 End
