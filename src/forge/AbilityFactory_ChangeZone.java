@@ -780,6 +780,8 @@ public class AbilityFactory_ChangeZone {
 	}
 	
 	private static boolean changeKnownOriginPlayDrawbackAI(AbilityFactory af, SpellAbility sa){
+		if (sa.getTarget() == null)
+			return true;
 		
 		return changeKnownPreferredTarget(af, sa, false);
 	}
@@ -791,7 +793,8 @@ public class AbilityFactory_ChangeZone {
 		String destination = params.get("Destination");
 		Target tgt = af.getAbTgt();
 		
-		tgt.resetTargets();
+		if (tgt != null)
+			tgt.resetTargets();
 
 		CardList list = AllZoneUtil.getCardsInZone(origin);
 		list = list.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, source);
