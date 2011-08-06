@@ -238,6 +238,23 @@ public class CombatUtil {
         if (blocker.getCounters(Counters.BRIBERY) > 0 && isCardInPlay("Gwafa Hazid, Profiteer"))
         	return false;
         
+        if (isCardInPlay("Kulrath Knight"))
+        {
+        	CardList all = new CardList();
+        	all.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+        	all.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer). getCards());
+        	
+        	all = all.getName("Kulrath Knight");
+        	for (int i=0; i<all.size(); i++)
+        	{
+        		Card cKK = all.get(i);
+        		String oppKK = AllZone.GameAction.getOpponent(cKK.getController());
+        		
+        		if (blocker.getController().equals(oppKK) && blocker.hasCounters())
+        			return false;
+        	}
+        }
+        
         return true;
     }//canBlock()
     
@@ -306,6 +323,24 @@ public class CombatUtil {
         
         if (c.getCounters(Counters.BRIBERY) > 0 && isCardInPlay("Gwafa Hazid, Profiteer"))
         	return false;
+        
+        if (isCardInPlay("Kulrath Knight"))
+        {
+        	CardList all = new CardList();
+        	all.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+        	all.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer). getCards());
+        	
+        	all = all.getName("Kulrath Knight");
+        	for (int i=0; i<all.size(); i++)
+        	{
+        		Card cKK = all.get(i);
+        		String oppKK = AllZone.GameAction.getOpponent(cKK.getController());
+        		
+        		if (c.getController().equals(oppKK) && c.hasCounters())
+        			return false;
+        	}
+        }
+
         
         //if Card has Haste, Card.hasSickness() will return false
         return true;
