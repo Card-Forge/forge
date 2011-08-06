@@ -17230,7 +17230,8 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite"))
+        else if(cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite") || 
+                cardName.equals("Quag Vampires") || cardName.equals("Skitter of Lizards"))
         {
         	final Ability ability = new Ability(card, "0") {
                 @Override
