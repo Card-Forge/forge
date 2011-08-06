@@ -4,7 +4,7 @@ Types:Creature Merfolk Rogue
 Text:no text
 PT:1/1
 K:Islandwalk
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | Optional$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw that many cards.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may draw that many cards.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X
 SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Rare
