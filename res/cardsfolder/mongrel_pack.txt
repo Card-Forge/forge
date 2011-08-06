@@ -1,0 +1,8 @@
+Name:Mongrel Pack
+ManaCost:3 G
+Types:Creature Hound
+Text:no text
+PT:4/1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mongrel_pack.jpg
+End

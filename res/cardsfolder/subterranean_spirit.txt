@@ -1,0 +1,9 @@
+Name:Subterranean Spirit
+ManaCost:3 R R 
+Types:Creature Elemental
+Text:no text
+PT:3/3
+K:Protection from Red
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/subterranean_spirit.jpg
+End

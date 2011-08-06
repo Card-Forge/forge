@@ -1,0 +1,8 @@
+Name:Sliptide Serpent
+ManaCost:4 U U
+Types:Creature  Serpent
+Text:no text
+PT:4/4
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sliptide_serpent.jpg
+End

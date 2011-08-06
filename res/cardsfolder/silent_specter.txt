@@ -1,0 +1,10 @@
+Name:Silent Specter
+ManaCost:4 B B
+Types:Creature Specter
+Text:Whenever Silent Specter deals damage to an opponent, that player discards two cards.
+PT:4/4
+K:Flying
+K:Morph:3 B B
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_specter.jpg
+End
