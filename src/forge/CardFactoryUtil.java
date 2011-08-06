@@ -975,8 +975,14 @@ public class CardFactoryUtil {
             }
         };//SpellAbility
         //sourceCard.addSpellAbility(a1);
-        a1.setDescription(cost + ": Untap " + sourceCard.getName() + ".");
-        a1.setStackDescription("Untap " + sourceCard.getName());
+        
+        StringBuilder sbDesc = new StringBuilder();
+        sbDesc.append(cost).append(": Untap ").append(sourceCard.getName()).append(".");
+        a1.setDescription(sbDesc.toString());
+        
+        StringBuilder sbStack = new StringBuilder();
+        sbStack.append("Untap ").append(sourceCard.getName());
+        a1.setStackDescription(sbStack.toString());
         
         a1.setBeforePayMana(new Input_PayManaCost(a1));
         return a1;
@@ -1033,8 +1039,14 @@ public class CardFactoryUtil {
         
         flashback.setFlashBackAbility(true);
         flashback.setManaCost(manaCost);
-        flashback.setDescription("Flashback: " + manaCost + lifecost);
-        flashback.setStackDescription("Flashback: " + sourceCard.getName());
+        
+        StringBuilder sbDesc = new StringBuilder();
+        sbDesc.append("Flashback: ").append(manaCost).append(lifecost);
+        flashback.setDescription(sbDesc.toString());
+        
+        StringBuilder sbStack = new StringBuilder();
+        sbStack.append("Flashback: ").append(sourceCard.getName());
+        flashback.setStackDescription(sbStack.toString());
         
         return flashback;
         
@@ -1102,7 +1114,10 @@ public class CardFactoryUtil {
         unearth.setFlashBackAbility(true);
         //unearth.setManaCost(manaCost);
         //unearth.setDescription("Unearth: " + manaCost);
-        unearth.setStackDescription("Unearth: " + sourceCard.getName());
+        
+        StringBuilder sbStack = new StringBuilder();
+        sbStack.append("Unearth: ").append(sourceCard.getName());
+        unearth.setStackDescription(sbStack.toString());
         
         return unearth;
         
@@ -1133,9 +1148,16 @@ public class CardFactoryUtil {
                 CardFactoryUtil.makeTokenSaproling(sourceCard.getController());
             }
         };
-        ability.setDescription("Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.");
-        ability.setStackDescription(sourceCard.getName()
-                + " - put a 1/1 green Saproling creature token onto the battlefield.");
+        StringBuilder sbDesc = new StringBuilder();
+        sbDesc.append("Remove three spore counters from CARDNAME: Put a 1/1 ");
+        sbDesc.append("green Saproling creature token onto the battlefield.");
+        ability.setDescription(sbDesc.toString());
+        
+        StringBuilder sbStack = new StringBuilder();
+        sbStack.append(sourceCard.getName());
+        sbStack.append(" - put a 1/1 green Saproling creature token onto the battlefield.");
+        ability.setStackDescription(sbStack.toString());
+        
         return ability;
     }//ability_Spore_Saproling()
     
@@ -1221,11 +1243,12 @@ public class CardFactoryUtil {
         StringBuilder sb = new StringBuilder();
         sb.append("Morph ").append(cost).append(" - turn this card face up.");
         morph_up.setDescription(sb.toString());
-        // morph_up.setDescription("Morph " + cost + " - turn this card face up.");
-        morph_up.setStackDescription(sourceCard.getName() + " - turn this card face up.");
+        
+        StringBuilder sbStack = new StringBuilder();
+        sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
+        morph_up.setStackDescription(sbStack.toString());
         
         return morph_up;
-        
     }
 
     public static SpellAbility ability_Merc_Search(final Card sourceCard, String cost) {
@@ -1306,10 +1329,15 @@ public class CardFactoryUtil {
                 sourceCard.getController().shuffle();
             }
         };
-        ability.setDescription(cost
-                + ", tap: Search your library for a Mercenary permanent card with converted mana cost " + cost
-                + " or less and put it into play. Then shuffle your library.");
-        ability.setStackDescription(sourceCard.getName() + " - search for a Mercenary and put it into play.");
+        StringBuilder sbDesc = new StringBuilder();
+        sbDesc.append(cost).append(", tap: Search your library for a Mercenary permanent card with converted mana cost ");
+        sbDesc.append(cost).append(" or less and put it into play. Then shuffle your library.");
+        ability.setDescription(sbDesc.toString());
+        
+        StringBuilder sbStack = new StringBuilder();
+        sbStack.append(sourceCard.getName()).append(" - search for a Mercenary and put it into play.");
+        ability.setStackDescription(sbStack.toString());
+        
         return ability;
     }
     
@@ -1417,10 +1445,15 @@ public class CardFactoryUtil {
                 sourceCard.getController().shuffle();
             }
         };
-        ability.setDescription(cost
-                + ", tap: Search your library for a Rebel permanent card with converted mana cost " + costMinusOne
-                + " or less and put it into play. Then shuffle your library.");
-        ability.setStackDescription(sourceCard.getName() + " - search for a Rebel and put it into play.");
+        StringBuilder sbDesc = new StringBuilder();
+        sbDesc.append(cost).append(", tap: Search your library for a Rebel permanent card with converted mana cost ");
+        sbDesc.append(costMinusOne).append(" or less and put it into play. Then shuffle your library.");
+        ability.setDescription(sbDesc.toString());
+        
+        StringBuilder sbStack = new StringBuilder();
+        sbStack.append(sourceCard.getName()).append(" - search for a Rebel and put it into play.");
+        ability.setStackDescription(sbStack.toString());
+        
         return ability;
     }
     
@@ -1443,8 +1476,14 @@ public class CardFactoryUtil {
                 sourceCard.cycle();
             }
         };
-        cycle.setDescription("Cycling (" + abCost.toString() + " Draw a card.)");
-        cycle.setStackDescription(sourceCard + " Cycling: Draw a card");
+        StringBuilder sbDesc = new StringBuilder();
+        sbDesc.append("Cycling (").append(abCost.toString()).append(" Draw a card.)");
+        cycle.setDescription(sbDesc.toString());
+        
+        StringBuilder sbStack = new StringBuilder();
+        sbStack.append(sourceCard).append(" Cycling: Draw a card");
+        cycle.setStackDescription(sbStack.toString());
+        
         cycle.getRestrictions().setActivateZone(Constant.Zone.Hand);
         return cycle;
     }//ability_cycle()
@@ -1510,10 +1549,16 @@ public class CardFactoryUtil {
         };
         if(type.contains("Basic")) description = "basic land";
         else description = type;
-        cycle.setDescription(description + "cycling (" + abCost.toString() + " Search your library for a " + description
-                + " card, reveal it, and put it into your hand. Then shuffle your library.");
-        cycle.setStackDescription(sourceCard + " " + description + "cycling: Search your library for a "
-                + description + " card.)");
+        
+        StringBuilder sbDesc = new StringBuilder();
+        sbDesc.append(description).append("cycling (").append(abCost.toString()).append(" Search your library for a ");
+        sbDesc.append(description).append(" card, reveal it, and put it into your hand. Then shuffle your library.");
+        cycle.setDescription(sbDesc.toString());
+        
+        StringBuilder sbStack = new StringBuilder();
+        sbStack.append(sourceCard).append(" ").append(description);
+        sbStack.append("cycling: Search your library for a ").append(description).append(" card.)");
+        cycle.setStackDescription(sbStack.toString());
         
         cycle.getRestrictions().setActivateZone(Constant.Zone.Hand);
         
@@ -1572,11 +1617,16 @@ public class CardFactoryUtil {
             }
             
         };
-        transmute.setDescription("Transmute ("
-                + abCost.toString()
-                + "Search your library for a card with the same converted mana cost as the discarded card, reveal that card, and put it into your hand. Then shuffle your library. Play this ability only any time you could play a sorcery.)");
-        transmute.setStackDescription(sourceCard
-                + " Transmute: Search your library for a card with the same converted mana cost.)");
+        StringBuilder sbDesc = new StringBuilder();
+        sbDesc.append("Transmute (").append(abCost.toString());
+        sbDesc.append("Search your library for a card with the same converted mana cost as the discarded card, reveal that card, ");
+        sbDesc.append("and put it into your hand. Then shuffle your library. Play this ability only any time you could play a sorcery.)");
+        transmute.setDescription(sbDesc.toString());
+
+        StringBuilder sbStack = new StringBuilder();
+        sbStack.append(sourceCard).append(" Transmute: Search your library for a card with the same converted mana cost.)");
+        transmute.setStackDescription(sbStack.toString());
+        
         transmute.getRestrictions().setActivateZone(Constant.Zone.Hand);
         return transmute;
     }//ability_transmute()
@@ -1608,8 +1658,14 @@ public class CardFactoryUtil {
             	sourceCard.addCounter(Counters.TIME, suspendCounters);
             }
         };
-        suspend.setDescription("Suspend " +suspendCounters + ": "+ suspendCost);
-        suspend.setStackDescription(sourceCard.getName() + " suspending for " + suspendCounters + " turns.)");
+        StringBuilder sbDesc = new StringBuilder();
+        sbDesc.append("Suspend ").append(suspendCounters).append(": ").append(suspendCost);
+        suspend.setDescription(sbDesc.toString());
+
+        StringBuilder sbStack = new StringBuilder();
+        sbStack.append(sourceCard.getName()).append(" suspending for ").append(suspendCounters).append(" turns.)");
+        suspend.setStackDescription(sbStack.toString());
+        
         suspend.getRestrictions().setActivateZone(Constant.Zone.Hand);
         return suspend;
     }//ability_suspend()
