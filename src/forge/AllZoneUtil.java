@@ -97,6 +97,12 @@ public class AllZoneUtil {
 	
 	//////////GRAVEYARD
 	
+	/**
+	 * gets all cards in given player's graveyard
+	 * 
+	 * @param player the player whose graveyard we want to get
+	 * @return a CardList containing all cards in that player's graveyard
+	 */
 	public static CardList getPlayerGraveyard(final String player) {
 		CardList cards = new CardList();
 		if( player.equals(Constant.Player.Human) || player.equals(Constant.Player.Computer) ){
@@ -106,10 +112,34 @@ public class AllZoneUtil {
 		return cards;
 	}
 	
+	/**
+	 * gets a list of all cards with a given name in a certain player's graveyard
+	 * 
+	 * @param player the player whose graveyard we want to get
+	 * @param cardName the card name to find in the graveyard
+	 * @return a CardList containing all cards with that name in the target graveyard
+	 */
 	public static CardList getPlayerGraveyard(final String player, final String cardName) {
 		CardList cards = new CardList();
 		cards = getPlayerGraveyard(player);
 		cards = cards.getName(cardName);
+		return cards;
+	}
+	
+	//////// HAND
+	
+	/**
+	 * gets a list of all cards in a given player's hand
+	 * 
+	 * @param player the player's hand to target
+	 * @return a CardList containing all cards in target player's hand
+	 */
+	public static CardList getPlayerHand(final String player) {
+		CardList cards = new CardList();
+		if( player.equals(Constant.Player.Human) || player.equals(Constant.Player.Computer) ){
+			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+			cards.addAll(hand.getCards());
+		}
 		return cards;
 	}
 }

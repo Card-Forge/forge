@@ -18592,9 +18592,8 @@ public class CardFactory implements NewConstants {
         		@Override
         		public void resolve() {
         			final String player = getTargetPlayer();
-        			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-        			CardList handList = new CardList( hand.getCards());
-        			AllZone.Display.getChoice("Target player's hand", handList.toArray());
+        			CardList hand = AllZoneUtil.getPlayerHand(player);
+        			AllZone.Display.getChoice("Target player's hand", hand.toArray());
         		}
 
         		@Override
