@@ -206,6 +206,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         
         //enchanted by
         if(card.getEnchantedBy().size() > 0) {
+        	if(area.length() != 0) area.append("\n");
             area.append("*Enchanted by ");
             for(Iterator<Card> it = card.getEnchantedBy().iterator(); it.hasNext();) {
                 area.append(it.next());
