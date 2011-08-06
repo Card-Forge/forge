@@ -4891,6 +4891,7 @@ Sorcery
 Search your library for a Mercenary card, reveal that card, and put it into your hand. Then shuffle your library.
 spTutor:Mercenary:Hand
 SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_summons.jpg
 
 Cathartic Adept
@@ -5130,6 +5131,7 @@ Sorcery
 no text
 spDamageAll:Creature:X:Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Creature
+SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chain_reaction.jpg
 
 Chainer, Dementia Master
@@ -5534,6 +5536,7 @@ Sorcery
 no text
 spDamageAll:Player,Creature.withFlying:3:Claws of Wirewood deals 3 damage to each creature with flying and each player.
 Cycling:2
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/claws_of_wirewood.jpg
 
 Clay Statue
@@ -6108,6 +6111,7 @@ Creature Elemental
 no text
 2/2
 WheneverKeyword:EntersBattleField:Type/Land:Play:Damage/1:NormalInput/Player:ASAP:Yes_No:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may have Cosi's Ravager deal 1 damage to target player.
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cosis_ravager.jpg
 
 Cosmic Horror
@@ -6232,6 +6236,7 @@ Instant
 Destroy target nonblack creature that entered the battlefield this turn.
 spDestroyTgt:Creature.nonBlack+enteredBattlefieldThisTurn
 SVar:RemAIDeck:True
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cradle_to_grave.jpg
 
 Cranial Extraction
@@ -6790,6 +6795,7 @@ Dakmor Plague
 Sorcery
 no text
 spDamageAll:Player,Creature:3:Dakmor Plague deals 3 damage to each creature and each player.
+SVar:Rarity:Uncommon
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/dakmor_plague.jpg
 
 Dakmor Salvage
@@ -7625,6 +7631,7 @@ Desert Sandstorm
 Sorcery
 no text
 spDamageAll:Creature:1:Desert Sandstorm deals 1 damage to each creature.
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_sandstorm.jpg
 
 Desert Twister
@@ -8558,6 +8565,7 @@ Dry Spell
 Sorcery
 no text
 spDamageAll:Player,Creature:1:Dry Spell deals 1 damage to each creature and each player.
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dry_spell.jpg
 
 Dryad Arbor
@@ -8887,6 +8895,7 @@ Sorcery
 Search your library for an Arcane card, reveal that card, and put it into your hand. Then shuffle your library.
 spTutor:Arcane:Hand
 SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eerie_procession.jpg
 
 Ekundu Griffin
@@ -9674,6 +9683,7 @@ Sorcery
 no text
 spDamageAll:Player,Creature:2:Evincar's Justice deals 2 damage to each creature and each player.
 SVar:Buyback:3
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evincars_justice.jpg
 
 Eviscerator
@@ -10490,6 +10500,7 @@ Fire Tempest
 Sorcery
 no text
 spDamageAll:Player,Creature:5:Fire Tempest deals 5 damage to each creature and each player.
+SVar:Rarity:Rare
 SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/fire_tempest.jpg
 
 Fireball
@@ -10522,6 +10533,7 @@ Enchantment
 no text
 StaticEffect:Play:Permanents you Control:Keyword/Haste:Type.Creature:Creatures you control have haste.
 abPumpTgtC 0 Sac-CARDNAME:+2/+2
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fires_of_yavimaya.jpg
 
 Firescreamer
@@ -11605,6 +11617,7 @@ Gale Force
 Sorcery
 no text
 spDamageAll:Creature.withFlying:5:Gale Force deals 5 damage to each creature with flying.
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gale_force.jpg
 
 Galina's Knight
@@ -14997,6 +15010,7 @@ Sorcery
 Search your library for an enchantment card, reveal it, and put it into your hand. Then shuffle your library.
 spTutor:Enchantment:Hand
 SVar:RemAIDeck:True
+SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/idyllic_tutor.jpg
 
 Ifh-Biff Efreet
@@ -17575,6 +17589,7 @@ G
 Sorcery
 Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
 spTutor:Land.Basic:Hand
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lay_of_the_land.jpg
 
 Lay Waste
@@ -19319,6 +19334,7 @@ Sorcery
 Search your library for a blue instant card, reveal that card, and put it into your hand. Then shuffle your library.
 spTutor:Instant.Blue:Hand
 SVar:RemAIDeck:True
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_scroll.jpg
 
 Merchant Ship
@@ -22436,6 +22452,7 @@ U
 Sorcery
 Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
 spTutor:Sorcery:TopOfLibrary
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/personal_tutor.jpg
 
 Persuasion
@@ -23417,6 +23434,7 @@ no text
 0/3
 Defender
 WheneverKeyword:Blocks:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Psychic Membrane blocks, you may draw a card.
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_membrane.jpg
 
 Psychic Spear
@@ -23442,6 +23460,7 @@ no text
 spDamageAll:Player,Creature:1:Psychotic Haze deals 1 damage to each creature and each player.
 Madness:1 B
 SVar:RemAIDeck:True
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychotic_haze.jpg
 
 Psychotrope Thallid
@@ -23833,6 +23852,7 @@ Rain of Embers
 Sorcery
 no text
 spDamageAll:Player,Creature:1:Rain of Embers deals 1 damage to each creature and each player.
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_embers.jpg
 
 Rain of Tears
@@ -25631,6 +25651,7 @@ GW
 Sorcery
 Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.
 spTutor:Forest,Plains:Hand
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safewright_quest.jpg
 
 Sage Aven
@@ -26506,6 +26527,7 @@ Seismic Shudder
 Instant
 no text
 spDamageAll:Creature.withoutFlying:1:Seismic Shudder deals 1 damage to each creature without flying.
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seismic_shudder.jpg
 
 Seismic Strike
@@ -29444,6 +29466,7 @@ Steam Blast
 Sorcery
 no text
 spDamageAll:Player,Creature:2:Steam Blast deals 2 damage to each creature and each player.
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steam_blast.jpg
 
 Steam Frigate
@@ -29519,6 +29542,7 @@ Sorcery
 Search your library for an Equipment card, reveal that card, and put it into your hand. Then shuffle your library.
 spTutor:Equipment:Hand
 SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steelshapers_gift.jpg
 
 Steely Resolve
@@ -30118,6 +30142,7 @@ Instant
 no text
 spDamageAll:Player,Creature:X:Sulfurous Blast deals 2 damage to each creature and each player. If you cast this spell during your main phase, Sulfurous Blast deals 3 damage to each creature and each player instead.
 SVar:X:Count$IfMainPhase.3.2
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfurous_blast.jpg
 
 Sulfurous Springs
@@ -30504,6 +30529,7 @@ Instant
 no text
 spDamageAll:Creature.withoutFlying:X:Threshold - Swirling Sandstorm deals 5 damage to each creature without flying if seven or more cards are in your graveyard.
 SVar:X:Count$Threshold.5.0
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swirling_sandstorm.jpg
 
 Sword of Body and Mind
@@ -30601,6 +30627,7 @@ Sorcery
 Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.
 spTutor:Land:Hand
 SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_scrying.jpg
 
 Sylvan Tutor
@@ -31753,6 +31780,7 @@ no text
 spDamageAll:Player,Creature.withoutFlying:X:Thunder of Hooves deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Beast
 SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_of_hooves.jpg
 
 Thunder Spirit
@@ -31967,6 +31995,7 @@ Sorcery
 Search your library for a legendary creature card, reveal it, and put it into your hand. Then shuffle your library.
 spTutor:Creature.Legendary:Hand
 SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_of_need.jpg
 
 Time Reversal
