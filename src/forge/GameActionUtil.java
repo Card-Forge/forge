@@ -15686,10 +15686,7 @@ public class GameActionUtil {
 		 * As long as Kor Duelist is equipped, it has double strike.
 		 */
 		public void execute() {
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Kor Duelist");
+			CardList list = AllZoneUtil.getCardsInPlay("Kor Duelist");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -15705,13 +15702,14 @@ public class GameActionUtil {
 
 	public static Command Keldon_Warlord                   = new Command() {
 		private static final long serialVersionUID = 3804539422363462063L;
-
+		
+		/*
+		 * Keldon Warlord's power and toughness are each equal to the number
+		 * of non-Wall creatures you control.
+		 */
 		public void execute() {
 			// get all creatures
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Keldon Warlord");
+			CardList list = AllZoneUtil.getCardsInPlay("Keldon Warlord");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
