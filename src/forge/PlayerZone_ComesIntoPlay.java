@@ -24,6 +24,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         super.add(o);
         
         Card c = (Card) o;
+        final String player = c.getController();
         
         if(trigger && ((CardFactoryUtil.oppHasKismet(c.getController()) && (c.isLand() || c.isCreature() || c.isArtifact()))
         		|| (AllZoneUtil.isCardInPlay("Root Maze") && (c.isLand() || c.isArtifact()))
@@ -165,6 +166,23 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 		}
                 	};
                 	ability.setStackDescription(source+" - "+seedLand.getController()+" puts a 1/1 green Snake token in play");
+                	AllZone.Stack.add(ability);
+                }
+                
+                //Tectonic Instability
+                CardList tis = AllZoneUtil.getCardsInPlay("Tectonic Instability");
+                final Card tisLand = c;
+                for(Card ti:tis) {
+                	final Card source = ti;
+                	SpellAbility ability = new Ability(source, "") {
+                		@Override
+                		public void resolve() {
+                			CardList lands = AllZoneUtil.getPlayerCardsInPlay(tisLand.getController());
+                			lands = lands.filter(AllZoneUtil.lands);
+                			for(Card land:lands) land.tap();
+                		}
+                	};
+                	ability.setStackDescription(source+" - tap all lands "+tisLand.getController()+"controls.");
                 	AllZone.Stack.add(ability);
                 }
             }//isLand()
