@@ -227,6 +227,11 @@ public class CombatUtil {
                     && !blocker.isWhite()) return false;
         }
         
+        if(attacker.getKeyword().contains("CARDNAME can't be blocked by artifact creatures.")) {
+        	if(blocker.isArtifact() && blocker.isCreature())
+        		return false;
+        }
+        
         if(attacker.getName().equals("Skirk Shaman")) {
             if(!blocker.getType().contains("Artifact")
                     && !blocker.isRed()) return false;
