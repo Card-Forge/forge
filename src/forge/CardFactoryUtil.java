@@ -2518,12 +2518,14 @@ public class CardFactoryUtil {
             
             @Override
             public void showMessage() {
+            	if(CombatUtil.Lorthos_Cancelled == true) stop();
             	AllZone.Display.showMessage("Select target Permanents for Lorthos: " + (i + 1) + " more to pick");
             	ButtonUtil.enableOnlyCancel();
             }
             
             @Override
             public void selectButtonCancel() {
+            	CombatUtil.Lorthos_Cancelled = true;
                 stop();
             }
             

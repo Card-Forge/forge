@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 
 public class CombatUtil {
+	static boolean Lorthos_Cancelled;
     public static boolean canBlock(Card attacker, Card blocker) {
         
         if(attacker == null || blocker == null) return false;
@@ -1670,6 +1671,7 @@ public class CombatUtil {
         		CardList Silence = AllZoneUtil.getPlayerCardsInPlay(AllZone.GameAction.getOpponent(c.getController())); 		
         		Silence = Silence.getName("Linvala, Keeper of Silence");
         		if(Silence.size() == 0) {
+        			Lorthos_Cancelled = false;
                 if(c.getController().equals(Constant.Player.Human)) {
                     AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Activate " + c.getName() + "'s ability: " + "\r\n",
                             ability.getManaCost(), paidCommand, unpaidCommand));
