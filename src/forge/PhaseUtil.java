@@ -432,19 +432,6 @@ public class PhaseUtil {
         		CombatUtil.checkBlockedAttackers(a, b);
         }
         
-        //Run Triggers
-        HashMap<String,Object> runParams = new HashMap<String,Object>();
-        runParams.put("Side","Blocker");
-        for (Card a:attList)
-        {
-        	CardList blockList = AllZone.Combat.getBlockers(a);
-        	for (Card b:blockList)
-        	{
-        		runParams.put("Blocker", b);
-        		AllZone.TriggerHandler.runTrigger("Blocks", runParams);
-        	}
-        }
-
         AllZone.Stack.unfreezeStack();
         CombatUtil.showCombat();
 	}

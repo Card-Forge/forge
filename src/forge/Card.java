@@ -938,7 +938,10 @@ public class Card extends MyObservable {
          // Triggered abilities
             for(Trigger trig : triggers)
             {
-            	sb.append(trig.toString() + "\r\n");
+            	if(!trig.isSecondary())
+            	{
+            		sb.append(trig.toString() + "\r\n");
+            	}
             }
             
             // Ripple + Dredge + Madness + CARDNAME is {color} + Recover.
@@ -1006,7 +1009,10 @@ public class Card extends MyObservable {
         // Triggered abilities
         for(Trigger trig : triggers)
         {
-        	sb.append(trig.toString() + "\r\n");
+        	if(!trig.isSecondary())
+        	{
+        		sb.append(trig.toString() + "\r\n");
+        	}
         }
         
         ArrayList<String> addedManaStrings = new ArrayList<String>();

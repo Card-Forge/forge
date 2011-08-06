@@ -651,7 +651,7 @@ public class AbilityFactory {
 					SpellAbility saTargeting = (ability.getTarget() == null) ?  findParentsTargetedCard(ability) : ability;
 					list = new CardList(saTargeting.getTarget().getTargetCards().toArray());
 				}
-				else if (calcX[0].startsWith("Triggering")) {
+				else if (calcX[0].startsWith("Triggered")) {
 					list = new CardList();
 					list.add(ability.getTriggeringCard());
 				}
@@ -692,7 +692,7 @@ public class AbilityFactory {
 			cards.addAll(parent.getTarget().getTargetCards());
 		}
 		
-		else if (defined.equals("Triggering"))
+		else if (defined.equals("Triggered"))
 			c = sa.getTriggeringCard();
 		
 		if (c != null)

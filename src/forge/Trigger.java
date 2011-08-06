@@ -187,6 +187,16 @@ public abstract class Trigger {
 		return false;
 	}
 	
+	public boolean isSecondary()
+	{
+		if(mapParams.containsKey("Secondary"))
+		{
+			if(mapParams.get("Secondary").equals("True"))
+				return true;
+		}
+		return false;
+	}
+	
 	public abstract boolean performTest(HashMap<String,Object> runParams);
 	
 	public abstract Trigger getCopy();
