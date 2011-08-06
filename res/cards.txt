@@ -1,3 +1,9 @@
+Elvish Piper
+3 G
+Creature Elf Shaman
+G, tap: You may put a creature card from your hand onto the battlefield.
+1/1
+
 Cadaver Imp
 1 B B
 Creature Imp
@@ -20148,12 +20154,6 @@ no text
 2/2
 Flying 
 Haste
-
-Elvish Piper
-3 G
-Creature Elf Shaman
-no text
-1/1
 
 Serra Angel
 3 W W
