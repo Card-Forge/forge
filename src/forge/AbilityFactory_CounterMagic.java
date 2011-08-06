@@ -121,6 +121,7 @@ public class AbilityFactory_CounterMagic {
 				&& AllZone.Stack.contains(tgt[0])
 				&& !tgt[0].getSourceCard().keywordsContain("CARDNAME can't be countered.")) {
 			final SpellAbility tgtSA = tgt[0];
+			Card tgtSACard = tgtSA.getSourceCard();
 
 			System.out.println("Send countered spell to " + destination);
 
@@ -163,6 +164,10 @@ public class AbilityFactory_CounterMagic {
 			{
 				removeFromStack(tgtSA,sa);
 				doExtraActions(tgtSA,sa);
+			}
+			
+			if(tgtSA.isAbility() && params.containsKey("DestroyPermanent")) {
+				AllZone.GameAction.destroy(tgtSACard);
 			}
 			
 		}
@@ -212,6 +217,10 @@ public class AbilityFactory_CounterMagic {
 		sb.append(tgt[0].getSourceCard().getName());
 		if(tgt[0].isAbility()) sb.append("'s ability.");
 		else sb.append(".");
+		
+		if(tgt[0].isAbility() && params.containsKey("DestroyPermanent")) {
+			sb.append("  Destroy "+tgt[0].getSourceCard()).append(".");
+		}
 
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null){
