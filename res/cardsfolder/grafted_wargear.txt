@@ -1,5 +1,5 @@
 Name:Grafted Wargear
-ManaCost:0
+ManaCost:3
 Types:Artifact Equipment
 Text:Equipped creature gets +3/+2.
 K:eqPump 0:+3/+2
