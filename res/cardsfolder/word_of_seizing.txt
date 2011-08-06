@@ -7,4 +7,5 @@ A:SP$GainControl | Cost$ 3 R R | Tgt$ TgtC | LoseControl$EOT | Untap$ True | Add
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/word_of_seizing.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/188.jpg
 End

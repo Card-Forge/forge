@@ -7,4 +7,5 @@ K:enPumpCurse:+0/+0
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_link.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/71.jpg
 End
