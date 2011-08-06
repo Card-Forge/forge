@@ -1,6 +1,6 @@
 Name:Arcbound Wanderer
 ManaCost:6
-Types:Artifact Creature
+Types:Artifact Creature Golem
 Text:no text
 PT:0/0
 K:Modular 0
