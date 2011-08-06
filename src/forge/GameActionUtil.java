@@ -5042,9 +5042,27 @@ public class GameActionUtil {
         }
     }
 
-    public static void executePlayerDamageEffects(Card c)
+    //not restricted to just combat damage:
+    public static void executePlayerDamageEffects(Card c, int damage, boolean isCombatDamage)
     {
-    	
+    	if (damage > 0)
+    	{
+	    	if(c.getKeyword().contains("Whenever this creature deals damage to a player, that player gets a poison counter."))
+				playerCombatDamage_PoisonCounter(c, 1);
+	    
+	    	if(c.getName().equals("Marsh Viper")) playerCombatDamage_PoisonCounter(c, 2);
+	    	else if(c.getName().equals("Abyssal Specter")) playerCombatDamage_Abyssal_Specter(c);
+	    	else if(c.getName().equals("Nicol Bolas")) playerCombatDamage_Nicol_Bolas(c);
+			else if(c.getName().equals("Goblin Lackey")) playerCombatDamage_Goblin_Lackey(c);
+			else if(c.getName().equals("Thieving Magpie")|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
+			else if(c.getName().equals("Warren Instigator")) playerCombatDamage_Warren_Instigator(c);
+			else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
+				playerCombatDamage_Whirling_Dervish(c); 
+	    	
+	    	if (isCombatDamage)
+	    		c.setDealtCombatDmgToOppThisTurn(true);
+	    		
+    	}
     }
     
 	public static void executePlayerCombatDamageEffects(Card c) {
@@ -5053,9 +5071,6 @@ public class GameActionUtil {
     	DealsDamage_Whenever_Parameters[0] = AllZone.GameAction.getOpponent(c.getController());
     	DealsDamage_Whenever_Parameters[2] = c;
     	AllZone.GameAction.CheckWheneverKeyword(c, "DealsDamage/Opponent", DealsDamage_Whenever_Parameters);
-    	
-		if(c.getKeyword().contains("Whenever this creature deals damage to a player, that player gets a poison counter.")) 
-			playerCombatDamage_PoisonCounter(c, 1);
 
 		if (c.getKeyword().contains("Poisonous 1"))
 		{
@@ -5127,22 +5142,16 @@ public class GameActionUtil {
 			}
 		} 
 
-		if(c.getName().equals("Marsh Viper")) playerCombatDamage_PoisonCounter(c, 2);
-		else if(c.getName().equals("Hypnotic Specter")) playerCombatDamage_Hypnotic_Specter(c);
-		else if(c.getName().equals("Abyssal Specter")) playerCombatDamage_Abyssal_Specter(c);
+		if(c.getName().equals("Hypnotic Specter")) playerCombatDamage_Hypnotic_Specter(c);
 		else if(c.getName().equals("Dimir Cutpurse")) playerCombatDamage_Dimir_Cutpurse(c);
 		else if(c.getName().equals("Ghastlord of Fugue")) playerCombatDamage_Ghastlord_of_Fugue(c);
 		else if(c.getName().equals("Garza Zol, Plague Queen")) playerCombatDamage_May_draw(c);
-		else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c);
+		else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c); 
 		else if(c.getName().equals("Guul Draz Specter")
 				|| c.getName().equals("Chilling Apparition") || c.getName().equals("Sedraxis Specter")) playerCombatDamage_Simple_Discard(c);
 		else if((c.getName().equals("Headhunter") || c.getName().equals("Riptide Pilferer")) && !c.isFaceDown()) playerCombatDamage_Simple_Discard(c);
-		else if(c.getName().equals("Shadowmage Infiltrator") || c.getName().equals("Thieving Magpie")
-				|| c.getName().equals("Lu Xun, Scholar General")) playerCombatDamage_Shadowmage_Infiltrator(c);
-		else if(c.getName().equals("Nicol Bolas")) playerCombatDamage_Nicol_Bolas(c);
-		else if(c.getName().equals("Goblin Lackey")) playerCombatDamage_Goblin_Lackey(c);
+		else if(c.getName().equals("Shadowmage Infiltrator")) playerCombatDamage_Shadowmage_Infiltrator(c);
 		else if(c.getName().equals("Augury Adept")) playerCombatDamage_Augury_Adept(c);
-		else if(c.getName().equals("Warren Instigator")) playerCombatDamage_Warren_Instigator(c);
 		else if(c.getName().equals("Spawnwrithe")) playerCombatDamage_Spawnwrithe(c);
 		else if(c.getName().equals("Glint-Eye Nephilim") || c.getName().equals("Cold-Eyed Selkie")) playerCombatDamage_Glint_Eye_Nephilim(c);
 		else if(c.getName().equals("Hystrodon") && !c.isFaceDown()) playerCombatDamage_Hystrodon(c);
@@ -5150,8 +5159,6 @@ public class GameActionUtil {
 		else if(c.getName().equals("Slith Strider") || c.getName().equals("Slith Ascendant")
 				|| c.getName().equals("Slith Bloodletter") || c.getName().equals("Slith Firewalker")
 				|| c.getName().equals("Slith Predator")) playerCombatDamage_Slith(c);
-		else if(c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) 
-			playerCombatDamage_Whirling_Dervish(c);
 		else if (c.getName().equals("Arcbound Slith"))
 			playerCombatDamage_Arcbound_Slith(c);
 		else if(c.getName().equals("Oros, the Avenger")) playerCombatDamage_Oros(c);

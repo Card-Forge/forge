@@ -2,7 +2,7 @@
 package forge;
 
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.HashMap;
 //import java.util.Iterator;
 import java.util.Map.Entry;
@@ -101,21 +101,16 @@ public class Input_FirstStrikeDamage extends Input {
             */
         }
         
-        CardList attackers = new CardList(AllZone.Combat.getAttackers());
+        //CardList attackers = new CardList(AllZone.Combat.getAttackers());
         CardList blockers = new CardList(AllZone.Combat.getAllBlockers().toArray());
         
 
+        /*
         for(int i = 0; i < attackers.size(); i++) {
             //System.out.println("attacker #" + i + ": " + attackers.getCard(i).getName() +" " + attackers.getCard(i).getAttack());
             
             CardList defend = AllZone.Combat.getBlockers(attackers.getCard(i));
             ArrayList<String> list = attackers.getCard(i).getKeyword();
-            
-            /*
-            if((attackers.getCard(i).hasFirstStrike() || attackers.getCard(i).hasDoubleStrike())) {
-            	
-                CombatUtil.executeCombatDamageEffects(attackers.getCard(i));
-            }*/
             
             //not sure if this will work correctly with multiple blockers?
             int defenderToughness = 0;
@@ -127,9 +122,11 @@ public class Input_FirstStrikeDamage extends Input {
                     && AllZone.Combat.isBlocked(attackers.getCard(i)))
 
             {
+            	GameActionUtil.executePlayerDamageEffects(attackers.getCard(i));
                 GameActionUtil.executePlayerCombatDamageEffects(attackers.getCard(i));
             }
         }
+        */
         for(int i = 0; i < blockers.size(); i++) {
             //System.out.println("blocker #" + i + ": " + blockers.getCard(i).getName() +" " + blockers.getCard(i).getAttack());
             if((blockers.getCard(i).hasFirstStrike() || blockers.getCard(i).hasDoubleStrike())) {

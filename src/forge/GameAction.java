@@ -3706,7 +3706,7 @@ public class GameAction {
         else
         	getPlayerLife(player).subtractLife(damage,source);
     	
-    	
+    	GameActionUtil.executePlayerDamageEffects(source, damage, true);
     	GameActionUtil.executePlayerCombatDamageEffects(source);
     	CombatUtil.executeCombatDamageEffects(source);
     }
@@ -3729,6 +3729,7 @@ public class GameAction {
             GameActionUtil.executeGuiltyConscienceEffects(source, c, damage);
         }
         
+        GameActionUtil.executePlayerDamageEffects(source, damage, false);
     }
     
     public void searchLibraryLand(String type, String player, String Zone1, boolean tapLand) {

@@ -2,7 +2,7 @@
 package forge;
 
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.HashMap;
 //import java.util.Iterator;
 import java.util.Map.Entry;
@@ -95,9 +95,10 @@ public class Input_CombatDamage extends Input {
         }
         //GameActionUtil.executePlayerCombatDmgOptionalEffects(unblocked.toArray());
         
-        CardList attackers = new CardList(AllZone.Combat.getAttackers());
+        //CardList attackers = new CardList(AllZone.Combat.getAttackers());
         CardList blockers = new CardList(AllZone.Combat.getAllBlockers().toArray());
         
+        /*
         for(int i = 0; i < attackers.size(); i++) {
             
             //this shouldn't trigger if creature has first strike, only if it also has double strike
@@ -108,29 +109,7 @@ public class Input_CombatDamage extends Input {
                 CardList defend = AllZone.Combat.getBlockers(attackers.getCard(i));
                 //System.out.println("creatures blocking " + attackers.getCard(i).getName() + " : " +defend.size());
                 
-                /*
-                //hack, don't get lifelink if a doublestriker kills his blocker with first strike damage
-                if (!attackers.getCard(i).hasDoubleStrike() || (defend.size()!=0 && attackers.getCard(i).hasDoubleStrike()) )
-                {
-                	for (int j=0; j < list.size(); j++)
-                    {
-                    	if (list.get(j).equals("Lifelink"))
-                    		GameActionUtil.executeLifeLinkEffects(attackers.getCard(i));
-                    	
-                    }
-                }
-                */
                 
-                /*
-                if(!attackers.getCard(i).hasDoubleStrike()
-                        || (attackers.getCard(i).hasDoubleStrike() && !AllZone.Combat.isBlocked(attackers.getCard(i)))
-                        || (attackers.getCard(i).hasDoubleStrike()
-                                && AllZone.Combat.isBlocked(attackers.getCard(i)) && defend.size() != 0)) {
-                    
-
-                    CombatUtil.executeCombatDamageEffects(attackers.getCard(i));
-                }
-                */
                 //not sure if this will work correctly with multiple blockers?
                 int defenderToughness = 0;
                 for(int k = 0; k < defend.size(); k++) {
@@ -141,12 +120,14 @@ public class Input_CombatDamage extends Input {
                         && list.contains("Trample")
                         && defenderToughness < attackers.getCard(i).getNetAttack()
                         && AllZone.Combat.isBlocked(attackers.getCard(i))) {
+                	GameActionUtil.executePlayerDamageEffects(attackers.getCard(i));
                     GameActionUtil.executePlayerCombatDamageEffects(attackers.getCard(i));
                 }
                 
             }
             
         }
+        */
         for(int i = 0; i < blockers.size(); i++) {
             //System.out.println("blocker #" + i + ": " + blockers.getCard(i).getName() +" " + blockers.getCard(i).getAttack());
             /*
