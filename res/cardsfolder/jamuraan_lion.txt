@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Cat
 Text:no text
 PT:3/1
-K:abPumpTgtC W T:CARDNAME can't block.
+A:AB$Pump | Cost$ W T | Tgt$ TgtC | KW$ CARDNAME can't block. | SpellDescription$ Target creature can't block this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jamuraan_lion.jpg
 SetInfo:VIS|Common|http://magiccards.info/scans/en/vi/110.jpg

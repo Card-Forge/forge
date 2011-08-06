@@ -11439,55 +11439,6 @@ public class CardFactory_Creatures {
             
             a2.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Wall of Mulch")) {
-            
-            final SpellAbility a2 = new Ability(card, "G") {
-                @Override
-                public void resolve() {
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c)) {
-                        //AllZone.getZone(c).remove(c);
-                        AllZone.GameAction.sacrifice(c);
-                        card.getController().drawCard();
-                    }
-                }//resolve
-                
-                @Override
-                public boolean canPlayAI() {
-                    //TODO: make AI able to use this
-                    return false;
-                }
-            };//SpellAbility
-            
-            Input runtime = new Input() {
-                private static final long serialVersionUID = -4390488827563977718L;
-                
-                @Override
-                public void showMessage() {
-                    CardList walls = new CardList(
-                            AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
-                    walls = walls.getType("Wall");
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(a2, walls, "Select a Wall to sacrifice.",
-                            false, false));
-                }
-            };
-            
-            card.addSpellAbility(a2);
-            a2.setDescription("G, Sacrifice a Wall: You draw a card.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getController()).append(" draws a card.");
-            a2.setStackDescription(sb.toString());
-            
-            a2.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Rootwater Thief")) {

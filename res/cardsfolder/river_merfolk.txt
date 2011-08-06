@@ -3,7 +3,7 @@ ManaCost:U U
 Types:Creature Merfolk
 Text:no text
 PT:2/1
-K:abPump U:Mountainwalk
+A:AB$Pump | Cost$ U | KW$ Mountainwalk| SpellDescription$ CARDNAME gains mountainwalk until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/river_merfolk.jpg
 SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/51.jpg
