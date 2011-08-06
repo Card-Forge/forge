@@ -210,7 +210,7 @@ G
 Creature Human Wizard
 no text
 1/1
-TgtKpump R T: First Strike
+TgtKPump R T:First Strike
 
 Scepter of Insight
 1 U U
@@ -2014,7 +2014,7 @@ Enchant creature
 
 Aspect of Mongoose
 1 G
-Enchantment Auras
+Enchantment Aura
 Enchanted creature has shroud.
 When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 Enchant creature
@@ -2680,80 +2680,80 @@ As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blu
 Airborne Aid
 3 U
 Sorcery
-Draw a card for each Bird on the battlefield.
-spDrawCards:NumCardsType/Bird/InPlay
+no text
+spDrawCards:Count$TypeOnBattlefield.Bird:Draw a card for each Bird on the battlefield.:Airborne Aid - draw cards.
 
 Collective Unconscious
 4 G G
 Sorcery
-Draw a card for each creature you control.
-spDrawCards:NumCardsType/Creature/YouCtrl
+no text
+spDrawCards:Count$TypeYouCtrl.Creature:Draw a card for each creature you control.:Collective Unconscious - draw cards.
 
 Compulsive Research
 2 U
 Sorcery
-Target player draws three cards. Then that player discards two cards unless he or she discards a land card.
-spDrawCardsTgt:3:Discard/2/UnlessDiscardType/Land
+no text
+spDrawCardsTgt:3:Drawback$TgtDiscard/2/UnlessDiscardType.Land:Target player draws three cards. Then that player discards two cards unless he or she discards a land card.:Compulsive Research - draw 3 cards, then discards 2 unless discards a land.
 
 Dream Cache
 2 U
 Sorcery
-Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library.
-spDrawCards:3:NumToLibrary/2/TopOrBottom
+no text
+spDrawCards:3:Drawback$YouHandToLibrary/2/TopOrBottom:Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library.:Dream Cache - Draw 3 cards, then put 2 back.
 
 Flow of Ideas
 5 U
 Sorcery
-Draw a card for each Island you control.
-spDrawCards:NumCardsType/Island/YouCtrl
+no text
+spDrawCards:Count$TypeYouCtrl.Island:Draw a card for each Island you control.:Flow of Ideas - draw cards.
 
 Opportunity
 4 U U
 Instant
-Target player draws four cards.
-spDrawCardsTgt:4
+no text
+spDrawCardsTgt:4:Target player draws four cards.:Opportunity - Target player draws 4 cards.
 
 Ribbons of the Reikai
 4 U
 Sorcery Arcane
-Draw a card for each Spirit you control.
-spDrawCards:NumCardsType/Spirit/YouCtrl
+no text
+spDrawCards:Count$TypeYouCtrl.Spirit:Draw a card for each Spirit you control.:Ribbons of the Reikai - draw cards.
 
 Sift
 3 U
 Sorcery
-Draw three cards, then discard a card.
-spDrawCards:3:Discard/1
+no text
+spDrawCards:3:Drawback$YouDiscard/1:Draw three cards, then discard a card.:Sift - Draw 3 cards, then discard 1 card.
 
 Sign in Blood
 B B
 Sorcery
-Target player draws two cards and loses 2 life.
-spDrawCardsTgt:2:LoseLife/2
+no text
+spDrawCardsTgt:2:Drawback$LoseLifeTgt/2:Target player draws two cards and loses 2 life.:Sign in Blood - Target player draws 2 cards and loses 2 life.
 
 Thirst for Knowledge
 2 U
 Instant
-Draw three cards. Then discard two cards unless you discard an artifact card.
-spDrawCards:3:Discard/2/UnlessDiscardType/Artifact
+no text
+spDrawCards:3:Drawback$YouDiscard/2/UnlessDiscardType.Artifact:Draw three cards. Then discard two cards unless you discard an artifact card.:Thirst for Knowledge - Draw 3 cards, then discard 2 cards unless you discard an artifact.
 
 Tidings
 3 U U
 Sorcery
-Draw four cards.
-spDrawCards:4
+no text
+spDrawCards:4:Draw four cards.:Tidings - Draw 4 cards.
 
 Vision Skeins
 1 U
 Instant
-Each player draws two cards.
-spDrawCards:2:NumOppDraw/2
+no text
+spDrawCards:2:Drawback$OppDraw/2:Each player draws two cards.:Both players draws 2 cards.
 
 Wistful Thinking
 2 U
 Sorcery
-Target player draws two cards, then discards four cards.
-spDrawCardsTgt:2:Discard/4
+no text
+spDrawCardsTgt:2:Drawback$TgtDiscard/4:Target player draws two cards, then discards four cards.:Wistful Thinking - Target player draws 2 cards, then discards 4 cards.
 
 Wildsize
 2 G
@@ -2764,8 +2764,8 @@ spPumpTgt:+2/+2/Trample
 Biomantic Mastery
 4 UG UG UG
 Sorcery
-Draw a card for each creature target player controls, then draw a card for each creature another target player controls.
-spDrawCards:NumCardsType/Creature/InPlay
+no text
+spDrawCards:Count$TypeOnBattlefield.Creature:Draw a card for each creature target player controls, then draw a card for each creature another target player controls.:Biomantic Mastery - Draw cards.
 
 Infiltrate
 U
@@ -2790,50 +2790,50 @@ spPumpTgt:Unblockable
 Ambition's Cost
 3 B
 Sorcery
-You draw three cards and you lose 3 life.
-spDrawCards:3:LoseLife/3
+no text
+spDrawCards:3:Drawback$YouLoseLife/3:You draw three cards and you lose 3 life.:Ambition's Cost - draw 3 cards and lose 3 life.
 
 Ancient Craving
 3 B
 Sorcery
-You draw three cards and you lose 3 life.
-spDrawCards:3:LoseLife/3
+no text
+spDrawCards:3:Drawback$YouLoseLife/3:You draw three cards and you lose 3 life.:Ancient Craving - draw 3 cards and lose 3 life.
 
 Brilliant Plan
 4 U
 Sorcery
-Draw three cards.
-spDrawCards:3
+no text
+spDrawCards:3:Draw three cards.:Brilliant Plan - Draw 3 cards.
 
 Careful Study
 U
 Sorcery
-Draw two cards, then discard two cards.
-spDrawCards:2:Discard/2
+no text
+spDrawCards:2:Drawback$YouDiscard/2:Draw two cards, then discard two cards.:Careful Study - Draw 2 cards, then discard 2 cards.
 
 Catalog
 2 U
 Instant
-Draw two cards, then discard a card.
-spDrawCards:2:Discard/1
+no text
+spDrawCards:2:Drawback$YouDiscard/1:Draw two cards, then discard a card.:Catalog - Draw 2 cards, then discard 1 card.
 
 Control of the Court
 1 R
 Sorcery
-Draw four cards, then discard three cards at random.
-spDrawCards:4:Discard/3/AtRandom
+no text
+spDrawCards:4:Drawback$YouDiscard/3/AtRandom:Draw four cards, then discard three cards at random.:Control of the Court - Draw 4 cards, then discard 3 at random.
 
 Divination
 2 U
 Sorcery
-Draw two cards.
-spDrawCards:2
+no text
+spDrawCards:2:Draw two cards.:Divination - Draw 2 cards.
 
 Goblin Lore
 1 R
 Sorcery
-Draw four cards, then discard three cards at random.
-spDrawCards:4:Discard/3/AtRandom
+no text
+spDrawCards:4:Drawback$YouDiscard/3/AtRandom:Draw four cards, then discard three cards at random.:Goblin Lore - Draw 4 cards, then discard 3 at random.
 
 Eye of Nowhere
 U U
