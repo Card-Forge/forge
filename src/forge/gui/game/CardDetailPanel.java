@@ -207,6 +207,13 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             }
         }
         
+        // Regeneration Shields
+        int regenShields = card.getShield();
+        if (regenShields > 0){
+            if(area.length() != 0) area.append("\n");
+            area.append("Regeneration Shield(s): ").append(regenShields);
+        }
+        
         //top revealed
         if(card.getKeyword().contains("Play with the top card of your library revealed.") &&
            !card.getTopCardName().equals(""))
