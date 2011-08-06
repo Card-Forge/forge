@@ -2718,7 +2718,37 @@ public class GameActionUtil {
 					+ player + " gains life equal to target creature's power.");
 			AllZone.Stack.add(ability);
 		}
-
+	}
+	
+	public static void endOfTurn_Lighthouse_Chronologist() 
+	{
+		final String player = AllZone.Phase.getActivePlayer();
+		final String opponent = AllZone.GameAction.getOpponent(player);
+		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, opponent);
+		CardList list = new CardList(playZone.getCards());
+		
+		list = list.filter(new CardListFilter()
+		{
+			public boolean addCard(Card c)
+			{
+				return c.getName().equals("Lighthouse Chronologist") && c.getCounters(Counters.LEVEL) >= 7;
+			}
+		});
+		
+		Ability ability;
+		for (int i = 0; i < list.size(); i++)
+		{
+			final Card card = list.get(i);
+			ability = new Ability(list.get(i), "0")
+			{
+				public void resolve()
+				{
+					 AllZone.Phase.addExtraTurn(card.getController());
+				}
+			};
+			ability.setStackDescription(card + " - " +card.getController() + " takes an extra turn.");
+			AllZone.Stack.add(ability);
+		}
 	}
 
 
@@ -9827,6 +9857,39 @@ public class GameActionUtil {
 		}// execute()
 	};
 	
+	public static Command Lighthouse_Chronologist  = new Command() {
+		
+		private static final long serialVersionUID = 2627513737024865169L;
+
+		public void execute()
+		{
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Lighthouse Chronologist");
+			
+			for (Card c:list)
+			{
+				int lcs = c.getCounters(Counters.LEVEL);
+				if ( lcs < 4)
+				{
+					c.setBaseAttack(1);
+					c.setBaseDefense(3);
+				}
+				else if ( lcs >=4 && lcs < 7 )
+				{
+					c.setBaseAttack(2);
+					c.setBaseDefense(4);
+				}
+				else
+				{
+					c.setBaseAttack(3);
+					c.setBaseDefense(5);
+				}
+			}
+		}
+	};
+	
 	public static Command Student_of_Warfare 		  = new Command() {
 		private static final long serialVersionUID = 2627513737024865169L;
 
@@ -15209,6 +15272,7 @@ public class GameActionUtil {
 
 		commands.put("Student_of_Warfare", Student_of_Warfare);
 		commands.put("Transcendent_Master", Transcendent_Master);
+		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
 		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
 		commands.put("People_of_the_Woods", People_of_the_Woods);

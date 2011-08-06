@@ -34,6 +34,7 @@ public class EndOfTurn implements java.io.Serializable
     }
     
     GameActionUtil.endOfTurn_Wall_Of_Reverence();
+    GameActionUtil.endOfTurn_Lighthouse_Chronologist();
     
     //GameActionUtil.removeExaltedEffects();
     GameActionUtil.removeAttackedBlockedThisTurn();
