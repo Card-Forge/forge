@@ -3,6 +3,8 @@ package forge;
 
 import java.util.LinkedList;
 
+import com.esotericsoftware.minlog.Log;
+
 
 public class Input_Cleanup extends Input {
     private static final long serialVersionUID = -4164275418971547948L;
@@ -116,7 +118,7 @@ public class Input_Cleanup extends Input {
             AllZone.GameAction.discard(card);
             showMessage();
             //We need a nextPhase here or else it will never get the needToNextPhase from showMessage() (because there isn't a nextPhsae() in the stack).
-            System.out.println("There better not be a nextPhase() on the stack!");
+            Log.debug("There better not be a nextPhase() on the stack!");
             if(AllZone.Phase != null) {
                 if(AllZone.Phase.isNeedToNextPhase()) {
                     AllZone.Phase.setNeedToNextPhase(false);

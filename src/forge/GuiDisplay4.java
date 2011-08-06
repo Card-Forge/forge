@@ -391,22 +391,8 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                             }
                         }
                     }
-                   
-                    inputControl.selectCard(c, AllZone.Human_Play);
-                   
-                }
-            }
-        });
-        //self play (no land) ---- Mouse
-        playerPlayPanel.addMouseListener(new MouseAdapter() {
-           
-            @Override
-            public void mousePressed(MouseEvent e) {
-            	Card c = playerPlayPanel.getCardFromMouseOverPanel();
-                if(c != null) {                   
+                    
                     CardList att = new CardList(AllZone.Combat.getAttackers());
-                    //CardList block = AllZone.Combat.getAllBlockers();
-                   
                     if((c.isTapped() ||c.hasSickness() || ((c.getKeyword().contains("Vigilance")) && att.contains(c)))
                             && (inputControl.input instanceof Input_Attack)) {
                     	arcane.ui.CardPanel cardPanel = playerPlayPanel.getCardPanel(c.getUniqueNumber());
@@ -416,28 +402,17 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                             }
                         }
                     }
-                    //right click:
+                    
                     if(e.isMetaDown()) {
                         if(att.contains(c) && (inputControl.input instanceof Input_Attack))  {
                             c.untap();
                             AllZone.Combat.removeFromCombat(c);
                         }
-                       
-                        /*
-                        // won't work yet:
-                        else if (block.contains(cardPanel.getCard()) && inputControl.input instanceof Input_Block)
-                        {
-                                Card crd = cardPanel.getCard();
-                                AllZone.Combat.removeFromCombat(crd);
-                        }
-                        */
-                       
-                    }
-
-                    else inputControl.selectCard(c, AllZone.Human_Play);
+                    } else inputControl.selectCard(c, AllZone.Human_Play);
                 }
             }
         });
+
         //self hand ---- Mouse
         playerHandPanel.addMouseListener(new MouseAdapter() {
            
