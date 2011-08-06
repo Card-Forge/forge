@@ -1,0 +1,11 @@
+Name:Boa Constrictor
+ManaCost:4 G
+Types:Creature Snake
+Text:no text
+PT:3/3
+A:AB$Pump | Cost$ T | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ CARDNAME gets +3/+3 until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boa_constrictor.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/231.jpg
+End
