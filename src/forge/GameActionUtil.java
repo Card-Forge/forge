@@ -9906,7 +9906,7 @@ public class GameActionUtil {
 		CardList                  gloriousAnthemList = new CardList();
 
 		public void execute() {
-			String keyword = "Indesctructible";
+			String keyword = "Indestructible";
 
 			CardList list = gloriousAnthemList;
 			Card c;
