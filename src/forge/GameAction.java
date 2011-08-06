@@ -3012,8 +3012,10 @@ public class GameAction {
                  		if(Mana.equals("")) Mana = "0";
                  		manaCost = new ManaCost(Mana);	
                  	}
-                 	if(manaCost.toString().equals("W") || manaCost.toString().equals("U") || manaCost.toString().equals("G") 
-                 		|| manaCost.toString().equals("B") || manaCost.toString().equals("R")) {
+                 	if(!manaCost.toString().contains("0") && !manaCost.toString().contains("1") && !manaCost.toString().contains("2") 
+                 			&& !manaCost.toString().contains("3") && !manaCost.toString().contains("4") && !manaCost.toString().contains("5")
+                 			&& !manaCost.toString().contains("6") && !manaCost.toString().contains("7") && !manaCost.toString().contains("8")
+                 			&& !manaCost.toString().contains("9")) {
                  		Mana = k[3] + " " + Mana;	
              			manaCost = new ManaCost(Mana);
                  	}
