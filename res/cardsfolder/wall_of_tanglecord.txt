@@ -1,0 +1,10 @@
+Name:Wall of Tanglecord
+ManaCost:2
+Types:Artifact Creature Wall
+Text:no text
+PT:0/6
+K:Defender
+K:abPump G:0/0/Reach
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_tanglecord.jpg
+End
