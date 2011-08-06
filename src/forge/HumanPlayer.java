@@ -129,4 +129,17 @@ public class HumanPlayer extends Player{
         AllZone.InputControl.setInput(in);
 	}
 	
+	protected void clashMoveToTopOrBottom(Card c) {
+		String choice = "";
+    	String choices[] = {"top","bottom"};
+    	choice = (String) AllZone.Display.getChoice(c.getName()+" - Top or bottom of Library", choices);
+
+    	if(choice.equals("bottom"))  {
+    		AllZone.GameAction.moveToBottomOfLibrary(c);
+    	}
+    	else{
+    		AllZone.GameAction.moveToTopOfLibrary(c);
+    	}
+	}
+	
 }//end HumanPlayer class

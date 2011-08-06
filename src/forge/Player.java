@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 
 public abstract class Player extends MyObservable{
 	protected String name;
@@ -853,6 +855,63 @@ public abstract class Player extends MyObservable{
     public Card getChannelCard() {
     	return channelCard;
     }
+    
+    ////////////////////////////////
+	//
+	// Clash
+	//
+	/////////////////////////////////
+    
+    public boolean clashWithOpponent(Card source) {
+    	/*
+    	 * Each clashing player reveals the top card of his or
+    	 * her library, then puts that card on the top or bottom.
+    	 * A player wins if his or her card had a higher mana cost.
+    	 * 
+    	 * Clash you win or win you don't.  There is no tie.
+    	 */
+    	Player player = AllZone.Phase.getPlayerTurn();
+    	Player opponent = player.getOpponent();
+    	String lib = Constant.Zone.Library;
+    	
+    	PlayerZone pLib = AllZone.getZone(lib, player);
+    	PlayerZone oLib = AllZone.getZone(lib, opponent);
+    	
+    	StringBuilder reveal = new StringBuilder();
+    	
+    	Card pCard = null;
+    	Card oCard = null;
+    	
+    	if(pLib.size() > 0) pCard = pLib.get(0);
+    	if(oLib.size() > 0) oCard = oLib.get(0);
+    	
+    	if(pLib.size() == 0 && oLib.size() == 0) return false;
+    	else if(pLib.size() == 0) {
+    		opponent.clashMoveToTopOrBottom(oCard);
+    		return false;
+    	}
+    	else if(oLib.size() == 0) {
+    		player.clashMoveToTopOrBottom(pCard);
+    		return true;
+    	}
+    	else {
+    		int pCMC = CardUtil.getConvertedManaCost(pCard);
+    		int oCMC = CardUtil.getConvertedManaCost(oCard);
+    		reveal.append(player).append(" reveals: ").append(pCard.getName()).append(".  CMC = ").append(pCMC);
+    		reveal.append("\r\n");
+    		reveal.append(opponent).append(" reveals: ").append(oCard.getName()).append(".  CMC = ").append(oCMC);
+    		reveal.append("\r\n\r\n");
+    		if(pCMC > oCMC) reveal.append(player).append(" wins clash.");
+    		else reveal.append(player).append(" loses clash.");
+    		JOptionPane.showMessageDialog(null, reveal.toString(), source.getName(), JOptionPane.PLAIN_MESSAGE);
+    		player.clashMoveToTopOrBottom(pCard);
+    		opponent.clashMoveToTopOrBottom(oCard);
+    		//JOptionPane.showMessageDialog(null, reveal.toString(), source.getName(), JOptionPane.PLAIN_MESSAGE);
+    		return pCMC > oCMC;
+    	}
+    }
+    
+    protected abstract void clashMoveToTopOrBottom(Card c);
     
 	////////////////////////////////
 	//

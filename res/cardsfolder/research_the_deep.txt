@@ -1,0 +1,7 @@
+Name:Research the Deep
+ManaCost:1 U
+Types:Sorcery
+Text:no text
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/research_the_deep.jpg
+End
