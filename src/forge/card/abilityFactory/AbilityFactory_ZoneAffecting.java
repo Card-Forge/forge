@@ -690,6 +690,7 @@ public class AbilityFactory_ZoneAffecting {
 	//				-Random
 	//				-TgtChoose
 	//				-RevealYouChoose
+	//				-RevealOppChoose
 	//				-Hand
 	//DiscardValid - a ValidCards syntax for acceptable cards to discard
 	//UnlessType - a ValidCards expression for "discard x unless you discard a ..."
@@ -817,7 +818,7 @@ public class AbilityFactory_ZoneAffecting {
 					else p.discard(numCards, sa, true);
 				}
 
-				else if(mode.equals("RevealYouChoose")) {
+				else if(mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose")) {
 					// Is Reveal you choose right? I think the wrong player is being used?
 					PlayerZone pzH = AllZone.getZone(Constant.Zone.Hand, p);
 					if(pzH.size() != 0) {
@@ -828,8 +829,13 @@ public class AbilityFactory_ZoneAffecting {
 							String[] dValid = params.get("DiscardValid").split(",");
 							dPChHand = dPHand.getValidCards(dValid,source.getController(),source);
 						}
+						Player chooser = null;
+						if (mode.equals("RevealYouChoose"))
+							chooser = source.getController();
+						else chooser = source.getController().getOpponent();
+						
 
-						if(source.getController().isComputer()){
+						if(chooser.isComputer()){
 							//AI
 							for(int i = 0; i < numCards; i++) {
 								if (dPChHand.size() > 0){
