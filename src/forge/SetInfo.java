@@ -34,8 +34,10 @@ public class SetInfo{
 	
 	public boolean equals(Object o)
 	{
-		SetInfo siO = (SetInfo) o;
-		return Code.equals(siO.Code);
+		if(o instanceof SetInfo){
+			SetInfo siO = (SetInfo) o;
+			return Code.equals(siO.Code);
+		} else return false;
 		
 	}
 }

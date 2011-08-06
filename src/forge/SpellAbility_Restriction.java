@@ -82,7 +82,7 @@ public class SpellAbility_Restriction {
 		bNeedsThreshold = bThreshold;
 	}
 	
-	final private int THRESHOLD = 7;
+	final private static int THRESHOLD = 7;
 	
 	private String sIsPresent = null;
 	public void setIsPresent(String present){

@@ -28,7 +28,6 @@ abstract public class Spell extends SpellAbility implements java.io.Serializable
     @Override
     public boolean canPlay() {
     	Card card = getSourceCard();
-        PlayerZone zone = AllZone.getZone(card);
         
         if (card.isUnCastable())
         	return false;

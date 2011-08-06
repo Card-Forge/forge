@@ -87,11 +87,10 @@ public class HumanPlayer extends Player{
 	public void handToLibrary(final int numToLibrary, String libPos) {
 		if(libPos.equals("Top") || libPos.equals("Bottom")) libPos = libPos.toLowerCase();
         else {
-            Object o = new Object();
             String s = "card";
             if(numToLibrary > 1) s += "s";
             
-            o = AllZone.Display.getChoice("Do you want to put the " + s
+            Object o = AllZone.Display.getChoice("Do you want to put the " + s
                     + " on the top or bottom of your library?", new Object[] {"top", "bottom"});
             libPos = o.toString();
         }
