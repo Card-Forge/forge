@@ -3,5 +3,5 @@ ManaCost:1 U R
 Types:Sorcery
 Text:Flip a coin. If you win the flip, take an extra turn after this one.
 SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stitch_in_time
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stitch_in_time.jpg
 End
