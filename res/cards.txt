@@ -7428,7 +7428,7 @@ Prodigal Sorcerer
 Creature Human Wizard
 no text
 1/1
-abDamageCP T:1
+abDamageTgtCP T:1
 
 Kamahl, Pit Fighter
 4 R R

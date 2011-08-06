@@ -91,7 +91,7 @@ public class Combat
         CardList att = new CardList(getAttackers());
         //sum unblocked attackers' power
         for(int i = 0; i < att.size(); i++) {
-          if(! isBlocked(att.get(i))) {
+          if(! isBlocked(att.get(i)) || (getBlockers(att.get(i)).size() == 0 && att.get(i).getKeyword().contains("Trample")) ){
            int damageDealt = att.get(i).getNetAttack();
              if (CombatUtil.isDoranInPlay())
                 damageDealt = att.get(i).getNetDefense();
@@ -401,6 +401,7 @@ public class Combat
 		                  this.addDefendingDamage(trample, attacking.get(i));
 		               }
 	             }//1 blocker
+	             
 	             else if(getAttackingPlayer().equals(Constant.Player.Computer))
 	             {
 	              int damageDealt = attacking.get(i).getNetAttack();

@@ -56,7 +56,7 @@ public class Input_CombatDamage extends Input {
     public void damageCreatureAndPlayer() {
         String player = AllZone.Combat.getDefendingPlayer();
         if(player.equals("")) //this is a really bad hack, to allow raging goblin to attack on turn 1
-        player = Constant.Player.Computer;
+        	player = Constant.Player.Computer;
         PlayerLife life = AllZone.GameAction.getPlayerLife(player);
         
         life.subtractLife(AllZone.Combat.getTotalDefendingDamage());

@@ -9134,7 +9134,7 @@ public class CardFactory implements NewConstants {
                     all = all.filter(new CardListFilter(){
                     	public boolean addCard(Card c)
                     	{
-                    		return c.isCreature() && !c.getName().equals("Ball Lightning");
+                    		return c.isCreature() && !c.getName().equals("Ball Lightning") && !c.getName().equals("Groundbreaker");
                     	}
                     });
                     

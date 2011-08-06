@@ -600,52 +600,52 @@ public class CombatUtil {
         //if (AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers))
         if( /*AllZone.Phase.getPhase().equals("Declare Blockers") || */
         AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
-            //if (!c.getCreatureAttackedThisTurn())
-            //{
-            String cost = CardFactoryUtil.getPropagandaCost(c);
-            if(!cost.equals("0")) {
-                final Ability ability = new Ability(c, cost) {
-                    @Override
-                    public void resolve() {
-                        canAttack[0] = true;
-                    }
-                };
-                
-                final Command unpaidCommand = new Command() {
-                    
-                    private static final long serialVersionUID = -6483405139208343935L;
-                    
-                    public void execute() {
-                        canAttack[0] = false;
-                        AllZone.Combat.removeFromCombat(crd);
-                        crd.untap();
-                    }
-                };
-                
-                final Command paidCommand = new Command() {
-                    private static final long serialVersionUID = -8303368287601871955L;
-                    
-                    public void execute() {
-                        canAttack[0] = true;
-                    }
-                };
-                
-                if(c.getController().equals(Constant.Player.Human)) {
-                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Propaganda " + c + "\r\n",
-                            ability.getManaCost(), paidCommand, unpaidCommand));
-                } else //computer
-                {
-                    if(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
-                    else {
-                        canAttack[0] = false;
-                        AllZone.Combat.removeFromCombat(crd);
-                        crd.untap();
-                    }
-                }
-            }
+            if (!c.getCreatureAttackedThisTurn())
+            {
+	            String cost = CardFactoryUtil.getPropagandaCost(c);
+	            if(!cost.equals("0")) {
+	                final Ability ability = new Ability(c, cost) {
+	                    @Override
+	                    public void resolve() {
+	                        canAttack[0] = true;
+	                    }
+	                };
+	                
+	                final Command unpaidCommand = new Command() {
+	                    
+	                    private static final long serialVersionUID = -6483405139208343935L;
+	                    
+	                    public void execute() {
+	                        canAttack[0] = false;
+	                        AllZone.Combat.removeFromCombat(crd);
+	                        crd.untap();
+	                    }
+	                };
+	                
+	                final Command paidCommand = new Command() {
+	                    private static final long serialVersionUID = -8303368287601871955L;
+	                    
+	                    public void execute() {
+	                        canAttack[0] = true;
+	                    }
+	                };
+	                
+	                if(c.getController().equals(Constant.Player.Human)) {
+	                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Propaganda " + c + "\r\n",
+	                            ability.getManaCost(), paidCommand, unpaidCommand));
+	                } else //computer
+	                {
+	                    if(ComputerUtil.canPayCost(ability)) ComputerUtil.playNoStack(ability);
+	                    else {
+	                        canAttack[0] = false;
+	                        AllZone.Combat.removeFromCombat(crd);
+	                        crd.untap();
+	                    }
+	                }
+	            }
+	        }
+            c.setCreatureAttackedThisTurn(true);
         }
-        //c.setCreatureAttackedThisTurn(true);
-        //}
         return canAttack[0];
     }
     
