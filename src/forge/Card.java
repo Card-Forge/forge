@@ -120,6 +120,7 @@ public class Card extends MyObservable {
     private int							xLifePaid							= 0;
     
     private int 					     multiKickerMagnitude			   = 0;
+    private int							replicateMagnitude					= 0;
     
     private int 						sunburstValue						= 0;
     
@@ -1839,6 +1840,18 @@ public class Card extends MyObservable {
     	return multiKickerMagnitude;
     }
     
+    public void addReplicateMagnitude(int n) {
+    	replicateMagnitude += n;
+    }
+    
+    public void setReplicateMagnitude(int n) {
+    	replicateMagnitude = n;
+    }
+    
+    public int getReplicateMagnitude() {
+    	return replicateMagnitude;
+    }
+    
     //public int getAttack(){return attack;}
     
     //for cards like Giant Growth, etc.
@@ -2427,6 +2440,7 @@ public class Card extends MyObservable {
 	
     private String toMixedCase(String s)
     {
+    	if(s.equals("")) return s;
     	StringBuilder sb = new StringBuilder();
     	// to handle hyphenated Types
     	String[] types = s.split("-");
