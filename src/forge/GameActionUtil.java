@@ -722,75 +722,75 @@ public class GameActionUtil {
 				}
 			}// execute()
 
-			void DoCascade(Card c) {
-				final Player controller = c.getController();
-				final PlayerZone lib = AllZone.getZone(Constant.Zone.Library, controller);
-				final Card cascCard = c;
+            void DoCascade(Card c) {
+                final Player controller = c.getController();
+                final PlayerZone lib = AllZone.getZone(Constant.Zone.Library, controller);
+                final Card cascCard = c;
 
-				final Ability ability = new Ability(c, "0") {
-					@Override
-					public void resolve() {
-						CardList topOfLibrary = new CardList(lib.getCards());
-						CardList revealed = new CardList();
+                final Ability ability = new Ability(c, "0") {
+                    @Override
+                    public void resolve() {
+                        CardList topOfLibrary = new CardList(lib.getCards());
+                        CardList revealed = new CardList();
 
-						if(topOfLibrary.size() == 0) return;
+                        if (topOfLibrary.size() == 0) return;
 
-						Card cascadedCard = null;
-						Card crd;
-						int count = 0;
-						while(cascadedCard == null) {
-							crd = topOfLibrary.get(count++);
-							revealed.add(crd);
-							lib.remove(crd);
-							if((!crd.isLand() && CardUtil.getConvertedManaCost(crd.getManaCost()) < CardUtil.getConvertedManaCost(cascCard.getManaCost()))) cascadedCard = crd;
+                        Card cascadedCard = null;
+                        Card crd;
+                        int count = 0;
+                        while (cascadedCard == null) {
+                            crd = topOfLibrary.get(count++);
+                            revealed.add(crd);
+                            lib.remove(crd);
+                            if ((!crd.isLand() && CardUtil.getConvertedManaCost(crd.getManaCost()) < CardUtil.getConvertedManaCost(cascCard.getManaCost()))) cascadedCard = crd;
 
-							if(count == topOfLibrary.size()) break;
+                            if (count == topOfLibrary.size()) break;
 
-						}//while
-							AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
+                        }//while
+                        AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
 
-						if(cascadedCard != null && !cascadedCard.isUnCastable()) {
+                        if (cascadedCard != null && !cascadedCard.isUnCastable()) {
 
-							if(cascadedCard.getController().equals(AllZone.HumanPlayer)) {
-								String[] choices = {"Yes", "No"};
+                            if (cascadedCard.getController().equals(AllZone.HumanPlayer)) {
+                                StringBuilder title = new StringBuilder();
+                                title.append(cascCard.getName()).append(" - Cascade Ability");
+                                StringBuilder question = new StringBuilder();
+                                question.append("Cast ").append(cascadedCard.getName()).append(" without paying its mana cost?");
+                                
+                                int answer = JOptionPane.showConfirmDialog(null, question.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
+                                
+                                if (answer == JOptionPane.YES_OPTION) {
+                                    AllZone.GameAction.playCardNoCost(cascadedCard);
+                                    revealed.remove(cascadedCard);
+                                }
+                            } else //computer
+                            {
+                                ArrayList<SpellAbility> choices = cascadedCard.getBasicSpells();
 
-								Object q = null;
-
-								q = AllZone.Display.getChoiceOptional("Cast " + cascadedCard.getName() + "?", choices);
-								if(q != null) {
-									if(q.equals("Yes")) {
-										AllZone.GameAction.playCardNoCost(cascadedCard);
-										revealed.remove(cascadedCard);
-									}
-								}
-							} else //computer
-							{
-								ArrayList<SpellAbility> choices = cascadedCard.getBasicSpells();
-
-								for(SpellAbility sa:choices) {
-									if(sa.canPlayAI()) {
-										ComputerUtil.playStackFree(sa);
-										revealed.remove(cascadedCard);
-										break;
-									}
-								}
-							}
-						}
-						revealed.shuffle();
-						for(Card bottom:revealed) {
-							lib.add(bottom);
-						}
-					}
-				};
-				StringBuilder sb = new StringBuilder();
-				sb.append(c).append(" - Cascade.");
-				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
-			}
-		};
-		Cascade.execute();
-	}
+                                for (SpellAbility sa:choices) {
+                                    if (sa.canPlayAI()) {
+                                        ComputerUtil.playStackFree(sa);
+                                        revealed.remove(cascadedCard);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        revealed.shuffle();
+                        for (Card bottom:revealed) {
+                            lib.add(bottom);
+                        }
+                    }
+                };
+                StringBuilder sb = new StringBuilder();
+                sb.append(c).append(" - Cascade.");
+                ability.setStackDescription(sb.toString());
+                
+                AllZone.Stack.add(ability);
+            }
+        };
+        Cascade.execute();
+    }
 	
 	public static void playCard_Ripple(final Card c) {
 		Command Ripple = new Command() {
