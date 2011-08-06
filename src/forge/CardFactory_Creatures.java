@@ -6861,29 +6861,37 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
-        else if(cardName.equals("Visara the Dreadful") || cardName.equals("Avatar of Woe")) {
+        else if (cardName.equals("Visara the Dreadful") || cardName.equals("Avatar of Woe")) {
             final Ability_Tap ability = new Ability_Tap(card) {
                 private static final long serialVersionUID = 6371765024236754171L;
-               
+                
                 @Override
                 public boolean canPlayAI() {
-                    if(CardFactoryUtil.AI_doesCreatureAttack(card)) return false;
-                   
-                    return CardFactoryUtil.AI_getHumanCreature(card, true).size() != 0;
-                }
-               
+                    return getCreature().size() != 0 
+                        && !CardFactoryUtil.AI_doesCreatureAttack(card);
+                }//canPlayAI()
+                
+                CardList getCreature() {
+                    CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardFactoryUtil.canTarget(card, c) 
+                                && !c.getKeyword().contains("Indestructible");
+                        }
+                    });
+                    return list;
+                }//getCreature()
+                
                 @Override
                 public void chooseTargetAI() {
-                    CardList creature = CardFactoryUtil.AI_getHumanCreature(card, true);
-                    Card target = CardFactoryUtil.AI_getBestCreature(creature);
-                    setTargetCard(target);
-                }
-               
+                    Card best = CardFactoryUtil.AI_getBestCreature(getCreature());
+                    setTargetCard(best);
+                }//chooseTargetAI()
+                
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         AllZone.GameAction.destroyNoRegeneration(getTargetCard());
                     }
