@@ -1,0 +1,8 @@
+Name:Cabal Ritual
+ManaCost:1 B
+Types:Instant
+Text:Add B B B to your mana pool.\r\n\r\nThreshold Ñ Add B B B B B to your mana pool instead if seven or more cards are in your graveyard.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_ritual.jpg
+End

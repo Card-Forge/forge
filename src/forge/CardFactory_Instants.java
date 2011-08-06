@@ -2390,7 +2390,7 @@ public class CardFactory_Instants {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Dark Ritual")) {
+        else if(cardName.equals("Dark Ritual") || cardName.equals("Cabal Ritual")) {
             final SpellAbility spell = new Spell(card) {
                 
                 private static final long serialVersionUID = -8579887529151755266L;
@@ -2401,6 +2401,10 @@ public class CardFactory_Instants {
                     mp.addExtrinsicKeyword("ManaPool:B");
                     mp.addExtrinsicKeyword("ManaPool:B");
                     mp.addExtrinsicKeyword("ManaPool:B");
+                    if(cardName.equals("Cabal Ritual") && card.getController().hasThreshold()) {
+                    	mp.addExtrinsicKeyword("ManaPool:B");
+                        mp.addExtrinsicKeyword("ManaPool:B");
+                    }
                 }
                 
                 @Override
@@ -2409,10 +2413,10 @@ public class CardFactory_Instants {
                 }
             };
             StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" adds B B B to your mana pool");
+            sb.append(card.getName()).append(" adds B B B to your mana pool.");
+            if(cardName.equals("Cabal Ritual")) sb.append("If you have threshold, add extra B B.");
             spell.setStackDescription(sb.toString());
             
-            // spell.setStackDescription(cardName + " adds B B B to your mana pool");
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             
