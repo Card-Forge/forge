@@ -7,7 +7,7 @@ A:AB$ Mana | Cost$ T | Produced$ U | IsPresent$ Artifact | PresentCompare$ GE3 |
 A:AB$ Mana | Cost$ T | Produced$ B | IsPresent$ Artifact | PresentCompare$ GE3 | PrecostDesc$ Metalcraft - | SpellDescription$ Add B to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | IsPresent$ Artifact | PresentCompare$ GE3 | PrecostDesc$ Metalcraft - | SpellDescription$ Add R to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ G | IsPresent$ Artifact | PresentCompare$ GE3 | PrecostDesc$ Metalcraft - | SpellDescription$ Add G to your mana pool.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mox_opal.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/179.jpg
