@@ -6,4 +6,5 @@ A:SP$ChangeZone | Cost$ 5 B | Origin$ Library | Destination$ Exile | ValidTgts$ 
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightmare_incursion.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/40.jpg
 End

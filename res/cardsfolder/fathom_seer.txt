@@ -8,4 +8,5 @@ T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescripti
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fathom_seer.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/62.jpg
 End
