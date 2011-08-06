@@ -2266,7 +2266,7 @@ class CardFactory_Lands {
                      targ.addCounter(Counters.P1P1, 1);
                }
             };
-            ability.setDescription("tap: Put a +1/+1 counter on each creature that entered the battlefield this turn.");
+            ability.setDescription("G U, tap: Put a +1/+1 counter on each creature that entered the battlefield this turn.");
             ability.setStackDescription("Put a +1/+1 counter on each creature that entered the battlefield this turn.");
             card.addSpellAbility(ability);
          }
@@ -2322,7 +2322,7 @@ class CardFactory_Lands {
             //not sure what's going on here, maybe because it's a land it doesn't add the ability to the text?
             //anyway, this does the trick:
             //card.removeIntrinsicKeyword("tap: add 1");
-            card.setText(card.getSpellText() +  "\r\n  Put a 2/2 colorless Assembly-Worker artifact creature token onto the battlefield.");
+            //card.setText(card.getSpellText() +  "\r\n  Put a 2/2 colorless Assembly-Worker artifact creature token onto the battlefield.");
             //card.addIntrinsicKeyword("tap: add 1");
            
          }//*************** END ************ END **************************
