@@ -4129,6 +4129,7 @@ res/cardsfolder/nantuko_disciple.txt -text svneol=native#text/plain
 res/cardsfolder/nantuko_elder.txt -text svneol=native#text/plain
 res/cardsfolder/nantuko_husk.txt -text svneol=native#text/plain
 res/cardsfolder/nantuko_shade.txt -text svneol=native#text/plain
+res/cardsfolder/nantuko_tracer.txt svneol=native#text/plain
 res/cardsfolder/nantuko_vigilante.txt svneol=native#text/plain
 res/cardsfolder/narcissism.txt -text svneol=native#text/plain
 res/cardsfolder/narcomoeba.txt svneol=native#text/plain
