@@ -180,7 +180,7 @@ Crows in the Field.jpg
 
 19
 The Desert Caravan
-A caravan is transporting silk across the desert. While setting up camp for the night you are attacked by the thieves. Defend yourself.
+A caravan is transporting silk across the desert. While setting up camp for the night you are attacked by thieves. Defend yourself.
 Hard
 Not Repeatable
 100
@@ -206,6 +206,6 @@ Not Repeatable
 120
 Six random rares
 500
-blank.jpg
+Private Domain.jpg
 
 End
