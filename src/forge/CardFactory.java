@@ -7507,6 +7507,141 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END ************************** 
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Cruel Ultimatum")) {
+            final SpellAbility spell = new Spell(card) {
+
+				private static final long serialVersionUID = -6598023699468746L;
+
+				@Override
+                public void resolve() {
+					// Opponent Sacrifices Creature
+                    String player = card.getController();
+                    AllZone.Display.showMessage("Sacrifice a Creature: ");
+                    ButtonUtil.enableOnlyCancel();
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(card.getController()));                   
+                    CardList creature2 = new CardList();
+                    creature2.addAll(play.getCards());
+                    creature2 = creature2.getType("Creature");                   
+                    if(player != "Human"){
+                		if(creature2.size() > 0) {
+                        Card[] Target = new Card[creature2.size()];
+                        for(int i = 0; i < creature2.size(); i++) {
+            				Card crd = creature2.get(i);
+            				Target[i] = crd;
+                        }
+                        Object check = AllZone.Display.getChoice("Select creature", Target);
+                        if(check != null) {
+                            setTargetCard((Card) check);
+                        }
+                		}
+                    } else {
+                    		if(creature2.size() > 0) {
+                            Card smallest = creature2.get(0);
+                            for(int i = 0; i < creature2.size(); i++)
+                                if(smallest.getNetAttack() < creature2.get(i).getNetAttack()) smallest = creature2.get(i);                         
+                            		setTargetCard(smallest);
+                    				}
+                    }
+                    Card c = getTargetCard();
+                    AllZone.GameAction.sacrifice(c);
+                    
+                                 
+					// Opponent Discards 3 Cards
+                    PlayerZone Ohand = AllZone.getZone(Constant.Zone.Hand, AllZone.GameAction.getOpponent(card.getController()));
+                    Card h[] = Ohand.getCards();
+                    Card[] handChoices = Ohand.getCards();
+                    int Handsize = 3;
+                    if(h.length <= 3) Handsize = h.length;
+                    String opponent = AllZone.GameAction.getOpponent(card.getController());
+                    Card choice = null; 
+
+                    for(int i = 0; i < Handsize; i++) {
+                            AllZone.Display.showMessage("Select a card to discard " + (3 - i) + " more to discard");
+                            ButtonUtil.enableOnlyCancel();
+                        handChoices = Ohand.getCards();
+                        //human chooses
+                        if(opponent.equals(Constant.Player.Human)) {
+                            choice = AllZone.Display.getChoice("Choose", handChoices);
+                        } else//computer chooses
+                        {
+                            choice = CardUtil.getRandom(handChoices);
+                        }
+                        
+                        AllZone.GameAction.discard(choice);
+                    }
+                    
+					// Opponent Loses 5 Life
+                    PlayerLife target = AllZone.GameAction.getPlayerLife(opponent);
+			        target.subtractLife(5);
+
+					// Player Returns Creature Card from Graveyard to Hand
+                    if(player == "Human") {                 	
+                        AllZone.Display.showMessage("Return a creature from your graveyard to your hand: ");
+                        ButtonUtil.enableOnlyCancel();
+                        }
+                    
+                    CardList creature = new CardList();
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    if(zone != null) {
+                    creature.addAll(zone.getCards());
+                    creature = creature.getType("Creature"); 
+
+                    if(player == "Human"){
+                        Card[] Target = new Card[creature.size()];
+                        for(int i = 0; i < creature.size(); i++) {
+            				Card crd = creature.get(i);
+            				Target[i] = crd;
+                        }
+                        Object check = AllZone.Display.getChoiceOptional("Select creature", Target);
+                        if(check != null) {
+                            setTargetCard((Card) check);
+                        } 
+                    } else {
+                            Card biggest = creature.get(0);
+                            for(int i = 0; i < creature.size(); i++)
+                                if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
+                            		setTargetCard(biggest);
+                    				}
+                    Card c2 = getTargetCard();
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController()); 	                        
+                    if(AllZone.GameAction.isCardInZone(c2, grave)) {
+                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                        AllZone.GameAction.moveTo(hand, c2);
+                    }
+                    }
+					// Player Draws 3 Cards
+                    for(int i = 0; i < 3; i++) {
+                        AllZone.GameAction.drawCard(card.getController());
+                    }
+					// Player Gains 5 Life
+			        PlayerLife playerlife = AllZone.GameAction.getPlayerLife(card.getController());                   
+			        playerlife.addLife(5);
+			     
+				} // Resolve
+
+				public boolean canPlayAI() {
+                    String opponent = AllZone.GameAction.getOpponent(card.getController());
+                    PlayerLife target = AllZone.GameAction.getPlayerLife(opponent);	
+                    PlayerZone Lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+                    CardList Deck = new CardList();
+                    Deck.addAll(Lib.getCards()); 
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(card.getController()));                   
+                    CardList creature = new CardList();
+                    creature.addAll(play.getCards());
+                    creature = creature.getType("Creature"); 
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    CardList creature2 = new CardList();
+                    creature2.addAll(zone.getCards());
+                    creature2 = creature2.getType("Creature");
+                return (Deck.size() > 2 && (target.getLife() <= 5 || (creature.size() > 0 && creature2.size() > 0)));
+        }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Tendrils of Agony")) {
             SpellAbility spell = new Spell(card) {
@@ -13933,6 +14068,19 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Chalice of the Void")) {
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = -7679939432259603542L;
+                
+                public void execute() {
+                	int XCounters = card.getXManaCostPaid();
+                	card.addCounter(Counters.CHARGE, XCounters);                
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+        }
+        //*************** END ************ END **************************     
 
         //*************** START *********** START **************************
         else if(cardName.equals("Counterbalance")) {

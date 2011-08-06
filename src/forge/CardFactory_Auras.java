@@ -5,6 +5,8 @@ package forge;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import javax.swing.JOptionPane;
+
 
 class CardFactory_Auras {
 	
@@ -605,6 +607,144 @@ class CardFactory_Auras {
             };
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************		
+
+        //*************** START *********** START **************************
+        else if(cardName.equals("Spreading Seas")) {
+            
+            final SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = 53941812202244498L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());
+                    list = list.getType("Land");
+                    
+                    if(list.isEmpty()) return false;
+                    
+                    setTargetCard(list.get(0));
+                    return true;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
+                    
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+                
+
+                private static final long serialVersionUID = 3528675502863241126L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.removeType("Swamp");
+                        crd.removeType("Forest");
+                        crd.removeType("Island");
+                        crd.removeType("Plains");
+                        crd.removeType("Mountain");
+                        
+                        crd.addType("Island");
+                    	SpellAbility[] Abilities = crd.getSpellAbility();
+                    	for(int i = 0; i < Abilities.length; i++) {
+                    		card.addSpellAbility(Abilities[i]);
+                        	}
+                        crd.clearSpellAbility();
+                        crd.addSpellAbility(new Ability_Mana(card, "tap: add U") {
+                            private static final long serialVersionUID = 787103012484588884L;
+                        });
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+                private static final long serialVersionUID = -2021446345291180334L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {                       
+                        Card crd = card.getEnchanting().get(0);
+                        ArrayList<Card> Seas = crd.getEnchantedBy();
+                        int Count = 0;
+                        for(int i = 0; i < Seas.size(); i++) {
+                        if(Seas.get(i).getName().equals("Spreading Seas")) Count = Count + 1;	
+                        }
+                        if(Count == 1) {
+                            crd.removeType("Island");
+                            crd.removeType("Land");
+                            crd.removeType("Basic");
+                            crd.removeType("Snow");
+                            crd.removeType("Legendary");
+                            crd.clearSpellAbility();
+                        	Card c = AllZone.CardFactory.copyCard(crd);                       	
+                        	ArrayList<String> Types = c.getType();
+                        	SpellAbility[] Abilities = card.getSpellAbility();
+                        	for(int i = 0; i < Types.size(); i++) {
+                        	crd.addType(Types.get(i));	
+                        	}
+                        	for(int i = 0; i < Abilities.length; i++) {
+                            	crd.addSpellAbility(Abilities[i]);	
+                            	}
+                        	JOptionPane.showMessageDialog(null, Abilities, "", JOptionPane.INFORMATION_MESSAGE);
+
+                        	// Restoring the card gives it the abilities from the copied card. This card is not in play and has no counters and thus the Dark Depths Error
+                        }   
+                    }
+                    
+                }//execute()
+            };//Command
+
+
+            
+            Command onLeavesPlay = new Command() {
+                
+                private static final long serialVersionUID = -4543302260602460839L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+            Input runtime = new Input() {
+                
+                private static final long serialVersionUID = -6237279587146079880L;
+                
+                @Override
+                public void showMessage() {
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    CardList land = new CardList();
+                    land.addAll(comp.getCards());
+                    land.addAll(hum.getCards());
+                    land = land.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isLand();
+                        }
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land", true,
+                            false));
+                }
+            };
+            spell.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
         else if(cardName.equals("Cursed Land")) {

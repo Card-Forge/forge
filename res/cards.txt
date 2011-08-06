@@ -1,3 +1,25 @@
+Spreading Seas
+1 U
+Enchantment Aura
+Enchanted land is an Island.
+Enchant land
+When CARDNAME enters the battlefield, draw a card.
+
+Chalice of the Void
+X X 0
+Artifact
+Chalice of the Void enters the battlefield with X charge counters on it. Whenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.
+
+Teferi's Puzzle Box
+4
+Artifact
+At the beginning of each player's draw step, that player puts the cards in his or her hand on the bottom of his or her library in any order, then draws that many cards.
+
+Cruel Ultimatum
+U U B B B R R
+Sorcery
+Target opponent sacrifices a creature, discards three cards, then loses 5 life. You return a creature card from your graveyard to your hand, draw three cards, then gain 5 life.
+
 Omnath, Locus of Mana
 2 G
 Legendary Creature Elemental

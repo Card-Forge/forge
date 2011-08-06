@@ -1250,7 +1250,7 @@ class CardFactory_Lands {
                         if(sa.getSourceCard().equals(card)) return false;
                     }
                     
-                    if(card.getCounters(Counters.ICE) > 0 && AllZone.GameAction.isCardInPlay(card)) return true;
+                    if(card.getCounters(Counters.ICE) > 0 && AllZone.GameAction.isCardInPlay(card) && card.isEnchantedBy("Spreading Seas") == false) return true; // Dodgy Fix to Spreading Seas
                     else return false;
                 }
                 
@@ -1278,7 +1278,7 @@ class CardFactory_Lands {
             	//TODO - this should probably be a state effect
                 @Override
                 public boolean canPlay() {
-                    return card.getCounters(Counters.ICE) == 0 && AllZone.GameAction.isCardInPlay(card);
+                    return card.getCounters(Counters.ICE) == 0 && AllZone.GameAction.isCardInPlay(card)&& card.isEnchantedBy("Spreading Seas") == false; // Dodgy Fix to Spreading Seas
                 }
                 
                 @Override

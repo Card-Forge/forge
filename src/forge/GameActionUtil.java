@@ -109,6 +109,7 @@ public class GameActionUtil {
 		// cause black vise to do an extra point of
 		// damage if black vise was in play
 		upkeep_Font_of_Mythos();
+		upkeep_Teferi_Puzzle_Box();
 		upkeep_Overbeing_of_Myth();
 
 		upkeep_AI_Aluren(); // experimental, just have the AI dump his small
@@ -263,6 +264,7 @@ public class GameActionUtil {
         playCard_Storm(c);
 
 		playCard_Dovescape(c); //keep this one top
+		playCard_Chalice_of_the_Void(c);
 		playCard_Vengevine(c);
 		playCard_Demigod_of_Revenge(c);
 		playCard_Halcyon_Glaze(c);
@@ -270,7 +272,7 @@ public class GameActionUtil {
 		playCard_Infernal_Kirin(c);
 		playCard_Cloudhoof_Kirin(c);
 		playCard_Bounteous_Kirin(c);
-		playCard_Emberstrike_Duo(c);
+		playCard_Emberstrike_Duo(c);		
 		playCard_Gravelgill_Duo(c);
 		playCard_Safehold_Duo(c);
 		playCard_Tattermunge_Duo(c);
@@ -1095,7 +1097,33 @@ public class GameActionUtil {
 
 
 	}//Gravelgill Duo
+	
+	public static void playCard_Chalice_of_the_Void(Card c) {
+		CardList list = AllZoneUtil.getCardsInPlay();
+		list = list.getName("Chalice of the Void");
 
+		if(list.size() > 0) {
+			for(int i = 0; i < list.size(); i++) {
+			final Card card = list.get(i);
+			final SpellAbility sa = AllZone.Stack.peek();
+			Ability ability2 = new Ability(card, "0") {
+				@Override
+				public void resolve() {
+					AllZone.Stack.pop();
+                    AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+				}
+			}; // ability2
+
+			ability2.setStackDescription(card.getName() + " - " + c.getController()
+					+ " played a spell with same amount of charge counters on Chalice of the Void. The spell is countered");
+			
+                      
+            int convertedManaSpell = CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost());								
+			if(sa.isSpell() == true && card.getCounters(Counters.CHARGE) == convertedManaSpell) AllZone.Stack.add(ability2);	
+		}					
+			}//if
+		} // Chalice_of_the_Void 
+	
 	public static void playCard_Safehold_Duo(Card c) {
 		final String controller = c.getController();
 
@@ -8390,6 +8418,52 @@ public class GameActionUtil {
 			AllZone.GameAction.drawCard(player);
 		}
 	}// upkeep_Font_of_Mythos()
+	
+	private static void upkeep_Teferi_Puzzle_Box() {
+		final String player = AllZone.Phase.getActivePlayer();
+
+		CardList list = new CardList();
+		list.addAll(AllZone.Human_Play.getCards());		
+		list.addAll(AllZone.Computer_Play.getCards());
+		list = list.getName("Teferi's Puzzle Box");
+        PlayerZone Playerhand = AllZone.getZone(Constant.Zone.Hand, player);
+        PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player); 
+       
+		CardList hand = new CardList();
+		Card[] handlist = null;
+		if(list.size() > 0) {
+            AllZone.Display.showMessage("Shuffle cards back into your library: ");
+            ButtonUtil.enableOnlyCancel();
+		AllZone.GameAction.drawCard(player); // Player draws a card in the draw phase before this card activates
+        hand.addAll(Playerhand.getCards());            
+			int Count = hand.size();
+            for(int i = 0; i < list.size(); i++) {           	
+            	if(player == "Human") {            
+                    for(int e = 0; e < Count; e++) {
+                    if(hand.size() == 0) hand.addAll(Playerhand.getCards());
+                    handlist = hand.toArray();
+                    Object check = AllZone.Display.getChoice("Select card to put on bottom of library", handlist);
+                    if(check != null) {
+                      Card target = ((Card) check);
+                      hand.remove(target);
+                       AllZone.GameAction.moveTo(lib, target);    
+                    }
+                    }
+            	}else {
+                    for(int x = 0; x < hand.size(); x++) hand.remove(hand.get(x));
+                    hand.addAll(Playerhand.getCards());
+                    for(int e = 0; e < hand.size(); e++) {
+                    AllZone.GameAction.moveTo(lib, hand.get(e)); 
+                    }
+            	}
+            	if(i == list.size() - 1) Count = Count - 1; // To remove the effect of the initial hack draw
+			for(int d = 0; d < Count; d++) {			
+				AllZone.GameAction.drawCard(player);
+			}
+		}
+		}
+
+	}// Teferi_Puzzle_Box
 
 	private static void upkeep_Overbeing_of_Myth() {
 		final String player = AllZone.Phase.getActivePlayer();

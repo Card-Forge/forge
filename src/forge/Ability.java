@@ -17,8 +17,8 @@ abstract public class Ability extends SpellAbility {
     @Override
     public boolean canPlay() {
 //      if(getSourceCard().isCreature() && (!getSourceCard().hasSickness()))
-        return AllZone.GameAction.isCardInPlay(getSourceCard()) && !getSourceCard().isFaceDown();
-        
+        return AllZone.GameAction.isCardInPlay(getSourceCard()) && !getSourceCard().isFaceDown() && getSourceCard().getName().equals("Spreading Seas") == false; // For Spreading Seas
+           
 //      return false;
     }
 }
