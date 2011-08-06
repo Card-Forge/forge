@@ -1077,8 +1077,13 @@ public class CombatUtil {
                     
                 };//ability
                 
-                ability2.setStackDescription(c.getName() + " - +1/+1 until end of turn for each Forest"
-                        + charger.getController() + " controls.");
+                StringBuilder sb = new StringBuilder();
+                sb.append(c.getName());
+                sb.append(" - +1/+1 until end of turn for each Forest ");
+                sb.append(charger.getController());
+                sb.append(" controls.");
+                ability2.setStackDescription(sb.toString());
+                
                 AllZone.Stack.add(ability2);
                 
             }//Timbermaw Larva
