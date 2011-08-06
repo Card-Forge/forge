@@ -2722,16 +2722,17 @@ public class CardFactory_Instants {
             return card;
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
-        else if(cardName.equals("Path to Exile")) {
+        else if (cardName.equals("Path to Exile")) {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 4752934806606319269L;
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                    	Player player = getTargetCard().getController();
+                        Player player = getTargetCard().getController();
                         PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                         
                         //remove card from play
@@ -2741,13 +2742,13 @@ public class CardFactory_Instants {
                         CardList lands = new CardList(lib.getCards());
                         lands = lands.getType("Basic");
                         
-                        if(player.equals(AllZone.HumanPlayer) && lands.size() > 0) {
-                            String[] choices = {"Yes", "No"};
-                            Object choice = AllZone.Display.getChoice("Search for Basic Land?", choices);
-                            if(choice.equals("Yes")) {
-                                Object o = AllZone.Display.getChoiceOptional(
-                                        "Pick a basic land card to put into play", lands.toArray());
-                                if(o != null) {
+                        if (player.equals(AllZone.HumanPlayer) && lands.size() > 0) {
+                            String question = "Pick a basic land card to put onto the battlefield tapped?";
+                            
+                            if (GameActionUtil.showYesNoDialog(card, question)) {
+                                Object o = AllZone.Display.getChoiceOptional("Choose a Basic Land", lands.toArray());
+                                
+                                if (o != null) {
                                     Card card = (Card) o;
                                     lib.remove(card);
                                     AllZone.Human_Battlefield.add(card);
@@ -2756,8 +2757,11 @@ public class CardFactory_Instants {
                                     player.shuffle();
                                 }
                             }// if choice yes
+                            
                         } // player equals human
-                        else if(player.equals(AllZone.ComputerPlayer) && lands.size() > 0) {
+                        
+                        // // player equals computer
+                        else if (player.equals(AllZone.ComputerPlayer) && lands.size() > 0) {
                             Card card = lands.get(0);
                             lib.remove(card);
                             // hand.add(card);
