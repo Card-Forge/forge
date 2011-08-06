@@ -1,3 +1,25 @@
+Diamond Valley
+no cost
+Land
+tap: Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
+
+People of the Woods
+G G
+Creature Human
+People of the Woods's toughness is equal to the number of Forests you control.
+1/0
+
+Jandor's Saddlebags
+2
+Artifact
+no text
+
+Gaea's Avenger
+1 G G
+Creature Treefolk
+Gaea's Avenger's power and toughness are each equal to 1 plus the number of artifacts your opponents control.
+1/1
+
 Exotic Orchard
 no cost
 Land

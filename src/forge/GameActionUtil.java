@@ -10088,6 +10088,61 @@ public class GameActionUtil {
                                                               else return false;
                                                           }
                                                       };
+                                                      
+                                                      
+     public static Command Gaeas_Avenger                   = new Command() {
+                                                          private static final long serialVersionUID = 1987511098173387864L;
+                                                         
+                                                          public void execute() {
+                                                              // get all creatures
+                                                              CardList list = new CardList();
+                                                              list.addAll(AllZone.Human_Play.getCards());
+                                                              list.addAll(AllZone.Computer_Play.getCards());
+                                                              list = list.getName("Gaea's Avenger");
+                                                             
+                                                              for(int i = 0; i < list.size(); i++) {
+                                                                  Card c = list.get(i);
+                                                                  c.setBaseAttack(countOppArtifacts(c)+1);
+                                                                  c.setBaseDefense(c.getBaseAttack());
+                                                              }
+                                                             
+                                                          }// execute()
+                                                         
+                                                          private int countOppArtifacts(Card c) {
+                                                              PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(c.getController()));
+                                                              CardList artifacts = new CardList(play.getCards());
+                                                              artifacts = artifacts.getType("Artifact");
+                                                              return artifacts.size();
+                                                          }
+                                                      };
+                                                      
+    public static Command People_of_the_Woods                   = new Command() {
+                                                          private static final long serialVersionUID = 1987554325573387864L;
+                                                         
+                                                          public void execute() {
+                                                              // get all creatures
+                                                              CardList list = new CardList();
+                                                              list.addAll(AllZone.Human_Play.getCards());
+                                                              list.addAll(AllZone.Computer_Play.getCards());
+                                                              list = list.getName("People of the Woods");
+                                                             
+                                                              for(int i = 0; i < list.size(); i++) {
+                                                                  Card c = list.get(i);
+                                                                  c.setBaseAttack(1);
+                                                                  c.setBaseDefense(countForests(c));
+                                                              }
+                                                             
+                                                          }// execute()
+                                                         
+                                                          private int countForests(Card c) {
+                                                              PlayerZone play = AllZone.getZone(
+                                                                      Constant.Zone.Play, c.getController());
+                                                              CardList forests = new CardList(play.getCards());
+                                                              forests = forests.getType("Forest");
+                                                              return forests.size();
+                                                          }
+                                                      };  
+
     
     public static Command Kird_Ape                    = new Command() {
                                                           private static final long serialVersionUID = 3448725650293971110L;
@@ -12637,8 +12692,8 @@ public class GameActionUtil {
                                                               
                                                               if(list.size() > 0) {
                                                                   Card c = list.get(0);
-                                                                  c.setBaseAttack(countAuras(c) * 2);
-                                                                  c.setBaseDefense(c.getBaseAttack() + 1);
+                                                                  c.setBaseAttack(5 + (countAuras(c) * 2));
+                                                                  c.setBaseDefense(c.getBaseAttack());
                                                               }
                                                               
                                                           }// execute()
@@ -14974,8 +15029,10 @@ public class GameActionUtil {
         commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
         commands.put("Dakkon", Dakkon);
         commands.put("Korlash", Korlash);
-        
+
         commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
+        commands.put("People_of_the_Woods", People_of_the_Woods);
+        commands.put("Gaeas_Avenger", Gaeas_Avenger);
         commands.put("Vexing_Beetle", Vexing_Beetle);
         commands.put("Sejiri_Merfolk", Sejiri_Merfolk);
         commands.put("Kird_Ape", Kird_Ape);

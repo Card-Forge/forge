@@ -17400,6 +17400,35 @@ public class CardFactory implements NewConstants {
            
             return card;
         }//*************** END ************ END **************************
+        
+      //*****************************START*******************************
+        if(cardName.equals("Jandor's Saddlebags")) {
+           /* Assuing the Rules state that this can target an untapped card,
+            * but it won't do anything useful
+            *
+            * This would bring the ruling in line with Icy Manipulator
+            * */
+           
+           final Ability_Tap ability = new Ability_Tap(card, "3") {
+         private static final long serialVersionUID = 6349074098650621348L;
+         public boolean canPlayAI() {
+                 return false;
+              }
+              public void chooseTargetAI() {
+                 //setTargetCard(c);
+              }//chooseTargetAI()
+              public void resolve() {
+                 if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
+                    getTargetCard().untap();
+                 }
+              }
+           };//SpellAbility
+           
+           card.addSpellAbility(ability);
+           ability.setDescription("3, tap: Untap target creature.");
+           ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Creature"));
+        }//Jandor's Saddlebags
+        //****************END*******END***********************
 
         
         // Cards with Cycling abilities

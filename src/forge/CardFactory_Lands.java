@@ -2787,6 +2787,68 @@ class CardFactory_Lands {
             a1.setDescription("2 R G: Until end of turn, Raging Ravine becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" It's still a land.");
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Diamond Valley")) {
+            final Ability_Tap ability = new Ability_Tap(card, "0") {
+               
+                private static final long serialVersionUID = -6589125674356046586L;
+               
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature();
+                        }
+                    });
+                   
+                    if(list.size() > 0 && AllZone.Computer_Life.getLife() < 5 ) setTargetCard(CardFactoryUtil.AI_getBestCreature(list, card));
+                   
+                    return list.size() > 0;
+                }
+               
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                   
+                    if(c != null) {
+                        if(CardFactoryUtil.canTarget(card, c) && c.isCreature() ) {
+                           AllZone.GameAction.addLife(c.getController(),c.getNetDefense());
+                           AllZone.GameAction.sacrifice(c);
+                        }
+                    }
+                }
+            };
+           
+            Input runtime = new Input() {
+               
+                private static final long serialVersionUID = -7649177692384343204L;
+               
+                @Override
+                public void showMessage() {
+                    CardList choice = new CardList();
+                    final String player = AllZone.Phase.getActivePlayer();
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    choice.addAll(play.getCards());
+
+                    choice = choice.getType("Creature");
+                    choice = choice.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return (c.isCreature());
+                        }
+                    });
+                   
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice,
+                            "Select target creature:", true, false));
+                }
+            };
+
+            card.addSpellAbility(ability);
+            ability.setBeforePayMana(runtime);
+           
+        }//*************** END ************ END **************************
+
+        
 
         if(hasKeyword(card, "Cycling") != -1) {
             int n = hasKeyword(card, "Cycling");
