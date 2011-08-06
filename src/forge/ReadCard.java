@@ -91,7 +91,12 @@ public class ReadCard implements Runnable, NewConstants {
             String s = readLine();
             while (!s.equals("End"))
             {
-            	if (s.startsWith("Name:"))
+            	if (s.startsWith("#"))
+            	{
+            		//no need to do anything, this indicates a comment line
+            	}
+            	
+            	else if (s.startsWith("Name:"))
             	{
             		String t = s.substring(5);
             		//System.out.println(s);
