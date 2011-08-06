@@ -507,7 +507,6 @@ src/forge/Mana_PartColorless.java svneol=native#text/plain
 src/forge/Mana_PartSnow.java svneol=native#text/plain
 src/forge/Mana_PartSplit.java svneol=native#text/plain
 src/forge/Mana_PartTest.java svneol=native#text/plain
-src/forge/Mana_PayCost.java -text svneol=native#text/plain
 src/forge/MenuItem_HowToPlay.java svneol=native#text/plain
 src/forge/Move.java svneol=native#text/plain
 src/forge/MoveAttack.java svneol=native#text/plain
