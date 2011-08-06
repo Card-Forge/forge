@@ -3393,7 +3393,12 @@ public class GameActionUtil {
 		 * choice. It can't be regenerated.
 		 */
 		final String player = AllZone.Phase.getActivePlayer();
-		final CardList cards = AllZoneUtil.getCardsInPlay("The Abyss");
+		final CardList the = AllZoneUtil.getCardsInPlay("The Abyss");
+		final CardList magus = AllZoneUtil.getCardsInPlay("Magus of the Abyss");
+		
+		CardList cards = new CardList();
+		cards.add(the);
+		cards.add(magus);
 		
 		for(Card c:cards) {
 			final Card abyss = c;
