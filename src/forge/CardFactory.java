@@ -5060,7 +5060,7 @@ public class CardFactory implements NewConstants {
                 public void execute() {
                 	
                 	StringBuilder sb = new StringBuilder();
-                	sb.append("When ").append(card.getName()).append(" comes into play, choose a creature type.");
+                	sb.append("When ").append(card.getName()).append(" enters the battlefield, choose a creature type.");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -5136,7 +5136,7 @@ public class CardFactory implements NewConstants {
                     };
                     StringBuilder sb = new StringBuilder();
                     sb.append(card.getName()).append(" - ").append(card.getController());
-                    sb.append(" puts a 1/1 ").append(t).append(" token into play");
+                    sb.append(" puts a 1/1 ").append(t).append(" token onto the battlefield");
                     a1.setStackDescription(sb.toString());
                     
                     card.addSpellAbility(a1);
@@ -5350,7 +5350,7 @@ public class CardFactory implements NewConstants {
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         AllZone.GameAction.exile(getTargetCard());
                         
-                        //put permanent into play
+                        //put permanent onto the battlefield
                         Card c = getSourceCard();
                         AllZone.getZone(Constant.Zone.Battlefield, c.getController()).add(c);
                     }
@@ -5587,11 +5587,11 @@ public class CardFactory implements NewConstants {
                 }
             };
             
-            necrogen.setDescription("2: Exile target creature card in a graveyard. Put a 1/1 green Saproling creature token into play.");
+            necrogen.setDescription("2: Exile target creature card in a graveyard. Put a 1/1 green Saproling creature token onto the battlefield.");
             
             StringBuilder sb = new StringBuilder();
             sb.append(card.getController());
-            sb.append(" exiles target creature card in a graveyard. Puts a 1/1 green Saproling creature token into play.");
+            sb.append(" exiles target creature card in a graveyard. Puts a 1/1 green Saproling creature token onto the battlefield.");
             necrogen.setStackDescription(sb.toString());
             
             necrogen.setAfterPayMana(necroTarget);
@@ -6175,7 +6175,7 @@ public class CardFactory implements NewConstants {
                 	// the landfall ability
                     AllZone.GameAction.sacrifice(getSourceCard());
 
-                	// Put two basic lands into play tapped
+                	// Put two basic lands onto the battlefield tapped
                 	AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(),
                 			Constant.Zone.Battlefield, true, Constant.Zone.Battlefield, true);
                 }
@@ -6237,7 +6237,7 @@ public class CardFactory implements NewConstants {
                 private static final long serialVersionUID = -7679939432259603542L;
                 
                 public void execute() {
-                    ability.setStackDescription("If Mox Diamond would come into play, you may discard a land card instead. If you do, put Mox Diamond into play. If you don't, put it into its owner's graveyard.");
+                    ability.setStackDescription("If Mox Diamond would enter the battlefield, you may discard a land card instead. If you do, put Mox Diamond onto the battlefield. If you don't, put it into its owner's graveyard.");
                     AllZone.Stack.add(ability);
                 }
             };

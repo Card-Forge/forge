@@ -1175,11 +1175,11 @@ public class CardFactoryUtil {
         };
         StringBuilder sbDesc = new StringBuilder();
         sbDesc.append(cost).append(", tap: Search your library for a Mercenary permanent card with converted mana cost ");
-        sbDesc.append(cost).append(" or less and put it into play. Then shuffle your library.");
+        sbDesc.append(cost).append(" or less and put it onto the battlefield. Then shuffle your library.");
         ability.setDescription(sbDesc.toString());
         
         StringBuilder sbStack = new StringBuilder();
-        sbStack.append(sourceCard.getName()).append(" - search for a Mercenary and put it into play.");
+        sbStack.append(sourceCard.getName()).append(" - search for a Mercenary and put it onto the battlefield.");
         ability.setStackDescription(sbStack.toString());
         
         return ability;
@@ -1288,11 +1288,11 @@ public class CardFactoryUtil {
         };
         StringBuilder sbDesc = new StringBuilder();
         sbDesc.append(cost).append(", tap: Search your library for a Rebel permanent card with converted mana cost ");
-        sbDesc.append(converted).append(" or less and put it into play. Then shuffle your library.");
+        sbDesc.append(converted).append(" or less and put it onto the battlefield. Then shuffle your library.");
         ability.setDescription(sbDesc.toString());
         
         StringBuilder sbStack = new StringBuilder();
-        sbStack.append(sourceCard.getName()).append(" - search for a Rebel and put it into play.");
+        sbStack.append(sourceCard.getName()).append(" - search for a Rebel and put it onto the battlefield.");
         ability.setStackDescription(sbStack.toString());
         
         return ability;
@@ -2073,7 +2073,7 @@ public class CardFactoryUtil {
             
             public void execute() {
                 
-                //testAndSet - only needed when comes into play.
+                //testAndSet - only needed when enters the battlefield.
                 if(firstTime) {
                     sourceCard.addCounter(Counters.FADE, Power);
                 }
@@ -2090,7 +2090,7 @@ public class CardFactoryUtil {
             
             public void execute() {
                 
-                //testAndSet - only needed when comes into play.
+                //testAndSet - only needed when enters the battlefield
                 if(firstTime) {
                     sourceCard.addCounter(Counters.TIME, Power);
                 }

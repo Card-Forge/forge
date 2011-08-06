@@ -1309,7 +1309,7 @@ public class CombatUtil {
                 
                 if(enchantments.size() > 0) {
                     if(c.getController().isHuman()) {
-                        Object o = AllZone.Display.getChoiceOptional("Pick an enchantment to put into play",
+                        Object o = AllZone.Display.getChoiceOptional("Pick an enchantment to put onto the battlefield",
                                 enchantments.toArray());
                         if(o != null) {
                             Card crd = (Card) o;
@@ -1375,7 +1375,7 @@ public class CombatUtil {
                 
                 if(creatures.size() > 0) {
                     if(c.getController().isHuman()) {
-                        Object o = AllZone.Display.getChoiceOptional("Pick a creature to put into play",
+                        Object o = AllZone.Display.getChoiceOptional("Pick a creature to put onto the battlefield",
                                 creatures.toArray());
                         if(o != null) {
                             Card card = (Card) o;
@@ -1384,7 +1384,7 @@ public class CombatUtil {
                             
                             card.tap();
                             AllZone.Combat.addAttacker(card);
-                            //the card that gets put into play tapped and attacking might trigger another ability:
+                            //the card that gets put onto the battlefield tapped and attacking might trigger another ability:
                             //however, this turns out to be incorrect rules-wise
                             //checkDeclareAttackers(card); 
                         }
@@ -1676,7 +1676,7 @@ public class CombatUtil {
                 }; //Ability
                 
                 StringBuilder sb2 = new StringBuilder();
-                sb2.append(c.getName()).append(" - put a 2/2 green Cat Warrior creature token with forestwalk into play.");
+                sb2.append(c.getName()).append(" - put a 2/2 green Cat Warrior creature token with forestwalk onto the battlefield.");
                 ability2.setStackDescription(sb2.toString());
                 
                 AllZone.Stack.add(ability2);
@@ -1697,7 +1697,7 @@ public class CombatUtil {
                 }; //Ability
                 
                 StringBuilder sb2 = new StringBuilder();
-                sb2.append(c.getName()).append(" - put a 2/2 black Zombie creature token into play.");
+                sb2.append(c.getName()).append(" - put a 2/2 black Zombie creature token onto the battlefield.");
                 ability2.setStackDescription(sb2.toString());
                 
                 AllZone.Stack.add(ability2);
@@ -1793,7 +1793,7 @@ public class CombatUtil {
                 
                 if(soldiers.size() > 0) {
                     if(c.getController().equals(AllZone.HumanPlayer)) {
-                        Object o = AllZone.Display.getChoiceOptional("Pick a soldier to put into play",
+                        Object o = AllZone.Display.getChoiceOptional("Pick a soldier to put onto the battlefield",
                                 soldiers.toArray());
                         if(o != null) {
                             Card card = (Card) o;
@@ -1802,7 +1802,7 @@ public class CombatUtil {
                             
                             card.tap();
                             AllZone.Combat.addAttacker(card);
-                            //the card that gets put into play tapped and attacking might trigger another ability:
+                            //the card that gets put onto the battlefield tapped and attacking might trigger another ability:
                             //however, this turns out to be incorrect rules-wise
                             //checkDeclareAttackers(card); 
                             card.setCreatureAttackedThisCombat(true);
@@ -2686,7 +2686,7 @@ public class CombatUtil {
             
             StringBuilder sb4 = new StringBuilder();
             sb4.append(c).append(" - (Exalted) searches library for an Aura card that could enchant that creature, ");
-            sb4.append("put it into play attached to that creature, then shuffles library.");
+            sb4.append("put it onto the battlefield attached to that creature, then shuffles library.");
             ability4.setStackDescription(sb4.toString());
             
             AllZone.Stack.add(ability4);

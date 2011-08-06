@@ -174,7 +174,7 @@ public class CardFactory_Creatures {
                     AllZone.Stack.add(ability);
                 }
             };//Command
-            ability.setStackDescription("Caller of the Claw - Put a 2/2 green Bear creature token into play for each nontoken creature put into your graveyard from play this turn.");
+            ability.setStackDescription("Caller of the Claw - Put a 2/2 green Bear creature token onto the battlefield for each nontoken creature put into your graveyard from play this turn.");
             card.addComesIntoPlayCommand(comesIntoPlay);
             
             SpellAbility spell = new Spell_Permanent(card) {
@@ -236,7 +236,7 @@ public class CardFactory_Creatures {
 	                            //CardFactory cf = new CardFactory("cards.txt");
 	                            
 	
-	                            //copy creature and put it into play
+	                            //copy creature and put it onto the battlefield
 	                            //copy = getCard(getTargetCard(), getTargetCard().getName(), card.getController());
 	                            copy = cfact.getCard(getTargetCard().getName(), getTargetCard().getOwner());
 	                            
@@ -414,9 +414,9 @@ public class CardFactory_Creatures {
             };
             ability.setBeforePayMana(removeCard);
             
-            ability.setDescription("Grandeur - Discard Korlash and put two Swamps from your library into play tapped.");
+            ability.setDescription("Grandeur Ñ Discard another card named Korlash, Heir to Blackblade: Search your library for up to two Swamp cards, put them onto the battlefield tapped, then shuffle your library.");
             StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - Search for two swamps and put them into play tapped.");
+            sb.append(card.getName()).append(" - Search for two swamps and put them onto the battlefield tapped.");
             ability.setStackDescription(sb.toString());
             
             card.addSpellAbility(ability);
@@ -548,11 +548,11 @@ public class CardFactory_Creatures {
             
             StringBuilder sbDesc = new StringBuilder();
             sbDesc.append("Grandeur - Discard another card named Baru, Fist of Krosa: Put an X/X ");
-            sbDesc.append("green Wurm creature token into play, where X is the number of lands that you control.");
+            sbDesc.append("green Wurm creature token onto the battlefield, where X is the number of lands that you control.");
             ability.setDescription(sbDesc.toString());
             
             StringBuilder sbStack = new StringBuilder();
-            sbStack.append(cardName).append(" - put X/X token into play.");
+            sbStack.append(cardName).append(" - put X/X token onto the battlefield.");
             ability.setStackDescription(sbStack.toString());
             
             card.addSpellAbility(ability);
@@ -1153,7 +1153,7 @@ public class CardFactory_Creatures {
                     Player opponent = card.getController().getOpponent();
                     
                     StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - ").append(opponent).append(" puts a 3/3 flying token into play");
+                    sb.append(card.getName()).append(" - ").append(opponent).append(" puts a 3/3 flying token onto the battlefield");
                     ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -1618,7 +1618,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                 	StringBuilder sb = new StringBuilder();
-                	sb.append("Symbiotic Elf - ").append(card.getController()).append(" puts two 1/1 tokens into play");
+                	sb.append("Symbiotic Elf - ").append(card.getController()).append(" puts two 1/1 tokens onto the battlefield");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -2251,7 +2251,7 @@ public class CardFactory_Creatures {
                 }
             };
             
-            ability.setStackDescription("When Sleeper Agent comes into play, target opponent gains control of it.");
+            ability.setStackDescription("When Sleeper Agent enters the battlefield, target opponent gains control of it.");
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -3934471871041458847L;
                 
@@ -3006,7 +3006,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                 	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getController()).append(" puts a 3/3 creature into play from Penumbra Kavu");
+                	sb.append(card.getController()).append(" puts a 3/3 creature onto the battlefield from Penumbra Kavu");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -3033,7 +3033,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                 	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getController()).append(" puts a 2/1 creature into play from Penumbra Bobcat");
+                	sb.append(card.getController()).append(" puts a 2/1 creature onto the battlefield from Penumbra Bobcat");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -3060,7 +3060,7 @@ public class CardFactory_Creatures {
                 public void execute() {
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(card.getController());
-                	sb.append(" puts a 2/4 Black Spider creature into play from Penumbra Spider");
+                	sb.append(" puts a 2/4 Black Spider creature onto the battlefield from Penumbra Spider");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -3087,7 +3087,7 @@ public class CardFactory_Creatures {
                 public void execute() {
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(card.getController());
-                	sb.append(" puts a 6/6 Black Wurm creature with trample into play from Penumbra Wurm");
+                	sb.append(" puts a 6/6 Black Wurm creature with trample onto the battlefield from Penumbra Wurm");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -3480,7 +3480,7 @@ public class CardFactory_Creatures {
                     while(!list.isEmpty()) {
                         ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
                         ((PlayerZone_ComesIntoPlay) AllZone.Computer_Battlefield).setTriggers(false);
-                        //so "comes into play" abilities don't trigger
+                        //so "enters the battlefield" abilities don't trigger
                         ///list.get(0).addComesIntoPlayCommand(Command.Blank);
                         
                         oppPlay.add(list.get(0));
@@ -4038,7 +4038,7 @@ public class CardFactory_Creatures {
                     ability.setTargetPlayer(card.getController());
                     
                     StringBuilder sb = new StringBuilder();
-                    sb.append(card).append(" - ").append(card.getController()).append(" puts tokens into play");
+                    sb.append(card).append(" - ").append(card.getController()).append(" puts tokens onto the battlefield");
                     ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -4058,7 +4058,7 @@ public class CardFactory_Creatures {
                         PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                         PlayerZone oldPlay = AllZone.getZone(getTargetCard());
                         
-                        //so "comes into play" abilities don't trigger
+                        //so "enters the battlefield" abilities don't trigger
                         //getTargetCard().addComesIntoPlayCommand(Command.Blank);
                         
                         ((PlayerZone_ComesIntoPlay) AllZone.Human_Battlefield).setTriggers(false);
@@ -6030,7 +6030,7 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability);
             ability.setDescription("W, Sacrifice Transluminant: Put a 1/1 white Spirit creature token with flying onto the battlefield at the beginning of the next end step.");
-            ability.setStackDescription("Put a 1/1 white Spirit creature token with flying into play at end of turn.");
+            ability.setStackDescription("Put a 1/1 white Spirit creature token with flying onto the battlefield at end of turn.");
             ability.setBeforePayMana(new Input_PayManaCost_Ability(ability.getManaCost(), new Command() {
                 private static final long serialVersionUID = -6553009833190713980L;
                 
@@ -6212,7 +6212,7 @@ public class CardFactory_Creatures {
             sb.append("Goldmeadow Harrier onto the battlefield. It has \"W, tap : Tap target creature.\"");
             ability.setDescription(sb.toString());
             
-            ability.setStackDescription(cardName+" - Put a 1/1 token into play");
+            ability.setStackDescription(cardName+" - Put a 1/1 token onto the battlefield");
         }//*************** END ************ END **************************
         
         
@@ -6830,7 +6830,7 @@ public class CardFactory_Creatures {
                     } else // human
                     {
                         if(basic.size() > 0) {
-                            Object o = AllZone.Display.getChoiceOptional("Select Plains card to put into play: ",
+                            Object o = AllZone.Display.getChoiceOptional("Select Plains card to put onto the battlefield: ",
                                     basic.toArray());
                             if(o != null) {
                                 Card c = (Card) o;
@@ -6862,7 +6862,7 @@ public class CardFactory_Creatures {
                     
                     if(self.size() < opp.size()) {
                     	StringBuilder sb = new StringBuilder();
-                    	sb.append(card.getName()).append(" - search library for a plains and put it into play");
+                    	sb.append(card.getName()).append(" - search library for a plains and put it onto the battlefield");
                     	ability.setStackDescription(sb.toString());
                         
                         AllZone.Stack.add(ability);
@@ -7323,7 +7323,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                 	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getName()).append(" - put three 1/1 Saproling creature tokens into play.");
+                	sb.append(card.getName()).append(" - put three 1/1 Saproling creature tokens onto the battlefield.");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -7357,7 +7357,7 @@ public class CardFactory_Creatures {
 
                 public void execute() {
                     StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - put creature tokens into play.");
+                    sb.append(card.getName()).append(" - put creature tokens onto the battlefield.");
                     ability.setStackDescription(sb.toString());
                     AllZone.Stack.add(ability);
                 }
@@ -7393,7 +7393,7 @@ public class CardFactory_Creatures {
                     {
                         if(basic.size() > 0) {
                             Object o = AllZone.Display.getChoiceOptional(
-                                    "Select Basic Land card to put into play tapped: ", basic.toArray());
+                                    "Select Basic Land card to put onto the battlefield tapped: ", basic.toArray());
                             if(o != null) {
                                 Card c = (Card) o;
                                 lib.remove(c);
@@ -7411,7 +7411,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                 	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getName()).append(" - search library for a basic land card and put it into play tapped.");
+                	sb.append(card.getName()).append(" - search library for a basic land card and put it onto the battlefield tapped.");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -9904,7 +9904,7 @@ public class CardFactory_Creatures {
                             landInLib.get(0).tap();
                             play.add(landInLib.get(0));
                         } else {
-                            Object o = AllZone.Display.getChoiceOptional("Select plains card to put into play: ",
+                            Object o = AllZone.Display.getChoiceOptional("Select plains card to put onto the battlefield: ",
                                     landInLib.toArray());
                             if(o != null) {
                                 Card crd = (Card) o;
@@ -10329,7 +10329,7 @@ public class CardFactory_Creatures {
                     lands = lands.getType("Forest");
                     
                     if(player.equals(AllZone.HumanPlayer) && lands.size() > 0) {
-                        Object o = AllZone.Display.getChoiceOptional("Pick a forest card to put into play",
+                        Object o = AllZone.Display.getChoiceOptional("Pick a forest card to put onto the battlefield",
                                 lands.toArray());
                         if(o != null) {
                             Card card = (Card) o;
@@ -10355,7 +10355,7 @@ public class CardFactory_Creatures {
                 public void execute() {
                 	
                 	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getController()).append(" searches his library for a Forest card to put that card into play.");
+                	sb.append(card.getController()).append(" searches his library for a Forest card to put that card onto the battlefield.");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
@@ -10951,7 +10951,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -7067218066522935060L;
                 
                 public void execute() {
-                    ability.setStackDescription("Kinsbaile Borderguard comes into play with a +1/+1 counter on it for each other Kithkin you control.");
+                    ability.setStackDescription("Kinsbaile Borderguard enters the battlefield with a +1/+1 counter on it for each other Kithkin you control.");
                     AllZone.Stack.add(ability);
                 }
             };
@@ -10975,7 +10975,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     ability2.setStackDescription("When Kinsbaile Borderguard is put into a graveyard from play, put a 1/1 white " +
-                    		"Kithkin Soldier creature token into play for each counter on it.");
+                    		"Kithkin Soldier creature token onto the battlefield for each counter on it.");
                     AllZone.Stack.add(ability2);
                 }
             };
@@ -11862,7 +11862,7 @@ public class CardFactory_Creatures {
         	};
         	
         	StringBuilder sb = new StringBuilder();
-        	sb.append(cardName).append(" - comes into play with a +1/+1 counter on it for each other spell played this turn.");
+        	sb.append(cardName).append(" - enters the battlefield with a +1/+1 counter on it for each other spell played this turn.");
         	intoPlay.setStackDescription(sb.toString());
         	
         	card.addComesIntoPlayCommand(comesIntoPlay);
@@ -12274,7 +12274,7 @@ public class CardFactory_Creatures {
 
                 public void execute() {
                 	StringBuilder sb = new StringBuilder();
-                	sb.append("Symbiotic Wurm - ").append(card.getController()).append(" puts seven 1/1 tokens into play");
+                	sb.append("Symbiotic Wurm - ").append(card.getController()).append(" puts seven 1/1 tokens onto the battlefield");
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);

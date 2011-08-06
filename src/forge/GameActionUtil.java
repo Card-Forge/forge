@@ -2773,7 +2773,7 @@ public class GameActionUtil {
 				
 				StringBuilder sb = new StringBuilder();
 				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" puts a 4/4 White Angel token with flying into play.");
+				sb.append(" puts a 4/4 White Angel token with flying onto the battlefield.");
 				ability2.setStackDescription(sb.toString());
 				
 				AllZone.Stack.add(ability2);
@@ -2936,7 +2936,7 @@ public class GameActionUtil {
 					
 					StringBuilder sb = new StringBuilder();
 					sb.append(card.getName()).append(" - ").append(c.getController());
-					sb.append(" played a blue spell, put a 1/1 blue Bird token with flying into play.");
+					sb.append(" played a blue spell, put a 1/1 blue Bird token with flying onto the battlefield.");
 					ability2.setStackDescription(sb.toString());
 					
 					AllZone.Stack.add(ability2);
@@ -2958,7 +2958,7 @@ public class GameActionUtil {
 				
 				StringBuilder sb = new StringBuilder();
 				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" played a green spell, put a 2/2 green Wolf token into play.");
+				sb.append(" played a green spell, put a 2/2 green Wolf token onto the battlefield.");
 				ability.setStackDescription(sb.toString());
 				
 				AllZone.Stack.add(ability);
@@ -4930,7 +4930,7 @@ public class GameActionUtil {
 		// Get a list of all mountains
 		CardList mountainList = AllZoneUtil.getPlayerTypeInPlay(valakutCard.getController(),
 				"Mountain");
-		// Don't count the one that just came into play
+		// Don't count the one that just entered the battlefield
 		if (mountainList.contains(mtn))
 			mountainList.remove(mtn);
 		
@@ -6505,14 +6505,14 @@ public class GameActionUtil {
 						"Creature", "Elemental"}, 2, 2, new String[] {"Trample"});
 
 				for(Card c:cl) {
-					c.setText("Whenever Spawnwrithe deals combat damage to a player, put a token into play that's a copy of Spawnwrithe.");
+					c.setText("Whenever Spawnwrithe deals combat damage to a player, put a token that's a copy of Spawnwrithe onto the battlefield.");
 					c.setCopiedToken(true);
 				}
 			}
 		};// ability2
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append(c.getName()).append(" - ").append(player).append(" puts copy into play.");
+		sb.append(c.getName()).append(" - ").append(player).append(" puts copy onto the battlefield.");
 		ability2.setStackDescription(sb.toString());
 		
 		AllZone.Stack.add(ability2);
@@ -6540,7 +6540,7 @@ public class GameActionUtil {
 
 					if(goblins.size() > 0) {
 						if(card.getController().equals(AllZone.HumanPlayer)) {
-							Object o = AllZone.Display.getChoiceOptional("Select a Goblin to put into play",
+							Object o = AllZone.Display.getChoiceOptional("Select a Goblin to put onto the battlefield",
 									goblins.toArray());
 
 							if(o != null) {
@@ -6559,7 +6559,7 @@ public class GameActionUtil {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append(c.getName()).append(" - ").append(c.getController());
-			sb.append(" puts a goblin into play from his or her hand.");
+			sb.append(" puts a goblin onto the battlefield from his or her hand.");
 			ability2.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability2);
@@ -6588,7 +6588,7 @@ public class GameActionUtil {
 
 					if(goblins.size() > 0) {
 						if(card.getController().equals(AllZone.HumanPlayer)) {
-							Object o = AllZone.Display.getChoiceOptional("Select a Goblin to put into play",
+							Object o = AllZone.Display.getChoiceOptional("Select a Goblin to put onto the battlefield",
 									goblins.toArray());
 
 							if(o != null) {
@@ -6607,7 +6607,7 @@ public class GameActionUtil {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append(c.getName()).append(" - ").append(c.getController());
-			sb.append(" puts a goblin into play from his or her hand.");
+			sb.append(" puts a goblin onto the battlefield from his or her hand.");
 			ability2.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability2);
@@ -8663,7 +8663,7 @@ public class GameActionUtil {
                         if (player.isHuman()) {
                             StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
-                            question.append(". Reveal card and put a 2/2 green Wolf creature token into play?");
+                            question.append(". Reveal card and put a 2/2 green Wolf creature token onto the battlefield?");
                             if (showYesNoDialog(k, question.toString())) {
                                 wantToken = true;
                             }
@@ -8780,7 +8780,7 @@ public class GameActionUtil {
 						creatures = creatures.getType("Creature");
 
 						if(player.equals(AllZone.HumanPlayer)) {
-							Object o = AllZone.Display.getChoiceOptional("Pick a creature to put into play",
+							Object o = AllZone.Display.getChoiceOptional("Pick a creature to put onto the battlefield",
 									creatures.toArray());
 							if(o != null) {
 								Card card = (Card) o;
@@ -8832,7 +8832,7 @@ public class GameActionUtil {
 						creatures = creatures.getType("Creature");
 
 						if(player.equals(AllZone.HumanPlayer)) {
-							Object o = AllZone.Display.getChoiceOptional("Pick a creature to put into play",
+							Object o = AllZone.Display.getChoiceOptional("Pick a creature to put onto the battlefield",
 									creatures.toArray());
 							if(o != null) {
 								Card card = (Card) o;
@@ -8918,7 +8918,7 @@ public class GameActionUtil {
 					creatures = creatures.getType("Creature");
 
 					if(player.equals(AllZone.HumanPlayer)) {
-						Object o = AllZone.Display.getChoiceOptional("Pick a creature to put into play",
+						Object o = AllZone.Display.getChoiceOptional("Pick a creature to put onto the battlefield",
 								creatures.toArray());
 						if(o != null) {
 							Card card = (Card) o;
@@ -9170,7 +9170,7 @@ public class GameActionUtil {
 
 						// sacrifice Defense of the Heart
 						AllZone.GameAction.sacrifice(card);
-						// search library for a creature, put it into play
+						// search library for a creature, put it onto the battlefield
 						Card creature1 = getCreatureFromLibrary();
 						if(creature1 != null) {
 							library.remove(creature1);
@@ -9214,7 +9214,7 @@ public class GameActionUtil {
 				StringBuilder sb = new StringBuilder();
 				sb.append("Defense of the Heart - ").append(player);
 				sb.append(" sacrifices Defense of the Heart to search their library for up to two ");
-				sb.append("creature cards and put those creatures into play. Then shuffle's their library.");
+				sb.append("creature cards and put those creatures onto the battlefield. Then shuffle's their library.");
 				ability.setStackDescription(sb.toString());
 				
 				AllZone.Stack.add(ability);
@@ -10237,7 +10237,7 @@ public class GameActionUtil {
 				};// Ability
 				
 				StringBuilder sb = new StringBuilder();
-				sb.append("Greener Pastures - ").append(mostLands).append(" puts a 1/1 green Saproling token into play.");
+				sb.append("Greener Pastures - ").append(mostLands).append(" puts a 1/1 green Saproling token onto the battlefield.");
 				ability.setStackDescription(sb.toString());
 
 				AllZone.Stack.add(ability);
@@ -10263,7 +10263,7 @@ public class GameActionUtil {
 			};// Ability
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("Bitterblossom - ").append(player).append(" loses 1 life and puts a 1/1 token into play.");
+			sb.append("Bitterblossom - ").append(player).append(" loses 1 life and puts a 1/1 token onto the battlefield.");
 			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
@@ -10519,7 +10519,7 @@ public class GameActionUtil {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append("Mycoloth - ").append(player);
-			sb.append(" puts a 1/1 green Saproling into play for each +1/+1 counter on Mycoloth.");
+			sb.append(" puts a 1/1 green Saproling onto the battlefield for each +1/+1 counter on Mycoloth.");
 			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
@@ -10544,7 +10544,7 @@ public class GameActionUtil {
 					CardFactoryUtil.makeTokenSaproling(card.getController());
 				}
 			};// Ability
-			ability.setStackDescription("Verdant Force - put a 1/1 green Saproling token into play.");
+			ability.setStackDescription("Verdant Force - put a 1/1 green Saproling token onto the battlefield.");
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -10677,7 +10677,7 @@ public class GameActionUtil {
 
 				}
 			};// Ability
-			ability.setStackDescription("Dragon Broodmother - put a 1/1 red and green Dragon token into play.");
+			ability.setStackDescription("Dragon Broodmother - put a 1/1 red and green Dragon token onto the battlefield.");
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -11320,7 +11320,7 @@ public class GameActionUtil {
 			
 			StringBuilder sb = new StringBuilder();
 			sb.append(list.get(i)).append(" - ").append(list.get(i).getController());
-			sb.append(" puts a 1/1 colorless Spirit creature token into play for each Shrine he controls.");
+			sb.append(" puts a 1/1 colorless Spirit creature token onto the battlefield for each Shrine he controls.");
 			ability.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability);
@@ -11483,7 +11483,7 @@ public class GameActionUtil {
             
             StringBuilder sb = new StringBuilder();
             sb.append("Creakwood Liege - ").append(player);
-            sb.append(" puts a 1/1 Green Black Worm creature token into play.");
+            sb.append(" puts a 1/1 Green Black Worm creature token onto the battlefield.");
             ability.setStackDescription(sb.toString());
 
             AllZone.Stack.add(ability);
@@ -11513,7 +11513,7 @@ public class GameActionUtil {
 
 			}; // ability
 
-			ability.setStackDescription("Mirror-Sigil Sergeant - put a token into play that's a copy of Mirror-Sigil Sergeant.");
+			ability.setStackDescription("Mirror-Sigil Sergeant - put a token onto the battlefield that's a copy of Mirror-Sigil Sergeant.");
 			AllZone.Stack.add(ability);
 		} // for
 	} //upkeep_Mirror_Sigil_Sergeant
@@ -12615,7 +12615,7 @@ public class GameActionUtil {
 
 		// check if newList has anything that oldList doesn't have
 		boolean newSnake(CardList oldList, CardList newList) {
-			// check if a Snake came into play under your control
+			// check if a Snake enters the battlefield under your control
 			for(int i = 0; i < newList.size(); i++)
 				if(!oldList.contains(newList.get(i))) return true;
 
@@ -12750,7 +12750,7 @@ public class GameActionUtil {
 				
 				StringBuilder sb = new StringBuilder();
 				sb.append(hivemasterList.get(outer).getName()).append(" - ").append(hivemasterList.get(outer).getController());
-				sb.append(" puts ").append(n[0]).append(" insect tokens into play.");
+				sb.append(" puts ").append(n[0]).append(" insect tokens onto the battlefield.");
 				ability.setStackDescription(sb.toString());
 
 				if(n[0] != 0) {
