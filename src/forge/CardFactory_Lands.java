@@ -2104,7 +2104,7 @@ class CardFactory_Lands {
         }//*************** END ************ END **************************
         
         
-        
+        /*
         //*************** START *********** START **************************  
         else if(cardName.equals("Gargoyle Castle")) {
             final Ability_Tap ability = new Ability_Tap(card, "5") {
@@ -2132,7 +2132,8 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
             
         }//*************** END ************ END **************************
-        
+        */
+        /*
         //*************** START *********** START **************************  
         else if(cardName.equals("Kher Keep")) {
             final Ability_Tap ability = new Ability_Tap(card, "1 R") {
@@ -2158,6 +2159,7 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
             
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Vitu-Ghazi, the City-Tree")) {
