@@ -62,9 +62,11 @@ Black Knight
 Black Vise
 Blade Sliver
 Blasted Landscape
+Blaze
 Bloated Toad
 Blood Knight
 Bloodbraid Elf
+Bloodcurdling Scream
 Bloodstone Cameo
 Body of Jukai
 Bog Wraith
@@ -186,6 +188,7 @@ Engineered Plague
 Enlightened Tutor
 Enlisted Wurm
 Enormous Baloth
+Enrage
 Ensnare
 Eron the Relentless
 Eternal Witness
@@ -264,6 +267,7 @@ Goblin General
 Goblin Glider
 Goblin Lackey
 Goblin Lore
+Goblin Offensive
 Goblin Ringleader
 Gods' Eye, Gate to the Reikai
 Goldmeadow Lookout
@@ -304,10 +308,13 @@ Hopping Automaton
 Horned Cheetah
 Horned Sliver
 Hoverguard Observer
+Howl of the Night Pack
 Hulking Cyclops
+Hurricane
 Hypnotic Specter
 Icatian Priest
 Ice Storm
+Icy Manipulator
 Igneous Golem
 Ihsan's Shade
 Imperial Recruiter
@@ -320,6 +327,8 @@ Inspirit
 Iron Lance
 Iron Tusk Elephant
 Iron-Barb Hellion
+Isochron Scepter
+Ivory Tower
 Ivy Dancer
 Jabari's Banner
 Jackal Pup
@@ -372,7 +381,9 @@ Leafdrake Roost
 Leatherback Baloth
 Leonin Skyhunter
 Levitation
+Ley Druid
 Library of Alexandria
+Lightkeeper of Emeria
 Lightning Greaves
 Lightning Helix
 Lingering Tormentor
@@ -469,8 +480,10 @@ Primeval Shambler
 Primoc Escapee
 Princess Lucrezia
 Propaganda
+Prosperity
 Prowess of the Fair
 Psionic Blast
+Psychic Drain
 Psychotrope Thallid
 Puppeteer
 Purge
@@ -519,6 +532,7 @@ Sangrite Surge
 Sanguine Guard
 Sarcomite Myr
 Savage Lands
+Savage Twister
 Scalebane's Elite
 Scarland Thrinax
 School of the Unseen
@@ -614,6 +628,7 @@ Sunder from Within
 Sunhome, Fortress of the Legion
 Suq'Ata Assassin
 Svogthos, the Restless Tomb
+Swallowing Plague
 Sword of the Meek
 Swords to Plowshares
 Sylvan Basilisk
@@ -686,6 +701,7 @@ Vicious Kavu
 Viridian Lorebearers
 Viridian Shaman
 Virtue's Ruin
+Vitalizing Cascade
 Vithian Renegades
 Vitu-Ghazi, the City-Tree
 Vodalian Knights
@@ -695,6 +711,7 @@ Voice of Law
 Voice of Reason
 Voice of Truth
 Volcanic Fallout
+Volcanic Geyser
 Voltaic Key
 Voracious Hatchling
 Vug Lizard
@@ -734,6 +751,7 @@ Wildfire Emissary
 Wilt-Leaf Cavaliers
 Wind Dancer
 Windreaper Falcon
+Windstorm
 Winter's Grasp
 Wirewood Hivemaster
 Wirewood Lodge

@@ -33,9 +33,11 @@ Angelfire Crusader
 Angelic Blessing
 Angelic Curator
 Angelic Wall
+Angelsong
 Anodet Lurker
 Antler Skulkin
 Anurid Murkdiver
+Apex Hawks
 Apprentice Wizard
 Araba Mothrider
 Arcbound Bruiser
@@ -67,6 +69,7 @@ Aven Trailblazer
 Avian Changeling
 Axegrinder Giant
 Azimaet Drake
+Azorius Chancery
 Azorius First-Wing
 Azorius Signet
 Balduvian Barbarians
@@ -126,6 +129,7 @@ Border Patrol
 Boreal Centaur
 Boreal Druid
 Boreal Griffin
+Boros Garrison
 Boros Recruit
 Boros Signet
 Brainbite
@@ -138,6 +142,7 @@ Breathstealer
 Briarberry Cohort
 Brilliant Halo
 Brothers of Fire
+Brush With Death
 Brute Force
 Bull Rush
 Buoyancy
@@ -238,6 +243,7 @@ Dark Banishing
 Dark Ritual
 Darkling Stalker
 Darklit Gargoyle
+Darkness
 Darksteel Citadel
 Darksteel Ingot
 Daru Lancer
@@ -264,6 +270,7 @@ Devoted Hero
 Devoted Retainer
 Devouring Deep
 Diabolic Edict
+Dimir Aqueduct
 Dimir Infiltrator
 Dimir Signet
 Diplomatic Immunity
@@ -307,6 +314,7 @@ Dwarven Trader
 Eager Cadet
 Earthbind
 Ebony Rhino
+Echoing Courage
 Echoing Decay
 Echoing Truth
 Ekundu Griffin
@@ -325,6 +333,7 @@ Emberstrike Duo
 Emerald Dragonfly
 Emerald Oryx
 Empty the Warrens
+Enclave Elite
 Enslaved Scout
 Erratic Explosion
 Esper Cormorants
@@ -334,6 +343,7 @@ Essence Warden
 Eternity Snare
 Ethercaste Knight
 Exclude
+Exhume
 Expunge
 Eye of Nowhere
 Eyeblight's Ending
@@ -377,6 +387,7 @@ Flowstone Shambler
 Flowstone Strike
 Flowstone Wall
 Flying Men
+Fog
 Fog of Gnats
 Folk of the Pines
 Fomori Nomad
@@ -424,6 +435,7 @@ Glintwing Invoker
 Glorious Charge
 Glory Seeker
 Gnarled Mass
+Gnarlid Pack
 Goblin Brigand
 Goblin Bully
 Goblin Cavaliers
@@ -450,6 +462,7 @@ Gold Myr
 Golden Bear
 Goldmeadow Dodger
 Goldmeadow Harrier
+Golgari Rot Farm
 Golgari Signet
 Goliath Beetle
 Goretusk Firebeast
@@ -470,6 +483,7 @@ Grixis Grimblade
 Grizzled Leotau
 Grizzly Bears
 Gruul Signet
+Gruul Turf
 Guardians of Akrasa
 Guided Strike
 Guilty Conscience
@@ -482,6 +496,7 @@ Havenwood Wurm
 Headless Horseman
 Heart Sliver
 Heartwood Dryad
+Heat Ray
 Helionaut
 Hematite Golem
 Henchfiend of Ukor
@@ -494,6 +509,7 @@ Hillcomber Giant
 Hoar Shade
 Hobgoblin Dragoon
 Hollow Dogs
+Holy Day
 Holy Strength
 Honor Guard
 Hooded Kavu
@@ -502,6 +518,7 @@ Horned Troll
 Horned Turtle
 Hornet Cobra
 Horseshoe Crab
+Howl from Beyond
 Howling Fury
 Hulking Goblin
 Hulking Ogre
@@ -535,12 +552,14 @@ Ire of Kaminari
 Iron Myr
 Iron Will
 Ironroot Treefolk
+Izzet Boilerworks
 Izzet Signet
 Jagwasp Swarm
 Jamuraan Lion
 Jedit's Dragoons
 Jhessian Lookout
 Jhessian Zombies
+Join the Ranks
 Jolrael's Centaur
 Joraga Bard
 Jukai Messenger
@@ -620,6 +639,7 @@ Lost Soul
 Lowland Giant
 Loxodon Mystic
 Lucent Liminid
+Lull
 Lumengrid Warden
 Lurking Informant
 Lurking Nightstalker
@@ -668,6 +688,7 @@ Mogg War Marshal
 Molten Frame
 Molten Rain
 Molten Ravager
+Moment's Peace
 Monk Realist
 Mons's Goblin Raiders
 Monstrous Carabid
@@ -750,6 +771,7 @@ Order of the Sacred Bell
 Ornithopter
 Orochi Leafcaller
 Orochi Sustainer
+Orzhov Basilica
 Orzhov Signet
 Ostiary Thrull
 Ostracize
@@ -805,6 +827,7 @@ Pygmy Razorback
 Pyrite Spellbomb
 Python
 Qasali Pridemage
+Quag Vampires
 Quiet Purity
 Raging Bull
 Raging Cougar
@@ -813,6 +836,7 @@ Raging Minotaur
 Raiding Nightstalker
 Raise Dead
 Raise the Alarm
+Rakdos Carnarium
 Rakdos Ickspitter
 Rakdos Signet
 Ramosian Lieutenant
@@ -839,7 +863,9 @@ Remote Isle
 Remove Soul
 Renewed Faith
 Repentant Blacksmith
+Reprisal
 Repulse
+Respite
 Restless Bones
 Restless Dead
 Return to Battle
@@ -915,6 +941,7 @@ Seat of the Synod
 Secluded Steppe
 Seething Song
 Seismic Strike
+Selesnya Sanctuary
 Selesnya Signet
 Sengir Bats
 Serpent Warrior
@@ -963,6 +990,7 @@ Silverback Ape
 Silvercoat Lion
 Silverstorm Samurai
 Simian Grunts
+Simic Growth Chamber
 Simic Ragworm
 Simic Signet
 Sinew Sliver
@@ -974,6 +1002,7 @@ Skeletal Changeling
 Skeletal Crocodile
 Skeletal Snake
 Skirk Shaman
+Skitter of Lizards
 Skred
 Sky Ruin Drake
 Skyhunter Patrol
@@ -1041,8 +1070,10 @@ Stormfront Pegasus
 Strangling Soot
 Straw Soldiers
 Stream Hopper
+Stream of Life
 Streetbreaker Wurm
 Striped Bears
+Stronghold Discipline
 Sudden Strength
 Sunbeam Spellbomb
 Sunflare Shaman
@@ -1166,7 +1197,9 @@ Vigilant Drake
 Villainous Ogre
 Vine Trellis
 Viridian Acolyte
+Viridian Joiner
 Virtuous Charge
+Virulent Sliver
 Viscerid Deepwalker
 Viscid Lemures
 Vision Skeins

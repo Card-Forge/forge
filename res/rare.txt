@@ -10,6 +10,7 @@ Akroma's Vengeance
 Akroma, Angel of Fury
 Akroma, Angel of Wrath
 Aladdin's Ring
+Ali from Cairo
 Aluren
 Ambassador Laquatus
 Amulet of Vigor
@@ -48,6 +49,7 @@ Basilisk Collar
 Battle of Wits
 Battlegrace Angel
 Bayou
+Beacon of Creation
 Beacon of Destruction
 Beacon of Unrest
 Beastmaster Ascension
@@ -68,7 +70,9 @@ Bloodghast
 Bloodstained Mire
 Blurred Mongoose
 Boris Devilboon
+Borrowing the East Wind
 Bounteous Kirin
+Braingeyser
 Breeding Pool
 Bribery
 Bridge from Below
@@ -139,6 +143,7 @@ Darksteel Colossus
 Darkwater Catacombs
 Dauntless Dourbark
 Day of Judgment
+Death Grasp
 Debtors' Knell
 Defense of the Heart
 Demigod of Revenge
@@ -162,6 +167,7 @@ Dragonmaster Outcast
 Drifting Djinn
 Dwarven Pony
 Earthcraft
+Earthquake
 El-Hajjaj
 Eladamri's Call
 Eladamri, Lord of Leaves
@@ -190,6 +196,7 @@ Exalted Angel
 Exploration
 Fable of Wolf and Owl
 Fastbond
+Fault Line
 Felidar Sovereign
 Femeref Enchantress
 Fervent Charge
@@ -258,6 +265,7 @@ Harabaz Druid
 Hatching Plans
 Haunting Echoes
 Heartmender
+Helix Pinnacle
 Hell-Bent Raider
 Helldozer
 Hellkite Overlord
@@ -328,6 +336,7 @@ Krosan Colossus
 Lady Zhurong, Warrior Queen
 Laquatus's Champion
 Last Word
+Lavalanche
 Leaf-Crowned Elder
 Legacy Weapon
 Lhurgoyf
@@ -383,6 +392,9 @@ Merfolk Sovereign
 Mesa Enchantress
 Might of Oaks
 Mikokoro, Center of the Sea
+Mind Shatter
+Mind Spring
+Mind Twist
 Mirri the Cursed
 Mirri, Cat Warrior
 Misty Rainforest
@@ -500,6 +512,7 @@ River Merfolk
 Roc of Kher Ridges
 Rockshard Elemental
 Rofellos, Llanowar Emissary
+Rolling Earthquake
 Rolling Stones
 Rootwater Thief
 Rorix Bladewing
@@ -569,9 +582,11 @@ Sphinx of Jwar Isle
 Sphinx of the Steel Wind
 Spiritmonger
 Spiritual Guardian
+Squall Line
 Squee, Goblin Nabob
 Staff of Domination
 Stangg
+Starstorm
 Stasis
 Steam Vents
 Steely Resolve
@@ -582,6 +597,7 @@ Stomping Ground
 Stoneforge Mystic
 Storm Herd
 Storm Spirit
+Stroke of Genius
 Stuffy Doll
 Sun Ce, Young Conquerer
 Sun Quan, Lord of Wu
@@ -669,6 +685,7 @@ Volcanic Island
 Volrath's Stronghold
 Vorosh, the Hunter
 Wall of Kelp
+Wall of Reverence
 Warren Instigator
 Warrior Angel
 Watery Grave
@@ -680,6 +697,7 @@ Windborn Muse
 Windswept Heath
 Wit's End
 Witch-Maw Nephilim
+Wolfbriar Elemental
 Wooded Bastion
 Wooded Foothills
 Wormwood Treefolk
