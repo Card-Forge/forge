@@ -1,189 +1,106 @@
-AEther Spellbomb
-AEther Web
-AEtherflame Wall
-Absorb Vis
-Accelerate
-Accelerated Mutation
-Accumulated Knowledge
-Acolyte of Xathrid
-Acorn Harvest
-Acridian
-Advance Scout
-Advanced Hoverguard
-Aesthir Glider
-Agent of Stromgald
-Aggressive Urge
-Agility
-Airborne Aid
-Akki Drillmaster
 Akrasan Squire
-Alaborn Grenadier
-Alaborn Musketeer
-Alaborn Trooper
-Alexi's Cloak
-Alley Grifters
 Alpha Myr
-Ambassador Oak
-Ambush Party
-Amrou Scout
-Amrou Seekers
-Anaba Bodyguard
-Anaba Shaman
 Anarchist
-Ancient Den
-Angel's Mercy
-Angelfire Crusader
-Angelic Blessing
-Angelic Curator
-Angelic Wall
-Angelsong
-Anodet Lurker
-Antler Skulkin
-Anurid Murkdiver
-Apex Hawks
-Apprentice Wizard
-Araba Mothrider
-Arcbound Bruiser
-Arcbound Hybrid
-Arcbound Stinger
-Arcbound Worker
-Ardent Militia
-Argothian Swine
-Armadillo Cloak
-Armored Pegasus
-Armorer Guildmage
-Arnjlot's Ascent
-Ascending Aven
-Asha's Favor
-Ashcoat Bear
-Ashen-Skin Zubera
-Ashenmoor Cohort
-Ashnod's Transmogrant
-Assault Zeppelid
-Aura Blast
-Auramancer
-Aven Cloudchaser
-Aven Envoy
-Aven Fisher
-Aven Flock
-Aven Riftwatcher
 Aven Squire
-Aven Trailblazer
-Avian Changeling
-Axegrinder Giant
-Azimaet Drake
 Azorius Chancery
-Azorius First-Wing
-Azorius Signet
-Balduvian Barbarians
-Balduvian Bears
-Ballynock Cohort
-Ballynock Trapper
-Banishing Knack
-Bant Sureblade
-Barbarian Horde
-Barbary Apes
-Barbtooth Wurm
-Barkhide Mauler
-Barren Moor
-Barrenton Cragtreads
-Battering Craghorn
 Battering Sliver
-Battle Hurda
-Battle Rampart
-Battle-Mad Ronin
-Battlegate Mimic
-Bay Falcon
-Bayou Dragonfly
-Bear Cub
-Befoul
-Belbe's Percher
-Benalish Cavalry
-Benalish Knight
-Benalish Trapper
-Berserkers of Blood Ridge
-Bird Maiden
 Blade of the Sixth Pride
-Bladetusk Boar
-Blanchwood Treefolk
 Blastoderm
-Blight Sickle
 Blightning
-Blightspeaker
-Blind Phantasm
-Blinding Mage
-Blistering Barrier
-Blistering Dieflyn
-Blockade Runner
-Bloodrock Cyclops
-Blossoming Wreath
-Bog Imp
-Bog Initiate
-Bog Raiders
-Bog Smugglers
-Bog Tatters
-Boggart Birth Rite
-Bojuka Brigand
-Bone Saw
-Bonesplitter
 Bonesplitter Sliver
-Boomerang
-Border Guard
-Border Patrol
-Boreal Centaur
-Boreal Druid
-Boreal Griffin
-Boros Garrison
-Boros Recruit
-Boros Signet
-Bountiful Harvest
-Brainbite
 Brainstorm
-Breach
-Break Asunder
-Breath of Life
-Breath of Malfegor
-Breathstealer
-Briarberry Cohort
 Brilliant Halo
-Brothers of Fire
-Brush With Death
-Brute Force
-Bull Rush
-Buoyancy
-Burning Cloak
-Burning Fields
-Burning Shield Askari
-Burst of Speed
-Cackling Flames
-Cackling Imp
-Cadaverous Knight
-Caller of Gales
-Cancel
-Canopy Spider
-Canyon Minotaur
-Canyon Wildcat
-Capashen Knight
-Capashen Templar
-Capashen Unicorn
 Capsize
-Caravan Hurda
-Careful Study
-Carnivorous Plant
 Carnophage
-Cartographer
-Castle Raptors
-Cat Warriors
-Catalog
-Cateran Brute
-Cateran Persuader
-Cathartic Adept
-Cave Sense
-Cavern Crawler
 Cavern Harpy
-Cavern Thoctar
-Cemetery Gate
-Centaur Courser
-Cephalid Looter
-Cerodon Yearling
-
+Child of Night
+Cloud of Faeries
+Coiled Tinviper
+Colossal Might
+Corrupt
+Dark Ritual
+Darksteel Ingot
+Dauthi Marauder
+Dauthi Slayer
+Deep Analysis
+Deft Duelist
+Diabolic Edict
+Dimir Aqueduct
+Disenchant
+Divination
+Drift of Phantasms
+Duress
+Elephant Ambush
+Elvish Fury
+Exclude
+Faceless Butcher
+False Defeat
+Firebolt
+Fledgling Djinn
+Foul Imp
+Frostling
+Gemhide Sliver
+Giant Spider
+Gruul Turf
+Guardians of Akrasa
+Hymn to Tourach
+Imperious Perfect
+Impulse
+Kindle
+Kird Ape
+Kitesail
+Kodama's Reach
+Kor Skyfisher
+Lightning Blast
+Lightning Bolt
+Lignify
+Llanowar Elves
+Mana Leak
+Metallic Sliver
+Moaning Spirit
+Molten Rain
+Mudbutton Torchrunner
+Mulldrifter
+Multani's Acolyte
+Muscle Sliver
+Naturalize
+Nightguard Patrol
+Oblivion Ring
+Order of the Ebon Hand
+Pacifism
+Pestermite
+Phyrexian Rager
+Plated Geopede
+Plated Sliver
+Pouncing Jaguar
+Qasali Pridemage
+Rakdos Carnarium
+Rancor
+Repulse
+Rishadan Airship
+River Boa
+Selesnya Sanctuary
+Serum Visions
+Shock
+Sign in Blood
+Sinew Sliver
+Snapping Drake
+Sprout Swarm
+Steppe Lynx
+Stone Rain
+Sunlance
+Synchronous Sliver
+Talruum Minotaur
+Tarfire
+Tendrils of Corruption
+Trinket Mage
+Vampire Lacerator
+Veteran Armorer
+Veteran Armorsmith
+Veteran Swordsmith
+Viashino Fangtail
+Vulshok Morningstar
+Vulshok Sorcerer
+Wild Nacatl
+Winged Sliver
+Yavimaya Wurm
