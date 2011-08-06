@@ -4313,6 +4313,7 @@ res/cardsfolder/swords_to_plowshares.txt -text svneol=native#text/plain
 res/cardsfolder/sygg_river_guide.txt -text svneol=native#text/plain
 res/cardsfolder/sylvan_basilisk.txt -text svneol=native#text/plain
 res/cardsfolder/sylvan_bounty.txt -text svneol=native#text/plain
+res/cardsfolder/sylvan_library.txt -text svneol=native#text/plain
 res/cardsfolder/sylvan_messenger.txt -text svneol=native#text/plain
 res/cardsfolder/sylvan_ranger.txt -text svneol=native#text/plain
 res/cardsfolder/sylvan_scrying.txt -text svneol=native#text/plain
