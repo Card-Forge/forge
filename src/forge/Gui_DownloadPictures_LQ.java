@@ -58,7 +58,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
     private JTextField               addr, port;
     
     //progress
-    private Card[]                   cards;
+    private mCard[]                   cards;
     private int                      card;
     private boolean                  cancel;
     private JProgressBar             bar;
@@ -66,7 +66,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
     private JOptionPane              dlg;
     private JButton                  close;
     
-    private Gui_DownloadPictures_LQ(Card[] c) {
+    private Gui_DownloadPictures_LQ(mCard[] c) {
         this.cards = c;
         addr = new JTextField(ForgeProps.getLocalized(PROXY_ADDRESS));
         port = new JTextField(ForgeProps.getLocalized(PROXY_PORT));
@@ -247,7 +247,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
     }//run
     
     public static void startDownload(JFrame frame) {
-        final Card[] card = getNeededCards();
+        final mCard[] card = getNeededCards();
        
         if(card.length == 0) {
             JOptionPane.showMessageDialog(frame, ForgeProps.getLocalized(NO_MORE));
@@ -261,16 +261,36 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
         download.setCancel(true);
     }//startDownload()
     
-    private static Card[] getNeededCards() {
+    private static mCard[] getNeededCards() {
         //read all card names and urls
-    	Card[] cardPlay = readFile(CARD_PICTURES);
-    	Card[] cardTokenLQ = readFile(CARD_PICTURES_TOKEN_LQ);
+    	//mCard[] cardPlay = readFile(CARD_PICTURES);
+    	mCard[] cardTokenLQ = readFile(CARD_PICTURES_TOKEN_LQ);
         
-        ArrayList<Card> list = new ArrayList<Card>();
+    	ArrayList<mCard> CList = new ArrayList<mCard>();
+    	CardList AllCards = AllZone.CardFactory.getAllCards();
+    	Log.error("AllCards.size: " + AllCards.size());
+    	
+    	for (int i=0; i<AllCards.size(); i++)
+    	{
+    		Card  c = AllCards.get(i);
+    		String url = c.getSVar("Picture");
+    		String[] URLs = url.split("\\\\");
+    		
+    		String iName = GuiDisplayUtil.cleanString(c.getImageName());
+    		CList.add(new mCard(iName + ".jpg", URLs[0]));
+    		//Log.error(iName + ".jpg" + "\t" + URLs[0]);
+    		
+    		if (URLs.length > 1)
+    			for (int j=1; j<URLs.length; j++)
+    				CList.add(new mCard(iName + j + ".jpg", URLs[j]));
+    	}
+    	
+        ArrayList<mCard> list = new ArrayList<mCard>();
         File file;
         
         File base = ForgeProps.getFile(IMAGE_BASE);
-        
+        mCard[] a = {new mCard("", "")};
+        mCard[] cardPlay = CList.toArray(a);
         //check to see which cards we already have
         for(int i = 0; i < cardPlay.length; i++) {
             file = new File(base, cardPlay[i].name);
@@ -283,7 +303,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
         }
         
         //return all card names and urls that are needed
-        Card[] out = new Card[list.size()];
+        mCard[] out = new mCard[list.size()];
         list.toArray(out);
         
 //    for(int i = 0; i < out.length; i++)
@@ -291,23 +311,23 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
         return out;
     }//getNeededCards()
     
-    private static Card[] readFile(String ABC) {
+    private static mCard[] readFile(String ABC) {
         try {
         	FileReader zrc = new FileReader(ForgeProps.getFile(ABC));
         	BufferedReader in = new BufferedReader(zrc);
             String line;
-            ArrayList<Card> list = new ArrayList<Card>();
+            ArrayList<mCard> list = new ArrayList<mCard>();
             StringTokenizer tok;
             
             line = in.readLine();
             while(line != null && (!line.equals(""))) {
                 tok = new StringTokenizer(line);
-                list.add(new Card(tok.nextToken(), tok.nextToken()));
+                list.add(new mCard(tok.nextToken(), tok.nextToken()));
                 
                 line = in.readLine();
             }
             
-            Card[] out = new Card[list.size()];
+            mCard[] out = new mCard[list.size()];
             list.toArray(out);
             return out;
             
@@ -333,13 +353,13 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
         }
     }
     
-    private static class Card {
+    private static class mCard {
         final public String name;
         final public String url;
         
-        Card(String cardName, String cardURL) {
+        mCard(String cardName, String cardURL) {
             name = cardName;
             url = cardURL;
         }
-    }//Card
+    }//mCard
 } 
