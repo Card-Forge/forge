@@ -232,6 +232,24 @@ public class ComputerUtil
     	if (cost.getUntap() && (card.isUntapped() || card.isSick()))
     		return false;
 		
+		if (cost.getTapXTypeCost())
+		{
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			CardList typeList = new CardList(play.getCards());
+			typeList = typeList.getValidCards(cost.getTapXType().split(","));
+			
+			if (cost.getTap())
+				typeList.remove(sa.getSourceCard());
+			typeList = typeList.filter( new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.isUntapped();
+				}
+			});
+			
+			if (cost.getTapXTypeAmount() > typeList.size())
+				return false;
+		}
+    	
 		if (cost.getSubCounter()){
 			Counters c = cost.getCounterType();
 			if (card.getCounters(c) - cost.getCounterNum() < 0 || !AllZone.GameAction.isCardInPlay(card)){
@@ -273,23 +291,14 @@ public class ComputerUtil
 			    Card target = sa.getTargetCard();
 				if (target != null && target.getController().equals(Constant.Player.Computer)) // don't sacrifice the card we're pumping
 					  typeList.remove(target);
-				return typeList.size() >= cost.getSacAmount();
+				
+				if (cost.getSacAmount() > typeList.size())
+					return false;
 			}
 			else if (cost.getSacThis() && !AllZone.GameAction.isCardInPlay(card))
 				return false;
 		}
 		
-		if (cost.getTapXTypeCost())
-		{
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-			CardList typeList = new CardList(play.getCards());
-			typeList = typeList.getValidCards(cost.getTapXType().split(","));
-			
-			if (cost.getTap())
-				typeList.remove(sa.getSourceCard());
-			
-			return typeList.size() >= cost.getTapXTypeAmount();
-		}
 		return true;
   }
   

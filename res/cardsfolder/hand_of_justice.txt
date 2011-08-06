@@ -1,0 +1,9 @@
+Name:Hand of Justice
+ManaCost:5 W
+Types:Creature Avatar
+Text:no text
+PT:2/6
+K:abDestroyTgtV T tapXType<3/Creature.White>:Creature:Destroy target creature.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/hand_of_justice.jpg
+End

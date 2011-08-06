@@ -14901,7 +14901,7 @@ public class CardFactory_Creatures {
         
       //*************** START *********** START **************************
         else if(cardName.equals("Tradewind Rider")) {
-            final SpellAbility a1 = new Ability(card, "0") {
+            final SpellAbility a1 = new Ability_Activated(card, "0") {
                 private static final long serialVersionUID = 3438865371487994984L;
                 
                 @Override

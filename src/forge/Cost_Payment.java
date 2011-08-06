@@ -58,6 +58,25 @@ public class Cost_Payment {
     	if (cost.getUntap() && (card.isUntapped() || card.isSick()))
     		return false;
     	
+		if (cost.getTapXTypeCost()){
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+			CardList typeList = new CardList(play.getCards());
+			    
+			typeList = typeList.getValidCards(cost.getTapXType().split(","));
+			
+			if (cost.getTap()) {
+				typeList = typeList.filter(new CardListFilter()
+				{
+					public boolean addCard(Card c)
+					{
+						return !c.equals(card) && c.isUntapped();
+					}
+				});
+			}
+			if (typeList.size() == 0)
+			 	return false;
+		}
+    	
     	int countersLeft = 0;
     	if (cost.getSubCounter()){
 			Counters c = cost.getCounterType();
@@ -104,27 +123,6 @@ public class Cost_Payment {
 			}
 			else if (cost.getSacThis() && !AllZone.GameAction.isCardInPlay(card))
 				return false;
-		}  
-		
-		if (cost.getTapXTypeCost())
-		{
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-			CardList typeList = new CardList(play.getCards());
-			    
-			typeList = typeList.getValidCards(cost.getTapXType().split(","));
-			
-			if (cost.getTap()) {
-				typeList = typeList.filter(new CardListFilter()
-				{
-					public boolean addCard(Card c)
-					{
-						return !c.equals(card);
-					}
-				});
-			}
-			if (typeList.size() == 0)
-			 	return false;
-
 		}
     	
     	return true;
@@ -158,6 +156,16 @@ public class Cost_Payment {
 			changeInput.stopSetNext(new Input_PayCostMana(this));
 			return false;
 		}
+		
+		if (!payTapXType && cost.getTapXTypeCost()){
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+            CardList typeList = new CardList(play.getCards());
+            typeList = typeList.getValidCards(cost.getTapXType().split(","));
+            
+			changeInput.stopSetNext(input_tapXCost(cost.getTapXTypeAmount(),cost.getTapXType(), typeList, ability, this));
+			return false;
+		}
+		
 		if (!paySubCounter && cost.getSubCounter()){	// pay counters here. 
 			Counters c = cost.getCounterType();
 			int countersLeft = card.getCounters(c) - cost.getCounterNum();
@@ -225,16 +233,6 @@ public class Cost_Payment {
     			changeInput.stopSetNext(sacrificeType(ability, cost.getSacType(), this));
     		return false;
     	}
-		
-		if (!payTapXType && cost.getTapXTypeCost())
-		{
-			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-            CardList typeList = new CardList(play.getCards());
-            typeList = typeList.getValidCards(cost.getTapXType().split(","));
-            
-			changeInput.stopSetNext(input_tapXCost(cost.getTapXTypeAmount(),cost.getTapXType(), typeList, ability, this));
-			return false;
-		}
 
 		req.finishPaying();
 		return true;
@@ -256,6 +254,11 @@ public class Cost_Payment {
 		}
 		// refund mana
         AllZone.ManaPool.unpaid();
+        
+		if (cost.getTapXTypeCost() && payTapXType){
+			// todo: it would be great if a user cancels payment that the tapped creatures will untap
+			
+		}
         
         // refund counters
         if (cost.getSubCounter() && paySubCounter){
@@ -328,6 +331,11 @@ public class Cost_Payment {
     	if (!cost.hasNoManaCost())
     		ComputerUtil.payManaCost(ability);
     	
+		if (cost.getTapXTypeCost()){
+			for (Card c : tapXCard)
+				c.tap();
+		}
+    	
     	if (cost.getSubCounter())
     		card.setCounter(cost.getCounterType(), countersLeft);
     	
@@ -359,12 +367,6 @@ public class Cost_Payment {
 		if (cost.getSacCost()){
 			for(Card c : sacCard)
 				AllZone.GameAction.sacrifice(c);
-		}
-		
-		if (cost.getTapXTypeCost())
-		{
-			for (Card c : tapXCard)
-				c.tap();
 		}
 
         AllZone.Stack.add(ability);
@@ -529,7 +531,7 @@ public class Cost_Payment {
             public void showMessage() {
             	if (cardList.size() == 0) stop();
             	
-                AllZone.Display.showMessage("Select a "+ cardType + " card to tap");
+                AllZone.Display.showMessage("Select a "+ cardType + " to tap");
                 ButtonUtil.enableOnlyCancel();
             }
             
@@ -543,6 +545,7 @@ public class Cost_Payment {
                 if(zone.is(Constant.Zone.Play) && cardList.contains(card) && card.isUntapped() ) {
                 	// send in CardList for Typing
                     card.tap();
+                    cardList.remove(card);
                     nTapped++;
                     
                     if(nTapped == nCards) 

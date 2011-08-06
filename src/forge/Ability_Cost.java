@@ -61,6 +61,17 @@ public class Ability_Cost {
 		// when adding new costs for cost string, place them here
 		name = cardName;
 		
+        String tapXStr = "tapXType<";
+        if (parse.contains(tapXStr))
+        {
+        	tapXTypeCost = true;
+        	String[] splitStr = abCostParse(parse, tapXStr, 2);
+        	parse = abUpdateParse(parse, tapXStr);
+        	
+        	tapXTypeAmount = Integer.parseInt(splitStr[0]);
+        	tapXType = splitStr[1];
+        }
+		
 		String subStr = "SubCounter<";
         if(parse.contains(subStr)) {
         	// SubCounter<NumCounters/CounterType>
@@ -104,17 +115,6 @@ public class Ability_Cost {
         	sacAmount = Integer.parseInt(splitStr[0]);
         	sacType = splitStr[1];
         	sacThis = (sacType.equals("CARDNAME"));
-        }     
-
-        String tapXStr = "tapXType<";
-        if (parse.contains(tapXStr))
-        {
-        	tapXTypeCost = true;
-        	String[] splitStr = abCostParse(parse, tapXStr, 2);
-        	parse = abUpdateParse(parse, tapXStr);
-        	
-        	tapXTypeAmount = Integer.parseInt(splitStr[0]);
-        	tapXType = splitStr[1];
         }
         
         if (parse.contains("Untap")){
@@ -239,9 +239,22 @@ public class Ability_Cost {
 		
 		if (untapCost){
 			if (first)
-				cost.append("Untap");
+				cost.append("Untap ");
 			else
-				cost.append(", untap");
+				cost.append(", untap ");
+			first = false;
+		}
+		
+		if (tapXTypeCost){
+			if (first)
+				cost.append("Tap ");
+			else
+				cost.append(", tap ");
+			cost.append(tapXTypeAmount);
+			cost.append(" untapped ");
+			cost.append(tapXType);	// needs IsValid String converter
+			if (tapXTypeAmount > 1)
+				cost.append("s");
 			first = false;
 		}
 		
