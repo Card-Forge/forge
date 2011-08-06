@@ -3,6 +3,8 @@ ManaCost:W
 Types:Creature Human Nomad Cleric
 Text:no text
 PT:1/1
+A:AB$ChangeZone | Cost$ W T| Origin$ Library | Destination$ Hand | ChangeType$ Land | ChangeNum$ 1|IsPresent$Land.YouDontCtrl|PresentCompare$ GTX | SpellDescription$ Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library. Activate this ability only if an opponent controls more lands than you.
+SVar:X:Count$Valid Land.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83311.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/59.jpg
