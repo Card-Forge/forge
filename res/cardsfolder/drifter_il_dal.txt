@@ -3,7 +3,7 @@ ManaCost:U
 Types:Creature Human Wizard
 Text:no text
 PT:2/1
-K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U
 K:Shadow
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/drifter_il_dal.jpg

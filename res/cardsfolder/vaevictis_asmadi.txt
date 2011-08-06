@@ -4,7 +4,7 @@ Types:Legendary Creature Elder Dragon
 Text:no text
 PT:7/7
 K:Flying
-K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:B R G
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay B R G
 K:abPump B:+1/+0
 K:abPump R:+1/+0
 K:abPump G:+1/+0

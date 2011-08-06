@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Enchantment Aura
 Text:You control enchanted creature. Enchanted creature gets +0/+1.
 K:Enchant creature
-K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay:1 U
+K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay 1 U
 K:enControlCreature
 K:enPump:+0/+1
 SVar:Rarity:Uncommon

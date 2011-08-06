@@ -3412,7 +3412,7 @@ public class GameActionUtil {
 				for(int i = 0; i < a.size(); i++) {
 					if(a.get(i).toString().startsWith("At the beginning of your upkeep, sacrifice " + c.getName()) ||
 							a.get(i).toString().startsWith("At the beginning of your upkeep, sacrifice CARDNAME")) {
-						String k[] = a.get(i).toString().split(":");
+						String k[] = a.get(i).toString().split(" pay ");
 						c.setUpkeepCost(k[1]);
 						return true;
 					}
@@ -3472,7 +3472,7 @@ public class GameActionUtil {
 				ArrayList<String> a = c.getKeyword();
 				for(int i = 0; i < a.size(); i++) {
 					if(a.get(i).toString().startsWith("At the beginning of your upkeep, destroy CARDNAME")) {
-						String k[] = a.get(i).toString().split(":");
+						String k[] = a.get(i).toString().split(" pay ");
 						c.setUpkeepCost(k[1]);
 						return true;
 					}
@@ -3543,7 +3543,7 @@ public class GameActionUtil {
 						s1 = s1.trim();
 						c.setUpkeepDamage(Integer.parseInt(s1));
 						System.out.println(k[1]);
-						String l[] = k[1].split("pay:");
+						String l[] = k[1].split(" pay ");
 						System.out.println(l[1]);
 						c.setUpkeepCost(l[1]);
 
