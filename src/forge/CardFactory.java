@@ -936,7 +936,7 @@ public class CardFactory implements NewConstants {
 
                 	else if (DiscardMethod.equals("AtRandom"))
                 	{
-                		AllZone.GameAction.discardRandom(discardingPlayer, nCards, this);
+                		discardingPlayer.discardRandom(nCards, this);
                 	}
 
                 	else if (DiscardMethod.equals("Hand"))
@@ -9722,7 +9722,7 @@ public class CardFactory implements NewConstants {
                     for(Card c:list) {
                         AllZone.GameAction.sacrifice(c);
                     }
-                    AllZone.GameAction.discardRandom(card.getController(), handList.size(), this);
+                    card.getController().discardRandom(handList.size(), this);
                     
                     getTargetPlayer().loseLife(5, card);
                 }

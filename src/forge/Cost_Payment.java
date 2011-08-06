@@ -276,7 +276,7 @@ public class Cost_Payment {
     		}
     		else{
     			if (discType.equals("Random")){
-    				AllZone.GameAction.discardRandom(card.getController(), discAmount, ability);
+    				card.getController().discardRandom(discAmount, ability);
     				payDiscard = true;
     			}
     			else{
@@ -476,7 +476,7 @@ public class Cost_Payment {
     		}
     		else{
     			if (discType.equals("Random")){
-    				AllZone.GameAction.discardRandom(card.getController(), discAmount, ability);
+    				card.getController().discardRandom(discAmount, ability);
     			}
     			else{
 	    			if (!discType.equals("Any")){
@@ -484,7 +484,6 @@ public class Cost_Payment {
 	    				AllZone.GameAction.AI_discardNumType(discAmount, validType, ability);
 	    			}
 	    			else{
-	    				//AllZone.GameAction.AI_discardNum(discAmount, ability);
 	    				AllZone.ComputerPlayer.discard(discAmount, ability);
 	    			}
     			}

@@ -3875,7 +3875,7 @@ public class CardFactoryUtil {
                     String dd[] = d[2].split("\\.");
                     AllZone.GameAction.discardUnless(dbPlayer, X, dd[1], sa);
                 }
-                if(d[2].contains("AtRandom")) AllZone.GameAction.discardRandom(dbPlayer, X, sa);
+                if(d[2].contains("AtRandom")) dbPlayer.discardRandom(X, sa);
             } 
             else dbPlayer.discard(X, sa); //AllZone.GameAction.discard(dbPlayer, X, sa);
         }

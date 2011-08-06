@@ -6170,8 +6170,8 @@ public class CardFactory_Sorceries {
         			AllZone.HumanPlayer.drawCards(3);
         			
         			//now, each player discards 3 cards at random
-        			AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, 3, this);
-        			AllZone.GameAction.discardRandom(AllZone.HumanPlayer, 3, this);
+        			AllZone.ComputerPlayer.discardRandom(3, this);
+        			AllZone.HumanPlayer.discardRandom(3, this);
         		}
 
         		@Override
@@ -7864,7 +7864,7 @@ public class CardFactory_Sorceries {
                     		AllZone.InputControl.setInput(CardFactoryUtil.input_discard(max, this));
                     	}
                     	else {
-                    		AllZone.GameAction.discardRandom(AllZone.ComputerPlayer, max, this);
+                    		AllZone.ComputerPlayer.discardRandom(max, this);
                     	}
                     }
                 }//resolve()

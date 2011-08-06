@@ -4769,9 +4769,8 @@ public class CardFactory_Instants {
                     for(Card c:list) {
                         AllZone.GameAction.sacrifice(c);
                     }
-                    AllZone.GameAction.discardRandom(card.getController(), handList.size(), this);
+                    card.getController().discardRandom(handList.size(), this);
                     
-                    //PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
                     getTargetPlayer().loseLife(5, card);
                 }
             };

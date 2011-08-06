@@ -376,9 +376,8 @@ public abstract class Player extends MyObservable{
     }//end doDiscard
     
     public void discardHand(SpellAbility sa) {
-        //PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
         CardList list = AllZoneUtil.getPlayerHand(this);
-        AllZone.GameAction.discardRandom(this, list.size(), sa);
+        discardRandom(list.size(), sa);
     }
     
     public void discardRandom(SpellAbility sa) {

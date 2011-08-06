@@ -150,7 +150,7 @@ public class GameAction {
 	        	moveToGraveyard(c);
     	}
     */
-    
+    /*
     @Deprecated
     public void discardRandom(Player player, int numDiscard, SpellAbility sa) {
     	player.discardRandom(numDiscard, sa);
@@ -158,8 +158,8 @@ public class GameAction {
         for(int i = 0; i < numDiscard; i++) {
             Card[] c = AllZone.getZone(Constant.Zone.Hand, player).getCards();
             if(c.length != 0) discard(CardUtil.getRandom(c), sa);
-        }*/
-    }
+        }
+    }*/
     
     /*
     public void discard(Player player, int numDiscard, SpellAbility sa) {
