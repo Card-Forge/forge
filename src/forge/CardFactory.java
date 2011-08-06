@@ -18142,6 +18142,51 @@ public class CardFactory implements NewConstants {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
+
+        //*************** START *********** START **************************
+        if(cardName.equals("Zuran Orb")) {
+        	final SpellAbility ability = new Ability_Activated(card,"0") {
+        		private static final long serialVersionUID = 6349074098650435648L;
+        		public boolean canPlayAI() {
+        			if( CardFactoryUtil.getLandsInPlay(Constant.Player.Computer).size() > 0 ) {
+        				if( AllZone.GameAction.getPlayerLife(Constant.Player.Computer).getLife() < 5 ) {
+        					return true;
+        				}
+        				else {
+        					return false;
+        				}
+        			}
+        			else return false;
+        		}
+        		public void chooseTargetAI() {
+        			Card target = null;
+        			target = CardFactoryUtil.getWorstLand(Constant.Player.Computer);
+        			setTargetCard(target);
+        		}//chooseTargetAI()
+        		public void resolve() {
+        			AllZone.GameAction.getPlayerLife(card.getController()).addLife(2);
+        			AllZone.GameAction.sacrifice(getTargetCard());
+        		}
+        	};//SpellAbility
+
+        	Input runtime = new Input() {
+        		private static final long serialVersionUID = -64941510699003443L;
+
+        		public void showMessage() {
+        			ability.setStackDescription(card +" - Sacrifice a land to gain 2 life.");
+        			PlayerZone play = AllZone.getZone(Constant.Zone.Play,card.getController());
+        			CardList choice = new CardList(play.getCards());
+        			choice  = choice.getType("Land");
+        			stopSetNext(CardFactoryUtil.input_sacrifice(ability,choice,"Select a land to sacrifice."));
+        		}
+        	};
+
+        	ability.setStackDescription("Zuran Orb - Gain 2 life.");
+        	card.addSpellAbility(ability);
+        	ability.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+
 
         
         // Cards with Cycling abilities

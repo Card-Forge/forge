@@ -1,3 +1,8 @@
+Zuran Orb
+0
+Artifact
+0: Sacrifice a land to gain 2 life.
+
 Storm Seeker
 3 G
 Instant

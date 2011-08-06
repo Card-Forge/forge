@@ -3539,6 +3539,84 @@ public class CardFactoryUtil {
     */
     
     
+    /**
+     * getWorstLand(String)
+     *
+     * This function finds the worst land a player has in play based on:
+     * worst
+     * 1. tapped, basic land
+     * 2. tapped, non-basic land
+     * 3. untapped, basic land
+     * 4. untapped, non-basic land
+     * best
+     *
+     * This is useful when the AI needs to find one of its lands to sacrifice
+     *
+     * @param player - Constant.Player.Human or Constant.Player.Computer
+     * @return the worst land found based on the description above
+     */
+    public static Card getWorstLand(String player) {
+    	Card worstLand = null;
+    	CardList lands = CardFactoryUtil.getLandsInPlay(player);
+    	//first, check for tapped, basic lands
+    	for( int i = 0; i < lands.size(); i++ ) {
+    		Card tmp = lands.get(i);
+    		if(tmp.isTapped() && tmp.isBasicLand()) {
+    			worstLand = tmp;
+    		}
+    	}
+    	//next, check for tapped, non-basic lands
+    	if(worstLand == null) {
+    		for( int i = 0; i < lands.size(); i++ ) {
+    			Card tmp = lands.get(i);
+    			if(tmp.isTapped()) {
+    				worstLand = tmp;
+    			}
+    		}
+    	}
+    	//next, untapped, basic lands
+    	if(worstLand == null) {
+    		for( int i = 0; i < lands.size(); i++ ) {
+    			Card tmp = lands.get(i);
+    			if(tmp.isUntapped() && tmp.isBasicLand()) {
+    				worstLand = tmp;
+    			}
+    		}
+    	}
+    	//next, untapped, non-basic lands
+    	if(worstLand == null) {
+    		for( int i = 0; i < lands.size(); i++ ) {
+    			Card tmp = lands.get(i);
+    			if(tmp.isUntapped()) {
+    				worstLand = tmp;
+    			}
+    		}
+    	}
+    	return worstLand;
+    }//end getWorstLand
+
+    /**
+     * getLandsInPlay(String)
+     *
+     * This function returns a CardList of all lands that the given
+     * player has in Constant.Zone.Play
+     *
+     * @param player - Constant.Player.Human or Constant.Player.Computer
+     * @return a CardList of that players lands
+     */
+    public static CardList getLandsInPlay(String player) {
+    	PlayerZone compBattlezone = AllZone.getZone(Constant.Zone.Play, player);
+    	CardList list = new CardList(compBattlezone.getCards());
+    	list = list.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			if(c.isLand()) return true;
+    			else return false;
+    		}
+    	});
+    	return list;
+    }
+
+    
     //may return null
     static public Card getRandomCard(CardList list) {
         if(list.size() == 0) return null;
