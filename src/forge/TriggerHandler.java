@@ -65,6 +65,10 @@ public class TriggerHandler {
 		{
 			ret = new Trigger_Taps(mapParams,host);
 		}
+		else if(mode.equals("TurnFaceUp"))
+		{
+			ret = new Trigger_TurnFaceUp(mapParams,host);
+		}
 		else if(mode.equals("Untaps"))
 		{
 			ret = new Trigger_Untaps(mapParams,host);

@@ -1377,6 +1377,11 @@ public class Card extends MyObservable {
     public void turnFaceUp() {
         for(Command var:turnFaceUpCommandList)
             var.execute();
+        
+        //Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Morpher", this);
+        AllZone.TriggerHandler.runTrigger("TurnFaceUp", runParams);
     }
     
     public void addDestroyCommand(Command c) {
