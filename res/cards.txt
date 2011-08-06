@@ -1,3 +1,48 @@
+Snow-Covered Forest
+no cost
+Basic Snow Land Forest
+no text
+tap: add G
+SVar:PicCount:4
+SVar:Rarity:Land
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_forest.jpg\http://www.wizards.com/global/images/magic/general/snow_covered_forest.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_forest.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_forest.jpg
+
+Snow-Covered Island
+no cost
+Basic Snow Land Island
+no text
+tap: add U
+SVar:PicCount:4
+SVar:Rarity:Land
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_island.jpg\http://www.wizards.com/global/images/magic/general/snow_covered_island.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_island.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_island.jpg
+
+Snow-Covered Mountain
+no cost
+Basic Snow Land Mountain
+no text
+tap: add R
+SVar:PicCount:4
+SVar:Rarity:Land
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg\http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+
+Snow-Covered Plains
+no cost
+Basic Snow Land Plains
+no text
+tap: add W
+SVar:PicCount:4
+SVar:Rarity:Land
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_plains.jpg\http://www.wizards.com/global/images/magic/general/snow_covered_plains.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_plains.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_plains.jpg
+
+Snow-Covered Swamp
+no cost
+Basic Snow Land Swamp
+no text
+tap: add B
+SVar:PicCount:4
+SVar:Rarity:Land
+SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_swamp.jpg\http://www.wizards.com/global/images/magic/general/snow_covered_swamp.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_swamp.jpg\http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_swamp.jpg
+
 Forest
 no cost
 Basic Land Forest
@@ -27984,51 +28029,6 @@ CARDNAME can't be blocked by creatures with power 2 or greater.
 CARDNAME can't block creatures with power 2 or greater.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sneaky_homunculus.jpg
-
-Snow-Covered Forest
-no cost
-Basic Snow Land Forest
-no text
-tap: add G
-SVar:PicCount:4
-SVar:Rarity:Land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_forest.jpg
-
-Snow-Covered Island
-no cost
-Basic Snow Land Island
-no text
-tap: add U
-SVar:PicCount:4
-SVar:Rarity:Land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_island.jpg
-
-Snow-Covered Mountain
-no cost
-Basic Snow Land Mountain
-no text
-tap: add R
-SVar:PicCount:4
-SVar:Rarity:Land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
-
-Snow-Covered Plains
-no cost
-Basic Snow Land Plains
-no text
-tap: add W
-SVar:PicCount:4
-SVar:Rarity:Land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_plains.jpg
-
-Snow-Covered Swamp
-no cost
-Basic Snow Land Swamp
-no text
-tap: add B
-SVar:PicCount:4
-SVar:Rarity:Land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/snow_covered_swamp.jpg
 
 Sokenzan Bruiser
 4 R
