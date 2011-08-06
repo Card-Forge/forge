@@ -8,6 +8,6 @@ SVar:X:Count$Valid Ally.YouCtrl
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_branchbender.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vastwood_animist.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/116.jpg
 End

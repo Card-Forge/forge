@@ -6,6 +6,7 @@ K:Enchant creature
 K:enPump:+0/+0
 K:stPumpEnchanted:Creature.White:1/2:No Condition:As long as enchanted creature is white, it gets +1/+2.
 K:stPumpEnchanted:Creature.Black:2/1:No Condition:As long as enchanted creature is black, it gets +2/+1.
+SVar:RemRandomDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/edge_of_the_divinity.jpg
