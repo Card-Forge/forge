@@ -12,6 +12,7 @@ public abstract class Player extends MyObservable{
 	protected int poisonCounters;
 	protected int life;
 	protected int assignedDamage;
+	protected int preventNextDamage;
 	protected int numPowerSurgeLands;
 	
 	protected boolean altWin = false;
@@ -34,6 +35,7 @@ public abstract class Player extends MyObservable{
 		life = myLife;
 		poisonCounters = myPoisonCounters;
 		assignedDamage = 0;
+		preventNextDamage = 0;
 		lastDrawnCard = null;
 		numDrawnThisTurn = 0;
 		bFirstTurn = true;
@@ -49,6 +51,7 @@ public abstract class Player extends MyObservable{
 		life = 20;
 		poisonCounters = 0;
 		assignedDamage = 0;
+		preventNextDamage = 0;
 		lastDrawnCard = null;
 		numDrawnThisTurn = 0;
 		slowtripList = new CardList();
@@ -186,9 +189,7 @@ public abstract class Player extends MyObservable{
 	
 	public void addDamage(final int damage, final Card source) {
 		int damageToDo = damage;
-		
-		if( preventAllDamageToPlayer(source, false))
-			damageToDo = 0;
+    	damageToDo = preventDamage(damageToDo,source,false);
 		
 		addDamageWithoutPrevention(damageToDo,source);
 	}
@@ -239,13 +240,32 @@ public abstract class Player extends MyObservable{
 		return reduce;
 	}
 	
+	public int preventDamage(final int damage, Card source, boolean isCombat) {
+    	int restDamage = damage;
+    	
+    	if( preventAllDamageToPlayer(source, false)) {
+    		restDamage = 0;
+        }
+    	
+    	if(restDamage >= preventNextDamage) {
+    		restDamage = restDamage - preventNextDamage;
+    		preventNextDamage = 0;
+    	}
+    	else {
+    		restDamage = 0;
+    		preventNextDamage = preventNextDamage - restDamage;
+    	}
+    	
+    	return restDamage;
+    }
+	
 	public void setAssignedDamage(int n)   		{	assignedDamage = n; }
     public int  getAssignedDamage()        		{	return assignedDamage; }
     
     public void addCombatDamage(final int damage, final Card source) {
     	
     	int damageToDo = damage;
-    	if (preventAllDamageToPlayer(source,true)) damageToDo = 0;
+    	damageToDo = preventDamage(damageToDo,source,true);
     	
     	addDamageWithoutPrevention(damageToDo, source);   //damage prevention is already checked
     	

@@ -198,7 +198,7 @@ import java.util.Random;
             hPlay = hPlay.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
                     // will include creatures already dealt damage
-                    return c.isCreature() && ((c.getNetDefense() + c.getDamage()) <= d)
+                    return c.isCreature() && (c.getKillDamage() <= d)
                             && CardFactoryUtil.canTarget(AF.getHostCard(), c)
                             && !(c.preventAllDamageToCard(AF.getHostCard(),false) && !noPrevention) 
                             && !c.getKeyword().contains("Indestructible")

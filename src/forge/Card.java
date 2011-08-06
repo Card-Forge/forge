@@ -45,7 +45,7 @@ public class Card extends MyObservable {
     private HashMap<Card, Integer>       assignedDamageHashMap             = new HashMap<Card, Integer>();
     
     private boolean                      unCastable;
-    private boolean						drawnThisTurn						= false;
+    private boolean						 drawnThisTurn						= false;
     private boolean                      tapped;
     private boolean                      sickness                          = true;                              //summoning sickness
     private boolean                      token                             = false;
@@ -90,6 +90,8 @@ public class Card extends MyObservable {
     private int                          damage;
     
     private int                          nShield;
+    private int 					     preventNextDamage				   = 0;
+    
     private int                          turnInZone;
     
     private int                          tempAttackBoost                   = 0;
@@ -112,7 +114,7 @@ public class Card extends MyObservable {
     private int 					     multiKickerMagnitude			   = 0;
     
     private Player                       owner                             = null;
-    private Player                      controller                        = null;
+    private Player                       controller                        = null;
     private String                       name                              = "";
     private String                       imageName                         = "";
     private String                       rarity                            = "";
@@ -2652,7 +2654,7 @@ public class Card extends MyObservable {
     
     //the amount of damage needed to kill the creature
     public int getKillDamage() {
-        return getNetDefense() - getDamage();
+        return getNetDefense() + preventNextDamage - getDamage();
     }
     
     
@@ -2720,10 +2722,9 @@ public class Card extends MyObservable {
             list.add(source);
             int damageToAdd = entry.getValue();
             
-            if (preventAllDamageToCard(source, true)) {
-            	damageToAdd = 0;
-            }
-            else {
+            damageToAdd = preventDamage(damageToAdd, source, true);
+            
+            if (damageToAdd > 0) {
 	            if(isCreature() && source.getName().equals("Mirri the Cursed") ) {
 	                final Card thisCard = source;
 	                Ability ability2 = new Ability(thisCard, "0") {
@@ -2785,6 +2786,25 @@ public class Card extends MyObservable {
 		return reduce;
     }
     
+    public int preventDamage(final int damage, Card source, boolean isCombat) {
+    	int restDamage = damage;
+    	
+    	if( preventAllDamageToCard(source, false)) {
+    		restDamage = 0;
+        }
+    	
+    	if(restDamage >= preventNextDamage) {
+    		restDamage = restDamage - preventNextDamage;
+    		preventNextDamage = 0;
+    	}
+    	else {
+    		restDamage = 0;
+    		preventNextDamage = preventNextDamage - restDamage;
+    	}
+    	
+    	return restDamage;
+    }
+    
     public void addDamage(HashMap<Card, Integer> sourcesMap) {
         for(Entry<Card, Integer> entry : sourcesMap.entrySet()) {
         	addDamageWithoutPrevention(entry.getValue(), entry.getKey()); // damage prevention is already checked!
@@ -2793,9 +2813,8 @@ public class Card extends MyObservable {
     
     public void addDamage(final int damageIn, final Card source) {
         int damageToAdd = damageIn;
-        if( preventAllDamageToCard(source, false)) {
-        	damageToAdd = 0;
-        }
+        damageToAdd = preventDamage(damageToAdd, source, false);
+        
         addDamageWithoutPrevention(damageToAdd,source);
     }
         
