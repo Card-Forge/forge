@@ -4,6 +4,7 @@ Types:Creature Ouphe
 Text:When CARDNAME enters the battlefield, you gain 2 life.
 PT:3/2
 K:Persist
+K:etbGainLife:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitchen_finks.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/229.jpg

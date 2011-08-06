@@ -3,6 +3,7 @@ ManaCost:2 W
 Types:Creature Cleric
 Text:When CARDNAME enters the battlefield, you gain 2 life.
 PT:2/2
+K:etbGainLife:2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83441.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/55.jpg

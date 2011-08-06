@@ -356,7 +356,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Venerable Monk") || cardName.equals("Kitchen Finks")
                 || cardName.equals("Shu Grain Caravan")) {
@@ -382,7 +382,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+        */
         /*
         //*************** START *********** START **************************
         else if(cardName.equals("Radiant's Dragoons")) {
