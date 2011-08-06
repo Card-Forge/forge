@@ -33,21 +33,23 @@ public class Spell_Permanent extends Spell {
     
     @Override
     public boolean canPlayAI() {
-        //check on legendary crap
-        if(getSourceCard().getType().contains("Legendary")) {
+    	
+    	Card card = getSourceCard();
+    	
+        //check on legendary
+        if(card.getType().contains("Legendary")) {
         	CardList list = new CardList(AllZone.Computer_Play.getCards());
-            if (list.containsName(getSourceCard().getName()) /*&&
+            if (list.containsName(card.getName()) /*&&
             	!getSourceCard().getName().equals("Flagstones of Trokair")*/)
             	return false;
         }
-        if(getSourceCard().getType().contains("Planeswalker")) {
+        if(card.getType().contains("Planeswalker")) {
         	CardList list = new CardList(AllZone.Computer_Play.getCards());
         	list = list.getType("Planeswalker");
         	
-        	Card c = getSourceCard();
         	for (int i=0;i<list.size();i++)
         	{
-        		String subtype = c.getType().get(c.getType().size() - 1);
+        		String subtype = card.getType().get(card.getType().size() - 1);
         		CardList cl = list.getType(subtype);
         		
         		 if(cl.size() > 0) {
@@ -55,10 +57,13 @@ public class Spell_Permanent extends Spell {
                  }
         	}
         }
-        if(getSourceCard().getType().contains("World")) {
+        if(card.getType().contains("World")) {
         	CardList list = new CardList(AllZone.Computer_Play.getCards());
         	list = list.getType("World");
         	if(list.size() > 0) return false;
+        }
+        if(card.getType().contains("Creature") && card.getNetDefense() <= 0) {
+        	 return false;
         }
         
         return super.canPlayAI();
