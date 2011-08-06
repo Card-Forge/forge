@@ -2207,9 +2207,9 @@ public class Card extends MyObservable {
                     else if(exR[j].startsWith("named")) //by name
                     	r = r && (getName().equals(exR[j].substring(6)));
                     else if(exR[j].startsWith("non")) // ... Other Card types
-                    	r = r && (!getType().contains(exR[j].substring(3)));
+                    	r = r && (!isType(exR[j].substring(3)));
                     else
-                    	r = r && (getType().contains(exR[j]));
+                    	r = r && (isType(exR[j]));
                }
             }
             if (r == true) return true;
