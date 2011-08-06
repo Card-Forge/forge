@@ -884,7 +884,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability2);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Sliver Queen")) {
             final SpellAbility a1 = new Ability(card, "2") {
@@ -918,7 +918,7 @@ public class CardFactory_Creatures {
             
             a1.setBeforePayMana(new Input_PayManaCost(a1));
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Korlash, Heir to Blackblade")) {
@@ -9681,7 +9681,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Boris Devilboon")) {
             final Ability_Tap tokenAbility1 = new Ability_Tap(card, "2 B R") {
@@ -9712,7 +9712,7 @@ public class CardFactory_Creatures {
                     + " - Put a 1/1 black and red Demon creature token named Minor Demon onto the battlefield.");
             tokenAbility1.setBeforePayMana(new Input_PayManaCost(tokenAbility1));
         }//*************** END ************ END **************************
-
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Rhys the Redeemed")) {
