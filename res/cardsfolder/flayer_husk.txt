@@ -1,7 +1,7 @@
 Name:Flayer Husk
 ManaCost:1
 Types:Artifact Equipment
-Text:no text
+Text:Equipped creature gets +1/+1.
 K:eqPump 2:+1/+1
 K:Living Weapon
 SVar:Rarity:Common
