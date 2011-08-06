@@ -9404,7 +9404,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(fetchBasicLand);
         }//*************** END ************ END **************************
 
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Doomed Necromancer")) {   
             final SpellAbility ability = new Ability_Tap(card, "B") {
@@ -9498,6 +9498,7 @@ public class CardFactory_Creatures {
             //     private static final long serialVersionUID = -462134621235305833L;
             // }); 
         }//*************** END ************ END **************************
+        */
         
         	
         //*************** START *********** START **************************
