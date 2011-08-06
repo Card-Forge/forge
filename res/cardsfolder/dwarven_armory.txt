@@ -1,0 +1,9 @@
+Name:Dwarven Armory
+ManaCost:2 R R
+Types:Enchantment
+Text:no text
+A:AB$PutCounter|Cost$T Sac<1/Land>|CounterType$P2P2|CounterNum$1|Tgt$TgtC|PlayerTurn$True|ActivatingPhases$Upkeep|SpellDescription$Put a +2/+2 counter on target creature. Activate this ability only during any upkeep step.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_armory.jpg
+End

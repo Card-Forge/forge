@@ -1,0 +1,9 @@
+Name:Coffin Puppets
+ManaCost:3 B B
+Types:Creature Zombie
+Text:no text
+PT:3/3
+A:AB$Retrieve|Cost$Sac<2/Land>|Destination$Battlefield|ActivatingZone$Graveyard|PlayerTurn$True|ActivatingPhases$Upkeep|IsPresent$Swamp.YouCtrl|SpellDescription$Return Coffin Puppets from your graveyard to the battlefield. Activate this ability only during your upkeep and only if you control a Swamp.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coffin_puppets.jpg
+End
