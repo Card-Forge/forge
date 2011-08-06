@@ -146,6 +146,11 @@ public class CardFactory implements NewConstants {
         
     	Card out = getCard(in.getName(), in.getOwner());
         out.setUniqueNumber(in.getUniqueNumber());
+        
+        out.setSVars(in.getSVars());
+        out.setSets(in.getSets());
+        out.setCurSetCode(in.getCurSetCode());
+        out.setImageFilename(in.getImageFilename());
         return out;
     	
     }
