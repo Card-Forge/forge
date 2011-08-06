@@ -1,3 +1,93 @@
+Irrigation Ditch
+no cost
+Land
+no text
+tap: add W
+tap, Sacrifice CARDNAME: Add G U to your mana pool.
+Comes into play tapped.
+
+Geothermal Crevice
+no cost
+Land
+no text
+tap: add R
+tap, Sacrifice CARDNAME: Add B G to your mana pool.
+Comes into play tapped.
+
+Havenwood Battleground
+no cost
+Land
+no text
+tap: add G
+tap, Sacrifice CARDNAME: Add G G to your mana pool.
+Comes into play tapped.
+
+Ebon Stronghold
+no cost
+Land
+no text
+tap: add B
+tap, Sacrifice CARDNAME: Add B B to your mana pool.
+Comes into play tapped.
+
+Dwarven Ruins
+no cost
+Land
+no text
+tap: add R
+tap, Sacrifice CARDNAME: Add R R to your mana pool.
+Comes into play tapped.
+
+Bog Wreckage
+no cost
+Land
+no text
+tap: add B
+tap, Sacrifice CARDNAME: Add W to your mana pool.
+tap, Sacrifice CARDNAME: Add U to your mana pool.
+tap, Sacrifice CARDNAME: Add B to your mana pool.
+tap, Sacrifice CARDNAME: Add R to your mana pool.
+tap, Sacrifice CARDNAME: Add G to your mana pool.
+Comes into play tapped.
+
+Basal Thrull
+B B
+Creature Thrull
+no text
+1/2
+tap, Sacrifice CARDNAME: Add B B to your mana pool.
+
+Archeological Dig
+no cost
+Land
+no text
+tap: add 1
+tap, Sacrifice CARDNAME: Add W to your mana pool.
+tap, Sacrifice CARDNAME: Add U to your mana pool.
+tap, Sacrifice CARDNAME: Add B to your mana pool.
+tap, Sacrifice CARDNAME: Add R to your mana pool.
+tap, Sacrifice CARDNAME: Add G to your mana pool.
+
+Ancient Spring
+no cost
+Land
+no text
+tap: add U
+tap, Sacrifice CARDNAME: Add W B to your mana pool.
+Comes into play tapped.
+
+Abandoned Outpost
+no cost
+Land
+no text
+tap: add W
+tap, Sacrifice CARDNAME: Add W to your mana pool.
+tap, Sacrifice CARDNAME: Add U to your mana pool.
+tap, Sacrifice CARDNAME: Add B to your mana pool.
+tap, Sacrifice CARDNAME: Add R to your mana pool.
+tap, Sacrifice CARDNAME: Add G to your mana pool.
+Comes into play tapped.
+
 Wild Cantor
 RG
 Creature Human Druid
