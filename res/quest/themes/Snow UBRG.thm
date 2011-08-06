@@ -1,0 +1,56 @@
+BasicLandPercentage=0
+
+[Group MaxCnt=4 Percentage=10]
+Snow-Covered Forest
+Snow-Covered Forest
+Snow-Covered Forest
+Snow-Covered Island
+[/Group]
+
+[Group MaxCnt=1 Percentage=5]
+Snow-Covered Island
+Snow-Covered Mountain
+Snow-Covered Swamp
+[/Group]
+
+[Group MaxCnt=4 Percentage=20]
+Frost Marsh
+Highland Weald
+Tresserhorn Sinks
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Skred
+Skred
+Skred
+Boreal Druid
+Karplusan Wolverine
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Snow Devil
+Into the North
+Into the North
+Boreal Centaur
+[/Group]
+
+[Group MaxCnt=4 Percentage=15]
+Woolly Mammoths
+Frostweb Spider
+Ohran Viper
+[/Group]
+
+[Group MaxCnt=4 Percentage=10]
+Temporal Spring
+Putrefy
+Chill to the Bone
+Slave of Bolas
+[/Group]
+
+[Group MaxCnt=3 Percentage=10]
+Drift of the Dead
+Centaur Omenreader
+Heidar, Rimewind Master
+[/Group]
+
+End
