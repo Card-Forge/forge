@@ -2902,11 +2902,16 @@ public class Card extends MyObservable {
     	
     		if (AllZoneUtil.isCardInPlay("Plated Pegasus") && source.isSpell() 
     			&& restDamage > 0) restDamage = restDamage - 1;
+    		
+    		if (isType("Cleric") && AllZoneUtil.isCardInPlay("Daunting Defender", player))
+    			restDamage = restDamage - AllZoneUtil.getPlayerCardsInPlay(player, "Daunting Defender").size();
     	} //Creature end
     	
 		if (AllZoneUtil.isCardInPlay("Energy Storm") && source.isSpell()) return 0;
     	
-		return restDamage;
+		if ( restDamage > 0)
+			return restDamage;
+		else return 0;
     }
     
     public int preventDamage(final int damage, Card source, boolean isCombat) {
