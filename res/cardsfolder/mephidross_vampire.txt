@@ -3,6 +3,7 @@ ManaCost:4 B B
 Types:Creature Vampire
 Text:no text
 PT:3/4
+K:Flying
 K:stPumpAll:Creature.YouCtrl:0/0/Types=Vampire:No Condition:Each creature you control is a Vampire in addition to its other types and has "Whenever this creature deals damage to a creature, put a +1/+1 counter on this creature."
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature deals damage to a creature, put a +1/+1 counter on this creature.
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredSource | CounterType$ P1P1 | CounterNum$ 1
