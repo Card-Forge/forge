@@ -28,13 +28,14 @@ public class SpellAbility_Requirements {
 		// freeze Stack. No abilities should go onto the stack while I'm filling requirements.
 		AllZone.Stack.freezeStack();
 		
-		if (select.doesTarget()){
+		// Skip to paying if parent ability doesn't target and has no subAbilities.
+		if (!select.doesTarget() && ability.getSubAbility() == null)
+			startPaying();
+		else{
 			select.setRequirements(this);
 			select.resetTargets();
 			select.chooseTargets();
 		}
-		else
-			startPaying();
 	}
 	
 	public void finishedTargeting(){

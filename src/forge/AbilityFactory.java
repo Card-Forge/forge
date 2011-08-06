@@ -20,6 +20,7 @@ public class AbilityFactory {
 	
 	private boolean isAb = false;
 	private boolean isSp = false;
+	private boolean isDb = false;
 	
 	public boolean isAbility()
 	{
@@ -29,6 +30,10 @@ public class AbilityFactory {
 	public boolean isSpell()
 	{
 		return isSp;
+	}
+	
+	public boolean isDrawback() {
+		return isDb;
 	}
 	
 	private Ability_Cost abCost = null;
@@ -120,14 +125,18 @@ public class AbilityFactory {
 			isSp = true;
 			API = mapParams.get("SP");
 		}
+		else if (mapParams.containsKey("DB")) {
+			isDb = true;
+			API = mapParams.get("DB");
+		}
 		else
 			throw new RuntimeException("AbilityFactory : getAbility -- no API in " + hostCard.getName());
 
-		
-		if (!mapParams.containsKey("Cost"))
-			throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + hostCard.getName());
-		abCost = new Ability_Cost(mapParams.get("Cost"), hostCard.getName(), isAb);
-		
+		if (!isDb){
+			if (!mapParams.containsKey("Cost"))
+				throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + hostCard.getName());
+			abCost = new Ability_Cost(mapParams.get("Cost"), hostCard.getName(), isAb);
+		}
 		
 		if (mapParams.containsKey("ValidTgts"))
 		{
@@ -145,8 +154,11 @@ public class AbilityFactory {
 			int min = mapParams.containsKey("TargetMin") ? Integer.parseInt(mapParams.get("TargetMin")) : 1;
 			int max = mapParams.containsKey("TargetMax") ? Integer.parseInt(mapParams.get("TargetMax")) : 1;
 			
-			if (hasValid)
-				abTgt = new Target(mapParams.get("TgtPrompt"), mapParams.get("ValidTgts").split(","), min, max);
+			if (hasValid){
+				// TgtPrompt now optional
+				String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " + mapParams.get("ValidTgts");
+				abTgt = new Target(prompt, mapParams.get("ValidTgts").split(","), min, max);
+			}
 			else
 				abTgt = new Target(mapParams.get("Tgt"), min, max);
 			
@@ -161,29 +173,18 @@ public class AbilityFactory {
 		// ***********************************
 		// Match API keywords
 		
-		if (API.equals("DealDamage"))
-		{
-			final int NumDmg[] = {-1};
-            final String NumDmgX[] = {"none"};
-            String tmpND = mapParams.get("NumDmg");
-            if (tmpND.length() > 0)
-            {
-            	if (tmpND.matches("X"))
-            		NumDmgX[0] = hostCard.getSVar(tmpND);
-            	
-            	else if (tmpND.matches("[0-9][0-9]?"))
-            		NumDmg[0] = Integer.parseInt(tmpND);
-            }
+	      if (API.equals("DealDamage"))
+	      {
+			AbilityFactory_DealDamage dd = new AbilityFactory_DealDamage(this);
 
-			AbilityFactory_DealDamage dd =  new AbilityFactory_DealDamage();
-            
-            if (isAb)
-				SA = dd.getAbility(this, NumDmg[0], NumDmgX[0]);
+			if (isAb)
+				SA = dd.getAbility();
 			else if (isSp)
-				SA = dd.getSpell(this, NumDmg[0], NumDmgX[0]);
-			
-            
-		}
+				SA = dd.getSpell();
+			else if (isDb)
+				SA = dd.getDrawback();
+			SA.setSubAbility(dd.getSubAbility());
+	      }
 		
 		if (API.equals("PutCounter")){
 			if (isAb)
@@ -240,9 +241,12 @@ public class AbilityFactory {
 		if (API.equals("GainLife")){
 			if (isAb)
 				SA = AbilityFactory_AlterLife.createAbilityGainLife(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_AlterLife.createSpellGainLife(this);
-			}
+			else if (isDb)
+				SA = AbilityFactory_AlterLife.createSpellGainLife(this);
+			if(hasSubAbility())
+				SA.setSubAbility(getSubAbility());
 		}
 
 		if (API.equals("LoseLife")){
@@ -297,17 +301,23 @@ public class AbilityFactory {
 		if (API.equals("Draw")){
 			if (isAb)
 				SA = AbilityFactory_ZoneAffecting.createAbilityDraw(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_ZoneAffecting.createSpellDraw(this);
-			}
+			else if (isDb)
+				SA = AbilityFactory_ZoneAffecting.createDrawbackDraw(this);
+			if(hasSubAbility())
+				SA.setSubAbility(getSubAbility());
 		}
 		
 		if (API.equals("Mill")){
 			if (isAb)
 				SA = AbilityFactory_ZoneAffecting.createAbilityMill(this);
-			if (isSp){
+			else if (isSp)
 				SA = AbilityFactory_ZoneAffecting.createSpellMill(this);
-			}
+			else if (isDb)
+				SA = AbilityFactory_ZoneAffecting.createDrawbackMill(this);
+			if(hasSubAbility())
+				SA.setSubAbility(getSubAbility());
 		}
 		
 		if (API.equals("Destroy")){
@@ -360,7 +370,7 @@ public class AbilityFactory {
         	
         	SA.setDescription(sb.toString());
         }
-
+        
         if (!isTargeted)
         	SA.setStackDescription(hostCard.getName());
         
@@ -400,6 +410,27 @@ public class AbilityFactory {
         }
         
         return SA;
+	}
+	
+	// Easy creation of SubAbilities
+	public Ability_Sub getSubAbility(){
+		Ability_Sub abSub = null;
+
+       String sSub = getMapParams().get("SubAbility");
+       
+       if (sSub.startsWith("SVar="))
+          sSub = getHostCard().getSVar(sSub.split("=")[1]);
+       
+       if (sSub.startsWith("DB$"))
+       {
+          AbilityFactory afDB = new AbilityFactory();
+          abSub = (Ability_Sub)afDB.getAbility(sSub, getHostCard());
+       }
+       else{
+    	   // Older style Drawback. May not be necessary?
+       }
+
+        return abSub;
 	}
 	
 	

@@ -48,6 +48,7 @@ public abstract class SpellAbility {
     protected Target		chosenTarget	   = null;
     
     private SpellAbility_Restriction restrictions = new SpellAbility_Restriction();
+    private Ability_Sub 	subAbility 			= null;
     
     private CardList 		sacrificedCards	   = null;
     
@@ -321,6 +322,14 @@ public abstract class SpellAbility {
     		description = description.replace("CARDNAME", this.getSourceCard().getName());
         return description;
     }
+    
+	public void setSubAbility(Ability_Sub subAbility) {
+		this.subAbility = subAbility;		
+	}
+	
+	public Ability_Sub getSubAbility() {
+		return this.subAbility;		
+	}
     
     public Card getTargetCard() {
         if(targetCard == null){

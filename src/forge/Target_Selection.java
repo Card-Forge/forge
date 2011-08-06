@@ -47,9 +47,23 @@ public class Target_Selection {
 			req.finishedTargeting();
 			return false;
 		}
-		else if (bDoneTarget && target.isMinTargetsChosen() || target.isMaxTargetsChosen()){
-			req.finishedTargeting();
-			return true;
+		else if (!doesTarget() || bDoneTarget && target.isMinTargetsChosen() || target.isMaxTargetsChosen()){
+			Ability_Sub abSub = ability.getSubAbility();
+			
+			if (abSub == null){
+				// if no more SubAbilities finish targeting
+				req.finishedTargeting();
+				return true;
+			}
+			else{
+				// Has Sub Ability
+				Target_Selection ts = new Target_Selection(abSub.getTarget(), abSub);
+				ts.setRequirements(req);
+				ts.resetTargets();
+				boolean flag = ts.chooseTargets();
+
+				return flag;
+			}
 		}
 		
 		//targets still needed

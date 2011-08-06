@@ -18,15 +18,7 @@ public class AbilityFactory_AlterLife {
 			@Override
 			public String getStackDescription(){
 				// when getStackDesc is called, just build exactly what is happening
-				 StringBuilder sb = new StringBuilder();
-				 String name = af.getHostCard().getName();
-				 int amount = calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
-				 String player = "You gain ";
-				 if (af.getAbTgt() != null)
-					 player = getTargetPlayer() + " gains ";
-				 sb.append(name).append(" - ").append(player).append(amount).append(" life.");
-
-				 return sb.toString();
+				return gainLifeStackDescription(af, this);
 			}
 			
 			public boolean canPlay(){
@@ -59,15 +51,7 @@ public class AbilityFactory_AlterLife {
 			@Override
 			public String getStackDescription(){
 			// when getStackDesc is called, just build exactly what is happening
-				 StringBuilder sb = new StringBuilder();
-				 String name = af.getHostCard().getName();
-				 int amount = calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
-				 String player = "You gain ";
-				 if (af.getAbTgt() != null)
-					 player = getTargetPlayer() + " gains ";
-				 sb.append(name).append(" - ").append(player).append(amount).append(" life.");
-
-				 return sb.toString();
+				return gainLifeStackDescription(af, this);
 			}
 			
 			public boolean canPlay(){
@@ -91,6 +75,42 @@ public class AbilityFactory_AlterLife {
 			
 		};
 		return spGainLife;
+	}
+	
+	public static SpellAbility createDrawbackGainLife(final AbilityFactory AF){
+		final SpellAbility dbGainLife = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = 6631124959690157874L;
+			
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+		
+			@Override
+			public String getStackDescription(){
+			// when getStackDesc is called, just build exactly what is happening
+				return gainLifeStackDescription(af, this);
+			}
+			
+			public boolean canPlayAI()
+			{
+				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
+				// then call xCount with that card to properly calculate the amount
+				// Or choosing how many to sacrifice 
+				return gainLifeCanPlayAI(af, this, params.get("LifeAmount"));
+			}
+			
+			@Override
+			public void resolve() {
+				int amount = calculateAmount(af.getHostCard(), params.get("LifeAmount"), this);
+				gainLifeResolve(af, this, amount);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return true;
+			}
+			
+		};
+		return dbGainLife;
 	}
 	
 	public static SpellAbility createAbilityLoseLife(final AbilityFactory AF){
@@ -181,14 +201,7 @@ public class AbilityFactory_AlterLife {
 		};
 		return abLoseLife;
 	}
-	
-	public static SpellAbility createAbilitySyphonLife(final AbilityFactory AF){	// tgt loses X life, you gain X life
-		return null;
-	}
-	
-	public static SpellAbility createSpellSyphonLife(final AbilityFactory AF){		// tgt loses X life, you gain X life
-		return null;
-	}
+
 	
 	public static int calculateAmount(Card card, String lifeAmount, SpellAbility ability){
 		if (lifeAmount.matches("X"))
@@ -210,6 +223,29 @@ public class AbilityFactory_AlterLife {
 		}
 
 		return Integer.parseInt(lifeAmount);
+	}
+	
+	public static String gainLifeStackDescription(AbilityFactory af, SpellAbility sa){
+		StringBuilder sb = new StringBuilder();
+		int amount = calculateAmount(af.getHostCard(), af.getMapParams().get("LifeAmount"), sa);
+
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+
+		String player = "You gain ";
+		if (af.getAbTgt() != null)
+			player = sa.getTargetPlayer() + " gains ";
+		sb.append(player).append(amount).append(" life.");
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			abSub.setParent(sa);
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
 	}
 	
 	public static boolean gainLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){
@@ -260,7 +296,6 @@ public class AbilityFactory_AlterLife {
 	
 	public static void gainLifeResolve(final AbilityFactory af, final SpellAbility sa, int lifeAmount){
 		HashMap<String,String> params = af.getMapParams();
-		String DrawBack = params.get("SubAbility");
 		Card card = af.getHostCard();
 		
 		ArrayList<Player> tgtPlayers;
@@ -277,8 +312,20 @@ public class AbilityFactory_AlterLife {
 			if (tgt == null || p.canTarget(af.getHostCard()))
 				p.gainLife(lifeAmount, sa.getSourceCard());
 		
-		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), tgtPlayers.get(0), card, null, sa);
+		
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+	     	   if (abSub.getParent() == null)
+	     		  abSub.setParent(sa);
+	     	   abSub.resolve();
+	        }
+			else{
+				String DrawBack = params.get("SubAbility");
+				if (af.hasSubAbility())
+					 CardFactoryUtil.doDrawBack(DrawBack, lifeAmount, card.getController(), card.getController().getOpponent(), tgtPlayers.get(0), card, null, sa);
+			}
+		}
 	}
 	
 	public static boolean loseLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){

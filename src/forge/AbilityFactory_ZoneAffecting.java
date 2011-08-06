@@ -14,17 +14,7 @@ public class AbilityFactory_ZoneAffecting {
 			@Override
 			public String getStackDescription(){
 			// when getStackDesc is called, just build exactly what is happening
-				Player player = af.getAbTgt() == null ? getActivatingPlayer() : getTargetPlayer(); 
-				StringBuilder sb = new StringBuilder();
-				
-				sb.append(getSourceCard().getName());
-				sb.append(" - ");
-				sb.append(player.toString());
-				sb.append(" draws (");
-				sb.append(af.getMapParams().get("NumCards"));
-				sb.append(")");
-				
-				return sb.toString();
+				return drawStackDescription(af, this);
 			}
 			
 			public boolean canPlay(){
@@ -55,17 +45,7 @@ public class AbilityFactory_ZoneAffecting {
 			@Override
 			public String getStackDescription(){
 				// when getStackDesc is called, just build exactly what is happening
-				Player player = af.getAbTgt() == null ? getActivatingPlayer() : getTargetPlayer(); 
-				StringBuilder sb = new StringBuilder();
-				
-				sb.append(getSourceCard().getName());
-				sb.append(" - ");
-				sb.append(player.toString());
-				sb.append(" draws (");
-				sb.append(af.getMapParams().get("NumCards"));
-				sb.append(")");
-				
-				return sb.toString();
+				return drawStackDescription(af, this);
 			}
 			
 			public boolean canPlay(){
@@ -85,6 +65,56 @@ public class AbilityFactory_ZoneAffecting {
 			
 		};
 		return spDraw;
+	}
+	
+	public static SpellAbility createDrawbackDraw(final AbilityFactory AF){
+		final SpellAbility dbDraw = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -4990932993654533449L;
+			
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription(){
+				// when getStackDesc is called, just build exactly what is happening
+				return drawStackDescription(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				drawResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				// TODO Auto-generated method stub
+				return true;
+			}
+			
+		};
+		return dbDraw;
+	}
+	
+	public static String drawStackDescription(AbilityFactory af, SpellAbility sa){
+		Player player = af.getAbTgt() == null ? sa.getActivatingPlayer() : sa.getTargetPlayer(); 
+		StringBuilder sb = new StringBuilder();
+		
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+		
+		sb.append(player.toString());
+		sb.append(" draws (");
+		sb.append(af.getMapParams().get("NumCards"));
+		sb.append(").");
+		
+		Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null){
+        	abSub.setParent(sa);
+        	sb.append(abSub.getStackDescription());
+        }
+		
+		return sb.toString();
 	}
 	
 	public static boolean drawCanPlayAI(final AbilityFactory af, SpellAbility sa){
@@ -161,13 +191,28 @@ public class AbilityFactory_ZoneAffecting {
 		}
 		
 		for(Player p : tgtPlayers)
-			if (tgt == null || p.canTarget(af.getHostCard()))
-				p.drawCards(numCards);		
+			if (tgt == null || p.canTarget(af.getHostCard())){
+				if (params.containsKey("NextUpkeep"))
+					for(int i = 0; i < numCards; i++)
+						p.addSlowtripList(source);
+				else
+					p.drawCards(numCards);		
+				
+			}
 
-		String DrawBack = params.get("SubAbility");
-		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), source.getController(), source, null, sa);
-
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+	     	   if (abSub.getParent() == null)
+	     		  abSub.setParent(sa);
+	     	   abSub.resolve();
+	        }
+	        else{
+				String DrawBack = params.get("SubAbility");
+				if (af.hasSubAbility())
+					 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), source.getController(), source, null, sa);
+	        }
+		}
 	}
 	
 	
@@ -181,18 +226,7 @@ public class AbilityFactory_ZoneAffecting {
 			
 			@Override
 			public String getStackDescription(){
-			// when getStackDesc is called, just build exactly what is happening
-				Player player = af.getAbTgt() == null ? getActivatingPlayer() : getTargetPlayer(); 
-				StringBuilder sb = new StringBuilder();
-				
-				sb.append(getSourceCard().getName());
-				sb.append(" - Mills ");
-				sb.append(af.getMapParams().get("NumCards"));
-				sb.append(" Cards from ");
-				sb.append(player.toString());
-				sb.append("'s library.");
-				
-				return sb.toString();
+				return millStackDescription(this, af);
 			}
 			
 			public boolean canPlay(){
@@ -220,6 +254,11 @@ public class AbilityFactory_ZoneAffecting {
 			
 			final AbilityFactory af = AF;
 			
+			@Override
+			public String getStackDescription(){
+				return millStackDescription(this, af);
+			}
+			
 			public boolean canPlay(){
 				// super takes care of AdditionalCosts
 				return super.canPlay();	
@@ -237,6 +276,61 @@ public class AbilityFactory_ZoneAffecting {
 			
 		};
 		return spMill;
+	}
+	
+	public static SpellAbility createDrawbackMill(final AbilityFactory AF){
+		final SpellAbility dbMill = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -4990932993654533449L;
+			
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription(){
+				return millStackDescription(this, af);
+			}
+			
+			public boolean canPlayAI()
+			{
+				return millCanPlayAI(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				millResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return true;
+			}
+			
+		};
+		return dbMill;
+	}
+	
+	public static String millStackDescription(SpellAbility sa, AbilityFactory af){
+		// when getStackDesc is called, just build exactly what is happening
+		Player player = af.getAbTgt() == null ? sa.getActivatingPlayer() : sa.getTargetPlayer(); 
+		StringBuilder sb = new StringBuilder();
+		
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+		
+		sb.append("Mills ");
+		sb.append(af.getMapParams().get("NumCards"));
+		sb.append(" Card(s) from ");
+		sb.append(player.toString());
+		sb.append("'s library.");
+		
+		Ability_Sub abSub = sa.getSubAbility();
+        if (abSub != null){
+        	abSub.setParent(sa);
+        	sb.append(abSub.getStackDescription());
+        }
+		
+		return sb.toString();
 	}
 	
 	public static boolean millCanPlayAI(final AbilityFactory af, SpellAbility sa){
@@ -304,6 +398,7 @@ public class AbilityFactory_ZoneAffecting {
 		HashMap<String,String> params = af.getMapParams();
 		
 		Card source = sa.getSourceCard();
+		// todo: handle deciding what X would be around here for Psychic Drain type cards
 		int numCards = Integer.parseInt(params.get("NumCards"));
 		
 		ArrayList<Player> tgtPlayers;
@@ -320,9 +415,18 @@ public class AbilityFactory_ZoneAffecting {
 			if (tgt == null || p.canTarget(af.getHostCard()))
 				p.mill(numCards);	
 
-		String DrawBack = params.get("SubAbility");
-		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
-
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+	     	   if (abSub.getParent() == null)
+	     		  abSub.setParent(sa);
+	     	   abSub.resolve();
+	        }
+			else{
+				String DrawBack = params.get("SubAbility");
+				if (af.hasSubAbility())
+					 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
+			}
+		}
 	}
 }

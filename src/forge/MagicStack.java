@@ -440,32 +440,7 @@ public class MagicStack extends MyObservable {
 		
 		AllZone.Phase.resetPriority();	// ActivePlayer gains priority first after Resolve
 		Card source = sa.getSourceCard();
-		boolean fizzle = false;
-
-		Target tgt = sa.getTarget();
-		if (tgt != null){
-			fizzle = true;
-			// With multi-targets, as long as one target is still legal, we'll try to go through as much as possible
-			ArrayList<Object> tgts = tgt.getTargets();
-			for(Object o : tgts){
-				if (o instanceof Player){
-					Player p = (Player)o;
-					fizzle &= !(p.canTarget(sa.getTargetCard()));
-				}
-				if (o instanceof Card){
-					Card card = (Card)o;
-					fizzle &= !(CardFactoryUtil.isTargetStillValid(sa, card));
-				}
-			}
-		}
-		else if (sa.getTargetCard() != null) {
-			// Fizzling will only work for Abilities that use the Target class,
-			// since the info isn't available otherwise
-			fizzle = !CardFactoryUtil.isTargetStillValid(sa, sa.getTargetCard());
-		} 
-		else if (sa.getTargetPlayer() != null) {
-			fizzle = !sa.getTargetPlayer().canTarget(source);
-		}
+		boolean fizzle = hasFizzled(sa, source);
 
 		if (!fizzle) {
 			final Card crd = source;
@@ -545,6 +520,42 @@ public class MagicStack extends MyObservable {
 
 		GuiDisplayUtil.updateGUI();
 	}
+	
+	public boolean hasFizzled(SpellAbility sa, Card source){
+		boolean fizzle = false;
+
+		Target tgt = sa.getTarget();
+		if (tgt != null){
+			fizzle = true;
+			// With multi-targets, as long as one target is still legal, we'll try to go through as much as possible
+			ArrayList<Object> tgts = tgt.getTargets();
+			for(Object o : tgts){
+				if (o instanceof Player){
+					Player p = (Player)o;
+					fizzle &= !(p.canTarget(sa.getTargetCard()));
+				}
+				if (o instanceof Card){
+					Card card = (Card)o;
+					fizzle &= !(CardFactoryUtil.isTargetStillValid(sa, card));
+				}
+			}
+		}
+		else if (sa.getTargetCard() != null) {
+			// Fizzling will only work for Abilities that use the Target class,
+			// since the info isn't available otherwise
+			fizzle = !CardFactoryUtil.isTargetStillValid(sa, sa.getTargetCard());
+		} 
+		else if (sa.getTargetPlayer() != null) {
+			fizzle = !sa.getTargetPlayer().canTarget(source);
+		}
+		
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null)
+			fizzle &= hasFizzled(abSub, source);
+	
+		return fizzle;
+	}
+	
 
 	public SpellAbility pop() {
 		SpellAbility sp = (SpellAbility) stack.remove(0);
