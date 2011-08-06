@@ -1,3 +1,38 @@
+Delusions of Mediocrity
+3 U
+Enchantment
+no text
+WheneverKeyword:EntersBattleField:Self:Any:ModifyLife/10:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Delusions of Mediocrity enters the battlefield, you gain 10 life.
+WheneverKeyword:LeavesBattleField:Self:Any:ModifyLife/-10:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Delusions of Mediocrity leaves the battlefield, you lose 10 life.
+
+Worldslayer
+5
+Artifact Equipment
+no text
+eqPump 5:+0/+0
+WheneverKeyword:DealsDamage/Opponent:Equipped_Creature:Play:Destroy:All/None:ASAP:No_Condition:AllTargets - Except Self:Whenever equipped creature deals combat damage to a player, destroy all permanents other than Worldslayer.
+
+Fallowsage
+3 U
+Creature Merfolk Wizard
+no text
+2/2
+WheneverKeyword:BecomesTapped:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Fallowsage becomes tapped, you may draw a card.
+
+Ballynock Trapper
+3 W
+Creature Kithkin Soldier
+no text
+2/2
+WheneverKeyword:CastSpell/Controller:Color/white:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a white spell, you may untap Ballynock Trapper.
+
+Angelic Benediction
+3 W
+Enchantment
+no text
+WheneverKeyword:Attack - Alone:No_Initiator:Play:StatsPumpEOT/1/1:Initiating_Card:ASAP:No_Condition:Initiator - OwnedByController:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
+WheneverKeyword:Attack - Alone:No_Initiator:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:Initiator - OwnedByController:Whenever a creature you control attacks alone, you may tap target creature.
+
 Battle Strain
 1 R
 Enchantment
@@ -5984,12 +6019,6 @@ Land
 no text
 abAddReflectedMana:Type:You
 
-Fallowsage
-3 U
-Creature Merfolk Wizard
-Whenever Fallowsage becomes tapped, you may draw a card.
-2/2
-
 Vithian Stinger
 2 R
 Creature Human Shaman
@@ -9138,12 +9167,6 @@ Creature Goblin Warrior
 Mudbrawler Cohort gets +1/+1 as long as you control another red creature.
 1/1
 Haste
-
-Ballynock Trapper
-3 W
-Creature Kithkin Soldier
-Whenever you cast a white spell, you may untap Ballynock Trapper.
-2/2
 
 Antler Skulkin
 5

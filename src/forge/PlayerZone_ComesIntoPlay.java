@@ -286,7 +286,10 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         }
         
 
-        if(leavesTrigger) c.leavesPlay();
+        if(leavesTrigger) {
+        	AllZone.GameAction.CheckWheneverKeyword(c,"LeavesBattleField",null);
+        	c.leavesPlay();
+        }
         
         if(AllZone.StaticEffects.getCardToEffectsList().containsKey(c.getName())) {
             String[] effects = AllZone.StaticEffects.getCardToEffectsList().get(c.getName());

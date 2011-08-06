@@ -140,6 +140,7 @@ public class GameActionUtil {
 
 	public static void executeTapSideEffects(Card c) {
 		
+		AllZone.GameAction.CheckWheneverKeyword(c,"BecomesTapped",null);
 		final String activePlayer = AllZone.Phase.getActivePlayer();
 
 		/* cards with Tap side effects can be listed here, just like in
@@ -157,18 +158,6 @@ public class GameActionUtil {
 			ability.setStackDescription("City of Brass deals 1 damage to " + player);
 			AllZone.Stack.add(ability);
 		}//end City of Brass
-
-		if (c.getName().equals("Fallowsage")) {
-			final String player = c.getController();
-			Ability ability = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					AllZone.GameAction.drawCard(player);
-				}
-			};// Ability
-			ability.setStackDescription("Fallowsage - draw a card");
-			AllZone.Stack.add(ability);
-		}//end Fallowsage
 		
 		if(c.getType().contains("Mountain")) {
 			final String opponent = AllZone.GameAction.getOpponent(c.getController());
@@ -313,7 +302,6 @@ public class GameActionUtil {
 		playCard_Forced_Fruition(c);
 		playCard_Gelectrode(c);
 		playCard_Cinder_Pyromancer(c);
-		playCard_Ballynock_Trapper(c);
 		playCard_Standstill(c);
 		playCard_Memory_Erosion(c);
 		playCard_SolKanar(c);
@@ -2421,47 +2409,6 @@ public class GameActionUtil {
 			}
 		}
 	}// Cinder_Pyromancer
-
-	public static void playCard_Ballynock_Trapper(Card c) {
-		final String controller = c.getController();
-
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Ballynock Trapper");
-
-		if(list.size() > 0 && CardUtil.getColors(c).contains(Constant.Color.White)) {
-
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
-
-				Ability ability2 = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-
-						if(card.getController().equals("Human")) {
-							String[] choices = {"Yes", "No"};
-							Object choice = AllZone.Display.getChoice("Untap Ballynock Trapper?", choices);
-							if(choice.equals("Yes")) {
-								card.untap();
-							}
-						}
-						if(card.getController().equals("Computer")) {
-							card.untap();
-						}
-					}
-
-				}; // ability2
-
-				ability2.setStackDescription(card.getName() + " - " + c.getController()
-						+ " played a white spell, you may untap Ballynock Trapper.");
-				AllZone.Stack.add(ability2);
-			}
-		}
-	}// Ballynock Trapper
-
 
 	public static void playCard_Forced_Fruition(Card c) {
 		PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
