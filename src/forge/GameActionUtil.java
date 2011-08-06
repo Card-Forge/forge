@@ -11463,20 +11463,20 @@ public class GameActionUtil {
 	      		if (CardsinPlay.size() < 3) return false;
 	      	}
   	      	if(SpecialConditions.contains("isPresent")) { // is a card of a certain type/color present?
-  	    	  	SpecialConditions = SpecialConditions.replaceAll("isPresent ", "");
+  	    	  	String Requirements = SpecialConditions.replaceAll("isPresent ", "");
     			CardList CardsinPlay = new CardList();
       			CardsinPlay.addAll(AllZone.Human_Play.getCards());
       			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
-      			String Conditions[] = SpecialConditions.split(",");
+      			String Conditions[] = Requirements.split(",");
       			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController());
 	      		if (CardsinPlay.isEmpty()) return false;
   	      	}
-  	      	if(SpecialConditions.contains("isNotPresent")) { // is a card of a certain type/color not present?
-  	    	  	SpecialConditions = SpecialConditions.replaceAll("isNotPresent ", "");
+  	      	if(SpecialConditions.contains("isNotPresent")) { // is no card of a certain type/color present?
+  	      		String Requirements = SpecialConditions.replaceAll("isNotPresent ", "");
     			CardList CardsinPlay = new CardList();
       			CardsinPlay.addAll(AllZone.Human_Play.getCards());
       			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
-      			String Conditions[] = SpecialConditions.split(",");
+      			String Conditions[] = Requirements.split(",");
       			CardsinPlay = CardsinPlay.getValidCards(Conditions, SourceCard.getController());
 	      		if (!CardsinPlay.isEmpty()) return false;
   	      	}
