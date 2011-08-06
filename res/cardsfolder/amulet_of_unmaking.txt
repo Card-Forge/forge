@@ -1,0 +1,8 @@
+Name:Amulet of Unmaking
+ManaCost:5
+Types:Artifact
+Text:no text
+A:AB$Bounce|Cost$5 T Exile<1/CARDNAME>|ValidTgts$Artifact,Creature,Land|SorcerySpeed$True|TgtPrompt$Select target artifact, creature, or land|Destination$Exile|SpellDescription$Exile target artifact, creature, or land. Activate this ability only any time you could cast a sorcery.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/amulet_of_unmaking.jpg
+End
