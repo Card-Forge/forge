@@ -6711,24 +6711,18 @@ public class GameActionUtil {
 	}
 
 	private static void playerCombatDamage_Hypnotic_Specter(Card c) {
-		final Player[] player = new Player[1];
-		player[0] = c.getController();
-		final Player[] opponent = new Player[1];
+		final Player player = c.getController().getOpponent();
 
 		if(c.getNetAttack() > 0) {
 			Ability ability = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-
-					opponent[0] = player[0].getOpponent();
-					opponent[0].discardRandom(this);
+					player.discardRandom(this);
 				}
 			};// ability
-
-			opponent[0] = player[0].getOpponent();
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("Hypnotic Specter - ").append(opponent[0]).append(" discards a card at random");
+			sb.append(c.getName()).append(" - ").append(player).append(" discards a card at random");
 			ability.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability);
@@ -6736,97 +6730,36 @@ public class GameActionUtil {
 	}
 	
 	private static void playerCombatDamage_Silent_Specter(Card c) {
-		final Player[] player = new Player[1];
-		player[0] = c.getController();
-		final Player[] opponent = new Player[1];
+		final Player player = c.getController().getOpponent();
 
 		if(c.getNetAttack() > 0 && !c.isFaceDown()) {
 			Ability ability = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-					
-                    PlayerZone Ohand = AllZone.getZone(Constant.Zone.Hand, player[0].getOpponent());
-                    Card h[] = Ohand.getCards();
-                    Card[] handChoices = Ohand.getCards();
-                    int Handsize = 1;
-                    if(h.length <= 1) Handsize = h.length;
-                    Player opponent = player[0].getOpponent();
-                    Card choice = null; 
-
-                    int j=0;
-                    
-                    while (j<2) {
-
-                    for(int i = 0; i < Handsize; i++) {
-                            AllZone.Display.showMessage("Select two cards to discard ");
-                            ButtonUtil.enableOnlyCancel();
-                        handChoices = Ohand.getCards();
-                        //human chooses
-                        if(opponent.equals(AllZone.HumanPlayer)) {
-                            choice = AllZone.Display.getChoice("Choose", handChoices);
-                        } else//computer chooses
-                        {
-                            choice = CardUtil.getRandom(handChoices);
-                        }
-                        
-                        choice.getController().discard(choice, this);
-                    }
-                    
-                    j++;
-                    
-                    }
-                    
+					player.discard(2, this, true);
 				}
 			};// ability
-			opponent[0] = player[0].getOpponent();
-			
 			StringBuilder sb = new StringBuilder();
-			sb.append("Silent Specter - ").append(opponent[0]).append(" discards two cards");
+			sb.append(c.getName()).append(" - ").append(player).append(" discards two cards");
 			ability.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability);
 		}
 	}
 	
-
-	private static void playerCombatDamage_Abyssal_Specter(Card c) {
-		final Player[] player = new Player[1];
-		player[0] = c.getController();
-		final Player[] opponent = new Player[1];
+	private static void playerCombatDamage_Abyssal_Specter(final Card c) {
+		final Player player = c.getController().getOpponent();
 
 		if(c.getNetAttack() > 0) {
-			Ability ability = new Ability(c, "0") {
+			SpellAbility ability = new Ability(c, "0") {
 				@Override
 				public void resolve() {
-                    PlayerZone Ohand = AllZone.getZone(Constant.Zone.Hand, player[0].getOpponent());
-                    Card h[] = Ohand.getCards();
-                    Card[] handChoices = Ohand.getCards();
-                    int Handsize = 1;
-                    if(h.length <= 1) Handsize = h.length;
-                    Player opponent = player[0].getOpponent();
-                    Card choice = null; 
-
-                    for(int i = 0; i < Handsize; i++) {
-                            AllZone.Display.showMessage("Select a card to discard ");
-                            ButtonUtil.enableOnlyCancel();
-                        handChoices = Ohand.getCards();
-                        //human chooses
-                        if(opponent.equals(AllZone.HumanPlayer)) {
-                            choice = AllZone.Display.getChoice("Choose", handChoices);
-                        } else//computer chooses
-                        {
-                            choice = CardUtil.getRandom(handChoices);
-                        }
-                        
-                        choice.getController().discard(choice, this);
-                    }
+					player.discard(1, this, true);
 				}
 			};// ability
 
-			opponent[0] = player[0].getOpponent();
-			
 			StringBuilder sb = new StringBuilder();
-			sb.append("Abyssal Specter - ").append(opponent[0]).append(" discards a card");
+			sb.append(c.getName()).append(" - ").append(player).append(" discards a card");
 			ability.setStackDescription(sb.toString());
 			
 			AllZone.Stack.add(ability);
