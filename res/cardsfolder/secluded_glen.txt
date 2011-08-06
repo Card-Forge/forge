@@ -1,0 +1,9 @@
+Name:Secluded Glen
+ManaCost:no cost
+Types:Land
+Text:As CARDNAME enters the battlefield, you may reveal a Faerie card from your hand. If you don't, CARDNAME enters the battlefield tapped.
+K:tap: add U
+K:tap: add B
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/secluded_glen.jpg
+End

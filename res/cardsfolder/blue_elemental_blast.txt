@@ -1,0 +1,10 @@
+Name:Blue Elemental Blast
+ManaCost:U
+Types:Instant
+Text:no text
+A:SP$Counter|Cost$U|Type$Spell|Destination$Graveyard|CounterValid$Card.Red|SpellDescription$Choose one - Counter target red spell; 
+A:SP$Destroy|Cost$U|ValidTgts$Permanent.Red|TgtPrompt$Select target red permanent.|SpellDescription$or destroy target red permanent.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blue_elemental_blast.jpg
+End

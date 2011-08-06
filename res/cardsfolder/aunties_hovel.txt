@@ -1,0 +1,9 @@
+Name:Auntie's Hovel
+ManaCost:no cost
+Types:Land
+Text:As CARDNAME enters the battlefield, you may reveal a Goblin card from your hand. If you don't, CARDNAME enters the battlefield tapped.
+K:tap: add B
+K:tap: add W
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aunties_hovel.jpg
+End

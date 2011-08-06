@@ -1,0 +1,10 @@
+Name:Murmuring Bosk
+ManaCost:no cost
+Types:Land Forest
+Text:As CARDNAME enters the battlefield, you may reveal a Treefolk card from your hand. If you don't, CARDNAME enters the battlefield tapped.
+K:tap: add G
+K:paintap:1:W
+K:paintap:1:B
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/murmuring_bosk.jpg
+End

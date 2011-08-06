@@ -604,6 +604,15 @@ public class AllZoneUtil {
 		return filter;
 	}
 	
+	public static CardListFilter getTypeFilter(final String type) {
+		CardListFilter filter = new CardListFilter() {
+			public boolean addCard(Card c) {
+				return c.isType(type);
+			}
+		};
+		return filter;
+	}
+	
 	public static CardListFilter black = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isBlack();

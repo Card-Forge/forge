@@ -1,0 +1,9 @@
+Name:Wanderwine Hub
+ManaCost:no cost
+Types:Land
+Text:As CARDNAME enters the battlefield, you may reveal a Merfolk card from your hand. If you don't, CARDNAME enters the battlefield tapped.
+K:tap: add W
+K:tap: add U
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wanderwine_hub.jpg
+End

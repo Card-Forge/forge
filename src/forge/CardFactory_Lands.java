@@ -3242,6 +3242,72 @@ class CardFactory_Lands {
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        //Lorwyn Dual Lands, and a couple Morningtide...
+        else if(cardName.equals("Ancient Amphitheater") || cardName.equals("Auntie's Hovel")
+                || cardName.equals("Gilt-Leaf Palace") || cardName.equals("Secluded Glen")
+                || cardName.equals("Wanderwine Hub")
+                || cardName.equals("Rustic Clachan") || cardName.equals("Murmuring Bosk")) {
+        	
+        	String shortTemp = "";
+        	if(cardName.equals("Ancient Amphitheater")) shortTemp = "Giant";
+        	if(cardName.equals("Auntie's Hovel")) shortTemp = "Goblin";
+        	if(cardName.equals("Gilt-Leaf Palace")) shortTemp = "Elf";
+        	if(cardName.equals("Secluded Glen")) shortTemp = "Faerie";
+        	if(cardName.equals("Wanderwine Hub")) shortTemp = "Merfolk";
+        	if(cardName.equals("Rustic Clachan")) shortTemp = "Kithkin";
+        	if(cardName.equals("Murmuring Bosk")) shortTemp = "Treefolk";
+        	
+        	final String type = shortTemp;
+        	
+        	
+            card.addComesIntoPlayCommand(new Command() {
+				private static final long serialVersionUID = -5646344170306812481L;
+
+				public void execute() {
+                    if(card.getController().isHuman()) humanExecute();
+                    else computerExecute();
+                }
+                
+                public void computerExecute() {
+                    CardList hand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
+                    hand = hand.filter(AllZoneUtil.getTypeFilter(type));
+                    if(hand.size() > 0) revealCard(hand.get(0));
+                    else card.tap();
+                }
+                
+                public void humanExecute() {
+                	AllZone.InputControl.setInput(new Input() {
+						private static final long serialVersionUID = -2774066137824255680L;
+
+						@Override
+        				public void showMessage() {
+        					AllZone.Display.showMessage(card.getName()+" - Reveal a card.");
+        					ButtonUtil.enableOnlyCancel();
+        				}
+
+        				@Override
+        				public void selectCard(Card c, PlayerZone zone) {
+        					if(zone.is(Constant.Zone.Hand) && c.isType(type)) {
+            					JOptionPane.showMessageDialog(null, "Revealed card: "+c.getName(), card.getName(), JOptionPane.PLAIN_MESSAGE);
+            					stop();
+        					}
+        				}
+        				
+        				@Override
+        				public void selectButtonCancel() {
+        					card.tap();
+        					stop();
+        				}
+        			});
+                }//execute()
+                
+                private void revealCard(Card c) {
+                	JOptionPane.showMessageDialog(null, c.getController()+" reveals "+c.getName(), card.getName(), JOptionPane.PLAIN_MESSAGE);
+                }
+            });
+        }//*************** END ************ END **************************
+        
         return card;
     }
     
