@@ -159,31 +159,8 @@ public class GameActionUtil {
 		 * the CardFactory classes
 		 */
 		
-		
-		/*
-		 * Whenever a Forest an opponent controls becomes tapped, you gain 1 life.
-		 *
-		if(c.getType().contains("Forest")) {
-			final Player opponent = c.getController().getOpponent();
-			final CardList lifetaps = AllZoneUtil.getPlayerCardsInPlay(opponent, "Lifetap");
-			for(Card lifetap:lifetaps) {
-				final Card source = lifetap;
-				Ability ability = new Ability(source, "0") {
-					@Override
-					public void resolve() {
-						//Lifetap controller (opponent in this case) gains 1 life
-						opponent.gainLife(1, source);
-					}
-				};//Ability
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(lifetap.getName()).append(" - Forest was tapped, ").append(opponent).append(" gains 1 life.");
-				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
-			}//for
-		}//end Lifetap */
-		
+		//Blight can't be converted to triggers until AF_Destroy properly handles "Defined"
+		//which in turn requires lastKnownInfo to get Enchanted right, otherwise Parallax Dementia doesn't work
 		/*
 		 * Blight - When enchanted land becomes tapped, destroy it.
 		 */
@@ -208,34 +185,6 @@ public class GameActionUtil {
 				}
 			}
 		}//end Blight
-		
-		/*
-		 * Relic Putrescense - When enchanted artifact becomes tapped,
-		 * controller gets a poison counter.
-		 */
-		if(c.isEnchantedBy("Relic Putrescence")) {
-			final ArrayList<Card> auras = c.getEnchantedBy();
-			final Card target = c;
-			for(Card aura:auras) {
-				if(aura.getName().equals("Relic Putrescence")) {
-					Ability ability = new Ability(aura, "0") {
-						@Override
-						public void resolve() {
-							if (target.getController().equals(AllZone.HumanPlayer))
-								AllZone.HumanPlayer.addPoisonCounters(1);
-							else
-								AllZone.ComputerPlayer.addPoisonCounters(1);
-						}
-					};//Ability
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(aura.getName()).append(" - ").append(target.getController()).append(" gets a poison counter.");
-					ability.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability);
-				}
-			}
-		}//end relic putrescence
 		
 		/*
 		 * Psychic Venom - When enchanted land becomes tapped, it deals 2 damage
