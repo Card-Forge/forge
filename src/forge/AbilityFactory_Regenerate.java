@@ -3,6 +3,7 @@ package forge;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Iterator;
 
 public class AbilityFactory_Regenerate {
 	
@@ -88,9 +89,13 @@ public class AbilityFactory_Regenerate {
 				sb.append(name).append(" - ");
 
 			sb.append("Regenerate ");
-			for(Card tgtC:tgtCards) {
-				if(tgtC.isFaceDown()) sb.append("Morph ");
-				else sb.append(tgtC.getName()).append(" ");
+			Iterator<Card> it = tgtCards.iterator();
+			while(it.hasNext()) {
+				Card tgtC = it.next();
+				if(tgtC.isFaceDown()) sb.append("Morph");
+				else sb.append(tgtC.getName());
+				
+				if(it.hasNext()) sb.append(" ");
 			}
 		}
 		sb.append(".");
@@ -196,7 +201,7 @@ public class AbilityFactory_Regenerate {
 			tgtCards = tgt.getTargetCards();
 		else
 			tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
-
+		
 		for(final Card tgtC : tgtCards){
 			final Command untilEOT = new Command() {
 				private static final long serialVersionUID = 1922050611313909200L;
