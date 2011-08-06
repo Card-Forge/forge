@@ -1,4 +1,4 @@
-Name:Soulcatcher's Aerie
+Name:Soulcatchers' Aerie
 ManaCost:1 W
 Types:Enchantment
 Text:no text
@@ -8,4 +8,5 @@ K:stPumpAll:Bird:X/X:no Condition:Bird creatures get +1/+1 for each feather coun
 SVar:X:Count$CardCounters.FEATHER
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulcatchers_aerie.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/25.jpg
 End
