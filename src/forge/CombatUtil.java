@@ -973,8 +973,8 @@ public class CombatUtil {
             
             if ((AllZone.Combat.getAttackers().length + AllZone.pwCombat.getAttackers().length) == 1)
             {
-	            if (c.getKeyword().contains("Whenever this creature attacks alone, it gets +2/+0 until end of turn") || 
-	            	c.getKeyword().contains("Whenever CARDNAME attacks alone, it gets +2/+0 until end of turn"))
+	            if (c.getKeyword().contains("Whenever this creature attacks alone, it gets +2/+0 until end of turn.") || 
+	            	c.getKeyword().contains("Whenever CARDNAME attacks alone, it gets +2/+0 until end of turn."))
 	            {
 	            	final Card charger = c;
 	            	Ability ability2 = new Ability(c, "0") {
