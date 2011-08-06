@@ -2459,7 +2459,7 @@ public class Card extends MyObservable {
  			
              //TODO: counters
              else if(Property.startsWith("named")) //by name
-             	{ if(getName().equals(Property.substring(6))) return false;}
+             	{ if(!getName().equals(Property.substring(5))) return false;}
              else if(Property.startsWith("non")) // ... Other Card types
              	{ if(isType(Property.substring(3))) return false;}
              else
