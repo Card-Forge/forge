@@ -178,6 +178,7 @@ public class GameActionUtil {
 		draw_Overbeing_of_Myth(player);
 		draw_Mana_Vault(player);
 		draw_Sylvan_Library(player);
+		draw_Armageddon_Clock(player);
 		AllZone.Stack.unfreezeStack();
 	}
 
@@ -10417,6 +10418,32 @@ public class GameActionUtil {
         		AllZone.Stack.add(damage);
         	}
         }
+	}
+	
+	private static void draw_Armageddon_Clock(final Player player){
+        /*
+         * At the beginning of your draw step, Armageddon Clock deals
+         * damage equal to the number of doom counters on it to each player.
+         */
+		CardList clocks = AllZoneUtil.getPlayerCardsInPlay(player, "Armageddon Clock");
+		for(final Card clock:clocks) {
+			//final Card source = clock;
+			final Ability damage = new Ability(clock, "0") {
+				@Override
+				public void resolve() {
+					player.getOpponent().addDamage(clock.getCounters(Counters.DOOM), clock);
+					player.addDamage(clock.getCounters(Counters.DOOM), clock);
+				}
+			};//Ability
+
+			StringBuilder sb = new StringBuilder();
+			sb.append(clock);
+			sb.append(" - does "+clock.getCounters(Counters.DOOM)+" damage to ");
+			sb.append("both players.");
+			damage.setStackDescription(sb.toString());
+
+			AllZone.Stack.add(damage);
+		}
 	}
 	
 	private static void upkeep_Carnophage() {

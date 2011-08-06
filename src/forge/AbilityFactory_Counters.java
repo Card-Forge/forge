@@ -53,6 +53,52 @@ public class AbilityFactory_Counters {
 		return abPutCounter;
 	}
 	
+	public static SpellAbility createAbilityRemoveCounters(final AbilityFactory AF){
+
+		final SpellAbility abRemCounter = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = 8581011868395954121L;
+			
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+
+			final String type = params.get("CounterType");
+		
+			@Override
+			public String getStackDescription(){
+			// when getStackDesc is called, just build exactly what is happening
+				 Counters cType = Counters.valueOf(type);
+				 StringBuilder sb = new StringBuilder();
+				 String name = af.getHostCard().getName();
+				 int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				 sb.append(name).append(" - Remove ").append(amount).append(" ").append(cType.getName()).append(" counter from ");
+				 Card tgt = getTargetCard();
+				 if (tgt != null)
+					 sb.append(tgt.getName());
+				 else
+					 sb.append(name);
+				 return sb.toString();
+			}
+			
+			public boolean canPlay(){
+				// super takes care of AdditionalCosts
+				return super.canPlay();	
+			}
+			
+			public boolean canPlayAI()
+			{
+				return removeCanPlayAI(af, this, params.get("CounterNum"), type);
+			}
+			
+			@Override
+			public void resolve() {
+				int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				removeResolve(af, this, amount, type);
+			}
+			
+		};
+		return abRemCounter;
+	}
+	
 	public static SpellAbility createSpellPutCounters(final AbilityFactory AF){
 		final SpellAbility spPutCounter = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
 			private static final long serialVersionUID = -323471693082498224L;
@@ -95,6 +141,54 @@ public class AbilityFactory_Counters {
 			public void resolve() {
 				int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
 				putResolve(af, this, amount, type);
+			}
+			
+		};
+		return spPutCounter;
+	}
+	
+	public static SpellAbility createSpellRemoveCounters(final AbilityFactory AF){
+		final SpellAbility spPutCounter = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = -5065591869141835456L;
+			
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+			
+			final String type = params.get("CounterType");
+		
+			@Override
+			public String getStackDescription(){
+				// when getStackDesc is called, just build exactly what is happening
+				 Counters cType = Counters.valueOf(type);
+				 StringBuilder sb = new StringBuilder();
+				 String name = af.getHostCard().getName();
+				 int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				 sb.append(name).append(" - Remove ").append(amount).append(" ").append(cType.getName()).append(" counter from ");
+				 Card tgt = getTargetCard();
+				 if (tgt != null)
+					 sb.append(tgt.getName());
+				 else
+					 sb.append(name);
+				 return sb.toString();
+			}
+			
+			public boolean canPlay(){
+				// super takes care of AdditionalCosts
+				return super.canPlay();	
+			}
+			
+			public boolean canPlayAI()
+			{
+				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
+				// then call xCount with that card to properly calculate the amount
+				// Or choosing how many to sacrifice 
+				return putCanPlayAI(af, this, params.get("CounterNum"), type);
+			}
+			
+			@Override
+			public void resolve() {
+				int amount = calculateAmount(af.getHostCard(), params.get("CounterNum"), this);
+				removeResolve(af, this, amount, type);
 			}
 			
 		};
@@ -247,6 +341,59 @@ public class AbilityFactory_Counters {
 		 return ((r.nextFloat() < .6667) && chance);
 	}
 	
+	public static boolean removeCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr, final String type){
+		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+		Random r = new Random();
+		Ability_Cost abCost = sa.getPayCosts();
+		//Target abTgt = sa.getTarget();
+		final Card source = sa.getSourceCard();
+		//CardList list;
+		//Card choice = null;
+		
+		//TODO - currently, not targeted, only for Self
+		
+		//Player player = af.isCurse() ? AllZone.HumanPlayer : AllZone.ComputerPlayer;
+		
+		
+		if (abCost != null){
+			// AI currently disabled for these costs
+			if (abCost.getSacCost()){ 
+				return false;
+			}
+			if (abCost.getLifeCost())	 return false;
+			if (abCost.getDiscardCost()) return false;
+			
+			if (abCost.getSubCounter()){
+				// A card has a 25% chance per counter to be able to pass through here
+				// 8+ counters will always pass. 0 counters will never
+				int currentNum = source.getCounters(abCost.getCounterType());
+				double percent = .25 * (currentNum / abCost.getCounterNum());
+				if (percent <= r.nextFloat())
+					return false;
+			}
+		}
+		
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		
+		// TODO handle proper calculation of X values based on Cost
+		//final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
+		
+		 // prevent run-away activations - first time will always return true
+		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+		 
+		 //currently, not targeted
+
+		 // Placeholder: No targeting necessary
+		 int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
+		 // each counter on the card is a 10% chance of not activating this ability. 
+		 if (r.nextFloat() < .1 * currCounters)	
+			 return false;
+
+
+		 return ((r.nextFloat() < .6667) && chance);
+	}
+	
 	public static void putResolve(final AbilityFactory af, final SpellAbility sa, int counterAmount, final String type){
 		HashMap<String,String> params = af.getMapParams();
 		String DrawBack = params.get("SubAbility");
@@ -265,6 +412,30 @@ public class AbilityFactory_Counters {
 		for(Card tgtCard : tgtCards)
 			if(AllZone.GameAction.isCardInPlay(tgtCard) && (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)))
 				tgtCard.addCounter(Counters.valueOf(type), counterAmount);
+		
+		if (af.hasSubAbility())
+			 CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+
+	}
+	
+	public static void removeResolve(final AbilityFactory af, final SpellAbility sa, int counterAmount, final String type){
+		HashMap<String,String> params = af.getMapParams();
+		String DrawBack = params.get("SubAbility");
+		Card card = af.getHostCard();
+		
+		ArrayList<Card> tgtCards;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = new ArrayList<Card>();
+			tgtCards.add(card);
+		}
+		
+		for(Card tgtCard : tgtCards)
+			if(AllZone.GameAction.isCardInPlay(tgtCard) && (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)))
+				tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
 		
 		if (af.hasSubAbility())
 			 CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);

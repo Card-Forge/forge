@@ -192,6 +192,14 @@ public class AbilityFactory {
 				SA = AbilityFactory_Counters.createSpellPutCounters(this);
 			}
 		}
+		
+		if (API.equals("RemoveCounter")){
+			if (isAb)
+				SA = AbilityFactory_Counters.createAbilityRemoveCounters(this);
+			if (isSp){
+				SA = AbilityFactory_Counters.createSpellRemoveCounters(this);
+			}
+		}
 
 		if (API.equals("Fetch")){
 			if (isAb)

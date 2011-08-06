@@ -20,6 +20,7 @@ public enum Counters {
     CHARGE(),
     CORPSE(),
     DIVINITY(),
+    DOOM(),
     EON(),
     FADE(),
     HOOFPRINT(),
