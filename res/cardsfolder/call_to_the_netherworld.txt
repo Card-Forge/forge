@@ -5,5 +5,5 @@ Text:Return target black creature card from your graveyard to your hand.
 K:spReturnTgt:1:Creature.Black:Hand
 K:Madness:0
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_the_netherworld_.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_the_netherworld.jpg
 End

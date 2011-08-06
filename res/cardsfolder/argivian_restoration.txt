@@ -4,5 +4,5 @@ Types:Sorcery
 Text:Return target artifact card from your graveyard to the battlefield.
 K:spReturnTgt:1:Artifact:Battlefield
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/argivian_restoration_.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/argivian_restoration.jpg
 End
