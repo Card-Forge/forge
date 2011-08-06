@@ -18653,6 +18653,86 @@ public class CardFactory implements NewConstants {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Blood Birthing")) {
+        	final SpellAbility spell = new Spell(card)
+        	{
+				private static final long serialVersionUID = -8303724057068847270L;
+
+				public void resolve()
+        		{
+        			int times = 1;
+        			CardList cl;
+        			if (CardFactoryUtil.getCards("Eldrazi Spawn", card.getController()).size() > 0)
+        				times = 3;
+        			for (int i=0;i<times;i++)
+        			{
+	        			cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "C", new String[] {
+								"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+	        			for (Card crd:cl)
+	        				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
+        			}
+        		}
+        	};
+        	spell.setStackDescription(cardName+" - " + card.getController() + " puts one or three 0/1 Eldrazi Spawn creature tokens onto the battlefield.");
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Growth Spasm")) {
+            SpellAbility spell = new Spell(card) {
+
+				private static final long serialVersionUID = 9074719023825939855L;
+
+				@Override
+                public void resolve() {
+					AllZone.GameAction.searchLibraryBasicLand(card.getController(), 
+							Constant.Zone.Play, true);
+					
+					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "C", new String[] {
+							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+        			for (Card crd:cl)
+        				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
+				}
+                
+                public boolean canPlayAI()
+                {
+                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                	CardList list = new CardList(library.getCards());
+                	list = list.getType("Basic");
+                	return list.size() > 0;
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Skittering Invasion")) {
+        	final SpellAbility spell = new Spell(card)
+        	{
+				private static final long serialVersionUID = -8303724057068847270L;
+
+				public void resolve()
+        		{
+        			CardList cl;
+
+        			for (int i=0;i<5;i++)
+        			{
+	        			cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "C", new String[] {
+								"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+	        			for (Card crd:cl)
+	        				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
+        			}
+        		}
+        	};
+        	spell.setStackDescription(cardName+" - " + card.getController() + " puts one or three 0/1 Eldrazi Spawn creature tokens onto the battlefield.");
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

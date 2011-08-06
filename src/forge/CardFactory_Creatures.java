@@ -17533,6 +17533,100 @@ public class CardFactory_Creatures {
 
         	card.addTurnFaceUpCommand(turnsFaceUp);
         }//*************** END ************ END **************************
+        
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Kozilek's Predator") || cardName.equals("Dread Drone")) {
+            final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    makeToken();
+                    makeToken();
+                }//resolve()
+                
+                public void makeToken() {
+                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "C", new String[] {
+							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+        			for (Card crd:cl)
+        				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
+                }
+                
+            }; //comesIntoPlayAbility
+            
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = 4193134733200317562L;
+
+				public void execute() {
+                    comesIntoPlayAbility.setStackDescription(card.getName()
+                            + " - put two 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield.");
+                    AllZone.Stack.add(comesIntoPlayAbility);
+                }
+            };
+            
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Emrakul's Hatcher")) {
+            final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    makeToken();
+                    makeToken();
+                    makeToken();
+                }//resolve()
+                
+                public void makeToken() {
+                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "C", new String[] {
+							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+        			for (Card crd:cl)
+        				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
+                }
+                
+            }; //comesIntoPlayAbility
+            
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = -8661023016178518439L;
+
+				public void execute() {
+                    comesIntoPlayAbility.setStackDescription(card.getName()
+                            + " - put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield.");
+                    AllZone.Stack.add(comesIntoPlayAbility);
+                }
+            };
+            
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Nest Invader")) {
+            final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    makeToken();
+                }//resolve()
+                
+                public void makeToken() {
+                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "C", new String[] {
+							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
+        			for (Card crd:cl)
+        				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
+                }
+                
+            }; //comesIntoPlayAbility
+            
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = 2179492272870559564L;
+
+				public void execute() {
+                    comesIntoPlayAbility.setStackDescription(card.getName()
+                            + " - put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield.");
+                    AllZone.Stack.add(comesIntoPlayAbility);
+                }
+            };
+            
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
 
         
         

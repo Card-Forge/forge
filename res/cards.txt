@@ -1,3 +1,42 @@
+Skittering Invasion
+7
+Tribal Sorcery Eldrazi
+Put five 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
+
+Growth Spasm
+2 G
+Sorcery
+Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library. Put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add 1 to your mana pool."
+
+Nest Invader
+1 G
+Creature Eldrazi Drone
+When Nest Invader enters the battlefield, put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add 1 to your mana pool."
+2/2
+
+Kozilek's Predator
+3 G
+Creature Eldrazi Drone
+When Kozilek's Predator enters the battlefield, put two 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
+2/2
+
+Emrakul's Hatcher
+4 R
+Creature Eldrazi Drone
+When Emrakul's Hatcher enters the battlefield, put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
+3/3
+
+Dread Drone
+4 B
+Creature Eldrazi Drone
+When Dread Drone enters the battlefield, put two 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
+4/1
+
+Blood Birthing
+1 R
+Sorcery
+If you control an Eldrazi Spawn, put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool." Otherwise, put one of those tokens onto the battlefield.
+
 Animate Artifact
 3 U
 Enchantment Aura
