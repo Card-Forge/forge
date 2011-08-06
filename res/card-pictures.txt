@@ -38,6 +38,16 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+geths_grimoire.jpg		http://www.wizards.com/global/images/magic/general/geths_grimoire.jpg
+wei_night_raiders.jpg			http://www.wizards.com/global/images/magic/general/wei_night_raiders.jpg
+zhang_liao_hero_of_hefei.jpg		http://www.wizards.com/global/images/magic/general/zhang_liao_hero_of_hefei.jpg	
+surrakar_marauder.jpg			http://www.wizards.com/global/images/magic/general/surrakar_marauder.jpg
+knucklebone_witch.jpg		http://www.wizards.com/global/images/magic/general/knucklebone_witch.jpg
+gristle_grinner.jpg		http://www.wizards.com/global/images/magic/general/gristle_grinner.jpg
+wretched_anurid.jpg			http://www.wizards.com/global/images/magic/general/wretched_anurid.jpg
+vermiculos.jpg			http://www.wizards.com/global/images/magic/general/vermiculos.jpg	
+vampiric_spirit.jpg			http://www.wizards.com/global/images/magic/general/vampiric_spirit.jpg
+moriok_rigger.jpg		http://www.wizards.com/global/images/magic/general/moriok_rigger.jpg
 yavimaya_elder.jpg		http://www.wizards.com/global/images/magic/general/yavimaya_elder.jpg
 vinelasher_kudzu.jpg			http://www.wizards.com/global/images/magic/general/vinelasher_kudzu.jpg
 algae_gharial.jpg		http://www.wizards.com/global/images/magic/general/algae_gharial.jpg	

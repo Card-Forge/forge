@@ -1342,6 +1342,7 @@ Surging Dementia
 Surging Flame
 Surging Might
 Surging Sentinels
+Surrakar Marauder
 Swamp Mosquito
 Sylvan Bounty
 Sylvan Ranger
@@ -1598,6 +1599,7 @@ Wormwood Dryad
 Wrap in Vigor
 Wrecking Ball
 Wrench Mind
+Wretched Anurid
 Wu Elite Cavalry
 Wu Infantry
 Wu Light Cavalry

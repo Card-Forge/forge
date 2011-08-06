@@ -321,6 +321,7 @@ Gemstone Array
 Gemstone Mine
 Gerrard's Verdict
 Gerrard's Wisdom
+Geth's Grimoire
 Ghitu Encampment
 Ghitu War Cry
 Ghor-Clan Bloodscale
@@ -365,6 +366,7 @@ Graypelt Refuge
 Greater Forgeling
 Green Ward
 Greenweaver Druid
+Gristle Grinner
 Grixis Battlemage
 Grizzly Fate
 Guardian of Cloverdell
@@ -948,6 +950,7 @@ Water Elemental
 Water Servant
 Web
 Wei Elite Companions
+Wei Night Raiders
 Whip Sergeant
 Whipcorder
 Whirling Dervish

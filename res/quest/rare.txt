@@ -432,6 +432,7 @@ Knight Exemplar
 Knight of the Reliquary
 Knight of the White Orchid
 Knotvine Paladin
+Knucklebone Witch
 Kobold Overlord
 Kodama of the North Tree
 Kokusho, the Evening Star
@@ -538,6 +539,7 @@ Moat
 Mobilization
 Molimo, Maro-Sorcerer
 Momentous Fall
+Moriok Rigger
 Morphling
 Mortivore
 Mossfire Valley
@@ -888,6 +890,7 @@ Utopia Tree
 Vaevictis Asmadi
 Valakut, the Molten Pinnacle
 Vampire Nocturnus
+Vampiric Spirit
 Vampiric Tutor
 Vedalken Archmage
 Veldrane of Sengir
@@ -896,6 +899,7 @@ Vengeful Firebrand
 Vengevine
 Verdant Catacombs
 Verduran Enchantress
+Vermiculos
 Vexing Beetle
 Viashivan Dragon
 Vindicate
@@ -943,6 +947,7 @@ Yore-Tiller Nephilim
 Zephid
 Zhang Fei, Fierce Warrior
 Zhang He, Wei General
+Zhang Liao, Hero of Hefei
 Zhou Yu, Chief Commander
 Zuberi, Golden Feather
 Zuo Ci, the Mocking Sage

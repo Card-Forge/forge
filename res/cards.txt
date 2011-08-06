@@ -1,3 +1,74 @@
+Geth's Grimoire
+4
+Artifact
+no text
+WheneverKeyword:DiscardsCard:ControllingPlayer_Opponent:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever an opponent discards a card, you may draw a card.
+
+Wei Night Raiders
+2 B B
+Creature Human Soldier
+no text
+2/2
+Horsemanship
+WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Wei Night Raiders deals damage to an opponent, that player discards a card.
+
+Zhang Liao, Hero of Hefei
+4 B B
+Legendary Creature Human Soldier
+no text
+3/3
+WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Zhang Liao, Hero of Hefei deals damage to an opponent, that opponent discards a card.
+
+Surrakar Marauder
+1 B
+Creature Surrakar
+no text
+2/1
+WheneverKeyword:EntersBattleField:Type/Land:Play:KeywordPumpEOT/Intimidate:Self:ASAP:No_Condition:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, Surrakar Marauder gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
+
+Knucklebone Witch
+B
+Creature Goblin Shaman
+no text
+1/1
+WheneverKeyword:PermanentIntoGraveyard:Type/Goblin:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a Goblin you control is put into a graveyard from the battlefield, you may put a +1/+1 counter on Knucklebone Witch.
+
+Gristle Grinner
+4 B
+Creature Zombie
+no text
+3/3
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever a creature is put into a graveyard from the battlefield, Gristle Grinner gets +2/+2 until end of turn.
+
+Wretched Anurid
+1 B
+Creature Zombie Frog Beast
+no text
+3/3
+WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/-1:ControllingPlayer_Self:ASAP:No_Condition:Initiator - Other than Self:Whenever another creature enters the battlefield, you lose 1 life.
+
+Vermiculos
+4 B
+Creature Horror
+no text
+1/1
+WheneverKeyword:EntersBattleField:Type/Artifact:Play:StatsPumpEOT/4/4:Self:ASAP:No_Condition:No Special Condition:Whenever an artifact enters the battlefield, Vermiculos gets +4/+4 until end of turn.
+
+Vampiric Spirit
+2 B B
+Creature Spirit
+no text
+4/3
+Flying
+WheneverKeyword:EntersBattleField:Self:Play:ModifyLife/-4:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Vampiric Spirit enters the battlefield, you lose 4 life.
+
+Moriok Rigger
+2 B
+Creature Human Rogue Rigger
+no text
+2/2
+WheneverKeyword:PermanentIntoGraveyard:Type/Artifact:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever an artifact is put into a graveyard from the battlefield, you may put a +1/+1 counter on Moriok Rigger.
+
 Vinelasher Kudzu
 1 G
 Creature Plant
