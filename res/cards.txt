@@ -1,3 +1,8 @@
+Quicksilver Amulet
+4
+Artifact
+4, tap: You may put a creature card from your hand onto the battlefield.
+
 Unyaro Bees
 G G G 
 Creature Insect
