@@ -1220,7 +1220,7 @@ Echo:1 G
 
 Feral Animist
 1 R G
-Creature Goblic Shaman
+Creature Goblin Shaman
 no text
 2/1
 abPump 3:+X/+0:Feral Animist gets +X/+0 until end of turn, where X is its power.
