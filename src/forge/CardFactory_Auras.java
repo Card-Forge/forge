@@ -2315,8 +2315,7 @@ class CardFactory_Auras {
                         if (optionRedOrGreen[0]) {
                         	tgts = tgts.filter(new CardListFilter() {
                         		public boolean addCard(Card c) {
-                        			return CardUtil.getColors(c).contains(Constant.Color.Green) || 
-                        			CardUtil.getColors(c).contains(Constant.Color.Red);
+                        			return c.isGreen() || c.isRed();
                         		}
                         	});
                         }
@@ -2458,7 +2457,7 @@ class CardFactory_Auras {
                                 return c.isCreature() && CardFactoryUtil.canTarget(card, c) && 
                                 ((!optionCmcTwoOrLess[0]) || (optionCmcTwoOrLess[0] && CardUtil.getConvertedManaCost(c.getManaCost()) <= 2)) && 
                                 ((!optionRedOrGreen[0]) || (optionRedOrGreen[0] && 
-                                	CardUtil.getColors(c).contains(Constant.Color.Green) || CardUtil.getColors(c).contains(Constant.Color.Red)));
+                                	c.isGreen() || c.isRed()));
                             }
                         });
                         
