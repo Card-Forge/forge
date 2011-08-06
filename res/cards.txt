@@ -4577,6 +4577,7 @@ Rejuvenate
 3 G
 Sorcery
 no text
+spGainLife:6
 Cycling:2
 
 Absolute Grace
@@ -5930,6 +5931,7 @@ Nourish
 G G
 Instant
 no text
+spGainLife:6
 
 Arcbound Bruiser
 5
@@ -6183,6 +6185,7 @@ Dosan's Oldest Chant
 4 G
 Sorcery
 no text
+spGainLife:6
 Draw a card.
 
 Sluggishness
@@ -17147,7 +17150,8 @@ Nevinyrral's Disk comes into play tapped.
 Renewed Faith
 2 W
 Instant
-no text
+When you cycle Renewed Faith, you may gain 2 life.
+spGainLife:6
 Cycling:1 W
 
 Hymn to Tourach

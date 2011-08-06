@@ -6778,7 +6778,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Renewed Faith") || cardName.equals("Rejuvenate")
                 || cardName.equals("Dosan's Oldest Chant") || cardName.equals("Nourish") ){ 
@@ -6807,7 +6807,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             if(cardName.equals("Renewed Faith")) {
-//    	  card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "1 W"));
+            // card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "1 W"));
                 card.addCycleCommand(new Command() {
                     private static final long serialVersionUID = 7699412574052780825L;
                     
@@ -6817,6 +6817,21 @@ public class CardFactory implements NewConstants {
                     }
                 });
             }
+        }//*************** END ************ END **************************
+*/
+        
+        
+        //*************** START *********** START **************************
+        else if (cardName.equals("Renewed Faith")) { 
+
+            card.addCycleCommand(new Command() {
+                private static final long serialVersionUID = 7699412574052780825L;
+                    
+                public void execute() {
+                    PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
+                    life.addLife(2);
+                }
+            });
         }//*************** END ************ END **************************
         
 
