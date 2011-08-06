@@ -6864,6 +6864,22 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************        
         
+
+        //*************** START *********** START **************************
+        else if(cardName.equals("Everflowing Chalice")) {
+            final Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = 4245563898487609274L;
+
+				public void execute() {
+                    card.addCounter(Counters.CHARGE, card.getMultiKickerMagnitude());
+                    card.setMultiKickerMagnitude(0);
+                }
+            };
+            card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
+        
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Chromatic Star")) {
             final SpellAbility ability = new Ability(card, "0") {
