@@ -11868,7 +11868,8 @@ public class CardFactory implements NewConstants {
         		@Override
         		public boolean canPlayAI() {
         			System.out.println("AI is pondering using "+cardName);
-        			return canPlay();
+        			SpellAbility sa = AllZone.Stack.peek();
+        			return canPlay() && sa.getSourceCard().getController().equals(AllZone.HumanPlayer);
         		}
 
 				@Override
@@ -11904,7 +11905,8 @@ public class CardFactory implements NewConstants {
         		@Override
         		public boolean canPlayAI() {
         			System.out.println("AI is pondering using "+cardName);
-        			return canPlay();
+        			SpellAbility sa = AllZone.Stack.peek();
+        			return canPlay() && sa.getSourceCard().getController().equals(AllZone.HumanPlayer);
         		}
 
 				@Override
