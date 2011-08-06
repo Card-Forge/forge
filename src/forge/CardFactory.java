@@ -6325,6 +6325,7 @@ public class CardFactory implements NewConstants {
          *  
          *  syntax: abUntapTgt {Ability_Cost}:{Valid Targets}:{Description}
          */
+        /* cards converted to AB$Untap
         if (hasKeyword(card, "abUntapTgt") != -1) {
         	int n = hasKeyword(card, "abUntapTgt");
 
@@ -6436,7 +6437,7 @@ public class CardFactory implements NewConstants {
         	AbUntapTgt.setDescription(abDesc[0]);
         	card.addSpellAbility(AbUntapTgt);
         }//End abUntapTgt
-        
+        */
         
         /*
          * Generic untap all targets spell
