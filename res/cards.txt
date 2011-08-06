@@ -1577,7 +1577,7 @@ Antler Skulkin
 Artifact Creature Scarecrow
 no text
 3/3
-TgtKPump 2:Persist
+abPumpTgt 2:Persist
 
 Gelectrode
 1 U R
@@ -1743,7 +1743,7 @@ Ethereal Usher
 Creature Spirit
 no text
 2/3
-TgtKPump U T:Unblockable
+abPumpTgt U T:Unblockable
 Transmute:1 U U
 
 Chartooth Cougar
@@ -1751,7 +1751,7 @@ Chartooth Cougar
 Creature Cat Beast
 no text
 4/4
-PTPump R:+1/+0
+abPump R:+1/+0
 TypeCycling:Mountain:2
 
 Elvish Aberration
@@ -2116,7 +2116,7 @@ Sturdy Hatchling
 Creature Elemental
 Sturdy Hatchling enters the battlefield with four -1/-1 counters on it. Whenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.  Whenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
 6/6
-KPump GU:Shroud
+abPump GU:Shroud
 
 Voracious Hatchling
 3 WB
@@ -2691,7 +2691,7 @@ no text
 First Strike
 This creature can't attack unless defending player controls an Island
 When you control no Islands, sacrifice this creature
-KPump U:Flying
+abPump U:Flying
 
 Serendib Sorcerer
 1 U U
@@ -2800,7 +2800,7 @@ Snow Creature Griffin
 no text
 3/2
 Flying
-KPump S:First Strike
+abPump S:First Strike
 
 Frost Raptor
 2 U
@@ -2808,15 +2808,15 @@ Snow Creature Bird
 no text
 2/2
 Flying
-KPump S S:Shroud
+abPump S S:Shroud
 
 Goblin Rimerunner
 2 R
 Snow Creature Goblin Warrior
 no text
 2/2
-TgtKPump T:This creature cannot block
-KPump S:Haste
+abPumpTgt T:This creature cannot block
+abPump S:Haste
 
 Phyrexian Snowcrusher
 6
@@ -2824,7 +2824,7 @@ Snow Artifact Creature Juggernaut
 no text
 6/5
 This card attacks each turn if able.
-PTPump 1 S:+1/+0
+abPump 1 S:+1/+0
 
 Rimebound Dead
 B
@@ -3006,7 +3006,7 @@ G
 Creature Human Wizard
 no text
 1/1
-TgtKPump R T:First Strike
+abPumpTgt R T:First Strike
 
 Scepter of Insight
 1 U U
@@ -3145,7 +3145,7 @@ Snow Creature Shade
 no text
 1/1
 Flying
-PTPump S:+1/+1
+abPump S:+1/+1
 
 Disentomb
 B
@@ -3886,7 +3886,7 @@ U
 Creature Merfolk Wizard
 no text
 1/1
-abTgtPTPump R T:+2/+0
+abPumpTgt R T:+2/+0
 G,tap: add W
 G,tap: add U
 G,tap: add B
@@ -4610,7 +4610,7 @@ Creature Wall
 no text
 0/4
 Defender
-PTPump R:+1/+0
+abPump R:+1/+0
 This creature can block creatures with shadow as though they didn't have shadow.
 
 Wall of Diffusion
@@ -4957,7 +4957,7 @@ Flying
 Trample
 Protection from white
 Protection from blue
-PTPump R:+1/+0
+abPump R:+1/+0
 Morph:3 R R R
 This card can't be countered.
 
@@ -4979,7 +4979,7 @@ U
 Creature Merfolk Wizard
 no text
 1/1
-TgtKPump 1 U T:Flying
+abPumpTgt 1 U T:Flying
 
 Caravan Hurda
 4 W
@@ -5001,7 +5001,7 @@ Creature Shade
 no text
 2/2
 Haste
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Giant Scorpion
 2 B
@@ -5021,7 +5021,7 @@ Molten Ravager
 Creature Elemental
 no text
 0/4
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Pillarfield Ox
 3 W
@@ -5685,14 +5685,14 @@ R
 Creature Human Wizard
 no text
 1/1
-abTgtPTPump B T:+1/+0
-abTgtPTPump G T:+0/+1
+abPumpTgt B T:+1/+0
+abPumpTgt G T:+0/+1
 
 Captive Flame
 2 R
 Enchantment 
 no text
-abTgtPTPump R:+1/+0
+abPumpTgt R:+1/+0
 
 Crenellated Wall
 4
@@ -5700,41 +5700,41 @@ Artifact Creature Wall
 no text
 0/4
 Defender
-abTgtPTPump T:+0/+4
+abPumpTgt T:+0/+4
 
 Ghitu War Cry
 2 R
 Enchantment 
 no text
-abTgtPTPump R:+1/+0
+abPumpTgt R:+1/+0
 
 Icatian Priest
 W
 Creature Human Cleric
 no text
 1/1
-abTgtPTPump 1 W W:+1/+1
+abPumpTgt 1 W W:+1/+1
 
 Shaper Guildmage
 U
 Creature Human Wizard
 no text
 1/1
-TgtKPump W T:First Strike
-abTgtPTPump B T:+1/+0
+abPumpTgt W T:First Strike
+abPumpTgt B T:+1/+0
 
 Thriss, Nantuko Primus
 5 G G
 Legendary Creature Insect Druid
 no text
 5/5
-abTgtPTPump G T:+5/+5
+abPumpTgt G T:+5/+5
 
 Tower of Champions
 4
 Artifact
 no text
-abTgtPTPump 8 T:+6/+6
+abPumpTgt 8 T:+6/+6
 
 Tuknir Deathlock
 R R G G
@@ -5742,21 +5742,21 @@ Legendary Creature Human Wizard
 no text
 2/2
 Flying
-abTgtPTPump R G T:+2/+2
+abPumpTgt R G T:+2/+2
 
 Ursapine
 3 G G
 Creature Beast
 no text
 3/3
-abTgtPTPump G:+1/+1
+abPumpTgt G:+1/+1
 
 Wyluli Wolf
 1 G
 Creature Wolf
 no text
 1/1
-abTgtPTPump T:+1/+1
+abPumpTgt T:+1/+1
 
 Dragonstalker
 4 W
@@ -5777,14 +5777,14 @@ Creature Drone
 no text
 2/2
 Flying
-KPump U:Shroud
+abPump U:Shroud
 
 Giant Crab
 4 U
 Creature Crab
 no text
 3/3
-KPump U:Shroud
+abPump U:Shroud
 
 Glimmering Angel
 3 W
@@ -5792,7 +5792,7 @@ Creature Angel
 no text
 2/2
 Flying
-KPump U:Shroud
+abPump U:Shroud
 
 Hero's Demise
 1 B
@@ -6134,7 +6134,7 @@ Creature Wall
 no text
 0/5
 Defender
-PTPump W:+0/+1
+abPump W:+0/+1
 
 Viashino Spearhunter
 2 R
@@ -6209,7 +6209,7 @@ Fiery Hellhound
 Creature Elemental Hound
 no text
 2/2
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Emerald Oryx
 3 G
@@ -6569,15 +6569,15 @@ W U B R G
 Legendary Creature Illusion
 no text
 5/5
-KPump U R:Flying
+abPump U R:Flying
 RegenerateMe:B G
-PTPump R W:+1/+1
+abPump R W:+1/+1
 
 Dauthi Embrace
 2 B
 Enchantment
 no text
-TgtKPump B B:Shadow
+abPumpTgt B B:Shadow
 
 Ember Shot
 6 R
@@ -6590,7 +6590,7 @@ Noble Steeds
 2 W
 Enchantment
 no text
-TgtKPump 1 W:First Strike
+abPumpTgt 1 W:First Strike
 
 Zap
 2 R
@@ -6617,28 +6617,28 @@ Creature Spirit
 no text
 1/2
 Flying
-abTgtPTPump T:+1/+2
+abPumpTgt T:+1/+2
 
 Flowstone Overseer
 2 R R R
 Creature Beast
 no text
 4/4
-abTgtPTPump R R:+1/-1
+abPumpTgt R R:+1/-1
 
 Ghost Warden
 1 W
 Creature Spirit
 no text
 1/1
-abTgtPTPump T:+1/+1
+abPumpTgt T:+1/+1
 
 Nantuko Disciple
 3 G
 Creature Insect Druid
 no text
 2/2
-abTgtPTPump G T:+2/+2
+abPumpTgt G T:+2/+2
 
 Voltaic Key
 1
@@ -6666,7 +6666,7 @@ Akki Drillmaster
 Creature Goblin Shaman
 no text
 2/2
-TgtKPump T:Haste
+abPumpTgt T:Haste
 
 Blight Sickle
 2
@@ -6962,7 +6962,7 @@ WB WB WB
 Creature Spirit
 no text
 2/2
-PTPump WB WB WB:+3/+3
+abPump WB WB WB:+3/+3
 Persist
 
 Gravelgill Axeshark
@@ -7155,8 +7155,8 @@ Rakdos Pit Dragon
 Creature Dragon
 Hellbent - Rakdos Pit Dragon has double strike as long as you have no cards in hand.
 3/3
-KPump R R:Flying
-PTPump R:+1/+0
+abPump R R:Flying
+abPump R:+1/+0
 
 Hell-Bent Raider
 1 R R
@@ -7313,11 +7313,11 @@ W
 Creature Human Cleric
 no text
 1/1
-TgtKPump T:Protection from black
-TgtKPump T:Protection from blue
-TgtKPump T:Protection from green
-TgtKPump T:Protection from red
-TgtKPump T:Protection from white
+abPumpTgt T:Protection from black
+abPumpTgt T:Protection from blue
+abPumpTgt T:Protection from green
+abPumpTgt T:Protection from red
+abPumpTgt T:Protection from white
 
 Siege-Gang Commander
 3 R R
@@ -7384,10 +7384,10 @@ Creature Shapeshifter
 no text
 3/3
 Untap:U
-KPump U:Flying
-KPump U:Shroud
-PTPump 1:+1/-1
-PTPump 1:-1/+1
+abPump U:Flying
+abPump U:Shroud
+abPump 1:+1/-1
+abPump 1:-1/+1
 
 Phyrexian Ghoul
 2 B
@@ -7443,7 +7443,7 @@ no cost
 Land
 no text
 tap: add 1
-TgtKPump 1 T:Protection from artifacts
+abPumpTgt 1 T:Protection from artifacts
 
 Yavimaya Scion
 4 G
@@ -7489,14 +7489,14 @@ Creature Shapeshifter
 no text
 2/2
 Changeling
-KPump B:Deathtouch
+abPump B:Deathtouch
 
 Vectis Silencers
 2 U
 Artifact Creature Human Rogue
 no text
 1/2
-KPump 2 B:Deathtouch
+abPump 2 B:Deathtouch
 
 Pestilent Kathari
 2 B
@@ -7505,7 +7505,7 @@ no text
 1/1
 Flying
 Deathtouch
-KPump 2 R:First Strike
+abPump 2 R:First Strike
 
 Tidehollow Strix
 U B
@@ -7557,7 +7557,7 @@ Creature Shapeshifter
 no text
 2/2
 Changeling
-PTPump 1 B:+1/+1
+abPump 1 B:+1/+1
 
 Skeletal Changeling
 1 B
@@ -7573,7 +7573,7 @@ Creature Shapeshifter
 no text
 3/3
 Changeling
-KPump R:First Strike
+abPump R:First Strike
 
 Woodland Changeling
 1 G
@@ -7720,7 +7720,7 @@ Creature Human Wizard
 no text
 1/1
 Exalted
-KPump U:Shroud
+abPump U:Shroud
 
 Abbey Gargoyles
 2 W W W
@@ -7897,7 +7897,7 @@ R
 Creature Goblin
 no text
 1/1
-KPump R:Protection from red
+abPump R:Protection from red
 
 Knight of Dawn
 1 W W
@@ -7905,11 +7905,11 @@ Creature Human Knight
 no text
 2/2
 First Strike
-KPump W W:Protection from black
-KPump W W:Protection from blue
-KPump W W:Protection from green
-KPump W W:Protection from red
-KPump W W:Protection from white
+abPump W W:Protection from black
+abPump W W:Protection from blue
+abPump W W:Protection from green
+abPump W W:Protection from red
+abPump W W:Protection from white
 
 Knight of Stromgald
 B B
@@ -7917,8 +7917,8 @@ Creature Human Knight
 no text
 2/1
 Protection from white
-KPump B:First Strike
-PTPump B B:+1/+0
+abPump B:First Strike
+abPump B B:+1/+0
 
 Llanowar Knight
 G W
@@ -7979,8 +7979,8 @@ Creature Human Cleric Knight
 no text
 2/1
 Protection from black
-KPump W:First Strike
-PTPump W W:+1/+0
+abPump W:First Strike
+abPump W W:+1/+0
 
 Order of the Ebon Hand
 B B
@@ -7988,8 +7988,8 @@ Creature Cleric Knight
 no text
 2/1
 Protection from white
-KPump B:First Strike
-PTPump B B:+1/+0
+abPump B:First Strike
+abPump B B:+1/+0
 
 Order of the White Shield
 W W
@@ -7997,8 +7997,8 @@ Creature Human Knight
 no text
 2/1
 Protection from black
-KPump W:First Strike
-PTPump W W:+1/+0
+abPump W:First Strike
+abPump W W:+1/+0
 
 Paladin en-Vec
 1 W W
@@ -8085,8 +8085,8 @@ Creature Zombie Knight
 no text
 2/1
 Protection from white
-KPump B:Flying
-PTPump B B:+1/+0
+abPump B:Flying
+abPump B B:+1/+0
 
 Thermal Glider
 2 W
@@ -8187,7 +8187,7 @@ Creature Efreet
 no text
 2/4
 Protection from white
-PTPump 1 R:+1/+0
+abPump 1 R:+1/+0
 
 Windreaper Falcon
 1 R G
@@ -8248,9 +8248,9 @@ no text
 2/1
 Protection from white
 Protection from black
-KPump WB:Flying
-KPump WB:First Strike
-PTPump WB WB:+1/+0
+abPump WB:Flying
+abPump WB:First Strike
+abPump WB WB:+1/+0
 
 Stalker Hag
 BG BG BG
@@ -8289,12 +8289,12 @@ Armored Guardian
 Creature Cat Soldier
 no text
 2/5
-TgtKPump 1 W W:Protection from white
-TgtKPump 1 W W:Protection from blue
-TgtKPump 1 W W:Protection from black
-TgtKPump 1 W W:Protection from red
-TgtKPump 1 W W:Protection from green
-KPump 1 U U:Shroud
+abPumpTgt 1 W W:Protection from white
+abPumpTgt 1 W W:Protection from blue
+abPumpTgt 1 W W:Protection from black
+abPumpTgt 1 W W:Protection from red
+abPumpTgt 1 W W:Protection from green
+abPump 1 U U:Shroud
 
 Obsidian Acolyte
 1 W
@@ -8302,7 +8302,7 @@ Creature Human Cleric
 no text
 1/1
 Protection from black
-TgtKPump W:Protection from black
+abPumpTgt W:Protection from black
 
 Crimson Acolyte
 1 W
@@ -8310,7 +8310,7 @@ Creature Human Cleric
 no text
 1/1
 Protection from red
-TgtKPump W:Protection from red
+abPumpTgt W:Protection from red
 
 White Shield Crusader
 W W
@@ -8318,8 +8318,8 @@ Creature Human Knight
 no text
 2/1
 Protection from black
-KPump W:Flying
-PTPump W W:+1/+0
+abPump W:Flying
+abPump W W:+1/+0
 
 Boggart Ram-Gang
 RG RG RG
@@ -8334,8 +8334,8 @@ RW RW
 Creature Human Wizard
 no text
 2/2
-TgtKPump 1 R:Haste
-TgtKPump 1 W:First Strike
+abPumpTgt 1 R:Haste
+abPumpTgt 1 W:First Strike
 
 Boros Recruit
 RW
@@ -8350,7 +8350,7 @@ Creature Human Knight
 no text
 2/2
 Flanking
-KPump R R:First Strike
+abPump R R:First Strike
 
 Cadaverous Knight
 2 B
@@ -8374,7 +8374,7 @@ Creature Human Knight
 no text
 2/2
 Flanking
-KPump W:Vigilance
+abPump W:Vigilance
 
 Hobgoblin Dragoon
 2 RW
@@ -8388,7 +8388,7 @@ Jabari's Banner
 2
 Artifact
 no text
-TgtKPump 1 T:Flanking
+abPumpTgt 1 T:Flanking
 
 Loamdragger Giant
 4 RG RG RG
@@ -8459,7 +8459,7 @@ UR
 Creature Goblin
 no text
 1/1
-KPump UR:Flying
+abPump UR:Flying
 
 Suq'Ata Lancer
 2 R
@@ -8489,7 +8489,7 @@ Creature Human Knight
 no text
 2/2
 Flanking
-KPump W W:First Strike
+abPump W W:First Strike
 
 Oversoul of Dusk
 GW GW GW GW GW
@@ -8568,7 +8568,7 @@ Creature Imp
 no text
 0/1
 Flying
-PTPump BR:+1/+0
+abPump BR:+1/+0
 
 Duergar Cave-Guard
 3 R
@@ -8576,28 +8576,28 @@ Creature Dwarf Warrior
 no text
 1/3
 Wither
-PTPump RW:+1/+0
+abPump RW:+1/+0
 
 Foxfire Oak
 5 G
 Creature Treefolk Shaman
 no text
 3/6
-PTPump RG RG RG:+3/+0
+abPump RG RG RG:+3/+0
 
 Loch Korrigan
 3 B
 Creature Spirit
 no text
 1/1
-PTPump UB:+1/+1
+abPump UB:+1/+1
 
 Parapet Watchers
 2 U
 Creature Kithkin Soldier
 no text
 2/2
-PTPump WU:+0/+1
+abPump WU:+0/+1
 
 Rune-Cervin Rider
 3 W
@@ -8605,7 +8605,7 @@ Creature Elf Knight
 no text
 2/2
 Flying
-PTPump GW GW:+1/+1
+abPump GW GW:+1/+1
 
 Talonrend
 4 U
@@ -8613,7 +8613,7 @@ Creature Elemental
 no text
 0/5
 Flying
-PTPump UR:+1/-1
+abPump UR:+1/-1
 
 Rhys the Redeemed
 GW
@@ -8982,7 +8982,7 @@ G
 Creature Elf Warrior
 Play this ability only once each turn.
 1/1
-PTPump 1 G:+2/+2
+abPump 1 G:+2/+2
 Wither
 
 Juvenile Gloomwidow
@@ -8998,7 +8998,7 @@ Rootwater Thief
 Creature Merfolk Rogue
 Whenever Rootwater Thief deals combat damage to a player, you may pay 2. If you do, search that player's library for a card and remove that card from the game, then the player shuffles his or her library.
 1/2
-KPump U:Flying
+abPump U:Flying
 
 Shatter
 1 R
@@ -9389,7 +9389,7 @@ Thorn-Thrash Viashino
 Creature Viashino Warrior
 no text
 2/2
-KPump G:Trample
+abPump G:Trample
 Devour:2
 
 Thunder-Thrash Elder
@@ -9612,7 +9612,7 @@ Creature Dragon
 no text
 2/2
 Flying
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Korlash, Heir to Blackblade
 2 B B
@@ -9946,8 +9946,8 @@ Bant Battlemage
 Creature Human Wizard
 no text
 2/2
-TgtKPump G T:Trample
-TgtKPump U T:Flying
+abPumpTgt G T:Trample
+abPumpTgt U T:Flying
 
 Battle Rampart
 2 R
@@ -9955,26 +9955,26 @@ Creature Wall
 no text
 1/3
 Defender
-TgtKPump T:Haste
+abPumpTgt T:Haste
 
 Elvish Herder
 G
 Creature Elf
 no text
 1/1
-TgtKPump G:Trample
+abPumpTgt G:Trample
 
 Flying Carpet
 4
 Artifact
 no text
-TgtKPump 2 T:Flying
+abPumpTgt 2 T:Flying
 
 Fyndhorn Bow
 2
 Artifact
 no text
-TgtKPump 3 T:First Strike
+abPumpTgt 3 T:First Strike
 
 Harmattan Efreet
 2 U U
@@ -9982,41 +9982,41 @@ Creature Efreet
 no text
 2/2
 Flying
-TgtKPump 1 U U:Flying
+abPumpTgt 1 U U:Flying
 
 Heartwood Shard
 3
 Artifact
 no text
-TgtKPump 3 T:Trample
-TgtKPump G T:Trample
+abPumpTgt 3 T:Trample
+abPumpTgt G T:Trample
 
 Icatian Scout
 W
 Creature Human Soldier Scout
 no text
 1/1
-TgtKPump 1 T:First Strike
+abPumpTgt 1 T:First Strike
 
 Iron Lance
 2
 Artifact
 no text
-TgtKPump 3 T:First Strike
+abPumpTgt 3 T:First Strike
 
 Ivy Dancer
 2 G
 Creature Dryad Shaman
 no text
 1/2
-TgtKPump T:Forestwalk
+abPumpTgt T:Forestwalk
 
 Jamuraan Lion
 2 W
 Creature Cat
 no text
 3/1
-TgtKPump W T:This creature cannot block
+abPumpTgt W T:This creature cannot block
 
 Pixie Queen
 2 G G
@@ -10024,14 +10024,14 @@ Creature Faerie
 no text
 1/1
 Flying
-TgtKPump G G G T:Flying
+abPumpTgt G G G T:Flying
 
 Restless Bones
 2 B
 Creature Skeleton
 no text
 1/1
-TgtKPump 3 B T:Swampwalk
+abPumpTgt 3 B T:Swampwalk
 RegenerateMe:1 B
 
 Sunhome, Fortress of the Legion
@@ -10039,7 +10039,7 @@ no cost
 Land
 no text
 tap: add 1
-TgtKPump 2 R W T:Double Strike
+abPumpTgt 2 R W T:Double Strike
 
 Unseen Walker
 1 G
@@ -10047,27 +10047,27 @@ Creature Dryad
 no text
 1/1
 Forestwalk
-TgtKPump 1 G G:Forestwalk
+abPumpTgt 1 G G:Forestwalk
 
 War Chariot
 3
 Artifact
 no text
-TgtKPump 3 T:Trample
+abPumpTgt 3 T:Trample
 
 Weatherseed Elf
 G
 Creature Elf
 no text
 1/1
-TgtKPump T:Forestwalk
+abPumpTgt T:Forestwalk
 
 Whip Sergeant
 2 R
 Creature Human Soldier
 no text
 2/1
-TgtKPump R:Haste
+abPumpTgt R:Haste
 
 Wind Dancer
 1 U
@@ -10075,14 +10075,14 @@ Creature Faerie
 no text
 1/1
 Flying
-TgtKPump T:Flying
+abPumpTgt T:Flying
 
 Angelfire Crusader
 3 W
 Creature Human Soldier Knight
 no text
 2/3
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Jokulhaups
 4 R R
@@ -10095,7 +10095,7 @@ Creature Viashino Warrior
 Play this ability only once each turn.
 1/1
 Double Strike
-PTPump B G:+1/+1
+abPump B G:+1/+1
 
 Primordial Sage
 4 G G
@@ -10108,14 +10108,14 @@ Merrow Levitator
 Creature Merfolk Wizard
 Whenever you play a blue spell, you may untap Merrow Levitator.
 2/3
-TgtKPump T:Flying
+abPump T:Flying
 
 Dauthi Trapper
 2 B
 Creature Dauthi Minion
 no text
 1/1 
-TgtKPump T:Shadow
+abPumpTgt T:Shadow
 
 Advance Scout
 1 W
@@ -10123,7 +10123,7 @@ Creature Human Soldier Scout
 no text
 1/1
 First Strike
-TgtKPump W:First Strike
+abPumpTgt W:First Strike
 
 Horde of Notions
 W U B R G
@@ -10188,14 +10188,14 @@ Artifact Creature Gargoyle
 no text
 1/2
 Flying
-PTPump B:+2/-1
+abPump B:+2/-1
 
 Dreadwing
 B
 Creature Zombie
 no text
 1/1
-PTKPump 1 U R:+3/+0/Flying
+abPump 1 U R:+3/+0/Flying
 
 Esper Cormorants
 2 W U
@@ -10209,18 +10209,18 @@ Kranioceros
 Creature Beast
 no text
 5/2
-PTPump 1 W:+0/+3
+abPump 1 W:+0/+3
 
 Thornling
 3 G G
 Creature Elemental Shapeshifter
 no text
 4/4
-KPump G:Haste
-KPump G:Trample
-KPump G:Indestructible
-PTPump 1:+1/-1
-PTPump 1:-1/+1
+abPump G:Haste
+abPump G:Trample
+abPump G:Indestructible
+abPump 1:+1/-1
+abPump 1:-1/+1
 
 Valiant Guard
 W
@@ -10233,7 +10233,7 @@ Vectis Agents
 Artifact Creature Human Rogue
 no text
 4/3
-PTKPump U B:-2/-0/Unblockable
+abPump U B:-2/-0/Unblockable
 
 Gerrard's Command
 W G
@@ -10375,7 +10375,7 @@ no text
 2/2
 Flying
 This creature can block only creatures with flying.
-PTPump 1 B:+1/+1
+abPump 1 B:+1/+1
 
 Benalish Knight
 2 W
@@ -10390,7 +10390,7 @@ Blockade Runner
 Creature Merfolk
 no text
 2/2
-KPump U:Unblockable
+abPump U:Unblockable
 
 Capashen Knight
 1 W
@@ -10398,14 +10398,14 @@ Creature Human Knight
 no text
 1/1
 First Strike
-PTPump 1 W:+1/+0
+abPump 1 W:+1/+0
 
 Cavern Thoctar
 5 G
 Creature Beast
 no text
 5/5
-PTPump 1 R:+1/+0
+abPump 1 R:+1/+0
 
 Char-Rumbler
 2 R R
@@ -10413,7 +10413,7 @@ Creature Elemental
 no text
 -1/3
 Double Strike
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Cloudheath Drake
 4 U
@@ -10421,7 +10421,7 @@ Artifact Creature Drake
 no text
 3/3
 Flying
-KPump 1 W:Vigilance
+abPump 1 W:Vigilance
 
 Coiled Tinviper
 3
@@ -10444,7 +10444,7 @@ Creature Insect
 no text
 1/1
 Flying
-KPump G G:First Strike
+abPump G G:First Strike
 
 Gloomwidow
 2 G
@@ -10482,7 +10482,7 @@ Hopping Automaton
 Artifact Creature Construct
 no text
 2/2
-PTKPump 0:-1/-1/Flying
+abPump 0:-1/-1/Flying
 
 Hornet Cobra
 1 G G
@@ -10496,15 +10496,15 @@ Hyalopterous Lemure
 Creature Spirit
 no text
 4/3
-PTKPump 0:-1/-0/Flying
+abPump 0:-1/-0/Flying
 
 Kavu Glider
 2 R
 Creature Kavu
 no text
 2/1
-PTPump W:+0/+1
-KPump U:Flying
+abPump W:+0/+1
+abPump U:Flying
 
 Kjeldoran Gargoyle
 5 W
@@ -10535,7 +10535,7 @@ Leaping Lizard
 Creature Lizard
 no text
 2/3
-PTKPump 1 G:-0/-1/Flying
+abPump 1 G:-0/-1/Flying
 
 Lightning Hounds
 2 R R
@@ -10574,8 +10574,8 @@ Mantis Engine
 Artifact Creature Insect
 no text
 3/3
-KPump 2:Flying
-KPump 2:First Strike
+abPump 2:Flying
+abPump 2:First Strike
 
 Nightguard Patrol
 2 W
@@ -10590,7 +10590,7 @@ Noble Panther
 Creature Cat
 no text
 3/3
-KPump 1:First Strike
+abPump 1:First Strike
 
 Pardic Collaborator
 3 R
@@ -10598,7 +10598,7 @@ Creature Human Barbarian
 no text
 2/2
 First Strike
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Pegasus Charger
 2 W
@@ -10667,7 +10667,7 @@ Creature Human Soldier Warrior
 no text
 1/3
 First Strike
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Sanguine Guard
 1 B B
@@ -10698,7 +10698,7 @@ Shore Snapper
 Creature Beast
 no text
 2/2
-KPump U:Islandwalk
+abPump U:Islandwalk
 
 Sigiled Paladin
 W W
@@ -10752,7 +10752,7 @@ Titanium Golem
 Artifact Creature Golem
 no text
 3/3
-KPump 1 W:First Strike
+abPump 1 W:First Strike
 
 Tundra Wolves
 W
@@ -10766,21 +10766,21 @@ Tyrranax
 Creature Beast
 no text
 5/4
-PTPump 1 G:-1/+1
+abPump 1 G:-1/+1
 
 Veldrane of Sengir
 5 B B
 Legendary Creature Human Rogue
 no text
 5/5
-PTKPump 1 B B:-3/-0/Forestwalk
+abPump 1 B B:-3/-0/Forestwalk
 
 Viscid Lemures
 4 B
 Creature Spirit
 no text
 4/3
-PTKPump 0:-1/-0/Swampwalk
+abPump 0:-1/-0/Swampwalk
 
 Volcano Imp
 3 B
@@ -10788,7 +10788,7 @@ Creature Imp
 no text
 2/2
 Flying
-KPump 1 R:First Strike
+abPump 1 R:First Strike
 
 Wall of Razors
 1 R
@@ -10820,7 +10820,7 @@ Play this ability only once each turn.
 1/1
 Flying
 First Strike
-PTPump W W:+2/+0
+abPump W W:+2/+0
 
 Ghor-Clan Bloodscale
 3 R
@@ -10828,7 +10828,7 @@ Creature Viashino Warrior
 Play this ability only once each turn.
 2/1
 First Strike
-PTPump 3 G:+2/+2
+abPump 3 G:+2/+2
 
 Shield Sphere
 0
@@ -11378,14 +11378,14 @@ Creature Drake
 Play this ability only once each turn.
 1/3
 Flying
-PTPump U:+1/+0
+abPump U:+1/+0
 
 Breathstealer
 2 B
 Creature Nightstalker
 no text
 2/2
-PTPump B:+1/-1
+abPump B:+1/-1
 
 Cavern Crawler
 2 R
@@ -11393,14 +11393,14 @@ Creature Insect
 no text
 0/3
 Mountainwalk
-PTPump R:+1/-1
+abPump R:+1/-1
 
 Cobalt Golem
 4
 Artifact Creature Golem
 no text
 2/3
-KPump 1 U:Flying
+abPump 1 U:Flying
 
 Dauthi Mercenary
 2 B
@@ -11408,14 +11408,14 @@ Creature Dauthi Knight Mercenary
 no text
 2/1
 Shadow
-PTPump 1 B:+1/+0
+abPump 1 B:+1/+0
 
 Deeptread Merrow
 1 U
 Creature Merfolk Rogue
 no text
 2/1
-KPump U:Islandwalk
+abPump U:Islandwalk
 
 Drake Hatchling
 2 U
@@ -11423,21 +11423,21 @@ Creature Drake
 Play this ability only once each turn.
 1/3
 Flying
-PTPump U:+1/+0
+abPump U:+1/+0
 
 Ebony Treefolk
 1 B G
 Creature Treefolk
 no text
 3/3
-PTPump B G:+1/+1
+abPump B G:+1/+1
 
 Enslaved Scout
 2 R
 Creature Goblin Scout
 no text
 2/2
-KPump 2:Mountainwalk
+abPump 2:Mountainwalk
 
 Fire Drake
 1 R R
@@ -11445,21 +11445,21 @@ Creature Drake
 Play this ability only once each turn.
 1/2
 Flying
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Flowstone Crusher
 3 R R
 Creature Beast
 no text
 4/4
-PTPump R:+1/-1
+abPump R:+1/-1
 
 Flowstone Giant
 2 R R
 Creature Giant
 no text
 3/3
-PTPump R:+2/-2
+abPump R:+2/-2
 
 Flowstone Hellion
 4 R
@@ -11467,7 +11467,7 @@ Creature Hellion Beast
 no text
 3/3
 Haste
-PTPump 0:+1/-1
+abPump 0:+1/-1
 
 Flowstone Mauler
 4 R R
@@ -11475,21 +11475,21 @@ Creature Beast
 no text
 4/5
 Trample
-PTPump R:+1/-1
+abPump R:+1/-1
 
 Flowstone Shambler
 2 R
 Creature Beast
 no text
 2/2
-PTPump R:+1/-1
+abPump R:+1/-1
 
 Flowstone Thopter
 7
 Artifact Creature Thopter
 no text
 4/4
-PTKPump 1:+1/-1/Flying
+abPump 1:+1/-1/Flying
 
 Flowstone Wall
 2 R
@@ -11497,7 +11497,7 @@ Creature Wall
 no text
 0/6
 Defender
-PTPump R:+1/-1
+abPump R:+1/-1
 
 Flowstone Wyvern
 3 R R
@@ -11505,49 +11505,49 @@ Creature Drake
 no text
 3/3
 Flying
-PTPump R:+2/-2
+abPump R:+2/-2
 
 Folk of the Pines
 4 G
 Creature Dryad
 no text
 2/5
-PTPump 1 G:+1/+0
+abPump 1 G:+1/+0
 
 Glintwing Invoker
 4 U
 Creature Human Wizard Mutant
 no text
 3/3
-PTKPump 7 U:+3/+3/Flying
+abPump 7 U:+3/+3/Flying
 
 Hematite Golem
 4
 Artifact Creature Golem
 no text
 1/4
-PTPump 1 R:+2/+0
+abPump 1 R:+2/+0
 
 Henge Guardian
 5
 Artifact Creature Dragon Wurm
 no text
 3/4
-KPump 2:Trample
+abPump 2:Trample
 
 Hooded Kavu
 2 R
 Creature Kavu
 no text
 2/2
-KPump B:Fear
+abPump B:Fear
 
 Igneous Golem
 5
 Artifact Creature Golem
 no text
 3/4
-KPump 2:Trample
+abPump 2:Trample
 
 Lionheart Maverick
 W
@@ -11555,21 +11555,21 @@ Creature Human Knight
 no text
 1/1
 Vigilance
-PTPump 4 W:+1/+2
+abPump 4 W:+1/+2
 
 Llanowar Cavalry
 2 G
 Creature Human Soldier
 no text
 1/4
-KPump W:Vigilance
+abPump W:Vigilance
 
 Malachite Golem
 6
 Artifact Creature Golem
 no text
 5/3
-KPump 1 G:Trample
+abPump 1 G:Trample
 
 Mesa Falcon
 1 W
@@ -11577,21 +11577,21 @@ Creature Bird
 no text
 1/1
 Flying
-PTPump 1 W:+0/+1
+abPump 1 W:+0/+1
 
 Patagia Golem
 4
 Artifact Creature Golem
 no text
 2/3
-KPump 3:Flying
+abPump 3:Flying
 
 Pavel Maliki
 4 B R
 Legendary Creature Human
 no text
 5/3
-PTPump B R:+1/+0
+abPump B R:+1/+0
 
 Pearl Dragon
 4 W W
@@ -11599,7 +11599,7 @@ Creature Dragon
 no text
 4/4
 Flying
-PTPump 1 W:+0/+1
+abPump 1 W:+0/+1
 
 Phyrexian Battleflies
 B
@@ -11607,7 +11607,7 @@ Creature Insect
 Play this ability no more than twice each turn.
 0/1
 Flying
-PTPump B:+1/+0
+abPump B:+1/+0
 
 Pit Imp
 B
@@ -11615,35 +11615,35 @@ Creature Imp
 Play this ability no more than twice each turn.
 0/1
 Flying
-PTPump B:+1/+0
+abPump B:+1/+0
 
 Plated Rootwalla
 4 G
 Creature Lizard
 Play this ability only once each turn.
 3/3
-PTPump 2 G:+3/+3
+abPump 2 G:+3/+3
 
 River Merfolk
 U U
 Creature Merfolk
 no text
 2/1
-KPump U:Mountainwalk
+abPump U:Mountainwalk
 
 Roofstalker Wight
 1 B
 Creature Zombie
 no text
 2/1
-KPump 1 U:Flying
+abPump 1 U:Flying
 
 Rootwalla
 2 G
 Creature Lizard
 Play this ability only once each turn.
 2/2
-PTPump 1 G:+2/+2
+abPump 1 G:+2/+2
 
 Roterothopter
 1
@@ -11651,21 +11651,21 @@ Artifact Creature Thopter
 Play this ability no more than twice each turn.
 0/2
 Flying
-PTPump 2:+1/+0
+abPump 2:+1/+0
 
 Serpentine Kavu
 4 G
 Creature Kavu
 no text
 4/4
-KPump R:Haste
+abPump R:Haste
 
 Shambling Strider
 4 G G
 Creature Yeti
 no text
 5/5
-PTPump R G:+1/-1
+abPump R G:+1/-1
 
 Soltari Crusader
 2 W
@@ -11673,14 +11673,14 @@ Creature Soltari Knight
 no text
 2/1
 Shadow
-PTPump 1 W:+1/+0
+abPump 1 W:+1/+0
 
 Soltari Emissary
 1 W
 Creature Soltari Soldier
 no text
 2/1
-KPump W:Shadow
+abPump W:Shadow
 
 Spitting Drake
 3 R
@@ -11688,14 +11688,14 @@ Creature Drake
 Play this ability only once each turn.
 2/2
 Flying
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Stonewood Invoker
 1 G
 Creature Elf Mutant
 no text
 2/2
-PTPump 7 G:+5/+5
+abPump 7 G:+5/+5
 
 Torch Drake
 3 U
@@ -11703,7 +11703,7 @@ Creature Drake
 no text
 2/2
 Flying
-PTPump 1 R:+1/+0
+abPump 1 R:+1/+0
 
 Vampire Bats
 B
@@ -11711,14 +11711,14 @@ Creature Bat
 Play this ability no more than twice each turn.
 0/1
 Flying
-PTPump B:+1/+0
+abPump B:+1/+0
 
 Viashino Grappler
 2 R
 Creature Viashino
 no text
 3/1
-KPump G:Trample
+abPump G:Trample
 
 Wall of Fire
 1 R R
@@ -11726,7 +11726,7 @@ Creature Wall
 no text
 0/5
 Defender
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Wall of Lava
 1 R R
@@ -11734,7 +11734,7 @@ Creature Wall
 no text
 1/3
 Defender
-PTPump R:+1/+1
+abPump R:+1/+1
 
 Wall of Opposition
 3 R R
@@ -11742,7 +11742,7 @@ Creature Wall
 no text
 0/6
 Defender
-PTPump 1:+1/+0
+abPump 1:+1/+0
 
 Wall of Water
 1 U U
@@ -11750,14 +11750,14 @@ Creature Wall
 no text
 0/5
 Defender
-PTPump U:+1/+0
+abPump U:+1/+0
 
 Yavimaya Ancients
 3 G G
 Creature Treefolk
 no text
 2/7
-PTPump G:+1/-2
+abPump G:+1/-2
 
 Dirtwater Wraith
 3 B
@@ -11765,7 +11765,7 @@ Creature Wraith
 no text
 1/3
 Swampwalk
-PTPump B:+1/+0
+abPump B:+1/+0
 
 Thunder Wall
 1 U U
@@ -11774,14 +11774,14 @@ no text
 0/2
 Defender
 Flying
-PTPump U:+1/+1
+abPump U:+1/+1
 
 Viashino Slasher
 1 R
 Creature Viashino Warrior
 no text
 1/2
-PTPump R:+1/-1
+abPump R:+1/-1
 
 Steam Spitter
 4 G
@@ -11789,7 +11789,7 @@ Creature Spider
 no text
 1/5
 Reach
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Dungeon Shade
 3 B
@@ -11797,14 +11797,14 @@ Creature Shade Spirit
 no text
 1/1
 Flying
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Fetid Horror
 3 B
 Creature Shade Horror
 no text
 1/2
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Whispering Shade
 3 B
@@ -11812,7 +11812,7 @@ Creature Shade
 no text
 1/1
 Swampwalk
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Undercity Shade
 4 B
@@ -11820,35 +11820,35 @@ Creature Shade
 no text
 1/1
 Fear
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Shade of Trokair
 3 W
 Creature Shade
 (NOTE: "Suspend" not implemented.)
 1/2
-PTPump W:+1/+1
+abPump W:+1/+1
 
 Looming Shade
 2 B
 Creature Shade
 no text
 1/1
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Hoar Shade
 3 B
 Creature Shade
 no text
 1/2
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Frozen Shade
 2 B
 Creature Shade
 no text
 0/1
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Pygmy Pyrosaur
 1 R
@@ -11856,22 +11856,22 @@ Creature Lizard
 no text
 1/1
 This creature cannot block
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Stone Kavu
 4 G
 Creature Kavu
 no text
 3/3
-PTPump R:+1/+0
-PTPump W:+0/+1
+abPump R:+1/+0
+abPump W:+0/+1
 
 Firescreamer
 3 B
 Creature Kavu
 no text
 2/2
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Moonwing Moth
 1 W W
@@ -11879,7 +11879,7 @@ Creature Insect
 no text
 2/1
 Flying
-PTPump W:+0/+1
+abPump W:+0/+1
 
 Killer Bees
 1 G G
@@ -11887,7 +11887,7 @@ Creature Insect
 no text
 0/1
 Flying
-PTPump G:+1/+1
+abPump G:+1/+1
 
 Firefly
 3 R
@@ -11895,49 +11895,49 @@ Creature Insect
 no text
 1/1
 Flying
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Carrion Ants
 2 B B
 Creature Insect
 no text
 0/1
-PTPump 1:+1/+1
+abPump 1:+1/+1
 
 Kjeldoran Outrider
 1 W
 Creature Human Soldier
 no text
 2/2
-PTPump W:+0/+1
+abPump W:+0/+1
 
 Honor Guard
 W
 Creature Human Soldier
 no text
 1/1
-PTPump W:+0/+1
+abPump W:+0/+1
 
 Storm Shaman
 2 R
 Creature Human Cleric Shaman
 no text
 0/4
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Primeval Shambler
 4 B
 Creature Horror Mercenary
 no text
 3/3
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Viscerid Deepwalker
 4 U
 Creature Homarid Warrior
 (NOTE: "Suspend" not implemented.)
 2/3
-PTPump U:+1/+0
+abPump U:+1/+0
 
 Colos Yearling
 2 R
@@ -11945,7 +11945,7 @@ Creature Goat Beast
 no text
 1/1
 Mountainwalk
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Granite Gargoyle
 2 R
@@ -11953,7 +11953,7 @@ Creature Gargoyle
 no text
 2/2
 Flying
-PTPump R:+0/+1
+abPump R:+0/+1
 
 Loxodon Stalwart
 3 W W
@@ -11961,14 +11961,14 @@ Creature Elephant Soldier
 no text
 3/3
 Vigilance
-PTPump W:+0/+1
+abPump W:+0/+1
 
 Vengeful Firebrand
 3 R
 Creature Elemental Warrior
 (NOTE: "Vengeful Firebrand has haste as long as a Warrior card is in your graveyard." not implemented.)
 5/2
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Pyre Charger
 R R
@@ -11976,28 +11976,28 @@ Creature Elemental Warrior
 no text
 1/1
 Haste
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Flamekin Brawler
 R
 Creature Elemental Warrior
 no text
 0/2
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Sea Spirit
 4 U
 Creature Elemental Spirit
 no text
 2/3
-PTPump U:+1/+0
+abPump U:+1/+0
 
 Flame Spirit
 4 R
 Creature Elemental Spirit
 no text
 2/3
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Tower Drake
 2 U
@@ -12005,7 +12005,7 @@ Creature Drake
 no text
 2/1
 Flying
-PTPump W:+0/+1
+abPump W:+0/+1
 
 Pardic Dragon
 4 R R
@@ -12013,7 +12013,7 @@ Creature Dragon
 (NOTE: "Suspend" not implemented.)
 4/4
 Flying
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Aven Flock
 4 W
@@ -12021,35 +12021,35 @@ Creature Bird Soldier
 no text
 2/3
 Flying
-PTPump W:+0/+1
+abPump W:+0/+1
 
 Ridgeline Rager
 2 R
 Creature Beast
 no text
 1/2
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Adarkar Sentinel
 5
 Artifact Creature Soldier
 no text
 3/3
-PTPump 1:+0/+1
+abPump 1:+0/+1
 
 Dragon Engine
 3
 Artifact Creature Construct
 no text
 1/3
-PTPump 2:+1/+0
+abPump 2:+1/+0
 
 Capashen Templar
 2 W
 Creature Human Knight
 no text
 2/2
-PTPump W:+0/+1
+abPump W:+0/+1
 
 Balshan Collaborator
 3 U
@@ -12057,7 +12057,7 @@ Creature Bird Soldier
 no text
 2/2
 Flying
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Duskdale Wurm
 5 G G
@@ -15264,7 +15264,7 @@ Creature Spirit
 no text
 1/1
 Haste
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Frostling
 R
@@ -15894,7 +15894,7 @@ Creature Dragon
 no text
 5/5
 Flying
-PTPump R:+1/+0
+abPump R:+1/+0
 
 Raging Goblin
 R
@@ -16183,7 +16183,7 @@ B B
 Creature Insect Shade
 no text
 2/1
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Blood Crypt
 no cost
@@ -16726,7 +16726,7 @@ Creature Shade Spirit
 no text
 1/1
 RegenerateMe:B
-PTPump B:+1/+1
+abPump B:+1/+1
 
 Diabolic Machine
 7
@@ -17343,8 +17343,8 @@ Creature Dragon
 no text
 4/4
 Flying
-PTPump R:+1/+0
-PTPump G:+0/+1
+abPump R:+1/+0
+abPump G:+0/+1
 
 Wall of Earth
 1 R
@@ -17402,7 +17402,7 @@ no text
 Flying
 Trample
 Haste
-PTPump R:+1/+0
+abPump R:+1/+0
 RegenerateMe:B G
 
 Ancient Den
