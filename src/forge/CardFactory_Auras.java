@@ -2629,6 +2629,8 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Aspect of Mongoose") || cardName.equals("Robe of Mirrors")
                 || cardName.equals("Diplomatic Immunity")) {
@@ -2716,6 +2718,8 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sleeper's Guile")) {

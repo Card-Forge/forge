@@ -1,3 +1,25 @@
+Agility
+1 R
+Enchantment Aura
+Enchanted creature gets +1/+1 and has flanking.
+Enchant creature
+enPump:+1/+1/Flanking
+
+Alexi's Cloak
+1 U
+Enchantment Aura
+Enchanted creature has shroud.
+Flash
+Enchant creature
+enPump:Shroud
+
+Burrowing
+R
+Enchantment Aura
+Enchanted creature has mountainwalk.
+Enchant creature
+enPump:Mountainwalk
+
 Improvised Armor
 3 W
 Enchantment Aura
@@ -5851,14 +5873,16 @@ Diplomatic Immunity
 1 U
 Enchantment Aura
 Enchanted creature has shroud.
-Shroud
 Enchant creature
+enPump:Shroud
+Shroud
 
 Robe of Mirrors
 U
 Enchantment Aura
 Enchanted creature has shroud.
 Enchant creature
+enPump:Shroud
 
 Fear
 B B
@@ -6252,8 +6276,9 @@ Aspect of Mongoose
 1 G
 Enchantment Aura
 Enchanted creature has shroud.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 Enchant creature
+enPump:Shroud
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Launch
 1 U
