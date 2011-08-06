@@ -391,6 +391,11 @@ public class QuestData implements NewConstants {
         return new ArrayList<String>(newCardList);
     }
     
+    //get new cards that were added to your card pool by addCards()
+    public void addToNewList(ArrayList<String> added) {
+    	newCardList.addAll(added);
+    }
+    
     //adds 11 cards, to the current card pool
     //(I chose 11 cards instead of 15 in order to make things more challenging)
     public void addCards() {
@@ -410,19 +415,6 @@ public class QuestData implements NewConstants {
         newCardList = newCards;
         
     }//addCards()
-    
-    public ArrayList<String> getRandomRares(int n, int colorIndex)
-    {
-    	ArrayList<String> newCards = new ArrayList<String>();
-    	newCards.addAll(boosterPack.getRare(n, colorIndex));
-    	
-    	/*
-    	for(String s : newCards ) {
-    		Card c = AllZone.CardFactory.getCard(s, AllZone.HumanPlayer);
-    		list.add(c);
-    	}*/
-    	return newCards;
-    }
     
     public void addRandomRare(int n)
     {

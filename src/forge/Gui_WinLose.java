@@ -453,6 +453,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             				
             				AllZone.QuestData.addCard(cardName);
             			}
+            			AllZone.QuestData.addToNewList(qa.getCardRewardList());
             			sb.append("\r\n");
             		}
             		sb.append("Quest Bounty: ");
