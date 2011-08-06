@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Elf Spellshaper
 Text:no text
 PT:1/1
-K:abMakeToken G T Discard<1/Any><>1<>Llanowar Elves<>G 1 1 Llanowar Elves<>Controller<>G<>Creature;Elf;Druid<>1<>1<>tap: add G<>put a 1/1 green Elf Warrior creature token onto the battlefield.
+K:abMakeToken G T Discard<1/Any><>1<>Llanowar Elves<>G 1 1 Llanowar Elves<>Controller<>G<>Creature;Elf;Druid<>1<>1<>tap: add G<>Put a 1/1 green Elf Druid creature token named Llanowar Elves onto the battlefield. It has "Tap: Add Green to your mana pool."
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card126166.jpg
 End
