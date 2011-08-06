@@ -7612,17 +7612,18 @@ public class CardFactory_Sorceries {
 					int maxCards = lib.size();
 					maxCards = Math.min(maxCards, 10);
 					if(maxCards == 0) return;
-					CardList topCards =   new CardList();
+					CardList topCards = new CardList();
 					//show top n cards:
 					for(int j = 0; j < maxCards; j++ ) {
 						topCards.add(lib.get(j));
 					}
 					final int num = CardFactoryUtil.getNumberOfManaSymbolsByColor("U", topCards);
 					AllZone.Display.getChoiceOptional("Revealed cards - "+num+" U mana symbols", topCards.toArray());
+					maxCards = Math.min(maxCards, num);
 					
 					//opponent moves this many cards to graveyard
 					PlayerZone oppLib = AllZone.getZone(Constant.Zone.Library, opp);
-					for(int i = 0; i < num; i++) {
+					for(int i = 0; i < maxCards; i++) {
 						AllZone.GameAction.moveToGraveyard(oppLib.get(i));
 					}
 					
