@@ -541,6 +541,8 @@ public class Card extends MyObservable {
         runParams.put("Card", this);
         runParams.put("CounterType", counterName);
         AllZone.TriggerHandler.runTrigger("CounterAdded", runParams);
+
+        AllZone.GameAction.checkStateEffects();
         
         this.updateObservers();
     }
