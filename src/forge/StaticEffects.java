@@ -190,9 +190,11 @@ public class StaticEffects
 	
 	public void removeStateBasedEffect(String s)
 	{
-		stateBasedMap.put(s, stateBasedMap.get(s)-1);
-		if(stateBasedMap.get(s) == 0)
-			stateBasedMap.remove(s);
+		if (stateBasedMap.containsKey(s)) {
+			stateBasedMap.put(s, stateBasedMap.get(s)-1);
+			if(stateBasedMap.get(s) == 0)
+				stateBasedMap.remove(s);
+		}
 	}
 	
 	public HashMap<String, Integer> getStateBasedMap()

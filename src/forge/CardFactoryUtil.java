@@ -3267,6 +3267,22 @@ public class CardFactoryUtil
 		return list;
   }
   
+  public static int getTotalBushidoMagnitude(Card c)
+  {
+	  int count = 0;
+	  ArrayList<String> keywords = c.getKeyword();
+	  for (String kw : keywords)
+	  {
+		  if (kw.contains("Bushido"))
+		  {
+			  String[] parse = kw.split(" ");
+			  String s = parse[1];
+			  count += Integer.parseInt(s);
+		  }
+	  }
+	  return count;
+  }
+  
   public static ArrayList<Ability> getBushidoEffects(Card c)
   {
 	  ArrayList<String> keywords = c.getKeyword();

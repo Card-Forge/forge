@@ -70,6 +70,12 @@
              } else
                 targetHeight = panelHeight;
           }
+          
+          if (targetWidth > 201 && srcWidth <= 201)
+         	 targetWidth = 201;
+          if (targetHeight > 285 && srcHeight <= 286)
+        	  targetHeight = 285;
+          
           ScalingInfo info = new ScalingInfo();
           info.targetWidth = targetWidth;
           info.targetHeight = targetHeight;

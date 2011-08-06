@@ -152,8 +152,7 @@ public class CombatUtil
     	if (CardUtil.getColors(blocker).contains(Constant.Color.Green))
     		return false;
     }
-    
-    
+     
     if (attacker.getName().equals("Amrou Seekers"))
     {
     	if (!blocker.getType().contains("Artifact") &&
@@ -173,25 +172,7 @@ public class CombatUtil
     	if (!CardUtil.getColors(blocker).contains(Constant.Color.Blue))
     		return false;
     }
-    /*
-    if(attacker.getKeyword().contains("Flying"))
-      return blocker.getKeyword().contains("Flying") ||
-      blocker.getKeyword().contains("This creature can block as though it had flying.") ||
-      blocker.getKeyword().contains("Reach");
-
-    if(attacker.getKeyword().contains("Fear"))
-      return blocker.getType().contains("Artifact")     ||
-      CardUtil.getColors(blocker).contains(Constant.Color.Black) ||
-      CardUtil.getColors(blocker).contains(Constant.Color.Colorless);
-
-    if (attacker.getName().equals("Amrou Seekers"))
-    	return blocker.getType().contains("Artifact") ||
-    	CardUtil.getColors(blocker).contains(Constant.Color.White);
-
-    if(attacker.getName().equals("Skirk Shaman"))
-      return blocker.getType().contains("Artifact")     ||
-      CardUtil.getColors(blocker).contains(Constant.Color.Red);
-    */
+   
     if(attacker.getName().equals("Goldmeadow Dodger"))
     	return blocker.getNetAttack() < 4;
     
@@ -255,7 +236,7 @@ public class CombatUtil
 			return false;
 		
 	}//flanking
-	
+		
 	if (attacker.getName().equals("Cho-Manno, Revolutionary"))
 		return false;
 	
@@ -284,16 +265,18 @@ public class CombatUtil
 	if (attacker.getKeyword().contains("Protection from Goblins") && (defender.getType().contains("Goblin") || defender.getKeyword().contains("Changeling") ))
 		return false;
 	
+	int defBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(defender);
+	int attBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(attacker);
 	
-	int defenderDamage = defender.getNetAttack() - flankingMagnitude;
-	int attackerDamage = attacker.getNetAttack();
+	int defenderDamage = defender.getNetAttack() - flankingMagnitude + defBushidoMagnitude;
+	int attackerDamage = attacker.getNetAttack() + attBushidoMagnitude;
 	
 	if (isDoranInPlay()) {
-		defenderDamage = defender.getNetDefense() - flankingMagnitude;
-		attackerDamage = attacker.getNetDefense();
+		defenderDamage = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
+		attackerDamage = attacker.getNetDefense() + attBushidoMagnitude;
 	}
-	int defenderLife = defender.getNetDefense() - flankingMagnitude;
-	int attackerLife = attacker.getNetDefense();
+	int defenderLife = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
+	int attackerLife = attacker.getNetDefense() + attBushidoMagnitude;
 
 	if (defender.getKeyword().contains("Double Strike"))
 	{
@@ -419,15 +402,18 @@ public class CombatUtil
 	if (defender.getKeyword().contains("Protection from Goblins") && (attacker.getType().contains("Goblin") || attacker.getKeyword().contains("Changeling") ))
 		return false;
 
-	int defenderDamage = defender.getNetAttack() - flankingMagnitude;
-	int attackerDamage = attacker.getNetAttack();
+	int defBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(defender);
+	int attBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(attacker);
+	
+	int defenderDamage = defender.getNetAttack() - flankingMagnitude + defBushidoMagnitude;
+	int attackerDamage = attacker.getNetAttack() + attBushidoMagnitude;
 	
 	if (isDoranInPlay()) {
-		defenderDamage = defender.getNetDefense() - flankingMagnitude;
-		attackerDamage = attacker.getNetDefense();
+		defenderDamage = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
+		attackerDamage = attacker.getNetDefense() + attBushidoMagnitude;
 	}
-	int defenderLife = defender.getNetDefense() - flankingMagnitude;
-	int attackerLife = attacker.getNetDefense();
+	int defenderLife = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
+	int attackerLife = attacker.getNetDefense() + attBushidoMagnitude;
 
 	if (attacker.getKeyword().contains("Double Strike"))
 	{
@@ -587,7 +573,6 @@ public class CombatUtil
       display.append("/");
       display.append(attack[i].getNetDefense());
       display.append(" is attacking \n");   
-      //display += attackerName +" (" +attack[i].getUniqueNumber() +") "  +attack[i].getNetAttack() +"/" +attack[i].getNetDefense()   +" is attacking \n";
 
       defend = AllZone.pwCombat.getBlockers(attack[i]).toArray();
 
@@ -608,8 +593,6 @@ public class CombatUtil
         display.append("/");
         display.append(defend[inner].getNetDefense());
         display.append(" is blocking \n");
-
-        //display += "     " +blockerName  +" (" +defend[inner].getUniqueNumber()  +") "  +defend[inner].getNetAttack()  +"/" +defend[inner].getNetDefense()    +" is blocking \n";
       }
     }//while - loop through attackers
 
@@ -1784,8 +1767,10 @@ public class CombatUtil
   {
 	  //System.out.println(a.getName() + " got blocked by " + b.getName());
 	  
-	  for (Ability ab: CardFactoryUtil.getBushidoEffects(a))
-		  AllZone.Stack.add(ab);
+	  if (!a.getCreatureGotBlockedThisTurn() ) {
+		  for (Ability ab: CardFactoryUtil.getBushidoEffects(a))
+			  AllZone.Stack.add(ab);
+	  }
 	  
 	  for (Ability ab: CardFactoryUtil.getBushidoEffects(b))
 		  AllZone.Stack.add(ab);

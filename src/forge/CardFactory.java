@@ -7009,7 +7009,7 @@ public class CardFactory implements NewConstants {
 		}
 		
 	  };
-	  bounce.setDescription("You may return three Islands you control to their owner's hand rather than pay Ensnare's mana cost.");
+	  bounce.setDescription("You may return two Islands you control to their owner's hand rather than pay Ensnare's mana cost.");
 	  bounce.setStackDescription(card.getName() + " - Tap all creatures.");
 	  bounce.setManaCost("0");
 	  
@@ -14992,6 +14992,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
        {
          private static final long serialVersionUID = 8394047173115959008L;
 
+         
          public boolean canPlayAI(){return false;}
           
           public void resolve()
@@ -16411,59 +16412,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	        card.clearSpellAbility();
 	    	card.addSpellAbility(spell);    
 	  	}//*************** END ************ END **************************
-	  
-	  
-/*
-	  	//*************** START *********** START **************************
-	    else if(cardName.equals("Riding the Dilu Horse"))
-	    {
-	      SpellAbility spell = new Spell(card)
-	      {
-			private static final long serialVersionUID = -620930445462994580L;
-
-			public boolean canPlayAI()
-	        {
-			  PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-			  
-		      CardList list = new CardList(play.getCards());
-		      list = list.filter(new CardListFilter()
-		      {
-		    	 public boolean addCard(Card c)
-		    	 {
-		    		 return c.isCreature() && !c.getKeyword().contains("Horsemanship") && !c.getKeyword().contains("Defender");
-		    	 }
-		      });
-		      if (list.size() > 0) {
-			      Card c = CardFactoryUtil.AI_getBestCreature(list, card);
-			      setTargetCard(c);
-		          return true;
-		      }
-		      return false;
-	        }
-	        
-	        public void resolve()
-	        {
-	          final Card[] target = new Card[1];
-	          
-
-	          target[0] = getTargetCard();
-	          if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
-	          {
-	            target[0].addTempAttackBoost(2);
-	            target[0].addTempDefenseBoost(2);
-	            target[0].addExtrinsicKeyword("Horsemanship");
-
-	            //String s = target[0].getText();
-	            target[0].setText("(+2/+2 and Horsemanship from " +card+")");
-	          }
-	        }//resolve()
-	      };
-	      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-	      card.clearSpellAbility();
-	      card.addSpellAbility(spell);
-	    }//*************** END ************ END **************************
-*/
-	  
+	  	  
 	  
 	    //*************** START *********** START **************************
 	    else if (cardName.equals("Millstone"))
@@ -16675,7 +16624,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	    }//*************** END ************ END **************************
 	    
 	    
-	  //*************** START *********** START **************************
+	    //*************** START *********** START **************************
 	    if (cardName.equals("Mind Funeral"))
 	    {
 	      final SpellAbility spell = new Spell(card)
@@ -16730,7 +16679,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	    }//*************** END ************ END **************************
 	    
 	    
-	  //*************** START *********** START **************************
+	    //*************** START *********** START **************************
 	    if (cardName.equals("Haunting Echoes"))
 	    {
 	      final SpellAbility spell = new Spell(card)
@@ -16917,7 +16866,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	      card.addSpellAbility(spell);
 	    }//*************** END ************ END **************************
 	    
-	  //*************** START *********** START **************************
+	    //*************** START *********** START **************************
 	    if (cardName.equals("Flame Rift"))
 	    {
 	    	final SpellAbility spell = new Spell(card)
@@ -17204,7 +17153,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		      }//*************** END ************ END **************************
 		    
 		    
-		  //*************** START *********** START **************************
+		      //*************** START *********** START **************************
 		      else if(cardName.equals("Thwart"))
 		      {
 		    	  final SpellAbility spell = new Spell(card)
