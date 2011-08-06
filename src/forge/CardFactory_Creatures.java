@@ -20812,6 +20812,44 @@ public class CardFactory_Creatures {
             ability.setStackDescription(cardName + " - rearrange top 3 cards of target player's library.");
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Ezuri, Renegade Leader")) {
+        	final String Tgts[] = {"Elf"};
+        	Target target = new Target("TgtV", "Select another target Elf.", Tgts);
+        	final Ability_Cost abCost = new Ability_Cost("G", card.getName(), true);
+
+        	final Card[] tgt = new Card[1];
+        	final Command untilEOT = new Command() {
+        		public void execute() {
+        			tgt[0].setShield(0);                    
+        		}
+        	};
+
+        	SpellAbility ability = new Ability_Activated(card, abCost, target) {
+        		@Override
+        		public void resolve() {
+        			tgt[0] = getTargetCard();
+        			tgt[0].addShield();
+        			AllZone.EndOfTurn.addUntil(untilEOT);
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+
+        		@Override
+        		public boolean canPlay() {
+        			CardList creats = AllZoneUtil.getTypeInPlay("Elf");
+        			return creats.size() != 0 && super.canPlay();
+        		}
+        	};
+            card.addSpellAbility(ability);
+            ability.setDescription("G: Regenerate another target Elf.");
+            
+            //ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility_NoTargetSelf(ability));
+        }//*************** END ************ END **************************
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
         {
