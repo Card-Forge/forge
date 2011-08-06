@@ -1,0 +1,9 @@
+Name:Gaseous Form
+ManaCost:2 U
+Types:Enchantment Aura
+Text:Prevent all combat damage that would be dealt to and dealt by enchanted creature.
+K:Enchant creature
+K:enPumpCurse:HIDDEN Prevent all combat damage that would be dealt to and dealt by CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gaseous_form.jpg
+End

@@ -25,6 +25,7 @@ public class Card extends MyObservable {
     private ArrayList<String>            intrinsicKeyword                  = new ArrayList<String>();
     private ArrayList<String>            extrinsicKeyword                  = new ArrayList<String>();
     private ArrayList<String>			 otherExtrinsicKeyword			   = new ArrayList<String>();
+    private ArrayList<String>			 HiddenExtrinsicKeyword			   = new ArrayList<String>();
     private ArrayList<String>            prevIntrinsicKeyword              = new ArrayList<String>();
     private ArrayList<Card>              attached                          = new ArrayList<Card>();
     private ArrayList<Card>              equippedBy                        = new ArrayList<Card>();             //which equipment cards are equipping this card?
@@ -781,7 +782,7 @@ public class Card extends MyObservable {
         StringBuilder sb = new StringBuilder();
         StringBuilder sbLong = new StringBuilder();
         StringBuilder sbMana = new StringBuilder();
-        ArrayList<String> keyword = getKeyword();
+        ArrayList<String> keyword = getUnhiddenKeyword();
         
         for (int i = 0; i < keyword.size(); i++) {
             if (!keyword.get(i).toString().contains("CostChange") 
@@ -1806,6 +1807,22 @@ public class Card extends MyObservable {
         ArrayList<String> a1 = new ArrayList<String>(getIntrinsicKeyword());
         ArrayList<String> a2 = new ArrayList<String>(getExtrinsicKeyword());
         ArrayList<String> a3 = new ArrayList<String>(getOtherExtrinsicKeyword());
+        ArrayList<String> a4 = new ArrayList<String>(getHiddenExtrinsicKeyword());
+        a1.addAll(a2);
+        a1.addAll(a3);
+        a1.addAll(a4);
+        
+        for(Ability_Mana sa:getManaAbility())
+            if(sa.isBasic()) a1.add((sa).orig);
+        
+        return a1;
+    }
+    
+    //keywords are like flying, fear, first strike, etc...
+    public ArrayList<String> getUnhiddenKeyword() {
+        ArrayList<String> a1 = new ArrayList<String>(getIntrinsicKeyword());
+        ArrayList<String> a2 = new ArrayList<String>(getExtrinsicKeyword());
+        ArrayList<String> a3 = new ArrayList<String>(getOtherExtrinsicKeyword());
         a1.addAll(a2);
         a1.addAll(a3);
         
@@ -1879,7 +1896,8 @@ public class Card extends MyObservable {
     
     public void addExtrinsicKeyword(String s) {
         //if(!getKeyword().contains(s)){
-        if(s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s) {
+    	if(s.startsWith("HIDDEN")) addHiddenExtrinsicKeyword(s);
+    	else if(s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s) {
             private static final long serialVersionUID = 221124403788942412L;
         });
         else 
@@ -1888,7 +1906,8 @@ public class Card extends MyObservable {
     }
     
     public void addStackingExtrinsicKeyword(String s) {
-    	if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s)
+    	if(s.startsWith("HIDDEN")) addHiddenExtrinsicKeyword(s);
+    	else if (s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s)
     	{
     		private static final long serialVersionUID = 2443750124751086033L;  
     	});
@@ -1896,7 +1915,8 @@ public class Card extends MyObservable {
     }
     
     public void removeExtrinsicKeyword(String s) {
-        extrinsicKeyword.remove(s);
+    	if(s.startsWith("HIDDEN")) removeHiddenExtrinsicKeyword(s);
+    	else extrinsicKeyword.remove(s);
         this.updateObservers();
     }
     
@@ -1963,6 +1983,23 @@ public class Card extends MyObservable {
         return prevIntrinsicKeyword.size();
     }
     
+    // Hidden Keywords will be returned without the indicator HIDDEN
+    public ArrayList<String> getHiddenExtrinsicKeyword() {
+    	ArrayList<String> Keyword = this.HiddenExtrinsicKeyword;
+    	for (int i = 0; i < Keyword.size(); i++) {
+    		Keyword.set(i, Keyword.get(i).replace("HIDDEN ", ""));
+    	}
+        return Keyword;
+    }
+    
+    public void addHiddenExtrinsicKeyword(String s) {
+    	HiddenExtrinsicKeyword.add(s);
+    }
+    
+    public void removeHiddenExtrinsicKeyword(String s) {
+    	HiddenExtrinsicKeyword.remove(s);
+        this.updateObservers();
+    }
     
     public boolean isPermanent() {
         return !(isInstant() || isSorcery() || isImmutable());
