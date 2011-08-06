@@ -3,7 +3,7 @@ ManaCost:R
 Types:Enchantment
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you cast a creature spell, tap target creature.
-SVar:TrigTap:AB$Tap | Cost$ 0 | Tgt$ TgtC
+SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:BuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/onslaught.jpg
