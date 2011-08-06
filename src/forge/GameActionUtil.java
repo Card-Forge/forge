@@ -466,7 +466,7 @@ public class GameActionUtil {
 		
 		playCard_Cascade(c);
 		playCard_Ripple(c);
-        playCard_Storm(c);
+        playCard_Storm(sa);
 
 		playCard_Dovescape(c); //keep this one top
 		playCard_Chalice_of_the_Void(c);
@@ -716,24 +716,13 @@ public class GameActionUtil {
 		Ripple.execute();
 	}//playCard_Ripple()
 	
-	public static void playCard_Storm(Card c) {
-		if(c.getKeyword().contains("Storm") && !c.isCopiedSpell())
+	public static void playCard_Storm(SpellAbility sa) {
+		Card source = sa.getSourceCard();
+		if(!source.isCopiedSpell() && source.getKeyword().contains("Storm"))
 		{		
-			final Card StormCard = c;
-			StormCard.removeIntrinsicKeyword("Storm");
-			final int StormNumber  = Phase.StormCount - 1;		
-			final Ability Storm = new Ability(c, "0") {	
-				public void resolve() {
-					for(int i = 0; i < (StormNumber); i++) {
-						AllZone.CardFactory.copySpellontoStack(StormCard,StormCard,true);   	
-				};	// For
-				}
-			};
-			StringBuilder sb = new StringBuilder();
-			sb.append(c).append(" - Storm.");
-			Storm.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(Storm);			
+			int StormNumber  = Phase.StormCount - 1;		
+			for(int i = 0; i < StormNumber; i++)
+				AllZone.CardFactory.copySpellontoStack(source, source, sa, true);   	
 		}
 	}//playCard_Storm()
 	

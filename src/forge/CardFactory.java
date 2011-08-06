@@ -189,45 +189,115 @@ public class CardFactory implements NewConstants {
     	
     }
     
-    final void copySpellontoStack(Card Source, Card in, boolean CopyDetails) {
-		Card c = AllZone.CardFactory.copyCardintoNew(in);
-		SpellAbility[] sa = c.getSpellAbility();
-		c.setController(Source.getController());
-		if(CopyDetails == true) {
-		c.addXManaCostPaid(in.getXManaCostPaid());
-		c.addMultiKickerMagnitude(in.getMultiKickerMagnitude());
-		if(in.isKicked()) c.setKicked(true);
-		
-		if(c.hasChoices()) {
-			for(int i = 0; i < in.getChoices().size(); i++) {
-				c.addSpellChoice(in.getChoice(i));
-			}
-			for(int i = 0; i < in.getChoiceTargets().size(); i++) {
-				c.setSpellChoiceTarget(in.getChoiceTarget(i));
-			}
-		}
-		}
-		for(int i = 0; i < sa.length; i++) {
-			if(in.getAbilityUsed() == i) {
-				if(c.isKicked() && !sa[i].isKickerAbility())  {
-			} else {
-				if(in.getSpellAbility()[i].getTargetCard() != null)
-					sa[i].setTargetCard(in.getSpellAbility()[i].getTargetCard());
-				if(in.getSpellAbility()[i].getTargetPlayer() != null) {
-				if(in.getSpellAbility()[i].getTargetPlayer().equals(AllZone.HumanPlayer)
-						|| (in.getSpellAbility()[i].getTargetPlayer().equals(AllZone.ComputerPlayer))) 
-					sa[i].setTargetPlayer(in.getSpellAbility()[i].getTargetPlayer());
-				}
-				if(Source.getController().equals(AllZone.HumanPlayer)) AllZone.GameAction.playSpellAbility(sa[i]);
-				else {
-					if(sa[i].canPlayAI()) {
-						ComputerUtil.playStackFree(sa[i]);
-					}
-				}
-			}
-			}	
-}   	
+    final void copySpellontoStack(Card source, Card original, SpellAbility sa, boolean bCopyDetails) {
+    	if (sa.getPayCosts() == null){
+    		copySpellontoStack(source, source, bCopyDetails);
+    		return;
+    	}
+    	Card c = AllZone.CardFactory.copyCard(original);
+    	c.setController(source.getController());
+    	c.setCopiedSpell(true);
+    	
+    	SpellAbility[] sas = c.getSpellAbility();
+    	SpellAbility copySA = null;
+    	for(int i = 0; i < sas.length; i++) {
+    		if(original.getAbilityUsed() == i) {
+    			copySA = sas[i];
+    		}
+    	}
+
+    	if (copySA == null){
+    		StringBuilder sb = new StringBuilder();
+    		sb.append("Couldn't find matching SpellAbility to copy Source: ").append(source);
+    		sb.append(" Spell to Copy: ").append(source);
+    		System.out.println(sb.toString());
+    		return;
+    	}
+    	
+    	if (bCopyDetails){
+    		c.addXManaCostPaid(original.getXManaCostPaid());
+    		c.addMultiKickerMagnitude(original.getMultiKickerMagnitude());
+    		if(original.isKicked()) c.setKicked(true);
+    	}
+    	
+    	if(source.getController().equals(AllZone.HumanPlayer))
+    		AllZone.GameAction.playSpellAbilityForFree(copySA);
+    	
+    	else if(copySA.canPlayAI())
+    		ComputerUtil.playStackFree(copySA);
     }
+    
+    
+    final void copySpellontoStack(Card source, Card original, boolean bCopyDetails) {
+    	SpellAbility[] sas = original.getSpellAbility();
+    	SpellAbility sa = null;
+    	for(int i = 0; i < sas.length; i++) {
+    		if(original.getAbilityUsed() == i) {
+    			sa = sas[i];
+    		}
+    	}
+    	
+    	if (sa == null){
+    		StringBuilder sb = new StringBuilder();
+    		sb.append("Couldn't find matching SpellAbility to copy Source: ").append(source);
+    		sb.append(" Spell to Copy: ").append(source);
+    		System.out.println(sb.toString());
+    		return;
+    	}
+    	
+    	if (sa.getPayCosts() != null){
+    		copySpellontoStack(source, original, sa, bCopyDetails);
+    		return;
+    	}
+    	
+    	Card c = AllZone.CardFactory.copyCardintoNew(original);
+
+    	SpellAbility copySA = null;
+    	for(SpellAbility s : c.getSpellAbility()){
+    		if (s.equals(sa))
+    			copySA = s;
+    	}
+    	
+    	if (copySA == null){
+    		StringBuilder sb = new StringBuilder();
+    		sb.append("Couldn't find matching SpellAbility to copy Source: ").append(source);
+    		sb.append(" Spell to Copy: ").append(source);
+    		System.out.println(sb.toString());
+    		return;
+    	}
+
+    	c.setController(source.getController());
+    	if(bCopyDetails) {
+    		c.addXManaCostPaid(original.getXManaCostPaid());
+    		c.addMultiKickerMagnitude(original.getMultiKickerMagnitude());
+    		if(original.isKicked()) c.setKicked(true);
+
+    		// I have no idea what get choice does?
+    		if(c.hasChoices()) {
+    			for(int i = 0; i < original.getChoices().size(); i++) {
+    				c.addSpellChoice(original.getChoice(i));
+    			}
+    			for(int i = 0; i < original.getChoiceTargets().size(); i++) {
+    				c.setSpellChoiceTarget(original.getChoiceTarget(i));
+    			}
+    		}
+    	}
+
+    	if(sa.getTargetCard() != null)
+    		copySA.setTargetCard(sa.getTargetCard());
+    	
+    	if(sa.getTargetPlayer() != null) {
+    		if(sa.getTargetPlayer().equals(AllZone.HumanPlayer)
+    				|| (sa.getTargetPlayer().equals(AllZone.ComputerPlayer))) 
+    			copySA.setTargetPlayer(sa.getTargetPlayer());
+    	}
+    	
+    	if(source.getController().equals(AllZone.HumanPlayer))
+    		AllZone.GameAction.playSpellAbilityForFree(copySA);
+    	
+    	else if(copySA.canPlayAI())
+    		ComputerUtil.playStackFree(copySA);
+    }		
     
     /*
     final public Card getCard(String cardName, String owner) {

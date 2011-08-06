@@ -509,63 +509,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);  
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Volcanic Awakening")) {
-            SpellAbility spell = new Spell(card) {
-
-				private static final long serialVersionUID = -650147710658746L;
-
-				@Override
-				public void resolve() {
-					if(AllZone.GameAction.isCardInPlay(getTargetCard())
-							&& CardFactoryUtil.canTarget(card, getTargetCard())) {
-						AllZone.GameAction.destroy(getTargetCard());
-					}
-				}
-                @Override
-                public void chooseTargetAI() {
-                    //target basic land that Human only has 1 or 2 in play
-                    CardList land = new CardList(AllZone.Human_Battlefield.getCards());
-                    land = land.getType("Land");
-                    
-                    Card target = null;
-                    
-                    String[] name = {"Forest", "Swamp", "Plains", "Mountain", "Island"};
-                    for(int i = 0; i < name.length; i++)
-                        if(land.getName(name[i]).size() == 1) {
-                            target = land.getName(name[i]).get(0);
-                            break;
-                        }
-                    
-                    //see if there are only 2 lands of the same type
-                    if(target == null) {
-                        for(int i = 0; i < name.length; i++)
-                            if(land.getName(name[i]).size() == 2) {
-                                target = land.getName(name[i]).get(0);
-                                break;
-                            }
-                    }//if
-                    if(target == null) {
-                        land.shuffle();
-                        target = land.get(0);
-                    }
-                    setTargetCard(target);
-                }//chooseTargetAI()
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList land = new CardList(AllZone.Human_Battlefield.getCards());
-                    land = land.getType("Land");
-                    return land.size() != 0;
-                }
-            };//SpellAbility
-            spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "Land"));
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);           
-        }//*************** END ************ END **************************
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Mind's Desire"))
         {
