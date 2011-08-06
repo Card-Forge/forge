@@ -27263,7 +27263,7 @@ Creature Elemental
 When Shriekmaw enters the battlefield, destroy target nonartifact, nonblack creature.
 3/2
 Fear
-etbDestroyTgt:Creature.nonArtifact.nonBlack
+etbDestroyTgt:Creature.nonArtifact+nonBlack
 SVar:Evoke:1 B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekmaw.jpg
