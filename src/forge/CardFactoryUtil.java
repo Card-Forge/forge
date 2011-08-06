@@ -1467,11 +1467,11 @@ public class CardFactoryUtil {
             
             @Override
             public void resolve() {
-                if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                        && CardFactoryUtil.canTarget(sourceCard, getTargetCard())) {
-                    if(sourceCard.isEquipping()) {
+                if (AllZone.GameAction.isCardInPlay(getTargetCard()) && 
+                       CardFactoryUtil.canTarget(sourceCard, getTargetCard())) {
+                    if (sourceCard.isEquipping()) {
                         Card crd = sourceCard.getEquipping().get(0);
-                        if(crd.equals(getTargetCard())) return;
+                        if (crd.equals(getTargetCard())) return;
                         
                         sourceCard.unEquipCard(crd);
                     }
@@ -1479,18 +1479,20 @@ public class CardFactoryUtil {
                 }
             }
             
+            // An animated artifact equipmemt can't equip a creature
             @Override
             public boolean canPlay() {
-                return AllZone.getZone(sourceCard).is(Constant.Zone.Play)
-                        && AllZone.Phase.getActivePlayer().equals(sourceCard.getController())
-                        && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+                return AllZone.getZone(sourceCard).is(Constant.Zone.Play) && 
+                       AllZone.Phase.getActivePlayer().equals(sourceCard.getController()) && 
+                       !sourceCard.isCreature() && 
+                       (AllZone.Phase.getPhase().equals("Main1") || 
+                       AllZone.Phase.getPhase().equals("Main2"));
             }
             
             @Override
             public boolean canPlayAI() {
                 return getCreature().size() != 0 && 
-                	   !sourceCard.isEquipping() && 
-                	   !sourceCard.isCreature();
+                !sourceCard.isEquipping();
             }
             
             
@@ -1504,12 +1506,10 @@ public class CardFactoryUtil {
                 CardList list = new CardList(AllZone.Computer_Play.getCards());
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
-                        return c.isCreature() && 
-                        	   (!CardFactoryUtil.AI_doesCreatureAttack(c)) && 
+                        return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c)) && 
                                CardFactoryUtil.canTarget(sourceCard, c) && 
                                (!c.getKeyword().contains("Defender")) && 
-                               (c.getNetDefense() + Tough > 0) && 
-                               c != sourceCard;
+                               (c.getNetDefense() + Tough > 0);
                     }
                 });
                 // list.remove(card);      // if mana-only cost, allow self-target
@@ -1538,7 +1538,7 @@ public class CardFactoryUtil {
                 return list;
             }//getCreature()
             
-        };//equip ability	
+        };//equip ability
         
         Input runtime = new Input() {
             private static final long serialVersionUID = -6785656229070523470L;

@@ -768,6 +768,7 @@ class CardFactory_Auras {
             Input runtime = new Input() {
 				private static final long serialVersionUID = -7462101446917907106L;
 
+				// Can't allow an artifact equipment that is equipping a creature to become animated
 				@Override
                 public void showMessage() {
                     PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
@@ -777,7 +778,9 @@ class CardFactory_Auras {
                     artifacts.addAll(hum.getCards());
                     artifacts = artifacts.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return !c.isCreature() && CardFactoryUtil.canTarget(card, c);
+                            return !c.isCreature() && 
+                            	   CardFactoryUtil.canTarget(card, c) && 
+                            	   !c.isEquipping();
                         }
                     });
                     
