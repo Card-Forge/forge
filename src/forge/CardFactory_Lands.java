@@ -1400,9 +1400,9 @@ class CardFactory_Lands {
             card.addSpellAbility(a1);
             card.addComesIntoPlayCommand(comesIntoPlay);
             StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with {X}: This creature gets +X/+0 until end of turn.");
+            sb.append(card).append(" - until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with \"X: This creature gets +X/+0 until end of turn.\"");
             a1.setStackDescription(sb.toString());
-            a1.setDescription("1 B R: Until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with {X}: This creature gets +X/+0 until end of turn. It's still a land.");
+            a1.setDescription("1 B R: Until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with \"X: This creature gets +X/+0 until end of turn.\" It's still a land.");
         }//*************** END ************ END **************************
         
         
