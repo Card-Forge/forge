@@ -2,8 +2,9 @@ Name:Orzhov Basilica
 ManaCost:no cost
 Types:Land
 Text:no text
-K:Orzhov Basilica enters the battlefield tapped.
-K:When Orzhov Basilica enters the battlefield, return a land you control to its owner's hand.
+K:CARDNAME enters the battlefield tapped.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return a land you control to its owner's hand.
+SVar:TrigReturn:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | ChangeType$ Land.YouCtrl
 A:AB$ Mana | Cost$ T | Produced$ W B | SpellDescription$ Add W B to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
