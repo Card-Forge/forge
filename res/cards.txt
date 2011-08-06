@@ -1,3 +1,8 @@
+Keening Stone
+6
+Artifact
+5, tap: Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of cards in that player's graveyard.
+
 Sarkhan the Mad
 3 B R
 Planeswalker - Sarkhan

@@ -18264,6 +18264,48 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Keening Stone")) {
+        	/*
+        	 * 5, Tap: Target player puts the top X cards of his or her
+        	 * library into his or her graveyard, where X is the number of
+        	 * cards in that player's graveyard.
+        	 */
+        	Ability_Tap ab1 = new Ability_Tap(card, "5") {
+				private static final long serialVersionUID = -6282104343089446216L;
+
+				@Override
+        		public boolean canPlayAI() {
+        			String player = getTargetPlayer();
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+        			CardList libList = new CardList(lib.getCards());
+        			return libList.size() > 0;
+        		}
+
+        		@Override
+        		public void resolve() {
+        			String player = getTargetPlayer();
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+        			PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+        			CardList libList = new CardList(lib.getCards());
+        			
+        			int numCards = grave.size();
+
+        			int max = libList.size();
+        			if(numCards > max) numCards = max;
+
+        			for(int i = 0; i < numCards; i++) {
+        				Card c = libList.get(i);
+        				lib.remove(c);
+        				grave.add(c);
+        			}
+        		}
+        	};
+        	ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+        	ab1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ab1));
+        	card.addSpellAbility(ab1);
+        }//*************** END ************ END **************************
 
         
         // Cards with Cycling abilities
