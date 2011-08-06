@@ -88,7 +88,7 @@ public class Input_CombatDamage extends Input {
             //if (unblocked.getCard(j).hasSecondStrike()) {
             if(!unblocked.getCard(j).hasFirstStrike()
                     || (unblocked.getCard(j).hasFirstStrike() && unblocked.getCard(j).hasDoubleStrike())) {
-                GameActionUtil.executePlayerCombatDamageEffects(unblocked.get(j));
+                //GameActionUtil.executePlayerCombatDamageEffects(unblocked.get(j));
                 CombatUtil.checkUnblockedAttackers(unblocked.get(j));
             }
             

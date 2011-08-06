@@ -3135,6 +3135,208 @@ class CardFactory_Planeswalkers {
             return card2;
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Elspeth Tirel")) {
+
+        	//Planeswalker book-keeping
+        	final int turn[] = new int[1];
+        	turn[0] = -1;
+            
+            final Card card2 = new Card() {
+                @Override
+                public void addDamage(int n, Card source) {
+                    subtractCounter(Counters.LOYALTY, n);
+                    AllZone.GameAction.checkStateEffects();
+                }
+            };
+            card2.setOwner(owner);
+            card2.setController(owner);
+            
+            card2.setName(card.getName());
+            card2.setType(card.getType());
+            card2.setManaCost(card.getManaCost());
+            card2.addSpellAbility(new Spell_Permanent(card2));
+            card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 4));
+        
+            final SpellAbility ability3 = new Ability(card2, "0")
+            {
+            	public void resolve()
+            	{
+                    card2.subtractCounter(Counters.LOYALTY, 5);
+                    turn[0] = AllZone.Phase.getTurn();
+                    
+            		CardList list = AllZoneUtil.getCardsInPlay();
+            		list = list.filter(new CardListFilter(){
+            			public boolean addCard(Card c)
+            			{
+            				return !c.isToken() && !c.isLand() && !c.equals(card2);
+            			}
+            		});
+            		
+            		CardListUtil.sortByIndestructible(list);
+        			CardListUtil.sortByDestroyEffect(list);
+        			
+        			for (int i=0;i<list.size();i++)
+        			{
+        				AllZone.GameAction.destroy(list.get(i));
+        			}
+            	}
+            	
+            	public boolean canPlayAI()
+            	{
+            		CardList humanList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+            		CardList compList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+            		
+            		CardListFilter filter = new CardListFilter()
+            		{
+						public boolean addCard(Card c) {
+							return !c.getName().equals("Mana Pool") && !c.isLand() && !c.isToken() && !c.equals(card2) &&
+							       !c.getKeyword().contains("Indestructible");
+						}
+            		};
+            		
+            		humanList = humanList.filter(filter);
+            		compList = compList.filter(filter);
+
+            		return card2.getCounters(Counters.LOYALTY) > 5 && (humanList.size() > (compList.size() +1));
+            	}
+            	
+            	public boolean canPlay() {
+                    return  card2.getCounters(Counters.LOYALTY) >= 5
+                            && AllZone.getZone(card2).is(Constant.Zone.Play)
+                            && turn[0] != AllZone.Phase.getTurn()
+                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2")) && AllZone.Stack.size() == 0;
+                }//canPlay()
+            };
+            
+            ability3.setBeforePayMana(new Input() {
+
+				private static final long serialVersionUID = -3310512279978705284L;
+				int                       check            = -1;
+                
+                @Override
+                public void showMessage() {
+                    if(check != AllZone.Phase.getTurn()) {
+                        check = AllZone.Phase.getTurn();
+                        turn[0] = AllZone.Phase.getTurn();
+                        AllZone.Stack.push(ability3);
+                    }
+                    stop();
+                }//showMessage()
+            });
+            
+            //ability 1: gain 1 life for each creature
+            final SpellAbility ability1 = new Ability(card2, "0") {
+                @Override
+                public void resolve() {
+                    card2.addCounterFromNonEffect(Counters.LOYALTY, 2);
+                    turn[0] = AllZone.Phase.getTurn();
+                    
+                    int life = AllZoneUtil.getCreaturesInPlay(card2.getController()).size();
+                    AllZone.GameAction.getPlayerLife(card2.getController()).addLife(life);
+                    Log.debug("Elspeth Tirel", "current phase: " + AllZone.Phase.getPhase());
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = AllZoneUtil.getCreaturesInPlay();
+                    return (list.size() > 2 || card2.getCounters(Counters.LOYALTY) < 4) &&
+                    		!(ability3.canPlay() && ability3.canPlayAI()) && card2.getCounters(Counters.LOYALTY) < 12;
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return 0 < card2.getCounters(Counters.LOYALTY)
+                            && AllZone.getZone(card2).is(Constant.Zone.Play)
+                            && turn[0] != AllZone.Phase.getTurn()
+                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2")) && AllZone.Stack.size() == 0;
+                }//canPlay()
+            };//SpellAbility ability1
+            
+            ability1.setBeforePayMana(new Input() {
+                private static final long serialVersionUID = -7969603493514210825L;
+                
+                int                       check            = -1;
+                
+                @Override
+                public void showMessage() {
+                    if(check != AllZone.Phase.getTurn()) {
+                        check = AllZone.Phase.getTurn();
+                        turn[0] = AllZone.Phase.getTurn();
+                        AllZone.Stack.push(ability1);
+                    }
+                    stop();
+                }//showMessage()
+            });
+            
+            //ability 1: create 3 white 1/1 tokens
+            final SpellAbility ability2 = new Ability(card2, "0") {
+                @Override
+                public void resolve() {
+                    card2.subtractCounter(Counters.LOYALTY, 2);
+                    turn[0] = AllZone.Phase.getTurn();
+                    
+                    for (int i=0;i<3;i++)
+                    	CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card2, "W", new String[] {
+                            "Creature", "Soldier"}, 1, 1, new String[] {""});
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return card2.getCounters(Counters.LOYALTY) >= 3 && 
+                           !(ability3.canPlay() && ability3.canPlayAI());
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return  card2.getCounters(Counters.LOYALTY) >= 2
+                            && AllZone.getZone(card2).is(Constant.Zone.Play)
+                            && turn[0] != AllZone.Phase.getTurn()
+                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2")) && AllZone.Stack.size() == 0;
+                }//canPlay()
+            };//SpellAbility ability2
+            
+            ability2.setBeforePayMana(new Input() {
+
+				private static final long serialVersionUID = 5089161242872591541L;
+				int                       check            = -1;
+                
+                @Override
+                public void showMessage() {
+                    if(check != AllZone.Phase.getTurn()) {
+                        check = AllZone.Phase.getTurn();
+                        turn[0] = AllZone.Phase.getTurn();
+                        AllZone.Stack.push(ability2);
+                    }
+                    stop();
+                }//showMessage()
+            });
+            
+            
+            ability1.setDescription("+2: You gain 1 life for each creature you control.");
+            ability1.setStackDescription("Elspeth Tirel - " + card2.getController() + " gains 1 life for each creature he/she controls.");
+            card2.addSpellAbility(ability1);
+
+            ability2.setDescription("-2: Put three white 1/1 Soldier creature tokens onto the battlefield.");
+            ability2.setStackDescription("Elspeth Tirel - put three 1/1 Soldier creature tokens onto the battlefield.");
+            card2.addSpellAbility(ability2);
+            
+            ability3.setDescription("-5: Destroy all other permanents except for lands and tokens.");
+            ability3.setStackDescription(card2 + " - Destroy all other permanents except for lands and tokens.");
+            card2.addSpellAbility(ability3);
+            
+            return card2;
+    	}//*************** END ************ END **************************
+        
         return card;
     }
     

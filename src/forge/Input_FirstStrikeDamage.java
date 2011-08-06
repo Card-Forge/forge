@@ -91,7 +91,7 @@ public class Input_FirstStrikeDamage extends Input {
         CardList unblocked = new CardList(AllZone.Combat.getUnblockedFirstStrikeAttackers());
         for(int j = 0; j < unblocked.size(); j++) {
             //System.out.println("Unblocked Creature: " +unblocked.get(j).getName());
-            GameActionUtil.executePlayerCombatDamageEffects(unblocked.get(j));
+            //GameActionUtil.executePlayerCombatDamageEffects(unblocked.get(j));
             CombatUtil.checkUnblockedAttackers(unblocked.get(j));
             
             /*if (unblocked.get(j).getKeyword().contains("Lifelink"))

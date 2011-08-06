@@ -5042,6 +5042,11 @@ public class GameActionUtil {
         }
     }
 
+    public static void executePlayerDamageEffects(Card c)
+    {
+    	
+    }
+    
 	public static void executePlayerCombatDamageEffects(Card c) {
 		// Whenever Keyword
     	Object[] DealsDamage_Whenever_Parameters = new Object[3];

@@ -1,3 +1,9 @@
+Elspeth Tirel
+3 W W
+Planeswalker - Elspeth
+no text
+SVar:Rarity:Mythic
+
 Captain of the Watch
 4 W W
 Creature Human Soldier 

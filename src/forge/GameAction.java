@@ -3706,6 +3706,8 @@ public class GameAction {
         else
         	getPlayerLife(player).subtractLife(damage,source);
     	
+    	
+    	GameActionUtil.executePlayerCombatDamageEffects(source);
     	CombatUtil.executeCombatDamageEffects(source);
     }
     
