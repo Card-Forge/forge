@@ -3258,40 +3258,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}
 	}
-	
-	public static void endOfTurn_Thran_Quarry() 
-	{
-		final Player player = AllZone.Phase.getPlayerTurn();
-		final Player opponent = player.getOpponent();
-		controlNoTypeSacrifice("Thran Quarry", "Creature", player);
-		controlNoTypeSacrifice("Thran Quarry", "Creature", opponent);
-	}
-	
-	public static void endOfTurn_Glimmervoid() 
-	{ 		
-		final Player player = AllZone.Phase.getPlayerTurn();
-		final Player opponent = player.getOpponent();
-		controlNoTypeSacrifice("Glimmervoid", "Artifact", player);
-		controlNoTypeSacrifice("Glimmervoid", "Artifact", opponent);
-	}
-	
-	public static void controlNoTypeSacrifice(String name, String type, Player player)
-	{
-		final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-		CardList list = new CardList(playZone.getCards());
-
-		CardList nameList = list.getName(name);
-		
-		if (nameList.size() == 0) return;
-		
-		CardList typeList = list.getType(type);
-		
-		if (typeList.size() == 0){
-			for(Card c : nameList){
-				AllZone.GameAction.sacrifice(c);
-			}
-		}
-	}
 
 	public static void endOfTurn_Krovikan_Horror()
 	{
