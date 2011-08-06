@@ -676,6 +676,7 @@ public abstract class Player extends MyObservable{
         	cause = sa.getSourceCard();
         }
         HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Player", this);
         runParams.put("Card", c);
         runParams.put("Cause", cause);
         AllZone.TriggerHandler.runTrigger("Discarded", runParams);

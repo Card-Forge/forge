@@ -6257,6 +6257,7 @@ res/cardsfolder/tel_jilad_fallen.txt -text svneol=native#text/plain
 res/cardsfolder/tel_jilad_justice.txt -text svneol=native#text/plain
 res/cardsfolder/tel_jilad_lifebreather.txt -text svneol=native#text/plain
 res/cardsfolder/tel_jilad_outrider.txt -text svneol=native#text/plain
+res/cardsfolder/telekinetic_bonds.txt -text svneol=native#text/plain
 res/cardsfolder/telekinetic_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/telethopter.txt svneol=native#text/plain
 res/cardsfolder/telimtors_darts.txt -text svneol=native#text/plain

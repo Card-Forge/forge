@@ -18,6 +18,14 @@ public class Trigger_Discarded extends Trigger {
 			}
 		}
 		
+		if(mapParams.containsKey("ValidPlayer"))
+		{
+			if(!matchesValid(runParams.get("Player"), mapParams.get("ValidPlayer").split(","), hostCard))
+			{
+				return false;
+			}
+		}
+		
 		if(mapParams.containsKey("ValidCause"))
 		{
 			if(runParams.get("Cause") == null)
