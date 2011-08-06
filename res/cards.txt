@@ -85,7 +85,7 @@ Death's Shadow gets -X/-X, where X is your life total.
 Stifle
 U
 Instant
-Counter target activated or triggered ability.
+no text
 
 Spell Pierce
 U
