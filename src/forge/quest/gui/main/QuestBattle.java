@@ -218,12 +218,12 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Lucifer 3", "hard", "W Sacrifice deck");
         addToDeckList("Luke Skywalker 3", "hard", "WU Rebels deck with Training Grounds");
         
-        addToDeckList("Maggie Simpson 2", "medium", "BRG jund deck with Sprouting Thrinax, Jund Hackblade and Bloodbraid Elf");
+        addToDeckList("Maggie Simpson 3", "hard", "BRG jund deck with Sprouting Thrinax, Jund Hackblade and Bloodbraid Elf");
         addToDeckList("Magneto 3", "hard", "B Shriekmaw deck with creature removal and re-animation");
         addToDeckList("Magnum 1", "easy", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
         addToDeckList("Magnum 2", "medium", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
         addToDeckList("Magnum 3", "hard", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
-        addToDeckList("Marge Simpson 3", "hard", "RG deck with tokens which are devoured by R and RG creatures with devour");
+        addToDeckList("Marge Simpson 2", "medium", "RG deck with tokens which are devoured by creatures with devour");
 //        addToDeckList("Michael 3", "hard", "W Angels deck");
         addToDeckList("Morpheus 3", "hard", "G Elf deck with Overrun, Gaea's Anthem, Imperious Perfect and other pumps");
         addToDeckList("Mr Slate 2", "medium", "WUG Merfolk deck with Lord of Atlantis, Stonybrook Banneret and Stonybrook Schoolmaster");
