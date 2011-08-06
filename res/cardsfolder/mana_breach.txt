@@ -9,4 +9,6 @@ SVar:TrigBounceOpp:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_breach.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/38.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/85.jpg
 End

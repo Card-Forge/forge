@@ -7,4 +7,5 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.withFlying | NumDmg$ 4 | Spel
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderbolt.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/115.jpg
 End

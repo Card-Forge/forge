@@ -6,4 +6,6 @@ PT:1/1
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_spy.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/208.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/124.jpg
 End

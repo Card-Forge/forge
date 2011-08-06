@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature |
 SVar:Buyback:3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seething_anger.jpg
+SetInfo:STH|Common|http://magiccards.info/scans/en/sh/96.jpg
 End

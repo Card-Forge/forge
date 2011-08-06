@@ -8,4 +8,5 @@ SVar:TrigTremor:AB$ DamageAll | Cost$ 0 | ValidCards$ Creature.withoutFlying | N
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthshaker.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/165.jpg
 End

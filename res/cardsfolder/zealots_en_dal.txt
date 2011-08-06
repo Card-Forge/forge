@@ -8,4 +8,5 @@ SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:X:Count$Valid Permanent.nonLand+YouCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zealots_en_dal.jpg
+SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/26.jpg
 End

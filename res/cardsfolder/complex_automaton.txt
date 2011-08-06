@@ -7,4 +7,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Permanent.YouCtrl 
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/complex_automaton.jpg
+SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/128.jpg
 End
