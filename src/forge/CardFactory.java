@@ -3975,24 +3975,7 @@ public class CardFactory implements NewConstants {
 					private static final long serialVersionUID = -2114111483117171609L;
 
 					public void resolve() {
-						Card c = new Card();
-
-				        c.setOwner(card.getController());
-				        c.setController(card.getController());
-
-				        c.setName(t);
-				        c.setImageName(in);
-				        c.setManaCost(col);
-				        c.setToken(true);
-				        
-				        c.addType("Creature");
-				        c.addType(t);
-				        
-				        c.setBaseAttack(1);
-				        c.setBaseDefense(1);
-
-				        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-				        play.add(c);
+						CardFactoryUtil.makeToken(t, in, card, col, new String[] {"Creature", t}, 1, 1, new String[] {""});	
 					}
 					
     			};
@@ -4096,24 +4079,7 @@ public class CardFactory implements NewConstants {
       {
         public void resolve()
         {
-          Card c = new Card();
-          
-          c.setName("Dragon");
-          c.setImageName("R 5 5 Dragon");
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setManaCost("R");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Dragon");
-          c.setBaseAttack(5);
-          c.setBaseDefense(5);
-          c.addIntrinsicKeyword("Flying");
-
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          play.add(c);
+        	CardFactoryUtil.makeToken("Dragon", "R 5 5 Dragon", card, "R", new String[] {"Creature","Dragon"}, 5, 5, new String[] {"Flying"});	
         }//resolve()
       };
       ability.setDescription("5RR: Put a 5/5 red Dragon creature token with flying into play.");
@@ -4132,26 +4098,7 @@ public class CardFactory implements NewConstants {
 
 		public void resolve()
         {
-          Card c = new Card();
-          c.setName("Wasp");
-          c.setImageName("C 1 1 Wasp");
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setManaCost("");
-          c.setToken(true);
-
-          c.addType("Artifact");
-          c.addType("Creature");
-          c.addType("Insect");
-
-          c.setBaseAttack(1);
-          c.setBaseDefense(1);
-          c.addIntrinsicKeyword("Flying");
-
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          play.add(c);
+			CardFactoryUtil.makeToken("Wasp", "C 1 1 Wasp", card, "", new String[] {"Artifact", "Creature", "Insect"}, 1, 1, new String[] {"Flying"} );
         }//resolve()
       };
       ability.setDescription("5, tap: Put a 1/1 Insect artifact creature token with flying named Wasp into play.");
@@ -4166,24 +4113,7 @@ public class CardFactory implements NewConstants {
         {
           public void resolve()
           {
-            Card c = new Card();
-            c.setName("Soldier");
-            c.setImageName("W 1 1 Soldier");
-
-            c.setOwner(card.getController());
-            c.setController(card.getController());
-
-            c.setManaCost("W");
-            c.setToken(true);
-
-            c.addType("Creature");
-            c.addType("Soldier");
-
-            c.setBaseAttack(1);
-            c.setBaseDefense(1);
-
-            PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-            play.add(c);
+        	  CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card, "W", new String[] {"Creature", "Soldier"}, 1, 1, new String[]{""});
           }//resolve()
         };
         ability.setDescription("2W: Put a 1/1 white Soldier creature token into play.");
@@ -4193,7 +4123,6 @@ public class CardFactory implements NewConstants {
     	
     }//*************** END ************ END **************************
     
-  
     
     //*************** START *********** START **************************
     else if(cardName.equals("Centaur Glade"))
@@ -4202,24 +4131,7 @@ public class CardFactory implements NewConstants {
       {
         public void resolve()
         {
-          Card c = new Card();
-          c.setName("Centaur");
-          c.setImageName("G 3 3 Centaur");
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setManaCost("G");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Centaur");
-
-          c.setBaseAttack(3);
-          c.setBaseDefense(3);
-
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          play.add(c);
+        	CardFactoryUtil.makeToken("Centaur", "G 3 3 Centaur", card, "G", new String[] {"Creature", "Centaur"}, 3, 3, new String[] {""} );
         }//resolve()
       };
       ability.setDescription("2GG: Put a 3/3 green Centaur creature token into play.");
@@ -4261,31 +4173,10 @@ public class CardFactory implements NewConstants {
         {
           if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card,getTargetCard()) )
           {
-            PlayerZone play = AllZone.getZone(getTargetCard());
-            makeToken(play, getTargetCard().getController());
-
+            CardFactoryUtil.makeToken("Ape", "G 3 3 Ape", card, "G", new String[] {"Creature", "Ape"}, 3, 3, new String[] {""} );
             AllZone.GameAction.destroyNoRegeneration(getTargetCard());
           }
         }//resolve()
-        void makeToken(PlayerZone play, String controller)
-        {
-          Card c = new Card();
-
-          c.setOwner(card.getController());
-          c.setController(controller);
-
-          c.setName("Ape");
-          c.setImageName("G 3 3 Ape");
-          c.setManaCost("G");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Ape");
-          c.setBaseAttack(3);
-          c.setBaseDefense(3);
-
-          play.add(c);
-        }
       };//SpellAbility
 
       card.clearSpellAbility();
@@ -4293,7 +4184,6 @@ public class CardFactory implements NewConstants {
 
       spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
     }//*************** END ************ END **************************
-
 
 
     //*************** START *********** START **************************
@@ -4554,9 +4444,10 @@ public class CardFactory implements NewConstants {
     	}//canPlayAI()
       };//SpellAbility enchantment
 
+      /*
 
       @SuppressWarnings("unused") // target
-	final Input target = new Input()
+      final Input target = new Input()
       {
 		private static final long serialVersionUID = -251660220889858176L;
 
@@ -4581,6 +4472,7 @@ public class CardFactory implements NewConstants {
     	  }
     	}
       };//Input target
+      */
 
       Command commandLeavesPlay = new Command()
       {
@@ -5244,8 +5136,6 @@ public class CardFactory implements NewConstants {
 		public boolean canPlayAI()
         {
           Combat combat = ComputerUtil.getAttackers();
-          @SuppressWarnings("unused") // attack
-		  Card[] attack = combat.getAttackers();
 
           CardList small = new CardList(AllZone.Computer_Play.getCards());
           small = small.getType("Creature");
@@ -5446,31 +5336,8 @@ public class CardFactory implements NewConstants {
 			private static final long serialVersionUID = 6118842682065463016L;
 			public void resolve()
 	    	{
-	    		makeToken();
-	    		makeToken();
-	    		makeToken();
-	    	}
-	    	void makeToken()
-	    	{
-	    		PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-	            Card c = new Card();
-
-	            c.setOwner(card.getController());
-	            c.setController(card.getController());
-
-	            c.setManaCost("W");
-	            c.setToken(true);
-
-	            c.addType("Creature");
-	            c.addType("Spirit");
-	            c.setBaseAttack(1);
-	            c.setBaseDefense(1);
-	            c.addIntrinsicKeyword("Flying");
-
-	            c.setName("Spirit");
-	            c.setImageName("W 1 1 Spirit");
-	            
-	            play.add(c);
+				for (int i=0;i<3;i++)
+					CardFactoryUtil.makeToken("Spirit", "W 1 1 Spirit", card, "W", new String[] {"Creature", "Spirit"}, 1, 1, new String[] {"Flying"} );
 	    	}
 	    };
 	    
@@ -5478,7 +5345,6 @@ public class CardFactory implements NewConstants {
 	    card.addSpellAbility(spell);
   	}//*************** END ************ END **************************
     
-  
     
   //*************** START *********** START **************************
     else if(cardName.equals("Sacred Nectar"))
@@ -5506,9 +5372,7 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
      
     }//*************** END ************ END **************************
-
-   
- 
+    
 
     //*************** START *********** START **************************
     else if(cardName.equals("Tremor"))
@@ -5558,7 +5422,6 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
-
     //*************** START *********** START **************************
     else if(cardName.equals("Reviving Dose"))
     {
@@ -5577,7 +5440,6 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-
 
 
     //*************** START *********** START **************************
@@ -5665,7 +5527,6 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
-
   //*************** START *********** START **************************
     else if(cardName.equals("Crib Swap"))
     {
@@ -5677,9 +5538,7 @@ public class CardFactory implements NewConstants {
         {
           if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
           {
-            String player = getTargetCard().getController();
-            makeToken(player);
-
+            CardFactoryUtil.makeToken("Shapeshifter", "C 1 1 Shapeshifter", card, "", new String[] {"Creature", "Shapeshifter"}, 1, 1, new String[] {"Changeling"} );
             //remove card from play
             AllZone.GameAction.removeFromGame(getTargetCard());
           }
@@ -5696,28 +5555,6 @@ public class CardFactory implements NewConstants {
           Card target = CardFactoryUtil.AI_getBestCreature(play);
           setTargetCard(target);
         }
-        void makeToken(String player)
-        {
-          Card c = new Card();
-
-          c.setName("Shapeshifter");
-          c.setName("C 1 1 Shapeshifter");
-
-          c.setOwner(player);
-          c.setController(player);
-
-          c.setManaCost("");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Shapeshifter");
-          c.addIntrinsicKeyword("Changeling");
-          c.setBaseAttack(1);
-          c.setBaseDefense(1);
-
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-          play.add(c);
-        }//makeToken()
 
       };
       spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
@@ -5725,8 +5562,6 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-
-
 
 
   //*************** START *********** START **************************
@@ -6252,32 +6087,6 @@ public class CardFactory implements NewConstants {
   //*************** START *********** START **************************
     else if(cardName.equals("Lab Rats"))
     {
-      final Command makeToken = new Command()
-      {
-		private static final long serialVersionUID = -6979735250385389139L;
-
-		public void execute()
-        {
-            Card c = new Card();
-
-            c.setOwner(card.getController());
-            c.setController(card.getController());
-
-            c.setName("Rat");
-            c.setImageName("B 1 1 Rat");
-            c.setManaCost("B");
-            c.setToken(true);
-
-            c.addType("Creature");
-            c.addType("Rat");
-            c.setBaseAttack(1);
-            c.setBaseDefense(1);
-
-            PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-            play.add(c);
-        }//execute()
-      };//Command
-
       final SpellAbility spell_one = new Spell(card)
       {
 		private static final long serialVersionUID = -8112024383172056976L;
@@ -6286,7 +6095,7 @@ public class CardFactory implements NewConstants {
 
         public void resolve()
         {
-          makeToken.execute();
+        	CardFactoryUtil.makeToken("Rat", "B 1 1 Rat", card, "B", new String[]{"Creature", "Rat"}, 1, 1, new String[] {""});
         }//resolve()
       };//SpellAbility
 
@@ -6296,11 +6105,11 @@ public class CardFactory implements NewConstants {
 
 		public void resolve()
         {
-          makeToken.execute();
+			CardFactoryUtil.makeToken("Rat", "B 1 1 Rat", card, "B", new String[]{"Creature", "Rat"}, 1, 1, new String[] {""});
 
-          //return card to the hand
-          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-          AllZone.GameAction.moveTo(hand, card);
+			//return card to the hand
+			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+			AllZone.GameAction.moveTo(hand, card);
         }
         
         public boolean canPlayAI()
@@ -6330,32 +6139,6 @@ public class CardFactory implements NewConstants {
     //*************** START *********** START **************************
     else if(cardName.equals("Sprout Swarm"))
     {
-      final Command makeToken = new Command()
-      {
-		private static final long serialVersionUID = 648546709124047998L;
-
-		public void execute()
-        {
-            Card c = new Card();
-
-            c.setOwner(card.getController());
-            c.setController(card.getController());
-
-            c.setName("Saproling");
-            c.setImageName("G 1 1 Saproling");
-            c.setManaCost("G");
-            c.setToken(true);
-
-            c.addType("Creature");
-            c.addType("Saproling");
-            c.setBaseAttack(1);
-            c.setBaseDefense(1);
-
-            PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-            play.add(c);
-        }//execute()
-      };//Command
-
       final SpellAbility spell_one = new Spell(card)
       {
 		private static final long serialVersionUID = -609007714604161377L;
@@ -6364,7 +6147,7 @@ public class CardFactory implements NewConstants {
 
         public void resolve()
         {
-          makeToken.execute();
+        	CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[]{"Creature", "Saproling"}, 1, 1, new String[] {""});
         }//resolve()
       };//SpellAbility
 
@@ -6374,11 +6157,10 @@ public class CardFactory implements NewConstants {
 
 		public void resolve()
         {
-          makeToken.execute();
-
-          //return card to the hand
-          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-          AllZone.GameAction.moveTo(hand, card);
+			CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[]{"Creature", "Saproling"}, 1, 1, new String[] {""});
+			//return card to the hand
+			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+			AllZone.GameAction.moveTo(hand, card);
         }
       };//SpellAbility
 
@@ -6927,26 +6709,8 @@ public class CardFactory implements NewConstants {
 
 		public void resolve()
         {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
           for (int i = 0; i < 2; i++)
-          {
-            Card c = new Card();
-
-            c.setOwner(card.getController());
-            c.setController(card.getController());
-
-            c.setName("Soldier");
-            c.setImageName("W 1 1 Soldier");
-            c.setManaCost("W");
-            c.setToken(true);
-
-            c.addType("Creature");
-            c.addType("Soldier");
-            c.setBaseAttack(1);
-            c.setBaseDefense(1);
-
-            play.add(c);
-          }//for
+        	  CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card, "W", new String[]{"Creature", "Soldier"}, 1, 1, new String[] {""});
         }//resolve()
       };
       card.clearSpellAbility();
@@ -6958,37 +6722,19 @@ public class CardFactory implements NewConstants {
     {
       SpellAbility spell = new Spell(card)
       {
-      private static final long serialVersionUID = -6704097906643840324L;
-
-      public void resolve()
-        {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          for (int i = 0; i < 2; i++)
-          {
-            Card c = new Card();
-
-            c.setOwner(card.getController());
-            c.setController(card.getController());
-
-            c.setName("Goblin");
-            c.setImageName("R 1 1 Goblin");
-            c.setManaCost("R");
-            c.setToken(true);
-
-            c.addType("Creature");
-            c.addType("Goblin");
-            c.setBaseAttack(1);
-            c.setBaseDefense(1);
-
-            play.add(c);
-          }//for
-        }//resolve()
+	      private static final long serialVersionUID = -6704097906643840324L;
+	
+	      public void resolve()
+	      {
+	          for (int i = 0; i < 2; i++)
+	          {
+	        	  CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", card, "R", new String[]{"Creature", "Goblin"}, 1, 1, new String[] {""});
+	          }//for
+	      }//resolve()
       };
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-
-
 
 
     //*************** START *********** START **************************
@@ -7014,32 +6760,14 @@ public class CardFactory implements NewConstants {
             if(list.get(i).getTurnInZone() == AllZone.Phase.getTurn())
               stormCount++;
 
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
           for (int i = 0; i < 2 * stormCount; i++)
-          {
-            Card c = new Card();
+        	  CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", card, "R", new String[]{"Creature", "Goblin"}, 1, 1, new String[] {""});
 
-            c.setOwner(card.getController());
-            c.setController(card.getController());
-
-            c.setName("Goblin");
-            c.setImageName("R 1 1 Goblin");
-            c.setManaCost("R");
-            c.setToken(true);
-
-            c.addType("Creature");
-            c.addType("Goblin");
-            c.setBaseAttack(1);
-            c.setBaseDefense(1);
-
-            play.add(c);
-          }//for
         }//resolve()
       };
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-
 
 
     //*************** START *********** START **************************
@@ -7063,24 +6791,7 @@ public class CardFactory implements NewConstants {
 
         void makeToken()
         {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          Card c = new Card();
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setName("Giant Warrior");
-          c.setImageName("W 5 5 Giant Warrior");
-          c.setManaCost("W");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Giant");
-          c.addType("Warrior");
-          c.setBaseAttack(5);
-          c.setBaseDefense(5);
-
-          play.add(c);
+        	CardFactoryUtil.makeToken("Giant Warrior", "W 5 5 Giant Warrior", card, "W", new String[]{"Creature", "Giant", "Warrior"}, 5, 5, new String[] {""});
         }//makeToken()
 
       };//SpellAbility
@@ -7098,32 +6809,12 @@ public class CardFactory implements NewConstants {
 
 		public void resolve()
         {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-
-          //make token
-          Card c = new Card();
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setName("Treefolk Shaman");
-          c.setImageName("G 2 5 Treefolk Shaman");
-          c.setManaCost("G");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Treefolk");
-          c.addType("Shaman");
-          c.setBaseAttack(2);
-          c.setBaseDefense(5);
-
-          play.add(c);
+			CardFactoryUtil.makeToken("Treefolk Shaman", "G 2 5 Treefolk Shaman", card, "G", new String[]{"Creature", "Treefolk", "Shaman"}, 2, 5, new String[] {""});
         }//resolve()
       };
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-
 
 
     //*************** START *********** START **************************
@@ -8434,31 +8125,10 @@ public class CardFactory implements NewConstants {
             if(c[i].isCreature())
             {
               AllZone.GameAction.destroyNoRegeneration(c[i]);
-              play.add(getCreature(c[i].getController()));
+              CardFactoryUtil.makeToken("Spirit", "W 1 1 Spirit", c[i], "W", new String[]{"Creature", "Spirit"}, 1, 1, new String[] {"Flying"});
             }
           }
         }//change()
-        public Card getCreature(String owner)
-        {
-          //TODO: owner and controller is NOT the same player sometimes
-          //owner is the player who played March of Souls
-          //the controller is the player who's creature was destroyed
-          Card c = new Card();
-          c.setToken(true);
-          c.setOwner(owner);
-          c.setController(owner);
-
-          c.setName("Spirit");
-          c.setImageName("W 1 1 Spirit");
-          c.setBaseAttack(1);
-          c.setBaseDefense(1);
-          c.addIntrinsicKeyword("Flying");
-
-          c.setManaCost("W");
-          c.addType("Creature");
-          c.addType("Spirit");
-          return c;
-        }//getCreature()
       };//SpellAbility
       card.clearSpellAbility();
       card.addSpellAbility(spell);
@@ -9709,12 +9379,7 @@ public class CardFactory implements NewConstants {
             else
             {
               PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
-              @SuppressWarnings("unused") // play
-			  PlayerZone play = AllZone.getZone(Constant.Zone.Play, getTargetCard().getOwner());
               AllZone.GameAction.moveTo(hand, getTargetCard());
-              
-              //play.remove(getTargetCard());
-              //hand.add(getTargetCard());
             }
           }//if
         }//resolve()
@@ -10335,23 +10000,7 @@ public class CardFactory implements NewConstants {
 
 		public void resolve()
         {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          Card c = new Card();
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setName("Beast");
-          c.setImageName("G 3 3 Beast");
-          c.setManaCost("G");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Beast");
-          c.setBaseAttack(3);
-          c.setBaseDefense(3);
-
-          play.add(c);
+		  CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", card, "G", new String[]{"Creature", "Beast"}, 1, 1, new String[] {""});
 
           //return card to hand if necessary
           String opponent = AllZone.GameAction.getOpponent(card.getController());
@@ -10406,24 +10055,7 @@ public class CardFactory implements NewConstants {
 
 		public void resolve()
         {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          Card c = new Card();
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setName("Elephant");
-          c.setImageName("G 3 3 Elephant");
-          c.setManaCost("G");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Elephant");
-          c.setBaseAttack(3);
-          c.setBaseDefense(3);
-
-          play.add(c);
-
+			CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", card, "G", new String[]{"Creature", "Elephant"}, 3, 3, new String[] {""});
         }//resolve()
       };
       
@@ -10447,24 +10079,7 @@ public class CardFactory implements NewConstants {
 
 		public void resolve()
         {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          Card c = new Card();
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setName("Elephant");
-          c.setImageName("G 3 3 Elephant");
-          c.setManaCost("G");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Elephant");
-          c.setBaseAttack(3);
-          c.setBaseDefense(3);
-
-          play.add(c);
-
+			CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", card, "G", new String[]{"Creature", "Elephant"}, 3, 3, new String[] {""});
         }//resolve()
       };
       
@@ -10487,29 +10102,8 @@ public class CardFactory implements NewConstants {
 		private static final long serialVersionUID = 3787460988525779623L;
 		public void resolve()
         {	
-	      makeToken();
+			CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", card, "G", new String[]{"Creature", "Squirrel"}, 1, 1, new String[] {""});
         }
-		public void makeToken()
-		{
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          Card c = new Card();
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setName("Squirrel");
-          c.setName("G 1 1 Squirrel");
-          c.setManaCost("G");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Squirrel");
-          c.setBaseAttack(1);
-          c.setBaseDefense(1);
-
-          play.add(c);
-
-        }//resolve()
       };
       
       spell.setDescription("Put a 1/1 green Squirrel creature token into play.");
@@ -10535,24 +10129,7 @@ public class CardFactory implements NewConstants {
         }
 		public void makeToken()
 		{
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          Card c = new Card();
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setName("Squirrel");
-          c.setImageName("G 1 1 Squirrel");
-          c.setManaCost("G");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Squirrel");
-          c.setBaseAttack(1);
-          c.setBaseDefense(1);
-
-          play.add(c);
-
+			CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", card, "G", new String[]{"Creature", "Squirrel"}, 1, 1, new String[] {""});
         }//resolve()
       };
       
@@ -10585,24 +10162,7 @@ public class CardFactory implements NewConstants {
 		
 		public void makeToken()
 		{
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          Card c = new Card();
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setName("Beast");
-          c.setImageName("G 4 4 Beast");
-          c.setManaCost("G");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Beast");
-          c.setBaseAttack(4);
-          c.setBaseDefense(4);
-
-          play.add(c);
-
+			CardFactoryUtil.makeToken("Beast", "G 4 4 Beast", card, "G", new String[]{"Creature", "Beast"}, 4, 4, new String[] {""});
         }//resolve()
       };
       
@@ -10625,29 +10185,8 @@ public class CardFactory implements NewConstants {
 		private static final long serialVersionUID = -7861877439125080643L;
 		public void resolve()
         {	
-	      makeToken();
+			CardFactoryUtil.makeToken("Wurm", "G 6 6 Wurm", card, "G", new String[]{"Creature", "Wurm"}, 6, 6, new String[] {""});
         }
-		public void makeToken()
-		{
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          Card c = new Card();
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setName("Wurm");
-          c.setImageName("G 6 6 Wurm");
-          c.setManaCost("G");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Wurm");
-          c.setBaseAttack(6);
-          c.setBaseDefense(6);
-
-          play.add(c);
-
-        }//resolve()
       };
       
       spell.setDescription("Put a 6/6 green Wurm creature token into play.");
@@ -10675,24 +10214,7 @@ public class CardFactory implements NewConstants {
         }
 		public void makeToken()
 		{
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          Card c = new Card();
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setName("Wurm");
-          c.setImageName("G 6 6 Wurm");
-          c.setManaCost("G");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Wurm");
-          c.setBaseAttack(6);
-          c.setBaseDefense(6);
-
-          play.add(c);
-
+			CardFactoryUtil.makeToken("Wurm", "G 6 6 Wurm", card, "G", new String[]{"Creature", "Wurm"}, 6, 6, new String[] {""});
         }//resolve()
       };
       
@@ -10726,24 +10248,7 @@ public class CardFactory implements NewConstants {
         }
 		public void makeToken()
 		{
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-          Card c = new Card();
-
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setName("Bear");
-          c.setImageName("G 2 2 Bear");
-          c.setManaCost("G");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Bear");
-          c.setBaseAttack(2);
-          c.setBaseDefense(2);
-
-          play.add(c);
-
+			CardFactoryUtil.makeToken("Bear", "G 2 2 Bear", card, "G", new String[]{"Creature", "Bear"}, 2, 2, new String[] {""});
         }//resolve()
       };
       
@@ -10765,40 +10270,17 @@ public class CardFactory implements NewConstants {
 
 		private static final long serialVersionUID = 1299216756153970592L;
 		public void resolve()
-        {   
-         makeToken();
+        { 
+			CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[]{"Creature", "Saproling"}, 1, 1, new String[] {""});
         }
-	    public void makeToken()
-	    {
-	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-	          Card c = new Card();
-	
-	          c.setOwner(card.getController());
-	          c.setController(card.getController());
-	
-	          c.setName("Saproling");
-	          c.setImageName("G 1 1 Saproling");
-	          c.setManaCost("G");
-	          c.setToken(true);
-	
-	          c.addType("Creature");
-	          c.addType("Saproling");
-	          c.setBaseAttack(1);
-	          c.setBaseDefense(1);
-	
-	          play.add(c);
-	
-	    	}//resolve()
-	     };
+	  };
 	     
-	     spell.setDescription("Put a 1/1 green Saproling creature token into play.");
-	     spell.setStackDescription(card.getController() + " put a 1/1 green Saproling creature token into play.");
+	  spell.setDescription("Put a 1/1 green Saproling creature token into play.");
+	  spell.setStackDescription(card.getController() + " put a 1/1 green Saproling creature token into play.");
 	     
-	     card.clearSpellAbility();
-	     card.addSpellAbility(spell);
+	  card.clearSpellAbility();
+	  card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-
-    
 
     //*************** START *********** START **************************
     else if(cardName.equals("Delirium Skeins"))
@@ -11551,36 +11033,9 @@ public class CardFactory implements NewConstants {
         {
           int life = AllZone.GameAction.getPlayerLife(card.getController()).getLife();
 
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-
-          //we need a new Card object for each token
-          //can't just add the same Card object over and over again
           for (int i = 0; i < life; i++)
-          {
-            play.add(getToken());
-          }
+        	  CardFactoryUtil.makeToken("Pegasus", "W 1 1 Pegasus", card, "W", new String[]{"Creature", "Pegasus"}, 1, 1, new String[] {"Flying"});
         }//resolve()
-
-        Card getToken()
-        {
-          Card c = new Card();
-          c.setOwner(card.getController());
-          c.setController(card.getController());
-
-          c.setName("Pegasus");
-          c.setImageName("W 1 1 Pegasus");
-          c.setManaCost("W");
-          c.setToken(true);
-
-          c.addType("Creature");
-          c.addType("Pegasus");
-
-          c.setBaseAttack(1);
-          c.setBaseDefense(1);
-
-          c.addIntrinsicKeyword("Flying");
-          return c;
-        }//getToken()
       };//SpellAbility
       card.clearSpellAbility();
       card.addSpellAbility(spell);
@@ -12188,8 +11643,6 @@ public class CardFactory implements NewConstants {
               PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
               AllZone.GameAction.moveTo(hand, getTargetCard());
             }
-            @SuppressWarnings("unused") // targetManaCost
-			String targetManaCost = getTargetCard().getManaCost();
             //System.out.println("target card has a converted manacost of: " +CardUtil.getConvertedManaCost(targetManaCost));
           }//if
         }//resolve()
@@ -12778,26 +12231,7 @@ public class CardFactory implements NewConstants {
  	        public void resolve()
  	        {
  	           card.subtractCounter(Counters.HOOFPRINT, 4);
-
- 	           Card c = new Card();
-
- 	           c.setOwner(card.getController());
- 	           c.setController(card.getController());
-
- 	           c.setName("Elemental");
- 	           c.setImageName("W 4 4 Elemental");
- 	           c.setManaCost("W");
- 	           c.setToken(true);
- 	           
- 	           c.addType("Creature");
- 	           c.addType("Elemental");
- 	           c.addIntrinsicKeyword("Flying");
- 	           c.setBaseAttack(4);
- 	           c.setBaseDefense(4);
- 	           
- 	           PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
- 	           play.add(c);
- 	        
+ 	           CardFactoryUtil.makeToken("Elemental", "W 4 4 Elemental", card, "W", new String[]{"Creature", "Elemental"}, 4, 4, new String[] {"Flying"});
  	        }
  	        
  	       public boolean canPlay()
@@ -12905,32 +12339,11 @@ public class CardFactory implements NewConstants {
 	    	    	makeToken();
 	    	    	makeToken();
     			}
-    	    	
-    	    	
     		}//resolve
     		
     		public void makeToken()
     		{
-    			Card c = new Card();
-
-    			  c.setName("Goblin Soldier");
-    	          c.setImageName("RW 1 1 Goblin Soldier");
-
-    	          c.setOwner(card.getController());
-    	          c.setController(card.getController());
-
-    	          c.setManaCost("R W");
-    	          c.setToken(true);
-    	         
-    	          c.addType("Creature");
-    	          c.addType("Goblin");
-    	          c.addType("Soldier");
-    	          c.setBaseAttack(1);
-    	          c.setBaseDefense(1);
-
-    	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-    	          play.add(c);
-    			
+    			CardFactoryUtil.makeToken("Goblin Soldier", "RW 1 1 Goblin Soldier", card, "RW", new String[]{"Creature", "Goblin", "Soldier"}, 1, 1, new String[] {""});
     		}
         };
         
@@ -14697,245 +14110,6 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
 
-
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Might of Oaks"))
-    {
-      SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -33985340162641452L;
-		
-		public boolean canPlayAI()
-        {
-          return getAttacker() != null;
-        }
-        public void chooseTargetAI()
-        {
-          setTargetCard(getAttacker());
-        }
-        public Card getAttacker()
-        {
-          //target creature that is going to attack
-          Combat c = ComputerUtil.getAttackers();
-          Card[] att = c.getAttackers();
-          if(att.length != 0)
-            return att[0];
-          else
-            return null;
-        }//getAttacker()
-        public void resolve()
-        {
-          final Card[] target = new Card[1];
-          final Command untilEOT = new Command()
-          {
-			private static final long serialVersionUID = -5138969487216215323L;
-
-			public void execute()
-            {
-              if(AllZone.GameAction.isCardInPlay(target[0]))
-              {
-                target[0].addTempAttackBoost(-7);
-                target[0].addTempDefenseBoost(-7);
-              }
-            }
-          };
-
-          target[0] = getTargetCard();
-          if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, getTargetCard()))
-          {
-            target[0].addTempAttackBoost(7);
-            target[0].addTempDefenseBoost(7);
-
-            AllZone.EndOfTurn.addUntil(untilEOT);
-          }
-        }//resolve()
-      };
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-*/
-    
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Guided Strike"))
-    {
-      final Card[] target = new Card[1];
-      final Command untilEOT = new Command()
-      {
-		private static final long serialVersionUID = 6381010042083054770L;
-
-		public void execute()
-        {
-          if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
-          {
-            target[0].addTempAttackBoost(-1);
-            target[0].removeExtrinsicKeyword("First Strike");
-          }
-        }
-      };
-
-      SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = 6373328936243472966L;
-		
-		public boolean canPlayAI()
-        {
-          return getAttacker() != null;
-        }
-        public void chooseTargetAI()
-        {
-          setTargetCard(getAttacker());
-        }
-        public Card getAttacker()
-        {
-          //target creature that is going to attack
-          Combat c = ComputerUtil.getAttackers();
-          Card[] att = c.getAttackers();
-          if(att.length != 0)
-            return att[0];
-          else
-            return null;
-        }//getAttacker()
-        public void resolve()
-        {
-          target[0] = getTargetCard();
-          if(AllZone.GameAction.isCardInPlay(target[0]))
-          {
-            target[0].addTempAttackBoost(1);
-            target[0].addExtrinsicKeyword("First Strike");
-
-            AllZone.EndOfTurn.addUntil(untilEOT);
-            AllZone.GameAction.drawCard(card.getController());
-          }
-        }//resolve()
-      };
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-*/
-    
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Aggressive Urge"))
-    {
-      final Card[] target = new Card[1];
-      final Command untilEOT = new Command()
-      {
-		private static final long serialVersionUID = 5519847437187468154L;
-
-		public void execute()
-        {
-          if(AllZone.GameAction.isCardInPlay(target[0]))
-          {
-            target[0].addTempAttackBoost(-1);
-            target[0].addTempDefenseBoost(-1);
-          }
-        }
-      };
-
-      SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -1043326570050661433L;
-		
-		public boolean canPlayAI()
-        {
-          return getAttacker() != null;
-        }
-        public void chooseTargetAI()
-        {
-          setTargetCard(getAttacker());
-        }
-        public Card getAttacker()
-        {
-          //target creature that is going to attack
-          Combat c = ComputerUtil.getAttackers();
-          Card[] att = c.getAttackers();
-          if(att.length != 0)
-            return att[0];
-          else
-            return null;
-        }//getAttacker()
-        public void resolve()
-        {
-          target[0] = getTargetCard();
-          if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
-          {
-            target[0].addTempAttackBoost(1);
-            target[0].addTempDefenseBoost(1);
-
-            AllZone.EndOfTurn.addUntil(untilEOT);
-            AllZone.GameAction.drawCard(card.getController());
-          }
-        }//resolve()
-      };
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-*/
-    
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Vindicate"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -2302610807061478203L;
-
-		public boolean canPlayAI()
-    	{
-    	  CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
-    	  return 4 < AllZone.Phase.getTurn() && 0 < human.size();
-    	}
-    	public void chooseTargetAI()
-    	{
-    	  CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
-    	  setTargetCard(CardFactoryUtil.AI_getBestCreature(human));
-    	}
-
-    	public void resolve()
-    	{
-    	  if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()))
-    	  {
-    		if(getTargetCard().isToken())
-    		  AllZone.getZone(getTargetCard()).remove(getTargetCard());
-    		else
-    		{
-    		  AllZone.GameAction.destroy(getTargetCard());
-    		}
-    	  }//if
-    	}//resolve()
-      };//SpellAbility
-      Input target = new Input()
-      {
-		private static final long serialVersionUID = -7826307781920832218L;
-		
-		public void showMessage()
-    	{
-    	  AllZone.Display.showMessage("Select target permanent for " +spell.getSourceCard());
-    	  ButtonUtil.enableOnlyCancel();
-    	}
-    	public void selectButtonCancel() {stop();}
-    	public void selectCard(Card card, PlayerZone zone)
-    	{
-    	  if(zone.is(Constant.Zone.Play))
-    	  {
-    		spell.setTargetCard(card);
-    		stopSetNext(new Input_PayManaCost(spell));
-    	  }
-    	}
-      };//Input
-
-      spell.setBeforePayMana(target);
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-*/
-    
-
     //*************** START *********** START **************************
     else if(cardName.equals("Animate Land"))
     {
@@ -16201,26 +15375,9 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 
 		public void resolve()
         {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
           for (int i = 0; i < 6; i++)
           {
-            Card c = new Card();
-
-            c.setOwner(card.getController());
-            c.setController(card.getController());
-
-            c.setName("Kor Soldier");
-            c.setImageName("W 1 1 Kor Soldier");
-            c.setManaCost("W");
-            c.setToken(true);
-
-            c.addType("Creature");
-            c.addType("Kor");
-            c.addType("Soldier");
-            c.setBaseAttack(1);
-            c.setBaseDefense(1);
-
-            play.add(c);
+        	  CardFactoryUtil.makeToken("Kor Soldier", "W 1 1 Kor Soldier", card, "W", new String[]{"Creature", "Kor", "Soldier"}, 1, 1, new String[] {""});
           }//for
         }//resolve()
       };
@@ -16230,34 +15387,14 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       
       SpellAbility kicker = new Spell(card)
       {
-
 		private static final long serialVersionUID = 1376255732058673590L;
 
 		public void resolve()
         {
-			
 		  card.setKicked(true);
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
           for (int i = 0; i < 12; i++)
           {
-        	
-            Card c = new Card();
-
-            c.setOwner(card.getController());
-            c.setController(card.getController());
-
-            c.setName("Kor Soldier");
-            c.setImageName("W 1 1 Kor Soldier");
-            c.setManaCost("W");
-            c.setToken(true);
-
-            c.addType("Creature");
-            c.addType("Kor");
-            c.addType("Soldier");
-            c.setBaseAttack(1);
-            c.setBaseDefense(1);
-
-            play.add(c);
+        	  CardFactoryUtil.makeToken("Kor Soldier", "W 1 1 Kor Soldier", card, "W", new String[]{"Creature", "Kor", "Soldier"}, 1, 1, new String[] {""});
           }//for
         }//resolve()
       };
@@ -16266,7 +15403,6 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       kicker.setAdditionalManaCost("6");
       kicker.setDescription("Kicker 6: If Conqueror's Pledge was kicked, put twelve of those tokens onto the battlefield instead.");
       kicker.setStackDescription(card.getName() + " - " + card.getController() + " puts twelve 1/1 white Kor Soldier creature tokens onto the battlefield.");
-      
       
       card.clearSpellAbility();
       card.addSpellAbility(spell);
@@ -16708,27 +15844,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     		
     		public void makeToken()
     		{
-    			  Card c = new Card();
-
-    			  c.setName("Thopter");
-    	          c.setImageName("U 1 1 Thopter");
-
-    	          c.setOwner(card.getController());
-    	          c.setController(card.getController());
-
-    	          c.setManaCost("U");
-    	          c.setToken(true);
-    	         
-    	          c.addType("Artifact");
-    	          c.addType("Creature");
-    	          c.addType("Thopter");
-    	          c.setBaseAttack(1);
-    	          c.setBaseDefense(1);
-    	          c.addIntrinsicKeyword("Flying");
-
-    	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-    	          play.add(c);
-    			
+    			CardFactoryUtil.makeToken("Thopter", "U 1 1 Thopter", card, "U", new String[]{"Artifact","Creature", "Thopter"}, 1, 1, new String[] {"Flying"});
     		}
         };
         
@@ -17453,7 +16569,6 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	    }//*************** END ************ END **************************
 
 	    
-	    
 		  //*************** START *********** START **************************
 		    if (cardName.equals("Serpent Generator"))
 		    {
@@ -17463,26 +16578,8 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 
 					public void resolve()
 		    		{
-		    			PlayerZone play = AllZone.getZone(card);
-		    			Card c = new Card();
-
-		    	        c.setOwner(card.getController());
-		    	        c.setController(card.getController());
-
-		    	        c.setName("Snake");
-		    	        c.setImageName("C 1 1 Snake");
-		    	        c.setManaCost("");
-		    	        c.setToken(true);
-
-		    	        c.addType("Artifact");
-		    	        c.addType("Creature");
-		    	        c.addType("Snake");
-		    	        c.setBaseAttack(1);
-		    	        c.setBaseDefense(1);
-		    	        
-		    	        c.addIntrinsicKeyword("Whenever this creature deals damage to a player, that player gets a poison counter.");
-
-		    	        play.add(c);
+						CardFactoryUtil.makeToken("Snake", "C 1 1 Snake", card, "", new String[]{"Artifact","Creature", "Snake"}, 1, 1, 
+												  new String[] {"Whenever this creature deals damage to a player, that player gets a poison counter."});
 		    		}
 		    	};
 		    	ability.setStackDescription("Put a 1/1 colorless Snake artifact creature token onto the battlefield. This creature has \"Whenever this creature deals damage to a player, that player gets a poison counter.\"");
@@ -18071,7 +17168,6 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
         card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
       }
     }//Vanishing
-
     
     return card;
   }//getCard2

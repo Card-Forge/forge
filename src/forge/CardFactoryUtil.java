@@ -3150,6 +3150,32 @@ public class CardFactoryUtil
 		list.add(creatureLands[i]);
 		return list;
   }
+    
+  public static void makeToken(String name, String imageName, Card source, String manaCost, String[] types, int baseAttack, int baseDefense,
+		   					   String[] intrinsicKeywords)
+  {
+	  Card c = new Card();
+	  c.setName(name);
+	  c.setImageName(imageName);
+	  
+	  c.setOwner(source.getController());
+	  c.setController(source.getController());
+	  
+	  c.setManaCost(manaCost);
+	  c.setToken(true);
+	  
+	  for (String t : types)
+		  c.addType(t);
+	  
+	  c.setBaseAttack(baseAttack);
+	  c.setBaseDefense(baseDefense);
+	  
+	  for (String kw : intrinsicKeywords)
+		  c.addIntrinsicKeyword(kw);
+	  
+	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, source.getController());
+      play.add(c);
+  }
   
   //may return null
   static public Card getRandomCard(CardList list)

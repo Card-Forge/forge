@@ -9092,7 +9092,7 @@ public class CardFactory_Creatures {
 	        {
 	          private static final long serialVersionUID = -8961588142846220965L;
 
-	  		public void execute()
+	  		  public void execute()
 	          {
 	            Card c = moveCreature[0];
 
@@ -9107,6 +9107,15 @@ public class CardFactory_Creatures {
 	              PlayerZone from = AllZone.getZone(c);
 	              from.remove(c);
 
+	              //make sure the creature is removed from combat:
+	              CardList list = new CardList(AllZone.Combat.getAttackers());
+	              if (list.contains(c))
+	            	  AllZone.Combat.removeFromCombat(c);
+	              
+	              CardList pwlist = new CardList(AllZone.pwCombat.getAttackers());
+	              if (pwlist.contains(c))
+	            	  AllZone.pwCombat.removeFromCombat(c);
+	              
 	              PlayerZone to = AllZone.getZone(Constant.Zone.Play, c.getOwner());
 	              to.add(c);
 
