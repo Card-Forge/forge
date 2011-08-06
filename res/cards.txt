@@ -1,3 +1,53 @@
+Back to Nature
+1 G
+Instant
+Destroy all enchantments.
+spDestroyAll:Enchantment
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/back_to_nature.jpg
+
+Cleanfall
+2 W
+Sorcery Arcane
+Destroy all enchantments.
+spDestroyAll:Enchantment
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanfall.jpg
+
+Hush
+3 G
+Sorcery
+Destroy all enchantments.
+spDestroyAll:Enchantment
+Cycling:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hush.jpg
+
+Tempest of Light
+2 W
+Instant
+Destroy all enchantments.
+spDestroyAll:Enchantment
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tempest_of_light.jpg
+
+Tranquil Path
+4 G
+Sorcery
+Destroy all enchantments.
+spDestroyAll:Enchantment
+Draw a card.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_path.jpg
+
+Tranquility
+2 G 
+Sorcery
+Destroy all enchantments.
+spDestroyAll:Enchantment
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquility.jpg
+
 Tethered Griffin
 W
 Creature Griffin
@@ -2603,13 +2653,6 @@ You may play two additional lands on each of your turns.
 1/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azusa_lost_but_seeking.jpg
-
-Back to Nature
-1 G
-Instant
-no text
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/back_to_nature.jpg
 
 Bad Moon
 1 B
@@ -5758,13 +5801,6 @@ no text
 RegenerateMe:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clay_statue.jpg
-
-Cleanfall
-2 W
-Sorcery Arcane
-no text
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cleanfall.jpg
 
 Clear
 1 W
@@ -14552,14 +14588,6 @@ Sorcery
 no text
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurricane.jpg
-
-Hush
-3 G
-Sorcery
-no text
-Cycling:2
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hush.jpg
 
 Hyalopterous Lemure
 4 B
@@ -29978,13 +30006,6 @@ Vigilance
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3746.jpg
 
-Tempest of Light
-2 W
-Instant
-no text
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tempest_of_light.jpg
-
 Temple Acolyte
 1 W
 Creature Human Cleric
@@ -31260,14 +31281,6 @@ spDestroyAll:Enchantment.nonAura
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_domain.jpg
 
-Tranquil Path
-4 G
-Sorcery
-no text
-Draw a card.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_path.jpg
-
 Tranquil Thicket
 no cost
 Land
@@ -31277,13 +31290,6 @@ tap: add G
 Cycling:G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_thicket.jpg
-
-Tranquility
-2 G 
-Sorcery
-no text
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquility.jpg
 
 Transcendent Master
 1 W W

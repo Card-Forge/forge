@@ -10967,6 +10967,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
         
+        
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Tranquility")      || cardName.equals("Tempest of Light")
                 || cardName.equals("Cleanfall")     || cardName.equals("Hush") 
@@ -11016,7 +11018,9 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
-
+*/
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Incendiary Command")) {
             //not sure what to call variables, so I just made up something
