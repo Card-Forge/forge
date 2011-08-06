@@ -3180,7 +3180,7 @@ public class CardFactory implements NewConstants {
             card.removeIntrinsicKeyword(parse);
             
             String k[] = parse.split(":");
-            String Targets = k[1]; // Artifact, Creature, Enchantment, Land, Permanent, White, Blue, Black, Red, Green, Colorless, MultiColor
+            final String Targets = k[1]; // Artifact, Creature, Enchantment, Land, Permanent, White, Blue, Black, Red, Green, Colorless, MultiColor
             // non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
             //non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
             final String Tgts[] = Targets.split(",");
@@ -3219,12 +3219,15 @@ public class CardFactory implements NewConstants {
                         Card c = list.get(0);
                         AllZone.GameAction.shuffle(card.getController());
                         AllZone.Computer_Library.remove(c);
-                        if (Destination == "Hand") AllZone.Computer_Hand.add(c);         			//move to hand
-                        else if (Destination == "TopOfLibrary") AllZone.Computer_Library.add(c, 0); //move to top of library
+                        if (Destination.equals("Hand")) AllZone.Computer_Hand.add(c);         			//move to hand
+                        if (Destination.equals("TopOfLibrary")) AllZone.Computer_Library.add(c, 0); //move to top of library
+                        if (Destination.equals("ThirdFromTopOfLibrary")) AllZone.Computer_Library.add(c, 2); //move to third from top of library
                         
-                        CardList l = new CardList();
-                        l.add(c);
-                        AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
+                        if (!Targets.startsWith("Card")) {
+                        	CardList l = new CardList();
+                        	l.add(c);
+                        	AllZone.Display.getChoiceOptional("Computer picked:", l.toArray());
+                        }
                     }
                 }//computerResolve()
                 
@@ -3239,7 +3242,8 @@ public class CardFactory implements NewConstants {
                         if(o != null) {
                         	AllZone.Human_Library.remove(o);
                         	if (Destination.equals("Hand")) AllZone.Human_Hand.add((Card) o);         			//move to hand
-                            else if (Destination.equals("TopOfLibrary")) AllZone.Human_Library.add((Card) o, 0);//move to top of library
+                            if (Destination.equals("TopOfLibrary")) AllZone.Human_Library.add((Card) o, 0); //move to top of library
+                            if (Destination.equals("ThirdFromTopOfLibrary")) AllZone.Human_Library.add((Card) o, 2); //move to third from top of library
                         }
                     }//if
                 }//resolve()
@@ -9507,6 +9511,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
+/* Converted to keyword 
         //*************** START *********** START **************************
         else if(cardName.equals("Fabricate")) {
             SpellAbility spell = new Spell(card) {
@@ -9562,7 +9567,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
+*/        
       
         //*************** START *********** START **************************
         else if(cardName.equals("Curse of Wizardry")) {
