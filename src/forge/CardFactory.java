@@ -17406,6 +17406,69 @@ public class CardFactory implements NewConstants {
       } 
       //*************** END ************ END **************************
         
+        
+      //*************** START *********** START **************************
+      else if(cardName.equals("Stream of Life"))
+      {
+    	  final SpellAbility spell = new Spell(card){
+			  private static final long serialVersionUID = 851280814064291421L;
+
+			  public void resolve()
+    		  {
+    		      String player = getTargetPlayer();
+    			  
+    		      AllZone.GameAction.getPlayerLife(player).addLife(card.getXManaCostPaid());
+    		      card.setXManaCostPaid(0);
+    		  }
+    		  
+    		  public boolean canPlayAI()
+    		  {
+    			  int humanLife = AllZone.Human_Life.getLife();
+    			  int computerLife = AllZone.Computer_Life.getLife();
+    			  
+    			  final int maxX = ComputerUtil.getAvailableMana().size() - 1;
+    			  return maxX > 3 && (humanLife >= computerLife);
+    		  }
+    	  };
+    	  spell.setDescription("Target player gains X life.");
+    	  spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+    	  spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
+    	  
+    	  card.clearSpellAbility();
+    	  card.addSpellAbility(spell);
+      }
+      //*************** END ************ END **************************
+        
+        
+      //*************** START *********** START **************************
+      else if(cardName.equals("Vitalizing Cascade"))
+      {
+    	  final SpellAbility spell = new Spell(card){
+			  private static final long serialVersionUID = -5930794708688097023L;
+
+			  public void resolve()
+    		  {
+				  AllZone.GameAction.getPlayerLife(card.getController()).addLife(card.getXManaCostPaid() + 3);
+    			  card.setXManaCostPaid(0);
+    		  }
+    		  
+    		  public boolean canPlayAI()
+    		  {
+    			  int humanLife = AllZone.Human_Life.getLife();
+    			  int computerLife = AllZone.Computer_Life.getLife();
+    			  
+    			  final int maxX = ComputerUtil.getAvailableMana().size() - 1;
+    			  return maxX > 3 && (humanLife >= computerLife);
+    		  }
+    	  };
+    	  spell.setDescription("You gain X plus 3 life.");
+    	  spell.setStackDescription("Vitalizing Cascade - You gain X plus 3 life.");
+    	  
+    	  card.clearSpellAbility();
+    	  card.addSpellAbility(spell);
+      }
+      //*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
