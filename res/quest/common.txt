@@ -3,6 +3,7 @@ AEther Web
 AEtherflame Wall
 Absorb Vis
 Accelerate
+Accelerated Mutation
 Accumulated Knowledge
 Acolyte of Xathrid
 Acorn Harvest
@@ -81,6 +82,7 @@ Barren Moor
 Barrenton Cragtreads
 Battering Craghorn
 Battering Sliver
+Battle Hurda
 Battle Rampart
 Battlegate Mimic
 Bay Falcon
@@ -94,6 +96,7 @@ Benalish Trapper
 Berserkers of Blood Ridge
 Bird Maiden
 Blade of the Sixth Pride
+Bladetusk Boar
 Blanchwood Treefolk
 Blastoderm
 Blight Sickle
@@ -111,6 +114,7 @@ Bog Raiders
 Bog Smugglers
 Bog Tatters
 Boggart Birth Rite
+Bojuka Brigand
 Bone Saw
 Bonesplitter
 Bonesplitter Sliver
@@ -132,7 +136,9 @@ Breathstealer
 Briarberry Cohort
 Brilliant Halo
 Brute Force
+Bull Rush
 Buoyancy
+Burning Cloak
 Burning Fields
 Burning Shield Askari
 Burst of Speed
@@ -359,6 +365,7 @@ Flight
 Floating-Dream Zubera
 Flowstone Giant
 Flowstone Shambler
+Flowstone Strike
 Flowstone Wall
 Flying Men
 Fog of Gnats
@@ -383,6 +390,7 @@ Fugitive Wizard
 Funeral Charm
 Furnace Spirit
 Fyndhorn Elves
+Gaea's Might
 Gaea's Skyfolk
 Galina's Knight
 Game-Trail Changeling
@@ -421,6 +429,7 @@ Goblin Patrol
 Goblin Piker
 Goblin Raider
 Goblin Rimerunner
+Goblin Roughrider
 Goblin Sky Raider
 Goblin Skycutter
 Goblin Spelunkers
@@ -438,10 +447,12 @@ Goretusk Firebeast
 Gorger Wurm
 Gorilla Chieftain
 Gorilla Warrior
+Grappler Spider
 Gravedigger
 Gravelgill Axeshark
 Gravelgill Duo
 Gray Ogre
+Graypelt Hunter
 Grayscaled Gharial
 Great Furnace
 Griffin Sentinel
@@ -453,6 +464,7 @@ Guardians of Akrasa
 Guided Strike
 Guilty Conscience
 Gush
+Guul Draz Vampire
 Halberdier
 Hand of Death
 Harvest Gwyllion
@@ -485,6 +497,7 @@ Hulking Goblin
 Hulking Ogre
 Humble Budoka
 Hundroog
+Hunger of the Nim
 Hungry Mist
 Hurloon Minotaur
 Hush
@@ -503,14 +516,17 @@ Incurable Ogre
 Independent Troops
 Indomitable Will
 Infiltrate
+Inner Calm, Outer Strength
 Inner-Flame Acolyte
 Innocent Blood
 Inspiration
 Ior Ruin Expedition
 Ire of Kaminari
 Iron Myr
+Iron Will
 Ironroot Treefolk
 Izzet Signet
+Jagwasp Swarm
 Jamuraan Lion
 Jedit's Dragoons
 Jhessian Lookout
@@ -535,9 +551,11 @@ Keeper of Kookus
 Keepers of the Faith
 Keldon Vandals
 Kelinore Bat
+Khalni Garden
 Kindle
 Kindled Fury
 Kird Ape
+Kitesail
 Kitsune Loreweaver
 Kjeldoran Outrider
 Kjeldoran War Cry
@@ -546,6 +564,7 @@ Knight of the Skyward Eye
 Kobolds of Kher Keep
 Kodama's Reach
 Kor Cartographer
+Kor Skyfisher
 Kraken Hatchling
 Kranioceros
 Krovikan Scoundrel
@@ -609,6 +628,7 @@ Manta Ray
 Manta Riders
 Marsh Boa
 Marsh Goblins
+Marsh Threader
 Marsh Viper
 Mask of Law and Grace
 Mass of Ghouls
@@ -623,6 +643,7 @@ Mesa Falcon
 Metallic Sliver
 Metathran Soldier
 Metathran Zombie
+Might of Alara
 Minister of Impediments
 Minotaur Warrior
 Mire Boa
@@ -657,6 +678,7 @@ Mudbrawler Cohort
 Mudbutton Torchrunner
 Mulldrifter
 Multani's Acolyte
+Muscle Burst
 Muscle Sliver
 Nacatl Outlander
 Nacatl Savage
@@ -763,6 +785,7 @@ Prodigal Sorcerer
 Profane Prayers
 Promised Kannushi
 Protective Bubble
+Pulse Tracker
 Pygmy Pyrosaur
 Pygmy Razorback
 Pyrite Spellbomb
@@ -837,6 +860,7 @@ Runeclaw Bear
 Runed Stalactite
 Rushwood Dryad
 Rustrazor Butcher
+Ruthless Cullblade
 Sabretooth Tiger
 Sacred Nectar
 Safehold Duo
@@ -960,6 +984,7 @@ Sootfeather Flock
 Southern Elephant
 Spark Spray
 Sparksmith
+Spell Pierce
 Spell Snip
 Spidersilk Armor
 Spidersilk Net
@@ -977,6 +1002,7 @@ Squall Drifter
 Squire
 Squirming Mass
 Stampeding Rhino
+Stand Firm
 Standing Troops
 Steadfast Guard
 Steadfastness
@@ -1195,6 +1221,7 @@ Wings of Velis Vel
 Winnower Patrol
 Wirewood Elf
 Wirewood Guardian
+Wirewood Pride
 Wistful Thinking
 Wood Elves
 Woodland Changeling

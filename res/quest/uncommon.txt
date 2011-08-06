@@ -28,6 +28,7 @@ Arcbound Slith
 Arctic Flats
 Arctic Nishoba
 Arctic Wolves
+Ardent Plea
 Armored Galleon
 Armored Griffin
 Arrogant Vampire
@@ -54,12 +55,15 @@ Behemoth Sledge
 Belligerent Hatchling
 Beloved Chaplain
 Benalish Heralds
+Bestial Menace
+Bituminous Blast
 Black Knight
 Black Vise
 Blade Sliver
 Blasted Landscape
 Bloated Toad
 Blood Knight
+Bloodbraid Elf
 Bloodstone Cameo
 Body of Jukai
 Bog Wraith
@@ -132,6 +136,7 @@ Crumbling Necropolis
 Crypt Cobra
 Crystalline Sliver
 Cudgel Troll
+Cunning Sparkmage
 Cursed Land
 Daggerclaw Imp
 Dakmor Ghoul
@@ -144,6 +149,7 @@ Dauthi Embrace
 Dauthi Ghoul
 Dauthi Mercenary
 Dauthi Trapper
+Death's Shadow
 Deathmark
 Deep-Sea Serpent
 Demonic Tutor
@@ -176,6 +182,7 @@ Elvish Aberration
 Elvish Harbinger
 Engineered Plague
 Enlightened Tutor
+Enlisted Wurm
 Enormous Baloth
 Ensnare
 Eron the Relentless
@@ -225,6 +232,7 @@ Fury Sliver
 Fusion Elemental
 Fyndhorn Bow
 Fyndhorn Elder
+Gatekeeper of Malakir
 Gelectrode
 Gemstone Array
 Gerrard's Verdict
@@ -235,6 +243,7 @@ Ghost Ship
 Ghost-Lit Redeemer
 Ghostly Changeling
 Ghostly Prison
+Ghoul's Feast
 Giant Harbinger
 Giant Octopus
 Gift of Estates
@@ -263,6 +272,7 @@ Greenweaver Druid
 Grizzly Fate
 Guardian of Cloverdell
 Guma
+Hada Freeblade
 Halcyon Glaze
 Hand of Cruelty
 Hand of Honor
@@ -328,6 +338,7 @@ Karakas
 Karoo Meerkat
 Karplusan Strider
 Kasimir the Lone Wolf
+Kathari Remnant
 Kazandu Blademaster
 Kazandu Refuge
 Keening Banshee
@@ -351,6 +362,7 @@ Lady Orca
 Land Tax
 Lava Flow
 Leafdrake Roost
+Leatherback Baloth
 Leonin Skyhunter
 Levitation
 Library of Alexandria
@@ -360,6 +372,7 @@ Lingering Tormentor
 Living Wall
 Llanowar Behemoth
 Llanowar Mentor
+Loam Lion
 Lobotomy
 Lockjaw Snapper
 Longbow Archer
@@ -394,6 +407,7 @@ Mortify
 Moss Diamond
 Mother of Runes
 Mycologist
+Mystical Tutor
 Nantuko Elder
 Narwhal
 Nature's Ruin
@@ -441,6 +455,7 @@ Plasma Elemental
 Plumeveil
 Pongify
 Power Armor
+Primal Bellow
 Primal Boost
 Primeval Shambler
 Primoc Escapee
@@ -464,6 +479,7 @@ Ramosian Commander
 Ramosian Revivalist
 Ranger en-Vec
 Rathi Fiend
+Rebuild
 Reckless Wurm
 Regrowth
 Relentless Rats
@@ -578,6 +594,8 @@ Stormcloud Djinn
 Stratozeppelid
 Stream of Acid
 Street Wraith
+Strength of Cedars
+Strip Mine
 Stromgald Crusader
 Stronghold Zeppelin
 Sturdy Hatchling
@@ -687,6 +705,7 @@ Waning Wurm
 War Chariot
 Warthog
 Wasp Lancer
+Wasteland
 Watchwolf
 Water Elemental
 Wei Elite Companions

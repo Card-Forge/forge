@@ -11,12 +11,14 @@ Akroma, Angel of Wrath
 Aladdin's Ring
 Aluren
 Ambassador Laquatus
+Amulet of Vigor
 Ancestral Recall
 Ancient Craving
 Ancient Silverback
 Ancient Spider
 Angel of Despair
 Angel of Retribution
+Anowon, the Ruin Sage
 Ant Queen
 Arashi, the Sky Asunder
 Arcanis the Omnipotent
@@ -30,6 +32,7 @@ Armored Guardian
 Ashes to Ashes
 Augury Adept
 Aven Brigadier
+Avenger of Zendikar
 Ayumi, the Last Visitor
 Azusa, Lost but Seeking
 Bad Moon
@@ -39,6 +42,7 @@ Baneslayer Angel
 Barren Glory
 Bartel Runeaxe
 Baru, Fist of Krosa
+Basilisk Collar
 Battle of Wits
 Battlegrace Angel
 Bayou
@@ -86,6 +90,7 @@ Carnassid
 Cascade Bluffs
 Cateran Overlord
 Cateran Slaver
+Celestial Colonnade
 Chainer, Dementia Master
 Chameleon Colossus
 Chandra Nalaar
@@ -113,6 +118,7 @@ Cosmic Horror
 Cover of Darkness
 Covetous Dragon
 Cranial Extraction
+Creeping Tar Pit
 Cromat
 Crucible of Fire
 Cruel Bargain
@@ -145,10 +151,12 @@ Do or Die
 Donate
 Door to Nothingness
 Doran, the Siege Tower
+Doubling Season
 Dovescape
 Dragon Broodmother
 Dragon Engine
 Dragon Roost
+Dragonmaster Outcast
 Drifting Djinn
 Dwarven Pony
 Earthcraft
@@ -227,6 +235,7 @@ Goblin Sharpshooter
 Goblin Trenches
 Godless Shrine
 Godsire
+Goliath Sphinx
 Granite Gargoyle
 Graven Cairns
 Great Sable Stag
@@ -242,6 +251,7 @@ Gwendlyn Di Corci
 Hallowed Fountain
 Hammerfist Giant
 Hanna, Ship's Navigator
+Harabaz Druid
 Hatching Plans
 Haunting Echoes
 Heartmender
@@ -455,6 +465,7 @@ Quirion Dryad
 Radiant, Archangel
 Rafiq of the Many
 Raging Kavu
+Raging Ravine
 Rakdos Pit Dragon
 Rakka Mar
 Ramosian Sky Marshal
@@ -476,6 +487,7 @@ Rith, the Awakener
 River Merfolk
 Roc of Kher Ridges
 Rockshard Elemental
+Rofellos, Llanowar Emissary
 Rolling Stones
 Rootwater Thief
 Rorix Bladewing
@@ -550,8 +562,11 @@ Stangg
 Stasis
 Steam Vents
 Steely Resolve
+Stifle
 Stillmoon Cavalier
+Stirring Wildwood
 Stomping Ground
+Stoneforge Mystic
 Storm Herd
 Stuffy Doll
 Sun Ce, Young Conquerer
