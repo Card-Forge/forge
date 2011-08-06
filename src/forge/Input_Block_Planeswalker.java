@@ -18,16 +18,17 @@ public class Input_Block_Planeswalker extends Input {
             Command com = GameActionUtil.commands.get(effect);
             com.execute();
         }
-        
         GameActionUtil.executeCardStateEffects();
         
-
         //could add "Reset Blockers" button
         ButtonUtil.enableOnlyOK();
         
         if(currentAttacker == null) AllZone.Display.showMessage("Planeswalker Combat\r\nTo Block, click on your Opponents attacker first , then your blocker(s)");
-        else AllZone.Display.showMessage("Select a creature to block " + currentAttacker.getName() + " ("
-                + currentAttacker.getUniqueNumber() + ") ");
+        else {
+        	String attackerName = currentAttacker.isFaceDown() ? "Morph" : currentAttacker.getName();
+        	AllZone.Display.showMessage("Select a creature to block " + attackerName + " ("
+        			+ currentAttacker.getUniqueNumber() + ") ");
+        }
         
         CombatUtil.showCombat();
     }

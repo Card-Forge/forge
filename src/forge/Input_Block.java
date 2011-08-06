@@ -20,13 +20,15 @@ public class Input_Block extends Input {
         }
         GameActionUtil.executeCardStateEffects();
         
-
         //could add "Reset Blockers" button
         ButtonUtil.enableOnlyOK();
         
         if(currentAttacker == null) AllZone.Display.showMessage("To Block, click on your Opponents attacker first, then your blocker(s)");
-        else AllZone.Display.showMessage("Select a creature to block " + currentAttacker.getName() + " ("
-                + currentAttacker.getUniqueNumber() + ") ");
+        else {
+        	String attackerName = currentAttacker.isFaceDown() ? "Morph" : currentAttacker.getName();
+        	AllZone.Display.showMessage("Select a creature to block " + attackerName + " ("
+        			+ currentAttacker.getUniqueNumber() + ") ");
+        }
         
         CombatUtil.showCombat();
     }
