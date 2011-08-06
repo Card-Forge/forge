@@ -14890,7 +14890,7 @@ public class GameActionUtil {
 		}// execute()
 
 	}; 
-	
+	/*
 	public static Command Kird_Ape                    = new Command() {
 		private static final long serialVersionUID = 3448725650293971110L;
 
@@ -14916,6 +14916,7 @@ public class GameActionUtil {
 			else return false;
 		}
 	};
+	*/
 
 	public static Command Loam_Lion                   = new Command() {
 		private static final long serialVersionUID = -6996623102170747897L;
@@ -21149,7 +21150,7 @@ public class GameActionUtil {
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Vexing_Beetle", Vexing_Beetle);
 		commands.put("Sejiri_Merfolk", Sejiri_Merfolk);
-		commands.put("Kird_Ape", Kird_Ape);
+		//commands.put("Kird_Ape", Kird_Ape);
 		commands.put("Loam_Lion", Loam_Lion);
 		commands.put("Sedge_Troll", Sedge_Troll);
 		commands.put("Hedge_Troll", Hedge_Troll);
