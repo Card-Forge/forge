@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Creature Fox Wizard
 Text:no text
 PT:2/1
-K:Protection:Spirit, Arcane:Protection from Spirits and from Arcane
+K:Protection:Spirit,Arcane:Protection from Spirits and from Arcane
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_riftwalker.jpg
 End
