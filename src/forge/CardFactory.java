@@ -608,6 +608,18 @@ public class CardFactory implements NewConstants {
 
     				return choosables.size() > 0 && super.canPlay();
     			}//canPlay()
+    			
+    			public boolean canPlayAI()
+    			{
+    				if(AllZone.Stack.size() < 1) {
+    					return false;
+    				}
+    				if(CardFactoryUtil.spCounter_MatchSpellAbility(card, AllZone.Stack.peek(),splitTargetingRestrictions, targetType)) {
+    					tgt[0] = AllZone.Stack.peek();
+    					return true;
+    				}
+    				return false;
+    			}
     		};//SpellAbility
     		
     		Input runtime = new Input() {
