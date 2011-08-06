@@ -2,7 +2,7 @@ Name:Salvage
 ManaCost:G
 Types:Sorcery
 Text:no text
-A:SP$Retrieve | Cost$ G | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Put target card from your graveyard on top of your library.
+A:SP$ChangeZone | Cost$ G | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Put target card from your graveyard on top of your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 #SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage.jpg

@@ -2,7 +2,7 @@ Name:Bone Harvest
 ManaCost:2 B
 Types:Instant
 Text:no text
-A:SP$Retrieve | Cost$ 2 B | Destination$ Library | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Put any number of target creature cards from your graveyard on top of your library.
+A:SP$ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Put any number of target creature cards from your graveyard on top of your library.
 K:Draw a card at the beginning of the next turn's upkeep.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True

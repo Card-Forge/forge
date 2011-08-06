@@ -2,7 +2,7 @@ Name:Shadowfeed
 ManaCost:B
 Types:Instant
 Text:no text
-A:SP$Retrieve | Cost$ B | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ YouGainLife/3 | SpellDescription$ Exile target card from a graveyard. You gain 3 life.
+A:SP$ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ YouGainLife/3 | SpellDescription$ Exile target card from a graveyard. You gain 3 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadowfeed.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/86.jpg

@@ -2,7 +2,7 @@ Name:Beckon Apparition
 ManaCost:WB
 Types:Instant
 Text:no text
-A:SP$Retrieve | Cost$ WB | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ MakeToken<>1<>Spirit<>WB 1 1 Spirit<>Controller<>WB<>Creature;Spirit<>1<>1<>Flying | SpellDescription$ Exile target card from a graveyard. Put a 1/1 white and black Spirit creature token with flying onto the battlefield.
+A:SP$ChangeZone | Cost$ WB | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ MakeToken<>1<>Spirit<>WB 1 1 Spirit<>Controller<>WB<>Creature;Spirit<>1<>1<>Flying | SpellDescription$ Exile target card from a graveyard. Put a 1/1 white and black Spirit creature token with flying onto the battlefield.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beckon_apparition.jpg
 SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/82.jpg

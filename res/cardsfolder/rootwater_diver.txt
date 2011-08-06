@@ -3,7 +3,7 @@ ManaCost:U
 Types:Creature Merfolk
 Text:no text
 PT:1/1
-A:AB$Retrieve | Cost$ T Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact | Destination$ Hand | SpellDescription$ Return target artifact card from your graveyard to your hand.
+A:AB$ChangeZone | Cost$ T Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact card from your graveyard to your hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_diver.jpg

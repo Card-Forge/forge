@@ -2,7 +2,7 @@ Name:Argivian Restoration
 ManaCost:2 U U
 Types:Sorcery
 Text:no text
-A:SP$Retrieve | Cost$ 2 U U | Destination$ Battlefield | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SpellDescription$ Return target artifact card from your graveyard to the battlefield.
+A:SP$ChangeZone | Cost$ 2 U U | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SpellDescription$ Return target artifact card from your graveyard to the battlefield.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argivian_restoration.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/34.jpg

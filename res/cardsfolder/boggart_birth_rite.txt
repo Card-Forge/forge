@@ -2,7 +2,7 @@ Name:Boggart Birth Rite
 ManaCost:B
 Types:Tribal Sorcery Goblin
 Text:no text
-A:SP$Retrieve | Cost$ B | Destination$ Hand | TgtPrompt$ Choose target Goblin card in your graveyard | ValidTgts$ Goblin.YouCtrl | SpellDescription$ Return target Goblin card from your graveyard to your hand.
+A:SP$ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target Goblin card in your graveyard | ValidTgts$ Goblin.YouCtrl | SpellDescription$ Return target Goblin card from your graveyard to your hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_birth_rite.jpg

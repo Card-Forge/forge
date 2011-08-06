@@ -2,7 +2,7 @@ Name:Fade from Memory
 ManaCost:B
 Types:Instant
 Text:no text
-A:SP$Retrieve | Cost$ B | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+A:SP$ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 K:Cycling:B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fade_from_memory.jpg

@@ -2,8 +2,8 @@ Name:Mortiphobia
 ManaCost:1 B B
 Types:Enchantment
 Text:no text
-A:AB$Retrieve | Cost$ 1 B Discard<1/Any> | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
-A:AB$Retrieve | Cost$ 1 B Sac<1/CARDNAME> | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+A:AB$ChangeZone | Cost$ 1 B Discard<1/Any> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+A:AB$ChangeZone | Cost$ 1 B Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Mortiphobia.jpg

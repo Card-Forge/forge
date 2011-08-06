@@ -2,7 +2,7 @@ Name:Urborg Uprising
 ManaCost:4 B
 Types:Sorcery
 Text:no text
-A:SP$Retrieve | Cost$ 4 B | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
+A:SP$ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_uprising.jpg

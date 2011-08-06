@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Creature Plant Zombie
 Text:no text
 PT:3/3
-A:AB$Retrieve | Cost$ BG BG | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ YouGainLife/1 | SpellDescription$ Exile target card from a graveyard. You gain 1 life.
+A:AB$ChangeZone | Cost$ BG BG | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ YouGainLife/1 | SpellDescription$ Exile target card from a graveyard. You gain 1 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/creakwood_ghoul.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/34.jpg

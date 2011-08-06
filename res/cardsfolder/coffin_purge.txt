@@ -2,8 +2,8 @@ Name:Coffin Purge
 ManaCost:B
 Types:Instant
 Text:no text
-A:SP$Retrieve | Cost$ B | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
-A:SP$Retrieve | Cost$ B | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | Flashback$ True | CostDesc$ Flashback B | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
+A:SP$ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+A:SP$ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | Flashback$ True | CostDesc$ Flashback B | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coffin_purge.jpg

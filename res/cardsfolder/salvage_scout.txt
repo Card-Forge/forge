@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Scout
 Text:no text
 PT:1/1
-A:AB$Retrieve | Cost$ W Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact | Destination$ Hand | SpellDescription$ Return target artifact card from your graveyard to your hand.
+A:AB$ChangeZone | Cost$ W Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact card from your graveyard to your hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage_scout.jpg

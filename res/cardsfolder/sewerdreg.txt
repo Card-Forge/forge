@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:3/3
 K:Swampwalk
-A:AB$Retrieve | Cost$ Sac<1/CARDNAME> | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+A:AB$ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sewerdreg.jpg
