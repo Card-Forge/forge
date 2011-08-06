@@ -9148,7 +9148,7 @@ public class CardFactory_Creatures {
                 }
             };//SpellAbility
             card.addSpellAbility(ability);
-            ability.setDescription("W, tap: Tap target creature.");
+            ability.setDescription("B, tap: Tap target creature.");
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
             
         }//*************** END ************ END **************************

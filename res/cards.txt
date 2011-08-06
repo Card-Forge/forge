@@ -1,3 +1,19 @@
+Reprisal
+1 W
+Instant
+Destroy target creature with power 4 or greater. It can't be regenerated.
+
+Ali from Cairo
+2 R R
+Creature Human
+Damage that would reduce your life total to less than 1 reduces it to 1 instead.
+0/1
+
+Ivory Tower
+1
+Artifact
+At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus four.
+
 Lavalanche
 X B R G
 Sorcery

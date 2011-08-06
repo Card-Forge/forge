@@ -85,6 +85,7 @@ public class GameActionUtil {
         upkeep_Blaze_Counters();
         upkeep_Dark_Confidant(); // keep this one semi-last
         
+        upkeep_Ivory_Tower();
         upkeep_BlackVice(); // keep this one last, since it happens at the end
         // of the upkeep.
         upkeep_Howling_Mine(); // keep this one even laster, since it would
@@ -5679,6 +5680,32 @@ public class GameActionUtil {
             
         }// for
     }// upkeep_Convalescence()
+    
+    public static void upkeep_Ivory_Tower() {
+        final String player = AllZone.Phase.getActivePlayer();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play,player);
+       
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName("Ivory Tower");
+       
+        Ability ability;
+       for(int i = 0; i < list.size(); i++) {
+         ability = new Ability(list.get(i), "0") {
+           public void resolve() {
+           PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+           int numCards = hand.getCards().length;
+            if( numCards > 4 ) {
+               AllZone.GameAction.getPlayerLife(player).addLife(numCards-4);
+            }
+           }
+         };//Ability
+         ability.setStackDescription("Ivory Tower - " +player+ " gains 1 life for each card > 4");
+
+         AllZone.Stack.add(ability);
+       }//for
+     }//upkeep_Ivory Tower()
+
+    
     
     // Currently we don't determine the difference between beginning and end of
     // upkeep in MTG forge.

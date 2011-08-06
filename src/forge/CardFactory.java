@@ -17565,6 +17565,42 @@ public class CardFactory implements NewConstants {
       } 
       //*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if(cardName.equals("Reprisal")) {
+          final SpellAbility spell = new Spell(card) {
+			private static final long serialVersionUID = 8653455310355884536L;
+
+			public void resolve() {
+          if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
+             AllZone.GameAction.destroy(getTargetCard());
+          }
+         }//resolve
+          };//SpellAbility
+         
+          card.clearSpellAbility();
+          card.addSpellAbility(spell);
+         
+          Input target = new Input() {
+			private static final long serialVersionUID = 4794354831721082791L;
+			public void showMessage() {
+                AllZone.Display.showMessage("Select target Creature to destroy");
+                ButtonUtil.enableOnlyCancel();
+             }
+             public void selectButtonCancel() {
+                stop();
+             }
+             public void selectCard(Card c, PlayerZone zone) {
+                if(zone.is(Constant.Zone.Play) && c.isCreature() && (c.getNetAttack() > 3)) {
+                   spell.setTargetCard(c);
+                   stopSetNext(new Input_PayManaCost(spell));
+                }
+             }
+          };//input
+       
+       spell.setBeforePayMana(target);
+        }//*************** END ************ END **************************
+
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

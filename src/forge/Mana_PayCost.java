@@ -22,7 +22,7 @@ public class Mana_PayCost {
     //note that when the cost is displayed it is backward "2/G 2/R 2/B 2/U 2/W"
     //so you would have to tap W, then U, then B, then R, then G (order matters)
     public Mana_PayCost(String manaCost) {
-        manaPart = split(manaCost);
+    	manaPart = split(manaCost);
     }
     
     public boolean isNeeded(String mana) {
