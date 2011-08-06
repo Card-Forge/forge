@@ -108,7 +108,8 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Dr No 3", "hard", "The Rack, Balance, Propaganda, discard spells");
         
         addToDeckList("Electro 3", "hard", "Stormfront deck, Arashi, the Sky Asunder + Ball Lightning");
-        addToDeckList("Elrond 2", "medium", "RGW Aura Gnarlid, Rabid Wombat and Uril with lots of auras");
+        addToDeckList("Elrond 2", "medium", "RGW Aura deck");
+        addToDeckList("Elrond 3", "medium", "RGW Aura deck");
 //        addToDeckList("En Sabah Nur 2", "medium", "RUB Singleton");
 //        addToDeckList("En Sabah Nur 3", "hard", "UBR Standard Constructed");
         addToDeckList("Endora 2", "medium", "Enchantress deck, enchantments + cards with enchantment effects");
