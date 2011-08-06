@@ -1,0 +1,6 @@
+Name:Regenerate
+ManaCost:1 G
+Types:Instant
+Text:Regenerate target creature.
+SVar:Rarity:Common
+End
