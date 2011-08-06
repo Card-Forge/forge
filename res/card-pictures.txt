@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+elvish_vanguard.jpg				http://www.wizards.com/global/images/magic/general/elvish_vanguard.jpg
 tribal_forcemage.jpg			http://www.wizards.com/global/images/magic/general/tribal_forcemage.jpg
 nirkana_cutthroat.jpg			http://www.wizards.com/global/images/magic/general/nirkana_cutthroat.jpg
 dust_corona.jpg		http://www.wizards.com/global/images/magic/general/dust_corona.jpg

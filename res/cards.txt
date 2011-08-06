@@ -1,3 +1,9 @@
+Elvish Vanguard
+1 G
+Creature Elf
+Whenever another Elf enters the battlefield, put a +1/+1 counter on Elvish Vanguard.
+1/1
+
 Arctic Wolves
 3 G G
 Creature Wolf

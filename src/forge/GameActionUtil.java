@@ -15684,6 +15684,19 @@ public class GameActionUtil {
 			return creatures.size();
 		}
 	};
+	
+	public static void Elvish_Vanguard(Card c) {
+		final Card crd = c;
+
+		Ability ability = new Ability(c, "0") {
+			@Override
+			public void resolve() {
+				crd.addCounter(Counters.P1P1, 1);
+			}
+		};
+		ability.setStackDescription(c.getName() + " - gets a +1/+1 counter.");
+		AllZone.Stack.add(ability);
+	}
 
 
 	// returns all PlayerZones that has at least 1 Glorious Anthem

@@ -59,6 +59,16 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                     AllZone.Stack.add(ability);
             }
             
+            if(c.isCreature() && (c.getType().contains("Elf")) || c.getKeyword().contains("Changeling")) {
+            	CardList list = AllZoneUtil.getPlayerCardsInPlay(c.getController(), "Elvish Vanguard");
+                
+            	//not for the Elvish Vanguard coming into play now
+            	list.remove(c);
+                for(Card var:list) {
+                    GameActionUtil.Elvish_Vanguard(var);
+                }
+            }
+            
             if(c.isLand()) {
                 //System.out.println("A land just came into play: " + c.getName());
                 
