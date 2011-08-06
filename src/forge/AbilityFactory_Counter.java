@@ -5,7 +5,8 @@ import java.util.HashMap;
 
 //Type - Spell or Ability or SpellOrAbility
 //CounterValid - a "valid" expression for types to counter
-//Destination - send countered spell to:
+//SpellTarget - a "valid" expression for targets of the spell to counter
+//Destination - send countered spell to: (only applies to Spells; ignored for Abilities)
 //		-Graveyard
 //		-Exile
 //		-TopDeck
@@ -15,8 +16,8 @@ import java.util.HashMap;
 //ExtraActions - implemented exactly as spCounter used them (can probably be updated to SubAbility/Drawback), then this param is eliminated
 
 //Examples:
-//A:SP$Counter|Cost$1 G|Type$Ability|SpelDescription$Counter target activated ability.
-//A:AB$Counter|Cost$G G|Type$Spell|Destination$Graveyard|CounterValid$Color(Black)|SpellDescription$Counter target black spell.
+//A:SP$Counter|Cost$1 G|Type$Ability|SpellDescription$Counter target activated ability.
+//A:AB$Counter|Cost$G G|Type$Spell|Destination$Graveyard|CounterValid$Color.Black|SpellDescription$Counter target black spell.
 
 public class AbilityFactory_Counter {
 
@@ -114,15 +115,14 @@ public class AbilityFactory_Counter {
 		//copied from spCounter
 		if(matchSpellAbility(sa.getSourceCard(), tgt[0], splitTargetingRestrictions, targetType) 
 				&& AllZone.Stack.contains(tgt[0])
-				&& !tgt[0].getSourceCard().keywordsContain("CARDNAME can't be countered."))
-		{
+				&& !tgt[0].getSourceCard().keywordsContain("CARDNAME can't be countered.")) {
 			SpellAbility tgtSA = tgt[0];
 			AllZone.Stack.remove(tgt[0]);
 
 			System.out.println("Send countered spell to " + destination);
 
-			if(destination.equals("None") || targetType.contains("Ability"))  {
-				//For Ability-targeting counterspells
+			if(tgtSA.isAbility())  {
+				//For Ability-targeted counterspells - do not move it anywhere, even if Destination$ is specified.
 			}
 			else if(destination.equals("Graveyard")) {
 				AllZone.GameAction.moveToGraveyard(tgtSA.getSourceCard());
