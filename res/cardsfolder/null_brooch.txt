@@ -1,0 +1,9 @@
+Name:Null Brooch
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$Counter | Cost$ 2 Discard<0/Hand> | Type$Spell | CounterValid$ Card.nonCreature| Destination$Graveyard |SpellDescription$ Counter target noncreature spell.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/null_brooch.jpg
+End
