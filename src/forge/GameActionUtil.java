@@ -6451,6 +6451,11 @@ public class GameActionUtil {
 	public static void upkeep_Ivory_Tower() {
 		final String player = AllZone.Phase.getActivePlayer();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play,player);
+		CardList hand = AllZoneUtil.getPlayerHand(player);
+		
+		if(hand.size() <= 4) {
+			return;
+		}
 
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Ivory Tower");
