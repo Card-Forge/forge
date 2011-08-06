@@ -747,7 +747,7 @@ public class GameAction {
             if(c.getCounters(Counters.LOYALTY) <= 0) AllZone.GameAction.moveToGraveyard(c);
             
             String subtype = c.getType().get(c.getType().size() - 1);
-            CardList cl = getPlaneswalkerSubtype(list, subtype, c);
+            CardList cl = list.getType(subtype);
             
             if(cl.size() > 1) {
                 for(Card crd:cl) {
@@ -799,6 +799,7 @@ public class GameAction {
         return a;
     }
     
+    /* no longer needed
     public CardList getPlaneswalkerSubtype(CardList search, String subtype, Card planeswalker) {
         CardList list = search;
         final String type = subtype;
@@ -809,7 +810,7 @@ public class GameAction {
         });
         
         return list;
-    }
+    }*/
     
     
     public void sacrificeCreature(String player, SpellAbility sa) {

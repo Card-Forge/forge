@@ -43,7 +43,7 @@ public class Spell_Permanent extends Spell {
         	for (int i=0;i<list.size();i++)
         	{
         		String subtype = c.getType().get(c.getType().size() - 1);
-        		CardList cl = AllZone.GameAction.getPlaneswalkerSubtype(list, subtype, c);
+        		CardList cl = list.getType(subtype);
         		
         		 if(cl.size() > 0) {
                      return false;

@@ -4543,6 +4543,7 @@ public class CardFactory_Sorceries {
 
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Cruel Edict") || cardName.equals("Imperial Edict")) {
             final SpellAbility spell = new Spell(card) {
@@ -4565,6 +4566,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
         
       //*************** START *********** START **************************
         else if(cardName.equals("Rite of Replication")) {
@@ -4887,6 +4889,7 @@ public class CardFactory_Sorceries {
             
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Time Stretch")) {
             final SpellAbility spell = new Spell(card) {
@@ -4904,6 +4907,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
       //*************** START *********** START **************************
         else if(cardName.equals("Time Warp")) {
             final SpellAbility spell = new Spell(card) {
@@ -4918,8 +4922,7 @@ public class CardFactory_Sorceries {
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
             card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
+        }//*************** END ************ END **************************        
         
 
         //*************** START *********** START **************************
@@ -4936,8 +4939,7 @@ public class CardFactory_Sorceries {
             };
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
+        }//*************** END ************ END **************************        
         
 
         //*************** START *********** START **************************
@@ -5104,7 +5106,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
 
-
         //*************** START *********** START **************************
         else if(cardName.equals("Lobotomy")) {
             final SpellAbility spell = new Spell(card) {
@@ -5188,8 +5189,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-        }//*************** END ************ END **************************  
-        
+        }//*************** END ************ END **************************          
         
 
         //*************** START *********** START **************************
@@ -5234,6 +5234,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         if(cardName.equals("Flame Rift")) {
             final SpellAbility spell = new Spell(card) {
@@ -5254,8 +5255,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
-        
+                
         //*************** START *********** START **************************
         else if(cardName.equals("Donate")) {
             final SpellAbility spell = new Spell(card) {
@@ -5331,8 +5331,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
-        
+                
         //*************** START *********** START **************************
         else if(cardName.equals("Bestial Menace")) {
             SpellAbility spell = new Spell(card) {
@@ -5351,6 +5350,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
         
         //********************Start********Start***********************
         else if(cardName.equals("Living Death"))
@@ -5664,8 +5664,7 @@ public class CardFactory_Sorceries {
         } 
         //*************** END ************ END **************************
         
-        
-        
+                
         //*************** START *********** START **************************
         else if(cardName.equals("Braingeyser"))
         {
@@ -5914,8 +5913,7 @@ public class CardFactory_Sorceries {
         }
         //*************** END ************ END **************************
           
-        
-        
+                
         //*************** START *********** START **************************
         else if (cardName.equals("Lavalanche"))
         {
@@ -5975,8 +5973,7 @@ public class CardFactory_Sorceries {
       	  card.addSpellAbility(spell);
         } 
         //*************** END ************ END **************************
-          
-       
+                 
         
         //*************** START *********** START **************************
         else if (cardName.equals("Psychic Drain"))
@@ -6012,6 +6009,7 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }
         //*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Balance"))
@@ -6202,6 +6200,7 @@ public class CardFactory_Sorceries {
 	        card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Summer Bloom"))
         {
@@ -6251,9 +6250,7 @@ public class CardFactory_Sorceries {
        	card.setSVar("PlayMain1", "TRUE");
        } //*************** END ************ END **************************
         
-   
-        
-        
+           
         //*************** START *********** START **************************
         else if(cardName.equals("Explore"))
         {
@@ -6304,6 +6301,7 @@ public class CardFactory_Sorceries {
        	card.setSVar("PlayMain1", "TRUE");
        } //*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Rampant Growth")) {
             SpellAbility spell = new Spell(card) {
@@ -6328,6 +6326,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Nature's Lore") || cardName.equals("Three Visits")) {
             SpellAbility spell = new Spell(card) {
@@ -6355,8 +6354,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
-        
+                
         //*************** START *********** START **************************
         else if(cardName.equals("Hellion Eruption")) {
             final SpellAbility spell = new Spell(card) {
@@ -6426,7 +6424,6 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
 
         
         //*************** START *********** START **************************
@@ -6488,6 +6485,7 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if (cardName.equals("Perish the Thought")) {
         	final SpellAbility spell = new Spell(card){
@@ -6534,6 +6532,7 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if (cardName.equals("Burning Inquiry")) {
         	final SpellAbility spell = new Spell(card){
@@ -6561,6 +6560,7 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Brood Birthing")) {
         	final SpellAbility spell = new Spell(card)
@@ -6587,7 +6587,6 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-  
         
         //*************** START *********** START **************************
         else if(cardName.equals("Growth Spasm")) {
@@ -6752,6 +6751,7 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Acidic Soil")) {
