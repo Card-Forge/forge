@@ -22144,7 +22144,8 @@ public class CardFactory implements NewConstants {
 						PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
 						PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
 						play.remove(c);
-						lib.add(c, 1); //add second from top
+						if (!c.isToken())
+							lib.add(c, 1); //add second from top
 						PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
 						life.addLife(3);
 					}
