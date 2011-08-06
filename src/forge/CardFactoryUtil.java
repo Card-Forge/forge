@@ -3115,13 +3115,13 @@ public class CardFactoryUtil {
 		
 		return neededDamage;
     }
-    
+    /*
     public static void checkEquipmentOnControllerChange(PlayerZone from, PlayerZone to, Card c)
     {
     	if (c.isEquipped() && !from.equals(to))
     		c.unEquipAllCards();
     }
-    
+    */
     //may return null
     static public Card getRandomCard(CardList list) {
         if(list.size() == 0) return null;

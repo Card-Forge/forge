@@ -7766,7 +7766,6 @@ public class CardFactory_Creatures {
                         from.remove(c);
                         
                         PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
-                        CardFactoryUtil.checkEquipmentOnControllerChange(from, to, c);
                         to.add(c);
                         
                         ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
@@ -16834,14 +16833,17 @@ public class CardFactory_Creatures {
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
                     Card[] handChoices = hand.getCards();
-                    choice = CardUtil.getRandom(handChoices);
-                    handChoices[0] = choice;
-                    for(int i = 1; i < handChoices.length; i++) {
-                        handChoices[i] = null;
+                    if (handChoices.length > 0)
+                    {
+	                    choice = CardUtil.getRandom(handChoices);
+	                    handChoices[0] = choice;
+	                    for(int i = 1; i < handChoices.length; i++) {
+	                        handChoices[i] = null;
+	                    }
+	                    AllZone.Display.getChoice("Random card", handChoices);
+	                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(
+	                            CardUtil.getConvertedManaCost(choice.getManaCost()));
                     }
-                    AllZone.Display.getChoice("Random card", handChoices);
-                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(
-                            CardUtil.getConvertedManaCost(choice.getManaCost()));
                 }//resolve()
             };
             Command intoPlay = new Command() {

@@ -4795,8 +4795,6 @@ public class CardFactory implements NewConstants {
                     PlayerZone from = AllZone.getZone(c);
                     PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
                     
-                    CardFactoryUtil.checkEquipmentOnControllerChange(from, to, c);
-                    
                     from.remove(c);
                     to.add(c);
                     
@@ -6396,12 +6394,9 @@ public class CardFactory implements NewConstants {
                         temp[0] = play;
                         orig[0].remove(getTargetCard());
                         
-                        CardFactoryUtil.checkEquipmentOnControllerChange(orig[0], temp[0], getTargetCard());
-                        
                         ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
                         ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
                         
-
                         getTargetCard().untap();
                         getTargetCard().addExtrinsicKeyword("Haste");
                         
@@ -16114,7 +16109,6 @@ public class CardFactory implements NewConstants {
                             
                             PlayerZone to = AllZone.getZone(Constant.Zone.Play,
                                     AllZone.GameAction.getOpponent(card.getController()));
-                            CardFactoryUtil.checkEquipmentOnControllerChange(from, to, c);
                             to.add(c);
                             
                             ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
