@@ -1,5 +1,7 @@
 package forge;
 
+import java.util.HashMap;
+
 //import java.util.*;
 
 //handles "until end of turn" and "at end of turn" commands from cards
@@ -18,6 +20,12 @@ public class EndOfTurn implements java.io.Serializable
   public void executeAt()
   {
 	  AllZone.GameAction.checkWheneverKeyword(AllZone.CardFactory.HumanNullCard,"BeginningOfEndStep",null);
+	  
+	//Run Triggers
+  	HashMap<String,Object> runParams = new HashMap<String,Object>();
+  	runParams.put("Phase", Constant.Phase.End_Of_Turn);
+  	runParams.put("Player", AllZone.Phase.getPlayerTurn());
+  	AllZone.TriggerHandler.runTrigger("BeginningOfPhase", runParams);
 	  
     //Pyrohemia and Pestilence
     CardList all = AllZoneUtil.getCardsInPlay();
@@ -190,6 +198,11 @@ public class EndOfTurn implements java.io.Serializable
     	if(c.getCreatureAttackedThisTurn()) c.setCreatureAttackedThisTurn(false);
     }
     execute(at);
+    
+	//Run triggers
+	//HashMap<String,Object> runParams = new HashMap<String,Object>();
+	//runParams.put("Phase", Constant.Phase.End_Of_Turn);
+	AllZone.TriggerHandler.runTrigger("EndOfPhase", runParams);
     
   }//executeAt()
 

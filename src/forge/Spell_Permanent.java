@@ -211,7 +211,6 @@ public class Spell_Permanent extends Spell {
     @Override
     public void resolve() {
         Card c = getSourceCard();
-        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-        play.add(c);
+        AllZone.GameAction.moveToPlay(c);
     }
 }

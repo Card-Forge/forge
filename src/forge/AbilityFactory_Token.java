@@ -14,6 +14,8 @@ public class AbilityFactory_Token extends AbilityFactory {
 	private String tokenPower;
 	private String tokenToughness;
 	private String tokenImage;
+	private boolean tokenTapped;
+	private boolean tokenAttacking;
     
 	public AbilityFactory_Token(final AbilityFactory af) {
 		AF = af;
@@ -49,6 +51,21 @@ public class AbilityFactory_Token extends AbilityFactory {
 		}
 		else {
 			image = "";
+		}
+		
+		if(mapParams.containsKey("TokenTapped")) {
+			tokenTapped = mapParams.get("TokenTapped").equals("True");
+		}
+		else
+		{
+			tokenTapped = false;
+		}
+		if(mapParams.containsKey("TokenAttacking")) {
+			tokenAttacking = mapParams.get("TokenAttacking").equals("True");
+		}
+		else
+		{
+			tokenAttacking = false;
 		}
 		
 		tokenAmount = numTokens;
@@ -269,7 +286,19 @@ public class AbilityFactory_Token extends AbilityFactory {
 		}
 		
 		for(int i=0;i<finalAmount;i++) {
-			CardFactoryUtil.makeToken(tokenName, imageName, controller, cost, tokenTypes, finalPower, finalToughness, tokenKeywords);
+			CardList tokens = CardFactoryUtil.makeToken(tokenName, imageName, controller, cost, tokenTypes, finalPower, finalToughness, tokenKeywords);
+			
+			for(Card c : tokens)
+			{
+				if(tokenTapped)
+				{
+					c.tap();
+				}
+				if(tokenAttacking)
+				{
+					AllZone.Combat.addAttacker(c);
+				}
+			}
 		}
 		
 		if (AF.hasSubAbility()){

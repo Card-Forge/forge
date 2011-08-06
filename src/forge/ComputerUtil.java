@@ -2,6 +2,7 @@ package forge;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 //import java.util.HashMap;
 //import java.util.Map;
 
@@ -71,6 +72,14 @@ public class ComputerUtil
 		  payManaCost(sa);
 		  
 		  AllZone.Stack.add(sa);
+		  
+		  if(sa.isSpell())
+		  {
+			  //Run triggers
+			  HashMap<String,Object> runParams = new HashMap<String,Object>();
+			  runParams.put("CastSA", sa);
+			  AllZone.TriggerHandler.runTrigger("SpellCast", runParams);
+		  }
 	  }
   }
   

@@ -348,6 +348,14 @@ public class MagicStack extends MyObservable {
 				}
 
 			}
+			
+			if(sp.isSpell())
+	    	{
+	    		//Run trigger
+	    		HashMap<String,Object> runParams = new HashMap<String,Object>();
+	    		runParams.put("CastSA", sp);
+	    		AllZone.TriggerHandler.runTrigger("SpellCast", runParams);
+	    	}
 		}
 		
 		if(sp instanceof Spell_Permanent && sp.getSourceCard().getName().equals("Mana Vortex")) {

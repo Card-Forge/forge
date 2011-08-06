@@ -8650,6 +8650,8 @@ public class CardFactory implements NewConstants {
         c.setIntrinsicAbilities(sim.getIntrinsicAbilities());
         c.setCurSetCode(sim.getCurSetCode());
         c.setImageFilename(sim.getImageFilename());
+        c.setTriggers(sim.getTriggers());
+        
         
         return c;
     }// copyStats()

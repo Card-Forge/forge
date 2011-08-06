@@ -35,9 +35,13 @@ public class GameAction {
     
     public Card moveTo(PlayerZone zone, Card c) {
     	// Remove card from Current Zone, if it has one
+    	String prevZone = "";
         PlayerZone p = AllZone.getZone(c);
         if(p != null)
+        {
+        	prevZone = p.getZoneName();
         	p.remove(c);
+        }
         
         // Store if this card was Unearthed to reenable flag after the Copy is created
         boolean unearthed = c.isUnearthed();
@@ -50,6 +54,14 @@ public class GameAction {
         c.setUnearthed(unearthed);
         
         zone.add(c);
+        
+        //Run triggers        
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("MovedCard",c);
+        runParams.put("Origin", prevZone);
+        runParams.put("Destination", zone.getZoneName());
+        AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
+        
         return c;
     }
     
@@ -2197,6 +2209,8 @@ public class GameAction {
         AllZone.HumanPlayer.clearHandSizeOperations();
         AllZone.ComputerPlayer.clearHandSizeOperations();
         
+        AllZone.TriggerHandler.clearRegistered();
+        
 
         {//re-number cards just so their unique numbers are low, just for user friendliness
             CardFactory c = AllZone.CardFactory;
@@ -2224,7 +2238,11 @@ public class GameAction {
                 //}
                 
                 AllZone.Human_Library.add(card);
-                
+             
+                for(Trigger trig : card.getTriggers())
+                {
+                	AllZone.TriggerHandler.registerTrigger(trig);
+                }
             }
             
             ArrayList<String> RAICards = new ArrayList<String>();
@@ -3098,6 +3116,7 @@ public class GameAction {
     
     public void playSpellAbility(SpellAbility sa) {
     	sa.setActivatingPlayer(AllZone.HumanPlayer);
+    	
     	if (sa.getPayCosts() != null){
     		Target_Selection ts = new Target_Selection(sa.getTarget(), sa);    		
     		Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);

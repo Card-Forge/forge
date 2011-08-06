@@ -165,6 +165,12 @@ public class ReadCard implements Runnable, NewConstants {
             		c.addIntrinsicAbility(t);
             	}
             	
+            	else if (s.startsWith("T:"))
+            	{
+            		String t = s.substring(2);
+            		c.addTrigger(TriggerHandler.parseTrigger(t, c));
+            	}
+            	
             	else if (s.startsWith("SetInfo:"))
             	{
             		String t = s.substring(8);

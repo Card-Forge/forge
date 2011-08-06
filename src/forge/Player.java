@@ -4,6 +4,7 @@ package forge;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -160,8 +161,15 @@ public abstract class Player extends MyObservable{
 			//Rule 118.4
 			//this is for players being able to pay 0 life
 			//nothing to do
-		}
+		}		
 		else System.out.println("Player - trying to lose positive life");
+		
+		//Run triggers
+    	HashMap<String,Object> runParams = new HashMap<String,Object>();
+    	runParams.put("Player", this);
+    	runParams.put("LifeAmount", toLose);
+    	AllZone.TriggerHandler.runTrigger("LifeLost", runParams);
+		
 		return newLifeSet;
 	}
 	
@@ -239,6 +247,13 @@ public abstract class Player extends MyObservable{
         if ( damageToDo > 0 ) {
 	        GameActionUtil.executeDamageDealingEffects(source, damageToDo);
 	        GameActionUtil.executeDamageToPlayerEffects(this, source, damageToDo);
+	        
+	        //Run triggers
+	        HashMap<String,Object> runParams = new HashMap<String,Object>();
+	        runParams.put("DamageSource", source);
+	        runParams.put("DamageTarget",this);
+	        
+	        AllZone.TriggerHandler.runTrigger("DamageDone", runParams);
         }
 	}
 	

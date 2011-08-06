@@ -34,6 +34,7 @@ public class AllZone implements NewConstants {
     public static final StaticEffects        	 StaticEffects      = new StaticEffects();
     public static final GameInfo				 GameInfo 			= new GameInfo();
     
+    public static final TriggerHandler			 TriggerHandler		= new TriggerHandler();
 
     //initialized at Runtime since it has to be the last object constructed
 
@@ -83,6 +84,7 @@ public class AllZone implements NewConstants {
 		map.put(Constant.Zone.Command 			+ AllZone.ComputerPlayer, Computer_Command);
 		
 		map.put(Constant.Zone.Stack				+ null					, Stack_Zone);
+		
     }
     
     public static PlayerZone getZone(Card c)

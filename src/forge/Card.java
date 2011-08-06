@@ -20,6 +20,7 @@ public class Card extends MyObservable {
     
     //private Collection keyword   = new TreeSet();
     //private ArrayList<String> keyword = new ArrayList<String>();
+    private ArrayList<Trigger>			triggers						= new ArrayList<Trigger>();
     private ArrayList<String>			 intrinsicAbility				   = new ArrayList<String>();
     private ArrayList<String>            intrinsicKeyword                  = new ArrayList<String>();
     private ArrayList<String>            extrinsicKeyword                  = new ArrayList<String>();
@@ -173,7 +174,26 @@ public class Card extends MyObservable {
     
     private int                          abilityTurnUsed;                                                       //What turn did this card last use this ability?
     private int                          abilityUsed;                                                           //How many times has this ability been used?
-                                                                                                                 
+    
+    public void addTrigger(Trigger t)
+    {
+    	triggers.add(t);
+    }
+    
+    public ArrayList<Trigger> getTriggers()
+    {
+    	return triggers;
+    }
+    
+    public void setTriggers(ArrayList<Trigger> trigs)
+    {
+    	triggers = trigs;
+    	for(Trigger t : triggers)
+    	{
+    		t.setHostCard(this);
+    	}
+    }
+                                                                                                                     
     public void setAbilityTurnUsed(int i) {
         abilityTurnUsed = i;
     }
@@ -400,6 +420,7 @@ public class Card extends MyObservable {
         } else {
             counters.put(counterName, Integer.valueOf(multiplier * n));
         }
+        System.out.println(counters.get(Counters.QUEST));
         
         if (counterName.equals(Counters.P1P1) || counterName.equals(Counters.M1M1)){
         	// +1/+1 counters should erase -1/-1 counters
@@ -911,6 +932,7 @@ public class Card extends MyObservable {
             // Give spellText line breaks for easier reading
             sb.append(s.replaceAll("\\\\r\\\\n", "\r\n"));
             
+
             // NOTE:
             if (sb.toString().contains(" (NOTE: ")) {
                 sb.insert(sb.indexOf("(NOTE: "), "\r\n");
@@ -919,6 +941,12 @@ public class Card extends MyObservable {
                 sb.append("\r\n");
             }
             
+            // Triggered abilities
+            for(Trigger trig : triggers)
+            {
+            	System.out.println("Adding triggerdesc");
+            	sb.append(trig.getMapParams().get("TriggerDescription").replace("CARDNAME", getName()) + "\r\n");
+            }
             
             // Add SpellAbilities
             SpellAbility[] sa = getSpellAbility();
@@ -2491,9 +2519,9 @@ public class Card extends MyObservable {
     	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
         if (Restriction.equals("False")) return false;
-
+        
             String incR[] = Restriction.split("\\."); // Inclusive restrictions are Card types
-            
+        
             if (incR[0].equals("Spell") && isType("Land"))
             	return false;
             if (incR[0].equals("Permanent") && (isType("Instant") || isType("Sorcery")))
@@ -3093,6 +3121,13 @@ public class Card extends MyObservable {
         	wither = true;
         
         GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
+        
+        //Run triggers
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("DamageSource", source);
+        runParams.put("DamageTarget",this);
+        
+        AllZone.TriggerHandler.runTrigger("DamageDone", runParams);
         
         if(AllZoneUtil.isCardInPlay(this) && wither) addCounterFromNonEffect(Counters.M1M1, damageToAdd);
         if(AllZoneUtil.isCardInPlay(this) && !wither) damage += damageToAdd;
