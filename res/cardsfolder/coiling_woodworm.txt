@@ -1,0 +1,9 @@
+Name:Coiling Woodworm
+ManaCost:2 G
+Types:Creature Insect Worm
+Text:no text
+PT:*/1
+K:stSetPT:Count$Valid Forest:1:Coiling Woodworm's power is equal to the number of Forests on the battlefield.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coiling_woodworm.jpg
+End

@@ -1,0 +1,10 @@
+Name:Wilderness Elemental
+ManaCost:1 R G
+Types:Creature Elemental
+Text:no text
+PT:*/3
+K:Trample
+K:stSetPT:Count$Valid Land.nonBasic+YouDontCtrl:3:CARDNAME's power is equal to the number of nonbasic lands your opponents control.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wilderness_elemental.jpg
+End
