@@ -646,9 +646,7 @@ public abstract class Player extends MyObservable{
     					sa.getSourceCard().getController()+" loses 5 life.");
     			AllZone.Stack.add(ability);
     		}
-    	} 
-    	
-        AllZone.GameAction.discard_megrim(c);
+    	}
         
         // necro disrupts madness
         if(AllZoneUtil.getPlayerCardsInPlay(c.getOwner(), "Necropotence").size() > 0) {	

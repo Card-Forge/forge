@@ -339,30 +339,6 @@ public class GameAction {
     		c.setCounter(Counters.P1P1, 2, false);
     }
     
-    public void discard_megrim(Card c) {
-        /* 
-         * Whenever an opponent discards a card, Megrim deals 2 damage to that player.
-        */
-    	final Player owner = c.getOwner();  //discarded card owner
-        final Player opponent = owner.getOpponent();  //check this for Megrim
-        CardList megrims = AllZoneUtil.getPlayerCardsInPlay(opponent, "Megrim");
-        for(Card megrim:megrims) {
-        	final Card thisMegrim = megrim;
-        	final Ability ability = new Ability(megrim, "0") {
-        		@Override
-        		public void resolve() {
-        			owner.addDamage(2, thisMegrim);
-        		}
-        	};
-        	
-        	StringBuilder sb = new StringBuilder();
-        	sb.append(megrim.getName()).append(" - deals 2 damage to ").append(owner);
-        	ability.setStackDescription(sb.toString());
-        	
-        	AllZone.Stack.add(ability);
-        }
-    }
-    
     public void discard_madness(Card c) {
     	// Whenever a card with madness is discarded, you may cast it for it's madness cost
     	if (!c.hasMadness())
