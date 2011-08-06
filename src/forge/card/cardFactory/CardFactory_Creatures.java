@@ -4221,46 +4221,15 @@ public class CardFactory_Creatures {
         		|| cardName.equals("Krakilin") || cardName.equals("Ivy Elemental") || cardName.equals("Lightning Serpent")) { 
         	
             SpellAbility spell = new Spell_Permanent(card) {
-                private static final long serialVersionUID = -11489323313L;
-                
-                @Override
+				private static final long serialVersionUID = 7708945715867177172L;
+
+				@Override
                 public boolean canPlayAI() {
                     return super.canPlay() && 4 <= ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(card.getManaCost());
                 }
             };
             card.clearFirstSpellAbility();
             card.addFirstSpellAbility(spell);
-            
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-        	        getTargetPlayer().loseLife(card.getCounters(Counters.P1P1),card);
-                }//resolve()
-            };
-  
-            Command intoPlay = new Command() {
-                
-                private static final long serialVersionUID = 2559021594L;
-                
-                public void execute() {
-                	int XCounters = card.getXManaCostPaid();
-                	if(card.getName().equals("Lightning Serpent")) card.addCounter(Counters.P1P0, XCounters);
-                	else card.addCounter(Counters.P1P1, XCounters);
-                	if(card.getName().equals("Maga, Traitor to Mortals")) {
-                		StringBuilder sb = new StringBuilder();
-                		sb.append(ability.getTargetPlayer()).append(" - loses life equal to the number of +1/+1 counters on ").append(card.getName());
-                		ability.setStackDescription(sb.toString());
-                        
-                        if(card.getController() == AllZone.HumanPlayer) AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
-                        else {
-                        	ability.setTargetPlayer(AllZone.HumanPlayer);
-                        	AllZone.Stack.add(ability);
-                        }
-                	} 
-
-                }//execute()
-            };//Command
-            card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
         
