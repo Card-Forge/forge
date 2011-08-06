@@ -472,7 +472,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
             		fileName = "BoxIcon.png";
             		icon = getIcon(fileName);
             		JOptionPane.showMessageDialog(null, sb.toString(), "Quest Rewards for " +qa.getName() ,  JOptionPane.INFORMATION_MESSAGE, icon);
-            	}
+            	}/* 
             	else if(quest.getDifficultyIndex() == 4) {
                     Card c = AllZone.CardFactory.getCard(quest.addRandomRare(), AllZone.HumanPlayer);
                     c.setCurSetCode(c.getMostRecentSet());
@@ -480,7 +480,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
                 	icon = getCardIcon(fileName);
                     
                     JOptionPane.showMessageDialog(null, "", "You have won a random rare for winning against a very hard deck.", JOptionPane.INFORMATION_MESSAGE, icon);
-                }
+                }*/
             	
             }
             else
