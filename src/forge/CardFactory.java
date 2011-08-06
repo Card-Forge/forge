@@ -7325,6 +7325,7 @@ public class CardFactory implements NewConstants {
                             card[0].setBaseDefense(oldDefense[0]);
                             
                             card[0].removeType("Creature");
+                            card[0].unEquipAllCards();
                         }
                     };
                     
