@@ -5049,6 +5049,7 @@ res/cardsfolder/repentant_vampire.txt -text svneol=native#text/plain
 res/cardsfolder/reprisal.txt -text svneol=native#text/plain
 res/cardsfolder/repulse.txt -text svneol=native#text/plain
 res/cardsfolder/rescind.txt -text svneol=native#text/plain
+res/cardsfolder/rescue.txt -text svneol=native#text/plain
 res/cardsfolder/research_the_deep.txt -text svneol=native#text/plain
 res/cardsfolder/reset.txt -text svneol=native#text/plain
 res/cardsfolder/resilient_wanderer.txt -text svneol=native#text/plain
