@@ -2,7 +2,7 @@ Name:Enrage
 ManaCost:X R
 Types:Instant
 Text:no text
-K:spPumpTgt:+X/+0:Target creature gets +X/+0 until end of turn.
+A:SP$Pump | Cost$ X R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enrage.jpg
