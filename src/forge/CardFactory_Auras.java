@@ -5506,7 +5506,7 @@ class CardFactory_Auras {
 		         if (card.isEnchanting())
 		         {
 			          Card crd = card.getEnchanting().get(0);
-			          crd.addExtrinsicKeyword("This card doesn't untap during its controller's untap step.");
+			          crd.addExtrinsicKeyword("This card doesn't untap during your untap step.");
 		         }
 		      }//execute()
 		  };//Command
@@ -5521,7 +5521,7 @@ class CardFactory_Auras {
 		         if (card.isEnchanting())
 		         {
 		            Card crd = card.getEnchanting().get(0);
-		            crd.removeExtrinsicKeyword("This card doesn't untap during its controller's untap step.");
+		            crd.removeExtrinsicKeyword("This card doesn't untap during your untap step.");
 		         }
 		     
 		      }//execute()

@@ -8828,7 +8828,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
     
     //*************** START *********** START **************************
-    if (cardName.equals("Soulscour") )
+    else if (cardName.equals("Soulscour") )
     {
        SpellAbility spell = new Spell(card)
        {
@@ -8919,7 +8919,7 @@ public class CardFactory implements NewConstants {
 
 
 //*************** START *********** START **************************
-	if (cardName.equals("Wrath of God") || cardName.equals("Damnation"))
+    else if (cardName.equals("Wrath of God") || cardName.equals("Damnation"))
 	{
 		SpellAbility spell = new Spell(card)
 		{
@@ -8934,8 +8934,9 @@ public class CardFactory implements NewConstants {
 				for (int i = 0; i < all.size(); i++)
 				{
 					Card c = all.get(i);
-					if (c.isCreature())
+					if (c.isCreature()) {
 						AllZone.GameAction.destroyNoRegeneration(c);
+					}
 				}
 			}// resolve()
 
@@ -8957,7 +8958,7 @@ public class CardFactory implements NewConstants {
 	}// *************** END ************ END **************************
 	
 	//*************** START *********** START **************************
-	if (cardName.equals("Day of Judgment"))
+	else if (cardName.equals("Day of Judgment"))
 	{
 		SpellAbility spell = new Spell(card)
 		{
@@ -8998,7 +8999,7 @@ public class CardFactory implements NewConstants {
 	
 	
 	//*************** START *********** START **************************
-	if (cardName.equals("Planar Cleansing") )
+	else if (cardName.equals("Planar Cleansing") )
 	{
 		SpellAbility spell = new Spell(card)
 		{
@@ -9037,7 +9038,7 @@ public class CardFactory implements NewConstants {
 	}// *************** END ************ END **************************
 	
 	//*************** START *********** START **************************
-	if (cardName.equals("Tranquility") || cardName.equals("Tempest of Light") || cardName.equals("Cleanfall"))
+	else if (cardName.equals("Tranquility") || cardName.equals("Tempest of Light") || cardName.equals("Cleanfall"))
 	{
 		SpellAbility spell = new Spell(card)
 		{
@@ -9058,7 +9059,7 @@ public class CardFactory implements NewConstants {
 						AllZone.GameAction.destroy(c);
 					
 				}	
-					
+				
 			}// resolve()
 
 			public boolean canPlayAI()
@@ -9083,7 +9084,7 @@ public class CardFactory implements NewConstants {
 	}// *************** END ************ END **************************
 	
 	//*************** START *********** START **************************
-	if (cardName.equals("Hush"))
+	else if (cardName.equals("Hush"))
 	{
 		SpellAbility spell = new Spell(card)
 		{
@@ -10241,7 +10242,7 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
     
-    if (cardName.equals("Lockjaw Snapper"))
+    else if (cardName.equals("Lockjaw Snapper"))
     {
     	
     	final Ability ability = new Ability(card, "0")
@@ -10661,7 +10662,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
     
     //*************** START *********** START **************************
-    if (cardName.equals("Think Twice"))
+    else if (cardName.equals("Think Twice"))
     {
     	SpellAbility spell = new Spell(card)
     	{
@@ -13695,6 +13696,12 @@ public class CardFactory implements NewConstants {
        public boolean canPlayAI()
         {
     	  CardList humanPlay = new CardList(AllZone.Human_Play.getCards()); 
+    	  humanPlay = humanPlay.filter(new CardListFilter()
+    	  {
+			public boolean addCard(Card c) {
+				return c.isCreature() && CardFactoryUtil.canTarget(card, c);
+			}  
+    	  });
     	  if (humanPlay.size() > 0)
     		  setTargetCard(CardFactoryUtil.AI_getBestCreature(humanPlay));
           return ((AllZone.Computer_Hand.size() > 2)&&(getTargetCard() != null)) ;

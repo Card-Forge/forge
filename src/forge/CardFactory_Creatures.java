@@ -15511,7 +15511,7 @@ public class CardFactory_Creatures {
 	      }//*************** END ************ END **************************
 	      
 	      //*************** START *********** START **************************
-	      if(cardName.equals("Stern Judge"))
+	      else if(cardName.equals("Stern Judge"))
 	      {
 	        final Ability_Tap ability = new Ability_Tap(card)
 	        {
@@ -15547,7 +15547,7 @@ public class CardFactory_Creatures {
 
 
 	      //*************** START *********** START **************************
-	      if(cardName.equals("Cackling Imp") || cardName.equals("Blightspeaker"))
+	      else if(cardName.equals("Cackling Imp") || cardName.equals("Blightspeaker"))
 	      {
 	        final Ability_Tap ability = new Ability_Tap(card)
 	        {
@@ -15575,7 +15575,7 @@ public class CardFactory_Creatures {
 
 
 	      //*************** START *********** START **************************
-	      if(cardName.equals("Thought Courier"))
+	      else if(cardName.equals("Thought Courier"))
 	      {
 	        final Ability_Tap ability = new Ability_Tap(card)
 	        {
@@ -15592,6 +15592,56 @@ public class CardFactory_Creatures {
 	        ability.setStackDescription("Thought Courier - draw a card, then discard a card.");
 	        ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
 	      }//*************** END ************ END **************************
+	      
+	    //*************** START *********** START **************************
+		    else if(cardName.equals("Elvish Hunter"))
+		    {
+		      final SpellAbility ability = new Ability_Tap(card, "1 G")
+		      {
+				private static final long serialVersionUID = -560200335562416099L;
+				public boolean canPlayAI()
+		        {
+		          if(CardFactoryUtil.AI_doesCreatureAttack(card))
+		            return false;
+
+		          return (getCreature().size() != 0);
+		        }
+		        public void chooseTargetAI()
+		        {
+		          card.tap();
+		          Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
+		          setTargetCard(target);
+		        }
+		        CardList getCreature()
+		        {
+		          CardList list = new CardList(AllZone.Human_Play.getCards());
+		          list = list.filter(new CardListFilter()
+		          {
+		            public boolean addCard(Card c)
+		            {
+		              return c.isCreature() && (! c.getKeyword().contains("This card doesn't untap during your next untap step.")) && 
+		              CardFactoryUtil.canTarget(card, c) && c.isTapped();
+		            }
+		          });
+		          list.remove(card);
+		          return list;
+		        }//getCreature()
+		        public void resolve()
+		        {
+		          if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
+		          {
+		            final Card[] creature = new Card[1];
+		            creature[0] = getTargetCard();
+		            creature[0].addExtrinsicKeyword("This card doesn't untap during your next untap step.");
+		          }//if (card is in play)
+		        }//resolve()
+		      };//SpellAbility
+		      card.addSpellAbility(ability);
+		      ability.setDescription("1 G, tap: Target creature doesn't untap during its controller's next untap step.");
+
+		      ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+		    }//*************** END ************ END **************************
+
 
 	      	    
 	      // Cards with Cycling abilities

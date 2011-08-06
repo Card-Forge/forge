@@ -947,11 +947,8 @@ public class GameActionUtil
 				{
 					crd.removeExtrinsicKeyword("Lifelink");
 				}
-
 			}
-
 		}
-
 	}
 
 	public static boolean isRafiqInPlay(String player)
@@ -1111,7 +1108,6 @@ public class GameActionUtil
 			return true;
 	}
 	
-	
 	//***CREATURES START HERE***
 	
 	public static void executeDestroyCreatureCardEffects(Card c, Card destroyed)
@@ -1129,8 +1125,11 @@ public class GameActionUtil
 				destroyCreature_Fecundity(c, destroyed);
 			else if (c.getName().equals("Moonlit Wake"))
 				destroyCreature_Moonlit_Wake(c, destroyed);
-			else if (c.getName().equals("Proper Burial"))
+			else if (c.getName().equals("Proper Burial") && destroyed.getController().equals(c.getController()))
 				destroyCreature_Proper_Burial(c, destroyed);
+			else if (c.getName().equals("Sek'Kuar, Deathkeeper") && !destroyed.isToken() && destroyed.getController().equals(c.getController()) && 
+				     !destroyed.getName().equals(c.getName()))
+				destroyCreature_SekKuar(c, destroyed);
 		//}
 	}
 	
@@ -1245,6 +1244,41 @@ public class GameActionUtil
 			}
 		};
 		ability.setStackDescription("Proper Burial - " + c.getController() +" gains " + destroyed.getNetDefense() +" life.");
+		AllZone.Stack.add(ability);
+	}
+	
+	private static void destroyCreature_SekKuar(Card c, Card destroyed)
+	{
+		final Card crd = c;
+		
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				Card c = new Card();
+
+				c.setOwner(crd.getController());
+				c.setController(crd.getController());
+
+				c.setName("Graveborn");
+				c.setImageName("BR 3 1 Graveborn");
+				c.setManaCost("B R");
+				c.setToken(true);
+
+				c.addType("Creature");
+				c.addType("Graveborn");
+
+				c.addIntrinsicKeyword("Haste");
+				
+				c.setBaseAttack(3);
+				c.setBaseDefense(1);
+
+				
+				PlayerZone play = AllZone.getZone(Constant.Zone.Play,crd.getController());
+				play.add(c);
+			}
+		};
+		ability.setStackDescription("Sek'Kuar, Deathkeeper - put a 3/1 black and red Graveborn creature token with haste onto the battlefield.");
 		AllZone.Stack.add(ability);
 	}
 	

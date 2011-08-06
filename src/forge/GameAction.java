@@ -524,7 +524,7 @@ private Card getCurrentCard(int ID)
 			ArrayList<String> keywords = c.getKeyword();
 			for (String kw : keywords)
 			{
-				if (kw.startsWith("Whenever") && kw.contains(" put into a graveyard from the battlefield,"))
+				if (kw.startsWith("Whenever ") && kw.contains(" put into a graveyard from the battlefield,"))
 					return true;
 			}
 			return false;
