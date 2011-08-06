@@ -1,0 +1,10 @@
+Name:Dark Privilege
+ManaCost:1 B
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+1.
+K:Enchant creature
+K:enPump:+1/+1
+A:AB$Regenerate | Cost$ Sac<1/Creature> | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_privilege.jpg
+End
