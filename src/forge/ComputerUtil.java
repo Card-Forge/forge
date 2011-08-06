@@ -165,58 +165,62 @@ public class ComputerUtil
     spellAbility.toArray(sa);
     return sa;
   }
+  
   static public boolean canPlay(SpellAbility sa)
   {
-    return sa.canPlayAI() && canPayCost(sa);
+	  return sa.canPlayAI() && canPayCost(sa);
   }
+  
   static public boolean canPayCost(SpellAbility sa)
   {
 	  Card card = sa.getSourceCard();
-    CardList land = getAvailableMana();
-   
-    if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
-    {
-       land.remove(sa.getSourceCard());
-    }
- // Beached - Delete old
-    String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
-    
-    ManaCost cost = new ManaCost(mana);
-    
-    // Tack xMana Payments into mana here if X is a set value
-    if (sa.getPayCosts() != null && cost.xcounter > 0){
-    	String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X"; 
-    	// For Count$xPaid set PayX in the AFs then use that here
-    	// Else calculate it as appropriate.
-		int manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.xcounter;
-		cost.increaseColorlessMana(manaToAdd);
-    }
+	  CardList land = getAvailableMana();
 
-    cost = AllZone.GameAction.getSpellCostChange(sa, cost);
-    if(cost.isPaid())
-        return canPayAdditionalCosts(sa);
- // Beached - Delete old
-    ArrayList<String> colors;
+	  if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
+	  {
+		  land.remove(sa.getSourceCard());
+	  }
+	  // Beached - Delete old
+	  String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
 
-    for(int i = 0; i < land.size(); i++)
-    {
-      colors = getColors(land.get(i));
-      int once = 0;
-     
-      for(int j =0; j < colors.size(); j++)
-      {
-         if(cost.isNeeded(colors.get(j)) && once == 0)
-         {
-           cost.payMana(colors.get(j));
-           once++;
-         }
+	  ManaCost cost = new ManaCost(mana);
 
-         if(cost.isPaid()) {
-            return canPayAdditionalCosts(sa);
-         }
-      }
-    }
-    return false;
+	  /*
+	  // Tack xMana Payments into mana here if X is a set value
+	  if (sa.getPayCosts() != null && cost.xcounter > 0){
+		  String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X"; 
+		  // For Count$xPaid set PayX in the AFs then use that here
+		  // Else calculate it as appropriate.
+		  int manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.xcounter;
+		  cost.increaseColorlessMana(manaToAdd);
+	  }
+	  */
+
+	  cost = AllZone.GameAction.getSpellCostChange(sa, cost);
+	  if(cost.isPaid())
+		  return canPayAdditionalCosts(sa);
+	  // Beached - Delete old
+	  ArrayList<String> colors;
+
+	  for(int i = 0; i < land.size(); i++)
+	  {
+		  colors = getColors(land.get(i));
+		  int once = 0;
+
+		  for(int j =0; j < colors.size(); j++)
+		  {
+			  if(cost.isNeeded(colors.get(j)) && once == 0)
+			  {
+				  cost.payMana(colors.get(j));
+				  once++;
+			  }
+
+			  if(cost.isPaid()) {
+				  return canPayAdditionalCosts(sa);
+			  }
+		  }
+	  }
+	  return false;
   }//canPayCost()
   
   static public boolean canPayAdditionalCosts(SpellAbility sa)
@@ -401,92 +405,94 @@ public class ComputerUtil
 
   static public void payManaCost(SpellAbility sa)
   {
-    CardList land = getAvailableMana();
-   
-    //this is to prevent errors for land cards that have abilities that cost mana.
-    if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
-    {
-       land.remove(sa.getSourceCard());
-    }
-    
-    String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
-    
-    ManaCost cost = AllZone.GameAction.getSpellCostChange(sa, new ManaCost(mana));
-    
-    Card card = sa.getSourceCard();
-    // Tack xMana Payments into mana here if X is a set value
-    if (sa.getPayCosts() != null && cost.xcounter > 0){
-    	String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X"; 
-    	// For Count$xPaid set PayX in the AFs then use that here
-    	// Else calculate it as appropriate.
-		int manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.xcounter;
-		cost.increaseColorlessMana(manaToAdd);
-		//i think this is ok here
-		card.setXManaCostPaid(manaToAdd);
-    }
-    
-    // Beached - Delete old
-    if(cost.isPaid())
-        return;
- // Beached - Delete old
-    ArrayList<String> colors;
+	  CardList land = getAvailableMana();
 
-    for(int i = 0; i < land.size(); i++)
-    {
-    	final Card sourceLand = land.get(i);
-       colors = getColors(land.get(i));
-      for(int j = 0; j <colors.size();j++)
-      {
-         if(cost.isNeeded(colors.get(j)) && sourceLand.isUntapped())
-         {
-            sourceLand.tap();
-            cost.payMana(colors.get(j));
-            
-            if (sourceLand.getName().equals("Undiscovered Paradise")) {
-            	sourceLand.setBounceAtUntap(true);
-            }
-            
-            if (sourceLand.getName().equals("Forbidden Orchard")) {
-            	AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(sourceLand, AllZone.HumanPlayer));
-            }
-            
-            //Manabarbs code
-            if(sourceLand.isLand()) { //&& this.isTapAbility()) {
-            	CardList barbs = AllZoneUtil.getCardsInPlay("Manabarbs");
-            	for(Card barb:barbs) {
-            		final Card manabarb = barb;
-            		SpellAbility ability = new Ability(manabarb, "") {
-            			@Override
-            			public void resolve() {
-            				sourceLand.getController().addDamage(1, manabarb);
-            			}
-            		};
-            		
-            		StringBuilder sb = new StringBuilder();
-            		sb.append(manabarb.getName()).append(" - deal 1 damage to ").append(sourceLand.getController());
-            		ability.setStackDescription(sb.toString());
-            		
-            		AllZone.Stack.add(ability);
-            	}
-            }
-            
-            if(sourceLand.getName().equals("Rainbow Vale")) {
-            	sourceLand.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
-            }
-            
-            //System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
+	  //this is to prevent errors for land cards that have abilities that cost mana.
+	  if(sa.getSourceCard().isLand() /*&& sa.isTapAbility()*/)
+	  {
+		  land.remove(sa.getSourceCard());
+	  }
 
-         }
-         if(cost.isPaid())
-         {
-        	 sa.getSourceCard().setSunburstValue(cost.getSunburst());
-        	 break; 
-         }
-      }
-     
-    }
-    if(! cost.isPaid())
-      throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName());
+	  String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
+
+	  ManaCost cost = AllZone.GameAction.getSpellCostChange(sa, new ManaCost(mana));
+
+	  Card card = sa.getSourceCard();
+	  // Tack xMana Payments into mana here if X is a set value
+	  /*
+	  if (sa.getPayCosts() != null && cost.xcounter > 0){
+		  String xSvar = card.getSVar("X").equals("Count$xPaid") ? "PayX" : "X"; 
+		  // For Count$xPaid set PayX in the AFs then use that here
+		  // Else calculate it as appropriate.
+		  int manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.xcounter;
+		  cost.increaseColorlessMana(manaToAdd);
+		  card.setXManaCostPaid(manaToAdd);
+	  }
+	  */
+
+	  // Beached - Delete old
+	  if(cost.isPaid())
+		  return;
+	  // Beached - Delete old
+	  ArrayList<String> colors;
+
+	  for(int i = 0; i < land.size(); i++)
+	  {
+		  final Card sourceLand = land.get(i);
+		  colors = getColors(land.get(i));
+		  for(int j = 0; j <colors.size();j++)
+		  {
+			  if(cost.isNeeded(colors.get(j)) && sourceLand.isUntapped())
+			  {
+				  sourceLand.tap();
+				  cost.payMana(colors.get(j));
+
+				  if (sourceLand.getName().equals("Undiscovered Paradise")) {
+					  sourceLand.setBounceAtUntap(true);
+				  }
+
+				  if (sourceLand.getName().equals("Forbidden Orchard")) {
+					  AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(sourceLand, AllZone.HumanPlayer));
+				  }
+
+				  //Manabarbs code
+				  if(sourceLand.isLand()) { //&& this.isTapAbility()) {
+					  CardList barbs = AllZoneUtil.getCardsInPlay("Manabarbs");
+					  for(Card barb:barbs) {
+						  final Card manabarb = barb;
+						  SpellAbility ability = new Ability(manabarb, "") {
+							  @Override
+							  public void resolve() {
+								  sourceLand.getController().addDamage(1, manabarb);
+							  }
+						  };
+
+						  StringBuilder sb = new StringBuilder();
+						  sb.append(manabarb.getName()).append(" - deal 1 damage to ").append(sourceLand.getController());
+						  ability.setStackDescription(sb.toString());
+
+						  AllZone.Stack.add(ability);
+					  }
+				  }
+
+				  if(sourceLand.getName().equals("Rainbow Vale")) {
+					  sourceLand.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
+				  }
+
+				  //System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());
+
+			  }
+			  if(cost.isPaid())
+			  {
+				  //if (sa instanceof Spell_Permanent) // should probably add this
+				  sa.getSourceCard().setSunburstValue(cost.getSunburst());
+				  break; 
+			  }
+		  }
+
+	  }
+	  if(!cost.isPaid())
+		  throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName());
   }//payManaCost()
   
  
