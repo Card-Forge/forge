@@ -6437,11 +6437,13 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                        CardFactoryUtil.makeToken("Shapeshifter", "C 1 1 Shapeshifter",
-                                getTargetCard().getController(), "", new String[] {"Creature", "Shapeshifter"}, 1,
-                                1, new String[] {"Changeling"});
-                        //remove card from play
+                    	String controller = getTargetCard().getController();
+                    	
                         AllZone.GameAction.removeFromGame(getTargetCard());
+                        
+                        CardFactoryUtil.makeToken("Shapeshifter", "C 1 1 Shapeshifter",
+                                controller, "", new String[] {"Creature", "Shapeshifter"}, 1,
+                                1, new String[] {"Changeling"});
                     }
                 }//resolve()
                 
