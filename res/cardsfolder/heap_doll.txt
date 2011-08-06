@@ -1,0 +1,10 @@
+Name:Heap Doll
+ManaCost:1
+Types:Artifact Creature Scarecrow
+Text:no text
+PT:1/1
+A:AB$Retrieve | Cost$ Sac<1/CARDNAME> | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heap_doll.jpg
+End
