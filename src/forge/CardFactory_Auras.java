@@ -577,7 +577,7 @@ class CardFactory_Auras {
                 			{
                 				for(String singleType:c.getType())
                 				{
-                					if(CardUtil.isBasicLandType(singleType))
+                					if(CardUtil.isABasicLandType(singleType))
                 					{
                 						humanLandCount.put(singleType, humanLandCount.get(singleType)+1);
                 					}
