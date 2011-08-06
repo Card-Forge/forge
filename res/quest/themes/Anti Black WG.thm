@@ -15,7 +15,7 @@ Painter's Servant
 Painter's Servant
 [/Group]
 
-[Group MaxCnt=4 Percentage=16]
+[Group MaxCnt=4 Percentage=15]
 Mold Adder
 Whirling Dervish
 Death Speakers
@@ -48,12 +48,13 @@ Melesse Spirit
 Oversoul of Dusk
 [/Group]
 
-
-[Group MaxCnt=4 Percentage=9]
+[Group MaxCnt=4 Percentage=10]
 Celestial Purge
 Celestial Purge
 Purge
 Purge
+Sphere of Grace
+Sphere of Grace
 Starlight
 Demon's Horn
 Throne of Bone
