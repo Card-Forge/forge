@@ -215,58 +215,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
 
-        //*************** START *********** START **************************
-        else if(cardName.equals("Lab Rats")) {
-            final SpellAbility spell_one = new Spell(card) {
-                private static final long serialVersionUID = -8112024383172056976L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken11BRat(card.getController());
-                }//resolve()
-            };//SpellAbility
-            
-            final SpellAbility spell_two = new Spell(card) {
-                private static final long serialVersionUID = -7503701530510847636L;
-                
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken11BRat(card.getController());
-                    
-                    //return card to the hand
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    AllZone.GameAction.moveTo(hand, card);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    String phase = AllZone.Phase.getPhase();
-                    return phase.equals(Constant.Phase.Main2);
-                }
-            };//SpellAbility
-            
-            spell_one.setManaCost("B");
-            spell_two.setManaCost("4 B");
-            spell_two.setAdditionalManaCost("4");
-            
-            spell_one.setDescription("Put a 1/1 black Rat token onto the battlefield.");
-            spell_two.setDescription("Buyback 4 (You may pay an additional 4 as you cast this spell. If you do, put this card into your hand as it resolves.)");
-            
-            spell_one.setStackDescription("Lab Rats - Put a 1/1 black Rat token onto the battlefield");
-            spell_two.setStackDescription("Lab Rats - Buyback, Put a 1/1 black Rat token onto the battlefield");
-            
-            spell_two.setIsBuyBackAbility(true);
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell_one);
-            card.addSpellAbility(spell_two);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Insurrection")) {
