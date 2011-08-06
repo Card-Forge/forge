@@ -10,4 +10,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefiel
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Creature.nonVampire | Defined$ Opponent
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sheoldred_whispering_one.jpg
+SetInfo:NPH|Mythic|http://magiccards.info/scans/en/nph/73.jpg
 End

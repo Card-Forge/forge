@@ -7,4 +7,5 @@ SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fresh_meat.jpg
+SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/109.jpg
 End

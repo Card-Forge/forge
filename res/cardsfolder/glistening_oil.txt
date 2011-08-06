@@ -10,4 +10,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ H
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glistening_oil.jpg
+SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/62.jpg
 End
