@@ -1,3 +1,95 @@
+AEther Membrane
+1 R R
+Creature Wall
+Whenever AEther Membrane blocks a creature, return that creature to its owner's hand at end of combat.
+0/5
+Defender
+Reach
+
+Alaborn Musketeer
+1 W
+Creature Human Soldier
+no text
+2/1
+Reach
+
+Arachnoid
+6
+Artifact Creature Spider
+no text
+2/6
+Reach
+
+Canopy Spider
+1 G
+Creature Spider
+no text
+1/3
+Reach
+
+Cloudcrown Oak
+2 G G
+Creature Treefolk Warrior
+no text
+3/4
+Reach
+
+Frostweb Spider
+2 G
+Snow Creature Spider
+Whenever Frostweb Spider blocks a creature with flying, put a +1/+1 counter on Frostweb Spider at end of combat.
+1/3
+Reach
+
+Goliath Spider
+6 G G
+Creature Spider
+no text
+7/6
+Reach
+
+Needlepeak Spider
+3 R
+Creature Spider
+no text
+4/2
+Reach
+
+Needleshot Gourna
+4 G G
+Creature Beast
+no text
+3/6
+Reach
+
+Plated Spider
+4 G
+Creature Spider
+no text
+4/4
+Reach
+
+Rib Cage Spider
+2 G
+Creature Spider
+no text
+1/4
+Reach
+
+Spitting Spider
+3 G G
+Creature Spider
+no text
+3/5
+Reach
+
+Tree Monkey
+G
+Creature Ape
+no text
+1/1
+Reach
+
 AEther Web
 1 G
 Enchantment Aura
@@ -16528,13 +16620,6 @@ Artifact Creature Myr
 no text
 2/1
 
-Arachnoid
-6
-Artifact Creature Spider
-no text
-2/6
-This creature can block as though it had flying.
-
 Ebony Rhino
 7
 Artifact Creature Rhino
@@ -16641,13 +16726,6 @@ no text
 1/1
 tap: add 1
 
-Canopy Spider
-1 G
-Creature Spider
-Reach
-1/3
-This creature can block as though it had flying.
-
 Carnivorous Plant
 3 G
 Creature Plant Wall
@@ -16714,13 +16792,6 @@ no text
 3/1
 Trample
 
-Goliath Spider
-6 G G
-Creature Spider
-Reach
-7/6
-This creature can block as though it had flying.
-
 Gorilla Warrior
 2 G
 Creature Ape Warrior
@@ -16759,13 +16830,6 @@ Creature Elemental
 no text
 3/6
 
-Needleshot Gourna
-4 G G
-Creature Beast
-Reach
-3/6
-This creature can block as though it had flying.
-
 Orochi Sustainer
 1 G
 Creature Snake Shaman
@@ -16779,13 +16843,6 @@ Creature Cat Warrior
 no text
 6/3
 
-Plated Spider
-4 G
-Creature Spider
-Reach
-4/4
-This creature can block as though it had flying.
-
 Plated Wurm
 4 G
 Creature Wurm
@@ -16798,13 +16855,6 @@ Creature Boar
 no text
 2/1
 Trample
-
-Rib Cage Spider
-2 G
-Creature Spider
-Reach
-1/4
-This creature can block as though it had flying.
 
 Rowan Treefolk
 3 G
@@ -16842,13 +16892,6 @@ G
 Creature Hound
 no text
 1/2
-
-Tree Monkey
-G
-Creature Ape
-Reach
-1/1
-This creature can block as though it had flying.
 
 Urborg Elf
 1 G
@@ -17441,13 +17484,6 @@ Creature Human Soldier
 no text
 2/1
 
-Alaborn Musketeer
-1 W
-Creature Human Soldier
-no text
-2/1
-This creature can block as though it had flying.
-
 Aven Envoy
 U
 Creature Bird Soldier
@@ -17648,14 +17684,6 @@ no text
 Flying
 Defender
 
-AEther Membrane
-1 R R
-Creature Wall
-Whenever AEther Membrane blocks a creature, return that creature to its owner's hand at end of combat.
-0/5
-Defender
-This creature can block as though it had flying.
-
 Barbarian Horde
 3 R
 Creature Human Barbarian Soldier
@@ -17781,13 +17809,6 @@ R
 Creature Goblin
 no text
 1/1
-
-Needlepeak Spider
-3 R
-Creature Spider
-Reach
-4/2
-This creature can block as though it had flying.
 
 Obsidian Giant
 4 R
@@ -18312,13 +18333,6 @@ no text
 Flash
 Flying
 
-Cloudcrown Oak
-2 G G
-Creature Treefolk Warrior
-no text
-3/4
-This creature can block as though it had flying.
-
 Axegrinder Giant
 4 R R
 Creature Giant Warrior
@@ -18807,13 +18821,6 @@ Arashi, the Sky Asunder
 Legendary Creature Spirit
 (NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying. Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
 5/5
-
-Spitting Spider
-3 G G
-Creature Spider
-no text
-3/5
-This creature can block as though it had flying.
 
 Tromp the Domains
 5 G
@@ -19483,13 +19490,6 @@ Transluminant
 Creature Dryad Shaman
 no text
 2/2
-
-Frostweb Spider
-2 G
-Snow Creature Spider
-Whenever Frostweb Spider blocks a creature with flying, put a +1/+1 counter on Frostweb Spider at end of combat.
-1/3
-This creature can block as though it had flying.
 
 Ashcoat Bear
 1 G
