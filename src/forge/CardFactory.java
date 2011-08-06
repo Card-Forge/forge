@@ -6625,7 +6625,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         if(cardName.equals("Hymn to Tourach")) {
             final SpellAbility spell = new Spell(card) {
@@ -6648,6 +6649,7 @@ public class CardFactory implements NewConstants {
             
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -9473,7 +9475,8 @@ public class CardFactory implements NewConstants {
             
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Wit's End")) {
             final SpellAbility spell = new Spell(card) {
@@ -9495,6 +9498,7 @@ public class CardFactory implements NewConstants {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -20141,6 +20145,7 @@ public class CardFactory implements NewConstants {
         //****************END*******END***********************
 
         
+/*
         //*************** START *********** START **************************
         if(cardName.equals("Mind Twist") || cardName.equals("Mind Shatter")) {
             final SpellAbility spell = new Spell(card) {
@@ -20166,6 +20171,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if (cardName.equals("Psychic Drain"))

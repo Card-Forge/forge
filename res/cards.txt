@@ -1,3 +1,36 @@
+Hymn to Tourach
+B B
+Sorcery
+no text
+spDiscardTgt:AtRandom:2:Target player discards two cards at random.:Hymn to Tourach - target player discards cards
+
+Mind Shatter
+X B B
+Sorcery
+no text
+spDiscardTgt:AtRandom:X:Target player discards X cards at random.:Mind Shatter - target player discards cards
+SVar:X:Count$xPaid
+
+Mind Twist
+X B
+Sorcery
+no text
+spDiscardTgt:AtRandom:X:Target player discards X cards at random.:Mind Twist - target player discards cards
+SVar:X:Count$xPaid
+
+Surging Dementia
+1 B
+Sorcery
+no text
+spDiscardTgt:TgtChoose:1:Target player discards a card.:Surging Dementia - Target player discards a card.
+Ripple:4
+
+Wit's End
+5 B B
+Sorcery
+no text
+spDiscardTgt:Hand:0:Target player discards his or her hand.:Wit's End - target player discards cards
+
 Rend Spirit 
 2 B
 Instant 
@@ -402,13 +435,6 @@ Surging AEther
 3 U
 Instant
 Return target permanent to its owner's hand.
-Ripple:4
-
-Surging Dementia
-1 B
-Sorcery
-no text
-spDamageTgtP:0:Drawback$TgtDiscard/1:Target player discards a card.:Surging Dementia - Target player discards a card.
 Ripple:4
 
 Surging Flame
@@ -6196,16 +6222,6 @@ Psychic Drain
 X U B
 Sorcery
 no text
-
-Mind Shatter
-X B B
-Sorcery
-Target player discards X cards at random.
-
-Mind Twist
-X B
-Sorcery
-Target player discards X cards at random.
 
 Icy Manipulator
 4
@@ -21368,11 +21384,6 @@ Beacon of Unrest
 Sorcery
 Put target artifact or creature card from a graveyard into play under your control. Shuffle Beacon of Unrest into its owner's library.
 
-Wit's End
-5 B B
-Sorcery
-Target player discards his or her hand.
-
 Ghost-Lit Redeemer
 W
 Creature Spirit
@@ -21490,11 +21501,6 @@ Instant
 When you cycle Renewed Faith, you may gain 2 life.
 spGainLife:6
 Cycling:1 W
-
-Hymn to Tourach
-B B
-Sorcery
-Target player discards two cards at random.
 
 Flametongue Kavu
 3 R
