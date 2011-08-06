@@ -1359,36 +1359,6 @@ public class CombatUtil {
                 } //enchantments.size > 0
             }//Zur the enchanter
             
-            else if(c.getName().equals("Yore-Tiller Nephilim") && !c.getCreatureAttackedThisCombat()) {
-                PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
-                
-                CardList creatures = new CardList(grave.getCards());
-                creatures = creatures.getType("Creature");
-                
-                if(creatures.size() > 0) {
-                    if(c.getController().isHuman()) {
-                        Object o = GuiUtils.getChoiceOptional("Pick a creature to put onto the battlefield",
-                                creatures.toArray());
-                        if(o != null) {
-                            Card card = (Card) o;
-                            AllZone.GameAction.moveToPlay(card);
-                            
-                            card.tap();
-                            AllZone.Combat.addAttacker(card);
-                        }
-                    } else if(c.getController().isComputer()) {
-                        Card card = CardFactoryUtil.AI_getBestCreature(creatures);
-                        if (card != null){
-	                        AllZone.GameAction.moveToPlay(card);
-	                        
-	                        card.tap();
-	                        AllZone.Combat.addAttacker(card);
-                        }
-                    }
-                    
-                } //if (creatures.size() > 0) 
-            }//Yore-Tiller Nephilim
-            
             else if(c.getName().equals("Spectral Bears")) {
                 Player opp = c.getController().getOpponent();
                 PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, opp);
