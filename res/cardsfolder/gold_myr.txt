@@ -6,6 +6,6 @@ PT:1/1
 K:tap: add W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gold_myr.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/157.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/180.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/157.jpg
 End

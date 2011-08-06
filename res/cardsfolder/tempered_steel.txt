@@ -6,6 +6,5 @@ K:stPumpAll:Creature.Artifact+YouCtrl:2/2:No Condition:Artifact creatures you co
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempered_steel.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/24.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/24.jpg
 End

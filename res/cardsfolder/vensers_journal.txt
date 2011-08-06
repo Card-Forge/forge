@@ -5,6 +5,5 @@ Text:You have no maximum hand size.\r\nAt the beginning of your upkeep, you gain
 K:HandSize = INF Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vensers_journal.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/220.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/220.jpg
 End

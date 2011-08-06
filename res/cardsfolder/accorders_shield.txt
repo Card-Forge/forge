@@ -5,6 +5,5 @@ Text:Equipped creature gets +0/+3 and has vigilance.
 K:eqPump 3:+0/+3/Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/accorders_shield.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/136.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/136.jpg
 End

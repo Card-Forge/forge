@@ -7,6 +7,5 @@ A:AB$Retrieve | Cost$ W Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact card
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage_scout.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/19.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/19.jpg
 End

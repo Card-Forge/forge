@@ -7,6 +7,5 @@ A:AB$PutCounter | Cost$ G G T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescr
 A:AB$Token | Cost$ 2 T SubCounter<1/CHARGE> | TokenImage$ G 1 1 Insect Infect | TokenAmount$ 1 | TokenName$ Insect | TokenTypes$ Creature,Insect | TokenOwner$ Controller | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Infect | SpellDescription$ Put a 1/1 green Insect creature token with infect onto the battlefield.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trigon_of_infestation.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/214.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/214.jpg
 End

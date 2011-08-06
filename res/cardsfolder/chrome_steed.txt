@@ -7,6 +7,5 @@ K:stPumpSelf:Creature:2/2:Metalcraft:Metalcraft - Chrome Steed gets +2/+2 as lon
 SVar:BuffedBy:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chrome_steed.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/142.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/142.jpg
 End

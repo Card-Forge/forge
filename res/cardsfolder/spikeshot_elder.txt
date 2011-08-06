@@ -7,6 +7,5 @@ K:abDamageTgtCP 1 R R:X:Spikeshot Elder deals damage equal to its power to targe
 SVar:X:Count$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spikeshot_elder.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/104.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/104.jpg
 End

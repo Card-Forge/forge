@@ -6,6 +6,5 @@ PT:2/2
 K:stPumpSelf:Permanent:2/2:Metalcraft:Metalcraft - Carapace Forger gets +2/+2 as long as you control three or more artifacts.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carapace_forger.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/114.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/114.jpg
 End

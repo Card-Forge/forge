@@ -8,6 +8,5 @@ A:AB$Token | Cost$ SubCounter<3/CHARGE> | TokenAmount$ 1 | TokenName$ Golem | To
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golem_foundry.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/160.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/160.jpg
 End

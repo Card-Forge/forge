@@ -7,6 +7,5 @@ K:Enchant creature
 K:enPumpCurse:HIDDEN CARDNAME doesn't untap during your untap step.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bonds_of_quicksilver.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/29.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/29.jpg
 End

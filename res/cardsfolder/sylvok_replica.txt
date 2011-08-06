@@ -6,6 +6,5 @@ PT:1/3
 K:abDestroyTgtV G Sac<1/CARDNAME>:Artifact,Enchantment:Destroy target artifact or enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvok_replica.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/210.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/210.jpg
 End

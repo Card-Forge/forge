@@ -6,6 +6,5 @@ PT:2/2
 A:AB$Draw | Cost$ 1 B Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ You draw two cards and lose 2 life. | SubAbility$ YouLoseLife/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moriok_replica.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/178.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/178.jpg
 End

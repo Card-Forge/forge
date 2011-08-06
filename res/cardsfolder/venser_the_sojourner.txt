@@ -4,6 +4,5 @@ Types:Planeswalker - Venser
 Text:no text
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venser_the_sojourner.jpg
-SetInfo:MRD|Mythic|http://magiccards.info/scans/en/som/135.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/135.jpg
 End

@@ -7,6 +7,5 @@ K:abTapTgt T SubCounter<1/CHARGE>:Artifact,Creature:Tap target artifact or creat
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tumble_magnet.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/218.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/218.jpg
 End

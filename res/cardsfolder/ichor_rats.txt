@@ -6,6 +6,5 @@ PT:2/1
 K:Infect
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ichor_rats.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/67.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/67.jpg
 End

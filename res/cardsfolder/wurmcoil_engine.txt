@@ -7,6 +7,5 @@ K:Deathtouch
 K:Lifelink
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wurmcoil_engine.jpg
-SetInfo:MRD|Mythic|http://magiccards.info/scans/en/som/223.jpg
 SetInfo:SOM|Mythic|http://magiccards.info/scans/en/som/223.jpg
 End

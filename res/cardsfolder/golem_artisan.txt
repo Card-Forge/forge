@@ -9,6 +9,5 @@ A:AB$Pump | Cost$ 2 | ValidTgts$ Creature.Artifact | KW$ Trample | SpellDescript
 A:AB$Pump | Cost$ 2 | ValidTgts$ Creature.Artifact | KW$ Haste | SpellDescription$ Target artifact creature gains haste until end of turn. | TgtPrompt$ Select target artifact creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/golem_artisan.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/159.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/159.jpg
 End

@@ -6,6 +6,5 @@ K:spDamageTgtCP:X:Galvanic Blast deals 2 damage to target creature or player. Me
 SVar:X:Count$MetalCraft.4.2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanic_blast.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/91.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/91.jpg
 End

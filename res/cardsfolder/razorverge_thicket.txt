@@ -7,6 +7,5 @@ K:tap: add W
 K:CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razorverge_thicket.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/228.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/228.jpg
 End

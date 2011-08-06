@@ -6,6 +6,5 @@ PT:2/2
 K:Infect
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contagious_nim.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/58.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/58.jpg
 End

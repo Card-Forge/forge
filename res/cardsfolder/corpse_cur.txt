@@ -7,6 +7,5 @@ K:Infect
 K:etbReturnTgt:1/MayReturn:Creature.withInfect:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_cur.jpg
-SetInfo:MRD|Common|http://magiccards.info/scans/en/som/147.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/147.jpg
 End

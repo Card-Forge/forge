@@ -6,6 +6,5 @@ PT:2/1
 K:WheneverKeyword:CastSpell/Controller:Type/Artifact:Play:ModifyLife/3:ControllingPlayer_Self:ASAP:PayMana/1:No Special Condition:Whenever you cast an artifact spell, you may pay 1. If you do, you gain 3 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lifesmith.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/124.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/124.jpg
 End

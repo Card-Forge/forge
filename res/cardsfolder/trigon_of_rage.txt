@@ -8,6 +8,5 @@ K:abPumpTgtC 2 T SubCounter<1/CHARGE>:+3/+0
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trigon_of_rage.jpg
-SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/216.jpg
 SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/216.jpg
 End

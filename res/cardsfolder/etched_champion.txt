@@ -7,6 +7,5 @@ K:stPumpSelf:Creature:0/0/Protection from white & Protection from blue & Protect
 SVar:BuffedBy:Artifact
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/etched_champion.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/154.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/154.jpg
 End

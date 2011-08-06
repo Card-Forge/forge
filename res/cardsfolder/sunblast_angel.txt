@@ -6,6 +6,5 @@ PT:4/5
 K:Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunblast_angel.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/22.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/22.jpg
 End

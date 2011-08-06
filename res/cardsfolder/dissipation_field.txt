@@ -4,6 +4,5 @@ Types:Enchantment
 Text:Whenever a permanent deals damage to you, return it to its owner's hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dissipation_field.jpg
-SetInfo:MRD|Rare|http://magiccards.info/scans/en/som/32.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/32.jpg
 End
