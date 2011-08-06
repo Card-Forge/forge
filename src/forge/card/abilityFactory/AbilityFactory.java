@@ -814,6 +814,10 @@ public class AbilityFactory {
 							list = new CardList(saTargeting.getTarget().getTargetCards().toArray());
 						}
 					}
+					else {
+						//TODO - this may needs edits to handle SpellAbility defineds?
+						list = new CardList(findParentsTargetedCard(ability).getTarget().getTargetCards().toArray());
+					}
 				}
 				else if (calcX[0].startsWith("Triggered")) {
 					list = new CardList();
