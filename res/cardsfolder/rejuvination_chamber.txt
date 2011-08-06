@@ -1,9 +1,0 @@
-Name:Rejuvination Chamber
-ManaCost:3
-Types:Artifact
-Text:no text
-K:Fading:2
-K:abGainLife T:2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rejuvination_chamber.jpg
-End
