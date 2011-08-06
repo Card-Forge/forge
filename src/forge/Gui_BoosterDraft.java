@@ -124,11 +124,14 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
         allCardModel.addListeners(allCardTable);
         allCardTable.setModel(allCardModel);
         
+        allCardModel.resizeCols(allCardTable);
 
         //construct deckModel
         deckModel = new TableModel(this);
         deckModel.addListeners(deckTable);
         deckTable.setModel(deckModel);
+        
+        deckModel.resizeCols(deckTable);
         
         //add cards to GUI from deck
 //    refreshGui();
@@ -207,7 +210,7 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
         cardDetailPanel.setBounds(new Rectangle(693, 23, 239, 323));
         cardDetailPanel.setLayout(null);
         picturePanel.setBorder(BorderFactory.createEtchedBorder());
-        picturePanel.setBounds(new Rectangle(698, 362, 226, 301));
+        picturePanel.setBounds(new Rectangle(693, 348, 240, 340));
         picturePanel.setLayout(borderLayout1);
         statsLabel.setFont(new java.awt.Font("Dialog", 0, 16));
         statsLabel.setText("Total - 0, Creatures - 0 Land - 0");
