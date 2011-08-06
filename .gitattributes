@@ -3012,6 +3012,7 @@ res/cardsfolder/krosan_cloudscraper.txt -text svneol=native#text/plain
 res/cardsfolder/krosan_colossus.txt -text svneol=native#text/plain
 res/cardsfolder/krosan_constrictor.txt -text svneol=native#text/plain
 res/cardsfolder/krosan_grip.txt svneol=native#text/plain
+res/cardsfolder/krosan_groundshaker.txt -text svneol=native#text/plain
 res/cardsfolder/krosan_restorer.txt -text svneol=native#text/plain
 res/cardsfolder/krosan_verge.txt -text svneol=native#text/plain
 res/cardsfolder/krosan_war_chief.txt -text svneol=native#text/plain
