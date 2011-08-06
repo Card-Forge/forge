@@ -205,7 +205,7 @@ public class GameActionUtil {
 			playCard_Kozilek(c);
 		else if (c.getName().equals("Ulamog, the Infinite Gyre"))
 			playCard_Ulamog(c);
-		else if (c.getName().equals("Emrakul, the Aeons Thorn"))
+		else if (c.getName().equals("Emrakul, the Aeons Torn"))
 			playCard_Emrakul(c);
 
 		playCard_Cascade(c);
