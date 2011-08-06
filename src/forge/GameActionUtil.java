@@ -69,6 +69,7 @@ public class GameActionUtil {
         upkeep_Goblin_Assault();
         upkeep_Battle_of_Wits();
         upkeep_Epic_Struggle();
+        upkeep_Near_Death_Experience();
         upkeep_Helix_Pinnacle();
         upkeep_Barren_Glory();
         upkeep_Felidar_Sovereign();
@@ -6141,6 +6142,36 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         }// if
     }// upkeep_Helix_Pinnacle
+    
+    private static void upkeep_Near_Death_Experience() {
+        final String player = AllZone.Phase.getActivePlayer();
+        PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+        PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+       
+        CardList list = new CardList(playZone.getCards());
+        list = list.getName("Near-Death Experience");
+       
+        if(0 < list.size() && life.getLife() == 1) {
+            Ability ability = new Ability(list.get(0), "0") {
+                @Override
+                public void resolve() {
+                    String opponent = AllZone.GameAction.getOpponent(player);
+                    PlayerLife oppLife = AllZone.GameAction.getPlayerLife(opponent);
+                   
+                    int gameNumber = 0;
+                    if (Constant.Runtime.WinLose.getWin()==1)
+                       gameNumber = 1;
+                    Constant.Runtime.WinLose.setWinMethod(gameNumber,"Near-Death Experience");
+                   
+                    oppLife.setLife(0);
+                }
+            };// Ability
+           
+            ability.setStackDescription("Near-Death Experience - " + player + " wins the game");
+            AllZone.Stack.add(ability);
+        }// if
+    }// upkeep_Near_Death_Experience
+
     
     private static void upkeep_Barren_Glory() {
         final String player = AllZone.Phase.getActivePlayer();

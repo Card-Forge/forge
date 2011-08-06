@@ -17774,6 +17774,173 @@ public class CardFactory implements NewConstants {
         }
         //*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Hurkyl's Recall")) {
+            /*
+             * Return all artifacts target player owns to his or her hand.
+             */
+             SpellAbility spell = new Spell(card) {
+             private static final long serialVersionUID = -4098702062413878046L;
+             
+             @Override
+             public boolean canPlayAI() {
+                PlayerZone humanPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                CardList humanArts = new CardList(humanPlay.getCards());
+                humanArts = humanArts.getType("Artifact");
+                if(humanArts.size() > 0) {
+                   return true;
+                }
+                else {
+                   return false;
+                }
+             }//canPlayAI
+             
+             @Override
+             public void chooseTargetAI() {
+                 setTargetPlayer(Constant.Player.Human);
+              }//chooseTargetAI()
+             
+             @Override
+                 public void resolve() {
+                    String player = getTargetPlayer();
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+                    final String opponent = AllZone.GameAction.getOpponent(player);
+                    PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play, opponent);
+                     CardList artifacts = new CardList(play.getCards());
+                     artifacts.addAll(oppPlay.getCards());
+                     artifacts = artifacts.getType("Artifact");
+                    
+                     for(int i = 0; i < artifacts.size(); i++) {
+                        Card thisArtifact = artifacts.get(i);
+                        //if is token, remove token from play, else return artifact to hand
+                        if(thisArtifact.getOwner().equals(player)) {
+                           if(thisArtifact.isToken()) {
+                              play.remove(thisArtifact);
+                           }
+                           else {
+                              AllZone.GameAction.moveTo(hand, thisArtifact);
+                           }
+                        }
+                     }
+                 }//resolve()
+             };
+             card.clearSpellAbility();
+             card.addSpellAbility(spell);
+             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
+         }//*************** END ************ END **************************
+        
+        
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Fracturing Gust")) {
+           /*
+            * Destroy all artifacts and enchantments.
+            * You gain 2 life for each permanent destroyed this way.
+            */
+            SpellAbility spell = new Spell(card) {
+            private static final long serialVersionUID = 6940814538785932457L;
+
+            @Override
+                public void resolve() {
+               final String player = AllZone.Phase.getActivePlayer();
+                    CardList all = new CardList();
+                    all.addAll(AllZone.Human_Play.getCards());
+                    all.addAll(AllZone.Computer_Play.getCards());
+                    all = all.filter(artAndEn);
+                   
+                    for(int i = 0; i < all.size(); i++) {
+                        Card c = all.get(i);
+                        AllZone.GameAction.destroy(c);
+                    }
+                    AllZone.GameAction.addLife(player, all.size()*2);
+                }// resolve()
+               
+                @Override
+                public boolean canPlayAI() {
+                    CardList human = new CardList(AllZone.Human_Play.getCards());
+                    CardList computer = new CardList(AllZone.Computer_Play.getCards());
+                   
+                    human = human.filter(artAndEn);
+                    computer = computer.filter(artAndEn);                   
+
+                    if(human.size() == 0) return false;
+                   
+                    // the computer will at least destroy 2 more human enchantments
+                    return computer.size() < human.size() - 1
+                            || (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty());
+                }//canPlayAI
+               
+                private CardListFilter artAndEn = new CardListFilter() {
+                   public boolean addCard(Card c) {
+                      return c.isArtifact() || c.isEnchantment();
+                   }
+                };
+               
+            };// SpellAbility
+            spell.setStackDescription(card.getName() + " - destroy all artifacts and enchantments.");
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }// *************** END ************ END **************************
+        
+        
+      //*************** START *********** START **************************
+        if(cardName.equals("Bottle of Suleiman")) {
+           /*
+            * Sacrifice Bottle of Suleiman: Flip a coin. If you lose the flip,
+            * Bottle of Suleiman deals 5 damage to you. If you win the flip,
+            * put a 5/5 colorless Djinn artifact creature token with flying
+            * onto the battlefield.
+            */
+           final SpellAbility ability = new Ability_Activated(card, "1") {
+             private static final long serialVersionUID = -5741302550353410000L;
+             
+             @Override
+             public boolean canPlayAI() {
+                 PlayerLife life = AllZone.GameAction.getPlayerLife(Constant.Player.Computer);
+                 if( life.getLife() > 10 ) {
+                    return true;
+                 }
+                 CardList play = new CardList(AllZone.Computer_Play.getCards());
+                 play = play.getType("Creature");
+                 if( play.size() == 0 ) {
+                    return true;
+                 }
+                 return false;
+              }
+             
+             @Override
+              public void resolve() {
+                 final String player = AllZone.Phase.getActivePlayer();
+                 String choice = "";
+                 String choices[] = {"heads","tails"};
+                 boolean flip = MyRandom.percentTrue(50);
+                 if(card.getController().equals(Constant.Player.Human)) {
+                    choice = (String) AllZone.Display.getChoice("Choose one", choices);
+                 }
+                 else {
+                    choice = choices[MyRandom.random.nextInt(2)];
+                 }
+
+                 AllZone.GameAction.sacrifice(card);
+
+                 if( (flip == true && choice.equals("heads")) ||   (flip == false && choice.equals("tails"))) {
+                    JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Win! - "+player+" puts a 5/5 Flying Djinn in play.", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
+                    CardFactoryUtil.makeToken("Djinn", "", card, "0", new String[] {"Creature", "Artifact", "Djinn"}, 5, 5, new String[] {"Flying"});
+                 }
+                 else{
+                    JOptionPane.showMessageDialog(null, "Bottle of Suleiman - Lose - Bottle does 5 damage to "+player+".", "Bottle of Suleiman", JOptionPane.PLAIN_MESSAGE);
+                    AllZone.GameAction.addDamage(card.getController(), 5, card);
+                 }
+              }
+           };//SpellAbility
+
+           card.addSpellAbility(ability);
+           ability.setDescription("1: Flip a coin.  Win: Put 5/5 Djinn in play.  Lose: Does 5 damage to you.");
+           ability.setStackDescription("Bottle of Suleiman - flip a coin");
+        }//*************** END ************ END **************************
+
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
