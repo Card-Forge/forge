@@ -393,6 +393,16 @@ public class Card extends MyObservable {
         SVars.put(Var, str);
     }
     
+    public Hashtable<String, String> getSVars()
+    {
+    	return SVars;
+    }
+    
+    public void setSVars(Hashtable<String, String> newSVars)
+    {
+    	SVars = newSVars;
+    }
+    
     public int sumAllCounters() {
         Object[] values = counters.values().toArray();
         int count = 0;
