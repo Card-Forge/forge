@@ -3267,16 +3267,19 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
         else if(cardName.equals("Shriekmaw")) {
             final CommandReturn getCreature = new CommandReturn() {
+            	
                 //get target card, may be null
                 public Object execute() {
                     CardList nonblack = CardFactoryUtil.AI_getHumanCreature(card, true);
                     nonblack = nonblack.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return (!c.isArtifact() && !CardUtil.getColors(c).contains(Constant.Color.Black));
+                            return (!c.isArtifact() 
+                            		&& !CardUtil.getColors(c).contains(Constant.Color.Black) 
+                            		&& CardFactoryUtil.canTarget(card, c) 
+                                    && !c.getKeyword().contains("Indestructible"));
                         }
                     });
                     
@@ -3284,15 +3287,17 @@ public class CardFactory_Creatures {
                     CardListUtil.sortAttack(list);
                     CardListUtil.sortFlying(list);
                     
-                    if(list.size() != 0) {
+                    if (list.size() != 0) {
                         Card c = list.get(0);
-                        if(2 <= c.getNetAttack() && c.getKeyword().contains("Flying")) return c;
+                        if (2 <= c.getNetAttack() 
+                        		&& c.getKeyword().contains("Flying")) return c;
                     }
                     
-                    if((AllZone.Computer_Life.getLife() < 10) && list.size() != 0) {
+                    if ((AllZone.Computer_Life.getLife() < 10) 
+                    		&& list.size() != 0) {
                         CardListUtil.sortAttack(list);
                         
-                        if(MyRandom.percentTrue(50)) CardListUtil.sortFlying(list);
+                        if (MyRandom.percentTrue(50)) CardListUtil.sortFlying(list);
                         
                         return list.get(0);
                     }
@@ -3311,6 +3316,7 @@ public class CardFactory_Creatures {
                     }
                 }//resolve()
             };//SpellAbility
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -70141932446179740L;
                 
@@ -3326,9 +3332,11 @@ public class CardFactory_Creatures {
                         
                         @Override
                         public void selectCard(Card card, PlayerZone zone) {
-                            if(!CardFactoryUtil.canTarget(ability, card)) {
+                            if (!CardFactoryUtil.canTarget(ability, card)) {
                                 AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                            } else if(card.isCreature() && zone.is(Constant.Zone.Play) && !card.isArtifact()
+                            } else if (card.isCreature() 
+                            		&& zone.is(Constant.Zone.Play) 
+                            		&& !card.isArtifact()
                                     && !CardUtil.getColors(card).contains(Constant.Color.Black)) {
                                 ability.setTargetCard(card);
                                 AllZone.Stack.add(ability);
@@ -3338,7 +3346,7 @@ public class CardFactory_Creatures {
                     };//Input target
                     
 
-                    if(card.getController().equals(Constant.Player.Human)) {
+                    if (card.getController().equals(Constant.Player.Human)) {
                         //get all creatures
                         CardList list = new CardList();
                         list.addAll(AllZone.Human_Play.getCards());
@@ -3353,10 +3361,10 @@ public class CardFactory_Creatures {
                         
                         if(list.size() != 0) AllZone.InputControl.setInput(target);
 //	              AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreature(ability));
-                    } else//computer
+                    } else //computer
                     {
                         Object o = getCreature.execute();
-                        if(o != null)//should never happen, but just in case
+                        if (o != null)//should never happen, but just in case
                         {
                             ability.setTargetCard((Card) o);
                             AllZone.Stack.add(ability);
@@ -11001,19 +11009,22 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Angel of Despair")) {
+        else if (cardName.equals("Angel of Despair")) {
             final SpellAbility ability = new Ability(card, "0") {
+                
                 @Override
                 public void resolve() {
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        if(c.isToken()) AllZone.getZone(c).remove(c);
+                    if (AllZone.GameAction.isCardInPlay(c) 
+                            && CardFactoryUtil.canTarget(card, c)) {
+                        if (c.isToken()) AllZone.getZone(c).remove(c);
                         
                         else AllZone.GameAction.destroy(c);
                     }
-                }
-            };
+                }//resolve()
+            };//SpellAbility
+            
             Command intoPlay = new Command() {
                 private static final long serialVersionUID = -3583483691705438214L;
                 
@@ -11024,15 +11035,22 @@ public class CardFactory_Creatures {
                     
                     CardList hum = new CardList();
                     hum.addAll(AllZone.Human_Play.getCards());
+                    hum = hum.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardFactoryUtil.canTarget(card, c) 
+                                && !c.getKeyword().contains("Indestructible") 
+                                && c.isCreature();
+                        }
+                    });
                     
-                    if(all.size() != 0) {
+                    if (all.size() != 0) {
                         
-                        if(card.getController().equals(Constant.Player.Human)) {
+                        if (card.getController().equals(Constant.Player.Human)) {
                             AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all,
                                     "Select target permanent to destroy.", true, false));
                             ButtonUtil.disableAll();
-                        } else if(card.getController().equals(Constant.Player.Computer)) {
-                            if(hum.size() > 0) {
+                        } else if (card.getController().equals(Constant.Player.Computer)) {
+                            if (hum.size() > 0) {
                                 Card human = CardFactoryUtil.AI_getBestCreature(hum);
                                 ability.setTargetCard(human);
                                 AllZone.Stack.add(ability);
@@ -11050,12 +11068,18 @@ public class CardFactory_Creatures {
                 @Override
                 public boolean canPlayAI() {
                     CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardFactoryUtil.canTarget(card, c) 
+                                && !c.getKeyword().contains("Indestructible");
+                        }
+                    });
                     
-                    return (list.size() > 0) && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
+                    return (list.size() > 0) 
+                        && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
                 }
             });
-        }//*************** END ************ END **************************   
-        
+        }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
         else if(cardName.equals("Mystic Snake")) {
