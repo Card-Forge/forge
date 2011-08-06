@@ -6,7 +6,7 @@ Repeatable
 25
 Three white rares
 100
-noIcon
+Dungeon Crawling White.jpg
 
 2
 Dungeon Crawling (Blue)
@@ -16,7 +16,7 @@ Repeatable
 25
 Three blue rares
 100
-noIcon
+Dungeon Crawling Blue.jpg
 
 3
 Dungeon Crawling (Black)
@@ -26,7 +26,7 @@ Repeatable
 25
 Three black rares
 100
-noIcon
+Dungeon Crawling Black.jpg
 
 4
 Dungeon Crawling (Red)
@@ -36,7 +36,7 @@ Repeatable
 25
 Three red rares
 100
-noIcon
+Dungeon Crawling Red.jpg
 
 5
 Dungeon Crawling (Green)
@@ -46,7 +46,7 @@ Repeatable
 25
 Three green rares
 100
-noICon
+Dungeon Crawling Green.jpg
 
 6
 Dungeon Crawling (Colorless)
@@ -56,7 +56,7 @@ Repeatable
 35
 Three colorless rares
 150
-noIcon
+Dungeon Crawling Colorless.jpg
 
 7
 Dungeon Crawling (Gold)
@@ -66,7 +66,7 @@ Repeatable
 35
 Three multi-colored rares
 150
-noIcon
+Dungeon Crawling Gold.jpg
 
 8
 A Wolf in Sheep's Clothing
@@ -76,7 +76,7 @@ Not Repeatable
 35
 Three random rares
 200
-noIcon
+A Wolf in Sheeps Clothing.jpg
 
 9
 Bushwhacked!
@@ -86,7 +86,7 @@ Not Repeatable
 50
 Four green rares
 225
-noIcon
+Bushwhacked.jpg
 
 10
 Zombie Attack!
@@ -96,7 +96,7 @@ Not Repeatable
 50
 Four black rares
 200
-noIcon
+Zombie Attack.jpg
 
 11
 The King's Contest
@@ -106,7 +106,7 @@ Not Repeatable
 50
 Three random rares
 150
-noIcon
+The Kings Contest.jpg
 
 12
 Barroom Brawl
@@ -116,7 +116,7 @@ Not Repeatable
 80
 Four random rares
 250
-noIcon
+Barroom Brawl.jpg
 
 13
 The Court Jester
@@ -126,7 +126,7 @@ Not Repeatable
 65
 Four multi-colored rares
 300
-noIcon
+The Court Jester.jpg
 
 14
 Ancient Battlefield
@@ -136,7 +136,7 @@ Not Repeatable
 80
 Four random rares
 250
-noIcon
+Ancient Battlefield.jpg
 
 15
 Don't Play With Matches
@@ -146,7 +146,7 @@ Not Repeatable
 65
 Four red rares
 200
-noIcon
+Dont Play With Matches.jpg
 
 16
 Mines of Kazum Durl
@@ -156,7 +156,7 @@ Not Repeatable
 65
 Four green rares
 250
-noIcon
+Mines of Kazum Durl.jpg
 
 17
 House Party
@@ -166,7 +166,7 @@ Not Repeatable
 80
 Four colorless rares
 250
-noIcon
+House Party.jpg
 
 18
 Crows in the Field
@@ -176,7 +176,7 @@ Not Repeatable
 80
 Five random rares
 300
-noIcon
+Crows in the Field.jpg
 
 19
 The Desert Caravan
@@ -186,7 +186,7 @@ Not Repeatable
 100
 Five random rares
 300
-noIcon
+The Desert Caravan.jpg
 
 20
 Blood Oath
@@ -196,6 +196,6 @@ Not Repeatable
 100
 Five colorless rares
 300
-noIcon
+Blood Oath.jpg
 
 End
