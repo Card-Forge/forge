@@ -118,27 +118,31 @@ public class CombatUtil {
         
         if(attacker.getKeyword().contains("Plainswalk")) {
             temp = blkCL.getType("Plains");
-            if(!temp.isEmpty()) return false;
+            if(!AllZoneUtil.isCardInPlay("Lord Magnus") 
+            		&& !AllZoneUtil.isCardInPlay("Great Wall")
+            		&& !temp.isEmpty()) return false;
         }
         
         if(attacker.getKeyword().contains("Islandwalk")) {
             temp = blkCL.getType("Island");
-            if(!temp.isEmpty()) return false;
+            if(!AllZoneUtil.isCardInPlay("Undertow") && !AllZoneUtil.isCardInPlay("Gosta Dirk") && !temp.isEmpty()) return false;
         }
         
         if(attacker.getKeyword().contains("Swampwalk")) {
             temp = blkCL.getType("Swamp");
-            if(!temp.isEmpty()) return false;
+            if(!AllZoneUtil.isCardInPlay("Ur-drago") && !AllZoneUtil.isCardInPlay("Quagmire") && !temp.isEmpty()) return false;
         }
         
         if(attacker.getKeyword().contains("Mountainwalk")) {
             temp = blkCL.getType("Mountain");
-            if(!temp.isEmpty()) return false;
+            if(!AllZoneUtil.isCardInPlay("Crevasse") && !temp.isEmpty()) return false;
         }
         
         if(attacker.getKeyword().contains("Forestwalk")) {
             temp = blkCL.getType("Forest");
-            if(!temp.isEmpty()) return false;
+            if(!AllZoneUtil.isCardInPlay("Lord Magnus")
+            		&& !AllZoneUtil.isCardInPlay("Deadfall")
+            		&& !temp.isEmpty()) return false;
         }
         
         if(attacker.getKeyword().contains("Legendary landwalk")) {
