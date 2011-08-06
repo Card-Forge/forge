@@ -3394,9 +3394,7 @@ public class CardFactoryUtil {
     	Target tgt = ability.getTarget();
     	if (tgt != null){
     		// Reconfirm the Validity of a TgtValid, or if the Creature is still a Creature
-    		if (tgt.canTgtValid() && !target.isValidCard(tgt.getValidTgts(), ability.getActivatingPlayer()))
-    			return false;
-    		else if (tgt.canTgtCreature() && !target.isCreature())
+    		if (tgt.doesTarget() && !target.isValidCard(tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getSourceCard()))
     			return false;
     		
     		// Check if the target is in the zone it needs to be in to be targeted

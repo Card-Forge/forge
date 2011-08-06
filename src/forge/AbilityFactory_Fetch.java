@@ -171,8 +171,8 @@ public class AbilityFactory_Fetch {
 		// Fetching should occur fairly often as it helps cast more spells, and have access to more mana
 		Ability_Cost abCost = af.getAbCost();
 		Card source = af.getHostCard();
-		HashMap<String,String> params = af.getMapParams();
-        String destination = params.get("Destination");
+		//HashMap<String,String> params = af.getMapParams();
+        //String destination = params.get("Destination");
 		
 		if (abCost != null){
 			// AI currently disabled for these costs

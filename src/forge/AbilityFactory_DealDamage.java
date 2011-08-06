@@ -176,7 +176,8 @@ public class AbilityFactory_DealDamage {
         else if (AF.isSpell())
         	rr = true;
         
-        if(AF.getAbTgt().canTgtCreaturePlayer()) {
+        // TODO: Consider targeting the planeswalker
+        if(AF.getAbTgt().canTgtCreatureAndPlayer()) {
             if(shouldTgtP(damage)) {
                 saMe.setTargetPlayer(AllZone.HumanPlayer);
                 return rr;

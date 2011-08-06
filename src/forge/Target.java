@@ -1,115 +1,101 @@
 package forge;
 
-public class Target {
-	private boolean tgtPlayer = false;
-	public boolean canTgtPlayer() { return tgtPlayer; }
-	private boolean tgtCreature = false;
-	public boolean canTgtCreature() { return tgtCreature; }
-	
-	public boolean canTgtCreaturePlayer() { return tgtCreature && tgtPlayer; }
-	public boolean doesTarget() { return tgtCreature || tgtPlayer || tgtValid; }
-	
+public class Target {	
 	private boolean tgtValid = false;
 	private String ValidTgts[];
 	private String vtSelection = "";
-	public boolean canTgtValid() { return tgtValid; }
+	
+	public boolean doesTarget() { return tgtValid; }
 	public String[] getValidTgts() { return ValidTgts; }
-	public void setValidTgts(String vTgts[]) { ValidTgts = vTgts; }
 	public String getVTSelection() { return vtSelection; }
-	public void setVTSelection(String vtSelStr) { vtSelection = vtSelStr; }
+	
+	private int minTargets = 1;
+	public int getMinTargets() { return minTargets; }
+	private int maxTargets = 1;
+	public int getMaxTargets() { return maxTargets; }
 	
 	private String tgtZone = Constant.Zone.Play;
 	public void setZone(String tZone) { tgtZone = tZone; }
 	public String getZone() { return tgtZone; }
 	
-	private int minTargets = 0;
-	public int getMinTargets() { return minTargets; }
-	private int maxTargets = 0;
-	public int getMaxTargets() { return maxTargets; }
 	// add array of targets here?
-	
+
 	private int numTargeted = 0;
 	public int getNumTargeted() { return numTargeted; }
 	public void incrementTargets() { numTargeted++; }
 	public void resetTargets() { numTargeted = 0; }
 	
 	public Target(String parse){
-		if (parse.contains("Tgt")){
-			// Tgt{C}{P}[/<MinTargets>/<MaxTargets>] min-max is optional 
-			String tgtStr = parse.replace("Tgt", "");
-			String[] tgtSplit = tgtStr.split("/");
-			
-			if (tgtSplit[0].contains("C"))	// creature
-				tgtCreature = true;
-			if (tgtSplit[0].contains("P"))	// player
-				tgtPlayer = true;	
-			if (tgtSplit[0].contains("V")) // valid
-				tgtValid = true;
-			
-			if (tgtSplit.length != 3){
-				minTargets = 1;
-				maxTargets = 1;
-			}
-			else{
-				minTargets = Integer.parseInt(tgtSplit[1]);
-				maxTargets = Integer.parseInt(tgtSplit[2]);
-			}
-		}
-	}
-	
-	public Target(String parse, String select, String[] valid){
-		if (parse.contains("Tgt")){
-			// Tgt{C}{P}{V}[/<MinTargets>/<MaxTargets>] min-max is optional 
-			String tgtStr = parse.replace("Tgt", "");
-			String[] tgtSplit = tgtStr.split("/");
-			
-			if (tgtSplit[0].contains("C"))	// creature
-				tgtCreature = true;
-			if (tgtSplit[0].contains("P"))	// player
-				tgtPlayer = true;	
-			if (tgtSplit[0].contains("V")) // valid
-				tgtValid = true;
-			
-			if (tgtSplit.length != 3){
-				minTargets = 1;
-				maxTargets = 1;
-			}
-			else{
-				minTargets = Integer.parseInt(tgtSplit[1]);
-				maxTargets = Integer.parseInt(tgtSplit[2]);
-			}
-			
-			if (tgtValid){
-				vtSelection = select;
-				ValidTgts = valid;
-			}
-		}
+		this(parse, 1, 1);
 	}
 	
 	public Target(String parse, int min, int max){
-		minTargets = min;
-		maxTargets = max;
+		// parse=Tgt{C}{P} - Primarily used for Pump or Damage 
+		// C = Creature   P=Player/Planeswalker
+		// CP = All three
 		
 		tgtValid = true;
-		ValidTgts = parse.split(",");
+
+		if (parse.contains("Tgt")){
+			parse = parse.replace("Tgt", "");
+		}
+
+		String valid;
+		String prompt;
+		
+		if (parse.equals("CP")){
+			valid = "Creature,Planeswalker,Player";
+			prompt = "Select target creature, planeswalker, or player";
+		}
+		else if (parse.equals("C")){
+			valid = "Creature";
+			prompt = "Select target creature";
+		}
+		else if (parse.equals("P")){
+			valid = "Planeswalker,Player";
+			prompt = "Select target planeswalker or player";
+		}
+		else{
+			System.out.println("Bad Parsing in Target(parse, min, max)");
+			return;
+		}
+		
+		vtSelection = prompt;
+		ValidTgts = valid.split(",");
+		
+		minTargets = min;
+		maxTargets = max;
 	}
 	
-	public String targetString()
-	{
-		StringBuilder sb = new StringBuilder("target ");
-
-		if (tgtCreature)
-			sb.append("creature");
-		if (tgtPlayer){
-			if (tgtCreature)
-				sb.append(" or ");
-			sb.append("player");
-		}
-		if (tgtValid){
-			sb.append(vtSelection);
-		}
-		sb.append(".");
-		
-		return sb.toString();
+	public Target(String select, String[] valid){		
+		this(select, valid, 1, 1);
 	}
+	
+	public Target(String select, String[] valid, int min, int max){
+		tgtValid = true;
+		vtSelection = select;
+		ValidTgts = valid;
+		
+		minTargets = min;
+		maxTargets = max;
+	}
+	
+	// These below functions are quite limited to the damage classes, we should find a way to move them into AF_DealDamage
+	public boolean canTgtPlayer() {
+		for(String s: ValidTgts){
+			if (s.equals("Player"))
+				return true;
+		}
+		return false; 
+	}
+	
+	public boolean canTgtCreature() { 
+		for(String s: ValidTgts){
+			if (s.contains("Creature") && !s.contains("nonCreature"))
+				return true;
+		}
+		return false; 
+	}
+	
+	public boolean canTgtCreatureAndPlayer() { return canTgtPlayer() && canTgtCreature(); }
 }

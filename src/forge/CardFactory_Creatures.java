@@ -13910,7 +13910,7 @@ public class CardFactory_Creatures {
         else if(cardName.equals("Tradewind Rider")) {
         	String select = "Select target permanent to return to owner's hand.";
             final String Tgts[] = {"Permanent"};
-            Target target = new Target("TgtV", select, Tgts);
+            Target target = new Target(select, Tgts);
 
             final Ability_Cost cost = new Ability_Cost("T tapXType<2/Creature>", card.getName(), true);
         	
@@ -20416,7 +20416,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Singing Tree")) {
             final String Tgts[] = {"Creature.attacking"};
-            Target target = new Target("TgtV", "Select target attacking creature.", Tgts);
+            Target target = new Target("Select target attacking creature.", Tgts);
           
             final Ability_Cost cost = new Ability_Cost("T", card.getName(), true);
 
@@ -20657,7 +20657,7 @@ public class CardFactory_Creatures {
         //*************** START *********** START **************************
         else if(cardName.equals("Witch Hunter")) {
         	final String Tgts[] = {"Creature+YouDontCtrl"};
-        	Target target = new Target("TgtV", "Select target creature you don't control.", Tgts);
+        	Target target = new Target("Select target creature you don't control.", Tgts);
         	final Ability_Cost abCost = new Ability_Cost("1 W W T", card.getName(), true);
 
         	final SpellAbility ability = new Ability_Activated(card, abCost, target) {

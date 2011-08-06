@@ -136,10 +136,14 @@ public class AbilityFactory {
 		
 		if (isTargeted)
 		{
+			int min = mapParams.containsKey("TargetMin") ? Integer.parseInt(mapParams.get("TargetMin")) : 1;
+			int max = mapParams.containsKey("TargetMax") ? Integer.parseInt(mapParams.get("TargetMax")) : 1;
+			
 			if (hasValid)
-				abTgt = new Target("TgtV", mapParams.get("TgtPrompt"), mapParams.get("ValidTgts").split(","));
+				abTgt = new Target(mapParams.get("TgtPrompt"), mapParams.get("ValidTgts").split(","), min, max);
 			else
-				abTgt = new Target(mapParams.get("Tgt"));
+				abTgt = new Target(mapParams.get("Tgt"), min, max);
+			
 			if (mapParams.containsKey("TgtZone"))	// if Targeting something not in play, this Key should be set
 				abTgt.setZone(mapParams.get("TgtZone"));
 		}
@@ -248,6 +252,14 @@ public class AbilityFactory {
 				SA = AbilityFactory_PermanentState.createAbilityUntap(this);
 			if (isSp){
 				SA = AbilityFactory_PermanentState.createSpellUntap(this);
+			}
+		}
+		
+		if (API.equals("Tap")){
+			if (isAb)
+				SA = AbilityFactory_PermanentState.createAbilityTap(this);
+			if (isSp){
+				SA = AbilityFactory_PermanentState.createSpellTap(this);
 			}
 		}
 		

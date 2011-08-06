@@ -1655,7 +1655,6 @@ public class CardFactory implements NewConstants {
         		String k[] = parse.split(":");
         		String tmpCost[] =  k[0].replace("abAllPump", "").split(" ", 2);
         		
-        		final Target abTgt = new Target(tmpCost[0]);
         		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName(), true);        		
         		
         		final String Scope[] = k[1].split("/");
@@ -1739,7 +1738,7 @@ public class CardFactory implements NewConstants {
             		}
             	}
             	
-            	SpellAbility abAllPump = new Ability_Activated(card, abCost, abTgt)
+            	SpellAbility abAllPump = new Ability_Activated(card, abCost, null)
             	{
             		private static final long serialVersionUID = 7783282947592874L;
             		
@@ -1921,7 +1920,13 @@ public class CardFactory implements NewConstants {
         		
         		final boolean bPumpEquipped = (tmpCost[0].equals("Equipped"));
         		
-        		final Target abTgt = new Target(tmpCost[0]);        			
+        		final Target abTgt;
+        		
+        		if (tmpCost[0].equals("TgtC"))
+        			abTgt = new Target(tmpCost[0]);
+        		else
+        			abTgt = null;
+        		   			
         		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName(), true);
                 
                 final int NumAttack[] = {-1138};
@@ -1985,7 +1990,7 @@ public class CardFactory implements NewConstants {
                 String d = "none";
                 StringBuilder sbD = new StringBuilder();
                 
-                if(abTgt.doesTarget()) 
+                if(abTgt != null && abTgt.doesTarget()) 
                 	sbD.append("Target creature");
                 else if (bPumpEquipped)
                 	sbD.append("Equipped creature");
@@ -2111,7 +2116,7 @@ public class CardFactory implements NewConstants {
                         
                         if(AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) return false;
                         
-                        if(!abTgt.doesTarget()) {
+                        if(abTgt == null) {
                         	Card creature;
                             if (bPumpEquipped)
                             	creature = card.getEquippingCard();
@@ -2183,7 +2188,7 @@ public class CardFactory implements NewConstants {
                     @Override
                     public void resolve() {
                         final Card[] creature = new Card[1];
-                        if(abTgt.doesTarget()) 
+                        if(abTgt != null && abTgt.doesTarget()) 
                         	creature[0] = getTargetCard();
                         else if (bPumpEquipped)
                         	creature[0] = card.getEquippingCard();
@@ -2191,7 +2196,7 @@ public class CardFactory implements NewConstants {
                         	creature[0] = card;
                     	
                         if(creature[0] != null && AllZone.GameAction.isCardInPlay(creature[0])
-                                && (!abTgt.doesTarget() || CardFactoryUtil.canTarget(card, getTargetCard()))) {
+                                && (abTgt == null || CardFactoryUtil.canTarget(card, getTargetCard()))) {
 
                             final int a = getNumAttack();
                             final int d = getNumDefense();
@@ -2237,9 +2242,6 @@ public class CardFactory implements NewConstants {
 
                 ability.setDescription(spDesc[0]);
                 ability.setStackDescription(stDesc[0]);
-                
-                if(!abTgt.doesTarget())
-                	ability.setTargetCard(card);
 
                 card.addSpellAbility(ability);
             }
@@ -2685,14 +2687,15 @@ public class CardFactory implements NewConstants {
         		
         		int drawBack = 2;
         		
-        		final Target abTgt = new Target(tmpCost[0]);
-        		if (abTgt.canTgtValid()){
+        		// TODO: These can do for some converting for an improved message box
+        		final Target abTgt;
+        		if (tmpCost[0].contains("TgtV")){
         			int valid = drawBack;
-					// Looks like VTSelection is used for the Message box, should improve the message
-        			abTgt.setVTSelection("Select a target: " + k[valid]);
-        			abTgt.setValidTgts(k[valid].split(","));
+        			abTgt = new Target("Select a target: " + k[valid], k[valid].split(","));
         			drawBack++;
         		}
+        		else
+        			abTgt = new Target(tmpCost[0]);
         		
         		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName(), true);    
                 
@@ -2728,7 +2731,7 @@ public class CardFactory implements NewConstants {
                     sb.append(card.getName());
                     sb.append(" deals " + NumDmg[0] + " damage to ");
                     
-                    sb.append(abTgt.targetString());
+                    sb.append(abTgt.getVTSelection());
                     spDesc[0] = sb.toString();
                     stDesc[0] = card.getName() + " -" + sb.toString();
                 }
@@ -2818,7 +2821,7 @@ public class CardFactory implements NewConstants {
                         if(r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed())) 
                         	rr = true;
                         
-                        if(abTgt.canTgtCreaturePlayer()) {
+                        if(abTgt.canTgtCreatureAndPlayer()) {
                             if(shouldTgtP()) {
                                 setTargetPlayer(AllZone.HumanPlayer);
                                 return rr;
@@ -3041,9 +3044,7 @@ public class CardFactory implements NewConstants {
         	String tmpCost = k[0].substring(13);
         	final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName(), true);
         	
-        	final Target tgtDstryTgt = new Target("TgtV");
         	final String Tgts[] = k[1].split(",");
-        	tgtDstryTgt.setValidTgts(Tgts);
         	
         	final boolean NoRegen[] = {false};
         	final String Drawback[] = {"none"};
@@ -3074,8 +3075,9 @@ public class CardFactory implements NewConstants {
         	String tmpDesc = spDesc[0].substring(15);
         	int i = tmpDesc.indexOf(".");
         	tmpDesc = tmpDesc.substring(0, i);
-        	//final String Selec = "Select target " + tmpDesc + " to destroy.";
-        	tgtDstryTgt.setVTSelection("Select target " + tmpDesc + " to destroy.");
+        	String Selec = "Select target " + tmpDesc + " to destroy.";
+        	
+        	final Target tgtDstryTgt = new Target(Selec, Tgts);
         	
         	spDesc[0] = abCost.toString() + spDesc[0];
         	
@@ -4563,10 +4565,7 @@ public class CardFactory implements NewConstants {
     		if (tmpCost[0].equals(""))
     			abTgt = null;
     		else{
-    			//abTgt = new Target(tmpCost[0]);
-    			//abTgt.setValidTgts("player".split(","));
-    			//abTgt.setVTSelection("Target a player to draw cards");
-    			abTgt = new Target("TgtP");
+    			abTgt = new Target("Target a player to draw cards", "player".split(","));
     		}
     		
        		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName(), true);
@@ -4952,9 +4951,7 @@ public class CardFactory implements NewConstants {
         		if (tmpCost[0].equals(""))
         			abTgt = null;
         		else{
-        			abTgt = new Target(tmpCost[0]+"V");
-        			abTgt.setValidTgts("player".split(","));
-        			abTgt.setVTSelection("Target a player to lose life");
+        			abTgt = new Target("Target a player to lose life", "player".split(","));
         		}
         		
         		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName(), true);
@@ -5241,9 +5238,7 @@ public class CardFactory implements NewConstants {
         		if (tmpCost[0].equals(""))
         			abTgt = null;
         		else{
-        			abTgt = new Target(tmpCost[0]);
-        			abTgt.setValidTgts(k[1].split(","));
-        			abTgt.setVTSelection("Target a player to gain life");
+        			abTgt = new Target("Target a player to gain life", k[1].split(","));
         			
         			inc++;
         		}
@@ -6362,17 +6357,20 @@ public class CardFactory implements NewConstants {
         	String tmpCost = k[0].substring(8);
         	final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName(), true);
 
-        	final Target tapTargets = new Target("TgtV");
         	final String Tgts[] = k[1].split(",");
-        	tapTargets.setValidTgts(Tgts);
+        	
         	final String abDesc[] = {"none"};
         	abDesc[0] = k[2];
 
         	String tmpDesc = abDesc[0].substring(11);
         	int i = tmpDesc.indexOf(".");
         	tmpDesc = tmpDesc.substring(0, i);
-        	tapTargets.setVTSelection("Select target " + tmpDesc + " to tap.");
 
+        	StringBuilder vtDesc = new StringBuilder();
+        	vtDesc.append("Select target ").append(tmpDesc).append(" to tap.");
+
+        	final Target tapTargets = new Target(vtDesc.toString(), Tgts);
+        	
         	abDesc[0] = abCost.toString() + abDesc[0];
 
         	final SpellAbility AbTapTgt = new Ability_Activated(card, abCost, tapTargets) {
@@ -6650,17 +6648,20 @@ public class CardFactory implements NewConstants {
         	String tmpCost = k[0].substring(10);
         	final Ability_Cost abCost = new Ability_Cost(tmpCost, card.getName(), true);
 
-        	final Target untapTargets = new Target("TgtV");
+
         	final String Tgts[] = k[1].split(",");
-        	untapTargets.setValidTgts(Tgts);
         	final String abDesc[] = {"none"};
         	abDesc[0] = k[2];
 
         	String tmpDesc = abDesc[0].substring(13);
         	int i = tmpDesc.indexOf(".");
         	tmpDesc = tmpDesc.substring(0, i);
-        	untapTargets.setVTSelection("Select target " + tmpDesc + " to untap.");
+        	
+        	StringBuilder vtDesc = new StringBuilder();
+        	vtDesc.append("Select target ").append(tmpDesc).append(" to untap.");
 
+        	final Target untapTargets = new Target(vtDesc.toString(), Tgts);
+        	
         	abDesc[0] = abCost.toString() + abDesc[0];
 
         	final SpellAbility AbUntapTgt = new Ability_Activated(card, abCost, untapTargets) {
@@ -6748,123 +6749,6 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(AbUntapTgt);
         }//End abUntapTgt
         
-     	/*
-     	 * Generic tap target ___ spell
-     	 * 
-     	 * syntax: spTapTgt:{Valid Targets}:{Description}
-     	 */
-        if (hasKeyword(card, "spTapTgt") != -1) {
-        	int n = hasKeyword(card, "spTapTgt");
-
-        	String parse = card.getKeyword().get(n).toString();
-        	card.removeIntrinsicKeyword(parse);
-
-        	String k[] = parse.split(":");
-        	
-        	final Target tapTargets = new Target("TgtV");
-        	final String Tgts[] = k[1].split(",");
-        	tapTargets.setValidTgts(Tgts);
-        	final String spDesc[] = {"none"};
-        	spDesc[0] = k[2];
-        	
-        	String tmpDesc = spDesc[0].substring(11);
-        	int i = tmpDesc.indexOf(".");
-        	tmpDesc = tmpDesc.substring(0, i);
-        	String Selec = "Select target " + tmpDesc + " to tap.";
-        	
-        	card.clearSpellAbility();
-
-        	final SpellAbility SpTapTgt = new Spell(card) {
-				private static final long serialVersionUID = 6956356114247328396L;
-
-				@Override
-        		public boolean canPlayAI() {
-        			CardList hCards = getTargets();
-
-        			Random r = new Random();
-        			boolean rr = false;
-        			if (r.nextFloat() <= .6667)
-        				rr = true;
-
-        			if(hCards.size() > 0) {
-        				Card c = null;
-        				CardList dChoices = new CardList();
-
-        				for(int i = 0; i < Tgts.length; i++) {
-        					if (Tgts[i].startsWith("Creature")) {
-        						c = CardFactoryUtil.AI_getBestCreature(hCards);
-        						if (c != null)
-        							dChoices.add(c);
-        					}
-
-        					CardListUtil.sortByTextLen(hCards);
-        					dChoices.add(hCards.get(0));
-
-        					CardListUtil.sortCMC(hCards);
-        					dChoices.add(hCards.get(0));
-        				}
-
-        				c = dChoices.get(CardUtil.getRandomIndex(dChoices));
-        				setTargetCard(c);
-
-        				return rr;
-        			}
-
-        			return false;
-        		}
-
-        		CardList getTargets() {
-        			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-        			tmpList = tmpList.getValidCards(Tgts, card.getController());
-        			tmpList = tmpList.getTargetableCards(card);
-        			tmpList = tmpList.filter(AllZoneUtil.untapped);
-        			return tmpList;
-        		}
-        		
-        		/*
-        		@Override
-        		public boolean canPlay() {
-        			return (CardFactoryUtil.canUseAbility(card) && super.canPlay());
-        		}
-        		*/
-
-        		@Override
-        		public void resolve() {
-        			Card tgtC = getTargetCard();
-        			if(AllZone.GameAction.isCardInPlay(tgtC)
-        					&& CardFactoryUtil.canTarget(card, tgtC)) {
-        				tgtC.tap();
-        			}
-        		}
-        	}; //SpTapTgt
-        	
-        	Input InGetTarget = CardFactoryUtil.input_targetValid(SpTapTgt, Tgts, Selec);
-            
-            SpTapTgt.setBeforePayMana(InGetTarget);
-            
-            SpTapTgt.setDescription(spDesc[0]);
-        	
-        	card.addSpellAbility(SpTapTgt);
-        	card.setSVar("PlayMain1", "TRUE");
-        	
-        	String bbCost = card.getSVar("Buyback");
-            if (!bbCost.equals(""))
-            {
-                SpellAbility bbDstryTgt = SpTapTgt.copy();
-                bbDstryTgt.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
-                
-                StringBuilder sb = new StringBuilder();
-                sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
-                sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
-                bbDstryTgt.setDescription(sb.toString());
-                // bbDstryTgt.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
-                bbDstryTgt.setIsBuyBackAbility(true);
-                
-                bbDstryTgt.setBeforePayMana(CardFactoryUtil.input_targetValid(bbDstryTgt, Tgts, Selec));
-                
-                card.addSpellAbility(bbDstryTgt);
-             }
-        }//End spTapTgt
         
         /*
          * Generic untap all targets spell
@@ -6879,11 +6763,10 @@ public class CardFactory implements NewConstants {
 
         	String k[] = parse.split(":");
         	
-        	final Target untapTargets = new Target("TgtV");
-        	
+
         	String Targets = k[1];
         	final String Tgts[] = Targets.split(",");
-        	untapTargets.setValidTgts(Tgts);
+
         	final String spDesc[] = {"none"};
         	final String stackDesc[] = {"none"};
         	stackDesc[0] = k[2];
@@ -6964,98 +6847,6 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(SpUntapAll);
         	card.setSVar("PlayMain1", "TRUE");
         }//End spUntapAll keyword
-        
-        /*
-         *  Generic untap target ___ spell
-         *  
-         *  syntax: spUntapTgt:{Valid Targets}:{Description}
-         */
-        if (hasKeyword(card, "spUntapTgt") != -1) {
-        	int n = hasKeyword(card, "spUntapTgt");
-
-        	String parse = card.getKeyword().get(n).toString();
-        	card.removeIntrinsicKeyword(parse);
-
-        	String k[] = parse.split(":");
-        	
-        	final Target untapTargets = new Target("TgtV");
-        	final String Tgts[] = k[1].split(",");
-        	untapTargets.setValidTgts(Tgts);
-        	final String spDesc[] = {"none"};
-        	spDesc[0] = k[2];
-
-        	String tmpDesc = spDesc[0].substring(13);
-        	int i = tmpDesc.indexOf(".");
-        	tmpDesc = tmpDesc.substring(0, i);
-        	String Selec = "Select target " + tmpDesc + " to untap.";
-
-        	final SpellAbility SpUntapTgt = new Spell(card) {
-        		private static final long serialVersionUID = 1740994300027185986L;
-
-        		@Override
-        		public boolean canPlayAI() {
-        			/*CardList hCards = getTargets();
-
-        			Random r = new Random();
-        			boolean rr = false;
-        			if (r.nextFloat() <= .6667)
-        				rr = true;
-
-        			if(hCards.size() > 0) {
-        				Card c = null;
-        				CardList dChoices = new CardList();
-
-        				for(int i = 0; i < Tgts.length; i++) {
-        					if (Tgts[i].startsWith("Creature")) {
-        						c = CardFactoryUtil.AI_getBestCreature(hCards);
-        						if (c != null)
-        							dChoices.add(c);
-        					}
-
-        					CardListUtil.sortByTextLen(hCards);
-        					dChoices.add(hCards.get(0));
-
-        					CardListUtil.sortCMC(hCards);
-        					dChoices.add(hCards.get(0));
-        				}
-
-        				c = dChoices.get(CardUtil.getRandomIndex(dChoices));
-        				setTargetCard(c);
-
-        				return rr;
-        			}
-					*/
-        			return false;
-        		}
-
-        		/*
-        		CardList getTargets() {
-        			CardList tmpList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-        			tmpList = tmpList.getValidCards(Tgts);
-        			tmpList = tmpList.getTargetableCards(card);
-        			tmpList = tmpList.filter(AllZoneUtil.untapped);
-        			return tmpList;
-        		}*/
-
-        		@Override
-        		public void resolve() {
-        			Card tgtC = getTargetCard();
-        			if(AllZone.GameAction.isCardInPlay(tgtC)
-        					&& CardFactoryUtil.canTarget(card, tgtC)) {
-        				tgtC.untap();
-        			}
-        		}
-        	}; //SpUntapTgt
-
-        	card.clearSpellAbility();
-        	Input InGetTarget = CardFactoryUtil.input_targetValid(SpUntapTgt, Tgts, Selec);
-
-        	SpUntapTgt.setBeforePayMana(InGetTarget);
-
-        	SpUntapTgt.setDescription(spDesc[0]);
-        	card.addSpellAbility(SpUntapTgt);
-        	card.setSVar("PlayMain1", "TRUE");
-        }//End spUntapTgt
         
         if (hasKeyword(card, "Flashback") != -1) {
             int n = hasKeyword(card, "Flashback");
@@ -8601,7 +8392,7 @@ public class CardFactory implements NewConstants {
         else if(cardName.equals("AEther Spellbomb")) {
         	Ability_Cost abCost = new Ability_Cost("U Sac<1/CARDNAME>", cardName, true);
         	String[] valid = {"Creature"};
-        	Target abTgt = new Target("TgtV", "Target a creature to bounce", valid);
+        	Target abTgt = new Target("Target a creature to bounce", valid);
             final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt) {
 				private static final long serialVersionUID = 1L;
 
@@ -8643,7 +8434,7 @@ public class CardFactory implements NewConstants {
         else if(cardName.equals("Lifespark Spellbomb")) {
         	Ability_Cost abCost = new Ability_Cost("G Sac<1/CARDNAME>", cardName, true);
         	String[] valid = {"Land"};
-        	Target abTgt = new Target("TgtV", "Target a land to animate", valid);
+        	Target abTgt = new Target("Target a land to animate", valid);
             final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt) {
                 private static final long serialVersionUID = -5744842090293912606L;
                 
@@ -8711,7 +8502,7 @@ public class CardFactory implements NewConstants {
         else if(cardName.equals("Necrogen Spellbomb")) {
         	Ability_Cost abCost = new Ability_Cost("B Sac<1/CARDNAME>", cardName, true);
         	String[] valid = {"player"};
-        	Target abTgt = new Target("TgtV","Target player discards a card", valid);
+        	Target abTgt = new Target("Target player discards a card", valid);
             final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt) {
 				private static final long serialVersionUID = -5712428914792877529L;
 
@@ -9041,7 +8832,7 @@ public class CardFactory implements NewConstants {
         else if(cardName.equals("Volrath's Dungeon")) {
         	
         	Ability_Cost dungeonCost = new Ability_Cost("Discard<1/Any>", cardName, true);
-        	Target dungeonTgt = new Target("TgtV", "Volrath's Dungeon - Target player" , "player".split(","));
+        	Target dungeonTgt = new Target("Volrath's Dungeon - Target player" , "player".split(","));
         	
             final SpellAbility dungeon = new Ability_Activated(card, dungeonCost, dungeonTgt){
 				private static final long serialVersionUID = 334033015590321821L;
@@ -9649,7 +9440,7 @@ public class CardFactory implements NewConstants {
         	final String[] Tgts = { "Creature.nonArtifact" };
         	
         	Ability_Cost abCost = new Ability_Cost("T Sac<1/CARDNAME>", cardName, true);
-        	Target abTgt = new Target("TgtV", "Target a non-Artifact Creature to Transmogrify", Tgts);
+        	Target abTgt = new Target("Target a non-Artifact Creature to Transmogrify", Tgts);
 
         	final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt){
                 private static final long serialVersionUID = -401631574059431293L;
@@ -11658,10 +11449,8 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Barl's Cage")) {
-            Target target = new Target("TgtV");
-            target.setVTSelection("Select target creature.");
             final String Tgts[] = {"Creature"};
-            target.setValidTgts(Tgts);
+        	Target target= new Target("Select target creature.", Tgts, 1, 1);
 
             final Ability_Cost cost = new Ability_Cost("3", card.getName(), true);
         	

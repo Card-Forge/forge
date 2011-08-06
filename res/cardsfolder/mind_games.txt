@@ -2,7 +2,7 @@ Name:Mind Games
 ManaCost:U
 Types:Instant
 Text:no text
-K:spTapTgt:Artifact,Creature,Land:Tap target artifact, creature, or land.
+A:SP$Tap|Cost$U|TgtPrompt$Choose target artifact, creature or land|ValidTgts$Artifact,Creature,Land|SpellDescription$Tap target artifact, creature or land.
 SVar:Buyback:2 U
 SVar:RemAIDeck:True
 SVar:Rarity:Common

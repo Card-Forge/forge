@@ -1556,7 +1556,7 @@ class CardFactory_Auras {
         	};//addSpellAbility
         	
         	// Target AbCost and Restriction are set here to get this working as expected
-        	Target tgt = new Target("TgtV", "Select a creature in a graveyard", "Creature".split(","));
+        	Target tgt = new Target("Select a creature in a graveyard", "Creature".split(","));
         	tgt.setZone(Constant.Zone.Graveyard);
         	animate.setTarget(tgt);
         	
