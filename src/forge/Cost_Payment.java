@@ -78,9 +78,8 @@ public class Cost_Payment {
     			// this will always work
     		}
     		else{
-    			int type = discType.indexOf("/");
-    			if (type != -1){
-    				String validType[] = discType.substring(type+1).split(",");
+    			if (!discType.equals("Any") && !discType.equals("Random")){
+    				String validType[] = discType.split(",");
     				handList = handList.getValidCards(validType);
     			}
 	    		if (discAmount > handList.size()){
@@ -186,12 +185,11 @@ public class Cost_Payment {
     				payDiscard = true;
     			}
     			else{
-	    			int type = discType.indexOf("/");
-	    			if (type != -1){
-	    				String validType[] = discType.substring(type+1).split(",");
+	    			if (!discType.equals("Any")){
+	    				String validType[] = discType.split(",");
 	    				handList = handList.getValidCards(validType);
 	    			}
-	    			changeInput.stopSetNext(input_discardCost(discAmount, handList, ability, this));
+	    			changeInput.stopSetNext(input_discardCost(discAmount, discType, handList, ability, this));
 	    			return false;
     			}
     		}
@@ -298,13 +296,12 @@ public class Cost_Payment {
     				AllZone.GameAction.discardRandom(card.getController(), discAmount, ability);
     			}
     			else{
-	    			int type = discType.indexOf("/");
-	    			if (type != -1){
-	    				String validType[] = discType.substring(type+1).split(",");
+	    			if (!discType.equals("Any")){
+	    				String validType[] = discType.split(",");
 	    				AllZone.GameAction.AI_discardNumType(discAmount, validType, ability);
 	    			}
 	    			else{
-	    				AllZone.GameAction.AI_discardNumUnless(discAmount, ability);
+	    				AllZone.GameAction.AI_discardNum(discAmount, ability);
 	    			}
     			}
     		}
@@ -316,7 +313,7 @@ public class Cost_Payment {
         AllZone.Stack.add(ability);
     }
     
-    public static Input input_discardCost(final int nCards, final CardList handList, SpellAbility sa, final Cost_Payment payment) {
+    public static Input input_discardCost(final int nCards, final String discType, final CardList handList, SpellAbility sa, final Cost_Payment payment) {
         final SpellAbility sp = sa;
     	Input target = new Input() {
             private static final long serialVersionUID = -329993322080934435L;
@@ -326,8 +323,11 @@ public class Cost_Payment {
             @Override
             public void showMessage() {
             	if (AllZone.Human_Hand.getCards().length == 0) stop();
-            	
-                AllZone.Display.showMessage("Select a card to discard");
+            	StringBuilder type = new StringBuilder("");
+            	if (!discType.equals("Any")){
+            		type.append(" ").append(discType);
+            	}
+                AllZone.Display.showMessage("Select a"+ type.toString() + " card to discard");
                 ButtonUtil.enableOnlyCancel();
             }
             

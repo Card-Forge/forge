@@ -53,7 +53,7 @@ public class Ability_Cost {
 		name = cardName;
 		
         if(parse.contains("SubCounter<")) {
-        	// SubCounter<CounterType/NumCounters>
+        	// SubCounter<NumCounters/CounterType>
         	subtractCounterCost = true;
         	int counterPos = parse.indexOf("SubCounter<");
         	int endPos = parse.indexOf(">", counterPos);
@@ -63,9 +63,9 @@ public class Ability_Cost {
         	str = str.replace("SubCounter<", "");
         	str = str.replace(">", "");
         	String[] strSplit = str.split("/");
-        	// convert strSplit[0] to Counter.something
-        	counterType = Counters.valueOf(strSplit[0]);
-        	counterAmount = Integer.parseInt(strSplit[1]);
+
+        	counterAmount = Integer.parseInt(strSplit[0]);
+        	counterType = Counters.valueOf(strSplit[1]);
         }       
 		
         if(parse.contains("PayLife<")) {
@@ -83,7 +83,7 @@ public class Ability_Cost {
         }
         
         if (parse.contains("Discard<")){
-        	// Discard<NumCards,DiscardType>
+        	// Discard<NumCards/DiscardType>
         	discardCost = true;
         	int startPos = parse.indexOf("Discard<");
         	int endPos = parse.indexOf(">", startPos);
@@ -93,7 +93,7 @@ public class Ability_Cost {
         	str = str.replace("Discard<", "");
         	str = str.replace(">", "");
         	
-        	String[] splitStr = str.split(",");
+        	String[] splitStr = str.split("/", 2);
         	
         	discardAmount = Integer.parseInt(splitStr[0]);
         	discardType = splitStr[1];
@@ -258,9 +258,9 @@ public class Ability_Cost {
 			}
 			else{
 				cost.append(discardAmount);
-				int type = discardType.indexOf("/");
-				if (type != -1)
-					cost.append(discardType.substring(type + 1)).append(" ");
+				if (!discardType.equals("Any") && !discardType.equals("Random")){
+					cost.append(" ").append(discardType);
+				}
 				cost.append(" card");
 				if (discardAmount > 1)
 					cost.append("s");

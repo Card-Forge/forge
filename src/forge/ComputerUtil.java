@@ -253,9 +253,8 @@ public class ComputerUtil
     			// this will always work
     		}
     		else{
-    			int type = discType.indexOf("/");
-    			if (type != -1){
-    				String validType[] = discType.substring(type+1).split(",");
+    			if (!discType.equals("Any") && !discType.equals("Random")){
+    				String validType[] = discType.split(",");
     				handList = handList.getValidCards(validType);
     			}
 	    		if (discAmount > handList.size()){

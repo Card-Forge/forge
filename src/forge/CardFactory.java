@@ -4753,7 +4753,7 @@ public class CardFactory implements NewConstants {
             String parse = card.getKeyword().get(spike).toString();
             card.removeIntrinsicKeyword(parse);
             
-            final Ability_Cost cost = new Ability_Cost("2 SubCounter<P1P1/1>", card.getName(), true);
+            final Ability_Cost cost = new Ability_Cost("2 SubCounter<1/P1P1>", card.getName(), true);
             final Target tgt = new Target("TgtC");
             
             final int m = Integer.parseInt(parse.substring(6));

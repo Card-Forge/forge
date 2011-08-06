@@ -1,0 +1,10 @@
+Name:Skyshroud Vampire
+ManaCost:3 B B
+Types:Creature Vampire
+Text:no text
+PT:3/3
+K:Flying
+K:abPump Discard<1/Creature>:+2/+2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_vampire.jpg
+End
