@@ -417,7 +417,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Electro 3  		hard   	Resonantg's Stormfront deck with mods, Arashi, the Sky Asunder + Ball Lightning");
         sb.append("\r\n");
-	sb.append("Endora 2  		medium  enchantress deck, enchantments + cards with enchantment effects");
+	    sb.append("Endora 2  		medium  enchantress deck, enchantments + cards with enchantment effects");
         sb.append("\r\n");
         sb.append("Endora 3  		hard   	enchantress deck, enchantments + cards with enchantment effects");
         sb.append("\r\n");
@@ -435,13 +435,13 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Frodo 3		hard	New, Apthaven's AI Zoo Hard, more creature removal + Glorious Anthems");
         sb.append("\r\n");
-	  sb.append("Galadriel 2		medium	Amulet of Vigor, green mana ramp, time vault and Howl of the Night Pack");
+	    sb.append("Galadriel 2		medium	Amulet of Vigor, green mana ramp, time vault and Howl of the Night Pack");
         sb.append("\r\n");
-	  sb.append("Galahad 1		easy		apthaven's knight deck with Kinsbaile Cavalier and Knight Exemplar");
+	    sb.append("Galahad 1		easy		apthaven's knight deck with Kinsbaile Cavalier and Knight Exemplar");
         sb.append("\r\n");
-	  sb.append("Galahad 2		medium	apthaven's knight deck with Kinsbaile Cavalier and Knight Exemplar");
+	    sb.append("Galahad 2		medium	apthaven's knight deck with Kinsbaile Cavalier and Knight Exemplar");
         sb.append("\r\n");
-	  sb.append("Galahad 3		hard		apthaven's knight deck with Kinsbaile Cavalier and Knight Exemplar");
+	    sb.append("Galahad 3		hard		apthaven's knight deck with Kinsbaile Cavalier and Knight Exemplar");
         sb.append("\r\n");
         sb.append("Genghis Khan 1	easy	Mana Elves + Birds + Armageddon, Llanowar Behemoth");
         sb.append("\r\n");
@@ -579,7 +579,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("R2-D2 3   		hard  	Black Vise, bounce (Boomerang) spells, Howling Mine");
         sb.append("\r\n");
- 	sb.append("Radagast 2  		medium 	Muraganda Petroglyphs, green vanilla creatures and a few tokens");
+ 	    sb.append("Radagast 2  		medium 	Muraganda Petroglyphs, green vanilla creatures and a few tokens");
         sb.append("\r\n");
         sb.append("Rocky 1		easy	Pro red, Flamebreak + Tremor + Pyroclasm but no Pyrohemia");
         sb.append("\r\n");
@@ -635,7 +635,11 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("The Great Gazoo 3	hard	Sloth's Sun Lotion deck, red damage all spells and pro from red creatures");
         sb.append("\r\n");
-	sb.append("Treebeard 2		medium	Treefolk creatures. Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder, Doran");
+        sb.append("Treebeard 1		easy	Treefolk creatures, a lumberjack's dream. Bosk Banneret, Dauntless Dourbark, Leaf-Crowned Elder");
+        sb.append("\r\n");
+	    sb.append("Treebeard 2		medium	Treefolk creatures. Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder, Doran");
+        sb.append("\r\n");
+        sb.append("Treebeard 3		hard	Treefolk creatures. Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder, Doran");
         sb.append("\r\n");
         sb.append("Uncle Owen 3		hard	Creature removal/control with Liliana Vess");
         sb.append("\r\n");
