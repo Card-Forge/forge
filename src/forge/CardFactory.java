@@ -4635,7 +4635,9 @@ public class CardFactory implements NewConstants {
                 }
            }
         }//spLoseLife
-
+        
+        
+        /* Cards converted to AF_AB$LoseLife
         if (hasKeyword(card, "abLoseLife") != -1)
         {
         	// abLoseLife{Tgt} <abCost>:<lifeLoss>:{Drawback$<Drawback>}:<SADesc>:<StackDesc>
@@ -4784,8 +4786,10 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(abLoseLife);
         	}
         }// abLoseLife
+        */
         
-        /*
+        
+        /* Cards converted to AF_SP$GainLife
         if (hasKeyword(card, "spGainLife") != -1)
         {
         	int n = hasKeyword(card, "spGainLife");
