@@ -260,6 +260,9 @@ public abstract class Player extends MyObservable{
 		return false;
 	}
 	
+	public boolean canTarget(Card card) {
+		return !hasShroud();
+	}	
 	
 	public boolean canPlaySpells() {
 		return true;
@@ -318,7 +321,7 @@ public abstract class Player extends MyObservable{
 		}
 		//lose:
 		else if(Constant.Runtime.Mill[0]) {
-			if (cantLose()){
+			if (!cantLose()){
 				altLoseConditionMet("Milled");
 				AllZone.GameAction.checkStateEffects();
 			}
