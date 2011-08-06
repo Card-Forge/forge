@@ -8147,6 +8147,7 @@ src/forge/Gui_DownloadPictures.java svneol=native#text/plain
 src/forge/Gui_DownloadPictures_LQ.java -text svneol=native#text/plain
 src/forge/Gui_DownloadPrices.java -text svneol=native#text/plain
 src/forge/Gui_DownloadSetPictures_LQ.java -text svneol=native#text/plain
+src/forge/Gui_MigrateLocalMWSSetPictures_HQ.java -text svneol=native#text/plain
 src/forge/Gui_MultipleBlockers.java svneol=native#text/plain
 src/forge/Gui_NewGame.java svneol=native#text/plain
 src/forge/Gui_QuestOptions.java svneol=native#text/plain
