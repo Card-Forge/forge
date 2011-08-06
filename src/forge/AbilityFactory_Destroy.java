@@ -228,6 +228,10 @@ public class AbilityFactory_Destroy {
 			 return false;
 		 }
 		 
+		 Ability_Sub subAb = sa.getSubAbility();
+		 if (subAb != null)
+		 	chance &= subAb.chkAI_Drawback();
+		 
 		 return ((r.nextFloat() < .6667) && chance);
 	}
 	
@@ -281,6 +285,10 @@ public class AbilityFactory_Destroy {
 		 else if(CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil.evaluateCreatureList(humanlist))
 			 return false;
 		 
+		 Ability_Sub subAb = sa.getSubAbility();
+		 if (subAb != null)
+		 	chance &= subAb.chkAI_Drawback();
+		 
 		 return ((r.nextFloat() < .6667) && chance);
 	}
 	
@@ -311,8 +319,16 @@ public class AbilityFactory_Destroy {
 	       }
 		}
 		
-		if (af.hasSubAbility())
-			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, firstTarget, sa);
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   if (abSub.getParent() == null)
+				  abSub.setParent(sa);
+			   abSub.resolve();
+			}
+			else
+				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, firstTarget, sa);
+		}
      }
 	
 	public static void destroyAllResolve(final AbilityFactory af, final SpellAbility sa, final boolean noRegen){
@@ -335,8 +351,16 @@ public class AbilityFactory_Destroy {
 	 	else
 	 		for(int i = 0; i < list.size(); i++) AllZone.GameAction.destroy(list.get(i));
 		
-		if (af.hasSubAbility())
-			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+	 	if (af.hasSubAbility()){
+	 		Ability_Sub abSub = sa.getSubAbility();
+	 		if (abSub != null){
+	 		   if (abSub.getParent() == null)
+	 			  abSub.setParent(sa);
+	 		   abSub.resolve();
+	 		}
+	 		else
+	 			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+	 	}
      }
 	
 	
@@ -370,6 +394,12 @@ public class AbilityFactory_Destroy {
 			 sb.append(" can't be regenerated");
 		 }
 		
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			abSub.setParent(sa);
+			sb.append(abSub.getStackDescription());
+		}
+		 
 		 return sb.toString();
 	}
 	
@@ -393,6 +423,12 @@ public class AbilityFactory_Destroy {
 						 
 		 if(noRegen) sb.append(". They can't be regenerated");
 		
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null) {
+				abSub.setParent(sa);
+				sb.append(abSub.getStackDescription());
+			}
+		 
 		 return sb.toString();
 	}
 }

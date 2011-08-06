@@ -112,8 +112,17 @@ public class AbilityFactory_Fetch {
 	            		AllZone.getZone(Constant.Zone.Removed_From_Play, player).add(c);
 
 	            }
-	            if (af.hasSubAbility())
-	    			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+	            
+	            if (af.hasSubAbility()){
+	            	Ability_Sub abSub = sa.getSubAbility();
+	            	if (abSub != null){
+	            	   if (abSub.getParent() == null)
+	            		  abSub.setParent(sa);
+	            	   abSub.resolve();
+	            	}
+	            	else
+	            		CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+	            }
 	        }//if
         }
 	}
@@ -179,8 +188,17 @@ public class AbilityFactory_Fetch {
                 	AllZone.Computer_Library.add(c, libraryPosition);
             	}//move to top of library
 	        }//if
-	        if (af.hasSubAbility())
-    			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+	        
+	        if (af.hasSubAbility()){
+	        	Ability_Sub abSub = sa.getSubAbility();
+	        	if (abSub != null){
+	        	   if (abSub.getParent() == null)
+	        		  abSub.setParent(sa);
+	        	   abSub.resolve();
+	        	}
+	        	else
+	        		CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+	        }
         }
 	}
 
@@ -220,6 +238,10 @@ public class AbilityFactory_Fetch {
 
 		// todo: add more decision making for Fetching
 		// if Type is Land or a Land Type, improve chances for each Landfall card you control
+		
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
 		
 		return ((r.nextFloat() < .8) && chance);
 	}
@@ -447,6 +469,12 @@ public class AbilityFactory_Fetch {
 		 if(destination.equals("Exile"))
 			 sb.append("Exile").append(targetname);
 		 
+		 Ability_Sub abSub = sa.getSubAbility();
+		 if (abSub != null) {
+		 	abSub.setParent(sa);
+		 	sb.append(abSub.getStackDescription());
+		 }
+		 
 		 return sb.toString();
 	}
 	
@@ -562,6 +590,9 @@ public class AbilityFactory_Fetch {
 		}
 
 		// todo: add more decision making for Retrieve
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
 		
 		return ((r.nextFloat() < .8) && chance);
 	}
@@ -625,10 +656,20 @@ public class AbilityFactory_Fetch {
 	    		AllZone.getZone(Constant.Zone.Removed_From_Play, tgtC.getOwner()).add(tgtC);
 	    	}
 		}
-		String DrawBack = af.getMapParams().get("SubAbility");
-		Card card = sa.getSourceCard();
+
 		
-        if (af.hasSubAbility())
-			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   if (abSub.getParent() == null)
+				  abSub.setParent(sa);
+			   abSub.resolve();
+			}
+			else{
+				String DrawBack = af.getMapParams().get("SubAbility");
+				Card card = sa.getSourceCard();
+				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+			}
+		}
     }//if
 }

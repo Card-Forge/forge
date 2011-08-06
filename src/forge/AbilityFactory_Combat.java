@@ -16,7 +16,7 @@ public class AbilityFactory_Combat {
 			
 			public boolean canPlayAI()
 			{
-				return putCanPlayAI(af);
+				return putCanPlayAI(af, this);
 			}
 			
 			@Override
@@ -41,7 +41,7 @@ public class AbilityFactory_Combat {
 			
 			public boolean canPlayAI()
 			{
-				return putCanPlayAI(af);
+				return putCanPlayAI(af, this);
 			}
 			
 			@Override
@@ -53,9 +53,15 @@ public class AbilityFactory_Combat {
 		return spFog;
 	}
 	
-	public static boolean putCanPlayAI(final AbilityFactory af){
+	public static boolean putCanPlayAI(final AbilityFactory af, SpellAbility sa){
 		// AI cannot use this properly until he can use SAs during Humans turn
-		return false;
+		boolean chance = false;
+		
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
+		
+		return chance;
 	}
 	
 	public static void putResolve(final AbilityFactory af, final SpellAbility sa){
@@ -66,8 +72,15 @@ public class AbilityFactory_Combat {
 		// Expand Fog keyword here depending on what we need out of it.
 		AllZone.GameInfo.setPreventCombatDamageThisTurn(true);
 		
-		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   if (abSub.getParent() == null)
+				  abSub.setParent(sa);
+			   abSub.resolve();
+			}
+			else
+				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+		}
 	}
 }

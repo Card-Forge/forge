@@ -30,18 +30,7 @@ public class AbilityFactory_Regenerate {
 			
 			@Override
 			public String getStackDescription(){
-				 StringBuilder sb = new StringBuilder();
-				 String name = af.getHostCard().getName();
-				 sb.append(name).append(" - regenerate ");
-				 Card tgt = getTargetCard();
-				 if (tgt != null) {
-					 if(tgt.isFaceDown()) sb.append("Morph");
-					 else sb.append(tgt.getName());
-				 }
-				 else {
-					 sb.append(af.getHostCard().getName());
-				 }
-				 return sb.toString();
+				return regenerateStackDescription(af, this);
 			}
 			
 		};//Ability_Activated
@@ -71,26 +60,39 @@ public class AbilityFactory_Regenerate {
 			
 			@Override
 			public String getStackDescription(){
-				 StringBuilder sb = new StringBuilder();
-				 String name = af.getHostCard().getName();
-				 sb.append(name).append(" - regenerate ");
-				 Card tgt = getTargetCard();
-				 if (tgt != null) {
-					 if(tgt.isFaceDown()) sb.append("Morph");
-					 else sb.append(tgt.getName());
-				 }
-				 else {
-					 sb.append(af.getHostCard().getName());
-				 }
-				 return sb.toString();
+				return regenerateStackDescription(af, this);
 			}
 			
 		}; // Spell
 
 		return spRegenerate;
 	}
+	
+	private static String regenerateStackDescription(AbilityFactory af, SpellAbility sa){
+		 StringBuilder sb = new StringBuilder();
+		 String name = af.getHostCard().getName();
+		 sb.append(name).append(" - regenerate ");
+		 Card tgt = sa.getTargetCard();
+		 if (tgt != null) {
+			 if(tgt.isFaceDown()) sb.append("Morph");
+			 else sb.append(tgt.getName());
+		 }
+		 else {
+			 sb.append(af.getHostCard().getName());
+		 }
+		 
+		 Ability_Sub abSub = sa.getSubAbility();
+		 if (abSub != null) {
+		 	abSub.setParent(sa);
+		 	sb.append(abSub.getStackDescription());
+		 }
+		 
+		 return sb.toString();
+	}
 
 	private static boolean doCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+		boolean chance = false;
+		
 		// temporarily disabled until better AI
 		if (af.getAbCost().getSacCost())	 return false;
 		if (af.getAbCost().getSubCounter())  return false;
@@ -149,12 +151,19 @@ public class AbilityFactory_Regenerate {
 				int aw = (weight[0] + weight[1] + weight[2]) / 3;
 				Random r = new Random();
 				if(r.nextInt(100) <= aw) {
-					if(af.isTargeted()) af.getAbTgt().addTarget(card);
-					return true;
+					if(af.isTargeted()) 
+						af.getAbTgt().addTarget(card);
+					chance = true;
+					break;
 				}
 			}
 		}
-		return false;
+		
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
+		
+		return chance;
 	}
 
 	private static void doResolve(final AbilityFactory af, final SpellAbility sa) {
@@ -184,6 +193,13 @@ public class AbilityFactory_Regenerate {
 			}
 		}
 		
-		// TODO: handle card drawback 
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   if (abSub.getParent() == null)
+				  abSub.setParent(sa);
+			   abSub.resolve();
+			}
+		}
 	}//doResolve
 }

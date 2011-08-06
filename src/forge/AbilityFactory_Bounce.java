@@ -20,7 +20,7 @@ public class AbilityFactory_Bounce {
 			@Override
 			public String getStackDescription(){
 			// when getStackDesc is called, just build exactly what is happening
-				return bounceStackDescription(af, destination);
+				return bounceStackDescription(af, this, destination);
 			}
 			
 			public boolean canPlay(){
@@ -54,7 +54,7 @@ public class AbilityFactory_Bounce {
 			@Override
 			public String getStackDescription(){
 				// when getStackDesc is called, just build exactly what is happening
-				return bounceStackDescription(af, destination);
+				return bounceStackDescription(af, this, destination);
 			}
 			
 			public boolean canPlay(){
@@ -76,7 +76,7 @@ public class AbilityFactory_Bounce {
 		return spBounce;
 	}
 	
-	public static String bounceStackDescription(AbilityFactory af, String destination){
+	public static String bounceStackDescription(AbilityFactory af, SpellAbility sa, String destination){
 		 StringBuilder sb = new StringBuilder();
 		 Card host = af.getHostCard();
 		 
@@ -116,6 +116,12 @@ public class AbilityFactory_Bounce {
 		 
 		 if(destination.equals("Exile"))
 			 sb.append("Exile").append(targetname);
+		 
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			abSub.setParent(sa);
+			sb.append(abSub.getStackDescription());
+		}
 		 
 		 return sb.toString();
 	}
@@ -213,6 +219,10 @@ public class AbilityFactory_Bounce {
 			 return false;
 		 }
 		 
+		 Ability_Sub subAb = sa.getSubAbility();
+		 if (subAb != null)
+		 	chance &= subAb.chkAI_Drawback();
+		 
 		 return ((r.nextFloat() < .6667) && chance);
 	}
 	
@@ -230,8 +240,6 @@ public class AbilityFactory_Bounce {
 			tgtCards = new ArrayList<Card>();
 			tgtCards.add(card);
 		}
-		
-		Card firstTarget = tgtCards.get(0);
 		
 		for(Card tgtC : tgtCards){
 	 	   if(AllZone.GameAction.isCardInPlay(tgtC) && (tgt == null || CardFactoryUtil.canTarget(card, tgtC))) {
@@ -259,7 +267,17 @@ public class AbilityFactory_Bounce {
 	         }
 		}
 		
-		if (af.hasSubAbility())
-			CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, firstTarget, sa);
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   if (abSub.getParent() == null)
+				  abSub.setParent(sa);
+			   abSub.resolve();
+			}
+			else{
+				Card firstTarget = tgtCards.get(0);
+				CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, firstTarget, sa);
+			}
+		}
      }
 }

@@ -14,15 +14,7 @@ public class AbilityFactory_PermanentState {
 			
 			@Override
 			public String getStackDescription(){
-			// when getStackDesc is called, just build exactly what is happening
-				 StringBuilder sb = new StringBuilder("Untap ");
-				 String name = af.getHostCard().getName();
-				 Card tgt = getTargetCard();
-				 if (tgt != null)
-					 sb.append(tgt.getName());
-				 else
-					 sb.append(name);
-				 return sb.toString();
+				return untapStackDescription(af, this);
 			}
 			
 			public boolean canPlay(){
@@ -50,6 +42,11 @@ public class AbilityFactory_PermanentState {
 			
 			final AbilityFactory af = AF;
 			
+			@Override
+			public String getStackDescription(){
+				return untapStackDescription(af, this);
+			}
+			
 			public boolean canPlay(){
 				// super takes care of AdditionalCosts
 				return super.canPlay();	
@@ -67,6 +64,33 @@ public class AbilityFactory_PermanentState {
 			
 		};
 		return spUntap;
+	}
+	
+	public static String untapStackDescription(AbilityFactory af, SpellAbility sa){
+		// when getStackDesc is called, just build exactly what is happening
+		 StringBuilder sb = new StringBuilder();
+		 
+		 sb.append(sa.getSourceCard()).append(" - ");
+		 
+		 sb.append("Untap ");
+
+		ArrayList<Card> tgtCards;
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = new ArrayList<Card>();
+			tgtCards.add(af.getHostCard());	
+		}
+		
+		for(Card c : tgtCards)
+			sb.append(c.getName()).append(" ");
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+        	sb.append(subAb.getStackDescription());
+		
+		 return sb.toString();
 	}
 	
 	public static boolean untapCanPlayAI(final AbilityFactory af, SpellAbility sa){
@@ -130,6 +154,10 @@ public class AbilityFactory_PermanentState {
 			}
 		}
 		
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+        	randomReturn &= subAb.chkAI_Drawback();
+		
 		return randomReturn;
 	}
 	
@@ -151,12 +179,20 @@ public class AbilityFactory_PermanentState {
 				tgtC.untap();
 		}
 
-		Card c = tgtCards.get(0);
-
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+	     	   if (abSub.getParent() == null)
+	     		  abSub.setParent(sa);
+	     	   abSub.resolve();
+	        }
+	        else{
+	        	Card c = tgtCards.get(0);
 				String DrawBack = params.get("SubAbility");
 				if (af.hasSubAbility())
 					 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, c, sa);
-
+	        }
+		}
 	}
 	
 	// ****** Tapping ********
@@ -168,15 +204,7 @@ public class AbilityFactory_PermanentState {
 			
 			@Override
 			public String getStackDescription(){
-			// when getStackDesc is called, just build exactly what is happening
-				 StringBuilder sb = new StringBuilder("Tap ");
-				 String name = af.getHostCard().getName();
-				 Card tgt = getTargetCard();
-				 if (tgt != null)
-					 sb.append(tgt.getName());
-				 else
-					 sb.append(name);
-				 return sb.toString();
+				return tapStackDescription(af, this);
 			}
 			
 			public boolean canPlay(){
@@ -204,6 +232,11 @@ public class AbilityFactory_PermanentState {
 			
 			final AbilityFactory af = AF;
 			
+			@Override
+			public String getStackDescription(){
+				return tapStackDescription(af, this);
+			}
+			
 			public boolean canPlay(){
 				// super takes care of AdditionalCosts
 				return super.canPlay();	
@@ -223,6 +256,33 @@ public class AbilityFactory_PermanentState {
 		return spTap;
 	}
 	
+	public static String tapStackDescription(AbilityFactory af, SpellAbility sa){
+		// when getStackDesc is called, just build exactly what is happening
+		 StringBuilder sb = new StringBuilder();
+		 
+		 sb.append(sa.getSourceCard()).append(" - ");
+		 
+		 sb.append("Tap ");
+		 
+		ArrayList<Card> tgtCards;
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = new ArrayList<Card>();
+			tgtCards.add(af.getHostCard());	
+		}
+		
+		for(Card c : tgtCards)
+			sb.append(c.getName()).append(" ");
+
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+        	sb.append(subAb.getStackDescription());
+		
+		 return sb.toString();
+	}
+	
 	public static boolean tapCanPlayAI(final AbilityFactory af, SpellAbility sa){
 		// AI cannot use this properly until he can use SAs during Humans turn
 		if (!ComputerUtil.canPayCost(sa))
@@ -233,8 +293,6 @@ public class AbilityFactory_PermanentState {
 		
 		Random r = new Random();
 		boolean randomReturn = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
-		
-		
 		
 		if (tgt == null){
 			if (sa.getSourceCard().isTapped())
@@ -286,6 +344,10 @@ public class AbilityFactory_PermanentState {
 			}
 		}
 		
+        Ability_Sub subAb = sa.getSubAbility();
+        if (subAb != null)
+        	randomReturn &= subAb.chkAI_Drawback();
+		
 		return randomReturn;
 	}
 	
@@ -307,12 +369,20 @@ public class AbilityFactory_PermanentState {
 				tgtC.tap();
 		}
 		
-		Card c = tgtCards.get(0);
-		
-		String DrawBack = params.get("SubAbility");
-		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, c, sa);
-
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+	     	   if (abSub.getParent() == null)
+	     		  abSub.setParent(sa);
+	     	   abSub.resolve();
+	        }
+	        else{
+	    		Card c = tgtCards.get(0);
+	    		String DrawBack = params.get("SubAbility");
+	    		if (af.hasSubAbility())
+	    			 CardFactoryUtil.doDrawBack(DrawBack, 0, card.getController(), card.getController().getOpponent(), card.getController(), card, c, sa);
+	        }
+		}
 	}
 	
 	// Untap All/Tap All

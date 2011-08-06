@@ -230,7 +230,7 @@ public class AbilityFactory_Counters {
 			
 			if (abCost.getSubCounter()){
 				// A card has a 25% chance per counter to be able to pass through here
-				// 8+ counters will always pass. 0 counters will never
+				// 4+ counters will always pass. 0 counters will never
 				int currentNum = source.getCounters(abCost.getCounterType());
 				double percent = .25 * (currentNum / abCost.getCounterNum());
 				if (percent <= r.nextFloat())
@@ -316,6 +316,10 @@ public class AbilityFactory_Counters {
 				 return false;
 		 }
 		 
+		 Ability_Sub subAb = sa.getSubAbility();
+		 if (subAb != null)
+		 	chance &= subAb.chkAI_Drawback();
+		 
 		 return ((r.nextFloat() < .6667) && chance);
 	}
 	
@@ -343,7 +347,7 @@ public class AbilityFactory_Counters {
 			
 			if (abCost.getSubCounter()){
 				// A card has a 25% chance per counter to be able to pass through here
-				// 8+ counters will always pass. 0 counters will never
+				// 4+ counters will always pass. 0 counters will never
 				int currentNum = source.getCounters(abCost.getCounterType());
 				double percent = .25 * (currentNum / abCost.getCounterNum());
 				if (percent <= r.nextFloat())
@@ -367,7 +371,10 @@ public class AbilityFactory_Counters {
 		 // each counter on the card is a 10% chance of not activating this ability. 
 		 if (r.nextFloat() < .1 * currCounters)	
 			 return false;
-
+		 
+		 Ability_Sub subAb = sa.getSubAbility();
+		 if (subAb != null)
+		 	chance &= subAb.chkAI_Drawback();
 
 		 return ((r.nextFloat() < .6667) && chance);
 	}
@@ -391,9 +398,16 @@ public class AbilityFactory_Counters {
 			if(AllZone.GameAction.isCardInPlay(tgtCard) && (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)))
 				tgtCard.addCounter(Counters.valueOf(type), counterAmount);
 		
-		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   if (abSub.getParent() == null)
+				  abSub.setParent(sa);
+			   abSub.resolve();
+			}
+			else
+				CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+		}
 	}
 	
 	public static void removeResolve(final AbilityFactory af, final SpellAbility sa, int counterAmount, final String type){
@@ -415,15 +429,20 @@ public class AbilityFactory_Counters {
 			if(AllZone.GameAction.isCardInPlay(tgtCard) && (tgt == null || CardFactoryUtil.canTarget(card, tgtCard)))
 				tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
 		
-		if (af.hasSubAbility())
-			 CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
-
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   if (abSub.getParent() == null)
+				  abSub.setParent(sa);
+			   abSub.resolve();
+			}
+			else
+				CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, null, sa);
+		}
 	}
 	
-	
-	// move proliferate here? AB$Proliferate
-	
-	//TODO - |NumProliferate$2
+	// ********** Proliferate ********************
+	// Instead of NumProliferate, do Profilerate SubAbility$Proliferate
 	
 	public static SpellAbility createAbilityProliferate(final AbilityFactory AF) {
 		final SpellAbility abProliferate = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
@@ -431,12 +450,12 @@ public class AbilityFactory_Counters {
 
 			@Override
 			public boolean canPlayAI() {
-    			return shouldProliferateAI();
+    			return shouldProliferateAI(this);
     		}
 			
     		@Override
 			public void resolve() {
-    			proliferateResolve(AF);
+    			proliferateResolve(AF, this);
     		}
     		
     		@Override
@@ -465,12 +484,12 @@ public class AbilityFactory_Counters {
 
 			@Override
 			public boolean canPlayAI() {
-    			return shouldProliferateAI();
+    			return shouldProliferateAI(this);
     		}
 			
     		@Override
 			public void resolve() {
-    			proliferateResolve(AF);
+    			proliferateResolve(AF, this);
     		}
     		
     		@Override
@@ -491,11 +510,17 @@ public class AbilityFactory_Counters {
     	return spProliferate;
     }
 	
-	private static boolean shouldProliferateAI() {
-		return true;
+	private static boolean shouldProliferateAI(SpellAbility sa) {
+		boolean chance = true;
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
+		
+		// todo: Make sure Human has poison counters or there are some counters we want to proliferate
+		return chance;
 	}
 	
-	private static void proliferateResolve(final AbilityFactory AF) {
+	private static void proliferateResolve(final AbilityFactory AF, SpellAbility sa) {
 		CardList hperms = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 		hperms = hperms.filter(new CardListFilter() {
 			public boolean addCard(Card crd)
@@ -634,5 +659,14 @@ public class AbilityFactory_Counters {
         		AllZone.HumanPlayer.addPoisonCounters(1);
 			
 		} //comp
+		
+		if (AF.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   if (abSub.getParent() == null)
+				  abSub.setParent(sa);
+			   abSub.resolve();
+			}
+		}
 	}
 }
