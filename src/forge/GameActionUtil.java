@@ -3188,6 +3188,67 @@ public class GameActionUtil
 		AllZone.Stack.add(ability);
 	}
 	
+	public static void executeGrvDestroyCardEffects(Card c, Card destroyed)
+	{
+		if (c.getName().contains("Bridge from Below") && destroyed.getController().equals(c.getController()) && !destroyed.isToken() )
+			destroyCreature_Bridge_from_Below_maketoken(c,destroyed);
+		if (c.getName().contains("Bridge from Below") && !destroyed.getController().equals(c.getController()))
+			destroyCreature_Bridge_from_Below_remove(c);
+	}
+	
+	private static void destroyCreature_Bridge_from_Below_maketoken(Card c, Card destroyed)
+	{
+		final Card crd = c;
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				makeToken();
+			}
+			public void makeToken()
+			{
+				 String player = crd.getController();
+				 Card c = new Card();
+
+	        	  c.setName("Zombie");
+	  	          c.setImageName("B 2 2 Zombie");
+
+	  	          c.setOwner(player);
+	  	          c.setController(player);
+
+	  	          c.setManaCost("B");
+	  	          c.setToken(true);
+	  	         
+	  	          c.addType("Creature");
+	  	          c.addType("Zombie");
+	  	          c.setBaseAttack(2);
+	  	          c.setBaseDefense(2);
+
+	  	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+	  	          play.add(c);
+			}
+		};
+		ability.setStackDescription("Bridge from Below - " + c.getController() +"puts a 2/2 black Zombie creature token onto the battlefield.");
+		AllZone.Stack.add(ability);
+	}
+	
+	private static void destroyCreature_Bridge_from_Below_remove(Card c)
+	{
+		final Card crd = c;
+		Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+			PlayerZone grv = AllZone.getZone(Constant.Zone.Graveyard, crd.getController());
+			PlayerZone exile = AllZone.getZone(Constant.Zone.Removed_From_Play, crd.getController());
+			grv.remove(crd);
+            exile.add(crd);
+			}
+		};
+		ability.setStackDescription("Bridge from Below - " + c.getController() +" exile Bridge from Below.");
+		AllZone.Stack.add(ability);
+	}
+
 	
 	//***LANDS END HERE***
 	
@@ -3218,6 +3279,8 @@ public class GameActionUtil
 		
 		AllZone.Stack.add(ability);
 	}
+	
+	
 	
 	
 	//***ENCHANTMENTS END HERE***

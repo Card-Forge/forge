@@ -3050,7 +3050,19 @@ public class CardFactory implements NewConstants {
     }
     //*************** END ************ END **************************
 
+    //*************** START *********** START **************************
+    else if(cardName.equals("Bridge from Below"))
+    {
+      SpellAbility spell = new Spell_Permanent(card)
+      {
+		private static final long serialVersionUID = 7254358703158629514L;
 
+		public boolean canPlayAI() { return false; }
+      };
+      card.clearSpellAbility();
+      card.addSpellAbility(spell);
+	 }
+//*************** END ************ END *************************
 
     //*************** START *********** START **************************
     else if(cardName.equals("Nevinyrral's Disk"))

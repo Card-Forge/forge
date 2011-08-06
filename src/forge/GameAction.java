@@ -579,7 +579,8 @@ private Card getCurrentCard(int ID)
     //destroy card effects:
     PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
     PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
-    
+    PlayerZone grv_comp = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+    PlayerZone grv_hum = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
     CardList list = new CardList();
     list.addAll(comp.getCards());
     list.addAll(hum.getCards());
@@ -594,9 +595,22 @@ private Card getCurrentCard(int ID)
 			return false;
 		}
     });
+    CardList grv = new CardList();
+    grv.addAll(grv_comp.getCards());
+    grv.addAll(grv_hum.getCards());
+    grv = grv.filter(new CardListFilter(){
+		public boolean addCard(Card c) {
+			if (c.getName().contains("Bridge from Below"))
+			return true; 
+			return false;
+		}
+    });
+    
     
     for (int i=0;i<list.size();i++)
     	GameActionUtil.executeDestroyCardEffects(list.get(i), c);	
+    for (int i=0;i<grv.size();i++)
+    	GameActionUtil.executeGrvDestroyCardEffects(grv.get(i), c);	
     
     if (persist){
     	c.setDamage(0);
