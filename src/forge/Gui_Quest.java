@@ -397,7 +397,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Fat Albert 3   		hard  	Winter Orb, Keldon Warlord, mana Elves/Slivers + several 6/6 creatures");
         sb.append("\r\n");
-        sb.append("Fred FLintstone 3   		hard  	Reasontg's Predator's Garden deck with mods, featuring Lorescale Coatl");
+        sb.append("Fred FLintstone 3	hard  	Reasontg's Predator's Garden deck with mods, featuring Lorescale Coatl");
         sb.append("\r\n");
         sb.append("Frodo 1		easy	New, Apthaven's AI Zoo Easy, some creature removal");
         sb.append("\r\n");
@@ -496,6 +496,12 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("Morpheus 3		hard	Elves with Overrun, Gaea's Anthem, Imperious Perfect and other pumps");
         sb.append("\r\n");
         sb.append("Napoleon 3		hard	Walls, Rolling Stones and Doran, the Siege Tower");
+        sb.append("\r\n");
+        sb.append("Ned Flanders 1		easy	Sloth's reanimator deck, a few large creatures and some spells");
+        sb.append("\r\n");
+        sb.append("Ned Flanders 2		medium	Sloth's reanimator deck, a few large creatures and some spells");
+        sb.append("\r\n");
+        sb.append("Ned Flanders 3		hard	Sloth's reanimator deck, a few large creatures and some spells");
         sb.append("\r\n");
         sb.append("Neo 3		hard	RG with Groundbreaker and other attack once then sacrifice at EoT creatures");
         sb.append("\r\n");
