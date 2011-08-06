@@ -13512,7 +13512,8 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
     
-  //*************** START *********** START **************************
+/*
+    //*************** START *********** START **************************
     else if(cardName.equals("Gerrard's Command"))
     {
       SpellAbility spell = new Spell(card)
@@ -13569,7 +13570,7 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-
+*/
 
 /*
     //*************** START *********** START **************************
@@ -14044,7 +14045,9 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
-
+    
+    
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Inspirit"))
     {
@@ -14103,6 +14106,8 @@ public class CardFactory implements NewConstants {
       card.clearSpellAbility();
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
+*/
+
 
     //*************** START *********** START **************************
     else if(cardName.equals("Animate Land"))

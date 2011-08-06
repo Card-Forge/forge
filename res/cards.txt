@@ -10150,9 +10150,10 @@ no text
 PTKPump U B:-2/-0/Unblockable
 
 Gerrard's Command
-G W
+W G
 Instant
-Untap target creature. It gets +3/+3 until end of turn.
+no text
+spPumpTgt:+3/+3:Drawback$UntapTgt:Untap target creature. It gets +3/+3 until end of turn.:Untap target creature. It gets +3/+3 until end of turn.
 
 Land Tax
 W
@@ -14901,7 +14902,8 @@ Creatures you control get +X/+X until end of turn, where X is 1 plus the number 
 Inspirit
 2 W
 Instant
-Untap target creature. It gets +2/+4 until end of turn.
+no text
+spPumpTgt:+2/+4:Drawback$UntapTgt:Untap target creature. It gets +2/+4 until end of turn.:Insprit - Untap target creature. It gets +2/+4 until end of turn.
 
 Haunted Angel
 2 W
