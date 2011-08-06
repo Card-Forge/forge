@@ -69,6 +69,7 @@ res/cardsfolder/aether_flash.txt -text svneol=native#text/plain
 res/cardsfolder/aether_membrane.txt -text svneol=native#text/plain
 res/cardsfolder/aether_mutation.txt -text svneol=native#text/plain
 res/cardsfolder/aether_spellbomb.txt -text svneol=native#text/plain
+res/cardsfolder/aether_tradewinds.txt -text svneol=native#text/plain
 res/cardsfolder/aether_vial.txt -text svneol=native#text/plain
 res/cardsfolder/aether_web.txt -text svneol=native#text/plain
 res/cardsfolder/aetherflame_wall.txt -text svneol=native#text/plain
