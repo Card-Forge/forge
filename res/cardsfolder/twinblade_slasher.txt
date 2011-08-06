@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Elf Warrior
 Text:Activate this ability only once each turn.
 PT:1/1
-A:AB$Pump|Cost$1 G|NumAtt$+2|NumDef$+2|ActivationLimit$1|SpellDescription$Twinblade Slasher gets +2/+2 until end of turn. Activate this ability only once each turn.
+A:AB$Pump | Cost$ 1 G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ Twinblade Slasher gets +2/+2 until end of turn. Activate this ability only once each turn.
 K:Wither
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twinblade_slasher.jpg

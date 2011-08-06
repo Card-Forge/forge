@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 K:Mountainwalk
 # K:abPump R:+1/+0
-A:AB$Pump|Cost$R|NumAtt$+1|SpellDescription$Colos Yearling gets +1/+0 until end of turn.
+A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ Colos Yearling gets +1/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/colos_yearling.jpg
 End

@@ -4,7 +4,7 @@ Types:Creature Drake
 Text:no text
 PT:1/3
 K:Flying
-A:AB$Pump|Cost$U|NumAtt$+1|ActivationLimit$1|SpellDescription$Azimaet Drake gets +1/+0 until end of turn. Activate this ability only once each turn.
+A:AB$Pump | Cost$ U | NumAtt$ +1 | ActivationLimit$ 1 | SpellDescription$ Azimaet Drake gets +1/+0 until end of turn. Activate this ability only once each turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azimaet_drake.jpg
 End

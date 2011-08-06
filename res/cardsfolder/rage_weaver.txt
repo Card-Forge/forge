@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Human Wizard
 Text:no text
 PT:2/1
-A:AB$Pump|Cost$2|ValidTgts$Creature.Black,Creature.Green|KW$Haste|SpellDescription$Target black or green creature gains haste until end of turn.|TgtPrompt$Select target black or green creature.
+A:AB$Pump | Cost$ 2 | ValidTgts$ Creature.Black,Creature.Green | KW$ Haste | SpellDescription$ Target black or green creature gains haste until end of turn. | TgtPrompt$ Select target black or green creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_weaver.jpg
 End

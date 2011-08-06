@@ -3,7 +3,7 @@ ManaCost:B G
 Types:Creature Zombie Leech
 Text:no text
 PT:2/2
-A:AB$Pump|Cost$PayLife<2>|NumAtt$+2|NumDef$+2|ActivationLimit$1|SpellDescription$Putrid Leech gets +2/+2 until end of turn. Activate this ability only once each turn.
+A:AB$Pump | Cost$ PayLife<2> | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ Putrid Leech gets +2/+2 until end of turn. Activate this ability only once each turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_leech.jpg
 End

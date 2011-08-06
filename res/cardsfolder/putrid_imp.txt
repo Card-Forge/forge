@@ -3,7 +3,7 @@ ManaCost:B
 Types:Creature Zombie Imp
 Text:no text
 PT:1/1
-A:AB$Pump|Cost$Discard<1/Any>|KW$Flying|SpellDescription$Putrid Imp gains flying until end of turn.
+A:AB$Pump | Cost$ Discard<1/Any> | KW$ Flying | SpellDescription$ Putrid Imp gains flying until end of turn.
 K:stPumpSelf:Creature:1/1/HIDDEN CARDNAME can't block.:Threshold:Threshold - As long as seven or more cards are in your graveyard, Putrid Imp gets +1/+1 and can't block.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_imp.jpg

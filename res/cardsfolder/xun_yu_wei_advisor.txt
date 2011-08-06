@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Legendary Creature Human Advisor
 Text:no text
 PT:1/1
-A:AB$Pump|Cost$T|NumAtt$+2|ValidTgts$Creature.YouCtrl|PlayerTurn$True|ActivatingPhases$Upkeep,Draw,Main1,BeginCombat|SpellDescription$Target creature you control gets +2/+0 until end of turn. Activate this ability only during your turn, before attackers are declared.
+A:AB$Pump | Cost$ T | NumAtt$ +2 | ValidTgts$ Creature.YouCtrl | PlayerTurn$ True | ActivatingPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ Target creature you control gets +2/+0 until end of turn. Activate this ability only during your turn, before attackers are declared.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/xun_yu_wei_advisor.jpg
 End

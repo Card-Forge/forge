@@ -3,7 +3,7 @@ ManaCost:6 R
 Types:Creature Giant
 Text:no text
 PT:3/3
-A:AB$Pump|Cost$tapXType<1/Land.Snow>|NumAtt$+1|NumDef$+1|SpellDescription$Karplusan Giant gets +1/+1 until end of turn.
+A:AB$Pump | Cost$ tapXType<1/Land.Snow> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Karplusan Giant gets +1/+1 until end of turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karplusan_giant.jpg

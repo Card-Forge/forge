@@ -4,7 +4,7 @@ Types:Creature Drake
 Text:no text
 PT:2/2
 K:Flying
-A:AB$Pump|Cost$R|NumAtt$+1|ActivationLimit$1|SpellDescription$Spitting Drake gets +1/+0 until end of turn. Activate this ability only once each turn.
+A:AB$Pump | Cost$ R | NumAtt$ +1 | ActivationLimit$ 1 | SpellDescription$ Spitting Drake gets +1/+0 until end of turn. Activate this ability only once each turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitting_drake.jpg
 End

@@ -2,7 +2,7 @@ Name:Crippling Fatigue
 ManaCost:1 B B
 Types:Sorcery
 Text:no text
-A:SP$Pump|Cost$1 B B|Tgt$TgtC|NumAtt$-2|NumDef$-2|IsCurse$True|SpellDescription$Target creature gets -2/-2 until end of turn.
+A:SP$Pump | Cost$ 1 B B | Tgt$ TgtC | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.
 K:Flashback:1 B PayLife<3>
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crippling_fatigue.jpg

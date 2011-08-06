@@ -3,7 +3,7 @@ ManaCost:G
 Types:Instant
 Text:no text
 # K:spPumpTgt:+3/+3
-A:SP$Pump|Cost$G|ValidTgts$Creature|NumAtt$+3|NumDef$+3|SpellDescription$Target creature gets +3/+3 until end of turn.|TgtPrompt$Select target creature.
+A:SP$Pump | Cost$ G | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn. | TgtPrompt$ Select target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_growth.jpg
 SetInfo:LEA|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=153&type=card
