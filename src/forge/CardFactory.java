@@ -9480,7 +9480,7 @@ public class CardFactory implements NewConstants {
 
   //*************** START *********** START **************************
     else if(cardName.equals("Mana Leak") || cardName.equals("Convolute") || cardName.equals("Daze") || cardName.equals("Force Spike") || 
-    		cardName.equals("Rune Boggle") || cardName.equals("Spell Snip"))
+    		cardName.equals("Runeboggle") || cardName.equals("Spell Snip"))
     {
       SpellAbility spell = new Spell(card)
       {

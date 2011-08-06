@@ -18,7 +18,7 @@ Convolute
 Instant
 Counter target spell unless its controller pays 4.
 
-Rune Boggle
+Runeboggle
 2 U
 Instant
 Counter target spell unless its controller pays 1.
