@@ -3960,6 +3960,7 @@ res/cardsfolder/reflexes.txt -text svneol=native#text/plain
 res/cardsfolder/refresh.txt -text svneol=native#text/plain
 res/cardsfolder/regal_unicorn.txt -text svneol=native#text/plain
 res/cardsfolder/regenerate.txt -text svneol=native#text/plain
+res/cardsfolder/regeneration.txt -text svneol=native#text/plain
 res/cardsfolder/regress.txt -text svneol=native#text/plain
 res/cardsfolder/regrowth.txt -text svneol=native#text/plain
 res/cardsfolder/reinforcements.txt -text svneol=native#text/plain
