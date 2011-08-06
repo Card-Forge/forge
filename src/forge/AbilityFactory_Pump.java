@@ -92,6 +92,11 @@ public class AbilityFactory_Pump {
             	return doTgtAI(this);
             }
             
+			@Override
+			public String getStackDescription(){
+				return pumpStackDescription(AF, this);
+			}
+            
             public void resolve() {
             	doResolve(this);
             }//resolve
@@ -166,6 +171,11 @@ public class AbilityFactory_Pump {
                 return super.canPlay();
             }
                         
+			@Override
+			public String getStackDescription(){
+				return pumpStackDescription(AF, this);
+			}
+            
             @Override
             public void resolve() {
                 doResolve(this);
@@ -312,6 +322,53 @@ public class AbilityFactory_Pump {
         
         return false;
 
+    }
+    
+    private String pumpStackDescription(AbilityFactory af, SpellAbility sa){
+		// when damageStackDescription is called, just build exactly what is happening
+		 StringBuilder sb = new StringBuilder();
+		 String name = af.getHostCard().getName();
+
+		ArrayList<Card> tgtCards;
+		Target tgt = AF.getAbTgt();
+		if (tgt != null)
+			tgtCards = tgt.getTargetCards();
+		else{
+			tgtCards = new ArrayList<Card>();
+			tgtCards.add(hostCard);
+		}
+	        
+		 sb.append(name).append(" - ");
+		 for(Card c : tgtCards){
+			 sb.append(c.getName());
+			 sb.append(" ");
+		 }
+	     final int atk = getNumAttack();
+	     final int def = getNumDefense();
+	     
+		 sb.append("gains ");
+	     if (atk != 0 || def != 0){
+	    	 if (atk >= 0)
+	    		 sb.append("+");
+	    	 sb.append(atk);
+	    	 sb.append("/");
+	    	 if (def >= 0)
+	    		 sb.append("+");
+	    	 sb.append(def);
+		     sb.append(" ");
+	     }
+
+		if(Keywords.size() > 0)
+		{
+			for (int i=0; i<Keywords.size(); i++)
+			{
+				if (!Keywords.get(i).equals("none"))
+					sb.append(Keywords.get(i)).append(" ");
+			}
+	    }
+		 
+		 sb.append("until end of turn.");
+		 return sb.toString();
     }
     
     private void doResolve(SpellAbility sa)

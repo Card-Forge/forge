@@ -38,6 +38,11 @@ public class AbilityFactory_DealDamage {
             	
             }
             
+			@Override
+			public String getStackDescription(){
+				return damageStackDescription(AF, this);
+			}
+            
             @Override
             public void resolve() {
             	doResolve(this);
@@ -72,6 +77,11 @@ public class AbilityFactory_DealDamage {
             	return doCanPlayAI(this);
             	
             }
+            
+			@Override
+			public String getStackDescription(){
+				return damageStackDescription(AF, this);
+			}
             
             @Override
             public void resolve() {
@@ -219,6 +229,38 @@ public class AbilityFactory_DealDamage {
         
         return rr;
     	
+    }
+    
+    private String damageStackDescription(AbilityFactory af, SpellAbility sa){
+		// when damageStackDescription is called, just build exactly what is happening
+		 StringBuilder sb = new StringBuilder();
+		 String name = af.getHostCard().getName();
+		 int damage = getNumDamage(sa);
+
+		 ArrayList<Object> tgts;
+		 Target tgt = AF.getAbTgt();
+		 if (tgt != null)
+			tgts = tgt.getTargets();
+		 else{
+			tgts = new ArrayList<Object>();
+			if (TgtOpp)
+				tgts.add(AF.getHostCard().getController().getOpponent());
+		 }
+	        
+		 sb.append(name).append(" - ");
+		 sb.append("Deals").append(damage).append(" damage to ");
+		 for(int i = 0; i < tgts.size(); i++){
+			 Object o = tgts.get(0);
+			 if (o instanceof Player){
+				 sb.append(((Player)o).getName());
+			 }
+			 else{
+				 sb.append(((Card)o).getName());
+			 }
+			 sb.append(" ");
+		 }
+
+		 return sb.toString();
     }
     
     private void doResolve(SpellAbility saMe)

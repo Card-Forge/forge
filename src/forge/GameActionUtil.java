@@ -4081,7 +4081,7 @@ public class GameActionUtil {
 			} else //computer
 			{
 				if(ComputerUtil.canPayCost(ability)) {
-					
+					ComputerUtil.payManaCost(ability);
 					StringBuilder sb = new StringBuilder();
 					sb.append(c.getName()).append(" - return 1 creature from your graveyard to your hand");
 					ability.setStackDescription(sb.toString());
@@ -4273,7 +4273,6 @@ public class GameActionUtil {
 
 		for(int i = 0; i < list.size(); i++) {
 			Card c = list.get(i);
-			if(c.getCheckedPropagandaThisTurn()) c.setCheckedPropagandaThisTurn(false);
 			if(c.getCreatureAttackedThisCombat()) c.setCreatureAttackedThisCombat(false);
 			if(c.getCreatureBlockedThisCombat()) c.setCreatureBlockedThisCombat(false);
 

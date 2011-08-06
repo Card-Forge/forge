@@ -831,7 +831,7 @@ public class CombatUtil {
                 };
                 
                 if(c.getController().isHuman()) {
-                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability("Propaganda " + c + "\r\n",
+                    AllZone.InputControl.setInput(new Input_PayManaCost_Ability(c + " - Pay to Attack\r\n",
                             ability.getManaCost(), paidCommand, unpaidCommand));
                 } else //computer
                 {

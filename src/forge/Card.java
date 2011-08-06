@@ -53,7 +53,6 @@ public class Card extends MyObservable {
     private boolean 					 copiedSpell					   = false; 
     private boolean 					 SpellwithChoices				   = false; 
     private boolean 					 SpellCopyingCard				   = false; 
-    private boolean 					 checkedPropagandaThisTurn		   = false;
     private boolean                      creatureAttackedThisCombat        = false;
     private boolean                      creatureBlockedThisCombat         = false;
     private boolean                      creatureGotBlockedThisCombat      = false;
@@ -201,16 +200,6 @@ public class Card extends MyObservable {
     public int getXManaCostPaid()
     {
     	return xManaCostPaid;
-    }
-    
-    public void setCheckedPropagandaThisTurn(boolean b)
-    {
-    	checkedPropagandaThisTurn = b;
-    }
-    
-    public boolean getCheckedPropagandaThisTurn()
-    {
-    	return checkedPropagandaThisTurn;
     }
     
     //used to see if an attacking creature with a triggering attack ability triggered this phase:
