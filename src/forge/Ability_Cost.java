@@ -414,7 +414,7 @@ public class Ability_Cost {
 				cost.append("Tap ");
 			else
 				cost.append(", tap ");
-			cost.append(convertIntAndTypeToWords(tapXTypeAmount, "untapped " + tapXType));
+			cost.append(convertIntAndTypeToWords(tapXTypeAmount, "untapped " + tapXType +" you control"));
 //			cost.append(tapXType);	// needs IsValid String converter
 			first = false;
 		}
