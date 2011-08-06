@@ -3,7 +3,8 @@ ManaCost:3 B B
 Types:Creature Nightstalker
 Text:no text
 PT:3/2
-K:WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:Yes_No:No Special Condition:When Brutal Nightstalker enters the battlefield, you may have target opponent discard a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Optional$ True | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, you may have target opponent discard a card.
+SVar:TrigDiscard:AB$Discard | Cost$ 0 | Tgt$ TgtP | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/brutal_nightstalker.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/4.jpg

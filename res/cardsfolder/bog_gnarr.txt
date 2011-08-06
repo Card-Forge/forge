@@ -3,7 +3,8 @@ ManaCost:4 G
 Types:Creature Beast
 Text:no text
 PT:2/2
-K:WheneverKeyword:CastSpell/Any:Color/black:Play:StatsPumpEOT/2/2:Self:ASAP:No_Condition:No Special Condition:Whenever a player casts a black spell, Bog Gnarr gets +2/+2 until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a player casts a black spell, Bog Gnarr gets +2/+2 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:BuffedBy:Spell.Black
 SVar:RemAIDeck:True
 SVar:Rarity:Common
