@@ -89,7 +89,7 @@ public class ComputerAI_counterSpells {
 					   c.getName().equals("Remand") || c.getName().equals("Mystic Snake") ||
 				 	   c.getName().equals("Absorb") || c.getName().equals("Undermine") ||
 				 	   c.getName().equals("Punish Ignorance") || c.getName().equals("Dismiss") || 
-				 	   c.getName().equals("Last Word")
+				 	   c.getName().equals("Last Word") || c.getName().equals("Dissipate")
 					   && ComputerUtil.canPayCost(sa);
 			}	
 		});

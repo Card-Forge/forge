@@ -1,3 +1,8 @@
+Dissipate
+1 U U
+Instant
+Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+
 All is Dust
 7
 Tribal Sorcery Eldrazi

@@ -18906,6 +18906,35 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Dissipate")) {
+        	SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 4165714000804564686L;
+
+				@Override
+        		public void resolve() {
+        			//counter spell, remove it from the game
+        			SpellAbility sa = AllZone.Stack.pop();
+        			PlayerZone rfg = AllZone.getZone(Constant.Zone.Removed_From_Play, sa.getSourceCard().getOwner());
+        			AllZone.GameAction.moveTo(rfg, sa.getSourceCard());
+        		}
+
+        		@Override
+        		public boolean canPlay() {
+        			if(AllZone.Stack.size() == 0) return false;
+
+        			//see if spell is on stack and that opponent played it
+        			String opponent = AllZone.GameAction.getOpponent(card.getController());
+        			SpellAbility sa = AllZone.Stack.peek();
+
+        				return sa.isSpell() && opponent.equals(sa.getSourceCard().getController())
+        					&& CardFactoryUtil.isCounterable(sa.getSourceCard());
+        		}
+        	};
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

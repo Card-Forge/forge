@@ -25,7 +25,7 @@ public class ComputerAI_counterSpells2 {
 	public static CardList getPlayableCounterSpells(final SpellAbility sa){
 		final String[] basic = {
 				"Counterspell", "Remand", "Cancel", "Mystic Snake", "Absorb", "Undermine", "Punish Ignorance",
-				"Dismiss", "Last Word" /*, "Force of Will",  "Thwart" */
+				"Dismiss", "Last Word", "Dissipate" /*, "Force of Will",  "Thwart" */
 		};
 		
 		final String[] creature = {
