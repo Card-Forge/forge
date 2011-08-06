@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 import java.util.Map.Entry;
 
@@ -2195,23 +2194,23 @@ public class GameAction {
         else throw new RuntimeException("GameAction : destroy() invalid card.getOwner() - " + c + " "
                 + c.getOwner());
         
-        play.remove(c);
         
         if(c.getKeyword().contains("Persist") && c.getCounters(Counters.M1M1) == 0) persist = true;
         
-        //tokens don't go into the graveyard
-        //TODO: must change this if any cards have effects that trigger "when creatures go to the graveyard"
-        if(!c.isToken())
-        //resets the card, untaps the card, removes anything "extra", resets attack and defense
-        moveToGraveyard(c);
-        
-
-        c.destroy();
         if(c.isEquipped()){	// when equipped creature goes to the grave here.
         	// Deathrender & Oathkeeper, Takeno's Daisho have similar triggers to Skullclamp
         	skullClamp_destroy(c);
         	c.unEquipAllCards();
         }
+        //tokens don't go into the graveyard
+        //TODO: must change this if any cards have effects that trigger "when creatures go to the graveyard"
+        if(!c.isToken())
+        //resets the card, untaps the card, removes anything "extra", resets attack and defense
+        moveToGraveyard(c);
+        else play.remove(c);
+
+        c.destroy();
+        
         
         //destroy card effects:
         PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
@@ -3927,32 +3926,51 @@ public class GameAction {
     			
     			if (c.getController().equals(Constant.Player.Human))
     			{	
-    				List<Card> selection1 = AllZone.Display.getChoicesOptional("Select permanent(s) computer controls", cperms.toArray());
-    				List<Card> selection2 = AllZone.Display.getChoicesOptional("Select permanent(s) you control", hperms.toArray());
-    				
-    				String[] choices = {"Human", "Computer"};
-    				List<String> playerSelection = AllZone.Display.getChoicesOptional("Select player(s)", choices);
-    			
-                    for(int m = 0; m < selection1.size(); m++) {
-                    	Card crd = selection1.get(m);
-                    	for(Counters c_1:Counters.values())
-                            if(crd.getCounters(c_1) != 0) crd.addCounter(c_1, 1);
-                    }
+    				cperms.addAll(hperms.toArray());
+    				final CardList unchosen = cperms;
+    				AllZone.InputControl.setInput(new Input() {
+    					private static final long serialVersionUID = -1779224307654698954L;
 
-                    for(int m = 0; m < selection2.size(); m++) {
-                    	Card crd = selection2.get(m);
-                    	for(Counters c_1:Counters.values())
-                            if(crd.getCounters(c_1) != 0) crd.addCounter(c_1, 1);
-                    }
-                
-                    for (int i=0;i<playerSelection.size();i++)
-                    {
-                    	String s = playerSelection.get(i);
-                    	if (s.equals("Human") && AllZone.Human_PoisonCounter.getPoisonCounters() > 0)
-                    		AllZone.Human_PoisonCounter.addPoisonCounters(1);
-                    	if (s.equals("Computer") && AllZone.Computer_PoisonCounter.getPoisonCounters() > 0)
-                    		AllZone.Computer_PoisonCounter.addPoisonCounters(1);
-                    }
+    					@Override
+    					public void showMessage() {
+    						AllZone.Display.showMessage("Choose permanents and/or players");
+    						ButtonUtil.enableOnlyOK();
+    					}
+
+    					@Override
+    					public void selectButtonOK() {
+    						stop();
+    					}
+
+    					@Override
+    					public void selectCard(Card card, PlayerZone zone)
+    					{
+    						if(!unchosen.contains(card)) return;
+    						unchosen.remove(card);
+    						ArrayList<String> choices = new ArrayList<String>();
+    						for(Counters c_1:Counters.values())
+    							if(card.getCounters(c_1) != 0) choices.add(c_1.getName());
+    						if (choices.size() > 0)
+    							card.addCounter(Counters.getType((choices.size() == 1 ? choices.get(0) : AllZone.Display.getChoice("Select counter type", choices.toArray()).toString())), 1);
+    					}
+    					boolean selComputer = false;
+    					boolean selHuman = false;
+    					@Override
+    					public void selectPlayer(String player){
+    						if (player.equals("Human") && selHuman == false)
+    						{
+    							selHuman = true;
+    							if (AllZone.Human_PoisonCounter.getPoisonCounters() > 0)
+    								AllZone.Human_PoisonCounter.addPoisonCounters(1);
+    						}
+    						if (player.equals("Computer") && selComputer == false)
+    						{
+    							selComputer = true;
+    							if (AllZone.Computer_PoisonCounter.getPoisonCounters() > 0)
+    								AllZone.Computer_PoisonCounter.addPoisonCounters(1);
+    						}
+    					}
+    				});
     			}
     			else //comp
     			{

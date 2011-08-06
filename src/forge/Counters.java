@@ -53,4 +53,8 @@ public enum Counters {
     public String getName() {
         return name;
     }
+    public static Counters getType(String name)
+    {
+    	return Enum.valueOf(Counters.class, name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase());
+    }
 }
