@@ -6403,6 +6403,7 @@ res/cardsfolder/wall_of_frost.txt svneol=native#text/plain
 res/cardsfolder/wall_of_granite.txt -text svneol=native#text/plain
 res/cardsfolder/wall_of_heat.txt -text svneol=native#text/plain
 res/cardsfolder/wall_of_ice.txt -text svneol=native#text/plain
+res/cardsfolder/wall_of_junk.txt -text svneol=native#text/plain
 res/cardsfolder/wall_of_kelp.txt -text svneol=native#text/plain
 res/cardsfolder/wall_of_lava.txt -text svneol=native#text/plain
 res/cardsfolder/wall_of_light.txt -text svneol=native#text/plain

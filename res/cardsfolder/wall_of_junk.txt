@@ -1,0 +1,12 @@
+Name:Wall of Junk
+ManaCost:2
+Types:Artifact Creature Wall
+Text:no text
+PT:0/7
+K:Defender
+T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | IsPresent$ Card.blocking+Self | PresentZone$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever CARDNAME blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
+SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_junk.jpg
+End
+
