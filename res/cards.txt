@@ -1,3 +1,10 @@
+Hammerhead Shark
+1 U
+Creature Fish
+no text
+2/3
+CARDNAME can't attack unless defending player controls an Island.
+
 Cagemail
 1 W
 Enchantment Aura
