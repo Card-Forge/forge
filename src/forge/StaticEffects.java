@@ -136,7 +136,6 @@ public class StaticEffects
 		cardToEffectsList.put("Skywatcher Adept", new String[] {"Skywatcher_Adept"});
 		cardToEffectsList.put("Soulsurge Elemental", new String[] {"Soulsurge_Elemental"});
 		cardToEffectsList.put("Spidersilk Armor", new String[] {"Spidersilk_Armor"});
-		cardToEffectsList.put("Steely Resolve", new String[] {"Steely_Resolve"});
 		cardToEffectsList.put("Student of Warfare", new String[]{"Student_of_Warfare"});
 		cardToEffectsList.put("Svogthos, the Restless Tomb", new String[] {"Svogthos_the_Restless_Tomb"});
 		

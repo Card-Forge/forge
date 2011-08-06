@@ -12750,50 +12750,6 @@ public class GameActionUtil {
 	};
 
 	
-	public static Command Steely_Resolve              = new Command() {
-
-		private static final long serialVersionUID   = 2005579284163773044L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword("Shroud");
-			}
-
-			list.clear();
-			CardList cards = new CardList();
-			cards.addAll(AllZone.Human_Play.getCards());
-			cards.addAll(AllZone.Computer_Play.getCards());
-			cards = cards.getName("Steely Resolve");
-
-			for(int outer = 0; outer < cards.size(); outer++) {
-				Card card = cards.get(outer);
-
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType(card.getChosenType());
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(c.getType().contains(card.getChosenType())
-							|| c.getKeyword().contains(
-									"Changeling")) {
-						c.addExtrinsicKeyword("Shroud");
-						gloriousAnthemList.add(c);
-					}
-
-
-				}// for inner
-			}// for outer
-		}// execute()
-	}; //Steely Resolve
-
 	public static Command Goblin_Assault                = new Command() {
 
 		private static final long serialVersionUID = 5138624295158786103L;
@@ -17162,7 +17118,6 @@ public class GameActionUtil {
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
 		commands.put("Spidersilk_Armor", Spidersilk_Armor);
-		commands.put("Steely_Resolve", Steely_Resolve);
 		commands.put("Student_of_Warfare", Student_of_Warfare);
 		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
 		
