@@ -3026,6 +3026,16 @@ public class CardFactory implements NewConstants {
             }
             
             if(ptk.length == 3) Keyword[0] = ptk[2];
+                        
+            String dK = Keyword[0];
+            if (Keyword[0].contains(" & "))////////////////
+            {
+            	int amp = Keyword[0].lastIndexOf("&");
+            	StringBuffer sbk = new StringBuffer(Keyword[0]);
+            	sbk.replace(amp, amp + 1, "and");
+            	dK = sbk.toString();
+            	dK = dK.replace(" & ", ", ");
+            }
             
             final String DrawBack[] = {"none"};
             final String spDesc[] = {"none"};
@@ -3055,7 +3065,7 @@ public class CardFactory implements NewConstants {
             if((AttackX[0].equals("none") && NumAttack[0] == -1138)
                     && (DefenseX[0].equals("none") && NumDefense[0] == -1138) && !Keyword[0].equals("none")) {
                 // k boost
-                sb.append("Target creature gains " + Keyword[0] + " until end of turn.");
+                sb.append("Target creature gains " + dK + " until end of turn.");
             }
             if((AttackX[0].equals("none") && !(NumAttack[0] == -1138))
                     && (DefenseX[0].equals("none") && !(NumDefense[0] == -1138)) && !Keyword[0].equals("none")) {
@@ -3076,7 +3086,7 @@ public class CardFactory implements NewConstants {
                 
                 sb.append(Math.abs(NumDefense[0]));
                 
-                sb.append(" and gains " + Keyword[0] + " until end of turn.");
+                sb.append(" and gains " + dK + " until end of turn.");
             }
             
             if(k.length > 2) {
@@ -3143,13 +3153,14 @@ public class CardFactory implements NewConstants {
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             if(c.isCreature()) {
-                                if(c.hasSickness() && Keyword[0].equals("Haste")) return CardFactoryUtil.canTarget(
-                                        card, c);
+                                if(c.hasSickness() && Keyword[0].contains("Haste")) 
+                                	return CardFactoryUtil.canTarget(card, c);
                                 
                                 return (CardFactoryUtil.AI_doesCreatureAttack(c))
                                         && (CardFactoryUtil.canTarget(card, c))
-                                        && (!Keyword[0].equals("none") && !c.getKeyword().contains(Keyword[0]))
-                                        && (!(!c.hasSickness()) && Keyword[0].equals("Haste"));
+                                        && (!Keyword[0].equals("none") && !c.hasAnyKeyword(Keyword[0].split(" & ")))
+                                        && (!(!c.hasSickness()) && Keyword[0].contains("Haste"));
+                                
                             }
                             return false;
                         }
@@ -3175,14 +3186,25 @@ public class CardFactory implements NewConstants {
                                     creature[0].addTempAttackBoost(-1 * a);
                                     creature[0].addTempDefenseBoost(-1 * d);
                                     
-                                    if(!Keyword[0].equals("none")) creature[0].removeExtrinsicKeyword(Keyword[0]);
+                                    if(!Keyword[0].equals("none"))
+                                    {
+                                    	String[] kws = Keyword[0].split(" & ");
+                                    	for (int i=0; i<kws.length; i++)
+                                    		creature[0].removeExtrinsicKeyword(kws[i]);	
+                                    }
+                                    	
                                 }
                             }
                         };
                         
                         creature[0].addTempAttackBoost(a);
                         creature[0].addTempDefenseBoost(d);
-                        if(!Keyword[0].equals("none")) creature[0].addExtrinsicKeyword(Keyword[0]);
+                        if(!Keyword[0].equals("none"))
+                        {
+                        	String[] kws = Keyword[0].split(" & ");
+                        	for (int i=0; i<kws.length; i++)
+                        		creature[0].addExtrinsicKeyword(kws[i]);
+                        }
                         
                         AllZone.EndOfTurn.addUntil(untilEOT);
                         
