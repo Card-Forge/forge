@@ -1309,175 +1309,41 @@ public class CombatUtil {
 	            }
 	            
 	            if (c.getKeyword().contains("Whenever CARDNAME attacks alone, it gets +1/+0 until end of turn."))
-		            {
-		            	final Card charger = c;
-		            	Ability ability2 = new Ability(c, "0") {
-		                    @Override
-		                    public void resolve() {
-		                        
-		                        final Command untilEOT = new Command() {
-									private static final long serialVersionUID = -6039349249335745813L;
+	            {
+	            	final Card charger = c;
+	            	Ability ability2 = new Ability(c, "0") {
+	            		@Override
+	            		public void resolve() {
 
-									public void execute() {
-		                                if(AllZone.GameAction.isCardInPlay(charger)) {
-		                                    charger.addTempAttackBoost(-1);
-		                                    charger.addTempDefenseBoost(0);
-		                                }
-		                            }
-		                        };//Command
-		                        
+	            			final Command untilEOT = new Command() {
+	            				private static final long serialVersionUID = -6039349249335745813L;
 
-		                        if(AllZone.GameAction.isCardInPlay(charger)) {
-		                            charger.addTempAttackBoost(1);
-		                            charger.addTempDefenseBoost(0);
-		                            
-		                            AllZone.EndOfTurn.addUntil(untilEOT);
-		                        }
-		                    }//resolve
-		                    
-		                };//ability
-		                
-		                StringBuilder sb2 = new StringBuilder();
-		                sb2.append(c.getName()).append(" - attacks alone and gets +1/+0 until EOT.");
-		                ability2.setStackDescription(sb2.toString());
-		                
-		                AllZone.Stack.add(ability2);
-		            }
+	            				public void execute() {
+	            					if(AllZone.GameAction.isCardInPlay(charger)) {
+	            						charger.addTempAttackBoost(-1);
+	            						charger.addTempDefenseBoost(0);
+	            					}
+	            				}
+	            			};//Command
+
+
+	            			if(AllZone.GameAction.isCardInPlay(charger)) {
+	            				charger.addTempAttackBoost(1);
+	            				charger.addTempDefenseBoost(0);
+
+	            				AllZone.EndOfTurn.addUntil(untilEOT);
+	            			}
+	            		}//resolve
+
+	            	};//ability
+
+	            	StringBuilder sb2 = new StringBuilder();
+	            	sb2.append(c.getName()).append(" - attacks alone and gets +1/+0 until EOT.");
+	            	ability2.setStackDescription(sb2.toString());
+
+	            	AllZone.Stack.add(ability2);
+	            }
             }
-            
-            if(c.getName().equals("Soltari Champion") && !c.getCreatureAttackedThisCombat()) {
-                final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-                
-                final Card crd = c;
-                Ability ability2 = new Ability(c, "0") {
-                    @Override
-                    public void resolve() {
-                        CardList cl = new CardList(play.getCards());
-                        cl = cl.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return c.isCreature() && !c.equals(crd);
-                            }
-                        });
-                        
-                        final CardList creatures = cl;
-                        
-                        final Command untilEOT = new Command() {
-                            
-                            private static final long serialVersionUID = -8434529949884582940L;
-                            
-                            public void execute() {
-                                for(Card creat:creatures) {
-                                    if(AllZone.GameAction.isCardInPlay(creat)) {
-                                        creat.addTempAttackBoost(-1);
-                                        creat.addTempDefenseBoost(-1);
-                                    }
-                                }
-                            }
-                        };//Command
-                        
-                        for(Card creat:creatures) {
-                            if(AllZone.GameAction.isCardInPlay(creat)) {
-                                creat.addTempAttackBoost(1);
-                                creat.addTempDefenseBoost(1);
-                            }
-                        }
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                };
-                
-                StringBuilder sb2 = new StringBuilder();
-                sb2.append(c.getName()).append(" - all other creatures you control get +1/+1 until end of turn.");
-                ability2.setStackDescription(sb2.toString());
-                
-                AllZone.Stack.add(ability2);
-            }//Soltari Champion
-            
-            if(c.getName().equals("Goblin General") && !c.getCreatureAttackedThisCombat()) {
-                final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
-                
-                //final Card crd = c;
-                Ability ability2 = new Ability(c, "0") {
-                    @Override
-                    public void resolve() {
-                        CardList cl = new CardList(play.getCards());
-                        cl = cl.filter(new CardListFilter() {
-                            public boolean addCard(Card c) {
-                                return c.isCreature()
-                                        && (c.getType().contains("Goblin") || c.getKeyword().contains("Changeling"));
-                            }
-                        });
-                        
-                        final CardList creatures = cl;
-                        
-                        final Command untilEOT = new Command() {
-                            
-                            private static final long serialVersionUID = -8434529949884582940L;
-                            
-                            public void execute() {
-                                for(Card creat:creatures) {
-                                    if(AllZone.GameAction.isCardInPlay(creat)) {
-                                        creat.addTempAttackBoost(-1);
-                                        creat.addTempDefenseBoost(-1);
-                                    }
-                                }
-                            }
-                        };//Command
-                        
-                        for(Card creat:creatures) {
-                            if(AllZone.GameAction.isCardInPlay(creat)) {
-                                creat.addTempAttackBoost(1);
-                                creat.addTempDefenseBoost(1);
-                            }
-                        }
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                };
-                
-                StringBuilder sb2 = new StringBuilder();
-                sb2.append(c.getName()).append(" - Goblin creatures you control get +1/+1 until end of turn.");
-                ability2.setStackDescription(sb2.toString());
-                
-                AllZone.Stack.add(ability2);
-            }//Goblin General
-            
-            if(c.getName().equals("Pianna, Nomad Captain") && !c.getCreatureAttackedThisCombat()) {
-                
-                //final Card crd = c;
-                Ability ability2 = new Ability(c, "0") {
-                    @Override
-                    public void resolve() {
-                        CardList cl = new CardList(AllZone.Combat.getAttackers());
-                        final CardList creatures = cl;
-                        
-                        final Command untilEOT = new Command() {
-                            private static final long serialVersionUID = -7050310805245783042L;
-                            
-                            public void execute() {
-                                for(Card creat:creatures) {
-                                    if(AllZone.GameAction.isCardInPlay(creat)) {
-                                        creat.addTempAttackBoost(-1);
-                                        creat.addTempDefenseBoost(-1);
-                                    }
-                                }
-                            }
-                        };//Command
-                        
-                        for(Card creat:creatures) {
-                            if(AllZone.GameAction.isCardInPlay(creat)) {
-                                creat.addTempAttackBoost(1);
-                                creat.addTempDefenseBoost(1);
-                            }
-                        }
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                };
-                
-                StringBuilder sb2 = new StringBuilder();
-                sb2.append(c.getName()).append(" - attacking creatures get +1/+1 until end of turn.");
-                ability2.setStackDescription(sb2.toString());
-                
-                AllZone.Stack.add(ability2);
-            }//Pianna, Nomad Captain
             
             if(c.getName().equals("Zur the Enchanter") && !c.getCreatureAttackedThisCombat()) {
                 //hack, to make sure this doesn't break grabbing an oblivion ring:
@@ -1582,40 +1448,6 @@ public class CombatUtil {
                     
                 } //if (creatures.size() > 0) 
             }//Yore-Tiller Nephilim
-            
-            else if(c.getName().equals("Flowstone Charger") && !c.getCreatureAttackedThisCombat()) {
-                final Card charger = c;
-                Ability ability2 = new Ability(c, "0") {
-                    @Override
-                    public void resolve() {
-                        
-                        final Command untilEOT = new Command() {
-                            private static final long serialVersionUID = -1703473800920781454L;
-                            
-                            public void execute() {
-                                if(AllZone.GameAction.isCardInPlay(charger)) {
-                                    charger.addTempAttackBoost(-3);
-                                    charger.addTempDefenseBoost(3);
-                                }
-                            }
-                        };//Command
-                        
-
-                        if(AllZone.GameAction.isCardInPlay(charger)) {
-                            charger.addTempAttackBoost(3);
-                            charger.addTempDefenseBoost(-3);
-                            
-                            AllZone.EndOfTurn.addUntil(untilEOT);
-                        }
-                    }//resolve
-                };//ability
-                
-                StringBuilder sb2 = new StringBuilder();
-                sb2.append(c.getName()).append(" - gets +3/-3 until EOT.");
-                ability2.setStackDescription(sb2.toString());
-                
-                AllZone.Stack.add(ability2);
-            }//Flowstone Charger
             
             else if(c.getName().equals("Timbermaw Larva") && !c.getCreatureAttackedThisCombat()) {
                 final Card charger = c;
