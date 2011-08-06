@@ -1,9 +1,11 @@
 Name:Reaper King
 ManaCost:2/W 2/U 2/B 2/R 2/G
 Types:Legendary Artifact Creature Scarecrow
-Text:Whenever another Scarecrow enters the battlefield under your control, destroy target permanent.
+Text:no text
 PT:6/6
 K:stPumpAll:Creature.Scarecrow+Other+YouCtrl:1/1:No Condition:Other Scarecrow creatures you control get +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Scarecrow.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever another Scarecrow enters the battlefield under your control, destroy target permanent.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

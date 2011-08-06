@@ -82,14 +82,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                     AllZone.Stack.add(ability);
             }
             
-            if(c.isType("Scarecrow") && AllZoneUtil.isCardInPlay("Reaper King", c.getController())) {
-            	CardList kings = AllZoneUtil.getCardsInPlay("Reaper King");
-            	kings.remove(c);
-            	for(final Card king:kings){
-            		GameActionUtil.execute_Reaper_King_Destroy_Effect(king);
-            	}
-            }
-            
             if(c.isLand()) {
                 //System.out.println("A land was just put onto the battlefield: " + c.getName());
                 

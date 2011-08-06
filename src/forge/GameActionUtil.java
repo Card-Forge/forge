@@ -3472,54 +3472,6 @@ public class GameActionUtil {
         return true; // Tell the calling routine it's okay to call again if there are other Valakuts in play
 	}
 	
-	public static void execute_Reaper_King_Destroy_Effect(final Card reaper) {
-		
-        SpellAbility destroyTgt = new Spell(reaper) {
-        	private static final long serialVersionUID = 7708410549601333534L;
-        	
-            /*CardList getPermanents() {
-                CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-                list = list.filter(new CardListFilter() {
-                    public boolean addCard(Card c) {
-                        return !c.hasKeyword("Indestructible");
-                    }
-                });
-                list = list.filter(AllZoneUtil.getCanTargetFilter(reaper));
-                return list;
-            }//getCreature()
- 
-            /*@Override
-            public void chooseTargetAI() {
-            	// Get a list of all permanents Reaper King could destroy
-            	CardList list = getPermanents();
-                else {
-                    list.shuffle();
-                    setTargetCard(list.get(0));
-                }
-            }//chooseTargetAI() */
-			
-			@Override
-            public void resolve() {
-            	Card target = getTargetCard();
-                if(getTargetCard() != null) {
-                    if(AllZone.GameAction.isCardInPlay(target) && CardFactoryUtil.canTarget(reaper, target)) {
-                    	AllZone.GameAction.destroy(target);
-                    }       
-                }
-            }//resolve()
-
-        };
-        destroyTgt.setManaCost("0");
-        destroyTgt.setStackDescription(reaper+" - destroy target permanent.");
-        if (reaper.getController() == AllZone.HumanPlayer) {
-        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetType(destroyTgt, "All"));
-        } else {
-        	destroyTgt.setChooseTargetAI(CardFactoryUtil.AI_targetType("Permanent", AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer)));
-        	AllZone.Stack.add(destroyTgt);
-        }
-	}
-
-
 	private static boolean showLandfallDialog(Card c) {
 		AllZone.Display.setCard(c);
 		String[] choices = {"Yes", "No"};
@@ -3560,12 +3512,6 @@ public class GameActionUtil {
 		StringBuilder sb = new StringBuilder();
 		sb.append(c).append(" - Landfall: gets +2/+2 until EOT.");
 		ability.setStackDescription(sb.toString());
-
-		/*if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
-		}
-
-		else if(c.getController().equals(AllZone.ComputerPlayer))*/
 		AllZone.Stack.add(ability);
 	}
 
@@ -5022,27 +4968,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability2);
 		}
 	}
-	
-	/*
-	private static void opponent_Discard(final Card source, final int num) {
-		final Player player = source.getController().getOpponent();
-
-		if(source.getNetAttack() > 0 && !source.isFaceDown()) {
-			Ability ability = new Ability(source, "0") {
-				@Override
-				public void resolve() {
-					player.discard(num, this, true);
-				}
-			};// ability
-			StringBuilder sb = new StringBuilder();
-			sb.append(source.getName()).append(" - ").append(player).append(" discards ");
-			sb.append(num).append(" card");
-			if(1 != num) sb.append("s");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}
-	}*/
 
 	private static void upkeep_AI_Aluren() {
 		CardList alurens = AllZoneUtil.getCardsInPlay("Aluren");
@@ -5499,49 +5424,6 @@ public class GameActionUtil {
             AllZone.Stack.add(ability);
         } // if creatures > 0
     } // upkeep_Squee()
-
-	/*
-	private static void upkeep_AEther_Vial() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("AEther Vial");
-
-		if(list.size() > 0) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card thisCard = list.get(i);
-				Ability ability = new Ability(list.get(i), "") {
-					@Override
-					public void resolve() {
-						// TODO Auto-generated method stub
-						String[] choices = {"Yes", "No"};
-
-						Object q = null;
-						if(player.equals(AllZone.HumanPlayer)) {
-							q = GuiUtils.getChoiceOptional("Put a counter on AEther Vial? ("
-									+ thisCard.getCounters(Counters.CHARGE) + ")", choices);
-							if(q == null || q.equals("No")) return;
-							if(q.equals("Yes")) {
-
-								thisCard.addCounter(Counters.CHARGE, 1);
-							}
-						} else if(player.equals(AllZone.ComputerPlayer)) {
-
-							thisCard.addCounter(Counters.CHARGE, 1);
-						}
-
-					}
-
-				};
-				ability.setStackDescription(list.get(i).getName() + " ("
-						+ list.get(i).getCounters(Counters.CHARGE)
-						+ " counters) - Put a charge counter on AEther Vial?");
-				AllZone.Stack.add(ability);
-			}//for
-		}
-	}
-	*/
 
 	private static void upkeep_Dragonmaster_Outcast() {
 		final Player player = AllZone.Phase.getPlayerTurn();
