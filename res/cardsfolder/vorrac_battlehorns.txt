@@ -1,0 +1,8 @@
+Name:Vorrac Battlehorns
+ManaCost:2
+Types:Artifact Equipment
+Text:Equipped creature has trample and can't be blocked by more than one creature.
+K:eqPump 1:Trample & HIDDEN CARDNAME can't be blocked by more than one creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vorrac_battlehorns.jpg
+End
