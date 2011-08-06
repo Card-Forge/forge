@@ -1,0 +1,10 @@
+Name:The Brute
+ManaCost:1 R
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+0.
+K:Enchant creature
+K:enPump:+1/+0
+A:AB$Regenerate | Cost$ R R R | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/the_brute.jpg
+End
