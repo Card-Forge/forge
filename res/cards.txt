@@ -1,3 +1,27 @@
+Viashino Cutthroat
+2 R R
+Creature Viashino
+no text
+5/3
+Haste
+WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Cutthroat to its owner's hand.
+
+Viashino Sandscout
+1 R
+Creature Viashino Scout
+no text
+2/1
+Haste
+WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Sandscout to its owner's hand. (Return it only if it's on the battlefield.)
+
+Viashino Sandstalker
+1 R R
+Creature Viashino Warrior
+no text
+4/2
+Haste
+WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:ControllerEndStep:At the beginning of the end step, return Viashino Sandstalker to its owner's hand. (Return it only if it's on the battlefield.)
+
 Fists of Ironwood
 1 G
 Enchantment Aura
