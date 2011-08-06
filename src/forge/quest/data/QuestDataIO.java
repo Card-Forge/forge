@@ -196,7 +196,7 @@ public class QuestDataIO {
     }
 
     /**
-     * Xstream subclass that ignores fields that are present in the save but not in the
+     * Xstream subclass that ignores fields that are present in the save but not in the class
      */
     private static class IgnoringXStream extends XStream {
         List<String> ignoredFields = new ArrayList<String>();
