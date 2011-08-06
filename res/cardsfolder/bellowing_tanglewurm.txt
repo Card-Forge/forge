@@ -1,0 +1,10 @@
+Name:Bellowing Tanglewurm
+ManaCost:3 G G
+Types:Creature Wurm
+Text:no text
+PT:4/4
+K:Intimidate
+K:stPumpOther:Creature.Green+YouCtrl:0/0/Intimidate:No Condition:Other green creatures you control have Intimidate.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bellowing_tanglewurm.jpg
+End
