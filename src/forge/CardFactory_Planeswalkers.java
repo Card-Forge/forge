@@ -3,6 +3,7 @@ package forge;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 
 class CardFactory_Planeswalkers {
@@ -329,14 +330,28 @@ class CardFactory_Planeswalkers {
                     list.addAll(library.getCards());
                     list = list.getType("Elf");
                     
-                    //currently, just adds all elves into play.
-                    for(int i = 0; i < list.size(); i++) {
-                        Card c = list.get(i);
-                        if(c.isCreature()) {
-                            library.remove(c);
-                            play.add(c);
-                        }
+                    if (card.getController().equals(Constant.Player.Human))
+                    {
+	                    List<Card> selection = AllZone.Display.getChoicesOptional("Select Elves to put into play", list.toArray());
+	                    
+	                    int numElves = selection.size();
+	                    for(int m = 0; m < numElves; m++) {
+	                    	Card c = selection.get(m);
+	                    	library.remove(c);
+	                    	play.add(c);
+	                    }
                     }
+                    else //computer
+                    {
+	                    for(int i = 0; i < list.size(); i++) {
+	                        Card c = list.get(i);
+	                        if(c.isCreature()) {
+	                            library.remove(c);
+	                            play.add(c);
+	                        }
+	                    }
+                    }
+                    
                 }
                 
                 @Override
