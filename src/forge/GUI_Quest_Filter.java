@@ -9,22 +9,16 @@ import com.cloudgarden.layout.AnchorConstraint;
 import com.cloudgarden.layout.AnchorLayout;
 
 import javax.swing.BorderFactory;
-//import javax.swing.ButtonGroup;
-//import javax.swing.DebugGraphics;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-//import javax.swing.JFrame;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-//import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-//import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
-//import javax.swing.border.LineBorder;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -65,10 +59,10 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 	private JSeparator jSeparator2;
 	private JPanel jPanel2;
 	private JCheckBox jCheckBoxBlack;
-	private JButton jButtonOk;
-	//private ButtonGroup buttonGroup1;
-	 private DeckDisplay       deckDisplay;
-	 public CardList filterCardList;
+	private JButton jButtonOk;	
+	private DeckDisplay       deckDisplay;
+	public CardList filterCardList;
+	int kCode;
 	 
 
 	
@@ -90,6 +84,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 				getContentPane().add(getJPanel1(), new AnchorConstraint(293, 483, 837, 45, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				getContentPane().add(NameText, new AnchorConstraint(38, 969, 126, 362, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL, AnchorConstraint.ANCHOR_REL));
 				NameText.setPreferredSize(new java.awt.Dimension(148, 24));
+				NameText.addKeyListener(new java.awt.event.KeyAdapter() {
+					public void keyPressed(java.awt.event.KeyEvent e) {
+						
+						if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+							FilterCardTable();
+						}
+					}
+				});
 			}
 			{
 				jLabel1 = new JLabel();
@@ -186,6 +188,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxBlue.setPreferredSize(new java.awt.Dimension(109, 14));
 			jCheckBoxBlue.setSelected(true);
 			jCheckBoxBlue.setBackground(new java.awt.Color(192,192,192));
+			jCheckBoxBlue.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxBlue;
 	}
@@ -199,6 +209,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxGreen.setPreferredSize(new java.awt.Dimension(109, 12));
 			jCheckBoxGreen.setSelected(true);
 			jCheckBoxGreen.setBackground(new java.awt.Color(192,192,192));
+			jCheckBoxGreen.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxGreen;
 	}
@@ -212,6 +230,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxRed.setPreferredSize(new java.awt.Dimension(109, 14));
 			jCheckBoxRed.setSelected(true);
 			jCheckBoxRed.setBackground(new java.awt.Color(192,192,192));
+			jCheckBoxRed.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxRed;
 	}
@@ -225,6 +251,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxWhite.setPreferredSize(new java.awt.Dimension(109, 13));
 			jCheckBoxWhite.setSelected(true);
 			jCheckBoxWhite.setBackground(new java.awt.Color(192,192,192));
+			jCheckBoxWhite.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxWhite;
 	}
@@ -238,6 +272,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxColorless.setPreferredSize(new java.awt.Dimension(80, 15));
 			jCheckBoxColorless.setSelected(true);
 			jCheckBoxColorless.setBackground(new java.awt.Color(192,192,192));
+			jCheckBoxColorless.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxColorless;
 	}
@@ -263,6 +305,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxBlack.setPreferredSize(new java.awt.Dimension(97, 20));
 			jCheckBoxBlack.setBackground(new java.awt.Color(192,192,192));
 			jCheckBoxBlack.setSelected(true);
+			jCheckBoxBlack.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxBlack;
 	}
@@ -331,6 +381,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxSorcery.setSelected(true);
 			jCheckBoxSorcery.setBackground(new java.awt.Color(192,192,192));
 			jCheckBoxSorcery.setPreferredSize(new java.awt.Dimension(93, 13));
+			jCheckBoxSorcery.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxSorcery;
 	}
@@ -343,6 +401,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxPlaneswalker.setSelected(true);
 			jCheckBoxPlaneswalker.setBackground(new java.awt.Color(192,192,192));
 			jCheckBoxPlaneswalker.setPreferredSize(new java.awt.Dimension(93, 14));
+			jCheckBoxPlaneswalker.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxPlaneswalker;
 	}
@@ -355,6 +421,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxLand.setSelected(true);
 			jCheckBoxLand.setBackground(new java.awt.Color(192,192,192));
 			jCheckBoxLand.setPreferredSize(new java.awt.Dimension(93, 14));
+			jCheckBoxLand.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxLand;
 	}
@@ -367,6 +441,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxInstant.setSelected(true);
 			jCheckBoxInstant.setBackground(new java.awt.Color(192,192,192));
 			jCheckBoxInstant.setPreferredSize(new java.awt.Dimension(93, 14));
+			jCheckBoxInstant.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxInstant;
 	}
@@ -379,6 +461,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxEnchant.setSelected(true);
 			jCheckBoxEnchant.setBackground(new java.awt.Color(192,192,192));
 			jCheckBoxEnchant.setPreferredSize(new java.awt.Dimension(93, 13));
+			jCheckBoxEnchant.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxEnchant;
 	}
@@ -391,6 +481,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxCreature.setSelected(true);
 			jCheckBoxCreature.setBackground(new java.awt.Color(192,192,192));
 			jCheckBoxCreature.setPreferredSize(new java.awt.Dimension(93, 13));
+			jCheckBoxCreature.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxCreature;
 	}
@@ -403,6 +501,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 			jCheckBoxArtifact.setSelected(true);
 			jCheckBoxArtifact.setBackground(new java.awt.Color(192,192,192));
 			jCheckBoxArtifact.setPreferredSize(new java.awt.Dimension(93, 18));
+			jCheckBoxArtifact.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return jCheckBoxArtifact;
 	}
@@ -411,6 +517,14 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 		if(cardText == null) {
 			cardText = new JTextField();
 			cardText.setPreferredSize(new java.awt.Dimension(168, 30));
+			cardText.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyPressed(java.awt.event.KeyEvent e) {
+					
+					if (e.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+						FilterCardTable();
+					}
+				}
+			});
 		}
 		return cardText;
 	}
@@ -429,101 +543,8 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 
 	public class CustomListener implements MouseListener {
 
-        public void mouseClicked(MouseEvent e) {
-        	
-        	String name = NameText.getText();
-        	String cText = cardText.getText();
-        	Gui_Quest_DeckEditor g = (Gui_Quest_DeckEditor) deckDisplay;
-        	CardFilter filter = new CardFilter();       	
-        	 g.setEnabled(true);
-			 CardList filterCardList=g.stCardList;
-        	if(name!="")
-        	{
-        		if(cText!=""){
-        		filterCardList = filter.CardListNameFilter(filterCardList, name);
-        		if(filterCardList.size()==0){
-        			JOptionPane.showMessageDialog(null, "Sorry, cards with name: "+name+" not found.", "Filter", JOptionPane.INFORMATION_MESSAGE );
-        			g.filterUsed=false;
-        			deckDisplay.updateDisplay(g.stCardList, deckDisplay.getBottom()) ;
-        		}else{
-        			filterCardList = filter.CardListTextFilter(filterCardList, cText);
-        			if(filterCardList.size()==0){
-            			JOptionPane.showMessageDialog(null, "Sorry, cards with text: "+cText+" not found.", "Filter", JOptionPane.INFORMATION_MESSAGE );
-            			g.filterUsed=false;
-            			deckDisplay.updateDisplay(g.stCardList, deckDisplay.getBottom()) ;
-            		}else{
-        			if(jCheckBoxBlack.isSelected()==false){
-        				filterCardList = filter.CardListColorFilter(filterCardList, "black");
-        				g.blackCheckBox.setSelected(false);
-        				g.blackCheckBox.setEnabled(false);
-        			}
-        			if(jCheckBoxBlue.isSelected()==false){
-        				filterCardList = filter.CardListColorFilter(filterCardList, "blue");
-        				g.blueCheckBox.setSelected(false);
-        				g.blueCheckBox.setEnabled(false);
-        			}
-        			if(jCheckBoxGreen.isSelected()==false){
-        				filterCardList = filter.CardListColorFilter(filterCardList, "green");
-        				g.greenCheckBox.setSelected(false);
-        				g.greenCheckBox.setEnabled(false);        				
-        			}
-        			if(jCheckBoxRed.isSelected()==false){
-        				filterCardList = filter.CardListColorFilter(filterCardList, "red");
-        				g.redCheckBox.setSelected(false);
-        				g.redCheckBox.setEnabled(false);
-        			}
-        			if(jCheckBoxWhite.isSelected()==false){
-        				filterCardList = filter.CardListColorFilter(filterCardList, "white");
-        				g.whiteCheckBox.setSelected(false);
-        				g.whiteCheckBox.setEnabled(false);
-        			}
-        			if(jCheckBoxColorless.isSelected()==false){
-        				filterCardList = filter.CardListColorFilter(filterCardList, "colorless");
-        				g.colorlessCheckBox.setSelected(false);
-        				g.colorlessCheckBox.setEnabled(false);
-        			}
-        			if(jCheckBoxArtifact.isSelected()==false){
-        				filterCardList = filter.CardListTypeFilter(filterCardList, "artifact");
-        				g.artifactCheckBox.setSelected(false);
-        				g.artifactCheckBox.setEnabled(false);
-        			}
-        			if(jCheckBoxCreature.isSelected()==false){
-        				filterCardList = filter.CardListTypeFilter(filterCardList, "creature");
-        				g.creatureCheckBox.setSelected(false);
-        				g.creatureCheckBox.setEnabled(false);
-        			}
-        			if(jCheckBoxEnchant.isSelected()==false){
-        				filterCardList = filter.CardListTypeFilter(filterCardList, "enchantment");
-        				g.enchantmentCheckBox.setSelected(false);
-        				g.enchantmentCheckBox.setEnabled(false);
-        			}
-        			if(jCheckBoxInstant.isSelected()==false){
-        				filterCardList = filter.CardListTypeFilter(filterCardList, "instant");
-        				g.instantCheckBox.setSelected(false);
-        				g.instantCheckBox.setEnabled(false);
-        			}
-        			if(jCheckBoxLand.isSelected()==false){
-        				filterCardList = filter.CardListTypeFilter(filterCardList, "land");
-        				g.landCheckBox.setSelected(false);
-        				g.landCheckBox.setEnabled(false);
-        			}
-        			if(jCheckBoxPlaneswalker.isSelected()==false){
-        				filterCardList = filter.CardListTypeFilter(filterCardList, "planeswalker");
-        				g.planeswalkerCheckBox.setSelected(false);
-        				g.planeswalkerCheckBox.setEnabled(false);
-        			}
-        			if(jCheckBoxSorcery.isSelected()==false){
-        				filterCardList = filter.CardListTypeFilter(filterCardList, "sorcery");
-        				g.sorceryCheckBox.setSelected(false);
-        				g.sorceryCheckBox.setEnabled(false);
-        			}
-        			
-        			deckDisplay.updateDisplay(filterCardList, deckDisplay.getBottom()) ;	
-        		}}}
-        		
-        	}
-        	        	        		
-        	dispose();
+        public void mouseClicked(MouseEvent e) {        	
+        	FilterCardTable();
         }
 
         public void mouseEntered(MouseEvent e) {             
@@ -546,42 +567,132 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
 	public class WListener implements WindowListener {
 
 		public void windowActivated(WindowEvent arg0) {
-			// TODO Auto-generated method stub
+						
+		}
+
+		public void windowClosed(WindowEvent arg0) {			
 			
 		}
 
-		public void windowClosed(WindowEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void windowClosing(WindowEvent arg0) {
-			// TODO Auto-generated method stub
+		public void windowClosing(WindowEvent arg0) {			
 			Gui_Quest_DeckEditor g = (Gui_Quest_DeckEditor) deckDisplay;
 			deckDisplay.updateDisplay(g.stCardList, deckDisplay.getBottom());
 			g.setEnabled(true);
 			
 		}
 
-		public void windowDeactivated(WindowEvent arg0) {
-			// TODO Auto-generated method stub
+		public void windowDeactivated(WindowEvent arg0) {			
 			
 		}
 
-		public void windowDeiconified(WindowEvent arg0) {
-			// TODO Auto-generated method stub
+		public void windowDeiconified(WindowEvent arg0) {			
 			
 		}
 
-		public void windowIconified(WindowEvent arg0) {
-			// TODO Auto-generated method stub
+		public void windowIconified(WindowEvent arg0) {			
 			
 		}
 
-		public void windowOpened(WindowEvent arg0) {
-			// TODO Auto-generated method stub
+		public void windowOpened(WindowEvent arg0) {			
 			
 		}
+	}
+	
+	private void FilterCardTable(){
+		String name = NameText.getText();
+    	String cText = cardText.getText();
+    	Gui_Quest_DeckEditor g = (Gui_Quest_DeckEditor) deckDisplay;
+    	CardFilter filter = new CardFilter();       	
+    	 g.setEnabled(true);
+		 CardList filterCardList=g.stCardList;
+    	if(name!="")
+    	{
+    		if(cText!=""){
+    		filterCardList = filter.CardListNameFilter(filterCardList, name);
+    		if(filterCardList.size()==0){
+    			JOptionPane.showMessageDialog(null, "Sorry, cards with name: "+name+" not found.", "Filter", JOptionPane.INFORMATION_MESSAGE );
+    			g.filterUsed=false;
+    			deckDisplay.updateDisplay(g.stCardList, deckDisplay.getBottom()) ;
+    		}else{
+    			filterCardList = filter.CardListTextFilter(filterCardList, cText);
+    			if(filterCardList.size()==0){
+        			JOptionPane.showMessageDialog(null, "Sorry, cards with text: "+cText+" not found.", "Filter", JOptionPane.INFORMATION_MESSAGE );
+        			g.filterUsed=false;
+        			deckDisplay.updateDisplay(g.stCardList, deckDisplay.getBottom()) ;
+        		}else{
+    			if(jCheckBoxBlack.isSelected()==false){
+    				filterCardList = filter.CardListColorFilter(filterCardList, "black");
+    				g.blackCheckBox.setSelected(false);
+    				g.blackCheckBox.setEnabled(false);
+    			}
+    			if(jCheckBoxBlue.isSelected()==false){
+    				filterCardList = filter.CardListColorFilter(filterCardList, "blue");
+    				g.blueCheckBox.setSelected(false);
+    				g.blueCheckBox.setEnabled(false);
+    			}
+    			if(jCheckBoxGreen.isSelected()==false){
+    				filterCardList = filter.CardListColorFilter(filterCardList, "green");
+    				g.greenCheckBox.setSelected(false);
+    				g.greenCheckBox.setEnabled(false);        				
+    			}
+    			if(jCheckBoxRed.isSelected()==false){
+    				filterCardList = filter.CardListColorFilter(filterCardList, "red");
+    				g.redCheckBox.setSelected(false);
+    				g.redCheckBox.setEnabled(false);
+    			}
+    			if(jCheckBoxWhite.isSelected()==false){
+    				filterCardList = filter.CardListColorFilter(filterCardList, "white");
+    				g.whiteCheckBox.setSelected(false);
+    				g.whiteCheckBox.setEnabled(false);
+    			}
+    			if(jCheckBoxColorless.isSelected()==false){
+    				filterCardList = filter.CardListColorFilter(filterCardList, "colorless");
+    				g.colorlessCheckBox.setSelected(false);
+    				g.colorlessCheckBox.setEnabled(false);
+    			}
+    			if(jCheckBoxArtifact.isSelected()==false){
+    				filterCardList = filter.CardListTypeFilter(filterCardList, "artifact");
+    				g.artifactCheckBox.setSelected(false);
+    				g.artifactCheckBox.setEnabled(false);
+    			}
+    			if(jCheckBoxCreature.isSelected()==false){
+    				filterCardList = filter.CardListTypeFilter(filterCardList, "creature");
+    				g.creatureCheckBox.setSelected(false);
+    				g.creatureCheckBox.setEnabled(false);
+    			}
+    			if(jCheckBoxEnchant.isSelected()==false){
+    				filterCardList = filter.CardListTypeFilter(filterCardList, "enchantment");
+    				g.enchantmentCheckBox.setSelected(false);
+    				g.enchantmentCheckBox.setEnabled(false);
+    			}
+    			if(jCheckBoxInstant.isSelected()==false){
+    				filterCardList = filter.CardListTypeFilter(filterCardList, "instant");
+    				g.instantCheckBox.setSelected(false);
+    				g.instantCheckBox.setEnabled(false);
+    			}
+    			if(jCheckBoxLand.isSelected()==false){
+    				filterCardList = filter.CardListTypeFilter(filterCardList, "land");
+    				g.landCheckBox.setSelected(false);
+    				g.landCheckBox.setEnabled(false);
+    			}
+    			if(jCheckBoxPlaneswalker.isSelected()==false){
+    				filterCardList = filter.CardListTypeFilter(filterCardList, "planeswalker");
+    				g.planeswalkerCheckBox.setSelected(false);
+    				g.planeswalkerCheckBox.setEnabled(false);
+    			}
+    			if(jCheckBoxSorcery.isSelected()==false){
+    				filterCardList = filter.CardListTypeFilter(filterCardList, "sorcery");
+    				g.sorceryCheckBox.setSelected(false);
+    				g.sorceryCheckBox.setEnabled(false);
+    			}
+    			
+    			deckDisplay.updateDisplay(filterCardList, deckDisplay.getBottom()) ;	
+    		}}}
+    		
+    	}
+    	        	        		
+    	dispose();
+		
 	}
 	
 }
