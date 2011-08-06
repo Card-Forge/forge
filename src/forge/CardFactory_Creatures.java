@@ -8104,7 +8104,7 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(addLevelCounters);
         }//*************** END ************ END **************************
         
-        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Ichor Rats")) {
 
@@ -8130,7 +8130,7 @@ public class CardFactory_Creatures {
         	};
         	card.addComesIntoPlayCommand(addPsnCounters);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Tuktuk the Explorer")) {
