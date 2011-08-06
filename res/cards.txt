@@ -1,3 +1,20 @@
+Capsize
+1 U U
+Instant
+Return target permanent to its owner's hand.
+spBounceTgt:Permanent:Hand
+SVar:Buyback:3
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/capsize.jpg
+
+Cumber Stone
+3 U
+Artifact
+no text
+StaticEffect:Play:Permanents your Opponents Control:PTBonus/-1/0:Type.Creature:Creatures your opponents control get -1/-0.
+SVar:PlayMain1:TRUE
+
 Planar Cleansing
 3 W W W
 Sorcery
@@ -4951,14 +4968,6 @@ no text
 1/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/capashen_unicorn.jpg
-
-Capsize
-1 U U
-Instant
-no text
-SVar:RemAIDeck:True
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/capsize.jpg
 
 Captain of the Watch
 4 W W

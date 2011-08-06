@@ -7424,7 +7424,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        //*************** START *********** START **************************
+/*        //*************** START *********** START **************************
         else if(cardName.equals("Capsize")) {
             final SpellAbility spell_one = new Spell(card) {
                 private static final long serialVersionUID = 7688777028599839669L;
@@ -7536,7 +7536,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell_two);
             
         }//*************** END ************ END **************************
-        
+ */       
         //*************** START *********** START **************************
         else if(cardName.equals("Whispers of the Muse")) {
             final SpellAbility spell_one = new Spell(card) {
