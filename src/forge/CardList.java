@@ -340,4 +340,12 @@ public class CardList implements Iterable<Card> {
             }
         });
     }
+    
+    public int getTotalConvertedManaCost() {
+    	int total = 0;
+    	for (int i=0; i<size(); i++) {
+    		total += get(i).getCMC();
+    	}
+    	return total;
+    }
 }

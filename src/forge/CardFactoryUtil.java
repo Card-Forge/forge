@@ -41,13 +41,19 @@ public class CardFactoryUtil {
         int bigCMC = 0;
         for (int i=0; i<all.size(); i++)
         {
-           int curCMC = CardUtil.getConvertedManaCost(all.get(i).getManaCost());
+        	Card card = all.get(i);
+        	int curCMC = card.getCMC();
            
-           if (curCMC >= bigCMC)
-           {
-              bigCMC = curCMC;
-              biggest = all.get(i);
-           }
+        	//Add all cost of all auras with the same controller
+        	CardList auras = new CardList(card.getEnchantedBy().toArray());
+        	auras.getController(card.getController());
+        	curCMC += auras.getTotalConvertedManaCost() + auras.size();
+           
+        	if (curCMC >= bigCMC)
+        	{
+        		bigCMC = curCMC;
+        		biggest = all.get(i);
+        	}
         }
         
         return biggest;

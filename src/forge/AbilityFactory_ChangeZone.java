@@ -647,9 +647,9 @@ public class AbilityFactory_ChangeZone {
 				Card choice = null;
 
 				if (CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false).isCreature() 
-						&& destination.equals("Battlefield"))
+						&& (destination.equals("Battlefield") || origin.equals("Battlefield")))
 	        		choice = CardFactoryUtil.AI_getBestCreatureToBounce(list); //if a creature is most expensive take the best
-	        	else if (destination.equals("Battlefield"))
+	        	else if (destination.equals("Battlefield") || origin.equals("Battlefield"))
 	        		choice = CardFactoryUtil.AI_getMostExpensivePermanent(list, af.getHostCard(), false);
 	        	else{
 					// todo: AI needs more improvement to it's retrieval (reuse some code from spReturn here)
