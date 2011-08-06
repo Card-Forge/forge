@@ -576,29 +576,26 @@ public class AbilityFactory_Counters {
 	}
 	
 	public static String removeStackDescription(AbilityFactory af, SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
+		Card card = af.getHostCard();
 		StringBuilder sb = new StringBuilder();
-
+		
 		if (!(sa instanceof Ability_Sub))
-			sb.append(sa.getSourceCard().getName()).append(" - ");
+			sb.append(card).append(" - ");
 		else
 			sb.append(" ");
 
-		Counters cType = Counters.valueOf(af.getMapParams().get("CounterType"));
-		String name = af.getHostCard().getName();
+		Counters cType = Counters.valueOf(params.get("CounterType"));
 		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("CounterNum"), sa);
 
 		sb.append("Remove ").append(amount).append(" ").append(cType.getName())
 				.append(" counter");
 		if(amount != 1) sb.append("s");
 		sb.append(" from");
-
-		if (af.getAbTgt() == null)
-			sb.append(" ").append(name);
-		else {
-			ArrayList<Card> tgts = af.getAbTgt().getTargetCards();
-			for (Card c : tgts)
-				sb.append(" ").append(c.getName());
-		}
+		
+		ArrayList<Card> tgts = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
+		for (Card c : tgts)
+			sb.append(" ").append(c);
 
 		sb.append(".");
 		
@@ -719,11 +716,10 @@ public class AbilityFactory_Counters {
 	
 	public static void removeResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		String type = params.get("CounterType");
-		int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
-		
 		String DrawBack = params.get("SubAbility");
 		Card card = af.getHostCard();
+		String type = params.get("CounterType");
+		int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
 		
 		ArrayList<Card> tgtCards;
 
@@ -731,8 +727,7 @@ public class AbilityFactory_Counters {
 		if (tgt != null)
 			tgtCards = tgt.getTargetCards();
 		else{
-			tgtCards = new ArrayList<Card>();
-			tgtCards.add(card);
+			tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
 		}
 		
 		for(Card tgtCard : tgtCards)
