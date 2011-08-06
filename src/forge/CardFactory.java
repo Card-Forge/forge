@@ -13735,7 +13735,7 @@ public class CardFactory implements NewConstants {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Boomerang") || cardName.equals("Eye of Nowhere")) {
+        else if(cardName.equals("Boomerang") || cardName.equals("Eye of Nowhere") || cardName.equals("Surging AEther")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 5383879224433456795L;
                 

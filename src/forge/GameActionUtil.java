@@ -277,6 +277,7 @@ public class GameActionUtil {
 			playCard_Artisan_of_Kozilek(c);
 
 		playCard_Cascade(c);
+		playCard_Ripple(c);
         playCard_Storm(c);
 
 		playCard_Dovescape(c); //keep this one top
@@ -543,6 +544,102 @@ public class GameActionUtil {
 			}
 		};
 		Cascade.execute();
+	}
+	
+	public static void playCard_Ripple(final Card c) {
+		Command Ripple = new Command() {
+			private static final long serialVersionUID = -845154812215847505L;
+			public void execute() {
+				final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+						Constant.Player.Human);
+				final PlayerZone comp = AllZone.getZone(Constant.Zone.Play,
+						Constant.Player.Computer);
+
+				CardList Human_ThrummingStone = new CardList();
+				CardList Computer_ThrummingStone = new CardList();
+				Human_ThrummingStone.addAll(play.getCards());
+				Computer_ThrummingStone.addAll(comp.getCards());
+
+				Human_ThrummingStone = Human_ThrummingStone.getName("Thrumming Stone");
+				Computer_ThrummingStone = Computer_ThrummingStone.getName("Thrumming Stone");
+						for (int i=0;i<Human_ThrummingStone.size();i++)
+						{
+							if(c.getController().equals(Constant.Player.Human)) c.addExtrinsicKeyword("Ripple:4");
+						}
+						for (int i=0;i<Computer_ThrummingStone.size();i++)
+						{ 
+							if(c.getController().equals(Constant.Player.Computer)) c.addExtrinsicKeyword("Ripple:4");
+						}
+		 		        ArrayList<String> a = c.getKeyword();
+		 		        for(int x = 0; x < a.size(); x++)
+		 		            if(a.get(x).toString().startsWith("Ripple")) {
+		 		                String parse = c.getKeyword().get(x).toString();                
+		 		                 String k[] = parse.split(":");
+		 		            	DoRipple(c,Integer.valueOf(k[1]));
+		 		            }
+			}// execute()
+
+			void DoRipple(Card c, final int RippleCount) {
+				final String controller = c.getController();
+				final PlayerZone lib = AllZone.getZone(Constant.Zone.Library, controller);
+				final Card RippleCard = c;
+
+				final Ability ability = new Ability(c, "0") {
+					@Override
+					public void resolve() {
+						CardList topOfLibrary = new CardList(lib.getCards());
+						CardList revealed = new CardList();
+						int RippleNumber = RippleCount;
+						if(topOfLibrary.size() == 0) return;
+						int RippleMax = 10; // Shouldn't Have more than Ripple 10, seeing as no cards exist with a ripple greater than 4
+						Card[] RippledCards = new Card[RippleMax]; 
+						Card crd;
+						if(topOfLibrary.size() < RippleNumber) RippleNumber = topOfLibrary.size();
+
+						for(int i = 0; i < RippleNumber; i++){
+							crd = topOfLibrary.get(i);
+							revealed.add(crd);
+							lib.remove(crd);
+							if(crd.getName().equals(RippleCard.getName())) RippledCards[i] = crd;
+						}//For
+							AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
+							for(int i = 0; i < RippleMax; i++) {
+						if(RippledCards[i] != null && !RippledCards[i].isUnCastable()) {
+
+							if(RippledCards[i].getController().equals(Constant.Player.Human)) {
+					        	Object[] possibleValues = {"Yes", "No"};
+					        	Object q = JOptionPane.showOptionDialog(null, "Cast " + RippledCards[i].getName() + "?", "Ripple", 
+					        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					        			null, possibleValues, possibleValues[0]);
+			                      if(q.equals(0)) {
+										AllZone.GameAction.playCardNoCost(RippledCards[i]);
+										revealed.remove(RippledCards[i]);
+									}
+							} else //computer
+							{
+								ArrayList<SpellAbility> choices = RippledCards[i].getBasicSpells();
+
+								for(SpellAbility sa:choices) {
+									if(sa.canPlayAI() && !sa.getSourceCard().getType().contains("Legendary")) {
+										ComputerUtil.playStackFree(sa);
+										revealed.remove(RippledCards[i]);
+										break;
+									}
+								}
+							}
+						}
+					}
+							revealed.shuffle();
+							for(Card bottom:revealed) {
+								lib.add(bottom);
+							}
+					}
+				};
+				ability.setStackDescription(c + " - Ripple.");
+				AllZone.Stack.add(ability);
+			}
+		};
+		Ripple.execute();
 	}
 	
 	public static void playCard_Storm(Card c) {

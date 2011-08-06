@@ -1,3 +1,44 @@
+Thrumming Stone
+5
+Legendary Artifact
+Spells you cast have ripple 4.
+
+Surging AEther
+3 U
+Instant
+Return target permanent to its owner's hand.
+Ripple:4
+
+Surging Dementia
+1 B
+Sorcery
+no text
+spDamageTgtP:0:Drawback$TgtDiscard/1:Target player discards a card.:Surging Dementia - Target player discards a card.
+Ripple:4
+
+Surging Flame
+1 R	
+Instant
+no text
+spDamageTgtCP:2
+Ripple:4
+
+Surging Might
+2 G	
+Enchantment Aura
+Enchanted creature gets +2/+2.
+Enchant creature
+enPump:+2/+2
+Ripple:4
+
+Surging Sentinels
+2 W	
+Creature Human Soldier
+no text
+2/1
+First strike
+Ripple:4
+
 Glory
 3 W W
 Creature Incarnation
