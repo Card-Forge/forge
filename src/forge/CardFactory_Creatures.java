@@ -141,47 +141,6 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Greater Forgeling")) {
-            final Command untilEOT = new Command() {
-                private static final long serialVersionUID = -4569751606008597903L;
-                
-                public void execute() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
-                        card.addTempAttackBoost(-3);
-                        card.addTempDefenseBoost(3);
-                    }
-                }
-            };
-            
-            SpellAbility ability = new Ability(card, "1 R") {
-                @Override
-                public boolean canPlayAI() {
-                    return MyRandom.random.nextBoolean() && CardFactoryUtil.AI_doesCreatureAttack(card)
-                            && 3 < card.getNetDefense();
-                }
-                
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(card)) {
-                        card.addTempAttackBoost(3);
-                        card.addTempDefenseBoost(-3);
-                        AllZone.EndOfTurn.addUntil(untilEOT);
-                    }
-                }
-            };
-            
-            ability.setDescription("1 R: Greater Forgeling gets +3/-3 until end of turn.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" gets +3/-3 until end of turn.");
-            ability.setStackDescription(sb.toString());
-            
-            card.addSpellAbility(ability);
-        }
-        //*************** END ************ END **************************
-        
-
-        //*************** START *********** START **************************
         else if(cardName.equals("Caller of the Claw")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
