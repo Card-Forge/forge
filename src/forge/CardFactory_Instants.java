@@ -3346,7 +3346,7 @@ public class CardFactory_Instants {
 
 				@Override
                 public void resolve() {
-                    AllZone.GameAction.sacrificeCreature(getTargetPlayer(), this);
+                    getTargetPlayer().sacrificeCreature();
                 }
                 
                 @Override

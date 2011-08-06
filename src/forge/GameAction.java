@@ -639,46 +639,6 @@ public class GameAction {
             if(c[i].getName().equals(name)) a.add(c[i]);
         }
         return a;
-    }    
-    
-    public void sacrificeCreature(Player player, SpellAbility sa) {
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-        CardList list = new CardList(play.getCards());
-        list = list.getType("Creature");
-        
-        this.sacrificePermanent(player, sa, list);
-    }
-    
-    /*
-    public void sacrificePermanent(Player player, String prompt, CardList choices) {
-        if(choices.size() > 0) {
-            if(player.isHuman()) {
-                Input in = CardFactoryUtil.input_sacrificePermanent(choices, prompt);
-                AllZone.InputControl.setInput(in);
-            } else {
-                CardListUtil.sortDefense(choices);
-                choices.reverse();
-                CardListUtil.sortAttackLowFirst(choices);
-                Card c = choices.get(0);
-                this.sacrificeDestroy(c);
-            }
-        }
-    }
-    */
-    
-    public void sacrificePermanent(Player player, SpellAbility sa, CardList choices) {
-        if(choices.size() > 0) {
-            if(player.equals(AllZone.HumanPlayer)) {
-                Input in = CardFactoryUtil.input_sacrificePermanent(choices, "Select a creature to sacrifice.");
-                AllZone.InputControl.setInput(in);
-            } else {
-                CardListUtil.sortDefense(choices);
-                choices.reverse();
-                CardListUtil.sortAttackLowFirst(choices);
-                Card c = choices.get(0);
-                this.sacrificeDestroy(c);
-            }
-        }
     }
     
     public void sacrifice(Card c) {

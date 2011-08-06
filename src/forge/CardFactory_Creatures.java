@@ -18044,7 +18044,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                 	if (card.getController().equals(AllZone.ComputerPlayer))
                 		setTargetPlayer(AllZone.HumanPlayer);
-                	AllZone.GameAction.sacrificeCreature(getTargetPlayer(), this);
+                	getTargetPlayer().sacrificeCreature();
 
                 	card.setKicked(false);
                 }

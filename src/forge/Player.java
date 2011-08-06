@@ -501,6 +501,15 @@ public abstract class Player extends MyObservable{
     ////////////////////////////////
     public abstract void sacrificePermanent(String prompt, CardList choices);
     
+    public void sacrificeCreature() {
+        CardList choices = AllZoneUtil.getCreaturesInPlay(this);
+    	sacrificePermanent("Select a creature to sacrifice.", choices);
+    }
+    
+    public void sacrificeCreature(CardList choices) {
+    	sacrificePermanent("Select a creature to sacrifice.", choices);
+    }
+    
 	////////////////////////////////
 	//
 	// generic Object overrides

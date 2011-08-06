@@ -7054,14 +7054,12 @@ public class GameActionUtil {
 					};
 
 					choices = choices.filter(filter);
-					if(choices.size() > 0) AllZone.GameAction.sacrificePermanent(AllZone.HumanPlayer, this,
-							choices);
+					if(choices.size() > 0) AllZone.HumanPlayer.sacrificeCreature(choices);
 
 					CardList compCreats = new CardList(cPlay.getCards());
 					compCreats = compCreats.filter(filter);
 
-					if(compCreats.size() > 0) AllZone.GameAction.sacrificePermanent(AllZone.ComputerPlayer,
-							this, compCreats);
+					if(compCreats.size() > 0) AllZone.ComputerPlayer.sacrificeCreature(compCreats);
 				}
 			};
 			ability.setStackDescription("At the beginning of your upkeep, each player sacrifices a non-Vampire creature.");

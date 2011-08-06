@@ -4091,8 +4091,8 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.sacrificeCreature(AllZone.HumanPlayer, this);
-                    AllZone.GameAction.sacrificeCreature(AllZone.ComputerPlayer, this);
+                    AllZone.HumanPlayer.sacrificeCreature();
+                    AllZone.ComputerPlayer.sacrificeCreature();
                 }
                 
                 @Override
@@ -4129,7 +4129,7 @@ public class CardFactory_Sorceries {
 
 				@Override
                 public void resolve() {
-                    AllZone.GameAction.sacrificeCreature(getTargetPlayer(), this);
+                    getTargetPlayer().sacrificeCreature();
                 }
                 
                 @Override
@@ -4171,7 +4171,7 @@ public class CardFactory_Sorceries {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
                     
-                    AllZone.GameAction.sacrificeCreature(getTargetPlayer(), this);
+                    getTargetPlayer().sacrificeCreature();
                     
                     grave.remove(card);
                     removed.add(card);
@@ -4196,8 +4196,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.sacrificeCreature(card.getController().getOpponent(),
-                            this);
+                    card.getController().getOpponent().sacrificeCreature();
                 }
                 
                 @Override
