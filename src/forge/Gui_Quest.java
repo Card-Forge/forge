@@ -183,13 +183,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         //if (questData.getMode().equals("Fantasy"))
         if ("Fantasy".equals(questData.getMode()))
         {
-        	//petComboBox.removeAll();
-        	ArrayList<String> petList = QuestUtil.getPetNames(questData);
-        	for (int i=0;i<petList.size();i++)
-        		petComboBox.addItem(petList.get(i));
-        	
-        	petComboBox.addItem("None");
-        	petComboBox.addItem("No Plant/Pet");
+        	refreshPets();
         	
             lifeLabel.setBounds(new Rectangle(1, 195, 499, 15));
             lifeLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -322,9 +316,20 @@ public class Gui_Quest extends JFrame implements NewConstants{
     	lifeLabel.setText("Max Life: " + questData.getLife());
     }
     
+    void refreshPets(){
+    	petComboBox.removeAllItems();
+    	ArrayList<String> petList = QuestUtil.getPetNames(questData);
+    	for (int i=0;i<petList.size();i++)
+    		petComboBox.addItem(petList.get(i));
+    	
+    	petComboBox.addItem("None");
+    	petComboBox.addItem("No Plant/Pet");
+    }
+    
     //make sure credits/life get updated after shopping at bazaar
     public void setVisible(boolean b)
     {
+    	refreshPets();
     	refreshCredits();
     	refreshLife();
     	super.setVisible(b);
