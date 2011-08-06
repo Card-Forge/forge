@@ -1,7 +1,7 @@
 Name:Ancestral Vision
 ManaCost:no cost
 Types:Sorcery
-Text:(NOTE: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
+Text:no text
 K:CARDNAME is blue.
 K:Suspend:4:U
 K:spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
