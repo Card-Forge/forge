@@ -3876,6 +3876,7 @@ public class GameActionUtil {
 
 	private static void landfall_Hedron_Crab(Card c) {
 		//final Card crd = c;
+		final String targetPlayer = AllZone.GameAction.getOpponent(c.getController());
 		final Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
@@ -3895,9 +3896,7 @@ public class GameActionUtil {
 				}
 			}
 		};
-
-		//ability.setStackDescription(c.getName() + " - Landfall: " + c.getController() + "  puts the top three cards of his or her library into his or her graveyard.");
-		//ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+		ability.setStackDescription(c.getName() + " - Landfall: " + targetPlayer + " puts the top three cards of his or her library into his or her graveyard.");
 
 		if(c.getController().equals(Constant.Player.Human)) {
 			AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
