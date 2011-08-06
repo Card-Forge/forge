@@ -1,8 +1,8 @@
 Name:Serene Offering
 ManaCost:1 W
 Types:Instant
-Text:Destroy target enchantment. You gain life equal to its converted mana cost.
-K:spDestroyTgt:Enchantment:Drawback$YouGainLife/dX
+Text:no text
+A:SP$Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ YouGainLife/dX | SpellDescription$ Destroy target enchantment. You gain life equal to its converted mana cost.
 SVar:dX:Count$TgtCardManaCost
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon

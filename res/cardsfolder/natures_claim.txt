@@ -1,8 +1,8 @@
 Name:Nature's Claim
 ManaCost:G
 Types:Instant
-Text:Destroy target artifact or enchantment. Its controller gains 4 life.
-K:spDestroyTgt:Artifact,Enchantment:Drawback$TgtCtrlrGainLife/4
+Text:no text
+A:SP$Destroy | Cost$ G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ TgtCtrlrGainLife/4 | SpellDescription$ Destroy target artifact or enchantment. Its controller gains 4 life.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_claim.jpg

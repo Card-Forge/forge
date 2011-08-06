@@ -1,8 +1,8 @@
 Name:Plunder
 ManaCost:4 R
 Types:Sorcery
-Text:Destroy target artifact or land.
-K:spDestroyTgt:Artifact,Land
+Text:no text
+A:SP$Destroy | Cost$ 4 R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land.
 K:Suspend:4:1 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plunder.jpg

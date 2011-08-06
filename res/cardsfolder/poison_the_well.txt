@@ -1,8 +1,8 @@
 Name:Poison the Well
 ManaCost:2 BR BR
 Types:Sorcery
-Text:Destroy target land. Poison the well deals 2 damage to that land's controller.
-K:spDestroyTgt:Land:Drawback$DamageTgtCtrlr/2
+Text:no text
+A:SP$Destroy | Cost$ 2 BR BR | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DamageTgtCtrlr/2 | SpellDescription$ Destroy target land. Poison the well deals 2 damage to that land's controller.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/poison_the_well.jpg

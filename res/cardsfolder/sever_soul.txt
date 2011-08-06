@@ -1,8 +1,8 @@
 Name:Sever Soul
 ManaCost:3 B B
 Types:Sorcery
-Text:Destroy target nonblack creature. It can't be regenerated. You gain life equal to its toughness.
-K:spDestroyTgt:Creature.nonBlack:NoRegen:Drawback$YouGainLife/dX
+Text:no text
+A:SP$Destroy | Cost$ 3 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SubAbility$ YouGainLife/dX | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. You gain life equal to its toughness.
 SVar:dX:Count$TgtCardToughness
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common

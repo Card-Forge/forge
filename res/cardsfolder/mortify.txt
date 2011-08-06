@@ -1,8 +1,8 @@
 Name:Mortify
 ManaCost:1 W B
 Types:Instant
-Text:Destroy target creature or enchantment.
-K:spDestroyTgt:Creature,Enchantment
+Text:no text
+A:SP$Destroy | Cost$ 1 W B | ValidTgts$ Creature,Enchantment | TgtPrompt$ Select target creature or enchantment | SpellDescription$ Destroy target creature or enchantment.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortify.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/122.jpg

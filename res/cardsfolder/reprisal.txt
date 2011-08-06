@@ -1,8 +1,8 @@
 Name:Reprisal
 ManaCost:1 W
 Types:Instant
-Text:Destroy target creature with power 4 or greater. It can't be regenerated.
-K:spDestroyTgt:Creature.powerGE4:NoRegen
+Text:no text
+A:SP$Destroy | Cost$ 1 W | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | NoRegen$ True | SpellDescription$ Destroy target creature with power 4 or greater. It can't be regenerated.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reprisal.jpg
 SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/37.jpg
