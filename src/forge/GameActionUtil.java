@@ -912,7 +912,7 @@ public class GameActionUtil {
 	}
 	
 	public static void playCard_Vengevine(Card c) {
-		if (Phase.PlayerCreatureSpellCount == 2 || Phase.ComputerCreatureSpellCount == 2)
+		if (c.isCreature() == true && (Phase.PlayerCreatureSpellCount == 2 || Phase.ComputerCreatureSpellCount == 2))
 		{
 		final String controller = c.getController();
 		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
