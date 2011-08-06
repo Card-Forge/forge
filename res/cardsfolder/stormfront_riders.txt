@@ -11,4 +11,5 @@ SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormfront_riders.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/20.jpg
 End

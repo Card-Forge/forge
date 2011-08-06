@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.Black | TgtPrompt$ Select target blac
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fang_skulkin.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/168.jpg
 End
