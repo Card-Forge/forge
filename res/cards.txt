@@ -1,3 +1,45 @@
+Burning Fields
+4 R
+Sorcery
+no text
+spDamageTgtOpp:5
+
+Searing Flesh
+6 R
+Sorcery
+no text
+spDamageTgtOpp:7
+
+Kiss of Death
+4 B B
+Sorcery
+no text
+spDamageTgtOpp:4:Drawback$YouGainLife/4:Kiss of Death deals 4 damage to target opponent. You gain 4 life.:Kiss of Death - deals 4 damage; you gain 4 life.
+
+Stolen Grain
+4 B B
+Sorcery
+no text
+spDamageTgtOpp:5:Drawback$YouGainLife/4:Stolen Grain deals 5 damage to target opponent. You gain 5 life.:Stolen Grain - deals 5 damage; you gain 5 life.
+
+Vampiric Touch
+2 B
+Sorcery
+no text
+spDamageTgtOpp:2Drawback$YouGainLife/2:Vampiric Touch deals 2 damage to target opponent and you gain 2 life.:Vampiric Touch - deals 2 damage and you gain 2 life.
+
+Eternal Flame
+2 R R
+Sorcery
+no text
+spDamageTgtOpp:Count$NumTypeYouCtrl.Mountain:Drawback$DamageYou/X.HalfUp:Eternal Flame deals X damage to target opponent where X is the number of mountains you control. It deals half X damage, rounded up, to you.:Eternal Flame - deals X damage and half X damage to you.
+
+Jovial Evil
+2 B
+Sorcery
+no text
+spDamageTgtOpp:Count$NumTypeWhiteOppCtrl.Creature/Twice:Jovial Evil deals X damage to target opponent, where X is twice the number of white creatures that player controls.:Jovial Evil - deals twice X damage.
+
 Arctic Wolves
 3 G G
 Creature Wolf
@@ -4200,12 +4242,6 @@ no text
 Horsemanship
 This creature cannot block
 
-Vampiric Touch
-2 B
-Sorcery
-no text
-spLoseLifeGainLife:2:Vampiric Touch deals 2 damage to target opponent and you gain 2 life.
-
 Wings of Hope
 W U
 Enchantment Aura
@@ -4679,18 +4715,6 @@ Landfall - Whenever a land enters the battlefield under your control, you may pu
 6/6
 Trample
 Landfall
-
-Kiss of Death
-4 B B
-Sorcery
-no text
-spLoseLifeGainLife:4:Kiss of Death deals 4 damage to target opponent. You gain 4 life.
-
-Stolen Grain
-4 B B
-Sorcery
-no text
-spLoseLifeGainLife:5:Stolen Grain deals 5 damage to target opponent. You gain 5 life.
 
 Privileged Position
 2 GW GW GW
