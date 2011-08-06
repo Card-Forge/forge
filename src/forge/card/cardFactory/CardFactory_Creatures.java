@@ -227,7 +227,7 @@ public class CardFactory_Creatures {
 	                            copy.setController(c.getController());
 	                            
 	                            copy.setManaCost(c.getManaCost());
-	                            copy.setColor(token.getColor());
+	                            copy.setColor(c.getColor());
 	                            copy.setToken(true);
 	                            
 	                            copy.setType(c.getType());
@@ -4931,47 +4931,6 @@ public class CardFactory_Creatures {
         	ability.setDescription(abCost+"Reveal any number of artifact cards in your hand. Add 2 to your mana pool for each card revealed this way.");
         	ability.setStackDescription(cardName+" - Reveal any number of artifact cards in your hand.");
         	card.addSpellAbility(ability); 
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sea Gate Oracle")) {
-        	final Ability ability = new Ability(card, "") {
-        		@Override
-        		public void resolve() {
-        			if(card.getController().isHuman()) {
-        				PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
-        				int maxCards = lib.size();
-        				maxCards = Math.min(maxCards, 2);
-        				if(maxCards == 0) return;
-        				CardList topCards =   new CardList();
-        				//show top n cards:
-        				for(int j = 0; j < maxCards; j++ ) {
-        					topCards.add(lib.get(j));
-        				}
-        				Object o = GuiUtils.getChoice("Put one card in your hand", topCards.toArray());
-    					if(o != null) {
-    						Card c_1 = (Card) o;
-    						topCards.remove(c_1);
-    						AllZone.GameAction.moveToHand(c_1);
-    					}
-    					for(Card c:topCards) {
-    						AllZone.GameAction.moveToBottomOfLibrary(c);
-    					}
-        			}
-        		}
-        	};
-        	ability.setStackDescription(cardName+" - Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.");
-        	Command intoPlay = new Command() {
-				private static final long serialVersionUID = -4300804642226899861L;
-
-				public void execute() {
-        			AllZone.Stack.addSimultaneousStackEntry(ability);
-
-        		}
-        	};
-
-        	card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
         
