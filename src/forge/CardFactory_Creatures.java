@@ -825,41 +825,6 @@ public class CardFactory_Creatures {
           
         */
         
-/*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Wellwisher")) {
-            final SpellAbility ability = new Ability_Tap(card, "0") {
-                private static final long serialVersionUID = 1446529067071763247L;
-                
-                @Override
-                public boolean canPlay() {
-                    setStackDescription(card.getName() + " - " + card.getController() + " gains " + countElf()
-                            + " life.");
-                    
-                    return super.canPlay();
-                }
-                
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.getPlayerLife(card.getController()).addLife(countElf());
-                }
-                
-                int countElf() {
-                    //get all creatures
-                    CardList list = new CardList();
-                    list.addAll(AllZone.Human_Play.getCards());
-                    list.addAll(AllZone.Computer_Play.getCards());
-                    list = list.getType("Elf");
-                    return list.size();
-                }
-            };//SpellAbility
-            ability.setDescription("tap: You gain 1 life for each Elf in play.");
-            ability.setBeforePayMana(new Input_NoCost_TapAbility((Ability_Tap) ability));
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-*/
-        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Sliver Overlord")) {
             //final String player = card.getController();
@@ -2062,39 +2027,6 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-
-        /* ************** START *********** START **************************
-        else if(cardName.equals("Groundbreaker") || cardName.equals("Ball Lightning")
-                || cardName.equals("Blistering Firecat") || cardName.equals("Spark Elemental")) {
-            final SpellAbility spell = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(card)) AllZone.GameAction.sacrifice(card);
-                }
-            };
-            spell.setStackDescription("Sacrifice " + card);
-            
-            final Command destroy = new Command() {
-                private static final long serialVersionUID = -3114095443175559598L;
-                
-                public void execute() {
-                    if(AllZone.GameAction.isCardInPlay(card)) AllZone.Stack.add(spell);
-                }
-            };
-            
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 1923179467785421942L;
-                
-                public void execute() {
-                    if(!card.isFaceDown()) AllZone.EndOfTurn.addAt(destroy);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-            card.addTurnFaceUpCommand(intoPlay);
-            card.setSacrificeAtEOT(true);
-        }//*************** END ************ END ************************* */
-        
-
         //*************** START *********** START **************************
         if(cardName.equals("Rukh Egg")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -6341,39 +6273,6 @@ public class CardFactory_Creatures {
                     }
                     
          */
-        
-/*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Mawcor") || cardName.equals("Pirate Ship")) {
-            final Ability_Tap ability = new Ability_Tap(card) {
-                private static final long serialVersionUID = 6238678956434079L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    setTargetPlayer(Constant.Player.Human);
-                }
-                
-                @Override
-                public void resolve() {
-                    if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,
-                                card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
-                }//resolve()
-            };//SpellAbility
-            card.addSpellAbility(ability);
-            ability.setDescription("tap: " + cardName + " deals 1 damage to target creature or player.");
-            
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(ability, true, false));
-        }//*************** END ************ END **************************
-*/
-                
         
         //*************** START *********** START **************************
         else if(cardName.equals("Rathi Assassin")) {
@@ -15574,32 +15473,6 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
                 
-/*
-        //*************** START *********** START **************************
-        if(cardName.equals("Thornscape Apprentice")) {
-            final SpellAbility ability = new Ability_Tap(card, "W") {
-                private static final long serialVersionUID = 7296467409302755815L;
-                
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    c.tap();
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };//SpellAbility
-            
-            card.addSpellAbility(ability);
-            ability.setDescription("W, tap: Tap target creature.");
-            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
-            
-        }//*************** END ************ END **************************
-*/
-        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Covetous Dragon")) {
             SpellAbility spell = new Spell_Permanent(card) {
@@ -18924,40 +18797,6 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
-        
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Ivy Elemental"))
-        {
-           SpellAbility sa = card.getSpellAbility()[0];
-           sa.setIsXCost(true);
-           sa.setManaCost("G");
-           
-           //card.getSpellAbility()[0].setIsXCost(true);
-           final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.addCounter(Counters.P1P1, card.getXManaCostPaid());
-                    card.setXManaCostPaid(0);
-                }
-            };
-           
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName);
-            sb.append(" - enters the battlefield with X +1/+1 counters on it.");
-            ability.setStackDescription(sb.toString());
-           
-            final Command comesIntoPlay = new Command() {
-            private static final long serialVersionUID = -6463000686862814506L;
-
-            public void execute() {
-                    AllZone.Stack.add(ability);
-                }
-            };
-           
-            card.addComesIntoPlayCommand(comesIntoPlay);
-        }//*************** END ************ END **************************
-        */
         
         //****************************START*****************
         else if(cardName.equals("Ley Druid")) {
