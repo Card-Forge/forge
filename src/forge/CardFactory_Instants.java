@@ -4262,6 +4262,45 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Telling Time")) {
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 2626878556107707854L;
+				String[] prompt = new String[] {
+        			"Put a card into your hand",
+        			"Put a card on top of library",
+        			"Put a card on bottom of library"
+        		};
+
+        		@Override                           
+        		public boolean canPlayAI() {
+        			return false;
+        		}      
+        		@Override
+        		public void resolve() {
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+        			CardList choices = new CardList();
+        			for(int i = 0; i < 3 && lib.size() > 0; i++) {
+        				choices.add(lib.get(i));
+        			}
+        			
+        			for(int i = 0; i < 3 && !choices.isEmpty(); i++) {
+        				Object o = AllZone.Display.getChoice(prompt[i], choices.toArray());
+						Card c1 = (Card)o;
+						if(i == 0) AllZone.GameAction.moveToHand(c1);
+						else if(i == 1) AllZone.GameAction.moveToTopOfLibrary(c1);
+						else if(i == 2) AllZone.GameAction.moveToBottomOfLibrary(c1);
+						
+						choices.remove(c1);
+        			}
+        		}
+        	};
+        	
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END ************************** 
+        
     	return card;
     }//getCard
 }
