@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 K:enPump:0/0
-T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Opponent | Execute$ TrigSacrifice | CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, that player sacrifices a land.
+T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Execute$ TrigSacrifice | CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, that player sacrifices a land.
 SVar:TrigSacrifice:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredTarget | SacValid$ Land | ChangeNum$ 1 | SpellDescription$ Sacrifice a land.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/destructive_urge.jpg

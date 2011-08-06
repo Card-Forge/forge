@@ -1,0 +1,12 @@
+Name:Pollenbright Wings
+ManaCost:4 G W
+Types:Enchantment Aura
+Text:Enchanted creature has flying
+K:Enchant creature
+K:enPump:+0/+0/Flying
+T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | Execute$ TrigToken | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, put that many 1/1 green Saproling creature tokens onto the battlefield.
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:X:Count$TriggeredDamageAmount
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pollenbright_wings.jpg
+End
