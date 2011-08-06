@@ -1,6 +1,7 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observer;
 import java.util.Stack;
 
@@ -255,12 +256,20 @@ public class Phase extends MyObservable
         
 	    else if (phase.equals(Constant.Phase.Combat_End))
         {
-			if (!inCombat() || !AllZone.Display.stopAtPhase(turn, phase)){
+			if (!inCombat()){
 				AllZone.Phase.setNeedToNextPhase(true);
 			}
 			else{
 				AllZone.EndOfCombat.executeUntil();
 				AllZone.EndOfCombat.executeAt();
+				
+		    	HashMap<String,Object> runParams = new HashMap<String,Object>();
+		    	runParams.put("Phase", phase);
+		    	runParams.put("Player", getPlayerTurn());
+		    	AllZone.TriggerHandler.runTrigger("Phase", runParams);
+		    	
+		    	if(AllZone.Stack.size() == 0 && !AllZone.Display.stopAtPhase(turn, phase)) 
+		    		AllZone.Phase.setNeedToNextPhase(true);
 			}
         }
 
