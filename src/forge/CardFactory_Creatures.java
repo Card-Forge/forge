@@ -7144,7 +7144,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
-        
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Malakir Bloodwitch")) {
             final SpellAbility abilityComes = new Ability(card, "0") {
@@ -7178,6 +7178,7 @@ public class CardFactory_Creatures {
             
             card.addComesIntoPlayCommand(commandComes);
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Meddling Mage")) {
