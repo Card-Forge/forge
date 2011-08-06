@@ -9,4 +9,5 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigGainControl:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature in opponent's graveyard
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scion_of_darkness.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/79.jpg
 End

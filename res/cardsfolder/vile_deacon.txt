@@ -8,4 +8,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | NumDef$ X
 SVar:X:Count$Valid Cleric
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vile_deacon.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/85.jpg
 End
