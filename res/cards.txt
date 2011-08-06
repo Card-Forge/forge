@@ -1,3 +1,38 @@
+Gemstone Mine
+no cost
+Land
+CARDNAME enters the battlefield with three mining counters on it.
+
+Vivid Crag
+no cost
+Land
+CARDNAME enters the battlefield tapped with two charge counters on it.
+tap: add R
+
+Vivid Creek
+no cost
+Land
+CARDNAME enters the battlefield tapped with two charge counters on it.
+tap: add U
+
+Vivid Grove
+no cost
+Land
+CARDNAME enters the battlefield tapped with two charge counters on it.
+tap: add G
+
+Vivid Marsh
+no cost
+Land
+CARDNAME enters the battlefield tapped with two charge counters on it.
+tap: add B
+
+Vivid Meadow
+no cost
+Land
+CARDNAME enters the battlefield tapped with two charge counters on it.
+tap: add W
+
 Encroach
 B
 Sorcery
@@ -1074,41 +1109,6 @@ Ancient Runes
 2 R
 Enchantment
 At the beginning of each player's upkeep, Ancient Runes deals damage to that player equal to the number of artifacts he or she controls.
-
-Vivid Crag
-no cost
-Land
-no text
-tap: add R
-
-Vivid Creek
-no cost
-Land
-no text
-tap: add U
-
-Vivid Grove
-no cost
-Land
-no text
-tap: add G
-
-Vivid Marsh
-no cost
-Land
-no text
-tap: add B
-
-Vivid Meadow
-no cost
-Land
-no text
-tap: add W
-
-Gemstone Mine
-no cost
-Land
-no text
 
 Lightning Dragon
 2 R R

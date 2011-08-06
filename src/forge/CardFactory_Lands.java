@@ -307,7 +307,7 @@ class CardFactory_Lands {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Gemstone Mine")) {
-            final Ability_Mana mine = new Ability_Mana(card, "tap, Remove a charge counter from CARDNAME: Add one mana of any color to your mana pool.") {
+            final Ability_Mana mine = new Ability_Mana(card, "tap, Remove a mining counter from CARDNAME: Add one mana of any color to your mana pool. If there are no mining counters on CARDNAME, sacrifice it.") {
 				private static final long serialVersionUID = -785117149012567841L;
 
                 @Override
@@ -357,8 +357,8 @@ class CardFactory_Lands {
 
             card.setReflectableMana("WUBRG");
             card.addSpellAbility(mine);
-            mine.setDescription("Gemstone Mine - tap, remove a mining counter: Add one mana of any color to your mana pool");
-            mine.setStackDescription("Gemstone Mine - tap, remove a mining counter: Add one mana of any color to your mana pool");
+            mine.setDescription("Gemstone Mine - tap, remove a mining counter: Add one mana of any color to your mana pool. If there are no mining counters on CARDNAME, sacrifice it.");
+            mine.setStackDescription("Gemstone Mine - tap, remove a mining counter: Add one mana of any color to your mana pool. If there are no mining counters on CARDNAME, sacrifice it.");
         	
             Command intoPlay = new Command() {
 				private static final long serialVersionUID = -2231880032957304542L;
