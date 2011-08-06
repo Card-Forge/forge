@@ -9,4 +9,5 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDesc
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ +5
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/escaped_null.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/109.jpg
 End

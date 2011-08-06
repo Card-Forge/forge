@@ -6,4 +6,5 @@ A:SP$ Counter | Cost$ U U Return<1/Land> | Type$ Spell | Destination$ Graveyard 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deprive.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/59.jpg
 End
