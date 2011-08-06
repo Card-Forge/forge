@@ -14300,7 +14300,6 @@ public class GameActionUtil {
 			for(Card rat:rats) {
 				rat.setBaseAttack(rats.size());
 				rat.setBaseDefense(rats.size());
-
 			}
 		}// execute()
 
@@ -14566,21 +14565,9 @@ public class GameActionUtil {
 	
 	public static Command Master_of_Etherium          = new Command() {
 		private static final long serialVersionUID   = -5406532269375480827L;
-
-		@SuppressWarnings("unused")
-		// gloriousAnthemList
-		CardList                  gloriousAnthemList = new CardList();
-
-		@SuppressWarnings("unused")
-		// otherMasters
-		int                       otherMasters       = 0;
-
+		
 		public void execute() {
-			// get all cards
-
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
+			CardList list = AllZoneUtil.getCardsInPlay();
 			list = list.filter(new CardListFilter() {
                 public boolean addCard(Card c) {
                     return c.getName().equals("Master of Etherium") || c.getName().equals("Broodstar");
@@ -14589,27 +14576,15 @@ public class GameActionUtil {
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-
-				c.setBaseAttack(countArtifacts(c));
+				CardList arts = AllZoneUtil.getPlayerCardsInPlay(c.getController());
+				arts = arts.filter(AllZoneUtil.artifacts);
+				c.setBaseAttack(arts.size());
 				c.setBaseDefense(c.getBaseAttack());
-
-
 			}
 
 		}// execute()
+	}; // Master of Etherium + Broodstar
 
-		private int countArtifacts(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList artifacts = new CardList(play.getCards());
-			artifacts = artifacts.getType("Artifact");
-			return artifacts.size();
-		}
-
-
-	}; // Master of etherium + Broodstar
-
-	
 	public static Command Loxodon_Punisher            = new Command() {
 
 		private static final long serialVersionUID = -7746134566580289667L;
@@ -14685,25 +14660,13 @@ public class GameActionUtil {
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				c.setBaseAttack(countWhitePermanents(c));
+				CardList white = AllZoneUtil.getPlayerCardsInPlay(c.getController());
+				white = white.filter(AllZoneUtil.white);
+				c.setBaseAttack(white.size());
 				c.setBaseDefense(c.getBaseAttack());
 			}
 
 		}// execute()
-
-		private int countWhitePermanents(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList whitePermanents = new CardList(
-					play.getCards());
-			whitePermanents = whitePermanents.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isWhite();
-				}
-
-			});
-			return whitePermanents.size();
-		}
 	};
 
 	public static Command Crowd_of_Cinders            = new Command() {
@@ -14715,25 +14678,13 @@ public class GameActionUtil {
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				c.setBaseAttack(countWhitePermanents(c));
+				CardList black = AllZoneUtil.getPlayerCardsInPlay(c.getController());
+				black = black.filter(AllZoneUtil.black);
+				c.setBaseAttack(black.size());
 				c.setBaseDefense(c.getBaseAttack());
 			}
 
 		}// execute()
-
-		private int countWhitePermanents(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList whitePermanents = new CardList(
-					play.getCards());
-			whitePermanents = whitePermanents.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isBlack();
-				}
-
-			});
-			return whitePermanents.size();
-		}
 	}; // Crowd of Cinders
 
 	public static Command Faerie_Swarm                = new Command() {
@@ -14765,25 +14716,13 @@ public class GameActionUtil {
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				c.setBaseAttack(countWhitePermanents(c));
-				c.setBaseDefense(c.getBaseAttack());
+				CardList green = AllZoneUtil.getPlayerCardsInPlay(c.getController());
+				green = green.filter(AllZoneUtil.green);
+				c.setBaseAttack(green.size());
+				c.setBaseDefense(green.size());
 			}
 
 		}// execute()
-
-		private int countWhitePermanents(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList whitePermanents = new CardList(
-					play.getCards());
-			whitePermanents = whitePermanents.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isGreen();
-				}
-
-			});
-			return whitePermanents.size();
-		}
 	}; // Drove of Elves
 
 
@@ -14821,43 +14760,11 @@ public class GameActionUtil {
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				int k = 0;
-				if(c.getController().equals(
-						AllZone.HumanPlayer)) {
-					k = countLands_Human();
-				} else k = countLands_Computer();
-				c.setBaseAttack(k);
-				c.setBaseDefense(k);
+				c.setBaseAttack(AllZoneUtil.getPlayerLandsInPlay(c.getController()).size());
+				c.setBaseDefense(c.getBaseAttack());
 
 			}
 		}
-
-		private int countLands_Human() {
-			PlayerZone Play = AllZone.getZone(
-					Constant.Zone.Play, AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(Play.getCards());
-			list = list.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isLand();
-				}
-			});
-			return list.size();
-		}
-
-		private int countLands_Computer() {
-			PlayerZone Play = AllZone.getZone(
-					Constant.Zone.Play, AllZone.ComputerPlayer);
-			CardList list = new CardList();
-			list.addAll(Play.getCards());
-			list = list.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isLand();
-				}
-			});
-			return list.size();
-		}
-
 
 	}; //Molimo, Maro-Sorcerer
 
@@ -14865,37 +14772,14 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -8778902687347191964L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Maro");
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				int k = 0;
-				if(c.getController().equals(
-						AllZone.HumanPlayer)) {
-					k = countHand_Human();
-				} else k = countHand_Computer();
-				c.setBaseAttack(k);
-				c.setBaseDefense(k);
+				c.setBaseAttack(AllZoneUtil.getPlayerHand(c.getController()).size());
+				c.setBaseDefense(c.getBaseAttack());
 			}
 		}
-
-		private int countHand_Human() {
-			PlayerZone Play = AllZone.getZone(
-					Constant.Zone.Hand, AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(Play.getCards());
-			return list.size();
-		}
-
-		private int countHand_Computer() {
-			PlayerZone Play = AllZone.getZone(
-					Constant.Zone.Hand, AllZone.ComputerPlayer);
-			CardList list = new CardList();
-			list.addAll(Play.getCards());
-			return list.size();
-		}
-
 	}; //Maro
 	
 	public static Command Masumaro_First_to_Live                       = new Command() {
@@ -15070,7 +14954,6 @@ public class GameActionUtil {
 
 		private int countSoundTheCalls() {
 			CardList list = AllZoneUtil.getCardsInGraveyard();
-
 			list = list.getName("Sound the Call");
 			return list.size();
 		}
@@ -15081,7 +14964,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -8778902687347191964L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Mortivore");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -15092,20 +14974,8 @@ public class GameActionUtil {
 		}
 
 		private int countCreatures() {
-			PlayerZone compGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.ComputerPlayer);
-			PlayerZone humGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(compGrave.getCards());
-			list.addAll(humGrave.getCards());
-			list = list.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isCreature();
-				}
-			});
+			CardList list = AllZoneUtil.getCardsInGraveyard();
+			list = list.filter(AllZoneUtil.creatures);
 			return list.size();
 		}
 
@@ -15115,7 +14985,6 @@ public class GameActionUtil {
 		private static final long serialVersionUID = -8778902687347191964L;
 
 		public void execute() {
-			// get all creatures
 			CardList list = AllZoneUtil.getCardsInPlay("Cognivore");
 
 			for(int i = 0; i < list.size(); i++) {
@@ -15126,15 +14995,7 @@ public class GameActionUtil {
 		}
 
 		private int countCreatures() {
-			PlayerZone compGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.ComputerPlayer);
-			PlayerZone humGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(compGrave.getCards());
-			list.addAll(humGrave.getCards());
+			CardList list = AllZoneUtil.getCardsInGraveyard();
 			list = list.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return c.isInstant();
@@ -15160,20 +15021,8 @@ public class GameActionUtil {
 		}
 
 		private int countCreatures() {
-			PlayerZone compGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.ComputerPlayer);
-			PlayerZone humGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(compGrave.getCards());
-			list.addAll(humGrave.getCards());
-			list = list.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isEnchantment();
-				}
-			});
+			CardList list = AllZoneUtil.getCardsInGraveyard();
+			list = list.filter(AllZoneUtil.enchantments);
 			return list.size();
 		}
 
@@ -15194,20 +15043,8 @@ public class GameActionUtil {
 		}
 
 		private int countCreatures() {
-			PlayerZone compGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.ComputerPlayer);
-			PlayerZone humGrave = AllZone.getZone(
-					Constant.Zone.Graveyard,
-					AllZone.HumanPlayer);
-			CardList list = new CardList();
-			list.addAll(compGrave.getCards());
-			list.addAll(humGrave.getCards());
-			list = list.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isCreature();
-				}
-			});
+			CardList list = AllZoneUtil.getCardsInGraveyard();
+			list = list.filter(AllZoneUtil.creatures);
 			return list.size();
 		}
 
@@ -15290,30 +15127,13 @@ public class GameActionUtil {
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				c.setBaseDefense(countLandTypes(c));
+				c.setBaseDefense(CardFactoryUtil.countBasicLandTypes(c.getController()));
 			}
 
 		}// execute()
-
-		int countLandTypes(Card card) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, card.getController());
-			CardList land = new CardList(play.getCards());
-
-			String basic[] = {
-					"Forest", "Plains", "Mountain", "Island", "Swamp" };
-			int count = 0;
-
-			for(int i = 0; i < basic.length; i++) {
-				CardList c = land.getType(basic[i]);
-				if(!c.isEmpty()) count++;
-			}
-			return count;
-		}
 	};
 	
 	public static Command Matca_Rioters            = new Command() {
-		
 		private static final long serialVersionUID = 1090204321481353143L;
 
 		public void execute() {
@@ -15321,24 +15141,11 @@ public class GameActionUtil {
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				c.setBaseDefense(countLandTypes(c));
+				c.setBaseDefense(CardFactoryUtil.countBasicLandTypes(c.getController()));
 				c.setBaseAttack(c.getBaseDefense());
 			}
 
 		}// execute()
-
-		int countLandTypes(Card card) {
-			CardList land = AllZoneUtil.getPlayerCardsInPlay(card.getController());
-
-			String basic[] = {"Forest", "Plains", "Mountain", "Island", "Swamp" };
-			int count = 0;
-
-			for(int i = 0; i < basic.length; i++) {
-				CardList c = land.getType(basic[i]);
-				if(!c.isEmpty()) count++;
-			}
-			return count;
-		}
 	};
 
 	public static Command Rakdos_Pit_Dragon           = new Command() {

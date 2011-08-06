@@ -500,9 +500,18 @@ public class AllZoneUtil {
 	};
 	
 	/**
-	 * a CardListFilter to get all creaures
+	 * a CardListFilter to get all creatures
 	 */
 	public static CardListFilter creatures = new CardListFilter() {
+		public boolean addCard(Card c) {
+			return c.isCreature();
+		}
+	};
+	
+	/**
+	 * a CardListFilter to get all enchantments
+	 */
+	public static CardListFilter enchantments = new CardListFilter() {
 		public boolean addCard(Card c) {
 			return c.isCreature();
 		}
