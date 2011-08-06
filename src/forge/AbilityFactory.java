@@ -159,11 +159,6 @@ public class AbilityFactory {
 			isTargeted = true;
 		}
 		
-		if(hostCard.getName().equals("Goblin Ruinblaster"))
-		{
-			System.out.println("Bug station next");
-		}
-		
 		if (isTargeted)
 		{
 			String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
