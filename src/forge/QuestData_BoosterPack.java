@@ -99,9 +99,47 @@ public class QuestData_BoosterPack implements NewConstants {
     }//colorStats()
     
     public QuestData_BoosterPack() {
-        setup(ForgeProps.getFile(QUEST.COMMON), commonCreature, commonSpell);
-        setup(ForgeProps.getFile(QUEST.UNCOMMON), uncommonCreature, uncommonSpell);
-        setup(ForgeProps.getFile(QUEST.RARE), rareCreature, rareSpell);
+        //setup(ForgeProps.getFile(QUEST.COMMON), commonCreature, commonSpell);
+        //setup(ForgeProps.getFile(QUEST.UNCOMMON), uncommonCreature, uncommonSpell);
+        //setup(ForgeProps.getFile(QUEST.RARE), rareCreature, rareSpell);
+        
+        CardList AllCards = new CardList(AllZone.CardFactory.getAllCards().toArray());
+        
+        for (int i=0; i<AllCards.size(); i++)
+        {
+        	Card aCard = AllCards.get(i);
+        	String rr = aCard.getSVar("Rarity");
+        	
+        	if (rr.equals("Common"))
+        	{
+        		if (aCard.isCreature())
+        			commonCreature.add(aCard.getName());
+        		else
+        			commonSpell.add(aCard.getName());
+        	}
+        	else if (rr.equals("Uncommon"))
+        	{
+        		if (aCard.isCreature())
+        			uncommonCreature.add(aCard.getName());
+        		else
+        			uncommonSpell.add(aCard.getName());
+        	}
+        	else if (rr.equals("Rare"))
+        	{
+        		if (aCard.isCreature())
+        			rareCreature.add(aCard.getName());
+        		else
+        			rareSpell.add(aCard.getName());
+        	}
+        	else if (rr.equals("Mythic"))
+        	{
+        		if (aCard.isCreature())
+        			rareCreature.add(aCard.getName());
+        		else
+        			rareSpell.add(aCard.getName());
+        	}
+        		
+        }
     }
     
     private int getColorIndex(int n) {
