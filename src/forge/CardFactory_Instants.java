@@ -1644,25 +1644,13 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    //PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
                     if(getTargetPlayer().getLife() == 10) {
-                    	//AllZone.GameAction.addDamage(getTargetPlayer(), card, 10);
                     	getTargetPlayer().addDamage(10, card);
                     }
                 }
                 
-                /*
-                @Override
-                public boolean canPlay() {
-                    String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    PlayerLife p = AllZone.GameAction.getPlayerLife(opponent);
-                    return p.getLife() == 10;
-                }
-                */
-                
                 @Override
                 public boolean canPlayAI() {
-                    //PlayerLife humanLife = AllZone.GameAction.getPlayerLife(AllZone.HumanPlayer);
                     return AllZone.HumanPlayer.getLife() == 10;
                 }
                 
@@ -2237,73 +2225,6 @@ public class CardFactory_Instants {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
-/*        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Smother")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 6479035316340603704L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList c = CardFactoryUtil.AI_getHumanCreature(true, 3, card, true);
-                    CardListUtil.sortAttack(c);
-                    CardListUtil.sortFlying(c);
-                    
-                    if(c.isEmpty()) return false;
-                    else {
-                        setTargetCard(c.get(0));
-                        return true;
-                    }
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    if(AllZone.GameAction.isCardInPlay(c)
-                            && CardUtil.getConvertedManaCost(card.getManaCost()) <= 3
-                            && CardFactoryUtil.canTarget(card, getTargetCard())) AllZone.GameAction.destroyNoRegeneration(c);
-                }//resolve()
-            };//SpellAbility
-            
-            Input target = new Input() {
-                private static final long serialVersionUID = 1877945605889747187L;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select target creature for " + card.getName()
-                            + " - creature must have a converted manacost of 3 or less");
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card card, PlayerZone zone) {
-                    if(!CardFactoryUtil.canTarget(spell, card)) {
-                        AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    }
-                    if(card.isCreature() && zone.is(Constant.Zone.Play)
-                            && CardUtil.getConvertedManaCost(card.getManaCost()) <= 3) {
-                        spell.setTargetCard(card);
-                        if(this.isFree()) 
-                        {
-                        	this.setFree(false);
-                        	AllZone.Stack.add(spell);
-                        	stop();
-                    	} 
-                        else
-                        	stopSetNext(new Input_PayManaCost(spell));
-                    }
-                }
-            };//Input
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            spell.setBeforePayMana(target);
-        }//*************** END ************ END **************************
- */       
         
         //*************** START *********** START **************************
         else if(cardName.equals("Strangling Soot")) {
@@ -2468,8 +2389,6 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    //if (AllZone.ComputerPlayer.equals(getTargetPlayer())) AllZone.GameAction.discardRandom(getTargetPlayer(), this);
-                    //else AllZone.InputControl.setInput(CardFactoryUtil.input_discard(this));
                 	getTargetPlayer().discard(this);
                 }//resolve()
             };//SpellAbility
@@ -3196,9 +3115,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    //CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-                    //list = list.getName("Mana Pool");
-                    Card mp = AllZone.ManaPool;//list.getCard(0);
+                    Card mp = AllZone.ManaPool;
                     mp.addExtrinsicKeyword("ManaPool:R");
                     mp.addExtrinsicKeyword("ManaPool:R");
                     mp.addExtrinsicKeyword("ManaPool:R");
@@ -3228,9 +3145,7 @@ public class CardFactory_Instants {
                 
                 @Override
                 public void resolve() {
-                    /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-                    list = list.getName("Mana Pool");*/
-                    Card mp = AllZone.ManaPool;//list.getCard(0);
+                    Card mp = AllZone.ManaPool;
                     mp.addExtrinsicKeyword("ManaPool:B");
                     mp.addExtrinsicKeyword("ManaPool:B");
                     mp.addExtrinsicKeyword("ManaPool:B");
@@ -3260,9 +3175,7 @@ public class CardFactory_Instants {
 
 				@Override
                 public void resolve() {
-                    /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer).getCards());
-                    list = list.getName("Mana Pool");*/
-                    Card mp = AllZone.ManaPool;//list.getCard(0);
+                    Card mp = AllZone.ManaPool;
                     mp.addExtrinsicKeyword("ManaPool:R");
                     mp.addExtrinsicKeyword("ManaPool:R");
                     mp.addExtrinsicKeyword("ManaPool:R");
@@ -4435,6 +4348,7 @@ public class CardFactory_Instants {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
         
 
         //*************** START *********** START **************************
