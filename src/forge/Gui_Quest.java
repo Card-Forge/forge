@@ -635,6 +635,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("The Great Gazoo 3	hard	Sloth's Sun Lotion deck, red damage all spells and pro from red creatures");
         sb.append("\r\n");
+	sb.append("Treebeard 2		medium	Treefolk creatures. Bosk Banneret, Dauntless Dourbark, Timber Protector, Leaf-Crowned Elder, Doran");
+        sb.append("\r\n");
         sb.append("Uncle Owen 3		hard	Creature removal/control with Liliana Vess");
         sb.append("\r\n");
         sb.append("Wilma Flintstone 1	easy	Noxious Hatchling, Woodlurker Mimic, Liliana Vess + a few BG spells");

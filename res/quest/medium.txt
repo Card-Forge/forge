@@ -39,5 +39,6 @@ Spock 2
 Storm 2
 Superman 2
 Tarzan 2
+Treebeard 2
 Wilma Flintstone 2
 Wyatt Earp 2
