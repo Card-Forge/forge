@@ -6190,8 +6190,9 @@ public class CardFactory_Creatures {
             //color change ability
         	Ability_Cost abCost = new Ability_Cost("G", cardName, true);
             final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
-            	
-                @Override
+				private static final long serialVersionUID = -5362934962417382279L;
+
+				@Override
                 public boolean canPlayAI() {
                     return false;
                 }
