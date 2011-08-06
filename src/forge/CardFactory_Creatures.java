@@ -234,7 +234,7 @@ public class CardFactory_Creatures {
 	                        {
 	                            Card c = getTargetCard();
 	                            
-	                            copy = new Card();
+	                            copy = CardFactory.copyStats(c);
 	                            
 	                            copy.setName(c.getName());
 	                            copy.setImageName(c.getImageName());
@@ -251,6 +251,12 @@ public class CardFactory_Creatures {
 	                            copy.setBaseDefense(c.getBaseDefense());
 	                            copy.addIntrinsicKeyword("Haste");
 	                        }
+	                        
+	                        //Slight hack in case Kiki copies a creature with triggers.
+                            for(Trigger t : copy.getTriggers())
+                            {
+                            	AllZone.TriggerHandler.registerTrigger(t);
+                            }
 	                        
 	                        copy.setCurSetCode(getTargetCard().getCurSetCode());
 	                        copy.setImageFilename(getTargetCard().getImageFilename());
@@ -285,7 +291,12 @@ public class CardFactory_Creatures {
 	                            public void execute() {
 	                                //technically your opponent could steal the token
 	                                //and the token shouldn't be sacrificed
-	                                if(AllZone.GameAction.isCardInPlay(target[index])) AllZone.GameAction.sacrifice(target[index]); //maybe do a setSacrificeAtEOT, but probably not.
+	                                if(AllZone.GameAction.isCardInPlay(target[index]))
+	                                {
+	                                	//Slight hack in case kiki copies a creature with triggers
+	                                	AllZone.TriggerHandler.removeAllFromCard(target[index]);
+	                                	AllZone.GameAction.sacrifice(target[index]); //maybe do a setSacrificeAtEOT, but probably not.
+	                                }
 	                            }
 	                        };//Command
 	                        AllZone.EndOfTurn.addAt(atEOT);
@@ -9885,6 +9896,9 @@ public class CardFactory_Creatures {
                     sb.append(card.getName()).append(" - reverting self to "+card.getName()+".");
                     copyBack.setStackDescription(sb.toString());
                     
+                    //Slight hack if the cloner copies a card with triggers
+                    AllZone.TriggerHandler.removeAllFromCard(cloned[0]);
+                    
                     AllZone.Stack.add(copyBack);
                 }
             };
@@ -9902,7 +9916,7 @@ public class CardFactory_Creatures {
 					}
 					
 					if (copyTarget[0] != null) {
-						cloned[0] = cfact.getCard(copyTarget[0].getName(), card.getController());
+						cloned[0] = CardFactory.copyStats(copyTarget[0]);
 						cloned[0].setCloneOrigin(card);
 						cloned[0].addLeavesPlayCommand(leaves);
 						cloned[0].setCloneLeavesPlayCommand(leaves);
@@ -9916,6 +9930,13 @@ public class CardFactory_Creatures {
 							cloned[0].setBaseDefense(7);
 							cloned[0].setBaseAttack(7);
 						}
+						
+						//Slight hack in case the cloner copies a card with triggers
+						for(Trigger t : cloned[0].getTriggers())
+						{
+							AllZone.TriggerHandler.registerTrigger(t);
+						}
+						
 						AllZone.GameAction.moveToPlay(cloned[0]);
 						card.setCurrentlyCloningCard(cloned[0]);
 					}
