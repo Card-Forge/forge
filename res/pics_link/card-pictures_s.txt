@@ -820,11 +820,6 @@ snarling_undorak.jpg	http://[server]/ON/Snarling%20Undorak.full.jpg
 sneak_attack.jpg	http://[server]/US/Sneak%20Attack.full.jpg
 sneaky_homunculus.jpg	http://[server]/8E/Sneaky%20Homunculus.full.jpg
 snorting_gahr.jpg	http://[server]/MM/Snorting%20Gahr.full.jpg
-snow_covered_forest.jpg	http://[server]/CS/Snow-Covered%20Forest.full.jpg
-snow_covered_island.jpg	http://[server]/CS/Snow-Covered%20Island.full.jpg
-snow_covered_mountain.jpg	http://[server]/CS/Snow-Covered%20Mountain.full.jpg
-snow_covered_plains.jpg	http://[server]/CS/Snow-Covered%20Plains.full.jpg
-snow_covered_swamp.jpg	http://[server]/CS/Snow-Covered%20Swamp.full.jpg
 snow_devil.jpg	http://[server]/IA/Snow%20Devil.full.jpg
 snow_fortress.jpg	http://[server]/IA/Snow%20Fortress.full.jpg
 snow_hound.jpg	http://[server]/IA/Snow%20Hound.full.jpg
