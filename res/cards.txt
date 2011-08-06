@@ -1,3 +1,9 @@
+Whirlwind
+2 G G
+Sorcery
+Destroy all creatures with flying.
+spDestroyAll:Creature.withFlying
+
 Serene Heart
 1 G
 Instant
@@ -1799,14 +1805,6 @@ Creature Human Barbarian
 no text
 2/1
 abDamageTgtC 2 R Sac-CARDNAME:2
-
-Emblem of the Warmind
-1 R
-Enchantment Aura
-no text
-Enchant creature
-enPump:+0/+0
-StaticEffect:Play:Permanents you Control:Keyword/Haste:Type.Creature:Creatures you control have haste.
 
 Bituminous Blast
 3 B R
