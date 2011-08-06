@@ -6,6 +6,7 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Permanent.Blue+YouCtrl | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, if you control a blue permanent, return target nonland permanent to its owner's hand.
 SVar:TrigBounce:AB$ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sedraxis_alchemist.jpg
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/54.jpg
 End
