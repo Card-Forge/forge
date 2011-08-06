@@ -18,13 +18,16 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+chainer_dementia_master.jpg	http://www.wizards.com/global/images/magic/general/chainer_dementia_master.jpg
+vorosh_the_hunter.jpg		http://www.wizards.com/global/images/magic/general/vorosh_the_hunter.jpg
+rith_the_awakener.jpg		http://www.wizards.com/global/images/magic/general/rith_the_awakener.jpg
 cantivore.jpg               http://www.wizards.com/global/images/magic/general/cantivore.jpg
 cognivore.jpg               http://www.wizards.com/global/images/magic/general/cognivore.jpg
 mortivore.jpg               http://www.wizards.com/global/images/magic/general/mortivore.jpg
 dimir_cutpurse.jpg          http://www.wizards.com/global/images/magic/general/dimir_cutpurse.jpg
 molimo_maro_sorcerer.jpg    http://www.wizards.com/global/images/magic/general/molimo_maro_sorcerer.jpg
 maro.jpg                    http://www.wizards.com/global/images/magic/general/maro.jpg
-multani_maro_sorcerer.jpg   http://www.wizards.com/global/images/magic/general/multani_maro_sorcerer.jpg
+multani_maro_sorcerer.jpg   http://www.wizards.com/global/images/magic/general/multani_maro_morcerer.jpg
 meddling_mage.jpg	 		http://www.wizards.com/global/images/magic/general/meddling_mage.jpg
 gravelgill_duo.jpg          http://www.wizards.com/global/images/magic/general/gravelgill_duo.jpg
 safehold_duo.jpg            http://www.wizards.com/global/images/magic/general/safehold_duo.jpg

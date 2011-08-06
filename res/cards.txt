@@ -1,3 +1,23 @@
+Chainer, Dementia Master
+3 B B
+Legendary Creature Human Minion
+When Chainer, Dementia Master leaves the battlefield, exile all Nightmares.
+3/3
+
+Vorosh, the Hunter
+3 G U B
+Legendary Creature Dragon
+Whenever Vorosh, the Hunter deals combat damage to a player, you may pay 2 G. If you do, put six +1/+1 counters on Vorosh.
+6/6
+Flying
+
+Rith, the Awakener
+3 R G W
+Legendary Creature Dragon
+Whenever Rith, the Awakener deals combat damage to a player, you may pay 2 G. If you do, choose a color, then put a 1/1 green Saproling creature token onto the battlefield for each permanent of that color.
+6/6
+Flying
+
 Cantivore
 1 W W
 Creature Lhurgoyf
@@ -112,44 +132,44 @@ As Meddling Mage enters the battlefield, name a nonland card. The named card can
 Shorecrasher Mimic
 1 GU
 Creature Shapeshifter
-Whenever you cast a spell that's both green and blue, Shorecrasher Mimic becomes 5/3 and gains trample until end of turn.
+Whenever you cast a spell that’s both green and blue, Shorecrasher Mimic becomes 5/3 and gains trample until end of turn.
 2/1
 
 Woodlurker Mimic
 1 BG
 Creature Shapeshifter
-Whenever you cast a spell that's both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
+Whenever you cast a spell that’s both black and green, Woodlurker Mimic becomes 4/5 and gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
 2/1
 
 Battlegate Mimic
 1 RW
 Creature Shapeshifter
-Whenever you cast a spell that's both red and white, Battlegate Mimic becomes 4/2 and gains first strike until end of turn.
+Whenever you cast a spell that’s both red and white, Battlegate Mimic becomes 4/2 and gains first strike until end of turn.
 2/1
 
 Nightsky Mimic
 1 WB
 Creature Shapeshifter
-Whenever you cast a spell that's both white and black, Nightsky Mimic becomes 4/4 and gains flying until end of turn.
+Whenever you cast a spell that’s both white and black, Nightsky Mimic becomes 4/4 and gains flying until end of turn.
 2/1
 
 Riverfall Mimic
 1 UR
 Creature Shapeshifter
-Whenever you cast a spell that's both blue and red, Riverfall Mimic becomes 3/3 and is unblockable until end of turn.
+Whenever you cast a spell that’s both blue and red, Riverfall Mimic becomes 3/3 and is unblockable until end of turn.
 2/1
 
 Sapling of Colfenor
 3 BG BG
 Legendary Creature Treefolk Shaman
-Whenever Sapling of Colfenor attacks, reveal the top card of your library. If it's a creature card, you gain life equal to that card’s toughness, lose life equal to its power, then put it into your hand.
+Whenever Sapling of Colfenor attacks, reveal the top card of your library. If it’s a creature card, you gain life equal to that card’s toughness, lose life equal to its power, then put it into your hand.
 2/5
 Indestructible
 
 Dovescape
 3 WU WU WU
 Enchantment
-Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell's converted mana cost.
+Whenever a player casts a noncreature spell, counter that spell. That player puts X 1/1 white and blue Bird creature tokens with flying onto the battlefield, where X is the spell’s converted mana cost.
 
 Lurking Informant
 1 UB
@@ -5357,7 +5377,7 @@ no text
 
 Trinket Mage
 2 U
-Creature Human Wizard
+Creature Human Mage
 When Trinket Mage comes into play, you may search your library for an artifact card with converted mana cost 1 or less, reveal that card, and put it into your hand. If you do, shuffle your library.
 2/2
 
@@ -12901,7 +12921,7 @@ This creature cannot block
 Funeral Charm
 B
 Instant
-Choose one - 
+Choose one - Target player discards a card; or target creature gets +2/-1 until end of turn; or target creature gains swampwalk until end of turn.
 
 Echoing Decay
 1 B

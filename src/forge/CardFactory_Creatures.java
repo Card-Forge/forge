@@ -10771,12 +10771,14 @@ public class CardFactory_Creatures {
 	        			ButtonUtil.disableAll();
 	        		}
 	        		else if (card.getController().equals(Constant.Player.Computer)) {
-	        			Card human = CardFactoryUtil.AI_getBestCreature(hum);
-	        			ability.setTargetCard(human);
-	        			AllZone.Stack.add(ability);
+	        			if (hum.size() > 0 )
+	        			{
+		        			Card human = CardFactoryUtil.AI_getBestCreature(hum);
+		        			ability.setTargetCard(human);
+		        			AllZone.Stack.add(ability);
+	        			}
 	        		}
 	        	}
-	          
 	        }//execute()
 	      };//Command
 	      card.addComesIntoPlayCommand(intoPlay);
@@ -12104,6 +12106,91 @@ public class CardFactory_Creatures {
 		//card.clearSpellAbility();
 		card.addSpellAbility(ability2);
 		ability2.setStackDescription(card.getName() + " - " + player + " gains life equal to permanents of the chosen color.");
+
+		
+	 }//*************** END ************ END **************************
+	      
+	      
+	  //*************** START *********** START **************************
+	  else if (cardName.equals("Rith, the Awakener"))
+	  {
+	    final String player = card.getController();
+
+		final Ability ability2 = new Ability(card, "2 G")
+		{
+			public void resolve()
+			{
+				int numberTokens = 0;
+				if (player.equals("Human"))
+				{
+					String choices[] = {"white", "blue" , "black" , "red" , "green"};
+					Object o = AllZone.Display.getChoiceOptional("Select Color: ", choices);
+					//System.out.println("Color:" + o);
+					numberTokens = CardFactoryUtil.getNumberOfPermanentsByColor((String)o);
+				}
+				
+				for (int i=0;i<numberTokens;i++)
+				{
+					makeToken();
+				}
+			}
+			
+			void makeToken()
+	        {
+	          Card c = new Card();
+
+	          c.setName("Saproling");
+	          c.setImageName("G 1 1 Saproling");
+
+	          c.setOwner(card.getController());
+	          c.setController(card.getController());
+
+	          c.setManaCost("G");
+	          c.setToken(true);
+	         
+	          c.addType("Creature");
+	          c.addType("Saproling");
+	          c.setBaseAttack(1);
+	          c.setBaseDefense(1);
+
+	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	          play.add(c);
+	        }//makeToken()
+			
+			public boolean canPlay()
+			{
+				//this is set to false, since it should only TRIGGER
+				return false;
+			}
+		};// ability2
+		//card.clearSpellAbility();
+		card.addSpellAbility(ability2);
+		ability2.setStackDescription(card.getName() + " - " + player + " puts a 1/1 green Saproling creature token onto the battlefield for each permanent of the chosen color");
+
+		
+	 }//*************** END ************ END **************************
+	      
+	      
+	      //*************** START *********** START **************************
+	  else if (cardName.equals("Vorosh, the Hunter"))
+	  {
+
+		final Ability ability2 = new Ability(card, "2 G")
+		{
+			public void resolve()
+			{
+				card.addCounter(Counters.P1P1, 6);
+			}
+
+			public boolean canPlay()
+			{
+				//this is set to false, since it should only TRIGGER
+				return false;
+			}
+		};// ability2
+		//card.clearSpellAbility();
+		card.addSpellAbility(ability2);
+		ability2.setStackDescription(card.getName() + " - gets six +1/+1 counters.");
 
 		
 	 }//*************** END ************ END **************************
@@ -17845,7 +17932,106 @@ public class CardFactory_Creatures {
     	      
 		      return newCard;
 	      }//*************** END ************ END **************************
-	       
+	      
+	      //*************** START *********** START **************************
+	      else if (cardName.equals("Chainer, Dementia Master"))
+	      {
+	    	  final Ability ability = new Ability(card, "B B B")
+	    	  {
+	    		  public void resolve()
+	    		  {
+	    			  AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(3);
+	    			  
+	    			  PlayerZone hGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+				      PlayerZone cGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+				      PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	    			  CardList creatures = new CardList();
+	    			  creatures.addAll(hGrave.getCards());
+	    			  creatures.addAll(cGrave.getCards());
+	    			  
+	    			  
+	    			  creatures = creatures.getType("Creature");
+	    			  if (creatures.size() > 0 ) 
+	    			  {
+		    			  if (card.getController().equals(Constant.Player.Human))
+		    			  {
+		    				  Object o = AllZone.Display.getChoice("Pick creature: " , creatures.toArray());
+		    				  if (o!=null)
+		  	        		  {
+			  	        			Card c = (Card)o;
+			  	        			PlayerZone zone = AllZone.getZone(c);
+			  	        			zone.remove(c);
+			  	        			play.add(c);
+			  	        			card.untap();
+			  	        			c.addExtrinsicKeyword(c.getName() + " is black.");
+			  	        			c.addType("Nightmare");
+			  	        			c.setController(card.getController());
+		  	        		  }
+		    			  }
+		    			  else
+		    			  {
+		    				  Card c = CardFactoryUtil.AI_getBestCreature(creatures);
+		    				  PlayerZone zone = AllZone.getZone(c);
+		    				  zone.remove(c);
+		    				  play.add(c);
+		    				  card.untap();
+		    			  }
+	    			  }
+	    		  }
+	    		  
+	    		  public boolean canPlayAI()
+	    		  {
+	    			  if(AllZone.Computer_Life.getLife() < 7)
+    					  return false;
+	    			  
+	    			  PlayerZone hGrave= AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+				      PlayerZone cGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+	    			  CardList creatures = new CardList();
+	    			  creatures.addAll(hGrave.getCards());
+	    			  creatures.addAll(cGrave.getCards());
+	    			  creatures = creatures.getType("Creature");
+	    			  return creatures.size() > 0;
+	    		  }
+	    		  
+	    		  public boolean canPlay()
+	    		  {
+	    			  PlayerZone hGrave= AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+				      PlayerZone cGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+	    			  CardList creatures = new CardList();
+	    			  creatures.addAll(hGrave.getCards());
+	    			  creatures.addAll(cGrave.getCards());
+	    			  creatures = creatures.getType("Creature");
+	    			  return creatures.size() > 0;
+	    		  }
+	    		  
+	    	  };
+	    	  
+	    	  card.addSpellAbility(ability);
+	    	  
+	    	  final Command leavesPlay = new Command()
+	    	  {
+	    		  private static final long serialVersionUID = 3367460511478891560L;
+
+				  public void execute()
+	    		  {
+	    			 PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+			    	 PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			    	
+			    	 CardList list = new CardList();
+			    	 list.addAll(hPlay.getCards());
+			    	 list.addAll(cPlay.getCards());
+			    	 list = list.getType("Nightmare");
+			    	 
+			    	 for (Card c : list)
+			    	 {
+			    		 AllZone.GameAction.removeFromGame(c);
+			    	 }
+	    		  }
+	    		
+	    	  };
+	    	  
+	    	  card.addLeavesPlayCommand(leavesPlay);
+	      }//*************** END ************ END **************************
 	       
 	      // Cards with Cycling abilities
 	      // -1 means keyword "Cycling" not found

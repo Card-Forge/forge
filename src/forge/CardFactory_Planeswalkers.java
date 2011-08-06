@@ -2300,7 +2300,7 @@ class CardFactory_Planeswalkers {
 	        }//resolve()
 	        public boolean canPlayAI()
 	        {
-	          return card2.getCounters(Counters.LOYALTY) < 4 && AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
+	          return card2.getCounters(Counters.LOYALTY) <= 6 && AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
 	        }
 	        public boolean canPlay()
 	        {

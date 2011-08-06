@@ -849,7 +849,7 @@ public class GameActionUtil
 	            {
 	               SpellAbility sa = AllZone.Stack.pop();
 	               
-	                   AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+	               AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
 	         
 	            }
 	         }; // ability2
@@ -2972,6 +2972,10 @@ public class GameActionUtil
 			playerCombatDamage_Rootwater_Thief(c);
 		else if (c.getName().equals("Treva, the Renewer"))
 			playerCombatDamage_Treva(c);
+		else if (c.getName().equals("Rith, the Awakener"))
+			playerCombatDamage_Rith(c);
+		else if (c.getName().equals("Vorosh, the Hunter"))
+			playerCombatDamage_Vorosh(c);
 		/*
 		if(CardFactoryUtil.hasNumberEquipments(c, "Umezawa's Jitte") == 1)
 		{
@@ -2985,7 +2989,7 @@ public class GameActionUtil
 			c.setDealtCombatDmgToOppThisTurn(true);
 
 	}
-	
+	/*
 	public static void executePlayerCombatDmgOptionalEffects(Card[] c)
 	{
 		for (int i=0;i< c.length;i++)
@@ -3011,6 +3015,7 @@ public class GameActionUtil
 			
 		}//for
 	}
+	*/
 	private static void playerCombatDamage_Oros(Card c)
 	{
 		System.out.println("Oros swung unblocked.");
@@ -3019,8 +3024,7 @@ public class GameActionUtil
 			AllZone.GameAction.playSpellAbility(sa[1]);
 		else
 			ComputerUtil.playNoStack(sa[1]);
-		
-	
+
 	}
 	
 	private static void playerCombatDamage_Dimir_Cutpurse(Card c)
@@ -3069,6 +3073,24 @@ public class GameActionUtil
 		else
 			ComputerUtil.playNoStack(sa[1]);
 
+	}
+	
+	private static void playerCombatDamage_Rith(Card c)
+	{
+		SpellAbility[] sa = c.getSpellAbility();
+		if (c.getController().equals(Constant.Player.Human))
+			AllZone.GameAction.playSpellAbility(sa[1]);
+		else
+			ComputerUtil.playNoStack(sa[1]);
+	}
+	
+	private static void playerCombatDamage_Vorosh(Card c)
+	{
+		SpellAbility[] sa = c.getSpellAbility();
+		if (c.getController().equals(Constant.Player.Human))
+			AllZone.GameAction.playSpellAbility(sa[1]);
+		else
+			ComputerUtil.playNoStack(sa[1]);
 	}
 	
 	private static void playerCombatDamage_Slith(Card c)
@@ -12969,6 +12991,43 @@ public class GameActionUtil
 		}// execute()
 	};// Spidersilk Armor
 	
+	public static Command Chainer = new Command()
+	{
+		private static final long serialVersionUID = -5404417712966524986L;
+		CardList gloriousAnthemList = new CardList();
+
+		public void execute()
+		{
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for (int i = 0; i < list.size(); i++)
+			{
+				c = list.get(i);
+				c.addSemiPermanentAttackBoost(-1);
+				c.addSemiPermanentDefenseBoost(-1);
+			}
+
+			// add +1/+1 to cards
+			list.clear();
+			PlayerZone[] zone = getZone("Chainer, Dementia Master");
+
+			for (int outer = 0; outer < zone.length; outer++)
+			{
+				CardList creature = new CardList(zone[outer].getCards());
+				creature = creature.getType("Nightmare");
+
+				for (int i = 0; i < creature.size(); i++)
+				{
+					c = creature.get(i);
+					c.addSemiPermanentAttackBoost(1);
+					c.addSemiPermanentDefenseBoost(1);
+					gloriousAnthemList.add(c);
+				}// for inner
+			}// for outer
+		}// execute()
+	};//Chainer
+	
 	public static Command Eldrazi_Monument = new Command()
 	{
 
@@ -13442,6 +13501,7 @@ public class GameActionUtil
 		commands.put("Honor_of_the_Pure", Honor_of_the_Pure);
 		commands.put("Beastmaster_Ascension", Beastmaster_Ascension);
 		commands.put("Spidersilk_Armor", Spidersilk_Armor);
+		commands.put("Chainer", Chainer);
 		commands.put("Eldrazi_Monument", Eldrazi_Monument);
 		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
 		

@@ -2621,6 +2621,13 @@ class CardFactory_Auras {
 		  {
 
 			private static final long serialVersionUID = -5744948616351896881L;
+			
+			//for flash:
+			public boolean canPlay()
+			{
+				return true;
+			}
+			
 			public boolean canPlayAI()
 		    {
 		      CardList list = new CardList(AllZone.Computer_Play.getCards());

@@ -1834,7 +1834,7 @@ class CardFactory_Equipment {
 			          };
 
 			          target[0] = card.getEquipping().get(0);
-			          if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0]))
+			          if(AllZone.GameAction.isCardInPlay(target[0]) )
 			          {
 			            target[0].addTempAttackBoost(2);
 			            target[0].addTempDefenseBoost(2);

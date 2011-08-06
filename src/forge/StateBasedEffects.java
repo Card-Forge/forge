@@ -92,6 +92,7 @@ public class StateBasedEffects
 		cardToEffectsList.put("Honor of the Pure", new String[] {"Honor_of_the_Pure"});
 		cardToEffectsList.put("Beastmaster Ascension", new String[] {"Beastmaster_Ascension"});
 		cardToEffectsList.put("Spidersilk Armor", new String[] {"Spidersilk_Armor"});
+		cardToEffectsList.put("Chainer, Dementia Master", new String[] {"Chainer"});
 		cardToEffectsList.put("Eldrazi Monument", new String[] {"Eldrazi_Monument"});
 		cardToEffectsList.put("Muraganda Petroglyphs", new String[] {"Muraganda_Petroglyphs"});
 		cardToEffectsList.put("Engineered Plague", new String[] {"Engineered_Plague"});
