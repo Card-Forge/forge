@@ -629,7 +629,7 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         */
-
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Meadowboon")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -668,7 +668,7 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Sengir Autocrat")) {

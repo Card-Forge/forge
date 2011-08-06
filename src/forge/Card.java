@@ -454,7 +454,6 @@ public class Card extends MyObservable {
         } else {
             counters.put(counterName, Integer.valueOf(multiplier * n));
         }
-        System.out.println(counters.get(Counters.QUEST));
         
         if (counterName.equals(Counters.P1P1) || counterName.equals(Counters.M1M1)){
         	// +1/+1 counters should erase -1/-1 counters

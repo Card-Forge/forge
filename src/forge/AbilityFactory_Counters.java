@@ -1044,8 +1044,7 @@ public class AbilityFactory_Counters {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return putAllCanPlayAI(af, this);
 			}
 
 		};
@@ -1098,8 +1097,7 @@ public class AbilityFactory_Counters {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return putAllPlayDrawbackAI(af, this);
 			}
 
 		};
@@ -1143,6 +1141,7 @@ public class AbilityFactory_Counters {
 		String amountStr = params.get("CounterNum");
 		String valid = params.get("ValidCards");
 		boolean curse = af.isCurse();
+		Target tgt = sa.getTarget();
 
 		hList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
 		cList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
@@ -1162,6 +1161,19 @@ public class AbilityFactory_Counters {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
 
+		if (tgt != null){
+			Player pl;
+			if (curse)
+				pl = AllZone.HumanPlayer;
+			else
+				pl = AllZone.ComputerPlayer;
+			
+			tgt.addTarget(pl);
+			
+			hList = hList.getController(pl);
+			cList = cList.getController(pl);
+		}
+		
 		// TODO handle proper calculation of X values based on Cost
 		final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
 
@@ -1169,6 +1181,7 @@ public class AbilityFactory_Counters {
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 
 		if(curse){
+
 			if(type.equals("M1M1")) {
 				CardList killable = hList.filter(new CardListFilter() {
 					public boolean addCard(Card c) {
@@ -1209,6 +1222,12 @@ public class AbilityFactory_Counters {
 		CardList cards = AllZoneUtil.getCardsInPlay();
 		cards = cards.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
+		Target tgt = sa.getTarget();
+		if (tgt != null){
+			Player pl = sa.getTargetPlayer();
+			cards = cards.getController(pl);
+		}
+		
 		for(Card tgtCard : cards) {
 			if (AllZone.getZone(tgtCard).is(Constant.Zone.Battlefield))
 				tgtCard.addCounter(Counters.valueOf(type), counterAmount);
