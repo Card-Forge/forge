@@ -651,8 +651,8 @@ public class GameAction {
 
     }
     
-    public void destroyNoRegeneration(Card c) {
-        if(!AllZone.GameAction.isCardInPlay(c) || c.getKeyword().contains("Indestructible")) return;
+    public boolean destroyNoRegeneration(Card c) {
+        if(!AllZone.GameAction.isCardInPlay(c) || c.getKeyword().contains("Indestructible")) return false;
         
         if (c.isEnchanted())
         {
@@ -696,11 +696,11 @@ public class GameAction {
 	        	ability.setStackDescription(sb.toString());
 	        	
 	        	AllZone.Stack.add(ability);
-	        	return;
+	        	return false;
         	}
         }//totem armor
         
-        sacrificeDestroy(c);
+        return sacrificeDestroy(c);
     }
     
     public Card addSuspendTriggers(final Card c){
@@ -2085,8 +2085,8 @@ public class GameAction {
 	}
     // Whenever Keyword
 	
-   public void sacrificeDestroy(Card c) {
-        if(!isCardInPlay(c)) return;
+   public boolean sacrificeDestroy(Card c) {
+        if(!isCardInPlay(c)) return false;
 
         Player owner = c.getOwner();
         if (!(owner.isComputer() || owner.isHuman()))
@@ -2117,6 +2117,7 @@ public class GameAction {
         	persistAb.setStackDescription(newCard.getName() + " - Returning from Persist");
         	AllZone.Stack.add(persistAb);
         }
+        return true;
     }//sacrificeDestroy()
     
     public boolean destroy(Card c) {
@@ -2176,8 +2177,7 @@ public class GameAction {
 
 
 
-        this.sacrificeDestroy(c);
-        return true;
+        return sacrificeDestroy(c);
     }
 
     //is this card a permanent that is in play?

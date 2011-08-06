@@ -564,7 +564,7 @@ public class AbilityFactory_Destroy {
 		 
 		 // if only creatures are affected evaluate both lists and pass only if human creatures are more valuable
 		 if (humanlist.getNotType("Creature").size() == 0 && computerlist.getNotType("Creature").size() == 0) {
-			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 200 >= CardFactoryUtil.evaluateCreatureList(humanlist))
+			 if(CardFactoryUtil.evaluateCreatureList(computerlist) + 150 >= CardFactoryUtil.evaluateCreatureList(humanlist))
 				 return false;
 		 } // otherwise evaluate both lists by CMC and pass only if human permanents are more valuable
 		 else if(CardFactoryUtil.evaluatePermanentList(computerlist) + 3 >= CardFactoryUtil.evaluatePermanentList(humanlist))
@@ -596,11 +596,21 @@ public class AbilityFactory_Destroy {
 		
 		list = list.getValidCards(Valid.split(","), card.getController(), card);
 
-	 	if(noRegen) 
-	 		for(int i = 0; i < list.size(); i++) AllZone.GameAction.destroyNoRegeneration(list.get(i));
-	 	else
-	 		for(int i = 0; i < list.size(); i++) AllZone.GameAction.destroy(list.get(i));
+		int destroyedThisWay = 0;
 		
+	 	if(noRegen){
+	 		for(int i = 0; i < list.size(); i++) 
+	 			if (AllZone.GameAction.destroyNoRegeneration(list.get(i)))
+	 				destroyedThisWay++;
+	 	}
+	 	else{
+	 		for(int i = 0; i < list.size(); i++) 
+	 			if (AllZone.GameAction.destroy(list.get(i)))
+	 				destroyedThisWay++;
+	 	}
+		
+	 	card.setSVar("DestroyedThisWay", Integer.toString(destroyedThisWay));
+	 	
 	 	if (af.hasSubAbility()){
 	 		Ability_Sub abSub = sa.getSubAbility();
 	 		if (abSub != null){
