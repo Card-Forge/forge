@@ -2347,6 +2347,142 @@ public class CardFactory implements NewConstants {
         	}
         }// abLoseLife
         
+        if (hasKeyword(card, "spGainLife") != -1)
+        {
+        	int n = hasKeyword(card, "spGainLife");
+        	if (n != -1)
+        	{
+                String parse = card.getKeyword().get(n).toString();
+                card.removeIntrinsicKeyword(parse);
+                
+                String k[] = parse.split(":");
+                
+                  final boolean Tgt[] = {false};
+                  Tgt[0] = k[0].contains("Tgt");
+
+                final int NumLife[] = {-1};
+                final String NumLifeX[] = {"none"};
+                
+                  if (k[1].matches("X"))
+                  {
+                     String x = card.getSVar(k[1]);
+                     if (x.startsWith("Count$"))
+                     {
+                        String kk[] = x.split("\\$");
+                        NumLifeX[0] = kk[1];
+                     }
+                  }
+                  else if (k[1].matches("[0-9][0-9]?"))
+                     NumLife[0] = Integer.parseInt(k[1]);
+                 
+                  // drawbacks and descriptions
+                  final String DrawBack[] = {"none"};
+                  final String spDesc[] = {"none"};
+                  final String stDesc[] = {"none"};
+                  if (k.length > 2)
+                  {
+                     if (k[2].contains("Drawback$"))
+                     {
+                        String kk[] = k[2].split("\\$");
+                        DrawBack[0] = kk[1];
+                        if (k.length > 3)
+                           spDesc[0] = k[3];
+                        if (k.length > 4)
+                           stDesc[0] = k[4];
+                     }
+                     else
+                     {
+                        if (k.length > 2)
+                           spDesc[0] = k[2];
+                        if (k.length > 3)
+                           stDesc[0] = k[3];
+                     }
+                  }
+                  else
+                  {
+                     if (Tgt[0] == true)
+                     {
+                        spDesc[0] = "Target player gains " + NumLife[0] + " life.";
+                        stDesc[0] =  cardName + " - target player gains life";
+                     }
+                     else
+                     {
+                        spDesc[0] = "You gain " + NumLife[0] + " life.";
+                        stDesc[0] = cardName + " - you gain life";
+                     }
+                  }
+
+                  final SpellAbility spGainLife = new Spell(card)
+                  {
+                  private static final long serialVersionUID = -8361697584661592092L;
+
+                   public int getNumLife()
+                   {
+                      if (NumLife[0] != -1)
+                         return NumLife[0];
+
+                      if (! NumLifeX[0].equals("none"))
+                         return CardFactoryUtil.xCount(card, NumLifeX[0]);
+                     
+                      return 0;
+                   }
+                   
+                   public boolean canPlayAI()
+                   {
+                      if (Tgt[0] == true)
+                         setTargetPlayer(Constant.Player.Computer);
+                      
+                      if (AllZone.Computer_Life.getLife() < 10)
+                    	  return true;
+                      else
+                      {
+                    	  Random r = new Random();
+                    	  return (r.nextFloat() < .6667);
+                      }
+                   }
+
+                  public void resolve()
+                     {
+                        int nlife = getNumLife();
+                        String TgtPlayer;
+
+                        if (Tgt[0] == true)
+                           TgtPlayer = getTargetPlayer();
+                        else
+                           TgtPlayer = card.getController();
+                       
+                        AllZone.GameAction.addLife(TgtPlayer, nlife);
+                       
+                        if (!DrawBack[0].equals("none"))
+                           CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
+                     }//resolve()
+                  };//SpellAbility
+                 
+                  if (Tgt[0] == true)
+                     spGainLife.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spGainLife));
+                 
+                  spGainLife.setDescription(spDesc[0]);
+                  spGainLife.setStackDescription(stDesc[0]);
+                 
+                  card.clearSpellAbility();
+                  card.addSpellAbility(spGainLife);
+                  
+                  String bbCost = card.getSVar("Buyback");
+                  if (!bbCost.equals(""))
+                  {
+                     SpellAbility bbGainLife = spGainLife.copy();
+                     bbGainLife.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+                     bbGainLife.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                     bbGainLife.setIsBuyBackAbility(true);
+                     
+                     if (Tgt[0] == true)
+                         bbGainLife.setBeforePayMana(CardFactoryUtil.input_targetPlayer(bbGainLife));
+                     
+                     card.addSpellAbility(bbGainLife);
+                  }
+        	}
+        }//spGainLife
+        
         if(hasKeyword(card, "SearchRebel") != -1) {
             int n = hasKeyword(card, "SearchRebel");
             if(n != -1) {
@@ -5018,8 +5154,7 @@ public class CardFactory implements NewConstants {
             spell.setStackDescription(card.getName() + " - " + card.getController() + " gains 3 life.");
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
+        }//*************** END ************ END **************************   
 
         //*************** START *********** START **************************
         else if(cardName.equals("Swords to Plowshares")) {
@@ -6429,7 +6564,7 @@ public class CardFactory implements NewConstants {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Renewed Faith") || cardName.equals("Rejuvenate")
-                || cardName.equals("Dosan's Oldest Chant") || cardName.equals("Nourish")) {
+                || cardName.equals("Dosan's Oldest Chant") || cardName.equals("Nourish") ){ 
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -1133816506198725425L;
                 
@@ -8986,8 +9121,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-
+       
         //*************** START *********** START **************************
         else if(cardName.equals("Worldly Tutor") || cardName.equals("Sylvan Tutor")) {
             SpellAbility spell = new Spell(card) {
@@ -13374,7 +13508,7 @@ public class CardFactory implements NewConstants {
                     card.addCounter(Counters.CHARGE, 1);
                 }
                 
-                @Override
+                //@Override
                 public String mana() {
                     return this.choices_made[0].toString();
                 }
