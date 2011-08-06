@@ -3260,9 +3260,7 @@ public class CardFactoryUtil {
     
     public static boolean isColored(Card c)
     {
-    	return CardUtil.getColors(c).contains(Constant.Color.White) || CardUtil.getColors(c).contains(Constant.Color.Blue) ||
-    		   CardUtil.getColors(c).contains(Constant.Color.Black) || CardUtil.getColors(c).contains(Constant.Color.Red) ||
-    		   CardUtil.getColors(c).contains(Constant.Color.Green);
+    	return c.isWhite() || c.isBlue() || c.isBlack() || c.isRed() || c.isGreen();
     }
     
     public static boolean canTarget(Card spell, Card target) {
@@ -3288,11 +3286,11 @@ public class CardFactoryUtil {
                     if(spell.isAura()) return false;
                 }
                 
-                if(kw.equals("Protection from white") && CardUtil.getColors(spell).contains(Constant.Color.White)) return false;
-                if(kw.equals("Protection from blue") && CardUtil.getColors(spell).contains(Constant.Color.Blue)) return false;
-                if(kw.equals("Protection from black") && CardUtil.getColors(spell).contains(Constant.Color.Black)) return false;
-                if(kw.equals("Protection from red") && CardUtil.getColors(spell).contains(Constant.Color.Red)) return false;
-                if(kw.equals("Protection from green") && CardUtil.getColors(spell).contains(Constant.Color.Green)) return false;
+                if(kw.equals("Protection from white") && spell.isWhite()) return false;
+                if(kw.equals("Protection from blue") && spell.isBlue()) return false;
+                if(kw.equals("Protection from black") && spell.isBlack()) return false;
+                if(kw.equals("Protection from red") && spell.isRed()) return false;
+                if(kw.equals("Protection from green") && spell.isGreen()) return false;
                 
                 if(kw.equals("Protection from creatures") && spell.isCreature()) return false;
                 
@@ -3333,15 +3331,15 @@ public class CardFactoryUtil {
                 kw = list.get(i);
                 
 
-                if(kw.equals("Protection from white") && CardUtil.getColors(card).contains(Constant.Color.White) && 
+                if(kw.equals("Protection from white") && card.isWhite() && 
                 		!card.getName().contains("White Ward")) return true;
-                if(kw.equals("Protection from blue") && CardUtil.getColors(card).contains(Constant.Color.Blue) && 
+                if(kw.equals("Protection from blue") && card.isBlue() && 
                 		!card.getName().contains("Blue Ward")) return true;
-                if(kw.equals("Protection from black") && CardUtil.getColors(card).contains(Constant.Color.Black) && 
+                if(kw.equals("Protection from black") && card.isBlack() && 
                 		!card.getName().contains("Black Ward")) return true;
-                if(kw.equals("Protection from red") && CardUtil.getColors(card).contains(Constant.Color.Red) && 
+                if(kw.equals("Protection from red") && card.isRed() && 
                 		!card.getName().contains("Red Ward")) return true;
-                if(kw.equals("Protection from green") && CardUtil.getColors(card).contains(Constant.Color.Green) && 
+                if(kw.equals("Protection from green") && card.isGreen() && 
                 		!card.getName().contains("Green Ward")) return true;
                 
                 if(kw.equals("Protection from creatures") && card.isCreature()) return true;
@@ -3378,11 +3376,11 @@ public class CardFactoryUtil {
             
             if(kw.equals("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
             		&& spell.isCreature() && spell.isArtifact()) return false;
-            if(kw.equals("Protection from white") && CardUtil.getColors(spell).contains(Constant.Color.White)) return false;
-            if(kw.equals("Protection from blue") && CardUtil.getColors(spell).contains(Constant.Color.Blue)) return false;
-            if(kw.equals("Protection from black") && CardUtil.getColors(spell).contains(Constant.Color.Black)) return false;
-            if(kw.equals("Protection from red") && CardUtil.getColors(spell).contains(Constant.Color.Red)) return false;
-            if(kw.equals("Protection from green") && CardUtil.getColors(spell).contains(Constant.Color.Green)) return false;
+            if(kw.equals("Protection from white") && spell.isWhite()) return false;
+            if(kw.equals("Protection from blue") && spell.isBlue()) return false;
+            if(kw.equals("Protection from black") && spell.isBlack()) return false;
+            if(kw.equals("Protection from red") && spell.isRed()) return false;
+            if(kw.equals("Protection from green") && spell.isGreen()) return false;
             
             if(kw.equals("Protection from creatures") && spell.isCreature()) return false;
             
