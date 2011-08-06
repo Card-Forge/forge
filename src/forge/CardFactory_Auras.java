@@ -988,7 +988,7 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
         
 
-        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Brilliant Halo")) {
             final SpellAbility spell = new Spell(card) {
@@ -1076,7 +1076,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+*/
         
 /*
         //*************** START *********** START **************************
@@ -1816,7 +1816,9 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        
+/*
+        //*************** START *********** START **************************
         else if(cardName.equals("Giant Strength")) {
             final SpellAbility spell = new Spell(card) {
   
@@ -1903,6 +1905,8 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Paralyzing Grasp")) {
@@ -4429,7 +4433,8 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Feast of the Unicorn")) {
             final SpellAbility spell = new Spell(card) {
@@ -4520,7 +4525,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+*/
         
 /*
         //*************** START *********** START **************************

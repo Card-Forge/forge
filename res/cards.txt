@@ -4841,6 +4841,7 @@ Feast of the Unicorn
 Enchantment Aura
 Enchanted creature gets +4/+0.
 Enchant creature
+enPump:+4/+0
 
 Vigilance
 W
@@ -5211,6 +5212,7 @@ R R
 Enchantment Aura
 Enchanted creature gets +2/+2.
 Enchant creature
+enPump:+2/+2
 
 Goblin War Paint
 1 R
@@ -6362,8 +6364,9 @@ Brilliant Halo
 1 W
 Enchantment Aura
 Enchanted creature gets +1/+2.
-When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 Enchant creature
+enPump:+1/+2
+When this card is put into a graveyard from the battlefield, return this card to its owner's hand
 
 Rancor
 G
