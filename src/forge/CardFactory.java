@@ -16605,7 +16605,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(store);
             
             final Ability_Mana retrieve = new Ability_Mana(card,
-                    "Remove a charge counter from Gemstone Array: Add one mana of any color to your mana pool.") {
+                    "0, Remove a charge counter from Gemstone Array: Add one mana of any color to your mana pool.") {
                 private static final long serialVersionUID = -2938965362221626028L;
                 
                 @Override
@@ -16637,8 +16637,8 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void showMessage() {
-                    retrieve.choices_made[0] = Input_PayManaCostUtil.getShortColorString(AllZone.Display.getChoiceOptional(
-                            "Select a Color", Constant.Color.onlyColors));
+                    retrieve.choices_made[0] = Input_PayManaCostUtil.getShortColorString((String)(AllZone.Display.getChoiceOptional(
+                            "Select a Color", Constant.Color.onlyColors)));
                     AllZone.Stack.add(retrieve);
                     stop();
                 }
