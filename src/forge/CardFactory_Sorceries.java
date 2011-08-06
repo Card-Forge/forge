@@ -5504,12 +5504,8 @@ public class CardFactory_Sorceries {
         	 * any number of target creatures and/or players.
         	 * Fireball costs 1 more to cast for each target beyond the first.
         	 */
-        	//no reason this should never be enough targets
-        	final Card[] target = new Card[100];
-        	final int[] index = new int[1];
-        	//it can target up to two players also
-        	final Player[] targetPlayers = new Player[2];
-        	final int[] index2 = new int[1];
+        	final CardList targets = new CardList();
+        	final ArrayList<Player> targetPlayers = new ArrayList<Player>();
 
         	final SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = -6293612568525319357L;
@@ -5519,9 +5515,7 @@ public class CardFactory_Sorceries {
 					final int maxX = ComputerUtil.getAvailableMana().size() - 1;
 					int humanLife = AllZone.HumanPlayer.getLife();
 					if(maxX >= humanLife) {
-						index2[0] = 0;
-						targetPlayers[index2[0]] = AllZone.HumanPlayer;
-						//index2[0] = 1;
+						targetPlayers.add(AllZone.HumanPlayer);
 						return true;
 					}
         			return false;
@@ -5540,34 +5534,34 @@ public class CardFactory_Sorceries {
         			if(card.getController().equals(AllZone.ComputerPlayer)) {
         				StringBuilder sb = new StringBuilder();
         				sb.append(cardName+" - Computer causes "+damage+" to:\n\n");
-        				for(int i = 0; i < target.length; i++) {
-            				if(AllZone.GameAction.isCardInPlay(target[i])
-            						&& CardFactoryUtil.canTarget(card, target[i])
-            						&& null != target[i]) {
-            					sb.append(target[i]+"\n");
+        				for(int i = 0; i < targets.size(); i++) {
+        					Card target = targets.get(i);
+            				if(AllZone.GameAction.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
+            					sb.append(target+"\n");
             				}
             			}
-            			for(int i = 0; i < targetPlayers.length; i++) {
-            				if( null != targetPlayers[i] ) {
-            					sb.append(targetPlayers[i]+"\n");
+            			for(int i = 0; i < targetPlayers.size(); i++) {
+            				Player p = targetPlayers.get(i);
+            				if( p.canTarget(card) ) {
+            					sb.append(p+"\n");
             				}
             			}
         				javax.swing.JOptionPane.showMessageDialog(null, sb.toString());
         			}
-        			for(int i = 0; i < target.length; i++) {
-        				if(AllZone.GameAction.isCardInPlay(target[i])
-        						&& CardFactoryUtil.canTarget(card, target[i])
-        						&& null != target[i]) {
+        			for(int i = 0; i < targets.size(); i++) {
+        				Card target = targets.get(i);
+        				if(AllZone.GameAction.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
         					//DEBUG
-        					Log.debug("Fireball", "Fireball does "+damage+" to: "+target[i]);
-        					target[i].addDamage(damage, card);
+        					Log.debug("Fireball", "Fireball does "+damage+" to: "+target);
+        					target.addDamage(damage, card);
         				}
         			}
-        			for(int i = 0; i < targetPlayers.length; i++) {
-        				if( null != targetPlayers[i] ) {
+        			for(int i = 0; i < targetPlayers.size(); i++) {
+        				Player p = targetPlayers.get(i);
+        				if( p.canTarget(card) ) {
         					//DEBUG
-        					Log.debug("Fireball", "Fireball does "+damage+" to: "+targetPlayers[i]);
-        					targetPlayers[i].addDamage(damage, card);
+        					Log.debug("Fireball", "Fireball does "+damage+" to: "+p);
+        					p.addDamage(damage, card);
         				}
         			}
         		}//resolve()
@@ -5575,8 +5569,8 @@ public class CardFactory_Sorceries {
         		//DEBUG
         		private void printCardTargets() {
         			StringBuilder sb = new StringBuilder("[");
-        			for(int i = 0; i < target.length; i++) {
-        				sb.append(target[i]).append(",");
+        			for(Card target:targets) {
+        				sb.append(target).append(",");
         			}
         			sb.append("]");
         			Log.debug("Fireball", sb.toString());
@@ -5584,8 +5578,8 @@ public class CardFactory_Sorceries {
         		//DEBUG
         		private void printPlayerTargets() {
         			StringBuilder sb = new StringBuilder("[");
-        			for(int i = 0; i < targetPlayers.length; i++) {
-        				sb.append(targetPlayers[i]).append(",");
+        			for(Player p:targetPlayers) {
+        				sb.append(p).append(",");
         			}
         			sb.append("]");
         			Log.debug("Fireball", sb.toString());
@@ -5593,16 +5587,8 @@ public class CardFactory_Sorceries {
         		
         		private int getNumTargets() {
         			int numTargets = 0;
-        			for( int j = 0; j < target.length; j++ ) {
-        				if( null != target[j] ) {
-        					numTargets++;
-        				}
-        			}
-        			for( int k = 0; k < targetPlayers.length; k++ ) {
-        				if( null != targetPlayers[k] ) {
-        					numTargets++;
-        				}
-        			}
+        			numTargets += targets.size();
+        			numTargets += targetPlayers.size();
         			return numTargets;
         		}
         		
@@ -5617,32 +5603,25 @@ public class CardFactory_Sorceries {
         		}
 				
 				private int getNumTargets() {
-        			int numTargets = 0;
-        			for( int j = 0; j < target.length; j++ ) {
-        				if( null != target[j] ) {
-        					numTargets++;
-        				}
-        			}
-        			for( int k = 0; k < targetPlayers.length; k++ ) {
-        				if( null != targetPlayers[k] ) {
-        					numTargets++;
-        				}
-        			}
+					int numTargets = 0;
+        			numTargets += targets.size();
+        			numTargets += targetPlayers.size();
         			//DEBUG
         			Log.debug("Fireball", "Fireball - numTargets = "+numTargets);
         			return numTargets;
         		}
 
-        		@Override
-        		public void selectButtonCancel() { stop(); }
-        		
+				@Override
+				public void selectButtonCancel() {
+					targets.clear();
+					targetPlayers.clear();
+					stop(); 
+				}
+
         		@Override
         		public void selectButtonOK() {
-        			if(this.isFree()) {
-						this.setFree(false);
-						AllZone.Stack.add(spell);
-						stop();
-					} else stopSetNext(new Input_PayManaCost(spell));
+        			spell.setStackDescription(cardName+" deals X damage to "+getNumTargets()+" target(s).");
+					stopSetNext(new Input_PayManaCost(spell));
         		}
 
         		@Override
@@ -5651,57 +5630,35 @@ public class CardFactory_Sorceries {
         				AllZone.Display.showMessage("Cannot target this card.");
     					return; //cannot target
         			}
-        			for(int i = 0; i < index[0]; i++) {
-        				if(c.equals(target[i])) {
-        					AllZone.Display.showMessage("You have already selected this target.");
-        					return; //cannot target the same creature twice.
-        				}
+        			if(targets.contains(c)) {
+        				AllZone.Display.showMessage("You have already selected this target.");
+        				return; //cannot target the same creature twice.
         			}
 
         			if(c.isCreature() && zone.is(Constant.Zone.Battlefield)) {
-        				target[index[0]] = c;
-        				index[0]++;
+        				targets.add(c);
         				showMessage();
-
-        				/*if(index[0] == target.length) {
-        					if(this.isFree()) {
-        						this.setFree(false);
-        						AllZone.Stack.add(spell);
-        						stop();
-        					} else stopSetNext(new Input_PayManaCost(spell));
-        				}*/
         			}
         		}//selectCard()
         		
         		@Override
                 public void selectPlayer(Player player) {
-        			for(int i = 0; i < index2[0]; i++) {
-        				if(player.equals(targetPlayers[i])) {
-        					AllZone.Display.showMessage("You have already selected this player.");
-        					return; //cannot target the same player twice.
-        				}
+        			if( !player.canTarget(card) ) {
+        				AllZone.Display.showMessage("Cannot target this card.");
+    					return; //cannot target
         			}
-                    //spell.setTargetPlayer(player);
-                    targetPlayers[index2[0]] = player;
-                    index2[0]++;
+        			if( targetPlayers.contains(player) ) {
+        				AllZone.Display.showMessage("You have already selected this player.");
+        				return; //cannot target the same player twice.
+        			}
+                    targetPlayers.add(player);
                     showMessage();
                 }
         	};//Input
 
-        	Input runtime = new Input() {
-        		private static final long serialVersionUID = 3522833806455511494L;
-
-        		@Override
-        		public void showMessage() {
-        			index[0] = 0;
-        			index2[0] = 0;
-        			stopSetNext(input);
-        		}
-        	};//Input
-
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
-        	spell.setBeforePayMana(runtime);
+        	spell.setBeforePayMana(input);
         }//*************** END ************ END **************************
         
 
