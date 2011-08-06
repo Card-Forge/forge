@@ -401,6 +401,14 @@ public class AbilityFactory_ChangeZone {
 		    	else
                 	AllZone.GameAction.moveTo(destZone, c);
             }
+            else{
+            	StringBuilder sb = new StringBuilder();
+            	int num = Math.min(fetchList.size(), changeNum - i - 1);
+            	sb.append("Cancel Search? Up to ").append(num).append(" more cards can change zones.");
+            	
+            	if (i+1 == changeNum || GameActionUtil.showYesNoDialog(card, sb.toString()))
+            		break;
+            }
         }
         
         if (origin.equals("Library") && !destination.equals("Library"))

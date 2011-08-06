@@ -247,7 +247,9 @@ public class ComputerAI_General implements Computer {
     	if (AllZone.Stack.size() == 0){
     		sas = getOtherPhases();
     		
-    		boolean pass = (sas.length == 0);
+    		boolean pass = (sas.length == 0) || AllZone.Phase.is(Constant.Phase.Upkeep, AllZone.ComputerPlayer) ||
+    			AllZone.Phase.is(Constant.Phase.Draw, AllZone.ComputerPlayer) || 
+    			AllZone.Phase.is(Constant.Phase.End_Of_Turn, AllZone.ComputerPlayer);
     		if (!pass){		// Each AF should check the phase individually
     	        pass = ComputerUtil.playCards(sas);
     		}
