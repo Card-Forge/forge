@@ -2,6 +2,8 @@ Name:AEther Tradewinds
 ManaCost:2 U
 Types:Instant
 Text:no text
+A:SP$ChangeZone | Cost$ 2 U | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | SubAbility$ SVar=DBChange | SpellDescription$ Return target permanent you control and target permanent you don't control to their owners' hands.
+SVar:DBChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouDontCtrl | TgtPrompt$ Select target permanent you don't control
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_tradewinds.jpg

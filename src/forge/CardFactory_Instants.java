@@ -4357,71 +4357,7 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-        
-      
-        //*************** START *********** START **************************
-        else if(cardName.equals("AEther Tradewinds")) {
-        	final Card[] target = new Card[2];
-        	final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -3811167493596209322L;
 
-				@Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                	for(int i = 0; i < target.length; i++) {
-                		if(AllZone.GameAction.isCardInPlay(target[i]) && CardFactoryUtil.canTarget(card, target[i])) {
-                            AllZone.GameAction.moveToHand(target[i]);
-                        }
-                	}
-                }
-            };
-        	
-        	final Input runtime = new Input() {
-				private static final long serialVersionUID = -8139950662809697287L;
-				boolean firstTarget = true;
-
-				@Override
-                public void showMessage() {
-					StringBuilder sb = new StringBuilder();
-					if(firstTarget) sb.append(card.getName()).append(" - Select target permanent you control");
-					else sb.append(card.getName()).append(" - Select target permanent you don't control");
-                    AllZone.Display.showMessage(sb.toString());
-                    ButtonUtil.enableOnlyCancel();
-                }
-				
-				@Override
-	            public void selectButtonCancel() {
-					stop();
-				}
-				
-				@Override
-                public void selectCard(Card c, PlayerZone zone) {
-					Player player = firstTarget ? AllZone.HumanPlayer : AllZone.ComputerPlayer;
-					if(zone.is(Constant.Zone.Battlefield, player) && CardFactoryUtil.canTarget(card, c)) {
-						if(null == target[0]) {
-							target[0] = c;
-							firstTarget = false;
-							showMessage();
-						}
-						else if(null == target[1]) {
-							target[1] = c;
-							stopSetNext(new Input_PayManaCost(spell));
-						}
-					}
-				}
-            };
-        	
-            spell.setDescription("Return target permanent you control and target permanent you don't control to their owners' hands.");
-            spell.setStackDescription(cardName+" - Return target permanents to their owners' hands.");
-            spell.setBeforePayMana(runtime);
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
         
     	return card;
     }//getCard

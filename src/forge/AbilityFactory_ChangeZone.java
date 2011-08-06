@@ -695,7 +695,10 @@ public class AbilityFactory_ChangeZone {
 		 StringBuilder sb = new StringBuilder();
 		 Card host = af.getHostCard();
 		 
-		 sb.append(host.getName()).append(" - ");
+		 if (!(sa instanceof Ability_Sub))
+			 sb.append(host.getName()).append(" -");
+		 
+		 sb.append(" ");
 		 
 		String destination = params.get("Destination");
 		String origin = params.get("Origin");
