@@ -12199,14 +12199,7 @@ public class GameActionUtil {
 		public void execute() {
 			// get all cards
 
-			CardList list = new CardList();
-			list.addAll(AllZone.Human_Play.getCards());
-			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.filter(new CardListFilter() {
-                public boolean addCard(Card c) {
-                    return c.getName().equals("Emperor Crocodile");
-                }
-            });
+			CardList list = AllZoneUtil.getCardsInPlay("Emperor Crocodile");
 			
 			for (int i=0;i<list.size();i++) {
 				
@@ -12419,10 +12412,7 @@ public class GameActionUtil {
 			PlayerZone[] zone = getZone("Fury Sliver");
 
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -12454,10 +12444,7 @@ public class GameActionUtil {
 			PlayerZone[] zone = getZone("Talon Sliver");
 
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -12490,10 +12477,7 @@ public class GameActionUtil {
 			PlayerZone[] zone = getZone("Crystalline Sliver");
 
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -12526,10 +12510,7 @@ public class GameActionUtil {
 			PlayerZone[] zone = getZone("Sidewinder Sliver");
 
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -12560,10 +12541,7 @@ public class GameActionUtil {
 			PlayerZone[] zone = getZone("Virulent Sliver");
 
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -12595,10 +12573,7 @@ public class GameActionUtil {
 			PlayerZone[] zone = getZone("Essence Sliver");
 
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -12630,10 +12605,7 @@ public class GameActionUtil {
 			PlayerZone[] zone = getZone("Synchronous Sliver");
 
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -12669,10 +12641,7 @@ public class GameActionUtil {
 
 			// for each zone found add +1/+1 to each card
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -12709,11 +12678,7 @@ public class GameActionUtil {
 
 			// for each zone found add +1/+1 to each card
 			for(int outer = 0; outer < zone.length; outer++) {
-
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -12749,10 +12714,7 @@ public class GameActionUtil {
 
 			// for each zone found add +0/+1 to each card
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -12789,10 +12751,7 @@ public class GameActionUtil {
 
 			// for each zone found add +1/+1 to each card
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -12826,10 +12785,7 @@ public class GameActionUtil {
 
 			// for each zone found add +1/+1 to each card
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
+				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -12863,11 +12819,7 @@ public class GameActionUtil {
 			//PlayerZone[] zone = getZone("Sliver Legion");
 
 			// get all Slivers
-			CardList all = new CardList();
-			all.addAll(AllZone.Human_Play.getCards());
-			all.addAll(AllZone.Computer_Play.getCards());
-
-			CardList allSliver = all.getType("Sliver");
+			CardList allSliver = AllZoneUtil.getTypeInPlay("Sliver");
 			pump = allSliver.size() - 1;  //it's for each *other* Sliver in play
 			
 			//slapshot5 - outer loop not needed.  This applies to *all* Slivers
