@@ -1,3 +1,32 @@
+Squadron Hawk
+1 W
+Creature Hawk
+no text
+1/1
+Flying
+When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+
+Skyshroud Sentinel
+2 G
+Creature Elf
+no text
+1/1
+When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+
+Nesting Wurm
+4 G G
+Creature Wurm
+no text
+4/3
+When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+
+Howling Wolf
+2 G G
+Creature Wolf
+no text
+2/2
+When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+
 Lovisa Coldeyes
 3 R R
 Legendary Creature Human Barbarian

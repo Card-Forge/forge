@@ -4693,7 +4693,68 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(intoPlay);
         }//end if
         
+        if (card.getKeyword().contains("When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library."))
+        {
+        	final SpellAbility ability = new Ability(card, "0")
+        	{
+        		public void resolve()
+        		{
+        			CardList list = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
+        			list = list.getName(cardName);
+        			if (list.size() < 1)
+        				return;
+        			
+        			if (card.getController().equals(Constant.Player.Human))
+        			{
+        				List<Card> selection = AllZone.Display.getChoicesOptional("Select cards to fetch from Library", list.toArray());
+        				
+                        for(int m = 0; m < selection.size(); m++) {
+                        	AllZone.Human_Library.remove(selection.get(m));
+        					AllZone.Human_Hand.add(selection.get(m));
+                        }
+        			}
+        			else
+        			{
+        				for (Card c:list)
+        				{
+        					AllZone.Computer_Library.remove(c);
+        					AllZone.Computer_Hand.add(c);
+        				}
+        				
+        				StringBuilder sb = new StringBuilder();
+        				
+        				sb.append("Opponent fetches and reveals ");
+        				sb.append(list.size());
+        				sb.append(" copies of ");
+        				sb.append(cardName);
+        				sb.append(".");
+        				JOptionPane.showMessageDialog(null, sb.toString(), "", JOptionPane.INFORMATION_MESSAGE);
+        				
+        				
+        			}
+        			AllZone.GameAction.shuffle(card.getController());
+        		}
+        		
+        	};
+        	
+        	Command intoPlay = new Command() {
+				private static final long serialVersionUID = 8374287903074067063L;
 
+				public void execute() {
+                	StringBuilder sb = new StringBuilder();
+                    sb.append(card.getName());
+                    sb.append(" - ");
+                    sb.append(" search your library for up to three cards named ");
+                    sb.append(cardName);
+                    sb.append(", reveal them, and put them into your hand. If you do, shuffle your library.");
+                	
+                    ability.setStackDescription(sb.toString());
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+        }
+        	
         //******************************************************************
         //************** Link to different CardFactories ******************* 
         if(card.getType().contains("Creature")) {
