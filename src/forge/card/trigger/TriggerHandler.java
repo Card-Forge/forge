@@ -24,6 +24,7 @@ import forge.gui.input.Input;
 
 public class TriggerHandler {
 
+    private ArrayList<String> registeredModes = new ArrayList<String>();
 	private ArrayList<Trigger> registeredTriggers = new ArrayList<Trigger>();
 	private ArrayList<String> suppressedModes = new ArrayList<String>();
 
@@ -188,11 +189,16 @@ public class TriggerHandler {
 	public void registerTrigger(Trigger trig)
 	{
 		registeredTriggers.add(trig);
+
+        String mode = trig.getMapParams().get("Mode");
+        if(!registeredModes.contains(mode))
+            registeredModes.add(mode);
 	}
 	
 	public void clearRegistered()
 	{
 		registeredTriggers.clear();
+        registeredModes.clear();
 	}
 	
 	public void removeRegisteredTrigger(Trigger trig)
@@ -223,7 +229,7 @@ public class TriggerHandler {
 	
 	public void runTrigger(String mode,HashMap<String,Object> runParams)
 	{
-		if(suppressedModes.contains(mode))
+		if(suppressedModes.contains(mode) || !registeredModes.contains(mode))
 		{
 			return;
 		}

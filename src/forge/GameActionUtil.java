@@ -10,14 +10,7 @@ import javax.swing.JOptionPane;
 import forge.card.abilityFactory.AbilityFactory;
 import forge.card.cardFactory.CardFactory;
 import forge.card.cardFactory.CardFactoryUtil;
-import forge.card.spellability.Ability;
-import forge.card.spellability.Ability_Activated;
-import forge.card.spellability.Ability_Mana;
-import forge.card.spellability.Ability_Static;
-import forge.card.spellability.Cost;
-import forge.card.spellability.Spell;
-import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
+import forge.card.spellability.*;
 import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCostUtil;
@@ -1833,10 +1826,20 @@ public class GameActionUtil {
 		CardList list = new CardList(playZone.getCards());
 		list = list.getName("Predatory Advantage");
 		for (int i = 0; i < list.size(); i++) {
-		if(player == AllZone.HumanPlayer && Phase.PlayerCreatureSpellCount == 0) 
-			CardFactoryUtil.makeToken("Lizard", "G 2 2 Lizard", list.get(i).getController(), "G", new String[] {"Creature", "Lizard"}, 2, 2, new String[] {""});
-			else if(player == AllZone.ComputerPlayer && Phase.ComputerCreatureSpellCount == 0) 
-				CardFactoryUtil.makeToken("Lizard", "G 2 2 Lizard", list.get(i).getController(), "G", new String[] {"Creature", "Lizard"}, 2, 2, new String[] {""});
+            final Player controller = list.get(i).getController();
+		    if((player == AllZone.HumanPlayer && Phase.PlayerCreatureSpellCount == 0) || (player == AllZone.ComputerPlayer && Phase.ComputerCreatureSpellCount == 0))
+            {
+                Ability abTrig = new Ability(list.get(i),"0") {
+                    public void resolve()
+                    {
+                        CardFactoryUtil.makeToken("Lizard", "G 2 2 Lizard", controller, "G", new String[] {"Creature", "Lizard"}, 2, 2, new String[] {""});
+                    }
+                };
+                abTrig.setTrigger(true);
+                abTrig.setStackDescription("At the beginning of each opponent's end step, if that player didn't cast a creature spell this turn, put a 2/2 green Lizard creature token onto the battlefield.");
+
+                AllZone.GameAction.playSpellAbility(abTrig);
+            }
 		}
 	}
 	
