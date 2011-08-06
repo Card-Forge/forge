@@ -5535,7 +5535,8 @@ public class GameActionUtil {
 	};
 
     public static Command Favor_of_the_Mighty = new Command() {
-        private CardList pumped = new CardList();
+		private static final long serialVersionUID = 2920036758177137722L;
+		private CardList pumped = new CardList();
         public void execute() {
             //Reset old cards
             for(Card c : pumped)
@@ -5550,7 +5551,7 @@ public class GameActionUtil {
 
             //Find creature(s) with highest cmc
             int maxCMC = -1;
-            boolean keepLooping = true;
+            //boolean keepLooping = true;
             CardList creats = AllZoneUtil.getCreaturesInPlay();
             for(Card c : creats)
             {
