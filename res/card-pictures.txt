@@ -38,6 +38,10 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+ferocious_charge.jpg		http://www.wizards.com/global/images/magic/general/ferocious_charge.jpg
+magma_jet.jpg		http://www.wizards.com/global/images/magic/general/magma_jet.jpg
+serum_visions.jpg		http://www.wizards.com/global/images/magic/general/serum_visions.jpg
+tel_jilad_justice.jpg		http://www.wizards.com/global/images/magic/general/tel_jilad_justice.jpg
 masticore.jpg		http://www.wizards.com/global/images/magic/general/masticore.jpg
 abyssal_hunter.jpg		http://www.wizards.com/global/images/magic/general/abyssal_hunter.jpg
 brothers_of_fire.jpg		http://www.wizards.com/global/images/magic/general/brothers_of_fire.jpg

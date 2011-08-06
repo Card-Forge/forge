@@ -1,3 +1,31 @@
+Ferocious Charge
+2 G
+Instant
+no text
+spPumpTgt:+4/+4:
+Scry 2
+
+Magma Jet
+1 R
+Instant
+no text
+spDamageTgtCP:2
+Scry 2
+
+Serum Visions
+U
+Sorcery
+no text
+spDrawCards:1:Draw a card.:Serum Visions - draw a card.
+Scry 2
+
+Tel-Jilad Justice
+1 G
+Instant
+Destroy target artifact.
+spDestroyTgt:Artifact
+Scry 2
+
 Masticore
 4
 Artifact Creature Masticore
