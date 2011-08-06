@@ -5628,6 +5628,7 @@ res/cardsfolder/serrated_biskelion.txt -text svneol=native#text/plain
 res/cardsfolder/serum_raker.txt -text svneol=native#text/plain
 res/cardsfolder/serum_tank.txt -text svneol=native#text/plain
 res/cardsfolder/serum_visions.txt -text svneol=native#text/plain
+res/cardsfolder/servant_of_volrath.txt svneol=native#text/plain
 res/cardsfolder/seshiro_the_anointed.txt -text svneol=native#text/plain
 res/cardsfolder/seton_krosan_protector.txt -text svneol=native#text/plain
 res/cardsfolder/setons_desire.txt -text svneol=native#text/plain
