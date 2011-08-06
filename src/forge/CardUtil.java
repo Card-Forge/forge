@@ -208,10 +208,35 @@ public class CardUtil {
     }
     
     public static boolean isACardType(String cardType) {
-    	return (   cardType.equals("Artifact") || cardType.equals("Creature")
-    			|| cardType.equals("Enchantment") || cardType.equals("Instant")
-    			|| cardType.equals("Land") || cardType.equals("Planeswalker")
-    			|| cardType.equals("Sorcery"));
+    	return getAllCardTypes().contains(cardType);
+    }
+    
+    public static ArrayList<String> getAllCardTypes() {
+    	ArrayList<String> types = new ArrayList<String>();
+
+    	types.addAll(getCardTypes());
+
+    	//not currently used by Forge
+    	types.add("Plane");
+    	types.add("Scheme");
+    	types.add("Vanguard");
+
+    	return types;
+    }
+
+    public static ArrayList<String> getCardTypes() {
+    	ArrayList<String> types = new ArrayList<String>();
+
+    	types.add("Artifact");
+    	types.add("Creature");
+    	types.add("Enchantment");
+    	types.add("Instant");
+    	types.add("Land");
+    	types.add("Planeswalker");
+    	types.add("Sorcery");
+    	types.add("Tribal");
+
+    	return types;
     }
     
     public static boolean isASuperType(String cardType) {
