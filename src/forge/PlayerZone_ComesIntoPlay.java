@@ -152,6 +152,21 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 	ability.setStackDescription(source+" - deals 2 damage to "+ankhLand.getController());
                 	AllZone.Stack.add(ability);
                 }
+                
+                CardList seeds = AllZoneUtil.getCardsInPlay("Seed the Land");
+                final Card seedLand = c;
+                for(Card seed:seeds) {
+                	final Card source = seed;
+                	SpellAbility ability = new Ability(source, "") {
+                		@Override
+                		public void resolve() {
+                			CardFactoryUtil.makeToken("Snake", "G 1 1 Snake", seedLand.getController(),
+                					"G", new String[] {"Creature", "Snake"}, 1, 1, new String[] {});
+                		}
+                	};
+                	ability.setStackDescription(source+" - "+seedLand.getController()+" puts a 1/1 green Snake token in play");
+                	AllZone.Stack.add(ability);
+                }
             }//isLand()
             
             //hack to make tokens trigger ally effects:
