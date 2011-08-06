@@ -251,7 +251,7 @@ class TableModel extends AbstractTableModel {
     }
     
     //returns true if any data changed positions
-    @SuppressWarnings("unchecked")
+    // @SuppressWarnings("unchecked")
     // Arrays.sort
     public boolean sort(int column, boolean ascending) {
         //used by addCard() to resort the cards

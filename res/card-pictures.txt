@@ -38,6 +38,10 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+icy_manipulator.jpg		http://www.wizards.com/global/images/magic/general/icy_manipulator.jpg
+reprisal.jpg		http://www.wizards.com/global/images/magic/general/reprisal.jpg
+ali_from_cairo.jpg		http://www.wizards.com/global/images/magic/general/ali_from_cairo.jpg
+ivory_tower.jpg		http://www.wizards.com/global/images/magic/general/ivory_tower.jpg
 lavalanche.jpg		http://www.wizards.com/global/images/magic/general/lavalanche.jpg
 ley_druid.jpg		http://www.wizards.com/global/images/magic/general/ley_druid.jpg
 goblin_offensive.jpg		http://www.wizards.com/global/images/magic/general/goblin_offensive.jpg

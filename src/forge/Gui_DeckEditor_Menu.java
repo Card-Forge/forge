@@ -660,7 +660,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         
     }//exportDeck()
     
-    @SuppressWarnings("unchecked")
+    // @SuppressWarnings("unchecked")
     // TableSorter type saftey
     private void exportDeckText(Deck aDeck, String filename) {
         //convert Deck into CardList
