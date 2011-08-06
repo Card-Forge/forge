@@ -1,8 +1,8 @@
 Name:Argivian Find
 ManaCost:W
 Types:Instant
-Text:Return target artifact or enchantment card from your graveyard to your hand.
-K:spReturnTgt:1:Artifact,Enchantment:Hand
+Text:no text
+A:SP$Retrieve | Cost$ W | Destination$ Hand | TgtPrompt$ Choose target artifact or enchantment card in your graveyard | ValidTgts$ Artifact.YouCtrl,Enchantment.YouCtrl | SpellDescription$ Return target artifact or enchantment card from your graveyard to your hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argivian_find.jpg
 End
