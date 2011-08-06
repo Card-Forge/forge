@@ -1,9 +1,9 @@
-Name:Bloodfire Colossus
-ManaCost:6 R R
-Types:Creature Giant
+Name:Bloodfire Dwarf
+ManaCost:R
+Types:Creature Dwarf
 Text:no text
-PT:6/6
-A:AB$DamageAll | Cost$ R Sac<1/CARDNAME> |ValidCards$ Creature |ValidPlayers$Each| NumDmg$ 6 | ValidDescription$ each creature and each player. | SpellDescription$CARDNAME deals 6 damage to each creature and each player.
+PT:1/1
+A:AB$DamageAll | Cost$ R Sac<1/CARDNAME> |ValidCards$ Creature.withoutFlying |NumDmg$ 1 | ValidDescription$ each creature without flying. | SpellDescription$CARDNAME deals 1 damage to each creature without flying.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_colossus.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/55.jpg

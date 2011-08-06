@@ -524,9 +524,11 @@ public class AbilityFactory_DealDamage {
     		Ability_Cost abCost = sa.getPayCosts();
     		final Card source = sa.getSourceCard();
     		final HashMap<String,String> params = af.getMapParams();
+    		String numDmg = params.get("NumDmg");
     		int dmg = getNumDamage(sa); 
     		String validC = "";
     		String validP = "";
+    		final int maxX = ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(source);
 
     		if(params.containsKey("ValidCards")) 
     			validC = params.get("ValidCards");
@@ -538,9 +540,22 @@ public class AbilityFactory_DealDamage {
 
     		humanlist = humanlist.getValidCards(validC.split(","), source.getController(), source);
     		computerlist = computerlist.getValidCards(validC.split(","), source.getController(), source);
+    		
+    		CardListFilter filter = new CardListFilter(){
+    			public boolean addCard(Card c)
+    			{
+    				return CardFactoryUtil.canDamage(source, c) && maxX >= (c.getNetDefense() + c.getDamage());
+    			}
+    		};
 
     		humanlist = humanlist.getNotKeyword("Indestructible");
+    		
     		computerlist = computerlist.getNotKeyword("Indestructible");
+    		if(numDmg.equals("X")) {
+    			humanlist = humanlist.filter(filter);
+    			computerlist = computerlist.filter(filter);
+    		}
+    		
     		
     		//abCost stuff that should probably be centralized...
     		if (abCost != null){
@@ -562,6 +577,10 @@ public class AbilityFactory_DealDamage {
     		if (!ComputerUtil.canPayCost(sa))
     			return false;
     		/////
+    		
+    		
+			if (AllZone.HumanPlayer.getLife() <= maxX)
+					return true;
     		
     		//if we can kill human, do it
     		if((validP.contains("Each") || validP.contains("EachOpponent")) && AllZone.HumanPlayer.getLife() <= dmg) {

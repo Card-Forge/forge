@@ -5152,38 +5152,6 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Ashen Firebeast")) {
-            
-            final Ability ability = new Ability(card, "1 R") {
-            	
-                @Override
-                public void resolve() {
-                	
-      				CardList all = AllZoneUtil.getCreaturesInPlay();
-                    all = all.filter(new CardListFilter()
-                    {
-                    	public boolean addCard(Card c)
-                    	{
-                    		return !c.getKeyword().contains("Flying") &&
-                    			   CardFactoryUtil.canDamage(card, c);
-                    	}
-                    });
-                    
-                    for(int i = 0; i < all.size(); i++)
-                        	all.get(i).addDamage(1, card);
-
-                }//resolve()
-            };//SpellAbility
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" deals 1 damage to each creature without flying.");
-            ability.setStackDescription(sb.toString());
-            
-            ability.setDescription("1 R: Ashen Firebeast deals 1 damage to each creature without flying.");
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Scourge of Kher Ridges")) {
             
             final Ability ability = new Ability(card, "1 R") {
@@ -5993,35 +5961,6 @@ public class CardFactory_Creatures {
             card.addLeavesPlayCommand(leavesBattlefield);
         }//*************** END ************ END **************************
 
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Bloodfire Colossus")) {
-        	
-        	Ability_Cost abCost = new Ability_Cost("R Sac<1/CARDNAME>", cardName, true);
-
-        	final Ability_Activated ability = new Ability_Activated(card, abCost, null){
-        		
-                private static final long serialVersionUID = 8283052965865884889L;
-
-                @Override
-                public void resolve() {
-        			int damage = 6;
-        			CardList all = AllZoneUtil.getCreaturesInPlay();
-        			for(Card c:all) {
-        				c.addDamage(damage, card);
-        			}
-        			AllZone.ComputerPlayer.addDamage(damage, card);
-        			AllZone.HumanPlayer.addDamage(damage, card);
-                }//resolve()
-            };//SpellAbility
-            
-            card.addSpellAbility(ability);
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(abCost.toString()).append("Bloodfire Colossus deals 6 damage to each creature and each player.");
-            ability.setDescription(sb.toString());
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Goblin Skycutter")) {
