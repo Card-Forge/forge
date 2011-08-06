@@ -1,7 +1,7 @@
 Name:Insolence
 ManaCost:2 R
 Types:Enchantment Aura
-Text:Whenever enchanted creature becomes tapped, Insolence deals 2 damage to that creature's controller.s
+Text:Whenever enchanted creature becomes tapped, Insolence deals 2 damage to that creature's controller.
 K:Enchant Creature Curse
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/insolence.jpg

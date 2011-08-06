@@ -2,7 +2,7 @@ Name:Halt Order
 ManaCost:2 U
 Types:Instant
 Text:no text
-A:SP$Counter | Cost$ 2 U | Type$ Spell | SpellTarget$ Creature | SubAbility$ SVar=DBDraw | SpellDescription$ Counter target artifact spell.\r\nDraw a card.
+A:SP$Counter | Cost$ 2 U | Type$ Spell | SpellTarget$ Creature | SubAbility$ SVar=DBDraw | SpellDescription$ Counter target artifact spell. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halt_order.jpg
