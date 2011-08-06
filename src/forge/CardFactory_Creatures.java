@@ -17814,7 +17814,31 @@ public class CardFactory_Creatures {
         		}   
         	};
         	card.addSpellAbility(ability);
-        	//ability.setDescription("4U: Look at the top four cards of your library, then put them back in any order.");
+        	ability.setStackDescription(cardName + " - Rearrange the top X cards in your library in any order.");
+        }//*************** END ************ END **************************
+        
+      //*************** START *********** START **************************
+        if(cardName.equals("Information Dealer")) {
+        	/*
+        	 * Tap: Look at the top X cards of your library, where X is the
+        	 * number of Wizards on the battlefield, then put them back in any order.
+        	 */
+        	final Ability_Tap ability = new Ability_Tap(card, "0") {
+				private static final long serialVersionUID = 3451190255076340818L;
+				
+				@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+        		@Override
+        		public void resolve() {
+        			if(card.getController().equals(Constant.Player.Human)) {
+        				int x = AllZoneUtil.getPlayerTypeInPlay(card.getController(), "Wizard").size();
+        				AllZoneUtil.rearrangeTopOfLibrary(card.getController(), x, false);
+        			}
+        		}   
+        	};
+        	card.addSpellAbility(ability);
         	ability.setStackDescription(cardName + " - Rearrange the top X cards in your library in any order.");
         }//*************** END ************ END **************************
 
