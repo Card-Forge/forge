@@ -441,4 +441,204 @@ public class AbilityFactory_AlterLife {
 	// todo: Setting one or both players life
 	// cards like Invincible Hymn, Blessed Wind
 	// <Blah>'s life total Becomes <Y>
+	
+	
+	// *************************************************************************
+	// ************************** Poison Counters ******************************
+	// *************************************************************************
+	//
+	// Made more sense here than in AF_Counters since it affects players and their health
+	
+	public static SpellAbility createAbilityPoison(final AbilityFactory AF){
+
+		final SpellAbility abPoison = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = 6598936088284756268L;
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+		
+			@Override
+			public String getStackDescription(){
+				// when getStackDesc is called, just build exactly what is happening
+				return poisonStackDescription(af, this);
+			}
+			
+			public boolean canPlay(){
+				// super takes care of AdditionalCosts
+				return super.canPlay();	
+			}
+			
+			public boolean canPlayAI()
+			{
+				return poisonCanPlayAI(af, this, params.get("Num"));
+			}
+			
+			@Override
+			public void resolve() {
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Num"), this);
+				poisonResolve(af, this, amount);
+			}
+			
+		};
+		return abPoison;
+	}
+	
+	public static SpellAbility createSpellPoison(final AbilityFactory AF){
+		final SpellAbility spPoison = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = -1495708415138457833L;
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+		
+			@Override
+			public String getStackDescription(){
+				return poisonStackDescription(af, this);
+			}
+			
+			public boolean canPlay(){
+				return super.canPlay();	
+			}
+			
+			public boolean canPlayAI() {
+				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
+				// then call xCount with that card to properly calculate the amount
+				// Or choosing how many to sacrifice 
+				return poisonCanPlayAI(af, this, params.get("Num"));
+			}
+			
+			@Override
+			public void resolve() {
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Num"), this);
+				poisonResolve(af, this, amount);
+			}
+			
+		};
+		return spPoison;
+	}
+	
+	public static SpellAbility createDrawbackPoison(final AbilityFactory AF){
+		final SpellAbility dbPoison = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -1173479041548558016L;
+			final AbilityFactory af = AF;
+			final HashMap<String,String> params = af.getMapParams();
+		
+			@Override
+			public String getStackDescription(){
+				return poisonStackDescription(af, this);
+			}
+			
+			public boolean canPlayAI()
+			{
+				// if X depends on abCost, the AI needs to choose which card he would sacrifice first
+				// then call xCount with that card to properly calculate the amount
+				// Or choosing how many to sacrifice 
+				return poisonCanPlayAI(af, this, params.get("Num"));
+			}
+			
+			@Override
+			public void resolve() {
+				int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("Num"), this);
+				poisonResolve(af, this, amount);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return true;
+			}
+			
+		};
+		return dbPoison;
+	}
+	
+	private static void poisonResolve(final AbilityFactory af, final SpellAbility sa, int num){
+		HashMap<String,String> params = af.getMapParams();
+		Card card = af.getHostCard();
+		
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+		
+		for(Player p : tgtPlayers)
+			if (tgt == null || p.canTarget(af.getHostCard()))
+				p.addPoisonCounters(num);
+		
+		
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+	     	   abSub.resolve();
+	        }
+			else{
+				String DrawBack = params.get("SubAbility");
+				if (af.hasSubAbility())
+					 CardFactoryUtil.doDrawBack(DrawBack, num, card.getController(), card.getController().getOpponent(), tgtPlayers.get(0), card, null, sa);
+			}
+		}
+	}
+	
+	private static String poisonStackDescription(AbilityFactory af, SpellAbility sa){
+		StringBuilder sb = new StringBuilder();
+		int amount = AbilityFactory.calculateAmount(af.getHostCard(), af.getMapParams().get("Num"), sa);
+
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+
+		ArrayList<Player> tgtPlayers;
+
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+		
+		for(Player player : tgtPlayers)
+			sb.append(player).append(" ");
+		
+		sb.append("gets ").append(amount).append(" poison counter");
+		if(amount != 1) sb.append("s.");
+		else sb.append(".");
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null) {
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
+	}
+	
+	private static boolean poisonCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){
+		Ability_Cost abCost = sa.getPayCosts();
+		//int humanPoison = AllZone.HumanPlayer.getPoisonCounters();
+		int humanLife = AllZone.HumanPlayer.getLife();
+		//int aiPoison = AllZone.ComputerPlayer.getPoisonCounters();
+		int aiLife = AllZone.ComputerPlayer.getLife();
+
+		// TODO handle proper calculation of X values based on Cost and what would be paid
+		final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+		
+		if (abCost != null){
+			// AI currently disabled for these costs
+			if (abCost.getSacCost()){
+				if (amountStr.contains("X"))
+					return false;
+			}
+			if(abCost.getLifeCost() && aiLife - abCost.getLifeAmount() < humanLife - amount) return false;
+		}
+		
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+		 
+		 Target tgt = sa.getTarget();
+		 
+		 if (sa.getTarget() != null){
+			 tgt.resetTargets();
+			 sa.getTarget().addTarget(AllZone.HumanPlayer);
+		 }
+		 
+		 return true;
+	}
 }
