@@ -1,3 +1,30 @@
+Call to Glory
+1 W
+Instant
+no text
+spAllPump:YouCtrl/Samurai:+1/+1:Drawback$UntapAllTypeYouCtrl.Creature:Untap all creatures you control. Samurai creatures get +1/+1 until end of turn.:Call to Glory - Untap all creatures you control; Samurai get +1/+1 until EOT
+
+Flowstone Slide
+X 2 R R
+Sorcery
+no text
+spAllPump:All:+X/-X:All Creatures get +X/-X until end of turn.:Flowstone Slide - All creatures get +X/-X until EOT
+SVar:X:Count$xPaid
+
+Gleam of Resistance
+4 W
+Instant
+no text
+spAllPump:YouCtrl:+1/+2:Drawback$UntapAllTypeYouCtrl.Creature:Creatures you control get +1/+2 until end of turn. Untap those creatures.:Gleam of Resistance - Creatures get +1/+2 until EOT; untap those creatures
+TypeCycling:Basic:1 W
+
+Violent Outburst
+1 R G
+Instant
+no text
+spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Violent Outburst - Creatures get +1/+0 until EOT
+Cascade
+
 Spreading Seas
 1 U
 Enchantment Aura
