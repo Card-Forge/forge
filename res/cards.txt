@@ -1,3 +1,53 @@
+Elvish Farmer
+1 G
+Creature Elf
+At the beginning of your upkeep, put a spore counter on Elvish Farmer.
+0/2
+Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+
+Mycologist
+1 W
+Creature Human Druid
+At the beginning of your upkeep, put a spore counter on Mycologist.
+0/2
+Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+
+Pallid Mycoderm
+3 W
+Creature Fungus
+At the beginning of your upkeep, put a spore counter on Pallid Mycoderm.
+2/4
+Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+
+Psychotrope Thallid
+2 G
+Creature Fungus
+At the beginning of your upkeep, put a spore counter on Psychotrope Thallid.
+1/1
+Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+
+Sporesower Thallid
+2 G G
+Creature Fungus
+At the beginning of your upkeep, put a spore counter on each Fungus you control.
+4/4
+Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+
+Thallid
+G
+Creature Fungus
+At the beginning of your upkeep, put a spore counter on Thallid.
+1/1
+Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+
+Thallid Shell-Dweller
+1 G
+Creature Fungus
+At the beginning of your upkeep, put a spore counter on Thallid Shell-Dweller.
+0/5
+Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.
+Defender
+
 Bartel Runeaxe
 3 G R B
 Legendary Creature Giant Warrior
@@ -15218,13 +15268,6 @@ Land
 no text
 tap: add 1
 
-Sporesower Thallid
-2 G G
-Creature Fungus
-At the beginning of your upkeep, put a spore counter on each Fungus you control.
-4/4
-Remove three spore counters from this card: Put a 1/1 green Saproling creature token into play.
-
 Wall of Mulch
 1 G
 Creature Wall
@@ -15404,53 +15447,10 @@ no text
 tap: add 1
 abDrawCards 2 T:1:Drawback$OppDraw/1:Each player draws a card.:Mikokoro, Center of the Sea - each player draws a card
 
-Thallid Shell-Dweller
-1 G
-Creature Fungus
-At the beginning of your upkeep, put a spore counter on Thallid Shell-Dweller.
-0/5
-Remove three spore counters from this card: Put a 1/1 green Saproling creature token into play.
-Defender
-
-Thallid
-G
-Creature Fungus
-At the beginning of your upkeep, put a spore counter on Thallid.
-1/1
-Remove three spore counters from this card: Put a 1/1 green Saproling creature token into play.
-
-Psychotrope Thallid
-2 G
-Creature Fungus
-At the beginning of your upkeep, put a spore counter on Psychotrope Thallid.
-1/1
-Remove three spore counters from this card: Put a 1/1 green Saproling creature token into play.
-
-Pallid Mycoderm
-3 W
-Creature Fungus
-At the beginning of your upkeep, put a spore counter on Pallid Mycoderm.
-2/4
-Remove three spore counters from this card: Put a 1/1 green Saproling creature token into play.
-
 Sleight of Hand
 U
 Sorcery
 Look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
-
-Mycologist
-1 W
-Creature Human Druid
-At the beginning of your upkeep, put a spore counter on Mycologist.
-0/2
-Remove three spore counters from this card: Put a 1/1 green Saproling creature token into play.
-
-Elvish Farmer
-1 G
-Creature Elf
-At the beginning of your upkeep, put a spore counter on Elvish Farmer.
-0/2
-Remove three spore counters from this card: Put a 1/1 green Saproling creature token into play.
 
 Vedalken Archmage
 2 U U

@@ -875,10 +875,11 @@ public class CardFactoryUtil {
                         "Creature", "Saproling"}, 1, 1, new String[] {""});
             }
         };
-        ability.setDescription("Remove three spore counters from " + sourceCard.getName()
-                + ": Put a 1/1 green Saproling creature token into play.");
+        ability.setDescription("Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.");
+//      ability.setDescription("Remove three spore counters from " + sourceCard.getName()
+//              + ": Put a 1/1 green Saproling creature token onto the battlefield.");
         ability.setStackDescription(sourceCard.getName()
-                + " - put a 1/1 green Saproling creature token into play.");
+                + " - put a 1/1 green Saproling creature token onto the battlefield.");
         return ability;
     }//ability_Spore_Saproling()
     
