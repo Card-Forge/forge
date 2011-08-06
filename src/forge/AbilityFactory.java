@@ -244,7 +244,7 @@ public class AbilityFactory {
 			else if (isSp)
 				SA = AbilityFactory_AlterLife.createSpellGainLife(this);
 			else if (isDb)
-				SA = AbilityFactory_AlterLife.createSpellGainLife(this);
+				SA = AbilityFactory_AlterLife.createDrawbackGainLife(this);
 			if(hasSubAbility())
 				SA.setSubAbility(getSubAbility());
 		}
@@ -252,9 +252,13 @@ public class AbilityFactory {
 		if (API.equals("LoseLife")){
 			if (isAb)
 				SA = AbilityFactory_AlterLife.createAbilityLoseLife(this);
-			if (isSp){
+			else if (isSp){
 				SA = AbilityFactory_AlterLife.createSpellLoseLife(this);
 			}
+			else if (isDb)
+				SA = AbilityFactory_AlterLife.createDrawbackLoseLife(this);
+			if(hasSubAbility())
+				SA.setSubAbility(getSubAbility());
 		}
 		
 		if (API.equals("Fog")){
