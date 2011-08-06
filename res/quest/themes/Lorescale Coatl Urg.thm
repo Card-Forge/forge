@@ -1,21 +1,15 @@
-BasicLandPercentage=10
+BasicLandPercentage=13
 
-[Group MaxCnt=4 Percentage=25]
-Jungle Shrine
-Seaside Citadel
-Seaside Citadel
-Seaside Citadel
-Sejiri Refuge
+[Group MaxCnt=4 Percentage=22]
 Tropical Island
 Tropical Island
-Tundra
 Volcanic Island
 Misty Rainforest
 Misty Rainforest
+Scalding Tarn
 [/Group]
 
 [Group MaxCnt=4 Percentage=13]
-Hoofprints of the Stag
 Jace's Erasure
 Lorescale Coatl
 Lorescale Coatl
@@ -73,7 +67,6 @@ Time Reversal
 [/Group]
 
 [Group MaxCnt=1 Percentage=2]
-Kiss of the Amesha
 Niv-Mizzet, the Firemind
 Niv-Mizzet, the Firemind
 Opportunity

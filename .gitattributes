@@ -1839,7 +1839,7 @@ res/cardsfolder/dwarven_hold.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_lieutenant.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_miner.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_nomad.txt -text svneol=native#text/plain
-res/cardsfolder/dwarven_patrol.txt svneol=native#text/plain
+res/cardsfolder/dwarven_patrol.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_pony.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_ruins.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_soldier.txt -text svneol=native#text/plain
@@ -8071,11 +8071,12 @@ res/quest/themes/Goblins[!!-~]R.thm -text
 res/quest/themes/Indestructibility[!!-~]WB.thm -text
 res/quest/themes/Islandwalk[!!-~]U.thm -text
 res/quest/themes/Kithkin[!!-~]W.thm -text
+res/quest/themes/Landfall[!!-~]brG.thm -text
 res/quest/themes/Lands[!!-~]WRG.thm -text
 res/quest/themes/Legends[!!-~]WG.thm -text
 res/quest/themes/Leyline[!!-~]of[!!-~]Singularity[!!-~]WUBRG.thm -text
 res/quest/themes/Lifegain[!!-~]WBG.thm -text
-res/quest/themes/Lorescale[!!-~]Coatl[!!-~]wUrg.thm -text
+res/quest/themes/Lorescale[!!-~]Coatl[!!-~]Urg.thm -text
 res/quest/themes/Megrim[!!-~]UBR.thm -text
 res/quest/themes/Merfolk[!!-~]U.thm -text
 res/quest/themes/Milling[!!-~]UB.thm -text
