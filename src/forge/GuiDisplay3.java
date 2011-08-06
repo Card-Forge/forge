@@ -264,8 +264,10 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         messageArea.setBorder(border);
             
         int thickness = 3;
-            
-        if (s.contains("Main"))
+        
+        if (AllZone.Stack.size() > 0 && AllZone.Stack.peek().getActivatingPlayer().isComputer())
+        	border = BorderFactory.createLineBorder(new Color(0, 255, 255), thickness);
+        else if (s.contains("Main"))
         	border = BorderFactory.createLineBorder(new Color(30, 0, 255), thickness);	
         else if (s.contains("To Block"))
         	border = BorderFactory.createLineBorder(new Color(13, 179, 0), thickness);
