@@ -1731,10 +1731,6 @@ public class CombatUtil {
                 } //if (creatures.size() > 0) 
             }//Preeminent Captain
             
-            else if(c.getName().equals("Nemesis of Reason") && !c.getCreatureAttackedThisCombat()) {
-                c.getController().getOpponent().mill(10);
-            }//Nemesis of Reason
-            
             else if(c.getName().equals("Novablast Wurm") && !c.getCreatureAttackedThisCombat()) {
                 final Card Novablast_Wurm = c;
                 CardList all = new CardList();
