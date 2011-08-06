@@ -568,13 +568,14 @@ public class GameAction {
         if(!frame.isDisplayable()) return;
         
         boolean stop = false;
-        
+        /*
+        //Ali from Cairo is now checked in addDamage()
         if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Computer) && AllZone.Computer_Life.getLife() < 1) 
         	AllZone.Computer_Life.setLife(1);
         
         if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Human) && AllZone.Human_Life.getLife() < 1) 
         	AllZone.Human_Life.setLife(1);
-        
+        */
 		if(!AllZoneUtil.isCardInPlay("Platinum Angel", Constant.Player.Computer) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", Constant.Player.Human)) {
 	        if(AllZone.Computer_Life.getLife() <= 0 || AllZone.Computer_PoisonCounter.getPoisonCounters() >= 10) {
 	            Constant.Runtime.WinLose.addWin();
@@ -609,12 +610,14 @@ public class GameAction {
         if(!frame.isDisplayable()) return;
         
         boolean stop = false;
-        
+        /*
+        //Ali from Cairo is now checked in addDamage()
         if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Computer) && AllZone.Computer_Life.getLife() < 1) 
         	AllZone.Computer_Life.setLife(1);
         
         if (AllZoneUtil.isCardInPlay("Ali from Cairo", Constant.Player.Human) && AllZone.Human_Life.getLife() < 1) 
         	AllZone.Human_Life.setLife(1);
+        */
         // Win / Lose
 		if(!AllZoneUtil.isCardInPlay("Platinum Angel", Constant.Player.Computer) && !AllZoneUtil.isCardInPlay("Abyssal Persecutor", Constant.Player.Human)) {
         if(AllZone.Computer_Life.getLife() <= 0 ) {
@@ -3881,8 +3884,11 @@ public class GameAction {
     	//addDamage(player, source, damage);
     	if (source.getKeyword().contains("Infect"))
     		addPoison(player, damage);
-        else
-        	getPlayerLife(player).subtractLife(damage,source);
+        else {
+        	//combat damage should use addDamage, not subtractLife
+        	addDamage(player, source, damage);
+        	//getPlayerLife(player).subtractLife(damage,source);
+        }
     	
     	GameActionUtil.executePlayerDamageEffects(player, source, damage, true);
     	GameActionUtil.executePlayerCombatDamageEffects(source);
@@ -3892,9 +3898,15 @@ public class GameAction {
     public void addDamage(String player, Card source, int damage) {
         if (source.getKeyword().contains("Infect"))
         	addPoison(player, damage);
-        else
-        	getPlayerLife(player).subtractLife(damage,source);
-         
+        else {
+        	int damageToDo = damage;
+        	PlayerLife life = getPlayerLife(player);
+        	if(AllZoneUtil.isCardInPlay("Ali from Cairo", player) && life.getLife() <= damageToDo) {
+        		damageToDo = Math.min(damageToDo, life.getLife() - 1);
+        	}
+        	life.subtractLife(damageToDo,source);
+        }
+        	
         if(source.getKeyword().contains("Lifelink")) GameActionUtil.executeLifeLinkEffects(source, damage);
         
         CardList cl = CardFactoryUtil.getAurasEnchanting(source, "Guilty Conscience");
