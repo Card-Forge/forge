@@ -6,4 +6,18 @@ Text:no text
 A:SP$Pump|Cost$G|ValidTgts$Creature|NumAtt$+3|NumDef$+3|SpellDescription$Target creature gets +3/+3 until end of turn.|TgtPrompt$Select target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_growth.jpg
+SetInfo:LEA|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=153&type=card
+SetInfo:LEB|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=448&type=card
+SetInfo:2ED|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=750&type=card
+SetInfo:3ED|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=1248&type=card
+SetInfo:4ED|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=2215&type=card
+SetInfo:5ED|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=3982&type=card
+SetInfo:6ED|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=14683&type=card
+SetInfo:7ED|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=11301&type=card
+SetInfo:8ED|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=45414&type=card
+SetInfo:9ED|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=83103&type=card
+SetInfo:XED|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=129568&type=card
+SetInfo:M10|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=189879&type=card
+SetInfo:M11|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=205224&type=card
+SetInfo:ICE|Common|http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=2570&type=card
 End

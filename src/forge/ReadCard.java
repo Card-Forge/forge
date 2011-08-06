@@ -156,6 +156,11 @@ public class ReadCard implements Runnable, NewConstants {
             		c.addIntrinsicAbility(t);
             	}
             	
+            	else if (s.startsWith("SetInfo:"))
+            	{
+            		String t = s.substring(4);
+            		c.addSet(new SetInfo(t));
+            	}
             	
             	s = readLine();
             } // while !End

@@ -2710,5 +2710,20 @@ public class Card extends MyObservable {
             GameActionUtil.executeGuiltyConscienceEffects(source, c, damageToAdd);
         }
     }
-
+    private ArrayList<SetInfo> Sets = new ArrayList<SetInfo>();
+    
+    public void addSet(SetInfo sInfo)
+    {
+    	Sets.add(sInfo);
+    }
+    
+    public ArrayList<SetInfo> getSets()
+    {
+    	return Sets;
+    }
+    
+    public void setSets(ArrayList<SetInfo> siList)
+    {
+    	Sets = siList;
+    }
 }//end Card class

@@ -5616,6 +5616,7 @@ src/forge/ReadPriceList.java -text svneol=native#text/plain
 src/forge/ReadQuest_Assignment.java -text svneol=native#text/plain
 src/forge/Run.java svneol=native#text/plain
 src/forge/RunTest.java svneol=native#text/plain
+src/forge/SetInfo.java -text svneol=native#text/plain
 src/forge/SimpleCombat.java svneol=native#text/plain
 src/forge/Spell.java svneol=native#text/plain
 src/forge/SpellAbility.java -text svneol=native#text/plain
