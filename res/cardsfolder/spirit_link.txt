@@ -1,0 +1,9 @@
+Name:Spirit Link
+ManaCost:W
+Types:Enchantment Aura
+Text:Whenever enchanted creature deals damage, you gain that much life.
+K:Enchant creature
+K:enPump:Whenever CARDNAME deals damage, you gain that much life. 
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spirit_link.jpg
+End
