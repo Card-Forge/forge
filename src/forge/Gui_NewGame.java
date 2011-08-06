@@ -10,6 +10,12 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -42,6 +48,7 @@ import javax.swing.border.TitledBorder;
 import com.esotericsoftware.minlog.Log;
 
 import arcane.ui.util.ManaSymbols;
+import arcane.util.MultiplexOutputStream;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -117,6 +124,15 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     static public ForgePreferences preferences;
     public static void main(String[] args) {
         ExceptionHandler.registerErrorHandling();
+        File logFile = new File("forge.log");
+		logFile.delete();
+		try {
+			OutputStream logFileStream = new BufferedOutputStream(new FileOutputStream(logFile));
+			System.setOut(new PrintStream(new MultiplexOutputStream(System.out, logFileStream), true));
+			System.setErr(new PrintStream(new MultiplexOutputStream(System.err, logFileStream), true));
+		} catch (FileNotFoundException ex) {
+			ErrorViewer.showError(ex);
+		}
         try {
         	preferences = new ForgePreferences("forge.preferences");
         	useLAFFonts.setSelected(preferences.lafFonts);

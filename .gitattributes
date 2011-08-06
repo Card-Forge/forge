@@ -336,6 +336,7 @@ src/arcane/ui/util/GlowText.java svneol=native#text/plain
 src/arcane/ui/util/ImageUtil.java -text svneol=native#text/plain
 src/arcane/ui/util/ManaSymbols.java svneol=native#text/plain
 src/arcane/ui/util/UI.java svneol=native#text/plain
+src/arcane/util/MultiplexOutputStream.java svneol=native#text/plain
 src/arcane/util/Util.java svneol=native#text/plain
 src/com/cloudgarden/layout/AnchorConstraint.java -text svneol=native#text/plain
 src/com/cloudgarden/layout/AnchorLayout.java -text svneol=native#text/plain

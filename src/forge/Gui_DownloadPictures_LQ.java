@@ -35,6 +35,8 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import com.esotericsoftware.minlog.Log;
+
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -237,14 +239,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
                     out.flush();
                     out.close();
                 } catch(Exception ex) {
-                    ErrorViewer.showError(ex, ForgeProps.getLocalized(ERRORS.OTHER), cards[card].name,
-                            cards[card].url);
-//                    throw new RuntimeException("Gui_DownloadPictures : error 1 - " +ex);
-                    int more = JOptionPane.showConfirmDialog(null, "Some error occured. Continue downloading pictures?", "Error",
-                            JOptionPane.YES_NO_OPTION);
-                    if (more == JOptionPane.NO_OPTION) {
-                    	break;
-                    }
+                	Log.error("LQ Pictures", "Error downloading pictures", ex);
                 }
             }//for
         }

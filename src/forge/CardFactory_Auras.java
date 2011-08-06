@@ -1385,7 +1385,7 @@ class CardFactory_Auras {
                     
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         card.enchantCard(c);
-                        System.out.println("Enchanted: " + getTargetCard());
+                        Log.debug("Lifelink", "Enchanted: " + getTargetCard());
                     }
                 }//resolve()
             };//SpellAbility
@@ -1500,7 +1500,7 @@ class CardFactory_Auras {
                     if (AllZone.GameAction.isCardInPlay(c) && 
                     	CardFactoryUtil.canTarget(card, c)) {
                         	card.enchantCard(c);
-                        	System.out.println("Enchanted: " + getTargetCard());
+                        	Log.debug("Fear", "Enchanted: " + getTargetCard());
                     }
                 }//resolve()
             };//SpellAbility
@@ -1728,7 +1728,7 @@ class CardFactory_Auras {
         	final String type = getAuraType(card);
         	final boolean curse = isCurseAura(card);
         	if("" == type) {
-        		System.out.println("Problem in generic Aura code - type is null");
+        		Log.error("Problem in generic Aura code - type is null");
         	}
         	final SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = 4191777361540717307L;
