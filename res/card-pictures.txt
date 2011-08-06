@@ -18,6 +18,15 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+gatekeeper_of_malakir.jpg		http://www.wizards.com/global/images/magic/general/gatekeeper_of_malakir.jpg
+guul_draz_vampire.jpg		http://www.wizards.com/global/images/magic/general/guul_draz_vampire.jpg
+bladetusk_boar.jpg		http://www.wizards.com/global/images/magic/general/bladetusk_boar.jpg
+bituminous_blast.jpg		http://www.wizards.com/global/images/magic/general/bituminous_blast.jpg
+enlisted_wurm.jpg		http://www.wizards.com/global/images/magic/general/enlisted_wurm.jpg
+kathari_remnant.jpg		http://www.wizards.com/global/images/magic/general/kathari_remnant.jpg
+ardent_plea.jpg		http://www.wizards.com/global/images/magic/general/ardent_plea.jpg
+kor_skyfisher.jpg		http://www.wizards.com/global/images/magic/general/kor_skyfisher.jpg
+bloodbraid_elf.jpg		http://www.wizards.com/global/images/magic/general/bloodbraid_elf.jpg
 bloodghast.jpg		http://www.wizards.com/global/images/magic/general/bloodghast.jpg
 malakir_bloodwitch.jpg		http://www.wizards.com/global/images/magic/general/malakir_bloodwitch.jpg
 goblin_guide.jpg		http://www.wizards.com/global/images/magic/general/goblin_guide.jpg
