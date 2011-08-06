@@ -4206,7 +4206,7 @@ Enchant creature
 Cleanfall
 2 W
 Sorcery Arcane
-Destroy all enchantments.
+no text
 
 Cloak of Mists
 1 U
@@ -8565,17 +8565,18 @@ You may play as many lands as you choose on your turn. Whenever you play a land 
 Tempest of Light
 2 W
 Instant
-Destroy all enchantments.
+no text
 
 Hush
 3 G
 Sorcery
 no text
+Cycling:2
 
 Tranquility
 2 G 
 Sorcery
-Destroy all enchantments.
+no text
 
 Spiritmonger
 3 B G

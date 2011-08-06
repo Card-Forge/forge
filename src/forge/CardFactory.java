@@ -8762,7 +8762,8 @@ public class CardFactory implements NewConstants {
 	}// *************** END ************ END **************************
 	
 	//*************** START *********** START **************************
-	else if (cardName.equals("Tranquility") || cardName.equals("Tempest of Light") || cardName.equals("Cleanfall"))
+	else if (cardName.equals("Tranquility") || cardName.equals("Tempest of Light") || 
+			 cardName.equals("Cleanfall") || cardName.equals("Hush"))
 	{
 		SpellAbility spell = new Spell(card)
 		{
@@ -8803,10 +8804,14 @@ public class CardFactory implements NewConstants {
 				(AllZone.Computer_Life.getLife() < 7 && !human.isEmpty());
 			}
 		};// SpellAbility
+		spell.setDescription("Destroy all enchantments.");
+		spell.setStackDescription(card.getName() + " - destroy all enchantments.");
 		card.clearSpellAbility();
 		card.addSpellAbility(spell);
 	}// *************** END ************ END **************************
-	
+    
+    
+/*
 	//*************** START *********** START **************************
 	else if (cardName.equals("Hush"))
 	{
@@ -8854,7 +8859,8 @@ public class CardFactory implements NewConstants {
 	    card.addSpellAbility(spell);
 	    card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2"));
 	}// *************** END ************ END **************************
-
+*/
+    
 
     //*************** START *********** START **************************
     else if(cardName.equals("Incendiary Command"))
