@@ -51,7 +51,6 @@ public class GameActionUtil {
 		
 		upkeep_Greener_Pastures();
 		upkeep_Heartmender();
-		upkeep_Nath();
 		upkeep_Anowon();
 		upkeep_Cunning_Lethemancer();
 		upkeep_Shapeshifter();
@@ -4788,33 +4787,6 @@ public class GameActionUtil {
 			} // for
 		} // if creatures > 0
 	}//upkeep_Heartmender
-
-	private static void upkeep_Nath() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		final Player opponent = player.getOpponent();
-
-		PlayerZone zone1 = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(zone1.getCards());
-		list = list.getName("Nath of the Gilt-Leaf");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-
-			ability = new Ability(list.get(i), "0") {
-				@Override
-				public void resolve() {
-					opponent.discardRandom(this);
-				}
-			}; // ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Nath of the Gilt-Leaf - ").append(opponent).append(" discards a card at random.");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}
-	}
 
 	private static void upkeep_Anowon() {
 		final Player player = AllZone.Phase.getPlayerTurn();

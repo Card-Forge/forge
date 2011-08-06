@@ -331,22 +331,6 @@ public class GameAction {
         return false;
     }
     
-    public void discard_nath(Card discardedCard) {
-        final Player owner = discardedCard.getOwner();
-        final Player opponent = owner.getOpponent();
-        
-        PlayerZone opponentZone = AllZone.getZone(Constant.Zone.Battlefield, opponent);
-        CardList opponentList = new CardList(opponentZone.getCards());
-        
-        for(int i = 0; i < opponentList.size(); i++) {
-            Card card = opponentList.get(i);
-            if(card.getName().equals("Nath of the Gilt-Leaf")) {
-                CardFactoryUtil.makeToken("Elf Warrior", "G 1 1 Elf Warrior", opponent, "G", 
-                		new String[] {"Creature", "Elf", "Warrior"}, 1, 1, new String[] {});
-            }
-        }
-    }
-    
     public void discard_PutIntoPlayInstead(Card c)
     {
     	moveToPlay(c);

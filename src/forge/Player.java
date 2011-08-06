@@ -648,7 +648,6 @@ public abstract class Player extends MyObservable{
     		}
     	} 
     	
-        AllZone.GameAction.discard_nath(c);
         AllZone.GameAction.discard_megrim(c);
         
         // necro disrupts madness
