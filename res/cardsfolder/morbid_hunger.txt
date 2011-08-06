@@ -1,0 +1,7 @@
+Name:Morbid Hunger
+ManaCost:4 B B
+Types:Sorcery
+Text:Morbid Hunger deals 3 damage to target creature or player. You gain 3 life.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/morbid_hunger.jpg
+End

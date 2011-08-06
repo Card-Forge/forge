@@ -2177,7 +2177,7 @@ public class CardFactory_Sorceries {
             flashback.setFlashBackAbility(true);
             flashback.setManaCost("4 R");
             flashback.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(flashback, true, false));
-            flashback.setDescription("Flashback: 4R");
+            flashback.setDescription("Flashback: 4 R");
             
             card.clearSpellAbility();
             card.addSpellAbility(spell);
@@ -2189,10 +2189,166 @@ public class CardFactory_Sorceries {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if (cardName.equals("Morbid Hunger")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = -5460524956297956293L;
+                
+                int                       damage           = 3;
+                Card                      check;
+                
+                @Override
+                public boolean canPlayAI() {
+                    PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
+                    CardList hand = new CardList(compHand.getCards());
 
-
-
-
+                    if (AllZone.HumanPlayer.getLife() <= damage) return AllZone.GameAction.isCardInZone(card, compHand);
+                    
+                    if (hand.size() >= 8) return true && AllZone.GameAction.isCardInZone(card, compHand);
+                    
+                    check = getFlying();
+                    return check != null && AllZone.GameAction.isCardInZone(card, compHand);
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    if (AllZone.HumanPlayer.getLife() <= damage) {
+                        setTargetPlayer(AllZone.HumanPlayer);
+                        return;
+                    }
+                    
+                    Card c = getFlying();
+                    if ((c == null) || (!check.equals(c))) {
+                        c = getAnyCreature();
+                        if (c == null) {
+                            setTargetPlayer(AllZone.HumanPlayer);
+                            return;
+                        }
+                    }
+                    
+                    setTargetCard(c);
+                }//chooseTargetAI()
+                
+                //uses "damage" variable
+                Card getFlying() {
+                    CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
+                    for (int i = 0; i < flying.size(); i++)
+                        if (flying.get(i).getNetDefense() <= damage) return flying.get(i);
+                    
+                    return null;
+                }
+                
+                Card getAnyCreature() {
+                    CardList creatures = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    for (int i = 0; i < creatures.size(); i++)
+                        if (creatures.get(i).getNetDefense() <= damage) return creatures.get(i);
+                    
+                    return null;
+                }
+                
+                @Override
+                public void resolve() {
+                    if (getTargetCard() != null) {
+                        if (AllZone.GameAction.isCardInPlay(getTargetCard())
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                            Card c = getTargetCard();
+                            c.addDamage(damage, card);
+                            card.getController().gainLife(3);
+                        }
+                    } else {
+                        getTargetPlayer().addDamage(damage, card);
+                        card.getController().gainLife(3);
+                    }
+                }
+            };//SpellAbility
+            
+            final SpellAbility flashback = new Spell(card) {
+                private static final long serialVersionUID = 4193073989624300707L;
+                
+                int                       damage           = 3;
+                Card                      check;
+                
+                @Override
+                public boolean canPlay() {
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    String phase = AllZone.Phase.getPhase();
+                    Player activePlayer = AllZone.Phase.getActivePlayer();
+                    
+                    return AllZone.GameAction.isCardInZone(card, grave) 
+                                    && ((phase.equals(Constant.Phase.Main1) || phase.equals(Constant.Phase.Main2)) 
+                                    && card.getController().equals(activePlayer) && AllZone.Stack.size() == 0);
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    if (AllZone.HumanPlayer.getLife() <= damage) return true;
+                    
+                    check = getFlying();
+                    return check != null;
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    if (AllZone.HumanPlayer.getLife() <= damage) {
+                        setTargetPlayer(AllZone.HumanPlayer);
+                        return;
+                    }
+                    
+                    Card c = getFlying();
+                    if ((c == null) || (!check.equals(c))) throw new RuntimeException(card
+                            + " error in chooseTargetAI() - Card c is " + c + ",  Card check is " + check);
+                    
+                    setTargetCard(c);
+                }//chooseTargetAI()
+                
+                //uses "damage" variable
+                Card getFlying() {
+                    CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
+                    for (int i = 0; i < flying.size(); i++)
+                        if (flying.get(i).getNetDefense() <= damage) return flying.get(i);
+                    
+                    return null;
+                }
+                
+                @Override
+                public void resolve() {
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+                    
+                    if (getTargetCard() != null) {
+                        if (AllZone.GameAction.isCardInPlay(getTargetCard())
+                                && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                            Card c = getTargetCard();
+                            c.addDamage(damage, card);
+                            card.getController().gainLife(3);
+                        }
+                    } else {
+                        getTargetPlayer().addDamage(damage, card);
+                        card.getController().gainLife(3);
+                    }
+                    
+                    grave.remove(card);
+                    removed.add(card);
+                    
+                }
+            };//flashback
+            flashback.setFlashBackAbility(true);
+            flashback.setManaCost("7 B B");
+            flashback.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(flashback, true, false));
+            flashback.setDescription("Flashback: 7 B B");
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            card.addSpellAbility(flashback);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
+            card.setFlashback(true);
+            
+            card.setSVar("PlayMain1", "TRUE");
+        }//*************** END ************ END **************************
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Erratic Explosion")) {
             final SpellAbility spell = new Spell(card) {
