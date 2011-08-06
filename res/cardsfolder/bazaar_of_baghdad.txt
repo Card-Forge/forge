@@ -2,7 +2,8 @@ Name:Bazaar of Baghdad
 ManaCost:no cost
 Types:Land
 Text:no text
-K:abDrawCards T:2:Drawback$YouDiscard/3:Draw two cards, then discard three cards.:Bazaar of Baghdad - draw cards and discard cards
+#K:abDrawCards T:2:Drawback$YouDiscard/3:Draw two cards, then discard three cards.:Bazaar of Baghdad - draw cards and discard cards
+A:AB$Draw | Cost$ T | NumCards$ 2 | SpellDescription$Draw two cards, then discard three cards. | SubAbility$ YouDiscard/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bazaar_of_baghdad.jpg
 End
