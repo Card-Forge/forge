@@ -232,7 +232,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 	};
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(source).append(" - tap all lands ");
-                	sb.append(tisLand.getController()).append("controls.");
+                	sb.append(tisLand.getController()).append(" controls.");
                 	ability.setStackDescription(sb.toString());
                 	
                 	AllZone.Stack.add(ability);
