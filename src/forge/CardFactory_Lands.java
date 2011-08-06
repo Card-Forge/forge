@@ -1847,7 +1847,8 @@ class CardFactory_Lands {
             
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        /*
+        //*************** START *********** START **************************
         else if(cardName.equals("Deserted Temple")) {
             final Ability_Tap ability = new Ability_Tap(card, "1") {
 
@@ -1901,6 +1902,7 @@ class CardFactory_Lands {
             ability.setBeforePayMana(runtime);
             
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Academy Ruins")) {

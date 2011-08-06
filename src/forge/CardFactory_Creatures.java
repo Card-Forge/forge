@@ -17888,12 +17888,12 @@ public class CardFactory_Creatures {
         	card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END ************************** 
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Filigree Sages")) {
         	/*
         	 * 2U: Untap target artifact.
-        	 */
+        	 *
         	final SpellAbility ability = new Ability(card, "2 U") {
         		@Override
         		public boolean canPlayAI() {
@@ -17930,6 +17930,7 @@ public class CardFactory_Creatures {
         	ability.setStackDescription(cardName + " - Untap Target Artifact");
         	ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Artifact"));
         }//*************** END ************ END ************************** 
+    	*/
         
         
         //*************** START *********** START **************************

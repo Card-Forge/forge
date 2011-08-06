@@ -3,6 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
+K:abUntapTgt 1 T:Land:Untap target land.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deserted_temple.jpg
 End

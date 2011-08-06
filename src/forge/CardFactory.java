@@ -8164,7 +8164,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Earthcraft")) {
             final SpellAbility a1 = new Ability(card, "0") {
@@ -8404,7 +8404,7 @@ public class CardFactory implements NewConstants {
             a3.setStackDescription(card + " - add 30 Squirrel tokens using Squirrel Nest");
             
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Mox Diamond")) {
