@@ -39,7 +39,7 @@ public class Input_PayManaCostUtil
     }
     {
     	AllZone.GameAction.playSpellAbility(chosen);
-    	manaCost = AllZone.ManaPool.subtarctMana(manaCost, chosen);
+    	manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
     	AllZone.Human_Play.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
 		return manaCost;	
     }
