@@ -1,0 +1,8 @@
+Name:True Conviction
+ManaCost:3 W W W
+Types:Enchantment
+Text:no text
+K:StaticEffect:Play:Permanents you Control:Keyword/Lifelink:Type.Creature:Creatures you control have lifelink.
+K:StaticEffect:Play:Permanents you Control:Keyword/Double Strike:Type.Creature:Creatures you control have double strike.
+K:SVar:Rarity:Rare
+End
