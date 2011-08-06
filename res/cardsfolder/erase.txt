@@ -1,8 +1,8 @@
 Name:Erase
 ManaCost:W
 Types:Instant
-Text:Exile target enchantment.
-K:spBounceTgt:Enchantment:Exile
+Text:no text
+A:SP$Bounce|Cost$W|ValidTgts$Enchantment|TgtPrompt$Select target enchantment|Destination$Exile|SpellDescription$Exile target enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erase.jpg
 End

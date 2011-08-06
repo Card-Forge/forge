@@ -1,8 +1,8 @@
 Name:Disempower
 ManaCost:1 W
 Types:Instant
-Text:Put target artifact or enchantment on top of its owner's library.
-K:spBounceTgt:Artifact,Enchantment:TopofLibrary
+Text:no text
+A:SP$Bounce|Cost$1 W|ValidTgts$Artifact,Enchantment|TgtPrompt$Select target artifact or enchantment|Destination$TopofLibrary|SpellDescription$Put target artifact or enchantment on top of its owner's library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disempower.jpg
 End

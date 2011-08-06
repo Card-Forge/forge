@@ -1,8 +1,8 @@
 Name:Disperse
 ManaCost:1 U
 Types:Instant
-Text:Return target nonland permanent to its owner's hand.
-K:spBounceTgt:Permanent.nonLand:Hand
+Text:no text
+A:SP$Bounce|Cost$1 U|ValidTgts$Permanent.nonLand|TgtPrompt$Select target nonland permanent|Destination$Hand|SpellDescription$Return target nonland permanent to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disperse.jpg
 End
