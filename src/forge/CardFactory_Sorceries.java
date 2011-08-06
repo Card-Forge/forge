@@ -1938,38 +1938,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
    
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Reminisce")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 505983020365091226L;
-                
-                @Override
-                public void resolve() {
-                    Player player = getTargetPlayer();
-                    // Move graveyard into library
-                    CardList grave = AllZoneUtil.getPlayerGraveyard(player);
-                    
-                    for(Card c : grave){
-                    	AllZone.GameAction.moveToLibrary(c);
-                    }
-
-                    // Shuffle library
-                    player.shuffle();;
-                }
-                
-                @Override
-                public boolean canPlayAI()//97% of the time shuffling your grave into your library is a good thing
-                {						 // ^--- over 2/3rd of the statistics in the world are made up
-                    setTargetPlayer(AllZone.ComputerPlayer);
-                    return true;
-                }
-                
-            };//SpellAbility
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
+      
 
         //*************** START *********** START **************************
         else if(cardName.equals("Sleight of Hand")) {
