@@ -10140,8 +10140,8 @@ public class GameActionUtil {
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(1);
-					c.addSemiPermanentDefenseBoost(2);
+					c.addSemiPermanentAttackBoost(2);
+					c.addSemiPermanentDefenseBoost(1);
 
 					gloriousAnthemList.add(c);
 				}// for inner

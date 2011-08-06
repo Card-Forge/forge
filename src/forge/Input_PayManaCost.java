@@ -24,6 +24,11 @@ public class Input_PayManaCost extends Input {
             
         spell = sa;
         
+        if (sa.getSourceCard().getName().equals("Rhys the Redeemed")) {
+        	System.out.println("Rhys!");
+        	
+        }
+        
         if(Phase.GameBegins == 1)  {
         	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 if(spell.getAfterPayMana() != null) stopSetNext(spell.getAfterPayMana());
@@ -34,6 +39,10 @@ public class Input_PayManaCost extends Input {
         	} else {
         		manaCost = AllZone.GameAction.GetSpellCostChange(sa); 
         	}    	
+        }
+        else
+        {
+        	manaCost = new ManaCost(sa.getManaCost());
         }
     }
    
