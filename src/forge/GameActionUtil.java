@@ -27,6 +27,7 @@ public class GameActionUtil {
         upkeep_Honden_of_Infinite_Rage();
         upkeep_Land_Tax();
         upkeep_Greener_Pastures();
+        upkeep_Wort();
         upkeep_Squee();
         upkeep_Sporesower_Thallid();
         upkeep_Dragonmaster_Outcast();
@@ -48,7 +49,6 @@ public class GameActionUtil {
         upkeep_Reya();
         upkeep_Emeria();
         upkeep_Oversold_Cemetery();
-        upkeep_Wort();
         upkeep_Nether_Spirit();
         upkeep_Nettletooth_Djinn();
         upkeep_Fledgling_Djinn();

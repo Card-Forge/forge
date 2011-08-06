@@ -1923,16 +1923,26 @@ class CardFactory_Planeswalkers {
             final SpellAbility ability1 = new Ability(card2, "0") {
                 @Override
                 public void resolve() {
-                    card2.addCounterFromNonEffect(Counters.LOYALTY, 1);
-                    turn[0] = AllZone.Phase.getTurn();
-                    
-                    Card c = getTargetCard();
-                    c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
+                	Card c = getTargetCard();
+                	if (c != null) 
+                	{		
+	                    card2.addCounterFromNonEffect(Counters.LOYALTY, 1);
+	                    turn[0] = AllZone.Phase.getTurn();
+	                    c.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
+                	}
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    return card2.getCounters(Counters.LOYALTY) < 8;
+                	CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                	list = list.filter(new CardListFilter()
+                	{
+                		public boolean addCard(Card c)
+                		{
+                			return CardFactoryUtil.canTarget(card2, c);
+                		}
+                	});
+                    return card2.getCounters(Counters.LOYALTY) < 8 && list.size() > 0;
                 }
                 
                 @Override

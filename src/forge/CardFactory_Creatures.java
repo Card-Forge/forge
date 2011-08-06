@@ -4,6 +4,7 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -1079,6 +1080,7 @@ public class CardFactory_Creatures {
                     CardList list = new CardList(library.getCards());
                     CardList swamp = list.getType("Swamp");
                     
+                    /*
                     for(int i = 0; i < 2 && (!swamp.isEmpty()); i++) {
                         Card c = swamp.get(0);
                         swamp.remove(c);
@@ -1087,6 +1089,18 @@ public class CardFactory_Creatures {
                         play.add(c);
                         c.tap();
                     }
+                    */
+                    
+                    List<Card> selection = AllZone.Display.getChoices("Select up to two swamps", swamp.toArray());
+                    
+                    for(int i = 0; i < selection.size(); i++) {
+                        Card c = selection.get(i);
+                        
+                        library.remove(c);
+                        play.add(c);
+                        c.tap();
+                    }
+                    
                     for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
                         Command com = GameActionUtil.commands.get(effect);
                         com.execute();
@@ -12185,8 +12199,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void showMessage() {
-                    CardList saps = new CardList(
-                            AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+                    CardList saps = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
                     saps = saps.getType("Saproling");
                     
                     stopSetNext(CardFactoryUtil.input_targetSpecific(a2, saps, "Select a Saproling to sacrifice.",
@@ -12194,11 +12207,61 @@ public class CardFactory_Creatures {
                 }
             };
             
+            final int[] numCreatures = new int[1];
             final Ability a3 = new Ability(card,"0")
             {
             	public void resolve()
             	{
-            		
+            		CardList creats = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+            		creats = creats.getType("Saproling");
+                    
+            		List<Card> selection = AllZone.Display.getChoices("Select Saprolings to sacrifice", creats.toArray());
+                    
+                    numCreatures[0] = selection.size();
+                    for(int m = 0; m < selection.size(); m++) {
+                        AllZone.GameAction.sacrifice(selection.get(m));
+                    }
+                    
+                    final Command eot1 = new Command() {
+                        
+						private static final long serialVersionUID = 5732420491509961333L;
+
+						public void execute() {
+                            CardList saps = new CardList();
+                            saps.addAll(AllZone.Human_Play.getCards());
+                            saps.addAll(AllZone.Computer_Play.getCards());
+                            
+                            saps = saps.getType("Saproling");
+                            
+                            for(int i = 0; i < saps.size(); i++) {
+                                Card sap = saps.get(i);
+                                
+                                sap.addTempAttackBoost(-numCreatures[0]);
+                                sap.addTempDefenseBoost(-numCreatures[0]);
+                            }
+                            
+                        }
+                    };
+                    
+                    CardList saps = new CardList();
+                    saps.addAll(AllZone.Human_Play.getCards());
+                    saps.addAll(AllZone.Computer_Play.getCards());
+                    
+                    saps = saps.getType("Saproling");
+                    for(int i = 0; i < saps.size(); i++) {
+                        Card sap = saps.get(i);
+                        
+                        sap.addTempAttackBoost(numCreatures[0]);
+                        sap.addTempDefenseBoost(numCreatures[0]);
+                    }
+                    
+                    AllZone.EndOfTurn.addUntil(eot1);
+                    
+            	}
+            	
+            	public boolean canPlayAI()
+            	{
+            		return false;
             	}
             };
             a1.setDescription("2G: Put a 1/1 green Saproling creature token into play.");
@@ -12209,12 +12272,13 @@ public class CardFactory_Creatures {
             card.addSpellAbility(a2);
             a2.setDescription("Sacrifice a Saproling: Saproling creatures get +1/+1 until end of turn");
             a2.setStackDescription("Saprolings get +1/+1 until end of turn.");
+            a2.setBeforePayMana(runtime);
             
             card.addSpellAbility(a3);
             a3.setDescription("(Alternate way of sacrificing multiple creatures).");
             a3.setStackDescription("Saprolings get +X/+X until end of turn.");
             
-            a2.setBeforePayMana(runtime);
+            
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************

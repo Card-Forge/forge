@@ -2888,7 +2888,7 @@ public class CardFactory implements NewConstants {
                         //System.out.println("Creats size: " + creats.size());
                         
                         if(card.getController().equals(Constant.Player.Human)) {
-                            List<Card> selection = AllZone.Display.getChoices("Select creature to sacrifice", creats.toArray());
+                            List<Card> selection = AllZone.Display.getChoices("Select creatures to sacrifice", creats.toArray());
                             
                             numCreatures[0] = selection.size();
                             for(int m = 0; m < selection.size(); m++) {
@@ -9131,7 +9131,12 @@ public class CardFactory implements NewConstants {
                 
                 public void computerResolve() {
                     CardList all = new CardList(AllZone.Human_Library.getCards());
-                    all = all.getType("Creature");
+                    all = all.filter(new CardListFilter(){
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isCreature() && !c.getName().equals("Ball Lightning");
+                    	}
+                    });
                     
                     CardList flying = all.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
