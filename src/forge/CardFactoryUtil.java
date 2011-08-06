@@ -1449,6 +1449,119 @@ public class CardFactoryUtil
 	return onUnEquip;
   }//vanila_unequip()
 
+  public static Command vanishing(final Card sourceCard, final int Power)
+  {
+	   Command age = new Command()
+	   {
+	    private static final long serialVersionUID = 431920157968451817L;
+		public boolean firstTime = true;
+        public void execute()
+        {
+
+          //testAndSet - only needed when comes into play.
+          if(firstTime){
+        	  sourceCard.setCounter(Counters.AGE, Power); 
+          }
+          firstTime = false;
+        }
+	   };
+	   return age;
+  }  // vanishing
+  
+  public static SpellAbility vanish_desc(final Card sourceCard, final int power)
+  {
+    final SpellAbility desc = new Ability_Hand(sourceCard, "0")
+    {
+	  private static final long serialVersionUID = -4960704261761785512L;
+
+	  public boolean canPlay() {return false;}
+	  
+      public void resolve()
+      {
+      }
+    }; 
+    // Be carefull changing this description cause it's crucial for ability to work (see GameActionUtil - vanishing for it)
+    desc.setDescription("Vanishing " + power + " (This permanent enters the battlefield with " +power+ " time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)");
+    return desc;
+  }//vanish_desc()
+  
+  public static Command ability_Soulshift(final Card sourceCard, final String Manacost)
+  {
+	  final Command Soulshift = new Command()
+    {
+	  private static final long serialVersionUID = -4960704261761785512L;
+	  
+      public void execute()
+      {
+    	  PlayerZone lib = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
+          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, sourceCard.getController());
+                 
+    	  
+          CardList cards = new CardList(lib.getCards());
+          CardList sameCost = new CardList();
+          int Cost = CardUtil.getConvertedManaCost(Manacost);
+          for (int i=0;i<cards.size();i++)
+          {
+        	  if( (CardUtil.getConvertedManaCost(cards.get(i).getManaCost()) <= Cost) && (cards.get(i).getType().contains("Spirit") || cards.get(i).getType().contains("Changeling")) )  
+        	  {
+        		  sameCost.add(cards.get(i));
+        	  }
+          }
+
+          
+          if(sameCost.size() == 0)
+            return;
+
+          if (sourceCard.getController().equals(Constant.Player.Human)) {
+        	 String[] choices =
+             { "Yes", "No" };
+             Object choice = AllZone.Display.getChoice(
+                   sourceCard + " - Soulshift "+ Cost  + "?", choices);
+              if (choice.equals("Yes")) {
+            Object o = AllZone.Display.getChoiceOptional("Select a card", sameCost.toArray()); 
+            if(o != null)
+            {
+              //ability.setTargetCard((Card)o);
+              //AllZone.Stack.add(ability);
+          
+              Card c1 = (Card)o;
+              lib.remove(c1);
+              hand.add(c1);
+                         
+                           
+            }}}
+            else          //Wiser choice should be here
+            {
+            	Card choice = null;
+            	sameCost.shuffle();
+            	choice = sameCost.getCard(0);
+            	if (!(choice == null)) { 
+            	lib.remove(choice);
+                hand.add(choice);}
+            }
+          }
+      
+    };
+
+    return Soulshift;
+  }//ability_Soulshift()
+
+  public static SpellAbility soul_desc(final Card sourceCard, final String Manacost)
+  {
+    final SpellAbility desc = new Ability_Hand(sourceCard, "0")
+    {
+	  private static final long serialVersionUID = -4960704261761785512L;
+
+	  public boolean canPlay() {return false;}
+	  
+      public void resolve()
+      {
+      }
+    };
+    desc.setDescription("Soulshift "  + Manacost +" - When this permanent is put into a graveyard from play, you may return target Spirit card with converted mana cost " + Manacost + "or less from your graveyard to your hand.");
+    return desc;
+  }//soul_desc()
+
   
   //CardList choices are the only cards the user can successful select
   public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, final boolean targeted)

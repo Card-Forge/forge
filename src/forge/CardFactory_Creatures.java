@@ -33,6 +33,25 @@ public class CardFactory_Creatures {
 		return -1;
 	}
 
+	public static int shouldSoulshift(Card c) {
+		ArrayList<String> a = c.getKeyword();
+		for (int i = 0; i < a.size(); i++)
+			if (a.get(i).toString().startsWith("Soulshift"))
+				return i;
+
+		return -1;
+	}
+
+	public static int shouldVanish(Card c) {
+		ArrayList<String> a = c.getKeyword();
+		for (int i = 0; i < a.size(); i++)
+			if (a.get(i).toString().startsWith("Vanishing"))
+				return i;
+
+		return -1;
+	}
+
+	
 	public static Card getCard(final Card card, String cardName, String owner, CardFactory cf)
 	{
 			    
@@ -18701,6 +18720,37 @@ public class CardFactory_Creatures {
 	          card.addSpellAbility(CardFactoryUtil.ability_transmute(card, manacost));
 	        }
 	      }//Transmute
+
+	      while (shouldSoulshift(card) != -1)
+	      {
+	        int n = shouldSoulshift(card);
+	        if (n != -1)
+	        {
+	          String parse = card.getKeyword().get(n).toString();
+	          card.removeIntrinsicKeyword(parse);
+	
+	          String k[] = parse.split(":");
+	          final String manacost = k[1];
+	          card.addSpellAbility(CardFactoryUtil.soul_desc(card, manacost));
+	          card.addDestroyCommand(CardFactoryUtil.ability_Soulshift(card, manacost));
+	        }
+	      }//Soulshift
+
+	      if (shouldVanish(card) != -1)
+	      {
+	        int n = shouldVanish(card);
+	        if (n != -1)
+	        {
+	          String parse = card.getKeyword().get(n).toString();
+	          card.removeIntrinsicKeyword(parse);
+	
+	          String k[] = parse.split(":");	          
+	          final int power = Integer.parseInt(k[1]);
+	
+	          card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
+	          card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
+	        }
+	      }//Vanishing
 	      
 		 return card;
 	}

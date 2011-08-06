@@ -1,8 +1,21 @@
 package forge;
+
+import java.util.ArrayList;
+
 class CardFactory_Auras {
+	
+	public static int shouldVanish(Card c) {
+		ArrayList<String> a = c.getKeyword();
+		for (int i = 0; i < a.size(); i++)
+			if (a.get(i).toString().startsWith("Vanishing"))
+				return i;
+
+		return -1;
+	}
 	public static Card getCard(final Card card, String cardName, String owner)
 	{
 	
+		
 		//*************** START *********** START **************************
 		if(cardName.equals("Epic Proportions"))
 		{
@@ -5771,7 +5784,23 @@ class CardFactory_Auras {
 
 	      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
 	    }//*************** END ************ END **************************
-		
-	    return card;
+		 
+		if (shouldVanish(card) != -1)
+	      {
+	        int n = shouldVanish(card);
+	        if (n != -1)
+	        {
+	          String parse = card.getKeyword().get(n).toString();
+	          card.removeIntrinsicKeyword(parse);
+	
+	          String k[] = parse.split(":");	          
+	          final int power = Integer.parseInt(k[1]);
+	
+	          card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
+	          card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
+	        }
+	      }//Vanishing		
+	    
+		return card;
 	}
 }

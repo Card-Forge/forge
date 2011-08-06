@@ -17777,6 +17777,41 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
       }
     }//transmute
 
+    while (hasKeyword(card,"Soulshift") != -1)
+    {
+      int n = hasKeyword(card,"Soulshift");
+      if (n != -1)
+      {
+        String parse = card.getKeyword().get(n).toString();
+        card.removeIntrinsicKeyword(parse);
+
+        String k[] = parse.split(":");
+        final String manacost = k[1];
+        
+
+        card.addSpellAbility(CardFactoryUtil.soul_desc(card, manacost));
+        card.addDestroyCommand(CardFactoryUtil.ability_Soulshift(card, manacost));
+      }
+    }//Soulshift
+    
+    if (hasKeyword(card,"Vanishing") != -1)
+    {
+      int n = hasKeyword(card,"Vanishing");
+      if (n != -1)
+      {
+        String parse = card.getKeyword().get(n).toString();
+        card.removeIntrinsicKeyword(parse);
+
+        String k[] = parse.split(":");
+        final int power = Integer.parseInt(k[1]);
+        
+
+        card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
+        card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
+      }
+    }//Vanishing
+
+    
     return card;
   }//getCard2
 	   

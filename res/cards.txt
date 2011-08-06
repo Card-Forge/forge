@@ -1,3 +1,110 @@
+Thief of Hope
+2 B
+Creature Spirit
+Whenever you play a Spirit or Arcane spell, target opponent loses 1 life and you gain 1 life.
+2/2
+Soulshift:2
+
+Venerable Kumo
+4 G
+Creature Spirit
+no text
+2/3
+Reach
+Soulshift:4
+
+Thousand-legged Kami
+6 G G
+Creature Spirit
+no text
+6/6
+Soulshift:7
+
+Nightsoil Kami
+4 G G
+Creature Spirit
+no text
+6/4
+Soulshift:5
+
+Kami of the Palace Fields
+5 W
+Creature Spirit
+no text
+3/2
+Flying
+First Strike
+Soulshift:5
+
+Kami of Lunacy
+4 B B
+Creature Spirit
+no text
+4/1
+Flying
+Soulshift:5
+
+Kami of Empty Graves
+3 B
+Creature Spirit
+no text
+4/1
+Soulshift:3
+
+Gibbering Kami
+3 B
+Creature Spirit
+no text
+2/2
+Flying
+Soulshift:3
+
+Forked-Branch Garami
+3 G G
+Creature Spirit
+no text
+4/4
+Soulshift:4
+Soulshift:4
+
+Crawling Filth
+5 B
+Creature Spirit
+no text
+2/2
+Fear
+Soulshift:5
+
+Body of Jukai
+7 G G
+Creature Spirit
+no text
+8/5
+Trample
+Soulshift:8
+
+Promised Kannushi
+G
+Creature Human Druid
+no text
+1/1
+Soulshift:7
+
+Torii Watchward
+4 W
+Creature Spirit
+no text
+3/3
+Vigilance
+Soulshift:4
+
+Waning Wurm
+3 B
+Creature Zombie Wurm
+no text
+7/6
+Vanishing:2
+
 Time Stretch
 8 U U
 Sorcery
@@ -13742,13 +13849,6 @@ Legendary Creature Angel
 Radiant, Archangel gets +1/+1 for each creature with flying in play.
 2/2
 Flying
-Vigilance
-
-Torii Watchward
-4 W
-Creature Spirit
-(NOTE: "Soulshift" not implemented.)
-3/3
 Vigilance
 
 Veteran Armorer

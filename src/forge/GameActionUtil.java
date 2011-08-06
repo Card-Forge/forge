@@ -64,6 +64,7 @@ public class GameActionUtil
 		upkeep_Defense_of_the_Heart();
 		upkeep_Mycoloth();
 		upkeep_Spore_Counters();
+		upkeep_Vanishing();
 		upkeep_Aven_Riftwatcher();
 		upkeep_Calciderm();
 		upkeep_Blastoderm();
@@ -93,6 +94,7 @@ public class GameActionUtil
 		playCard_Dovescape(c); //keep this one top
 		playCard_Demigod_of_Revenge(c);
 		playCard_Halcyon_Glaze(c);
+		playCard_Thief_of_Hope(c);
 		playCard_Infernal_Kirin(c);
 		playCard_Cloudhoof_Kirin(c);
 		playCard_Bounteous_Kirin(c);
@@ -662,6 +664,59 @@ public class GameActionUtil
 			}					
 
 	}//Halcyon Glaze
+	
+	public static void playCard_Thief_of_Hope(Card c)
+	{
+		final String controller = c.getController();
+			
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play,
+				controller);
+		
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.getName("Thief of Hope");
+
+		if (list.size() > 0){
+			if (c.getType().contains("Spirit") || c.getType().contains("Arcane") || c.getIntrinsicKeyword().contains("Changeling"))
+			{
+					for (int i=0;i<list.size();i++)
+					{
+						final Card card = list.get(i);			
+						Ability ability2 = new Ability(card, "0")
+						{
+							public void resolve()
+							{
+						 final String target;
+						if (card.getController().contains("Human"))
+						{
+				               String[] choices =
+				               { "Opponent", "Yourself" };
+				               Object choice = AllZone.Display.getChoice(
+				                     "Choose target player", choices);
+				               if (choice.equals("Opponent"))
+				               {
+				            	   target = "Computer";    // check for target of spell/abilities should be here
+				               }// if choice yes
+				               else target = "Human";     // check for target of spell/abilities should be here
+						}
+						else target = "Human";            // check for target of spell/abilities should be here
+	                    AllZone.GameAction.getPlayerLife(target).subtractLife(1);
+	                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
+	                     life.addLife(1);
+						
+							} //resolve
+						};   //ability
+						ability2.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+					    ability2.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability2));
+						ability2.setStackDescription(card.getName() + " - "
+								+ c.getController() + " played a Spirit or Arcane spell,  target opponent loses 1 life and you gain 1 life.");
+						AllZone.Stack.add(ability2);
+					}
+				}//if
+			}					
+
+	}//Thief of Hope
 	
 	public static void playCard_Infernal_Kirin(Card c)
 	{
@@ -5637,6 +5692,39 @@ public class GameActionUtil
 		}
 	}
 
+	private static void upkeep_Vanishing()
+	{	
+		final String player = AllZone.Phase.getActivePlayer();
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
+		CardList list = new CardList(playZone.getCards());
+		list = list.filter(new CardListFilter()
+    	  {     			
+				public boolean addCard(Card c) {
+					SpellAbility[] sas = c.getSpellAbility();
+					 boolean hasRegen = false;
+					for (SpellAbility sa : sas)
+	                  {
+	                     if(sa.toString().contains("At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)")) //this is essentially ".getDescription()"
+	                     hasRegen = true;
+	                  }
+					return hasRegen;
+				}
+        	  });
+		if (list.size() > 0)
+		{
+			for (int i = 0; i < list.size(); i++)
+			{
+				Card card = list.get(i);
+				card.setCounter(Counters.AGE,
+						card.getCounters(Counters.AGE) - 1);
+				if (card.getCounters(Counters.AGE) <= 0)
+				{
+					AllZone.GameAction.sacrifice(card);
+				}
+			}
+		}
+	}
+	
 	private static void upkeep_Aven_Riftwatcher()
 	{
 		// get all Aven Riftwatcher in play under the control of this player
