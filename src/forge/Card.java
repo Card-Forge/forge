@@ -1922,7 +1922,7 @@ public class Card extends MyObservable {
     
     
     public boolean isPermanent() {
-        return !(isInstant() || isSorcery());
+        return !(isInstant() || isSorcery() || isImmutable());
     }
     
     public boolean isCreature() {
