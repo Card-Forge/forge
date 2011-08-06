@@ -4,7 +4,6 @@ Types:Creature Elf Shaman
 Text:no text
 PT:2/4
 K:All creatures able to block CARDNAME do so.
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_bard.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/66.jpg
