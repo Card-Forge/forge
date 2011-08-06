@@ -1,5 +1,5 @@
 Name:Fog Bank
-ManaCost:2 B
+ManaCost:1 U
 Types:Creature Wall
 Text:no text
 PT:0/2
