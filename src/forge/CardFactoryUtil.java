@@ -2864,7 +2864,7 @@ public class CardFactoryUtil {
                 kw = list.get(i);
                 if(kw.equals("Shroud")) return false;
                 
-                if(kw.equals("This card can't be the target of spells or abilities your opponents control.")) {
+                if(kw.equals("CARDNAME can't be the target of spells or abilities your opponents control.")) {
                     if(!spell.getController().equals(target.getController())) return false;
                 }
                 

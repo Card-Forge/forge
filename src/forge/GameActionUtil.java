@@ -13416,7 +13416,7 @@ public class GameActionUtil {
 
 			for(int i = 0; i < cList.size(); i++) {
 				c = cList.get(i);
-				c.removeExtrinsicKeyword("This card can't be the target of spells or abilities your opponents control.");
+				c.removeExtrinsicKeyword("CARDNAME can't be the target of spells or abilities your opponents control.");
 			}
 			cList.clear();
 			PlayerZone[] zone = getZone("Privileged Position");
@@ -13432,8 +13432,8 @@ public class GameActionUtil {
 							&& !c.getName().equals(
 									"Privileged Position")
 									&& !c.getExtrinsicKeyword().contains(
-									"This card can't be the target of spells or abilities your opponents control.")) {
-						c.addExtrinsicKeyword("This card can't be the target of spells or abilities your opponents control.");
+									"CARDNAME can't be the target of spells or abilities your opponents control.")) {
+						c.addExtrinsicKeyword("CARDNAME can't be the target of spells or abilities your opponents control.");
 						gloriousAnthemList.add(c);
 					}
 
@@ -13469,7 +13469,7 @@ public class GameActionUtil {
 			for(int i = 0; i < pp.size(); i++) {
 				Card c = pp.get(i);
 				otherPPs = countOtherPPs(c);
-				if(otherPPs > 0) c.addExtrinsicKeyword("This card can't be the target of spells or abilities your opponents control.");
+				if(otherPPs > 0) c.addExtrinsicKeyword("CARDNAME can't be the target of spells or abilities your opponents control.");
 				//else if
 			}// for inner
 		}// execute()

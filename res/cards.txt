@@ -1,3 +1,69 @@
+Drove of Elves
+3 G
+Creature Elf
+Drove of Elves's power and toughness are each equal to the number of green permanents you control.
+1/1
+CARDNAME can't be the target of spells or abilities your opponents control.
+
+Plated Slagwurm
+4 G G G
+Creature Wurm
+no text
+8/8
+CARDNAME can't be the target of spells or abilities your opponents control.
+
+Shielding Plax
+2 GU
+Enchantment Aura
+Enchanted creature can't be the target of spells or abilities your opponents control.
+Enchant creature
+enPump:CARDNAME can't be the target of spells or abilities your opponents control.
+When CARDNAME enters the battlefield, draw a card.
+
+Silhana Ledgewalker
+1 G
+Creature Elf Rogue
+no text
+1/1
+CARDNAME can't be blocked except by creatures with flying.
+CARDNAME can't be the target of spells or abilities your opponents control.
+
+Slippery Bogle
+UG
+Creature Beast
+no text
+1/1
+CARDNAME can't be the target of spells or abilities your opponents control.
+
+Taoist Hermit
+2 G
+Creature Human Mystic
+no text
+2/2
+CARDNAME can't be the target of spells or abilities your opponents control.
+
+Troll Ascetic
+1 G G
+Creature Troll Shaman
+no text
+3/2
+RegenerateMe:1 G
+CARDNAME can't be the target of spells or abilities your opponents control.
+
+Uril, the Miststalker
+2 R G W
+Legendary Creature Beast
+Uril gets +2/+2 for each Aura attached to it.
+5/5
+CARDNAME can't be the target of spells or abilities your opponents control.
+
+Zuo Ci, the Mocking Sage
+1 G G
+Legendary Creature Human Advisor
+Zuo Ci, the Mocking Sage can't be blocked by creatures with horsemanship.
+1/2
+CARDNAME can't be the target of spells or abilities your opponents control.
+
 Avatar of Might
 6 G G
 Creature Avatar
@@ -816,14 +882,6 @@ Angelsong
 Instant
 no text
 Cycling:2
-
-Silhana Ledgewalker
-1 G
-Creature Elf Rogue
-no text
-1/1
-CARDNAME can't be blocked except by creatures with flying.
-This card can't be the target of spells or abilities your opponents control.
 
 Treetop Bracers
 1 G
@@ -2669,14 +2727,6 @@ Enchantment Aura
 Enchanted creature gets +1/+1.
 Enchant creature
 enPump:+1/+1
-When CARDNAME enters the battlefield, draw a card.
-
-Shielding Plax
-2 GU
-Enchantment Aura
-Enchanted creature can't be the target of spells or abilities your opponents control.
-Enchant creature
-enPump:This card can't be the target of spells or abilities your opponents control.
 When CARDNAME enters the battlefield, draw a card.
 
 Striped Bears
@@ -6608,13 +6658,6 @@ Instant Arcane
 no text
 spDamageTgtC:1:Drawback$DamageTgt/1:First Volley deals 1 damage to target creature and 1 damage to that creature's controller.:First Volley - deals 1 damage to creature and 1 damage to its controller.
 
-Drove of Elves
-3 G
-Creature Elf
-Drove of Elves's power and toughness are each equal to the number of green permanents you control.
-1/1
-This card can't be the target of spells or abilities your opponents control.
-
 Faerie Swarm
 3 U
 Creature Faerie
@@ -8795,13 +8838,6 @@ Creature Elephant Soldier
 Loxodon Punisher gets +2/+2 for each Equipment attached to it.
 2/2
 
-Uril, the Miststalker
-2 R G W
-Legendary Creature Beast
-Uril gets +2/+2 for each Aura attached to it.
-5/5
-This card can't be the target of spells or abilities your opponents control.
-
 Rabid Wombat
 2 G G
 Creature Wombat
@@ -9538,13 +9574,6 @@ no text
 spDamageTgtP:3
 Cycling:2
 
-Slippery Bogle
-UG
-Creature Beast
-no text
-1/1
-This card can't be the target of spells or abilities your opponents control.
-
 Barbarian General
 4 R
 Creature Human Barbarian Soldier
@@ -9965,35 +9994,6 @@ Privileged Position
 2 GW GW GW
 Enchantment
 Other permanents you control can't be the targets of spells or abilities your opponents control.
-
-Plated Slagwurm
-4 G G G
-Creature Wurm
-no text
-8/8
-This card can't be the target of spells or abilities your opponents control.
-
-Troll Ascetic
-1 G G
-Creature Troll Shaman
-no text
-3/2
-RegenerateMe:1 G
-This card can't be the target of spells or abilities your opponents control.
-
-Zuo Ci, the Mocking Sage
-1 G G
-Legendary Creature Human Advisor
-Zuo Ci, the Mocking Sage can't be blocked by creatures with horsemanship.
-1/2
-This card can't be the target of spells or abilities your opponents control.
-
-Taoist Hermit
-2 G
-Creature Human Mystic
-no text
-2/2
-This card can't be the target of spells or abilities your opponents control.
 
 Taoist Mystic
 2 G
