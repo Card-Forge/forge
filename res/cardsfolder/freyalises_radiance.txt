@@ -1,5 +1,5 @@
 Name:Freyalise's Radiance
-ManaCost:3 U
+ManaCost:1 G
 Types:Enchantment
 Text:Snow permanents don't untap during their controllers' untap steps.
 K:Permanents don't untap during their controllers' untap steps:Snow
