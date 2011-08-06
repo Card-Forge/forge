@@ -5,7 +5,9 @@ public class Input_Main extends Input
 {
 	private static final long serialVersionUID = -2162856359060870957L;
 	//Input_Draw changes this
-    public static boolean canPlayLand;
+    //public static boolean canPlayLand;
+	public static boolean firstLandHasBeenPlayed;
+	public static int canPlayNumberOfLands;
 
     public void showMessage()
     {
@@ -18,7 +20,6 @@ public class Input_Main extends Input
     }
     public void selectButtonOK()
     {
-    	
     	//AllZone.Phase.nextPhase();
     	//for debugging: System.out.println("need to nextPhase(Input_Main.selectButtonOK) = true");
         AllZone.Phase.setNeedToNextPhase(true);
@@ -28,14 +29,26 @@ public class Input_Main extends Input
 		//these if statements cannot be combined
 		if(card.isLand() && zone.is(Constant.Zone.Hand, Constant.Player.Human))
 		{
-		    if(canPlayLand)
+		    if(canPlayNumberOfLands > 0 )
 		    {
-			InputUtil.playAnyCard(card, zone);
-			canPlayLand = false;
-	                AllZone.GameAction.checkStateEffects();
+		    	CardList fastbonds = CardFactoryUtil.getFastbonds(Constant.Player.Human);
+		    	if (fastbonds.size() > 0){
+		    		if (firstLandHasBeenPlayed)    	
+		    		{
+		    			for ( Card vard : fastbonds)
+		    			{
+		    				AllZone.GameAction.getPlayerLife(Constant.Player.Human).subtractLife(1);
+		    			}
+		    		}
+		    	}
+		    	InputUtil.playAnyCard(card, zone);
+		    	canPlayNumberOfLands--;
+		    	firstLandHasBeenPlayed = true;
+	            AllZone.GameAction.checkStateEffects();
 		    }
 	
 			//TODO: add code for exploration / fastbond here
+		    
 		}
 		else
 		{

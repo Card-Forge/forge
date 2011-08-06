@@ -2,15 +2,15 @@ import java.util.*;
 
 public class ComputerAI_Rats2 implements Computer
 {
-    private boolean playLand = true;
+	private int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
     
     private static Random random = new Random();
         
     public void main1()
     {
-	if(playLand)
+	if(numberPlayLand > 0)
 	{
-	    playLand = false;
+	    numberPlayLand--;
 	    ComputerUtil.playLand();
 	}
 
@@ -25,7 +25,7 @@ public class ComputerAI_Rats2 implements Computer
     }
     public void main2()
     {
-	  playLand = true;
+    	numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
 	  
 	  //AllZone.Phase.nextPhase();
 	  //for debugging: System.out.println("need to nextPhase(ComputerAI_Rats2.main2) = true");
@@ -132,6 +132,12 @@ public class ComputerAI_Rats2 implements Computer
       //for debugging: System.out.println("need to nextPhase(ComputerAI_Rats2.playInstantAndAbilities) = true");
       AllZone.Phase.setNeedToNextPhase(true);
     }
+
+    public void addNumberPlayLands(int n)
+    {
+    	numberPlayLand += n;
+    }
+    
     public void stack_not_empty() 
     {
 	  AllZone.InputControl.resetInput();

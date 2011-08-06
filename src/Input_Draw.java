@@ -22,7 +22,9 @@
         boolean humanSkipsDrawPhase = humanCards.containsName("Necropotence") || humanCards.containsName("Yawgmoth's Bargain");
        
        if(AllZone.Phase.getPhase().equals(Constant.Phase.Draw) && humanSkipsDrawPhase){
-    	   Input_Main.canPlayLand = true;
+    	   //Input_Main.canPlayLand = true;
+    	   Input_Main.canPlayNumberOfLands = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Human);
+    	   Input_Main.firstLandHasBeenPlayed = false;
     	   AllZone.Phase.setNeedToNextPhase(true);
           
        }
@@ -56,7 +58,9 @@
           
           if(AllZone.Phase.getPhase().equals(Constant.Phase.Draw))
           {
-              Input_Main.canPlayLand = true;
+              //Input_Main.canPlayLand = true;
+              Input_Main.canPlayNumberOfLands = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Human);
+              Input_Main.firstLandHasBeenPlayed = false;
              
               //AllZone.Phase.nextPhase();
               //for debugging: System.out.println("need to nextPhase(from Input_Draw on human's draw) = true");

@@ -21,6 +21,21 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 		super.add(o);
 
 		Card c = (Card) o;
+		
+		//cannot use addComesIntoPlayCommand - trigger might be set to false;
+		if (c.getName().equals("Exploration")) {
+			Input_Main.canPlayNumberOfLands++;
+			AllZone.Computer.getComputer().addNumberPlayLands(1);	
+		}
+		else if (c.getName().equals("Azusa, Lost but Seeking")) {
+			Input_Main.canPlayNumberOfLands+=2;
+			AllZone.Computer.getComputer().addNumberPlayLands(2);
+		}
+		else if( c.getName().equals("Fastbond")) {
+			Input_Main.canPlayNumberOfLands+=100;
+			AllZone.Computer.getComputer().addNumberPlayLands(100);
+		}
+		
 		if (trigger)
 		{
 			c.setSickness(true);// summoning sickness
@@ -108,7 +123,23 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 		
 		super.remove(o);
 		
-		Card c = (Card) o;		
+		Card c = (Card) o;
+		
+		//cannot use addLeavesPlayCommand - trigger might be set to false
+		if (c.getName().equals("Exploration")) {
+			Input_Main.canPlayNumberOfLands--;
+			AllZone.Computer.getComputer().addNumberPlayLands(-1);
+		}
+		else if (c.getName().equals("Azusa, Lost but Seeking")) {
+			Input_Main.canPlayNumberOfLands-=2;
+			AllZone.Computer.getComputer().addNumberPlayLands(-2);
+		}
+		else if( c.getName().equals("Fastbond")) {
+			Input_Main.canPlayNumberOfLands-=100;
+			AllZone.Computer.getComputer().addNumberPlayLands(-100);
+		}
+		
+		
 		if (leavesTrigger)
 			c.leavesPlay();
 		

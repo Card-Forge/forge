@@ -11,5 +11,7 @@ public interface Computer
     public void main2();
     public void end_of_turn();//end of Human's turn
     
+    public void addNumberPlayLands(int n);
+    
     public void stack_not_empty();
 }

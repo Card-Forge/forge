@@ -21,6 +21,12 @@ public class ComputerAI_Input extends Input
 	
 	think();
     }//getMessage();
+    
+    public Computer getComputer()
+    {
+    	return computer;
+    }
+    
     private void think()
     {
 	final String phase = AllZone.Phase.getPhase();

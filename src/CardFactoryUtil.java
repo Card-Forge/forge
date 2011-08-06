@@ -2349,8 +2349,38 @@ public class CardFactoryUtil
 	  }
 	  return s;
   }
-  
 
+  public static int getCanPlayNumberOfLands(String player)
+  {
+	  int count = 1;
+	  CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
+	  list = list.filter(new CardListFilter()
+	  {
+		public boolean addCard(Card c) {
+			return c.getName().equals("Exploration") || c.getName().equals("Azusa, Lost but Seeking") || c.getName().equals("Fastbond");
+		}  
+	  });
+	  
+	  for (Card var : list)
+	  {
+		  if (var.getName().equals("Exploration"))
+			  count++;
+		  else if (var.getName().equals("Azusa, Lost but Seeking"))
+			  count = count + 2;
+		  else if (var.getName().equals("Fastbond"))
+			  count = 100;
+	  }
+	  
+	  return count;
+  }
+  
+  public static CardList getFastbonds(String player)
+  {  
+	  CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, player).getCards());
+	  list = list.getName("Fastbond");
+	  return list;
+  }
+  
   //may return null
   static public Card getRandomCard(CardList list)
   {

@@ -5,11 +5,11 @@ import forge.error.ErrorViewer;
 
 
 public class ComputerAI_Burn2 implements Computer {
-    private volatile boolean playLand = true;
+    private volatile int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
     
     public void main1() {
-        if(playLand) {
-            playLand = false;
+        if(numberPlayLand > 0 ) {
+        	numberPlayLand--;
             ComputerUtil.playLand();
             
             Card c[] = AllZone.Computer_Hand.getCards();
@@ -73,15 +73,16 @@ public class ComputerAI_Burn2 implements Computer {
     }//main1()
     
     public void main2() {
-        playLand = true;
+    	numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
         
         //AllZone.Phase.nextPhase();
         //for debugging: System.out.println("need to nextPhase(ComputerAI_Burn2.main2) = true; Note, this is not tested, did it work?");
         AllZone.Phase.setNeedToNextPhase(true);
     }
     
-    public void declare_attackers_before() {
-        AllZone.Phase.setNeedToNextPhase(true);
+    public void declare_attackers_before()
+    {
+    	 AllZone.Phase.setNeedToNextPhase(true);
     }
     
     public void declare_attackers() {
@@ -161,10 +162,15 @@ public class ComputerAI_Burn2 implements Computer {
         for(int i = 0; i < 17; i++)
             library.add(cf.getCard("Mountain", Constant.Player.Computer));
         
-        if(library.size() != 40) throw new RuntimeException(
-                "ComputerAI_Burn : getLibrary() error, library size is " + library.size());
+        if(library.size() != 40)
+            throw new RuntimeException("ComputerAI_Burn : getLibrary() error, library size is " + library.size());
         
         return library.toArray();
+    }
+    
+    public void addNumberPlayLands(int n)
+    {
+    	numberPlayLand += n;
     }
     
     public void stack_not_empty() {

@@ -1,6 +1,8 @@
 public class ComputerAI_Testing implements Computer 
 {
     
+	private int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
+	
     //must shuffle this
     public Card[] getLibrary() {return new Card[] {};}
 
@@ -56,4 +58,9 @@ public class ComputerAI_Testing implements Computer
     	//for debugging: System.out.println("need to nextPhase(ComputerAI_Testing.end_of_turn) = true");
         AllZone.Phase.setNeedToNextPhase(true);
         }
+    
+    public void addNumberPlayLands(int n)
+    {
+    	numberPlayLand += n;
+    }
 }
