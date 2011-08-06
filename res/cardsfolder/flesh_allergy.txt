@@ -7,4 +7,5 @@ SVar:DBLoseLife:DB$LoseLife | Defined$ TargetedController | LifeAmount$ X
 SVar:X:Count$ThisTurnEntered Graveyard from Battlefield Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flesh_allergy.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/62.jpg
 End
