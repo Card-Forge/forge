@@ -13299,7 +13299,7 @@ public class GameActionUtil {
 		}
 	};
 	*/
-	
+	/*
 	public static Command Ikiral_Outrider  = new Command() {
 		private static final long serialVersionUID = 7835884582225439851L;
 
@@ -13362,6 +13362,7 @@ public class GameActionUtil {
 			}
 		}
 	};
+	*/
 	/*
 	public static Command Beastbreaker_of_Bala_Ged  = new Command() {
 		private static final long serialVersionUID = -8692202913296782937L;
@@ -13593,7 +13594,7 @@ public class GameActionUtil {
 		}
 	};
 	*/
-
+	/*
 	public static Command Kargan_Dragonlord		  = new Command() {
 		private static final long serialVersionUID = -1956268937191206962L;
 
@@ -13629,6 +13630,7 @@ public class GameActionUtil {
 			}
 		}
 	};
+	*/
 	/*
 	public static Command Dakkon_Blackblade                      = new Command() {
 
@@ -16032,15 +16034,15 @@ public class GameActionUtil {
 		//commands.put("Heedless_One", Heedless_One);
 		commands.put("Homarid", Homarid);
 		
-		commands.put("Ikiral_Outrider", Ikiral_Outrider);
+		//commands.put("Ikiral_Outrider", Ikiral_Outrider);
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		
 		commands.put("Joiner_Adept", Joiner_Adept);
 		
-		commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
+		//commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
 		//commands.put("Keldon_Warlord", Keldon_Warlord);
 		//commands.put("Kithkin_Rabble", Kithkin_Rabble);
-		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
+		//commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
 		//commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
 		commands.put("Koth_Emblem", Koth_Emblem);
 		
