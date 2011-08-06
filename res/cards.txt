@@ -1,9 +1,101 @@
+Drekavac
+1 B
+Creature Beast
+When Drekavac comes into play, sacrifice it unless you discard a noncreature card.
+3/3
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card111258.jpg
+
+Ley Druid
+2 G
+Creature Human Druid
+no text
+1/1
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ley_druid.jpg
+
+Meekstone
+1
+Artifact
+Creatures with power 3 or greater don't untap during their controllers' untap steps.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/meekstone.jpg
+
+Sustenance
+1 G
+Enchantment
+no text
+abPumpTgt 1 Sac-Land:+1/+1
+SVar:RemAIDeck:True
+
+Skull Catapult
+4
+Artifact
+no text
+abDamageTgtCP 1 T Sac-Creature:2
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_catapult.jpg
+
+Plagued Rusalka
+B
+Creature Spirit
+no text
+1/1
+abPumpTgt B Sac-Creature:-1/-1
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/plagued_rusalka.jpg
+
+Phyrexian Plaguelord
+3 B B
+Creature Carrier
+no text
+4/4
+abPumpTgt T Sac-CARDNAME:-4/-4
+abPumpTgt 0 Sac-Creature:-1/-1
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_plaguelord.jpg
+
+Goblin Bombardment
+1 R
+Enchantment
+no text
+abDamageTgtCP 0 Sac-Creature:1
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_bombardment.jpg
+
+Blood Rites
+3 R R
+Enchantment
+no text
+abDamageTgtCP 1 R Sac-Creature:2
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_rites.jpg
+
+Blasting Station
+3
+Artifact
+no text
+abDamageTgtCP T Sac-Creature:1
+WheneverKeyword:EntersBattleField:Type/Creature:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever a creature enters the battlefield, you may untap Blasting Station.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blasting_station.jpg
+
 Overgrown Battlement
 1 G
 Creature Wall
 no text
 0/4
 Defender
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 
 Smokespew Invoker
@@ -12,6 +104,7 @@ Creature Zombie Mutant
 no text
 3/1
 abPumpTgt 7 B:-3/-3
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 
 Elvish Vanguard
@@ -1765,12 +1858,6 @@ G
 Enchantment
 no text
 abPumpTgt 0 Sac-CARDNAME:+3/+3
-
-Sustenance
-1 G
-Enchantment
-no text
-abPumpTgt 1 Sac-Land:+1/+1
 
 Agent of Shauku
 1 B
@@ -4795,15 +4882,6 @@ Cycling:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blasted_landscape.jpg
 
-Blasting Station
-3
-Artifact
-no text
-abDamageTgtCP T Sac-Creature:1
-WheneverKeyword:EntersBattleField:Type/Creature:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever a creature enters the battlefield, you may untap Blasting Station.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blasting_station.jpg
-
 Blastoderm
 2 G G
 Creature Beast
@@ -5005,14 +5083,6 @@ no text
 Sacrifice CARDNAME: Add B to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_pet.jpg
-
-Blood Rites
-3 R R
-Enchantment
-no text
-abDamageTgtCP 1 R Sac-Creature:2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_rites.jpg
 
 Blood Vassal
 2 B
@@ -9360,14 +9430,6 @@ Unearth:B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dregscape_zombie.jpg
 
-Drekavac
-1 B
-Creature Beast
-When Drekavac comes into play, sacrifice it unless you discard a noncreature card.
-3/3
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card111258.jpg
-
 Drelnoch
 4 U
 Creature Yeti Mutant
@@ -12971,14 +13033,6 @@ First Strike
 Haste
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_berserker.jpg
-
-Goblin Bombardment
-1 R
-Enchantment
-no text
-abDamageTgtCP 0 Sac-Creature:1
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_bombardment.jpg
 
 Goblin Brigand
 1 R
@@ -17752,14 +17806,6 @@ enPump:Swampwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leshracs_rite.jpg
 
-Ley Druid
-2 G
-Creature Human Druid
-no text
-1/1
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ley_druid.jpg
-
 Leyline of Singularity
 2 U U
 Enchantment
@@ -19116,13 +19162,6 @@ As Meddling Mage enters the battlefield, name a nonland card. The named card can
 2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meddling_mage.jpg
-
-Meekstone
-1
-Artifact
-Creatures with power 3 or greater don't untap during their controllers' untap steps.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/meekstone.jpg
 
 Megatog
 4 R R
@@ -22254,16 +22293,6 @@ RegenerateMe:B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_monitor.jpg
 
-Phyrexian Plaguelord
-3 B B
-Creature Carrier
-no text
-4/4
-abPumpTgt T Sac-CARDNAME:-4/-4
-abPumpTgt 0 Sac-Creature:-1/-1
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_plaguelord.jpg
-
 Phyrexian Rager
 2 B
 Creature Horror
@@ -22444,15 +22473,6 @@ Destroy all creatures you don't control. They can't be regenerated.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83206.jpg
-
-Plagued Rusalka
-B
-Creature Spirit
-no text
-1/1
-abPumpTgt B Sac-Creature:-1/-1
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plagued_rusalka.jpg
 
 Plains
 no cost
@@ -26852,14 +26872,6 @@ spDamageTgtC:X:Skred deals damage to target creature equal to the number of snow
 SVar:X:Count$TypeYouCtrl.Snow
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skred.jpg
-
-Skull Catapult
-4
-Artifact
-no text
-abDamageTgtCP 1 T Sac-Creature:2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_catapult.jpg
 
 Skull of Ramos
 3
