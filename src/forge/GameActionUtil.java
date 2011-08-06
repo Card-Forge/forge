@@ -3416,7 +3416,8 @@ public class GameActionUtil {
                 CardList plants = new CardList(play.getCards());
                 plants = plants.filter(new CardListFilter() {
                     public boolean addCard(Card card) {
-                        return card.isCreature() && card.getType().contains("Plant");
+                        return card.isCreature() && card.getType().contains("Plant") || 
+                        card.getKeyword().contains("Changeling");
                     }
                 });
                 

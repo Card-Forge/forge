@@ -2737,6 +2737,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spDraw);
         }//spDrawCards
         
+        /*
         //Spell gain life lose life cards (like Soul Feast)
         if(hasKeyword(card, "spLoseLifeGainLife") != -1) {
             int n = hasKeyword(card, "spLoseLifeGainLife");
@@ -2792,6 +2793,134 @@ public class CardFactory implements NewConstants {
                 return card;
             }
         }// spLoseLifeGainLife
+        */
+        
+        if (hasKeyword(card, "spLoseLife") != -1)
+        {
+           int n = hasKeyword(card, "spLoseLife");
+           if (n != -1)
+           {
+              String parse = card.getKeyword().get(n).toString();
+              card.removeIntrinsicKeyword(parse);
+              
+              String k[] = parse.split(":");
+              
+                final boolean Tgt[] = {false};
+                Tgt[0] = k[0].contains("Tgt");
+
+              final int NumLife[] = {-1};
+              final String NumLifeX[] = {"none"};
+              
+                if (k[1].matches("X"))
+                {
+                   String x = card.getSVar(k[1]);
+                   if (x.startsWith("Count$"))
+                   {
+                      String kk[] = x.split("\\$");
+                      NumLifeX[0] = kk[1];
+                   }
+                }
+                else if (k[1].matches("[0-9][0-9]?"))
+                   NumLife[0] = Integer.parseInt(k[1]);
+               
+                // drawbacks and descriptions
+                final String DrawBack[] = {"none"};
+                final String spDesc[] = {"none"};
+                final String stDesc[] = {"none"};
+                if (k.length > 2)
+                {
+                   if (k[2].contains("Drawback$"))
+                   {
+                      String kk[] = k[2].split("\\$");
+                      DrawBack[0] = kk[1];
+                      if (k.length > 3)
+                         spDesc[0] = k[3];
+                      if (k.length > 4)
+                         stDesc[0] = k[4];
+                   }
+                   else
+                   {
+                      if (k.length > 2)
+                         spDesc[0] = k[2];
+                      if (k.length > 3)
+                         stDesc[0] = k[3];
+                   }
+                }
+                else
+                {
+                   if (Tgt[0] == true)
+                   {
+                      spDesc[0] = "Target player loses " + NumLife[0] + " life.";
+                      stDesc[0] =  cardName + " - target player loses life";
+                   }
+                   else
+                   {
+                      spDesc[0] = "You lose " + NumLife[0] + " life.";
+                      stDesc[0] = cardName + " - you lose life";
+                   }
+                }
+               
+               
+                final SpellAbility spLoseLife = new Spell(card)
+                {
+                private static final long serialVersionUID = -8361697584661592092L;
+
+                 public int getNumLife()
+                 {
+                    if (NumLife[0] != -1)
+                       return NumLife[0];
+
+                    if (! NumLifeX[0].equals("none"))
+                       return CardFactoryUtil.xCount(card, NumLifeX[0]);
+                   
+                    return 0;
+                 }
+                 
+                 public boolean canPlayAI()
+                 {
+                    if (Tgt[0] == true)
+                    {
+                       setTargetPlayer(Constant.Player.Human);
+                       return true;
+                    }
+                    else   // pretty much just for Stronghold Discipline...
+                    {      // assumes there's a good Drawback$ that makes losing life worth it
+                       int nlife = getNumLife();
+                       if ((AllZone.Computer_Life.getLife() - nlife) > 10)
+                          return true;
+                       else
+                          return false;
+                    }
+                 }
+
+                public void resolve()
+                   {
+                      int nlife = getNumLife();
+                      String TgtPlayer;
+
+                      if (Tgt[0] == true)
+                         TgtPlayer = getTargetPlayer();
+                      else
+                         TgtPlayer = card.getController();
+                     
+                      AllZone.GameAction.subLife(TgtPlayer, nlife);
+                     
+                      if (!DrawBack[0].equals("none"))
+                         CardFactoryUtil.doDrawBack(DrawBack[0], nlife, card.getController(), AllZone.GameAction.getOpponent(card.getController()), TgtPlayer, card, null);
+                   }//resolve()
+                };//SpellAbility
+               
+                if (Tgt[0] == true)
+                   spLoseLife.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spLoseLife));
+               
+                spLoseLife.setDescription(spDesc[0]);
+                spLoseLife.setStackDescription(stDesc[0]);
+               
+                card.clearSpellAbility();
+                card.addSpellAbility(spLoseLife);
+           }
+        }
+
         
         if(hasKeyword(card, "SearchRebel") != -1) {
             int n = hasKeyword(card, "SearchRebel");
@@ -14125,8 +14254,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlay() {
-                    CardList gobs = new CardList(
-                            AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+                    CardList gobs = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
                     gobs = gobs.getType("Goblin");
                     
                     return super.canPlay() && gobs.size() > 0;
@@ -14186,8 +14314,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                     if(card.getController().equals(Constant.Player.Computer)) {
-                        CardList gobs = new CardList(
-                                AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
+                        CardList gobs = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
                         gobs = gobs.getType("Goblin");
                         
                         if(gobs.size() > 0) {

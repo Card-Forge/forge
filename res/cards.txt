@@ -1,3 +1,50 @@
+Absorb Vis
+6 B
+Sorcery
+no text
+spLoseLifeTgt:4:Drawback$YouGainLife/4:Target player loses 4 life and you gain 4 life.
+TypeCycling:Basic:1 B
+
+Last Caress
+2 B
+Sorcery
+no text
+spLoseLifeTgt:1:Drawback$YouGainLife/1:Target player loses 1 life and you gain 1 life.
+Draw a card.
+
+Soul Feast
+3 B B
+Sorcery
+no text
+spLoseLifeTgt:4:Drawback$YouGainLife/4:Target player loses 4 life and you gain 4 life.
+
+Morsel Theft
+2 B B
+Tribal Sorcery Rogue
+(NOTE: "Prowl" is not implemented.)
+spLoseLifeTgt:3:Drawback$YouGainLife/3:Target player loses 3 life and you gain 3 life.:Morsel Theft - target player 3 loses life and you gain 3 life.
+
+Exotic Disease
+4 B
+Sorcery
+no text
+spLoseLifeTgt:X:Drawback$YouGainLife/X:Domain - Target player loses X life and you gain X life, where X is the number of basic land types among lands you control.
+SVar:X:Count$Domain
+
+Stronghold Discipline
+2 B B
+Sorcery
+no text
+spLoseLife:X:Drawback$OppLoseLife/dX:Each player loses 1 life for each creature he or she controls.:Stronghold Discipline - each player loses life
+SVar:X:Count$TypeYouCtrl.Creature
+SVar:dX:Count$TypeOppCtrl.Creature
+
+Syphon Life
+1 B B
+Sorcery
+(NOTE: "Retrace" is not implemented.)
+spLoseLifeTgt:2:Drawback$YouGainLife/2:Target player loses 2 life and you gain 2 life.:Syphone Life - target player loses life and you gain life
+
 Exhume
 1 B
 Sorcery
@@ -2261,13 +2308,6 @@ Instant
 no text
 spDamageTgtC:5
 TypeCycling:Basic:1 R
-
-Absorb Vis
-6 B
-Sorcery
-no text
-spLoseLifeGainLife:4
-TypeCycling:Basic:1 B
 
 Ethereal Usher
 5 U
@@ -5844,25 +5884,6 @@ Sun Quan, Lord of Wu
 Legendary Creature Human Soldier
 Creatures you control have horsemanship.
 4/4
-
-Last Caress
-2 B
-Sorcery
-no text
-spLoseLifeGainLife:1
-Draw a card.
-
-Morsel Theft
-2 B B
-Tribal Sorcery Rogue
-(NOTE: "Prowl" is not implemented.)
-spLoseLifeGainLife:3
-
-Soul Feast
-3 B B
-Sorcery
-no text
-spLoseLifeGainLife:4
 
 Shu Grain Caravan
 2 W
