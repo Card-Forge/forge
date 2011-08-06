@@ -216,8 +216,11 @@ public class QuestDataIO {
             };
         }
 
+        //is not used anywhere as far as I can search for
+        /*
         public List<String> getIgnoredFields() {
             return ignoredFields;
         }
+        */
     }
 }

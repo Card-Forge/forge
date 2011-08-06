@@ -13,8 +13,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class QuestQuest extends QuestSelectablePanel {
-
-    Quest_Assignment assignment;
+	private static final long serialVersionUID = -162817410327650160L;
+	
+	Quest_Assignment assignment;
 
     public QuestQuest(Quest_Assignment assignment) {
         super(assignment.getName(), assignment.getDifficulty(), assignment.getDesc(), GuiUtils.getIconFromFile(assignment.getIconName()));

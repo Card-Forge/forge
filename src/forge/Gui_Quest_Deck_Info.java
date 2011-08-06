@@ -216,10 +216,11 @@ public class Gui_Quest_Deck_Info implements NewConstants {
         */
     }
 
+    /*
     private static void addToDeckList(String name, String difficulty, String description) {
         nameDeckMap.put(name, new DeckInfo(name, description, difficulty));
     }
-
+    */
 
     public static void showDeckList() {
 

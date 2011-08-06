@@ -433,11 +433,11 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
             List<String> list = questData.getCardpool();
 
             for (String cardName : list) {
-                String setCode = "";
+                //String setCode = "";
                 if (cardName.contains("|")) {
                     String s[] = cardName.split("\\|", 2);
                     cardName = s[0];
-                    setCode = s[1];
+                    //setCode = s[1];
                 }
 
                 cardpool.add(AllZone.CardFactory.getCard(cardName, null));
@@ -451,12 +451,12 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         CardList deckList = new CardList();
         for(int i = 0; i < deck.countMain(); i++) {
         	String cardName = deck.getMain(i);
-        	String setCode = "";
+        	//String setCode = "";
             if (cardName.contains("|"))
             {
             	String s[] = cardName.split("\\|",2);
             	cardName = s[0];
-            	setCode = s[1];
+            	//setCode = s[1];
             }
 
         	deckList.add(AllZone.CardFactory.getCard(cardName, null));
@@ -534,12 +534,12 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
                 
                 for(int i = 0; i < d.countMain(); i++) {
                 	String cardName = d.getMain(i);
-                	String setCode = "";
+                	//String setCode = "";
                     if (cardName.contains("|"))
                     {
                     	String s[] = cardName.split("\\|",2);
                     	cardName = s[0];
-                    	setCode = s[1];
+                    	//setCode = s[1];
                     }
 
                 	deck.add(AllZone.CardFactory.getCard(cardName, null));
@@ -683,12 +683,12 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         
         for(int i = 0; i < d.countMain(); i++) { {
         	String cardName = d.getMain(i);
-        	String setCode = "";
+        	//String setCode = "";
             if (cardName.contains("|"))
             {
             	String s[] = cardName.split("\\|",2);
             	cardName = s[0];
-            	setCode = s[1];
+            	//setCode = s[1];
             }
         	
         	deck.add(AllZone.CardFactory.getCard(cardName, null));

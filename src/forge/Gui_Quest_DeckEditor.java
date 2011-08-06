@@ -8,7 +8,7 @@ import forge.gui.game.CardDetailPanel;
 import forge.gui.game.CardPicturePanel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.quest.data.QuestBoosterPack;
+//import forge.quest.data.QuestBoosterPack;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -104,7 +104,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
         
         Card c;
         String cardName;
-        QuestBoosterPack pack = new QuestBoosterPack();
+        //QuestBoosterPack pack = new QuestBoosterPack();
         
         java.util.List<String> addedList = AllZone.QuestData.getAddedCards();
         

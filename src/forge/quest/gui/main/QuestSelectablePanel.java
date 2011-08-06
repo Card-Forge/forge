@@ -11,7 +11,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 public class QuestSelectablePanel extends JPanel {
-    protected Color backgroundColor;
+	private static final long serialVersionUID = -1502285997894190742L;
+	
+	protected Color backgroundColor;
     private boolean selected;
 
     ImageIcon icon;

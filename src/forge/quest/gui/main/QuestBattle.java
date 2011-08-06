@@ -366,14 +366,14 @@ public class QuestBattle extends QuestSelectablePanel {
     }
 
     private static class DeckInfo {
-        String name;
+        //String name;
         String difficulty;
         String description;
 
         private DeckInfo(String name, String description, String difficulty) {
             this.description = description;
             this.difficulty = difficulty;
-            this.name = name;
+            //this.name = name;
         }
     }
 

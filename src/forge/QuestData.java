@@ -19,7 +19,6 @@ import java.util.*;
 //static readAIQuestDeckFiles(QuestData data, ArrayList aiDeckNames)
 //OR non-static readAIQuestDeckFiles()
 //which reads the files "questDecks-easy", "questDecks-medium","questDecks-hard",
-@SuppressWarnings({"deprecation"})
 @Deprecated
 public class QuestData implements NewConstants {
 	QuestData_Prefs qdPrefs = null;

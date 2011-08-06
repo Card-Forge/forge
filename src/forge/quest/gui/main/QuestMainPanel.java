@@ -25,7 +25,9 @@ import java.util.List;
 
 
 public class QuestMainPanel extends QuestAbstractPanel {
-    private forge.quest.data.QuestData questData;
+	private static final long serialVersionUID = 6142934729724012402L;
+
+	private forge.quest.data.QuestData questData;
 
     JLabel creditsLabel = new JLabel();
     JLabel lifeLabel = new JLabel();

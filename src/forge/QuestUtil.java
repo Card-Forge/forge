@@ -10,7 +10,6 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 
 @Deprecated
-@SuppressWarnings("deprecation")
 public class QuestUtil {
 	
 	public static int getLife(QuestData qd)

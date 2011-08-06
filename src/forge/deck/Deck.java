@@ -5,7 +5,7 @@ import forge.Constant;
 
 import java.util.*;
 
-public class Deck implements Comparable{
+public class Deck implements Comparable<Deck>{
     //gameType is from Constant.GameType, like Constant.GameType.Regular
 
     private Map<String, String> metadata = new HashMap<String, String>();
@@ -161,12 +161,8 @@ public class Deck implements Comparable{
         return metadata.get(DESCRIPTION);
     }
 
-    public int compareTo(Object o) {
-        if (o instanceof Deck)
-        {
-            return getName().compareTo(((Deck)o).getName());
-        }
-        return 0;
+    public int compareTo(Deck d) {
+    	return getName().compareTo(d.getName());
     }
 
     public Set<Map.Entry<String,String>> getMetadata() {

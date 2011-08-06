@@ -30,7 +30,7 @@ public class QuestData {
     int lost;
 
     int life;
-    private int maxLife;
+    //private int maxLife;
 
     int questsPlayed;
 

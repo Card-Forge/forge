@@ -68,7 +68,9 @@ public class QuestBazaarItem {
         }
         
         JPanel itemPanel = new JPanel() {
-            @Override
+			private static final long serialVersionUID = -5182857296365949682L;
+
+			@Override
             public Dimension getPreferredSize() {
                 Dimension realSize = super.getPreferredSize();
                 realSize.width = 100;
