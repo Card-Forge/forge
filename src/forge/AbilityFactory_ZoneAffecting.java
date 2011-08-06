@@ -400,6 +400,7 @@ public class AbilityFactory_ZoneAffecting {
 	public static String millStackDescription(SpellAbility sa, AbilityFactory af){
 		// when getStackDesc is called, just build exactly what is happening
 		StringBuilder sb = new StringBuilder();
+		int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa);
 		
 		ArrayList<Player> tgtPlayers;
 
@@ -417,11 +418,11 @@ public class AbilityFactory_ZoneAffecting {
 		for(Player p : tgtPlayers)
 			sb.append(p.toString()).append(" ");
 		
-		sb.append("Mills ");
-		int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("NumCards"), sa);
+		sb.append("mills ");
 		sb.append(numCards);
-		sb.append(" Card(s) from ");
-		sb.append(" library.");
+		sb.append(" card");
+		if(numCards != 1) sb.append("s");
+		sb.append(" from his or her library.");
 		
 		Ability_Sub abSub = sa.getSubAbility();
         if (abSub != null){
