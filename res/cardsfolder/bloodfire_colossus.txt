@@ -1,0 +1,8 @@
+Name:Bloodfire Colossus
+ManaCost:6 R R
+Types:Creature Giant
+Text:R, Sacrifice Bloodfire Colossus, Bloodfire Colossus deals 6 damage to each creature and each player.
+PT:6/6
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodfire_colossus.jpg
+End

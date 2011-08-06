@@ -1,0 +1,9 @@
+Name:Crater Hellion
+ManaCost:4 R R
+Types:Creature Hellion
+Text:When Crater Hellion comes into play, it deals 4 damage to each other creature.
+PT:6/6
+K:Echo:4 R R
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crater_hellion.jpg
+End
