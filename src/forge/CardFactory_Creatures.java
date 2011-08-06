@@ -11049,7 +11049,7 @@ public class CardFactory_Creatures {
 	        };//ability
 	        
 	        card.addSpellAbility(ability);
-	        ability.setDescription("R, tap, Sacrifice a creature other than Brion Stoutarm: Brion Stoutarm deals damage equal to the sacrificed creature's power to target player .");
+	        ability.setDescription("R, tap, Sacrifice a creature other than Brion Stoutarm: Brion Stoutarm deals damage equal to the sacrificed creature's power to target player.");
 	        ability.setStackDescription("Brion Stoutarm deals damage equal to sacrificed creature's power");
 	  	}//*************** END ************ END **************************
 	    
@@ -11472,7 +11472,7 @@ public class CardFactory_Creatures {
           }
         };
         ability.setBeforePayMana(runtime);
-    	ability.setDescription("T, Sacrifice a Forest or Plains: Search your library for a land card, put it into play, then shuffle your library.");
+    	ability.setDescription("\r\n" + "tap, Sacrifice a Forest or Plains: Search your library for a land card, put it into play, then shuffle your library.");
     	ability.setStackDescription(card.getName() + " - Search your library for a card and put it into play, then shuffle your library");
     	card.addSpellAbility(ability);
     	

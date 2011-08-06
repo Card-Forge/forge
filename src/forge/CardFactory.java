@@ -3477,6 +3477,7 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Terror"))
     {
@@ -3542,9 +3543,10 @@ public class CardFactory implements NewConstants {
       spell.setBeforePayMana(runtime);
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
+*/
 
 
-
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Expunge"))
     {
@@ -3614,7 +3616,7 @@ public class CardFactory implements NewConstants {
 
       card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2"));
     }//*************** END ************ END **************************
-
+*/
 
 
     //*************** START *********** START **************************

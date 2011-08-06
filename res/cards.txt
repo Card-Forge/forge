@@ -11757,6 +11757,8 @@ Expunge
 2 B
 Instant
 Destroy target nonartifact, nonblack creature. It can't be regenerated.
+spDestroyTgt:Creature.nonBlack+nonArtifact:NoRegen
+Cycling:2
 
 Flying Men
 U
@@ -12373,7 +12375,7 @@ Until end of turn, creatures you control gain trample and get +1/+1 for each bas
 Elvish Fury
 G
 Instant
-Buyback 4 #(If you pay an additional 4 as you play this spell, put it into your hand instead of your graveyard as part of the spell's resolution.)# Target creature gets +2/+2 until end of turn.
+no text
 
 Primal Boost
 2 G
@@ -13165,6 +13167,7 @@ Terror
 1 B
 Instant
 Destroy target nonartifact, nonblack creature. It can't be regenerated.
+spDestroyTgt:Creature.nonArtifact+nonBlack:NoRegen
 
 Aven Fisher
 3 U
