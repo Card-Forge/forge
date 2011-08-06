@@ -5,7 +5,6 @@ Text:no text
 A:SP$ChangeZone | Cost$ G | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Put target card from your graveyard on top of your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
-#SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage.jpg
-SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=6622&type=card
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/salvage.jpg
 SetInfo:PO2|Common|http://magiccards.info/scans/en/po2/85.jpg
 End
