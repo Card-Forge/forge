@@ -1,0 +1,10 @@
+Name:Sulfur Elemental
+ManaCost:2 R
+Types:Creature Elemental
+Text:no text
+K:Flash
+K:Split second
+K:stPumpAll:Creature.White:1/-1:no Condition:White creatures get +1/-1.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfur_elemental.jpg
+End
