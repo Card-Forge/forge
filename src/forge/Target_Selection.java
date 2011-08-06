@@ -209,7 +209,7 @@ public class Target_Selection {
 	            CardList allCards = new CardList();
 	            allCards.addAll(AllZone.Human_Play.getCards());
 	            allCards.addAll(AllZone.Computer_Play.getCards());
-	            CardList choices = allCards.getValidCards(Tgts);
+	            CardList choices = allCards.getValidCards(Tgts, sa.getSourceCard().getController());
 	            
 	            boolean canTargetPlayer = false;
 	            for(String s : Tgts)

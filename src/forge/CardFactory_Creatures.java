@@ -20271,6 +20271,42 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Witch Hunter")) {
+        	final String Tgts[] = {"Creature+YouDontCtrl"};
+        	Target target = new Target("TgtV", "Select target creature you don't control.", Tgts);
+        	final Ability_Cost abCost = new Ability_Cost("1 W W T", card.getName(), true);
+
+        	final SpellAbility ability = new Ability_Activated(card, abCost, target) {
+				private static final long serialVersionUID = -7134239527522243583L;
+
+				@Override
+        		public void resolve() {
+        			Card target = getTargetCard();
+        			if( AllZone.GameAction.isCardInPlay(target) && CardFactoryUtil.canTarget(card, target)) {
+        				AllZone.GameAction.moveToHand(target);
+        			}
+        		}
+        		
+        		@Override
+        		public boolean canPlay() {
+        			String opp = AllZone.GameAction.getOpponent(card.getController());
+        			CardList targets = AllZoneUtil.getCreaturesInPlay(opp);
+        			return AllZoneUtil.isCardInPlay(card) && targets.size() > 0 && super.canPlay();
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+        	};//SpellAbility
+        	
+        	card.addSpellAbility(ability);
+        	ability.setDescription(abCost+"Return target creature an opponent controls to its owner's hand.");
+        	ability.setStackDescription(card.getName() + " - return target creature to owner's hand.");
+        	//ability.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

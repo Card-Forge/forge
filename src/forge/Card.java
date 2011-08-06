@@ -2436,7 +2436,7 @@ public class Card extends MyObservable {
             if (r == true) return true;
         }
         return false;
-    }//getValidCards
+    }//isValidCard
 
 	public void setImmutable(boolean isImmutable) {
 		this.isImmutable = isImmutable;
