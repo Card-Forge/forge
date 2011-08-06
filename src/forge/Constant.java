@@ -115,6 +115,8 @@ public interface Constant {
         public static final String Colorless    = "colorless";
         //color order "wubrg"
         public static final String Colors[]     = {White, Blue, Black, Red, Green, Colorless};
+        public static final String ColorsOnly[] = {White, Blue, Black, Red, Green};
+        
         
         public static final String onlyColors[] = {White, Blue, Black, Red, Green};
         

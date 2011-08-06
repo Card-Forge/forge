@@ -1105,7 +1105,10 @@ public class CombatUtil {
             }//Goblin General
             
             if(c.getName().equals("Zur the Enchanter") && !c.getCreatureAttackedThisCombat()) {
-                PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getController());
+                //hack, to make sure this doesn't break grabbing an oblivion ring:
+            	c.setCreatureAttackedThisCombat(true);
+            	
+            	PlayerZone library = AllZone.getZone(Constant.Zone.Library, c.getController());
                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
                 PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play,
                         AllZone.GameAction.getOpponent(c.getController()));

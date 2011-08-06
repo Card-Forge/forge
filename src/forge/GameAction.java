@@ -1563,7 +1563,7 @@ public class GameAction {
                 damageToAdd = 0;
                 card.addCounterFromNonEffect(Counters.M1M1, damage);
             }
-            if(source.getName().equals("Spiritmonger") || source.getName().equals("Mirri the Cursed")) {
+            if(card.isCreature() && (source.getName().equals("Spiritmonger") || source.getName().equals("Mirri the Cursed")) ) {
                 final Card thisCard = source;
                 Ability ability2 = new Ability(source, "0") {
                     @Override

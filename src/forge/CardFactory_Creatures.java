@@ -15731,7 +15731,7 @@ public class CardFactory_Creatures {
                     String color = "";
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
                         
-                        Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.Colors);
+                        Object o = AllZone.Display.getChoice("Choose mana color", Constant.Color.ColorsOnly);
                         color = (String) o;
                         c.addExtrinsicKeyword("Protection from " + color);
                         if(creatureMap.containsKey(c)) {
