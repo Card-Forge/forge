@@ -152,6 +152,21 @@ public class GuiDisplayUtil implements NewConstants {
         return out.toString().toLowerCase();
     }
     
+    public static String cleanStringMWS(String in)
+    {
+    	StringBuffer out = new StringBuffer();
+    	char c;
+    	for (int i=0; i<in.length(); i++)
+    	{
+    		c = in.charAt(i);
+    		if (c == '"' || c == '/')
+    			out.append("");
+    		else
+    			out.append(c);
+    	}
+    	return out.toString();
+    }
+    
     public static void setupNoLandPanel(JPanel j, Card c[]) {
         ArrayList<Card> a = new ArrayList<Card>();
         /*

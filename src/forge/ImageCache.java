@@ -175,9 +175,7 @@ public class ImageCache implements NewConstants {
     /**
      * Returns the map key for a card, without any suffixes for the image size.
      */
-    private static String getKey(Card card) { return getKey(card, "Set"); }
-    
-    private static String getKey(Card card, String option) {
+    private static String getKey(Card card) {
         String key = GuiDisplayUtil.cleanString(card.getImageName());
         //if(card.isBasicLand() && card.getRandomPicture() != 0) key += card.getRandomPicture();
         File path = null;
@@ -190,22 +188,50 @@ public class ImageCache implements NewConstants {
         else
         	path = ForgeProps.getFile(IMAGE_BASE);
         
-        if (!card.getCurSetCode().equals("") && option.equals("Set"))
+        File  f = null;
+        if (!card.getCurSetCode().equals(""))
         {
-        	key = card.getCurSetCode() + "/" + key;
+        	StringBuilder sbKey = new StringBuilder();
         	
-        	File f = new File(path, key + ".jpg");
-        	if (!f.exists())
-        	{
-        		return getKey(card, "Original");
-        	}
+        	//First try 3 letter set code with MWS filename format 
+        	sbKey.append(card.getCurSetCode() + "/");
+        	sbKey.append(GuiDisplayUtil.cleanStringMWS(card.getName()) + ".full");
+        	
+        	f = new File(path, sbKey.toString() + ".jpg");
+        	if (f.exists())
+        		return sbKey.toString();
+        	
+        	sbKey = new StringBuilder();
+        	
+        	//Second, try 2 letter set code with MWS filename format
+        	sbKey.append(SetInfoUtil.getSetCode2_SetCode3(card.getCurSetCode()) + "/");
+        	sbKey.append(GuiDisplayUtil.cleanStringMWS(card.getName()) + ".full");
+        	
+        	f = new File(path, sbKey.toString() + ".jpg");
+        	if (f.exists())
+        		return sbKey.toString();
+        	
+        	sbKey = new StringBuilder();
+        	
+        	//Third, try 3 letter set code with Forge filename format
+        	sbKey.append(card.getCurSetCode() + "/");
+        	sbKey.append(GuiDisplayUtil.cleanString(card.getName()));
+        	
+        	f = new File(path, sbKey.toString() + ".jpg");
+        	if (f.exists())
+        		return sbKey.toString();
+        	
+        	//Last, give up with set images, go with the old picture type
+        	f = new File(path, key + ".jpg");
+        	if (f.exists())
+        		return key;
+        	
+        	//if still no file, download if option enabled
         }
-        else
-        {
-        	int n = card.getRandomPicture();
-        	if (n > 0)
-        		key += n;
-        }
+        
+        int n = card.getRandomPicture();
+        if (n > 0)
+        	key += n;
         
         key += tkn;
 //        key = GuiDisplayUtil.cleanString(key);
