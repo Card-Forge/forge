@@ -3911,6 +3911,211 @@ public class CardFactory implements NewConstants {
             }
         }// spReturnTgt
         
+        
+        /**
+         *  Generic return target card(s) from graveyard to Hand, Battlefield or Top of Library.
+         *  This version handles abilities that activate when card enters the battlefield.
+         *  spReturnTgt:{Num Cards/Parameters}:{Type}:{To Zone}:{DrawBack}:{Spell Desc}
+         *  
+         *  Buyback and X Count/Costs are not yet implemented.
+         */
+        if (hasKeyword(card, "etbReturnTgt") != -1) {
+            int n = hasKeyword(card, "etbReturnTgt");
+            
+            String parse = card.getKeyword().get(n).toString();
+            card.removeIntrinsicKeyword(parse);
+            String k[] = parse.split(":");
+            final boolean returnUpTo[] = {false};
+            final int numCardsToReturn;
+            
+            String np[] = k[1].split("/");
+            numCardsToReturn = Integer.parseInt(np[0]);
+            
+            if (np.length > 1) {
+                if (np[1].equals("UpTo")) {
+                    returnUpTo[0] = true;
+                }
+            }
+            
+            //  Artifact, Creature, Enchantment, Land, Permanent, Instant, Sorcery, Card
+            //  White, Blue, Black, Red, Green, Colorless, MultiColor
+            //  non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
+            //  non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
+            
+            String Targets = k[2];
+            final String Tgts[] = Targets.split(",");
+            
+            final String Destination = k[3];
+            
+            String desc = "";
+            final String Drawback[] = {"none"};
+            
+             if (k.length > 4) {
+                
+                if (k[4].contains("Drawback$")){
+                    String kk[] = k[4].split("\\$");
+                    Drawback[0] = kk[1];
+                } else {
+                    desc = k[4];
+                }
+            }
+            if (k.length > 5) {
+                desc = k[5];
+            }
+            
+            final SpellAbility etbRtrnTgt = new Ability(card, "0") {
+
+                @Override
+                public void resolve() {
+                    
+                    CardList targets = getTargetList();
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    Player player = card.getController();
+                    
+                    for (Card c:targets) {
+                        
+                        if (AllZone.GameAction.isCardInZone(c, grave)) {
+                            
+                            if (Destination.equals("Hand")) {
+                                PlayerZone zone = AllZone.getZone(Constant.Zone.Hand, player);
+                                AllZone.GameAction.moveTo(zone, c);
+                            }
+                            else if (Destination.equals("Battlefield")) {
+                                PlayerZone zone = AllZone.getZone(Constant.Zone.Play, player);
+                                AllZone.GameAction.moveTo(zone, c);
+                            }
+                            else if (Destination.equals("TopofLibrary")) {
+                                // PlayerZone zone = AllZone.getZone(Constant.Zone.Play, player);
+                                AllZone.GameAction.moveToTopOfLibrary(c);
+                            }
+                        }
+                    }// for
+                    
+                    if (!Drawback[0].equals("none")) {
+                        CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), 
+                                card.getController().getOpponent(), card.getController(), card, card, this);
+                    }
+                }//resolve()
+            };// etbRtrnTgt
+            
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = -8592314045228582326L;
+
+                public void execute() {
+                    
+                    Player player = card.getController();
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+                    CardList results = new CardList();
+                    CardList choices = new CardList(grave.getCards());
+                    choices = choices.getValidCards(Tgts);
+                    
+                    // AI will not use an Eternal Witness to return an Eternal Witness.
+                    
+                    if (card.getController().equals(AllZone.ComputerPlayer)) {
+                        choices = choices.getNotName(card.getName());
+                        if (Destination.equals("Battlefield") 
+                                && !AllZone.Phase.getPhase().equals(Constant.Phase.Main1)) {
+                            choices = choices.getNotKeyword("At the beginning of the end step, destroy CARDNAME.");
+                            choices = choices.getNotKeyword("At the beginning of the end step, exile CARDNAME.");
+                            choices = choices.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+                        }
+                    }
+                    
+                    if (choices.isEmpty()) return;
+                    
+                    if (card.getController().equals(AllZone.HumanPlayer)) {
+                        
+                        CardList targets = new CardList();
+                        
+                        for (int i = 0; i < numCardsToReturn; i++) {
+                            if (grave.size() > 0) {
+                                Object o = AllZone.Display.getChoiceOptional("Select a card", choices.toArray());
+                                if (o == null) break;
+                                Card c = (Card) o;
+                                targets.add(c);
+                                choices.remove(c);
+                            }
+                        }
+                        if (targets.size() > 0) {
+                            etbRtrnTgt.setTargetList(targets);
+                            AllZone.Stack.add(etbRtrnTgt);
+                        }
+                    }// if HumanPlayer
+                    
+                    else { // ComputerPlayer
+                        
+                        for (int nctr = 0; nctr < numCardsToReturn; nctr ++) {
+                            for (int i = 0; i < Tgts.length; i++) {
+                            
+                                if (Tgts[i].startsWith("Artifact")) {
+                                    if (CardFactoryUtil.AI_getBestArtifact(choices) != null) {
+                                        Card c = CardFactoryUtil.AI_getBestArtifact(choices);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else if (Tgts[i].startsWith("Creature")) {
+                                    if (CardFactoryUtil.AI_getBestCreature(choices) != null) {
+                                        Card c = CardFactoryUtil.AI_getBestCreature(choices);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else if (Tgts[i].startsWith("Enchantment")) {
+                                    if (CardFactoryUtil.AI_getBestEnchantment(choices, card, true) != null) {
+                                        Card c = CardFactoryUtil.AI_getBestEnchantment(choices, card, true);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else if (Tgts[i].startsWith("Land")) {
+                                    if (CardFactoryUtil.AI_getBestLand(choices) != null) {
+                                        Card c = CardFactoryUtil.AI_getBestLand(choices);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else if (Tgts[i].startsWith("Permanent")) {
+                                    if (CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true) != null) {
+                                        Card c = CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else if (Tgts[i].startsWith("Instant")) {
+                                    if (CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true) != null) {
+                                        // Card c = CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true);
+                                        Card c = CardFactoryUtil.getRandomCard(choices);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else if (Tgts[i].startsWith("Sorcery")) {
+                                    if (CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true) != null) {
+                                        // Card c = CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true);
+                                        Card c = CardFactoryUtil.getRandomCard(choices);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else {
+                                    if (CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true) != null) {
+                                        // Card c = CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true);
+                                        Card c = CardFactoryUtil.getRandomCard(choices);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                }
+                            }// for i
+                        }// for nctr
+                        if (results.size() > 0) {
+                            etbRtrnTgt.setTargetList(results);
+                            AllZone.Stack.add(etbRtrnTgt);
+                        }
+                    }// ComputerPlayer
+                    
+                }// execute()
+            };// Command()
+            card.addComesIntoPlayCommand(intoPlay);
+            
+            if (desc.length() > 0) {
+                etbRtrnTgt.setDescription(desc);
+            }
+        }// etbReturnTgt
+        
 
         // Generic Tutor cards
         if(hasKeyword(card, "spTutor") != -1) {
