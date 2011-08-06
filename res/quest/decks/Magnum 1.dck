@@ -2,33 +2,27 @@ Magnum 1
 [general]
 constructed
 [main]
-1 Horrible Hordes
-1 Leonin Scimitar
-4 Tropical Island
-1 Antler Skulkin
-1 Tanglebloom
-1 Nevinyrral's Disk
-1 Garruk Wildspeaker
+2 Tropical Island
 8 Island
-1 Magnetic Flux
 1 Argothian Pixies
 1 Sentinels of Glen Elendra
-1 Temporal Spring
+2 Temporal Spring
 1 Fangren Hunter
 4 Breeding Pool
 1 Council of Advisors
 1 Cold-Eyed Selkie
-1 Shielding Plax
+2 Shielding Plax
 2 Gaea's Skyfolk
-1 Rod of Ruin
+1 Gilder Bairn
 1 Silver Myr
 1 Wyluli Wolf
-1 Trapjaw Kelpie
+3 Trapjaw Kelpie
 1 Wildsize
 1 Explore
 1 Horned Troll
-1 Slippery Bogle
-2 Convolute
+2 Slippery Bogle
+1 Convolute
+1 Voidslime
 5 Forest
 1 Greater Mossdog
 3 Dryad Arbor
@@ -37,6 +31,9 @@ constructed
 1 Vision Skeins
 1 Coral Eel
 2 Sturdy Hatchling
-1 Shorecrasher Mimic
+2 Shorecrasher Mimic
 1 Fable of Wolf and Owl
+1 Murkfiend Liege
+1 Lorescale Coatl
+1 Favor of the Overbeing
 [sideboard]
