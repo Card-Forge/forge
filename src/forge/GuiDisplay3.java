@@ -506,6 +506,8 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
 	        	File file = new File(base, iconName);
 	        	ImageIcon icon = new ImageIcon(file.toString());
 	        	oppIconLabel.setIcon(icon);
+	        	oppIconLabel.setAlignmentX(100);
+	        	
         	}
         }
         
@@ -1159,6 +1161,7 @@ class Gui_MultipleBlockers3 extends JFrame {
     
     private int               assignDamage;
     private Card              att;
+    private CardList	      blockers;
     private CardContainer     guiDisplay;
     
     private BorderLayout      borderLayout1    = new BorderLayout();
@@ -1187,11 +1190,19 @@ class Gui_MultipleBlockers3 extends JFrame {
         updateDamageLabel();//update user message about assigning damage
         guiDisplay = display;
         att = attacker;
+        blockers = creatureList;
         
         for(int i = 0; i < creatureList.size(); i++)
             creaturePanel.add(new CardPanel(creatureList.get(i)));
         
-
+        if (att.getKeyword().contains("Trample")) {
+	        Card player = new Card();
+	        player.setName("Player");
+	        player.addIntrinsicKeyword("Shroud");
+	        player.addIntrinsicKeyword("Indestructible");
+	        creaturePanel.add(new CardPanel(player));
+        }
+        
         JDialog dialog = new JDialog(this, true);
         dialog.setTitle("Multiple Blockers");
         dialog.setContentPane(mainPanel);
@@ -1245,22 +1256,52 @@ class Gui_MultipleBlockers3 extends JFrame {
     void creaturePanel_mousePressed(MouseEvent e) {
         Object o = creaturePanel.getComponentAt(e.getPoint());
         if(o instanceof CardPanel) {
+        	
+        	boolean assignedDamage = true;
+        	
             CardContainer cardPanel = (CardContainer) o;
             Card c = cardPanel.getCard();
             //c.setAssignedDamage(c.getAssignedDamage() + 1);
             CardList cl = new CardList();
             cl.add(att);
             
-            AllZone.GameAction.addAssignedDamage(c, att, /*c.getTotalAssignedDamage() +*/1);
+            boolean assignedLethalDamageToAllBlockers = true;
+        	for (Card crd : blockers )
+        	{
+        		if (crd.getTotalAssignedDamage() < ( crd.getNetDefense() - crd.getDamage() ))
+        			assignedLethalDamageToAllBlockers = false;
+        	}
+        	
+            
+            if (c.getName().equals("Player") && att.getKeyword().contains("Trample") && assignedLethalDamageToAllBlockers)
+            {
+            	//what happens with Double Strike???
+            	if (att.getKeyword().contains("First Strike"))
+            		AllZone.Combat.addDefendingFirstStrikeDamage(1, att);
+            	else
+            		AllZone.Combat.addDefendingDamage(1, att);
+            	
+            	AllZone.GameAction.addAssignedDamage(c, att, 1);
+            }
+            else if (!c.getName().equals("Player")){
+            	AllZone.GameAction.addAssignedDamage(c, att, /*c.getTotalAssignedDamage() +*/1);
+            }
+            else
+            	assignedDamage = false;
+            
+            if (assignedDamage)
+            {
+	            assignDamage--;
+	            updateDamageLabel();
+	            if(assignDamage == 0) dispose();
+            }
             
             if(guiDisplay != null) {
                 guiDisplay.setCard(c);
             }
         }
         //reduce damage, show new user message, exit if necessary
-        assignDamage--;
-        updateDamageLabel();
-        if(assignDamage == 0) dispose();
+        
     }//creaturePanel_mousePressed()
     
     void updateDamageLabel() {
