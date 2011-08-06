@@ -1,3 +1,17 @@
+Bloodshed Fever
+R
+Enchantment Aura
+Enchanted creature attacks each turn if able.
+Enchant creature
+enPumpCurse:This card attacks each turn if able.
+
+Dehydration
+3 U
+Enchantment Aura
+Enchanted creature doesn't untap during its controller's untap step.
+Enchant creature
+enPumpCurse:This card doesn't untap during your untap step.
+
 Wings of Aesthir
 W U
 Enchantment Aura
