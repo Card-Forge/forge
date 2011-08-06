@@ -18289,12 +18289,11 @@ public class CardFactory_Creatures {
 	      //*************** START *********** START **************************
 	      else if (cardName.equals("Lockjaw Snapper"))
 	      {
-	      	
 	      	final Ability ability = new Ability(card, "0")
 	          {
 	            public void resolve()
 	            {
-	          	PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+	            	PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
 	    			PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
 	    			
 	    			CardList creatures = new CardList();

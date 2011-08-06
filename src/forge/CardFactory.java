@@ -8324,57 +8324,6 @@ public class CardFactory implements NewConstants {
 		card.addSpellAbility(spell);
 	}// *************** END ************ END **************************
     
-    
-/*
-	//*************** START *********** START **************************
-	else if (cardName.equals("Hush"))
-	{
-		SpellAbility spell = new Spell(card)
-		{
-			private static final long serialVersionUID = -1572271570905127602L;
-
-			public void resolve()
-			{
-
-				CardList all = new CardList();
-				all.addAll(AllZone.Human_Play.getCards());
-				all.addAll(AllZone.Computer_Play.getCards());
-				all = all.getType("Enchantment");
-				CardListUtil.sortByDestroyEffect(all);
-
-				for (int i = 0; i < all.size(); i++)
-				{
-					Card c = all.get(i);
-					AllZone.GameAction.destroy(c);
-				}
-
-			}// resolve()
-
-			public boolean canPlayAI()
-			{
-				CardList human = new CardList(AllZone.Human_Play.getCards());
-				CardList computer = new CardList(AllZone.Computer_Play.getCards());
-
-				human = human.getType("Enchantment");
-				computer = computer.getType("Enchantment");
-				
-				
-				if (human.size() == 0) 
-					return false;
-				
-				// the computer will at least destroy 2 more human enchantments
-				return computer.size() < human.size() - 1 || 
-				(AllZone.Computer_Life.getLife() < 7 && !human.isEmpty());
-			}
-		};// SpellAbility
-
-		spell.setDescription("Destroy all enchantments.");
-		card.clearSpellAbility();
-	    card.addSpellAbility(spell);
-	    card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2"));
-	}// *************** END ************ END **************************
-*/
-    
 
     //*************** START *********** START **************************
     else if(cardName.equals("Incendiary Command"))
@@ -9631,52 +9580,7 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
     
-    
-/*
-    //*************** END ************ END **************************
-    else if (cardName.equals("Lockjaw Snapper"))
-    {
-    	
-    	final Ability ability = new Ability(card, "0")
-        {
-          public void resolve()
-          {
-        	PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
-  			PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
-  			
-  			CardList creatures = new CardList();
-  			creatures.addAll(hPlay.getCards());
-  			creatures.addAll(cPlay.getCards());
-  			creatures = creatures.filter(new CardListFilter()
-  			{
-					public boolean addCard(Card c) {
-						return c.getCounters(Counters.M1M1) > 0;
-					}
-  			});
-  			
-  			for (int i=0; i<creatures.size();i++)
-  			{
-  				Card c = creatures.get(i);
-  				c.addCounter(Counters.M1M1, 1);
-  			}
-          }
-        };
-    	
-    	Command destroy = new Command()
-    	{
-    		private static final long serialVersionUID = 6389028698247230474L;
-
-			public void execute()
-    		{
-    			ability.setStackDescription(card.getName()+ " - put -1/-1 counter on each creature that has a -1/-1 counter on it.");
-                AllZone.Stack.add(ability);
-    		}
-    	};//command
-    	card.addDestroyCommand(destroy);
-    }//*************** START *********** START **************************
-*/
-    
-    
+       
     //*************** START *********** START **************************
     else if(cardName.equals("Deep Analysis"))
     {

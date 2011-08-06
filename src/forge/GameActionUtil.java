@@ -3,7 +3,6 @@ import java.util.*;
 
 public class GameActionUtil
 {
-	
 	public static void executeUpkeepEffects()
 	{
 		
@@ -1305,27 +1304,8 @@ public class GameActionUtil
 		               
 		               for (int j = 0; j < cl.size()*cmc; j++)
 		     	       { 
-		     	         Card crd = new Card();
-		     	         String controller = crd1.getController();
-		     	         crd.setOwner(controller);
-		     	         crd.setController(controller);
-		     	         
-		     	         crd.setName("Bird");
-		     	         crd.setImageName("WU 1 1 Bird");
-		     	         crd.setManaCost("WU");
-		     	         crd.setToken(true);
-	
-		     	         crd.addType("Creature");
-		     	         crd.addType("Bird");
-		     	         crd.addIntrinsicKeyword("Flying");
-	
-		     	         crd.setBaseAttack(1);
-		     	         crd.setBaseDefense(1);
-	
-		     	         PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
-		     	         play.add(crd);
-		     	      }
-		               
+		            	   CardFactoryUtil.makeToken("Bird", "WU 1 1 Bird", card, "W U", new String[] {"Creature", "Bird"}, 1, 1, new String[] {"Flying"} );
+		     	       }
 		               
 		               /*
 		            	SpellAbility sa = AllZone.Stack.peek
@@ -2031,7 +2011,6 @@ public class GameActionUtil
 
 	public static void playCard_Reki(Card c)
 	{
-
 		PlayerZone play = AllZone
 				.getZone(Constant.Zone.Play, c.getController());
 
@@ -2102,7 +2081,6 @@ public class GameActionUtil
 
 		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, c
 				.getController());
-		final String controller = c.getController();
 
 		CardList list = new CardList();
 		list.addAll(play.getCards());
@@ -2118,29 +2096,11 @@ public class GameActionUtil
 				{
 					public void resolve()
 					{
-
-						Card card = new Card();
-
-						card.setOwner(controller);
-						card.setController(controller);
-						
-						card.setName("Angel");
-						card.setImageName("W 4 4 Angel");
-						card.setManaCost("W");
-						card.setToken(true);
-
-						card.addType("Creature");
-						card.addType("Angel");
-						card.addIntrinsicKeyword("Flying");
-						card.setBaseAttack(4);
-						card.setBaseDefense(4);
-
-						play.add(card);
+						CardFactoryUtil.makeToken("Angel", "W 4 4 Angel", card, "W", new String[] {"Creature", "Angel"}, 4, 4, new String[] {"Flying"} );
 					}
 				}; // ability2
 
-				ability2
-						.setStackDescription(card.getName()
+				ability2.setStackDescription(card.getName()
 								+ " - "
 								+ c.getController()
 								+ " puts a 4/4 White Angel token with flying into play.");
@@ -2319,29 +2279,7 @@ public class GameActionUtil
 						{
 							public void resolve()
 							{
-								makeToken();
-							}
-							public void makeToken()
-							{
-								Card crd = new Card();
-
-								crd.setOwner(controller);
-								crd.setController(controller);
-								
-								crd.setName("Bird");
-								crd.setImageName("U 1 1 Bird");
-								crd.setManaCost("U");
-								crd.setToken(true);
-
-								crd.addType("Creature");
-								crd.addType("Bird");
-								crd.addIntrinsicKeyword("Flying");
-
-								crd.setBaseAttack(1);
-								crd.setBaseDefense(1);
-
-								PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
-								play.add(crd);
+								CardFactoryUtil.makeToken("Bird", "U 1 1 Bird", card, "U", new String[] {"Creature", "Bird"}, 1, 1, new String[] {"Flying"} );
 							}
 						}; // ability2
 			
@@ -2362,28 +2300,7 @@ public class GameActionUtil
 						{
 							public void resolve()
 							{
-								makeToken();
-							}
-							public void makeToken()
-							{
-								Card crd = new Card();
-
-								crd.setOwner(controller);
-								crd.setController(controller);
-
-								crd.setName("Wolf");
-								crd.setImageName("G 2 2 Wolf");
-								crd.setManaCost("G");
-								crd.setToken(true);
-
-								crd.addType("Creature");
-								crd.addType("Wolf");
-
-								crd.setBaseAttack(2);
-								crd.setBaseDefense(2);
-
-								PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
-								play.add(crd);
+								CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card, "G", new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""} );
 							}
 						}; // ability
 			
@@ -2392,8 +2309,6 @@ public class GameActionUtil
 						AllZone.Stack.add(ability);
 					}
 			}//if
-			
-
 	}//Fable
 
 
@@ -3316,25 +3231,7 @@ public class GameActionUtil
 		{
 			public void resolve()
 			{
-				Card card = new Card();
-
-				card.setName("Wolf");
-				card.setImageName("G 2 2 Wolf");
-
-				card.setOwner(crd.getController());
-				card.setController(crd.getController());
-
-				card.setManaCost("G");
-				card.setToken(true);
-
-				card.addType("Creature");
-				card.addType("Wolf");
-				card.setBaseAttack(2);
-				card.setBaseDefense(2);
-
-				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
-				play.add(card);
-				
+				CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", crd, "G", new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""} );
 				crd.addCounter(Counters.P1P1, 1);
 			}
 		};
@@ -3606,26 +3503,7 @@ public class GameActionUtil
 			}
 			public void makeToken()
 			{
-				String player = crd.getController();
-				 Card c = new Card();
-
-	        	  c.setName("Elf Warrior");
-	  	          c.setImageName("G 1 1 Elf Warrior");
-
-	  	          c.setOwner(player);
-	  	          c.setController(player);
-
-	  	          c.setManaCost("G");
-	  	          c.setToken(true);
-	  	         
-	  	          c.addType("Creature");
-	  	          c.addType("Elf");
-	  	          c.addType("Warrior");
-	  	          c.setBaseAttack(1);
-	  	          c.setBaseDefense(1);
-
-	  	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-	  	          play.add(c);
+				CardFactoryUtil.makeToken("Elf Warrior", "G 1 1 Elf Warrior", crd, "G", new String[] {"Creature", "Elf", "Warrior"}, 1, 1, new String[] {""} );
 			}
 		};
 		ability.setStackDescription("Prowess of the Fair - " + c.getController() +" may put a 1/1 green Elf Warrior creature token onto the battlefield.");
@@ -3696,27 +3574,7 @@ public class GameActionUtil
 		{
 			public void resolve()
 			{
-				Card c = new Card();
-
-				c.setOwner(crd.getController());
-				c.setController(crd.getController());
-
-				c.setName("Graveborn");
-				c.setImageName("BR 3 1 Graveborn");
-				c.setManaCost("B R");
-				c.setToken(true);
-
-				c.addType("Creature");
-				c.addType("Graveborn");
-
-				c.addIntrinsicKeyword("Haste");
-				
-				c.setBaseAttack(3);
-				c.setBaseDefense(1);
-
-				
-				PlayerZone play = AllZone.getZone(Constant.Zone.Play,crd.getController());
-				play.add(c);
+				CardFactoryUtil.makeToken("Graveborn", "BR 3 1 Graveborn", crd, "BR", new String[] {"Creature", "Graveborn"}, 3, 1, new String[] {"Haste"} );
 			}
 		};
 		ability.setStackDescription("Sek'Kuar, Deathkeeper - put a 3/1 black and red Graveborn creature token with haste onto the battlefield.");
@@ -3766,29 +3624,7 @@ public class GameActionUtil
 		{
 			public void resolve()
 			{
-				makeToken();
-			}
-			public void makeToken()
-			{
-				 String player = crd.getController();
-				 Card c = new Card();
-
-	        	  c.setName("Zombie");
-	  	          c.setImageName("B 2 2 Zombie");
-
-	  	          c.setOwner(player);
-	  	          c.setController(player);
-
-	  	          c.setManaCost("B");
-	  	          c.setToken(true);
-	  	         
-	  	          c.addType("Creature");
-	  	          c.addType("Zombie");
-	  	          c.setBaseAttack(2);
-	  	          c.setBaseDefense(2);
-
-	  	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-	  	          play.add(c);
+				CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", crd, "B", new String[] {"Creature", "Zombie"}, 2, 2, new String[] {""} );
 			}
 		};
 		ability.setStackDescription("Bridge from Below - " + c.getController() +"puts a 2/2 black Zombie creature token onto the battlefield.");
@@ -3884,24 +3720,7 @@ public class GameActionUtil
 		{
 			public void resolve()
 			{
-				Card card = new Card();
-
-				card.setName("Beast");
-				card.setImageName("G 4 4 Beast");
-
-				card.setOwner(crd.getController());
-				card.setController(crd.getController());
-
-				card.setManaCost("G");
-				card.setToken(true);
-
-				card.addType("Creature");
-				card.addType("Beast");
-				card.setBaseAttack(4);
-				card.setBaseDefense(4);
-
-				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
-				play.add(card);
+				CardFactoryUtil.makeToken("Beast", "G 4 4 Beast", crd, "G", new String[] {"Creature", "Beast"}, 4, 4, new String[] {""} );
 			}
 		};
 		
@@ -3924,26 +3743,7 @@ public class GameActionUtil
 		{
 			public void resolve()
 			{
-				Card card = new Card();
-	
-				card.setName("Bird");
-				card.setImageName("W 1 1 Bird");
-
-				card.setOwner(crd.getController());
-				card.setController(crd.getController());
-
-				card.setManaCost("W");
-				card.setToken(true);
-
-				card.addType("Creature");
-				card.addType("Bird");
-				card.setBaseAttack(1);
-				card.setBaseDefense(1);
-				
-				card.addIntrinsicKeyword("Flying");
-
-				PlayerZone play = AllZone.getZone(Constant.Zone.Play, crd.getController());
-				play.add(card);
+				CardFactoryUtil.makeToken("Bird", "W 1 1 Bird", crd, "W", new String[] {"Creature", "Bird"}, 1, 1, new String[] {"Flying"} );
 			}
 		};
 		
@@ -4749,32 +4549,16 @@ public class GameActionUtil
 	private static void playerCombatDamage_Spawnwrithe(Card c)
 	{
 		final String player = c.getController();
+		final Card crd = c;
 
 		Ability ability2 = new Ability(c, "0")
 		{
 			public void resolve()
 			{
-				Card card = new Card();
-
-				card.setName("Spawnwrithe");
-
-				card.setOwner(player);
-				card.setController(player);
-
-				card.setManaCost("2 G");
-				card.setToken(true);
-				card
-						.setText("Whenever Spawnwrithe deals combat damage to a player, put a token into play that's a copy of Spawnwrithe.");
-
-				card.addType("Creature");
-				card.addType("Elemental");
-				card.addIntrinsicKeyword("Trample");
-				card.setBaseAttack(2);
-				card.setBaseDefense(2);
-
-				PlayerZone play = AllZone.getZone(Constant.Zone.Play, card
-						.getController());
-				play.add(card);
+				CardList cl = CardFactoryUtil.makeToken("Spawnwrithe", "", crd, "2 G", new String[] {"Creature", "Elemental"}, 2, 2, new String[] {"Trample"} );
+				
+				for (Card c:cl)
+					c.setText("Whenever Spawnwrithe deals combat damage to a player, put a token into play that's a copy of Spawnwrithe.");
 			}
 		};// ability2
 
@@ -4782,33 +4566,6 @@ public class GameActionUtil
 				+ " puts copy into play.");
 		AllZone.Stack.add(ability2);
 	}
-
-	/*
-	private static void playerCombatDamage_Guiltfeeder(Card c)
-	{
-		final String player = c.getController();
-		final String opponent = AllZone.GameAction.getOpponent(player);
-
-		Ability ability2 = new Ability(c, "0")
-		{
-			public void resolve()
-			{
-
-				PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard,
-						opponent);
-				CardList cardsInGrave = new CardList(graveyard.getCards());
-				PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
-
-				life.subtractLife(cardsInGrave.size());
-
-			}
-		};// ability2
-
-		ability2.setStackDescription(c.getName() + " - " + opponent
-				+ " loses life equal to cards in graveyard.");
-		AllZone.Stack.add(ability2);
-	}
-	*/
 	
 	private static void playerCombatDamage_Goblin_Lackey(Card c)
 	{
@@ -5929,13 +5686,12 @@ public class GameActionUtil
 			// System.out.println("top of deck: " + library.get(i).getName());
 			String creatureType = library.get(0).getType().toString();
 			String cardName = library.get(0).getName();
-
+			
+			final Card crd = list.get(i);
 			ability = new Ability(list.get(i), "0")
 			{
 				public void resolve()
 				{
-					PlayerZone play = AllZone.getZone(Constant.Zone.Play,
-							player);
 					PlayerZone library = AllZone.getZone(Constant.Zone.Library,
 							player);
 
@@ -5944,24 +5700,7 @@ public class GameActionUtil
 					if (creatureType.contains("Elf")
 							|| creatureType.contains("Shaman") || library.get(0).getKeyword().contains("Changeling"))
 					{
-						Card c = new Card();
-
-						c.setOwner(player);
-						c.setController(player);
-
-						c.setName("Wolf");
-						c.setImageName("G 2 2 Wolf");
-						c.setManaCost("G");
-						c.setToken(true);
-
-						c.addType("Creature");
-						c.addType("Wolf");
-
-						c.setBaseAttack(2);
-						c.setBaseDefense(2);
-
-						play.add(c);
-
+						CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", crd, "G", new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""} );
 					}
 
 				}// resolve()
@@ -6002,8 +5741,6 @@ public class GameActionUtil
 			{
 				public void resolve()
 				{
-					PlayerZone play = AllZone.getZone(Constant.Zone.Play,
-							player);
 					PlayerZone library = AllZone.getZone(Constant.Zone.Library,
 							player);
 
@@ -6012,9 +5749,43 @@ public class GameActionUtil
 					if (creatureType.contains("Treefolk")
 							|| creatureType.contains("Shaman") || library.get(0).getKeyword().contains("Changeling"))
 					{
-						Card c = library.get(0);
-						library.remove(c);
-						play.add(c);
+						if (player.equals(Constant.Player.Human)) 
+						{
+							String[] choices = { "Yes", "No" };
+							Object q = null;
+
+							StringBuilder sb = new StringBuilder();
+							sb.append("Play ");
+							sb.append(library.get(0).toString());
+							sb.append(" without paying its mana cost?");
+							
+							q = AllZone.Display.getChoiceOptional(sb.toString(), choices);
+
+							if (q == null || q.equals("No"))
+								;
+							else
+							{
+								Card c = library.get(0);
+								AllZone.GameAction.playCardNoCost(c);
+								library.remove(c);
+							}
+						}
+						else
+						{
+							Card c = library.get(0);
+							ArrayList<SpellAbility> choices = c.getBasicSpells();
+						    
+						    for (SpellAbility sa : choices )
+						    {
+						    	if (sa.canPlayAI())
+						    	{
+						    		ComputerUtil.playStackFree(sa);
+						    		break;
+						    	}
+						    }
+							library.remove(c);
+							//play.add(c);
+						}
 					}
 
 				}// resolve()
@@ -6022,7 +5793,7 @@ public class GameActionUtil
 			if (creatureType.contains("Treefolk")
 					|| creatureType.contains("Shaman"))
 				ability.setStackDescription("Leaf-Crowned Elder - " + player
-						+ " puts into play: " + cardName + ".");
+						+ " reveals: " + cardName + ".");
 			else
 				ability.setStackDescription("Leaf-Crowned Elder - " + player
 						+ " reveals top card: " + cardName + ".");
@@ -7027,8 +6798,6 @@ public class GameActionUtil
 	
 	private static void upkeep_Greener_Pastures()
 	{
-		
-
 		final String player = AllZone.Phase.getActivePlayer();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		PlayerZone oppPlayZone = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(player));
@@ -7055,34 +6824,15 @@ public class GameActionUtil
 			list = list.getName("Greener Pastures");
 	
 			Ability ability;
-			
 					
 			for (int i = 0; i < list.size(); i++)
 			{
+				final Card crd = list.get(i);
 				ability = new Ability(list.get(i), "0")
 				{
 					public void resolve()
 					{
-						Card c = new Card();
-	
-						c.setOwner(mostLands);
-						c.setController(mostLands);
-		
-
-						c.setName("Saproling");
-						c.setImageName("G 1 1 Saproling");
-						c.setManaCost("G");
-						c.setToken(true);
-	
-						c.addType("Creature");
-						c.addType("Saproling");
-	
-						c.setBaseAttack(1);
-						c.setBaseDefense(1);
-	
-						PlayerZone play = AllZone.getZone(Constant.Zone.Play,
-								mostLands);
-						play.add(c);
+						CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", crd, "G", new String[] {"Creature", "Saproling"}, 1, 1, new String[] {""} );
 					}// resolve()
 				};// Ability
 				ability.setStackDescription("Greener Pastures - " + mostLands + " puts a 1/1 green Saproling token into play.");
@@ -7104,32 +6854,13 @@ public class GameActionUtil
 		Ability ability;
 		for (int i = 0; i < list.size(); i++)
 		{
+			final Card crd = list.get(i);
 			ability = new Ability(list.get(i), "0")
 			{
 				public void resolve()
 				{
 					AllZone.GameAction.getPlayerLife(player).subtractLife(1);
-					Card c = new Card();
-
-					c.setOwner(player);
-					c.setController(player);
-
-					c.setName("Faerie Rogue");
-					c.setImageName("B 1 1 Faerie Rogue");
-					c.setManaCost("B");
-					c.setToken(true);
-
-					c.addType("Creature");
-					c.addType("Faerie");
-					c.addType("Rogue");
-					c.addIntrinsicKeyword("Flying");
-
-					c.setBaseAttack(1);
-					c.setBaseDefense(1);
-
-					PlayerZone play = AllZone.getZone(Constant.Zone.Play,
-							player);
-					play.add(c);
+					CardFactoryUtil.makeToken("Faerie Rogue", "B 1 1 Faerie Rogue", crd, "B", new String[] {"Creature", "Faerie", "Rogue"}, 1, 1, new String[] {"Flying"} );
 				}// resolve()
 			};// Ability
 			ability.setStackDescription("Bitterblossom - deals 1 damage to "
@@ -7245,25 +6976,7 @@ public class GameActionUtil
 				
 				public void makeToken()
 				{
-					Card c = new Card();
-
-					c.setOwner(player);
-					c.setController(player);
-
-					c.setName("Saproling");
-					c.setImageName("G 1 1 Saproling");
-					c.setManaCost("G");
-					c.setToken(true);
-
-					c.addType("Creature");
-					c.addType("Saproling");
-
-					c.setBaseAttack(1);
-					c.setBaseDefense(1);
-
-					PlayerZone play = AllZone.getZone(Constant.Zone.Play,
-							player);
-					play.add(c);
+					CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {"Creature", "Saproling"}, 1, 1, new String[] {""} );
 				}
 			};// Ability
 			ability.setStackDescription("Mycoloth - "
@@ -7291,14 +7004,22 @@ public class GameActionUtil
 			{
 				public void resolve()
 				{
-					makeToken();
+					int multiplier = 1;
+					int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", card.getController()).size();
+					if (doublingSeasons > 0)
+						  multiplier = (int) Math.pow(2, doublingSeasons);
+					for (int i=0;i<multiplier;i++)
+						makeToken();
 					
 				}// resolve()
 				
 				public void makeToken()
 				{
+					//CardList cl = CardFactoryUtil.makeToken("Dragon", "RG 1 1 Dragon", card, "RG", new String[] {"Creature", "Dragon"}, 1, 1, new String[] {"Flying"} );
+					
+					
 					final Card c = new Card();
-
+					
 					c.setOwner(card.getController());
 					c.setController(card.getController());
 
@@ -7312,9 +7033,7 @@ public class GameActionUtil
 
 					c.setBaseAttack(1);
 					c.setBaseDefense(1);
-					c.addIntrinsicKeyword("Flying");
-					
-
+											
 					//final String player = card.getController();
 				    final int[] numCreatures = new int[1];
 					
@@ -7403,7 +7122,6 @@ public class GameActionUtil
 				    c.addSpellAbility(devour);
 				  	c.addComesIntoPlayCommand(intoPlay);
 					
-					
 					PlayerZone play = AllZone.getZone(Constant.Zone.Play,card.getController());
 					play.add(c);
 					
@@ -7426,6 +7144,7 @@ public class GameActionUtil
 		Ability ability;
 		for (int i = 0; i < list.size(); i++)
 		{
+			final Card crd = list.get(i);
 			ability = new Ability(list.get(i), "0")
 			{
 				public void resolve()
@@ -7441,48 +7160,12 @@ public class GameActionUtil
 					}
 					if (q.equals("Yes") || player.equals(Constant.Player.Computer))
 					{
-						Card c = new Card();
-	
-						c.setOwner(player);
-						c.setController(player);
-	
-						c.setName("Beast");
-						c.setImageName("G 3 3 Beast");
-						c.setManaCost("G");
-						c.setToken(true);
-	
-						c.addType("Creature");
-						c.addType("Beast");
-	
-						c.setBaseAttack(3);
-						c.setBaseDefense(3);
-	
-						PlayerZone play = AllZone.getZone(Constant.Zone.Play,
-								player);
-						play.add(c);
+						CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd, "G", new String[] {"Creature", "Beast"}, 3, 3, new String[] {""} );
 					}
-					
+					//???
 					else if (player.equals(Constant.Player.Computer))
 					{
-						Card c = new Card();
-	
-						c.setOwner(player);
-						c.setController(player);
-	
-						c.setName("Beast");
-						c.setImageName("G 3 3 Beast");
-						c.setManaCost("G");
-						c.setToken(true);
-	
-						c.addType("Creature");
-						c.addType("Beast");
-	
-						c.setBaseAttack(3);
-						c.setBaseDefense(3);
-	
-						PlayerZone play = AllZone.getZone(Constant.Zone.Play,
-								player);
-						play.add(c);
+						CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd, "G", new String[] {"Creature", "Beast"}, 3, 3, new String[] {""} );
 					}
 				}// resolve()
 			};// Ability
@@ -7967,35 +7650,19 @@ public class GameActionUtil
 		list = list.getName("Honden of Life's Web");
 
 		for (int i = 0; i < list.size(); i++) {
+			final Card crd = list.get(i);
 			final Ability ability = new Ability(list.get(i), "0")
 		    {   
-			public void resolve() {
-			PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
-			CardList hondlist = new CardList();
-			hondlist.addAll(Play.getCards());
-			hondlist = hondlist.getType("Shrine");
-		    for (int j = 0; j < hondlist.size() ; j++) 
-		    {        
-		    	Card crd = new Card();
-
-				crd.setOwner(player);
-				crd.setController(player);
-				
-				crd.setName("Spirit");
-				crd.setImageName("C 1 1 Spirit");
-				crd.setManaCost("");
-				crd.setToken(true);
-
-				crd.addType("Creature");
-				crd.addType("Spirit");
-
-				crd.setBaseAttack(1);
-				crd.setBaseDefense(1);
-
-				PlayerZone addplay = AllZone.getZone(Constant.Zone.Play, player);
-				addplay.add(crd); 
-		    }
-			}
+				public void resolve() {
+					PlayerZone Play = AllZone.getZone(Constant.Zone.Play, player);
+					CardList hondlist = new CardList();
+					hondlist.addAll(Play.getCards());
+					hondlist = hondlist.getType("Shrine");
+				    for (int j = 0; j < hondlist.size() ; j++) 
+				    {        
+				    	CardFactoryUtil.makeToken("Spirit", "C 1 1 Spirit", crd, "", new String[] {"Creature", "Spirit"}, 1, 1, new String[] {""} );
+				    }
+				}
 		    };
 		    ability.setStackDescription(list.get(i)+" - " + list.get(i).getController() + " puts a 1/1 colorless Spirit creature token into play for each Shrine he controls.");
 		    AllZone.Stack.add(ability);
@@ -10789,8 +10456,8 @@ public class GameActionUtil
 
 				// Gain life for new Soul Wardens
 				n[0] += newHivemaster.size();
-
-				final String player = hivemasterList.get(outer).getController();
+				final Card crd = hivemasterList.get(outer);
+				
 				SpellAbility ability = new Ability(new Card(), "0")
 				{
 
@@ -10798,30 +10465,8 @@ public class GameActionUtil
 					{
 						for(int i=0; i<n[0];i++)
 						{
-							makeToken();
+							CardFactoryUtil.makeToken("Insect", "G 1 1 Insect", crd, "G", new String[] {"Creature", "Insect"}, 1, 1, new String[] {""} );
 						}
-					}
-					public void makeToken()
-					{
-						Card c = new Card();
-
-						c.setOwner(player);
-						c.setController(player);
-
-						c.setName("Insect");
-						c.setImageName("G 1 1 Insect");
-						c.setManaCost("G");
-						c.setToken(true);
-
-						c.addType("Creature");
-						c.addType("Insect");
-
-						c.setBaseAttack(1);
-						c.setBaseDefense(1);
-
-						
-						PlayerZone play = AllZone.getZone(Constant.Zone.Play,player);
-						play.add(c);
 					}
 				};
 				ability.setStackDescription(hivemasterList.get(outer).getName()
