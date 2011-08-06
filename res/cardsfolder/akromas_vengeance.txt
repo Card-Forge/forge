@@ -1,8 +1,8 @@
 Name:Akroma's Vengeance
 ManaCost:4 W W
 Types:Sorcery
-Text:Destroy all artifacts, creatures, and enchantments.
-K:spDestroyAll:Artifact,Creature,Enchantment
+Text:no text
+A:SP$DestroyAll | Cost$ 4 W W | ValidCards$ Artifact,Creature,Enchantment | SpellDescription$ Destroy all artifacts, creatures, and enchantments.
 K:Cycling:3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_vengeance.jpg

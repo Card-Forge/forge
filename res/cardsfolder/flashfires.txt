@@ -1,8 +1,8 @@
 Name:Flashfires
 ManaCost:3 R
 Types:Sorcery
-Text:Destroy all Plains.
-K:spDestroyAll:Plains
+Text:no text
+A:SP$DestroyAll | Cost$ 3 R | ValidCards$ Plains | SpellDescription$ Destroy all Plains.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flashfires.jpg

@@ -1,8 +1,8 @@
 Name:Boil
 ManaCost:3 R
 Types:Instant
-Text:Destroy all Islands.
-K:spDestroyAll:Island
+Text:no text
+A:SP$DestroyAll | Cost$ 3 R | ValidCards$ Island | SpellDescription$ Destroy all Islands.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/7e/en-us/card25675.jpg

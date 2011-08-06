@@ -1,8 +1,8 @@
 Name:Hellfire
 ManaCost:2 B B B
 Types:Sorcery
-Text:Destroy all nonblack creatures. Hellfire deals X plus 3 damage to you, where X is the number of creatures put into all graveyards this way.
-K:spDestroyAll:Creature.nonBlack:Drawback$DamageYou/X.Plus.3
+Text:no text
+A:SP$DestroyAll | Cost$ 2 B B B | ValidCards$ Creature.nonBlack | SubAbility$ DamageYou/X.Plus.3 | SpellDescription$ Destroy all nonblack creatures. Hellfire deals X plus 3 damage to you, where X is the number of creatures put into all graveyards this way.
 SVar:X:Count$TypeOnBattlefield.Creature.nonBlack
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellfire.jpg

@@ -1,8 +1,8 @@
 Name:Acid Rain
 ManaCost:3 U
 Types:Sorcery
-Text:Destroy all Forests.
-K:spDestroyAll:Forest
+Text:no text
+A:SP$DestroyAll | Cost$ 3 U | ValidCards$ Forest | SpellDescription$ Destroy all Forests.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acid_rain.jpg

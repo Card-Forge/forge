@@ -1,8 +1,8 @@
 Name:Back to Nature
 ManaCost:1 G
 Types:Instant
-Text:Destroy all enchantments.
-K:spDestroyAll:Enchantment
+Text:no text
+A:SP$DestroyAll | Cost$ 1 G | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/back_to_nature.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/164.jpg

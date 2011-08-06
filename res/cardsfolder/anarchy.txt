@@ -1,8 +1,8 @@
 Name:Anarchy
 ManaCost:2 R R
 Types:Sorcery
-Text:Destroy all white permanents.
-K:spDestroyAll:Permanent.White
+Text:no text
+A:SP$DestroyAll | Cost$ 2 R R | ValidCards$ Permanent.White | SpellDescription$ Destroy all white permanents.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anarchy.jpg
