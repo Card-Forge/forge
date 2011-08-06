@@ -2,6 +2,7 @@ Name:Urza's Tower
 ManaCost:no cost
 Types:Land Urza's Tower
 Text:no text
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_tower.jpg
 End

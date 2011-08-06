@@ -2,6 +2,7 @@ Name:Urza's Mine
 ManaCost:no cost
 Types:Land Urza's Mine
 Text:no text
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urzas_mine.jpg
 End

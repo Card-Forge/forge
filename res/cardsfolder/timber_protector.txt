@@ -3,8 +3,8 @@ ManaCost:4 G
 Types:Creature Treefolk Warrior
 Text:no text
 PT:4/6
-K:stPumpAll:Creature.Treefolk+Other+YouCtrl:1/1/Indestructible:No Condition:Other Treefolk creatures you control get +1/+1 and are indestructible.
-K:stPumpAll:Land.Forest+Other+YouCtrl:0/0/Indestructible:No Condition:Other Forests you control are indestructible.
+K:stPumpAll:Creature.Treefolk+Other+YouCtrl:1/1:No Condition:Other Treefolk creatures you control get +1/+1.
+K:stPumpAll:Forest+YouCtrl,Treefolk.Other+YouCtrl:0/0/HIDDEN Indestructible:No Condition:Other Treefolk and Forests you control are indestructible.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/timber_protector.jpg

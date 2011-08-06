@@ -4,6 +4,7 @@ Types:Creature Human Mercenary
 Text:no text
 PT:1/1
 K:abPumpTgtC 1 B Sac<1/Land>:+2/+0
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_shauku.jpg
 End
