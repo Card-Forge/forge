@@ -205,7 +205,7 @@ private Card getCurrentCard(int ID)
            Object o = new Object();
            String s = "card";
            if (numToLibrary > 1)
-              s = "cards";
+              s += "s";
 
            o = AllZone.Display.getChoice("Do you want to put the " + s + " on the top or bottom of your library?", new Object[] {"top", "bottom"});
            libPos = o.toString();
@@ -267,6 +267,105 @@ private Card getCurrentCard(int ID)
      }    
   }
 
+  public void scry(String player, int numScry)
+  {
+	  CardList topN = new CardList();
+	  PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
+	  for (int i = 0; i < numScry; i++)
+	  {
+		  topN.add(library.get(0));
+		  library.remove(0);
+	  }
+	  
+	  int N = topN.size();
+	  
+	  if (player.equals(Constant.Player.Human))
+	  {
+		  for (int i = 0; i < N; i++)
+		  {
+			  Object o;
+			  o = AllZone.Display.getChoiceOptional("Choose a card to put on the bottom of your library.", topN.toArray());
+			  if (o != null)
+			  {
+				  Card c = (Card)o;
+				  topN.remove(c);
+				  library.add(c);
+			  }
+			  else	// no card chosen for the bottom
+				  break;
+		  }
+		  N = topN.size();
+		  if (N > 0)
+			  for (int i = 0; i < N; i++)
+			  {
+				  Object o;
+				  o = AllZone.Display.getChoice("Choose a card to put on the top of your library.", topN.toArray());
+				  if (o != null)
+				  {
+					  Card c = (Card)o;
+					  topN.remove(c);
+					  library.add(c, 0);
+				  }
+				  // no else - a card must have been chosen
+			  }
+
+	  }
+	  else // computer
+	  {
+		  for (int i = 0; i < N; i++)
+		  {
+			  boolean b = false;
+			  if (topN.get(i).getType().contains("Basic"))
+			  {
+				  CardList bl = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+				  bl = bl.filter(new CardListFilter()
+				  {
+					  public boolean addCard(Card c)
+					  {
+						  if (c.getType().contains("Basic"))
+							  return true;
+
+						  return false;
+					  }
+				  });
+				  
+				  if (bl.size() > 5) // if control more than 5 Basic land, probably don't need more
+					  b = true;
+			  }
+			  else if (topN.get(i).getType().contains("Creature"))
+			  {
+				  CardList cl = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+				  cl = cl.filter(new CardListFilter()
+				  {
+					  public boolean addCard(Card c)
+					  {
+						  if (c.getType().contains("Creature"))
+							  return true;
+
+						  return false;
+					  }
+				  });
+				  
+				  if (cl.size() > 5) // if control more than 5 Creatures, probably don't need more
+					  b = true;					  
+			  }
+			  if (b == true)
+			  {  
+				  library.add(topN.get(i));
+				  topN.remove(i);
+			  }
+		  }
+		  N = topN.size();
+		  if (N > 0)
+			  for (int i=0; i<N; i++) // put the rest on top in random order
+			  {
+				  Random rndm = new Random();
+				  int r = rndm.nextInt(topN.size());
+				  library.add(topN.get(r), 0);
+				  topN.remove(r);
+			  }
+	  }
+  }
   
   public void discard_nath(Card discardedCard)
   {
