@@ -146,7 +146,7 @@ public class SpellAbility_Restriction {
 		Player activator = sa.getActivatingPlayer();
 		if (activator == null){
 			activator = c.getController();
-			System.out.println(c.getName() + " Did not have activater set in SpellAbility_Restriction.canPlay()");
+			System.out.println(c.getName() + " Did not have activator set in SpellAbility_Restriction.canPlay()");
 		}
 		
 		if (bSorcerySpeed && !Phase.canCastSorcery(activator))
