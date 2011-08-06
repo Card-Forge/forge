@@ -6096,23 +6096,23 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 
-					if(player.equals("Human")) {
-						String[] choices = {"Yes", "No"};
-						Object o = AllZone.Display.getChoiceOptional(
-								"Return Squee from your graveyard to your hand?", choices);
-						if(o.equals("Yes")) {
-							Card c = squees.get(index[0]);
-							graveyard.remove(c);
-							hand.add(c);
+					Card c = squees.get(index[0]);
+                    if(AllZone.GameAction.isCardInZone(c, graveyard)) {
+						if(player.equals("Human")) {
+							String[] choices = {"Yes", "No"};
+							Object o = AllZone.Display.getChoiceOptional(
+									"Return Squee from your graveyard to your hand?", choices);
+							if(!o.equals("Yes")) {
+								index[0] = index[0] + 1;
+								return;
+							}
 						}
-					} else if(player.equals("Computer")) {
-						Card c = squees.get(index[0]);
-						graveyard.remove(c);
-						hand.add(c);
-					}
-					index[0] = index[0] + 1;
+                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getController());
+                        AllZone.GameAction.moveTo(hand, c);
+
+						index[0] = index[0] + 1;
+                    }
 				}
 
 			};// Ability
