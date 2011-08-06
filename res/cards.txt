@@ -1,3 +1,39 @@
+Apocalypse Hydra
+X G R
+Creature Hydra
+Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.\r\n1 R, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to target creature or player.
+0/0
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse_hydra.jpg
+
+Arashi, the Sky Asunder
+3 G G
+Legendary Creature Spirit
+(NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying." not implemented.) (NOTE: "Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
+5/5
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card87333.jpg
+
+Assert Authority
+5 U U
+Instant
+Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.\r\nAffinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+spCounter:Spell:None:Exile:None
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/assert_authority.jpg
+
+Avenger of Zendikar
+5 G G
+Creature Elemental
+When Avenger of Zendikar enters the battlefield, put a 0/1 green Plant creature token onto the battlefield for each land you control.\r\nLandfall - Whenever a land enters the battlefield under your control, you may put a +1/+1 counter on each Plant creature you control.
+5/5
+Landfall
+SVar:BuffedBy:Land
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/avenger_of_zendikar.jpg
+
 Siren's Call
 U
 Instant
@@ -1306,14 +1342,6 @@ Multikicker 1 W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apex_hawks.jpg
 
-Apocalypse Hydra
-X G R
-Creature Hydra
-Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it. 1 R, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to target creature or player.
-0/0
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse_hydra.jpg
-
 Apprentice Wizard
 1 U U
 Creature Human Wizard
@@ -1342,15 +1370,6 @@ no text
 Reach
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51230.jpg
-
-Arashi, the Sky Asunder
-3 G G
-Legendary Creature Spirit
-(NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying. Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
-5/5
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card87333.jpg
 
 Arc Runner
 2 R
@@ -1884,15 +1903,6 @@ no text
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assembly_worker.jpg
 
-Assert Authority
-5 U U
-Instant
-Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-spCounter:Spell:None:Exile:None
-CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/assert_authority.jpg
-
 Astral Steel
 2 W
 Instant
@@ -2136,16 +2146,6 @@ Domain - Aven Trailblazer's toughness is equal to the number of basic land types
 Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_trailblazer.jpg
-
-Avenger of Zendikar
-5 G G
-Creature Elemental
-When Avenger of Zendikar enters the battlefield, put a 0/1 green Plant creature token onto the battlefield for each land you control. Landfall - Whenever a land enters the battlefield under your control, you may put a +1/+1 counter on each Plant creature you control.
-5/5
-Landfall
-SVar:BuffedBy:Land
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/avenger_of_zendikar.jpg
 
 Avian Changeling
 2 W
