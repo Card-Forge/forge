@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Worm Horror
 Text:When CARDNAME enters the battlefield, sacrifice a creature.
 PT:5/1
-A:AB$Regenerate|Cost$B|SpellDescription$Regenerate CARDNAME.
+A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spined_fluke.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/160.jpg
