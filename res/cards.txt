@@ -4994,7 +4994,6 @@ W
 Enchantment Aura
 Enchanted creature has vigilance.
 Enchant creature
-enPump:Vigilance
 
 Mask of Law and Grace
 W
@@ -6186,9 +6185,10 @@ no text
 AEther Web
 1 G
 Enchantment Aura
-Enchanted creature gets +1/+1, has reach, and can block creatures with shadow as though they didn't have shadow. 
-Enchant creature
+Enchanted creature gets +1/+1, has reach, and can block creatures with shadow as though they didn't have shadow.
 Flash
+Enchant creature
+enPump:+1/+1/Reach & This creature can block creatures with shadow as though they didn't have shadow.
 
 Emeria Angel
 2 W W
@@ -6446,12 +6446,14 @@ W U
 Enchantment Aura
 Enchanted creature gets +1/+3 and has flying.
 Enchant creature
+enPump:+1/+3/Flying
 
 Serra's Embrace
 2 W W
 Enchantment Aura
 Enchanted creature gets +2/+2 and has flying and vigilance.
 Enchant creature
+enPump:+2/+2/Flying & Vigilance
 
 Flight
 U
@@ -6566,6 +6568,7 @@ Armadillo Cloak
 Enchantment Aura
 Enchanted creature gets +2/+2 and has trample and lifelink.
 Enchant creature
+enPump:+2/+2/Trample & Lifelink
 
 Dryad Sophisticate
 1 G

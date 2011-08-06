@@ -1380,10 +1380,6 @@ class CardFactory_Auras {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
 
-        
-        
-        // NOTE: this card is missing it's cards.txt entry
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Paralyzing Grasp")) {
             final SpellAbility spell = new Spell(card) {
@@ -1604,6 +1600,96 @@ class CardFactory_Auras {
             card.addLeavesPlayCommand(onLeavesPlay);
             
 
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+        
+        //******************************************************************
+        // This card can't be converted to keyword, problem with CARDNME   *
+        //*************** START *********** START **************************
+        else if(cardName.equals("Vigilance")) {
+            final SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = 3659751920022901998L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Computer_Play.getCards());
+                    list = list.getType("Creature");
+                    
+                    if(list.isEmpty()) return false;
+                    
+                    //else
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
+                            setTargetCard(list.get(i));
+                            return true;
+                        }
+                    }
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                        card.enchantCard(c);
+                        System.out.println("Enchanted: " + getTargetCard());
+                    }
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+                
+                private static final long serialVersionUID = -2060758415927004190L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        crd.addExtrinsicKeyword("Vigilance");
+                    }
+                }//execute()
+            };//Command
+            
+
+            Command onUnEnchant = new Command() {
+                
+                private static final long serialVersionUID = -5220074511756932255L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        
+                        crd.removeExtrinsicKeyword("Vigilance");
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+                
+                private static final long serialVersionUID = -549155960320946886L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
@@ -2431,7 +2517,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-
+        
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Armadillo Cloak")) {
             final SpellAbility spell = new Spell(card) {
@@ -2527,7 +2615,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+*/
         
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Serra's Embrace")) {
             final SpellAbility spell = new Spell(card) {
@@ -2619,7 +2709,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+*/
         
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Wings of Hope")) {
             final SpellAbility spell = new Spell(card) {
@@ -2710,7 +2802,9 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+*/
         
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("AEther Web")) {
             final SpellAbility spell = new Spell(card) {
@@ -2809,7 +2903,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
+*/
         
 /*
         //*************** START *********** START **************************
@@ -3064,96 +3158,6 @@ class CardFactory_Auras {
             Command onLeavesPlay = new Command() {
                 
                 private static final long serialVersionUID = 8310935051473082927L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            
-            card.addEnchantCommand(onEnchant);
-            card.addUnEnchantCommand(onUnEnchant);
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
-*/
-        
-/*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Vigilance")) {
-            final SpellAbility spell = new Spell(card) {
-                
-                private static final long serialVersionUID = 3659751920022901998L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Play.getCards());
-                    list = list.getType("Creature");
-                    
-                    if(list.isEmpty()) return false;
-                    
-                    //else
-                    CardListUtil.sortAttack(list);
-                    CardListUtil.sortFlying(list);
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canTarget(card, list.get(i))) {
-                            setTargetCard(list.get(i));
-                            return true;
-                        }
-                    }
-                    return false;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(card);
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        card.enchantCard(c);
-                        System.out.println("Enchanted: " + getTargetCard());
-                    }
-                }//resolve()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Command onEnchant = new Command() {
-                
-                private static final long serialVersionUID = -2060758415927004190L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.addExtrinsicKeyword("Vigilance");
-                    }
-                }//execute()
-            };//Command
-            
-
-            Command onUnEnchant = new Command() {
-                
-                private static final long serialVersionUID = -5220074511756932255L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        
-                        crd.removeExtrinsicKeyword("Vigilance");
-                    }
-                    
-                }//execute()
-            };//Command
-            
-            Command onLeavesPlay = new Command() {
-                
-                private static final long serialVersionUID = -549155960320946886L;
                 
                 public void execute() {
                     if(card.isEnchanting()) {
