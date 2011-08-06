@@ -838,6 +838,7 @@ res/cardsfolder/cephalid_broker.txt -text svneol=native#text/plain
 res/cardsfolder/cephalid_coliseum.txt -text svneol=native#text/plain
 res/cardsfolder/cephalid_inkshrouder.txt -text svneol=native#text/plain
 res/cardsfolder/cephalid_looter.txt -text svneol=native#text/plain
+res/cardsfolder/cephalid_pathmage.txt -text svneol=native#text/plain
 res/cardsfolder/cephalid_retainer.txt -text svneol=native#text/plain
 res/cardsfolder/cephalid_scout.txt -text svneol=native#text/plain
 res/cardsfolder/cerebral_eruption.txt -text svneol=native#text/plain
