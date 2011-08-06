@@ -2335,7 +2335,10 @@ public class CardFactory implements NewConstants {
             });
               
               CardList choices = allCards.getValidCards(Tgts);
-              stopSetNext(CardFactoryUtil.input_targetSpecific(spDstryTgt, choices, Selec, true));
+              boolean free = false;
+              if (this.isFree())
+            	  free = true;
+              stopSetNext(CardFactoryUtil.input_targetSpecific(spDstryTgt, choices, Selec, true, free));
            }
         };//InGetTarget
        
@@ -3474,91 +3477,6 @@ public class CardFactory implements NewConstants {
    }//*************** END ************ END **************************
     
 
-/*
-    //contributed code
-    //*************** START *********** START **************************
-    if(cardName.equals("Dark Banishing"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = -5621665629586583879L;
-		
-		Card check;
-
-        public boolean canPlayAI()
-        {
-          check = getNonBlackCreature();
-          return check != null;
-        }
-
-        public void chooseTargetAI()
-        {
-          Card c = getNonBlackCreature();
-          if((c == null) || (! check.equals(c)))
-            throw new RuntimeException(card +" error in chooseTargetAI() - Card c is " +c +",  Card check is " +check);
-
-          setTargetCard(c);
-        }//chooseTargetAI()
-
-        Card getNonBlackCreature()
-        {
-          int maxAttack = 0;
-          Card bestCard = null;
-          CardList nonBlackCards = CardFactoryUtil.AI_getHumanCreature(card, true);
-
-          for(int i = 0; i < nonBlackCards.size(); i++)
-            if(!CardUtil.getColors(nonBlackCards.get(i)).contains(Constant.Color.Black))
-              if(nonBlackCards.get (i).getNetAttack() > maxAttack)
-          {
-            maxAttack = nonBlackCards.get(i).getNetAttack();
-            bestCard = nonBlackCards.get(i);
-          }
-
-          return bestCard;
-        }
-
-        public void resolve()
-        {
-          if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card,getTargetCard()))
-          {
-            AllZone.GameAction.destroyNoRegeneration(getTargetCard());
-          }
-        }//resolve()
-      };//SpellAbility
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-
-      //target
-      Input target = new Input()
-      {
-		private static final long serialVersionUID = -3155643868640376193L;
-		
-		public void showMessage()
-        {
-          AllZone.Display.showMessage("Select target non-black creature for " +spell.getSourceCard());
-          ButtonUtil.enableOnlyCancel();
-        }
-        public void selectButtonCancel() {stop();}
-        public void selectCard(Card c, PlayerZone zone)
-        {
-          if (!CardFactoryUtil.canTarget(card, c))
-          {
-        	  AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-          }
-          else if((!CardUtil.getColors(c).contains(Constant.Color.Black))
-             && c.isCreature()
-             && zone.is(Constant.Zone.Play))
-          {
-            spell.setTargetCard(c);
-            stopSetNext(new Input_PayManaCost(spell));
-          }
-        }
-      };//SpellAbility - target
-
-      spell.setBeforePayMana(target);
-    }//*************** END ************ END **************************
-*/
-   
 
     //*************** START *********** START **************************
     else if(cardName.equals("Pyrohemia"))
@@ -4280,164 +4198,8 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
     
-    
-/*
-  //*************** START *********** START **************************
-    else if(cardName.equals("Terminate"))
-    {
-      final SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = 3334967250557638367L;
-		
-		public boolean canPlayAI()
-        {
-          return (getCreature().size() != 0) && (AllZone.Phase.getTurn() > 4);
-        }
-        public void chooseTargetAI()
-        {
-          Card best = CardFactoryUtil.AI_getBestCreature(getCreature());
-          setTargetCard(best);
+ 
 
-          CardList human = CardFactoryUtil.AI_getHumanCreature(AllZone.Computer_Life.getLife() - 1, card, true);
-          CardListUtil.sortAttack(human);
-
-          if(0 < human.size())
-            setTargetCard(human.get(0));
-          
-        }
-        CardList getCreature()
-        {
-          return CardFactoryUtil.AI_getHumanCreature(card, true);
-        }//getCreature()
-        public void resolve()
-        {
-          if (AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard()))
-        	  AllZone.GameAction.destroyNoRegeneration(getTargetCard());
-        }//resolve()
-      };
-
-      card.clearSpellAbility();
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-      card.addSpellAbility(spell);
-    }//*************** END ************ END **************************
-*/
-    
-/*    
-    //*************** START *********** START **************************
-    else if(cardName.equals("Kinsbaile Borderguard"))
-    {
-    	final SpellAbility ability = new Ability(card, "0")
-        {
-          public void resolve()
-          {
-             card.addCounter(Counters.P1P1, countKithkin());
-             //System.out.println("all counters: " +card.sumAllCounters());
-          }//resolve()
-          
-          public int countKithkin()
-          {
-        	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-        	  CardList kithkin = new CardList(play.getCards());
-        	  kithkin = kithkin.filter(new CardListFilter()        	  
-        	  {
-
-				public boolean addCard(Card c)
-				{
-					return (c.getType().contains("Kithkin") || c.getKeyword().contains("Changeling"))&& !c.equals(card);
-				}
-        		  
-        	  });
-        	  return kithkin.size();
-        	  
-          }
-          @SuppressWarnings("unused") // makeToken
-		  public void makeToken()
-          {
-        	  Card c = new Card();
-
-              c.setOwner(card.getController());
-              c.setController(card.getController());
-
-              c.setName("Kithkin Soldier");
-              c.setImageName("W 1 1 Kithkin Soldier");
-              c.setManaCost("W");
-              c.setToken(true);
-
-              c.addType("Creature");
-              c.addType("Kithkin");
-              c.addType("Soldier");
-
-              c.setBaseAttack(1);
-              c.setBaseDefense(1);
-
-              PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-              play.add(c);
-          }
-        };
-        Command intoPlay = new Command()
-        {
-		  private static final long serialVersionUID = -7067218066522935060L;
-
-		  public void execute()
-          {
-            ability.setStackDescription("Kinsbaile Borderguard comes into play with a +1/+1 counter on it for each other Kithkin you control.");
-            AllZone.Stack.add(ability);
-          }
-        };
-        
-        final SpellAbility ability2 = new Ability(card, "0")
-        {
-          public void resolve()
-          {
-             for (int i=0;i<card.sumAllCounters();i++)
-             {
-            	 makeToken();
-             }
-          }//resolve()
-          
-          public void makeToken()
-          {
-        	  Card c = new Card();
-
-              c.setOwner(card.getController());
-              c.setController(card.getController());
-
-              c.setName("Kithkin Soldier");
-              c.setImageName("W 1 1 Kithkin Soldier");
-              c.setManaCost("W");
-              c.setToken(true);
-
-              c.addType("Creature");
-              c.addType("Kithkin");
-              c.addType("Soldier");
-
-              c.setBaseAttack(1);
-              c.setBaseDefense(1);
-
-              PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-              play.add(c);
-          }
-          
-        };
-        
-        Command destroy = new Command()
-        {
-		  private static final long serialVersionUID = 304026662487997331L;
-
-		  public void execute()
-          {
-            ability2.setStackDescription("When Kinsbaile Borderguard is put into a graveyard from play, put a 1/1 white Kithkin Soldier creature token into play for each counter on it.");
-            AllZone.Stack.add(ability2);
-          }
-        };     
-        
-        card.addComesIntoPlayCommand(intoPlay);
-        card.addDestroyCommand(destroy);
-    	
-    }//*************** END ************ END **************************
-*/
-
-    
   //*************** START *********** START **************************
     else if(cardName.equals("Oblivion Ring"))
     {
@@ -4484,7 +4246,7 @@ public class CardFactory implements NewConstants {
         {
           CardList choice = (CardList)getPerm.execute();
 
-          stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice, "Select target permanent to remove from the game", true));
+          stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice, "Select target permanent to remove from the game", true, false));
           ButtonUtil.disableAll();//to disable the Cancel button
         }
       };
@@ -4817,70 +4579,6 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
-/*
-    //*************** START *********** START **************************
-    else if(cardName.equals("Angelic Blessing"))
-    {
-      SpellAbility spell = new Spell(card)
-      {
-		private static final long serialVersionUID = 6906094867912276636L;
-		
-		public void resolve()
-        {
-          final Command eot = new Command()
-          {
-			private static final long serialVersionUID = 4672991308703961180L;
-
-			public void execute()
-            {
-              Card c = getTargetCard();
-              if(AllZone.GameAction.isCardInPlay(c) )
-              {
-                c.addTempAttackBoost(-3);
-                c.addTempDefenseBoost(-3);
-                c.removeExtrinsicKeyword("Flying");
-              }
-            }//execute()
-          };//Command
-
-          Card c = getTargetCard();
-          if(AllZone.GameAction.isCardInPlay(c)  && CardFactoryUtil.canTarget(card, c) )
-          {
-            c.addTempAttackBoost(3);
-            c.addTempDefenseBoost(3);
-            c.addExtrinsicKeyword("Flying");
-
-            AllZone.EndOfTurn.addUntil(eot);
-          }
-        }//resolve()
-        public boolean canPlayAI()
-        {
-          Combat combat = ComputerUtil.getAttackers();
-          return (0 != combat.getAttackers().length);
-        }
-        public void chooseTargetAI()
-        {
-          Combat combat = ComputerUtil.getAttackers();
-          Card[] attacker = combat.getAttackers();
-          if(attacker.length != 0)
-            setTargetCard(attacker[0]);
-          else
-          {
-            CardList list = new CardList(AllZone.Computer_Play.getCards());
-            list = list.getType("Creature");
-            Card best = CardFactoryUtil.AI_getBestCreature(list);
-            setTargetCard(best);
-          }
-        }//chooseTargetAI()
-      };//SpellAbility
-      card.clearSpellAbility();
-      card.addSpellAbility(spell);
-
-      spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-    }//*************** END ************ END **************************
-*/
-
-
     //*************** START *********** START **************************
     else if (cardName.equals("Molten Rain"))
 	{
@@ -5054,8 +4752,16 @@ public class CardFactory implements NewConstants {
             index[0]++;
             showMessage();
 
-            if(index[0] == target.length)
-              stopSetNext(new Input_PayManaCost(spell));
+            if(index[0] == target.length) {
+            	if(this.isFree())
+                {
+                  this.setFree(false);
+                  AllZone.Stack.add(spell);
+                  stop();
+                }
+            	else
+            		stopSetNext(new Input_PayManaCost(spell));
+            }
           }
         }//selectCard()
       };//Input
@@ -5154,8 +4860,16 @@ public class CardFactory implements NewConstants {
             index[0]++;
             showMessage();
 
-            if(index[0] == target.length)
-              stopSetNext(new Input_PayManaCost(spell));
+            if(index[0] == target.length) {
+            	if(this.isFree())
+                {
+                  this.setFree(false);
+                  AllZone.Stack.add(spell);
+                  stop();
+                }
+            	else
+            		stopSetNext(new Input_PayManaCost(spell));
+            }
           }
         }//selectCard()
       };//Input
@@ -5238,8 +4952,16 @@ public class CardFactory implements NewConstants {
             index[0]++;
             showMessage();
 
-            if(index[0] == target.length)
-              stopSetNext(new Input_PayManaCost(spell));
+            if(index[0] == target.length) {
+            	if(this.isFree())
+                {
+                  this.setFree(false);
+                  AllZone.Stack.add(spell);
+                  stop();
+                }
+            	else
+            		stopSetNext(new Input_PayManaCost(spell));
+            }
           }
         }//selectCard()
       };//Input
@@ -5338,8 +5060,16 @@ public class CardFactory implements NewConstants {
             index[0]++;
             showMessage();
 
-            if(index[0] == target.length)
-              stopSetNext(new Input_PayManaCost(spell));
+            if(index[0] == target.length) {
+            	if(this.isFree())
+                {
+                  this.setFree(false);
+                  AllZone.Stack.add(spell);
+                  stop();
+                }
+            	else
+            		stopSetNext(new Input_PayManaCost(spell));
+            }
           }
         }//selectCard()
       };//Input
@@ -5359,71 +5089,6 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
       spell.setBeforePayMana(runtime);
     }//*************** END ************ END **************************
-
-    
-/*
-	// *************** START *********** START **************************
-	if (cardName.equals("Lay Waste") || cardName.equals("Stone Rain")
-			|| cardName.equals("Ice Storm") || cardName.equals("Sinkhole"))
-	{
-		final SpellAbility spell = new Spell(card)
-		{
-			private static final long serialVersionUID = -4973311759179228894L;
-			public boolean canPlayAI()
-			{
-				CardList land = new CardList(AllZone.Human_Play.getCards());
-				land = land.getType("Basic");
-				return land.size() != 0;
-			}
-				public void chooseTargetAI()
-			{
-				// target basic land that Human only has 1 or 2 in play
-				CardList land = new CardList(AllZone.Human_Play.getCards());
-				land = land.getType("Basic");
-					Card target = null;
-					String[] name =
-				{ "Forest", "Swamp", "Plains", "Mountain", "Island" };
-				for (int i = 0; i < name.length; i++)
-					if (land.getName(name[i]).size() == 1)
-					{
-						target = land.getName(name[i]).get(0);
-						break;
-					}
-					// see if there are only 2 lands of the same type
-				if (target == null)
-				{
-					for (int i = 0; i < name.length; i++)
-						if (land.getName(name[i]).size() == 2)
-						{
-							target = land.getName(name[i]).get(0);
-							break;
-						}
-				}// if
-				if (target == null)
-				{
-					land.shuffle();
-					target = land.get(0);
-				}
-				setTargetCard(target);
-			}// chooseTargetAI()
-				public void resolve()
-				{
-				if (AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
-					AllZone.GameAction.destroy(getTargetCard());
-			}// resolve()
-		};// SpellAbility
-		card.clearSpellAbility();
-		spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell,
-			"Land"));
-			card.addSpellAbility(spell);
-			if (cardName.equals("Lay Waste"))
-		{
-			card.addSpellAbility(CardFactoryUtil.ability_cycle(card, "2"));
-			spell.setDescription("Destroy target land");
-		}
-			return card;
-	}// *************** END ************ END **************************
-*/
 
 
     //*************** START *********** START **************************
@@ -6235,7 +5900,10 @@ public class CardFactory implements NewConstants {
 			  perms.addAll(human.getCards());
 			  perms.addAll(comp.getCards());
 			  
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell_one, perms, "Select target permanent.", true));
+			  boolean free = false;
+			  if (this.isFree())
+				  free = true;
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell_one, perms, "Select target permanent.", true, free));
 	        }
 	  };  
 	  
@@ -6251,8 +5919,11 @@ public class CardFactory implements NewConstants {
 			  perms.addAll(human.getCards());
 			  perms.addAll(comp.getCards());
 	          
+			  boolean free = false;
+			  if (this.isFree())
+				  free = true;
 	          
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell_two, perms, "Select target permanent.", true));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell_two, perms, "Select target permanent.", true, free));
 	        }
 	  };  
       
@@ -8034,7 +7705,7 @@ public class CardFactory implements NewConstants {
 
         	AllZone.GameAction.destroy(getTargetCard());
         	
-            if(! getTargetCard().isToken() && !getTargetCard().isFaceDown())
+            if(!getTargetCard().isFaceDown())
             {
               //get all creatures
               CardList list = new CardList();
@@ -8069,7 +7740,14 @@ public class CardFactory implements NewConstants {
     	  if(zone.is(Constant.Zone.Play) && !card.isLand())
     	  {
     		spell.setTargetCard(card);
-    		stopSetNext(new Input_PayManaCost(spell));
+    		if(this.isFree())
+            {
+              this.setFree(false);
+              AllZone.Stack.add(spell);
+              stop();
+            }
+    		else
+    			stopSetNext(new Input_PayManaCost(spell));
     	  }
     	}
       };//Input
@@ -13124,7 +12802,7 @@ public class CardFactory implements NewConstants {
   	    	lands.addAll(play.getCards());
   	    	lands = lands.getType("Land");
 
-            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, lands, "Select a land to sacrifice", false));
+            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, lands, "Select a land to sacrifice", false, false));
 
           }//showMessage()
         };//Input
@@ -13278,7 +12956,8 @@ public class CardFactory implements NewConstants {
                    return (!c.isLand() && CardFactoryUtil.canTarget(creature, c));
                 }
              });
-             tBanish.setBeforePayMana(CardFactoryUtil.input_targetSpecific(tBanish, all, "Return target nonland permanent to its owner's hand.", true));
+             
+             tBanish.setBeforePayMana(CardFactoryUtil.input_targetSpecific(tBanish, all, "Return target nonland permanent to its owner's hand.", true, false));
              AllZone.EndOfTurn.addUntil(new Command(){
 				private static final long serialVersionUID = -7819140065166374666L;
 
@@ -15304,7 +14983,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		  			}
 	            });
 	            
-	            stopSetNext(CardFactoryUtil.input_targetSpecific(a1, all, "Select target basic land", true));
+	            stopSetNext(CardFactoryUtil.input_targetSpecific(a1, all, "Select target basic land", true, false));
 	          }
         };
         a1.setBeforePayMana(runtime);
@@ -16242,7 +15921,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	              {
 	                AllZone.GameAction.sacrifice(card);
 	              }
-	            }, true));
+	            }, true, false));
         }
       };
       
@@ -16802,7 +16481,11 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 	          choice.addAll(AllZone.Human_Play.getCards());
 	          choice = choice.getType("Artifact");
 	          
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, choice, "Select artifact to sacrifice.", false));
+	          boolean free = false;
+			  if (this.isFree())
+				  free = true;
+	          
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, choice, "Select artifact to sacrifice.", false, free));
 	        }
 	    };
 	    spell.setBeforePayMana(runtime);  
@@ -16924,7 +16607,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
   	    		}
   	    	});
 
-            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, arts, "Select a non-token Artifact to sacrifice", false));
+            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, arts, "Select a non-token Artifact to sacrifice", false, false));
 
           }//showMessage()
         };//Input
@@ -17800,8 +17483,12 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		    					  return c.isPermanent() && !c.getName().equals("Mana Pool");
 		    				  }
 		    			  });
-
-		    			  stopSetNext(CardFactoryUtil.input_targetSpecific(spell, perms, "Select a permanent you control", true));
+		    			  
+		    			  boolean free = false;
+		    			  if (this.isFree())
+		    				  free = true;
+		    			  
+		    			  stopSetNext(CardFactoryUtil.input_targetSpecific(spell, perms, "Select a permanent you control", true, free));
 
 		    		  }//showMessage()
 		          };//Input

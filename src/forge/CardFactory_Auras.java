@@ -3483,7 +3483,7 @@ class CardFactory_Auras {
 		          CardList cars = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 		          cars = cars.getType("Caribou");
 		          
-		          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, cars, "Select a Caribou to sacrifice.", false));
+		          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, cars, "Select a Caribou to sacrifice.", false, false));
 		        }
 		      };  
 		      
@@ -3515,7 +3515,7 @@ class CardFactory_Auras {
 	              }
 	          });
 	          
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land you control", true));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land you control", true, false));
 	        }
 	      };
 	      spell.setBeforePayMana(runtime2);
@@ -3669,7 +3669,7 @@ class CardFactory_Auras {
 	              }
 	          });
 	          
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land", true));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land", true, false));
 	        }
 	      };
 	      spell.setBeforePayMana(runtime);
@@ -3821,7 +3821,7 @@ class CardFactory_Auras {
 	              }
 	          });
 	          
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land", true));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land", true, false));
 	        }
 	      };
 	      spell.setBeforePayMana(runtime);
@@ -3897,7 +3897,7 @@ class CardFactory_Auras {
 	              }
 	          });
 	          
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land", true));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(spell, land, "Select target land", true, false));
 	        }
 	      };
 	      spell.setBeforePayMana(runtime);

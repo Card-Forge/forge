@@ -23,63 +23,79 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
       cost = cost.replaceAll("tap", "T");
       return (cost.contains("T"));
    }
-    public Ability_Mana(Card sourceCard, String orig)
-    {
-   super(isTapAbility(orig) ? SpellAbility.Ability_Tap : SpellAbility.Ability, sourceCard);
-   this.orig=orig;
-   setDescription(orig);
-   if(isBasic())//lowers memory usage drastically
-   {
-	   Mana = "" + orig.charAt(9);
-	   setManaCost("0");
-	   return;
-   }
-   String[] parts = orig.split(":");
-   Mana=parts[1];
-   Mana = Mana.replaceAll(" add ", "");
-   setStackDescription("Add "+ Mana +" to your mana pool.");
-   Mana = Mana.replaceAll(" ", "");
    
-   String cost=parts[0];
-   cost = cost.replaceAll("tap", "T");
-   //cost = cost.replaceAll("T, ", "");
-   setManaCost(cost.replaceAll("T", "").split(",")[0]);
-   if (getManaCost().equals("")) setManaCost("0");   
-   //pain lands
-    ArrayList<String> pain = new ArrayList<String>();
-    pain.add("Battlefield Forge");
-    pain.add("Caves of Koilos");
-    pain.add("Llanowar Wastes");
-    pain.add("Shivan Reef");
-    pain.add("Yavimaya Coast");
-    pain.add("Adarkar Wastes");
-    pain.add("Brushland");
-    pain.add("Karplusan Forest");
-    pain.add("Underground River");
-    pain.add("Sulfurous Springs");
-    if(pain.contains(sourceCard.getName()) && !Mana.equals("1"))
-    runcommands.add(new Command()
-    {
-    	/**
-		 * 
-		 */
-		private static final long serialVersionUID = -5904507275105961979L;
-
-		public void execute(){
-
-    		AllZone.GameAction.getPlayerLife(getController()).subtractLife(1);
-    }});
-	//parseCosts();
-	/*for(String subcost : cost.split(","))
-	{
-		subcost.trim();
-		if (subcost.equals("") || subcost.equals("T") ||
-				subcost.equals(getManaCost())) continue;
-		if (subcost.startsWith("Sacrifice a")){
-			String sactype= subcost.substring(12).trim();//will remove both "Sac a " and "Sac an" :P
-			Input bpM_old = getBeforePayMana();
-		}
-	}*/
+   public Ability_Mana(Card sourceCard, String orig)
+   {
+	   super(isTapAbility(orig) ? SpellAbility.Ability_Tap : SpellAbility.Ability, sourceCard);
+	   
+	   /*
+	   if (orig.contains("$"))
+	   {
+		   String[] k = orig.split(":");
+		   String mana = k[1];
+		   int count = CardFactoryUtil.xCount(sourceCard, k[2]);
+		   StringBuilder sb = new StringBuilder();
+		   sb.append("tap: add ");
+		   for (int i=0;i<count;i++)
+			   sb.append(mana);
+		   orig = sb.toString();
+	   }
+	   */
+	   
+	   this.orig=orig;
+	   setDescription(orig);
+	   if(isBasic())//lowers memory usage drastically
+	   {
+		   Mana = "" + orig.charAt(9);
+		   setManaCost("0");
+		   return;
+	   }
+	   String[] parts = orig.split(":");
+	   Mana=parts[1];
+	   Mana = Mana.replaceAll(" add ", "");
+	   setStackDescription("Add "+ Mana +" to your mana pool.");
+	   Mana = Mana.replaceAll(" ", "");
+	   
+	   String cost=parts[0];
+	   cost = cost.replaceAll("tap", "T");
+	   //cost = cost.replaceAll("T, ", "");
+	   setManaCost(cost.replaceAll("T", "").split(",")[0]);
+	   if (getManaCost().equals("")) setManaCost("0");   
+	   //pain lands
+	    ArrayList<String> pain = new ArrayList<String>();
+	    pain.add("Battlefield Forge");
+	    pain.add("Caves of Koilos");
+	    pain.add("Llanowar Wastes");
+	    pain.add("Shivan Reef");
+	    pain.add("Yavimaya Coast");
+	    pain.add("Adarkar Wastes");
+	    pain.add("Brushland");
+	    pain.add("Karplusan Forest");
+	    pain.add("Underground River");
+	    pain.add("Sulfurous Springs");
+	    if(pain.contains(sourceCard.getName()) && !Mana.equals("1"))
+	    runcommands.add(new Command()
+	    {
+	    	/**
+			 * 
+			 */
+			private static final long serialVersionUID = -5904507275105961979L;
+	
+			public void execute(){
+	
+	    		AllZone.GameAction.getPlayerLife(getController()).subtractLife(1);
+	    }});
+		//parseCosts();
+		/*for(String subcost : cost.split(","))
+		{
+			subcost.trim();
+			if (subcost.equals("") || subcost.equals("T") ||
+					subcost.equals(getManaCost())) continue;
+			if (subcost.startsWith("Sacrifice a")){
+				String sactype= subcost.substring(12).trim();//will remove both "Sac a " and "Sac an" :P
+				Input bpM_old = getBeforePayMana();
+			}
+		}*/
     }
     public boolean equals(Object o)//Mana abilities with equal descriptions are considered equal, please take this into account
       {return (o instanceof Ability_Mana ? ((Ability_Mana)o).orig.equals(orig) : (o instanceof String ? o.toString().equals(orig) : false )) ;}

@@ -24,7 +24,7 @@ public class AllZone implements NewConstants {
     public static final MagicStack               Stack              = new MagicStack();
     public static final InputControl             InputControl       = new InputControl();
     public static final GameAction               GameAction         = new GameAction();
-    public static final StateBasedEffects        StateBasedEffects  = new StateBasedEffects();
+    public static final StaticEffects        StateBasedEffects  = new StaticEffects();
     public static final GameInfo				 GameInfo 			= new GameInfo();
     
     //initialized at Runtime since it has to be the last object constructed

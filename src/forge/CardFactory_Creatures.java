@@ -834,7 +834,7 @@ public class CardFactory_Creatures {
 	                  (!c.getType().contains("Legendary"));
 	            }
 	          });
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select target creature to copy that is not legendary.", true));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select target creature to copy that is not legendary.", true, false));
 	        }
 	      };//Input
 	      ability.setStackDescription("Kiki-Jiki - copy card.");
@@ -1099,7 +1099,7 @@ public class CardFactory_Creatures {
 		             CardList slivers = new CardList(AllZone.getZone(Constant.Zone.Play, opponent).getCards());
 		             slivers = slivers.getType("Sliver");
 		             
-		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability2, slivers, "Select a Sliver", true));
+		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability2, slivers, "Select a Sliver", true, false));
 		           }
 		       });
 		       
@@ -1954,7 +1954,7 @@ public class CardFactory_Creatures {
 				  perms.addAll(human.getCards());
 				  perms.addAll(comp.getCards());
 				  
-		          stopSetNext(CardFactoryUtil.input_targetSpecific(a1, perms, "Select target permanent.", true));
+		          stopSetNext(CardFactoryUtil.input_targetSpecific(a1, perms, "Select target permanent.", true, false));
 		        }
 		    };  
 	        
@@ -2199,7 +2199,7 @@ public class CardFactory_Creatures {
 		          CardList kith = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 		          kith = kith.getType("Kithkin");
 		          
-		          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, kith, "Select a Kithkin to sacrifice.", true));
+		          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, kith, "Select a Kithkin to sacrifice.", true, false));
 		        }
 		      };  
 		      
@@ -5081,7 +5081,7 @@ public class CardFactory_Creatures {
 	        {
 	          CardList choice = (CardList)getCreature.execute();
 
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice, "Select Elemental to remove from the game", false));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice, "Select Elemental to remove from the game", false, false));
 	          ButtonUtil.disableAll();
 	        }
 
@@ -5223,7 +5223,7 @@ public class CardFactory_Creatures {
 	        {
 	          CardList choice = (CardList)getCreature.execute();
 
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice, "Select Elf to remove from the game", false));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice, "Select Elf to remove from the game", false, false));
 	          ButtonUtil.disableAll(); //target this card means: sacrifice this card
 	        }
 	      };
@@ -5425,7 +5425,7 @@ public class CardFactory_Creatures {
 	        {
 	          CardList choice = (CardList)getCreature.execute();
 
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice, "Select creature to remove from the game", false));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice, "Select creature to remove from the game", false, false));
 	          ButtonUtil.disableAll(); 
 	        }
 	      };
@@ -5561,7 +5561,7 @@ public class CardFactory_Creatures {
 	        {
 	          CardList choice = (CardList)getBlackPerm.execute();
 
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice, "Select target black permanent to remove from the game", true));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice, "Select target black permanent to remove from the game", true, false));
 	          ButtonUtil.disableAll();//to disable the Cancel button
 	        }
 	      };
@@ -5690,7 +5690,7 @@ public class CardFactory_Creatures {
 	        {
 	          CardList choice = (CardList)getCreature.execute();
 
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice, "Select target creature to remove from the game", true));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(abilityComes, choice, "Select target creature to remove from the game", true, false));
 	          ButtonUtil.disableAll();//to disable the Cancel button
 	        }
 	      };
@@ -6261,7 +6261,7 @@ public class CardFactory_Creatures {
 						}
 		            	
 		            });
-		            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, creats, "Select a creature", false));
+		            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, creats, "Select a creature", false, false));
 		          }
 		      });
 		      card.addSpellAbility(ability);
@@ -6908,7 +6908,7 @@ public class CardFactory_Creatures {
 	            	
 	            });
 	            
-	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, slivers, "Select a tapped non-black creature", true));
+	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, slivers, "Select a tapped non-black creature", true, false));
 	          }
 	      });
 
@@ -7208,7 +7208,7 @@ public class CardFactory_Creatures {
 	  			}
 	            });
 	            
-	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, all, "Destroy target enchanted creature.", true));
+	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, all, "Destroy target enchanted creature.", true, false));
 	          }
 	        };
 	        ability.setBeforePayMana(runtime);
@@ -7329,7 +7329,7 @@ public class CardFactory_Creatures {
 	  			}
 	            });
 	            
-	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, all, "Choose target creature or enchantment.", true));
+	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, all, "Choose target creature or enchantment.", true, false));
 	          }
 	        };
 	        ability.setBeforePayMana(runtime);
@@ -8031,7 +8031,7 @@ public class CardFactory_Creatures {
 	          {
 	            PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
 	            CardList choice = new CardList(play.getCards());
-	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice, "Select a permanent you control.", true));
+	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice, "Select a permanent you control.", true, false));
 	          }
 	        };
 	        card.addSpellAbility(ability);
@@ -9348,7 +9348,7 @@ public class CardFactory_Creatures {
 	              {
 	                AllZone.GameAction.sacrifice(card);
 	              }
-	            }, true));
+	            }, true, false));
 	          }//showMessage()
 	        };//Input
 
@@ -10724,7 +10724,7 @@ public class CardFactory_Creatures {
 	              CardList rats = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 	              rats = rats.getType("Rat");
 	              
-	              stopSetNext(CardFactoryUtil.input_targetSpecific(ability, rats, "Select a Rat to sacrifice.", false));
+	              stopSetNext(CardFactoryUtil.input_targetSpecific(ability, rats, "Select a Rat to sacrifice.", false, false));
 	            }
 	          };
 	          
@@ -11214,7 +11214,7 @@ public class CardFactory_Creatures {
 	        	if (all.size() != 0) {
 	        		
 	        		if(card.getController().equals(Constant.Player.Human)) {
-	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target permanent to tap/untap.", true));
+	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target permanent to tap/untap.", true, false));
 	        			ButtonUtil.enableAll();
 	        		}
 	        		else if (card.getController().equals(Constant.Player.Computer)) {
@@ -11282,7 +11282,7 @@ public class CardFactory_Creatures {
 	        	if (all.size() != 0) {
 	        		
 	        		if(card.getController().equals(Constant.Player.Human)) {
-	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target permanent to destroy.", true));
+	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target permanent to destroy.", true, false));
 	        			ButtonUtil.disableAll();
 	        		}
 	        		else if (card.getController().equals(Constant.Player.Computer)) {
@@ -12081,7 +12081,7 @@ public class CardFactory_Creatures {
                 }
             });
             
-            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, land, "Select a Plains or Forest to sacrifice.", false));
+            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, land, "Select a Plains or Forest to sacrifice.", false, false));
           }
         };
         ability.setBeforePayMana(runtime);
@@ -12277,7 +12277,7 @@ public class CardFactory_Creatures {
 	          CardList saps = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 	          saps = saps.getType("Saproling");
 	          
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, saps, "Select a Saproling to sacrifice.", false));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, saps, "Select a Saproling to sacrifice.", false, false));
 	        }
 	      };  
 	      
@@ -12382,7 +12382,7 @@ public class CardFactory_Creatures {
 	        CardList saps = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 	        saps = saps.getType("Saproling");
 	        
-	        stopSetNext(CardFactoryUtil.input_targetSpecific(a2, saps, "Select a Saproling to sacrifice.", false));
+	        stopSetNext(CardFactoryUtil.input_targetSpecific(a2, saps, "Select a Saproling to sacrifice.", false, false));
 	      }
 	    };
 	    
@@ -12442,7 +12442,7 @@ public class CardFactory_Creatures {
 		          CardList saps = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 		          saps = saps.getType("Saproling");
 		          
-		          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, saps, "Select a Saproling to sacrifice.", false));
+		          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, saps, "Select a Saproling to sacrifice.", false, false));
 		        }
 		      };  
 		      
@@ -12488,7 +12488,7 @@ public class CardFactory_Creatures {
 		          CardList walls = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 		          walls = walls.getType("Wall");
 		          
-		          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, walls, "Select a Wall to sacrifice.", false));
+		          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, walls, "Select a Wall to sacrifice.", false, false));
 		        }
 		      };  
 		      
@@ -13218,7 +13218,7 @@ public class CardFactory_Creatures {
 	                }
 	             }
 	          }
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, targets, "Select target blocking or blocked by Cromat.", true));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, targets, "Select target blocking or blocked by Cromat.", true, false));
 	       }
 	    };
 	    card.addSpellAbility(a2);
@@ -13426,7 +13426,7 @@ public class CardFactory_Creatures {
 	        {
 	        	PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
 	        	CardList choice = new CardList(play.getCards());
-	        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, choice, "Select a permanent you control.", false));
+	        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, choice, "Select a permanent you control.", false, false));
 	            ButtonUtil.disableAll();
 	          
 	        }//execute()
@@ -13497,7 +13497,7 @@ public class CardFactory_Creatures {
 	        	//Object o = AllZone.Display.getChoiceOptional("Select a creature card to bounce", blackBlue.toArray());
 	        	
 	        	
-	        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, redGreen, "Select a red or green creature you control.", false));
+	        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, redGreen, "Select a red or green creature you control.", false, false));
 	            ButtonUtil.disableAll();
 	          
 	        }//execute()
@@ -13567,7 +13567,7 @@ public class CardFactory_Creatures {
 	              }
 	           }
 	           
-	           AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, whiteBlue, "Select a white or blue creature you control.", false));
+	           AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, whiteBlue, "Select a white or blue creature you control.", false, false));
 	            ButtonUtil.disableAll();
 	         
 	        }//execute()
@@ -13640,7 +13640,7 @@ public class CardFactory_Creatures {
 	        	//Object o = AllZone.Display.getChoiceOptional("Select a creature card to bounce", blackBlue.toArray());
 	        	
 	        	
-	        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, greenWhite, "Select a green or white creature you control.",false));
+	        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, greenWhite, "Select a green or white creature you control.", false, false));
 	            ButtonUtil.disableAll();
 	          
 	        }//execute()
@@ -13719,7 +13719,7 @@ public class CardFactory_Creatures {
 	        	//Object o = AllZone.Display.getChoiceOptional("Select a creature card to bounce", blackBlue.toArray());
 	        	
 	        	
-	        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, creatures, "Select a creature you control.", false));
+	        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, creatures, "Select a creature you control.", false, false));
 	            ButtonUtil.disableAll();
 	          
 	        }//execute()
@@ -13811,7 +13811,7 @@ public class CardFactory_Creatures {
 	        	//Object o = AllZone.Display.getChoiceOptional("Select a creature card to bounce", blackBlue.toArray());
 	        	
 	        	
-	        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, blackBlue, "Select blue or black creature you control.", false));
+	        	AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, blackBlue, "Select blue or black creature you control.", false, false));
 	            ButtonUtil.disableAll();
 	          
 	        }//execute()
@@ -13956,7 +13956,7 @@ public class CardFactory_Creatures {
 	          CardList saps = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 	          saps = saps.getType("Saproling");
 	          
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, saps, "Select a Saproling to sacrifice.",false));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, saps, "Select a Saproling to sacrifice.", false, false));
 	        }
 	      };
 	      a1.setDescription("2G: Put a 1/1 green Saproling creature token into play.");
@@ -14034,7 +14034,7 @@ public class CardFactory_Creatures {
 	          CardList creats = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 	          creats = creats.getType("Creature");
 	          
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, creats, "Select a creature to sacrifice.",false));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, creats, "Select a creature to sacrifice.", false, false));
 	        }
 	      };
 
@@ -14109,7 +14109,7 @@ public class CardFactory_Creatures {
 	          CardList creats = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 	          creats = creats.getType("Creature");
 	          
-	          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, creats, "Select a creature to sacrifice.",false));
+	          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, creats, "Select a creature to sacrifice.",false, false));
 	        }
 	      };
 
@@ -14169,7 +14169,7 @@ public class CardFactory_Creatures {
 	            CardList creats = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 	            creats = creats.getType("Creature");
 	            
-	            stopSetNext(CardFactoryUtil.input_targetSpecific(a2, creats, "Select a creature to sacrifice.",false));
+	            stopSetNext(CardFactoryUtil.input_targetSpecific(a2, creats, "Select a creature to sacrifice.", false, false));
 	          }
 	        };
 	    	
@@ -14225,7 +14225,7 @@ public class CardFactory_Creatures {
 	        	if (all.size() != 0) {
 	        		
 	        		if(card.getController().equals(Constant.Player.Human)) {
-	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target artifact.", true));
+	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target artifact.", true, false));
 	        			ButtonUtil.disableAll();
 	        		}
 	        		else if (card.getController().equals(Constant.Player.Computer)) {
@@ -14303,7 +14303,7 @@ public class CardFactory_Creatures {
 	        	if (all.size() != 0) {
 	        		
 	        		if(card.getController().equals(Constant.Player.Human)) {
-	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target artifact.", true));
+	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target artifact.", true, false));
 	        			ButtonUtil.disableAll();
 	        		}
 	        		else if (card.getController().equals(Constant.Player.Computer)) {
@@ -14378,7 +14378,7 @@ public class CardFactory_Creatures {
 	        	if (all.size() != 0) {
 	        		
 	        		if(card.getController().equals(Constant.Player.Human)) {
-	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target enchantment.", true));
+	        			AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all, "Select target enchantment.", true, false));
 	        			ButtonUtil.disableAll();
 	        		}
 	        		else if (card.getController().equals(Constant.Player.Computer)) {
@@ -15224,7 +15224,7 @@ public class CardFactory_Creatures {
 		  			}
 	            });
 	            
-	            stopSetNext(CardFactoryUtil.input_targetSpecific(a1, all, "Return target permanent", true));
+	            stopSetNext(CardFactoryUtil.input_targetSpecific(a1, all, "Return target permanent", true, false));
 	          }
 	        };
 	        a1.setBeforePayMana(runtime);
@@ -15442,7 +15442,7 @@ public class CardFactory_Creatures {
 		  			}
 	            });
 	            
-	            stopSetNext(CardFactoryUtil.input_targetSpecific(a1, all, "Destroy target artifact or enchantment.", true));
+	            stopSetNext(CardFactoryUtil.input_targetSpecific(a1, all, "Destroy target artifact or enchantment.", true, false));
 	          }
 	        };
 	        a1.setBeforePayMana(runtime);
@@ -15994,9 +15994,7 @@ public class CardFactory_Creatures {
 			private static final long serialVersionUID = -9155272432379335551L;
 			public void resolve()
 	          {
-	             /*CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
-	             list = list.getName("Mana Pool");*/
-	             Card mp = AllZone.ManaPool;//list.getCard(0);
+	             Card mp = AllZone.ManaPool;
 	             
 	             PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
 	             PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
@@ -16033,6 +16031,28 @@ public class CardFactory_Creatures {
 	    }//*************** END ************ END **************************
 	    
 	    
+	    /*
+	  //*************** START *********** START **************************
+	    if (cardName.equals("Priest of Titania"))
+	    {
+
+	       String countString = "Count$TypeOnBattlefield.Elf";
+	    	
+	       SpellAbility ability = new Ability_Mana(card, "tap: add G:"+countString)
+	       {
+	    	   private static final long serialVersionUID = -5461196759660196802L;
+	       };
+	    	
+			
+
+	       ability.setDescription("tap: add G to your mana pool for each Elf in play.");
+	       ability.setStackDescription(cardName + " adds G to your mana pool for each Elf in play.");
+	       //card.clearSpellAbility();
+	       card.addSpellAbility(ability);
+
+	       return card;
+	    }//*************** END ************ END **************************
+	    */
 	  //*************** START ************ START **************************
 	    if (cardName.equals("Rats of Rath"))
 	    {
@@ -16049,7 +16069,7 @@ public class CardFactory_Creatures {
 	    			CardList choices = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 	    			choices.filter(new CardListFilter(){public boolean addCard(Card c){
 	    				return c.isArtifact() || c.isCreature() || c.isLand();}});
-	    			stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choices, "Select an artifact, creature, or land you control", true));}
+	    			stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choices, "Select an artifact, creature, or land you control", true, false));}
 	    		});
 	    	ability.setDescription("B: Destroy target artifact, creature, or land you control.");
 	    	card.addSpellAbility(ability);
@@ -16678,7 +16698,7 @@ public class CardFactory_Creatures {
 		          CardList creats = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 		          creats = creats.getType("Creature");
 		          
-		          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, creats, "Select a creature to sacrifice.",false));
+		          stopSetNext(CardFactoryUtil.input_targetSpecific(a2, creats, "Select a creature to sacrifice.", false, false));
 		        }
 		      };
 
@@ -16899,7 +16919,7 @@ public class CardFactory_Creatures {
   	              }
   	            });
 
-  	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select target Merfolk creature", Command.Blank,true));
+  	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select target Merfolk creature", Command.Blank, true, false));
   	          }//showMessage()
   	        };//Input
 
@@ -16990,7 +17010,7 @@ public class CardFactory_Creatures {
 	  	              }
 	  	            });
 	
-	  	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select target Dwarf creature", Command.Blank,true));
+	  	            stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select target Dwarf creature", Command.Blank, true, false));
 	  	          }//showMessage()
 	  	        };//Input
 
@@ -17652,7 +17672,7 @@ public class CardFactory_Creatures {
 						}
 		    		 });
 		    		 
-		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select an Artifact or Enchantment", true));
+		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select an Artifact or Enchantment", true, false));
 		           }
 		       });
 	    	card.addSpellAbility(ability);
@@ -17730,7 +17750,7 @@ public class CardFactory_Creatures {
 						}
 		    		 });
 		    		 
-		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select an Artifact or Enchantment", true));
+		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select an Artifact or Enchantment", true, false));
 		           }
 		       });
 	    	card.addSpellAbility(ability);
@@ -17808,7 +17828,7 @@ public class CardFactory_Creatures {
 						}
 		    		 });
 		    		 
-		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select target Enchantment", true));
+		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select target Enchantment", true, false));
 		           }
 		       });
 	    	card.addSpellAbility(ability);
@@ -17889,7 +17909,7 @@ public class CardFactory_Creatures {
 						}
 		    		 });
 		    		 
-		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select an Artifact or Enchantment", true));
+		             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list, "Select an Artifact or Enchantment", true, false));
 		           }
 		       });
 	    	card.addSpellAbility(ability);
@@ -18301,7 +18321,7 @@ public class CardFactory_Creatures {
 			          CardList creats = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 			          creats = creats.getType("Merfolk");
 			          
-			          stopSetNext(CardFactoryUtil.input_targetSpecific(ability, creats, "Select a target Merfolk",true));
+			          stopSetNext(CardFactoryUtil.input_targetSpecific(ability, creats, "Select a target Merfolk",true, false));
 			        }
 			      };
 			      ability.setDescription("1 W: Target Merfolk you control gains protection from the color of your choice until end of turn.");

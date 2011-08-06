@@ -1388,7 +1388,7 @@ public class CardFactoryUtil
             list.addAll(AllZone.Human_Play.getCards());
             list = list.getType("Creature");
             
-            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
           }
     };//Input
     
@@ -1567,13 +1567,13 @@ public class CardFactoryUtil
   }//soul_desc()
   
   //CardList choices are the only cards the user can successful select
-  public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, final boolean targeted)
+  public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, final boolean targeted, final boolean free)
   {
-    return input_targetSpecific(spell, choices, message, Command.Blank, targeted);
+    return input_targetSpecific(spell, choices, message, Command.Blank, targeted, free);
   }
 
   //CardList choices are the only cards the user can successful select
-  public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, final Command paid, final boolean targeted)
+  public static Input input_targetSpecific(final SpellAbility spell, final CardList choices, final String message, final Command paid, final boolean targeted, final boolean free)
   {
     Input target = new Input()
     {
@@ -1596,7 +1596,7 @@ public class CardFactoryUtil
           spell.setTargetCard(card);
           if(spell instanceof Ability_Tap && spell.getManaCost().equals("0"))
              stopSetNext(new Input_NoCost_TapAbility((Ability_Tap)spell));
-          else if(spell.getManaCost().equals("0") || this.isFree())
+          else if(spell.getManaCost().equals("0") || free)
           {
         	this.setFree(false);
             AllZone.Stack.add(spell);
@@ -2445,8 +2445,8 @@ public class CardFactoryUtil
   //parser for non-mana X variables
   public static int xCount(Card c, String s)
   {
-     int n = 0;
-    
+      int n = 0;
+     
       String cardController = c.getController();
       String oppController = AllZone.GameAction.getOpponent(cardController);
      

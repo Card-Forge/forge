@@ -1121,7 +1121,7 @@ class CardFactory_Lands {
 	               });
 	               
 	               //System.out.println("size of choice: " + choice.size());
-	               stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice, "Select target Legendary creature:", true));
+	               stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice, "Select target Legendary creature:", true, false));
 	             }
 	           };
 	     	  
@@ -1223,7 +1223,7 @@ class CardFactory_Lands {
 	             });
 	             
 	             //System.out.println("size of choice: " + choice.size());
-	             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice, "Select target 1/1 Creature:", true));
+	             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice, "Select target 1/1 Creature:", true, false));
 	           }
 	         };
 	   	  
@@ -1325,7 +1325,7 @@ class CardFactory_Lands {
 	             });
 	             
 	             //System.out.println("size of choice: " + choice.size());
-	             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice, "Select target legendary Creature:", true));
+	             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice, "Select target legendary Creature:", true, false));
 	           }
 	         };
 	   	  
@@ -1391,7 +1391,7 @@ class CardFactory_Lands {
 	             });
 	             
 	             //System.out.println("size of choice: " + choice.size());
-	             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice, "Select target Elf", true));
+	             stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice, "Select target Elf", true, false));
 	           }
 	         };
 	   	  

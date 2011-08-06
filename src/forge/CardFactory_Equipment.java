@@ -118,7 +118,7 @@ class CardFactory_Equipment {
 		            list.addAll(AllZone.Human_Play.getCards());
 		            list = list.getType("Creature");
 		            
-		            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+		            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 		          }
 	        };//Input
 		    
@@ -238,7 +238,7 @@ class CardFactory_Equipment {
 		            list.addAll(AllZone.Human_Play.getCards());
 		            list = list.getType("Creature");
 		            
-		            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+		            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 		          }
 	        };//Input
 		    
@@ -359,7 +359,7 @@ class CardFactory_Equipment {
 		            list.addAll(AllZone.Human_Play.getCards());
 		            list = list.getType("Creature");
 		            
-		            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+		            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 		          }
 	        };//Input
 		    
@@ -474,7 +474,7 @@ class CardFactory_Equipment {
 		            list.addAll(AllZone.Human_Play.getCards());
 		            list = list.getType("Creature");
 		            
-		            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+		            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 		          }
 	        };//Input
 		    
@@ -591,7 +591,7 @@ class CardFactory_Equipment {
 		            list.addAll(AllZone.Human_Play.getCards());
 		            list = list.getType("Creature");
 		            
-		            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+		            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 		          }
 	        };//Input
 		    
@@ -703,7 +703,7 @@ class CardFactory_Equipment {
 		            list.addAll(AllZone.Human_Play.getCards());
 		            list = list.getType("Creature");
 		            
-		            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+		            stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 		          }
 	        };//Input
 		    
@@ -818,7 +818,7 @@ class CardFactory_Equipment {
 	               list.addAll(AllZone.Human_Play.getCards());
 	               list = list.getType("Creature");
 	              
-	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 	             }
 	        };//Input
 	      
@@ -937,7 +937,7 @@ class CardFactory_Equipment {
 	               list.addAll(AllZone.Human_Play.getCards());
 	               list = list.getType("Creature");
 	              
-	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 	             }
 	        };//Input
 	      
@@ -1056,7 +1056,7 @@ class CardFactory_Equipment {
 		               list.addAll(AllZone.Human_Play.getCards());
 		               list = list.getType("Creature");
 		              
-		               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+		               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 		        }
 	        };//Input
 	      
@@ -1176,7 +1176,7 @@ class CardFactory_Equipment {
 	               list.addAll(AllZone.Human_Play.getCards());
 	               list = list.getType("Creature");
 	              
-	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 	             }
 	        };//Input
 	      
@@ -1294,7 +1294,7 @@ class CardFactory_Equipment {
 	               list.addAll(AllZone.Human_Play.getCards());
 	               list = list.getType("Creature");
 	              
-	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 	             }
 	        };//Input
 	      
@@ -1504,7 +1504,7 @@ class CardFactory_Equipment {
 	               list.addAll(AllZone.Human_Play.getCards());
 	               list = list.getType("Creature");
 	              
-	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 	             }
 	        };//Input
 	      
@@ -1623,7 +1623,7 @@ class CardFactory_Equipment {
 	               list.addAll(AllZone.Human_Play.getCards());
 	               list = list.getType("Creature");
 	              
-	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 	             }
 	        };//Input
 	      
@@ -1705,7 +1705,7 @@ class CardFactory_Equipment {
 	               list.addAll(AllZone.Human_Play.getCards());
 	               list = list.getType("Creature");
 	              
-	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 	             }
 	        };//Input
 	        
@@ -1999,7 +1999,7 @@ class CardFactory_Equipment {
 	               list.addAll(AllZone.Human_Play.getCards());
 	               list = list.getType("Creature");
 	              
-	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true));
+	               stopSetNext(CardFactoryUtil.input_targetSpecific(equip, list, "Select target creature to equip", true, false));
 	             }
 	        };//Input
 	      

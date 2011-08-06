@@ -2,7 +2,7 @@ package forge;
 import java.util.*;
 
 
-public class StateBasedEffects
+public class StaticEffects
 {
 	//this is used to keep track of all state-based effects in play:
 	private HashMap<String, Integer> stateBasedMap = new HashMap<String, Integer>();
@@ -10,7 +10,7 @@ public class StateBasedEffects
 	//this is used to define all cards that are state-based effects, and map the corresponding commands to their cardnames
 	private static HashMap<String, String[]> cardToEffectsList = new HashMap<String, String[]>();
 	
-	public StateBasedEffects() 
+	public StaticEffects() 
 	{
 		initStateBasedEffectsList();
 	}
@@ -56,6 +56,7 @@ public class StateBasedEffects
 		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash"});
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});
 		cardToEffectsList.put("Vexing Beetle", new String[] {"Vexing_Beetle"});
+		cardToEffectsList.put("Loam Lion", new String[] {"Loam_Lion"});
 		cardToEffectsList.put("Kird Ape", new String[] {"Kird_Ape"});
 		cardToEffectsList.put("Sedge Troll", new String[] {"Sedge_Troll"});
 		cardToEffectsList.put("Hedge Troll", new String[] {"Hedge_Troll"});

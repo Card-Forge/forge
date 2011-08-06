@@ -1,3 +1,15 @@
+Loam Lion
+W
+Creature Cat
+Loam Lion gets +1/+2 as long as you control a Forest.
+1/1
+
+Hada Freeblade
+W
+Creature Humand Soldier Ally
+Whenever Hada Freeblade or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Hada Freeblade.
+0/1
+
 Gatekeeper of Malakir
 B B
 Creature Vampire Warrior
@@ -6530,7 +6542,7 @@ When this card is put into a graveyard from anywhere, reveal this card and shuff
 
 Darksteel Colossus
 11
-Artifact Creature
+Artifact Creature Golem
 no text
 11/11
 Trample
