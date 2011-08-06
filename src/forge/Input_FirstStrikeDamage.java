@@ -102,7 +102,7 @@ public class Input_FirstStrikeDamage extends Input {
         }
         
         //CardList attackers = new CardList(AllZone.Combat.getAttackers());
-        CardList blockers = new CardList(AllZone.Combat.getAllBlockers().toArray());
+        //CardList blockers = new CardList(AllZone.Combat.getAllBlockers().toArray());
         
 
         /*
@@ -127,12 +127,15 @@ public class Input_FirstStrikeDamage extends Input {
             }
         }
         */
+        
+        /*
         for(int i = 0; i < blockers.size(); i++) {
             //System.out.println("blocker #" + i + ": " + blockers.getCard(i).getName() +" " + blockers.getCard(i).getAttack());
             if((blockers.getCard(i).hasFirstStrike() || blockers.getCard(i).hasDoubleStrike())) {
                 CombatUtil.executeCombatDamageEffects(blockers.getCard(i));
             }
         }
+        */
         
 
         CardList pwAttackers = new CardList(AllZone.pwCombat.getAttackers());

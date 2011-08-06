@@ -3604,8 +3604,15 @@ public class GameAction {
         
         if(isCardInPlay(card)) {
         	card.addDamage(map);
-        	CombatUtil.executeCombatDamageEffects(card);
+        	//CombatUtil.executeCombatDamageEffects(card);
         }
+        
+        for(Entry<Card, Integer> entry : map.entrySet()){
+        	Card source = entry.getKey();
+        	CombatUtil.executeCombatDamageEffects(source);
+        }
+        
+        
         
     }
     

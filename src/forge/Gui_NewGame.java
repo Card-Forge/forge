@@ -1,4 +1,3 @@
-
 package forge;
 
 
@@ -167,6 +166,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
 			}
 		});
 		
+		/*
         try {
             //deck migration - this is a little hard to read, because i can't just plainly reference a class in the
             //default package
@@ -176,6 +176,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
         }
+        */
         try {
             Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
             SwingUtilities.invokeLater(new Runnable() {   			
@@ -738,6 +739,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             LAFMap.put("NimROD", "com.nilo.plaf.nimrod.NimRODLookAndFeel");
             LAFMap.put("Office Blue 2007", "org.jvnet.substance.skin.SubstanceOfficeBlue2007LookAndFeel");
             LAFMap.put("Office Silver 2007", "org.jvnet.substance.skin.SubstanceOfficeSilver2007LookAndFeel");
+            LAFMap.put("Quaqua", "ch.randelshofer.quaqua.BasicQuaquaLookAndFeel");
             LAFMap.put("Raven", "org.jvnet.substance.skin.SubstanceRavenLookAndFeel");
             LAFMap.put("Raven Graphite", "org.jvnet.substance.skin.SubstanceRavenGraphiteLookAndFeel");
             LAFMap.put("Raven Graphite Glass", "org.jvnet.substance.skin.SubstanceRavenGraphiteGlassLookAndFeel");
@@ -753,14 +755,18 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             }
             Arrays.sort(keys);
             
-            ListChooser<String> ch = new ListChooser<String>("Choose one", 0, 1, keys);
-            if(ch.show()) try {
-                String name = ch.getSelectedValue();
-                int index = ch.getSelectedIndex();
+            ListChooser<String> ch1 = new ListChooser<String>("Choose one", 0, 1, keys);
+            if(ch1.show()) try {
+                String name = ch1.getSelectedValue();
+                int index = ch1.getSelectedIndex();
                 if(index == -1) return;
                 //UIManager.setLookAndFeel(info[index].getClassName());
                 preferences.laf = LAFMap.get(name);
-                UIManager.setLookAndFeel(LAFMap.get(name));
+                if (name.equals("Quaqua"))
+                	UIManager.setLookAndFeel(ch.randelshofer.quaqua.QuaquaManager.getLookAndFeel());
+                else
+                	UIManager.setLookAndFeel(LAFMap.get(name));
+                
                 
                 SwingUtilities.updateComponentTreeUI(c);
             } catch(Exception ex) {

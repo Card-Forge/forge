@@ -141,20 +141,14 @@ public class Input_CombatDamage extends Input {
             
 
             //if (blockers.get(i).hasSecondStrike())
+
+        	/*
             if(!blockers.getCard(i).hasFirstStrike()
                     || (blockers.getCard(i).hasFirstStrike() && blockers.getCard(i).hasDoubleStrike())) {
                 
                 CombatUtil.executeCombatDamageEffects(blockers.getCard(i));
-                /*
-                ArrayList<String> list = blockers.getCard(i).getKeyword();
-                for (int j=0; j < list.size(); j++)
-                {
-                	if (list.get(j).equals("Lifelink"))
-                		GameActionUtil.executeLifeLinkEffects(blockers.getCard(i));
-                }
-                
-                */
             }
+            */
             
         }
         
