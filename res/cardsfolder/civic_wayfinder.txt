@@ -1,0 +1,8 @@
+Name:Civic Wayfinder
+ManaCost:2 G
+Types:Creature Elf Warrior Druid
+Text:When Civic Wayfinder enters the battlefield, you may search your library for a basic land card, reveal it, and put it into your hand. If you do, shuffle your library.
+PT:2/2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/civic_wayfinder.jpg
+End

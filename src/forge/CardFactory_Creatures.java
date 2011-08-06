@@ -17439,7 +17439,8 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Borderland Ranger") || cardName.equals("Sylvan Ranger")) {
+        else if(cardName.equals("Borderland Ranger") || cardName.equals("Sylvan Ranger")
+        		|| cardName.equals("Civic Wayfinder")) {
             
             final Ability ability = new Ability(card, "0") {
                 @Override
