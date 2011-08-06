@@ -136,7 +136,8 @@ Accelerated Mutation
 3 G G
 Instant
 no text
-spPumpTgt:Count$MaxCMCYouCtrl/Count$MaxCMCYouCtrl:Target creature gets +X/+X until end of turn, where X is the highest converted mana cost among permanents you control.:Target creature gets +X/+X until end of turn.
+spPumpTgt:+X/+X:Target creature gets +X/+X until end of turn, where X is the highest converted mana cost among permanents you control.:Target creature gets +X/+X until end of turn.
+SVar:X:Count$MaxCMCYouCtrl
 
 Burning Cloak
 R
@@ -154,25 +155,29 @@ Gaea's Might
 G
 Instant
 no text
-spPumpTgt:Count$Domain/Count$Domain:Domain - Target creature gets +1/+1 until end of turn for each basic land type among lands you control.:Target creature gets +Domain/+Domain until end of turn.
+spPumpTgt:+X/+X:Domain - Target creature gets +1/+1 until end of turn for each basic land type among lands you control.:Target creature gets +Domain/+Domain until end of turn.
+SVar:X:Count$Domain
 
 Ghoul's Feast
 1 B
 Instant
 no text
-spPumpTgt:Count$TypeInYourYard.Creature/+0:Target creature gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
+spPumpTgt:+X/+0:Target creature gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.
+SVar:X:Count$TypeInYourYard.Creature
 
 Hunger of the Nim
 1 B
 Sorcery
 no text
-spPumpTgt:Count$TypeYouCtrl.Artifact/+0:Target creature gets +1/+0 for each artifact you control.:Hunger of the Nim - Target creature gets +X/+0
+spPumpTgt:+X/+0:Target creature gets +1/+0 for each artifact you control.:Hunger of the Nim - Target creature gets +X/+0
+SVar:X:Count$TypeYouCtrl.Artifact
 
 Inner Calm, Outer Strength
 2 G
 Instant Arcane
 no text
-spPumpTgt:Count$CardsInYourHand/Count$CardsInYourHand:Target creature gets +X/+X until end of turn, where X is the number of cards in your hand.:Inner Calm, Outer Strength - Target creature gets +X/+X
+spPumpTgt:+X/+X:Target creature gets +X/+X until end of turn, where X is the number of cards in your hand.:Inner Calm, Outer Strength - Target creature gets +X/+X
+SVar:X:Count$CardsInYourHand
 
 Iron Will
 W
@@ -185,19 +190,22 @@ Might of Alara
 G
 Instant
 no text
-spPumpTgt:Count$Domain/Count$Domain:Domain - Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
+spPumpTgt:+X/+X:Domain - Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
+SVar:X:Count$Domain
 
 Muscle Burst
 1 G
 Instant
 no text
-spPumpTgt:Count$NamedInAllYards.Muscle Burst\Plus.3/Count$NamedInAllYards.Muscle Burst\Plus.3:Target creature gets +X/+X until end of turn, where X is 3 plus the number of cards named Muscle Burst in all graveyards.:Muscle Burst - Target creature gets +X/+X until end of turn.
+spPumpTgt:+X/+X:Target creature gets +X/+X until end of turn, where X is 3 plus the number of cards named Muscle Burst in all graveyards.:Muscle Burst - Target creature gets +X/+X until end of turn.
+SVar:X:Count$NamedInAllYards.MuscleBurst/Plus.3
 
 Primal Bellow
 G
 Instant
 no text
-spPumpTgt:Count$TypeYouCtrl.Forest/Count$TypeYouCtrl.Forest:Target creature gets +1/+1 until end of turn for each Forest you control:Primal Bellow - Target creature gets +X/+X until end of turn
+spPumpTgt:+X/+X:Target creature gets +1/+1 until end of turn for each Forest you control:Primal Bellow - Target creature gets +X/+X until end of turn
+SVar:X:Count$TypeYouCtrl.Forest
 
 Stand Firm
 W
@@ -210,13 +218,15 @@ Strength of Cedars
 4 G
 Instant Arcane
 no text
-spPumpTgt:Count$TypeYouCtrl.Land/Count$TypeYouCtrl.Land:Target creature gets +X/+X until end of turn, where X is the number of lands you control.:Strength of Cedars - Target creature gets +X/+X until end of turn.
+spPumpTgt:+X/+X:Target creature gets +X/+X until end of turn, where X is the number of lands you control.:Strength of Cedars - Target creature gets +X/+X until end of turn.
+SVar:X:Count$TypeYouCtrl.Land
 
 Wirewood Pride
 G
 Instant
 no text
-spPumpTgt:Count$TypeOnBattlefield.Elf/Count$TypeOnBattlefield.Elf:Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.:Wirewood Pride - Target creature get +X/+X until end of turn.
+spPumpTgt:+X/+X:Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.:Wirewood Pride - Target creature get +X/+X until end of turn.
+SVar:X:Count$TypeOnBattlefield.Elf
 
 Rofellos, Llanowar Emissary
 G G
