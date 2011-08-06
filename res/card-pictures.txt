@@ -38,6 +38,10 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+ivy_elemental.jpg				http://www.wizards.com/global/images/magic/general/ivy_elemental.jpg
+krakilin.jpg					http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4769&type=card
+maga_traitor_to_mortals.jpg		http://www.wizards.com/global/images/magic/general/maga_traitor_to_mortals.jpg
+shifting_wall.jpg				http://www.wizards.com/global/images/magic/general/shifting_wall.jpg
 apocalypse_hydra.jpg		http://www.wizards.com/global/images/magic/general/apocalypse_hydra.jpg
 crossbow_ambush.jpg		http://www.wizards.com/global/images/magic/general/crossbow_ambush.jpg
 magnetic_flux.jpg		http://www.wizards.com/global/images/magic/general/magnetic_flux.jpg

@@ -1,3 +1,29 @@
+Ivy Elemental
+X G
+Creature Elemental
+Ivy Elemental enters the battlefield with X +1/+1 counters on it.
+0/0
+
+Krakilin
+X G G
+Creature Beast
+Krakilin enters the battlefield with X +1/+1 counters on it.
+0/0
+RegenerateMe:1 G
+
+Maga, Traitor to Mortals
+X B B B
+Legendary Creature Human Wizard
+Maga, Traitor to Mortals enters the battlefield with X +1/+1 counters on it. When Maga enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.
+0/0
+
+Shifting Wall
+X 0
+Artifact Creature Wall
+Shifting Wall enters the battlefield with X +1/+1 counters on it.
+0/0
+Defender
+
 Apocalypse Hydra 
 X G R
 Creature Hydra

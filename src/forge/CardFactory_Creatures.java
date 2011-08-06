@@ -14700,6 +14700,52 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Shifting Wall") || cardName.equals("Maga, Traitor to Mortals")
+        		|| cardName.equals("Krakilin") || cardName.equals("Ivy Elemental")) { 
+        	
+        	if(!card.getName().equals("Krakilin")) {
+            SpellAbility spell = new Spell_Permanent(card) {
+                private static final long serialVersionUID = -11489323313L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    return super.canPlay() && 4 <= ComputerUtil.getAvailableMana().size() - CardUtil.getConvertedManaCost(card.getManaCost());
+                }
+            };
+             card.clearSpellAbility();
+             card.addSpellAbility(spell);
+        	}
+            
+            
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    PlayerLife target = AllZone.GameAction.getPlayerLife(getTargetPlayer());
+        	        target.subtractLife(card.getCounters(Counters.P1P1));
+                }//resolve()
+            };
+  
+            Command intoPlay = new Command() {
+                
+                private static final long serialVersionUID = 2559021594L;
+                
+                public void execute() {
+                	int XCounters = card.getXManaCostPaid();
+                	card.addCounter(Counters.P1P1, XCounters);
+                	if(card.getName().equals("Maga, Traitor to Mortals")) {
+                        ability.setStackDescription(ability.getTargetPlayer() + " - loses life equal to the number of +1/+1 counters on " + card.getName());
+                        if(card.getController() == Constant.Player.Human) AllZone.InputControl.setInput(CardFactoryUtil.input_targetPlayer(ability));
+                        else {
+                        	ability.setTargetPlayer(Constant.Player.Human);
+                        	AllZone.Stack.add(ability);
+                        }
+                	} 
+                }//execute()
+            };//Command
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Apocalypse Hydra")) {      
             SpellAbility spell = new Spell_Permanent(card) {
                 private static final long serialVersionUID = -11489323313L;
