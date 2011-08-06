@@ -692,6 +692,7 @@ public class Card extends MyObservable {
         text = t;
     }
     
+    // get the text that should be displayed
     public String getText() {
     	StringBuilder sb = new StringBuilder();
     	sb.append(this.getAbilityText());
@@ -704,6 +705,7 @@ public class Card extends MyObservable {
     	return sb.toString();
     }
     
+    // get the text that does not belong to a cards abilities (and is not really there ruleswise)
     public String getNonAbilityText() {
         StringBuilder sb = new StringBuilder();
         ArrayList<String> keyword = getHiddenExtrinsicKeyword();
@@ -713,6 +715,7 @@ public class Card extends MyObservable {
         return sb.toString();
     }
     
+    // convert a keyword list to the String that should be displayed ingame
     public String keywordsToText(ArrayList<String> keyword) {
         StringBuilder sb = new StringBuilder();
         StringBuilder sbLong = new StringBuilder();
@@ -759,6 +762,7 @@ public class Card extends MyObservable {
     	return sb.toString();
     }
     
+    //get the text of the abilities of a card
     public String getAbilityText() {
         if(isInstant() || isSorcery()) {
             String s = getSpellText();

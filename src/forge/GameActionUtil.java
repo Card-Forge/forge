@@ -20726,7 +20726,7 @@ public class GameActionUtil {
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
-					if((( c.getText().trim().equals("") || c.isFaceDown()) && c.getUnhiddenKeyword().size() == 0)) {
+					if((( c.getAbilityText().trim().equals("") || c.isFaceDown()) && c.getUnhiddenKeyword().size() == 0)) {
 						c.addSemiPermanentAttackBoost(2);
 						c.addSemiPermanentDefenseBoost(2);
 
