@@ -12816,37 +12816,7 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if (cardName.equals("Yavimaya Elder"))
-        {
-    	        final SpellAbility ability = new Ability(card, "2") {
-    	            @Override
-    	            public boolean canPlay() {
-    	                return AllZone.GameAction.isCardInPlay(card)
-    	                        && !AllZone.Stack.getSourceCards().contains(card);//in play and not already activated(Sac cost problems)
-    	            }
-    	            
-    	            @Override
-    	            public boolean canPlayAI() {
-    	                return (AllZone.Computer_Hand.size() < 3) && (AllZone.Computer_Library.size() > 0)
-    	                        && MyRandom.random.nextBoolean();
-    	            }
-    	            
-    	            @Override
-    	            public void resolve() {
-    	                //if (card.getController().equals(AllZone.ComputerPlayer))
-    	            	//for now, sac happens during resolution:
-    	                AllZone.GameAction.sacrifice(getSourceCard());
-    	                card.getController().drawCard();
-    	            }
-    	        };
-    	        
-    	        StringBuilder sbDesc = new StringBuilder();
-    	        sbDesc.append("2, Sacrifice ").append(card.getName()).append(": Draw a card.");
-    	        ability.setDescription(sbDesc.toString());
-    	        
-    	        StringBuilder sbStack = new StringBuilder();
-    	        sbStack.append(card.getName()).append(" - Draw a card.");
-    	        ability.setStackDescription(sbStack.toString());
+        else if (cardName.equals("Yavimaya Elder")) {
     	        
     	        final Command destroy = new Command()
     	        {
@@ -12857,37 +12827,9 @@ public class CardFactory_Creatures {
     	        		AllZone.GameAction.searchLibraryTwoBasicLand(card.getController(), Constant.Zone.Hand, false, Constant.Zone.Hand, false);
     	        	}
     	        };
-    	        
-    	        /*
-    	        Input runtime = new Input() {
-                    
-					private static final long serialVersionUID = -4361362367624073190L;
-					boolean                   once             = true;
-                    
-                    @Override
-                    public void showMessage() {
-                        //this is necessary in order not to have a StackOverflowException
-                        //because this updates a card, it creates a circular loop of observers
-                        if(once) {
-                            once = false;
-                            stopSetNext(new Input_PayManaCost(ability));
-                            AllZone.GameAction.sacrifice(card);
-                            
-                            
-                            //AllZone.Stack.add(ability);
-                            //stop();
-                        }
-                    }//showMessage()
-                };
-    	        
-                ability.setBeforePayMana(runtime);
-                */
-                
-    	        card.addSpellAbility(ability);
     	        card.addDestroyCommand(destroy);
         	    
-        }
-        //*************** END ************ END **************************
+        }//*************** END ************ END **************************
        
         
         //*************** START *********** START **************************
