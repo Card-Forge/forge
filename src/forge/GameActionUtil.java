@@ -9185,72 +9185,77 @@ public class GameActionUtil {
 		}// if
 	}// upkeep_Defense of the Heart
 	
-	private static void upkeep_Oath_of_Druids() {
-		CardList oathList = AllZoneUtil.getCardsInPlay("Oath of Druids");
-		if (oathList.isEmpty())
-			return;
-		
-		final Player player = AllZone.Phase.getPlayerTurn();
+    private static void upkeep_Oath_of_Druids() {
+        CardList oathList = AllZoneUtil.getCardsInPlay("Oath of Druids");
+        if (oathList.isEmpty())
+            return;
+        
+        final Player player = AllZone.Phase.getPlayerTurn();
 
-		if (AllZoneUtil.compareTypeAmountInPlay(player, "Creature") < 0){
-			for(int i = 0; i < oathList.size(); i++) {
-				Ability ability = new Ability(oathList.get(i), "0") {
-	               @Override
-	               public void resolve() {
-	            	   //String opponent = player.getOpponent();
-	            	   CardList libraryList = AllZoneUtil.getPlayerCardsInLibrary(player);
-	            	   //PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-	            	   PlayerZone battlefield = AllZone.getZone(Constant.Zone.Battlefield, player);
-	            	   boolean oathFlag = true;
+        if (AllZoneUtil.compareTypeAmountInPlay(player, "Creature") < 0) {
+            for (int i = 0; i < oathList.size(); i++) {
+                final Card oath = oathList.get(i);
+                Ability ability = new Ability(oath, "0") {
+                   @Override
+                   public void resolve() {
+                       CardList libraryList = AllZoneUtil.getPlayerCardsInLibrary(player);
+                       PlayerZone battlefield = AllZone.getZone(Constant.Zone.Battlefield, player);
+                       boolean oathFlag = true;
 
-	            	   if (AllZoneUtil.compareTypeAmountInPlay(player, "Creature") < 0){
-		                      if(player == AllZone.HumanPlayer){
-			                      String[] choices = {"Yes", "No"};
-			                      Object q = null;
-			                      q = AllZone.Display.getChoiceOptional("Use Oath of Druids?", choices);
-			                      if(q == null || q.equals("No"))
-			                    	  oathFlag = false;
-		                      }
-		                      else {	// if player == Computer
-		                    	  CardList creaturesInLibrary = AllZoneUtil.getPlayerTypeInLibrary(player, "Creature");
-		                    	  CardList creaturesInBattlefield = AllZoneUtil.getPlayerTypeInPlay(player, "Creature");
+                       if (AllZoneUtil.compareTypeAmountInPlay(player, "Creature") < 0) {
+                           if (player == AllZone.HumanPlayer){
+                               StringBuilder question = new StringBuilder();
+                               question.append("Reveal cards from the top of your library and place ");
+                               question.append("the first creature revealed onto the battlefield?");
+                               if (!GameActionUtil.showYesNoDialog(oath, question.toString())) {
+                                   oathFlag = false;
+                               }
+                           }
+                           else {    // if player == Computer
+                               CardList creaturesInLibrary = AllZoneUtil.getPlayerTypeInLibrary(player, "Creature");
+                               CardList creaturesInBattlefield = AllZoneUtil.getPlayerTypeInPlay(player, "Creature");
 
-	                        	  // if there are at least 3 creatures in library, or none in play with one in library, oath
-		                          if(creaturesInLibrary.size() > 2 || (creaturesInBattlefield.size() == 0 && creaturesInLibrary.size() > 0) )
-		                        	  oathFlag = true;
-		                          else
-		                        	  oathFlag = false;
-		                      }
-		                      
-		                      if (oathFlag){
-			                        int max = libraryList.size();
-			                        for(int i = 0; i < max; i++) {
-			                            Card c = libraryList.get(i);
-			                            if(c.getType().contains("Creature")) {
-		                                    AllZone.GameAction.moveTo(battlefield, c);
-		                                    break;   
-			                            } 
-			                            else{
-			                            	AllZone.GameAction.moveToGraveyard(c);
-			                            }
-			                        }
-			                  }
-	                    }
-	               }
-	            };// Ability
-	            
-	            StringBuilder sb = new StringBuilder();
-	            sb.append("At the beginning of each player's upkeep, that player chooses target player ");
-	            sb.append("who controls more creatures than he or she does and is his or her opponent. The ");
-	            sb.append("first player may reveal cards from the top of his or her library until he or she ");
-	            sb.append("reveals a creature card. If he or she does, that player puts that card onto the ");
-	            sb.append("battlefield and all other cards revealed this way into his or her graveyard.");
-	            ability.setStackDescription(sb.toString());
+                               // if there are at least 3 creatures in library, or none in play with one in library, oath
+                               if (creaturesInLibrary.size() > 2 
+                                       || (creaturesInBattlefield.size() == 0 && creaturesInLibrary.size() > 0) )
+                                   oathFlag = true;
+                               else
+                                   oathFlag = false;
+                           }
+                           
+                           if (oathFlag) {
+                               CardList cardsToReveal = new CardList();
+                               int max = libraryList.size();
+                               for (int i = 0; i < max; i++) {
+                                   Card c = libraryList.get(i);
+                                   cardsToReveal.add(c);
+                                   if (c.getType().contains("Creature")) {
+                                       AllZone.GameAction.moveTo(battlefield, c);
+                                       break;   
+                                   } 
+                                   else {
+                                       AllZone.GameAction.moveToGraveyard(c);
+                                   }
+                               }// for loop
+                               if (cardsToReveal.size() > 0)
+                                   AllZone.Display.getChoice("Revealed cards", cardsToReveal.toArray());
+                           }
+                       }
+                   }
+                };// Ability
+                
+                StringBuilder sb = new StringBuilder();
+                sb.append("At the beginning of each player's upkeep, that player chooses target player ");
+                sb.append("who controls more creatures than he or she does and is his or her opponent. The ");
+                sb.append("first player may reveal cards from the top of his or her library until he or she ");
+                sb.append("reveals a creature card. If he or she does, that player puts that card onto the ");
+                sb.append("battlefield and all other cards revealed this way into his or her graveyard.");
+                ability.setStackDescription(sb.toString());
 
-	            AllZone.Stack.add(ability);
-	         }
-		}
-	}// upkeep_Oath of Druids()
+                AllZone.Stack.add(ability);
+            }
+        }
+    }// upkeep_Oath of Druids()
 	
 	private static void upkeep_Oath_of_Ghouls() {	
 		CardList oathList = AllZoneUtil.getCardsInPlay("Oath of Ghouls");
