@@ -36,6 +36,9 @@ public class StateBasedEffects
 		cardToEffectsList.put("Rakdos Pit Dragon", new String[] {"Rakdos_Pit_Dragon"});
 		cardToEffectsList.put("Nyxathid", new String[] {"Nyxathid"});
 		cardToEffectsList.put("Lord of Extinction", new String[] {"Lord_of_Extinction"});
+		cardToEffectsList.put("Cantivore", new String[] {"Cantivore"});
+		cardToEffectsList.put("Cognivore", new String[] {"Cognivore"});
+		cardToEffectsList.put("Mortivore", new String[] {"Mortivore"});
 		cardToEffectsList.put("Terravore", new String[] {"Terravore"});
 		cardToEffectsList.put("Magnivore", new String[] {"Magnivore"});
 		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});

@@ -1,3 +1,24 @@
+Cantivore
+1 W W
+Creature Lhurgoyf
+Cantivore's power and toughness are equal to the number of enchantment cards in all graveyards.
+1/1
+Vigilance
+
+Cognivore
+6 U U
+Creature Lhurgoyf
+Cognivore's power and toughness are each equal to the number of instant cards in all graveyards.
+1/1
+Flying
+
+Mortivore
+2 B B
+Creature Lhurgoyf
+Mortivore's power and toughness are each equal to the number of creature cards in all graveyards.
+1/1
+RegenerateMe:B
+
 Dimir Cutpurse
 1 U B
 Creature Spirit

@@ -11470,6 +11470,111 @@ public class GameActionUtil
 	         }	     
 	               
 	   };//Maro
+	   
+	   public static Command Mortivore = new Command()
+	   {
+	      private static final long serialVersionUID = -8778902687347191964L;
+	      public void execute()
+	      {
+	         // get all creatures
+	         CardList list = new CardList();
+	         list.addAll(AllZone.Human_Play.getCards());
+	         list.addAll(AllZone.Computer_Play.getCards());
+	         list = list.getName("Mortivore");
+
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            Card c = list.get(i);
+	            c.setBaseAttack(countCreatures());
+	            c.setBaseDefense(c.getBaseAttack());
+	         }
+	      }
+	      private int countCreatures()
+	      {
+	         PlayerZone compGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+	         PlayerZone humGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+	         CardList list = new CardList();
+	         list.addAll(compGrave.getCards());
+	         list.addAll(humGrave.getCards());
+	         list = list.filter(new CardListFilter(){
+	            public boolean addCard(Card c) {
+	               return c.isCreature();
+	            }
+	         });
+	         return list.size();
+	      }
+	         
+	   };//Mortivore
+
+	   public static Command Cognivore = new Command()
+	   {
+	      private static final long serialVersionUID = -8778902687347191964L;
+	      public void execute()
+	      {
+	         // get all creatures
+	         CardList list = new CardList();
+	         list.addAll(AllZone.Human_Play.getCards());
+	         list.addAll(AllZone.Computer_Play.getCards());
+	         list = list.getName("Cognivore");
+
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            Card c = list.get(i);
+	            c.setBaseAttack(countCreatures());
+	            c.setBaseDefense(c.getBaseAttack());
+	         }
+	      }
+	      private int countCreatures()
+	      {
+	         PlayerZone compGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+	         PlayerZone humGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+	         CardList list = new CardList();
+	         list.addAll(compGrave.getCards());
+	         list.addAll(humGrave.getCards());
+	         list = list.filter(new CardListFilter(){
+	            public boolean addCard(Card c) {
+	               return c.isInstant();
+	            }
+	         });
+	         return list.size();
+	      }
+	         
+	   };//Cognivore
+	   
+	   public static Command Cantivore = new Command()
+	   {
+	      private static final long serialVersionUID = -8778902687347191964L;
+	      public void execute()
+	      {
+	         // get all creatures
+	         CardList list = new CardList();
+	         list.addAll(AllZone.Human_Play.getCards());
+	         list.addAll(AllZone.Computer_Play.getCards());
+	         list = list.getName("Cantivore");
+
+	         for (int i = 0; i < list.size(); i++)
+	         {
+	            Card c = list.get(i);
+	            c.setBaseAttack(countCreatures());
+	            c.setBaseDefense(c.getBaseAttack());
+	         }
+	      }
+	      private int countCreatures()
+	      {
+	         PlayerZone compGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+	         PlayerZone humGrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+	         CardList list = new CardList();
+	         list.addAll(compGrave.getCards());
+	         list.addAll(humGrave.getCards());
+	         list = list.filter(new CardListFilter(){
+	            public boolean addCard(Card c) {
+	               return c.isEnchantment();
+	            }
+	         });
+	         return list.size();
+	      }
+	         
+	   };//Cantivore
 
 	public static Command Lhurgoyf = new Command()
    {
@@ -13266,6 +13371,9 @@ public class GameActionUtil
 		commands.put("Rakdos_Pit_Dragon", Rakdos_Pit_Dragon);
 		commands.put("Nyxathid", Nyxathid);
 		commands.put("Lord_of_Extinction", Lord_of_Extinction);
+		commands.put("Cantivore", Cantivore);
+		commands.put("Cognivore", Cognivore);
+		commands.put("Mortivore", Mortivore);
 		commands.put("Terravore", Terravore);
 		commands.put("Magnivore", Magnivore);
 		commands.put("Tarmogoyf", Tarmogoyf);
