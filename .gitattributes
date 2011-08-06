@@ -4867,6 +4867,7 @@ res/cardsfolder/vectis_silencers.txt -text svneol=native#text/plain
 res/cardsfolder/vector_asp.txt -text svneol=native#text/plain
 res/cardsfolder/vedalken_aethermage.txt -text svneol=native#text/plain
 res/cardsfolder/vedalken_archmage.txt -text svneol=native#text/plain
+res/cardsfolder/vedalken_certarch.txt -text svneol=native#text/plain
 res/cardsfolder/vedalken_dismisser.txt -text svneol=native#text/plain
 res/cardsfolder/vedalken_entrancer.txt -text svneol=native#text/plain
 res/cardsfolder/vedalken_ghoul.txt -text svneol=native#text/plain

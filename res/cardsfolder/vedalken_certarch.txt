@@ -1,0 +1,9 @@
+Name:Vedalken Certarch
+ManaCost:U
+Types:Creature Vedalken Wizard
+Text:no text
+PT:1/1
+A:AB$Tap|Cost$T|ValidTgts$Artifact,Creature,Land|TgtPrompt$Select target artifact,creature or land.|IsPresent$Artifact|PresentCompare$GE3|PrecostDesc$Metalcraft - |SpellDescription$Tap target artifact,creature or land.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_certarch.jpg
+End
