@@ -185,7 +185,6 @@ public class GameActionUtil {
 		playCard_Riverfall_Mimic(c);
 		playCard_Shorecrasher_Mimic(c);
 		playCard_Woodlurker_Mimic(c);
-		playCard_Belligerent_Hatchling(c);
 		playCard_Voracious_Hatchling(c);
 		playCard_Sturdy_Hatchling(c);
 		playCard_Noxious_Hatchling(c);
@@ -1142,64 +1141,6 @@ public class GameActionUtil {
 
 		}
 	} // Dovescape
-
-
-	public static void playCard_Belligerent_Hatchling(Card c) {
-		final Player controller = c.getController();
-
-		final PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, controller);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Belligerent Hatchling");
-
-		if(list.size() > 0) {
-			if(c.isRed()) {
-				for(int i = 0; i < list.size(); i++) {
-					final Card card = list.get(i);
-
-					Ability ability2 = new Ability(card, "0") {
-						@Override
-						public void resolve() {
-							if(card.getCounters(Counters.M1M1) > 0) card.subtractCounter(Counters.M1M1, 1);
-						}
-
-					}; // ability2
-					
-					StringBuilder sb = new StringBuilder();
-					sb.append(card.getName()).append(" - ").append(c.getController());
-					sb.append(" played a red spell, remove a -1/-1 counter from Belligerent Hatchling.");
-					ability2.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability2);
-				}
-			}//if
-		}
-
-		if(c.isWhite()) {
-			for(int i = 0; i < list.size(); i++) {
-				final Card card = list.get(i);
-
-				Ability ability = new Ability(card, "0") {
-					@Override
-					public void resolve() {
-						if(card.getCounters(Counters.M1M1) > 0) card.subtractCounter(Counters.M1M1, 1);
-					}
-
-				}; // ability
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(card.getName()).append(" - ").append(c.getController());
-				sb.append(" played a white spell, remove a -1/-1 counter from Belligerent Hatchling.");
-				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
-			}
-		}//if
-
-
-	}// Belligerent Hatchling
 
 	public static void playCard_Noxious_Hatchling(Card c) {
 		final Player controller = c.getController();
