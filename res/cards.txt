@@ -1,3 +1,18 @@
+Soulcatcher
+1 W
+Creature Bird Soldier
+no text
+1/1
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initator - Has Keyword/Flying:Whenever a creature with flying is put into a graveyard from the battlefield, put a +1/+1 counter on Soulcatcher.
+Flying
+
+Kresh the Bloodbraided
+2 B R G
+Legendary Creature Human Warrior
+no text
+3/3
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/Power:Self:ASAP:Yes_No:Initator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put X +1/+1 counters on Kresh the Bloodbraided, where X is that creature's power.
+
 Mind Peel
 B
 Sorcery
@@ -9870,14 +9885,6 @@ Fecundity
 Enchantment
 no text
 Whenever a creature is put into a graveyard from the battlefield, that creature's controller may draw a card.
-
-Soulcatcher
-1 W
-Creature Bird Soldier
-no text
-1/1
-Whenever a creature with flying is put into a graveyard from the battlefield, put a +1/+1 counter on Soulcatcher.
-Flying
 
 Dauthi Ghoul
 1 B

@@ -4205,8 +4205,6 @@ public class GameActionUtil {
 		else if(c.getName().equals("Dingus Staff")) destroyCreature_Dingus_Staff(c, destroyed);
 		else if(c.getName().equals("Dauthi Ghoul") && destroyed.getKeyword().contains("Shadow")) destroyCreature_Dauthi_Ghoul(
 				c, destroyed);
-		else if(c.getName().equals("Soulcatcher") && destroyed.getKeyword().contains("Flying")) destroyCreature_Soulcatcher(
-				c, destroyed);
 		else if(c.getName().equals("Prowess of the Fair") && destroyed.getType().contains("Elf")
 				&& !destroyed.isToken() && !c.equals(destroyed)
 				&& destroyed.getController().equals(c.getController())) destroyCreature_Prowess_of_the_Fair(c,
@@ -4252,19 +4250,6 @@ public class GameActionUtil {
 		};
 		if(AllZone.GameAction.isCardInPlay(c)) ability.setStackDescription("Dauthi Ghoul - gets a +1/+1 counter.");
 		AllZone.Stack.add(ability);
-	}
-
-	private static void destroyCreature_Soulcatcher(Card c, Card destroyed) {
-		final Card crd = c;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				if(AllZone.GameAction.isCardInPlay(crd)) crd.addCounter(Counters.P1P1, 1);
-			}
-		};
-
-		ability.setStackDescription("Soulcatcher - gets a +1/+1 counter.");
-		if(AllZone.GameAction.isCardInPlay(c)) AllZone.Stack.add(ability);
 	}
 
 	private static void destroyCreature_Prowess_of_the_Fair(Card c, Card destroyed) {

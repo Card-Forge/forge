@@ -718,7 +718,95 @@ public class GameAction {
             }
         });
         
+        // Whenever Keyword
+ 		CardList Cards_In_Play = new CardList();
+ 		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+ 		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+ 		Cards_In_Play = Cards_In_Play.filter(new CardListFilter() {
+             public boolean addCard(Card c) {
+                 if(c.getKeyword().toString().contains("WheneverKeyword")) return true;
+                 return false;
+             }
+         });
+ 		for(int i = 0; i < Cards_In_Play.size() ; i++) {	
+ 			Card card = Cards_In_Play.get(i);
+ 		        ArrayList<String> a = card.getKeyword();
+ 		        int WheneverKeywords = 0;
+ 		        int WheneverKeyword_Number[] = new int[a.size()];
+ 		        for(int x = 0; x < a.size(); x++)
+ 		            if(a.get(x).toString().startsWith("WheneverKeyword")) {
+ 		            	WheneverKeyword_Number[WheneverKeywords] = x;
+ 		            	WheneverKeywords = WheneverKeywords + 1;
+ 		            }
+ 		        for(int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
+                 String parse = card.getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
+                 String k[] = parse.split(":");
+                 final String F_k[] = k;
+                 if((k[1].equals("PermanentIntoGraveyard"))) // No Check Necessary as it is in GameAction 
+                		 {      
+                   	if(k[2].contains("Type")) {
+                        String TypeParse = k[2];                
+                        String Type[] = TypeParse.split("/");
+                        for(int z = 0; z < Type.length - 1; z++) if(!(c.getType()).contains(Type[z + 1])) k[4] = "Null";     		
+                             	}
+                  	if(k[8].contains("Initator - Other than Self")) {
+                 		if(card.equals(c)) k[4] = "Null";      		
+                 	}
+                  	if(k[8].contains("Initator - Has Keyword")) {
+                  		boolean Nullified = true;
+                        String KeywordParse = k[8];                
+                        String Keyword[] = KeywordParse.split("/");
+                        for(int z = 0; z < Keyword.length - 1; z++) if((c.getKeyword()).contains(Keyword[z + 1])) Nullified = false;  
+                        if(Nullified == true) k[4] = "Null";
+                 	}
+                		final Card crd = card;
+                		final Card Destroyed = c;
 
+                		if(k[4].contains("+1+1 Counters")) {
+            				Card Target = null;
+            				if(k[5].equals("Self")) Target = crd;
+            				final Card F_Target = Target;
+                            String AmountParse = k[4];                
+                            String S_Amount = AmountParse.split("/")[1];
+                            int I_Amount = 0;
+                            if(S_Amount.equals("Power")) I_Amount = Destroyed.getNetAttack();
+                            else I_Amount = Integer.valueOf(S_Amount);
+                        final int F_Amount = I_Amount;
+                		Ability ability = new Ability(Target, "0") {
+                			@Override
+                			public void resolve() {
+                				boolean Go = true;
+                        		if(F_k[3].equals("Play")) {
+                        			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, F_Target.getController());
+                            		if(AllZone.GameAction.isCardInZone(F_Target,Required_Zone)) {
+                				if(F_k[7].equals("Yes_No")) {
+    				        	if(F_Target.getController().equals("Human")) {
+    					        	Object[] possibleValues = {"Yes", "No"};
+    					        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + F_Target.getName(),F_Target.getName() + " Ability", 
+    					        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+    					        			null, possibleValues, possibleValues[0]);
+    			                      if(q.equals(1)) {
+    			                    	  Go = false;
+    				                    }
+    				        	}
+                				}
+			                      if(Go == true) if(AllZone.GameAction.isCardInPlay(F_Target)) F_Target.addCounter(Counters.P1P1, F_Amount);
+                			}
+                        		}
+                			}
+                		};
+                		ability.setStackDescription(Target.getName() + " - gets " + F_Amount + " +1/+1 counters.");
+                		if(k[3].equals("Play")) {
+                			PlayerZone Required_Zone = AllZone.getZone(Constant.Zone.Play, Target.getController());
+                    		if(AllZone.GameAction.isCardInZone(Target,Required_Zone)) {
+                    			if(k[6].equals("ASAP")) AllZone.Stack.add(ability);
+                    		}
+                		}
+                	}
+                		 }       	
+ 		        }
+ 		}
+ 		// Whenever Keyword
         for(int i = 0; i < list.size(); i++)
             GameActionUtil.executeDestroyCardEffects(list.get(i), c);
         for(int i = 0; i < grv.size(); i++)
