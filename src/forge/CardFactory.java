@@ -11628,7 +11628,8 @@ public class CardFactory implements NewConstants {
         	Ability_Cost abCost = new Ability_Cost("1 T Sac<1/CARDNAME>", cardName, true);
         	final Ability_Activated spell = new Ability_Activated(card, abCost, null) {
         		private static final long serialVersionUID = 7550743617522146304L;
-
+        		
+        		@Override
         		public void resolve() {
         			int damage = card.getCounters(Counters.TIME);
         			CardList all = AllZoneUtil.getCreaturesInPlay();
@@ -11638,14 +11639,15 @@ public class CardFactory implements NewConstants {
         			AllZone.HumanPlayer.addDamage(damage, card);
         			AllZone.ComputerPlayer.addDamage(damage, card);
         		}
+        		
+        		@Override
         		public boolean canPlayAI() {
         			final int damage = card.getCounters(Counters.TIME);
 
         			if (AllZone.HumanPlayer.getLife() <= damage) return true;
 
-        			CardListFilter filter = new CardListFilter(){
-        				public boolean addCard(Card c)
-        				{
+        			CardListFilter filter = new CardListFilter() {
+        				public boolean addCard(Card c) {
         					return c.isCreature() && CardFactoryUtil.canDamage(card, c) && damage >= (c.getNetDefense() + c.getDamage());
         				}
         			};
