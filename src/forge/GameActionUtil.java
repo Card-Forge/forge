@@ -13064,6 +13064,7 @@ public class GameActionUtil {
 		}// execute()
 	};
 
+	/*
 	public static Command Serra_Avatar                = new Command() {
 		private static final long serialVersionUID = -7560281839252561370L;
 
@@ -13078,6 +13079,7 @@ public class GameActionUtil {
 			}// for
 		}// execute
 	}; // Serra Avatar
+	*/
 
 	public static Command Ajani_Avatar_Token          = new Command() {
 		private static final long serialVersionUID = 3027329837165436727L;
@@ -16388,7 +16390,7 @@ public class GameActionUtil {
 		commands.put("Ruthless_Cullblade", Ruthless_Cullblade);
 		
 		//commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
-		commands.put("Serra_Avatar", Serra_Avatar);
+		//commands.put("Serra_Avatar", Serra_Avatar);
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
 		//commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
