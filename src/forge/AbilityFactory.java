@@ -200,6 +200,14 @@ public class AbilityFactory {
 				SA = AbilityFactory_Counters.createSpellRemoveCounters(this);
 			}
 		}
+		
+		if (API.equals("Proliferate")){
+			if (isAb)
+				SA = AbilityFactory_Counters.createAbilityProliferate(this);
+			if (isSp){
+				SA = AbilityFactory_Counters.createSpellProliferate(this);
+			}
+		}
 
 		if (API.equals("Fetch")){
 			if (isAb)

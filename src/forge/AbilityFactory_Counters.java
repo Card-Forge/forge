@@ -443,5 +443,218 @@ public class AbilityFactory_Counters {
 	}
 	
 	
-	// move proliferate here? AB$Proliferate|NumProliferate$2
+	// move proliferate here? AB$Proliferate
+	
+	//TODO - |NumProliferate$2
+	
+	public static SpellAbility createAbilityProliferate(final AbilityFactory AF) {
+		final SpellAbility abProliferate = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+    		private static final long serialVersionUID = -6617234927365102930L;
+
+			@Override
+			public boolean canPlayAI() {
+    			return shouldProliferateAI();
+    		}
+			
+    		@Override
+			public void resolve() {
+    			proliferateResolve(AF);
+    		}
+    		
+    		@Override
+    		public boolean canPlay(){
+				// super takes care of AdditionalCosts
+				return super.canPlay();	
+			}
+    		
+    		@Override
+			public String getStackDescription(){
+				 StringBuilder sb = new StringBuilder();
+				 String name = AF.getHostCard().getName();
+				 sb.append(name).append(" - Proliferate.");
+				 sb.append("  (You choose any number of permanents and/or players with ");
+    	         sb.append("counters on them, then give each another counter of a kind already there.)");
+				 return sb.toString();
+			}
+    	};
+    	
+    	return abProliferate;
+    }
+	
+	public static SpellAbility createSpellProliferate(final AbilityFactory AF) {
+		final SpellAbility spProliferate = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = 1265466498444897146L;
+
+			@Override
+			public boolean canPlayAI() {
+    			return shouldProliferateAI();
+    		}
+			
+    		@Override
+			public void resolve() {
+    			proliferateResolve(AF);
+    		}
+    		
+    		@Override
+    		public boolean canPlay(){
+				// super takes care of AdditionalCosts
+				return super.canPlay();	
+			}
+    		
+    		@Override
+			public String getStackDescription(){
+				 StringBuilder sb = new StringBuilder();
+				 String name = AF.getHostCard().getName();
+				 sb.append(name).append(" - Proliferate.");
+				 return sb.toString();
+			}
+    	};
+    	
+    	return spProliferate;
+    }
+	
+	private static boolean shouldProliferateAI() {
+		return true;
+	}
+	
+	private static void proliferateResolve(final AbilityFactory AF) {
+		CardList hperms = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+		hperms = hperms.filter(new CardListFilter() {
+			public boolean addCard(Card crd)
+			{
+				return !crd.getName().equals("Mana Pool") /*&& crd.hasCounters()*/;
+			}
+		});
+		
+		CardList cperms = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+		cperms = cperms.filter(new CardListFilter() {
+			public boolean addCard(Card crd)
+			{
+				return !crd.getName().equals("Mana Pool") /*&& crd.hasCounters()*/;
+			}
+		});
+		
+		if (AF.getHostCard().getController().equals(AllZone.HumanPlayer)) {	
+			cperms.addAll(hperms.toArray());
+			final CardList unchosen = cperms;
+			AllZone.InputControl.setInput(new Input() {
+				private static final long serialVersionUID = -1779224307654698954L;
+
+				@Override
+				public void showMessage() {
+					AllZone.Display.showMessage("Choose permanents and/or players");
+					ButtonUtil.enableOnlyOK();
+				}
+
+				@Override
+				public void selectButtonOK() {
+					stop();
+				}
+
+				@Override
+				public void selectCard(Card card, PlayerZone zone)
+				{
+					if(!unchosen.contains(card)) return;
+					unchosen.remove(card);
+					ArrayList<String> choices = new ArrayList<String>();
+					for(Counters c_1:Counters.values())
+						if(card.getCounters(c_1) != 0) choices.add(c_1.getName());
+					if (choices.size() > 0)
+						card.addCounter(Counters.getType((choices.size() == 1 ? choices.get(0) : AllZone.Display.getChoice("Select counter type", choices.toArray()).toString())), 1);
+				}
+				boolean selComputer = false;
+				boolean selHuman = false;
+				@Override
+				public void selectPlayer(Player player) {
+					if (player.equals(AllZone.HumanPlayer) && selHuman == false) {
+						selHuman = true;
+						if (AllZone.HumanPlayer.getPoisonCounters() > 0)
+							AllZone.HumanPlayer.addPoisonCounters(1);
+					}
+					if (player.equals(AllZone.ComputerPlayer) && selComputer == false) {
+						selComputer = true;
+						if (AllZone.ComputerPlayer.getPoisonCounters() > 0)
+							AllZone.ComputerPlayer.addPoisonCounters(1);
+					}
+				}
+			});
+		}
+		else { //Compy
+			cperms = cperms.filter(new CardListFilter() {
+				public boolean addCard(Card crd) {
+					int pos = 0;
+					int neg = 0;
+					for(Counters c_1:Counters.values()) {
+                        if(crd.getCounters(c_1) != 0) {
+                        	if (CardFactoryUtil.isNegativeCounter(c_1))
+                        		neg++;
+                        	else
+                        		pos++;
+                        }
+					}
+					return pos > neg;
+				}
+			});
+			
+			hperms = hperms.filter(new CardListFilter() {
+				public boolean addCard(Card crd) {
+					int pos = 0;
+					int neg = 0;
+					for(Counters c_1:Counters.values()) {
+                        if(crd.getCounters(c_1) != 0) {
+                        	if (CardFactoryUtil.isNegativeCounter(c_1))
+                        		neg++;
+                        	else
+                        		pos++;
+                        }
+					}
+					return pos < neg;
+				}
+			});
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("<html>Proliferate: <br>Computer selects ");
+			if (cperms.size() == 0 && hperms.size() == 0 && AllZone.HumanPlayer.getPoisonCounters() == 0)
+				sb.append("<b>nothing</b>.");
+			else {
+				if (cperms.size()>0) {
+					sb.append("<br>From Computer's permanents: <br><b>");
+					for (Card c:cperms) {
+						sb.append(c);
+						sb.append(" ");
+					}
+					sb.append("</b><br>");
+				}
+				if (hperms.size()>0) {
+					sb.append("<br>From Human's permanents: <br><b>");
+					for (Card c:cperms) {
+						sb.append(c);
+						sb.append(" ");
+					}
+					sb.append("</b><br>");
+				}
+				if (AllZone.HumanPlayer.getPoisonCounters() > 0)
+					sb.append("<b>Human Player</b>.");
+			}//else
+			sb.append("</html>");
+			
+			
+			//add a counter for each counter type, if it would benefit the computer
+			for (Card c:cperms) {
+				for(Counters c_1:Counters.values())
+                    if(c.getCounters(c_1) != 0) c.addCounter(c_1, 1);
+			}
+			
+			//add a counter for each counter type, if it would screw over the player
+			for (Card c:hperms) {
+				for(Counters c_1:Counters.values())
+                    if(c.getCounters(c_1) != 0) c.addCounter(c_1, 1);
+			}
+			
+			//give human a poison counter, if he has one
+			if (AllZone.HumanPlayer.getPoisonCounters() > 0)
+        		AllZone.HumanPlayer.addPoisonCounters(1);
+			
+		} //comp
+	}
 }
