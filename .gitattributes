@@ -8724,6 +8724,7 @@ src/forge/card/abilityFactory/AbilityFactory_AlterLife.java -text svneol=native#
 src/forge/card/abilityFactory/AbilityFactory_Animate.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Bounce.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_ChangeZone.java -text svneol=native#text/plain
+src/forge/card/abilityFactory/AbilityFactory_Choose.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Clash.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_Combat.java -text svneol=native#text/plain
 src/forge/card/abilityFactory/AbilityFactory_CounterMagic.java -text svneol=native#text/plain
