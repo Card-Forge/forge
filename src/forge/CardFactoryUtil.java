@@ -1727,8 +1727,9 @@ public class CardFactoryUtil {
             
             @Override
             public void resolve() {
-                if (AllZone.GameAction.isCardInPlay(getTargetCard()) && 
-                       CardFactoryUtil.canTarget(sourceCard, getTargetCard())) {
+                if (AllZone.GameAction.isCardInPlay(getTargetCard()) 
+                        && CardFactoryUtil.canTarget(sourceCard, getTargetCard())) {
+                    
                     if (sourceCard.isEquipping()) {
                         Card crd = sourceCard.getEquipping().get(0);
                         if (crd.equals(getTargetCard())) return;
@@ -1742,19 +1743,17 @@ public class CardFactoryUtil {
             // An animated artifact equipmemt can't equip a creature
             @Override
             public boolean canPlay() {
-                return AllZone.getZone(sourceCard).is(Constant.Zone.Play) && 
-                       AllZone.Phase.getActivePlayer().equals(sourceCard.getController()) && 
-                       !sourceCard.isCreature() && 
-                       (AllZone.Phase.getPhase().equals("Main1") || 
-                       AllZone.Phase.getPhase().equals("Main2"));
+                return AllZone.getZone(sourceCard).is(Constant.Zone.Play) 
+                        && AllZone.Phase.getActivePlayer().equals(sourceCard.getController()) 
+                        && !sourceCard.isCreature() 
+                        && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
             }
             
             @Override
             public boolean canPlayAI() {
-                return getCreature().size() != 0 && 
-                !sourceCard.isEquipping();
+                return getCreature().size() != 0 
+                        && !sourceCard.isEquipping();
             }
-            
             
             @Override
             public void chooseTargetAI() {
@@ -1762,32 +1761,41 @@ public class CardFactoryUtil {
                 setTargetCard(target);
             }
             
-            CardList getCreature() {    // build list and do some pruning
+            CardList getCreature() {
                 CardList list = new CardList(AllZone.Computer_Play.getCards());
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
-                        return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c)) && 
-                               CardFactoryUtil.canTarget(sourceCard, c) && 
-                               (!c.getKeyword().contains("Defender")) && 
-                               (c.getNetDefense() + Tough > 0);
+                        return c.isCreature() 
+                                && CardFactoryUtil.AI_doesCreatureAttack(c) 
+                                && CardFactoryUtil.canTarget(sourceCard, c) 
+                                && (!c.getKeyword().contains("Defender")) 
+                                && (c.getNetDefense() + Tough > 0);
                     }
                 });
-                // list.remove(card);      // if mana-only cost, allow self-target
+
+                // Is there at least 1 Loxodon Punisher and/or Goblin Gaveleer to target
+                CardList equipMagnetList = list;
+                equipMagnetList = equipMagnetList.filter(new CardListFilter() {
+                    public boolean addCard(Card c) {
+                        return c.getName().equals("Loxodon Punisher") 
+                                || c.getName().equals("Goblin Gaveleer");
+                    }
+                });
                 
-                // is there at least 1 Loxodon Punisher to target
-                
-                CardList equipMagnetList = list.getName("Loxodon Punisher");
-                if (equipMagnetList.size() != 0 && Tough >= -1) {    // we want Loxodon Punisher to gain at least +1 toughness
-                	return equipMagnetList;
+                if (!equipMagnetList.isEmpty() && Tough >= 0) {
+                    return equipMagnetList;
                 }
                 
-                if (Power == 0 && Tough == 0) {    // This aura is keyword only
+                // This equipment is keyword only
+                if (Power == 0 && Tough == 0) {
                     list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c){
+                        public boolean addCard(Card c) {
                             ArrayList<String> extKeywords = new ArrayList<String>(Arrays.asList(extrinsicKeywords));
                             for (String s:extKeywords) {
+                                
+                                // We want to give a new keyword
                                 if (!c.getKeyword().contains(s))
-                                    return true;    // We want to give a new keyword
+                                    return true;
                             }
                                 //no new keywords:
                                 return false;
@@ -1797,7 +1805,6 @@ public class CardFactoryUtil {
                 
                 return list;
             }//getCreature()
-            
         };//equip ability
         
         Input runtime = new Input() {
