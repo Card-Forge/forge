@@ -19104,6 +19104,41 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(spell, true, false));
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Feldon's Cane")) {
+        	/*
+        	 * Tap, Exile Feldon's Cane: Shuffle your graveyard into your library.
+        	 */
+        	final Ability_Tap ability = new Ability_Tap(card, "0") {
+				private static final long serialVersionUID = -1299603105585632846L;
+
+				@Override
+        		public void resolve() {
+        			final String player = card.getController();
+        			CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+        			//exile Feldon's Cane
+        			AllZone.GameAction.removeFromGame(card);
+        			
+        			for(Card c:grave) {
+        				lib.add(c);
+        			}
+        			AllZone.getZone(Constant.Zone.Graveyard, player).reset();
+        			AllZone.GameAction.shuffle(player);
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+        			return lib.size() < 5;
+        		}
+
+        	};//SpellAbility
+
+        	ability.setStackDescription(cardName+" - Player shuffles grave into library.");
+        	card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

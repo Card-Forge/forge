@@ -1,3 +1,8 @@
+Feldon's Cane
+1
+Artifact
+tap, Exile Feldon's Cane: Shuffle your graveyard into your library.
+
 Mirror-Sigil Sergeant
 5 W
 Creature Rhino Soldier
