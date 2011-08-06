@@ -16863,21 +16863,29 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Lichenthrope")) {
-            final Card newCard = new Card() {
-                @Override
+            /*
+        	final Card newCard = new Card() {
+            	final Card crd = this;
+            	@Override
                 public void addDamage(final int n, final Card source) {
                     final Ability ability = new Ability(card, "0") {
                         @Override
                         public void resolve() {
-                            for(int i = 0; i < n; i++)
-                                card.addCounter(Counters.M1M1, n);
+                            crd.addCounter(Counters.M1M1, n);
                         }
                     };
                     ability.setStackDescription(card.getName() + " - gets " + n + " -1/-1 counters.");
                     AllZone.Stack.add(ability);
                 }
             };
-            
+            */
+        	final Card newCard = new Card()
+        	{
+        		@Override
+                public void addDamage(final int n, final Card source) {
+                    this.addCounter(Counters.M1M1, n);
+                }
+        	};
             newCard.setOwner(card.getOwner());
             newCard.setController(card.getController());
             

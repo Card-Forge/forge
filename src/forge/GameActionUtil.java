@@ -32,7 +32,7 @@ public class GameActionUtil {
         upkeep_Sporesower_Thallid();
         upkeep_Dragonmaster_Outcast();
         upkeep_Scute_Mob();
-        upkeep_Lichentrope();
+        upkeep_Lichenthrope();
         upkeep_Heartmender();
         upkeep_AEther_Vial();
         upkeep_Ratcatcher();
@@ -4581,12 +4581,18 @@ public class GameActionUtil {
         } // if creatures > 0
     }
     
-    private static void upkeep_Lichentrope() {
+    private static void upkeep_Lichenthrope() {
         final String player = AllZone.Phase.getActivePlayer();
         PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
         
         CardList list = new CardList(playZone.getCards());
-        list = list.getName("LichenTrope");
+        list = list.filter(new CardListFilter()
+        {
+        	public boolean addCard(Card c)
+        	{
+        		return c.getName().equals("Lichenthrope") && c.getCounters(Counters.M1M1) > 0;
+        	}
+        });
         
         final CardList cl = list;
         
@@ -4602,11 +4608,11 @@ public class GameActionUtil {
                     }
                     
                 };// Ability
-                ability.setStackDescription("Lichentrope - Remove a -1/-1 counter.");
+                ability.setStackDescription("Lichenthrope - Remove a -1/-1 counter.");
                 AllZone.Stack.add(ability);
             } // for
         } // if creatures > 0
-    }//Lichentrope
+    }//Lichenthrope
     
 
     private static void upkeep_Heartmender() {
