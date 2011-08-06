@@ -24,12 +24,12 @@ public class ManaCost {
     	manaPart = split(manaCost);
     }
     
+    // takes a Short Color and returns true if it exists in the mana cost. Easier for split costs
     public boolean isColor(String color){
     	for(Object s : manaPart){
-    		if (Input_PayManaCostUtil.getLongColorString(s.toString()).equals(color))
+    		if (s.toString().contains(color))
     			return true;
     	}
-    	
     	return false;
     }
     

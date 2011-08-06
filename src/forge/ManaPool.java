@@ -115,50 +115,9 @@ public class ManaPool extends Card {
     }
     
     public void addManaToFloating(String manaStr, Card card) {
-    	manaStr = manaStr.trim();
-    	String[] manaArr = manaStr.split(" ");
-    	
-    	String color = "";
-    	int currentTotal = 0;
-    	int genericTotal = 0;
-    	int snowTotal = 0;
-    	
-    	for(String c : manaArr){
-    		String longStr = Input_PayManaCostUtil.getLongColorString(c);
-    		if (longStr.equals(Constant.Color.Colorless)){
-    			genericTotal += Integer.parseInt(c);
-    			if (card.isSnow())
-    				snowTotal += Integer.parseInt(c);
-    		}
-    		else if (color.equals("")){	
-    			color = longStr;
-    			currentTotal = 1;
-    		}
-    		else if (color.equals(longStr)){
-    			currentTotal++;
-    		}
-    		else{	// color != longstr
-    			// add aggregate color
-    			floatingMana.add(new Mana(color, currentTotal, card));
-    			floatingTotals[map.get(color)] += currentTotal;
-    			if (card.isSnow())
-    				floatingTotals[map.get(Constant.Color.Snow)] += currentTotal;
-    			
-    			color = longStr;
-    			currentTotal = 1;
-    		}
-    	}
-    	if (!color.equals("")){	// some colored mana was produced
-			floatingMana.add(new Mana(color, currentTotal, card));
-			floatingTotals[map.get(color)] += currentTotal;
-			if (card.isSnow())
-				floatingTotals[map.get(Constant.Color.Snow)] += currentTotal;
-    	}
-    	
-    	if (genericTotal > 0){	
-    		floatingMana.add(new Mana(Constant.Color.Colorless, genericTotal, card));
-    		floatingTotals[map.get(Constant.Color.Colorless)] += genericTotal;
-    		floatingTotals[map.get(Constant.Color.Snow)] += snowTotal;
+    	ArrayList<Mana> manaList = convertStringToMana(manaStr, card);
+    	for(Mana m : manaList){
+    		addManaToPool(floatingMana, m);
     	}
 
         //Omnath, Locus of Mana Pump Trigger
@@ -172,6 +131,13 @@ public class ManaPool extends Card {
     }
     
     public void addManaToPaying(String manaStr, Card card) {
+    	ArrayList<Mana> manaList = convertStringToMana(manaStr, card);
+    	for(Mana m : manaList)
+    		addManaToPool(payingMana, m);
+    }
+    
+    public static ArrayList<Mana> convertStringToMana(String manaStr, Card card){
+    	ArrayList<Mana> manaList = new ArrayList<Mana>();
     	manaStr = manaStr.trim();
     	String[] manaArr = manaStr.split(" ");
     	
@@ -192,16 +158,18 @@ public class ManaPool extends Card {
     		}
     		else{	// more than one color generated
     			// add aggregate color
-    			payingMana.add(new Mana(color, total, card));
+    			manaList.add(new Mana(color, total, card));
     			
     			color = longStr;
     			total = 1;
     		}
     	}
     	if (total > 0)
-    		payingMana.add(new Mana(color, total, card));
+    		manaList.add(new Mana(color, total, card));
     	if (genericTotal > 0)	
-    		payingMana.add(new Mana(Constant.Color.Colorless, genericTotal, card));
+    		manaList.add(new Mana(Constant.Color.Colorless, genericTotal, card));
+    	
+    	return manaList;
     }
     
     public void clearPool()
@@ -315,6 +283,17 @@ public class ManaPool extends Card {
 			i++;
 		}
 		removeManaFrom(pool, choice);
+    }
+    
+    public void findAndRemoveFrom(ArrayList<Mana> pool, Mana mana){
+    	Mana set = null;
+    	for (Mana m : pool){
+    		if (m.getSourceCard().equals(mana.getSourceCard()) && m.getColor().equals(mana.getColor())){
+    			set = m;
+    			break;
+    		}
+    	}
+    	removeManaFrom(pool, set);
     }
     
     public void removeManaFrom(ArrayList<Mana> pool, Mana choice){
@@ -438,7 +417,6 @@ public class ManaPool extends Card {
     	// get a mana of this type from floating, bail if none available
     	Mana mana = getManaFrom(floatingMana, manaStr);
     	if (mana == null) return manaCost;	// no matching mana in the pool
-    	Card c = mana.getSourceCard();
     	
     	Mana[] manaArray = mana.toSingleArray();
     	
@@ -447,7 +425,7 @@ public class ManaPool extends Card {
 	    	if (manaCost.isNeeded(m)){
 	    		manaCost.payMana(m);
 	    		payingMana.add(m);
-	    		removeManaFromFloating(manaCost, c);
+	    		findAndRemoveFrom(floatingMana, m);
 	    	}
 	    	else
 	    		break;

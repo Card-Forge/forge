@@ -14,25 +14,60 @@ public class Input_PayManaCostUtil
 	
     if(card instanceof ManaPool) 
     	return ((ManaPool)card).subtractMana(manaCost);
-	ArrayList<Ability_Mana> abilities = getManaAbilities(card);
 
+	ArrayList<Ability_Mana> abilities = getManaAbilities(card);
     StringBuilder cneeded = new StringBuilder();
+    boolean choice = true;
+    boolean skipExpress = false;
+    
     for(String color : Constant.Color.ManaColors)
     	if(manaCost.isNeeded(color))
     		cneeded.append(getShortColorString(color));
+    
     Iterator<Ability_Mana> it = abilities.iterator();//you can't remove unneeded abilities inside a for(am:abilities) loop :(
     while(it.hasNext())
     {
     	Ability_Mana ma = it.next();
     	if (!ma.canPlay()) it.remove();
     	else if (!canMake(ma, cneeded.toString())) it.remove();
+    	
+    	if (!skipExpress){
+    		// skip express mana if there's a a sacrifice or the ability is not undoable
+	    	if (ma.isSacrifice() || !ma.undoable()){
+	    		skipExpress = true;
+	    		continue;
+	    	}	
+    	}
     }
     if(abilities.isEmpty())
     	return manaCost;
     
-    //String color;
+    // todo when implementing sunburst 
+    // If the card has sunburst or any other ability that tracks mana spent, skip express Mana choice
+    // if (card.getTrackManaPaid()) skipExpress = true;
+
+	if (!skipExpress){
+		// express Mana Choice
+		ArrayList<Ability_Mana> colorMatches = new ArrayList<Ability_Mana>();
+
+		for(Ability_Mana am : abilities){
+			String[] m = ManaPool.formatMana(am);
+			for(String color : m)
+				if(manaCost.isColor(color)) // convert to long before checking if color
+					colorMatches.add(am);
+		}
+		
+		if (colorMatches.size() == 0 || colorMatches.size() == abilities.size()) 
+			// can only match colorless just grab the first and move on.
+			choice = false;
+		else if (colorMatches.size() < abilities.size()){
+			// leave behind only color matches
+			abilities = colorMatches;
+		}
+	}
+
     Ability_Mana chosen = abilities.get(0);
-    if(1 < abilities.size())
+    if(1 < abilities.size() && choice)
     {
     	HashMap<String, Ability_Mana> ability = new HashMap<String, Ability_Mana>();
     	for(Ability_Mana am : abilities)
@@ -167,7 +202,7 @@ public class Input_PayManaCostUtil
 	  if(am.isReflectedMana()) {
 		  for( String color:((Ability_Reflected_Mana)am).getPossibleColors()) {
 			  if (mana.contains(getShortColorString(color))) {
-			  return true;
+				  return true;
 			  }
 		  }
 		  return false;
