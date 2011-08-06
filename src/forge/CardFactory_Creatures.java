@@ -13437,11 +13437,13 @@ public class CardFactory_Creatures {
         	
         	final Command comesIntoPlay = new Command() {
 				private static final long serialVersionUID = -6986957647765851979L;
-				final Player player = card.getController();
+				
         		public void execute() {
+        			Player player = card.getController();
         			CardList type = AllZoneUtil.getCreaturesInPlay(player);
+        			type.remove(card);
 
-        			if( player.isComputer()) {
+        			if(player.isComputer()) {
         				if( type.size() > 0 ) {
         					Card sac = CardFactoryUtil.AI_getWorstCreature(type);
         					AllZone.GameAction.sacrifice(sac);
