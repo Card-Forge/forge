@@ -261,7 +261,7 @@ public class SetInfoUtil {
 		{"ZEN", "WWK", "", "Zendikar", "3"},
 		{"ROE", "", "", "Rise of the Eldrazi", "3"},
 		{"M11", "", "", "Magic 2011", "3"},
-		{"SOM", "MBS", "", "Scars of Mirrodin", "3"}
+		{"SOM", "MBS", "NPH", "Scars of Mirrodin", "3"}
 	};
 	
 	public static ArrayList<String> getBlockNameList() {
