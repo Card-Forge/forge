@@ -10088,6 +10088,7 @@ public class GameActionUtil {
 	private static void upkeep_Shapeshifter() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Shapeshifter");
+		list = list.filter(AllZoneUtil.nonToken);
 
 		for(final Card c:list) {
 			SpellAbility ability = new Ability(c, "0") {

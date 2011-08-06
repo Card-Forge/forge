@@ -15336,21 +15336,23 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = 5447692676152380940L;
 
 				public void execute() {
-					int num = 0;
-					if(card.getController().isHuman()) {
-						String[] choices = new String[7];
-						for(int j = 0; j < 7; j++) {
-							choices[j] = ""+j;
+					if(!card.isToken()) {  //ugly hack to get around tokens created by Crib Swap
+						int num = 0;
+						if(card.getController().isHuman()) {
+							String[] choices = new String[7];
+							for(int j = 0; j < 7; j++) {
+								choices[j] = ""+j;
+							}
+							String answer = (String)(AllZone.Display.getChoiceOptional(
+									card.getName()+" - Choose a number", choices));
+							num = Integer.parseInt(answer);
 						}
-						String answer = (String)(AllZone.Display.getChoiceOptional(
-								card.getName()+" - Choose a number", choices));
-						num = Integer.parseInt(answer);
+						else {
+							num = 3;
+						}
+						card.setBaseAttack(num);
+						card.setBaseDefense(7-num);
 					}
-					else {
-						num = 3;
-					}
-					card.setBaseAttack(num);
-					card.setBaseDefense(7-num);
 				}
         	};
 
