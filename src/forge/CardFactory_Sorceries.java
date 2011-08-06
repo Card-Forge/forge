@@ -2662,67 +2662,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
          }//*********************END**********END***********************
         
-        
-      //*************** START *********** START **************************
-      else if(cardName.equals("Exhume"))
-      {
-    	  // Can this be converted to SP$ChangeZone | Hidden$ True | Defined$ Each ?
-    	  final SpellAbility spell = new Spell(card)
-    	  {
-    		  private static final long serialVersionUID = 8073863864604364654L;
-
-    		  public void resolve()
-    		  {
-    			  CardList humanList = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
-    			  humanList = humanList.getType("Creature");
-    			  CardList computerList = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
-    			  computerList = computerList.getType("Creature");
-
-    			  Card c;
-    			  if (humanList.size() > 0)
-    			  {
-    				  Object check = GuiUtils.getChoiceOptional("Select creature to Exhume", humanList.toArray());
-    				  if (check!=null)
-    				  {
-    					  c = (Card)check;
-    					  AllZone.GameAction.moveToPlay(c);
-    				  }
-
-    			  }
-
-    			  if (computerList.size() > 0)
-    			  {
-    				  c = CardFactoryUtil.AI_getBestCreature(computerList);
-    				  if (c != null)
-    					  c = computerList.get(0);
-
-    				  AllZone.GameAction.moveToPlay(c);
-    			  }
-    		  }
-
-    		  public boolean canPlayAI()
-    		  {   
-    			  CardList humanList = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
-    			  humanList = humanList.getType("Creature");
-    			  CardList computerList = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
-    			  computerList = computerList.getType("Creature");
-
-    			  if (computerList.size() > 0)
-    			  {
-    				  if (humanList.size() == 0)
-    					  return true;
-
-    				  return CardFactoryUtil.AI_getBestCreature(computerList).getNetAttack() > 
-    				  CardFactoryUtil.AI_getBestCreature(humanList).getNetAttack();
-    			  }
-    			  return false;
-    		  }
-    	  };
-    	  card.clearSpellAbility();
-    	  card.addSpellAbility(spell);        
-      }
-      //*************** END ************ END **************************
-
 
 
 	//*************** START *********** START **************************
