@@ -2,7 +2,7 @@ Name:Temple Bell
 ManaCost:3
 Types:Artifact
 Text:no text
-K:abDrawCards T:1:Drawback$OppDraw/1:Each player draws a card.:Temple Bell - each player draws a card
+A:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Each player draws a card. | SubAbility$ OppDraw/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_bell.jpg
 End

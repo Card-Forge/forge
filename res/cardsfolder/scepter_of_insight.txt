@@ -2,7 +2,7 @@ Name:Scepter of Insight
 ManaCost:1 U U
 Types:Artifact
 Text:no text
-K:abDrawCards 3 U T:1:Draw a card.:Scepter of Insight - draw a card
+A:AB$Draw | Cost$ 3 U T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scepter_of_insight.jpg
 End
