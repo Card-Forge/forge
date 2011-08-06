@@ -1,8 +1,8 @@
-Ivy Elemental
-X G
-Creature Elemental
-Ivy Elemental enters the battlefield with X +1/+1 counters on it.
-0/0
+Ley Druid
+2 G
+Creature Human Druid
+no text
+1/1
 
 Goblin Offensive
 X 1 R R

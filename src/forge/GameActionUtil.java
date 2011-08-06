@@ -6494,8 +6494,11 @@ public class GameActionUtil {
         // does not check to see if Howling Mine is untapped
         list = list.getName("Howling Mine");
         
-        for(int i = 0; i < list.size(); i++)
-            AllZone.GameAction.drawCard(player);
+        for(int i = 0; i < list.size(); i++){
+        	if( list.getCard(i).isUntapped() ) {
+        		AllZone.GameAction.drawCard(player);
+        	}
+        }
     }// upkeep_Howling_Mine()
     
     private static void upkeep_Font_of_Mythos() {

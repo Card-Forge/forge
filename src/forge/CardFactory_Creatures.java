@@ -17401,6 +17401,78 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
+        /*
+        //*************** START *********** START **************************
+        else if(cardName.equals("Ivy Elemental"))
+        {
+           SpellAbility sa = card.getSpellAbility()[0];
+           sa.setIsXCost(true);
+           sa.setManaCost("G");
+           
+           //card.getSpellAbility()[0].setIsXCost(true);
+           final Ability ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    card.addCounter(Counters.P1P1, card.getXManaCostPaid());
+                    card.setXManaCostPaid(0);
+                }
+            };
+           
+            StringBuilder sb = new StringBuilder();
+            sb.append(cardName);
+            sb.append(" - enters the battlefield with X +1/+1 counters on it.");
+            ability.setStackDescription(sb.toString());
+           
+            final Command comesIntoPlay = new Command() {
+            private static final long serialVersionUID = -6463000686862814506L;
+
+            public void execute() {
+                    AllZone.Stack.add(ability);
+                }
+            };
+           
+            card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
+        */
+        
+        //****************************START*****************
+        else if(cardName.equals("Ley Druid")) {
+           final Ability_Tap ability = new Ability_Tap(card) {
+			private static final long serialVersionUID = -7229312351481710270L;
+			public boolean canPlayAI() {
+                 return false;
+              }
+              public void resolve() {
+                 if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
+                    getTargetCard().untap();  //untapping land
+                 }
+              }
+           };//Ability_Tap
+           
+           Input target = new Input() {
+			private static final long serialVersionUID = -9065927577683004322L;
+			public void showMessage() {
+                 AllZone.Display.showMessage("Select target tapped land to untap");
+                 ButtonUtil.enableOnlyCancel();
+              }
+              public void selectButtonCancel() {stop();}
+              public void selectCard(Card c, PlayerZone zone) {
+                 if(c.isLand() && zone.is(Constant.Zone.Play) && c.isTapped()) {
+                    card.tap(); //tapping Ley Druid
+                    ability.setTargetCard(c);
+                    AllZone.Stack.add(ability);
+                    stop();
+                 }
+              }//selectCard()
+           };//Input
+           
+           card.addSpellAbility(ability);
+           ability.setDescription("tap: Untap target land.");
+           ability.setBeforePayMana(target);
+        }//end Ley Druid
+        //**************END****************END***********************
+
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(shouldCycle(card) != -1) {
