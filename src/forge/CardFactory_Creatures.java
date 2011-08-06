@@ -5767,6 +5767,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         */
         
+        /* Converteded to AF Trigger
         //*************** START *********** START **************************
         else if(cardName.equals("Rathi Fiend")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -5787,7 +5788,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Doomsday Specter")) {
