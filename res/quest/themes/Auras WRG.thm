@@ -7,14 +7,24 @@ Wooded Foothills
 Windswept Heath
 [/Group]
 
-[Group MaxCnt=4 Percentage=22]
+[Group MaxCnt=4 Percentage=20]
 Aura Gnarlid
+Aura Gnarlid
+Kor Spiritdancer
 Kor Spiritdancer
 Rabid Wombat
 Uril, the Miststalker
 [/Group]
 
-[Group MaxCnt=2 Percentage=9]
+[Group MaxCnt=4 Percentage=7]
+Gate Hound
+Gate Hound
+Skyrider Trainee
+Thran Golem
+Thran Golem
+[/Group]
+
+[Group MaxCnt=2 Percentage=5]
 Totem-Guide Hartebeest
 Troll Ascetic
 Sacred Wolf
@@ -32,7 +42,7 @@ Rancor
 Spider Umbra
 [/Group]
 
-[Group MaxCnt=3 Percentage=10]
+[Group MaxCnt=3 Percentage=9]
 Agility
 Brilliant Halo
 Eland Umbra
@@ -48,10 +58,12 @@ Volcanic Strength
 
 [Group MaxCnt=3 Percentage=12]
 Ancestral Mask
+Ancestral Mask
 Armadillo Cloak
 Asha's Favor
 Battle Mastery
 Boar Umbra
+Fencer's Magemark
 Fencer's Magemark
 Guardian's Magemark
 Lightning Talons
