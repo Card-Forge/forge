@@ -5109,6 +5109,9 @@ res/quest/questData -text svneol=unset#unset
 res/quest/quests.txt -text svneol=native#text/plain
 res/quest/rare.txt -text svneol=native#text/plain
 res/quest/themes/Domain.thm -text
+res/quest/themes/Goblins[!!-~]BR.thm -text
+res/quest/themes/Goblins[!!-~]R.thm -text
+res/quest/themes/Indestructibility[!!-~]WB.thm -text
 res/quest/themes/White.thm -text
 res/quest/uncommon.txt -text svneol=native#text/plain
 res/rare.txt -text svneol=native#text/plain

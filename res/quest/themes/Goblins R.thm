@@ -1,0 +1,90 @@
+BasicLandPercentage=35
+
+[Group MaxCnt=4 Percentage=30]
+Goblin Ringleader
+Goblin General
+Goblin King
+Goblin Piledriver
+Goblin Warchief
+Goblin Lackey
+Goblin Chieftain
+Warren Instigator
+[/Group]
+
+[Group MaxCnt=1 Percentage=16]
+Goblin Matron
+Sensation Gorger
+Goblin Grenade
+Tarfire
+Reckless One
+Mogg War Marshal
+Siege-Gang Commander
+Goblin Guide
+Kiki-Jiki, Mirror Breaker
+Squee, Goblin Nabob
+Mudbutton Torchrunner
+Goblin Arsonist
+Goblin Marshal
+Goblin Sharpshooter
+[/Group]
+
+[Group MaxCnt=4 Percentage=19]
+Akki Raider
+Akki Underling
+Arms Dealer
+Battle Squadron
+Bloodmark Mentor
+Boggart Arsonists
+Boros Recruit
+Crazed Goblin
+Dragon Fodder
+Ember Hauler
+Enslaved Scout
+Flamewave Invoker
+Goblin Balloon Brigade
+Goblin Berserker
+Goblin Brigand
+Goblin Bully
+Goblin Cavaliers
+Goblin Chariot
+Goblin Digging Team
+Goblin Gaveleer
+Goblin Glider
+Goblin Hero
+Goblin Medics
+Goblin Mountaineer
+Goblin Mutant
+Goblin Patrol
+Goblin Piker
+Goblin Raider
+Goblin Roughrider
+Goblin Settler
+Goblin Sky Raider
+Goblin Spelunkers
+Goblin Striker
+Goblin War Buggy
+Hearthfire Hobgoblin
+Hobgoblin Dragoon
+Hulking Goblin
+Keeper of Kookus
+Kyren Glider
+Kyren Sniper
+Lavafume Invoker
+Mogg Fanatic
+Mogg Jailer
+Mogg Sentry
+Mons's Goblin Raiders
+Mudbrawler Cohort
+Raging Goblin
+Rustrazor Butcher
+Skirk Shaman
+Slingshot Goblin
+Spikeshot Elder
+Spikeshot Goblin
+Stream Hopper
+Tar Pitcher
+Tuktuk the Explorer
+Utvara Scalper
+[/Group]
+
+End
