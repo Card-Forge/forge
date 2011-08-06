@@ -3150,9 +3150,7 @@ class CardFactory_Auras {
 	          return false;
 	        }//canPlayAI()
 	        public void resolve()
-	        {
-	        	
-	        	
+	        {       	
 	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
 	          play.add(card);
 	            

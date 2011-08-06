@@ -1,4 +1,7 @@
 package forge;
+
+import java.util.HashMap;
+
 class CardFactory_Planeswalkers {
 	public static Card getCard(final Card card, String cardName, String owner)
 	{
@@ -1686,7 +1689,7 @@ class CardFactory_Planeswalkers {
 	        }
 	        public void selectCard(Card c, PlayerZone zone)
 	        {
-	          if(c.isLand() && zone.is(Constant.Zone.Play))
+	          if(c.isLand() && zone.is(Constant.Zone.Play) && CardFactoryUtil.canTarget(card2, c))
 	          {
 	            count++;
 	            c.untap();
@@ -2249,6 +2252,330 @@ class CardFactory_Planeswalkers {
 		       return card2;
 	    }//*************** END ************ END **************************
 	    
+	  //*************** START *********** START **************************
+	    else if(cardName.equals("Tezzeret the Seeker"))
+	    {
+	      final int turn[] = new int[1];
+	      turn[0] = -1;
+
+	      final Card card2 = new Card()
+	      {
+	        public void addDamage(int n)
+	        {
+	          subtractCounter(Counters.LOYALTY,n);
+	          AllZone.GameAction.checkStateEffects();
+	        }
+	      };
+	      card2.addCounter(Counters.LOYALTY,4);
+
+	      card2.setOwner(owner);
+	      card2.setController(owner);
+
+	      card2.setName(card.getName());
+	      card2.setType(card.getType());
+	      card2.setManaCost(card.getManaCost());
+	      card2.addSpellAbility(new Spell_Permanent(card2));
+
+	      //ability1
+	      final SpellAbility ability1 = new Ability(card2, "0")
+	      {
+	        public void resolve()
+	        {
+	          card2.addCounter(Counters.LOYALTY, 1);
+
+	          turn[0] = AllZone.Phase.getTurn();
+
+	          //only computer uses the stack
+	          CardList tapped = new CardList(AllZone.Computer_Play.getCards());
+	          tapped = tapped.filter(new CardListFilter()
+	          {
+	            public boolean addCard(Card c)
+	            {
+	              return c.isArtifact() && c.isTapped() && CardFactoryUtil.canTarget(card2, c);
+	            }
+	          });
+
+	          for(int i = 0; i < 2 && i < tapped.size(); i++)
+	            tapped.get(i).untap();
+	        }//resolve()
+	        public boolean canPlayAI()
+	        {
+	          return card2.getCounters(Counters.LOYALTY) < 4 && AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
+	        }
+	        public boolean canPlay()
+	        {
+	          return  AllZone.getZone(card2).is(Constant.Zone.Play) &&
+	                  turn[0] != AllZone.Phase.getTurn() &&
+	                  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+	                  !AllZone.Phase.getPhase().equals("End of Turn") &&
+	                  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	                  && AllZone.Stack.size() == 0;
+	        }//canPlay()
+	      };
+	      final Input targetArtifact = new Input()
+	      {
+
+			private static final long serialVersionUID = -7915255038817192835L;
+			private int count;
+	        public void showMessage()
+	        {
+	          AllZone.Display.showMessage("Select a land to untap");
+	          ButtonUtil.disableAll();
+	        }
+	        public void selectCard(Card c, PlayerZone zone)
+	        {
+	          if(c.isArtifact() && zone.is(Constant.Zone.Play) && CardFactoryUtil.canTarget(card2, c))
+	          {
+	            count++;
+	            c.untap();
+	          }
+
+	          //doesn't use the stack, its just easier this way
+	          if(count == 2)
+	          {
+	            count = 0;
+	            turn[0] = AllZone.Phase.getTurn();
+	            card2.addCounter(Counters.LOYALTY,1);
+	            stop();
+	          }
+	        }//selectCard()
+	      };//Input
+
+	      Input runtime1 = new Input()
+	      {
+			private static final long serialVersionUID = 871304623687370615L;
+
+			public void showMessage()
+	        {
+	          stopSetNext(targetArtifact);
+	        }
+	      };//Input
+	      ability1.setDescription("+1: Untap up to two target artifacts.");
+	      ability1.setStackDescription("Tezzeret the Seeker - Untap two target artifacts.");
+
+	      ability1.setBeforePayMana(runtime1);
+	      card2.addSpellAbility(ability1);
+	      //end ability 1
+	      
+	      
+	      
+	      //ability 2
+	      final SpellAbility ability2 = new Ability(card2, "0")
+	      {
+	        public void resolve()
+	        {
+	          turn[0] = AllZone.Phase.getTurn();
+	          
+	          int size = card2.getCounters(Counters.LOYALTY) + 1;
+	          Object choice[] = new Object[size];
+
+	          for(int i = 0; i < choice.length; i++)
+	            choice[i] = new Integer(i);
+
+	          Integer damage = (Integer) AllZone.Display.getChoice("Select X", choice);
+	          final int dam = damage.intValue();
+
+	          card2.subtractCounter(Counters.LOYALTY, dam);
+	          
+	          PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card2.getController());
+	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
+	          CardList list = new CardList(lib.getCards());
+	          list = list.filter(new CardListFilter()
+	          {
+	        	  public boolean addCard(Card c)
+	        	  {
+	        		  return c.isArtifact() && CardUtil.getConvertedManaCost(c.getManaCost()) <= dam;
+	        	  }
+	          });
+	          
+	          if (list.size() > 0)
+	          {
+	        	  Object o = AllZone.Display.getChoiceOptional("Select artifact", AllZone.Human_Library.getCards());
+	        	  if (o != null)
+	        	  {
+	        		  Card c = (Card)o;
+	        		  if (list.contains(c))
+	        		  {
+	        			  lib.remove(c);
+	        			  play.add(c);
+	        		  }
+	        	  }
+	          }
+	        }//resolve()
+	        public boolean canPlay()
+	        {
+	          SpellAbility sa;
+	  	      for (int i=0; i<AllZone.Stack.size(); i++)
+	  	      {
+	  	    	     sa = AllZone.Stack.peek(i);
+	  	    	     if (sa.getSourceCard().equals(card2))
+	  	    	          return false;
+	  	      }
+
+	          return AllZone.getZone(card2).is(Constant.Zone.Play) &&
+	                 turn[0] != AllZone.Phase.getTurn() &&
+	                 AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+	                 !AllZone.Phase.getPhase().equals("End of Turn") && 
+	                 (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	                 && AllZone.Stack.size() == 0;
+	        }
+	        public boolean canPlayAI()
+	        {
+	          return false;
+	        }
+	      };//SpellAbility ability2
+	      ability2.setDescription("-X: Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.");
+	      ability2.setStackDescription(card2.getName() + " - Search your library for an artifact card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.");
+	      card2.addSpellAbility(ability2);
+	      
+	      
+	      final SpellAbility ability3 = new Ability(card2, "0")
+	      {
+			public void resolve() {
+				
+				card2.subtractCounter(Counters.LOYALTY, 5);
+
+		        turn[0] = AllZone.Phase.getTurn();
+		        
+		        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
+		        CardList list = new CardList(play.getCards());
+		        list = list.getType("Artifact");
+		        CardList creatures = list.filter(new CardListFilter(){
+		        	public boolean addCard(Card c)
+		        	{
+		        		return c.isCreature();
+		        	}
+		        });
+				
+		        //final Card[] tempCards = new Card[creatures.size()];
+		        final HashMap<Integer, Card> tempCardMap = new HashMap<Integer, Card>();
+		        
+		        for (Card creatureCard : creatures)
+		        {
+		        	Card crd = copyStats(creatureCard);
+		        	tempCardMap.put(creatureCard.getUniqueNumber(), crd);
+		        	//System.out.println("Just added:" + crd);
+		        }
+		        
+		        for (Card c : list)
+		        {
+		        	final Card[] art = new Card[1];
+		        	art[0] = c;
+		        	if (AllZone.GameAction.isCardInPlay(art[0]))
+			        {
+			        	if (c.isCreature())
+			        	{
+			        		//Card crd = copyStats(art[0]);
+			        		//tempCards[c.getUniqueNumber()] = crd;
+			        		
+			        		final Command creatureUntilEOT = new Command()
+			                {
+			        			private static final long serialVersionUID = 5063161656920609389L;
+
+			        			public void execute()
+			        			{
+			        				final int id = art[0].getUniqueNumber();
+			        				
+			        				Card tempCard = tempCardMap.get(id);
+			        				
+			        				//CardList cl = new CardList();
+			        				/*
+			        				cl = cl.filter(new CardListFilter(){
+			        					public boolean addCard(Card c)
+			        					{
+			        						
+			        						return c.getUniqueNumber() == id;
+			        					}
+			        				});
+			        				*/
+			        			
+			        				//Card temp = cl.get(0);
+				        				
+				        			art[0].setBaseAttack(tempCard.getBaseAttack());
+				        			art[0].setBaseDefense(tempCard.getBaseDefense());
+			        				
+			        			}
+			                };//Command
+			                
+			                art[0].setBaseAttack(5);
+			                art[0].setBaseDefense(5);
+			                
+			        		AllZone.EndOfTurn.addUntil(creatureUntilEOT);
+			        	}
+			        	else 
+			        	{	
+			        		final Command nonCreatureUntilEOT = new Command()
+			        		{
+								private static final long serialVersionUID = 248122386218960073L;
+
+								public void execute()
+			        			{
+			        				art[0].removeType("Creature");
+			        				art[0].setBaseAttack(0);
+			        				art[0].setBaseDefense(0);
+			        			}
+			                };//Command
+			                
+			                art[0].addType("Creature");
+			                art[0].setBaseAttack(5);
+			                art[0].setBaseDefense(5);
+			                
+			        		AllZone.EndOfTurn.addUntil(nonCreatureUntilEOT);
+			        	}//noncreature artifact
+			        		
+		        	}
+		        }//for
+			}//resolve
+			
+			public boolean canPlay()
+	        {
+	          return  AllZone.getZone(card2).is(Constant.Zone.Play) &&
+	                  turn[0] != AllZone.Phase.getTurn() &&
+	                  card2.getCounters(Counters.LOYALTY) >= 5 &&
+	          		  AllZone.Phase.getActivePlayer().equals(card2.getController()) &&
+	          		  !AllZone.Phase.getPhase().equals("End of Turn") &&
+	          		  (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"))
+	          		  && AllZone.Stack.size() == 0;
+	        }//canPlay()
+			
+			public boolean canPlayAI()
+			{
+				PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+				CardList list = new CardList(play.getCards());
+				list = list.filter(new CardListFilter()
+				{
+					public boolean addCard(Card c)
+					{
+						return c.isArtifact() && (!c.isCreature() || (c.isCreature() && c.getBaseAttack() < 4)) && !c.hasSickness();
+					}
+				});
+				return list.size() > 4 && AllZone.Phase.getPhase().equals("Main1") && card2.getCounters(Counters.LOYALTY) > 5;
+			}
+	      };
+	      ability3.setDescription("-5: Artifacts you control become 5/5 artifact creatures until end of turn.");
+	      ability3.setStackDescription(card2.getName() + " - Artifacts you control become 5/5 artifact creatures until end of turn.");
+	      card2.addSpellAbility(ability3);
+	      
+	      return card2;
+	    
+	    }
+	    
 	    return card;
 	}
+	
+	// copies stats like attack, defense, etc..
+	private static Card copyStats(Object o) {
+		Card sim = (Card) o;
+		Card c = new Card();
+
+		c.setBaseAttack(sim.getBaseAttack());
+		c.setBaseDefense(sim.getBaseDefense());
+		c.setIntrinsicKeyword(sim.getKeyword());
+		c.setName(sim.getName());
+		c.setType(sim.getType());
+		c.setText(sim.getSpellText());
+		c.setManaCost(sim.getManaCost());
+
+		return c;
+	}// copyStats()
 }

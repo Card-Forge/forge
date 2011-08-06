@@ -4061,7 +4061,7 @@ public class CardFactory_Creatures {
 		          }//resolve()
 		          public boolean canPlay()
 		          {
-		            return getGraveCreatures().size() != 0;
+		            return super.canPlay() && getGraveCreatures().size() != 0;
 		          }
 		          CardList getGraveCreatures()
 		          {

@@ -754,7 +754,7 @@ public class GuiDisplayUtil implements NewConstants {
         ArrayList<Card> ret = new ArrayList<Card>();
         for(Card c:cards) {
             String name = c.getName();
-            if(name.equals(moxName)) ret.add(c);
+            if(name.equals(moxName) && !c.isCreature()) ret.add(c);
         }
         return ret;
     }
