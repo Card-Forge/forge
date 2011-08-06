@@ -630,7 +630,8 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         colorlessCheckBox.setOpaque(false);
         
         picture.addMouseListener(new CustomListener());
-        if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+        // if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) statsLabel.setFont(new java.awt.Font("Dialog", 0, 13));
         statsLabel.setText("Total - 0, Creatures - 0 Land - 0");
         //Do not lower statsLabel any lower, we want this to be visible at 1024 x 768 screen size
         this.setTitle("Deck Editor");
@@ -639,14 +640,16 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         gridLayout1.setColumns(1);
         gridLayout1.setRows(0);
         statsLabel2.setText("Total - 0, Creatures - 0 Land - 0");
-        if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
+        // if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 13));
         /* jLabel1.setText("Click on the column name (like name or color) to sort the cards"); */
         
         pictureViewPanel.setCardPanel(picture);
      
         this.getContentPane().setLayout(new MigLayout("fill"));
                 
-        this.getContentPane().add(landCheckBox, "cell 0 0, egx checkbox, split 16");
+        // this.getContentPane().add(landCheckBox, "cell 0 0, egx checkbox, split 16");
+        this.getContentPane().add(landCheckBox, "cell 0 0, egx checkbox, split 14");
         this.getContentPane().add(creatureCheckBox, "");
         this.getContentPane().add(sorceryCheckBox, "");
         this.getContentPane().add(instantCheckBox, "");
@@ -661,9 +664,9 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         this.getContentPane().add(greenCheckBox, "");
         this.getContentPane().add(colorlessCheckBox, "");
 
-        jLabel1.setText("with Name includes");
-        this.getContentPane().add(jLabel1, "");
-        this.getContentPane().add(searchTextField, "wmin 120");
+        // jLabel1.setText("with Name includes");
+        // this.getContentPane().add(jLabel1, "");
+        // this.getContentPane().add(searchTextField, "wmin 120");
         this.getContentPane().add(filterButton, "wmin 100, hmin 25");
         
         this.getContentPane().add(jScrollPane1, "cell 0 1 1 2, pushy, grow");
