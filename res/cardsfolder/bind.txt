@@ -1,8 +1,11 @@
 Name:Bind
 ManaCost:1 G
 Types:Instant
-Text:Counter target activated ability.\r\nDraw a card.
-K:spCounter:Ability:None:None:My-Draw(1)
+Text:no text
+#Counter target activated ability.\r\nDraw a card.
+#K:spCounter:Ability:None:None:My-Draw(1)
+A:SP$Counter|Cost$1 G|Type$Ability|SpellDescription$Counter target activated ability.
+K:Draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bind.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/182.jpg
