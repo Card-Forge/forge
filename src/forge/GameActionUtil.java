@@ -69,11 +69,7 @@ public class GameActionUtil {
 		upkeep_Sleeper_Agent();
 		upkeep_Pillory_of_the_Sleepless();
 		upkeep_Mirror_Sigil_Sergeant();
-		upkeep_Verdant_Force();
 		upkeep_Dragon_Broodmother(); //put this before bitterblossom and mycoloth, so that they will resolve FIRST
-		
-		// Win / Lose	
-		//final Player player = AllZone.Phase.getPlayerTurn();
 
 		//Win / Lose
 		// Checks for can't win or can't lose happen in Player.altWinConditionMet()
@@ -5840,30 +5836,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}
 	}
-	
-	private static void upkeep_Verdant_Force() {
-		//final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone hPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-		PlayerZone cPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-
-		CardList list = new CardList(hPlay.getCards());
-		list.addAll(cPlay.getCards());
-		list = list.getName("Verdant Force");
-
-		Ability ability;
-		for(int i = 0; i < list.size(); i++) {
-			final Card card = list.get(i);
-			ability = new Ability(card, "0") {
-				@Override
-				public void resolve() {
-					CardFactoryUtil.makeTokenSaproling(card.getController());
-				}
-			};// Ability
-			ability.setStackDescription("Verdant Force - put a 1/1 green Saproling token onto the battlefield.");
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Verdant_Force()
 	
 	private static void upkeep_Dragon_Broodmother() {
 		CardList list = AllZoneUtil.getCardsInPlay("Dragon Broodmother");
