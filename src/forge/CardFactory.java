@@ -18568,6 +18568,30 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Glasses of Urza")) {
+        	final Ability_Tap ability = new Ability_Tap(card, "0") {
+        		private static final long serialVersionUID = -3857979945891501990L;
+
+        		@Override
+        		public void resolve() {
+        			final String player = getTargetPlayer();
+        			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
+        			CardList handList = new CardList( hand.getCards());
+        			AllZone.Display.getChoice("Target player's hand", handList.toArray());
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+
+        	};//SpellAbility
+
+        	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+        	card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

@@ -1,3 +1,8 @@
+Glasses of Urza
+1
+Artifact
+tap: Look at target player's hand.
+
 Reveillark
 4 W
 Creature Elemental
