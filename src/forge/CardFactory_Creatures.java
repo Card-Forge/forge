@@ -17354,6 +17354,8 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+        
+/* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Ronom Unicorn") || cardName.equals("Kami of Ancient Law")) {
             final Ability ability = new Ability(card, "0") {
@@ -17425,7 +17427,7 @@ public class CardFactory_Creatures {
             });
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+*/
         
 /* Converted to the abDestroyTgtV keyword
         //*************** START *********** START **************************
