@@ -554,8 +554,9 @@ class CardFactory_Planeswalkers {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, opponent);
                     CardList oppPerms = new CardList(play.getCards());
                     
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
-                    life.subtractLife(7,card2);
+                    //PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
+                    //life.subtractLife(7,card2);
+                    AllZone.GameAction.addDamage(opponent, card2, 7);
                     
                     for(int j = 0; j < 7; j++) {
                         //will not actually let human choose which cards to discard
@@ -1344,8 +1345,9 @@ class CardFactory_Planeswalkers {
                     }
 
                     else {
-                        PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-                        life.subtractLife(1,card2);
+                        //PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
+                        //life.subtractLife(1,card2);
+                    	AllZone.GameAction.addDamage(getTargetPlayer(), card2, 1);
                     }
                 }
                 
@@ -1504,8 +1506,10 @@ class CardFactory_Planeswalkers {
                     card2.subtractCounter(Counters.LOYALTY, 8);
                     turn[0] = AllZone.Phase.getTurn();
                     
-                    PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
-                    life.subtractLife(10,card2);
+                    //PlayerLife life = AllZone.GameAction.getPlayerLife(getTargetPlayer());
+                    //life.subtractLife(10,card2);
+                    
+                    AllZone.GameAction.addDamage(getTargetPlayer(), card2, 10);
                     
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, getTargetPlayer());
                     CardList list = new CardList(play.getCards());
@@ -2096,7 +2100,7 @@ class CardFactory_Planeswalkers {
                         }
                     } 
                     else 
-                    	AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card2);
+                    	AllZone.GameAction.addDamage(getTargetPlayer(), card2, damage);
                     
                     AllZone.GameAction.gainLife(card2.getController(), 3);
                 }
