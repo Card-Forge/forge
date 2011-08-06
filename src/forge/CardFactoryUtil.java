@@ -3139,6 +3139,14 @@ public class CardFactoryUtil {
                 if(kw.equals("CARDNAME can't be the target of red spells or abilities from red sources.")) {
                 	if(spell.isRed()) return false;
                 }
+                
+                if(kw.equals("CARDNAME can't be the target of black spells.")) {
+                	if(spell.isBlack() && spell.isSpell()) return false;
+                }
+                
+                if(kw.equals("CARDNAME can't be the target of blue spells.")) {
+                	if(spell.isBlue() && spell.isSpell()) return false;
+                }
             }
         }
         return true;
