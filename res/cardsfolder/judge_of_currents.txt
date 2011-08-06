@@ -4,7 +4,7 @@ Types:Creature Merfolk Wizard
 Text:no text
 PT:1/1
 #Note: Type/Creature.Merfolk is not accepted by WheneverKeyword
-#"Initiator - OwnedByController" causes one player not to trigger if both players have Judge of Currents in play
+#"Initiator - OwnedByController" causes one player not to trigger if both players have Judge of Currents on the battlefield
 K:WheneverKeyword:BecomesTapped:Type/Merfolk:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a Merfolk you control becomes tapped, you may gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/judge_of_currents.jpg

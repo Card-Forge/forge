@@ -1,7 +1,7 @@
 Name:Pestilence
 ManaCost:2 B B
 Types:Enchantment
-Text:At end of turn, if no creatures are in play, sacrifice Pestilence.
+Text:At the beginning of the end step, if no creatures are on the battlefield, sacrifice CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5619.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/147.jpg
