@@ -481,9 +481,10 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     Deck getRandomDeck(Deck[] d) {
         //get a random number between 0 and d.length
-        int i = (int) (Math.random() * d.length);
+        //int i = (int) (Math.random() * d.length);
+    	Random r = new Random();
         
-        return d[i];
+        return d[r.nextInt(d.length)];
     }
     
     void startButton_actionPerformed(ActionEvent e) {
