@@ -108,6 +108,38 @@ public class AbilityFactory_CounterMagic {
 	}
 	
 	// Add Counter Drawback
+	public SpellAbility getDrawbackCounter(final AbilityFactory AF) {
+		final SpellAbility dbCounter = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+			private static final long serialVersionUID = -4272851734871573693L;
+
+			@Override
+			public String getStackDescription() {
+				return counterStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return counterCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				counterResolve(af, this);
+			}
+			
+			@Override
+			public boolean chkAI_Drawback() {
+				return counterDoTriggerAI(af, this, true);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return counterDoTriggerAI(af, this, mandatory);
+			}
+
+		};
+		return dbCounter;
+	}
 
 	private boolean counterCanPlayAI(final AbilityFactory af, final SpellAbility sa){
 		boolean toReturn = true;
@@ -116,10 +148,11 @@ public class AbilityFactory_CounterMagic {
 		}
 		
 		SpellAbility topSA = AllZone.Stack.peek();
-		if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()))
+		if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer())
 			return false;
 		
 		Target tgt = sa.getTarget();
+		tgt.resetTargets();
 		if (Target_Selection.matchSpellAbility(sa, topSA, tgt))
 			tgt.addTarget(topSA);
 		
@@ -165,6 +198,62 @@ public class AbilityFactory_CounterMagic {
 		return toReturn;
 	}
 	
+	public boolean counterDoTriggerAI(AbilityFactory af, SpellAbility sa, boolean mandatory){
+		boolean toReturn = true;
+		if(AllZone.Stack.size() < 1) {
+			return false;
+		}
+		
+		SpellAbility topSA = AllZone.Stack.peek();
+		if (!CardFactoryUtil.isCounterable(topSA.getSourceCard()) || topSA.getActivatingPlayer().isComputer())
+			return false;
+		
+		Target tgt = sa.getTarget();
+		tgt.resetTargets();
+		if (Target_Selection.matchSpellAbility(sa, topSA, tgt))
+			tgt.addTarget(topSA);
+		
+		else
+			return false;
+		
+		Card source = sa.getSourceCard();
+		if (unlessCost != null){
+			// Is this Usable Mana Sources? Or Total Available Mana?
+			int usableManaSources = CardFactoryUtil.getUsableManaSources(AllZone.HumanPlayer);
+			int toPay = 0;
+			boolean setPayX = false;
+			if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")){
+				setPayX = true;
+				toPay = ComputerUtil.determineLeftoverMana(sa);
+			}
+			else
+				toPay = AbilityFactory.calculateAmount(source, unlessCost, sa);
+			
+			if (toPay == 0)
+				return false;
+			
+			if (toPay <= usableManaSources){
+				// If this is a reusable Resource, feel free to play it most of the time
+				if (!sa.getPayCosts().isReusuableResource() || MyRandom.random.nextFloat() < .4)
+					return false;
+			}
+			
+			if (setPayX)
+				source.setSVar("PayX", Integer.toString(toPay));
+		}
+		
+		// TODO: Improve AI
+		
+		// Will return true if this spell can counter (or is Reusable and can force the Human into making decisions) 
+		
+		// But really it should be more picky about how it counters things
+
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			toReturn &= subAb.chkAI_Drawback();
+		
+		return toReturn;
+	}
 	
 	private void counterResolve(final AbilityFactory af, final SpellAbility sa) {
 		// TODO: Before this resolves we should see if any of our targets are still on the stack

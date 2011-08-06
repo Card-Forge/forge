@@ -228,13 +228,13 @@ public class Spell_Permanent extends Spell {
     		return false;
     	}
         
-        if (!checkETBEffects(card, this))
+        if (!checkETBEffects(card, this, null))
         	return false;
         
         return super.canPlayAI();
     }//canPlayAI()
     
-    public static boolean checkETBEffects(Card card, SpellAbility sa){
+    public static boolean checkETBEffects(Card card, SpellAbility sa, String api){
         // Trigger play improvements
         ArrayList<Trigger> triggers = card.getTriggers();
         for(Trigger tr : triggers){
@@ -253,9 +253,12 @@ public class Spell_Permanent extends Spell {
         	// Maybe better considerations 
         	AbilityFactory af = new AbilityFactory();
         	SpellAbility exSA = af.getAbility(card.getSVar(params.get("Execute")), card);
+        	
+        	if (api != null && !af.getAPI().equals(api))
+        		continue;
+        	
         	exSA.setActivatingPlayer(sa.getActivatingPlayer());
-        	
-        	
+
         	// Run non-mandatory trigger.
         	// These checks only work if the Executing SpellAbility is an Ability_Sub.
         	if (exSA instanceof Ability_Sub && !exSA.doTrigger(false)){

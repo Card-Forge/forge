@@ -38,38 +38,50 @@ public class ComputerUtil
 	    	if (af != null && af.getAPI().equals("Counter"))
 	    		continue;
 	    	
-	    	
 	    	sa.setActivatingPlayer(AllZone.ComputerPlayer);
 	    	if(canPayCost(sa) && sa.canPlay() && sa.canPlayAI())
 	    	{
-		    	AllZone.Stack.freezeStack();
-		    	Card source = sa.getSourceCard();
-		    	
-	    		if(sa.isSpell() && !source.isCopiedSpell())
-	    			AllZone.GameAction.moveToStack(source);
-		
-		        Cost cost = sa.getPayCosts();
-		        Target tgt = sa.getTarget();
-		        
-		        if (cost == null){
-			        payManaCost(sa);
-			        sa.chooseTargetAI();
-			        sa.getBeforePayManaAI().execute();
-			        AllZone.Stack.addAndUnfreeze(sa);
-		        }
-		        else{
-		        	if (tgt != null && tgt.doesTarget())
-		        		sa.chooseTargetAI();
-		        	
-		        	Cost_Payment pay = new Cost_Payment(cost, sa);
-		        	pay.payComputerCosts();
-		        }
+	    		handlePlayingSpellAbility(sa);
 		
 		        return false;
 	    	}
 	    }//while
 	    return true;
   }//playCards()
+  
+  static public boolean playCards(ArrayList<SpellAbility> all)
+  {
+	  SpellAbility[] sas = new SpellAbility[all.size()];
+	  for(int i = 0; i < sas.length; i++){
+		  sas[i] = all.get(i);
+	  }
+	  return playCards(sas);
+  }//playCards()
+  
+  static public void handlePlayingSpellAbility(SpellAbility sa){
+		AllZone.Stack.freezeStack();
+		Card source = sa.getSourceCard();
+
+		if (sa.isSpell() && !source.isCopiedSpell())
+			AllZone.GameAction.moveToStack(source);
+
+		Cost cost = sa.getPayCosts();
+		Target tgt = sa.getTarget();
+
+		if (cost == null) {
+			payManaCost(sa);
+			sa.chooseTargetAI();
+			sa.getBeforePayManaAI().execute();
+			AllZone.Stack.addAndUnfreeze(sa);
+		} 
+		else {
+			if (tgt != null && tgt.doesTarget())
+				sa.chooseTargetAI();
+
+			Cost_Payment pay = new Cost_Payment(cost, sa);
+			pay.payComputerCosts();
+		}
+  }
   
   static public int counterSpellRestriction(SpellAbility sa){
 	  // Move this to AF?

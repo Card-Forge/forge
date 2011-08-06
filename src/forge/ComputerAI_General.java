@@ -7,6 +7,7 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.card.spellability.Spell_Permanent;
 
 
 public class ComputerAI_General implements Computer {
@@ -147,7 +148,7 @@ public class ComputerAI_General implements Computer {
         return getPlayable(all);
     }//getMain2()
     
-    private SpellAbility[] getOtherPhases(){
+    private CardList getAvailableSpellAbilities(){
         CardList all = new CardList();
         all.addAll(AllZone.Computer_Hand.getCards());
         all.addAll(AllZone.Computer_Battlefield.getCards());
@@ -164,29 +165,19 @@ public class ComputerAI_General implements Computer {
           }
         });
         all.addAll(humanPlayable.toArray());
-        
-        return getPlayable(all);
+        return all;
+    }
+    
+    private SpellAbility[] getOtherPhases(){
+        return getPlayable(getAvailableSpellAbilities());
     }
     
     private ArrayList<SpellAbility> getPossibleCounters(){
-        CardList all = new CardList();
-        all.addAll(AllZone.Computer_Hand.getCards());
-        all.addAll(AllZone.Computer_Battlefield.getCards());
-        all.addAll(CardFactoryUtil.getFlashbackCards(AllZone.ComputerPlayer).toArray());
-
-        
-        CardList humanPlayable = new CardList();
-        humanPlayable.addAll(AllZone.Human_Battlefield.getCards());
-        humanPlayable = humanPlayable.filter(new CardListFilter()
-        {
-          public boolean addCard(Card c)
-          {
-            return (c.canAnyPlayerActivate());
-          }
-        });
-        all.addAll(humanPlayable.toArray());
-        
-        return getPlayableCounters(all);
+        return getPlayableCounters(getAvailableSpellAbilities());
+    }
+    
+    private ArrayList<SpellAbility> getPossibleETBCounters(){
+        return getETBCounters(getAvailableSpellAbilities());
     }
     
     /**
@@ -211,10 +202,28 @@ public class ComputerAI_General implements Computer {
     
     private ArrayList<SpellAbility> getPlayableCounters(CardList l) {
         ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
-        for(Card c:l)
-            for(SpellAbility sa:c.getSpellAbility())
+        for(Card c:l){
+            for(SpellAbility sa:c.getSpellAbility()){
+            	// Check if this AF is a Counterpsell
             	if (sa.getAbilityFactory() != null && sa.getAbilityFactory().getAPI().equals("Counter"))
             		spellAbility.add(sa);
+            }
+        }
+        
+        return spellAbility;
+    }
+    
+    private ArrayList<SpellAbility> getETBCounters(CardList l) {
+        ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
+        for(Card c:l){
+            for(SpellAbility sa:c.getSpellAbility()){
+            	// Or if this Permanent has an ETB ability with Counter
+            	if (sa instanceof Spell_Permanent){
+            		if (Spell_Permanent.checkETBEffects(c, sa, "Counter"))
+            			spellAbility.add(sa);
+            	}
+            }
+        }
         
         return spellAbility;
     }
@@ -278,7 +287,7 @@ public class ComputerAI_General implements Computer {
     
     public void stackResponse(){
     	// if top of stack is empty 
-    	SpellAbility[] sas;
+    	SpellAbility[] sas = null;
     	if (AllZone.Stack.size() == 0){
     		sas = getOtherPhases();
     		
@@ -290,7 +299,7 @@ public class ComputerAI_General implements Computer {
     		}
     			
     		if (pass)
-    			AllZone.Phase.passPriority();	
+    			AllZone.Phase.passPriority();
     		return;
     	}
     	
@@ -304,14 +313,23 @@ public class ComputerAI_General implements Computer {
     	
     	// top of stack is owned by human,
     	ArrayList<SpellAbility> possibleCounters = getPossibleCounters();
-    	sas = getOtherPhases();
     	
     	if (possibleCounters.size() > 0 && ComputerUtil.playCounterSpell(possibleCounters)){
     		// Responding CounterSpell is on the Stack trying to Counter the Spell
     		// If playCounterSpell returns true, a Spell is hitting the Stack
     		return;
     	}
-    	else if (sas.length > 0){
+    	
+    	possibleCounters.clear();
+    	possibleCounters = getPossibleETBCounters();
+    	if (possibleCounters.size() > 0 && !ComputerUtil.playCards(possibleCounters)){
+    		// Responding Permanent w/ ETB Counter is on the Stack
+    		// AllZone.Phase.passPriority();
+    		return;
+    	}
+    	
+    	sas = getOtherPhases();
+    	if (sas.length > 0){
 			// Spell not Countered 
     		// each AF should check the Stack/Phase on it's own
 			

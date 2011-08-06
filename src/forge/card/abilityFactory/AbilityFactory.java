@@ -537,6 +537,8 @@ public class AbilityFactory {
 				SA = c.getAbilityCounter(this);
 			else if(isSp)
 				SA = c.getSpellCounter(this);
+			else if(isDb)
+				SA = c.getDrawbackCounter(this);
 		}
 		
 		if (API.equals("AddTurn")){

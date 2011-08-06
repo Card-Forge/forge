@@ -319,6 +319,22 @@ public class AllZoneUtil {
 		return cards.getName(cardName);
 	}
 	
+	public static CardList getPlayerCardsInLibrary(final Player player, int numCards) {
+		CardList cards = new CardList();
+		if( player.equals(AllZone.HumanPlayer) || player.equals(AllZone.ComputerPlayer) ){
+			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+			
+			if (lib.size() <= numCards)
+				cards.addAll(lib.getCards());
+			else{
+				for(int i = 0; i < numCards; i++)
+					cards.add(lib.get(i));
+			}
+		}
+		return cards;
+	}
+	
+	
 	///Check if a certain card is in play
 	
 	public static boolean isCardInPlay(Card card) {
