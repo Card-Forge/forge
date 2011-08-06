@@ -13558,7 +13558,7 @@ public class GameActionUtil {
 			}
 		}
 	};
-	
+	/*
 	public static Command Transcendent_Master		  = new Command() {
 		private static final long serialVersionUID = -7568530551652446195L;
 
@@ -13591,6 +13591,7 @@ public class GameActionUtil {
 			}
 		}
 	};
+	*/
 
 	public static Command Kargan_Dragonlord		  = new Command() {
 		private static final long serialVersionUID = -1956268937191206962L;
@@ -16090,7 +16091,7 @@ public class GameActionUtil {
 		commands.put("The_Tabernacle_at_Pendrell_Vale", The_Tabernacle_at_Pendrell_Vale);
 		commands.put("Tarmogoyf", Tarmogoyf);
 		//commands.put("Terravore", Terravore);
-		commands.put("Transcendent_Master", Transcendent_Master);
+		//commands.put("Transcendent_Master", Transcendent_Master);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);
 		
