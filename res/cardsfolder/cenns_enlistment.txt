@@ -7,4 +7,5 @@ A:SP$Token | Cost$ 3 W Discard<1/Land> |CostDesc$ Retrace| TokenImage$ W 1 1 Kit
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cenns_enlistment.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/3.jpg
 End

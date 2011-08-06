@@ -8,4 +8,5 @@ A:AB$PutCounter | Cost$ tapXType<1/Creature.Blue> SubCounter<1/POLYP> | CounterT
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_reef.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/29.jpg
 End
