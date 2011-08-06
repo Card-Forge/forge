@@ -898,11 +898,13 @@ public class CombatUtil {
         power += attacker.getKeywordMagnitude("Bushido");
         
         //if the defender has first strike and wither the attacker will deal less damage than expected
-        if((defender.getKeyword().contains("First Strike") || defender.getKeyword().contains("Double Strike"))
+        if(null != defender) {
+        	if((defender.getKeyword().contains("First Strike") || defender.getKeyword().contains("Double Strike"))
         		&& (defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))
         		&& !(attacker.getKeyword().contains("First Strike") || attacker.getKeyword().contains("Double Strike")
         				|| attacker.getKeyword().contains("CARDNAME can't have counters placed on it.")))          
         	power -= defender.getNetCombatDamage();
+        }
         
         ArrayList<Trigger> registeredTriggers = AllZone.TriggerHandler.getRegisteredTriggers();
 		for(Trigger trigger : registeredTriggers)
@@ -1772,9 +1774,6 @@ public class CombatUtil {
         	// opponent discards their hand,
         	opp.discardRandom(handSize, a.getSpellAbility()[0]);
         	opp.drawCards(handSize);
-        } else if(a.getName().equals("Sylvan Basilisk")) {
-            AllZone.GameAction.destroy(b);
-            System.out.println("destroyed blocker " + b.getName());
         } else if(a.getName().equals("Elven Warhounds")) {
         	AllZone.GameAction.moveToLibrary(b);
         }
