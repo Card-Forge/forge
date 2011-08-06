@@ -4,6 +4,7 @@ Types:Legendary Creature Angel
 Text:no text
 PT:3/3
 K:Flying
+A:AB$Bounce|Cost$PayLife<2>|Destination$Hand|SpellDescription$Return CARDNAME to its owner's hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selenia_dark_angel.jpg
 End

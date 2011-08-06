@@ -1,0 +1,10 @@
+Name:Balshan Griffin
+ManaCost:3 U U
+Types:Creature Griffin
+Text:no text
+PT:3/2
+K:Flying
+A:AB$Bounce|Cost$2 U Discard<1/Any>|Destination$Hand|SpellDescription$Return Amugaba to its owner's hand.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/balshan_griffin.jpg
+End

@@ -3,8 +3,9 @@ ManaCost:4 W W
 Types:Legendary Creature Human
 Text:no text
 PT:4/4
-K:StaticEffect:Play:All Permanents:PTBonus/1/1:Color.white!NotSelf:Other white creatures get +1/+1.
-K:StaticEffect:Play:All Permanents:PTBonus/-1/-1:NonColor.white:Nonwhite creatures get -1/-1.
+K:stPumpAll:Creature.White+Other:1/1:No Condition:Other white creatures get +1/+1.
+K:stPumpAll:Creature.nonWhite:-1/-1:No Condition:Nonwhite creatures get -1/-1.
+A:AB$Bounce|Cost$PayLife<2>|Destination$Hand|SpellDescription$Return CARDNAME to its owner's hand.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crovax_ascendant_hero.jpg

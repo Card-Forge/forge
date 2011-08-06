@@ -7523,6 +7523,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Amugaba")) {
             
@@ -7560,6 +7561,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Subterranean Spirit")) {
