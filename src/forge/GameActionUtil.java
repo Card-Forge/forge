@@ -2914,45 +2914,6 @@ public class GameActionUtil {
         
         if(source.getKeyword().contains("Deathtouch") && affected.isCreature()) AllZone.GameAction.destroy(affected);
 	}
-
-	public static void executeGuiltyConscienceEffects(Card c, Card source) {
-		int pwr = c.getNetCombatDamage();
-		final int damage = pwr;
-		final Card src = source;
-
-		final Card crd = c;
-		Ability ability2 = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				crd.addDamage(damage, src);
-			}
-		}; // ability2
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Guilty Conscience deals ").append(damage).append(" damage to ").append(c.getName());
-		ability2.setStackDescription(sb.toString());
-		
-		if (damage >= 0)
-			AllZone.Stack.add(ability2);
-	}
-
-	public static void executeGuiltyConscienceEffects(Card c, Card source, int n) {
-		final int damage = n;
-		final Card crd = c;
-		final Card src = source;
-		Ability ability2 = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				crd.addDamage(damage, src);
-			}
-		}; // ability2
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Guilty Conscience deals ").append(n).append(" damage to ").append(c.getName());
-		ability2.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability2);
-	}
 	
 	public static void executeSwordOfLightAndShadowEffects(final Card source) {
 		final Card src = source;
