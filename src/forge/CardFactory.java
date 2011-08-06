@@ -1375,7 +1375,7 @@ public class CardFactory implements NewConstants {
                  {
                     public boolean addCard(Card c)
                     {
-                       if (c.hasSickness() && keyword.equals("Hsste"))
+                       if (c.hasSickness() && keyword.equals("Haste"))
                           return CardFactoryUtil.canTarget(card, c);
                       
                        return (CardFactoryUtil.AI_doesCreatureAttack(c)) &&
