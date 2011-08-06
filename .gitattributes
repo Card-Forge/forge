@@ -1212,6 +1212,7 @@ res/cardsfolder/dwarven_berserker.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_bloodboiler.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_demolition_team.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_grunt.txt -text svneol=native#text/plain
+res/cardsfolder/dwarven_lieutenant.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_miner.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_pony.txt -text svneol=native#text/plain
 res/cardsfolder/dwarven_ruins.txt -text svneol=native#text/plain
