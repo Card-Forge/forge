@@ -1,0 +1,9 @@
+Name:Feast of Blood
+ManaCost:1 B
+Types:Sorcery
+Text:no text
+A:SP$Destroy|Cost$1 B|ValidTgts$Creature|TgtPrompt$Select target creature|SubAbility$YouGainLife/4|isPresent$Vampire.YouCtrl|PresentCompare$GE2|SpellDescription$Cast Feast of Blood only if you control two or more Vampires.\r\nDestroy target creature. You gain 4 life.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/feast_of_blood.jpg
+End

@@ -1,0 +1,11 @@
+Name:Chaos Charm
+ManaCost:R
+Types:Instant
+Text:no text
+A:SP$Destroy|Cost$R|ValidTgts$Wall|TgtPrompt$Select target wall|PrecostDesc$Choose one - |SpellDescription$Destroy target Wall;
+A:SP$DealDamage|Cost$R|Tgt$TgtC|NumDmg$1|SpellDescription$or Chaos Charm deals 1 damage to target creature;
+A:SP$Pump|Cost$R|ValidTgts$Creature|KW$Haste|TgtPrompt$Select target creature|SpellDescription$or target creature gains haste until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chaos_charm.jpg
+End
