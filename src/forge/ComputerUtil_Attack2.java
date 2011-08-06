@@ -190,7 +190,7 @@ public class ComputerUtil_Attack2 {
           combat.setDefenders(AllZone.Combat.getDefenders());
 
           boolean bAssault = doAssault();
-       // Determine who will be attacked
+          // Determine who will be attacked
           chooseDefender(combat, bAssault);
 
           CardList attackersLeft = new CardList(attackers.toArray());
@@ -259,7 +259,7 @@ public class ComputerUtil_Attack2 {
             	   
                    candidateAttackers.add(pCard);
                    if(pCard.getNetCombatDamage() > 0){
-                       candidateUnblockedDamage += pCard.getNetCombatDamage();
+                       candidateUnblockedDamage += CombatUtil.damageIfUnblocked(pCard,AllZone.HumanPlayer);
                        computerForces += 1;
                    }
 
@@ -337,7 +337,7 @@ public class ComputerUtil_Attack2 {
                     }
                }
                if(isUnblockableCreature){
-                   unblockableDamage += attacker.getNetCombatDamage();
+                   unblockableDamage += CombatUtil.damageIfUnblocked(attacker,AllZone.HumanPlayer);
                }
            }
            if(unblockableDamage > 0){turnsUntilDeathByUnblockable = AllZone.HumanPlayer.life/unblockableDamage;}

@@ -8,7 +8,13 @@ import forge.card.cardFactory.CardFactoryUtil;
 
 public class ComputerUtil_Block2
 {
-   
+	  private static CardList attackers = new CardList(); //all attackers
+	  private static CardList attackersLeft = new CardList(); //keeps track of all currently unblocked attackers
+	  private static CardList blockedButUnkilled = new CardList(); //keeps track of all blocked attackers that currently wouldn't be destroyed
+	  private static CardList blockersLeft = new CardList(); //keeps track of all unassigned blockers
+	  private static int diff = 0;
+	
+	
    //finds the creatures able to block the attacker 
    private static CardList getPossibleBlockers(Card attacker, CardList blockersLeft, Combat combat) {
 	  CardList blockers = new CardList();
@@ -82,78 +88,22 @@ public class ComputerUtil_Block2
 
 	   return sortedAttackers;
    }
-
-   //Main function
-   public static Combat getBlockers(Combat originalCombat, CardList possibleBlockers) {
-	  
-	  Combat combat = originalCombat;
-	  
-	  CardList attackers = sortPotentialAttackers(combat);
-      
-	  if (attackers.size() == 0)
-		  return combat;
+   
+   // ======================= block assignment functions ================================
+   
+   // Good Blocks means a good trade or no trade
+   private static Combat makeGoodBlocks(Combat combat){
 	   
-	  CardList attackersLeft = new CardList(attackers.toArray()); //keeps track of all currently unblocked attackers
-	  CardList blockedButUnkilled = new CardList(); //keeps track of all blocked attackers that currently wouldn't be destroyed
-	  CardList tramplingAttackers = new CardList();
-	  CardList blockersLeft = new CardList(possibleBlockers.toArray()); //keeps track of all unassigned blockers
-	  CardList blockers = new CardList();
-	  CardList safeBlockers = new CardList();
-	  CardList killingBlockers = new CardList();
-	  CardList chumpBlockers = new CardList();
+	  CardList currentAttackers = new CardList();
 	  
-	  int diff = AllZone.ComputerPlayer.getLife() * 2 + 5; //This is the minimal gain for an unnecessary trade 
-	  
-	  // remove all attackers that can't be blocked anyway
-	  for(Card a : attackers) {
-		  if(!CombatUtil.canBeBlocked(a)) { 
-			  attackersLeft.remove(a);
-		  }
-	  }
-	  
-	  // Lure effects
-	  CardList attackersWithLure = attackersLeft.getKeyword("All creatures able to block CARDNAME do so.");
-	  combat.setAttackersWithLure(attackersWithLure);
-	  CardList canBlockAttackerWithLure = new CardList();
-	  for(Card attacker : attackersWithLure) {
-		  for(Card b : possibleBlockers) {
-			  if(CombatUtil.canBlock(attacker, b)) canBlockAttackerWithLure.add(b);
-		  }
-	  }
-	  combat.setCanBlockAttackerWithLure(canBlockAttackerWithLure);
-	  
-	  if (attackersLeft.size() == 0)
-		  return combat;
-	   
-	  // remove all blockers that can't block anyway
-	  for(Card b : possibleBlockers) {
-		  if(!CombatUtil.canBlock(b, combat)) blockersLeft.remove(b);
-	  }
-	  
-	  boolean bLifeInDanger = CombatUtil.lifeInDanger(combat);
-	  
-	  //These creatures won't prevent any damage
-	  if (bLifeInDanger) {
-		  //TODO - this keyword is no longer present.  Somehow, this will need to check triggers.
-		  blockersLeft = blockersLeft.getNotKeyword("Whenever CARDNAME is dealt damage, you lose that much life.");
-	  }
-	   
-	  if (blockersLeft.size() == 0)
-		  return combat;
-	  
-	  //Begin with the weakest blockers
-	  CardListUtil.sortAttackLowFirst(blockersLeft);
-	   
-	  CardList currentAttackers = new CardList(attackersLeft.toArray());
-
-	  //first choose good blocks only
 	  for(Card attacker : attackersLeft) {
 		  
 		  Card blocker = new Card();
 		  
-		  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
+		  CardList blockers = getPossibleBlockers(attacker, blockersLeft, combat);
 		   
-		  safeBlockers = getSafeBlockers(attacker, blockers);
+		  CardList safeBlockers = getSafeBlockers(attacker, blockers);
+		  CardList killingBlockers = new CardList();
 		   
 		  if(safeBlockers.size() > 0) {
 			  // 1.Blockers that can destroy the attacker but won't get destroyed 
@@ -182,143 +132,258 @@ public class ComputerUtil_Block2
 			  blockersLeft.remove(blocker);
 			  combat.addBlocker(attacker, blocker);
 		  }
-	  }
-	   
+	  }  
 	  attackersLeft = new CardList(currentAttackers.toArray());
-	  
-	  if(blockersLeft.size() == 0) return combat;
-	  
-	  currentAttackers = new CardList(attackersLeft.toArray());
-	  
-	  //if computer life is not in danger, try to make good gangblocks
-	  if(!CombatUtil.lifeInDanger(combat)) 
-		  for(Card attacker : attackersLeft) {
-			  if(!attacker.getKeyword().contains("First Strike") && !attacker.getKeyword().contains("Double Strike")
-					   && !attacker.hasStartOfKeyword("Rampage")) {
-				  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
-				  CardList firstStrikeBlockers = new CardList();
-				  CardList blockGang = new CardList();
-			      for(int i = 0; i < blockers.size(); i++)
-			         if(blockers.get(i).hasFirstStrike() || blockers.get(i).hasDoubleStrike())
-			        	 firstStrikeBlockers.add(blockers.get(i));
-			      
-			      if(!firstStrikeBlockers.isEmpty()) {
-			    	  CardListUtil.sortAttack(firstStrikeBlockers);
-			    	  for(Card blocker : firstStrikeBlockers) {
-			    		  //if the total damage of the blockgang was not enough without but is enough with this blocker finish the blockgang
-			    		  if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) < attacker.getKillDamage()) {
-			    			  blockGang.add(blocker);
-			    			  if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) >= attacker.getKillDamage()) {
-			    				  currentAttackers.remove(attacker);
-			    				  for(Card b : blockGang) {
-			    					  blockersLeft.remove(b);
-			    					  combat.addBlocker(attacker, b);
-			    				  }
-			    			  }
-			    		  }
-			    	  }
-			      }
-			  }
-		  }
-	  //End gangblocks
-	  
-	  attackersLeft = new CardList(currentAttackers.toArray());
-	  
-	  if(blockersLeft.size() == 0) return combat;
-	  
-	  //choose necessary trade blocks if life is in danger
-	  if (CombatUtil.lifeInDanger(combat))
-		  for(Card attacker : attackersLeft) {
-			  killingBlockers = 
-				  getKillingBlockers(attacker, getPossibleBlockers(attacker, blockersLeft, combat));
-			  if(killingBlockers.size() > 0 && CombatUtil.lifeInDanger(combat)) {
-				  Card blocker = CardFactoryUtil.AI_getWorstCreature(killingBlockers);
-				  combat.addBlocker(attacker, blocker);
-				  currentAttackers.remove(attacker);
-				  blockersLeft.remove(blocker);
-			  }
-		  }
+	  return combat;
+   }
+   
+   // Good Gang Blocks means a good trade or no trade
+   private static Combat makeGangBlocks(Combat combat){
 	   
-	  attackersLeft = new CardList(currentAttackers.toArray());
-	   
-	  //choose necessary chump blocks if life is still in danger
-	  if (CombatUtil.lifeInDanger(combat))
-		  for(Card attacker : attackersLeft) {
-			  chumpBlockers = getPossibleBlockers(attacker, blockersLeft, combat);
-			  if(chumpBlockers.size() > 0 && CombatUtil.lifeInDanger(combat)) {
-				  Card blocker = CardFactoryUtil.AI_getWorstCreature(chumpBlockers);
-				  combat.addBlocker(attacker, blocker);
-				  currentAttackers.remove(attacker);
-				  blockedButUnkilled.add(attacker);
-				  blockersLeft.remove(blocker);
-			  }
-		  }
+	  CardList currentAttackers = new CardList();
+	  CardList blockers = new CardList();
 	  
-	  attackersLeft = new CardList(currentAttackers.toArray()); 
-	  
-	  //Reinforce blockers blocking attackers with trample if life is still in danger
-	  if (CombatUtil.lifeInDanger(combat)) {
-		  tramplingAttackers = attackers.getKeyword("Trample");
-		  tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); 	//Don't make it worse
-		  //TODO - should check here for a "rampage-like" trigger that replaced the keyword:
-		  // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
-
-		  for(Card attacker : tramplingAttackers) {
-			  chumpBlockers = getPossibleBlockers(attacker, blockersLeft, combat);
-			  for(Card blocker : chumpBlockers) {
-				  //Add an additional blocker if the current blockers are not enough and the new one would suck some of the damage
-				  if(CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,combat.getBlockers(attacker)) 
-						  && CombatUtil.shieldDamage(attacker, blocker) > 0 && CombatUtil.canBlock(attacker,blocker, combat)
-						  && CombatUtil.lifeInDanger(combat)) {
-					  combat.addBlocker(attacker, blocker);
-					  blockersLeft.remove(blocker);
-				  }
-			  }
-		  }
-	  }
-	  
-	  //Support blockers not destroying the attacker with more blockers to try to kill the attacker
-	  if (blockedButUnkilled.size() > 0) {
-		  CardList targetAttackers = blockedButUnkilled.getKeywordsDontContain("Rampage"); 	//Don't make it worse
-		  //TODO - should check here for a "rampage-like" trigger that replaced the keyword:
-		  // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
-
-		  for(Card attacker : targetAttackers) {
+	  for(Card attacker : attackersLeft) {
+		  if(!attacker.getKeyword().contains("First Strike") && !attacker.getKeyword().contains("Double Strike")
+				   && !attacker.hasStartOfKeyword("Rampage")) {
 			  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
+			  CardList firstStrikeBlockers = new CardList();
+			  CardList blockGang = new CardList();
+		      for(int i = 0; i < blockers.size(); i++)
+		         if(blockers.get(i).hasFirstStrike() || blockers.get(i).hasDoubleStrike())
+		        	 firstStrikeBlockers.add(blockers.get(i));
+		      
+		      if(!firstStrikeBlockers.isEmpty()) {
+		    	  CardListUtil.sortAttack(firstStrikeBlockers);
+		    	  for(Card blocker : firstStrikeBlockers) {
+		    		  //if the total damage of the blockgang was not enough without but is enough with this blocker finish the blockgang
+		    		  if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) < attacker.getKillDamage()) {
+		    			  blockGang.add(blocker);
+		    			  if (CombatUtil.totalDamageOfBlockers(attacker, blockGang) >= attacker.getKillDamage()) {
+		    				  currentAttackers.remove(attacker);
+		    				  for(Card b : blockGang) {
+		    					  blockersLeft.remove(b);
+		    					  combat.addBlocker(attacker, b);
+		    				  }
+		    			  }
+		    		  }
+		    	  }
+		      }
+		  }
+	  }
+	  attackersLeft = new CardList(currentAttackers.toArray());
+	  return combat;
+   }
+   
+   // Bad Trade Blocks (should only be made if life is in danger)
+   private static Combat makeTradeBlocks(Combat combat){
+	   
+	  CardList currentAttackers = new CardList();
+	  CardList killingBlockers = new CardList();
+	  
+	  for(Card attacker : attackersLeft) {
+		  killingBlockers = 
+			  getKillingBlockers(attacker, getPossibleBlockers(attacker, blockersLeft, combat));
+		  if(killingBlockers.size() > 0 && CombatUtil.lifeInDanger(combat)) {
+			  Card blocker = CardFactoryUtil.AI_getWorstCreature(killingBlockers);
+			  combat.addBlocker(attacker, blocker);
+			  currentAttackers.remove(attacker);
+			  blockersLeft.remove(blocker);
+		  }
+	  }
+	  attackersLeft = new CardList(currentAttackers.toArray());
+	  return combat;
+   }
+   
+   // Chump Blocks (should only be made if life is in danger)
+   private static Combat makeChumpBlocks(Combat combat){
+	   
+	  CardList currentAttackers = new CardList();
+	  CardList chumpBlockers = new CardList();
+	  
+	  for(Card attacker : attackersLeft) {
+		  chumpBlockers = getPossibleBlockers(attacker, blockersLeft, combat);
+		  if(chumpBlockers.size() > 0 && CombatUtil.lifeInDanger(combat)) {
+			  Card blocker = CardFactoryUtil.AI_getWorstCreature(chumpBlockers);
+			  combat.addBlocker(attacker, blocker);
+			  currentAttackers.remove(attacker);
+			  blockedButUnkilled.add(attacker);
+			  blockersLeft.remove(blocker);
+		  }
+	  }
+	  attackersLeft = new CardList(currentAttackers.toArray());
+	  return combat;
+   }
+   
+   //Reinforce blockers blocking attackers with trample (should only be made if life is in danger)
+   private static Combat reinforceBlockersAgainstTrample(Combat combat){
+	   
+	  CardList chumpBlockers = new CardList();
+	  
+	  CardList tramplingAttackers = attackers.getKeyword("Trample");
+	  tramplingAttackers = tramplingAttackers.getKeywordsDontContain("Rampage"); 	//Don't make it worse
+	  //TODO - should check here for a "rampage-like" trigger that replaced the keyword:
+	  // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
 
-			  //Try to use safe blockers first
-			  safeBlockers = getSafeBlockers(attacker, blockers);
-			  for(Card blocker : safeBlockers) {
-				  //Add an additional blocker if the current blockers are not enough and the new one would deal additional damage
-				  if(attacker.getKillDamage() > CombatUtil.totalDamageOfBlockers(attacker,combat.getBlockers(attacker)) 
-						  && CombatUtil.dealsDamageAsBlocker(attacker, blocker) > 0 && CombatUtil.canBlock(attacker,blocker, combat)) {
-					  combat.addBlocker(attacker, blocker);
-					  blockersLeft.remove(blocker);
-				  }
-				  blockers.remove(blocker); //Don't check them again next
-			  }
-
-			  //Try to add blockers that could be destroyed, but are worth less than the attacker
-			  //Don't use blockers without First Strike or Double Strike if attacker has it
-			  if (attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike")) {
-				  safeBlockers = blockers.getKeyword("First Strike");
-				  safeBlockers.addAll(blockers.getKeyword("Double Strike").toArray());
-			  }
-			  else safeBlockers = new CardList(blockers.toArray());
-
-			  for(Card blocker : safeBlockers) {
-				  //Add an additional blocker if the current blockers are not enough and the new one would deal the remaining damage
-				  int currentDamage = CombatUtil.totalDamageOfBlockers(attacker,combat.getBlockers(attacker));
-				  int additionalDamage = CombatUtil.dealsDamageAsBlocker(attacker, blocker);
-				  if(attacker.getKillDamage() > currentDamage 
-						  && !(attacker.getKillDamage() > currentDamage + additionalDamage)
-						  && CardFactoryUtil.evaluateCreature(blocker) + diff < CardFactoryUtil.evaluateCreature(attacker)
-						  && CombatUtil.canBlock(attacker,blocker,combat)) {
-					  combat.addBlocker(attacker, blocker);
-					  blockersLeft.remove(blocker);
-				  }
+	  for(Card attacker : tramplingAttackers) {
+		  chumpBlockers = getPossibleBlockers(attacker, blockersLeft, combat);
+		  for(Card blocker : chumpBlockers) {
+			  //Add an additional blocker if the current blockers are not enough and the new one would suck some of the damage
+			  if(CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,combat.getBlockers(attacker)) 
+					  && CombatUtil.shieldDamage(attacker, blocker) > 0 && CombatUtil.canBlock(attacker,blocker, combat)
+					  && CombatUtil.lifeInDanger(combat)) {
+				  combat.addBlocker(attacker, blocker);
+				  blockersLeft.remove(blocker);
 			  }
 		  }
+	  }
+
+	  return combat;
+   }
+   
+   //Support blockers not destroying the attacker with more blockers to try to kill the attacker
+   private static Combat reinforceBlockersToKill(Combat combat){
+	   
+	  CardList safeBlockers = new CardList();
+	  CardList blockers = new CardList();
+	  CardList targetAttackers = blockedButUnkilled.getKeywordsDontContain("Rampage"); 	//Don't make it worse
+	  //TODO - should check here for a "rampage-like" trigger that replaced the keyword:
+	  // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
+	  
+	  for(Card attacker : targetAttackers) {
+		  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
+
+		  //Try to use safe blockers first
+		  safeBlockers = getSafeBlockers(attacker, blockers);
+		  for(Card blocker : safeBlockers) {
+			  //Add an additional blocker if the current blockers are not enough and the new one would deal additional damage
+			  if(attacker.getKillDamage() > CombatUtil.totalDamageOfBlockers(attacker,combat.getBlockers(attacker)) 
+					  && CombatUtil.dealsDamageAsBlocker(attacker, blocker) > 0 && CombatUtil.canBlock(attacker,blocker, combat)) {
+				  combat.addBlocker(attacker, blocker);
+				  blockersLeft.remove(blocker);
+			  }
+			  blockers.remove(blocker); //Don't check them again next
+		  }
+
+		  //Try to add blockers that could be destroyed, but are worth less than the attacker
+		  //Don't use blockers without First Strike or Double Strike if attacker has it
+		  if (attacker.hasKeyword("First Strike") || attacker.hasKeyword("Double Strike")) {
+			  safeBlockers = blockers.getKeyword("First Strike");
+			  safeBlockers.addAll(blockers.getKeyword("Double Strike").toArray());
+		  }
+		  else safeBlockers = new CardList(blockers.toArray());
+
+		  for(Card blocker : safeBlockers) {
+			  //Add an additional blocker if the current blockers are not enough and the new one would deal the remaining damage
+			  int currentDamage = CombatUtil.totalDamageOfBlockers(attacker,combat.getBlockers(attacker));
+			  int additionalDamage = CombatUtil.dealsDamageAsBlocker(attacker, blocker);
+			  if(attacker.getKillDamage() > currentDamage 
+					  && !(attacker.getKillDamage() > currentDamage + additionalDamage)
+					  && CardFactoryUtil.evaluateCreature(blocker) + diff < CardFactoryUtil.evaluateCreature(attacker)
+					  && CombatUtil.canBlock(attacker,blocker,combat)) {
+				  combat.addBlocker(attacker, blocker);
+				  blockersLeft.remove(blocker);
+			  }
+		  }
+	  }
+
+	  return combat;
+   }
+   
+   private static Combat resetBlockers(Combat combat, CardList possibleBlockers) {
+	   
+	  CardList oldBlockers = combat.getAllBlockers();
+	  for (Card blocker:oldBlockers) {
+		  combat.removeFromCombat(blocker);
+	  }
+	  
+	  attackersLeft = new CardList(attackers.toArray()); //keeps track of all currently unblocked attackers
+	  blockersLeft = new CardList(possibleBlockers.toArray()); //keeps track of all unassigned blockers
+	  blockedButUnkilled = new CardList(); //keeps track of all blocked attackers that currently wouldn't be destroyed
+	  
+	  return combat;
+   }
+
+   //Main function
+   static public Combat getBlockers(Combat originalCombat, CardList possibleBlockers) {
+	  
+	  Combat combat = originalCombat;
+	  
+	  attackers = sortPotentialAttackers(combat);
+      
+	  if (attackers.size() == 0)
+		  return combat;
+	   
+	  attackersLeft = new CardList(attackers.toArray()); //keeps track of all currently unblocked attackers
+	  blockersLeft = new CardList(possibleBlockers.toArray()); //keeps track of all unassigned blockers
+	  blockedButUnkilled = new CardList(); //keeps track of all blocked attackers that currently wouldn't be destroyed
+	  CardList blockers = new CardList();
+	  CardList chumpBlockers = new CardList();
+	  
+	  diff = AllZone.ComputerPlayer.getLife() * 2 + 5; //This is the minimal gain for an unnecessary trade 
+	  
+	  // remove all attackers that can't be blocked anyway
+	  for(Card a : attackers) {
+		  if(!CombatUtil.canBeBlocked(a)) { 
+			  attackersLeft.remove(a);
+		  }
+	  }
+	  
+	  // remove all blockers that can't block anyway
+	  for(Card b : possibleBlockers) {
+		  if(!CombatUtil.canBlock(b, combat)) blockersLeft.remove(b);
+	  }
+	  
+	  // Lure effects
+	  CardList attackersWithLure = attackersLeft.getKeyword("All creatures able to block CARDNAME do so.");
+	  combat.setAttackersWithLure(attackersWithLure);
+	  CardList canBlockAttackerWithLure = new CardList();
+	  for(Card attacker : attackersWithLure) {
+		  for(Card b : possibleBlockers) {
+			  if(CombatUtil.canBlock(attacker, b)) canBlockAttackerWithLure.add(b);
+		  }
+	  }
+	  combat.setCanBlockAttackerWithLure(canBlockAttackerWithLure);
+	  
+	  if (attackersLeft.size() == 0)
+		  return combat;
+	  
+	  //Begin with the weakest blockers
+	  CardListUtil.sortAttackLowFirst(blockersLeft);
+
+	  //== 1. choose best blocks first ==
+	  combat = makeGoodBlocks(combat);
+	  combat = makeGangBlocks(combat);
+	  if (CombatUtil.lifeInDanger(combat)) combat = makeTradeBlocks(combat); //choose necessary trade blocks if life is in danger
+	  if (CombatUtil.lifeInDanger(combat)) combat = makeChumpBlocks(combat); //choose necessary chump blocks if life is still in danger
+	  //Reinforce blockers blocking attackers with trample if life is still in danger
+	  if (CombatUtil.lifeInDanger(combat)) combat = reinforceBlockersAgainstTrample(combat);
+	  //Support blockers not destroying the attacker with more blockers to try to kill the attacker
+	  if (!CombatUtil.lifeInDanger(combat)) combat = reinforceBlockersToKill(combat);
+	  
+	  //== 2. If the AI life would still be in danger make a safer approach ==
+	  if (CombatUtil.lifeInDanger(combat)) {
+		  combat = resetBlockers(combat, possibleBlockers); // reset every block assignment
+		  combat = makeTradeBlocks(combat); //choose necessary trade blocks if life is in danger
+		  combat = makeGoodBlocks(combat);
+		  if (CombatUtil.lifeInDanger(combat)) combat = makeChumpBlocks(combat); //choose necessary chump blocks if life is still in danger
+		  //Reinforce blockers blocking attackers with trample if life is still in danger
+		  if (CombatUtil.lifeInDanger(combat)) combat = reinforceBlockersAgainstTrample(combat);
+		  if (!CombatUtil.lifeInDanger(combat)) combat = makeGangBlocks(combat);
+		  if (!CombatUtil.lifeInDanger(combat)) combat = reinforceBlockersToKill(combat);
+	  }
+	  
+	  //== 3. If the AI life would be in serious danger make an even safer approach ==
+	  if (CombatUtil.lifeInSeriousDanger(combat)) {
+		  combat = resetBlockers(combat, possibleBlockers); // reset every block assignment
+		  combat = makeChumpBlocks(combat); //choose chump blocks
+		  if (CombatUtil.lifeInDanger(combat)) combat = makeTradeBlocks(combat); //choose necessary trade blocks if life is in danger
+		  if (!CombatUtil.lifeInDanger(combat)) combat = makeGoodBlocks(combat);
+		  //Reinforce blockers blocking attackers with trample if life is still in danger
+		  if (CombatUtil.lifeInDanger(combat)) combat = reinforceBlockersAgainstTrample(combat);
+		  if (!CombatUtil.lifeInDanger(combat)) combat = makeGangBlocks(combat);
+		  //Support blockers not destroying the attacker with more blockers to try to kill the attacker
+		  if (!CombatUtil.lifeInDanger(combat)) combat = reinforceBlockersToKill(combat);
 	  }
 	  
 	  // assign blockers that have to block 

@@ -557,7 +557,7 @@ public class CombatUtil {
     }
     
     //Returns the damage an unblocked attacker would deal
-    private static int damageIfUnblocked(Card attacker, Player attacked)
+    public static int damageIfUnblocked(Card attacker, Player attacked)
     {
 	  int damage = attacker.getNetCombatDamage();
 	  int sum = 0;
@@ -570,7 +570,7 @@ public class CombatUtil {
     }
  
     //Returns the poison an unblocked attacker would deal
-    private static int poisonIfUnblocked(Card attacker, Player attacked)
+    public static int poisonIfUnblocked(Card attacker, Player attacked)
     {
 	  int damage = attacker.getNetCombatDamage();
 	  int poison = 0;
@@ -603,12 +603,10 @@ public class CombatUtil {
       return sum;
     }
     
-    //Checks if the life of the attacked Player/Planeswalker is in danger 
-    public static boolean lifeInDanger(Combat combat) {
-  	   // life in danger only cares about the player's life. Not about a Planeswalkers life
+    //calculates the amount of life that will remain after the attack 
+    public static int lifeThatWouldRemain(Combat combat) {
     	
  	   int damage = 0;
- 	   int poison = 0;
 
  	   CardList attackers = combat.sortAttackerByDefender()[0];
  	   CardList unblocked = new CardList();
@@ -621,6 +619,28 @@ public class CombatUtil {
  			  else if(attacker.hasKeyword("Trample") && getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,blockers)) {
  				  if(!attacker.hasKeyword("Infect"))	  
  					  damage += getAttack(attacker) - CombatUtil.totalShieldDamage(attacker,blockers);
+ 			  }
+ 	   }
+ 	   
+ 	   damage += sumDamageIfUnblocked(unblocked, AllZone.ComputerPlayer);
+ 	   
+	   return AllZone.ComputerPlayer.getLife() - damage;
+    }
+    
+    //calculates the amount of poison counters after the attack  
+    public static int resultingPoison(Combat combat) {
+    	
+ 	   int poison = 0;
+
+ 	   CardList attackers = combat.sortAttackerByDefender()[0];
+ 	   CardList unblocked = new CardList();
+ 	   
+ 	   for(Card attacker : attackers) {
+ 			  
+ 			  CardList blockers = combat.getBlockers(attacker);
+ 			  
+ 			  if(blockers.size() == 0) unblocked.add(attacker);
+ 			  else if(attacker.hasKeyword("Trample") && getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,blockers)) {
  				  if(attacker.hasKeyword("Infect"))
  					  poison += getAttack(attacker) - CombatUtil.totalShieldDamage(attacker,blockers);
  				  if(attacker.hasKeyword("Poisonous"))
@@ -628,10 +648,23 @@ public class CombatUtil {
  			  }
  	   }
  	   
- 	   damage += sumDamageIfUnblocked(unblocked, AllZone.ComputerPlayer);
  	   poison += sumPoisonIfUnblocked(unblocked, AllZone.ComputerPlayer);
  	   
-	   return (damage + 3 > AllZone.ComputerPlayer.getLife() || poison + 2 > 10 - AllZone.ComputerPlayer.getPoisonCounters());
+	   return AllZone.ComputerPlayer.getPoisonCounters() + poison;
+    }
+    
+    //Checks if the life of the attacked Player/Planeswalker is in danger 
+    public static boolean lifeInDanger(Combat combat) {
+  	   // life in danger only cares about the player's life. Not about a Planeswalkers life
+ 	   
+	   return (lifeThatWouldRemain(combat) < 4 || resultingPoison(combat) > 7);
+    }
+    
+    //Checks if the life of the attacked Player/Planeswalker is in danger 
+    public static boolean lifeInSeriousDanger(Combat combat) {
+  	   // life in danger only cares about the player's life. Not about a Planeswalkers life
+ 	   
+	   return (lifeThatWouldRemain(combat) < 1 || resultingPoison(combat) > 9);
     }
     
     // This calculates the amount of damage a blockgang can deal to the attacker (first strike not supported)
