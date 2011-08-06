@@ -4,7 +4,7 @@ Types:Creature Human Knight
 Text:no text
 PT:1/2
 K:stPumpAll:Creature.Green+Other+YouCtrl:1/1:isUntapped:As long as Juniper Order Advocate is untapped, green creatures you control get +1/+1.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_advocate.jpg
