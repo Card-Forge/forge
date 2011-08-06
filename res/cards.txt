@@ -1,3 +1,9 @@
+Veteran's Reflexes
+W
+Instant
+no text
+spPumpTgt:+1/+1:Drawback$UntapTgt:Target creature gets +1/+1 until end of turn. Untap that creature.:Veteran's Reflexes - target gets +1/+1; untap target.
+
 Explore
 1 G
 Sorcery

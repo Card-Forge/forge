@@ -17506,7 +17506,7 @@ public class CardFactory implements NewConstants {
         }
         //*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Riding the Dilu Horse"))
         {
         	SpellAbility spell = new Spell(card)
@@ -17551,6 +17551,7 @@ public class CardFactory implements NewConstants {
         			}
         		}//resolve()
         	};
+        	spell.setDescription("Target creature gets +2/+2 and gains horsemanship. (This effect lasts indefinitely.)");
 	        spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
 	        card.clearSpellAbility();
 	        card.addSpellAbility(spell);
