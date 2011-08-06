@@ -580,7 +580,7 @@ public class Card extends MyObservable {
 				if(hasVanish && AllZone.GameAction.isCardInPlay(this))
 					AllZone.GameAction.sacrifice(this);
 				
-				if(hasSuspend() && AllZone.GameAction.isCardExiled(this))
+				if(hasSuspend() && AllZoneUtil.isCardExiled(this))
 				{
 					final Card c = this;
 					

@@ -337,7 +337,7 @@ public class GameAction {
     }
 
     public Card exile(Card c) {
-    	if(AllZone.GameAction.isCardExiled(c)) return c;
+    	if(AllZoneUtil.isCardExiled(c)) return c;
 
     	PlayerZone removed = AllZone.getZone(Constant.Zone.Exile, c.getOwner());
 
@@ -2181,11 +2181,6 @@ public class GameAction {
     public boolean isCardInGrave(Card c) {
         return AllZoneUtil.isCardInZone(AllZone.Computer_Graveyard, c)
                 || AllZoneUtil.isCardInZone(AllZone.Human_Graveyard, c);
-    }
-    
-    public boolean isCardExiled(Card c) {
-        return AllZoneUtil.isCardInZone(AllZone.Computer_Exile, c)
-                || AllZoneUtil.isCardInZone(AllZone.Human_Exile, c);
     }
     
     /**

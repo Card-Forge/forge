@@ -1631,7 +1631,7 @@ class CardFactory_Planeswalkers {
 							private static final long serialVersionUID = -947355314271308770L;
 
 							public void execute() {
-                                 if(AllZone.GameAction.isCardExiled(c)) {
+                                 if(AllZoneUtil.isCardExiled(c)) {
                                      PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getOwner());
                                 	 AllZone.GameAction.moveTo(play, AllZoneUtil.getCardState(c));
                                  }

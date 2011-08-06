@@ -1498,7 +1498,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					
-					if(AllZone.GameAction.isCardExiled(eve) && eve.getCounters(Counters.SCREAM) > 0) {
+					if(AllZoneUtil.isCardExiled(eve) && eve.getCounters(Counters.SCREAM) > 0) {
 						eve.subtractCounter(Counters.SCREAM, 1);
 
 						if(eve.getCounters(Counters.SCREAM) == 0) {
@@ -1520,7 +1520,7 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append(eve.getName()).append(" - remove a scream counter and return creatures to the battlefield.");
 			hallow.setStackDescription(sb.toString());
-			if(AllZone.GameAction.isCardExiled(eve)) {
+			if(AllZoneUtil.isCardExiled(eve)) {
 				AllZone.Stack.addSimultaneousStackEntry(hallow);
 
 			}

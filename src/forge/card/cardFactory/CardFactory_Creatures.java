@@ -959,7 +959,7 @@ public class CardFactory_Creatures {
                     //System.out.println(abilityComes.getTargetCard().getName());
                     Object o = abilityComes.getTargetCard();
                     
-                    if(o == null || ((Card) o).isToken() || !AllZone.GameAction.isCardExiled((Card) o)) return;
+                    if(o == null || ((Card) o).isToken() || !AllZoneUtil.isCardExiled((Card) o)) return;
                     
                     SpellAbility ability = new Ability(card, "0") {
                         @Override

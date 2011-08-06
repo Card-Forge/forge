@@ -3995,7 +3995,7 @@ public class CardFactory_Sorceries {
 
 						public void execute() {
 							//when this is in exile, and on the stack, this must get called again...
-							if(!AllZone.GameAction.isCardExiled(card)) {
+							if(!AllZoneUtil.isCardExiled(card)) {
 								AllZone.GameAction.exile(card);
 								card.addCounter(Counters.SCREAM, 2);
 							}

@@ -105,7 +105,7 @@ public class Spell_Permanent extends Spell {
             //System.out.println(abilityComes.getTargetCard().getName());
             Object o = championAbilityComes.getTargetCard();
             
-            if(o == null || ((Card) o).isToken() || !AllZone.GameAction.isCardExiled((Card) o)) return;
+            if(o == null || ((Card) o).isToken() || !AllZoneUtil.isCardExiled((Card) o)) return;
             
             SpellAbility ability = new Ability(getSourceCard(), "0") {
                 @Override

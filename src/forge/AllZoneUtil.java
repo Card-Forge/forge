@@ -347,6 +347,9 @@ public class AllZoneUtil {
 		return cards;
 	}
 	
+	public static boolean isCardExiled(Card c) {
+        return getCardsInExile().contains(c);
+    }
 	
 	///Check if a certain card is in play
 	

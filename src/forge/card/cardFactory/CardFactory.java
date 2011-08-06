@@ -1241,7 +1241,7 @@ public class CardFactory implements NewConstants {
                 
                 public void execute() {
                     Object o = enchantment.getTargetCard();
-                    if(o == null || ((Card) o).isToken() || !AllZone.GameAction.isCardExiled((Card) o)) return;
+                    if(o == null || ((Card) o).isToken() || !AllZoneUtil.isCardExiled((Card) o)) return;
                     
                     SpellAbility ability = new Ability(card, "0") {
                         @Override
