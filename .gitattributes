@@ -2091,6 +2091,7 @@ res/cardsfolder/flowstone_thopter.txt -text svneol=native#text/plain
 res/cardsfolder/flowstone_wall.txt -text svneol=native#text/plain
 res/cardsfolder/flowstone_wyvern.txt -text svneol=native#text/plain
 res/cardsfolder/fluctuator.txt -text svneol=native#text/plain
+res/cardsfolder/flurry_of_wings.txt svneol=native#text/plain
 res/cardsfolder/flying_carpet.txt -text svneol=native#text/plain
 res/cardsfolder/flying_men.txt -text svneol=native#text/plain
 res/cardsfolder/fodder_cannon.txt -text svneol=native#text/plain
