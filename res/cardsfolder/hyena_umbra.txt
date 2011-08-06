@@ -1,7 +1,7 @@
 Name:Hyena Umbra
 ManaCost:W
 Types:Enchantment Aura
-Text:Enchanted creature gets +1/+1 and has first strike.
+Text:no text
 K:Enchant creature
 K:Totem armor
 K:enPump:+1/+1/First Strike
