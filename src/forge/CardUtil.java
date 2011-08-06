@@ -227,6 +227,24 @@ public class CardUtil {
         return tok.countTokens();
     }
 
+    static public String addManaCosts(String mc1, String mc2)
+    {
+       String tMC = new String("");
+       
+       Integer cl1, cl2, tCL;
+       cl1 = Integer.valueOf(mc1.replaceAll("[WUBRGSX]", "").trim());
+       cl2 = Integer.valueOf(mc2.replaceAll("[WUBRGSX]", "").trim());
+       tCL = cl1 + cl2;
+       
+       mc1 = mc1.replace(cl1.toString(), "").trim();
+       mc2 = mc2.replace(cl2.toString(), "").trim();
+       
+       tMC = tCL.toString() + " " + mc1 + " " + mc2;
+       
+       System.out.println("TMC:" + tMC);
+       return tMC;
+    }
+    
     static public Card getRelative(Card c, String relation)
     {
     	if(relation.equals("CARDNAME")) return c;

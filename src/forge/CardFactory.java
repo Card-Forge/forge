@@ -2993,6 +2993,20 @@ public class CardFactory implements NewConstants {
                
                 card.clearSpellAbility();
                 card.addSpellAbility(spLoseLife);
+                
+                String bbCost = card.getSVar("Buyback");
+                if (!bbCost.equals(""))
+                {
+                   SpellAbility bbLoseLife = spLoseLife.copy();
+                   bbLoseLife.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
+                   bbLoseLife.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                   bbLoseLife.setIsBuyBackAbility(true);
+                   
+                   if (Tgt[0] == true)
+                       bbLoseLife.setBeforePayMana(CardFactoryUtil.input_targetPlayer(bbLoseLife));
+                   
+                   card.addSpellAbility(bbLoseLife);
+                }
            }
         }
 

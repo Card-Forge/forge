@@ -1,3 +1,10 @@
+Brush With Death
+2 B
+Sorcery
+no text
+spLoseLifeTgt:2:Drawback$YouGainLife/2:Target opponent loses 2 life and you gain 2 life.
+SVar:Buyback:2 B B
+
 Windstorm
 X G
 Instant

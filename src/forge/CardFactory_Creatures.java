@@ -3368,7 +3368,6 @@ public class CardFactory_Creatures {
                         else
                         	ability.setTargetCard(human);
                         
-                        
                         AllZone.Stack.add(ability);
                     }//else
                 }//execute()

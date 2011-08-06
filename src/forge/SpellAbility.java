@@ -294,4 +294,15 @@ public abstract class SpellAbility {
     public boolean isFlashBackAbility() {
         return flashBackAbility;
     }
+    
+    public SpellAbility copy()
+    {
+       SpellAbility clone = null;
+        try {
+           clone = (SpellAbility)this.clone();
+        } catch (CloneNotSupportedException e) {
+           System.err.println(e);
+        }
+        return clone;
+    }
 }
