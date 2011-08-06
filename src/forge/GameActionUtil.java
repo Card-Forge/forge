@@ -2715,7 +2715,9 @@ public class GameActionUtil
 					{
 						String k[] = a.get(i).toString().split(":");
 						c.addCounter(Counters.AGE, 1);
-						c.setUpkeepCost(CardFactoryUtil.multiplyManaCost(k[1], c.getCounters(Counters.AGE)));
+						String upkeepCost = CardFactoryUtil.multiplyManaCost(k[1], c.getCounters(Counters.AGE));
+						c.setUpkeepCost(upkeepCost);
+						System.out.println("Multiplied cost: " + upkeepCost);
 				        //c.setUpkeepCost(k[1]);
 						return true;
 					}

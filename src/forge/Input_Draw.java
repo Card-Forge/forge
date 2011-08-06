@@ -24,8 +24,8 @@ package forge;
        
        if(AllZone.Phase.getPhase().equals(Constant.Phase.Draw) && humanSkipsDrawPhase){
     	   //Input_Main.canPlayLand = true;
-    	   Input_Main.canPlayNumberOfLands = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Human);
-    	   Input_Main.firstLandHasBeenPlayed = false;
+    	   AllZone.GameInfo.setHumanCanPlayNumberOfLands(CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Human));
+    	   AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(false);
     	   AllZone.Phase.setNeedToNextPhase(true);
           
        }
@@ -60,9 +60,9 @@ package forge;
           if(AllZone.Phase.getPhase().equals(Constant.Phase.Draw))
           {
               //Input_Main.canPlayLand = true;
-              Input_Main.canPlayNumberOfLands = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Human);
-              Input_Main.firstLandHasBeenPlayed = false;
-             
+        	  AllZone.GameInfo.setHumanCanPlayNumberOfLands(CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Human));
+        	  AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(false);
+        	  
               //AllZone.Phase.nextPhase();
               //for debugging: System.out.println("need to nextPhase(from Input_Draw on human's draw) = true");
               AllZone.Phase.setNeedToNextPhase(true);

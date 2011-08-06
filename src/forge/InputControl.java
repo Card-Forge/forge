@@ -185,7 +185,7 @@ import java.util.*;
            }
            else if(phase.equals(Constant.Phase.End_Of_Turn))
            {
-        	  System.out.println("Cache size: " + ImageCache.cache.size());
+        	  //System.out.println("Cache size: " + ImageCache.cache.size());
         	  
         	  /*
         	  CardList visibleCards = new CardList();

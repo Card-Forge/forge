@@ -17967,7 +17967,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 					}
 					
 		    	  };
-		    	  bounce.setDescription("You may return two Islands you control to their owner's hand rather than pay Thwart's mana cost.");
+		    	  bounce.setDescription("You may return three Islands you control to their owner's hand rather than pay Thwart's mana cost.");
 		    	  bounce.setStackDescription(card.getName() + " - Counter target spell.");
 		    	  bounce.setManaCost("0");
 		    	  

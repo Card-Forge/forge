@@ -33,16 +33,17 @@ public class InputUtil
 			{
 				AllZone.Human_Hand.remove(card);
 				AllZone.Human_Play.add(card);
-				Input_Main.canPlayNumberOfLands--;
-		    	Input_Main.firstLandHasBeenPlayed = true;
+				AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
+				AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
+		    	
 			}
 		}
 		else //play the land
 		{
 			AllZone.Human_Hand.remove(card);
 			AllZone.Human_Play.add(card);
-			Input_Main.canPlayNumberOfLands--;
-	    	Input_Main.firstLandHasBeenPlayed = true;
+			AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
+			AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
 		}
 	} //land
 	else if(zone.is(Constant.Zone.Hand, Constant.Player.Human) && 

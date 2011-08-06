@@ -335,6 +335,15 @@ public class ComputerUtil
       AllZone.Computer_Hand.remove(landList.get(0));
       AllZone.Computer_Play.add(landList.get(0));
       
+      if (!AllZone.GameInfo.computerPlayedFirstLandThisTurn()) {
+    	  AllZone.GameInfo.setComputerPlayedFirstLandThisTurn(true);
+      }
+      else
+      {
+    	  if (CardFactoryUtil.getFastbonds(Constant.Player.Computer).size() > 0)
+    		  AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(1);
+      }
+      
       AllZone.GameAction.checkStateEffects();
     }
   }

@@ -2158,20 +2158,25 @@ public class CardFactoryUtil
 		  sb.append(tokenized[0]);
 	  }
 	  else {
-		  for (int i=0; i<multiplier; i++)
+		  for (int i=0; i<multiplier; i++) {
 			  //tokenized[0] = tokenized[0] + " " + tokenized[0];
+			  sb.append((" "));
 			  sb.append(tokenized[0]);
+		  }
 	  }
 	  
 	  for (int i=1;i<tokenized.length;i++){
 		  for (int j=0;j<multiplier;j++)
 		  {
 			  //tokenized[i] = tokenized[i] + " " + tokenized[i];
-			  sb.append(tokenized[0]);
+			  sb.append((" "));
+			  sb.append(tokenized[i]);
+			  
 		  }
 	  }
 	  
 	  String result = sb.toString();
+	  System.out.println("result: " + result);
 	  result = result.trim();
 	  return result;
   }

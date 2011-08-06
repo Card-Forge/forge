@@ -9,7 +9,7 @@ import java.util.TreeSet;
 public class ComputerAI_General implements Computer {
     //private boolean          playLand = true;
 	//private int numberPlayLand = 1;
-	public int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
+	//private int numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
     private Collection<Card> playMain1Cards;
     
     @SuppressWarnings("unchecked")
@@ -20,8 +20,8 @@ public class ComputerAI_General implements Computer {
     }
     
     public void main1() {
-        if(numberPlayLand > 0) {
-            numberPlayLand--;
+        if(AllZone.GameInfo.getComputerCanPlayNumberOfLands() > 0) {
+        	AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
             ComputerUtil.playLand();
             for(String effect:AllZone.StateBasedEffects.getStateBasedMap().keySet()) {
                 Command com = GameActionUtil.commands.get(effect);
@@ -35,9 +35,9 @@ public class ComputerAI_General implements Computer {
         playCards(Constant.Phase.Main1);
         
         //for cards like Exploration, Fastbond, Azusa, ...
-        while(numberPlayLand > 0)
+        while(AllZone.GameInfo.getComputerCanPlayNumberOfLands() > 0)
         {
-        	numberPlayLand--;
+        	AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
         	ComputerUtil.playLand();
         	
         	for(String effect:AllZone.StateBasedEffects.getStateBasedMap().keySet()) {
@@ -49,7 +49,7 @@ public class ComputerAI_General implements Computer {
     }//main1()
     
     public void main2() {
-        numberPlayLand = CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer);
+    	AllZone.GameInfo.setComputerCanPlayNumberOfLands(CardFactoryUtil.getCanPlayNumberOfLands(Constant.Player.Computer));
         
         playCards(Constant.Phase.Main2);
     }
@@ -311,16 +311,6 @@ public class ComputerAI_General implements Computer {
             }
         */
         return library.toArray();
-    }
-    
-    public void addNumberPlayLands(int n)
-    {
-    	numberPlayLand += n;
-    }
-    
-    public void setNumberPlayLands(int n)
-    {
-    	numberPlayLand = n;
     }
     
     public void stack_not_empty() {

@@ -945,8 +945,8 @@ private Card getCurrentCard(int ID)
 	//System.gc(); //garbage collection... does it make a difference though?
 	lastPlayerToDraw = Constant.Player.Human;
 	
-	Input_Main.canPlayNumberOfLands = 1;
-	AllZone.Computer.getComputer().setNumberPlayLands(1);
+	AllZone.GameInfo.setComputerCanPlayNumberOfLands(1);
+	AllZone.GameInfo.setHumanCanPlayNumberOfLands(1);
 	
     AllZone.Computer_Life.setLife(20);
     AllZone.Human_Life.setLife(20);
@@ -1277,7 +1277,7 @@ private int getDifferentLand(CardList list, String land)
 		
 		ArrayList<String> choices = new ArrayList<String>();
 		
-		if (Input_Main.canPlayNumberOfLands > 0 && AllZone.Stack.size() == 0 &&
+		if (AllZone.GameInfo.getHumanCanPlayNumberOfLands() > 0 && AllZone.Stack.size() == 0 &&
 			(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2))  )
 			choices.add("Play land");
 		
@@ -1304,8 +1304,8 @@ private int getDifferentLand(CardList list, String land)
 		{
 			 AllZone.Human_Hand.remove(c);
 			 AllZone.Human_Play.add(c);
-			 Input_Main.canPlayNumberOfLands--;
-		     Input_Main.firstLandHasBeenPlayed = true;
+			 AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
+			 AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
 		}
 		else 
 		{
@@ -1343,11 +1343,13 @@ private int getDifferentLand(CardList list, String land)
 	    SpellAbility sa;
 	    
 	    //TODO: add Buyback, Kicker, ... , spells here
+	    /*
 	    ArrayList<SpellAbility> additional = c.getAdditionalCostSpells();
 	    for (SpellAbility s : additional)
 	    {
 	    	
 	    }
+	    */
 	/*
 	 System.out.println(choices.length);
 	 for(int i = 0; i < choices.length; i++)

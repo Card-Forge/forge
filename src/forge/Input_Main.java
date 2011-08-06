@@ -1,14 +1,12 @@
 package forge;
-import java.util.*;
 
-@SuppressWarnings("unused") // java.util.*
 public class Input_Main extends Input
 {
 	private static final long serialVersionUID = -2162856359060870957L;
 	//Input_Draw changes this
     //public static boolean canPlayLand;
-	public static boolean firstLandHasBeenPlayed;
-	public static int canPlayNumberOfLands;
+	//public static boolean firstLandHasBeenPlayed;
+	//public static int canPlayNumberOfLands;
 
     public void showMessage()
     {
@@ -30,16 +28,13 @@ public class Input_Main extends Input
 		//these if statements cannot be combined
 		if(card.isLand() && zone.is(Constant.Zone.Hand, Constant.Player.Human))
 		{
-		    if(canPlayNumberOfLands > 0 )
+		    if(AllZone.GameInfo.getHumanCanPlayNumberOfLands() > 0 )
 		    {
 		    	CardList fastbonds = CardFactoryUtil.getFastbonds(Constant.Player.Human);
 		    	if (fastbonds.size() > 0){
-		    		if (firstLandHasBeenPlayed)    	
+		    		if (AllZone.GameInfo.humanPlayedFirstLandThisTurn())    	
 		    		{
-		    			for ( Card vard : fastbonds)
-		    			{
-		    				AllZone.GameAction.getPlayerLife(Constant.Player.Human).subtractLife(1);
-		    			}
+	    				AllZone.GameAction.getPlayerLife(Constant.Player.Human).subtractLife(1);
 		    		}
 		    	}
 		    	InputUtil.playAnyCard(card, zone);

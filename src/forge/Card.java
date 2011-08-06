@@ -301,7 +301,10 @@ public class Card extends MyObservable
     		  if (k.startsWith("Scry"))
     		  {
     			  String kk[] = k.split(" ");
-    			  sb.append("Scry " + kk[1] + " (To scry X, look at the top X cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)\r\n");
+    			  //sb.append("Scry " + kk[1] + " (To scry X, look at the top X cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)\r\n");
+    			  sb.append("Scry ");
+    			  sb.append(kk[1]);
+    			  sb.append(" (To scry X, look at the top X cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)\r\n");
     		  }
     	  }
             

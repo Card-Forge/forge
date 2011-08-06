@@ -28,16 +28,22 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 		
 		//cannot use addComesIntoPlayCommand - trigger might be set to false;
 		if (c.getName().equals("Exploration")) {
-			Input_Main.canPlayNumberOfLands++;
-			AllZone.Computer.getComputer().addNumberPlayLands(1);	
+			if (c.getController().equals(Constant.Player.Human))
+				AllZone.GameInfo.addHumanCanPlayNumberOfLands(1);
+			else
+				AllZone.GameInfo.addComputerCanPlayNumberOfLands(1);
 		}
 		else if (c.getName().equals("Azusa, Lost but Seeking")) {
-			Input_Main.canPlayNumberOfLands+=2;
-			AllZone.Computer.getComputer().addNumberPlayLands(2);
+			if (c.getController().equals(Constant.Player.Human))
+				AllZone.GameInfo.addHumanCanPlayNumberOfLands(2);
+			else
+				AllZone.GameInfo.addComputerCanPlayNumberOfLands(2);
 		}
 		else if( c.getName().equals("Fastbond")) {
-			Input_Main.canPlayNumberOfLands+=100;
-			AllZone.Computer.getComputer().addNumberPlayLands(100);
+			if (c.getController().equals(Constant.Player.Human))
+				AllZone.GameInfo.addHumanCanPlayNumberOfLands(100);
+			else
+				AllZone.GameInfo.addComputerCanPlayNumberOfLands(100);
 		}
 		
 		if (trigger)
@@ -198,16 +204,22 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone
 		
 		//cannot use addLeavesPlayCommand - trigger might be set to false
 		if (c.getName().equals("Exploration")) {
-			Input_Main.canPlayNumberOfLands--;
-			AllZone.Computer.getComputer().addNumberPlayLands(-1);
+			if (c.getController().equals(Constant.Player.Human))
+				AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
+			else
+				AllZone.GameInfo.addComputerCanPlayNumberOfLands(-1);
 		}
 		else if (c.getName().equals("Azusa, Lost but Seeking")) {
-			Input_Main.canPlayNumberOfLands-=2;
-			AllZone.Computer.getComputer().addNumberPlayLands(-2);
+			if (c.getController().equals(Constant.Player.Human))
+				AllZone.GameInfo.addHumanCanPlayNumberOfLands(-2);
+			else
+				AllZone.GameInfo.addComputerCanPlayNumberOfLands(-2);
 		}
 		else if( c.getName().equals("Fastbond")) {
-			Input_Main.canPlayNumberOfLands-=100;
-			AllZone.Computer.getComputer().addNumberPlayLands(-100);
+			if (c.getController().equals(Constant.Player.Human))
+				AllZone.GameInfo.addHumanCanPlayNumberOfLands(-100);
+			else
+				AllZone.GameInfo.addComputerCanPlayNumberOfLands(-100);
 		}
 		
 		

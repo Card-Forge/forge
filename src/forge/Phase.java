@@ -201,6 +201,7 @@ public class Phase extends MyObservable
     }
     else if (is(Constant.Phase.Untap, Constant.Player.Computer))
     {
+      AllZone.GameInfo.setComputerPlayedFirstLandThisTurn(false);
       turn++;
       /*
       if (computerExtraTurns > 0)

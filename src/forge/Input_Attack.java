@@ -22,9 +22,7 @@ public void showMessage()
     		if (!c.getKeyword().contains("Vigilance"))
     				c.tap();
     	}
-    		
     }
-    
   }
   public void selectButtonOK()
   {
