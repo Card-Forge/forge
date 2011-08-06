@@ -22,6 +22,7 @@ public interface NewConstants {
     
     public static final String DECKS         = "decks";
     public static final String BOOSTER_DECKS = "booster-decks";
+    public static final String NEW_DECKS     = "decks-dir";
     
     public static final String TOKENS        = "tokens";
     public static final String CARD_PICTURES = "card-pictures";

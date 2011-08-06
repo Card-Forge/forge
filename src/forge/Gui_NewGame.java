@@ -1,4 +1,6 @@
+
 package forge;
+
 
 import java.awt.Color;
 import java.awt.Component;
@@ -47,32 +49,35 @@ import forge.properties.NewConstants.LANG.Gui_NewGame.MENU_BAR.OPTIONS;
 public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LANG.Gui_NewGame {
     private static final long       serialVersionUID     = -2437047615019135648L;
     
-    private final DeckIO            deckIO               = new DeckIO(ForgeProps.getFile(DECKS));
-    private final DeckIO            boosterDeckIO        = new DeckIO(ForgeProps.getFile(BOOSTER_DECKS));
+//    private final DeckIO            deckIO               = new OldDeckIO(ForgeProps.getFile(DECKS));
+//    private final DeckIO            boosterDeckIO        = new OldDeckIO(ForgeProps.getFile(BOOSTER_DECKS));
+    private final DeckIO            deckIO               = new NewDeckIO(ForgeProps.getFile(NEW_DECKS));
+    //with the new IO, there's no reason to use different instances
+    private final DeckIO            boosterDeckIO        = deckIO;
     private ArrayList<Deck>         allDecks;
     private static Gui_DeckEditor   editor;
     
-    private JLabel                titleLabel           = new JLabel();
-    private JLabel                jLabel2              = new JLabel();
-    private JLabel                jLabel3              = new JLabel();
-    private JComboBox             humanComboBox        = new JComboBox();
-    private JComboBox             computerComboBox     = new JComboBox();
-    private JButton               deckEditorButton     = new JButton();
-    private JButton               startButton          = new JButton();
-    private ButtonGroup           buttonGroup1         = new ButtonGroup();
-    private JRadioButton          sealedRadioButton    = new JRadioButton();
-    private JRadioButton          singleRadioButton    = new JRadioButton();
-    private JPanel                jPanel2              = new JPanel();
-    private Border                border1;
-    private TitledBorder          titledBorder1;
-    private JRadioButton          draftRadioButton     = new JRadioButton();
-    private JPanel                jPanel1              = new JPanel();
-    private Border                border2;
+    private JLabel                  titleLabel           = new JLabel();
+    private JLabel                  jLabel2              = new JLabel();
+    private JLabel                  jLabel3              = new JLabel();
+    private JComboBox               humanComboBox        = new JComboBox();
+    private JComboBox               computerComboBox     = new JComboBox();
+    private JButton                 deckEditorButton     = new JButton();
+    private JButton                 startButton          = new JButton();
+    private ButtonGroup             buttonGroup1         = new ButtonGroup();
+    private JRadioButton            sealedRadioButton    = new JRadioButton();
+    private JRadioButton            singleRadioButton    = new JRadioButton();
+    private JPanel                  jPanel2              = new JPanel();
+    private Border                  border1;
+    private TitledBorder            titledBorder1;
+    private JRadioButton            draftRadioButton     = new JRadioButton();
+    private JPanel                  jPanel1              = new JPanel();
+    private Border                  border2;
     @SuppressWarnings("unused")
     // titledBorder2
-    private TitledBorder          titledBorder2;
-    private static JCheckBox      newGuiCheckBox       = new JCheckBox("", true);
-    private static JCheckBox      smoothLandCheckBox   = new JCheckBox("", true);
+    private TitledBorder            titledBorder2;
+    private static JCheckBox        newGuiCheckBox       = new JCheckBox("", true);
+    private static JCheckBox        smoothLandCheckBox   = new JCheckBox("", true);
     
     // GenerateConstructedDeck.get2Colors() and GenerateSealedDeck.get2Colors()
     // use these two variables
@@ -81,7 +86,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     public static JCheckBoxMenuItem removeArtifacts      = new JCheckBoxMenuItem(
                                                                  ForgeProps.getLocalized(MENU_BAR.OPTIONS.GENERATE.REMOVE_ARTIFACTS));
     
-    private JButton               questButton          = new JButton();
+    private JButton                 questButton          = new JButton();
     
     private Action                  LOOK_AND_FEEL_ACTION = new LookAndFeelAction(this);
     private Action                  DOWNLOAD_ACTION      = new DownloadAction();
@@ -90,7 +95,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     public static void main(String[] args) {
         ExceptionHandler.registerErrorHandling();
-    	try {
+        try {
             Object[] o = UIManager.getInstalledLookAndFeels();
             if(o.length > 3) {
                 final Color background = new Color(204, 204, 204);
@@ -102,7 +107,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                         "Dialog.background", "OptionPane.background", "ScrollBar.background"};
                 for(int i = 0; i < properties.length; i++) {
                     //UIManager.put(properties, background);
-                	UIManager.put(properties[i], background);
+                    UIManager.put(properties[i], background);
                 }
             }
         } catch(Exception ex) {
@@ -402,19 +407,15 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             if(humanGenerate) {
                 if(constructed) Constant.Runtime.HumanDeck[0] = generateConstructedDeck();
                 else if(sealed) Constant.Runtime.HumanDeck[0] = generateSealedDeck();
-            } 
-            else if (humanGenerateMulti3) {
-            	if(constructed) Constant.Runtime.HumanDeck[0] = generateConstructed3ColorDeck();
-            }
-            else if (humanGenerateMulti5) {
-            	if(constructed) Constant.Runtime.HumanDeck[0] = generateConstructed5ColorDeck();
-            }
-            else if(humanRandom) {
+            } else if(humanGenerateMulti3) {
+                if(constructed) Constant.Runtime.HumanDeck[0] = generateConstructed3ColorDeck();
+            } else if(humanGenerateMulti5) {
+                if(constructed) Constant.Runtime.HumanDeck[0] = generateConstructed5ColorDeck();
+            } else if(humanRandom) {
                 Constant.Runtime.HumanDeck[0] = getRandomDeck(getDecks(format));
                 JOptionPane.showMessageDialog(null, String.format("You are using deck: %s",
                         Constant.Runtime.HumanDeck[0].getName()), "Deck Name", JOptionPane.INFORMATION_MESSAGE);
-            } 
-            else {
+            } else {
                 Constant.Runtime.HumanDeck[0] = deckIO.readDeck(human);
             }
             
@@ -427,14 +428,11 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             if(computerGenerate) {
                 if(constructed) Constant.Runtime.ComputerDeck[0] = generateConstructedDeck();
                 else if(sealed) Constant.Runtime.ComputerDeck[0] = generateSealedDeck();
-            } 
-            else if (computerGenerateMulti3) {
-            	if(constructed) Constant.Runtime.ComputerDeck[0] = generateConstructed3ColorDeck();
-            }
-            else if (computerGenerateMulti5) {
-            	if(constructed) Constant.Runtime.ComputerDeck[0] = generateConstructed5ColorDeck();
-            }
-            else if(computerRandom) {
+            } else if(computerGenerateMulti3) {
+                if(constructed) Constant.Runtime.ComputerDeck[0] = generateConstructed3ColorDeck();
+            } else if(computerGenerateMulti5) {
+                if(constructed) Constant.Runtime.ComputerDeck[0] = generateConstructed5ColorDeck();
+            } else if(computerRandom) {
                 Constant.Runtime.ComputerDeck[0] = getRandomDeck(getDecks(format));
                 JOptionPane.showMessageDialog(null, String.format("The computer is using deck: %s",
                         Constant.Runtime.ComputerDeck[0].getName()), "Deck Name", JOptionPane.INFORMATION_MESSAGE);
@@ -479,7 +477,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     }
     
     private Deck generateConstructed3ColorDeck() {
-    	GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
+        GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
         CardList name = gen.generate3ColorDeck();
         Deck deck = new Deck(Constant.GameType.Constructed);
         
@@ -489,7 +487,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     }
     
     private Deck generateConstructed5ColorDeck() {
-    	GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
+        GenerateConstructedMultiColorDeck gen = new GenerateConstructedMultiColorDeck();
         CardList name = gen.generate5ColorDeck();
         Deck deck = new Deck(Constant.GameType.Constructed);
         
@@ -580,9 +578,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     }/* draftRadioButton_actionPerformed() */
     
     public static class LookAndFeelAction extends AbstractAction {
-
-		private static final long serialVersionUID = -4447498333866711215L;
-		private Component c;
+        
+        private static final long serialVersionUID = -4447498333866711215L;
+        private Component         c;
         
         public LookAndFeelAction(Component c) {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.LF));
@@ -607,29 +605,29 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     }
     
     public static class DownloadAction extends AbstractAction {
-
-		private static final long serialVersionUID = 6564425021778307101L;
-
-		public DownloadAction() {
+        
+        private static final long serialVersionUID = 6564425021778307101L;
+        
+        public DownloadAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.DOWNLOAD));
         }
-
+        
         public void actionPerformed(ActionEvent e) {
             Gui_DownloadPictures.startDownload(null);
         }
     }
     
     public static class CardSizesAction extends AbstractAction {
-
-		private static final long serialVersionUID = -2900235618450319571L;
-		private String[] keys    = {"Tiny", "Small", "Medium", "Large"};
-        private int[]    widths  = {42, 63, 70, 93};
-        private int[]    heights = {59, 88, 98, 130};
+        
+        private static final long serialVersionUID = -2900235618450319571L;
+        private String[]          keys             = {"Tiny", "Small", "Medium", "Large"};
+        private int[]             widths           = {42, 63, 70, 93};
+        private int[]             heights          = {59, 88, 98, 130};
         
         public CardSizesAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.CARD_SIZES));
         }
-
+        
         public void actionPerformed(ActionEvent e) {
             ListChooser<String> ch = new ListChooser<String>("Choose one", "Choose a new card size", 0, 1, keys);
             if(ch.show()) try {
@@ -644,10 +642,10 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     }
     
     public static class AboutAction extends AbstractAction {
-
-		private static final long serialVersionUID = 5492173304463396871L;
-
-		public AboutAction() {
+        
+        private static final long serialVersionUID = 5492173304463396871L;
+        
+        public AboutAction() {
             super(ForgeProps.getLocalized(MENU_BAR.MENU.ABOUT));
         }
         

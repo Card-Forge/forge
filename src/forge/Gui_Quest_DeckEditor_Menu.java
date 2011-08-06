@@ -264,7 +264,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         Object check = null;
         
         try {
-            ObjectInputStream in = new _ObjectInputStream(new FileInputStream(file));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
             check = in.readObject();
             
             in.close();

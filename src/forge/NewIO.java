@@ -66,7 +66,7 @@ public class NewIO {
     
     private ObjectInputStream getReader() {
         try {
-            return new _ObjectInputStream(new FileInputStream(file));
+            return new ObjectInputStream(new FileInputStream(file));
         } catch(IOException ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("IO : getReader() - error - " + ex);

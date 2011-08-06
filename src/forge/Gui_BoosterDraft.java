@@ -1,4 +1,7 @@
+
 package forge;
+
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Frame;
@@ -35,7 +38,6 @@ import javax.swing.event.TableModelListener;
 import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-
 
 
 public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants, NewConstants.LANG.Gui_BoosterDraft {
@@ -450,7 +452,7 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
     private void refreshGui() {
         Deck deck = Constant.Runtime.HumanDeck[0];
         if(deck == null) //this is just a patch, i know
-            deck = new Deck(Constant.Runtime.GameType[0]);
+        deck = new Deck(Constant.Runtime.GameType[0]);
         
         allCardModel.clear();
         deckModel.clear();
@@ -461,8 +463,7 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
             c = AllZone.CardFactory.getCard(deck.getMain(i), Constant.Player.Human);
             
             //add rarity to card if this is a sealed card pool
-            if(!Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed))
-                c.setRarity(pack.getRarity(c.getName()));;
+            if(!Constant.Runtime.GameType[0].equals(Constant.GameType.Constructed)) c.setRarity(pack.getRarity(c.getName()));;
             
             deckModel.addCard(c);
         }//for
@@ -510,7 +511,7 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
         //pick card
         int n = allCardTable.getSelectedRow();
         if(n == -1) //is valid selection?
-            return;
+        return;
         
         Card c = allCardModel.rowToCard(n);
         
@@ -582,7 +583,8 @@ public class Gui_BoosterDraft extends JFrame implements CardDetail, NewConstants
         Deck[] all = {
                 human, computer[0], computer[1], computer[2], computer[3], computer[4], computer[5], computer[6]};
         
-        DeckIO deckIO = new DeckIO(ForgeProps.getFile(BOOSTER_DECKS));
+//        DeckIO deckIO = new OldDeckIO(ForgeProps.getFile(BOOSTER_DECKS));
+        DeckIO deckIO = new NewDeckIO(ForgeProps.getFile(NEW_DECKS));
         deckIO.writeBoosterDeck(all);
         
         //write file

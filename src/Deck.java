@@ -1,4 +1,3 @@
-import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -25,20 +24,13 @@ public class Deck implements Serializable {
     private boolean           isSealed;
     private boolean           isDraft;
     
-    private ArrayList<String> main             = new ArrayList<String>();
-    private ArrayList<String> sideboard        = new ArrayList<String>();
+    private ArrayList<String> main;
+    private ArrayList<String> sideboard;
     
     //very important, do NOT change this
-    private String            name             = "";
+    private String            name;
     
-    private Object readResolve() throws ObjectStreamException {
-        System.out.println("resolving obsolete Deck");
-        forge.Deck d = new forge.Deck(deckType);
-        d.setName(name);
-        for(String s:main)
-            d.addMain(s);
-        for(String s:sideboard)
-            d.addSideboard(s);
-        return d;
+    public forge.Deck migrate() {
+        return new forge.Deck(deckType, main, sideboard, name);
     }
 }

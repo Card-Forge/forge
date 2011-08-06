@@ -28,7 +28,7 @@ public class QuestData_State implements Serializable {
     
     @SuppressWarnings("unchecked")
     private Object readResolve() throws ObjectStreamException {
-        System.out.println("resolving obsolete QuestData_State");
+//        System.out.println("resolving obsolete QuestData_State");
         //removing generic types to make cast between Deck and forge.Deck
         //i'm using Deck in this class because it may be somewhere in the serialization stream
         //it is irrelevant, because readResolve replaces Deck by forge.Deck, and since generics

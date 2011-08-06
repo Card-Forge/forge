@@ -51,8 +51,11 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
 
     private final boolean     debugPrint        = false;
     
-    private final DeckIO      deckIO            = new DeckIO(ForgeProps.getFile(DECKS));
-    private final DeckIO      boosterDeckIO     = new DeckIO(ForgeProps.getFile(BOOSTER_DECKS));
+//    private final DeckIO      deckIO            = new OldDeckIO(ForgeProps.getFile(DECKS));
+//    private final DeckIO      boosterDeckIO     = new OldDeckIO(ForgeProps.getFile(BOOSTER_DECKS));
+    private final DeckIO      deckIO            = new NewDeckIO(ForgeProps.getFile(NEW_DECKS));
+    //with the new IO, there's no reason to use different instances
+    private final DeckIO      boosterDeckIO     = deckIO;
     
     private boolean           isDeckSaved;
     private String            currentDeckName;
@@ -329,7 +332,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         Object check = null;
         
         try {
-            ObjectInputStream in = new _ObjectInputStream(new FileInputStream(file));
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
             check = in.readObject();
             
             in.close();

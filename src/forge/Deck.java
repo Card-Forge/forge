@@ -1,31 +1,45 @@
+
 package forge;
 
 
+import static java.util.Collections.*;
 
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 
 public class Deck implements java.io.Serializable {
     private static final long serialVersionUID = -2188987217361601903L;
     
     //gameType is from Constant.GameType, like Constant.GameType.Regular
-    private String            deckType;
+    private String            name, comment, deckType;
     
-    private boolean           isRegular;
-    private boolean           isSealed;
-    private boolean           isDraft;
-    
-    private ArrayList<String> main             = new ArrayList<String>();
-    private ArrayList<String> sideboard        = new ArrayList<String>();
-    
-    //very important, do NOT change this
-    private String            name             = "";
+    private List<String>      main, sideboard, mainView, sideboardView;
     
     //gameType is from Constant.GameType, like Constant.GameType.Regular
     public Deck(String gameType) {
-        deckType = gameType;
         setDeckType(gameType);
+        name = "";
+        main = new ArrayList<String>();
+        sideboard = new ArrayList<String>();
+        mainView = unmodifiableList(main);
+        sideboardView = unmodifiableList(sideboard);
+    }
+    
+    public Deck(String deckType, List<String> main, List<String> sideboard, String name) {
+        this.deckType = deckType;
+        this.main = main;
+        this.sideboard = main;
+        this.name = name;
+    }
+    
+    public List<String> getMain() {
+        return mainView;
+    }
+    
+    public List<String> getSideboard() {
+        return sideboardView;
     }
     
     public String getDeckType() {
@@ -33,14 +47,14 @@ public class Deck implements java.io.Serializable {
     }
     
     //can only call this method ONCE
-    private final void setDeckType(String deckType) {
-        if(isRegular || isSealed || isDraft) throw new RuntimeException(
+    private void setDeckType(String deckType) {
+        if(this.deckType != null) throw new IllegalStateException(
                 "Deck : setDeckType() error, deck type has already been set");
         
-        if(deckType.equals(Constant.GameType.Constructed)) isRegular = true;
-        else if(deckType.equals(Constant.GameType.Sealed)) isSealed = true;
-        else if(deckType.equals(Constant.GameType.Draft)) isDraft = true;
-        else throw new RuntimeException("Deck : setDeckType() error, invalid deck type - " + deckType);
+        if(!Constant.GameType.GameTypes.contains(deckType)) throw new RuntimeException(
+                "Deck : setDeckType() error, invalid deck type - " + deckType);
+        
+        this.deckType = deckType;
     }
     
     public void setName(String s) {
@@ -50,6 +64,14 @@ public class Deck implements java.io.Serializable {
     public String getName() {
         return name;
     }//may return null
+    
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+    
+    public String getComment() {
+        return comment;
+    }
     
     public void addMain(String cardName) {
         main.add(cardName);
@@ -84,21 +106,22 @@ public class Deck implements java.io.Serializable {
     }
     
     public boolean isDraft() {
-        return isDraft;
+        return deckType.equals(Constant.GameType.Draft);
     }
     
     public boolean isSealed() {
-        return isSealed;
+        return deckType.equals(Constant.GameType.Sealed);
     }
     
     public boolean isRegular() {
-        return isRegular;
+        return deckType.equals(Constant.GameType.Constructed);
     }
     
     public int hashcode() {
         return getName().hashCode();
     }
     
+    @Override
     public String toString() {
         return getName();
     }
