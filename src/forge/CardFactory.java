@@ -8189,6 +8189,189 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Brilliant Ultimatum")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 1481112451519L;
+                
+                @Override
+                public void resolve() {
+                    
+                    Card choice = null;
+                    
+                    //check for no cards in hand on resolve
+                    PlayerZone Library = AllZone.getZone(Constant.Zone.Library, card.getController());
+                    CardList Lib = new CardList(Library.getCards());
+                    PlayerZone Exile = AllZone.getZone(Constant.Zone.Removed_From_Play, card.getController());
+                    CardList cards = new CardList();
+                    CardList Exiled = new CardList();
+                    if(Lib.size() == 0) {
+                    	JOptionPane.showMessageDialog(null, "No more cards in library.", "", JOptionPane.INFORMATION_MESSAGE);
+                    	return;
+                    }
+                    int Count = 5;
+                    if(Lib.size() < 5) Count = Lib.size();
+                    for(int i = 0; i < Count; i++) cards.add(Lib.get(i));                  	
+                    for(int i = 0; i < Count; i++) {
+                    	Exiled.add(Lib.get(i));
+                    	AllZone.GameAction.moveTo(Exile, Lib.get(i));                  	
+                    }
+                    CardList Pile1 = new CardList();
+                    CardList Pile2 = new CardList();
+                    boolean stop = false;
+                    int  Pile1CMC = 0;
+                    int  Pile2CMC = 0;
+                   
+
+                        AllZone.Display.getChoice("Revealing top " + Count + " cards of library: ", cards.toArray());
+                        //Human chooses
+                        if(card.getController().equals(Constant.Player.Computer)) {
+                        for(int i = 0; i < Count; i++) {
+                        	if(stop == false) {
+                        choice = AllZone.Display.getChoiceOptional("Choose cards to put into the first pile: ", cards.toArray());
+                        if(choice != null) {
+                        	Pile1.add(choice);
+                        	cards.remove(choice);
+                        	Pile1CMC = Pile1CMC + CardUtil.getConvertedManaCost(choice);
+                        }
+                        else stop = true;	
+                        }
+                        }
+                        for(int i = 0; i < Count; i++) {
+                        	if(!Pile1.contains(Exiled.get(i))) {
+                        		Pile2.add(Exiled.get(i));
+                        		Pile2CMC = Pile2CMC + CardUtil.getConvertedManaCost(Exiled.get(i));
+                        	}
+                        }
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("You have spilt the cards into the following piles" + "\r\n" + "\r\n");
+                        sb.append("Pile 1: " + "\r\n");
+                        for(int i = 0; i < Pile1.size(); i++) sb.append(Pile1.get(i).getName() + "\r\n");
+                        sb.append("\r\n" + "Pile 2: " + "\r\n");
+                        for(int i = 0; i < Pile2.size(); i++) sb.append(Pile2.get(i).getName() + "\r\n");
+                        JOptionPane.showMessageDialog(null, sb, "", JOptionPane.INFORMATION_MESSAGE);
+                        if(Pile1CMC >= Pile2CMC) {
+                        	JOptionPane.showMessageDialog(null, "Computer chooses the Pile 1", "", JOptionPane.INFORMATION_MESSAGE);
+	                    	  for(int i = 0; i < Pile1.size(); i++) {
+									ArrayList<SpellAbility> choices = Pile1.get(i).getBasicSpells();
+
+									for(SpellAbility sa:choices) {
+										if(sa.canPlayAI()) {
+											ComputerUtil.playStackFree(sa);
+											if(Pile1.get(i).isPermanent()) Exiled.remove(Pile1.get(i));
+											break;
+										}
+									}
+	                    	  }
+                        } else {
+                        	JOptionPane.showMessageDialog(null, "Computer chooses the Pile 2", "", JOptionPane.INFORMATION_MESSAGE);
+	                    	  for(int i = 0; i < Pile2.size(); i++) {
+									ArrayList<SpellAbility> choices = Pile2.get(i).getBasicSpells();
+
+									for(SpellAbility sa:choices) {
+										if(sa.canPlayAI()) {
+											ComputerUtil.playStackFree(sa);
+											if(Pile2.get(i).isPermanent())  Exiled.remove(Pile2.get(i));
+											break;
+										}
+									}
+	                    	  }	
+		    		}
+                        
+                    } else//Computer chooses (It picks the highest converted mana cost card and 1 random card.)
+                    {
+                        Card biggest = null;
+                        biggest = Exiled.get(0);
+                        
+                        for(int i = 0; i < Count; i++) {
+                            if(CardUtil.getConvertedManaCost(biggest.getManaCost()) >= CardUtil.getConvertedManaCost(biggest.getManaCost())) {
+                                biggest = cards.get(i);
+                            }
+                        }
+                        Pile1.add(biggest);
+                        cards.remove(biggest);
+                        if(cards.size() > 0) { 
+                        Card Random = CardUtil.getRandom(cards.toArray());
+                        Pile1.add(Random);
+                        }
+                        for(int i = 0; i < Count; i++) if(!Pile1.contains(Exiled.get(i))) Pile2.add(Exiled.get(i));
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("Choose a pile to add to your hand: " + "\r\n" + "\r\n");
+                        sb.append("Pile 1: " + "\r\n");
+                        for(int i = 0; i < Pile1.size(); i++) sb.append(Pile1.get(i).getName() + "\r\n");
+                        sb.append("\r\n" + "Pile 2: " + "\r\n");
+                        for(int i = 0; i < Pile2.size(); i++) sb.append(Pile2.get(i).getName() + "\r\n");
+			        	Object[] possibleValues = {"Pile 1", "Pile 2"};
+			        	Object q = JOptionPane.showOptionDialog(null, sb, "Brilliant Ultimatum", 
+			        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+			        			null, possibleValues, possibleValues[0]);
+			        	boolean stop2 = false;
+	                      if(q.equals(0)) {	  
+	                    	  int Spells = Pile1.size();
+	                    	  for( int i = 0; i < Spells; i++) {
+	                          	if(stop2 == false) {
+	                          Object check = AllZone.Display.getChoiceOptional("Select spells to play in reserve order: ", Pile1.toArray());
+	                          if(check != null) {
+	              	  					if(((Card) check).isLand() == true) {
+	              	  	   					if(AllZone.GameInfo.getHumanCanPlayNumberOfLands() > 0) {
+	              	    					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	              			                play.add(check);
+	              	  		                AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
+	              	  		                AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
+	              	  	   					} else {
+	              	  	   					JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
+	              	  	   					}
+	              	  					} else if(((Card) check).isPermanent() == true && ((Card) check).isAura() == false) {	
+	              	  	                    AllZone.Stack.add(((Card) check).getSpellAbility()[0]);
+	              	  				} else {
+	              	  	  						AllZone.GameAction.playCardNoCost(((Card) check));
+	              	  				}
+	                        	  Pile1.remove((Card) check);
+	                          } 
+	                    	  }  else stop2 = true;
+	                    	  }
+			    		} else {
+	                    	  int Spells = Pile2.size();
+	                    	  for( int i = 0; i < Spells; i++) {
+	                          	if(stop2 == false) {
+	                          Object check = AllZone.Display.getChoiceOptional("Select spells to play in reserve order: ", Pile2.toArray());
+	                          if(check != null) {
+            	  					if(((Card) check).isLand() == true) {
+            	  	   					if(AllZone.GameInfo.getHumanCanPlayNumberOfLands() > 0) {
+            	    					PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+            			                play.add(check);
+            	  		                AllZone.GameInfo.addHumanCanPlayNumberOfLands(-1);
+            	  		                AllZone.GameInfo.setHumanPlayedFirstLandThisTurn(true);
+            	  	   					} else {
+            	  	   					JOptionPane.showMessageDialog(null, "You can't play any more lands this turn.", "", JOptionPane.INFORMATION_MESSAGE);
+            	  	   					}
+            	  					} else if(((Card) check).isPermanent() == true && ((Card) check).isAura() == false) {	
+            	  	                    AllZone.Stack.add(((Card) check).getSpellAbility()[0]);
+            	  				} else {
+            	  	  						AllZone.GameAction.playCardNoCost(((Card) check));
+            	  				}
+	                        	  Pile2.remove((Card) check);
+	                          } 
+	                    	  }  else stop2 = true;
+	                    	  }
+			    		}
+                    }
+                   Pile1.clear();
+                   Pile2.clear();
+                }//resolve()
+
+                   			
+                @Override
+                public boolean canPlayAI() {
+                	PlayerZone Library = AllZone.getZone(Constant.Zone.Library, card.getController());
+                	CardList cards = new CardList(Library.getCards());
+                    return cards.size() >= 8;
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Fact or Fiction")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 1481112451519L;
