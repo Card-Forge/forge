@@ -506,7 +506,7 @@ public class ComputerUtil_Attack2 {
     				canBeKilledByOne = true;  // there is a single creature on the battlefield that can kill the creature
     				killingBlockers.add(defender);
                     // see if the defending creature is of higher or lower value. We don't want to attack only to lose value
-                    if(CardFactoryUtil.evaluateCreature(defender) < CardFactoryUtil.evaluateCreature(attacker)){
+                    if(CardFactoryUtil.evaluateCreature(defender) <= CardFactoryUtil.evaluateCreature(attacker)){
                     	isWorthLessThanAllKillers = false;
                     } 
     			}
@@ -525,7 +525,7 @@ public class ComputerUtil_Attack2 {
     	}
 
         // if the creature cannot block and can kill all opponents they might as well attack, they do nothing staying back
-        if(canKillAllDangerous && !CombatUtil.canBlock(attacker) && !isWorthLessThanAllKillers){
+        if(canKillAllDangerous && !CombatUtil.canBlock(attacker) && isWorthLessThanAllKillers){
             System.out.println(attacker.getName() + " = attacking because they can't block, expecting to kill or damage player");
             return true;
         }
