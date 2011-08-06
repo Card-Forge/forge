@@ -1,3 +1,12 @@
+Gorgon Recluse
+3 B B
+Creature Gorgon
+Whenever Gorgon Recluse blocks or becomes blocked by a nonblack creature, destroy that creature at end of combat.
+2/4
+Madness:B B
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gorgon_recluse.jpg
+
 Strength of Isolation
 1 W
 Enchantment Aura

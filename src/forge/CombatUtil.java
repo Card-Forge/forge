@@ -2309,6 +2309,7 @@ public class CombatUtil {
             
             AllZone.EndOfCombat.addAt(atEOC);
         }//Frostweb Spider
+        
         else if(b.getName().equals("Abomination")
                 && (CardUtil.getColors(a).contains(Constant.Color.White) || CardUtil.getColors(a).contains(
                         Constant.Color.Green))) {
@@ -2322,7 +2323,9 @@ public class CombatUtil {
                 }
             };
             
-            ability.setStackDescription(b + " - destroy blocked green or white creature.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(b).append(" - destroy blocked green or white creature.");
+            ability.setStackDescription(sb.toString());
             
             final Command atEOC = new Command() {
                 private static final long serialVersionUID = 5854485314766349980L;
@@ -2333,7 +2336,8 @@ public class CombatUtil {
             };
             
             AllZone.EndOfCombat.addAt(atEOC);
-        }
+        }//Abomination blocking
+        
         if(a.getName().equals("Abomination")
                 && (CardUtil.getColors(b).contains(Constant.Color.White) || CardUtil.getColors(b).contains(
                         Constant.Color.Green))) {
@@ -2345,7 +2349,9 @@ public class CombatUtil {
                 }
             };
             
-            ability.setStackDescription(b + " - destroy blocking green or white creature.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(a).append(" - destroy blocking green or white creature.");
+            ability.setStackDescription(sb.toString());
             
             final Command atEOC = new Command() {
                 
@@ -2357,7 +2363,59 @@ public class CombatUtil {
             };
             
             AllZone.EndOfCombat.addAt(atEOC);
-        }
+        }//Abomination attacking
+        
+        else if (b.getName().equals("Gorgon Recluse") 
+                    && !CardUtil.getColors(a).contains(Constant.Color.Black)) {
+            final Card attacker = a;
+            final Ability ability = new Ability(b, "0") {
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(attacker)) {
+                        AllZone.GameAction.destroy(attacker);
+                    }
+                }
+            };
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(b).append(" - destroy blocked nonblack creature.");
+            ability.setStackDescription(sb.toString());
+            
+            final Command atEOC = new Command() {
+                private static final long serialVersionUID = -2166473476701642189L;
+
+                public void execute() {
+                    AllZone.Stack.add(ability);
+                }
+            };
+            
+            AllZone.EndOfCombat.addAt(atEOC);
+        }//Gorgon Recluse blocking
+        
+        if (a.getName().equals("Gorgon Recluse")
+                && !CardUtil.getColors(b).contains(Constant.Color.Black)) {
+            final Card blocker = b;
+            final Ability ability = new Ability(a, "0") {
+                @Override
+                public void resolve() {
+                    AllZone.GameAction.destroy(blocker);
+                }
+            };
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(a).append(" - destroy blocking nonblack creature.");
+            ability.setStackDescription(sb.toString());
+            
+            final Command atEOC = new Command() {
+                private static final long serialVersionUID = -8606306519001580192L;
+
+                public void execute() {
+                    if (AllZone.GameAction.isCardInPlay(blocker)) AllZone.Stack.add(ability);
+                }
+            };
+            
+            AllZone.EndOfCombat.addAt(atEOC);
+        }//Gorgon Recluse attacking
         
         else if (b.getName().equals("Alaborn Zealot")) {
         	final Card blocker = b; 
