@@ -9163,7 +9163,7 @@ public class CardFactory implements NewConstants {
                         choice = AllZone.Display.getChoice("Choose", removeLand(all.toArray()));
                         
                         Card[] showLibrary = library.getCards();
-                        Comparator com = new TableSorter(new CardList(showLibrary), 2, true);
+                        Comparator<Card> com = new TableSorter(new CardList(showLibrary), 2, true);
                         Arrays.sort(showLibrary, com);
                         
                         AllZone.Display.getChoiceOptional("Opponent's Library", showLibrary);
@@ -11813,6 +11813,45 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
             card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "1 G", "3"));
+            
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Parallel Evolution")) {
+            SpellAbility spell = new Spell(card) {
+                
+                private static final long serialVersionUID = 3456160935845779623L;
+                
+                @Override
+                public void resolve() {
+                
+					// for each play zone add a copy of each creature token card
+					CardList creature = new CardList();
+					creature.addAll(AllZone.Human_Play.getCards());
+					creature.addAll(AllZone.Computer_Play.getCards());
+					
+					creature = creature.getType("Creature");
+					
+					creature = creature.filter(new CardListFilter()
+						{
+							public boolean addCard(Card crd)
+							{
+								return crd.isToken();
+							}
+						});
+					
+					CardFactoryUtil.copyTokens(creature);
+				
+				}
+            };
+            
+            spell.setDescription("For each creature token on the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.");
+            spell.setStackDescription("For each creature token on the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.");
+            
+            card.setFlashback(true);
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "4 G G G", "0"));
             
         }//*************** END ************ END **************************
         

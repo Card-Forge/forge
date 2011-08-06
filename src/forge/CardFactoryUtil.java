@@ -1,4 +1,3 @@
-
 package forge;
 
 
@@ -4078,6 +4077,27 @@ public class CardFactoryUtil {
             list.add(temp);
         }
         return list;
+    }
+    
+    public static CardList copyTokens(CardList tokenList)
+    {
+    	CardList list = new CardList();
+    	
+    	for(int tokenAdd = 0; tokenAdd < tokenList.size(); tokenAdd++){
+			Card thisToken = tokenList.getCard(tokenAdd);
+			
+			ArrayList<String> tal = thisToken.getType();
+			String tokenTypes [] = new String [tal.size ()];
+			tal.toArray (tokenTypes);
+
+			ArrayList<String> kal = thisToken.getIntrinsicKeyword();
+			String tokenKeywords [] = new String [kal.size ()];
+			kal.toArray(tokenKeywords);
+			
+			list.add(makeToken(thisToken.getName(), thisToken.getImageName(), thisToken.getController(), thisToken.getManaCost(), tokenTypes, thisToken.getBaseAttack(), thisToken.getBaseDefense(), tokenKeywords));		
+		}
+    	
+    	return list;
     }
     
     public static int getTotalBushidoMagnitude(Card c) {
