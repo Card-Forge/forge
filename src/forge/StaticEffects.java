@@ -151,7 +151,7 @@ public class StaticEffects
 		cardToEffectsList.put("Muraganda Petroglyphs", new String[] {"Muraganda_Petroglyphs"});
 		cardToEffectsList.put("Nut Collector", new String[] {"Nut_Collector"});
 		cardToEffectsList.put("Engineered Plague", new String[] {"Engineered_Plague"});
-		cardToEffectsList.put("Night of Souls' Betrayal", new String[] {"Night_of_Souls_Betrayal"});
+		//cardToEffectsList.put("Night of Souls' Betrayal", new String[] {"Night_of_Souls_Betrayal"});
 		cardToEffectsList.put("Thelonite Hermit", new String[] {"Thelonite_Hermit"});
 		cardToEffectsList.put("Deranged Hermit", new String[] {"Deranged_Hermit"});
 		cardToEffectsList.put("Jacques le Vert", new String[] {"Jacques"});

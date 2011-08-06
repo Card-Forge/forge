@@ -9382,13 +9382,7 @@ public class GameActionUtil {
 	}// upkeep_Verdant_Force()
 	
 	private static void upkeep_Dragon_Broodmother() {
-		//final Player player = AllZone.Phase.getActivePlayer();
-		PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-		PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-
-		CardList list = new CardList(hPlay.getCards());
-		list.addAll(cPlay.getCards());
-		list = list.getName("Dragon Broodmother");
+		CardList list = AllZoneUtil.getCardsInPlay("Dragon Broodmother");
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
@@ -9651,7 +9645,6 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.addDamage(player, crd, 1);
 					player.addDamage(1, crd);
 				}
 			};// Ability
@@ -9677,7 +9670,6 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.addDamage(player, crd, 1);
 					player.addDamage(1, crd);
 				}
 			};// Ability
@@ -9709,10 +9701,7 @@ public class GameActionUtil {
 	}
 	
 	private static void draw_Howling_Mine(Player player) {
-		CardList list = new CardList();
-		list.addAll(AllZone.Human_Play.getCards());
-		list.addAll(AllZone.Computer_Play.getCards());
-		list = list.getName("Howling Mine");
+		CardList list = AllZoneUtil.getCardsInPlay("Howling Mine");
 
 		for(int i = 0; i < list.size(); i++){
 			if( list.getCard(i).isUntapped() ) {
@@ -9737,10 +9726,7 @@ public class GameActionUtil {
 	}// Font_of_Mythos()
 	
 	private static void draw_Teferi_Puzzle_Box(Player player) {
-		CardList list = new CardList();
-		list.addAll(AllZone.Human_Play.getCards());		
-		list.addAll(AllZone.Computer_Play.getCards());
-		list = list.getName("Teferi's Puzzle Box");
+		CardList list = AllZoneUtil.getCardsInPlay("Teferi's Puzzle Box");
         PlayerZone Playerhand = AllZone.getZone(Constant.Zone.Hand, player);
         PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player); 
        
@@ -9794,7 +9780,6 @@ public class GameActionUtil {
         		final Ability damage = new Ability(vault, "0") {
         			@Override
         			public void resolve() {
-        				//AllZone.GameAction.addDamage(player, vault, 1);
         				player.addDamage(1, vault);
         			}
         		};//Ability
@@ -9993,7 +9978,6 @@ public class GameActionUtil {
 
 	private static void upkeep_Honden_of_Infinite_Rage() {
 		final Player controller = AllZone.Phase.getActivePlayer();
-		//final String opponent = player.getOpponent();
 		PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
 
 		CardList list = new CardList();
@@ -10114,18 +10098,14 @@ public class GameActionUtil {
 		final Player player = AllZone.Phase.getActivePlayer();
 
 		// get all creatures
-		CardList list = new CardList();
-		list.addAll(AllZone.Human_Play.getCards());
-		list.addAll(AllZone.Computer_Play.getCards());
-
-		list = list.getName("Seizan, Perverter of Truth");
+		CardList list = AllZoneUtil.getCardsInPlay("Seizan, Perverter of Truth");
 
 		if(list.size() == 0) return;
 		final Card F_card = list.get(0);
 		Ability ability = new Ability(list.get(0), "0") {
 			@Override
 			public void resolve() {
-				player.subtractLife(2,F_card);
+				player.subtractLife(2, F_card);
 			}
 		};// Ability
 		
@@ -10172,10 +10152,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Grinning_Demon() {
 		final Player player = AllZone.Phase.getActivePlayer();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Grinning Demon");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Grinning Demon");
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
@@ -10199,10 +10176,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Juzam_Djinn() {
 		final Player player = AllZone.Phase.getActivePlayer();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Juzam Djinn");
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Juzam Djinn");
 
 		Ability ability;
 		for(int i = 0; i < list.size(); i++) {
@@ -10210,7 +10184,6 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.addDamage(player, crd, 1);
 					player.addDamage(1, crd);
 				}
 			};// Ability
@@ -10236,7 +10209,6 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.addDamage(player, crd, 1);
 					player.addDamage(1, crd);
 				}
 			};// Ability
@@ -10442,10 +10414,7 @@ public class GameActionUtil {
 
 			PlayerZone[] zone = new PlayerZone[4];
 
-			CardList cl = new CardList();
-			cl.addAll(AllZone.Human_Play.getCards());
-			cl.addAll(AllZone.Computer_Play.getCards());
-			cl = cl.getName("Conspiracy");
+			CardList cl = AllZoneUtil.getCardsInPlay("Conspiracy");
 
 			for(int i = 0; i < cl.size(); i++) {
 				Card card = cl.get(i);
@@ -10506,18 +10475,12 @@ public class GameActionUtil {
 			}
 
 			list.clear();
-			CardList cards = new CardList();
-			cards.addAll(AllZone.Human_Play.getCards());
-			cards.addAll(AllZone.Computer_Play.getCards());
-			cards = cards.getName("Engineered Plague");
+			CardList cards = AllZoneUtil.getCardsInPlay("Engineered Plague");
 
 			for(int outer = 0; outer < cards.size(); outer++) {
 				Card card = cards.get(outer);
 
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType(card.getChosenType());
+				CardList creature = AllZoneUtil.getTypeInPlay(card.getChosenType());
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -10535,7 +10498,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; //Engineered Plague
-
+	/*
 	public static Command Night_of_Souls_Betrayal     = new Command() {
 		private static final long serialVersionUID   = 867116049464930958L;
 
@@ -10553,18 +10516,11 @@ public class GameActionUtil {
 			}
 
 			list.clear();
-			CardList cards = new CardList();
-			cards.addAll(AllZone.Human_Play.getCards());
-			cards.addAll(AllZone.Computer_Play.getCards());
-			cards = cards.getName("Night of Souls' Betrayal");
+			CardList cards = AllZoneUtil.getCardsInPlay("Night of Souls' Betrayal");
 
 			for(int outer = 0; outer < cards.size(); outer++) {
-				//Card card = cards.get(outer); //unused
 
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Creature");
+				CardList creature = AllZoneUtil.getCreaturesInPlay();
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -10577,7 +10533,7 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	}; //Night of Souls' Betrayal
-
+	*/
 
 	public static Command Rolling_Stones              = new Command() {
 		private static final long serialVersionUID   = -3317318747868440229L;
@@ -21044,7 +21000,7 @@ public class GameActionUtil {
 		commands.put("Nut_Collector", Nut_Collector);
 
 		commands.put("Engineered_Plague", Engineered_Plague);
-		commands.put("Night_of_Souls_Betrayal", Night_of_Souls_Betrayal);
+		//commands.put("Night_of_Souls_Betrayal", Night_of_Souls_Betrayal);
 
 		commands.put("Thelonite_Hermit", Thelonite_Hermit);
 		commands.put("Deranged_Hermit", Deranged_Hermit);
