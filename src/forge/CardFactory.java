@@ -2225,7 +2225,7 @@ public class CardFactory implements NewConstants {
                     choices = choices.filter(new CardListFilter(){
                     	public boolean addCard(Card c)
                     	{
-                    		return !c.getKeyword().contains("Shroud");
+                    		return CardFactoryUtil.canTarget(card, c);
                     	}
                     });
                     

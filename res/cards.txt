@@ -4,6 +4,31 @@ Instant
 Exile target artifact or enchantment.
 spBounceTgt:Artifact,Enchantment:Exile
 
+Caustic Rain
+2 B B
+Sorcery
+Exile target land.
+spBounceTgt:Land:Exile
+
+Erase
+W
+Instant
+Exile target enchantment.
+spBounceTgt:Enchantment:Exile
+
+Iona's Judgment
+4 W
+Sorcery
+Exile target creature or enchantment.
+spBounceTgt:Creature,Enchantment:Exile
+
+Wipe Clean 
+1 W
+Instant
+Exile target enchantment.
+spBounceTgt:Enchantment:Exile
+Cycling:3
+
 Hoodwink
 1 U
 Instant
