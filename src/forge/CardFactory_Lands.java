@@ -1744,53 +1744,120 @@ class CardFactory_Lands {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Kjeldoran Outpost")) {
-           final Command comesIntoPlay = new Command() {
-              private static final long serialVersionUID = 6175830918425915833L;
-              final Player player = card.getController();
-              public void execute() {
-                 CardList plains = AllZoneUtil.getPlayerTypeInPlay(player, "Plains");
+        	final Command comesIntoPlay = new Command() {
+        		private static final long serialVersionUID = 6175830918425915833L;
+        		final Player player = card.getController();
+        		public void execute() {
+        			CardList plains = AllZoneUtil.getPlayerTypeInPlay(player, "Plains");
 
-                 if( player.equals(AllZone.ComputerPlayer)) {
-                    if( plains.size() > 0 ) {
-                       CardList tappedPlains = new CardList(plains.toArray());
-                       tappedPlains = tappedPlains.filter(AllZoneUtil.tapped);
-                       //if any are tapped, sacrifice it
-                       //else sacrifice random
-                       if( tappedPlains.size() > 0 ) {
-                          AllZone.GameAction.sacrifice(tappedPlains.get(0));
-                       }
-                       else {
-                          AllZone.GameAction.sacrifice(plains.get(0));
-                       }
-                    }
-                    else {
-                       AllZone.GameAction.sacrifice(card);
-                    }
-                 }
-                 else { //this is the human resolution
-                    Input target = new Input() {
-                       private static final long serialVersionUID = 6653677835621129465L;
-                       public void showMessage() {
-                          AllZone.Display.showMessage(cardName+" - Select one plains to sacrifice");
-                          ButtonUtil.enableOnlyCancel();
-                       }
-                       public void selectButtonCancel() {
-                    	   AllZone.GameAction.sacrifice(card);
-                    	   stop();
-                       }
-                       public void selectCard(Card c, PlayerZone zone) {
-                          if(c.isLand() && zone.is(Constant.Zone.Battlefield) && c.getType().contains("Plains")) {
-                             AllZone.GameAction.sacrifice(c);
-                             stop();
-                          }
-                       }//selectCard()
-                    };//Input
-                    AllZone.InputControl.setInput(target);
-                 }
-              }
-           };
+        			if( player.equals(AllZone.ComputerPlayer)) {
+        				if( plains.size() > 0 ) {
+        					CardList tappedPlains = new CardList(plains.toArray());
+        					tappedPlains = tappedPlains.filter(AllZoneUtil.tapped);
+        					//if any are tapped, sacrifice it
+        					//else sacrifice random
+        					if( tappedPlains.size() > 0 ) {
+        						AllZone.GameAction.sacrifice(tappedPlains.get(0));
+        					}
+        					else {
+        						AllZone.GameAction.sacrifice(plains.get(0));
+        					}
+        				}
+        				else {
+        					AllZone.GameAction.sacrifice(card);
+        				}
+        			}
+        			else { //this is the human resolution
+        				Input target = new Input() {
+        					private static final long serialVersionUID = 6653677835621129465L;
+        					public void showMessage() {
+        						AllZone.Display.showMessage(cardName+" - Select one plains to sacrifice");
+        						ButtonUtil.enableOnlyCancel();
+        					}
+        					public void selectButtonCancel() {
+        						AllZone.GameAction.sacrifice(card);
+        						stop();
+        					}
+        					public void selectCard(Card c, PlayerZone zone) {
+        						if(c.isLand() && zone.is(Constant.Zone.Battlefield) && c.getType().contains("Plains")) {
+        							AllZone.GameAction.sacrifice(c);
+        							stop();
+        						}
+        					}//selectCard()
+        				};//Input
+        				AllZone.InputControl.setInput(target);
+        			}
+        		}
+        	};
 
-           card.addComesIntoPlayCommand(comesIntoPlay);
+        	card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
+        
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Lake of the Dead")) {
+        	Ability_Cost abCost = new Ability_Cost("T Sac<1/Swamp>", cardName, true);
+        	final Ability_Activated mana = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = -4916450798017379003L;
+				@Override
+        		public boolean canPlayAI() {
+        			return false;
+        		}
+        		@Override
+        		public void resolve() {
+        			AllZone.ManaPool.addManaToFloating("B B B B", card);
+        		}
+        	};
+        	final Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = 8514298400925774334L;
+				final Player player = card.getController();
+        		public void execute() {
+        			CardList swamps = AllZoneUtil.getPlayerTypeInPlay(player, "Swamp");
+
+        			if( player.equals(AllZone.ComputerPlayer)) {
+        				if( swamps.size() > 0 ) {
+        					CardList tappedSwamps = new CardList(swamps.toArray());
+        					tappedSwamps = tappedSwamps.filter(AllZoneUtil.tapped);
+        					//if any are tapped, sacrifice it
+        					//else sacrifice random
+        					if( tappedSwamps.size() > 0 ) {
+        						AllZone.GameAction.sacrifice(tappedSwamps.get(0));
+        					}
+        					else {
+        						AllZone.GameAction.sacrifice(swamps.get(0));
+        					}
+        				}
+        				else {
+        					AllZone.GameAction.sacrifice(card);
+        				}
+        			}
+        			else { //this is the human resolution
+        				Input target = new Input() {
+							private static final long serialVersionUID = -7346173541960840052L;
+							public void showMessage() {
+        						AllZone.Display.showMessage(cardName+" - Select one Swamp to sacrifice");
+        						ButtonUtil.enableOnlyCancel();
+        					}
+        					public void selectButtonCancel() {
+        						AllZone.GameAction.sacrifice(card);
+        						stop();
+        					}
+        					public void selectCard(Card c, PlayerZone zone) {
+        						if(c.isLand() && zone.is(Constant.Zone.Battlefield) && c.getType().contains("Swamp")) {
+        							AllZone.GameAction.sacrifice(c);
+        							stop();
+        						}
+        					}//selectCard()
+        				};//Input
+        				AllZone.InputControl.setInput(target);
+        			}
+        		}
+        	};
+
+        	card.addComesIntoPlayCommand(comesIntoPlay);
+        	mana.setDescription(abCost+"Add B B B B to your mana pool.");
+        	mana.setStackDescription(cardName+" - add B B B B to your mana pool.");
+        	card.addSpellAbility(mana);
         }//*************** END ************ END **************************
         
         

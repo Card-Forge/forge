@@ -1,0 +1,9 @@
+Name:Lake of the Dead
+ManaCost:no cost
+Types:Land
+Text:If CARDNAME would enter the battlefield, sacrifice a Swamp instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
+K:tap: add B
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lake_of_the_dead.jpg
+End
