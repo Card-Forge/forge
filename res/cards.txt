@@ -1,3 +1,9 @@
+Inspiration
+3 U
+Instant
+no text
+spDrawCardsTgt:2:Target player draws two cards.:Inspiration - draw 2 cards.
+
 Festering Wound
 1 B
 Enchantment Aura
@@ -7172,12 +7178,6 @@ Touch of Brilliance
 Sorcery
 no text
 spDrawCards:2:Draw two cards.:Touch of Brilliance - draw 2 cards.
-
-Inspiration
-3 U
-Sorcery
-no text
-spDrawCardsTgt:2:Target player draws two cards.:Inspiration - draw 2 cards.
 
 Concentrate
 2 U U
