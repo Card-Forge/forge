@@ -1,3 +1,17 @@
+Dread Warlock
+1 B B
+Creature Human Wizard
+no text
+2/2
+CARDNAME can't be blocked except by black creatures.
+
+Prowling Nightstalker
+3 B
+Creature Nightstalker
+no text
+2/2
+CARDNAME can't be blocked except by black creatures.
+
 Zulaport Enforcer
 B
 Creature Human Warrior
