@@ -213,9 +213,12 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     	if (!Constant.Quest.fantasyQuest[0])
     		AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
     	else{
+    		if (AllZone.QuestAssignment != null)
+    			QuestUtil.setupQuest(AllZone.QuestAssignment);
     		//AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife);
     		CardList humanList = QuestUtil.getHumanPlantAndPet(AllZone.QuestData, AllZone.QuestAssignment);
     		CardList computerList = new CardList();
+    		
     		
 
     		int humanLife = QuestUtil.getLife(AllZone.QuestData);
@@ -237,6 +240,8 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     		AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
     	else{
     		//AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0], humanList, computerList, humanLife, computerLife);
+    		if (AllZone.QuestAssignment != null)
+    			QuestUtil.setupQuest(AllZone.QuestAssignment);
     		
     		CardList humanList = QuestUtil.getHumanPlantAndPet(AllZone.QuestData, AllZone.QuestAssignment);
     		CardList computerList = QuestUtil.getComputerCreatures(AllZone.QuestData, AllZone.QuestAssignment);

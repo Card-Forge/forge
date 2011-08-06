@@ -217,7 +217,28 @@ public class QuestUtil {
 		}
 		else if (id == 8)
 		{
+			CardList humanList = new CardList();
+			for (int i=0;i<3;i++)
+			{
+				Card c = CardFactoryUtil.makeToken("Sheep", "G 0 1 Sheep", Constant.Player.Human, "G", 
+													new String[] {"Creature","Sheep"}, 0, 1, new String[]{""}).get(0);
+				humanList.add(c);
+			}
+			qa.setHuman(humanList);
+			qa.setCardRewardList(pack.getRare(3));			
+		}
+		else if (id == 9)
+		{
+			CardList humanList = new CardList();
+			Card c = AllZone.CardFactory.getCard("Trusty Machete", Constant.Player.Human);
+			humanList.add(c);
 			
+			qa.setHuman(humanList);
+			
+			for (int i=0;i<3;i++)
+				qa.addCompy("Wall of Wood");
+			
+			qa.setCardRewardList(pack.getRare(4, 4));			
 		}
 	}
 	
