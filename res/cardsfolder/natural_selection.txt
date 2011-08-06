@@ -2,7 +2,7 @@ Name:Natural Selection
 ManaCost:G
 Types:Instant
 Text:no text
-A:SP$RearrangeTopOfLibrary | Cost$ G | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 3 | MayShuffle$ True | SpellDescription$ Look at the top 3 cards of target player's library and put them back in any order. You may have that player shuffle his or her library.
+A:SP$ RearrangeTopOfLibrary | Cost$ G | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 3 | MayShuffle$ True | SpellDescription$ Look at the top 3 cards of target player's library and put them back in any order. You may have that player shuffle his or her library.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natural_selection.jpg
