@@ -1488,7 +1488,9 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlayAI() {
-                return getCreature().size() != 0 && !sourceCard.isEquipping();
+                return getCreature().size() != 0 && 
+                	   !sourceCard.isEquipping() && 
+                	   !sourceCard.isCreature();
             }
             
             
@@ -1502,10 +1504,12 @@ public class CardFactoryUtil {
                 CardList list = new CardList(AllZone.Computer_Play.getCards());
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card c) {
-                        return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
-                                && CardFactoryUtil.canTarget(sourceCard, c)
-                                && (!c.getKeyword().contains("Defender"))
-                                && (c.getNetDefense() + Tough > 0);
+                        return c.isCreature() && 
+                        	   (!CardFactoryUtil.AI_doesCreatureAttack(c)) && 
+                               CardFactoryUtil.canTarget(sourceCard, c) && 
+                               (!c.getKeyword().contains("Defender")) && 
+                               (c.getNetDefense() + Tough > 0) && 
+                               c != sourceCard;
                     }
                 });
                 // list.remove(card);      // if mana-only cost, allow self-target
