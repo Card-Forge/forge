@@ -1727,7 +1727,7 @@ public class GameAction {
             firstZone.add(c);
             
         }//if
-        if ((list.size() == 0) || Zone2.trim().length() != 0) return;
+        if ((list.size() == 0) || Zone2.trim().length() == 0) return;
         //branch 3
         o = AllZone.Display.getChoiceOptional("Choose second land", list.toArray());
         if(o != null) {
