@@ -7,5 +7,5 @@ T:Mode$ AttackerBlocked | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerD
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Triggered | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/labyrinth_minotaur.jpg
-SetInfo:HML|Common|http://magiccards.info/scans/en/hl/97
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/97|2
 End
