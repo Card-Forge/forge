@@ -2185,17 +2185,81 @@ public class Card extends MyObservable {
                     		&& CardUtil.isCreatureType(cardType) && getKeyword().contains("Changeling"))) return true;
         return false;
     }
-    	
     
+    // This takes a player and a card argument for YouCtrl and Other
+    public boolean isValidCard(String Restris[], Player You, Card source) {
+    	
+    	String Restriction[] = new String[Restris.length];
+    	String st = "";
+        for (int i=0; i<Restris.length; i++)
+        {
+        	Restriction[i] = Restris[i];
+        	if (Restriction[i].contains("Other"))
+            {
+                if (this.equals(source)) {
+                    st = "False"; 								//False restriction entries in the array will return false
+                 }
+                else st = Restriction[i].replaceAll(".Other", "");
+                Restriction[i] = st;
+            }
+        	else if (Restriction[i].contains("Self"))
+            {
+                if (!this.equals(source)) {
+                    st = "False"; 								//False restriction entries in the array will return false
+                 }
+                else st = Restriction[i].replaceAll(".Self", "");
+                Restriction[i] = st;
+            }
+            if (Restriction[i].contains("YouCtrl"))
+            {
+                if (!getController().isPlayer(You)) {
+                    st = "False"; 								//False restriction entries in the array will return false
+                 }
+                else st = Restriction[i].replaceAll(".YouCtrl", "");
+                Restriction[i] = st;
+            }
+            else if (Restriction[i].contains("YouDontCtrl"))
+            {
+                if (getController().isPlayer(You)) {
+                	st = "False"; 								//False restriction entries in the array will return false
+                }
+               else st = Restriction[i].replaceAll(".YouDontCtrl", "");
+               Restriction[i] = st;
+            }
+        }
+        return isValidCard(Restriction);
+    }
+    
+    // This takes a card argument Self and Other
+    public boolean isValidCard(String Restris[], Card source) {
+    	
+    	String Restriction[] = new String[Restris.length];
+    	String st = "";
+        for (int i=0; i<Restris.length; i++)
+        {
+        	Restriction[i] = Restris[i];
+        	if (Restriction[i].contains("Other"))
+            {
+                if (this.equals(source)) {
+                    st = "False"; 								//False restriction entries in the array will return false;
+                 }
+                else st = Restriction[i].replaceAll(".Other", "");
+                Restriction[i] = st;
+            }
+        	else if (Restriction[i].contains("Self"))
+            {
+                if (!this.equals(source)) {
+                    st = "False"; 								//False restriction entries in the array will return false
+                 }
+                else st = Restriction[i].replaceAll(".Self", "");
+                Restriction[i] = st;
+            }
+        }
+        return isValidCard(Restriction);
+    }
+    
+    // This takes a player argument YouCtrl and YouDontCtrl
     public boolean isValidCard(String Restris[], Player You) {
-    	/////////////////// temporary DEBUG code
-    	System.out.println("DEBUG: "+this.getName()+" - isValidCard Restrictions length: "+Restris.length);
-    	System.out.print("DEBUG: "+this.getName()+" - isValidCard Restrictions: ");
-    	for(String a:Restris) {
-    		System.out.print("|"+a);
-    	}
-    	System.out.println("|");
-    	////////////////// end temp DEBUG code
     	
     	String Restriction[] = new String[Restris.length];
     	String st = "";
@@ -2205,7 +2269,7 @@ public class Card extends MyObservable {
             if (Restriction[i].contains("YouCtrl"))
             {
                 if (!getController().isPlayer(You)) {
-                    return false;
+                	st = "False"; 								//False restriction entries in the array will return false
                  }
                 st = Restriction[i].replaceAll(".YouCtrl", "");
                 Restriction[i] = st;
@@ -2213,7 +2277,7 @@ public class Card extends MyObservable {
             else if (Restriction[i].contains("YouDontCtrl"))
             {
                 if (getController().isPlayer(You)) {
-                   return false;
+                	st = "False"; 								//False restriction entries in the array will return false
                 }
                 st = Restriction[i].replaceAll(".YouDontCtrl", "");
                 Restriction[i] = st;
@@ -2240,6 +2304,7 @@ public class Card extends MyObservable {
     public boolean isValid(String Restriction) {
     	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
+        if (Restriction.equals("False")) return false;
 
             String incR[] = Restriction.split("\\."); // Inclusive restrictions are Card types
             
