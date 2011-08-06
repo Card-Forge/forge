@@ -10141,6 +10141,436 @@ public class GameActionUtil {
 		**/
 	};
     
+	public static Command StaticEffectKeyword  		= new Command() {
+		/** StaticEffectKeyword
+		 * Syntax:[ k[0] StaticEffect : k[1] Where the Card must be : k[2] Which Cards the Bonus Affects : 
+		 * 			k[3] What Bonus does the Card have : k[4] Special Conditions : k[5] Description
+		 */
+		
+		private static final long serialVersionUID = -8467814700545847505L;
+		int						  max			  		 = 100;
+		CardList[]                old            		 = new CardList[max];
+		CardList[]                next             	 	 = new CardList[max];
+		CardList                  CardsWithKeyword 	 	 = new CardList();
+		String[] 				      InfoStorage	   		 = new String[max];
+		int						  KeywordsActive		 = 0;
+		int						  ActivationNumber	     = 0;
+
+		public void execute() {
+			// Initialize Variables
+			if(old[0] == null) {
+				for(int i = 0; i < max; i++) {
+					old[i] = new CardList();
+					next[i] = new CardList();
+					old[i].clear();
+					next[i].clear();
+					InfoStorage[i] = "-1";
+				}
+			}
+			// Reset Variables at Start of Game
+			if(AllZone.GameAction.StaticEffectKeywordReset) {
+			AllZone.GameAction.StaticEffectKeywordReset = false;
+			for(int i = 0; i < max; i++)	{
+				old[i] = new CardList();
+				next[i] = new CardList();
+				old[i].clear();
+				next[i].clear();
+				InfoStorage[i] = "-1";	
+			}
+			}
+			// Check if the Bonuses need to be removed
+			if(Phase.GameBegins == 1) {
+			for(int i = 0; i < max; i++)	{
+				String[] InfoSplit = InfoStorage[i].split(":");
+				for(int z = 0; z < CardsWithKeyword.size(); z++)
+					if(Integer.valueOf(InfoSplit[0]) == CardsWithKeyword.get(z).getUniqueNumber()) 
+						removeKeyword(old[i],CardsWithKeyword.get(z),i,Integer.valueOf(InfoSplit[1]),InfoSplit[2]);
+			}
+			// Gather Cards in Play and Graveyards with the Keyword
+            PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+            PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+            PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
+            PlayerZone Cgrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Computer);
+            
+     		CardList Cards_WithKeyword = new CardList();
+            Cards_WithKeyword.add(new CardList(Hplay.getCards()));
+            Cards_WithKeyword.add(new CardList(Cplay.getCards()));
+            Cards_WithKeyword.add(new CardList(Hgrave.getCards()));
+            Cards_WithKeyword.add(new CardList(Cgrave.getCards()));
+     		Cards_WithKeyword = Cards_WithKeyword.filter(new CardListFilter() {
+                 public boolean addCard(Card c) {
+                     if(c.getKeyword().toString().contains("StaticEffect")) return true;
+                     return false;
+                 }
+             });
+     		// For each card found, find the keywords which are the StatusEffect Keywords
+     		for(int i = 0; i < Cards_WithKeyword.size() ; i++) {
+     			Card card = Cards_WithKeyword.get(i);
+     		        ArrayList<String> a = card.getKeyword();
+     		        int StaticEffectKeywords = 0;
+     		        int StaticEffectKeyword_Number[] = new int[a.size()];
+     		        for(int x = 0; x < a.size(); x++)
+     		            if(a.get(x).toString().startsWith("StaticEffect")) {
+     		            	StaticEffectKeyword_Number[StaticEffectKeywords] = x;
+     		            	StaticEffectKeywords = StaticEffectKeywords + 1;
+     		            }
+     		       // For each keyword found, Record Data about the keyword and the source card
+     		        // Record Data Start
+     		        for(int CKeywords = 0; CKeywords < StaticEffectKeywords; CKeywords++) {
+                        String parse = card.getKeyword().get(StaticEffectKeyword_Number[CKeywords]).toString();                
+                        String k[] = parse.split(":");
+                        int ANCount = 0;
+     	     			KeywordsActive = 0;
+     	     			while(InfoStorage[KeywordsActive] != "-1") {
+     	     				KeywordsActive++;		
+     	     			}
+     	     			
+     	   	      	// Special Conditions
+     		      		boolean SpecialConditionsMet = true;
+     		      		CardList SpecialConditionsCardList = new CardList();
+     		      		if(k[4].contains("CardsInHandMore")) {
+     		      			SpecialConditionsCardList.clear();
+     		      			String Condition = k[4].split("/")[1];
+     		      			SpecialConditionsCardList.addAll(AllZone.getZone(Constant.Zone.Hand, card.getController()).getCards());
+     		      			if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) SpecialConditionsMet = false;
+     		      		}
+     		      		if(SpecialConditionsMet) {
+     	     			boolean ActivatedAlready = false;
+     	     			// JOptionPane.showMessageDialog(null, ANCount + " " + CKeywords, "", JOptionPane.INFORMATION_MESSAGE); 
+     	     			for(int y = 0; y < max; y++) {
+     	     			if(InfoStorage[y].split(":")[0].equals(String.valueOf(card.getUniqueNumber()))) {
+     	     				if(ANCount == CKeywords) {
+     	     				ActivatedAlready = true;
+     	     				ActivationNumber = y;	
+     	     				break;
+     	     			} else {
+     	     				ANCount++;	
+     	     			}
+     	     			}
+     	     			}
+     	     			if(!ActivatedAlready) {
+     	     				InfoStorage[KeywordsActive] = String.valueOf(card.getUniqueNumber()) + ":" + StaticEffectKeyword_Number[CKeywords] + ":" +  card.getController();
+     	     				ActivationNumber = KeywordsActive;
+     	     			}
+     	     			CardList SourceCard_in_CardsWithKeyword = CardsWithKeyword.getName(card.getName());
+     	     			for(int i1 = 0; i1 < SourceCard_in_CardsWithKeyword.size() ; i1++) {
+         	     			if(!SourceCard_in_CardsWithKeyword.get(i1).equals(card)) 
+         	     				SourceCard_in_CardsWithKeyword.remove(SourceCard_in_CardsWithKeyword.get(i1));	
+         	     			}
+     	     			// JOptionPane.showMessageDialog(null, ANCount + " " + SourceCard_in_CardsWithKeyword.size(), "", JOptionPane.INFORMATION_MESSAGE);
+     	     			for(int i1 = 0; i1 < ANCount - SourceCard_in_CardsWithKeyword.size() + 1; i1++) {
+     	     				if(CKeywords + 1 == StaticEffectKeywords) CardsWithKeyword.add(card);
+     	     			}
+     	     			 // Record Data End
+     	     			
+     	     		 // Final Statement: For each keyword found, run addKeyword	
+                     addKeyword(card,ActivationNumber,k);
+     		        }
+     		}
+			}
+			}
+		}// execute()
+
+		void addKeyword(Card SourceCard, int ANumber, String[] Keyword_Details) {
+			// Initialize Variables
+				next[ANumber].clear();
+				final Card F_SourceCard = SourceCard;
+	      		CardList Cards_inZone = new CardList();
+	      		
+	      		// Where does the SourceCard have to be?
+	      		boolean CardInRightZone = false;
+	      		if(Keyword_Details[1].equals("Play")&& AllZone.GameAction.isCardInPlay(SourceCard)) CardInRightZone = true;
+	      		if(Keyword_Details[1].equals("Graveyard")&& AllZone.GameAction.isCardInGrave(SourceCard)) CardInRightZone = true;
+	      	
+	      		if(CardInRightZone) {
+	      		// Who gets the Bonus?
+	      		Cards_inZone.add(AffectedCards(SourceCard, Keyword_Details));
+	      		
+	      		// Special Conditions
+		      		final String[] Specific = Keyword_Details[4].split("!");
+		      		final int[] Restriction_Count = new int[1]; 
+		      		for(int i = 0; i < Specific.length;i++) {
+		      			if(Specific[i].contains("Type.") && !Specific[i].contains("NonType.")) {
+		      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                if(c.getType().contains(Specific[Restriction_Count[0]].replaceFirst("Type.", ""))) return true;
+                                return false;
+                            }
+                		});
+		      			}
+		      			if(Specific[i].contains("NonType.")) {
+		      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
+                                public boolean addCard(Card c) {
+                                    if(!c.getType().contains(Specific[Restriction_Count[0]].replaceFirst("NonType.", ""))) return true;
+                                    return false;
+                                }
+                    		});
+   		      			}
+		      			if(Specific[i].contains("Color.") && !Specific[i].contains("NonColor.")) {
+		      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
+                                public boolean addCard(Card c) {
+                                    if(CardUtil.getColors(c).contains(Specific[Restriction_Count[0]].replaceFirst("Color.", ""))) return true;
+                                    return false;
+                                }
+                    		});	
+   		      			}
+		      			if(Specific[i].contains("NonColor.")) {
+		      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
+                                public boolean addCard(Card c) {
+                                    if(!CardUtil.getColors(c).contains(Specific[Restriction_Count[0]].replaceFirst("NonColor.", ""))) return true;
+                                    return false;
+                                }
+                    		});	
+   		      			}
+		      			if(Specific[i].equals("NotSelf")) {
+		      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
+                                public boolean addCard(Card c) {
+                                    if(!c.equals(F_SourceCard)) return true;
+                                    return false;
+                                }
+                    		});
+   		      			}
+		      		Restriction_Count[0]++;
+		      		}
+		      		
+		    // From the cards left, determine which cards have already got the bonus 		
+			for(int i = 0; i < Cards_inZone.size(); i++) {
+				if(!old[ANumber].contains(Cards_inZone.get(i))) next[ANumber].add(Cards_inZone.get(i));
+			}
+			// Final Statement: Run addKeyword noting which cards should have the bonus but don't have it yet
+			addKeyword(SourceCard,next[ANumber],Keyword_Details,ANumber);
+		}
+		}
+
+		void addKeyword(Card SourceCard, CardList list, String[] Keyword_Details, int ANumber) {
+			// Initialize Variables
+			String[] Keyword = Keyword_Details[3].split("!");
+			// For each effect .....
+			for(int a =0; a < Keyword.length;a++) {
+			int Count = list.size();
+			// .... For each card that needs the bonus, add the bonus
+				for(int i = 0; i < Count; i++) {
+					if(a + 1 == Keyword.length) old[ANumber].add(list.get(i)); // Only store the card when it has all the bonuses added
+					if(Keyword[a].contains("PTBonus")) {
+					list.get(i).addSemiPermanentAttackBoost(Integer.valueOf(Keyword[a].split("/")[1]));
+					list.get(i).addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[a].split("/")[2]));
+				}
+			else if(Keyword[a].contains("SetPT")) {
+						// -9001 is a failsafe number, It will be used when a card only has a SetPT bonus which only affects 
+						// cards with either a Power or Toughness bonus, but not both. NOT TESTED
+						int[] SetPTAmounts = SetPTBonus(SourceCard, Keyword_Details);
+						if(SetPTAmounts[0] != -9001) list.get(i).setBaseAttack(SetPTAmounts[0]);
+						if(SetPTAmounts[0] != -9001) list.get(i).setBaseDefense(SetPTAmounts[1]);
+					}
+			else if(Keyword[a].contains("Keyword")) {
+				list.get(i).addExtrinsicKeyword(Keyword[a].replaceFirst("Keyword/", ""));
+			 }
+			}
+			}
+		}
+		
+		void removeKeyword(CardList list , Card Source,int ANumber, int AbilityNumber, String LastKnownController) {
+			// Initialize Variables
+        	CardList List_Copy = new CardList();
+        	List_Copy.add(list);
+        	String keyword = "";
+            String parse = Source.getKeyword().get(AbilityNumber).toString();                
+            String k[] = parse.split(":");
+                     
+            // Get the Effects from the Keyword
+            int Effects = 1;                   
+            String EffectParse = k[3];                
+            String Effect[] = EffectParse.split("!");
+            Effects = Effect.length;
+            for(int y = 0; y < Effects; y++) { 
+            boolean Done = false;
+            if(Effect[y].contains("SetPT")) { // Auto reset for cards with SetPT
+            	CardsWithKeyword.remove(Source);
+            	InfoStorage[ANumber] = "-1";
+            	old[ANumber].remove(Source);
+            	Done = true;
+             }
+     		 if(!Done) { // Basically if its not SetPT
+     		 // Is the Card in the right location	 
+     		 boolean SourceCardinRightZone = true;
+     		 if(k[1].equals("Play") && !AllZone.GameAction.isCardInPlay(Source)) SourceCardinRightZone = false;
+     		 if(k[1].equals("Graveyard") && !AllZone.GameAction.isCardInGrave(Source)) SourceCardinRightZone = false;
+     		 if(!LastKnownController.equals(Source.getController())) SourceCardinRightZone = false;
+     		  // Special Conditions
+      	      boolean SpecialConditionsMet = true;
+   	      	  CardList SpecialConditionsCardList = new CardList();
+   	      	  if(k[4].contains("CardsInHandMore")) {
+   	      			SpecialConditionsCardList.clear();
+   	      			String Condition = k[4].split("/")[1];
+   	      			SpecialConditionsCardList.addAll(AllZone.getZone(Constant.Zone.Hand, Source.getController()).getCards());
+   	      			if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) SpecialConditionsMet = false;
+   	      	  }
+   	      // If the Source Card is not in the right Location or the Special Conditions are no longer met - Then Remove Bonus
+            		if(!SourceCardinRightZone || !SpecialConditionsMet) {
+            			if(Effects == y + 1) {
+            			CardsWithKeyword.remove(Source);
+            			InfoStorage[ANumber] = "-1";
+            			}
+               for(int i = 0; i < List_Copy.size(); i++) {
+			   Card c = List_Copy.get(i);
+			   if(old[ANumber].contains(c)) {
+					if(Effects == y + 1) old[ANumber].remove(c);
+                    if(Effect[y].contains("PTBonus")) {
+                   	keyword = Effect[y]; 
+					c.addSemiPermanentAttackBoost(Integer.valueOf(keyword.split("/")[1]) * -1);
+					c.addSemiPermanentDefenseBoost(Integer.valueOf(keyword.split("/")[2]) * -1);
+			   } else if(Effect[y].contains("Keyword")) {
+                   	keyword = Effect[y].split("/")[1];
+					List_Copy.get(i).removeExtrinsicKeyword(keyword);
+					}
+			   }
+               }
+               }
+        // If a card under the influence of a source card is not in the right location - Then Remove Bonus
+			for(int i = 0; i < List_Copy.size(); i++) {
+				Card c = List_Copy.get(i);
+				if(old[ANumber].contains(c) && !AffectedCards(Source, k).contains(c)) {
+					old[ANumber].remove(c);
+                    if(Effect[y].contains("PTBonus")) {
+                      	 keyword = Effect[y]; 
+								c.addSemiPermanentAttackBoost(Integer.valueOf(keyword.split("/")[1]) * -1);
+								c.addSemiPermanentDefenseBoost(Integer.valueOf(keyword.split("/")[2]) * -1);
+						} else if(Effect[y].contains("Keyword")) {
+							keyword = Effect[y].split("/")[1];
+							List_Copy.get(i).removeExtrinsicKeyword(keyword);
+						}
+						}
+     		        	}
+                     	}
+            			}	
+		}
+
+		CardList AffectedCards (Card SourceCard, String[] Keyword_Details) {
+			/** 
+			 	This Function is used for 2 purposes:
+				1. To determine which cards should be affected by a static effect
+				2. To determine the value of SetPT bonuses.
+				It works by going through all conditions and finding the cards in the zones
+			**/
+			CardList Cards_inZone = new CardList();
+      		if(Keyword_Details[2].equals("All Permanents")) {
+	      		Cards_inZone.addAll(AllZone.Human_Play.getCards());
+	      		Cards_inZone.addAll(AllZone.Computer_Play.getCards());
+	      		}
+	      		if(Keyword_Details[2].equals("Permanents you Control")) {
+		      		Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Play, SourceCard.getController()).getCards());
+		      		}
+	      		if(Keyword_Details[2].equals("Permanents your Opponents Control")) {
+		      		Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(SourceCard.getController())).getCards());
+		      		}
+	      		if(Keyword_Details[2].equals("ControllerCardsInHand")) {
+		      		Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
+		      		}
+	      		if(Keyword_Details[2].equals("OpponentCardsInHand")) {
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.GameAction.getOpponent(SourceCard.getController())).getCards());
+		      		}
+	      		if(Keyword_Details[2].equals("ControllerCardsInGrave")) {
+		      		Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Graveyard, SourceCard.getController()).getCards());
+		      		}
+	      		if(Keyword_Details[2].equals("OpponentCardsInGrave")) {
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Graveyard, AllZone.GameAction.getOpponent(SourceCard.getController())).getCards());
+		      		}
+	      		if(Keyword_Details[2].equals("ControllerAllCards") || Keyword_Details[2].equals("AllCards")) {
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Play, SourceCard.getController()).getCards());
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Graveyard, SourceCard.getController()).getCards());
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Library, SourceCard.getController()).getCards());
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Removed_From_Play, SourceCard.getController()).getCards());
+		      		}
+	      		if(Keyword_Details[2].equals("OpponentAllCards") || Keyword_Details[2].equals("AllCards")) {
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(SourceCard.getController())).getCards());
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Hand, AllZone.GameAction.getOpponent(SourceCard.getController())).getCards());
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Graveyard, AllZone.GameAction.getOpponent(SourceCard.getController())).getCards());
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Library, AllZone.GameAction.getOpponent(SourceCard.getController())).getCards());
+	      			Cards_inZone.addAll(AllZone.getZone(Constant.Zone.Removed_From_Play, AllZone.GameAction.getOpponent(SourceCard.getController())).getCards());
+		      		}
+	      		if(Keyword_Details[2].equals("Self")) {
+		      		Cards_inZone.add(SourceCard);
+		      		}
+	      		if(Keyword_Details[2].equals("Enchanted Permanent")) {
+	      			CardList CardsinPlay = new CardList();
+	      			CardsinPlay.addAll(AllZone.Human_Play.getCards());
+	      			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
+		      		for(int i = 0; i < CardsinPlay.size(); i++)
+		      		if(CardsinPlay.get(i).getEnchantedBy().contains(SourceCard)) Cards_inZone.add(CardsinPlay.get(i));
+		      		}
+	      		if(Keyword_Details[2].equals("Eqiupped Permanent")) {
+	      			CardList CardsinPlay = new CardList();
+	      			CardsinPlay.addAll(AllZone.Human_Play.getCards());
+	      			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
+		      		for(int i = 0; i < CardsinPlay.size(); i++)
+		      		if(CardsinPlay.get(i).getEquippedBy().contains(SourceCard)) Cards_inZone.add(CardsinPlay.get(i));
+		      		}
+			return Cards_inZone;
+		}
+		
+		int[] SetPTBonus (Card SourceCard, String[] Keyword_Details) {
+			/**
+			 	This Function determines the value of SetPT Bonuses and sends it to addKeyword
+			 	It calls AffectedCards, to get the cards which would determine the value of the SetPT Bonus 
+			 	and then uses special conditions to determine the proper value.
+			**/
+			 
+			int[] Bonus = new int[2];
+			String[] CardsinZoneDetails = new String[3];
+			CardsinZoneDetails[2] = Keyword_Details[4]; // Where to search for Cards MUST be the only special condition
+			final String[] Details = Keyword_Details[3].split("/");
+			for(int i =0; i < Details.length - 1; i++) {
+				final int[] Count = new int[1];
+				if(Details[i+1].contains("Type") && !Details[i+1].contains("NonType")) {
+					CardList Cards_inZone = AffectedCards(SourceCard, CardsinZoneDetails);
+      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            if(c.getType().contains(Details[Count[0] + 1].replaceFirst("Type.", ""))) return true;
+                            return false;
+			}
+      				});
+      				Bonus[i] = Cards_inZone.size();
+				}
+				if(Details[i+1].contains("NonType")) {
+					CardList Cards_inZone = AffectedCards(SourceCard, CardsinZoneDetails);
+      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            if(!c.getType().contains(Details[Count[0] + 1].replaceFirst("NonType.", ""))) return true;
+                            return false;
+			}
+      				});
+      				Bonus[i] = Cards_inZone.size();
+				}
+				if(Details[i+1].contains("Color") && !Details[i+1].contains("NonColor")) {
+					CardList Cards_inZone = AffectedCards(SourceCard, CardsinZoneDetails);
+      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            if(CardUtil.getColors(c).contains(Details[Count[0] + 1].replaceFirst("Color.", ""))) return true;
+                            return false;
+                        }
+            		});	
+      				Bonus[i] = Cards_inZone.size();
+				}
+				if(Details[i+1].contains("NonColor")) {
+					CardList Cards_inZone = AffectedCards(SourceCard, CardsinZoneDetails);
+      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            if(!CardUtil.getColors(c).contains(Details[Count[0] + 1].replaceFirst("NonColor.", ""))) return true;
+                            return false;
+                        }
+            		});	;
+      				Bonus[i] = Cards_inZone.size();
+				}
+				if(Details[i+1].equals("NoModifier")) {
+					Bonus[i] = -9001; // Failsafe
+				}
+				Count[0]++;
+			}
+			return Bonus;
+		}
+	};
+	
 	public static Command Undead_Warchief           = new Command() {
 		private static final long serialVersionUID   = 5835056455026735693L;
 

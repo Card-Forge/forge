@@ -535,6 +535,7 @@ public class GameAction {
 	        }
 	        
 	        GameActionUtil.executeCardStateEffects();
+	        GameActionUtil.StaticEffectKeyword.execute();
 	        
 	        //System.out.println("checking state effects");
 	        ArrayList<Card> creature = PlayerZoneUtil.getCardType(AllZone.Computer_Play, "Creature");
@@ -710,7 +711,8 @@ public class GameAction {
     }
     
     // Whenever Keyword
-    public void CheckWheneverKeyword(Card Triggering_Card,String Event, Object[] Custom_Parameters) { 
+    public void CheckWheneverKeyword(Card Triggering_Card,String Event, Object[] Custom_Parameters) {
+    	checkStateEffects();
         PlayerZone Hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
         PlayerZone Cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
         PlayerZone Hgrave = AllZone.getZone(Constant.Zone.Graveyard, Constant.Player.Human);
@@ -2433,6 +2435,7 @@ public class GameAction {
     }
     
     boolean Start_Cut = false;
+    boolean StaticEffectKeywordReset = true;
     public void newGame(Deck humanDeck, Deck computerDeck) {
 //    AllZone.Computer = new ComputerAI_Input(new ComputerAI_General());
         Constant.Quest.fantasyQuest[0] = false;
@@ -2476,6 +2479,7 @@ public class GameAction {
         AllZone.InputControl.resetInput();
         
         AllZone.StaticEffects.reset();
+        StaticEffectKeywordReset = true;
         
         Computer_Cleanup.clearHandSizeOperations();
         Input_Cleanup.clearHandSizeOperations();

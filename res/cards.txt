@@ -1,3 +1,52 @@
+Reckless One
+3 R
+Creature  Goblin Avatar
+no text
+1/1
+Haste
+StaticEffect:Play:Self:SetPT/Type.Goblin/Type.Goblin:Permanents you Control:Reckless One's power and toughness are each equal to the number of Goblins on the battlefield.
+
+Balefire Liege
+2 RW RW RW
+Creature Spirit Horror
+no text
+2/4
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.red!NotSelf:Other red creatures you control get +1/+1.
+StaticEffect:Play:Permanents you Control:PTBonus/1/1:Color.white!NotSelf:Other white creatures you control get +1/+1.
+WheneverKeyword:CastSpell/Controller:Color/red:Play:Damage/3:NormalInput/Player:ASAP:No_Condition:No Special Condition:Whenever you cast a red spell, Balefire Liege deals 3 damage to target player.
+WheneverKeyword:CastSpell/Controller:Color/white:Play:ModifyLife/3:ControllingPlayer_Initiator:ASAP:No_Condition:No Special Condition:Whenever you cast a white spell, you gain 3 life.
+
+Ascendant Evincar
+4 B B
+Legendary Creature Vampire
+no text
+3/3
+Flying
+StaticEffect:Play:All Permanents:PTBonus/1/1:Color.black!NotSelf:Other black creatures get +1/+1.
+StaticEffect:Play:All Permanents:PTBonus/-1/-1:NonColor.black:Nonblack creatures get -1/-1.
+
+Akki Underling
+1 R
+Creature Goblin Warrior
+no text
+2/1
+StaticEffect:Play:Self:PTBonus/2/1!Keyword/First Strike:CardsInHandMore/7:As long as you have seven or more cards in hand, Akki Underling gets +2/+1 and has first strike.
+
+Shadow Sliver
+2 U
+Creature Sliver
+no text
+1/1
+StaticEffect:Play:All Permanents:Keyword/Shadow:Type.Sliver:All Sliver creatures have shadow. (They can block or be blocked by only creatures with shadow.)
+
+Quick Sliver
+1 G
+Creature Sliver
+no text
+1/1
+Flash
+StaticEffect:Play:AllCards:Keyword/Flash:Type.Sliver:Any player may play Sliver cards as though they had flash.
+
 Keldon Halberdier
 4 R
 Creature - Human Warrior

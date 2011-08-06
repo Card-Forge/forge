@@ -38,6 +38,12 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+reckless_one.jpg					http://www.wizards.com/global/images/magic/general/reckless_one.jpg
+balefire_liege.jpg					http://www.wizards.com/global/images/magic/general/balefire_liege.jpg
+ascendant_evincar.jpg				http://www.wizards.com/global/images/magic/general/ascendant_evincar.jpg
+akki_underling.jpg					http://www.wizards.com/global/images/magic/general/akki_underling.jpg
+shadow_sliver.jpg					http://www.wizards.com/global/images/magic/general/shadow_sliver.jpg
+quick_sliver.jpg					http://www.wizards.com/global/images/magic/general/quick_sliver.jpg
 ancestral_vision.jpg              	http://www.wizards.com/global/images/magic/general/ancestral_vision.jpg
 duskrider_peregrine.jpg				http://www.wizards.com/global/images/magic/general/duskrider_peregrine.jpg
 errant_ephemeron.jpg              	http://www.wizards.com/global/images/magic/general/errant_ephemeron.jpg

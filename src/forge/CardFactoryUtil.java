@@ -2765,9 +2765,10 @@ public class CardFactoryUtil {
             
             @Override
             public void selectPlayer(String player) {
-                command.execute();
-                
+            	 // Swapped the next two lines of code around, helps the WheneverKeyword work properly but not sure 
+            	 // if it causes other cards to malfunction
                 spell.setTargetPlayer(player);
+                command.execute();
                 if(spell.getManaCost().equals("0") || this.isFree()) {
                     this.setFree(false);
                     AllZone.Stack.add(spell, spell.getSourceCard().getManaCost().contains("X"));
