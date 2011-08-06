@@ -18,65 +18,9 @@ public class CardFactory_Sorceries {
     public static Card getCard(final Card card, final String cardName, Player owner) 
     {
     
-    	 //*************** START *********** START **************************
-        if(cardName.equals("Timetwister") || cardName.equals("Time Reversal")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 505983020365091226L;
-                
-                @Override
-                public void resolve() {
-                    discardDraw7(AllZone.HumanPlayer);
-                    discardDraw7(AllZone.ComputerPlayer);
-                    
-                    if (cardName.equals("Time Reversal"))
-                    	AllZone.GameAction.exile(card);
-                }//resolve()
-                
-                void discardDraw7(Player player) {
-                    // Move hand into library
-                	CardList hand = AllZoneUtil.getPlayerHand(player);
-                	CardList grave = AllZoneUtil.getPlayerGraveyard(player);
-                	
-                	for(Card c : hand)
-                		AllZone.GameAction.moveToLibrary(c);
-                	
-                	 // Move graveyard into library
-                	for(Card c : grave)
-                		AllZone.GameAction.moveToLibrary(c);
-
-                    // Shuffle library
-                    player.shuffle();
-                    
-                    // Draw seven cards
-                    player.drawCards(7);
-                }
-                
-                // Simple, If computer has two or less playable cards remaining in hand play Timetwister
-                @Override
-                public boolean canPlayAI() {
-                    Card[] c = removeLand(AllZone.Computer_Hand.getCards());
-                    return 2 >= c.length;
-                }
-                
-                Card[] removeLand(Card[] in) {
-                    CardList c = new CardList(in);
-                    c = c.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return !c.isLand();
-                        }
-                    });
-                    return c.toArray();
-                }//removeLand()
-                
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
-        
-
+    	 
         //*************** START *********** START **************************
-        else if(cardName.equals("Molten Rain")) {
+        if(cardName.equals("Molten Rain")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 8855786097956610090L;
                 
