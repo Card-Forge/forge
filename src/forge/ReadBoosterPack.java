@@ -161,6 +161,24 @@ public class ReadBoosterPack implements NewConstants {
     	for(int i = 0; i < numberCommons; i++)
             list.add(getRandomCard(commonList));
     	
+    	for (int i = 0;i<10;i++)
+    	{
+	    	list.add(AllZone.CardFactory.getCard("Forest", Constant.Player.Human));
+	        list.add(AllZone.CardFactory.getCard("Island", Constant.Player.Human));
+	        list.add(AllZone.CardFactory.getCard("Plains", Constant.Player.Human));
+	        list.add(AllZone.CardFactory.getCard("Mountain", Constant.Player.Human));
+	        list.add(AllZone.CardFactory.getCard("Swamp", Constant.Player.Human));
+    	}
+    	
+    	for (int i = 0;i<5;i++)
+    	{
+    		list.add(AllZone.CardFactory.getCard("Snow-Covered Forest", Constant.Player.Human));
+            list.add(AllZone.CardFactory.getCard("Snow-Covered Island", Constant.Player.Human));
+            list.add(AllZone.CardFactory.getCard("Snow-Covered Plains", Constant.Player.Human));
+            list.add(AllZone.CardFactory.getCard("Snow-Covered Mountain", Constant.Player.Human));
+            list.add(AllZone.CardFactory.getCard("Snow-Covered Swamp", Constant.Player.Human));
+    	}
+    	
     	return list;
     }
     
