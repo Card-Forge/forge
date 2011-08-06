@@ -1,0 +1,10 @@
+Name:Deathmark Prelate
+ManaCost:3 B
+Types:Creature Human Cleric
+Text:no text
+PT:2/3
+A:AB$Destroy|Cost$2 B T Sac<1/Zombie>|ValidTgts$Creature.nonZombie|TgtPrompt$Select target non-Zombie creature|SorcerySpeed$True|NoRegen$True|SpellDescription$Destroy target non-Zombie creature. It can't be regenerated. Activate this ability only any time you could cast a sorcery.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathmark_prelate.jpg
+End
