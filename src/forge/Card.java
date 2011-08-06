@@ -939,6 +939,10 @@ public class Card extends MyObservable {
         return res;
     }
     
+    public void clearFirstSpellAbility(){
+    	spellAbility.remove(0);
+    }
+    
     public void clearSpellAbility() {
         spellAbility.clear();
         manaAbility.clear();
@@ -950,6 +954,13 @@ public class Card extends MyObservable {
     
     public void clearManaAbility() {
         manaAbility.clear();
+    }
+    
+    
+    public void addFirstSpellAbility(SpellAbility a){
+    	a.setSourceCard(this);
+        if(a instanceof Ability_Mana) manaAbility.add(0, (Ability_Mana) a);
+        else spellAbility.add(0, a);
     }
     
     public void addSpellAbility(SpellAbility a) {

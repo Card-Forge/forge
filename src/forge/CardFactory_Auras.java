@@ -2073,13 +2073,13 @@ class CardFactory_Auras {
                 if (k.length > 2)    {    spDesc[0] = k[2].trim();    }    // Use the spell and stack descriptions included
                 if (k.length > 3)    {    stDesc[0] = k[3].trim();    }    // with the keyword if they are present.
                 
-                card.clearSpellAbility();
+                card.clearFirstSpellAbility();
                 
                 if (! curse[0]) {
-                    card.addSpellAbility(CardFactoryUtil.enPump_Enchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
+                    card.addFirstSpellAbility(CardFactoryUtil.enPump_Enchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
                 }
                 else {
-                    card.addSpellAbility(CardFactoryUtil.enPumpCurse_Enchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
+                    card.addFirstSpellAbility(CardFactoryUtil.enPumpCurse_Enchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
                 }
                 card.addEnchantCommand(CardFactoryUtil.enPump_onEnchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
                 card.addUnEnchantCommand(CardFactoryUtil.enPump_unEnchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));

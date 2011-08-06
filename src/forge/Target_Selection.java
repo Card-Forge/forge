@@ -1,5 +1,7 @@
 package forge;
 
+import java.util.ArrayList;
+
 public class Target_Selection {
 	private Target target = null;
 	private SpellAbility ability = null;
@@ -65,10 +67,18 @@ public class Target_Selection {
 
 			@Override
 	        public void showMessage() {
-				String zone = select.getTgt().getZone();
+				Target tgt = select.getTgt();
+				String zone = tgt.getZone();
 				
-				CardList choices = AllZoneUtil.getCardsInZone(zone).getValidCards(Tgts, sa.getActivatingPlayer() , sa.getSourceCard());
-
+				CardList choices = AllZoneUtil.getCardsInZone(zone).getValidCards(Tgts, sa.getActivatingPlayer(), sa.getSourceCard());
+				
+				// Remove cards already targeted
+				ArrayList<Card> targeted = tgt.getTargetCards();
+				for(Card c : targeted){
+					if (choices.contains(c))
+						choices.remove(c);
+				}
+				
 				if (zone.equals(Constant.Zone.Play)){
 		            boolean canTargetPlayer = false;
 		            for(String s : Tgts)

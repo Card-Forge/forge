@@ -84,9 +84,13 @@ public class AbilityFactory_Bounce {
 		 
 		 StringBuilder sbTargets = new StringBuilder();
 		 
-		 ArrayList<Card> tgts = af.getAbTgt().getTargetCards();
-		 if (tgts.size() == 0)
+		 ArrayList<Card> tgts;
+		 if (af.getAbTgt() != null)
+			 tgts = af.getAbTgt().getTargetCards();
+		 else{
+			 tgts = new ArrayList<Card>();
 			 tgts.add(af.getHostCard());
+		 }
 		 
 		 for(Card c : tgts) {
 			 sbTargets.append(" ");
