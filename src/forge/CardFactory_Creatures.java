@@ -7288,7 +7288,8 @@ public class CardFactory_Creatures {
 	      }//*************** END ************ END **************************
 
 
-
+	    /*
+	    
 	      //*************** START *********** START **************************
 	      else if(cardName.equals("Timberwatch Elf"))
 	      {
@@ -7368,9 +7369,7 @@ public class CardFactory_Creatures {
 
 	        ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility(ability));
 	      }//*************** END ************ END **************************
-
-
-
+			*/
 
 	      //*************** START *********** START **************************
 	      else if(cardName.equals("Mad Auntie"))
@@ -18318,7 +18317,7 @@ public class CardFactory_Creatures {
 		     //*************** START *********** START **************************
 	          else if(cardName.equals("Cathartic Adept"))
 	          {
-	            final SpellAbility a1 = new Ability_Tap(card, "0")
+	            final Ability_Tap a1 = new Ability_Tap(card)
 	            {
 					private static final long serialVersionUID = 2359247592519063187L;
 
@@ -18342,8 +18341,6 @@ public class CardFactory_Creatures {
 	                       }
 	               
 	               }
-	             
-	             
 	               public boolean canPlayAI()
 	               {
 	                  String player = getTargetPlayer();
@@ -18352,11 +18349,23 @@ public class CardFactory_Creatures {
 	                   return libList.size() > 0;
 	               }
 	            };//SpellAbility
-	            card.addSpellAbility(a1);
+	           
+	            //not sure why, but this card doesn't seem to want to tap:
+	            final Command tap =  new Command()
+	            {
+					private static final long serialVersionUID = -6290276896549170403L;
+
+					public void execute()
+	            	{
+	            		card.tap();
+	            	}
+	            };
+	            
 	            a1.setDescription("tap: Target player puts the top card of his or her library into his or her graveyard.");
 	            a1.setStackDescription("Player puts the top card of his or her library into his or her graveyard");
-	            a1.setBeforePayMana(new Input_PayManaCost(a1));
-	            a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
+	            //a1.setBeforePayMana(new Input_PayManaCost(a1));
+	            a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1, tap));
+	            card.addSpellAbility(a1);
 	          }//*************** END ************ END **************************
 
 	       

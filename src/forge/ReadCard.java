@@ -87,6 +87,7 @@ public class ReadCard implements Runnable, NewConstants {
             s = readLine();
             if(c.isCreature()) {
                 
+            	//System.out.println("Creature name:" + c.getName());
                 int n = s.indexOf("/");
                 int att = Integer.parseInt(s.substring(0, n));
                 int def = Integer.parseInt(s.substring(n + 1));

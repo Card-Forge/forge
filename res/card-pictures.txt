@@ -18,6 +18,15 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+wooded_foothills.jpg		http://www.wizards.com/global/images/magic/general/wooded_foothills.jpg
+windswept_heath.jpg			http://www.wizards.com/global/images/magic/general/windswept_heath.jpg
+polluted_delta.jpg			http://www.wizards.com/global/images/magic/general/polluted_delta.jpg
+flooded_strand.jpg			http://www.wizards.com/global/images/magic/general/flooded_strand.jpg
+bloodstaind_mire.jpg		http://www.wizards.com/global/images/magic/general/bloodstained_mire.jpg
+verdant_catacombs.jpg		http://www.wizards.com/global/images/magic/general/verdant_catacombs.jpg
+scalding_tarn.jpg			http://www.wizards.com/global/images/magic/general/scalding_tarn.jpg
+marsh_flats.jpg				http://www.wizards.com/global/images/magic/general/marsh_flats.jpg
+arid_mesa.jpg				http://www.wizards.com/global/images/magic/general/arid_mesa.jpg
 serpent_generator.jpg		http://www.wizards.com/global/images/magic/general/serpent_generator.jpg
 pit_scorpion.jpg			http://www.wizards.com/global/images/magic/general/pit_scorpion.jpg
 bridge_from_below.jpg       http://www.wizards.com/global/images/magic/general/bridge_from_below.jpg

@@ -704,7 +704,7 @@ class CardFactory_Lands {
 	             PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
 	             CardList list = new CardList(library.getCards());
 	             list = list.getType("Basic");
-	             if (list.size() > 0 && AllZone.GameAction.isCardInPlay(card))
+	             if (super.canPlay() && list.size() > 0 && AllZone.GameAction.isCardInPlay(card))
 	           	  return true;
 	             else
 	           	 return false;
@@ -796,6 +796,126 @@ class CardFactory_Lands {
 	         ability.setDescription("tap, Sacrifice Terramorphic Expanse: Search your library for a basic land card and put it into play tapped. Then shuffle your library.");
 	         ability.setBeforePayMana(runtime);
 	       }//*************** END ************ END **************************
+	    
+	    
+	       //*************** START *********** START **************************
+	       else if(cardName.equals("Arid Mesa") || cardName.equals("Marsh Flats") || cardName.equals("Misty Rainforest") || 
+	    		   cardName.equals("Scalding Tarn")  || cardName.equals("Verdant Catacombs") || 
+	    		   cardName.equals("Bloodstained Mire") || cardName.equals("Flooded Strand") || cardName.equals("Polluted Delta") ||
+	    		   cardName.equals("Windswept Heath") || cardName.equals("Wooded Foothills"))
+	       {
+	    	  
+	    	 final String[] land1 = new String[1];
+	    	 final String[] land2 = new String[1];
+	    	 
+	    	 if (cardName.equals("Arid Mesa")) { land1[0] = "Mountain"; land2[0] = "Plains";}
+	    	 else if (cardName.equals("Marsh Flats")) { land1[0] = "Plains"; land2[0] = "Swamp";}
+	    	 else if (cardName.equals("Misty Rainforest")) { land1[0] = "Forest"; land2[0] = "Island";}
+	    	 else if (cardName.equals("Scalding Tarn")) { land1[0] = "Island"; land2[0] = "Mountain";}
+	    	 else if (cardName.equals("Verdant Catacombs")) { land1[0] = "Swamp"; land2[0] = "Forest";}
+	    	 else if (cardName.equals("Bloodstained Mire")) { land1[0] = "Swamp"; land2[0] = "Mountain";}
+	    	 else if (cardName.equals("Flooded Strand")) { land1[0] = "Plains"; land2[0] = "Island";}
+	    	 else if (cardName.equals("Polluted Delta")) { land1[0] = "Island"; land2[0] = "Swamp";}
+	    	 else if (cardName.equals("Windswept Heath")) { land1[0] = "Forest"; land2[0] = "Plains";}
+	    	 else if (cardName.equals("Wooded Foothills")) { land1[0] = "Mountain"; land2[0] = "Forest";}
+	    	 
+	         //tap sacrifice
+	         final Ability_Tap ability = new Ability_Tap(card, "0")
+	         {
+
+			   private static final long serialVersionUID = 6865042319287843154L;
+
+			   public boolean canPlayAI()
+	           {
+	             return false;
+	           }
+	           public void chooseTargetAI()
+	           {
+	             AllZone.GameAction.sacrifice(card);
+	           }
+	           public boolean canPlay()
+	           {
+	             PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+	             CardList list = new CardList(library.getCards());
+	             list = list.filter(new CardListFilter()
+	             {
+	            	public boolean addCard(Card c)
+	            	{
+	            		return c.getType().contains(land1[0]) || c.getType().contains(land2[0]);
+	            	}
+	             });
+	             if (super.canPlay() && list.size() > 0 && AllZone.GameAction.isCardInPlay(card))
+	           	  return true;
+	             else
+	           	  return false;
+	             		
+	           }//canPlay()
+	           public void resolve()
+	           {
+	             if(card.getOwner().equals(Constant.Player.Human))
+	               humanResolve();
+	             //else
+	             //  computerResolve();
+	           }
+
+	           public void humanResolve()
+	           {
+	             PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+	             PlayerZone play    = AllZone.getZone(Constant.Zone.Play   , card.getController());
+
+	             CardList full = new CardList(library.getCards());
+	             CardList land = new CardList(library.getCards());
+	             land = land.filter(new CardListFilter()
+	             {
+	            	 public boolean addCard(Card c)
+	            	 {
+	            		 return c.getType().contains(land1[0]) || c.getType().contains(land2[0]);
+	            	 }
+	             });
+
+	             Object o = AllZone.Display.getChoiceOptional("Choose a " +land1[0] +  " or " + land2[0], full.toArray());
+	             if(o != null)
+	             {
+	               
+	               Card c = (Card)o;
+	               if (land.contains(c))
+	               {	
+	            	   library.remove(c);
+	            	   play.add(c);
+	               }
+	             }
+	             AllZone.GameAction.shuffle(card.getController());
+	           }//resolve()
+	         };//SpellAbility
+
+	         Input runtime = new Input()
+	         {
+
+			   private static final long serialVersionUID = -7328086812286814833L;
+			   boolean once = true;
+	           public void showMessage()
+	           {
+	             //this is necessary in order not to have a StackOverflowException
+	             //because this updates a card, it creates a circular loop of observers
+	             if(once)
+	             {
+	               once = false;
+	               String player = card.getController();
+	               AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+	               AllZone.GameAction.sacrifice(card);
+	               
+	               ability.setStackDescription(card.getController() +" - Search your library for a "+land1[0]+" or "+land2[0]+" card and put it onto the battlefield. Then shuffle your library.");
+	               AllZone.Stack.add(ability);
+
+	               stop();
+	             }
+	           }//showMessage()
+	         };
+	         card.addSpellAbility(ability);
+	         ability.setDescription("Tap, Pay 1 life, Sacrifice " + card.getName() +": Search your library for a "+land1[0]+" or "+land2[0]+" card and put it onto the battlefield. Then shuffle your library.");
+	         ability.setBeforePayMana(runtime);
+	       }//*************** END ************ END **************************
+
 	       
 	     //*************** START *********** START **************************
 	       else if(cardName.equals("Tortuga"))
@@ -2438,6 +2558,7 @@ class CardFactory_Lands {
 
          }//*************** END ************ END **************************
          
+        /*
        //*************** START *********** START **************************
          else if(cardName.equals("Skarrg, the Rage Pits"))
          {
@@ -2536,6 +2657,8 @@ class CardFactory_Lands {
            a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Creature"));
 
          }//*************** END ************ END **************************
+         
+         */
          
        //*************** START *********** START **************************
          else if(cardName.equals("Daru Encampment"))

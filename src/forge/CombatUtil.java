@@ -1804,7 +1804,7 @@ public class CombatUtil
 		  AllZone.EndOfCombat.addAt(atEOC);
 	  }
 	  
-	  else if (b.getName().equals("AEther Membrane") )
+	  else if (b.getName().equals("AEther Membrane") || b.getName().equals("Aether Membrane") )
 	  {
 		  final Card attacker = a;
 		  final Ability ability = new Ability(b, "0")

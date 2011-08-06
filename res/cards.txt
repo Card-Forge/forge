@@ -1,3 +1,169 @@
+Feral Animist
+1 R G
+Creature Goblic Shaman
+no text
+2/1
+abPump 3:Count$CardPower/+0:Feral Animist gets +X/+0 until end of turn, where X is its power.
+
+Fire-Belly Changeling
+1 R
+Creature Shapeshifter
+Play this ability no more than twice each turn.
+1/1
+abPump R:+1/+0
+
+Kitsune Loreweaver
+1 W
+Creature Fox Cleric
+no text
+2/1
+abPump 1 W:+0/Count$NumCardsInYourHand:Kitsune Loreweaver get +0/+X until end of turn, where X is the number of cards in your hand.
+
+Knight of the Skyward Eye
+1 W
+Creature Human Knight
+Play this ability only once each turn.
+2/2
+abPump 3 G:+3/+3
+
+Power Armor
+4
+Artifact
+Domain
+abPumpTgt 3 T:Count$Domain/Count$Domain:Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
+
+Seedcradle Witch
+GW
+Creature Elf Shaman
+no text
+1/1
+abPumpTgt 2 G W:+3/+3:Drawback$UntapTgt:Target creature gets +3/+3 until end of turn. Untap that creature.
+
+Stormcloud Djinn
+4 U
+Creature Djinn
+no text
+3/3
+Flying
+This creature can block only creatures with flying.
+abPump R R:+2/+0:Drawback$DamageYou/1:Stormcloud Djinn gets +2/+0 until end of turn and deals 1 damage to you.
+
+Timberwatch Elf
+2 G
+Creature Elf
+no text
+1/2
+abPumpTgt T:Count$TypeOnBattlefield.Elf/Count$TypeOnBattlefield.Elf:Target creature get +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+Wandering Goblins
+2 R
+Creature Goblin Warrior
+Domain
+0/3
+abPump 3:Count$Domain/+0:Wandering Goblins gets +1/+0 until end of turn for each basic land type among lands you control.
+
+Rappelling Scouts
+2 W W
+Creature Human Rebel Scout
+no text
+1/4
+Flying
+abPumpTgt 2 W:Protection from white
+abPumpTgt 2 W:Protection from blue
+abPumpTgt 2 W:Protection from black
+abPumpTgt 2 W:Protection from red
+abPumpTgt 2 W:Protection from green
+
+Jodah's Avenger
+5 U
+Creature Shapeshifter
+no text
+4/4
+abPump 0:-1/-1/Double Strike
+abPump 0:-1/-1/Protection from red
+abPump 0:-1/-1/Vigilance
+abPump 0:-1/-1/Shadow
+
+Wormwood Dryad
+2 G
+Creature Dryad
+no text
+3/1
+abPump G:Forestwalk:Drawback$DamageYou/1:Wormwood Dryad gains forestwalk until end of turn and deals 1 damage to you.
+abPump B:Swampwalk:Drawback$DamageYou/1:Wormwood Dryad gains swampwalk until end of turn and deals 1 damage to you.
+
+Wormwood Treefolk
+3 G G
+Creature Treefolk
+no text
+4/4
+abPump G G:Forestwalk:Drawback$DamageYou/2:Wormwood Dryad gains forestwalk until end of turn and deals 2 damage to you.
+abPump B B:Swampwalk:Drawback$DamageYou/2:Wormwood Dryad gains swampwalk until end of turn and deals 2 damage to you.
+
+Auriok Bladewarden
+1 W
+Creature Human Soldier
+no text
+1/1
+abPumpTgt T:Count$CardPower/Count$CardPower:Target creature get +X/+X until end of turn, where X is Auriok Bladewarden's power.
+
+Boreal Centaur
+1 G
+Snow Creature Centaur Warrior
+Play this ability only once each turn.
+2/2
+abPump S:+1/+1
+
+Wooded Foothills
+no cost
+Land
+no text
+
+Windswept Heath
+no cost
+Land
+no text
+
+Polluted Delta
+no cost
+Land
+no text
+
+Flooded Strand
+no cost
+Land
+no text
+
+Bloodstained Mire
+no cost
+Land
+no text
+
+Verdant Catacombs
+no cost
+Land
+no text
+
+Scalding Tarn
+no cost
+Land
+no text
+
+Misty Rainforest
+no cost
+Land
+no text
+
+Marsh Flats
+no cost
+Land
+no text
+
+Arid Mesa
+no cost
+Land
+no text
+
 Serpent Generator
 6
 Artifact
@@ -1119,6 +1285,7 @@ no cost
 Land
 no text
 tap: add 1
+abPumpTgt R G T:+1/+1/Trample
 
 Goblin Burrows
 no cost
@@ -6060,6 +6227,7 @@ no text
 4/4
 Changeling
 Protection from black
+abPump 2 G G:Count$CardPower/Count$CardPower:Chameleon Colossus gets +X/+X until end of turn, where X is its power.
 
 Rakdos Pit Dragon
 2 R R
@@ -14259,12 +14427,6 @@ Wild Mongrel
 Creature Hound
 (NOTE: " and becomes color of your choice." not implemented.)
 2/2
-
-Timberwatch Elf
-2 G
-Creature Elf
-no text
-1/2
 
 Wirewood Elf
 1 G

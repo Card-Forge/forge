@@ -2453,7 +2453,14 @@ public class CardFactoryUtil
          else
             return doXMath(Integer.parseInt(sq[2]), m);    // not Hellbent
 
-    
+      // Count$CardPower
+      if (sq[0].contains("CardPower"))
+         return doXMath(c.getNetAttack(), m);
+      // Count$CardToughness
+      if (sq[0].contains("CardToughness"))
+         return doXMath(c.getNetDefense(), m);
+      
+      
       //Generic Zone-based counting
      // Count$QualityAndZones.Subquality
      
@@ -2725,6 +2732,9 @@ public class CardFactoryUtil
      if (d[0].contains("Draw"))
         for (int i=0; i < X; i++)
            AllZone.GameAction.drawCard(dbPlayer);
+     
+     if (d[0].contains("UntapTgt"))
+         TgtC.untap();
     
      if (d[0].contains("GenToken")) // placeholder for effect
         X = X + 0;
