@@ -8919,37 +8919,6 @@ public class GameActionUtil {
 			}// for
 		}// execute
 	}; // Ajani Avatar
-
-	public static Command Windwright_Mage             = new Command() {
-		private static final long serialVersionUID = 7208941897570511298L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Windwright Mage");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card card = list.get(i);
-
-				Player player = card.getController();
-				PlayerZone graveyard = AllZone.getZone(
-						Constant.Zone.Graveyard, player);
-
-				CardList artifacts = new CardList(
-						graveyard.getCards());
-				artifacts = artifacts.getType("Artifact");
-
-				if(artifacts.size() > 0) {
-					if(!card.getKeyword().contains("Flying")) {
-						card.addExtrinsicKeyword("Flying");
-					}
-				} else {
-					// this is tricky, could happen that flying is wrongfully
-					// removed... not sure?
-							card.removeExtrinsicKeyword("Flying");
-				}
-
-			}// for
-		}// execute
-	}; // Windwright Mage
 	
 	public static Command Old_Man_of_the_Sea = new Command() {
 		private static final long serialVersionUID = 8076177362922156784L;
@@ -10083,7 +10052,6 @@ public class GameActionUtil {
 		commands.put("Tarmogoyf", Tarmogoyf);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);
-		commands.put("Windwright_Mage", Windwright_Mage);
 		
 		///The commands above are in alphabetical order by cardname.
 	}
