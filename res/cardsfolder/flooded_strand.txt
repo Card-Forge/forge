@@ -2,7 +2,7 @@ Name:Flooded Strand
 ManaCost:no cost
 Types:Land
 Text:no text
-SVar:RemAIDeck:True
+A:AB$Fetch|Cost$T PayLife<1> Sac<1/CARDNAME>|Destination$Battlefield|FetchType$Plains,Island|FetchNum$1|SpellDescription$Search your library for a Plains or Island card and put it onto the battlefield. Then shuffle your library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flooded_strand.jpg
 End

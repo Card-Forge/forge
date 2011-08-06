@@ -119,6 +119,8 @@ public class AbilityFactory_Fetch {
 	        	Card c;
 	        	if (type.contains("Basic"))
 	        		c = fetchBasicManaFixing(library);
+	        	else if (areAllBasics(type))	// if Searching for only basics, 
+	        		c = fetchBasicManaFixing(library, type);
 	        	else
 	        		c = library.get(0);
 
@@ -145,7 +147,10 @@ public class AbilityFactory_Fetch {
 			if (abCost.getSacCost()){
 				// Sac is ok in general, but should add some decision making based off SacType and Fetch Type
 			}
-			if (abCost.getLifeCost())	 	return false;
+			if (abCost.getLifeCost()){
+				if (AllZone.Computer_Life.getLife() < 5)
+					return false;
+			}
 			if (abCost.getDiscardCost()) 	return false;
 			
 			if (abCost.getSubCounter()) 	return false;
@@ -159,7 +164,8 @@ public class AbilityFactory_Fetch {
 		// prevent run-away activations - first time will always return true
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
 		
-		// todo: add more decision making if Fetch is used for things other than Lands. 
+		// todo: add more decision making for Fetching
+		// if Type is Land or a Land Type, improve chances for each Landfall card you control
 		
 		return ((r.nextFloat() < .8) && chance);
 	}
@@ -171,7 +177,7 @@ public class AbilityFactory_Fetch {
 		return list;
 	}
 	
-	private static Card fetchBasicManaFixing(CardList list){
+	private static Card fetchBasicManaFixing(CardList list){	// Search for a Basic Land
         CardList combined = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
         combined.add(AllZoneUtil.getPlayerHand(Constant.Player.Computer));
         
@@ -189,7 +195,7 @@ public class AbilityFactory_Fetch {
         String minType = null;
         
         for(int i = 0; i < basics.size(); i++){
-        	String b = basics.get(0);
+        	String b = basics.get(i);
         	int num = combined.getType(names[i]).size();
         	if (num < minSize){
         		minType = b;
@@ -203,5 +209,52 @@ public class AbilityFactory_Fetch {
         return list.get(0);
 	}
 	
+	private static Card fetchBasicManaFixing(CardList list, String type){	// type = basic land types
+        CardList combined = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+        combined.add(AllZoneUtil.getPlayerHand(Constant.Player.Computer));
+        
+        String names[] = type.split(",");
+        ArrayList<String> basics = new ArrayList<String>();
+
+        // what types can I go get?
+        for(int i = 0; i < names.length; i++){
+        	if (list.getType(names[i]).size() != 0)
+        		basics.add(names[i]);
+        }
+        
+        // Which basic land is least available from hand and play, that I still have in my deck
+        int minSize = Integer.MAX_VALUE;
+        String minType = null;
+        
+        for(int i = 0; i < basics.size(); i++){
+        	String b = basics.get(i);
+        	int num = combined.getType(names[i]).size();
+        	if (num < minSize){
+        		minType = b;
+        		minSize = num;
+        	}
+        }
+        
+        if (minType != null)
+        	list = list.getType(minType);
+        
+        return list.get(0);
+	}
 	
+	private static boolean areAllBasics(String types){
+		String[] split = types.split(",");
+        String names[] = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
+        boolean[] bBasic = new boolean[split.length];
+        
+        for(String s : names){
+        	for(int i = 0; i < split.length; i++)
+        		bBasic[i] |= s.equals(split[i]);        		
+        }
+		
+    	for(int i = 0; i < split.length; i++)
+    		if (!bBasic[i])
+    			return false;
+
+        return true;
+	}
 }

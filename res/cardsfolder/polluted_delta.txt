@@ -2,7 +2,7 @@ Name:Polluted Delta
 ManaCost:no cost
 Types:Land
 Text:no text
-SVar:RemAIDeck:True
+A:AB$Fetch|Cost$T PayLife<1> Sac<1/CARDNAME>|Destination$Battlefield|FetchType$Island,Swamp|FetchNum$1|SpellDescription$Search your library for a Island or Swamp card and put it onto the battlefield. Then shuffle your library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/polluted_delta.jpg
 End

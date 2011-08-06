@@ -2,7 +2,7 @@ Name:Bloodstained Mire
 ManaCost:no cost
 Types:Land
 Text:no text
-SVar:RemAIDeck:True
+A:AB$Fetch|Cost$T PayLife<1> Sac<1/CARDNAME>|Destination$Battlefield|FetchType$Swamp,Mountain|FetchNum$1|SpellDescription$Search your library for a Swamp or Mountain card and put it onto the battlefield. Then shuffle your library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodstained_mire.jpg
 End
