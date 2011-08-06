@@ -12222,9 +12222,7 @@ public class GameActionUtil {
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
-				if(oppLess10Life(c)
-						&& !c.getIntrinsicKeyword().contains(
-								"Haste")) c.addIntrinsicKeyword("Haste");
+				if(oppLess10Life(c) == true && !c.getIntrinsicKeyword().contains("Haste")) c.addIntrinsicKeyword("Haste");
 				else c.removeIntrinsicKeyword("Haste");
 			}
 		}// execute()
