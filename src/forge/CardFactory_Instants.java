@@ -39,9 +39,9 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
+        /*
         //*************** START ********** START *************************
-        else if(cardName.equals("Regenerate") /*|| cardName.equals("Death Ward")*/)
+        else if(cardName.equals("Regenerate") /*|| cardName.equals("Death Ward")*)
           {
           	card.clearSpellAbility();
           	final Card[] tgt = new Card[1];
@@ -89,6 +89,7 @@ public class CardFactory_Instants {
               card.addSpellAbility(spell);            
               
           }//*************** END ************ END ************************** 
+          */
     
         //*************** START *********** START **************************
         else if (cardName.equals("Brave the Elements")) {

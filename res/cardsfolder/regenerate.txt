@@ -1,7 +1,8 @@
 Name:Regenerate
 ManaCost:1 G
 Types:Instant
-Text:Regenerate target creature.
+Text:no text
+A:SP$Regenerate|Cost$W|Tgt$TgtC|SpellDescription$Regenerate target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/regenerate.jpg
 End
