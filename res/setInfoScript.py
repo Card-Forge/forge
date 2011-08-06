@@ -143,6 +143,8 @@ def addSets(card):
 	end = html.find('<br><u><b>Languages:</b></u><br>', start)
 	block = html[start:end]
 	
+	print card.name
+	
 	for edition in allSets.keys():
 		edIndex = block.find(edition+'<')
 		if edIndex == -1:
