@@ -497,6 +497,7 @@ public class GenerateConstructedMultiColorDeck
     remove.add("Heart of Ramos");
     remove.add("Eye of Ramos");
     remove.add("Forbidden Orchard");
+    remove.add("Everflowing Chalice");
    
     
     final ArrayList<Card> goodLand = new ArrayList<Card>();
