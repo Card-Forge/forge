@@ -4,6 +4,7 @@ Types:Creature Bringer
 Text:At the beginning of your upkeep, you may draw two cards.
 PT:5/5
 K:Trample
+SVar:AltCost:W U B R G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_blue_dawn.jpg
 End

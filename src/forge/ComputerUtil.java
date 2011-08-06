@@ -188,7 +188,10 @@ public class ComputerUtil
        land.remove(sa.getSourceCard());
     }
  // Beached - Delete old
-    ManaCost cost = AllZone.GameAction.GetSpellCostChange(sa);
+    String mana = sa.getPayCosts() != null ? sa.getPayCosts().getMana() : sa.getManaCost();
+    ManaCost cost = new ManaCost(mana);
+    
+    cost = AllZone.GameAction.GetSpellCostChange(sa, cost);
     if(cost.isPaid())
         return canPayAdditionalCosts(sa);
  // Beached - Delete old
@@ -377,7 +380,10 @@ public class ComputerUtil
     {
        land.remove(sa.getSourceCard());
     }
-    ManaCost cost = AllZone.GameAction.GetSpellCostChange(sa);
+    
+    String mana = sa.getPayCosts() != null ? sa.getPayCosts().getMana() : sa.getManaCost();
+    
+    ManaCost cost = AllZone.GameAction.GetSpellCostChange(sa, new ManaCost(mana));
     // Beached - Delete old
     if(cost.isPaid())
         return;

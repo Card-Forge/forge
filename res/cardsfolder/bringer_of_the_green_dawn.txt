@@ -4,6 +4,7 @@ Types:Creature Bringer
 Text:At the beginning of your upkeep, you may put a 3/3 green Beast creature token into play.
 PT:5/5
 K:Trample
+SVar:AltCost:W U B R G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_green_dawn.jpg
 End

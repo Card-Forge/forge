@@ -23,7 +23,8 @@ public class Input_PayCostMana extends Input {
         	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 	manaCost = new ManaCost("0"); 
         	} else {
-        		manaCost = AllZone.GameAction.GetSpellCostChange(sa); 
+    		    String mana = payment.getCost().getMana();
+        		manaCost = AllZone.GameAction.GetSpellCostChange(sa, new ManaCost(mana)); 
         	}    	
         }
         else

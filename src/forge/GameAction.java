@@ -3207,12 +3207,12 @@ public class GameAction {
     
     int CostCutting_GetMultiMickerManaCostPaid = 0;
     String CostCutting_GetMultiMickerManaCostPaid_Colored = "";
-    public ManaCost GetSpellCostChange(SpellAbility sa) {
+    public ManaCost GetSpellCostChange(SpellAbility sa, ManaCost originalCost) {
     	// Beached
         Card  originalCard = sa.getSourceCard();
-        ManaCost manaCost;
         SpellAbility spell = sa;
-        manaCost = new ManaCost(sa.getManaCost());
+        ManaCost manaCost = new ManaCost(originalCost.toString());
+        
          if(spell.isSpell() == true) {
          if(originalCard.getName().equals("Avatar of Woe")){
  			Player player = AllZone.Phase.getActivePlayer();
@@ -3618,7 +3618,8 @@ public class GameAction {
 	    	if(sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
 	    		manaCost = new ManaCost("0"); 
 	    	} else {
-	    		manaCost = GetSpellCostChange(sa);    		
+	    		
+	    		manaCost = GetSpellCostChange(sa, new ManaCost(sa.getManaCost()));    		
 	    	}      
 	        if(manaCost.isPaid() && sa.getBeforePayMana() == null) {
 	        	if (sa.getAfterPayMana() == null){

@@ -11592,6 +11592,28 @@ public class CardFactory implements NewConstants {
             }
         }//Vanishing
         
+        // AltCost
+		SpellAbility[] abilities = card.getSpellAbility();
+		if (abilities.length > 0){
+			String altCost = card.getSVar("AltCost");
+			SpellAbility sa = abilities[0];
+			if (!altCost.equals("") && sa.isSpell())
+			{
+				SpellAbility altCostSA = sa.copy();
+	
+				Ability_Cost abCost = new Ability_Cost(altCost, card.getName(), altCostSA.isAbility());
+				altCostSA.payCosts = abCost;
+				
+	            StringBuilder sb = new StringBuilder();
+	            
+	            sb.append("You may ").append(abCost.toStringAlt());
+	            sb.append(" rather than pay ").append(card.getName()).append("'s mana cost");
+	            
+	            altCostSA.setDescription(sb.toString());
+	
+	            card.addSpellAbility(altCostSA);
+			}
+		}
         return card;
     }
     

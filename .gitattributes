@@ -1442,6 +1442,7 @@ res/cardsfolder/fire_lit_thicket.txt -text svneol=native#text/plain
 res/cardsfolder/fire_sprites.txt -text svneol=native#text/plain
 res/cardsfolder/fire_tempest.txt -text svneol=native#text/plain
 res/cardsfolder/fireball.txt -text svneol=native#text/plain
+res/cardsfolder/fireblast.txt -text svneol=native#text/plain
 res/cardsfolder/firebolt.txt -text svneol=native#text/plain
 res/cardsfolder/firefly.txt -text svneol=native#text/plain
 res/cardsfolder/fires_of_yavimaya.txt -text svneol=native#text/plain

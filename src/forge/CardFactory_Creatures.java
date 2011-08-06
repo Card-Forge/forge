@@ -10471,40 +10471,6 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Bringer of the Green Dawn") || cardName.equals("Bringer of the Blue Dawn")
-                || cardName.equals("Bringer of the White Dawn")) {
-            final SpellAbility diffCost = new Spell(card) {
-                private static final long serialVersionUID = -1598664186463358630L;
-                
-                @Override
-                public void resolve() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    
-
-                    hand.remove(card);
-                    play.add(card);
-                    //card.comesIntoPlay(); //do i need this?
-                }
-                
-                @Override
-                public boolean canPlay() {
-                    return AllZone.Phase.getActivePlayer().equals(card.getController())
-                            && !AllZone.Phase.getPhase().equals("End of Turn")
-                            && !AllZone.GameAction.isCardInPlay(card) && super.canPlay();
-                }
-                
-            };
-            diffCost.setManaCost("W U B R G");
-            diffCost.setDescription("You may pay W U B R G rather than pay " + card.getName() + "'s mana cost. ");
-            diffCost.setStackDescription(card.getName() + " - Creature 5/5");
-            card.addSpellAbility(diffCost);
-            
-
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Thelonite Hermit")) {
             
             Command turnsFaceUp = new Command() {

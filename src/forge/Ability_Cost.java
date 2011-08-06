@@ -191,8 +191,10 @@ public class Ability_Cost {
 	}
 	
 	public void changeCost(SpellAbility sa){
-		if (manaCost != "0")
-			manaCost = AllZone.GameAction.GetSpellCostChange(sa).toString();
+		if (manaCost != "0"){
+		    String mana = getMana();
+			manaCost = AllZone.GameAction.GetSpellCostChange(sa, new ManaCost(mana)).toString();
+		}
 	}
 	
 	public String toString()
@@ -200,20 +202,31 @@ public class Ability_Cost {
 		if (isAbility)
 			return abilityToString();
 		else
-			return spellToString();
+			return spellToString(true);
 	}
 	
 	// maybe add a conversion method that turns the amounts into words 1=a(n), 2=two etc.
 	
-	private String spellToString() {
-		StringBuilder cost = new StringBuilder("As an additional cost to cast ");
-		cost.append(name);
-		cost.append(", ");
+	public String toStringAlt(){
+		return spellToString(false);
+	}
+	
+	
+	private String spellToString(boolean bFlag) {
+		StringBuilder cost = new StringBuilder();
+		
+		if (bFlag)
+			cost.append("As an additional cost to cast ").append(name).append(", ");
+		
 		boolean first = true;
 
-		if (!(manaCost.equals("0") || manaCost.equals(""))){
+		if (!bFlag){
 			// usually no additional mana cost for spells
 			// only three Alliances cards have additional mana costs, but they are basically kicker/multikicker
+			if (!getMana().equals("") && !getMana().equals("0")){
+				cost.append("pay ").append(getMana());
+				first = false;
+			}
 		}
 		
 		if (tapCost || untapCost){	
@@ -277,7 +290,9 @@ public class Ability_Cost {
 		if (first)
 			return "";
 		
-		cost.append(".").append("\n");
+		if (bFlag)
+			cost.append(".").append("\n");
+		
 		return cost.toString();
 	}
 
