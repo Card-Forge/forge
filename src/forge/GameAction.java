@@ -2090,36 +2090,11 @@ public class GameAction {
             GameActionUtil.executeGrvDestroyCardEffects(grv.get(i), c);
         
         if(persist) {
-            /*
-        	c.setDamage(0);
-            c.untap();
-            PlayerZone ownerPlay = AllZone.getZone(Constant.Zone.Play, c.getOwner());
-            PlayerZone grave = AllZone.getZone(c);
-            
-            if(c.isEquipped()) c.unEquipAllCards();
-            
-            grave.remove(c);
-            ownerPlay.add(c);
-            
-            c.setTempAttackBoost(0);
-            c.setTempDefenseBoost(0);
-            c.setExaltedBonus(false);
-            //reset more stuff ?
-            
-            for(Counters counter:Counters.values())
-                if(c.getCounters(counter) != 0) c.setCounter(counter, 0);
-            
-            c.addCounter(Counters.M1M1, 1);
-            */
-        	
         	PlayerZone ownerPlay = AllZone.getZone(Constant.Zone.Play, c.getOwner());
-            PlayerZone grave = AllZone.getZone(c);
-            grave.remove(c);
-        	
-        	Card crd = AllZone.CardFactory.getCard(c.getName(), c.getOwner());
-        	ownerPlay.add(crd);
-        	
-        	crd.addCounter(Counters.M1M1, 1);
+
+        	ownerPlay.add(c);
+        	moveTo(ownerPlay, c);
+        	c.addCounter(Counters.M1M1, 1);
         }
         
         //if (c.getName().equals("Rancor") || c.getName().equals("Brilliant Halo") || c.getName().equals("Undying Rage"))
