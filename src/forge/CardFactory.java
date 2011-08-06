@@ -3919,7 +3919,7 @@ public class CardFactory implements NewConstants {
          *  
          *  Buyback and X Count/Costs are not yet implemented.
          */
-        if (hasKeyword(card, "etbReturnTgt") != -1) {
+        while (hasKeyword(card, "etbReturnTgt") != -1) {
             int n = hasKeyword(card, "etbReturnTgt");
             
             String parse = card.getKeyword().get(n).toString();
