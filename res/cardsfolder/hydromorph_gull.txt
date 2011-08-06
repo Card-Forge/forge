@@ -5,6 +5,7 @@ Text:no text
 PT:3/3
 K:Flying
 A:AB$Counter | Cost$ U Sac<1/CARDNAME> | Type$ Spell | SpellTarget$ Creature.YouCtrl | SpellDescription$ Counter target spell that targets one or more creatures you control.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hydromorph_gull.jpg
 End
