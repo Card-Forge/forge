@@ -2254,6 +2254,7 @@ res/cardsfolder/faerie_harbinger.txt -text svneol=native#text/plain
 res/cardsfolder/faerie_macabre.txt svneol=native#text/plain
 res/cardsfolder/faerie_noble.txt -text svneol=native#text/plain
 res/cardsfolder/faerie_swarm.txt -text svneol=native#text/plain
+res/cardsfolder/faerie_tauntings.txt -text svneol=native#text/plain
 res/cardsfolder/faerie_trickery.txt -text svneol=native#text/plain
 res/cardsfolder/faith_healer.txt -text svneol=native#text/plain
 res/cardsfolder/fallen_angel.txt -text svneol=native#text/plain

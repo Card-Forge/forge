@@ -149,6 +149,14 @@ public abstract class Trigger {
                 return false;
             }
         }
+        
+        if(mapParams.containsKey("PlayerTurn"))
+            if(!AllZone.Phase.isPlayerTurn(hostCard.getController()))
+                return false;
+        
+        if(mapParams.containsKey("OpponentTurn"))
+            if(AllZone.Phase.isPlayerTurn(hostCard.getController()))
+                return false;
 
         return true;
     }
