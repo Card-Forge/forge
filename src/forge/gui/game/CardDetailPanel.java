@@ -7,9 +7,13 @@
 package forge.gui.game;
 
 
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.Iterator;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -42,6 +46,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
     private JLabel            cdLabel4;
     private JLabel            cdLabel5;
     private JLabel            cdLabel6;
+    private JLabel			  cdLabel7;
     private JTextArea         cdArea;
     
     public CardDetailPanel(Card card) {
@@ -54,11 +59,29 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         cdLabels.add(cdLabel3 = new JLabel());
         cdLabels.add(cdLabel4 = new JLabel());
         cdLabels.add(cdLabel6 = new JLabel());
-        cdLabels.add(cdLabel5 = new JLabel());
+        
+        JPanel IDR = new JPanel(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        
+        c.fill = GridBagConstraints.HORIZONTAL;
+        
+        c.gridwidth = 2;
+        c.weightx = 1.0;
+        IDR.add(cdLabel5 = new JLabel(), c);
+        
+        c.gridwidth = 1;
+        c.weightx = 0.3;
+        IDR.add(cdLabel7 = new JLabel(), c);
+        
+        cdLabels.add(IDR);
+        
         add(cdLabels);
         cdLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         cdLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         cdLabel3.setHorizontalAlignment(SwingConstants.CENTER);
+        //cdLabel7.setSize(100, cdLabel7.getHeight());
+        
+        cdLabel7.setHorizontalAlignment(SwingConstants.CENTER);
         
         add(new JScrollPane(cdArea = new JTextArea(4, 12)));
         cdArea.setLineWrap(true);
@@ -71,6 +94,11 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             cdLabel4.setFont(new java.awt.Font("Dialog", 0, 14));
             cdLabel5.setFont(new java.awt.Font("Dialog", 0, 14));
             cdLabel6.setFont(new java.awt.Font("Dialog", 0, 14));
+            
+            java.awt.Font f = new java.awt.Font("Dialog", 0, 14);
+            f = f.deriveFont(java.awt.Font.BOLD);
+            cdLabel7.setFont(f);
+            
             cdArea.setFont(new java.awt.Font("Dialog", 0, 14));
         }
         
@@ -84,6 +112,9 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         cdLabel4.setText("");
         cdLabel5.setText("");
         cdLabel6.setText("");
+        cdLabel7.setText("");
+        cdLabel7.setOpaque(false);
+        cdLabel7.setBorder(null);
         cdArea.setText("");
         setBorder(GuiDisplayUtil.getBorder(card));
         
@@ -105,8 +136,39 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
         if(card.isPlaneswalker()) cdLabel4.setText("Assigned Damage: " + card.getTotalAssignedDamage());
         
-        cdLabel5.setText("Card ID  " + card.getUniqueNumber() + " " + card.getCurSetCode());
+        cdLabel5.setText("Card ID  " + card.getUniqueNumber());
         
+        cdLabel7.setText(card.getCurSetCode());
+        if (!cdLabel7.getText().equals(""))
+        {
+	        	cdLabel7.setOpaque(true);
+	        String csr = card.getCurSetRarity();
+	        if (csr.equals("Common") || csr.equals("Land"))
+	        {
+	        	cdLabel7.setBackground(Color.BLACK);
+	        	cdLabel7.setForeground(Color.WHITE);
+	        	cdLabel7.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+	        }
+	        else if (csr.equals("Uncommon"))
+	        {
+	        	cdLabel7.setBackground(Color.LIGHT_GRAY);
+	        	cdLabel7.setForeground(Color.BLACK);
+	        	cdLabel7.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	        }
+	        else if (csr.equals("Rare"))
+	        {
+	        	cdLabel7.setBackground(Color.YELLOW);
+	        	cdLabel7.setForeground(Color.BLACK);
+	        	cdLabel7.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	        }
+	        else if (csr.equals("Mythic"))
+	        {
+	        	cdLabel7.setBackground(Color.RED);
+	        	cdLabel7.setForeground(Color.BLACK);
+	        	cdLabel7.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	        }
+	        //cdLabel7.setText(card.getCurSetCode());
+        }
 
         //fill the card text
         
@@ -213,17 +275,6 @@ public class CardDetailPanel extends JPanel implements CardContainer {
                 if(it.hasNext()) area.append(", ");
             }
             area.append("*");
-        }
-        
-        //controlling
-        if(card.getGainControlTargets().size() > 0) {
-        	if(area.length() != 0) area.append("\n");
-        	area.append("+Controlling: ");
-        	for(Iterator<Card> it = card.getGainControlTargets().iterator(); it.hasNext();) {
-        		area.append(it.next());
-        		if(it.hasNext()) area.append(", ");
-        	}
-        	area.append("+");
         }
         
         //uncastable
