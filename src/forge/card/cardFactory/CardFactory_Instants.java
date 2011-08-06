@@ -51,10 +51,13 @@ public class CardFactory_Instants {
                     
                 }//resolve
             };//SpellAbility
+            
             StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" - I do nothing but go to the graveyard.");
             spell.setStackDescription(sb.toString());
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -160,8 +163,11 @@ public class CardFactory_Instants {
                     }//for
 				}//resolve
         	};//SpellAbility
+        	
         	card.setSVar("PlayMain1", "TRUE");
-        	card.clearSpellAbility();
+        	
+        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
+        	card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -220,7 +226,9 @@ public class CardFactory_Instants {
                     AllZone.EndOfTurn.addUntil(untilEOT);
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             card.setSVar("PlayMain1", "TRUE");
@@ -269,7 +277,8 @@ public class CardFactory_Instants {
             
             spell_two.setIsBuyBackAbility(true);
             
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell_one);
             card.addSpellAbility(spell_two);
         }//*************** END ************ END **************************
@@ -389,9 +398,11 @@ public class CardFactory_Instants {
                 }//showMessage()
             };//Input
             
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell_one);
             card.addSpellAbility(spell_two);
+            
             card.setCopiesSpells(true);
             spell_one.setBeforePayMana(runtime1);
             spell_two.setBeforePayMana(runtime2);
@@ -444,7 +455,10 @@ public class CardFactory_Instants {
                     
                 }//showMessage()
             };//Input
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
+            
             card.setCopiesSpells(true);
             card.addSpellAbility(spell);
             spell.setBeforePayMana(runtime);
@@ -564,7 +578,9 @@ public class CardFactory_Instants {
                     return cards.size() >= 10;
                 }
             };//SpellAbility
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -645,7 +661,9 @@ public class CardFactory_Instants {
                     }//in play?
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             card.setSVar("PlayMain1", "TRUE");
@@ -673,7 +691,9 @@ public class CardFactory_Instants {
                 
             };
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             card.setSVar("PlayMain1", "TRUE");
@@ -720,7 +740,8 @@ public class CardFactory_Instants {
                 }//resolve()
             };//SpellAbility
             
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -811,7 +832,9 @@ public class CardFactory_Instants {
             card.setSVar("PlayMain1", "TRUE");
             
             spell.setBeforePayMana(target);
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -853,7 +876,9 @@ public class CardFactory_Instants {
                     }//if
                 }//resolve()
             };
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
@@ -894,7 +919,9 @@ public class CardFactory_Instants {
                     
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             card.setSVar("PlayMain1", "TRUE");
@@ -932,7 +959,9 @@ public class CardFactory_Instants {
 
                 }
             };
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -984,8 +1013,12 @@ public class CardFactory_Instants {
                     });
                 }
             };//SpellAbility
+            
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
+            
             card.addSpellAbility(spell);
             spell.setDescription("Until end of turn, target creature gains \"tap: Return target nonland permanent to its owner's hand.\"");
             spell.setStackDescription("Target creature gains \"tap: Return target nonland permanent to its owner's hand.\"");
@@ -1095,7 +1128,9 @@ public class CardFactory_Instants {
                     return creature.size() >= 3;
                 }
             };//SpellAbility
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -1115,7 +1150,9 @@ public class CardFactory_Instants {
                 	Phase.getHighTides().add(this.getSourceCard());
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -1154,7 +1191,9 @@ public class CardFactory_Instants {
                     
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
           
@@ -1246,7 +1285,9 @@ public class CardFactory_Instants {
         			}//in play?
         		}//resolve()
         	};//SpellAbility
-        	card.clearSpellAbility();
+        	
+        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
+        	card.clearFirstSpellAbility();
         	card.addSpellAbility(spell);
 
         	spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
@@ -1288,7 +1329,9 @@ public class CardFactory_Instants {
         			}
         		}//resolve()
         	};
-        	card.clearSpellAbility();
+        	
+        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
+        	card.clearFirstSpellAbility();
         	card.addSpellAbility(spell);
         	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
@@ -1350,7 +1393,9 @@ public class CardFactory_Instants {
         	};
         	
         	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-        	card.clearSpellAbility();
+        	
+        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
+        	card.clearFirstSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -1383,7 +1428,9 @@ public class CardFactory_Instants {
         	StringBuilder sb = new StringBuilder();
         	sb.append(cardName).append(" - Rearrange the top X cards in your library in any order.");
         	spell.setStackDescription(sb.toString());
-        	card.clearSpellAbility();
+        	
+        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
+        	card.clearFirstSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -1435,7 +1482,10 @@ public class CardFactory_Instants {
                     return false;
                 }
             };//SpellAbility
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
+            
             spell.setStackDescription("Name a card. Exile the top six cards of your library, then reveal cards from the top of your library until you reveal the named card. Put that card into your hand and exile all other cards revealed this way");
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
@@ -1481,7 +1531,9 @@ public class CardFactory_Instants {
                     }
                 }
             };
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -1517,8 +1569,11 @@ public class CardFactory_Instants {
                     getTargetPlayer().loseLife(5, card);
                 }
             };
+            
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
@@ -1592,7 +1647,8 @@ public class CardFactory_Instants {
             sb.append(card.getName()).append(" - All creatures that can attack must do so or be destroyed.");
             spell.setStackDescription(sb.toString());
             
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -1619,7 +1675,9 @@ public class CardFactory_Instants {
                 	if(getTargetPlayer().equals(AllZone.HumanPlayer)) AllZone.ManaPool.clearPool();
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
 
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
@@ -1673,7 +1731,9 @@ public class CardFactory_Instants {
                 	return PhaseUtil.isBeforeCombatDamage() && creatures.size() > 0;
                 }
             };//SpellAbility
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
             
             card.setSVar("PlayMain1", "TRUE");
@@ -1716,7 +1776,8 @@ public class CardFactory_Instants {
         		}
         	};
         	
-        	card.clearSpellAbility();
+        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
+        	card.clearFirstSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END ************************** 
         
@@ -1795,7 +1856,8 @@ public class CardFactory_Instants {
             spell.setStackDescription(cardName+" - exile X attacking creatures.");
             spell.setBeforePayMana(runtime);
             
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -1888,7 +1950,8 @@ public class CardFactory_Instants {
             spell.setStackDescription(cardName+" - deals X damage to each of X target creatures and/or players.");
             spell.setBeforePayMana(runtime);
             
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -2061,8 +2124,10 @@ public class CardFactory_Instants {
                 }//chooseTwo()
             };//Input chooseTwoInput
             
-            card.clearSpellAbility();
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
+            
             card.setSpellWithChoices(true);
             spell.setBeforePayMana(chooseTwoInput);
         }//*************** END ************ END **************************
@@ -2097,8 +2162,11 @@ public class CardFactory_Instants {
                 	}
                 }
             };
+            
             spell.setStackDescription(card+" - destroy/return enchantments.");
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -2164,7 +2232,9 @@ public class CardFactory_Instants {
         	sb.append(cardName);
         	sb.append(" deals 3 damage to that creature's controller.");
         	spell.setDescription(sb.toString());
-        	card.clearSpellAbility();
+        	
+        	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
+        	card.clearFirstSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
@@ -2203,7 +2273,9 @@ public class CardFactory_Instants {
                 	}
                 }//resolve()
             };//SpellAbility
-            card.clearSpellAbility();
+            
+            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
+            card.clearFirstSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
 
