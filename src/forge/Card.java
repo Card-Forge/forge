@@ -572,6 +572,9 @@ public class Card extends MyObservable {
 					AllZone.GameAction.playCardNoCost(c);
 				}
 			}
+
+            AllZone.GameAction.checkStateEffects();
+
             this.updateObservers();
         }
     }
