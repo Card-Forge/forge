@@ -9585,6 +9585,7 @@ public class CardFactory_Creatures {
             newCard.addSpellAbility(new Spell_Permanent(newCard));
             
             newCard.setSVars(card.getSVars());
+            newCard.setSets(card.getSets());
             
             return newCard;
         }//*************** END ************ END **************************
@@ -9641,6 +9642,7 @@ public class CardFactory_Creatures {
             newCard.addSpellAbility(new Spell_Permanent(newCard));
             
             newCard.setSVars(card.getSVars());
+            newCard.setSets(card.getSets());
             
             return newCard;
         }//*************** END ************ END **************************
@@ -9801,6 +9803,8 @@ public class CardFactory_Creatures {
             newCard.addSpellAbility(new Spell_Permanent(newCard));
             
             newCard.setSVars(card.getSVars());
+            newCard.setSets(card.getSets());
+            
             
             return newCard;
         }//*************** END ************ END **************************
