@@ -19297,7 +19297,7 @@ public class CardFactory_Creatures {
             }
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Time Elemental")) {
         	final Ability_Tap ability = new Ability_Tap(card, "2 U U") {
@@ -19351,7 +19351,7 @@ public class CardFactory_Creatures {
         	
         	ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Vampire Hexmage")) {

@@ -1,8 +1,10 @@
 Name:Time Elemental
 ManaCost:2 U
 Types:Creature Elemental
-Text:When Time Elemental attacks or blocks, at end of combat, sacrifice it and it deals 5 damage to you. 2 U U, tap: Return target permanent that isn't enchanted to its owner's hand.
+Text:When Time Elemental attacks or blocks, at end of combat, sacrifice it and it deals 5 damage to you.
+# 2 U U, tap: Return target permanent that isn't enchanted to its owner's hand.
 PT:0/2
+A:AB$Bounce|Cost$2 U U T|ValidTgts$Permanent.unenchanted|TgtPrompt$Select target unenchanted permanent|Destination$Hand|SpellDescription$Return target permanent that isn't enchanted to its owner's hand.  
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_elemental.jpg
