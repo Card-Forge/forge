@@ -185,7 +185,7 @@ public class CardFactory implements NewConstants {
     	}
     }
 
-  //Creatures with simple, self-targeted mana-activated keyword adding abilities
+/*  //Creatures with simple, self-targeted mana-activated keyword adding abilities
     //-1 means not found
     while(hasKeyword(card, "KPump") != -1)
     {
@@ -737,7 +737,7 @@ public class CardFactory implements NewConstants {
           }
         }
       }//while
-
+*/
     
     //Creatures with self-regenerate abilities
     //-1 means keyword "RegenerateMe" not found
@@ -1978,7 +1978,7 @@ public class CardFactory implements NewConstants {
     }//AbDamageCP
     
     
-    while (hasKeyword(card, "abTgtPTPump") != -1)
+/*    while (hasKeyword(card, "abTgtPTPump") != -1)
     {
      int n = hasKeyword(card, "abTgtPTPump");
      if (n != -1)
@@ -2241,7 +2241,7 @@ public class CardFactory implements NewConstants {
            }//!tapCost
      }
     }//while
-    
+*/    
     // Generic destroy target card
     if (hasKeyword(card, "spDestroyTgt") != -1)
     {
