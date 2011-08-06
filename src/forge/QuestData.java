@@ -419,8 +419,22 @@ public class QuestData implements NewConstants {
     public long getCreditsToAdd(WinLose winLose)
     {
     	long creds = (long) (10 + (0.2 * win));
+    	String[] wins = winLose.getWinMethods();
+    	
     	if (winLose.getLose() == 0)
     		creds += 10;
+    	
+    	for(String s : wins)
+    	{
+    		if (s != null) {
+	    		if (s.equals("Poison Counters") || s.equals("Milled") || s.equals("Battle of Wits") || 
+	    			s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || s.equals("Epic Struggle") ||
+	    			s.equals("Door to Nothingness")) {
+	    			creds+=100;
+	    		}
+    		}
+    	}
+    	
     	this.addCredits(creds);
     	
     	return creds;

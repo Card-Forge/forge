@@ -1099,7 +1099,9 @@ public class CardFactory_Creatures {
 	                    List<Card> selection = AllZone.Display.getChoices("Select up to two swamps", swamp.toArray());
 	                    
 	                    for(int i = 0; i < selection.size(); i++) {
-	                        Card c = selection.get(i);
+	                        if (i == 2)
+	                        	break;
+	                    	Card c = selection.get(i);
 	                        
 	                        library.remove(c);
 	                        play.add(c);

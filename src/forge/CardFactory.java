@@ -5015,9 +5015,8 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     for(int i = 0; i < target.length; i++) {
                         Card c = target[i];
-                        PlayerZone remove = AllZone.getZone(Constant.Zone.Removed_From_Play, c.getOwner());
-                        
-                        AllZone.GameAction.moveTo(remove, c);
+                        if (AllZone.GameAction.isCardInPlay(c))
+                        	AllZone.GameAction.removeFromGame(c);
                     }
                     
                     PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
@@ -14125,6 +14124,11 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                     AllZone.GameAction.getPlayerLife(getTargetPlayer()).setLife(0);
+                    
+                    int gameNumber = 0;
+                    if (Constant.Runtime.WinLose.getWin()==1)
+                    	gameNumber = 1;
+                    Constant.Runtime.WinLose.setWinMethod(gameNumber,"Door to Nothingness");
                 }
                 
                 @Override

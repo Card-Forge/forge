@@ -5846,6 +5846,11 @@ public class GameActionUtil {
                 public void resolve() {
                     String opponent = AllZone.GameAction.getOpponent(player);
                     PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
+                    
+                    int gameNumber = 0;
+                    if (Constant.Runtime.WinLose.getWin()==1)
+                    	gameNumber = 1;
+                    Constant.Runtime.WinLose.setWinMethod(gameNumber,"Felidar Sovereign");
                     life.setLife(0);
                 }
             };// Ability
@@ -5869,6 +5874,12 @@ public class GameActionUtil {
                 public void resolve() {
                     String opponent = AllZone.GameAction.getOpponent(player);
                     PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
+                    
+                    int gameNumber = 0;
+                    if (Constant.Runtime.WinLose.getWin()==1)
+                    	gameNumber = 1;
+                    Constant.Runtime.WinLose.setWinMethod(gameNumber,"Battle of Wits");
+                    
                     life.setLife(0);
                 }
             };// Ability
@@ -5891,6 +5902,10 @@ public class GameActionUtil {
             	@Override
             	public void resolve() 
             	{
+            		int gameNumber = 0;
+                    if (Constant.Runtime.WinLose.getWin()==1)
+                     	gameNumber = 1;
+                    Constant.Runtime.WinLose.setWinMethod(gameNumber,"Helix Pinnacle");
             		AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(player))
             			.setLife(0);
             	}

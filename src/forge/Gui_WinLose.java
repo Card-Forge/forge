@@ -47,7 +47,6 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         Constant.Runtime.WinLose.addWin();
         Constant.Runtime.WinLose.addLose();
         
-
         //setup limited deck
         Deck deck = new Deck(Constant.GameType.Sealed);
         CardList pack = new CardList(BoosterPack.getBoosterPack(1).toArray());
@@ -181,8 +180,24 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     private String getWinText(long creds, WinLose winLose)
     {
     	StringBuilder sb = new StringBuilder();
+    	String[] wins = winLose.getWinMethods();
+    	
+    	
+    	for (String s : wins)
+    	{
+    		if (s != null) {
+	    		if (s.equals("Poison Counters") || s.equals("Milled") || s.equals("Battle of Wits") || 
+	    			s.equals("Felidar Sovereign") || s.equals("Helix Pinnacle") || s.equals("Epic Struggle") ||
+	    			s.equals("Door to Nothingness")) {
+	    			sb.append("Alternate win condition: ");
+	    			sb.append(s);
+	    			sb.append("! Bonus: +100 credits.\r\n");
+	    		}
+    		}
+    	}
+
     	if (winLose.getLose()==0)
-    		sb.append("You have not lost once! Bonus: 10 credits.\r\n");
+    		sb.append("You have not lost once! Bonus: +10 credits.\r\n");
     	sb.append("You have earned " + creds + " credits in total.");
     	return sb.toString();
     }
@@ -197,7 +212,9 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     
     void quitButton_actionPerformed(ActionEvent e) {
         //are we on a quest?
-        if(AllZone.QuestData == null) new Gui_NewGame();
+        if(AllZone.QuestData == null) {
+        	new Gui_NewGame();
+        }
         else { //Quest
             WinLose winLose = Constant.Runtime.WinLose;
             QuestData quest = AllZone.QuestData;

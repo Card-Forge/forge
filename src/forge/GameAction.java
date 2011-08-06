@@ -415,8 +415,17 @@ public class GameAction {
         if (isAliFromCairoInPlay(AllZone.Human_Play) && AllZone.Human_Life.getLife() < 1) 
         	AllZone.Human_Life.setLife(1);
         
-        if(AllZone.Computer_Life.getLife() <= 0 || AllZone.Computer_PoisonCounter.getPoisonCounters() >= 10) {
+        if(AllZone.Computer_Life.getLife() <= 0 ) {
             Constant.Runtime.WinLose.addWin();
+            stop = true;
+        }
+        if (AllZone.Computer_PoisonCounter.getPoisonCounters() >= 10)
+        {
+        	int gameNumber = 0;
+        	if (Constant.Runtime.WinLose.getWin() == 1)
+        		gameNumber = 1;
+        	Constant.Runtime.WinLose.setWinMethod(gameNumber, "Poison Counters");
+        	Constant.Runtime.WinLose.addWin();
             stop = true;
         }
         if(AllZone.Human_Life.getLife() <= 0 || AllZone.Human_PoisonCounter.getPoisonCounters() >= 10) {
@@ -781,6 +790,12 @@ public class GameAction {
         //lose:
         else if(Constant.Runtime.Mill[0]) {
             PlayerLife life = AllZone.GameAction.getPlayerLife(player);
+            
+            int gameNumber = 0;
+            if (Constant.Runtime.WinLose.getWin()==1)
+            	gameNumber = 1;
+            Constant.Runtime.WinLose.setWinMethod(gameNumber,"Battle of Wits");
+            
             life.setLife(0);
             checkStateEffects();
         }

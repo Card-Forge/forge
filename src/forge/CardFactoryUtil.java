@@ -541,6 +541,7 @@ public class CardFactoryUtil {
             
             @Override
             public void showMessage() {
+            	if (AllZone.Human_Hand.getCards().length == 0) stop();
                 AllZone.Display.showMessage("Select " + (nCards - n) + " cards to discard, unless you discard a "
                         + uType + ".");
                 ButtonUtil.disableAll();
@@ -1731,8 +1732,8 @@ public class CardFactoryUtil {
             
             @Override
             public void showMessage() {
+            	if (AllZone.Human_Hand.getCards().length == 0) stop();
             	
-                
                 AllZone.Display.showMessage("Select a card to discard");
                 ButtonUtil.disableAll();
             }

@@ -4502,6 +4502,7 @@ Izzet Signet =25
 Jabari's Banner =23
 Jabari's Influence =93
 Jace Beleren =630
+Jace, the Mind Sculptor =5055
 Jack-in-the-Mox =99
 Jackal Familiar =25
 Jackal Pup =28
