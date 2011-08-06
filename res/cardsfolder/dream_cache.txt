@@ -2,7 +2,7 @@ Name:Dream Cache
 ManaCost:2 U
 Types:Sorcery
 Text:no text
-K:spDrawCards:3:Drawback$YouHandToLibrary/2/TopOrBottom:Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library.:Dream Cache - Draw 3 cards, then put 2 back.
+A:SP$Draw | Cost$ 2 U | NumCards$ 3 | SpellDescription$ Draw three cards, then put two cards from your hand both on top of your library or both on the bottom of your library. | SubAbility$ YouHandToLibrary/2/TopOrBottom
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_cache.jpg
 End

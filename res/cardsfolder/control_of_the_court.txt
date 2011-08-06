@@ -2,7 +2,7 @@ Name:Control of the Court
 ManaCost:1 R
 Types:Sorcery
 Text:no text
-K:spDrawCards:4:Drawback$YouDiscard/3/AtRandom:Draw four cards, then discard three cards at random.:Control of the Court - Draw 4 cards, then discard 3 at random.
+A:SP$Draw | Cost$ 1 R | NumCards$ 4 | SpellDescription$ Draw four cards, then discard three cards at random. | SubAbility$ YouDiscard/3/AtRandom
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Three_Kingdoms/control_of_the_court.jpg
 End
