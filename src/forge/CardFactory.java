@@ -5540,8 +5540,9 @@ public class CardFactory implements NewConstants {
                  @Override
                  public void resolve()
                  {
-                    AllZone.GameAction.getPlayerLife(getController()).subtractLife(amountHurt,card);
-                    super.resolve();
+                    //AllZone.GameAction.getPlayerLife(getController()).subtractLife(amountHurt,card);
+                    AllZone.GameAction.addDamage(card.getController(), card, amountHurt);
+                	 super.resolve();
                  }
                  
                  @Override
@@ -6184,8 +6185,10 @@ public class CardFactory implements NewConstants {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
-                    AllZone.Human_Life.subtractLife(1,card);
-                    AllZone.Computer_Life.subtractLife(1,card);
+                    //AllZone.Human_Life.subtractLife(1,card);
+                    AllZone.GameAction.addDamage(Constant.Player.Human, card, 1);
+                    //AllZone.Computer_Life.subtractLife(1,card);
+                    AllZone.GameAction.addDamage(Constant.Player.Computer, card, 1);
                 }//resolve()
             };//SpellAbility
             ability.setDescription("R: Pyrohemia deals 1 damage to each creature and each player.");
@@ -6240,8 +6243,10 @@ public class CardFactory implements NewConstants {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
-                    AllZone.Human_Life.subtractLife(1,card);
-                    AllZone.Computer_Life.subtractLife(1,card);
+                    //AllZone.Human_Life.subtractLife(1,card);
+                    //AllZone.Computer_Life.subtractLife(1,card);
+                    AllZone.GameAction.addDamage(Constant.Player.Human, card, 1);
+                    AllZone.GameAction.addDamage(Constant.Player.Computer, card, 1);
                 }//resolve()
             };//SpellAbility
             ability.setDescription("B: Pestilence deals 1 damage to each creature and each player.");
@@ -9011,9 +9016,9 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     if(getTargetCard() != null) {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(2,
-                                card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2,card);
+                                && CardFactoryUtil.canTarget(card, getTargetCard()))
+                        	getTargetCard().addDamage(2, card);
+                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, 2);
                 }//resolve()
             };//SpellAbility
             
@@ -9306,7 +9311,7 @@ public class CardFactory implements NewConstants {
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) {
                             getTargetCard().addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
+                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
                 }
             };
             ability.setDescription("3, tap: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.");

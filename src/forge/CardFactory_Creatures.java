@@ -69,7 +69,7 @@ public class CardFactory_Creatures {
                             AllZone.GameAction.getPlayerLife(getController()).subtractLife(n,card);
                         }
                     };
-                    ability.setStackDescription("Filthy Cur - causes " + n + " damage to " + getController());
+                    ability.setStackDescription("Filthy Cur - "+getController()+" loses  " + n + " life.");
                     AllZone.Stack.add(ability);
                 }//addDamage()
             };//Card
@@ -319,7 +319,8 @@ public class CardFactory_Creatures {
                     SpellAbility ability = new Ability(card, "0") {
                         @Override
                         public void resolve() {
-                            AllZone.GameAction.getPlayerLife(getController()).subtractLife(n,card);
+                            //AllZone.GameAction.getPlayerLife(getController()).subtractLife(n,card);
+                        	AllZone.GameAction.addDamage(getController(), card, n);
                         }
                     };
                     ability.setStackDescription("Shinka Gatekeeper - causes " + n + " damage to "
@@ -357,7 +358,8 @@ public class CardFactory_Creatures {
                     SpellAbility ability = new Ability(card, "0") {
                         @Override
                         public void resolve() {
-                            AllZone.GameAction.getPlayerLife(getController()).subtractLife(n,card);
+                            //AllZone.GameAction.getPlayerLife(getController()).subtractLife(n,card);
+                        	AllZone.GameAction.addDamage(getController(), card, n);
                         }
                     };
                     ability.setStackDescription("Jackal Pup - causes " + n + " damage to " + getController());
@@ -1736,7 +1738,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     if(getTargetCard() != null && CardFactoryUtil.canDamage(card, getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(3, card);
-                    else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(3,card);
+                    else AllZone.GameAction.addDamage(getTargetPlayer(), card, 3);
                 }
             };
             Command leavesPlay = new Command() {
@@ -2800,7 +2802,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
-                    AllZone.GameAction.getPlayerLife(opponent).subtractLife(4,card);
+                    AllZone.GameAction.addDamage(opponent, card, 4);
                 }
             };
             Command intoPlay = new Command() {
@@ -5004,7 +5006,7 @@ public class CardFactory_Creatures {
                                 Card c = getTargetCard();
                                 c.addDamage(damage, card);
                             }
-                        } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(damage,card);
+                        } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
                     }
                 }//resolve()
             };//SpellAbility
@@ -5038,7 +5040,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void selectPlayer(String player) {
                     int damage = ((Integer) countZubera.execute()).intValue();
-                    AllZone.GameAction.getPlayerLife(player).subtractLife(damage,card);
+                    AllZone.GameAction.addDamage(player, card, damage);
                     stop();
                 }//selectPlayer()
             };//Input
@@ -8285,7 +8287,7 @@ public class CardFactory_Creatures {
             card.addLeavesPlayCommand(leavesBattlefield);
         }//*************** END ************ END **************************
 
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Mogg Fanatic")) {
             final Ability ability = new Ability(card, "0") {
@@ -8337,6 +8339,7 @@ public class CardFactory_Creatures {
                 }
             }, true, false));
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Bloodfire Colossus")) {
@@ -8802,8 +8805,10 @@ public class CardFactory_Creatures {
                     for(int i = 0; i < list.size(); i++)
                         list.get(i).addDamage(4, card);
                     
-                    AllZone.Human_Life.subtractLife(4,card);
-                    AllZone.Computer_Life.subtractLife(4,card);
+                    //AllZone.Human_Life.subtractLife(4,card);
+                    //AllZone.Computer_Life.subtractLife(4,card);
+                    AllZone.GameAction.addDamage(Constant.Player.Human, card, 4);
+                    AllZone.GameAction.addDamage(Constant.Player.Computer, card, 4);
                 }//resolve()
             };//SpellAbility
             card.addSpellAbility(ability);
@@ -10514,9 +10519,11 @@ public class CardFactory_Creatures {
                                 AllZone.GameAction.sacrifice(c);
                                 String opponent = AllZone.GameAction.getOpponent(player);
                                 
-                                PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
-                                life.subtractLife(power,card);
+                                //PlayerLife life = AllZone.GameAction.getPlayerLife(opponent);
+                                //life.subtractLife(power,card);
+                                AllZone.GameAction.addDamage(opponent, card, power);
                                 
+                                //TODO: this may not be needed
                                 GameActionUtil.executeLifeLinkEffects(card, power);
                                 
                                 CardList cl = CardFactoryUtil.getAurasEnchanting(card, "Guilty Conscience");
@@ -15183,7 +15190,7 @@ public class CardFactory_Creatures {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,
                                 card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1,card);
+                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, 1);
                 }//resolve()
                 
             };//SpellAbility
@@ -15490,7 +15497,7 @@ public class CardFactory_Creatures {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(total,
                                 card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(total,card);
+                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, total);
                    card.subtractCounter(Counters.P1P1,total);
                 }//resolve()
             };//SpellAbility
@@ -16494,7 +16501,7 @@ public class CardFactory_Creatures {
                         if(AllZone.GameAction.isCardInPlay(getTargetCard())
                                 && CardFactoryUtil.canTarget(card, getTargetCard())) getTargetCard().addDamage(1,
                                 card);
-                    } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1,card);
+                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, 1);
                 }//resolve()
             };//SpellAbility
             
@@ -19418,8 +19425,10 @@ public class CardFactory_Creatures {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
-                    AllZone.Human_Life.subtractLife(1,card);
-                    AllZone.Computer_Life.subtractLife(1,card);
+                    //AllZone.Human_Life.subtractLife(1,card);
+                    //AllZone.Computer_Life.subtractLife(1,card);
+                    AllZone.GameAction.addDamage(Constant.Player.Human, card, 1);
+                    AllZone.GameAction.addDamage(Constant.Player.Computer, card, 1);
                 }//resolve()
             };//SpellAbility
             ability.setDescription("B: Pestilence Demon deals 1 damage to each creature and each player.");
@@ -19490,8 +19499,10 @@ public class CardFactory_Creatures {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
-                    AllZone.Human_Life.subtractLife(1,card);
-                    AllZone.Computer_Life.subtractLife(1,card);
+                    //AllZone.Human_Life.subtractLife(1,card);
+                    //AllZone.Computer_Life.subtractLife(1,card);
+                    AllZone.GameAction.addDamage(Constant.Player.Human, card, 1);
+                    AllZone.GameAction.addDamage(Constant.Player.Computer, card, 1);
                 }//resolve()
             };//SpellAbility
             ability.setDescription("G: Ifh-B�ff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability");
