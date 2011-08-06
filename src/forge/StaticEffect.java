@@ -5,7 +5,8 @@ public class StaticEffect {
 	private Card			 	source				  			= new Card();
 	private int			 		keywordNumber				  	= 0;	
     private CardList            affectedCards                	= new CardList();
-	private int			 		xValue				  			= 0;	  
+	private int			 		xValue				  			= 0;
+	private int					yValue							= 0;
 
     
     public void setSource(Card card) {
@@ -38,5 +39,13 @@ public class StaticEffect {
     
     public int getXValue() {
         return xValue;
+    }
+    
+    public void setYValue(int y) {
+    	yValue = y;
+    }
+    
+    public int getYValue() {
+        return yValue;
     }
 }

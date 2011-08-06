@@ -112,7 +112,7 @@ public class GameActionUtil {
 		upkeep_Nut_Collector();
 		
 		// Win / Lose	
-		final Player player = AllZone.Phase.getPlayerTurn();
+		//final Player player = AllZone.Phase.getPlayerTurn();
 
 		//Win / Lose
 		// Checks for can't win or can't lose happen in Player.altWinConditionMet()
@@ -10040,12 +10040,19 @@ public class GameActionUtil {
 							affectedCards = affectedCards.getValidCards(specific, cardWithKeyword.getController(), cardWithKeyword);
 							se.setAffectedCards(affectedCards);
 							
+							String[] pt = k[2].split("/");
+							
 							int x = 0;
-		            		if (k[2].contains("X")) 
+		            		if (pt[0].contains("X") || pt[1].contains("X")) 
 		                 		x = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("X").split("\\$")[1]);
-		                 	se.setXValue(x);	
+		                 	se.setXValue(x);
+		                 	
+		                 	int y = 0;
+		            		if (pt[1].contains("Y")) 
+		                 		y = CardFactoryUtil.xCount(cardWithKeyword, cardWithKeyword.getSVar("Y").split("\\$")[1]);
+		                 	se.setYValue(y);
 		            		
-							addStaticEffects(cardWithKeyword,affectedCards,k[2],x); //give the boni to the affected cards
+							addStaticEffects(cardWithKeyword,affectedCards,k[2],x, y); //give the boni to the affected cards
 
 							storage.add(se); // store the information
 						}
@@ -10054,7 +10061,7 @@ public class GameActionUtil {
 	    	}
 		}// execute()
 		
-		void addStaticEffects(Card source, CardList affectedCards, String Keyword_Details, int xValue) {
+		void addStaticEffects(Card source, CardList affectedCards, String Keyword_Details, int xValue, int yValue) {
 			
 			int powerbonus = 0;
 			int toughnessbonus = 0;
@@ -10066,8 +10073,9 @@ public class GameActionUtil {
 			if(!Keyword[0].contains("X")) powerbonus = Integer.valueOf(Keyword[0]);
 			else powerbonus = xValue; 		// the xCount takes places before
 			
-			if(!Keyword[1].contains("X")) toughnessbonus = Integer.valueOf(Keyword[1]);
-			else toughnessbonus = xValue;
+			if(Keyword[1].contains("X")) toughnessbonus = xValue;
+			else if(Keyword[1].contains("Y")) toughnessbonus = yValue;
+			else toughnessbonus = Integer.valueOf(Keyword[1]);
 			
 			for(int i = 0; i < affectedCards.size(); i++) {
 				Card affectedCard = affectedCards.get(i);
@@ -10104,14 +10112,15 @@ public class GameActionUtil {
 			CardList affected = se.getAffectedCards();
 			int KeywordNumber = se.getKeywordNumber();
 			int xValue = se.getXValue(); 		// the old xValue has to be removed, not the actual one!
+			int yValue = se.getYValue(); 		// the old xValue has to be removed, not the actual one!
             String parse = source.getKeyword().get(KeywordNumber).toString();                
             String k[] = parse.split(":");
 			for(int i = 0; i < affected.size(); i++) {
-				removeStaticEffect(source, affected.get(i),k,xValue);
+				removeStaticEffect(source, affected.get(i),k,xValue, yValue);
 			}	
 		}
 		
-		void removeStaticEffect(Card source, Card affectedCard, String[] Keyword_Details, int xValue) {
+		void removeStaticEffect(Card source, Card affectedCard, String[] Keyword_Details, int xValue, int yValue) {
 			
 			int powerbonus = 0;
 			int toughnessbonus = 0;
@@ -10123,8 +10132,9 @@ public class GameActionUtil {
 			if(!Keyword[0].contains("X")) powerbonus = Integer.valueOf(Keyword[0]);
 			else powerbonus = xValue; 		
 			
-			if(!Keyword[1].contains("X")) toughnessbonus = Integer.valueOf(Keyword[1]);
-			else toughnessbonus = xValue;
+			if(Keyword[1].contains("X")) toughnessbonus = xValue;
+			else if(Keyword[1].contains("Y")) toughnessbonus = yValue;
+			else toughnessbonus = Integer.valueOf(Keyword[1]);
 			
 			affectedCard.addSemiPermanentAttackBoost(powerbonus * -1);
 			affectedCard.addSemiPermanentDefenseBoost(toughnessbonus * -1);
