@@ -2821,55 +2821,36 @@ public class GameAction {
     }
     
     public void playCard(Card c) {
-        if(c.isLand() && isCardInZone(c, AllZone.Human_Hand)) {
-            HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-            SpellAbility[] sas = canPlaySpellAbility(c.getSpellAbility());
-            
-            ArrayList<String> choices = new ArrayList<String>();
-            
-            if(CardFactoryUtil.canHumanPlayLand()) 
-            	choices.add("Play land");
-            
-            for(SpellAbility sa:sas) {
-                if(sa.canPlay()) {
-                    choices.add(sa.toString());
-                    map.put(sa.toString(), sa);
-                }
+        HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
+        SpellAbility[] abilities = canPlaySpellAbility(c.getSpellAbility());
+        ArrayList<String> choices = new ArrayList<String>();
+        
+        if(c.isLand() && isCardInZone(c, AllZone.Human_Hand) && CardFactoryUtil.canHumanPlayLand()) 
+        		choices.add("Play land");
+        
+        for(SpellAbility sa:abilities) {
+            if(sa.canPlay()) {
+                choices.add(sa.toString());
+                map.put(sa.toString(), sa);
             }
-            
-            //String[] ch = (String[])choices.toArray();
-            String[] ch = new String[choices.size()];
-            for(int i = 0; i < choices.size(); i++) {
-                ch[i] = choices.get(i);
-                if (ch[i].contains("CARDNAME"))
-                	ch[i] = ch[i].replace("CARDNAME", c.getName());
-            }
-            String choice = AllZone.Display.getChoiceOptional("Choose", ch);
-            
-            if(choice == null) ;
-            else if(choice.equals("Play land")) {
-                playLand(c, AllZone.Human_Hand);
-            } else {
-                SpellAbility sa = map.get(choice);
-                playSpellAbility(sa);
-            }
-        } else {
-            SpellAbility[] choices = canPlaySpellAbility(c.getSpellAbility());
-            SpellAbility sa;
-            /*
-             System.out.println(choices.length);
-             for(int i = 0; i < choices.length; i++)
-                 System.out.println(choices[i]);
-            */
-            if(choices.length == 0) return;
-            else if(choices.length == 1) sa = choices[0];
-            else { 
-            	sa = AllZone.Display.getChoiceOptional("Choose", choices);
-            }
-            
-            if(sa == null) return;
-            playSpellAbility(sa);
         }
+        
+        String choice;
+        if (choices.size() == 0) 
+        	return;
+        else if (choices.size() == 1)
+        	choice = choices.get(0);
+        else
+        	choice = (String) AllZone.Display.getChoiceOptional("Choose", choices.toArray());
+        
+        if(choice.equals("Play land")){
+        	playLand(c, AllZone.Human_Hand);
+        	return;
+        }
+        
+        SpellAbility ability = map.get(choice);
+        if(ability != null)
+            playSpellAbility(ability);
     }
     
     static public void playLand(Card land, PlayerZone zone)

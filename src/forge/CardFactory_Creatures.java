@@ -220,10 +220,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    if(((AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && AllZone.Phase.getActivePlayer() == card.getController()) || (AllZone.Phase.getPhase().equals(
-                            Constant.Phase.Main1) && AllZone.Phase.getActivePlayer() == card.getController()))
-                            && AllZone.GameAction.isCardInPlay(card) && super.canPlay()) return true;
-                    else return false;
+                    return (Phase.canCastSorcery(card.getController()) && AllZone.GameAction.isCardInPlay(card) && super.canPlay());
                 }
                 
                 @Override
@@ -256,10 +253,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    if(((AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && AllZone.Phase.getActivePlayer() == card.getController()) || (AllZone.Phase.getPhase().equals(
-                            Constant.Phase.Main1) && AllZone.Phase.getActivePlayer() == card.getController()))
-                            && AllZone.GameAction.isCardInPlay(card) && super.canPlay()) return true;
-                    else return false;
+                    return (Phase.canCastSorcery(card.getController()) && AllZone.GameAction.isCardInPlay(card) && super.canPlay());
                 }
                 
                 @Override
@@ -14829,7 +14823,7 @@ public class CardFactory_Creatures {
                     
                     CardList tappedCreats = new CardList();
                     
-                    Object o = AllZone.Display.getChoice("Pick first creature to tap", creats.toArray());
+                    Object o = AllZone.Display.getChoiceOptional("Pick first creature to tap", creats.toArray());
                     
                     if(o != null) {
                         Card c1 = (Card) o;
@@ -14837,7 +14831,7 @@ public class CardFactory_Creatures {
                         tappedCreats.add(c1);
                     } else return;
                     
-                    o = AllZone.Display.getChoice("Pick second creature to tap", creats.toArray());
+                    o = AllZone.Display.getChoiceOptional("Pick second creature to tap", creats.toArray());
                     if(o != null) {
                         Card c2 = (Card) o;
                         creats.remove(c2);
