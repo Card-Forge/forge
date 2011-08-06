@@ -1450,6 +1450,20 @@ public class CardFactoryUtil
     	    	
 	return onUnEquip;
   }//vanila_unequip()
+  
+  public static Command entersBattleFieldWithCounters(final Card c, final Counters type, final int n)
+  {
+	  Command addCounters = new Command()
+	  {
+		private static final long serialVersionUID = 4825430555490333062L;
+
+		public void execute()
+		{
+			c.addCounter(type, n);  
+		}
+	  };
+	  return addCounters;
+  }
 
   public static Command vanishing(final Card sourceCard, final int Power)
   {
@@ -1462,7 +1476,7 @@ public class CardFactoryUtil
 
           //testAndSet - only needed when comes into play.
           if(firstTime){
-        	  sourceCard.setCounter(Counters.AGE, Power); 
+        	  sourceCard.addCounter(Counters.TIME, Power); 
           }
           firstTime = false;
         }
@@ -3150,9 +3164,10 @@ public class CardFactoryUtil
 		list.add(creatureLands[i]);
 		return list;
   }
-    
+  
+     
   public static CardList makeToken(String name, String imageName, Card source, String manaCost, String[] types, int baseAttack, int baseDefense,
-		   					   String[] intrinsicKeywords)
+		   					   	   String[] intrinsicKeywords)
   {
 	  CardList list = new CardList();
 	  Card c = new Card();

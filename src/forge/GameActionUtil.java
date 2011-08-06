@@ -6472,9 +6472,9 @@ public class GameActionUtil
 				{
 					public void resolve()
 					{
-				        card.setCounter(Counters.AGE,
-						card.getCounters(Counters.AGE) - 1);
-				    if (card.getCounters(Counters.AGE) <= 0)
+				        card.setCounter(Counters.TIME,
+						card.getCounters(Counters.TIME) - 1);
+				    if (card.getCounters(Counters.TIME) <= 0)
 				{
 					AllZone.GameAction.sacrifice(card);
 				}
@@ -6483,7 +6483,7 @@ public class GameActionUtil
 				ability.setStackDescription(card.getName() + " - Vanishing - remove a time counter from it. When the last is removed, sacrifice it.)");
 				AllZone.Stack.add(ability);
 				
-					}
+			}
 		}
 	}
 
@@ -6500,9 +6500,9 @@ public class GameActionUtil
 			for (int i = 0; i < list.size(); i++)
 			{
 				Card card = list.get(i);
-				card.setCounter(Counters.AGE,
-						card.getCounters(Counters.AGE) - 1);
-				if (card.getCounters(Counters.AGE) <= 0)
+				card.setCounter(Counters.TIME,
+						card.getCounters(Counters.TIME) - 1);
+				if (card.getCounters(Counters.TIME) <= 0)
 				{
 					AllZone.GameAction.sacrifice(card);
 				}
@@ -6521,9 +6521,9 @@ public class GameActionUtil
 			for (int i = 0; i < list.size(); i++)
 			{
 				Card card = list.get(i);
-				card.setCounter(Counters.AGE,
-						card.getCounters(Counters.AGE) - 1);
-				if (card.getCounters(Counters.AGE) <= 0)
+				card.setCounter(Counters.TIME,
+						card.getCounters(Counters.TIME) - 1);
+				if (card.getCounters(Counters.TIME) <= 0)
 				{
 					AllZone.GameAction.sacrifice(card);
 				}

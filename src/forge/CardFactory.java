@@ -8094,6 +8094,7 @@ public class CardFactory implements NewConstants {
             		return c.isPermanent() && !c.isArtifact();
             	}
              });
+             CardListUtil.sortByIndestructible(all);
              CardListUtil.sortByDestroyEffect(all);
              
              for (int i = 0; i < all.size(); i++)
@@ -8165,6 +8166,7 @@ public class CardFactory implements NewConstants {
 				all.addAll(AllZone.Computer_Play.getCards());
 				all = all.getType("Creature");
 
+				CardListUtil.sortByIndestructible(all);
 				CardListUtil.sortByDestroyEffect(all);
 				
 				for (int i = 0; i < all.size(); i++)
@@ -8288,6 +8290,7 @@ public class CardFactory implements NewConstants {
 				all.addAll(AllZone.Human_Play.getCards());
 				all.addAll(AllZone.Computer_Play.getCards());
 				all = all.getType("Enchantment");
+				CardListUtil.sortByIndestructible(all);
 				CardListUtil.sortByDestroyEffect(all);
 				
 				for (int i = 0; i < all.size(); i++)
@@ -8828,6 +8831,7 @@ public class CardFactory implements NewConstants {
           CardList all = new CardList();
           all.addAll(AllZone.Human_Play.getCards());
           all.addAll(AllZone.Computer_Play.getCards());
+          CardListUtil.sortByIndestructible(all);
           CardListUtil.sortByDestroyEffect(all);
 
           for(int i = 0; i < all.size(); i++)
@@ -17100,7 +17104,6 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 
         String k[] = parse.split(":");
         final String manacost = k[1];
-        
 
         card.addSpellAbility(CardFactoryUtil.soul_desc(card, manacost));
         card.addDestroyCommand(CardFactoryUtil.ability_Soulshift(card, manacost));
@@ -17136,6 +17139,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		c.setBaseDefense(sim.getBaseDefense());
 		c.setIntrinsicKeyword(sim.getKeyword());
 		c.setName(sim.getName());
+		c.setImageName(sim.getImageName());
 		c.setType(sim.getType());
 		c.setText(sim.getSpellText());
 		c.setManaCost(sim.getManaCost());

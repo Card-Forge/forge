@@ -2,7 +2,7 @@ package forge;
 import java.util.*;
 
 enum Counters {
-	AGE, BLAZE, CHARGE, DIVINITY, FADE, HOOFPRINT, ICE, LOYALTY, M1M1, MANA, P0M1, P1P1, QUEST, SPORE
+	AGE, BLAZE, CHARGE, DIVINITY, FADE, HOOFPRINT, ICE, LOYALTY, M1M1, MANA, P0M1, P1P1, QUEST, SPORE, TIME
 }
 
 public class Card extends MyObservable 

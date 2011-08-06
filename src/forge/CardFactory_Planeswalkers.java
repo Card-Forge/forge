@@ -20,8 +20,6 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.setCounter(Counters.LOYALTY, 4);
-	
 	      card2.setOwner(owner);
 	      card2.setController(owner);
 	
@@ -29,6 +27,7 @@ class CardFactory_Planeswalkers {
 	      card2.setType(card.getType());
 	      card2.setManaCost(card.getManaCost());
 	      card2.addSpellAbility(new Spell_Permanent(card2));
+	      card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 4));
 	
 	      //ability2: target creature gets +3/+3 and flying until EOT
 	      final SpellAbility ability2 = new Ability(card2, "0")
@@ -75,8 +74,6 @@ class CardFactory_Planeswalkers {
 	
 	        public boolean canPlay()
 	        {
-	          @SuppressWarnings("unused") // library
-			   PlayerZone library = AllZone.getZone(Constant.Zone.Library, card2.getController());
 	
 	          return 	  0 < card2.getCounters(Counters.LOYALTY) &&
 	                      AllZone.getZone(card2).is(Constant.Zone.Play) &&
@@ -254,8 +251,6 @@ class CardFactory_Planeswalkers {
 	           AllZone.GameAction.checkStateEffects();
 	         }
 	       };
-	       card2.setCounter(Counters.LOYALTY, 2);
-	
 	       card2.setOwner(owner);
 	       card2.setController(owner);
 	
@@ -263,6 +258,7 @@ class CardFactory_Planeswalkers {
 	       card2.setType(card.getType());
 	       card2.setManaCost(card.getManaCost());
 	       card2.addSpellAbility(new Spell_Permanent(card2));
+	       card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 2));
 	
 	       //ability2: gain 2 life for each elf controlled
 	       final SpellAbility ability2 = new Ability(card2, "0")
@@ -504,8 +500,6 @@ class CardFactory_Planeswalkers {
 	           AllZone.GameAction.checkStateEffects();
 	         }
 	       };
-	       card2.setCounter(Counters.LOYALTY, 5);
-	
 	       card2.setOwner(owner);
 	       card2.setController(owner);
 	
@@ -513,6 +507,7 @@ class CardFactory_Planeswalkers {
 	       card2.setType(card.getType());
 	       card2.setManaCost(card.getManaCost());
 	       card2.addSpellAbility(new Spell_Permanent(card2));
+	       card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 5));
 	       
 	       //ability3
 	       final SpellAbility ability3 = new Ability(card2, "0")
@@ -852,8 +847,6 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.setCounter(Counters.LOYALTY, 4);
-	
 	      card2.setOwner(owner);
 	      card2.setController(owner);
 	
@@ -861,6 +854,7 @@ class CardFactory_Planeswalkers {
 	      card2.setType(card.getType());
 	      card2.setManaCost(card.getManaCost());
 	      card2.addSpellAbility(new Spell_Permanent(card2));
+	      card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 4));
 	
 	      //ability2: all controller's creatures get +1\+1 and vigilance until EOT
 	      final SpellAbility ability2 = new Ability(card2, "0")
@@ -1074,8 +1068,6 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.setCounter(Counters.LOYALTY, 5);
-
 	      card2.setOwner(owner);
 	      card2.setController(owner);
 
@@ -1083,6 +1075,7 @@ class CardFactory_Planeswalkers {
 	      card2.setType(card.getType());
 	      card2.setManaCost(card.getManaCost());
 	      card2.addSpellAbility(new Spell_Permanent(card2));
+	      card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 5));
 
 	      //ability2
 	      final SpellAbility ability2 = new Ability(card2, "0")
@@ -1321,8 +1314,6 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.setCounter(Counters.LOYALTY, 6);
-
 	      card2.setOwner(owner);
 	      card2.setController(owner);
 
@@ -1330,6 +1321,7 @@ class CardFactory_Planeswalkers {
 	      card2.setType(card.getType());
 	      card2.setManaCost(card.getManaCost());
 	      card2.addSpellAbility(new Spell_Permanent(card2));
+	      card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 6));
 
 	      //ability 1
 	      final SpellAbility ability1 = new Ability(card2, "0")
@@ -1589,8 +1581,6 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.setCounter(Counters.LOYALTY,3);
-
 	      card2.setOwner(owner);
 	      card2.setController(owner);
 
@@ -1598,6 +1588,7 @@ class CardFactory_Planeswalkers {
 	      card2.setType(card.getType());
 	      card2.setManaCost(card.getManaCost());
 	      card2.addSpellAbility(new Spell_Permanent(card2));
+	      card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 3));
 
 	      //ability1
 	      final SpellAbility ability1 = new Ability(card2, "0")
@@ -1838,8 +1829,6 @@ class CardFactory_Planeswalkers {
 		          AllZone.GameAction.checkStateEffects();
 		        }
 		      };
-		      card2.setCounter(Counters.LOYALTY,3);
-
 		      card2.setOwner(owner);
 		      card2.setController(owner);
 
@@ -1847,7 +1836,7 @@ class CardFactory_Planeswalkers {
 		      card2.setType(card.getType());
 		      card2.setManaCost(card.getManaCost());
 		      card2.addSpellAbility(new Spell_Permanent(card2));
-		      
+		      card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 3));
 		      
 		      //ability1
 		      final SpellAbility ability1 = new Ability(card2, "0")
@@ -1978,8 +1967,6 @@ class CardFactory_Planeswalkers {
 		          AllZone.GameAction.checkStateEffects();
 		        }
 		      };
-		      card2.setCounter(Counters.LOYALTY, 3);
-
 		      card2.setOwner(owner);
 		      card2.setController(owner);
 
@@ -1987,6 +1974,7 @@ class CardFactory_Planeswalkers {
 		      card2.setType(card.getType());
 		      card2.setManaCost(card.getManaCost());
 		      card2.addSpellAbility(new Spell_Permanent(card2));
+		      card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 3));
 		      
 		    //ability 1: destroy target noncreature permanent
 		       final SpellAbility ability1 = new Ability(card2, "0")
@@ -2213,8 +2201,6 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.setCounter(Counters.LOYALTY,4);
-
 	      card2.setOwner(owner);
 	      card2.setController(owner);
 
@@ -2222,6 +2208,7 @@ class CardFactory_Planeswalkers {
 	      card2.setType(card.getType());
 	      card2.setManaCost(card.getManaCost());
 	      card2.addSpellAbility(new Spell_Permanent(card2));
+	      card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 4));
 
 	      //ability1
 	      final SpellAbility ability1 = new Ability(card2, "0")
@@ -2525,8 +2512,6 @@ class CardFactory_Planeswalkers {
 	          AllZone.GameAction.checkStateEffects();
 	        }
 	      };
-	      card2.setCounter(Counters.LOYALTY,4);
-
 	      card2.setOwner(owner);
 	      card2.setController(owner);
 
@@ -2534,6 +2519,7 @@ class CardFactory_Planeswalkers {
 	      card2.setType(card.getType());
 	      card2.setManaCost(card.getManaCost());
 	      card2.addSpellAbility(new Spell_Permanent(card2));
+	      card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 4));
 	      
 	      final SpellAbility ability1 = new Ability(card2, "0")
 	      {

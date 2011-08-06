@@ -150,6 +150,29 @@ public class CardListUtil
 	   list.sort(com);
   }
   
+  public static void sortByIndestructible(CardList list)
+  {
+	  final ArrayList<String> arrList = new ArrayList<String>();
+	  arrList.add("Timber Protector");
+	  arrList.add("Eldrazi Monument");
+	  
+	  Comparator<Card> com = new Comparator<Card>()
+	  {
+	      public int compare(Card a, Card b)
+	      {
+	        if( arrList.contains(a.getName()) && arrList.contains(b.getName()))
+	          return 0;
+	        else if(arrList.contains(a.getName()))
+	          return 1;
+	        else if(arrList.contains(b.getName()))
+	          return -1;
+
+	        return 0;
+	     }
+	   };
+	   list.sort(com);
+  }
+  
   public static void sortByTapped(CardList list)
   {
 	  Comparator<Card> com = new Comparator<Card>()
