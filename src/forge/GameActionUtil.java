@@ -4315,7 +4315,10 @@ public class GameActionUtil
 
 	private static void playerCombatDamage_Shadowmage_Infiltrator(Card c)
 	{
-		final String player = c.getController();
+		//String player = c.getController();
+		final String[] player = new String[1];
+		final Card crd = c;
+
 
 		if (c.getNetAttack() > 0)
 		{
@@ -4323,12 +4326,13 @@ public class GameActionUtil
 			{
 				public void resolve()
 				{
-
-					AllZone.GameAction.drawCard(player);
+					player[0] = crd.getController(); 
+					AllZone.GameAction.drawCard(player[0]);
 				}
 			};// ability2
-
-			ability2.setStackDescription(c.getName() + " - " + player
+			
+			player[0] = c.getController();
+			ability2.setStackDescription(c.getName() + " - " + player[0]
 					+ " draws a card.");
 			AllZone.Stack.add(ability2);
 		}
@@ -4337,8 +4341,8 @@ public class GameActionUtil
 
 	private static void playerCombatDamage_Augury_Adept(Card c)
 	{
-		final String player = c.getController();
-
+		final String[] player = new String[1];
+		final Card crd = c;
 
 		if (c.getNetAttack() > 0)
 		{
@@ -4346,22 +4350,24 @@ public class GameActionUtil
 			{
 				public void resolve()
 				{
-					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-		             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-		             if (lib.size() > 0 ) {
+					player[0] = crd.getController();
+					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player[0]);
+		            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player[0]);
+		            if (lib.size() > 0 ) {
 	                	CardList cl = new CardList();
 				    	cl.add(lib.get(0));
 				    	AllZone.Display.getChoiceOptional("Top card", cl.toArray());
 	                                     };
 		            Card top = lib.get(0);
-		            AllZone.GameAction.getPlayerLife(player).addLife(CardUtil.getConvertedManaCost(top.getManaCost()));
+		            AllZone.GameAction.getPlayerLife(player[0]).addLife(CardUtil.getConvertedManaCost(top.getManaCost()));
 		            hand.add(top);
 		            lib.remove(top);
 		            	                                  
 				}
 			};// ability2
 
-			ability2.setStackDescription(c.getName() + " - " + player
+			player[0] = c.getController();
+			ability2.setStackDescription(c.getName() + " - " + player[0]
 					+ " reveals the top card of his library and put that card into his hand. He gain life equal to its converted mana cost.");
 			AllZone.Stack.add(ability2);
 		}
@@ -4370,8 +4376,9 @@ public class GameActionUtil
 	
 	private static void playerCombatDamage_Hypnotic_Specter(Card c)
 	{
-		final String player = c.getController();
-		final String opponent = AllZone.GameAction.getOpponent(player);
+		final String[] player = new String[1];
+		player[0] = c.getController();
+		final String[] opponent = new String[1];
 
 		if (c.getNetAttack() > 0)
 		{
@@ -4379,12 +4386,15 @@ public class GameActionUtil
 			{
 				public void resolve()
 				{
-					AllZone.GameAction.discardRandom(opponent);
+					
+					opponent[0] = AllZone.GameAction.getOpponent(player[0]);
+					AllZone.GameAction.discardRandom(opponent[0]);
 				}
 			};// ability
 
-			ability.setStackDescription("Hypnotic Specter - " + opponent
-					+ " discards one card at random");
+			opponent[0] = AllZone.GameAction.getOpponent(player[0]);
+			ability.setStackDescription("Hypnotic Specter - " + opponent[0]
+					+ " discards a card at random");
 			AllZone.Stack.add(ability);
 		}
 	}

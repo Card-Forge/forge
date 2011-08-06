@@ -25,7 +25,8 @@ class CardFactory_Auras {
 			
 			public boolean canPlay()
 			{
-				return true; // for flash, which is not working through the keyword for some reason
+				return AllZone.GameAction.isCardInZone(card, AllZone.Human_Hand) ||
+				   AllZone.GameAction.isCardInZone(card, AllZone.Computer_Hand); // for flash, which is not working through the keyword for some reason
 			}
 			
 			public boolean canPlayAI()
@@ -215,7 +216,6 @@ class CardFactory_Auras {
 		{
 		  final SpellAbility spell = new Spell(card)
 		  {
-
 
 			private static final long serialVersionUID = -4759884801420518565L;
 			public boolean canPlayAI()
@@ -1292,7 +1292,8 @@ class CardFactory_Auras {
 			private static final long serialVersionUID = -8730555134087764706L;
 			public boolean canPlay()
 		    {
-		      return true; // for flash, which is not working through the keyword for some reason
+				return AllZone.GameAction.isCardInZone(card, AllZone.Human_Hand) ||
+				   AllZone.GameAction.isCardInZone(card, AllZone.Computer_Hand); // for flash, which is not working through the keyword for some reason
 		    }
 		   
 		   public boolean canPlayAI()
@@ -1400,7 +1401,8 @@ class CardFactory_Auras {
 			//for flash, keyword somehow doesn't work
 			public boolean canPlay()
 			{
-				return true;
+				return AllZone.GameAction.isCardInZone(card, AllZone.Human_Hand) ||
+				   AllZone.GameAction.isCardInZone(card, AllZone.Computer_Hand);
 			}
 			
 			public boolean canPlayAI()
@@ -2632,13 +2634,14 @@ class CardFactory_Auras {
 		{
 		  final SpellAbility spell = new Spell(card)
 		  {
-
+			  
 			private static final long serialVersionUID = -5744948616351896881L;
 			
-			//for flash:
+			//for flash, a hack:
 			public boolean canPlay()
 			{
-				return true;
+				return AllZone.GameAction.isCardInZone(card, AllZone.Human_Hand) ||
+					   AllZone.GameAction.isCardInZone(card, AllZone.Computer_Hand);
 			}
 			
 			public boolean canPlayAI()
@@ -3090,7 +3093,6 @@ class CardFactory_Auras {
 		 
 		  Command onEnchant = new Command()
 		  {   
-
 
 			private static final long serialVersionUID = -6043933114268403555L;
 
@@ -4628,7 +4630,8 @@ class CardFactory_Auras {
 		//for flash, keyword somehow doesn't work
 	       public boolean canPlay()
 	       {
-	          return true;
+	    	   return AllZone.GameAction.isCardInZone(card, AllZone.Human_Hand) ||
+			   		  AllZone.GameAction.isCardInZone(card, AllZone.Computer_Hand);
 	       }
 	       
 	       public boolean canPlayAI()
@@ -4739,7 +4742,8 @@ class CardFactory_Auras {
 		   //for flash, keyword somehow doesn't work
 	       public boolean canPlay()
 	       {
-	          return true;
+	    	   return AllZone.GameAction.isCardInZone(card, AllZone.Human_Hand) ||
+			   			AllZone.GameAction.isCardInZone(card, AllZone.Computer_Hand);
 	       }
 	       
 	       public boolean canPlayAI()
@@ -4957,7 +4961,8 @@ class CardFactory_Auras {
 			//for flash, keyword somehow doesn't work
 	       public boolean canPlay()
 	       {
-	          return true;
+	    	   return AllZone.GameAction.isCardInZone(card, AllZone.Human_Hand) ||
+			   			AllZone.GameAction.isCardInZone(card, AllZone.Computer_Hand);
 	       }
 	       
 	       public boolean canPlayAI()

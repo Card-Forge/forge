@@ -1164,8 +1164,8 @@ private int getDifferentLand(CardList list, String land)
 		
 		ArrayList<String> choices = new ArrayList<String>();
 		
-		if (Input_Main.canPlayNumberOfLands > 0 && 
-			(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2)) )
+		if (Input_Main.canPlayNumberOfLands > 0 && AllZone.Stack.size() == 0 &&
+			(AllZone.Phase.getPhase().equals(Constant.Phase.Main1) || AllZone.Phase.getPhase().equals(Constant.Phase.Main2))  )
 			choices.add("Play land");
 		
 		for (SpellAbility sa: sas)

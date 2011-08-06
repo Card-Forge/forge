@@ -3575,8 +3575,8 @@ AEther Web
 1 G
 Enchantment Aura
 Enchanted creature gets +1/+1, has reach, and can block creatures with shadow as though they didn't have shadow. 
-Flash
 Enchant creature
+Flash
 
 Emeria Angel
 2 W W
