@@ -74,60 +74,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Infest")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -4970294125917784048L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList human = new CardList(AllZone.Human_Battlefield.getCards());
-                    CardList computer = new CardList(AllZone.Computer_Battlefield.getCards());
-                    
-                    human = human.getType("Creature");
-                    computer = computer.getType("Creature");
-                    
-                    human = CardListUtil.filterToughness(human, 2);
-                    computer = CardListUtil.filterToughness(computer, 2);
-                    
-                    //the computer will at least destroy 2 more human creatures
-                    return computer.size() < human.size() - 1;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    CardList list = AllZoneUtil.getCreaturesInPlay();
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        final Card[] target = new Card[1];
-                        target[0] = list.get(i);
-                        
-                        final Command untilEOT = new Command() {
-							private static final long serialVersionUID = 38760668661487826L;
-
-							public void execute() {
-                                if(AllZone.GameAction.isCardInPlay(target[0])) {
-                                    target[0].addTempAttackBoost(2);
-                                    target[0].addTempDefenseBoost(2);
-                                }
-                            }
-                        };//Command
-                        
-                        if(AllZone.GameAction.isCardInPlay(target[0])) {
-                            target[0].addTempAttackBoost(-2);
-                            target[0].addTempDefenseBoost(-2);
-                            
-                            AllZone.EndOfTurn.addUntil(untilEOT);
-                        }//if
-                    }//for
-                }//resolve()
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            card.setSVar("PlayMain1", "TRUE");
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Molten Rain")) {
