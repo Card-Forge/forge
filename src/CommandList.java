@@ -1,11 +1,12 @@
 import java.util.*;
 
-public class CommandList implements java.io.Serializable, Command
+public class CommandList implements java.io.Serializable, Command, Iterable<Command>
 {
   private static final long serialVersionUID = -1532687201812613302L;
 
   private ArrayList<Command> a = new ArrayList<Command>();
 
+  public Iterator<Command> iterator(){return a.iterator();}
   //bug fix, when token is pumped up like with Giant Growth
   //and Sorceress Queen targets token, the effects need to be done
   //in this order, weird I know, DO NOT CHANGE THIS
