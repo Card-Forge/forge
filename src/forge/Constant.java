@@ -105,6 +105,14 @@ public interface Constant {
         public static final String ManaColors[] = {White, Blue, Black, Red, Green, Colorless, Snow};
     }
     
+    public interface Rarity{
+    	public static final String Common		= "Common";
+    	public static final String Uncommon		= "Uncommon";
+    	public static final String Rare			= "Rare";
+    	public static final String Mythic		= "Mythic";
+    	public static final String Land			= "Land";
+    }
+    
     public interface Quest {
     	public static final boolean[] fantasyQuest = new boolean[1];
     	
