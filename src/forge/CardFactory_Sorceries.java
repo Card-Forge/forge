@@ -739,7 +739,7 @@ public class CardFactory_Sorceries {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Threaten") || cardName.equals("Act of Treason")) {
+        else if(cardName.equals("Threaten") || cardName.equals("Act of Treason") || cardName.equals("Slave of Bolas")) {
             final PlayerZone[] orig = new PlayerZone[1];
             final PlayerZone[] temp = new PlayerZone[1];
             final String[] controllerEOT = new String[1];
@@ -797,6 +797,7 @@ public class CardFactory_Sorceries {
                         
                         getTargetCard().untap();
                         getTargetCard().addExtrinsicKeyword("Haste");
+                        if (cardName.equals("Slave of Bolas")) getTargetCard().addExtrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
                         
                         AllZone.EndOfTurn.addUntil(untilEOT);
                     }//is card in play?
