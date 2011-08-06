@@ -12576,7 +12576,11 @@ public class GameActionUtil {
 
 	public static Command stSetPT = new Command() {
 		/*
-		 * Syntax: K:stSetPT:<power>:<toughness>:condition:altPower:altToughness:SpellDescription
+		 * Syntax: K:stSetPT:power:toughness:Description
+		 * or (for Angry Mob/Gaea's Liege)
+		 * K:stSetPT:power:toughness:condition:altPower:altToughness:Description
+		 * or (for Levels)
+		 * K:stSetPT:power:toughness:condition:altPower:altToughness:condition2:altPower2:altToughness2:Description
 		 */
 		private static final long serialVersionUID = -8019071015309088017L;
 
@@ -12597,17 +12601,38 @@ public class GameActionUtil {
 				for(int x = 0; x < a.size(); x++) {
 					if(a.get(x).toString().startsWith("stSetPT")) {
 						String parse = card.getKeyword().get(x).toString();
-						boolean altCondition = false;
 						String k[] = parse.split(":");
+						for(int z = 0; z < k.length; z++) {
+							System.out.println("k["+z+"]: "+k[z]);
+						}
 						if(k.length < 2) {
-							
+							System.out.println("Error in stSetPT for: "+card.getName());
 						}
 						else {
 							//TODO - add some checking here...?
-							int power = k[1].matches("[0-9][0-9]?") ? Integer.parseInt(k[1]) : CardFactoryUtil.xCount(card,k[1]);
-							int toughness = k[2].matches("[0-9][0-9]?") ? Integer.parseInt(k[2]) : CardFactoryUtil.xCount(card,k[2]);
+							int power = 0;
+							int toughness = 0;
 							int altPower = 0;
 							int altToughness = 0;
+							boolean altCondition = false;
+							
+							int altPower2 = 0;
+							int altToughness2 = 0;
+							boolean altCondition2 = false;
+							
+							//double condition (for level creatures)
+							if(k.length > 6) {
+								String condition2 = k[6];
+								if(condition2.startsWith("LevelGE")) {
+									condition2 = condition2.replace("LevelGE", "");
+									int levelReq = Integer.parseInt(condition2);
+									System.out.println("condition2, got level: "+levelReq);
+									if(card.getCounters(Counters.LEVEL) >= levelReq) {
+										altCondition2 = true;
+									}
+								}
+							}
+							//single condition (for Gaea's Liege/Angry Mob)
 							if(k.length > 3) {
 								String condition = k[3];
 								if(condition.equals("isAttacking")
@@ -12618,17 +12643,36 @@ public class GameActionUtil {
 										&& AllZone.Phase.isPlayerTurn(card.getController())) {
 									altCondition = true;
 								}
+								else if(condition.startsWith("LevelGE")) {
+									condition = condition.replace("LevelGE", "");
+									int levelReq = Integer.parseInt(condition);
+									System.out.println("condition, got level: "+levelReq);
+									if(card.getCounters(Counters.LEVEL) >= levelReq) {
+										altCondition = true;
+									}
+								}
 							}
-							if(k.length > 4) {
-								altPower = k[4].matches("[0-9][0-9]?") ? Integer.parseInt(k[4]) : CardFactoryUtil.xCount(card,k[4]);
+							
+							if(altCondition2) {
+								if(k.length > 6) {
+									altPower2 = k[7].matches("[0-9][0-9]?") ? Integer.parseInt(k[7]) : CardFactoryUtil.xCount(card,k[7]);
+								}
+								if(k.length > 7) {
+									altToughness2 = k[8].matches("[0-9][0-9]?") ? Integer.parseInt(k[8]) : CardFactoryUtil.xCount(card,k[8]);
+								}
+								card.setBaseAttack(altPower2);
+								card.setBaseDefense(altToughness2);
 							}
-							if(k.length > 5) {
-								altToughness = k[5].matches("[0-9][0-9]?") ? Integer.parseInt(k[5]) : CardFactoryUtil.xCount(card,k[5]);
-							}
-							if(altCondition) {
+							else if(altCondition) {
 								//System.out.println("In alt condition");
 								//System.out.println("Setting power for ("+card.getName()+") to: "+altPower);
 								//System.out.println("Setting toughness for ("+card.getName()+") to: "+altToughness);
+								if(k.length > 4) {
+									altPower = k[4].matches("[0-9][0-9]?") ? Integer.parseInt(k[4]) : CardFactoryUtil.xCount(card,k[4]);
+								}
+								if(k.length > 5) {
+									altToughness = k[5].matches("[0-9][0-9]?") ? Integer.parseInt(k[5]) : CardFactoryUtil.xCount(card,k[5]);
+								}
 								card.setBaseAttack(altPower);
 								card.setBaseDefense(altToughness);
 							}
@@ -12636,6 +12680,8 @@ public class GameActionUtil {
 								//use the base power/toughness to calculate
 								//System.out.println("Setting power for ("+card.getName()+") to: "+power);
 								//System.out.println("Setting toughness for ("+card.getName()+") to: "+toughness);
+								power = k[1].matches("[0-9][0-9]?") ? Integer.parseInt(k[1]) : CardFactoryUtil.xCount(card,k[1]);
+								toughness = k[2].matches("[0-9][0-9]?") ? Integer.parseInt(k[2]) : CardFactoryUtil.xCount(card,k[2]);
 								card.setBaseAttack(power);
 								card.setBaseDefense(toughness);
 							}
@@ -13377,7 +13423,7 @@ public class GameActionUtil {
 			}
 		}
 	};
-	
+	/*
 	public static Command Halimar_Wavewatch  = new Command() {
 		private static final long serialVersionUID = 117755207922239944L;
 
@@ -13407,6 +13453,7 @@ public class GameActionUtil {
 			}
 		}
 	};
+	*/
 	
 	/*
 	 * Level up 2 B
@@ -15976,7 +16023,7 @@ public class GameActionUtil {
 		//commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
 		
 		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
-		commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
+		//commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
 		//commands.put("Heedless_One", Heedless_One);
 		commands.put("Homarid", Homarid);
 		

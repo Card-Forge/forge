@@ -1,8 +1,10 @@
 Name:Halimar Wavewatch
 ManaCost:1 U
 Types:Creature Merfolk Soldier
-Text:LEVEL 1-4 0/6 LEVEL 5+ 6/6 Islandwalk
+Text:no text
 PT:0/3
+K:stSetPT:0:3:LevelGE1:0:6:LevelGE5:6:6:LEVEL 1-4 0/6 LEVEL 5+ 6/6 Islandwalk
+K:stPumpSelf:Creature.countersGE5LEVEL:0/0/Islandwalk:No Condition:no text
 K:Level up:2
 K:maxLevel:5
 SVar:Rarity:Common
