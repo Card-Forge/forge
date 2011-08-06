@@ -5,5 +5,5 @@ Text:Domain - Matca Rioters's power and toughness are each equal to the number o
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/matca_rioters.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/84.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/84.jpg
 End

@@ -11,5 +11,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_cylix.jpg
 SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/132.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/138.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/138.jpg
 End

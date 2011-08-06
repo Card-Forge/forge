@@ -5,5 +5,5 @@ Text:Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X i
 PT:0/0
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse_hydra.jpg
-SetInfo:CON|Mythic|http://magiccards.info/scans/en/cfx/98.jpg
+SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/98.jpg
 End

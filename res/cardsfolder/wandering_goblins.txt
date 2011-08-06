@@ -7,5 +7,5 @@ K:abPump 3:+X/+0:Wandering Goblins gets +1/+0 until end of turn for each basic l
 SVar:X:Count$Domain
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wandering_goblins.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/76.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/76.jpg
 End

@@ -6,5 +6,5 @@ PT:4/3
 K:abPump U B:-2/-0/Unblockable
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vectis_agents.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/131.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/131.jpg
 End

@@ -7,5 +7,5 @@ K:stPumpSelf:Creature:0/0/Deathtouch:isPresent Permanent.Green+YouCtrl:Toxic Igu
 SVar:BuffedBy:Permanent.Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/toxic_iguanar.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/72.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/72.jpg
 End

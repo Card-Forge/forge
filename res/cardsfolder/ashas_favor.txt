@@ -6,5 +6,5 @@ K:Enchant creature
 K:enPump:Flying & First Strike & Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashas_favor.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/2.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/2.jpg
 End

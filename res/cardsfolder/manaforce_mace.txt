@@ -7,5 +7,5 @@ K:stPumpEquipped:Creature:X/X:no Condition:no text
 SVar:X:Count$Domain
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/manaforce_mace.jpg
-SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/139.jpg
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/139.jpg
 End

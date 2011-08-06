@@ -7,5 +7,5 @@ K:Exalted
 A:AB$Draw | Cost$ U T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ YouDiscard/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frontline_sage.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/28.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/28.jpg
 End

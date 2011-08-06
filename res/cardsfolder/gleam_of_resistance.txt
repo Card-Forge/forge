@@ -7,5 +7,5 @@ K:TypeCycling:Basic:1 W
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gleam_of_resistance.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/8.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/8.jpg
 End

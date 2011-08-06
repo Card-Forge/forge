@@ -7,5 +7,5 @@ K:stPumpSelf:Creature:X/0:no Condition:Salvage Slasher gets +1/+0 for each artif
 SVar:X:Count$TypeInYourYard.Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/salvage_slasher.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/52.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/52.jpg
 End

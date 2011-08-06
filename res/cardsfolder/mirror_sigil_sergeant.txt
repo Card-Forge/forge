@@ -6,5 +6,5 @@ PT:4/4
 K:Trample
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_sigil_sergeant.jpg
-SetInfo:CON|Mythic|http://magiccards.info/scans/en/cfx/12.jpg
+SetInfo:CFX|Mythic|http://magiccards.info/scans/en/cfx/12.jpg
 End

@@ -6,5 +6,5 @@ PT:2/2
 K:WheneverKeyword:Attacks:Self:Play:ModifyLife/-2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Infectious Horror attacks, each opponent loses 2 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_horror.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/47.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/47.jpg
 End

@@ -6,5 +6,5 @@ PT:2/2
 K:Protection from red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vedalken_outlander.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/132.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/132.jpg
 End

@@ -7,5 +7,5 @@ K:Flying
 K:abPump B:+2/-1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/darklit_gargoyle.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/7.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/7.jpg
 End

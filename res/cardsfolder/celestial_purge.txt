@@ -7,5 +7,5 @@ SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_purge.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/9.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/7.jpg
-SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/5.jpg
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/5.jpg
 End

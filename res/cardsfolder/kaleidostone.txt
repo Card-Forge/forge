@@ -7,5 +7,5 @@ K:5, tap, Sacrifice CARDNAME: Add W U B R G to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaleidostone.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/137.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/137.jpg
 End

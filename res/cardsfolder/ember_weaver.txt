@@ -8,5 +8,5 @@ K:stPumpSelf:Creature:1/0/First Strike:isPresent Permanent.Red+YouCtrl:As long a
 SVar:BuffedBy:Permanent.Red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_weaver.jpg
-SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/81.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/81.jpg
 End

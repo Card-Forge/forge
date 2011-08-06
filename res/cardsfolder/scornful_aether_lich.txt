@@ -6,5 +6,5 @@ PT:2/4
 K:abPump W B:Fear & Vigilance
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scornful_aether_lich.jpg
-SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/34.jpg
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/34.jpg
 End

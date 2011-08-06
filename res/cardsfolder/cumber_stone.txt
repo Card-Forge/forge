@@ -6,5 +6,5 @@ K:StaticEffect:Play:Permanents your Opponents Control:PTBonus/-1/0:Type.Creature
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cumber_stone.jpg
-SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/24.jpg
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/24.jpg
 End

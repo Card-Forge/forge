@@ -7,5 +7,5 @@ K:CARDNAME can't block.
 K:Unearth:B R
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shambling_remains.jpg
-SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/124.jpg
+SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/124.jpg
 End
