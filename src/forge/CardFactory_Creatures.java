@@ -6451,7 +6451,10 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlay() {
-                    return AllZone.GameAction.isCardInPlay(card) && !card.isTapped() && !card.hasSickness() && super.canPlay();
+                    return AllZone.GameAction.isCardInPlay(card) 
+                    	&& !card.isTapped() 
+                    	&& !card.hasSickness() 
+                    	&& super.canPlay();
                 }
                 
                 @Override
@@ -6461,7 +6464,10 @@ public class CardFactory_Creatures {
                         public boolean addCard(Card c) {
                         	//slapshot5 - rule 202.2c tells me this needs to use getColors()
                             //return c.isTapped() && !CardUtil.getColor(c).equals(Constant.Color.Black);
-                        	return c.isTapped() && !CardUtil.getColors(c).contains(Constant.Color.Black);
+                        	return c.isTapped() 
+                        		&& !CardUtil.getColors(c).contains(Constant.Color.Black) 
+                        		&& CardFactoryUtil.canTarget(card, c) 
+                        		&& !c.getKeyword().contains("Indestructible");
                         }
                     });
                     
@@ -6477,7 +6483,9 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && c.isTapped() && CardFactoryUtil.canTarget(card, c)
+                    if(AllZone.GameAction.isCardInPlay(c) 
+                    		&& c.isTapped() 
+                    		&& CardFactoryUtil.canTarget(card, c)
                             && !CardUtil.getColors(c).contains(Constant.Color.Black)) {
                     		//&& !CardUtil.getColor(c).equals(Constant.Color.Black)) {
                         AllZone.GameAction.destroy(c);
@@ -6496,9 +6504,12 @@ public class CardFactory_Creatures {
                         
                         public boolean addCard(Card c) {
                             PlayerZone zone = AllZone.getZone(c);
-                            return c.isCreature() && zone.is(Constant.Zone.Play) && c.isTapped()
-                            		&& !CardUtil.getColors(c).contains(Constant.Color.Black);
-                                    //&& !CardUtil.getColor(c).equals(Constant.Color.Black);
+                            return c.isCreature() 
+                            	&& zone.is(Constant.Zone.Play) 
+                            	&& CardFactoryUtil.canTarget(card, c)
+                            	&& c.isTapped()
+                            	&& !CardUtil.getColors(c).contains(Constant.Color.Black);
+                                //&& !CardUtil.getColor(c).equals(Constant.Color.Black);
                         }
                         
                     });
@@ -6914,17 +6925,19 @@ public class CardFactory_Creatures {
                     SpellAbility sa;
                     for(int i = 0; i < AllZone.Stack.size(); i++) {
                         sa = AllZone.Stack.peek(i);
-                        if(sa.getSourceCard().equals(card)) return false;
+                        if (sa.getSourceCard().equals(card)) return false;
                     }
                     
-                    if(AllZone.GameAction.isCardInPlay(card) && !card.hasSickness() && !card.isTapped() && super.canPlay()) return true;
+                    if (AllZone.GameAction.isCardInPlay(card) 
+                            && !card.hasSickness() 
+                            && !card.isTapped() 
+                            && super.canPlay()) return true;
                     else return false;
-                    
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    if(CardFactoryUtil.AI_doesCreatureAttack(card)) return false;
+                    if (CardFactoryUtil.AI_doesCreatureAttack(card)) return false;
                     
                     return CardFactoryUtil.AI_getHumanCreature(card, true).size() != 0
                             && CardFactoryUtil.AI_getHumanEnchantment(card, true).size() != 0;
@@ -6933,30 +6946,44 @@ public class CardFactory_Creatures {
                 @Override
                 public void chooseTargetAI() {
                     CardList creature = CardFactoryUtil.AI_getHumanCreature(card, true);
-                    if(creature.size() > 0) {
+                    creature = creature.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return CardFactoryUtil.canTarget(card, c)
+                                && !c.getKeyword().contains("Indestructible");
+                        }
+                    });
+                    
+                    if (creature.size() > 0) {
                         Card target = CardFactoryUtil.AI_getBestCreature(creature);
                         setTargetCard(target);
+                        
                     } else {
                         CardList enchantment = CardFactoryUtil.AI_getHumanEnchantment(card, true);
-                        if(enchantment.size() > 0) {
+                        enchantment = enchantment.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return CardFactoryUtil.canTarget(card, c)
+                                    && !c.getKeyword().contains("Indestructible");
+                            }
+                        });
+                        
+                        if (enchantment.size() > 0) {
                             Card target = CardFactoryUtil.AI_getBestEnchantment(enchantment, card, true);
                             setTargetCard(target);
                         }
                     }
-                }
+                }//chooseTargetAI()
                 
                 @Override
                 public void resolve() {
-                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                    if (AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(card, getTargetCard())) {
                         AllZone.GameAction.destroy(getTargetCard());
                     }
                 }//resolve()
             };//SpellAbility
+            
             card.addSpellAbility(ability);
             ability.setDescription("tap, 1 W B: Destroy target creature or enchantment.");
-            
-            //ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
             
             Input runtime = new Input() {
                 private static final long serialVersionUID = -8099713981623158814L;
@@ -6968,17 +6995,18 @@ public class CardFactory_Creatures {
                     all.addAll(AllZone.Computer_Play.getCards());
                     all = all.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return (c.isEnchantment() || c.isCreature()) && CardFactoryUtil.canTarget(card, c);
+                            return (c.isEnchantment() || c.isCreature()) 
+                                    && CardFactoryUtil.canTarget(card, c);
                         }
                     });
                     
                     stopSetNext(CardFactoryUtil.input_targetSpecific(ability, all,
                             "Choose target creature or enchantment.", true, false));
                 }
-            };
+            };//Input runtime
+            
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Wojek Embermage")) {
@@ -10183,43 +10211,47 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Stalking Assassin")) {
-        	
+        else if (cardName.equals("Stalking Assassin")) {
+            
             final Ability_Tap destroy = new Ability_Tap(card, "3 B") {
-				private static final long serialVersionUID = -6612039354743803366L;
+                private static final long serialVersionUID = -6612039354743803366L;
 
-				@Override
+                @Override
                 public boolean canPlayAI() {
                     CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
                     human = human.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isTapped() && CardFactoryUtil.canTarget(card, c);
+                            return c.isTapped() 
+                                && CardFactoryUtil.canTarget(card, c) 
+                                && !c.getKeyword().contains("Indestructible");
                         }
                     });
                     
                     if (human.size() > 0) {
-                    	CardListUtil.sortAttack(human);
+                        CardListUtil.sortAttack(human);
                         CardListUtil.sortFlying(human);
-                    	setTargetCard(human.get(0));
+                        setTargetCard(human.get(0));
                     }
                                         
                     return 0 < human.size();
-                }
+                }//canPlayAI()
                 
                 @Override
                 public void resolve() {
                     Card c = getTargetCard();
                     
-                    if(AllZone.GameAction.isCardInPlay(c) && c.isTapped() && CardFactoryUtil.canTarget(card, c)) {
+                    if (AllZone.GameAction.isCardInPlay(c) 
+                            && c.isTapped() 
+                            && CardFactoryUtil.canTarget(card, c)) {
                         AllZone.GameAction.destroy(c);
                     }
                 }//resolve()
             };//SpellAbility
             
             Input target = new Input() {
-				private static final long serialVersionUID = -8953453455402148585L;
+                private static final long serialVersionUID = -8953453455402148585L;
 
-				@Override
+                @Override
                 public void showMessage() {
                     AllZone.Display.showMessage("Select target tapped creature to destroy");
                     ButtonUtil.enableOnlyCancel();
@@ -10234,7 +10266,9 @@ public class CardFactory_Creatures {
                 public void selectCard(Card c, PlayerZone zone) {
                     if (!CardFactoryUtil.canTarget(card, c)) {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    } else if (c.isCreature() && zone.is(Constant.Zone.Play) && c.isTapped()) {
+                    } else if (c.isCreature() 
+                            && zone.is(Constant.Zone.Play) 
+                            && c.isTapped()) {
                         //tap ability
                         card.tap();
                         
@@ -10245,10 +10279,10 @@ public class CardFactory_Creatures {
                 }//selectCard()
             };//Input
             
-        	final SpellAbility tap = new Ability_Tap(card, "3 U") {
-				private static final long serialVersionUID = -8634280576775825017L;
+            final SpellAbility tap = new Ability_Tap(card, "3 U") {
+                private static final long serialVersionUID = -8634280576775825017L;
 
-				@Override
+                @Override
                 public void resolve() {
                     Card c = getTargetCard();
                     c.tap();
@@ -10256,17 +10290,18 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public boolean canPlayAI() {
-                	CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
-                	human = human.filter(new CardListFilter() {
-                		public boolean addCard(Card c) {
-                			return c.isUntapped() && CardFactoryUtil.canTarget(card, c);
-                		}
-                	});
-                	
+                    CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    human = human.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isUntapped() 
+                                && CardFactoryUtil.canTarget(card, c);
+                        }
+                    });
+                    
                     if (human.size() > 0) {
-                    	CardListUtil.sortAttack(human);
+                        CardListUtil.sortAttack(human);
                         CardListUtil.sortFlying(human);
-                    	setTargetCard(human.get(0));
+                        setTargetCard(human.get(0));
                     }
                     
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
@@ -10274,19 +10309,21 @@ public class CardFactory_Creatures {
                     assassins.addAll(play.getCards());
                     
                     assassins = assassins.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
+                        public boolean addCard(Card c) {
                             return c.isCreature() && (!c.hasSickness() || c.getKeyword().contains("Haste")) && 
                                    c.isUntapped() && !c.equals(card) && 
                                   (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || 
                                    c.getName().equals("Tetsuo Umezawa") || c.getName().equals("Stalking Assassin"));
-                    	}
+                        }
                     });
                     
                     Combat attackers = ComputerUtil.getAttackers();
                     CardList list = new CardList(attackers.getAttackers());
-                	
-                    return (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer().equals(card.getController()) && 
-                    		human.size() > 0 && (assassins.size() > 0 || !list.contains(card)));
+                    
+                    return (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) 
+                            && AllZone.Phase.getActivePlayer().equals(card.getController()) 
+                            && human.size() > 0 
+                            && (assassins.size() > 0 || !list.contains(card)));
                     
                 }//canPlayAI
             };//SpellAbility
@@ -20212,7 +20249,7 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START ************************
-        if(cardName.equals("Lord of the Undead")) {
+        else if(cardName.equals("Lord of the Undead")) {
             final Ability_Tap ability = new Ability_Tap(card, "1 B") {
                 
 				private static final long serialVersionUID = -4287216165943846367L;
