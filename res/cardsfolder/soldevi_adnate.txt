@@ -2,7 +2,7 @@ Name:Soldevi Adnate
 ManaCost:1 B
 Types:Creature Human Cleric
 Text:no text
-A:AB$Mana | Cost$T Sac<1/Creature.Black,Creature.Artifact> | Produced$B | Amount$ X | SpellDescription$ Add to your mana pool an amount of black mana equal to the sacrificed creature's converted mana cost.
+A:AB$ Mana | Cost$ T Sac<1/Creature.Black,Creature.Artifact> | Produced$ B | Amount$ X | SpellDescription$ Add to your mana pool an amount of black mana equal to the sacrificed creature's converted mana cost.
 SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Common
