@@ -2440,6 +2440,188 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(bbDstryTgt);
              }
          }//spDestroyTgt
+        
+        // Generic enters the battlefield destroy target
+        if (hasKeyword(card, "etbDestroyTgt") != -1)
+        {
+        	int n = hasKeyword(card, "etbDestroyTgt");
+        	
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+        	
+        	String k[] = parse.split(":");
+        	String Targets = k[1];
+        	final String Tgts[] = Targets.split(",");
+        	
+            String tmpDesc = card.getSpellText();
+            int i = tmpDesc.indexOf("destroy target ");
+            tmpDesc = tmpDesc.substring(i + 15);
+            i = tmpDesc.indexOf(".");
+            tmpDesc = tmpDesc.substring(0, i);
+            final String Selec = "Select target " + tmpDesc + " to destroy.";
+        	
+        	final boolean NoRegen[] = {false};
+        	if (k.length > 2)
+        	{
+        		if (k[2].equals("NoRegen"))
+        			NoRegen[0] = true;
+        	}
+        	
+        	final boolean May[] = {false};
+        	if (parse.contains("May"))
+        		May[0] = true;
+        	
+        	final boolean Evoke[] = {false};
+        	if (card.getSVar("Evoke").length() > 0)
+        		Evoke[0] = true;
+        	
+        	card.clearSpellAbility();
+        	
+        	SpellAbility spETBDestroyTgt = new Spell_Permanent(card)
+        	{
+                private static final long serialVersionUID = -1148528222969323318L;
+                
+                @Override
+                public boolean canPlayAI() 
+                {
+                    Random r = new Random();
+                	                    
+                    CardList hCards = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                    hCards = hCards.getValidCards(Tgts);
+                    if (hCards.size() > 0)
+                    	return true;
+                    
+                    CardList cCards = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+                    cCards = cCards.getValidCards(Tgts);
+                    if (cCards.size() == 0)
+                    	return true;
+                    else
+                    {
+                    	if (r.nextInt(100) > 67)
+                    		return true;
+                    }
+                    
+                	return false;
+                }
+        	};
+        	card.addSpellAbility(spETBDestroyTgt);
+        	
+            final SpellAbility saDestroyTgt = new Ability(card, "0") 
+            {
+                @Override
+                public void resolve() 
+                {
+                    Card c = getTargetCard();
+                    if (c == null)
+                    	return;
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) 
+                    {
+                        if(c.isToken()) 
+                        	AllZone.getZone(c).remove(c);
+                        else
+                        	AllZone.GameAction.destroy(c);
+                    }
+                }
+            };
+            saDestroyTgt.setStackDescription(card.getName() + " - destroy target " + Selec + ".");
+            
+            Command etbDestroyTgt = new Command() 
+            {
+                private static final long serialVersionUID = 9072052875006010497L;
+                
+                public void execute() 
+                {
+                    CardList hCards = new CardList(AllZone.Human_Play.getCards());
+                    CardList cCards = new CardList(AllZone.Computer_Play.getCards());
+                    
+                    hCards = hCards.getValidCards(Tgts);
+                    cCards = cCards.getValidCards(Tgts);
+                    
+                    if(hCards.size() > 0 || cCards.size() > 0) 
+                    {
+                        if (card.getController().equals(Constant.Player.Human))
+                        {
+                            Input inDT = CardFactoryUtil.input_targetValid(saDestroyTgt, Tgts, Selec);
+
+                            AllZone.InputControl.setInput(inDT);
+                            
+                            if (May[0] == true)
+                            	ButtonUtil.enableOnlyCancel();
+                            else
+                            	ButtonUtil.disableAll();
+                        } 
+                        else
+                        {
+                        	Card c = new Card();
+                        	CardList dChoices = new CardList();
+                        	if(hCards.size() > 0) 
+                            {
+                                for (int i=0; i<Tgts.length; i++)
+                                {
+                                	if (Tgts[i].startsWith("Creature"))
+                                	{
+                                		c = CardFactoryUtil.AI_getBestCreature(hCards);
+                                		if (c != null)
+                                			dChoices.add(c);
+                                	}
+                                	
+                                	CardListUtil.sortByTextLen(hCards);
+                                	dChoices.add(hCards.get(0));
+                                	
+                                	CardListUtil.sortCMC(hCards);
+                                	dChoices.add(hCards.get(0));
+                                }
+                                
+                                c = dChoices.get(CardUtil.getRandomIndex(dChoices));
+                                saDestroyTgt.setTargetCard(c);
+                                AllZone.Stack.add(saDestroyTgt);
+                            } 
+                        	else if (cCards.size() > 0 && May[0] == false)
+                        	{
+                    			for (int i=0; i<Tgts.length; i++)
+                    			{
+                    				if (Tgts[i].startsWith("Creature"))
+                    				{
+                    					c = CardFactoryUtil.AI_getWorstCreature(cCards);
+                    					if (c != null)
+                    						dChoices.add(c);
+                    				}
+                    				
+                    				CardListUtil.sortByTextLen(cCards);
+                    				dChoices.add(cCards.get(cCards.size() - 1));
+                    				
+                    				CardListUtil.sortCMC(cCards);
+                    				dChoices.add(cCards.get(cCards.size() - 1));
+                    			}
+                    			
+                    			c = dChoices.get(CardUtil.getRandomIndex(dChoices));
+                                saDestroyTgt.setTargetCard(c);
+                                AllZone.Stack.add(saDestroyTgt);
+                        	}
+                        }
+                    }
+                }
+            };
+            card.addComesIntoPlayCommand(etbDestroyTgt);
+            
+            
+            if (Evoke[0] == true)
+            {
+            	String EvCost = card.getSVar("Evoke");
+            	
+            	SpellAbility evDestroyTgt = new Spell_Evoke(card, EvCost)
+            	{
+                    private static final long serialVersionUID = 5261598836419831953L;
+                    
+                    @Override
+                    public boolean canPlayAI() {
+                        return false;
+                    }            		
+            	};
+            	card.addSpellAbility(evDestroyTgt);
+            }
+        } // etbDestoryTgt
 
         // Generic destroy all card
         if(hasKeyword(card, "spDestroyAll") != -1) {
