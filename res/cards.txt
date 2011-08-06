@@ -1,3 +1,11 @@
+Sutured Ghoul
+4 B B B
+Creature Zombie
+As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard. Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
+1/1
+Trample
+SVar:Rarity:Rare
+
 Patriarch's Bidding
 3 B B
 Sorcery
@@ -9,6 +17,7 @@ Death Baron
 Creature Zombie Wizard
 Skeleton creatures you control and other Zombie creatures you control get +1/+1 and have deathtouch.
 2/2
+SVar:Rarity:Rare
 
 Squadron Hawk
 1 W
@@ -17,6 +26,7 @@ no text
 1/1
 Flying
 When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:Rarity:Common
 
 Skyshroud Sentinel
 2 G
@@ -24,6 +34,7 @@ Creature Elf
 no text
 1/1
 When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:Rarity:Common
 
 Nesting Wurm
 4 G G
@@ -31,6 +42,7 @@ Creature Wurm
 no text
 4/3
 When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:Rarity:Uncommon
 
 Howling Wolf
 2 G G
@@ -38,6 +50,7 @@ Creature Wolf
 no text
 2/2
 When CARDNAME enters the battlefield, you may search your library for up to three cards named CARDNAME, reveal them, and put them into your hand. If you do, shuffle your library.
+SVar:Rarity:Common
 
 Lovisa Coldeyes
 3 R R
@@ -45,6 +58,7 @@ Legendary Creature Human Barbarian
 Warrior, Berserker, and/or other Barbarian creatures get +2/+2 and have haste.
 3/3
 SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
 
 Dragon Tyrant
 8 R R
@@ -56,6 +70,7 @@ Trample
 Double Strike
 At the beginning of your upkeep, sacrifice CARDNAME unless you pay:R R R R
 abPump R:+1/+0
+SVar:Rarity:Rare
 
 Chaosphere
 2 R
@@ -65,6 +80,7 @@ StaticEffect:Play:All Permanents:Keyword/CARDNAME can block only creatures with 
 StaticEffect:Play:All Permanents:Keyword/Reach:Type.Creature!without.Flying:Creatures without flying have reach. (They can block creatures with flying.)
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
+SVar:Rarity:Rare
 
 Dense Canopy
 1 G
@@ -73,6 +89,7 @@ no text
 StaticEffect:Play:All Permanents:Keyword/CARDNAME can block only creatures with flying.:Type.Creature!with.Flying:Creatures with flying can block only creatures with flying.
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
 
 Seething Pathblazer
 2 R
@@ -80,6 +97,7 @@ Creature Elemental Warrior
 no text
 2/2
 abPump 0 Sac-Elemental:+2/+0/First Strike
+SVar:Rarity:Common
 
 Abandoned Outpost
 no cost

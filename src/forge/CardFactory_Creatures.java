@@ -20863,7 +20863,76 @@ public class CardFactory_Creatures {
               };//Ability_Mana
 
               card.addSpellAbility(ability);
-          }//*************** END ************ END **************************         
+          }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        if(cardName.equals("Sutured Ghoul")) {
+                
+                //final String player = card.getController();
+                final int[] numCreatures = new int[1];
+                final int[] sumPower = new int[1];
+                final int[] sumToughness = new int[1];
+                
+                Command intoPlay = new Command() {
+                    private static final long serialVersionUID = -75234586897814L;
+                    
+                    public void execute() {
+                        int intermSumPower,intermSumToughness;
+                        intermSumPower = intermSumToughness = 0;
+                        PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                        CardList creats = new CardList(grave.getCards());
+                        creats = creats.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return c.isCreature() && !c.equals(card);
+                            }
+                        });
+                        
+                        //System.out.println("Creats size: " + creats.size());
+                        
+                        if(card.getController().equals(Constant.Player.Human)) {
+                            if (creats.size() > 0)
+                            {
+	                        	List<Card> selection = AllZone.Display.getChoicesOptional("Select creatures to sacrifice", creats.toArray());
+	                            
+	                            numCreatures[0] = selection.size();
+	                            for(int m = 0; m < selection.size(); m++) {
+	                            	intermSumPower += selection.get(m).getBaseAttack();
+	                            	intermSumToughness += selection.get(m).getBaseDefense();
+	                                AllZone.GameAction.removeFromGame(selection.get(m));
+	                            }
+                            }
+                            
+                        }//human
+                        else {
+                            int count = 0;
+                            for(int i = 0; i < creats.size(); i++) {
+                                Card c = creats.get(i);
+                                if(c.getNetAttack() <= 2 && c.getNetDefense() <= 3) {
+                                	intermSumPower += c.getBaseAttack();
+                                	intermSumToughness += c.getBaseDefense();
+                                    AllZone.GameAction.removeFromGame(c);
+                                    count++;
+                                }
+                                //is this needed?
+                                AllZone.Computer_Play.updateObservers();
+                            }
+                            numCreatures[0] = count;
+                        }
+                        sumPower[0] = intermSumPower;
+                        sumToughness[0] = intermSumToughness;
+                        card.setBaseAttack(sumPower[0]);
+                        card.setBaseDefense(sumToughness[0]);
+                        //AllZone.Stack.add(suture);
+                    }
+                };
+                
+                //suture.setStackDescription(card.getName() + " - has power equal to the sum of the power of all exiled creatures and toughness equal to the sum of their toughness.");
+                //suture.setDescription("When Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard. Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.");
+                //card.addSpellAbility(suture);
+                card.addComesIntoPlayCommand(intoPlay);
+                
+                //card.addSpellAbility(CardFactoryUtil.ability_Devour(card, magnitude));
+        }//*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
