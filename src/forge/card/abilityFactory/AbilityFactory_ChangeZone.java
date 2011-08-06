@@ -1413,8 +1413,16 @@ public class AbilityFactory_ChangeZone {
 		HashMap<String,String> params = af.getMapParams();
         String destination = params.get("Destination");
         String origin = params.get("Origin");
+		
 		CardList cards = AllZoneUtil.getCardsInZone(origin);
 		cards = filterListByType(cards, params, "ChangeType", sa);
+		
+        Player tgtPlayer = null;
+		if(af.getAbTgt().getTargetPlayers() != null) {
+			tgtPlayer = af.getAbTgt().getTargetPlayers().get(0);
+			cards = AllZoneUtil.getCardsInZone(origin,tgtPlayer);
+		}
+
 		
 		// I don't know if library position is necessary. It's here if it is, just in case
 		int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
