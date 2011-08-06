@@ -3044,32 +3044,6 @@ public class GameActionUtil {
 		
 		AllZone.Stack.add(ability2);
 	}
-
-	public static void executeSwordOfFireAndIceEffects(Card source) {
-		final Card src = source;
-		Ability ability = new Ability(src, "0") {
-			@Override
-			public void resolve() {
-				Card target = getTargetCard();
-				if(target != null)
-					target.addDamage(2, src);
-				else {
-					getTargetPlayer().addDamage(2, src);
-				}
-				
-				src.getController().drawCard();
-			}
-		}; // ability
-
-		ability.setChooseTargetAI(CardFactoryUtil.AI_targetHumanCreatureOrPlayer());
-		ability.setStackDescription("Sword of Fire and Ice - Deals 2 damage to target creature or player and you draw a card." );
-		if (src.getController() == AllZone.HumanPlayer) {
-	       	AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreaturePlayer(ability, true, true));
-	    } else {
-	    	ability.chooseTargetAI();
-	       	AllZone.Stack.add(ability);
-	    }
-	}
 	
 	public static void executeSwordOfLightAndShadowEffects(final Card source) {
 		final Card src = source;
@@ -3417,10 +3391,6 @@ public class GameActionUtil {
         if(c.isEquipped()) {
         	ArrayList<Card> equips = c.getEquippedBy();
         	for(Card equip:equips) {
-
-        		if(equip.getName().equals("Sword of Fire and Ice")) {
-        			GameActionUtil.executeSwordOfFireAndIceEffects(equip);
-        		}
         		if(equip.getName().equals("Sword of Light and Shadow")) {
         			GameActionUtil.executeSwordOfLightAndShadowEffects(equip);
         		}
