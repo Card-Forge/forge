@@ -573,7 +573,39 @@ class CardFactory_Equipment {
                         card.equipCard(getTargetCard());
                     }
                 }
-            };
+                
+                @Override
+                public boolean canPlay() {
+                    return AllZone.getZone(card).is(Constant.Zone.Play)
+                            && AllZone.Phase.getActivePlayer().equals(card.getController())
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals("Main2"));
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    return getCreature().size() != 0 && !card.isEquipping();
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    Card target = CardFactoryUtil.AI_getBestCreature(getCreature());
+                    setTargetCard(target);
+                }
+                
+                CardList getCreature() {    // build list and do some pruning
+                	CardList list = new CardList(AllZone.Computer_Play.getCards());
+                	list = list.filter(new CardListFilter() {
+                		public boolean addCard(Card c) {
+                			return c.isCreature() && (!CardFactoryUtil.AI_doesCreatureAttack(c))
+                			&& CardFactoryUtil.canTarget(card, c)
+                			&& (!c.getKeyword().contains("Defender"));
+                		}
+                	});
+                	return list;
+                }//getCreature()
+                
+            };// equip ability
+
             
             Command onEquip = new Command() {
 				private static final long serialVersionUID = -5278473287541239581L;
