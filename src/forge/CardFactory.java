@@ -16877,11 +16877,11 @@ public class CardFactory implements NewConstants {
       //*************** END ************ END **************************
         
       //*************** START *********** START **************************
-      else if (cardName.equals("Earthquake") || cardName.equals("Rolling Earthquake"))
+      else if (cardName.equals("Earthquake") || cardName.equals("Rolling Earthquake") || cardName.equals("Fault Line"))
       {
     	  final String[] keyword = new String[1];
     	  
-    	  if (cardName.equals("Earthquake"))
+    	  if (cardName.equals("Earthquake") || cardName.equals("Fault Line"))
     		  keyword[0] = "Flying";
     	  else
     		  keyword[0] = "Horsemanship";
@@ -16992,6 +16992,8 @@ public class CardFactory implements NewConstants {
       }
       //*************** END ************ END **************************
         
+        
+      //*************** START *********** START **************************
       else if(cardName.equals("Braingeyser"))
       {
     	  final SpellAbility spell = new Spell(card){
