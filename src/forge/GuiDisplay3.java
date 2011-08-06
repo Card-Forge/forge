@@ -1259,7 +1259,7 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
         */
         
         cardImagePanel.setScalingBlur(false); //use blured image if scaling down more than 50%
-        cardImagePanel.setScaleLarger(true); //upscale if needed true
+        cardImagePanel.setScaleLarger(false); //upscale if needed true
         cardImagePanel.setScalingType(ScalingType.bicubic); // type of scaling bicubic has good quality / speed ratio
         cardImagePanel.setScalingMultiPassType(MultipassType.none);
         
