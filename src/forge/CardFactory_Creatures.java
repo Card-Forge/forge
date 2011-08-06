@@ -6177,7 +6177,6 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility(ability));
         }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
         else if(cardName.equals("Intrepid Hero")) {
             //tap ability - no cost - target creature
@@ -6232,13 +6231,14 @@ public class CardFactory_Creatures {
                 }
                 
                 @Override
-                public void selectCard(Card card, PlayerZone zone) {
-                    if(card.isCreature() && zone.is(Constant.Zone.Play) && 3 < card.getNetAttack()) {
-                        ability.setTargetCard(card);
+                public void selectCard(Card c, PlayerZone zone) {
+                    if(c.isCreature() && zone.is(Constant.Zone.Play) && 
+                    		3 < c.getNetAttack() && CardFactoryUtil.canTarget(card, c)) {
+                        ability.setTargetCard(c);
                         stopSetNext(new Input_NoCost_TapAbility(ability));
                     }
                 }
-            };
+            };//Input
             
             card.addSpellAbility(ability);
             ability.setDescription("tap: Destroy target creature with power 4 or greater.");
