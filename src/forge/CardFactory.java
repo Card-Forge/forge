@@ -18306,6 +18306,37 @@ public class CardFactory implements NewConstants {
         	ab1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ab1));
         	card.addSpellAbility(ab1);
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Repay in Kind")) {
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -4587825292642224776L;
+
+				@Override
+        		public boolean canPlayAI() {
+        			return AllZone.Human_Life.getLife() > AllZone.Computer_Life.getLife();
+        		}
+
+        		@Override
+        		public void resolve() {
+        			int humanLife = AllZone.Human_Life.getLife();
+        			int compLife = AllZone.Computer_Life.getLife();
+        			if( humanLife > compLife ) {
+        				AllZone.Human_Life.setLife(compLife);
+        			}
+        			else if( compLife > humanLife ) {
+        				AllZone.Computer_Life.setLife(humanLife);
+        			}
+        			else {
+        				//they must be equal, so nothing to do
+        			}
+        		}
+        	};//SpellAbility
+        	
+        	spell.setStackDescription(card.getName() + " - Each player's life total becomes the lowest life total among all players..");
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
 
         
         // Cards with Cycling abilities
