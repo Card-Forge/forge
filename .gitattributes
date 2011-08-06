@@ -6517,6 +6517,7 @@ src/forge/Gui_QuestOptions.java svneol=native#text/plain
 src/forge/Gui_Quest_Assignments.java -text svneol=native#text/plain
 src/forge/Gui_Quest_DeckEditor.java -text svneol=native#text/plain
 src/forge/Gui_Quest_DeckEditor_Menu.java -text svneol=native#text/plain
+src/forge/Gui_Quest_Deck_Info.java svneol=native#text/plain
 src/forge/Gui_SealedDeck.java svneol=native#text/plain
 src/forge/Gui_SetEditor.java svneol=native#text/plain
 src/forge/Gui_Shops.java -text svneol=native#text/plain
