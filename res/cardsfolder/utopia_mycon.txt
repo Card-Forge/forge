@@ -11,4 +11,5 @@ A:AB$Mana | Cost$ Sac<1/Saproling> | Produced$ R | SpellDescription$ Add R to yo
 A:AB$Mana | Cost$ Sac<1/Saproling> | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/utopia_mycon.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/140.jpg
 End

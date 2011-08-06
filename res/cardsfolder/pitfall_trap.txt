@@ -7,4 +7,5 @@ A:SP$Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking+withoutFlying | TgtProm
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pitfall_trap.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/32.jpg
 End

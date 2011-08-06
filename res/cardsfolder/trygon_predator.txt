@@ -8,4 +8,5 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Optional$ 
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact.YouDontCtrl,Enchantment.YouDontCtrl | TgtPrompt$ Select target artifact or enchantment you don't control.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trygon_predator.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/133.jpg
 End

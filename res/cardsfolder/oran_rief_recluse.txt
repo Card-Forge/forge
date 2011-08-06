@@ -10,4 +10,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.withFlying | TgtProm
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oran_rief_recluse.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/173.jpg
 End
