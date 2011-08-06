@@ -5820,8 +5820,8 @@ public class CardFactory_Creatures {
         
                             if(grave != null && AllZone.GameAction.isCardInZone(target[0], grave)) {
                                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                                AllZone.GameAction.moveTo(play, target[0]);
                                 target[0].setController(card.getController());
+                                AllZone.GameAction.moveTo(play, target[0]);
                             }
                         }
                     });
