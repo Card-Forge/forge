@@ -5067,6 +5067,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
 
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Sacred Nectar")) {
             SpellAbility spell = new Spell(card) {
@@ -5091,6 +5092,7 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
             
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -5138,6 +5140,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
 
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Reviving Dose")) {
             SpellAbility spell = new Spell(card) {
@@ -5155,7 +5158,9 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************   
-
+*/
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Swords to Plowshares")) {
             SpellAbility spell = new Spell(card) {
@@ -9092,6 +9097,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
 
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Wandering Stream")) {
             SpellAbility spell = new Spell(card) {
@@ -9121,7 +9127,9 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-       
+  */
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Worldly Tutor") || cardName.equals("Sylvan Tutor")) {
             SpellAbility spell = new Spell(card) {
@@ -10349,6 +10357,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         if(cardName.equals("Festival of Trokin")) {
             final SpellAbility spell = new Spell(card) {
@@ -10387,6 +10397,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************

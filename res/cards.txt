@@ -4745,6 +4745,7 @@ Sacred Nectar
 1 W
 Sorcery
 no text
+spGainLife:4
 
 Maniacal Rage
 1 R
@@ -12590,7 +12591,9 @@ Put X 1/1 white Pegasus creature tokens with flying into play, where X is your l
 Festival of Trokin
 W
 Sorcery
-For each creature you have in play, you gain 2 life.
+no text
+spGainLife:X:You gain 2 life for each creature you control.:Festival of Trokin - player gains X life
+SVar:X:Count$TypeYouCtrl.Creature/Times.2
 
 Savannah
 no cost
@@ -16786,7 +16789,9 @@ Search your library for two basic land cards, reveal those cards, and put one in
 Wandering Stream
 2 G
 Sorcery
-You gain 2 life for each basic land type among lands you control.
+no text
+spGainLife:X:Domain - You gain 2 life for each basic land type among lands you control.:Wandering Stream - player gains X life
+SVar:X:Count$Domain/Times.2
 
 Aggressive Urge
 1 G
@@ -17074,7 +17079,8 @@ Tap all nonwhite creatures.
 Reviving Dose
 2 W
 Instant
-You gain 3 life.
+no text
+spGainLife:3
 Draw a card.
 
 Angelic Blessing
