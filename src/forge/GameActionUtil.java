@@ -12884,43 +12884,6 @@ public class GameActionUtil {
 		}// execute()
 	};
 
-	
-	public static Command Goblin_Assault                = new Command() {
-
-		private static final long serialVersionUID = 5138624295158786103L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "CARDNAME attacks each turn if able.";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Goblin Assault");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Goblin");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	}; //Goblin Assault               
-
 	public static Command That_Which_Was_Taken        = new Command() {
 		private static final long serialVersionUID   = -4142514935709694293L;
 
@@ -16285,7 +16248,7 @@ public class GameActionUtil {
 		commands.put("Gaddock_Teeg", Gaddock_Teeg);
 		//commands.put("Gaeas_Avenger", Gaeas_Avenger);
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
-		commands.put("Goblin_Assault", Goblin_Assault);
+		//commands.put("Goblin_Assault", Goblin_Assault);
 		commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
 		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
 		commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);

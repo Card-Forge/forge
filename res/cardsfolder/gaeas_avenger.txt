@@ -1,7 +1,7 @@
 Name:Gaea's Avenger
 ManaCost:1 G G
 Types:Creature Treefolk
-Text:Gaea's Avenger's power and toughness are each equal to 1 plus the number of artifacts your opponents control.
+Text:no text
 PT:1+*/1+*
 K:stSetPT:Count$NumTypeOppCtrl.Artifact/Plus.1:Count$NumTypeOppCtrl.Artifact/Plus.1:CARDNAME's power and toughness are each equal to 1 plus the number of artifacts your opponents control.
 SVar:Rarity:Rare
