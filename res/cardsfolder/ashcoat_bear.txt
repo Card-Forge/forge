@@ -6,4 +6,5 @@ PT:2/2
 K:Flash
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card114905.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/190.jpg
 End

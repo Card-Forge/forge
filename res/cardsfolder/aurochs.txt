@@ -8,4 +8,6 @@ K:stPumpSelf:Creature:X/0:Creature.attacking+Self:Whenever Aurochs attacks, it g
 SVar:X:Count$Valid Creature.attacking+YouCtrl+Other
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurochs.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/141.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/113.jpg
 End

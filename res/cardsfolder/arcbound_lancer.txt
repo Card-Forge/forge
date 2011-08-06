@@ -7,4 +7,5 @@ K:First Strike
 K:Modular 4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_lancer.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/98.jpg
 End

@@ -7,4 +7,5 @@ K:Flying
 K:Modular 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_stinger.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/103.jpg
 End

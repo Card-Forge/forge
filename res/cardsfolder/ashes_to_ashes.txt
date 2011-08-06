@@ -5,4 +5,7 @@ Text:Ashes to Ashes removes two target non-artifact creatures from the game and 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/4e/en-us/card2086.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/3.jpg
+SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/1.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/3.jpg
 End

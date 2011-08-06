@@ -7,4 +7,5 @@ K:abPump B:+1/+1
 K:CostChange:Player:More:B:Spell:black:All:NoSpecial
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/andradite_leech.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/93.jpg
 End

@@ -6,4 +6,6 @@ PT:1/1
 K:abTapTgt T:Creature.powerLE2:Tap target creature with power 2 or less.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aysen_bureaucrats.jpg
+SetInfo:HML|Common|http://magiccards.info/scans/en/hl/104.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/285.jpg
 End

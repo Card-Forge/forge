@@ -5,4 +5,5 @@ Text:no text
 K:abDestroyTgtV Sac<1/Land>:Enchantment:Destroy target enchantment.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_fracture.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/2.jpg
 End

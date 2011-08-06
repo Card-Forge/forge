@@ -7,4 +7,5 @@ K:Flying
 K:etbBounceTgt:Land:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_fogbringer.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/34.jpg
 End

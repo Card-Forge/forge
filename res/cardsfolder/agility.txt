@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+1/+1/Flanking
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agility.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/154.jpg
 End

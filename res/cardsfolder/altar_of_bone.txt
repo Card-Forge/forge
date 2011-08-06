@@ -6,4 +6,5 @@ A:SP$Fetch | Cost$ W G Sac<1/Creature> | Destination$ Hand | FetchType$ Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/altar_of_bone.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/359.jpg
 End

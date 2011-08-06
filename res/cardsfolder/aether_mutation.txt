@@ -7,4 +7,5 @@ A:SP$Bounce | Cost$ 3 G U | ValidTgts$ Creature | TgtPrompt$ Select target creat
 SVar:X:Count$CardManaCost
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_mutation.jpg
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/91.jpg
 End

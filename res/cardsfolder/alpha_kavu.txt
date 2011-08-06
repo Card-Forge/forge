@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ 1 G | NumAtt$ -1 | NumDef$ +1 | ValidTgts$ Creature.Kavu | Tgt
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_kavu.jpg
+SetInfo:PLS|Uncommon|http://magiccards.info/scans/en/ps/77.jpg
 End

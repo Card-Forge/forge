@@ -6,4 +6,5 @@ PT:3/3
 K:abPumpTgtC 2:Persist
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/antler_skulkin.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/167.jpg
 End

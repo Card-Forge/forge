@@ -7,4 +7,5 @@ K:Flying
 A:AB$Bounce | Cost$ Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Destination$ Hand | PlayerTurn$ True | ActivatingPhases$ Upkeep | SpellDescription$ Return up to two target creatures to their owners' hands. Activate this ability only during your upkeep.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_augur.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/32.jpg
 End

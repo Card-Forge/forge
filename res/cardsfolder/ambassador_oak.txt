@@ -6,4 +6,5 @@ PT:3/3
 K:etbMakeToken<>1<>Elf Warrior<>G 1 1 Elf Warrior<>Controller<>G<>Creature;Elf;Warrior<>1<>1<>None<>Put a 1/1 green Elf Warrior creature token onto the battlefield.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambassador_oak.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/113.jpg
 End

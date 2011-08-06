@@ -7,4 +7,5 @@ A:AB$Untap | Cost$ T | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target la
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_elder.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/233.jpg
 End

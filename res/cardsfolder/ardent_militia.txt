@@ -6,4 +6,10 @@ PT:2/5
 K:Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ardent_militia.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/3.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/2.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/166.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/3.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/121.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/5.jpg
 End

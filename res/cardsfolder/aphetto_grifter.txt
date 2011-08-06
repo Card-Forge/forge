@@ -7,4 +7,5 @@ K:abTapTgt tapXType<2/Wizard>:Permanent:Tap target permanent.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_grifter.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/65.jpg
 End

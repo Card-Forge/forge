@@ -6,4 +6,5 @@ PT:2/2
 K:Haste
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/jud/en-us/card33717.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/77.jpg
 End

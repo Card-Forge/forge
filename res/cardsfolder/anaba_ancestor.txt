@@ -7,4 +7,5 @@ A:AB$Pump | Cost$ T | NumAtt$ +1 | NumDef$ +1 | ValidTgts$ Creature.Minotaur+Oth
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anaba_ancestor.jpg
+SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/81.jpg
 End

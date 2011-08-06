@@ -8,4 +8,5 @@ K:Echo:3 R
 K:etbDestroyTgt:Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avalanche_riders.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/74.jpg
 End

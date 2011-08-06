@@ -6,4 +6,5 @@ PT:2/4
 K:StaticEffect:Play:All Permanents:Keyword/Vigilance:Type.Creature!Type.Cleric:Cleric creatures have vigilance.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_devoted.jpg
+SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/2.jpg
 End

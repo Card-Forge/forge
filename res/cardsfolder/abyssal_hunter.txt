@@ -7,4 +7,6 @@ K:abDamageTgtC B T:X:Drawback$TapTgt:Tap target creature. Abyssal Hunter deals d
 SVar:X:Count$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_hunter.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/109.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/1.jpg
 End

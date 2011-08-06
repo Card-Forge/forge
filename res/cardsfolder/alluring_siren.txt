@@ -7,4 +7,6 @@ A:AB$Pump | Cost$ T | ValidTgts$ Creature.YouDontCtrl | KW$ HIDDEN CARDNAME atta
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alluring_siren.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/43.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/43.jpg
 End

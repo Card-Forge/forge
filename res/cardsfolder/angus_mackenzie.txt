@@ -7,4 +7,5 @@ A:AB$Fog | Cost$ W U G T | PlayerTurn$ True | ActivatingPhases$ Upkeep,Draw,Main
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angus_mackenzie.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/257.jpg
 End

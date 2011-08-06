@@ -2,8 +2,9 @@ Name:AEther Vial
 ManaCost:1
 Types:Artifact
 Text:At the beginning of your upkeep, you may put a charge counter on AEther Vial.
-K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:CustomCounter.CHARGE/1:Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may put a charge counter on CARDNAME.  
+K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:CustomCounter.CHARGE/1:Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may put a charge counter on CARDNAME.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_vial.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/91.jpg
 End

@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+2/+2/Trample & Lifelink
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armadillo_cloak.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/229.jpg
 End

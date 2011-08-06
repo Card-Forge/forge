@@ -7,4 +7,5 @@ A:AB$PutCounter | Cost$ T Sac<1/CARDNAME> | Tgt$ TgtC | CounterType$ P1P2 | Coun
 SVar:Rarity:Common
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armor_thrull.jpg
+SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/1.jpg
 End

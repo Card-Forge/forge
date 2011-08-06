@@ -7,4 +7,5 @@ K:abUntapTgt T:Forest:Untap target forest.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arbor_elf.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/95.jpg
 End

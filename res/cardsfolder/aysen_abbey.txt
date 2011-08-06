@@ -9,4 +9,5 @@ K:2, tap: add G
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aysen_abbey.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/137.jpg
 End

@@ -9,4 +9,5 @@ SVar:X:Count$NumTypeYouCtrl.Land
 SVar:BuffedBy:Land
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avenger_of_zendikar.jpg
+SetInfo:WWK|Mythic|http://magiccards.info/scans/en/wwk/96.jpg
 End

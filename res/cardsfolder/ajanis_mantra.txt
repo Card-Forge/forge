@@ -5,4 +5,5 @@ Text:no text
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ajanis_mantra.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/2.jpg
 End

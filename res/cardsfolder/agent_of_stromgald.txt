@@ -7,4 +7,5 @@ K:R: add B
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_stromgald.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/94.jpg
 End

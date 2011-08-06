@@ -8,4 +8,5 @@ K:abDamageTgtV 2 W T:2:Creature.attacking,Creature.blocking:Aven Archer deals 2 
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_archer.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/6.jpg
 End

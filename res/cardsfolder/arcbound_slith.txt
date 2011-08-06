@@ -6,4 +6,5 @@ PT:0/0
 K:Modular 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_slith.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/102.jpg
 End

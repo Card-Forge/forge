@@ -7,4 +7,5 @@ K:First Strike
 K:abPumpTgtC W:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/advance_scout.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/213.jpg
 End

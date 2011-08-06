@@ -6,4 +6,5 @@ K:WheneverKeyword:Attack - Alone:No_Initiator:Play:StatsPumpEOT/1/1:Initiating_C
 K:WheneverKeyword:Attack - Alone:No_Initiator:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:Initiator - OwnedByController:Whenever a creature you control attacks alone, you may tap target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_benediction.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/3.jpg
 End

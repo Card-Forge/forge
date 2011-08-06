@@ -5,4 +5,5 @@ Text:Switch target creature's power and toughness until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/about_face.jpg
 SVar:RemAIDeck:True
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/73.jpg
 End

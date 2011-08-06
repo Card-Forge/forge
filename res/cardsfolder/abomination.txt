@@ -7,4 +7,6 @@ K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Cr
 K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature.Green,Creature.White
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abomination.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/1.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/1.jpg
 End

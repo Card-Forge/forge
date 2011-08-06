@@ -7,4 +7,7 @@ K:Trample
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angry_mob.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/280.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/74.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/253.jpg
 End

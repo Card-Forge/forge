@@ -5,4 +5,5 @@ Text:no text
 A:SP$Draw | Cost$ 3 B | NumCards$ 3 | SpellDescription$ You draw three cards and you lose 3 life. | SubAbility$ YouLoseLife/3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambitions_cost.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/67.jpg
 End

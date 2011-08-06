@@ -7,4 +7,5 @@ A:AB$GainLife | Cost$ tapXType<5/Cleric> | LifeAmount$ 10 | SpellDescription$ Yo
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestors_prophet.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/3.jpg
 End

@@ -7,4 +7,5 @@ K:Flying
 K:abAllPump 1 G U:YouCtrl:Shroud:Creatures you control gain shroud until end of turn.:Aerie Mystics - creatures gain shroud until EOT
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aerie_mystics.jpg
+SetInfo:CON|Uncommon|http://magiccards.info/scans/en/cfx/1.jpg
 End

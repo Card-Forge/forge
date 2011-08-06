@@ -4,4 +4,6 @@ Types:Artifact
 Text:no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashnods_transmogrant.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/350.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/5.jpg
 End

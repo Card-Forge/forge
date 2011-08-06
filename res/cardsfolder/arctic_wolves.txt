@@ -7,4 +7,5 @@ K:Cumulative upkeep:2
 K:When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_wolves.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/60.jpg
 End

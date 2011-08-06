@@ -7,4 +7,6 @@ K:Flying
 K:Protection from red
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abbey_gargoyles.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/101.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/277.jpg
 End

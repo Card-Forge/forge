@@ -5,4 +5,12 @@ Text:no text
 K:abDamageTgtCP 8 T:4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aladdins_ring.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/291.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/286.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/346.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/310.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/286.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/271.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/232.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/71.jpg
 End

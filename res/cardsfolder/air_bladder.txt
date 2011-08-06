@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:Flying & CARDNAME can block only creatures with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/air_bladder.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/28.jpg
 End

@@ -6,4 +6,6 @@ PT:1/1
 K:CARDNAME can't be blocked by creatures with power 3 or greater.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amrou_kithkin.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/252.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/172.jpg
 End

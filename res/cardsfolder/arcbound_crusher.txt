@@ -9,4 +9,5 @@ K:WheneverKeyword:EntersBattleField:Type/Artifact:Play:+1+1 Counters/1:Self:ASAP
 SVar:BuffedBy:Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_crusher.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/95.jpg
 End

@@ -6,4 +6,5 @@ K:spCounter:Spell:None:Exile:None
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assert_authority.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/30.jpg
 End

@@ -11,4 +11,5 @@ SVar:BuffedBy:Land
 SVar:RemAIDeck:True
 SVar:Rarity:None
 SVar:Picture:http://www.wizards.com/global/images/magic/general/admonition_angel.jpg
+SetInfo:WWK|Mythic|http://magiccards.info/scans/en/wwk/1.jpg
 End

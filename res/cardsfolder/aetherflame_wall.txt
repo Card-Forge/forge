@@ -8,4 +8,5 @@ K:abPump R:+1/+0
 K:CARDNAME can block creatures with shadow as though they didn't have shadow.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aetherflame_wall.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/142.jpg
 End

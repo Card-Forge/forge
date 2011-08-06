@@ -5,4 +5,5 @@ Text:Target creature gets +1/+2 until end of turn.
 K:Storm
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/astral_steel.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/2.jpg
 End

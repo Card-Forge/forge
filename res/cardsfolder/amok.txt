@@ -6,4 +6,5 @@ A:AB$PutCounter | Cost$ 1 Discard<1/Random> | Tgt$ TgtC | CounterType$ P1P1 | Co
 SVar:Rarity:Rare
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amok.jpg
+SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/76.jpg
 End

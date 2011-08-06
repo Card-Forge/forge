@@ -7,4 +7,5 @@ K:Flying
 K:Exalted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_squire.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/3.jpg
 End

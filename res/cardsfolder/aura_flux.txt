@@ -6,4 +6,5 @@ K:stPumpAll:Enchantment.Other:0/0/At the beginning of your upkeep, sacrifice CAR
 SVar:Rarity:Uncommon
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_flux.jpg
+SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/27.jpg
 End

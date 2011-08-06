@@ -7,4 +7,5 @@ A:SP$Bounce | Cost$ R | ValidTgts$ Island | TgtPrompt$ Select target Island | De
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/active_volcano.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/130.jpg
 End

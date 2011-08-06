@@ -7,4 +7,5 @@ K:tap: add W
 K:tap: add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_flats.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/143.jpg
 End

@@ -6,4 +6,5 @@ PT:1/1
 K:stPumpSelf:Creature:0/0/HIDDEN CARDNAME can't be blocked by creatures with power 2 or greater.:isPresent Land.Snow+YouDontCtrl:Creatures with power 2 or greater can't block Arctic Foxes as long as defending player controls a snow land.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_foxes.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/226.jpg
 End

@@ -7,4 +7,5 @@ K:spDestroyTgt:Artifact:NoRegen:Drawback$MakeToken<>X<>Saproling<>G 1 1 Saprolin
 SVar:X:Count$CardManaCost
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_mutation.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/231.jpg
 End

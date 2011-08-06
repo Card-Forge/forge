@@ -8,4 +8,5 @@ K:abUntapTgt T:Artifact,Creature:Untap target artifact or creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_alchemist.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/64.jpg
 End

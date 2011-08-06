@@ -5,4 +5,5 @@ Text:no text
 K:abDamageTgtCP 1 T Sac<1/CARDNAME>:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aeolipile.jpg
+SetInfo:FEM|Rare|http://magiccards.info/scans/en/fe/166.jpg
 End

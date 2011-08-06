@@ -9,4 +9,5 @@ K:2, tap: add R
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/an_havva_township.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/136.jpg
 End

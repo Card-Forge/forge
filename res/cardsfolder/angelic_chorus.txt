@@ -5,4 +5,6 @@ Text:no text
 K:WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/Toughness:ControllingPlayer_Self:ASAP:No_Condition:Initiator - OwnedByController:Whenever a creature enters the battlefield under your control, you gain life equal to its toughness.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_chorus.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/3.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/4.jpg
 End

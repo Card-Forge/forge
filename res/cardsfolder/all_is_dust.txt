@@ -4,4 +4,5 @@ Types:Tribal Sorcery Eldrazi
 Text:Each player sacrifices all colored permanents he or she controls.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/all_is_dust.jpg
+SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/1.jpg
 End

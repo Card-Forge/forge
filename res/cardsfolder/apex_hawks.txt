@@ -7,4 +7,5 @@ K:Flying
 K:Multikicker 1 W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apex_hawks.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/2.jpg
 End

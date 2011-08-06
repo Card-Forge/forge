@@ -7,4 +7,6 @@ K:Deathtouch
 K:etbDestroyTgt:Artifact,Enchantment,Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_slime.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/161.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/165.jpg
 End

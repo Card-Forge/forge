@@ -11,4 +11,5 @@ K:abPumpTgtC 1 W W:Protection from green
 K:abPump 1 U U:Shroud
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armored_guardian.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/230.jpg
 End

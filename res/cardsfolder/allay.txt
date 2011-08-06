@@ -7,4 +7,5 @@ SVar:Buyback:3
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/allay.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/1.jpg
 End

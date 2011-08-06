@@ -6,4 +6,5 @@ PT:4/3
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anowon_the_ruin_sage.jpg
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/49.jpg
 End

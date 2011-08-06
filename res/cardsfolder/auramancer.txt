@@ -6,4 +6,5 @@ PT:2/2
 K:etbReturnTgt:1/MayReturn:Enchantment:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auramancer.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/5.jpg
 End

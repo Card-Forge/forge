@@ -6,4 +6,5 @@ K:spPumpTgt:Haste
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/accelerate.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/90.jpg
 End

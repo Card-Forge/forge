@@ -7,4 +7,5 @@ K:Flash
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/affa_guard_hound.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/14.jpg
 End

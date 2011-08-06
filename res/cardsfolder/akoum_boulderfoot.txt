@@ -6,4 +6,5 @@ PT:4/5
 K:WheneverKeyword:EntersBattleField:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Akoum Boulderfoot enters the battlefield, it deals 1 damage to target creature or player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akoum_boulderfoot.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/134.jpg
 End

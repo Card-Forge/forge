@@ -7,4 +7,5 @@ K:Flying
 A:AB$Pump | Cost$ 2 W Discard<1/Any> | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ CARDNAME gets +1/+2 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_trooper.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/2.jpg
 End

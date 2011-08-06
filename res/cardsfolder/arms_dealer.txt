@@ -6,4 +6,5 @@ PT:1/1
 K:abDamageTgtC 1 R Sac<1/Goblin>:4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arms_dealer.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/172.jpg
 End

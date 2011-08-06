@@ -5,4 +5,5 @@ Text:Landfall - Whenever a land enters the battlefield under your control, equip
 SVar:BuffedBy:Land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adventuring_gear.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/195.jpg
 End

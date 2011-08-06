@@ -7,4 +7,6 @@ A:AB$Draw | Cost$ T | NumCards$ 3 | SpellDescription$ Draw three cards.
 A:AB$Bounce | Cost$ U U U | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcanis_the_omnipotent.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/66.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/66.jpg
 End

@@ -6,4 +6,5 @@ K:spLoseLifeTgt:4:Drawback$YouGainLife/4:Target player loses 4 life and you gain
 K:TypeCycling:Basic:1 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/absorb_vis.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/40.jpg
 End

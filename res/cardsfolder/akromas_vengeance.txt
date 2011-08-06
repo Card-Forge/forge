@@ -6,4 +6,5 @@ K:spDestroyAll:Artifact,Creature,Enchantment
 K:Cycling:3
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akromas_vengeance.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/2.jpg
 End

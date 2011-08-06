@@ -7,4 +7,5 @@ K:Shroud
 K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put a +1/+1 counter on Algae Gharial.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/algae_gharial.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/123.jpg
 End

@@ -6,4 +6,5 @@ A:SP$Bounce | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target ench
 K:Cycling:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_extraction.jpg
+SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/5.jpg
 End

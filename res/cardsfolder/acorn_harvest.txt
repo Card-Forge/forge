@@ -7,4 +7,5 @@ A:SP$Token | Cost$ 3 G | TokenAmount$ 2 | TokenName$ Squirrel | TokenTypes$ Crea
 K:Flashback:1 G PayLife<3>
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acorn_harvest.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/118.jpg
 End

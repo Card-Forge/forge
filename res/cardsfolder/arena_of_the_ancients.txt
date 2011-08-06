@@ -5,4 +5,5 @@ Text:Legendary creatures don't untap during their controllers' untap steps. When
 K:Permanents don't untap during their controllers' untap steps:Creature.Legendary
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arena_of_the_ancients.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/215.jpg
 End

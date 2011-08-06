@@ -6,4 +6,5 @@ K:paintap:2:2
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_tomb.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/305.jpg
 End

@@ -7,4 +7,5 @@ K:Cycling:UB
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/architects_of_will.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/17.jpg
 End

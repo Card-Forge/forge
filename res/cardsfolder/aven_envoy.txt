@@ -6,4 +6,5 @@ PT:0/2
 K:Flying
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/lgn/en-us/card44325.jpg
+SetInfo:LGN|Common|http://magiccards.info/scans/en/le/30.jpg
 End

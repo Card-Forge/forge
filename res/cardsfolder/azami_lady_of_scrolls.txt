@@ -6,4 +6,5 @@ PT:0/2
 A:AB$Draw | Cost$ tapXType<1/Wizard> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azami_lady_of_scrolls.jpg
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/52.jpg
 End

@@ -5,4 +5,5 @@ Text:Adamaro's power and toughness are equal to number of cards in opponent's ha
 PT:1/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adamaro_first_to_desire.jpg
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/91.jpg
 End

@@ -7,4 +7,5 @@ K:Flying
 K:abTapTgt 2 U:Creature.withFlying:Tap target creature with flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/air_servant.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/42.jpg
 End

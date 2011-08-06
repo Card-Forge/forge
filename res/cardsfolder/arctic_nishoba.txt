@@ -7,4 +7,5 @@ K:Trample
 K:Cumulative upkeep:GW
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arctic_nishoba.jpg
+SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/102.jpg
 End

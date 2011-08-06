@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Exile All Hallow's Eve with two scream counters on it.\r\nAt the beginning of your upkeep, if All Hallow's Eve is exiled with a scream counter on it, remove a scream counter from it. If there are no more scream counters on it, put it into your graveyard and each player returns all creature cards from his or her graveyard to the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/all_hallows_eve.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/2.jpg
 End

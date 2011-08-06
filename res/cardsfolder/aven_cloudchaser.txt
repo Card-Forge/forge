@@ -7,4 +7,8 @@ K:Flying
 K:etbDestroyTgt:Enchantment
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_cloudchaser.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/5.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/7.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/3.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/7.jpg
 End

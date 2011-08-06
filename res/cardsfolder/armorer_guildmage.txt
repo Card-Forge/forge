@@ -7,4 +7,5 @@ K:abPumpTgtC B T:+1/+0
 K:abPumpTgtC G T:+0/+1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armorer_guildmage.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/156.jpg
 End

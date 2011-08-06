@@ -7,4 +7,5 @@ K:WheneverKeyword:GainLife:Controller:Play:+1+1 Counters/Life_Gained:Self:ASAP:N
 SVar:RemAIDeck:True
 SVar:Rarity:None
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ageless_entity.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/73.jpg
 End

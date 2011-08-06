@@ -5,4 +5,5 @@ Text:Until end of turn, target land is 3/3 creature that's still a land.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/ne/en-us/card21377.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/101.jpg
 End

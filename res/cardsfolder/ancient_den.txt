@@ -5,4 +5,5 @@ Text:(Ancient Den isn't a spell.)
 K:tap: add W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_den.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/278.jpg
 End

@@ -7,4 +7,5 @@ SVar:X:Count$Valid Equipment.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/armed_response.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/2.jpg
 End

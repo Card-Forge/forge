@@ -6,4 +6,5 @@ PT:0/1
 K:abLoseLifeTgt 1 B T:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acolyte_of_xathrid.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/83.jpg
 End

@@ -6,4 +6,5 @@ PT:2/2
 K:CARDNAME can't be blocked except by artifact creatures and/or white creatures.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amrou_seekers.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/2.jpg
 End

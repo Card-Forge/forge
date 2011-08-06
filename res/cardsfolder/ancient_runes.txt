@@ -4,4 +4,5 @@ Types:Enchantment
 Text:At the beginning of each player's upkeep, Ancient Runes deals damage to that player equal to the number of artifacts he or she controls.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_runes.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/161.jpg
 End

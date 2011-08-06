@@ -7,4 +7,5 @@ K:abPumpTgtC 1 B Sac<1/Land>:+2/+0
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_shauku.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/55.jpg
 End

@@ -5,4 +5,5 @@ Text:All creatures gain protection from red.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/absolute_law.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/2.jpg
 End

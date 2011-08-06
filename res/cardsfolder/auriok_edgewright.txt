@@ -7,4 +7,6 @@ K:stPumpSelf:Creature:0/0/Double Strike:Metalcraft:Metalcraft - Auriok Edgewrigh
 SVar:BuffedBy:Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_edgewright.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/3.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/3.jpg
 End

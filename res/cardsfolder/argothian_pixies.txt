@@ -7,4 +7,5 @@ K:PreventAllDamageBy Artifact.Creature
 K:CARDNAME can't be blocked by artifact creatures.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_pixies.jpg
+SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/59.jpg
 End

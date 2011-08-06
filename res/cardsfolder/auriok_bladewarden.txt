@@ -7,4 +7,5 @@ K:abPumpTgtC T:+X/+X:Target creature get +X/+X until end of turn, where X is Aur
 SVar:X:Count$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_bladewarden.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/3.jpg
 End

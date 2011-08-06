@@ -7,4 +7,7 @@ K:Flying
 K:WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Abyssal Horror enters the battlefield, target player discards two cards.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_horror.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/115.jpg
+SetInfo:S99|Rare|http://magiccards.info/scans/en/st/63.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/115.jpg
 End

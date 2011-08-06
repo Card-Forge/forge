@@ -8,4 +8,5 @@ K:Trample
 SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/abyssal_persecutor.jpg
+SetInfo:WWK|Mythic|http://magiccards.info/scans/en/wwk/47.jpg
 End

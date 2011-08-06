@@ -6,4 +6,5 @@ PT:2/3
 K:abPump R:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card21253.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/1.jpg
 End

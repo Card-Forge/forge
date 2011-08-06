@@ -6,4 +6,5 @@ K:spDestroyAll:Permanent.White
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anarchy.jpg
+SetInfo:ICE|Uncommon|http://magiccards.info/scans/en/ia/170.jpg
 End

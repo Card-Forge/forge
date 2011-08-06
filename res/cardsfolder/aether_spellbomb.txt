@@ -5,4 +5,5 @@ Text:no text
 A:AB$Draw | Cost$ 1 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_spellbomb.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/141.jpg
 End

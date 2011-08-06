@@ -10,4 +10,5 @@ K:tap, Sacrifice CARDNAME: Add R to your mana pool.
 K:tap, Sacrifice CARDNAME: Add G to your mana pool.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archaeological_dig.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/320.jpg
 End

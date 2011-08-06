@@ -6,4 +6,5 @@ PT:2/2
 K:stPumpSelf:Creature:2/2:Threshold:Threshold - Anurid Barkripper gets +2/+2 as long as seven or more cards are in your graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anurid_barkripper.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/104.jpg
 End
