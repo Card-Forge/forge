@@ -14043,36 +14043,6 @@ public class GameActionUtil {
 		}
 	};
 
-	
-	public static Command Champions_Drake = new Command() {
-		private static final long serialVersionUID = 8076177362922156784L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Champion's Drake");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				if(hasThreeLevels(c)) {
-					c.setBaseAttack(4);
-					c.setBaseDefense(4);
-				} else {
-					c.setBaseAttack(1);
-					c.setBaseDefense(1);
-				}
-			}
-		}// execute()
-
-		private boolean hasThreeLevels(Card c) {
-			CardList levels = AllZoneUtil.getPlayerCardsInPlay(c.getController());
-			levels = levels.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.isCreature() && c.getCounters(Counters.LEVEL) >= 3;
-				}
-			});
-			return levels.size() > 0;
-		}
-	};
-
 	public static Command Liu_Bei                     = new Command() {
 
 		private static final long serialVersionUID = 4235093010715735727L;
@@ -15985,7 +15955,6 @@ public class GameActionUtil {
 		
 		//commands.put("Cantivore", Cantivore);
 		commands.put("Caravan_Escort", Caravan_Escort);
-		commands.put("Champions_Drake", Champions_Drake);
 		commands.put("Coat_of_Arms", Coat_of_Arms);	
 		//commands.put("Cognivore", Cognivore);
 		commands.put("Conspiracy", Conspiracy);
