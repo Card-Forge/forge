@@ -1,3 +1,11 @@
+Guan Yu's 1,000-Li March
+4 W W
+Sorcery
+Destroy all creatures that are tapped.
+spDestroyAll:Creature.tapped
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guan_yus_1000_li_march.jpg
+
 Crumble
 G
 Instant
@@ -13345,13 +13353,6 @@ When Guan Yu, Sainted Warrior is put into your graveyard from the battlefield, y
 Horsemanship
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guan_yu_sainted_warrior.jpg
-
-Guan Yu's 1,000-Li March
-4 W W
-Sorcery
-Destroy all tapped creatures.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/guan_yus_1000_li_march.jpg
 
 Guard Duty
 W

@@ -22246,7 +22246,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
 */
         
-        
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Guan Yu's 1,000-Li March")) {
         	SpellAbility spell = new Spell(card) {
@@ -22285,6 +22285,8 @@ public class CardFactory implements NewConstants {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Inferno")) {
