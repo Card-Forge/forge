@@ -271,7 +271,16 @@ public class AbilityFactory_CounterMagic {
 			tgt[0] = topSA;
 			toReturn = true;
 		}
-
+		else
+			return false;
+		
+		Card source = sa.getSourceCard();
+		if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")){
+			int xPay = ComputerUtil.determineLeftoverMana(sa);
+			if (xPay == 0)	// todo: compare xPay to human's leftover mana
+				return false;
+			source.setSVar("PayX", Integer.toString(xPay));
+		}
 		
 		Ability_Sub subAb = sa.getSubAbility();
 		if (subAb != null)

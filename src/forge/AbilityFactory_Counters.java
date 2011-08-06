@@ -197,7 +197,14 @@ public class AbilityFactory_Counters {
 			return false;
 
 		// TODO handle proper calculation of X values based on Cost
-		final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+		int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+		
+		if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			amount = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(amount));
+			// todo: 
+		}
 
 		// prevent run-away activations - first time will always return true
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
@@ -1180,8 +1187,16 @@ public class AbilityFactory_Counters {
 			cList = cList.getController(pl);
 		}
 		
-		// TODO handle proper calculation of X values based on Cost
-		final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+		// TODO improve X value to don't overpay when extra mana won't do anything more useful
+		final int amount;
+		if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			amount = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(amount));
+		}
+		else{
+			amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+		}
 
 		// prevent run-away activations - first time will always return true
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
