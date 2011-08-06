@@ -344,6 +344,7 @@ public class CardFactoryUtil {
         if (c.hasStartOfKeyword("Fading")) value -= 20; //not used atm
         if (c.hasStartOfKeyword("Vanishing")) value -= 20; //not used atm
         
+        if (c.isUntapped()) value += 1;
 
         return value;
         
