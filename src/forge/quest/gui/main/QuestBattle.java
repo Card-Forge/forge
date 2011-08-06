@@ -242,6 +242,9 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Neo 3", "hard", "RG deck with Boartusk Liege, Jund Hackblade and Naya Hushblade");
         addToDeckList("Newton 3", "hard", "WB Relentless Rats deck with Thrumming Stone, Vindicate and Swords to Plowshares");
         
+        addToDeckList("Oberon 1", "easy", "UB Faerie deck");
+        addToDeckList("Oberon 2", "medium", "UB Faerie deck");
+        addToDeckList("Oberon 3", "hard", "UB Faerie deck");
         addToDeckList("Odin 3", "hard", "WU deck with Thistledown Liege and Grand Arbiter Augustin IV");
 //        addToDeckList("Owlman 2", "medium", "U Ebony Owl deck");
 //        addToDeckList("Owlman 3", "hard", "B Control Standard deck");
@@ -277,6 +280,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Samantha Stephens 2", "medium", "WU Painter's Servant anti-red deck");
         addToDeckList("Samantha Stephens 3", "hard", "WU Painter's Servant anti-red deck with Grindstone combo");
         addToDeckList("Samantha Stephens 4", "very hard", "WU Painter's Servant - Grindstone combo");
+        addToDeckList("Samwise Gamgee 3", "hard", "Mono W Kithkin deck");
         addToDeckList("Saruman 2", "medium", "UBR discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
         addToDeckList("Saruman 3", "hard", "UBR discard deck with Megrim, Liliana's Caress and Burning Inquiry ");
         addToDeckList("Sauron 2", "medium", "UB Black Vise deck with Underworld Dreams, lots of card draw for both players");
