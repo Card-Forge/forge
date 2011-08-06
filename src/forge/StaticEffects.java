@@ -44,9 +44,8 @@ public class StaticEffects
 		cardToEffectsList.put("Crowd of Cinders", new String[] {"Crowd_of_Cinders"});
 		cardToEffectsList.put("Crucible of Fire", new String[] {"Crucible_of_Fire"});
 		
-		cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon"});
+		cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon_Blackblade"});
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});
-		cardToEffectsList.put("Deranged Hermit", new String[] {"Deranged_Hermit"});
 		cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});
 		
 		cardToEffectsList.put("Eldrazi Monument", new String[] {"Eldrazi_Monument"});
@@ -133,7 +132,6 @@ public class StaticEffects
 		cardToEffectsList.put("Tethered Griffin", new String[] {"Tethered_Griffin"});
 		cardToEffectsList.put("That Which Was Taken", new String[] {"That_Which_Was_Taken"});
 		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"Tabernacle"});
-		cardToEffectsList.put("Thelonite Hermit", new String[] {"Thelonite_Hermit"});
 		cardToEffectsList.put("Time of Heroes", new String[] {"Time_of_Heroes"});
 		cardToEffectsList.put("Transcendent Master", new String[]{"Transcendent_Master"});
 		

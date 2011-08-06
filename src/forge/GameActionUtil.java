@@ -13485,7 +13485,7 @@ public class GameActionUtil {
 	
 	
 	
-	public static Command Dakkon                      = new Command() {
+	public static Command Dakkon_Blackblade                      = new Command() {
 
 		private static final long serialVersionUID = 6863244333398587274L;
 
@@ -16010,93 +16010,6 @@ public class GameActionUtil {
 		}// execute()
 	}; // Eldrazi_Monument
 
-	public static Command Thelonite_Hermit            = new Command() {
-		private static final long serialVersionUID   = 1876182498187900500L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-
-			}
-
-			// add +1/+1 to black cards
-			list.clear();
-			PlayerZone[] zone = getZone("Thelonite Hermit");
-
-			// for each zone found add +1/+1 to each black card
-			for(int outer = 0; outer < zone.length; outer++) {
-				// CardList creature = new CardList(zone[outer].getCards());
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.filter(new CardListFilter() {
-					public boolean addCard(Card c) {
-						return c.getType().contains("Saproling")
-						|| c.getKeyword().contains("Changeling");
-					}
-				});
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(1);
-					c.addSemiPermanentDefenseBoost(1);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Thelonite Hermit
-
-	public static Command Deranged_Hermit             = new Command() {
-		private static final long serialVersionUID   = -6105987998040015344L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-
-			}
-
-			// add +1/+1 to black cards
-			list.clear();
-			PlayerZone[] zone = getZone("Deranged Hermit");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				// CardList creature = new CardList(zone[outer].getCards());
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.filter(new CardListFilter() {
-					public boolean addCard(Card c) {
-						return c.getType().contains("Squirrel")
-						|| c.getKeyword().contains("Changeling");
-					}
-				});
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(1);
-					c.addSemiPermanentDefenseBoost(1);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Deranged Hermit
-
-
 	public static Command Muraganda_Petroglyphs       = new Command() {
 		private static final long serialVersionUID   = -6715848091817213517L;
 		CardList                  gloriousAnthemList = new CardList();
@@ -16444,9 +16357,8 @@ public class GameActionUtil {
 		commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
 		commands.put("Crucible_of_Fire", Crucible_of_Fire);
 		
-		commands.put("Dakkon", Dakkon);
+		commands.put("Dakkon_Blackblade", Dakkon_Blackblade);
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
-		commands.put("Deranged_Hermit", Deranged_Hermit);
 		commands.put("Drove_of_Elves", Drove_of_Elves);
 		
 		commands.put("Eldrazi_Monument", Eldrazi_Monument);
@@ -16536,7 +16448,6 @@ public class GameActionUtil {
 		commands.put("Terravore", Terravore);
 		commands.put("Tethered_Griffin", Tethered_Griffin);
 		commands.put("That_Which_Was_Taken", That_Which_Was_Taken);
-		commands.put("Thelonite_Hermit", Thelonite_Hermit);
 		commands.put("Time_of_Heroes", Time_of_Heroes);
 		commands.put("Transcendent_Master", Transcendent_Master);
 		
