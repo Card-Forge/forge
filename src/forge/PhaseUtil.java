@@ -270,12 +270,19 @@ public class PhaseUtil {
 
     
     private static boolean canOnlyUntapOneLand() {
+    	
+    	// This is the older and no longer used rule for this card
+    	/*
     	CardList orbs = AllZoneUtil.getCardsInPlay("Winter Orb");
     	for(Card c : orbs){
         	//if any Winter Orb is untapped, effect is on
     		if (c.isUntapped())
     			return true;
     	}
+    	*/
+    	
+    	if (AllZoneUtil.getCardsInPlay("Winter Orb").size() > 0)
+    		return true;
 
     	if (AllZoneUtil.getCardsInPlay("Hokori, Dust Drinker").size() > 0)
     		return true;
