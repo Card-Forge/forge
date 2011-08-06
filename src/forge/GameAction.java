@@ -1687,6 +1687,9 @@ public class GameAction {
                  	if(k[7].contains("NonType")) {
                  		if(originalCard.getType().contains(k[6])) k[3] = "0";             		
                  	}
+                 	if(k[7].contains("OpponentTurn")) {
+                 		if(originalCard.getController().equals(lastPlayerToDraw)) k[3] = "0";             		
+                 	}
                  	if(k[7].contains("Affinity")) {
                           String spilt = k[7];                
                           String color_spilt[] = spilt.split("/");  
@@ -1797,6 +1800,9 @@ public class GameAction {
                          	}
                          	if(k[7].contains("NonType")) {
                          		if(originalCard.getType().contains(k[6])) k[3] = "0";             		
+                         	}
+                         	if(k[7].contains("OpponentTurn")) {
+                         		if(originalCard.getController().equals(lastPlayerToDraw)) k[3] = "0";             		
                          	}
                          	if(k[7].contains("Affinity")) {
       	                            String spilt = k[7];                

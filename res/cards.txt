@@ -1,3 +1,9 @@
+Defense Grid
+2
+Artifact
+Each spell costs 3 more to cast except during its controller's turn.
+CostChange:All:More:3:Spell:All:All:OpponentTurn
+
 Thoughtcast
 4 U
 Sorcery
