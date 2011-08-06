@@ -76,13 +76,17 @@ public class Input_Mulligan extends Input {
         PlayerZone CPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
         PlayerZone CHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
         for(int i = 0; i < CHandList.size() ; i++) {
-        	if(CHandList.get(i).getName().startsWith("Leyline")) {
+        	if(CHandList.get(i).getName().startsWith("Leyline") && (AllZoneUtil.getCardsInPlay("Leyline of Singularity").size() == 0)) {
             	CPlay.add(CHandList.get(i));
             	CHand.remove(CHandList.get(i));
         }
     	
     }
-        AllZone.GameAction.seeWhoPlaysFirst();
+        if(AllZone.GameAction.Start_Cut == true) {
+        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Human),AllZone.GameAction.HumanCut);
+        AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer),AllZone.GameAction.ComputerCut);
+        }
+        AllZone.GameAction.checkStateEffects();
         stop();
     }
 }

@@ -9795,8 +9795,8 @@ public class GameActionUtil {
     public static Command Akromas_Memorial                = new Command() {
         
         private static final long serialVersionUID   = -670715429635395830L;
-        CardList                  gloriousAnthemList = new CardList();
-       
+        CardList              gloriousAnthemList = new CardList();
+    	String[]              Akroma_Memorial_Controller = new String[10]; // Shouldn't have more than 2 in play since its legendary, let alone 10.
         public void execute() {
             String keyword1 = "Flying";
             String keyword2 = "First Strike";
@@ -9807,60 +9807,127 @@ public class GameActionUtil {
             String keyword7 = "Protection from Red";
             CardList list = gloriousAnthemList;
             Card c;
-            // reset all cards in list - aka "old" cards
-            for(int i = 0; i < list.size(); i++) {
-                c = list.get(i);
-                c.removeExtrinsicKeyword(keyword1);
-                c.removeExtrinsicKeyword(keyword2);
-                c.removeExtrinsicKeyword(keyword3);
-                c.removeExtrinsicKeyword(keyword4);
-                c.removeExtrinsicKeyword(keyword5);
-                c.removeExtrinsicKeyword(keyword6);
-                c.removeExtrinsicKeyword(keyword7);
+            
+			CardList Akroma_List = AllZoneUtil.getCardsInPlay("Akroma's Memorial");
+			CardList Akroma_Zone = new CardList();
+        	for(int i = 0; i < Akroma_List.size(); i++) {
+        		Akroma_Zone.clear();
+				Akroma_Zone.addAll(AllZone.getZone(Constant.Zone.Play, Akroma_List.get(i).getController()).getCards());	
+        	}
+        	CardList List_Copy = new CardList();
+        	List_Copy.add(list);
+            for(int i = 0; i < List_Copy.size(); i++) {
+                c = List_Copy.get(i);                 
+                if(!Akroma_Zone.contains(c)) {
+                	c.removeExtrinsicKeyword(keyword1);
+                    c.removeExtrinsicKeyword(keyword2);
+                    c.removeExtrinsicKeyword(keyword3);
+                    c.removeExtrinsicKeyword(keyword4);
+                    c.removeExtrinsicKeyword(keyword5);
+                    c.removeExtrinsicKeyword(keyword6);
+                    c.removeExtrinsicKeyword(keyword7);
+                    list.remove(c);
+                }
             }
-           
-            list.clear();
+
             PlayerZone[] zone = getZone("Akroma's Memorial");
-           
+			if(AllZoneUtil.isCardInPlay("Akroma's Memorial")) {
+			CardList ControllerCheck = AllZoneUtil.getCardsInPlay("Akroma's Memorial");
+			for(int i = 0; i < ControllerCheck.size(); i++) Akroma_Memorial_Controller[i] = ControllerCheck.get(i).getController();
             for(int outer = 0; outer < zone.length; outer++) {
                 CardList creature = new CardList(
                         zone[outer].getCards());
                 creature = creature.getType("Creature");
-               
+            	
                 for(int i = 0; i < creature.size(); i++) {
                     c = creature.get(i);
-                    if(!c.getKeyword().contains(keyword1)) {
-                        c.addExtrinsicKeyword(keyword1);
-                        gloriousAnthemList.add(c);
+                    if(!list.contains(c)) {
+                    gloriousAnthemList.add(c);
+                    
+                    if(!c.getIntrinsicKeyword().contains(keyword1)) {
+                        c.addExtrinsicKeyword(keyword1);  
                     }
-                    if(!c.getKeyword().contains(keyword2)) {
+                    if(!c.getIntrinsicKeyword().contains(keyword2)) {
                         c.addExtrinsicKeyword(keyword2);
-                        gloriousAnthemList.add(c);
                     }
-                    if(!c.getKeyword().contains(keyword3)) {
+                    if(!c.getIntrinsicKeyword().contains(keyword3)) {
                         c.addExtrinsicKeyword(keyword3);
-                        gloriousAnthemList.add(c);
                     }
-                    if(!c.getKeyword().contains(keyword4)) {
+                    if(!c.getIntrinsicKeyword().contains(keyword4)) {
                         c.addExtrinsicKeyword(keyword4);
-                        gloriousAnthemList.add(c);
                     }
-                    if(!c.getKeyword().contains(keyword5)) {
+                    if(!c.getIntrinsicKeyword().contains(keyword5)) {
                         c.addExtrinsicKeyword(keyword5);
-                        gloriousAnthemList.add(c);
                     }
-                    if(!c.getKeyword().contains(keyword6)) {
+                    if(!c.getIntrinsicKeyword().contains(keyword6)) {
                         c.addExtrinsicKeyword(keyword6);
-                        gloriousAnthemList.add(c);
                     }
-                    if(!c.getKeyword().contains(keyword7)) {
+                    if(!c.getIntrinsicKeyword().contains(keyword7)) {
                         c.addExtrinsicKeyword(keyword7);
-                        gloriousAnthemList.add(c);
+                    }
                     }
                 }// for inner
             }// for outer
+			} 
         }// execute()
     };
+    
+	public static Command Leyline_of_Singularity                = new Command() {
+
+		private static final long serialVersionUID   = -67071835355151830L;
+		CardList                  Leyline_of_Singularity_Tokens = new CardList();
+
+		public void execute() {
+			String Type = "Legendary";
+
+			if(AllZoneUtil.isCardInPlay("Leyline of Singularity")) {
+				CardList NonLand = new CardList();
+				NonLand.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+				NonLand.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+				
+				NonLand = NonLand.filter(new CardListFilter() {
+                    public boolean addCard(Card c) {
+                        return !c.isLand() && c.isPermanent() && !c.getName().equals("Mana Pool");
+                    }
+                });
+
+				for(int i = 0; i < NonLand.size(); i++) {
+					Card c = NonLand.get(i);
+					ArrayList<String> Card_Types = c.getType();
+					if(!c.getType().contains(Type)) {					
+						ArrayList<String> NewCard_Type = new ArrayList<String>(Card_Types.size() + 1);
+						NewCard_Type.add(0,Type);
+						for(int x = 0; x < Card_Types.size(); x++) NewCard_Type.add(x + 1 , Card_Types.get(x));
+						if(c.isToken()) Leyline_of_Singularity_Tokens.add(c);
+						c.setType(NewCard_Type);
+					}
+				}
+				} else {
+    				CardList NonLand = new CardList();
+    				NonLand.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+    				NonLand.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+    				
+    				NonLand = NonLand.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return !c.isLand() && c.isPermanent() && !c.getName().equals("Mana Pool");
+                        }
+                    });
+    				
+    				for(int r = 0; r < NonLand.size(); r++) {
+        				Card crd = NonLand.get(r);
+        				if(!crd.isToken()) {
+                        	Card c = AllZone.CardFactory.copyCard(crd); 
+                        	if(!c.getType().contains("Legendary")) crd.removeType("Legendary");
+
+        				} else if(Leyline_of_Singularity_Tokens.contains(crd) && AllZoneUtil.isCardInPlay(crd.getName())){
+        					crd.removeType("Legendary");
+        				}
+    				
+    				}
+    				Leyline_of_Singularity_Tokens.clear();
+				}
+		}// execute()
+	};
     
 	public static Command Levitation                  = new Command() {
 
@@ -18189,6 +18256,7 @@ public class GameActionUtil {
 
 		commands.put("Darksteel_Forge", Darksteel_Forge);
 		commands.put("Akromas_Memorial", Akromas_Memorial);
+		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
 		commands.put("Levitation", Levitation);
 		commands.put("Knighthood", Knighthood);
 		commands.put("Absolute_Law", Absolute_Law);
