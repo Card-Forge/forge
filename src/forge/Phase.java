@@ -306,7 +306,8 @@ public class Phase extends MyObservable
         //This line fixes Combat Damage triggers not going off when they should
         AllZone.Stack.unfreezeStack();
 
-		resetPriority();
+        if(!phase.equals(Constant.Phase.Untap)) //Nobody recieves priority during untap
+		    resetPriority();
 	}
 	
     public void nextPhase() {
@@ -386,8 +387,6 @@ public class Phase extends MyObservable
                 AllZone.Phase.setNeedToNextPhase(false);
                 AllZone.Phase.nextPhase();
         }
-
-        AllZone.Stack.chooseOrderOfSimultaneousStackEntryAll();
     }
     
     private Player handleNextTurn() {
