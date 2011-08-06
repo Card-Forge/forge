@@ -32,6 +32,13 @@ public class Ability_Cost {
 	private int lifeAmount = 0;
 	public int getLifeAmount() { return lifeAmount; }
 	
+	private boolean discardCost = false;
+	public boolean getDiscardCost() { return discardCost; }
+	private int discardAmount = 0;
+	public int getDiscardAmount() { return discardAmount; }
+	private String discardType = "";
+	public String getDiscardType() { return discardType; }
+	
 	public boolean hasNoManaCost() { return manaCost.equals("") || manaCost.equals("0"); };
 	private String manaCost = "";
 	public String getMana() { return manaCost; }
@@ -73,6 +80,23 @@ public class Ability_Cost {
         	str = str.replace(">", "");
         	
         	lifeAmount = Integer.parseInt(str);
+        }
+        
+        if (parse.contains("Discard<")){
+        	// Discard<NumCards,DiscardType>
+        	discardCost = true;
+        	int startPos = parse.indexOf("Discard<");
+        	int endPos = parse.indexOf(">", startPos);
+        	String str = parse.substring(startPos, endPos+1);
+        	parse = parse.replace(str, "").trim();
+        	
+        	str = str.replace("Discard<", "");
+        	str = str.replace(">", "");
+        	
+        	String[] splitStr = str.split(",");
+        	
+        	discardAmount = Integer.parseInt(splitStr[0]);
+        	discardType = splitStr[1];
         }
         
         if(parse.contains("Sac-")) {
@@ -121,7 +145,7 @@ public class Ability_Cost {
 			cost.append(manaCost);
 		}
 		
-		if (tapCost){	
+		if (tapCost || untapCost){	
 			// tap cost for spells will not be in this form.
 		}
 		
@@ -137,6 +161,29 @@ public class Ability_Cost {
 				cost.append("and pay ");
 			cost.append(lifeAmount);
 			cost.append(" Life");
+
+			first = false;
+		}
+		
+		if (discardCost){
+			if (first)
+				cost.append("discard ");
+			else
+				cost.append("and discard ");
+			if (discardType.equals("Hand")){
+				cost.append(" your hand");
+			}
+			else{
+				cost.append(discardAmount);
+				int type = discardType.indexOf("/");
+				if (type != -1)
+					cost.append(discardType.substring(type + 1)).append(" ");
+				cost.append(" card");
+				if (discardAmount > 1)
+					cost.append("s");
+				if (discardType.equals("Random"))
+					cost.append(" at random");
+			}
 
 			first = false;
 		}
@@ -201,6 +248,28 @@ public class Ability_Cost {
 			first = false;
 		}
 		
+		if (discardCost){
+			if (first)
+				cost.append("Discard ");
+			else
+				cost.append(", discard ");
+			if (discardType.equals("Hand")){
+				cost.append(" your hand");
+			}
+			else{
+				cost.append(discardAmount);
+				int type = discardType.indexOf("/");
+				if (type != -1)
+					cost.append(discardType.substring(type + 1)).append(" ");
+				cost.append(" card");
+				if (discardAmount > 1)
+					cost.append("s");
+				if (discardType.equals("Random"))
+					cost.append(" at random");
+			}
+
+			first = false;
+		}
 		
 		cost.append(sacString(first));
 		

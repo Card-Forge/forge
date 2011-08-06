@@ -23,10 +23,12 @@ public class Cost_Payment {
 	private boolean paySubCounter;
 	private boolean paySac;
 	private boolean payLife;
+	private boolean payDiscard;
 	
 	private boolean bCancel = false;
 
 	public void setPayMana(boolean bPay){	payMana = bPay;	}
+	public void setPayDiscard(boolean bSac){	payDiscard = bSac;	}
 	public void setPaySac(boolean bSac){	paySac = bSac;	}
 	
 	final private Input changeInput = new Input() {
@@ -42,6 +44,7 @@ public class Cost_Payment {
 		paySubCounter = !cost.getSubCounter();
 		paySac = !cost.getSacCost();
 		payLife = !cost.getLifeCost();
+		payDiscard = !cost.getDiscardCost();
 	}
 	
     public boolean canPayAdditionalCosts(){
@@ -64,6 +67,27 @@ public class Cost_Payment {
     		int curLife = AllZone.GameAction.getPlayerLife(card.getController()).getLife();
     		if (curLife < cost.getLifeAmount())
     			return false;
+    	}
+    	
+    	if (cost.getDiscardCost()){
+    		PlayerZone zone = AllZone.getZone(Constant.Zone.Hand, card.getController());
+    		CardList handList = new CardList(zone.getCards());
+    		String discType = cost.getDiscardType();
+    		int discAmount = cost.getDiscardAmount();
+    		if (discType.equals("Hand")){
+    			// this will always work
+    		}
+    		else{
+    			int type = discType.indexOf("/");
+    			if (type != -1){
+    				String validType[] = discType.substring(type+1).split(",");
+    				handList = handList.getValidCards(validType);
+    			}
+	    		if (discAmount > handList.size()){
+	    			// not enough cards in hand to pay
+	    			return false;
+	    		}
+    		}
     	}
     	
 		if (cost.getSacCost()){
@@ -147,8 +171,33 @@ public class Cost_Payment {
 			}
 		}
 		
-		if (!paySac && cost.getSacCost()){
-    		// sacrifice stuff here
+		if (!payDiscard && cost.getDiscardCost()){			// discard here
+    		PlayerZone zone = AllZone.getZone(Constant.Zone.Hand, card.getController());
+    		CardList handList = new CardList(zone.getCards());
+    		String discType = cost.getDiscardType();
+    		int discAmount = cost.getDiscardAmount();
+    		if (discType.equals("Hand")){
+    			AllZone.GameAction.discardHand(card.getController(), ability);
+    			payDiscard = true;
+    		}
+    		else{
+    			if (discType.equals("Random")){
+    				AllZone.GameAction.discardRandom(card.getController(), discAmount, ability);
+    				payDiscard = true;
+    			}
+    			else{
+	    			int type = discType.indexOf("/");
+	    			if (type != -1){
+	    				String validType[] = discType.substring(type+1).split(",");
+	    				handList = handList.getValidCards(validType);
+	    			}
+	    			changeInput.stopSetNext(input_discardCost(discAmount, handList, ability, this));
+	    			return false;
+    			}
+    		}
+		}
+		
+		if (!paySac && cost.getSacCost()){					// sacrifice stuff here
     		if (cost.getSacThis())
     			changeInput.stopSetNext(sacrificeThis(ability, this));
     		else
@@ -161,7 +210,7 @@ public class Cost_Payment {
 	}
 
 	public boolean isAllPaid(){
-		return (payTap && payUntap && payMana && paySubCounter && paySac && payLife);
+		return (payTap && payUntap && payMana && paySubCounter && paySac && payLife && payDiscard);
 	}
 	
 	public void cancelPayment(){
@@ -190,10 +239,13 @@ public class Cost_Payment {
         	life.payLife(cost.getLifeAmount()*-1);
         }
         
+        // can't really undiscard things
+        
 		// can't really unsacrifice things
 	}
     
     public void payComputerCosts(){
+    	// make sure ComputerUtil.canPayAdditionalCosts() is updated when updating new Costs
     	Card sacCard = null;
     	ability.setActivatingPlayer(Constant.Player.Computer);
     	
@@ -235,12 +287,87 @@ public class Cost_Payment {
     	if (cost.getLifeCost())
     		AllZone.GameAction.getPlayerLife(card.getController()).payLife(cost.getLifeAmount());
     	
+    	if (cost.getDiscardCost()){
+    		String discType = cost.getDiscardType();
+    		int discAmount = cost.getDiscardAmount();
+    		if (discType.equals("Hand")){
+    			AllZone.GameAction.discardHand(card.getController(), ability);
+    		}
+    		else{
+    			if (discType.equals("Random")){
+    				AllZone.GameAction.discardRandom(card.getController(), discAmount, ability);
+    			}
+    			else{
+	    			int type = discType.indexOf("/");
+	    			if (type != -1){
+	    				String validType[] = discType.substring(type+1).split(",");
+	    				AllZone.GameAction.AI_discardNumType(discAmount, validType, ability);
+	    			}
+	    			else{
+	    				AllZone.GameAction.AI_discardNumUnless(discAmount, ability);
+	    			}
+    			}
+    		}
+    	}
+    	
 		if (cost.getSacCost())
 			AllZone.GameAction.sacrifice(sacCard);
 
         AllZone.Stack.add(ability);
     }
     
+    public static Input input_discardCost(final int nCards, final CardList handList, SpellAbility sa, final Cost_Payment payment) {
+        final SpellAbility sp = sa;
+    	Input target = new Input() {
+            private static final long serialVersionUID = -329993322080934435L;
+            
+            int                       nDiscard                = 0;
+            
+            @Override
+            public void showMessage() {
+            	if (AllZone.Human_Hand.getCards().length == 0) stop();
+            	
+                AllZone.Display.showMessage("Select a card to discard");
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+            	cancel();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(zone.is(Constant.Zone.Hand) && handList.contains(card) ) {
+                	// send in CardList for Typing
+                    AllZone.GameAction.discard(card, sp);
+                    handList.remove(card);
+                    nDiscard++;
+                    
+                    //in case no more cards in hand
+                    if(nDiscard == nCards) 
+                    	done();
+                    else if (AllZone.Human_Hand.getCards().length == 0)	// this really shouldn't happen
+                    	cancel();
+                    else
+                    	showMessage();
+                }
+            }
+            
+            public void cancel(){
+            	payment.setCancel(true);
+            	stop();
+            	payment.payCost();
+            }
+            
+            public void done(){
+            	payment.setPayDiscard(true);
+            	stop();
+            	payment.payCost();
+            }
+        };
+        return target;
+    }//input_discard() 
 	
     public static Input sacrificeThis(final SpellAbility spell, final Cost_Payment payment) {
         Input target = new Input() {

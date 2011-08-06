@@ -1,0 +1,10 @@
+Name:Kris Mage
+ManaCost:R
+Types:Creature Human Spellshaper
+Text:no text
+PT:1/1
+K:abDamageTgtCP R T Discard<1,Any>:1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kris_mage.jpg
+K:SVar:RemAIDeck:True
+End

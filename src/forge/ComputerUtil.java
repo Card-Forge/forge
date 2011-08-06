@@ -244,7 +244,27 @@ public class ComputerUtil
 				return false;
 		}
 	  
-		// check additional costs.
+		if (cost.getDiscardCost()){
+    		PlayerZone zone = AllZone.getZone(Constant.Zone.Hand, card.getController());
+    		CardList handList = new CardList(zone.getCards());
+    		String discType = cost.getDiscardType();
+    		int discAmount = cost.getDiscardAmount();
+    		if (discType.equals("Hand")){
+    			// this will always work
+    		}
+    		else{
+    			int type = discType.indexOf("/");
+    			if (type != -1){
+    				String validType[] = discType.substring(type+1).split(",");
+    				handList = handList.getValidCards(validType);
+    			}
+	    		if (discAmount > handList.size()){
+	    			// not enough cards in hand to pay
+	    			return false;
+	    		}
+    		}
+		}
+		
 		if (cost.getSacCost()){
 			  // if there's a sacrifice in the cost, just because we can Pay it doesn't mean we want to. 
 			if (!cost.getSacThis()){

@@ -1,0 +1,9 @@
+Name:Stormbind
+ManaCost:1 R G
+Types:Enchantment
+Text:no text
+K:abDamageTgtCP 2 Discard<1,Random>:2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stormbind.jpg
+K:SVar:RemAIDeck:True
+End
