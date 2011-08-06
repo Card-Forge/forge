@@ -2296,9 +2296,8 @@ public class CombatUtil {
 	                    	library.remove(Enchantment);
 	                    	play.add(Enchantment);
 	                    	Enchantment.enchantCard(attacker);
-                            if(player == "Human") AllZone.GameAction.shuffle(attacker.getController());
 	                    }
-	                    
+                        if(player == "Human") AllZone.GameAction.shuffle(attacker.getController());	                    
                 }//resolve
             };// ability4
             ability4.setStackDescription(c + " - (Exalted) searches library for an Aura card that could enchant that creature, put it into play attached to that creature, then shuffles library. ");
