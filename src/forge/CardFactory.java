@@ -3644,6 +3644,244 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spBnceAll);            
 
         }//spBounceAll
+        
+        
+        // Generic return target card(s) from graveyard to Hand or Battlefield cards
+        // spReturnTgt:{Num Cards/Parameters}:{Type}:{To Zone}:{DrawBack}
+        if (hasKeyword(card, "spReturnTgt") != -1) {
+            int n = hasKeyword(card, "spReturnTgt");
+            
+            String parse = card.getKeyword().get(n).toString();
+            card.removeIntrinsicKeyword(parse);
+            String k[] = parse.split(":");
+            final boolean returnUpTo[] = {false};
+            
+            String np[] = k[1].split("/");
+            final int numCardsToReturn = Integer.parseInt(np[0]);
+            if (np.length > 1) {
+                if (np[1].equals("Return Up To")) {
+                    returnUpTo[0] = true;
+                }
+            }
+            
+            //  Artifact, Creature, Enchantment, Land, Permanent, Instant, Sorcery
+            //  White, Blue, Black, Red, Green, Colorless, MultiColor
+            //  non-Artifact, non-Creature, non-Enchantment, non-Land, non-Permanent,
+            //  non-White, non-Blue, non-Black, non-Red, non-Green, non-Colorless, non-MultiColor
+            
+            String Targets = k[2];
+            final String Tgts[] = Targets.split(",");
+            
+            final String Destination = k[3];
+            
+            final String Drawback[] = {"none"};
+            if (k.length > 4) {
+                
+                if (k[4].contains("Drawback$")){
+                    String kk[] = k[4].split("\\$");
+                    Drawback[0] = kk[1];
+                }
+            }
+            
+            card.clearSpellAbility();
+            
+            final SpellAbility spRtrnTgt = new Spell(card) {
+                private static final long serialVersionUID = 7970018872459137897L;
+                
+                @Override
+                public boolean canPlay() {
+                    if (returnUpTo[0]) return true;
+                    return getGraveyardList().size() >= numCardsToReturn;
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                    if (AllZone.Phase.getTurn() <= 3) return false;
+                    
+                    CardList results = new CardList();
+                    CardList choices = getGraveyardList();
+                    
+                    if (choices.size() > 0) {
+                        for (int nctr = 0; nctr < numCardsToReturn; nctr ++) {
+                            for (int i = 0; i < Tgts.length; i++) {
+                            
+                                if (Tgts[i].startsWith("Artifact")) {
+                                    if (CardFactoryUtil.AI_getBestArtifact(choices) != null) {
+                                        Card c = CardFactoryUtil.AI_getBestArtifact(choices);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else if (Tgts[i].startsWith("Creature")) {
+                                    if (CardFactoryUtil.AI_getBestCreature(choices) != null) {
+                                        Card c = CardFactoryUtil.AI_getBestCreature(choices);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else if (Tgts[i].startsWith("Enchantment")) {
+                                    if (CardFactoryUtil.AI_getBestEnchantment(choices, card, true) != null) {
+                                        Card c = CardFactoryUtil.AI_getBestEnchantment(choices, card, true);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else if (Tgts[i].startsWith("Land")) {
+                                    if (CardFactoryUtil.AI_getBestLand(choices) != null) {
+                                        Card c = CardFactoryUtil.AI_getBestLand(choices);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else if (Tgts[i].startsWith("Permanent")) {
+                                    if (CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true) != null) {
+                                        Card c = CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else if (Tgts[i].startsWith("Instant")) {
+                                    if (CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true) != null) {
+                                        // Card c = CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true);
+                                        Card c = CardFactoryUtil.getRandomCard(choices);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else if (Tgts[i].startsWith("Sorcery")) {
+                                    if (CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true) != null) {
+                                        // Card c = CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true);
+                                        Card c = CardFactoryUtil.getRandomCard(choices);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                } else {
+                                    if (CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true) != null) {
+                                        // Card c = CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true);
+                                        Card c = CardFactoryUtil.getRandomCard(choices);
+                                        results.add(c);
+                                        choices.remove(c);
+                                    }
+                                }
+                            }// for i
+                        }// for nctr
+                    }// if choices
+                    
+                    if (results.size() >= numCardsToReturn) {
+                        results.shuffle();
+                        CardList targets = new CardList();
+                        for (int i = 0; i < numCardsToReturn; i++) {
+                            targets.add(results.get(i));
+                        }
+                        setTargetList(targets);
+                        return true;
+                    }
+                    return false;
+                }// canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    
+                    CardList targets = getTargetList();
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    String player = card.getController();
+                    
+                    for (Card c:targets) {
+                        
+                        if (AllZone.GameAction.isCardInZone(c, grave)) {
+                            if (Destination.equals("Hand")) {
+                                PlayerZone zone = AllZone.getZone(Constant.Zone.Hand, player);
+                                AllZone.GameAction.moveTo(zone, c);
+                                
+                            } else {
+                                PlayerZone zone = AllZone.getZone(Constant.Zone.Play, player);
+                                AllZone.GameAction.moveTo(zone, c);
+                            }
+                        }
+                    }
+                }// resolve()
+                
+                CardList getGraveyardList() {
+                    
+                    String player = card.getController();
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
+                    CardList list = new CardList(grave.getCards());
+                    list = list.getValidCards(Tgts);
+                    
+                    // AI will not use a Boggart Birth Rite to return a Boggart Birth Rite.
+                    // In testing the AI targeted a Sage's Knowledge with a Deja Vu.
+                    // Fixed this by having AI pick a random Instant or Sorcery
+                    // rather than picking the card with highest casting cost.
+                    
+                    if (card.getController().equals(Constant.Player.Computer)) {
+                        list = list.getNotName(card.getName());
+                        
+/*                      // I failed to solve the problem above with this code.
+                        
+                        CardList tmp = list;
+                        for (int i = 0; i < tmp.size(); i++) {
+                            ArrayList<String> kw = tmp.get(i).getKeyword();
+                            for (int j = 0; j < kw.size(); j++) {
+                                if (kw.get(j).toString().startsWith("spReturnTgt")) {
+                                    list.remove(kw.get(j));
+                                }
+                            }
+                        }
+*/
+                    }
+                    return list;
+                }// getGraveyardList()
+            };// spRtrnTgt
+            
+            // We have a null bug in here for the card Urborg Uprising. I am not sure
+            // how to fix it at this time. The card now has a note about this bug.
+            
+            Input target = new Input() {
+                private static final long serialVersionUID = 816838038180106359L;
+                
+                @Override
+                public void showMessage() {
+                    
+                    CardList grave = getGraveyardList();
+                    CardList targets = new CardList();
+                    
+                    if (returnUpTo[0]) {
+                        for (int i = 0; i < numCardsToReturn; i++) {
+                            if (!grave.isEmpty()) {
+                                Card c = AllZone.Display.getChoiceOptional("Select a card", grave.toArray());
+                                targets.add(c);
+                                grave.remove(c);
+                            }
+                        }
+                        
+                    } else if (grave.size() > numCardsToReturn) {
+                        for (int i = 0; i < numCardsToReturn; i++) {
+                            Card c = AllZone.Display.getChoice("Select a card", grave.toArray());
+                            targets.add(c);
+                            grave.remove(c);
+                        }
+                        
+                    } else if (grave.size() == numCardsToReturn) {
+                        targets = grave;
+                    }
+                    
+                    if (targets != null && !targets.isEmpty()) {
+                        spRtrnTgt.setTargetList(targets);
+                        stopSetNext(new Input_PayManaCost(spRtrnTgt));
+                    } else stop();
+                    
+                }// showMessage()
+                
+                public CardList getGraveyardList() {
+                    CardList list = new CardList();
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    list.addAll(zone.getCards());
+                    list = list.getValidCards(Tgts);
+                    return list;
+                }
+                
+            };// Input
+            
+            spRtrnTgt.setBeforePayMana(target);
+            card.addSpellAbility(spRtrnTgt);
+            
+            card.setSVar("PlayMain1", "TRUE");
+        }// spReturnTgt
+        
 
         // Generic Tutor cards
         if(hasKeyword(card, "spTutor") != -1) {

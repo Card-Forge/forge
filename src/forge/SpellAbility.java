@@ -25,6 +25,8 @@ public abstract class SpellAbility {
     private Card            targetCard;
     private Card            sourceCard;
     
+    private CardList        targetList;
+    
     private boolean         spell;
     private boolean         tapAbility;
     private boolean         untapAbility;
@@ -313,6 +315,28 @@ public abstract class SpellAbility {
     		System.out.println(getSourceCard()+" - SpellAbility.setTargetCard() called with null for target card.");
     	}
         //System.out.println(card + " has become target of a spell or ability (" +this.getSourceCard() + ")");
+    }
+    
+    public CardList getTargetList() {
+        if (targetList == null) return null;
+        
+        return targetList;
+    }
+    
+    public void setTargetList(CardList list) {
+        targetPlayer = null;//reset setTargetPlayer()
+        
+        targetList = list;
+        StringBuilder sb = new StringBuilder();
+        sb.append(getSourceCard().getName()).append(" - targeting ");
+        for (int i = 0; i < targetList.size(); i++) {
+            
+            if (!targetList.get(i).isFaceDown()) sb.append(targetList.get(i));
+            else sb.append("Morph(").append(targetList.get(i).getUniqueNumber()).append(")");
+            
+            if (i < targetList.size() - 1) sb.append(", ");
+        }
+        setStackDescription(sb.toString());
     }
     
     public void setTargetPlayer(String p) {
