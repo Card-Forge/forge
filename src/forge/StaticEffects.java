@@ -93,7 +93,6 @@ public class StaticEffects
 		cardToEffectsList.put("Keldon Warlord", new String[] {"Keldon_Warlord"});
 		cardToEffectsList.put("Kithkin Rabble", new String[] {"Kithkin_Rabble"});
 		cardToEffectsList.put("Knight of Cliffhaven", new String[] {"Knight_of_Cliffhaven"});
-		cardToEffectsList.put("Knight of the Reliquary", new String[] {"Knight_of_the_Reliquary"});
 		cardToEffectsList.put("Kor Duelist", new String[] {"Kor_Duelist"});
 		cardToEffectsList.put("Kor Spiritdancer", new String[] {"Kor_Spiritdancer"});
 		cardToEffectsList.put("Korlash, Heir to Blackblade", new String[] {"Korlash_Heir_to_Blackblade"});
@@ -110,7 +109,7 @@ public class StaticEffects
 		cardToEffectsList.put("Maraxus of Keld", new String[] {"Maraxus_of_Keld"});
 		cardToEffectsList.put("Maro", new String[] {"Maro"});
 		cardToEffectsList.put("Marrow-Gnawer", new String[] {"Marrow_Gnawer"});
-		cardToEffectsList.put("Master of Etherium", new String[] {"Master_of_Etherium", "Master_of_Etherium_Pump", "Master_of_Etherium_Other"});
+		cardToEffectsList.put("Master of Etherium", new String[] {"Master_of_Etherium"});
 		cardToEffectsList.put("Masumaro, First to Live", new String[] {"Masumaro_First_to_Live"});
 		cardToEffectsList.put("Matca Rioters", new String[] {"Matca_Rioters"});
 		cardToEffectsList.put("Meddling Mage", new String[] {"Meddling_Mage"});
@@ -163,7 +162,6 @@ public class StaticEffects
 		cardToEffectsList.put("Transcendent Master", new String[]{"Transcendent_Master"});
 		
 		cardToEffectsList.put("Umbra Stalker", new String[] {"Umbra_Stalker"});
-		cardToEffectsList.put("Undead Warchief", new String[] {"Undead_Warchief"});
 		cardToEffectsList.put("Uril, the Miststalker", new String[] {"Uril"});
 		
 		cardToEffectsList.put("Vampire Nocturnus", new String[]{"Vampire_Nocturnus"});
@@ -174,8 +172,6 @@ public class StaticEffects
 		cardToEffectsList.put("Windwright Mage", new String[] {"Windwright_Mage"});
 		cardToEffectsList.put("Wolf", new String[] {"Sound_the_Call_Wolf"});
 		cardToEffectsList.put("Wren's Run Packmaster", new String[] {"Wrens_Run_Packmaster"});
-		
-		cardToEffectsList.put("Yavimaya Enchantress", new String[] {"Yavimaya_Enchantress"});
 		
 		cardToEffectsList.put("Zulaport Enforcer", new String[] {"Zulaport_Enforcer"});
 	}

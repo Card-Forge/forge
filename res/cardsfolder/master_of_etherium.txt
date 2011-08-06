@@ -1,8 +1,9 @@
 Name:Master of Etherium
 ManaCost:2 U
 Types:Artifact Creature Vedalken Wizard
-Text:Master of Etherium's power and toughness are each equal to the number of artifacts you control.\r\nOther artifact creatures you control get +1/+1.
+Text:Master of Etherium's power and toughness are each equal to the number of artifacts you control.
 PT:1/1
+K:stPumpAll:Creature.Artifact+Other+YouCtrl:1/1:No Condition:Other artifact creatures you control get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Artifact
 SVar:Rarity:Rare

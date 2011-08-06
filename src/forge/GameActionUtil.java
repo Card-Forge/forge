@@ -12495,41 +12495,6 @@ public class GameActionUtil {
 		}
 	};
 	
-	public static Command Undead_Warchief           = new Command() {
-		private static final long serialVersionUID   = 5835056455026735693L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-2);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Undead Warchief");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Zombie");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(2);
-					c.addSemiPermanentDefenseBoost(1);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute
-	}; // Undead Warchief
 	
 	public static Command Coat_of_Arms                 = new Command() {
 		private static final long serialVersionUID   = 583505612126735693L;
@@ -14665,51 +14630,7 @@ public class GameActionUtil {
     	  }
       };//Kor Spiritdancer
 
-	public static Command Yavimaya_Enchantress        = new Command() {
-		private static final long serialVersionUID = -5650088477640877743L;
-
-		public void execute() {
-			CardList list = AllZoneUtil.getCardsInPlay("Yavimaya Enchantress");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(2 + countEnchantments());
-				c.setBaseDefense(2 + countEnchantments());
-			}
-		}// execute()
-
-		private int countEnchantments() {
-			CardList ench = AllZoneUtil.getTypeInPlay("Enchantment");
-			return ench.size();
-		}
-	};
-
-	public static Command Knight_of_the_Reliquary     = new Command() {
-		private static final long serialVersionUID = -8511276284636573216L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Knight of the Reliquary");
-
-			for(int i = 0; i < list.size(); i++) {
-				Card c = list.get(i);
-				c.setBaseAttack(2 + countLands(c));
-				c.setBaseDefense(2 + countLands(c));
-			}
-		}// execute()
-
-		private int countLands(Card c) {
-			PlayerZone grave = AllZone.getZone(
-					Constant.Zone.Graveyard, c.getController());
-
-			CardList land = new CardList();
-			land.addAll(grave.getCards());
-
-			land = land.getType("Land");
-			return land.size();
-		}
-	};
-
+	
 	public static Command Relentless_Rats_Other       = new Command() {
 		private static final long serialVersionUID = -7731719556755491679L;
 
@@ -15014,39 +14935,7 @@ public class GameActionUtil {
 		}//execute()
 	};
 
-	public static Command Master_of_Etherium_Other    = new Command() {
-		private static final long serialVersionUID = -3325892185484133742L;
-
-		int                       otherMasters     = 0;
-
-		private int countOtherMasters(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList masters = new CardList(play.getCards());
-			masters = masters.getName("Master of Etherium");
-			return masters.size() - 1;
-
-		}
-
-		public void execute() {
-
-
-			CardList creature = new CardList();
-			creature.addAll(AllZone.Human_Play.getCards());
-			creature.addAll(AllZone.Computer_Play.getCards());
-
-			creature = creature.getName("Master of Etherium");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				otherMasters = countOtherMasters(c);
-				c.setOtherAttackBoost(otherMasters);
-				c.setOtherDefenseBoost(otherMasters);
-
-			}// for inner
-		}// execute()
-	};
-
+	
 	public static Command Master_of_Etherium          = new Command() {
 		private static final long serialVersionUID   = -5406532269375480827L;
 
@@ -15092,88 +14981,7 @@ public class GameActionUtil {
 
 	}; // Master of etherium + Broodstar
 
-	public static Command Master_of_Etherium_Pump     = new Command() {
-		private static final long serialVersionUID   = -1736492817816019320L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-
-			// now, apply the +1/+1 to all other artifacts controlled:
-
-				CardList cList = gloriousAnthemList;
-			Card c;
-
-			for(int i = 0; i < cList.size(); i++) {
-				c = cList.get(i);
-				c.addSemiPermanentAttackBoost(-1);
-				c.addSemiPermanentDefenseBoost(-1);
-			}
-
-			// add +1/+1 to cards
-			cList.clear();
-			PlayerZone[] zone = getZone("Master of Etherium");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Artifact");
-
-				for(int i = 0; i < creature.size(); i++) {
-
-					c = creature.get(i);
-					if(c.isCreature()
-							&& !c.getName().equals(
-							"Master of Etherium")) {
-						c.addSemiPermanentAttackBoost(1);
-						c.addSemiPermanentDefenseBoost(1);
-						gloriousAnthemList.add(c);
-					}
-
-				} // for
-			} // for
-
-			/*
-			 * CardList masters = new CardList();
-			 * masters.addAll(AllZone.Human_Play.getCards());
-			 * masters.addAll(AllZone.Computer_Play.getCards()); masters =
-			 * masters.getName("Master of Etherium");
-			 * 
-			 * for (int i=0; i < masters.size(); i++) { c = masters.get(i); int
-			 * otherMasters = countOtherMasters(c);
-			 * System.out.println("otherMasters: " +otherMasters); if
-			 * (otherMasters > 0) { for (int j=0; j < otherMasters; j++) {
-			 * System.out.println("j: " + j + " for card ");
-			 * c.setAttack(c.getAttack() + 1); c.setDefense(c.getDefense() + 1);
-			 * gloriousAnthemList.add(c); } } }
-			 */
-
-		}// execute()
-
-		@SuppressWarnings("unused")
-		// countArtifacts
-		private int countArtifacts(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList artifacts = new CardList(play.getCards());
-			artifacts = artifacts.getType("Artifact");
-			return artifacts.size();
-		}
-
-		@SuppressWarnings("unused")
-		// countOtherMasters
-		private int countOtherMasters(Card c) {
-			PlayerZone play = AllZone.getZone(
-					Constant.Zone.Play, c.getController());
-			CardList masters = new CardList(play.getCards());
-			masters = masters.getName("Master of Etherium");
-			return masters.size() - 1;
-
-		}
-	}; // Master of etherium pump
-
-
+	
 	public static Command Loxodon_Punisher            = new Command() {
 
 		private static final long serialVersionUID = -7746134566580289667L;
@@ -17740,7 +17548,6 @@ public class GameActionUtil {
 		commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
 		commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Kithkin_Rabble", Kithkin_Rabble);
-		commands.put("Knight_of_the_Reliquary", Knight_of_the_Reliquary);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
 		commands.put("Kor_Duelist", Kor_Duelist);
 		commands.put("Kor_Spiritdancer", Kor_Spiritdancer);
@@ -17760,8 +17567,6 @@ public class GameActionUtil {
 		commands.put("Maro", Maro);
 		commands.put("Marrow_Gnawer", Marrow_Gnawer);
 		commands.put("Master_of_Etherium", Master_of_Etherium);
-		commands.put("Master_of_Etherium_Pump", Master_of_Etherium_Pump);
-		commands.put("Master_of_Etherium_Other", Master_of_Etherium_Other);
 		commands.put("Masumaro_First_to_Live", Masumaro_First_to_Live);
 		commands.put("Matca_Rioters", Matca_Rioters);
 		commands.put("Meddling_Mage", Meddling_Mage);
@@ -17815,7 +17620,6 @@ public class GameActionUtil {
 		commands.put("Transcendent_Master", Transcendent_Master);
 		
 		commands.put("Umbra_Stalker", Umbra_Stalker);
-		commands.put("Undead_Warchief", Undead_Warchief);
 		commands.put("Uril", Uril);
 		
 		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
@@ -17825,8 +17629,6 @@ public class GameActionUtil {
 		commands.put("Wild_Nacatl", Wild_Nacatl);
 		commands.put("Windwright_Mage", Windwright_Mage);
 		commands.put("Wrens_Run_Packmaster", Wrens_Run_Packmaster);
-		
-		commands.put("Yavimaya_Enchantress", Yavimaya_Enchantress);
 		
 		commands.put("Zulaport_Enforcer", Zulaport_Enforcer);
 		

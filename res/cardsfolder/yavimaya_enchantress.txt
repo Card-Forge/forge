@@ -1,8 +1,10 @@
 Name:Yavimaya Enchantress
 ManaCost:2 G
 Types:Creature Human Druid
-Text:Yavimaya Enchantress gets +1/+1 for each Enchantment in play.
+Text:no text
 PT:2/2
+K:stPumpSelf:Creature:X/X:no Condition:CARDNAME gets +1/+1 for each enchantment on the battlefield.
+SVar:X:Count$Valid Enchantment
 SVar:BuffedBy:Enchantment
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_enchantress.jpg

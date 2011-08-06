@@ -1,8 +1,10 @@
 Name:Knight of the Reliquary
 ManaCost:1 G W
 Types:Creature Human Knight
-Text:Knight of the Reliquary gets +1/+1 for each land card in your graveyard.
+Text:no text
 PT:2/2
+K:stPumpSelf:Creature:X/X:no Condition:CARDNAME gets +1/+1 for each land card in your graveyard.
+SVar:X:Count$TypeInYourYard.Land
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_reliquary.jpg
 SetInfo:CFX|Rare|http://magiccards.info/scans/en/cfx/113.jpg
