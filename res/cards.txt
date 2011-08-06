@@ -1,3 +1,9 @@
+Death Cultist
+B
+Creature Human Wizard
+Sacrifice Death Cultist: Target player loses 1 life and you gain 1 life.
+1/1
+
 Everflowing Chalice
 0
 Artifact

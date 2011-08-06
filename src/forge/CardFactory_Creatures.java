@@ -17628,7 +17628,38 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
 
-        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Death Cultist")) {
+        	/*
+        	 * Sacrifice Death Cultist: Target player loses 1 life and you gain 1 life.
+        	 */
+        	final SpellAbility ability = new Ability(card, "0") {
+        		
+        		@Override
+        		public boolean canPlayAI() {
+        			PlayerLife human = AllZone.GameAction.getPlayerLife(Constant.Player.Human);
+        			return human.getLife() == 1;
+        		}
+
+        		@Override
+        		public void resolve() {
+        			//AllZone.GameAction.drawCard(sourceCard.getController());
+        			final String target = getTargetPlayer();
+        			PlayerLife targetLife = AllZone.GameAction.getPlayerLife(target);
+        			final String player = card.getController();
+        			PlayerLife playerLife = AllZone.GameAction.getPlayerLife(player);
+        			
+        			AllZone.GameAction.sacrifice(card);
+        			
+        			targetLife.subtractLife(1);
+        			playerLife.addLife(1);        			
+        		}
+        	};
+        	//ability.setDescription("1, Sacrifice " + cardName + ": Draw a card.");
+        	//ability.setStackDescription(cardName + " - Target player loses 1 life and controller gains 1 life.");
+        	card.addSpellAbility(ability);
+        	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
+        }//*************** END ************ END **************************
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
