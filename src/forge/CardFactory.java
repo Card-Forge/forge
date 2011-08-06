@@ -9348,7 +9348,7 @@ public class CardFactory implements NewConstants {
             }, true, false));
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Seal of Removal")) {
             final Ability ability = new Ability(card, "0") {
@@ -9402,7 +9402,7 @@ public class CardFactory implements NewConstants {
                 }
             }));
         }//*************** END ************ END **************************
-        
+        */
      
         //*************** START *********** START **************************
         else if(cardName.equals("Kaervek's Spite")) {
