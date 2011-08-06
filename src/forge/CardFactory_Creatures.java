@@ -9813,7 +9813,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Fire Bowman")) {
             final Ability ability = new Ability(card, "0") {
@@ -9871,7 +9871,7 @@ public class CardFactory_Creatures {
                 }
             }, true, false));
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sygg, River Guide")) {
