@@ -1,0 +1,10 @@
+Name:Rith's Grove
+ManaCost:no cost
+Types:Land Lair
+Text:When CARDNAME enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
+K:tap: add R
+K:tap: add G
+K:tap: add W
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riths_grove.jpg
+End

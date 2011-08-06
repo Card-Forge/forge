@@ -1,0 +1,10 @@
+Name:Darigaaz's Caldera
+ManaCost:no cost
+Types:Land Lair
+Text:When CARDNAME enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
+K:tap: add B
+K:tap: add R
+K:tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/darigaazs_caldera.jpg
+End

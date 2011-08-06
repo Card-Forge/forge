@@ -2438,6 +2438,60 @@ class CardFactory_Lands {
             card.addSpellAbility(addMana);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Crosis's Catacombs") || cardName.equals("Darigaaz's Caldera") ||
+        		cardName.equals("Dromar's Cavern")    || cardName.equals("Rith's Grove") ||
+        		cardName.equals("Trava's Ruins")) {
+        	final Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = 7813334062721799674L;
+
+				public void execute() {
+        			final Player player = card.getController();
+        			CardList land = AllZoneUtil.getPlayerLandsInPlay(player);
+        			land = land.getNotType("Lair");
+
+        			if( player.isComputer()) {
+        				if( land.size() > 0 ) {
+        					CardList tappedLand = new CardList(land.toArray());
+        					tappedLand = tappedLand.filter(AllZoneUtil.tapped);
+        					if( tappedLand.size() > 0 ) {
+        						AllZone.GameAction.moveToHand(CardFactoryUtil.getWorstLand(tappedLand));
+        					}
+        					else {
+        						AllZone.GameAction.moveToHand(CardFactoryUtil.getWorstLand(land));
+        					}
+        				}
+        				else {
+        					AllZone.GameAction.sacrifice(card);
+        				}
+        			}
+        			else { //this is the human resolution
+        				Input target = new Input() {
+							private static final long serialVersionUID = 7944127258985401036L;
+							public void showMessage() {
+        						AllZone.Display.showMessage(cardName+" - Select one non-Lair land to return to your hand");
+        						ButtonUtil.enableOnlyCancel();
+        					}
+        					public void selectButtonCancel() {
+        						AllZone.GameAction.sacrifice(card);
+        						stop();
+        					}
+        					public void selectCard(Card c, PlayerZone zone) {
+        						if(c.isLand() && zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && !c.getType().contains("Lair")) {
+        							AllZone.GameAction.moveToHand(c);
+        							stop();
+        						}
+        					}//selectCard()
+        				};//Input
+        				AllZone.InputControl.setInput(target);
+        			}
+        		}
+        	};
+
+        	card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
+        
         return card;
     }
     

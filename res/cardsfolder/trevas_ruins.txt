@@ -1,0 +1,10 @@
+Name:Treva's Ruins
+ManaCost:no cost
+Types:Land Lair
+Text:When CARDNAME enters the battlefield, sacrifice it unless you return a non-Lair land you control to its owner's hand.
+K:tap: add G
+K:tap: add W
+K:tap: add U
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/trevas_ruins.jpg
+End
