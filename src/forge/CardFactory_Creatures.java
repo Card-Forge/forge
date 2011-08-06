@@ -703,7 +703,7 @@ public class CardFactory_Creatures {
                         lib.remove(sliver);
                         hand.add(sliver);
                     }
-                    AllZone.GameAction.shuffle(player);
+                    player.shuffle();
                 }
             };
             
@@ -4323,7 +4323,7 @@ public class CardFactory_Creatures {
                     Card c[] = hand.getCards();
                     for(int i = 0; i < c.length; i++)
                         AllZone.GameAction.moveTo(library, c[i]);
-                    AllZone.GameAction.shuffle(card.getController());
+                    card.getController().shuffle();
                     
                     //draw same number of cards as before
                     for(int i = 0; i < c.length; i++)
@@ -5654,7 +5654,7 @@ public class CardFactory_Creatures {
                     //this allows players to look at their decks without paying anything
                     if(o == null) stop();
                     else {
-                        AllZone.GameAction.shuffle(AllZone.HumanPlayer);
+                        AllZone.HumanPlayer.shuffle();
                         ability.setTargetCard((Card) o);
                         stopSetNext(new Input_PayManaCost(ability));
                     }
@@ -8781,7 +8781,7 @@ public class CardFactory_Creatures {
                     AllZone.Computer_Library.remove(land);
                     AllZone.Computer_Play.add(land);
                     
-                    AllZone.GameAction.shuffle(AllZone.ComputerPlayer);
+                    AllZone.ComputerPlayer.shuffle();
                 }//computerResolve()
                 
                 public void humanResolve() {
@@ -8801,7 +8801,7 @@ public class CardFactory_Creatures {
                         play.add(land);
                     }
                     
-                    AllZone.GameAction.shuffle(card.getController());
+                    card.getController().shuffle();
                 }//resolve()
             };//SpellAbility
 
@@ -10155,7 +10155,7 @@ public class CardFactory_Creatures {
                         lib.remove(dragon);
                         hand.add(dragon);
                     }
-                    AllZone.GameAction.shuffle(card.getController());
+                    card.getController().shuffle();
                 }//execute()
             };//Command
             
@@ -10174,7 +10174,7 @@ public class CardFactory_Creatures {
                     PlayerZone libraryZone = AllZone.getZone(Constant.Zone.Library, card.getOwner());
                     AllZone.GameAction.moveTo(libraryZone, card);
                     //shuffle library
-                    AllZone.GameAction.shuffle(card.getOwner());
+                    card.getOwner().shuffle();
                 }//execute()
             };//Command
             card.addDestroyCommand(leavesPlay);
@@ -10314,7 +10314,7 @@ public class CardFactory_Creatures {
                             PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                             AllZone.GameAction.moveTo(hand, (Card) check);
                         }
-                        AllZone.GameAction.shuffle(AllZone.HumanPlayer);
+                        AllZone.HumanPlayer.shuffle();
                     }
                 }
                 
@@ -10559,7 +10559,7 @@ public class CardFactory_Creatures {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
                         Card c = getTargetCard();
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         lib.remove(c);
                         hand.add(c);
                         
@@ -10614,7 +10614,7 @@ public class CardFactory_Creatures {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
                         Card c = getTargetCard();
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         lib.remove(c);
                         hand.add(c);
                         
@@ -10671,7 +10671,7 @@ public class CardFactory_Creatures {
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
                         Card c = getTargetCard();
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
                         
@@ -10724,7 +10724,7 @@ public class CardFactory_Creatures {
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
                         Card c = getTargetCard();
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
                         
@@ -10860,7 +10860,7 @@ public class CardFactory_Creatures {
                                     play.add(crd);
                                 }
                             }
-                            AllZone.GameAction.shuffle(card.getController());
+                            card.getController().shuffle();
                         }
                     }//if(isCardInPlay)
                 }
@@ -10956,7 +10956,7 @@ public class CardFactory_Creatures {
                             }
                         }
                     }
-                    AllZone.GameAction.shuffle(card.getController());
+                    card.getController().shuffle();
                 }//resolve()
                 
             };//Ability
@@ -11573,11 +11573,11 @@ public class CardFactory_Creatures {
                                     cards.toArray());
                             Card c = (Card) o;
                             AllZone.GameAction.exile(c);
-                            AllZone.GameAction.shuffle(opponent);
+                            opponent.shuffle();
                         } else {
                             Card c = lib.get(0);
                             AllZone.GameAction.exile(c);
-                            AllZone.GameAction.shuffle(opponent);
+                            opponent.shuffle();
                         }
                     }
                     
@@ -11905,7 +11905,7 @@ public class CardFactory_Creatures {
                             }
                         }
                     }
-                    AllZone.GameAction.shuffle(card.getController());
+                    card.getController().shuffle();
                 }//resolve()
             };//Ability
             
@@ -12282,7 +12282,7 @@ public class CardFactory_Creatures {
                     
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
                         Card c = getTargetCard();
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         lib.remove(c);
                         hand.add(c, 0);
                         
@@ -13295,7 +13295,7 @@ public class CardFactory_Creatures {
                                 oneCostCreatures.remove(c2);
                             }
                         }
-                        AllZone.GameAction.shuffle(controller);
+                        controller.shuffle();
                     } else //computer
                     {
                         oneCostCreatures.shuffle();
@@ -13316,7 +13316,7 @@ public class CardFactory_Creatures {
                         }
                         //ability.setTargetCard(powerTwoCreatures.get(0));
                         //AllZone.Stack.add(ability);
-                        AllZone.GameAction.shuffle(controller);
+                       controller.shuffle();
                     }
                     
 
@@ -15946,7 +15946,7 @@ public class CardFactory_Creatures {
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
                         Card c = getTargetCard();
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
                         
@@ -16000,7 +16000,7 @@ public class CardFactory_Creatures {
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
                         Card c = getTargetCard();
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
                     }
@@ -16052,7 +16052,7 @@ public class CardFactory_Creatures {
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
                         Card c = getTargetCard();
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
                         
@@ -16165,7 +16165,7 @@ public class CardFactory_Creatures {
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
                         Card c = getTargetCard();
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
                         
@@ -16220,7 +16220,7 @@ public class CardFactory_Creatures {
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
                         Card c = getTargetCard();
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
                     }
@@ -16272,7 +16272,7 @@ public class CardFactory_Creatures {
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
                         Card c = getTargetCard();
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         lib.remove(c);
                         lib.add(c, 0);
                         
@@ -16346,7 +16346,7 @@ public class CardFactory_Creatures {
                                 play.add(crd);
                             }
                         }
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                     }//if(isCardInPlay)
                 }
                 
@@ -16885,7 +16885,7 @@ public class CardFactory_Creatures {
                             AllZone.Human_Play.add(card);
                             //  card.tap();
                             lands.remove(card);
-                            AllZone.GameAction.shuffle(player);
+                            player.shuffle();
                         }
                     } // player equals human
                     else if(player.equals(AllZone.ComputerPlayer) && lands.size() > 0) {
@@ -16895,7 +16895,7 @@ public class CardFactory_Creatures {
                         AllZone.Computer_Play.add(card);
                         //   card.tap();
                         lands.remove(card);
-                        AllZone.GameAction.shuffle(player);
+                        player.shuffle();
                     }
                 }
             };
@@ -17859,7 +17859,7 @@ public class CardFactory_Creatures {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
                     if(AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
                         Card c = getTargetCard();
-                        AllZone.GameAction.shuffle(card.getController());
+                        card.getController().shuffle();
                         lib.remove(c);
                         hand.add(c);
                         
@@ -18135,7 +18135,7 @@ public class CardFactory_Creatures {
                             }
                         }
                     }
-                    AllZone.GameAction.shuffle(card.getController());
+                    card.getController().shuffle();
                 }//resolve()
             };//Ability
             
@@ -19465,7 +19465,7 @@ public class CardFactory_Creatures {
         			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
         			if (AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
         				Card c = getTargetCard();
-        				AllZone.GameAction.shuffle(card.getController());
+        				card.getController().shuffle();
         				lib.remove(c);
         				hand.add(c);
         			}
@@ -20061,7 +20061,7 @@ public class CardFactory_Creatures {
         		public void resolve() {
         			if(AllZoneUtil.isCardInPlay(card)) {
         				AllZone.GameAction.moveToLibrary(card);
-        				AllZone.GameAction.shuffle(card.getOwner());
+        				card.getOwner().shuffle();
         			}
         		}
         	};
