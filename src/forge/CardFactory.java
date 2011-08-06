@@ -6321,11 +6321,12 @@ public class CardFactory implements NewConstants {
         		@Override
         		public boolean canPlayAI() {
         			PlayerZone grave = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
-        			return grave.size() < 15;
+        			return grave.size() > 5;
         		}
 
         	};//SpellAbility
         	ability.setDescription(abCost+"Exile all cards from target player's graveyard.");
+        	ability.setStackDescription(card+" - Exile all cards from target player's graveyard.");
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
