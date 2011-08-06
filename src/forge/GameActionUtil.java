@@ -11362,6 +11362,178 @@ public class GameActionUtil
 		
 	};//Captain of the Watch Other
 
+	public static Command Veteran_Swordsmith_Pump = new Command()
+	{
+		private static final long serialVersionUID = 542524781150091105L;
+		
+		CardList gloriousAnthemList = new CardList();
+
+		public void execute()
+		{
+
+			CardList cList = gloriousAnthemList;
+			Card c;
+
+			for (int i = 0; i < cList.size(); i++)
+			{
+				c = cList.get(i);
+				c.addSemiPermanentAttackBoost(-1);
+
+			}
+			cList.clear();
+			PlayerZone[] zone = getZone("Veteran Swordsmith");
+
+			// for each zone found add +1/+1 to each card
+			for (int outer = 0; outer < zone.length; outer++)
+			{
+				CardList creature = new CardList(zone[outer].getCards());
+				creature = creature.getType("Soldier");
+
+				for (int i = 0; i < creature.size(); i++)
+				{
+					c = creature.get(i);
+					if (c.isCreature()
+							&& !c.getName().equals("Veteran Swordsmith"))
+					{
+						c.addSemiPermanentAttackBoost(1);						
+						gloriousAnthemList.add(c);
+					}
+
+				} // for
+			} // for
+
+		}// execute()
+
+	};//Veteran Swordsmith_Pump
+	
+	public static Command Veteran_Swordsmith_Other = new Command()
+	{
+		private static final long serialVersionUID = -7242601069504800797L;
+		
+		int otherCenns=0;
+		
+		private int countOtherCenns(Card c)
+		{
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c
+					.getController());
+			CardList cenns = new CardList(play.getCards());
+			cenns = cenns.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c)
+				{
+					return c.getName().equals("Veteran Swordsmith") && (c.getType().contains("Soldier") ||c.getKeyword().contains("Changeling"));
+				}
+			});
+			return cenns.size()-1;
+
+		}
+
+		public void execute()
+		{
+
+			CardList creature = new CardList();
+			creature.addAll(AllZone.Human_Play.getCards());
+			creature.addAll(AllZone.Computer_Play.getCards());
+			
+			creature = creature.getName("Veteran Swordsmith");
+
+			for (int i = 0; i < creature.size(); i++)
+			{
+				Card c = creature.get(i);
+				otherCenns = countOtherCenns(c);
+				c.setOtherAttackBoost(otherCenns);
+				
+
+			}// for inner
+		}// execute()
+		
+	};//Veteran Swordsmith Other
+	
+	public static Command Veteran_Armorsmith_Pump = new Command()
+	{
+		private static final long serialVersionUID = 542524781150091105L;
+		
+		CardList gloriousAnthemList = new CardList();
+
+		public void execute()
+		{
+
+			CardList cList = gloriousAnthemList;
+			Card c;
+
+			for (int i = 0; i < cList.size(); i++)
+			{
+				c = cList.get(i);
+				c.addSemiPermanentDefenseBoost(-1);				
+			}
+			cList.clear();
+			PlayerZone[] zone = getZone("Veteran Armorsmith");
+
+			// for each zone found add +1/+1 to each card
+			for (int outer = 0; outer < zone.length; outer++)
+			{
+				CardList creature = new CardList(zone[outer].getCards());
+				creature = creature.getType("Soldier");
+
+				for (int i = 0; i < creature.size(); i++)
+				{
+					c = creature.get(i);
+					if (c.isCreature()
+							&& !c.getName().equals("Veteran Armorsmith"))
+					{						
+						c.addSemiPermanentDefenseBoost(1);				
+						gloriousAnthemList.add(c);
+					}
+
+				} // for
+			} // for
+
+		}// execute()
+
+	};//Veteran_Armorsmith_Pump
+	
+	public static Command Veteran_Armorsmith_Other = new Command()
+	{
+		private static final long serialVersionUID = -7242601069504800797L;
+		
+		int otherCenns=0;
+		
+		private int countOtherCenns(Card c)
+		{
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, c
+					.getController());
+			CardList cenns = new CardList(play.getCards());
+			cenns = cenns.filter(new CardListFilter()
+			{
+				public boolean addCard(Card c)
+				{
+					return c.getName().equals("Veteran Armorsmith") && (c.getType().contains("Soldier") ||c.getKeyword().contains("Changeling"));
+				}
+			});
+			return cenns.size()-1;
+
+		}
+
+		public void execute()
+		{
+
+			CardList creature = new CardList();
+			creature.addAll(AllZone.Human_Play.getCards());
+			creature.addAll(AllZone.Computer_Play.getCards());
+			
+			creature = creature.getName("Veteran Armorsmith");
+
+			for (int i = 0; i < creature.size(); i++)
+			{
+				Card c = creature.get(i);
+				otherCenns = countOtherCenns(c);				
+				c.setOtherDefenseBoost(otherCenns);
+				
+
+			}// for inner
+		}// execute()
+		
+	};//Veteran Armorsmith Other	
 	
 	public static Command Elvish_Champion_Pump = new Command()
 	{
@@ -15023,6 +15195,10 @@ public class GameActionUtil
 		commands.put("Wizened_Cenn_Other", Wizened_Cenn_Other);
 		commands.put("Captain_of_the_Watch_Pump", Captain_of_the_Watch_Pump);
 		commands.put("Captain_of_the_Watch_Other", Captain_of_the_Watch_Other);
+		commands.put("Veteran_Swordsmith_Pump", Veteran_Swordsmith_Pump);
+		commands.put("Veteran_Swordsmith_Other", Veteran_Swordsmith_Other);
+		commands.put("Veteran_Armorsmith_Pump", Veteran_Armorsmith_Pump);
+		commands.put("Veteran_Armorsmith_Other", Veteran_Armorsmith_Other);
 		commands.put("Merfolk_Sovereign_Pump", Merfolk_Sovereign_Pump);
 		commands.put("Merfolk_Sovereign_Other", Merfolk_Sovereign_Other);
 		commands.put("Lord_of_Atlantis_Pump", Lord_of_Atlantis_Pump);

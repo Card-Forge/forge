@@ -83,6 +83,8 @@ public class StateBasedEffects
 		cardToEffectsList.put("Elvish Archdruid", new String[] {"Elvish_Archdruid_Pump", "Elvish_Archdruid_Other"});
 		cardToEffectsList.put("Wizened Cenn", new String[] {"Wizened_Cenn_Pump", "Wizened_Cenn_Other"});
 		cardToEffectsList.put("Captain of the Watch", new String[] {"Captain_of_the_Watch_Pump", "Captain_of_the_Watch_Other"});
+		cardToEffectsList.put("Veteran Armorsmith", new String[] {"Veteran_Armorsmith_Pump", "Veteran_Armorsmith_Other"});
+		cardToEffectsList.put("Veteran Swordsmith", new String[] {"Veteran_Swordsmith_Pump", "Veteran_Swordsmith_Other"});
 		cardToEffectsList.put("Timber Protector", new String[] {"Timber_Protector_Pump", "Timber_Protector_Other"});
 		cardToEffectsList.put("Goblin Chieftain", new String[] {"Goblin_Chieftain_Pump", "Goblin_Chieftain_Other"});
 		cardToEffectsList.put("Goblin King", new String[] {"Goblin_King_Pump", "Goblin_King_Other"});

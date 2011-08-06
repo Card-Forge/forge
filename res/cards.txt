@@ -1,3 +1,15 @@
+Veteran Armorsmith
+W W
+Creature Human Soldier 
+Other Soldier creatures you control get +0/+1.
+2/3
+
+Veteran Swordsmith
+2 W
+Creature Human Soldier 
+Other Soldier creatures you control get +1/+0.
+3/2
+
 Captain of the Watch
 4 W W
 Creature Human Soldier 
