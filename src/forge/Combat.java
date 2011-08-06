@@ -637,6 +637,9 @@ public class Combat {
         }
 	}
 	
+	public boolean isUnblocked(Card att){
+		return unblockedMap.containsKey(att);
+	}
 	
 	public Card[] getUnblockedAttackers() {
 		CardList out = new CardList();
