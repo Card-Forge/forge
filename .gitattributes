@@ -726,6 +726,7 @@ res/cardsfolder/bogardan_firefiend.txt svneol=native#text/plain
 res/cardsfolder/bogardan_hellkite.txt -text svneol=native#text/plain
 res/cardsfolder/bogardan_lancer.txt svneol=native#text/plain
 res/cardsfolder/bogardan_rager.txt svneol=native#text/plain
+res/cardsfolder/bogart_sheninigans.txt svneol=native#text/plain
 res/cardsfolder/boggart_arsonists.txt -text svneol=native#text/plain
 res/cardsfolder/boggart_birth_rite.txt -text svneol=native#text/plain
 res/cardsfolder/boggart_harbinger.txt -text svneol=native#text/plain
