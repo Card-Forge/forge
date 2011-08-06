@@ -103,11 +103,16 @@ public class PhaseUtil {
     	for(Card c : list) {
     		if(c.getKeyword().contains("You may choose not to untap CARDNAME during your untap step.")) {
     			if(c.isTapped()) {
-    				if(c.getController().equals(AllZone.HumanPlayer)) {
-    					String[] choices = {"Yes", "No"};
-    					Object o = AllZone.Display.getChoice("Untap "+c.getName()+"?", choices);
-    					String answer = (String) o;
-    					if(null != answer && answer.equals("Yes")) {
+    				if(c.getController().isHuman()) {
+    					String prompt = "Untap "+c.getName()+"?";
+    					if(c.getGainControlTargets().size() > 0) {
+    						ArrayList<Card> targets = c.getGainControlTargets();
+    						prompt += "\r\n"+c.getName()+" is controlling: ";
+    						for(Card target:targets) {
+    							prompt += target.getName();
+    						}
+    					}
+    					if(GameActionUtil.showYesNoDialog(c, prompt)) {
     						c.untap();
     					}
     				}
