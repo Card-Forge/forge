@@ -3718,7 +3718,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Chainer's Edict")) {
             final SpellAbility spell = new Spell(card) {
@@ -3785,7 +3785,7 @@ public class CardFactory_Sorceries {
             card.setFlashback(true);
 
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Rite of Replication")) {

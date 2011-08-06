@@ -3,7 +3,7 @@ ManaCost:2 W W
 Types:Sorcery
 Text:no text
 A:SP$Token | Cost$ 2 W W | TokenImage$ W 1 1 Bird Flying | TokenOwner$ Controller | TokenAmount$ 2 | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SpellDescription$ Put two 1/1 white Bird creature tokens with flying onto the battlefield.
-K:Flashback:tapXType<3/Creature.White>
+A:SP$Token | Cost$ tapXType<3/Creature.White> | TokenImage$ W 1 1 Bird Flying | TokenOwner$ Controller | TokenAmount$ 2 | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | Flashback$ True | CostDesc$ Flashback-Tap three untapped white creatures you control. | SpellDescription$ (You may cast this card from your graveyard for its flashback cost. Then exile it.)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_screech.jpg
 SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/3.jpg
