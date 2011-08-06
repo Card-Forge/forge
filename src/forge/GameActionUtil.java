@@ -470,9 +470,6 @@ public class GameActionUtil {
 		// (called in MagicStack.java)
 		Card c = sa.getSourceCard();
 		
-		if (c.getName().equals("Artisan of Kozilek"))
-			playCard_Artisan_of_Kozilek(c);
-
 		playCard_Cascade(c);
 		playCard_Ripple(c);
         playCard_Storm(c);
@@ -516,53 +513,6 @@ public class GameActionUtil {
 		
 		AllZone.GameAction.checkWheneverKeyword(c,"CastSpell",null);
 	}
-	
-	public static void playCard_Artisan_of_Kozilek(Card c)
-	{
-		final Player controller = c.getController();
-		final Ability ability = new Ability(c, "0")
-		{
-			public void chooseTargetAI()
-			{	
-				CardList list = AllZoneUtil.getPlayerGraveyard(AllZone.ComputerPlayer);
-				list = list.getType("Creature");
-				
-				if (list.size()>0)
-				{
-					CardListUtil.sortCMC(list);
-					setTargetCard(list.get(0));
-				}
-			}
-			public void resolve()
-			{
-				if (controller.equals(AllZone.HumanPlayer))
-				{
-					CardList creatures = AllZoneUtil.getPlayerGraveyard(AllZone.HumanPlayer);
-					creatures = creatures.getType("Creature");
-					Object check = GuiUtils.getChoiceOptional("Select creature", creatures.toArray());
-					if(check != null) {
-	                    this.setTargetCard((Card) check);
-	                }
-				}
-				
-				PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, controller);
-				Card crd = getTargetCard();
-				if (crd!=null) {
-					if(AllZone.GameAction.isCardInZone(crd, grave)) {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, crd.getController());
-                        AllZone.GameAction.moveTo(play, crd);
-                    }
-				}
-			}
-		};
-		StringBuilder sb = new StringBuilder();
-		sb.append(c).append(" - you may return target creature card from your graveyard to the battlefield.");
-		ability.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability);
-	}
-	
-	
 	
 	public static void playCard_Cascade(final Card c) {
 		Command Cascade = new Command() {
