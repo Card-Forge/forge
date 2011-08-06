@@ -62,8 +62,157 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         exitCommand = exit;
         
         setupMenu();
+        setupFilterMenu();
         
         if(canEditComputerDecks) setupComputerMenu();
+    }
+    
+    private void setupFilterMenu(){
+    	JMenuItem filter = new JMenuItem("New filter");
+    	JMenuItem clearfilter = new JMenuItem("Clear filter");
+    	JMenu menu = new JMenu("Filter");
+    	menu.add(filter);
+    	menu.add(clearfilter);
+    	this.add(menu);
+    	
+    	 filter.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent ev) {
+            	 Gui_Quest_DeckEditor g = (Gui_Quest_DeckEditor) deckDisplay;
+            	 if(g.stCardList==null){
+            		 g.blackCheckBox.setSelected(true);
+            		 g.blackCheckBox.setEnabled(true);
+	 				 g.blueCheckBox.setSelected(true);
+					 g.blueCheckBox.setEnabled(true);
+					 g.greenCheckBox.setSelected(true);
+	 				 g.greenCheckBox.setEnabled(true);
+	 				 g.redCheckBox.setSelected(true);
+					 g.redCheckBox.setEnabled(true);
+					 g.whiteCheckBox.setSelected(true);
+	 				 g.whiteCheckBox.setEnabled(true);
+	 				 g.colorlessCheckBox.setSelected(true);
+					 g.colorlessCheckBox.setEnabled(true);
+					 g.artifactCheckBox.setSelected(true);
+	 				 g.artifactCheckBox.setEnabled(true);
+	 				 g.creatureCheckBox.setSelected(true);
+					 g.creatureCheckBox.setEnabled(true);
+					 g.enchantmentCheckBox.setSelected(true);
+	 				 g.enchantmentCheckBox.setEnabled(true);
+	 				 g.instantCheckBox.setSelected(true);
+					 g.instantCheckBox.setEnabled(true);
+					 g.landCheckBox.setSelected(true);
+	 				 g.landCheckBox.setEnabled(true);
+	 				 g.planeswalkerCheckBox.setSelected(true);
+					 g.planeswalkerCheckBox.setEnabled(true);
+					 g.sorceryCheckBox.setSelected(true);
+	 				 g.sorceryCheckBox.setEnabled(true);
+	 				 g.stCardList = g.getTop();
+	            	 GUI_Quest_Filter filt = new GUI_Quest_Filter(g, deckDisplay);
+	                 g.setEnabled(false);
+	                 g.filterUsed=true;
+	                 filt.setVisible(true);
+                 }else
+                 {
+                	 g.blackCheckBox.setSelected(true);
+     				 g.blackCheckBox.setEnabled(true);
+     				 g.blueCheckBox.setSelected(true);
+    				 g.blueCheckBox.setEnabled(true);
+    				 g.greenCheckBox.setSelected(true);
+     				 g.greenCheckBox.setEnabled(true);
+     				 g.redCheckBox.setSelected(true);
+    				 g.redCheckBox.setEnabled(true);
+    				 g.whiteCheckBox.setSelected(true);
+     				 g.whiteCheckBox.setEnabled(true);
+     				 g.colorlessCheckBox.setSelected(true);
+    				 g.colorlessCheckBox.setEnabled(true);
+    				 g.artifactCheckBox.setSelected(true);
+     				 g.artifactCheckBox.setEnabled(true);
+     				 g.creatureCheckBox.setSelected(true);
+    				 g.creatureCheckBox.setEnabled(true);
+    				 g.enchantmentCheckBox.setSelected(true);
+     				 g.enchantmentCheckBox.setEnabled(true);
+     				 g.instantCheckBox.setSelected(true);
+    				 g.instantCheckBox.setEnabled(true);
+    				 g.landCheckBox.setSelected(true);
+     				 g.landCheckBox.setEnabled(true);
+     				 g.planeswalkerCheckBox.setSelected(true);
+    				 g.planeswalkerCheckBox.setEnabled(true);
+    				 g.sorceryCheckBox.setSelected(true);
+     				 g.sorceryCheckBox.setEnabled(true);
+     				 GUI_Quest_Filter filt = new GUI_Quest_Filter(g, deckDisplay);
+     				 g.filterUsed=true;
+     				 g.setEnabled(false);
+	                 filt.setVisible(true);
+                 }
+             }
+         });
+    	 clearfilter.addActionListener(new ActionListener() {
+             public void actionPerformed(ActionEvent ev) {
+            	
+            	 Gui_Quest_DeckEditor g = (Gui_Quest_DeckEditor) deckDisplay;
+            	 if(g.stCardList==null){
+	            	 g.blackCheckBox.setSelected(true);
+	 				 g.blackCheckBox.setEnabled(true);
+	 				 g.blueCheckBox.setSelected(true);
+					 g.blueCheckBox.setEnabled(true);
+					 g.greenCheckBox.setSelected(true);
+	 				 g.greenCheckBox.setEnabled(true);
+	 				 g.redCheckBox.setSelected(true);
+					 g.redCheckBox.setEnabled(true);
+					 g.whiteCheckBox.setSelected(true);
+	 				 g.whiteCheckBox.setEnabled(true);
+	 				 g.colorlessCheckBox.setSelected(true);
+					 g.colorlessCheckBox.setEnabled(true);
+					 g.artifactCheckBox.setSelected(true);
+	 				 g.artifactCheckBox.setEnabled(true);
+	 				 g.creatureCheckBox.setSelected(true);
+					 g.creatureCheckBox.setEnabled(true);
+					 g.enchantmentCheckBox.setSelected(true);
+	 				 g.enchantmentCheckBox.setEnabled(true);
+	 				 g.instantCheckBox.setSelected(true);
+					 g.instantCheckBox.setEnabled(true);
+					 g.landCheckBox.setSelected(true);
+	 				 g.landCheckBox.setEnabled(true);
+	 				 g.planeswalkerCheckBox.setSelected(true);
+					 g.planeswalkerCheckBox.setEnabled(true);
+					 g.sorceryCheckBox.setSelected(true);
+	 				 g.sorceryCheckBox.setEnabled(true);
+	 				 g.filterUsed=false;
+ 				 }else{
+ 					g.blackCheckBox.setSelected(true);
+	 				 g.blackCheckBox.setEnabled(true);
+	 				 g.blueCheckBox.setSelected(true);
+					 g.blueCheckBox.setEnabled(true);
+					 g.greenCheckBox.setSelected(true);
+	 				 g.greenCheckBox.setEnabled(true);
+	 				 g.redCheckBox.setSelected(true);
+					 g.redCheckBox.setEnabled(true);
+					 g.whiteCheckBox.setSelected(true);
+	 				 g.whiteCheckBox.setEnabled(true);
+	 				 g.colorlessCheckBox.setSelected(true);
+					 g.colorlessCheckBox.setEnabled(true);
+					 g.artifactCheckBox.setSelected(true);
+	 				 g.artifactCheckBox.setEnabled(true);
+	 				 g.creatureCheckBox.setSelected(true);
+					 g.creatureCheckBox.setEnabled(true);
+					 g.enchantmentCheckBox.setSelected(true);
+	 				 g.enchantmentCheckBox.setEnabled(true);
+	 				 g.instantCheckBox.setSelected(true);
+					 g.instantCheckBox.setEnabled(true);
+					 g.landCheckBox.setSelected(true);
+	 				 g.landCheckBox.setEnabled(true);
+	 				 g.planeswalkerCheckBox.setSelected(true);
+					 g.planeswalkerCheckBox.setEnabled(true);
+					 g.sorceryCheckBox.setSelected(true);
+	 				 g.sorceryCheckBox.setEnabled(true);
+	 				 g.filterUsed=false;
+ 					 deckDisplay.updateDisplay(g.stCardList, deckDisplay.getBottom()) ; 
+ 				 }
+            	 
+ 				 
+                 
+             }
+         });
+    	 
     }
     
     

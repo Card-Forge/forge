@@ -109,7 +109,14 @@ public class ImageCache implements NewConstants {
             }
             filename = GuiDisplayUtil.cleanString(c.getImageName()) + basicLandSuffix + suffix;
         } else filename = "morph" + suffix;
-        File file = new File(ForgeProps.getFile(IMAGE_BASE), filename);
+        
+        String loc = "";
+        if (!c.isToken())
+        	loc = IMAGE_BASE;
+        else
+        	loc = IMAGE_TOKEN;
+        
+        File file = new File(ForgeProps.getFile(loc), filename);
         
         /**
          * try current directory

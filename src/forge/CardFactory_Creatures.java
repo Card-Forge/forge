@@ -14886,28 +14886,30 @@ public class CardFactory_Creatures {
 	  		{
 	  			public void resolve()
 	  			{
-	  				boolean artifact = false;
-	  				card.setBaseAttack(4);
-	  				card.setBaseDefense(4);
-	  				
-	  				card.removeIntrinsicKeyword("Flying");
-	  				card.removeIntrinsicKeyword("First Strike");
-	  				
-	  				if (card.isArtifact())
-	  					artifact = true;
-	  				
-	  				card.setType(new ArrayList<String>());
-	  				if (artifact)
-	  					card.addType("Artifact");
-	  				card.addType("Creature"); 
-	  				card.addType("Kithkin");
-	  				card.addType("Spirit");
-	  				card.addType("Warrior");
+	  				if (card.getType().contains("Spirit") || card.getKeyword().contains("Changeling")) {
+		  				boolean artifact = false;
+		  				card.setBaseAttack(4);
+		  				card.setBaseDefense(4);
+		  				
+		  				card.removeIntrinsicKeyword("Flying");
+		  				card.removeIntrinsicKeyword("First Strike");
+		  				
+		  				if (card.isArtifact())
+		  					artifact = true;
+		  				
+		  				card.setType(new ArrayList<String>());
+		  				if (artifact)
+		  					card.addType("Artifact");
+		  				card.addType("Creature"); 
+		  				card.addType("Kithkin");
+		  				card.addType("Spirit");
+		  				card.addType("Warrior");
+	  				}
 	  			}
 	  			
 	  			public boolean canPlay()
 	  			{
-	  				return card.getType().contains("Spirit");
+	  				return card.getType().contains("Spirit") || card.getKeyword().contains("Changeling");
 	  			}
 	  			
 	  			public boolean canPlayAI()
@@ -14926,28 +14928,30 @@ public class CardFactory_Creatures {
 	   		{
 	   			public void resolve()
 	   			{
-	   				boolean artifact = false;
-	   				card.setBaseAttack(8);
-	   				card.setBaseDefense(8);
-	   				
-	   				card.addIntrinsicKeyword("Flying");
-	   				card.addIntrinsicKeyword("First Strike");
-	   				
-	   				if (card.isArtifact())
-	   					artifact = true;
-	   				
-	   				card.setType(new ArrayList<String>());
-	   				if (artifact)
-	   					card.addType("Artifact");
-	   				card.addType("Creature"); 
-	   				card.addType("Kithkin");
-	   				card.addType("Spirit");
-	   				card.addType("Warrior");
-	   				card.addType("Avatar");
+	   				if (card.getType().contains("Warrior") || card.getKeyword().contains("Changeling")) {
+		   				boolean artifact = false;
+		   				card.setBaseAttack(8);
+		   				card.setBaseDefense(8);
+		   				
+		   				card.addIntrinsicKeyword("Flying");
+		   				card.addIntrinsicKeyword("First Strike");
+		   				
+		   				if (card.isArtifact())
+		   					artifact = true;
+		   				
+		   				card.setType(new ArrayList<String>());
+		   				if (artifact)
+		   					card.addType("Artifact");
+		   				card.addType("Creature"); 
+		   				card.addType("Kithkin");
+		   				card.addType("Spirit");
+		   				card.addType("Warrior");
+		   				card.addType("Avatar");
+	   				}
 	   			}
 	   			public boolean canPlay()
 	   			{
-	   				return card.getType().contains("Warrior");
+	   				return card.getType().contains("Warrior") || card.getKeyword().contains("Changeling");
 	   			}
 	   			public boolean canPlayAI()
 	   			{

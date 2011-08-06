@@ -164,7 +164,7 @@ no text
 
 Umezawa's Jitte
 2
-Artifact Equipment
+Legendary Artifact Equipment
 Whenever equipped creature deals combat damage, put two charge counters on Umezawa's Jitte.
 
 Vendilion Clique
@@ -404,7 +404,7 @@ This card can't be the target of spells or abilities your opponents control.
 
 Auramancer
 2 W
-Creature Human
+Creature Human Wizard
 When Auramancer enters the battlefield, you may return target card from your graveyard to your hand.
 2/2
 
@@ -1407,7 +1407,7 @@ no text
 tap: add U
 
 Umara Raptor
-1 U
+2 U
 Creature Bird Ally
 Whenever Umara Raptor or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Umara Raptor.
 1/1
@@ -12071,8 +12071,8 @@ no cost
 Land Creature Forest Dryad
 no text
 1/1
-tap: add G
 Dryad Arbor is green.
+tap: add G
 
 Sliversmith
 2

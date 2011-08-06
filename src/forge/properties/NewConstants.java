@@ -32,6 +32,7 @@ public interface NewConstants {
     public static final String NAME_MUTATOR  = "name-mutator";
     
     public static final String IMAGE_BASE    = "image/base";
+    public static final String IMAGE_TOKEN   = "image/token";
     
     /**
      * properties for regular game

@@ -38,7 +38,7 @@ import javax.swing.border.BevelBorder;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class GUI_Filter extends javax.swing.JDialog {
+public class GUI_Quest_Filter extends javax.swing.JDialog {
 
 	private static final long serialVersionUID = -8475271235196182185L;
 	private JLabel jLabel1;
@@ -69,11 +69,12 @@ public class GUI_Filter extends javax.swing.JDialog {
 	//private ButtonGroup buttonGroup1;
 	 private DeckDisplay       deckDisplay;
 	 public CardList filterCardList;
+	 
 
 	
-	public GUI_Filter(JFrame g,DeckDisplay display) {
-		super(g);
-		deckDisplay = display;	
+	public GUI_Quest_Filter(JFrame g,DeckDisplay display) {
+		super(g);		
+		deckDisplay = display;			
 		initGUI();		
 	}
 	
@@ -432,46 +433,24 @@ public class GUI_Filter extends javax.swing.JDialog {
         	
         	String name = NameText.getText();
         	String cText = cardText.getText();
-        	CardList filterCardList = AllZone.CardFactory.getAllCards(); 
-        	CardFilter filter = new CardFilter();
-        	Gui_DeckEditor g = (Gui_DeckEditor) deckDisplay;
-        	 g.blackCheckBox.setSelected(true);
-			 g.blackCheckBox.setEnabled(true);
-			 g.blueCheckBox.setSelected(true);
-			 g.blueCheckBox.setEnabled(true);
-			 g.greenCheckBox.setSelected(true);
-			 g.greenCheckBox.setEnabled(true);
-			 g.redCheckBox.setSelected(true);
-			 g.redCheckBox.setEnabled(true);
-			 g.whiteCheckBox.setSelected(true);
-			 g.whiteCheckBox.setEnabled(true);
-			 g.colorlessCheckBox.setSelected(true);
-			 g.colorlessCheckBox.setEnabled(true);
-			 g.artifactCheckBox.setSelected(true);
-			 g.artifactCheckBox.setEnabled(true);
-			 g.creatureCheckBox.setSelected(true);
-			 g.creatureCheckBox.setEnabled(true);
-			 g.enchantmentCheckBox.setSelected(true);
-			 g.enchantmentCheckBox.setEnabled(true);
-			 g.instantCheckBox.setSelected(true);
-			 g.instantCheckBox.setEnabled(true);
-			 g.landCheckBox.setSelected(true);
-			 g.landCheckBox.setEnabled(true);
-			 g.planeswalkerCheckBox.setSelected(true);
-			 g.planeswalkerCheckBox.setEnabled(true);
-			 g.sorceryCheckBox.setSelected(true);
-			 g.sorceryCheckBox.setEnabled(true); 
-			 g.setEnabled(true);
+        	Gui_Quest_DeckEditor g = (Gui_Quest_DeckEditor) deckDisplay;
+        	CardFilter filter = new CardFilter();       	
+        	 g.setEnabled(true);
+			 CardList filterCardList=g.stCardList;
         	if(name!="")
         	{
         		if(cText!=""){
         		filterCardList = filter.CardListNameFilter(filterCardList, name);
         		if(filterCardList.size()==0){
         			JOptionPane.showMessageDialog(null, "Sorry, cards with name: "+name+" not found.", "Filter", JOptionPane.INFORMATION_MESSAGE );
+        			g.filterUsed=false;
+        			deckDisplay.updateDisplay(g.stCardList, deckDisplay.getBottom()) ;
         		}else{
         			filterCardList = filter.CardListTextFilter(filterCardList, cText);
         			if(filterCardList.size()==0){
             			JOptionPane.showMessageDialog(null, "Sorry, cards with text: "+cText+" not found.", "Filter", JOptionPane.INFORMATION_MESSAGE );
+            			g.filterUsed=false;
+            			deckDisplay.updateDisplay(g.stCardList, deckDisplay.getBottom()) ;
             		}else{
         			if(jCheckBoxBlack.isSelected()==false){
         				filterCardList = filter.CardListColorFilter(filterCardList, "black");
@@ -538,6 +517,7 @@ public class GUI_Filter extends javax.swing.JDialog {
         				g.sorceryCheckBox.setSelected(false);
         				g.sorceryCheckBox.setEnabled(false);
         			}
+        			
         			deckDisplay.updateDisplay(filterCardList, deckDisplay.getBottom()) ;	
         		}}}
         		
@@ -577,7 +557,8 @@ public class GUI_Filter extends javax.swing.JDialog {
 
 		public void windowClosing(WindowEvent arg0) {
 			// TODO Auto-generated method stub
-			Gui_DeckEditor g = (Gui_DeckEditor) deckDisplay;
+			Gui_Quest_DeckEditor g = (Gui_Quest_DeckEditor) deckDisplay;
+			deckDisplay.updateDisplay(g.stCardList, deckDisplay.getBottom());
 			g.setEnabled(true);
 			
 		}

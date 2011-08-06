@@ -3307,8 +3307,10 @@ public class CardFactory implements NewConstants {
           for(int i = 0; i < 7; i++)
             AllZone.GameAction.drawCard(player);
           
-          library.remove(card);
-          grave.add(card);
+          if (card.getController().equals(player)) {
+        	  library.remove(card);
+        	  grave.add(card);
+          }
         }
 
         // Simple, If computer has two or less playable cards remaining in hand play Timetwister
@@ -5424,7 +5426,7 @@ public class CardFactory implements NewConstants {
           PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
          
           return library.getCards().length != 0 && AllZone.Phase.getActivePlayer().equals(card.getController())
-          && !AllZone.Phase.getPhase().equals("End of Turn");
+          && !AllZone.Phase.getPhase().equals("End of Turn") && super.canPlay();
         }
         public boolean canPlayAI()
         {

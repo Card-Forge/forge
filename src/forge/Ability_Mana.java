@@ -155,9 +155,12 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
            return !(card.hasSickness() && isTapAbility());
 
        if(card.isCreature() && (!card.hasSickness() || !isTapAbility()))
-      return true;
+    	   return true;
+       //Dryad Arbor, Mishra's Factory, Mutavault, ...
+       else if (card.isCreature() && card.isLand() && card.hasSickness())
+    	   return false;
        else if(card.isArtifact() || card.isGlobalEnchantment() || card.isLand())
-      return true;
+    	   return true;
    }
    return false;
     }

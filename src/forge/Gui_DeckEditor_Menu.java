@@ -100,9 +100,10 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
     	
     	 filter.addActionListener(new ActionListener() {
              public void actionPerformed(ActionEvent ev) {
-            	             	         	 
-                 //GUI_Filter filt = new GUI_Filter( deckDisplay);
-                 
+            	 Gui_DeckEditor g = (Gui_DeckEditor) deckDisplay;            	         	 
+                 GUI_Filter filt = new GUI_Filter( g,deckDisplay);
+                 g.setEnabled(false);
+                 filt.setVisible(true);
              }
          });
     	 clearfilter.addActionListener(new ActionListener() {

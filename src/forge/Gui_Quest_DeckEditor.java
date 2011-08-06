@@ -1,6 +1,7 @@
 package forge;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
@@ -72,23 +73,24 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
     private JLabel            statsLabel2          = new JLabel();
     private JLabel            jLabel1              = new JLabel();
     
-    private JCheckBox         whiteCheckBox        = new JCheckBox("W", true);
-    private JCheckBox         blueCheckBox         = new JCheckBox("U", true);
-    private JCheckBox         blackCheckBox        = new JCheckBox("B", true);
-    private JCheckBox         redCheckBox          = new JCheckBox("R", true);
-    private JCheckBox         greenCheckBox        = new JCheckBox("G", true);
-    private JCheckBox         colorlessCheckBox    = new JCheckBox("C", true);
+    public JCheckBox         whiteCheckBox        = new JCheckBox("W", true);
+    public JCheckBox         blueCheckBox         = new JCheckBox("U", true);
+    public JCheckBox         blackCheckBox        = new JCheckBox("B", true);
+    public JCheckBox         redCheckBox          = new JCheckBox("R", true);
+    public JCheckBox         greenCheckBox        = new JCheckBox("G", true);
+    public JCheckBox         colorlessCheckBox    = new JCheckBox("C", true);
     
-    private JCheckBox         landCheckBox         = new JCheckBox("Land", true);
-    private JCheckBox         creatureCheckBox     = new JCheckBox("Creature", true);
-    private JCheckBox         sorceryCheckBox      = new JCheckBox("Sorcery", true);
-    private JCheckBox         instantCheckBox      = new JCheckBox("Instant", true);
-    private JCheckBox         planeswalkerCheckBox = new JCheckBox("Planeswalker", true);
-    private JCheckBox         artifactCheckBox     = new JCheckBox("Artifact", true);
-    private JCheckBox         enchantmentCheckBox  = new JCheckBox("Enchant", true);
-    
-    private CardList          top;
-    private CardList          bottom;
+    public JCheckBox         landCheckBox         = new JCheckBox("Land", true);
+    public JCheckBox         creatureCheckBox     = new JCheckBox("Creature", true);
+    public JCheckBox         sorceryCheckBox      = new JCheckBox("Sorcery", true);
+    public JCheckBox         instantCheckBox      = new JCheckBox("Instant", true);
+    public JCheckBox         planeswalkerCheckBox = new JCheckBox("Planeswalker", true);
+    public JCheckBox         artifactCheckBox     = new JCheckBox("Artifact", true);
+    public JCheckBox         enchantmentCheckBox  = new JCheckBox("Enchant", true);
+    public CardList 		 stCardList;
+    public boolean           filterUsed;
+    private CardList         top;
+    private CardList         bottom;
     
     public static void main(String[] args) {
 
@@ -337,6 +339,8 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         //show cards, makes this user friendly, lol, well may, ha
         updateDisplay(cardpool, bottom);
         
+        
+        
         //this affects the card pool
         topModel.sort(4, true);//sort by type
         topModel.sort(3, true);//then sort by color
@@ -381,6 +385,17 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         });
         
         setSize(1024, 768);
+        this.setResizable(false);
+        Dimension screen = getToolkit().getScreenSize();
+        Rectangle bounds = getBounds();
+        bounds.width = 1024;
+        bounds.height = 768;
+        bounds.x = (screen.width - bounds.width) / 2;
+        bounds.y = (screen.height - bounds.height) / 2;
+        setBounds(bounds);
+       
+		
+        
         //TODO use this as soon the deck editor has resizable GUI
 //        //Use both so that when "un"maximizing, the frame isn't tiny
 //        setSize(1024, 740);
@@ -402,6 +417,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
     
     public Gui_Quest_DeckEditor() {
         try {
+        	filterUsed=false;
             jbInit();
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
@@ -418,6 +434,10 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
     }
     
     private void jbInit() throws Exception {
+    	
+    	@SuppressWarnings("unused")
+		CardList stCardList=new CardList();
+    	
         border1 = new EtchedBorder(EtchedBorder.RAISED, Color.white, new Color(148, 145, 140));
         titledBorder1 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)),
                 "All Cards");
@@ -562,6 +582,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         colorlessCheckBox.addItemListener(new ItemListener() {
             
             public void itemStateChanged(ItemEvent e) {
+            	
                 updateDisplay();
             }
         });
@@ -639,6 +660,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         this.getContentPane().add(redCheckBox, null);
         this.getContentPane().add(greenCheckBox, null);
         this.getContentPane().add(colorlessCheckBox, null);
+       
     }
     
     void addButton_actionPerformed(ActionEvent e) {
@@ -649,9 +671,18 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
             Card c = topModel.rowToCard(n);
             bottomModel.addCard(c);
             bottomModel.resort();
+            	if(filterUsed==true){
+            		stCardList.remove(c.getName());
+            		stCardList.shuffle();
+            	}
+            
             
             if(!Constant.GameType.Constructed.equals(customMenu.getGameType())) {
                 topModel.removeCard(c);
+                	if(filterUsed==false){
+                		stCardList=this.getTop();  
+                	}
+                
             }
             
             //3 conditions" 0 cards left, select the same row, select next row
@@ -661,6 +692,10 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
                 topTable.addRowSelectionInterval(n, n);
             }
         }//if(valid row)
+       
+    	   
+        
+    
     }//addButton_actionPerformed
     
     void removeButton_actionPerformed(ActionEvent e) {
@@ -670,10 +705,16 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         if(n != -1) {
             Card c = bottomModel.rowToCard(n);
             bottomModel.removeCard(c);
+            	if(filterUsed==true){
+            		stCardList.add(c);
+            	}
             
             if(!Constant.GameType.Constructed.equals(customMenu.getGameType())) {
                 topModel.addCard(c);
                 topModel.resort();
+                	if(filterUsed==false){
+                		stCardList=this.getTop();  
+                	}
             }
             
             //3 conditions" 0 cards left, select the same row, select next row
@@ -683,6 +724,9 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
                 bottomTable.addRowSelectionInterval(n, n);
             }
         }//if(valid row)
+    
+        
+        
     }//removeButton_actionPerformed
     
     @SuppressWarnings("unused")

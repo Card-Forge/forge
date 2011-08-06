@@ -1312,6 +1312,37 @@ private int getDifferentLand(CardList list, String land)
 		  card.addDamage(damageToAdd);
   }
   
+  /*
+  public void counterSpell()
+  {
+	  SpellAbility s;
+	  boolean spellOnStack = false;
+ 	  for (int i=0; i<AllZone.Stack.size(); i++)
+ 	  {
+ 	       s = AllZone.Stack.peek(i);
+ 	       if (s.isSpell()) {
+ 	             spellOnStack = true;
+ 	             break;
+ 	       }
+ 	  }
+	  
+ 	  if (!spellOnStack)
+ 		  return;
+ 	  
+	  SpellAbility sa = AllZone.Stack.peek();
+	  //SpellAbility sa = AllZone.Stack.pop();
+	  
+	  
+	  while (!sa.isSpell() || AllZone.Stack.size() == 0)
+	  {
+	  	  sa = AllZone.Stack.peek();
+	  	  sa.resolve();
+	  }
+	  if (sa.isSpell())
+		  AllZone.GameAction.moveToGraveyard(sa.getSourceCard());
+  }
+  */
+  
   public void addLife(String player, int life)
   {
      // place holder for future life gain modification rules

@@ -26,12 +26,15 @@ public class MagicStack extends MyObservable
     this.updateObservers();
     if(sp.isSpell())
     {
-    	//put code for Standstill here
-    	GameActionUtil.executePlayCardEffects(sp);
+    	
     	//attempt to counter human spell
     	if (sp.getSourceCard().getController().equals(Constant.Player.Human) &&
     		CardFactoryUtil.isCounterable(sp.getSourceCard()) )
     		ComputerAI_counterSpells.counter_Spell(sp);
+    	
+    	//put code for Standstill here
+    	GameActionUtil.executePlayCardEffects(sp);
+    	
     }
   }
   public SpellAbility pop()

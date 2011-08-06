@@ -1139,6 +1139,26 @@ public class CardFactoryUtil
 	    			  Card rebel = (Card)o;
 	    			  lib.remove(rebel);
 	    			  play.add(rebel);
+	    			  if (rebel.isAura())
+	    			  {
+	    				  Object obj = null;
+		        		  if (rebel.getKeyword().contains("Enchant creature"))
+		        		  {
+		        			  PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			        		  CardList creats = new CardList(play.getCards());
+			        		  creats.addAll(oppPlay.getCards());
+			        		  creats = creats.getType("Creature");
+			        		  obj = AllZone.Display.getChoiceOptional("Pick a creature to attach "+rebel.getName() + " to",creats.toArray() );
+		        		  }
+		        		  if (obj != null)
+		        		  {
+		        			  Card target = (Card)obj;
+		        			  if(AllZone.GameAction.isCardInPlay(target)) {
+		        	        	  rebel.enchantCard(target);
+		        			  }
+		        		  }
+
+	    			  }
 	    		  }
 	    	  }
 	    	  AllZone.GameAction.shuffle(sourceCard.getController());
