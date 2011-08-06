@@ -2156,22 +2156,9 @@ public class GameAction {
 	        			crd = list.get(0);
 	        	}
 	        	
-	        	final Card card = c;
-	        	Ability_Static ability = new Ability_Static(crd, "0")
-	        	{
-	        		public void resolve()
-	        		{
-	        			destroy(crd);
-	    	        	card.setDamage(0);
-	    	        	
-	        		}
-	        	};
-	        	
-	        	StringBuilder sb = new StringBuilder();
-	        	sb.append(crd).append(" - Totem armor: destroy this aura.");
-	        	ability.setStackDescription(sb.toString());
-	        	
-	        	AllZone.Stack.add(ability);
+	        	c.setDamage(0);
+    			destroy(crd);
+    			System.out.println("Totem armor destroyed instead of original card");
 	        	return false;
         	}
         }//totem armor
