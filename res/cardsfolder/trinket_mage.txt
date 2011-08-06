@@ -2,9 +2,9 @@ Name:Trinket Mage
 ManaCost:2 U
 Types:Creature Human Wizard
 Text:no text
+PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an artifact card with converted mana cost 1 or less, reveal that card, and put it into your hand. If you do, shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Hand | ChangeType$ Artifact.cmcLE1 | ChangeNum$ 1
-PT:2/2
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trinket_mage.jpg

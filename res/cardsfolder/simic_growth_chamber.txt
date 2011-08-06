@@ -2,7 +2,7 @@ Name:Simic Growth Chamber
 ManaCost:no cost
 Types:Land
 Text:no text
-K:Simic Growth Chamber enters the battlefield tapped.
+K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G U | SpellDescription$ Add G U to your mana pool.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return a land you control to its owner's hand.
 SVar:TrigReturn:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouCtrl

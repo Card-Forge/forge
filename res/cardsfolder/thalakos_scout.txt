@@ -4,7 +4,7 @@ Types:Creature Thakalos Soldier Scout
 Text:no text
 PT:2/1
 K:Shadow
-A:AB$ChangeZone | Cost$ Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+A:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thalakos_scout.jpg
