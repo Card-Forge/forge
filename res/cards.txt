@@ -1,3 +1,11 @@
+Siren's Call
+U
+Instant
+Cast Siren's Call only during an opponent's turn, before attackers are declared.  Creatures the active player controls attack this turn if able.  At the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.
+SVar:Rarity:Uncommon
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sirens_call.jpg
+
 Cosi's Ravager
 3 R
 Creature Elemental

@@ -5365,6 +5365,80 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if( cardName.equals("Siren's Call") ) {
+            /**
+             *  Creatures the active player controls attack this turn if able.
+             *  
+             *  At the beginning of the next end step, destroy all non-Wall creatures
+             *  that player controls that didn't attack this turn. Ignore this effect
+             *  for each creature the player didn't control continuously since the
+             *  beginning of the turn.
+             *  
+             *  Note: I cheated a bit - they are destroyed at the end of combat since
+             *  the getCreatureAttackedThisCombat is cleared at the end of combat, and
+             *  as far as I know, this info is not available at EndOfTurn
+             */
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -5746330758531799264L;
+
+				@Override
+                public boolean canPlay() {
+					//can only cast during compy's turn before attackers are declared
+					//Main1 phase won't work because this happens too soon I think
+					return AllZone.Phase.getPhase().equals(Constant.Phase.Combat_Before_Declare_Attackers_InstantAbility);
+                }//canPlay
+				
+				@Override
+				public boolean canPlayAI() {
+					return false;
+				}//canPlayAI
+                
+                @Override
+                public void resolve() {
+                	//this needs to get a list of opponents creatures and set the siren flag
+                	String player = card.getController();
+                	String opponent = AllZone.GameAction.getOpponent(player);
+                	CardList creatures = AllZoneUtil.getCreaturesInPlay(opponent);
+                	for(Card creature:creatures) {
+                		//skip walls, skip creatures with summoning sickness
+                		//also skip creatures with haste if they came into play this turn
+                		if((!creature.isWall() && !creature.hasSickness())
+                				|| !(creature.getKeyword().contains("Haste") && creature.getTurnInZone() == 1)) {
+                			creature.setSirenAttackOrDestroy(true);
+                			//System.out.println("Siren's Call - setting flag for "+creature.getName());
+                		}
+                	}
+                	Command atEOT = new Command() {
+						private static final long serialVersionUID = 5369528776959445848L;
+
+						public void execute() {
+							String player = card.getController();
+							String opponent = AllZone.GameAction.getOpponent(player);
+							CardList creatures = AllZoneUtil.getCreaturesInPlay(opponent);
+							
+							for(Card creature:creatures) {
+								//System.out.println("Siren's Call - EOT - "+creature.getName() +" flag: "+creature.getSirenAttackOrDestroy());
+								//System.out.println("Siren's Call - EOT - "+creature.getName() +" attacked?: "+creature.getCreatureAttackedThisCombat());
+								if(creature.getSirenAttackOrDestroy() && !creature.getCreatureAttackedThisCombat()) {
+									if(AllZone.GameAction.isCardInPlay(creature)) {
+										//System.out.println("Siren's Call - destroying "+creature.getName());
+										//this should probably go on the stack
+										AllZone.GameAction.destroy(creature);
+									}
+								}
+								creature.setSirenAttackOrDestroy(false);
+							}
+                        }//execute
+                    };//Command
+                    AllZone.EndOfCombat.addAt(atEOT);
+                }//resolve
+            };//SpellAbility
+            spell.setStackDescription(card.getName() + " - All creatures that can attack must do so or be destroyed.");
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

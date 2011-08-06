@@ -174,7 +174,8 @@ import java.util.*;
           {
              if ( (attackers.get(i).getKeyword().contains("CARDNAME attacks each turn if able.") 
             	   || attackers.get(i).getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME."))
-                   /*&& CombatUtil.canAttack(attackers.get(i))*/)
+                   /*&& CombatUtil.canAttack(attackers.get(i))*/
+            	   || attackers.get(i).getSirenAttackOrDestroy())
                 combat.addAttacker(attackers.get(i));
           }
 

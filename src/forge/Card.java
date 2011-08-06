@@ -57,6 +57,7 @@ public class Card extends MyObservable {
     private boolean                      creatureGotBlockedThisCombat      = false;
     private boolean                      dealtCombatDmgToOppThisTurn       = false;
     private boolean                      dealtDmgToOppThisTurn             = false;
+    private boolean						sirenAttackOrDestroy				= false;
     private boolean                      exaltedBonus                      = false;
     private boolean                      faceDown                          = false;
     private boolean                      sacrificeAtEOT                    = false;
@@ -255,6 +256,14 @@ public class Card extends MyObservable {
     
     public boolean getDealtDmgToOppThisTurn() {
         return dealtDmgToOppThisTurn;
+    }
+    
+    public void setSirenAttackOrDestroy(boolean b) {
+    	sirenAttackOrDestroy = b;
+    }
+    
+    public boolean getSirenAttackOrDestroy() {
+    	return sirenAttackOrDestroy;
     }
     
     public void addReceivedDamageFromThisTurn(Card c, int damage) {
