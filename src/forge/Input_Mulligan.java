@@ -23,17 +23,14 @@ public class Input_Mulligan extends Input {
     public void selectButtonCancel() {
     	AllZone.GameInfo.setHumanMulliganedToZero(false);
     	
-        Card[] hand = AllZone.Human_Hand.getCards();
-        for(int i = 0; i < hand.length; i++) {
-            AllZone.Human_Library.add(hand[i]);
-            AllZone.Human_Hand.remove(hand[i]);
-        }
-        
+    	CardList hand = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
+    	for(Card c : hand)
+    		AllZone.GameAction.moveToLibrary(c);
+
         for(int i = 0; i < 100; i++)
             AllZone.HumanPlayer.shuffle();
         
-        
-        int newHand = hand.length - 1;
+        int newHand = hand.size() - 1;
         
         AllZone.GameInfo.addHumanNumberOfTimesMulliganed(1);
         
@@ -42,7 +39,7 @@ public class Input_Mulligan extends Input {
         if(AllZone.QuestData != null)
         {
         	if (AllZone.QuestData.getSleightOfHandLevel() >= 1 && AllZone.GameInfo.getHumanNumberOfTimesMulliganed() == 1)
-        		newHand = hand.length;
+        		newHand++;
         }
         for(int i = 0; i < newHand; i++)
             AllZone.HumanPlayer.drawCard();
@@ -81,18 +78,11 @@ public class Input_Mulligan extends Input {
         //Human Leylines
         ButtonUtil.reset();
         CardList HHandList = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
-        PlayerZone HPlay = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-        PlayerZone HHand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-        for(int i = 0; i < HHandList.size() ; i++) {
-        	if(HHandList.get(i).getName().startsWith("Leyline")) {
-        		String[] choices = {"Yes", "No"};
-        		Object q = null;
-        		q = GuiUtils.getChoiceOptional("Put " + HHandList.get(i).getName() + " onto the battlefield?", choices);
-        		if(q == null || q.equals("No"));
-        		else {
-        			HPlay.add(HHandList.get(i));
-        			HHand.remove(HHandList.get(i));
-        		}
+
+        for(Card c : HHandList){
+        	if(c.getName().startsWith("Leyline")) {
+        		if (GameActionUtil.showYesNoDialog(c, "Put onto Battlefield?")) 
+        			AllZone.GameAction.moveToPlay(c);
         	}
         }
 

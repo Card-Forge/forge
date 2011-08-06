@@ -133,12 +133,19 @@ public class AIPlayer extends Player{
 	
 	public void handToLibrary(final int numToLibrary, final String libPosIn) {
 		String libPos = libPosIn;
+		
 		for(int i = 0; i < numToLibrary; i++) {
-			if(libPos.equals("Top") || libPos.equals("Bottom")) libPos = libPos.toLowerCase();
-			else {
+			int position;
+			if (libPos.equalsIgnoreCase("Top"))
+				position = 0;
+			else if (libPos.equalsIgnoreCase("Bottom"))
+				position = -1;
+			else{
 				Random r = new Random();
-				if(r.nextBoolean()) libPos = "top";
-				else libPos = "bottom";
+				if(r.nextBoolean()) 
+					position = 0;
+				else 
+					position = -1;
 			}
 			CardList hand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
 
@@ -149,27 +156,20 @@ public class AIPlayer extends Player{
 				CardList blIH = hand.getType("Basic");
 				if(blIH.size() > 0) {
 					Card card = blIH.get(CardUtil.getRandomIndex(blIH));
-					AllZone.Computer_Hand.remove(card);
-					if(libPos.equals("top")) AllZone.Computer_Library.add(card, 0);
-					else AllZone.Computer_Library.add(card);
-					//return;
+					
+					AllZone.GameAction.moveToLibrary(card, position);
 				}
 				else {
-
 					CardListUtil.sortAttackLowFirst(hand);
 					CardListUtil.sortNonFlyingFirst(hand);
-					if(libPos.equals("top")) AllZone.Computer_Library.add(hand.get(0), 0);
-					else AllZone.Computer_Library.add(hand.get(0));
-					AllZone.Computer_Hand.remove(hand.get(0));
-					//return;
+					
+					AllZone.GameAction.moveToLibrary(hand.get(0), position);
 				}
 			} 
 			else {
 				CardListUtil.sortCMC(hand); 
-				if(libPos.equals("top")) AllZone.Computer_Library.add(hand.get(0), 0);
-				else AllZone.Computer_Library.add(hand.get(0));
-				AllZone.Computer_Hand.remove(hand.get(0));
-				//return;
+				
+				AllZone.GameAction.moveToLibrary(hand.get(0), position);
 			}
         }
 	}

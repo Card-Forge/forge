@@ -33,34 +33,22 @@ public class CardFactory_Sorceries {
                 }//resolve()
                 
                 void discardDraw7(Player player) {
-                    // Discard hand into graveyard
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-                    Card[] c = hand.getCards();
-                    for(int i = 0; i < c.length; i++) {
-                    	hand.remove(c[i]);
-                    	library.add(c[i], 0);
-                    }
-                    
-                    // Move graveyard into library
-                   
-                    Card[] g = grave.getCards();
-                    for(int i = 0; i < g.length; i++) {
-                        grave.remove(g[i]);
-                        library.add(g[i], 0);
-                    }
-                    
+                    // Move hand into library
+                	CardList hand = AllZoneUtil.getPlayerHand(player);
+                	CardList grave = AllZoneUtil.getPlayerGraveyard(player);
+                	
+                	for(Card c : hand)
+                		AllZone.GameAction.moveToLibrary(c);
+                	
+                	 // Move graveyard into library
+                	for(Card c : grave)
+                		AllZone.GameAction.moveToLibrary(c);
+
                     // Shuffle library
                     player.shuffle();
                     
                     // Draw seven cards
                     player.drawCards(7);
-                    
-                    if(card.getController().equals(player)) {
-                        library.remove(card);
-                        grave.add(card);
-                    }
                 }
                 
                 // Simple, If computer has two or less playable cards remaining in hand play Timetwister
@@ -3217,74 +3205,6 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);           
         }//*************** END ************ END **************************
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Cruel Tutor") || cardName.equals("Imperial Seal")) {
-            SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -948983382014193129L;
-
-				@Override
-                public boolean canPlayAI() {
-                    int life = AllZone.ComputerPlayer.getLife();
-                    if(4 < AllZone.Phase.getTurn() && AllZone.Computer_Library.size() > 0 && life >= 4) return true;
-                    else return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    Player player = card.getController();
-                    if(player.isHuman()) humanResolve();
-                    else computerResolve();
-                }
-                
-                public void computerResolve() {
-                    //TODO: somehow select a good noncreature card for AI
-                    CardList creature = new CardList(AllZone.Computer_Library.getCards());
-                    creature = creature.getType("Creature");
-                    if(creature.size() != 0) {
-                        Card c = CardFactoryUtil.AI_getBestCreature(creature);
-                        
-                        if(c == null) {
-                            creature.shuffle();
-                            c = creature.get(0);
-                        }
-                        
-                        card.getController().shuffle();
-                        
-                        //move to top of library
-                        AllZone.Computer_Library.remove(c);
-                        AllZone.Computer_Library.add(c, 0);
-                        
-                        //lose 2 life
-                        AllZone.ComputerPlayer.loseLife(2, card);
-                    }
-                }//computerResolve()
-                
-                public void humanResolve() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    
-                    CardList list = new CardList(library.getCards());
-                    
-                    if(list.size() != 0) {
-                        Object o = GuiUtils.getChoiceOptional("Select a card", list.toArray());
-                        
-                        card.getController().shuffle();
-                        if(o != null) {
-                            //put card on top of library
-                            library.remove(o);
-                            library.add((Card) o, 0);
-                        }
-                        //lose 2 life
-                        AllZone.HumanPlayer.loseLife(2, card);
-                    }//if
-                    
-
-                }//resolve()
-            };
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Invincible Hymn")) {
@@ -6555,21 +6475,15 @@ public class CardFactory_Sorceries {
                 }//resolve()
                 
                 void discardDrawX(Player player) {
-                	int handSize = 0;
-                    // Discard hand into library
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-                    handSize = hand.size();
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-                    Card[] c = hand.getCards();
-                    for(int i = 0; i < c.length; i++) {
-                    	hand.remove(c[i]);
-                    	library.add(c[i], 0);
-                    }
+                	CardList hand = AllZoneUtil.getPlayerHand(player);
+
+                    for(Card c : hand)
+                    	AllZone.GameAction.moveToLibrary(c);
                     
                     // Shuffle library
                     player.shuffle();
                     
-                    player.drawCards(handSize);
+                    player.drawCards(hand.size());
                 }
                 
                 // Simple, If computer has two or less playable cards remaining in hand play Winds of Change

@@ -2186,13 +2186,9 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    card.setDamage(0);
-                    card.clearAssignedDamage();
-                    card.untap();
-                    
-                    //moves card to top of library
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getOwner());
-                    library.add(card, 0);
+                	if (AllZone.getZone(card).is(Constant.Zone.Graveyard))
+                		AllZone.GameAction.moveToLibrary(card);
+ 
                 }
             };
             Command destroy = new Command() {
@@ -2200,11 +2196,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     if(card.isToken()) return;
-                    
-                    //remove from graveyard
-                    PlayerZone grave = AllZone.getZone(card);
-                    grave.remove(card);
-                    
+
                     ability.setStackDescription("Put Undying Beast on top of its owner's library.");
                     AllZone.Stack.add(ability);
                 }

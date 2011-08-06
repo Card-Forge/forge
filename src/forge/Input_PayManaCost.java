@@ -82,6 +82,8 @@ public class Input_PayManaCost extends Input {
 
 			// this seems to remove a card if it is in the player's hand
 			// and trys to remove abilities, but no error messsage is generated
+			
+			// todo(sol) if spell but not copied spell, move to stack
 			AllZone.Human_Hand.remove(originalCard);
 
 			if (spell.getAfterPayMana() != null)
