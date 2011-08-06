@@ -2071,10 +2071,6 @@ public class GameAction {
         		throw new RuntimeException("GameAction : destroy() invalid card.getOwner() - " + c + " " + owner);
         
         boolean persist = (c.getKeyword().contains("Persist") && c.getCounters(Counters.M1M1) == 0);
-        
-        //tokens don't go into the graveyard
-        //TODO: must change this if any cards have effects that trigger "when creatures go to the graveyard"
-        //resets the card, untaps the card, removes anything "extra", resets attack and defense
 
         Card newCard = moveToGraveyard(c);
         

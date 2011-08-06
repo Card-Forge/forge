@@ -132,7 +132,6 @@ public class GameActionUtil {
 		upkeep_Oath_of_Druids();
 		upkeep_Oath_of_Ghouls();
 		upkeep_Mycoloth();
-		upkeep_Spore_Counters();
 		upkeep_Suspend();
 		upkeep_Vanishing();
 		upkeep_Fading();
@@ -7303,27 +7302,6 @@ public class GameActionUtil {
             }
         } //if
     }//nether spirit
-
-	private static void upkeep_Spore_Counters() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getType("Creature");
-
-		for(int i = 0; i < list.size(); i++) {
-			Card c = list.get(i);
-			if(c.getName().equals("Deathspore Thallid") || c.getName().equals("Elvish Farmer")
-					|| c.getName().equals("Feral Thallid") || c.getName().equals("Mycologist")
-					|| c.getName().equals("Pallid Mycoderm") || c.getName().equals("Psychotrope Thallid")
-					|| c.getName().equals("Savage Thallid") || c.getName().equals("Thallid")
-					|| c.getName().equals("Thallid Devourer") || c.getName().equals("Thallid Germinator")
-					|| c.getName().equals("Thallid Shell-Dweller") || c.getName().equals("Thorn Thallid")
-					|| c.getName().equals("Utopia Mycon") || c.getName().equals("Vitaspore Thallid")) {
-				c.addCounter(Counters.SPORE, 1);
-			}
-		}
-	}
 
 	public static void upkeep_Suspend() {
 		Player player = AllZone.Phase.getPlayerTurn();
