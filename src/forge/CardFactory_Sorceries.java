@@ -7951,6 +7951,68 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Overwhelming Stampede")) {
+        	/*
+        	 * Until end of turn, creatures you control gain trample and get
+        	 * +X/+X, where X is the greatest power among creatures you control.
+        	 */
+        	final int[] x = new int[1];
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -3676506382832498840L;
+
+				@Override
+                public boolean canPlayAI() {
+                    CardList list = AllZoneUtil.getCreaturesInPlay(Constant.Player.Computer);
+                    return list.size() > 2;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                	String player = card.getController();
+                    CardList list = AllZoneUtil.getCreaturesInPlay(player);
+                    
+                    x[0] = findHighestPower(list);    
+                    
+                    for(Card creature:list) {
+                        final Card c = creature;
+                        
+                        final Command untilEOT = new Command() {
+							private static final long serialVersionUID = -2712661762676783458L;
+
+							public void execute() {
+                                if(AllZone.GameAction.isCardInPlay(c)) {
+                                    c.addTempAttackBoost(-x[0]);
+                                    c.addTempDefenseBoost(-x[0]);
+                                    c.removeExtrinsicKeyword("Trample");
+                                }
+                            }
+                        };//Command
+                        
+                        if(AllZone.GameAction.isCardInPlay(c)) {
+                            c.addTempAttackBoost(x[0]);
+                            c.addTempDefenseBoost(x[0]);
+                            c.addExtrinsicKeyword("Trample");
+                            
+                            AllZone.EndOfTurn.addUntil(untilEOT);
+                        }//if
+                    }//for
+                }//resolve()
+                
+                private int findHighestPower(CardList list) {
+                	int highest = 0;
+                	for(Card c:list) {
+                		if( c.getNetAttack() > highest ) highest = c.getNetAttack();
+                	}
+                	return highest;
+                }
+            };
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            card.setSVar("PlayMain1", "TRUE");
+        }//*************** END ************ END **************************
+        
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
             int n = hasKeyword(card, "Cycling");
