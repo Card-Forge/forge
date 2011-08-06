@@ -5,6 +5,7 @@ Text:When Stonecloaker comes into play, return a creature you control to its own
 PT:3/2
 K:Flash
 K:Flying
+K:SVar:RemAIDeck:True
 K:SVar:Rarity:Uncommon
 K:SVar:Picture:http://www.wizards.com/global/images/magic/general/stonecloaker.jpg
 End
