@@ -1,3 +1,9 @@
+Stalking Assassin
+1 U B
+Creature Human Assassin
+no text
+1/1
+
 Burst Lightning
 R
 Instant

@@ -8692,8 +8692,38 @@ public class CardFactory_Creatures {
                             
                             @Override
                             public boolean canPlayAI() {
-                                return false;
-                            }
+                            	CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+                            	human = human.filter(new CardListFilter() {
+                            		public boolean addCard(Card c) {
+                            			return c.isUntapped() && CardFactoryUtil.canTarget(card, c);
+                            		}
+                            	});
+                            	
+                                if (human.size() > 0) {
+                                	CardListUtil.sortAttack(human);
+                                    CardListUtil.sortFlying(human);
+                                	setTargetCard(human.get(0));
+                                }
+                                
+                                PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                                CardList assassins = new CardList();
+                                assassins.addAll(play.getCards());
+                                
+                                assassins = assassins.filter(new CardListFilter() {
+                                    public boolean addCard(Card c) {
+                                        return c.isCreature() && (!c.hasSickness() || c.getKeyword().contains("Haste")) && c.isUntapped() && 
+                                              (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || 
+                                               c.getName().equals("Tetsuo Umezawa") || c.getName().equals("Stalking Assassin"));
+                                    }
+                                });
+                                
+                                Combat attackers = ComputerUtil.getAttackers();
+                                CardList list = new CardList(attackers.getAttackers());
+                            	
+                                return (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer().equals(card.getController()) && 
+                                		human.size() > 0 && (assassins.size() > 0 || !list.contains(card)));
+                                
+                            }//canPlayAI
                         };//SpellAbility
                         c.addSpellAbility(new Spell_Permanent(c));
                         c.addSpellAbility(ability);
@@ -8768,10 +8798,11 @@ public class CardFactory_Creatures {
                     assassins.addAll(play.getCards());
                     
                     assassins = assassins.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
+                        public boolean addCard(Card c) {
                             return c.isCreature() && (!c.hasSickness() || c.getKeyword().contains("Haste")) && c.isUntapped() && 
-                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || c.getName().equals("Tetsuo Umezawa"));
-                    	}
+                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || 
+                                   c.getName().equals("Tetsuo Umezawa") || c.getName().equals("Stalking Assassin"));
+                        }
                     });
                     
                     Combat attackers = ComputerUtil.getAttackers();
@@ -8820,10 +8851,11 @@ public class CardFactory_Creatures {
                     assassins.addAll(play.getCards());
                     
                     assassins = assassins.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
+                        public boolean addCard(Card c) {
                             return c.isCreature() && (!c.hasSickness() || c.getKeyword().contains("Haste")) && c.isUntapped() && 
-                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || c.getName().equals("Tetsuo Umezawa"));
-                    	}
+                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || 
+                                   c.getName().equals("Tetsuo Umezawa") || c.getName().equals("Stalking Assassin"));
+                        }
                     });
                     
                     Combat attackers = ComputerUtil.getAttackers();
@@ -8872,10 +8904,11 @@ public class CardFactory_Creatures {
                     assassins.addAll(play.getCards());
                     
                     assassins = assassins.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
+                        public boolean addCard(Card c) {
                             return c.isCreature() && (!c.hasSickness() || c.getKeyword().contains("Haste")) && c.isUntapped() && 
-                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || c.getName().equals("Tetsuo Umezawa"));
-                    	}
+                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || 
+                                   c.getName().equals("Tetsuo Umezawa") || c.getName().equals("Stalking Assassin"));
+                        }
                     });
                     
                     Combat attackers = ComputerUtil.getAttackers();
@@ -8923,10 +8956,11 @@ public class CardFactory_Creatures {
                     assassins.addAll(play.getCards());
                     
                     assassins = assassins.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
+                        public boolean addCard(Card c) {
                             return c.isCreature() && (!c.hasSickness() || c.getKeyword().contains("Haste")) && c.isUntapped() && 
-                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || c.getName().equals("Tetsuo Umezawa"));
-                    	}
+                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || 
+                                   c.getName().equals("Tetsuo Umezawa") || c.getName().equals("Stalking Assassin"));
+                        }
                     });
                     
                     Combat attackers = ComputerUtil.getAttackers();
@@ -8941,6 +8975,124 @@ public class CardFactory_Creatures {
             ability.setDescription("3 W, tap: Tap target creature.");
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
             
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Stalking Assassin")) {
+        	
+            final Ability_Tap destroy = new Ability_Tap(card, "3 B") {
+				private static final long serialVersionUID = -6612039354743803366L;
+
+				@Override
+                public boolean canPlayAI() {
+                    CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    human = human.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isTapped() && CardFactoryUtil.canTarget(card, c);
+                        }
+                    });
+                    
+                    if (human.size() > 0) {
+                    	CardListUtil.sortAttack(human);
+                        CardListUtil.sortFlying(human);
+                    	setTargetCard(human.get(0));
+                    }
+                                        
+                    return 0 < human.size();
+                }
+                
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && c.isTapped() && CardFactoryUtil.canTarget(card, c)) {
+                        AllZone.GameAction.destroy(c);
+                    }
+                }//resolve()
+            };//SpellAbility
+            
+            Input target = new Input() {
+				private static final long serialVersionUID = -8953453455402148585L;
+
+				@Override
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select target tapped creature to destroy");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    if (!CardFactoryUtil.canTarget(card, c)) {
+                        AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+                    } else if (c.isCreature() && zone.is(Constant.Zone.Play) && c.isTapped()) {
+                        //tap ability
+                        card.tap();
+                        
+                        destroy.setTargetCard(c);
+                        AllZone.Stack.add(destroy);
+                        stop();
+                    }
+                }//selectCard()
+            };//Input
+            
+        	final SpellAbility tap = new Ability_Tap(card, "3 U") {
+				private static final long serialVersionUID = -8634280576775825017L;
+
+				@Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    c.tap();
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                	CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+                	human = human.filter(new CardListFilter() {
+                		public boolean addCard(Card c) {
+                			return c.isUntapped() && CardFactoryUtil.canTarget(card, c);
+                		}
+                	});
+                	
+                    if (human.size() > 0) {
+                    	CardListUtil.sortAttack(human);
+                        CardListUtil.sortFlying(human);
+                    	setTargetCard(human.get(0));
+                    }
+                    
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    CardList assassins = new CardList();
+                    assassins.addAll(play.getCards());
+                    
+                    assassins = assassins.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                            return c.isCreature() && (!c.hasSickness() || c.getKeyword().contains("Haste")) && 
+                                   c.isUntapped() && !c.equals(card) && 
+                                  (c.getName().equals("Rathi Assassin") || c.getName().equals("Royal Assassin") || 
+                                   c.getName().equals("Tetsuo Umezawa") || c.getName().equals("Stalking Assassin"));
+                    	}
+                    });
+                    
+                    Combat attackers = ComputerUtil.getAttackers();
+                    CardList list = new CardList(attackers.getAttackers());
+                	
+                    return (AllZone.Phase.getPhase().equals(Constant.Phase.Main1) && AllZone.Phase.getActivePlayer().equals(card.getController()) && 
+                    		human.size() > 0 && (assassins.size() > 0 || !list.contains(card)));
+                    
+                }//canPlayAI
+            };//SpellAbility
+            
+            card.addSpellAbility(tap);
+            tap.setDescription("3 U, tap: Tap target creature.");
+            tap.setBeforePayMana(CardFactoryUtil.input_targetCreature(tap));
+            card.addSpellAbility(destroy);
+            destroy.setDescription("3 B, tap: Destroy target tapped creature.");
+            destroy.setBeforePayMana(target);
+            destroy.setBeforePayMana(CardFactoryUtil.input_targetCreature(destroy));
         }//*************** END ************ END **************************
         
         
