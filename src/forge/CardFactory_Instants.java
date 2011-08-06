@@ -388,6 +388,44 @@ public class CardFactory_Instants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("About Face") || cardName.equals("Inside Out") || cardName.equals("Transmutation") || cardName.equals("Twisted Image")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = -5744842090293911111L;
+                
+                @Override
+                public void resolve() {
+                    //in case ability is played twice
+                    final int[] oldAttack = new int[1];
+                    final int[] oldDefense = new int[1];
+                    
+                    final Card card[] = new Card[1];
+                    card[0] = getTargetCard();
+                    
+                    oldAttack[0] = card[0].getBaseAttack();
+                    oldDefense[0] = card[0].getBaseDefense();
+                    
+                    card[0].setBaseAttack(oldDefense[0]);
+                    card[0].setBaseDefense(oldAttack[0]);
+                    
+                    //EOT
+                    final Command untilEOT = new Command() {
+                        private static final long serialVersionUID = 7236360479349324099L;
+                        
+                        public void execute() {
+                            card[0].setBaseAttack(oldAttack[0]);
+                            card[0].setBaseDefense(oldDefense[0]);
+                        }
+                    };
+                    
+                    AllZone.EndOfTurn.addUntil(untilEOT);
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
         else if(cardName.equals("Crib Swap")) {
