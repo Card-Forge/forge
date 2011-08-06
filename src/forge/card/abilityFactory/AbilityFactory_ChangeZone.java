@@ -506,6 +506,8 @@ public class AbilityFactory_ChangeZone {
 		CardList fetchList = AllZoneUtil.getCardsInZone(origin, player);
         if (origin.equals("Library"))	// Look at whole library before moving onto choosing a card
         	GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at " + origin, fetchList.toArray());
+        if (origin.equals("Hand") && player.isComputer())	// Look at opponents hand before moving onto choosing a card
+        	GuiUtils.getChoiceOptional(af.getHostCard().getName() + " - Looking at " + origin, fetchList.toArray());
 		
 		fetchList = filterListByType(fetchList, params, "ChangeType", sa);
 
