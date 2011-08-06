@@ -1,3 +1,10 @@
+Lavaclaw Reaches
+no cost
+Land
+Comes into play tapped.
+tap: add B
+tap: add R
+
 Tormod's Crypt
 0
 Artifact

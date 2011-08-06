@@ -4,6 +4,8 @@ package forge;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 
 class CardFactory_Lands {
     
@@ -2720,6 +2722,118 @@ class CardFactory_Lands {
             a1.setStackDescription(card
                     + " - until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance.");
             a1.setDescription("3 W U: Until end of turn, Celestial Colonnade becomes a 4/4 white and blue Elemental creature with flying and vigilance. It's still a land.");
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Lavaclaw Reaches")) {
+            final SpellAbility X_ability = new Ability(card, "0") {
+                @Override
+                public boolean canPlayAI() {
+					PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, "Human");
+			        CardList opponentCreatureList = new CardList(opponentPlayZone.getCards());
+			        opponentCreatureList = opponentCreatureList.getType("Creature");
+      			  int n = ComputerUtil.getAvailableMana().size() - 1;
+      			  if(n > 0) setManaCost(n + "");
+                    return (n > 0 && opponentCreatureList.size() == 0);
+                }
+                
+                @Override
+                public void resolve() {
+                    final Card c = card;
+                    for(int i = 0; i < Integer.parseInt(getManaCost()); i++) {
+                        c.addTempAttackBoost(1);   	
+                    }                  
+                    c.updateObservers();
+                    
+                    Command untilEOT = new Command() {
+                        private static final long serialVersionUID = -28032591440730370L;
+                        
+                        public void execute() {
+                            for(int i = 0; i < Integer.parseInt(getManaCost()); i++) {
+                            c.addTempAttackBoost(-1);
+                            }
+                        }
+                    };
+                    AllZone.EndOfTurn.addUntil(untilEOT);
+                }//resolve()
+            };//SpellAbility 
+                
+          	  X_ability.setBeforePayMana(new Input()
+        	  {
+        		private static final long serialVersionUID = 437814522686732L;
+
+    			public void showMessage()
+        		 {
+        			 String s = JOptionPane.showInputDialog("What would you like X to be?");
+        	  		 try {
+        	  			     Integer.parseInt(s);
+        	  				 X_ability.setManaCost(s);
+        	  				 stopSetNext(new Input_PayManaCost(X_ability));
+        	  			 }
+        	  			 catch(NumberFormatException e){
+        	  				 AllZone.Display.showMessage("\"" + s + "\" is not a number.");
+        	  				 showMessage();
+        	  			 }
+        		 }
+        	  });
+  
+              final Command eot1 = new Command() {
+                  private static final long serialVersionUID = -132950142223575L;
+                  
+                  public void execute() {
+                      Card c = card;
+                      c.removeType("Creature");
+                      c.removeType("Elemental");
+                      c.removeSpellAbility(X_ability);
+                      c.setManaCost("");
+                      c.setBaseAttack(0);
+                      c.setBaseDefense(0);
+                  }
+              };
+              
+            final SpellAbility a1 = new Ability(card, "1 B R") {
+                @Override
+                public boolean canPlayAI() {
+                    return (!card.hasSickness() && !card.getType().contains("Creature"));
+                }
+                
+                @Override
+                public void resolve() {
+                    Card c = card;
+                    
+                    c.setBaseAttack(2);
+                    c.setBaseDefense(2);
+                    c.setManaCost("B R");
+                    
+                    //to prevent like duplication like "Creature Creature"              
+                    if(!c.getType().contains("Creature")) c.addType("Creature");
+                    if(!c.getType().contains("Elemental")) c.addType("Elemental");
+                    
+                  card.removeSpellAbility(X_ability);
+              	  X_ability.setDescription("X: This creature gets +X/+0 until end of turn.");
+            	  X_ability.setStackDescription("X: This creature gets +X/+0 until end of turn.");
+            	  card.addSpellAbility(X_ability);
+                    
+                    
+                    AllZone.EndOfTurn.addUntil(eot1);
+                }
+
+            };//SpellAbility
+            final Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = 4245563898487609274L;
+
+				public void execute() {
+					// Comes into tapped Keyword gets removed, so this this command does the tapping. Keyword is still required for things like Amulet of Vigor (Not tested)
+					card.tap();
+                }
+            };
+
+            card.clearSpellKeepManaAbility();
+            card.addSpellAbility(a1);
+            card.addComesIntoPlayCommand(comesIntoPlay);
+            a1.setStackDescription(card
+                    + " - until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with {X}: This creature gets +X/+0 until end of turn.");
+            a1.setDescription("1 B R: Until end of turn, Lavaclaw Reaches becomes a 2/2 black and red Elemental creature with {X}: This creature gets +X/+0 until end of turn. It's still a land.");
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
