@@ -37,6 +37,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Mana;
 import forge.card.spellability.Ability_Static;
+import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
@@ -3127,6 +3128,60 @@ public class CardFactory implements NewConstants {
             
             card.addComesIntoPlayCommand(intoPlay);
             card.addDestroyCommand(toGrave);
+        }//*************** END ************ END **************************
+        
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Triangle of War")) {
+        	
+        	Target t2 = new Target(card, "Select target creature an opponent controls", "Creature.YouDontCtrl".split(","));
+            final Ability_Sub sub = new Ability_Sub(card, t2) {
+				private static final long serialVersionUID = -572849470457911366L;
+
+				@Override
+            	public boolean chkAI_Drawback() {
+            		return false;
+            	}
+				
+				@Override
+				public void resolve() {
+					Card myc = this.getParent().getTargetCard();
+					Card oppc = getTargetCard();
+					if(AllZoneUtil.isCardInPlay(myc) && AllZoneUtil.isCardInPlay(oppc)) {
+						if(CardFactoryUtil.canTarget(card, myc) && CardFactoryUtil.canTarget(card, oppc)) {
+							int myPower = myc.getNetAttack();
+							int oppPower = oppc.getNetAttack();
+							myc.addDamage(oppPower, oppc);
+							oppc.addDamage(myPower, myc);
+						}
+					}
+				}
+            	
+            	@Override
+            	public boolean doTrigger(boolean b) {
+            		return false;
+            	}
+            };
+        	
+        	Cost abCost = new Cost("2 Sac<1/CARDNAME>", cardName, true);
+        	Target t1 = new Target(card, "Select target creature you control", "Creature.YouCtrl".split(","));
+        	final Ability_Activated ability = new Ability_Activated(card, abCost, t1) {
+				private static final long serialVersionUID = 2312243293988795896L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	sub.resolve();
+                }
+            };
+            ability.setSubAbility(sub);
+            ability.setDescription(abCost+"Choose target creature you control and target creature an opponent controls. Each of those creatures deals damage equal to its power to the other.");
+            ability.setStackDescription(card+" - Each creature deals damage equal to its power to the other.");
+            card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
 
