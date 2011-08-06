@@ -242,9 +242,10 @@ public class GameActionUtil {
 		 * Blight - When enchanted land becomes tapped, destroy it.
 		 */
 		if(c.isEnchantedBy("Blight")) {
-			final ArrayList<Card> blights = c.getEnchantedBy();
+			ArrayList<Card> blights = c.getEnchantedBy();
 			final Card target = c;
-			for(Card blight:blights) {
+			for(int i = 0; i < blights.size(); i++) {
+				Card blight = blights.get(i);
 				if(blight.getName().equals("Blight")) {
 					Ability ability = new Ability(blight, "0") {
 						@Override
