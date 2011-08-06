@@ -8,4 +8,5 @@ A:AB$ ChangeZone | Cost$ U T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select t
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/civic_guildmage.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/211.jpg
 End
