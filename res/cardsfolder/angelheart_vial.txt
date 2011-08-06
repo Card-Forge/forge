@@ -7,5 +7,7 @@ T:Mode$ DamageDone | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ Tri
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ CHARGE | CounterNum$ X
 SVar:X:Count$TriggeredDamageAmount
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/angelheart_vial.jpg
 End
 
