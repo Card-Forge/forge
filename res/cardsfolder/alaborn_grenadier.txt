@@ -1,6 +1,6 @@
 Name:Alaborn Grenadier
 ManaCost:W W
-Types:Creature Soldier
+Types:Creature Human Soldier
 Text:no text
 PT:2/2
 K:Vigilance
