@@ -556,6 +556,11 @@ public abstract class Player extends MyObservable{
 			numDrawnThisTurn++;
 
 			GameActionUtil.executeDrawCardTriggeredEffects(this);
+			
+			//Run triggers
+			HashMap<String,Object> runParams = new HashMap<String,Object>();
+			runParams.put("Drawn", c);
+			AllZone.TriggerHandler.runTrigger("Drawn", runParams);
 		}
 		//lose:
 		else if (!Constant.Runtime.DevMode[0] || AllZone.Display.canLoseByDecking()) {	

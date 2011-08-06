@@ -45,6 +45,10 @@ public class TriggerHandler {
 		{
 			ret = new Trigger_Discarded(mapParams,host);
 		}
+		else if(mode.equals("Drawn"))
+		{
+			ret = new Trigger_Drawn(mapParams,host);
+		}
 		else if(mode.equals("LifeGained"))
 		{
 			ret = new Trigger_LifeGained(mapParams,host);
