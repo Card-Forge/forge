@@ -5703,7 +5703,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************        
         
         //*************** START *********** START **************************
-        else if(cardName.equals("All is Dust")) {
+        else if(cardName.equals("All Is Dust")) {
         	/*
         	 * Each player sacrifices all colored permanents he or she controls.
         	 */
@@ -5733,7 +5733,7 @@ public class CardFactory_Sorceries {
         			computer = computer.filter(colorless);
         			computer = computer.getNotKeyword("Indestructible");
 
-        			Log.debug("All is Dust", "Current phase:" + AllZone.Phase.getPhase());
+        			Log.debug("All Is Dust", "Current phase:" + AllZone.Phase.getPhase());
         			// the computer will at least destroy 2 more human permanents
         			return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
         				(computer.size() < human.size() - 1
