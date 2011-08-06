@@ -172,6 +172,7 @@ src/forge/Gui_Welcome.java svneol=native#text/plain
 src/forge/Gui_WinLose.java svneol=native#text/plain
 src/forge/IO.java svneol=native#text/plain
 src/forge/ImageCache.java svneol=native#text/plain
+src/forge/ImageCache2.java svneol=native#text/plain
 src/forge/ImageEditor.java -text svneol=native#text/plain
 src/forge/ImageJPanel.java -text svneol=native#text/plain
 src/forge/ImagePreviewPanel.java -text svneol=native#text/plain
