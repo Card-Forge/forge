@@ -343,32 +343,35 @@ public class AbilityFactory_ChangeZone {
         
         int changeNum = params.containsKey("ChangeNum") ? Integer.parseInt(params.get("ChangeNum")) : 1;
 
-        for(int i=0; i < changeNum; i++){
-	        if(fetchList.size() == 0 || destination == null) 
-	        	break;
-	        	
+        for (int i=0; i < changeNum; i++) {
+            if (fetchList.size() == 0 || destination == null) 
+                break;
+                
             Object o = AllZone.Display.getChoiceOptional("Select a card", fetchList.toArray());
             
-            if(o != null) {
-            	origZone.remove(o);
-            	Card c = (Card) o;
-            	fetchList.remove(c);
+            if (o != null) {
+                origZone.remove(o);
+                Card c = (Card) o;
+                fetchList.remove(c);
 
-                if (destination.equals("Library")){
-                	// this needs to be zero indexed. Top = 0, Third = 2
-                	int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
-                	destZone.add(c, libraryPos);
+                if (destination.equals("Library")) {
+                    // this needs to be zero indexed. Top = 0, Third = 2
+                    int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : 0;
+                    if (origin.equals("Library")) {
+                        player.shuffle();
+                    }
+                    destZone.add(c, libraryPos);
                 }
-                else{
-                	destZone.add(c);
-                	if (destination.equals("Battlefield") && params.containsKey("Tapped"))
-	                	c.tap();
+                else {
+                    destZone.add(c);
+                    if (destination.equals("Battlefield") && params.containsKey("Tapped"))
+                        c.tap();
                 }
             }
         }
         
-        if (origin.equals("Library"))
-        	player.shuffle();
+        if (origin.equals("Library") && !destination.equals("Library"))
+            player.shuffle();
 	            
 		String DrawBack = params.get("SubAbility");
         
