@@ -658,9 +658,9 @@ public class Card extends MyObservable {
                 } else if (keyword.get(i).toString().contains("StaticEffect")) {
                     String k[] = keyword.get(i).split(":");
                     sbLong.append(k[5]).append("\r\n");
-                } else if (keyword.get(i).toString().contains("stPumpAll")) {
+                } else if (keyword.get(i).toString().contains("stPump")) {
                     String k[] = keyword.get(i).split(":");
-                    sbLong.append(k[5]).append("\r\n");
+                    sbLong.append(k[4]).append("\r\n");
                 } else if (keyword.get(i).endsWith(".")) {
                     sbLong.append(keyword.get(i).toString()).append("\r\n");
                 } else if (keyword.get(i).contains("At the beginning of your upkeep, ") 
@@ -2030,6 +2030,18 @@ public class Card extends MyObservable {
         return false;
     }
     
+    public boolean isValidCard(String Restrictions[], String Controller) {
+    	String Restriction[] = Restrictions;
+    	if (Restrictions[0].startsWith("YouCtrl")) {
+    		if (!controller.equals(Controller)) return false;
+    		Restriction[0] = Restriction[0].replaceFirst("YouCtrl ", "");
+    	}
+    	if (Restrictions[0].startsWith("YouDontCtrl")) {
+    		if (controller.equals(Controller)) return false;
+    		Restriction[0] = Restriction[0].replaceFirst("YouDontCtrl ", "");
+    	}
+    	return isValidCard(Restriction);
+    }
     
     public boolean isValidCard(String Restrictions[]) {
         

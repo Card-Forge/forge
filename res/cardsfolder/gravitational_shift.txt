@@ -2,8 +2,8 @@ Name:Gravitational Shift
 ManaCost:3 U U
 Types:Enchantment
 Text:no text
-K:stPumpAll:Creature.withFlying:All Permanents:2/0:No Condition:Creatures with flying get +2/+0.
-K:stPumpAll:Creature.withoutFlying:All Permanents:-2/0:No Condition:Creatures without flying get -2/-0.
+K:stPumpAll:Creature.withFlying:2/0:No Condition:Creatures with flying get +2/+0.
+K:stPumpAll:Creature.withoutFlying:-2/0:No Condition:Creatures without flying get -2/-0.
 SVar:PlayMain1:TRUE
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

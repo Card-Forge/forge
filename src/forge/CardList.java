@@ -279,11 +279,18 @@ public class CardList implements Iterable<Card> {
         Collections.sort(list, c);
     }
     
+    public CardList getValidCards(final String Restrictions[], final String Controller) {
+        return this.filter(new CardListFilter() {
+            public boolean addCard(Card c) {
+                return c.isValidCard(Restrictions, Controller);
+            }
+        });
+    } 
+       
     public CardList getValidCards(final String Restrictions[]) {
         return this.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 return c.isValidCard(Restrictions);
-
             }
         });
     }//getValidCards
