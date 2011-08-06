@@ -1258,28 +1258,6 @@ public class CombatUtil {
                 }
             }//Fervent Charge
             
-            //Raging Ravine, other future creats?
-            if(c.getKeyword().contains("Whenever this creature attacks, put a +1/+1 counter on it.")) {
-                ArrayList<String> kw = c.getKeyword();
-                int count = 0;
-                for(String s:kw) {
-                    if(s.equals("Whenever this creature attacks, put a +1/+1 counter on it.")) count++;
-                }
-                final Card crd = c;
-                Ability ability = new Ability(c, "0") {
-                    @Override
-                    public void resolve() {
-                        crd.addCounter(Counters.P1P1, 1);
-                    }
-                };
-                StringBuilder sb = new StringBuilder();
-                sb.append(c).append(" - Whenever this creature attacks, put a +1/+1 counter on it.");
-                ability.setStackDescription(sb.toString());
-                
-                for(int i = 0; i < count; i++)
-                    AllZone.Stack.add(ability);
-            }//Raging Ravine
-            
             //Mijae Djinn
             if(c.getName().equals("Mijae Djinn")) {
   				if( GameActionUtil.flipACoin(c.getController(), c)) {
