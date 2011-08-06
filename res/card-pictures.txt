@@ -38,6 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+gigantomancer.jpg				http://www.wizards.com/global/images/magic/general/gigantomancer.jpg
+mirror_entity.jpg				http://www.wizards.com/global/images/magic/general/mirror_entity.jpg
 lightning_serpent.jpg				http://www.wizards.com/global/images/magic/general/lightning_serpent.jpg
 ivy_elemental.jpg				http://www.wizards.com/global/images/magic/general/ivy_elemental.jpg
 krakilin.jpg					http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4769&type=card

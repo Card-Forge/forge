@@ -5481,7 +5481,141 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Mirror Entity"))
+        {
+      	  final Ability ability = new Ability(card, "0")
+      	  {
+      		  public void resolve()
+      		  {
+        			final CardList list = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards()).getType("Creature");
+                    final int[] originalAttack = new int[list.size()];
+                    final int[] originalDefense = new int[list.size()];
+          			for(int i = 0; i < list.size(); i++) {
+                     originalAttack[i] = list.get(i).getBaseAttack();
+                     originalDefense[i] = list.get(i).getBaseDefense();
+                      
+                      list.get(i).setBaseAttack(Integer.parseInt(getManaCost()));
+                      list.get(i).setBaseDefense(Integer.parseInt(getManaCost()));
+                      list.get(i).addExtrinsicKeyword("Changeling");
+                      if(i + 1 == list.size()) {
+                      final Command EOT = new Command() {
+                          private static final long serialVersionUID = 6437463765161964445L;
+                          
+                          public void execute() {
+                        	  
+                        	  for(int x = 0; x < list.size(); x++) {
+                              if(AllZone.GameAction.isCardInPlay(list.get(x))) {
+                            	  list.get(x).setBaseAttack(originalAttack[x]);
+                            	  list.get(x).setBaseDefense(originalDefense[x]);
+                            	  list.get(x).removeExtrinsicKeyword("Changeling");
+                              }
+                        	  }
+                        	  }
+                          };
+                          AllZone.EndOfTurn.addUntil(EOT);
+                      };
+      		  }
+      		  }
+      		  public boolean canPlayAI()
+      		  {
+      			 return false;
+      			  /**
+      			CardList Clist = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards()).getType("Creature"); 
+      			CardList Hlist = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards()).getType("Creature");
+      			return((Clist.size() - Hlist.size() * ComputerUtil.getAvailableMana().size() > AllZone.GameAction.getPlayerLife(Constant.Player.Human).getLife())
+      					&& AllZone.Phase.getPhase().equals(Constant.Phase.Main1));
+      					**/
+      					
+      		  }
+      	  };
+      	  ability.setBeforePayMana(new Input()
+      	  {
+      		private static final long serialVersionUID = 4378124586732L;
 
+  			public void showMessage()
+      		 {
+      			 String s = JOptionPane.showInputDialog("What would you like X to be?");
+      	  		 try {
+      	  			     Integer.parseInt(s);
+      	  				 ability.setManaCost(s);
+      	  				 stopSetNext(new Input_PayManaCost(ability));
+      	  			 }
+      	  			 catch(NumberFormatException e){
+      	  				 AllZone.Display.showMessage("\"" + s + "\" is not a number.");
+      	  				 showMessage();
+      	  			 }
+      		 }
+      	  });
+      	  ability.setDescription("X: Creatures you control become X/X and gain changeling until end of turn.");
+      	  ability.setStackDescription(card.getName() + "X: Creatures you control become X/X and gain changeling until end of turn.");
+      	  card.addSpellAbility(ability);
+        }
+        //*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Gigantomancer")) {
+        	final Ability ability = new Ability(card, "1") {
+                private static final long serialVersionUID = -68531201448677L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    Card c = getCreature();
+                    if(c == null) return false;
+                    else {
+                        setTargetCard(c);
+                        return true;
+                    }
+                }//canPlayAI()
+                
+                //may return null
+                public Card getCreature() {
+                    CardList untapped = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards()).getType("Creature");
+                    untapped = untapped.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isUntapped() && 6 > c.getNetAttack();
+                        }
+                    });                   
+                    if(untapped.isEmpty()) return null;
+                    Card worst = untapped.get(0);
+                    for(int i = 0; i < untapped.size(); i++)
+                        if(worst.getNetAttack() > untapped.get(i).getNetAttack()) worst = untapped.get(i);
+                    return worst;
+                }
+                
+                @Override
+                public void resolve() {
+                    if(AllZone.GameAction.isCardInPlay(getTargetCard())
+                            && CardFactoryUtil.canTarget(card, getTargetCard())) {
+                        final Card[] creature = new Card[1];
+                        
+                        creature[0] = getTargetCard();
+                        final int[] originalAttack = {creature[0].getBaseAttack()};
+                        final int[] originalDefense = {creature[0].getBaseDefense()};
+                        
+                        creature[0].setBaseAttack(7);
+                        creature[0].setBaseDefense(7);
+                        
+                        final Command EOT = new Command() {
+                            private static final long serialVersionUID = 6437463765161964445L;
+                            
+                            public void execute() {
+                                if(AllZone.GameAction.isCardInPlay(creature[0])) {
+                                    creature[0].setBaseAttack(originalAttack[0]);
+                                    creature[0].setBaseDefense(originalDefense[0]);
+                                }
+                            }
+                        };
+                        AllZone.EndOfTurn.addUntil(EOT);
+                    }//is card in play?
+                }//resolve()
+            };//SpellAbility
+            card.addSpellAbility(ability);
+            ability.setDescription("1: Target creature you control becomes 7/7 until end of turn.");
+            //this ability can target "this card" when it shouldn't be able to
+            ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Sorceress Queen") || cardName.equals("Serendib Sorcerer")) {
             final Ability_Tap ability = new Ability_Tap(card) {
