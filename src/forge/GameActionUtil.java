@@ -44,7 +44,6 @@ public class GameActionUtil {
 		upkeep_Carnophage();
 		upkeep_Sangrophage();
 		upkeep_Dega_Sanctuary();
-		upkeep_Sheltered_Valley();
 		upkeep_Living_Artifact();
 		upkeep_Tangle_Wire();
 		upkeep_Dance_of_the_Dead();
@@ -7619,33 +7618,7 @@ public class GameActionUtil {
 		}//for
 	}//upkeep_Dega_Sanctuary()
 	
-	private static void upkeep_Sheltered_Valley() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Sheltered Valley");
-
-		for(Card valley:list) {
-			final Card source = valley;
-			final Ability ability = new Ability(source, "0") {
-				public void resolve() {
-					CardList play = AllZoneUtil.getPlayerLandsInPlay(player);
-					if(play.size() <= 3) {
-						player.gainLife(1, source);
-					}
-				}
-			};//Ability
-
-			StringBuilder sb = new StringBuilder();
-			sb.append(source.getName()).append(" - ");
-			sb.append("if you control three or fewer lands, you gain 1 life.");
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}//for
-	}//upkeep_Sheltered_Valley()
-
-	
-		private static void upkeep_Plague_Spitter() {
+			private static void upkeep_Plague_Spitter() {
 		/*
 		 * At the beginning of your upkeep, Plague Spitter deals 1 damage
 		 * to each creature and each player
