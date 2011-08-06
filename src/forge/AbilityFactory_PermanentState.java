@@ -727,6 +727,45 @@ public class AbilityFactory_PermanentState {
 		 * All cards using this currently have SVar:RemAIDeck:True
 		 */
 		return false;
+		
+		//Here is the code used in the keyword version:
+		/*
+		if (!ComputerUtil.canPayCost(this) || !super.canPlayAI())
+			return false;
+
+		CardList hCards = getTargets();
+
+		Random r = new Random();
+		boolean rr = false;
+		if (r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed()))
+			rr = true;
+
+		if(hCards.size() > 0) {
+			CardList human = hCards.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getController().equals(AllZone.HumanPlayer);
+				}
+			});
+			CardList compy = hCards.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getController().equals(AllZone.HumanPlayer);
+				}
+			});
+			if(human.size() > compy.size()) {
+				return rr;
+			}
+		}
+		return false;
+		*/
+		
+		/*private CardList getTargets() {
+        			CardList tmpList = AllZoneUtil.getCardsInPlay();
+        			tmpList = tmpList.getValidCards(Tgts,card.getController(),card);
+        			tmpList = tmpList.getTargetableCards(card);
+        			tmpList = tmpList.filter(AllZoneUtil.untapped);
+        			return tmpList;
+        		}
+		 */
 	}
 
 	private static String tapAllStackDescription(AbilityFactory af, SpellAbility sa){
