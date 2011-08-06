@@ -5617,7 +5617,7 @@ public class CardFactory_Creatures {
                     Card c = getTargetCard();
                     
                     if(AllZone.GameAction.isCardInPlay(c) && c.isTapped() && CardFactoryUtil.canTarget(card, c)
-                            && !CardUtil.getColor(c).contains(Constant.Color.Black)) {
+                            && !CardUtil.getColors(c).contains(Constant.Color.Black)) {
                     		//&& !CardUtil.getColor(c).equals(Constant.Color.Black)) {
                         AllZone.GameAction.destroy(c);
                     }
