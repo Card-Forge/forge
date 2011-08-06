@@ -2631,18 +2631,22 @@ public class CardFactoryUtil {
           }
           public void selectButtonCancel() {stop();}
           public void selectCard(Card card, PlayerZone zone) {
-             boolean foundCardType = false;
-             StringTokenizer st = new StringTokenizer(cardTypeList, ";");
-             if( cardTypeList.equals("All") ) {
-                foundCardType = true;
-             } else {
+        	  boolean foundCardType = false;
+        	  StringTokenizer st = new StringTokenizer(cardTypeList, ";");
+        	  if( cardTypeList.equals("All") ) {
+        		  foundCardType = true;
+        	  } else {
                 while( st.hasMoreTokens() ) {
                    if( card.getType().contains( st.nextToken() )) {
                       foundCardType = true;
                    }
                 }
              }
-             if( foundCardType && zone.is(Constant.Zone.Play)) {
+        	  if(!canTarget(spell, card)) {
+        		  AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+        	  }
+        	  
+        	  else if( foundCardType && zone.is(Constant.Zone.Play)) {
                 spell.setTargetCard(card);
                 if(spell.getManaCost().equals("0") || this.isFree())//for "sacrifice this card" abilities
                 {
