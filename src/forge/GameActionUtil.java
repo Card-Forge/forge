@@ -10186,7 +10186,7 @@ public class GameActionUtil {
 			CardList list = new CardList();
 			list.addAll(AllZone.Human_Play.getCards());
 			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Halimar_Wavewatch");
+			list = list.getName("Halimar Wavewatch");
 
 			for (Card c:list)
 			{

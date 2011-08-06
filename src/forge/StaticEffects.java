@@ -63,7 +63,7 @@ public class StaticEffects
 		cardToEffectsList.put("Knight of Cliffhaven", new String[] {"Knight_of_Cliffhaven"});
 		cardToEffectsList.put("Beastbreaker of Bala Ged", new String[] {"Beastbreaker_of_Bala_Ged"});
 		cardToEffectsList.put("Hada Spy Patrol", new String[] {"Hada_Spy_Patrol"});
-		cardToEffectsList.put("Halimar_Wavewatch", new String[] {"Halimar Wavewatch"});
+		cardToEffectsList.put("Halimar Wavewatch", new String[] {"Halimar_Wavewatch"});
 		
 		cardToEffectsList.put("Soulsurge Elemental", new String[] {"Soulsurge_Elemental"});
 		cardToEffectsList.put("Dauntless Dourbark", new String[] {"Dauntless_Dourbark"});
