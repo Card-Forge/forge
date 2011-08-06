@@ -4018,68 +4018,7 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Last Stand")) {
-        	/*
-        	 * Target opponent loses 2 life for each Swamp you control.
-        	 * Last Stand deals damage equal to the number of Mountains
-        	 * you control to target creature.
-        	 * Put a 1/1 green Saproling creature token onto the battlefield
-        	 * for each Forest you control.
-        	 * You gain 2 life for each Plains you control.
-        	 * Draw a card for each Island you control, then discard that many cards.
-        	 */
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 4475834103787262421L;
-
-				@Override
-                public boolean canPlayAI() {
-                    return false;
-                }
                 
-                @Override
-                public void resolve() {
-                	Player player = card.getController();
-                	Player opp = player.getOpponent();
-                    int numSwamps = AllZoneUtil.getPlayerTypeInPlay(player, "Swamp").size();
-                    int numMountains = AllZoneUtil.getPlayerTypeInPlay(player, "Mountain").size();
-                    int numForests = AllZoneUtil.getPlayerTypeInPlay(player, "Forest").size();
-                    int numPlains = AllZoneUtil.getPlayerTypeInPlay(player, "Plains").size();
-                    int numIslands = AllZoneUtil.getPlayerTypeInPlay(player, "Island").size();
-                    
-                    //swamps
-                    opp.loseLife(2*numSwamps, card);
-                    
-                    //mountain
-                    getTargetCard().addDamage(numMountains, card);
-                    
-                    //forest
-                    for(int i = 0; i < numForests; i++)
-                    	CardFactoryUtil.makeTokenSaproling(player);
-                    
-                    //plains
-                    player.gainLife(2*numPlains, card);
-                    
-                    //islands
-                    int max = Math.min(numIslands, AllZoneUtil.getPlayerCardsInLibrary(player).size());
-                    if(max > 0) {
-                    	player.drawCards(max);
-                    	if(player.equals(AllZone.HumanPlayer)) {
-                    		AllZone.InputControl.setInput(CardFactoryUtil.input_discard(max, this));
-                    	}
-                    	else {
-                    		AllZone.ComputerPlayer.discardRandom(max, this);
-                    	}
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Overwhelming Stampede")) {
