@@ -167,27 +167,6 @@ public class GameActionUtil {
 		 */
 		
 		
-		if(c.getType().contains("Mountain")) {
-			final Player opponent = c.getController().getOpponent();
-			final CardList lifebloods = AllZoneUtil.getPlayerCardsInPlay(opponent, "Lifeblood");
-			for(Card lifeblood:lifebloods) {
-				final Card source = lifeblood;
-				Ability ability = new Ability(source, "0") {
-					@Override
-					public void resolve() {
-						//Lifeblood controller (opponent in this case) gains 1 life
-						opponent.gainLife(1, source);
-					}
-				};//Ability
-				
-				StringBuilder sb = new StringBuilder();
-				sb.append(lifeblood.getName()).append(" - Mountain was tapped, ").append(opponent).append(" gains 1 life.");
-				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
-			}//for
-		}//end Lifeblood
-		
 		/*
 		 * Whenever a Forest an opponent controls becomes tapped, you gain 1 life.
 		 *
