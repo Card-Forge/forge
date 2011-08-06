@@ -1,0 +1,10 @@
+Name:Suq'Ata Firewalker
+ManaCost:1 U U
+Types:Creature Human Wizard
+Text:no text
+PT:0/1
+K:CARDNAME can't be the target of red spells or abilities from red sources.
+A:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/suqata_firewalker.jpg
+End

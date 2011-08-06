@@ -3135,6 +3135,10 @@ public class CardFactoryUtil {
                 if(kw.equals("CARDNAME can't be the target of Aura spells.")) {
                     if(spell.isAura()) return false;
                 }
+                
+                if(kw.equals("CARDNAME can't be the target of red spells or abilities from red sources.")) {
+                	if(spell.isRed()) return false;
+                }
             }
         }
         return true;
