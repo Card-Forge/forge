@@ -3620,6 +3620,7 @@ res/cardsfolder/kami_of_the_hunt.txt -text svneol=native#text/plain
 res/cardsfolder/kami_of_the_palace_fields.txt -text svneol=native#text/plain
 res/cardsfolder/kami_of_the_tended_garden.txt -text svneol=native#text/plain
 res/cardsfolder/kami_of_the_waning_moon.txt svneol=native#text/plain
+res/cardsfolder/kami_of_twisted_reflection.txt -text svneol=native#text/plain
 res/cardsfolder/karakas.txt -text svneol=native#text/plain
 res/cardsfolder/kargan_dragonlord.txt -text svneol=native#text/plain
 res/cardsfolder/karma.txt -text svneol=native#text/plain
