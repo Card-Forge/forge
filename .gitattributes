@@ -1095,6 +1095,7 @@ res/cardsfolder/cinder_shade.txt -text svneol=native#text/plain
 res/cardsfolder/cinder_storm.txt -text svneol=native#text/plain
 res/cardsfolder/cinder_wall.txt svneol=native#text/plain
 res/cardsfolder/cinderbones.txt -text svneol=native#text/plain
+res/cardsfolder/cinderhaze_wretch.txt -text svneol=native#text/plain
 res/cardsfolder/circular_logic.txt -text svneol=native#text/plain
 res/cardsfolder/citanul_centaurs.txt -text svneol=native#text/plain
 res/cardsfolder/citanul_druid.txt -text svneol=native#text/plain
