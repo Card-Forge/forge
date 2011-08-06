@@ -40,6 +40,7 @@ public class Input_PayManaCostUtil
     while(it.hasNext())
     {
     	Ability_Mana ma = it.next();
+    	ma.setActivatingPlayer(AllZone.HumanPlayer);
     	if (!ma.canPlay()) it.remove();
     	else if (!canMake(ma, cneeded.toString())) it.remove();
     	
