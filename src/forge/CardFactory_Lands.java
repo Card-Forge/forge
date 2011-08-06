@@ -3704,14 +3704,13 @@ class CardFactory_Lands {
                     card.untap();
                 }
                 
-                //@Override
+              //@Override
                 public String mana() {
-                	String mana = "";
+                	StringBuilder mana = new StringBuilder();
                 	for(int i = 0; i < num[0]; i++) {
-                		mana += shortString;
-                		mana += " ";
+                		mana.append(shortString).append(" ");
                 	}
-                    return mana.trim();
+                    return mana.toString().trim();
                 }
                 
                 @Override

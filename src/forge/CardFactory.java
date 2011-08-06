@@ -11398,14 +11398,14 @@ public class CardFactory implements NewConstants {
                     card.untap();
                 }
                 
-                //@Override
+				//@Override
                 public String mana() {
-                	String mana = shortString;
+                	StringBuilder mana = new StringBuilder();
+                	mana.append(shortString);
                 	for(int i = 0; i < num[0]; i++) {
-                		mana += " ";
-                		mana += shortString;
+                		mana.append(" ").append(shortString);
                 	}
-                    return mana;
+                    return mana.toString();
                 }
                 
                 @Override
