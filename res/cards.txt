@@ -1826,7 +1826,7 @@ Enchant creature
 Nourish
 G G
 Instant
-You gain 6 life. 
+no text
 
 Arcbound Bruiser
 5
@@ -4465,7 +4465,7 @@ Haste
 Nyxathid
 1 B B
 Creature Elemental
-As Nyxathid comes into play, choose an opponent.Nyxathid gets -1/-1 for each card in the chosen player's hand.
+As Nyxathid comes into play, choose an opponent. Nyxathid gets -1/-1 for each card in the chosen player's hand.
 7/7
 
 Juggernaut
@@ -6193,7 +6193,7 @@ Destroy all enchantments.
 Hush
 3 G
 Sorcery
-Destroy all enchantments.
+no text
 
 Tranquility
 2 G 
@@ -6721,7 +6721,7 @@ All creatures get -1/-1.
 Belbe's Portal
 5
 Artifact
-As Belbe's Portal comes into play, choose a creature type.
+As Belbe's Portal comes into play, choose a creature type. 3, T: You may put a creature card of the chosen type from your hand onto the battlefield.
 
 Cover of Darkness
 1 B
@@ -7175,7 +7175,7 @@ All rats have fear.
 Lab Rats
 B
 Sorcery
-Put a 1/1 black Rat creature token into play.
+no text
 
 Patrol Signaler
 1 W
@@ -11835,7 +11835,7 @@ Target player reveals his or her hand and discards all nonland cards.
 Sprout Swarm
 1 G
 Instant
-Put a 1/1 green Saproling creature token into play.
+no text
 Buyback 3 (You may pay an additional 3 as you play this spell. If you do, put this card into your hand as it resolve.)
 
 Llanowar Mentor
@@ -12509,7 +12509,7 @@ no text
 Spark Spray
 R
 Instant
-Spark Spray deals 1 damage to target creature or player. Cycling R
+no text
 
 Path of Anger's Flame
 2 R
@@ -12519,7 +12519,7 @@ Creatures you control get +2/+0 until end of turn.
 Lay Waste
 3 R
 Sorcery
-Destroy target land.
+no text
 
 Threaten
 2 R
@@ -13961,7 +13961,7 @@ Skip your draw step. If you would discard a card from your hand, remove that car
 Yawgmoth's Bargain
 4 B B
 Enchantment
-Skip your draw step. Pay 1 life: Draw a card.
+Skip your draw step.
 
 Ancient Silverback
 4 G G
