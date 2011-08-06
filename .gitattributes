@@ -1164,6 +1164,7 @@ res/cardsfolder/command_of_unsummoning.txt -text svneol=native#text/plain
 res/cardsfolder/commander_eesha.txt -text svneol=native#text/plain
 res/cardsfolder/commander_greven_il_vec.txt -text svneol=native#text/plain
 res/cardsfolder/commune_with_nature.txt -text svneol=native#text/plain
+res/cardsfolder/complex_automaton.txt -text svneol=native#text/plain
 res/cardsfolder/composite_golem.txt -text svneol=native#text/plain
 res/cardsfolder/compulsion.txt -text svneol=native#text/plain
 res/cardsfolder/compulsive_research.txt -text svneol=native#text/plain
