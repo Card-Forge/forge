@@ -1,0 +1,9 @@
+Name:Bola Warrior
+ManaCost:1 R
+Types:Creature Human Spellshaper Warrior
+Text:no text
+PT:1/1
+A:AB$Pump|Cost$R T Discard<1/Any>|Tgt$TgtC|KW$CARDNAME can't block.|SpellDescription$Target creature can't block this turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bola_warrior.jpg
+End

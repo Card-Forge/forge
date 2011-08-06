@@ -1,0 +1,12 @@
+#Forge
+#Mon Nov 08 21:31:15 CET 2010
+gui.laf=com.sun.java.swing.plaf.windows.WindowsLookAndFeel
+AI.stack.land=false
+gui.new=true
+stack.offset=tiny
+card.images.size=medium
+card.scale.larger.than.original=true
+card.overlay=true
+stack.max.size=3
+loss.condition.milling=false
+gui.laf.fonts=false
