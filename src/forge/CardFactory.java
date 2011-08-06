@@ -19958,6 +19958,102 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Stitch Together")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = -57996914115026814L;
+
+                @Override
+                public void resolve() {
+                    CardList threshold = new CardList();
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    threshold.addAll(grave.getCards());
+                    Card c = getTargetCard();
+                    
+                    if(threshold.size() >= 7) {
+                        if(AllZone.GameAction.isCardInZone(c, grave)) {
+                            PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                            AllZone.GameAction.moveTo(play, c);
+                        }
+                    }
+                    
+                    else {
+                        if(AllZone.GameAction.isCardInZone(c, grave)) {
+                            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                            AllZone.GameAction.moveTo(hand, c); 
+                        }
+                    }
+                }//resolve()
+
+                @Override
+                public boolean canPlay() {
+                    return getCreatures().length != 0;
+                }
+                
+                public boolean canPlayAI() {
+                    CardList check = new CardList();
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    check.addAll(zone.getCards());
+                    return getCreaturesAI().length != 0 || check.size() >= 7;
+                }
+                
+                public Card[] getCreatures() {
+                    CardList creature = new CardList();
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    creature.addAll(zone.getCards());
+                    creature = creature.getType("Creature");
+                    return creature.toArray();
+                }
+                
+                public Card[] getCreaturesAI() {
+                    CardList creature = new CardList();
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    creature.addAll(zone.getCards());
+                    creature = creature.getType("Creature");
+                    creature = creature.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getNetAttack() > 4;
+                        }
+                    });
+                    return creature.toArray();
+                }
+                
+                @Override
+                public void chooseTargetAI() {
+                    Card c[] = getCreatures();
+                    Card biggest = c[0];
+                    for(int i = 0; i < c.length; i++)
+                        if(biggest.getNetAttack() < c[i].getNetAttack()) biggest = c[i];
+
+                    setTargetCard(biggest);
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+
+            Input target = new Input() {
+                private static final long serialVersionUID = -3717723884199321767L;
+
+                @Override
+                public void showMessage() {
+                    Object check = AllZone.Display.getChoiceOptional("Select creature", getCreatures());
+                    if(check != null) {
+                        spell.setTargetCard((Card) check);
+                        stopSetNext(new Input_PayManaCost(spell));
+                    } else stop();
+                }//showMessage()
+
+                public Card[] getCreatures() {
+                    CardList creature = new CardList();
+                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+                    creature.addAll(zone.getCards());
+                    creature = creature.getType("Creature");
+                    return creature.toArray();
+                }
+            };//Input
+            spell.setBeforePayMana(target);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

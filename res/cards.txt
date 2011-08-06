@@ -1,3 +1,8 @@
+Stitch Together
+B B
+Sorcery
+Return target creature card from your graveyard to your hand. Threshold - Return that card from your graveyard to the battlefield instead if seven or more cards are in your graveyard.
+
 Symbiotic Wurm
 5 G G G
 Creature Wurm
