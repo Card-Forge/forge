@@ -1,0 +1,9 @@
+Name:Trash for Treasure
+ManaCost:2 R
+Types:Sorcery
+Text:no text
+A:SP$Retrieve|Cost$2 R Sac<1/Artifact>|Destination$Battlefield|TgtPrompt$Choose target artifact card in your graveyard|ValidTgts$Artifact.YouCtrl|SpellDescription$Return target artifact card from your graveyard to the battlefield.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/trash_for_treasure.jpg
+End
