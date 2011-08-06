@@ -38,6 +38,10 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+scavenger_drake.jpg		http://www.wizards.com/global/images/magic/general/scavenger_drake.jpg
+glaze_fiend.jpg			http://www.wizards.com/global/images/magic/general/glaze_fiend.jpg
+lilianas_specter.jpg		http://www.wizards.com/global/images/magic/general/lilianas_specter.jpg	
+temple_acolyte.jpg			http://www.wizards.com/global/images/magic/general/temple_acolyte.jpg
 totem_speaker.jpg		http://www.wizards.com/global/images/magic/general/totem_speaker.jpg
 grazing_gladehart.jpg			http://www.wizards.com/global/images/magic/general/grazing_gladehart.jpg
 seers_sundial.jpg		http://www.wizards.com/global/images/magic/general/seers_sundial.jpg	

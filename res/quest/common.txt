@@ -535,6 +535,7 @@ Giant Tortoise
 Giant Warthog
 Gibbering Kami
 Gift of Granite
+Glaze Fiend
 Gleam of Resistance
 Glimmerdust Nap
 Glimmering Angel
@@ -773,6 +774,7 @@ Lightning Elemental
 Lightning Hounds
 Lightning Talons
 Lignify
+Liliana's Specter
 Lim-Dul's High Guard
 Lionheart Maverick
 Living Airship
@@ -1360,6 +1362,7 @@ Tel-Jilad Archers
 Tel-Jilad Chosen
 Tel-Jilad Exile
 Tel-Jilad Outrider
+Temple Acolyte
 Temporal Fissure
 Temporal Spring
 Tendrils of Corruption
