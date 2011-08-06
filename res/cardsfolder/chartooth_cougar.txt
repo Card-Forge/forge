@@ -3,7 +3,7 @@ ManaCost:5 R
 Types:Creature Cat Beast
 Text:no text
 PT:4/4
-K:abPump R:+1/+0
+A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ Chartooth Cougar gets +1/+0 until end of turn.
 K:TypeCycling:Mountain:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chartooth_cougar.jpg

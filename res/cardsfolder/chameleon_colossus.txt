@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:Changeling
 K:Protection from black
-K:abPump 2 G G:+X/+X:Chameleon Colossus gets +X/+X until end of turn, where X is its power.
+A:AB$Pump | Cost$ 2 G G | NumAtt$ +X | NumDef$ +X | SpellDescription$ Chameleon Colossus gets +X/+X until end of turn, where X is its power.
 SVar:X:Count$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chameleon_colossus.jpg

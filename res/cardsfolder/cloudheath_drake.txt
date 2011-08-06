@@ -4,7 +4,7 @@ Types:Artifact Creature Drake
 Text:no text
 PT:3/3
 K:Flying
-K:abPump 1 W:Vigilance
+A:AB$Pump | Cost$ 1 W | KW$ Vigilance | SpellDescription$ Cloudheath Drake gains vigilance until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudheath_drake.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/35.jpg
