@@ -6,4 +6,5 @@ A:SP$Dig | Cost$ 2 G | DigNum$ 5 | ChangeValid$ Creature | AnyNumber$ True | Spe
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lead_the_stampede.jpg
+SetInfo:MBS|Uncommon|http://magiccards.info/scans/en/mbs/82.jpg
 End

@@ -6,4 +6,5 @@ A:SP$Dig | Cost$ G | DigNum$ 5 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Ca
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_stirrings.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/174.jpg
 End
