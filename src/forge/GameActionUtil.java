@@ -12253,8 +12253,9 @@ public class GameActionUtil {
 
 	public static Command Dauntless_Escort = new Command() {
 		private static final long serialVersionUID = -2201201455269804L;
-
+		CardList  old = new CardList();	
 		public void execute() {
+
 			// Human Activates Dauntless Escort
 	        PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Play,"Human");
 	        CardList PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
@@ -12274,18 +12275,22 @@ public class GameActionUtil {
                 for(int i = 0; i < opponentCreatureList.size(); i++) {
                 	Card c = opponentCreatureList.get(i);
                 	if(c.getOwner() == "Human") {
-                		c.removeExtrinsicKeyword("Indestructible");	               		
+                		if(old.size() == 0) {
+                    		c.removeExtrinsicKeyword("Indestructible");	 
+                    		old.add(c);              			
+                		}
+                        for(int x = 0; x < old.size(); x++) {
+                    		if(old.get(x) == c) break;
+                		c.removeExtrinsicKeyword("Indestructible");	 
+                		old.add(c);
+                    		}
+                        }
                 	}
                 }
                 }            
-			} else {
-				if(PlayerCreatureList.size() != 0) {
-                for(int i = 0; i < PlayerCreatureList.size(); i++) {
-                	Card c = PlayerCreatureList.get(i);
-                    c.removeExtrinsicKeyword("Indestructible");				
-			}
-				}
-			}
+		
+
+
 			// Computer Activates Dauntless Escort
 	        PlayerPlayZone = AllZone.getZone(Constant.Zone.Play,"Computer");
 	        PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
@@ -12302,21 +12307,22 @@ public class GameActionUtil {
                 }
 				}
 				if(opponentCreatureList.size() != 0) {
-                for(int i = 0; i < opponentCreatureList.size(); i++) {
-                	Card c = opponentCreatureList.get(i);
-                	if(c.getOwner() == "Computer") {
-                		c.removeExtrinsicKeyword("Indestructible");	               		
-                	}
-                }
-                }            
-			} else {
-				if(PlayerCreatureList.size() != 0) {
-                for(int i = 0; i < PlayerCreatureList.size(); i++) {
-                	Card c = PlayerCreatureList.get(i);
-                    c.removeExtrinsicKeyword("Indestructible");				
-			}
-				}
-			}			
+	                for(int i = 0; i < opponentCreatureList.size(); i++) {
+	                	Card c = opponentCreatureList.get(i);
+	                	if(c.getOwner() == "Computer") {
+	                		if(old.size() == 0) {
+	                    		c.removeExtrinsicKeyword("Indestructible");	 
+	                    		old.add(c);              			
+	                		}
+	                        for(int x = 0; x < old.size(); x++) {
+	                    		if(old.get(x) == c) break;
+	                		c.removeExtrinsicKeyword("Indestructible");	 
+	                		old.add(c);
+	                    		}
+	                        }
+	                }
+	                }            
+			} 			
 		}// execute()
 
 	}; 

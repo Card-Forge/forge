@@ -5929,14 +5929,28 @@ public class CardFactory_Creatures {
                     private static final long serialVersionUID = 2701248867610L;
                     
                     public void execute() {
-                        if(card.getController() == "Human") Phase.Sac_Dauntless_Escort = false;
-                        else Phase.Sac_Dauntless_Escort_Comp = false;	                     
+                        if(card.getController() == "Human") {
+                        	Phase.Sac_Dauntless_Escort = false;
+                        	} else {
+                        	Phase.Sac_Dauntless_Escort_Comp = false;  
+                        	}
+    			        PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Play, card.getController());
+    			        CardList PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
+    			        PlayerCreatureList = PlayerCreatureList.getType("Creature");
+        				if(PlayerCreatureList.size() != 0) {
+        	                for(int i = 0; i < PlayerCreatureList.size(); i++) {
+        	                	Card c = PlayerCreatureList.get(i);
+        	                    c.removeExtrinsicKeyword("Indestructible");				
+        				}
+        					}
                     }
                 };
         		@Override
         		public void resolve() {
                     AllZone.GameAction.sacrifice(card);
-                    if(card.getController() == "Human") Phase.Sac_Dauntless_Escort = true;
+                    if(card.getController() == "Human") {
+                    	Phase.Sac_Dauntless_Escort = true;
+                    }
                     else Phase.Sac_Dauntless_Escort_Comp = true;	
 
                     AllZone.EndOfTurn.addUntil(untilEOT);
