@@ -1,3 +1,9 @@
+Blight
+B B
+Enchantment Aura
+When enchanted land becomes tapped, destroy it.
+Enchant Land Curse
+
 Sphinx of Magosi
 3 U U U
 Creature Sphinx

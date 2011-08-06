@@ -168,6 +168,26 @@ public class GameActionUtil {
 				AllZone.Stack.add(ability);
 			}//for
 		}
+		
+		/*
+		 * Blight - When enchanted land becomes tapped, destroy it.
+		 */
+		if(c.isEnchantedBy("Blight")) {
+			final ArrayList<Card> blights = c.getEnchantedBy();
+			final Card target = c;
+			for(Card blight:blights) {
+				if(blight.getName().equals("Blight")) {
+					Ability ability = new Ability(blight, "0") {
+						@Override
+						public void resolve() {
+							AllZone.GameAction.destroy(target);
+						}
+					};//Ability
+					ability.setStackDescription(blight.getName()+" - Destroy enchanted land.");
+					AllZone.Stack.add(ability);
+				}
+			}
+		}//end Blight
 
 	}//end executeTapSideEffects()
 
