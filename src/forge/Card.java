@@ -247,14 +247,14 @@ public class Card extends MyObservable
   
   public String getSVar(String Var)
   {
-	  if (SVars.contains(Var))
+	  if (SVars.containsKey(Var))
 		  return SVars.get(Var);
 	  else
 		  return new String("");
   }
   public void SetSVar(String Var, String str)
   {
-	  if (SVars.contains(Var))
+	  if (SVars.containsKey(Var))
 		  SVars.remove(Var);
 	  
 	  SVars.put(Var, str);
