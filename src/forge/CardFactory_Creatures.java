@@ -8074,7 +8074,48 @@ public class CardFactory_Creatures {
             ability.setStackDescription(card.getName() + " - " + card.getController() + " gains 3 life.");
             
         }//*************** END ************ END **************************
-        
+    
+        //*************** START *********** START **************************
+        else if(cardName.equals("Painter's Servant")) {
+                final Ability ability = new Ability(card, "0") {
+                    @Override
+                    public void resolve() {
+                        if(card.getController().equals(Constant.Player.Human)) {
+                            
+                            String color = "";
+                            String[] colors = Constant.Color.Colors;
+                            colors[colors.length - 1] = null;
+                            
+                            Object o = AllZone.Display.getChoice("Choose color", colors);
+                            color = (String) o;
+                            card.setChosenColor(color);
+                        } else {
+                            PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Human);
+                            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Human);
+                            CardList list = new CardList();
+                            list.addAll(lib.getCards());
+                            list.addAll(hand.getCards());
+                            
+                            if(list.size() > 0) {
+                                String color = CardFactoryUtil.getMostProminentColor(list);
+                                if(!color.equals("")) card.setChosenColor(color);
+                                else card.setChosenColor("black");
+                            } else {
+                                card.setChosenColor("black");
+                            }
+                        }
+                    }
+                };
+                Command comesIntoPlay = new Command() {
+                    private static final long serialVersionUID = 333134223161L;
+                    
+                    public void execute() {
+                        AllZone.Stack.add(ability);
+                    }
+                };//Command
+                ability.setStackDescription("As Painter's Servant enters the battlefield, choose a color.");
+                card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
         else if(cardName.equals("Mogg Fanatic")) {

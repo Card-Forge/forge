@@ -11,6 +11,7 @@ public class Phase extends MyObservable
 	private int turn;
 	static int	 	GameBegins = 0; // Omnath
     static int	   StormCount;
+    static int	   HighTideCount = 0;
     static int	   PlayerSpellCount;
     static int	   PlayerCreatureSpellCount;   
     static int	   ComputerSpellCount;
@@ -230,6 +231,7 @@ public class Phase extends MyObservable
         //if(getPhase().equals(Constant.Phase.Untap)) {
         if(is(Constant.Phase.Untap, Constant.Player.Human)) {
         	StormCount = 0;
+        	HighTideCount = 0;
             PlayerSpellCount = 0;
             PlayerCreatureSpellCount = 0;   
             ComputerSpellCount = 0;
@@ -243,6 +245,7 @@ public class Phase extends MyObservable
               */
         } else if(is(Constant.Phase.Untap, Constant.Player.Computer)) {
         	StormCount = 0;
+        	HighTideCount = 0;
             PlayerSpellCount = 0;
             PlayerCreatureSpellCount = 0;   
             ComputerSpellCount = 0;

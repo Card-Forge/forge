@@ -111,6 +111,50 @@ public class Input_PayManaCostUtil
          } 
          }
          	// Nirkana Revenant Code
+       	// High Tide Code
+         if(Phase.HighTideCount > 0 && card.getType().contains("Island") && card.getController().equals("Human")) {
+         	for(int x = 0; x < Phase.HighTideCount; x++) {
+        		for(int i = 0; i < abilities.size(); i++) {
+        			if(abilities.get(i).mana().contains("U") == true) {
+         		if(card.isSnow() == false) {
+         			chosen = abilities.get(i);	
+         			manaCost = AllZone.ManaPool.subtractMana(manaCost, chosen);
+         		} else { 
+         			
+         			if(manaCost.toString().trim() != "") {
+         			if(manaCost.toString().contains("U"))  {
+         				manaCost.subtractMana("U");
+         				if(AllZone.ManaPool.has == "") {
+         					AllZone.ManaPool.paid = AllZone.ManaPool.paid.replaceFirst("U", "");
+         					mp.removeExtrinsicKeyword("ManaPool:U");
+         				}
+         				else  {
+         					AllZone.ManaPool.has = AllZone.ManaPool.has.replaceFirst("U", "");
+         					
+         				}
+         			}
+         			else {
+         				if(manaCost.toString().length() > 0) {
+         				manaCost.subtractMana("1");
+         				
+         				if(AllZone.ManaPool.has == "") {
+         					AllZone.ManaPool.paid = AllZone.ManaPool.paid.replaceFirst("U", "");
+         					mp.removeExtrinsicKeyword("ManaPool:U");
+         				}
+         				else {
+         					AllZone.ManaPool.has = AllZone.ManaPool.has.replaceFirst("U", "");
+         					
+         				}
+         			}
+         			}
+         			
+         			}
+         		}       		
+         	}      		
+         	}
+         } 
+         }
+         	// High Tide Code
      	AllZone.Human_Play.updateObservers();//DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)
      	return manaCost;	
      }

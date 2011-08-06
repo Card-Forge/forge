@@ -14669,7 +14669,25 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-
+        //*************** START *********** START **************************
+        else if(cardName.equals("High Tide")) {
+            SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = -4997834721261916L;
+                
+                @Override
+                public boolean canPlayAI() {                   
+                    return false;
+                }//canPlay()
+                
+                @Override
+                public void resolve() {
+                	Phase.HighTideCount = Phase.HighTideCount + 1;
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Gift of Estates")) {
             SpellAbility spell = new Spell(card) {
@@ -20351,6 +20369,62 @@ public class CardFactory implements NewConstants {
             };//SpellAbility
             card.clearSpellAbility();
             card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Grindstone")) {
+        	Ability_Tap ab1 = new Ability_Tap(card, "3") {
+				private static final long serialVersionUID = -6281219446216L;
+
+				@Override
+        		public boolean canPlayAI() {
+        			String player = getTargetPlayer();
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+        			CardList libList = new CardList(lib.getCards());
+        			CardList list = AllZoneUtil.getCardsInPlay("Painter's Servant");
+        			return libList.size() > 0 && list.size() > 0;
+        		}
+
+        		@Override
+        		public void resolve() {
+					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, getTargetPlayer());
+					PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, getTargetPlayer());
+					CardList libList = new CardList(lib.getCards());
+					int count = 0;
+					int broken = 0;
+					for(int i = 0; i < libList.size(); i = i + 2) {
+						Card c1 = null;
+						Card c2 = null;
+						if(i < libList.size()) c1 = libList.get(i);
+						else broken = 1;
+						if(i + 1 < libList.size()) c2 = libList.get(i + 1);
+						else broken = 1;
+						if(broken == 0) {
+							ArrayList<String> C2Color = CardUtil.getColors(c2);
+							broken = 1;
+							for(int x = 0; x < C2Color.size(); x++) {
+							if(CardUtil.getColors(c1).contains(C2Color.get(x)) && C2Color.get(x) != Constant.Color.Colorless)  {
+								count = count + 1;
+								broken = 0;
+							} 				
+							}
+						}
+
+					}
+					count = (count * 2) + 2;
+					int max = count;
+					if(libList.size() < count) max = libList.size();
+
+					for(int j = 0; j < max; j++) {
+						Card c = libList.get(j);
+						lib.remove(c);
+						grave.add(c);
+					}
+				}
+        	};
+        	ab1.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
+        	ab1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ab1));
+        	card.addSpellAbility(ab1);
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************

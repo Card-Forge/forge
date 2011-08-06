@@ -1,3 +1,19 @@
+Painter's Servant
+2
+Artifact Creature Scarecrow
+As Painter's Servant enters the battlefield, choose a color. All cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
+1/3
+
+Grindstone
+1
+Artifact
+3, Tap: Put the top two cards of target player's library into that player's graveyard. If both cards share a color, repeat this process.
+
+High Tide
+U
+Instant
+Until end of turn, whenever a player taps an Island for mana, that player adds Blue to his or her mana pool (in addition to the mana the land produces).
+
 Abyssal Persecutor
 2 B B
 Creature Demon

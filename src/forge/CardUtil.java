@@ -131,6 +131,12 @@ public class CardUtil {
         				colors.add(color);
         if(colors.contains(Constant.Color.Colorless))
         	colors.clear();
+        // Painter's
+		CardList list = AllZoneUtil.getCardsInPlay("Painter's Servant");
+		if(list.size() > 0){
+			for(int i = 0; i < list.size(); i++) colors.add(list.get(i).getChosenColor());	
+		}
+        //Painter's
         if(colors.isEmpty()) colors.add(Constant.Color.Colorless);
         
         return new ArrayList<String>(colors);
