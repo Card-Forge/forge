@@ -1,3 +1,15 @@
+Blistering Firecat
+1 R R R
+Creature Cat
+no text
+7/1
+Morph:R R
+Trample
+Haste
+At the beginning of the end step, sacrifice CARDNAME.
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39737.jpg
+
 Mirror Universe
 6
 Artifact
@@ -3443,18 +3455,6 @@ Flying
 abPump BR:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blistering_dieflyn.jpg
-
-Blistering Firecat
-1 R R R
-Creature Cat
-At end of turn, sacrifice Blistering Firecat.
-7/1
-Morph:R R
-Trample
-Haste
-At the beginning of the end step, sacrifice CARDNAME.
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39737.jpg
 
 Blizzard Elemental
 5 U U
