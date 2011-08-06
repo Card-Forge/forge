@@ -194,9 +194,8 @@ public class ComputerUtil_Attack2 {
           CardList attackersLeft = new CardList(attackers.toArray());
           
           //Atackers that don't really have a choice
-          for (int i=0; i < attackersLeft.size(); i++)
+          for (Card attacker : attackers)
           {
-        	 Card attacker = attackersLeft.get(i);
              if ( (attacker.getKeyword().contains("CARDNAME attacks each turn if able.") 
             	   || attacker.getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")
                    || attacker.getKeyword().contains("At the beginning of the end step, exile CARDNAME.")
@@ -209,12 +208,10 @@ public class ComputerUtil_Attack2 {
              }
           }
           
-        attackersLeft = attackersLeft.filter(new CardListFilter()
-  		{
-  		  public boolean addCard(Card c)
-  		  {
-  		    return (0 < AllZone.HumanPlayer.predictDamage(c.getNetCombatDamage(),c,true) || c.getName().equals("Guiltfeeder"));
-  		  }
+        attackersLeft = attackersLeft.filter(new CardListFilter() {
+  		  	public boolean addCard(Card c) {
+  		  		return (0 < AllZone.HumanPlayer.predictDamage(c.getNetCombatDamage(),c,true) || c.getName().equals("Guiltfeeder"));
+  		  	}
   		});
 
            // *******************
@@ -552,22 +549,3 @@ public class ComputerUtil_Attack2 {
     }
 
  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
