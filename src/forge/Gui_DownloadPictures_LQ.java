@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -216,28 +217,34 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
                     
                     File f = new File(base, cName);
                     
-                    in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
-                    out = new BufferedOutputStream(new FileOutputStream(f));
-                    
-                    while((len = in.read(buf)) != -1) {
-                        //user cancelled
-                        if(cancel) {
-                            in.close();
-                            out.flush();
-                            out.close();
-                            
-                            //delete what was written so far
-                            f.delete();
-                            
-                            return;
-                        }//if - cancel
-                        
-                        out.write(buf, 0, len);
-                    }//while - read and write file
-                    
-                    in.close();
-                    out.flush();
-                    out.close();
+                    try {
+                    	in = new BufferedInputStream(new URL(url).openConnection(p).getInputStream());
+                    	out = new BufferedOutputStream(new FileOutputStream(f));
+
+                    	while((len = in.read(buf)) != -1) {
+                    		//user cancelled
+                    		if(cancel) {
+                    			in.close();
+                    			out.flush();
+                    			out.close();
+
+                    			//delete what was written so far
+                    			f.delete();
+
+                    			return;
+                    		}//if - cancel
+
+                    		out.write(buf, 0, len);
+                    	}//while - read and write file
+
+                    	in.close();
+                    	out.flush();
+                    	out.close();
+                    }
+                    catch(MalformedURLException mURLe) {
+                    	System.out.println("bad URL for: "+cards[card].name);
+                    	//Log.error("LQ Pictures", "Malformed URL for: "+cards[card].name, mURLe);
+                    }
                 } catch(Exception ex) {
                 	Log.error("LQ Pictures", "Error downloading pictures", ex);
                 }
