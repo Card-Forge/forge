@@ -19023,7 +19023,7 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = 7042012311958529153L;
 
 				public void execute() {
-					StringBuffer sb = new StringBuffer();
+					StringBuilder sb = new StringBuilder();
 					sb.append(card.getName()).append(" - search library for a basic land card and put it into your hand.");
 					ability.setStackDescription(sb.toString());
                     // ability.setStackDescription(card.getName()
@@ -20567,7 +20567,7 @@ public class CardFactory_Creatures {
                 }
             }; //ability
             
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             sb.append(cardName).append(" - Put a 3/3 white Bird creature token with flying onto the battlefield.");
             ability.setStackDescription(sb.toString());
 

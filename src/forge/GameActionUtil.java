@@ -2390,9 +2390,9 @@ public class GameActionUtil {
                     @Override
                     public void resolve() {
                         if (card.getController().equals("Human")) {
-                            StringBuffer title = new StringBuffer();
+                        	StringBuilder title = new StringBuilder();
                             title.append("Cinder Pyromancer Ability");
-                            StringBuffer message = new StringBuffer();
+                            StringBuilder message = new StringBuilder();
                             message.append("Will you untap your Cinder Pyromancer?");
                             int choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
                             
@@ -2407,7 +2407,7 @@ public class GameActionUtil {
                     }// resolve()
                 };// ability2
                 
-                StringBuffer sb = new StringBuffer();
+                StringBuilder sb = new StringBuilder();
                 sb.append(card.getName()).append(" - ").append(c.getController()).append(" played a red spell, you may untap Cinder Pyromancer.");
                 ability2.setStackDescription(sb.toString());
                 AllZone.Stack.add(ability2);
@@ -2586,9 +2586,9 @@ public class GameActionUtil {
                         
                         if (card.getController().equals("Human")) {
                             if (mayDrawNotMust) {
-                                StringBuffer title = new StringBuffer();
+                            	StringBuilder title = new StringBuilder();
                                 title.append(card.getName()).append(" Ability");
-                                StringBuffer message = new StringBuffer();
+                                StringBuilder message = new StringBuilder();
                                 message.append("Will you draw a card?");
                                 choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
                             }// May Draw a card
@@ -2608,7 +2608,7 @@ public class GameActionUtil {
                     }// resolve()
                 };// ability2
                 
-                StringBuffer sb = new StringBuffer();
+                StringBuilder sb = new StringBuilder();
                 sb.append(card.getName()).append(" - ").append(c.getController()).append(" plays an enchantment spell and ");
                 if (card.getName().equals("Verduran Enchantress") || card.getName().equals("Mesa Enchantress")) {
                     sb.append("may draw a card.");
@@ -2922,9 +2922,9 @@ public class GameActionUtil {
                     Ability ability2 = new Ability(card, "0") {
                         public void resolve() {
                             if (card.getController().equals("Human")) {
-                                StringBuffer title = new StringBuffer();
+                            	StringBuilder title = new StringBuilder();
                                 title.append("Kor Firewalker Ability");
-                                StringBuffer message = new StringBuffer();
+                                StringBuilder message = new StringBuilder();
                                 message.append("Will you gain 1 life?");
                                 int choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
                                 
@@ -2939,7 +2939,7 @@ public class GameActionUtil {
                         }// resolve()
                     };//ability2
                     
-                    StringBuffer sb = new StringBuffer();
+                    StringBuilder sb = new StringBuilder();
                     sb.append(card.getName()).append(" - ").append(c.getController()).append(" played a Red spell, ");
                     sb.append(card.getController()).append(" gains 1 life.");
                     ability2.setStackDescription(sb.toString());
@@ -3657,7 +3657,7 @@ public class GameActionUtil {
                     }
                 } // resolve
             }; // ability
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             sb.append("Wall of Reverence - ").append(player).append(" gains life equal to target creature's power.");
             ability.setStackDescription(sb.toString());
             // ability.setStackDescription("Wall of Reverence - "
@@ -5506,9 +5506,9 @@ public class GameActionUtil {
                 @Override
                 public void resolve() {
                     if (player.equals("Human")) {
-                        StringBuffer title = new StringBuffer();
+                    	StringBuilder title = new StringBuilder();
                         title.append(c.getName()).append(" Ability");
-                        StringBuffer message = new StringBuffer();
+                        StringBuilder message = new StringBuilder();
                         message.append("Will you draw a card?");
                         int choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
                         
@@ -5528,7 +5528,7 @@ public class GameActionUtil {
                 }//resolve()
             };// ability2
             
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             sb.append(c.getName()).append(" - ").append(player).append(" may draw a card.");
             ability2.setStackDescription(sb.toString());
             AllZone.Stack.add(ability2);

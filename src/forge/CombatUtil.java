@@ -2272,9 +2272,9 @@ public class CombatUtil {
             int compHandSize = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).size();
             
             if (player.equals ("Human")) {
-                StringBuffer title = new StringBuffer();
+            	StringBuilder title = new StringBuilder();
                 title.append(a.getName()).append(" Ability");
-                StringBuffer message = new StringBuffer();
+                StringBuilder message = new StringBuilder();
                 message.append("Do you want to draw ").append(numCards).append(" cards?");
                 choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
             }// if player.equals Human

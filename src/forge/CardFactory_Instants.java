@@ -3513,7 +3513,7 @@ public class CardFactory_Instants {
                     return false;
                 }
             };
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" adds B B B to your mana pool");
             spell.setStackDescription(sb.toString());
             
@@ -3546,7 +3546,7 @@ public class CardFactory_Instants {
                     return false;
                 }
             };
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" adds R R R to your mana pool");
             spell.setStackDescription(sb.toString());
             

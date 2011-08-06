@@ -8901,7 +8901,7 @@ public class CardFactory implements NewConstants {
                     if (hand.size() > 0) {
                         AllZone.Display.getChoice("Target player's hand", hand.toArray());
                     } else {
-                        StringBuffer sb = new StringBuffer();
+                    	StringBuilder sb = new StringBuilder();
                         sb.append(getTargetPlayer()).append("'s hand is empty!");
                         javax.swing.JOptionPane.showMessageDialog(null, sb.toString(), "Target player's hand", JOptionPane.INFORMATION_MESSAGE);
                     }
