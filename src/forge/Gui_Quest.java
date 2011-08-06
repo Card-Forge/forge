@@ -397,11 +397,11 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Cyclops 3		hard	Slivers mainly, some spells");
         sb.append("\r\n");
-        sb.append("Da Vinci 1		easy	Some Swampwalk creatures, Morph creatures + discard spells");
+        sb.append("Da Vinci 1		easy	Mono black deck, Ashenmoor Cohort + Badmoon + some Fear");
         sb.append("\r\n");
-        sb.append("Da Vinci 2		medium	Some Swampwalk creatures, Morph creatures + drain/gain life spells");
+        sb.append("Da Vinci 2		medium	Mono black deck, Korlash, Heir to Blackblade's + Badmoon + threat removal");
         sb.append("\r\n");
-        sb.append("Da Vinci 3		hard	Some Swampwalk creatures, Morph creatures + Angel of Despair");
+        sb.append("Da Vinci 3		hard	Mono black deck, Korlash, Heir to Blackblade's + Badmoon + threat removal");
         sb.append("\r\n");
         sb.append("Darrin Stephens 1	easy	U Affinity deck, Affinity for artifacts and Modular cards");
         sb.append("\r\n");
