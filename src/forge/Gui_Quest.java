@@ -419,7 +419,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Electro 3  		hard   	Resonantg's Stormfront deck with mods, Arashi, the Sky Asunder + Ball Lightning");
         sb.append("\r\n");
-	  sb.append("Elrond 2		medium  Aura Gnarlid, Rabid Wombat and Uril with lots of auras");
+        sb.append("Elrond 2		medium  Aura Gnarlid, Rabid Wombat and Uril with lots of auras");
         sb.append("\r\n");
 	    sb.append("Endora 2  		medium  enchantress deck, enchantments + cards with enchantment effects");
         sb.append("\r\n");
@@ -586,6 +586,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("R2-D2 3   		hard  	Black Vise, bounce (Boomerang) spells, Howling Mine");
         sb.append("\r\n");
  	    sb.append("Radagast 2  		medium 	Muraganda Petroglyphs, green vanilla creatures and a few tokens");
+        sb.append("\r\n");
+        sb.append("Radiant 3  		medium 	Flying Creatures with Radiant, Archangel, Gravitational Shift and Moat");
         sb.append("\r\n");
         sb.append("Rocky 1		easy	Pro red, Flamebreak + Tremor + Pyroclasm but no Pyrohemia");
         sb.append("\r\n");
