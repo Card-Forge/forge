@@ -9952,22 +9952,19 @@ public class GameActionUtil {
 		**/
 	};
     
-	public static Command Undead_Warchief         = new Command() {
-		private static final long serialVersionUID   = -3463429634177142721L;
+	public static Command Undead_Warchief           = new Command() {
+		private static final long serialVersionUID   = 5835056455026735693L;
 
 		CardList                  gloriousAnthemList = new CardList();
 
 		public void execute() {
-			int pumpAttack = 2;
-			int pumpDefense = 1;
-
 			CardList list = gloriousAnthemList;
 			Card c;
 			// reset all cards in list - aka "old" cards
 			for(int i = 0; i < list.size(); i++) {
 				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-pumpAttack);
-				c.addSemiPermanentDefenseBoost(-pumpDefense);
+				c.addSemiPermanentAttackBoost(-2);
+				c.addSemiPermanentDefenseBoost(-1);
 			}
 
 			// add +1/+1 to cards
@@ -9976,21 +9973,56 @@ public class GameActionUtil {
 
 			// for each zone found add +1/+1 to each card
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
+				CardList creature = new CardList(
+						zone[outer].getCards());
 				creature = creature.getType("Zombie");
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(pumpAttack);
-					c.addSemiPermanentDefenseBoost(pumpDefense);
+					c.addSemiPermanentAttackBoost(1);
+					c.addSemiPermanentDefenseBoost(2);
 
 					gloriousAnthemList.add(c);
 				}// for inner
 			}// for outer
-		}// execute()
+		}// execute
 	}; // Undead Warchief
+	
+	public static Command Daru_Warchief           = new Command() {
+		private static final long serialVersionUID   = 5835056455026735693L;
+
+		CardList                  gloriousAnthemList = new CardList();
+
+		public void execute() {
+			CardList list = gloriousAnthemList;
+			Card c;
+			// reset all cards in list - aka "old" cards
+			for(int i = 0; i < list.size(); i++) {
+				c = list.get(i);
+				c.addSemiPermanentAttackBoost(-1);
+				c.addSemiPermanentDefenseBoost(-2);
+			}
+
+			// add +1/+1 to cards
+			list.clear();
+			PlayerZone[] zone = getZone("Daru Warchief");
+
+			// for each zone found add +1/+1 to each card
+			for(int outer = 0; outer < zone.length; outer++) {
+				CardList creature = new CardList(
+						zone[outer].getCards());
+				creature = creature.getType("Soldier");
+
+				for(int i = 0; i < creature.size(); i++) {
+					c = creature.get(i);
+					c.addSemiPermanentAttackBoost(1);
+					c.addSemiPermanentDefenseBoost(2);
+
+					gloriousAnthemList.add(c);
+				}// for inner
+			}// for outer
+		}// execute
+	}; // Daru Warchief()
     
 	public static Command Leyline_of_Singularity                = new Command() {
 
@@ -15548,7 +15580,11 @@ public class GameActionUtil {
 			CardList list = new CardList();
 			list.addAll(AllZone.Human_Play.getCards());
 			list.addAll(AllZone.Computer_Play.getCards());
-			list = list.getName("Master of Etherium");
+			list = list.filter(new CardListFilter() {
+                public boolean addCard(Card c) {
+                    return c.getName().equals("Master of Etherium") || c.getName().equals("Broodstar");
+                }
+            });
 
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
@@ -15570,7 +15606,7 @@ public class GameActionUtil {
 		}
 
 
-	}; // Master of etherium
+	}; // Master of etherium + Broodstar
 
 	public static Command Master_of_Etherium_Pump     = new Command() {
 		private static final long serialVersionUID   = -1736492817816019320L;
@@ -18379,6 +18415,7 @@ public class GameActionUtil {
 		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
 		commands.put("Goblin_Warchief", Goblin_Warchief);	
 		commands.put("Undead_Warchief", Undead_Warchief);
+		commands.put("Daru_Warchief", Daru_Warchief);
 		commands.put("Levitation", Levitation);
 		commands.put("Knighthood", Knighthood);
 		commands.put("Absolute_Law", Absolute_Law);

@@ -1676,12 +1676,16 @@ public class GameAction {
                         && ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true) 
                         || (k[4].equals("Self") && originalCard.equals(card)) || k[4].equals("All"))
                  		&& ((CardUtil.getColors(sa.getSourceCard()).contains(k[5])) || k[5].equals("All")) 
-                 		&& ((sa.getSourceCard().getType().contains(k[6])) || k[6].equals("All"))) {     
+                        && ((sa.getSourceCard().getType().contains(k[6])) 
+                        || (!(sa.getSourceCard().getType().contains(k[6])) && k[7].contains("NonType")) || k[6].equals("All"))) {      
                   	if(k[7].contains("CardIsTapped")) {
                  		if(card.isTapped() == false) k[3] = "0";             		
                  	}
                  	if(k[7].contains("TargetInPlay")) {
                  		if(!Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
+                 	}
+                 	if(k[7].contains("NonType")) {
+                 		if(originalCard.getType().contains(k[6])) k[3] = "0";             		
                  	}
                  	if(k[7].contains("Affinity")) {
                           String spilt = k[7];                
@@ -1783,12 +1787,16 @@ public class GameAction {
                          		&& ((k[4].equals("Spell") && sa.isSpell() == true) || (k[4].equals("Ability") && sa.isAbility() == true) 
                          		|| (k[4].equals("Self") && originalCard.equals(card)) || k[4].equals("All"))
                          		&& ((CardUtil.getColors(sa.getSourceCard()).contains(k[5])) || k[5].equals("All")) 
-                         		&& ((sa.getSourceCard().getType().contains(k[6])) || k[6].equals("All"))) { 
+                         		&& ((sa.getSourceCard().getType().contains(k[6])) 
+                         		|| (!(sa.getSourceCard().getType().contains(k[6])) && k[7].contains("NonType")) || k[6].equals("All"))) { 
                          	if(k[7].contains("CardIsTapped")) {
                          		if(card.isTapped() == false) k[3] = "0";             		
                          	}
                          	if(k[7].contains("TargetInPlay")) {
                          		if(!Player_Play.contains(sa.getSourceCard())) k[3] = "0";             		
+                         	}
+                         	if(k[7].contains("NonType")) {
+                         		if(originalCard.getType().contains(k[6])) k[3] = "0";             		
                          	}
                          	if(k[7].contains("Affinity")) {
       	                            String spilt = k[7];                
@@ -1874,7 +1882,7 @@ public class GameAction {
  	        }
          } // Khalni Hydra      
          return manaCost;
-    } 
+    }
     public void playSpellAbility(SpellAbility sa) {
     	ManaCost manaCost = GetSpellCostChange(sa);    
         if(manaCost.isPaid() /**sa.getManaCost().equals("0")**/ && sa.getBeforePayMana() == null) {

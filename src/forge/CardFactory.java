@@ -21119,7 +21119,7 @@ public class CardFactory implements NewConstants {
         }// *************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Dissipate")) {
+        else if(cardName.equals("Dissipate") || cardName.equals("Assert Authority")) {
         	SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = 4165714000804564686L;
 
