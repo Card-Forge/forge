@@ -10419,6 +10419,21 @@ public class CardFactory implements NewConstants {
     
     public Card postFactoryKeywords(Card card){
     	// this function should handle any keywords that need to be added after a spell goes through the factory
+        if(hasKeyword(card, "Fading") != -1) {
+            int n = hasKeyword(card, "Fading");
+            if(n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                card.removeIntrinsicKeyword(parse);
+                
+                String k[] = parse.split(":");
+                final int power = Integer.parseInt(k[1]);
+                
+
+                card.addComesIntoPlayCommand(CardFactoryUtil.fading(card, power));
+                card.addSpellAbility(CardFactoryUtil.fading_desc(card, power));
+            }
+        }//Vanishing    	
+    	
         if(hasKeyword(card, "Vanishing") != -1) {
             int n = hasKeyword(card, "Vanishing");
             if(n != -1) {

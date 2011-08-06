@@ -119,7 +119,7 @@ public class GameActionUtil {
 		upkeep_Mycoloth();
 		upkeep_Spore_Counters();
 		upkeep_Vanishing();
-		upkeep_Blastoderm();
+		upkeep_Fading();
 		upkeep_Masticore();
 		upkeep_Eldrazi_Monument();
 		upkeep_Blaze_Counters();
@@ -7543,24 +7543,44 @@ public class GameActionUtil {
 			}
 		}
 	}
+	
+	private static void upkeep_Fading() {
 
-	private static void upkeep_Blastoderm() {
 		final String player = AllZone.Phase.getActivePlayer();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
 		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Blastoderm");
+		list = list.filter(new CardListFilter() {
+			public boolean addCard(Card c) {
+				SpellAbility[] sas = c.getSpellAbility();
+				boolean isFading = false;
+				for(SpellAbility sa:sas) {
+					if(sa.toString().contains(
+							"At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)")) //this is essentially ".getDescription()"
+						isFading = true;
+				}
+				return isFading;
+			}
+		});
 		if(list.size() > 0) {
 			for(int i = 0; i < list.size(); i++) {
-				Card card = list.get(i);
-				if(card.getCounters(Counters.FADE) <= 0) {
-					AllZone.GameAction.sacrifice(card);
-				}
-				card.setCounter(Counters.FADE, card.getCounters(Counters.FADE) - 1);
+				final Card card = list.get(i);
+				Ability ability = new Ability(card, "0") {
+					@Override
+					public void resolve() {
+						int fadeCounters = card.getCounters(Counters.FADE);
+						if (fadeCounters <= 0)
+							AllZone.GameAction.sacrifice(card);
+						else
+							card.setCounter(Counters.FADE, fadeCounters - 1);
+					}
+				}; // ability
+				ability.setStackDescription(card.getName()
+						+ " - Fading - remove a fade counter from it. If you can't, sacrifice it.)");
+				AllZone.Stack.add(ability);
 
 			}
 		}
 	}
-
 
 	private static void upkeep_Defense_of_the_Heart() {
 		final String player = AllZone.Phase.getActivePlayer();

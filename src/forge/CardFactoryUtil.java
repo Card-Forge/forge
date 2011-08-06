@@ -2176,6 +2176,44 @@ public class CardFactoryUtil {
         return addCounters;
     }
     
+    public static Command fading(final Card sourceCard, final int Power) {
+        Command fade = new Command() {
+            private static final long serialVersionUID = 431920157968451817L;
+            public boolean            firstTime        = true;
+            
+            public void execute() {
+                
+                //testAndSet - only needed when comes into play.
+                if(firstTime) {
+                    sourceCard.addCounter(Counters.FADE, Power);
+                }
+                firstTime = false;
+            }
+        };
+        return fade;
+    } // vanishing
+    
+    public static SpellAbility fading_desc(final Card sourceCard, final int power) {
+        final SpellAbility desc = new Ability_Hand(sourceCard, "0") {
+            private static final long serialVersionUID = -4960704261761785512L;
+            
+            @Override
+            public boolean canPlay() {
+                return false;
+            }
+            
+            @Override
+            public void resolve() {}
+        };
+        // Be carefull changing this description cause it's crucial for ability to work (see GameActionUtil - vanishing for it)
+        desc.setDescription("Fading "
+                + power
+                + " (This permanent enters the battlefield with "
+                + power
+                + " fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)");
+        return desc;
+    }//vanish_desc()
+    
     public static Command vanishing(final Card sourceCard, final int Power) {
         Command age = new Command() {
             private static final long serialVersionUID = 431920157968451817L;

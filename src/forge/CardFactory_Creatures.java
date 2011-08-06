@@ -14799,27 +14799,6 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(gain2Life);
             
         }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Blastoderm")) {
-            Command fadeCounters = new Command() {
-                private static final long serialVersionUID = -580691660706977218L;
-                public boolean            firstTime        = true;
-                
-                public void execute() {
-                    
-                    //testAndSet - only needed when comes into play.
-                    if(firstTime) {
-                        card.addCounter(Counters.FADE, 3);
-                    }
-                    firstTime = false;
-                }
-            };
-            
-            card.addComesIntoPlayCommand(fadeCounters);
-            
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Godsire")) {
