@@ -2187,13 +2187,8 @@ public class CombatUtil {
 	            }//Shield Sphere
 	            
 	            else if(c.getName().equals("Meglonoth") && !c.getCreatureBlockedThisCombat()) {
-	                PlayerLife oppLife = AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(c.getController()));
-	                oppLife.subtractLife(c.getNetAttack(),c);
-	                
-	                //ability2.setStackDescription(c.getName() + " blocks and deals damage equal to its power to attacking player.");
-	                //AllZone.Stack.add(ability2);
-	                
-	            }//Shield Sphere
+	                AllZone.GameAction.addDamage(AllZone.GameAction.getOpponent(c.getController()), c, c.getNetAttack());
+	            }//Meglonoth
 	            c.setCreatureBlockedThisCombat(true);
         	}//for
             

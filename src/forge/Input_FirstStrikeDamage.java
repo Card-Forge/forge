@@ -51,15 +51,7 @@ public class Input_FirstStrikeDamage extends Input {
     public void selectCard(Card card, PlayerZone zone) {
         InputUtil.playInstantAbility(card, zone);
     }//selectCard()
-    /**
-    @SuppressWarnings("unused")
-    // playerDamage
-    private void playerDamage(PlayerLife p) {
-        int n = p.getAssignedDamage();
-        p.setAssignedDamage(0);
-        p.subtractLife(n);
-    }
-    **/
+
     //moves assigned damage to damage for all creatures
     //deals damage to player if needed
     private void damageCreatureAndPlayer() {
