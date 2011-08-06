@@ -298,11 +298,10 @@ public class CombatUtil {
         
         if(AllZoneUtil.isCardInPlay("Peacekeeper")) return false;
         
-        if(AllZoneUtil.isCardInPlay("Moat") || AllZoneUtil.isCardInPlay("Magus of the Moat")
+        if((AllZoneUtil.isCardInPlay("Moat") || AllZoneUtil.isCardInPlay("Magus of the Moat"))
             && !c.getKeyword().contains("Flying")) return false;
         
         // CARDNAME can't attack if defending player controls an untapped creature with power ...
-        
         final int powerLimit[] = {0};
         int keywordPosition = 0;
         boolean hasKeyword = false;
@@ -353,6 +352,11 @@ public class CombatUtil {
         
         if(c.getKeyword().contains("CARDNAME can't attack unless defending player controls a Forest.")) {
             temp = list.getType("Forest");
+            if(temp.isEmpty()) return false;
+        }
+        
+        if(c.getKeyword().contains("CARDNAME can't attack unless defending player controls a blue permanent.")) {
+            temp = list.getColor("Blue");
             if(temp.isEmpty()) return false;
         }
     	

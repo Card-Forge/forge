@@ -1,0 +1,9 @@
+Name:Whimwader
+ManaCost:4 U
+Types:Creature Elemental
+Text:no text
+PT:6/4
+K:CARDNAME can't attack unless defending player controls a blue permanent.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whimwader.jpg
+End

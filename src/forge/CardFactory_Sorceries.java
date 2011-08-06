@@ -6525,7 +6525,6 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Stitch Together")) {
@@ -6623,95 +6622,6 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if (cardName.equals("Natural Order")){
-            final SpellAbility spell = new Spell(card) {
-
-				private static final long serialVersionUID = -6598323179507468746L;
-
-				@Override
-                public void resolve() {
-					Player controller = card.getController();
-					
-					PlayerZone battlezone = AllZone.getZone(Constant.Zone.Play, controller);
-			        PlayerZone library = AllZone.getZone(Constant.Zone.Library, controller);
-			        
-					CardList list = new CardList(library.getCards());
-			        list = list.getType("Creature").getColor("G");
-			        
-			        if(list.size() == 0) return;
-			        
-					if(controller.equals(AllZone.HumanPlayer)) {
-				        
-				        Card c = AllZone.Display.getChoiceOptional("Choose a green creature", list.toArray());
-				        if(c != null) {
-				            list.remove(c);
-				            library.remove(c);
-				            battlezone.add(c);
-				            
-				        }//if
-			        } else {
-			        	CardList greenlist = new CardList(library.getCards());
-			        	greenlist = greenlist.getType("Creature").getColor("G");
-			        	Card c = CardFactoryUtil.AI_getBestCreature(greenlist);
-			        	if(c != null) {
-				            list.remove(c);
-				            library.remove(c);
-				            battlezone.add(c);
-				            
-				        }//if
-			        }
-                } // resolve
-               
-        		public void chooseTargetAI() {
-        			Card target = null;
-        			target = CardFactoryUtil.AI_getWorstCreature(new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards()));
-        			setTargetCard(target);
-        			AllZone.GameAction.sacrifice(getTargetCard());
-        		}//chooseTargetAI()
-
-                
-                public boolean canPlayAI()
-                {
-                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer);
-                	CardList list = new CardList(library.getCards());
-                	list = list.getType("Creature").getColor("G");
-                	PlayerZone inPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                	CardList listInPlay = new CardList(inPlay.getCards());
-                	listInPlay = listInPlay.getType("Creature").getColor("G");
-                	Card inPlayCreature = CardFactoryUtil.AI_getWorstCreature(new CardList(AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer).getCards()));
-                	Card inLibraryCreature = CardFactoryUtil.AI_getBestCreature(new CardList(AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer).getCards()));
-                	return (list.size() > 0) && (listInPlay.size() > 0) && (inPlayCreature.getNetAttack() < inLibraryCreature.getNetAttack());
-                }
-            };//SpellAbility
-            Input runtime = new Input() {
-                
-				private static final long serialVersionUID = -7551607354431165941L;
-
-				@Override
-                public void showMessage() {
-					Player player = card.getController();
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-                    CardList choice = new CardList(play.getCards());
-                    choice = choice.getType("Creature").getColor("G");   
-                    
-                    boolean free = false;
-                    if (this.isFree())
-                    	free = true;
-                    
-                    if (player.equals(AllZone.HumanPlayer)) {
-                    	stopSetNext(CardFactoryUtil.input_sacrifice(spell, choice, "Select a green creature to sacrifice.", free));
-                    }
-                }
-            };
-
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            spell.setBeforePayMana(runtime);
-
-        } //*************** END ************ END **************************
-        */
 
         //*************** START ********** START *************************
         else if (cardName.equals("Destructive Force") || cardName.equals("Wildfire"))
@@ -6923,6 +6833,7 @@ public class CardFactory_Sorceries {
             spell.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Ashes to Ashes")) {
             final Card[] target = new Card[2];
@@ -7018,7 +6929,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
-        
         
         
         //*************** START *********** START **************************
@@ -7209,6 +7119,7 @@ public class CardFactory_Sorceries {
         	card.addSpellAbility(spell);
         }// *************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Last Stand")) {
         	/*
@@ -7269,6 +7180,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Overwhelming Stampede")) {
@@ -7332,6 +7244,7 @@ public class CardFactory_Sorceries {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Winds of Change")) {
         	/*
@@ -7378,6 +7291,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Nature's Resurgence")) {
         	/*
@@ -7404,6 +7318,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("All Hallow's Eve")) {
@@ -7505,6 +7420,7 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Death Cloud")) {
         	/*
@@ -7550,6 +7466,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Channel")) {
