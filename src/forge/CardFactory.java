@@ -13553,12 +13553,6 @@ public class CardFactory implements NewConstants {
         else if(cardName.equals("Culling Sun")) {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 2169815434022673011L;
-                
-                CardListFilter filter = new CardListFilter() {
-        			public boolean addCard(Card c) {
-        				return c.isCreature() && CardUtil.getConvertedManaCost(c) <= 3;
-        			}
-        		};
 
                 @Override
         		public void resolve() {
