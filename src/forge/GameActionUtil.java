@@ -14202,94 +14202,6 @@ public class GameActionUtil {
 		}// execute()
 
 	}; //Jund_Hackblade
-
-	public static Command Naya_Hushblade              = new Command() {
-		private static final long serialVersionUID = 3953482302338689497L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Naya Hushblade");
-
-			if(list.size() > 0) {
-				for(int i = 0; i < list.size(); i++) {
-
-					Card c = list.get(i);
-					if(CardFactoryUtil.controlsAnotherMulticoloredPermanent(c)) {
-						c.setBaseAttack(3);
-						c.setBaseDefense(2);
-						if(!c.getIntrinsicKeyword().contains(
-								"Shroud")) c.addIntrinsicKeyword("Shroud");
-					} else {
-						c.setBaseAttack(2);
-						c.setBaseDefense(1);
-						if(c.getIntrinsicKeyword().contains(
-								"Shroud")) c.removeIntrinsicKeyword("Shroud");
-					}
-
-				}
-			}
-		}// execute()
-
-	}; //Naya_Hushblade
-
-	public static Command Serra_Ascendant = new Command() {
-		private static final long serialVersionUID = -3183332336954804701L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Serra Ascendant");
-
-			if(list.size() > 0) {
-				for(int i = 0; i < list.size(); i++) {
-
-					Card c = list.get(i);
-					if(moreThan30Life(c)) {
-						c.setBaseAttack(6);
-						c.setBaseDefense(6);
-						c.addNonStackingIntrinsicKeyword("Flying");
-					} else {
-						c.setBaseAttack(1);
-						c.setBaseDefense(1);
-						c.removeIntrinsicKeyword("Flying");
-					}
-
-				}
-			}
-		}// execute()
-
-		private boolean moreThan30Life(Card c) {
-			int life = c.getController().getLife();
-
-			if(life >= 30) return true;
-			else return false;
-		}
-
-	};
-	
-	public static Command Relentless_Rats_Other       = new Command() {
-		private static final long serialVersionUID = -7731719556755491679L;
-
-		int                       otherRats        = 0;
-
-		private int countOtherRats(Card c) {
-			CardList rats = AllZoneUtil.getCardsInPlay("Relentless Rats");
-			return rats.size() - 1;
-		}
-
-		public void execute() {
-
-			CardList creature = AllZoneUtil.getCardsInPlay("Relentless Rats");
-
-			for(int i = 0; i < creature.size(); i++) {
-				Card c = creature.get(i);
-				otherRats = countOtherRats(c);
-				c.setOtherAttackBoost(otherRats);
-				c.setOtherDefenseBoost(otherRats);
-
-			}// for inner
-		}// execute()
-
-	};
 	
 	public static Command Plague_Rats = new Command() {
 		private static final long serialVersionUID = 2333292591304646698L;
@@ -16632,7 +16544,6 @@ public class GameActionUtil {
 		commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
 		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
 		
-		commands.put("Naya_Hushblade", Naya_Hushblade);
 		commands.put("Nightmare", Nightmare);
 		commands.put("Nirkana_Cutthroat", Nirkana_Cutthroat);
 		commands.put("Nut_Collector", Nut_Collector);
@@ -16648,12 +16559,10 @@ public class GameActionUtil {
 		commands.put("Primalcrux", Primalcrux);
 		
 		commands.put("Rakdos_Pit_Dragon", Rakdos_Pit_Dragon);
-		commands.put("Relentless_Rats_Other", Relentless_Rats_Other);
 		commands.put("Rolling_Stones", Rolling_Stones);
 		commands.put("Ruthless_Cullblade", Ruthless_Cullblade);
 		
 		commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
-		commands.put("Serra_Ascendant", Serra_Ascendant);
 		commands.put("Serra_Avatar", Serra_Avatar);
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);

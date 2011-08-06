@@ -103,7 +103,6 @@ public class StaticEffects
 		cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
 		cardToEffectsList.put("Muraganda Petroglyphs", new String[] {"Muraganda_Petroglyphs"});
 		
-		cardToEffectsList.put("Naya Hushblade", new String[] {"Naya_Hushblade"});
 		cardToEffectsList.put("Nightmare", new String[] {"Nightmare"});
 		cardToEffectsList.put("Nirkana Cutthroat", new String[] {"Nirkana_Cutthroat"});
 		cardToEffectsList.put("Nut Collector", new String[] {"Nut_Collector"});
@@ -119,12 +118,10 @@ public class StaticEffects
 		cardToEffectsList.put("Primalcrux",new String[] {"Primalcrux"});
 		
 		cardToEffectsList.put("Rakdos Pit Dragon", new String[] {"Rakdos_Pit_Dragon"});
-		cardToEffectsList.put("Relentless Rats", new String[] {"Relentless_Rats_Other"});
 		cardToEffectsList.put("Rolling Stones", new String[] {"Rolling_Stones"});
 		cardToEffectsList.put("Ruthless Cullblade", new String[] {"Ruthless_Cullblade"});
 		
 		cardToEffectsList.put("Serpent of the Endless Sea", new String[] {"Serpent_of_the_Endless_Sea"});
-		cardToEffectsList.put("Serra Ascendant", new String[] {"Serra_Ascendant"});
 		cardToEffectsList.put("Serra Avatar", new String[] {"Serra_Avatar"});
 		cardToEffectsList.put("Skywatcher Adept", new String[] {"Skywatcher_Adept"});
 		cardToEffectsList.put("Soulsurge Elemental", new String[] {"Soulsurge_Elemental"});
