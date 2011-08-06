@@ -713,7 +713,7 @@ public class AbilityFactory {
 				else
 					return 0;
 				
-				return CardFactoryUtil.handlePaid(list, calcX[1]) * multiplier;
+				return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
 			}
 			
 			else

@@ -3639,12 +3639,16 @@ public class CardFactoryUtil {
         else return num;
     }
 	
-	public static int handlePaid(CardList paidList, String string) {
+	public static int handlePaid(CardList paidList, String string, Card source) {
 		if (paidList == null || paidList.size() == 0)
 			return 0;
 		
 		if (string.equals("Amount"))
 			return paidList.size();
+		if( string.contains("Valid") ) {
+			String valid = string.replace("Valid ", "");
+			return paidList.getValidCards(valid, source.getController(), source).size();
+		}
 		
 		int tot = 0;
 		for(Card c : paidList)
