@@ -3588,9 +3588,8 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         
-
         //*************** START *********** START **************************
-        else if(cardName.equals("Gravedigger") || cardName.equals("Cadaver Imp")) {
+        else if(cardName.equals("Gravedigger") || cardName.equals("Cadaver Imp") || cardName.equals("Mnemonic Wall")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -3607,7 +3606,15 @@ public class CardFactory_Creatures {
                 public void execute() {
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     CardList list = new CardList(grave.getCards());
-                    list = list.getType("Creature");
+                    
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card crd) {
+                            return ((card.getName().equals("Gravedigger") || card.getName().equals("Cadaver Imp")) && crd.isCreature())
+                                        ||
+                                    (card.getName().equals("Mnemonic Wall") && (crd.isInstant() || crd.isSorcery()));
+                        }
+                    });
+                    // list = list.getType("Creature");
                     
                     if(list.isEmpty()) return;
                     
@@ -3620,7 +3627,14 @@ public class CardFactory_Creatures {
                     }//if
                     else//computer
                     {
-                        Card best = CardFactoryUtil.AI_getBestCreature(list);
+                        Card best = card;
+                        if (card.getName().equals("Gravedigger") || card.getName().equals("Cadaver Imp")) {
+                            best = CardFactoryUtil.AI_getBestCreature(list);
+                        } else {
+                            // compy will select a random Instant or Sorcery
+                            list.shuffle();
+                            best = list.get(0);
+                        }
                         ability.setTargetCard(best);
                         AllZone.Stack.add(ability);
                     }

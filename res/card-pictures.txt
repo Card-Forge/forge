@@ -38,6 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+mnemonic_wall.jpg		http://www.wizards.com/global/images/magic/general/mnemonic_wall.jpg
+cadaver_imp.jpg		http://www.wizards.com/global/images/magic/general/cadaver_imp.jpg
 demonic_consultation.jpg        http://www.wizards.com/global/images/magic/general/demonic_consultation.jpg
 stitch_together.jpg     http://www.wizards.com/global/images/magic/general/stitch_together.jpg
 symbiotic_wurm.jpg      http://www.wizards.com/global/images/magic/general/symbiotic_wurm.jpg
