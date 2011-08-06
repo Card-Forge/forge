@@ -2,7 +2,7 @@ Name:Death of a Thousand Stings
 ManaCost:4 B
 Types:Instant Arcane
 Text:no text
-K:spLoseLifeTgt:1:Drawback$YouGainLife/1:Target player loses 1 life and you gain 1 life.
+A:SP$LoseLife | Cost$ 4 B | ValidTgts$ Player | TgtPrompt$ Select a player to lose 1 life | LifeAmount$ 1 | SubAbility$ YouGainLife/1 | SpellDescription$ Target player loses 1 life and you gain 1 life.
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:Yes_No:ControllerUpkeep!MoreCardsInHand:At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return Death of a Thousand Stings from your graveyard to your hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_of_a_thousand_stings.jpg

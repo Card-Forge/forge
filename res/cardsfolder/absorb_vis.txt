@@ -2,7 +2,7 @@ Name:Absorb Vis
 ManaCost:6 B
 Types:Sorcery
 Text:no text
-K:spLoseLifeTgt:4:Drawback$YouGainLife/4:Target player loses 4 life and you gain 4 life.
+A:SP$LoseLife | Cost$ 6 B | ValidTgts$ Player | TgtPrompt$ Select a player to lose 4 life | LifeAmount$ 4 | SubAbility$ YouGainLife/4 | SpellDescription$ Target player loses 4 life and you gain 4 life.
 K:TypeCycling:Basic:1 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/absorb_vis.jpg

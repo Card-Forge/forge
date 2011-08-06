@@ -2,7 +2,7 @@ Name:Soul Feast
 ManaCost:3 B B
 Types:Sorcery
 Text:no text
-K:spLoseLifeTgt:4:Drawback$YouGainLife/4:Target player loses 4 life and you gain 4 life.
+A:SP$LoseLife | Cost$ 3 B B | ValidTgts$ Player | TgtPrompt$ Select a player to lose 4 life | LifeAmount$ 4 | SubAbility$ YouGainLife/4 | SpellDescription$ Target player loses 4 life and you gain 4 life.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_feast.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/165.jpg

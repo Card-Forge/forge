@@ -2,7 +2,7 @@ Name:Brush With Death
 ManaCost:2 B
 Types:Sorcery
 Text:no text
-K:spLoseLifeTgt:2:Drawback$YouGainLife/2:Target opponent loses 2 life and you gain 2 life.
+A:SP$LoseLife | Cost$ 2 B | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ YouGainLife/2 | SpellDescription$ Target opponent loses 2 life and you gain 2 life.
 SVar:Buyback:2 B B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brush_with_death.jpg

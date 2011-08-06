@@ -4491,6 +4491,7 @@ public class CardFactory implements NewConstants {
         }//spDrawCards
         */
         
+        /* Cards converted to AF_SP$LoseLife
         if (hasKeyword(card, "spLoseLife") != -1)
         {
            int n = hasKeyword(card, "spLoseLife");
@@ -4635,7 +4636,7 @@ public class CardFactory implements NewConstants {
                 }
            }
         }//spLoseLife
-        
+        */
         
         /* Cards converted to AF_AB$LoseLife
         if (hasKeyword(card, "abLoseLife") != -1)

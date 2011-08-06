@@ -2,7 +2,7 @@ Name:Last Caress
 ManaCost:2 B
 Types:Sorcery
 Text:no text
-K:spLoseLifeTgt:1:Drawback$YouGainLife/1:Target player loses 1 life and you gain 1 life.
+A:SP$LoseLife | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Select a player to lose 1 life | LifeAmount$ 1 | SubAbility$ YouGainLife/1 | SpellDescription$ Target player loses 1 life and you gain 1 life.
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_caress.jpg
