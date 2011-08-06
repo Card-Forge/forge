@@ -9924,6 +9924,42 @@ public class GameActionUtil {
 		}
 	};
 	
+	public static Command Caravan_Escort  = new Command() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -6996623102170747897L;
+
+		public void execute()
+		{
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Caravan Escort");
+
+			for (Card c:list)
+			{
+				int lcs = c.getCounters(Counters.LEVEL);
+				if ( lcs < 1)
+				{
+					c.setBaseAttack(1);
+					c.setBaseDefense(1);
+				}
+				else if ( lcs >=1 && lcs < 5 )
+				{
+					c.setBaseAttack(2);
+					c.setBaseDefense(2);
+				}
+				else
+				{
+					c.setBaseAttack(5);
+					c.setBaseDefense(5);
+					c.addNonStackingIntrinsicKeyword("First Strike");
+				}
+			}
+		}
+	};
+	
 	public static Command Student_of_Warfare 		  = new Command() {
 		private static final long serialVersionUID = 2627513737024865169L;
 
@@ -15338,6 +15374,7 @@ public class GameActionUtil {
 		commands.put("Transcendent_Master", Transcendent_Master);
 		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
+		commands.put("Caravan_Escort", Caravan_Escort);
 		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
