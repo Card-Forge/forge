@@ -1911,11 +1911,7 @@ public class GameActionUtil {
 	public static void removeAttackedBlockedThisTurn() {
 		// resets the status of attacked/blocked this turn
 		Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-		list = list.getType("Creature");
+		CardList list = AllZoneUtil.getCreaturesInPlay(player);
 
 		for(int i = 0; i < list.size(); i++) {
 			Card c = list.get(i);
@@ -1972,8 +1968,6 @@ public class GameActionUtil {
 
 	public static void executeLandfallEffects(Card c) {
 		if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
-
-
 	}
 	
 	private static boolean checkValakutCondition(Card valakutCard, Card mtn) {
@@ -2144,25 +2138,8 @@ public class GameActionUtil {
 	public static void executeCombatDamageToCreatureEffects(final Card source, final Card affected, int damage) {
 		
 		if (damage <= 0) return;
-        
-    	if(source.getName().equals("Mirri the Cursed") ) {
-	        final Card thisCard = source;
-	        Ability ability2 = new Ability(thisCard, "0") {
-	            @Override
-	            public void resolve() {
-	                thisCard.addCounter(Counters.P1P1, 1);
-	            }
-	        }; // ability2
-        
-	        StringBuilder sb2 = new StringBuilder();
-	        sb2.append(thisCard.getName()).append(" - gets a +1/+1 counter");
-	        ability2.setStackDescription(sb2.toString());
-
-            AllZone.Stack.addSimultaneousStackEntry(ability2);
-
-    	}
-
-
+		
+		//placeholder for any future needs (everything that was here is converted to script)
 	}
 	
 	//not restricted to combat damage, restricted to dealing damage to creatures
