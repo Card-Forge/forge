@@ -7625,7 +7625,7 @@ public class CardFactory_Sorceries {
                     int cmc = CardUtil.getConvertedManaCost(c.getManaCost());
                     PlayerZone grave = AllZone.getZone(c);
                     
-                    if(AllZone.GameAction.isCardInZone(c, grave)) {
+                    if(AllZone.GameAction.isCardInZone(c, grave) && c.isCreature()) {
                         PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                         AllZone.GameAction.moveTo(play, c);
                         c.setController(card.getController());
@@ -7640,7 +7640,7 @@ public class CardFactory_Sorceries {
                 
                 public CardList getCreatures() {
                     CardList creatures = AllZoneUtil.getCardsInGraveyard();
-                    creatures.filter(AllZoneUtil.creatures);
+                    creatures = creatures.filter(AllZoneUtil.creatures);
                     if (card.getController().equals(Constant.Player.Computer)) {
                         creatures = creatures.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
                     }
