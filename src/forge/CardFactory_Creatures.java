@@ -9320,6 +9320,7 @@ public class CardFactory_Creatures {
                                 }// If an enchantment is selected
                             }// If there are enchantments in library
                             
+                            card.getController().shuffle();
                         }// If answered yes to may exile
                     }// If player is human
                     
@@ -9341,6 +9342,7 @@ public class CardFactory_Creatures {
                             if (card.getName().equals("Academy Rector")) {
                                 AllZone.GameAction.exile(card);
                             }
+                            card.getController().shuffle();
                         }
                     }// player is the computer
                 }// resolve()
