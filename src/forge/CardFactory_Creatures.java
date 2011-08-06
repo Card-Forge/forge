@@ -4008,6 +4008,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Karmic Guide")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -4040,6 +4041,7 @@ public class CardFactory_Creatures {
                     }//if
                     else//computer
                     {
+                        list = list.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
                         Card best = CardFactoryUtil.AI_getBestCreature(list);
                         ability.setTargetCard(best);
                         AllZone.Stack.add(ability);
@@ -4057,6 +4059,7 @@ public class CardFactory_Creatures {
                 public boolean canPlayAI() {
                     CardList creats = new CardList();
                     creats.addAll(AllZone.Computer_Graveyard.getCards());
+                    creats = creats.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
                     creats = creats.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
                             return c.isCreature() && c.getNetAttack() > 2;
@@ -4068,6 +4071,7 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Gravedigger") || cardName.equals("Cadaver Imp") || cardName.equals("Mnemonic Wall")) {

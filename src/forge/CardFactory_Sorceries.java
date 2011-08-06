@@ -944,7 +944,7 @@ public class CardFactory_Sorceries {
                     PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
                     creature.addAll(zone.getCards());
                     creature = creature.getType("Creature");
-                    if (card.getController().equals("Computer")) {
+                    if (card.getController().equals(Constant.Player.Computer)) {
                         creature = creature.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
                     }
                     return creature.toArray();
@@ -7644,7 +7644,7 @@ public class CardFactory_Sorceries {
                 public CardList getCreatures() {
                     CardList creatures = AllZoneUtil.getCardsInGraveyard();
                     creatures.filter(AllZoneUtil.creatures);
-                    if (card.getController().equals("Computer")) {
+                    if (card.getController().equals(Constant.Player.Computer)) {
                         creatures = creatures.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
                     }
                     return creatures;
