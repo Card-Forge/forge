@@ -28,6 +28,12 @@ public class Cost_Payment {
 	private boolean payTapXType;
 	
 	private boolean bCancel = false;
+	
+	private static CardList payTapXTypeTappedList = new CardList();
+	static void addPayTapXTypeTappedList(Card c)
+	{
+		payTapXTypeTappedList.add(c);
+	}
 
 	public void setPayMana(boolean bPay){	payMana = bPay;	}
 	public void setPayDiscard(boolean bSac){	payDiscard = bSac;	}
@@ -255,9 +261,12 @@ public class Cost_Payment {
 		// refund mana
         AllZone.ManaPool.unpaid();
         
-		if (cost.getTapXTypeCost() && payTapXType){
-			// todo: it would be great if a user cancels payment that the tapped creatures will untap
-			
+		if (cost.getTapXTypeCost() /*&& payTapXType*/){
+
+			for (Card c:payTapXTypeTappedList)
+				c.untap();	
+			//needed?
+			payTapXTypeTappedList = new CardList();
 		}
         
         // refund counters
@@ -545,6 +554,7 @@ public class Cost_Payment {
                 if(zone.is(Constant.Zone.Play) && cardList.contains(card) && card.isUntapped() ) {
                 	// send in CardList for Typing
                     card.tap();
+                    payTapXTypeTappedList.add(card);
                     cardList.remove(card);
                     nTapped++;
                     
