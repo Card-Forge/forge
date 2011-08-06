@@ -1128,7 +1128,7 @@ public class AbilityFactory_ChangeZone {
 		        	
 		        		AllZone.GameAction.moveTo(AllZone.getZone(destination, tgtC.getController()),tgtC);
 		        		
-		        		if(params.containsKey("Ninjutsu")) {
+		        		if(params.containsKey("Ninjutsu") || params.containsKey("Attacking")) {
 		        			AllZone.Combat.addAttacker(tgtC);
 		        			AllZone.Combat.addUnblockedAttacker(tgtC);
 		        		}
