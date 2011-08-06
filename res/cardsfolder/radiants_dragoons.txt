@@ -6,4 +6,5 @@ PT:2/5
 K:Echo:3 W
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radiants_dragoons.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/21.jpg
 End

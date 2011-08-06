@@ -7,4 +7,5 @@ K:Flying
 K:CARDNAME can block only creatures with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_airship.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/91.jpg
 End

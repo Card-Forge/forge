@@ -6,4 +6,5 @@ A:SP$Destroy | Cost$ R Sac<1/Land> | ValidTgts$ Land | TgtPrompt$ Select target 
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/raze.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/207.jpg
 End

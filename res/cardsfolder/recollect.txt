@@ -5,4 +5,5 @@ Text:no text
 A:SP$Retrieve | Cost$ 2 G | Destination$ Hand | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Return target card from your graveyard to your hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recollect.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/178.jpg
 End

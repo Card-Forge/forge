@@ -6,4 +6,5 @@ K:Fading:2
 K:abGainLife T:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rejuvenation_chamber.jpg
+SetInfo:NMS|Uncommon|http://magiccards.info/scans/en/ne/137.jpg
 End

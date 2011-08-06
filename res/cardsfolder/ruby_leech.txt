@@ -7,4 +7,5 @@ K:First strike
 K:CostChange:Player:More:R:Spell:red:All:NoSpecial
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruby_leech.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/161.jpg
 End

@@ -6,4 +6,5 @@ A:SP$Fetch | Cost$ 2 G Sac<1/Land> | Destination$ Battlefield | FetchType$ Land.
 K:Draw a card at the beginning of the next turn's upkeep.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renewal.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/66.jpg
 End

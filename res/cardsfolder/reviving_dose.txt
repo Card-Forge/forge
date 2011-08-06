@@ -6,4 +6,6 @@ K:spGainLife:3
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22941.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/31.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/34.jpg
 End

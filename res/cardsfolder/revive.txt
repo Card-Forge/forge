@@ -5,4 +5,5 @@ Text:no text
 A:SP$Retrieve | Cost$ 1 G | Destination$ Hand | TgtPrompt$ Choose target green card in your graveyard | ValidTgts$ Card.Green+YouCtrl | SpellDescription$ Return target green card from your graveyard to your hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revive.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/262.jpg
 End

@@ -7,4 +7,5 @@ K:Vigilance
 K:CostChange:Player:Less:1:Self:All:All:Affinity/Plains
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razor_golem.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/137.jpg
 End

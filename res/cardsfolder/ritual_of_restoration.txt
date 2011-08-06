@@ -5,4 +5,5 @@ Text:no text
 A:SP$Retrieve | Cost$ W | Destination$ Hand | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SpellDescription$ Return target artifact card from your graveyard to your hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ritual_of_restoration.jpg
+SetInfo:DST|Common|http://magiccards.info/scans/en/ds/13.jpg
 End

@@ -6,4 +6,5 @@ K:spDamageTgtCP:3
 K:Suspend:1:R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rift_bolt.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/176.jpg
 End

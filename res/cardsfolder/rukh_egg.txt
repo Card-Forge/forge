@@ -5,4 +5,7 @@ Text:When Rukh Egg is put into a graveyard from the battlefield, put a 4/4 red B
 PT:0/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rukh_egg.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/216.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/214.jpg
+SetInfo:ARN|Common|http://magiccards.info/scans/en/an/52.jpg
 End

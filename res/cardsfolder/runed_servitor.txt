@@ -6,4 +6,5 @@ PT:2/2
 K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1!DrawCards/1:ControllingPlayer_Self!ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:When Runed Servitor is put into a graveyard from the battlefield, each player draws a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_servitor.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/224.jpg
 End

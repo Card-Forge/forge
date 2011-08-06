@@ -6,4 +6,5 @@ A:SP$Retrieve | Cost$ 2 B | Destination$ Hand | TgtPrompt$ Choose target creatur
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recover.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/122.jpg
 End

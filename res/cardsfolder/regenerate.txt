@@ -5,4 +5,5 @@ Text:no text
 A:SP$Regenerate | Cost$ W | Tgt$ TgtC | SpellDescription$ Regenerate target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/regenerate.jpg
+SetInfo:M10|Common|http://magiccards.info/scans/en/m10/202.jpg
 End

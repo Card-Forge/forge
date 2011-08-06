@@ -5,4 +5,6 @@ Text:no text
 K:abAddReflectedMana:Type:You
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reflecting_pool.jpg
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/328.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/278.jpg
 End

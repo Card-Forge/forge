@@ -7,4 +7,5 @@ A:SP$Token | Cost$ 4 G | TokenAmount$ 1 | TokenName$ Treefolk Shaman | TokenType
 K:WheneverKeyword:EntersBattleField:Type/Forest:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a Forest enters the battlefield under your control, you may return Reach of Branches from your graveyard to your hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_of_branches.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/132.jpg
 End

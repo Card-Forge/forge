@@ -7,4 +7,5 @@ K:StaticEffect:Play:Permanents you Control:Keyword/Trample:Type.Creature!Color.g
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roughshod_mentor.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/128.jpg
 End

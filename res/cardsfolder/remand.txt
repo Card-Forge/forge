@@ -5,4 +5,5 @@ Text:Counter target spell. If that spell is countered this way, put it into it's
 K:spCounter:Spell:None:Hand:My-Draw(1)
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87919.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/63.jpg
 End

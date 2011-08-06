@@ -6,4 +6,5 @@ PT:2/2
 A:AB$Regenerate | Tgt$ TgtC | Cost$ G T Discard<1/Any> | SpellDescription$ Regenerate target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rushwood_herbalist.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/265.jpg
 End

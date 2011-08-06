@@ -6,4 +6,6 @@ PT:5/4
 K:CARDNAME can't attack unless defending player controls an Island.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/red_cliffs_armada.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/51.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/51.jpg
 End

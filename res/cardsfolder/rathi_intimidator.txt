@@ -7,4 +7,5 @@ K:Fear
 K:SearchMerc:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rathi_intimidator.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/69.jpg
 End

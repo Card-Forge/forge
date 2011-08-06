@@ -6,4 +6,5 @@ PT:4/4
 K:abGainLife Sac<1/BEAST>:4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_baloth.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/278.jpg
 End

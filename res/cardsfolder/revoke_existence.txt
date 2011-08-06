@@ -5,4 +5,6 @@ Text:no text
 A:SP$Bounce | Cost$ 1 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Destination$ Exile | SpellDescription$ Exile target artifact or enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revoke_existence.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/18.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/18.jpg
 End

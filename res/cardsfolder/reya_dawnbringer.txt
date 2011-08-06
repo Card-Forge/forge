@@ -6,4 +6,6 @@ PT:4/6
 K:Flying
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22965.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/33.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/35.jpg
 End

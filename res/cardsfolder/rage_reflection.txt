@@ -6,4 +6,5 @@ K:StaticEffect:Play:Permanents you Control:Keyword/Double Strike:Type.Creature:C
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_reflection.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/104.jpg
 End

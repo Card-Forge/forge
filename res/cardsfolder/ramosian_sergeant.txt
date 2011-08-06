@@ -6,4 +6,5 @@ PT:1/1
 K:SearchRebel:3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_sergeant.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/39.jpg
 End

@@ -6,4 +6,5 @@ PT:4/4
 K:Fear
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ratcatcher.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/52.jpg
 End

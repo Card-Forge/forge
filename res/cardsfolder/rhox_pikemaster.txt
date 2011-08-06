@@ -8,4 +8,5 @@ K:stPumpAll:Creature.Soldier+Other+YouCtrl:0/0/First Strike:No Condition:Other S
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_pikemaster.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/26.jpg
 End

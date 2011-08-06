@@ -7,4 +7,5 @@ K:enPumpCurse:CARDNAME can't attack or block.
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:ModifyLife/1:ControllingPlayer_Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may gain 1 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/recumbent_bliss.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/13.jpg
 End

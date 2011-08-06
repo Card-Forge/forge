@@ -7,4 +7,5 @@ K:Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/repel_the_darkness.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/42.jpg
 End

@@ -6,4 +6,5 @@ A:SP$Destroy | Cost$ 3 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select t
 K:Flashback:4 W W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ray_of_distortion.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/42.jpg
 End

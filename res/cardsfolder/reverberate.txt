@@ -4,4 +4,5 @@ Types:Instant
 Text:Copy target instant or sorcery spell. You may choose new targets for the copy.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reverberate.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/155.jpg
 End

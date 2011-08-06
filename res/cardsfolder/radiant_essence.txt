@@ -6,4 +6,5 @@ PT:2/3
 K:stPumpSelf:Creature:1/2:isPresent Permanent.Black+YouDontCtrl:Radiant Essence gets +1/+2 as long as an opponent controls a black permanent.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radiant_essence.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/336.jpg
 End

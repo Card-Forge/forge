@@ -7,4 +7,5 @@ SVar:X:Count$TypeOppCtrl.Mountain/Times.2
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal/renewing_dawn.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/185.jpg
 End

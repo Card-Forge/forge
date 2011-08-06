@@ -7,4 +7,5 @@ K:Whenever CARDNAME blocks a creature, destroy that creature at end of combat:Cr
 K:Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat:Creature.nonWall
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rock_basilisk.jpg
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/339.jpg
 End

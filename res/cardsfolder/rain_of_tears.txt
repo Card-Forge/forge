@@ -5,4 +5,8 @@ Text:Destroy target land.
 K:spDestroyTgt:Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_tears.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/43.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/155.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/29.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/170.jpg
 End

@@ -6,4 +6,5 @@ PT:3/2
 K:WheneverKeyword:Attack - Alone:Self:Play:StatsPumpEOT/3/0:Self:ASAP:No_Condition:No Special Condition:Whenever Reckless Ogre attacks alone, it gets +3/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_ogre.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/98.jpg
 End

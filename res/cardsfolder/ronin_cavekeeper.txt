@@ -6,4 +6,5 @@ PT:4/3
 K:Bushido 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ronin_cavekeeper.jpg
+SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/111.jpg
 End

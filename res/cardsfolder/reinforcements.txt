@@ -6,4 +6,5 @@ A:SP$Retrieve | Cost$ W | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reinforcements.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/142.jpg
 End

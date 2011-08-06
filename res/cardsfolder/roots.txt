@@ -6,4 +6,5 @@ K:Enchant creature without flying
 K:When CARDNAME enters the battlefield, tap enchanted creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roots.jpg
+SetInfo:HML|Uncommon|http://magiccards.info/scans/en/hl/68.jpg
 End

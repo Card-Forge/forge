@@ -6,4 +6,5 @@ A:AB$Bounce | Cost$ 2 T | ValidTgts$ Permanent.nonToken+YouCtrl | TgtPrompt$ Sel
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_pawnshop.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/311.jpg
 End

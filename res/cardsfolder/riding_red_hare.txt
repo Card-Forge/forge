@@ -5,4 +5,6 @@ Text:no text
 K:spPumpTgt:+3/+3/Horsemanship
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riding_red_hare.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/18.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/18.jpg
 End

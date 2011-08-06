@@ -7,4 +7,5 @@ A:AB$Retrieve | Cost$ T Sac<1/CARDNAME> | TgtPrompt$ Choose target artifact card
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_diver.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/81.jpg
 End

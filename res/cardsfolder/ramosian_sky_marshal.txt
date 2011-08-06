@@ -7,4 +7,5 @@ K:Flying
 K:SearchRebel:7
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_sky_marshal.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/40.jpg
 End

@@ -5,4 +5,5 @@ Text:Ruthless Cullblade gets +2/+1 as long as an opponent has 10 or less life.
 PT:2/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruthless_cullblade.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/65.jpg
 End

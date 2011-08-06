@@ -5,4 +5,5 @@ Text:Cast Reset only during an opponent's turn after his or her upkeep step.\r\n
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reset.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/73.jpg
 End

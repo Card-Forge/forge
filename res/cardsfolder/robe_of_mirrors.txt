@@ -6,4 +6,6 @@ K:Enchant creature
 K:enPump:Shroud
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/robe_of_mirrors.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/43.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/101.jpg
 End

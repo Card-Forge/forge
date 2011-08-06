@@ -7,4 +7,5 @@ K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:MakeToken-Zombie-B-2-2-N
 K:WheneverKeyword:PermanentIntoGraveyard:Type/Cleric:Play:MakeToken-Zombie-B-2-2-None-/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever another Cleric is put into a graveyard from the battlefield, put a 2/2 black Zombie creature token onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotlung_reanimator.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/164.jpg
 End

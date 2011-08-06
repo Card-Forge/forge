@@ -6,4 +6,5 @@ PT:2/1
 K:abDrawCardsTgt T:1:Drawback$TgtDiscard/1:Target player draws a card, then discards a card.:Reckless Scholar - target player draws a card and discards a card
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_scholar.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/60.jpg
 End

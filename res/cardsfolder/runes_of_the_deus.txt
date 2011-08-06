@@ -9,4 +9,5 @@ K:stPumpEnchanted:Creature.Green:1/1/Trample:No Condition:As long as enchanted c
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runes_of_the_deus.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/215.jpg
 End

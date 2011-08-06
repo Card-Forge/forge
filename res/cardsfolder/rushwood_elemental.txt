@@ -7,4 +7,5 @@ K:Trample
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:+1+1 Counters/1:Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may put a +1/+1 counter on Rushwood Elemental.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rushwood_elemental.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/264.jpg
 End

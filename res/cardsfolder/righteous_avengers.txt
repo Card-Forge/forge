@@ -6,4 +6,5 @@ PT:3/1
 K:Plainswalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1632.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/203.jpg
 End

@@ -6,4 +6,5 @@ PT:1/1
 K:abDamageTgtC T:1:Drawback$LoseLifeTgtCtrlr/1:Rakdos Ickspitter deals 1 damage to target creature and that creature's controller loses 1 life.:Rakdos Ickspitter - deal damage to creature and its controller loses life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_ickspitter.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/128.jpg
 End

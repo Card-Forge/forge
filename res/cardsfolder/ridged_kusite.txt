@@ -6,4 +6,5 @@ PT:1/1
 K:abPumpTgtC 1 B T Discard<1/Any>:+1/+0/First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ridged_kusite.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/78.jpg
 End

@@ -7,4 +7,5 @@ K:StaticEffect:Play:Permanents you Control:Keyword/Protection from white:Type.Cr
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/righteous_war.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/134.jpg
 End

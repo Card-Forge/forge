@@ -7,4 +7,8 @@ SVar:RemAIDeck:True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73573.jpg
+SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/113.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/108.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/58.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/173.jpg
 End

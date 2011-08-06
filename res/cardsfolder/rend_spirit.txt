@@ -5,4 +5,5 @@ Text:Destroy target Spirit.
 K:spDestroyTgt:Creature.Spirit
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rend_spirit.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/141.jpg
 End

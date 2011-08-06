@@ -6,4 +6,5 @@ PT:4/3
 K:abDestroyTgtV T:Creature.enchanted:Destroy target enchanted creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ramses_overdark.jpg
+SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/292.jpg
 End

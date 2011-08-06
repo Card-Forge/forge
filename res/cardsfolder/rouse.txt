@@ -7,4 +7,5 @@ A:SP$Pump | Cost$ PayLife<2> | ValidTgts$ Creature | NumAtt$ +2 | TgtPrompt$ Sel
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rouse.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/157.jpg
 End

@@ -6,4 +6,8 @@ K:Enchant creature
 K:enPump:First Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reflexes.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/213.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/208.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/211.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/213.jpg
 End

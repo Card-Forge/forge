@@ -5,4 +5,5 @@ Text:Destroy target non-Spirit creature.
 K:spDestroyTgt:Creature.nonSpirit
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rend_flesh.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/140.jpg
 End

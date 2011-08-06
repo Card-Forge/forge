@@ -6,4 +6,5 @@ PT:4/3
 K:Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reveillark.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/22.jpg
 End

@@ -6,4 +6,5 @@ PT:3/3
 K:Exalted
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rafiq_of_the_many.jpg
+SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/185.jpg
 End

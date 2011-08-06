@@ -7,4 +7,5 @@ K:Persist
 K:Wither
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rendclaw_trow.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/127.jpg
 End

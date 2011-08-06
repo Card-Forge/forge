@@ -7,4 +7,5 @@ K:abTapTgt 1 T:Artifact,Creature,Land:Tap target artifact, creature, or land.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_gix.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/131.jpg
 End

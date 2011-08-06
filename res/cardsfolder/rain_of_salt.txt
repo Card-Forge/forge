@@ -5,4 +5,6 @@ Text:no text
 A:SP$Destroy | Cost$ 4 R R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy two target lands.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_salt.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/206.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/153.jpg
 End

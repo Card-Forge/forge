@@ -6,4 +6,5 @@ Text:Put two 1/1 white Soldier creature tokens into play.
 A:SP$Token | Cost$ 1 W | TokenAmount$ 2 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ Controller | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48103.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/mi/16.jpg
 End

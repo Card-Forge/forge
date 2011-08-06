@@ -7,4 +7,5 @@ K:Flying
 K:Haste
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39859.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/224.jpg
 End

@@ -6,4 +6,5 @@ PT:2/4
 K:SearchRebel:6
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ramosian_commander.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/36.jpg
 End

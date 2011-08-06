@@ -6,4 +6,5 @@ A:SP$Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enc
 K:Flashback:G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ray_of_revelation.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/20.jpg
 End

@@ -6,4 +6,6 @@ K:spDamageAll:Creature.attacking:1:Rain of Blades deals 1 damage to each attacki
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_blades.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/35.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/20.jpg
 End

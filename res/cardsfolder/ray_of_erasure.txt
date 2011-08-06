@@ -6,4 +6,5 @@ A:SP$Mill | Cost$ U | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a play
 K:Draw a card at the beginning of the next turn's upkeep.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ray_of_erasure.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/93.jpg
 End

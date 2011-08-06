@@ -6,4 +6,5 @@ PT:4/3
 K:First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ramirez_depietro.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/291.jpg
 End

@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPump:+2/-1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riot_spikes.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/146.jpg
 End

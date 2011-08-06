@@ -6,4 +6,13 @@ PT:1/1
 K:abDestroyTgtV T:Creature.tapped:Destroy target tapped creature.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83235.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/159.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/32.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/41.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/159.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/174.jpg
+SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/116.jpg
+SetInfo:M10|Rare|http://magiccards.info/scans/en/m10/110.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/33.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/32.jpg
 End

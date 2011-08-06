@@ -7,4 +7,5 @@ K:First Strike
 A:AB$Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ranger_en_vec.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/343.jpg
 End

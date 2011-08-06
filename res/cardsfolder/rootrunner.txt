@@ -7,4 +7,5 @@ A:AB$Bounce | Cost$ G G Sac<1/CARDNAME> | ValidTgts$ Land | TgtPrompt$ Select ta
 K:Soulshift:3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootrunner.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/237.jpg
 End

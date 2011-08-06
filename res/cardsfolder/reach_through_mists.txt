@@ -6,6 +6,3 @@ A:SP$Draw | Cost$ U | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_through_mists.jpg
 End
-
-
-K:spDrawCards:1:Draw a card.:Reach Through Mists - Draw a card.

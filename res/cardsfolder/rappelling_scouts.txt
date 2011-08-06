@@ -11,4 +11,5 @@ K:abPump 2 W:Protection from red
 K:abPump 2 W:Protection from green
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rappelling_scouts.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/41.jpg
 End

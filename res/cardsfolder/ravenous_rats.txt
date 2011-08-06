@@ -5,4 +5,12 @@ Text:When Ravenous Rats comes into play, target opponent discards a card.
 PT:1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_rats.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/158.jpg
+SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/68.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/120.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po2/27.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/157.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/171.jpg
+SetInfo:P02|Common|http://magiccards.info/scans/en/po2/27.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/86.jpg
 End

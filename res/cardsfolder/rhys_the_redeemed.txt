@@ -4,7 +4,8 @@ Types:Legendary Creature Elf Warrior
 Text:no text
 PT:1/1
 #K:abMakeToken 2 GW T<>1<>Elf Warrior<>GW 1 1 Elf Warrior<>Controller<>G W<>Creature;Elf;Warrior<>1<>1<>None<>put a 1/1 green and white Elf Warrior creature token onto the battlefield.
-A:AB$Token | Cost$ 2 GW T | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ Controller | TokenColors$ Green,White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green and white Elf Warrior creature token onto the battlefield.  
+A:AB$Token | Cost$ 2 GW T | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ Controller | TokenColors$ Green,White | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green and white Elf Warrior creature token onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhys_the_redeemed.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/237.jpg
 End

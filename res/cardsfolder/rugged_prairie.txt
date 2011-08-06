@@ -9,4 +9,5 @@ K:WR, tap: add R R
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rugged_prairie.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/178.jpg
 End

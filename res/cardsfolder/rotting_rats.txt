@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1!DiscardCards/1:Cont
 K:Unearth:1 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotting_rats.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/51.jpg
 End

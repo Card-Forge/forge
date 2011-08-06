@@ -7,4 +7,5 @@ K:abDrawCards 2 U U T:X:Draw a card for each Wizard you control.:Riptide Directo
 SVar:X:Count$TypeYouCtrl.Wizard
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_director.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/50.jpg
 End

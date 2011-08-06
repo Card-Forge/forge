@@ -6,4 +6,5 @@ A:SP$Bounce | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22985.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/70.jpg
 End

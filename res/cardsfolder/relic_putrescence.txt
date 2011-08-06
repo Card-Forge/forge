@@ -5,4 +5,6 @@ Text:Whenever enchanted artifact becomes tapped, its controller gets a poison co
 K:Enchant Artifact Curse
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_putrescence.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/77.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/77.jpg
 End

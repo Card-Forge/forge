@@ -5,4 +5,12 @@ Text:Counter target creature spell.
 K:spCounter:Spell:Type(Creature):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83228.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/95.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/72.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/117.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/95.jpg
+SetInfo:9ED|Common|http://magiccards.info/scans/en/9e/93.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/100.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/94.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/49.jpg
 End

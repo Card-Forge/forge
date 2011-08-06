@@ -6,4 +6,5 @@ A:SP$Regenerate | Cost$ 2 G | Tgt$ TgtC | SpellDescription$ Regenerate target cr
 K:Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/refresh.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/264.jpg
 End

@@ -7,4 +7,5 @@ K:abTapTgt 1 T:Land:Tap target land.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rishadan_port.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/324.jpg
 End

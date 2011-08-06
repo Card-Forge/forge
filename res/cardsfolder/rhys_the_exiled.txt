@@ -7,4 +7,5 @@ K:WheneverKeyword:Attacks:Self:Play:ModifyLife/ControlledAmountType/Elf:Controll
 A:AB$Regenerate | Cost$ B Sac<1/Elf> | SpellDescription$ Regenerate Rhys the Exiled.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhys_the_exiled.jpg
+SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/135.jpg
 End

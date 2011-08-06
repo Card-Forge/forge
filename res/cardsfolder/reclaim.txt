@@ -6,4 +6,6 @@ A:SP$Retrieve | Cost$ G | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reclaim.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/120.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/263.jpg
 End

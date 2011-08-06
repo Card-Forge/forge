@@ -6,4 +6,6 @@ PT:1/2
 K:abPump R:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ridgeline_rager.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/215.jpg
+SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/100.jpg
 End

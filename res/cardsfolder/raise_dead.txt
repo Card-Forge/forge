@@ -5,4 +5,15 @@ Text:no text
 A:SP$Retrieve | Cost$ B | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83220.jpg
+SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/157.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/31.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/157.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/40.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/30.jpg
+SetInfo:P02|Common|http://magiccards.info/scans/en/po2/26.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/152.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/32.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/53.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/85.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/31.jpg
 End

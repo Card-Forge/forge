@@ -8,4 +8,7 @@ K:Comes into play tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruins_of_trokair.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/438.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/327.jpg
+SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/185.jpg
 End

@@ -7,4 +7,5 @@ SVar:PlayMain1:TRUE
 SVar:AntiBuffedBy:Sliver
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reflex_sliver.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/138.jpg
 End

@@ -6,4 +6,5 @@ PT:1/1
 K:abDamageTgtCP T:1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_hunter.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/82.jpg
 End

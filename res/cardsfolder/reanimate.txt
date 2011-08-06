@@ -4,4 +4,5 @@ Types:Sorcery
 Text:Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its converted mana cost.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reanimate.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/45.jpg
 End

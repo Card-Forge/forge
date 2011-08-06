@@ -6,4 +6,5 @@ PT:4/4
 K:WheneverKeyword:BecomesBlocked:Self:Play:StatsPumpEOT/1/1:Self:ASAP:No_Condition:No Special Condition:Whenever Rabid Wolverines becomes blocked by a creature, Rabid Wolverines gets +1/+1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rabid_wolverines.jpg
+SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/119.jpg
 End

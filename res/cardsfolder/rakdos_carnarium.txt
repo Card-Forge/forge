@@ -8,4 +8,5 @@ K:Tap: add B R
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_carnarium.jpg
+SetInfo:DIS|Common|http://magiccards.info/scans/en/di/178.jpg
 End
