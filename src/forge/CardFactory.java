@@ -3951,8 +3951,11 @@ public class CardFactory implements NewConstants {
 	             	   String color = "";
 	             	   if (card.getController().equals(Constant.Player.Human)) {
 
-	             		   String[] colors = Constant.Color.Colors;
-	             		   colors[colors.length-1] = null;
+	             		   // String[] colors = Constant.Color.Colors;
+	             		   // colors[colors.length-1] = null;
+	             		   
+	             		   // You can no longer choose to gain "protection from null".
+	             		   String[] colors = Constant.Color.onlyColors;
 
 	             		   Object o = AllZone.Display.getChoice("Choose color", colors);
 	             		   color = (String)o;
