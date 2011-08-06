@@ -2,7 +2,8 @@ Name:Disenchant
 ManaCost:1 W
 Types:Instant
 Text:Destroy target artifact or enchantment.
-K:spDestroyTgt:Artifact,Enchantment
+#K:spDestroyTgt:Artifact,Enchantment
+A:SP$Destroy|Cost$1 W|ValidTgts$Artifact,Enchantment|TgtPrompt$Select target artifact or enchantment|SpellDescription$Destroy target artifact or enchantment.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disenchant.jpg
 End
