@@ -2856,6 +2856,7 @@ res/cardsfolder/heros_resolve.txt -text svneol=native#text/plain
 res/cardsfolder/hex.txt -text svneol=native#text/plain
 res/cardsfolder/hexplate_golem.txt -text svneol=native#text/plain
 res/cardsfolder/hibernation.txt -text svneol=native#text/plain
+res/cardsfolder/hibernation_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/hickory_woodlot.txt -text svneol=native#text/plain
 res/cardsfolder/hidden_path.txt -text svneol=native#text/plain
 res/cardsfolder/hideous_end.txt -text svneol=native#text/plain
