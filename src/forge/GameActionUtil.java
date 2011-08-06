@@ -67,7 +67,7 @@ public class GameActionUtil {
 		upkeep_Festering_Wound_Damage();
 		upkeep_Greener_Pastures();
 		upkeep_Squee();
-		upkeep_Sporesower_Thallid();
+		//upkeep_Sporesower_Thallid();
 		upkeep_Dragonmaster_Outcast();
 		upkeep_Scute_Mob();
 		upkeep_Lichenthrope();
@@ -6029,7 +6029,7 @@ public class GameActionUtil {
 		} // if creatures > 0
 	}//Scute Mob
 
-
+	/*
 	private static void upkeep_Sporesower_Thallid() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
@@ -6058,7 +6058,7 @@ public class GameActionUtil {
 				AllZone.Stack.add(ability);
 			} // for
 		} // if creatures > 0
-	}
+	}*/
 
 	private static void upkeep_Lichenthrope() {
 		final Player player = AllZone.Phase.getPlayerTurn();
