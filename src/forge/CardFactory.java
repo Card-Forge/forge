@@ -7753,11 +7753,13 @@ public class CardFactory implements NewConstants {
                             setTargetCard((Card) check);
                         } 
                     } else {
+                    		if(creature.size() > 0) {
                             Card biggest = creature.get(0);
                             for(int i = 0; i < creature.size(); i++)
                                 if(biggest.getNetAttack() < creature.get(i).getNetAttack()) biggest = creature.get(i);                         
                             		setTargetCard(biggest);
                     				}
+                    }
                     Card c2 = getTargetCard();
                     PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController()); 	                        
                     if(AllZone.GameAction.isCardInZone(c2, grave)) {
