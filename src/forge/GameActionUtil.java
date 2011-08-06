@@ -35,6 +35,7 @@ public class GameActionUtil {
 		upkeep_Drop_of_Honey();
 		upkeep_Planar_Collapse();
 		upkeep_Genesis();
+		upkeep_Demonic_Hordes();
 		upkeep_Phyrexian_Arena();
 		upkeep_Fallen_Empires_Storage_Lands();
 		upkeep_Master_of_the_Wild_Hunt();
@@ -4107,6 +4108,98 @@ public class GameActionUtil {
 			}
 		}
 	}//upkeep_Genesis
+	
+	
+//upkeep_Demonic_Hordes
+	
+	private static void upkeep_Demonic_Hordes() {
+		
+		/*
+		 * At the beginning of your upkeep, unless you pay BBB, 
+		 * tap Demonic Hordes and sacrifice a land of an opponent's choice.
+		 */
+		
+		final Player player = AllZone.Phase.getPlayerTurn();
+		final CardList cards = AllZoneUtil.getPlayerCardsInPlay(player, "Demonic Hordes");
+		
+		for(int i = 0; i < cards.size(); i++) {
+			
+			final Card c = cards.get(i);
+			
+			final Ability noPay = new Ability(c, "B B B") {
+				private static final long serialVersionUID = 4820011390853920644L;
+				@Override
+					public void resolve() {
+						PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+						PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
+						CardList playerLand = AllZoneUtil.getPlayerLandsInPlay(player);
+						
+						if((c.getController().equals(AllZone.ComputerPlayer)) && (playerLand.size() > 0)) {
+							AllZone.InputControl.setInput(CardFactoryUtil.input_sacrificePermanent(playerLand, c.getName()+" - Select a land to sacrifice."));
+							play.remove(playerLand);
+							graveyard.add(playerLand);
+							c.tap();
+						}
+						else {
+							if((c.getController().equals(AllZone.ComputerPlayer)) && (playerLand.size() == 0)) {
+								c.tap();
+							}
+						}
+						if((c.getController().equals(AllZone.HumanPlayer)) && (playerLand.size() > 0)) {
+								Card target = CardFactoryUtil.AI_getBestLand(playerLand);
+								play.remove(target);
+								graveyard.add(target);
+								c.tap();
+							}
+						else {
+							if((c.getController().equals(AllZone.HumanPlayer)) && (playerLand.size() == 0)) {
+								c.tap();
+							}
+						}
+					} //end resolve()
+			}; //end noPay ability
+			
+			if(c.getController().equals(AllZone.HumanPlayer)) {
+				String[] choices = {"Yes", "No"};
+				Object choice = AllZone.Display.getChoice("Pay Demonic Hordes upkeep cost?", choices);
+				if(choice.equals("Yes")) {
+					final Ability pay = new Ability(c, "0") {
+						private static final long serialVersionUID = 4820011440853920644L;
+						public void resolve() {
+							if (AllZone.getZone(c).is(Constant.Zone.Play)) {
+								GameActionUtil.payManaDuringAbilityResolve("Pay cost for " + c + "\r\n", noPay.getManaCost(), Command.Blank, Command.Blank);
+							}
+						} //end resolve()
+					}; //end pay ability
+					pay.setStackDescription("Demonic Hordes - Upkeep Cost");
+					AllZone.Stack.add(pay);
+				} //end choice
+				else {
+					StringBuilder sb = new StringBuilder();
+					sb.append(c.getName()).append(" - is tapped and you must sacrifice a land of opponent's choice");
+					noPay.setStackDescription(sb.toString());
+					AllZone.Stack.add(noPay);
+				}
+			} //end human
+			else { //computer
+				if((c.getController().equals(AllZone.ComputerPlayer) && (ComputerUtil.canPayCost(noPay)))) {
+					final Ability computerPay = new Ability(c, "0") {
+						private static final long serialVersionUID = 4820011440852868644L;
+						public void resolve() {
+							ComputerUtil.payManaCost(noPay);
+						}
+					};
+					computerPay.setStackDescription("Computer pays Demonic Hordes upkeep cost");
+					AllZone.Stack.add(computerPay);
+				} 
+				else {
+					AllZone.Stack.add(noPay);
+				}
+			} //end computer
+			
+		} //end for loop
+			
+	} //upkeep_Demonic_Hordes
 
 	//END UPKEEP CARDS
 
