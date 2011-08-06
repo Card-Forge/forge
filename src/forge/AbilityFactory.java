@@ -288,6 +288,14 @@ public class AbilityFactory {
 			}
 		}
 		
+		if (API.equals("Destroy")){
+			if (isAb)
+				SA = AbilityFactory_Destroy.createAbilityDestroy(this);
+			if (isSp){
+				SA = AbilityFactory_Destroy.createSpellDestroy(this);
+			}
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
         if (hasSpDesc)
