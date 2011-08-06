@@ -4224,9 +4224,10 @@ public class CardFactory implements NewConstants {
     		if (tmpCost[0].equals(""))
     			abTgt = null;
     		else{
-    			abTgt = new Target(tmpCost[0]);
-    			abTgt.setValidTgts("player".split(","));
-    			abTgt.setVTSelection("Target a player to draw cards");
+    			//abTgt = new Target(tmpCost[0]);
+    			//abTgt.setValidTgts("player".split(","));
+    			//abTgt.setVTSelection("Target a player to draw cards");
+    			abTgt = new Target("TgtP");
     		}
     		
        		final Ability_Cost abCost = new Ability_Cost(tmpCost[1], card.getName(), true);
