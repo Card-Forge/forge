@@ -15196,8 +15196,8 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public void showMessage() {
-                    card.addSpellAbility(ability);
-                    ability.setDescription("Sacrifice " + cardName + ": destroy target artifact or enchantment.");
+                    //card.addSpellAbility(ability);
+                    //ability.setDescription("Sacrifice " + cardName + ": destroy target artifact or enchantment.");
                     
                     PlayerZone hplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
                     PlayerZone cplay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
