@@ -1,3 +1,12 @@
+Swords to Plowshares
+W
+Instant
+Exile target creature. Its controller gains life equal to its power.
+spBounceTgt:Creature:Exile:Drawback$TgtCtrlrGainLife/dX
+SVar:dX:Count$TgtCardPower
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/br/en-us/card21172.jpg
+
 Call to Heel
 1 U
 Instant
@@ -29834,13 +29843,6 @@ Equipped creature gets +2/+0 and has first strike, vigilance, trample, and haste
 eqPump 3:+2/+0/First Strike & Vigilance & Trample & Haste
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_vengeance.jpg
-
-Swords to Plowshares
-W
-Instant
-Remove target creature from the game. Its controller gains life equal to its power.
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/br/en-us/card21172.jpg
 
 Sygg, River Guide
 W U

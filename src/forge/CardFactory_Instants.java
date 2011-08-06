@@ -338,6 +338,7 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
         
+/* converted to spBounceTgt keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Swords to Plowshares")) {
             SpellAbility spell = new Spell(card) {
@@ -383,7 +384,8 @@ public class CardFactory_Instants {
             
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
-
+*/
+        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Crib Swap")) {
