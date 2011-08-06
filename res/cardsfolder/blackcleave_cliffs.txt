@@ -6,5 +6,5 @@ K:tap: add B
 K:tap: add R
 K:CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
 SVar:Rarity:Rare
-SVar:Pcture:http://www.wizards.com/global/images/magic/general/blackcleave_cliffs.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blackcleave_cliffs.jpg
 End
