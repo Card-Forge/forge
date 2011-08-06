@@ -18475,6 +18475,32 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Dreamstone Hedron")) {
+        	final Ability_Tap ability = new Ability_Tap(card, "3") {
+				private static final long serialVersionUID = 4493940591347356773L;
+
+				@Override
+        		public boolean canPlayAI() {
+					PlayerZone lib = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+					return lib.size() > 0;
+        		}
+
+				@Override
+				public void resolve() {
+					final String player = card.getController();
+					AllZone.GameAction.sacrifice(card);
+					AllZone.GameAction.drawCard(player);
+					AllZone.GameAction.drawCard(player);
+					AllZone.GameAction.drawCard(player);
+				}
+        	};
+        	ability.setDescription("3, tap: Sacrifice Dreamstone Hedron: Draw 3 cards.");
+        	ability.setStackDescription(cardName+" - Draw 3 cards.");
+        	ability.setBeforePayMana(new Input_PayManaCost(ability));
+        	card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

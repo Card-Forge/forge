@@ -1,3 +1,9 @@
+Dreamstone Hedron
+6
+Artifact
+no text
+tap: add 3
+
 Beastbreaker of Bala Ged
 1 G
 Creature Human Warrior
