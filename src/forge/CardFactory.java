@@ -19276,6 +19276,45 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Curse of Wizardry")) {
+            final Ability ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    if(card.getController().equals(Constant.Player.Human)) {
+                        
+                        String color = "";
+                        String[] colors = Constant.Color.Colors;
+                        colors[colors.length - 1] = null;
+                        
+                        Object o = AllZone.Display.getChoice("Choose color", colors);
+                        color = (String) o;
+                        card.setChosenColor(color);
+                    } else {
+                        CardList list = AllZoneUtil.getPlayerCardsInLibrary(Constant.Player.Human);
+                        list.add(AllZoneUtil.getPlayerHand(Constant.Player.Human));
+                        
+                        if(list.size() > 0) {
+                            String color = CardFactoryUtil.getMostProminentColor(list);
+                            if(!color.equals("")) card.setChosenColor(color);
+                            else card.setChosenColor("black");
+                        } else {
+                            card.setChosenColor("black");
+                        }
+                    }
+                }
+            };
+            Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = -6417019967914398902L;
+
+				public void execute() {
+                    AllZone.Stack.add(ability);
+                }
+            };//Command
+            ability.setStackDescription("As "+cardName+" enters the battlefield, choose a color.");
+            card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

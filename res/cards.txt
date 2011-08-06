@@ -1,3 +1,8 @@
+Curse of Wizardry
+2 B B
+Enchantment
+As Curse of Wizardry enters the battlefield, choose a color.  Whenever a player casts a spell of the chosen color, that player loses 1 life.
+
 Kor Line-Slinger
 1 W
 Creature Kor Scout

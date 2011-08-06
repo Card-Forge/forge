@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+curse_of_wizardry.jpg			http://www.wizards.com/global/images/magic/general/curse_of_wizardry.jpg
 kor_line_slinger.jpg			http://www.wizards.com/global/images/magic/general/kor_line_slinger.jpg
 dawnglare_invoker.jpg			http://www.wizards.com/global/images/magic/general/dawnglare_invoker.jpg
 perimeter_captain.jpg			http://www.wizards.com/global/images/magic/general/perimeter_captain.jpg

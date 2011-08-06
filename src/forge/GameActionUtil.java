@@ -193,7 +193,8 @@ public class GameActionUtil {
 		playCard_Enchantress_Draw(c);
 		playCard_Mold_Adder(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
-		playCard_Kor_Firewalker(c);       
+		playCard_Kor_Firewalker(c);
+		playCard_Curse_of_Wizardry(c);
 	}
 
 	public static void playCard_Kozilek(Card c)
@@ -2144,6 +2145,29 @@ public class GameActionUtil {
 		}                   
 
 	}//Kor Firewalker
+	
+	public static void playCard_Curse_of_Wizardry(final Card c) {
+		System.out.println("In curse of wizardry");
+		CardList list = AllZoneUtil.getCardsInPlay("Curse of Wizardry");
+
+		if(list.size() > 0){
+			ArrayList<String> cl=CardUtil.getColors(c);
+			
+				for (int i=0;i<list.size();i++) {
+					final Card card = list.get(i);
+					if(cl.contains(card.getChosenColor())) {
+					Ability ability = new Ability(card, "0") {
+						public void resolve() {
+							AllZone.GameAction.getPlayerLife(c.getController()).subtractLife(1);                      
+						} //resolve
+					};//ability
+					ability.setStackDescription(card.getName() + " - " + c.getController() + 
+							" played a "+card.getChosenColor()+" spell, " + c.getController()+" loses 1 life.");
+					AllZone.Stack.add(ability);
+				}
+			}//if
+		}//if
+	}//Curse of Wizardry
 
 
 	public static void executeDrawCardTriggeredEffects(String player) {
