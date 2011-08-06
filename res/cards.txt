@@ -1,3 +1,9 @@
+Fear
+B B
+Enchantment Aura
+Enchanted creature has fear.
+Enchant creature
+
 Fire-Field Ogre
 1 U B R
 Creature Ogre Mutant
@@ -9520,13 +9526,6 @@ Enchantment Aura
 Enchanted creature has shroud.
 Enchant creature
 enPump:Shroud
-
-Fear
-B B
-Enchantment Aura
-Enchanted creature has fear.
-Enchant creature
-enPump:Fear
 
 Battle Mastery
 2 W
