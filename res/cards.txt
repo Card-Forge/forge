@@ -1,3 +1,9 @@
+Hermit Druid
+1 G
+Creature Human Druid
+G, tap: Reveal cards from the top of your library until you reveal a basic land card. Put that card into your hand and all other cards revealed this way into your graveyard.
+1/1
+
 Bone Shredder
 2 B
 Creature Minion

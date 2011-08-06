@@ -5920,6 +5920,60 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Hermit Druid")) {
+            final SpellAbility ability = new Ability_Tap(card, "G") {
+				private static final long serialVersionUID = 5884624727757154056L;
+
+				@Override
+                public boolean canPlayAI() {
+                    // todo: figure out when the AI would want to use the Druid
+					return false;
+                }
+                
+                
+                @Override
+                public void resolve() {
+                	CardList library = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
+                	if(library.size() == 0) return;	// maybe provide some notification that library is empty?
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+
+					CardList revealed = new CardList();
+
+					Card basicGrab = null;
+					Card top;
+					int count = 0;
+					// reveal top card until library runs out or hit a basic land
+					while(basicGrab == null) {
+						top = library.get(count);
+						count++;
+						revealed.add(top);
+						lib.remove(top);
+						if (top.isBasicLand())
+							basicGrab = top;
+
+						if(count == library.size()) 
+							break;
+					}//while
+					AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
+					
+					if (basicGrab != null){
+						// put basic in hand
+						hand.add(basicGrab);
+						revealed.remove(basicGrab);
+					}
+					// place revealed cards in graveyard (todo: player should choose order)
+					for(Card c : revealed){
+						grave.add(c);
+					}
+                }
+            };
+            ability.setStackDescription("G, tap: Reveal cards until you reveal a basic land. Put that in your hand, and put the rest in your graveyard");
+            card.addSpellAbility(ability);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Sorceress Queen") || cardName.equals("Serendib Sorcerer")) {
             final Ability_Tap ability = new Ability_Tap(card) {
                 private static final long serialVersionUID = -6853184726011448677L;
