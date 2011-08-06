@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Human Wizard
 Text:All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay 1."
 PT:2/6
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_tabernacle.jpg
 SetInfo:PLC|Rare|http://magiccards.info/scans/en/pc/8.jpg
