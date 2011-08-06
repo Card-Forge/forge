@@ -10,6 +10,7 @@ SVar:SVar1:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget
 SVar:Trig2:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ SVar2 | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, that creature's controller loses life equal to its toughness.
 SVar:SVar2:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ X
 SVar:X:TriggeredCard$CardToughness
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shriveling_rot.jpg
 SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/54.jpg
