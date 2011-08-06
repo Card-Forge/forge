@@ -7,4 +7,5 @@ SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ichor_explosion.jpg
+SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/64.jpg
 End

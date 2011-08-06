@@ -7,4 +7,5 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigDamage:AB$DealDamage | Cost$ Sac<1/CARDNAME> | Defined$ TriggeredTarget | NumDmg$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_scamp.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/84.jpg
 End
