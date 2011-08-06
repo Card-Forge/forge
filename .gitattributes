@@ -5356,6 +5356,7 @@ res/cardsfolder/quietus_spike.txt -text svneol=native#text/plain
 res/cardsfolder/quill_slinger_boggart.txt svneol=native#text/plain
 res/cardsfolder/quilled_slagwurm.txt -text svneol=native#text/plain
 res/cardsfolder/quilled_sliver.txt svneol=native#text/plain
+res/cardsfolder/quirion_druid.txt svneol=native#text/plain
 res/cardsfolder/quirion_dryad.txt -text svneol=native#text/plain
 res/cardsfolder/quirion_explorer.txt -text svneol=native#text/plain
 res/cardsfolder/quirion_ranger.txt -text svneol=native#text/plain
