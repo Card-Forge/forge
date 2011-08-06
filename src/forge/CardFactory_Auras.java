@@ -525,13 +525,57 @@ class CardFactory_Auras {
                 public boolean canPlayAI() {
                 	if(card.getName().equals("Spreading Seas")
                 			|| card.getName().equals("Lingering Mirage")
-                			|| card.getName().equals("Sea's Claim"))
+                			|| card.getName().equals("Sea's Claim")
+                			|| card.getName().equals("Phantasmal Terrain"))
                 	{
                 		NewType[0] = "Island";
                 	}
                 	else if(card.getName().equals("Evil Presence") 
                 			||card.getName().equals("Tainted Well")) {
                 		NewType[0] = "Swamp";
+                	}
+                	else if(card.getName().equals("Convincing Mirage")
+                			|| card.getName().equals("Phantasmal Terrain")) {
+                		String[] LandTypes = new String[] { "Plains","Island","Swamp","Mountain","Forest"};
+                    	HashMap<String,Integer> humanLandCount = new HashMap<String,Integer>();
+            			CardList humanlands = new CardList(AllZone.Human_Play.getCards());
+            			humanlands = humanlands.getType("Land");
+            			humanlands = humanlands.filter(new CardListFilter() {
+                        	public boolean addCard(Card c) {
+                        		return c.getType().contains("Land");
+                        	}
+                        });
+            			
+            			for(int i=0;i<LandTypes.length;i++)
+            			{
+            				humanLandCount.put(LandTypes[i],0);
+            			}
+            			
+            			for(Card c:humanlands)
+            			{
+            				for(String singleType:c.getType())
+            				{
+            					if(CardUtil.isABasicLandType(singleType))
+            					{
+            						humanLandCount.put(singleType, humanLandCount.get(singleType)+1);
+            					}
+            				}
+            			}
+            			
+            			int minAt = 0;
+            			int minVal = Integer.MAX_VALUE;
+            			for(int i=0;i<LandTypes.length;i++)
+            			{
+            				if(getTargetCard().getType().contains(LandTypes[i])) continue;
+            				
+            				if(humanLandCount.get(LandTypes[i]) < minVal)
+            				{
+            					minVal = humanLandCount.get(LandTypes[i]);
+            					minAt = i;
+            				}
+            			}
+            			
+            			NewType[0] = LandTypes[minAt];
                 	}
                     CardList list = new CardList(AllZone.Human_Play.getCards());
                     list = list.getType("Land");
@@ -551,56 +595,13 @@ class CardFactory_Auras {
                 		NewType[0] = "Island";
                 	}
                 	else if(card.getName().equals("Evil Presence") 
-                			||card.getName().equals("Tainted Well")) {
+                			|| card.getName().equals("Tainted Well")) {
                 		NewType[0] = "Swamp";
                 	}
-                	else
-                	{
-                		String[] LandTypes = new String[] { "Plains","Island","Swamp","Mountain","Forest"};
-                		if(card.getController().equals(AllZone.ComputerPlayer))
-                		{
-                			HashMap<String,Integer> humanLandCount = new HashMap<String,Integer>();
-                			CardList humanlands = new CardList(AllZone.Human_Play.getCards());
-                			humanlands = humanlands.getType("Land");
-                			humanlands = humanlands.filter(new CardListFilter() {
-                            	public boolean addCard(Card c) {
-                            		return c.getType().contains("Land");
-                            	}
-                            });
-                			
-                			for(int i=0;i<LandTypes.length;i++)
-                			{
-                				humanLandCount.put(LandTypes[i],0);
-                			}
-                			
-                			for(Card c:humanlands)
-                			{
-                				for(String singleType:c.getType())
-                				{
-                					if(CardUtil.isABasicLandType(singleType))
-                					{
-                						humanLandCount.put(singleType, humanLandCount.get(singleType)+1);
-                					}
-                				}
-                			}
-                			
-                			int minAt = 0;
-                			int minVal = Integer.MAX_VALUE;
-                			for(int i=0;i<LandTypes.length;i++)
-                			{
-                				if(getTargetCard().getType().contains(LandTypes[i])) continue;
-                				
-                				if(humanLandCount.get(LandTypes[i]) < minVal)
-                				{
-                					minVal = humanLandCount.get(LandTypes[i]);
-                					minAt = i;
-                				}
-                			}
-                			
-                			NewType[0] = LandTypes[minAt];
-                		}
-                		else
-                		{
+                	else if(card.getName().equals("Convincing Mirage")
+                			|| card.getName().equals("Phantasmal Terrain")) {
+                		//Only query player, AI will have decided already.
+                		if(card.getController() == AllZone.HumanPlayer) {
                 			NewType[0] = AllZone.Display.getChoice("Select land type.", "Plains","Island","Swamp","Mountain","Forest");
                 		}
                 	}
