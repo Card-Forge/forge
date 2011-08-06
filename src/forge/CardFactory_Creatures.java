@@ -20377,6 +20377,42 @@ public class CardFactory_Creatures {
         }
         //*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        if (cardName.equals("Roc Egg")) {
+            final SpellAbility ability = new Ability(card, "0") {
+            	
+                @Override
+                public void resolve() {
+                    CardFactoryUtil.makeToken("Bird", "W 3 3 Bird", card, "W", new String[] {"Creature", "Bird"},
+                            3, 3, new String[] {"Flying"});
+                }
+            }; //ability
+            
+            StringBuffer sb = new StringBuffer();
+            sb.append(cardName).append(" - Put a 3/3 white Bird creature token with flying onto the battlefield.");
+            ability.setStackDescription(sb.toString());
+
+            final Command createBird = new Command() {
+                
+				private static final long serialVersionUID = 5899334489679688989L;
+
+				public void execute() {
+                    AllZone.Stack.add(ability);
+                }
+            };
+            
+            final Command destroy = new Command() {
+                
+				private static final long serialVersionUID = 159321399857094976L;
+
+				public void execute() {
+                    AllZone.EndOfTurn.addAt(createBird);
+                }
+            };
+            
+            card.addDestroyCommand(destroy);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

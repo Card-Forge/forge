@@ -1,3 +1,10 @@
+Roc Egg
+2 W
+Creature Bird
+When Roc Egg is put into a graveyard from the battlefield, put a 3/3 white Bird creature token with flying onto the battlefield.
+0/3
+Defender
+
 Sleeper's Robe
 U B
 Enchantment Aura
