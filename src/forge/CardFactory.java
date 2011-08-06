@@ -18861,6 +18861,51 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("All is Dust")) {
+        	/*
+        	 * Each player sacrifices all colored permanents he or she controls.
+        	 */
+        	SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -8228522411909468245L;
+
+				@Override
+        		public void resolve() {
+        			CardList all = AllZoneUtil.getCardsInPlay();
+        			all = all.filter(colorless);
+
+        			CardListUtil.sortByIndestructible(all);
+        			CardListUtil.sortByDestroyEffect(all);
+
+        			for(Card c: all) {
+        				AllZone.GameAction.sacrifice(c);
+        			}
+        		}// resolve()
+
+        		@Override
+        		public boolean canPlayAI() {
+        			//same basic AI as Wrath of God, Damnation, Consume the Meek, etc.
+        			CardList human = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+        			human = human.filter(colorless);
+        			CardList computer = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+        			computer = computer.filter(colorless);
+
+        			// the computer will at least destroy 2 more human permanents
+        			return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
+        				(computer.size() < human.size() - 1
+        				|| (AllZone.Computer_Life.getLife() < 7 && !human.isEmpty()));
+        		}
+        		
+        		private CardListFilter colorless = new CardListFilter() {
+        			public boolean addCard(Card c) {
+    					return !CardUtil.getColors(c).contains(Constant.Color.Colorless) && !c.getName().equals("Mana Pool");
+    				}
+        		};
+        	};// SpellAbility
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }// *************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {

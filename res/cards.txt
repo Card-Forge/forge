@@ -1,3 +1,8 @@
+All is Dust
+7
+Tribal Sorcery Eldrazi
+Each player sacrifices all colored permanents he or she controls.
+
 Tranquil Path
 4 G
 Sorcery
