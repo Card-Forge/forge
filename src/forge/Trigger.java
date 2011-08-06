@@ -102,12 +102,23 @@ public abstract class Trigger {
 		return true;
 	}
 
-    public boolean phaseCheck()
+    public boolean phasesCheck()
     {
         if(mapParams.containsKey("TriggerPhases"))
         {
+            String phases = mapParams.get("TriggerPhases");
+
+        	if (phases.contains("->")){
+        		// If phases lists a Range, split and Build Activate String
+        		// Combat_Begin->Combat_End (During Combat)
+        		// Draw-> (After Upkeep)
+        		// Upkeep->Combat_Begin (Before Declare Attackers)
+
+        		String[] split = phases.split("->", 2);
+        		phases = AllZone.Phase.buildActivateString(split[0], split[1]);
+        	}
             ArrayList<String> triggerPhases = new ArrayList<String>();
-            for(String s :  mapParams.get("TriggerPhases").split(","))
+            for(String s :  phases.split(","))
 			{
 				triggerPhases.add(s);
 			}
