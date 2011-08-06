@@ -81,7 +81,7 @@ public class StaticEffects
 		cardToEffectsList.put("Lord of Extinction", new String[] {"Lord_of_Extinction"});
 		cardToEffectsList.put("Loxodon Punisher", new String[] {"Loxodon_Punisher"});
 		
-		cardToEffectsList.put("Magnivore", new String[] {"Magnivore"});
+		//cardToEffectsList.put("Magnivore", new String[] {"Magnivore"});
 		cardToEffectsList.put("Magus of the Tabernacle", new String[] {"Magus_of_the_Tabernacle"});
 		cardToEffectsList.put("Maraxus of Keld", new String[] {"Maraxus_of_Keld"});
 		//cardToEffectsList.put("Maro", new String[] {"Maro"});

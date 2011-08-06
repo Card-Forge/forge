@@ -15179,7 +15179,7 @@ public class GameActionUtil {
 		}
 
 	}; //terravore
-
+	/*
 	public static Command Magnivore                   = new Command() {
 
 		private static final long serialVersionUID = 6569701555927133445L;
@@ -15207,7 +15207,7 @@ public class GameActionUtil {
 		}
 
 	}; //magnivore
-
+	*/
 	public static Command Tarmogoyf                   = new Command() {
 		private static final long serialVersionUID = 5895665460018262987L;
 
@@ -16297,7 +16297,7 @@ public class GameActionUtil {
 		commands.put("Lord_of_Extinction", Lord_of_Extinction);
 		commands.put("Loxodon_Punisher", Loxodon_Punisher);
 		
-		commands.put("Magnivore", Magnivore);
+		//commands.put("Magnivore", Magnivore);
 		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		//commands.put("Maro", Maro);
