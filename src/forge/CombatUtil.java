@@ -41,6 +41,9 @@ public class CombatUtil {
         	}
         }
         
+        if (attacker.getKeyword().contains("Creatures with power less than CARDNAME's power can't block it.") &&
+    			attacker.getNetAttack() > blocker.getNetAttack()) return false;
+        
         if (hasKeyword) {    // The keyword "CARDNAME can't block creatures with power" ... is present
         	String tmpString = blocker.getKeyword().get(keywordPosition).toString();
         	String asSeparateWords[]  = tmpString.trim().split(" ");
@@ -60,13 +63,13 @@ public class CombatUtil {
 					&& blocker.getKeyword().contains("CARDNAME can't block creatures with power greater than CARDNAME's power.")) return false;
         	if (attacker.getNetAttack() >= blocker.getNetDefense()
         			&& blocker.getKeyword().contains("CARDNAME can't block creatures with power equal to or greater than CARDNAME's toughness.")) return false;
-        	if (attacker.getKeyword().contains("Creatures with power less than CARDNAME's power can't block it.") &&
-        			attacker.getNetAttack() > blocker.getNetAttack()) return false;
+        	
         		
         	
         }// hasKeyword CARDNAME can't block creatures with power ...
         
         // CARDNAME can't be blocked by creatures with power ...
+        
 
         int powerLimit2[] = {0};
         int keywordPosition2 = 0;
