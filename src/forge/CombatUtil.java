@@ -1909,6 +1909,21 @@ public class CombatUtil {
             
             AllZone.EndOfCombat.addAt(atEOC);
         }
+        
+        else if (b.getName().equals("Alaborn Zealot")) {
+        	final Card blocker = b; 
+        	final Card attacker = a;
+        	final Ability ability = new Ability(b, "0") {
+        		@Override
+        		public void resolve() {
+        			AllZone.GameAction.destroy(attacker);
+        			AllZone.GameAction.destroy(blocker);
+        		}
+        	};
+        	
+        	ability.setStackDescription(b + " - destroy attacking creature.");
+        	AllZone.Stack.add(ability);
+        }
 
         else if(b.getName().equals("AEther Membrane") || b.getName().equals("Aether Membrane") || b.getName().equals("Wall of Tears")) {
             final Card attacker = a;

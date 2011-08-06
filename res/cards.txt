@@ -1,3 +1,9 @@
+Alaborn Zealot
+W
+Creature Human Soldier
+When Alaborn Zealot blocks a creature, destroy that creature and Alaborn Zealot.
+1/1
+
 Dread Warlock
 1 B B
 Creature Human Wizard
