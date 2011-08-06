@@ -464,8 +464,11 @@ public class AbilityFactory_ChangeZone {
 		HashMap<String,String> params = af.getMapParams();
 
 		ArrayList<Player> fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-		if (params.containsKey("Chooser"))
-			fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Chooser"), sa);
+		if (params.containsKey("Chooser")) {
+			if (params.get("Chooser").equals("Targeted") && af.getAbTgt().getTargetPlayers() != null)
+				fetchers = af.getAbTgt().getTargetPlayers();
+			else fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Chooser"), sa);
+		}
 
 		for(Player player : fetchers){
 			if (player.isComputer()){
