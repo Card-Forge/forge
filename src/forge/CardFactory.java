@@ -15653,6 +15653,8 @@ public class CardFactory implements NewConstants {
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
     
+    
+/*
   //*************** START *********** START **************************
     else if(cardName.equals("Shatter"))
     {
@@ -15705,7 +15707,9 @@ public class CardFactory implements NewConstants {
       spell.setBeforePayMana(runtime);
       card.addSpellAbility(spell);
       }//*************** END ************ END **************************
+*/
     
+/*
     //*************** START *********** START **************************
     else if(cardName.equals("Disenchant") || cardName.equals("Naturalize"))
     {
@@ -15800,7 +15804,9 @@ public class CardFactory implements NewConstants {
       spell.setBeforePayMana(runtime);
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
+*/
     
+/*
   //*************** START *********** START **************************
     else if(cardName.equals("Demystify"))
     {
@@ -15848,6 +15854,7 @@ public class CardFactory implements NewConstants {
       spell.setBeforePayMana(runtime);
       card.addSpellAbility(spell);
     }//*************** END ************ END **************************
+*/
 
 
     //*************** START *********** START **************************

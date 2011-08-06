@@ -8540,6 +8540,7 @@ Shatter
 1 R
 Instant
 Destroy target Artifact.
+spDestroyTgt:Artifact
 
 Loxodon Hierarch
 2 G W
@@ -10890,16 +10891,19 @@ Naturalize
 1 G
 Instant
 Destroy target artifact or enchantment.
+spDestroyTgt:Artifact,Enchantment
 
 Disenchant
 1 W
 Instant
 Destroy target artifact or enchantment.
+spDestroyTgt:Artifact,Enchantment
 
 Demystify
 W
 Instant
 Destroy target enchantment.
+spDestroyTgt:Enchantment
 
 Azimaet Drake
 2 U

@@ -18,6 +18,14 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+stasis.jpg		http://www.wizards.com/global/images/magic/general/stasis.jpg
+cosmic_horror.jpg		http://www.wizards.com/global/images/magic/general/cosmic_horror.jpg
+force_of_nature.jpg		http://www.wizards.com/global/images/magic/general/force_of_nature.jpg
+krosan_cloudscraper.jpg		http://www.wizards.com/global/images/magic/general/krosan_cloudscraper.jpg
+kami_of_the_tended_garden.jpg		http://www.wizards.com/global/images/magic/general/kami_of_the_tended_garden.jpg
+junun_efreet.jpg		http://www.wizards.com/global/images/magic/general/junun_efreet.jpg
+hungry_mist.jpg		http://www.wizards.com/global/images/magic/general/hungry_mist.jpg
+child_of_gaea.jpg		http://www.wizards.com/global/images/magic/general/child_of_gaea.jpg
 burning_fields.jpg		http://www.wizards.com/global/images/magic/general/burning_fields.jpg
 searing_flesh.jpg		http://www.wizards.com/global/images/magic/general/searing_flesh.jpg
 eternal_flame.jpg		http://www.wizards.com/global/images/magic/general/eternal_flame.jpg
