@@ -5,7 +5,7 @@ Text:no text
 PT:1/3
 K:stPumpAll:Snake.Other+YouCtrl:0/1:no Condition:Other Snake creatures you control get +0/+1.
 K:stPumpAll:Shaman.YouCtrl:0/0/SVar=Mana:no Condition:Shamans you control have "Tap: Add G G to your mana pool."
-SVar:Mana:AB$Mana | Cost$ T | Produce$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.
+SVar:Mana:AB$Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add G G to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sachi_daughter_of_seshiro.jpg
