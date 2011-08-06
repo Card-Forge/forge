@@ -2487,6 +2487,7 @@ class CardFactory_Planeswalkers {
                     final int boost = 1;
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
                     CardList list = new CardList(play.getCards());
+                    list = list.getType("Creature");
                     
                     for(int i = 0; i < list.size(); i++) {
                         final Card[] target = new Card[1];
