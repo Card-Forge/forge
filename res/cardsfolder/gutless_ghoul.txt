@@ -1,0 +1,9 @@
+Name:Gutless Ghoul
+ManaCost:2 B
+Types:Snow Creature Zombie
+Text:no text
+PT:2/2
+K:abGainLife 1 Sac<1/Creature>:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gutless_ghoul.jpg
+End
