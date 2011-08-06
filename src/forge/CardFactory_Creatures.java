@@ -3103,6 +3103,8 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         
+        
+/* Converted to the etbDestroyTgt keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Shriekmaw")) {
             final CommandReturn getCreature = new CommandReturn() {
@@ -3235,7 +3237,9 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
-        
+*/
+
+/* Converted to the etbDestroyTgt keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Nekrataal") || cardName.equals("Bone Shredder")) {
         	// add creatures that destroy nonblack nonartifact without any additional weirdness like evoke
@@ -3336,6 +3340,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
+*/
         
         
       //*************** START *********** START **************************
@@ -10882,6 +10887,8 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         
+        
+/* Converted to the etbDestroyTgt keyword
         //*************** START *********** START **************************
         else if (cardName.equals("Angel of Despair")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -10954,7 +10961,9 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
-
+*/
+        
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Mystic Snake")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -13862,6 +13871,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
 
+/* Converted to the etbDestroyTgt keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Viridian Shaman")      || cardName.equals("Uktabi Orangutan")
                 || cardName.equals("Vithian Renegades") || cardName.equals("Keldon Vandals")
@@ -13933,8 +13943,9 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
+*/
         
-
+/* Converted to the etbDestroyTgt keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Avalanche Riders")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -13999,7 +14010,9 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
+*/
         
+/* Converted to the etbDestroyTgt keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Aven Cloudchaser") || cardName.equals("Cloudchaser Eagle")
                 || cardName.equals("Monk Realist")) {
@@ -14058,6 +14071,8 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Rakka Mar")) {

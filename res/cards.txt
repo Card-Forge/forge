@@ -1,3 +1,131 @@
+Angel of Despair
+3 W W B B
+Creature Angel
+When Angel of Despair enters the battlefield, destroy target permanent.
+5/5
+Flying
+etbDestroyTgt:Permanent
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card83869.jpg
+
+Avalanche Riders
+3 R
+Creature Human Nomad
+When Avalanche Riders enters the battlefield, destroy target land.
+2/2
+Haste
+Echo:3 R
+etbDestroyTgt:Land
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/avalanche_riders.jpg
+
+Aven Cloudchaser
+3 W
+Creature Bird Soldier
+When Aven Cloudchaser enters the battlefield, destroy target enchantment.
+2/2
+Flying
+etbDestroyTgt:Enchantment
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_cloudchaser.jpg
+
+Bone Shredder
+2 B
+Creature Minion
+When Bone Shredder enters the battlefield, destroy target nonartifact, nonblack creature.
+1/1
+Flying
+Echo:2B
+etbDestroyTgt:Creature.nonArtifact+nonBlack
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_shredder.jpg
+
+Cloudchaser Eagle
+3 W
+Creature Bird
+When Cloudchaser Eagle enters the battlefield, destroy target enchantment.
+2/2
+Flying
+etbDestroyTgt:Enchantment
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudchaser_eagle.jpg
+
+Keldon Vandals
+2 R
+Creature Human Rogue
+When Keldon Vandals enters the battlefield, destroy target artifact.
+4/1
+Echo:2 R
+etbDestroyTgt:Artifact
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_vandals.jpg
+
+Manic Vandal
+2 R
+Creature Human Warrior
+When Manic Vandal enters the battlefield, destroy target artifact.
+2/2
+etbDestroyTgt:Artifact
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/manic_vandal.jpg
+
+Monk Realist
+1 W
+Creature Human Monk Cleric
+When Monk Realist enters the battlefield, destroy target enchantment.
+1/1
+etbDestroyTgt:Enchantment
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/monk_realist.jpg
+
+Nekrataal
+2 B B
+Creature Human Assassin
+When Nekrataal enters the battlefield, destroy target nonartifact, nonblack creature. That creature can't be regenerated.
+2/1
+First Strike
+etbDestroyTgt:Creature.nonArtifact+nonBlack:NoRegen
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nekrataal.jpg
+
+Shriekmaw
+4 B
+Creature Elemental
+When Shriekmaw enters the battlefield, destroy target nonartifact, nonblack creature.
+3/2
+Fear
+etbDestroyTgt:Creature.nonArtifact.nonBlack
+SVar:Evoke:1 B
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekmaw.jpg
+
+Uktabi Orangutan
+2 G
+Creature Ape
+When Uktabi Orangutan enters the battlefield, destroy target artifact.
+2/2
+etbDestroyTgt:Artifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_orangutan.jpg
+
+Viridian Shaman
+2 G
+Creature Elf Shaman
+When Viridian Shaman enters the battlefield, destroy target artifact.
+2/2
+etbDestroyTgt:Artifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_shaman.jpg
+
+Vithian Renegades
+1 R G
+Creature Human Shaman
+When Vithian Renegades enters the battlefield, destroy target artifact.
+3/2
+etbDestroyTgt:Artifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vithian_renegades.jpg
+
 Acidic Slime
 3 G G
 Creature Ooze
@@ -1334,15 +1462,6 @@ CostChange:Player:More:B:Spell:black:All:NoSpecial
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/andradite_leech.jpg
 
-Angel of Despair
-3 W W B B
-Creature Angel
-When Angel of Despair comes into play, destroy target permanent.
-5/5
-Flying
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card83869.jpg
-
 Angel of Light
 4 W
 Creature Angel
@@ -2232,16 +2351,6 @@ WheneverKeyword:EntersBattleField:Type/Creature:Play:ModifyLife/1:ControllingPla
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_champion.jpg
 
-Avalanche Riders
-3 R
-Creature Human Nomad
-When Avalanche Riders enters the battlefield, destroy target land.
-2/2
-Haste
-Echo:3 R
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/avalanche_riders.jpg
-
 Avatar of Fury
 6 R R
 Creature Avatar
@@ -2288,15 +2397,6 @@ Flying
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_brigadier.jpg
-
-Aven Cloudchaser
-3 W
-Creature Bird Soldier
-When Aven Cloudchaser comes into play, destroy target enchantment.
-2/2
-Flying
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_cloudchaser.jpg
 
 Aven Envoy
 U
@@ -3911,16 +4011,6 @@ Equipped creature gets +1/+0.
 eqPump 1:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_saw.jpg
-
-Bone Shredder
-2 B
-Creature Minion
-When CARDNAME enters the battlefield, destroy target nonartifact, nonblack creature.
-1/1
-Flying
-Echo:2 B
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_shredder.jpg
 
 Bonesplitter
 1
@@ -5870,15 +5960,6 @@ Flying
 CARDNAME can block only creatures with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloud_sprite.jpg
-
-Cloudchaser Eagle
-3 W
-Creature Bird
-When Cloudchaser Eagle comes into play, destroy target enchantment.
-2/2
-Flying
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudchaser_eagle.jpg
 
 Cloudcrown Oak
 2 G G
@@ -16532,15 +16613,6 @@ abDamageTgtCP 4 R T Sac-Creature:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_necropolis.jpg
 
-Keldon Vandals
-2 R
-Creature Human Rogue
-When Keldon Vandals enters the battlefield, destroy target artifact.
-4/1
-Echo:2 R
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_vandals.jpg
-
 Keldon Warlord
 2 R R
 Creature Human Barbarian
@@ -18724,14 +18796,6 @@ enPump:+2/+2/CARDNAME can't block.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maniacal_rage.jpg
 
-Manic Vandal
-2 R
-Creature Human Warrior
-When Manic Vandal enters the battlefield, destroy target artifact.
-2/2
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/manic_vandal.jpg
-
 Manta Ray
 1 U U
 Creature Fish
@@ -19816,14 +19880,6 @@ When CARDNAME enters the battlefield,  return target enchantment card from your 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monk_idealist.jpg
 
-Monk Realist
-1 W
-Creature Human Monk Cleric
-When Monk Realist comes into play, destroy target enchantment.
-1/1
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/monk_realist.jpg
-
 Mons's Goblin Raiders
 R
 Creature Goblin
@@ -20634,15 +20690,6 @@ Counter target noncreature spell.
 spCounter:Spell:Type(Non-Creature):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/negate.jpg
-
-Nekrataal
-2 B B  
-Creature Human Assassin
-When CARDNAME enters the battlefield, destroy target nonartifact, nonblack creature. It can't be regenerated.
-2/1
-First Strike
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nekrataal.jpg
 
 Nema Siltlurker
 4 G
@@ -26923,15 +26970,6 @@ WheneverKeyword:Attacks:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrieking_specter.jpg
 
-Shriekmaw
-4 B  
-Creature Elemental
-When Shriekmaw comes into play, destroy target nonartifact, nonblack creature.
-3/2
-Fear
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shriekmaw.jpg
-
 Shu Cavalry
 2 W
 Creature Human Soldier
@@ -32371,14 +32409,6 @@ Cumulative upkeep:G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_efreet.jpg
 
-Uktabi Orangutan
-2 G
-Creature Ape
-When Uktabi Orangutan comes into play, destroy target artifact.
-2/2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/uktabi_orangutan.jpg
-
 Ulamog, the Infinite Gyre
 11
 Legendary Creature Eldrazi
@@ -33476,14 +33506,6 @@ SVar:X:Count$TypeOppCtrl.Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_lorebearers.jpg
 
-Viridian Shaman
-2 G
-Creature Elf Shaman
-When Viridian Shaman comes into play, destroy target artifact.
-2/2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_shaman.jpg
-
 Viridian Zealot
 G G
 Creature Elf Warrior
@@ -33596,14 +33618,6 @@ Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature to
 abPumpTgtC 0 Sac-Saproling:Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitaspore_thallid.jpg
-
-Vithian Renegades
-1 R G
-Creature Human Shaman
-When Vithian Renegades comes into play, destroy target artifact. 
-3/2
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vithian_renegades.jpg
 
 Vithian Stinger
 2 R
