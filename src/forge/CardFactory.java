@@ -9061,7 +9061,10 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if (cardName.equals("Renewed Faith")) { 
-
+            /**
+             *   The "You gain 6 life." ability is now done via a keyword. This code
+             *   object will give the controller 2 life when this card is cycled.
+             */
             card.addCycleCommand(new Command() {
                 private static final long serialVersionUID = 7699412574052780825L;
                     
@@ -9897,7 +9900,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
 
-//*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Wrath of God") || cardName.equals("Damnation")) {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -18728406578984546L;
@@ -16270,30 +16273,6 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         
-/*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Braidwood Cup")) {
-            final Ability_Tap ability = new Ability_Tap(card) {
-                private static final long serialVersionUID = -7784976576326683976L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    return AllZone.Phase.getPhase().equals(Constant.Phase.Main2);
-                }
-                
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.getPlayerLife(card.getController()).addLife(1);
-                }
-            };//SpellAbility
-            card.addSpellAbility(ability);
-            ability.setDescription("tap: You gain 1 life.");
-            ability.setStackDescription("Braidwood Cup - " + card.getController() + " gains 1 life.");
-            ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
-        }//*************** END ************ END **************************
-*/
-        
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Innocent Blood")) {
             final SpellAbility spell = new Spell(card) {
@@ -19568,35 +19547,6 @@ public class CardFactory implements NewConstants {
            ability.setBeforePayMana(CardFactoryUtil.input_targetType(ability, "Artifact;Creature;Land"));
         }//end Icy Manipulator
         //****************END*******END***********************
-
-        
-/*
-        //*************** START *********** START **************************
-        if(cardName.equals("Mind Twist") || cardName.equals("Mind Shatter")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 42470566751344693L;
-                
-                @Override
-                public boolean canPlayAI() {
-                	final int maxX = ComputerUtil.getAvailableMana().size() - 1;
-                    return ((cardName.equals("Mind Twist") && AllZone.Human_Hand.size() > 1 && maxX >= 2) || 
-                    		(cardName.equals("Mind Shatter") && AllZone.Human_Hand.size() > 1 && maxX >= 3));
-                }
-                
-                @Override
-                public void resolve() {
-                    String target = getTargetPlayer();
-                    for (int i =0; i<card.getXManaCostPaid();i++)
-                    	AllZone.GameAction.discardRandom(target);
-                }
-            };//SpellAbility
-            spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
-            spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
-*/
         
         
         //*************** START *********** START **************************
