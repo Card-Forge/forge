@@ -54,7 +54,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         */
 
         this.sourceCard = sourceCard;
-        this.orig = orig;
+        this.orig = (sourceCard.getName().isEmpty() ? orig : orig.replaceAll(sourceCard.getName(), "CARDNAME"));
         setDescription(orig);
         
         /*
@@ -79,7 +79,6 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         String[] parts = orig.split(":");
         Mana = parts[1];
         Mana = Mana.replaceAll(" add ", "");
-        setStackDescription("Add " + Mana + " to your mana pool.");
         Mana = Mana.replaceAll(" ", "");
         
         String cost = parts[0];
@@ -204,11 +203,12 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     public String Mana() {
         if(!orig.contains("for each")) return Mana;
         else {
-            String[] manaPart = orig.split(":");
+            /*String[] manaPart = orig.split(": add ");
             String m = manaPart[1];
             m = m.replaceAll(" add ", "");
-            //TODO: make this handle "multiple-mana symbol" cases, if they are ever needed
-            m = m.substring(0, 2);
+            //TOhaveDOne: make this handle "multiple-mana symbol" cases, if they are ever needed
+            m = m.substring(0, 2);*/
+        	String m = orig.split(": add ")[1].split(" to ")[0];
             
             String[] parts = orig.split(" for each ");
             int index = parts[1].indexOf(' ');

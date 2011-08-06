@@ -1322,7 +1322,7 @@ public class Card extends MyObservable {
     
     public void addExtrinsicKeyword(String s) {
         //if(!getKeyword().contains(s)){
-        if(s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, (getName().isEmpty() ? s : s.replaceAll(getName(), "CARDNAME"))) {
+        if(s.startsWith("tap: add")) manaAbility.add(new Ability_Mana(this, s) {
             private static final long serialVersionUID = 221124403788942412L;
         });
         else extrinsicKeyword.add((getName().isEmpty() ? s :s.replaceAll(getName(), "CARDNAME")));
