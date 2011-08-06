@@ -1,7 +1,9 @@
 Name:Archon of Justice
 ManaCost:3 W W
 Types:Creature Archon
-Text:When Archon of Justice is put into a graveyard from the battlefield, exile target permanent.
+Text:no text
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When Archon of Justice is put into a graveyard from the battlefield, exile target permanent.
+SVar:TrigChange:AB$ChangeZone | Cost$ 0 | ValidTgts$ Permanent | Origin$ Battlefield | Destination$ Exile
 PT:4/4
 K:Flying
 SVar:Rarity:Rare

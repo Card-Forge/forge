@@ -6115,67 +6115,7 @@ public class CardFactory_Creatures {
             };//Command
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Archon of Justice")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    if(getTargetCard() != null) {
-                        if(AllZone.GameAction.isCardInPlay(getTargetCard())
-                                && CardFactoryUtil.canTarget(card, getTargetCard())) {
-                            AllZone.GameAction.exile(getTargetCard());
-                        }
-                    }
-                }
-            };
-            ability.setStackDescription("Archon of Justice - Exile target permanent.");
-            
-            Command leavesPlay = new Command() {
-                private static final long serialVersionUID = 7552566264976488465L;
-                
-                public void execute() {
-                    if(card.getController().equals(AllZone.HumanPlayer)) AllZone.InputControl.setInput(CardFactoryUtil.input_targetPermanent(ability));
-                    else {
-                        /*
-                         *  if computer controlled Archon of Justice have it select the best creature, or enchantment, 
-                         *  or artifact, whatever the human controllers, and as a last option a card it controls.
-                         */
-                        Card temp;
-                        
-                        CardList human_list = new CardList(AllZone.Human_Battlefield.getCards());
-                        human_list.remove("Mana Pool");
-                        temp = CardFactoryUtil.AI_getBestCreature(human_list);
-                        if(temp != null) ability.setTargetCard(CardFactoryUtil.AI_getBestCreature(human_list));
-                        if(ability.getTargetCard() == null) {
-                            temp = CardFactoryUtil.AI_getBestEnchantment(human_list, card, false);
-                            if(temp != null) ability.setTargetCard(CardFactoryUtil.AI_getBestEnchantment(
-                                    human_list, card, true));
-                        }
-                        if(ability.getTargetCard() == null) {
-                            temp = CardFactoryUtil.AI_getBestArtifact(human_list);
-                            if(temp != null) ability.setTargetCard(CardFactoryUtil.AI_getBestArtifact(human_list));
-                        }
-                        if(ability.getTargetCard() == null) {
-                            if(human_list.size() == 0) {
-                                CardList computer_list = new CardList(AllZone.Computer_Battlefield.getCards());
-                                if(computer_list.size() == 0) {
-                                    return; //we have nothing in play to destroy.
-                                } else {
-                                    ability.setTargetCard(computer_list.get(0)); //should determine the worst card to destroy, but this case wont be hit much.
-                                }
-                            }
-                            ability.setTargetCard(human_list.get(0));
-                        }
-                        AllZone.Stack.add(ability);
-                    }
-                }//execute()
-            };//Command
-            card.addDestroyCommand(leavesPlay);
-        }//*************** END ************ END **************************
-        
-        
+
         //*************** START *********** START **************************
         else if(cardName.equals("Knight of the White Orchid")) {
             final Ability ability = new Ability(card, "0") {

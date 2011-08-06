@@ -67,7 +67,6 @@ public class GameActionUtil {
 		upkeep_Festering_Wound_Counter();
 		upkeep_Festering_Wound_Damage();
 		upkeep_Greener_Pastures();
-		upkeep_Wort();
 		upkeep_Squee();
 		upkeep_Sporesower_Thallid();
 		upkeep_Dragonmaster_Outcast();
@@ -9182,53 +9181,6 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		} // if creatures > 0
 	} // reya
-
-	private static void upkeep_Wort() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
-		PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-
-		CardList creatures = new CardList(graveyard.getCards());
-		creatures = creatures.getType("Goblin");
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Wort, Boggart Auntie");
-
-		if(creatures.size() > 0 && list.size() > 0) {
-			Ability ability = new Ability(list.get(0), "0") {
-				@Override
-				public void resolve() {
-					PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-
-					CardList creatures = new CardList(graveyard.getCards());
-					creatures = creatures.getType("Goblin");
-
-					if(player.equals(AllZone.HumanPlayer)) {
-						Object o = GuiUtils.getChoiceOptional("Pick a goblin to put into your hand",
-								creatures.toArray());
-						if(o != null) {
-							Card card = (Card) o;
-							graveyard.remove(card);
-							hand.add(card);
-						}
-					} else if(player.equals(AllZone.ComputerPlayer)) {
-						Card card = creatures.get(0);
-						graveyard.remove(card);
-						hand.add(card);
-
-					}
-				}
-
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Wort returns creature from graveyard to ").append(player).append("'s hand");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		} // if creatures > 0
-	} // Wort
 
     private static void upkeep_Nether_Spirit() {
         final Player player = AllZone.Phase.getPlayerTurn();
