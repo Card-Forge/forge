@@ -276,9 +276,6 @@ public class CombatUtil {
         if(blocker.getKeyword().contains("CARDNAME can block only creatures with flying.")
                 && !attacker.getKeyword().contains("Flying")) return false;
         
-        if (attacker.getKeyword().contains("CARDNAME can't be blocked by creatures with flying.")
-        		&& blocker.getKeyword().contains("Flying")) return false;
-        
         if(attacker.getKeyword().contains("Flying")) {
             if(!blocker.getKeyword().contains("Flying")
                     && !blocker.getKeyword().contains("CARDNAME can block creatures with flying.")
@@ -289,40 +286,9 @@ public class CombatUtil {
             if(!blocker.getKeyword().contains("Horsemanship")) return false;
         }
         
-        if(attacker.getName().equals("Taoist Warrior") || attacker.getName().equals("Zuo Ci, the Mocking Sage")) {
-            if(blocker.getKeyword().contains("Horsemanship")) return false;
-        }
-        
         if(attacker.getKeyword().contains("Fear")) {
             if(!blocker.getType().contains("Artifact") && !blocker.isBlack())
             return false;
-        }
-        
-        if (attacker.getKeyword().contains("CARDNAME can't be blocked by white creatures."))
-        {
-        	if (blocker.isWhite())
-        		return false;
-        }
-        
-        if(attacker.getKeyword().contains("CARDNAME can't be blocked by Saprolings.")) {
-        	if(blocker.isType("Saproling")) return false;
-        }
-        
-        if(attacker.getKeyword().contains("Intimidate")) {
-            if(!blocker.getType().contains("Artifact") && !attacker.sharesColorWith(blocker)) return false;
-        }
-        
-        if(attacker.getName().equals("Barrenton Cragtreads")) {
-            if(CardUtil.getColors(blocker).contains(Constant.Color.Red)) return false;
-        }
-        
-        if(attacker.getName().equals("Wanderbrine Rootcutters")) {
-            if(CardUtil.getColors(blocker).contains(Constant.Color.Green)) return false;
-        }
-        
-        if(attacker.getKeyword().contains("CARDNAME can't be blocked by artifact creatures.")) {
-        	if(blocker.isArtifact() && blocker.isCreature())
-        		return false;
         }
         
         if (attacker.getKeyword().contains("CARDNAME can't be blocked by Walls.") && blocker.isType("Wall")) return false;
