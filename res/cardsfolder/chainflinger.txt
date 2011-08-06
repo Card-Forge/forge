@@ -4,7 +4,7 @@ Types:Creature Beast
 Text:no text
 PT:2/2
 A:AB$DealDamage|Cost$1 R T|Tgt$TgtCP|NumDmg$1|SpellDescription$Chainflinger deals 1 damage to target creature or player.
-A:AB$DealDamage|Cost$2 R T|Tgt$TgtCP|NumDmg$2|Threshold$True|SpellDescription$Chainflinger deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.
+A:AB$DealDamage|Cost$2 R T|Tgt$TgtCP|NumDmg$2|Threshold$True|PrecostDesc$Threshold - |SpellDescription$Chainflinger deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chainflinger.jpg
 End
