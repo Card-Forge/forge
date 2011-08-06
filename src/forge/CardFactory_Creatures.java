@@ -3515,7 +3515,7 @@ public class CardFactory_Creatures {
                     CardList list = new CardList(art.toArray());
                     list = list.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.getExtrinsicKeyword().contains("Indestructible");
+                            return c.getIntrinsicKeyword().contains("Indestructible");
                         }
                     });
 
