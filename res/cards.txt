@@ -1,3 +1,9 @@
+Phyrexian Plaguelord
+3 B B
+Creature Carrier
+no text
+4/4
+
 Reclaim
 G
 Instant

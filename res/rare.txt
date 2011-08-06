@@ -588,6 +588,7 @@ Penumbra Wurm
 Pestilence Demon
 Phantom Nishoba
 Phyrexian Arena
+Phyrexian Plaguelord
 Phyrexian Tower
 Phytohydra
 Pianna, Nomad Captain
