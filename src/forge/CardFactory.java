@@ -231,7 +231,7 @@ public class CardFactory implements NewConstants {
         			{
         				Card c = clICtrl.get(i);
         				for (int j = 0; j < types.length; j++)
-        					if (c.getType().contains(types[j]))
+        					if (c.getType().contains(types[j].trim()))
         						fnd = true;
         			}
         			

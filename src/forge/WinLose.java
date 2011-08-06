@@ -10,6 +10,8 @@ public class WinLose
   //...
   //
   private String[] winMethods = new String[2];
+  private int[]	   winTurns   = new int[2];
+  
   
   private int win;
   private int lose;
@@ -33,6 +35,15 @@ public class WinLose
 	  return winMethods;
   }
   
+  public void setWinTurn(int gameNumber, int turns)
+  {
+	  winTurns[gameNumber] = turns;
+  }
+  
+  public int[] getWinTurns()
+  {
+	  return winTurns;
+  }
 
   public boolean didWinRecently() {return winRecently;}
 }

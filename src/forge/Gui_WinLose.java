@@ -136,9 +136,24 @@ public class Gui_WinLose extends JFrame implements NewConstants {
         statsLabel.setText("Won: " + winLose.getWin() + ", Lost: " + winLose.getLose());
         
         //show "You Won" or "You Lost"
-        if(winLose.didWinRecently()) titleLabel.setText("You Won");
-        else titleLabel.setText("You Lost");
-        
+        if(winLose.didWinRecently()) 
+        {
+        	titleLabel.setText("You Won");
+        	
+        	int game = 0;
+        	if (winLose.getWinTurns()[0] != 0)
+        		game = 1;
+        	winLose.setWinTurn(game, AllZone.Phase.getTurn());
+        	//winLose.setWinTurn(winLose.countWinLose()-1, AllZone.Phase.getTurn());
+        	
+        	//System.out.println("CountwinLose:" + winLose.countWinLose());
+        	//System.out.println("You won by turn: " + AllZone.Phase.getTurn());
+        }
+        else 
+        {
+        	titleLabel.setText("You Lost");
+        	//System.out.println("You lost by turn: " + AllZone.Phase.getTurn());
+        }
     }//setup();
     
     private void jbInit() throws Exception {
@@ -278,6 +293,20 @@ public class Gui_WinLose extends JFrame implements NewConstants {
 	    			sb.append("</u>");
 	    			sb.append("! Bonus: <b>+100 credits</b>.<br>");
 	    		}
+    		}
+    	}
+    	
+    	int[] winTurns = winLose.getWinTurns();
+    	
+    	for (int i : winTurns)
+    	{
+    		System.out.println("Quest, won by turn:" + i);
+    		if (i != 0)
+    		{
+    			if (i == 1)
+    				sb.append("Won in one turn! Bonus: <b>+1500 credits</b>.<br>");
+    			else if (i <= 5)
+    				sb.append("Won by turn 5! Bonus: <b>+250 credits</b>.<br>");
     		}
     	}
 
