@@ -1,0 +1,48 @@
+BasicLandPercentage=0
+
+[Group MaxCnt=40 Percentage=40]
+Underground Sea
+Plateau
+Taiga
+Tropical Island
+Scrubland
+Bayou
+Tundra
+Savannah
+Badlands
+Volcanic Island
+[/Group]
+
+[Group MaxCnt=20 Percentage=30]
+Aven Trailblazer
+Drag Down
+Tribal Flames
+Allied Strategies
+Matca Rioters
+[/Group]
+
+[Group MaxCnt=30 Percentage=20]
+Collective Restraint
+Voices from the Void
+Ordered Migration
+Might of Alara
+Tromp the Domains
+Gaea's Might
+Global Ruin
+Exotic Disease
+Stratadon
+[/Group]
+
+[Group MaxCnt=20 Percentage=10]
+Wandering Goblins
+Wandering Stream
+Power Armor
+Wild Nacatl
+Sedge Troll
+Loam Lion
+Kird Ape
+Hedge Troll
+Sejiri Merfolk
+[/Group]
+
+End
