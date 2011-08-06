@@ -545,30 +545,7 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
         
 
-             
-        //*************** START *********** START **************************
-        else if(cardName.equals("Accumulated Knowledge")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -7650377883588723237L;
-                
-                @Override
-                public void resolve() {
-                	card.getController().drawCards(1);
-                	CardList count = AllZoneUtil.getCardsInGraveyard("Accumulated Knowledge");
-                    card.getController().drawCards(count.size());
-                }
-            };
-            spell.setDescription("Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(cardName).append(" - Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.");
-            spell.setStackDescription(sb.toString());
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-        }//*************** END ************ END **************************
-        
-        
+                     
         //*************** START *********** START **************************
         else if(cardName.equals("Echoing Decay")) {
             final SpellAbility spell = new Spell(card) {
