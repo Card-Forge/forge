@@ -19315,6 +19315,45 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if (cardName.equals("Oust")) {
+        	/*
+        	 * Put target creature into its owner's library second from the
+        	 * top. Its controller gains 3 life.
+        	 */
+        	final SpellAbility spell = new Spell(card){
+				private static final long serialVersionUID = 4305992990847699048L;
+
+				@Override
+				public void resolve() {
+					Card c = getTargetCard();
+					if(null != c) {
+						PlayerZone lib = AllZone.getZone(Constant.Zone.Library, c.getOwner());
+						PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
+						play.remove(c);
+						lib.add(c, 1); //add second from top
+						PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
+						life.addLife(3);
+					}
+				}
+				
+				@Override
+        		public void chooseTargetAI() {
+        			CardList creatures = AllZoneUtil.getCreaturesInPlay(Constant.Player.Human);
+        			setTargetCard(CardFactoryUtil.AI_getBestCreature(creatures));
+        		}//chooseTargetAI()
+				
+				@Override
+        		public boolean canPlayAI() {
+					return AllZoneUtil.getCreaturesInPlay(Constant.Player.Human).size() > 0;
+        		}
+        	};
+        	
+        	spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
