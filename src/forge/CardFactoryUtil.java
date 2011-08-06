@@ -3286,6 +3286,18 @@ public class CardFactoryUtil {
         // Count$CardManaCost
         if(sq[0].contains("CardManaCost")) return doXMath(CardUtil.getConvertedManaCost(c), m);
         
+        //Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
+        if (sq[0].contains("IfMainPhase"))
+        {
+        	String cPhase = AllZone.Phase.getPhase();
+        	if ((cPhase.equals(Constant.Phase.Main1) ||
+        		 cPhase.equals(Constant.Phase.Main2)) && 
+        		 AllZone.Phase.getActivePlayer().equals(cardController))
+        		return doXMath(Integer.parseInt(sq[1]), m);
+        	else
+        		return doXMath(Integer.parseInt(sq[2]), m); // not Main Phase
+        }
+        
         //Generic Zone-based counting
         // Count$QualityAndZones.Subquality
         
