@@ -127,11 +127,10 @@ public abstract class Player extends MyObservable{
 	public void addDamage(final int damage, final Card source) {
 		int damageToDo = damage;
 		
-		if (source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.")
-    			|| source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME."))
+		if( reducePlayerDamageToZero(source, false) )
         	damageToDo = 0;
 		
-		if (source.getKeyword().contains("Infect")) {
+		if( source.getKeyword().contains("Infect") ) {
         	addPoisonCounters(damage);
         }
         else {
@@ -149,6 +148,27 @@ public abstract class Player extends MyObservable{
         }
         
         GameActionUtil.executePlayerDamageEffects(this, source, damageToDo, false);
+	}
+	
+	private boolean reducePlayerDamageToZero(final Card source, final boolean isCombat) {
+		boolean reduce = false;
+    	if(isCombat) {
+    		//for future use
+    	}
+    	reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt to and dealt by CARDNAME.");
+		reduce = reduce || source.getKeyword().contains("Prevent all damage that would be dealt by CARDNAME.");
+		
+		//Spirit of Resistance
+		if(AllZoneUtil.isCardInPlay("Spirit of Resistance", this)) {
+			if( AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Black).size() > 0
+					&& AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Blue).size() > 0
+					&& AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Green).size() > 0
+					&& AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Red).size() > 0
+					&& AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.White).size() > 0) {
+				reduce = true;
+			}
+		}
+		return reduce;
 	}
 	
 	public void setAssignedDamage(int n)   		{	assignedDamage = n; }
@@ -208,6 +228,8 @@ public abstract class Player extends MyObservable{
 		//TODO
 		return new CardList();
 	}
+	
+	
 	
 	////////////////////////////////
 	//
