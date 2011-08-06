@@ -1384,7 +1384,7 @@ public class GameAction {
                 ability2.setStackDescription(source.getName() + " - gets a +1/+1 counter");
                 AllZone.Stack.add(ability2);
             }
-            if(source.getKeyword().contains("Deathtouch")) {
+            if(source.getKeyword().contains("Deathtouch") && card.isCreature()) {
                 AllZone.GameAction.destroy(card);
                 AllZone.Combat.removeFromCombat(card);
             }
@@ -1416,7 +1416,7 @@ public class GameAction {
             AllZone.Stack.add(ability2);
         }
         
-        if(source.getKeyword().contains("Deathtouch")) {
+        if(source.getKeyword().contains("Deathtouch") && card.isCreature()) {
             AllZone.GameAction.destroy(card);
             AllZone.Combat.removeFromCombat(card);
         }
