@@ -290,7 +290,7 @@ public class GameActionUtil {
 				final PlayerZone lib = AllZone.getZone(Constant.Zone.Library, controller);
 				final Card RippleCard = c;
 				boolean Activate_Ripple = false;
-	        	if(controller == AllZone.HumanPlayer){
+	        	if(controller.isHuman()){
 		        	Object[] possibleValues = {"Yes", "No"};
                     AllZone.Display.showMessage("Activate Ripple? ");
 		        	Object q = JOptionPane.showOptionDialog(null, "Activate Ripple for " + c, "Ripple", 
@@ -1817,7 +1817,7 @@ public class GameActionUtil {
 		list = list.getName("Predatory Advantage");
 		for (int i = 0; i < list.size(); i++) {
             final Player controller = list.get(i).getController();
-		    if((player == AllZone.HumanPlayer && Phase.PlayerCreatureSpellCount == 0) || (player == AllZone.ComputerPlayer && Phase.ComputerCreatureSpellCount == 0))
+		    if((player.isHuman() && Phase.PlayerCreatureSpellCount == 0) || (player.isComputer() && Phase.ComputerCreatureSpellCount == 0))
             {
                 Ability abTrig = new Ability(list.get(i),"0") {
                     public void resolve()
@@ -2084,7 +2084,7 @@ public class GameActionUtil {
         };
         DamageTgt.setManaCost("0");
         DamageTgt.setStackDescription("Valakut, the Molten Pinnacle deals 3 damage to target creature or player.");
-        if (valakutCard.getController() == AllZone.HumanPlayer) {
+        if (valakutCard.getController().isHuman()) {
         	AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreaturePlayer(DamageTgt, true, true));
         } else {
         	DamageTgt.chooseTargetAI();
@@ -2669,7 +2669,7 @@ public class GameActionUtil {
 				public void resolve() {
 					int x = 0;
 					int y = 0;
-					if(player == AllZone.HumanPlayer) {
+					if(player.isHuman()) {
 						y = (AllZone.ComputerPlayer.getLife() % 2);
 						if(!(y == 0)) y = 1;
 						else y = 0;
@@ -4142,7 +4142,7 @@ public class GameActionUtil {
                        boolean oathFlag = true;
 
                        if (AllZoneUtil.compareTypeAmountInPlay(player, "Creature") < 0) {
-                           if (player == AllZone.HumanPlayer){
+                           if (player.isHuman()){
                                StringBuilder question = new StringBuilder();
                                question.append("Reveal cards from the top of your library and place ");
                                question.append("the first creature revealed onto the battlefield?");
@@ -5224,15 +5224,11 @@ public class GameActionUtil {
 
 	}// Teferi_Puzzle_Box
 
-		private static void upkeep_Carnophage() {
+	private static void upkeep_Carnophage() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Carnophage");
-		if(player == AllZone.HumanPlayer) {
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Carnophage");
+		if(player.isHuman()) {
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
 				String[] choices = {"Yes", "No"};
@@ -5241,7 +5237,7 @@ public class GameActionUtil {
 				else c.tap();
 			}
 		}
-		if(player == AllZone.ComputerPlayer) for(int i = 0; i < list.size(); i++) {
+		else if(player.isComputer()) for(int i = 0; i < list.size(); i++) {
 			Card c = list.get(i);
 			if(AllZone.ComputerPlayer.getLife() > 1) player.loseLife(1, c);
 			else c.tap();
@@ -5250,13 +5246,9 @@ public class GameActionUtil {
 
 	private static void upkeep_Sangrophage() {
 		final Player player = AllZone.Phase.getPlayerTurn();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, player);
 
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Sangrophage");
-		if(player == AllZone.HumanPlayer) {
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Sangrophage");
+		if(player.isHuman()) {
 			for(int i = 0; i < list.size(); i++) {
 				Card c = list.get(i);
 				String[] choices = {"Yes", "No"};
@@ -5265,7 +5257,7 @@ public class GameActionUtil {
 				else c.tap();
 			}
 		}
-		if(player == AllZone.ComputerPlayer) for(int i = 0; i < list.size(); i++) {
+		else if(player.isComputer()) for(int i = 0; i < list.size(); i++) {
 			Card c = list.get(i);
 			if(AllZone.ComputerPlayer.getLife() > 2) player.loseLife(2,c);
 			else c.tap();
@@ -6426,11 +6418,9 @@ public class GameActionUtil {
 
 			// Human Activates Dauntless Escort
 			PlayerZone PlayerPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.HumanPlayer);
-			CardList PlayerCreatureList = new CardList(PlayerPlayZone.getCards());
-			PlayerCreatureList = PlayerCreatureList.getType("Creature");
+			CardList PlayerCreatureList = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
 			PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Battlefield,AllZone.ComputerPlayer);
-			CardList opponentCreatureList = new CardList(opponentPlayZone.getCards());
-			opponentCreatureList = opponentCreatureList.getType("Creature");
+			CardList opponentCreatureList = AllZoneUtil.getCreaturesInPlay(AllZone.ComputerPlayer);
 			if(Phase.isSacDauntlessEscort() == true) {
 				if(PlayerCreatureList.size() != 0) {
 					for(int i = 0; i < PlayerCreatureList.size(); i++) {
@@ -6442,7 +6432,7 @@ public class GameActionUtil {
 				if(opponentCreatureList.size() != 0) {
 					for(int i = 0; i < opponentCreatureList.size(); i++) {
 						Card c = opponentCreatureList.get(i);
-						if(c.getOwner() == AllZone.HumanPlayer) {
+						if(c.getOwner().isHuman()) {
 							if(old.size() == 0) {
 								c.removeExtrinsicKeyword("Indestructible");	 
 								old.add(c);              			
@@ -6475,7 +6465,7 @@ public class GameActionUtil {
 				if(opponentCreatureList.size() != 0) {
 					for(int i = 0; i < opponentCreatureList.size(); i++) {
 						Card c = opponentCreatureList.get(i);
-						if(c.getOwner() == AllZone.ComputerPlayer) {
+						if(c.getOwner().isComputer()) {
 							if(old.size() == 0) {
 								c.removeExtrinsicKeyword("Indestructible");	 
 								old.add(c);              			

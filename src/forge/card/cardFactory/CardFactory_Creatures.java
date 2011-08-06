@@ -1499,7 +1499,7 @@ public class CardFactory_Creatures {
                     private static final long serialVersionUID = 2701248867610L;
                     
                     public void execute() {
-                        if(card.getController() == AllZone.HumanPlayer) {
+                        if(card.getController().isHuman()) {
                         	Phase.setSacDauntlessEscort(false);
                         	} else {
                         	Phase.setSacDauntlessEscortAI(false);  
@@ -1518,7 +1518,7 @@ public class CardFactory_Creatures {
         		@Override
         		public void resolve() {
                     AllZone.GameAction.sacrifice(card);
-                    if(card.getController() == AllZone.HumanPlayer) {
+                    if(card.getController().isHuman()) {
                     	Phase.setSacDauntlessEscort(true);
                     }
                     else Phase.setSacDauntlessEscortAI(true);	

@@ -110,7 +110,7 @@ public class ImageCache implements NewConstants {
      * Returns the image appropriate to display the card in the picture panel
      */
     public static BufferedImage getImage(Card card, int width, int height) {
-        String key = (card.isFaceDown() && card.getController() == AllZone.ComputerPlayer)? "Morph":getKey(card);
+        String key = (card.isFaceDown() && card.getController().isComputer())? "Morph":getKey(card);
         BufferedImage original = getImage(key);
         if(original == null) return null;
         
@@ -122,7 +122,7 @@ public class ImageCache implements NewConstants {
     }
     
     public static BufferedImage getOriginalImage(Card card) {
-        String key = (card.isFaceDown() && card.getController() == AllZone.ComputerPlayer)? "Morph":getKey(card);
+        String key = (card.isFaceDown() && card.getController().isComputer())? "Morph":getKey(card);
         return getImage(key);
     }
     

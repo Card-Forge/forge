@@ -178,7 +178,7 @@ class CardFactory_Auras {
                 	else if(card.getName().equals("Convincing Mirage")
                 			|| card.getName().equals("Phantasmal Terrain")) {
                 		//Only query player, AI will have decided already.
-                		if(card.getController() == AllZone.HumanPlayer) {
+                		if(card.getController().isHuman()) {
                 			NewType[0] = GuiUtils.getChoice("Select land type.", "Plains","Island","Swamp","Mountain","Forest");
                 		}
                 	}

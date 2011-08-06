@@ -105,7 +105,7 @@ class CardFactory_Lands {
         		public void resolve() {
         			String Color = "";
 
-        			if(card.getController() == AllZone.HumanPlayer){
+        			if(card.getController().isHuman()){
         				if(AllZoneUtil.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card, getTargetCard())) {                     
         					Object o = GuiUtils.getChoice("Choose mana color", Constant.Color.onlyColors);
         					Color = (String) o;
@@ -194,7 +194,7 @@ class CardFactory_Lands {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName()).append(" - target creature you control gains protection from the color of your choice until end of turn");
         			a[0].setStackDescription(sb.toString());
-        			if(card.getController() == AllZone.HumanPlayer) {
+        			if(card.getController().isHuman()) {
         				AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(a[0], creats, "Select target creature you control", false, false));
         			} else {
                         AllZone.Stack.addSimultaneousStackEntry(a[0]);

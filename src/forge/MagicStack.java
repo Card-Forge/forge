@@ -689,7 +689,7 @@ public class MagicStack extends MyObservable {
 		
 		if (sp.isSpell() && !sp.getSourceCard().isCopiedSpell()) {
 			Phase.setStormCount(Phase.getStormCount() + 1);
-			if (sp.getSourceCard().getController() == AllZone.HumanPlayer) {
+			if (sp.getSourceCard().getController().isHuman()) {
 				Phase.PlayerSpellCount = Phase.PlayerSpellCount + 1;
 				if (sp.getSourceCard().isCreature()) {
 					Phase.PlayerCreatureSpellCount = Phase.PlayerCreatureSpellCount + 1;

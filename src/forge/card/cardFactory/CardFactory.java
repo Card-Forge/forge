@@ -1709,13 +1709,13 @@ public class CardFactory implements NewConstants {
 
                     if (targetHand.size() == 0) return;
                     
-                    if (target == AllZone.HumanPlayer){
+                    if (target.isHuman()){
     	                Object discard = GuiUtils.getChoice("Select Card to place on top of library.", targetHand.toArray());
     	                
                         Card card = (Card)discard;
                         AllZone.GameAction.moveToLibrary(card);
                     }
-                    else if (target == AllZone.ComputerPlayer){
+                    else if (target.isComputer()){
                     	AllZone.ComputerPlayer.handToLibrary(1, "Top");
                     }
                 }
