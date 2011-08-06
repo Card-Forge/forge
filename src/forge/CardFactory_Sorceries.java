@@ -1847,8 +1847,6 @@ public class CardFactory_Sorceries {
                 private static final long serialVersionUID = 8127696608769903507L;
                 
                 @Override
-                @SuppressWarnings("unchecked")
-                // Comparator
                 public void resolve() {
                     Player opponent = card.getController().getOpponent();
                     Card choice = null;
@@ -1862,12 +1860,12 @@ public class CardFactory_Sorceries {
                     //human chooses
                     if(opponent.equals(AllZone.ComputerPlayer)) {
                         CardList all = AllZone.CardFactory.getAllCards();
-                        all.sort(new Comparator() {
-                            public int compare(Object a1, Object b1) {
-                                Card a = (Card) a1;
-                                Card b = (Card) b1;
+                        all.sort(new Comparator<Card>() {
+                            public int compare(Card a1, Card b1) {
+                                //Card a = (Card) a1;
+                               // Card b = (Card) b1;
                                 
-                                return a.getName().compareTo(b.getName());
+                                return a1.getName().compareTo(b1.getName());
                             }
                         });
                         choice = AllZone.Display.getChoice("Choose", removeLand(all.toArray()));
@@ -1877,7 +1875,7 @@ public class CardFactory_Sorceries {
                         Arrays.sort(showLibrary, com);
                         
                         AllZone.Display.getChoiceOptional("Opponent's Library", showLibrary);
-                        AllZone.GameAction.shuffle(opponent);
+                        opponent.shuffle();
                     }//if
                     else//computer chooses
                     {
@@ -1898,7 +1896,7 @@ public class CardFactory_Sorceries {
                         
                     }//else
                     remove(choice, opponent);
-                    AllZone.GameAction.shuffle(opponent);
+                    opponent.shuffle();
                 }//resolve()
                 
                 void remove(Card c, Player player) {
