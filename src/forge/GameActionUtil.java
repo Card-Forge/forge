@@ -2619,8 +2619,7 @@ public class GameActionUtil {
         }//isEquipped
 
 		
-		if(c.getName().equals("Ghastlord of Fugue")) playerCombatDamage_Ghastlord_of_Fugue(c);
-		else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c);
+		if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c);
 		else if(c.getName().equals("Augury Adept")) playerCombatDamage_Augury_Adept(c);
 		else if(c.getName().equals("Spawnwrithe")) playerCombatDamage_Spawnwrithe(c);
 		else if(c.getName().equals("Rootwater Thief")) playerCombatDamage_Rootwater_Thief(c);
@@ -2674,54 +2673,6 @@ public class GameActionUtil {
 		AllZone.Stack.addSimultaneousStackEntry(ability);
 
 	}
-
-	private static void playerCombatDamage_Ghastlord_of_Fugue(Card c) {
-		final Player player = c.getController();
-		final Player opponent = player.getOpponent();
-
-		if(c.getNetAttack() > 0) {
-			Ability ability2 = new Ability(c, "0") {
-				@Override
-				public void resolve() {
-					Card choice = null;
-
-					//check for no cards in hand on resolve
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opponent);
-
-					Card[] handChoices = removeLand(hand.getCards());
-
-					if(handChoices.length == 0) return;
-
-					//human chooses
-					if(opponent.equals(AllZone.ComputerPlayer)) {
-						choice = GuiUtils.getChoice("Choose", handChoices);
-					} else//computer chooses
-					{
-						choice = CardUtil.getRandom(handChoices); // wise choice should be here
-					}
-
-					AllZone.GameAction.exile(choice);
-				}//resolve()
-
-				@Override
-				public boolean canPlayAI() {
-					Card[] c = removeLand(AllZone.Human_Hand.getCards());
-					return 0 < c.length;
-				}
-
-				Card[] removeLand(Card[] in) {
-					return in;
-				}//removeLand() 
-			};// ability2
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(c.getName()).append(" - ").append("opponent discards a card.");
-			ability2.setStackDescription(sb.toString());
-
-            AllZone.Stack.addSimultaneousStackEntry(ability2);
-
-		}
-	} //Ghastlord of Fugue
 
 
 	private static void playerCombatDamage_Rootwater_Thief(Card c) {

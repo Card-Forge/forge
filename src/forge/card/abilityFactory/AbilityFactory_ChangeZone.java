@@ -470,34 +470,33 @@ public class AbilityFactory_ChangeZone {
 		HashMap<String,String> params = af.getMapParams();
 
 		ArrayList<Player> fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+		Player chooser = null;
 		if (params.containsKey("Chooser")) {
 			if (params.get("Chooser").equals("Targeted") && af.getAbTgt().getTargetPlayers() != null)
-				fetchers = af.getAbTgt().getTargetPlayers();
-			else fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Chooser"), sa);
+				chooser = af.getAbTgt().getTargetPlayers().get(0);
+			else chooser = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Chooser"), sa).get(0);
 		}
 
 		for(Player player : fetchers){
-			if (player.isComputer()){
-				changeHiddenOriginResolveAI(af, sa);
+			if (chooser == null) 
+				chooser = player;
+			if (chooser.isComputer()){
+				changeHiddenOriginResolveAI(af, sa, player);
 			}
 			else{
-				changeHiddenOriginResolveHuman(af, sa);
+				changeHiddenOriginResolveHuman(af, sa, player);
 			}
 		}
 	}
 	
-	private static void changeHiddenOriginResolveHuman(AbilityFactory af, SpellAbility sa){
+	private static void changeHiddenOriginResolveHuman(AbilityFactory af, SpellAbility sa, Player player){
 		HashMap<String,String> params = af.getMapParams();
         Card card = af.getHostCard();
 		Target tgt = af.getAbTgt();
-		Player player;
 		if (tgt != null){
 			player = tgt.getTargetPlayers().get(0);
 			if (!player.canTarget(sa.getSourceCard()))
 				return;
-		}
-		else{
-			player = AllZone.HumanPlayer;
 		}
 
 		String origin = params.get("Origin");
@@ -574,19 +573,15 @@ public class AbilityFactory_ChangeZone {
         }
 	}
 	
-	private static void changeHiddenOriginResolveAI(AbilityFactory af, SpellAbility sa){
+	private static void changeHiddenOriginResolveAI(AbilityFactory af, SpellAbility sa, Player player){
 		HashMap<String,String> params = af.getMapParams();
 		Target tgt = af.getAbTgt();
 		Card card = af.getHostCard();
 		
-		Player player;
 		if (tgt != null){
 			player = tgt.getTargetPlayers().get(0);
 			if (!player.canTarget(sa.getSourceCard()))
 				return;
-		}
-		else{
-			player = AllZone.ComputerPlayer;
 		}
 		
 		String origin = params.get("Origin");
