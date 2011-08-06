@@ -9692,7 +9692,7 @@ public class CardFactory implements NewConstants {
       }
       //*************** END ************ END **************************
 
-        
+        /*
       //*************** START *********** START **************************
       else if(cardName.equals("Helix Pinnacle"))
       {
@@ -9736,7 +9736,7 @@ public class CardFactory implements NewConstants {
     	  card.addSpellAbility(ability);
       }
       //*************** END ************ END **************************
-        
+        */
        
         //*************** START *********** START **************************
       	else if(cardName.equals("Bottle of Suleiman")) {

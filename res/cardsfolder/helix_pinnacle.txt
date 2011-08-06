@@ -3,6 +3,8 @@ ManaCost:G
 Types:Enchantment
 Text:At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
 K:Shroud
+A:AB$PutCounter | Cost$ X | CounterType$ TOWER | CounterNum$ X | SpellDescription$ Put a tower counter on CARDNAME.
+SVar:X:Count$xPaid
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helix_pinnacle.jpg
 SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/68.jpg
