@@ -334,6 +334,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Wilma Flintstone 3", "hard", "BG deck with Noxious Hatchling and Woodlurker Mimic");
         addToDeckList("Wally 3", "hard", "WB Artifact deck with Tempered Steel");
         addToDeckList("Wolverine 3", "hard", "BG deck with Nightmare, Korlash, Heir to Blackblade and Kodama's Reach");
+        addToDeckList("Wonder Woman 2", "medium", "W Equipment deck");
         addToDeckList("Wyatt Earp 1", "easy", "Mono W deck with Crovax, Ascendant Hero, Crusade and small to medium sized creatures.");
         addToDeckList("Wyatt Earp 2", "medium", "Mono W deck with Crovax, Ascendant Hero, Crusade and small to medium sized creatures.");
         addToDeckList("Wyatt Earp 3", "hard", "Mono W deck with Crovax, Ascendant Hero, Honor of the Pure and small to medium sized creatures.");
