@@ -7368,6 +7368,7 @@ res/cardsfolder/worldslayer.txt -text svneol=native#text/plain
 res/cardsfolder/worm_harvest.txt svneol=native#text/plain
 res/cardsfolder/wormfang_manta.txt svneol=native#text/plain
 res/cardsfolder/wormfang_newt.txt -text svneol=native#text/plain
+res/cardsfolder/wormfang_turtle.txt -text svneol=native#text/plain
 res/cardsfolder/wormwood_dryad.txt -text svneol=native#text/plain
 res/cardsfolder/wormwood_treefolk.txt -text svneol=native#text/plain
 res/cardsfolder/worn_powerstone.txt -text svneol=native#text/plain
