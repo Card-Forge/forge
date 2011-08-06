@@ -136,6 +136,10 @@ public class ReadQuest_Assignment implements Runnable, NewConstants {
         		qa.setComputerLife(30);
         	else if (qa.getDifficulty().equals("Very Hard"))
         		qa.setComputerLife(35);
+        	else if (qa.getDifficulty().equals("Expert"))
+        		qa.setComputerLife(50);
+        	else if (qa.getDifficulty().equals("Insane"))
+        		qa.setComputerLife(100);
 
             s = readLine();
             if (s.equals("Repeatable"))
