@@ -412,6 +412,8 @@ public class AbilityFactory_ChangeZone {
         PlayerZone destZone = AllZone.getZone(destination, player);
 
         String type = params.get("ChangeType");
+        if (type == null)
+        	type = "Card";
 		
         CardList fetched = new CardList();
         
