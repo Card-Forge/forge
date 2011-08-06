@@ -70,7 +70,10 @@ public class EndOfTurn implements java.io.Serializable
     				if(AllZone.GameAction.isCardInPlay(card)) AllZone.GameAction.sacrifice(card);
     			}
     		};
-    		sac.setStackDescription("Sacrifice " + card);
+    		StringBuilder sb = new StringBuilder();
+    		sb.append("Sacrifice ").append(card);
+    		sac.setStackDescription(sb.toString());
+    		
     		AllZone.Stack.add(sac);
     	}
     	if(!c.isFaceDown() && c.getKeyword().contains("At the beginning of the end step, exile CARDNAME.")) {
@@ -81,7 +84,10 @@ public class EndOfTurn implements java.io.Serializable
     				if(AllZone.GameAction.isCardInPlay(card)) AllZone.GameAction.exile(card);
     			}
     		};
-    		exile.setStackDescription("Exile " + card);
+    		StringBuilder sb = new StringBuilder();
+    		sb.append("Exile ").append(card);
+    		exile.setStackDescription(sb.toString());
+    		
     		AllZone.Stack.add(exile);
     	}
     	if(!c.isFaceDown() && c.getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")) {
@@ -92,7 +98,10 @@ public class EndOfTurn implements java.io.Serializable
     				if(AllZone.GameAction.isCardInPlay(card)) AllZone.GameAction.destroy(card);
     			}
     		};
-    		destroy.setStackDescription("Destroy " + card);
+    		StringBuilder sb = new StringBuilder();
+    		sb.append("Destroy ").append(card);
+    		destroy.setStackDescription(sb.toString());
+    		
     		AllZone.Stack.add(destroy);
     	}
     	if( c.getKeyword().contains("An opponent gains control of CARDNAME at the beginning of the next end step.")) {
@@ -118,7 +127,10 @@ public class EndOfTurn implements java.io.Serializable
     				}
     			}
     		};
-    		change.setStackDescription(vale.getName()+" changes controllers.");
+    		StringBuilder sb = new StringBuilder();
+    		sb.append(vale.getName()).append(" changes controllers.");
+    		change.setStackDescription(sb.toString());
+    		
     		AllZone.Stack.add(change);
     	}
     }
