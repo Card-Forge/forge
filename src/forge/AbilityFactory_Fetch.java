@@ -88,9 +88,9 @@ public class AbilityFactory_Fetch {
 	            
 	            if(o != null) {
 	            	AllZone.Human_Library.remove(o);
-	                player.shuffle();
 	            	Card c = (Card) o;
 	            	library.remove(c);
+	                player.shuffle();
 	            	if (destination.equals("Hand")) 
 	            		AllZone.Human_Hand.add(c);         			//move to hand
 	            	else if (destination.equals("Library")) 

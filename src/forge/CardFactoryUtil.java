@@ -3423,8 +3423,7 @@ public class CardFactoryUtil {
     }
     
     public static boolean canTarget(Card spell, Player player) {
-    	Card c = player.isComputer() ? AllZone.CardFactory.ComputerNullCard : AllZone.CardFactory.HumanNullCard;
-    	return canTarget(spell, c);
+    	return player.hasShroud();
     }
     
     public static boolean canTarget(Card spell, Card target) {
