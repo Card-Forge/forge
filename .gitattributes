@@ -2850,6 +2850,7 @@ res/cardsfolder/huang_zhong_shu_general.txt -text svneol=native#text/plain
 res/cardsfolder/hulking_cyclops.txt -text svneol=native#text/plain
 res/cardsfolder/hulking_goblin.txt -text svneol=native#text/plain
 res/cardsfolder/hulking_ogre.txt -text svneol=native#text/plain
+res/cardsfolder/hull_breach.txt svneol=native#text/plain
 res/cardsfolder/hum_of_the_radix.txt -text svneol=native#text/plain
 res/cardsfolder/humble_budoka.txt -text svneol=native#text/plain
 res/cardsfolder/hunding_gjornersen.txt -text svneol=native#text/plain
