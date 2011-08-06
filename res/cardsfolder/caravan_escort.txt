@@ -1,8 +1,10 @@
 Name:Caravan Escort
 ManaCost:W
 Types:Creature Human Knight
-Text:LEVEL 1-4 2/2 LEVEL 5+ 5/5 First Strike
+Text:no text
 PT:1/1
+K:stSetPT:1:1:LevelGE1:2:2:LevelGE5:5:5:LEVEL 1-4 2/2 LEVEL 5+ 5/5 First Strike
+K:stPumpSelf:Creature.countersGE5LEVEL:0/0/First Strike:No Condition:no text
 K:Level up:2
 K:maxLevel:5
 SVar:Rarity:Common

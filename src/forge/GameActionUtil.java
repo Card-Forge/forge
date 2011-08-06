@@ -13268,7 +13268,7 @@ public class GameActionUtil {
 			}
 		}
 	};
-	
+	/*
 	public static Command Caravan_Escort  = new Command() {
 		private static final long serialVersionUID = -6996623102170747897L;
 
@@ -13298,6 +13298,7 @@ public class GameActionUtil {
 			}
 		}
 	};
+	*/
 	
 	public static Command Ikiral_Outrider  = new Command() {
 		private static final long serialVersionUID = 7835884582225439851L;
@@ -13392,6 +13393,7 @@ public class GameActionUtil {
 		}
 	};
 	*/
+	/*
 	public static Command Hada_Spy_Patrol  = new Command() {
 		private static final long serialVersionUID = 2343715852240209999L;
 
@@ -13423,6 +13425,7 @@ public class GameActionUtil {
 			}
 		}
 	};
+	*/
 	/*
 	public static Command Halimar_Wavewatch  = new Command() {
 		private static final long serialVersionUID = 117755207922239944L;
@@ -16000,7 +16003,7 @@ public class GameActionUtil {
 		//commands.put("Bloodghast", Bloodghast);
 		
 		//commands.put("Cantivore", Cantivore);
-		commands.put("Caravan_Escort", Caravan_Escort);
+		//commands.put("Caravan_Escort", Caravan_Escort);
 		commands.put("Coat_of_Arms", Coat_of_Arms);	
 		//commands.put("Cognivore", Cognivore);
 		commands.put("Conspiracy", Conspiracy);
@@ -16022,7 +16025,7 @@ public class GameActionUtil {
 		//commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
 		//commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
 		
-		commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
+		//commands.put("Hada_Spy_Patrol", Hada_Spy_Patrol);
 		//commands.put("Halimar_Wavewatch", Halimar_Wavewatch);
 		//commands.put("Heedless_One", Heedless_One);
 		commands.put("Homarid", Homarid);

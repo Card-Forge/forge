@@ -31,7 +31,7 @@ public class StaticEffects
 		//cardToEffectsList.put("Broodstar", new String[] {"Master_of_Etherium"});
 		
 		//cardToEffectsList.put("Cantivore", new String[] {"Cantivore"});
-		cardToEffectsList.put("Caravan Escort", new String[] {"Caravan_Escort"});
+		//cardToEffectsList.put("Caravan Escort", new String[] {"Caravan_Escort"});
 		cardToEffectsList.put("Coat of Arms", new String[] {"Coat_of_Arms"});
 		//cardToEffectsList.put("Cognivore", new String[] {"Cognivore"});
 		cardToEffectsList.put("Conspiracy", new String[] {"Conspiracy"});
@@ -52,7 +52,7 @@ public class StaticEffects
 		//cardToEffectsList.put("Guul Draz Specter", new String[] {"Guul_Draz_Specter"});
 		//cardToEffectsList.put("Guul Draz Vampire", new String[] {"Guul_Draz_Vampire"});
 		
-		cardToEffectsList.put("Hada Spy Patrol", new String[] {"Hada_Spy_Patrol"});
+		//cardToEffectsList.put("Hada Spy Patrol", new String[] {"Hada_Spy_Patrol"});
 		//cardToEffectsList.put("Halimar Wavewatch", new String[] {"Halimar_Wavewatch"});
 		//cardToEffectsList.put("Heedless One", new String[] {"Heedless_One"});
 		cardToEffectsList.put("Homarid", new String[] {"Homarid"});
