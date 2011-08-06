@@ -1,0 +1,9 @@
+Name:Spontaneous Generation
+ManaCost:3 G
+Types:Sorcery
+Text:Put a 1/1 green Saproling creature token onto the battlefield for each card in your hand.
+K:spMakeToken<>X<>Saproling<>G 1 1 Saproling<>Controller<>G<>Creature;Saproling<>1<>1<>None
+SVar:X:Count$InYourHand
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spontaneous_generation.jpg
+End
