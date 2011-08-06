@@ -1,3 +1,12 @@
+Fiery Temper
+1 R R
+Instant
+no text
+spDamageTgtCP:3
+Madness:R
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_temper.jpg
+
 Dark Withering
 4 B B
 Instant
