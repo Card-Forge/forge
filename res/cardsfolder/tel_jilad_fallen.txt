@@ -1,0 +1,9 @@
+Name:Tel-Jilad Fallen
+ManaCost:2 G G
+Types:Creature Elf Warrior
+Text:no text
+K:Protection from artifacts
+K:Infect
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tel_jilad_fallen.jpg
+End

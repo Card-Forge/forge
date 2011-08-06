@@ -3724,6 +3724,7 @@ res/cardsfolder/tek.txt -text svneol=native#text/plain
 res/cardsfolder/tel_jilad_archers.txt -text svneol=native#text/plain
 res/cardsfolder/tel_jilad_chosen.txt -text svneol=native#text/plain
 res/cardsfolder/tel_jilad_exile.txt -text svneol=native#text/plain
+res/cardsfolder/tel_jilad_fallen.txt -text svneol=native#text/plain
 res/cardsfolder/tel_jilad_justice.txt -text svneol=native#text/plain
 res/cardsfolder/tel_jilad_outrider.txt -text svneol=native#text/plain
 res/cardsfolder/telimtors_darts.txt -text svneol=native#text/plain
