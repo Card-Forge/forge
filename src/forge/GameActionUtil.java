@@ -2465,11 +2465,6 @@ public class GameActionUtil {
         if (c.getName().equals("Fecundity")) destroyCreature_Fecundity(c, destroyed);
         else if (c.getName().equals("Proper Burial") 
                 && destroyed.getController().equals(c.getController())) destroyCreature_Proper_Burial(c, destroyed);
-        else if (c.getName().equals("Sek'Kuar, Deathkeeper") 
-                && !destroyed.isToken()
-                && destroyed.getController().equals(c.getController()) 
-                && !destroyed.getName().equals(c.getName())) destroyCreature_SekKuar(c, destroyed);
-        //}
     }
 
     //***
@@ -2511,20 +2506,6 @@ public class GameActionUtil {
 		sb.append(destroyed.getNetDefense()).append(" life.");
 		ability.setStackDescription(sb.toString());
 		
-		AllZone.Stack.add(ability);
-	}
-
-	private static void destroyCreature_SekKuar(Card c, Card destroyed) {
-		final Card crd = c;
-
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				CardFactoryUtil.makeToken("Graveborn", "BR 3 1 Graveborn", crd.getController(), "BR", new String[] {
-						"Creature", "Graveborn"}, 3, 1, new String[] {"Haste"});
-			}
-		};
-		ability.setStackDescription("Sek'Kuar, Deathkeeper - put a 3/1 black and red Graveborn creature token with haste onto the battlefield.");
 		AllZone.Stack.add(ability);
 	}
 
