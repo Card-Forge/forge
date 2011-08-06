@@ -3926,6 +3926,7 @@ public class CardFactory implements NewConstants {
             card.removeIntrinsicKeyword(parse);
             String k[] = parse.split(":");
             final boolean returnUpTo[] = {false};
+            final boolean mayReturn[] = {false};
             final int numCardsToReturn;
             
             String np[] = k[1].split("/");
@@ -3934,6 +3935,8 @@ public class CardFactory implements NewConstants {
             if (np.length > 1) {
                 if (np[1].equals("UpTo")) {
                     returnUpTo[0] = true;
+                } else if (np[1].equals("MayReturn")) {
+                    mayReturn[0] = true;
                 }
             }
             
@@ -3950,7 +3953,7 @@ public class CardFactory implements NewConstants {
             String desc = "";
             final String Drawback[] = {"none"};
             
-             if (k.length > 4) {
+            if (k.length > 4) {
                 
                 if (k[4].contains("Drawback$")){
                     String kk[] = k[4].split("\\$");
@@ -4029,7 +4032,12 @@ public class CardFactory implements NewConstants {
                         
                         for (int i = 0; i < numCardsToReturn; i++) {
                             if (grave.size() > 0) {
-                                Object o = AllZone.Display.getChoiceOptional("Select a card", choices.toArray());
+                                Object o;
+                                if (mayReturn[0] || returnUpTo[0]) {
+                                    o = AllZone.Display.getChoiceOptional("Select a card", choices.toArray());
+                                } else {
+                                    o = AllZone.Display.getChoice("Select a card", choices.toArray());
+                                }
                                 if (o == null) break;
                                 Card c = (Card) o;
                                 targets.add(c);

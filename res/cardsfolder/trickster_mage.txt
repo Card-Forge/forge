@@ -1,6 +1,6 @@
 Name:Trickster Mage
 ManaCost:U
-Types:Human Spellshaper
+Types:Creature Human Spellshaper
 Text:no text
 PT:1/1
 K:abTapTgt U T Discard<1/Any>:Artifact,Creature,Land:Tap target artifact, creature, or land.

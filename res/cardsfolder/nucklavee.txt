@@ -3,8 +3,8 @@ ManaCost:4 UR UR
 Types:Creature Beast
 Text:When Nucklavee enters the battlefield, you may return target red sorcery card from your graveyard to your hand.\r\nWhen Nucklavee enters the battlefield, you may return target blue instant card from your graveyard to your hand.
 PT:4/4
-K:etbReturnTgt:1:Sorcery.Red:Hand
-K:etbReturnTgt:1:Instant.Blue:Hand
+K:etbReturnTgt:1/MayReturn:Sorcery.Red:Hand
+K:etbReturnTgt:1/MayReturn:Instant.Blue:Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nucklavee.jpg
 End

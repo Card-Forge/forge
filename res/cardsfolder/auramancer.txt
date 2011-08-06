@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Human Wizard
 Text:When Auramancer enters the battlefield, you may return target enchantment card from your graveyard to your hand.
 PT:2/2
-K:etbReturnTgt:1:Enchantment:Hand
+K:etbReturnTgt:1/MayReturn:Enchantment:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auramancer.jpg
 End

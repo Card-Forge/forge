@@ -4,7 +4,7 @@ Types:Creature Imp
 Text:When Cadaver Imp enters the battlefield, you may return target creature card from your graveyard to your hand.
 PT:1/1
 K:Flying
-K:etbReturnTgt:1:Creature:Hand
+K:etbReturnTgt:1/MayReturn:Creature:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cadaver_imp.jpg
 End

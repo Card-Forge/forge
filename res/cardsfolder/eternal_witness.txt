@@ -3,7 +3,7 @@ ManaCost:1 G G
 Types:Creature Human Shaman
 Text:When Eternal Witness enters the battlefield, you may return target card from your graveyard to your hand.
 PT:2/1
-K:etbReturnTgt:1:Card:Hand
+K:etbReturnTgt:1/MayReturn:Card:Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51628.jpg
 End
