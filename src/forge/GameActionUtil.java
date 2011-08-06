@@ -3491,6 +3491,7 @@ public class GameActionUtil {
 		}
 		
 		AllZone.GameInfo.setAssignedFirstStrikeDamageThisCombat(false);
+		AllZone.GameInfo.setResolvedFirstStrikeDamageThisCombat(false);
 	}
 
 

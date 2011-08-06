@@ -336,6 +336,7 @@ public class Phase extends MyObservable
             if(c.getCreatureGotBlockedThisCombat()) c.setCreatureGotBlockedThisCombat(false);
             
             AllZone.GameInfo.setAssignedFirstStrikeDamageThisCombat(false);
+            AllZone.GameInfo.setResolvedFirstStrikeDamageThisCombat(false);
         }
     }
 

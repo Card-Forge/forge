@@ -35,7 +35,8 @@ public class ComputerAI_Input extends Input {
         final String phase = AllZone.Phase.getPhase();
         
         if(phase.equals(Constant.Phase.Main1)) {
-            computer.main1();
+        	System.out.println("Computer main1");
+        	computer.main1();
         }
 
         else if(phase.equals(Constant.Phase.Combat_Declare_Attackers_InstantAbility)) {
@@ -50,6 +51,7 @@ public class ComputerAI_Input extends Input {
         {
         	computer.after_declare_blockers();
         } else if(phase.equals(Constant.Phase.Main2)) {
+        	System.out.println("Computer main2");
             computer.main2();
         } else if(phase.equals(Constant.Phase.At_End_Of_Turn)) {
             AllZone.EndOfTurn.executeAt();

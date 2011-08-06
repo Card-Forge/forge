@@ -19745,6 +19745,7 @@ public class CardFactory implements NewConstants {
         			CardList computer = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
         			computer = computer.filter(colorless);
 
+        			System.out.println("Current phase:" + AllZone.Phase.getPhase());
         			// the computer will at least destroy 2 more human permanents
         			return  AllZone.Phase.getPhase().equals(Constant.Phase.Main2) && 
         				(computer.size() < human.size() - 1

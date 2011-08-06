@@ -12,7 +12,7 @@ public class GameInfo {
 	
 	private boolean preventCombatDamageThisTurn;
 	private boolean assignedFirstStrikeDamageThisCombat;
-	
+	private boolean resolvedFirstStrikeDamageThisCombat;
 
 	public void setComputerCanPlayNumberOfLands(int n) {
 		computerCanPlayNumberOfLands = n;
@@ -96,6 +96,15 @@ public class GameInfo {
 
 	public boolean getAssignedFirstStrikeDamageThisCombat() {
 		return assignedFirstStrikeDamageThisCombat;
+	}
+	
+	public void setResolvedFirstStrikeDamageThisCombat(boolean b)
+	{
+		resolvedFirstStrikeDamageThisCombat = b;
+	}
+	
+	public boolean getResolvedFirstStrikeDamageThisCombat() {
+		return resolvedFirstStrikeDamageThisCombat;
 	}
 
 	

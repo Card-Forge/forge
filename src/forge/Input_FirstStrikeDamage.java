@@ -28,7 +28,7 @@ public class Input_FirstStrikeDamage extends Input {
     
     @Override
     public void selectButtonOK() {
-    	if (!AllZone.GameInfo.isPreventCombatDamageThisTurn())
+    	if (!AllZone.GameInfo.isPreventCombatDamageThisTurn() && !AllZone.GameInfo.getResolvedFirstStrikeDamageThisCombat())
     		 damageCreatureAndPlayer();
         
         AllZone.GameAction.checkStateEffects();
@@ -61,6 +61,8 @@ public class Input_FirstStrikeDamage extends Input {
     //moves assigned damage to damage for all creatures
     //deals damage to player if needed
     private void damageCreatureAndPlayer() {
+    	AllZone.GameInfo.setResolvedFirstStrikeDamageThisCombat(true);
+    	
         String player = AllZone.Combat.getDefendingPlayer();
         if(player.equals("")) //this is a really bad hack, to allow raging goblin to attack on turn 1
         player = Constant.Player.Computer;
@@ -100,6 +102,7 @@ public class Input_FirstStrikeDamage extends Input {
             
 
             if((attackers.getCard(i).hasFirstStrike() || attackers.getCard(i).hasDoubleStrike())) {
+            	
                 CombatUtil.executeCombatDamageEffects(attackers.getCard(i));
                 
                 /*
