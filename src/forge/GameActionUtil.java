@@ -19,6 +19,9 @@ public class GameActionUtil {
 		upkeep_TabernacleUpkeepCost();
 		upkeep_MagusTabernacleUpkeepCost();
 		// upkeep_CheckEmptyDeck_Lose(); //still a little buggy
+		
+		AllZone.GameAction.CheckWheneverKeyword(AllZone.CardFactory.HumanNullCard, "BeginningOfUpkeep", null);
+		
 		upkeep_Genesis();
 		upkeep_Phyrexian_Arena();
 		upkeep_Master_of_the_Wild_Hunt();

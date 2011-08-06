@@ -207,7 +207,12 @@ public class CardFactory implements NewConstants {
 						|| (in.getSpellAbility()[i].getTargetPlayer().equals(Constant.Player.Computer))) 
 					sa[i].setTargetPlayer(in.getSpellAbility()[i].getTargetPlayer());
 				}
-				AllZone.GameAction.playSpellAbility(sa[i]);
+				if(Source.getController().equals(Constant.Player.Human)) AllZone.GameAction.playSpellAbility(sa[i]);
+				else {
+					if(sa[i].canPlayAI()) {
+						ComputerUtil.playStackFree(sa[i]);
+					}
+				}
 			}
 			}	
 }   	
