@@ -1,0 +1,8 @@
+Name:Tower of Calamities
+ManaCost:4
+Types:Artifact
+Text:no text
+K:abDamageTgtC 8 T:12
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_calamities.jpg
+End
