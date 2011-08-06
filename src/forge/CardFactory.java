@@ -18607,6 +18607,33 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if (cardName.equals("Burning Inquiry")) {
+        	final SpellAbility spell = new Spell(card){
+				private static final long serialVersionUID = 7133052973770045886L;
+
+				@Override
+        		public void resolve() {
+        			//each player draws three cards
+        			AllZone.GameAction.drawCards(Constant.Player.Computer, 3);
+        			AllZone.GameAction.drawCards(Constant.Player.Human, 3);
+        			
+        			//now, each player discards 3 cards at random
+        			AllZone.GameAction.discardRandom(Constant.Player.Computer, 3);
+        			AllZone.GameAction.discardRandom(Constant.Player.Human, 3);
+        		}
+
+        		@Override
+        		public boolean canPlayAI() {
+        			return AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).size() > 0;
+        		}
+        	};
+        	
+        	spell.setStackDescription(cardName+" - each player draws 3 cards, then discards 3 cards at random.");
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
