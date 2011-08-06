@@ -381,6 +381,10 @@ public class Cost_Payment {
         AllZone.Stack.add(ability);
     }
     
+	public void changeCost(){
+		cost.changeCost(ability);
+	}
+    
     public static Input input_discardCost(final int nCards, final String discType, final CardList handList, SpellAbility sa, final Cost_Payment payment) {
         final SpellAbility sp = sa;
     	Input target = new Input() {

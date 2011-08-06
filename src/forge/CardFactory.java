@@ -10769,7 +10769,7 @@ public class CardFactory implements NewConstants {
                 card.addComesIntoPlayCommand(CardFactoryUtil.fading(card, power));
                 card.addSpellAbility(CardFactoryUtil.fading_desc(card, power));
             }
-        }//Vanishing    	
+        }//Fading    	
     	
         if(hasKeyword(card, "Vanishing") != -1) {
             int n = hasKeyword(card, "Vanishing");
