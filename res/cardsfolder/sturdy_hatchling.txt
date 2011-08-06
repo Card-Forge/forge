@@ -1,8 +1,9 @@
 Name:Sturdy Hatchling
 ManaCost:3 GU
 Types:Creature Elemental
-Text:Sturdy Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.\r\nWhenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
+Text:Whenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.\r\nWhenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
 PT:6/6
+K:etbCounter:M1M1:4
 A:AB$Pump | Cost$ GU | KW$ Shroud | SpellDescription$ Sturdy Hatchling gains shroud until end of turn.
 SVar:BuffedBy:Spell.Blue,Spell.Green
 SVar:Rarity:Uncommon
