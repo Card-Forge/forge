@@ -4561,8 +4561,8 @@ public class GameActionUtil {
 
 	public static void executeGrvDestroyCardEffects(Card c, Card destroyed) {
 		if(c.getName().contains("Bridge from Below") && destroyed.getController().equals(c.getController())
-				&& !destroyed.isToken()) destroyCreature_Bridge_from_Below_maketoken(c, destroyed);
-		if(c.getName().contains("Bridge from Below") && !destroyed.getController().equals(c.getController())) destroyCreature_Bridge_from_Below_remove(c);
+				&& !destroyed.isToken() && destroyed.isCreature()) destroyCreature_Bridge_from_Below_maketoken(c, destroyed);
+		if(c.getName().contains("Bridge from Below") && !destroyed.getController().equals(c.getController()) && destroyed.isCreature()) destroyCreature_Bridge_from_Below_remove(c);
 	}
 
 	private static void destroyCreature_Bridge_from_Below_maketoken(Card c, Card destroyed) {
