@@ -10844,6 +10844,69 @@ public class CardFactory implements NewConstants {
             
             card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
+        
+      //*************** START ************ START **************************
+        else if(cardName.equals("Black Mana Battery") || cardName.equals("Blue Mana Battery")
+        		|| cardName.equals("Green Mana Battery") || cardName.equals("Red Mana Battery")
+        		|| cardName.equals("White Mana Battery")) {
+        	final int[] num = new int[1];
+        	String name[] = cardName.split(" ");
+        	final String shortString = Input_PayManaCostUtil.getShortColorString(name[0].trim().toLowerCase());
+        	StringBuilder desc = new StringBuilder();
+        	desc.append("tap, Remove any number of charge counters from ");
+        	desc.append(cardName);
+        	desc.append(": Add ");
+        	desc.append(shortString);
+        	desc.append(" to your mana pool, then add an additional ");
+        	desc.append(shortString);
+        	desc.append(" to your mana pool for each charge counter removed this way.");
+            
+            final Ability_Mana addMana = new Ability_Mana(card, desc.toString()) {
+            	private static final long serialVersionUID = -5356224416791741957L;
+
+				@Override
+                public void undo() {
+                    card.addCounter(Counters.CHARGE, num[0]);
+                }
+                
+                //@Override
+                public String mana() {
+                	String mana = shortString;
+                	for(int i = 0; i < num[0]; i++) {
+                		mana += " ";
+                		mana += shortString;
+                	}
+                    return mana;
+                }
+                
+                @Override
+                public void resolve() {
+                    card.subtractCounter(Counters.CHARGE, num[0]);
+                    super.resolve();
+                }
+            };
+            
+            Input runtime = new Input() {
+				private static final long serialVersionUID = -8808673510875540608L;
+
+				@Override
+                public void showMessage() {
+					num[0] = card.getCounters(Counters.CHARGE);
+                	String[] choices = new String[num[0]+1];
+                	for(int j=0;j<=num[0];j++) {
+                		choices[j] = ""+j;
+                	}
+                    String answer = (String)(AllZone.Display.getChoiceOptional(
+                            "Charge counters to remove", choices));
+                    num[0] = Integer.parseInt(answer);
+                    AllZone.Stack.add(addMana);
+                    stop();
+                }
+            };
+            
+            addMana.setBeforePayMana(runtime);
+            card.addSpellAbility(addMana);
+        }//*************** END ************ END **************************
 
         
         // Cards with Cycling abilities
