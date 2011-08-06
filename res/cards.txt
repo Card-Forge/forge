@@ -1,3 +1,62 @@
+Captain of the Watch
+4 W W
+Creature Human Soldier 
+Other Soldier creatures you control get +1/+1 and have vigilance.\r\nWhen Captain of the Watch enters the battlefield, put three 1/1 white Soldier creature tokens onto the battlefield.
+3/3
+Vigilance
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/captain_of_the_watch.jpg
+
+Chalice of the Void
+X X 0
+Artifact
+Chalice of the Void enters the battlefield with X charge counters on it.\r\nWhenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chalice_of_the_void.jpg
+
+Child of Gaea
+3 G G G
+Creature Elemental
+no text
+7/7
+Trample
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G G
+RegenerateMe:1 G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_gaea.jpg
+
+Conspiracy
+3 B B
+Enchantment
+As Conspiracy comes into play, choose a creature type.\r\nCreature cards you own that aren't in play, creature spells you control, and creatures you control are the chosen type.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/conspiracy.jpg
+
+Cover of Darkness
+1 B
+Enchantment
+As Cover of Darkness comes into play, choose a creature type.\r\nCreatures of the chosen type have fear.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cover_of_darkness.jpg
+
+Crib Swap
+2 W
+Tribal Instant Shapeshifter
+Changeling\r\nRemove target creature from the game. Its controller puts a 1/1 colorless Shapeshifter creature token into play.
+Changeling
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crib_swap.jpg
+
+Curse of Wizardry
+2 B B
+Enchantment
+As Curse of Wizardry enters the battlefield, choose a color.\r\nWhenever a player casts a spell of the chosen color, that player loses 1 life.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_wizardry.jpg
+
 Beastmaster Ascension
 2 G
 Enchantment
@@ -4635,16 +4694,6 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/capsize.jpg
 
-Captain of the Watch
-4 W W
-Creature Human Soldier 
-Other Soldier creatures you control get +1/+1 and have vigilance. When Captain of the Watch enters the battlefield, put three 1/1 white Soldier creature tokens onto the battlefield.
-3/3
-Vigilance
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/captain_of_the_watch.jpg
-
 Captain Sisay
 2 G W
 Legendary Creature Human Soldier
@@ -5127,14 +5176,6 @@ Target player sacrifices a creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chainers_edict.jpg
 
-Chalice of the Void
-X X 0
-Artifact
-Chalice of the Void enters the battlefield with X charge counters on it. Whenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chalice_of_the_void.jpg
-
 Chambered Nautilus
 2 U
 Creature Nautilus Beast
@@ -5326,16 +5367,6 @@ When Child of Alara is put into a graveyard from play, destroy all nonland perma
 Trample
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_alara.jpg
-
-Child of Gaea
-3 G G G
-Creature Elemental
-no text
-7/7
-Trample
-At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G G
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_gaea.jpg
 
 Child of Night
 1 B
@@ -5933,14 +5964,6 @@ no text
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conquerors_pledge.jpg
 
-Conspiracy
-3 B B
-Enchantment
-As Conspiracy comes into play, choose a creature type. Creature cards you own that aren't in play, creature spells you control, and creatures you control are the chosen type.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conspiracy.jpg
-
 Consume the Meek
 3 B B
 Instant
@@ -6143,13 +6166,6 @@ Exalted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/court_archers.jpg
 
-Cover of Darkness
-1 B
-Enchantment
-As Cover of Darkness comes into play, choose a creature type. Creatures of the chosen type have fear.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cover_of_darkness.jpg
-
 Covert Operative
 4 U
 Creature Human Wizard
@@ -6307,14 +6323,6 @@ Defender
 abPumpTgtC T:+0/+4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crenellated_wall.jpg
-
-Crib Swap
-2 W
-Tribal Instant Shapeshifter
-Changeling. Remove target creature from the game. Its controller puts a 1/1 colorless Shapeshifter creature token into play.
-Changeling
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crib_swap.jpg
 
 Crimson Acolyte
 1 W
@@ -6626,13 +6634,6 @@ At the beginning of each upkeep, tap enchanted creature.
 Enchant Creature Curse
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_chains.jpg
-
-Curse of Wizardry
-2 B B
-Enchantment
-As Curse of Wizardry enters the battlefield, choose a color. Whenever a player casts a spell of the chosen color, that player loses 1 life.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_wizardry.jpg
 
 Cursed Flesh
 B
