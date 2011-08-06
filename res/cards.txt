@@ -1,3 +1,25 @@
+Air Bladder
+U
+Enchantment Aura
+Enchanted creature has flying and can block only creatures with flying.
+Enchant creature
+enPump:Flying & This creature can block only creatures with flying.
+
+Gift of Granite
+W
+Enchantment Aura
+Enchanted creature gets +0/+2.
+Flash
+Enchant creature
+enPump:+0/+2
+
+Lance
+W
+Enchantment Aura
+Enchanted creature has first strike.
+Enchant creature
+enPump:First Strike
+
 Fishliver Oil
 1 U
 Enchantment Aura
