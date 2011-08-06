@@ -7643,7 +7643,9 @@ public class GameActionUtil {
 		commands.put("Homarid", Homarid);
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		
-		commands.put("Joiner_Adept", Joiner_Adept);
+		// Card converted to script
+		// commands.put("Joiner_Adept", Joiner_Adept);
+		
 		commands.put("Koth_Emblem", Koth_Emblem);
 		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
 		commands.put("Liu_Bei", Liu_Bei);
