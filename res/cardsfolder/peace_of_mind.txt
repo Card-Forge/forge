@@ -1,0 +1,8 @@
+Name:Peace of Mind
+ManaCost:1 W
+Types:Enchantment
+Text:no text
+A:AB$GainLife|Cost$W Discard<1/Any>|LifeAmount$3|SpellDescription$You gain 3 life.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/peace_of_mind.jpg
+End
