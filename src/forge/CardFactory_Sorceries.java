@@ -4632,8 +4632,7 @@ public class CardFactory_Sorceries {
       		  
         		public boolean canPlayAI()
         		{
-        			Player player = getTargetPlayer();
-        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
         			CardList libList = new CardList(lib.getCards());
       			  
         			int humanLife = AllZone.HumanPlayer.getLife();
@@ -4645,11 +4644,11 @@ public class CardFactory_Sorceries {
         	};
         	spell.setDescription("Target player puts the top X cards of his or her library into his or her graveyard and you gain X life.");
         	spell.setStackDescription("Psychic Drain - Target player puts the top X cards of his or her library into his or her graveyard and you gain X life.");
+        	spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
         	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
-        }
-        //*************** END ************ END **************************
+        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
