@@ -1,5 +1,6 @@
 package forge.card.abilityFactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -9,6 +10,7 @@ import forge.Card;
 import forge.CardList;
 import forge.Command;
 import forge.ComputerUtil;
+import forge.Constant;
 import forge.Counters;
 import forge.MyRandom;
 import forge.Player;
@@ -204,6 +206,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 	
 	private boolean tokenCanPlayAI(SpellAbility sa){
 		Cost cost = sa.getPayCosts();
+		HashMap<String,String> params = af.getMapParams();
 		if (!ComputerUtil.canPayCost(sa))	// If there is a cost payment it's usually not mandatory
 			return false;
 
@@ -219,9 +222,13 @@ public class AbilityFactory_Token extends AbilityFactory {
 			}
 		}
 		
-		
-		if (AbilityFactory.playReusable(sa))
-			return true;
+		boolean haste = false;
+		for(String kw:tokenKeywords)
+			if (kw.equals("Haste")) haste = true;
+			
+		//Don't generate tokens without haste before main 2 if possible
+		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !haste && !params.containsKey("ActivatingPhases"))
+        	return false;
 
 		// TODO: if i don't have enough blockers and my token can block one of the unblocked creatures
 		// create it after attackers are declared
@@ -261,6 +268,9 @@ public class AbilityFactory_Token extends AbilityFactory {
 			int xPay = ComputerUtil.determineLeftoverMana(sa);
 			source.setSVar("PayX", Integer.toString(xPay));
 		}
+		
+		if (AbilityFactory.playReusable(sa))
+			return chance;
 		
 		return ((r.nextFloat() < .6667) && chance);
 	}
