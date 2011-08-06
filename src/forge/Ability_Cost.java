@@ -11,6 +11,15 @@ public class Ability_Cost {
 	public boolean getSacThis() { return sacThis; }
 	private int sacAmount = 0;
 	public int getSacAmount() { return sacAmount; }
+	
+	private boolean exileCost = false;
+	public boolean getExileCost() { return exileCost; }
+	private String exileType = "";	// <type> or CARDNAME
+	public String getExileType() { return exileType; }
+	private boolean exileThis = false;
+	public boolean getExileThis() { return exileThis; }
+	private int exileAmount = 0;
+	public int getExileAmount() { return exileAmount; }
     
 	private boolean tapCost = false;
 	public boolean getTap() { return tapCost; } 
@@ -123,6 +132,17 @@ public class Ability_Cost {
         	sacAmount = Integer.parseInt(splitStr[0]);
         	sacType = splitStr[1];
         	sacThis = (sacType.equals("CARDNAME"));
+        }
+        
+        String exileStr = "Exile<";
+        if(parse.contains(exileStr)) {
+        	exileCost = true;
+        	String[] splitStr = abCostParse(parse, exileStr, 2);
+        	parse = abUpdateParse(parse, exileStr);
+        	
+        	exileAmount = Integer.parseInt(splitStr[0]);
+        	exileType = splitStr[1];
+        	exileThis = (exileType.equals("CARDNAME"));
         }
         
         String returnStr = "Return<";
@@ -244,6 +264,11 @@ public class Ability_Cost {
 			first = false;
 		}
 		
+		if (exileCost){
+			cost.append(exileString(first));
+			first = false;
+		}
+		
 		if (returnCost){
 			cost.append(returnString(first));
 			first = false;
@@ -348,6 +373,11 @@ public class Ability_Cost {
 			first = false;
 		}
 		
+		if (exileCost){
+			cost.append(exileString(first));
+			first = false;
+		}
+		
 		if (returnCost){
 			cost.append(returnString(first));
 			first = false;
@@ -376,6 +406,29 @@ public class Ability_Cost {
 			cost.append(sacAmount).append(" ");
 			cost.append(sacType);
 			if (sacAmount > 1)
+				cost.append("s");
+		}
+		return cost.toString();
+	}
+	
+	public String exileString(boolean first) {
+		StringBuilder cost = new StringBuilder();
+		if(first) {
+			if(isAbility)
+				cost.append("Exile ");
+			else
+				cost.append("exile ");
+		}
+		else {
+			cost.append(", exile ");
+		}
+		
+		if(exileType.equals("CARDNAME"))
+			cost.append(name);
+		else {
+			cost.append(exileAmount).append(" ");
+			cost.append(exileType);
+			if(exileAmount > 1)
 				cost.append("s");
 		}
 		return cost.toString();

@@ -299,6 +299,23 @@ public class ComputerUtil
 				return false;
 		}
 		
+		if (cost.getExileCost()){
+			  // if there's an exile in the cost, just because we can Pay it doesn't mean we want to. 
+			if (!cost.getExileThis()){
+			    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			    CardList typeList = new CardList(play.getCards());
+			    typeList = typeList.getValidCards(cost.getExileType().split(","));
+			    Card target = sa.getTargetCard();
+				if (target != null && target.getController().equals(Constant.Player.Computer)) // don't exile the card we're pumping
+					  typeList.remove(target);
+				
+				if (cost.getExileAmount() > typeList.size())
+					return false;
+			}
+			else if (cost.getExileThis() && !AllZone.GameAction.isCardInPlay(card))
+				return false;
+		}
+		
 		if (cost.getReturnCost()){
 			  // if there's a return in the cost, just because we can Pay it doesn't mean we want to. 
 			if (!cost.getReturnThis()){
@@ -554,6 +571,11 @@ public class ComputerUtil
 	  
       CardListUtil.sortAttackLowFirst(typeList);
 	  return typeList.get(0);
+  }
+  
+  static public Card chooseExileType(String type, Card activate, Card target){
+	  //logic is the same as sacrifice...
+      return chooseSacrificeType(type, activate, target);
   }
   
   static public Card chooseTapType(String type, Card activate, boolean tap, int index){
