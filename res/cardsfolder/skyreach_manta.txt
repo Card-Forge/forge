@@ -1,0 +1,12 @@
+Name:Skyreach Manta
+ManaCost:5
+Types:Artifact Creature Fish
+Text:no text
+PT:0/0
+K:Flying
+K:Sunburst
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyreach_manta.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/152.jpg
+End

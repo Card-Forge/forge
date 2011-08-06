@@ -1,0 +1,11 @@
+Name:Baton of Courage
+ManaCost:3
+Types:Artifact
+Text:no text
+K:Flash
+K:Sunburst
+A:AB$Pump | Cost$ Subcounter<1/CHARGE> | Tgt$ TgtC | NumDef$ 1 | NumAtt$ 1 | SpellDescription$ Target creature gets +1/+1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/baton_of_courage.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/105.jpg
+End

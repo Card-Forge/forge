@@ -57,10 +57,13 @@ public class Input_PayManaCost extends Input {
         boolean canUse = false;
         for(Ability_Mana am:card.getManaAbility())
             canUse |= am.canPlay();
-        manaCost = Input_PayManaCostUtil.tapCard(card, manaCost);
+        manaCost = Input_PayManaCostUtil.tapCard(card, manaCost,false);
         showMessage();
         
-        if(manaCost.isPaid()) done();
+        if(manaCost.isPaid()) {
+        	originalCard.setSunburstValue(manaCost.getSunburst());
+        	done();
+        }
     }
     
     private void done() {
@@ -105,6 +108,9 @@ public class Input_PayManaCost extends Input {
     public void showMessage() {
         ButtonUtil.enableOnlyCancel();
         AllZone.Display.showMessage("Pay Mana Cost: " + manaCost.toString());
-        if(manaCost.isPaid() && !new ManaCost(originalManaCost).isPaid()) done(); 
+        if(manaCost.isPaid() && !new ManaCost(originalManaCost).isPaid()) {
+        	originalCard.setSunburstValue(manaCost.getSunburst());
+        	done(); 
+        }
     }
 }

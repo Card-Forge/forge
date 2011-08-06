@@ -6,7 +6,7 @@ public class Input_PayManaCostUtil
   //all mana abilities start with this and typical look like "tap: add G"
   //mana abilities are Strings and are retrieved by calling card.getKeyword()
   //taps any card that has mana ability, not just land
-  public static ManaCost tapCard(Card card, ManaCost manaCost)
+  public static ManaCost tapCard(Card card, ManaCost manaCost,boolean forceNoExpress)
   {
 	//make sure computer's lands aren't selected
 	if(card.getController().equals(AllZone.ComputerPlayer))
@@ -45,6 +45,7 @@ public class Input_PayManaCostUtil
     // todo when implementing sunburst 
     // If the card has sunburst or any other ability that tracks mana spent, skip express Mana choice
     // if (card.getTrackManaPaid()) skipExpress = true;
+    if(forceNoExpress) skipExpress = true;
 
 	if (!skipExpress){
 		// express Mana Choice

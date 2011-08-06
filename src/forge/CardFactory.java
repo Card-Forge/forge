@@ -340,6 +340,31 @@ public class CardFactory implements NewConstants {
         		}
         	});
         }
+        if(hasKeyword(card,"Sunburst") != -1)
+        {	
+        	Command sunburstCIP = new Command() {
+				private static final long serialVersionUID = 1489845860231758299L;
+				public void execute() {
+					if(card.isType("Creature")) {
+						card.addCounter(Counters.P1P1, card.getSunburstValue());
+					}						
+					else {
+						card.addCounter(Counters.CHARGE, card.getSunburstValue());
+					}
+						
+				}
+        	};
+        	
+        	Command sunburstLP = new Command() {
+				private static final long serialVersionUID = -7564420917490677427L;
+				public void execute() {
+        			card.setSunburstValue(0);
+        		}
+        	};
+        		
+        	card.addComesIntoPlayCommand(sunburstCIP);
+        	card.addLeavesPlayCommand(sunburstLP);
+        }
         if(hasKeyword(card,"spCounter") != -1) {
     		ComputerAI_counterSpells2.KeywordedCounterspells.add(card.getName());
 

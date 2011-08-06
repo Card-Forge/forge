@@ -1,0 +1,13 @@
+Name:Lunar Avenger
+ManaCost:7
+Types:Artifact Creature Golem
+Text:no text
+PT:2/2
+K:Sunburst
+A:AB$Pump | Cost$ SubCounter<1/P1P1> | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+A:AB$Pump | Cost$ SubCounter<1/P1P1> | KW$ First strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+A:AB$Pump | Cost$ SubCounter<1/P1P1> | KW$ Haste | SpellDescription$ CARDNAME gains haste until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lunar_avenger.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/136.jpg
+End

@@ -120,6 +120,8 @@ public class Card extends MyObservable {
     
     private int 					     multiKickerMagnitude			   = 0;
     
+    private int 						sunburstValue						= 0;
+    
     private Player                       owner                             = null;
     private Player                       controller                        = null;
     private String                       name                              = "";
@@ -183,6 +185,16 @@ public class Card extends MyObservable {
     
     public int getAbilityUsed() {
         return abilityUsed;
+    }
+    
+    public int getSunburstValue()
+    {
+    	return sunburstValue;
+    }
+    
+    public void setSunburstValue(int value)
+    {
+    	sunburstValue = value;
     }
     
     //****************TOhaveDOne:Use somehow

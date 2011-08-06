@@ -2,12 +2,14 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 public class ManaCost {
     //holds Mana_Part objects
     //ManaPartColor is stored before ManaPartColorless
     private ArrayList<Object> manaPart;
+    private HashMap<String,Integer> sunburstMap = new HashMap<String,Integer>();
     
 //manaCost can be like "0", "3", "G", "GW", "10", "3 GW", "10 GW"
     //or "split hybrid mana" like "2/G 2/G", "2/B 2/B 2/B"
@@ -25,6 +27,13 @@ public class ManaCost {
     	while (manaCost.startsWith("X"))
     		manaCost = manaCost.substring(2);
     	manaPart = split(manaCost);
+    }
+    
+    public int getSunburst()
+    {
+    	int ret = sunburstMap.size();
+    	sunburstMap.clear();
+    	return ret;
     }
     
     // takes a Short Color and returns true if it exists in the mana cost. Easier for split costs
@@ -114,6 +123,12 @@ public class ManaCost {
         	return false;
         
         choice.reduce(mana);
+        if(!mana.equals(Constant.Color.Colorless)) {
+        	if(sunburstMap.containsKey(mana))
+        		sunburstMap.put(mana, sunburstMap.get(mana)+1);
+        	else
+        		sunburstMap.put(mana, 1);
+        }
         return true;
     }
     
@@ -140,6 +155,12 @@ public class ManaCost {
         	return false;
         
         choice.reduce(mana);
+        if(!mana.isColor(Constant.Color.Colorless)) {
+        	if(sunburstMap.containsKey(mana.getColor()))
+        		sunburstMap.put(mana.getColor(), sunburstMap.get(mana.getColor())+1);
+        	else
+        		sunburstMap.put(mana.getColor(), 1);
+        }
         return true;
     }
     

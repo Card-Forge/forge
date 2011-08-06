@@ -599,7 +599,7 @@ public class Cost_Payment {
 		        boolean canUse = false;
 		        for(Ability_Mana am:card.getManaAbility())
 		            canUse |= am.canPlay();
-		        mana = Input_PayManaCostUtil.tapCard(card, mana);
+		        mana = Input_PayManaCostUtil.tapCard(card, mana,false);
 		        
 		        if(mana.isPaid()) 
 		        	done();
@@ -660,7 +660,7 @@ public class Cost_Payment {
 		        boolean canUse = false;
 		        for(Ability_Mana am:card.getManaAbility())
 		            canUse |= am.canPlay();
-		        manaCost = Input_PayManaCostUtil.tapCard(card, manaCost);
+		        manaCost = Input_PayManaCostUtil.tapCard(card, manaCost,false);
 		        if(manaCost.isPaid()){
 		        	manaCost = new ManaCost(Integer.toString(numX));
 		        	xPaid++;

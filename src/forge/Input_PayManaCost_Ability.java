@@ -59,7 +59,7 @@ public class Input_PayManaCost_Ability extends Input {
     @Override
     public void selectCard(Card card, PlayerZone zone) {
         //only tap card if the mana is needed
-        manaCost = Input_PayManaCostUtil.tapCard(card, manaCost);
+        manaCost = Input_PayManaCostUtil.tapCard(card, manaCost,false);
         showMessage();
         
         if(manaCost.isPaid()) {

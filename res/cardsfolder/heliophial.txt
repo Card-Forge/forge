@@ -1,0 +1,11 @@
+Name:Heliophial
+ManaCost:5
+Types:Artifact
+Text:no text
+A:AB$DealDamage | Cost$ 2 Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of charge counters on it to target creature or player.
+K:Sunburst
+SVar:X:Count$CardCounters.CHARGE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/heliophial.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/130.jpg
+End

@@ -456,7 +456,10 @@ public class ComputerUtil
 
          }
          if(cost.isPaid())
-            break;
+         {
+        	 sa.getSourceCard().setSunburstValue(cost.getSunburst());
+        	 break; 
+         }
       }
      
     }

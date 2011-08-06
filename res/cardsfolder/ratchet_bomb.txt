@@ -7,4 +7,5 @@ A:AB$DestroyAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Permanent.nonLand+cmcEQX
 SVar:X:Count$CardCounters.CHARGE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ratchet_bomb.jpg
+SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/196.jpg
 End
