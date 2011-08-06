@@ -1513,7 +1513,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Goretusk Firebeast")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -1539,7 +1539,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sylvan Messenger") 
@@ -1708,7 +1708,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Flametongue Kavu")) {
             final CommandReturn getCreature = new CommandReturn() {
@@ -1780,6 +1780,7 @@ public class CardFactory_Creatures {
                 }
             });
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Phylactery Lich") ) {
@@ -2157,7 +2158,7 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Fire Imp") || cardName.equals("Corrupt Eunuchs")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -2208,7 +2209,7 @@ public class CardFactory_Creatures {
                 }
             });        
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Keening Banshee")) {
