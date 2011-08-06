@@ -237,8 +237,10 @@ public class GameActionUtil {
 			public void resolve()
 			{
 				Card crd = getTargetCard();
-				if (crd!=null)
-					AllZone.GameAction.destroy(crd);
+				if (crd!=null) {
+					if (CardFactoryUtil.canTarget(ulamog, crd))
+						AllZone.GameAction.destroy(crd);
+				}
 			}
 		};
 		ability.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability));
