@@ -858,20 +858,13 @@ public class CardFactory implements NewConstants {
             }
         }//Devour
         
-        while(hasKeyword(card, "Modular") != -1) {
+        if(hasKeyword(card, "Modular") != -1) {
             int n = hasKeyword(card, "Modular");
             if(n != -1) {
                 String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
+
                 final int m = Integer.parseInt(parse.substring(8));
-                String t = card.getSpellText();
-                if(!t.equals("")) t += "\r\n";
-                card.setText(t
-                        + parse
-                        + " (This enters the battlefield with "
-                        + m
-                        + " +1/+1 counters on it. When it's put into a graveyard, you may put its +1/+1 counters on target artifact creature.)");//Erm help? Isn't there a normal way to do this?...
+
                 card.addComesIntoPlayCommand(new Command() {
                     private static final long serialVersionUID = 339412525059881775L;
                     

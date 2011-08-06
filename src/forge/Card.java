@@ -1005,6 +1005,13 @@ public class Card extends MyObservable {
                 	sbLong.append(keyword.get(i));
                 	sbLong.append(" (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)");
                 }
+                else if(keyword.get(i).startsWith("Modular")) {
+                    String numCounters = keyword.get(i).split(" ")[1];
+                    sbLong.append(keyword.get(i));
+                    sbLong.append(" (This enters the battlefield with ");
+                    sbLong.append(numCounters);
+                    sbLong.append(" +1/+1 counters on it. When it's put into a graveyard, you may put its +1/+1 counters on target artifact creature.)");
+                }
                 else {
                     if (i != 0 && sb.length() != 0) sb.append(", ");
                     sb.append(keyword.get(i).toString());
@@ -2718,8 +2725,8 @@ public class Card extends MyObservable {
 				
          else if (Property.startsWith("with")) // ... Card keywords
          {
-          	if (Property.startsWith("without") && getKeyword().contains(Property.substring(7))) return false;
-         	if (!Property.startsWith("without") && !getKeyword().contains(Property.substring(4))) return false;
+          	if (Property.startsWith("without") && hasStartOfKeyword(Property.substring(7))) return false;
+         	if (!Property.startsWith("without") && !hasStartOfKeyword(Property.substring(4))) return false;
          }
          
          else if (Property.startsWith("tapped"))
