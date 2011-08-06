@@ -4,7 +4,7 @@ Types:Creature Bird Skeleton
 Text:no text
 PT:3/2
 K:Flying
-A:AB$Regenerate | Cost$ B Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME.
+A:AB$ Regenerate | Cost$ B Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME.
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_kathari.jpg
 SVar:Rarity:Common

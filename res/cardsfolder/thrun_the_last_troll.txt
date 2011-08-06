@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Legendary Creature Troll Shaman
 Text:no text
 PT:4/4
-A:AB$Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
+A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 K:CARDNAME can't be countered.
 K:CARDNAME can't be the target of spells or abilities your opponents control.
 SVar:Rarity:Mythic

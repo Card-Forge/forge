@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Creature Troll Warrior
 Text:no text
 PT:8/4
-A:AB$Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put four 1/1 blue Faerie creature tokens with flying onto the battlefield under target opponent's control.
 SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 4 | TokenName$ Faerie | TokenTypes$ Creature,Faerie | TokenOwner$ Opponent | TokenColors$ Blue | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
 SVar:Rarity:Rare
