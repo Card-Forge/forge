@@ -229,11 +229,11 @@ public class QuestMainPanel extends QuestAbstractPanel {
         optionsPanel = new JPanel();
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
 
-        optionsPanel.add(this.devModeCheckBox);
-        optionsPanel.add(Box.createVerticalStrut(5));
         optionsPanel.add(this.newGUICheckbox);
         optionsPanel.add(Box.createVerticalStrut(5));
         optionsPanel.add(this.smoothLandCheckBox);
+        optionsPanel.add(Box.createVerticalStrut(5));
+        optionsPanel.add(this.devModeCheckBox);
         optionsPanel.setBorder(new TitledBorder(new EtchedBorder(), "Options"));
         return optionsPanel;
     }
@@ -351,7 +351,11 @@ public class QuestMainPanel extends QuestAbstractPanel {
 
     void refresh() {
         QuestData.saveData(AllZone.QuestData);
-        
+
+        devModeCheckBox.setSelected(Constant.Runtime.DevMode[0]);
+        smoothLandCheckBox.setSelected(Constant.Runtime.Smooth[0]);
+        newGUICheckbox.setSelected(Gui_NewGame.preferences.newGui);
+
         creditsLabel.setText(" " + questData.getCredits());
         statsLabel.setText(questData.getWin() + " wins / " + questData.getLost() + " losses");
         titleLabel.setText(questData.getRank());
@@ -411,7 +415,7 @@ public class QuestMainPanel extends QuestAbstractPanel {
                 petCheckBox.setEnabled(false);
             }
 
-            if (questData.getSelectedPet().equals("")) {
+            if (questData.getSelectedPet() == null || questData.getSelectedPet().equals("")) {
                 petCheckBox.setSelected(false);
                 petComboBox.setEnabled(false);
             }
@@ -511,6 +515,9 @@ public class QuestMainPanel extends QuestAbstractPanel {
         else {
             AllZone.Display = new GuiDisplay3();
         }
+
+        Gui_NewGame.preferences.newGui = newGUICheckbox.isSelected();
+
         Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
 
 
