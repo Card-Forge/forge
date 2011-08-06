@@ -1,0 +1,10 @@
+Name:Darkslick Drake
+ManaCost:2 U U
+Types:Creature Drake
+Text:no text
+PT:2/4
+K:Flying
+K:WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Darkslick Drake is put into your graveyard from the battlefield, draw a card.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://forums.mtgsalvation.com/attachment.php?attachmentid=110664&d=1284537694
+End
