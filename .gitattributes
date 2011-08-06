@@ -4697,6 +4697,7 @@ res/cardsfolder/resize.txt -text svneol=native#text/plain
 res/cardsfolder/resounding_roar.txt svneol=native#text/plain
 res/cardsfolder/resounding_scream.txt svneol=native#text/plain
 res/cardsfolder/resounding_silence.txt -text svneol=native#text/plain
+res/cardsfolder/resounding_thunder.txt svneol=native#text/plain
 res/cardsfolder/resounding_wave.txt -text svneol=native#text/plain
 res/cardsfolder/respite.txt -text svneol=native#text/plain
 res/cardsfolder/resplendent_mentor.txt -text svneol=native#text/plain
