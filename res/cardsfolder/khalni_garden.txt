@@ -3,6 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:When Khalni Garden enters the battlefield, put a 0/1 green Plant creature token onto the battlefield.
 K:Comes into play tapped.
+K:etbMakeToken<>1<>Plant<>G 0 1 Plant<>Controller<>G<>Creature;Plant<>0<>1<>None<>put a 0/1 green Plant creature token onto the battlefield.
 K:tap: add G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/khalni_garden.jpg

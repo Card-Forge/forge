@@ -3077,6 +3077,7 @@ class CardFactory_Lands {
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
         }//*************** END ************ END **************************
         
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Khalni Garden")) {
             final Ability ability = new Ability(card, "0") {
@@ -3098,6 +3099,7 @@ class CardFactory_Lands {
             card.clearSpellKeepManaAbility();
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Celestial Colonnade")) {
