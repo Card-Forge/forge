@@ -1,7 +1,7 @@
 Name:Wild Growth
 ManaCost:G
 Types:Enchantment Aura
-Text:Whenever enchanted land is tapped for mana, its controller adds Green to his or her mana pool (in addition to the mana the land produces).
+Text:Whenever enchanted land is tapped for mana, its controller adds G to his or her mana pool (in addition to the mana the land produces).
 K:Enchant Land
 SVar:RemAIDeck:True
 SVar:Rarity:Common
