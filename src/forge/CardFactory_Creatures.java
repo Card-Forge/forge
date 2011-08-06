@@ -790,6 +790,8 @@ public class CardFactory_Creatures {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Primal Plasma") || cardName.equals("Primal Clay")) {
+        	card.setBaseAttack(3);
+        	card.setBaseDefense(3);
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
@@ -809,6 +811,7 @@ public class CardFactory_Creatures {
                         card.setBaseAttack(1);
                         card.setBaseDefense(6);
                         card.addIntrinsicKeyword("Defender");
+                        card.addType("Wall");
                     }
                     
                 }//resolve()
