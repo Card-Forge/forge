@@ -1,0 +1,11 @@
+Name:Serpent Skin
+ManaCost:2 G
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+1.
+K:Flash
+K:Enchant creature
+K:enPump:+1/+1
+A:AB$Regenerate | Cost$ G | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/serpent_skin.jpg
+End
