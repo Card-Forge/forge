@@ -4183,6 +4183,7 @@ public class CardFactory_Sorceries {
         	});
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Biorhythm")) {
         	final SpellAbility spell = new Spell(card) {
@@ -4364,10 +4365,6 @@ public class CardFactory_Sorceries {
 				}
         	};//SpellAbility
         	
-        	/*StringBuilder sb = new StringBuilder();
-        	sb.append(card.getName()).append(" - Each player's life total becomes the lowest life total among all players.");
-        	spell.setStackDescription(sb.toString()); */
-        	
         	// Do not remove SpellAbilities created by AbilityFactory or Keywords.
         	card.clearFirstSpellAbility();
         	card.addSpellAbility(spell);
@@ -4397,11 +4394,11 @@ public class CardFactory_Sorceries {
 
 				@Override
                 public void resolve() {
-                	System.out.println(userChoice);
-                	System.out.println("0: "+ab0player[0]);
-                	System.out.println("1: "+ab1card[0]);
-                	System.out.println("2: "+ab2card[0]);
-                	System.out.println("3: "+ab3cards);
+                	//System.out.println(userChoice);
+                	//System.out.println("0: "+ab0player[0]);
+                	//System.out.println("1: "+ab1card[0]);
+                	//System.out.println("2: "+ab2card[0]);
+                	//System.out.println("3: "+ab3cards);
                 	
                 	//"Target player loses X life",
                 	for(int i = 0; i < card.getChoices().size(); i++) {
@@ -4422,15 +4419,6 @@ public class CardFactory_Sorceries {
 
                     //"Return target creature card with converted mana cost X or less from your graveyard to the battlefield",
                     if(userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) {
-                        /*
-                    	//get all creatures
-                        CardList grave = AllZoneUtil.getPlayerGraveyard(card.getController());
-                        grave = grave.filter(AllZoneUtil.creatures);
-                        //grave = grave.filter(); //need to filter by cmc
-                        
-                        Object o = GuiUtils.getChoiceOptional("Select target creature card", grave);
-                        Card c = (Card)o;
-                        */
                     	Card c = ab1card[0];
                     	if(c != null) {
                     		if(AllZoneUtil.isCardInPlayerGraveyard(card.getController(), c) && CardFactoryUtil.canTarget(card, c)) {
@@ -4499,11 +4487,8 @@ public class CardFactory_Sorceries {
 				public void execute() {
                     ArrayList<String> a = new ArrayList<String>();
                     if(userChoice.contains(cardChoice[0]) || card.getChoices().contains(cardChoice[0])) a.add(ab0player[0]+" loses X life");
-                    
                     if(userChoice.contains(cardChoice[1]) || card.getChoices().contains(cardChoice[1])) a.add("return "+ab1card[0]+" from graveyard to play");
-                    
                     if(userChoice.contains(cardChoice[2]) || card.getChoices().contains(cardChoice[2])) a.add(ab2card[0]+" gets -X/-X until end of turn");
-                    
                     if(userChoice.contains(cardChoice[3]) || card.getChoices().contains(cardChoice[3])) a.add("up to X target creatures gain Fear until end of turn");
                     
                     String s = a.get(0) + ", " + a.get(1);
