@@ -11389,6 +11389,7 @@ public class CardFactory implements NewConstants {
 				@Override
                 public void undo() {
                     card.addCounter(Counters.CHARGE, num[0]);
+                    card.untap();
                 }
                 
                 //@Override
@@ -11404,6 +11405,7 @@ public class CardFactory implements NewConstants {
                 @Override
                 public void resolve() {
                     card.subtractCounter(Counters.CHARGE, num[0]);
+                    card.tap();
                     super.resolve();
                 }
             };
