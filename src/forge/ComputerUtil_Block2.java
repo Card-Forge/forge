@@ -289,7 +289,8 @@ public class ComputerUtil_Block2
          //System.out.println("Computer checking to block: "+attack.getName());
          //Lure
          if(attack.isEnchantedBy("Lure")) {
-        	 for(Card blocker:possibleBlockers) {
+        	 for(int j = 0; j < possibleBlockers.size(); j++) {
+        		 Card blocker = possibleBlockers.get(j);
         		 if(CombatUtil.canBlock(attack, blocker)) {
         			 possibleBlockers.remove(blocker);
         			 combat.addBlocker(attack, blocker);
