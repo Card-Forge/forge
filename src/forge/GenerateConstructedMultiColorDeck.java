@@ -786,7 +786,7 @@ public class GenerateConstructedMultiColorDeck
 	    	  
 	        return CardUtil.getColors(c).size() <= 3 &&
 	               !c.isLand()                       && //no land
-	               !remove.contains(c.getName())     || //OR very important
+	               !(remove.contains(c.getName()) || c.getSVar("RemAIDeck").equals("True"))    || //OR very important
 	               goodLand.contains(c.getName());
 	      }
 	    });
