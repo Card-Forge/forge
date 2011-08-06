@@ -138,7 +138,6 @@ public class GameActionUtil {
 		upkeep_Copper_Tablet();
 		upkeep_Sulfuric_Vortex();
 		upkeep_Power_Surge();
-		upkeep_The_Rack();
 		upkeep_Storm_World();
 		upkeep_Black_Vise();
 		upkeep_Ebony_Owl_Netsuke();
@@ -7677,38 +7676,7 @@ public class GameActionUtil {
 		}//for
 	}//upkeep_Sheltered_Valley()
 
-	private static void upkeep_The_Rack() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-
-		CardList racks = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent(), "The Rack");
-		racks.add(AllZoneUtil.getPlayerCardsInPlay(player.getOpponent(), "Wheel of Torture"));
-
-		// if there are 1 or more The Racks owned by the opponent of the
-		// current player have each of them deal damage.
-		for(Card rack:racks) {
-			final Card src = rack;
-			Ability ability = new Ability(src, "0") {
-				@Override
-				public void resolve() {
-					int playerHandSize = AllZone.getZone(Constant.Zone.Hand, player).size();
-					int damage = 3 - playerHandSize;
-					if (damage < 1) 
-						return;
-					player.addDamage(damage, src);
-				}
-			};// Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(src.getName());
-			sb.append(" - deals X damage to ").append(player);
-			sb.append(", where X is 3 minus the number of cards in his or her hand.");
-			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
-		}
-	}// upkeep_The_Rack
-	
-	private static void upkeep_Storm_World() {
+		private static void upkeep_Storm_World() {
 		final Player player = AllZone.Phase.getPlayerTurn();
 
 		CardList storms = AllZoneUtil.getCardsInPlay("Storm World");

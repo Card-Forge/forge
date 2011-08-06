@@ -1,7 +1,10 @@
 Name:The Rack
 ManaCost:1
 Types:Artifact
-Text:At the beginning of opponent's upkeep, The Rack deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | IsPresent$ Card.YouDontCtrl | PresentZone$ Hand | PresentCompare$ GE4 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of opponent's upkeep, The Rack deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ X
+SVar:X:Count$InOppHand/Minus.3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_rack.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/113.jpg
