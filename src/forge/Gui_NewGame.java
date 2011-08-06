@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.List;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -519,6 +520,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             boolean humanGenerate = human.equals("Generate Deck");
             boolean humanGenerateMulti3 = human.equals("Generate 3-Color Deck");
             boolean humanGenerateMulti5 = human.equals("Generate 5-Color Gold Deck");
+            boolean humanGenerateTheme = human.equals("Generate Theme Deck");
             boolean humanRandom = human.equals("Random");
             if(humanGenerate) {
                 if(constructed) Constant.Runtime.HumanDeck[0] = generateConstructedDeck();
@@ -527,6 +529,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 if(constructed) Constant.Runtime.HumanDeck[0] = generateConstructed3ColorDeck();
             } else if(humanGenerateMulti5) {
                 if(constructed) Constant.Runtime.HumanDeck[0] = generateConstructed5ColorDeck();
+            } else if (humanGenerateTheme) {
+            	if (constructed) Constant.Runtime.HumanDeck[0] = generateConstructedThemeDeck();
             } else if(humanRandom) {
                 Constant.Runtime.HumanDeck[0] = getRandomDeck(getDecks(format));
                 JOptionPane.showMessageDialog(null, String.format("You are using deck: %s",
@@ -539,6 +543,7 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             boolean computerGenerate = computer.equals("Generate Deck");
             boolean computerGenerateMulti3 = computer.equals("Generate 3-Color Deck");
             boolean computerGenerateMulti5 = computer.equals("Generate 5-Color Gold Deck");
+            boolean computerGenerateTheme = computer.equals("Generate Theme Deck");
             
             boolean computerRandom = computer.equals("Random");
             if(computerGenerate) {
@@ -548,6 +553,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
                 if(constructed) Constant.Runtime.ComputerDeck[0] = generateConstructed3ColorDeck();
             } else if(computerGenerateMulti5) {
                 if(constructed) Constant.Runtime.ComputerDeck[0] = generateConstructed5ColorDeck();
+            } else if (computerGenerateTheme) {
+            	if (constructed) Constant.Runtime.ComputerDeck[0] = generateConstructedThemeDeck();
             } else if(computerRandom) {
                 Constant.Runtime.ComputerDeck[0] = getRandomDeck(getDecks(format));
                 JOptionPane.showMessageDialog(null, String.format("The computer is using deck: %s",
@@ -616,6 +623,21 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         return deck;
     }
     
+    private Deck generateConstructedThemeDeck()
+    {
+    	GenerateThemeDeck gen = new GenerateThemeDeck();
+    	ArrayList<String> tNames = gen.getThemeNames();
+    	Object o = AllZone.Display.getChoice("Select a theme.", tNames.toArray());
+    	
+    	CardList td = gen.getThemeDeck(o.toString(), 60);
+    	Deck deck = new Deck(Constant.GameType.Constructed);
+    	
+    	for (int i=0; i<td.size(); i++)
+    		deck.addMain(td.get(i).getName());
+    	
+    	return deck;
+    }
+    
     void singleRadioButton_actionPerformed(ActionEvent e) {
         Constant.Runtime.GameType[0] = Constant.GameType.Constructed;
         updateDeckComboBoxes();
@@ -640,6 +662,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
             
             humanComboBox.addItem("Generate 5-Color Gold Deck");
             computerComboBox.addItem("Generate 5-Color Gold Deck");
+            
+            humanComboBox.addItem("Generate Theme Deck");
+            computerComboBox.addItem("Generate Theme Deck");
             
             humanComboBox.addItem("Random");
             computerComboBox.addItem("Random");

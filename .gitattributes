@@ -4605,6 +4605,7 @@ res/quest/quest.properties svneol=native#text/plain
 res/quest/questData -text svneol=unset#unset
 res/quest/quests.txt -text svneol=native#text/plain
 res/quest/rare.txt -text svneol=native#text/plain
+res/quest/themes/White.thm -text
 res/quest/uncommon.txt -text svneol=native#text/plain
 res/rare.txt -text svneol=native#text/plain
 res/sound/tap.mp3 -text svneol=unset#audio/mpeg
@@ -4712,6 +4713,7 @@ src/forge/GenerateConstructedDeck.java -text svneol=native#text/plain
 src/forge/GenerateConstructedMultiColorDeck.java -text svneol=native#text/plain
 src/forge/GenerateDraftDeck.java svneol=native#text/plain
 src/forge/GenerateSealedDeck.java svneol=native#text/plain
+src/forge/GenerateThemeDeck.java -text svneol=native#text/plain
 src/forge/GuiDisplay.java svneol=native#text/plain
 src/forge/GuiDisplay2.java svneol=native#text/plain
 src/forge/GuiDisplay3.java -text svneol=native#text/plain

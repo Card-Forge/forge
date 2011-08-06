@@ -1,0 +1,32 @@
+[BasicLand]
+Plains
+EndBasicLand
+
+[SpecialLand]
+Blasted Landscape
+Darksteel Citadel
+Drifting Meadow
+EndSpecialLand
+
+[Core]
+Glorious Anthem
+Isamaru, Hound of Konda
+Savannah Lions
+Silvercoat Lion
+Skyhunter Prowler
+Stand Firm
+Sunlance
+EndCore
+
+[Support]
+Standing Troops
+Staunch Defenders
+Steadfast Guard
+Steadfastness
+Steppe Lynx
+Swords to Plowshares
+Unmake
+Valorous Charge
+EndSupport
+
+End
