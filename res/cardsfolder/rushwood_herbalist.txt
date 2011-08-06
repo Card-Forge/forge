@@ -1,0 +1,8 @@
+Name:Rushwood Herbalist
+ManaCost:2 G
+Types:Creature Human Spellshaper
+Text:no text
+A:AB$Regenerate|Tgt$TgtC|Cost$G T Discard<1/Any>|SpellDescription$Regenerate target creature.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rushwood_herbalist.jpg
+End
