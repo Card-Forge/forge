@@ -884,7 +884,7 @@ public class CardFactory implements NewConstants {
         } //while - card has more RegenerateMe - Jungle Troll has two Regenerate keywords
         */
 
-        
+        /* Cards converted to SP$PumpAll
         if (hasKeyword(card, "spAllPump") != -1)
         {
         	int n = hasKeyword(card, "spAllPump");
@@ -1142,6 +1142,7 @@ public class CardFactory implements NewConstants {
                 card.addSpellAbility(bbAllPump);
              }
          }//spAllPump
+        */
         
         /* Cards converted to AB$PumpAll
         while (hasKeyword(card, "abAllPump") != -1)
