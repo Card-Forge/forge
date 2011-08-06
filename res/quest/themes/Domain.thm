@@ -26,16 +26,17 @@ Windswept Heath
 Wooded Foothills
 [/Group]
 
-[Group MaxCnt=4 Percentage=30]
+[Group MaxCnt=4 Percentage=32]
 Aven Trailblazer
 Drag Down
 Tribal Flames
 Allied Strategies
 Matca Rioters
 Tek
+Exotic Curse
 [/Group]
 
-[Group MaxCnt=4 Percentage=20]
+[Group MaxCnt=4 Percentage=18]
 Collective Restraint
 Voices from the Void
 Ordered Migration

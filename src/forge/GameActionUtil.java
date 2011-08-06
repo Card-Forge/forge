@@ -11320,7 +11320,7 @@ public class GameActionUtil {
 			if(!Keyword[0].contains("X")) powerbonus = Integer.valueOf(Keyword[0]);
 			else powerbonus = xValue; 		// the xCount takes places before
 			
-			if(!Keyword[1].contains("X")) toughnessbonus = Integer.valueOf(Keyword[0]);
+			if(!Keyword[1].contains("X")) toughnessbonus = Integer.valueOf(Keyword[1]);
 			else toughnessbonus = xValue;
 			
 			for(int i = 0; i < affectedCards.size(); i++) {
@@ -11357,7 +11357,7 @@ public class GameActionUtil {
 			if(!Keyword[0].contains("X")) powerbonus = Integer.valueOf(Keyword[0]);
 			else powerbonus = xValue; 		
 			
-			if(!Keyword[1].contains("X")) toughnessbonus = Integer.valueOf(Keyword[0]);
+			if(!Keyword[1].contains("X")) toughnessbonus = Integer.valueOf(Keyword[1]);
 			else toughnessbonus = xValue;
 			
 			affectedCard.addSemiPermanentAttackBoost(powerbonus * -1);
