@@ -241,7 +241,7 @@ public class CardUtil {
        String tMC = "";
        
        Integer cl1, cl2, tCL;
-       String c1, c2;
+       String c1, c2, cc1, cc2;
        
        c1 = mc1.replaceAll("[WUBRGSX]", "").trim();
        c2 = mc2.replaceAll("[WUBRGSX]", "").trim();
@@ -258,13 +258,13 @@ public class CardUtil {
        
        tCL = cl1 + cl2;
        
-       mc1 = mc1.replace("[12]?[0-9]", "").trim();
-       mc2 = mc2.replace("[12]?[0-9]", "").trim();
+       cc1 = mc1.replaceAll("[0-9]", "").trim();
+       cc2 = mc2.replaceAll("[0-9]", "").trim();
        
-       tMC = tCL.toString() + " " + mc1 + " " + mc2;
+       tMC = tCL.toString() + " " + cc1 + " " + cc2;
        
        //System.out.println("TMC:" + tMC);
-       return tMC;
+       return tMC.trim();
     }
     
     static public Card getRelative(Card c, String relation)
