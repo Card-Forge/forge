@@ -2734,8 +2734,8 @@ public class Card extends MyObservable {
             	if (isCreature())
             		GameActionUtil.executeCombatDamageToCreatureEffects(source, this, damageToAdd);
             	GameActionUtil.executeCombatDamageEffects(source, damageToAdd);
-            	map.put(source, damageToAdd);
             }
+        	map.put(source, damageToAdd);
         }
         
         if(AllZoneUtil.isCardInPlay(this)) {
