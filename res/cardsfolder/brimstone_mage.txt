@@ -6,7 +6,7 @@ PT:2/2
 K:stSetPT:2:2:LevelGE1:2:3:LevelGE3:2:4:LEVEL 1-2 2/3 tap: Brimstone Mage deals 1 damage to target creature or player. LEVEL 3+ 2/4 tap: Brimstone Mage deals 3 damage to target creature or player.
 K:stPumpSelf:Creature.countersGE1LEVEL:0/0/SVar=Ping:No Condition:no text
 K:stPumpSelf:Creature.countersGE3LEVEL:0/0/SVar=Bolt:No Condition:no text
-K:Level up:2 R
+K:Level up:3 R
 K:maxLevel:3
 SVar:Ping:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Bolt:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
