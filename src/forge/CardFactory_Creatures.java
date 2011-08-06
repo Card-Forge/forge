@@ -18601,6 +18601,58 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if (cardName.equals("Totem-Guide Hartebeest")) {
+        	final SpellAbility ability = new Ability(card, "0") {
+
+        		@Override
+        		public void resolve() {
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+        			PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+        			if (AllZone.GameAction.isCardInZone(getTargetCard(), lib)) {
+        				Card c = getTargetCard();
+        				AllZone.GameAction.shuffle(card.getController());
+        				lib.remove(c);
+        				hand.add(c);
+        			}
+        		}//resolve()
+        	};//spell ability
+
+        	Command intoPlay = new Command() {
+				private static final long serialVersionUID = -4230274815515610713L;
+
+				public void execute() {
+        			PlayerZone lib = AllZone.getZone(Constant.Zone.Library, card.getController());
+        			CardList cards = new CardList(lib.getCards());
+        			CardList auras = new CardList();
+
+        			for (int i = 0; i < cards.size(); i++) {
+        				if (cards.get(i).getType().contains("Enchantment") && cards.get(i).getType().contains("Aura")) {
+        					auras.add(cards.get(i));
+        				}
+        			}
+
+        			String controller = card.getController();
+
+        			if(auras.size() == 0) return;
+
+        			if (controller.equals(Constant.Player.Human)) {
+        				Object o = AllZone.Display.getChoiceOptional("Select target card", auras.toArray());
+        				if (o != null) {
+        					ability.setTargetCard((Card) o);
+        					AllZone.Stack.add(ability);
+        				}
+        			} else {    //computer	
+        				auras.shuffle();
+        				ability.setTargetCard(auras.get(0));
+        				AllZone.Stack.add(ability);
+        			}
+        		}//execute()
+        	};//Command
+        	
+        	card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
