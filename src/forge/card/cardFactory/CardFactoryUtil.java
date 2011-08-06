@@ -3309,7 +3309,7 @@ public class CardFactoryUtil {
 
         	n = cardsonbattlefield.size();
 
-        	return doXMath(n, m);
+        	return doXMath(n, m,source);
         }
         
         final String[] sq;
@@ -3317,17 +3317,17 @@ public class CardFactoryUtil {
         
         if(sq[0].contains("CardsInHand")) {
         	if(players.size() > 0) {
-        		return doXMath(AllZoneUtil.getPlayerHand(players.get(0)).size(), m);
+        		return doXMath(AllZoneUtil.getPlayerHand(players.get(0)).size(), m, source);
         	}
         }
         
         if(sq[0].contains("LifeTotal")) {
         	if(players.size() > 0) {
-        		return doXMath(players.get(0).getLife(), m);
+        		return doXMath(players.get(0).getLife(), m, source);
         	}
         }
         
-        return doXMath(n, m);
+        return doXMath(n, m, source);
     }
     
     //parser for non-mana X variables
@@ -3378,7 +3378,7 @@ public class CardFactoryUtil {
         	
         	n = cardsonbattlefield.size();
             
-            return doXMath(n, m);
+            return doXMath(n, m, c);
         }
         
         final String[] sq;
@@ -3409,7 +3409,7 @@ public class CardFactoryUtil {
        //TriggeringObjects
        if(sq[0].startsWith("Triggered"))
        {
-            return doXMath((Integer)c.getTriggeringObject(sq[0].substring(9)),m);
+            return doXMath((Integer)c.getTriggeringObject(sq[0].substring(9)),m, c);
        }
         
         // Count$Domain
@@ -3420,37 +3420,37 @@ public class CardFactoryUtil {
             for(int i = 0; i < basic.length; i++)
                 if(!someCards.getType(basic[i]).isEmpty()) n++;
             
-            return doXMath(n, m);
+            return doXMath(n, m, c);
         }
         
         // Count$YourLifeTotal
         if(sq[0].contains("YourLifeTotal")) {
-            if(cardController.isComputer()) return doXMath(AllZone.ComputerPlayer.getLife(), m);
-            else if(cardController.isHuman()) return doXMath(AllZone.HumanPlayer.getLife(), m);
+            if(cardController.isComputer()) return doXMath(AllZone.ComputerPlayer.getLife(), m, c);
+            else if(cardController.isHuman()) return doXMath(AllZone.HumanPlayer.getLife(), m, c);
             
             return 0;
         }
         
         // Count$OppLifeTotal
         if(sq[0].contains("OppLifeTotal")) {
-            if(oppController.isComputer()) return doXMath(AllZone.ComputerPlayer.getLife(), m);
-            else if(oppController.isHuman()) return doXMath(AllZone.HumanPlayer.getLife(), m);
+            if(oppController.isComputer()) return doXMath(AllZone.ComputerPlayer.getLife(), m, c);
+            else if(oppController.isHuman()) return doXMath(AllZone.HumanPlayer.getLife(), m, c);
             
             return 0;
         }
         
         // Count$YourPoisonCounters
         if(sq[0].contains("YourPoisonCounters")) {
-            if(cardController.isComputer()) return doXMath(AllZone.ComputerPlayer.getPoisonCounters(), m);
-            else if(cardController.isHuman()) return doXMath(AllZone.HumanPlayer.getPoisonCounters(), m);
+            if(cardController.isComputer()) return doXMath(AllZone.ComputerPlayer.getPoisonCounters(), m, c);
+            else if(cardController.isHuman()) return doXMath(AllZone.HumanPlayer.getPoisonCounters(), m, c);
             
             return 0;
         }
         
         // Count$OppPoisonCounters
         if(sq[0].contains("OppPoisonCounters")) {
-            if(oppController.isComputer()) return doXMath(AllZone.ComputerPlayer.getPoisonCounters(), m);
-            else if(oppController.isHuman()) return doXMath(AllZone.HumanPlayer.getPoisonCounters(), m);
+            if(oppController.isComputer()) return doXMath(AllZone.ComputerPlayer.getPoisonCounters(), m, c);
+            else if(oppController.isHuman()) return doXMath(AllZone.HumanPlayer.getPoisonCounters(), m, c);
             
             return 0;
         }
@@ -3467,53 +3467,53 @@ public class CardFactoryUtil {
         
         // Count$Chroma.<mana letter>
         if(sq[0].contains("Chroma")) return doXMath(
-                getNumberOfManaSymbolsControlledByColor(sq[1], cardController), m);
+                getNumberOfManaSymbolsControlledByColor(sq[1], cardController), m, c);
         
         // Count$Hellbent.<numHB>.<numNotHB>
         if(sq[0].contains("Hellbent"))
         {
         	if(myHand.size() <= 0) 
-        		return doXMath(Integer.parseInt(sq[1]), m); // Hellbent
+        		return doXMath(Integer.parseInt(sq[1]), m, c); // Hellbent
         	else
-        		return doXMath(Integer.parseInt(sq[2]), m); // not Hellbent
+        		return doXMath(Integer.parseInt(sq[2]), m, c); // not Hellbent
         }
         
         //Count$Metalcraft.<numMC>.<numNotMC>
         if(sq[0].contains("Metalcraft"))
         {
         	if(cardController.hasMetalcraft())
-        		return doXMath(Integer.parseInt(sq[1]),m);
+        		return doXMath(Integer.parseInt(sq[1]),m, c);
         	else
-        		return doXMath(Integer.parseInt(sq[2]),m);
+        		return doXMath(Integer.parseInt(sq[2]),m, c);
         }
         
         if (sq[0].contains("Threshold"))
         {
         	if (myYard.size() >= 7)
-        		return doXMath(Integer.parseInt(sq[1]), m); // Have Threshold
+        		return doXMath(Integer.parseInt(sq[1]), m, c); // Have Threshold
         	else
-        		return doXMath(Integer.parseInt(sq[2]), m); // not Threshold
+        		return doXMath(Integer.parseInt(sq[2]), m, c); // not Threshold
         }
         	
         
         // Count$CardPower
-        if(sq[0].contains("CardPower")) return doXMath(c.getNetAttack(), m);
+        if(sq[0].contains("CardPower")) return doXMath(c.getNetAttack(), m, c);
         // Count$CardToughness
-        if(sq[0].contains("CardToughness")) return doXMath(c.getNetDefense(), m);
+        if(sq[0].contains("CardToughness")) return doXMath(c.getNetDefense(), m, c);
         // Count$CardManaCost
-        if(sq[0].contains("CardManaCost")) return doXMath(CardUtil.getConvertedManaCost(c), m);
+        if(sq[0].contains("CardManaCost")) return doXMath(CardUtil.getConvertedManaCost(c), m, c);
         // Count$CardCounters.<counterType>
         if (sq[0].contains("CardCounters"))
-        	return doXMath(c.getCounters(Counters.getType(sq[1])), m);
+        	return doXMath(c.getCounters(Counters.getType(sq[1])), m, c);
         // Count$TimesKicked
         if(sq[0].contains("TimesKicked"))
-        	return doXMath(c.getMultiKickerMagnitude(), m);
+        	return doXMath(c.getMultiKickerMagnitude(), m, c);
         if(sq[0].contains("NumCounters")) {
         	int num = c.getCounters(Counters.getType(sq[1]));
-        	return doXMath(num, m);
+        	return doXMath(num, m, c);
         }
         if(sq[0].contains("NumBlockingMe"))
-        	return doXMath(AllZone.Combat.getBlockers(c).size(), m);
+        	return doXMath(AllZone.Combat.getBlockers(c).size(), m, c);
         
         //Count$IfMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfMainPhase"))
@@ -3522,9 +3522,9 @@ public class CardFactoryUtil {
         	if ((cPhase.equals(Constant.Phase.Main1) ||
         		 cPhase.equals(Constant.Phase.Main2)) && 
         		 AllZone.Phase.getPlayerTurn().equals(cardController))
-        		return doXMath(Integer.parseInt(sq[1]), m);
+        		return doXMath(Integer.parseInt(sq[1]), m, c);
         	else
-        		return doXMath(Integer.parseInt(sq[2]), m); // not Main Phase
+        		return doXMath(Integer.parseInt(sq[2]), m, c); // not Main Phase
         }
 
         //Count$ThisTurnEntered <ZoneDestination> <ZoneOrigin> <Valid>
@@ -3559,7 +3559,7 @@ public class CardFactoryUtil {
                }
             });
 
-            return doXMath(res.size(),m);
+            return doXMath(res.size(),m, c);
         }
         
         //Generic Zone-based counting
@@ -3727,9 +3727,9 @@ public class CardFactoryUtil {
         if(sq[0].contains("CardMulticolor"))
         {
         	if(CardUtil.getColors(c).size() > 1)
-        		return doXMath(Integer.parseInt(sq[1]),m);
+        		return doXMath(Integer.parseInt(sq[1]),m, c);
         	else
-        		return doXMath(Integer.parseInt(sq[2]),m);
+        		return doXMath(Integer.parseInt(sq[2]),m, c);
         }
         
         // 1/10 - Count$MaxCMCYouCtrl
@@ -3741,37 +3741,50 @@ public class CardFactoryUtil {
                 if(cmc > mmc) mmc = cmc;
             }
             
-            return doXMath(mmc, m);
+            return doXMath(mmc, m, c);
         }
         
         n = someCards.size();
         
-        return doXMath(n, m);
+        return doXMath(n, m, c);
     }
     
-    private static int doXMath(int num, String m){
+    private static int doXMath(int num, String m,Card c){
         if(m.equals("none")) return num;
         
         String[] s = m.split("\\.");
+        int secondaryNum = 0;
+
+        try
+        {
+            if(s.length == 2)
+            {
+                secondaryNum = Integer.parseInt(s[1]);
+            }
+        }
+        catch(Exception e)
+        {
+            secondaryNum = xCount(c, c.getSVar(s[1]));
+        }
         
-        if(s[0].contains("Plus")) return num + Integer.parseInt(s[1]);
-        else if(s[0].contains("NMinus")) return Integer.parseInt(s[1]) - num;
-        else if(s[0].contains("Minus")) return num - Integer.parseInt(s[1]);
+        if(s[0].contains("Plus")) return num + secondaryNum;
+        else if(s[0].contains("NMinus")) return secondaryNum - num;
+        else if(s[0].contains("Minus")) return num - secondaryNum;
         else if(s[0].contains("Twice")) return num * 2;
         else if(s[0].contains("HalfUp")) return (int) (Math.ceil(num / 2.0));
         else if(s[0].contains("HalfDown")) return (int) (Math.floor(num / 2.0));
         else if(s[0].contains("ThirdUp")) return (int) (Math.ceil(num / 3.0));
         else if(s[0].contains("ThirdDown")) return (int) (Math.floor(num / 3.0));
         else if(s[0].contains("Negative")) return num * -1;
-        else if(s[0].contains("Times")) return num * Integer.parseInt(s[1]);
+        else if(s[0].contains("Times")) return num * secondaryNum;
         else return num;
     }
     
-    private static int doXMath(int num, String[] m) {
+    private static int doXMath(int num, String[] m, Card c) {
     	if (m.length == 0)
     		return num;
     	
-    	return doXMath(num, m[0]);
+    	return doXMath(num, m[0],c);
     }
 	
 	public static int handlePaid(CardList paidList, String string, Card source) {
@@ -3781,7 +3794,7 @@ public class CardFactoryUtil {
 		if (string.startsWith("Amount")){
 			if (string.contains(".")){
 				String[] splitString = string.split("\\.", 2);
-				return doXMath(paidList.size(), splitString[1]);
+				return doXMath(paidList.size(), splitString[1],source);
 			}
 			else
 				return paidList.size();
@@ -3829,7 +3842,7 @@ public class CardFactoryUtil {
 	                //for(int i = 1; i < dd.length; i++)
 	                //    ddd.add(dd[i]);
 	                
-	                X = doXMath(X, m);
+	                X = doXMath(X, m, Src);
 	            }
 	        } 
 	        else if(d[1].matches("[0-9][0-9]?")) 
