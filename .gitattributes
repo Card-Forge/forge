@@ -3993,6 +3993,7 @@ res/cardsfolder/phyrexian_altar.txt -text svneol=native#text/plain
 res/cardsfolder/phyrexian_arena.txt -text svneol=native#text/plain
 res/cardsfolder/phyrexian_battleflies.txt -text svneol=native#text/plain
 res/cardsfolder/phyrexian_boon.txt -text svneol=native#text/plain
+res/cardsfolder/phyrexian_broodlings.txt svneol=native#text/plain
 res/cardsfolder/phyrexian_debaser.txt -text svneol=native#text/plain
 res/cardsfolder/phyrexian_defiler.txt -text svneol=native#text/plain
 res/cardsfolder/phyrexian_denouncer.txt -text svneol=native#text/plain
