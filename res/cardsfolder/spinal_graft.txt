@@ -1,0 +1,10 @@
+Name:Spinal Graft
+ManaCost:1 B
+Types:Enchantment Aura
+Text:no text
+K:Enchant Creature
+K:enPump:+3/+3
+K:When enchanted creature becomes the target of a spell or ability, destroy that creature. It can't be regenerated.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spinal_graft.jpg
+End

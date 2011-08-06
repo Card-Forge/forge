@@ -4527,6 +4527,81 @@ public class CardFactoryUtil {
     		
     		AllZone.Stack.add(ability);
     	}
+    	
+    	//When enchanted creature becomes the target of a spell or ability, <destroy/exile/sacrifice> <that creature/CARDNAME>. (It can't be regenerated.)
+    	ArrayList<Card> auras = c.getEnchantedBy();
+    	for(int a=0;a<auras.size();a++)
+    	{
+    		final Card aura = auras.get(a);
+    		ArrayList<String> keywords = aura.getKeyword();
+    		for(int i=0;i<keywords.size();i++)
+    		{
+    			final String keyword = keywords.get(i);
+    			if(keyword.startsWith("When enchanted creature becomes the target of a spell or ability, "))
+    			{
+    				final String action[] = new String[1];
+    				action[0] = keyword.substring(66);
+    				String stackDesc = action[0];
+    				stackDesc = stackDesc.replace("that", "enchanted");
+    				stackDesc = stackDesc.substring(0,1).toUpperCase().concat(stackDesc.substring(1));
+    				stackDesc = aura.getName().concat(" (").concat(Integer.toString(aura.getUniqueNumber())).concat(") - ").concat(stackDesc);
+    				
+    				Ability saTrigger = new Ability(aura,"0") {
+    					public void resolve()
+    					{
+    						Card target = null;
+    						boolean noRegen = false;
+    						if(action[0].endsWith(" It can't be regenerated."))
+    	    				{
+    	    					noRegen = true;
+    	    					action[0] = action[0].substring(0,action[0].length()-25);
+    	    				}
+    	    				
+    	    				if(action[0].endsWith("CARDNAME."))
+    	    				{
+    	    					target = aura;
+    	    				}
+    	    				else if(action[0].endsWith("that creature."))
+    	    				{
+    	    					target = c;
+    	    				}
+    	    				else
+    	    				{
+    	    					throw new IllegalArgumentException("There is a problem in the keyword " + keyword + "for card \"" + c.getName() + "\"");
+    	    				}
+    	    				
+    	    				if(action[0].startsWith("exile"))
+    	    				{   					
+    	    					AllZone.GameAction.exile(target);
+    	    				}
+    	    				else if(action[0].startsWith("destroy"))
+    	    				{
+    	    					if(noRegen)
+    	    					{
+    	    						AllZone.GameAction.destroyNoRegeneration(target);
+    	    					}
+    	    					else
+    	    					{
+    	    						AllZone.GameAction.destroy(target);
+    	    					}    					
+    	    				}
+    	    				else if(action[0].startsWith("sacrifice"))
+    	    				{
+    	    					AllZone.GameAction.sacrifice(target);
+    	    				}
+    	    				else
+    	    				{
+    	    					throw new IllegalArgumentException("There is a problem in the keyword " + keyword + "for card \"" + c.getName() + "\"");
+    	    				}
+    					}
+    				};
+    				
+    				saTrigger.setStackDescription(stackDesc);
+    				
+    				AllZone.Stack.add(saTrigger);
+    			}
+    		}
+    	}
     	//}
     }
 
