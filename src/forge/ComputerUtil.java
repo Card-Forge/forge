@@ -397,20 +397,37 @@ public class ComputerUtil
 
     for(int i = 0; i < land.size(); i++)
     {
+    	final Card sourceLand = land.get(i);
        colors = getColors(land.get(i));
       for(int j = 0; j <colors.size();j++)
       {
-         if(cost.isNeeded(colors.get(j)) && land.get(i).isUntapped())
+         if(cost.isNeeded(colors.get(j)) && sourceLand.isUntapped())
          {
-            land.get(i).tap();
+            sourceLand.tap();
             cost.payMana(colors.get(j));
             
-            if (land.get(i).getName().equals("Undiscovered Paradise")) {
-            	land.get(i).setBounceAtUntap(true);
+            if (sourceLand.getName().equals("Undiscovered Paradise")) {
+            	sourceLand.setBounceAtUntap(true);
             }
             
-            if (land.get(i).getName().equals("Forbidden Orchard")) {
-            	AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(land.get(i), AllZone.HumanPlayer));
+            if (sourceLand.getName().equals("Forbidden Orchard")) {
+            	AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(sourceLand, AllZone.HumanPlayer));
+            }
+            
+            //Manabarbs code
+            if(sourceLand.isLand()) { //&& this.isTapAbility()) {
+            	CardList barbs = AllZoneUtil.getCardsInPlay("Manabarbs");
+            	for(Card barb:barbs) {
+            		final Card manabarb = barb;
+            		SpellAbility ability = new Ability(manabarb, "") {
+            			@Override
+            			public void resolve() {
+            				sourceLand.getController().addDamage(1, manabarb);
+            			}
+            		};
+            		ability.setStackDescription(manabarb.getName()+" - deal 1 damage to "+sourceLand.getController());
+            		AllZone.Stack.add(ability);
+            	}
             }
             
             //System.out.println("just subtracted " + colors.get(j) + ", cost is now: " + cost.toString());

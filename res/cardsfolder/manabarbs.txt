@@ -1,0 +1,8 @@
+Name:Manabarbs
+ManaCost:3 R
+Types:Enchentment
+Text:Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/manabarbs.jpg
+End

@@ -278,7 +278,23 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
         	for(int i = 0; i < Phase.HighTideCount; i++) {
         		AllZone.ManaPool.addManaToFloating("U", sourceCard);	
         	}
-        } 
+        }
+        
+        //Manabarbs code
+        if(sourceCard.isLand() && this.isTapAbility()) {
+        	CardList barbs = AllZoneUtil.getCardsInPlay("Manabarbs");
+        	for(Card barb:barbs) {
+        		final Card manabarb = barb;
+        		SpellAbility ability = new Ability(manabarb, "") {
+        			@Override
+        			public void resolve() {
+        				sourceCard.getController().addDamage(1, manabarb);
+        			}
+        		};
+        		ability.setStackDescription(manabarb.getName()+" - deal 1 damage to "+sourceCard.getController());
+        		AllZone.Stack.add(ability);
+        	}
+        }
 
         if(!runcommands.isEmpty()) for(Command c:runcommands)
             c.execute();
