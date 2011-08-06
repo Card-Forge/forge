@@ -1,7 +1,7 @@
 Name:Bad Moon
 ManaCost:1 B
 Types:Enchantment
-Text:Black creatures get +1/+1
+Text:no text
 K:stPumpAll:Creature.Black:1/1:No Condition:Black creatures get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare

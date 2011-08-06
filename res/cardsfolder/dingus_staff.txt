@@ -2,7 +2,7 @@ Name:Dingus Staff
 ManaCost:4
 Types:Artifact
 Text:no text
-K:Whenever a creature is put into a graveyard from the battlefield, Dingus Egg deals 2 damage to that creature's controller.
+K:Whenever a creature is put into a graveyard from the battlefield, Dingus Staff deals 2 damage to that creature's controller.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dingus_staff.jpg
 SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/149.jpg

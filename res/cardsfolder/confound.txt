@@ -2,7 +2,7 @@ Name:Confound
 ManaCost:1 U
 Types:Instant
 Text:no text
-A:SP$Counter | Cost$ 1 U | Type$ Spell | SpellTarget$ Creature | SubAbility$ SVar=DBDraw | SpellDescription$ Counter target spell that targets one or more creatures.\r\nDraw a card.
+A:SP$Counter | Cost$ 1 U | Type$ Spell | SpellTarget$ Creature | SubAbility$ SVar=DBDraw | SpellDescription$ Counter target spell that targets one or more creatures. Draw a card.
 SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/confound.jpg
