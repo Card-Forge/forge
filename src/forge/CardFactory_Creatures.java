@@ -18083,7 +18083,7 @@ public class CardFactory_Creatures {
 				@Override
 				public boolean canPlay() {
 					//need to check if there are other creatures in play
-					return true;
+					return AllZone.GameAction.isCardInPlay(card) && !card.hasSickness();
 				}
 				@Override
 				public boolean canPlayAI() {
