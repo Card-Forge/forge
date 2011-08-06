@@ -26,7 +26,7 @@ import forge.card.spellability.Target;
 import forge.gui.GuiUtils;
 
 public class AbilityFactory_Reveal {
-	
+
 	// *************************************************************************
 	// ************************* Dig *******************************************
 	// *************************************************************************
@@ -120,7 +120,7 @@ public class AbilityFactory_Reveal {
 		else
 			sb.append(" ");
 
-		
+
 		ArrayList<Player> tgtPlayers;
 
 		Target tgt = af.getAbTgt();
@@ -128,7 +128,7 @@ public class AbilityFactory_Reveal {
 			tgtPlayers = tgt.getTargetPlayers();
 		else
 			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
-		
+
 		sb.append(host.getController()).append(" looks at the top ").append(numToDig);
 		sb.append(" card");
 		if(numToDig != 1) sb.append("s");
@@ -207,6 +207,7 @@ public class AbilityFactory_Reveal {
 		String destZone2 = params.containsKey("DestinationZone2") ? params.get("DestinationZone2") : "Library";
 		int libraryPosition2 = params.containsKey("LibraryPosition2") ? Integer.parseInt(params.get("LibraryPosition2")) : -1;
 		boolean optional = params.containsKey("Optional");
+		boolean noMove = params.containsKey("NoMove");
 
 		ArrayList<Player> tgtPlayers;
 
@@ -233,70 +234,72 @@ public class AbilityFactory_Reveal {
 					//show the user the revealed cards
 					GuiUtils.getChoice("Looking at cards from library", top.toArray());
 
-					if(mitosis) {
-						valid = sharesNameWithCardOnBattlefield(top);
-						for(Card c:top) {
-							if(!valid.contains(c)) rest.add(c);
+					if(!noMove) {
+						if(mitosis) {
+							valid = sharesNameWithCardOnBattlefield(top);
+							for(Card c:top) {
+								if(!valid.contains(c)) rest.add(c);
+							}
 						}
-					}
-					else if(!changeValid.equals("")) {
-						valid = top.getValidCards(changeValid.split(","), host.getController(), host);
-						for(Card c:top) {
-							if(!valid.contains(c)) rest.add(c);
-						}
-					}
-					else {
-						valid = top;
-					}
-
-					int j = 0;
-					while(j < destZone1ChangeNum || (anyNumber && j < numToDig)) {
-						//let user get choice
-						Card chosen = null;
-						if(anyNumber || optional) {
-							chosen = GuiUtils.getChoiceOptional("Choose a card to put into "+destZone1, valid.toArray());
+						else if(!changeValid.equals("")) {
+							valid = top.getValidCards(changeValid.split(","), host.getController(), host);
+							for(Card c:top) {
+								if(!valid.contains(c)) rest.add(c);
+							}
 						}
 						else {
-							chosen = GuiUtils.getChoice("Choose a card to put into "+destZone1, valid.toArray());
+							valid = top;
 						}
-						if(chosen == null) break;
-						valid.remove(chosen);
-						PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
-						if(zone.is("Library")) {
-							//System.out.println("Moving to lib position: "+libraryPosition);
-							AllZone.GameAction.moveToLibrary(chosen, libraryPosition);
-						}
-						else {
-							AllZone.GameAction.moveTo(zone, chosen);
-						}
-						//AllZone.GameAction.revealToComputer() - for when this exists
-						j++;
-					}
 
-					//dump anything not selected from valid back into the rest
-					rest.addAll(valid.toArray());
-					
-					//now, move the rest to destZone2
-					if(destZone2.equals("Library")) {
-						//put them in any order
-						while(rest.size() > 0) {
-							Card chosen;
-							if(rest.size() > 1) {
-								chosen = GuiUtils.getChoice("Put the rest in the library in any order", rest.toArray());
+						int j = 0;
+						while(j < destZone1ChangeNum || (anyNumber && j < numToDig)) {
+							//let user get choice
+							Card chosen = null;
+							if(anyNumber || optional) {
+								chosen = GuiUtils.getChoiceOptional("Choose a card to put into "+destZone1, valid.toArray());
 							}
 							else {
-								chosen = rest.get(0);
+								chosen = GuiUtils.getChoice("Choose a card to put into "+destZone1, valid.toArray());
 							}
-							AllZone.GameAction.moveToLibrary(chosen, libraryPosition2);
-							rest.remove(chosen);
+							if(chosen == null) break;
+							valid.remove(chosen);
+							PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
+							if(zone.is("Library")) {
+								//System.out.println("Moving to lib position: "+libraryPosition);
+								AllZone.GameAction.moveToLibrary(chosen, libraryPosition);
+							}
+							else {
+								AllZone.GameAction.moveTo(zone, chosen);
+							}
+							//AllZone.GameAction.revealToComputer() - for when this exists
+							j++;
 						}
-					}
-					else {
-						//just move them randomly
-						for(int i = 0; i < rest.size(); i++) {
-							Card c = rest.get(i);
-							PlayerZone toZone = AllZone.getZone(destZone2, c.getOwner());
-							AllZone.GameAction.moveTo(toZone, c);
+
+						//dump anything not selected from valid back into the rest
+						rest.addAll(valid.toArray());
+
+						//now, move the rest to destZone2
+						if(destZone2.equals("Library")) {
+							//put them in any order
+							while(rest.size() > 0) {
+								Card chosen;
+								if(rest.size() > 1) {
+									chosen = GuiUtils.getChoice("Put the rest in the library in any order", rest.toArray());
+								}
+								else {
+									chosen = rest.get(0);
+								}
+								AllZone.GameAction.moveToLibrary(chosen, libraryPosition2);
+								rest.remove(chosen);
+							}
+						}
+						else {
+							//just move them randomly
+							for(int i = 0; i < rest.size(); i++) {
+								Card c = rest.get(i);
+								PlayerZone toZone = AllZone.getZone(destZone2, c.getOwner());
+								AllZone.GameAction.moveTo(toZone, c);
+							}
 						}
 					}
 				}//end if canTarget
@@ -310,7 +313,7 @@ public class AbilityFactory_Reveal {
 			}
 		}
 	}//end resolve
-	
+
 	//returns a CardList that is a subset of list with cards that share a name with a permanent on the battlefield
 	private static CardList sharesNameWithCardOnBattlefield(CardList list) {
 		CardList toReturn = new CardList();
@@ -322,7 +325,7 @@ public class AbilityFactory_Reveal {
 		}
 		return toReturn;
 	}
-	
+
 	//**********************************************************************
 	//******************************* RevealHand ***************************
 	//**********************************************************************
@@ -523,70 +526,70 @@ public class AbilityFactory_Reveal {
 
 		return true;
 	}
-    
-    private static void revealHandResolve(final AbilityFactory af, final SpellAbility sa){
-    	HashMap<String,String> params = af.getMapParams();
-    	Card source = sa.getSourceCard();
 
-    	ArrayList<Player> tgtPlayers;
+	private static void revealHandResolve(final AbilityFactory af, final SpellAbility sa){
+		HashMap<String,String> params = af.getMapParams();
+		Card source = sa.getSourceCard();
 
-    	Target tgt = af.getAbTgt();
-    	if (tgt != null)
-    		tgtPlayers = tgt.getTargetPlayers();
-    	else
-    		tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+		ArrayList<Player> tgtPlayers;
 
-    	for(Player p : tgtPlayers) {
-    		if (tgt == null || p.canTarget(af.getHostCard())){
-    			CardList hand = AllZoneUtil.getPlayerHand(p);
-    			if(sa.getActivatingPlayer().isHuman()) {
-    				if (hand.size() > 0) {
-    					GuiUtils.getChoice(p+"'s hand", hand.toArray());
-    				} else {
-    					StringBuilder sb = new StringBuilder();
-    					sb.append(p).append("'s hand is empty!");
-    					javax.swing.JOptionPane.showMessageDialog(null, sb.toString(), p+"'s hand", JOptionPane.INFORMATION_MESSAGE);
-    				}
-    			}
-    			else {
-    				//reveal to Computer (when computer can keep track of seen cards...)
-    			}
+		Target tgt = af.getAbTgt();
+		if (tgt != null)
+			tgtPlayers = tgt.getTargetPlayers();
+		else
+			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
 
-    		}
-    	}
+		for(Player p : tgtPlayers) {
+			if (tgt == null || p.canTarget(af.getHostCard())){
+				CardList hand = AllZoneUtil.getPlayerHand(p);
+				if(sa.getActivatingPlayer().isHuman()) {
+					if (hand.size() > 0) {
+						GuiUtils.getChoice(p+"'s hand", hand.toArray());
+					} else {
+						StringBuilder sb = new StringBuilder();
+						sb.append(p).append("'s hand is empty!");
+						javax.swing.JOptionPane.showMessageDialog(null, sb.toString(), p+"'s hand", JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				else {
+					//reveal to Computer (when computer can keep track of seen cards...)
+				}
 
-    	if (af.hasSubAbility()){
-    		Ability_Sub abSub = sa.getSubAbility();
-    		if (abSub != null){
-    			abSub.resolve();
-    		}
-    		else{
-    			String DrawBack = params.get("SubAbility");
-    			if (af.hasSubAbility())
-    				CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
-    		}
-    	}
-    }
-    
-  //**********************************************************************
+			}
+		}
+
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+				abSub.resolve();
+			}
+			else{
+				String DrawBack = params.get("SubAbility");
+				if (af.hasSubAbility())
+					CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
+			}
+		}
+	}
+
+	//**********************************************************************
 	//******************************* SCRY *********************************
 	//**********************************************************************
-	
+
 	public static SpellAbility createAbilityScry(final AbilityFactory AF){
 		final SpellAbility abScry = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
 			private static final long serialVersionUID = 2631175859655699419L;
 			final AbilityFactory af = AF;
-			
+
 			@Override
 			public String getStackDescription(){
 				return scryStackDescription(af, this);
 			}
-			
+
 			public boolean canPlayAI()
 			{
 				return scryCanPlayAI(af,this);
 			}
-			
+
 			@Override
 			public void resolve() {
 				scryResolve(af, this);
@@ -596,40 +599,40 @@ public class AbilityFactory_Reveal {
 			public boolean doTrigger(boolean mandatory) {
 				return scryTriggerAI(af,this);
 			}
-			
+
 		};
 		return abScry;
 	}
-	
+
 	public static SpellAbility createSpellScry(final AbilityFactory AF){
 		final SpellAbility spScry = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
 			private static final long serialVersionUID = 6273876397392154403L;
 			final AbilityFactory af = AF;
-			
+
 			@Override
 			public String getStackDescription(){
 				return scryStackDescription(af, this);
 			}
-			
+
 			public boolean canPlayAI()
 			{
 				return scryCanPlayAI(af, this);
 			}
-			
+
 			@Override
 			public void resolve() {
 				scryResolve(af, this);
 			}
-			
+
 		};
 		return spScry;
 	}
-	
+
 	public static SpellAbility createDrawbackScry(final AbilityFactory AF){
 		final SpellAbility dbScry = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
 			private static final long serialVersionUID = 7763043327497404630L;
 			final AbilityFactory af = AF;
-			
+
 			@Override
 			public String getStackDescription(){
 				// when getStackDesc is called, just build exactly what is happening
@@ -650,19 +653,19 @@ public class AbilityFactory_Reveal {
 			public boolean doTrigger(boolean mandatory) {
 				return scryTriggerAI(af, this);
 			}
-			
+
 		};
 		return dbScry;
 	}
-	
+
 	private static void scryResolve(final AbilityFactory af, final SpellAbility sa){
 		HashMap<String,String> params = af.getMapParams();
-		
+
 		Card source = sa.getSourceCard();
-        int num = 1;
-        if (params.containsKey("ScryNum"))
-        	num = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("ScryNum"), sa);
-		
+		int num = 1;
+		if (params.containsKey("ScryNum"))
+			num = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("ScryNum"), sa);
+
 		ArrayList<Player> tgtPlayers;
 
 		Target tgt = af.getAbTgt();
@@ -670,7 +673,7 @@ public class AbilityFactory_Reveal {
 			tgtPlayers = tgt.getTargetPlayers();
 		else
 			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
-		
+
 		for(Player p : tgtPlayers) {
 			if (tgt == null || p.canTarget(af.getHostCard())){
 				p.scry(num);
@@ -680,44 +683,44 @@ public class AbilityFactory_Reveal {
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-	     	   abSub.resolve();
-	        }
-	        else{
+				abSub.resolve();
+			}
+			else{
 				String DrawBack = params.get("SubAbility");
 				if (af.hasSubAbility())
-					 CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
-	        }
+					CardFactoryUtil.doDrawBack(DrawBack, 0, source.getController(), source.getController().getOpponent(), tgtPlayers.get(0), source, null, sa);
+			}
 		}
 	}
-	
+
 	private static boolean scryTargetAI(AbilityFactory af, SpellAbility sa) {
-        Target tgt = af.getAbTgt();
-        
-        if (tgt != null) {	// It doesn't appear that Scry ever targets
-            // ability is targeted
-            tgt.resetTargets();
-            
-            tgt.addTarget(AllZone.ComputerPlayer);
-        }
-        
-        return true;
-    }// scryTargetAI()
-	
+		Target tgt = af.getAbTgt();
+
+		if (tgt != null) {	// It doesn't appear that Scry ever targets
+			// ability is targeted
+			tgt.resetTargets();
+
+			tgt.addTarget(AllZone.ComputerPlayer);
+		}
+
+		return true;
+	}// scryTargetAI()
+
 	private static boolean scryTriggerAI(AbilityFactory af, SpellAbility sa) {
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
-        
-        return scryTargetAI(af, sa);
-    }// scryTargetAI()
-	
+
+		return scryTargetAI(af, sa);
+	}// scryTargetAI()
+
 	public static String scryStackDescription(AbilityFactory af, SpellAbility sa){
 		StringBuilder sb = new StringBuilder();
-		
+
 		if (!(sa instanceof Ability_Sub))
 			sb.append(sa.getSourceCard().getName()).append(" - ");
 		else
 			sb.append(" ");
-		
+
 		ArrayList<Player> tgtPlayers;
 
 		Target tgt = af.getAbTgt();
@@ -725,41 +728,41 @@ public class AbilityFactory_Reveal {
 			tgtPlayers = tgt.getTargetPlayers();
 		else
 			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
-		
+
 		for(Player p : tgtPlayers)
 			sb.append(p.toString()).append(" ");
 
-        int num = 1;
-        if (af.getMapParams().containsKey("ScryNum"))
-        	num = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("ScryNum"), sa);
-		
+		int num = 1;
+		if (af.getMapParams().containsKey("ScryNum"))
+			num = AbilityFactory.calculateAmount(sa.getSourceCard(), af.getMapParams().get("ScryNum"), sa);
+
 		sb.append("scrys (").append(num).append(").");
-		
+
 		Ability_Sub abSub = sa.getSubAbility();
-        if (abSub != null){
-        	sb.append(abSub.getStackDescription());
-        }
-		
+		if (abSub != null){
+			sb.append(abSub.getStackDescription());
+		}
+
 		return sb.toString();
 	}
-	
+
 	private static boolean scryCanPlayAI(final AbilityFactory af, SpellAbility sa){
 		Card source = sa.getSourceCard();
-		
+
 		double chance = .4;	// 40 percent chance of milling with instant speed stuff
 		if (AbilityFactory.isSorcerySpeed(sa))
 			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
 		Random r = MyRandom.random;
 		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
-		
+
 		if (AbilityFactory.playReusable(sa))
 			randomReturn = true;
-		
+
 		if (af.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-	     	   return randomReturn && abSub.chkAI_Drawback();
-	        }
+				return randomReturn && abSub.chkAI_Drawback();
+			}
 		}
 		return randomReturn;
 	}
@@ -767,7 +770,7 @@ public class AbilityFactory_Reveal {
 	//**********************************************************************
 	//*********************** REARRANGETOPOFLIBRARY ************************
 	//**********************************************************************
-	
+
 	public static SpellAbility createRearrangeTopOfLibraryAbility(final AbilityFactory AF)
 	{
 		final SpellAbility RTOLAbility = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
@@ -778,28 +781,28 @@ public class AbilityFactory_Reveal {
 			{
 				return rearrangeTopOfLibraryStackDescription(AF, this);
 			}
-			
+
 			@Override
 			public boolean canPlayAI()
 			{
 				return false;
 			}
-			
+
 			@Override
 			public boolean doTrigger(boolean mandatory) {
 				return rearrangeTopOfLibraryTrigger(AF, this, mandatory);
 			}
-			
+
 			@Override
 			public void resolve() {
 				rearrangeTopOfLibraryResolve(AF, this);
 			}
-			
+
 		};
-		
+
 		return RTOLAbility;
 	}
-	
+
 	public static SpellAbility createRearrangeTopOfLibrarySpell(final AbilityFactory AF)
 	{
 		final SpellAbility RTOLSpell = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
@@ -810,28 +813,28 @@ public class AbilityFactory_Reveal {
 			{
 				return rearrangeTopOfLibraryStackDescription(AF, this);
 			}
-			
+
 			@Override
 			public boolean canPlayAI()
 			{
 				return false;
 			}
-			
+
 			@Override
 			public boolean doTrigger(boolean mandatory) {
 				return rearrangeTopOfLibraryTrigger(AF, this, mandatory);
 			}
-			
+
 			@Override
 			public void resolve() {
 				rearrangeTopOfLibraryResolve(AF, this);			
 			}
-			
+
 		};
-		
+
 		return RTOLSpell;
 	}
-	
+
 	public static SpellAbility createRearrangeTopOfLibraryDrawback(final AbilityFactory AF){
 		final SpellAbility dbDraw = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
 			private static final long serialVersionUID = -777856059960750319L;
@@ -856,26 +859,26 @@ public class AbilityFactory_Reveal {
 			public boolean doTrigger(boolean mandatory) {
 				return rearrangeTopOfLibraryTrigger(AF, this, mandatory);
 			}
-			
+
 		};
 		return dbDraw;
 	}
-	
+
 	private static String rearrangeTopOfLibraryStackDescription(final AbilityFactory AF, final SpellAbility sa)
 	{
 		int numCards = 0;
 		ArrayList<Player> tgtPlayers = new ArrayList<Player>();
 		boolean shuffle = false;
-		
+
 		Target tgt = AF.getAbTgt();
 		if (tgt != null && !AF.getMapParams().containsKey("Defined"))
 			tgtPlayers = tgt.getTargetPlayers();
 		else
 			tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), AF.getMapParams().get("Defined"), sa);
-		
+
 		numCards = AbilityFactory.calculateAmount(AF.getHostCard(), AF.getMapParams().get("NumCards"), sa);
 		shuffle = AF.getMapParams().containsKey("MayShuffle") ? true : false;
-		
+
 		StringBuilder ret = new StringBuilder();
 		if(!(sa instanceof Ability_Sub))
 		{
@@ -892,9 +895,9 @@ public class AbilityFactory_Reveal {
 			ret.append(" & ");
 		}
 		ret.delete(ret.length()-3, ret.length());
-		
+
 		ret.append(" library. Then put them back in any order.");
-		
+
 		if(shuffle)
 		{
 			ret.append("You may have ");
@@ -906,32 +909,32 @@ public class AbilityFactory_Reveal {
 			{
 				ret.append("that");
 			}
-			
+
 			ret.append(" player shuffle his or her library.");
 		}
-		
+
 		return ret.toString();
 	}
-	
+
 	private static boolean rearrangeTopOfLibraryTrigger(final AbilityFactory AF, final SpellAbility sa, final boolean mandatory)
 	{
 		if(!ComputerUtil.canPayCost(sa))
 			return false;
-		
+
 		Ability_Sub abSub = sa.getSubAbility();
 		if (abSub != null) {
 			return abSub.doTrigger(mandatory);
 		}
-    	
+
 		return false;
 	}
-	
+
 	private static void rearrangeTopOfLibraryResolve(final AbilityFactory AF,final SpellAbility sa)
 	{
 		int numCards = 0;
 		ArrayList<Player> tgtPlayers = new ArrayList<Player>();
 		boolean shuffle = false;
-		
+
 		if(sa.getActivatingPlayer().isHuman())
 		{
 			Target tgt = AF.getAbTgt();
@@ -939,10 +942,10 @@ public class AbilityFactory_Reveal {
 				tgtPlayers = tgt.getTargetPlayers();
 			else
 				tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), AF.getMapParams().get("Defined"), sa);
-			
+
 			numCards = AbilityFactory.calculateAmount(AF.getHostCard(), AF.getMapParams().get("NumCards"), sa);
 			shuffle = AF.getMapParams().containsKey("MayShuffle") ? true : false;
-			
+
 			for(Player p : tgtPlayers)
 				if (tgt == null || p.canTarget(AF.getHostCard()))
 					AllZoneUtil.rearrangeTopOfLibrary(AF.getHostCard(), p, numCards, shuffle);
@@ -950,15 +953,15 @@ public class AbilityFactory_Reveal {
 		if (AF.hasSubAbility()){
 			Ability_Sub abSub = sa.getSubAbility();
 			if (abSub != null){
-	     	   abSub.resolve();
-	        }
+				abSub.resolve();
+			}
 			else{
 				String DrawBack = AF.getMapParams().get("SubAbility");
 				if (AF.hasSubAbility())
-					 CardFactoryUtil.doDrawBack(DrawBack, numCards, AF.getHostCard().getController(), AF.getHostCard().getController().getOpponent(), tgtPlayers.get(0), AF.getHostCard(), null, sa);
+					CardFactoryUtil.doDrawBack(DrawBack, numCards, AF.getHostCard().getController(), AF.getHostCard().getController().getOpponent(), tgtPlayers.get(0), AF.getHostCard(), null, sa);
 			}
 		}
-		
+
 	}
 
 }//end class AbilityFactory_Reveal

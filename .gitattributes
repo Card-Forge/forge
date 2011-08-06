@@ -7594,6 +7594,7 @@ res/cardsfolder/viscerid_deepwalker.txt -text svneol=native#text/plain
 res/cardsfolder/viscid_lemures.txt -text svneol=native#text/plain
 res/cardsfolder/viseling.txt svneol=native#text/plain
 res/cardsfolder/vision_skeins.txt -text svneol=native#text/plain
+res/cardsfolder/visions.txt -text svneol=native#text/plain
 res/cardsfolder/vital_splicer.txt -text svneol=native#text/plain
 res/cardsfolder/vital_surge.txt -text svneol=native#text/plain
 res/cardsfolder/vitalize.txt -text svneol=native#text/plain
