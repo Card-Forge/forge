@@ -3,8 +3,9 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:Izzet Boilerworks enters the battlefield tapped.
-K:When Izzet Boilerworks enters the battlefield, return a land you control to its owner's hand.
 A:AB$ Mana | Cost$ T | Produced$ U R | SpellDescription$ Add U R to your mana pool.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return a land you control to its owner's hand.
+SVar:TrigReturn:AB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Cost$ 0 | Hidden$ True | ChangeType$ Land.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/izzet_boilerworks.jpg
