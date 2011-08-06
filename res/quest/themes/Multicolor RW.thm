@@ -1,0 +1,42 @@
+BasicLandPercentage=15
+
+[Group MaxCnt=4 Percentage=21]
+Plateau
+Sacred Foundry
+Jungle Shrine
+Arid Mesa
+[/Group]
+
+[Group MaxCnt=4 Percentage=20]
+Balefire Liege
+Battlegate Mimic
+Belligerent Hatchling
+[/Group]
+
+[Group MaxCnt=4 Percentage=22]
+Boros Guildmage
+Boros Recruit
+Boros Swiftblade
+Cerodon Yearling
+Double Cleave
+Figure of Destiny
+Lightning Helix
+Squee's Embrace
+Stun Sniper
+[/Group]
+
+[Group MaxCnt=4 Percentage=12]
+Hearthfire Hobgoblin
+Hobgoblin Dragoon
+Skyknight Legionnaire
+[/Group]
+
+[Group MaxCnt=2 Percentage=10]
+Ajani Vengeant
+Brion Stoutarm
+Bull Cerodon
+Nobilis of War
+Sunhome Enforcer
+[/Group]
+
+End

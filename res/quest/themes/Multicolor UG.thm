@@ -1,4 +1,4 @@
-BasicLandPercentage=16
+BasicLandPercentage=15
 
 [Group MaxCnt=4 Percentage=21]
 Tropical Island
@@ -7,7 +7,7 @@ Seaside Citadel
 Misty Rainforest
 [/Group]
 
-[Group MaxCnt=4 Percentage=25]
+[Group MaxCnt=4 Percentage=24]
 Murkfiend Liege
 Sturdy Hatchling
 Shorecrasher Mimic
@@ -15,14 +15,14 @@ Fable of Wolf and Owl
 Favor of the Overbeing
 [/Group]
 
-[Group MaxCnt=4 Percentage=15]
+[Group MaxCnt=4 Percentage=14]
 Gaea's Skyfolk
 Jhessian Infiltrator
 Slippery Bogle
 Vedalken Heretic
 [/Group]
 
-[Group MaxCnt=4 Percentage=23]
+[Group MaxCnt=4 Percentage=17]
 Cold-Eyed Selkie
 Lorescale Coatl
 Shielding Plax
@@ -32,7 +32,7 @@ Winged Coatl
 Wistful Selkie
 [/Group]
 
-[Group MaxCnt=1 Percentage=10]
+[Group MaxCnt=1 Percentage=9]
 Assault Zeppelid
 Æther Mutation
 Jungle Barrier
