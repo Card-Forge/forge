@@ -305,36 +305,14 @@ public class Ability_Cost {
 				cost.append("pay ");
 			else
 				cost.append("and pay ");
-			cost.append(lifeAmount);
+			cost.append(convertIntToWords(lifeAmount));
 			cost.append(" Life");
 
 			first = false;
 		}
 		
 		if (discardCost){
-			if (first)
-				cost.append("discard ");
-			else
-				cost.append("and discard ");
-			
-			if (discardThis){
-				cost.append(name);
-			}
-			else if (discardType.equals("Hand")){
-				cost.append(" your hand");
-			}
-			else{
-				cost.append(discardAmount);
-				int type = discardType.indexOf("/");
-				if (type != -1)
-					cost.append(discardType.substring(type + 1)).append(" ");
-				cost.append(" card");
-				if (discardAmount > 1)
-					cost.append("s");
-				if (discardType.equals("Random"))
-					cost.append(" at random");
-			}
-
+			cost.append(discardString(first));
 			first = false;
 		}
 		
@@ -403,8 +381,8 @@ public class Ability_Cost {
 				cost.append("Tap ");
 			else
 				cost.append(", tap ");
-			cost.append(tapXTypeAmount);
-			cost.append(" untapped ");
+			cost.append(convertIntToWords(tapXTypeAmount));
+			cost.append("untapped ");
 			cost.append(tapXType);	// needs IsValid String converter
 			if (tapXTypeAmount > 1)
 				cost.append("s");
@@ -419,11 +397,10 @@ public class Ability_Cost {
 					cost.append("Remove ");
 				else
 					cost.append(", remove ");
-				if (counterAmount != 1)
-					cost.append(counterAmount);
-				else
-					cost.append("a");
-				cost.append(" " + counterType.getName());
+
+				cost.append(convertIntToWords(counterAmount));
+
+				cost.append(counterType.getName());
 				cost.append(" counter");
 				if (counterAmount != 1)
 					cost.append("s");
@@ -442,11 +419,10 @@ public class Ability_Cost {
 					cost.append("Put ");
 				else
 					cost.append(", put ");
-				if (counterAmount != 1)
-					cost.append(counterAmount);
-				else
-					cost.append("a");
-				cost.append(" " + counterType.getName());
+
+				cost.append(convertIntToWords(counterAmount));
+
+				cost.append(counterType.getName());
 				cost.append(" counter");
 				if (counterAmount != 1)
 					cost.append("s");
@@ -461,39 +437,14 @@ public class Ability_Cost {
 				cost.append("Pay ");
 			else
 				cost.append(", Pay ");
-			cost.append(lifeAmount);
+			cost.append(convertIntToWords(lifeAmount));
 			cost.append(" Life");
 
 			first = false;
 		}
 		
 		if (discardCost){
-			if (first)
-				cost.append("Discard ");
-			else
-				cost.append(", discard ");
-			
-			if (discardThis){
-				cost.append(name);
-			}
-			else if (discardType.equals("Hand")){
-				cost.append(" your hand");
-			}
-			else if(discardType.equals("LastDrawn")) {
-				cost.append("last drawn card");
-			}
-			else{
-				cost.append(discardAmount);
-				if (!discardType.equals("Any") && !discardType.equals("Random")){
-					cost.append(" ").append(discardType);
-				}
-				cost.append(" card");
-				if (discardAmount > 1)
-					cost.append("s");
-				if (discardType.equals("Random"))
-					cost.append(" at random");
-			}
-
+			cost.append(discardString(first));
 			first = false;
 		}
 		
@@ -517,13 +468,51 @@ public class Ability_Cost {
 			first = false;
 		}
 		
-		if (first)	// No any costs, append 0
+		if (first)	// No costs, append 0
 			cost.append("0");
 		
 		cost.append(": ");
 		return cost.toString();
 	}
 
+	public String discardString(boolean first){
+		StringBuilder cost = new StringBuilder();
+		if (first){
+			if (isAbility)
+				cost.append("Discard ");
+			else
+				cost.append("discard ");
+		}
+		else{
+			if (isAbility)
+				cost.append(", discard ");
+			else
+				cost.append("and discard ");
+		}
+		
+		if (discardThis){
+			cost.append(name);
+		}
+		else if (discardType.equals("Hand")){
+			cost.append(" your hand");
+		}
+		else if(discardType.equals("LastDrawn")) {
+			cost.append("last drawn card");
+		}
+		else{
+			cost.append(convertIntToWords(discardAmount));
+			if (!discardType.equals("Any") && !discardType.equals("Card") && !discardType.equals("Random")){
+				cost.append(discardType).append(" ");
+			}
+			cost.append("card");
+			if (discardAmount > 1)
+				cost.append("s");
+			if (discardType.equals("Random"))
+				cost.append(" at random");
+		}
+		return cost.toString();
+	}
+	
 	public String sacString(boolean first)
 	{
 		StringBuilder cost = new StringBuilder();
@@ -540,7 +529,7 @@ public class Ability_Cost {
 		if (sacType.equals("CARDNAME"))
 			cost.append(name);
 		else{
-			cost.append(sacAmount).append(" ");
+			cost.append(convertIntToWords(sacAmount));
 			cost.append(sacType);
 			if (sacAmount > 1)
 				cost.append("s");
@@ -563,7 +552,7 @@ public class Ability_Cost {
 		if(exileType.equals("CARDNAME"))
 			cost.append(name);
 		else {
-			cost.append(exileAmount).append(" ");
+			cost.append(convertIntToWords(exileAmount));
 			cost.append(exileType);
 			if(exileAmount > 1)
 				cost.append("s");
@@ -586,7 +575,7 @@ public class Ability_Cost {
 		if(exileType.equals("CARDNAME"))
 			cost.append(name);
 		else {
-			cost.append(exileAmount).append(" ");
+			cost.append(convertIntToWords(exileAmount));
 			cost.append(exileType);
 			if(exileAmount > 1)
 				cost.append("s");
@@ -611,7 +600,7 @@ public class Ability_Cost {
 		if (returnType.equals("CARDNAME"))
 			cost.append(name);
 		else{
-			cost.append(returnAmount).append(" ");
+			cost.append(convertIntToWords(returnAmount));
 			cost.append(returnType);
 			
 			if (returnAmount > 1){
@@ -622,5 +611,22 @@ public class Ability_Cost {
 		}
 		cost.append(" to ").append(pronoun).append(" owner's hand");
 		return cost.toString();
+	}
+	
+// TODO: If an Ability_Cost needs to pay more than 10 of something, fill this array as appropriate
+	private static final String[] numNames = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" }; 
+	
+	
+	private String convertIntToWords(int i){
+		StringBuilder sb = new StringBuilder();
+		
+		if (i >= numNames.length)
+			sb.append(i);
+		else
+			sb.append(numNames[i]);
+		
+		sb.append(" ");
+		
+		return sb.toString();
 	}
 }
