@@ -1,0 +1,9 @@
+Name:Kjeldoran Dead
+ManaCost:B
+Types:Creature Skeleton
+Text:When CARDNAME enters the battlefield, sacrifice a creature.
+PT:3/1
+A:AB$Regenerate|Cost$B|SpellDescription$Regenerate CARDNAME.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_dead.jpg
+End

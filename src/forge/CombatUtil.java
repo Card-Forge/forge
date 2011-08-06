@@ -285,6 +285,10 @@ public class CombatUtil {
         		return false;
         }
         
+        if(attacker.getKeyword().contains("CARDNAME can't be blocked by Saprolings.")) {
+        	if(blocker.isType("Saproling")) return false;
+        }
+        
         if(attacker.getKeyword().contains("Intimidate")) {
             if(!blocker.getType().contains("Artifact") && !attacker.sharesColorWith(blocker)) return false;
         }

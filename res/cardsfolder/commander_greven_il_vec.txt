@@ -1,0 +1,9 @@
+Name:Commander Greven il-Vec
+ManaCost:3 B B B
+Types:Legendary Creature Human Warrior
+Text:When CARDNAME enters the battlefield, sacrifice a creature.
+PT:7/5
+K:Fear
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/commander_greven_il_vec.jpg
+End

@@ -1,0 +1,8 @@
+Name:Accursed Centaur
+ManaCost:B
+Types:Creature Zombie Centaur
+Text:When CARDNAME enters the battlefield, sacrifice a creature.
+PT:2/2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/accursed_centaur.jpg
+End

@@ -13428,6 +13428,53 @@ public class CardFactory_Creatures {
         	
         	card.addSpellAbility(discard);
         }//*************** END ************ END **************************
+        
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Accursed Centaur") || cardName.equals("Commander Greven il-Vec") ||
+        		cardName.equals("Kjeldoran Dead") || cardName.equals("Spined Fluke") ||
+        		cardName.equals("Vindictive Mob")) {
+        	
+        	final Command comesIntoPlay = new Command() {
+				private static final long serialVersionUID = -6986957647765851979L;
+				final Player player = card.getController();
+        		public void execute() {
+        			CardList type = AllZoneUtil.getCreaturesInPlay(player);
+
+        			if( player.isComputer()) {
+        				if( type.size() > 0 ) {
+        					Card sac = CardFactoryUtil.AI_getWorstCreature(type);
+        					AllZone.GameAction.sacrifice(sac);
+        				}
+        				else {
+        					AllZone.GameAction.sacrifice(card);
+        				}
+        			}
+        			else { //this is the human resolution
+        				Input target = new Input() {
+							private static final long serialVersionUID = 2795318747338985959L;
+							public void showMessage() {
+        						AllZone.Display.showMessage(cardName+" - Select a creature to sacrifice");
+        						ButtonUtil.enableOnlyCancel();
+        					}
+        					public void selectButtonCancel() {
+        						AllZone.GameAction.sacrifice(card);
+        						stop();
+        					}
+        					public void selectCard(Card c, PlayerZone zone) {
+        						if(zone.is(Constant.Zone.Battlefield, card.getController()) && c.isCreature()) {
+        							AllZone.GameAction.sacrifice(c);
+        							stop();
+        						}
+        					}//selectCard()
+        				};//Input
+        				AllZone.InputControl.setInput(target);
+        			}
+        		}
+        	};
+
+        	card.addComesIntoPlayCommand(comesIntoPlay);
+        }//*************** END ************ END **************************
                
         
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
