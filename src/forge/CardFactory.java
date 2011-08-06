@@ -3231,7 +3231,12 @@ public class CardFactory implements NewConstants {
                 {
                    SpellAbility bbLoseLife = spLoseLife.copy();
                    bbLoseLife.setManaCost(CardUtil.addManaCosts(card.getManaCost(), bbCost));
-                   bbLoseLife.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                   
+                   StringBuilder sb = new StringBuilder();
+                   sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
+                   sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
+                   bbLoseLife.setDescription(sb.toString());
+                   // bbLoseLife.setDescription("Buyback " + bbCost + "(You may pay an additional " + bbCost + " as you cast this spell. If you do, put this card into your hand as it resolves.)");
                    bbLoseLife.setIsBuyBackAbility(true);
                    
                    if (Tgt[0] == true)
@@ -3240,7 +3245,7 @@ public class CardFactory implements NewConstants {
                    card.addSpellAbility(bbLoseLife);
                 }
            }
-        }
+        }//spLoseLife
 
         if (hasKeyword(card, "abLoseLife") != -1)
         {
