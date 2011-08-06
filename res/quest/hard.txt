@@ -53,6 +53,7 @@ Napoleon 3
 Ned Flanders 3
 Neo 3
 Newton 3
+Pebbles Flintstone 3
 Picard 3
 Pinky and the Brain 3
 Professor X 3

@@ -543,6 +543,10 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Newton 3		hard	Relentless Rats, Ratcatcher, Aluren and Harmonize");
         sb.append("\r\n");
+        sb.append("Pebbles Flintstone 2	medium	Sloth' Meekstone deck, Meekstone, Marble Titan and creatures with vigilance");
+        sb.append("\r\n");
+        sb.append("Pebbles Flintstone 3	hard	Sloth' Meekstone deck, Meekstone, Marble Titan and creatures with vigilance");
+        sb.append("\r\n");
         sb.append("Picard 3		hard	UWG Elf deck similar to Morpheus but also has flying elves");
         sb.append("\r\n");
         sb.append("Pinky and the Brain 3	hard	Royal Assassin, WoG + Damnation, Liliana Vess, Beacon of Unrest");
