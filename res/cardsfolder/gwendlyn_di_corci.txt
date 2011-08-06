@@ -3,6 +3,7 @@ ManaCost:R B B U
 Types:Legendary Creature Human Rogue
 Text:no text
 PT:3/5
+A:AB$Discard|Cost$T|ValidTgts$Player|PlayerTurn$True|NumCards$1|Mode$Random|SpellDescription$Target player discards a card at random. Activate this ability only during your turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gwendlyn_di_corci.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/268.jpg

@@ -5,6 +5,7 @@ Text:no text
 PT:3/3
 A:AB$Discard|Cost$X B T Discard<2/Any>|ValidTgts$Player|NumCards$X|Mode$Random|SpellDescription$Target player discards X cards at random.
 SVar:X:Count$xPaid
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greel_mind_raker.jpg
 End
