@@ -1,9 +1,13 @@
 package forge.card.abilityFactory;
 
+import forge.AllZone;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
+
+import java.util.HashMap;
+import java.util.Hashtable;
 
 public class AbilityFactory_Clash {
 
@@ -143,6 +147,12 @@ public class AbilityFactory_Clash {
 
                     win.resolve();
                 }
+
+                //Run triggers
+                HashMap<String,Object> runParams = new HashMap<String,Object>();
+                runParams.put("Player",AF.getHostCard().getController());
+                runParams.put("Won","True");
+                AllZone.TriggerHandler.runTrigger("Clashed",runParams);
         }
         else
         {
@@ -154,6 +164,11 @@ public class AbilityFactory_Clash {
 
                     otherwise.resolve();
                 }
+                //Run triggers
+                HashMap<String,Object> runParams = new HashMap<String,Object>();
+                runParams.put("Player",AF.getHostCard().getController());
+                runParams.put("Won","False");
+                AllZone.TriggerHandler.runTrigger("Clashed",runParams);
         }
 
         //Oldstyle drawbacks shouldn't be necessary anymore?

@@ -77,6 +77,10 @@ public class TriggerHandler {
 		{
 			ret = new Trigger_ChangesZone(mapParams,host);
 		}
+        else if(mode.equals("Clashed"))
+        {
+            ret = new Trigger_Clashed(mapParams,host);
+        }
 		else if(mode.equals("CounterAdded")) {
 			ret = new Trigger_CounterAdded(mapParams, host);
 		}
