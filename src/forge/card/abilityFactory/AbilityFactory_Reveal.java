@@ -185,11 +185,12 @@ public class AbilityFactory_Reveal {
 		Card host = af.getHostCard();
 		int numToDig = AbilityFactory.calculateAmount(af.getHostCard(), params.get("DigNum"), sa);
 		String destZone1 = params.containsKey("DestinationZone") ? params.get("DestinationZone") : "Hand";
+		int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : -1;
 		int destZone1ChangeNum = params.containsKey("ChangeNum") ? Integer.parseInt(params.get("ChangeNum")) : 1;
 		String changeValid = params.containsKey("ChangeValid") ? params.get("ChangeValid") : "";
 		boolean anyNumber = params.containsKey("AnyNumber");
 		String destZone2 = params.containsKey("DestinationZone2") ? params.get("DestinationZone2") : "Library";
-		int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition")) : -1;
+		int libraryPosition2 = params.containsKey("LibraryPosition2") ? Integer.parseInt(params.get("LibraryPosition2")) : -1;
 		boolean optional = params.containsKey("Optional");
 
 		ArrayList<Player> tgtPlayers;
@@ -240,7 +241,13 @@ public class AbilityFactory_Reveal {
 						if(chosen == null) break;
 						valid.remove(chosen);
 						PlayerZone zone = AllZone.getZone(destZone1, chosen.getOwner());
-						AllZone.GameAction.moveTo(zone, chosen);
+						if(zone.is("Library")) {
+							//System.out.println("Moving to lib position: "+libraryPosition);
+							AllZone.GameAction.moveToLibrary(chosen, libraryPosition);
+						}
+						else {
+							AllZone.GameAction.moveTo(zone, chosen);
+						}
 						//AllZone.GameAction.revealToComputer() - for when this exists
 						j++;
 					}
@@ -253,7 +260,7 @@ public class AbilityFactory_Reveal {
 						//put them in any order
 						while(rest.size() > 0) {
 							Card chosen = GuiUtils.getChoice("Put the rest in your library in any order", rest.toArray());
-							AllZone.GameAction.moveToLibrary(chosen, libraryPosition);
+							AllZone.GameAction.moveToLibrary(chosen, libraryPosition2);
 							rest.remove(chosen);
 						}
 					}
