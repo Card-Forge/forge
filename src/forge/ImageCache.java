@@ -83,9 +83,7 @@ public class ImageCache implements NewConstants {
                         if(!file.exists()) {
                         	//DEBUG
                             //System.out.println("File not found, no image created: " + file);
-                            //return null;
-                        	//String newKey = getKey()
-                        	
+                            return null;
                         }
                         BufferedImage image = ImageUtil.getImage(file);
                         return image;
@@ -191,11 +189,15 @@ public class ImageCache implements NewConstants {
         File  f = null;
         if (!card.getCurSetCode().equals(""))
         {
+            String nn = "";
+        	if (card.getRandomPicture() > 0)
+                nn = Integer.toString(card.getRandomPicture() + 1);
+        	
         	StringBuilder sbKey = new StringBuilder();
         	
         	//First try 3 letter set code with MWS filename format 
         	sbKey.append(card.getCurSetCode() + "/");
-        	sbKey.append(GuiDisplayUtil.cleanStringMWS(card.getName()) + ".full");
+        	sbKey.append(GuiDisplayUtil.cleanStringMWS(card.getName()) + nn + ".full");
         	
         	f = new File(path, sbKey.toString() + ".jpg");
         	if (f.exists())
@@ -205,7 +207,7 @@ public class ImageCache implements NewConstants {
         	
         	//Second, try 2 letter set code with MWS filename format
         	sbKey.append(SetInfoUtil.getSetCode2_SetCode3(card.getCurSetCode()) + "/");
-        	sbKey.append(GuiDisplayUtil.cleanStringMWS(card.getName()) + ".full");
+        	sbKey.append(GuiDisplayUtil.cleanStringMWS(card.getName()) + nn + ".full");
         	
         	f = new File(path, sbKey.toString() + ".jpg");
         	if (f.exists())
@@ -215,14 +217,14 @@ public class ImageCache implements NewConstants {
         	
         	//Third, try 3 letter set code with Forge filename format
         	sbKey.append(card.getCurSetCode() + "/");
-        	sbKey.append(GuiDisplayUtil.cleanString(card.getName()));
+        	sbKey.append(GuiDisplayUtil.cleanString(card.getName()) + nn);
         	
         	f = new File(path, sbKey.toString() + ".jpg");
         	if (f.exists())
         		return sbKey.toString();
         	
         	//Last, give up with set images, go with the old picture type
-        	f = new File(path, key + ".jpg");
+        	f = new File(path, key + nn + ".jpg");
         	if (f.exists())
         		return key;
         	

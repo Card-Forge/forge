@@ -150,6 +150,9 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
                 filteredOut = filterByType(c);
             }
             
+        	c.setCurSetCode(c.getMostRecentSet());
+            c.setImageFilename(CardUtil.buildFilename(c));
+
             if(!filteredOut) {
                 topModel.addCard(c);
             }
@@ -862,7 +865,10 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         } else {
             CardList all = AllZone.CardFactory.getAllCards();
             for(int i = 0; i < all.size(); i++)
-                topModel.addCard(all.get(i));
+            {
+                c = all.get(i);
+                topModel.addCard(c);
+            }
         }
         
         topModel.resort();

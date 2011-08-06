@@ -140,6 +140,8 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardContainer, DeckD
             
             if(addedList.contains(cardName)) c.setRarity("new");
             
+        	c.setCurSetCode(c.getMostRecentSet());
+            c.setImageFilename(CardUtil.buildFilename(c));
 
             topModel.addCard(c);
         }//for

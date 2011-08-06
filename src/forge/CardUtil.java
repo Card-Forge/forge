@@ -1,5 +1,6 @@
 package forge;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -8,6 +9,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 
 
@@ -233,5 +236,67 @@ public class CardUtil {
     	return (cardType.equals("Plains")
     			|| cardType.equals("Island") || cardType.equals("Swamp")
     			|| cardType.equals("Mountain") || cardType.equals("Forest"));
+    }
+    
+    public static String buildFilename(Card card)
+    {	
+        File path = null;
+        if (card.isToken() && !card.isCopiedToken())
+        	path = ForgeProps.getFile(NewConstants.IMAGE_TOKEN);
+        else
+        	path = ForgeProps.getFile(NewConstants.IMAGE_BASE);
+        
+    	File  f = null;
+        if (!card.getCurSetCode().equals(""))
+        {
+            String nn = "";
+        	if (card.getRandomPicture() > 0)
+                nn = Integer.toString(card.getRandomPicture() + 1);
+        	
+        	StringBuilder sbKey = new StringBuilder();
+        	
+        	//First try 3 letter set code with MWS filename format 
+        	sbKey.append(card.getCurSetCode() + "/");
+        	sbKey.append(GuiDisplayUtil.cleanStringMWS(card.getName()) + nn + ".full");
+        	
+        	f = new File(path, sbKey.toString() + ".jpg");
+        	if (f.exists())
+        		return sbKey.toString();
+        	
+        	sbKey = new StringBuilder();
+        	
+        	//Second, try 2 letter set code with MWS filename format
+        	sbKey.append(SetInfoUtil.getSetCode2_SetCode3(card.getCurSetCode()) + "/");
+        	sbKey.append(GuiDisplayUtil.cleanStringMWS(card.getName()) + nn + ".full");
+        	
+        	f = new File(path, sbKey.toString() + ".jpg");
+        	if (f.exists())
+        		return sbKey.toString();
+        	
+        	sbKey = new StringBuilder();
+        	
+        	//Third, try 3 letter set code with Forge filename format
+        	sbKey.append(card.getCurSetCode() + "/");
+        	sbKey.append(GuiDisplayUtil.cleanString(card.getName()) + nn);
+        	
+        	f = new File(path, sbKey.toString() + ".jpg");
+        	if (f.exists())
+        		return sbKey.toString();
+        	
+        	sbKey = new StringBuilder();
+        	
+        	//Last, give up with set images, go with the old picture type
+        	sbKey.append(GuiDisplayUtil.cleanString(card.getImageName()));
+        	if (card.getRandomPicture() > 1)
+        		sbKey.append(card.getRandomPicture());
+        	
+        	f = new File(path, sbKey.toString() + ".jpg");
+        	if (f.exists())
+        		return sbKey.toString();
+        	
+        	//if still no file, download if option enabled?
+        }
+
+    	return "none";
     }
 }

@@ -2904,4 +2904,21 @@ public class Card extends MyObservable {
     	return "";
     }
     
+    public String getMostRecentSet()
+    {
+    	return SetInfoUtil.getMostRecentSet(Sets);
+    }
+    
+    private String ImageFilename = "none";
+    
+    public void setImageFilename(String iFN)
+    {
+    	ImageFilename = iFN;	
+    }
+    
+    public String getImageFilename()
+    {
+    	return ImageFilename;
+    }
+    
 }//end Card class

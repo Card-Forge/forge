@@ -163,5 +163,30 @@ public class SetInfoUtil {
 		
 		return "";
 	}
+	
+	public static String getMostRecentSet(ArrayList<SetInfo> alSI)
+	{
+		int mostRecent = 0;
+		
+		for (int i=0; i<alSI.size(); i++)
+		{
+			SetInfo s = alSI.get(i);
+			
+			for (int j=0; j<sets.length; j++)
+			{
+				if (sets[j][1].equals(s.Code))
+				{
+					if (j > mostRecent)
+					{
+						mostRecent = j;
+						break;
+					}
+				}
+			}
+			
+		}
+		
+		return sets[mostRecent][1];
+	}
 
 }

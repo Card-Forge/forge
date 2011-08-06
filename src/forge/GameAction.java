@@ -2383,6 +2383,7 @@ public class GameAction {
                     card.setRandomPicture(generator.nextInt(n));
                 if ((card.getSets().size() > 0) && card.getCurSetCode().equals(""))
                 	card.setRandomSetCode();
+                card.setImageFilename(CardUtil.buildFilename(card));
 
                     //System.out.println("human random number:" + card.getRandomPicture());
                 //}
@@ -2465,6 +2466,7 @@ public class GameAction {
         }
 
         ManaPool mp = AllZone.ManaPool;
+        mp.setImageFilename("mana_pool");
         AllZone.Human_Play.add(mp);
         //ButtonUtil.reset();
 
