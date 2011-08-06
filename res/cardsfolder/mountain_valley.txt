@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:Comes into play tapped.
-A:AB$Fetch | Cost$ T Sac<1/CARDNAME> | Destination$ Battlefield | FetchType$ Mountain,Forest | FetchNum$ 1 | SpellDescription$ Search your library for a Mountain or Forest card and put it onto the battlefield. Then shuffle your library.
+A:AB$ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Mountain,Forest | ChangeNum$ 1 | SpellDescription$ Search your library for a Mountain or Forest card and put it onto the battlefield. Then shuffle your library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mountain_valley.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/305.jpg

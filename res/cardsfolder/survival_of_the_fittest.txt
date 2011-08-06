@@ -2,7 +2,7 @@ Name:Survival of the Fittest
 ManaCost:1 G
 Types:Enchantment
 Text:no text
-A:AB$Fetch | Cost$ G Discard<1/Creature> | Destination$ Hand | FetchType$ Creature | FetchNum$ 1 | SpellDescription$ Search your library for a Creature card and put it into your hand. Then shuffle your library.
+A:AB$ChangeZone | Cost$ G Discard<1/Creature> | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a Creature card and put it into your hand. Then shuffle your library.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/survival_of_the_fittest.jpg

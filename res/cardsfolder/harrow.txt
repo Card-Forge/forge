@@ -2,7 +2,7 @@ Name:Harrow
 ManaCost:2 G
 Types:Instant
 Text:no text
-A:SP$Fetch | Cost$ 2 G Sac<1/Land> | Destination$ Battlefield | FetchType$ Land.Basic | FetchNum$ 2 | SpellDescription$ Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
+A:SP$ChangeZone | Cost$ 2 G Sac<1/Land> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 2 | SpellDescription$ Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harrow.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/124.jpg

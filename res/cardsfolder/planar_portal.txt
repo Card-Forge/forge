@@ -2,7 +2,7 @@ Name:Planar Portal
 ManaCost:6
 Types:Artifact
 Text:no text
-A:AB$Fetch | Cost$ 6 T | Destination$ Hand | FetchType$ Card | FetchNum$ 1 | SpellDescription$ Search your library for a card and put that card into your hand. Then shuffle your library.
+A:AB$ChangeZone | Cost$ 6 T | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | SpellDescription$ Search your library for a card and put that card into your hand. Then shuffle your library.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_portal.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/311.jpg

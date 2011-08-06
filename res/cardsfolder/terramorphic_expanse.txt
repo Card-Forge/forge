@@ -2,7 +2,7 @@ Name:Terramorphic Expanse
 ManaCost:no cost
 Types:Land
 Text:no text
-A:AB$Fetch | Cost$ T Sac<1/CARDNAME> | Destination$ Battlefield | Tapped$ True | FetchType$ Land.Basic | FetchNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
+A:AB$ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card118874.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/229.jpg

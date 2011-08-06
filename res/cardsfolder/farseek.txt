@@ -2,7 +2,7 @@ Name:Farseek
 ManaCost:1 G
 Types:Sorcery
 Text:no text
-A:SP$Fetch | Cost$ 1 G | Destination$ Battlefield | FetchType$ Plains,Island,Swamp,Mountain | Tapped$ True | FetchNum$ 1 | SpellDescription$ Search your library for a Plains, Island, Swamp, or Mountain card and put it onto the battlefield tapped. Then shuffle your library.
+A:SP$ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains,Island,Swamp,Mountain | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a Plains, Island, Swamp, or Mountain card and put it onto the battlefield tapped. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/farseek.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/163.jpg

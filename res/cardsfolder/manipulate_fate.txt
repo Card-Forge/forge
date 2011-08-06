@@ -2,7 +2,7 @@ Name:Manipulate Fate
 ManaCost:1 U
 Types:Sorcery
 Text:no text
-A:SP$Fetch | Cost$ 1 U | Destination$ Exile | FetchType$ Card | FetchNum$ 3 | SpellDescription$ Search your library for three cards, exile them, then shuffle your library.
+A:SP$ChangeZone | Cost$ 1 U | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 3 | SpellDescription$ Search your library for three cards, exile them, then shuffle your library.
 K:Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
