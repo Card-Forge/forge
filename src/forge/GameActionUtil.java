@@ -2857,7 +2857,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 
-					AllZone.GameAction.getPlayerLife(player_d).subtractLife(1,F_card);
+					AllZone.GameAction.addDamage(player_d, F_card, 1);
 				}
 			};
 			ability.setStackDescription(list.get(i) + " - Deals 1 damage to him or her");
@@ -3270,8 +3270,7 @@ public class GameActionUtil {
 				public void execute() {
 					if(c.getName().equals("Cosmic Horror")) {
 						String player = c.getController();
-						PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-						life.subtractLife(7,c);
+						AllZone.GameAction.addDamage(player, c, 7);
 					}
 					AllZone.GameAction.destroy(c);
 				}
@@ -3343,8 +3342,7 @@ public class GameActionUtil {
 				public void execute() {
 					//AllZone.GameAction.sacrifice(c);
 					String player = c.getController();
-					PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-					life.subtractLife(c.getUpkeepDamage(),c);
+					AllZone.GameAction.addDamage(player, c, c.getUpkeepDamage());
 				}
 			};
 
@@ -4356,8 +4354,7 @@ public class GameActionUtil {
 			@Override
 			public void resolve() {
 				String player = crd.getController();
-				PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-				life.subtractLife(2,crd);
+				AllZone.GameAction.addDamage(player, crd, 2);
 			}
 		};
 		ability.setStackDescription("Dingus Egg - Deals 2 damage to " + destroyed.getController() + ".");
@@ -4544,7 +4541,7 @@ public class GameActionUtil {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())
                             && CardFactoryUtil.canTarget(valakutCard, getTargetCard())) getTargetCard().addDamage(3,
                             valakutCard);
-                } else AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(3,valakutCard);
+                } else AllZone.GameAction.addDamage(getTargetPlayer(), valakutCard, 3);
             }//resolve()
 
         };
@@ -4904,7 +4901,7 @@ public class GameActionUtil {
 				if(target != null)
 					target.addDamage(2, src);
 				else 
-					AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(2,src);
+					AllZone.GameAction.addDamage(getTargetPlayer(), src, 2);
 				
 				AllZone.GameAction.drawCard(src.getController());
 			}
@@ -7668,28 +7665,21 @@ public class GameActionUtil {
 	private static void upkeep_Ancient_Runes() {
 		final String player = AllZone.Phase.getActivePlayer();
 		
-		CardList ancient_runes = new CardList();
-		ancient_runes.addAll(AllZone.Human_Play.getCards());
-		ancient_runes.addAll(AllZone.Computer_Play.getCards());
-		ancient_runes = ancient_runes.getName("Ancient Runes");
-		
-		PlayerZone activePlayZone = AllZone.getZone(Constant.Zone.Play, player);
-		CardList artifacts = new CardList(activePlayZone.getCards());
-		artifacts = artifacts.getType("Artifact");
+		CardList ancient_runes = AllZoneUtil.getCardsInPlay("Ancient Runes");
 		
 		// determine how much damage to deal the current player
-		final int damage = artifacts.size();
+		final int damage = AllZoneUtil.getPlayerTypeInPlay(player, "Artifact").size();
 		
 		// if there are 1 or more Ancient Runes on the 
 		// battlefield have each of them deal damage.
 		if(0 < ancient_runes.size()) {
-			for(int i = 0; i < ancient_runes.size(); i++) {
-				Ability ability = new Ability(ancient_runes.get(0), "0") {
+			for(Card rune:ancient_runes) {
+				final Card src = rune;
+				Ability ability = new Ability(src, "0") {
 					@Override
 					public void resolve() {
 						if(damage>0){
-							PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-							life.setLife(life.getLife() - damage);
+							AllZone.GameAction.addDamage(player, src, damage);
 						}
 					}
 				};// Ability
@@ -7704,10 +7694,7 @@ public class GameActionUtil {
 	private static void upkeep_Karma() {
 		final String player = AllZone.Phase.getActivePlayer();
 		
-		CardList karma = new CardList();
-		karma.addAll(AllZone.Human_Play.getCards());
-		karma.addAll(AllZone.Computer_Play.getCards());
-		karma = karma.getName("Karma");
+		CardList karmas = AllZoneUtil.getCardsInPlay("Karma");
 		
 		PlayerZone activePlayZone = AllZone.getZone(Constant.Zone.Play, player);
 		CardList swamps = new CardList(activePlayZone.getCards());
@@ -7718,14 +7705,14 @@ public class GameActionUtil {
 		
 		// if there are 1 or more Karmas on the  
 		// battlefield have each of them deal damage.
-		if(0 < karma.size()) {
-			for(int i = 0; i < karma.size(); i++) {
-				Ability ability = new Ability(karma.get(0), "0") {
+		if(0 < karmas.size()) {
+			for(Card karma:karmas) {
+				final Card src = karma;
+				Ability ability = new Ability(src, "0") {
 					@Override
 					public void resolve() {
 						if(damage>0){
-							PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-							life.setLife(life.getLife() - damage);
+							AllZone.GameAction.addDamage(player, src, 1);
 						}
 					}
 				};// Ability
@@ -7736,45 +7723,6 @@ public class GameActionUtil {
 			}
 		}// if
 	}// upkeep_Karma()
-	
-/*
-	private static void upkeep_Karma() {
-		final String player = AllZone.Phase.getActivePlayer();
-		String opponent = AllZone.GameAction.getOpponent(player);
-
-		PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, opponent);
-
-		CardList karma = new CardList(opponentPlayZone.getCards());
-		karma = karma.getName("Karma");
-
-		PlayerZone activePlayZone = AllZone.getZone(Constant.Zone.Play, player);
-		CardList swamps = new CardList(activePlayZone.getCards());
-		swamps = swamps.getType("Swamp");
-
-		// determine how much damage to deal the current player
-		final int damage = swamps.size();
-
-		// if there are 1 or more Karmas owned by the opponent of the
-		// current player have each of them deal damage.
-		if(0 < karma.size()) {
-			for(int i = 0; i < karma.size(); i++) {
-				Ability ability = new Ability(karma.get(0), "0") {
-					@Override
-					public void resolve() {
-						if(damage>0){
-							PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-							life.setLife(life.getLife() - damage);
-						}
-					}
-				};// Ability
-				if(damage>0){
-					ability.setStackDescription("Karma deals " + damage + " damage to " + player);
-					AllZone.Stack.add(ability);
-				}
-			}
-		}// if
-	}// upkeep_Karma()
-*/
 	
 	private static void upkeep_Convalescence() {
 		final String player = AllZone.Phase.getActivePlayer();
@@ -7873,21 +7821,21 @@ public class GameActionUtil {
 
 		PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, opponent);
 
-		CardList theRack = new CardList(opponentPlayZone.getCards());
-		theRack = theRack.getName("The Rack");
+		CardList racks = new CardList(opponentPlayZone.getCards());
+		racks = racks.getName("The Rack");
 
 		// determine how much damage to deal the current player
 		final int damage = 3 - playerHandSize;
 
 		// if there are 1 or more The Racks owned by the opponent of the
 		// current player have each of them deal damage.
-		if(0 < theRack.size()) {
-			for(int i = 0; i < theRack.size(); i++) {
-				Ability ability = new Ability(theRack.get(0), "0") {
+		if(0 < racks.size()) {
+			for(Card rack:racks) {
+				final Card src = rack;
+				Ability ability = new Ability(src, "0") {
 					@Override
 					public void resolve() {
-						PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-						life.setLife(life.getLife() - damage);
+						AllZone.GameAction.addDamage(player, src, damage);
 					}
 				};// Ability
 
@@ -7943,30 +7891,25 @@ public class GameActionUtil {
 		// so, check if opponent of the current player has Black Vise
 		String opponent = AllZone.GameAction.getOpponent(player);
 
-		PlayerZone opponentPlayZone = AllZone.getZone(Constant.Zone.Play, opponent);
-
-		CardList blackVice = new CardList(opponentPlayZone.getCards());
-		blackVice = blackVice.getName("Black Vise");
+		CardList vises = AllZoneUtil.getPlayerCardsInPlay(opponent, "Black Vise");
 
 		// determine how much damage to deal the current player
 		final int damage = playerHandSize - 4;
 
 		// if there are 1 or more black vises owned by the opponent of the
-		// current player have each of them deal damage.
-		if(0 < blackVice.size()) {
-			for(int i = 0; i < blackVice.size(); i++) {
-				Ability ability = new Ability(blackVice.get(0), "0") {
-					@Override
-					public void resolve() {
-						PlayerLife life = AllZone.GameAction.getPlayerLife(player);
-						life.setLife(life.getLife() - damage);
-					}
-				};// Ability
+		// current player have each of them deal damage
+		for(Card vise:vises) {
+			final Card src = vise;
+			Ability ability = new Ability(src, "0") {
+				@Override
+				public void resolve() {
+					AllZone.GameAction.addDamage(player, src, damage);
+				}
+			};// Ability
 
-				ability.setStackDescription("Black Vise deals " + damage + " to " + player);
-				AllZone.Stack.add(ability);
-			}
-		}// if
+			ability.setStackDescription("Black Vise deals " + damage + " to " + player);
+			AllZone.Stack.add(ability);
+		}
 	}// upkeep_BlackVice
 
 	private static void upkeep_Copper_Tablet() {
@@ -7983,7 +7926,6 @@ public class GameActionUtil {
 			ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
 					AllZone.GameAction.addDamage(player, source, 1);
 				}
 			};// Ability
@@ -8256,7 +8198,7 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(2,F_card);
+					AllZone.GameAction.addDamage(player, F_card, 2);
 				}
 			};
 
@@ -8293,19 +8235,14 @@ public class GameActionUtil {
 							@Override
 							public void resolve() {
 								//if (c.getController().equals(player))
-								AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
+								AllZone.GameAction.addDamage(player, F_card, 1);
 							}
 						};
-
 						ability.setStackDescription("Cursed Land deals one damage to enchanted land's controller.");
-
 						AllZone.Stack.add(ability);
-
-
 					}
 				}
 			}
-
 		}//list > 0
 	}//cursed land
 
@@ -8338,7 +8275,7 @@ public class GameActionUtil {
 								AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
 							}
 						};
-						ability.setStackDescription("Pillory of the Sleepless deals one damage to enchanted creature's controller.");
+						ability.setStackDescription("Pillory of the Sleepless  - enchanted creature's controller loses 1 life.");
 
 						AllZone.Stack.add(ability);
 					}
@@ -8410,8 +8347,7 @@ public class GameActionUtil {
 							"Creature", "Faerie", "Rogue"}, 1, 1, new String[] {"Flying"});
 				}// resolve()
 			};// Ability
-			ability.setStackDescription("Bitterblossom - deals 1 damage to " + player
-					+ " and put a 1/1 token into play.");
+			ability.setStackDescription("Bitterblossom - " +player+" loses 1 life and puts a 1/1 token into play.");
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -8606,10 +8542,10 @@ public class GameActionUtil {
 			Ability ability = new Ability(blaze.get(i), "0") {
 				@Override
 				public void resolve() {
-					AllZone.GameAction.getPlayerLife(player).subtractLife(1,Source);
+					AllZone.GameAction.addDamage(player, Source, 1);
 				}
 			};
-			ability.setStackDescription(blaze.get(i) + " - has a blaze counter and " + player + " gets dealt 1 damage.");
+			ability.setStackDescription(blaze.get(i) + " - has a blaze counter and deals 1 damage to" + player + ".");
 			AllZone.Stack.add(ability);
 		}
 
@@ -9367,8 +9303,8 @@ public class GameActionUtil {
 						String[] choices = {"Yes", "No, target a creature instead"};
 
 						Object q = AllZone.Display.getChoiceOptional("Select computer as target?", choices);
-						if(q != null && q.equals("Yes")) AllZone.GameAction.getPlayerLife(Constant.Player.Computer).subtractLife(
-								hondlist.size(),card);
+						if(q != null && q.equals("Yes")) AllZone.GameAction.addDamage(Constant.Player.Computer,
+								card, hondlist.size());
 						else {
 							CardList cards = new CardList(oppPlay.getCards());
 							CardList oppCreatures = new CardList();
@@ -9401,8 +9337,7 @@ public class GameActionUtil {
 						}
 						if(targetc != null) {
 							if(AllZone.GameAction.isCardInPlay(targetc)) targetc.addDamage(hondlist.size(), card);
-						} else AllZone.GameAction.getPlayerLife(Constant.Player.Human).subtractLife(
-								hondlist.size(),card);
+						} else AllZone.GameAction.addDamage(Constant.Player.Human, card, hondlist.size());
 					}
 				}//resolve()
 			};//SpellAbility
@@ -9410,8 +9345,6 @@ public class GameActionUtil {
 			ability.setStackDescription(list.get(i) + " - Deals " + hondlist.size()
 					+ " damage to target creature or player");
 			AllZone.Stack.add(ability);
-
-
 		}
 
 	}// upkeep_Honden_of_Infinite_Rage
@@ -9477,13 +9410,7 @@ public class GameActionUtil {
 
 	private static void upkeep_Moroii() {
 		final String player = AllZone.Phase.getActivePlayer();
-		PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-
-		CardList list = new CardList();
-		list.addAll(play.getCards());
-
-		list = list.getName("Moroii");
-
+		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Moroii");
 		for(int i = 0; i < list.size(); i++) {
 			final Card F_card = list.get(i);
 			AllZone.GameAction.getPlayerLife(player).subtractLife(1,F_card);
@@ -10628,10 +10555,8 @@ public class GameActionUtil {
 					          {
 					            if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(c, getTargetCard()) )
 					            	AllZone.GameAction.addDamage(getTargetCard(), c, 1);
-					              //getTargetCard().addDamage(1);
 					          }
 					          else
-					            //AllZone.GameAction.getPlayerLife(getTargetPlayer()).subtractLife(1);
 					        	  AllZone.GameAction.addDamage(getTargetPlayer(), c, 1);
 					        }//resolve()
 					    };//SpellAbility
