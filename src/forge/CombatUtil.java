@@ -212,13 +212,19 @@ public class CombatUtil {
     public static boolean finishedMandatotyBlocks(Combat combat) {
     	
     	CardList blockers = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
+  	  	CardList attackers = new CardList(combat.getAttackers());
     	
     	//if a creature does not block but should, return false
 		for(Card blocker : blockers) {
-				if(!combat.getAllBlockers().contains(blocker) 
-						&& (canBlockAnAttackerWithLure(blocker, combat) || 
-								blocker.getKeyword().contains("CARDNAME blocks each turn if able."))) 
+				//lure effects
+				if(!combat.getAllBlockers().contains(blocker) && canBlockAnAttackerWithLure(blocker, combat)) 
 					return false;
+				
+				//"CARDNAME blocks each turn if able."
+				if(!combat.getAllBlockers().contains(blocker) && blocker.getKeyword().contains("CARDNAME blocks each turn if able."))
+					for(Card attacker: attackers)
+						if(canBlock(attacker, blocker, combat))
+							return false;
 		}
         
         return true;
