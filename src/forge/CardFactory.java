@@ -812,7 +812,7 @@ public class CardFactory implements NewConstants {
                 card.addComesIntoPlayCommand(intoPlay);
         }
         
-        
+        /* Converteded to AF Trigger
         if (hasKeyword(card, "When CARDNAME enters the battlefield, return a land you control to its owner's hand.") != -1)
         {
         	int n = hasKeyword(card, "When CARDNAME enters the battlefield, return a land you control to its owner's hand.");
@@ -846,6 +846,7 @@ public class CardFactory implements NewConstants {
                 card.addComesIntoPlayCommand(intoPlay);
         	}
         }
+        */
         
         if (hasKeyword(card, "Multikicker") != -1)
         {
