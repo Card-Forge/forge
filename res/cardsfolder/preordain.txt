@@ -1,0 +1,9 @@
+Name:Preordain
+ManaCost:U
+Types:Sorcery
+Text:no text
+A:SP$Scry | Cost$ U | ScryNum$ 2 |SpellDescription$ Scry 2, then draw a card. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)|SubAbility$SVar=DBDraw
+SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/preordain.jpg
+End
