@@ -2408,7 +2408,7 @@ class CardFactory_Lands {
                 
                 @Override
                 public boolean canPlayAI() {
-                    return getAttacker() != null;
+                    return getLegendaryAttackers().size() > 0;
                 }
                 
                 @Override
@@ -2416,15 +2416,27 @@ class CardFactory_Lands {
                     setTargetCard(getAttacker());
                 }
                 
-                public Card getAttacker() {
-                    //target creature that is going to attack
+                public CardList getLegendaryAttackers() {
                     Combat c = ComputerUtil.getAttackers();
                     CardList att = new CardList(c.getAttackers());
+                    // Shizo can only target Legendary, don't target creatures that already have Fear
+                    att = att.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return CardFactoryUtil.canTarget(card, c) && c.getType().contains("Legendary") 
+                    			&& !c.getIntrinsicKeyword().contains("Fear");
+                    	}
+                    });
                     att.remove(card);
-                    att.shuffle();
+                    return att;
+                }
+                	
+                public Card getAttacker() {
+                    //target creature that is going to attack
+                	CardList att = getLegendaryAttackers();
+                    if (att.size() == 0) return null;
                     
-                    if(att.size() != 0) return att.get(0);
-                    else return null;
+                    att.shuffle();
+                    return att.get(0);
                 }//getAttacker()
                 
                 @Override

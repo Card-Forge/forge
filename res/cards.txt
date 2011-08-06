@@ -1,3 +1,16 @@
+People of the Woods
+G G
+Creature Human
+People of the Woods's toughness is equal to the number of Forests you control.
+1/1
+
+Aven Trailblazer
+2 W
+Creature Bird Soldier
+Domain - Aven Trailblazer's toughness is equal to the number of basic land types among lands you control.
+2/1
+Flying
+
 Lady Caleria
 3 G G W W
 Legendary Creature Human Archer
@@ -4783,13 +4796,6 @@ Sorcery
 no text
 spDiscardTgt:TgtChoose:X:Target player discards a card for each Swamp you control.:Mind Sludge - target player discards cards
 SVar:X:Count$TypeYouCtrl.Swamp
-
-Aven Trailblazer
-2 W
-Creature Bird Soldier
-Domain - Aven Trailblazer's toughness is equal to the number of basic land types among lands you control.
-2/0
-Flying
 
 Psychatog
 1 U B
@@ -9886,12 +9892,6 @@ Diamond Valley
 no cost
 Land
 tap: Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.
-
-People of the Woods
-G G
-Creature Human
-People of the Woods's toughness is equal to the number of Forests you control.
-1/0
 
 Gaea's Avenger
 1 G G
