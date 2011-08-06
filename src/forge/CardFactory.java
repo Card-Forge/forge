@@ -16201,7 +16201,7 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
     			  CardList gobs = new CardList(AllZone.getZone(Constant.Zone.Play, card.getController()).getCards());
 	    	      gobs = gobs.getType("Goblin");
 	    	      
-	    	      return gobs.size()>0;
+	    	      return super.canPlay() && gobs.size()>0;
     		  }
     		  
     	      public boolean canPlayAI()

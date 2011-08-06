@@ -1540,7 +1540,6 @@ class CardFactory_Equipment {
 	              return getCreature().size() != 0 && !card.isEquipping();
 	            }
 	         
-	          
 	          public void chooseTargetAI()
 	            {
 	              Card target = CardFactoryUtil.AI_getBestCreature(getCreature());

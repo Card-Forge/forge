@@ -15509,7 +15509,89 @@ public class CardFactory_Creatures {
 	        ability.setDescription("1, tap: Destroy all artifacts, creatures, and enchantments.");
 	        ability.setStackDescription("Destroy all artifacts, creatures, and enchantments.");
 	      }//*************** END ************ END **************************
+	      
+	      //*************** START *********** START **************************
+	      if(cardName.equals("Stern Judge"))
+	      {
+	        final Ability_Tap ability = new Ability_Tap(card)
+	        {
+	  		private static final long serialVersionUID = 3059547795996737707L;
+	  		public void resolve()
+	          {
+	            AllZone.Human_Life.subtractLife(countSwamps("Human"));
+	            AllZone.Computer_Life.subtractLife(countSwamps("Computer"));
+	          }
+	          int countSwamps(String player)
+	          {
+	            PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+	            CardList swamps = new CardList(play.getCards());
+	            swamps = swamps.getType("Swamp");
+	            return swamps.size();
+	          }
+	          public boolean canPlayAI()
+	          {
+	            int computer = countSwamps(Constant.Player.Computer);
+	            int human    = countSwamps(Constant.Player.Human);
 
+	            if((computer >= AllZone.Computer_Life.getLife()) || (human == 0))
+	              return false;
+
+	            return computer <= human;
+	          }
+	        };//SpellAbility
+	        card.addSpellAbility(ability);
+	        ability.setDescription("tap: Each player loses 1 life for each Swamp he or she controls.");
+	        ability.setStackDescription("Stern Judge - Each player loses 1 life for each Swamp he or she controls");
+	        ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
+	      }//*************** END ************ END **************************
+
+
+	      //*************** START *********** START **************************
+	      if(cardName.equals("Cackling Imp") || cardName.equals("Blightspeaker"))
+	      {
+	        final Ability_Tap ability = new Ability_Tap(card)
+	        {
+	  		private static final long serialVersionUID = -8034678094689484203L;
+	  		public void resolve()
+	          {
+	            String opponent = AllZone.GameAction.getOpponent(card.getController());
+	            AllZone.GameAction.getPlayerLife(opponent).subtractLife(1);
+	          }
+	          public boolean canPlayAI()
+	          {
+	            //computer should play ability if this creature doesn't attack
+	            Combat c = ComputerUtil.getAttackers();
+	            CardList list = new CardList(c.getAttackers());
+
+	            //could this creature attack?, if attacks, do not use ability
+	            return (! list.contains(card));
+	          }
+	        };//SpellAbility
+	        card.addSpellAbility(ability);
+	        ability.setDescription("tap: Target player loses 1 life.");
+	        ability.setStackDescription(card.getName() + " - Opponent loses 1 life.");
+	        ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
+	      }//*************** END ************ END **************************
+
+
+	      //*************** START *********** START **************************
+	      if(cardName.equals("Thought Courier"))
+	      {
+	        final Ability_Tap ability = new Ability_Tap(card)
+	        {
+	  		private static final long serialVersionUID = -7702857487992969125L;
+	  		public boolean canPlayAI() {return false;}
+	          public void resolve()
+	          {
+	            AllZone.GameAction.drawCard(card.getController());
+	            AllZone.InputControl.setInput(CardFactoryUtil.input_discard());
+	          }
+	        };//SpellAbility
+	        card.addSpellAbility(ability);
+	        ability.setDescription("tap: Draw a card, then discard a card.");
+	        ability.setStackDescription("Thought Courier - draw a card, then discard a card.");
+	        ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
+	      }//*************** END ************ END **************************
 
 	      	    
 	      // Cards with Cycling abilities
