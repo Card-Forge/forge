@@ -1850,6 +1850,7 @@ res/cardsfolder/femeref_enchantress.txt -text svneol=native#text/plain
 res/cardsfolder/femeref_knight.txt -text svneol=native#text/plain
 res/cardsfolder/femeref_scouts.txt -text svneol=native#text/plain
 res/cardsfolder/fen_stalker.txt -text svneol=native#text/plain
+res/cardsfolder/fencer_clique.txt -text svneol=native#text/plain
 res/cardsfolder/fencers_magemark.txt -text svneol=native#text/plain
 res/cardsfolder/fend_off.txt -text svneol=native#text/plain
 res/cardsfolder/feral_animist.txt -text svneol=native#text/plain
