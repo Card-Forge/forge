@@ -610,6 +610,22 @@ public class QuestUtil {
 			
 			qa.setCardRewardList(pack.getRare(5, 1));
 		}
+		
+		else if (id == 21) // Private Domain
+		{
+			CardList humanList = new CardList();
+
+			humanList.add(AllZone.CardFactory.getCard("Strip Mine", Constant.Player.Human));
+			
+			qa.setHuman(humanList);
+			
+			String compySetupCards[] = {"Plains", "Island", "Swamp", "Mountain", "Forest"};
+			
+			for (int i = 0; i < 5; i ++)
+				qa.addCompy(compySetupCards[i]);
+			
+			qa.setCardRewardList(pack.getRare(6));
+		}
 			
 	}
 	

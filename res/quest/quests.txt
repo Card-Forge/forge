@@ -198,4 +198,14 @@ Five colorless rares
 300
 Blood Oath.jpg
 
+21
+Private Domain
+During your travels, you accidentally stumble upon the domain of an evil, powerful wizard. A fight to the death ensues.
+Expert
+Not Repeatable
+120
+Six random rares
+500
+blank.jpg
+
 End

@@ -8,7 +8,7 @@ Aven Trailblazer
 2 W
 Creature Bird Soldier
 Domain - Aven Trailblazer's toughness is equal to the number of basic land types among lands you control.
-2/1
+2/0
 Flying
 
 Psychatog
