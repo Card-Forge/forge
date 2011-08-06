@@ -9,4 +9,5 @@ SVar:DBDig:DB$Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Cre
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_empath.jpg
+SetInfo:FUT|Common|http://magiccards.info/scans/en/fut/130.jpg
 End

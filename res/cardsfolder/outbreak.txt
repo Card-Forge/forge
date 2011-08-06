@@ -8,4 +8,5 @@ SVar:AltCost:Discard<1/Swamp>
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/outbreak.jpg
+SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/71.jpg
 End

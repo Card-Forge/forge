@@ -9,4 +9,5 @@ T:Mode$ SpellCast | ValidCard$ Creature.Blue | ValidActivatingPlayer$ You | Trig
 SVar:TrigDig:AB$Dig | Cost$ 0 | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | LibraryPosition2$ 0
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_connoisseur.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/118.jpg
 End
