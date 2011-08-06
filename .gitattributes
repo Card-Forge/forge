@@ -1199,6 +1199,7 @@ res/cardsfolder/errant_ephemeron.txt -text svneol=native#text/plain
 res/cardsfolder/erratic_explosion.txt -text svneol=native#text/plain
 res/cardsfolder/esper_cormorants.txt -text svneol=native#text/plain
 res/cardsfolder/esper_stormblade.txt -text svneol=native#text/plain
+res/cardsfolder/essence_drain.txt -text svneol=native#text/plain
 res/cardsfolder/essence_scatter.txt -text svneol=native#text/plain
 res/cardsfolder/essence_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/essence_warden.txt -text svneol=native#text/plain
