@@ -545,10 +545,10 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         int land = deck.getType("Land").size();
         
         StringBuffer show = new StringBuffer();
-        show.append("Total: ").append(total).append(", Creatures: ").append(creature).append(", Land: ").append(land);
+        show.append("Total: ").append(total).append(",  Creatures: ").append(creature).append(",  Land: ").append(land);
         String[] color = Constant.Color.Colors;
         for(int i = 0; i < 5; i++)
-        	show.append(", ").append(color[i]).append(": ").append(CardListUtil.getColor(deck, color[i]).size());
+        	show.append(",  ").append(color[i]).append(": ").append(CardListUtil.getColor(deck, color[i]).size());
         
         return show.toString();
     }//getStats()
@@ -663,7 +663,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         colorlessCheckBox.setOpaque(false);
         
         picture.addMouseListener(new CustomListener());
-        if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) statsLabel.setFont(new java.awt.Font("Dialog", 0, 13));
         statsLabel.setText("Total: 0, Creatures: 0, Land: 0");
         //Do not lower statsLabel any lower, we want this to be visible at 1024 x 768 screen size
         this.setTitle("Deck Editor");
@@ -672,7 +672,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         gridLayout1.setColumns(1);
         gridLayout1.setRows(0);
         statsLabel2.setText("Total: 0, Creatures: 0, Land: 0");
-        if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
+        if (!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 13));
         /* jLabel1.setText("Click on the column name (like name or color) to sort the cards"); */
         
         pictureViewPanel.setCardPanel(picture);
@@ -680,20 +680,20 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         this.getContentPane().setLayout(new MigLayout("fill"));
                 
         // this.getContentPane().add(landCheckBox, "cell 0 0, egx checkbox, split 16");
-        this.getContentPane().add(landCheckBox, "cell 0 0, egx checkbox, split 14");
-        this.getContentPane().add(creatureCheckBox, "");
-        this.getContentPane().add(sorceryCheckBox, "");
-        this.getContentPane().add(instantCheckBox, "");
-        this.getContentPane().add(planeswalkerCheckBox, "");
-        this.getContentPane().add(artifactCheckBox, "");
-        this.getContentPane().add(enchantmentCheckBox, "");
+        this.getContentPane().add(landCheckBox, "cell 0 0, egx checkbox, grow, split 14");
+        this.getContentPane().add(creatureCheckBox, "grow");
+        this.getContentPane().add(sorceryCheckBox, "grow");
+        this.getContentPane().add(instantCheckBox, "grow");
+        this.getContentPane().add(planeswalkerCheckBox, "grow");
+        this.getContentPane().add(artifactCheckBox, "grow");
+        this.getContentPane().add(enchantmentCheckBox, "grow");
         
-        this.getContentPane().add(whiteCheckBox, "");
-        this.getContentPane().add(blueCheckBox, "");
-        this.getContentPane().add(blackCheckBox, "");
-        this.getContentPane().add(redCheckBox, "");
-        this.getContentPane().add(greenCheckBox, "");
-        this.getContentPane().add(colorlessCheckBox, "");
+        this.getContentPane().add(whiteCheckBox, "grow");
+        this.getContentPane().add(blueCheckBox, "grow");
+        this.getContentPane().add(blackCheckBox, "grow");
+        this.getContentPane().add(redCheckBox, "grow");
+        this.getContentPane().add(greenCheckBox, "grow");
+        this.getContentPane().add(colorlessCheckBox, "grow");
 
         this.getContentPane().add(filterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
         
