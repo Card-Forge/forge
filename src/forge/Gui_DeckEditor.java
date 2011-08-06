@@ -94,7 +94,6 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     private CardList          bottom;
     public Card               cCardHQ;
     private static File       previousDirectory    = null;
-    private GUI_PictureHQ     hq;
     
     private CardDetailPanel   detail               = new CardDetailPanel(null);
     private CardPicturePanel  picture              = new CardPicturePanel(null);

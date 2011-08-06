@@ -6,6 +6,7 @@ import static java.lang.Double.*;
 import static java.lang.Math.*;
 
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -110,7 +111,9 @@ public class ImageCache implements NewConstants {
         if(original == null) return null;
         
         double scale = min((double) width / original.getWidth(), (double) height / original.getHeight());
-        //TODO here would be the place to limit the scaling
+        //TODO here would be the place to limit the scaling, scaling option in menu ?
+        if(scale > 1)
+        	scale = 1;
         
         return getImage(key + "#" + scale);
     }
@@ -187,6 +190,7 @@ public class ImageCache implements NewConstants {
 
         BufferedImage image = new BufferedImage(tgtWidth, tgtHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) image.getGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
         g2d.drawImage(original, at, null);
         g2d.dispose();
         return image;
@@ -209,6 +213,7 @@ public class ImageCache implements NewConstants {
 
         BufferedImage image = new BufferedImage(tgtHeight, tgtWidth, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) image.getGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
         g2d.drawImage(original, at, null);
         g2d.dispose();
         return image;
@@ -226,6 +231,7 @@ public class ImageCache implements NewConstants {
         BufferedImage image = new BufferedImage((int) (original.getWidth() * scale),
                 (int) (original.getHeight() * scale), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D) image.getGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
         g2d.drawImage(original, at, null);
         g2d.dispose();
         return image;
