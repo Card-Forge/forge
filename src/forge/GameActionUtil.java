@@ -6517,7 +6517,11 @@ public class GameActionUtil {
 							}
 						};//Ability
 						thisVault.addSpellAbility(untap);
-						untap.setStackDescription("Untap "+thisVault);
+						
+						StringBuilder sb = new StringBuilder();
+						sb.append("Untap ").append(thisVault);
+						untap.setStackDescription(sb.toString());
+						
 						untap.setBeforePayMana(new Input_PayManaCost(untap));
 						//AllZone.Stack.add(untap);
 						AllZone.GameAction.playSpellAbility(untap);
@@ -6554,7 +6558,11 @@ public class GameActionUtil {
         						player.addDamage(1, source);
         					}
         				};
-        				ability.setStackDescription(auraName+" -  deals 1 damage to "+ player);
+        				
+        				StringBuilder sb = new StringBuilder();
+        				sb.append(auraName).append(" -  deals 1 damage to ").append(player);
+        				ability.setStackDescription(sb.toString());
+        				
                         AllZone.Stack.add(ability);
         			} 
         		}
@@ -6589,7 +6597,11 @@ public class GameActionUtil {
         						player.addDamage(1, source);
         					}
         				};
-        				ability.setStackDescription(auraName+" -  deals 1 damage to "+ player);
+        				
+        				StringBuilder sb = new StringBuilder();
+        				sb.append(auraName).append(" -  deals 1 damage to ").append(player);
+        				ability.setStackDescription(sb.toString());
+        				
                         AllZone.Stack.add(ability);
         			} 
         		}
@@ -6619,7 +6631,11 @@ public class GameActionUtil {
 								player.loseLife(1);
 							}
 						};
-						ability.setStackDescription(auraName+" - "+player+" loses 1 life.");
+						
+						StringBuilder sb = new StringBuilder();
+						sb.append(auraName).append(" - ").append(player).append(" loses 1 life.");
+						ability.setStackDescription(sb.toString());
+						
 						AllZone.Stack.add(ability);
 					} 
 				}
@@ -6654,7 +6670,11 @@ public class GameActionUtil {
         						player.addDamage(1, source);
         					}
         				};
-        				ability.setStackDescription(auraName+" -  deals 1 damage to "+ player);
+        				
+        				StringBuilder sb = new StringBuilder();
+        				sb.append(auraName).append(" -  deals 1 damage to ").append(player);
+        				ability.setStackDescription(sb.toString());
+        				
                         AllZone.Stack.add(ability);
         			} 
         		}
@@ -6689,7 +6709,10 @@ public class GameActionUtil {
         					}
         				};
         				if(enchantedCard.isUntapped()) {
-        					ability.setStackDescription(auraName+" -  tap enchanted creature.");
+        					StringBuilder sb = new StringBuilder();
+        					sb.append(auraName).append(" -  tap enchanted creature.");
+        					ability.setStackDescription(sb.toString());
+        					
         					AllZone.Stack.add(ability);
         				}
         			} 
@@ -6709,17 +6732,22 @@ public class GameActionUtil {
         if(list.size() > 0) {
         	Ability ability2;
         	for(Card target:list) {
-        				final Card source = list.get(0);
-        				final Card enchantedCard = target;
-        				ability2 = new Ability(source, "0") {
-        					@Override
-        					public void resolve() {
-        						//add an infection counter
-        						source.addCounter(Counters.INFECTION, 1);
-        					}
-        				};
-        				ability2.setStackDescription(auraName+" - add an infection counter to "+enchantedCard.getName());
-        				AllZone.Stack.add(ability2);
+        		final Card source = list.get(0);
+        		final Card enchantedCard = target;
+        		ability2 = new Ability(source, "0") {
+        			@Override
+        			public void resolve() {
+        				//add an infection counter
+        				source.addCounter(Counters.INFECTION, 1);
+        			}
+        		};
+        		
+        		StringBuilder sb = new StringBuilder();
+        		sb.append(auraName).append(" - add an infection counter to ");
+        		sb.append(enchantedCard.getName());
+        		ability2.setStackDescription(sb.toString());
+        		
+        		AllZone.Stack.add(ability2);
         	}
         }//list > 0
 	}
@@ -6753,7 +6781,11 @@ public class GameActionUtil {
         						enchantedCard.getController().addDamage(damage, source);
         					}
         				};
-        				ability1.setStackDescription(auraName + " - deals X damage to "+target.getController());
+        				
+        				StringBuilder sb = new StringBuilder();
+        				sb.append(auraName).append(" - deals X damage to ").append(target.getController());
+        				ability1.setStackDescription(sb.toString());
+        				
         				AllZone.Stack.add(ability1);
         			} 
         		}
@@ -7078,7 +7110,11 @@ public class GameActionUtil {
 
 				}
 			}; // ability
-			ability.setStackDescription("Nath of the Gilt-Leaf - " + opponent + " discards a card at random.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Nath of the Gilt-Leaf - ").append(opponent).append(" discards a card at random.");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}
@@ -7255,10 +7291,20 @@ public class GameActionUtil {
 
 				}// resolve()
 			};// Ability
-			if(creatureType.contains("Elf") || creatureType.contains("Warrior")) ability.setStackDescription("Winnower Patrol - "
-					+ player + " reveals: " + cardName + ", and Winnower Patrol gets +1/+1.");
-			else ability.setStackDescription("Winnower Patrol - " + player + " reveals top card: " + cardName
-					+ ".");
+			if(creatureType.contains("Elf") || creatureType.contains("Warrior")) {
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Winnower Patrol - ").append(player).append(" reveals: ");
+				sb.append(cardName).append(", and Winnower Patrol gets +1/+1.");
+				ability.setStackDescription(sb.toString());
+			}
+			else {
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Winnower Patrol - ").append(player).append(" reveals top card: ");
+				sb.append(cardName).append(".");
+				ability.setStackDescription(sb.toString());
+			}
 
 			AllZone.Stack.add(ability);
 		 }// for
@@ -7299,10 +7345,20 @@ public class GameActionUtil {
 
 				}// resolve()
 			};// Ability
-			if(creatureType.contains("Faerie") || creatureType.contains("Wizard")) ability.setStackDescription("Nightshade Schemers - "
-					+ player + " reveals: " + cardName + ", and " + opponent + " loses 2 life.");
-			else ability.setStackDescription("Nightshade Schemers - " + player + " reveals top card: " + cardName
-					+ ".");
+			if(creatureType.contains("Faerie") || creatureType.contains("Wizard")) {
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Nightshade Schemers - ").append(player).append(" reveals: ");
+				sb.append(cardName).append(", and ").append(opponent).append(" loses 2 life.");
+				ability.setStackDescription(sb.toString());
+			}
+			else {
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Nightshade Schemers - ").append(player);
+				sb.append(" reveals top card: ").append(cardName).append(".");
+				ability.setStackDescription(sb.toString());
+			}
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -7342,10 +7398,20 @@ public class GameActionUtil {
 
 				}// resolve()
 			};// Ability
-			if(creatureType.contains("Giant") || creatureType.contains("Wizard")) ability.setStackDescription("Wandering Graybeard - "
-					+ player + " reveals: " + cardName + ", and gains 4 life.");
-			else ability.setStackDescription("Wandering Graybeard - " + player + " reveals top card: " + cardName
-					+ ".");
+			if(creatureType.contains("Giant") || creatureType.contains("Wizard")) {
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Wandering Graybeard - ").append(player).append(" reveals: ");
+				sb.append(cardName).append(", and gains 4 life.");
+				ability.setStackDescription(sb.toString());
+			}
+			else {
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Wandering Graybeard - ").append(player);
+				sb.append(" reveals top card: ").append(cardName).append(".");
+				ability.setStackDescription(sb.toString());
+			}
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -7384,10 +7450,20 @@ public class GameActionUtil {
 
 				}// resolve()
 			};// Ability
-			if(creatureType.contains("Elf") || creatureType.contains("Shaman")) ability.setStackDescription("Wolf-Skull Shaman - "
-					+ player + " reveals: " + cardName + ", and puts 2/2 Wolf into play.");
-			else ability.setStackDescription("Wolf-Skull Shaman - " + player + " reveals top card: " + cardName
-					+ ".");
+			if(creatureType.contains("Elf") || creatureType.contains("Shaman")) {
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Wolf-Skull Shaman - ").append(player).append(" reveals: ");
+				sb.append(cardName).append(", and puts 2/2 Wolf into play.");
+				ability.setStackDescription(sb.toString());
+			}
+			else {
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Wolf-Skull Shaman - ").append(player).append(" reveals top card: ");
+				sb.append(cardName).append(".");
+				ability.setStackDescription(sb.toString());
+			}
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -7593,8 +7669,11 @@ public class GameActionUtil {
 
 				}// resolve()
 			};// Ability
-			ability.setStackDescription("Dark Confidant - " + player + " loses " + convertedManaCost
-					+ " life and draws top card(" + cardName + ").");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Dark Confidant - ").append(player).append(" loses ").append(convertedManaCost);
+			sb.append(" life and draws top card(").append(cardName).append(").");
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -7828,7 +7907,11 @@ public class GameActionUtil {
 				}
 
 			};// Ability
-			ability.setStackDescription("Wort returns creature from graveyard to " + player + "'s hand");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Wort returns creature from graveyard to ").append(player).append("'s hand");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		} // if creatures > 0
 	} // Wort
@@ -7910,10 +7993,13 @@ public class GameActionUtil {
 						card.subtractCounter(Counters.TIME, 1);
 					}
 				}; // ability
-				ability.setStackDescription(card.getName()
-						+ " - Vanishing - remove a time counter from it. When the last is removed, sacrifice it.)");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - Vanishing - remove a time counter from it. ");
+				sb.append("When the last is removed, sacrifice it.)");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
-
 			}
 		}
 	}
@@ -7941,10 +8027,13 @@ public class GameActionUtil {
 							card.subtractCounter(Counters.FADE, 1);
 					}
 				}; // ability
-				ability.setStackDescription(card.getName()
-						+ " - Fading - remove a fade counter from it. If you can't, sacrifice it.)");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(card.getName()).append(" - Fading - remove a fade counter from it. ");
+				sb.append("If you can't, sacrifice it.)");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
-
 			}
 		}
 	}
@@ -8028,13 +8117,15 @@ public class GameActionUtil {
 						}
 					}// getCreatureFromLibrary
 				};// Ability
-
-				ability.setStackDescription("Defense of the Heart - "
-						+ player
-						+ " sacrifices Defense of the Heart to search their library for up to two creature cards and put those creatures into play. Then shuffle's their library.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Defense of the Heart - ").append(player);
+				sb.append(" sacrifices Defense of the Heart to search their library for up to two ");
+				sb.append("creature cards and put those creatures into play. Then shuffle's their library.");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 				card.addSpellAbility(ability);
-
 			}
 		}// if
 	}// upkeep_Defense of the Heart
@@ -8092,7 +8183,15 @@ public class GameActionUtil {
 	                    }
 	               }
 	            };// Ability
-	            ability.setStackDescription("At the beginning of each player's upkeep, that player chooses target player who controls more creatures than he or she does and is his or her opponent. The first player may reveal cards from the top of his or her library until he or she reveals a creature card. If he or she does, that player puts that card onto the battlefield and all other cards revealed this way into his or her graveyard.");
+	            
+	            StringBuilder sb = new StringBuilder();
+	            sb.append("At the beginning of each player's upkeep, that player chooses target player ");
+	            sb.append("who controls more creatures than he or she does and is his or her opponent. The ");
+	            sb.append("first player may reveal cards from the top of his or her library until he or she ");
+	            sb.append("reveals a creature card. If he or she does, that player puts that card onto the ");
+	            sb.append("battlefield and all other cards revealed this way into his or her graveyard.");
+	            ability.setStackDescription(sb.toString());
+
 	            AllZone.Stack.add(ability);
 	         }
 		}
@@ -8134,7 +8233,12 @@ public class GameActionUtil {
 						}
 					}
 				};// Ability
-				ability.setStackDescription("At the beginning of each player's upkeep, Oath of Ghouls returns a creature from their graveyard to owner's hand if they have more than an opponent.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("At the beginning of each player's upkeep, Oath of Ghouls returns a creature ");
+				sb.append("from their graveyard to owner's hand if they have more than an opponent.");
+				ability.setStackDescription(sb.toString());
+
 				AllZone.Stack.add(ability);
 			}
 		}
@@ -8163,7 +8267,11 @@ public class GameActionUtil {
 					}
 				};// Ability
 				if(damage>0){
-					ability.setStackDescription("Ancient Runes deals " + damage + " damage to " + player);
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append("Ancient Runes deals ").append(damage).append(" damage to ").append(player);
+					ability.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability);
 				}
 			}
@@ -8192,7 +8300,11 @@ public class GameActionUtil {
 					}
 				};// Ability
 				if(damage>0){
-					ability.setStackDescription("Karma deals " + damage + " damage to " + player);
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append("Karma deals ").append(damage).append(" damage to ").append(player);
+					ability.setStackDescription(sb.toString());
+					
 					AllZone.Stack.add(ability);
 				}
 			}
@@ -8216,7 +8328,10 @@ public class GameActionUtil {
 						player.gainLife(1);  //AllZone.GameAction.gainLife(player, 1);
 				}
 			};// Ability
-			ability.setStackDescription("Convalescence - " + player + " gain 1 life");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Convalescence - ").append(player).append(" gain 1 life");
+			ability.setStackDescription(sb.toString());
 
 			if(player.getLife() <= 10) {
 				AllZone.Stack.add(ability);
@@ -8244,8 +8359,10 @@ public class GameActionUtil {
             		}
             	}
             };// Ability
-            ability.setStackDescription("Convalescent Care - " + player
-            		+ " gains 3 life and draws a card");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append("Convalescent Care - ").append(player).append(" gains 3 life and draws a card");
+            ability.setStackDescription(sb.toString());
 
             if (player.getLife() <= 5){
             	AllZone.Stack.add(ability);
@@ -8274,7 +8391,10 @@ public class GameActionUtil {
 					}
 				}
 			};//Ability
-			ability.setStackDescription("Ivory Tower - " +player+ " gains 1 life for each card > 4");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Ivory Tower - " ).append(player).append(" gains 1 life for each card > 4");
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}//for
@@ -8297,7 +8417,11 @@ public class GameActionUtil {
 					player.gainLife(hand.size());
 				}
 			};//Ability
-			ability.setStackDescription(journal.getName()+" - " +player+ " gains "+hand.size()+" life.");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(journal.getName()).append(" - ").append(player);
+			sb.append(" gains ").append(hand.size()).append(" life.");
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}//for
@@ -8338,8 +8462,11 @@ public class GameActionUtil {
 						player.addDamage(damage, src);
 					}
 				};// Ability
-
-				ability.setStackDescription("The Rack -  deals " + damage + " damage to " + player);
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("The Rack -  deals ").append(damage).append(" damage to ").append(player);
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}
 		}// if
@@ -8368,8 +8495,11 @@ public class GameActionUtil {
 						player.addDamage(damage, source);
 					}
 				};// Ability
-
-				ability.setStackDescription(storm+" -  deals " + damage + " damage to " + player);
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(storm).append(" -  deals ").append(damage).append(" damage to ").append(player);
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}
 		}// if
@@ -8408,8 +8538,11 @@ public class GameActionUtil {
 					player.addDamage(damage, src);
 				}
 			};// Ability
-
-			ability.setStackDescription("Black Vise deals " + damage + " to " + player);
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Black Vise deals ").append(damage).append(" to ").append(player);
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}
 	}// upkeep_BlackVice
@@ -8431,7 +8564,10 @@ public class GameActionUtil {
 					player.addDamage(1, source);
 				}
 			};// Ability
-			ability.setStackDescription(source+" - deals 1 damage to " + player);
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(source).append(" - deals 1 damage to ").append(player);
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -8454,7 +8590,10 @@ public class GameActionUtil {
 					player.addDamage(2, source);
 				}
 			};// Ability
-			ability.setStackDescription(source+" - deals 2 damage to " + player);
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(source).append(" - deals 2 damage to ").append(player);
+			ability.setStackDescription(sb.toString());
 
 			AllZone.Stack.add(ability);
 		}// for
@@ -8478,7 +8617,11 @@ public class GameActionUtil {
 					player.addDamage(damage, source);
 				}
 			};// Ability
-			ability.setStackDescription(source+" - deals "+damage+" damage to " + player);
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(source).append(" - deals ").append(damage).append(" damage to ").append(player);
+			ability.setStackDescription(sb.toString());
+			
 			if(damage > 0) {
 				AllZone.Stack.add(ability);
 			}
@@ -8504,8 +8647,11 @@ public class GameActionUtil {
 					opponent.setLife(0);
 				}
 			};// Ability
-
-			ability.setStackDescription("Klaas, Elf Friend - " + player + " wins the game");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Klaas, Elf Friend - ").append(player).append(" wins the game");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}// if
 	}// upkeep_Klass
@@ -8535,8 +8681,11 @@ public class GameActionUtil {
 					opponent.setLife(0);
 				}
 			};// Ability
-
-			ability.setStackDescription("Felidar Sovereign - " + player + " wins the game");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Felidar Sovereign - ").append(player).append(" wins the game");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}// if
 	}// upkeep_Felidar_Sovereign
@@ -8566,8 +8715,11 @@ public class GameActionUtil {
 					opponent.setLife(0);
 				}
 			};// Ability
-
-			ability.setStackDescription("Battle of Wits - " + player + " wins the game");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Battle of Wits - ").append(player).append(" wins the game");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}// if
 	}// upkeep_Battle_of_Wits
@@ -8596,8 +8748,11 @@ public class GameActionUtil {
 					opponent.setLife(0);
 				}
 			};// Ability
-
-			ability.setStackDescription("Mortal Combat - " + player + " wins the game");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Mortal Combat - ").append(player).append(" wins the game");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}// if
 	}// upkeep_Mortal Combat
@@ -8628,8 +8783,11 @@ public class GameActionUtil {
 					opponent.setLife(0);
 				}
 			};// Ability
-
-			ability.setStackDescription("Epic Struggle - " + player + " wins the game");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Epic Struggle - ").append(player).append(" wins the game");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}// if
 	}// upkeep_Epic_Struggle
@@ -8655,9 +8813,12 @@ public class GameActionUtil {
 					}
 					player.getOpponent().setLife(0);
 				}
-			};
-
-			ability.setStackDescription("Helix Pinnacle - " + player + " wins the game");
+			};// ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Helix Pinnacle - ").append(player).append(" wins the game");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}// if
 	}// upkeep_Helix_Pinnacle
@@ -8688,8 +8849,11 @@ public class GameActionUtil {
 					opponent.setLife(0);
 				}
 			};// Ability
-
-			ability.setStackDescription("Near-Death Experience - " + player + " wins the game");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Near-Death Experience - ").append(player).append(" wins the game");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}// if
 	}// upkeep_Near_Death_Experience
@@ -8718,8 +8882,11 @@ public class GameActionUtil {
 					opponent.setLife(0);
 				}
 			};// Ability
-
-			ability.setStackDescription(list.get(0)+" - " + player + " wins the game");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(list.get(0)).append(" - ").append(player).append(" wins the game");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}// if
 	}// upkeep_Test_of_Endurance
@@ -8755,8 +8922,11 @@ public class GameActionUtil {
 					opponent.setLife(0);
 				}
 			};// Ability
-
-			ability.setStackDescription("Barren Glory - " + player + " wins the game");
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Barren Glory - ").append(player).append(" wins the game");
+			ability.setStackDescription(sb.toString());
+			
 			AllZone.Stack.add(ability);
 		}// if
 	}// upkeep_Barren_Glory
@@ -8892,8 +9062,10 @@ public class GameActionUtil {
 						CardFactoryUtil.makeTokenSaproling(mostLands);
 					}// resolve()
 				};// Ability
-				ability.setStackDescription("Greener Pastures - " + mostLands
-						+ " puts a 1/1 green Saproling token into play.");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Greener Pastures - ").append(mostLands).append(" puts a 1/1 green Saproling token into play.");
+				ability.setStackDescription(sb.toString());
 
 				AllZone.Stack.add(ability);
 			}// for
