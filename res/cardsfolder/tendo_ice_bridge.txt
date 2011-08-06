@@ -1,8 +1,9 @@
 Name:Tendo Ice Bridge
 ManaCost:no cost
 Types:Land
-Text:CARDNAME enters the battlefield with one charge counter on it.
+Text:no text
 K:tap: add 1
+K:etbCounter:CHARGE:1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tendo_ice_bridge.jpg
 SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/165.jpg

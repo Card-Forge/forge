@@ -467,15 +467,6 @@ class CardFactory_Lands {
             card.addSpellAbility(tendo);
             tendo.setDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
             tendo.setStackDescription("CARDNAME - tap, remove a charge counter: Add one mana of any color to your mana pool");
-        	
-            Command intoPlay = new Command() {
-				private static final long serialVersionUID = -2231880032957304542L;
-
-				public void execute() {
-					card.addCounter(Counters.CHARGE, 1);
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
         
