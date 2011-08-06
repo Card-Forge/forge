@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import forge.error.ErrorViewer;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -2060,23 +2061,30 @@ public class Card extends MyObservable {
         return false;
     }
     
-    public boolean isValidCard(String Restrictions[], String Controller) {
-        for (int i=0; i<Restrictions.length; i++)
+    public boolean isValidCard(String Restris[], String You) {
+    	String Restriction[] = {""};
+    	String st = "";
+        for (int i=0; i<Restriction.length; i++)
         {
-            if (Restrictions[i].contains("YouCtrl"))
+        	Restriction[i] = Restris[i];
+            if (Restriction[i].contains("YouCtrl"))
             {
-                if (!getController().equals(Controller))
-                   return false;
-                Restrictions[i] = Restrictions[i].replaceAll(".YouCtrl", "");
+                if (!getController().equals(You)) {
+                    return false;
+                 }
+                st = Restriction[i].replaceAll(".YouCtrl", "");
+                Restriction[i] = st;
             }
-            else if (Restrictions[i].contains("YouDontCtrl"))
+            else if (Restriction[i].contains("YouDontCtrl"))
             {
-                if (getController().equals(Controller))
+                if (getController().equals(You)) {
                    return false;
-                Restrictions[i] = Restrictions[i].replaceAll(".YouDontCtrl", "");
+                }
+                st = Restriction[i].replaceAll(".YouDontCtrl", "");
+                Restriction[i] = st;
             }
         }
-        return isValidCard(Restrictions);
+        return isValidCard(Restriction);
     }
     
     public boolean isValidCard(String Restrictions[]) {
