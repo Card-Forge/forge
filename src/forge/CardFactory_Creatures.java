@@ -19386,7 +19386,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Kozilek's Predator") || cardName.equals("Dread Drone")) {
             final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
                 @Override
@@ -19417,7 +19417,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Emrakul's Hatcher")) {
             final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
                 @Override
@@ -19449,7 +19449,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Nest Invader")) {
             final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
                 @Override
@@ -19536,7 +19536,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Storm Entity")) {
+        else if(cardName.equals("Storm Entity")) {
         	final SpellAbility intoPlay = new Ability(card, "0") {
         		@Override
         		public boolean canPlayAI() {
@@ -19563,7 +19563,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END ************************** 
         
         //*************** START *********** START **************************
-        if(cardName.equals("Filigree Sages")) {
+        else if(cardName.equals("Filigree Sages")) {
         	/*
         	 * 2U: Untap target artifact.
         	 */
@@ -19605,7 +19605,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END ************************** 
         
         //*************** START *********** START **************************
-        if(cardName.equals("Aven Fateshaper")) {
+        else if(cardName.equals("Aven Fateshaper")) {
         	/*
         	 * When Aven Fateshaper enters the battlefield, look at the top four
         	 * cards of your library, then put them back in any order.
@@ -19647,7 +19647,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Descendant of Soramaro")) {
+        else if(cardName.equals("Descendant of Soramaro")) {
         	/*
         	 * 1U: Look at the top X cards of your library, where X is the number
         	 * of cards in your hand, then put them back in any order.
@@ -19669,8 +19669,8 @@ public class CardFactory_Creatures {
         	ability.setStackDescription(cardName + " - Rearrange the top X cards in your library in any order.");
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
-        if(cardName.equals("Information Dealer")) {
+        //*************** START *********** START **************************
+        else if(cardName.equals("Information Dealer")) {
         	/*
         	 * Tap: Look at the top X cards of your library, where X is the
         	 * number of Wizards on the battlefield, then put them back in any order.
@@ -19695,7 +19695,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
-        if(cardName.equals("Dawnglare Invoker")) {
+        else if(cardName.equals("Dawnglare Invoker")) {
         	/*
         	 * 8: Tap all creatures target player controls.
         	 */
@@ -19724,7 +19724,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Sphinx of Magosi")) {
+        else if(cardName.equals("Sphinx of Magosi")) {
         	/*
         	 * 2 U: Draw a card, then put a +1/+1 counter on Sphinx of Magosi.
         	 */
@@ -19741,7 +19741,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Kor Line-Slinger")) {
+        else if(cardName.equals("Kor Line-Slinger")) {
         	final Ability_Tap ability = new Ability_Tap(card) {
 				private static final long serialVersionUID = -5883773208646266056L;
 				
@@ -19798,7 +19798,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Arc-Slogger")) {
+        else if(cardName.equals("Arc-Slogger")) {
         	/*
         	 * R, Exile the top ten cards of your library: Arc-Slogger deals
         	 * 2 damage to target creature or player.
@@ -19838,7 +19838,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Cemetery Reaper")) {
+        else if(cardName.equals("Cemetery Reaper")) {
         	final Ability_Tap ability = new Ability_Tap(card, "2 B")
         	{
 				private static final long serialVersionUID = 1067370853723993280L;
@@ -19978,7 +19978,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Old Man of the Sea")) {
         	/*
         	 * Tap: Gain control of target creature with power less than or
@@ -20211,7 +20211,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         
-      //*************** START *********** START ************************
+        //*************** START *********** START ************************
         if(cardName.equals("Lord of the Undead")) {
             final Ability_Tap ability = new Ability_Tap(card, "1 B") {
                 
@@ -20267,7 +20267,7 @@ public class CardFactory_Creatures {
 
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Grave Defiler")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
@@ -20305,7 +20305,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if (cardName.equals("Kargan Dragonlord"))
+        else if (cardName.equals("Kargan Dragonlord"))
         {
 	        final SpellAbility ability = new Ability_Activated(card, "R") {
 				private static final long serialVersionUID = -2252408767635375616L;
@@ -20446,41 +20446,44 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Dwarven Demolition Team")) {
+        else if (cardName.equals("Dwarven Demolition Team")) {
             final Ability_Tap ability = new Ability_Tap(card) {
-				private static final long serialVersionUID = -4635857814967376792L;
-				
-				@Override
+                private static final long serialVersionUID = -4635857814967376792L;
+                
+                @Override
                 public boolean canPlayAI() {
-					CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
-					human = human.filter(new CardListFilter() {
+                    CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    human = human.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.getType().contains("Wall");
+                            return c.getType().contains("Wall") 
+                                && CardFactoryUtil.canTarget(card, c) 
+                                && !c.getKeyword().contains("Indestructible");
                         }
                     });
-					
-					CardListUtil.sortAttack(human);
+                    
+                    CardListUtil.sortAttack(human);
                     CardListUtil.sortFlying(human);
                     
                     if (0 < human.size()) setTargetCard(human.get(0));
                     
                     return 0 < human.size();
-				}//canPlayAI()
+                }//canPlayAI()
 
-				@Override
+                @Override
                 public void resolve() {
                     Card c = getTargetCard();
                     
-                    if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    if (AllZone.GameAction.isCardInPlay(c) 
+                            && CardFactoryUtil.canTarget(card, c)) {
                         AllZone.GameAction.destroy(c);
                     }
                 }//resolve()
             };//SpellAbility
             
             Input target = new Input() {
-				private static final long serialVersionUID = 3550520287933502665L;
+                private static final long serialVersionUID = 3550520287933502665L;
 
-				@Override
+                @Override
                 public void showMessage() {
                     AllZone.Display.showMessage("Select target Wall to destroy");
                     ButtonUtil.enableOnlyCancel();
@@ -20495,7 +20498,9 @@ public class CardFactory_Creatures {
                 public void selectCard(Card c, PlayerZone zone) {
                     if (!CardFactoryUtil.canTarget(card, c)) {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                    } else if (c.isCreature() && zone.is(Constant.Zone.Play) && c.getType().contains("Wall")) {
+                    } else if (c.isCreature() 
+                            && zone.is(Constant.Zone.Play) 
+                            && c.getType().contains("Wall")) {
                         //tap ability
                         card.tap();
                         
@@ -20624,7 +20629,7 @@ public class CardFactory_Creatures {
         //*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if (cardName.equals("Roc Egg")) {
+        else if (cardName.equals("Roc Egg")) {
             final SpellAbility ability = new Ability(card, "0") {
             	
                 @Override
@@ -20659,8 +20664,8 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(destroy);
         }//*************** END ************ END **************************
         
-        
-        if (cardName.equals("Yavimaya Elder"))
+        //*************** START *********** START **************************
+        else if (cardName.equals("Yavimaya Elder"))
         {
     	        final SpellAbility ability = new Ability(card, "2") {
     	            @Override
@@ -20725,7 +20730,7 @@ public class CardFactory_Creatures {
     	        card.addDestroyCommand(destroy);
         	    
         }
-       //*************** END ************ END **************************
+        //*************** END ************ END **************************
         
         //*************** START *********** START **************************
         else if(cardName.equals("Fauna Shaman")) {
