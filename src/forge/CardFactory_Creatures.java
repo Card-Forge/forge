@@ -19819,7 +19819,7 @@ public class CardFactory_Creatures {
                 }//canPlayAI()
             };//SpellAbility
             card.addSpellAbility(ability);
-            ability.setDescription("W U, tap: Put a bribery counter on target creature you don't control.");
+            ability.setDescription("W U, tap: Put a bribery counter on target creature you don't control.  Its controller draws a card.");
             
             ability.setBeforePayMana(new Input()
             {
