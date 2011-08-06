@@ -1,7 +1,7 @@
 Name:Aven Riftwatcher
 ManaCost:2 W
 Types:Creature Bird Rebel Soldier
-Text:When Aven Riftwatcher comes into play or leaves play, you gain 2 life.
+Text:When CARDNAME enters the battlefield or leaves the battlefield, you gain 2 life.
 K:Vanishing:3
 PT:2/3
 K:Flying

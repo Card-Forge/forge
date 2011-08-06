@@ -1,7 +1,7 @@
 Name:Angel of Mercy
 ManaCost:4 W
 Types:Creature Angel
-Text:When Angel of Mercy comes into play, you gain 3 life.
+Text:When CARDNAME enters the battlefield, you gain 3 life.
 PT:3/3
 K:Flying
 SVar:Rarity:Uncommon

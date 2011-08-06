@@ -1,7 +1,7 @@
 Name:Baru, Fist of Krosa
 ManaCost:3 G G
 Types:Legendary Creature Human Druid
-Text:Whenever a Forest comes into play, green creatures you control get +1/+1 until end of turn.
+Text:Whenever a Forest enters the battlefield, green creatures you control get +1/+1 and gain trample until end of turn.
 PT:4/4
 SVar:BuffedBy:Forest
 SVar:Rarity:Rare

@@ -1,7 +1,7 @@
 Name:Affa Guard Hound
 ManaCost:2 W
 Types:Creature Hound
-Text:When Affa Guard Hound comes into play, target creature gets +0/+3 until end of turn.
+Text:When CARDNAME enters the battlefield, target creature gets +0/+3 until end of turn.
 PT:2/2
 K:Flash
 SVar:PlayMain1:TRUE

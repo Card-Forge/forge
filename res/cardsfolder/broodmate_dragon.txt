@@ -1,7 +1,7 @@
 Name:Broodmate Dragon
 ManaCost:3 B R G
 Types:Creature Dragon
-Text:When Broodmate Dragon comes into play, put a 4/4 red Dragon creature token with flying into play.
+Text:When CARDNAME enters the battlefield, put a 4/4 red Dragon creature token with flying onto the battlefield.
 PT:4/4
 K:Flying
 K:etbMakeToken<>1<>Dragon<>R 4 4 Dragon<>Controller<>R<>Creature;Dragon<>4<>4<>Flying<>put a 4/4 red Dragon creature token with flying onto the battlefield.

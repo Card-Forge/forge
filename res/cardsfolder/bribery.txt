@@ -1,7 +1,7 @@
 Name:Bribery
 ManaCost:3 U U
 Types:Sorcery
-Text:Search target opponent's library for a creature card and put that card into play under your control. Then that player shuffles his or her library.
+Text:Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles his or her library.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card21300.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/64.jpg
