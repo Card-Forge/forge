@@ -25,12 +25,14 @@ public class Cost_Payment {
 	private boolean paySac;
 	private boolean payLife;
 	private boolean payDiscard;
+	private boolean payTapXType;
 	
 	private boolean bCancel = false;
 
 	public void setPayMana(boolean bPay){	payMana = bPay;	}
 	public void setPayDiscard(boolean bSac){	payDiscard = bSac;	}
 	public void setPaySac(boolean bSac){	paySac = bSac;	}
+	public void setPayTapXType(boolean bTapX) { payTapXType = bTapX; }
 	
 	final private Input changeInput = new Input() {
 		private static final long serialVersionUID = -5750122411788688459L; };
@@ -46,6 +48,7 @@ public class Cost_Payment {
 		paySac = !cost.getSacCost();
 		payLife = !cost.getLifeCost();
 		payDiscard = !cost.getDiscardCost();
+		payTapXType = !cost.getTapXTypeCost();
 	}
 	
     public boolean canPayAdditionalCosts(){
@@ -102,6 +105,27 @@ public class Cost_Payment {
 			else if (cost.getSacThis() && !AllZone.GameAction.isCardInPlay(card))
 				return false;
 		}  
+		
+		if (cost.getTapXTypeCost())
+		{
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+			CardList typeList = new CardList(play.getCards());
+			    
+			typeList = typeList.getValidCards(cost.getTapXType().split(","));
+			
+			if (cost.getTap()) {
+				typeList = typeList.filter(new CardListFilter()
+				{
+					public boolean addCard(Card c)
+					{
+						return !c.equals(card);
+					}
+				});
+			}
+			if (typeList.size() == 0)
+			 	return false;
+
+		}
     	
     	return true;
     }
@@ -201,13 +225,23 @@ public class Cost_Payment {
     			changeInput.stopSetNext(sacrificeType(ability, cost.getSacType(), this));
     		return false;
     	}
+		
+		if (!payTapXType && cost.getTapXTypeCost())
+		{
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+            CardList typeList = new CardList(play.getCards());
+            typeList = typeList.getValidCards(cost.getTapXType().split(","));
+            
+			changeInput.stopSetNext(input_tapXCost(cost.getTapXTypeAmount(),cost.getTapXType(), typeList, ability, this));
+			return false;
+		}
 
 		req.finishPaying();
 		return true;
 	}
 
 	public boolean isAllPaid(){
-		return (payTap && payUntap && payMana && paySubCounter && paySac && payLife && payDiscard);
+		return (payTap && payUntap && payMana && paySubCounter && paySac && payLife && payDiscard && payTapXType);
 	}
 	
 	public void cancelPayment(){
@@ -244,6 +278,7 @@ public class Cost_Payment {
     public void payComputerCosts(){
     	// make sure ComputerUtil.canPayAdditionalCosts() is updated when updating new Costs
     	ArrayList<Card> sacCard = new ArrayList<Card>();
+    	ArrayList<Card> tapXCard = new ArrayList<Card>();
     	ability.setActivatingPlayer(Constant.Player.Computer);
     	
     	// double check if something can be sacrificed here. Real check is in ComputerUtil.canPayAdditionalCosts()
@@ -260,6 +295,19 @@ public class Cost_Payment {
 	    		return;
 	    	}
     	}
+    	
+    	if (cost.getTapXTypeCost()) {
+    		boolean tap = cost.getTap();
+    		
+    		for(int i = 0; i < cost.getTapXTypeAmount(); i++)
+    			tapXCard.add(ComputerUtil.chooseTapType(cost.getTapXType(), card, tap, i));
+    		
+    		if (tapXCard.size() != cost.getTapXTypeAmount()){
+	    		System.out.println("Couldn't find a valid card to tap for: "+card.getName());
+	    		return;
+	    	}
+    	}
+    	
     	// double check if counters available? Real check is in ComputerUtil.canPayAdditionalCosts()
     	int countersLeft = 0;
     	if (cost.getSubCounter()){
@@ -311,6 +359,12 @@ public class Cost_Payment {
 		if (cost.getSacCost()){
 			for(Card c : sacCard)
 				AllZone.GameAction.sacrifice(c);
+		}
+		
+		if (cost.getTapXTypeCost())
+		{
+			for (Card c : tapXCard)
+				c.tap();
 		}
 
         AllZone.Stack.add(ability);
@@ -463,4 +517,55 @@ public class Cost_Payment {
         };
         return target;
     }//sacrificeType()
+    
+    public static Input input_tapXCost(final int nCards, final String cardType, final CardList cardList, SpellAbility sa, final Cost_Payment payment) {
+        //final SpellAbility sp = sa;
+    	Input target = new Input() {
+
+			private static final long serialVersionUID = 6438988130447851042L;
+			int                       nTapped                = 0;
+            
+            @Override
+            public void showMessage() {
+            	if (cardList.size() == 0) stop();
+            	
+                AllZone.Display.showMessage("Select a "+ cardType + " card to tap");
+                ButtonUtil.enableOnlyCancel();
+            }
+            
+            @Override
+            public void selectButtonCancel() {
+            	cancel();
+            }
+            
+            @Override
+            public void selectCard(Card card, PlayerZone zone) {
+                if(zone.is(Constant.Zone.Play) && cardList.contains(card) && card.isUntapped() ) {
+                	// send in CardList for Typing
+                    card.tap();
+                    nTapped++;
+                    
+                    if(nTapped == nCards) 
+                    	done();
+                    else if (cardList.size() == 0)	// this really shouldn't happen
+                    	cancel();
+                    else
+                    	showMessage();
+                }
+            }
+            
+            public void cancel(){
+            	payment.setCancel(true);
+            	stop();
+            	payment.payCost();
+            }
+            
+            public void done(){
+            	payment.setPayTapXType(true);
+            	stop();
+            	payment.payCost();
+            }
+        };
+        return target;
+    }//input_tapXCost() 
 }

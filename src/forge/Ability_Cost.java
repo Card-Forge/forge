@@ -16,6 +16,13 @@ public class Ability_Cost {
 	public boolean getTap() { return tapCost; } 
 	
 	// future expansion of Ability_Cost class: tap untapped type
+	private boolean tapXTypeCost = false;
+	public boolean getTapXTypeCost() { return tapXTypeCost;}
+	private int tapXTypeAmount = 0;
+	public int getTapXTypeAmount() { return tapXTypeAmount; }
+	private String tapXType = "";
+	public String getTapXType() { return tapXType;}
+	
 	private boolean untapCost = false;
 	public boolean getUntap() { return untapCost; } 
 	
@@ -99,6 +106,17 @@ public class Ability_Cost {
         	sacThis = (sacType.equals("CARDNAME"));
         }     
 
+        String tapXStr = "tapXType<";
+        if (parse.contains(tapXStr))
+        {
+        	tapXTypeCost = true;
+        	String[] splitStr = abCostParse(parse, tapXStr, 2);
+        	parse = abUpdateParse(parse, tapXStr);
+        	
+        	tapXTypeAmount = Integer.parseInt(splitStr[0]);
+        	tapXType = splitStr[1];
+        }
+        
         if (parse.contains("Untap")){
         	untapCost = true;
             parse = parse.replace("Untap", "").trim();

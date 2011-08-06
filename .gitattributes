@@ -3170,6 +3170,7 @@ res/cardsfolder/skeletal_changeling.txt -text svneol=native#text/plain
 res/cardsfolder/skeletal_crocodile.txt -text svneol=native#text/plain
 res/cardsfolder/skeletal_snake.txt -text svneol=native#text/plain
 res/cardsfolder/skeletal_wurm.txt -text svneol=native#text/plain
+res/cardsfolder/skinrender.txt -text svneol=native#text/plain
 res/cardsfolder/skirk_prospector.txt -text svneol=native#text/plain
 res/cardsfolder/skirk_shaman.txt -text svneol=native#text/plain
 res/cardsfolder/skithiryx_the_blight_dragon.txt -text svneol=native#text/plain

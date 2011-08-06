@@ -278,6 +278,18 @@ public class ComputerUtil
 			else if (cost.getSacThis() && !AllZone.GameAction.isCardInPlay(card))
 				return false;
 		}
+		
+		if (cost.getTapXTypeCost())
+		{
+			PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+			CardList typeList = new CardList(play.getCards());
+			typeList = typeList.getValidCards(cost.getTapXType().split(","));
+			
+			if (cost.getTap())
+				typeList.remove(sa.getSourceCard());
+			
+			return typeList.size() >= cost.getTapXTypeAmount();
+		}
 		return true;
   }
   
@@ -516,6 +528,30 @@ public class ComputerUtil
 	  
       CardListUtil.sortAttackLowFirst(typeList);
 	  return typeList.get(0);
+  }
+  
+  static public Card chooseTapType(String type, Card activate, boolean tap, int index){
+	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+      CardList typeList = new CardList(play.getCards());
+      typeList = typeList.getValidCards(type.split(","));
+	  
+      //is this needed?
+      typeList = typeList.filter(new CardListFilter()
+	  {
+		 public boolean addCard(Card c)
+		 {
+			 return c.isUntapped();
+		 }
+	  });
+      
+      if (tap)
+    	  typeList.remove(activate);
+    	  
+	  if (typeList.size() == 0 || index >= typeList.size())
+		  return null;
+	  
+      CardListUtil.sortAttackLowFirst(typeList);
+	  return typeList.get(index);
   }
 
   static public void untapDraw()

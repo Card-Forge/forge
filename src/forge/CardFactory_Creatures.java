@@ -3341,6 +3341,98 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
 */
+      //*************** START *********** START **************************
+        else if(cardName.equals("Skinrender")) {
+
+            final CommandReturn getCreature = new CommandReturn() {
+                //get target card, may be null
+                public Object execute() {
+                    CardList l = CardFactoryUtil.AI_getHumanCreature(card, true);
+                                        
+                    CardList list = new CardList(l.toArray());                  
+                    if (list.isEmpty())	// todo: if human doesn't have a valid creature must kill own valid target
+                    	return null;
+                    
+                    // Sorts: Highest Attacking Flyer at the top. 
+                    CardListUtil.sortAttack(list);
+                    CardListUtil.sortFlying(list);
+                    
+                    Card target = list.get(0);
+                    // if "Best creature has 2+ Attack and flying target that. 
+                    if(2 <= target.getNetAttack() && target.getKeyword().contains("Flying")) 
+                    	return target;
+                    
+                    if(MyRandom.percentTrue(50))
+                    	CardListUtil.sortAttack(list);
+
+                    return target;
+                }//execute()
+            };//CommandReturn
+            
+            final SpellAbility ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
+                    	c.addCounter(Counters.M1M1,3);
+                    }
+                }//resolve()
+            };//SpellAbility
+            Command intoPlay = new Command() {
+
+				private static final long serialVersionUID = 8876482925803330585L;
+
+				public void execute() {
+                    Input target = new Input() {
+                    	
+						private static final long serialVersionUID = -2760098744343748530L;
+
+						@Override
+                        public void showMessage() {
+                            AllZone.Display.showMessage("Select target creature");
+                            ButtonUtil.disableAll();
+                        }
+                        
+                        @Override
+                        public void selectCard(Card card, PlayerZone zone) {
+                            if(!CardFactoryUtil.canTarget(ability, card)) {
+                                AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+                            } else if(card.isCreature() && zone.is(Constant.Zone.Play)) {
+                                ability.setTargetCard(card);
+                                AllZone.Stack.add(ability);
+                                stop();
+                            }
+                        }
+                    };//Input target
+                    
+
+                    if(card.getController().equals(Constant.Player.Human)) {
+                        //get all creatures
+                    	CardList creatures = AllZoneUtil.getTypeInPlay("Creature");
+                        creatures = creatures.filter(new CardListFilter(){
+                        	public boolean addCard(Card c)
+                        	{
+                        		return CardFactoryUtil.canTarget(card, c);
+                        	}
+                        });
+                    	
+                        if(creatures.size() != 0) AllZone.InputControl.setInput(target);
+
+                    } 
+                    else{ //computer
+                        Object o = getCreature.execute();
+                        if(o != null)//should never happen, but just in case
+                        {
+                            ability.setTargetCard((Card) o);
+                            AllZone.Stack.add(ability);
+                        }
+                    }//else
+                }//execute()
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
         
         
       //*************** START *********** START **************************
@@ -14807,6 +14899,141 @@ public class CardFactory_Creatures {
 
         }//*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Tradewind Rider")) {
+            final SpellAbility a1 = new Ability(card, "0") {
+                private static final long serialVersionUID = 3438865371487994984L;
+                
+                @Override
+                public void chooseTargetAI() {
+                    if(getCreature().size() != 0) {
+                        Card bestCreature = CardFactoryUtil.AI_getBestCreature(getCreature());
+                        if(getEnchantment().size() != 0) {
+                            Card bestEnchantment = CardFactoryUtil.AI_getBestEnchantment(getEnchantment(), card,
+                                    true);
+                            if(CardUtil.getConvertedManaCost(bestCreature.getManaCost()) > CardUtil.getConvertedManaCost(bestEnchantment.getManaCost())) {
+                                setTargetCard(bestCreature);
+                            } else {
+                                setTargetCard(bestEnchantment);
+                            }
+                        } else {
+                            setTargetCard(bestCreature);
+                        }
+                    } else if(getArtifact().size() != 0) {
+                        Card bestArtifact = CardFactoryUtil.AI_getBestArtifact(getArtifact());
+                        setTargetCard(bestArtifact);
+                    }
+                    
+                }//ChooseTargetAI()
+                
+                CardList getCreature() {
+                    CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    return list;
+                }//getEnchantment()
+                
+                CardList getArtifact() {
+                    CardList list = CardFactoryUtil.AI_getHumanArtifact(card, true);
+                    return list;
+                }//getArtifact()
+                
+                CardList getEnchantment() {
+                    CardList list = CardFactoryUtil.AI_getHumanEnchantment(card, true);
+                    return list;
+                }
+                
+                
+                @Override
+                public boolean canPlayAI() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    CardList cards = new CardList();
+                    
+                    cards.addAll(play.getCards());
+                    cards = cards.filter(new CardListFilter() {
+                        
+                        public boolean addCard(Card c) {
+                            return (c.isArtifact() || c.isEnchantment() || c.isCreature())
+                                    && CardFactoryUtil.canTarget(card, c);
+                        }
+                        
+                    });
+                    
+                    return cards.size() > 0;
+                    
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    String controller = card.getController();
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+                    
+                    CardList creats = new CardList();
+                    
+                    creats.addAll(play.getCards());
+                    creats = creats.getType("Creature");
+                    creats = creats.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isUntapped() && !c.equals(card);
+                        }
+                    });
+                    
+                    if(creats.size() > 1 && AllZone.GameAction.isCardInPlay(card) && card.isUntapped()
+                            && !card.hasSickness() && super.canPlay()) return true;
+                    else return false;
+                }
+                
+                @Override
+                public void resolve() {
+                    
+                    if(getTargetCard() == null) return;
+                    
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
+                    AllZone.GameAction.moveTo(hand, getTargetCard());
+                }
+                
+            };//a1
+            
+            Target target = new Target("TgtV");
+            target.setVTSelection("Select target permanent to return to owner's hand.");
+            final String Tgts[] = {"Permanent"};
+            target.setValidTgts(Tgts);
+            
+            a1.setTarget(target);
+           
+            final Ability_Cost cost = new Ability_Cost("T tapXType<2/Creature>", card.getName(), true);
+            a1.setPayCosts(cost);
+            
+            //card.clearSpellAbility();
+            card.addSpellAbility(a1);
+            a1.setDescription("tap, Tap two untapped creatures you control: Return target permanent to its owner's hand.");
+            
+            /*
+            Input runtime = new Input() {
+                
+
+                private static final long serialVersionUID = 5673846456179861542L;
+                
+                @Override
+                public void showMessage() {
+                    CardList all = new CardList();
+                    all.addAll(AllZone.Human_Play.getCards());
+                    all.addAll(AllZone.Computer_Play.getCards());
+                    all = all.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return (c.isPermanent()) && CardFactoryUtil.canTarget(card, c);
+                        }
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(a1, all, "Return target permanent", true,
+                            false));
+                }
+            };
+            a1.setBeforePayMana(runtime);
+            
+            */
+        }//*************** END ************ END **************************
+        
+        /*
+        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Tradewind Rider")) {
@@ -14989,6 +15216,7 @@ public class CardFactory_Creatures {
             
         }//*************** END ************ END **************************
         
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Nullmage Shepherd")) {

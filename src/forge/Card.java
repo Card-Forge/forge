@@ -2030,7 +2030,7 @@ public class Card extends MyObservable {
     
     public boolean isValidCard(String Restrictions[]) {
         
-        if (getName().equals("Mana Pool")) return false;
+        if (getName().equals("Mana Pool") || isImmutable()) return false;
 
         for(int i = 0; i < Restrictions.length; i++) {
         	boolean r = true;
