@@ -22,6 +22,11 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
     	return orig.contains("Sacrifice CARDNAME: Add ");
     }
     
+    public boolean isSacrificeAny()
+    {
+    	return (orig.contains("Sacrifice a") && orig.contains(": Add"));
+    }
+    
     public boolean isUndoableMana() {
     	// isBasic, plus "2" so Sol Ring is counted
     	return (orig.length() == 10 && orig.startsWith("tap: add ") && "21WBURG".contains("" + orig.charAt(9)));
@@ -130,7 +135,7 @@ abstract public class Ability_Mana extends SpellAbility implements java.io.Seria
             setManaCost("0");
             return;
         }
-        else if (isSacrifice())
+        else if (isSacrifice() || isSacrificeAny())
         {
         	String regex = "[0-9]+,";
         	Pattern pattern = Pattern.compile(regex); 

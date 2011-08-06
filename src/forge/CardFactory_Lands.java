@@ -3366,11 +3366,6 @@ class CardFactory_Lands {
                     choice.addAll(play.getCards());
 
                     choice = choice.getType("Creature");
-                    choice = choice.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return (c.isCreature());
-                        }
-                    });
                    
                     stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice,
                             "Sacrifice a creature:", true, false));

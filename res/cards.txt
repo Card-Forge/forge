@@ -1,3 +1,9 @@
+Skirk Prospector
+R
+Creature Goblin
+no text
+1/1
+
 Trinket Mage
 2 U
 Creature Human Wizard

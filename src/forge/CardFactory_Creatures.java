@@ -2884,6 +2884,53 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Skirk Prospector")) {
+            final Ability_Mana ability = new Ability_Mana(card, "Sacrifice a Goblin: Add R") {
+				private static final long serialVersionUID = -6764282980691397966L;
+
+				@Override
+                public boolean canPlayAI() {
+					return false;
+                }
+               
+                @Override
+                public void resolve() {
+                    Card c = getTargetCard();
+                   
+                    if(c != null && c.isCreature() ) {
+                    	AllZone.GameAction.sacrifice(c);
+                    	super.resolve();
+                    }
+                }
+                
+                @Override
+				public String mana() {
+					return "R";
+            	}
+            };
+           
+            Input runtime = new Input() {
+				private static final long serialVersionUID = -7876248316975077074L;
+
+				@Override
+                public void showMessage() {
+                    CardList choice = new CardList();
+                    final String player = card.getController();
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+                    choice.addAll(play.getCards());
+
+                    choice = choice.getType("Goblin");
+                   
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, choice,
+                            "Sacrifice a Goblin:", true, false));
+                }
+            };
+
+            card.addSpellAbility(ability);
+            ability.setBeforePayMana(runtime);
+        }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
         else if(cardName.equals("Sylvan Messenger")) {

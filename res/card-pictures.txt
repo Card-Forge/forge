@@ -38,7 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
-sejiri_merfolk.jpg               http://www.wizards.com/global/images/magic/general/sejiri_merfolk.jpg
+skirk_prospector.jpg		http://www.wizards.com/global/images/magic/general/skirk_prospector.jpg
+sejiri_merfolk.jpg		http://www.wizards.com/global/images/magic/general/sejiri_merfolk.jpg
 phyrexian_tower.jpg		http://www.wizards.com/global/images/magic/general/phyrexian_tower.jpg
 undiscovered_paradise.jpg		http://www.wizards.com/global/images/magic/general/undiscovered_paradise.jpg
 hagra_crocodile.jpg		http://www.wizards.com/global/images/magic/general/hagra_crocodile.jpg	
