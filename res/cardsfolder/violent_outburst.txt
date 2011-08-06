@@ -2,7 +2,7 @@ Name:Violent Outburst
 ManaCost:1 R G
 Types:Instant
 Text:no text
-K:spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Violent Outburst - Creatures get +1/+0 until EOT
+A:SP$PumpAll | Cost$ 1 R G | ValidCards$ Creature.YouCtrl | NumAtt$+1 |  SpellDescription$ Creatures you control get +1/+0 until end of turn.
 K:Cascade
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/violent_outburst.jpg

@@ -2,7 +2,7 @@ Name:Glorious Charge
 ManaCost:1 W
 Types:Instant
 Text:no text
-K:spAllPump:YouCtrl:+1/+1:Creatures you control get +1/+1 unti end of turn.:Glorious Charge - Creatures get +1/+1 until EOT
+A:SP$PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumAtt$+1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glorious_charge.jpg
 SetInfo:M10|Common|http://magiccards.info/scans/en/m10/11.jpg
