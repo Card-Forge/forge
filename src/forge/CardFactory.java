@@ -16720,6 +16720,8 @@ public class CardFactory implements NewConstants {
 			}
 			public boolean canPlayAI()
 			{
+				if (getSourceCard().getAttachedCards().length == 0)
+					return false;
 				for(SpellAbility sa:getSourceCard().getAttachedCards()[0].getSpellAbility())
                     if(sa.canPlayAI())
                     	return true;
@@ -17236,26 +17238,58 @@ public class CardFactory implements NewConstants {
          {
           
 		  private static final long serialVersionUID = -3413999403234892711L;
-
-		  public void resolve()
-          {
-              PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-              CardList land = new CardList(play.getCards());
-              land = land.getType("Forest");
-              makeToken();
-              for(int i = 1; i < land.size(); i++)
-            	  makeToken();
-            }//resolve()
-          
-          public void makeToken()
-          {
-             CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card, "G", new String[]{"Creature", "Wolf"}, 2, 2, new String[] {""});
-          }
+	
+			  public void resolve()
+	          {
+	              PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+	              CardList land = new CardList(play.getCards());
+	              land = land.getType("Forest");
+	              makeToken();
+	              for(int i = 1; i < land.size(); i++)
+	            	  makeToken();
+	            }//resolve()
+	          
+	          public void makeToken()
+	          {
+	             CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card, "G", new String[]{"Creature", "Wolf"}, 2, 2, new String[] {""});
+	          }
           };
           card.clearSpellAbility();
           card.addSpellAbility(spell);
        }//*************** END ************ END **************************
 
+      //*************** START *********** START **************************
+      else if(cardName.equals("Fog") || cardName.equals("Angelsong") || cardName.equals("Darkness") ||
+    		  cardName.equals("Holy Day") || cardName.equals("Lull") || cardName.equals("Moment's Peace") ||
+    		  cardName.equals("Respite"))
+      {
+    	  SpellAbility spell = new Spell(card)
+    	  {
+			private static final long serialVersionUID = -493504450911948985L;
+
+			public void resolve()
+    		{
+    			  AllZone.GameInfo.setPreventCombatDamageThisTurn(true);
+    			  
+    			  if (cardName.equals("Respite"))
+    			  {
+    				  CardList attackers = new CardList();
+    				  attackers.addAll(AllZone.Combat.getAttackers());
+    				  attackers.addAll(AllZone.pwCombat.getAttackers());
+    				  AllZone.GameAction.addLife(card.getController(), attackers.size());
+    			  }
+    		}
+			public boolean canPlayAI()
+			{
+				return false;
+			}
+    	  };
+    	  card.clearSpellAbility();
+    	  card.addSpellAbility(spell);
+    	  if (cardName.equals("Moment's Peace"))
+    		  card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "2 G", "0"));
+      }//*************** END ************ END **************************
+      
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

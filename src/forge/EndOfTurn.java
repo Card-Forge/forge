@@ -37,6 +37,7 @@ public class EndOfTurn implements java.io.Serializable
     
     //GameActionUtil.removeExaltedEffects();
     GameActionUtil.removeAttackedBlockedThisTurn();
+    AllZone.GameInfo.setPreventCombatDamageThisTurn(false);
     
     AllZone.StaticEffects.rePopulateStateBasedList();
     

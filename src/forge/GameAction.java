@@ -825,6 +825,8 @@ public class GameAction {
         AllZone.GameInfo.setComputerCanPlayNumberOfLands(1);
         AllZone.GameInfo.setHumanCanPlayNumberOfLands(1);
         
+        AllZone.GameInfo.setPreventCombatDamageThisTurn(false);
+        
         AllZone.Human_PoisonCounter.setPoisonCounters(0);
         AllZone.Computer_PoisonCounter.setPoisonCounters(0);
         

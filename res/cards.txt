@@ -1,3 +1,40 @@
+Angelsong
+1 W
+Instant
+Prevent all combat damage that would be dealt this turn.
+Cycling:2
+
+Lull
+1 G
+Instant
+Prevent all combat damage that would be dealt this turn.
+Cycling:2
+
+Holy Day
+W
+Instant
+Prevent all combat damage that would be dealt this turn.
+
+Moment's Peace
+1 G
+Instant
+Prevent all combat damage that would be dealt this turn.
+
+Darkness
+B
+Instant
+Prevent all combat damage that would be dealt this turn.
+
+Respite
+1 G
+Instant
+Prevent all combat damage that would be dealt this turn. You gain 1 life for each attacking creature.
+
+Fog
+G
+Instant
+Prevent all combat damage that would be dealt this turn.
+
 Wall of Reverence
 3 W
 Creature Spirit Wall
