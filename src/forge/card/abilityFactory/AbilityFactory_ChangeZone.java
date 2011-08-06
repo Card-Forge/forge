@@ -1143,7 +1143,7 @@ public class AbilityFactory_ChangeZone {
 	    			AllZone.GameAction.moveToLibrary(tgtC, libraryPosition);
 
 	    			if (params.containsKey("Shuffle"))	// for things like Gaea's Blessing
-	    				player.shuffle();
+	    				tgtC.getOwner().shuffle();
 	    		}
 	    		else{
 		    		if (destination.equals("Battlefield")){
