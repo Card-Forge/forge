@@ -468,6 +468,9 @@ public class CombatUtil {
         if(attacker.getKeyword().contains("Indestructible") && 
         		!(defender.getKeyword().contains("Wither") || defender.getKeyword().contains("Infect"))) return false;
         
+        if(!CardFactoryUtil.canDamage(defender, attacker)) return false;
+        
+        /* Checked by the function above
         //this usually doesn't happen, unless the attacker got pro {color} after being blocked, or the defender became {color}
         if(attacker.getKeyword().contains("Protection from white")
                 && defender.isWhite()) return false;
@@ -492,7 +495,7 @@ public class CombatUtil {
                 && (defender.getType().contains("Goblin") || defender.getKeyword().contains("Changeling"))) return false;
         if(attacker.getKeyword().contains("Protection from Clerics")
                 && (defender.getType().contains("Cleric") || defender.getKeyword().contains("Changeling"))) return false;
-        
+        */
         
         int defBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(defender);
         int attBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(attacker);
@@ -594,6 +597,9 @@ public class CombatUtil {
         if(attacker.getKeyword().contains("Prevent all combat damage that would be dealt to and dealt by CARDNAME.") ||
         		attacker.getKeyword().contains("Prevent all combat damage that would be dealt by CARDNAME")) return false;
         
+        if(!CardFactoryUtil.canDamage(attacker,defender)) return false;
+        
+        /* Checked by the function above
         if(defender.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
         		&& attacker.isCreature() && attacker.isArtifact()) return false;
         if(defender.getKeyword().contains("Protection from white")
@@ -617,6 +623,7 @@ public class CombatUtil {
                 && (attacker.getType().contains("Demon") || attacker.getKeyword().contains("Changeling"))) return false;
         if(defender.getKeyword().contains("Protection from Goblins")
                 && (attacker.getType().contains("Goblin") || attacker.getKeyword().contains("Changeling"))) return false;
+        */
         
         int defBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(defender);
         int attBushidoMagnitude = CardFactoryUtil.getTotalBushidoMagnitude(attacker);

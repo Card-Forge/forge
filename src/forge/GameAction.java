@@ -3671,6 +3671,10 @@ public class GameAction {
         
         int assignedDamage = damage;
         card.addReceivedDamageFromThisTurn(sourceCard, damage);
+        
+        if(!CardFactoryUtil.canDamage(sourceCard,card)) assignedDamage = 0;
+        
+        /* Checked by the function above
         if(card.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
         		&& sourceCard.isCreature() && sourceCard.isArtifact()) assignedDamage = 0;
         if(card.getKeyword().contains("Protection from white")
@@ -3694,7 +3698,8 @@ public class GameAction {
         
         if(card.getKeyword().contains("Protection from enchantments")
                 && sourceCard.getType().contains("Enchantment")) assignedDamage = 0;
-        
+        */
+
         card.addAssignedDamage(assignedDamage, sourceCard);
         
         Log.debug("***");
