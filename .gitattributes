@@ -6490,6 +6490,7 @@ res/cardsfolder/withered_wretch.txt -text svneol=native#text/plain
 res/cardsfolder/withering_boon.txt -text svneol=native#text/plain
 res/cardsfolder/withstand_death.txt -text svneol=native#text/plain
 res/cardsfolder/wits_end.txt -text svneol=native#text/plain
+res/cardsfolder/wizard_mentor.txt -text svneol=native#text/plain
 res/cardsfolder/wizard_replica.txt -text svneol=native#text/plain
 res/cardsfolder/wizards_school.txt -text svneol=native#text/plain
 res/cardsfolder/wizened_cenn.txt -text svneol=native#text/plain
