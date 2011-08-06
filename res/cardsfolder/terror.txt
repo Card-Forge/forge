@@ -2,7 +2,7 @@ Name:Terror
 ManaCost:1 B
 Types:Instant
 Text:no text
-A:SP$Destroy | Cost$ 1 B | ValidTgts$ Creature.nonArtifact+nonBlack | TgtPrompt$ Select target nonartifact, nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonartifact, nonblack creature. It can't be regenerated.
+A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.nonArtifact+nonBlack | TgtPrompt$ Select target nonartifact, nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonartifact, nonblack creature. It can't be regenerated.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terror.jpg
 SetInfo:LEA|Common|http://magiccards.info/scans/en/al/39.jpg
