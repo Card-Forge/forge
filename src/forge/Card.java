@@ -2034,16 +2034,24 @@ public class Card extends MyObservable {
     }
     
     public boolean isValidCard(String Restrictions[], String Controller) {
-    	String Restriction[] = Restrictions;
-    	if (Restrictions[0].startsWith("YouCtrl")) {
-    		if (!controller.equals(Controller)) return false;
-    		Restriction[0] = Restriction[0].replaceFirst("YouCtrl ", "");
-    	}
-    	if (Restrictions[0].startsWith("YouDontCtrl")) {
-    		if (controller.equals(Controller)) return false;
-    		Restriction[0] = Restriction[0].replaceFirst("YouDontCtrl ", "");
-    	}
-    	return isValidCard(Restriction);
+        for (int i=0; i<Restrictions.length; i++)
+        {
+            if (Restrictions[i].contains("YouCtrl"))
+            {
+                if (!getController().equals(Controller))
+                   return false;
+                Restrictions[i].replaceAll(".YouCtrl", "");
+                Restrictions[i].replaceAll("YouCtrl", "");
+            }
+            else if (Restrictions[i].contains("YouDontCtrl"))
+            {
+                if (getController().equals(Controller))
+                   return false;
+                Restrictions[i].replaceAll(".YouDontCtrl", "");
+                Restrictions[i].replaceAll("YouDontCtrl", "");
+            }
+        }
+        return isValidCard(Restrictions);
     }
     
     public boolean isValidCard(String Restrictions[]) {
