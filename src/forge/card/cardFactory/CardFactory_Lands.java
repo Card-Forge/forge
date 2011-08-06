@@ -890,7 +890,7 @@ class CardFactory_Lands {
         //*************** START *********** START **************************
         else if(cardName.equals("Crosis's Catacombs") || cardName.equals("Darigaaz's Caldera") ||
         		cardName.equals("Dromar's Cavern")    || cardName.equals("Rith's Grove") ||
-        		cardName.equals("Trava's Ruins")) {
+        		cardName.equals("Treva's Ruins")) {
         	final Command comesIntoPlay = new Command() {
 				private static final long serialVersionUID = 7813334062721799674L;
 
