@@ -56,6 +56,11 @@ public class AbilityFactory {
 	{
 		return abTgt;
 	}
+	
+	private boolean isCurse = false;
+	public boolean isCurse(){
+		return isCurse;
+	}
 
 	private boolean hasSubAb = false;
 	
@@ -123,9 +128,6 @@ public class AbilityFactory {
 		{
 			hasValid = true;
 			isTargeted = true;
-			abTgt = new Target("TgtV");
-			abTgt.setValidTgts(mapParams.get("ValidTgts").split(","));
-			abTgt.setVTSelection(mapParams.get("TgtPrompt"));
 		}
 		
 		if (mapParams.containsKey("ValidCards"))
@@ -134,9 +136,17 @@ public class AbilityFactory {
 		if (mapParams.containsKey("Tgt"))
 		{
 			isTargeted = true;
-			abTgt = new Target(mapParams.get("Tgt"));
 		}
 		
+		if (isTargeted)
+		{
+			if (hasValid)
+				abTgt = new Target("TgtV", mapParams.get("TgtPrompt"), mapParams.get("ValidTgts").split(","));
+			else
+				abTgt = new Target(mapParams.get("Tgt"));
+		}
+		
+		isCurse = mapParams.containsKey("IsCurse");	
 		
 		hasSubAb = mapParams.containsKey("SubAbility");
 		
@@ -170,19 +180,24 @@ public class AbilityFactory {
 		}
 		
 		// additional API keywords here
-
+		if (API.equals("PutCounter")){
+			if (isAb)
+				SA = AbilityFactory_Counters.createAbilityPutCounters(this);
+			if (isSp){
+				// todo: createSpellPutCounters
+			}
+		}
 
 		// *********************************************
 		// set universal properties of the SpellAbility
-        if (isTargeted)
-        {
-        	//if (isAb)
-        		SA.setTarget(abTgt);   
-        	
-        }
-        
-        //if (isAb)
-        	SA.setPayCosts(abCost);
+		if (isSp){	
+			// Ability_Activated sets abTgt and abCost in the constructor so this only needs to be set for Spells
+			// Once Spell constructors set Tgt and abCost this block should be removed
+	        if (isTargeted)
+	        	SA.setTarget(abTgt);
+	        
+	        SA.setPayCosts(abCost);
+		}
         
         if (hasSpDesc)
         {
