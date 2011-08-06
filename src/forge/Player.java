@@ -37,6 +37,7 @@ public abstract class Player extends MyObservable{
 		assignedDamage = 0;
 		lastDrawnCard = null;
 		bFirstTurn = true;
+		this.updateObservers();
 	}
 	
 	public String getName() {

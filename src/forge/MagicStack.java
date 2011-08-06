@@ -35,8 +35,9 @@ public class MagicStack extends MyObservable {
 	public void unfreezeStack() {
 		frozen = false;
 		while (!frozenStack.isEmpty()) {
-			this.add(frozenStack.get(0));
+			SpellAbility sa = frozenStack.get(0);
 			frozenStack.remove(0);
+			this.add(sa);
 		}
 	}
 
