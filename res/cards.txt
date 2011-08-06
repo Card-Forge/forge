@@ -1,3 +1,44 @@
+Eladamri, Lord of Leaves
+G G
+Legendary Creature Elf Warrior
+Other Elf creatures have forestwalk.\r\nOther Elves have shroud. 
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamri_lord_of_leaves.jpg
+
+Eldrazi Monument
+5
+Artifact
+Creatures you control get +1/+1, have flying, and are indestructible.\r\nAt the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_monument.jpg
+
+Emberstrike Duo
+1 BR
+Creature Elemental Warrior Shaman
+Whenever you cast a black spell, Emberstrike Duo gets +1/+1 until end of turn.\r\nWhenever you cast a red spell, Emberstrike Duo gains first strike until end of turn.
+1/1
+SVar:BuffedBy:Spell.Black,Spell.Red
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emberstrike_duo.jpg
+
+Engineered Plague
+2 B
+Enchantment
+As Engineered Plague comes into play, choose a creature type.\r\nAll creatures of the chosen type get -1/-1.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/engineered_plague.jpg
+
+Eternity Vessel
+6
+Artifact
+Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total.\r\nLandfall - Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
+Landfall
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eternity_vessel.jpg
+
 Dark Depths
 no cost
 Legendary Snow Land
@@ -8840,15 +8881,6 @@ Lifelink
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/el_hajjaj.jpg
 
-Eladamri, Lord of Leaves
-G G
-Legendary Creature Elf Warrior
-Other Elf creatures have forestwalk. Other Elves have shroud. 
-2/2
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamri_lord_of_leaves.jpg
-
 Eladamri's Call
 G W
 Instant
@@ -8864,14 +8896,6 @@ Enchant creature
 enPump:+10/+10/Trample & Annihilator 2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_conscription.jpg
-
-Eldrazi Monument
-5
-Artifact
-Creatures you control get +1/+1, have flying, and are indestructible. At the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
-SVar:PlayMain1:TRUE
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_monument.jpg
 
 Elephant Ambush
 2 G G
@@ -9118,15 +9142,6 @@ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_shot.jpg
 
-Emberstrike Duo
-1 BR
-Creature Elemental Warrior Shaman
-Whenever you cast a black spell, Emberstrike Duo gets +1/+1 until end of turn. Whenever you cast a red spell, Emberstrike Duo gains first strike until end of turn.
-1/1
-SVar:BuffedBy:Spell.Black,Spell.Red
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/emberstrike_duo.jpg
-
 Emerald Dragonfly
 1 G
 Creature Insect
@@ -9279,13 +9294,6 @@ Enchant creature
 enPumpCurse:-2/-2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enfeeblement.jpg
-
-Engineered Plague
-2 B
-Enchantment
-As Engineered Plague comes into play, choose a creature type. All creatures of the chosen type get -1/-1.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/engineered_plague.jpg
 
 Enlightened Tutor
 W
@@ -9501,14 +9509,6 @@ enPumpCurse:CARDNAME doesn't untap during your untap step.
 When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternity_snare.jpg
-
-Eternity Vessel
-6
-Artifact
-Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total. Landfall - Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
-Landfall
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eternity_vessel.jpg
 
 Ethercaste Knight
 W U
