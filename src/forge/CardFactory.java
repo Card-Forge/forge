@@ -2876,7 +2876,7 @@ public class CardFactory implements NewConstants {
                         
                         if (!Drawback[0].equals("none"))
                         	CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), c.getController(), card, c, this);
-                    }
+                    } 
                 }
             };
             saDestroyTgt.setStackDescription(card.getName() + " - destroy target " + Selec + ".");
@@ -3264,6 +3264,236 @@ public class CardFactory implements NewConstants {
                card.addSpellAbility(bbBnceTgt);
             }
         }//spBounceTgt
+        
+        // Generic bounce when enters the battlefield
+        if (hasKeyword(card, "etbBounceTgt") != -1)
+        {
+        	int n = hasKeyword(card, "etbBounceTgt");
+        	
+        	String parse = card.getKeyword().get(n).toString();
+        	card.removeIntrinsicKeyword(parse);
+        	
+        	String k[] = parse.split(":");
+        	
+        	final boolean May[] = {false};
+        	if (k[0].contains("May"))
+        		May[0] = true;
+        	
+        	final String Tgts[] = k[1].split(",");
+        	
+        	final String Destination = k[2];
+        	
+        	final String Selec[] = {"Select a target "};
+        	String tgtType = card.getSpellText();
+        	int i = 0;
+        	if (Destination.equals("Hand"))
+        	{
+        		i = tgtType.indexOf("return target ");
+        		tgtType = tgtType.substring(i + "return target ".length());
+        		i = tgtType.indexOf(" to its owner's hand.");
+        		tgtType = tgtType.substring(0, i);
+        		Selec[0] += tgtType + " to return.";
+        	}
+        	else if (Destination.equals("Exile"))
+        	{
+        		i = tgtType.indexOf("exile target ");
+        		tgtType = tgtType.substring(i + "exile target ".length());
+        		i = tgtType.indexOf(".");
+        		tgtType = tgtType.substring(0, i);
+        		Selec[0] += tgtType + " to exile.";
+        	}
+        	else if (Destination.equals("TopofLibrary"))
+        	{
+        		i = tgtType.indexOf("put target ".length());
+        		tgtType = tgtType.substring(i + "put target ".length());
+        		i = tgtType.indexOf(" on top of its owner's library.");
+        		tgtType = tgtType.substring(0, i);
+        		Selec[0] += tgtType + " to put on top of the library.";
+        	}
+        	else
+        	{
+        		Selec[0] = card.getSpellText();
+        	}
+        	
+        	final String Drawback[] = {"none"};
+        	if (k.length > 3)
+        	{
+        		if (k[3].startsWith("Drawback"))
+        			Drawback[0] = k[3].substring("Drawback$".length());
+        	}
+        	
+        	final boolean Evoke[] = {false};
+        	if (card.getSVar("Evoke").length() > 0)
+        		Evoke[0] = true;
+        	
+        	card.setSVar("PlayMain1", "TRUE");
+        	card.clearSpellAbility();
+        	
+        	// over-rides the default Spell_Permanent
+        	// enables the AI to play the card when appropriate
+        	SpellAbility spETBBounceTgt = new Spell_Permanent(card)
+        	{
+                private static final long serialVersionUID = -1548526222769333358L;
+                
+                @Override
+                public boolean canPlayAI() 
+                {
+                    Random r = new Random();
+                	                    
+                    CardList hCards = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+                    hCards = hCards.getValidCards(Tgts);
+                    if (hCards.size() > 0)
+                    	return true;
+                    
+                    CardList cCards = new CardList(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+                    cCards = cCards.getValidCards(Tgts);
+                    if (cCards.size() == 0)
+                    	return true;
+                    else
+                    {
+                    	if (r.nextInt(100) > 67)
+                    		return true;
+                    }
+                    
+                	return false;
+                }
+        	};
+        	card.addSpellAbility(spETBBounceTgt);
+        	
+        	// performs the bounce
+        	final SpellAbility saBounceTgt = new Ability(card, "0")
+        	{
+        		@Override
+        		public void resolve()
+        		{
+        			Card tgtC = getTargetCard();
+        			if (tgtC == null)
+        				return;
+        			
+        			if (AllZone.GameAction.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(card, tgtC))
+        			{
+        				if (tgtC.isToken())
+        					AllZone.getZone(tgtC).remove(tgtC);
+        				else
+        				{
+        					if (Destination.equals("TopofLibrary"))
+        						AllZone.GameAction.moveToTopOfLibrary(tgtC);
+        					else if (Destination.equals("ShuffleIntoLibrary"))
+        					{
+        						AllZone.GameAction.moveToTopOfLibrary(tgtC);
+        						AllZone.GameAction.shuffle(tgtC.getOwner());
+        					}
+        					else if (Destination.equals("Exile"))
+        						AllZone.GameAction.removeFromGame(tgtC);
+        					else if (Destination.equals("Hand"))
+        						AllZone.GameAction.moveToHand(tgtC);
+        				}
+        				
+        				if (!Drawback[0].equals("none"))
+        					CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtC.getController(), card, tgtC, this);
+        			}
+        		}
+        	}; //saBounceTgt
+        	saBounceTgt.setStackDescription(card.getName() + " - bounce target.");
+        	
+        	// when the card enters the battlefield, enable the human to target
+        	// or the AI decides on a target
+        	Command etbBounceTgt = new Command()
+        	{
+        		private static final long serialVersionUID = 829702746298938287L;
+        		
+        		public void execute()
+        		{
+        			CardList hCards = new CardList(AllZone.Human_Play.getCards());
+        			CardList cCards = new CardList(AllZone.Computer_Play.getCards());
+        			
+        			hCards = hCards.getValidCards(Tgts);
+        			cCards = cCards.getValidCards(Tgts);
+        			
+        			if (hCards.size() > 0 || cCards.size() > 0)
+        			{
+        				if (card.getController().equals(Constant.Player.Human))
+        				{
+        					Input inDT = CardFactoryUtil.input_targetValid(saBounceTgt, Tgts, Selec[0]);
+        					
+        					AllZone.InputControl.setInput(inDT);
+        					
+        					if (May[0] == true)
+        						ButtonUtil.enableOnlyCancel();
+        					else
+        						ButtonUtil.disableAll();
+        				}
+        				else
+        				{
+        					Card c = new Card();
+        					CardList dChoices = new CardList();
+        					if (hCards.size() > 0)
+        					{
+        						for (int i=0; i<Tgts.length; i++)
+        						{
+        							if (Tgts[i].startsWith("Creature"))
+        							{
+        								c = CardFactoryUtil.AI_getBestCreature(hCards);
+        								if (c != null)
+        									dChoices.add(c);
+        							}
+        							
+        							CardListUtil.sortByTextLen(hCards);
+        							dChoices.add(hCards.get(0));
+        							
+        							CardListUtil.sortCMC(hCards);
+        							dChoices.add(hCards.get(0));
+        						}
+        						
+        						c = dChoices.get(CardUtil.getRandomIndex(dChoices));
+        						saBounceTgt.setTargetCard(c);
+        						AllZone.Stack.add(saBounceTgt);
+        					}
+        					else if (cCards.size() > 0 && May[0] == false)
+        					{
+        						for (int i=0; i<Tgts.length; i++)
+        						{
+        							if (Tgts[i].startsWith("Creature"))
+        							{
+        								c = CardFactoryUtil.AI_getWorstCreature(cCards);
+        								if (c != null)
+        									dChoices.add(c);
+        							}
+        							
+        							CardListUtil.sortByTextLen(cCards);
+        							dChoices.add(cCards.get(cCards.size() - 1));
+        							
+        							CardListUtil.sortCMC(cCards);
+        							dChoices.add(cCards.get(cCards.size() - 1));
+        						}
+        						
+        						c = dChoices.get(CardUtil.getRandomIndex(dChoices));
+        						saBounceTgt.setTargetCard(c);
+        						AllZone.Stack.add(saBounceTgt);
+        					}
+        				}
+        			}
+        		}
+        	}; // etbBounceTgt
+        	card.addComesIntoPlayCommand(etbBounceTgt);
+        	
+        	// handle SVar:Evoke:{cost}
+        	if (Evoke[0] == true)
+        	{
+        		String EvCost = card.getSVar("Evoke");
+        		
+        		SpellAbility evBounceTgt = new Spell_Evoke(card, EvCost)
+        		{
+        			private static final long serialVersionUID = 865327909209183746L;
+        			
+        			@Override
+        			public boolean canPlayAI() {
+        				return false;
+        			}
+        		};
+        		card.addSpellAbility(evBounceTgt);
+        	}
+        } // etbBounceTgt
 
         // Generic bounce all card
         if(hasKeyword(card, "spBounceAll") != -1) {
