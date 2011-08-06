@@ -1,0 +1,8 @@
+Name:Backfire
+ManaCost:U
+Types:Enchantment Aura
+Text:Whenever enchanted creature deals damage to you, Backfire deals that much damage to that creature's controller.
+K:Enchant Creature Curse
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/backfire.jpg
+End

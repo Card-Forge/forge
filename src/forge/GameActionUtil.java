@@ -5109,11 +5109,36 @@ public class GameActionUtil {
     }
 
     //not restricted to just combat damage:
-    public static void executePlayerDamageEffects(String player, Card c, final int damage, boolean isCombatDamage)
+    public static void executePlayerDamageEffects(final String player, final Card c, final int damage, boolean isCombatDamage)
     {
     	if (damage > 0)
     	{
     		CardList playerPerms = AllZoneUtil.getPlayerCardsInPlay(player);
+    		
+    		/*
+    		 * Backfire - Whenever enchanted creature deals damage to you, Backfire
+    		 * deals that much damage to that creature's controller.
+    		 */
+    		if(c.isEnchanted()) {
+    			final String auraName = "Backfire";
+    			
+    	        CardList auras = new CardList(c.getEnchantedBy().toArray());
+    			auras = auras.getName(auraName);
+    	        
+    			if(auras.size() > 0) {
+    				for(Card aura:auras) {
+    					final Card source = aura;
+    					Ability ability = new Ability(source, "0") {
+    						@Override
+    						public void resolve() {
+    							AllZone.GameAction.addDamage(c.getController(), source, damage);
+    						}
+    					};
+    					ability.setStackDescription(source.getName()+" - deals "+damage+" damage to "+ c.getController());
+    					AllZone.Stack.add(ability);
+    				}
+    			}//auras > 0
+    		}//end c.isEnchanted()
     		
     		/*
     		 * Darien, King of Kjeldor - 
