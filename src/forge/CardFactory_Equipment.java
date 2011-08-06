@@ -66,6 +66,14 @@ class CardFactory_Equipment {
                         }
                     });
                     // list.remove(card);      // if mana-only cost, allow self-target
+                    
+                    // is there at least 1 Loxodon Punisher to target
+                    
+                    CardList equipMagnetList = list.getName("Loxodon Punisher");
+                    if (equipMagnetList.size() != 0) {
+                        return equipMagnetList;
+                    }
+                    
                     return list;
                 }//getCreature()
                 
@@ -275,6 +283,14 @@ class CardFactory_Equipment {
                         }
                     });
                     // list.remove(card);      // if mana-only cost, allow self-target
+                    
+                    // is there at least 1 Loxodon Punisher to target
+                    
+                    CardList equipMagnetList = list.getName("Loxodon Punisher");
+                    if (equipMagnetList.size() != 0) {
+                        return equipMagnetList;
+                    }
+                    
                     return list;
                 }//getCreature()
                 
