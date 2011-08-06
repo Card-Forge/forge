@@ -283,6 +283,9 @@ public class AbilityFactory_Reveal {
 							}
 						}
 						else if(!changeValid.equals("")) {
+							if(changeValid.contains("ChosenType")) {
+								changeValid.replace("ChosenType", host.getChosenType());
+							}
 							valid = top.getValidCards(changeValid.split(","), host.getController(), host);
 							for(Card c:top) {
 								if(!valid.contains(c)) rest.add(c);
@@ -297,6 +300,7 @@ public class AbilityFactory_Reveal {
 						
 						if(changeAll) {
 							for(Card c:valid) {
+								if(c.equals(dummy)) continue;
 								PlayerZone zone = AllZone.getZone(destZone1, c.getOwner());
 								if(zone.is("Library")) {
 									AllZone.GameAction.moveToLibrary(c, libraryPosition);
