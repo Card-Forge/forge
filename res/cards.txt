@@ -1008,7 +1008,8 @@ Feral Animist
 Creature Goblic Shaman
 no text
 2/1
-abPump 3:Count$CardPower/+0:Feral Animist gets +X/+0 until end of turn, where X is its power.
+abPump 3:+X/+0:Feral Animist gets +X/+0 until end of turn, where X is its power.
+SVar:X:Count$CardPower
 
 Fire-Belly Changeling
 1 R
@@ -1023,7 +1024,8 @@ Kitsune Loreweaver
 Creature Fox Cleric
 no text
 2/1
-abPump 1 W:+0/Count$NumCardsInYourHand:Kitsune Loreweaver get +0/+X until end of turn, where X is the number of cards in your hand.
+abPump 1 W:+0/+X:Kitsune Loreweaver get +0/+X until end of turn, where X is the number of cards in your hand.
+SVar:X:Count$NumCardsInYourHand
 
 Knight of the Skyward Eye
 1 W
@@ -1036,7 +1038,8 @@ Power Armor
 4
 Artifact
 Domain
-abPumpTgt 3 T:Count$Domain/Count$Domain:Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
+abPumpTgt 3 T:+X/+X:Target creature gets +1/+1 until end of turn for each basic land type among lands you control.
+SVar:X:Count$Domain
 
 Seedcradle Witch
 GW
@@ -1059,14 +1062,16 @@ Timberwatch Elf
 Creature Elf
 no text
 1/2
-abPumpTgt T:Count$TypeOnBattlefield.Elf/Count$TypeOnBattlefield.Elf:Target creature get +X/+X until end of turn, where X is the number of Elves on the battlefield.
+abPumpTgt T:+X/+X:Target creature get +X/+X until end of turn, where X is the number of Elves on the battlefield.
+SVar:X:Count$TypeOnBattlefield.Elf
 
 Wandering Goblins
 2 R
 Creature Goblin Warrior
 Domain
 0/3
-abPump 3:Count$Domain/+0:Wandering Goblins gets +1/+0 until end of turn for each basic land type among lands you control.
+abPump 3:+X/+0:Wandering Goblins gets +1/+0 until end of turn for each basic land type among lands you control.
+SVar:X:Count$Domain
 
 Rappelling Scouts
 2 W W
@@ -1095,7 +1100,8 @@ Viridian Lorebearers
 Creature Elf Shaman
 no text
 3/3
-abPumpTgt 3 G T:Count$TypeOppCtrl.Artifact/Count$TypeOppCtrl.Artifact:Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
+abPumpTgt 3 G T:+X/+X:Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
+SVar:X:Count$TypeOppCtrl.Artifact
 
 Wormwood Dryad
 2 G
@@ -1118,7 +1124,8 @@ Auriok Bladewarden
 Creature Human Soldier
 no text
 1/1
-abPumpTgt T:Count$CardPower/Count$CardPower:Target creature get +X/+X until end of turn, where X is Auriok Bladewarden's power.
+abPumpTgt T:+X/+X:Target creature get +X/+X until end of turn, where X is Auriok Bladewarden's power.
+SVar:X:Count$CardPower
 
 Boreal Centaur
 1 G
@@ -7232,7 +7239,8 @@ no text
 4/4
 Changeling
 Protection from black
-abPump 2 G G:Count$CardPower/Count$CardPower:Chameleon Colossus gets +X/+X until end of turn, where X is its power.
+abPump 2 G G:+X/+X:Chameleon Colossus gets +X/+X until end of turn, where X is its power.
+SVar:X:Count$CardPower
 
 Rakdos Pit Dragon
 2 R R
