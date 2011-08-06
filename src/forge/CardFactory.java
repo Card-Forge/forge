@@ -11510,12 +11510,13 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Disrupting Scepter")) {
         	/*
         	 * 3, Tap: Target player discards a card. Activate this
         	 * ability only during your turn.
-        	 */
+        	 *
         	//Ability_Cost abCost = new Ability_Cost("3 T", cardName, true);
         	//Target tgt = new Target("TgtP");
         	//final Ability_Activated ability = new Ability_Activated(card, abCost, tgt) {
@@ -11537,7 +11538,7 @@ public class CardFactory implements NewConstants {
         			else { //compy
         				AllZone.GameAction.AI_discardNum(1, this);
         			}
-        			*/
+        			*
         			target.discard(1, this);
         		}
 
@@ -11548,6 +11549,7 @@ public class CardFactory implements NewConstants {
         	ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Lifeforce")) {
