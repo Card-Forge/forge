@@ -131,6 +131,15 @@ public class CombatUtil {
 	            if(!temp.isEmpty()) return false;
 	        }
 	        
+	        if(attacker.getKeyword().contains("Desertwalk")) {
+	            temp = blkCL.filter(new CardListFilter() {
+	                public boolean addCard(Card c) {
+	                    return c.isLand() && c.getType().contains("Desert");
+	                }
+	            });
+	            if(!temp.isEmpty()) return false;
+	        }
+	        
 	        if(attacker.getKeyword().contains("Nonbasic landwalk")) {
 	            temp = blkCL.filter(new CardListFilter() {
 	                public boolean addCard(Card c) {
