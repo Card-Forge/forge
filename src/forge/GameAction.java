@@ -2301,11 +2301,13 @@ public class GameAction {
                 if ((card.getSets().size() > 0) && card.getCurSetCode().equals(""))
                 	card.setRandomSetCode();
                 
-                int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
-                if (n > 1)
-                    card.setRandomPicture(generator.nextInt(n));
+                if (!card.getCurSetCode().equals("")) {
+                	int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
+                	if (n > 1)
+                		card.setRandomPicture(generator.nextInt(n));
                 
-                card.setImageFilename(CardUtil.buildFilename(card));
+                	card.setImageFilename(CardUtil.buildFilename(card));
+                }
 
                     //System.out.println("human random number:" + card.getRandomPicture());
                 //}
@@ -2335,11 +2337,13 @@ public class GameAction {
                 if ((card.getSets().size() > 0) && card.getCurSetCode().equals(""))
                 	card.setRandomSetCode();
                 
-                int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
-                if (n > 1)
-                    card.setRandomPicture(generator.nextInt(n));
+                if (!card.getCurSetCode().equals("")) {
+                	int n = SetInfoUtil.getSetInfo_Code(card.getSets(), card.getCurSetCode()).PicCount;
+                	if (n > 1)
+                		card.setRandomPicture(generator.nextInt(n));
                 
-                card.setImageFilename(CardUtil.buildFilename(card));
+                	card.setImageFilename(CardUtil.buildFilename(card));
+                }
                 
                 AllZone.Computer_Library.add(card);
                 

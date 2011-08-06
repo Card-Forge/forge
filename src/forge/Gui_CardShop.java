@@ -129,12 +129,13 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
         	if (c.getCurSetCode().equals(""))
         		c.setCurSetCode(c.getMostRecentSet());
         	
-        	int n = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).PicCount;
-            if (n > 1)
-                c.setRandomPicture(r.nextInt(n));
+        	if (!c.getCurSetCode().equals("")) {
+        		int n = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).PicCount;
+            	if (n > 1)
+            		c.setRandomPicture(r.nextInt(n));
         	
-        	c.setImageFilename(CardUtil.buildFilename(c));
-        	
+        		c.setImageFilename(CardUtil.buildFilename(c));
+        	}
 
             topModel.addCard(c);
             
@@ -158,12 +159,13 @@ public class Gui_CardShop extends JFrame implements CardContainer, DeckDisplay, 
             if (c.getCurSetCode().equals(""))
         		c.setCurSetCode(c.getMostRecentSet());
         	
-            int n = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).PicCount;
-            if (n > 1)
-                c.setRandomPicture(r.nextInt(n));
+            if (!c.getCurSetCode().equals("")) {
+            	int n = SetInfoUtil.getSetInfo_Code(c.getSets(), c.getCurSetCode()).PicCount;
+            	if (n > 1)
+                	c.setRandomPicture(r.nextInt(n));
             
-            c.setImageFilename(CardUtil.buildFilename(c));
-        	
+            	c.setImageFilename(CardUtil.buildFilename(c));
+            }
 
             bottomModel.addCard(c);
         }// for
