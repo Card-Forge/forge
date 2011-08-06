@@ -1455,7 +1455,7 @@ public class CardFactory_Creatures {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Venerable Monk") || cardName.equals("Kitchen Finks")
-                || cardName.equals("Shu Grain Caravan") || cardName.equals("Kemba's Skyguard")) {
+                || cardName.equals("Shu Grain Caravan")) {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
