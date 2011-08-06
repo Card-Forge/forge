@@ -40,17 +40,12 @@ public class ComputerUtil_Attack2 {
 		attackers = getPossibleAttackers(possibleAttackers);
 		blockers  = getPossibleBlockers(possibleBlockers);
 		this.blockerLife = blockerLife;
-
-		// todo: get rid of valuable
-		final ArrayList<String> valuable = new ArrayList<String>();
-		valuable.add("Kamahl, Pit Fighter");
-		valuable.add("Elvish Piper");
 		
 		attackers = attackers.filter(new CardListFilter()
 		{
 		  public boolean addCard(Card c)
 		  {
-		    return (0 < getAttack(c) || c.getName().equals("Guiltfeeder")) && ! valuable.contains(c.getName());
+		    return (0 < AllZone.HumanPlayer.predictDamage(c.getNetCombatDamage(),c,true) || c.getName().equals("Guiltfeeder"));
 		  }
 		});
 	}//constructor
