@@ -1983,6 +1983,7 @@ res/cardsfolder/endless_cockroaches.txt -text svneol=native#text/plain
 res/cardsfolder/enemy_of_the_guildpact.txt -text svneol=native#text/plain
 res/cardsfolder/energizer.txt -text svneol=native#text/plain
 res/cardsfolder/energy_arc.txt svneol=native#text/plain
+res/cardsfolder/energy_bolt.txt -text svneol=native#text/plain
 res/cardsfolder/energy_flux.txt -text svneol=native#text/plain
 res/cardsfolder/energy_storm.txt -text svneol=native#text/plain
 res/cardsfolder/energy_tap.txt -text svneol=native#text/plain
