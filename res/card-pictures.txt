@@ -3776,3 +3776,5 @@ hidden_path.jpg		http://www.wizards.com/global/images/magic/general/hidden_path.
 lumbering_satyr.jpg		http://www.wizards.com/global/images/magic/general/lumbering_satyr.jpg
 spinneret_sliver.jpg		http://www.wizards.com/global/images/magic/general/spinneret_sliver.jpg
 territorial_baloth.jpg		http://www.wizards.com/global/images/magic/general/territorial_baloth.jpg
+necrogenesis.jpg		http://www.wizards.com/global/images/magic/general/necrogenesis.jpg
+night_soil.jpg		http://www.wizards.com/global/images/magic/general/night_soil.jpg

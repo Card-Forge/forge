@@ -12745,6 +12745,155 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Necrogenesis")) {
+            final SpellAbility necrogen = new Ability(card, "2") {
+                private static final long serialVersionUID = 1299216756153970592L;
+                
+                @Override
+                public void resolve() {
+                	Card c = getTargetCard();
+                	if (AllZone.getZone(c).is(Constant.Zone.Graveyard)){
+                		// target is still in the grave, ability resolves
+                		AllZone.GameAction.exile(c);
+                		CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
+                            "Creature", "Saproling"}, 1, 1, new String[] {""});
+                	}
+                }
+                
+                @Override
+                public boolean canPlayAI(){
+                	return false;
+                }
+                
+                @Override
+                public boolean canPlay(){
+					CardList list = new CardList(AllZone.Human_Graveyard.getCards());
+					list.addAll(AllZone.Computer_Graveyard.getCards());
+					return list.getType("Creature").size() > 0 && super.canPlay();
+                }
+            };
+            Input necroTarget = new Input() {
+
+            	boolean once = false;
+				private static final long serialVersionUID = 8243511353958609599L;
+
+				@Override
+                public void showMessage() {
+					CardList list = new CardList(AllZone.Human_Graveyard.getCards());
+					list.addAll(AllZone.Computer_Graveyard.getCards());
+					list = list.getType("Creature");
+					if (list.size() == 0 || once) {
+						once = false;
+						stop();
+					}
+					else {
+						Object o = AllZone.Display.getChoice("Choose card to exile", list.toArray());
+						if (o!=null)
+						{
+							Card c = (Card)o;
+							necrogen.setTargetCard(c);
+							once = true;
+							AllZone.Stack.add(necrogen);
+						}
+					}
+					stop();
+                }
+            };
+            
+            necrogen.setDescription("2: Exile target creature card in a graveyard. Put a 1/1 green Saproling creature token into play.");
+            necrogen.setStackDescription(card.getController()
+                    + " exiles target creature card in a graveyard. Puts a 1/1 green Saproling creature token into play.");
+            necrogen.setAfterPayMana(necroTarget);
+            card.addSpellAbility(necrogen);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Night Soil")) {
+            final SpellAbility nightSoil = new Ability(card, "1") {
+                @Override
+                public void resolve() {
+            		CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card, "G", new String[] {
+                        "Creature", "Saproling"}, 1, 1, new String[] {""});
+                }
+                
+                @Override
+                public boolean canPlayAI(){
+                	return false;
+                }
+                
+                @Override
+                public boolean canPlay(){
+					CardList grave = new CardList(AllZone.Human_Graveyard.getCards());
+					CardList aiGrave = new CardList(AllZone.Computer_Graveyard.getCards());
+					return (grave.getType("Creature").size() > 1 || aiGrave.getType("Creature").size() > 1) && super.canPlay();
+                }
+            };
+            Input soilTarget = new Input() {
+
+            	boolean once = false;
+				private static final long serialVersionUID = 8243511353958609599L;
+
+				@Override
+                public void showMessage() {
+					CardList grave = new CardList(AllZone.Human_Graveyard.getCards());
+					CardList aiGrave = new CardList(AllZone.Computer_Graveyard.getCards());
+					grave = grave.getType("Creature");
+					aiGrave = aiGrave.getType("Creature");
+					
+					if (once || (grave.size() < 2 && aiGrave.size() < 2)) {
+						once = false;
+						stop();
+					}
+					else {
+						CardList chooseGrave;
+						if (grave.size() < 2)
+							chooseGrave = aiGrave;
+						else if (aiGrave.size() < 2)
+							chooseGrave = grave;
+						else{
+							chooseGrave = aiGrave;
+							chooseGrave.addAll(grave.toArray());
+						}
+						
+						Object o = AllZone.Display.getChoice("Choose first card to exile", chooseGrave.toArray());
+						if (o!=null)
+						{
+							CardList newGrave;
+							Card c = (Card)o;
+							if (c.getOwner().equals("Human")){
+								newGrave = new CardList(AllZone.Human_Graveyard.getCards());
+							}
+							else {
+								newGrave = new CardList(AllZone.Computer_Graveyard.getCards());
+							}
+							
+							newGrave = newGrave.getType("Creature");
+							newGrave.remove(c);
+							
+							Object o2 = AllZone.Display.getChoice("Choose second card to exile", newGrave.toArray());
+							if (o2!=null)
+							{
+								Card c2 = (Card)o2;
+								newGrave.remove(c2);
+								AllZone.GameAction.exile(c);
+								AllZone.GameAction.exile(c2);
+								once = true;
+								AllZone.Stack.add(nightSoil);
+							}
+						}
+					}
+					stop();
+                }
+            };
+            
+            nightSoil.setDescription("1, Exile target creature card in a graveyard: Put a 1/1 green Saproling creature token into play.");
+            nightSoil.setStackDescription(card.getController()
+                    + " put a 1/1 green Saproling creature token into play.");
+            nightSoil.setAfterPayMana(soilTarget);
+            card.addSpellAbility(nightSoil);
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Delirium Skeins")) {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 7901561313373975648L;

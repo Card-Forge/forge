@@ -1,3 +1,13 @@
+Necrogenesis
+B G
+Enchantment
+no text
+
+Night Soil
+G G
+Enchantment
+no text
+
 Spitting Sliver
 4 B
 Creature Sliver

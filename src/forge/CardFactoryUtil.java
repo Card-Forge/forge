@@ -1581,7 +1581,7 @@ public class CardFactoryUtil {
             }
         };
         suspend.setDescription("Suspend " +suspendCounters + ": "+ suspendCost);
-        suspend.setStackDescription(sourceCard + " suspending for " + suspendCounters + " turns.)");
+        suspend.setStackDescription(sourceCard.getName() + " suspending for " + suspendCounters + " turns.)");
         return suspend;
     }//ability_suspend()
     
@@ -2724,7 +2724,7 @@ public class CardFactoryUtil {
             
             @Override
             public void showMessage() {
-                AllZone.Display.showMessage("Select target player");
+                AllZone.Display.showMessage(spell.getSourceCard().getName() + ": Select target player");
                 ButtonUtil.enableOnlyCancel();
             }
             

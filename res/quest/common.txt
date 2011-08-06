@@ -1696,3 +1696,4 @@ Somnomancer
 Spinneret Sliver
 Keldon Marauders
 Furious Assault
+Night Soil

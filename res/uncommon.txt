@@ -1042,3 +1042,4 @@ Keldon Champion
 Bloodmark Mentor
 Kobold Drill Sergeant
 Kobold Taskmaster
+Necrogenesis
