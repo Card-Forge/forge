@@ -1,3 +1,21 @@
+Goblin Mutant
+2 R R
+Creature Goblin Mutant
+no text
+5/3
+Trample
+CARDNAME can't attack if defending player controls an untapped creature with power 3 or greater.
+CARDNAME can't block creatures with power 3 or greater.
+
+Orgg
+3 R R
+Creature Orgg
+no text
+6/6
+Trample
+CARDNAME can't attack if defending player controls an untapped creature with power 3 or greater.
+CARDNAME can't block creatures with power 3 or greater.
+
 Brassclaw Orcs
 2 R
 Creature Orc

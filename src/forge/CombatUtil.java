@@ -186,6 +186,46 @@ public class CombatUtil {
             if(!c.getKeyword().contains("Flying")) moatPrevented = true;
         }
         
+        // CARDNAME can't attack if defending player controls an untapped creature with power ...
+        
+        final int powerLimit[] = {0};
+        int keywordPosition = 0;
+        boolean hasKeyword = false;
+        
+        ArrayList<String> attackerKeywords = c.getKeyword();
+        for (int i = 0; i < attackerKeywords.size(); i++) {
+        	if (attackerKeywords.get(i).toString().startsWith("CARDNAME can't attack if defending player controls an untapped creature with power")) {
+                hasKeyword = true;
+                keywordPosition = i;
+           }
+        }
+        
+        if (hasKeyword) {    // The keyword "CARDNAME can't attack if defending player controls an untapped creature with power" ... is present
+        	String tmpString = c.getKeyword().get(keywordPosition).toString();
+            String asSeparateWords[]  = tmpString.trim().split(" ");
+            
+            if (asSeparateWords.length >= 13) {
+            	if (asSeparateWords[12].matches("[0-9][0-9]?")) {
+            		powerLimit[0] = Integer.parseInt((asSeparateWords[12]).trim());
+            		
+            		CardList list = null;
+            		if(c.getController().equals(Constant.Player.Human)) {
+                        list = new CardList(AllZone.Computer_Play.getCards());
+                    } else {
+                        list = new CardList(AllZone.Human_Play.getCards());
+                    }
+            		
+            		list = list.getType("Creature");
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card ct) {
+                            return (ct.isUntapped() && ct.getNetAttack() >= powerLimit[0]);
+                        }
+                    });
+                    if (!list.isEmpty()) return false;
+            	}
+            }
+        } // hasKeyword = CARDNAME can't attack if defending player controls an untapped creature with power ...
+        
         PlayerZone play = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(c.getController()));
         CardList list = new CardList(play.getCards());
         CardList temp;
