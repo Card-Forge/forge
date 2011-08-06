@@ -1087,7 +1087,7 @@ class CardFactory_Lands {
         */
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Wasteland") || /* cardName.equals("Strip Mine") || */ cardName.equals("Tectonic Edge")) {
+        else if(cardName.equals("Wasteland") || cardName.equals("Tectonic Edge")) {
         	
         	final CardListFilter landFilter = new CardListFilter() {
                 public boolean addCard(Card c) {
@@ -1155,31 +1155,6 @@ class CardFactory_Lands {
             else ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Library of Alexandria")) {
-        	final Ability_Cost abCost = new Ability_Cost("T", cardName, true);
-        	final SpellAbility draw = new Ability_Activated(card, abCost, null){
-                private static final long serialVersionUID = -3405763871882165537L;
-                
-                @Override
-                public boolean canPlay() {
-                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    return hand.getCards().length == 7 && super.canPlay();
-                }
-                
-                @Override
-                public void resolve() {
-                    card.getController().drawCard();
-                }
-            };//SpellAbility
-            StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append(abCost.toString()).append("Draw a card. Play this ability only if you have exactly 7 cards in your hand.");
-            draw.setDescription(sbDesc.toString());
-            draw.setStackDescription("Library of Alexandria - draw a card.");
-            card.addSpellAbility(draw);
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Dark Depths")) {
@@ -1613,35 +1588,6 @@ class CardFactory_Lands {
         
         /*
         //*************** START *********** START **************************  
-        else if(cardName.equals("Gargoyle Castle")) {
-            final Ability_Tap ability = new Ability_Tap(card, "5") {
-                
-                private static final long serialVersionUID = 8524185208900629992L;
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.GameAction.isCardInPlay(card) && card.isUntapped()) return true;
-                    else return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    AllZone.GameAction.sacrifice(card);
-                    CardFactoryUtil.makeToken("Gargoyle", "C 3 4 Gargoyle", card, "", new String[] {
-                            "Artifact", "Creature", "Gargoyle"}, 3, 4, new String[] {"Flying"});
-                }
-            };
-            
-            ability.setDescription("5, tap, sacrifice Gargoyle Castle: Put a 3/4 colorless Gargoyle artifact creature token with flying onto the battlefield.");
-            ability.setStackDescription(card.getName()
-                    + " - Put a 3/4 colorless Gargoyle artifact creature token with flying onto the battlefield.");
-            
-            card.addSpellAbility(ability);
-            
-        }//*************** END ************ END **************************
-        */
-        /*
-        //*************** START *********** START **************************  
         else if(cardName.equals("Kher Keep")) {
             final Ability_Tap ability = new Ability_Tap(card, "1 R") {
                 private static final long serialVersionUID = 4037838521451709399L;
@@ -2069,33 +2015,6 @@ class CardFactory_Lands {
         }
         //*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Urza's Factory")) {
-            final Ability_Tap ability = new Ability_Tap(card, "7") {
-                private static final long serialVersionUID = 1781653158406511188L;
-                
-                @Override
-                public boolean canPlay() {
-                    if(AllZone.GameAction.isCardInPlay(card)) return true;
-                    else return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Assembly-Worker", "C 2 2 Assembly-Worker", card, "", new String[] {
-                            "Artifact", "Creature", "Assembly-Worker"}, 2, 2, new String[] {""});
-                }
-            };
-            
-            ability.setDescription("7, tap: Put a 2/2 colorless Assembly-Worker artifact creature token onto the battlefield.");
-            ability.setStackDescription(card.getName()
-                    + " - Put a 2/2 colorless Assembly-Worker artifact creature token onto the battlefield.");
-            
-            card.addSpellAbility(ability);
-            
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Goblin Burrows")) {
@@ -2599,29 +2518,6 @@ class CardFactory_Lands {
             a1.setBeforePayMana(new Input_PayManaCost_Ability(a1.getManaCost(), paid1));
         }//*************** END ************ END **************************
         
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Khalni Garden")) {
-            final Ability ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    CardFactoryUtil.makeToken("Plant", "G 0 1 Plant", card, "G",
-                            new String[] {"Creature", "Plant"}, 0, 1, new String[] {""});
-                }
-            };
-            ability.setStackDescription("When Khalni Garden enters the battlefield, put a 0/1 green Plant creature token onto the battlefield.");
-            
-            final Command comesIntoPlay = new Command() {
-                private static final long serialVersionUID = 6175835326425915833L;
-                
-                public void execute() {
-                    AllZone.Stack.add(ability);
-                }
-            };
-            card.clearSpellKeepManaAbility();
-            card.addComesIntoPlayCommand(comesIntoPlay);
-        }//*************** END ************ END **************************
-        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Celestial Colonnade")) {
@@ -3084,21 +2980,8 @@ class CardFactory_Lands {
                  }
               }
            };
-           /*
-           final Ability_Tap ability2 = new Ability_Tap(card, "1 W") {
-              private static final long serialVersionUID = 6987135326425915833L;
-              public void resolve() {
-                 CardFactoryUtil.makeToken("Soldier", "W 1 1 Soldier", card, "W", new String[] {"Creature", "Soldier"}, 1, 1, new String[] {""});
-              }
-           };//SpellAbility */
 
            card.addComesIntoPlayCommand(comesIntoPlay);
-           /*
-           card.addSpellAbility(ability2);
-           ability2.setDescription("1 W, tap: Put a 1/1 white soldier token in play.");
-           ability2.setStackDescription("Kjeldoran Outpost - put a 1/1 white soldier token in play");
-           ability2.setBeforePayMana(new Input_PayManaCost(ability2));
-			*/
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
@@ -3237,50 +3120,7 @@ class CardFactory_Lands {
         	extraTurn.setStackDescription(sb.toString());
         	card.addSpellAbility(extraTurn);
         }//*************** END ************ END **************************
-        /*
-        //*************** START ********** START *************************
-        else if(cardName.equals("Elephant Graveyard")) {
-        	final String Tgts[] = {"Creature.Elephant"};
-        	Target target = new Target("TgtV", "Select target Elephant to Regenerate.", Tgts);
-
-        	final Ability_Cost cost = new Ability_Cost("T", card.getName(), true);
-        	
-        	final Card[] tgt = new Card[1];
-        	final Command untilEOT = new Command() {
-				private static final long serialVersionUID = -5392534004045270599L;
-
-				public void execute() {
-        			tgt[0].setShield(0);                    
-        		}
-        	};
-
-        	final SpellAbility ability = new Ability_Activated(card, cost, target) {
-				private static final long serialVersionUID = -3783236452506062253L;
-
-				@Override
-        		public void resolve() {
-        			tgt[0] = this.getTargetCard();
-
-        			tgt[0].addShield();
-        			AllZone.EndOfTurn.addUntil(untilEOT);
-        		}
-
-        		@Override
-        		public boolean canPlayAI() {
-        			return false;
-        		}
-
-        		@Override
-        		public boolean canPlay() {
-        			CardList elephants = AllZoneUtil.getTypeInPlay("Elephant");
-        			return elephants.size() != 0;
-        		}
-        	};
-
-        	ability.setDescription("tap: Regenerate target Elephant.");
-        	card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        */
+        
         
         //*************** START ************ START **************************
         else if(cardName.equals("Bottomless Vault") || cardName.equals("Dwarven Hold")
