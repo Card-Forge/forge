@@ -143,7 +143,10 @@ public class AbilityFactory_Bounce {
 			if (abCost.getSacCost()){ 
 				return false;
 			}
-			if (abCost.getLifeCost())	 return false;
+			if (abCost.getLifeCost()){
+				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
+					return false;
+			}
 			if (abCost.getDiscardCost()) return false;
 			
 			if (abCost.getSubCounter()){

@@ -87,12 +87,14 @@ public class AbilityFactory_ZoneAffecting {
 				return false;
 			}
 			if (abCost.getLifeCost()){
-				if (AllZone.ComputerPlayer.getLife() < 5)
+				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
 					return false;
 			}
 			if (abCost.getDiscardCost()) 	return false;
 			
-			if (abCost.getSubCounter()) 	return false;
+			if (abCost.getSubCounter()) {
+				if (abCost.getCounterType().equals(Counters.P1P1)) return false; // Other counters should be used 
+			}
 			
 		}
 		

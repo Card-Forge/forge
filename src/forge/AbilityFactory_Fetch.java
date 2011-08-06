@@ -191,7 +191,7 @@ public class AbilityFactory_Fetch {
 				// Sac is ok in general, but should add some decision making based off SacType and Fetch Type
 			}
 			if (abCost.getLifeCost()){
-				if (AllZone.ComputerPlayer.getLife() < 5)
+				if (AllZone.ComputerPlayer.getLife() - abCost.getLifeAmount() < 4)
 					return false;
 			}
 			if (abCost.getDiscardCost()) 	return false;
