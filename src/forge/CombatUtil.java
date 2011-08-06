@@ -272,6 +272,12 @@ public class CombatUtil {
     		if(blocker.isValidCard(restrictions, attacker.getController(), attacker))
     			return false;
         }
+        
+        if(attacker.hasKeyword("CARDNAME can't be blocked by black creatures.") && blocker.isBlack()) return false;
+        if(attacker.hasKeyword("CARDNAME can't be blocked by blue creatures.") && blocker.isBlue()) return false;
+        if(attacker.hasKeyword("CARDNAME can't be blocked by green creatures.") && blocker.isGreen()) return false;
+        if(attacker.hasKeyword("CARDNAME can't be blocked by red creatures.") && blocker.isRed()) return false;
+        if(attacker.hasKeyword("CARDNAME can't be blocked by white creatures.") && blocker.isWhite()) return false;
 
         if(blocker.getKeyword().contains("CARDNAME can block only creatures with flying.")
                 && !attacker.getKeyword().contains("Flying")) return false;
