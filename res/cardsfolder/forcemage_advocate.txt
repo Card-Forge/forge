@@ -7,4 +7,5 @@ A:AB$ ChangeZone | Cost$ T | ValidTgts$ Card.YouDontCtrl | Origin$ Graveyard | D
 SVar:DBPutCounter:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forcemage_advocate.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/116.jpg
 End
