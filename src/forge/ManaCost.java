@@ -19,7 +19,7 @@ public class ManaCost {
     //note that when the cost is displayed it is backward "2/G 2/R 2/B 2/U 2/W"
     //so you would have to tap W, then U, then B, then R, then G (order matters)
     public ManaCost(String manaCost) {
-    	if (manaCost.equals(""))
+    	if (manaCost.equals("") || manaCost.equals("X"))
     		manaCost = "0";
     	
     	while (manaCost.startsWith("X"))
