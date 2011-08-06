@@ -17,7 +17,6 @@ import forge.Counters;
 import forge.GameActionUtil;
 import forge.MyRandom;
 import forge.Player;
-import forge.PlayerZone;
 import forge.card.cardFactory.CardFactoryUtil;
 import forge.card.spellability.Ability_Activated;
 import forge.card.spellability.Ability_Sub;
