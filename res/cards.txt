@@ -1,1160 +1,3 @@
-Undead Warchief
-2 B B
-Creature Zombie 
-Zombie spells you cast cost 1 less to cast.\r\nZombie creatures you control get +2/+1.
-1/1
-CostChange:Player:Less:1:Spell:All:Zombie:NoSpecial
-SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_warchief.jpg
-
-Vampiric Embrace
-2 B B
-Enchantment Aura
-Enchanted creature gets +2/+2 and has flying.\r\nWhenever a creature dealt damage by enchanted creature this turn is put into a graveyard, put a +1/+1 counter on that creature.
-Enchant creature
-enPump:+2/+2/Flying & Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_embrace.jpg
-
-Voracious Hatchling
-3 WB
-Creature Elemental
-Voracious Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling.\r\nWhenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.
-6/6
-Lifelink
-SVar:BuffedBy:Spell.White,Spell.Black
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Voracious_Hatchling.jpg
-
-Wispmare
-2 W
-Creature Elemental
-When Wispmare enters the battlefield, destroy target enchantment.
-1/3
-Flying
-etbDestroyTgt:Enchantment
-SVar:Evoke:W
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wispmare.jpg
-
-Witch-Maw Nephilim
-G W U B
-Creature Nephilim
-Whenever you play a spell, you may put two +1/+1 counters on Witch-Maw Nephilim.\r\nWhenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
-1/1
-SVar:BuffedBy:Spell
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_maw_nephilim.jpg
-
-Wren's Run Packmaster
-3 G
-Creature Elf Warrior
-Champion an Elf.\r\nEach Wolf you control has deathtouch.
-5/5
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wrens_run_packmaster.jpg
-
-Yavimaya's Embrace
-5 G U U
-Enchantment Aura
-You control enchanted creature.\r\nEnchanted creature gets +2/+2 and has trample.
-Enchant creature
-enPump:+2/+2/Trample
-enControlCreature
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimayas_embrace.jpg
-
-Tattermunge Duo
-2 RG
-Creature Goblin Warrior Shaman
-Whenever you cast a red spell, Tattermunge Duo gets +1/+1 until end of turn.\r\nWhenever you cast a green spell, Tattermunge Duo gains forestwalk until end of turn.
-2/3
-SVar:BuffedBy:Spell.Red,Spell.Green
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_duo.jpg
-
-Thelonite Hermit
-3 G
-Creature Elf Shaman
-Saproling creatures get +1/+1.\r\nWhen Thelonite Hermit is turned face up, put four 1/1 green Saproling creature tokens into play.
-1/1
-Morph:3 G G
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thelonite_hermit.jpg
-
-Thistledown Duo
-2 WU
-Creature Kithkin Soldier Wizard
-Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn.\r\nWhenever you cast a blue spell, Thistledown Duo gains flying until end of turn.
-2/2
-SVar:BuffedBy:Spell.White,Spell.Blue
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_duo.jpg
-
-Thoughtcast
-4 U
-Sorcery
-Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\n
-spDrawCards:2:Draw two cards.:Thoughtcast - draw 2 cards.
-CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtcast.jpg
-
-Tinker
-2 U
-Sorcery
-As an additional cost to cast Tinker, sacrifice an artifact.\r\nSearch your library for an artifact card and put that card onto the battlefield. Then shuffle your library.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tinker.jpg
-
-Tolsimir Wolfblood
-4 G W
-Legendary Creature Elf Warrior
-Other green creatures you control get +1/+1.\r\nOther white creatures you control get +1/+1.
-3/4
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/tolsimir_wolfblood.jpg
-
-Safehold Duo
-3 GW
-Creature Elf Warrior Shaman
-Whenever you cast a green spell, Safehold Duo gets +1/+1 until end of turn.\r\nWhenever you cast a white spell, Safehold Duo gains vigilance until end of turn.
-2/4
-SVar:BuffedBy:Spell.Green,Spell.White
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_duo.jpg
-
-Sejiri Refuge
-no cost
-Land
-Sejiri Refuge enters the battlefield tapped.\r\nWhen Seijiri Refuge enters the battlefield, you gain 1 life.
-tap: add W
-tap: add U
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_refuge.jpg
-
-Sengir Autocrat
-3 B
-Creature Human
-When Sengir Autocrat comes into play, put three 0/1 black Serf creature tokens into play.\r\nWhen Sengir Autocrat leaves play, remove all Serf tokens from the game.
-2/2
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106638.jpg
-
-Skullclamp
-1
-Artifact Equipment
-Equipped creature gets +1/-1.\r\nWhen equipped creature is put into a graveyard, draw two cards.
-eqPump 1:+1/-1
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skullclamp.jpg
-
-Sleeper Agent
-B
-Creature Minion
-When Sleeper Agent comes into play, target opponent gains control of it.\r\nAt the beginning of your upkeep, Sleeper Agent deals 2 damage to you.
-3/3
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sleeper_agent.jpg
-
-Slith Strider
-1 U U
-Creature Slith
-Whenever Slith Strider becomes blocked, draw a card.\r\nWhenever Slith Strider deals combat damage to a player, put a +1/+1 counter on it.
-1/1
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_strider.jpg
-
-Solemn Simulacrum
-4
-Artifact Creature Golem
-When Solemn Simulacrum comes into play, you may search your library for a basic land card and put that card into play tapped. If you do, shuffle your library.\r\nWhen Solemn Simulacrum is put into a graveyard from play, you may draw a card.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_simulacrum.jpg
-
-Steely Resolve
-1 G
-Enchantment
-As Steely Resolve comes into play, choose a creature type.\r\nCreatures of the chosen type have shroud. 
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/steely_resolve.jpg
-
-Stitch Together
-B B
-Sorcery
-Return target creature card from your graveyard to your hand.\r\nThreshold - Return that card from your graveyard to the battlefield instead if seven or more cards are in your graveyard.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stitch_together.jpg
-
-Stonecloaker
-2 W
-Creature Gargoyle
-When Stonecloaker comes into play, return a creature you control to its owner's hand.\r\nWhen Stonecloaker comes into play, remove target card in a graveyard from the game.
-3/2
-Flash
-Flying
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stonecloaker.jpg
-
-Sturdy Hatchling
-3 GU
-Creature Elemental
-Sturdy Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.\r\nWhenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
-6/6
-abPump GU:Shroud
-SVar:BuffedBy:Spell.Blue,Spell.Green
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Sturdy_Hatchling.jpg
-
-Sutured Ghoul
-4 B B B
-Creature Zombie
-As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.\r\nSutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
-1/1
-Trample
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sutured_ghoul.jpg
-
-Sword of Body and Mind
-3
-Artifact Equipment
-Equipped creature gets +2/+2 and has protection from green and from blue.\r\nWhenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.
-SVar:Rarity:Rare
-SVar:Picture:http://serv1.tcgimages.eu/img/cards/From_the_Vault_Relics/sword_of_body_and_mind.jpg
-
-Sword of Fire and Ice
-3
-Artifact Equipment
-Equipped creature gets +2/+2 and has protection from red and from blue.\r\nWhenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to target creature or player and you draw a card.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_fire_and_ice.jpg
-
-Sword of Light and Shadow
-3
-Artifact Equipment
-Equipped creature gets +2/+2 and has protection from white and from black.\r\nWhenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_light_and_shadow.jpg
-
-Sword of the Meek
-2
-Artifact Equipment
-Equipped creature gets +1/+2.\r\nWhenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_the_meek.jpg
-
-Reach of Branches
-4 G
-Tribal Instant Treefolk
-Put a 2/5 green Treefolk Shaman creature token into play.\r\nWhenever a Forest comes into play under your control, you may return Reach of Branches from your graveyard to your hand.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_of_branches.jpg
-
-Relentless Rats
-1 B B
-Creature Rat
-Relentless Rats gets +1/+1 for each other creature in play named Relentless Rats.\r\nA deck can have any number of cards named Relentless Rats.
-2/2
-SVar:RemAIDeck:True
-SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
-SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73573.jpg
-
-Eerie Procession
-2 U
-Sorcery
-Search your library for an Arcane card, reveal that card, and put it into your hand. Then shuffle your library.
-spTutor:Arcane:Hand
-SVar:RemAIDeck:True
-
-Idyllic Tutor
-2 W
-Sorcery
-Search your library for an enchantment card, reveal it, and put it into your hand. Then shuffle your library.
-spTutor:Enchantment:Hand
-SVar:RemAIDeck:True
-
-Lay of the Land
-G
-Sorcery
-Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
-spTutor:Land.Basic:Hand
-
-Merchant Scroll
-1 U
-Sorcery
-Search your library for a blue instant card, reveal that card, and put it into your hand. Then shuffle your library.
-spTutor:Instant.Blue:Hand
-SVar:RemAIDeck:True
-
-Safewright Quest
-GW
-Sorcery
-Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.
-spTutor:Forest,Plains:Hand
-
-Steelshaper's Gift
-W
-Sorcery
-Search your library for an Equipment card, reveal that card, and put it into your hand. Then shuffle your library.
-spTutor:Equipment:Hand
-SVar:RemAIDeck:True
-
-Sylvan Scrying
-2 G
-Sorcery
-Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.
-spTutor:Land:Hand
-SVar:RemAIDeck:True
-
-Time of Need
-1 G
-Sorcery
-Search your library for a legendary creature card, reveal it, and put it into your hand. Then shuffle your library.
-spTutor:Creature.Legendary:Hand
-SVar:RemAIDeck:True
-
-Personal Tutor 
-U
-Sorcery
-Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
-spTutor:Sorcery:TopOfLibrary
-
-Painter's Servant
-2
-Artifact Creature Scarecrow
-As Painter's Servant enters the battlefield, choose a color.\r\nAll cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
-1/3
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/painters_servant.jpg
-
-Phantom Centaur
-2 G G
-Creature Centaur Spirit
-Phantom Centaur enters the battlefield with three +1/+1 counters on it.\r\nIf damage would be dealt to Phantom Centaur, prevent that damage. Remove a +1/+1 counter from Phantom Centaur.
-2/0
-Protection from black
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_centaur.jpg
-
-Phylactery Lich
-B B B
-Creature Zombie
-As Phylactery Lich enters the battlefield, put a phylactery counter on an artifact you control.\r\nWhen you control no permanents with phylactery counters on them, sacrifice Phylactery Lich.
-5/5
-Indestructible
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phylactery_lich.jpg
-
-Pillory of the Sleepless
-1 W B
-Enchantment Aura
-Enchanted creature can't attack or block.\r\nEnchanted creature has "At the beginning of your upkeep, you lose 1 life."
-Enchant creature
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pillory_of_the_sleepless.jpg
-
-Pyre Zombie
-1 B R
-Creature Zombie
-no text
-2/1
-abDamageTgtCP 1 R R Sac-CARDNAME:2
-WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/1 B B:ControllerUpkeep:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay 1 B B. If you do, return Pyre Zombie from your graveyard to your hand.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_zombie.jpg
-
-Oblivion Ring
-2 W
-Enchantment
-When Oblivion Ring comes into play, remove another target nonland permanent from the game.\r\nWhen Oblivion Ring leaves play, return the removed card to play under its owner's control.
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139414.jpg
-
-Omnath, Locus of Mana
-2 G
-Legendary Creature Elemental
-Green mana doesn't empty from your mana pool as steps and phases end.\r\nOmnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.
-1/1
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/omnath_locus_of_mana.jpg
-
-Oracle of Mul Daya
-3 G
-Creature Elf Shaman
-You may play an additional land on each of your turns.\r\nYou may play the top card of your library if it's a land card.
-2/2
-Play with the top card of your library revealed.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/oracle_of_mul_daya.jpg
-
-Overbeing of Myth
-GU GU GU GU GU
-Creature Spirit Avatar
-Overbeing of Myth's power and toughness are each equal to the number of cards in your hand.\r\nAt the beginning of your draw step, draw an additional card.
-1/1
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/overbeing_of_myth.jpg
-
-Cateran Summons
-B
-Sorcery
-Search your library for a Mercenary card, reveal that card, and put it into your hand. Then shuffle your library.
-spTutor:Mercenary:Hand
-SVar:RemAIDeck:True
-
-Evincar's Justice
-2 B B
-Sorcery
-no text
-spDamageAll:Player,Creature:2:Evincar's Justice deals 2 damage to each creature and each player.
-SVar:Buyback:3
-
-Claws of Wirewood
-3 G
-Sorcery
-no text
-spDamageAll:Player,Creature.withFlying:3:Claws of Wirewood deals 3 damage to each creature with flying and each player.
-Cycling:2
-
-Gale Force
-4 G
-Sorcery
-no text
-spDamageAll:Creature.withFlying:5:Gale Force deals 5 damage to each creature with flying.
-
-Squall
-2 G
-Sorcery
-no text
-spDamageAll:Creature.withFlying:2:Squall deals 2 damage to each creature with flying.
-
-Triskelion
-6
-Artifact Creature Construct
-no text
-1/1
-etbCounter:P1P1:3
-abDamageTgtCP 0 SubCounter<P1P1/1>:1
-SVar:RemAIDeck:True
-
-Maga, Traitor to Mortals
-X B B B
-Legendary Creature Human Wizard
-Maga, Traitor to Mortals enters the battlefield with X +1/+1 counters on it.\r\nWhen Maga enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.
-0/0
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/maga_traitor_to_mortals.jpg
-
-Mana Vault
-1
-Artifact
-At the beginning of your upkeep, you may pay 4. If you do, untap Mana Vault.\r\nAt the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.
-tap: add 3
-CARDNAME doesn't untap during your untap step.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_vault.jpg
-
-Mask of Riddles
-U B
-Artifact Equipment
-Equipped creature has fear.\r\nWhenever equipped creature deals combat damage to a player, you may draw a card. 
-eqPump 2:Fear
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_riddles.jpg
-
-Master of Etherium
-2 U
-Artifact Creature Vedalken Wizard
-Master of Etherium's power and toughness are each equal to the number of artifacts you control.\r\nOther artifact creatures you control get +1/+1.
-1/1
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_etherium.jpg
-
-Meddling Mage
-U W
-Creature Human Wizard
-As Meddling Mage enters the battlefield, name a nonland card.\r\nThe named card can't be cast.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/meddling_mage.jpg
-
-Momentous Fall
-2 G G
-Instant
-As an additional cost to cast Momentous Fall, sacrifice a creature.\r\nYou draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/momentous_fall.jpg
-
-Mul Daya Channelers
-1 G G
-Creature Elf Druid Shaman
-As long as the top card of your library is a creature card, Mul Daya Channelers gets +3/+3.\r\nAs long as the top card of your library is a land card, Mul Daya Channelers has "tap: Add two mana of any one color to your mana pool."
-2/2
-Play with the top card of your library revealed.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mul_daya_channelers.jpg
-
-Mycosynth Golem
-11
-Artifact Creature Golem
-Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\nArtifact creature spells you cast have affinity for artifacts. (They cost 1 less to cast for each artifact you control.)
-4/5
-CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-CostChange:Player:Less:1:Spell:All:Artifact/Creature:Affinity/Artifact/All Conditions
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_golem.jpg
-
-Mystic Snake
-1 G U U
-Creature Snake
-When Mystic Snake comes into play, counter target spell.
-2/2
-Flash
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
-
-Laquatus's Champion
-4 B B
-Creature Nightmare Horror
-When Laquatus's Champion enters the battlefield, target player loses 6 life.\r\nWhen Laquatus's Champion leaves the battlefield, that player gains 6 life.
-6/3
-RegenerateMe:B
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/laquatuss_champion.jpg
-
-Lichenthrope
-3 G G
-Creature Plant Fungus
-If damage would be dealt to Lichenthrope, put that many -1/-1 counters on it instead.\r\nAt the beginning of your upkeep, remove a -1/-1 counter from Lichenthrope
-5/5
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lichenthrope.jpg
-
-Dakmor Plague
-3 B B
-Sorcery
-no text
-spDamageAll:Player,Creature:3:Dakmor Plague deals 3 damage to each creature and each player.
-
-Dry Spell
-1 B
-Sorcery
-no text
-spDamageAll:Player,Creature:1:Dry Spell deals 1 damage to each creature and each player.
-
-Famine
-3 B B
-Sorcery
-no text
-spDamageAll:Player,Creature:3:Famine deals 3 damage to each creature and each player.
-
-Psychotic Haze
-2 B B
-Instant
-no text
-spDamageAll:Player,Creature:1:Psychotic Haze deals 1 damage to each creature and each player.
-Madness:1 B
-SVar:RemAIDeck:True
-
-Chain Reaction
-2 R R
-Sorcery
-no text
-spDamageAll:Creature:X:Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield.
-SVar:X:Count$TypeOnBattlefield.Creature
-
-Desert Sandstorm
-2 R
-Sorcery
-no text
-spDamageAll:Creature:1:Desert Sandstorm deals 1 damage to each creature.
-
-Evaporate
-2 R
-Sorcery
-no text
-spDamageAll:Creature.White,Creature.Blue:1:Evaporate deals 1 damage to each creature that's white or blue.
-SVar:RemAIDeck:True
-
-Fire Tempest
-5 R R
-Sorcery
-no text
-spDamageAll:Player,Creature:5:Fire Tempest deals 5 damage to each creature and each player.
-
-Rain of Embers
-1 R
-Sorcery
-no text
-spDamageAll:Player,Creature:1:Rain of Embers deals 1 damage to each creature and each player.
-
-Seismic Shudder
-1 R
-Instant
-no text
-spDamageAll:Creature.withoutFlying:1:Seismic Shudder deals 1 damage to each creature without flying.
-
-Shadowstorm
-R
-Sorcery
-no text
-spDamageAll:Creature.withShadow:2:Shadowstorm deals 2 damage to each creature with shadow.
-SVar:RemAIDeck:True
-
-Steam Blast
-2 R
-Sorcery
-no text
-spDamageAll:Player,Creature:2:Steam Blast deals 2 damage to each creature and each player.
-
-Sulfurous Blast
-2 R R
-Instant
-no text
-spDamageAll:Player,Creature:X:Sulfurous Blast deals 2 damage to each creature and each player. If you cast this spell during your main phase, Sulfurous Blast deals 3 damage to each creature and each player instead.
-SVar:X:Count$IfMainPhase.3.2
-
-Swirling Sandstorm
-3 R
-Instant
-no text
-spDamageAll:Creature.withoutFlying:X:Threshold - Swirling Sandstorm deals 5 damage to each creature without flying if seven or more cards are in your graveyard.
-SVar:X:Count$Threshold.5.0
-
-Thunder of Hooves
-3 R
-Sorcery
-no text
-spDamageAll:Player,Creature.withoutFlying:X:Thunder of Hooves deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield.
-SVar:X:Count$TypeOnBattlefield.Beast
-SVar:RemAIDeck:True
-
-Kabira Crossroads
-no cost
-Land
-Kabira Crossroads enters the battlefield tapped.\r\nWhen Kabira Crossroads enters the battlefield, you gain 2 life.
-tap: add W
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kabira_crossroads.jpg
-
-Kazandu Refuge
-no cost
-Land
-Kazandu Refuge enters the battlefield tapped.\r\nWhen Kazandu Refuge enters the battlefield, you gain 1 life.
-tap: add R
-tap: add G
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_refuge.jpg
-
-Kinsbaile Borderguard
-1 W W
-Creature Kithkin Soldier
-Kinsbaile Borderguard comes into play with a +1/+1 counter on it for each other Kithkin you control.\r\nWhen Kinsbaile Borderguard is put into a graveyard from play, put a 1/1 white Kithkin Soldier creature token into play for each counter on it.
-1/1
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kinsbaile_borderguard.jpg
-
-Journey to Nowhere
-1 W
-Enchantment
-When Journey to Nowhere enters the battlefield, exile target creature.\r\nWhen Journey to Nowhere leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/journey_to_nowhere.jpg
-
-Jwar Isle Refuge
-no cost
-Land
-Jwar Isle Refuge enters the battlefield tapped.\r\nWhen Jwar Isle Refuge enters the battlefield, you gain 1 life.
-tap: add U
-tap: add B 
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/jwar_isle_refuge.jpg
-
-Iona, Shield of Emeria
-6 W W W
-Legendary Creature Angel
-As Iona, Shield of Emeria enters the battlefield, choose a color.\r\nYour opponents can't cast spells of the chosen color.
-7/7
-Flying
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/iona_shield_of_emeria.jpg
-
-Harrow
-2 G
-Instant
-As an additional cost to cast Harrow, sacrifice a land.\r\nSearch your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harrow.jpg
-
-Cradle to Grave
-1 B
-Instant
-Destroy target nonblack creature that entered the battlefield this turn.
-spDestroyTgt:Creature.nonBlack+enteredBattlefieldThisTurn
-SVar:RemAIDeck:True
-
-Vendetta
-B
-Instant
-Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
-spDestroyTgt:Creature.nonBlack:NoRegen:Drawback$YouLoseLife/dX
-SVar:dX:Count$TgtCardToughness
-SVar:PlayMain1:TRUE
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vendetta.jpg
-
-Sever Soul
-3 B B
-Sorcery
-Destroy target nonblack creature. It can't be regenerated. You gain life equal to its toughness.
-spDestroyTgt:Creature.nonBlack:NoRegen:Drawback$YouGainLife/dX
-SVar:dX:Count$TgtCardToughness
-SVar:PlayMain1:TRUE
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sever_soul.jpg
-
-Poison Arrow
-4 B B
-Sorcery
-Destroy target nonblack creature. You gain 3 life.
-spDestroyTgt:Creature.nonBlack:Drawback$YouGainLife/3
-SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/poison_arrow.jpg
-
-Glasses of Urza
-1
-Artifact
-tap: Look at target player's hand.
-SVar:RemAIDeck:True
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/glasses_of_urza.jpg
-
-Gaddock Teeg
-G W
-Legendary Creature Kithkin Advisor
-Noncreature spells with converted mana cost 4 or greater can't be cast.\r\nNoncreature spells with X in their mana costs can't be cast.
-2/2
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gaddock_teeg.jpg
-
-Ghostfire
-2 R
-Instant
-Ghostfire is colorless.\r\n
-spDamageTgtCP:3
-CARDNAME is colorless.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostfire.jpg
-
-Gilt-Leaf Archdruid
-3 G G
-Creature Elf Druid
-Whenever you play a Druid spell, you may draw a card.\r\nTap seven untapped Druids you control: Gain control of all lands target player controls.
-3/3
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_archdruid.jpg
-
-Goblin Assault
-2 R
-Enchantment
-At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.\r\nGoblin creatures attack each turn if able.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_assault.jpg
-
-Goblin Warchief
-1 R R
-Creature Goblin 
-Goblin spells you cast cost 1 less to cast.\r\nGoblin creatures you control have haste.
-2/2
-CostChange:Player:Less:1:Spell:All:Goblin:NoSpecial
-SVar:PlayMain1:TRUE
-SVar:BuffedBy:Goblin
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warchief.jpg
-
-Grand Arbiter Augustin IV
-2 W U
-Legendary Creature Human Advisor
-White spells you cast cost 1 less to cast.\r\nBlue spells you cast cost 1 less to cast.\r\nSpells your opponents cast cost 1 more to cast.
-2/3
-CostChange:Player:Less:1:Spell:white:All:NoSpecial
-CostChange:Player:Less:1:Spell:blue:All:NoSpecial
-CostChange:Opponent:More:1:Spell:All:All:NoSpecial
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_arbiter_augustin_iv.jpg
-
-Gravelgill Duo
-2 UB
-Creature Merfolk Rogue Warrior
-Whenever you cast a blue spell, Gravelgill Duo gets +1/+1 until end of turn.\r\nWhenever you cast a black spell, Gravelgill Duo gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
-2/1
-SVar:BuffedBy:Spell.Blue,Spell.Black
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gravelgill_duo.jpg
-
-Graypelt Refuge
-no cost
-Land
-Graypelt Refuge enters the battlefield tapped.\r\nWhen Graypelt Refuge enters the battlefield, you gain 1 life.
-tap: add W
-tap: add G
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_refuge.jpg
-
-Guul Draz Specter
-2 B B
-Creature Specter
-Guul Draz Specter gets +3/+3 as long as an opponent has no cards in hand.\r\nWhenever Guul Draz Specter deals combat damage to a player, that player discards a card.
-2/2
-Flying
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/guul_draz_specter.jpg
-
-Fable of Wolf and Owl
-3 GU GU GU
-Enchantment
-Whenever you play a green spell, you may put a 2/2 green Wolf creature token into play.\r\nWhenever you play a blue spell, you may put a 1/1 blue Bird creature token with flying into play.
-SVar:BuffedBy:Spell.Green,Spell.Blue
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fable_of_wolf_and_owl.jpg
-
-Faceless Butcher
-2 B B
-Creature Nightmare Horror
-When Faceless Butcher comes into play, remove target creature other than Faceless Butcher from the game.\r\nWhen Faceless Butcher is destroyed, return the removed card to play under its owner's control.
-2/3
-SVar:PlayMain1:TRUE
-SVar:Rarity:Common
-SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108840.jpg
-
-Festering Wound
-1 B
-Enchantment Aura
-At the beginning of your upkeep, you may put an infection counter on Festering Wound.\r\nAt the beginning of the upkeep of enchanted creature's controller, Festering Wound deals X damage to that player, where X is the number of infection counters on Festering Wound.
-Enchant Creature Curse
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_wound.jpg
-
-Fireball
-X R
-Sorcery
-Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.\r\nFireball costs 1 more to cast for each target beyond the first.
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fireball.jpg
-
-Eladamri, Lord of Leaves
-G G
-Legendary Creature Elf Warrior
-Other Elf creatures have forestwalk.\r\nOther Elves have shroud. 
-2/2
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamri_lord_of_leaves.jpg
-
-Eldrazi Monument
-5
-Artifact
-Creatures you control get +1/+1, have flying, and are indestructible.\r\nAt the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
-SVar:PlayMain1:TRUE
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_monument.jpg
-
-Emberstrike Duo
-1 BR
-Creature Elemental Warrior Shaman
-Whenever you cast a black spell, Emberstrike Duo gets +1/+1 until end of turn.\r\nWhenever you cast a red spell, Emberstrike Duo gains first strike until end of turn.
-1/1
-SVar:BuffedBy:Spell.Black,Spell.Red
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/emberstrike_duo.jpg
-
-Engineered Plague
-2 B
-Enchantment
-As Engineered Plague comes into play, choose a creature type.\r\nAll creatures of the chosen type get -1/-1.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/engineered_plague.jpg
-
-Eternity Vessel
-6
-Artifact
-Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total.\r\nLandfall - Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
-Landfall
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eternity_vessel.jpg
-
-Dark Depths
-no cost
-Legendary Snow Land
-Dark Depths enters the battlefield with ten ice counters on it.\r\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_depths.jpg
-
-Daru Warchief
-2 W W
-Creature Human Soldier
-Soldier spells you cast cost 1 less to cast.\r\nSoldier creatures you control get +1/+2.
-1/1
-CostChange:Player:Less:1:Spell:All:Soldier:NoSpecial
-SVar:PlayMain1:TRUE
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_warchief.jpg
-
-Dauntless Dourbark
-3 G
-Creature Treefolk Warrior
-Dauntless Dourbark's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control.\r\nDauntless Dourbark has trample as long as you control another Treefolk.
-1/1
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_dourbark.jpg
-
-Deranged Hermit
-3 G G
-Creature Elf
-When Deranged Hermit enters the battlefield, put four 1/1 green Squirrel creature tokens onto the battlefield.\r\nSquirrel creatures get +1/+1.
-1/1
-Echo:3 G G
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deranged_hermit.jpg
-
-Doubling Season
-4 G
-Enchantment
-If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.\r\nIf an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_season.jpg
-
-Elspeth Tirel
-3 W W
-Planeswalker - Elspeth
-no text
-SVar:Rarity:Mythic
-
-Captain of the Watch
-4 W W
-Creature Human Soldier 
-Other Soldier creatures you control get +1/+1 and have vigilance.\r\nWhen Captain of the Watch enters the battlefield, put three 1/1 white Soldier creature tokens onto the battlefield.
-3/3
-Vigilance
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/captain_of_the_watch.jpg
-
-Chalice of the Void
-X X 0
-Artifact
-Chalice of the Void enters the battlefield with X charge counters on it.\r\nWhenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/chalice_of_the_void.jpg
-
-Child of Gaea
-3 G G G
-Creature Elemental
-no text
-7/7
-Trample
-At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G G
-RegenerateMe:1 G
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_gaea.jpg
-
-Conspiracy
-3 B B
-Enchantment
-As Conspiracy comes into play, choose a creature type.\r\nCreature cards you own that aren't in play, creature spells you control, and creatures you control are the chosen type.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/conspiracy.jpg
-
-Cover of Darkness
-1 B
-Enchantment
-As Cover of Darkness comes into play, choose a creature type.\r\nCreatures of the chosen type have fear.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cover_of_darkness.jpg
-
-Crib Swap
-2 W
-Tribal Instant Shapeshifter
-Changeling\r\nRemove target creature from the game. Its controller puts a 1/1 colorless Shapeshifter creature token into play.
-Changeling
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/crib_swap.jpg
-
-Curse of Wizardry
-2 B B
-Enchantment
-As Curse of Wizardry enters the battlefield, choose a color.\r\nWhenever a player casts a spell of the chosen color, that player loses 1 life.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_wizardry.jpg
-
-Beastmaster Ascension
-2 G
-Enchantment
-Whenever a creature you control attacks, you may put a quest counter on Beastmaster Ascension.\r\nAs long as Beastmaster Ascension has seven or more quest counters on it, creatures you control get +5/+5.
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/beastmaster_ascension.jpg
-
-Belbe's Portal
-5
-Artifact
-As Belbe's Portal comes into play, choose a creature type.\r\n3, tap: You may put a creature card of the chosen type from your hand onto the battlefield.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_portal.jpg
-
-Belligerent Hatchling
-3 RW
-Creature Elemental
-Belligerent Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a red spell, remove a -1/-1 counter from Belligerent Hatchling.\r\nWhenever you cast a white spell, remove a -1/-1 counter from Belligerent Hatchling.
-6/6
-First Strike
-SVar:BuffedBy:Spell.Red,Spell.White
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/Belligerent_Hatchling.jpg
-
-Blinkmoth Infusion
-12 U U
-Instant
-Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\nUntap all artifacts.
-CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-spAllPump:YouCtrl/None:+0/+0:Drawback$UntapAllTypeYouCtrl.Artifact:
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/blinkmoth_infusion.jpg
-
-Bloodghast
-B B
-Creature Vampire Spirit
-Bloodghast has haste as long as an opponent has 10 or less life.\r\nLandfall - Whenever a land enters the battlefield under your control, you may return Bloodghast from your graveyard to the battlefield.
-2/1
-CARDNAME can't block.
-Landfall
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodghast.jpg
-
-Bridge from Below
-B B B
-Enchantment
-Whenever a nontoken creature is put into your graveyard from the battlefield, if Bridge from Below is in your graveyard, put a 2/2 black Zombie creature token onto the battlefield.\r\nWhen a creature is put into an opponent's graveyard from the battlefield, if Bridge from Below is in your graveyard, exile Bridge from Below.
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bridge_from_below.jpg
-
-Broodstar
-8 U U
-Creature Beast
-Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\nBroodstar's power and toughness are each equal to the number of artifacts you control.
-1/1
-Flying
-CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/broodstar.jpg
-
-Apocalypse Hydra
-X G R
-Creature Hydra
-Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.\r\n1 R, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to target creature or player.
-0/0
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse_hydra.jpg
-
-Arashi, the Sky Asunder
-3 G G
-Legendary Creature Spirit
-(NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying." not implemented.) (NOTE: "Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
-5/5
-SVar:RemAIDeck:True
-SVar:Rarity:Rare
-SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card87333.jpg
-
-Assert Authority
-5 U U
-Instant
-Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.\r\nAffinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
-spCounter:Spell:None:Exile:None
-CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/assert_authority.jpg
-
-Avenger of Zendikar
-5 G G
-Creature Elemental
-When Avenger of Zendikar enters the battlefield, put a 0/1 green Plant creature token onto the battlefield for each land you control.\r\nLandfall - Whenever a land enters the battlefield under your control, you may put a +1/+1 counter on each Plant creature you control.
-5/5
-Landfall
-SVar:BuffedBy:Land
-SVar:Rarity:Mythic
-SVar:Picture:http://www.wizards.com/global/images/magic/general/avenger_of_zendikar.jpg
-
-Siren's Call
-U
-Instant
-Cast Siren's Call only during an opponent's turn, before attackers are declared.  Creatures the active player controls attack this turn if able.  At the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.
-SVar:Rarity:Uncommon
-SVar:RemAIDeck:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sirens_call.jpg
-
-Cosi's Ravager
-3 R
-Creature Elemental
-no text
-2/2
-WheneverKeyword:EntersBattleField:Type/Land:Play:Damage/1:NormalInput/Player:ASAP:Yes_No:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may have Cosi's Ravager deal 1 damage to target player.
-
-Fires of Yavimaya
-1 R G
-Enchantment
-no text
-StaticEffect:Play:Permanents you Control:Keyword/Haste:Type.Creature:Creatures you control have haste.
-abPumpTgtC 0 Sac-CARDNAME:+2/+2
-
-Yuki-Onna
-3 R
-Creature Spirit
-When Yuki-Onna enters the battlefield, destroy target artifact.
-3/1
-etbDestroyTgt:Artifact
-WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Yuki-Onna to its owner's hand.
-
-Psychic Membrane
-2 U
-Creature Wall
-no text
-0/3
-Defender
-WheneverKeyword:Blocks:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Psychic Membrane blocks, you may draw a card.
-
-Ancestral Vision
-no cost
-Sorcery
-Ancestral Vision is blue. (NOTE: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
-CARDNAME is blue.
-Suspend:4:U
-spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
-SVar:RemAIDeck:True
-SVar:Rarity:None
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_vision.jpg
-
-Resuscitate
-1 G
-Instant
-Until end of turn, creatures you control gain "1: Regenerate this creature." (NOTE: This ability is not currently implemented.)
-SVar:RemAIDeck:True
-SVar:PlayMain1:TRUE
-SVar:Rarity:None
-SVar:Picture:http://www.wizards.com/global/images/magic/general/resuscitate.jpg
-
 Abandoned Outpost
 no cost
 Land
@@ -2122,6 +965,17 @@ spDrawCardsTgt:3:Target player draws three cards.:Ancestral Recall - draw 3 card
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/2u/en-us/card692.jpg
 
+Ancestral Vision
+no cost
+Sorcery
+Ancestral Vision is blue. (NOTE: Ancestral Vision currently draws 0 cards due to the combined upkeep/draw phases. Once they are seperated, this should work as expected.)
+CARDNAME is blue.
+Suspend:4:U
+spDrawCardsTgt:3:Target player draws three cards.:CARDNAME - draw 3 cards.
+SVar:RemAIDeck:True
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ancestral_vision.jpg
+
 Ancient Craving
 3 B
 Sorcery
@@ -2405,6 +1259,14 @@ Multikicker 1 W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apex_hawks.jpg
 
+Apocalypse Hydra
+X G R
+Creature Hydra
+Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.\r\n1 R, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to target creature or player.
+0/0
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/apocalypse_hydra.jpg
+
 Apprentice Wizard
 1 U U
 Creature Human Wizard
@@ -2433,6 +1295,15 @@ no text
 Reach
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51230.jpg
+
+Arashi, the Sky Asunder
+3 G G
+Legendary Creature Spirit
+(NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying." not implemented.) (NOTE: "Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
+5/5
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card87333.jpg
 
 Arc Runner
 2 R
@@ -2966,6 +1837,15 @@ no text
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assembly_worker.jpg
 
+Assert Authority
+5 U U
+Instant
+Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.\r\nAffinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+spCounter:Spell:None:Exile:None
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/assert_authority.jpg
+
 Astral Steel
 2 W
 Instant
@@ -3209,6 +2089,16 @@ Domain - Aven Trailblazer's toughness is equal to the number of basic land types
 Flying
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_trailblazer.jpg
+
+Avenger of Zendikar
+5 G G
+Creature Elemental
+When Avenger of Zendikar enters the battlefield, put a 0/1 green Plant creature token onto the battlefield for each land you control.\r\nLandfall - Whenever a land enters the battlefield under your control, you may put a +1/+1 counter on each Plant creature you control.
+5/5
+Landfall
+SVar:BuffedBy:Land
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/avenger_of_zendikar.jpg
 
 Avian Changeling
 2 W
@@ -3900,6 +2790,14 @@ maxLevel:6
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beastbreaker_of_bala_ged.jpg
 
+Beastmaster Ascension
+2 G
+Enchantment
+Whenever a creature you control attacks, you may put a quest counter on Beastmaster Ascension.\r\nAs long as Beastmaster Ascension has seven or more quest counters on it, creatures you control get +5/+5.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/beastmaster_ascension.jpg
+
 Bee Sting
 3 G
 Sorcery
@@ -3933,6 +2831,23 @@ Flying
 CARDNAME can block only creatures with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_percher.jpg
+
+Belbe's Portal
+5
+Artifact
+As Belbe's Portal comes into play, choose a creature type.\r\n3, tap: You may put a creature card of the chosen type from your hand onto the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_portal.jpg
+
+Belligerent Hatchling
+3 RW
+Creature Elemental
+Belligerent Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a red spell, remove a -1/-1 counter from Belligerent Hatchling.\r\nWhenever you cast a white spell, remove a -1/-1 counter from Belligerent Hatchling.
+6/6
+First Strike
+SVar:BuffedBy:Spell.Red,Spell.White
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Belligerent_Hatchling.jpg
 
 Beloved Chaplain
 1 W
@@ -4298,6 +3213,16 @@ no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_mage.jpg
 
+Blinkmoth Infusion
+12 U U
+Instant
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\nUntap all artifacts.
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+spAllPump:YouCtrl/None:+0/+0:Drawback$UntapAllTypeYouCtrl.Artifact:
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blinkmoth_infusion.jpg
+
 Blinkmoth Nexus
 no cost
 Land
@@ -4431,6 +3356,16 @@ spPumpTgt:+X/+0:Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodcurdling_scream.jpg
+
+Bloodghast
+B B
+Creature Vampire Spirit
+Bloodghast has haste as long as an opponent has 10 or less life.\r\nLandfall - Whenever a land enters the battlefield under your control, you may return Bloodghast from your graveyard to the battlefield.
+2/1
+CARDNAME can't block.
+Landfall
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodghast.jpg
 
 Bloodmark Mentor
 1 R
@@ -5147,6 +4082,14 @@ Search target opponent's library for a creature card and put that card into play
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card21300.jpg
 
+Bridge from Below
+B B B
+Enchantment
+Whenever a nontoken creature is put into your graveyard from the battlefield, if Bridge from Below is in your graveyard, put a 2/2 black Zombie creature token onto the battlefield.\r\nWhen a creature is put into an opponent's graveyard from the battlefield, if Bridge from Below is in your graveyard, exile Bridge from Below.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bridge_from_below.jpg
+
 Brilliant Halo
 1 W
 Enchantment Aura
@@ -5233,6 +4176,16 @@ When Broodmate Dragon comes into play, put a 4/4 red Dragon creature token with 
 Flying
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broodmate_dragon.jpg
+
+Broodstar
+8 U U
+Creature Beast
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\nBroodstar's power and toughness are each equal to the number of artifacts you control.
+1/1
+Flying
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/broodstar.jpg
 
 Broodwarden
 3 G G
@@ -5635,6 +4588,16 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/capsize.jpg
 
+Captain of the Watch
+4 W W
+Creature Human Soldier 
+Other Soldier creatures you control get +1/+1 and have vigilance.\r\nWhen Captain of the Watch enters the battlefield, put three 1/1 white Soldier creature tokens onto the battlefield.
+3/3
+Vigilance
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/captain_of_the_watch.jpg
+
 Captain Sisay
 2 G W
 Legendary Creature Human Soldier
@@ -5870,6 +4833,14 @@ SearchMerc:5
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_slaver.jpg
 
+Cateran Summons
+B
+Sorcery
+Search your library for a Mercenary card, reveal that card, and put it into your hand. Then shuffle your library.
+spTutor:Mercenary:Hand
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_summons.jpg
+
 Cathartic Adept
 U
 Creature Human Wizard
@@ -6101,6 +5072,14 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ceta_disciple.jpg
 
+Chain Reaction
+2 R R
+Sorcery
+no text
+spDamageAll:Creature:X:Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield.
+SVar:X:Count$TypeOnBattlefield.Creature
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chain_reaction.jpg
+
 Chainer, Dementia Master
 3 B B
 Legendary Creature Human Minion
@@ -6116,6 +5095,14 @@ Sorcery
 Target player sacrifices a creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chainers_edict.jpg
+
+Chalice of the Void
+X X 0
+Artifact
+Chalice of the Void enters the battlefield with X charge counters on it.\r\nWhenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chalice_of_the_void.jpg
 
 Chambered Nautilus
 2 U
@@ -6309,6 +5296,17 @@ Trample
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_alara.jpg
 
+Child of Gaea
+3 G G G
+Creature Elemental
+no text
+7/7
+Trample
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:G G
+RegenerateMe:1 G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/child_of_gaea.jpg
+
 Child of Night
 1 B
 Creature Vampire
@@ -6477,6 +5475,14 @@ tap: add R
 tap: add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/city_of_brass.jpg
+
+Claws of Wirewood
+3 G
+Sorcery
+no text
+spDamageAll:Player,Creature.withFlying:3:Claws of Wirewood deals 3 damage to each creature with flying and each player.
+Cycling:2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/claws_of_wirewood.jpg
 
 Clay Statue
 4
@@ -6905,6 +5911,14 @@ no text
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/conquerors_pledge.jpg
 
+Conspiracy
+3 B B
+Enchantment
+As Conspiracy comes into play, choose a creature type.\r\nCreature cards you own that aren't in play, creature spells you control, and creatures you control are the chosen type.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/conspiracy.jpg
+
 Consume the Meek
 3 B B
 Instant
@@ -7036,6 +6050,14 @@ RegenerateMe:2 B
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupt_official.jpg
 
+Cosi's Ravager
+3 R
+Creature Elemental
+no text
+2/2
+WheneverKeyword:EntersBattleField:Type/Land:Play:Damage/1:NormalInput/Player:ASAP:Yes_No:Initiator - OwnedByController:Landfall - Whenever a land enters the battlefield under your control, you may have Cosi's Ravager deal 1 damage to target player.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cosis_ravager.jpg
+
 Cosmic Horror
 3 B B B
 Creature Horror
@@ -7107,6 +6129,13 @@ Exalted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/court_archers.jpg
 
+Cover of Darkness
+1 B
+Enchantment
+As Cover of Darkness comes into play, choose a creature type.\r\nCreatures of the chosen type have fear.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cover_of_darkness.jpg
+
 Covert Operative
 4 U
 Creature Human Wizard
@@ -7144,6 +6173,14 @@ Trample
 Echo:1 G G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cradle_guard.jpg
+
+Cradle to Grave
+1 B
+Instant
+Destroy target nonblack creature that entered the battlefield this turn.
+spDestroyTgt:Creature.nonBlack+enteredBattlefieldThisTurn
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cradle_to_grave.jpg
 
 Cranial Extraction
 3 B
@@ -7264,6 +6301,14 @@ Defender
 abPumpTgtC T:+0/+4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crenellated_wall.jpg
+
+Crib Swap
+2 W
+Tribal Instant Shapeshifter
+Changeling\r\nRemove target creature from the game. Its controller puts a 1/1 colorless Shapeshifter creature token into play.
+Changeling
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crib_swap.jpg
 
 Crimson Acolyte
 1 W
@@ -7576,6 +6621,13 @@ Enchant Creature Curse
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_chains.jpg
 
+Curse of Wizardry
+2 B B
+Enchantment
+As Curse of Wizardry enters the battlefield, choose a color.\r\nWhenever a player casts a spell of the chosen color, that player loses 1 life.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_wizardry.jpg
+
 Cursed Flesh
 B
 Enchantment Aura
@@ -7681,6 +6733,13 @@ etbDestroyTgt:Creature.nonBlack
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dakmor_lancer.jpg
 
+Dakmor Plague
+3 B B
+Sorcery
+no text
+spDamageAll:Player,Creature:3:Dakmor Plague deals 3 damage to each creature and each player.
+SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/dakmor_plague.jpg
+
 Dakmor Salvage
 no cost
 Land
@@ -7776,6 +6835,13 @@ At the beginning of your upkeep, reveal the top card of your library and put tha
 2/1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_confidant.jpg
+
+Dark Depths
+no cost
+Legendary Snow Land
+Dark Depths enters the battlefield with ten ice counters on it.\r\nWhen Dark Depths has no ice counters on it, sacrifice it. If you do, put an indestructible legendary 20/20 black Avatar creature token with flying named Marit Lage onto the battlefield.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_depths.jpg
 
 Dark Hatchling
 4 B B
@@ -7937,6 +7003,24 @@ First Strike
 Morph:2 W W
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_lancer.jpg
+
+Daru Warchief
+2 W W
+Creature Human Soldier
+Soldier spells you cast cost 1 less to cast.\r\nSoldier creatures you control get +1/+2.
+1/1
+CostChange:Player:Less:1:Spell:All:Soldier:NoSpecial
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_warchief.jpg
+
+Dauntless Dourbark
+3 G
+Creature Treefolk Warrior
+Dauntless Dourbark's power and toughness are each equal to the number of Forests you control plus the number of Treefolk you control.\r\nDauntless Dourbark has trample as long as you control another Treefolk.
+1/1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_dourbark.jpg
 
 Dauntless Escort
 1 W G
@@ -8441,6 +7525,15 @@ spBounceTgt:Permanent:Hand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deny_reality.jpg
 
+Deranged Hermit
+3 G G
+Creature Elf
+When Deranged Hermit enters the battlefield, put four 1/1 green Squirrel creature tokens onto the battlefield.\r\nSquirrel creatures get +1/+1.
+1/1
+Echo:3 G G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deranged_hermit.jpg
+
 Derelor
 3 B
 Creature Thrull 
@@ -8474,6 +7567,13 @@ no text
 Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4333.jpg
+
+Desert Sandstorm
+2 R
+Sorcery
+no text
+spDamageAll:Creature:1:Desert Sandstorm deals 1 damage to each creature.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desert_sandstorm.jpg
 
 Desert Twister
 4 G G
@@ -8971,6 +8071,13 @@ spPumpTgt:Double Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/double_cleave.jpg
 
+Doubling Season
+4 G
+Enchantment
+If an effect would put one or more tokens onto the battlefield under your control, it puts twice that many of those tokens onto the battlefield instead.\r\nIf an effect would place one or more counters on a permanent you control, it places twice that many of those counters on that permanent instead.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_season.jpg
+
 Douse in Gloom
 2 B
 Instant
@@ -9394,6 +8501,13 @@ tap: add G
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/druid_of_the_anima.jpg
 
+Dry Spell
+1 B
+Sorcery
+no text
+spDamageAll:Player,Creature:1:Dry Spell deals 1 damage to each creature and each player.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dry_spell.jpg
+
 Dryad Arbor
 no cost
 Land Creature Forest Dryad
@@ -9715,6 +8829,14 @@ CostChange:Player:Less:B:Spell:All:Cleric:NoSpecial
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/edgewalker.jpg
 
+Eerie Procession
+2 U
+Sorcery
+Search your library for an Arcane card, reveal that card, and put it into your hand. Then shuffle your library.
+spTutor:Arcane:Hand
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eerie_procession.jpg
+
 Ekundu Griffin
 3 W
 Creature Griffin
@@ -9734,6 +8856,15 @@ Lifelink
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/el_hajjaj.jpg
 
+Eladamri, Lord of Leaves
+G G
+Legendary Creature Elf Warrior
+Other Elf creatures have forestwalk.\r\nOther Elves have shroud. 
+2/2
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamri_lord_of_leaves.jpg
+
 Eladamri's Call
 G W
 Instant
@@ -9749,6 +8880,14 @@ Enchant creature
 enPump:+10/+10/Trample & Annihilator 2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_conscription.jpg
+
+Eldrazi Monument
+5
+Artifact
+Creatures you control get +1/+1, have flying, and are indestructible.\r\nAt the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eldrazi_monument.jpg
 
 Elephant Ambush
 2 G G
@@ -9790,6 +8929,13 @@ Planeswalker - Elspeth
 no text
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elspeth_knight_errant.jpg
+
+Elspeth Tirel
+3 W W
+Planeswalker - Elspeth
+no text
+SVar:Rarity:Mythic
+SVar:Picture:http://serv1.tcgimages.eu/img/cards/Scars_of_Mirrodin/elspeth_tirel.jpg
 
 Elven Cache
 2 G G
@@ -9995,6 +9141,15 @@ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_shot.jpg
 
+Emberstrike Duo
+1 BR
+Creature Elemental Warrior Shaman
+Whenever you cast a black spell, Emberstrike Duo gets +1/+1 until end of turn.\r\nWhenever you cast a red spell, Emberstrike Duo gains first strike until end of turn.
+1/1
+SVar:BuffedBy:Spell.Black,Spell.Red
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/emberstrike_duo.jpg
+
 Emerald Dragonfly
 1 G
 Creature Insect
@@ -10147,6 +9302,13 @@ Enchant creature
 enPumpCurse:-2/-2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enfeeblement.jpg
+
+Engineered Plague
+2 B
+Enchantment
+As Engineered Plague comes into play, choose a creature type.\r\nAll creatures of the chosen type get -1/-1.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/engineered_plague.jpg
 
 Enlightened Tutor
 W
@@ -10363,6 +9525,14 @@ When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternity_snare.jpg
 
+Eternity Vessel
+6
+Artifact
+Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total.\r\nLandfall - Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
+Landfall
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eternity_vessel.jpg
+
 Ethercaste Knight
 W U
 Artifact Creature Human Knight
@@ -10428,6 +9598,15 @@ spBounceAll:Creature:Hand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evacuation.jpg
 
+Evaporate
+2 R
+Sorcery
+no text
+spDamageAll:Creature.White,Creature.Blue:1:Evaporate deals 1 damage to each creature that's white or blue.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/evaporate.jpg
+
 Everflowing Chalice
 0
 Artifact
@@ -10436,6 +9615,14 @@ Multikicker 2
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/everflowing_chalice.jpg
+
+Evincar's Justice
+2 B B
+Sorcery
+no text
+spDamageAll:Player,Creature:2:Evincar's Justice deals 2 damage to each creature and each player.
+SVar:Buyback:3
+SVar:Picture:http://www.wizards.com/global/images/magic/general/evincars_justice.jpg
 
 Eviscerator
 3 B B
@@ -10603,12 +9790,29 @@ spDestroyTgt:Creature.nonElf
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eyeblights_ending.jpg
 
+Fable of Wolf and Owl
+3 GU GU GU
+Enchantment
+Whenever you play a green spell, you may put a 2/2 green Wolf creature token into play.\r\nWhenever you play a blue spell, you may put a 1/1 blue Bird creature token with flying into play.
+SVar:BuffedBy:Spell.Green,Spell.Blue
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fable_of_wolf_and_owl.jpg
+
 Fabricate
 2 U
 Sorcery
 Search your library for an artifact card, reveal it, and put it into your hand. Then shuffle your library.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fabricate.jpg
+
+Faceless Butcher
+2 B B
+Creature Nightmare Horror
+When Faceless Butcher comes into play, remove target creature other than Faceless Butcher from the game.\r\nWhen Faceless Butcher is destroyed, return the removed card to play under its owner's control.
+2/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108840.jpg
 
 Fact or Fiction
 3 U
@@ -10713,6 +9917,14 @@ Counter target creature spell.
 spCounter:Spell:Type(Creature):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://gatherer.wizards.com/handlers/image.ashx?multiverseid=6533&type=card
+
+Famine
+3 B B
+Sorcery
+no text
+spDamageAll:Player,Creature:3:Famine deals 3 damage to each creature and each player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/famine.jpg
 
 Fanatical Fever
 2 G G
@@ -10970,6 +10182,14 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fervor.jpg
 
+Festering Wound
+1 B
+Enchantment Aura
+At the beginning of your upkeep, you may put an infection counter on Festering Wound.\r\nAt the beginning of the upkeep of enchanted creature's controller, Festering Wound deals X damage to that player, where X is the number of infection counters on Festering Wound.
+Enchant Creature Curse
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/festering_wound.jpg
+
 Festival of Trokin
 W
 Sorcery
@@ -11213,6 +10433,20 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fire_sprites.jpg
 
+Fire Tempest
+5 R R
+Sorcery
+no text
+spDamageAll:Player,Creature:5:Fire Tempest deals 5 damage to each creature and each player.
+SVar:Picture:http://serv1.tcgimages.eu/img/cards/Portal/fire_tempest.jpg
+
+Fireball
+X R
+Sorcery
+Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.\r\nFireball costs 1 more to cast for each target beyond the first.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fireball.jpg
+
 Firebolt
 R
 Sorcery
@@ -11229,6 +10463,14 @@ Flying
 abPump R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firefly.jpg
+
+Fires of Yavimaya
+1 R G
+Enchantment
+no text
+StaticEffect:Play:Permanents you Control:Keyword/Haste:Type.Creature:Creatures you control have haste.
+abPumpTgtC 0 Sac-CARDNAME:+2/+2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fires_of_yavimaya.jpg
 
 Firescreamer
 3 B
@@ -12247,6 +11489,14 @@ tap: add G
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/ia/en-us/card2568.jpg
 
+Gaddock Teeg
+G W
+Legendary Creature Kithkin Advisor
+Noncreature spells with converted mana cost 4 or greater can't be cast.\r\nNoncreature spells with X in their mana costs can't be cast.
+2/2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gaddock_teeg.jpg
+
 Gaea's Anthem
 1 G G
 Enchantment
@@ -12297,6 +11547,13 @@ Counter target blue spell.
 spCounter:Spell:Color(blue):Graveyard:None
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gainsay.jpg
+
+Gale Force
+4 G
+Sorcery
+no text
+spDamageAll:Creature.withFlying:5:Gale Force deals 5 damage to each creature with flying.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gale_force.jpg
 
 Galina's Knight
 W U
@@ -12543,6 +11800,15 @@ abPumpTgtC T:+1/+1
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96901.jpg
 
+Ghostfire
+2 R
+Instant
+Ghostfire is colorless.\r\n
+spDamageTgtCP:3
+CARDNAME is colorless.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostfire.jpg
+
 Ghostly Changeling
 2 B
 Creature Shapeshifter
@@ -12748,6 +12014,14 @@ no text
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gilder_bairn.jpg
 
+Gilt-Leaf Archdruid
+3 G G
+Creature Elf Druid
+Whenever you play a Druid spell, you may draw a card.\r\nTap seven untapped Druids you control: Gain control of all lands target player controls.
+3/3
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_archdruid.jpg
+
 Giltspire Avenger
 G W U
 Creature Human Soldier
@@ -12794,6 +12068,14 @@ WheneverKeyword:EntersBattleField:Type/Artifact:Play:KeywordPumpEOT/Unblockable!
 SVar:BuffedBy:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glassdust_hulk.jpg
+
+Glasses of Urza
+1
+Artifact
+tap: Look at target player's hand.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/glasses_of_urza.jpg
 
 Glaze Fiend
 1 B
@@ -13033,6 +12315,13 @@ no text
 abDamageTgtCP T:2:Drawback$DamageYou/3:Goblin Artillery deals 2 damage to target creature or player and 3 damage to you.:Goblin Artillery - deal damage to creature or player and you.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_artillery.jpg
+
+Goblin Assault
+2 R
+Enchantment
+At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.\r\nGoblin creatures attack each turn if able.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_assault.jpg
 
 Goblin Balloon Brigade
 R
@@ -13471,6 +12760,17 @@ WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:Pay
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_wagon.jpg
 
+Goblin Warchief
+1 R R
+Creature Goblin 
+Goblin spells you cast cost 1 less to cast.\r\nGoblin creatures you control have haste.
+2/2
+CostChange:Player:Less:1:Spell:All:Goblin:NoSpecial
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Goblin
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_warchief.jpg
+
 Godless Shrine
 no cost
 Land Plains Swamp
@@ -13656,6 +12956,17 @@ HandSize = INF Self
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graceful_adept.jpg
 
+Grand Arbiter Augustin IV
+2 W U
+Legendary Creature Human Advisor
+White spells you cast cost 1 less to cast.\r\nBlue spells you cast cost 1 less to cast.\r\nSpells your opponents cast cost 1 more to cast.
+2/3
+CostChange:Player:Less:1:Spell:white:All:NoSpecial
+CostChange:Player:Less:1:Spell:blue:All:NoSpecial
+CostChange:Opponent:More:1:Spell:All:All:NoSpecial
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_arbiter_augustin_iv.jpg
+
 Grand Coliseum
 no cost
 Land
@@ -13761,6 +13072,15 @@ Persist
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gravelgill_axeshark.jpg
 
+Gravelgill Duo
+2 UB
+Creature Merfolk Rogue Warrior
+Whenever you cast a blue spell, Gravelgill Duo gets +1/+1 until end of turn.\r\nWhenever you cast a black spell, Gravelgill Duo gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
+2/1
+SVar:BuffedBy:Spell.Blue,Spell.Black
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gravelgill_duo.jpg
+
 Graven Cairns
 no cost
 Land
@@ -13801,6 +13121,15 @@ Trample
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_hunter.jpg
+
+Graypelt Refuge
+no cost
+Land
+Graypelt Refuge enters the battlefield tapped.\r\nWhen Graypelt Refuge enters the battlefield, you gain 1 life.
+tap: add W
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/graypelt_refuge.jpg
 
 Grayscaled Gharial
 U
@@ -14180,6 +13509,15 @@ spCounter:Spell:Type(Instant) Color(blue):Graveyard:None
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guttural_response.jpg
 
+Guul Draz Specter
+2 B B
+Creature Specter
+Guul Draz Specter gets +3/+3 as long as an opponent has no cards in hand.\r\nWhenever Guul Draz Specter deals combat damage to a player, that player discards a card.
+2/2
+Flying
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guul_draz_specter.jpg
+
 Guul Draz Vampire
 B
 Creature Vampire Rogue
@@ -14436,6 +13774,13 @@ Flying
 WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:TapPermanent:NormalInput/Creature:ASAP:No_Condition:ControllerUpkeep:At the beginning of your upkeep, tap target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harrier_griffin.jpg
+
+Harrow
+2 G
+Instant
+As an additional cost to cast Harrow, sacrifice a land.\r\nSearch your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/harrow.jpg
 
 Haru-Onna
 3 G
@@ -15594,6 +14939,14 @@ Exile all cards from target player's hand and graveyard.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/identity_crisis.jpg
 
+Idyllic Tutor
+2 W
+Sorcery
+Search your library for an enchantment card, reveal it, and put it into your hand. Then shuffle your library.
+spTutor:Enchantment:Hand
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/idyllic_tutor.jpg
+
 Ifh-Biff Efreet
 2 G G
 Creature Efreet
@@ -16154,6 +15507,15 @@ enPump:CARDNAME can't be blocked except by Walls.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invisibility.jpg
 
+Iona, Shield of Emeria
+6 W W W
+Legendary Creature Angel
+As Iona, Shield of Emeria enters the battlefield, choose a color.\r\nYour opponents can't cast spells of the chosen color.
+7/7
+Flying
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/iona_shield_of_emeria.jpg
+
 Iona's Judgment
 4 W
 Sorcery
@@ -16642,6 +16004,13 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/joraga_bard.jpg
 
+Journey to Nowhere
+1 W
+Enchantment
+When Journey to Nowhere enters the battlefield, exile target creature.\r\nWhen Journey to Nowhere leaves the battlefield, return the exiled card to the battlefield under its owner's control.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/journey_to_nowhere.jpg
+
 Jovial Evil
 2 B
 Sorcery
@@ -16801,6 +16170,15 @@ At the beginning of your upkeep, Juzam Djinn deals 1 damage to you.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/an/en-us/card922.jpg
 
+Jwar Isle Refuge
+no cost
+Land
+Jwar Isle Refuge enters the battlefield tapped.\r\nWhen Jwar Isle Refuge enters the battlefield, you gain 1 life.
+tap: add U
+tap: add B 
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jwar_isle_refuge.jpg
+
 Jwari Scuttler
 2 U
 Creature Crab
@@ -16808,6 +16186,14 @@ no text
 2/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jwari_scuttler.jpg
+
+Kabira Crossroads
+no cost
+Land
+Kabira Crossroads enters the battlefield tapped.\r\nWhen Kabira Crossroads enters the battlefield, you gain 2 life.
+tap: add W
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kabira_crossroads.jpg
 
 Kabuto Moth
 2 W
@@ -17093,6 +16479,15 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_blademaster.jpg
 
+Kazandu Refuge
+no cost
+Land
+Kazandu Refuge enters the battlefield tapped.\r\nWhen Kazandu Refuge enters the battlefield, you gain 1 life.
+tap: add R
+tap: add G
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_refuge.jpg
+
 Kazandu Tuskcaller
 1 G
 Creature Human Shaman
@@ -17358,6 +16753,14 @@ Flying
 WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:DrawCards/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Kingfisher is put into a graveyard from the battlefield, draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kingfisher.jpg
+
+Kinsbaile Borderguard
+1 W W
+Creature Kithkin Soldier
+Kinsbaile Borderguard comes into play with a +1/+1 counter on it for each other Kithkin you control.\r\nWhen Kinsbaile Borderguard is put into a graveyard from play, put a 1/1 white Kithkin Soldier creature token into play for each counter on it.
+1/1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kinsbaile_borderguard.jpg
 
 Kinsbaile Cavalier
 3 W
@@ -18013,6 +17416,15 @@ spCounter:Spell:None:Topdeck:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lapse_of_certainty.jpg
 
+Laquatus's Champion
+4 B B
+Creature Nightmare Horror
+When Laquatus's Champion enters the battlefield, target player loses 6 life.\r\nWhen Laquatus's Champion leaves the battlefield, that player gains 6 life.
+6/3
+RegenerateMe:B
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/laquatuss_champion.jpg
+
 Last Breath
 1 W
 Instant
@@ -18105,6 +17517,13 @@ Sorcery
 no text
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavalanche.jpg
+
+Lay of the Land
+G
+Sorcery
+Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
+spTutor:Land.Basic:Hand
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lay_of_the_land.jpg
 
 Lay Waste
 3 R
@@ -18294,6 +17713,14 @@ no text
 2/2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lich_lord_of_unx.jpg
+
+Lichenthrope
+3 G G
+Creature Plant Fungus
+If damage would be dealt to Lichenthrope, put that many -1/-1 counters on it instead.\r\nAt the beginning of your upkeep, remove a -1/-1 counter from Lichenthrope
+5/5
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lichenthrope.jpg
 
 Life Burst
 1 W
@@ -19116,6 +18543,14 @@ Destroy target nonland permanent and all other permanents with the same name as 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_pulse.jpg
 
+Maga, Traitor to Mortals
+X B B B
+Legendary Creature Human Wizard
+Maga, Traitor to Mortals enters the battlefield with X +1/+1 counters on it.\r\nWhen Maga enters the battlefield, target player loses life equal to the number of +1/+1 counters on it.
+0/0
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/maga_traitor_to_mortals.jpg
+
 Magefire Wings
 U R
 Enchantment Aura
@@ -19367,6 +18802,16 @@ Counter target spell unless its controller pays 1.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_tithe.jpg
 
+Mana Vault
+1
+Artifact
+At the beginning of your upkeep, you may pay 4. If you do, untap Mana Vault.\r\nAt the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.
+tap: add 3
+CARDNAME doesn't untap during your untap step.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mana_vault.jpg
+
 Manakin
 2
 Artifact Creature Construct
@@ -19565,6 +19010,14 @@ enPump:Protection from black & Protection from red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_law_and_grace.jpg
 
+Mask of Riddles
+U B
+Artifact Equipment
+Equipped creature has fear.\r\nWhenever equipped creature deals combat damage to a player, you may draw a card. 
+eqPump 2:Fear
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mask_of_riddles.jpg
+
 Masked Admirers
 2 G G
 Creature Elf Shaman
@@ -19609,6 +19062,15 @@ no text
 1/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_decoy.jpg
+
+Master of Etherium
+2 U
+Artifact Creature Vedalken Wizard
+Master of Etherium's power and toughness are each equal to the number of artifacts you control.\r\nOther artifact creatures you control get +1/+1.
+1/1
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_etherium.jpg
 
 Master of the Wild Hunt
 2 G G
@@ -19669,6 +19131,14 @@ When Meadowboon leaves play, put a +1/+1 counter on each creature you control.
 3/3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/meadowboon.jpg
+
+Meddling Mage
+U W
+Creature Human Wizard
+As Meddling Mage enters the battlefield, name a nonland card.\r\nThe named card can't be cast.
+2/2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/meddling_mage.jpg
 
 Meekstone
 1
@@ -19790,6 +19260,14 @@ no text
 When CARDNAME enters the battlefield, draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_of_secrets.jpg
+
+Merchant Scroll
+1 U
+Sorcery
+Search your library for a blue instant card, reveal that card, and put it into your hand. Then shuffle your library.
+spTutor:Instant.Blue:Hand
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_scroll.jpg
 
 Merchant Ship
 U
@@ -20437,6 +19915,14 @@ Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molting_harpy.jpg
 
+Momentous Fall
+2 G G
+Instant
+As an additional cost to cast Momentous Fall, sacrifice a creature.\r\nYou draw cards equal to the sacrificed creature's power, then you gain life equal to its toughness.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/momentous_fall.jpg
+
 Moment's Peace
 1 G
 Instant
@@ -20846,6 +20332,15 @@ Transmute:1 U U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/muddle_the_mixture.jpg
 
+Mul Daya Channelers
+1 G G
+Creature Elf Druid Shaman
+As long as the top card of your library is a creature card, Mul Daya Channelers gets +3/+3.\r\nAs long as the top card of your library is a land card, Mul Daya Channelers has "tap: Add two mana of any one color to your mana pool."
+2/2
+Play with the top card of your library revealed.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mul_daya_channelers.jpg
+
 Mulldrifter
 4 U
 Creature Elemental
@@ -20954,6 +20449,16 @@ Devour:2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mycoloth.jpg
 
+Mycosynth Golem
+11
+Artifact Creature Golem
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\nArtifact creature spells you cast have affinity for artifacts. (They cost 1 less to cast for each artifact you control.)
+4/5
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+CostChange:Player:Less:1:Spell:All:Artifact/Creature:Affinity/Artifact/All Conditions
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mycosynth_golem.jpg
+
 Myr Enforcer
 7
 Artifact Creature Myr
@@ -21001,6 +20506,15 @@ Enchant creature
 When CARDNAME enters the battlefield, tap enchanted creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_restraints.jpg
+
+Mystic Snake
+1 G U U
+Creature Snake
+When Mystic Snake comes into play, counter target spell.
+2/2
+Flash
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
 
 Mystical Tutor
 U
@@ -21907,6 +21421,13 @@ CARDNAME can't be countered.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/obliterate.jpg
 
+Oblivion Ring
+2 W
+Enchantment
+When Oblivion Ring comes into play, remove another target nonland permanent from the game.\r\nWhen Oblivion Ring leaves play, return the removed card to play under its owner's control.
+SVar:Rarity:Common
+SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card139414.jpg
+
 Oboro, Palace in the Clouds
 no cost
 Legendary Land
@@ -22079,6 +21600,14 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/omen.jpg
 
+Omnath, Locus of Mana
+2 G
+Legendary Creature Elemental
+Green mana doesn't empty from your mana pool as steps and phases end.\r\nOmnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.
+1/1
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/omnath_locus_of_mana.jpg
+
 Ondu Cleric
 1 W
 Creature Kor Cleric Ally
@@ -22150,6 +21679,15 @@ Look at the top card of your library. You may put that card on the bottom of you
 Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card22988.jpg
+
+Oracle of Mul Daya
+3 G
+Creature Elf Shaman
+You may play an additional land on each of your turns.\r\nYou may play the top card of your library if it's a land card.
+2/2
+Play with the top card of your library revealed.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/oracle_of_mul_daya.jpg
 
 Oran-Rief Survivalist
 1 G
@@ -22432,6 +21970,14 @@ Exalted
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/outrider_of_jhess.jpg
 
+Overbeing of Myth
+GU GU GU GU GU
+Creature Spirit Avatar
+Overbeing of Myth's power and toughness are each equal to the number of cards in your hand.\r\nAt the beginning of your draw step, draw an additional card.
+1/1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/overbeing_of_myth.jpg
+
 Overgrown Battlement
 1 G
 Creature Wall
@@ -22527,6 +22073,14 @@ Enchant creature
 enPumpCurse:CARDNAME can't attack or block.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pacifism.jpg
+
+Painter's Servant
+2
+Artifact Creature Scarecrow
+As Painter's Servant enters the battlefield, choose a color.\r\nAll cards that aren't on the battlefield, spells, and permanents are the chosen color in addition to their other colors.
+1/3
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/painters_servant.jpg
 
 Paladin en-Vec
 1 W W
@@ -22868,6 +22422,13 @@ Target opponent reveals his or her hand. You choose a card from it. That player 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/perish_the_thought.jpg
 
+Personal Tutor
+U
+Sorcery
+Search your library for a sorcery card and reveal that card. Shuffle your library, then put the card on top of it.
+spTutor:Sorcery:TopOfLibrary
+SVar:Picture:http://www.wizards.com/global/images/magic/general/personal_tutor.jpg
+
 Persuasion
 3 U U
 Enchantment Aura
@@ -22944,6 +22505,15 @@ Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_forces.jpg
 
+Phantom Centaur
+2 G G
+Creature Centaur Spirit
+Phantom Centaur enters the battlefield with three +1/+1 counters on it.\r\nIf damage would be dealt to Phantom Centaur, prevent that damage. Remove a +1/+1 counter from Phantom Centaur.
+2/0
+Protection from black
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_centaur.jpg
+
 Phantom Monster
 3 U
 Creature Phantasm
@@ -22982,6 +22552,15 @@ Fear
 Cumulative upkeep:B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phobian_phantasm.jpg
+
+Phylactery Lich
+B B B
+Creature Zombie
+As Phylactery Lich enters the battlefield, put a phylactery counter on an artifact you control.\r\nWhen you control no permanents with phylactery counters on them, sacrifice Phylactery Lich.
+5/5
+Indestructible
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/phylactery_lich.jpg
 
 Phyrexian Arena
 1 B B
@@ -23127,6 +22706,14 @@ no text
 2/4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pillarfield_ox.jpg
+
+Pillory of the Sleepless
+1 W B
+Enchantment Aura
+Enchanted creature can't attack or block.\r\nEnchanted creature has "At the beginning of your upkeep, you lose 1 life."
+Enchant creature
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pillory_of_the_sleepless.jpg
 
 Pincher Beetles
 2 G
@@ -23400,6 +22987,15 @@ spDestroyTgt:Artifact,Land
 Suspend:4:1 R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/plunder.jpg
+
+Poison Arrow
+4 B B
+Sorcery
+Destroy target nonblack creature. You gain 3 life.
+spDestroyTgt:Creature.nonBlack:Drawback$YouGainLife/3
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/poison_arrow.jpg
 
 Poison the Well
 2 BR BR
@@ -23805,6 +23401,15 @@ no text
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_drain.jpg
 
+Psychic Membrane
+2 U
+Creature Wall
+no text
+0/3
+Defender
+WheneverKeyword:Blocks:Self:Play:DrawCards/1:ControllingPlayer_Self:ASAP:Yes_No:No Special Condition:Whenever Psychic Membrane blocks, you may draw a card.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_membrane.jpg
+
 Psychic Spear
 B
 Sorcery
@@ -23820,6 +23425,15 @@ Whenever enchanted land becomes tapped, Psychic Venom deals 2 damage to that lan
 Enchant Land Curse
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_venom.jpg
+
+Psychotic Haze
+2 B B
+Instant
+no text
+spDamageAll:Player,Creature:1:Psychotic Haze deals 1 damage to each creature and each player.
+Madness:1 B
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/psychotic_haze.jpg
 
 Psychotrope Thallid
 2 G
@@ -23930,6 +23544,16 @@ Haste
 abPump R:+1/+0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_charger.jpg
+
+Pyre Zombie
+1 B R
+Creature Zombie
+no text
+2/1
+abDamageTgtCP 1 R R Sac-CARDNAME:2
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:PayMana/1 B B:ControllerUpkeep:At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay 1 B B. If you do, return Pyre Zombie from your graveyard to your hand.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pyre_zombie.jpg
 
 Pyretic Ritual
 1 R
@@ -24194,6 +23818,13 @@ no text
 Swampwalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6558.jpg
+
+Rain of Embers
+1 R
+Sorcery
+no text
+spDamageAll:Player,Creature:1:Rain of Embers deals 1 damage to each creature and each player.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rain_of_embers.jpg
 
 Rain of Tears
 1 B B
@@ -24571,6 +24202,13 @@ Fear
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83418.jpg
 
+Reach of Branches
+4 G
+Tribal Instant Treefolk
+Put a 2/5 green Treefolk Shaman creature token into play.\r\nWhenever a Forest comes into play under your control, you may return Reach of Branches from your graveyard to your hand.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reach_of_branches.jpg
+
 Reanimate
 B
 Sorcery
@@ -24817,6 +24455,16 @@ Whenever you play a legendary spell, draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reki_the_history_of_kamigawa.jpg
 
+Relentless Rats
+1 B B
+Creature Rat
+Relentless Rats gets +1/+1 for each other creature in play named Relentless Rats.\r\nA deck can have any number of cards named Relentless Rats.
+2/2
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73573.jpg
+
 Reliquary Tower
 no cost
 Land
@@ -25005,6 +24653,15 @@ Sorcery
 Return target creature card from your graveyard to play.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/resurrection.jpg
+
+Resuscitate
+1 G
+Instant
+Until end of turn, creatures you control gain "1: Regenerate this creature." (NOTE: This ability is not currently implemented.)
+SVar:RemAIDeck:True
+SVar:PlayMain1:TRUE
+SVar:Rarity:None
+SVar:Picture:http://www.wizards.com/global/images/magic/general/resuscitate.jpg
 
 Retribution of the Meek
 2 W
@@ -25942,6 +25599,15 @@ CARDNAME can't be the target of spells or abilities your opponents control.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sacred_wolf.jpg
 
+Safehold Duo
+3 GW
+Creature Elf Warrior Shaman
+Whenever you cast a green spell, Safehold Duo gets +1/+1 until end of turn.\r\nWhenever you cast a white spell, Safehold Duo gains vigilance until end of turn.
+2/4
+SVar:BuffedBy:Spell.Green,Spell.White
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_duo.jpg
+
 Safehold Elite
 1 GW
 Creature Elf Scout
@@ -25950,6 +25616,13 @@ no text
 Persist
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/safehold_elite.jpg
+
+Safewright Quest
+GW
+Sorcery
+Search your library for a Forest or Plains card, reveal it, and put it into your hand. Then shuffle your library.
+spTutor:Forest,Plains:Hand
+SVar:Picture:http://www.wizards.com/global/images/magic/general/safewright_quest.jpg
 
 Sage Aven
 3 U
@@ -26819,6 +26492,13 @@ Islandwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/6e/en-us/card14538.jpg
 
+Seismic Shudder
+1 R
+Instant
+no text
+spDamageAll:Creature.withoutFlying:1:Seismic Shudder deals 1 damage to each creature without flying.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seismic_shudder.jpg
+
 Seismic Strike
 2 R
 Instant
@@ -26843,6 +26523,15 @@ As long as you control a plains, Sejiri Merfolk has first strike and lifelink.
 2/1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_merfolk.jpg
+
+Sejiri Refuge
+no cost
+Land
+Sejiri Refuge enters the battlefield tapped.\r\nWhen Seijiri Refuge enters the battlefield, you gain 1 life.
+tap: add W
+tap: add U
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sejiri_refuge.jpg
 
 Sejiri Steppe
 no cost
@@ -26881,6 +26570,14 @@ no text
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/selesnya_signet.jpg
+
+Sengir Autocrat
+3 B
+Creature Human
+When Sengir Autocrat comes into play, put three 0/1 black Serf creature tokens into play.\r\nWhen Sengir Autocrat leaves play, remove all Serf tokens from the game.
+2/2
+SVar:Rarity:Uncommon
+SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106638.jpg
 
 Sengir Bats
 1 B B
@@ -27109,6 +26806,16 @@ Scry 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serum_visions.jpg
 
+Sever Soul
+3 B B
+Sorcery
+Destroy target nonblack creature. It can't be regenerated. You gain life equal to its toughness.
+spDestroyTgt:Creature.nonBlack:NoRegen:Drawback$YouGainLife/dX
+SVar:dX:Count$TgtCardToughness
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sever_soul.jpg
+
 Severed Legion
 1 B B
 Creature Zombie
@@ -27183,6 +26890,15 @@ Whenever Shadowmage Infiltrator deals combat damage to a player, you may draw a 
 Fear
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadowmage_infiltrator.jpg
+
+Shadowstorm
+R
+Sorcery
+no text
+spDamageAll:Creature.withShadow:2:Shadowstorm deals 2 damage to each creature with shadow.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shadowstorm.jpg
 
 Shambling Remains
 1 B R
@@ -27943,6 +27659,14 @@ WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:DrawCards/
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sire_of_the_storm.jpg
 
+Siren's Call
+U
+Instant
+Cast Siren's Call only during an opponent's turn, before attackers are declared.  Creatures the active player controls attack this turn if able.  At the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sirens_call.jpg
+
 Sisay's Ring
 4
 Artifact
@@ -28084,6 +27808,14 @@ Sacrifice CARDNAME: Add B to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skull_of_ramos.jpg
+
+Skullclamp
+1
+Artifact Equipment
+Equipped creature gets +1/-1.\r\nWhen equipped creature is put into a graveyard, draw two cards.
+eqPump 1:+1/-1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skullclamp.jpg
 
 Skullmulcher
 4 G
@@ -28300,6 +28032,14 @@ Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slay.jpg
 
+Sleeper Agent
+B
+Creature Minion
+When Sleeper Agent comes into play, target opponent gains control of it.\r\nAt the beginning of your upkeep, Sleeper Agent deals 2 damage to you.
+3/3
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sleeper_agent.jpg
+
 Sleeper's Guile
 2 B
 Enchantment Aura
@@ -28422,6 +28162,14 @@ Whenever Slith Predator deals combat damage to a player, put a +1/+1 counter on 
 Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_predator.jpg
+
+Slith Strider
+1 U U
+Creature Slith
+Whenever Slith Strider becomes blocked, draw a card.\r\nWhenever Slith Strider deals combat damage to a player, put a +1/+1 counter on it.
+1/1
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/slith_strider.jpg
 
 Sliver Legion
 W U B R G
@@ -28631,6 +28379,14 @@ spDestroyTgt:Artifact,Enchantment:Drawback$YouGainLife/4
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_offering.jpg
+
+Solemn Simulacrum
+4
+Artifact Creature Golem
+When Solemn Simulacrum comes into play, you may search your library for a basic land card and put that card into play tapped. If you do, shuffle your library.\r\nWhen Solemn Simulacrum is put into a graveyard from play, you may draw a card.
+2/2
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/solemn_simulacrum.jpg
 
 Solidarity
 3 W
@@ -29417,6 +29173,14 @@ When CARDNAME enters the battlefield, you may search your library for up to thre
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squadron_hawk.jpg
 
+Squall
+2 G
+Sorcery
+no text
+spDamageAll:Creature.withFlying:2:Squall deals 2 damage to each creature with flying.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/squall.jpg
+
 Squall Drifter
 1 W
 Snow Creature Elemental
@@ -29674,6 +29438,13 @@ spDrawCards:1:Draw a card. Proliferate.:Steady Progress - draw a card, prolifera
 Proliferate
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Scars_of_Mirrodin/steady_progress.jpg
 
+Steam Blast
+2 R
+Sorcery
+no text
+spDamageAll:Player,Creature:2:Steam Blast deals 2 damage to each creature and each player.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steam_blast.jpg
+
 Steam Frigate
 2 U
 Creature Human Pirate
@@ -29740,6 +29511,21 @@ Defender
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card48910.jpg
+
+Steelshaper's Gift
+W
+Sorcery
+Search your library for an Equipment card, reveal that card, and put it into your hand. Then shuffle your library.
+spTutor:Equipment:Hand
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steelshapers_gift.jpg
+
+Steely Resolve
+1 G
+Enchantment
+As Steely Resolve comes into play, choose a creature type.\r\nCreatures of the chosen type have shroud. 
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/steely_resolve.jpg
 
 Steppe Lynx
 W
@@ -29818,6 +29604,13 @@ tap: add G
 Comes into play tapped.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stirring_wildwood.jpg
+
+Stitch Together
+B B
+Sorcery
+Return target creature card from your graveyard to your hand.\r\nThreshold - Return that card from your graveyard to the battlefield instead if seven or more cards are in your graveyard.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stitch_together.jpg
 
 Stolen Grain
 4 B B
@@ -29906,6 +29699,16 @@ Trample
 WheneverKeyword:Attacks:No_Initiator:Play:StatsPumpEOT/2/2:Initiating_Card:ASAP:No_Condition:Initiator - OwnedByController!Initiator - Has Keyword/Trample:Whenever a creature you control with trample attacks, it gets +2/+2 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonebrow_krosan_hero.jpg
+
+Stonecloaker
+2 W
+Creature Gargoyle
+When Stonecloaker comes into play, return a creature you control to its owner's hand.\r\nWhen Stonecloaker comes into play, remove target card in a graveyard from the game.
+3/2
+Flash
+Flying
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stonecloaker.jpg
 
 Stoneforge Mystic
 1 W
@@ -30263,6 +30066,16 @@ spDiscardOpp:AtRandom:1:Drawback$OppDiscard/1:Target opponent discards a card at
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stupor.jpg
 
+Sturdy Hatchling
+3 GU
+Creature Elemental
+Sturdy Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.\r\nWhenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
+6/6
+abPump GU:Shroud
+SVar:BuffedBy:Spell.Blue,Spell.Green
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Sturdy_Hatchling.jpg
+
 Subversion
 3 B B
 Enchantment
@@ -30297,6 +30110,14 @@ Comes into play tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfur_vent.jpg
+
+Sulfurous Blast
+2 R R
+Instant
+no text
+spDamageAll:Player,Creature:X:Sulfurous Blast deals 2 damage to each creature and each player. If you cast this spell during your main phase, Sulfurous Blast deals 3 damage to each creature and each player instead.
+SVar:X:Count$IfMainPhase.3.2
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfurous_blast.jpg
 
 Sulfurous Springs
 no cost
@@ -30603,6 +30424,15 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sustenance.jpg
 
+Sutured Ghoul
+4 B B B
+Creature Zombie
+As Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.\r\nSutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
+1/1
+Trample
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sutured_ghoul.jpg
+
 Svogthos, the Restless Tomb
 no cost
 Land
@@ -30667,6 +30497,42 @@ Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swat.jpg
 
+Swirling Sandstorm
+3 R
+Instant
+no text
+spDamageAll:Creature.withoutFlying:X:Threshold - Swirling Sandstorm deals 5 damage to each creature without flying if seven or more cards are in your graveyard.
+SVar:X:Count$Threshold.5.0
+SVar:Picture:http://www.wizards.com/global/images/magic/general/swirling_sandstorm.jpg
+
+Sword of Body and Mind
+3
+Artifact Equipment
+Equipped creature gets +2/+2 and has protection from green and from blue.\r\nWhenever equipped creature deals combat damage to a player, you put a 2/2 green Wolf creature token onto the battlefield and that player puts the top ten cards of his or her library into his or her graveyard.
+SVar:Rarity:Rare
+SVar:Picture:http://serv1.tcgimages.eu/img/cards/From_the_Vault_Relics/sword_of_body_and_mind.jpg
+
+Sword of Fire and Ice
+3
+Artifact Equipment
+Equipped creature gets +2/+2 and has protection from red and from blue.\r\nWhenever equipped creature deals combat damage to a player, Sword of Fire and Ice deals 2 damage to target creature or player and you draw a card.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_fire_and_ice.jpg
+
+Sword of Light and Shadow
+3
+Artifact Equipment
+Equipped creature gets +2/+2 and has protection from white and from black.\r\nWhenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_light_and_shadow.jpg
+
+Sword of the Meek
+2
+Artifact Equipment
+Equipped creature gets +1/+2.\r\nWhenever a 1/1 creature enters the battlefield under your control, you may return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_the_meek.jpg
+
 Sword of Vengeance
 3
 Artifact Equipment
@@ -30727,6 +30593,14 @@ When Sylvan Ranger enters the battlefield, you may search your library for a bas
 1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_ranger.jpg
+
+Sylvan Scrying
+2 G
+Sorcery
+Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.
+spTutor:Land:Hand
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_scrying.jpg
 
 Sylvan Tutor
 G
@@ -31051,6 +30925,15 @@ RegenerateMe:B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tattered_drake.jpg
 
+Tattermunge Duo
+2 RG
+Creature Goblin Warrior Shaman
+Whenever you cast a red spell, Tattermunge Duo gets +1/+1 until end of turn.\r\nWhenever you cast a green spell, Tattermunge Duo gains forestwalk until end of turn.
+2/3
+SVar:BuffedBy:Spell.Red,Spell.Green
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tattermunge_duo.jpg
+
 Tattermunge Maniac
 RG
 Creature Goblin Warrior
@@ -31166,6 +31049,7 @@ Tempered Steel
 Enchantment
 no text
 StaticEffect:Play:Permanents you Control:PTBonus/2/2:Type.Creature!Type.Artifact:Artifact creatures you control get +2/+2.
+SVar:Picture:http://serv4.tcgimages.eu/img/cards/Scars_of_Mirrodin/tempered_steel.jpg
 
 Tempest Drake
 1 W U
@@ -31500,6 +31384,15 @@ SVar:X:Count$TypeOppCtrlTapped.Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/theft_of_dreams.jpg
 
+Thelonite Hermit
+3 G
+Creature Elf Shaman
+Saproling creatures get +1/+1.\r\nWhen Thelonite Hermit is turned face up, put four 1/1 green Saproling creature tokens into play.
+1/1
+Morph:3 G G
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thelonite_hermit.jpg
+
 Thermal Blast
 4 R
 Instant
@@ -31561,6 +31454,15 @@ no text
 spDrawCards:3:Drawback$YouDiscard/2/UnlessDiscardType.Artifact:Draw three cards. Then discard two cards unless you discard an artifact card.:Thirst for Knowledge - Draw 3 cards, then discard 2 cards unless you discard an artifact.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thirst_for_knowledge.jpg
+
+Thistledown Duo
+2 WU
+Creature Kithkin Soldier Wizard
+Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn.\r\nWhenever you cast a blue spell, Thistledown Duo gains flying until end of turn.
+2/2
+SVar:BuffedBy:Spell.White,Spell.Blue
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thistledown_duo.jpg
 
 Thistledown Liege
 1 WU WU WU
@@ -31712,6 +31614,15 @@ spCounter:Spell:CMC(<=,4):Graveyard:None
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtbind.jpg
 
+Thoughtcast
+4 U
+Sorcery
+Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)\r\n
+spDrawCards:2:Draw two cards.:Thoughtcast - draw 2 cards.
+CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtcast.jpg
+
 Thoughtcutter Agent
 U B
 Artifact Creature Human Rogue
@@ -31833,6 +31744,15 @@ no text
 Flying
 Whenever CARDNAME deals combat damage to a player, proliferate.
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Scars_of_Mirrodin/thrummingbird.jpg
+
+Thunder of Hooves
+3 R
+Sorcery
+no text
+spDamageAll:Player,Creature.withoutFlying:X:Thunder of Hooves deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield.
+SVar:X:Count$TypeOnBattlefield.Beast
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_of_hooves.jpg
 
 Thunder Spirit
 1 W W
@@ -32040,6 +31960,14 @@ Each creature you control with a level counter on it gets +2/+2.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/time_of_heroes.jpg
 
+Time of Need
+1 G
+Sorcery
+Search your library for a legendary creature card, reveal it, and put it into your hand. Then shuffle your library.
+spTutor:Creature.Legendary:Hand
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/time_of_need.jpg
+
 Time Reversal
 3 U U
 Sorcery
@@ -32105,6 +32033,13 @@ Comes into play tapped.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tinder_farm.jpg
+
+Tinker
+2 U
+Sorcery
+As an additional cost to cast Tinker, sacrifice an artifact.\r\nSearch your library for an artifact card and put that card onto the battlefield. Then shuffle your library.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tinker.jpg
 
 Tireless Missionaries
 4 W
@@ -32194,6 +32129,15 @@ tap: add U to your mana pool for each Artifact you control.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolarian_academy.jpg
+
+Tolsimir Wolfblood
+4 G W
+Legendary Creature Elf Warrior
+Other green creatures you control get +1/+1.\r\nOther white creatures you control get +1/+1.
+3/4
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tolsimir_wolfblood.jpg
 
 Tome Scour
 U
@@ -32722,6 +32666,17 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trip_wire.jpg
 
+Triskelion
+6
+Artifact Creature Construct
+no text
+1/1
+etbCounter:P1P1:3
+abDamageTgtCP 0 SubCounter<P1P1/1>:1
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/triskelion.jpg
+
 Trokin High Guard
 3 W
 Creature Human Knight
@@ -33043,6 +32998,16 @@ abPump R:+1/-1
 Unearth:2 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_leotau.jpg
+
+Undead Warchief
+2 B B
+Creature Zombie 
+Zombie spells you cast cost 1 less to cast.\r\nZombie creatures you control get +2/+1.
+1/1
+CostChange:Player:Less:1:Spell:All:Zombie:NoSpecial
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undead_warchief.jpg
 
 Undercity Shade
 4 B
@@ -33490,6 +33455,15 @@ SVar:PlayMain1:TRUE
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampire_nocturnus.jpg
 
+Vampiric Embrace
+2 B B
+Enchantment Aura
+Enchanted creature gets +2/+2 and has flying.\r\nWhenever a creature dealt damage by enchanted creature this turn is put into a graveyard, put a +1/+1 counter on that creature.
+Enchant creature
+enPump:+2/+2/Flying & Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_embrace.jpg
+
 Vampiric Feast
 5 B B
 Sorcery
@@ -33635,6 +33609,16 @@ no text
 abPump 1 B B:-3/-0/Forestwalk
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veldrane_of_sengir.jpg
+
+Vendetta
+B
+Instant
+Destroy target nonblack creature. It can't be regenerated. You lose life equal to that creature's toughness.
+spDestroyTgt:Creature.nonBlack:NoRegen:Drawback$YouLoseLife/dX
+SVar:dX:Count$TgtCardToughness
+SVar:PlayMain1:TRUE
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vendetta.jpg
 
 Vendilion Clique
 1 U U
@@ -34439,6 +34423,16 @@ no text
 1/2
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/pk/en-us/card10483.jpg
+
+Voracious Hatchling
+3 WB
+Creature Elemental
+Voracious Hatchling enters the battlefield with four -1/-1 counters on it.\r\nWhenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling.\r\nWhenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.
+6/6
+Lifelink
+SVar:BuffedBy:Spell.White,Spell.Black
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/Voracious_Hatchling.jpg
 
 Vorosh, the Hunter
 3 G U B
@@ -35810,6 +35804,17 @@ WheneverKeyword:EntersBattleField:Type/Beast:Play:DrawCards/1:ControllingPlayer_
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wirewood_savage.jpg
 
+Wispmare
+2 W
+Creature Elemental
+When Wispmare enters the battlefield, destroy target enchantment.
+1/3
+Flying
+etbDestroyTgt:Enchantment
+SVar:Evoke:W
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wispmare.jpg
+
 Wistful Selkie
 GU GU GU
 Creature Merfolk Wizard
@@ -35827,6 +35832,15 @@ spDrawCardsTgt:2:Drawback$TgtDiscard/4:Target player draws two cards, then disca
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wistful_thinking.jpg
+
+Witch-Maw Nephilim
+G W U B
+Creature Nephilim
+Whenever you play a spell, you may put two +1/+1 counters on Witch-Maw Nephilim.\r\nWhenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
+1/1
+SVar:BuffedBy:Spell
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_maw_nephilim.jpg
 
 Wit's End
 5 B B
@@ -36077,6 +36091,15 @@ spDiscardTgt:TgtChoose:2/UnlessDiscardType.Artifact:Target player discards two c
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrench_mind.jpg
 
+Wren's Run Packmaster
+3 G
+Creature Elf Warrior
+Champion an Elf.\r\nEach Wolf you control has deathtouch.
+5/5
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wrens_run_packmaster.jpg
+
 Wretched Anurid
 1 B
 Creature Zombie Frog Beast
@@ -36245,6 +36268,16 @@ Trample
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/bd/en-us/card26631.jpg
 
+Yavimaya's Embrace
+5 G U U
+Enchantment Aura
+You control enchanted creature.\r\nEnchanted creature gets +2/+2 and has trample.
+Enchant creature
+enPump:+2/+2/Trample
+enControlCreature
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimayas_embrace.jpg
+
 Yawgmoth's Bargain
 4 B B
 Enchantment
@@ -36352,6 +36385,16 @@ no text
 WheneverKeyword:Attack - Alone:Self:Play:KeywordPumpEOT/Unblockable:Self:ASAP:No_Condition:No Special Condition:Whenever Yuan Shao's Infantry attacks alone, Yuan Shao's Infantry is unblockable this combat.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yuan_shaos_infantry.jpg
+
+Yuki-Onna
+3 R
+Creature Spirit
+When Yuki-Onna enters the battlefield, destroy target artifact.
+3/1
+etbDestroyTgt:Artifact
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Yuki-Onna to its owner's hand.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yuki_onna.jpg
 
 Zap
 2 R
