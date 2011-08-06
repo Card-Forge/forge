@@ -2,7 +2,6 @@ Name:Fill with Fright
 ManaCost:3 B
 Types:Sorcery
 Text:no text
-#K:spDiscardTgt:TgtChoose:2:Target player discards two cards.:Fill with Fright - target player discards cards
 A:SP$Discard|Cost$3 B|ValidTgts$Player|NumCards$2|Mode$TgtChoose|SpellDescription$Target player discards two cards.
 K:Scry 2
 SVar:Rarity:Common
