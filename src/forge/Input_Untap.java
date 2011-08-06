@@ -16,7 +16,8 @@ public class Input_Untap extends Input {
             c[i].setSickness(false);
         
         //if(isMarbleTitanInPlay()) marbleUntap();
-        if(!isStasisInPlay()) doUntap();
+        //if(!isStasisInPlay()) doUntap();
+        if(!AllZoneUtil.isCardInPlay("Stasis")) doUntap();
         
         if (AllZone.Phase.getTurn() != 1)
             GameActionUtil.executeUpkeepEffects();
@@ -31,6 +32,7 @@ public class Input_Untap extends Input {
     
     private boolean isMarbleTitanInPlay() //or Meekstone
     {
+    	/*
         CardList all = new CardList();
         all.addAll(AllZone.Human_Play.getCards());
         all.addAll(AllZone.Computer_Play.getCards());
@@ -42,8 +44,13 @@ public class Input_Untap extends Input {
         });
         
         return all.size() > 0;
+        */
+        
+        return AllZoneUtil.isCardInPlay("Marble Titan") || AllZoneUtil.isCardInPlay("Meekstone");
+
     }
     
+    /*
     private boolean isStasisInPlay() {
         CardList all = new CardList();
         all.addAll(AllZone.Human_Play.getCards());
@@ -57,7 +64,7 @@ public class Input_Untap extends Input {
         
         return all.size() > 0;
     }
-    
+    */
      
     private void doUntap()
     {
@@ -135,6 +142,7 @@ public class Input_Untap extends Input {
 
     
     private boolean isWinterOrbInEffect() {
+    	/*
     	CardList all = new CardList();
     	all.addAll(AllZone.Human_Play.getCards());
     	all.addAll(AllZone.Computer_Play.getCards());
@@ -142,7 +150,9 @@ public class Input_Untap extends Input {
     		public boolean addCard(Card c) {
     			return c.getName().equals("Winter Orb");
     		}
-    	});
+    	}); */
+    	
+    	CardList all = AllZoneUtil.getCardsInPlay("Winter Orb");
 
     	//if multiple Winter Orbs, check that at least 1 of them is untapped
     	for( int i = 0; i < all.size(); i++ ) {
