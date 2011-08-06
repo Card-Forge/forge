@@ -3209,14 +3209,16 @@ SVar:X:Count$TypeOppCtrlTapped.Creature
 Cruel Bargain
 B B B
 Sorcery
-(NOTE: "You lose half your life, rounded up." is not implemented.)
-spDrawCards:4:Drawback$LoseLifeYou/Count$YourLifeTotal/HalfUp:Draw four cards.:You lose half your life, rounded up.:Cruel Bargain - Draw cards and lose half your life, rounded up.
+no text
+spDrawCards:4:Drawback$LoseLifeYou/dX:Draw four cards. You lose half your life, rounded up.:Cruel Bargain - Draw cards and lose half your life, rounded up.
+SVar:dX:Count$YourLifeTotal/HalfUp
 
 Infernal Contract
 B B B
 Sorcery
-(NOTE: "You lose half your life, rounded up." is not implemented.)
-spDrawCards:4:Drawback$LoseLifeYou/Count$YourLifeTotal/HalfUp:Draw four cards.:You lose half your life, rounded up.:Infernal Contract - Draw cards and lose half your life, rounded up.
+no text
+spDrawCards:4:Drawback$LoseLifeYou/dX:Draw four cards. You lose half your life, rounded up.:Infernal Contract - Draw cards and lose half your life, rounded up.
+SVar:dX:Count$YourLifeTotal/HalfUp
 
 Theft of Dreams
 2 U
