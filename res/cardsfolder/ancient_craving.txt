@@ -2,7 +2,7 @@ Name:Ancient Craving
 ManaCost:3 B
 Types:Sorcery
 Text:no text
-K:spDrawCards:3:Drawback$YouLoseLife/3:You draw three cards and you lose 3 life.:Ancient Craving - draw 3 cards and lose 3 life.
+A:SP$Draw | Cost$ 3 B | NumCards$ 3 | SpellDescription$ You draw three cards and you lose 3 life. | SubAbility$ YouLoseLife/3
 SVar:Rarity:Rare
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/ancient_craving.jpg
 End
