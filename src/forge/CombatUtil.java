@@ -191,14 +191,14 @@ public class CombatUtil {
         
         if(attacker.getKeyword().contains("Fear")) {
             if(!blocker.getType().contains("Artifact")
-                    && !CardUtil.getColors(blocker).contains(Constant.Color.Black) /*&&
-                                                                                   !CardUtil.getColors(blocker).contains(Constant.Color.Colorless) */) //should not include colorless, right?
+                    && !blocker.isBlack() /*&&
+                        !CardUtil.getColors(blocker).contains(Constant.Color.Colorless) */) //should not include colorless, right?
             return false;
         }
         
         if (attacker.getKeyword().contains("CARDNAME can't be blocked by white creatures."))
         {
-        	if (!CardUtil.getColors(blocker).contains(Constant.Color.White))
+        	if (!blocker.isWhite())
         		return false;
         }
         
@@ -216,20 +216,20 @@ public class CombatUtil {
         
         if(/*attacker.getName().equals("Amrou Seekers")*/ attacker.getKeyword().contains("CARDNAME can't be blocked except by artifact creatures and/or white creatures.")) {
             if(!blocker.getType().contains("Artifact")
-                    && !CardUtil.getColors(blocker).contains(Constant.Color.White)) return false;
+                    && !blocker.isWhite()) return false;
         }
         
         if(attacker.getName().equals("Skirk Shaman")) {
             if(!blocker.getType().contains("Artifact")
-                    && !CardUtil.getColors(blocker).contains(Constant.Color.Red)) return false;
+                    && !blocker.isRed()) return false;
         }
         
         if(attacker.getName().equals("Manta Ray")) {
-            if(!CardUtil.getColors(blocker).contains(Constant.Color.Blue)) return false;
+            if(!blocker.isBlue()) return false;
         }
         
         if(attacker.getKeyword().contains("CARDNAME can't be blocked except by black creatures.")) {
-        	if(!CardUtil.getColors(blocker).contains(Constant.Color.Black))return false; 
+        	if(!blocker.isBlack())return false; 
         }
         
         if (attacker.getKeyword().contains("CARDNAME can't be blocked by Walls.") && blocker.isType("Wall")) return false;
@@ -453,15 +453,15 @@ public class CombatUtil {
         
         //this usually doesn't happen, unless the attacker got pro {color} after being blocked, or the defender became {color}
         if(attacker.getKeyword().contains("Protection from white")
-                && CardUtil.getColors(defender).contains(Constant.Color.White)) return false;
+                && defender.isWhite()) return false;
         if(attacker.getKeyword().contains("Protection from blue")
-                && CardUtil.getColors(defender).contains(Constant.Color.Blue)) return false;
+                && defender.isBlue()) return false;
         if(attacker.getKeyword().contains("Protection from black")
-                && CardUtil.getColors(defender).contains(Constant.Color.Black)) return false;
+                && defender.isBlack()) return false;
         if(attacker.getKeyword().contains("Protection from red")
-                && CardUtil.getColors(defender).contains(Constant.Color.Red)) return false;
+                && defender.isRed()) return false;
         if(attacker.getKeyword().contains("Protection from green")
-                && CardUtil.getColors(defender).contains(Constant.Color.Green)) return false;
+                && defender.isGreen()) return false;
         
         if(attacker.getKeyword().contains("Protection from artifacts") && defender.isArtifact()) return false;
         
@@ -578,15 +578,15 @@ public class CombatUtil {
         if(defender.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
         		&& attacker.isCreature() && attacker.isArtifact()) return false;
         if(defender.getKeyword().contains("Protection from white")
-                && CardUtil.getColors(attacker).contains(Constant.Color.White)) return false;
+                && attacker.isWhite()) return false;
         if(defender.getKeyword().contains("Protection from blue")
-                && CardUtil.getColors(attacker).contains(Constant.Color.Blue)) return false;
+                && attacker.isBlue()) return false;
         if(defender.getKeyword().contains("Protection from black")
-                && CardUtil.getColors(attacker).contains(Constant.Color.Black)) return false;
+                && attacker.isBlack()) return false;
         if(defender.getKeyword().contains("Protection from red")
-                && CardUtil.getColors(attacker).contains(Constant.Color.Red)) return false;
+                && attacker.isRed()) return false;
         if(defender.getKeyword().contains("Protection from green")
-                && CardUtil.getColors(attacker).contains(Constant.Color.Green)) return false;
+                && attacker.isGreen()) return false;
         
         if(defender.getKeyword().contains("Protection from artifacts") && attacker.isArtifact()) return false;
         
@@ -830,11 +830,11 @@ public class CombatUtil {
                     && (blocker.getType().contains("Goblin") || blocker.getKeyword().contains("Changeling"))) return false;
             
             //pro colors:
-            if(kw.equals("Protection from white") && CardUtil.getColors(blocker).contains(Constant.Color.White)) return false;
-            if(kw.equals("Protection from blue") && CardUtil.getColors(blocker).contains(Constant.Color.Blue)) return false;
-            if(kw.equals("Protection from black") && CardUtil.getColors(blocker).contains(Constant.Color.Black)) return false;
-            if(kw.equals("Protection from red") && CardUtil.getColors(blocker).contains(Constant.Color.Red)) return false;
-            if(kw.equals("Protection from green") && CardUtil.getColors(blocker).contains(Constant.Color.Green)) return false;
+            if(kw.equals("Protection from white") && blocker.isWhite()) return false;
+            if(kw.equals("Protection from blue") && blocker.isBlue()) return false;
+            if(kw.equals("Protection from black") && blocker.isBlack()) return false;
+            if(kw.equals("Protection from red") && blocker.isRed()) return false;
+            if(kw.equals("Protection from green") && blocker.isGreen()) return false;
         }
         return true;
     }
@@ -1621,7 +1621,7 @@ public class CombatUtil {
                 CardList list = new CardList(play.getCards());
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card crd) {
-                        return CardUtil.getColors(crd).contains(Constant.Color.Black) && !crd.isToken();
+                        return crd.isBlack() && !crd.isToken();
                     }
                 });
                 if(list.size() == 0) {
@@ -1635,7 +1635,7 @@ public class CombatUtil {
                 CardList list = new CardList(play.getCards());
                 list = list.filter(new CardListFilter() {
                     public boolean addCard(Card crd) {
-                        return CardUtil.getColors(crd).contains(Constant.Color.Black);
+                        return crd.isBlack();
                     }
                 });
                 if(list.size() == 0) {

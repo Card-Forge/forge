@@ -3600,7 +3600,7 @@ public class GameAction {
  	        PlayerCreature = PlayerCreature.getType("Creature");
  	        PlayerCreature = PlayerCreature.filter(new CardListFilter() {
  				public boolean addCard(Card c) {
- 					return c.isCreature() && CardUtil.getColors(c).contains(Constant.Color.Green);
+ 					return c.isCreature() && c.isGreen();
  				}
  			});       
  	        String Mana = manaCost + " ";
@@ -3696,15 +3696,15 @@ public class GameAction {
         if(card.getKeyword().contains("Prevent all damage that would be dealt to CARDNAME by artifact creatures.") 
         		&& sourceCard.isCreature() && sourceCard.isArtifact()) assignedDamage = 0;
         if(card.getKeyword().contains("Protection from white")
-                && CardUtil.getColors(sourceCard).contains(Constant.Color.White)) assignedDamage = 0;
+                && sourceCard.isWhite()) assignedDamage = 0;
         if(card.getKeyword().contains("Protection from blue")
-                && CardUtil.getColors(sourceCard).contains(Constant.Color.Blue)) assignedDamage = 0;
+                && sourceCard.isBlue()) assignedDamage = 0;
         if(card.getKeyword().contains("Protection from black")
-                && CardUtil.getColors(sourceCard).contains(Constant.Color.Black)) assignedDamage = 0;
+                && sourceCard.isBlack()) assignedDamage = 0;
         if(card.getKeyword().contains("Protection from red")
-                && CardUtil.getColors(sourceCard).contains(Constant.Color.Red)) assignedDamage = 0;
+                && sourceCard.isRed()) assignedDamage = 0;
         if(card.getKeyword().contains("Protection from green")
-                && CardUtil.getColors(sourceCard).contains(Constant.Color.Green)) assignedDamage = 0;
+                && sourceCard.isGreen()) assignedDamage = 0;
         
         if(card.getKeyword().contains("Protection from creatures") && sourceCard.isCreature()) assignedDamage = 0;
         if(card.getKeyword().contains("Protection from everything")) assignedDamage = 0;
