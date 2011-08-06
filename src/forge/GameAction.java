@@ -3230,9 +3230,17 @@ public class GameAction {
     public void playSpellAbility(SpellAbility sa) {
     	sa.setActivatingPlayer(AllZone.HumanPlayer);
     	
-    	if (sa.getPayCosts() != null){
-    		Target_Selection ts = new Target_Selection(sa.getTarget(), sa);    		
-    		Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
+    	if (sa.getPayCosts() != null || sa.getTarget() != null){
+    		Target_Selection ts = new Target_Selection(sa.getTarget(), sa); 		
+    		Cost_Payment payment = null;
+    		if(sa.getPayCosts() == null)
+    		{
+    			payment = new Cost_Payment(new Ability_Cost("0",sa.getSourceCard().getName(),sa.isAbility()), sa);
+    		}
+    		else
+    		{
+    			payment = new Cost_Payment(sa.getPayCosts(),sa);
+    		}
     		
     		payment.changeCost();
     		
@@ -3268,11 +3276,19 @@ public class GameAction {
     	}
     }
     
-    public void playSpellAbility_NoStack(SpellAbility sa) {
+    public void playSpellAbility_NoStack(SpellAbility sa,boolean skipTargeting) {
     	sa.setActivatingPlayer(AllZone.HumanPlayer);
     	
     	if (sa.getPayCosts() != null){
-    		Target_Selection ts = new Target_Selection(sa.getTarget(), sa);    		
+    		Target_Selection ts = null;
+    		if(skipTargeting)
+    		{
+    			ts = new Target_Selection(null, sa);
+    		}
+    		else
+    		{
+    			ts = new Target_Selection(sa.getTarget(),sa);
+    		}
     		Cost_Payment payment = new Cost_Payment(sa.getPayCosts(), sa);
     		
     		payment.changeCost();

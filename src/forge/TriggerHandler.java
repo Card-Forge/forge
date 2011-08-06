@@ -726,7 +726,7 @@ public class TriggerHandler {
 					//sa[0].resolve();
 					if(sa[0].getSourceCard().getController().equals(AllZone.HumanPlayer))
 					{
-						AllZone.GameAction.playSpellAbility_NoStack(sa[0]);
+						AllZone.GameAction.playSpellAbility_NoStack(sa[0],true);
 					}
 					else
 					{
