@@ -1729,7 +1729,7 @@ mantis_engine.jpg		http://www.wizards.com/global/images/magic/general/mantis_eng
 marble_diamond.jpg		http://www.wizards.com/global/images/magic/general/marble_diamond.jpg
 marble_titan.jpg		http://resources.wizards.com/magic/cards/9ed/en-us/card84533.jpg
 march_of_souls.jpg		http://resources.wizards.com/magic/cards/ps/en-us/card26277.jpg
-marit_lage.jpg		http://www.magickartenmarkt.de/img/cards/Game_Day_Cards/marit_lage_token.jpg
+c_20_20_marit_lage.jpg		http://www.magickartenmarkt.de/img/cards/Game_Day_Cards/marit_lage_token.jpg
 marrow_gnawer.jpg		http://www.wizards.com/global/images/magic/general/marrow_gnawer.jpg
 marsh_boa.jpg		http://resources.wizards.com/magic/cards/pr/en-us/card24664.jpg
 marsh_goblins.jpg		http://resources.wizards.com/magic/cards/dk/en-us/card1821.jpg
