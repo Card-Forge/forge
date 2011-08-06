@@ -247,6 +247,14 @@ public class AbilityFactory {
 			}
 		}
 		
+		if (API.equals("Regenerate")){
+			if (isAb)
+				SA = AbilityFactory_Regenerate.getAbility(this);
+			if (isSp){
+				SA = AbilityFactory_Regenerate.getSpell(this);
+			}
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
         if (hasSpDesc)
