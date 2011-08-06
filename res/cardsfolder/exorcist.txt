@@ -1,0 +1,9 @@
+Name:Exorcist
+ManaCost:W W
+Types:Creature Human Cleric
+Text:no text
+PT:1/1
+K:abDestroyTgtV 1 W T:Creature.Black:Destroy target black creature.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/exorcist.jpg
+End

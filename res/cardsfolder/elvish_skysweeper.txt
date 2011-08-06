@@ -1,0 +1,9 @@
+Name:Elvish Skysweeper
+ManaCost:G
+Types:Creature Elf Warrior
+Text:no text
+PT:1/1
+K:abDestroyTgtV 4 G Sac<1/Creature>:Creature.withFlying:Destroy target creature with flying.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_skysweeper.jpg
+End
