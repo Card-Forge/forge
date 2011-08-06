@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:2/2
 K:stPumpAll:Creature.White+Other:1/1:no Condition:Other white creatures get +1/+1.
-K:CARDNAME can't be countered.
+K:Split second
 K:Flying
 K:Flash
 SVar:Rarity:Uncommon
