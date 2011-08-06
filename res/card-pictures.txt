@@ -18,6 +18,17 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+basilisk_collar.jpg		http://www.wizards.com/global/images/magic/general/basilisk_collar.jpg
+battle_hurda.jpg		http://www.wizards.com/global/images/magic/general/battle_hurda.jpg
+bull_rush.jpg		http://www.wizards.com/global/images/magic/general/bull_rush.jpg
+cunning_sparkmage.jpg		http://www.wizards.com/global/images/magic/general/cunning_sparkmage.jpg
+goblin_roughrider.jpg		http://www.wizards.com/global/images/magic/general/goblin_roughrider.jpg
+goliath_sphinx.jpg		http://www.wizards.com/global/images/magic/general/goliath_sphinx.jpg
+grappler_spider.jpg		http://www.wizards.com/global/images/magic/general/grappler_spider.jpg
+jagwasp_swarm.jpg		http://www.wizards.com/global/images/magic/general/jagwasp_swarm.jpg
+kitesail.jpg		http://www.wizards.com/global/images/magic/general/kitesail.jpg
+leatherback_baloth.jpg		http://www.wizards.com/global/images/magic/general/leatherback_baloth.jpg
+marsh_threader.jpg		http://www.wizards.com/global/images/magic/general/marsh_threader.jpg
 bojuka_brigand.jpg		http://www.wizards.com/global/images/magic/general/bojuka_brigand.jpg
 graypelt_hunter.jpg		http://www.wizards.com/global/images/magic/general/graypelt_hunter.jpg
 khalni_garden.jpg		http://www.wizards.com/global/images/magic/general/khalni_garden.jpg

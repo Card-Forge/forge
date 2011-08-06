@@ -1,3 +1,76 @@
+Basilisk Collar
+1
+Artifact Equipment
+Equipped creature has deathtouch and lifelink.
+VanillaEquipment:0:0:2:Deathtouch:Lifelink:none
+
+Battle Hurda
+4 W
+Creature Giant
+no text
+3/3
+First Strike
+
+Bull Rush
+R
+Instant
+no text
+spPumpTgt:+2/+0
+
+Cunning Sparkmage
+2 R
+Creature Human Shaman
+no text
+0/1
+Haste
+abDamageCP T:1
+
+Goblin Roughrider
+2 R
+Creature Goblin Knight
+no text
+3/2
+
+Goliath Sphinx
+5 U U
+Creature Sphinx
+no text
+8/7
+Flying
+
+Grappler Spider
+1 G
+Creature Spider
+no text
+2/1
+Reach
+
+Jagwasp Swarm
+3 B
+Creature Insect
+no text
+3/2
+Flying
+
+Kitesail
+2
+Artifact Equipment
+Equipped creature gets +1/+0 and has flying.
+VanillaEquipment:1:0:2:Flying:none:none
+
+Leatherback Baloth
+G G G
+Creature Beast
+no text
+4/5
+
+Marsh Threader
+1 W
+Creature Kor Scout
+no text
+2/1
+Swampwalk
+
 Bojuka Brigand
 1 B
 Creature Human Warrior Ally
