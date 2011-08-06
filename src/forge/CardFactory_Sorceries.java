@@ -166,7 +166,7 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(CardFactoryUtil.input_targetType(spell, "Land"));
         }// *************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Violent Ultimatum")) {
             final Card[] target = new Card[3];
             final int[] index = new int[1];
@@ -505,7 +505,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Demonic Tutor") || cardName.equals("Diabolic Tutor")
                 || cardName.equals("Grim Tutor")) {
             final SpellAbility spell = new Spell(card) {
@@ -2725,8 +2725,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-
-
         //*************** START *********** START **************************
         else if(cardName.equals("Plague Wind")) {
             final SpellAbility spell = new Spell(card) {
@@ -4032,7 +4030,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Rite of Replication")) {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -2902112019334177L;
@@ -4235,7 +4233,7 @@ public class CardFactory_Sorceries {
         
 
         //*************** START *********** START **************************
-        if(cardName.equals("Tinker")) {
+        else if(cardName.equals("Tinker")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -5878957726445248334L;
                 
@@ -4369,7 +4367,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Time Warp")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -76579316599195788L;
@@ -4404,7 +4402,7 @@ public class CardFactory_Sorceries {
         
 
         //*************** START *********** START **************************
-        if(cardName.equals("Traumatize")) {
+        else if(cardName.equals("Traumatize")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 42470566751344693L;
                 
@@ -4440,7 +4438,7 @@ public class CardFactory_Sorceries {
         
 
         //*************** START *********** START **************************
-        if(cardName.equals("Mind Funeral")) {
+        else if(cardName.equals("Mind Funeral")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 42470566751344693L;
                 
@@ -4488,7 +4486,7 @@ public class CardFactory_Sorceries {
         
 
         //*************** START *********** START **************************
-        if(cardName.equals("Haunting Echoes")) {
+        else if(cardName.equals("Haunting Echoes")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 42470566751344693L;
                 
@@ -4629,7 +4627,7 @@ public class CardFactory_Sorceries {
         
 
         //*************** START *********** START **************************
-        if(cardName.equals("Identity Crisis")) {
+        else if(cardName.equals("Identity Crisis")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 42470566751344693L;
                 
@@ -4672,7 +4670,7 @@ public class CardFactory_Sorceries {
         
         
         //*************** START *********** START **************************
-        if(cardName.equals("Flame Rift")) {
+        else if(cardName.equals("Flame Rift")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -6008296722680155321L;
                 
@@ -5116,37 +5114,37 @@ public class CardFactory_Sorceries {
         
 
         //*************** START *********** START **************************
-      else if (cardName.equals("Beacon of Creation"))
-      {
-         SpellAbility spell = new Spell(card)
-         {
-			private static final long serialVersionUID = -2510951665205047650L;
+        else if (cardName.equals("Beacon of Creation"))
+        {
+        	SpellAbility spell = new Spell(card)
+        	{
+        		private static final long serialVersionUID = -2510951665205047650L;
 
-    		public void resolve()
-            {
-             PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-              CardList land = new CardList(play.getCards());
-              land = land.getType("Forest");
-              makeToken();
-                for(int i = 1; i < land.size(); i++)
-                     makeToken();
-            
-              // shuffle back into library
-            PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-            library.add(card);
-            card.getController().shuffle();
-            
-            }//resolve()
-          
-          public void makeToken()
-          {
-             CardFactoryUtil.makeToken("Insect", "G 1 1 Insect", card.getController(), "G", 
-            		 new String[]{"Creature", "Insect"}, 1, 1, new String[] {""});
-          }
-          };
-          card.clearSpellAbility();
-          card.addSpellAbility(spell);
-       }//*************** END ************ END **************************
+        		public void resolve()
+        		{
+        			PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+        			CardList land = new CardList(play.getCards());
+        			land = land.getType("Forest");
+        			makeToken();
+        			for(int i = 1; i < land.size(); i++)
+        				makeToken();
+
+        			// shuffle back into library
+        			PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+        			library.add(card);
+        			card.getController().shuffle();
+
+        		}//resolve()
+
+        		public void makeToken()
+        		{
+        			CardFactoryUtil.makeToken("Insect", "G 1 1 Insect", card.getController(), "G", 
+        					new String[]{"Creature", "Insect"}, 1, 1, new String[] {""});
+        		}
+        	};
+        	card.clearSpellAbility();
+        	card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
         
         
         //*************** START *********** START **************************
@@ -5523,7 +5521,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         
-      //*************** START *********** START **************************
+        //*************** START *********** START **************************
         else if(cardName.equals("Riding the Dilu Horse"))
         {
         	SpellAbility spell = new Spell(card)
@@ -6926,7 +6924,7 @@ public class CardFactory_Sorceries {
         */
 
         //*************** START ********** START *************************
-        if (cardName.equals("Destructive Force") || cardName.equals("Wildfire"))
+        else if (cardName.equals("Destructive Force") || cardName.equals("Wildfire"))
         {
         	SpellAbility spDFWf = new Spell(card)
         	{
@@ -7231,101 +7229,7 @@ public class CardFactory_Sorceries {
             spell.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
         
-        /*
-      //*************** START *********** START **************************
-        else if(cardName.equals("Dust to Dust")) {
-        	
-            final Card[] target = new Card[2];
-            final int[] index = new int[1];
-            
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = -6657178029755410643L;
-
-				@Override
-                public boolean canPlayAI() {
-                    return 2 <= getArtifacts().size();
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    CardList human = getArtifacts();
-                    CardListUtil.sortAttack(human);
-                    
-                    target[0] = human.get(0);
-                    target[1] = human.get(1);
-                }
-                
-                CardList getArtifacts() {
-                	CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isArtifact() && CardFactoryUtil.canTarget(card, c);
-                        }
-                    });
-                    return list;
-                }//getNonArtifact()
-                
-                @Override
-                public void resolve() {
-                    for(int i = 0; i < target.length; i++) {
-                        Card c = target[i];
-                        if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c))
-                        	AllZone.GameAction.exile(c);
-                    }
-                }//resolve()
-            };//SpellAbility
-            
-
-            final Input input = new Input() {
-				private static final long serialVersionUID = -2347728746555100991L;
-
-				@Override
-                public void showMessage() {
-                    if(index[0] == 0) AllZone.Display.showMessage("Select 1st target artifact to exile");
-                    else AllZone.Display.showMessage("Select 2nd target artifact to exile");
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    if(c.isArtifact() && zone.is(Constant.Zone.Play)) {
-                        target[index[0]] = c;
-                        index[0]++;
-                        showMessage();
-                        
-                        if(index[0] == target.length) {
-                            if(this.isFree()) {
-                                this.setFree(false);
-                                AllZone.Stack.add(spell);
-                                stop();
-                            } else stopSetNext(new Input_PayManaCost(spell));
-                        }
-                    }
-                }//selectCard()
-            };//Input
-            
-            Input runtime = new Input() {
-				private static final long serialVersionUID = 1757906446704412414L;
-
-				@Override
-                public void showMessage() {
-                    index[0] = 0;
-                    stopSetNext(input);
-                }
-            };//Input
-            
-            card.setSVar("PlayMain1", "TRUE");
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            spell.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
-        */
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Take Possession")) {
@@ -7639,7 +7543,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Winds of Change")) {
+        else if(cardName.equals("Winds of Change")) {
         	/*
         	 * Each player shuffles the cards from his or her hand into
         	 * his or her library, then draws that many cards.
@@ -7685,7 +7589,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Nature's Resurgence")) {
+        else if(cardName.equals("Nature's Resurgence")) {
         	/*
         	 * Each player draws a card for each creature card in his
         	 * or her graveyard.
@@ -7712,7 +7616,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("All Hallow's Eve")) {
+        else if(cardName.equals("All Hallow's Eve")) {
         	/*
         	 * Exile All Hallow's Eve with 2 scream counters on it.
         	 */
@@ -7749,11 +7653,11 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
-        if(cardName.equals("Molten Psyche")) {
+        else if(cardName.equals("Molten Psyche")) {
         	/*
         	 * Each player shuffles the cards from his or her hand into his
         	 * or her library, then draws that many cards.
-        	 * Metalcraft � If you control three or more artifacts, Molten
+        	 * Metalcraft - If you control three or more artifacts, Molten
         	 * Psyche deals damage to each opponent equal to the number of
         	 * cards that player has drawn this turn.
         	 */
@@ -7856,6 +7760,8 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
+        
         
     	return card;
     }//getCard
