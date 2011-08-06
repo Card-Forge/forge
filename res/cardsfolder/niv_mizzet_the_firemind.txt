@@ -4,7 +4,7 @@ Types:Legendary Creature Dragon Wizard
 Text:no text
 PT:4/4
 K:Flying
-K:abDrawCards T:1:Draw a card.:Niv-Mizzet, the Firemind - Draw a card
+A:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
 K:WheneverKeyword:DrawCard:ControllingPlayer_Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:Whenever you draw a card, Niv-Mizzet, the Firemind deals 1 damage to target creature or player
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/niv_mizzet_the_firemind.jpg

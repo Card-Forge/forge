@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Creature Warrior
 Text:no text
 PT:2/2
-K:abDrawCards 1 BSac<1/CARDNAME>:2:Drawback$YouLoseLife/2:You draw two cards and lose 2 life.:Moriok Replica - draw two cards and lose 2 life
+A:AB$Draw | Cost$ 1 B Sac<1/CARDNAME> | NumCards$ 2 | SpellDescription$ You draw two cards and lose 2 life. | SubAbility$ YouLoseLife/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moriok_replica.jpg
 SetInfo:MRD|Common|http://magiccards.info/scans/en/som/178.jpg

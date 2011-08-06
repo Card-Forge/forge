@@ -4,7 +4,7 @@ Types:Creature Moonfolk Rogue
 Text:no text
 PT:1/1
 K:Flying
-K:abDrawCards 2 Return<1/Land>:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Soratami Cloudskater - Draw a card, then discard a card.
+A:AB$Draw | Cost$ 2 Return<1/Land> | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ YouDiscard/1
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_cloudskater.jpg

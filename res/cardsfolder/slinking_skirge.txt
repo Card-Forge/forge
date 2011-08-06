@@ -4,7 +4,7 @@ Types:Creature Imp
 Text:no text
 PT:2/1
 K:Flying
-K:abDrawCards 2 Sac<1/CARDNAME>:1:Draw a card.:Slinking Skirge - Controller draws a card.
+A:AB$Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slinking_skirge.jpg
 SetInfo:UDS|Common|http://magiccards.info/scans/en/ud/71.jpg

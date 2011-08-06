@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-K:abDrawCards W U T Sac<1/Bird>:1:Draw a card.:Seaside Haven - Controller draws a card.
+A:AB$Draw | Cost$ W U T Sac<1/Bird> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seaside_haven.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/323.jpg
