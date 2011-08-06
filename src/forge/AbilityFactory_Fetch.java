@@ -193,9 +193,10 @@ public class AbilityFactory_Fetch {
 		Random r = new Random();
 		// prevent run-away activations - first time will always return true
 		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
-		if(af.getAbTgt().canTgtPlayer()) {
+		
+		Target tgt = af.getAbTgt();
+		if(tgt != null && tgt.canTgtPlayer()) {
 			sa.setTargetPlayer(AllZone.ComputerPlayer);
-			return chance;
 		}
 
 		// todo: add more decision making for Fetching
