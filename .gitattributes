@@ -454,6 +454,7 @@ res/cardsfolder/balduvian_barbarians.txt -text svneol=native#text/plain
 res/cardsfolder/balduvian_bears.txt -text svneol=native#text/plain
 res/cardsfolder/balduvian_conjurer.txt -text svneol=native#text/plain
 res/cardsfolder/balduvian_dead.txt svneol=native#text/plain
+res/cardsfolder/balduvian_frostwaker.txt -text svneol=native#text/plain
 res/cardsfolder/balduvian_horde.txt -text svneol=native#text/plain
 res/cardsfolder/balduvian_rage.txt svneol=native#text/plain
 res/cardsfolder/balduvian_trading_post.txt -text svneol=native#text/plain
