@@ -1,3 +1,32 @@
+Symbiotic Beast
+4 G G
+Creature Beast
+no text
+4/4
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:MakeToken-Insect-G-1-1-None-/4:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Symbiotic Beast is put into a graveyard from the battlefield, put four 1/1 green Insect creature tokens onto the battlefield.
+
+Tukatongue Thallid
+G
+Creature Fungus
+no text
+1/1
+WheneverKeyword:PermanentIntoGraveyard:Self:Graveyard:MakeToken-Saproling-G-1-1-None-/1:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:When Tukatongue Thallid is put into a graveyard from the battlefield, put a 1/1 green Saproling creature token onto the battlefield.
+
+Haru-Onna
+3 G
+Creature Spirit
+no text
+2/1
+When CARDNAME enters the battlefield, draw a card.
+WheneverKeyword:CastSpell/Controller:OneTypeOfMany/Arcane/Spirit:Play:MoveFrom-Play-Hand:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a Spirit or Arcane spell, you may return Haru-Onna to its owner's hand.
+
+Jackalope Herd
+3 G
+Creature Rabbit Beast
+no text
+4/5
+WheneverKeyword:CastSpell/Controller:No_Initiator:Play:MoveFrom-Play-Hand:Self:ASAP:No_Condition:No Special Condition:When you cast a spell, return Jackalope Herd to its owner's hand.
+
 Grixis Slavedriver
 5 B
 Creature Zombie Giant
