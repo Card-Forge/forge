@@ -545,12 +545,12 @@ public class GameAction {
         			}
         		}//if isAura
 
-        		if(c.getNetDefense() <= c.getDamage() && !c.getKeyword().contains("Indestructible")) {
+        		if(c.isCreature() && c.getNetDefense() <= c.getDamage() && !c.getKeyword().contains("Indestructible")) {
         			destroy(c);
         			AllZone.Combat.removeFromCombat(c); //this is untested with instants and abilities but required for First Strike combat phase
         		}
 
-        		else if(c.getNetDefense() <= 0) {
+        		else if(c.isCreature() && c.getNetDefense() <= 0) {
         			destroy(c);
         			AllZone.Combat.removeFromCombat(c);
         		}
