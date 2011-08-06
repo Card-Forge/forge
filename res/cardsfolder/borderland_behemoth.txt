@@ -1,0 +1,10 @@
+Name:Borderland Behemoth
+ManaCost:5 R R
+Types:Creature Giant Warrior 
+Text:no text
+PT:4/4
+K:stPumpSelf:Creature:X/X:no Condition:Borderland Behemoth gets +4/+4 for each other Giant you control.
+SVar:X:Count$Valid Giant.Other+YouCtrl/Times.4
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/borderland_behemoth.jpg
+End
