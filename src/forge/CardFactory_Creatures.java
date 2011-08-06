@@ -15172,7 +15172,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                	card.getController().drawCard();
+                	getActivatingPlayer().drawCard();
                 }
             };//SpellAbility
             card.addSpellAbility(ability2);
@@ -18042,6 +18042,7 @@ public class CardFactory_Creatures {
                     return false;
                 }
             };
+            ability.getRestrictions().setActivationLimit(1);
             
             StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" gets +3/+3 until end of turn, ");
@@ -19971,8 +19972,7 @@ public class CardFactory_Creatures {
 	            
 	            @Override
 	            public boolean canPlay() {
-	                return (CardFactoryUtil.canUseAbility(card))
-	                        && (AllZone.GameAction.isCardInPlay(card)) && (!card.isFaceDown() && card.getCounters(Counters.LEVEL) >= 8) && super.canPlay();
+	                return card.getCounters(Counters.LEVEL) >= 8 && super.canPlay();
 	            }
 	            
 	            @Override

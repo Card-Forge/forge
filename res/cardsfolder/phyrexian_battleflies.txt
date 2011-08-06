@@ -1,10 +1,10 @@
 Name:Phyrexian Battleflies
 ManaCost:B
 Types:Creature Insect
-Text:Play this ability no more than twice each turn.
+Text:no text
 PT:0/1
 K:Flying
-K:abPump B:+1/+0
+A:AB$Pump|Cost$B|NumAtt$+1|ActivationLimit$2|SpellDescription$Phyrexian Battleflies gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_battleflies.jpg
 End

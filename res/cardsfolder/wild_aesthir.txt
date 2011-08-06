@@ -1,11 +1,11 @@
 Name:Wild Aesthir
 ManaCost:2 W
 Types:Creature Bird
-Text:Activate this ability only once each turn.
+Text:no text
 PT:1/1
 K:Flying
 K:First Strike
-K:abPump W W:+2/+0
+A:AB$Pump|Cost$W W|NumAtt$+2|ActivationLimit$1|SpellDescription$Wild Aesthir gets +2/+0 until end of turn. Activate this ability only once each turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_aesthir.jpg
 End

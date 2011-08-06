@@ -34,7 +34,7 @@ public class AbilityFactory_Counters {
 			
 			public boolean canPlay(){
 				// super takes care of AdditionalCosts
-				return (CardFactoryUtil.canUseAbility(af.getHostCard()) && super.canPlay());	
+				return super.canPlay();	
 			}
 			
 			public boolean canPlayAI()
@@ -79,7 +79,7 @@ public class AbilityFactory_Counters {
 			
 			public boolean canPlay(){
 				// super takes care of AdditionalCosts
-				return (CardFactoryUtil.canUseAbility(af.getHostCard()) && super.canPlay());	
+				return super.canPlay();	
 			}
 			
 			public boolean canPlayAI()

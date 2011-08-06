@@ -74,6 +74,7 @@ public class SpellAbility_Restriction {
 	
 	/*
 	 * Restrictions of the future
+	 * cardsInHand
 		boolean bHasThreshold = false;
 		boolean bHasMetalcraft = false;
 		int levelMin = 0;

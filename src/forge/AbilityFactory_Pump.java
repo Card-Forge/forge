@@ -163,7 +163,7 @@ public class AbilityFactory_Pump {
             
             @Override
             public boolean canPlay() {
-                return (Cost_Payment.canPayAdditionalCosts(AF.getAbCost(), this) && CardFactoryUtil.canUseAbility(hostCard) && super.canPlay());
+                return super.canPlay();
             }
                         
             @Override

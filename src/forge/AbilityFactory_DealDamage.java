@@ -31,9 +31,7 @@ public class AbilityFactory_DealDamage {
         	
             @Override
             public boolean canPlay(){
-                return (Cost_Payment.canPayAdditionalCosts(AF.getAbCost(), this) 
-                		&& CardFactoryUtil.canUseAbility(AF.getHostCard()) 
-                		&& super.canPlay());
+                return super.canPlay();
             }
             
             @Override

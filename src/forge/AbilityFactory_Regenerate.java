@@ -12,9 +12,7 @@ public class AbilityFactory_Regenerate {
 			
 			@Override
 			public boolean canPlay(){
-				return (Cost_Payment.canPayAdditionalCosts(AF.getAbCost(), this) 
-						&& CardFactoryUtil.canUseAbility(AF.getHostCard()) 
-						&& super.canPlay());
+				return super.canPlay();
 			}
 
 			@Override
@@ -34,14 +32,13 @@ public class AbilityFactory_Regenerate {
 
 	public static SpellAbility getSpell(final AbilityFactory AF){
 
-		final SpellAbility spRegenerate = new Spell(AF.getHostCard()) {
+		final SpellAbility spRegenerate = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
 			private static final long serialVersionUID = -3899905398102316582L;
 			AbilityFactory af = AF;
 
 			@Override
 			public boolean canPlay(){
-				return (Cost_Payment.canPayAdditionalCosts(AF.getAbCost(), this) 
-						&& super.canPlay());
+				return super.canPlay();
 			}
 
 			@Override

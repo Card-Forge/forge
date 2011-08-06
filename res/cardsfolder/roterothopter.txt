@@ -1,10 +1,10 @@
 Name:Roterothopter
 ManaCost:1
 Types:Artifact Creature Thopter
-Text:Play this ability no more than twice each turn.
+Text:no text
 PT:0/2
 K:Flying
-K:abPump 2:+1/+0
+A:AB$Pump|Cost$2|NumAtt$+1|ActivationLimit$2|SpellDescription$Roterothopter gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roterothopter.jpg
 End

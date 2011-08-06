@@ -277,6 +277,8 @@ public class AbilityFactory {
         if (mapParams.containsKey("ActivationLimit"))
         	SA.getRestrictions().setActivationLimit(Integer.parseInt(mapParams.get("ActivationLimit")));
 
+        if (mapParams.containsKey("ActivatingPhases"))
+        	SA.getRestrictions().setActivatePhases(mapParams.get("ActivatingPhases"));
         
         return SA;
 	}

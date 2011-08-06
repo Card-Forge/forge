@@ -21,7 +21,7 @@ public class AbilityFactory_Fetch {
 			
 			public boolean canPlay(){
 				// super takes care of AdditionalCosts
-				return (CardFactoryUtil.canUseAbility(af.getHostCard()) && super.canPlay());	
+				return super.canPlay();	
 			}
 			
 			@Override
@@ -47,7 +47,7 @@ public class AbilityFactory_Fetch {
 			
 			public boolean canPlay(){
 				// super takes care of AdditionalCosts
-				return (CardFactoryUtil.canUseAbility(af.getHostCard()) && super.canPlay());	
+				return super.canPlay();	
 			}
 			
 			@Override

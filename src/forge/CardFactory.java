@@ -1458,7 +1458,7 @@ public class CardFactory implements NewConstants {
                     	if (abCost.getTap() && (card.isTapped() || card.isSick()))
                     		return false;
                     	
-                        return (CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                        return super.canPlay();
                     }
             		
                     @Override
@@ -1818,7 +1818,7 @@ public class CardFactory implements NewConstants {
                     
                     @Override
                     public boolean canPlay() {
-                        return CardFactoryUtil.canUseAbility(card) && super.canPlay();
+                        return super.canPlay();
                     }
                     
                     private CardList getCreatures() {
@@ -2460,7 +2460,7 @@ public class CardFactory implements NewConstants {
                     
                     @Override
                     public boolean canPlay(){
-                        return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                        return super.canPlay();
                     }
                     
                     @Override
@@ -2803,7 +2803,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
                 public boolean canPlay(){
-                    return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                    return super.canPlay();
                 }
 
                 
@@ -4309,7 +4309,7 @@ public class CardFactory implements NewConstants {
                 
                 @Override
 				public boolean canPlay(){
-                    return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                    return super.canPlay();
 				}
                 
                 @Override
@@ -4984,7 +4984,7 @@ public class CardFactory implements NewConstants {
 					}
 					
 					public boolean canPlay(){
-                        return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                        return super.canPlay();
 					}
 					 
 					public boolean canPlayAI()
@@ -5341,7 +5341,7 @@ public class CardFactory implements NewConstants {
 
 				@Override
                 public boolean canPlay() {
-                	return (Cost_Payment.canPayAdditionalCosts(cost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                	return super.canPlay();
                 }//canPlay()
                 
                 @Override
@@ -5959,7 +5959,7 @@ public class CardFactory implements NewConstants {
 				
 				@Override
 				public boolean canPlay(){
-					return Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay();
+					return super.canPlay();
 				}
         		
 				@Override
@@ -6112,7 +6112,7 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public boolean canPlay() {
-        			return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        			return super.canPlay();
         		}
 
         		@Override
@@ -6204,7 +6204,7 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public boolean canPlay() {
-        			return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        			return super.canPlay();
         		}
 
         		@Override
@@ -6297,7 +6297,7 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public boolean canPlay() {
-        			return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        			return super.canPlay();
         		}
 
         		@Override
@@ -6415,7 +6415,7 @@ public class CardFactory implements NewConstants {
 
         		@Override
         		public boolean canPlay() {
-        			return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+        			return super.canPlay();
         		}
 
         		@Override

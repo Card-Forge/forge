@@ -1,9 +1,9 @@
 Name:Knight of the Skyward Eye
 ManaCost:1 W
 Types:Creature Human Knight
-Text:Activate this ability only once each turn.
+Text:no text
 PT:2/2
-K:abPump 3 G:+3/+3
+A:AB$Pump|Cost$3 G|NumAtt$+3|NumDef$+3|ActivationLimit$1|SpellDescription$Knight of the Skyward Eye gets +3/+3 until end of turn. Activate this ability only once each turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_the_skyward_eye.jpg
 End
