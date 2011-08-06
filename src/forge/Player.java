@@ -263,6 +263,9 @@ public abstract class Player extends MyObservable{
 			else return 0;
     	}
     	if (AllZoneUtil.isCardInPlay("Urza's Armor", this) && restDamage > 0) restDamage = restDamage - 1;
+    	
+    	if (AllZoneUtil.isCardInPlay("Guardian Seraph", this) && !source.getController().isPlayer(this) && restDamage > 0) 
+    		restDamage = restDamage - 1;
 		
 		if(AllZoneUtil.isCardInPlay("Spirit of Resistance", this)) {
 			if( AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.Black).size() > 0
