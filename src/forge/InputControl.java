@@ -85,15 +85,12 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         }
         
         else if(phase.equals(Constant.Phase.End_Of_Turn)){
-            if (playerTurn.isHuman()){
-            	AllZone.Computer.getComputer().end_of_turn();
-            	return null;
-        	}
-        	else if (priority.isComputer()){
+            if (priority.isComputer()){
         		// AI passes priority in his end of turn phase to player automatically
         		AllZone.Phase.passPriority();
         		return null;
         	}
+            // Players EOT can just fall through to general passpriority
         }
         
         else if(phase.equals(Constant.Phase.Cleanup))	// Player needs to discard
