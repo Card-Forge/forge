@@ -175,7 +175,7 @@ public class AbilityFactory_ZoneAffecting {
 		}
 		
 		double chance = .4;	// 40 percent chance of milling with instant speed stuff
-		if (source.isSorcery() || sa.getRestrictions().getSorcerySpeed())
+		if (AbilityFactory.isSorcerySpeed(sa))
 			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
 		Random r = new Random();
 		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
@@ -494,7 +494,7 @@ public class AbilityFactory_ZoneAffecting {
 		Random r = new Random();
 		
 		double chance = .4;	// 40 percent chance of milling with instant speed stuff
-		if (source.isSorcery() || sa.getRestrictions().getSorcerySpeed())
+		if (AbilityFactory.isSorcerySpeed(sa))
 			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
 		
 		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
@@ -635,7 +635,7 @@ public class AbilityFactory_ZoneAffecting {
 	//A:AB$Discard | Cost$U | ValidTgts$ Opponent | Mode$RevealYouChoose | NumCards$X | SpellDescription$<...>
 	
 	public static SpellAbility createAbilityDiscard(final AbilityFactory AF) {
-		final SpellAbility abDraw = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+		final SpellAbility abDiscard = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
 			private static final long serialVersionUID = 4348585353456736817L;
 			final AbilityFactory af = AF;
 			
@@ -661,11 +661,11 @@ public class AbilityFactory_ZoneAffecting {
 			}
 			
 		};
-		return abDraw;
+		return abDiscard;
 	}
 
 	public static SpellAbility createSpellDiscard(final AbilityFactory AF) {
-		final SpellAbility spDraw = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+		final SpellAbility spDiscard = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
 			private static final long serialVersionUID = 4348585353456736817L;
 			final AbilityFactory af = AF;
 			
@@ -686,11 +686,11 @@ public class AbilityFactory_ZoneAffecting {
 			}
 			
 		};
-		return spDraw;
+		return spDiscard;
 	}
 	
 	public static SpellAbility createDrawbackDiscard(final AbilityFactory AF) {
-		final SpellAbility dbDraw = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
+		final SpellAbility dbDiscard = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
 			private static final long serialVersionUID = 4348585353456736817L;
 			final AbilityFactory af = AF;
 			
@@ -716,7 +716,7 @@ public class AbilityFactory_ZoneAffecting {
 			}
 			
 		};
-		return dbDraw;
+		return dbDiscard;
 	}
 
 	private static void discardResolve(final AbilityFactory af, final SpellAbility sa){
@@ -931,9 +931,18 @@ public class AbilityFactory_ZoneAffecting {
 			}
 		}
 		
-		double chance = .4;	// 40 percent chance of milling with instant speed stuff
-		if (source.isSorcery() || sa.getRestrictions().getSorcerySpeed())
-			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
+		if(!af.getMapParams().get("Mode").equals("Hand")) {
+			if (af.getMapParams().get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")){
+				// Set PayX here to maximum value.
+				int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), 
+						AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.HumanPlayer).size());
+				source.setSVar("PayX", Integer.toString(cardsToDiscard));
+			}
+		}
+		
+		double chance = .5;	// 50 percent chance of discarding with instant speed stuff
+		if (AbilityFactory.isSorcerySpeed(sa))
+			chance = .75;	// 75% chance for sorcery speed (since it will never activate EOT)
 		Random r = new Random();
 		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);
 				
@@ -1168,7 +1177,7 @@ public class AbilityFactory_ZoneAffecting {
 		Card source = sa.getSourceCard();
 		
 		double chance = .4;	// 40 percent chance of milling with instant speed stuff
-		if (source.isSorcery() || sa.getRestrictions().getSorcerySpeed())
+		if (AbilityFactory.isSorcerySpeed(sa))
 			chance = .667;	// 66.7% chance for sorcery speed (since it will never activate EOT)
 		Random r = new Random();
 		boolean randomReturn = r.nextFloat() <= Math.pow(chance, source.getAbilityUsed()+1);

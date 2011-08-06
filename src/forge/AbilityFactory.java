@@ -657,6 +657,15 @@ public class AbilityFactory {
 				AllZone.Phase.is(Constant.Phase.End_Of_Turn, AllZone.HumanPlayer));
 	}
 	
+	public static boolean isSorcerySpeed(SpellAbility sa){
+		if (sa.isSpell())
+			return sa.getSourceCard().isSorcery();
+		else if (sa.isAbility())
+			return sa.getRestrictions().getSorcerySpeed();
+		
+		return false;
+	}
+	
 	// Utility functions used by the AFs
 	public static int calculateAmount(Card card, String amount, SpellAbility ability){
 		// amount can be anything, not just 'X' as long as sVar exists

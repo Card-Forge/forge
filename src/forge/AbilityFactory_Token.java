@@ -25,23 +25,8 @@ public class AbilityFactory_Token extends AbilityFactory {
 		AF = af;
 		
 		HashMap<String,String> mapParams = af.getMapParams();
-		String numTokens,numPower,numToughness,image;
+		String image;
 		String[] keywords;
-		
-		if(!mapParams.get("TokenAmount").matches("[0-9][0-9]?")) //It's an X-value.
-			numTokens = AF.getHostCard().getSVar(mapParams.get("TokenAmount"));
-		else
-			numTokens = mapParams.get("TokenAmount");
-		
-		if(!mapParams.get("TokenPower").matches("[0-9][0-9]?"))
-			numPower = AF.getHostCard().getSVar(mapParams.get("TokenPower"));
-		else
-			numPower = mapParams.get("TokenPower");
-		
-		if(!mapParams.get("TokenToughness").matches("[0-9][0-9]?"))
-			numToughness = AF.getHostCard().getSVar(mapParams.get("TokenToughness"));
-		else
-			numToughness = mapParams.get("TokenToughness");
 		
 		if(mapParams.containsKey("TokenKeywords")) {
 			keywords = mapParams.get("TokenKeywords").split("<>");
@@ -97,12 +82,12 @@ public class AbilityFactory_Token extends AbilityFactory {
 			tokenSVars = null;
 		}
 		
-		tokenAmount = numTokens;
+		tokenAmount = mapParams.get("TokenAmount");
+		tokenPower = mapParams.get("TokenPower");
+		tokenToughness = mapParams.get("TokenToughness");
 		tokenName = mapParams.get("TokenName");
 		tokenTypes = mapParams.get("TokenTypes").split(",");
 		tokenColors = mapParams.get("TokenColors").split(",");
-		tokenPower = numPower;
-		tokenToughness = numToughness;
 		tokenKeywords = keywords;
 		tokenImage = image;
 		if(mapParams.containsKey("TokenOwner"))
@@ -236,7 +221,13 @@ public class AbilityFactory_Token extends AbilityFactory {
 					return false;
 			}
 		}
-
+		
+		if (tokenAmount.equals("X") && source.getSVar(tokenAmount).equals("Count$xPaid")){
+			// Set PayX here to maximum value.
+			int xPay = ComputerUtil.determineLeftoverMana(sa);
+			source.setSVar("PayX", Integer.toString(xPay));
+		}
+		
 		return ((r.nextFloat() < .33) && chance);
 	}
 	
@@ -330,9 +321,7 @@ public class AbilityFactory_Token extends AbilityFactory {
 		}
 
 		int finalPower = AbilityFactory.calculateAmount(AF.getHostCard(), tokenPower, sa);
-		
 		int finalToughness = AbilityFactory.calculateAmount(AF.getHostCard(), tokenToughness, sa);
-		
 		int finalAmount = AbilityFactory.calculateAmount(AF.getHostCard(), tokenAmount, sa);
 		
 		for(int i=0;i<finalAmount;i++) {
