@@ -590,7 +590,7 @@ public class AbilityFactory_Counters {
 		sb.append("Remove ").append(amount).append(" ").append(cType.getName())
 				.append(" counter");
 		if(amount != 1) sb.append("s");
-		sb.append("on");
+		sb.append(" from");
 
 		if (af.getAbTgt() == null)
 			sb.append(" ").append(name);
