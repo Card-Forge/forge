@@ -1994,14 +1994,34 @@ public class CardFactory_Creatures {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Minotaur Explorer")) {
+        else if(cardName.equals("Minotaur Explorer") || cardName.equals("Balduvian Horde") ||
+        		cardName.equals("Pillaging Horde")) {
+
+        	final SpellAbility creature = new Spell_Permanent(card){
+				private static final long serialVersionUID = -7326018877172328480L;
+
+				@Override
+				public boolean canPlayAI(){
+        			int reqHand = 1;
+        			if (AllZone.getZone(card).is(Constant.Zone.Hand))
+        				reqHand++;
+        			
+        			// Don't play if it would sacrifice as soon as it comes into play
+        			return AllZoneUtil.getCardsInZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size() > reqHand;
+        		}
+        	};
+        	card.clearFirstSpellAbility();
+        	card.addFirstSpellAbility(creature);
+        	
             final SpellAbility ability = new Ability(card, "0") {
             	
                 @Override
                 public void resolve() {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                    if(hand.getCards().length == 0) AllZone.GameAction.sacrifice(card);
-                    else card.getController().discardRandom(this);
+                    if(hand.getCards().length == 0) 
+                    	AllZone.GameAction.sacrifice(card);
+                    else 
+                    	card.getController().discardRandom(this);
                 }
             };//SpellAbility
             
@@ -2010,7 +2030,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                 	StringBuilder sb = new StringBuilder();
-                	sb.append(card.getController()).append(" - discards at random or sacrifices Minotaur Explorer");
+                	sb.append(card.getController()).append(" - discards at random or sacrifices ").append(cardName);
                 	ability.setStackDescription(sb.toString());
                     
                     AllZone.Stack.add(ability);
