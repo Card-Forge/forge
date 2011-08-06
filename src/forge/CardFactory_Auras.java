@@ -1774,22 +1774,11 @@ class CardFactory_Auras {
         else if (cardName.equals("Entangling Vines") || cardName.equals("Glimmerdust Nap") || 
         		 cardName.equals("Melancholy") || cardName.equals("Mystic Restraints") || 
        		     cardName.equals("Roots") || cardName.equals("Thirst")) {
-            
+           
             final SpellAbility spell = new Spell(card) {
 				private static final long serialVersionUID = 843412563175285562L;
 				
-				// for flash, which is not working through the keyword for some reason
-				// if not flash then limit to main 1 and 2 on controller's turn and card in hand
-				@Override
-	            public boolean canPlay() {
-					if (!AllZone.getZone(card).equals(Constant.Zone.Hand))
-						return false;
-					
-					if (Phase.canCastSorcery(getSourceCard().getController()))
-						return true;
-					
-	                return card.getKeyword().contains("Flash");
-				}
+
 
                 @Override
                 public boolean canPlayAI() {
