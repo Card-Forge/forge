@@ -1231,6 +1231,7 @@ public class CombatUtil {
                 }
             } //BMA
             
+            /*
             //Fervent Charge
             if(!c.getCreatureAttackedThisCombat()) {
                 PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
@@ -1273,7 +1274,7 @@ public class CombatUtil {
                     AllZone.Stack.add(ability2);
                     
                 }
-            }//Fervent Charge
+            }//Fervent Charge */
             
             //Mijae Djinn
             if(c.getName().equals("Mijae Djinn")) {
