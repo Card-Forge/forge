@@ -2187,14 +2187,24 @@ class CardFactory_Lands {
                     setTargetCard(getAttacker());
                 }
                 
+                /*
+                 *  getAttacker() will now filter out non-Goblins and non-Changelings
+                 */
+                
                 public Card getAttacker() {
                     //target creature that is going to attack
-                    Combat c = ComputerUtil.getAttackers();
-                    CardList att = new CardList(c.getAttackers());
-                    att.remove(card);
-                    att.shuffle();
+                    Combat attackers = ComputerUtil.getAttackers();
+                    CardList list = new CardList(attackers.getAttackers());
+                    list = list.filter(new CardListFilter() {
+                    	public boolean addCard(Card c) {
+                    		return CardFactoryUtil.canTarget(card, c) && 
+                            (c.getType().contains("Goblin") || c.getKeyword().contains("Changeling"));
+                    	}
+                    });
+                    list.remove(card);
+                    list.shuffle();
                     
-                    if(att.size() != 0) return att.get(0);
+                    if(list.size() != 0) return list.get(0);
                     else return null;
                 }//getAttacker()
                 
@@ -2211,7 +2221,7 @@ class CardFactory_Lands {
             card.addSpellAbility(a2[0]);
             a2[0].setDescription("1 R, tap: Target Goblin gets +2/+0 until end of turn.");
             
-
+/*
             @SuppressWarnings("unused")
             // target unused
             final Input target = new Input() {
@@ -2245,7 +2255,34 @@ class CardFactory_Lands {
                     stop();
                 }
             };//Input target
-            a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Goblin"));
+*/
+            /*
+             *  This input method will allow the human to select both Goblins and Changelings
+             */
+            
+            Input runtime = new Input() {
+                private static final long serialVersionUID = 8320178628066517937L;
+
+                @Override
+                public void showMessage() {
+                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                    CardList creatures = new CardList();
+                    creatures.addAll(comp.getCards());
+                    creatures.addAll(hum.getCards());
+                    creatures = creatures.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isCreature() && CardFactoryUtil.canTarget(card, c) && 
+                                  (c.getType().contains("Goblin") || c.getKeyword().contains("Changeling"));
+                        }
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(a2[0], creatures, "Select target Goblin", true, false));
+                }
+            };//Input target
+            a2[0].setBeforePayMana(runtime);
+            
+//          a2[0].setBeforePayMana(CardFactoryUtil.input_targetType(a2[0], "Goblin"));
             
         }//*************** END ************ END **************************
         
