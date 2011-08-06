@@ -8,10 +8,13 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.imageio.*;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -26,6 +29,8 @@ import forge.properties.NewConstants;
 
 
 public class GuiDisplayUtil implements NewConstants {
+	
+	
     public static JPanel getCardPanel(Card c) {
         return getCardPanel(c, c.getName());
     }
@@ -205,7 +210,9 @@ public class GuiDisplayUtil implements NewConstants {
         
 
         if(file.exists()) {
-            return new PicturePanel(file);
+        	
+        	
+            return new PicturePanelResize(file);
         } else {
             JPanel p = new JPanel();
             
@@ -223,13 +230,45 @@ public class GuiDisplayUtil implements NewConstants {
         }//else
     }//getPicture()
     
+    
+    public static JPanel getPictureHQ(String c) {
+    	File file = new File(ForgeProps.getFile(IMAGE_BASE), c);
+    	return new PicturePanel(file);
+    }
+    
+
+    
+    public static int getPictureHQheight(String c) throws IOException{
+    	File file = new File(ForgeProps.getFile(IMAGE_BASE), c);    	  	
+    	BufferedImage a = ImageIO.read(file);
+    	return a.getHeight();
+    }
+    
+    public static int getPictureHQwidth(String c) throws IOException{
+    	File file = new File(ForgeProps.getFile(IMAGE_BASE), c);    	  	
+    	BufferedImage a = ImageIO.read(file);
+    	return a.getWidth();
+    }
+    
+    public static boolean IsPictureHQExists(String c) {
+    	File file = new File(ForgeProps.getFile(IMAGE_BASE), c);
+    	if(file.exists()){
+    		return true;
+    	}
+    	else
+    	{
+    		return false;
+    	}
+    }
+    
+    
     public static String cleanString(String in) {
         StringBuffer out = new StringBuffer();
         char c;
         for(int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
             if(c == ' ' || c == '-') out.append('_');
-            else if(Character.isLetterOrDigit(c)) {
+            else if(Character.isLetterOrDigit(c) || c=='_') {
                 out.append(c);
             }
         }

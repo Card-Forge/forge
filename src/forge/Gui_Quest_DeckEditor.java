@@ -8,8 +8,11 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -91,6 +94,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
     public boolean           filterUsed;
     private CardList         top;
     private CardList         bottom;
+    public String cardN;
     
     public static void main(String[] args) {
 
@@ -428,7 +432,7 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         //change card name if needed
         c = AllZone.CardFactory.copyCard(c);
         if(AllZone.NameChanger.shouldChangeCardName()) c = AllZone.NameChanger.changeCard(c);
-        
+        cardN = c.getName();
         CardDetailUtil.updateCardDetail(c, cdTextArea, cardDetailPanel, picturePanel, new JLabel[] {
                 cdLabel1, cdLabel2, cdLabel3, cdLabel4, cdLabel5});
     }
@@ -595,8 +599,9 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         cardDetailPanel.setBounds(new Rectangle(765, 23, 239, 323));
         cardDetailPanel.setLayout(null);
         picturePanel.setBorder(BorderFactory.createEtchedBorder());
-        picturePanel.setBounds(new Rectangle(772, 362, 226, 301));
+        picturePanel.setBounds(new Rectangle(765, 362, 239, 338));
         picturePanel.setLayout(borderLayout1);
+        picturePanel.addMouseListener(new CustomListener());
         statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
         statsLabel.setText("Total - 0, Creatures - 0 Land - 0");
         statsLabel.setBounds(new Rectangle(19, 672, 720, 31));
@@ -773,5 +778,45 @@ public class Gui_Quest_DeckEditor extends JFrame implements CardDetail, DeckDisp
         topModel.resort();
         bottomModel.resort();
     }////refreshGui()
+   
+    public class CustomListener implements MouseListener {
+
+        public void mouseClicked(MouseEvent e) {
+        	        	
+        }
+
+        public void mouseEntered(MouseEvent e) { 
+        	       	
+        	if (picturePanel.getComponentCount()!=0){
+        		cardN= GuiDisplayUtil.cleanString(cardN);
+        		cardN = cardN+".jpg";    
+            	
+        		    if(GuiDisplayUtil.IsPictureHQExists(cardN)){    
+        		    
+					GUI_PictureHQ hq = new GUI_PictureHQ(Gui_Quest_DeckEditor.this,cardN);
+					try {
+						hq.letsGo(Gui_Quest_DeckEditor.this, cardN);
+						cardN = cardN.substring(0, cardN.length()-4);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					}
+					
+        		}
+      	
+        }
+
+        public void mouseExited(MouseEvent e) {             
+            
+        }
+
+        public void mousePressed(MouseEvent e) {             
+             
+        }
+
+        public void mouseReleased(MouseEvent e) {           
+             
+        }
+   }
     
 }

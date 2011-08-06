@@ -113,7 +113,8 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
         //Progress
         p0.add(bar);
         bar.setStringPainted(true);
-        bar.setString(ForgeProps.getLocalized(BAR_BEFORE_START));
+      // bar.setString(ForgeProps.getLocalized(BAR_BEFORE_START));
+        bar.setString(String.format(ForgeProps.getLocalized(card == cards.length? BAR_CLOSE:BAR_WAIT), this.card, cards.length));
         Dimension d = bar.getPreferredSize();
         d.width = 300;
         bar.setPreferredSize(d);
@@ -149,6 +150,7 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
         bar.setString(String.format(ForgeProps.getLocalized(card == cards.length? BAR_CLOSE:BAR_WAIT), this.card,
                 cards.length));
         System.out.println(card + "/" + cards.length);
+        
     }
     
     public JDialog getDlg(JFrame frame) {
@@ -242,17 +244,321 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
     
     private static Card[] getNeededCards() {
         //read all card names and urls
-        Card[] card = readFile();
+        Card[] cardA = readFile(CARD_PICTURES_A);
+        Card[] cardB = readFile(CARD_PICTURES_B);
+        Card[] cardC = readFile(CARD_PICTURES_C);
+        Card[] cardD = readFile(CARD_PICTURES_D);
+        Card[] cardE = readFile(CARD_PICTURES_E);
+        Card[] cardF = readFile(CARD_PICTURES_F);
+        Card[] cardG = readFile(CARD_PICTURES_G);
+        Card[] cardH = readFile(CARD_PICTURES_H);
+        Card[] cardI = readFile(CARD_PICTURES_I);
+        Card[] cardJ = readFile(CARD_PICTURES_J);
+        Card[] cardK = readFile(CARD_PICTURES_K);
+        Card[] cardL = readFile(CARD_PICTURES_L);
+        Card[] cardM = readFile(CARD_PICTURES_M);
+        Card[] cardN = readFile(CARD_PICTURES_N);
+        Card[] cardO = readFile(CARD_PICTURES_O);
+        Card[] cardP = readFile(CARD_PICTURES_P);
+        Card[] cardQ = readFile(CARD_PICTURES_Q);
+        Card[] cardR = readFile(CARD_PICTURES_R);
+        Card[] cardS = readFile(CARD_PICTURES_S);
+        Card[] cardT = readFile(CARD_PICTURES_T);
+        Card[] cardU = readFile(CARD_PICTURES_U);
+        Card[] cardV = readFile(CARD_PICTURES_V);
+        Card[] cardW = readFile(CARD_PICTURES_W);
+        Card[] cardX = readFile(CARD_PICTURES_X);
+        Card[] cardY = readFile(CARD_PICTURES_Y);
+        Card[] cardZ = readFile(CARD_PICTURES_Z);
+        Card[] cardOther = readFile(CARD_PICTURES_OTHER);
         ArrayList<Card> list = new ArrayList<Card>();
         File file;
         
+        CardList all = AllZone.CardFactory.getAllCards(); 
+        
         File base = ForgeProps.getFile(IMAGE_BASE);
         
-        //check to see which cards we already have
-        for(int i = 0; i < card.length; i++) {
-            file = new File(base, card[i].name);
-            if(!file.exists()) list.add(card[i]);
+        //check to see which cards we already have and which cards Forge support
+        String cCard;
+        int simbol;
+      
+        for(int k=0;k < all.size();k++){
+        	cCard = GuiDisplayUtil.cleanString(all.getCard(k).getName().toLowerCase())+".jpg";
+        	File fileTest = new File(base, cCard);
+        	if(!fileTest.exists())
+        	{
+        	simbol = cCard.codePointAt(0);
+        	switch (simbol) {
+        	case 97:  //a
+        	for(int i = 0; i < cardA.length; i++) {
+                            if(cCard.equals(cardA[i].name.toLowerCase()))
+                    	{
+                    		list.add(cardA[i]);
+                			break; 
+                    	}
+               
+                }
+        	break;
+        	case 98:  //b	
+        	for(int i = 0; i < cardB.length; i++) {
+                    	if(cCard.equals(cardB[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardB[i]);
+            			break;
+                    	}
+                	}
+        		break;
+        	case 99:  //c	
+        	for(int i = 0; i < cardC.length; i++) {
+                	if(cCard.equals(cardC[i].name.toLowerCase()))
+                	{
+                	list.add(cardC[i]);
+        			break;
+                	}
+                	
+       			}
+        		break;
+        	case 100:  //D	
+            	for(int i = 0; i < cardD.length; i++) {
+                    
+                    	if(cCard.equals(cardD[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardD[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 101:  //E	
+            	for(int i = 0; i < cardE.length; i++) {
+                    
+                    	if(cCard.equals(cardE[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardE[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 102:  //F	
+            	for(int i = 0; i < cardF.length; i++) {
+                    
+                    	if(cCard.equals(cardF[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardF[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 103:  //G	
+            	for(int i = 0; i < cardG.length; i++) {
+                   
+                    	if(cCard.equals(cardG[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardG[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 104:  //H	
+            	for(int i = 0; i < cardH.length; i++) {
+                    
+                    	if(cCard.equals(cardH[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardH[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 105:  //I	
+            	for(int i = 0; i < cardI.length; i++) {
+                    
+                    	if(cCard.equals(cardI[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardI[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 106:  //J	
+            	for(int i = 0; i < cardJ.length; i++) {
+                   
+                    	if(cCard.equals(cardJ[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardJ[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 107:  //K	
+            	for(int i = 0; i < cardK.length; i++) {
+                  
+                    	if(cCard.equals(cardK[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardK[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 108:  //L	
+            	for(int i = 0; i < cardL.length; i++) {
+                   
+                    	if(cCard.equals(cardL[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardL[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 109:  //M	
+            	for(int i = 0; i < cardM.length; i++) {
+                   
+                    	if(cCard.equals(cardM[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardM[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 110:  //N	
+            	for(int i = 0; i < cardN.length; i++) {
+                   
+                    	if(cCard.equals(cardN[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardN[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 111:  //O	
+            	for(int i = 0; i < cardO.length; i++) {
+                   
+                    	if(cCard.equals(cardO[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardO[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 112:  //P	
+            	for(int i = 0; i < cardP.length; i++) {
+                   
+                    	if(cCard.equals(cardP[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardP[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 113:  //Q	
+            	for(int i = 0; i < cardQ.length; i++) {
+                    
+                    	if(cCard.equals(cardQ[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardQ[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 114:  //R	
+            	for(int i = 0; i < cardR.length; i++) {
+                   
+                    	if(cCard.equals(cardR[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardR[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 115:  //S	
+            	for(int i = 0; i < cardS.length; i++) {
+                   
+                    	if(cCard.equals(cardS[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardS[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 116:  //T	
+            	for(int i = 0; i < cardT.length; i++) {
+                   
+                    	if(cCard.equals(cardT[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardT[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 117:  //U	
+            	for(int i = 0; i < cardU.length; i++) {
+                   
+                    	if(cCard.equals(cardU[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardU[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 118:  //V	
+            	for(int i = 0; i < cardV.length; i++) {
+                   
+                    	if(cCard.equals(cardV[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardV[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 119:  //W	
+            	for(int i = 0; i < cardW.length; i++) {
+                   
+                    	if(cCard.equals(cardW[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardW[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 120:  //X	
+            	for(int i = 0; i < cardX.length; i++) {
+                  
+                    	if(cCard.equals(cardX[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardX[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 121:  //Y	
+            	for(int i = 0; i < cardY.length; i++) {
+                   
+                    	if(cCard.equals(cardY[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardY[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	case 122:  //Z	
+            	for(int i = 0; i < cardZ.length; i++) {
+                   
+                    	if(cCard.equals(cardZ[i].name.toLowerCase()))
+                    	{
+                    	list.add(cardZ[i]);
+            			break;                    	
+                    	}
+           			}
+            	break;
+        	default: break;	
+        	}
+       }
+        } 	
+        for(int i = 0; i < cardOther.length; i++) {
+            file = new File(base, cardOther[i].name);
+            if(!file.exists()) list.add(cardOther[i]);
         }
+        
+        
+        
         //return all card names and urls that are needed
         Card[] out = new Card[list.size()];
         list.toArray(out);
@@ -262,9 +568,10 @@ public class Gui_DownloadPictures extends DefaultBoundedRangeModel implements Ru
         return out;
     }//getNeededCards()
     
-    private static Card[] readFile() {
+    private static Card[] readFile(String ABC) {
         try {
-            BufferedReader in = new BufferedReader(new FileReader(ForgeProps.getFile(CARD_PICTURES)));
+        	FileReader zrc = new FileReader(ForgeProps.getFile(ABC));
+            BufferedReader in = new BufferedReader(zrc);
             String line;
             ArrayList<Card> list = new ArrayList<Card>();
             StringTokenizer tok;
