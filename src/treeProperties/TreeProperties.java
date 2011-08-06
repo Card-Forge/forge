@@ -246,14 +246,14 @@ public class TreeProperties implements Iterable<PropertyElement> {
      * Retrieves the child properties for the given key. Transparent properties can't be retrieved this way.
      */
     public TreeProperties getChildProperties(String key) {
-        return (TreeProperties) getProperty(key, "--" + child);
+        return (TreeProperties) getProperty(key, "--" + child, true);
     }
     
     /**
      * Retrieves the child properties for the given key.
      */
     public TreeProperties getTransparentProperties(String key) {
-        return (TreeProperties) getProperty(key, "--" + transparent);
+        return (TreeProperties) getProperty(key, "--" + transparent, true);
     }
     
     /**
@@ -267,10 +267,10 @@ public class TreeProperties implements Iterable<PropertyElement> {
             PropertyType<?> t = instanceTypes.get(cls);
             suffix = "--" + t.getSuffix();
         }
-        return (T) getProperty(key, suffix);
+        return (T) getProperty(key, suffix, true);
     }
     
-    private Object getProperty(String key, String suffix) {
+    private Object getProperty(String key, String suffix, boolean top) {
         checkQueryKey(key);
         //first, try the key in the current file, as if there were no slash
         //No subpath - either directly in the properties...
@@ -283,7 +283,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
         for(Entry<String, Object> entry:properties.entrySet()) {
             if(entry.getKey().endsWith("--" + transparent)) {
                 TreeProperties p = (TreeProperties) entry.getValue();
-                if((result = p.getProperty(key, suffix)) != null) {
+                if((result = p.getProperty(key, suffix, false)) != null) {
                     return result;
                 }
             }
@@ -297,16 +297,17 @@ public class TreeProperties implements Iterable<PropertyElement> {
         while((index = key.indexOf('/', index + 1)) != -1) {
             String first = key.substring(0, index), second = key.substring(index + 1);
             
-            TreeProperties p = (TreeProperties) getProperty(first, "--" + child);
+            TreeProperties p = (TreeProperties) getProperty(first, "--" + child, false);
             if(p == null) continue;
-            if((result = p.getProperty(second, suffix)) != null) {
+            if((result = p.getProperty(second, suffix, false)) != null) {
                 return result;
             }
         }
-        Exception ex=
-        new Exception("TreeProperties returns null for " + key + suffix);
+        if(top) {
+            Exception ex = new Exception("TreeProperties returns null for " + key + suffix);
 //        ex.printStackTrace();
-        System.err.println(ex);
+            System.err.println(ex);
+        }
         return null;
     }
     
