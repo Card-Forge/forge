@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 K:Untap:1
 A:AB$GainLife | Cost$ 2 T | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
-K:abTapTgt 4 T:Creature:Tap target creature.
+A:AB$Tap | Cost$ 4 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 A:AB$Draw | Cost$ 5 T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/staff_of_domination.jpg

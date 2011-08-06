@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Human Wizard
 Text:no text
 PT:1/2
-K:abTapTgt U T:Creature:Tap target creature.
+A:AB$Tap | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 A:AB$Untap | Cost$ U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puppeteer.jpg

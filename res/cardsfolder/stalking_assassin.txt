@@ -3,7 +3,7 @@ ManaCost:1 U B
 Types:Creature Human Assassin
 Text:no text
 PT:1/1
-K:abTapTgt 3 U T:Creature:Tap target creature.
+A:AB$Tap | Cost$ 3 U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stalking_assassin.jpg
 SetInfo:INV|Rare|http://magiccards.info/scans/en/in/277.jpg

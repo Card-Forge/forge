@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Creature Elephant Cleric
 Text:no text
 PT:3/3
-K:abTapTgt W T:Creature:Tap target creature.
+A:AB$Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_mystic.jpg
 SetInfo:DST|Common|http://magiccards.info/scans/en/ds/7.jpg

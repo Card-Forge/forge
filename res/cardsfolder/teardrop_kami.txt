@@ -3,7 +3,7 @@ ManaCost:U
 Types:Creature Spirit
 Text:no text
 PT:1/1
-K:abTapTgt Sac<1/CARDNAME>:Creature:Tap target creature.
+A:AB$Tap | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 A:AB$Untap | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Common

@@ -3,8 +3,8 @@ ManaCost:U
 Types:Creature Human Wizard
 Text:no text
 PT:1/1
+A:AB$Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 K:abLoseLifeTgt B T:1
-K:abTapTgt W T:Creature:Tap target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormscape_apprentice.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/75.jpg

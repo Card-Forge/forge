@@ -2,7 +2,7 @@ Name:Puppet Strings
 ManaCost:3
 Types:Artifact
 Text:no text
-K:abTapTgt 2 T:Creature:Tap target creature.
+A:AB$Tap | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 A:AB$Untap | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

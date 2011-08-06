@@ -6035,6 +6035,7 @@ public class CardFactory implements NewConstants {
          * 
          * syntax: abTapTgt {Ability_Cost}:{Valid Targets}:{Description}
          */
+        /* Cards converted to AF_AB$Tap.
         if (hasKeyword(card, "abTapTgt") != -1) {
         	int n = hasKeyword(card, "abTapTgt");
 
@@ -6132,6 +6133,7 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(AbTapTgt);
         	card.setSVar("PlayMain1", "TRUE");
         }//End abTapTgt
+        */
         
         /*
          *  Generic tap all ___ activated ability

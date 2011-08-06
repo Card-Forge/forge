@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Human Rebel Rogue
 Text:no text
 PT:1/2
-K:abTapTgt B T:Creature:Tap target creature.
+A:AB$Tap | Cost$ B T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rathi_trapper.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/90.jpg
