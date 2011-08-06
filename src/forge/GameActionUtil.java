@@ -8,7 +8,6 @@ import java.util.HashMap;
 
 public class GameActionUtil {
     public static void executeUpkeepEffects() {
-        
         upkeep_removeDealtDamageToOppThisTurn();
         upkeep_UpkeepCost(); //sacrifice unless upkeep cost is paid
         upkeep_DestroyUpkeepCost(); //destroy unless upkeep cost is paid

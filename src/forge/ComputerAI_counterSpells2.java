@@ -106,9 +106,12 @@ public class ComputerAI_counterSpells2 {
 	
 	public static boolean checkArray(Card c, String[] type)
 	{
+		if (c.getSpellAbility().length == 0)
+			return false;
 		for(String s : type)
 		{
 			SpellAbility sa = c.getSpellAbility()[0];
+
 			if (s.equals(c.getName()) && ComputerUtil.canPayCost(sa))
 				return true;
 		}
