@@ -2314,149 +2314,154 @@ public class Card extends MyObservable {
         return isValidCard(Restriction);
     }
     
+    
+    // Takes an array of arguments like Permanent.Blue+withFlying, only one of them has to be true
     public boolean isValidCard(String Restrictions[]) {
     	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
 
         for(int i = 0; i < Restrictions.length; i++) {
-        	boolean r = true;
-            String incR[] = Restrictions[i].split("\\."); // Inclusive restrictions are Card types
+        	if(isValid(Restrictions[i])) return true;
+        }
+        return false;
+        
+    }//isValidCard
+    
+    
+    // Takes an argument like Permanent.Blue+withFlying
+    public boolean isValid(String Restriction) {
+    	
+        if (getName().equals("Mana Pool") || isImmutable()) return false;
+
+            String incR[] = Restriction.split("\\."); // Inclusive restrictions are Card types
             
             if (incR[0].equals("Spell") && isType("Land"))
-            	r = false;
+            	return false;
             if (incR[0].equals("Permanent") && (isType("Instant") || isType("Sorcery")))
-            	r = false;
+            	return false;
             if(!incR[0].equals("Card") && !incR[0].equals("Spell") && !incR[0].equals("Permanent") && !(isType(incR[0])))
-            	r = false; //Check for wrong type
+            	return false; //Check for wrong type
             
             if(incR.length > 1) {
                 final String excR = incR[1];
                 String exR[] = excR.split("\\+"); // Exclusive Restrictions are ...
-                for(int j = 0; j < exR.length; j++) {
-        			if (exR[j].contains("White") || // ... Card colors
-                       exR[j].contains("Blue") ||
-                       exR[j].contains("Black") ||
-                       exR[j].contains("Red") ||
-                       exR[j].contains("Green") ||
-                       exR[j].contains("Colorless")) 
-        			{
-    					if(exR[j].startsWith("non"))
-    						r = r && (!CardUtil.getColors(this).contains(exR[j].substring(3).toLowerCase()));
-    					else
-    						r = r && (CardUtil.getColors(this).contains(exR[j].toLowerCase()));
-        			}
-                    else if (exR[j].contains("MultiColor")) // ... Card is multicolored
-                    {
-                    	if (exR[j].startsWith("non"))
-                    		r = r && (CardUtil.getColors(this).size() <= 1);
-                    	else 
-                    		r = r && (CardUtil.getColors(this).size() > 1);
-                    }
-        			
-                    else if (exR[j].contains("MonoColor")) // ... Card is monocolored
-                    {
-                    	if (exR[j].startsWith("non"))
-                    		r = r && (CardUtil.getColors(this).size() > 1 || isColorless());
-                    	else 
-                    		r = r && CardUtil.getColors(this).size() == 1 && !isColorless();
-                    }
-                    
-                    else if (exR[j].contains("with")) // ... Card keywords
-                    {
-                    	if (exR[j].startsWith("without")) 
-                    		r = r && (!getKeyword().contains(exR[j].substring(7)));
-                    	else 
-                    		r = r && (getKeyword().contains(exR[j].substring(4)));
-                    }
-                    
-                    else if (exR[j].startsWith("tapped"))
-                    	r = r && (isTapped());
-                    else if (exR[j].startsWith("untapped"))
-                    	r = r && (isUntapped());
-
-                    else if (exR[j].startsWith("enteredBattlefieldThisTurn"))
-                    	r = r && (getTurnInZone() == AllZone.Phase.getTurn());
-                    
-                    else if (exR[j].startsWith("enchanted"))
-                    	r = r && (isEnchanted());
-                    else if (exR[j].startsWith("unenchanted"))
-                    	r = r && (!isEnchanted());
-                    else if (exR[j].startsWith("enchanting"))
-                    	r = r && (isEnchanting());
-        			
-                    else if (exR[j].startsWith("equipped"))
-                    	r = r && (isEquipped());
-                    else if (exR[j].startsWith("unequipped"))
-                    	r = r && (!isEquipped());
-                    else if (exR[j].startsWith("equipping"))
-                    	r = r && (isEquipping());
-                    
-                    else if (exR[j].startsWith("token"))
-                    	r = r && (isToken());
-                    else if (exR[j].startsWith("nonToken"))
-                    	r = r && (!isToken());
-                    
-                    else if (exR[j].startsWith("power") || 	// 8/10
-                    		 exR[j].startsWith("toughness") ||
-                    		 exR[j].startsWith("cmc"))
-                    {
-                    	int x = 0;
-                    	int y = 0;
-                    	int z = 0;
-                    	
-                    	if (exR[j].startsWith("power") )
-                        {
-                        	z = 7;
-                        	y = getNetAttack();
-                        }
-                        else if (exR[j].startsWith("toughness"))
-                        {
-                        	z = 11;
-                        	y = getNetDefense();
-                        }
-                        else if (exR[j].startsWith("cmc"))
-                        {
-                        	z = 5;
-                        	y = getCMC();
-                        }
-                    	
-                    	if (exR[j].substring(z).equals("X"))
-                    		x = CardFactoryUtil.xCount(this, getSVar("X"));
-                    	else
-                    		x = Integer.parseInt(exR[j].substring(z));
-                    	
-                    	if (exR[j].contains("LT"))
-                    		r = r && (y < x);
-                    	else if (exR[j].contains("LE"))
-                    		r = r && (y <= x);
-                    	else if (exR[j].contains("EQ"))
-                    		r = r && (y == x);
-                    	else if (exR[j].contains("GE"))
-                    		r = r && (y >= x);
-                    	else if (exR[j].contains("GT"))
-                    		r = r && (y > x);
-                    }
-        			
-                    else if (exR[j].startsWith("attacking")) r = r && isAttacking();
-        			
-                    else if (exR[j].startsWith("notattacking")) r = r && !isAttacking();
-        			
-                    else if (exR[j].startsWith("blocking")) r = r && isBlocking();
-        			
-                    //TODO: enchanting
-                    //TODO: counters
-                    else if(exR[j].startsWith("named")) //by name
-                    	r = r && (getName().equals(exR[j].substring(6)));
-                    else if(exR[j].startsWith("non")) // ... Other Card types
-                    	r = r && (!isType(exR[j].substring(3)));
-                    else
-                    	r = r && (isType(exR[j]));
-               }
+                for(int j = 0; j < exR.length; j++)
+                    if(hasProperty(exR[j]) == false) return false;
             }
-            if (r == true) return true;
-        }
-        return false;
-    }//isValidCard
+            return true;
+    }//isValidCard(String Restriction)
+
+    // Takes arguments like Blue or withFlying
+	public boolean hasProperty(String Property) {
+		if (Property.contains("White") || // ... Card colors
+                Property.contains("Blue") ||
+                Property.contains("Black") ||
+                Property.contains("Red") ||
+                Property.contains("Green") ||
+                Property.contains("Colorless")) 
+ 			{
+					if(Property.startsWith("non"))
+					{	
+						if (CardUtil.getColors(this).contains(Property.substring(3).toLowerCase())) return false;
+					}	
+					else
+						if (!CardUtil.getColors(this).contains(Property.toLowerCase())) return false;
+ 			}
+             else if (Property.contains("MultiColor")) // ... Card is multicolored
+             {
+            	 if (Property.startsWith("non") && (CardUtil.getColors(this).size() > 1)) return false;
+                 if (!Property.startsWith("non") && (CardUtil.getColors(this).size() <= 1)) return false;
+             }
+ 			
+             else if (Property.contains("MonoColor")) // ... Card is monocolored
+             {
+              	if (Property.startsWith("non") && (CardUtil.getColors(this).size() == 1 && !isColorless())) return false;
+             	if (!Property.startsWith("non") && (CardUtil.getColors(this).size() > 1 || isColorless())) return false;
+             }
+             
+             else if (Property.contains("with")) // ... Card keywords
+             {
+              	if (Property.startsWith("without") && getKeyword().contains(Property.substring(7))) return false;
+             	if (!Property.startsWith("without") && !getKeyword().contains(Property.substring(4))) return false;
+             }
+             
+             else if (Property.startsWith("tapped"))
+             	{ if(!isTapped()) return false;}
+             else if (Property.startsWith("untapped"))
+             	{ if(!isUntapped()) return false;}
+             else if (Property.startsWith("enteredBattlefieldThisTurn"))
+             	{ if(!(getTurnInZone() == AllZone.Phase.getTurn())) return false;}
+             
+             else if (Property.startsWith("enchanted"))
+             	{ if(!isEnchanted()) return false;}
+             else if (Property.startsWith("unenchanted"))
+             	{ if(isEnchanted()) return false;}
+             else if (Property.startsWith("enchanting"))
+             	{ if(!isEnchanting()) return false;}
+ 			
+             else if (Property.startsWith("equipped"))
+         		{ if(!isEquipped()) return false;}
+             else if (Property.startsWith("unequipped"))
+         		{ if(isEquipped()) return false;}
+             else if (Property.startsWith("equipping"))
+         		{ if(!isEquipping()) return false;}
+             
+             else if (Property.startsWith("token"))
+         		{ if(!isToken()) return false;}
+             else if (Property.startsWith("nonToken"))
+         		{ if(isToken()) return false;}
+             
+             else if (Property.startsWith("power") || 	// 8/10
+             		 Property.startsWith("toughness") ||
+             		 Property.startsWith("cmc"))
+             {
+             	int x = 0;
+             	int y = 0;
+             	int z = 0;
+             	
+             	if (Property.startsWith("power") )
+                 {
+                 	z = 7;
+                 	y = getNetAttack();
+                 }
+                 else if (Property.startsWith("toughness"))
+                 {
+                 	z = 11;
+                 	y = getNetDefense();
+                 }
+                 else if (Property.startsWith("cmc"))
+                 {
+                 	z = 5;
+                 	y = getCMC();
+                 }
+             	
+             	if (Property.substring(z).equals("X"))
+             		x = CardFactoryUtil.xCount(this, getSVar("X"));
+             	else
+             		x = Integer.parseInt(Property.substring(z));
+             	
+             	if (Property.contains("LT") && y >= x) return false;
+             	else if (Property.contains("LE") && y > x) return false;
+             	else if (Property.contains("EQ") && y != x) return false;
+             	else if (Property.contains("GE") && y < x) return false;
+             	else if (Property.contains("GT") && y <= x) return false;
+             }
+ 			
+             else if (Property.startsWith("attacking")) { if(!isAttacking())  return false;}
+ 			
+             else if (Property.startsWith("notattacking")) { if(isAttacking())  return false;}
+ 			
+             else if (Property.startsWith("blocking")) { if(!isBlocking())  return false;}
+ 			
+             //TODO: counters
+             else if(Property.startsWith("named")) //by name
+             	{ if(getName().equals(Property.substring(6))) return false;}
+             else if(Property.startsWith("non")) // ... Other Card types
+             	{ if(isType(Property.substring(3))) return false;}
+             else
+             	if(!isType(Property)) return false;
+       return true;
+	}//hasProperty
 
 	public void setImmutable(boolean isImmutable) {
 		this.isImmutable = isImmutable;
