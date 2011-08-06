@@ -11369,6 +11369,45 @@ public class CardFactory implements NewConstants {
             card.addComesIntoPlayCommand(intoPlay);          
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Phyrexian Processor")) {
+            final SpellAbility ability = new Ability_Static(card, "0") {
+                @Override
+                public void resolve() {
+                	Player player = card.getController();
+                	int lifeToPay = 0;
+                    if(player.isHuman()) {
+                    	int num = card.getController().getLife();
+                    	String[] choices = new String[num+1];
+                    	for(int j = 0; j <= num; j++) {
+                    		choices[j] = ""+j;
+                    	}
+                        String answer = (String)(AllZone.Display.getChoiceOptional(
+                                "Life to pay:", choices));
+                        lifeToPay = Integer.parseInt(answer);
+                    } else {
+                        //not implemented for Compy
+                    }
+                    
+                    if(player.payLife(lifeToPay, card)) card.setXLifePaid(lifeToPay);
+                }
+            };//ability
+            Command intoPlay = new Command() {
+                private static final long serialVersionUID = 5634360316643996274L;
+                
+                public void execute() {
+                	
+                	StringBuilder sb = new StringBuilder();
+                	sb.append("When ").append(card.getName()).append(" comes into play, pay any amount of life.");
+                	ability.setStackDescription(sb.toString());
+                    
+                    AllZone.Stack.add(ability);
+                }
+            };
+            card.addComesIntoPlayCommand(intoPlay);
+            
+        }//*************** END ************ END **************************
+        
 
         return postFactoryKeywords(card);
     }//getCard2

@@ -112,6 +112,8 @@ public class Card extends MyObservable {
     
     private int							 xManaCostPaid 					   = 0;
     
+    private int							xLifePaid							= 0;
+    
     private int 					     multiKickerMagnitude			   = 0;
     
     private Player                       owner                             = null;
@@ -203,6 +205,16 @@ public class Card extends MyObservable {
     public int getXManaCostPaid()
     {
     	return xManaCostPaid;
+    }
+    
+    public void setXLifePaid(int n)
+    {
+    	xLifePaid = n;
+    }
+    
+    public int getXLifePaid()
+    {
+    	return xLifePaid;
     }
     
     //used to see if an attacking creature with a triggering attack ability triggered this phase:

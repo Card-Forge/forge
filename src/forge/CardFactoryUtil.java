@@ -3732,6 +3732,20 @@ public class CardFactoryUtil {
         	}
         }
         
+        if(sq[0].contains("xLifePaid")) {
+        	if (c.getController().isHuman()) {
+        		return c.getXLifePaid();
+        	}
+        	else {
+        		//copied for xPaid
+        		//not implemented for Compy
+        		//int dam = ComputerUtil.getAvailableMana().size()- CardUtil.getConvertedManaCost(c);
+        		//if (dam < 0) dam = 0;
+        		//return dam;
+        		return 0;
+        	}
+        }
+        
         CardList someCards = new CardList();
         
         //Complex counting methods
