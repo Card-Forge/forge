@@ -31,6 +31,14 @@ class CardFactory_Auras {
         return -1;
     }
     
+    public static int shouldControl(Card c) {
+        ArrayList<String> a = c.getKeyword();
+        for (int i = 0; i < a.size(); i++)
+            if (a.get(i).toString().startsWith("enControlCreature")) return i;
+        
+        return -1;
+    }
+    
     public static Card getCard(final Card card, String cardName, String owner) {
     	
     	
@@ -1012,136 +1020,7 @@ class CardFactory_Auras {
 
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Control Magic") || cardName.equals("Mind Control")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 7359753772138233155L;
                 
-                @Override
-                public boolean canPlayAI() {
-                    CardList c = CardFactoryUtil.AI_getHumanCreature(card, true);
-                    CardListUtil.sortAttack(c);
-                    CardListUtil.sortFlying(c);
-                    
-                    if(c.isEmpty()) return false;
-                    
-                    if(2 <= c.get(0).getNetAttack() && c.get(0).getKeyword().contains("Flying")) {
-                        setTargetCard(c.get(0));
-                        return true;
-                    }
-                    
-                    CardListUtil.sortAttack(c);
-                    if(4 <= c.get(0).getNetAttack()) {
-                        setTargetCard(c.get(0));
-                        return true;
-                    }
-                    
-                    return false;
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-                    play.add(card);
-                    
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
-                    
-                }//resolve()
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Command onEnchant = new Command() {
-                
-                private static final long serialVersionUID = -3423649303706656587L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        //set summoning sickness
-                        if(crd.getKeyword().contains("Haste")) {
-                            crd.setSickness(false);
-                        } else {
-                            crd.setSickness(true);
-                        }
-                        
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
-                        
-                        PlayerZone from = AllZone.getZone(crd);
-                        from.remove(crd);
-                        
-                        crd.setController(card.getController());
-                        
-                        PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
-                        to.add(crd);
-                        
-                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
-                    }
-                }//execute()
-            };//Command
-            
-            Command onUnEnchant = new Command() {
-                
-                private static final long serialVersionUID = -2365466450520529652L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        if(AllZone.GameAction.isCardInPlay(crd)) {
-                            if(crd.getKeyword().contains("Haste")) {
-                                crd.setSickness(false);
-                            } else {
-                                crd.setSickness(true);
-                            }
-                            
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
-                            
-                            PlayerZone from = AllZone.getZone(crd);
-                            from.remove(crd);
-                            
-                            AllZone.Combat.removeFromCombat(crd);
-                            
-                            String opp = AllZone.GameAction.getOpponent(crd.getController());
-                            crd.setController(opp);
-                            
-                            PlayerZone to = AllZone.getZone(Constant.Zone.Play, opp);
-                            to.add(crd);
-                            
-                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
-                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
-                        }
-                    }
-                    
-                }//execute()
-            };//Command
-            
-            Command onLeavesPlay = new Command() {
-                
-
-                private static final long serialVersionUID = 8144460293841806556L;
-                
-                public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            
-            card.addEnchantCommand(onEnchant);
-            card.addUnEnchantCommand(onUnEnchant);
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
-
-            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
-        }//*************** END ************ END **************************
-        
         //******************************************************************
         // This card can't be converted to keyword, problem with CARDNME   *
         //*************** START *********** START **************************
@@ -1415,6 +1294,137 @@ class CardFactory_Auras {
     	// ************************************************************************
     	// The card objects below have been converted to keyword and can be deleted
     	// ************************************************************************
+/*
+        //*************** START *********** START **************************
+        else if(cardName.equals("Control Magic") || cardName.equals("Mind Control")) {
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = 7359753772138233155L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList c = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    CardListUtil.sortAttack(c);
+                    CardListUtil.sortFlying(c);
+                    
+                    if(c.isEmpty()) return false;
+                    
+                    if(2 <= c.get(0).getNetAttack() && c.get(0).getKeyword().contains("Flying")) {
+                        setTargetCard(c.get(0));
+                        return true;
+                    }
+                    
+                    CardListUtil.sortAttack(c);
+                    if(4 <= c.get(0).getNetAttack()) {
+                        setTargetCard(c.get(0));
+                        return true;
+                    }
+                    
+                    return false;
+                }//canPlayAI()
+                
+                @Override
+                public void resolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    play.add(card);
+                    
+                    Card c = getTargetCard();
+                    
+                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
+                    
+                }//resolve()
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            
+            Command onEnchant = new Command() {
+                
+                private static final long serialVersionUID = -3423649303706656587L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        //set summoning sickness
+                        if(crd.getKeyword().contains("Haste")) {
+                            crd.setSickness(false);
+                        } else {
+                            crd.setSickness(true);
+                        }
+                        
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                        
+                        PlayerZone from = AllZone.getZone(crd);
+                        from.remove(crd);
+                        
+                        crd.setController(card.getController());
+                        
+                        PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        to.add(crd);
+                        
+                        ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
+                        ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                    }
+                }//execute()
+            };//Command
+            
+            Command onUnEnchant = new Command() {
+                
+                private static final long serialVersionUID = -2365466450520529652L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        if(AllZone.GameAction.isCardInPlay(crd)) {
+                            if(crd.getKeyword().contains("Haste")) {
+                                crd.setSickness(false);
+                            } else {
+                                crd.setSickness(true);
+                            }
+                            
+                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                            
+                            PlayerZone from = AllZone.getZone(crd);
+                            from.remove(crd);
+                            
+                            AllZone.Combat.removeFromCombat(crd);
+                            
+                            String opp = AllZone.GameAction.getOpponent(crd.getController());
+                            crd.setController(opp);
+                            
+                            PlayerZone to = AllZone.getZone(Constant.Zone.Play, opp);
+                            to.add(crd);
+                            
+                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                        }
+                    }
+                    
+                }//execute()
+            };//Command
+            
+            Command onLeavesPlay = new Command() {
+                
+
+                private static final long serialVersionUID = 8144460293841806556L;
+                
+                public void execute() {
+                    if(card.isEnchanting()) {
+                        Card crd = card.getEnchanting().get(0);
+                        card.unEnchantCard(crd);
+                    }
+                }
+            };
+            
+            card.addEnchantCommand(onEnchant);
+            card.addUnEnchantCommand(onUnEnchant);
+            card.addLeavesPlayCommand(onLeavesPlay);
+            
+
+            spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
+        }//*************** END ************ END **************************
+*/
+        
 /*
         //*************** START *********** START **************************
         else if(cardName.equals("Weakness")) {
@@ -5684,20 +5694,10 @@ class CardFactory_Auras {
         }//*************** END ************ END **************************
 */
         
-        if(shouldVanish(card) != -1) {
-            int n = shouldVanish(card);
-            if(n != -1) {
-                String parse = card.getKeyword().get(n).toString();
-                card.removeIntrinsicKeyword(parse);
-                
-                String k[] = parse.split(":");
-                final int power = Integer.parseInt(k[1]);
-                
-                card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
-                card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
-            }
-        }//Vanishing
-
+        /*
+         *   This section is for cards which add a P/T boost
+         *   and/or keywords to the enchanted creature
+         */
         if (shouldEnchant(card) != -1) {
             int n = shouldEnchant(card);
             if (n != -1) {
@@ -5789,6 +5789,327 @@ class CardFactory_Auras {
                 card.addLeavesPlayCommand(CardFactoryUtil.enPump_LeavesPlay(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
             }
         }// enPump[Curse]
+        
+        /*
+         *  For Control Magic type of auras
+         */
+        if (shouldControl(card) != -1) {
+            int n = shouldControl(card);
+            if (n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                card.removeIntrinsicKeyword(parse);
+                String k[] = parse.split(":");
+                
+                String option = "none";
+                boolean optionUnTapLands = false;
+                final boolean optionCmcTwoOrLess[] = {false};
+                final boolean optionRedOrGreen[] = {false};
+                
+                /*
+                 *  Check to see if these are options and/or descriptions
+                 *  Descriptions can be added later if needed
+                 */
+                if (k.length > 1) {
+                	if (k[1].startsWith("Option=")) {
+                		option = k[1].substring(7);
+                	}
+                }
+                
+                /*
+                 *  This is for the Treachery aura
+                 *  no need to parse the number of lands at this time
+                 */
+                if (option.contains("untap up to 5 lands") || 
+                		card.getKeyword().contains("When CARDNAME enters the battlefield, untap up to five lands.")) {
+                	optionUnTapLands = true;
+                }
+                
+                /* 
+                 *  This is for the Threads of Disloyalty aura
+                 *  no need to parse the CMC number at this time
+                 */
+                if (option.contains("CMC 2 or less") || 
+                		card.getKeyword().contains("Enchant creature with converted mana cost 2 or less")) {
+                	optionCmcTwoOrLess[0] = true;
+                }
+                
+                /*
+                 *  This is for the Mind Harness aura
+                 *  no need to parse the colors at this time
+                 */
+                if (option.contains("red or green") || 
+                		card.getKeyword().contains("Enchant red or green creature")) {
+                	optionRedOrGreen[0] = true;
+                }
+                
+                /*
+                 *  I borrowed the code from Peregrine Drake
+                 */
+                final Input untap = new Input() {
+					private static final long serialVersionUID = -2208979487849617156L;
+					int                       stop             = 5;
+                    int                       count            = 0;
+                    
+                    @Override
+                    public void showMessage() {
+                        AllZone.Display.showMessage("Select a land to untap");
+                        ButtonUtil.enableOnlyCancel();
+                    }
+                    
+                    @Override
+                    public void selectButtonCancel() {
+                        stop();
+                    }
+                    
+                    @Override
+                    public void selectCard(Card card, PlayerZone zone) {
+                        if(card.isLand() && zone.is(Constant.Zone.Play)) {
+                            card.untap();
+                            count++;
+                            if(count == stop) stop();
+                        }
+                    }//selectCard()
+                };// Input untap
+                
+                final SpellAbility untapAbility = new Ability(card, "0") {
+                    @Override
+                    public void resolve() {
+                        if(card.getController().equals("Human")) AllZone.InputControl.setInput(untap);
+                        else {
+                            CardList list = new CardList(AllZone.Computer_Play.getCards());
+                            list = list.filter(new CardListFilter() {
+                                public boolean addCard(Card c) {
+                                    return c.isLand() && c.isTapped();
+                                }
+                            });
+                            for(int i = 0; i < 5 && i < list.size(); i++)
+                                list.get(i).untap();
+                        }//else
+                    }//resolve()
+                };// untapAbility
+                
+                Command intoPlay = new Command() {
+					private static final long serialVersionUID = -3310362768233358111L;
+
+					public void execute() {
+                    	untapAbility.setStackDescription(card.getController() + " untaps up to 5 lands.");
+                        AllZone.Stack.add(untapAbility);
+                    }
+                };
+                if (optionUnTapLands) {
+                	card.addComesIntoPlayCommand(intoPlay);
+                }
+                
+                /*
+                 *  I borrowed this code from Control Magic
+                 */
+                final SpellAbility spell = new Spell(card) {
+					private static final long serialVersionUID = 5211276723523636356L;
+
+					@Override
+                    public boolean canPlayAI() {
+                        CardList tgts = CardFactoryUtil.AI_getHumanCreature(card, true);
+                        CardListUtil.sortAttack(tgts);
+                        CardListUtil.sortFlying(tgts);
+                        
+                        /*
+                         *  This is a new addition and is used
+                         *  by the Threads of Disloyalty aura
+                         */
+                        if (optionCmcTwoOrLess[0]) {
+                        	tgts = tgts.filter(new CardListFilter() {
+                        		public boolean addCard(Card c) {
+                        			return CardUtil.getConvertedManaCost(c.getManaCost()) <= 2;
+                        		}
+                        	});
+                        	if (tgts.isEmpty()) return false;
+                        	else {
+                        		CardListUtil.sortAttack(tgts);
+                                CardListUtil.sortFlying(tgts);
+                        		setTargetCard(tgts.get(0));
+                        		return true;
+                        	}
+                        }
+                        
+                        /*
+                         *  This is a new addition and is
+                         *  used by the Mind Harness aura
+                         */
+                        if (optionRedOrGreen[0]) {
+                        	tgts = tgts.filter(new CardListFilter() {
+                        		public boolean addCard(Card c) {
+                        			return CardUtil.getColors(c).contains(Constant.Color.Green) || 
+                        			CardUtil.getColors(c).contains(Constant.Color.Red);
+                        		}
+                        	});
+                        }
+                        
+                        if (tgts.isEmpty()) return false;
+                                                
+                        if (2 <= tgts.get(0).getNetAttack() && tgts.get(0).getKeyword().contains("Flying")) {
+                            setTargetCard(tgts.get(0));
+                            return true;
+                        }
+                        
+                        CardListUtil.sortAttack(tgts);
+                        if (4 <= tgts.get(0).getNetAttack()) {
+                            setTargetCard(tgts.get(0));
+                            return true;
+                        }
+                        
+                        /*
+                         *  This is new and we may want to add more tests
+                         *  Do we want the AI to hold these auras when
+                         *  losing game and at a creature disadvatange
+                         */
+                        if (3 <= tgts.get(0).getNetAttack() && AllZone.Human_Life.getLife() > AllZone.Computer_Life.getLife()) {
+                            setTargetCard(tgts.get(0));
+                            return true;
+                        }
+                        
+                        return false;
+                    }//canPlayAI()
+                    
+                    @Override
+                    public void resolve() {
+                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                        play.add(card);
+                        
+                        Card c = getTargetCard();
+                        
+                        if (AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
+                        
+                    }//resolve()
+                };//SpellAbility
+                card.clearSpellAbility();
+                card.addSpellAbility(spell);
+                
+                Command onEnchant = new Command() {
+					private static final long serialVersionUID = -6323085271405286813L;
+
+					public void execute() {
+                        if(card.isEnchanting()) {
+                            Card crd = card.getEnchanting().get(0);
+                            //set summoning sickness
+                            if(crd.getKeyword().contains("Haste")) {
+                                crd.setSickness(false);
+                            } else {
+                                crd.setSickness(true);
+                            }
+                            
+                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                            
+                            PlayerZone from = AllZone.getZone(crd);
+                            from.remove(crd);
+                            
+                            crd.setController(card.getController());
+                            
+                            PlayerZone to = AllZone.getZone(Constant.Zone.Play, card.getController());
+                            to.add(crd);
+                            
+                            ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
+                            ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                        }
+                    }//execute()
+                };//Command
+                
+                Command onUnEnchant = new Command() {
+					private static final long serialVersionUID = -3086710987052359078L;
+
+					public void execute() {
+                        if(card.isEnchanting()) {
+                            Card crd = card.getEnchanting().get(0);
+                            if(AllZone.GameAction.isCardInPlay(crd)) {
+                                if(crd.getKeyword().contains("Haste")) {
+                                    crd.setSickness(false);
+                                } else {
+                                    crd.setSickness(true);
+                                }
+                                
+                                ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
+                                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
+                                
+                                PlayerZone from = AllZone.getZone(crd);
+                                from.remove(crd);
+                                
+                                AllZone.Combat.removeFromCombat(crd);
+                                
+                                String opp = AllZone.GameAction.getOpponent(crd.getController());
+                                crd.setController(opp);
+                                
+                                PlayerZone to = AllZone.getZone(Constant.Zone.Play, opp);
+                                to.add(crd);
+                                
+                                ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
+                                ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
+                            }
+                        }
+                        
+                    }//execute()
+                };//Command
+                
+                Command onLeavesPlay = new Command() {
+					private static final long serialVersionUID = 7464815269438815827L;
+
+					public void execute() {
+                        if(card.isEnchanting()) {
+                            Card crd = card.getEnchanting().get(0);
+                            card.unEnchantCard(crd);
+                        }
+                    }
+                };//Command
+                
+                /*
+                 *  We now need an improved input method so we can filter out the inappropriate
+                 *  choices for the auras Threads of Disloyalty and Mind Harness
+                 * 
+                 *  NOTE: can we target a creature in our zone ?
+                 */
+                Input runtime = new Input() {
+                    private static final long serialVersionUID = -7462101446917907106L;
+
+                    @Override
+                    public void showMessage() {
+                        PlayerZone comp = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+                        PlayerZone hum = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+                        CardList creatures = new CardList();
+                        creatures.addAll(comp.getCards());
+                        creatures.addAll(hum.getCards());
+                        creatures = creatures.filter(new CardListFilter() {
+                            public boolean addCard(Card c) {
+                                return c.isCreature() && CardFactoryUtil.canTarget(card, c) && 
+                                ((!optionCmcTwoOrLess[0]) || (optionCmcTwoOrLess[0] && CardUtil.getConvertedManaCost(c.getManaCost()) <= 2)) && 
+                                ((!optionRedOrGreen[0]) || (optionRedOrGreen[0] && 
+                                	CardUtil.getColors(c).contains(Constant.Color.Green) || CardUtil.getColors(c).contains(Constant.Color.Red)));
+                            }
+                        });
+                        
+                        stopSetNext(CardFactoryUtil.input_targetSpecific(spell, creatures, "Select target creature", true, false));
+                    }
+                };
+                
+                card.addEnchantCommand(onEnchant);
+                card.addUnEnchantCommand(onUnEnchant);
+                card.addLeavesPlayCommand(onLeavesPlay);
+                
+                spell.setBeforePayMana(runtime);
+            }// SpellAbility spell
+        }// enControlCreature
+        
+        if(shouldVanish(card) != -1) {
+            int n = shouldVanish(card);
+            if(n != -1) {
+                String parse = card.getKeyword().get(n).toString();
+                card.removeIntrinsicKeyword(parse);
+                
+                String k[] = parse.split(":");
+                final int power = Integer.parseInt(k[1]);
+                
+                card.addComesIntoPlayCommand(CardFactoryUtil.vanishing(card, power));
+                card.addSpellAbility(CardFactoryUtil.vanish_desc(card, power));
+            }
+        }//Vanishing
         
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

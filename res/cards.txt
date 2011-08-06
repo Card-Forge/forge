@@ -1,3 +1,64 @@
+Binding Grasp
+3 U
+Enchantment Aura
+You control enchanted creature. Enchanted creature gets +0/+1.
+Enchant creature
+At the beginning of your upkeep, sacrifice Binding Grasp unless you pay:1 U
+enControlCreature
+enPump:+0/+1
+
+Control Magic
+2 U U
+Enchantment Aura
+You control enchanted creature.
+Enchant creature
+enControlCreature
+
+Mind Control
+3 U U
+Enchantment Aura
+You control enchanted creature.
+Enchant creature
+enControlCreature
+
+Mind Harness
+U
+Enchantment Aura
+You control enchanted creature.
+Enchant red or green creature
+Cumulative upkeep:1
+enControlCreature::Option=red or green
+
+Persuasion
+3 U U
+Enchantment Aura
+You control enchanted creature.
+Enchant creature
+enControlCreature
+
+Threads of Disloyalty
+1 U U
+Enchantment Aura
+You control enchanted creature.
+enControlCreature:Option=CMC 2 or less
+Enchant creature with converted mana cost 2 or less
+
+Treachery
+3 U U
+Enchantment Aura
+You control enchanted creature.
+Enchant creature
+enControlCreature:Option=untap up to 5 lands
+When CARDNAME enters the battlefield, untap up to five lands.
+
+Yavimaya's Embrace
+5 G U U
+Enchantment Aura
+You control enchanted creature. Enchanted creature gets +2/+2 and has trample.
+Enchant creature
+enPump:+2/+2/Trample
+enControlCreature
+
 Arena of the Ancients
 3
 Artifact
@@ -604,12 +665,6 @@ Daring Leap
 Instant
 no text
 spPumpTgt:+1/+1/Flying & First Strike
-
-Mind Control
-3 U U
-Enchantment Aura
-You control enchanted creature.
-Enchant creature
 
 Fabricate
 2 U
@@ -10246,12 +10301,6 @@ R G
 Instant
 no text
 spPumpTgt:+4/+2/Trample
-
-Control Magic
-2 U U
-Enchantment Aura
-You control enchanted creature.
-Enchant creature
 
 Epic Proportions
 4 G G

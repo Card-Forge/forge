@@ -38,6 +38,12 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+binding_grasp.jpg		http://www.wizards.com/global/images/magic/general/binding_grasp.jpg
+mind_harness.jpg		http://www.wizards.com/global/images/magic/general/mind_harness.jpg
+persuasion.jpg		http://www.wizards.com/global/images/magic/general/persuasion.jpg
+threads_of_disloyalty.jpg		http://www.wizards.com/global/images/magic/general/threads_of_disloyalty.jpg
+treachery.jpg		http://www.wizards.com/global/images/magic/general/treachery.jpg
+yavimayas_embrace.jpg		http://www.wizards.com/global/images/magic/general/yavimayas_embrace.jpg
 arena_of_the_ancients.jpg		http://www.wizards.com/global/images/magic/general/arena_of_the_ancients.jpg
 energy_tap.jpg					http://www.wizards.com/global/images/magic/general/energy_tap.jpg
 divine_offering.jpg				http://www.wizards.com/global/images/magic/general/divine_offering.jpg
