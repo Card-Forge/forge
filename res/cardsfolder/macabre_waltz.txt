@@ -1,0 +1,12 @@
+Name:Macabre Waltz
+ManaCost:1 B
+Types:Sorcery
+Text:Return up to two target creature cards from your graveyard to your hand, then discard a card.
+K:spReturnTgt:2/UpTo:Creature:Hand:Drawback$YouDiscard/1
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/macabre_waltz.jpg
+End
+
+
+
+K:spDestroyTgt:Creature.cmcLE3:NoRegen

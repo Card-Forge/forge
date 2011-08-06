@@ -3650,7 +3650,7 @@ public class CardFactory implements NewConstants {
          *  Generic return target card(s) from graveyard to Hand, Battlefield or Top of Library
          *  spReturnTgt:{Num Cards/Parameters}:{Type}:{To Zone}:{DrawBack}:{Spell Desc}
          *  
-         *  DrawBack and X Count/Costs are not yet implemented.
+         *  X Count/Costs are not yet implemented.
          */
         if (hasKeyword(card, "spReturnTgt") != -1) {
             int n = hasKeyword(card, "spReturnTgt");
@@ -3806,6 +3806,10 @@ public class CardFactory implements NewConstants {
                                 AllZone.GameAction.moveToTopOfLibrary(c);
                             }
                         }
+                    }// for
+                    
+                    if (!Drawback[0].equals("none")) {
+                        CardFactoryUtil.doDrawBack(Drawback[0], 0, card.getController(), AllZone.GameAction.getOpponent(card.getController()), card.getController(), card, card, this);
                     }
                 }// resolve()
                 
