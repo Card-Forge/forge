@@ -278,6 +278,20 @@ public class AbilityFactory {
 				hostCard.setSVar("PlayMain1", "TRUE");
 		}
 		
+		if (API.equals("PumpAll")) {
+			AbilityFactory_Pump afPump = new AbilityFactory_Pump(this);
+			
+			if (isAb)
+				SA = afPump.getPumpAllAbility();
+			else if (isSp)
+				SA = afPump.getPumpAllSpell();
+			else if (isDb)
+				SA = afPump.getPumpAllDrawback();
+			
+			if (isAb || isSp)
+				hostCard.setSVar("PlayMain1", "TRUE");
+		}
+		
 		if (API.equals("GainLife")){
 			if (isAb)
 				SA = AbilityFactory_AlterLife.createAbilityGainLife(this);

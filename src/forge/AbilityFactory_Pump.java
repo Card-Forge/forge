@@ -484,4 +484,199 @@ public class AbilityFactory_Pump {
 		}
         
     }
+    
+    
+    /////////////////////////////////////
+    //
+    // PumpAll
+    //
+    //////////////////////////////////////
+    
+    public SpellAbility getPumpAllAbility() {
+        final SpellAbility abPumpAll = new Ability_Activated(hostCard, AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = -8299417521903307630L;
+
+			@Override
+            public boolean canPlayAI() {
+            	return pumpAllCanPlayAI(this);
+            }
+            
+            
+			@Override
+			public String getStackDescription(){
+				return pumpAllStackDescription(AF, this);
+			}
+            
+            @Override
+            public void resolve() {
+                doPumpAllResolve(this);
+                hostCard.setAbilityUsed(hostCard.getAbilityUsed() + 1);
+            }//resolve()
+            
+            
+        };//SpellAbility
+
+        return abPumpAll;
+	}
+    
+    private boolean pumpAllCanPlayAI(SpellAbility sa) {
+    	String valid = "";
+    	boolean isCurse = false;
+    	
+    	if(params.containsKey("ValidCards")) {
+			valid = params.get("ValidCards");
+    	}
+    	if(params.containsKey("IsCurse")) {
+    		isCurse = true;
+    	}
+    	
+    	CardList comp = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+    	comp = comp.getValidCards(valid, hostCard.getController(), hostCard);
+    	CardList human = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+    	human = human.getValidCards(valid,hostCard.getController(), hostCard);
+    	
+    	if(isCurse) {
+    		return human.size() > comp.size();
+    	}
+    	else return comp.size() > human.size();
+    }
+    
+    private void doPumpAllResolve(SpellAbility sa) {
+    	String valid = "";
+
+		if(params.containsKey("ValidCards")) 
+			valid = params.get("ValidCards");
+    	
+    	CardList list = AllZoneUtil.getCardsInPlay();
+		list = list.getValidCards(valid.split(","), hostCard.getController(), hostCard);
+
+		for(Card c:list){
+			final Card tgtC = c;
+			
+			// only pump things in play
+			if (!AllZone.GameAction.isCardInPlay(tgtC))
+				continue;
+			
+	        final int a = getNumAttack(sa);
+	        final int d = getNumDefense(sa);
+    
+	        tgtC.addTempAttackBoost(a);
+	        tgtC.addTempDefenseBoost(d);
+
+        	for (int i=0; i<Keywords.size(); i++) {
+        		if (!Keywords.get(i).equals("none"))
+        			tgtC.addExtrinsicKeyword(Keywords.get(i));
+        	}
+
+	        if (!params.containsKey("Permanent")){
+	        	// If not Permanent, remove Pumped at EOT
+		        final Command untilEOT = new Command() {
+					private static final long serialVersionUID = 5415795460189457660L;
+
+					public void execute() {
+		                if(AllZone.GameAction.isCardInPlay(tgtC)) {
+		                	tgtC.addTempAttackBoost(-1 * a);
+		                	tgtC.addTempDefenseBoost(-1 * d);
+		                    
+		                    if(Keywords.size() > 0) {
+		                    	for (int i=0; i<Keywords.size(); i++) {
+		                    		if (!Keywords.get(i).equals("none")) {
+		                    			tgtC.removeExtrinsicKeyword(Keywords.get(i));
+		                    		}
+		                    	}
+		                    }
+		                }
+		            }
+		        };
+		        
+		        AllZone.EndOfTurn.addUntil(untilEOT);
+	        }
+		}
+		
+		if (AF.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   abSub.resolve();
+			}
+			else{
+				Card first = list.get(0);
+	        	CardFactoryUtil.doDrawBack(params.get("SubAbility"), 0,
+	                hostCard.getController(), hostCard.getController().getOpponent(),
+	                first.getController(), hostCard, first, sa);
+			}
+		}
+        
+    }
+    
+    public SpellAbility getPumpAllDrawback() {
+        SpellAbility dbPumpAll = new Ability_Sub(hostCard, AF.getAbTgt()) {
+			private static final long serialVersionUID = 6411531984691660342L;
+
+			public boolean canPlayAI() {
+            	return pumpAllCanPlayAI(this);
+            }
+            
+			/*
+			@Override
+			public String getStackDescription(){
+				return pumpStackDescription(AF, this);
+			}*/
+            
+            public void resolve() {
+            	doPumpAllResolve(this);
+            }//resolve
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return chkPumpAllDrawbackAI(this);
+			}
+        };//SpellAbility
+        
+        return dbPumpAll;
+	}
+    
+    public SpellAbility getPumpAllSpell() {
+    	SpellAbility spPumpAll = new Spell(hostCard, AF.getAbCost(), AF.getAbTgt()) {
+    		private static final long serialVersionUID = -4055467978660824703L;
+
+    		public boolean canPlayAI() {
+    			return pumpAllCanPlayAI(this);
+    		}
+    		
+			@Override
+			public String getStackDescription(){
+				return pumpAllStackDescription(AF, this);
+			}
+
+    		public void resolve() {
+    			doPumpAllResolve(this);
+    		}//resolve
+    	};//SpellAbility
+
+    	return spPumpAll;
+    }
+
+    private boolean chkPumpAllDrawbackAI(SpellAbility sa) {
+    	return true;
+    }
+    
+    private String pumpAllStackDescription(AbilityFactory af, SpellAbility sa){
+    	StringBuilder sb = new StringBuilder();
+    	String name = af.getHostCard().getName();
+
+    	String desc = "";
+    	if(params.containsKey("SpellDescription")) {
+    		desc = params.get("SpellDescription");
+    	}
+
+    	sb.append(name).append(" - ");
+    	sb.append(desc);
+
+    	Ability_Sub abSub = sa.getSubAbility();
+    	if (abSub != null) {
+    		sb.append(abSub.getStackDescription());
+    	}
+
+    	return sb.toString();
+    }
 }
