@@ -5364,6 +5364,95 @@ public class CardFactory implements NewConstants {
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Violent Ultimatum")) {
+            final Card[] target = new Card[3];
+            final int[] index = new int[1];
+            
+            final SpellAbility spell = new Spell(card) {
+                private static final long serialVersionUID = -1880229743741157304L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList human = CardFactoryUtil.AI_getHumanCreature(card, true);
+                    
+                    CardListUtil.sortAttack(human);
+                    CardListUtil.sortFlying(human);
+                    
+                    if(3 <= human.size()) {
+                        for(int i = 0; i < 3; i++)
+                            //should check to make sure none of these creatures have protection or cannot be the target of spells.
+                            target[i] = human.get(i);
+                    }
+                    
+                    return 3 <= human.size();
+                }
+                
+                @Override
+                public void resolve() {
+                    for(int i = 0; i < target.length; i++)
+                        if(AllZone.GameAction.isCardInPlay(target[i])
+                                && CardFactoryUtil.canTarget(card, target[i])) AllZone.GameAction.destroy(target[i]);
+                }//resolve()
+            };//SpellAbility
+            
+
+            final Input input = new Input() {
+                private static final long serialVersionUID = 5792813689927185739L;
+                
+                @Override
+                public void showMessage() {
+                    int count = 3 - index[0];
+                    AllZone.Display.showMessage("Select target " + count + " permanents to destroy");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                
+                @Override
+                public void selectCard(Card c, PlayerZone zone) {
+                    for(int i = 0; i < index[0]; i++) {
+                        if(c.equals(target[i])) {
+                            AllZone.Display.showMessage("You have already selected this target. You must select unique targets for each of the 3 permanents to destroy.");
+                            return; //cannot target the same permanent twice.
+                        }
+                    }
+                    
+                    if(c.isPermanent() && zone.is(Constant.Zone.Play)) {
+                        target[index[0]] = c;
+                        index[0]++;
+                        showMessage();
+                        
+                        if(index[0] == target.length) {
+                            if(this.isFree()) {
+                                this.setFree(false);
+                                AllZone.Stack.add(spell);
+                                stop();
+                            } else stopSetNext(new Input_PayManaCost(spell));
+                        }
+                    }
+                }//selectCard()
+            };//Input
+            
+            Input runtime = new Input() {
+                private static final long serialVersionUID = 3522833806455511494L;
+                
+                @Override
+                public void showMessage() {
+                    index[0] = 0;
+                    stopSetNext(input);
+                }
+            };//Input
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+            spell.setBeforePayMana(runtime);
+            
+            card.setSVar("PlayMain1", "TRUE");
+        }//*************** END ************ END **************************
 
         //*************** START *********** START **************************
         else if(cardName.equals("Hex")) {

@@ -1,3 +1,8 @@
+Violent Ultimatum
+B B R R R G G
+Sorcery
+Destroy three target permanents.
+
 Incendiary Command
 3 R R
 Sorcery
