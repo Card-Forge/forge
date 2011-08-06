@@ -1135,7 +1135,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         
-        /* Converted to trigger
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Great Whale")) {
             final Input untap = new Input() {
@@ -1196,7 +1196,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END ***************************
-        */
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Palinchron")) {
