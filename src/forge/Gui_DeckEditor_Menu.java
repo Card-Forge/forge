@@ -18,6 +18,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -741,7 +742,7 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("Gui_DeckEditor_Menu : exportDeckText() error, " + ex.getMessage() + " : "
-                    + ex.getStackTrace());
+                    + Arrays.toString(ex.getStackTrace()));
         }
     }//exportDeckText()
     

@@ -2419,7 +2419,7 @@ public class CardFactory implements NewConstants {
             final boolean Tgt[] = {false};
             Tgt[0] = k[0].contains("Tgt");
             
-            String tmpCost = new String("");
+            String tmpCost = "";
             
             if(Tgt[0]) tmpCost = k[0].substring(14);
             

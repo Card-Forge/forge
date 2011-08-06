@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import javax.swing.JFileChooser;
@@ -359,7 +360,7 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         } catch(Exception ex) {
             ErrorViewer.showError(ex);
             throw new RuntimeException("Gui_Quest_DeckEditor_Menu : exportDeckText() error, " + ex.getMessage()
-                    + " : " + ex.getStackTrace());
+                    + " : " + Arrays.toString(ex.getStackTrace()));
         }
     }//exportDeckText()
     

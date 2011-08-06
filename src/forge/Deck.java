@@ -123,7 +123,7 @@ public class Deck implements java.io.Serializable {
         return deckType.equals(Constant.GameType.Constructed);
     }
     
-    public int hashcode() {
+    public int hashCode() {
         return getName().hashCode();
     }
     
