@@ -681,7 +681,6 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
 
-
         //*************** START *********** START **************************
         else if(cardName.equals("Lab Rats")) {
             final SpellAbility spell_one = new Spell(card) {
@@ -724,7 +723,8 @@ public class CardFactory_Sorceries {
             spell_two.setAdditionalManaCost("4");
             
             spell_one.setDescription("Put a 1/1 black Rat token into play.");
-            spell_two.setDescription("Buyback 4 - Pay 4B, put this card into your hand as it resolves.");
+            spell_two.setDescription("Buyback 4 (You may pay an additional 4 as you cast this spell. If you do, put this card into your hand as it resolves.)");
+            // spell_two.setDescription("Buyback 4 - Pay 4B, put this card into your hand as it resolves.");
             
             spell_one.setStackDescription("Lab Rats - Put a 1/1 black Rat token into play");
             spell_two.setStackDescription("Lab Rats - Buyback, Put a 1/1 black Rat token into play");
@@ -736,7 +736,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell_two);
         }//*************** END ************ END **************************
         
-
 
         //*************** START *********** START **************************
         else if(cardName.equals("Threaten") || cardName.equals("Act of Treason")) {
