@@ -1417,10 +1417,11 @@ public class AbilityFactory_ChangeZone {
 		CardList cards = AllZoneUtil.getCardsInZone(origin);
 		
         Player tgtPlayer = null;
-		if(af.getAbTgt().getTargetPlayers() != null) {
-			tgtPlayer = af.getAbTgt().getTargetPlayers().get(0);
-			cards = AllZoneUtil.getCardsInZone(origin,tgtPlayer);
-		}
+        if(af.getAbTgt() != null)
+			if(af.getAbTgt().getTargetPlayers() != null) {
+				tgtPlayer = af.getAbTgt().getTargetPlayers().get(0);
+				cards = AllZoneUtil.getCardsInZone(origin,tgtPlayer);
+			}
 		cards = filterListByType(cards, params, "ChangeType", sa);
 
 		
