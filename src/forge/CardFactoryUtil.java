@@ -3717,9 +3717,14 @@ public class CardFactoryUtil {
         else if(d[0].contains("Tgt")) dbPlayer = TgtP;
         
         // 1/10
-        if(d[0].contains("DamageTgtC")) AllZone.GameAction.addDamage(TgtC, Src, X);
-        else if(d[0].contains("DamageSelf")) AllZone.GameAction.addDamage(Src, Src, X); // 2/10
-        else if(d[0].contains("Damage")) AllZone.GameAction.addDamage(dbPlayer, X, Src);
+        if (d[0].contains("DamageTgtCtrlr"))
+        	AllZone.GameAction.addDamage(TgtC.getController(), X, Src);
+        else if (d[0].contains("DamageTgtC")) 
+        	AllZone.GameAction.addDamage(TgtC, Src, X);
+        else if (d[0].contains("DamageSelf"))
+        	AllZone.GameAction.addDamage(Src, Src, X); // 2/10
+        else if(d[0].contains("Damage"))
+        	AllZone.GameAction.addDamage(dbPlayer, X, Src);
         
         
 
