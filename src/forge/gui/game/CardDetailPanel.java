@@ -277,6 +277,17 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             area.append("*");
         }
         
+        //controlling
+        if(card.getGainControlTargets().size() > 0) {
+        	if(area.length() != 0) area.append("\n");
+        	area.append("+Controlling: ");
+        	for(Iterator<Card> it = card.getGainControlTargets().iterator(); it.hasNext();) {
+        		area.append(it.next());
+        		if(it.hasNext()) area.append(", ");
+        	}
+        	area.append("+");
+        }
+        
         //uncastable
         if(card.isUnCastable()) {
             if(area.length() != 0) area.append("\n");
