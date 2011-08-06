@@ -5850,12 +5850,13 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -2433442359225521472L;
                 
                 public void execute() {
-                    AllZone.Stack.add(new Ability(card, "0", "Return " + target[0] + " from graveyard to play") {
+                    AllZone.Stack.add(new Ability(card, "0", "Adarkar Valkyrie - Return " + target[0] + " from graveyard to play") {
                         @Override
                         public void resolve() {
                             PlayerZone grave = AllZone.getZone(target[0]);
                             //checks to see if card is still in the graveyard
-                            if(AllZone.GameAction.isCardInZone(target[0], grave)) {
+        
+                            if(grave != null && AllZone.GameAction.isCardInZone(target[0], grave)) {
                                 PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                                 target[0].setController(card.getController());
                                 AllZone.GameAction.moveTo(play, target[0]);
@@ -5870,24 +5871,24 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     //resets the Card destroy Command
-                    //target[0].addDestroy(Command.Blank);
                     target[0].removeDestroyCommand(destroy);
-                    
                 }
             };
             
-            final Ability_Tap ability = new Ability_Tap(card) {
+            Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+            Target tgt = new Target("Target creature other than "+cardName, "Creature.Other".split(","));
+            final Ability_Activated ability = new Ability_Activated(card, abCost, tgt){
                 private static final long serialVersionUID = -8454685126878522607L;
                 
                 @Override
                 public void resolve() {
                     if(AllZone.GameAction.isCardInPlay(getTargetCard())) {
                         target[0] = getTargetCard();
-                        AllZone.EndOfTurn.addUntil(untilEOT);
                         
-                        //when destroyed, return to play
-                        //add triggered ability to target card
-                        target[0].addDestroyCommand(destroy);
+                        if (!target[0].isToken()){	// not necessary, but will help speed up stack resolution
+	                        AllZone.EndOfTurn.addUntil(untilEOT);
+	                        target[0].addDestroyCommand(destroy);
+                        }
                     }//if
                 }//resolve()
                 
@@ -5896,39 +5897,13 @@ public class CardFactory_Creatures {
                     return false;
                 }
             };//SpellAbility
-            
-            Input targetInput = new Input() {
-                private static final long serialVersionUID = 913860087744941946L;
-                
-                @Override
-                public void showMessage() {
-                    AllZone.Display.showMessage("Select target non-token creature other than this card");
-                    ButtonUtil.enableOnlyCancel();
-                }
-                
-                @Override
-                public void selectButtonCancel() {
-                    stop();
-                }
-                
-                @Override
-                public void selectCard(Card c, PlayerZone zone) {
-                    //must target non-token creature, and cannot target itself
-                    if(c.isCreature() && (!c.isToken()) && (!c.equals(card))) {
-                        ability.setTargetCard(c);
-                        stopSetNext(new Input_NoCost_TapAbility(ability));
-                    }
-                }
-            };
-            
+
             card.addSpellAbility(ability);
             
             StringBuilder sb = new StringBuilder();
             sb.append("tap: When target creature other than Adarkar Valkyrie is put into a ");
             sb.append("graveyard this turn, return that card to play under your control.");
             ability.setDescription(sb.toString());
-            
-            ability.setBeforePayMana(targetInput);
         }//*************** END ************ END **************************
         
         
