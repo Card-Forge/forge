@@ -5,6 +5,7 @@ Text:no text
 PT:1/2
 K:Bushido 1
 K:stPumpSelf:Creature:1/2/Vigilance:isPresent Samurai.Legendary+YouCtrl:As long as you control a legendary Samurai, Konda's Hatamoto gets +1/+2 and has vigilance. (Attacking doesn't cause this creature to tap.)
+SVar:BuffedBy:Samurai.Legendary
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kondas_hatamoto.jpg
 End

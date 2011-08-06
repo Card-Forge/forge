@@ -4,6 +4,7 @@ Types:Creature Kithkin Soldier
 Text:no text
 PT:2/1
 K:stPumpSelf:Creature:1/1/First Strike:isPresent Giant.YouCtrl:As long as you control a Giant, Kithkin Greatheart gets +1/+1 and has first strike.
+SVar:BuffedBy:Giant
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kithkin_greatheart.jpg
 End

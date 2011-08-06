@@ -5,6 +5,7 @@ Text:no text
 PT:2/3
 K:Reach
 K:stPumpSelf:Creature:1/0/First Strike:isPresent Permanent.Red+YouCtrl:As long as you control a red permanent, Ember Weaver gets +1/+0 and has first strike.
+SVar:BuffedBy:Permanent.Red
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_weaver.jpg
 End
