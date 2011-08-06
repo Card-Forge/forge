@@ -7302,7 +7302,7 @@ public class CardFactory_Sorceries {
                 
                 public CardList getCreatures() {
                     CardList creatures = AllZoneUtil.getCardsInGraveyard();
-                    creatures = creatures.filter(AllZoneUtil.creatures);
+                    creatures = creatures.getType("Creature");
                     if (card.getController().equals(Constant.Player.Computer)) {
                         creatures = creatures.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
                     }
@@ -7311,13 +7311,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void chooseTargetAI() {
-                    CardList creatures = getCreatures();
-                    Card biggest = creatures.get(0);
-                    for(int i = 0; i < creatures.size(); i++)
-                        if(biggest.getNetAttack() < creatures.get(i).getNetAttack()) {
-                            biggest = creatures.get(i);
-                        }
-                    setTargetCard(biggest);
+                    setTargetCard(CardFactoryUtil.AI_getBestCreature(getCreatures()));
                 }
             };//SpellAbility
             card.clearSpellAbility();
