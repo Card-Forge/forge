@@ -4,6 +4,7 @@ Types:Creature Cat Soldier
 Text:When CARDNAME enters the battlefield, you gain 4 life.
 PT:2/5
 K:Vigilance
+K:etbGainLife:4
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jedits_dragoons.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/25.jpg

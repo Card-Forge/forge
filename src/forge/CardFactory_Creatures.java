@@ -407,7 +407,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
         */
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Shu Soldier-Farmers") || cardName.equals("Staunch Defenders")
                 || cardName.equals("Spiritual Guardian") || cardName.equals("Teroh's Faithful")
@@ -433,7 +433,7 @@ public class CardFactory_Creatures {
             };
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Loxodon Hierarch")) {

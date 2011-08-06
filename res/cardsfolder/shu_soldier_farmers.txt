@@ -3,6 +3,7 @@ ManaCost:4 W
 Types:Creature Human Soldier
 Text:When CARDNAME enters the battlefield, you gain 4 life.
 PT:2/4
+K:etbGainLife:4
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Three_Kingdoms/shu_soldier_farmers.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/27.jpg

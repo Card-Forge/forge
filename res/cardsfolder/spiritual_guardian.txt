@@ -3,6 +3,7 @@ ManaCost:3 W W
 Types:Creature Spirit
 Text:When CARDNAME enters the battlefield, you gain 4 life.
 PT:3/4
+K:etbGainLife:4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiritual_guardian.jpg
 SetInfo:POR|Rare|http://magiccards.info/scans/en/po/189.jpg
