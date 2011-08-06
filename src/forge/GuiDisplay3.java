@@ -233,7 +233,8 @@ public class GuiDisplay3 extends JFrame implements Display, NewConstants, NewCon
     
     //returned Object could be null
     public <T> T getChoiceOptional(String message, T[] choices) {
-        ListChooser<T> c = new ListChooser<T>(message, 0, 1, choices);
+        if(choices == null || choices.length == 0) return null;
+    	ListChooser<T> c = new ListChooser<T>(message, 0, 1, choices);
         final JList list = c.getJList();
         if(choices[0] instanceof Card) {
             list.addListSelectionListener(new ListSelectionListener() {

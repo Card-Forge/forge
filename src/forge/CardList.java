@@ -12,8 +12,8 @@ public class CardList implements Iterable<Card>
 	//private LinkedList list = new LinkedList();
 
     public CardList() {}
-    public CardList(Card c[]) { addAll(c);}
-    public CardList(Object c[]) {addAll(c);}
+    public CardList(Card... c) { addAll(c);}
+    public CardList(Object[] c) {addAll(c);}
 
 //    cardColor is like "R" or "G",  returns a new CardList that is a subset of current CardList
     public CardList getColor(String cardColor)

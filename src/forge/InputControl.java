@@ -9,9 +9,16 @@ package forge;
 		private Input input;
         static int n = 0;
 
-        public void setInput(Input in)
+        public void setInput(final Input in)
         {
-       input = in;
+       if(!(input == null || input instanceof Input_StackNotEmpty))
+    	   AllZone.Stack.add(new Ability(AllZone.ManaPool, "no cost", "Delayed Input")//TODO: source other than mp?
+    	   {
+    		   public void resolve() {
+    			   AllZone.InputControl.setInput(in);
+    		   }
+    	   });
+       else input = in;
        updateObservers();
         }
         public void resetInput()

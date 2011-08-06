@@ -887,7 +887,7 @@ private Card getCurrentCard(int ID)
   //changes AllZone.Computer_Library
   private Card[] smoothComputerManaCurve(Card[] in)
   {
-    CardList library = new CardList(in);
+	CardList library = new CardList(in);
     library.shuffle();
 
     //remove all land, keep non-basicland in there, shuffled
@@ -900,6 +900,8 @@ private Card getCurrentCard(int ID)
     //effectively use them very well
     land = threadLand(land);
     
+    try
+	{
     //mana weave, total of 7 land
     library.add(7, land.get(0));
     library.add(8, land.get(1));
@@ -909,6 +911,12 @@ private Card getCurrentCard(int ID)
 
     library.add(13, land.get(5));
     library.add(16, land.get(6));
+	}
+    catch(NullPointerException e)
+	{
+		System.err.println("Error: cannot smooth mana curve, not enough land");
+		return in;
+	}
 
     //add the rest of land to the end of the deck
     for(int i = 0; i < land.size(); i++)

@@ -13,8 +13,8 @@ public class MagicStack extends MyObservable
 
    public void add(SpellAbility sp)
   {
-	  if(sp instanceof Ability_Mana) sp.resolve(); else
-      push(sp);
+	  if(sp instanceof Ability_Mana || sp instanceof Ability_Triggered)//TODO make working triggered abilities!
+		  sp.resolve(); else push(sp);
   }
   public int size()
   {
