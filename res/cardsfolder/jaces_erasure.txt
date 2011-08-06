@@ -2,7 +2,7 @@ Name:Jace's Erasure
 ManaCost:1 U
 Types:Enchantment
 Text:no text
-T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever you draw a card, you may have target player put the top card of his or her library into his or her graveyard.
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Optional$ True | Execute$ TrigMill | TriggerDescription$ Whenever you draw a card, you may have target player put the top card of his or her library into his or her graveyard.
 SVar:TrigMill:AB$Mill | Cost$ 0 | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player to mill
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jaces_erasure.jpg
