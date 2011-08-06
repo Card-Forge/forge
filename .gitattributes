@@ -1860,6 +1860,7 @@ res/cardsfolder/elvish_lyrist.txt -text svneol=native#text/plain
 res/cardsfolder/elvish_pathcutter.txt -text svneol=native#text/plain
 res/cardsfolder/elvish_pioneer.txt svneol=native#text/plain
 res/cardsfolder/elvish_piper.txt -text svneol=native#text/plain
+res/cardsfolder/elvish_promenade.txt -text svneol=native#text/plain
 res/cardsfolder/elvish_ranger.txt -text svneol=native#text/plain
 res/cardsfolder/elvish_scout.txt svneol=native#text/plain
 res/cardsfolder/elvish_scrapper.txt -text svneol=native#text/plain
