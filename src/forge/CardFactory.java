@@ -17620,6 +17620,83 @@ public class CardFactory implements NewConstants {
        	card.addSpellAbility(spell);
        } //*************** END ************ END **************************
         
+      //*************** START *********** START **************************
+        else if(cardName.equals("Rampant Growth")) {
+            SpellAbility spell = new Spell(card) {
+
+				private static final long serialVersionUID = -6598323179507468746L;
+
+				@Override
+                public void resolve() {
+                    String player = card.getController();
+                    
+                    if(player.equals(Constant.Player.Human)) humanResolve();
+                    else computerResolve();
+                }
+                
+                public void computerResolve() {
+                    CardList land = new CardList(AllZone.Computer_Library.getCards());
+                    land = land.getType("Basic");
+                    
+                    //just to make the computer a little less predictable
+                    land.shuffle();
+                    
+                    //3 branches: 1-no land in deck, 2-one land in deck, 3-two or more land in deck
+                    if(land.size() != 0) {
+                        //branch 2 - at least 1 land in library
+                        Card tapped = land.remove(0);
+                        tapped.tap();
+                        
+                        AllZone.Computer_Play.add(tapped);
+                        AllZone.Computer_Library.remove(tapped);
+                        
+                        //branch 3
+                        if(land.size() != 0) {
+                            Card toHand = land.remove(0);
+                            AllZone.Computer_Hand.add(toHand);
+                            AllZone.Computer_Library.remove(toHand);
+                        }
+                    }
+                }//computerResolve()
+                
+                public void humanResolve() {
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
+                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
+                    
+                    CardList list = new CardList(library.getCards());
+                    list = list.getType("Basic");
+                    
+                    //3 branches: 1-no land in deck, 2-one land in deck, 3-two or more land in deck
+                    
+                    //branch 1
+                    if(list.size() == 0) return;
+                    
+                    //branch 2
+                    Object o = AllZone.Display.getChoiceOptional("Put into play tapped", list.toArray());
+                    if(o != null) {
+                        Card c = (Card) o;
+                        c.tap();
+                        list.remove(c);
+                        
+                        library.remove(c);
+                        play.add(c);
+                        
+                        AllZone.GameAction.shuffle(card.getController());
+                    }//if
+                }//resolve()
+                
+                public boolean canPlayAI()
+                {
+                	PlayerZone library = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer);
+                	CardList list = new CardList(library.getCards());
+                	list = list.getType("Basic");
+                	return list.size() > 0;
+                }
+            };//SpellAbility
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
