@@ -10,4 +10,5 @@ A:SP$ Pump | Cost$ 1 PW | ValidTgts$ Creature,Artifact | TgtPrompt$ Select targe
 A:SP$ Pump | Cost$ 1 PW | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target creature or artifact | KW$ Protection from artifacts | SpellDescription$ Target creature or artifact you control gains protection from artifacts until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/apostles_blessing.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/2.jpg
 End

@@ -8,4 +8,5 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigDraw:AB$Draw | Cost$ Sac<1/CARDNAME> | Defined$ You | NumCards$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/impaler_shrike.jpg
+SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/36.jpg
 End
