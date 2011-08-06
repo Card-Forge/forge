@@ -3396,6 +3396,7 @@ res/cardsfolder/root_cage.txt -text svneol=native#text/plain
 res/cardsfolder/root_maze.txt -text svneol=native#text/plain
 res/cardsfolder/rootbound_crag.txt -text svneol=native#text/plain
 res/cardsfolder/rootbreaker_wurm.txt -text svneol=native#text/plain
+res/cardsfolder/rootrunner.txt -text svneol=native#text/plain
 res/cardsfolder/roots.txt -text svneol=native#text/plain
 res/cardsfolder/rootwalla.txt -text svneol=native#text/plain
 res/cardsfolder/rootwater_commando.txt -text svneol=native#text/plain

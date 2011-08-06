@@ -1,0 +1,10 @@
+Name:Rootrunner
+ManaCost:2 G G
+Types:Creature Spirit
+Text:no text
+PT:3/3
+A:AB$Bounce|Cost$G G Sac<1/CARDNAME>|ValidTgts$Land|TgtPrompt$Select target Land|Destination$TopofLibrary|SpellDescription$Put target land on top of its owner's library.
+K:Soulshift:3
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rootrunner.jpg
+End
