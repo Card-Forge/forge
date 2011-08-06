@@ -3362,6 +3362,7 @@ res/cardsfolder/kavu_climber.txt -text svneol=native#text/plain
 res/cardsfolder/kavu_glider.txt -text svneol=native#text/plain
 res/cardsfolder/kavu_lair.txt svneol=native#text/plain
 res/cardsfolder/kavu_monarch.txt -text svneol=native#text/plain
+res/cardsfolder/kavu_predator.txt svneol=native#text/plain
 res/cardsfolder/kavu_runner.txt -text svneol=native#text/plain
 res/cardsfolder/kavu_scout.txt -text svneol=native#text/plain
 res/cardsfolder/kavu_titan.txt -text svneol=native#text/plain
