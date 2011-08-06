@@ -102,7 +102,7 @@ import java.util.*;
           // it won't be surprised by Exalted
           int humanExaltedBonus = countExaltedBonus(AllZone.HumanPlayer);
           if (humanExaltedBonus > 0) {
-        	  int nFinestHours = GameActionUtil.countFinestHours(AllZone.HumanPlayer);
+        	  int nFinestHours = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer, "Finest Hour").size();
         	  
         	  if ( (blockersNeeded == 0 || nFinestHours > 0) && humanList.size() > 0) {
         		  //
@@ -112,7 +112,7 @@ import java.util.*;
         			  // For Finest Hour, one creature could attack and get the bonus TWICE
         			  humanBaseAttack = humanBaseAttack + humanExaltedBonus;
         		  }	
-        		  int totalExaltedAttack = GameActionUtil.isRafiqInPlay(AllZone.HumanPlayer) ? 
+        		  int totalExaltedAttack = AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.HumanPlayer) ? 
         				  2 * humanBaseAttack: humanBaseAttack;
         		  if ((AllZone.ComputerPlayer.getLife() - 3) <= totalExaltedAttack) {
         			  // We will lose if there is an Exalted attack -- keep one blocker
@@ -180,9 +180,9 @@ import java.util.*;
           }
 
           if (combat.getAttackers().length == 0 && (countExaltedBonus(AllZone.ComputerPlayer) >= 3 ||
-                   GameActionUtil.isRafiqInPlay(AllZone.ComputerPlayer) ||
+        		  AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.ComputerPlayer) ||
                    AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Battlegrace Angel").size() >= 2 ||
-                   (GameActionUtil.countFinestHours(AllZone.ComputerPlayer)>=1) && AllZone.Phase.isFirstCombat())
+                   (AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Finest Hour").size()>=1) && AllZone.Phase.isFirstCombat())
                    && !doAssault())
           {
              int biggest = 0;

@@ -2622,7 +2622,7 @@ public class CombatUtil {
         
         Player phasingPlayer = c.getController();
         // Finest Hour untaps the creature on the first combat phase
-		if ((GameActionUtil.countFinestHours(phasingPlayer)>0) &&
+		if ((AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Finest Hour").size() > 0) &&
 				AllZone.Phase.isFirstCombat()) {
 			// Untap the attacking creature
 			Ability fhUntap = new Ability(c, "0") {
@@ -2634,7 +2634,7 @@ public class CombatUtil {
 			AllZone.Stack.add(fhUntap);
 		
 			// If any Finest Hours, queue up a new combat phase
-			for (int ix = 0; ix < GameActionUtil.countFinestHours(phasingPlayer); ix++) {
+			for (int ix = 0; ix < AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Finest Hour").size(); ix++) {
 				Ability fhAddCombat = new Ability(c, "0") {
 					public void resolve() {
 						AllZone.Phase.addExtraCombat(crd.getController());				
@@ -2644,7 +2644,7 @@ public class CombatUtil {
 				AllZone.Stack.add(fhAddCombat);
 			}
 		}
-        if(GameActionUtil.isRafiqInPlay(phasingPlayer)) {
+        if(AllZoneUtil.isCardInPlay("Rafiq of the Many", phasingPlayer)) {
             Ability ability2 = new Ability(c, "0") {
                 @Override
                 public void resolve() {

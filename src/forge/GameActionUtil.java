@@ -3918,32 +3918,6 @@ public class GameActionUtil {
 		AllZone.GameInfo.setAssignedFirstStrikeDamageThisCombat(false);
 		AllZone.GameInfo.setResolvedFirstStrikeDamageThisCombat(false);
 	}
-	
-	public static boolean isRafiqInPlay(Player player) {
-		PlayerZone playerZone = AllZone.getZone(Constant.Zone.Play, player);
-
-		CardList cards = new CardList();
-		cards.addAll(playerZone.getCards());
-
-		cards = cards.getName("Rafiq of the Many");
-
-		if(cards.size() >= 1) // should only be 1, since Rafiq is Legendary
-			return true;
-		else return false;
-
-	}
-	
-	public static int countFinestHours(Player controller) {
-		PlayerZone playerZone = AllZone.getZone(Constant.Zone.Play, controller);
-
-		CardList cards = new CardList();
-		cards.addAll(playerZone.getCards());
-
-		cards = cards.getName("Finest Hour");
-
-		return cards.size();
-	}
-
 
 	public static void executeAllyEffects(Card c) {
 		if(c.getName().equals("Kazandu Blademaster") || c.getName().equals("Makindi Shieldmate")
