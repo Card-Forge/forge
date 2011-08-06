@@ -5818,7 +5818,7 @@ public class CardFactory_Creatures {
             ability.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
-                
+        /*keyworded
         //*************** START *********** START **************************
         else if(cardName.equals("Giltspire Avenger")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -5872,7 +5872,7 @@ public class CardFactory_Creatures {
             ability.setDescription("tap: Destroy target creature that dealt damage to you this turn.");
             ability.setBeforePayMana(target);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Vedalken Plotter")) {

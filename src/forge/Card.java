@@ -2443,6 +2443,8 @@ public class Card extends MyObservable {
              	{ if(!isFaceDown()) return false;}
              else if (Property.startsWith("enteredBattlefieldThisTurn"))
              	{ if(!(getTurnInZone() == AllZone.Phase.getTurn())) return false;}
+             else if (Property.startsWith("dealtDamageToYouThisTurn"))
+          	{ if(!(dealtDmgToOppThisTurn && !getController().isPlayer(sourceController))) return false;}
              
              else if (Property.startsWith("enchanted"))
              	{ if(!isEnchanted()) return false;}
