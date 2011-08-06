@@ -10108,12 +10108,21 @@ public class CardFactory implements NewConstants {
                     if(life.getLife() == 10) life.subtractLife(10);
                 }
                 
+                /*
                 @Override
                 public boolean canPlay() {
                     String opponent = AllZone.GameAction.getOpponent(card.getController());
                     PlayerLife p = AllZone.GameAction.getPlayerLife(opponent);
                     return p.getLife() == 10;
                 }
+                */
+                
+                @Override
+                public boolean canPlayAI() {
+                    PlayerLife humanLife = AllZone.GameAction.getPlayerLife(Constant.Player.Human);
+                    return humanLife.getLife() == 10;
+                }
+                
             };
             spell.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             card.clearSpellAbility();
