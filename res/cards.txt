@@ -1,3 +1,41 @@
+Gravitational Shift
+3 U U
+Enchantment
+no text
+StaticEffect:Play:All Permanents:PTBonus/2/0:Type.Creature!with.Flying:Creatures with flying get +2/+0.
+StaticEffect:Play:All Permanents:PTBonus/-2/0:Type.Creature!without.Flying:Creatures without flying get -2/-0.
+
+Mouth of Ronom
+no cost
+Snow Land
+no text
+tap: add 1
+abDamageTgtC 4 S T Sac-CARDNAME:4
+
+Vampiric Sliver
+3 B
+Creature Sliver
+no text
+3/3
+StaticEffect:Play:All Permanents:Keyword/Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.:Type.Sliver:All Sliver creatures have "Whenever a creature dealt damage by this creature this turn is put into a graveyard, put a +1/+1 counter on this creature."
+SVar:PlayMain1:TRUE
+
+Death of a Thousand Stings
+4 B
+Instant Arcane
+no text
+spLoseLifeTgt:1:Drawback$YouGainLife/1:Target player loses 1 life and you gain 1 life.
+WheneverKeyword:BeginningOfUpkeep:No_Initiator:Graveyard:MoveFrom-Graveyard-Hand:Self:ASAP:Yes_No:ControllerUpkeep!MoreCardsInHand:At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return Death of a Thousand Stings from your graveyard to your hand.
+
+Brackwater Elemental
+2 U
+Creature Elemental
+no text
+4/4
+WheneverKeyword:Attacks:Self:Play:KeywordPumpEOT/At the beginning of the end step, sacrifice CARDNAME.:Self:ASAP:No_Condition:No Special Condition:When Brackwater Elemental attacks, sacrifice it at the beginning of the next end step.
+WheneverKeyword:Blocks:Self:Play:KeywordPumpEOT/At the beginning of the end step, sacrifice CARDNAME.:Self:ASAP:No_Condition:No Special Condition:When Brackwater Elemental blocks, sacrifice it at the beginning of the next end step.
+Unearth:2 U
+
 Acid Rain
 3 U
 Sorcery

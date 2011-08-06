@@ -10346,6 +10346,22 @@ public class GameActionUtil {
                                 }
                     		});	
    		      			}
+		      			if(Specific[i].contains("with.")) {
+		      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
+	                            public boolean addCard(Card c) {
+	                                if(c.hasKeyword(Specific[Restriction_Count[0]].replaceFirst("with.", ""))) return true;
+	                                return false;
+	                            }
+	                		});
+			      		}
+		      			if(Specific[i].contains("without.")) {
+		      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
+	                            public boolean addCard(Card c) {
+	                                if(!c.hasKeyword(Specific[Restriction_Count[0]].replaceFirst("without.", ""))) return true;
+	                                return false;
+	                            }
+	                		});
+			      		}
 		      			if(Specific[i].equals("NotSelf")) {
 		      				Cards_inZone = Cards_inZone.filter(new CardListFilter() {
                                 public boolean addCard(Card c) {
