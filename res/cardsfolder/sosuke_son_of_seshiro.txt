@@ -1,0 +1,9 @@
+Name:Sosuke, Son of Seshiro
+ManaCost:2 G G
+Types:Legendary Creature Snake Warrior
+Text:no text
+PT:3/4
+K:stPumpAll:Creature.Snake+Other+YouCtrl:1/0:No Condition:Other Snake creatures you control get +1/+0.
+K:stPumpAll:Creature.Warrior+YouCtrl:0/0/HIDDEN Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.:No Condition:Whenever a Warrior you control deals combat damage to a creature, destroy that creature at end of combat.
+SVar:Rarity:Rare
+End
