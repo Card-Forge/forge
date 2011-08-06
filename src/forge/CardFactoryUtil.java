@@ -3081,6 +3081,10 @@ public class CardFactoryUtil {
                 if(kw.equals("CARDNAME can't be the target of blue spells.")) {
                 	if(spell.isBlue() && spell.isSpell()) return false;
                 }
+                
+                if(kw.equals("CARDNAME can't be the target of spells.")) {
+                	if(spell.isSpell()) return false;
+                }
             }
         }
         return true;

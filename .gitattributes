@@ -5573,6 +5573,7 @@ res/cardsfolder/spectral_guardian.txt -text svneol=native#text/plain
 res/cardsfolder/spectral_lynx.txt -text svneol=native#text/plain
 res/cardsfolder/spectral_procession.txt -text svneol=native#text/plain
 res/cardsfolder/spectral_searchlight.txt -text svneol=native#text/plain
+res/cardsfolder/spectral_shield.txt -text svneol=native#text/plain
 res/cardsfolder/spectral_sliver.txt svneol=native#text/plain
 res/cardsfolder/spell_contortion.txt -text svneol=native#text/plain
 res/cardsfolder/spell_pierce.txt -text svneol=native#text/plain
