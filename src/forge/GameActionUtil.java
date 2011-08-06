@@ -2463,8 +2463,6 @@ public class GameActionUtil {
 
     public static void executeDestroyCreatureCardEffects(Card c, Card destroyed) {
         if (c.getName().equals("Fecundity")) destroyCreature_Fecundity(c, destroyed);
-        else if (c.getName().equals("Proper Burial") 
-                && destroyed.getController().equals(c.getController())) destroyCreature_Proper_Burial(c, destroyed);
     }
 
     //***
@@ -2490,24 +2488,6 @@ public class GameActionUtil {
 
         AllZone.Stack.add(ability);
     }
-
-	private static void destroyCreature_Proper_Burial(final Card c, Card destroyed) {
-		final Card crd = c;
-		final Card crd2 = destroyed;
-		Ability ability = new Ability(c, "0") {
-			@Override
-			public void resolve() {
-				crd.getController().gainLife(crd2.getNetDefense(), c);
-			}
-		};
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("Proper Burial - ").append(c.getController()).append(" gains ");
-		sb.append(destroyed.getNetDefense()).append(" life.");
-		ability.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability);
-	}
 
 	//***CREATURES END HERE***
 
