@@ -589,19 +589,24 @@ public class AbilityFactory_ChangeZone {
 			
 			// Narrow down the list:
 			if (origin.equals("Battlefield")){
-				// Bounce from Battlefield to: 
-				
 				// filter out untargetables
 				list = list.filter(new CardListFilter() {
 					public boolean addCard(Card c) {
 						return CardFactoryUtil.canTarget(source, c);
 					}
 				});
+				
+				// if Destination is hand, either bounce opponents dangerous stuff or save my about to die stuff
+				
+				// if Destination is exile, filter out my cards
 			}
 			else if (origin.equals("Graveyard")){
 				// Retrieve from Graveyard to:
 				
 			}
+			
+			if (destination.equals("Exile"))
+				list = list.getController(AllZone.HumanPlayer);
 
 			if (list.size() == 0)
 				return false;

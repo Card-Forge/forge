@@ -149,18 +149,14 @@ public class CardList implements Iterable<Card> {
         return c;
     }
     
-    /* no longer needed
-    private String toMixedCase(String s)
-    {
-    	String fc = "";
-    	String lcs = "";
-    	
-    	fc = s.substring(0,1).toUpperCase();
-    	lcs = s.substring(1).toLowerCase();
-    	
-    	return fc + lcs;
+    //cardType is like "Land" or "Goblin", returns a new CardList that is a subset of current CardList
+    public CardList getController(final Player player) {
+    	return this.filter(new CardListFilter() {
+    		public boolean addCard(Card c) {
+    			return c.getController().isPlayer(player);
+    		}
+    	});
     }
-    */
     
   //cardType is like "Land" or "Goblin", returns a new CardList that is a subset of current CardList
     public CardList getType(final String cardType) {
