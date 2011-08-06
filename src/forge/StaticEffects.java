@@ -18,39 +18,49 @@ public class StaticEffects
 	}
 	
 	public void initStateBasedEffectsList()
-	{	//value has to be an array, since certain cards have multiple commands associated with them
-		cardToEffectsList.put("Conspiracy", new String[] {"Conspiracy"});
-		cardToEffectsList.put("Serra Avatar", new String[] {"Serra_Avatar"});
+	{	
+		//value has to be an array, since certain cards have multiple commands associated with them
+		
+		cardToEffectsList.put("Adamaro, First to Desire", new String[] {"Adamaro_First_to_Desire"});
 		cardToEffectsList.put("Avatar",  new String[] {"Ajani_Avatar_Token"});
-		cardToEffectsList.put("Windwright Mage", new String[] {"Windwright_Mage"});
-		cardToEffectsList.put("Uril, the Miststalker", new String[] {"Uril"});
-		cardToEffectsList.put("Rabid Wombat", new String[] {"Rabid_Wombat"});
-		cardToEffectsList.put("Kithkin Rabble", new String[] {"Kithkin_Rabble"});
-		cardToEffectsList.put("Death's Shadow", new String[] {"Deaths_Shadow"});
-		cardToEffectsList.put("Nightmare", new String[] {"Nightmare"});
 		cardToEffectsList.put("Aven Trailblazer", new String[] {"Aven_Trailblazer"});
-		cardToEffectsList.put("Matca Rioters", new String[] {"Matca_Rioters"});
-		cardToEffectsList.put("Rakdos Pit Dragon", new String[] {"Rakdos_Pit_Dragon"});
-		cardToEffectsList.put("Nyxathid", new String[] {"Nyxathid"});
-		cardToEffectsList.put("Lord of Extinction", new String[] {"Lord_of_Extinction"});
+		
+		
 		cardToEffectsList.put("Cantivore", new String[] {"Cantivore"});
 		cardToEffectsList.put("Cognivore", new String[] {"Cognivore"});
-		cardToEffectsList.put("Mortivore", new String[] {"Mortivore"});
-		cardToEffectsList.put("Terravore", new String[] {"Terravore"});
-		cardToEffectsList.put("Magnivore", new String[] {"Magnivore"});
-		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
-		cardToEffectsList.put("Lhurgoyf", new String[] {"Lhurgoyf"});
-		cardToEffectsList.put("Emperor Crocodile", new String[] {"Emperor_Crocodile"});		
-		cardToEffectsList.put("Wolf", new String[] {"Sound_the_Call_Wolf"});
-		cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});		
+		cardToEffectsList.put("Conspiracy", new String[] {"Conspiracy"});
 		cardToEffectsList.put("Crowd of Cinders", new String[] {"Crowd_of_Cinders"});
+		cardToEffectsList.put("Death's Shadow", new String[] {"Deaths_Shadow"});
+		cardToEffectsList.put("Drove of Elves", new String[] {"Drove_of_Elves"});
+		cardToEffectsList.put("Emperor Crocodile", new String[] {"Emperor_Crocodile"});
 		cardToEffectsList.put("Faerie Swarm", new String[] {"Faerie_Swarm"});
-		cardToEffectsList.put("Svogthos, the Restless Tomb", new String[] {"Svogthos_the_Restless_Tomb"});
-		cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
-		cardToEffectsList.put("Molimo, Maro-Sorcerer", new String[] {"Molimo_Maro_Sorcerer"});
+		cardToEffectsList.put("Kithkin Rabble", new String[] {"Kithkin_Rabble"});
+		cardToEffectsList.put("Lhurgoyf", new String[] {"Lhurgoyf"});
+		cardToEffectsList.put("Lord of Extinction", new String[] {"Lord_of_Extinction"});
+		cardToEffectsList.put("Magnivore", new String[] {"Magnivore"});
 		cardToEffectsList.put("Maro", new String[] {"Maro"});
 		cardToEffectsList.put("Masumaro, First to Live", new String[] {"Masumaro_First_to_Live"});
-		cardToEffectsList.put("Adamaro, First to Desire", new String[] {"Adamaro_First_to_Desire"});
+		cardToEffectsList.put("Matca Rioters", new String[] {"Matca_Rioters"});
+		cardToEffectsList.put("Molimo, Maro-Sorcerer", new String[] {"Molimo_Maro_Sorcerer"});
+		cardToEffectsList.put("Mortivore", new String[] {"Mortivore"});
+		
+		
+		cardToEffectsList.put("Multani, Maro-Sorcerer", new String[] {"Multani_Maro_Sorcerer"});
+		cardToEffectsList.put("Nightmare", new String[] {"Nightmare"});
+		cardToEffectsList.put("Nyxathid", new String[] {"Nyxathid"});
+		cardToEffectsList.put("Rabid Wombat", new String[] {"Rabid_Wombat"});
+		cardToEffectsList.put("Rakdos Pit Dragon", new String[] {"Rakdos_Pit_Dragon"});
+		cardToEffectsList.put("Serra Avatar", new String[] {"Serra_Avatar"});
+		cardToEffectsList.put("Svogthos, the Restless Tomb", new String[] {"Svogthos_the_Restless_Tomb"});
+		cardToEffectsList.put("Tarmogoyf", new String[] {"Tarmogoyf"});
+		cardToEffectsList.put("Terravore", new String[] {"Terravore"});
+		cardToEffectsList.put("Uril, the Miststalker", new String[] {"Uril"});
+		cardToEffectsList.put("Windwright Mage", new String[] {"Windwright_Mage"});
+		
+				
+		cardToEffectsList.put("Wolf", new String[] {"Sound_the_Call_Wolf"});
+		
+		
 		cardToEffectsList.put("Overbeing of Myth", new String[] {"Overbeing_of_Myth"});
 		cardToEffectsList.put("Guul Draz Specter", new String[] {"Guul_Draz_Specter"});
 		cardToEffectsList.put("Dakkon Blackblade", new String[] {"Dakkon"});
@@ -135,8 +145,6 @@ public class StaticEffects
 		cardToEffectsList.put("Undead Warchief", new String[] {"Undead_Warchief"});
 		cardToEffectsList.put("Coat of Arms", new String[] {"Coat_of_Arms"});
 		cardToEffectsList.put("Knighthood", new String[] {"Knighthood"});
-		cardToEffectsList.put("Absolute Law", new String[] {"Absolute_Law"});
-		cardToEffectsList.put("Absolute Grace", new String[] {"Absolute_Grace"});
 		cardToEffectsList.put("The Tabernacle at Pendrell Vale", new String[] {"Tabernacle"});
 		cardToEffectsList.put("Magus of the Tabernacle", new String[] {"Magus_of_the_Tabernacle"});
 		cardToEffectsList.put("Goblin Assault", new String[] {"Goblin_Assault"});

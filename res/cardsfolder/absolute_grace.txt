@@ -1,7 +1,8 @@
 Name:Absolute Grace
 ManaCost:1 W
 Types:Enchantment
-Text:All creatures gain protection from black.
+Text:no text
+K:stPumpAll:Creature:1/1:No Condition:All creatures have protection from black.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/absolute_grace.jpg

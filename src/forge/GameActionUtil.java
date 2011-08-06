@@ -12895,78 +12895,7 @@ public class GameActionUtil {
 		}// execute()
 	};
 
-	public static Command Absolute_Grace              = new Command() {
-		private static final long serialVersionUID   = -6904191523315339355L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Protection from black";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Absolute Grace");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-
-
-	public static Command Absolute_Law                = new Command() {
-
-		private static final long serialVersionUID   = -6707183535529395830L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Protection from red";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Absolute Law");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-
+	
 	public static Command Tabernacle                  = new Command() {
 		private static final long serialVersionUID   = -3233715310427996429L;
 		CardList                  gloriousAnthemList = new CardList();
@@ -12986,25 +12915,13 @@ public class GameActionUtil {
 			}
 
 			list.clear();
-			PlayerZone cPlay = AllZone.Computer_Play;
-			PlayerZone hPlay = AllZone.Human_Play;
-			CardList clist = new CardList();
-			clist.addAll(cPlay.getCards());
-			clist.addAll(hPlay.getCards());
-			clist = clist.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.getName().equals(
-							"The Tabernacle at Pendrell Vale"); /*|| c.getName().equals("Magus of the Tabernacle");*/
-				}
-			});
+			
+			CardList clist = AllZoneUtil.getCardsInPlay("The Tabernacle at Pendrell Vale");
 
 			int number = clist.size();
 			//System.out.println("Tabernacle Number:" + number);
 			if(number > 0) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Creature");
+				CardList creature = AllZoneUtil.getCreaturesInPlay();
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -13035,25 +12952,12 @@ public class GameActionUtil {
 			}
 
 			list.clear();
-			PlayerZone cPlay = AllZone.Computer_Play;
-			PlayerZone hPlay = AllZone.Human_Play;
-			CardList clist = new CardList();
-			clist.addAll(cPlay.getCards());
-			clist.addAll(hPlay.getCards());
-			clist = clist.filter(new CardListFilter() {
-				public boolean addCard(Card c) {
-					return c.getName().equals(
-							"Magus of the Tabernacle");
-				}
-			});
+			CardList clist = AllZoneUtil.getCardsInPlay("Magus of the Tabernacle");
 
 			int number = clist.size();
 			//System.out.println("Tabernacle Number:" + number);
 			if(number > 0) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Creature");
+				CardList creature = AllZoneUtil.getCreaturesInPlay();
 
 				for(int i = 0; i < creature.size(); i++) {
 					c = creature.get(i);
@@ -18117,8 +18021,6 @@ public class GameActionUtil {
 	static {
 		//Please add cards in alphabetical order so they are easier to find
 		
-		commands.put("Absolute_Grace", Absolute_Grace);
-		commands.put("Absolute_Law", Absolute_Law);
 		commands.put("Adamaro_First_to_Desire", Adamaro_First_to_Desire);
 		commands.put("Ajani_Avatar_Token", Ajani_Avatar_Token);
 		commands.put("Akromas_Memorial", Akromas_Memorial);
