@@ -204,12 +204,18 @@ public class CardFactory implements NewConstants {
                 }
             });
         }//if "Comes into play tapped."
-        if (hasKeyword(card, "CARDNAME enters the battlefield tapped unless you control a ") != -1)
+        if (hasKeyword(card, "CARDNAME enters the battlefield tapped unless you control") != -1)
         {
-        	int n = hasKeyword(card, "CARDNAME enters the battlefield tapped unless you control a ");
+        	int n = hasKeyword(card, "CARDNAME enters the battlefield tapped unless you control");
         	String parse = card.getKeyword().get(n).toString();
         	
-        	final String types[] = parse.substring(60, parse.length() - 1).split(" or a ");
+        	String splitString;
+        	if (parse.contains(" or a "))
+        		splitString = " or a ";
+        	else
+        		splitString = " or an ";
+        	
+        	final String types[] = parse.substring(60, parse.length() - 1).split(splitString);
         	
         	card.addComesIntoPlayCommand(new Command()
         	{

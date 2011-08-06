@@ -484,6 +484,8 @@ public class QuestData implements NewConstants {
     public void subtractCredits(long c)
     {
     	credits-=c;
+    	if (credits < 0)
+    		credits = 0;
     }
     
     public long getCredits() {

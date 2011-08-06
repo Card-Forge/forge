@@ -203,6 +203,11 @@ public class Gui_WinLose extends JFrame {
             	JOptionPane.showMessageDialog(null, "You have earned " + creds + " credits.");
             	
             }
+            else
+            {
+            	quest.subtractCredits(15);
+            	JOptionPane.showMessageDialog(null, "You FAIL! You have lost 15 credits.");
+            }
             
             winLose.reset();
             

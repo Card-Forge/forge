@@ -319,7 +319,7 @@ Drowned Catacomb
 no cost
 Land
 no text
-CARDNAME enters the battlefield tapped unless you control an Island or a Swamp.
+CARDNAME enters the battlefield tapped unless you control a Island or a Swamp.
 tap: add U
 tap: add B
 
