@@ -4053,6 +4053,7 @@ res/cardsfolder/reminisce.txt -text svneol=native#text/plain
 res/cardsfolder/remote_farm.txt -text svneol=native#text/plain
 res/cardsfolder/remote_isle.txt -text svneol=native#text/plain
 res/cardsfolder/remove.txt -text svneol=native#text/plain
+res/cardsfolder/remove_enchantments.txt -text svneol=native#text/plain
 res/cardsfolder/remove_soul.txt -text svneol=native#text/plain
 res/cardsfolder/rend_flesh.txt -text svneol=native#text/plain
 res/cardsfolder/rend_spirit.txt -text svneol=native#text/plain

@@ -4233,6 +4233,41 @@ public class CardFactory_Instants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Remove Enchantments")) {
+            final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = -7324132132222075031L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	final Player you = card.getController();
+                	CardList ens = AllZoneUtil.getTypeInPlay("Enchantment");
+                	CardList toReturn = ens.filter(new CardListFilter() {
+                		public boolean addCard(Card c) {
+                			return (c.getOwner().isPlayer(you) && c.getController().isPlayer(you)) ||
+                				(c.isAura() && c.getEnchanting().get(0).getController().isPlayer(you)) ||
+                				(c.isAura() && c.getEnchanting().get(0).isAttacking() && 
+                						c.getEnchanting().get(0).getController().isPlayer(you.getOpponent()));
+                		}
+                	});
+                	for(Card c:toReturn) AllZone.GameAction.moveToHand(c);
+                	
+                	for(Card c:ens) {
+                		if(!toReturn.contains(c)) AllZone.GameAction.destroy(c);
+                	}
+                }
+            };
+            spell.setStackDescription(card+" - destroy/return enchantments.");
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
 
         
     	return card;
