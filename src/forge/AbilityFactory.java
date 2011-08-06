@@ -259,6 +259,14 @@ public class AbilityFactory {
 			}
 		}
 		
+		if (API.equals("Draw")){
+			if (isAb)
+				SA = AbilityFactory_ZoneAffecting.createAbilityDraw(this);
+			if (isSp){
+				SA = AbilityFactory_ZoneAffecting.createSpellDraw(this);
+			}
+		}
+		
 		// *********************************************
 		// set universal properties of the SpellAbility
         if (hasSpDesc)

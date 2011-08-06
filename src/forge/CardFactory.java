@@ -8230,48 +8230,6 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(nightSoil);
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Yawgmoth's Bargain")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    	card.getController().drawCard();
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };//SpellAbility
-            
-            ability.setDescription("Pay 1 life: Draw a card.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" - Pay 1 life: Draw a card.");
-            ability.setStackDescription(sb.toString());
-
-            card.addSpellAbility(ability);
-            
-            //instead of paying mana, pay life and add to stack
-            //Input showMessage() is always the first method called
-            Input payLife = new Input() {
-                
-                private static final long serialVersionUID = 8660593629867722192L;
-                
-                @Override
-                public void showMessage() {
-                	boolean paid = card.getController().payLife(1, card);
-                    
-                    //this order is very important, do not change
-                    stop();
-                    if (paid)
-                    	AllZone.Stack.push(ability);
-                }
-            };//Input
-            ability.setBeforePayMana(payLife);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Necropotence")) {
