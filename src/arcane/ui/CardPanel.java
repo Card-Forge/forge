@@ -274,7 +274,14 @@ public class CardPanel extends JPanel implements CardContainer{
 	}
 	public void setText(Card card) {
 		if (card == null || !Gui_NewGame.cardOverlay.isSelected()) return;
-        titleText.setText(card.getName());
+        if(card.isFaceDown()){
+        	titleText.setText("");
+        	showCastingCost = false;
+        }
+        else {
+        	titleText.setText(card.getName());
+        	showCastingCost = true;
+        }
         
         if (card.isCreature() && card.isPlaneswalker()) {
             ptText.setText(card.getNetAttack() + "/" + card.getNetDefense() + " (" + String.valueOf(card.getCounters(Counters.LOYALTY)) + ")");
@@ -300,7 +307,6 @@ public class CardPanel extends JPanel implements CardContainer{
                 - i.top - i.bottom);
         if(gameCard != null && Gui_NewGame.cardOverlay.isSelected()){
 	        setText(gameCard);
-	        showCastingCost = true;
         }
         
         setImage(image, image);

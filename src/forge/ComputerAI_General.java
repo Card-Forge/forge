@@ -164,7 +164,7 @@ public class ComputerAI_General implements Computer {
                 }//BuffedBy
 
                 CardList antibuffed = new CardList(AllZone.Human_Play.getCards()); //get all cards the computer controls with AntiBuffedBy
-                for(int k = 0; k < buffed.size(); k++) {
+                for(int k = 0; k < antibuffed.size(); k++) {
                     Card buffedcard = antibuffed.get(k);
                     if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
                             String buffedby = buffedcard.getSVar("AntiBuffedBy");
