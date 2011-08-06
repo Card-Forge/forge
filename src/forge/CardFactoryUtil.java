@@ -4629,9 +4629,6 @@ public class CardFactoryUtil {
     	if (c.getKeyword().contains("Artifacts, creatures, enchantments, and lands you control are indestructible."))
     		return "Elspeth_Emblem";
     	
-    	if (c.getKeyword().contains("Whenever you cast a spell, exile target permanent."))
-    		return "Venser_Emblem";
-    	
     	if (c.getKeyword().contains("Mountains you control have 'tap: This land deals 1 damage to target creature or player.'"))
     		return "Koth_Emblem";
     	

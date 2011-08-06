@@ -3605,6 +3605,275 @@ class CardFactory_Planeswalkers {
         }
         //*************** END ************ END **************************
         
+        //*************** START *********** START **************************
+        else if(cardName.equals("Venser, the Sojourner")) {
+            
+            final int turn[] = new int[1];
+            turn[0] = -1;
+            
+            final Card card2 = new Card() {
+                @Override
+                public void addDamage(int n, Card source) {
+                    subtractCounter(Counters.LOYALTY, n);
+                    AllZone.GameAction.checkStateEffects();
+                }
+            };
+            card2.setOwner(owner);
+            card2.setController(owner);
+            
+            card2.setName(card.getName());
+            card2.setType(card.getType());
+            card2.setManaCost(card.getManaCost());
+            card2.addSpellAbility(new Spell_Permanent(card2));
+            card2.addComesIntoPlayCommand(CardFactoryUtil.entersBattleFieldWithCounters(card2, Counters.LOYALTY, 3));
+            
+
+            final SpellAbility ability1 = new Ability(card2, "0") {
+                @Override
+                public void resolve() {
+                	final Card c = getTargetCard();
+                	                	
+                	if (c != null && AllZone.GameAction.isCardInPlay(c)) 
+                	{		
+                		 final Command eot = new Command() {
+
+							private static final long serialVersionUID = -947355314271308770L;
+
+							public void execute() {
+                                 if(AllZone.GameAction.isCardRemovedFromGame(c)) {
+                                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getOwner());
+                                	 AllZone.GameAction.moveTo(play, c);
+                                 }
+                             }//execute()
+                         };//Command
+                		
+	                    card2.addCounterFromNonEffect(Counters.LOYALTY, 2);
+	                    turn[0] = AllZone.Phase.getTurn();
+	                    
+	                    AllZone.GameAction.exile(c);
+	                    AllZone.EndOfTurn.addAt(eot);
+                	}
+                	
+                }
+                
+                @Override
+                public boolean canPlayAI() {
+                	CardList list = AllZoneUtil.getCardsInPlay();
+                	list = list.filter(new CardListFilter()
+                	{
+                		public boolean addCard(Card c)
+                		{
+                			return CardFactoryUtil.canTarget(card2, c) && c.getOwner().equals(Constant.Player.Computer) &&
+                				   !c.equals(card2);
+                		}
+                	});
+                	if (list.size() > 0) {
+                		
+                		CardList bestCards = list.filter(new CardListFilter()
+                		{
+                			public boolean addCard(Card c)
+                			{
+                				return c.getKeyword().contains("When CARDNAME enters the battlefield, draw a card.") ||
+                					   c.getName().equals("Venerated Teacher") || c.getName().equals("Stoneforge Mystic") || c.getName().equals("Sun Titan") ||
+                					   c.getType().contains("Ally");
+                			}
+                		});
+                		
+                		if (bestCards.size()>0) {
+                			bestCards.shuffle();
+                			setTargetCard(bestCards.get(0));
+                		}
+                		setTargetCard(list.get(0));
+                	}
+                	
+                    return card2.getCounters(Counters.LOYALTY) < 8 && list.size() > 0 &&
+                    	   AllZone.Phase.getPhase().equals("Main2");
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    SpellAbility sa;
+                    for(int i = 0; i < AllZone.Stack.size(); i++) {
+                        sa = AllZone.Stack.peek(i);
+                        if(sa.getSourceCard().equals(card2)) return false;
+                    }
+                    return 0 < card2.getCounters(Counters.LOYALTY)
+                            && AllZone.getZone(card2).is(Constant.Zone.Play)
+                            && turn[0] != AllZone.Phase.getTurn()
+                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2")) && AllZone.Stack.size() == 0;
+                }//canPlay()
+                
+            };//SpellAbility ability1
+            
+            Input runtime = new Input() {
+                private static final long serialVersionUID = 8609211991425118222L;
+                
+                @Override
+                public void showMessage() {
+                    CardList list = new CardList();
+                    list.addAll(AllZone.Human_Play.getCards());
+                    list.addAll(AllZone.Computer_Play.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isPermanent() && c.getOwner().equals(Constant.Player.Human) 
+                            	   && CardFactoryUtil.canTarget(card, c) && !c.equals(card2);
+                        }
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability1, list,
+                            "Select target permanent you own", true, false));
+                }//showMessage()
+            };//Input
+            
+            
+            final SpellAbility ability2 = new Ability(card2, "0") {
+                @Override
+                public void resolve() {
+                    card2.subtractCounter(Counters.LOYALTY, 1);
+                    turn[0] = AllZone.Phase.getTurn();
+                    
+                    CardList list = AllZoneUtil.getCardsInPlay();
+                    list = list.getType("Creature");
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        final Card[] target = new Card[1];
+                        target[0] = list.get(i);
+                        
+                        final Command untilEOT = new Command() {
+							private static final long serialVersionUID = -7291011871465745495L;
+
+							public void execute() {
+                                if(AllZone.GameAction.isCardInPlay(target[0])) {
+                                    target[0].removeExtrinsicKeyword("Unblockable");
+                                }
+                            }
+                        };//Command
+                        
+                        if(AllZone.GameAction.isCardInPlay(target[0])) {
+                            target[0].addExtrinsicKeyword("Unblockable");
+                            AllZone.EndOfTurn.addUntil(untilEOT);
+                        }//if
+                    }//for
+                    
+                }//resolve()
+                
+                @Override
+                public boolean canPlay() {
+                    return AllZone.getZone(card2).is(Constant.Zone.Play)
+                            && turn[0] != AllZone.Phase.getTurn()
+                            && card2.getCounters(Counters.LOYALTY) >= 1
+                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2")) && AllZone.Stack.size() == 0;
+                }//canPlay()
+                
+                @Override
+                public boolean canPlayAI() {
+                    
+                	CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                    list = list.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card crd)
+                    	{
+                    		return crd.isEmblem() && crd.getKeyword().contains("Whenever you cast a spell, exile target permanent.");
+                    	}
+                    });
+                	
+                    CardList creatList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                    creatList = creatList.filter(new CardListFilter()
+                    {
+                    	public boolean addCard(Card crd)
+                    	{
+                    		return crd.isCreature() && CombatUtil.canAttack(crd);
+                    	}
+                    });
+                    
+                    return list.size() >= 1 && card2.getCounters(Counters.LOYALTY) > 2 && creatList.size() >= 3 && AllZone.Phase.getPhase().equals("Main1");
+                    
+                }
+            };//SpellAbility ability2
+            
+            
+            //ability3
+            final SpellAbility ability3 = new Ability(card2, "0") {
+                @Override
+                public void resolve() {
+                    card2.subtractCounter(Counters.LOYALTY, 8);
+                    turn[0] = AllZone.Phase.getTurn();
+                    
+                    Card emblem = new Card();
+                    //should we even name this permanent?
+                    //emblem.setName("Elspeth Emblem");
+                    emblem.addIntrinsicKeyword("Indestructible");
+                    emblem.addIntrinsicKeyword("Shroud");
+                    emblem.addIntrinsicKeyword("Whenever you cast a spell, exile target permanent.");
+                    emblem.setImmutable(true);
+                    emblem.addType("Emblem");
+                    emblem.setController(card2.getController());
+                    emblem.setOwner(card2.getOwner());
+                    
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
+                    play.add(emblem);
+                    
+                    /*
+                    //AllZone.GameAction.checkStateEffects();
+                    AllZone.StaticEffects.rePopulateStateBasedList();
+                    for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
+                        Command com = GameActionUtil.commands.get(effect);
+                        com.execute();
+                    }           
+                    */           
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return 8 <= card2.getCounters(Counters.LOYALTY)
+                            && AllZone.getZone(card2).is(Constant.Zone.Play)
+                            && turn[0] != AllZone.Phase.getTurn()
+                            && AllZone.Phase.getActivePlayer().equals(card2.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && (AllZone.Phase.getPhase().equals("Main1") || AllZone.Phase.getPhase().equals(
+                                    "Main2")) && AllZone.Stack.size() == 0;
+                }//canPlay()
+                
+                @Override
+                public boolean canPlayAI() {
+                	//multiple venser emblems are NOT redundant
+                	/*
+                    CardList list = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+                    list = list.filter(new CardListFilter(){
+                    	public boolean addCard(Card c)
+                    	{
+                    		return c.isEmblem() && c.getKeyword().contains("Whenever you cast a spell, exile target permanent.");
+                    	}
+                    });
+                    */
+                	return card2.getCounters(Counters.LOYALTY) > 8;
+                }
+            };
+            
+            ability1.setBeforePayMana(runtime);
+            ability1.setDescription("+2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.");
+            card2.addSpellAbility(ability1);
+            
+            ability2.setDescription("-1: Creatures are unblockable this turn.");
+            ability2.setStackDescription("Creatures are unblockable this turn.");
+            card2.addSpellAbility(ability2);
+            
+            ability3.setDescription("-8: You get an emblem with \"Whenever you cast a spell, exile target permanent.\"");
+            ability3.setStackDescription(card + "You get an emblem with \"Whenever you cast a spell, exile target permanent.\"");
+            card2.addSpellAbility(ability3);
+            
+            card2.setSVars(card.getSVars());
+            
+            return card2;
+        }//*************** END ************ END **************************
+        
+        
         return card;
     }
     

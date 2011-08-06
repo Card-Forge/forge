@@ -435,6 +435,7 @@ public class GameActionUtil {
 		playCard_Kor_Firewalker(c);
 		playCard_Curse_of_Wizardry(c);
 		playCard_Hand_of_the_Praetors(c);
+		playCard_Venser_Emblem(c);
 		
 		AllZone.GameAction.CheckWheneverKeyword(c,"CastSpell",null);
 	}
@@ -866,6 +867,94 @@ public class GameActionUtil {
 			}
 		}
 	}
+	
+	public static void playCard_Venser_Emblem(Card c)
+	{
+		final String controller = c.getController();
+
+		final PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+
+		CardList list = new CardList();
+		list.addAll(play.getCards());
+
+		list = list.filter(new CardListFilter(){
+			public boolean addCard(Card crd)
+			{
+				return crd.getKeyword().contains("Whenever you cast a spell, exile target permanent.");
+			}
+		});
+		
+		for (int i=0;i<list.size();i++)
+		{
+			final Card card = list.get(i);
+			final SpellAbility ability = new Ability(card, "0")
+			{
+				public void resolve()
+				{
+					Card target = getTargetCard();
+					if (CardFactoryUtil.canTarget(card, target) && AllZone.GameAction.isCardInPlay(target))
+						AllZone.GameAction.exile(target);
+				}
+				
+				public void chooseTargetAI()
+				{
+					CardList humanList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Human);
+					CardList compList = AllZoneUtil.getPlayerCardsInPlay(Constant.Player.Computer);
+					
+					CardListFilter filter = new CardListFilter(){
+						public boolean addCard(Card c)
+						{
+							return CardFactoryUtil.canTarget(card, c);
+						}
+					};
+					
+					humanList = humanList.filter(filter);
+					compList = compList.filter(filter);
+					
+					if (humanList.size() > 0)
+					{
+						CardListUtil.sortCMC(humanList);
+						setTargetCard(humanList.get(0));
+					}
+					else if (compList.size() > 0)
+					{
+						CardListUtil.sortCMC(compList);
+						compList.reverse();
+						setTargetCard(compList.get(0));
+					}
+								
+				}
+			};
+			
+			Input runtime = new Input() {
+				private static final long serialVersionUID = -7620283169787412409L;
+
+				@Override
+                public void showMessage() {
+                    CardList list = new CardList();
+                    list.addAll(AllZone.Human_Play.getCards());
+                    list.addAll(AllZone.Computer_Play.getCards());
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.isPermanent() && CardFactoryUtil.canTarget(card, c);
+                        }
+                    });
+                    
+                    stopSetNext(CardFactoryUtil.input_targetSpecific(ability, list,
+                            "Select target permanent to Exile", true, false));
+                }//showMessage()
+            };//Input
+
+			ability.setBeforePayMana(runtime);
+			if (controller.equals(Constant.Player.Human))
+				AllZone.GameAction.playSpellAbility(ability);
+			else {
+				ability.chooseTargetAI();
+				AllZone.Stack.add(ability);
+			}
+		}
+	}
+	
 	
 	public static void playCard_Emberstrike_Duo(Card c) {
 		final String controller = c.getController();
