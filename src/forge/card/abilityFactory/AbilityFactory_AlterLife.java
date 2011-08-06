@@ -422,10 +422,11 @@ public class AbilityFactory_AlterLife {
 		Random r = MyRandom.random;
 		Cost abCost = sa.getPayCosts();
 		final Card source = sa.getSourceCard();
+		HashMap<String,String> params = af.getMapParams();
 		int humanLife = AllZone.HumanPlayer.getLife();
 		int aiLife = AllZone.ComputerPlayer.getLife();
 
-		String amountStr = af.getMapParams().get("LifeAmount");
+		String amountStr = params.get("LifeAmount");
 		
 		// TODO handle proper calculation of X values based on Cost and what would be paid
 		final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
@@ -454,6 +455,10 @@ public class AbilityFactory_AlterLife {
 		
 		if (!AllZone.HumanPlayer.canLoseLife())
 			return false;
+		
+		//Don't use loselife before main 2 if possible
+		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        	return false;
 		
 		 // prevent run-away activations - first time will always return true
 		 boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
@@ -750,8 +755,9 @@ public class AbilityFactory_AlterLife {
 	
 	private static boolean poisonCanPlayAI(final AbilityFactory af, final SpellAbility sa, final String amountStr){
 		Cost abCost = sa.getPayCosts();
+		HashMap<String,String> params = af.getMapParams();
 		//int humanPoison = AllZone.HumanPlayer.getPoisonCounters();
-		int humanLife = AllZone.HumanPlayer.getLife();
+		//int humanLife = AllZone.HumanPlayer.getLife();
 		//int aiPoison = AllZone.ComputerPlayer.getPoisonCounters();
 		int aiLife = AllZone.ComputerPlayer.getLife();
 
@@ -764,11 +770,15 @@ public class AbilityFactory_AlterLife {
 				if (amountStr.contains("X"))
 					return false;
 			}
-			if(abCost.getLifeCost() && aiLife - abCost.getLifeAmount() < humanLife - amount) return false;
+			if(abCost.getLifeCost() && aiLife - abCost.getLifeAmount() <= 0) return false;
 		}
 		
 		if (!ComputerUtil.canPayCost(sa))
 			return false;
+		
+		//Don't use poison before main 2 if possible
+		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        	return false;
 		 
 		 Target tgt = sa.getTarget();
 		 
@@ -918,6 +928,10 @@ public class AbilityFactory_AlterLife {
 
 		if(!AllZone.ComputerPlayer.canGainLife())
 			return false;
+		
+		//Don't use setLife before main 2 if possible
+		if(AllZone.Phase.isBefore(Constant.Phase.Main2) && !params.containsKey("ActivatingPhases"))
+        	return false;
 
 		// TODO handle proper calculation of X values based on Cost and what would be paid
 		int amount;
