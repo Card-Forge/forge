@@ -38,6 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+improvised_armor.jpg		http://www.wizards.com/global/images/magic/general/improvised_armor.jpg
+savage_hunger.jpg		http://www.wizards.com/global/images/magic/general/savage_hunger.jpg
 finest_hour.jpg      http://www.wizards.com/global/images/magic/general/finest_hour.jpg
 fountain_of_youth.jpg		http://www.wizards.com/global/images/magic/general/fountain_of_youth.jpg
 marble_chalice.jpg		http://www.wizards.com/global/images/magic/general/marble_chalice.jpg

@@ -1,3 +1,19 @@
+Improvised Armor
+3 W
+Enchantment Aura
+Enchanted creature gets +2/+5.
+Cycling:3
+Enchant creature
+enPump:+2/+5
+
+Savage Hunger
+2 G
+Enchantment Aura
+Enchanted creature gets +1/+0 and has trample.
+Enchant creature
+enPump:+1/+0/Trample
+Cycling:2
+
 Finest Hour
 2 G W U
 Enchantment
