@@ -1,3 +1,10 @@
+Mind Peel
+B
+Sorcery
+no text
+spDiscardTgt:TgtChoose:1:Target player discards a card.:Mind Peel - target player discards a card
+SVar:Buyback:2 B B
+
 Grave Titan
 4 B B
 Creature Giant

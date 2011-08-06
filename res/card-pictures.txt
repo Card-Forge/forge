@@ -38,6 +38,7 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+mind_peel.jpg		http://www.wizards.com/global/images/magic/general/mind_peel.jpg
 grave_titan.jpg		http://www.wizards.com/global/images/magic/general/grave_titan.jpg
 aether_adept.jpg		http://www.wizards.com/global/images/magic/general/aether_adept.jpg
 tireless_missionaries.jpg		http://www.wizards.com/global/images/magic/general/tireless_missionaries.jpg
