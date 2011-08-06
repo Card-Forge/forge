@@ -53,6 +53,7 @@ public class Card extends MyObservable {
     private ArrayList<Card_Color>		 cardColor						   = new ArrayList<Card_Color>();
     
     private ArrayList<Card>				rememberedCards						= new ArrayList<Card>();
+    private ArrayList<Card>				imprintedCards						= new ArrayList<Card>();
     
     private HashMap<Card, Integer>       receivedDamageFromThisTurn        = new HashMap<Card, Integer>();
     private HashMap<Card, Integer>		 dealtDamageToThisTurn			   = new HashMap<Card, Integer>();
@@ -202,6 +203,22 @@ public class Card extends MyObservable {
     public void clearRemembered()
     {
     	rememberedCards.clear();
+    }
+    
+    public void addImprinted(Card c) {
+    	imprintedCards.add(c);
+    }
+    
+    public void addImprinted(ArrayList<Card> list) {
+    	imprintedCards.addAll(list);
+    }
+    
+    public ArrayList<Card> getImprinted() {
+    	return imprintedCards;
+    }
+    
+    public void clearImprinted() {
+    	imprintedCards.clear();
     }
     
     public Trigger addTrigger(Trigger t)

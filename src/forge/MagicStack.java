@@ -758,7 +758,7 @@ public class MagicStack extends MyObservable {
 			}
 			if(sa.getAbilityFactory() != null)
 			{
-				AbilityFactory.HandleRemembering(sa.getAbilityFactory());
+				AbilityFactory.handleRemembering(sa.getAbilityFactory());
 			}
 			sa.resolve();
 		} else {

@@ -313,6 +313,17 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         	area.append("^");
         }
         
+        //Imprint
+        if(!card.getImprinted().isEmpty()) {
+        	if(area.length() != 0) area.append("\n");
+        	area.append("^Imprinting: ");
+        	for(Iterator<Card> it = card.getImprinted().iterator(); it.hasNext();) {
+        		area.append(it.next());
+        		if(it.hasNext()) area.append(", ");
+        	}
+        	area.append("^");
+        }
+        
         //uncastable
         if(card.isUnCastable()) {
             if(area.length() != 0) area.append("\n");

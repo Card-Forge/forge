@@ -866,6 +866,12 @@ public class AbilityFactory {
 					for(Card c : card.getRemembered())
 						list.add(AllZoneUtil.getCardState(c));
 				}
+				else if (calcX[0].startsWith("Imprinted")) {
+					// Add whole Imprinted list to handlePaid
+					list = new CardList();
+					for(Card c : card.getImprinted())
+						list.add(AllZoneUtil.getCardState(c));
+				}
 				else
 					return 0;
 				
@@ -915,6 +921,12 @@ public class AbilityFactory {
 			for(Card rem : hostCard.getRemembered()){
 				// Get current state of each remembered card
 				cards.add(AllZoneUtil.getCardState(rem));
+			}
+		}
+		
+		else if (defined.equals("Imprinted")){
+			for(Card imprint : hostCard.getImprinted()){
+				cards.add(AllZoneUtil.getCardState(imprint));
 			}
 		}
 			
@@ -1107,21 +1119,39 @@ public class AbilityFactory {
 		return parent;
 	}
 	
-	public static void HandleRemembering(AbilityFactory AF)
+	public static void handleRemembering(AbilityFactory AF)
 	{
-		if(!AF.getMapParams().containsKey("RememberTargets"))
+		HashMap<String,String> params = AF.getMapParams();
+		ArrayList<Card> tgts;
+		Card host;
+		
+		if(!params.containsKey("RememberTargets") && !params.containsKey("Imprint"))
 		{
 			return;
 		}
 		
-		if(AF.getMapParams().containsKey("ForgetOtherTargets"))
+		host = AF.getHostCard();
+		
+		if(params.containsKey("ForgetOtherTargets"))
 		{
-			AF.getHostCard().clearRemembered();
+			host.clearRemembered();
+		}
+		else if(params.containsKey("Unimprint")) {
+			host.clearImprinted();
 		}
 		
-		for(Card c : AF.getAbTgt().getTargetCards())
-		{
-			AF.getHostCard().addRemembered(c);
+		Target tgt = AF.getAbTgt();
+		tgts = (tgt == null) ? new ArrayList<Card>() : tgt.getTargetCards();
+		
+		if(params.containsKey("RememberTargets")) {
+			for(Card c : tgts)
+			{
+				host.addRemembered(c);
+			}
+		}
+		else if(params.containsKey("Imprint")) {
+			host.addImprinted(tgts);
 		}
 	}
-}
+	
+}//end class AbilityFactory
