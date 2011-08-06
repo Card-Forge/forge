@@ -313,6 +313,12 @@ public abstract class Player extends MyObservable{
 				restDamage += restDamage;
 		}
     	
+    	if( AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) ) {
+			int amount = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Gratuitous Violence").size();
+			for (int i = 0; i < amount;i++)
+				restDamage += restDamage;
+		}
+    	
     	if( AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell()) {
     		int amount = AllZoneUtil.getCardsInPlay("Benevolent Unicorn").size();
 			for (int i = 0; i < amount;i++)

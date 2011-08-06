@@ -203,7 +203,8 @@ public class AbilityFactory_DealDamage {
 		int restDamage = d;
 
 		if (!noPrevention)
-			restDamage = AllZone.HumanPlayer.staticDamagePrevention(restDamage, AF.getHostCard(), false);
+			restDamage = AllZone.HumanPlayer.predictDamage(restDamage, AF.getHostCard(), false);
+		else restDamage = AllZone.HumanPlayer.staticReplaceDamage(restDamage, AF.getHostCard(), false);
 
 		if (restDamage == 0) return false;
 
@@ -227,7 +228,8 @@ public class AbilityFactory_DealDamage {
 			public boolean addCard(Card c) {
 				int restDamage = d;
 				if (!noPrevention)
-					restDamage = c.staticDamagePrevention(d,AF.getHostCard(),false);
+					restDamage = c.predictDamage(d,AF.getHostCard(),false);
+				else restDamage = AllZone.HumanPlayer.staticReplaceDamage(restDamage, AF.getHostCard(), false);
 				// will include creatures already dealt damage
 				return c.getKillDamage() <= restDamage && CardFactoryUtil.canTarget(AF.getHostCard(), c)
 				&& !c.getKeyword().contains("Indestructible") && !(c.getSVar("SacMe").length() > 0);
@@ -544,14 +546,14 @@ public class AbilityFactory_DealDamage {
     		CardListFilter filterX = new CardListFilter(){
     			public boolean addCard(Card c)
     			{
-    				return CardFactoryUtil.canDamage(source, c) && c.staticDamagePrevention(maxX, source, false) >= c.getKillDamage();
+    				return CardFactoryUtil.canDamage(source, c) && c.predictDamage(maxX, source, false) >= c.getKillDamage();
     			}
     		};
     		
     		CardListFilter filter = new CardListFilter(){
     			public boolean addCard(Card c)
     			{
-    				return CardFactoryUtil.canDamage(source, c) && c.staticDamagePrevention(dmg, source, false) >= c.getKillDamage();
+    				return CardFactoryUtil.canDamage(source, c) && c.predictDamage(dmg, source, false) >= c.getKillDamage();
     			}
     		};
 
@@ -592,17 +594,17 @@ public class AbilityFactory_DealDamage {
     		
     		//Don't kill yourself
     		if (validP.contains("Each") 
-    				&& AllZone.ComputerPlayer.getLife() <= AllZone.ComputerPlayer.staticDamagePrevention(dmg, source, false))
+    				&& AllZone.ComputerPlayer.getLife() <= AllZone.ComputerPlayer.predictDamage(dmg, source, false))
 				return false;
     		
     		//TODO: X may be something different than X paid
 			if ((validP.contains("Each") || validP.contains("EachOpponent")) && numDmg.equals("X") 
-					&& AllZone.HumanPlayer.getLife() <= AllZone.HumanPlayer.staticDamagePrevention(maxX, source, false))
+					&& AllZone.HumanPlayer.getLife() <= AllZone.HumanPlayer.predictDamage(maxX, source, false))
 					return true;
     		
     		//if we can kill human, do it
     		if((validP.contains("Each") || validP.contains("EachOpponent")) 
-    				&& AllZone.HumanPlayer.getLife() <= AllZone.HumanPlayer.staticDamagePrevention(dmg, source, false))
+    				&& AllZone.HumanPlayer.getLife() <= AllZone.HumanPlayer.predictDamage(dmg, source, false))
     			return true;
 
     		 // prevent run-away activations - first time will always return true

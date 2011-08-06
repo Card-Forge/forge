@@ -2966,14 +2966,27 @@ public class Card extends MyObservable {
     	
     	int restDamage = damage;
     	
-    	if( AllZoneUtil.isCardInPlay("Furnace of Rath")) {
+    	if( AllZoneUtil.isCardInPlay("Furnace of Rath") && isCreature()) {
 			int amount = AllZoneUtil.getCardsInPlay("Furnace of Rath").size();
+			for (int i = 0; i < amount;i++)
+				restDamage += restDamage;
+		}
+    	
+    	if( AllZoneUtil.isCardInPlay("Gratuitous Violence", source.getController()) && isCreature()) {
+			int amount = AllZoneUtil.getPlayerCardsInPlay(source.getController(), "Gratuitous Violence").size();
 			for (int i = 0; i < amount;i++)
 				restDamage += restDamage;
 		}
     	
     	if( AllZoneUtil.isCardInPlay("Benevolent Unicorn") && source.isSpell() && isCreature() ) {
     		int amount = AllZoneUtil.getCardsInPlay("Benevolent Unicorn").size();
+			for (int i = 0; i < amount;i++)
+				if ( restDamage > 0 )	
+					restDamage -= 1;
+		}
+    	
+    	if( AllZoneUtil.isCardInPlay("Lashknife Barrier", getController()) && isCreature() ) {
+    		int amount = AllZoneUtil.getPlayerCardsInPlay(getController(), "Lashknife Barrier").size();
 			for (int i = 0; i < amount;i++)
 				if ( restDamage > 0 )	
 					restDamage -= 1;

@@ -1,0 +1,9 @@
+Name:Lashknife Barrier
+ManaCost:2 W
+Types:Enchantment
+Text:If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.
+K:When CARDNAME enters the battlefield, draw a card.
+SVar:PlayMain1:TRUE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lashknife_barrier.jpg
+End
