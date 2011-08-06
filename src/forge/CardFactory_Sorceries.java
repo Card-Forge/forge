@@ -2691,99 +2691,10 @@ public class CardFactory_Sorceries {
     	  card.addSpellAbility(spell);        
       }
       //*************** END ************ END **************************
-    
-        
-        
-        //*************** START *********** START **************************
-        else if (cardName.equals("Savage Twister"))
-        {
-        	final SpellAbility spell = new Spell(card)
-        	{
-        		private static final long serialVersionUID = -2579177525478645067L;
-        		public void resolve()
-        		{
-        			CardList all = new CardList();
-        			all.addAll(AllZone.Human_Battlefield.getCards());
-        			all.addAll(AllZone.Computer_Battlefield.getCards());
-        			all = all.filter(new CardListFilter()
-        			{
-        				public boolean addCard(Card c)
-        				{
-        					return c.isCreature();
-        				}
-        			});
 
-        			for(int i = 0; i < all.size(); i++)
-        				all.get(i).addDamage(card.getXManaCostPaid(), card);
 
-        			card.setXManaCostPaid(0);
-        		}
-        		public boolean canPlayAI()
-        		{
-        			final int maxX = ComputerUtil.getAvailableMana().size() - 1;
 
-        			CardListFilter filter = new CardListFilter(){
-        				public boolean addCard(Card c)
-        				{
-        					return c.isCreature() && maxX >= (c.getNetDefense() + c.getDamage());
-        				}
-        			};
-
-        			CardList humanAll = new CardList(AllZone.Human_Battlefield.getCards());
-        			humanAll = humanAll.filter(filter);
-
-        			CardList compAll = new CardList(AllZone.Computer_Battlefield.getCards());
-        			compAll = compAll.filter(filter);
-
-        			return humanAll.size() > (compAll.size() + 2);
-        		}
-        	};
-        	StringBuilder sbDesc = new StringBuilder();
-        	sbDesc.append(cardName).append(" deals X damage to each creature.");
-        	spell.setDescription(sbDesc.toString());
-
-        	StringBuilder sbStack = new StringBuilder();
-        	sbStack.append(cardName).append(" - deals X damage to each creature.");
-        	spell.setStackDescription(sbStack.toString());
-
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        } 
-        //*************** END ************ END **************************
-          
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Stream of Life"))
-        {
-        	final SpellAbility spell = new Spell(card){
-        		private static final long serialVersionUID = 851280814064291421L;
-
-        		public void resolve()
-        		{
-        			getTargetPlayer().gainLife(card.getXManaCostPaid(), card);
-        			card.setXManaCostPaid(0);
-        		}
-
-        		public boolean canPlayAI()
-        		{
-        			int humanLife = AllZone.HumanPlayer.getLife();
-        			int computerLife = AllZone.ComputerPlayer.getLife();
-
-        			final int maxX = ComputerUtil.getAvailableMana().size() - 1;
-        			return maxX > 3 && (humanLife >= computerLife);
-        		}
-        	};
-        	spell.setDescription("Target player gains X life.");
-        	spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
-        	spell.setChooseTargetAI(CardFactoryUtil.AI_targetComputer());
-
-        	card.clearSpellAbility();
-        	card.addSpellAbility(spell);
-        }
-        //*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
+	//*************** START *********** START **************************
         else if (cardName.equals("Lavalanche"))
         {
         	final SpellAbility spell = new Spell(card)
@@ -2840,8 +2751,9 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-                 
+    
         
+           
         //*************** START *********** START **************************
         else if (cardName.equals("Psychic Drain"))
         {
