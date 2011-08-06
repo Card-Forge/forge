@@ -1,3 +1,12 @@
+Dark Withering
+4 B B
+Instant
+Destroy target nonblack creature.
+spDestroyTgt:Creature.nonBlack
+Madness:B
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_withering.jpg
+
 Plague Stinger
 1 B
 Creature Insect Horror
