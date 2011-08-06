@@ -5634,6 +5634,7 @@ res/cardsfolder/sosuke_son_of_seshiro.txt -text svneol=native#text/plain
 res/cardsfolder/sosukes_summons.txt -text svneol=native#text/plain
 res/cardsfolder/soul_bleed.txt -text svneol=native#text/plain
 res/cardsfolder/soul_channeling.txt svneol=native#text/plain
+res/cardsfolder/soul_exchange.txt -text svneol=native#text/plain
 res/cardsfolder/soul_feast.txt -text svneol=native#text/plain
 res/cardsfolder/soul_kiss.txt -text svneol=native#text/plain
 res/cardsfolder/soul_manipulation.txt -text svneol=native#text/plain
