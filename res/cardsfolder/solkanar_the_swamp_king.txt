@@ -4,7 +4,7 @@ Types:Legendary Creature Demon
 Text:no text
 PT:5/5
 K:Swampwalk
-T:Mode$SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a black spell, you gain 1 life.
+T:Mode$ SpellCast | ValidCard$ Card.Black | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a black spell, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/solkanar_the_swamp_king.jpg

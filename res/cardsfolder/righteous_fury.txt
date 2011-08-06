@@ -2,7 +2,7 @@ Name:Righteous Fury
 ManaCost:4 W W
 Types:Sorcery
 Text:no text
-A:SP$DestroyAll | Cost$ 4 W W | ValidCards$ Creature.tapped | RememberDestroyed$ True | SubAbility$ SVar=DBGainLife | SpellDescription$ Destroy all tapped creatures. You gain 2 life for each creature destroyed this way.
+A:SP$ DestroyAll | Cost$ 4 W W | ValidCards$ Creature.tapped | RememberDestroyed$ True | SubAbility$ SVar=DBGainLife | SpellDescription$ Destroy all tapped creatures. You gain 2 life for each creature destroyed this way.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ X
 SVar:X:Remembered$Amount.Twice
 SVar:PlayMain1:TRUE

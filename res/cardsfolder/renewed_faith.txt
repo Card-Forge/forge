@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Instant
 Text:no text
 K:Cycling:1 W
-A:SP$GainLife | Cost$ 2 W | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
+A:SP$ GainLife | Cost$ 2 W | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
 T:Mode$ Cycled | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ When you cycle Renewed Faith, you may gain 2 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 2
 SVar:Rarity:Common
