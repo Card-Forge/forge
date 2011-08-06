@@ -430,8 +430,18 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
             cardpool = new CardList();
             List<String> list = questData.getCardpool();
             
-            for(int i = 0; i < list.size(); i++)
-                cardpool.add(AllZone.CardFactory.getCard(list.get(i).toString(), null));
+            for(int i = 0; i < list.size(); i++) {
+            	String cardName = list.get(i);
+            	String setCode = "";
+                if (cardName.contains("|"))
+                {
+                	String s[] = cardName.split("\\|",2);
+                	cardName = s[0];
+                	setCode = s[1];
+                }
+            	
+            	cardpool.add(AllZone.CardFactory.getCard(cardName, null));
+            }
         } else {
             questData.ai_addDeck(deck);
             cardpool = AllZone.CardFactory.getAllCards();
@@ -439,9 +449,18 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         
         //convert Deck main to CardList
         CardList deckList = new CardList();
-        for(int i = 0; i < deck.countMain(); i++)
-            deckList.add(AllZone.CardFactory.getCard(deck.getMain(i), null));
-        
+        for(int i = 0; i < deck.countMain(); i++) {
+        	String cardName = deck.getMain(i);
+        	String setCode = "";
+            if (cardName.contains("|"))
+            {
+            	String s[] = cardName.split("\\|",2);
+            	cardName = s[0];
+            	setCode = s[1];
+            }
+        	
+        	deckList.add(AllZone.CardFactory.getCard(cardName, null));
+        }
         //update gui
         deckDisplay.updateDisplay(cardpool, deckList);
         
@@ -513,9 +532,18 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
                 Deck d = questData.ai_getDeck(deckName);
                 CardList deck = new CardList();
                 
-                for(int i = 0; i < d.countMain(); i++)
-                    deck.add(AllZone.CardFactory.getCard(d.getMain(i), null));
-                
+                for(int i = 0; i < d.countMain(); i++) {
+                	String cardName = d.getMain(i);
+                	String setCode = "";
+                    if (cardName.contains("|"))
+                    {
+                    	String s[] = cardName.split("\\|",2);
+                    	cardName = s[0];
+                    	setCode = s[1];
+                    }
+
+                	deck.add(AllZone.CardFactory.getCard(cardName, null));
+                }
                 CardList cardpool = AllZone.CardFactory.getAllCards();
                 
                 deckDisplay.updateDisplay(cardpool, deck);
@@ -653,9 +681,18 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         Deck d = questData.getDeck(deckName);
         CardList deck = new CardList();
         
-        for(int i = 0; i < d.countMain(); i++) {
-            deck.add(AllZone.CardFactory.getCard(d.getMain(i), null));
-            
+        for(int i = 0; i < d.countMain(); i++) { {
+        	String cardName = d.getMain(i);
+        	String setCode = "";
+            if (cardName.contains("|"))
+            {
+            	String s[] = cardName.split("\\|",2);
+            	cardName = s[0];
+            	setCode = s[1];
+            }
+        	
+        	deck.add(AllZone.CardFactory.getCard(cardName, null));
+        }    
             //remove any cards that are in the deck from the card pool
             cardpool.remove(d.getMain(i));
         }

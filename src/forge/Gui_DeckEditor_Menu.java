@@ -353,11 +353,31 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         
         CardList top = new CardList();
         
-        for(int i = 0; i < deck.countMain(); i++)
-            top.add(AllZone.CardFactory.getCard(deck.getMain(i), AllZone.HumanPlayer));
+        for(int i = 0; i < deck.countMain(); i++) {
+        	String cardName = deck.getMain(i);
+        	String setCode = "";
+            if (cardName.contains("|"))
+            {
+            	String s[] = cardName.split("\\|",2);
+            	cardName = s[0];
+            	setCode = s[1];
+            }	
         
-        for(int i = 0; i < deck.countSideboard(); i++)
-            top.add(AllZone.CardFactory.getCard(deck.getSideboard(i), AllZone.HumanPlayer));
+            top.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
+        }
+        
+        for(int i = 0; i < deck.countSideboard(); i++) {
+        	String cardName = deck.getMain(i);
+        	String setCode = "";
+            if (cardName.contains("|"))
+            {
+            	String s[] = cardName.split("\\|",2);
+            	cardName = s[0];
+            	setCode = s[1];
+            }
+	        
+            top.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
+        }
         
         deckDisplay.updateDisplay(top, new CardList());
     }//new draft
@@ -869,12 +889,31 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         setDeckData(deck.getName(), true);
         
         CardList top = new CardList();
-        for(int i = 0; i < deck.countSideboard(); i++)
-            top.add(AllZone.CardFactory.getCard(deck.getSideboard(i), AllZone.HumanPlayer));
+        for(int i = 0; i < deck.countSideboard(); i++) {
+        	String cardName = deck.getMain(i);
+        	String setCode = "";
+            if (cardName.contains("|"))
+            {
+            	String s[] = cardName.split("\\|",2);
+            	cardName = s[0];
+            	setCode = s[1];
+            }	
         
+            top.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
+        }
         CardList bottom = new CardList();
-        for(int i = 0; i < deck.countMain(); i++)
-            bottom.add(AllZone.CardFactory.getCard(deck.getMain(i), AllZone.HumanPlayer));
+        for(int i = 0; i < deck.countMain(); i++) {
+        	String cardName = deck.getMain(i);
+        	String setCode = "";
+            if (cardName.contains("|"))
+            {
+            	String s[] = cardName.split("\\|",2);
+            	cardName = s[0];
+            	setCode = s[1];
+            }
+
+        	bottom.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
+        }
         
         deckDisplay.updateDisplay(top, bottom);
     }//showSealedDeck()
@@ -898,12 +937,32 @@ public class Gui_DeckEditor_Menu extends JMenuBar implements NewConstants {
         setDeckData(deck.getName(), true);
         
         CardList top = new CardList();
-        for(int i = 0; i < deck.countSideboard(); i++)
-            top.add(AllZone.CardFactory.getCard(deck.getSideboard(i), AllZone.HumanPlayer));
+        for(int i = 0; i < deck.countSideboard(); i++) {
+        	String cardName = deck.getMain(i);
+        	String setCode = "";
+            if (cardName.contains("|"))
+            {
+            	String s[] = cardName.split("\\|",2);
+            	cardName = s[0];
+            	setCode = s[1];
+            }
+
+        	top.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
+        }
         
         CardList bottom = new CardList();
-        for(int i = 0; i < deck.countMain(); i++)
-            bottom.add(AllZone.CardFactory.getCard(deck.getMain(i), AllZone.HumanPlayer));
+        for(int i = 0; i < deck.countMain(); i++) {
+        	String cardName = deck.getMain(i);
+        	String setCode = "";
+            if (cardName.contains("|"))
+            {
+            	String s[] = cardName.split("\\|",2);
+            	cardName = s[0];
+            	setCode = s[1];
+            }
+
+        	bottom.add(AllZone.CardFactory.getCard(cardName, AllZone.HumanPlayer));
+        }
         
         deckDisplay.updateDisplay(top, bottom);
     }//showDraftDeck()
