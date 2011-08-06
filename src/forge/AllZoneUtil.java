@@ -496,7 +496,7 @@ public class AllZoneUtil {
 			case 3: suffix="rd"; break;
 			default: suffix="th";
 			}
-			String title = "Put "+i+suffix+" in Library: ";
+			String title = "Put "+i+suffix+" from the top: ";
 			Object o = GuiUtils.getChoiceOptional(title, topCards.toArray());
 			if(o == null) break;
 			Card c_1 = (Card) o;
