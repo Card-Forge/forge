@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Creature Zombie
 Text:no text
 PT:3/3
-K:Whenever CARDNAME deals combat damage to a creature destroy that creature. It can't be regenerated.
+K:Whenever CARDNAME deals combat damage to a creature, destroy that creature. It can't be regenerated.
 A:AB$Pump | Cost$ Discard<1/Any> | KW$ Flying & Protection from green & Protection from white | SpellDescription$ CARDNAME gains flying and protection from green and from white until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grotesque_hybrid.jpg

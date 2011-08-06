@@ -5511,7 +5511,7 @@ public class GameActionUtil {
         	abilityWithoutRegen.setStackDescription(sb.toString());
         
         	int amountWithoutRegeneration = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature. It can't be regenerated.");
-        	int amountWithRegeneration = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature.") - amountWithoutRegeneration;
+        	int amountWithRegeneration = source.getAmountOfKeyword("Whenever CARDNAME deals combat damage to a creature, destroy that creature.");
         	
 	        for(int i=0 ; i < amountWithRegeneration ; i++)
 	        	AllZone.Stack.add(ability);
