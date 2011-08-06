@@ -180,6 +180,11 @@ public class TriggerHandler {
 			return;
 		}
 		
+		if(regtrig.getHostCard().isFaceDown())
+		{
+			return;
+		}
+		
 		HashMap<String,String> trigParams = regtrig.getMapParams();
 		
 		if(mode.equals(trigParams.get("Mode")))

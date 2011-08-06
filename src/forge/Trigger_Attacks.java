@@ -22,6 +22,10 @@ public class Trigger_Attacks extends Trigger {
 		if(mapParams.containsKey("Alone"))
 		{
 			CardList otherAttackers = (CardList)runParams.get("OtherAttackers");
+			if(otherAttackers == null)				
+			{
+				return false;
+			}
 			if(mapParams.get("Alone").equals("True"))
 			{
 				if(otherAttackers.size() != 0)

@@ -5457,40 +5457,6 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
   
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Midsummer Revel")) {   
-           
-        	final SpellAbility ability = new Ability(card, "G") {
-
-        		@Override
-        		public boolean canPlayAI() {
-        			if(card.getCounters(Counters.VERSE) > 0) return true;
-        			return false;
-        		}
-
-        		@Override
-        		public void resolve() { 
-        				for(int i = 0; i < card.getCounters(Counters.VERSE); i++) {
-                            CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", card.getController(), "G", new String[] {
-                                    "Creature", "Beast"}, 3, 3, new String[] {""});
-        				}
-        			AllZone.GameAction.sacrifice(card);
-        		}
-        	};
-            card.addSpellAbility(ability);
-
-            StringBuilder sbStack = new StringBuilder();
-            sbStack.append(cardName).append(" puts X 3/3 green Beast creature tokens onto the battlefield");
-            ability.setStackDescription(sbStack.toString());
-            
-            StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append("G, Sacrifice Midsummer Revel: Put X 3/3 green Beast creature tokens onto ");
-            sbDesc.append("the battlefield, where X is the number of verse counters on Midsummer Revel.");
-            ability.setDescription(sbDesc.toString());
-        }//*************** END ************ END **************************
-             
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Necrogenesis")) {
             final SpellAbility necrogen = new Ability(card, "2") {

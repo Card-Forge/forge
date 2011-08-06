@@ -4,7 +4,9 @@ Types:Creature Goblin Assassin
 Text:no text
 PT:2/2
 K:Persist
-K:WheneverKeyword:EntersBattleField:Self:Play:Damage/Power:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Murderous Redcap enters the battlefield, it deals damage equal to its power to target creature or player.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage equal to its power to target creature or player.
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ X
+SVar:X:Count$CardPower
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murderous_redcap.jpg

@@ -2,8 +2,10 @@ Name:Mesmeric Orb
 ManaCost:2
 Types:Artifact
 Text:Whenever a permanent becomes untapped, that permanent's controller puts the top card of his or her library into his or her graveyard.
-#When the WheneverKeyword can handle BecomesUntapped and Library/Top then this can be converted to keyword
-#K:WheneverKeyword:BecomesUntapped:Type/Permanent:Play:MoveFrom-Library-Graveyard:ControllingPlayer_Self:ASAP:Yes_No:Initiator - OwnedByController:Whenever a permanent becomes untapped, that permanent's controller puts the top card of his or her library into his or her graveyard.
+T:Mode$ Untaps | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigYouMill | TriggerDescription$ Whenever a permanent becomes untapped, that permanent's controller
+T:Mode$ Untaps | ValidCard$ Card.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigOppMill | TriggerDescription$ puts the top card of his or her library into his or her graveyard. 
+SVar:TrigYouMill:AB$Mill | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:TrigOppMill:AB$Mill | Cost$ 0 | Defined$ Opponent | NumCards$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mesmeric_orb.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/204.jpg
