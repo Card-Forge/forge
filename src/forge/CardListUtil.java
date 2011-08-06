@@ -304,11 +304,8 @@ public class CardListUtil
     
     for(int i  = 0; i < c.size(); i++){
       //if(c.get(i).isCreature() && c.get(i).hasSecondStrike()) {
-       if(c.get(i).isCreature() && (!c.get(i).hasFirstStrike() || (c.get(i).hasDoubleStrike() && c.get(i).hasFirstStrike())) ) {
-    	  if (!CombatUtil.isDoranInPlay())	
-    		  attack += c.get(i).getNetAttack();
-    	  else if(CombatUtil.isDoranInPlay())
-    		  attack += c.get(i).getNetDefense();       
+       if(c.get(i).isCreature() && (!c.get(i).hasFirstStrike() || (c.get(i).hasDoubleStrike() && c.get(i).hasFirstStrike())) ) {	
+    		  attack += c.get(i).getNetCombatDamage();    
       }
     }
     //System.out.println("Total attack: " +attack);
@@ -333,11 +330,8 @@ public class CardListUtil
     int attack = 0;
    
     for(int i  = 0; i < c.size(); i++){
-      if(c.get(i).isCreature() && (c.get(i).hasFirstStrike() || c.get(i).hasDoubleStrike())) {
-         if (!CombatUtil.isDoranInPlay())   
-            attack += c.get(i).getNetAttack();
-         else if(CombatUtil.isDoranInPlay())
-            attack += c.get(i).getNetDefense(); 
+      if(c.get(i).isCreature() && (c.get(i).hasFirstStrike() || c.get(i).hasDoubleStrike())) {  
+            attack += c.get(i).getNetCombatDamage();
       }
     }
     Log.debug("Total First Strike attack: " +attack);

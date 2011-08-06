@@ -5689,8 +5689,7 @@ public class GameActionUtil {
 	}
 
 	public static void executeGuiltyConscienceEffects(Card c, Card source) {
-		int pwr = c.getNetAttack();
-		if(CombatUtil.isDoranInPlay()) pwr = c.getNetDefense();
+		int pwr = c.getNetCombatDamage();
 		final int damage = pwr;
 		final Card src = source;
 

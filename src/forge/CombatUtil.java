@@ -488,10 +488,7 @@ public class CombatUtil {
     //This function takes Doran and Double Strike into account
     public static int getAttack(Card c)
     {
-       int n = c.getNetAttack();
-
-       if(CombatUtil.isDoranInPlay())
-          n = c.getNetDefense();
+       int n = c.getNetCombatDamage();
 
        if(c.hasDoubleStrike())
           n *= 2;
@@ -592,11 +589,7 @@ public class CombatUtil {
         
         int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
         
-        int defenderDamage = defender.getNetAttack() - flankingMagnitude + defBushidoMagnitude;
-        
-        if(isDoranInPlay()) {
-            defenderDamage = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
-        }
+        int defenderDamage = defender.getNetCombatDamage() - flankingMagnitude + defBushidoMagnitude;
         
         // consider static Damage Prevention
         defenderDamage = attacker.predictDamage(defenderDamage, defender, true);
@@ -673,13 +666,8 @@ public class CombatUtil {
         int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
         attBushidoMagnitude += attacker.getAmountOfKeyword("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
         
-        int defenderDamage = defender.getNetAttack() - flankingMagnitude + defBushidoMagnitude;
-        int attackerDamage = attacker.getNetAttack() + attBushidoMagnitude;
-        
-        if(isDoranInPlay()) {
-            defenderDamage = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
-            attackerDamage = attacker.getNetDefense() + attBushidoMagnitude;
-        }
+        int defenderDamage = defender.getNetCombatDamage() - flankingMagnitude + defBushidoMagnitude;
+        int attackerDamage = attacker.getNetCombatDamage() + attBushidoMagnitude;
         
         // consider Damage Prevention/Replacement
         defenderDamage = attacker.predictDamage(defenderDamage, defender, true);
@@ -741,7 +729,8 @@ public class CombatUtil {
         if(attacker.getName().equals("Sylvan Basilisk") && !defender.getKeyword().contains("Indestructible")) return true;
         
         if(attacker.hasStartOfKeyword("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat")) {
-        	int KeywordPosition = attacker.getKeywordPosition("Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat");
+        	int KeywordPosition = attacker.getKeywordPosition(
+        			"Whenever CARDNAME becomes blocked by a creature, destroy that creature at end of combat");
         	String parse = attacker.getKeyword().get(KeywordPosition).toString();
     		String k[] = parse.split(":");
     		final String restrictions[] = k[1].split(",");
@@ -753,15 +742,11 @@ public class CombatUtil {
         
         int defBushidoMagnitude = defender.getKeywordMagnitude("Bushido");
         int attBushidoMagnitude = attacker.getKeywordMagnitude("Bushido");
+        attBushidoMagnitude += attacker.getAmountOfKeyword(
+        		"Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
         
-        int defenderDamage = defender.getNetAttack() - flankingMagnitude + defBushidoMagnitude;
-        int attackerDamage = attacker.getNetAttack() + attBushidoMagnitude;
-        attBushidoMagnitude += attacker.getAmountOfKeyword("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
-        
-        if(isDoranInPlay()) {
-            defenderDamage = defender.getNetDefense() - flankingMagnitude + defBushidoMagnitude;
-            attackerDamage = attacker.getNetDefense() + attBushidoMagnitude;
-        }
+        int defenderDamage = defender.getNetCombatDamage() - flankingMagnitude + defBushidoMagnitude;
+        int attackerDamage = attacker.getNetCombatDamage() + attBushidoMagnitude;
         
         // consider Damage Prevention/Replacement
         defenderDamage = attacker.predictDamage(defenderDamage, defender, true);

@@ -1851,6 +1851,12 @@ public class Card extends MyObservable {
         else return getUnswitchedDefense();
     }
     
+    //How much combat damage does the card deal
+    public int getNetCombatDamage() {
+    	if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) return getNetDefense();
+    	return getNetAttack();
+    }
+    
     public void setRandomPicture(int n) {
         randomPicture = n;
     }

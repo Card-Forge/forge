@@ -63,9 +63,7 @@ public class CombatPlaneswalker
         //sum unblocked attackers' power
         for(int i = 0; i < att.size(); i++) {
           if(! isBlocked(att.get(i))) {
-           int damageDealt = att.get(i).getNetAttack();
-             if (CombatUtil.isDoranInPlay())
-                damageDealt = att.get(i).getNetDefense();
+           int damageDealt = att.get(i).getNetCombatDamage();
 
              //if the creature has first strike do not do damage in the normal combat phase
              //if(att.get(i).hasSecondStrike())
@@ -168,9 +166,7 @@ public class CombatPlaneswalker
       
       //attacker always gets all blockers' attack
       for (Card b : block) {
-    	  int attack =  b.getNetAttack();
-     	  if (CombatUtil.isDoranInPlay())
-     		 attack = b.getNetDefense();
+    	  int attack =  b.getNetCombatDamage();
      	 attacking.get(i).addAssignedDamage(attack, b);
       }
       if(block.size() == 0)//this damage is assigned to a player by setPlayerDamage()
@@ -180,11 +176,7 @@ public class CombatPlaneswalker
         block.get(0).addAssignedDamage(attacking.get(i).getNetAttack(), attacking.get(i));
 
         //trample
-        int trample = attacking.get(i).getNetAttack() - block.get(0).getNetDefense();
-        if (CombatUtil.isDoranInPlay())
-        {
-        	trample = attacking.get(i).getNetDefense() - block.get(0).getNetDefense();
-        }
+        int trample = attacking.get(i).getNetCombatDamage() - block.get(0).getKillDamage();
         if(attacking.get(i).getKeyword().contains("Trample") && 0 < trample)
           this.addDefendingDamage(trample, attacking.get(i));
 

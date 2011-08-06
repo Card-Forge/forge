@@ -303,10 +303,7 @@ public class ComputerUtil_Attack2 {
     
    public int getAttack(Card c)
    {
-      int n = c.getNetAttack();
-
-      if(CombatUtil.isDoranInPlay())
-         n = c.getNetDefense();
+      int n = c.getNetCombatDamage();
 
       if(c.getKeyword().contains("Double Strike"))
          n *= 2;

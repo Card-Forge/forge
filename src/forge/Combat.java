@@ -197,12 +197,10 @@ public class Combat {
 		CardList att = new CardList(getAttackers());
 		// sum unblocked attackers' power
 		for (int i = 0; i < att.size(); i++) {
-			if (!isBlocked(att.get(i))
-					|| (getBlockers(att.get(i)).size() == 0 && att.get(i)
-							.getKeyword().contains("Trample"))) {
-				int damageDealt = att.get(i).getNetAttack();
-				if (CombatUtil.isDoranInPlay())
-					damageDealt = att.get(i).getNetDefense();
+			if (!isBlocked(att.get(i)) 
+					|| (getBlockers(att.get(i)).size() == 0 && att.get(i).getKeyword().contains("Trample"))) {
+				
+				int damageDealt = att.get(i).getNetCombatDamage();
 
 				if (damageDealt > 0) {
 					// if the creature has first strike do not do damage in the normal combat phase
@@ -220,9 +218,8 @@ public class Combat {
 		// sum unblocked attackers' power
 		for (int i = 0; i < att.size(); i++) {
 			if (!isBlocked(att.get(i))) {
-				int damageDealt = att.get(i).getNetAttack();
-				if (CombatUtil.isDoranInPlay())
-					damageDealt = att.get(i).getNetDefense();
+				
+				int damageDealt = att.get(i).getNetCombatDamage();
 
 				if (damageDealt > 0) {
 					// if the creature has first strike or double strike do damage in the first strike combat phase
@@ -390,6 +387,7 @@ public class Combat {
 	// set Card.setAssignedDamage() for all creatures in combat
 	// also assigns player damage by setPlayerDamage()
 	public void setAssignedFirstStrikeDamage() {
+		
 		setDefendingFirstStrikeDamage();
 
 		CardList block;
@@ -401,9 +399,7 @@ public class Combat {
 
 			for (Card b : block) {
 				if (b.hasFirstStrike() || b.hasDoubleStrike()) {
-					int attack = b.getNetAttack();
-					if (CombatUtil.isDoranInPlay())
-						attack = b.getNetDefense();
+					int attack = b.getNetCombatDamage();
 					attacking.get(i).addAssignedDamage(attack, b);
 				}
 			}
@@ -413,48 +409,33 @@ public class Combat {
 				addUnblockedAttacker(attacking.get(i));
 			}
 
-			else if (attacking.get(i).hasFirstStrike() || (attacking.get(i).hasDoubleStrike())) {
+			else if (attacking.get(i).hasFirstStrike() || attacking.get(i).hasDoubleStrike()) {
 				if (block.size() == 1) {
-					if (attacking.get(i).hasFirstStrike()
-							|| attacking.get(i).hasDoubleStrike()) {
-						int damageDealt = attacking.get(i).getNetAttack();
-						if (CombatUtil.isDoranInPlay())
-							damageDealt = attacking.get(i).getNetDefense();
+					int damageDealt = attacking.get(i).getNetCombatDamage();
 
-						CardList cl = new CardList();
-						cl.add(attacking.get(i));
+					CardList cl = new CardList();
+					cl.add(attacking.get(i));
 
-						block.get(0).addAssignedDamage(damageDealt,
-								attacking.get(i));
+					block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
 
-						// trample
-						int trample = damageDealt
-								- block.get(0).getNetDefense();
-						if (attacking.get(i).getKeyword().contains("Trample")
-								&& 0 < trample) {
-							this.addDefendingFirstStrikeDamage(trample,
-									attacking.get(i));
-							// System.out.println("First Strike trample damage: "
-							// + trample);
-						}
+					// trample
+					int trampleDamage = damageDealt - block.get(0).getKillDamage();
+					
+					if (attacking.get(i).getKeyword().contains("Trample") && 0 < trampleDamage) {
+						this.addDefendingFirstStrikeDamage(trampleDamage,	attacking.get(i));
+						// System.out.println("First Strike trample damage: " + trample);
 					}
 				}// 1 blocker
 				else if (getAttackingPlayer().isComputer()) {
-					if (attacking.get(i).hasFirstStrike()
-							|| attacking.get(i).hasDoubleStrike()) {
-						int damageDealt = attacking.get(i).getNetAttack();
-						if (CombatUtil.isDoranInPlay())
-							damageDealt = attacking.get(i).getNetDefense();
-						addAssignedFirstStrikeDamage(attacking.get(i), block,
-								damageDealt);
+					if (attacking.get(i).hasFirstStrike() || attacking.get(i).hasDoubleStrike()) {
+						int damageDealt = attacking.get(i).getNetCombatDamage();
+						addAssignedFirstStrikeDamage(attacking.get(i), block, damageDealt);
 					}
 				} 
 				else{
 					// human
 					if (attacking.get(i).hasFirstStrike() || attacking.get(i).hasDoubleStrike()) {
-						int damageDealt = attacking.get(i).getNetAttack();
-						if (CombatUtil.isDoranInPlay())
-							damageDealt = attacking.get(i).getNetDefense();
+						int damageDealt = attacking.get(i).getNetCombatDamage();
 						AllZone.Display.assignDamage(attacking.get(i), block, damageDealt);
 
 					}
@@ -498,15 +479,14 @@ public class Combat {
 		CardList attacking = new CardList(getAttackers());
 		for (int i = 0; i < attacking.size(); i++) {
 			block = getBlockers(attacking.get(i));
+			
+			int damageDealt = attacking.get(i).getNetCombatDamage();
 
 			// attacker always gets all blockers' attack
-
 			for (Card b : block) {
 				if (!b.hasFirstStrike()
 						|| (b.hasFirstStrike() && b.hasDoubleStrike())) {
-					int attack = b.getNetAttack();
-					if (CombatUtil.isDoranInPlay())
-						attack = b.getNetDefense();
+					int attack = b.getNetCombatDamage();
 					attacking.get(i).addAssignedDamage(attack, b);
 				}
 			}
@@ -518,32 +498,21 @@ public class Combat {
 
 			else if (!attacking.get(i).hasFirstStrike() || attacking.get(i).hasDoubleStrike()) {
 				if (block.size() == 1) {
-					int damageDealt = attacking.get(i).getNetAttack();
-					if (CombatUtil.isDoranInPlay())
-						damageDealt = attacking.get(i).getNetDefense();
 
-					block.get(0).addAssignedDamage(damageDealt,
-							attacking.get(i));
+					block.get(0).addAssignedDamage(damageDealt, attacking.get(i));
 
 					// trample
-					int trample = damageDealt - block.get(0).getNetDefense();
-					if (attacking.get(i).getKeyword().contains("Trample")
-							&& 0 < trample) {
+					int trample = damageDealt - block.get(0).getKillDamage();
+					if (attacking.get(i).getKeyword().contains("Trample") && 0 < trample) {
 						this.addDefendingDamage(trample, attacking.get(i));
 					}
 				}// 1 blocker
 
 				else if (getAttackingPlayer().isComputer()) {
-					int damageDealt = attacking.get(i).getNetAttack();
-					if (CombatUtil.isDoranInPlay())
-						damageDealt = attacking.get(i).getNetDefense();
 					addAssignedDamage(attacking.get(i), block, damageDealt);
 
 				} 
 				else{ // human attacks
-					int damageDealt = attacking.get(i).getNetAttack();
-					if (CombatUtil.isDoranInPlay())
-						damageDealt = attacking.get(i).getNetDefense();
 
 					AllZone.Display.assignDamage(attacking.get(i), block, damageDealt);
 

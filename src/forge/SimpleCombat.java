@@ -64,12 +64,8 @@ class SimpleCombat {
             if(blockers.size() == 0) {} else {
                 
                 Card block = blockers.get(0);
-                int blockerDamage = block.getNetAttack();
-                int attackerDamage = attack.getNetAttack();
-                if(CombatUtil.isDoranInPlay()) {
-                    blockerDamage = block.getNetDefense();
-                    attackerDamage = attack.getNetDefense();
-                }
+                int blockerDamage = block.getNetCombatDamage();
+                int attackerDamage = attack.getNetCombatDamage();
                 
                 if(attack.getNetDefense() <= blockerDamage) aDestroy.add(attack);
                 
