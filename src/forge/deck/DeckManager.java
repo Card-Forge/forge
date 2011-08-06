@@ -34,10 +34,6 @@ public class DeckManager {
     Map<String, Deck> deckMap;
     Map<String, Deck[]> boosterMap;
 
-    public DeckManager(String fileName) {
-        this(new File(fileName));
-    }
-
     public DeckManager(File deckDir) {
         if (deckDir == null) {
             throw new IllegalArgumentException("No deck directory specified");
@@ -173,15 +169,25 @@ public class DeckManager {
 
         ListIterator<String> lineIterator = lines.listIterator();
 
-        String firstLine = lineIterator.next();
+        String line = lineIterator.next();
 
         //Old text-based format
-        if (!firstLine.equals("[Metadata]")) {
+        if (!line.equals("[metadata]")) {
             lineIterator.previous();
             return readDeckOld(lineIterator);
         }
 
-        return null;
+        Deck d = new Deck();
+
+        //read metadata
+        while(!(line = lineIterator.next()).equals("[main]")){
+            String[] linedata = line.split("=",2);
+            d.addMetaData(linedata[0], linedata[1]);
+        }
+
+        addCardList(lineIterator, d);
+
+        return d;
 
     }
 
@@ -206,19 +212,28 @@ public class DeckManager {
         //readDeck deck type
         String deckType = iterator.next();
 
-        Deck d = new Deck(deckType);
+        Deck d = new Deck();
         d.setName(name);
         d.setComment(comment);
+        d.setDeckType(deckType);
 
         //go to [main]
         while ((line = iterator.next()) != null && !line.equals("[main]")) {
             System.err.println("unexpected line: " + line);
         }
 
+        addCardList(iterator, d);
+
+        return d;
+    }
+
+    private static void addCardList(ListIterator<String> lineIterator, Deck d) {
+        String line;
+
         Pattern p = Pattern.compile("\\s*((\\d+)\\s+)?(.*?)\\s*");
 
         //readDeck main deck
-        while (iterator.hasNext() && !(line = iterator.next()).equals("[sideboard]")) {
+        while (lineIterator.hasNext() && !(line = lineIterator.next()).equals("[sideboard]")) {
             Matcher m = p.matcher(line);
             m.matches();
             String s = m.group(2);
@@ -230,7 +245,8 @@ public class DeckManager {
         }
 
         //readDeck sideboard
-        while (iterator.hasNext()) {
+        while (lineIterator.hasNext()) {
+            line = lineIterator.next();
             Matcher m = p.matcher(line);
             m.matches();
             String s = m.group(2);
@@ -239,8 +255,6 @@ public class DeckManager {
                 d.addSideboard(m.group(3));
             }
         }
-
-        return d;
     }
 
     private String deriveFileName(String deckName) {
@@ -296,12 +310,13 @@ public class DeckManager {
     }
 
     private void write(Deck d, BufferedWriter out) throws IOException {
-        out.write(format("%s%n", d.getName()));
-        if (d.getComment() != null) {
-            out.write(format("%s%n", d.getComment()));
+        out.write("[metadata]\n");
+
+        for (Entry<String, String> entry : d.getMetadata()) {
+            if (entry.getValue() != null)
+                out.write(format("%s=%s%n", entry.getKey(), entry.getValue().replaceAll("\n", "")));
         }
-        out.write(format("%s%n", "[general]"));
-        out.write(format("%s%n", d.getDeckType()));
+
         out.write(format("%s%n", "[main]"));
         for (Entry<String, Integer> e : count(d.getMain()).entrySet()) {
             out.write(format("%d %s%n", e.getValue(), e.getKey()));

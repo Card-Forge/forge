@@ -12,8 +12,6 @@ public class Deck implements Comparable{
 
     private List<String> main;
     private List<String> sideboard;
-    private transient List<String> mainView;
-    private transient List<String> sideboardView;
 
     public static final String NAME = "Name";
     public static final String DECK_TYPE = "Deck Type";
@@ -23,15 +21,9 @@ public class Deck implements Comparable{
 
 
     //gameType is from Constant.GameType, like Constant.GameType.Regular
-    public Deck(String gameType) {
-        setDeckType(gameType);
-        setName("");
-
+    public Deck() {
         main = new ArrayList<String>();
-        mainView = Collections.unmodifiableList(main);
-
         sideboard = new ArrayList<String>();
-        sideboardView = Collections.unmodifiableList(sideboard);
     }
 
     public Deck(String deckType, List<String> main, List<String> sideboard, String name) {
@@ -39,18 +31,20 @@ public class Deck implements Comparable{
         setName(name);
 
         this.main = main;
-        mainView = Collections.unmodifiableList(main);
+        this.sideboard = sideboard;
+    }
 
-        this.sideboard = main;
-        sideboardView = Collections.unmodifiableList(sideboard);
+    public Deck(String type) {
+        this();
+        setDeckType(type);
     }
 
     public List<String> getMain() {
-        return mainView;
+        return Collections.unmodifiableList(main);
     }
 
     public List<String> getSideboard() {
-        return sideboardView;
+        return Collections.unmodifiableList(sideboard);
     }
 
     public String getDeckType() {
@@ -58,7 +52,7 @@ public class Deck implements Comparable{
     }
 
     //can only call this method ONCE
-    private void setDeckType(String deckType) {
+    void setDeckType(String deckType) {
         if (this.getDeckType() != null) {
             throw new IllegalStateException(
                     "Deck : setDeckType() error, deck type has already been set");
@@ -78,7 +72,7 @@ public class Deck implements Comparable{
 
     public String getName() {
         return metadata.get(NAME);
-    }//may return null
+    }
 
     public void setComment(String comment) {
         metadata.put(COMMENT, comment);
@@ -173,5 +167,13 @@ public class Deck implements Comparable{
             return getName().compareTo(((Deck)o).getName());
         }
         return 0;
+    }
+
+    public Set<Map.Entry<String,String>> getMetadata() {
+        return metadata.entrySet();
+    }
+
+    public void addMetaData(String key, String value) {
+        metadata.put(key, value);
     }
 }
