@@ -6331,7 +6331,6 @@ public class GameActionUtil {
             ability = new Ability(list.get(i), "0") {
                 @Override
                 public void resolve() {
-                    AllZone.GameAction.getPlayerLife(player).subtractLife(1);
                     CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", crd, "R", new String[] {
                             "Creature", "Goblin"}, 1, 1, new String[] {"Haste"});
                 }// resolve()
@@ -9444,7 +9443,7 @@ public class GameActionUtil {
                                                                       }
                                                                   };
                                                                   ability.setStackDescription("Baru, Fist of Krosa - creatures get +1/+1 until end of turn.");
-                                                                  
+                                                                 
                                                                   if(!all.getName("Baru, Fist of Krosa").isEmpty()) AllZone.Stack.push(ability);
                                                               }// outer for
                                                               
