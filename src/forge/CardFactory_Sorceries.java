@@ -3040,6 +3040,8 @@ public class CardFactory_Sorceries {
                     String player = card.getController();
                     if(player.equals(Constant.Player.Human)) humanResolve();
                     else computerResolve();
+                    
+                    AllZone.GameAction.checkStateEffects();
                 }
                 
                 public void humanResolve() {
