@@ -95,25 +95,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             	}
             }
             
-            if(c.isCreature() && AllZoneUtil.isCardInPlay("Intruder Alarm")) {
-            	CardList alarms = AllZoneUtil.getCardsInPlay("Intruder Alarm");
-            	for(Card alarm:alarms) {
-            		final Card triggerer = alarm;
-            		Ability ability = new Ability(triggerer, "0") {
-            			@Override
-            			public void resolve() {
-            				CardList creatures = AllZoneUtil.getCreaturesInPlay();
-            				for(Card cr:creatures) cr.untap();
-            			}
-            		};
-            		StringBuilder sb = new StringBuilder();
-            		sb.append(triggerer.getName()).append(" - untap all creatures.");
-            		ability.setStackDescription(sb.toString());
-            		
-            		AllZone.Stack.add(ability);
-            	}
-            }
-            
             if(c.isLand()) {
                 //System.out.println("A land was just put onto the battlefield: " + c.getName());
                 
