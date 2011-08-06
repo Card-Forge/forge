@@ -111,6 +111,7 @@ public class StaticEffects
 		cardToEffectsList.put("Knight of the Reliquary", new String[] {"Knight_of_the_Reliquary"});
 		cardToEffectsList.put("Zuberi, Golden Feather", new String[] {"Zuberi"});
 		cardToEffectsList.put("Loxodon Punisher", new String[] {"Loxodon_Punisher"});
+		cardToEffectsList.put("Goblin Gaveleer", new String[] {"Goblin_Gaveleer"});
 		cardToEffectsList.put("Master of Etherium", new String[] {"Master_of_Etherium", "Master_of_Etherium_Pump", "Master_of_Etherium_Other"});
 		cardToEffectsList.put("Broodstar", new String[] {"Master_of_Etherium"});
 		cardToEffectsList.put("Daru Warchief", new String[] {"Daru_Warchief"});

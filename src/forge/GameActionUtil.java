@@ -17671,6 +17671,34 @@ public class GameActionUtil {
 			return equipment.size();
 		}
 	};
+	
+	
+    public static Command Goblin_Gaveleer            = new Command() {
+		
+        private static final long serialVersionUID = -9039509574117844271L;
+
+		public void execute() {
+			// get all creatures
+			CardList list = new CardList();
+			list.addAll(AllZone.Human_Play.getCards());
+			list.addAll(AllZone.Computer_Play.getCards());
+			list = list.getName("Goblin Gaveleer");
+			
+			for (int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
+				c.setBaseAttack(1 + countEquipment(c) * 2);
+				// c.setBaseDefense(c.getBaseAttack());
+			}
+			
+		}// execute()
+		
+		private int countEquipment(Card c) {
+			CardList equipment = new CardList(
+					c.getEquippedBy().toArray());
+			return equipment.size();
+		}
+	};// Goblin_Gaveleer
+	
 
 	public static Command Rabid_Wombat                = new Command() {
 
@@ -20688,6 +20716,7 @@ public class GameActionUtil {
 		commands.put("Knight_of_the_Reliquary", Knight_of_the_Reliquary);
 		commands.put("Zuberi", Zuberi);
 		commands.put("Loxodon_Punisher", Loxodon_Punisher);
+		commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
 		commands.put("Master_of_Etherium", Master_of_Etherium);
 		commands.put("Master_of_Etherium_Pump", Master_of_Etherium_Pump);
 		commands.put("Master_of_Etherium_Other", Master_of_Etherium_Other);
