@@ -31,7 +31,7 @@ public class Input_Block extends Input {
         		if(attacker.hasKeyword("All creatures able to block CARDNAME do so.")) {
         			CardList bls = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
         			for(Card bl:bls) {
-        				if(CombatUtil.canBlock(attacker, bl)) {
+        				if(CombatUtil.canBlock(attacker, bl, AllZone.Combat)) {
         					allBlocking.add(bl);
         					AllZone.Combat.addBlocker(attacker, bl);
         				}
@@ -69,7 +69,7 @@ public class Input_Block extends Input {
         if(CardUtil.toList(AllZone.Combat.getAttackers()).contains(card)) {
             currentAttacker = card;
         } else if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && card.isCreature() 
-        		&& CombatUtil.canBlock(currentAttacker, card)) {
+        		&& CombatUtil.canBlock(currentAttacker, card, AllZone.Combat)) {
             if(currentAttacker != null && (!allBlocking.contains(card))) {
                 allBlocking.add(card);
                 AllZone.Combat.addBlocker(currentAttacker, card);

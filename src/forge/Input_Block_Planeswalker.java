@@ -30,7 +30,7 @@ public class Input_Block_Planeswalker extends Input {
         		if(attacker.hasKeyword("All creatures able to block CARDNAME do so.")) {
         			CardList bls = AllZoneUtil.getCreaturesInPlay(AllZone.HumanPlayer);
         			for(Card bl:bls) {
-        				if(CombatUtil.canBlock(attacker, bl)) {
+        				if(CombatUtil.canBlock(attacker, bl, AllZone.Combat)) {
         					allBlocking.add(bl);
         					AllZone.Combat.addBlocker(attacker, bl);
         				}
@@ -66,8 +66,8 @@ public class Input_Block_Planeswalker extends Input {
         //is attacking?
         if(CardUtil.toList(AllZone.pwCombat.getAttackers()).contains(card)) {
             currentAttacker = card;
-        } else if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && card.isCreature() && card.isUntapped()
-                && CombatUtil.canBlock(currentAttacker, card)) {
+        } else if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && card.isCreature() 
+                && CombatUtil.canBlock(currentAttacker, card, AllZone.Combat)) {
             if(currentAttacker != null && (!allBlocking.contains(card))) {
                 allBlocking.add(card);
                 AllZone.pwCombat.addBlocker(currentAttacker, card);

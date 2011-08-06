@@ -12,6 +12,23 @@ import com.esotericsoftware.minlog.Log;
 public class CombatUtil {
 	static boolean Lorthos_Cancelled;
 	
+	
+	//can the creature block given the combat state?
+	public static boolean canBlock(Card blocker, Combat combat) {
+		
+		if(blocker == null) return false;
+		
+        if (combat.getAllBlockers().size() > 1 && AllZoneUtil.isCardInPlay("Caverns of Despair"))
+        	return false;
+        
+        if (combat.getAllBlockers().size() > 0 && AllZoneUtil.isCardInPlay("Silent Arbiter"))
+        	return false;
+        
+		
+		return canBlock(blocker);
+	}
+	
+	
 	//can the creature block at all?
 	public static boolean canBlock(Card blocker) {
 		
@@ -23,12 +40,6 @@ public class CombatUtil {
         	return false;
 		
         if (blocker.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
-        	return false;
-
-        if (AllZone.Combat.getAllBlockers().size() > 1 && AllZoneUtil.isCardInPlay("Caverns of Despair"))
-        	return false;
-        
-        if (AllZone.Combat.getAllBlockers().size() > 0 && AllZoneUtil.isCardInPlay("Silent Arbiter"))
         	return false;
         
         CardList kulrath = AllZoneUtil.getCardsInPlay("Kulrath Knight");
@@ -48,14 +59,22 @@ public class CombatUtil {
 	}
 	
 	//can the attacker be blocked at all?
+	public static boolean canBeBlocked(Card attacker, Combat combat) {
+    	
+        if(attacker == null) return true;
+        
+        if (attacker.getKeyword().contains("CARDNAME can't be blocked by more than one creature.") 
+        		&& combat.getBlockers(attacker).size() > 0)  return false;
+        
+        return canBeBlocked(attacker);
+	}
+	
+	//can the attacker be blocked at all?
 	public static boolean canBeBlocked(Card attacker) {
     	
         if(attacker == null) return true;
         
         if(attacker.getKeyword().contains("Unblockable")) return false;
-        
-        if (attacker.getKeyword().contains("CARDNAME can't be blocked by more than one creature.") 
-        		&& AllZone.Combat.getBlockers(attacker).size() > 0)  return false;
         
         //Landwalk
         if (!AllZoneUtil.isCardInPlay("Staff of the Ages")) { //"Creatures with landwalk abilities can be blocked as though they didn't have those abilities."
@@ -115,9 +134,23 @@ public class CombatUtil {
 	            if(!temp.isEmpty()) return false;
 	        }
         }
-        
         return true;
 	}
+        
+	
+	// can the blocker block the attacker given the combat state?
+    public static boolean canBlock(Card attacker, Card blocker, Combat combat) {
+    	
+        if(attacker == null || blocker == null) return false;
+        
+    	if (canBlock(blocker, combat) == false) return false;
+    	if (canBeBlocked(attacker, combat) == false) return false;
+    	
+    	if (!combat.isAttackerWithLure(attacker) && combat.canBlockAttackerWithLure(blocker)) return false;
+        
+        return canBlock(attacker, blocker);
+    }
+	
         
 	// can the blocker block the attacker?
     public static boolean canBlock(Card attacker, Card blocker) {
@@ -294,7 +327,22 @@ public class CombatUtil {
         return true;
     }//canBlock()
     
+    //can a creature attack given the combat state
+    public static boolean canAttack(Card c, Combat combat) {
+    	
+        if (combat.getAttackers().length > 1 && AllZoneUtil.isCardInPlay("Crawlspace",c.getController().getOpponent()))
+        	return false;
+        
+        if (combat.getAttackers().length > 1 && AllZoneUtil.isCardInPlay("Caverns of Despair"))
+        	return false;
+        
+        if (combat.getAttackers().length > 0 && AllZoneUtil.isCardInPlay("Silent Arbiter"))
+        	return false;
+    	
+    	return canAttack(c);
+    }
     
+  //can a creature attack att all?
     public static boolean canAttack(Card c) {
         
         if(AllZoneUtil.isCardInPlay("Peacekeeper")) return false;
@@ -380,15 +428,6 @@ public class CombatUtil {
         if (c.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
         	return false;
         
-        if (AllZone.Combat.getAttackers().length > 1 && AllZoneUtil.isCardInPlay("Crawlspace",c.getController().getOpponent()))
-        	return false;
-        
-        if (AllZone.Combat.getAttackers().length > 1 && AllZoneUtil.isCardInPlay("Caverns of Despair"))
-        	return false;
-        
-        if (AllZone.Combat.getAttackers().length > 0 && AllZoneUtil.isCardInPlay("Silent Arbiter"))
-        	return false;
-        
         if (AllZoneUtil.isCardInPlay("Ensnaring Bridge")) {
         	int limit = Integer.MAX_VALUE;
         	CardList Human = new CardList();
@@ -424,8 +463,6 @@ public class CombatUtil {
         			return false;
         	}
         }
-
-        
         //if Card has Haste, Card.hasSickness() will return false
         return true;
     }//canAttack()
@@ -619,6 +656,7 @@ public class CombatUtil {
         
         return defenderDefense;
     }//shieldDamage
+    
     
     public static boolean canDestroyAttacker(Card attacker, Card defender) {
         

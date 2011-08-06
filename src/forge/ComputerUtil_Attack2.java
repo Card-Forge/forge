@@ -22,14 +22,16 @@ public class ComputerUtil_Attack2 {
 
 	public ComputerUtil_Attack2(CardList possibleAttackers, CardList possibleBlockers, int blockerLife)
 	{
+		Combat combat = new Combat();
+		
 		humanList = new CardList(possibleBlockers.toArray());
 		humanList = humanList.getType("Creature");
 		
 		computerList = new CardList(possibleAttackers.toArray()); 
 		computerList = computerList.getType("Creature");
 		
-		attackers = getPossibleAttackers(possibleAttackers);
-		blockers  = getPossibleBlockers(possibleBlockers);
+		attackers = getPossibleAttackers(possibleAttackers, combat);
+		blockers  = getPossibleBlockers(possibleBlockers, combat);
 		this.blockerLife = blockerLife;
 		
 		final ArrayList<String> valuable = new ArrayList<String>();
@@ -45,7 +47,7 @@ public class ComputerUtil_Attack2 {
 		});
 	}//constructor
        
-	public CardList getPossibleAttackers(CardList in)
+	public CardList getPossibleAttackers(CardList in, final Combat combat)
     {
       CardList list = new CardList(in.toArray());
       list = list.filter(new CardListFilter()
@@ -55,7 +57,7 @@ public class ComputerUtil_Attack2 {
       return list;
     }//getUntappedCreatures()
 	
-      public CardList getPossibleBlockers(CardList in)
+      public CardList getPossibleBlockers(CardList in, final Combat combat)
       {
         CardList list = new CardList(in.toArray());
         list = list.filter(new CardListFilter()
@@ -69,12 +71,12 @@ public class ComputerUtil_Attack2 {
        //this checks to make sure that the computer player
        //doesn't lose when the human player attacks
        //this method is used by getAttackers()
-       public int blockersNeeded()
+       public int blockersNeeded(Combat combat)
        {
           CardListUtil.sortAttack(humanList);
           int blockersNeeded = computerList.size();
           
-          CardList list = computerList;
+          CardList list = getPossibleBlockers(computerList, combat);
           
           for(int i = 0; i < list.size(); i++) {
              if(!doesHumanAttackAndWin(i)) {
@@ -165,12 +167,13 @@ public class ComputerUtil_Attack2 {
           //Atackers that don't really have a choice
           for (int i=0; i<attackers.size();i++)
           {
-             if ( attackers.get(i).getKeyword().contains("CARDNAME attacks each turn if able.") 
+             if ( (attackers.get(i).getKeyword().contains("CARDNAME attacks each turn if able.") 
             	   || attackers.get(i).getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")
                    || attackers.get(i).getKeyword().contains("At the beginning of the end step, exile CARDNAME.")
                    || attackers.get(i).getKeyword().contains("At the beginning of the end step, sacrifice CARDNAME.")
                    || attackers.get(i).getSacrificeAtEOT()
             	   || attackers.get(i).getSirenAttackOrDestroy())
+            	   && CombatUtil.canAttack(attackers.get(i), combat))
                 combat.addAttacker(attackers.get(i));
           }
           
@@ -189,7 +192,7 @@ public class ComputerUtil_Attack2 {
                    att = attackers.get(i);
                 }
              }
-             if (att!= null)
+             if (att!= null && CombatUtil.canAttack(att, combat))
              combat.addAttacker(att);
           }
           
@@ -198,7 +201,7 @@ public class ComputerUtil_Attack2 {
           else if(doAssault() || (humanList.size() == 1 && 3 < attackers.size()))
           {
              for(int i = 0; i < attackers.size(); i++)
-                combat.addAttacker(attackers.get(i));
+            	 if (CombatUtil.canAttack(attackers.get(i), combat)) combat.addAttacker(attackers.get(i));
           }
           
           else
@@ -215,7 +218,7 @@ public class ComputerUtil_Attack2 {
 
              //this has to be before the sorting below
              //because this sorts attackers
-             int i = blockersNeeded(); //new
+             int i = blockersNeeded(combat); //new
 
              //so the biggest creature will usually attack
              //I think this works, not sure, may have to change it
@@ -237,7 +240,8 @@ public class ComputerUtil_Attack2 {
             	if (!attackers.get(i).hasFirstStrike() && !attackers.get(i).hasDoubleStrike())
             		 totalFirstStrikeBlockPower = CombatUtil.getTotalFirstStrikeBlockPower(attackers.get(i), AllZone.HumanPlayer);
         
-                if ( shouldAttack(attackers.get(i),blockers) &&	totalFirstStrikeBlockPower < attackers.get(i).getKillDamage() )
+                if ( shouldAttack(attackers.get(i),blockers, combat) &&	totalFirstStrikeBlockPower < attackers.get(i).getKillDamage() 
+                		&& CombatUtil.canAttack(attackers.get(i), combat))
                    combat.addAttacker(attackers.get(i));
                 
              }
@@ -246,6 +250,7 @@ public class ComputerUtil_Attack2 {
     return combat;
   }//getAttackers()
 
+  /*
   //returns null if no blockers found
   public Card getBiggestAttack(Card attack)
   {
@@ -266,7 +271,7 @@ public class ComputerUtil_Attack2 {
 		    return blockers.get(i);
 		
 		return null;
-	}
+	}*/
 
    public int countExaltedBonus(Player player)
    {
@@ -295,13 +300,13 @@ public class ComputerUtil_Attack2 {
       return n;
    }   
     
-    public boolean shouldAttack(Card attacker, CardList defenders)
+    public boolean shouldAttack(Card attacker, CardList defenders, Combat combat)
     {
     	boolean canBeKilled = false;
     	boolean canKillAll = true;
     	
     	for (Card defender:defenders) {
-    		if(CombatUtil.canBlock(attacker, defender)) {
+    		if(CombatUtil.canBlock(attacker, defender, combat)) {
     			if(CombatUtil.canDestroyAttacker(attacker, defender)) canBeKilled = true;
     			if(!CombatUtil.canDestroyBlocker(defender, attacker)) canKillAll = false;
     		}
@@ -313,16 +318,22 @@ public class ComputerUtil_Attack2 {
 	public static Combat getAttackers(CardList attackerPermanents, CardList defenderPermanents) {
   	  	
 		Combat combat = new Combat();
+		CardList attackerCreatures = attackerPermanents.getType("Creature");
 		CardList attackersLeft = new CardList(); //keeps track of all undecided attackers
+		CardList plannedBlockers = new CardList(); //creatures that should be held back to blcok
+		
 		CardList humanBlockers = new CardList();
 		
 		for(Card c:defenderPermanents) {
-			if(c.isCreature() && CombatUtil.canBlock(c)) humanBlockers.add(c);
+			if(c.isCreature() && CombatUtil.canBlock(c, combat)) humanBlockers.add(c);
 		}
 		
-		for(Card c:attackerPermanents) {
-			if(c.isCreature() && CombatUtil.canAttack(c)) attackersLeft.add(c);
+		for(Card c:attackerCreatures) {
+			if(CombatUtil.canAttack(c, combat)) attackersLeft.add(c);
+			else if(CombatUtil.canBlock(c, combat)) plannedBlockers.add(c);
 		}
+		
+		
 		
 		return combat;
     }

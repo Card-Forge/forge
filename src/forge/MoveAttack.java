@@ -90,7 +90,7 @@ public class MoveAttack
 		attacker = CardUtil.getRandom(combat.getAttackers().toArray());
 		blocker = CardUtil.getRandom(pool.toArray());
 		
-		if(CombatUtil.canBlock(attacker, blocker))
+		if(CombatUtil.canBlock(attacker, blocker, AllZone.Combat))
 		{
 		    pool.remove(blocker);
 		    battle.addBlocker(attacker, blocker);

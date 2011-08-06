@@ -472,14 +472,13 @@ public class ComputerUtil_Block2
    */
    
    //finds the creatures able to block the attacker 
-   private static CardList getPossibleBlockers(Card attacker, CardList blockersLeft, CardList canBlockAttackerWithLure, CardList attackersWithLure) {
+   private static CardList getPossibleBlockers(Card attacker, CardList blockersLeft, Combat combat) {
 	  CardList blockers = new CardList();
 	  
 	  for(int i = 0; i < blockersLeft.size(); i++) {
 		  Card blocker = blockersLeft.get(i);
 		  //if the blocker can block a creature with lure it can't block a creature without 
-		  if((!canBlockAttackerWithLure.contains(blocker) || attackersWithLure.contains(attacker))  
-				  && CombatUtil.canBlock(attacker,blocker)) blockers.add(blocker);
+		  if(CombatUtil.canBlock(attacker,blocker,combat)) blockers.add(blocker);
 	  }
 		  
    return blockers;   
@@ -545,6 +544,7 @@ public class ComputerUtil_Block2
 	  
 	  // Lure effects
 	  CardList attackersWithLure = attackers.getKeyword("All creatures able to block CARDNAME do so.");
+	  combat.setAttackersWithLure(attackersWithLure);
 	  CardList canBlockAttackerWithLure = new CardList();
 	  for(int i = 0; i < attackersWithLure.size(); i++) {
 		  attacker = attackersWithLure.get(i);
@@ -553,14 +553,15 @@ public class ComputerUtil_Block2
 			  if(CombatUtil.canBlock(attacker, b)) canBlockAttackerWithLure.add(b);
 		  }
 	  }
-	   
+	  combat.setCanBlockAttackerWithLure(canBlockAttackerWithLure);
+	  
 	  if (attackersLeft.size() == 0)
 		  return combat;
 	   
 	  // remove all blockers that can't block anyway
 	  for(int i = 0; i < possibleBlockers.size(); i++) {
 		  b = possibleBlockers.get(i);
-		  if(!CombatUtil.canBlock(b)) blockersLeft.remove(b);
+		  if(!CombatUtil.canBlock(b, combat)) blockersLeft.remove(b);
 	  }
 	  
 	  //These creatures won't prevent any damage
@@ -584,7 +585,7 @@ public class ComputerUtil_Block2
 		  
 		  blocker = new Card();
 		  
-		  blockers = getPossibleBlockers(attacker, blockersLeft, canBlockAttackerWithLure, attackersWithLure);
+		  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
 		   
 		  safeBlockers = getSafeBlockers(attacker, blockers);
 		   
@@ -627,7 +628,7 @@ public class ComputerUtil_Block2
 		  for(int i = 0; i < attackersLeft.size(); i++) {
 		  	  attacker = attackersLeft.get(i);
 			  killingBlockers = 
-				  getKillingBlockers(attacker, getPossibleBlockers(attacker, blockersLeft, canBlockAttackerWithLure, attackersWithLure));
+				  getKillingBlockers(attacker, getPossibleBlockers(attacker, blockersLeft, combat));
 			  if(killingBlockers.size() > 0) {
 				  blocker = CardFactoryUtil.AI_getWorstCreature(killingBlockers);
 				  combat.addBlocker(attacker, blocker);
@@ -642,7 +643,7 @@ public class ComputerUtil_Block2
 	  if (CombatUtil.lifeInDanger(combat))
 		  for(int i = 0; i < attackersLeft.size(); i++) {
 			  attacker = attackersLeft.get(i);	  
-			  chumpBlockers = getPossibleBlockers(attacker, blockersLeft, canBlockAttackerWithLure, attackersWithLure);
+			  chumpBlockers = getPossibleBlockers(attacker, blockersLeft, combat);
 			  if(chumpBlockers.size() > 0) {
 				  blocker = CardFactoryUtil.AI_getWorstCreature(chumpBlockers);
 				  combat.addBlocker(attacker, blocker);
@@ -663,12 +664,12 @@ public class ComputerUtil_Block2
 		  
 		  for(int i = 0; i < tramplingAttackers.size(); i++) {
 			  attacker = tramplingAttackers.get(i);
-			  chumpBlockers = getPossibleBlockers(attacker, blockersLeft, canBlockAttackerWithLure, attackersWithLure);
+			  chumpBlockers = getPossibleBlockers(attacker, blockersLeft, combat);
 			  for(int j = 0; j < chumpBlockers.size(); j++) {
 				  blocker = chumpBlockers.get(j);
 			  	  //Add an additional blocker if the current blockers are not enough and the new one would suck some of the damage
 			  	  if(CombatUtil.getAttack(attacker) > CombatUtil.totalShieldDamage(attacker,combat.getBlockers(attacker)) 
-			  			  && CombatUtil.shieldDamage(attacker, blocker) > 0) {
+			  			  && CombatUtil.shieldDamage(attacker, blocker) > 0 && CombatUtil.canBlock(attacker,blocker, combat)) {
 			  		  combat.addBlocker(attacker, blocker);
 			  		  blockersLeft.remove(blocker);
 				  }
@@ -684,7 +685,7 @@ public class ComputerUtil_Block2
 		  
 		  for(int i = 0; i < targetAttackers.size(); i++) {
 			  attacker = targetAttackers.get(i);
-			  blockers = getPossibleBlockers(attacker, blockersLeft, canBlockAttackerWithLure, attackersWithLure);
+			  blockers = getPossibleBlockers(attacker, blockersLeft, combat);
 			  
 			  //Try to use safe blockers first
 			  safeBlockers = getSafeBlockers(attacker, blockers);
@@ -692,7 +693,7 @@ public class ComputerUtil_Block2
 				  blocker = safeBlockers.get(j);
 			  	  //Add an additional blocker if the current blockers are not enough and the new one would deal additional damage
 			  	  if(attacker.getKillDamage() > CombatUtil.totalDamageOfBlockers(attacker,combat.getBlockers(attacker)) 
-			  			  && CombatUtil.dealsDamageAsBlocker(attacker, blocker) > 0) {
+			  			  && CombatUtil.dealsDamageAsBlocker(attacker, blocker) > 0 && CombatUtil.canBlock(attacker,blocker, combat)) {
 			  		  combat.addBlocker(attacker, blocker);
 			  		  blockersLeft.remove(blocker);
 			  	  }
@@ -714,7 +715,8 @@ public class ComputerUtil_Block2
 				  int additionalDamage = CombatUtil.dealsDamageAsBlocker(attacker, blocker);
 			  	  if(attacker.getKillDamage() > currentDamage 
 			  			  && !(attacker.getKillDamage() > currentDamage + additionalDamage)
-			  			  && CardFactoryUtil.evaluateCreature(blocker) + diff < CardFactoryUtil.evaluateCreature(attacker)) {
+			  			  && CardFactoryUtil.evaluateCreature(blocker) + diff < CardFactoryUtil.evaluateCreature(attacker)
+			  			  && CombatUtil.canBlock(attacker,blocker,combat)) {
 			  		  combat.addBlocker(attacker, blocker);
 			  		  blockersLeft.remove(blocker);
 				  }
@@ -732,11 +734,13 @@ public class ComputerUtil_Block2
 		  attackers.shuffle();
 		  for(int i = 0; i < attackers.size(); i++) {
 			  attacker = attackers.get(i);
-			  blockers = getPossibleBlockers(attacker, chumpBlockers, canBlockAttackerWithLure, attackersWithLure);
+			  blockers = getPossibleBlockers(attacker, chumpBlockers, combat);
 			  for(int j = 0; j < blockers.size(); j++) {
-				  blocker = blockers.get(j);
-				  combat.addBlocker(attacker, blocker);
-				  blockersLeft.remove(blocker);
+				  if (CombatUtil.canBlock(attacker, blocker, combat)) {
+					  blocker = blockers.get(j);
+					  combat.addBlocker(attacker, blocker);
+					  blockersLeft.remove(blocker);
+				  }
 			  }
 		  }
 	  }
