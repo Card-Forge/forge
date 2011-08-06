@@ -13524,7 +13524,7 @@ public class GameActionUtil {
 			}
 		}
 	};
-	
+	/*
 	public static Command Student_of_Warfare 		  = new Command() {
 		private static final long serialVersionUID = 2627513737024865169L;
 
@@ -13558,6 +13558,7 @@ public class GameActionUtil {
 			}
 		}
 	};
+	*/
 	/*
 	public static Command Transcendent_Master		  = new Command() {
 		private static final long serialVersionUID = -7568530551652446195L;
@@ -16085,7 +16086,7 @@ public class GameActionUtil {
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
 		//commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
-		commands.put("Student_of_Warfare", Student_of_Warfare);
+		//commands.put("Student_of_Warfare", Student_of_Warfare);
 		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);
 		
 		commands.put("The_Tabernacle_at_Pendrell_Vale", The_Tabernacle_at_Pendrell_Vale);
