@@ -436,6 +436,8 @@ public class AbilityFactory_ChangeZone {
         	fetchList.remove(c);
         }
         
+        player.shuffle();
+        
         for(Card c : fetched){
         	origZone.remove(c);
         	if (destination.equals("Library")){
@@ -448,9 +450,8 @@ public class AbilityFactory_ChangeZone {
         		c.tap();
         }
         
-        AllZone.Display.getChoice(af.getHostCard().getName() + " - Computer picked:", fetched.toArray());
-        
-        player.shuffle();
+        if (!destination.equals("Battlefield") && !type.equals("Card")) 
+        	AllZone.Display.getChoice(af.getHostCard().getName() + " - Computer picked:", fetched.toArray());
         
 		String DrawBack = params.get("SubAbility");
         

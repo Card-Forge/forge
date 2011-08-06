@@ -1,0 +1,10 @@
+Name:Slow Motion
+ManaCost:2 U
+Types:Enchantment Aura
+Text:At the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless he or she pays {2}..
+K:Enchant creature
+K:enPumpCurse:HIDDEN At the beginning of your upkeep, sacrifice CARDNAME unless you pay 2
+K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/slow_motion.jpg
+End
