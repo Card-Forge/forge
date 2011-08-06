@@ -9,4 +9,5 @@ A:AB$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fylamarid.jpg
+SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/64.jpg
 End

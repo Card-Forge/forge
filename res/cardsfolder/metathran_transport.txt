@@ -9,4 +9,5 @@ A:AB$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creatur
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/metathran_transport.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/62.jpg
 End

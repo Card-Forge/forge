@@ -8,4 +8,5 @@ A:AB$ Animate | Cost$ W | ValidTgts$ Permanent | TgtPrompt$ Select target perman
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurora_griffin.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/2.jpg
 End

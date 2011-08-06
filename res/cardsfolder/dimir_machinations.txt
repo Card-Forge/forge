@@ -7,4 +7,5 @@ K:Transmute:1 B B
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_machinations.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/84.jpg
 End

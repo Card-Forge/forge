@@ -7,4 +7,5 @@ A:AB$Dig | Cost$ 1 Sac<1/Creature> | ValidTgts$ Opponent | TgtPrompt$ Select tar
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtpicker_witch.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/109.jpg
 End

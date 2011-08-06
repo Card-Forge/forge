@@ -7,4 +7,6 @@ SVar:X:Count$Domain
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worldly_counsel.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/89.jpg
+SetInfo:CFX|Common|http://magiccards.info/scans/en/cfx/39.jpg
 End

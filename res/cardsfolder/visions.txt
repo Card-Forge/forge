@@ -7,4 +7,6 @@ SVar:DBShuffle:DB$Shuffle | Defined$ Targeted | Optional$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/visions.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/304.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/210.jpg
 End

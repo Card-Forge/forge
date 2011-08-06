@@ -9,4 +9,5 @@ SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Sele
 A:AB$ Animate | Cost$ W | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ White | OverwriteColors$ True | SpellDescription$ Target permanent becomes white until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloudchaser_kestrel.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/10.jpg
 End

@@ -6,4 +6,5 @@ A:SP$ChangeZone | Cost$ 4 U | ValidTgts$ Creature | TgtPrompt$ Select target cre
 SVar:DBDig:DB$Dig | Defined$ Opponent | DigNum$ 2 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition$ -1 | LibraryPosition2$ 0
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spin_into_myth.jpg
+SetInfo:FUT|Uncommon|http://magiccards.info/scans/en/fut/60.jpg
 End
