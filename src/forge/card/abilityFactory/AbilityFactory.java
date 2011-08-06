@@ -435,20 +435,20 @@ public class AbilityFactory {
 		
 		if (API.equals("Scry")){
 			if (isAb)
-				SA = AbilityFactory_ZoneAffecting.createAbilityScry(this);
+				SA = AbilityFactory_Reveal.createAbilityScry(this);
 			else if (isSp)
-				SA = AbilityFactory_ZoneAffecting.createSpellScry(this);
+				SA = AbilityFactory_Reveal.createSpellScry(this);
 			else if (isDb)
-				SA = AbilityFactory_ZoneAffecting.createDrawbackScry(this);
+				SA = AbilityFactory_Reveal.createDrawbackScry(this);
 		}
 		
 		if(API.equals("RearrangeTopOfLibrary")){
 			if(isAb)
-				SA = AbilityFactory_ZoneAffecting.createRearrangeTopOfLibraryAbility(this);
+				SA = AbilityFactory_Reveal.createRearrangeTopOfLibraryAbility(this);
 			else if(isSp)
-				SA = AbilityFactory_ZoneAffecting.createRearrangeTopOfLibrarySpell(this);
+				SA = AbilityFactory_Reveal.createRearrangeTopOfLibrarySpell(this);
 			else if(isDb)
-				SA = AbilityFactory_ZoneAffecting.createRearrangeTopOfLibraryDrawback(this);
+				SA = AbilityFactory_Reveal.createRearrangeTopOfLibraryDrawback(this);
 		}
 		
 		if (API.equals("Sacrifice")){
@@ -557,7 +557,6 @@ public class AbilityFactory {
                 SA = AbilityFactory_Clash.getSpell(this);
             else if(isDb)
                 SA = AbilityFactory_Clash.getDrawback(this);
-
         }
 		
 		if(API.equals("Animate")) {
@@ -598,11 +597,11 @@ public class AbilityFactory {
 		
 		if (API.equals("RevealHand")){
 			if (isAb)
-				SA = AbilityFactory_ZoneAffecting.createAbilityRevealHand(this);
+				SA = AbilityFactory_Reveal.createAbilityRevealHand(this);
 			else if (isSp)
-				SA = AbilityFactory_ZoneAffecting.createSpellRevealHand(this);
+				SA = AbilityFactory_Reveal.createSpellRevealHand(this);
 			else if (isDb)
-				SA = AbilityFactory_ZoneAffecting.createDrawbackRevealHand(this);
+				SA = AbilityFactory_Reveal.createDrawbackRevealHand(this);
 		}
 		
 		if (API.equals("Dig")){
