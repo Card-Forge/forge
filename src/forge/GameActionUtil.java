@@ -9165,6 +9165,7 @@ public class GameActionUtil {
 		final Player player = AllZone.Phase.getPlayerTurn();
 
 		CardList racks = AllZoneUtil.getPlayerCardsInPlay(player.getOpponent(), "The Rack");
+		racks.add(AllZoneUtil.getPlayerCardsInPlay(player.getOpponent(), "Wheel of Torture"));
 
 		// if there are 1 or more The Racks owned by the opponent of the
 		// current player have each of them deal damage.
@@ -9182,7 +9183,8 @@ public class GameActionUtil {
 			};// Ability
 			
 			StringBuilder sb = new StringBuilder();
-			sb.append("The Rack - deals X damage to ").append(player);
+			sb.append(src.getName());
+			sb.append(" - deals X damage to ").append(player);
 			sb.append(", where X is 3 minus the number of cards in his or her hand.");
 			ability.setStackDescription(sb.toString());
 			
