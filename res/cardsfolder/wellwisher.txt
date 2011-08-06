@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Elf
 Text:no text
 PT:1/1
-K:abGainLife T:X:You gain 1 life for each Elf on the battlefield.:Wellwisher - you gain life
+A:AB$GainLife | Cost$ T | LifeAmount$ X | SpellDescription$ You gain 1 life for each Elf on the battlefield.
 SVar:X:Count$TypeOnBattlefield.Elf
 SVar:BuffedBy:Elf
 SVar:Rarity:Common

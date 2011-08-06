@@ -3,7 +3,7 @@ ManaCost:5 G G
 Types:Creature Treefolk Shaman
 Text:When Guardian of Cloverdell comes into play, put three 1/1 white Kithkin Soldier creature tokens into play.
 PT:4/5
-K:abGainLife G Sac<1/Kithkin>:1
+A:AB$GainLife | Cost$ G Sac<1/Kithkin> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 K:etbMakeToken<>3<>Kithkin Soldier<>W 1 1 Kithkin Soldier<>Controller<>W<>Creature;Kithkin;Soldier<>1<>1<>None<>put three 1/1 white Kithkin Soldier creature tokens into play.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_of_cloverdell.jpg
