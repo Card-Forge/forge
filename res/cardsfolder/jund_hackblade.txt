@@ -3,7 +3,7 @@ ManaCost:BG R
 Types:Creature Goblin Berserker
 Text:no text
 PT:2/1
-K:stPumpSelf:Creature:1/1/Haste:isPresent Permanent.MultiColor+Other+YouCtrlAs long as you control another multicolored permanent, Jund Hackblade gets +1/+1 and has haste.
+K:stPumpSelf:Creature:1/1/Haste:isPresent Permanent.MultiColor+Other+YouCtrl:As long as you control another multicolored permanent, Jund Hackblade gets +1/+1 and has haste.
 SVar:BuffedBy:Permanent.MultiColor
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jund_hackblade.jpg
