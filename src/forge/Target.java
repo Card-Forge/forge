@@ -114,7 +114,7 @@ public class Target {
 			prompt = "Select target planeswalker or player";
 		}
 		else{
-			System.out.println("Bad Parsing in Target(parse, min, max)");
+			System.out.println("Bad Parsing in Target(parse, min, max): "+parse);
 			return;
 		}
 		
