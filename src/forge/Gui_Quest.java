@@ -423,6 +423,8 @@ public class Gui_Quest extends JFrame implements NewConstants{
         sb.append("\r\n");
         sb.append("Doc Holiday 3		hard	Morph + Regenerate GWU creatures");
         sb.append("\r\n");
+        sb.append("Doran 3		hard	WBG Doran, the Siege Tower deck with high toughness creatures");
+        sb.append("\r\n");
         sb.append("Dr No 3  		hard   	The Rack, Balance, Propaganda, discard spells");
         sb.append("\r\n");
         sb.append("Electro 3  		hard   	Resonantg's Stormfront deck with mods, Arashi, the Sky Asunder + Ball Lightning");
