@@ -1,7 +1,8 @@
 Name:Fervor
 ManaCost:2 R
 Types:Enchantment
-Text:Creatures you control have haste.
+Text:no text
+K:stPumpAll:Creature.YouCtrl:0/0/Haste:No Condition:Creatures you control have haste.
 SVar:BuffedBy:Creature
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare

@@ -13253,79 +13253,6 @@ public class GameActionUtil {
 			}// for outer
 		}// execute()
 	};
-
-
-	public static Command Concordant_Crossroads       = new Command() {
-		private static final long serialVersionUID   = -6811663469245799727L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Haste";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Concordant Crossroads");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-
-	public static Command Mass_Hysteria               = new Command() {
-		private static final long serialVersionUID   = 8171915479339460306L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Haste";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Mass Hysteria");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	};
 	
 	
 	public static Command Emperor_Crocodile                      = new Command() {
@@ -13355,78 +13282,7 @@ public class GameActionUtil {
 
 		}// execute()
 	};
-
-	public static Command Fervor                      = new Command() {
-		private static final long serialVersionUID   = -826876381048543684L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Haste";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Fervor");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-
-	public static Command Madrush_Cyclops             = new Command() {
-
-		private static final long serialVersionUID   = -2379786355503597363L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Haste";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Madrush Cyclops");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Creature");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					if(!c.getKeyword().contains(keyword)) {
-						c.addExtrinsicKeyword(keyword);
-						gloriousAnthemList.add(c);
-					}
-				}// for inner
-			}// for outer
-		}// execute()
-	}; //Madrush Cyclops
-
-
+	
 	public static Command Sun_Quan                    = new Command() {
 
 		private static final long serialVersionUID   = -2379786355503597363L;
@@ -19160,17 +19016,22 @@ public class GameActionUtil {
 		commands.put("Cantivore", Cantivore);
 		commands.put("Castle", Castle);
 		commands.put("Castle_Raptors", Castle_Raptors);
+		commands.put("Chainer", Chainer);
 		commands.put("Champions_Drake", Champions_Drake);
+		commands.put("Coat_of_Arms", Coat_of_Arms);	
 		commands.put("Cognivore", Cognivore);
 		commands.put("Conspiracy", Conspiracy);
 		commands.put("Cover_of_Darkness", Cover_of_Darkness);
 		commands.put("Crowd_of_Cinders", Crowd_of_Cinders);
 		
 		commands.put("Dakkon", Dakkon);
+		commands.put("Darksteel_Forge", Darksteel_Forge);
+		commands.put("Daru_Warchief", Daru_Warchief);
 		commands.put("Deaths_Shadow", Deaths_Shadow);
 		commands.put("Drove_of_Elves", Drove_of_Elves);
 		
 		commands.put("Eladamri", Eladamri);
+		commands.put("Emperor_Crocodile", Emperor_Crocodile);
 		
 		commands.put("Faerie_Swarm", Faerie_Swarm);
 		
@@ -19189,9 +19050,11 @@ public class GameActionUtil {
 		commands.put("Imperious_Perfect", Imperious_Perfect);
 		commands.put("Iona_Shield_of_Emeria", Iona_Shield_of_Emeria);
 		
+		commands.put("Jacques", Jacques);
 		commands.put("Joiner_Adept", Joiner_Adept);
 		
 		commands.put("Kargan_Dragonlord", Kargan_Dragonlord);
+		commands.put("Kaysa", Kaysa);
 		commands.put("Keldon_Warlord", Keldon_Warlord);
 		commands.put("Kithkin_Rabble", Kithkin_Rabble);
 		commands.put("Knight_of_the_Reliquary", Knight_of_the_Reliquary);
@@ -19200,10 +19063,12 @@ public class GameActionUtil {
 		commands.put("Kor_Spiritdancer", Kor_Spiritdancer);
 		commands.put("Korlash_Heir_to_Blackblade", Korlash_Heir_to_Blackblade);
 		
+		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
 		commands.put("Lhurgoyf", Lhurgoyf);
 		commands.put("Lord_of_Extinction", Lord_of_Extinction);
 		
 		commands.put("Magnivore", Magnivore);
+		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		commands.put("Maro", Maro);
 		commands.put("Marrow_Gnawer", Marrow_Gnawer);
@@ -19213,9 +19078,11 @@ public class GameActionUtil {
 		commands.put("Mortivore", Mortivore);
 		commands.put("Mul_Daya_Channelers", Mul_Daya_Channelers);
 		commands.put("Multani_Maro_Sorcerer", Multani_Maro_Sorcerer);
+		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
 		
 		commands.put("Nightmare", Nightmare);
 		commands.put("Nirkana_Cutthroat", Nirkana_Cutthroat);
+		commands.put("Nut_Collector", Nut_Collector);
 		commands.put("Nyxathid", Nyxathid);
 		
 		commands.put("Old_Man_of_the_Sea", Old_Man_of_the_Sea);
@@ -19323,36 +19190,26 @@ public class GameActionUtil {
 		commands.put("Honor_of_the_Pure", Honor_of_the_Pure);
 		commands.put("Beastmaster_Ascension", Beastmaster_Ascension);
 		commands.put("Spidersilk_Armor", Spidersilk_Armor);
-		commands.put("Chainer", Chainer);
+		
 		commands.put("Eldrazi_Monument", Eldrazi_Monument);
-		commands.put("Muraganda_Petroglyphs", Muraganda_Petroglyphs);
-		commands.put("Nut_Collector", Nut_Collector);
+		
 
 		commands.put("Engineered_Plague", Engineered_Plague);
 
 		commands.put("Thelonite_Hermit", Thelonite_Hermit);
 		commands.put("Deranged_Hermit", Deranged_Hermit);
-		commands.put("Jacques", Jacques);
-		commands.put("Kaysa", Kaysa);
+
 		commands.put("Meng_Huo", Meng_Huo);
 		
 		commands.put("Tolsimir", Tolsimir);
-		commands.put("Darksteel_Forge", Darksteel_Forge);
+		
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		commands.put("Koth_Emblem", Koth_Emblem);
 		commands.put("Akromas_Memorial", Akromas_Memorial);
-		commands.put("Leyline_of_Singularity", Leyline_of_Singularity);
+		
 		commands.put("Goblin_Warchief", Goblin_Warchief);	
 		commands.put("Undead_Warchief", Undead_Warchief);
-		commands.put("Coat_of_Arms", Coat_of_Arms);	
-		commands.put("Daru_Warchief", Daru_Warchief);
-		commands.put("Magus_of_the_Tabernacle", Magus_of_the_Tabernacle);
 		
-		commands.put("Concordant_Crossroads", Concordant_Crossroads);
-		commands.put("Mass_Hysteria", Mass_Hysteria);
-		commands.put("Fervor", Fervor);
-		commands.put("Madrush_Cyclops", Madrush_Cyclops);
-		commands.put("Emperor_Crocodile", Emperor_Crocodile);
 		commands.put("Sun_Quan", Sun_Quan);
 
 		commands.put("Rolling_Stones", Rolling_Stones);

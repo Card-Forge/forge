@@ -1,7 +1,8 @@
 Name:Concordant Crossroads
 ManaCost:G
 Types:World Enchantment
-Text:All creatures have haste.
+Text:no text
+K:stPumpAll:Creature:0/0/Haste:No Condition:All creatures have haste.
 SVar:BuffedBy:Creature
 SVar:AntiBuffedBy:Creature
 SVar:Rarity:Rare

@@ -68,7 +68,6 @@ public class StaticEffects
 		cardToEffectsList.put("Halimar Wavewatch", new String[] {"Halimar_Wavewatch"});
 		cardToEffectsList.put("Nirkana Cutthroat", new String[] {"Nirkana_Cutthroat"});
 		cardToEffectsList.put("Zulaport Enforcer", new String[] {"Zulaport_Enforcer"});
-		
 		cardToEffectsList.put("Champion's Drake", new String[] {"Champions_Drake"});
 		cardToEffectsList.put("Soulsurge Elemental", new String[] {"Soulsurge_Elemental"});
 		cardToEffectsList.put("Vampire Nocturnus", new String[]{"Vampire_Nocturnus"});
@@ -156,11 +155,7 @@ public class StaticEffects
 		cardToEffectsList.put("Serra's Blessing", new String[] {"Serras_Blessing"});
 		cardToEffectsList.put("Cover of Darkness", new String[] {"Cover_of_Darkness"});
 		cardToEffectsList.put("Steely Resolve", new String[] {"Steely_Resolve"});
-		cardToEffectsList.put("Concordant Crossroads", new String[] {"Concordant_Crossroads"});
 		cardToEffectsList.put("That Which Was Taken", new String[] {"That_Which_Was_Taken"});
-		cardToEffectsList.put("Mass Hysteria", new String[] {"Mass_Hysteria"});
-		cardToEffectsList.put("Fervor", new String[] {"Fervor"});
-		cardToEffectsList.put("Madrush Cyclops", new String[] {"Madrush_Cyclops"});
 		cardToEffectsList.put("Rolling Stones", new String[] {"Rolling_Stones"});
 		cardToEffectsList.put("Sun Quan, Lord of Wu", new String[] {"Sun_Quan"});
 		cardToEffectsList.put("Kinsbaile Cavalier", new String[] {"Kinsbaile_Cavalier"});
