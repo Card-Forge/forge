@@ -537,7 +537,7 @@ public class GameAction {
     		@Override
     		public void resolve() {
     			//moveToHand(madness);
-    			if (madness.getOwner().equals("Human"))
+    			if (madness.getOwner().equals(Constant.Player.Human))
     				AllZone.Human_Graveyard.remove(madness);
     			else
     				AllZone.Computer_Graveyard.remove(madness);
@@ -553,7 +553,7 @@ public class GameAction {
     			// pay madness cost here.
     			if (cast.getManaCost().equals("0"))
     				AllZone.Stack.add(cast);
-    			else if (madness.getOwner().equals("Human"))
+    			else if (madness.getOwner().equals(Constant.Player.Human))
     				AllZone.InputControl.setInput(new Input_PayManaCost(cast));
     			else 	// computer will ALWAYS pay a madness cost if he has the mana.
     				ComputerUtil.playStack(cast);	
@@ -1185,7 +1185,7 @@ public class GameAction {
                 		final SpellAbility F_SpellAbility = SpellAbility[0];
                 		
                 		if(k[7].contains("Choice_Instant") && k[4] != "Null") {
-                	    	if(card.getController().equals("Human")) {
+                	    	if(card.getController().equals(Constant.Player.Human)) {
                 	        	Object[] possibleValues = {"Yes", "No"};
                 	        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + card.getName(),card.getName() + " Ability", 
                 	        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -1999,7 +1999,7 @@ public class GameAction {
         String SearchDescription = " ";
         boolean SearchLib = true;
         if(Keyword_Details[7].contains("Choice_Instant-SearchLibrary")) {
-    	    	if(Source.getController().equals("Human")) {
+    	    	if(Source.getController().equals(Constant.Player.Human)) {
     	        	Object[] possibleValues = {"Yes", "No"};
     	        	Object q = JOptionPane.showOptionDialog(null, "Search Libraries?",Source.getName() + " F_SpellAbility", 
     	        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -2178,7 +2178,7 @@ public class GameAction {
         	
     		if(AllZone.GameAction.isCardInZone(Source,Required_Zone[0]) || Zones.equals("Any")) {
 		if(Keyword_Details[7].equals("Yes_No")) {
-    	if(Source.getController().equals("Human")) {
+    	if(Source.getController().equals(Constant.Player.Human)) {
         	Object[] possibleValues = {"Yes", "No"};
         	Object q = JOptionPane.showOptionDialog(null, "Activate - " + Source.getName(),Source.getName() + " Ability", 
         			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -2189,7 +2189,7 @@ public class GameAction {
     	}
 		}
 		if(Keyword_Details[7].equals("Opponent_Yes_No")) {
-	    	if(!Source.getController().equals("Human")) {
+	    	if(!Source.getController().equals(Constant.Player.Human)) {
 	        	Object[] possibleValues = {"Yes", "No"};
 	        	Object q = JOptionPane.showOptionDialog(null, "Activate - " + Source.getName(),Source.getName() + " Ability", 
 	        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
@@ -4142,13 +4142,13 @@ public class GameAction {
     					boolean selHuman = false;
     					@Override
     					public void selectPlayer(String player){
-    						if (player.equals("Human") && selHuman == false)
+    						if (player.equals(Constant.Player.Human) && selHuman == false)
     						{
     							selHuman = true;
     							if (AllZone.Human_PoisonCounter.getPoisonCounters() > 0)
     								AllZone.Human_PoisonCounter.addPoisonCounters(1);
     						}
-    						if (player.equals("Computer") && selComputer == false)
+    						if (player.equals(Constant.Player.Computer) && selComputer == false)
     						{
     							selComputer = true;
     							if (AllZone.Computer_PoisonCounter.getPoisonCounters() > 0)

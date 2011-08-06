@@ -301,7 +301,7 @@ public void push(SpellAbility sp)
 	if(sp.isSpell() && !sp.getSourceCard().isCopiedSpell())
 	{
 	    Phase.StormCount = Phase.StormCount + 1;
-	    if(sp.getSourceCard().getController() == "Human") {
+	    if(sp.getSourceCard().getController() == Constant.Player.Human) {
 		    Phase.PlayerSpellCount = Phase.PlayerSpellCount + 1; 
 		    if(sp.getSourceCard().isCreature() == true) {
 		   	    Phase.PlayerCreatureSpellCount = Phase.PlayerCreatureSpellCount + 1;   	    	
