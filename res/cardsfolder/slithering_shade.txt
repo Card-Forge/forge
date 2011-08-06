@@ -5,7 +5,7 @@ Text:no text
 PT:0/1
 K:Defender
 A:AB$Pump | Cost$ B | NumAtt$+1|NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-K:stPumpSelf:Creature:0/0/CARDNAME can attack as though it didn't have defender.:Hellbent:Hellbent Ñ CARDNAME can attack as though it didn't have defender as long as you have no cards in hand.
+K:stPumpSelf:Creature:0/0/CARDNAME can attack as though it didn't have defender.:Hellbent:Hellbent - CARDNAME can attack as though it didn't have defender as long as you have no cards in hand.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slithering_shade.jpg
 End
