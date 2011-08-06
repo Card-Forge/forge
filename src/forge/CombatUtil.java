@@ -467,6 +467,31 @@ public class CombatUtil {
        return n;
     }
     
+    //Returns the damage unblocked attackers would deal
+    private static int sumAttack(CardList attackers)
+    {
+       int sum = 0;
+ 	  for(int i = 0; i < attackers.size(); i++) {
+ 		  Card a = attackers.get(i);
+ 		  if (!a.hasKeyword("Infect")) sum += getAttack(a);
+ 	  }
+
+       return sum;
+    }
+    
+  //Returns the number of poison counters unblocked attackers would deal
+    private static int sumPoison(CardList attackers)
+    {
+       int sum = 0;
+ 	  for(int i = 0; i < attackers.size(); i++) {
+ 		  Card a = attackers.get(i);
+ 		  if (a.hasKeyword("Infect")) sum += getAttack(a);
+ 		  if (a.hasKeyword("Poisonous")) sum += a.getKeywordMagnitude("Poisonous");
+ 	  }
+
+       return sum;
+    }
+    
     //Checks if the life of the attacked Player/Planeswalker is in danger 
     public static boolean lifeInDanger(Combat combat) {
  	   
@@ -492,6 +517,9 @@ public class CombatUtil {
  					  poison += attacker.getKeywordMagnitude("Poisonous");
  			  }
  	   }
+ 	   
+ 	   damage += sumAttack(unblocked);
+ 	   poison += sumPoison(unblocked);
  	   
  	   if (combat.getPlaneswalker() == null) {
  		   if (damage + 3 > AllZone.ComputerPlayer.getLife() || poison + 2 > 10 - AllZone.ComputerPlayer.getPoisonCounters())
