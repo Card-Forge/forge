@@ -164,6 +164,32 @@ public class CardFactory_Creatures {
 	       }//*************** END ************ END **************************
 	    
 	    //*************** START *********** START **************************
+	    else if(cardName.equals("Street Wraith"))
+	       {
+	         final SpellAbility a1 = new Ability_Hand(card, "0")
+	         {
+
+	        		  private static final long serialVersionUID = -4960704261761785512L;
+
+	        		  public boolean canPlayAI() {return false;}
+
+	        	      public void resolve()
+	        	      {
+	        	    	AllZone.GameAction.getPlayerLife(card.getController()).subtractLife(2);
+	        	        AllZone.GameAction.discard(card);
+	        	        AllZone.GameAction.drawCard(card.getController());
+	        	        card.cycle();	        	 
+	        	    };
+	        	 	          
+	          
+	         };//SpellAbility
+	         card.addSpellAbility(a1);
+	         a1.setDescription("Cycling - (Pay 2 life, Discard this card: Draw a card.)");
+     	     a1.setStackDescription(card +" Cycling: Draw a card");
+	    
+	       }//*************** END ************ END **************************
+	    
+	    //*************** START *********** START **************************
 	    else if(cardName.equals("Shinka Gatekeeper"))
 	    {
 	      final Card newCard = new Card()
@@ -9975,7 +10001,27 @@ public class CardFactory_Creatures {
 	             public boolean canPlayAI() {return false;}
 	          };//SpellAbility
 	          card.addSpellAbility(ability);
-	          ability.setDescription("tap: Tap target creature.");
+	          ability.setDescription("W, tap: Tap target creature.");
+	          ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
+
+	    	}//*************** END ************ END **************************
+	      
+	      //*************** START *********** START **************************
+	      if (cardName.equals("Rathi Trapper"))
+	      {
+	      	final SpellAbility ability = new Ability_Tap(card, "B")
+	          {
+
+	  		   private static final long serialVersionUID = 4424848120984319655L;
+	  		   public void resolve()
+	             {
+	               Card c = getTargetCard();
+	               c.tap();
+	             }
+	             public boolean canPlayAI() {return false;}
+	          };//SpellAbility
+	          card.addSpellAbility(ability);
+	          ability.setDescription("W, tap: Tap target creature.");
 	          ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
 
 	    	}//*************** END ************ END **************************
@@ -9995,7 +10041,7 @@ public class CardFactory_Creatures {
 	             public boolean canPlayAI() {return false;}
 	          };//SpellAbility
 	          card.addSpellAbility(ability);
-	          ability.setDescription("W, tap: Tap target creature.");
+	          ability.setDescription("tap: Tap target creature.");
 	          ability.setBeforePayMana(CardFactoryUtil.input_targetCreature(ability));
 
 	    	}//*************** END ************ END **************************

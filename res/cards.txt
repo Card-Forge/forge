@@ -1,3 +1,9 @@
+Rathi Trapper
+1 B
+Creature Human Rebel Rogue
+no text
+1/2
+
 Charging Bandits
 4 B
 Creature Human Rogue

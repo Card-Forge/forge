@@ -18,6 +18,7 @@ forest.jpg					http://resources.wizards.com/magic/cards/unh/en-us/card73946.jpg
 forest1.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=2748
 forest2.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=587
 forest3.jpg					http://gatherer.wizards.com/handlers/image.ashx?type=card&multiverseid=586
+rathi_trapper.jpg           http://www.wizards.com/global/images/magic/general/rathi_trapper.jpg
 hollow_dogs.jpg             http://www.wizards.com/global/images/magic/general/hollow_dogs.jpg
 lurking_nightstalker.jpg    http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=6557
 vicious_kavu.jpg            http://www.wizards.com/global/images/magic/general/vicious_kavu.jpg
