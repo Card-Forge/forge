@@ -2487,8 +2487,9 @@ public class Card extends MyObservable {
                  	y = getCMC();
                  }
              	
-             	if (Property.substring(z).equals("X"))
-             		x = CardFactoryUtil.xCount(source, getSVar("X"));
+             	if (Property.substring(z).equals("X")) {
+             		x = CardFactoryUtil.xCount(source, source.getSVar("X"));
+             	}
              	else
              		x = Integer.parseInt(Property.substring(z));
              	
