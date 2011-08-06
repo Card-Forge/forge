@@ -280,10 +280,6 @@ public class AbilityFactory {
 				SA = AbilityFactory_PermanentState.createAbilityUntap(this);
 			else if (isSp)
 				SA = AbilityFactory_PermanentState.createSpellUntap(this);
-			else if (isDb)
-				SA = AbilityFactory_PermanentState.createDrawbackUntap(this);
-			if(hasSubAbility())
-				SA.setSubAbility(getSubAbility());
 		}
 		
 		if (API.equals("Tap")){
