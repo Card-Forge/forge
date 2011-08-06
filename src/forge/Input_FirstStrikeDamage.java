@@ -27,7 +27,8 @@ public class Input_FirstStrikeDamage extends Input {
     
     @Override
     public void selectButtonOK() {
-        damageCreatureAndPlayer();
+    	if (!AllZone.GameInfo.isPreventCombatDamageThisTurn())
+    		 damageCreatureAndPlayer();
         
         AllZone.GameAction.checkStateEffects();
         
