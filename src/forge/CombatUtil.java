@@ -2211,25 +2211,25 @@ public class CombatUtil {
             //AllZone.GameAction.checkStateEffects();
             
         }//flanking
-        if((a.getName().equals("Chambered Nautilus") || a.getName().equals("Slith Strider"))
-                && !a.getCreatureGotBlockedThisCombat()) {
+        
+        if (a.getName().equals("Slith Strider") && !a.getCreatureGotBlockedThisCombat()) {
             String player = a.getController();
             AllZone.GameAction.drawCard(player);
         } else if(a.getName().equals("Corrupt Official") && !a.getCreatureGotBlockedThisCombat()) {
             String opp = b.getController();
             AllZone.GameAction.discardRandom(opp);
         } else if (a.getName().equals("Robber Fly") && !a.getCreatureGotBlockedThisCombat()) {
-        	String opp = b.getController();
-        	PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);
-        	CardList list = new CardList(hand.getCards());
-        	int handSize = list.size();
-        	
-        	for (int ctr = 0; ctr < handSize; ctr ++) {   // opponent discards their hand,
-        		AllZone.GameAction.discardRandom(opp);
-        	}
-        	for (int ctr = 0; ctr < handSize; ctr ++) {   // then draws that many cards
-        		AllZone.GameAction.drawCard(opp);;
-        	}
+            String opp = b.getController();
+            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, opp);
+            CardList list = new CardList(hand.getCards());
+            int handSize = list.size();
+            
+            for (int ctr = 0; ctr < handSize; ctr ++) {   // opponent discards their hand,
+                AllZone.GameAction.discardRandom(opp);
+            }
+            for (int ctr = 0; ctr < handSize; ctr ++) {   // then draws that many cards
+                AllZone.GameAction.drawCard(opp);;
+            }
         } else if(a.getName().equals("Sylvan Basilisk")) {
             AllZone.GameAction.destroy(b);
             System.out.println("destroyed blocker " + b.getName());
@@ -2241,34 +2241,23 @@ public class CombatUtil {
             
             play.remove(b);
             library.add(b, 0);
-        } 
-/* These two cards were moved into one code block, see below
-        else if(a.getName().equals("Saprazzan Heir") && !a.getCreatureBlockedThisCombat()) {
-            String player = a.getController();
-            AllZone.GameAction.drawCard(player);
-            AllZone.GameAction.drawCard(player);
-            AllZone.GameAction.drawCard(player);
-        } else if(a.getName().equals("Drelnoch") && !a.getCreatureBlockedThisCombat()) {
-            String player = a.getController();
-            AllZone.GameAction.drawCard(player);
-            AllZone.GameAction.drawCard(player);
-        } 
-*/
-        else if((a.getName().equals("Silkenfist Order") || a.getName().equals("Silkenfist Fighter"))
+        } else if((a.getName().equals("Silkenfist Order") || a.getName().equals("Silkenfist Fighter"))
                 && !a.getCreatureBlockedThisCombat()) {
             a.untap();
         } else if (a.getName().equals("Deepwood Tantiv") && !a.getCreatureBlockedThisCombat()) {
-        	AllZone.GameAction.getPlayerLife(a.getController()).addLife(2);
+            AllZone.GameAction.getPlayerLife(a.getController()).addLife(2);
         } else if (a.getName().equals("Sacred Prey") && !a.getCreatureBlockedThisCombat()) {
-        	AllZone.GameAction.getPlayerLife(a.getController()).addLife(1);
+            AllZone.GameAction.getPlayerLife(a.getController()).addLife(1);
         } else if (a.getName().equals("Vedalken Ghoul") && !a.getCreatureBlockedThisCombat()) {
-        	 AllZone.GameAction.getPlayerLife(b.getController()).subtractLife(4,a);
+             AllZone.GameAction.getPlayerLife(b.getController()).subtractLife(4,a);
         }
         
-        else if ((a.getName().equals("Saprazzan Heir") || a.getName().equals("Drelnoch")) && !a.getCreatureBlockedThisCombat()) {
+        else if ((a.getName().equals("Chambered Nautilus") || a.getName().equals("Saprazzan Heir") 
+                || a.getName().equals("Drelnoch")) && !a.getCreatureBlockedThisCombat()) {
             String player = a.getController();
             int numCards = 3;
             if (a.getName().equals("Drelnoch")) numCards = 2;
+            if (a.getName().equals("Chambered Nautilus")) numCards = 1;
             int choice = 0;
             int compLibSize = AllZone.getZone(Constant.Zone.Library, Constant.Player.Computer).size();
             int compHandSize = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer).size();
@@ -2287,7 +2276,7 @@ public class CombatUtil {
                     AllZone.GameAction.drawCard(player);
                 }
             }
-        }// if Saprazzan Heir or Drelnoch was blocked
+        }// if Saprazzan Heir or Drelnoch or Chambered Nautilus was blocked
         
         if(b.getName().equals("Frostweb Spider") && (a.getKeyword().contains("Flying"))) {
             final Card spider = b;
