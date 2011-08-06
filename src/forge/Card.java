@@ -2280,6 +2280,15 @@ public class Card extends MyObservable {
     	
     
     public boolean isValidCard(String Restris[], String You) {
+    	/////////////////// temporary DEBUG code
+    	System.out.println("DEBUG: "+this.getName()+" - isValidCard Restrictions length: "+Restris.length);
+    	System.out.print("DEBUG: "+this.getName()+" - isValidCard Restrictions: ");
+    	for(String a:Restris) {
+    		System.out.print("|"+a);
+    	}
+    	System.out.println("|");
+    	////////////////// end temp DEBUG code
+    	
     	String Restriction[] = new String[Restris.length];
     	String st = "";
         for (int i=0; i<Restris.length; i++)
@@ -2306,6 +2315,9 @@ public class Card extends MyObservable {
     }
     
     public boolean isValidCard(String Restrictions[]) {
+    	/////////////////// temporary DEBUG code
+    	System.out.println("DEBUG: "+this.getName()+" - WARNING - isValidCard is not checking YouCtrl/YouDontCtrl");
+    	/////////////////// end temp DEBUG code
     	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
 
