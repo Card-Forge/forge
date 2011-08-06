@@ -2308,7 +2308,7 @@ public class Card extends MyObservable {
     }
     
     public boolean isSpell() {
-        return (isInstant() || isSorcery());
+        return (isInstant() || isSorcery() || (isAura() && !AllZoneUtil.getCardsInPlay().contains(this)));
     }
     
     public boolean isCreature() {
