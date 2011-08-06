@@ -3066,12 +3066,8 @@ public class CardFactoryUtil {
     
     public static void checkEquipmentOnControllerChange(PlayerZone from, PlayerZone to, Card c)
     {
-    	if (!c.isEquipped())
-    		;
-    	else if (!from.equals(to))
-    	{
+    	if (c.isEquipped() && !from.equals(to))
     		c.unEquipAllCards();
-    	}
     }
     
     //may return null

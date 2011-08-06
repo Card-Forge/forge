@@ -365,6 +365,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                     CardPanel cardPanel = (CardPanel) o;
                     
                     CardList att = new CardList(AllZone.Combat.getAttackers());
+                    //CardList block = AllZone.Combat.getAllBlockers();
                     
                     if((cardPanel.getCard().isTapped() || cardPanel.getCard().hasSickness() || ((cardPanel.getCard().getKeyword().contains("Vigilance")) && att.contains(cardPanel.getCard())))
                             && (inputControl.input instanceof Input_Attack)) {
@@ -377,10 +378,20 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
                     }
                     //right click:
                     if(e.isMetaDown()) {
-                        if(att.contains(cardPanel.getCard())) {
+                        if(att.contains(cardPanel.getCard()) && (inputControl.input instanceof Input_Attack))  {
                             cardPanel.getCard().untap();
                             AllZone.Combat.removeFromCombat(cardPanel.getCard());
                         }
+                        
+                        /*
+                        // won't work yet:
+                        else if (block.contains(cardPanel.getCard()) && inputControl.input instanceof Input_Block)
+                        {
+                        	Card crd = cardPanel.getCard();
+                        	AllZone.Combat.removeFromCombat(crd);
+                        }
+                        */
+                        
                     }
 
                     else inputControl.selectCard(cardPanel.getCard(), AllZone.Human_Play);

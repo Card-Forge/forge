@@ -1942,6 +1942,11 @@ class CardFactory_Planeswalkers {
                 			return CardFactoryUtil.canTarget(card2, c);
                 		}
                 	});
+                	if (list.size() > 0) {
+                		CardListUtil.sortCMC(list);
+                		setTargetCard(list.get(0));
+                	}
+                	
                     return card2.getCounters(Counters.LOYALTY) < 8 && list.size() > 0;
                 }
                 
@@ -1961,13 +1966,9 @@ class CardFactory_Planeswalkers {
                                     "Main2")) && AllZone.Stack.size() == 0;
                 }//canPlay()
                 
-                @Override
-                public void chooseTargetAI() {
-                    Card c = getPermanent();
-                    
-                    if(getPermanent() != null) setTargetCard(c);
-                }//chooseTargetAI()
                 
+                
+                /*
                 Card getPermanent() {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
                     int highestCost = 0;
@@ -1975,7 +1976,7 @@ class CardFactory_Planeswalkers {
                     CardList perms = new CardList(play.getCards());
                     perms = perms.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return CardFactoryUtil.canTarget(card2, c) /* && c.isTapped()*/;
+                            return CardFactoryUtil.canTarget(card2, c);
                         }
                     });
                     
@@ -1993,6 +1994,8 @@ class CardFactory_Planeswalkers {
                     
                     return null;
                 }
+                */
+    			
             };//SpellAbility ability1
             
             /*

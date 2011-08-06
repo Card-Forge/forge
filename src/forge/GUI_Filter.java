@@ -39,6 +39,7 @@ public class GUI_Filter extends javax.swing.JDialog {
     private JTextField        NameText;
     private JLabel            jLabel5;
     private JTextField        cardText;
+    private JTextField		  cardType;
     private JPanel            jPanel1;
     private JCheckBox         jCheckBoxColorless;
     private JCheckBox         jCheckBoxWhite;
