@@ -218,7 +218,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Magnum 1", "easy", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
         addToDeckList("Magnum 2", "medium", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
         addToDeckList("Magnum 3", "hard", "UG deck with Sturdy Hatchling and Shorecrasher Mimic");
-        addToDeckList("Marge Simpson 3 ", "hard", "RG deck with tokens which are devoured by R and RG creatures with devour");
+        addToDeckList("Marge Simpson 3", "hard", "RG deck with tokens which are devoured by R and RG creatures with devour");
 //        addToDeckList("Michael 3", "hard", "W Angels deck");
         addToDeckList("Morpheus 3", "hard", "G Elf deck with Overrun, Gaea's Anthem, Imperious Perfect and other pumps");
         addToDeckList("Mr Slate 2", "medium", "WUG Merfolk deck with Lord of Atlantis, Stonybrook Banneret and Stonybrook Schoolmaster");

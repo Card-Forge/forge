@@ -190,7 +190,7 @@ public class ComputerUtil_Attack2 {
        private boolean doAssault()
        {
     	   //Beastmaster Ascension
-    	   if(AllZoneUtil.isCardInPlay("Beastmaster Ascension", AllZone.ComputerPlayer) && attackers.size() > 3) {
+    	   if(AllZoneUtil.isCardInPlay("Beastmaster Ascension", AllZone.ComputerPlayer) && attackers.size() > 1) {
     		   CardList beastions = AllZoneUtil.getCardsInZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer).
     		   		getName("Beastmaster Ascension");
     		   int minCreatures = 7;
@@ -198,7 +198,6 @@ public class ComputerUtil_Attack2 {
     			   int counters = beastion.getCounters(Counters.QUEST);
     			   minCreatures = Math.min(minCreatures, 7 - counters);
     		   }
-    		   minCreatures = Math.max(minCreatures, 2);
     		   if (attackers.size() >= minCreatures)
     			   return true;
     	   }
