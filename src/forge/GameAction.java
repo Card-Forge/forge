@@ -371,33 +371,24 @@ public class GameAction {
     }
     
     public void discard_megrim(Card c) {
-        //Whenever an opponent discards a card, Megrim deals 2 damage to that player.
-        //when a card is discarded, deal 2 damage to that player for each Megrim in play controlled by the opponent.
-        final String owner = c.getOwner();
-        final String opponent = AllZone.GameAction.getOpponent(owner);
-        PlayerZone opponentZone = AllZone.getZone(Constant.Zone.Play, opponent);
-        CardList opponentList = new CardList(opponentZone.getCards());
-        
-        //remove 2 life for each Megrim the opponent controls.
-        for(int i = 0; i < opponentList.size(); i++) {
-            Card tmpCard = opponentList.get(i);
-            if(tmpCard.getName().equals("Megrim")) {
-                AllZone.GameAction.getPlayerLife(owner).subtractLife(2);
-            }
+        /* 
+         * Whenever an opponent discards a card, Megrim deals 2 damage to that player.
+        */
+    	final String owner = c.getOwner();  //discarded card owner
+        final String opponent = AllZone.GameAction.getOpponent(owner);  //check this for Megrim
+        CardList megrims = AllZoneUtil.getPlayerCardsInPlay(opponent, "Megrim");
+        for(Card megrim:megrims) {
+        	final Card thisMegrim = megrim;
+        	final Ability ability = new Ability(megrim, "0") {
+        		@Override
+        		public void resolve() {
+        			AllZone.GameAction.addDamage(owner, thisMegrim, 2);
+        		}
+        	};
+        	ability.setStackDescription(megrim.getName()+" - deals 2 damage to "+owner);
+        	AllZone.Stack.add(ability);
         }
     }
-    
-    /*
-    private boolean isAliFromCairoInPlay(PlayerZone zone) {
-    	   if( zone == null ) {
-    	      return false;
-    	   }
-    	   else {
-    	      CardList all = new CardList();
-    	      all.addAll(zone.getCards());
-    	      return all.containsName("Ali from Cairo");
-    	   }
-    } */
     
     //do this during combat damage:
     public void checkWinLoss()
