@@ -4120,15 +4120,7 @@ public class GameActionUtil
 			playerCombatDamage_Rith(c);
 		else if (c.getName().equals("Vorosh, the Hunter"))
 			playerCombatDamage_Vorosh(c);
-		/*
-		if(CardFactoryUtil.hasNumberEquipments(c, "Umezawa's Jitte") == 1)
-		{
-			PlayerZone play = AllZone.getZone(c);
-			CardList list = new CardList(play.getCards());
-			list = list.getName("Umezawa's Jitte");
-			Card jitte = list.get(0);
-		}
-		*/
+		
 		if (c.getNetAttack() > 0)
 			c.setDealtCombatDmgToOppThisTurn(true);
 
@@ -5004,7 +4996,6 @@ public class GameActionUtil
 		{
 			Ability ability = new Ability(list.get(i), "0")
 			{
-
 				public void resolve()
 				{
 					PlayerZone graveyard = AllZone.getZone(
@@ -5089,7 +5080,6 @@ public class GameActionUtil
 				AllZone.Stack.add(ability);
 			}//for
 		}
-		
 	}
 	
 	private static void upkeep_Scute_Mob()
@@ -5155,9 +5145,7 @@ public class GameActionUtil
 							Card c = fungi.get(j);
 							c.addCounter(Counters.SPORE, 1);
 						}
-
 					}
-
 				};// Ability
 				ability
 						.setStackDescription("Sporesower - put a spore counter on each fungus you control.");
@@ -5378,89 +5366,6 @@ public class GameActionUtil
 			AllZone.Stack.add(ability);
 		}
 	}
-	/*
-	private static void upkeep_Sensation_Gorger()
-	{
-		final String player = AllZone.Phase.getActivePlayer();
-		final String opponent = AllZone.GameAction.getOpponent(player);
-		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, player);
-		PlayerZone library = AllZone.getZone(Constant.Zone.Library, player);
-
-		CardList list = new CardList(playZone.getCards());
-		list = list.getName("Sensation Gorger");
-
-		Ability ability;
-		for (int i = 0; i < list.size(); i++)
-		{
-			
-      	  	if (library.size() <= 0)
-			{
-				return;
-			}
-      	  	
-      	  	if (list.get(i).getController().equals("Human"))
-      	  	{
-				String[] choices = { "Yes", "No" };
-				Object o = AllZone.Display.getChoiceOptional("Use " + list.get(i).getName() +  "'s ability this turn?", choices);
-				
-				if (o.equals("No"))
-					return;
-      	  	}
-			
-			// System.out.println("top of deck: " + library.get(i).getName());
-			String creatureType = library.get(i).getType().toString();
-			String cardName = library.get(i).getName();
-
-			ability = new Ability(list.get(i), "0")
-			{
-				public void resolve()
-				{
-					PlayerZone library = AllZone.getZone(Constant.Zone.Library,
-							player);
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand,
-							player);
-
-					// PlayerZone oppLibrary =
-					// AllZone.getZone(Constant.Zone.Library, opponent);
-					PlayerZone oppHand = AllZone.getZone(Constant.Zone.Hand,
-							opponent);
-
-					String creatureType = library.get(0).getType().toString();
-
-					if (creatureType.contains("Goblin")
-							|| creatureType.contains("Shaman"))
-					{
-						Card[] c = hand.getCards();
-				        for(int q = 0; q < c.length; q++)
-				            AllZone.GameAction.discard(c[q]);
-				        
-				        Card[] oc = oppHand.getCards();
-				        for(int j = 0; j < oc.length; j++)
-				            AllZone.GameAction.discard(oc[j]);
-
-						for(int z = 0; z < 4; z++)
-						{
-							AllZone.GameAction.drawCard(Constant.Player.Computer);
-							AllZone.GameAction.drawCard(Constant.Player.Human);
-						}
-
-					}
-
-				}// resolve()
-			};// Ability
-			if (creatureType.contains("Goblin")
-					|| creatureType.contains("Shaman"))
-				ability.setStackDescription("Sensation Gorger - " + player
-						+ " reveals: " + cardName
-						+ ", everyone discards their hands and draws 4 cards.");
-			else
-				ability.setStackDescription("Sensation Gorger - " + player
-						+ " reveals top card: " + cardName + ".");
-
-			AllZone.Stack.add(ability);
-		}// for
-	}// upkeep_Sensation_Gorger() 
-	*/
 	
 	private static void upkeep_Sensation_Gorger()
 	{
@@ -7485,8 +7390,9 @@ public class GameActionUtil
 		for (int i = 0; i < list.size(); i++) {
 			AllZone.GameAction.drawCard(player);
 			AllZone.GameAction.getPlayerLife(player).subtractLife(1);
+			
+			AllZone.GameAction.checkStateEffects();
 		}
-		AllZone.GameAction.checkStateEffects();
 	}// upkeep_Phyrexian_Arena
 	
 	private static void upkeep_Honden_of_Seeing_Winds()

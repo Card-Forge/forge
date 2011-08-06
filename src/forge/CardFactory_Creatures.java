@@ -9383,7 +9383,6 @@ public class CardFactory_Creatures {
 	      }//*************** END ************ END **************************
 
 
-
 	      //*************** START *********** START **************************
 	      else if(cardName.equals("Meloku the Clouded Mirror"))
 	      {
@@ -9394,22 +9393,38 @@ public class CardFactory_Creatures {
 	        	CardFactoryUtil.makeToken("Illusion", "U 1 1 Illusion", card, "U", new String[]{"Creature", "Illusion"}, 1, 1, new String[] {"Flying"});
 	            PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
 
-	            //TODO: the "bounced" land should be chosen by the user
-	            //instead of "automatically" done for him
-	            CardList island = new CardList(play.getCards());
-	            island = island.filter(new CardListFilter()
+	            CardList land = new CardList(play.getCards());
+	            land = land.filter(new CardListFilter()
 	            {
 	              public boolean addCard(Card c)
 	              {
-	                return c.getType().contains("Land") && c.isTapped();
+	                return c.getType().contains("Land");
 	              }
 	            });
 	            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
 
-	            if(! island.isEmpty())
-	              AllZone.GameAction.moveTo(hand, island.get(0));
+	            if(! land.isEmpty()) {
+	            	Object o = AllZone.Display.getChoiceOptional("Select target Land", land.toArray());
+		    		Card l = (Card)o;
+		    		AllZone.GameAction.moveTo(hand, l);
+	            }
+	            
 	          }//resolve()
+	          
+	          public boolean canPlay()
+	          {
+	        	  PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
 
+		          CardList land = new CardList(play.getCards());
+		          land = land.filter(new CardListFilter()
+		          {
+		        	  public boolean addCard(Card c)
+		              {
+		                return c.getType().contains("Land");
+		              }
+		          });
+		          return land.size() > 0;
+	          }
 	        };//SpellAbility
 	        card.addSpellAbility(ability);
 	        ability.setDescription("1, Return a land you control to its owner's hand: Put a 1/1 blue Illusion creature token with flying into play.");

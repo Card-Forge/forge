@@ -5036,8 +5036,6 @@ public class CardFactory implements NewConstants {
     }//*************** END ************ END **************************
 
 
-
-
     //*************** START *********** START **************************
     else if(cardName.equals("Ashes to Ashes"))
     {
