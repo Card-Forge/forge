@@ -97,10 +97,16 @@ public class GUI_ImportPicture extends JDialog implements NewConstants {
             jLabelNeedSpace.setText("HDD Need Space: Unknown.");
             jLabelHDDFree = new JLabel();
             jLabelHDDFree.setBounds(new Rectangle(15, 119, 177, 16));
-            File file = ForgeProps.getFile(IMAGE_BASE);
-            long freeSpace = file.getFreeSpace();
-            freeSpaceM = freeSpace / 1024 / 1024;
-            jLabelHDDFree.setText("HDD Free Space: " + freeSpaceM + " MB");
+            try {
+                File file = ForgeProps.getFile(IMAGE_BASE);
+                long freeSpace = file.getFreeSpace();
+                freeSpaceM = freeSpace / 1024 / 1024;
+                jLabelHDDFree.setText("HDD Free Space: " + freeSpaceM + " MB");
+            } catch(NoSuchMethodError err) {
+                // getFreeSpace is @since 1.6
+                err.printStackTrace();
+                jLabelHDDFree.setText("HDD Free Space could not be determined");
+            }
             jLabelSource = new JLabel();
             jLabelSource.setBounds(new Rectangle(63, 45, 267, 17));
             jLabelSource.setBorder(BorderFactory.createLineBorder(Color.black, 1));

@@ -40,7 +40,7 @@ public class GUI_Filter extends javax.swing.JDialog {
     private JLabel            jLabel5;
     private JTextField        cardText;
     @SuppressWarnings("unused")
-    private JTextField		  cardType;
+    private JTextField        cardType;
     private JPanel            jPanel1;
     private JCheckBox         jCheckBoxColorless;
     private JCheckBox         jCheckBoxWhite;
@@ -149,7 +149,12 @@ public class GUI_Filter extends javax.swing.JDialog {
             this.setResizable(true);
             this.setTitle("Filter");
             // pack();
-            this.setIconImage(null);
+            try {
+                this.setIconImage(null);
+            } catch(NoSuchMethodError err) {
+                // setIconImage is @since 1.6
+                err.printStackTrace();
+            }
             this.addWindowListener(new WListener());
             
 

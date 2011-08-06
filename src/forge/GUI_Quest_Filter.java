@@ -141,7 +141,12 @@ public class GUI_Quest_Filter extends javax.swing.JDialog {
             this.setResizable(false);
             this.setTitle("Filter");
             pack();
-            this.setIconImage(null);
+            try {
+                this.setIconImage(null);
+            } catch(NoSuchMethodError err) {
+                // setIconImage is @since 1.6
+                err.printStackTrace();
+            }
             this.addWindowListener(new WListener());
             
 
