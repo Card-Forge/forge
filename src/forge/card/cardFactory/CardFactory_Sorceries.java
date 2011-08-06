@@ -1731,68 +1731,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
             card.addSpellAbility(CardFactoryUtil.ability_Flashback(card, "4 G G G"));
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Commune with Nature")) {
-            SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -7652317332073733242L;
-                
-                @Override
-                public void resolve() {
-                    Player player = card.getController();
-                    if(player.equals(AllZone.HumanPlayer)) humanResolve();
-                    else computerResolve();
-                }
-                
-                public void computerResolve() {
-                    //get top 5 cards of library
-                    CardList top = new CardList();
-                    int limit = AllZone.Computer_Library.getCards().length;
-                    
-                    for(int i = 0; i < 5 && i < limit; i++) {
-                        top.add(AllZone.Computer_Library.get(0));
-                    }
-                    
-                    //put creature card in hand, if there is one
-                    CardList creature = top.getType("Creature");
-                    if(creature.size() > 0) {
-                    	Card best = CardFactoryUtil.AI_getBestCreature(creature);
-                        top.remove(best);
-                    	AllZone.GameAction.moveToHand(best);
-                    }
-                    
-                    //put cards on bottom of library
-                    for(int i = 0; i < top.size(); i++)
-                    	AllZone.GameAction.moveToBottomOfLibrary(top.get(i));
-                    
-                }//computerResolve()
-                
-                public void humanResolve() {
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-                    
-                    CardList list = new CardList();
-                    for(int i = 0; i < 5 && i < library.getCards().length; i++)
-                        list.add(library.get(i));
-                    
-                    //optional, select a creature
-                    Object o = GuiUtils.getChoiceOptional("Select a creature", list.toArray());
-                    if(o != null && ((Card) o).isCreature()) {
-                        list.remove((Card) o);
-                        AllZone.GameAction.moveToHand((Card) o);
-                    }
-                    
-                    //put remaining cards on the bottom of the library
-                    for(int i = 0; i < list.size(); i++)
-                    	AllZone.GameAction.moveToBottomOfLibrary(list.get(i));
-
-                }//resolve()
-            };
-            
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-        }//*************** END ************ END **************************
 
         
         //*************** START *********** START **************************
@@ -4894,20 +4832,9 @@ public class CardFactory_Sorceries {
                 			stop();
                 			return;
                 		}
-
                 		userChoice.addAll(a);
                 		
                 		stopSetNext(chooseX);
-
-                		/*
-                		if(userChoice.contains(cardChoice[0])) stopSetNext(targetPlayer);
-                		else if(userChoice.contains(cardChoice[1])) stopSetNext(targetGraveCreature);
-                		else if(userChoice.contains(cardChoice[2])) stopSetNext(targetCreature);
-                		else if(userChoice.contains(cardChoice[3])) stopSetNext(targetXCreatures);
-                		else {
-                			throw new RuntimeException("Something in Profane Command selection is FUBAR.");
-                		}
-                		*/
                 	}
                 }//showMessage()
                 
