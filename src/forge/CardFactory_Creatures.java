@@ -173,7 +173,7 @@ public class CardFactory_Creatures {
             a1.setBeforePayMana(CardFactoryUtil.input_targetPlayer(a1));
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Captain of the Watch")) {
             final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
@@ -203,7 +203,7 @@ public class CardFactory_Creatures {
             
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Dimir Guildmage")) {
