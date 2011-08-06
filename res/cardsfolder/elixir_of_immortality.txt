@@ -2,7 +2,7 @@ Name:Elixir of Immortality
 ManaCost:1
 Types:Artifact
 Text:no text
-A:AB$GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 5 | SubAbility$ SVar=DBShuffle | SpellDescription$ You gain 5 life. Shuffle Elixir of Immortality and your graveyard into your library.
+A:AB$GainLife | Cost$ 2 T Sac<1/CARDNAME> | LifeAmount$ 5 | SubAbility$ SVar=DBShuffle | SpellDescription$ You gain 5 life. Shuffle Elixir of Immortality and your graveyard into their owner's library.
 SVar:DBShuffle:DB$ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elixir_of_immortality.jpg

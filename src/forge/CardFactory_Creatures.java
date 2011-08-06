@@ -6997,11 +6997,11 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability2);
             
             StringBuilder sb = new StringBuilder();
-            sb.append(abCost+"Remove all +1/+1 counters from "+cardName+".  "+cardName);
-            sb.append(" deals damage to target creature or player equal to the number of counters removed this way.");
+            sb.append(abCost+"Remove all +1/+1 counters from "+cardName+":  "+cardName);
+            sb.append(" deals damage to target creature or player equal to the number of +1/+1 counters removed this way.");
             ability2.setDescription(sb.toString());
             
-            ability2.setStackDescription("Molten Hydra deals damage to number of counters on it to target creature or player.");
+            ability2.setStackDescription("Molten Hydra deals damage to number of +1/+1 counters on it to target creature or player.");
         }//*************** END ************ END **************************
         
         

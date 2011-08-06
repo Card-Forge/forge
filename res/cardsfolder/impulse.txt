@@ -1,7 +1,7 @@
 Name:Impulse
 ManaCost:1 U
 Types:Instant
-Text:Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library.
+Text:Look at the top four cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3641.jpg
