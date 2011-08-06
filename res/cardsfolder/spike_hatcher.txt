@@ -4,7 +4,7 @@ Types:Creature Spike
 Text:no text
 PT:0/0
 K:Spike 6
-A:AB$Regenerate|Cost$1 SubCounter<1/P1P1>|SpellDescription$Regenerate Spike Hatcher.
+A:AB$Regenerate | Cost$ 1 SubCounter<1/P1P1> | SpellDescription$ Regenerate Spike Hatcher.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spike_hatcher.jpg
 End

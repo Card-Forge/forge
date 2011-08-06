@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:tap: add 1
-A:AB$Regenerate|ValidTgts$Creature.Insect,Creature.Rat,Creature.Spider,Creature.Squirrel|TgtPrompt$Select target Insect, Rat, Spider, or Squirrel|Cost$1 B|SpellDescription$Regenerate target Insect, Rat, Spider, or Squirrel.
+A:AB$Regenerate | ValidTgts$ Creature.Insect,Creature.Rat,Creature.Spider,Creature.Squirrel | TgtPrompt$ Select target Insect, Rat, Spider, or Squirrel | Cost$ 1 B | SpellDescription$ Regenerate target Insect, Rat, Spider, or Squirrel.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swarmyard.jpg
 End

@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Legendary Land
 Text:no text
 K:tap: add 1
-A:AB$Regenerate|Cost$G T|Tgt$TgtC|SpellDescription$Regenerate target creature.
+A:AB$Regenerate | Cost$ G T | Tgt$ TgtC | SpellDescription$ Regenerate target creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yavimaya_hollow.jpg
 End

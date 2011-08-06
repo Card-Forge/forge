@@ -4,7 +4,7 @@ Types:Artifact Creature Beast
 Text:no text
 PT:4/2
 K:WheneverKeyword:BecomesTapped:Self:Play:ModifyLife/2:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Soldevi Steam Beast becomes tapped, target opponent gains 2 life.
-A:AB$Regenerate|Cost$2|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_steam_beast.jpg
 End

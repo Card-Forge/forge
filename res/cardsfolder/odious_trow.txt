@@ -3,7 +3,7 @@ ManaCost:BG
 Types:Creature Troll
 Text:no text
 PT:1/1
-A:AB$Regenerate|Cost$1 BG|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ 1 BG | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/odious_trow.jpg
 End

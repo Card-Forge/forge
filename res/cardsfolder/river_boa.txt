@@ -4,7 +4,7 @@ Types:Creature Snake
 Text:no text
 PT:2/1
 K:Islandwalk
-A:AB$Regenerate|Cost$G|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/river_boa.jpg
 End

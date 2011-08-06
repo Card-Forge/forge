@@ -3,7 +3,7 @@ ManaCost:7 B
 Types:Creature Skeleton Wurm
 Text:no text
 PT:7/6
-A:AB$Regenerate|Cost$B|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skeletal_wurm.jpg
 End

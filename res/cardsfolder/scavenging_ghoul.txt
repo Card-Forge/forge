@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 #TODO - this should actually be at end of turn
 K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:CustomCounter.CORPSE/1:Self:ASAP:No_Condition:Initiator - Other than Self:At the beginning of each end step, put a corpse counter on Scavenging Ghoul for each creature put into a graveyard from the battlefield this turn.
-A:AB$Regenerate|Cost$SubCounter<1/CORPSE>|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ SubCounter<1/CORPSE> | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scavenging_ghoul.jpg
 End

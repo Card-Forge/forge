@@ -4,7 +4,7 @@ Types:Creature Zombie
 Text:no text
 PT:2/1
 K:stPumpSelf:Creature:X/0:no Condition:Nim Lasher gets +1/+0 for each artifact you control.
-A:AB$Regenerate|Cost$Sac<1/Artifact>|SpellDescription$Regenerate Nim Shambler.
+A:AB$Regenerate | Cost$ Sac<1/Artifact> | SpellDescription$ Regenerate Nim Shambler.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:BuffedBy:Artifact
 SVar:Rarity:Uncommon

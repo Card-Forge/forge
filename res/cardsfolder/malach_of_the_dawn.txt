@@ -4,7 +4,7 @@ Types:Creature Angel
 Text:no text
 PT:2/4
 K:Flying
-A:AB$Regenerate|Cost$W W W|SpellDescription$Regenerate CARDNAME.
+A:AB$Regenerate | Cost$ W W W | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122481.jpg
 End
