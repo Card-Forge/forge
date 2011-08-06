@@ -160,7 +160,7 @@ public class CardFactory_Sorceries {
                 public void resolve() {
                     Card c = getTargetCard();
                     if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        if(!c.getType().contains("Basic")) AllZone.GameAction.addDamage(c.getController(), card, 2);
+                        if(!c.getType().contains("Basic")) c.getController().addDamage(2, card);
                         AllZone.GameAction.destroy(c);
                     }
                     
@@ -983,7 +983,7 @@ public class CardFactory_Sorceries {
                 		if(AllZone.GameAction.isCardInPlay(getTargetCard())
                 				&& CardFactoryUtil.canTarget(card, getTargetCard()))
                 			getTargetCard().addDamage(1,card);
-                	} else AllZone.GameAction.addDamage(getTargetPlayer(), card, 1);
+                	} else getTargetPlayer().addDamage(1, card);
             };
            };
             card.clearSpellAbility();
@@ -1198,7 +1198,7 @@ public class CardFactory_Sorceries {
                         AllZone.GameAction.destroy(getTargetCard());
                         CardList Grave = new CardList(AllZone.getZone(Constant.Zone.Graveyard, getTargetCard().getController()).getCards());
                         int Damage = (Grave.getType("Land")).size();
-                        AllZone.GameAction.addDamage(getTargetCard().getController(), card, Damage);
+                        getTargetCard().getController().addDamage(Damage, card);
                     }
 				}
                 @Override
@@ -1833,8 +1833,8 @@ public class CardFactory_Sorceries {
                                 all.get(i).addDamage(3, card);
                             }
                         }
-                    AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, 3);
-                    AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, 3);
+                    AllZone.HumanPlayer.addDamage(3, card);
+                    AllZone.ComputerPlayer.addDamage(3, card);
                 }
             };
             card.clearSpellAbility();
@@ -2104,7 +2104,7 @@ public class CardFactory_Sorceries {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
+                    } else getTargetPlayer().addDamage(damage, card);
                 }
             };//SpellAbility
             
@@ -2167,7 +2167,7 @@ public class CardFactory_Sorceries {
                             Card c = getTargetCard();
                             c.addDamage(damage, card);
                         }
-                    } else AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
+                    } else getTargetPlayer().addDamage(damage, card);
                     
                     grave.remove(card);
                     removed.add(card);
@@ -2248,7 +2248,7 @@ public class CardFactory_Sorceries {
                     } else {
                         javax.swing.JOptionPane.showMessageDialog(null, "Erratic Explosion causes " + damage
                                 + " to " + getTargetPlayer());
-                        AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
+                        getTargetPlayer().addDamage(damage, card);
                     }
                 }
                 
@@ -4752,8 +4752,8 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                	AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, 4);
-                	AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, 4);
+                	AllZone.HumanPlayer.addDamage(4, card);
+                	AllZone.ComputerPlayer.addDamage(4, card);
                 }
                 
                 @Override
@@ -5068,8 +5068,8 @@ public class CardFactory_Sorceries {
                   for(int i = 0; i < all.size(); i++)
                       	all.get(i).addDamage(card.getXManaCostPaid(), card);
                   
-                  AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, damage);
-                  AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, damage);
+                  AllZone.HumanPlayer.addDamage(damage, card);
+                  AllZone.ComputerPlayer.addDamage(damage, card);
                   
       			card.setXManaCostPaid(0);
       		}
@@ -5137,8 +5137,8 @@ public class CardFactory_Sorceries {
                   for(int i = 0; i < all.size(); i++)
                       	all.get(i).addDamage(card.getXManaCostPaid(), card);
                   
-                  AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, damage);
-                  AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, damage);
+                  AllZone.HumanPlayer.addDamage(damage, card);
+                  AllZone.ComputerPlayer.addDamage(damage, card);
                   
       			card.setXManaCostPaid(0);
       		}
@@ -5264,8 +5264,8 @@ public class CardFactory_Sorceries {
                   for(int i = 0; i < all.size(); i++)
                       	all.get(i).addDamage(card.getXManaCostPaid(), card);
                   
-                  AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, damage);
-                  AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, damage);
+                  AllZone.HumanPlayer.addDamage(damage, card);
+                  AllZone.ComputerPlayer.addDamage(damage, card);
                   
       			card.setXManaCostPaid(0);
       		}
@@ -5936,7 +5936,7 @@ public class CardFactory_Sorceries {
 							AllZone.GameAction.removeFromGame(graveList.get(j));
 						}
 					}
-					AllZone.GameAction.addDamage(tPlayer, card, damage);
+					tPlayer.addDamage(damage, card);
 				}
 				
 				@Override
@@ -6217,8 +6217,8 @@ public class CardFactory_Sorceries {
         			CardList humanLands = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
         			CardList compLands = AllZoneUtil.getPlayerLandsInPlay(AllZone.ComputerPlayer);
         			
-        			AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, compLands.size());
-        			AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, humanLands.size());
+        			AllZone.ComputerPlayer.addDamage(compLands.size(), card);
+        			AllZone.HumanPlayer.addDamage(humanLands.size(), card);
         		}// resolve()
 
         		@Override
@@ -6306,7 +6306,7 @@ public class CardFactory_Sorceries {
                     } else {
                         javax.swing.JOptionPane.showMessageDialog(null, cardName+" causes " + damage
                                 + " to " + getTargetPlayer());
-                        AllZone.GameAction.addDamage(getTargetPlayer(), card, damage);
+                        getTargetPlayer().addDamage(damage, card);
                     }
                     //System.out.println("Library after: "+AllZoneUtil.getPlayerCardsInLibrary(card.getController()));
                 }
@@ -6538,7 +6538,7 @@ public class CardFactory_Sorceries {
         				if( null != targetPlayers[i] ) {
         					//DEBUG
         					Log.debug("Fireball", "Fireball does "+damage+" to: "+targetPlayers[i]);
-        					AllZone.GameAction.addDamage(targetPlayers[i], card, damage);
+        					targetPlayers[i].addDamage(damage, card);
         				}
         			}
         		}//resolve()
@@ -7297,7 +7297,7 @@ public class CardFactory_Sorceries {
                         	AllZone.GameAction.removeFromGame(c);
                     }
                     
-                    AllZone.GameAction.addDamage(card.getController(), card, 5);
+                    card.getController().addDamage(5, card);
                 }//resolve()
             };//SpellAbility
             
@@ -7506,8 +7506,8 @@ public class CardFactory_Sorceries {
 				@Override
         		public void resolve() {
         			int counters = getTargetPlayer().getPoisonCounters();
-        			AllZone.GameAction.addDamage(getTargetPlayer(), card, counters);
-        			getTargetPlayer().addPoisonCounters(-counters);
+        			getTargetPlayer().addDamage(counters, card);
+        			getTargetPlayer().subtractPoisonCounters(counters);
         		}// resolve()
 
         		@Override
@@ -7560,7 +7560,7 @@ public class CardFactory_Sorceries {
 						AllZone.Display.getChoiceOptional(card+" - Revealed card", new Card[] {topCard});
 
 						//deal damage to player
-						AllZone.GameAction.addDamage(opponent, card, damage);
+						opponent.addDamage(damage, card);
 
 						//deal damage to all opponent's creatures
 						CardList creatures = AllZoneUtil.getCreaturesInPlay(opponent);
