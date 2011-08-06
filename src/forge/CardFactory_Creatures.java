@@ -3350,62 +3350,6 @@ public class CardFactory_Creatures {
             copyTokens1.setStackDescription(sb.toString());
         }//*************** END ************ END **************************
         
-
-        //*************** START *********** START **************************
-        else if(cardName.equals("Pestermite")) {
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                        if(c.isTapped()) c.untap();
-                        else c.tap();
-                    }
-                }
-            };
-            Command intoPlay = new Command() {
-                private static final long serialVersionUID = 5202575895575352408L;
-                
-                public void execute() {
-                    CardList all = AllZoneUtil.getCardsInPlay();
-                    
-                    CardList hum = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-                    
-                    if(all.size() != 0) {
-                        if(card.getController().isHuman()) {
-                            AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(ability, all,
-                                    "Select target permanent to tap/untap.", true, false));
-                            ButtonUtil.enableAll();
-                        } else {
-                            Card human = CardFactoryUtil.AI_getBestCreature(hum);
-                            ability.setTargetCard(human);
-                            AllZone.Stack.add(ability);
-                        }
-                    }
-                    
-                }//execute()
-            };//Command
-            card.addComesIntoPlayCommand(intoPlay);
-            
-            card.clearSpellAbility();
-            card.addSpellAbility(new Spell_Permanent(card) {
-                private static final long serialVersionUID = -3055232264358172133L;
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = CardFactoryUtil.AI_getHumanCreature(card, true);
-                    list = list.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return c.isUntapped();
-                        }
-                    });
-                    
-                    return (list.size() > 0) && AllZone.getZone(getSourceCard()).is(Constant.Zone.Hand);
-                }
-            });
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Mystic Snake")) {
