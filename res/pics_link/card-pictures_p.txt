@@ -329,6 +329,7 @@ pooling_venom.jpg	http://[server]/FUT/Pooling%20Venom.full.jpg
 porphyry_nodes.jpg	http://[server]/PLC/Porphyry%20Nodes.full.jpg
 port_inspector.jpg	http://[server]/MM/Port%20Inspector.full.jpg
 portcullis.jpg	http://[server]/SH/Portcullis.full.jpg
+portent.jpg	http://[server]/5E/Portent.full.jpg
 possessed_aven.jpg	http://[server]/TO/Possessed%20Aven.full.jpg
 possessed_barbarian.jpg	http://[server]/TO/Possessed%20Barbarian.full.jpg
 possessed_centaur.jpg	http://[server]/TO/Possessed%20Centaur.full.jpg
