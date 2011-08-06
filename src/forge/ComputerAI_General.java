@@ -152,7 +152,7 @@ public class ComputerAI_General implements Computer {
             		return true;
             	
                 if(c.isLand()) return false;
-                if(c.isCreature() && c.getKeyword().contains("Haste")) return true;
+                if(c.isCreature() && (c.getKeyword().contains("Haste")) || c.getKeyword().contains("Exalted")) return true;
                 CardList Vengevines = new CardList();
                 Vengevines.addAll(AllZone.getZone(Constant.Zone.Graveyard, "Computer").getCards());       
                 Vengevines = Vengevines.getName("Vengevine");
