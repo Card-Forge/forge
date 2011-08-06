@@ -8976,8 +8976,6 @@ public class GameActionUtil {
 		Brawn.execute();
 		Filth.execute();
 		Dauntless_Escort.execute();
-	
-		Baru.execute();
 
 		//Souls_Attendant.execute();
 		Wirewood_Hivemaster.execute();
@@ -10096,66 +10094,6 @@ public class GameActionUtil {
 			}// for
 		}// execute
 	}; // Windwright Mage
-	
-	public static Command Baru                        = new Command() {
-		private static final long serialVersionUID = 7535910275326543185L;
-
-		CardList                  old              = new CardList();
-
-		public void execute() {
-			// get all Forests
-			CardList all = new CardList();
-			all.addAll(AllZone.Human_Battlefield.getCards());
-			all.addAll(AllZone.Computer_Battlefield.getCards());
-			CardList current = all.getType("Forest");
-
-			for(int outer = 0; outer < current.size(); outer++) {
-				if(old.contains(current.get(outer))) continue;
-
-				final CardList test = all.getName("Baru, Fist of Krosa");
-				SpellAbility ability = new Ability(current.get(outer), "0") {
-					@Override
-					public void resolve() {
-						Card c = test.get(0);
-
-						CardList all = new CardList(
-								AllZone.getZone(
-										Constant.Zone.Battlefield,
-										c.getController()).getCards());
-
-						all = all.filter(new CardListFilter() {
-							public boolean addCard(Card c) {
-								return c.isCreature() && c.isGreen();
-							}
-						});
-
-						for(int i = 0; i < all.size(); i++) {
-							all.get(i).addTempAttackBoost(1);
-							all.get(i).addTempDefenseBoost(1);
-							all.get(i).addExtrinsicKeyword(
-									"Trample");
-
-							final Card c1 = all.get(i);
-							AllZone.EndOfTurn.addUntil(new Command() {
-								private static final long serialVersionUID = 3659932873866606966L;
-
-								public void execute() {
-									c1.addTempAttackBoost(-1);
-									c1.addTempDefenseBoost(-1);
-									c1.removeExtrinsicKeyword("Trample");
-								}
-							});
-						}// for
-					}
-				};
-				ability.setStackDescription("Baru, Fist of Krosa - creatures get +1/+1 until end of turn.");
-
-				if(!all.getName("Baru, Fist of Krosa").isEmpty()) AllZone.Stack.add(ability);
-			}// outer for
-
-			old = current;
-		}// execute()
-	}; // Baru
 
 	public static Command Wirewood_Hivemaster         = new Command() {
 		private static final long serialVersionUID = -6440532066018273862L;
