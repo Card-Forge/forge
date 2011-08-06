@@ -3785,13 +3785,18 @@ public class CardFactory implements NewConstants {
                     for (Card c:targets) {
                         
                         if (AllZone.GameAction.isCardInZone(c, grave)) {
+                            
                             if (Destination.equals("Hand")) {
                                 PlayerZone zone = AllZone.getZone(Constant.Zone.Hand, player);
                                 AllZone.GameAction.moveTo(zone, c);
-                                
-                            } else {
+                            }
+                            else if (Destination.equals("Battlefield")) {
                                 PlayerZone zone = AllZone.getZone(Constant.Zone.Play, player);
                                 AllZone.GameAction.moveTo(zone, c);
+                            }
+                            else if (Destination.equals("TopofLibrary")) {
+                                // PlayerZone zone = AllZone.getZone(Constant.Zone.Play, player);
+                                AllZone.GameAction.moveToTopOfLibrary(c);
                             }
                         }
                     }
@@ -3880,7 +3885,6 @@ public class CardFactory implements NewConstants {
                     list = list.getValidCards(Tgts);
                     return list;
                 }
-                
             };// Input
             
             spRtrnTgt.setBeforePayMana(target);
