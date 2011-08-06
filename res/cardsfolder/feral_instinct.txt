@@ -1,0 +1,9 @@
+Name:Feral Instinct
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$Pump|Cost$1 G|ValidTgts$Creature|NumAtt$+1|NumDef$+1|SpellDescription$Target creature gets +1/+1 until end of turn.
+K:Draw a card at the beginning of the next turn's upkeep.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_instinct.jpg
+End
