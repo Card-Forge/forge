@@ -13888,7 +13888,7 @@ Flash
 Necropotence
 B B B
 Enchantment
-Skip your draw step. If you would discard a card from your hand, remove that card from the game instead. Pay 1 life: Set aside the top card of your library face down. At the end of your turn, put that card into your hand.
+Skip your draw step. If you would discard a card from your hand, remove that card from the game instead.
 
 Yawgmoth's Bargain
 4 B B
