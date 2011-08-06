@@ -470,7 +470,7 @@ public class AbilityFactory_ChangeZone {
         		c = basicManaFixing(fetchList, type);
         	else if (fetchList.getNotType("Creature").size() == 0)
         		c = CardFactoryUtil.AI_getBestCreature(fetchList); 	//if only creatures take the best
-        	else if (destination.equals("Battlefield"))
+        	else if (destination.equals("Battlefield") || destination.equals("Graveyard"))
         		c = CardFactoryUtil.AI_getMostExpensivePermanent(fetchList, af.getHostCard(), false);
         	else if (destination.equals("Exile")){
         		// Exiling your own stuff, if Exiling opponents stuff choose best
