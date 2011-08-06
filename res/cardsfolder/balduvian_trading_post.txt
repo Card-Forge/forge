@@ -1,0 +1,10 @@
+Name:Balduvian Trading Post
+ManaCost:no cost
+Types:Land
+Text:If CARDNAME would enter the battlefield, sacrifice an untapped Mountain instead. If you do, put CARDNAME onto the battlefield. If you don't, put it into its owner's graveyard.
+K:tap: add 1 R
+A:AB$DealDamage | Cost$ 1 T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target attacking creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/balduvian_trading_post.jpg
+End

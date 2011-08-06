@@ -1743,24 +1743,31 @@ class CardFactory_Lands {
 
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Kjeldoran Outpost")) {
+        else if(cardName.equals("Kjeldoran Outpost") || cardName.equals("Balduvian Trading Post")
+        		||cardName.equals("Heart of Yavimaya")) {
+        	
+        	final String[] type = new String[1];
+        	if(cardName.equals("Kjeldoran Outpost")) type[0] = "Plains";
+        	else if(cardName.equals("Balduvian Trading Post")) type[0] = "Mountain";
+        	else if(cardName.equals("Heart of Yavimaya")) type[0] = "Forest";
+        	
         	final Command comesIntoPlay = new Command() {
         		private static final long serialVersionUID = 6175830918425915833L;
         		final Player player = card.getController();
         		public void execute() {
-        			CardList plains = AllZoneUtil.getPlayerTypeInPlay(player, "Plains");
+        			CardList land = AllZoneUtil.getPlayerTypeInPlay(player, type[0]);
 
         			if( player.equals(AllZone.ComputerPlayer)) {
-        				if( plains.size() > 0 ) {
-        					CardList tappedPlains = new CardList(plains.toArray());
-        					tappedPlains = tappedPlains.filter(AllZoneUtil.tapped);
+        				if( land.size() > 0 ) {
+        					CardList tappedLand = new CardList(land.toArray());
+        					tappedLand = tappedLand.filter(AllZoneUtil.tapped);
         					//if any are tapped, sacrifice it
         					//else sacrifice random
-        					if( tappedPlains.size() > 0 ) {
-        						AllZone.GameAction.sacrifice(tappedPlains.get(0));
+        					if( tappedLand.size() > 0 ) {
+        						AllZone.GameAction.sacrifice(tappedLand.get(0));
         					}
         					else {
-        						AllZone.GameAction.sacrifice(plains.get(0));
+        						AllZone.GameAction.sacrifice(land.get(0));
         					}
         				}
         				else {
@@ -1771,7 +1778,7 @@ class CardFactory_Lands {
         				Input target = new Input() {
         					private static final long serialVersionUID = 6653677835621129465L;
         					public void showMessage() {
-        						AllZone.Display.showMessage(cardName+" - Select one plains to sacrifice");
+        						AllZone.Display.showMessage(cardName+" - Select one "+type[0]+" to sacrifice");
         						ButtonUtil.enableOnlyCancel();
         					}
         					public void selectButtonCancel() {
@@ -1779,7 +1786,7 @@ class CardFactory_Lands {
         						stop();
         					}
         					public void selectCard(Card c, PlayerZone zone) {
-        						if(c.isLand() && zone.is(Constant.Zone.Battlefield) && c.getType().contains("Plains")) {
+        						if(c.isLand() && zone.is(Constant.Zone.Battlefield) && c.getType().contains(type[0])) {
         							AllZone.GameAction.sacrifice(c);
         							stop();
         						}
