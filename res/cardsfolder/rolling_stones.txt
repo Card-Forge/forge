@@ -3,6 +3,7 @@ ManaCost:1 W
 Types:Enchantment
 Text:Wall creatures can attack as though they didn't have defender.
 SVar:PlayMain1:TRUE
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rolling_stones.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/38.jpg
