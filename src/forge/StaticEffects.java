@@ -128,7 +128,6 @@ public class StaticEffects
 		
 		cardToEffectsList.put("Windwright Mage", new String[] {"Windwright_Mage"});
 		cardToEffectsList.put("Wolf", new String[] {"Sound_the_Call_Wolf"});
-		cardToEffectsList.put("Wren's Run Packmaster", new String[] {"Wrens_Run_Packmaster"});
 		
 		cardToEffectsList.put("Zulaport Enforcer", new String[] {"Zulaport_Enforcer"});
 	}

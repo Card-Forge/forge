@@ -1,8 +1,9 @@
 Name:Wren's Run Packmaster
 ManaCost:3 G
 Types:Creature Elf Warrior
-Text:Champion an Elf.\r\nEach Wolf you control has deathtouch.
+Text:Champion an Elf (When this enters the battlefield, sacrifice it unless you exile another Elf you control. When this leaves the battlefield, that card returns to the battlefield.)
 PT:5/5
+K:stPumpAll:Wolf.YouCtrl:0/0/Deathtouch:No Condition:Each Wolf you control has deathtouch. (Any amount of damage it deals to a creature is enough to destroy that creature.)
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrens_run_packmaster.jpg

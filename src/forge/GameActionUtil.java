@@ -12912,40 +12912,6 @@ public class GameActionUtil {
 		}// execute()
 	};
 	
-	public static Command Wrens_Run_Packmaster        = new Command() {
-
-		private static final long serialVersionUID   = 6089293045852070662L;
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Deathtouch";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Wren's Run Packmaster");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
-				creature = creature.getType("Wolf");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-
 	/*
 	public static Command Serra_Avatar                = new Command() {
 		private static final long serialVersionUID = -7560281839252561370L;
@@ -16140,7 +16106,6 @@ public class GameActionUtil {
 		commands.put("Vexing_Beetle", Vexing_Beetle);
 		
 		commands.put("Windwright_Mage", Windwright_Mage);
-		commands.put("Wrens_Run_Packmaster", Wrens_Run_Packmaster);
 		
 		commands.put("Zulaport_Enforcer", Zulaport_Enforcer);
 		
