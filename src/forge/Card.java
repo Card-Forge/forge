@@ -187,7 +187,7 @@ public class Card extends MyObservable
 	  return !hasFirstStrike() || (hasFirstStrike() && hasDoubleStrike());
   };
   
-  //for Planeswalker abilities and Effects (like Wither), Doubling Season gets ignored.
+  //for Planeswalker abilities and Combat Damage (like Wither), Doubling Season gets ignored.
   public void addCounterFromNonEffect(Counters counterName, int n)
   {
 	  if(counters.containsKey(counterName))
@@ -684,7 +684,7 @@ public class Card extends MyObservable
   public String getController(){return controller;}
 
   public void setName(String s)                {name = s; this.updateObservers();}
-  public void setOwner(String player)        {owner = player;}
+  public void setOwner(String player)        {owner = player; this.updateObservers();}
   public void setController(String player){controller = player; this.updateObservers();}
 
   public ArrayList<Card> getEquippedBy() 

@@ -4230,7 +4230,8 @@ public class CardFactory implements NewConstants {
         {
           if(AllZone.GameAction.isCardInPlay(getTargetCard()) && CardFactoryUtil.canTarget(card,getTargetCard()) )
           {
-            CardFactoryUtil.makeToken("Ape", "G 3 3 Ape", card, "G", new String[] {"Creature", "Ape"}, 3, 3, new String[] {""} );
+            CardFactoryUtil.makeToken("Ape", "G 3 3 Ape", AllZone.GameAction.getOpponent(card.getController()), "G", 
+            						  new String[] {"Creature", "Ape"}, 3, 3, new String[] {""} );
             AllZone.GameAction.destroyNoRegeneration(getTargetCard());
           }
         }//resolve()
@@ -5593,7 +5594,8 @@ public class CardFactory implements NewConstants {
         {
           if(AllZone.GameAction.isCardInPlay(getTargetCard())  && CardFactoryUtil.canTarget(card, getTargetCard()) )
           {
-            CardFactoryUtil.makeToken("Shapeshifter", "C 1 1 Shapeshifter", card, "", new String[] {"Creature", "Shapeshifter"}, 1, 1, new String[] {"Changeling"} );
+            CardFactoryUtil.makeToken("Shapeshifter", "C 1 1 Shapeshifter", AllZone.GameAction.getOpponent(card.getController()), "", 
+            						  new String[] {"Creature", "Shapeshifter"}, 1, 1, new String[] {"Changeling"} );
             //remove card from play
             AllZone.GameAction.removeFromGame(getTargetCard());
           }
@@ -17259,7 +17261,12 @@ return land.size() > 1 && CardFactoryUtil.AI_isMainPhase();
 		c.setType(sim.getType());
 		c.setText(sim.getSpellText());
 		c.setManaCost(sim.getManaCost());
-
+		
+		if (!sim.getOwner().equals(""))
+			c.setOwner(sim.getOwner());
+		if (!sim.getController().equals(""))
+			c.setController(sim.getController());
+		
 		return c;
 	}// copyStats()
 

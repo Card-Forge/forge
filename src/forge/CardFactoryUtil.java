@@ -3185,8 +3185,8 @@ public class CardFactoryUtil
 	  c.setName(name);
 	  c.setImageName(imageName);
 	  
-	  c.setOwner(source.getController());
 	  c.setController(source.getController());
+	  c.setOwner(source.getOwner());
 	  
 	  c.setManaCost(manaCost);
 	  c.setToken(true);
@@ -3216,6 +3216,45 @@ public class CardFactoryUtil
 	  return list;
 	  
   }
+  
+  public static CardList makeToken(String name, String imageName, String controller, String manaCost, String[] types, int baseAttack, int baseDefense,
+		   	   String[] intrinsicKeywords)
+	{
+		CardList list = new CardList();
+		Card c = new Card();
+		c.setName(name);
+		c.setImageName(imageName);
+		
+		c.setController(controller);
+		c.setOwner(controller);
+		
+		c.setManaCost(manaCost);
+		c.setToken(true);
+		
+		for (String t : types)
+		c.addType(t);
+		
+		c.setBaseAttack(baseAttack);
+		c.setBaseDefense(baseDefense);
+		
+		for (String kw : intrinsicKeywords)
+			c.addIntrinsicKeyword(kw);
+		
+		PlayerZone play = AllZone.getZone(Constant.Zone.Play, controller);
+		
+		int multiplier = 1;
+		int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", controller).size();
+		if (doublingSeasons > 0)
+		multiplier = (int) Math.pow(2, doublingSeasons);
+		
+		for (int i=0;i<multiplier;i++) {
+			Card temp = CardFactory.copyStats(c);
+			temp.setToken(true);
+			play.add(temp);
+			list.add(temp);
+		}
+		return list;
+	}
   
   //may return null
   static public Card getRandomCard(CardList list)

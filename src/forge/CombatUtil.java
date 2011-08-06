@@ -1146,7 +1146,6 @@ public class CombatUtil
 			        	        	  crd.enchantCard(target);
 			        			  }
 			        		  }
-			        		  
 			        	  }
 			        	  AllZone.GameAction.shuffle(c.getController());
 			        	  //we have to have cards like glorious anthem take effect immediately:

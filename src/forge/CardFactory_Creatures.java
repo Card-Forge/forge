@@ -1343,8 +1343,9 @@ public class CardFactory_Creatures {
 	      {
 	        public void resolve()
 	        {
+	          String opp = AllZone.GameAction.getOpponent(card.getController());
 	          for(int i = 0; i < 5; i++)
-	        	  CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", card, "R", new String[]{"Creature", "Goblin"}, 1, 1, new String[] {""});
+	        	  CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", opp, "R", new String[]{"Creature", "Goblin"}, 1, 1, new String[] {""});
 	        }
 	      };//SpellAbility
 
@@ -1369,8 +1370,9 @@ public class CardFactory_Creatures {
 	      {
 	        public void resolve()
 	        {
+	          String opp = AllZone.GameAction.getOpponent(card.getController());
 	          for(int i = 0; i < 2; i++)
-	        	  CardFactoryUtil.makeToken("Centaur", "G 3 3 Centaur", card, "G", new String[]{"Creature", "Centaur"}, 3, 3, 
+	        	  CardFactoryUtil.makeToken("Centaur", "G 3 3 Centaur", opp, "G", new String[]{"Creature", "Centaur"}, 3, 3, 
 	        			  					new String[] {"Protection from black"});
 	        }
 	      };//SpellAbility
@@ -1393,9 +1395,11 @@ public class CardFactory_Creatures {
 	    {
 	      final SpellAbility ability = new Ability(card, "0")
 	      {
+	    	
 	        public void resolve()
 	        {	
-	        	CardFactoryUtil.makeToken("Horror", "B 4 4 Horror", card, "B", new String[]{"Creature", "Horror"}, 4, 4, new String[] {""});
+	        	String opp = AllZone.GameAction.getOpponent(card.getController());
+	        	CardFactoryUtil.makeToken("Horror", "B 4 4 Horror", opp, "B", new String[]{"Creature", "Horror"}, 4, 4, new String[] {""});
 	        }
 	      };//SpellAbility
 
@@ -1420,8 +1424,9 @@ public class CardFactory_Creatures {
 	      {
 	        public void resolve()
 	        {
+	          String opp = AllZone.GameAction.getOpponent(card.getController());
 	          for(int i = 0; i < 3; i++)
-	        	  CardFactoryUtil.makeToken("Knight", "W 2 2 Knight", card, "W", new String[]{"Creature", "Knight"}, 2, 2, new String[] {"First Strike"});
+	        	  CardFactoryUtil.makeToken("Knight", "W 2 2 Knight", opp, "W", new String[]{"Creature", "Knight"}, 2, 2, new String[] {"First Strike"});
 	        }
 	      };//SpellAbility
 
@@ -1446,8 +1451,9 @@ public class CardFactory_Creatures {
 	      {
 	        public void resolve()
 	        {
+	          String opp = AllZone.GameAction.getOpponent(card.getController());
 	          for(int i = 0; i < 4; i++)
-	        	  CardFactoryUtil.makeToken("Faerie", "U 1 1 Faerie", card, "U", new String[]{"Creature", "Faerie"}, 1, 1, new String[] {"Flying"});
+	        	  CardFactoryUtil.makeToken("Faerie", "U 1 1 Faerie", opp, "U", new String[]{"Creature", "Faerie"}, 1, 1, new String[] {"Flying"});
 	        }
 	      };//SpellAbility
 
@@ -16238,9 +16244,37 @@ public class CardFactory_Creatures {
 								if (o != null)
 								{
 									PlayerZone play = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+									PlayerZone oppPlay = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
 									Card c = (Card)o;
 									lib.remove(c);
 									play.add(c);
+									
+									if (c.isAura())
+						        	{  
+						        		  Object obj = null;
+						        		  if (c.getKeyword().contains("Enchant creature"))
+						        		  {
+							        		  CardList creats = new CardList(play.getCards());
+							        		  creats.addAll(oppPlay.getCards());
+							        		  creats = creats.getType("Creature");
+							        		  obj = AllZone.Display.getChoiceOptional("Pick a creature to attach "+c.getName() + " to",creats.toArray() );
+						        		  }
+						        		  else if (c.getKeyword().contains("Enchant land") || c.getKeyword().contains("Enchant land you control"))
+						        		  {
+						        			  CardList lands = new CardList(play.getCards());
+							        		  //lands.addAll(oppPlay.getCards());
+							        		  lands = lands.getType("Land");
+							        		  if (lands.size() > 0)
+							        			  obj = AllZone.Display.getChoiceOptional("Pick a land to attach "+c.getName() + " to",lands.toArray() );
+						        		  }
+						        		  if (obj != null)
+						        		  {
+						        			  Card target = (Card)obj;
+						        			  if(AllZone.GameAction.isCardInPlay(target)) {
+						        	        	  c.enchantCard(target);
+						        			  }
+						        		  }
+						        	}
 								}
 							}
 							AllZone.GameAction.removeFromGame(card);
