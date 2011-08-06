@@ -669,6 +669,9 @@ public class MagicStack extends MyObservable {
 		
 		if (sp.getTargetCard() != null)
 			CardFactoryUtil.checkTargetingEffects(sp, sp.getTargetCard());
+
+        if(simultaneousStackEntryList.size() > 0)
+            AllZone.Phase.passPriority();
 	}
 
 	public int size() {
@@ -923,6 +926,11 @@ public class MagicStack extends MyObservable {
 	public Object getComputerCreatureSpellCount() {
 		return ComputerCreatureSpellCount;
 	}
+
+    public boolean hasSimultaneousStackEntries()
+    {
+        return simultaneousStackEntryList.size() > 0;
+    }
 
     public void addSimultaneousStackEntry(SpellAbility sa)
     {

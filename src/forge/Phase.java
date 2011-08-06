@@ -534,7 +534,8 @@ public class Phase extends MyObservable
     			pPlayerPriority = getPlayerTurn();	// this needs to be set early as we exit the phase
     		}
     		else{
-    			AllZone.Stack.resolveStack();
+                if(!AllZone.Stack.hasSimultaneousStackEntries())
+    			    AllZone.Stack.resolveStack();
     		}
             AllZone.Stack.chooseOrderOfSimultaneousStackEntryAll();
     	}
