@@ -1,3 +1,9 @@
+Disorient
+3 U
+Instant
+no text
+spPumpTgt:-7/-0
+
 Feldon's Cane
 1
 Artifact
