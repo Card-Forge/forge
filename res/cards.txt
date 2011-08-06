@@ -1,3 +1,76 @@
+Chain Reaction
+2 R R
+Sorcery
+no text
+spDamageAll:Creature:X:Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield.
+SVar:X:Count$TypeOnBattlefield.Creature
+
+Desert Sandstorm
+2 R
+Sorcery
+no text
+spDamageAll:Creature:1:Desert Sandstorm deals 1 damage to each creature.
+
+Evaporate
+2 R
+Sorcery
+no text
+spDamageAll:Creature.White,Creature.Blue:1:Evaporate deals 1 damage to each creature that's white or blue.
+SVar:RemAIDeck:True
+
+Fire Tempest
+5 R R
+Sorcery
+no text
+spDamageAll:Player,Creature:5:Fire Tempest deals 5 damage to each creature and each player.
+
+Rain of Embers
+1 R
+Sorcery
+no text
+spDamageAll:Player,Creature:1:Rain of Embers deals 1 damage to each creature and each player.
+
+Seismic Shudder
+1 R
+Instant
+no text
+spDamageAll:Creature.withoutFlying:1:Seismic Shudder deals 1 damage to each creature without flying.
+
+Shadowstorm
+R
+Sorcery
+no text
+spDamageAll:Creature.withShadow:2:Shadowstorm deals 2 damage to each creature with shadow.
+SVar:RemAIDeck:True
+
+Steam Blast
+2 R
+Sorcery
+no text
+spDamageAll:Player,Creature:2:Steam Blast deals 2 damage to each creature and each player.
+
+Sulfurous Blast
+2 R R
+Instant
+no text
+spDamageAll:Player,Creature:X:Sulfurous Blast deals 2 damage to each creature and each player. If you cast this spell during your main phase, Sulfurous Blast deals 3 damage to each creature and each player instead.
+SVar:X:Count$IfMainPhase.3.2
+
+Swirling Sandstorm
+3 R
+Instant
+no text
+spDamageAll:Creature.withoutFlying:X:Threshold - Swirling Sandstorm deals 5 damage to each creature without flying if seven or more cards are in your graveyard.
+SVar:X:Count$Threshold.5.0
+
+Thunder of Hooves
+3 R
+Sorcery
+no text
+spDamageAll:Player,Creature.withoutFlying:X:Thunder of Hooves deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield.
+SVar:X:Count$TypeOnBattlefield.Beast
+SVar:RemAIDeck:True
+
 Kabira Crossroads
 no cost
 Land
