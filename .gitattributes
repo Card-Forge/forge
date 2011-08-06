@@ -1291,6 +1291,7 @@ res/cardsfolder/cunning_sparkmage.txt -text svneol=native#text/plain
 res/cardsfolder/curfew.txt svneol=native#text/plain
 res/cardsfolder/curiosity.txt -text svneol=native#text/plain
 res/cardsfolder/curse_of_chains.txt -text svneol=native#text/plain
+res/cardsfolder/curse_of_marit_lage.txt -text svneol=native#text/plain
 res/cardsfolder/curse_of_wizardry.txt -text svneol=native#text/plain
 res/cardsfolder/cursecatcher.txt -text svneol=native#text/plain
 res/cardsfolder/cursed_flesh.txt -text svneol=native#text/plain
