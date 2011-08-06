@@ -39,6 +39,15 @@ snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 brave_the_elements.jpg		http://www.wizards.com/global/images/magic/general/brave_the_elements.jpg
+perimeter_captain.jpg		http://www.wizards.com/global/images/magic/general/perimeter_captain.jpg
+sejiri_merfolk.jpg		http://www.wizards.com/global/images/magic/general/sejiri_merfolk.jpg
+windrider_eel.jpg		http://www.wizards.com/global/images/magic/general/windrider_eel.jpg
+territorial_baloth.jpg		http://www.wizards.com/global/images/magic/general/territorial_baloth.jpg
+plated_geopede.jpg		http://www.wizards.com/global/images/magic/general/plated_geopede.jpg
+hedron_rover.jpg		http://www.wizards.com/global/images/magic/general/hedron_rover.jpg
+hagra_crocodile.jpg		http://www.wizards.com/global/images/magic/general/hagra_crocodile.jpg
+steppe_lynx.jpg		http://www.wizards.com/global/images/magic/general/steppe_lynx.jpg
+talon_sliver.jpg		http://www.wizards.com/global/images/magic/general/talon_sliver.jpg
 stormscape_apprentice.jpg		http://www.wizards.com/global/images/magic/general/stormscape_apprentice.jpg
 stormscape_master.jpg		http://www.wizards.com/global/images/magic/general/stormscape_master.jpg
 thunderscape_apprentice.jpg		http://www.wizards.com/global/images/magic/general/thunderscape_apprentice.jpg
