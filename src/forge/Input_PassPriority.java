@@ -16,13 +16,17 @@ public class Input_PassPriority extends Input implements java.io.Serializable {
         }
         
         StringBuilder sb = new StringBuilder();
-        sb.append(AllZone.Phase.getPlayerTurn()).append("'s ").append(phase);
-        sb.append(": ").append(player).append(" has priority for Spells or Abilities. Stack is ");
+        
+        sb.append("Turn : ").append(AllZone.Phase.getPlayerTurn()).append("\n");
+        sb.append("Phase: ").append(phase).append("\n");
+        sb.append("Stack: ");
         if (AllZone.Stack.size() != 0)
-        	sb.append("not ");
-        
-        sb.append("Empty");
-        
+        	sb.append(AllZone.Stack.size()).append(" to Resolve.");
+        else
+        	sb.append("Empty");
+        sb.append("\n");
+        sb.append("Priority: ").append(player);
+
         AllZone.Display.showMessage(sb.toString());
     }
     
