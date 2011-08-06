@@ -3648,7 +3648,9 @@ public class CardFactory implements NewConstants {
         
         /**
          *  Generic return target card(s) from graveyard to Hand or Battlefield cards
-         *  spReturnTgt:{Num Cards/Parameters}:{Type}:{To Zone}:{DrawBack}
+         *  spReturnTgt:{Num Cards/Parameters}:{Type}:{To Zone}:{DrawBack}:{Spell Desc}
+         *  
+         *  DrawBack and Buyback is not yet implemented.
          */
         if (hasKeyword(card, "spReturnTgt") != -1) {
             int n = hasKeyword(card, "spReturnTgt");
@@ -3845,9 +3847,6 @@ public class CardFactory implements NewConstants {
                     return list;
                 }// getGraveyardList()
             };// spRtrnTgt
-            
-            // We have a null bug in here for the card Urborg Uprising. I am not sure
-            // how to fix it at this time. The card now has a note about this bug.
             
             Input target = new Input() {
                 private static final long serialVersionUID = 816838038180106359L;
