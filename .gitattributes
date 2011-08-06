@@ -1195,6 +1195,7 @@ res/cardsfolder/crypt_cobra.txt -text svneol=native#text/plain
 res/cardsfolder/crypt_creeper.txt -text svneol=native#text/plain
 res/cardsfolder/crypt_of_agadeem.txt -text svneol=native#text/plain
 res/cardsfolder/crypt_ripper.txt -text svneol=native#text/plain
+res/cardsfolder/crypt_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/cryptic_command.txt svneol=native#text/plain
 res/cardsfolder/crystal_ball.txt -text svneol=native#text/plain
 res/cardsfolder/crystal_chimes.txt svneol=native#text/plain
