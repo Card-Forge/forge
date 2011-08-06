@@ -721,7 +721,7 @@ public class CombatUtil {
             if(attacker.getKeyword().contains("Double Strike") || attacker.getKeyword().contains("First Strike")
             		&& !defender.getKeyword().contains("Indestructible") && !defender.getKeyword().contains("First Strike")) {
             	
-            	if(attackerDamage > defenderLife) return false;
+            	if(attackerDamage >= defenderLife) return false;
             	if(attackerDamage > 0 && attacker.getKeyword().contains("Deathtouch") ) return false;
             }
             
@@ -803,7 +803,7 @@ public class CombatUtil {
             if(defender.getKeyword().contains("Double Strike") || defender.getKeyword().contains("First Strike")
             		&& !attacker.getKeyword().contains("Indestructible") && !attacker.getKeyword().contains("First Strike")) {
             	
-            	if(defenderDamage > attackerLife) return false;
+            	if(defenderDamage >= attackerLife) return false;
             	if(defenderDamage > 0 && defender.getKeyword().contains("Deathtouch") ) return false;
             }
             
