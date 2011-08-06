@@ -11272,8 +11272,19 @@ public class GameActionUtil {
 
 		void addKeyword(Card SourceCard, CardList list, String[] Keyword_Details, int ANumber) {
 			// Initialize Variables
-			String[] Keyword = Keyword_Details[3].split("!");
+			String[] Keyword = Keyword_Details[3].split("/");
+			for(int i = 0; i < list.size(); i++) {
+				old[ANumber].add(list.get(i));
+				list.get(i).addSemiPermanentAttackBoost(Integer.valueOf(Keyword[0]));
+				list.get(i).addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[1]));
+				if (Keyword.length > 2) {
+					for(int j = 2; j < Keyword.length; j++) {
+						list.get(i).addExtrinsicKeyword(Keyword[j]);
+					}
+				}
+			}
 			// For each effect .....
+			/*
 			for(int a =0; a < Keyword.length;a++) {
 			int Count = list.size();
 			// .... For each card that needs the bonus, add the bonus
@@ -11290,91 +11301,73 @@ public class GameActionUtil {
 						int[] SetPTAmounts = SetPTBonus(SourceCard, Keyword_Details);
 						if(SetPTAmounts[0] != -9001) list.get(i).setBaseAttack(SetPTAmounts[0]);
 						if(SetPTAmounts[0] != -9001) list.get(i).setBaseDefense(SetPTAmounts[1]);
-					}*/
+					}
 			else if(Keyword[a].contains("Keyword")) {
 				list.get(i).addExtrinsicKeyword(Keyword[a].replaceFirst("Keyword/", ""));
 			 }
 			}
-			}
+			}*/
 		}
 		
 		void removeKeyword(CardList list , Card Source,int ANumber, int AbilityNumber, String LastKnownController) {
 			// Initialize Variables
-        	CardList List_Copy = new CardList();
-        	List_Copy.add(list);
-        	String keyword = "";
             String parse = Source.getKeyword().get(AbilityNumber).toString();                
             String k[] = parse.split(":");
                      
-            // Get the Effects from the Keyword
-            int Effects = 1;                   
-            String EffectParse = k[3];                
-            String Effect[] = EffectParse.split("!");
-            Effects = Effect.length;
-            for(int y = 0; y < Effects; y++) { 
-            /*if(Effect[y].contains("SetPT")) { // Auto reset for cards with SetPT
+     		 // Is the Card in the right location	 
+            boolean SourceCardinRightZone = true;
+            if(!AllZone.GameAction.isCardInPlay(Source)) SourceCardinRightZone = false;
+            if(k[1].equals("Graveyard") && !AllZone.GameAction.isCardInGrave(Source)) SourceCardinRightZone = false;
+            if(!LastKnownController.equals(Source.getController())) SourceCardinRightZone = false;
+            	
+      	    // If the Source Card is not in the right Location or the Special Conditions are no longer met - Then Remove Bonus
+            if(!SourceCardinRightZone || !SpecialConditionsMet(Source, k[4])) {
+        		for(int i = 0; i < list.size(); i++) {
+        			if(old[ANumber].contains(list.get(i))) {
+        				removeKeywords(Source, list.get(i), k, ANumber);
+        			}
+        		}
             	CardsWithKeyword.remove(Source);
             	InfoStorage[ANumber] = "-1";
-            	old[ANumber].remove(Source);
-            	Done = true;
-             }*/
-     		 // Is the Card in the right location	 
-            	boolean SourceCardinRightZone = true;
-            	if(!AllZone.GameAction.isCardInPlay(Source)) SourceCardinRightZone = false;
-            	if(k[1].equals("Graveyard") && !AllZone.GameAction.isCardInGrave(Source)) SourceCardinRightZone = false;
-            	if(!LastKnownController.equals(Source.getController())) SourceCardinRightZone = false;
-            	// Special Conditions
-      	      	boolean SpecialConditionsMet = true;
-      	      	CardList SpecialConditionsCardList = new CardList();
-      	      	if(k[4].contains("CardsInHandMore")) {
-   	      			SpecialConditionsCardList.clear();
-   	      			String Condition = k[4].split("/")[1];
-   	      			SpecialConditionsCardList.addAll(AllZone.getZone(Constant.Zone.Hand, Source.getController()).getCards());
-   	      			if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) SpecialConditionsMet = false;
-      	      	}
-      	      	// If the Source Card is not in the right Location or the Special Conditions are no longer met - Then Remove Bonus
-            	if(!SourceCardinRightZone || !SpecialConditionsMet) {
-            		if(Effects == y + 1) {
-            			CardsWithKeyword.remove(Source);
-            			InfoStorage[ANumber] = "-1";
-            		}
-            		for(int i = 0; i < List_Copy.size(); i++) {
-            			Card c = List_Copy.get(i);
-            			if(old[ANumber].contains(c)) {
-            				if(Effects == y + 1) old[ANumber].remove(c);
-            				if(Effect[y].contains("PTBonus")) {
-            					keyword = Effect[y]; 
-            					c.addSemiPermanentAttackBoost(Integer.valueOf(keyword.split("/")[1]) * -1);
-            					c.addSemiPermanentDefenseBoost(Integer.valueOf(keyword.split("/")[2]) * -1);
-            				} else if(Effect[y].contains("Keyword")) {
-            					keyword = Effect[y].split("/")[1];
-            					List_Copy.get(i).removeExtrinsicKeyword(keyword);
-            				}
-            			}
-            		}
-               }
-        // If a card under the influence of a source card is not in the right location - Then Remove Bonus
-			for(int i = 0; i < List_Copy.size(); i++) {
-				Card c = List_Copy.get(i);
-      	      	// Affected card has lost the requirements
+            }
+            // If a card under the influence of a source card is not in the right location or has lost the requirements - Then Remove Bonus
+			for(int i = 0; i < list.size(); i++) {
+				Card c = list.get(i);
       	      	String Affected = k[1];
       	      	final String Specific[] = Affected.split(",");
 				if(old[ANumber].contains(c) && (!AffectedCards(Source, k).contains(c) || !c.isValidCard(Specific))) {
-					if(Effects == y + 1) old[ANumber].remove(c);
-                    if(Effect[y].contains("PTBonus")) {
-                      	keyword = Effect[y]; 
-						c.addSemiPermanentAttackBoost(Integer.valueOf(keyword.split("/")[1]) * -1);
-						c.addSemiPermanentDefenseBoost(Integer.valueOf(keyword.split("/")[2]) * -1);
-					} 
-                    else if(Effect[y].contains("Keyword")) {
-						keyword = Effect[y].split("/")[1];
-						List_Copy.get(i).removeExtrinsicKeyword(keyword);
-					}
+					old[ANumber].remove(c);
+					removeKeywords(Source, c, k, ANumber);
 				}
-     		 }         	
-           }	
+     		 }         		
 		}
-
+		
+		void removeKeywords(Card SourceCard, Card affcard, String[] Keyword_Details, int ANumber) {
+			// Initialize Variables
+			String[] Keyword = Keyword_Details[3].split("/");
+			old[ANumber].remove(affcard);
+			affcard.addSemiPermanentAttackBoost(Integer.valueOf(Keyword[0]) * -1);
+			affcard.addSemiPermanentDefenseBoost(Integer.valueOf(Keyword[1]) * -1);
+			if (Keyword.length > 2) {
+				for(int j = 2; j < Keyword.length; j++) {
+					affcard.removeExtrinsicKeyword(Keyword[j]);
+				}
+			}
+		}
+		
+    	// Special Conditions
+		boolean SpecialConditionsMet(Card SourceCard, String SpecialConditions) {
+  	      	CardList SpecialConditionsCardList = new CardList();
+  	      	if(SpecialConditions.contains("CardsInHandMore")) {
+	      			SpecialConditionsCardList.clear();
+	      			String Condition = SpecialConditions.split("/")[1];
+	      			SpecialConditionsCardList.addAll(AllZone.getZone(Constant.Zone.Hand, SourceCard.getController()).getCards());
+	      			if(SpecialConditionsCardList.size() < Integer.valueOf(Condition)) return false;
+  	      	}
+  	      	return true;
+			
+		}
+		
 		CardList AffectedCards (Card SourceCard, String[] Keyword_Details) {
 			/** 
 			 	This Function is used for 2 purposes:
