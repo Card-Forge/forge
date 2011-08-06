@@ -219,6 +219,10 @@ public class ComputerAI_General implements Computer {
         all.addAll(AllZone.Computer_Hand.getCards());
         all.addAll(AllZone.Computer_Play.getCards());
         all.addAll(CardFactoryUtil.getFlashbackCards(Constant.Player.Computer).toArray());
+        
+        // Prevent the computer from summoning Ball Lightning type creatures during main phase 2
+        all = all.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+        
         all = all.filter(new CardListFilter() {
             public boolean addCard(Card c) {
                 if(c.isLand()) return false;

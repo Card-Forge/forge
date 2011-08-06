@@ -918,7 +918,7 @@ public class CardFactory_Sorceries {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Breath of Life") || cardName.equals("Resurrection")
+        else if(cardName.equals("Breath of Life")  || cardName.equals("Resurrection")
                 || cardName.equals("False Defeat") || cardName.equals("Zombify")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -5799646914112924814L;
