@@ -1,0 +1,9 @@
+Name:Naya Panorama
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+A:AB$Fetch|Cost$1 T Sac<1/CARDNAME>|Destination$Battlefield|Tapped$True|FetchType$Land.Mountain+Basic,Land.Forest+Basic,Land.Plains+Basic|FetchNum$1|SpellDescription$Search your library for a basic Mountain, Forest, or Plains card and put it onto the battlefield tapped. Then shuffle your library.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_panorama.jpg
+End
