@@ -8,12 +8,13 @@ import java.util.HashMap;
 
 //GainControl specific params:
 //	LoseControl - the lose control conditions (as a comma separated list)
-//			-Untap
-//			-LoseControl
+//			-Untap - source card becomes untapped
+//			-LoseControl - you lose control of source card
 //			-PowerGT - (not implemented yet for Old Man of the Sea)
 //	UntilEOT - set to True if this only lasts to end of turn (not implemented yet)
 //	AddKWs	- Keywords to add to the controlled card (like Haste, Sacrifice CARDNAME at EOT, any standard keyword) - not implemented yet
 //  OppChoice - set to True if opponent chooses creature (for Preacher) - not implemented yet
+//	Untap	- set to true if target card should untap when control is taken
 
 public class AbilityFactory_GainControl {
 	
@@ -23,12 +24,18 @@ public class AbilityFactory_GainControl {
 	private HashMap<String,String> params = null;
 	private Card hostCard = null;
 	private ArrayList<String> lose = null;
+	private boolean bUntap = false;
 	
 	public AbilityFactory_GainControl(AbilityFactory newAF) {
 		AF = newAF;
 		params = AF.getMapParams();
 		hostCard = AF.getHostCard();
 		lose = new ArrayList<String>(Arrays.asList(params.get("LoseControl").split(",")));
+		if(params.containsKey("Untap")) {
+			if(params.get("Untap").equals("True")) {
+				bUntap = true;
+			}
+		}
 	}
 	
 	public SpellAbility getSpell() {
@@ -157,7 +164,7 @@ public class AbilityFactory_GainControl {
                 ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(false);
                 ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(false);
                 
-                tgtC.setSickness(true);
+                //tgtC.setSickness(true);
                 tgtC.setController(hostCard.getController());
                 
                 PlayerZone from = AllZone.getZone(tgtC);
@@ -165,6 +172,8 @@ public class AbilityFactory_GainControl {
                 
                 PlayerZone to = AllZone.getZone(Constant.Zone.Play, tgtC.getController());
                 to.add(tgtC);
+                
+                if(bUntap) tgtC.untap();
                 
                 ((PlayerZone_ComesIntoPlay) AllZone.Human_Play).setTriggers(true);
                 ((PlayerZone_ComesIntoPlay) AllZone.Computer_Play).setTriggers(true);
