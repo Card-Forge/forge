@@ -1,0 +1,10 @@
+Name:Lodestone Myr
+ManaCost:4
+Types:Artifact Creature Myr
+Text:no text
+PT:3/3
+K:Trample
+K:abPump tapXType<1/Artifact>:+1/+1
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/lodestone_myr.jpg
+End
