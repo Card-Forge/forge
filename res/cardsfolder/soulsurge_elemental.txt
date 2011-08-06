@@ -2,8 +2,9 @@ Name:Soulsurge Elemental
 ManaCost:3 R
 Types:Creature Elemental
 Text:Soulsurge Elemental's power is equal to the number of creatures you control.
-PT:1/1
+PT:*/1
 K:First Strike
+K:stSetPT:Count$Valid Creature.YouCtrl:1:Soulsurge Elemental's power is equal to the number of creatures you control.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soulsurge_elemental.jpg
 SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/163.jpg

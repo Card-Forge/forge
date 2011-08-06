@@ -1,8 +1,9 @@
 Name:Bant Sureblade
 ManaCost:GU W
 Types:Creature Human Soldier
-Text:As long as you control another multicolored permanent, Bant Sureblade gets +1/+1 and has first strike.
+Text:no text
 PT:2/1
+K:stPumpSelf:Creature:1/1/First Strike:isPresent Permanent.MultiColor+Other+YouCtrl:As long as you control another multicolored permanent, Bant Sureblade gets +1/+1 and has first strike.
 SVar:BuffedBy:Permanent.MultiColor
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_sureblade.jpg

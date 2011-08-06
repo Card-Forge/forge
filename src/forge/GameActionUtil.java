@@ -14300,97 +14300,6 @@ public class GameActionUtil {
 
 	}; //Liu_Bei
 
-	
-	public static Command Bant_Sureblade              = new Command() {
-
-		private static final long serialVersionUID = 1987511205573387864L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Bant Sureblade");
-
-			if(list.size() > 0) {
-				for(int i = 0; i < list.size(); i++) {
-
-					Card c = list.get(i);
-					if(CardFactoryUtil.controlsAnotherMulticoloredPermanent(c)) {
-						c.setBaseAttack(3);
-						c.setBaseDefense(2);
-						if(!c.getIntrinsicKeyword().contains(
-								"First Strike")) c.addIntrinsicKeyword("First Strike");
-					} else {
-						c.setBaseAttack(2);
-						c.setBaseDefense(1);
-						if(c.getIntrinsicKeyword().contains(
-								"First Strike")) c.removeIntrinsicKeyword("First Strike");
-					}
-
-				}
-			}
-		}// execute()
-
-	}; //Bant_Sureblade
-
-	public static Command Esper_Stormblade            = new Command() {
-
-		private static final long serialVersionUID = 1799759665613654307L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Esper Stormblade");
-
-			if(list.size() > 0) {
-				for(int i = 0; i < list.size(); i++) {
-
-					Card c = list.get(i);
-					if(CardFactoryUtil.controlsAnotherMulticoloredPermanent(c)) {
-						c.setBaseAttack(3);
-						c.setBaseDefense(2);
-						if(!c.getIntrinsicKeyword().contains(
-								"Flying")) c.addIntrinsicKeyword("Flying");
-					} else {
-						c.setBaseAttack(2);
-						c.setBaseDefense(1);
-						if(c.getIntrinsicKeyword().contains(
-								"Flying")) c.removeIntrinsicKeyword("Flying");
-					}
-
-				}
-			}
-		}// execute()
-
-	}; //Esper_Stormblade
-
-	public static Command Grixis_Grimblade            = new Command() {
-
-		private static final long serialVersionUID = 5895665460018262987L;
-
-		public void execute() {
-			// get all creatures
-			CardList list = AllZoneUtil.getCardsInPlay("Grixis Grimblade");
-
-			if(list.size() > 0) {
-				for(int i = 0; i < list.size(); i++) {
-
-					Card c = list.get(i);
-					if(CardFactoryUtil.controlsAnotherMulticoloredPermanent(c)) {
-						c.setBaseAttack(3);
-						c.setBaseDefense(2);
-						if(!c.getIntrinsicKeyword().contains(
-								"Deathtouch")) c.addIntrinsicKeyword("Deathtouch");
-					} else {
-						c.setBaseAttack(2);
-						c.setBaseDefense(1);
-						if(c.getIntrinsicKeyword().contains(
-								"Deathtouch")) c.removeIntrinsicKeyword("Deathtouch");
-					}
-
-				}
-			}
-		}// execute()
-
-	}; //Grixis_Grimblade
-
 	public static Command Plague_Rats = new Command() {
 		private static final long serialVersionUID = 2333292591304646698L;
 
@@ -16331,7 +16240,7 @@ public class GameActionUtil {
 			return creatures.size();
 		}
 	};*/
-	
+	/*
 	public static Command Soulsurge_Elemental                   = new Command() {
 		private static final long serialVersionUID = 8607200838396348507L;
 
@@ -16345,7 +16254,7 @@ public class GameActionUtil {
 			}
 		}// execute()
 	};
-	
+	*/
 	public static void Elvish_Vanguard(Card c) {
 		final Card crd = c;
 
@@ -16391,7 +16300,6 @@ public class GameActionUtil {
 		//commands.put("Angry_Mob", Angry_Mob);
 		//commands.put("Aven_Trailblazer", Aven_Trailblazer);
 		
-		commands.put("Bant_Sureblade", Bant_Sureblade);
 		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
 		commands.put("Bloodghast", Bloodghast);
 		commands.put("Broodwarden", Broodwarden);
@@ -16412,7 +16320,6 @@ public class GameActionUtil {
 		//commands.put("Eldrazi_Monument", Eldrazi_Monument);
 		commands.put("Elspeth_Emblem", Elspeth_Emblem);
 		commands.put("Emperor_Crocodile", Emperor_Crocodile);
-		commands.put("Esper_Stormblade", Esper_Stormblade);
 		
 		commands.put("Faerie_Swarm", Faerie_Swarm);
 		
@@ -16421,7 +16328,6 @@ public class GameActionUtil {
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);
 		commands.put("Goblin_Assault", Goblin_Assault);
 		commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
-		commands.put("Grixis_Grimblade", Grixis_Grimblade);
 		commands.put("Guul_Draz_Specter", Guul_Draz_Specter);
 		commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
 		
@@ -16483,7 +16389,7 @@ public class GameActionUtil {
 		//commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
 		commands.put("Serra_Avatar", Serra_Avatar);
 		commands.put("Skywatcher_Adept", Skywatcher_Adept);
-		commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
+		//commands.put("Soulsurge_Elemental", Soulsurge_Elemental);
 		commands.put("Sound_the_Call_Wolf", Sound_the_Call_Wolf);
 		commands.put("Student_of_Warfare", Student_of_Warfare);
 		commands.put("Svogthos_the_Restless_Tomb", Svogthos_the_Restless_Tomb);

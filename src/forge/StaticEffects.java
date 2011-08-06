@@ -27,7 +27,6 @@ public class StaticEffects
 		cardToEffectsList.put("Avatar",  new String[] {"Ajani_Avatar_Token"});
 		//cardToEffectsList.put("Aven Trailblazer", new String[] {"Aven_Trailblazer"});
 		
-		cardToEffectsList.put("Bant Sureblade", new String[] {"Bant_Sureblade"});
 		cardToEffectsList.put("Beastbreaker of Bala Ged", new String[] {"Beastbreaker_of_Bala_Ged"});
 		cardToEffectsList.put("Bloodghast", new String[] {"Bloodghast"});
 		//cardToEffectsList.put("Broodstar", new String[] {"Master_of_Etherium"});
@@ -48,7 +47,6 @@ public class StaticEffects
 		
 		//cardToEffectsList.put("Eldrazi Monument", new String[] {"Eldrazi_Monument"});
 		cardToEffectsList.put("Emperor Crocodile", new String[] {"Emperor_Crocodile"});
-		cardToEffectsList.put("Esper Stormblade", new String[] {"Esper_Stormblade"});
 		
 		cardToEffectsList.put("Faerie Swarm", new String[] {"Faerie_Swarm"});
 		
@@ -57,7 +55,6 @@ public class StaticEffects
 		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
 		cardToEffectsList.put("Goblin Assault", new String[] {"Goblin_Assault"});
 		cardToEffectsList.put("Goblin Gaveleer", new String[] {"Goblin_Gaveleer"});
-		cardToEffectsList.put("Grixis Grimblade", new String[] {"Grixis_Grimblade"});
 		cardToEffectsList.put("Guul Draz Specter", new String[] {"Guul_Draz_Specter"});
 		cardToEffectsList.put("Guul Draz Vampire", new String[] {"Guul_Draz_Vampire"});
 		
@@ -118,7 +115,7 @@ public class StaticEffects
 		//cardToEffectsList.put("Serpent of the Endless Sea", new String[] {"Serpent_of_the_Endless_Sea"});
 		cardToEffectsList.put("Serra Avatar", new String[] {"Serra_Avatar"});
 		cardToEffectsList.put("Skywatcher Adept", new String[] {"Skywatcher_Adept"});
-		cardToEffectsList.put("Soulsurge Elemental", new String[] {"Soulsurge_Elemental"});
+		//cardToEffectsList.put("Soulsurge Elemental", new String[] {"Soulsurge_Elemental"});
 		cardToEffectsList.put("Student of Warfare", new String[]{"Student_of_Warfare"});
 		cardToEffectsList.put("Svogthos, the Restless Tomb", new String[] {"Svogthos_the_Restless_Tomb"});
 		
