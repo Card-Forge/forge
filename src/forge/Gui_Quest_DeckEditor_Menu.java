@@ -922,8 +922,11 @@ public class Gui_Quest_DeckEditor_Menu extends JMenuBar {
         deckMenu.add(save);
         deckMenu.add(copy);
         
-        deckMenu.addSeparator();//new code
-        deckMenu.add(addCard); //new code
+        // The "Cheat - Add Card" menu item is buggy.
+        // There are other, safer and less buggy ways for people to cheat.
+        
+        // deckMenu.addSeparator();//new code
+        // deckMenu.add(addCard); //new code
         
         deckMenu.addSeparator();
         addImportExport(deckMenu, true);
