@@ -6532,6 +6532,7 @@ res/cardsfolder/springing_tiger.txt -text svneol=native#text/plain
 res/cardsfolder/springjack_knight.txt svneol=native#text/plain
 res/cardsfolder/springjack_shepherd.txt -text svneol=native#text/plain
 res/cardsfolder/springleaf_drum.txt svneol=native#text/plain
+res/cardsfolder/sprite_noble.txt -text svneol=native#text/plain
 res/cardsfolder/sprout.txt -text svneol=native#text/plain
 res/cardsfolder/sprout_swarm.txt -text svneol=native#text/plain
 res/cardsfolder/sprouting_phytohydra.txt -text svneol=native#text/plain
