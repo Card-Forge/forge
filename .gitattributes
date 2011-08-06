@@ -3193,6 +3193,7 @@ res/cardsfolder/instill_infection.txt -text svneol=native#text/plain
 res/cardsfolder/insurrection.txt -text svneol=native#text/plain
 res/cardsfolder/intervene.txt -text svneol=native#text/plain
 res/cardsfolder/intimidation.txt -text svneol=native#text/plain
+res/cardsfolder/intimidator_initiate.txt -text svneol=native#text/plain
 res/cardsfolder/into_the_core.txt -text svneol=native#text/plain
 res/cardsfolder/into_the_north.txt -text svneol=native#text/plain
 res/cardsfolder/into_thin_air.txt -text svneol=native#text/plain
