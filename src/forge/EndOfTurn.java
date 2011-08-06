@@ -1,4 +1,6 @@
 package forge;
+
+import java.util.ArrayList;
 //import java.util.*;
 
 //handles "until end of turn" and "at end of turn" commands from cards
@@ -16,6 +18,40 @@ public class EndOfTurn implements java.io.Serializable
 
   public void executeAt()
   {
+	  // Whenever Keyword
+		CardList Cards_In_Play = new CardList();
+		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Human).getCards());
+		Cards_In_Play.addAll(AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer).getCards());
+		Cards_In_Play = Cards_In_Play.filter(new CardListFilter() {
+           public boolean addCard(Card c) {
+               if(c.getKeyword().toString().contains("WheneverKeyword")) return true;
+               return false;
+           }
+       });
+		boolean Triggered = false;
+		for(int i = 0; i < Cards_In_Play.size() ; i++) {	
+		if(Triggered == false) {	
+			Card card = Cards_In_Play.get(i);
+		        ArrayList<String> a = card.getKeyword();
+		        int WheneverKeywords = 0;
+		        int WheneverKeyword_Number[] = new int[a.size()];
+		        for(int x = 0; x < a.size(); x++)
+		            if(a.get(x).toString().startsWith("WheneverKeyword")) {
+		            	WheneverKeyword_Number[WheneverKeywords] = x;
+		            	WheneverKeywords = WheneverKeywords + 1;
+		            }
+		        for(int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
+               String parse = card.getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
+               String k[] = parse.split(":");
+               if((k[1].equals("BeginningOfEndStep"))) {
+              	 AllZone.GameAction.RunWheneverKeyword(card, "BeginningOfEndStep"); // Beached
+              	 Triggered = true;
+               }
+		        }
+		}
+		}
+		  // Whenever Keyword
+	  
     //Pyrohemia and Pestilence
     CardList all = new CardList();
     all.addAll(AllZone.Human_Play.getCards());

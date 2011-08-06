@@ -545,24 +545,13 @@ public class Card extends MyObservable {
         ArrayList<String> keyword = getKeyword();
         for(int i = 0; i < keyword.size(); i++) {
         	if(!keyword.get(i).toString().contains("CostChange")) {
-            if(i != 0) sb.append(", ");
-        	if(!keyword.get(i).toString().contains("WheneverKeyword")) sb.append(keyword.get(i).toString()); 
-        	else {
- 		        ArrayList<String> a = getKeyword();
- 		        int WheneverKeywords = 0;
- 		        int WheneverKeyword_Number[] = new int[a.size()];
- 		        for(int x = 0; x < a.size(); x++)
- 		            if(a.get(x).toString().startsWith("WheneverKeyword")) {
- 		            	WheneverKeyword_Number[WheneverKeywords] = x;
- 		            	WheneverKeywords = WheneverKeywords + 1;
- 		            }
- 		        for(int CKeywords = 0; CKeywords < WheneverKeywords; CKeywords++) {
-                 String parse = getKeyword().get(WheneverKeyword_Number[CKeywords]).toString();                
-                 String k[] = parse.split(":");
-                 sb.append(k[9]); 
-        	}
-        	}
-        	}
+                if(i != 0) sb.append(", ");
+            	if(!keyword.get(i).toString().contains("WheneverKeyword")) sb.append(keyword.get(i).toString()); 
+            	else {                
+                     String k[] = keyword.get(i).split(":");
+                     sb.append(k[9]); 
+            	}
+            	}
         }
         sb.append("\r\n");
         sb.append(text);

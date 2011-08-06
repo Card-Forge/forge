@@ -1,3 +1,12 @@
+Dross Harvester
+1 B B
+Creature Horror
+no text
+4/4
+Protection from white
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:No_Condition:No Special Condition:Whenever a creature is put into a graveyard from the battlefield, you gain 2 life.
+WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:ModifyLife/-4:ControllingPlayer_Self:ASAP:No_Condition:ControllerEndStep:At the beginning of your end step, you lose 4 life.
+
 Time Reversal
 3 U U
 Sorcery
@@ -181,7 +190,7 @@ Soulcatcher
 Creature Bird Soldier
 no text
 1/1
-WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initator - Has Keyword/Flying:Whenever a creature with flying is put into a graveyard from the battlefield, put a +1/+1 counter on Soulcatcher.
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/1:Self:ASAP:No_Condition:Initiator - Has Keyword/Flying:Whenever a creature with flying is put into a graveyard from the battlefield, put a +1/+1 counter on Soulcatcher.
 Flying
 
 Kresh the Bloodbraided
@@ -189,7 +198,7 @@ Kresh the Bloodbraided
 Legendary Creature Human Warrior
 no text
 3/3
-WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/Power:Self:ASAP:Yes_No:Initator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put X +1/+1 counters on Kresh the Bloodbraided, where X is that creature's power.
+WheneverKeyword:PermanentIntoGraveyard:Type/Creature:Play:+1+1 Counters/Power:Self:ASAP:Yes_No:Initiator - Other than Self:Whenever another creature is put into a graveyard from the battlefield, you may put X +1/+1 counters on Kresh the Bloodbraided, where X is that creature's power.
 
 Mind Peel
 B
