@@ -48,6 +48,7 @@ public enum Counters {
     TIDE(),
     TIME(),
     TOWER("tower"),
+    TREASURE(),
     VERSE(),
     WIND();
     

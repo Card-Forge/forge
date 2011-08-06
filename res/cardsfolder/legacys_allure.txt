@@ -1,0 +1,10 @@
+Name:Legacy's Allure
+ManaCost:U U
+Types:Enchantment
+Text:no text
+K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:CustomCounter.TREASURE/1:Self:ASAP:Yes_No:ControllerUpkeep:At the beginning of your upkeep, you may put a treasure counter on CARDNAME.
+A:AB$GainControl|Cost$Sac<1/CARDNAME>|ValidTgts$Creature.powerLEX|TgtPrompt$Select target creature with power less than or equal to the number of treasure counters.|SpellDescription$Gain control of target creature with power less than or equal to the number of treasure counters on CARDNAME. (This effect lasts indefinitely.)
+SVar:X:Count$CardCounters.TREASURE
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/legacys_allure.jpg
+End
