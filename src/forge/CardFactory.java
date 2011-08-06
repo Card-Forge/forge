@@ -2308,18 +2308,18 @@ public class CardFactory implements NewConstants {
             final boolean NoRegen[] = {false};
             final String Drawback[] = {"none"};
             
-            if (k.length > 3)
+            if (k.length > 2)
             {
-            	if (k[3].equals("NoRegen"))
+            	if (k[2].equals("NoRegen"))
             		NoRegen[0] = true;
             	
-            	else if (k[3].startsWith("Drawback$"))
-            		Drawback[0] = k[3];
+            	else if (k[2].startsWith("Drawback$"))
+            		Drawback[0] = k[2];
             	            	
-            	if (k.length > 4)
+            	if (k.length > 3)
             	{
-            		if (k[4].startsWith("Drawback$"))
-            			Drawback[0] = k[4];
+            		if (k[3].startsWith("Drawback$"))
+            			Drawback[0] = k[3];
             	}
             	
             	if (!Drawback[0].equals("none"))
