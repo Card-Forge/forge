@@ -166,8 +166,11 @@ public class AbilityFactory {
 			
 			if (hasValid){
 				// TgtPrompt now optional
+				StringBuilder sb = new StringBuilder();
+				sb.append(hostC + " - ");
 				String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " + mapParams.get("ValidTgts");
-				abTgt = new Target(hostC,prompt, mapParams.get("ValidTgts").split(","), min, max);
+				sb.append(prompt);
+				abTgt = new Target(hostC,sb.toString(), mapParams.get("ValidTgts").split(","), min, max);
 			}
 			else
 				abTgt = new Target(hostC,mapParams.get("Tgt"), min, max);

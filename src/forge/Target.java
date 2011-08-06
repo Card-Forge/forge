@@ -114,6 +114,7 @@ public class Target {
 
 		String valid;
 		String prompt;
+		StringBuilder sb = new StringBuilder();
 		
 		if (parse.equals("CP")){
 			valid = "Creature,Planeswalker.YouDontCtrl,Player";
@@ -132,7 +133,9 @@ public class Target {
 			return;
 		}
 		
-		vtSelection = prompt;
+		sb.append(src + " - ");
+		sb.append(prompt);
+		vtSelection = sb.toString();
 		ValidTgts = valid.split(",");
 		
 		minTargets = min;
