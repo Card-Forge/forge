@@ -440,7 +440,7 @@ public class Cost {
 			if (first)
 				cost.append("Untap ");
 			else
-				cost.append(", untap ");
+				cost.append(", untap");
 			first = false;
 		}
 		
