@@ -14137,7 +14137,7 @@ public class GameActionUtil {
 			creature = creature.filter(new CardListFilter() {
 				public boolean addCard(Card c) {
 					return c.getKeyword().contains(
-							"When you control no Islands, sacrifice this creature");
+							"When you control no Islands, sacrifice CARDNAME.");
 				}
 			});
 

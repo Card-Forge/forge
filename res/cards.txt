@@ -1,17 +1,60 @@
-Armored Galleon
-4 U
-Creature Human Pirate
-no text
-5/4
-CARDNAME can't attack unless defending player controls an Island.
-
 Dandan
 U U
 Creature Fish
 no text
 4/1
 CARDNAME can't attack unless defending player controls an Island.
-When you control no Islands, sacrifice this creature
+When you control no Islands, sacrifice CARDNAME.
+
+Manta Ray
+1 U U
+Creature Fish
+Manta Ray can't be blocked except by blue creatures.
+3/3
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice CARDNAME.
+
+Pirate Ship
+4 U
+Creature Human Pirate
+no text
+4/3
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice CARDNAME.
+
+Sea Serpent
+5 U
+Creature Serpent
+no text
+5/5
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice CARDNAME.
+
+Slipstream Serpent
+7 U
+Creature Serpent
+no text
+6/6
+Morph:5 U
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice CARDNAME.
+
+Vodalian Knights
+1 U U
+Creature Merfolk Knight
+no text
+2/2
+First Strike
+CARDNAME can't attack unless defending player controls an Island.
+When you control no Islands, sacrifice CARDNAME.
+abPump U:Flying
+
+Armored Galleon
+4 U
+Creature Human Pirate
+no text
+5/4
+CARDNAME can't attack unless defending player controls an Island.
 
 Deep-Sea Serpent
 4 U U
@@ -28,22 +71,6 @@ no text
 CARDNAME can't attack unless defending player controls an Island.
 Flying
 
-Manta Ray
-1 U U
-Creature Fish
-Manta Ray can't be blocked except by blue creatures.
-3/3
-CARDNAME can't attack unless defending player controls an Island.
-When you control no Islands, sacrifice this creature
-
-Pirate Ship
-4 U
-Creature Human Pirate
-no text
-4/3
-CARDNAME can't attack unless defending player controls an Island.
-When you control no Islands, sacrifice this creature
-
 Red Cliffs Armada
 4 U
 Creature Human Soldier
@@ -57,14 +84,6 @@ Creature Serpent
 no text
 6/6
 CARDNAME can't attack unless defending player controls an Island.
-
-Sea Serpent
-5 U
-Creature Serpent
-no text
-5/5
-CARDNAME can't attack unless defending player controls an Island.
-When you control no Islands, sacrifice this creature
 
 Serpent of the Endless Sea
 4 U
@@ -81,31 +100,12 @@ no text
 CARDNAME can't attack unless defending player controls an Island.
 Cycling:1 U
 
-Slipstream Serpent
-7 U
-Creature Serpent
-no text
-6/6
-Morph:5 U
-CARDNAME can't attack unless defending player controls an Island.
-When you control no Islands, sacrifice this creature
-
 Steam Frigate
 2 U
 Creature Human Pirate
 no text
 3/3
 CARDNAME can't attack unless defending player controls an Island.
-
-Vodalian Knights
-1 U U
-Creature Merfolk Knight
-no text
-2/2
-First Strike
-CARDNAME can't attack unless defending player controls an Island.
-When you control no Islands, sacrifice this creature
-abPump U:Flying
 
 Wu Warship
 2 U
