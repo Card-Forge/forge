@@ -6939,7 +6939,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Hammerfist Giant")) {
-            final Ability_Tap ability = new Ability_Tap(card) {
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
                 private static final long serialVersionUID = 1089840397064226840L;
                 
                 @Override
@@ -6971,13 +6972,11 @@ public class CardFactory_Creatures {
                 }//resolve()
             };//SpellAbility
             card.addSpellAbility(ability);
-            ability.setDescription("tap: Hammerfist Giant deals 4 damage to each creature without flying and each player.");
-            ability.setStackDescription("Hammerfist Giant - deals 4 damage to each creature without flying and each player.");
-            ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
+            ability.setDescription(abCost+cardName+" deals 4 damage to each creature without flying and each player.");
+            ability.setStackDescription(cardName+" - deals 4 damage to each creature without flying and each player.");
         }//*************** END ************ END **************************
         
 
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Stangg")) {
             
@@ -10142,7 +10141,8 @@ public class CardFactory_Creatures {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Stern Judge")) {
-            final Ability_Tap ability = new Ability_Tap(card) {
+        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
+            final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
                 private static final long serialVersionUID = 3059547795996737707L;
                 
                 @Override
@@ -10171,7 +10171,6 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             ability.setDescription("tap: Each player loses 1 life for each Swamp he or she controls.");
             ability.setStackDescription("Stern Judge - Each player loses 1 life for each Swamp he or she controls");
-            ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
         }//*************** END ************ END **************************
   
         
