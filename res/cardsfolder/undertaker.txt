@@ -1,0 +1,9 @@
+Name:Undertaker
+ManaCost:1 B
+Types:Creature Human Spellshaper
+Text:no text
+PT:1/1
+A:AB$ChangeZone | Cost$ B T Discard<1/Any> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target creature card from your graveyard to your hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/undertaker.jpg
+End
