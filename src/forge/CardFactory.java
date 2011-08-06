@@ -21744,7 +21744,7 @@ public class CardFactory implements NewConstants {
         		@Override
         		public boolean canPlay() {
         			PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-        			return library.getCards().length != 0;
+        			return library.getCards().length != 0 && super.canPlay();
         		}
 
         		@Override
