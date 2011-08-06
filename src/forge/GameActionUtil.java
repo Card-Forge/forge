@@ -2005,6 +2005,31 @@ public class GameActionUtil
 		drawCardTriggered_Niv_Mizzet(player);
 		drawCardTriggered_Hoofprints_of_the_Stag(player);
 		drawCardTriggered_Lorescale_Coatl(player);
+		drawCardTriggered_Underworld_Dreams(player);
+	}
+	
+	public static void drawCardTriggered_Underworld_Dreams(String player)
+	{
+		PlayerZone playZone = AllZone.getZone(Constant.Zone.Play, AllZone.GameAction.getOpponent(player));
+		CardList list = new CardList(playZone.getCards());
+		final String player_d = player;
+		list = list.getName("Underworld Dreams");
+		
+		for(int i=0;i<list.size();i++)
+		{
+			Card c = list.get(i);
+			final Ability ability = new Ability(c, "0")
+			{
+				public void resolve()
+				{
+	 		      
+					AllZone.GameAction.getPlayerLife(player_d).subtractLife(1);
+			 	}
+			};
+			ability.setStackDescription(list.get(i) + " - Deals 1 damage to him or her");
+		    AllZone.Stack.add(ability);
+			
+		}		
 	}
 	
 	public static void drawCardTriggered_Lorescale_Coatl(String player)

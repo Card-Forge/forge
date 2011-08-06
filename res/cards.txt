@@ -1,3 +1,8 @@
+Underworld Dreams
+B B B
+Enchantment
+Whenever an opponent draws a card, Underworld Dreams deals 1 damage to him or her.
+
 Phytohydra
 2 W W G
 Creature Plant Hydra
