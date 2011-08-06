@@ -4485,7 +4485,8 @@ Green creatures you control get +0/+2.
 Spidersilk Net
 0
 Artifact Equipment
-Equipped creature gets +0/+2 and has reach. 
+Equipped creature gets +0/+2 and has reach.
+VanillaEquipment:0:2:2:Reach:none:none
 
 Accumulated Knowledge
 1 U
@@ -5734,6 +5735,7 @@ Trailblazer's Boots
 2
 Artifact Equipment
 Equipped creature has nonbasic landwalk.
+VanillaEquipment:0:0:2:Nonbasic landwalk:none:none
 
 Trusty Machete
 1
