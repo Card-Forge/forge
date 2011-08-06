@@ -992,7 +992,9 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlay() {
-                return sourceCard.isFaceDown() && AllZone.GameAction.isCardInPlay(sourceCard) && super.canPlay();
+        		CardList Silence = AllZoneUtil.getPlayerCardsInPlay(AllZone.GameAction.getOpponent(getSourceCard().getController()));
+        		Silence = Silence.getName("Linvala, Keeper of Silence");
+                return sourceCard.isFaceDown() && AllZone.GameAction.isCardInPlay(sourceCard) && Silence.size() == 0;
             }
             
         };//morph_up
