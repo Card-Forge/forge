@@ -682,7 +682,10 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     
     private Deck generate2ColorDeck(String p)
     {
+    	Random r = new Random();
+    	
     	ArrayList<String> colors = new ArrayList<String>();
+    	colors.add("Random");
     	colors.add("White");
     	colors.add("Blue");
     	colors.add("Black");
@@ -694,16 +697,21 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     	{
     		c1 = AllZone.Display.getChoice("Select first color.", colors.toArray());
     	
+    		if (c1.toString().equals("Random"))
+    			c1 = colors.get(r.nextInt(colors.size() - 1) + 1);
+    		
     		colors.remove(c1);
     	
     		c2 = AllZone.Display.getChoice("Select second color.", colors.toArray());
+    		
+    		if (c2.toString().equals("Random"))
+    			c2 = colors.get(r.nextInt(colors.size() - 1) + 1);
     	}
     	else if (p.equals("C"))
     	{
-    		Random r = new Random();
-    		c1 = colors.get(r.nextInt(colors.size()));
+    		c1 = colors.get(r.nextInt(colors.size() - 1) + 1);
     		colors.remove(c1);
-    		c2 = colors.get(r.nextInt(colors.size()));
+    		c2 = colors.get(r.nextInt(colors.size() - 1) + 1);
     	}
     	Generate2ColorDeck gen = new Generate2ColorDeck(c1.toString(), c2.toString());
     	CardList d = gen.get2ColorDeck(60);
