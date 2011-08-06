@@ -2256,123 +2256,6 @@ public class Card extends MyObservable {
         return false;
     }
     
-    /*
-    // This takes a player and a card argument for YouCtrl and Other
-    public boolean isValidCards(String Restris[], Player You, Card source) {
-    	
-    	String Restriction[] = new String[Restris.length];
-    	String st = "";
-        for (int i=0; i<Restris.length; i++)
-        {
-        	Restriction[i] = Restris[i];
-        	if (Restriction[i].contains("Other"))
-            {
-                if (this.equals(source)) {
-                    st = "False"; 								//False restriction entries in the array will return false
-                 }
-                else st = Restriction[i].replaceAll(".Other", "");
-                Restriction[i] = st;
-            }
-        	else if (Restriction[i].contains("Self"))
-            {
-                if (!this.equals(source)) {
-                    st = "False"; 								//False restriction entries in the array will return false
-                 }
-                else st = Restriction[i].replaceAll(".Self", "");
-                Restriction[i] = st;
-            }
-        	if (Restriction[i].contains("Attached"))			// is this card attached to the source?
-            {
-        		if (!this.equipping.contains(source) && !this.enchanting.contains(source)) {
-                    st = "False"; 								//False restriction entries in the array will return false
-                 }
-                else st = Restriction[i].replaceAll(".Attached", "");
-                Restriction[i] = st;
-            }    
-            if (Restriction[i].contains("YouCtrl"))
-            {
-                if (!getController().isPlayer(You)) {
-                    st = "False"; 								//False restriction entries in the array will return false
-                 }
-                else st = Restriction[i].replaceAll(".YouCtrl", "");
-                Restriction[i] = st;
-            }
-            else if (Restriction[i].contains("YouDontCtrl"))
-            {
-                if (getController().isPlayer(You)) {
-                	st = "False"; 								//False restriction entries in the array will return false
-                }
-               else st = Restriction[i].replaceAll(".YouDontCtrl", "");
-               Restriction[i] = st;
-            }
-        }
-        return isValidCard(Restriction,null,null);
-    }
-    
-    // This takes a card argument Self, Attached and Other
-    public boolean isValidCard(String Restris[], Card source) {
-    	
-    	String Restriction[] = new String[Restris.length];
-    	String st = "";
-        for (int i=0; i<Restris.length; i++)
-        {
-        	Restriction[i] = Restris[i];
-        	if (Restriction[i].contains("Other"))
-            {
-                if (this.equals(source)) {
-                    st = "False"; 								//False restriction entries in the array will return false;
-                 }
-                else st = Restriction[i].replaceAll(".Other", "");
-                Restriction[i] = st;
-            }
-        	else if (Restriction[i].contains("Self"))
-            {
-                if (!this.equals(source)) {
-                    st = "False"; 								//False restriction entries in the array will return false
-                 }
-                else st = Restriction[i].replaceAll(".Self", "");
-                Restriction[i] = st;
-            }
-        	if (Restriction[i].contains("Attached"))			// is this card attached to the source?
-            {
-        		if (!this.equipping.contains(source) && !this.enchanting.contains(source)) {
-                    st = "False"; 								//False restriction entries in the array will return false
-                 }
-                else st = Restriction[i].replaceAll(".Attached", "");
-                Restriction[i] = st;
-            }    
-        }
-        return isValidCard(Restriction);
-    }
-    
-    // This takes a player argument YouCtrl and YouDontCtrl
-    public boolean isValidCard(String Restris[], Player You) {
-    	
-    	String Restriction[] = new String[Restris.length];
-    	String st = "";
-        for (int i=0; i<Restris.length; i++)
-        {
-        	Restriction[i] = Restris[i];
-            if (Restriction[i].contains("YouCtrl"))
-            {
-                if (!getController().isPlayer(You)) {
-                	st = "False"; 								//False restriction entries in the array will return false
-                 }
-                else st = Restriction[i].replaceAll(".YouCtrl", "");
-                Restriction[i] = st;
-            }
-            else if (Restriction[i].contains("YouDontCtrl"))
-            {
-                if (getController().isPlayer(You)) {
-                	st = "False"; 								//False restriction entries in the array will return false
-                }
-                else st = Restriction[i].replaceAll(".YouDontCtrl", "");
-                Restriction[i] = st;
-            }
-        }
-        return isValidCard(Restriction);
-    }*/
-    
     
     // Takes an array of arguments like Permanent.Blue+withFlying, only one of them has to be true
     public boolean isValidCard(final String Restrictions[], final Player sourceController, final Card source) {
@@ -2387,7 +2270,7 @@ public class Card extends MyObservable {
     }//isValidCard
     
     
-    // Takes an argument like Permanent.Blue+withFlying
+    // Takes one argument like Permanent.Blue+withFlying
     public boolean isValid(final String Restriction, final Player sourceController, final Card source) {
     	
         if (getName().equals("Mana Pool") || isImmutable()) return false;
@@ -2803,7 +2686,7 @@ public class Card extends MyObservable {
     	if(isCreature()) { //and not a planeswalker
     		if((source.isCreature() && AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this)))return 0;
     	
-    		if((isCombat && AllZoneUtil.isCardInPlay("Mark of Asylum", player)))return 0;
+    		if((!isCombat && AllZoneUtil.isCardInPlay("Mark of Asylum", player)))return 0;
     	
     		if((AllZoneUtil.isCardInPlay("Light of Sanction", player) && source.getController().isPlayer(player)))
     			return 0;

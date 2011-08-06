@@ -180,13 +180,15 @@ import java.util.Random;
         	if (!noPrevention)
         		restDamage = AllZone.HumanPlayer.staticDamagePrevention(restDamage,AF.getHostCard(),false);
         	
+        	if (restDamage == 0) return false;
+        	
             PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer);
             CardList hand = new CardList(compHand.getCards());
            
             if(AF.isSpell() && hand.size() > 7) // anti-discard-at-EOT
                return true;
            
-            if(AllZone.HumanPlayer.getLife() - d < 10) // if damage from this spell would drop the human to less than 10 life
+            if(AllZone.HumanPlayer.getLife() - restDamage < 10) // if damage from this spell would drop the human to less than 10 life
                return true;
            
             return false;

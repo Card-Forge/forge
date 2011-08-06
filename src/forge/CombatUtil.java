@@ -525,6 +525,7 @@ public class CombatUtil {
         return false; //should never arrive here
     } //canDestroyAttacker
     
+    
     public static boolean canDestroyBlocker(Card defender, Card attacker) {
     	
         int flankingMagnitude = 0;
