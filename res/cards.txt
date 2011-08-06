@@ -27,7 +27,7 @@ Loam Lion gets +1/+2 as long as you control a Forest.
 
 Hada Freeblade
 W
-Creature Humand Soldier Ally
+Creature Human Soldier Ally
 Whenever Hada Freeblade or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Hada Freeblade.
 0/1
 
