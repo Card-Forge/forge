@@ -20784,6 +20784,74 @@ public class CardFactory_Creatures {
             ability.setStackDescription(cardName + " - search for a creature card and put into hand");
             card.addSpellAbility(ability);
         }//*************** END ************ END ************************** 
+
+        
+        //*************** START *********** START **************************
+        else if(cardName.equals("Gwafa Hazid, Profiteer")) {
+            final Ability_Tap ability = new Ability_Tap(card, "W U") {
+                private static final long serialVersionUID = 8926798567122080343L;
+                
+                @Override
+                public void resolve() {
+                    Card tgtC = getTargetCard();
+                	if(AllZone.GameAction.isCardInPlay(tgtC) && CardFactoryUtil.canTarget(card, tgtC)) {
+                        tgtC.addCounter(Counters.BRIBERY, 1);
+                        
+                    }//is card in play?
+                }//resolve()
+                
+                @Override
+                public boolean canPlayAI() {
+                    CardList list = new CardList(AllZone.Human_Play.getCards());                    
+                    list = list.filter(new CardListFilter() {
+                        public boolean addCard(Card c) {
+                            return c.getCounters(Counters.BRIBERY) < 1 &&
+                                   CardFactoryUtil.canTarget(card, c) &&
+                                   c.isCreature();
+                        }
+                    });
+                    
+                    if(list.isEmpty()) return false;
+                    
+                    setTargetCard(list.get(CardUtil.getRandomIndex(list)));
+                    return true;
+                }//canPlayAI()
+            };//SpellAbility
+            card.addSpellAbility(ability);
+            ability.setDescription("W U, tap: Put a bribery counter on target creature you don't control.");
+            
+            ability.setBeforePayMana(new Input()
+            {
+            	private static final long serialVersionUID = 141164423096887945L;
+                        
+                @Override
+                public void showMessage() {
+                    AllZone.Display.showMessage("Select target creature you don't control");
+                    ButtonUtil.enableOnlyCancel();
+                }
+                
+                @Override
+                public void selectButtonCancel() {
+                    stop();
+                }
+                
+                @Override
+                public void selectCard(Card card, PlayerZone zone) {
+                    if(!CardFactoryUtil.canTarget(ability, card)) {
+                        AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
+                    } else if(card.isCreature() && zone.is(Constant.Zone.Play) && zone.getPlayer().equals(Constant.Player.Computer)) {
+                        ability.setTargetCard(card);
+                        done();
+                    }
+                }
+                
+                void done() {
+                    ability.getSourceCard().tap();
+                	stopSetNext(new Input_PayManaCost(ability));
+                }
+            });
+
+        }//*************** END ************ END **************************
         
         
         // Cards with Cycling abilities
