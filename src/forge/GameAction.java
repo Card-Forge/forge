@@ -1666,7 +1666,7 @@ public class GameAction {
                         						
                                             CardFactoryUtil.makeToken( F_TokenConditions[1], F_TokenConditions[2]+ " " + 
                                             		Integer.valueOf(F_TokenConditions[3])+ " " + Integer.valueOf(F_TokenConditions[4])
-                                             + " " + F_TokenConditions[1], F_card, Color, creatTypes, Integer.valueOf(F_TokenConditions[3]), 
+                                             + " " + F_TokenConditions[1], F_card.getController(), Color, creatTypes, Integer.valueOf(F_TokenConditions[3]), 
                                              Integer.valueOf(F_TokenConditions[4]), F_KeyWordConditions);
       			                      }
 

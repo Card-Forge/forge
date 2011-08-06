@@ -475,7 +475,7 @@ public class CardFactory_Creatures {
                 }//countGraveyard()
                 
                 void makeToken() {
-                    CardFactoryUtil.makeToken("Bear", "G 2 2 Bear", card, "W", new String[] {"Creature", "Bear"},
+                    CardFactoryUtil.makeToken("Bear", "G 2 2 Bear", card.getController(), "G", new String[] {"Creature", "Bear"},
                             2, 2, new String[] {""});
                 }//makeToken()
             };//SpellAbility
@@ -1046,7 +1046,7 @@ public class CardFactory_Creatures {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
                     CardList list = new CardList(play.getCards());
                     list = list.getType("Land");
-                    CardFactoryUtil.makeToken("Wurm", "G X X Wurm", card, "G", new String[] {"Creature", "Wurm"},
+                    CardFactoryUtil.makeToken("Wurm", "G X X Wurm", card.getController(), "G", new String[] {"Creature", "Wurm"},
                             list.size(), list.size(), new String[] {""});
                 }
             };
@@ -1887,7 +1887,7 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Bird", "R 4 4 Bird", card, "R", new String[] {"Creature", "Bird"},
+                    CardFactoryUtil.makeToken("Bird", "R 4 4 Bird", card.getController(), "R", new String[] {"Creature", "Bird"},
                             4, 4, new String[] {"Flying"});
                 }
             }; //ability
@@ -2265,7 +2265,7 @@ public class CardFactory_Creatures {
                 }
                 
                 void makeToken() {
-                    CardFactoryUtil.makeToken("Insect", "G 1 1 Insect", card, "G", new String[] {
+                    CardFactoryUtil.makeToken("Insect", "G 1 1 Insect", card.getController(), "G", new String[] {
                             "Creature", "Insect"}, 1, 1, new String[] {""});
                 }//makeToken()
             };//SpellAbility
@@ -2294,7 +2294,7 @@ public class CardFactory_Creatures {
                 }
                 
                 void makeToken() {
-                    CardFactoryUtil.makeToken("Hound", "G 1 1 Hound", card, "G", new String[] {
+                    CardFactoryUtil.makeToken("Hound", "G 1 1 Hound", card.getController(), "G", new String[] {
                             "Creature", "Hound"}, 1, 1, new String[] {""});
                 }//makeToken()
             };//SpellAbility
@@ -3933,7 +3933,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Kavu", "B 3 3 Kavu", card, "B", new String[] {"Creature", "Kavu"},
+                    CardFactoryUtil.makeToken("Kavu", "B 3 3 Kavu", card.getController(), "B", new String[] {"Creature", "Kavu"},
                             3, 3, new String[] {""});
                 }//resolve()
             };//Ability
@@ -3957,7 +3957,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Cat", "B 2 1 Cat", card, "B", new String[] {"Creature", "Cat"}, 2,
+                    CardFactoryUtil.makeToken("Cat", "B 2 1 Cat", card.getController(), "B", new String[] {"Creature", "Cat"}, 2,
                             1, new String[] {""});
                 }//resolve()
             };//Ability
@@ -3980,7 +3980,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Spider", "B 2 4 Spider", card, "B", new String[] {
+                    CardFactoryUtil.makeToken("Spider", "B 2 4 Spider", card.getController(), "B", new String[] {
                             "Creature", "Spider"}, 2, 4, new String[] {"Reach"});
                 }//resolve()
             };//Ability
@@ -4003,7 +4003,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Wurm", "B 6 6 Wurm", card, "B", new String[] {"Creature", "Wurm"},
+                    CardFactoryUtil.makeToken("Wurm", "B 6 6 Wurm", card.getController(), "B", new String[] {"Creature", "Wurm"},
                             6, 6, new String[] {"Trample"});
                 }//resolve()
             };//Ability
@@ -4785,7 +4785,7 @@ public class CardFactory_Creatures {
                 
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card, "G", new String[] {"Creature", "Wolf"},
+                    CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card.getController(), "G", new String[] {"Creature", "Wolf"},
                             2, 2, new String[] {""});
                 }
             };//SpellAbility
@@ -5336,7 +5336,7 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     int count = ((Integer) countZubera.execute()).intValue();
                     for(int i = 0; i < count; i++)
-                        CardFactoryUtil.makeToken("Spirit", "C 1 1 Spirit", card, "", new String[] {
+                        CardFactoryUtil.makeToken("Spirit", "C 1 1 Spirit", card.getController(), "", new String[] {
                                 "Creature", "Spirit"}, 1, 1, new String[] {""});
                 }//resolve()
             };//SpellAbility
@@ -8889,7 +8889,7 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -5126793112740563180L;
                 
                 public void execute() {
-                    CardFactoryUtil.makeToken("Spirit", "W 1 1 Spirit", card, "W", new String[] {
+                    CardFactoryUtil.makeToken("Spirit", "W 1 1 Spirit", card.getController(), "W", new String[] {
                             "Creature", "Spirit"}, 1, 1, new String[] {"Flying"});
                 }//execute()
             };//Command
@@ -9206,7 +9206,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    CardList cl = CardFactoryUtil.makeToken("Stangg Twin", "RG 3 4 Stangg Twin", card, "R G",
+                    CardList cl = CardFactoryUtil.makeToken("Stangg Twin", "RG 3 4 Stangg Twin", card.getController(), "R G",
                             new String[] {"Legendary", "Creature", "Human", "Warrior"}, 3, 4, new String[] {""});
                     
                     cl.get(0).addLeavesPlayCommand(new Command() {
@@ -9504,7 +9504,7 @@ public class CardFactory_Creatures {
                 
                 void makeToken() {
                     CardList cl = CardFactoryUtil.makeToken("Goldmeadow Harrier", "W 1 1 Goldmeadow Harrier",
-                            card, "W", new String[] {"Creature", "Kithkin", "Soldier"}, 1, 1, new String[] {""});
+                    		card.getController(), "W", new String[] {"Creature", "Kithkin", "Soldier"}, 1, 1, new String[] {""});
                     
                     for(final Card c:cl) {
                         final SpellAbility ability = new Ability_Tap(c, "W") {
@@ -10081,7 +10081,7 @@ public class CardFactory_Creatures {
                 
                 
                 public void makeToken() {
-                    CardFactoryUtil.makeToken("Rat", "B 1 1 Rat", card, "B", new String[] {"Creature", "Rat"}, 1,
+                    CardFactoryUtil.makeToken("Rat", "B 1 1 Rat", card.getController(), "B", new String[] {"Creature", "Rat"}, 1,
                             1, new String[] {""});
                 }
                 
@@ -12168,9 +12168,9 @@ public class CardFactory_Creatures {
                 }//resolve()
                 
                 void makeTokens() {
-                    CardFactoryUtil.makeToken("Wurm", "C 3 3 Wurm Deathtouch", card, "", new String[] {
+                    CardFactoryUtil.makeToken("Wurm", "C 3 3 Wurm Deathtouch", card.getController(), "", new String[] {
                             "Artifact", "Creature", "Wurm"}, 3, 3, new String[] {"Deathtouch"});
-                    CardFactoryUtil.makeToken("Wurm", "C 3 3 Wurm Lifelink", card, "", new String[] {
+                    CardFactoryUtil.makeToken("Wurm", "C 3 3 Wurm Lifelink", card.getController(), "", new String[] {
                             "Artifact", "Creature", "Wurm"}, 3, 3, new String[] {"Lifelink"});
                 }//makeToken()
             };//Ability
@@ -14025,7 +14025,7 @@ public class CardFactory_Creatures {
                 }//resolve()
                 
                 void makeToken() {
-                    CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", card, "R", new String[] {
+                    CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", card.getController(), "R", new String[] {
                             "Creature", "Goblin"}, 1, 1, new String[] {""});
                 }
             };
@@ -16249,7 +16249,7 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     if(card.getCounters(Counters.TIME) <= 0) CardFactoryUtil.makeToken("Insect", "G 6 1 Insect",
-                            card, "G", new String[] {"Creature", "Insect"}, 6, 1, new String[] {"Shroud"});
+                    		card.getController(), "G", new String[] {"Creature", "Insect"}, 6, 1, new String[] {"Shroud"});
                 }
             };
             
@@ -17938,7 +17938,7 @@ public class CardFactory_Creatures {
                 }//resolve()
                 
                 public void makeToken() {
-                    CardFactoryUtil.makeToken("Kithkin Soldier", "W 1 1 Kithkin Soldier", card, "W", new String[] {
+                    CardFactoryUtil.makeToken("Kithkin Soldier", "W 1 1 Kithkin Soldier", card.getController(), "W", new String[] {
                             "Creature", "Kithkin", "Soldier"}, 1, 1, new String[] {""});
                 }
             };
@@ -18588,7 +18588,7 @@ public class CardFactory_Creatures {
             final Ability ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeToken("Tuktuk the Returned", "C 5 5 Tuktuk the Returned", card, "", 
+                    CardFactoryUtil.makeToken("Tuktuk the Returned", "C 5 5 Tuktuk the Returned", card.getController(), "", 
                     		new String[] {"Legendary", "Artifact", "Creature", "Goblin", "Golem"}, 5, 5, new String[] {""});
                 }//resolve()
             };//Ability
@@ -18793,7 +18793,7 @@ public class CardFactory_Creatures {
                 }//resolve()
                 
                 public void makeToken() {
-                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "", new String[] {
+                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(), "", new String[] {
 							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
         			for (Card crd:cl)
         				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
@@ -18826,7 +18826,7 @@ public class CardFactory_Creatures {
                 }//resolve()
                 
                 public void makeToken() {
-                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "", new String[] {
+                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(), "", new String[] {
 							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
         			for (Card crd:cl)
         				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
@@ -18857,7 +18857,7 @@ public class CardFactory_Creatures {
                 }//resolve()
                 
                 public void makeToken() {
-                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card, "", new String[] {
+                	CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", card.getController(), "", new String[] {
 							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
         			for (Card crd:cl)
         				crd.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(crd));
@@ -19255,7 +19255,7 @@ public class CardFactory_Creatures {
 				public void makeToken(Card c)
 				{
 					AllZone.GameAction.exile(c);
-            		CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", card, "B", new String[] {
+            		CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", card.getController(), "B", new String[] {
                             "Creature", "Zombie"}, 2, 2, new String[] {""});
 				}
 				
@@ -19756,7 +19756,7 @@ public class CardFactory_Creatures {
                 }
         
                 void makeToken() {
-                    CardFactoryUtil.makeToken("Insect", "G 1 1 Insect", card, "G", new String[] {
+                    CardFactoryUtil.makeToken("Insect", "G 1 1 Insect", card.getController(), "G", new String[] {
                             "Creature", "Insect"}, 1, 1, new String[] {""});
                 }//makeToken()
             };//SpellAbility
@@ -20005,7 +20005,7 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     
-                    CardFactoryUtil.makeToken("Bird", "W 3 3 Bird", card, "W", new String[] {"Creature", "Bird"},
+                    CardFactoryUtil.makeToken("Bird", "W 3 3 Bird", card.getController(), "W", new String[] {"Creature", "Bird"},
                             3, 3, new String[] {"Flying"});
                     
                 }// resolve()

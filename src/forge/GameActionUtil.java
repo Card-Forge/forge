@@ -2612,7 +2612,7 @@ public class GameActionUtil {
 				Ability ability2 = new Ability(card, "0") {
 					@Override
 					public void resolve() {
-						CardFactoryUtil.makeToken("Angel", "W 4 4 Angel", card, "W", new String[] {
+						CardFactoryUtil.makeToken("Angel", "W 4 4 Angel", card.getController(), "W", new String[] {
 								"Creature", "Angel"}, 4, 4, new String[] {"Flying"});
 					}
 				}; // ability2
@@ -2758,7 +2758,7 @@ public class GameActionUtil {
 					Ability ability2 = new Ability(card, "0") {
 						@Override
 						public void resolve() {
-							CardFactoryUtil.makeToken("Bird", "U 1 1 Bird", card, "U", new String[] {
+							CardFactoryUtil.makeToken("Bird", "U 1 1 Bird", card.getController(), "U", new String[] {
 									"Creature", "Bird"}, 1, 1, new String[] {"Flying"});
 						}
 					}; // ability2
@@ -2777,7 +2777,7 @@ public class GameActionUtil {
 				Ability ability = new Ability(card, "0") {
 					@Override
 					public void resolve() {
-						CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card, "G", new String[] {
+						CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", card.getController(), "G", new String[] {
 								"Creature", "Wolf"}, 2, 2, new String[] {""});
 					}
 				}; // ability
@@ -3807,9 +3807,9 @@ public class GameActionUtil {
 		list = list.getName("Predatory Advantage");
 		for (int i = 0; i < list.size(); i++) {
 		if(player == AllZone.HumanPlayer && Phase.PlayerCreatureSpellCount == 0) 
-			CardFactoryUtil.makeToken("Lizard", "G 2 2 Lizard", list.get(i), "G", new String[] {"Creature", "Lizard"}, 2, 2, new String[] {""});
+			CardFactoryUtil.makeToken("Lizard", "G 2 2 Lizard", list.get(i).getController(), "G", new String[] {"Creature", "Lizard"}, 2, 2, new String[] {""});
 			else if(player == AllZone.ComputerPlayer && Phase.ComputerCreatureSpellCount == 0) 
-				CardFactoryUtil.makeToken("Lizard", "G 2 2 Lizard", list.get(i), "G", new String[] {"Creature", "Lizard"}, 2, 2, new String[] {""});
+				CardFactoryUtil.makeToken("Lizard", "G 2 2 Lizard", list.get(i).getController(), "G", new String[] {"Creature", "Lizard"}, 2, 2, new String[] {""});
 		}
 	}
 	
@@ -4173,7 +4173,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", crd, "G", new String[] {"Creature", "Wolf"}, 2, 2,
+				CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", crd.getController(), "G", new String[] {"Creature", "Wolf"}, 2, 2,
 						new String[] {""});
 				crd.addCounter(Counters.P1P1, 1);
 			}
@@ -4386,7 +4386,7 @@ public class GameActionUtil {
 			}
 
 			public void makeToken() {
-				CardFactoryUtil.makeToken("Elf Warrior", "G 1 1 Elf Warrior", crd, "G", new String[] {
+				CardFactoryUtil.makeToken("Elf Warrior", "G 1 1 Elf Warrior", crd.getController(), "G", new String[] {
 						"Creature", "Elf", "Warrior"}, 1, 1, new String[] {""});
 			}
 		};
@@ -4447,7 +4447,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				CardFactoryUtil.makeToken("Graveborn", "BR 3 1 Graveborn", crd, "BR", new String[] {
+				CardFactoryUtil.makeToken("Graveborn", "BR 3 1 Graveborn", crd.getController(), "BR", new String[] {
 						"Creature", "Graveborn"}, 3, 1, new String[] {"Haste"});
 			}
 		};
@@ -4490,7 +4490,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", crd, "B", new String[] {"Creature", "Zombie"},
+				CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", crd.getController(), "B", new String[] {"Creature", "Zombie"},
 						2, 2, new String[] {""});
 			}
 		};
@@ -4728,7 +4728,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				CardFactoryUtil.makeToken("Beast", "G 4 4 Beast", crd, "G", new String[] {"Creature", "Beast"}, 4,
+				CardFactoryUtil.makeToken("Beast", "G 4 4 Beast", crd.getController(), "G", new String[] {"Creature", "Beast"}, 4,
 						4, new String[] {""});
 			}
 		};
@@ -4749,7 +4749,7 @@ public class GameActionUtil {
 		Ability ability = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				CardFactoryUtil.makeToken("Bird", "W 1 1 Bird", crd, "W", new String[] {"Creature", "Bird"}, 1, 1,
+				CardFactoryUtil.makeToken("Bird", "W 1 1 Bird", crd.getController(), "W", new String[] {"Creature", "Bird"}, 1, 1,
 						new String[] {"Flying"});
 			}
 		};
@@ -5106,7 +5106,7 @@ public class GameActionUtil {
 			public void resolve() {
 				Player opponent = src.getController().getOpponent();
 				
-				CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", src, "G",
+				CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", src.getController(), "G",
 						new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
 				
 				
@@ -5846,7 +5846,7 @@ public class GameActionUtil {
 		Ability ability2 = new Ability(c, "0") {
 			@Override
 			public void resolve() {
-				CardList cl = CardFactoryUtil.makeToken("Spawnwrithe", "", crd, "2 G", new String[] {
+				CardList cl = CardFactoryUtil.makeToken("Spawnwrithe", "", crd.getController(), "2 G", new String[] {
 						"Creature", "Elemental"}, 2, 2, new String[] {"Trample"});
 
 				for(Card c:cl) {
@@ -6642,7 +6642,7 @@ public class GameActionUtil {
 					Ability ability = new Ability(list.get(i), "0") {
 						@Override
 						public void resolve() {
-							CardFactoryUtil.makeToken("Dragon", "R 5 5 Dragon", c, "R", new String[] {
+							CardFactoryUtil.makeToken("Dragon", "R 5 5 Dragon", c.getController(), "R", new String[] {
 									"Creature", "Dragon"}, 5, 5, new String[] {"Flying"});
 						}
 
@@ -7159,7 +7159,7 @@ public class GameActionUtil {
 
 					if(creatureType.contains("Elf") || creatureType.contains("Shaman")
 							|| library.get(0).getKeyword().contains("Changeling")) {
-						CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", crd, "G",
+						CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", crd.getController(), "G",
 								new String[] {"Creature", "Wolf"}, 2, 2, new String[] {""});
 					}
 
@@ -8664,7 +8664,7 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					player.subtractLife(1,crd);
-					CardFactoryUtil.makeToken("Faerie Rogue", "B 1 1 Faerie Rogue", crd, "B", new String[] {
+					CardFactoryUtil.makeToken("Faerie Rogue", "B 1 1 Faerie Rogue", crd.getController(), "B", new String[] {
 							"Creature", "Faerie", "Rogue"}, 1, 1, new String[] {"Flying"});
 				}// resolve()
 			};// Ability
@@ -8687,7 +8687,7 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", crd, "R", new String[] {
+					CardFactoryUtil.makeToken("Goblin", "R 1 1 Goblin", crd.getController(), "R", new String[] {
 							"Creature", "Goblin"}, 1, 1, new String[] {"Haste"});
 				}// resolve()
 			};// Ability
@@ -8711,7 +8711,7 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", crd, "", new String[] {
+					CardList cl = CardFactoryUtil.makeToken("Eldrazi Spawn", "C 0 1 Eldrazi Spawn", crd.getController(), "", new String[] {
 							"Creature", "Eldrazi", "Spawn"}, 0, 1, new String[] {"Sacrifice CARDNAME: Add 1 to your mana pool."});
 					for (Card c:cl)
 						c.addSpellAbility(CardFactoryUtil.getEldraziSpawnAbility(c));
@@ -8737,7 +8737,7 @@ public class GameActionUtil {
 			ability = new Ability(list.get(i), "0") {
 				@Override
 				public void resolve() {
-					CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", crd, "G", new String[] {
+					CardFactoryUtil.makeToken("Squirrel", "G 1 1 Squirrel", crd.getController(), "G", new String[] {
 							"Creature", "Squirrel"}, 1, 1, new String[] {""});
 				}// resolve()
 			};// Ability
@@ -9152,11 +9152,11 @@ public class GameActionUtil {
 
 						if(q == null || q.equals("No")) return;
 						if(q.equals("Yes")) {
-							CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd, "G", new String[] {
+							CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd.getController(), "G", new String[] {
 									"Creature", "Beast"}, 3, 3, new String[] {""});
 						}
 					} else if(player.equals(AllZone.ComputerPlayer)) {
-						CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd, "G", new String[] {
+						CardFactoryUtil.makeToken("Beast", "G 3 3 Beast", crd.getController(), "G", new String[] {
 								"Creature", "Beast"}, 3, 3, new String[] {""});
 					}
 				}// resolve()
@@ -9509,7 +9509,7 @@ public class GameActionUtil {
 		list = list.getName("Master of the Wild Hunt");
 
 		for(int i = 0; i < list.size(); i++) {
-		    CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", list.get(i), "G", new String[] {
+		    CardFactoryUtil.makeToken("Wolf", "G 2 2 Wolf", list.get(i).getController(), "G", new String[] {
 		            "Creature", "Wolf"}, 2, 2, new String[] {""});
 		}
 	}// upkeep_Master_of_the_Wild_Hunt
@@ -9706,7 +9706,7 @@ public class GameActionUtil {
 					hondlist.addAll(Play.getCards());
 					hondlist = hondlist.getType("Shrine");
 					for(int j = 0; j < hondlist.size(); j++) {
-						CardFactoryUtil.makeToken("Spirit", "C 1 1 Spirit", crd, "", new String[] {
+						CardFactoryUtil.makeToken("Spirit", "C 1 1 Spirit", crd.getController(), "", new String[] {
 								"Creature", "Spirit"}, 1, 1, new String[] {""});
 					}
 				}
@@ -9866,11 +9866,11 @@ public class GameActionUtil {
 
 						if(q == null || q.equals("No")) return;
 						if(q.equals("Yes")) {
-							CardFactoryUtil.makeToken("Worm", "B G 1 1 Worm", crd, "B G", new String[] {
+							CardFactoryUtil.makeToken("Worm", "B G 1 1 Worm", crd.getController(), "B G", new String[] {
 									"Creature", "Worm"}, 1, 1, new String[] {""});
 						}
 					} else if(player.equals(AllZone.ComputerPlayer)) {
-						CardFactoryUtil.makeToken("Worm", "B G 1 1 Worm", crd, "B G", new String[] {
+						CardFactoryUtil.makeToken("Worm", "B G 1 1 Worm", crd.getController(), "B G", new String[] {
 								"Creature", "Worm"}, 1, 1, new String[] {""});
 					}
 				}// resolve()
@@ -9969,7 +9969,7 @@ public class GameActionUtil {
 					CardList list = AllZoneUtil.getPlayerCardsInPlay(player);
 					CardList blueList = list.getColor("U");
 					if (!blueList.isEmpty()) {
-						CardFactoryUtil.makeToken("Mirror-Sigil Sergeant","W 4 4 Mirror Sigil Sergeant", card, "5 W",
+						CardFactoryUtil.makeToken("Mirror-Sigil Sergeant","W 4 4 Mirror Sigil Sergeant", card.getController(), "5 W",
 								new String[]{"Creature","Rhino","Soldier"}, 4, 4, new String[]{"Trample",
 								"At the beginning of your upkeep, if you control a blue permanent, you may put a token that's a copy of Mirror-Sigil Sergeant onto the battlefield."});
 					}
@@ -13961,9 +13961,8 @@ public class GameActionUtil {
 					public void resolve() {
 						for(int i = 0; i < n[0]; i++) {
 							CardFactoryUtil.makeToken("Insect",
-									"G 1 1 Insect", crd, "G",
-									new String[] {
-									"Creature", "Insect"                                                      }, 1, 1, new String[] {""});
+									"G 1 1 Insect", crd.getController(), "G",
+									new String[] {"Creature", "Insect"}, 1, 1, new String[] {""});
 						}
 					}
 				};

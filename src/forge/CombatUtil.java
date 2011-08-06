@@ -1708,7 +1708,7 @@ public class CombatUtil {
                 Ability ability2 = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        CardFactoryUtil.makeToken("Cat Warrior", "G 2 2 Cat Warrior", jedit, "G", new String[] {
+                        CardFactoryUtil.makeToken("Cat Warrior", "G 2 2 Cat Warrior", jedit.getController(), "G", new String[] {
                                 "Creature", "Cat", "Warrior"}, 2, 2, new String[] {"Forestwalk"});
                         //(anger) :
                         //GameActionUtil.executeCardStateEffects(); 
@@ -1729,7 +1729,7 @@ public class CombatUtil {
                     @Override
                     public void resolve() {
                     	for (int i=0;i<2;i++)
-                    		CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", grave, "B", new String[] {
+                    		CardFactoryUtil.makeToken("Zombie", "B 2 2 Zombie", grave.getController(), "B", new String[] {
                                 "Creature", "Zombie"}, 2, 2, new String[] {""});
                         //(anger) :
                         //GameActionUtil.executeCardStateEffects(); 

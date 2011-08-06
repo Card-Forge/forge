@@ -1130,9 +1130,7 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 sourceCard.subtractCounter(Counters.SPORE, 3);
-                
-                makeToken("Saproling", "G 1 1 Saproling", sourceCard, "G", new String[] {
-                        "Creature", "Saproling"}, 1, 1, new String[] {""});
+                CardFactoryUtil.makeTokenSaproling(sourceCard.getController());
             }
         };
         ability.setDescription("Remove three spore counters from CARDNAME: Put a 1/1 green Saproling creature token onto the battlefield.");
@@ -4388,47 +4386,6 @@ public class CardFactoryUtil {
     		return lib.get(0);
     	else
     		return null;
-    }
-    
-    @Deprecated
-    public static CardList makeToken(String name, String imageName, Card source, String manaCost, String[] types, int baseAttack, int baseDefense, String[] intrinsicKeywords) {
-    	// todo(sol) this function shouldn't be called, better to call makeToken with Player controller as third paramter
-    	CardList list = new CardList();
-        Card c = new Card();
-        c.setName(name);
-        c.setImageName(imageName);
-        
-        //c.setController(source.getController());
-        //c.setOwner(source.getOwner());
-        
-        c.setManaCost(manaCost);	// todo: most tokens mana cost is 0, this needs to be fixed
-        c.addColor(manaCost);
-        c.setToken(true);
-        
-        for(String t:types)
-            c.addType(t);
-        
-        c.setBaseAttack(baseAttack);
-        c.setBaseDefense(baseDefense);
-        
-        for(String kw:intrinsicKeywords)
-            c.addIntrinsicKeyword(kw);
-        
-        PlayerZone play = AllZone.getZone(Constant.Zone.Play, source.getController());
-        
-        int multiplier = 1;
-        int doublingSeasons = CardFactoryUtil.getCards("Doubling Season", source.getController()).size();
-        if(doublingSeasons > 0) multiplier = (int) Math.pow(2, doublingSeasons);
-        
-        for(int i = 0; i < multiplier; i++) {
-            Card temp = CardFactory.copyStats(c);
-            temp.setToken(true);
-            temp.setController(source.getController());
-            temp.setOwner(source.getController());
-            play.add(temp);
-            list.add(temp);
-        }
-        return list;
     }
     
     public static CardList makeTokenSaproling(Player controller) {
