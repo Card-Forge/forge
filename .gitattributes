@@ -2085,6 +2085,7 @@ res/cardsfolder/essence_scatter.txt -text svneol=native#text/plain
 res/cardsfolder/essence_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/essence_warden.txt -text svneol=native#text/plain
 res/cardsfolder/etched_champion.txt -text svneol=native#text/plain
+res/cardsfolder/etched_monstrosity.txt -text svneol=native#text/plain
 res/cardsfolder/etched_oracle.txt -text svneol=native#text/plain
 res/cardsfolder/eternal_dragon.txt -text svneol=native#text/plain
 res/cardsfolder/eternal_flame.txt -text svneol=native#text/plain
