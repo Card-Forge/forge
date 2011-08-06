@@ -39,7 +39,7 @@ public class CardFactory_Instants {
         }//*************** END ************ END **************************
 
         //*************** START ********** START *************************
-        else if(cardName.equals("Regenerate"))
+        else if(cardName.equals("Regenerate") || cardName.equals("Death Ward"))
           {
           	card.clearSpellAbility();
           	final Card[] tgt = new Card[1];

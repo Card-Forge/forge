@@ -1,0 +1,8 @@
+Name:Death Ward
+ManaCost:W
+Types:Instant
+Text:Regenerate target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/death_ward.jpg
+End
