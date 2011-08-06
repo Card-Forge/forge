@@ -2147,7 +2147,6 @@ public class GameActionUtil {
 	}//Kor Firewalker
 	
 	public static void playCard_Curse_of_Wizardry(final Card c) {
-		System.out.println("In curse of wizardry");
 		CardList list = AllZoneUtil.getCardsInPlay("Curse of Wizardry");
 
 		if(list.size() > 0){
