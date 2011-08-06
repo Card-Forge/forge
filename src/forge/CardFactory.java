@@ -10532,7 +10532,7 @@ public class CardFactory implements NewConstants {
         //*************** START *********** START **************************
         else if (cardName.equals("An-Zerrin Ruins")) {
         	
-        	final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
+        	final Ability_Static comesIntoPlayAbility = new Ability_Static(card, "0") {
                 @Override
                 public void resolve() {
                 	String chosenType = "";

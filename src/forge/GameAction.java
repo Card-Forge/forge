@@ -886,7 +886,7 @@ public class GameAction {
 	        	}
 	        	
 	        	final Card card = c;
-	        	Ability ability = new Ability(crd, "0")
+	        	Ability_Static ability = new Ability_Static(crd, "0")
 	        	{
 	        		public void resolve()
 	        		{
@@ -2390,7 +2390,7 @@ public class GameAction {
 	        	}
 	        	
 	        	final Card card = c;
-	        	Ability ability = new Ability(crd, "0")
+	        	Ability_Static ability = new Ability_Static(crd, "0")
 	        	{
 	        		public void resolve()
 	        		{

@@ -133,7 +133,7 @@ public class MagicStack extends MyObservable
 	  }
 		 if(ActualEffectTriggered == false) {
 		  //  // WheneverKeyword Test: Added one } at end
-	  if(sp instanceof Ability_Triggered)//TODO make working triggered abilities!
+	  if(sp instanceof Ability_Triggered || sp instanceof Ability_Static)//TODO make working triggered abilities!
 		  sp.resolve(); 
 	  else {
 		  if(sp.isKickerAbility()) {

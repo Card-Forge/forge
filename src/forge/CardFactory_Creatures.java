@@ -96,7 +96,7 @@ public class CardFactory_Creatures {
         else if(cardName.equals("Belligerent Hatchling") || cardName.equals("Noxious Hatchling")
                 || cardName.equals("Shrewd Hatchling") || cardName.equals("Sturdy Hatchling")
                 || cardName.equals("Voracious Hatchling")) {
-            final SpellAbility ability = new Ability(card, "0") {
+            final SpellAbility ability = new Ability_Static(card, "0") {
                 @Override
                 public void resolve() {
                     card.addCounter(Counters.M1M1, 4);
@@ -16726,7 +16726,7 @@ public class CardFactory_Creatures {
             final Card newCard = new Card() {
                 @Override
                 public void addDamage(final int n, final Card source) {
-                    final Ability ability = new Ability(card, "0") {
+                    final Ability_Static ability = new Ability_Static(card, "0") {
                         @Override
                         public void resolve() {
                             String player = source.getController();
@@ -17346,7 +17346,7 @@ public class CardFactory_Creatures {
         else if(cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite") || 
                 cardName.equals("Quag Vampires") || cardName.equals("Skitter of Lizards"))
         {
-        	final Ability ability = new Ability(card, "0") {
+        	final Ability_Static ability = new Ability_Static(card, "0") {
                 @Override
                 public void resolve() {
                     card.addCounter(Counters.P1P1, card.getMultiKickerMagnitude());

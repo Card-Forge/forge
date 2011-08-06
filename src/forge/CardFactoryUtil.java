@@ -1141,13 +1141,13 @@ public class CardFactoryUtil {
         return ability;
     }
     
-    public static Ability ability_Morph_Up(final Card sourceCard, String cost, String orgManaCost, int a, int d) {
+    public static Ability_Static ability_Morph_Up(final Card sourceCard, String cost, String orgManaCost, int a, int d) {
         //final String player = sourceCard.getController();
         //final String manaCost = cost;
         final int attack = a;
         final int defense = d;
         final String origManaCost = orgManaCost;
-        final Ability morph_up = new Ability(sourceCard, cost) {
+        final Ability_Static morph_up = new Ability_Static(sourceCard, cost) {
             private static final long serialVersionUID = -7892773658629724785L;
             
             @Override
@@ -1167,9 +1167,10 @@ public class CardFactoryUtil {
             
             @Override
             public boolean canPlay() {
-        		CardList Silence = AllZoneUtil.getPlayerCardsInPlay(AllZone.GameAction.getOpponent(getSourceCard().getController()));
-        		Silence = Silence.getName("Linvala, Keeper of Silence");
-                return sourceCard.isFaceDown() && AllZone.GameAction.isCardInPlay(sourceCard) && Silence.size() == 0;
+            	// unMorphing a card is a Special Action, and not effected by Linvala
+        		//CardList Silence = AllZoneUtil.getPlayerCardsInPlay(AllZone.GameAction.getOpponent(getSourceCard().getController()));
+        		//Silence = Silence.getName("Linvala, Keeper of Silence");
+                return sourceCard.isFaceDown() && AllZone.GameAction.isCardInPlay(sourceCard); // && Silence.size() == 0;
             }
             
         };//morph_up
