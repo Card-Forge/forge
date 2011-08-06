@@ -232,7 +232,7 @@ public abstract class Player extends MyObservable{
 		damageToDo = replaceDamage(damageToDo, source, false);
     	damageToDo = preventDamage(damageToDo, source, false);
 		
-		addDamageAfterPrevention(damageToDo,source);
+		addDamageAfterPrevention(damageToDo,source,false);
 	}
 	
 	public void addDamageWithoutPrevention(final int damage, final Card source) {
@@ -240,11 +240,11 @@ public abstract class Player extends MyObservable{
 		
 		damageToDo = replaceDamage(damageToDo, source, false);
 		
-		addDamageAfterPrevention(damageToDo,source);
+		addDamageAfterPrevention(damageToDo,source,false);
 	}
 	
     //This function handles damage after replacement and prevention effects are applied
-	public void addDamageAfterPrevention(final int damage, final Card source) {
+	public void addDamageAfterPrevention(final int damage, final Card source, final boolean isCombat) {
 		int damageToDo = damage;
     	
 		if( source.getKeyword().contains("Infect") ) {
@@ -269,6 +269,7 @@ public abstract class Player extends MyObservable{
 	        runParams.put("DamageSource", source);
 	        runParams.put("DamageTarget",this);
 	        runParams.put("DamageAmount",damageToDo);
+            runParams.put("IsCombatDamage",isCombat);
 	        AllZone.TriggerHandler.runTrigger("DamageDone", runParams);
         }
 	}
@@ -462,7 +463,7 @@ public abstract class Player extends MyObservable{
     	damageToDo = replaceDamage(damageToDo, source, true);
     	damageToDo = preventDamage(damageToDo, source, true);
     	
-    	addDamageAfterPrevention(damageToDo, source);   //damage prevention is already checked
+    	addDamageAfterPrevention(damageToDo, source,true);   //damage prevention is already checked
     	
     	if ( damageToDo > 0 ) {
     		GameActionUtil.executeCombatDamageToPlayerEffects(this, source, damageToDo);

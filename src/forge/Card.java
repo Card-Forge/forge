@@ -3193,7 +3193,7 @@ public class Card extends MyObservable {
     
     public void addDamage(HashMap<Card, Integer> sourcesMap) {
         for(Entry<Card, Integer> entry : sourcesMap.entrySet()) {
-        	addDamageAfterPrevention(entry.getValue(), entry.getKey()); // damage prevention is already checked!
+        	addDamageAfterPrevention(entry.getValue(), entry.getKey(),true); // damage prevention is already checked!
         }
     }
     
@@ -3204,7 +3204,7 @@ public class Card extends MyObservable {
     	damageToAdd = replaceDamage(damageToAdd, source, false);
         damageToAdd = preventDamage(damageToAdd, source, false);
         
-        addDamageAfterPrevention(damageToAdd,source);
+        addDamageAfterPrevention(damageToAdd,source,false);
         
     }
     
@@ -3213,11 +3213,11 @@ public class Card extends MyObservable {
         
     	damageToAdd = replaceDamage(damageToAdd, source, false);
         
-        addDamageAfterPrevention(damageToAdd,source);
+        addDamageAfterPrevention(damageToAdd,source,false);
     }
         
     //This function handles damage after replacement and prevention effects are applied
-    public void addDamageAfterPrevention(final int damageIn, final Card source) {
+    public void addDamageAfterPrevention(final int damageIn, final Card source,final boolean isCombat) {
     	int damageToAdd = damageIn;
     	boolean wither = false;
     	
@@ -3236,6 +3236,7 @@ public class Card extends MyObservable {
         runParams.put("DamageSource", source);
         runParams.put("DamageTarget", this);
         runParams.put("DamageAmount", damageToAdd);
+        runParams.put("IsCombatDamage",isCombat);
         AllZone.TriggerHandler.runTrigger("DamageDone", runParams);
         
         if(this.isPlaneswalker()) {
