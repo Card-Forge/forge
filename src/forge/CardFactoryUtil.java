@@ -346,9 +346,7 @@ public class CardFactoryUtil {
         if (c.hasStartOfKeyword("Fading")) value -= 20; //not used atm
         if (c.hasStartOfKeyword("Vanishing")) value -= 20; //not used atm
         
-        //undesired effects
-        if (c.hasStartOfKeyword("When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.")) value -= 10;
-        
+
         return value;
         
     } //evaluateCreature

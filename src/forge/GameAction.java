@@ -2111,13 +2111,7 @@ public class GameAction {
         	AllZone.Stack.add(persistAb);
         }
         
-        if(c.getKeyword().contains(
-                "When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.")) {
-            PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, newCard.getOwner());
-            moveTo(hand, newCard);
-        }
-
-        else if(c.getName().equals("Nissa's Chosen")) {
+        if(c.getName().equals("Nissa's Chosen")) {
             PlayerZone library = AllZone.getZone(Constant.Zone.Library, newCard.getOwner());
             moveTo(library, newCard);
         }
