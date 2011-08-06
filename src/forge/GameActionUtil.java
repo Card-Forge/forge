@@ -5880,7 +5880,9 @@ public class GameActionUtil {
 					sb.append(" damage to ").append(c.getController());
 					ability.setStackDescription(sb.toString());
 					
-					AllZone.Stack.add(ability);
+					//Backfire triggers only if its controller is damaged
+					if(aura.getController().isPlayer(player))
+						AllZone.Stack.add(ability);
 				}
 			}//auras > 0
 		}//end c.isEnchanted()

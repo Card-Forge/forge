@@ -113,16 +113,23 @@ public abstract class Player extends MyObservable{
 	public boolean gainLife(final int toGain, final Card source) {
 		boolean newLifeSet = false;
 		if(!canGainLife()) return false;
+		int lifeGain = toGain;
 		
-		if(toGain > 0) {
+		if(AllZoneUtil.isCardInPlay("Boon Reflection", this)) {
+			int amount = AllZoneUtil.getCardsInPlay("Boon Reflection").size();
+			for (int i = 0; i < amount;i++)
+				lifeGain += lifeGain;
+		}
+		
+		if(lifeGain > 0) {
 			//Lich
 			if(AllZoneUtil.isCardInPlay("Lich", this)) {
 				//draw cards instead of gain life
-				drawCards(toGain);
+				drawCards(lifeGain);
 				newLifeSet = false;
 			}
 			else {
-				addLife(toGain);
+				addLife(lifeGain);
 				newLifeSet = true;
 				this.updateObservers();
 			}
@@ -130,7 +137,7 @@ public abstract class Player extends MyObservable{
 		else System.out.println("Player - trying to gain negative or 0 life");
 		
 		Object[] Life_Whenever_Parameters = new Object[1];
-    	Life_Whenever_Parameters[0] = toGain;
+    	Life_Whenever_Parameters[0] = lifeGain;
     	AllZone.GameAction.checkWheneverKeyword(getPlayerCard(), "GainLife", Life_Whenever_Parameters);
 
 		return newLifeSet;
