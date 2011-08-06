@@ -8597,6 +8597,7 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
 
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Bonded Fetch") || cardName.equals("Merfolk Looter")) {
             final Ability_Tap ability = new Ability_Tap(card) {
@@ -8618,6 +8619,7 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Bonded Fetch - draw a card, then discard a card.");
             ability.setBeforePayMana(new Input_NoCost_TapAbility(ability));
         }//*************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -13907,6 +13909,7 @@ public class CardFactory_Creatures {
         //*************** END ************ END **************************
         
 
+/*
         //*************** START *********** START **************************
         if(cardName.equals("Benalish Heralds")) {
             final SpellAbility ability = new Ability_Tap(card, "3 U") {
@@ -13928,6 +13931,8 @@ public class CardFactory_Creatures {
             ability.setDescription("3 U, tap: Draw a card.");
             
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         if(cardName.equals("Jund Battlemage")) {
@@ -15826,6 +15831,8 @@ public class CardFactory_Creatures {
             }, true, false));
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Archivist")) {
             final SpellAbility ability = new Ability_Tap(card, "0") {
@@ -15845,6 +15852,8 @@ public class CardFactory_Creatures {
             ability.setDescription("tap: Draw a card.");
             ability.setStackDescription(card.getName() + " - draw a card.");
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Sygg, River Guide")) {

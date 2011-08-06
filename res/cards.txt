@@ -2848,9 +2848,10 @@ no text
 
 Archivist
 2 U U
-Creature Human Advisor
+Creature Human Wizard
 no text
 1/1
+abDrawCards T:1:Draw a card.:Archivist - draw a card
 
 Fire Bowman
 R
@@ -3510,6 +3511,7 @@ Merfolk Looter
 Creature Merfolk Rogue
 no text
 1/1
+abDrawCards T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Merfolk Looter - draw a card and discard a card
 
 Thornscape Apprentice
 G
@@ -3862,6 +3864,7 @@ Benalish Heralds
 Creature Human Soldier
 no text
 2/4
+abDrawCards 3 U T:1:Draw a card.:Benalish Heralds - draw a card
 
 Magefire Wings
 U R
@@ -15008,13 +15011,14 @@ Artifact Creature Myr
 no text
 2/1
 
-Bonded Fetch 
+Bonded Fetch
 2 U
 Creature Homunculus
 no text
 0/2
 Defender
 Haste
+abDrawCards T:1:Drawback$YouDiscard/1:Draw a card, then discard a card.:Bonded Fetch - draw a card and discard a card
 
 Blind Phantasm 
 2 U
