@@ -140,6 +140,7 @@ public class Cost_Payment {
     		else{
     			if (!discType.equals("Any") && !discType.equals("Random")){
     				String validType[] = discType.split(",");
+
     				handList = handList.getValidCards(validType,ability.getActivatingPlayer() ,ability.getSourceCard());
     			}
 	    		if (discAmount > handList.size()){

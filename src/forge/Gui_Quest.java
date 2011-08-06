@@ -67,7 +67,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
     private ButtonGroup       oppGroup           = new ButtonGroup();
     private static JCheckBox  smoothLandCheckBox = new JCheckBox("", false);
     public static JCheckBox   newGUICheckbox	 = new JCheckBox("", true);
-    private static JCheckBox  millLoseCheckBox 	 = new JCheckBox("", true);
+    private static JCheckBox  devModeCheckBox 	 = new JCheckBox("", true);
     
     public static void main(String[] args) {
         new Gui_Quest();
@@ -258,8 +258,9 @@ public class Gui_Quest extends JFrame implements NewConstants{
         //smoothLandCheckBox.setSelected(true);
         newGUICheckbox.setText("New GUI");
         newGUICheckbox.setBounds(new Rectangle(65, 28, 165, 24));
-        millLoseCheckBox.setText("Milling = Loss Condition");
-        millLoseCheckBox.setBounds(new Rectangle(65, 94, 190, 25));
+        devModeCheckBox.setText("Developer Mode");
+        devModeCheckBox.setBounds(new Rectangle(65, 94, 190, 25));
+        devModeCheckBox.setSelected(Constant.Runtime.DevMode[0]);
         
         //resizeCheckbox.setSelected(true);
         this.getContentPane().add(rankLabel, null);
@@ -298,7 +299,7 @@ public class Gui_Quest extends JFrame implements NewConstants{
         this.getContentPane().add(playGameButton, null);
         jPanel3.add(smoothLandCheckBox, null);
         jPanel3.add(newGUICheckbox, null);
-        jPanel3.add(millLoseCheckBox, null);
+        jPanel3.add(devModeCheckBox, null);
         this.getContentPane().add(jPanel2, null);
         this.getContentPane().add(jPanel3, null);
         oppGroup.add(oppOneRadio);
@@ -774,17 +775,14 @@ public class Gui_Quest extends JFrame implements NewConstants{
         
         //smoothLandCheckBox.isSelected() - for the AI
         
+        // Dev Mode occurs before Display
+        Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
+        
         //DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards are added
         if(newGUICheckbox.isSelected()) AllZone.Display = new GuiDisplay4();
         else AllZone.Display = new GuiDisplay3();
         
-        if(smoothLandCheckBox.isSelected()) Constant.Runtime.Smooth[0] = true;
-        else Constant.Runtime.Smooth[0] = false;
-        
-        if(millLoseCheckBox.isSelected())
-        	Constant.Runtime.Mill[0] = true;
-        else
-        	Constant.Runtime.Mill[0] = false;
+        Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
         
         if (questData.getMode().equals("Realistic"))
         	AllZone.GameAction.newGame(human, computer);
@@ -815,13 +813,9 @@ public class Gui_Quest extends JFrame implements NewConstants{
         
         Deck human = questData.getDeck(check.toString());
         
-        if(smoothLandCheckBox.isSelected()) Constant.Runtime.Smooth[0] = true;
-        else Constant.Runtime.Smooth[0] = false;
+        Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
         
-        if(millLoseCheckBox.isSelected())
-        	Constant.Runtime.Mill[0] = true;
-        else
-        	Constant.Runtime.Mill[0] = false;
+        Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
         
         Object pet = petComboBox.getSelectedItem();
     	if (pet != null)

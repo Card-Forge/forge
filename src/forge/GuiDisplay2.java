@@ -893,12 +893,17 @@ public class GuiDisplay2 extends javax.swing.JFrame implements CardContainer, Di
 		return true;
 	}
 	
-    public boolean loadPhases(){
+    public boolean loadPrefs(){
     	
     	return false;
     }
     
-    public boolean savePhases(){
+    public boolean savePrefs(){
     	return false;
-    }    
+    }
+
+
+	public boolean canLoseByDecking() {
+		return true;
+	}    
 }

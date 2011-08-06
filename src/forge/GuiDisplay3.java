@@ -73,7 +73,6 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
-
 public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewConstants, NewConstants.GUI.GuiDisplay, NewConstants.LANG.GuiDisplay {
     private static final long serialVersionUID = 4519302185194841060L;
     
@@ -170,7 +169,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         Object[] obj = {
                 HUMAN_GRAVEYARD_ACTION, HUMAN_REMOVED_ACTION, HUMAN_FLASHBACK_ACTION, COMPUTER_GRAVEYARD_ACTION,
                 COMPUTER_REMOVED_ACTION, new JSeparator(), 
-                GuiDisplay3.playsoundCheckboxForMenu, new JSeparator(), ErrorViewer.ALL_THREADS_ACTION,
+                playsoundCheckboxForMenu, new JSeparator(), ErrorViewer.ALL_THREADS_ACTION,
                 CONCEDE_ACTION};
         
         JMenu gameMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.MENU.TITLE));
@@ -186,19 +185,42 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         JMenuItem aiLabel = new JMenuItem("Computer");
         JMenuItem humanLabel = new JMenuItem("Human");
         
-        Component[] objPhases = { aiLabel, GuiDisplay4.cbAIUpkeep, GuiDisplay4.cbAIDraw, GuiDisplay4.cbAIBeginCombat, 
-				GuiDisplay4.cbAIEndCombat, GuiDisplay4.cbAIEndOfTurn, new JSeparator(), 
-				humanLabel, GuiDisplay4.cbHumanUpkeep, GuiDisplay4.cbHumanDraw, GuiDisplay4.cbHumanBeginCombat, 
-				GuiDisplay4.cbHumanEndCombat, GuiDisplay4.cbHumanEndOfTurn };
+        Component[] objPhases = { aiLabel, cbAIUpkeep, cbAIDraw, cbAIBeginCombat, 
+				cbAIEndCombat, cbAIEndOfTurn, new JSeparator(), 
+				humanLabel, cbHumanUpkeep, cbHumanDraw, cbHumanBeginCombat, 
+				cbHumanEndCombat, cbHumanEndOfTurn };
         
         for(Component cmp:objPhases) {
             gamePhases.add(cmp);
         }
 
+        // Dev Mode Creation
+        JMenu devMenu = new JMenu(ForgeProps.getLocalized(MENU_BAR.DEV.TITLE));
+        
+        devMenu.setEnabled(Constant.Runtime.DevMode[0]);
+        
+        if (Constant.Runtime.DevMode[0]){
+        	canLoseByDecking.setSelected(Constant.Runtime.Mill[0]);
+        	
+            Action viewAIHand = new ZoneAction(AllZone.Computer_Hand, COMPUTER_HAND.BASE);
+            Action viewAILibrary = new ZoneAction(AllZone.Computer_Library, COMPUTER_LIBRARY.BASE);
+            Action viewHumanLibrary = new ZoneAction(AllZone.Human_Library, HUMAN_LIBRARY.BASE);
+
+            Object[] objDev = { GuiDisplay4.canLoseByDecking, viewAIHand, viewAILibrary, viewHumanLibrary };
+	        for(Object o:objDev) {
+	        	if(o instanceof ForgeAction) 
+	        		devMenu.add(((ForgeAction) o).setupButton(new JMenuItem()));
+	        	else if (o instanceof Component)
+	        		devMenu.add((Component)o);
+	        	else if (o instanceof Action)
+	        		devMenu.add((Action)o);
+	        }
+        }
         
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(gameMenu);
         menuBar.add(gamePhases);
+        menuBar.add(devMenu);
         menuBar.add(new MenuItem_HowToPlay());
         this.setJMenuBar(menuBar);
     }//addMenu()
@@ -850,7 +872,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         //oppPCLabel.setHorizontalAlignment(SwingConstants.TOP);
         oppPCLabel.setForeground(greenColor);
         
-        JLabel oppHandLabel = new JLabel(ForgeProps.getLocalized(COMPUTER_HAND.TITLE), SwingConstants.TRAILING);
+        JLabel oppHandLabel = new JLabel(ForgeProps.getLocalized(COMPUTER_HAND.BUTTON), SwingConstants.TRAILING);
         if(!Gui_NewGame.useLAFFonts.isSelected()) oppHandLabel.setFont(statFont);
         
         //JLabel oppGraveLabel = new JLabel("Grave:", SwingConstants.TRAILING);
@@ -925,7 +947,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
         
         playerPCLabel.setForeground(greenColor);
         
-        JLabel playerLibraryLabel = new JLabel(ForgeProps.getLocalized(HUMAN_LIBRARY.TITLE),
+        JLabel playerLibraryLabel = new JLabel(ForgeProps.getLocalized(HUMAN_LIBRARY.BUTTON),
                 SwingConstants.TRAILING);
         if(!Gui_NewGame.useLAFFonts.isSelected()) playerLibraryLabel.setFont(statFont);
         
@@ -1019,7 +1041,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
      * Exit the Application
      */
     private void concede() {
-    	savePhases();
+    	savePrefs();
         dispose();
         Constant.Runtime.WinLose.addLose();
         if (!Constant.Quest.fantasyQuest[0])
@@ -1067,7 +1089,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     	return false;
     }
     
-    public boolean loadPhases(){
+    public boolean loadPrefs(){
     	ForgePreferences fp = Gui_NewGame.preferences;
 
     	cbAIUpkeep.setSelected(fp.bAIUpkeep);
@@ -1085,7 +1107,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     	return true;
     }
     
-    public boolean savePhases(){
+    public boolean savePrefs(){
     	ForgePreferences fp = Gui_NewGame.preferences;
     	
     	fp.bAIUpkeep = cbAIUpkeep.isSelected();
@@ -1120,6 +1142,12 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     
     // ********** End of Phase stuff in Display ******************
     
+    // ****** Developer Mode ******* 
+    
+    public static JCheckBoxMenuItem canLoseByDecking	   = new JCheckBoxMenuItem("Lose by Decking", true);
+
+    // *****************************
+    
     JXMultiSplitPane                  pane                     = new JXMultiSplitPane();
     JButton                         cancelButton             = new JButton();
     JButton                         okButton                 = new JButton();
@@ -1138,7 +1166,7 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
     JLabel                          oppPCLabel               = new JLabel();
     JLabel                          playerPCLabel            = new JLabel();
     JLabel                          oppLibraryLabel          = new JLabel(
-                                                                     ForgeProps.getLocalized(COMPUTER_LIBRARY.TITLE),
+                                                                     ForgeProps.getLocalized(COMPUTER_LIBRARY.BUTTON),
                                                                      SwingConstants.TRAILING);
     JLabel                          oppHandValue             = new JLabel();
     JLabel                          oppLibraryValue          = new JLabel();
@@ -1200,6 +1228,10 @@ public class GuiDisplay3 extends JFrame implements CardContainer, Display, NewCo
             concede();
         }
     }
+
+	public boolean canLoseByDecking(){
+		return canLoseByDecking.isSelected();
+	}
 }
 
 //very hacky

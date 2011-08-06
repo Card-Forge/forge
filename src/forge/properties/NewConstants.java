@@ -166,6 +166,10 @@ public interface NewConstants {
                 public static interface PHASE {
                 	public static final String TITLE = "%s/Display/phase/title";
                 }
+                
+                public static interface DEV {
+                	public static final String TITLE = "%s/Display/dev/title";
+                }
             }
             
             public static final String HUMAN_TITLE = "%s/Display/human/title";
@@ -173,9 +177,12 @@ public interface NewConstants {
             public static interface HUMAN_HAND {
                 public static final String TITLE = "%s/Display/human/hand/title";
             }
-            
+
             public static interface HUMAN_LIBRARY {
+            	public static final String BASE = "%s/Display/human/library";
                 public static final String TITLE = "%s/Display/human/library/title";
+            	public static final String MENU = "%s/Display/human/library/menu";
+            	public static final String BUTTON = "%s/Display/human/library/button";
             }
             
             public static final String HUMAN_GRAVEYARD = "%s/Display/human/graveyard";
@@ -206,12 +213,20 @@ public interface NewConstants {
             
             public static final String COMPUTER_TITLE = "%s/Display/computer/title";
             
+
             public static interface COMPUTER_HAND {
+            	public static final String BASE = "%s/Display/computer/hand";
                 public static final String TITLE = "%s/Display/computer/hand/title";
+            	public static final String BUTTON = "%s/Display/computer/hand/button";
+            	public static final String MENU = "%s/Display/computer/hand/menu";
             }
             
+
             public static interface COMPUTER_LIBRARY {
+            	public static final String BASE = "%s/Display/computer/library";
                 public static final String TITLE = "%s/Display/computer/library/title";
+            	public static final String BUTTON = "%s/Display/computer/library/button";
+            	public static final String MENU = "%s/Display/computer/library/menu";
             }
             
             
@@ -283,7 +298,7 @@ public interface NewConstants {
                 public static final String DECK_EDITOR         = "%s/NewGame/deckeditor";
                 public static final String NEW_GUI         = "%s/NewGame/newgui";
                 public static final String AI_LAND         = "%s/NewGame/ailand";
-                public static final String MILLING         = "%s/NewGame/milling";
+                public static final String DEV_MODE         = "%s/NewGame/devmode";
                 public static final String QUEST_MODE         = "%s/NewGame/questmode";
                 public static final String START_GAME         = "%s/NewGame/startgame";
                 

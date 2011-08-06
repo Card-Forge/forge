@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 
 public interface Constant {
-    public static final String ProgramName = "Forge - 04/2010 - http://mtgrares.blogspot.com";
+    public static final String ProgramName = "Forge - http://cardforge.org";
     
     //used to pass information between the GUI screens
     public interface Runtime {
@@ -20,6 +20,7 @@ public interface Constant {
         public static final WinLose   WinLose      = new WinLose();
         public static final boolean[] Smooth       = new boolean[1];
         public static final boolean[] Mill		   = new boolean[1];
+        public static final boolean[] DevMode	   = new boolean[1];	// one for normal mode one for quest mode
         
         public static final int[]     width        = new int[1];
         public static final int[]     height       = new int[1];

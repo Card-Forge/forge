@@ -43,7 +43,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 import com.esotericsoftware.minlog.Log;
@@ -63,13 +62,15 @@ import forge.properties.ForgePreferences.CardSizeType;
 import forge.properties.ForgePreferences.StackOffsetType;
 import forge.properties.NewConstants.LANG.Gui_NewGame.MENU_BAR.MENU;
 import forge.properties.NewConstants.LANG.Gui_NewGame.MENU_BAR.OPTIONS;
+/*CHOPPIC*/
+import java.awt.Graphics;
+import javax.swing.ImageIcon;
 
+/*CHOPPIC*/
 
 public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LANG.Gui_NewGame {
     private static final long       serialVersionUID     = -2437047615019135648L;
-    
-//    private final DeckIO            deckIO               = new OldDeckIO(ForgeProps.getFile(DECKS));
-//    private final DeckIO            boosterDeckIO        = new OldDeckIO(ForgeProps.getFile(BOOSTER_DECKS));
+
     private final DeckIO            deckIO               = new NewDeckIO(ForgeProps.getFile(NEW_DECKS));
     //with the new IO, there's no reason to use different instances
     private final DeckIO            boosterDeckIO        = deckIO;
@@ -86,21 +87,20 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     private ButtonGroup             buttonGroup1         = new ButtonGroup();
     private JRadioButton            sealedRadioButton    = new JRadioButton();
     private JRadioButton            singleRadioButton    = new JRadioButton();
-    private JPanel                  jPanel2              = new JPanel();
-    private Border                  border1;
-    private TitledBorder            titledBorder1;
+
     private JRadioButton            draftRadioButton     = new JRadioButton();
-    private JPanel                  jPanel1              = new JPanel();
-    private Border                  border2;
-    private JPanel                  jPanel3              = new JPanel();
-    private Border                  border3;
-    private TitledBorder            titledBorder3;
+
+    /*CHOPPIC*/
+    private CustomPanel jPanel1 = new CustomPanel(10);
+    private CustomPanel jPanel2 = new CustomPanel(10);
+    private CustomPanel jPanel3 = new CustomPanel(10);
+    /*CHOPPIC*/
+    
     // @SuppressWarnings("unused")
     // titledBorder2
-    private TitledBorder            titledBorder2;
     private static JCheckBox        newGuiCheckBox       = new JCheckBox("", true);
     private static JCheckBox        smoothLandCheckBox   = new JCheckBox("", false);
-    private static JCheckBox        millLoseCheckBox     = new JCheckBox("", true);
+    private static JCheckBox        devModeCheckBox     = new JCheckBox("", true);
     
     // GenerateConstructedDeck.get2Colors() and GenerateSealedDeck.get2Colors()
     // use these two variables
@@ -143,7 +143,9 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         	useLAFFonts.setSelected(preferences.lafFonts);
         	newGuiCheckBox.setSelected(preferences.newGui);
         	smoothLandCheckBox.setSelected(preferences.stackAiLand);
-        	millLoseCheckBox.setSelected(preferences.millingLossCondition);
+        	Constant.Runtime.Mill[0] = preferences.millingLossCondition;
+        	Constant.Runtime.DevMode[0] = preferences.developerMode;
+        	devModeCheckBox.setSelected(preferences.developerMode);
         	cardOverlay.setSelected(preferences.cardOverlay);
         	ImageCache.scaleLargerThanOriginal = preferences.scaleLargerThanOriginal;
         	cardScale.setSelected(preferences.scaleLargerThanOriginal);
@@ -331,22 +333,42 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
     }
     
     private void jbInit() throws Exception {
+    	
+    	/*
         border1 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
         titledBorder1 = new TitledBorder(border1, ForgeProps.getLocalized(NEW_GAME_TEXT.GAMETYPE));
         border2 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
         titledBorder2 = new TitledBorder(border2, ForgeProps.getLocalized(NEW_GAME_TEXT.LIBRARY));
         border3 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
         titledBorder3 = new TitledBorder(border3, ForgeProps.getLocalized(NEW_GAME_TEXT.SETTINGS));
+        */
+    	
+    	/*CHOPPIC
+    	titledBorder1 = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), ForgeProps.getLocalized(NEW_GAME_TEXT.GAMETYPE));
+        titledBorder2 = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), ForgeProps.getLocalized(NEW_GAME_TEXT.LIBRARY));
+        titledBorder3 = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), ForgeProps.getLocalized(NEW_GAME_TEXT.SETTINGS));
+        titledBorder1.setTitlePosition(TitledBorder.ABOVE_TOP);
+        titledBorder2.setTitlePosition(TitledBorder.ABOVE_TOP);
+        titledBorder3.setTitlePosition(TitledBorder.ABOVE_TOP);
+        */
+        
         titleLabel.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.NEW_GAME));
         titleLabel.setFont(new java.awt.Font("Dialog", 0, 26));
+        
+        /*CHOPPIC*/
+        titleLabel.setForeground(Color.WHITE);
+        /*CHOPPIC*/
+        
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        
         this.getContentPane().setLayout(new MigLayout("fill"));
-
+        
         /*
          *  Game Type Panel
          */
         
-        jPanel2.setBorder(titledBorder1);
+        /* jPanel2.setBorder(titledBorder1); */
+        setCustomBorder(jPanel2, ForgeProps.getLocalized(NEW_GAME_TEXT.GAMETYPE));
         jPanel2.setLayout(new MigLayout("align center"));
         
         singleRadioButton.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.CONSTRUCTED_TEXT));
@@ -376,7 +398,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
          *  Library Panel
          */
         
-        jPanel1.setBorder(titledBorder2);
+        /* jPanel1.setBorder(titledBorder2); */
+        setCustomBorder(jPanel1, ForgeProps.getLocalized(NEW_GAME_TEXT.LIBRARY));
         jPanel1.setLayout(new MigLayout("align center"));
         
         jLabel2.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.YOURDECK));
@@ -393,12 +416,13 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
          *  Settings Panel
          */
         
-        jPanel3.setBorder(titledBorder3);
+        /* jPanel3.setBorder(titledBorder3); */
+        setCustomBorder(jPanel3, ForgeProps.getLocalized(NEW_GAME_TEXT.SETTINGS));
         jPanel3.setLayout(new MigLayout("align center"));
         
         newGuiCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.NEW_GUI));
         smoothLandCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.AI_LAND));
-        millLoseCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.MILLING));
+        devModeCheckBox.setText(ForgeProps.getLocalized(NEW_GAME_TEXT.DEV_MODE));
         
         /*
          *  Buttons
@@ -431,19 +455,23 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         jPanel2.add(singleRadioButton, "span 3, wrap");
         jPanel2.add(sealedRadioButton, "span 3, wrap");
         jPanel2.add(draftRadioButton, "span 3, wrap");
+        updatePanelDisplay(jPanel2);
         
         this.getContentPane().add(jPanel1, "span 2, grow");
         jPanel1.add(jLabel2);
         jPanel1.add(humanComboBox, "sg combobox, wrap");
         jPanel1.add(jLabel3);
         jPanel1.add(computerComboBox, "sg combobox"); 
+        updatePanelDisplay(jPanel1);
+        
         this.getContentPane().add(deckEditorButton, "sg buttons, align 50% 50%, wrap");
         
         this.getContentPane().add(jPanel3, "span 2, grow");
         
         jPanel3.add(newGuiCheckBox, "wrap");
         jPanel3.add(smoothLandCheckBox, "wrap");
-        jPanel3.add(millLoseCheckBox, "wrap");
+        jPanel3.add(devModeCheckBox, "wrap");
+        updatePanelDisplay(jPanel3);
         
         this.getContentPane().add(startButton, "sg buttons, align 50% 50%, split 2, flowy");
         this.getContentPane().add(questButton, "sg buttons, align 50% 50%"); 
@@ -451,7 +479,43 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         buttonGroup1.add(singleRadioButton);
         buttonGroup1.add(sealedRadioButton);
         buttonGroup1.add(draftRadioButton);
+        
+        /*CHOPPIC*/
+        /*Add background image*/
+        ((JPanel)getContentPane()).setOpaque(false);
+        ImageIcon bkgd = new ImageIcon("res/images/ui/newgame_background.jpg");
+        JLabel myLabel = new JLabel(bkgd);
+        getLayeredPane().add(myLabel, new Integer(Integer.MIN_VALUE));
+        myLabel.setBounds(0, 0, bkgd.getIconWidth(), bkgd.getIconHeight());
+        /*CHOPPIC*/
+        
     }
+    
+    /*CHOPPIC*/
+    /*Update Panel Display*/
+    void updatePanelDisplay(JPanel panel) {
+    	for (Component c : panel.getComponents()) {
+    		if (c instanceof JRadioButton) {
+    			((JRadioButton)c).setOpaque(false);
+    	    }
+    	    else if (c instanceof JLabel) {
+        			((JLabel)c).setOpaque(false);
+        	}
+    	    else if (c instanceof JCheckBox) {
+    			((JCheckBox)c).setOpaque(false);
+    	    }
+    	}
+    	panel.setOpaque(false);
+    }
+    
+    void setCustomBorder(JPanel panel, String title) {
+    	TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), title);
+    	tb.setTitlePosition(TitledBorder.ABOVE_TOP);
+    	tb.setTitleFont(new java.awt.Font("Dialog", 0, 12));
+    	tb.setTitleColor(Color.BLUE);
+    	panel.setBorder(tb);
+    }
+    /*CHOPPIC*/
     
     void deckEditorButton_actionPerformed(ActionEvent e) {
         if(editor == null) {
@@ -573,16 +637,12 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
         }// else
         
         //DO NOT CHANGE THIS ORDER, GuiDisplay needs to be created before cards are added
+        Constant.Runtime.DevMode[0] = devModeCheckBox.isSelected();
         
         if(newGuiCheckBox.isSelected()) AllZone.Display = new GuiDisplay4();
         else AllZone.Display = new GuiDisplay3();
         
-        if(smoothLandCheckBox.isSelected()) Constant.Runtime.Smooth[0] = true;
-        else Constant.Runtime.Smooth[0] = false;
-        
-        if(millLoseCheckBox.isSelected()) Constant.Runtime.Mill[0] = true;
-        else Constant.Runtime.Mill[0] = false;
-        
+        Constant.Runtime.Smooth[0] = smoothLandCheckBox.isSelected();
 
         AllZone.GameAction.newGame(Constant.Runtime.HumanDeck[0], Constant.Runtime.ComputerDeck[0]);
         AllZone.Display.setVisible(true);
@@ -1142,7 +1202,8 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
 			preferences.lafFonts = useLAFFonts.isSelected();
 			preferences.newGui = newGuiCheckBox.isSelected();
 			preferences.stackAiLand = smoothLandCheckBox.isSelected();
-			preferences.millingLossCondition = millLoseCheckBox.isSelected();
+			preferences.millingLossCondition = Constant.Runtime.Mill[0];
+			preferences.developerMode = Constant.Runtime.DevMode[0];
 			preferences.cardOverlay = cardOverlay.isSelected();
 			preferences.scaleLargerThanOriginal = ImageCache.scaleLargerThanOriginal;
 			preferences.save();
@@ -1164,4 +1225,27 @@ public class Gui_NewGame extends JFrame implements NewConstants, NewConstants.LA
 		}
 		super.processWindowEvent(event);
 	}
+	
+	/*CHOPPIC*/
+	/* Panel with rounded border and semi-transparent background */
+    private class CustomPanel extends JPanel {
+		private static final long serialVersionUID = 774205995101881824L;
+		private final int radius;
+    	
+    	CustomPanel(int radius){
+    		this.radius = radius;
+    	}
+
+    	public void paintComponent(Graphics g) {
+    		Color bg = getBackground();
+    	    g.setColor(new Color(bg.getRed(),bg.getGreen(),bg.getBlue(),180));
+     		g.fillRoundRect(0,0, getWidth()-1, getHeight()-1, radius, radius);
+    	    g.setColor(new Color(0,0,0,70));
+    	    g.drawRoundRect(0,0, getWidth()-1, getHeight()-1, radius, radius);
+    	}
+
+    }
+    
+    /*CHOPPIC*/
+	
 }

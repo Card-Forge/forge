@@ -32,7 +32,9 @@ public interface Display {
 
 	public boolean stopAtPhase(Player turn, String phase);
     
-    public boolean loadPhases();
+    public boolean loadPrefs();
     
-    public boolean savePhases();
+    public boolean savePrefs();
+
+	public boolean canLoseByDecking();
 }

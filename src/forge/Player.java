@@ -403,6 +403,7 @@ public abstract class Player extends MyObservable{
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, this);
 		PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, this);
 		for(int i = 0; i < n; i++) {
+			// todo: any draw replacements would go here, not just Dredge
 			if(getDredge().size() == 0 || !dredge()) {
 				doDraw(library, hand);
 			}
@@ -421,9 +422,9 @@ public abstract class Player extends MyObservable{
 			GameActionUtil.executeDrawCardTriggeredEffects(this);
 		}
 		//lose:
-		else if(Constant.Runtime.Mill[0]) {
-			if (!cantLose()){
-				altLoseConditionMet("Milled");
+		else if (!Constant.Runtime.DevMode[0] || AllZone.Display.canLoseByDecking()) {	
+			// if devMode is off, or canLoseByDecking is Enabled, run Lose Condition
+			if (altLoseConditionMet("Milled")){
 				AllZone.GameAction.checkStateEffects();
 			}
 		}
@@ -709,13 +710,14 @@ public abstract class Player extends MyObservable{
     	winCondition = s;
     }
     
-    public void altLoseConditionMet(String s) { 
+    public boolean altLoseConditionMet(String s) { 
     	if (cantLose()){
     		System.out.println("Tried to lose, but currently can't.");
-    		return;
+    		return false;
     	}
     	altLose = true; 
     	loseCondition = s;
+    	return true;
     }
     
     public boolean cantLose(){

@@ -15,6 +15,8 @@ public class ForgePreferences extends Preferences {
 	public boolean newGui;
 	public boolean stackAiLand;
 	public boolean millingLossCondition;
+	public boolean developerMode;
+	
 	public String laf;
 	public boolean lafFonts;
 	public StackOffsetType stackOffset;
@@ -58,6 +60,7 @@ public class ForgePreferences extends Preferences {
 		newGui = getBoolean("gui.new", true);
 		stackAiLand = getBoolean("AI.stack.land", false);
 		millingLossCondition = getBoolean("loss.condition.milling", true);
+		developerMode = getBoolean("developer.mode", false);
 		
 		laf = get("gui.laf", "");	
 		lafFonts = getBoolean("gui.laf.fonts", false);
@@ -87,6 +90,7 @@ public class ForgePreferences extends Preferences {
 
 		set("AI.stack.land", stackAiLand);
 		set("loss.condition.milling", millingLossCondition);
+		set("developer.mode", developerMode);
 		
 		set("gui.laf", laf);
 		set("gui.laf.fonts", lafFonts);
