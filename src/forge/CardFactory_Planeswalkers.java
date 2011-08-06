@@ -124,7 +124,14 @@ class CardFactory_Planeswalkers {
                     
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
                     play.add(emblem);
-                                        
+                    
+                    //AllZone.GameAction.checkStateEffects();
+                    AllZone.StaticEffects.rePopulateStateBasedList();
+                    for(String effect:AllZone.StaticEffects.getStateBasedMap().keySet()) {
+                        Command com = GameActionUtil.commands.get(effect);
+                        com.execute();
+                    }  
+                    
                     /*
                     //make all permanents in play/hand/library and graveyard	
                     PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());

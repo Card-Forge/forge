@@ -1709,13 +1709,18 @@ public class GameAction {
                         			public void execute() {
                         				if(Whenever_Go(F_card,F_k) == true) 
                         					if(AllZone.GameAction.isCardInZone(F_card,Required_Zone) || F_Zones.equals("Any")) {
+                        					String[] types = F_TokenConditions[1].split(" ");
+                        					String[] creatTypes = new String[types.length+1];
+                        					creatTypes[0] = "Creature";
+                        					for (int i=0;i<types.length;i++)
+                        						creatTypes[i+1]=types[i];
+
                         					String Color = F_TokenConditions[2];
                         					if(F_TokenConditions[2].equals("c")) Color = "1";
                         					for(int z = 0; z < F_Amount[0]; z++) 
                                             CardFactoryUtil.makeToken( F_TokenConditions[1] + " Token", F_TokenConditions[2]+ " " + 
                                             		Integer.valueOf(F_TokenConditions[3])+ " " + Integer.valueOf(F_TokenConditions[4])
-                                             + " " + F_TokenConditions[1], F_card, Color, new String[] {
-                                             "Creature", F_TokenConditions[1]}, Integer.valueOf(F_TokenConditions[3]), 
+                                             + " " + F_TokenConditions[1], F_card, Color, creatTypes, Integer.valueOf(F_TokenConditions[3]), 
                                              Integer.valueOf(F_TokenConditions[4]), F_KeyWordConditions);
       			                      }
 
