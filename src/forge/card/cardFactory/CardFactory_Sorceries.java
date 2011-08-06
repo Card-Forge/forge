@@ -163,6 +163,7 @@ public class CardFactory_Sorceries {
         }//*************** END ************ END **************************
         
 
+        /*
         //*************** START *********** START **************************
         //should REALLY be an aura:
         else if(cardName.equals("Lignify")) {
@@ -215,6 +216,7 @@ public class CardFactory_Sorceries {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+        */
         
 	
 	    //*************** START *********** START **************************
