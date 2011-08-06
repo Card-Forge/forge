@@ -17876,6 +17876,23 @@ public class CardFactory_Creatures {
         }//*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        if(cardName.equals("Sphinx of Magosi")) {
+        	/*
+        	 * 2 U: Draw a card, then put a +1/+1 counter on Sphinx of Magosi.
+        	 */
+        	final SpellAbility ability = new Ability(card, "2 U") {
+        		@Override
+        		public void resolve() {
+        			final String player = card.getController();
+        			AllZone.GameAction.drawCards(player, 1);
+        			card.addCounter(Counters.P1P1, 1);
+        		}   
+        	};
+        	card.addSpellAbility(ability);
+        	ability.setStackDescription(cardName+" - add a +1+1 counter and draw a card.");
+        }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         if(cardName.equals("Kor Line-Slinger")) {
         	final Ability_Tap ability = new Ability_Tap(card) {
 				private static final long serialVersionUID = -5883773208646266056L;
