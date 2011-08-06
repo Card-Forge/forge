@@ -4199,6 +4199,96 @@ public class CardFactory_Instants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
+      //*************** START *********** START **************************
+        else if(cardName.equals("Agony Warp")) {
+        	final Card[] target = new Card[2];
+        	final SpellAbility spell = new Spell(card) {
+				private static final long serialVersionUID = 3818559481920103914L;
+
+				@Override
+                public boolean canPlayAI() {
+                    return false;
+                }
+                
+                @Override
+                public void resolve() {
+                	
+                	final Command untilEOTAtt = new Command() {
+						private static final long serialVersionUID = 7327217065460047190L;
+
+						public void execute() {
+                            if(AllZone.GameAction.isCardInPlay(target[0])) {
+                                target[0].addTempAttackBoost(3);
+                            }
+                        }
+                    };
+                    
+                    final Command untilEOTDef = new Command() {
+						private static final long serialVersionUID = -5195474401697095394L;
+
+						public void execute() {
+                            if(AllZone.GameAction.isCardInPlay(target[1])) {
+                            	target[1].addTempDefenseBoost(3);
+                            }
+                        }
+                    };
+                    
+                    
+                    if(AllZone.GameAction.isCardInPlay(target[0]) && CardFactoryUtil.canTarget(card, target[0])) {
+                        target[0].addTempAttackBoost(-3);
+                        AllZone.EndOfTurn.addUntil(untilEOTAtt);
+                    }
+                    if(AllZone.GameAction.isCardInPlay(target[1]) && CardFactoryUtil.canTarget(card, target[1])) {
+                        target[1].addTempDefenseBoost(-3);
+                        AllZone.EndOfTurn.addUntil(untilEOTDef);
+                    }
+                }
+            };
+        	
+        	final Input runtime = new Input() {
+				private static final long serialVersionUID = -6933844881209733696L;
+				boolean firstTarget = true;
+
+				@Override
+                public void showMessage() {
+					StringBuilder sb = new StringBuilder();
+					if(firstTarget) sb.append(card.getName()).append(" - Select target creature to get -3/-0");
+					else sb.append(card.getName()).append(" - Select target creature to get -0/-3");
+                    AllZone.Display.showMessage(sb.toString());
+                    ButtonUtil.enableOnlyCancel();
+                }
+				
+				@Override
+	            public void selectButtonCancel() {
+					stop();
+				}
+				
+				@Override
+                public void selectCard(Card c, PlayerZone zone) {
+					if(zone.is(Constant.Zone.Battlefield) && CardFactoryUtil.canTarget(card, c) && 
+							c.isCreature()) {
+						if(null == target[0]) {
+							target[0] = c;
+							firstTarget = false;
+							showMessage();
+						}
+						else if(null == target[1]) {
+							target[1] = c;
+							stopSetNext(new Input_PayManaCost(spell));
+						}
+					}
+				}
+            };
+        	
+            spell.setDescription("Target creature gets -3/-0 until end of turn.\n\nTarget creature gets -0/-3 until end of turn.");
+            spell.setStackDescription(cardName+" - Target creature gets -3/-0 until end of turn.\n\nTarget creature gets -0/-3 until end of turn.");
+            spell.setBeforePayMana(runtime);
+            
+            card.clearSpellAbility();
+            card.addSpellAbility(spell);
+        }//*************** END ************ END **************************
+        
     	return card;
     }//getCard
 }

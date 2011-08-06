@@ -1,0 +1,7 @@
+Name:Agony Warp
+ManaCost:U B
+Types:Instant
+Text:Target creature gets -3/-0 until end of turn.\r\n\r\nTarget creature gets -0/-3 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/agony_warp.jpg
+End
