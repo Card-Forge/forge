@@ -10731,6 +10731,8 @@ public class CardFactory implements NewConstants {
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
         
+        
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Soulscour")) {
             SpellAbility spell = new Spell(card) {
@@ -10774,6 +10776,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
+*/
         
 
         //*************** START *********** START **************************
@@ -10803,7 +10806,7 @@ public class CardFactory implements NewConstants {
         }//*************** END ************ END **************************
         
         
-   /* Converted to the spDestroyAll keyword
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Wrath of God") || cardName.equals("Damnation")) {
             SpellAbility spell = new Spell(card) {
@@ -10929,7 +10932,7 @@ public class CardFactory implements NewConstants {
         }// *************** END ************ END **************************
 */
         
-
+/* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************
         else if(cardName.equals("Planar Cleansing")) {
             SpellAbility spell = new Spell(card) {
@@ -10966,7 +10969,7 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }// *************** END ************ END **************************
-        
+*/
         
 /* Converted to the spDestroyAll keyword
         //*************** START *********** START **************************

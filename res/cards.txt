@@ -1,3 +1,19 @@
+Planar Cleansing
+3 W W W
+Sorcery
+Destroy all non-land permanents.
+spDestroyAll:Permanent.nonLand
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_cleansing.jpg
+
+Soulscour
+7 W W W
+Sorcery
+Destroy all nonartifact permanents.
+spDestroyAll:Permanent.nonArtifact
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soulscour.jpg
+
 Back to Nature
 1 G
 Instant
@@ -22285,13 +22301,6 @@ SVar:PicCount:4
 SVar:Rarity:Land
 SVar:Picture:http://resources.wizards.com/magic/cards/unh/en-us/card73963.jpg
 
-Planar Cleansing
-3 W W W
-Sorcery
-Destroy all non-land permanents.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/planar_cleansing.jpg
-
 Planar Gate
 6
 Artifact
@@ -27690,13 +27699,6 @@ Whenever another creature comes into play, you gain 1 life.
 1/1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/souls_attendant.jpg
-
-Soulscour
-7 W W W
-Sorcery
-Destroy all nonartifact permanents.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/soulscour.jpg
 
 Soulsurge Elemental
 3 R
