@@ -1861,52 +1861,6 @@ public class CardFactory implements NewConstants {
                 }
             });
         }//*************** END ************ END **************************
-       
-
-        //*************** START ************ START **************************
-        else if(cardName.equals("Ashnod's Transmogrant")) {
-        	final String[] Tgts = { "Creature.nonArtifact" };
-        	
-        	Cost abCost = new Cost("T Sac<1/CARDNAME>", cardName, true);
-        	Target abTgt = new Target(card,"Select target nonartifact creature to Transmogrify", Tgts);
-
-        	final Ability_Activated ability = new Ability_Activated(card, abCost, abTgt){
-                private static final long serialVersionUID = -401631574059431293L;
-                
-                @Override
-                public void resolve() {
-                    Card crd = getTargetCard();
-                    // if it's not a valid target on resolution, spell fizzles
-                    if (crd == null || !AllZone.GameAction.isCardInPlay(crd) || !crd.isValidCard(Tgts,card.getController(),card))
-                    	return;
-                    crd.addCounter(Counters.P1P1, 1);
-                    
-                    // trick to get Artifact on the card type side of the type line
-                    ArrayList<String> types = crd.getType();
-                    types.add(0, "Artifact");
-                    crd.setType(types);
-                }
-                
-                @Override
-                public boolean canPlayAI() {
-                    CardList list = new CardList(AllZone.Computer_Battlefield.getCards()).filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return !c.isArtifact() && c.isCreature();
-                        }
-                    });
-                    Card crd = CardFactoryUtil.AI_getBestCreature(list);
-                    if(crd != null) setTargetCard(crd);
-                    return (getTargetCard() != null);
-                }
-            };
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(abCost.toString());
-            sb.append("Put a +1/+1 counter on target nonartifact creature. That creature becomes an artifact in addition to its other types.");
-            ability.setDescription(sb.toString());
-            
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
 
         
         //*************** START *********** START **************************
