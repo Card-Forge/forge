@@ -6,4 +6,7 @@ PT:2/2
 K:abDamageTgtCP 1 R R:1:Drawback$DamageYou/1:Brothers of Fire deals 1 damage to target creature or player and 1 damage to you.:Brothers of Fire - deal damage to creature or player and you.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brothers_of_fire.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/214.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/58.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/197.jpg
 End

@@ -7,4 +7,5 @@ K:Flying
 K:Vigilance
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/mi/en-us/card3325.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/54.jpg
 End

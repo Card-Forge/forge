@@ -7,4 +7,5 @@ K:Haste
 K:Wither
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_ram_gang.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/203.jpg
 End

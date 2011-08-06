@@ -6,4 +6,5 @@ PT:2/1
 SVar:BuffedBy:Permanent.MultiColor
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_sureblade.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/143.jpg
 End

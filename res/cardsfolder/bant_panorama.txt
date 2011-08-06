@@ -6,4 +6,5 @@ K:tap: add 1
 A:AB$Fetch | Cost$ 1 T Sac<1/CARDNAME> | Destination$ Battlefield | Tapped$ True | FetchType$ Land.Forest+Basic,Land.Plains+Basic,Land.Island+Basic | FetchNum$ 1 | SpellDescription$ Search your library for a basic Forest, Plains, or Island card and put it onto the battlefield tapped. Then shuffle your library.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_panorama.jpg
+SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/221.jpg
 End

@@ -6,4 +6,5 @@ A:SP$GainControl|Cost$3 R|ValidTgts$Creature.nonLegendary|TgtPrompt$Select targe
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_with_anger.jpg
+SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/158.jpg
 End

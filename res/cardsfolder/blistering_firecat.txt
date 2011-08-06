@@ -9,4 +9,5 @@ K:Haste
 K:At the beginning of the end step, sacrifice CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/ons/en-us/card39737.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/189.jpg
 End

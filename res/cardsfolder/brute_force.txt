@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:+3/+3
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/plc/en-us/card122373.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/116.jpg
 End

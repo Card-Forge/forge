@@ -6,4 +6,5 @@ K:WheneverKeyword:Blocks:No_Initiator:Play:Damage/1:ControllingPlayer_Initiator:
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_strain.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/177.jpg
 End

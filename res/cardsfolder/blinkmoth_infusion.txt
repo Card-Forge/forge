@@ -7,4 +7,5 @@ K:spAllPump:YouCtrl/None:+0/+0:Drawback$UntapAllTypeYouCtrl.Artifact:Untap all a
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinkmoth_infusion.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/25.jpg
 End

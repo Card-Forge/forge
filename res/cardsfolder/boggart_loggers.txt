@@ -7,4 +7,5 @@ K:Forestwalk
 K:abDestroyTgtV 2 B Sac<1/CARDNAME>:Treefolk,Forest:Destroy target Treefolk or Forest.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_loggers.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/103.jpg
 End

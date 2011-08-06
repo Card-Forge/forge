@@ -7,4 +7,7 @@ K:CARDNAME doesn't untap during your untap step.
 K:WheneverKeyword:BeginningOfUpkeep:No_Initiator:Play:UntapPermanent:Self:ASAP:PayMana/1:ControllerUpkeep:At the beginning of your upkeep, you may pay 1. If you do, untap Brass Man.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_man.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/238.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/320.jpg
+SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/73.jpg
 End

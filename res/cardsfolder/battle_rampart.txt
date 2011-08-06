@@ -7,4 +7,6 @@ K:Defender
 K:abPumpTgtC T:Haste
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_rampart.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/173.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/135.jpg
 End

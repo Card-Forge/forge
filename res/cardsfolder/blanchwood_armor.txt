@@ -9,4 +9,9 @@ SVar:X:Count$TypeYouCtrl.Forest
 SVar:BuffedBy:Forest
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blanchwood_armor.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/234.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/237.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/253.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/232.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/232.jpg
 End

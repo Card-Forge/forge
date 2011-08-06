@@ -7,4 +7,5 @@ K:enPump:+1/+2
 K:When CARDNAME is put into a graveyard from the battlefield, return CARDNAME to its owner's hand.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brilliant_halo.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/5.jpg
 End

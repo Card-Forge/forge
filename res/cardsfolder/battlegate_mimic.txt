@@ -6,4 +6,5 @@ PT:2/1
 SVar:BuffedBy:Spell.Red+White
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Battlegate_Mimic.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/133.jpg
 End

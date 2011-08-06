@@ -6,4 +6,5 @@ PT:2/1
 K:abDamageTgtC 2 R Sac<1/CARDNAME>:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_lunatic.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/175.jpg
 End

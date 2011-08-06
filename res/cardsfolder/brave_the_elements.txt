@@ -5,4 +5,5 @@ Text:Choose a color. White creatures you control gain protection from the chosen
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brave_the_elements.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/4.jpg
 End

@@ -8,4 +8,7 @@ K:tap: add 3
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basalt_monolith.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/233.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/235.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/232.jpg
 End

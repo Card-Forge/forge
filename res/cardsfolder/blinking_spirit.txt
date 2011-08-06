@@ -1,10 +1,13 @@
 Name:Blinking Spirit
 ManaCost:3 W
-Types:Creature Spirit	
+Types:Creature Spirit
 Text:no text
 PT:2/2
 A:AB$Bounce | Cost$ 0 | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinking_spirit.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/288.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/8.jpg
+SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/232.jpg
 End

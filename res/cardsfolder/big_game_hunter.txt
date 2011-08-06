@@ -7,4 +7,5 @@ K:etbDestroyTgt:Creature.powerGE4:NoRegen
 K:Madness:B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/big_game_hunter.jpg
+SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/63.jpg
 End

@@ -7,4 +7,5 @@ A:AB$Bounce | Cost$ 2 Sac<1/Permanent> | ValidTgts$ Creature | TgtPrompt$ Select
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barrin_master_wizard.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/63.jpg
 End

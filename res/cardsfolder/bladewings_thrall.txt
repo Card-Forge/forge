@@ -8,4 +8,5 @@ K:stPumpSelf:Creature:0/0/Flying:isPresent Dragon.YouCtrl:Bladewing's Thrall has
 SVar:BuffedBy:Dragon
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladewings_thrall.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/55.jpg
 End

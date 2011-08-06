@@ -7,4 +7,6 @@ K:Intimidate
 K:stPumpAll:Creature.Green+Other+YouCtrl:0/0/Intimidate:No Condition:Other green creatures you control have Intimidate.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bellowing_tanglewurm.jpg
+SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/som/111.jpg
+SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/111.jpg
 End

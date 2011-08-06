@@ -5,4 +5,6 @@ Text:no text
 A:AB$PutCounter | Cost$ 2 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blue_mana_battery.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/318.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/217.jpg
 End

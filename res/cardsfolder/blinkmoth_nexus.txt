@@ -5,4 +5,5 @@ Text:no text
 K:tap: add 1
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/dst/en-us/card39439.jpg
+SetInfo:DST|Rare|http://magiccards.info/scans/en/ds/163.jpg
 End

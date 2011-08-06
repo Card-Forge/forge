@@ -5,4 +5,5 @@ Text:no text
 K:spPumpTgt:+2/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bull_rush.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/73.jpg
 End

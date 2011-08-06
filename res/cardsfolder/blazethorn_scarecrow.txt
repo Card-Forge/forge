@@ -8,4 +8,5 @@ K:stPumpSelf:Creature:0/0/Wither:isPresent Creature.Green+YouCtrl:Blazethorn Sca
 SVar:BuffedBy:Creature.Red,Creature.Green
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazethorn_scarecrow.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/246.jpg
 End

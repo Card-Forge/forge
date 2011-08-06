@@ -7,4 +7,5 @@ K:Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bewilder.jpg
+SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/49.jpg
 End

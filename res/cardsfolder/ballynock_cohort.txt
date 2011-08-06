@@ -8,4 +8,5 @@ K:stPumpSelf:Creature:1/1:isPresent Creature.White+Other+YouCtrl:CARDNAME gets +
 SVar:BuffedBy:Creature.White
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballynock_cohort.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/3.jpg
 End

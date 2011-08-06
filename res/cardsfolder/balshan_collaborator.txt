@@ -7,4 +7,5 @@ K:Flying
 K:abPump B:+1/+1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balshan_collaborator.jpg
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/25.jpg
 End

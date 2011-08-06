@@ -7,4 +7,5 @@ K:Swampwalk
 K:WheneverKeyword:CastSpell/Any:Type/Goblin:Play:ModifyLife/2:ControllingPlayer_Self:ASAP:PayMana/G:No Special Condition:Whenever a player casts a Goblin spell, you may pay G. If you do, you gain 2 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_strider_ash.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/198.jpg
 End

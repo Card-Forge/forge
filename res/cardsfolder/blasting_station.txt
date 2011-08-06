@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Type/Creature:Play:UntapPermanent:Self:ASAP:
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blasting_station.jpg
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/107.jpg
 End

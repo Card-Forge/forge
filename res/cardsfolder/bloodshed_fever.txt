@@ -6,4 +6,5 @@ K:Enchant creature
 K:enPumpCurse:CARDNAME attacks each turn if able.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodshed_fever.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/84.jpg
 End

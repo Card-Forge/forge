@@ -7,4 +7,5 @@ K:First Strike
 SVar:BuffedBy:Spell.Red,Spell.White
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Belligerent_Hatchling.jpg
+SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/134.jpg
 End

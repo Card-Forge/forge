@@ -6,4 +6,6 @@ PT:3/2
 K:Horsemanship
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_general.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/p3k/100.jpg
+SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/100.jpg
 End

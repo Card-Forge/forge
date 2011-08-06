@@ -6,4 +6,5 @@ K:Cascade
 K:spDamageTgtC:4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bituminous_blast.jpg
+SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/34.jpg
 End

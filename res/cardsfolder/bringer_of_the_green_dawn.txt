@@ -7,4 +7,5 @@ K:Trample
 SVar:AltCost:W U B R G
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bringer_of_the_green_dawn.jpg
+SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/83.jpg
 End

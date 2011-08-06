@@ -6,4 +6,5 @@ K:Permanents don't untap during their controllers' untap steps:Land.nonBasic
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/back_to_basics.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/62.jpg
 End

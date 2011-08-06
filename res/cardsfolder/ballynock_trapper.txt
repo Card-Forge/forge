@@ -7,4 +7,5 @@ K:abTapTgt T:Creature:Tap target creature.
 K:WheneverKeyword:CastSpell/Controller:Color/white:Play:UntapPermanent:Self:ASAP:Yes_No:No Special Condition:Whenever you cast a white spell, you may untap Ballynock Trapper.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ballynock_trapper.jpg
+SetInfo:EVE|Common|http://magiccards.info/scans/en/eve/2.jpg
 End

@@ -8,4 +8,5 @@ K:Tap: add R W
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_garrison.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/275.jpg
 End

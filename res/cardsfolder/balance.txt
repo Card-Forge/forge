@@ -4,4 +4,8 @@ Types:Sorcery
 Text:Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balance.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/188.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/187.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/256.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/187.jpg
 End

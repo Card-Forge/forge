@@ -6,4 +6,6 @@ PT:3/3
 K:CARDNAME attacks each turn if able.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodrock_cyclops.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/90.jpg
+SetInfo:10E|Common|http://magiccards.info/scans/en/10e/192.jpg
 End

@@ -7,4 +7,5 @@ K:WheneverKeyword:CastSpell/Any:No Condition:Play:StatsPumpEOT/-1/-1:Self:ASAP:N
 SVar:AntiBuffedBy:Spell
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_creeper.jpg
+SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/42.jpg
 End

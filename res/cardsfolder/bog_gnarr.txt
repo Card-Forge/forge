@@ -8,4 +8,5 @@ SVar:BuffedBy:Spell.Black
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_gnarr.jpg
+SetInfo:APC|Common|http://magiccards.info/scans/en/ap/76.jpg
 End

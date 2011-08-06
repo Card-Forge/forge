@@ -7,4 +7,5 @@ K:stPumpAll:Creature.Sliver:0/0/Trample:No Condiion:All Sliver creatures have tr
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_sliver.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/95.jpg
 End

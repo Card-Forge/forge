@@ -7,4 +7,5 @@ K:Flying
 K:Swampwalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/te/en-us/card4749.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/109.jpg
 End

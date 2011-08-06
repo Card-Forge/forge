@@ -5,4 +5,5 @@ Text:no text
 A:AB$Regenerate | Tgt$ TgtC | Cost$ Return<1/CARDNAME> | SpellDescription$ Regenerate target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broken_fall.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/110.jpg
 End

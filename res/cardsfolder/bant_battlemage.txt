@@ -7,4 +7,5 @@ K:abPumpTgtC G T:Trample
 K:abPumpTgtC U T:Flying
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bant_battlemage.jpg
+SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/5.jpg
 End

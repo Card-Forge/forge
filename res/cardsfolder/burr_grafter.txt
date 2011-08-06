@@ -8,4 +8,5 @@ K:Soulshift:3
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burr_grafter.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/203.jpg
 End

@@ -7,7 +7,5 @@ A:AB$Pump | Cost$ 1 G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDesc
 K:Madness:0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/basking_rootwalla.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/121.jpg
 End
-#
-# K:abPump 1 G:+2/+2
-#

@@ -8,4 +8,5 @@ K:Echo:2 B
 K:etbDestroyTgt:Creature.nonArtifact+nonBlack
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bone_shredder.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/49.jpg
 End

@@ -9,4 +9,5 @@ SVar:X:Count$Valid Creature.YouCtrl/Minus.1
 SVar:BuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bravado.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/177.jpg
 End

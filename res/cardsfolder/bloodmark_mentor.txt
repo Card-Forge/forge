@@ -7,4 +7,5 @@ K:StaticEffect:Play:Permanents you Control:Keyword/First Strike:Type.Creature!Co
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodmark_mentor.jpg
+SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/83.jpg
 End

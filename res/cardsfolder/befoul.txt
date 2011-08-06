@@ -5,4 +5,7 @@ Text:Destroy target land or nonblack creature. It can't be regenerated.
 K:spDestroyTgt:Land,Creature.nonBlack:NoRegen
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/befoul.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/116.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/102.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/118.jpg
 End

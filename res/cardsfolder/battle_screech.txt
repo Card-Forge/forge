@@ -6,4 +6,5 @@ A:SP$Token | Cost$ 2 W W | TokenImage$ W 1 1 Bird Flying | TokenOwner$ Controlle
 K:Flashback:tapXType<3/Creature.White>
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_screech.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/3.jpg
 End

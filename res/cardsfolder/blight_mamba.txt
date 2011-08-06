@@ -7,4 +7,6 @@ K:Infect
 A:AB$Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blight_mamba.jpg
+SetInfo:MRD|Common|http://magiccards.info/scans/en/som/112.jpg
+SetInfo:SOM|Common|http://magiccards.info/scans/en/som/112.jpg
 End

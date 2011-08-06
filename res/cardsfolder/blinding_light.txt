@@ -5,4 +5,8 @@ Text:Tap all nonwhite creatures.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/p3/en-us/card20388.jpg
+SetInfo:S99|Rare|http://magiccards.info/scans/en/st/8.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/209.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po/170.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/9.jpg
 End

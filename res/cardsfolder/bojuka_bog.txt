@@ -5,4 +5,5 @@ Text:CARDNAME enters the battlefield tapped. When CARDNAME enters the battlefiel
 K:tap: add B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bojuka_bog.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/132.jpg
 End

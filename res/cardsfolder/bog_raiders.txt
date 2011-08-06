@@ -6,4 +6,8 @@ PT:2/2
 K:Swampwalk
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/uz/en-us/card5597.jpg
+SetInfo:M11|Common|http://magiccards.info/scans/en/m11/86.jpg
+SetInfo:USG|Common|http://magiccards.info/scans/en/us/119.jpg
+SetInfo:S99|Common|http://magiccards.info/scans/en/st/66.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/po/4.jpg
 End

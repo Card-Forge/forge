@@ -7,4 +7,5 @@ K:1: add B
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_initiate.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/95.jpg
 End

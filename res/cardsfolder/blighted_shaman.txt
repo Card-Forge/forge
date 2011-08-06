@@ -7,4 +7,6 @@ K:abPumpTgtC T Sac<1/Land>:+1/+1
 K:abPumpTgtC T Sac<1/Creature>:+2/+2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blighted_shaman.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/114.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/5.jpg
 End

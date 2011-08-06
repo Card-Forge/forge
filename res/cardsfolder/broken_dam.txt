@@ -6,4 +6,6 @@ A:SP$Tap | Cost$ U | TargetMin$ 1 | TargetMax$ 2 | TgtPrompt$ Choose target crea
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/broken_dam.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/37.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/37.jpg
 End

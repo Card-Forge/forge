@@ -5,4 +5,8 @@ Text:When enchanted land becomes tapped, destroy it.
 K:Enchant Land Curse
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blight.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/6.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/113.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/6.jpg
+SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/3.jpg
 End

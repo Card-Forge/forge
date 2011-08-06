@@ -11,4 +11,5 @@ K:tap, Sacrifice CARDNAME: Add G to your mana pool.
 K:Comes into play tapped.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_wreckage.jpg
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/314.jpg
 End

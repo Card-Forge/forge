@@ -6,4 +6,5 @@ K:spGainLife:X:You gain life equal to the number of creature cards in your grave
 SVar:X:Count$TypeInYourYard.Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blossoming_wreath.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/62.jpg
 End

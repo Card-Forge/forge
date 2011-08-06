@@ -6,4 +6,17 @@ PT:3/3
 K:Swampwalk
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83011.jpg
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/120.jpg
+SetInfo:LEB|Uncommon|http://magiccards.info/scans/en/be/4.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/123.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po/5.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/8.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/117.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/130.jpg
+SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/86.jpg
+SetInfo:6ED|Uncommon|http://magiccards.info/scans/en/6e/118.jpg
+SetInfo:3ED|Uncommon|http://magiccards.info/scans/en/rv/4.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/9.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/67.jpg
+SetInfo:2ED|Uncommon|http://magiccards.info/scans/en/un/4.jpg
 End

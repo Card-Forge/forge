@@ -8,4 +8,7 @@ SVar:X:Sacrificed$CardPower
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodshot_cyclops.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/179.jpg
+SetInfo:UDS|Rare|http://magiccards.info/scans/en/ud/77.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/176.jpg
 End

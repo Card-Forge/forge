@@ -4,4 +4,5 @@ Types:Sorcery
 Text:If you control an Eldrazi Spawn, put three 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool." Otherwise, put one of those tokens onto the battlefield.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brood_birthing.jpg
+SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/138.jpg
 End

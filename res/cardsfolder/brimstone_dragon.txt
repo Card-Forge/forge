@@ -7,4 +7,6 @@ K:Flying
 K:Haste
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6605.jpg
+SetInfo:P02|Rare|http://magiccards.info/scans/en/po2/92.jpg
+SetInfo:POR|Rare|http://magiccards.info/scans/en/po2/92.jpg
 End

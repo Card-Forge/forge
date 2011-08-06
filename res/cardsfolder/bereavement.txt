@@ -6,4 +6,6 @@ K:WheneverKeyword:PermanentIntoGraveyard:Type/Creature!Color/green:Play:DiscardC
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bereavement.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/117.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/120.jpg
 End

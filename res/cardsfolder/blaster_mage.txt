@@ -6,4 +6,5 @@ PT:2/2
 K:abDestroyTgtV R T Discard<1/Any>:Wall:Destroy target Wall.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blaster_mage.jpg
+SetInfo:MMQ|Common|http://magiccards.info/scans/en/mm/175.jpg
 End

@@ -5,4 +5,5 @@ Text:Target player puts the top three cards of his or her library into his or he
 K:Storm
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brain_freeze.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/29.jpg
 End

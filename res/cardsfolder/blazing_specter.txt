@@ -8,4 +8,5 @@ K:Haste
 K:WheneverKeyword:DealsDamage/Opponent:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:No_Condition:No Special Condition:Whenever Blazing Specter deals combat damage to a player, that player discards a card.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blazing_specter.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/236.jpg
 End

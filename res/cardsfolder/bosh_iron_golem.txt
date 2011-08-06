@@ -9,4 +9,5 @@ SVar:X:Sacrificed$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bosh_iron_golem.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/147.jpg
 End

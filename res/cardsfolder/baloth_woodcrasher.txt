@@ -7,4 +7,5 @@ K:WheneverKeyword:EntersBattleField:Type/Land:Play:KeywordPumpEOT/Trample!StatsP
 SVar:BuffedBy:Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baloth_woodcrasher.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/157.jpg
 End

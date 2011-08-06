@@ -7,4 +7,5 @@ K:Level up:2 G
 K:maxLevel:6
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beastbreaker_of_bala_ged.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/178.jpg
 End

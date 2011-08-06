@@ -6,4 +6,6 @@ PT:3/2
 K:WheneverKeyword:EntersBattleField:Self:Play:DiscardCards/1:ControllingPlayer_Opponent:ASAP:Yes_No:No Special Condition:When Brutal Nightstalker enters the battlefield, you may have target opponent discard a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal_Second_Age/brutal_nightstalker.jpg
+SetInfo:P02|Uncommon|http://magiccards.info/scans/en/po2/4.jpg
+SetInfo:POR|Uncommon|http://magiccards.info/scans/en/po2/4.jpg
 End

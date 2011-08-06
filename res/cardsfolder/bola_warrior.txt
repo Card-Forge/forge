@@ -6,4 +6,5 @@ PT:1/1
 A:AB$Pump | Cost$ R T Discard<1/Any> | Tgt$ TgtC | KW$ CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bola_warrior.jpg
+SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/78.jpg
 End

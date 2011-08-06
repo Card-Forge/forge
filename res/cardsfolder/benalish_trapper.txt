@@ -6,4 +6,5 @@ PT:1/2
 K:abTapTgt W T:Creature:Tap target creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_trapper.jpg
+SetInfo:INV|Common|http://magiccards.info/scans/en/in/8.jpg
 End

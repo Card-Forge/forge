@@ -8,4 +8,5 @@ K:WheneverKeyword:CastSpell/Controller:Type/Treefolk:Play:StatsPumpEOT/2/2:Self:
 SVar:BuffedBy:Forest,Treefolk
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battlewand_oak.jpg
+SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/197.jpg
 End

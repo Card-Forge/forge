@@ -5,4 +5,6 @@ Text:no text
 K:spDamageTgtOpp:5:Burning Fields deals 5 damage to target opponent.:Burning Fields - deals 5 damage
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_fields.jpg
+SetInfo:POR|Common|http://magiccards.info/scans/en/p3k/103.jpg
+SetInfo:PTK|Common|http://magiccards.info/scans/en/p3k/103.jpg
 End

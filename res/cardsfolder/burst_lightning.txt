@@ -4,4 +4,5 @@ Types:Instant
 Text:no text
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burst_lightning.jpg
+SetInfo:ZEN|Common|http://magiccards.info/scans/en/zen/119.jpg
 End

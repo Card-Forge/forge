@@ -7,4 +7,5 @@ K:abPumpTgtC 1 R:Haste
 K:abPumpTgtC 1 W:First Strike
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_guildmage.jpg
+SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/242.jpg
 End

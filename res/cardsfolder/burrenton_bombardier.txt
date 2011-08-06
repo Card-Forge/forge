@@ -7,4 +7,5 @@ A:AB$PutCounter | Cost$ 2 W Discard<1/CARDNAME> | Tgt$ TgtC | CounterType$ P1P1 
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burrenton_bombardier.jpg
+SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/3.jpg
 End

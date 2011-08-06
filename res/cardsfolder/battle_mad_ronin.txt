@@ -7,4 +7,5 @@ K:CARDNAME attacks each turn if able.
 K:Bushido 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/battle_mad_ronin.jpg
+SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/156.jpg
 End

@@ -6,4 +6,5 @@ K:spDrawCards:X:Draw a card for each creature target player controls, then draw 
 SVar:X:Count$TypeOnBattlefield.Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/biomantic_mastery.jpg
+SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/142.jpg
 End

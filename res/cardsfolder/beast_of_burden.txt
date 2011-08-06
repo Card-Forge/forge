@@ -7,4 +7,8 @@ K:StaticEffect:Play:Self:SetPT/Type.Creature/Type.Creature:All Permanents:Beast 
 SVar:BuffedBy:Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/beast_of_burden.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/292.jpg
+SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/122.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/288.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/287.jpg
 End

@@ -6,4 +6,5 @@ K:tap: add 1
 K:Cycling:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blasted_landscape.jpg
+SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/319.jpg
 End

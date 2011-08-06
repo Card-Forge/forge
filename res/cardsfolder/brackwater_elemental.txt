@@ -8,4 +8,5 @@ K:WheneverKeyword:Blocks:Self:Play:KeywordPumpEOT/At the beginning of the end st
 K:Unearth:2 U
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brackwater_elemental.jpg
+SetInfo:CON|Common|http://magiccards.info/scans/en/cfx/21.jpg
 End

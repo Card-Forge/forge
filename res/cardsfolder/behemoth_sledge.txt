@@ -5,4 +5,5 @@ Text:Equipped creature gets +2/+2 and has lifelink and trample.
 K:eqPump 3:+2/+2/Lifelink & Trample
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/behemoth_sledge.jpg
+SetInfo:ARB|Uncommon|http://magiccards.info/scans/en/arb/65.jpg
 End

@@ -6,4 +6,5 @@ PT:2/2
 A:AB$Pump | Cost$ S | NumAtt$ +1 | NumDef$ +1 | ActivationLimit$ 1 | SpellDescription$ Boreal Centaur gets +1/+0 until end of turn. Activate this ability only once each turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boreal_centaur.jpg
+SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/104.jpg
 End

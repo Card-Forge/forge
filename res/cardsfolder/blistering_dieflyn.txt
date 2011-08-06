@@ -7,4 +7,5 @@ K:Flying
 K:abPump BR:+1/+0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blistering_dieflyn.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/82.jpg
 End

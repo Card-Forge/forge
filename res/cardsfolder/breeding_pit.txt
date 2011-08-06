@@ -6,4 +6,6 @@ K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay B B
 K:WheneverKeyword:BeginningOfEndStep:No_Initiator:Play:MakeToken-Thrull-B-0-1-None-/1:ControllingPlayer_Self:ASAP:No_Condition:ControllerEndStep:At the beginning of your end step, put a 0/1 black Thrull creature token onto the battlefield.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breeding_pit.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/10.jpg
+SetInfo:FEM|Uncommon|http://magiccards.info/scans/en/fe/9.jpg
 End
