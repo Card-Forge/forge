@@ -1,3 +1,10 @@
+Sejiri Steppe
+no cost
+Land
+When Sejiri Steppe enters the battlefield, target creature you control gains protection from the color of your choice until end of turn. 
+tap: add W
+Comes into play tapped.
+
 Lavaclaw Reaches
 no cost
 Land
