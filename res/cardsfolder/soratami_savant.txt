@@ -4,6 +4,7 @@ Types:Creature Moonfolk Wizard
 Text:no text
 PT:2/2
 A:AB$Counter | Cost$ 3 Return<1/Land> | Type$ Spell | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays 3.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soratami_savant.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/90.jpg

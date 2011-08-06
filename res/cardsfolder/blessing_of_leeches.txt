@@ -8,6 +8,7 @@ K:Enchant creature
 K:enPump:+0/+0
 A:AB$Regenerate | Cost$ 0 | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
 #TODO - check rarity on this one
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessing_of_leeches.jpg
 End

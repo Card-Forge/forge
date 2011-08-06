@@ -4,6 +4,7 @@ Types:Land
 Text:no text
 K:tap: add 1
 A:AB$PutCounter|Cost$1 T|CounterType$STORAGE | CounterNum$1 | SpellDescription$Put a storage counter on CARDNAME.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dreadship_reef.jpg
 SetInfo:TSP|Uncommon|http://magiccards.info/scans/en/ts/271.jpg

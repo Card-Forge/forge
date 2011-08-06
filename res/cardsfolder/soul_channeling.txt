@@ -5,6 +5,7 @@ Text:no text
 K:Enchant creature
 K:enPump:0/0
 A:AB$Regenerate | Cost$ PayLife<2> | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_channeling.jpg
 End

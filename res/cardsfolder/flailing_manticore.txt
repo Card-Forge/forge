@@ -7,6 +7,7 @@ K:Flying
 K:First Strike
 A:AB$Pump | Cost$ 1 | NumAtt$ +1 | NumDef$ +1 | AnyPlayer$ True | SpellDescription$ Flailing Manticore gets +1/+1 until end of turn.
 A:AB$Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ -1 | AnyPlayer$ True | SpellDescription$ Flailing Manticore gets -1/-1 until end of turn.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flailing_manticore.jpg
 SetInfo:MM|Rare|http://magiccards.info/scans/en/mm/187.jpg

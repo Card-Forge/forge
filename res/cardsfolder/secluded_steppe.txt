@@ -5,6 +5,7 @@ Text:no text
 K:CARDNAME enters the battlefield tapped.
 K:tap: add W
 K:Cycling:W
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/secluded_steppe.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/324.jpg

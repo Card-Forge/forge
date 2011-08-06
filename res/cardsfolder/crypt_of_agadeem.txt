@@ -4,6 +4,7 @@ Types:Land
 Text:no text
 K:CARDNAME enters the battlefield tapped.
 K:tap: add B
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_of_agadeem.jpg
 SetInfo:ZEN|Rare|http://magiccards.info/scans/en/zen/212.jpg

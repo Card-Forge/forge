@@ -6,6 +6,7 @@ A:SP$Counter | Cost$ 2 U | Type$ Spell | UnlessCost$ 2 | SubAbility$SVar=DBDraw 
 K:Multikicker 1 U
 SVar:DBDraw:DB$Draw | NumCards$ X
 SVar:X:Count$TimesKicked
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_contortion.jpg
 SetInfo:WWK|Uncommon|http://magiccards.info/scans/en/wwk/38.jpg

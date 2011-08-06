@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:paintap:1:R
-A:AB$DealDamage | Cost$ R T Sac<1/CARDNAME> | Tgt$TgtCP | NumDmg$ 2 |Threshold$True|PrecostDesc$ Threshold - | SpellDescription$ CARDNAME deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.
+A:AB$DealDamage | Cost$ R T Sac<1/CARDNAME> | Tgt$TgtCP | NumDmg$ 2 | Threshold$ True | PrecostDesc$ Threshold - | SpellDescription$ CARDNAME deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_ring.jpg
 End

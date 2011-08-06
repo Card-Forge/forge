@@ -6,6 +6,7 @@ PT:2/2
 A:AB$LoseLife | Cost$ T | Defined$ Opponent | LifeAmount$ X | SubAbility$ YouLoseLife/dX | SpellDescription$ Each player loses 1 life for each Swamp he or she controls.
 SVar:X:Count$TypeOppCtrl.Swamp
 SVar:dX:Count$TypeYouCtrl.Swamp
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/tor/en-us/card35082.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/16.jpg

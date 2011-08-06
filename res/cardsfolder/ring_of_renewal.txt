@@ -2,7 +2,7 @@ Name:Ring of Renewal
 ManaCost:5
 Types:Artifact
 Text:no text
-A:AB$Discard|Cost$5 T|NumCards$1|Mode$Random|SpellDescription$Discard a card at random, then draw two cards.|SubAbility$SVar=DB
+A:AB$Discard | Cost$ 5 T | NumCards$ 1 | Mode$ Random | SpellDescription$ Discard a card at random, then draw two cards. | SubAbility$SVar=DB
 SVar:DB:DB$Draw|NumCards$2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_renewal.jpg

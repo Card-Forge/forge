@@ -4,6 +4,7 @@ Types:Instant
 Text:no text
 A:SP$Counter | Cost$ 2 U | Type$ Spell | UnlessCost$ 1 | SubAbility$SVar=DBDraw | SpellDescription$ Counter target spell unless its controller pays 1. Draw a card
 SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runeboggle.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/33.jpg

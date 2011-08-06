@@ -4,6 +4,7 @@ Types:Instant
 Text:no text
 A:SP$Counter | Cost$ X U | Type$ Spell | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays X.
 SVar:X:Count$xPaid
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/condescend.jpg
 SetInfo:5DN|Common|http://magiccards.info/scans/en/5dn/27.jpg

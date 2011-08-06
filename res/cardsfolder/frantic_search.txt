@@ -5,6 +5,7 @@ Text:no text
 A:SP$Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards, then discard two cards. Untap up to three lands. | SubAbility$ SVar=DBDiscard
 SVar:DBDiscard:DB$Discard | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ YouUntapUpTo/2/Land
 # Use old subability for untapping until AF$Untap can handle Urza block style "Free" spells
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frantic_search.jpg
 SetInfo:ULG|Common|http://magiccards.info/scans/en/ul/32.jpg

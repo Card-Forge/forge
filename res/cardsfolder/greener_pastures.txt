@@ -2,6 +2,7 @@ Name:Greener Pastures
 ManaCost:2 G
 Types:Enchantment
 Text:At the beginning of each player's upkeep, if that player controls more lands than each other player, the player puts a 1/1 green Saproling creature token onto the battlefield.
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greener_pastures.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/258.jpg

@@ -2,7 +2,7 @@ Name:Claws of Wirewood
 ManaCost:3 G
 Types:Sorcery
 Text:no text
-A:SP$DamageAll|Cost$3 G|NumDmg$3|ValidCards$Creature.withFlying|ValidPlayers$Each|ValidDescription$each creature with flying and each player.|SpellDescription$CARDNAME deals 3 damage to each creature with flying and each player.
+A:SP$DamageAll | Cost$ 3 G | NumDmg$ 3 | ValidCards$ Creature.withFlying | ValidPlayers$ Each | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals 3 damage to each creature with flying and each player.
 K:Cycling:2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/claws_of_wirewood.jpg

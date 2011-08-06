@@ -3,6 +3,7 @@ ManaCost:U
 Types:Instant
 Text:no text
 A:SP$Counter | Cost$ U | Type$ Spell | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays 1.
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/force_spike.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/88.jpg

@@ -5,6 +5,7 @@ Text:no text
 K:CARDNAME enters the battlefield tapped.
 K:tap: add G
 K:Cycling:G
+SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_thicket.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/326.jpg
