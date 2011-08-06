@@ -1,0 +1,9 @@
+Name:Deepwood Drummer
+ManaCost:1 G
+Types:Creature Human Spellshaper
+Text:no text
+PT:1/1
+K:abPumpTgtC G T Discard<1/Any>:+2/+2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deepwood_drummer.jpg
+End

@@ -1,0 +1,9 @@
+Name:Coral Helm
+ManaCost:3
+Types:Artifact
+Text:no text
+K:abPumpTgtC 3 Discard<1/Random>:+2/+2
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_helm.jpg
+End

@@ -1,0 +1,11 @@
+Name:Burr Grafter
+ManaCost:3 G
+Types:Creature Spirit
+Text:no text
+PT:2/2
+K:abPumpTgtC Sac<1/CARDNAME>:+2/+2
+K:Soulshift:3
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/burr_grafter.jpg
+End

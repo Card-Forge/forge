@@ -1,0 +1,9 @@
+Name:Narcissism
+ManaCost:2 G
+Types:Enchantment
+Text:no text
+K:abPumpTgtC 1 G Discard<1/Any>:+2/+2
+K:abPumpTgtC 1 G Sac<1/CARDNAME>:+2/+2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/narcissism.jpg
+End
