@@ -11781,6 +11781,24 @@ public class GameActionUtil {
 			}
 		}// execute()
 	};
+	
+	/**
+	 * stores the Command
+	 */
+	public static Command Primalcrux = new Command() {
+		private static final long serialVersionUID = -5760985115546543522L;
+
+		public void execute() {
+			// get all creatures
+			CardList cards = AllZoneUtil.getCardsInPlay("Primalcrux");
+			for(Card c:cards) {
+				String player = c.getController();
+				int pt = CardFactoryUtil.getNumberOfManaSymbolsControlledByColor("B", player);
+				c.setBaseAttack(pt);
+				c.setBaseDefense(pt);
+			}
+		}// execute()
+	};
 
 	public static Command Absolute_Grace              = new Command() {
 		private static final long serialVersionUID   = -6904191523315339355L;
@@ -20832,6 +20850,7 @@ public class GameActionUtil {
 		commands.put("Angry_Mob", Angry_Mob);
 		commands.put("Maraxus_of_Keld", Maraxus_of_Keld);
 		commands.put("Umbra_Stalker", Umbra_Stalker);
+		commands.put("Primalcrux", Primalcrux);
 		
 		//System.out.println("size of commands: " + commands.size());
 

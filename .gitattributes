@@ -2917,6 +2917,7 @@ res/cardsfolder/primal_clay.txt -text svneol=native#text/plain
 res/cardsfolder/primal_frenzy.txt -text svneol=native#text/plain
 res/cardsfolder/primal_plasma.txt -text svneol=native#text/plain
 res/cardsfolder/primal_rage.txt -text svneol=native#text/plain
+res/cardsfolder/primalcrux.txt -text svneol=native#text/plain
 res/cardsfolder/primeval_shambler.txt -text svneol=native#text/plain
 res/cardsfolder/primeval_titan.txt -text svneol=native#text/plain
 res/cardsfolder/primoc_escapee.txt -text svneol=native#text/plain
