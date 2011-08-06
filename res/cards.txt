@@ -6685,6 +6685,7 @@ Destroy target nonblack creature. You gain 3 life.
 spDestroyTgt:Creature.Nonblack:Drawback$YouGainLife/3
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
+SVar:Picture:http://serv2.tcgimages.eu/img/cards/Portal_Second_Age/dark_offering.jpg
 
 Dark Ritual
 B
