@@ -5989,6 +5989,8 @@ class CardFactory_Auras {
                 card.addEnchantCommand(CardFactoryUtil.enPump_onEnchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
                 card.addUnEnchantCommand(CardFactoryUtil.enPump_unEnchant(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
                 card.addLeavesPlayCommand(CardFactoryUtil.enPump_LeavesPlay(card, Power, Tough, extrinsicKeywords, spDesc, stDesc));
+                
+                card.setSVar("PlayMain1", "TRUE");                
             }
         }// enPump[Curse]
         
@@ -6290,6 +6292,8 @@ class CardFactory_Auras {
                         stopSetNext(CardFactoryUtil.input_targetSpecific(spell, creatures, "Select target creature", true, false));
                     }
                 };
+                
+                card.setSVar("PlayMain1", "TRUE");
                 
                 card.addEnchantCommand(onEnchant);
                 card.addUnEnchantCommand(onUnEnchant);
