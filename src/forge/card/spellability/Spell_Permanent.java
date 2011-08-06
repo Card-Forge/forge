@@ -79,7 +79,7 @@ public class Spell_Permanent extends Spell {
                 if(computer.size() != 0) {
                     target = computer.get(0);
                     championAbilityComes.setTargetCard(target);
-                    AllZone.Stack.add(championAbilityComes);
+                    AllZone.Stack.addSimultaneousStackEntry(championAbilityComes);
                     if(getSourceCard().getName().equals("Mistbind Clique")) {
                     	//TODO this needs to target
                     	CardList list = AllZoneUtil.getPlayerLandsInPlay(AllZone.HumanPlayer);
@@ -117,7 +117,7 @@ public class Spell_Permanent extends Spell {
             sb.append(getSourceCard().getName()).append(" - returning card to battlefield.");
             ability.setStackDescription(sb.toString());
             
-            AllZone.Stack.add(ability);
+            AllZone.Stack.addSimultaneousStackEntry(ability);
         }//execute()
     };//championCommandLeavesPlay
     

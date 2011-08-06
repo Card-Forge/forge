@@ -283,7 +283,6 @@ public class TriggerHandler {
                 }
             }
         }
-
 	}
 
     //Checks if the conditions are right for a single trigger to go off, and runs it if so.
@@ -948,7 +947,9 @@ public class TriggerHandler {
 				}
 			};
 			wrapperAbility.setTrigger(true);
-			
+            wrapperAbility.setMandatory(isMandatory);
+            wrapperAbility.setDescription(wrapperAbility.getStackDescription());
+			/*
 			if(host.getController().isHuman())
 			{
 				AllZone.GameAction.playSpellAbility(wrapperAbility);
@@ -958,7 +959,8 @@ public class TriggerHandler {
 				wrapperAbility.doTrigger(isMandatory);
 				ComputerUtil.playStack(wrapperAbility);
 			}
-
+                */
+            AllZone.Stack.addSimultaneousStackEntry(wrapperAbility);
             return true;
 		}
 

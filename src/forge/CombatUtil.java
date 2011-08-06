@@ -1811,6 +1811,7 @@ public class CombatUtil {
         }
         
         a.setCreatureGotBlockedThisCombat(true);
+
     }
     
     public static void executeExaltedAbility(Card c, int magnitude) {
@@ -1846,7 +1847,7 @@ public class CombatUtil {
             sb.append(c).append(" - (Exalted) gets +1/+1 until EOT.");
             ability.setStackDescription(sb.toString());
             
-            AllZone.Stack.add(ability);
+            AllZone.Stack.addSimultaneousStackEntry(ability);
         }
         
         Player phasingPlayer = c.getController();
@@ -1864,7 +1865,7 @@ public class CombatUtil {
 			sbUntap.append(c).append(" - (Exalted) untap.");
 			fhUntap.setStackDescription(sbUntap.toString());
 			
-			AllZone.Stack.add(fhUntap);
+			AllZone.Stack.addSimultaneousStackEntry(fhUntap);
 		
 			// If any Finest Hours, queue up a new combat phase
 			for (int ix = 0; ix < AllZoneUtil.getPlayerCardsInPlay(phasingPlayer, "Finest Hour").size(); ix++) {
@@ -1878,7 +1879,7 @@ public class CombatUtil {
 				sbACom.append(c).append(" - (Exalted) ").append(phasingPlayer).append(" gets Extra Combat Phase.");
 				fhAddCombat.setStackDescription(sbACom.toString());
 				
-				AllZone.Stack.add(fhAddCombat);
+				AllZone.Stack.addSimultaneousStackEntry(fhAddCombat);
 			}
 		}
         
@@ -1929,7 +1930,7 @@ public class CombatUtil {
             sb4.append("put it onto the battlefield attached to that creature, then shuffles library.");
             ability4.setStackDescription(sb4.toString());
             
-            AllZone.Stack.add(ability4);
+            AllZone.Stack.addSimultaneousStackEntry(ability4);
             } // For
         }
     }

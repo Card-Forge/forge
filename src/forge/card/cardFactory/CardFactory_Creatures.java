@@ -189,7 +189,8 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 8485080996453793968L;
                 
                 public void execute() {
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };//Command
             ability.setStackDescription("Caller of the Claw - Put a 2/2 green Bear creature token onto the battlefield for each nontoken creature put into your graveyard from play this turn.");
@@ -456,7 +457,8 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 2856638426932227407L;
                 
                 public void execute() {
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             
@@ -507,8 +509,9 @@ public class CardFactory_Creatures {
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(card.getName()).append(" - choose: 3/3, 2/2 flying, 1/6 defender");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
@@ -529,8 +532,9 @@ public class CardFactory_Creatures {
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(card.getName()).append(" - ").append(card.getOwner()).append(" creatures have Trample.");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addDestroyCommand(destroy);
@@ -552,8 +556,9 @@ public class CardFactory_Creatures {
                 	sb.append(card.getName()).append(" - ").append(card.getOwner());
                 	sb.append(" creatures have Swampwalk.");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addDestroyCommand(destroy);
@@ -688,8 +693,9 @@ public class CardFactory_Creatures {
                 	sb.append(card.getName()).append(" - ").append(card.getOwner());
                 	sb.append(" creatures have Haste.");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addDestroyCommand(destroy);
@@ -711,8 +717,9 @@ public class CardFactory_Creatures {
                 	sb.append(card.getName()).append(" - ").append(card.getOwner());
                 	sb.append(" creatures have First Strike.");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addDestroyCommand(destroy);
@@ -734,8 +741,9 @@ public class CardFactory_Creatures {
                 	sb.append(card.getName()).append(" - ").append(card.getOwner());
                 	sb.append(" creatures have Flying.");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addDestroyCommand(destroy);
@@ -828,8 +836,9 @@ public class CardFactory_Creatures {
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(card.getController()).append(" sacrifices Drekavac unless he discards a noncreature card");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             
@@ -902,8 +911,9 @@ public class CardFactory_Creatures {
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(card.getController()).append(" - discards at random or sacrifices ").append(cardName);
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
@@ -980,7 +990,8 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 4757054648163014149L;
                 
                 public void execute() {
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             StringBuilder sb = new StringBuilder();
@@ -1007,8 +1018,8 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -3934471871041458847L;
                 
                 public void execute() {
-                    AllZone.Stack.add(ability);
-                    
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }//execute()
             };
             card.addComesIntoPlayCommand(intoPlay);
@@ -1091,7 +1102,8 @@ public class CardFactory_Creatures {
                         if(o != null)//should never happen, but just in case
                         {
                             ability.setTargetCard((Card) o);
-                            AllZone.Stack.add(ability);
+                            AllZone.Stack.addSimultaneousStackEntry(ability);
+
                         }
                     }//else
                 }//execute()
@@ -1165,8 +1177,9 @@ public class CardFactory_Creatures {
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(card.getController()).append(" untaps up to 5 lands.");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
@@ -1227,8 +1240,9 @@ public class CardFactory_Creatures {
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(card.getController()).append(" untaps up to 7 lands.");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
@@ -1289,8 +1303,9 @@ public class CardFactory_Creatures {
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(card.getController()).append(" untaps up to 7 lands.");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
@@ -1371,8 +1386,9 @@ public class CardFactory_Creatures {
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(card.getController()).append(" untaps up to 2 lands.");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
@@ -1407,8 +1423,9 @@ public class CardFactory_Creatures {
                 	sb.append(card.getController());
                 	sb.append(" shuffles the cards from his hand into his library, then draws that many cards.");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability );
+
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
@@ -1438,8 +1455,9 @@ public class CardFactory_Creatures {
                 	sb.append(card.getController().getOpponent());
                 	sb.append(" gains control of all other permanents you control");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
@@ -1512,7 +1530,8 @@ public class CardFactory_Creatures {
                         if(computer.size() != 0) {
                             target = computer.get(0);
                             abilityComes.setTargetCard(target);
-                            AllZone.Stack.add(abilityComes);
+                            AllZone.Stack.addSimultaneousStackEntry(abilityComes);
+
                         }
                         else
                         	AllZone.GameAction.sacrifice(card);
@@ -1545,8 +1564,9 @@ public class CardFactory_Creatures {
                     StringBuilder sb = new StringBuilder();
                     sb.append(card.getName()).append(" - returning creature to the battlefield");
                     ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }//execute()
             };//Command
             
@@ -1663,7 +1683,8 @@ public class CardFactory_Creatures {
                     //computer chooses target in Command destroy
                     if(con.equals(AllZone.ComputerPlayer)) ability.setTargetPlayer(AllZone.HumanPlayer);
                     
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }//execute()
             };
             card.addDestroyCommand(destroy);
@@ -1707,8 +1728,9 @@ public class CardFactory_Creatures {
                     StringBuilder sb = new StringBuilder();
                     sb.append(card).append(" - ").append(opponent).append(" discards cards");
                     ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }//execute()
             };
             card.addDestroyCommand(destroy);
@@ -1753,8 +1775,9 @@ public class CardFactory_Creatures {
                     StringBuilder sb = new StringBuilder();
                     sb.append(card).append(" - ").append(card.getController()).append(" draws cards");
                     ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                     
                 }//execute()
             };
@@ -1799,8 +1822,9 @@ public class CardFactory_Creatures {
                     StringBuilder sb = new StringBuilder();
                     sb.append(card).append(" - ").append(card.getController()).append(" gains life");
                     ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                     
                 }//execute()
             };
@@ -1846,8 +1870,9 @@ public class CardFactory_Creatures {
                     StringBuilder sb = new StringBuilder();
                     sb.append(card).append(" - ").append(card.getController()).append(" puts tokens onto the battlefield");
                     ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }//execute()
             };
             card.addDestroyCommand(destroy);
@@ -2447,7 +2472,8 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = -2433442359225521472L;
                 
                 public void execute() {
-                    AllZone.Stack.add(new Ability(card, "0", "Adarkar Valkyrie - Return " + target[0] + " from graveyard to the battlefield") {
+
+                    AllZone.Stack.addSimultaneousStackEntry(new Ability(card, "0", "Adarkar Valkyrie - Return " + target[0] + " from graveyard to the battlefield") {
                         @Override
                         public void resolve() {
                             PlayerZone grave = AllZone.getZone(target[0]);
@@ -2887,7 +2913,8 @@ public class CardFactory_Creatures {
                     else if(ability.canPlayAI()) {
                         ability.chooseTargetAI();
                         //need to add this to the stack
-                        AllZone.Stack.add(ability);
+                        AllZone.Stack.addSimultaneousStackEntry(ability);
+
                     }
                     
                 }//execute()
@@ -3078,7 +3105,8 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     AllZone.GameAction.sacrifice(card);
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             }));
         }//*************** END ************ END **************************
@@ -3155,7 +3183,8 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 6667896040611028600L;
                 
                 public void execute() {
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             });
             
@@ -3399,7 +3428,8 @@ public class CardFactory_Creatures {
                     	sb.append("Mystic Snake counters ").append(AllZone.Stack.peek().getSourceCard().getName());
                     	ability.setStackDescription(sb.toString());
                         
-                        AllZone.Stack.add(ability);
+                        AllZone.Stack.addSimultaneousStackEntry(ability);
+
                     }
                 }
             };
@@ -4383,9 +4413,11 @@ public class CardFactory_Creatures {
                     
                     if (card.getName().equals("Lost Auramancers") 
                             && card.getCounters(Counters.TIME) <= 0) {
-                        AllZone.Stack.add(ability);
+                        AllZone.Stack.addSimultaneousStackEntry(ability);
+
                     } else if (card.getName().equals("Academy Rector")) {
-                        AllZone.Stack.add(ability);
+                        AllZone.Stack.addSimultaneousStackEntry(ability);
+
                     }
                     
                 }// execute()
@@ -4459,7 +4491,8 @@ public class CardFactory_Creatures {
                         ButtonUtil.disableAll();
                     } else if(card.getController().equals(AllZone.ComputerPlayer)) {
                         ability.setTargetPlayer(AllZone.HumanPlayer);
-                        AllZone.Stack.add(ability);
+                        AllZone.Stack.addSimultaneousStackEntry(ability);
+
                     }
                 }//execute()
             };//Command
@@ -4556,7 +4589,8 @@ public class CardFactory_Creatures {
                     else //computer
                     {
                         abilityComes.setTargetPlayer(AllZone.HumanPlayer);
-                        AllZone.Stack.add(abilityComes);
+                        AllZone.Stack.addSimultaneousStackEntry(abilityComes);
+
                     }//else
                 }//execute()
             };//CommandComes
@@ -4578,8 +4612,9 @@ public class CardFactory_Creatures {
                     StringBuilder sb = new StringBuilder();
                     sb.append("Laquatus's Champion - ").append(abilityComes.getTargetPlayer()).append(" regains 6 life.");
                     ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }//execute()
             };//Command
             
@@ -4641,7 +4676,8 @@ public class CardFactory_Creatures {
                 private static final long serialVersionUID = 8485080996453793968L;
                 
                 public void execute() {
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };//Command
             ability.setStackDescription("As Meddling Mage enters the battlefield, name a nonland card.");
@@ -4810,7 +4846,8 @@ public class CardFactory_Creatures {
                     	}
                     };
                     ability.setStackDescription(toString() + " - you may put a token that's a copy of " + getName() + " onto the battlefield.");
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                     
                     for(Entry<Card, Integer> entry : m.entrySet()) {
                         this.addDamage(entry.getValue(), entry.getKey());
@@ -4904,7 +4941,8 @@ public class CardFactory_Creatures {
                 public void execute() {
                     ability.setStackDescription("Singe-Mind Ogre - target player reveals a card at random from " +
                     		"his or her hand, then loses life equal to that card's converted mana cost.");
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
@@ -4987,7 +5025,8 @@ public class CardFactory_Creatures {
                 
                 public void execute() {
                     ability.setStackDescription("Kinsbaile Borderguard enters the battlefield with a +1/+1 counter on it for each other Kithkin you control.");
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             
@@ -5011,7 +5050,8 @@ public class CardFactory_Creatures {
                 public void execute() {
                     ability2.setStackDescription("When Kinsbaile Borderguard is put into a graveyard from play, put a 1/1 white " +
                     		"Kithkin Soldier creature token onto the battlefield for each counter on it.");
-                    AllZone.Stack.add(ability2);
+                    AllZone.Stack.addSimultaneousStackEntry(ability2);
+
                 }
             };
             
@@ -5038,8 +5078,9 @@ public class CardFactory_Creatures {
                 	StringBuilder sb = new StringBuilder();
                 	sb.append(card.getName()).append(" - gain 2 life for each age counter on it.");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };//command
             
@@ -5093,7 +5134,8 @@ public class CardFactory_Creatures {
                 public void execute() {
                     if(card.isKicked()) {
                             ability.setStackDescription("Kavu Titan gets 3 +1/+1 counters and gains trample.");
-                            AllZone.Stack.add(ability);
+                            AllZone.Stack.addSimultaneousStackEntry(ability);
+
                     }
                 }//execute()
             };//CommandComes
@@ -5161,7 +5203,8 @@ public class CardFactory_Creatures {
                         else //computer
                         {
                             ability.setStackDescription("Gatekeeper of Malakir - targeting Human");
-                            AllZone.Stack.add(ability);
+                            AllZone.Stack.addSimultaneousStackEntry(ability);
+
                         }//else
                     }
                 }//execute()
@@ -5192,7 +5235,8 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = 4245563898487609274L;
 
 				public void execute() {
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addComesIntoPlayCommand(comesIntoPlay);
@@ -5232,7 +5276,8 @@ public class CardFactory_Creatures {
 					sb.append(card.getName()).append(" - Add 2 Level counters to each creature you control with Level up.");
 					ability.setStackDescription(sb.toString());
         			
-        			AllZone.Stack.add(ability);
+        			AllZone.Stack.addSimultaneousStackEntry(ability);
+
         		}
         	};
         	card.addComesIntoPlayCommand(addLevelCounters);
@@ -5295,8 +5340,9 @@ public class CardFactory_Creatures {
         			StringBuilder sb = new StringBuilder();
         			sb.append(card.getName()).append(" - chosen type gets +2/+2 and Trample until EOT");
         			ability.setStackDescription(sb.toString());
-        			
-        			AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
         		}//execute
         	};//command
 
@@ -5326,7 +5372,8 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = -3734151854295L;
 
 				public void execute() {
-        			AllZone.Stack.add(intoPlay);
+        			AllZone.Stack.addSimultaneousStackEntry(intoPlay);
+
         		}
         	};
         	
@@ -5620,7 +5667,8 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = 931101364538995898L;
 
 				public void execute() {
-        			AllZone.Stack.add(ability);
+        			AllZone.Stack.addSimultaneousStackEntry(ability);
+
         		}
         	};
         	
@@ -5802,7 +5850,8 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = -4300804642226899861L;
 
 				public void execute() {
-        			AllZone.Stack.add(ability);
+        			AllZone.Stack.addSimultaneousStackEntry(ability);
+
         		}
         	};
 
@@ -6002,7 +6051,8 @@ public class CardFactory_Creatures {
                     else if(list.size() != 0) {
                         Card target = CardFactoryUtil.AI_getBestCreature(list);
                         ability.setTargetCard(target);
-                        AllZone.Stack.add(ability);
+                        AllZone.Stack.addSimultaneousStackEntry(ability);
+
                     }
                 }//execute()
             };
@@ -6082,7 +6132,8 @@ public class CardFactory_Creatures {
         		
         		public void execute() {
         			sacOrSac.setStackDescription("When "+cardName+" enters the battlefield, sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.");
-        			AllZone.Stack.add(sacOrSac);
+        			AllZone.Stack.addSimultaneousStackEntry(sacOrSac);
+
         		}
         	};
 
@@ -6119,7 +6170,8 @@ public class CardFactory_Creatures {
                     //Slight hack if the cloner copies a card with triggers
                     AllZone.TriggerHandler.removeAllFromCard(cloned[0]);
                     
-                    AllZone.Stack.add(copyBack);
+                    AllZone.Stack.addSimultaneousStackEntry(copyBack);
+
                 }
             };
         	
@@ -6274,7 +6326,8 @@ public class CardFactory_Creatures {
 				private static final long serialVersionUID = 911163814565333484L;
 
 				public void execute() {
-            		AllZone.Stack.add(toPlay);
+            		AllZone.Stack.addSimultaneousStackEntry(toPlay);
+
             	}
             };
         	

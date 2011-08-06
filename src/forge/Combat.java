@@ -398,6 +398,8 @@ public class Combat {
 				HashMap<String,Object> runParams = new HashMap<String,Object>();
 				runParams.put("Attacker", attacker);
 				AllZone.TriggerHandler.runTrigger("AttackerUnblocked", runParams);
+
+
 			}
 		}
 	}
@@ -624,6 +626,9 @@ public class Combat {
             damageMap.clear();
             c.clearAssignedDamage();
         }
+
+        //This was deeper before,but that resulted in the stack entry acting like before.
+
 	}
 	
 	public boolean isUnblocked(Card att){

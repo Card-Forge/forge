@@ -542,6 +542,7 @@ public class Card extends MyObservable {
         runParams.put("CounterType", counterName);
         AllZone.TriggerHandler.runTrigger("CounterAdded", runParams);
 
+
         AllZone.GameAction.checkStateEffects();
         
         this.updateObservers();
@@ -1423,7 +1424,7 @@ public class Card extends MyObservable {
     
     public void executeTrigger(ZCTrigger type) {
         for(Ability_Triggered t:zcTriggers)
-            if(t.trigger.equals(type) && t.isBasic()) AllZone.Stack.add(t);
+            if(t.trigger.equals(type) && t.isBasic()) AllZone.Stack.addSimultaneousStackEntry(t);
     }
     
     public void clearTriggers() {
@@ -2091,6 +2092,8 @@ public class Card extends MyObservable {
     		HashMap<String,Object> runParams = new HashMap<String,Object>();
     		runParams.put("Card", this);
     		AllZone.TriggerHandler.runTrigger("Taps", runParams);
+
+
     	}
     	setTapped(true);
     }
@@ -2101,11 +2104,13 @@ public class Card extends MyObservable {
     		HashMap<String,Object> runParams = new HashMap<String,Object>();
     		runParams.put("Card", this);
     		AllZone.TriggerHandler.runTrigger("Untaps", runParams);
+
     	}
 
     	for(Command var:untapCommandList) {
             var.execute();
     	}
+
         setTapped(false);
     }
     

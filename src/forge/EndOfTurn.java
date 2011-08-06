@@ -47,8 +47,9 @@ public class EndOfTurn implements java.io.Serializable
     		StringBuilder sb = new StringBuilder();
     		sb.append("Sacrifice ").append(card);
     		sac.setStackDescription(sb.toString());
-    		
-    		AllZone.Stack.add(sac);
+
+            AllZone.Stack.addSimultaneousStackEntry(sac);
+
     	}
     	if(!c.isFaceDown() && c.getKeyword().contains("At the beginning of the end step, exile CARDNAME.")) {
     		final Card card = c;
@@ -61,8 +62,9 @@ public class EndOfTurn implements java.io.Serializable
     		StringBuilder sb = new StringBuilder();
     		sb.append("Exile ").append(card);
     		exile.setStackDescription(sb.toString());
-    		
-    		AllZone.Stack.add(exile);
+
+            AllZone.Stack.addSimultaneousStackEntry(exile);
+
     	}
     	if(!c.isFaceDown() && c.getKeyword().contains("At the beginning of the end step, destroy CARDNAME.")) {
     		final Card card = c;
@@ -75,8 +77,9 @@ public class EndOfTurn implements java.io.Serializable
     		StringBuilder sb = new StringBuilder();
     		sb.append("Destroy ").append(card);
     		destroy.setStackDescription(sb.toString());
-    		
-    		AllZone.Stack.add(destroy);
+
+            AllZone.Stack.addSimultaneousStackEntry(destroy);
+
     	}
     	//Berserk is using this, so don't check isFaceDown()
     	if(c.getKeyword().contains("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.")) {
@@ -91,8 +94,9 @@ public class EndOfTurn implements java.io.Serializable
     		StringBuilder sb = new StringBuilder();
     		sb.append("Sacrifice ").append(card);
     		sac.setStackDescription(sb.toString());
-    		
-    		AllZone.Stack.add(sac);
+
+            AllZone.Stack.addSimultaneousStackEntry(sac);
+
     		}
     		else {
     			c.removeExtrinsicKeyword("At the beginning of the next end step, destroy CARDNAME if it attacked this turn.");
@@ -113,8 +117,9 @@ public class EndOfTurn implements java.io.Serializable
     		StringBuilder sb = new StringBuilder();
     		sb.append(vale.getName()).append(" changes controllers.");
     		change.setStackDescription(sb.toString());
-    		
-    		AllZone.Stack.add(change);
+
+            AllZone.Stack.addSimultaneousStackEntry(change);
+
     	}
     	if(c.getName().equals("Erg Raiders") && !c.getCreatureAttackedThisTurn() &&
     			!(c.getTurnInZone() == AllZone.Phase.getTurn()) && AllZone.Phase.isPlayerTurn(c.getController())) {
@@ -130,8 +135,9 @@ public class EndOfTurn implements java.io.Serializable
     		StringBuilder sb = new StringBuilder();
     		sb.append(raider.getName()).append(" deals 2 damage to controller.");
     		change.setStackDescription(sb.toString());
-    		
-    		AllZone.Stack.add(change);
+
+            AllZone.Stack.addSimultaneousStackEntry(change);
+
     	}
     	if(c.hasKeyword("At the beginning of your end step, sacrifice this creature unless it attacked this turn.")
     			&& !c.getCreatureAttackedThisTurn()
@@ -149,13 +155,18 @@ public class EndOfTurn implements java.io.Serializable
     		StringBuilder sb = new StringBuilder();
     		sb.append(source.getName()).append(" - sacrifice ").append(source.getName()).append(".");
     		change.setStackDescription(sb.toString());
-    		
-    		AllZone.Stack.add(change);
+
+            AllZone.Stack.addSimultaneousStackEntry(change);
+
     	}
     	
     }
+
+
     execute(at);
-    
+
+
+
     CardList all2 = AllZoneUtil.getCardsInPlay();
     for(Card c:all2) {
     	if(c.getCreatureAttackedThisTurn()) c.setCreatureAttackedThisTurn(false);

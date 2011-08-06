@@ -573,6 +573,8 @@ public class ComputerUtil
 	  }
 	  if(!cost.isPaid())
 		  throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard().getName());
+
+
       
   }//payManaCost()
   

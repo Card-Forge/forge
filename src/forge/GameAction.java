@@ -100,6 +100,8 @@ public class GameAction {
         runParams.put("Destination", zone.getZoneName());
         AllZone.TriggerHandler.runTrigger("ChangesZone", runParams);
 
+
+
         return c;
     }
     
@@ -618,6 +620,8 @@ public class GameAction {
         HashMap<String,Object> runParams = new HashMap<String,Object>();
         runParams.put("Card", c);
         AllZone.TriggerHandler.runTrigger("Sacrificed", runParams);
+
+
     }
     
     public void destroyNoRegeneration(Card c) {
@@ -2142,7 +2146,9 @@ public class GameAction {
                 GameActionUtil.executeVampiricEffects(crd);
             }
         }
-        
+
+
+
         this.sacrificeDestroy(c);
         return true;
     }

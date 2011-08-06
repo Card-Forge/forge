@@ -16,10 +16,13 @@ import forge.card.spellability.Ability_Triggered;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Spell_Permanent;
 import forge.card.spellability.Target;
+import forge.gui.GuiUtils;
 import forge.gui.input.Input;
 import forge.gui.input.Input_PayManaCost_Ability;
 
 public class MagicStack extends MyObservable {
+    private ArrayList<SpellAbility> simultaneousStackEntryList = new ArrayList<SpellAbility>();
+
 	private ArrayList<SpellAbility> stack = new ArrayList<SpellAbility>();
 	private ArrayList<SpellAbility> frozenStack = new ArrayList<SpellAbility>();
 	private boolean frozen = false;
@@ -422,6 +425,7 @@ public class MagicStack extends MyObservable {
     			runParams.put("Card", sp.getSourceCard());
     			AllZone.TriggerHandler.runTrigger("Cycled", runParams);
     		}
+
 		}
 		
 		if(sp instanceof Spell_Permanent && sp.getSourceCard().getName().equals("Mana Vortex")) {
@@ -850,5 +854,92 @@ public class MagicStack extends MyObservable {
 	public Object getComputerCreatureSpellCount() {
 		return ComputerCreatureSpellCount;
 	}
+
+    public void addSimultaneousStackEntry(SpellAbility sa)
+    {
+        simultaneousStackEntryList.add(sa);
+        /*
+        *Debug output.
+        System.out.println("STO add! Size:" + simultaneousStackEntryList.size());
+        */
+    }
+
+    public void chooseOrderOfSimultaneousStackEntryAll()
+    {
+        /*
+        *Debug output.
+        if(simultaneousStackEntryList.size() > 0)
+        {
+            System.out.println("STO run! Size:" + simultaneousStackEntryList.size());
+        }
+        */
+        chooseOrderOfSimultaneousStackEntry(AllZone.Phase.getPlayerTurn());
+        chooseOrderOfSimultaneousStackEntry(AllZone.Phase.getPlayerTurn().getOpponent());
+    }
+
+    public void chooseOrderOfSimultaneousStackEntry(Player activePlayer)
+    {
+        if(simultaneousStackEntryList.size() == 0)
+            return;
+
+        ArrayList<SpellAbility> activePlayerSAs = new ArrayList<SpellAbility>();
+        for(int i=0;i<simultaneousStackEntryList.size();i++)
+        {
+            if(simultaneousStackEntryList.get(i).getActivatingPlayer() == null)
+            {
+                if(simultaneousStackEntryList.get(i).getSourceCard().getController().equals(activePlayer))
+                {
+                    activePlayerSAs.add(simultaneousStackEntryList.get(i));
+                    simultaneousStackEntryList.remove(i);
+                    i--;
+                }
+            }
+            else
+            {
+                if(simultaneousStackEntryList.get(i).getActivatingPlayer().equals(activePlayer))
+                {
+                    activePlayerSAs.add(simultaneousStackEntryList.get(i));
+                    simultaneousStackEntryList.remove(i);
+                    i--;
+                }
+            }
+        }
+        if(activePlayerSAs.size() == 0)
+            return;
+
+        if(activePlayer.isComputer())
+        {
+            for(SpellAbility sa : activePlayerSAs)
+            {
+                sa.doTrigger(sa.isMandatory());
+				ComputerUtil.playStack(sa);
+            }
+        }
+        else
+        {
+            while(activePlayerSAs.size() > 1)
+            {
+               SpellAbility next = (SpellAbility) GuiUtils.getChoice("Choose which spell or ability to put on the stack next.", activePlayerSAs.toArray());
+               activePlayerSAs.remove(next);
+
+                if(next.isTrigger())
+                {
+                    System.out.println("Stack order: AllZone.GameAction.playSpellAbility(next)");
+                    AllZone.GameAction.playSpellAbility(next);
+                }
+                else
+                {
+                    System.out.println("Stack order: AllZone.Stack.add(next)");
+                    add(next);
+                }
+            }
+
+            if(activePlayerSAs.get(0).isTrigger())
+                AllZone.GameAction.playSpellAbility(activePlayerSAs.get(0));
+            else
+            add(activePlayerSAs.get(0));
+            //AllZone.GameAction.playSpellAbility(activePlayerSAs.get(0));
+        }
+    }
 
 }

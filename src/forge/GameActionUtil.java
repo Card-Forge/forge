@@ -105,7 +105,7 @@ public class GameActionUtil {
 		upkeep_Power_Surge();	
 		upkeep_AI_Aluren(); 
 		// experimental, AI abuse aluren
-		
+
 		AllZone.Stack.unfreezeStack();
 	}
 
@@ -114,7 +114,8 @@ public class GameActionUtil {
 		final Player player = AllZone.Phase.getPlayerTurn();
 		draw_Teferi_Puzzle_Box(player);
 		draw_Sylvan_Library(player);
-		AllZone.Stack.unfreezeStack();	
+
+    	AllZone.Stack.unfreezeStack();
 	}
 
 	public static void executeTapSideEffects(Card c) {
@@ -142,8 +143,9 @@ public class GameActionUtil {
 					StringBuilder sb = new StringBuilder();
 					sb.append(blight.getName()).append(" - Destroy enchanted land.");
 					ability.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
 				}
 			}
 		}//end Blight
@@ -174,6 +176,7 @@ public class GameActionUtil {
 		playCard_Presence_of_the_Master(c);
 		
 		AllZone.GameAction.checkWheneverKeyword(c,"CastSpell",null);
+
 	}
 	
 	public static void playCard_Cascade(final Card c) {
@@ -278,8 +281,9 @@ public class GameActionUtil {
                 StringBuilder sb = new StringBuilder();
                 sb.append(c).append(" - Cascade.");
                 ability.setStackDescription(sb.toString());
-                
-                AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
             }
         };
         Cascade.execute();
@@ -385,8 +389,9 @@ public class GameActionUtil {
 				StringBuilder sb = new StringBuilder();
 				sb.append(c).append(" - Ripple.");
 				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}
 			}
 		};
@@ -440,8 +445,9 @@ public class GameActionUtil {
 					sb.append(card.getName()).append(" - ").append("Whenever you cast a spell, if it's the second creature ");
 					sb.append("spell you cast this turn, you may return Vengevine from your graveyard to the battlefield.");
 					ability.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
 				}//if
 			}
 		}
@@ -458,7 +464,9 @@ public class GameActionUtil {
 				}
 			};
 			counter.setStackDescription(source.getName()+" - counter enchantment spell.");
-			AllZone.Stack.add(counter);
+
+            AllZone.Stack.addSimultaneousStackEntry(counter);
+
 		}
 	}
 	
@@ -544,7 +552,9 @@ public class GameActionUtil {
 				AllZone.GameAction.playSpellAbility(ability);
 			else {
 				ability.chooseTargetAI();
-				AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}
 		}
 	}
@@ -571,7 +581,9 @@ public class GameActionUtil {
 				ability2.setStackDescription(sb.toString());
                 
 				int convertedManaSpell = CardUtil.getConvertedManaCost(sa.getSourceCard().getManaCost());								
-				if(sa.isSpell() == true && card.getCounters(Counters.CHARGE) == convertedManaSpell) AllZone.Stack.add(ability2);	
+				if(sa.isSpell() == true && card.getCounters(Counters.CHARGE) == convertedManaSpell)
+                    AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 			}					
 		}//if
 	} // Chalice_of_the_Void 
@@ -595,8 +607,9 @@ public class GameActionUtil {
 			sb.append(" casts Demigod of Revenge, returns all cards named Demigod ");
 			sb.append("of Revenge from your graveyard to the battlefield.");
 			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 
 		}//if					
 	}// Demigod of Revenge
@@ -652,8 +665,9 @@ public class GameActionUtil {
 					sb.append(" played a Spirit or Arcane spell, target player reveals his or her hand ");
 					sb.append("and discards all cards with converted mana cost ").append(converted).append(".");
 					ability2.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability2);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 				}
 			}//if
 		}
@@ -709,7 +723,9 @@ public class GameActionUtil {
 			}; // ability2
 
 			ability2.setStackDescription("Dovescape Ability");
-			AllZone.Stack.add(ability2);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 
 		}
 	} // Dovescape
@@ -734,8 +750,9 @@ public class GameActionUtil {
 				sb.append(card.getName()).append(" - ").append(c.getController());
 				sb.append(" played a spell, ").append(drawer).append(" draws seven cards.");
 				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 			}
 		}
 
@@ -762,8 +779,9 @@ public class GameActionUtil {
 			sb.append(card.getName()).append(" - ").append(c.getController());
 			sb.append(" played a spell, ").append(drawer).append(" draws three cards.");
 			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 
 		}
 
@@ -793,8 +811,9 @@ public class GameActionUtil {
 				sb.append(card.getName()).append(" - ").append(c.getController());
 				sb.append(" puts a 4/4 White Angel token with flying onto the battlefield.");
 				ability2.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability2);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 
 			} // for
 		}// if isEnchantment()
@@ -820,8 +839,9 @@ public class GameActionUtil {
 					sb.append(" played a ").append(card.getChosenColor()).append(" spell, ");
 					sb.append(c.getController()).append(" loses 1 life.");
 					ability.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
 				}
 			}//if
 		}//if
@@ -888,8 +908,9 @@ public class GameActionUtil {
 				}
 			};
 			upkeepAbility.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(upkeepAbility);
+
+            AllZone.Stack.addSimultaneousStackEntry(upkeepAbility);
+
 		}
 	} //upkeep_Braid_of_Fire
 	
@@ -946,7 +967,8 @@ public class GameActionUtil {
 			};
 			destroyAbility.setStackDescription(sb.toString());
 
-			AllZone.Stack.add(destroyAbility);
+            AllZone.Stack.addSimultaneousStackEntry(destroyAbility);
+
 		}
 	}//TabernacleUpkeepCost
 
@@ -1001,7 +1023,8 @@ public class GameActionUtil {
 			};
 			upkeepAbility.setStackDescription(sb.toString());
 
-			AllZone.Stack.add(upkeepAbility);
+			AllZone.Stack.addSimultaneousStackEntry(upkeepAbility);
+
 			
 		}
 	}//MagusTabernacleUpkeepCost
@@ -1059,7 +1082,8 @@ public class GameActionUtil {
 			};
 			upkeepAbility.setStackDescription(sb.toString());
 
-			AllZone.Stack.add(upkeepAbility);
+            AllZone.Stack.addSimultaneousStackEntry(upkeepAbility);
+
 		}
 	}//upkeepCost
 
@@ -1090,7 +1114,7 @@ public class GameActionUtil {
 				final StringBuilder sb = new StringBuilder();
 				sb.append("Echo for ").append(c).append("\n");
 				
-				final Ability sacAbility = new Ability(c, c.getEchoCost()) {
+				final Ability sacAbility = new Ability(c, "0") {
 					@Override
 					public void resolve() {
 						if(c.getController().equals(AllZone.HumanPlayer)) {
@@ -1107,7 +1131,8 @@ public class GameActionUtil {
 				};
 				sacAbility.setStackDescription(sb.toString());
 
-				AllZone.Stack.add(sacAbility);
+                AllZone.Stack.addSimultaneousStackEntry(sacAbility);
+
 
 				c.removeIntrinsicKeyword("(Echo unpaid)");
 			}
@@ -1130,7 +1155,9 @@ public class GameActionUtil {
 				}
 			};
 			slowtrip.setStackDescription(card.getName() + " - Draw a card");
-			AllZone.Stack.add(slowtrip);
+
+			AllZone.Stack.addSimultaneousStackEntry(slowtrip);
+
 			
 		}
 		player.clearSlowtripList();
@@ -1151,8 +1178,9 @@ public class GameActionUtil {
 				}
 			};
 			slowtrip.setStackDescription(card.getName() + " - Draw a card");
-			AllZone.Stack.add(slowtrip);
-			
+
+            AllZone.Stack.addSimultaneousStackEntry(slowtrip);
+
 		}
 		opponent.clearSlowtripList();
 	}
@@ -1209,7 +1237,9 @@ public class GameActionUtil {
 				}
 			};
 			upkeepAbility.setStackDescription(sb.toString());
-			AllZone.Stack.add(upkeepAbility);
+
+            AllZone.Stack.addSimultaneousStackEntry(upkeepAbility);
+
 		}
 	}//upkeepCost
 
@@ -1265,7 +1295,9 @@ public class GameActionUtil {
 				}
 			};
 			upkeepAbility.setStackDescription(sb.toString());
-			AllZone.Stack.add(upkeepAbility);
+
+            AllZone.Stack.addSimultaneousStackEntry(upkeepAbility);
+
 		}
 	}//upkeepCost
 
@@ -1327,7 +1359,9 @@ public class GameActionUtil {
 				}
 			};
 			upkeepAbility.setStackDescription(sb.toString());
-			AllZone.Stack.add(upkeepAbility);
+
+            AllZone.Stack.addSimultaneousStackEntry(upkeepAbility);
+
 		}
 	}//damageUpkeepCost
 	
@@ -1401,7 +1435,8 @@ public class GameActionUtil {
 			sacrificeCreature.setStackDescription(sb.toString());
 			
 			if(abyss_getTargets(player,abyss).size() > 0)
-				AllZone.Stack.add(sacrificeCreature);
+                AllZone.Stack.addSimultaneousStackEntry(sacrificeCreature);
+
 		}//end for
 	}//The Abyss
 	
@@ -1442,8 +1477,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append(vortex.getName()).append(" - "+player+" sacrifices a land.");
 			sacrificeLand.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(sacrificeLand);
+
+            AllZone.Stack.addSimultaneousStackEntry(sacrificeLand);
+
 		}//end for
 	}//Mana_Vortex
 	
@@ -1489,7 +1525,8 @@ public class GameActionUtil {
 			sb.append(eve.getName()).append(" - remove a scream counter and return creatures to the battlefield.");
 			hallow.setStackDescription(sb.toString());
 			if(AllZone.GameAction.isCardExiled(eve)) {
-				AllZone.Stack.add(hallow);
+				AllZone.Stack.addSimultaneousStackEntry(hallow);
+
 			}
 		}//end for
 	}//All_Hallows_Eve
@@ -1551,8 +1588,9 @@ public class GameActionUtil {
 			sb.append(c.getName()).append(" - sacrifice an artifact or ");
 			sb.append(c.getName()).append(" becomes tapped and deals 2 damage to you.");
 			sacrificeArtifact.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(sacrificeArtifact);
+
+            AllZone.Stack.addSimultaneousStackEntry(sacrificeArtifact);
+
 		}//end for
 	}
 	
@@ -1601,8 +1639,9 @@ public class GameActionUtil {
 				StringBuilder sb = new StringBuilder();
 				sb.append(c.getName()).append(" - deals 7 damage to controller");
 				sevenDamage.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(sevenDamage);
+
+                AllZone.Stack.addSimultaneousStackEntry(sevenDamage);
+
 			}
 			else {
 				
@@ -1610,7 +1649,8 @@ public class GameActionUtil {
 				sb.append(c.getName()).append(" - sacrifice a creature.");
 				sacrificeCreature.setStackDescription(sb.toString());
 				
-				AllZone.Stack.add(sacrificeCreature);
+				AllZone.Stack.addSimultaneousStackEntry(sacrificeCreature);
+
 			}
 		}//end for
 	}// upkeep_Lord_of_the_Pit()
@@ -1678,8 +1718,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append(c.getName()).append(" - destroy 1 creature with lowest power.");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}//end for
 	}// upkeep_Drop_of_Honey()
 	
@@ -1730,13 +1771,17 @@ public class GameActionUtil {
                         } //end resolve()
                     }; //end pay ability
                     pay.setStackDescription("Demonic Hordes - Upkeep Cost");
-                    AllZone.Stack.add(pay);
+
+                    AllZone.Stack.addSimultaneousStackEntry(pay);
+
                 } //end choice
                 else {
                     StringBuilder sb = new StringBuilder();
                     sb.append(c.getName()).append(" - is tapped and you must sacrifice a land of opponent's choice");
                     noPay.setStackDescription(sb.toString());
-                    AllZone.Stack.add(noPay);
+
+                    AllZone.Stack.addSimultaneousStackEntry(noPay);
+
                 }
             } //end human
 			else { //computer
@@ -1748,10 +1793,13 @@ public class GameActionUtil {
 						}
 					};
 					computerPay.setStackDescription("Computer pays Demonic Hordes upkeep cost");
-					AllZone.Stack.add(computerPay);
+
+                    AllZone.Stack.addSimultaneousStackEntry(computerPay);
+
 				} 
 				else {
-					AllZone.Stack.add(noPay);
+                    AllZone.Stack.addSimultaneousStackEntry(noPay);
+
 				}
 			} //end computer
 			
@@ -1814,8 +1862,9 @@ public class GameActionUtil {
             StringBuilder sb = new StringBuilder();
             sb.append("Wall of Reverence - ").append(player).append(" gains life equal to target creature's power.");
             ability.setStackDescription(sb.toString());
-            
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }
     }//endOfTurn_Wall_Of_Reverence()
 	
@@ -1873,8 +1922,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append(card).append(" - ").append(card.getController()).append(" takes an extra turn.");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}
 	}
 
@@ -1988,6 +2038,8 @@ public class GameActionUtil {
 
 	public static void executeLandfallEffects(Card c) {
 		if(c.getName().equals("Lotus Cobra")) landfall_Lotus_Cobra(c);
+
+
 	}
 	
 	private static boolean checkValakutCondition(Card valakutCard, Card mtn) {
@@ -2098,7 +2150,8 @@ public class GameActionUtil {
         	AllZone.InputControl.setInput(CardFactoryUtil.input_targetCreaturePlayer(DamageTgt, true, true));
         } else {
         	DamageTgt.chooseTargetAI();
-        	AllZone.Stack.add(DamageTgt);
+            AllZone.Stack.addSimultaneousStackEntry(DamageTgt);
+
         }
         return true; // Tell the calling routine it's okay to call again if there are other Valakuts in play
 	}
@@ -2137,7 +2190,7 @@ public class GameActionUtil {
 		ability.setStackDescription(sb.toString());
 
 		if(c.getController().equals(AllZone.HumanPlayer)) {
-			if(showLandfallDialog(c)) AllZone.Stack.add(ability);
+			if(showLandfallDialog(c)) AllZone.Stack.addSimultaneousStackEntry(ability);
 		}
 		else{
 			// todo: once AI has a mana pool he should choose add Ability and choose a mana as appropriate
@@ -2170,9 +2223,12 @@ public class GameActionUtil {
 	        StringBuilder sb2 = new StringBuilder();
 	        sb2.append(thisCard.getName()).append(" - gets a +1/+1 counter");
 	        ability2.setStackDescription(sb2.toString());
-	        
-	        AllZone.Stack.add(ability2);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability2);
+
     	}
+
+
 	}
 	
 	//not restricted to combat damage, restricted to dealing damage to creatures
@@ -2194,8 +2250,9 @@ public class GameActionUtil {
         	StringBuilder sb = new StringBuilder();
             sb.append(affected.getName()+" - Deals ").append(stuffyDamage).append(" damage to ").append(opponent);
             ability.setStackDescription(sb.toString());
-            
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }
         
         if(affected.getName().equals("Jackal Pup") || affected.getName().equals("Shinka Gatekeeper")) {
@@ -2209,8 +2266,9 @@ public class GameActionUtil {
         	StringBuilder sb = new StringBuilder();
             sb.append(affected.getName()+" - Deals ").append(selfDamage).append(" damage to ").append(player);
             ability.setStackDescription(sb.toString());
-            
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }
         
 		if(source.getName().equals("Spiritmonger")) {
@@ -2224,8 +2282,9 @@ public class GameActionUtil {
         	StringBuilder sb2 = new StringBuilder();
         	sb2.append(source.getName()).append(" - gets a +1/+1 counter");
         	ability2.setStackDescription(sb2.toString());
-        	
-        	AllZone.Stack.add(ability2);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability2);
+
         }
         
         if(affected.getKeyword().contains("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.")) {
@@ -2242,7 +2301,8 @@ public class GameActionUtil {
         	int amount = affected.getAmountOfKeyword("Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.");
             
             for(int i=0 ; i < amount ; i++)
-            	AllZone.Stack.add(ability2);
+                AllZone.Stack.addSimultaneousStackEntry(ability2);
+
         }
         
         if(affected.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
@@ -2265,15 +2325,18 @@ public class GameActionUtil {
 	        	int amount = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
 	            
 	            for(int i=0 ; i < amount ; i++)
-	            	AllZone.Stack.add(ability2);
+                    AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 	    	}
 	    	int amount = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it.");
             
             for(int i=0 ; i < amount ; i++)
-            	AllZone.Stack.add(ability); AllZone.Stack.add(ability);
+                AllZone.Stack.addSimultaneousStackEntry(ability); AllZone.Stack.addSimultaneousStackEntry(ability);
         }
         
         if(source.getKeyword().contains("Deathtouch") && affected.isCreature()) AllZone.GameAction.destroy(affected);
+
+
 	}
 	
 	public static void executeSwordOfLightAndShadowEffects(final Card source) {
@@ -2309,7 +2372,8 @@ public class GameActionUtil {
                  // list = list.getType("Creature");
                  
                  if(list.isEmpty()) {
-                	 AllZone.Stack.add(ability);
+                     AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 	 return;
                  }
                  
@@ -2317,14 +2381,16 @@ public class GameActionUtil {
                      Object o = GuiUtils.getChoiceOptional("Select target card", list.toArray());
                      if(o != null) {
                          ability.setTargetCard((Card) o);
-                         AllZone.Stack.add(ability);
+                         AllZone.Stack.addSimultaneousStackEntry(ability);
+
                      }
                  }//if
                  else//computer
                  {
                      Card best = CardFactoryUtil.AI_getBestCreature(list);
                      ability.setTargetCard(best);
-                     AllZone.Stack.add(ability);
+                     AllZone.Stack.addSimultaneousStackEntry(ability);
+
                  }
              }//execute()
         };//Command
@@ -2364,8 +2430,9 @@ public class GameActionUtil {
                 	sb.append(" - gets a +1/+1 counter");
                 }
                 ability2.setStackDescription(sb.toString());
-                
-                AllZone.Stack.add(ability2);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability2);
+
             }
         }
     }
@@ -2411,7 +2478,8 @@ public class GameActionUtil {
 					
 					//Backfire triggers only if its controller is damaged
 					if(aura.getController().isPlayer(player))
-						AllZone.Stack.add(ability);
+                        AllZone.Stack.addSimultaneousStackEntry(ability);
+
 				}
 			}//auras > 0
 		}//end c.isEnchanted()
@@ -2436,8 +2504,9 @@ public class GameActionUtil {
 				sb.append(darien.getName()).append(" - ").append(darien.getController());
 				sb.append(" puts ").append(damage).append(" Soldier tokens onto the battlefield.");
 				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}
 		}
 		/*if (playerPerms.getName("Dissipation Field").size() > 0)  {  
@@ -2482,8 +2551,9 @@ public class GameActionUtil {
 				sb.append(lich.getName()).append(" - ").append(lich.getController());
 				sb.append(" sacrifices ").append(damage).append(" nontoken Permanents.");
 				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}
     	}
 		
@@ -2496,6 +2566,8 @@ public class GameActionUtil {
     	
     	if (player.isPlayer(AllZone.HumanPlayer)) c.setDealtDmgToHumanThisTurn(true);
     	if (player.isPlayer(AllZone.ComputerPlayer)) c.setDealtDmgToComputerThisTurn(true);
+
+
     }
     
     private static void execute_Living_Artifact(final Player p, final int num) {
@@ -2507,7 +2579,9 @@ public class GameActionUtil {
     			}
     		};
     		addCounter.setStackDescription(la.getName()+" - Put "+num+" vitality counters on "+la);
-    		AllZone.Stack.add(addCounter);
+
+            AllZone.Stack.addSimultaneousStackEntry(addCounter);
+
     	}
     }
     
@@ -2534,7 +2608,9 @@ public class GameActionUtil {
     				}
     			};
     			ability.setStackDescription(zone+" - "+c.getController()+" gains control of "+zone);
-    			AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
     		}
     	}
 
@@ -2574,7 +2650,8 @@ public class GameActionUtil {
 			for (int i=0;i<keywords.size();i++)
 			{
 				if (keywords.get(i).startsWith("Poisonous"))
-					AllZone.Stack.add(ability);
+					AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}
 		}
 		
@@ -2603,7 +2680,7 @@ public class GameActionUtil {
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
 		
 		else if(c.isEnchantedBy("Celestial Mantle")) execute_Celestial_Mantle( c);
-		
+
 		//Unused variable
 		//c.setDealtCombatDmgToOppThisTurn(true); 
 
@@ -2620,7 +2697,9 @@ public class GameActionUtil {
 					}
 				};
 				doubleLife.setStackDescription(aura.getName()+" - "+enchanted.getController()+" doubles his or her life total.");
-				AllZone.Stack.add(doubleLife);
+
+                AllZone.Stack.addSimultaneousStackEntry(doubleLife);
+
 			}
 		}
 	}
@@ -2664,7 +2743,9 @@ public class GameActionUtil {
 			}
 		};
 		ability.setStackDescription("Farsight Mask - You may draw a card.");
-		AllZone.Stack.add(ability);
+
+		AllZone.Stack.addSimultaneousStackEntry(ability);
+
 	}
 
 	private static void playerCombatDamage_Ghastlord_of_Fugue(Card c) {
@@ -2709,8 +2790,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append(c.getName()).append(" - ").append("opponent discards a card.");
 			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 		}
 	} //Ghastlord of Fugue
 
@@ -2756,7 +2838,8 @@ public class GameActionUtil {
 				private static final long serialVersionUID = 2200679209414069339L;
 
 				public void execute() {
-					AllZone.Stack.add(ability2);
+					AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 				}
 			};
 			AllZone.EndOfTurn.addAt(dealtDmg);
@@ -2796,8 +2879,9 @@ public class GameActionUtil {
 			sb.append(c.getName()).append(" - ").append(opponent);
 			sb.append(" loses half his or her life, rounded up.");
 			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 		}
 	}
 
@@ -2855,8 +2939,9 @@ public class GameActionUtil {
 			sb.append(" exiles the top four cards of his or her library. ");
 			sb.append("If two or more of those cards have the same name, repeat this process.");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}
 	}
 
@@ -2880,8 +2965,9 @@ public class GameActionUtil {
 		StringBuilder sb = new StringBuilder();
 		sb.append(c.getName()).append(" - ").append(player).append(" puts copy onto the battlefield.");
 		ability2.setStackDescription(sb.toString());
-		
-		AllZone.Stack.add(ability2);
+
+        AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 	}
 	
 	private static void playerCombatDamage_Augury_Adept(Card c) {
@@ -2900,6 +2986,8 @@ public class GameActionUtil {
 						cl.add(lib.get(0));
 						GuiUtils.getChoiceOptional("Top card", cl.toArray());
 					};
+                    if(lib.size() == 0)
+                        return;
 					Card top = lib.get(0);
 					player[0].gainLife(CardUtil.getConvertedManaCost(top.getManaCost()), crd);
 					AllZone.GameAction.moveToHand(top);
@@ -2913,8 +3001,9 @@ public class GameActionUtil {
 			sb.append(" reveals the top card of his library and put that card into his hand. ");
 			sb.append("He gain life equal to its converted mana cost.");
 			ability2.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability2);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability2);
+
 		}
 	}
 
@@ -2967,7 +3056,9 @@ public class GameActionUtil {
 					}
 				};
 				vaultChoice.setStackDescription(source.getName()+" - Untap creature during Upkeep?");
-				AllZone.Stack.add(vaultChoice);
+
+                AllZone.Stack.addSimultaneousStackEntry(vaultChoice);
+
 			}
 		}
 	}
@@ -2990,7 +3081,9 @@ public class GameActionUtil {
 				}
 			};
 			ab.setStackDescription(crypt.getName()+" - Flip a coin.");
-			AllZone.Stack.add(ab);
+
+            AllZone.Stack.addSimultaneousStackEntry(ab);
+
 		}
 	}//upkeep_Mana_Crypt
 	
@@ -3034,7 +3127,8 @@ public class GameActionUtil {
 				sb.append(land.getName()).append(" -  activate Life gain ability?");
 				ability.setStackDescription(sb.toString());
 
-				AllZone.Stack.add(ability);
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}
 		}
 	}//upkeep_Farmstead()
@@ -3072,7 +3166,9 @@ public class GameActionUtil {
 
 				};// Ability
 				ability.setStackDescription("Heartmender - Remove a -1/-1 counter from each creature you control.");
-				AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			} // for
 		} // if creatures > 0
 	}//upkeep_Heartmender
@@ -3150,7 +3246,9 @@ public class GameActionUtil {
             sb.append("Ink Dissolver - ").append(player);
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }// for
     }// upkeep_Ink_Dissolver()
     
@@ -3238,7 +3336,9 @@ public class GameActionUtil {
             sb.append("Kithkin Zephyrnaut - ").append(player);
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }// for
     }// upkeep_Kithkin_Zephyrnaut()
     
@@ -3325,7 +3425,9 @@ public class GameActionUtil {
             sb.append("Leaf-Crowned Elder - ").append(player);
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }// for
     }// upkeep_Leaf_Crowned_Elder()
     
@@ -3408,7 +3510,9 @@ public class GameActionUtil {
             sb.append("Mudbutton Clanger - ").append(player);
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }// for
     }// upkeep_Mudbutton_Clanger()
     
@@ -3479,7 +3583,9 @@ public class GameActionUtil {
             sb.append("Nightshade Schemers - ").append(player);
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }// for
     }// upkeep_Nightshade_Schemers()
     
@@ -3565,7 +3671,9 @@ public class GameActionUtil {
             sb.append("Pyroclast Consul - ").append(player);
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }// for
     }// upkeep_Pyroclast_Consul()
     
@@ -3644,7 +3752,9 @@ public class GameActionUtil {
             sb.append("Sensation Gorger - ").append(player);
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }// for
     }// upkeep_Sensation_Gorger()
     
@@ -3717,7 +3827,9 @@ public class GameActionUtil {
             sb.append("Squeaking Pie Grubfellows - ").append(player);
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }// for
     }// upkeep_Squeaking_Pie_Grubfellows()
     
@@ -3787,7 +3899,9 @@ public class GameActionUtil {
             sb.append("Wandering Graybeard - ").append(player);
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }// for
     }// upkeep_Wandering_Graybeard()
     
@@ -3878,7 +3992,9 @@ public class GameActionUtil {
             sb.append("Waterspout Weavers - ").append(player);
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }// for
     }// upkeep_Waterspout_Weavers()
     
@@ -3948,7 +4064,9 @@ public class GameActionUtil {
             sb.append("Winnower Patrol - ").append(player);
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }// for
     }// upkeep_Winnower_Patrol()
     
@@ -4020,7 +4138,9 @@ public class GameActionUtil {
             sb.append("Wolf-Skull Shaman - ").append(player);
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
         }// for
     }// upkeep_Wolf_Skull_Shaman()
     
@@ -4063,7 +4183,8 @@ public class GameActionUtil {
 			sb.append(" life and draws top card (").append(cardName).append(").");
 			ability.setStackDescription(sb.toString());
 
-			AllZone.Stack.add(ability);
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}// for
 	}// upkeep_Dark_Confidant()
 
@@ -4100,7 +4221,9 @@ public class GameActionUtil {
 					}
 				};// Ability
 				ability.setStackDescription("Oversold Cemetary returns creature from the graveyard to its owner's hand.");
-				AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}
 		}
 	}//Oversold Cemetery
@@ -4138,7 +4261,9 @@ public class GameActionUtil {
                 StringBuilder sb = new StringBuilder();
                 sb.append("Nether Spirit - ").append(player).append(" returns Nether Spirit to the battlefield");
                 ability.setStackDescription(sb.toString());
-                AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
             }
         } //if
     }//nether spirit
@@ -4189,8 +4314,9 @@ public class GameActionUtil {
 				sb.append(card.getName()).append(" - Vanishing - remove a time counter from it. ");
 				sb.append("When the last is removed, sacrifice it.)");
 				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}
 		}
 	}
@@ -4223,8 +4349,9 @@ public class GameActionUtil {
 				sb.append(card.getName()).append(" - Fading - remove a fade counter from it. ");
 				sb.append("If you can't, sacrifice it.)");
 				ability.setStackDescription(sb.toString());
-				
-				AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}
 		}
 	}
@@ -4296,7 +4423,8 @@ public class GameActionUtil {
                 sb.append("battlefield and all other cards revealed this way into his or her graveyard.");
                 ability.setStackDescription(sb.toString());
 
-                AllZone.Stack.add(ability);
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
             }
         }
     }// upkeep_Oath of Druids()
@@ -4341,7 +4469,8 @@ public class GameActionUtil {
 				sb.append("from their graveyard to owner's hand if they have more than an opponent.");
 				ability.setStackDescription(sb.toString());
 
-				AllZone.Stack.add(ability);
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}
 		}
 	}//Oath of Ghouls
@@ -4372,8 +4501,9 @@ public class GameActionUtil {
 					StringBuilder sb = new StringBuilder();
 					sb.append("Ancient Runes deals ").append(damage).append(" damage to ").append(player);
 					ability.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
 				}
 			}
 		}// if
@@ -4405,8 +4535,9 @@ public class GameActionUtil {
 					StringBuilder sb = new StringBuilder();
 					sb.append("Karma deals ").append(damage).append(" damage to ").append(player);
 					ability.setStackDescription(sb.toString());
-					
-					AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
 				}
 			}
 		}// if
@@ -4433,7 +4564,8 @@ public class GameActionUtil {
 			ability.setStackDescription(sb.toString());
 
 			if(player.getLife() <= 10) {
-				AllZone.Stack.add(ability);
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}
 		}// for
 	}// upkeep_Convalescence()
@@ -4466,7 +4598,8 @@ public class GameActionUtil {
             ability.setStackDescription(sb.toString());
 
             if (player.getLife() <= 5){
-            	AllZone.Stack.add(ability);
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
             }
 
 		}// for
@@ -4497,7 +4630,8 @@ public class GameActionUtil {
 			sb.append("if you control a black or red permanent, you gain 2 life. If you control a black permanent and a red permanent, you gain 4 life instead.");
 			ability.setStackDescription(sb.toString());
 
-			AllZone.Stack.add(ability);
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}//for
 	}//upkeep_Dega_Sanctuary()
 		
@@ -4525,7 +4659,8 @@ public class GameActionUtil {
 			ability.setStackDescription(sb.toString());
 			
 			if(damage > 0) {
-				AllZone.Stack.add(ability);
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}
 		}// for
 	}// upkeep_Power_Surge()
@@ -4550,8 +4685,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Felidar Sovereign - ").append(player).append(" wins the game");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}// if
 	}// upkeep_Felidar_Sovereign
 
@@ -4577,8 +4713,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Battle of Wits - ").append(player).append(" wins the game");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}// if
 	}// upkeep_Battle_of_Wits
 	
@@ -4604,8 +4741,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Mortal Combat - ").append(player).append(" wins the game");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}// if
 	}// upkeep_Mortal Combat
 
@@ -4635,8 +4773,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Epic Struggle - ").append(player).append(" wins the game");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}// if
 	}// upkeep_Epic_Struggle
 
@@ -4661,8 +4800,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Helix Pinnacle - ").append(player).append(" wins the game");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}// if
 	}// upkeep_Helix_Pinnacle
 
@@ -4687,8 +4827,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Near-Death Experience - ").append(player).append(" wins the game");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}// if
 	}// upkeep_Near_Death_Experience
 	
@@ -4713,8 +4854,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append(list.get(0)).append(" - ").append(player).append(" wins the game");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}// if
 	}// upkeep_Test_of_Endurance
 
@@ -4752,8 +4894,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Barren Glory - ").append(player).append(" wins the game");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}// if
 	}// upkeep_Barren_Glory
 
@@ -4776,7 +4919,8 @@ public class GameActionUtil {
 
 			ability.setStackDescription("Sleeper Agent deals 2 damage to its controller.");
 
-			AllZone.Stack.add(ability);
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}
 	}//upkeep_Sleeper_Agent
 	
@@ -4806,7 +4950,9 @@ public class GameActionUtil {
 				}
 			};
 			ability.setStackDescription(c.getName()+" - choose a new number");
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}//foreach(Card)
 	}//upkeep_Shapeshifter
 	
@@ -4890,7 +5036,9 @@ public class GameActionUtil {
 				}
 			};
 			ability.setStackDescription(c.getName()+" - you may have this creature become a copy of target creature.");
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}//foreach(Card)
 	}//upkeep_Vesuvan_Doppelganger_Keyword
 	
@@ -4942,7 +5090,9 @@ public class GameActionUtil {
 				}
 			};
 			ability.setStackDescription(source.getName()+" - "+player+" taps X artifacts, creatures or lands he or she controls.");
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}//foreach(wire)
 	}//upkeep_Tangle_Wire()
 
@@ -4975,7 +5125,8 @@ public class GameActionUtil {
 						};
 						ability.setStackDescription("Pillory of the Sleepless  - enchanted creature's controller loses 1 life.");
 
-						AllZone.Stack.add(ability);
+                        AllZone.Stack.addSimultaneousStackEntry(ability);
+
 					}
 				}
 			}
@@ -5020,7 +5171,8 @@ public class GameActionUtil {
 				sb.append("Greener Pastures - ").append(mostLands).append(" puts a 1/1 green Saproling token onto the battlefield.");
 				ability.setStackDescription(sb.toString());
 
-				AllZone.Stack.add(ability);
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 			}// for
 
 		}//else
@@ -5080,8 +5232,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append(crd).append(" - sacrifice Masticore unless you discard a card.");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}// for
 	}//upkeep_Masticore
 
@@ -5127,8 +5280,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Eldrazi Monument - ").append(player).append(" sacrifices a creature.");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}
 
 	}//upkeep_Eldrazi_Monument
@@ -5157,8 +5311,9 @@ public class GameActionUtil {
 			sb.append(blaze.get(i)).append(" - has a blaze counter and deals 1 damage to ");
 			sb.append(player).append(".");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}
 	}
 	
@@ -5272,7 +5427,8 @@ public class GameActionUtil {
 								}
 								numCreatures[0] = count;
 							}
-							AllZone.Stack.add(devour);
+                            AllZone.Stack.addSimultaneousStackEntry(devour);
+
 						}
 					};
 					
@@ -5289,7 +5445,8 @@ public class GameActionUtil {
 			};// Ability
 			ability.setStackDescription("Dragon Broodmother - put a 1/1 red and green Dragon token onto the battlefield.");
 
-			AllZone.Stack.add(ability);
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}// for
 	}// upkeep_Dragon_Broodmother()
 	
@@ -5352,8 +5509,9 @@ public class GameActionUtil {
 			StringBuilder sb = new StringBuilder();
 			sb.append("At the beginning of your draw step, you may draw two additional cards. If you do, choose two cards in your hand drawn this turn. For each of those cards, pay 4 life or put the card on top of your library.");
 			ability.setStackDescription(sb.toString());
-			
-			AllZone.Stack.add(ability);
+
+            AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		}//end for
 	}
 	
@@ -5503,7 +5661,9 @@ public class GameActionUtil {
 			}; // ability
 
 			ability.setStackDescription("Mirror-Sigil Sergeant - put a token onto the battlefield that's a copy of Mirror-Sigil Sergeant.");
-			AllZone.Stack.add(ability);
+
+			AllZone.Stack.addSimultaneousStackEntry(ability);
+
 		} // for
 	} //upkeep_Mirror_Sigil_Sergeant
 

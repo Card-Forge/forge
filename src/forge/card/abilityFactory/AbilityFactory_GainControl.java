@@ -341,7 +341,7 @@ public class AbilityFactory_GainControl {
             	if(bNoRegen) sb.append("  It can't be regenerated.");
             	ability.setStackDescription(sb.toString());
                 
-                AllZone.Stack.add(ability);
+                AllZone.Stack.addSimultaneousStackEntry(ability);
     		}
 			
     	};

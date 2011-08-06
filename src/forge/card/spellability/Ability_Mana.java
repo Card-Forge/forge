@@ -111,7 +111,7 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
         
         if (source.getName().equals("Forbidden Orchard")) {
         	this.undoable = false;
-        	AllZone.Stack.add(CardFactoryUtil.getForbiddenOrchardAbility(source, getActivatingPlayer().getOpponent()));
+        	AllZone.Stack.addSimultaneousStackEntry(CardFactoryUtil.getForbiddenOrchardAbility(source, getActivatingPlayer().getOpponent()));
         }
         
         if(source.getType().contains("Mountain") && AllZoneUtil.isCardInPlay("Gauntlet of Might")) {
@@ -167,6 +167,8 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
         runParams.put("Ability_Mana", this);
         runParams.put("Produced", produced);
         AllZone.TriggerHandler.runTrigger("TapsForMana", runParams);
+
+
         
 	}//end produceMana(String)
 	

@@ -158,8 +158,9 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 	sb.append(source).append(" - tap all lands ");
                 	sb.append(tisLand.getController()).append(" controls.");
                 	ability.setStackDescription(sb.toString());
-                	
-                	AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
                 
                 CardList les = AllZoneUtil.getPlayerCardsInPlay(c.getOwner().getOpponent(), "Land Equilibrium");
@@ -181,7 +182,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 	CardList oLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner().getOpponent());
                 	//(pLands - 1) because this land is in play, and the ability is before it is in play
                 	if(oLands.size() <= (pLands.size() - 1)) {
-                		AllZone.Stack.add(ability);
+                		AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 	}
                 }
                 
@@ -238,10 +240,13 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 sb.append("return Sword of the Meek from your graveyard to the battlefield, then attach it to that creature.");
                 ability.setStackDescription(sb.toString());
 
-                AllZone.Stack.add(ability);
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
             }
         }
-        
+
+
+
         /*
         for (String effect : AllZone.StateBasedEffects.getStateBasedMap().keySet() ) {
         	Command com = GameActionUtil.commands.get(effect);
@@ -313,6 +318,8 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
             Command com = GameActionUtil.commands.get(effect);
             com.execute();
         }
+
+
     }
     
     public void setTrigger(boolean b) {

@@ -293,6 +293,8 @@ public class Phase extends MyObservable
     		AllZone.TriggerHandler.runTrigger("Phase", runParams);
             
         }
+
+
         
         //This line fixes Combat Damage triggers not going off when they should
         AllZone.Stack.unfreezeStack();
@@ -377,6 +379,8 @@ public class Phase extends MyObservable
                 AllZone.Phase.setNeedToNextPhase(false);
                 AllZone.Phase.nextPhase();
         }
+
+        AllZone.Stack.chooseOrderOfSimultaneousStackEntryAll();
     }
     
     private Player handleNextTurn() {
@@ -513,6 +517,7 @@ public class Phase extends MyObservable
     		// pass the priority to other player
     		setPriorityPlayer(actingPlayer.getOpponent());
     		AllZone.InputControl.resetInput();
+            AllZone.Stack.chooseOrderOfSimultaneousStackEntryAll();
     	}
     	else{
     		if (AllZone.Stack.size() == 0){
@@ -523,6 +528,7 @@ public class Phase extends MyObservable
     		else{
     			AllZone.Stack.resolveStack();
     		}
+            AllZone.Stack.chooseOrderOfSimultaneousStackEntryAll();
     	}
     }
     

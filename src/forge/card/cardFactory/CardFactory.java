@@ -557,7 +557,8 @@ public class CardFactory implements NewConstants {
         			sb.append(card.getController()).append(" loses "+num+" life");
         			etbLoseLifeAbility.setStackDescription(sb.toString());
 
-        			AllZone.Stack.add(etbLoseLifeAbility);
+                    AllZone.Stack.addSimultaneousStackEntry(etbLoseLifeAbility);
+
         		}
         	};
         	card.addComesIntoPlayCommand(etbLoseLife);
@@ -865,7 +866,8 @@ public class CardFactory implements NewConstants {
                             }
                             numCreatures[0] = count;
                         }
-                        AllZone.Stack.add(devour);
+                        AllZone.Stack.addSimultaneousStackEntry(devour);
+
                     }
                 };
                 
@@ -924,7 +926,8 @@ public class CardFactory implements NewConstants {
                             	if (ability.getTargetCard() != null){
 	                            	ability.setStackDescription("Put " + card.getCounters(Counters.P1P1)
 	                                        + " +1/+1 counter/s from " + card + " on " + ability.getTargetCard());
-	                            	AllZone.Stack.add(ability);
+	                            	AllZone.Stack.addSimultaneousStackEntry(ability);
+
                             	}
                             }
                         }
@@ -1126,7 +1129,8 @@ public class CardFactory implements NewConstants {
                 	sb.append("When ").append(card.getName()).append(" enters the battlefield, choose a creature type.");
                 	ability.setStackDescription(sb.toString());
                     
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
@@ -1210,7 +1214,9 @@ public class CardFactory implements NewConstants {
                 
                 public void execute() {
                     ability.setStackDescription("As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.");
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.setText("As Sarpadian Empires, Vol. VII enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.\r\n"
@@ -1273,8 +1279,9 @@ public class CardFactory implements NewConstants {
                     StringBuilder sb = new StringBuilder();
                     sb.append(card.getName()).append(" - returning creature to the battlefield");
                     ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }//execute()
             };//Command
             
@@ -1385,7 +1392,9 @@ public class CardFactory implements NewConstants {
 							Card c = (Card)o;
 							necrogen.setTargetCard(c);
 							once = true;
-							AllZone.Stack.add(necrogen);
+
+                            AllZone.Stack.addSimultaneousStackEntry(necrogen);
+
 						}
 					}
 					stop();
@@ -1474,7 +1483,9 @@ public class CardFactory implements NewConstants {
 								AllZone.GameAction.exile(c);
 								AllZone.GameAction.exile(c2);
 								once = true;
-								AllZone.Stack.add(nightSoil);
+
+                                AllZone.Stack.addSimultaneousStackEntry(nightSoil);
+
 							}
 						}
 					}
@@ -1811,7 +1822,8 @@ public class CardFactory implements NewConstants {
                 
                 public void execute() {
                     ability.setStackDescription("If Mox Diamond would enter the battlefield, you may discard a land card instead. If you do, put Mox Diamond onto the battlefield. If you don't, put it into its owner's graveyard.");
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             SpellAbility spell = new Spell_Permanent(card) {
@@ -2151,8 +2163,9 @@ public class CardFactory implements NewConstants {
         			sb.append("Imprint - ").append(card.getController());
         			sb.append(" may exile an instant card with converted mana cost 2 or less from their hand.");
         			ability.setStackDescription(sb.toString());
-                  
-        			AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
         		}
         	};
         	
@@ -2458,7 +2471,8 @@ public class CardFactory implements NewConstants {
 				private static final long serialVersionUID = -6417019967914398902L;
 
 				public void execute() {
-                    AllZone.Stack.add(ability);
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };//Command
             
@@ -2546,8 +2560,9 @@ public class CardFactory implements NewConstants {
 					StringBuilder sb = new StringBuilder();
 					sb.append(card.getName()).append(" - choose a creature type. Creatures of that type do not untap during their controller's untap step.");
 					comesIntoPlayAbility.setStackDescription(sb.toString());
-                	
-                	AllZone.Stack.add(comesIntoPlayAbility);
+
+                    AllZone.Stack.addSimultaneousStackEntry(comesIntoPlayAbility);
+
                 }
             };
             
@@ -2810,7 +2825,8 @@ public class CardFactory implements NewConstants {
 				private static final long serialVersionUID = 2266471224097876143L;
 
 				public void execute() {
-        			AllZone.Stack.add(ability);
+        			AllZone.Stack.addSimultaneousStackEntry(ability);
+
         		}
         	};
         	
@@ -2879,8 +2895,9 @@ public class CardFactory implements NewConstants {
                 	StringBuilder sb = new StringBuilder();
                 	sb.append("As ").append(card.getName()).append(" enters the battlefield, pay any amount of life.");
                 	ability.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(ability);
+
+                    AllZone.Stack.addSimultaneousStackEntry(ability);
+
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
@@ -3147,8 +3164,9 @@ public class CardFactory implements NewConstants {
                 	sb.append("exile all creatures you control. ");
                 	sb.append("Then put that many 5/5 red Dragon creature tokens with flying onto the battlefield.");
                 	exileAll.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(exileAll);
+
+                    AllZone.Stack.addSimultaneousStackEntry(exileAll);
+
                 }
             };
             
@@ -3176,8 +3194,9 @@ public class CardFactory implements NewConstants {
                 	sb.append("sacrifice all Dragons you control. ");
                 	sb.append("Then return the exiled cards to the battlefield under your control.");
                 	returnAll.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(returnAll);
+
+                    AllZone.Stack.addSimultaneousStackEntry(returnAll);
+
                 }
             };
             
@@ -3205,8 +3224,9 @@ public class CardFactory implements NewConstants {
                 	sb.append(cardName).append(" - ").append(card.getController());
                 	sb.append(" loses life equal to his or her life total.");
                 	loseAllLife.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(loseAllLife);
+
+                    AllZone.Stack.addSimultaneousStackEntry(loseAllLife);
+
                 }
             };
             
@@ -3226,8 +3246,9 @@ public class CardFactory implements NewConstants {
                 	sb.append(cardName).append(" - ").append(card.getController());
                 	sb.append("loses the game.");
                 	loseGame.setStackDescription(sb.toString());
-                    
-                    AllZone.Stack.add(loseGame);
+
+                    AllZone.Stack.addSimultaneousStackEntry(loseGame);
+
                 }
             };
             

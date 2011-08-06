@@ -244,7 +244,8 @@ class CardFactory_Lands {
         			if(card.getController() == AllZone.HumanPlayer) {
         				AllZone.InputControl.setInput(CardFactoryUtil.input_targetSpecific(a[0], creats, "Select target creature you control", false, false));
         			} else {
-        				AllZone.Stack.add(a[0]);  		
+                        AllZone.Stack.addSimultaneousStackEntry(a[0]);
+
         			}
         		}
         	};         

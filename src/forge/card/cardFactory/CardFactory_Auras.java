@@ -1521,7 +1521,8 @@ class CardFactory_Auras {
 				private static final long serialVersionUID = 3595188622377350327L;
 
 				public void execute() {
-					AllZone.Stack.add(attach);
+                    AllZone.Stack.addSimultaneousStackEntry(attach);
+
 				}
 			};
         	
@@ -1548,7 +1549,8 @@ class CardFactory_Auras {
                     PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     if(AllZone.GameAction.isCardInZone(c, play))
-                    	AllZone.Stack.add(detach);
+                        AllZone.Stack.addSimultaneousStackEntry(detach);
+
 				}
 			};
 			// Do not remove SpellAbilities created by AbilityFactory or Keywords.
@@ -2242,7 +2244,9 @@ class CardFactory_Auras {
 						StringBuilder sb = new StringBuilder();
 						sb.append(card.getController()).append(" untaps up to 5 lands.");
 						untapAbility.setStackDescription(sb.toString());
-                        AllZone.Stack.add(untapAbility);
+
+                        AllZone.Stack.addSimultaneousStackEntry(untapAbility);
+
                     }
                 };
                 if (optionUnTapLands) {

@@ -1431,7 +1431,7 @@ public class CardFactoryUtil {
                 Object o = GuiUtils.getChoiceOptional("Select a card", sameType.toArray());
                 if(o != null) {
                     //ability.setTargetCard((Card)o);
-                    //AllZone.Stack.add(ability);
+
                     sourceCard.getController().discard(sourceCard, this);
                     Card c1 = (Card) o;
                     AllZone.GameAction.moveToHand(c1);
@@ -1505,7 +1505,7 @@ public class CardFactoryUtil {
                 Object o = GuiUtils.getChoiceOptional("Select a card", sameCost.toArray());
                 if(o != null) {
                     //ability.setTargetCard((Card)o);
-                    //AllZone.Stack.add(ability);
+
                     sourceCard.getController().discard(sourceCard, this);
                     Card c1 = (Card) o;
 
@@ -4417,7 +4417,9 @@ public class CardFactoryUtil {
 	                }
 	            };
 	            ability.setStackDescription("Fastbond - Deals 1 damage to you.");
-	            AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 	        }
         }
 		
@@ -4430,7 +4432,9 @@ public class CardFactoryUtil {
 	                }
 	            };
 	            ability.setStackDescription(city.getName()+" - sacrifice "+city.getName());
-	            AllZone.Stack.add(ability);
+
+                AllZone.Stack.addSimultaneousStackEntry(ability);
+
 	        }
         }
 		

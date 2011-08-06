@@ -40,6 +40,7 @@ public abstract class SpellAbility {
     
     private boolean         spell;
     private boolean			trigger 		   = false;
+    private boolean         mandatory          = false;
     
     private boolean         tapAbility;
     private boolean         untapAbility;
@@ -102,7 +103,7 @@ public abstract class SpellAbility {
     public boolean canPlayAI() {
         return true;
     }
-    
+
 	// This should be overridden by ALL AFs
     public boolean doTrigger(boolean mandatory){
     	return false;
@@ -387,6 +388,8 @@ public abstract class SpellAbility {
     
     public void setStackDescription(String s) {
         stackDescription = s;
+        if(description == "")
+            description = s;
     }
     
     public String getStackDescription() {
@@ -432,6 +435,7 @@ public abstract class SpellAbility {
 		while(node != null){
 			if (node != this)
 				sb.append(" ");
+
 			sb.append(node.getDescription().replace("CARDNAME", node.getSourceCard().getName()));
 			node = node.getSubAbility();
 
@@ -589,4 +593,12 @@ public abstract class SpellAbility {
 	public boolean isTrigger() {
 		return trigger;
 	}
+
+    public void setMandatory(boolean mand) {
+        this.mandatory = mand;
+    }
+
+    public boolean isMandatory() {
+        return mandatory;
+    }
 }
