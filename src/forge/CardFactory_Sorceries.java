@@ -1014,12 +1014,10 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void resolve() {
-                    CardList nonwhite = new CardList();
-                    nonwhite.addAll(AllZone.Human_Play.getCards());
-                    nonwhite.addAll(AllZone.Computer_Play.getCards());
+                	CardList nonwhite = AllZoneUtil.getCreaturesInPlay();
                     nonwhite = nonwhite.filter(new CardListFilter() {
                         public boolean addCard(Card c) {
-                            return c.isCreature() && (!CardUtil.getColors(c).contains(Constant.Color.White));
+                            return !c.isWhite();
                         }
                     });
                     for(int i = 0; i < nonwhite.size(); i++)
@@ -2136,7 +2134,7 @@ public class CardFactory_Sorceries {
                     CardList flying = CardFactoryUtil.AI_getHumanCreature("Flying", card, true);
                     for(int i = 0; i < flying.size(); i++)
                         if(flying.get(i).getNetDefense() <= damage
-                                && (!CardUtil.getColors(flying.get(i)).contains(Constant.Color.White))) {
+                                && (!(flying.get(i)).isWhite())) {
                             return flying.get(i);
                         }
                     return null;
@@ -2173,7 +2171,7 @@ public class CardFactory_Sorceries {
                 
                 @Override
                 public void selectCard(Card card, PlayerZone zone) {
-                    if((!CardUtil.getColors(card).contains(Constant.Color.White)) && card.isCreature()
+                    if((!card.isWhite()) && card.isCreature()
                             && zone.is(Constant.Zone.Play)) {
                         spell.setTargetCard(card);
                         if (this.isFree())
@@ -7013,6 +7011,11 @@ public class CardFactory_Sorceries {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Fireball")) {
+        	/*
+        	 * Fireball deals X damage divided evenly, rounded down, among
+        	 * any number of target creatures and/or players.
+        	 * Fireball costs 1 more to cast for each target beyond the first.
+        	 */
         	//no reason this should never be enough targets
         	final Card[] target = new Card[100];
         	final int[] index = new int[1];
