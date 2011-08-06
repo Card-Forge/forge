@@ -69,7 +69,12 @@ class BoosterDraft_1 implements BoosterDraft
 	  }
 	  
 	  else if (draftType.equals("Block")) {	// Draft from cards by block or set
-          Object o = GuiUtils.getChoice("Choose Block", SetInfoUtil.getBlockNameList().toArray());
+          ArrayList<String> bNames = SetInfoUtil.getBlockNameList();
+          ArrayList<String> rbNames = new ArrayList<String>();
+          for (int i=bNames.size() - 1; i>=0; i--)
+        	  rbNames.add(bNames.get(i));
+		  
+		  Object o = GuiUtils.getChoice("Choose Block", rbNames.toArray());
           
           ArrayList<String> blockSets = SetInfoUtil.getSets_BlockName(o.toString());
           int nPacks = SetInfoUtil.getPackCount(o.toString());
