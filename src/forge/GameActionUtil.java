@@ -50,7 +50,6 @@ public class GameActionUtil {
 		*/
 		
 		upkeep_Greener_Pastures();
-		upkeep_Squee();
 		upkeep_Scute_Mob();
 		upkeep_Heartmender();
 		upkeep_Nath();
@@ -4752,47 +4751,6 @@ public class GameActionUtil {
 			}
 		}
 	}//upkeep_Farmstead()
-	
-    private static void upkeep_Squee() {
-        final Player player = AllZone.Phase.getPlayerTurn();
-        PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-
-        CardList list = new CardList(graveyard.getCards());
-        list = list.getName("Squee, Goblin Nabob");
-
-        final CardList squees = list;
-        final int[] index = new int[1];
-        index[0] = 0;
-
-        for (int i = 0; i < list.size(); i++) {
-            Ability ability = new Ability(list.get(i), "0") {
-                @Override
-                public void resolve() {
-                    PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-
-                    Card c = squees.get(index[0]);
-                    if (AllZone.GameAction.isCardInZone(c, graveyard)) {
-                        if (player.equals(AllZone.HumanPlayer)) {
-                            String question = "Return Squee, Goblin Nabob from your graveyard to your hand?";
-                            if (!GameActionUtil.showYesNoDialog(c, question)) {
-                                index[0] = index[0] + 1;
-                                return;
-                            }
-                        }
-                        PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, c.getController());
-                        AllZone.GameAction.moveTo(hand, c);
-
-                        index[0] = index[0] + 1;
-                    }
-                }
-            };// Ability
-            StringBuilder sb = new StringBuilder();
-            sb.append("Squee, Goblin Nabob - ").append(player);
-            sb.append(" may return Squee, Goblin Nabob from graveyard to hand.");
-            ability.setStackDescription(sb.toString());
-            AllZone.Stack.add(ability);
-        } // if creatures > 0
-    } // upkeep_Squee()
 
 	private static void upkeep_Scute_Mob() {
 		final Player player = AllZone.Phase.getPlayerTurn();
