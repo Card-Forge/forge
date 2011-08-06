@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Defined$ Each | ChangeNum$ 2 | Shuffle$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_explorer.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/86.jpg
 End

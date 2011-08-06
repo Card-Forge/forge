@@ -8,4 +8,5 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ Each
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurloon_shaman.jpg
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/108.jpg
 End
