@@ -191,7 +191,7 @@ public interface NewConstants {
             }
             
             
-            public static final String COMPUTER_GRAVEYARD = "%s/Display/human/graveyard";
+            public static final String COMPUTER_GRAVEYARD = "%s/Display/computer/graveyard";
             
             public static interface COMPUTER_GRAVEYARD {
                 public static final String TITLE  = "%s/Display/computer/graveyard/title";
@@ -200,7 +200,7 @@ public interface NewConstants {
             }
             
             
-            public static final String COMPUTER_REMOVED = "%s/Display/human/removed";
+            public static final String COMPUTER_REMOVED = "%s/Display/computer/removed";
             
             public static interface COMPUTER_REMOVED {
                 public static final String TITLE  = "%s/Display/computer/removed/title";
