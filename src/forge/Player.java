@@ -912,7 +912,7 @@ public abstract class Player extends MyObservable{
     		return true;
     	
     	CardList oppList = AllZoneUtil.getPlayerCardsInPlay(getOpponent());
-    	oppList = oppList.getKeyword("Your opponents can't win the game.");
+    	oppList = oppList.getKeyword("Your opponents can't lose the game.");
     	
     	return oppList.size() > 0;
     }
@@ -932,7 +932,7 @@ public abstract class Player extends MyObservable{
     		return true;
     	
     	CardList oppList = AllZoneUtil.getPlayerCardsInPlay(this);
-    	oppList = oppList.getKeyword("Your opponents can't lose the game.");
+    	oppList = oppList.getKeyword("Your opponents can't win the game.");
     	
     	return oppList.size() > 0;
     }
