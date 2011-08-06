@@ -2104,48 +2104,6 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(spell);
         	card.addSpellAbility(freeCast);
         }//*************** END ************ END **************************
-       
-        
-        //*************** START *********** START **************************
-      	else if(cardName.equals("Bottle of Suleiman")) {
-      		/*
-      		 * 1, Sacrifice Bottle of Suleiman: Flip a coin. If you lose the flip,
-      		 * Bottle of Suleiman deals 5 damage to you. If you win the flip,
-      		 * put a 5/5 colorless Djinn artifact creature token with flying
-      		 * onto the battlefield.
-      		 */
-      		Cost abCost = new Cost("1 Sac<1/CARDNAME>", cardName, true);
-      		final SpellAbility ability = new Ability_Activated(card, abCost, null) {
-      			private static final long serialVersionUID = -5741302550353410000L;
-
-      			@Override
-      			public boolean canPlayAI() {
-      				if( AllZone.ComputerPlayer.getLife() > 10 ) {
-      					return true;
-      				}
-      				CardList play = new CardList(AllZone.Computer_Battlefield.getCards());
-      				play = play.getType("Creature");
-      				if( play.size() == 0 ) {
-      					return true;
-      				}
-      				return false;
-      			}
-
-      			@Override
-      			public void resolve() {
-      				if(GameActionUtil.flipACoin(card.getController(), card)) {
-      					CardFactoryUtil.makeToken("Djinn", "C 5 5 Djinn", card.getController(), "", new String[] {"Creature", "Artifact", "Djinn"}, 5, 5, new String[] {"Flying"});
-      				}
-      				else {
-      					card.getController().addDamage(5, card);
-      				}
-      			}
-      		};//SpellAbility
-
-      		card.addSpellAbility(ability);
-      		ability.setDescription(abCost+"Flip a coin. If you lose the flip, Bottle of Suleiman deals 5 damage to you. If you win the flip, put a 5/5 colorless Djinn artifact creature token with flying onto the battlefield.");
-      		ability.setStackDescription("Bottle of Suleiman - flip a coin");
-      	}//*************** END ************ END **************************
         
       
         //*************** START *********** START **************************
