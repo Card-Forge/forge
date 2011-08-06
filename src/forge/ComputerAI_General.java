@@ -154,24 +154,24 @@ public class ComputerAI_General implements Computer {
                 if(c.isCreature() && (c.getKeyword().contains("Haste")) || c.getKeyword().contains("Exalted")) return true;
 
                 CardList buffed = new CardList(AllZone.Computer_Play.getCards()); //get all cards the computer controls with BuffedBy
-                for(int i = 0; i < buffed.size(); i++) {
-                	Card buffedcard = buffed.get(i);
-                	if (buffedcard.getSVar("BuffedBy").length() > 0) {
-                			String buffedby = buffedcard.getSVar("BuffedBy");
-                			final String bffdby[] = buffedby.split(",");
-                			if (c.isValidCard(bffdby)) return true;
-                	}       
-                }
+                for(int j = 0; j < buffed.size(); j++) {
+                    Card buffedcard = buffed.get(j);
+                    if (buffedcard.getSVar("BuffedBy").length() > 0) {
+                            String buffedby = buffedcard.getSVar("BuffedBy");
+                            final String bffdby[] = buffedby.split(",");
+                            if (c.isValidCard(bffdby)) return true;
+                    }       
+                }//BuffedBy
 
                 CardList antibuffed = new CardList(AllZone.Human_Play.getCards()); //get all cards the computer controls with AntiBuffedBy
-                for(int i = 0; i < buffed.size(); i++) {
-                	Card buffedcard = antibuffed.get(i);
-                	if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
-                			String buffedby = buffedcard.getSVar("AntiBuffedBy");
-                			final String bffdby[] = buffedby.split(",");
-                			if (c.isValidCard(bffdby)) return true;
-                	}       
-                }
+                for(int k = 0; k < buffed.size(); k++) {
+                    Card buffedcard = antibuffed.get(k);
+                    if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
+                            String buffedby = buffedcard.getSVar("AntiBuffedBy");
+                            final String bffdby[] = buffedby.split(",");
+                            if (c.isValidCard(bffdby)) return true;
+                    }       
+                }//AntiBuffedBy
 
                 if(c.isLand()) return false;
 
