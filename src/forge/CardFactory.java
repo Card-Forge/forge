@@ -11737,7 +11737,10 @@ public class CardFactory implements NewConstants {
         			return creats.size() != 0 && super.canPlay();
         		}
         	};
-        	ability.setDescription(abCost+"Regenerate target black creature.");
+        	StringBuilder sb = new StringBuilder();
+        	sb.append(abCost).append("Regenerate target black creature.");
+        	ability.setDescription(sb.toString());
+        	
         	card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
         
@@ -11759,7 +11762,11 @@ public class CardFactory implements NewConstants {
 				private static final long serialVersionUID = -8002808964908985221L;
 
 				public void execute() {
-                	comesIntoPlayAbility.setStackDescription(card.getName()+" - tap all red creatures.");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(card.getName()).append(" - tap all red creatures.");
+					comesIntoPlayAbility.setStackDescription(sb.toString());
+                	
                 	AllZone.Stack.add(comesIntoPlayAbility);
                 }
             };
@@ -11848,7 +11855,7 @@ public class CardFactory implements NewConstants {
 
         	};//Ability
 
-        	ability.setDescription("3, tap: "+"Target player discards a card.  Activate this ability only during your turn.");
+        	ability.setDescription("3, tap: "+"Target player discards a card. Activate this ability only during your turn.");
         	card.addSpellAbility(ability);
         	ability.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
