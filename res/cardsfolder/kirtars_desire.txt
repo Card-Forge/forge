@@ -1,0 +1,10 @@
+Name:Kirtar's Desire
+ManaCost:W
+Types:Enchantment Aura
+Text:Enchanted creature can't attack.
+K:Enchant creature
+K:enPumpCurse:CARDNAME can't attack.
+K:stPumpAll:Creature:Enchanted Permanent:0/0/CARDNAME can't block.:Threshold:Threshold - Enchanted creature can't block as long as seven or more cards are in your graveyard.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/kirtars_desire.jpg
+End

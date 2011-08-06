@@ -1,0 +1,10 @@
+Name:Battlewise Aven
+ManaCost:3 W
+Types:Creature Bird Soldier
+Text:no text
+PT:2/2
+K:Flying
+K:stPumpAll:Creature:Self:1/1/First Strike:Threshold:Threshold - As long as seven or more cards are in your graveyard, Battlewise Aven gets +1/+1 and has first strike.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/battlewise_aven.jpg
+End
