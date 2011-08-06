@@ -41,7 +41,24 @@ abstract public class Ability_Mana extends Ability_Activated implements java.io.
 	}
 	
 	public void produceMana(){
-		produceMana(origProduced);
+		StringBuilder sb = new StringBuilder();
+		if (amount == 0)
+			sb.append("0");
+		else{
+			try{
+				// if baseMana is an integer(colorless), just multiply amount and baseMana
+				int base = Integer.parseInt(origProduced);
+				sb.append(base*amount);
+			}
+			catch(NumberFormatException e){
+				for(int i = 0; i < amount; i++){
+					if (i != 0)
+						sb.append(" ");
+					sb.append(origProduced);
+				}
+			}
+		}
+		produceMana(sb.toString());
 	}
 	
 	public void produceMana(String produced){
