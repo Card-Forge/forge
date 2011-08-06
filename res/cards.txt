@@ -1,3 +1,58 @@
+Akoum Refuge
+no cost
+Land
+Akoum Refuge enters the battlefield tapped.\r\nWhen Akoum Refuge enters the battlefield, you gain 1 life.
+tap: add B
+tap: add R
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/akoum_refuge.jpg
+
+Aven Brigadier
+3 W W W
+Creature Bird Soldier
+Other Bird creatures get +1/+1.\r\nOther Soldier creatures get +1/+1.
+3/5
+Flying
+SVar:PlayMain1:TRUE
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_brigadier.jpg
+
+Extinguish
+1 U
+Instant
+Counter target sorcery spell.
+spCounter:Spell:Type(Sorcery):Graveyard:None
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/extinguish.jpg
+
+Seasoned Marshal
+2 W W
+Creature Human Soldier
+no text
+2/2
+WheneverKeyword:Attacks:Self:Play:TapPermanent:NormalInput/Creature:ASAP:Yes_No:No Special Condition:Whenever Seasoned Marshal attacks, you may tap target creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/seasoned_marshal.jpg
+
+Spindrift Drake
+U
+Creature Drake
+no text
+2/1
+At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U
+Flying
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spindrift_drake.jpg
+
+Yomiji, Who Bars the Way
+5 W W
+Legendary Creature Spirit
+no text
+4/4
+WheneverKeyword:PermanentIntoGraveyard:Type/Legendary:Play:MoveFrom-Graveyard-Hand:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a legendary permanent other than Yomiji, Who Bars the Way is put into a graveyard from the battlefield, return that card to its owner's hand.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/yomiji_who_bars_the_way.jpg
+
 Afflict
 2 B
 Instant
@@ -709,15 +764,6 @@ no text
 WheneverKeyword:EntersBattleField:Self:Play:Damage/1:InputType - CreatureORPlayer:ASAP:No_Condition:SingleTarget:When Akoum Boulderfoot enters the battlefield, it deals 1 damage to target creature or player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akoum_boulderfoot.jpg
-
-Akoum Refuge
-no cost
-Land
-Akoum Refuge enters the battlefield tapped. When Akoum Refuge enters the battlefield, you gain 1 life.
-tap: add B
-tap: add R
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/akoum_refuge.jpg
 
 Akrasan Squire
 W
@@ -2145,16 +2191,6 @@ If there are ten or more creature cards total in all graveyards, Avatar of Woe c
 Fear
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_woe.jpg
-
-Aven Brigadier
-3 W W W
-Creature Bird Soldier
-Other Bird creatures get +1/+1. Other Soldier creatures get +1/+1.
-3/5
-Flying
-SVar:PlayMain1:TRUE
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_brigadier.jpg
 
 Aven Cloudchaser
 3 W
@@ -9927,14 +9963,6 @@ spDestroyTgt:Creature.nonBlack+nonArtifact:NoRegen
 Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/expunge.jpg
-
-Extinguish
-2 U
-Instant
-Counter target sorcery spell.
-spCounter:Spell:Type(Sorcery):Graveyard:None
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/extinguish.jpg
 
 Eye of Nowhere
 U U
@@ -26609,15 +26637,6 @@ tap: add G
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seaside_citadel.jpg
 
-Seasoned Marshal
-2 W W
-Creature Human Knight
-no text
-2/2
-WheneverKeyword:Attacks:Self:Play:TapPermanent:NormalInput/Creature:ASAP:Yes_No:No Special Condition:Whenever Seasoned Marshal attacks, you may tap target creature.
-SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/seasoned_marshal.jpg
-
 Seat of the Synod
 no cost
 Artifact Land
@@ -29119,16 +29138,6 @@ abDamageTgtCP R T:X:Spikeshot Goblin deals damage equal to its power to target c
 SVar:X:Count$CardPower
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spikeshot_goblin.jpg
-
-Spindrift Drake
-U
-Creature Harpy Mercenary
-no text
-2/1
-At the beginning of your upkeep, sacrifice CARDNAME unless you pay:U
-Flying
-SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/spindrift_drake.jpg
 
 Spined Basher
 2 B
@@ -36545,15 +36554,6 @@ no text
 Cycling:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yoked_plowbeast.jpg
-
-Yomiji, Who Bars the Way
-4 W W
-Legendary Creature Spirit
-no text
-4/4
-WheneverKeyword:PermanentIntoGraveyard:Type/Legendary:Play:MoveFrom-Graveyard-Hand:Initiating_Card:ASAP:No_Condition:No Special Condition:Whenever a legendary permanent other than Yomiji, Who Bars the Way is put into a graveyard from the battlefield, return that card to its owner's hand.
-SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/yomiji_who_bars_the_way.jpg
 
 Yore-Tiller Nephilim
 W U B R
