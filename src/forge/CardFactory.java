@@ -5992,10 +5992,7 @@ public class CardFactory implements NewConstants {
             final Ability ability1 = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    
-                    //String player = card.getController();
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
                     
                     if(hand.size() == 0) return;
                     
@@ -6013,9 +6010,7 @@ public class CardFactory implements NewConstants {
                             creatures.toArray());
                     if(o != null) {
                         Card c = (Card) o;
-                        hand.remove(c);
-                        play.add(c);
-                        c.setSickness(true);
+                        AllZone.Stack.add(c.getSpellPermanent());
                     }
                     
 

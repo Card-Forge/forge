@@ -1630,7 +1630,6 @@ class CardFactory_Planeswalkers {
                 
                 public void humanResolve() {
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer);
-                    PlayerZone lib = AllZone.getZone(Constant.Zone.Library, AllZone.HumanPlayer);
                     
                     CardList putOnTop = new CardList(hand.getCards());
                     

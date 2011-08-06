@@ -2430,19 +2430,14 @@ public class CardFactory_Sorceries {
                 }//computerResolve()
                 
                 public void resolve(Card selectedCard) {
-                    Player opponent = card.getController().getOpponent();
-                    PlayerZone library = AllZone.getZone(Constant.Zone.Library, opponent);
-                    
+                    Player opponent = card.getController().getOpponent();             
                     Card c = selectedCard;
-                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
                     
                     //need to set controller before adding it to "play"
                     c.setController(card.getController());
                     c.setSickness(true);
                     
-                    library.remove(c);
-                    play.add(c);
-                    
+                    AllZone.GameAction.moveToPlay(c, card.getController());
 
                     opponent.shuffle();
                 }//resolve()

@@ -4071,23 +4071,20 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					// should check if Genesis is still there
-					PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
-					PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
 					if(player.equals(AllZone.HumanPlayer) && grave.size() > 0) {
 							CardList creatures = AllZoneUtil.getPlayerGraveyard(player);
 							creatures = creatures.filter(creatureFilter);
 							Object creatureChoice = GuiUtils.getChoice("Creature to move to hand", creatures.toArray());
 							Card creatureCard = (Card) creatureChoice;
-	                        graveyard.remove(creatureCard);
-	                        hand.add(creatureCard);
+;
+	                        AllZone.GameAction.moveToHand(creatureCard);
 						//}//end choice="Yes"
 					}
 					else{ //computer resolve
 						CardList compCreatures = AllZoneUtil.getPlayerGraveyard(player);
 						compCreatures = compCreatures.filter(creatureFilter);
 						Card target = CardFactoryUtil.AI_getBestCreature(compCreatures);
-						graveyard.remove(target);
-                        hand.add(target);
+						AllZone.GameAction.moveToHand(target);
 					}
 				}
 			};
@@ -7859,7 +7856,6 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
-						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 
 						CardList rats = new CardList(lib.getCards());
 						rats = rats.getType("Rat");
@@ -7870,14 +7866,13 @@ public class GameActionUtil {
 										rats.toArray());
 								if(o != null) {
 									Card card = (Card) o;
-									lib.remove(card);
-									hand.add(card);
+
+									AllZone.GameAction.moveToHand(card);
 								}
 							} else if(player.equals(AllZone.ComputerPlayer)) {
 								Card card = rats.get(0);
-								lib.remove(card);
-								hand.add(card);
 
+								AllZone.GameAction.moveToHand(card);
 							}
 							player.shuffle();
 						}
@@ -8215,7 +8210,6 @@ public class GameActionUtil {
                         if (player.isHuman()) {
                             Card c = library.get(0);
                             AllZone.GameAction.playCardNoCost(c);
-                            library.remove(c);
                         }
                         // player isComputer()
                         else {
@@ -9113,8 +9107,6 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						CardList graveyardCreatures = AllZoneUtil.getPlayerTypeInGraveyard(player, "Creature");
-						PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 
 						if(graveyardCreatures.size() >= 4) {
 							if(player.equals(AllZone.HumanPlayer)) {
@@ -9122,14 +9114,13 @@ public class GameActionUtil {
 										graveyardCreatures.toArray());
 								if(o != null) {
 									Card card = (Card) o;
-									graveyard.remove(card);
-									hand.add(card);
+
+									AllZone.GameAction.moveToHand(card);
 								}
 							} 
 							else if(player.equals(AllZone.ComputerPlayer)) {
 								Card card = graveyardCreatures.get(0);
-								graveyard.remove(card);
-								hand.add(card);
+								AllZone.GameAction.moveToHand(card);
 							}
 						}
 					}
@@ -9156,7 +9147,6 @@ public class GameActionUtil {
 				@Override
 				public void resolve() {
 					PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-					PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
 					CardList creatures = new CardList(graveyard.getCards());
 					creatures = creatures.getType("Creature");
@@ -9166,14 +9156,12 @@ public class GameActionUtil {
 								creatures.toArray());
 						if(o != null) {
 							Card card = (Card) o;
-							graveyard.remove(card);
-							playZone.add(card);
+
+							AllZone.GameAction.moveToPlay(card);
 						}
 					} else if(player.equals(AllZone.ComputerPlayer)) {
 						Card card = creatures.get(0);
-						graveyard.remove(card);
-						playZone.add(card);
-
+						AllZone.GameAction.moveToPlay(card);
 					}
 				}
 
@@ -9186,7 +9174,6 @@ public class GameActionUtil {
     private static void upkeep_Nether_Spirit() {
         final Player player = AllZone.Phase.getPlayerTurn();
         final PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-        final PlayerZone playZone = AllZone.getZone(Constant.Zone.Battlefield, player);
 
         CardList all = new CardList(graveyard.getCards());
         all = all.getType("Creature");
@@ -9199,8 +9186,7 @@ public class GameActionUtil {
             Ability ability = new Ability(list.get(0), "0") {
                 @Override
                 public void resolve() {
-                    graveyard.remove(nether);
-                    playZone.add(nether);
+                    AllZone.GameAction.moveToHand(nether);
                 }
             };
 
@@ -9507,8 +9493,6 @@ public class GameActionUtil {
 					@Override
 					public void resolve() {
 						CardList graveyardCreatures = AllZoneUtil.getPlayerTypeInGraveyard(player, "Creature");
-						PlayerZone graveyard = AllZone.getZone(Constant.Zone.Graveyard, player);
-						PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, player);
 
 						if(AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0) {
 							if(player.equals(AllZone.HumanPlayer)) {
@@ -9516,14 +9500,14 @@ public class GameActionUtil {
 										graveyardCreatures.toArray());
 								if(o != null) {
 									Card card = (Card) o;
-									graveyard.remove(card);
-									hand.add(card);
+
+									AllZone.GameAction.moveToHand(card);
 								}
 							} 
 							else if(player.equals(AllZone.ComputerPlayer)) {
 								Card card = graveyardCreatures.get(0);
-								graveyard.remove(card);
-								hand.add(card);
+
+								AllZone.GameAction.moveToHand(card);
 							}
 						}
 					}
@@ -10320,6 +10304,7 @@ public class GameActionUtil {
 	}//upkeep_Shapeshifter
 	
 	private static void upkeep_Vesuvan_Doppelganger_Keyword() {
+		// todo: what about enchantments? i dont know how great this solution is
 		final Player player = AllZone.Phase.getPlayerTurn();
 		final String keyword = "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.";
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player);

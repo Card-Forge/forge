@@ -328,7 +328,6 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
         }
         
         PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, c.getController());
-        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, c.getController());
         CardList meek = new CardList(grave.getCards());
         
         meek = meek.getName("Sword of the Meek");
@@ -338,7 +337,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                 final Card crd = meek.get(i);
                 final Card creat = c;
                 final PlayerZone graveZone = grave;
-                final PlayerZone playZone = play;
+
                 Ability ability = new Ability(meek.get(i), "0") {
                     @Override
                     public void resolve() {
@@ -347,8 +346,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                             	if(AllZone.GameAction.isCardInZone(crd, graveZone)
                                         && AllZone.GameAction.isCardInPlay(creat) && creat.isCreature()
                                         && creat.getNetAttack() == 1 && creat.getNetDefense() == 1) {
-                                    graveZone.remove(crd);
-                                    playZone.add(crd);
+                                    AllZone.GameAction.moveToPlay(crd);
                                     
                                     crd.equipCard(creat);
                                 }
@@ -359,8 +357,7 @@ public class PlayerZone_ComesIntoPlay extends DefaultPlayerZone {
                             if(AllZone.GameAction.isCardInZone(crd, graveZone)
                                     && AllZone.GameAction.isCardInPlay(creat) && creat.isCreature()
                                     && creat.getNetAttack() == 1 && creat.getNetDefense() == 1) {
-                                graveZone.remove(crd);
-                                playZone.add(crd);
+                            	AllZone.GameAction.moveToPlay(crd);
                                 
                                 crd.equipCard(creat);
                             }

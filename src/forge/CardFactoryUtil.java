@@ -968,7 +968,6 @@ public class CardFactoryUtil {
     */
     
     public static SpellAbility ability_Morph_Down(final Card sourceCard) {
-        final Player player = sourceCard.getController();
         final SpellAbility morph_down = new Spell(sourceCard) {
             private static final long serialVersionUID = -1438810964807867610L;
             

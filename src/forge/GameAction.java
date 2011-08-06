@@ -223,6 +223,11 @@ public class GameAction {
         return moveTo(play, c);
     }
     
+    public Card moveToPlay(Card c, Player p) {
+        PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, p);
+        return moveTo(play, c);
+    }
+    
     public Card moveToBottomOfLibrary(Card c) {
     	return moveToLibrary(c, -1);
     }

@@ -48,8 +48,8 @@ public class SpellAbility_Requirements {
 			// cancel ability during target choosing
 			Card c = ability.getSourceCard();
 			if (bCasting && !c.isCopiedSpell()){	// and not a copy
-				// add back to hand
-				AllZone.GameAction.moveToHand(c);
+				// add back to where it came from
+				AllZone.GameAction.moveTo(fromZone, c);
 			}
 			
 			select.resetTargets();
@@ -78,8 +78,8 @@ public class SpellAbility_Requirements {
 		else if (payment.isCanceled()){
 			Card c = ability.getSourceCard();
 			if (bCasting && !c.isCopiedSpell()){	// and not a copy
-				// add back to hand
-				AllZone.GameAction.moveToHand(c);
+				// add back to Previous Zone
+				AllZone.GameAction.moveTo(fromZone, c);
 			}
 			
 			if (select != null)

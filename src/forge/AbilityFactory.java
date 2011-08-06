@@ -710,7 +710,6 @@ public class AbilityFactory {
 		String defined = (def == null) ? "Self" : def;
 		
 		if (defined.equals("Targeted")){
-			Target tgt = sa.getTarget();
 			SpellAbility parent = sa;
 			do{
 				parent = ((Ability_Sub)parent).getParent();
