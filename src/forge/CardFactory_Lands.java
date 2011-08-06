@@ -3653,6 +3653,55 @@ class CardFactory_Lands {
             card.addSpellAbility(ability);
             ability.setBeforePayMana(CardFactoryUtil.input_targetCreatureKeyword_NoCost_TapAbility("Flying", ability));
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        if(cardName.equals("Magosi, the Waterveil")) {
+        	/*
+        	 * Magosi, the Waterveil enters the battlefield tapped.
+        	 * Tap: Add Blue to your mana pool.
+        	 * Blue, Tap: Put an eon counter on Magosi, the Waterveil. Skip your next turn.
+        	 * Tap, Remove an eon counter from Magosi, the Waterveil and return it to its 
+        	 * owner's hand: Take an extra turn after this one.
+        	 */
+
+        	final Ability_Tap skipTurn = new Ability_Tap(card, "U") {
+				private static final long serialVersionUID = -2404286785963486611L;
+
+				@Override
+        		public void resolve() {
+        			String player = card.getController();
+        			card.addCounter(Counters.EON, 1);
+        			AllZone.Phase.addExtraTurn(AllZone.GameAction.getOpponent(player));                 
+        		}
+        	};//skipTurn
+        	
+        	final Ability_Tap extraTurn = new Ability_Tap(card) {
+				private static final long serialVersionUID = -2599252144246080154L;
+
+				@Override
+        		public void resolve() {
+        			String player = card.getController();
+        			card.subtractCounter(Counters.EON, 1);
+        			AllZone.Phase.addExtraTurn(player);
+        			AllZone.GameAction.moveToHand(card);
+        		}
+				
+				@Override
+				public boolean canPlay() {
+					return card.getCounters(Counters.EON) > 0;
+				}
+        	};//extraTurn
+
+        	skipTurn.setDescription("U, tap: Put an eon counter on "+card.getName()+". Skip your next turn.");
+        	skipTurn.setStackDescription(card.getName()+" - add an Eon counter and skip you next turn.");
+        	card.addSpellAbility(skipTurn);
+        	
+        	extraTurn.setDescription("tap, Remove an eon counter from "+card.getName()+" and return it to its owner's hand: Take an extra turn after this one.");
+        	extraTurn.setStackDescription(card.getName()+" - return this card to its owner's hand.  Take an extra turn after this one.");
+        	card.addSpellAbility(extraTurn);
+        	
+        	skipTurn.setBeforePayMana(new Input_PayManaCost(skipTurn));
+        }//*************** END ************ END **************************
 
         if(hasKeyword(card, "Cycling") != -1) {
             int n = hasKeyword(card, "Cycling");

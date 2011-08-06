@@ -19,6 +19,7 @@ public enum Counters {
     BRIBERY(),
     CHARGE(),
     DIVINITY(),
+    EON(),
     FADE(),
     HOOFPRINT(),
     ICE(),
