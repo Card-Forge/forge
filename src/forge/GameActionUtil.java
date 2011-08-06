@@ -11700,83 +11700,6 @@ public class GameActionUtil {
 		}// execute()
 	}; // Reflex_Sliver
 
-	public static Command Horned_Sliver               = new Command() {
-		private static final long serialVersionUID   = 4789073152424705372L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Trample";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Horned Sliver");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Muscles_Sliver
-
-	public static Command Sinew_Sliver                = new Command() {
-		private static final long serialVersionUID   = -4633694634393704728L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			int pumpAttack = 1;
-			int pumpDefense = 1;
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.addSemiPermanentAttackBoost(-pumpAttack);
-				c.addSemiPermanentDefenseBoost(-pumpDefense);
-			}
-
-			// add +1/+1 to cards
-			list.clear();
-			PlayerZone[] zone = getZone("Sinew Sliver");
-
-			// for each zone found add +1/+1 to each card
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList();
-				creature.addAll(AllZone.Human_Play.getCards());
-				creature.addAll(AllZone.Computer_Play.getCards());
-				creature = creature.getType("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addSemiPermanentAttackBoost(pumpAttack);
-					c.addSemiPermanentDefenseBoost(pumpDefense);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	}; // Muscles_Sliver
-
 	public static Command Knighthood                  = new Command() {
 
 		private static final long serialVersionUID   = -6904191523315339355L;
@@ -13752,77 +13675,6 @@ public class GameActionUtil {
 		}// execute()
 	};
 
-	
-	public static Command Sidewinder_Sliver           = new Command() {
-
-		private static final long serialVersionUID   = 4336346186741907749L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Flanking";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Sidewinder Sliver");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-
-	
-	public static Command Essence_Sliver              = new Command() {
-		private static final long serialVersionUID   = 6089293045852070662L;
-
-		CardList                  gloriousAnthemList = new CardList();
-
-		public void execute() {
-			String keyword = "Lifelink";
-
-			CardList list = gloriousAnthemList;
-			Card c;
-			// reset all cards in list - aka "old" cards
-			for(int i = 0; i < list.size(); i++) {
-				c = list.get(i);
-				c.removeExtrinsicKeyword(keyword);
-			}
-
-			list.clear();
-			PlayerZone[] zone = getZone("Essence Sliver");
-
-			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = AllZoneUtil.getTypeInPlay("Sliver");
-
-				for(int i = 0; i < creature.size(); i++) {
-					c = creature.get(i);
-					c.addExtrinsicKeyword(keyword);
-
-					gloriousAnthemList.add(c);
-				}// for inner
-			}// for outer
-		}// execute()
-	};
-
-	
-
-	
-	
 	public static Command Sliver_Legion               = new Command() {
 		private static final long serialVersionUID   = -4564640511791858445L;
 
@@ -19947,6 +19799,7 @@ public class GameActionUtil {
 		commands.put("Adamaro_First_to_Desire", Adamaro_First_to_Desire);
 		commands.put("Ajani_Avatar_Token", Ajani_Avatar_Token);
 		commands.put("Angry_Mob", Angry_Mob);
+		commands.put("Aura_Gnarlid", Aura_Gnarlid);
 		commands.put("Aven_Trailblazer", Aven_Trailblazer);
 		
 		commands.put("Bant_Sureblade", Bant_Sureblade);
@@ -20031,11 +19884,16 @@ public class GameActionUtil {
 		commands.put("Uril", Uril);
 		
 		commands.put("Vampire_Nocturnus", Vampire_Nocturnus);
+		commands.put("Vexing_Beetle", Vexing_Beetle);
 		
+		commands.put("Werebear", Werebear);
+		commands.put("Wild_Nacatl", Wild_Nacatl);
 		commands.put("Windwright_Mage", Windwright_Mage);
+		commands.put("Wrens_Run_Packmaster", Wrens_Run_Packmaster);
 		
 		commands.put("Yavimaya_Enchantress", Yavimaya_Enchantress);
 		
+		commands.put("Zuberi", Zuberi);
 		commands.put("Zulaport_Enforcer", Zulaport_Enforcer);
 		
 		///The commands above are in alphabetical order by cardname.  The cammands.put() below need to be filed above
@@ -20043,25 +19901,14 @@ public class GameActionUtil {
 		
 		commands.put("Dakkon", Dakkon);
 		commands.put("Lighthouse_Chronologist", Lighthouse_Chronologist);
-		
 		commands.put("Caravan_Escort", Caravan_Escort);
 		commands.put("Ikiral_Outrider", Ikiral_Outrider);
 		commands.put("Knight_of_Cliffhaven", Knight_of_Cliffhaven);
 		commands.put("Beastbreaker_of_Bala_Ged", Beastbreaker_of_Bala_Ged);
-		
-		
-		
-		
 		commands.put("Champions_Drake", Champions_Drake);
-		
-		
 		commands.put("Dauntless_Dourbark", Dauntless_Dourbark);
-		
-		
 		commands.put("Serpent_of_the_Endless_Sea", Serpent_of_the_Endless_Sea);
 		commands.put("Gaeas_Avenger", Gaeas_Avenger);
-		commands.put("Vexing_Beetle", Vexing_Beetle);
-		commands.put("Wild_Nacatl", Wild_Nacatl);
 		commands.put("Liu_Bei", Liu_Bei);
 		commands.put("Mystic_Enforcer", Mystic_Enforcer);
 		commands.put("Guul_Draz_Vampire", Guul_Draz_Vampire);
@@ -20071,13 +19918,10 @@ public class GameActionUtil {
 		commands.put("Grixis_Grimblade", Grixis_Grimblade);
 		commands.put("Jund_Hackblade", Jund_Hackblade);
 		commands.put("Naya_Hushblade", Naya_Hushblade);
-		commands.put("Werebear", Werebear);
+		
 		commands.put("Divinity_of_Pride", Divinity_of_Pride);
 		commands.put("Serra_Ascendant", Serra_Ascendant);
 		
-		commands.put("Aura_Gnarlid", Aura_Gnarlid);
-		
-		commands.put("Zuberi", Zuberi);
 		commands.put("Loxodon_Punisher", Loxodon_Punisher);
 		commands.put("Goblin_Gaveleer", Goblin_Gaveleer);
 		commands.put("Master_of_Etherium", Master_of_Etherium);
@@ -20165,17 +20009,12 @@ public class GameActionUtil {
 
 		commands.put("Rolling_Stones", Rolling_Stones);
 		commands.put("Kinsbaile_Cavalier", Kinsbaile_Cavalier);
-		commands.put("Wrens_Run_Packmaster", Wrens_Run_Packmaster);
+		
 		
 		////////////////////
 
 		commands.put("Sliver_Legion", Sliver_Legion);
 		
-		commands.put("Sidewinder_Sliver", Sidewinder_Sliver);
-		commands.put("Essence_Sliver", Essence_Sliver);
-		commands.put("Sinew_Sliver", Sinew_Sliver);
-		commands.put("Horned_Sliver", Horned_Sliver);
-
 		commands.put("Heart_Sliver", Heart_Sliver);
 		commands.put("Reflex_Sliver", Reflex_Sliver);
 		commands.put("Gemhide_Sliver", Gemhide_Sliver);

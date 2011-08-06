@@ -1,8 +1,9 @@
 Name:Sinew Sliver
 ManaCost:1 W
 Types:Creature Sliver
-Text:All Sliver creatures get +1/+1.
+Text:no text
 PT:1/1
+K:stPumpAll:Creature.Sliver:1/1:no Condition:All Sliver creatures get +1/+1.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sinew_sliver.jpg

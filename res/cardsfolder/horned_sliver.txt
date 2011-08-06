@@ -1,8 +1,9 @@
 Name:Horned Sliver
 ManaCost:2 G
 Types:Creature Sliver
-Text:All Sliver creatures have trample.
+Text:no text
 PT:2/2
+K:stPumpAll:Creature.Sliver:0/0/Trample:no Condition:All Sliver creatures have trample.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horned_sliver.jpg

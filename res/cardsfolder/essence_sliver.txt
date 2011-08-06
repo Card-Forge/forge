@@ -1,8 +1,11 @@
 Name:Essence Sliver
 ManaCost:3 W
 Types:Creature Sliver
-Text:All Slivers have lifelink.
+Text:no text
 PT:3/3
+#TODO - Note: Oracle text says "Whenever a Sliver deals damage, its controller gains that much life."
+#I just did a straight conversion from the previous implementation.
+K:stPumpAll:Creature.Sliver:0/0/Lifelink:no Condition:All Slivers have lifelink.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/essence_sliver.jpg
