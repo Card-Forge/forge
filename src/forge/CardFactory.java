@@ -10442,7 +10442,36 @@ public class CardFactory implements NewConstants {
         	card.addSpellAbility(ability);
         	ability.setBeforePayMana(CardFactoryUtil.input_targetPlayer(ability));
         }//*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
+        else if (cardName.equals("An-Zerrin Ruins")) {
+        	
+        	final SpellAbility comesIntoPlayAbility = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                	String chosenType = "";
+        			if(card.getController().equals(Constant.Player.Human)) {
+        				chosenType = JOptionPane.showInputDialog(null, "Enter a creature type:", card.getName(),
+        						JOptionPane.QUESTION_MESSAGE);
+        			}
+        			else {
+        				//not implemented for AI
+        			}
+        			card.setChosenType(chosenType);
+                }//resolve()
+            }; //comesIntoPlayAbility
+            
+            Command intoPlay = new Command() {
+				private static final long serialVersionUID = 2985015252466920757L;
 
+				public void execute() {
+                	comesIntoPlayAbility.setStackDescription(card.getName()+" - choose a creature type.  Creatures of that type do not untap during their controller's untap step.");
+                	AllZone.Stack.add(comesIntoPlayAbility);
+                }
+            };
+            
+            card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
 
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found

@@ -1,6 +1,8 @@
 
 package forge;
 
+import java.util.ArrayList;
+
 
 public class Input_Untap extends Input {
     private static final long serialVersionUID = 3452595801560263386L;
@@ -99,6 +101,9 @@ public class Input_Untap extends Input {
     				}
     			}
     		}
+    		else if(isAnZerrinRuinsType(getAnZerrinRuinsTypes(), c)) {
+    			//nothing to do, just doesn't let the card untap
+    		}
     		else if((c.getCounters(Counters.WIND)>0) && AllZoneUtil.isCardInPlay("Freyalise's Winds")) {
     			//remove a WIND counter instead of untapping
     			c.subtractCounter(Counters.WIND, 1);
@@ -165,6 +170,23 @@ public class Input_Untap extends Input {
     		if( all.get(i).isUntapped() ) {
     			return true;
     		}
+    	}
+    	return false;
+    }
+    
+    private ArrayList<String> getAnZerrinRuinsTypes() {
+    	ArrayList<String> types = new ArrayList<String>();
+    	CardList ruins = AllZoneUtil.getCardsInPlay("An-Zerrin Ruins");
+    	for(Card ruin:ruins) {
+    		types.add(ruin.getChosenType());
+    	}
+    	return types;
+    }
+    
+    private boolean isAnZerrinRuinsType(ArrayList<String> types, Card card) {
+    	ArrayList<String> cardTypes = card.getType();
+    	for(String type:cardTypes) {
+    		if(types.contains(type)) return true;
     	}
     	return false;
     }
