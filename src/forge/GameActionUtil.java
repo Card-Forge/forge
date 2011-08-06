@@ -104,6 +104,8 @@ public class GameActionUtil {
         // (called in MagicStack.java)
         Card c = sa.getSourceCard();
         
+        playCard_Cascade(c);
+        
         playCard_Dovescape(c); //keep this one top
         playCard_Demigod_of_Revenge(c);
         playCard_Halcyon_Glaze(c);
@@ -144,7 +146,7 @@ public class GameActionUtil {
         playCard_Mold_Adder(c);
         playCard_Fable_of_Wolf_and_Owl(c);
         
-        playCard_Cascade(c);
+        
         
     }
     
