@@ -2117,6 +2117,7 @@ res/cardsfolder/giant_solifuge.txt -text svneol=native#text/plain
 res/cardsfolder/giant_spider.txt -text svneol=native#text/plain
 res/cardsfolder/giant_strength.txt -text svneol=native#text/plain
 res/cardsfolder/giant_tortoise.txt -text svneol=native#text/plain
+res/cardsfolder/giant_trap_door_spider.txt svneol=native#text/plain
 res/cardsfolder/giant_warthog.txt -text svneol=native#text/plain
 res/cardsfolder/gibbering_kami.txt -text svneol=native#text/plain
 res/cardsfolder/gift_of_estates.txt -text svneol=native#text/plain
