@@ -5248,6 +5248,7 @@ res/cardsfolder/repentance.txt svneol=native#text/plain
 res/cardsfolder/repentant_blacksmith.txt -text svneol=native#text/plain
 res/cardsfolder/repentant_vampire.txt -text svneol=native#text/plain
 res/cardsfolder/repercussion.txt svneol=native#text/plain
+res/cardsfolder/repopulate.txt -text svneol=native#text/plain
 res/cardsfolder/reprisal.txt -text svneol=native#text/plain
 res/cardsfolder/repulse.txt -text svneol=native#text/plain
 res/cardsfolder/rescind.txt -text svneol=native#text/plain
