@@ -251,7 +251,7 @@ public class Gui_DownloadPictures_LQ extends DefaultBoundedRangeModel implements
                 	System.out.println("Error - the LQ picture for "+cards[card].name+" could not be found on the server.");
                 }
                 catch(Exception ex) {
-                	System.out.println("Ganeral error - downloading LQ picture for "+cards[card].name);
+                	System.out.println("General error - downloading LQ picture for "+cards[card].name);
                 	Log.error("LQ Pictures", "Error downloading pictures", ex);
                 	
                 }
