@@ -1108,7 +1108,6 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    //AllZone.GameAction.getPlayerLife(card.getController()).loseLife(4,card);
                 	card.getController().loseLife(4, card);
                 }
             };
@@ -1469,7 +1468,6 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    //PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
                     card.getController().loseLife(2,card);
                     
                     card.getController().drawCards(2);
@@ -9891,12 +9889,7 @@ public class CardFactory_Creatures {
             final Ability ability2 = new Ability(card, "2 W") {
                 @Override
                 public void resolve() {
-                    CardList cards = new CardList();
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                    cards.addAll(hum.getCards());
-                    cards.addAll(comp.getCards());
-                    cards = cards.getType("Creature");
+                    CardList cards = AllZoneUtil.getCreaturesInPlay();
                     
                     for(int i = 0; i < cards.size(); i++) {
                         if(!(cards.get(i)).isWhite()
@@ -9936,11 +9929,7 @@ public class CardFactory_Creatures {
                         lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor((String) o);
                         
                     } else {
-                        PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                        PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-                        CardList list = new CardList();
-                        list.addAll(cPlay.getCards());
-                        list.addAll(hPlay.getCards());
+                        CardList list = AllZoneUtil.getCardsInPlay();
                         String color = CardFactoryUtil.getMostProminentColor(list);
                         lifeGain = CardFactoryUtil.getNumberOfPermanentsByColor(color);
                     }
@@ -9978,11 +9967,7 @@ public class CardFactory_Creatures {
                         //System.out.println("Color:" + o);
                         numberTokens = CardFactoryUtil.getNumberOfPermanentsByColor((String) o);
                     } else {
-                        PlayerZone cPlay = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
-                        PlayerZone hPlay = AllZone.getZone(Constant.Zone.Play, AllZone.HumanPlayer);
-                        CardList list = new CardList();
-                        list.addAll(cPlay.getCards());
-                        list.addAll(hPlay.getCards());
+                        CardList list = AllZoneUtil.getCardsInPlay();
                         String color = CardFactoryUtil.getMostProminentColor(list);
                         numberTokens = CardFactoryUtil.getNumberOfPermanentsByColor(color);
                     }
@@ -10536,7 +10521,7 @@ public class CardFactory_Creatures {
             a2.setDescription("W B: Destroy target creature blocking or blocked by Cromat.");
         }//*************** END ************ END **************************
         
-
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Energizer")) {
             Ability_Tap ability = new Ability_Tap(card, "2") {
@@ -10556,7 +10541,7 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Put a +1/+1 counter on target Energizer.");
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+        */
 
         //*************** START *********** START **************************
         else if(cardName.equals("Sphinx of Jwar Isle")) {
@@ -10675,8 +10660,6 @@ public class CardFactory_Creatures {
                 @Override
                 public void resolve() {
                     Card c = card;
-                    //PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                    //PlayerLife oppLife = AllZone.GameAction.getPlayerLife(AllZone.GameAction.getOpponent(c.getController()));
                     c.getController().loseLife(3,card);
                     c.getController().getOpponent().loseLife(3,card);
                 }
@@ -11044,7 +11027,6 @@ public class CardFactory_Creatures {
             final SpellAbility a1 = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    //PlayerLife life = AllZone.GameAction.getPlayerLife(card.getController());
                     card.getController().loseLife(1,card);
                     PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getOwner());
                     
@@ -12887,7 +12869,6 @@ public class CardFactory_Creatures {
             final SpellAbility ability = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    //PlayerLife target = AllZone.GameAction.getPlayerLife(getTargetPlayer());
         	        getTargetPlayer().loseLife(card.getCounters(Counters.P1P1),card);
                 }//resolve()
             };
@@ -14218,8 +14199,6 @@ public class CardFactory_Creatures {
                 public void resolve() {
                     Card c = card;
                     Player player = c.getController();
-                    //PlayerLife life = AllZone.GameAction.getPlayerLife(c.getController());
-                    //life.addLife(2);
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     
 
@@ -14233,7 +14212,6 @@ public class CardFactory_Creatures {
                             Card card = (Card) o;
                             lib.remove(card);
                             AllZone.Human_Play.add(card);
-                            //  card.tap();
                             lands.remove(card);
                             player.shuffle();
                         }
@@ -14241,9 +14219,7 @@ public class CardFactory_Creatures {
                     else if(player.equals(AllZone.ComputerPlayer) && lands.size() > 0) {
                         Card card = lands.get(0);
                         lib.remove(card);
-                        // hand.add(card);
                         AllZone.Computer_Play.add(card);
-                        //   card.tap();
                         lands.remove(card);
                         player.shuffle();
                     }
