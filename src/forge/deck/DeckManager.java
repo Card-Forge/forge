@@ -237,6 +237,7 @@ public class DeckManager {
 
         //readDeck main deck
         while ((line = iterator.next()) != null && !line.equals("[sideboard]")) {
+            System.out.println(line);
             Matcher m = p.matcher(line);
             String s = m.group(2);
             int count = s == null ? 1 : parseInt(s);
@@ -272,7 +273,7 @@ public class DeckManager {
 
             //save the files and remove them from the list
             for (Deck deck : deckMap.values()) {
-                File f = new File(deckDir, deriveFileName(deck.getName()) + ".DCKFileFilter");
+                File f = new File(deckDir, deriveFileName(deck.getName()) + ".dck");
                 files.remove(f);
                 BufferedWriter out = new BufferedWriter(new FileWriter(f));
                 write(deck, out);
@@ -292,7 +293,7 @@ public class DeckManager {
                 File f = new File(deckDir, deriveFileName(e.getValue()[0].getName()) + ".bdk");
                 f.mkdir();
                 for (int i = 0; i < e.getValue().length; i++) {
-                    BufferedWriter out = new BufferedWriter(new FileWriter(new File(f, i + ".DCKFileFilter")));
+                    BufferedWriter out = new BufferedWriter(new FileWriter(new File(f, i + ".dck")));
                     write(e.getValue()[i], out);
                     out.close();
                 }
