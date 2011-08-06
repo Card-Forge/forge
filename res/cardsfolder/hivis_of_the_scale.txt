@@ -1,6 +1,6 @@
 Name:Hivis of the Scale
 ManaCost:3 R R
-Types:Legendary Creature Viashano Shaman
+Types:Legendary Creature Viashino Shaman
 Text:no text
 PT:3/4
 K:You may choose not to untap CARDNAME during your untap step.
