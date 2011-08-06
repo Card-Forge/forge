@@ -343,6 +343,8 @@ public class QuestBattle extends QuestSelectablePanel {
 //        addToDeckList("Vampire 2", "medium", "Vampire Singleton");
 //        addToDeckList("Vampire 3", "hard", "Vampire Constructed");
         
+        addToDeckList("Walle 2", "medium", "Mono W Myr deck");
+        addToDeckList("Wally 3", "hard", "WB Artifact deck with Tempered Steel");
 //        addToDeckList("Werewolf 2", "medium", "UGB UBG Fungal Shambler deck");
         addToDeckList("White Knight 1", "easy", "Mono W Knights deck");
         addToDeckList("White Knight 2", "medium", "Mono W Knights deck");
@@ -350,7 +352,6 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Wilma Flintstone 1", "easy", "BG deck with Noxious Hatchling and Woodlurker Mimic");
         addToDeckList("Wilma Flintstone 2", "medium", "BG deck with Noxious Hatchling and Woodlurker Mimic");
         addToDeckList("Wilma Flintstone 3", "hard", "BG deck with Noxious Hatchling and Woodlurker Mimic");
-        addToDeckList("Wally 3", "hard", "WB Artifact deck with Tempered Steel");
         addToDeckList("Wolverine 3", "hard", "BG deck with Nightmare, Korlash, Heir to Blackblade and Kodama's Reach");
         addToDeckList("Wonder Woman 2", "medium", "W Equipment deck");
         addToDeckList("Wyatt Earp 1", "easy", "Mono W deck with Crovax, Ascendant Hero, Crusade and small to medium sized creatures.");
