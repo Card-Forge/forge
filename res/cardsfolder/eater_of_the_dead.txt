@@ -1,0 +1,10 @@
+Name:Eater of the Dead
+ManaCost:4 B
+Types:Creature Horror
+Text:no text
+PT:3/4
+A:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | IsPresent$ Card.Self+tapped | TgtPrompt$ Select target creature in a graveyard | ValidTgts$ Card.Creature | SubAbility$ SVar=DBUntap | SpellDescription$ If CARDNAME is tapped, exile target creature card from a graveyard and untap Eater of the Dead.
+SVar:DBUntap:DB$Untap | Defined$ Self
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eater_of_the_dead.jpg
+End
