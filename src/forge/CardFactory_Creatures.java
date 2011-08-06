@@ -7187,58 +7187,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(comesIntoPlay);
         }//*************** END ************ END **************************
 
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Kazandu Tuskcaller"))
-        {
-        	Ability_Cost abCost = new Ability_Cost("T", cardName, true);
-        	final Ability_Activated ability = new Ability_Activated(card, abCost, null) {
-				private static final long serialVersionUID = 5172811502850812588L;
-				@Override
-                public void resolve() {
-					Player controller = card.getController();
-                    CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", controller, "G", new String[] {
-                                "Creature", "Elephant"}, 3, 3, new String[] {""});
-                }
-                public boolean canPlay()
-                {
-                	int lcs = card.getCounters(Counters.LEVEL);
-                	return super.canPlay() && lcs >= 2 && lcs <= 5;
-                }
-            };//Ability
-            ability.setDescription(abCost+"Put a 3/3 green Elephant creature token onto the battlefield.(LEVEL 2-5)");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - Put a 3/3 green Elephant creature token onto the battlefield.");
-            ability.setStackDescription(sb.toString());
-            
-            Ability_Cost abCost2 = new Ability_Cost("T", cardName, true);
-            final Ability_Activated ability2 = new Ability_Activated(card, abCost2, null) {
-
-				private static final long serialVersionUID = 4795715660485178553L;
-				@Override
-                public void resolve() {
-					Player controller = card.getController();
-                    for (int i=0;i<2;i++)
-                    	CardFactoryUtil.makeToken("Elephant", "G 3 3 Elephant", controller, "G", new String[] {
-                                "Creature", "Elephant"}, 3, 3, new String[] {""});
-                }
-                public boolean canPlay()
-                {
-                	int lcs = card.getCounters(Counters.LEVEL);
-                	return super.canPlay() && lcs >= 6;
-                }
-            };//Ability
-            ability2.setDescription(abCost2+" Put two 3/3 green Elephant creature tokens onto the battlefield.(LEVEL 6+)");
-            
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(card).append(" - Put two 3/3 green Elephant creature tokens onto the battlefield.");
-            ability2.setStackDescription(sb2.toString());
-            
-            card.addSpellAbility(ability);
-            card.addSpellAbility(ability2);
-    	}//*************** END ************ END **************************
-        
+                
         
         //*************** START *********** START **************************
         else if(cardName.equals("Venerated Teacher")) {
