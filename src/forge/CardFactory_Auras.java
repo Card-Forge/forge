@@ -523,13 +523,19 @@ class CardFactory_Auras {
                 
                 @Override
                 public boolean canPlayAI() {
+                	if(card.getName().equals("Spreading Seas")
+                			|| card.getName().equals("Lingering Mirage")
+                			|| card.getName().equals("Sea's Claim"))
+                	{
+                		NewType[0] = "Island";
+                	}
+                	else if(card.getName().equals("Evil Presence") 
+                			||card.getName().equals("Tainted Well")) {
+                		NewType[0] = "Swamp";
+                	}
                     CardList list = new CardList(AllZone.Human_Play.getCards());
                     list = list.getType("Land");
-                    list = list.filter(new CardListFilter() {
-                    	public boolean addCard(Card c) {
-                    		return c.getType().contains("Land");
-                    	}
-                    });
+                    list = list.getNotType(NewType[0]); // Don't enchant lands that already have the type
                     if(list.isEmpty()) return false;
                     
                     setTargetCard(list.get(0));
@@ -631,6 +637,8 @@ class CardFactory_Auras {
                         	crd.removeType("Island");
                         	crd.removeType("Plains");
                         	crd.removeType("Mountain");
+                        	crd.removeType("Locus");
+                        	crd.removeType("Lair");
                         
                         	crd.addType(NewType[0]);
                         	SpellAbility[] Abilities = crd.getSpellAbility();
