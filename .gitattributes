@@ -6548,6 +6548,7 @@ res/cardsfolder/thunder_wall.txt -text svneol=native#text/plain
 res/cardsfolder/thunderblust.txt svneol=native#text/plain
 res/cardsfolder/thunderbolt.txt svneol=native#text/plain
 res/cardsfolder/thunderclap.txt -text svneol=native#text/plain
+res/cardsfolder/thundercloud_shaman.txt svneol=native#text/plain
 res/cardsfolder/thundering_giant.txt -text svneol=native#text/plain
 res/cardsfolder/thundermare.txt -text svneol=native#text/plain
 res/cardsfolder/thunderscape_apprentice.txt -text svneol=native#text/plain
