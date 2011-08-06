@@ -1,0 +1,12 @@
+Name:Sustainer of the Realm
+ManaCost:2 W W
+Types:Creature Angel
+Text:no text
+PT:2/3
+K:Flying
+K:WheneverKeyword:Blocks:Self:Play:StatsPumpEOT/0/2:Self:ASAP:No_Condition:No Special Condition:Whenever CARDNAME blocks, it gets +0/+2 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sustainer_of_the_realm.jpg
+SetInfo:ULG|Uncommon|http://magiccards.info/scans/en/ul/23.jpg
+SetInfo:7ED|Uncommon|http://magiccards.info/scans/en/7e/52.jpg
+End
