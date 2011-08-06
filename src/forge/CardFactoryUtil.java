@@ -517,12 +517,33 @@ public class CardFactoryUtil {
         all = all.getType("Creature");
         Card biggest = null;
         
-        //if flying creature is small, get biggest non-flying creature
         if(all.size() != 0) {
             biggest = all.get(0);
             
             for(int i = 0; i < all.size(); i++)
                 if(evaluateCreature(biggest) < evaluateCreature(all.get(i))) biggest = all.get(i);
+        }
+        return biggest;
+    }
+    
+    //This selection rates tokens higher
+    public static Card AI_getBestCreatureToBounce(CardList list) {
+        CardList all = list;
+        all = all.getType("Creature");
+        Card biggest = null;         //returns null if list.size() == 0
+        int biggestvalue = 0;
+        int newvalue = 0;
+        
+        if(all.size() != 0) {
+            biggest = all.get(0);
+            
+            for(int i = 0; i < all.size(); i++) {
+            	biggestvalue = evaluateCreature(biggest);
+            	if (biggest.isToken()) biggestvalue += 100; 	// raise the value of tokens
+            	newvalue = evaluateCreature(all.get(i));
+            	if (all.get(i).isToken()) newvalue += 100;		// raise the value of tokens
+                if(evaluateCreature(biggest) < evaluateCreature(all.get(i))) biggest = all.get(i);
+            }
         }
         return biggest;
     }
