@@ -1,4 +1,4 @@
-Names:Groffskithur
+Name:Groffskithur
 ManaCost:5 G
 Types:Creature Beast
 Text:no text
