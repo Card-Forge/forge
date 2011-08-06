@@ -939,75 +939,6 @@ public class CardFactory_Sorceries {
         
 
         //*************** START *********** START **************************
-        else if(cardName.equals("Breath of Life")  || cardName.equals("Resurrection")
-                || cardName.equals("False Defeat") || cardName.equals("Zombify")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = -5799646914112924814L;
-                
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    PlayerZone grave = AllZone.getZone(c);
-                    
-                    if(AllZone.GameAction.isCardInZone(c, grave)) {
-                        PlayerZone play = AllZone.getZone(Constant.Zone.Play, c.getController());
-                        AllZone.GameAction.moveTo(play, c);
-                    }
-                }//resolve()
-                
-                @Override
-                public boolean canPlay() {
-                    return super.canPlay() && getCreatures().length != 0;
-                }
-                
-                public Card[] getCreatures() {
-                    CardList creature = new CardList();
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    creature.addAll(zone.getCards());
-                    creature = creature.getType("Creature");
-                    if (card.getController().equals(Constant.Player.Computer)) {
-                        creature = creature.getNotKeyword("At the beginning of the end step, sacrifice CARDNAME.");
-                    }
-                    return creature.toArray();
-                }
-                
-                @Override
-                public void chooseTargetAI() {
-                    Card c[] = getCreatures();
-                    Card biggest = c[0];
-                    for(int i = 0; i < c.length; i++)
-                        if(biggest.getNetAttack() < c[i].getNetAttack()) biggest = c[i];
-                    
-                    setTargetCard(biggest);
-                }
-            };//SpellAbility
-            card.clearSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Input target = new Input() {
-                private static final long serialVersionUID = -3717723884199321767L;
-                
-                @Override
-                public void showMessage() {
-                    Object check = AllZone.Display.getChoiceOptional("Select creature", getCreatures());
-                    if(check != null) {
-                        spell.setTargetCard((Card) check);
-                        stopSetNext(new Input_PayManaCost(spell));
-                    } else stop();
-                }//showMessage()
-                
-                public Card[] getCreatures() {
-                    CardList creature = new CardList();
-                    PlayerZone zone = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    creature.addAll(zone.getCards());
-                    creature = creature.getType("Creature");
-                    return creature.toArray();
-                }
-            };//Input
-            spell.setBeforePayMana(target);
-        }//*************** END ************ END **************************
-        
-        //*************** START *********** START **************************
         else if(cardName.equals("Blinding Light")) {
             SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -631672055247954361L;
@@ -1036,6 +967,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Grapeshot")) {
