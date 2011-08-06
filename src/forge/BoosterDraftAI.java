@@ -231,9 +231,17 @@ public class BoosterDraftAI
     for(int i = 0; i < 9; i++)
     {
       land = AllZone.CardFactory.getCard(colorToLand.get(color[0]).toString(), AllZone.ComputerPlayer);
+      
+      land.setCurSetCode(land.getMostRecentSet());
+      land.setImageFilename(CardUtil.buildFilename(land));
+      
       list.add(land);
 
       land = AllZone.CardFactory.getCard(colorToLand.get(color[1]).toString(), AllZone.ComputerPlayer);
+      
+      land.setCurSetCode(land.getMostRecentSet());
+      land.setImageFilename(CardUtil.buildFilename(land));
+      
       list.add(land);
     }
 
