@@ -69,6 +69,8 @@ public class ComputerUtil
 	  
 		  if (sa.getSourceCard().getKeyword().contains("Draw a card."))
 			  sa.getSourceCard().getController().drawCard();
+		  if (sa.getSourceCard().getKeyword().contains("Draw a card at the beginning of the next turn's upkeep."))
+			  sa.getSourceCard().getController().addSlowtripCount(1);
 		  payManaCost(sa);
 		  
 		  AllZone.Stack.add(sa);
@@ -85,6 +87,8 @@ public class ComputerUtil
 	  
 	  if (sa.getSourceCard().getKeyword().contains("Draw a card."))
 		  sa.getSourceCard().getController().drawCard();
+	  if (sa.getSourceCard().getKeyword().contains("Draw a card at the beginning of the next turn's upkeep."))
+		  sa.getSourceCard().getController().addSlowtripCount(1);
 		  
 	  AllZone.Stack.add(sa);
   }
@@ -112,6 +116,8 @@ public class ComputerUtil
 
       if (sa.getSourceCard().getKeyword().contains("Draw a card."))
     	  sa.getSourceCard().getController().drawCard();
+	  if (sa.getSourceCard().getKeyword().contains("Draw a card at the beginning of the next turn's upkeep."))
+		  sa.getSourceCard().getController().addSlowtripCount(1);
 
       for (int i=0; i<sa.getSourceCard().getKeyword().size(); i++)
       {

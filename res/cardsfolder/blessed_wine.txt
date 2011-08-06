@@ -1,0 +1,9 @@
+Name:Blessed Wine
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$GainLife|Cost$1 W|LifeAmount$1|SpellDescription$You gain 1 life.
+K:Draw a card at the beginning of the next turn's upkeep.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/blessed_wine.jpg
+End

@@ -479,6 +479,8 @@ public class MagicStack extends MyObservable {
 			if (sa.getSourceCard().getKeyword().contains("Draw a card.")
 					&& !(sa.getSourceCard().getKeyword().contains("Ripple:4") && sa.isAbility()))
 				sa.getSourceCard().getController().drawCard();
+			  if (sa.getSourceCard().getKeyword().contains("Draw a card at the beginning of the next turn's upkeep."))
+				  sa.getSourceCard().getController().addSlowtripCount(1);
 
 			if (sa.getSourceCard().getKeyword().contains("Proliferate"))
 				AllZone.GameAction.getProliferateAbility(sa.getSourceCard(), "0").resolve();

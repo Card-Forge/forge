@@ -23,6 +23,7 @@ public abstract class Player extends MyObservable{
 	
 	protected Card lastDrawnCard;
 	protected int numDrawnThisTurn = 0;
+	protected int slowtripCount = 0;
 	
 	public Player(String myName) {
 		this(myName, 20, 0);
@@ -48,6 +49,7 @@ public abstract class Player extends MyObservable{
 		assignedDamage = 0;
 		lastDrawnCard = null;
 		numDrawnThisTurn = 0;
+		slowtripCount = 0;
 		bFirstTurn = true;
 		altWin = false;
 		altLose = false;
@@ -136,6 +138,7 @@ public abstract class Player extends MyObservable{
 	}
 	
 	public boolean canLoseLife() {
+		if(AllZoneUtil.isCardInPlay("Platinum Emperion",this)) return false;
 		return true;
 	}
 	
@@ -151,6 +154,7 @@ public abstract class Player extends MyObservable{
 	
 	public boolean payLife(int lifePayment, Card source) {
     	
+		if(lifePayment > 0 && AllZoneUtil.isCardInPlay("Platinum Emperion",this)) return false;
     	if (lifePayment <= life){
     		subtractLife(lifePayment);
     		return true;
@@ -520,6 +524,18 @@ public abstract class Player extends MyObservable{
     	Card old = lastDrawnCard;
     	lastDrawnCard = null;
     	return old;
+    }
+    
+    public int getSlowtripCount() {
+    	return slowtripCount;
+    }
+    
+    public void setSlowtripCount(int count) {
+    	slowtripCount = count;
+    }
+    
+    public void addSlowtripCount(int count) {
+    	slowtripCount += count;
     }
 	
     public boolean isFirstTurn() { return bFirstTurn; }

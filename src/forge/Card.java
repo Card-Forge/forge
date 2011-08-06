@@ -729,7 +729,8 @@ public class Card extends MyObservable {
             
             // Draw a card. + Changeling + CARDNAME can't be countered. + Cascade
             for (int i = 0; i < kw.size(); i++) {
-                if ((kw.get(i).contains("Draw a card.") && !sb.toString().contains("Draw a card.")) 
+                if ((kw.get(i).contains("Draw a card.") && !sb.toString().contains("Draw a card."))
+                		|| (kw.get(i).contains("Draw a card at the beginning of the next turn's upkeep.") && !sb.toString().contains("Draw a card at the beginning of the next turn's upkeep."))
                         || (kw.get(i).contains("Changeling") && !sb.toString().contains("Changeling")) 
                         || (kw.get(i).contains("CARDNAME can't be countered.") && !sb.toString().contains("CARDNAME can't be countered.")) 
                         || (kw.get(i).contains("Cascade") && !sb.toString().contains("Cascade"))) {

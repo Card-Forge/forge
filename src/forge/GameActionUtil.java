@@ -14,6 +14,7 @@ public class GameActionUtil {
 		upkeep_removeDealtDamageToOppThisTurn();
 		upkeep_Braid_Of_Fire();
 		
+		upkeep_Slowtrips();  // for "Draw a card at the beginning of the next turn's upkeep."
 		upkeep_UpkeepCost(); //sacrifice unless upkeep cost is paid
 		upkeep_DestroyUpkeepCost(); //destroy unless upkeep cost is paid
 		upkeep_DamageUpkeepCost(); //deal damage unless upkeep cost is paid
@@ -3389,6 +3390,15 @@ public class GameActionUtil {
 		}
 	}//echo
 
+	private static void upkeep_Slowtrips() {  // Draw a card at the beginning of the next turn's upkeep.
+		Player player = AllZone.Phase.getPlayerTurn();
+		
+		int cards = player.getSlowtripCount();
+		player.drawCards(cards);
+		player.setSlowtripCount(0);
+		
+	}
+	
 	private static void upkeep_UpkeepCost() {
 		Player player = AllZone.Phase.getPlayerTurn();
 
