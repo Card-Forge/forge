@@ -3537,7 +3537,7 @@ public class CardFactory_Sorceries {
             return card;
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Riding the Dilu Horse"))
         {
@@ -3588,7 +3588,7 @@ public class CardFactory_Sorceries {
 	        card.clearSpellAbility();
 	        card.addSpellAbility(spell);
         }//*************** END ************ END **************************
-
+		*/
         
         //*************** START *********** START **************************
         else if(cardName.equals("Summer Bloom"))
