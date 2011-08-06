@@ -17506,24 +17506,22 @@ public class CardFactory_Creatures {
 
         //*************** START *********** START **************************
         else if(cardName.equals("Tribal Forcemage")) {
-
+        	/*
+        	 * Morph: 1G
+        	 * When Tribal Forcemage is turned face up, creatures of the creature
+        	 * type of your choice get +2/+2 and gain trample until end of turn.
+        	 */
         	final Command turnsFaceUp = new Command() {
 				private static final long serialVersionUID = 2826741404979610245L;
 
 				public void execute() {
         			final int pump = 2;
-        			final String chosenType = JOptionPane.showInputDialog(null, "Select a card type:", card.getName(),
-        					JOptionPane.QUESTION_MESSAGE);
-        			
         			final Command eot = new Command() {
         				private static final long serialVersionUID = -3638246921594162776L;
 
         				public void execute() {
-        					//CardList saps = new CardList();
-        					//saps.addAll(AllZone.Human_Play.getCards());
-        					//saps.addAll(AllZone.Computer_Play.getCards());
         					CardList type = AllZoneUtil.getCardsInPlay();
-        					type = type.getType(chosenType);
+        					type = type.getType(card.getChosenType());
 
         					for(int i = 0; i < type.size(); i++) {
         						Card c = type.get(i);
@@ -17531,14 +17529,22 @@ public class CardFactory_Creatures {
         						c.addTempDefenseBoost(-pump);
         						c.removeExtrinsicKeyword("Trample");
         					}
+        					card.setChosenType(null);
         				}
         			};
         			final SpellAbility ability = new Ability(card, "0") {
         				@Override
         				public void resolve() {
-        					//CardList saps = new CardList();
-        					//saps.addAll(AllZone.Human_Play.getCards());
-        					//saps.addAll(AllZone.Computer_Play.getCards());
+        					String chosenType = "";
+        					if(card.getController().equals(Constant.Player.Human)) {
+        						chosenType = JOptionPane.showInputDialog(null, "Select a card type:", card.getName(),
+        								JOptionPane.QUESTION_MESSAGE);
+        					}
+        					else {
+        						//TODO - this could probably be updated to get the most prominent type in play
+        						chosenType = "Elf";
+        					}
+        					card.setChosenType(chosenType);
         					CardList type = AllZoneUtil.getCardsInPlay();
         					type = type.getType(chosenType);
         					for(int i = 0; i < type.size(); i++) {
@@ -17548,11 +17554,6 @@ public class CardFactory_Creatures {
         						c.addExtrinsicKeyword("Trample");
         					}
         					AllZone.EndOfTurn.addUntil(eot);
-        				}
-
-        				@Override
-        				public boolean canPlayAI() {
-        					return false;
         				}
         			};//SpellAbility
         			ability.setStackDescription(card.getName()+" - chosen type gets +2/+2 and Trample until EOT");
