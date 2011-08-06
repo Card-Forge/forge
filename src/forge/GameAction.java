@@ -1177,6 +1177,7 @@ public class GameAction {
         AllZone.Stack.reset();//this works, it clears the stack of Upkeep effects like Bitterblossom
         AllZone.InputControl.setInput(new Input_Mulligan());
         Phase.GameBegins = 1;
+        ButtonUtil.reset();
     }//newGame()
     
     //this is where the computer cheats

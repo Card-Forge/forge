@@ -42,6 +42,7 @@ public class Card extends MyObservable {
     private boolean                      sickness                          = true;                              //summoning sickness
     private boolean                      token                             = false;
     private boolean 					 copiedToken					   = false;
+    private boolean 					 copiedSpell					   = false;
     private boolean 					 checkedPropagandaThisTurn		   = false;
     private boolean                      creatureAttackedThisCombat        = false;
     private boolean                      creatureBlockedThisCombat         = false;
@@ -707,7 +708,14 @@ public class Card extends MyObservable {
     public boolean isCopiedToken() {
     	return copiedToken;
     }
+    public void setCopiedSpell(boolean b)
+    {
+    	copiedSpell = b;
+    }
     
+    public boolean isCopiedSpell() {
+    	return copiedSpell;
+    }
     public void setExaltedBonus(boolean b) {
         exaltedBonus = b;
     }

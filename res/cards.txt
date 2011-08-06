@@ -253,8 +253,7 @@ Irini Sengir
 Legendary Creature Vampire Dwarf
 White enchantment spells and green enchantment spells cost 2 more to cast.
 2/2
-CostChange:All:More:2:Spell:white:Enchantment:NoSpecial
-CostChange:All:More:2:Spell:green:Enchantment:NoSpecial
+CostChange:All:More:2:Spell:white/green:Enchantment:OnlyOneBonus
 
 Hum of the Radix
 2 G G

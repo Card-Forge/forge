@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 
 public class GameActionUtil {
 	public static void executeUpkeepEffects() {
@@ -453,7 +455,7 @@ public class GameActionUtil {
 				Human_Nexus = Human_Nexus.getName("Maelstrom Nexus");
 				Computer_Nexus = Computer_Nexus.getName("Maelstrom Nexus");
 				if (Human_Nexus.size() > 0){
-					if (Phase.PlayerSpellCount == 1)
+					if (Phase.PlayerSpellCount == 1 && !c.isCopiedSpell())
 					{
 						for (int i=0;i<Human_Nexus.size();i++)
 						{
@@ -462,7 +464,7 @@ public class GameActionUtil {
 					}
 						}
 				if (Computer_Nexus.size() > 0){
-					if (Phase.ComputerSpellCount == 1)
+					if (Phase.ComputerSpellCount == 1 && !c.isCopiedSpell())
 					{
 						for (int i=0;i<Computer_Nexus.size();i++)
 						{ 
@@ -910,7 +912,8 @@ public class GameActionUtil {
 		    				};
 		    			// ability.setStackDescription(StormCard + " - Storm Copy.");
 		    			// Add all targetted storm cards to the if statement
-						Phase.StormCount = Phase.StormCount - 1;
+		    			ability.getSourceCard().setCopiedSpell(true);
+					//	Phase.StormCount = Phase.StormCount - 1;
 	                    String player = StormCard.getController();
 	                    ability.setManaCost("0");
 	                    if(player == "Human"){
@@ -952,10 +955,11 @@ public class GameActionUtil {
 						@Override
 						public void resolve() {
 				        	if(controller == "Human"){
-					    		String[] choices = {"Yes", "No"};
-					    		Object q = null;
-					    		q = AllZone.Display.getChoiceOptional("Return Vengevine from the graveyard", choices);
-					    		if(q.equals("Yes")) {
+					        	Object[] possibleValues = {"Yes", "No"};
+					        	Object q = JOptionPane.showOptionDialog(null, "Return Vengevine from the graveyard?", "Vengevine Ability", 
+					        			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					        			null, possibleValues, possibleValues[0]);
+			                      if(q.equals(0)) {
 				                    if(AllZone.GameAction.isCardInZone(card, grave)) {
 				                        AllZone.GameAction.moveTo(play, card);
 				                    }
@@ -2215,7 +2219,7 @@ public class GameActionUtil {
 
 		list = list.getName("Gelectrode");
 
-		if(list.size() > 0 && (c.getType().contains("Instant") || c.getType().contains("Sorcery"))) {
+		if(list.size() > 0 && (c.getType().contains("Instant") || c.getType().contains("Sorcery")) && !c.isCopiedSpell()) {
 
 			for(int i = 0; i < list.size(); i++) {
 				final Card card = list.get(i);

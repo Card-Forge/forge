@@ -223,7 +223,7 @@ public class MagicStack extends MyObservable
     stack.add(0, sp);
 
     this.updateObservers();
-    if(sp.isSpell())
+    if(sp.isSpell() && !sp.getSourceCard().isCopiedSpell())
     {
    	    Phase.StormCount = Phase.StormCount + 1;
    	    if(sp.getSourceCard().getController() == "Human") {
