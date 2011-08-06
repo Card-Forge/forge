@@ -4479,7 +4479,6 @@ public class GameActionUtil {
 
 		
 		if(c.getName().equals("Ghastlord of Fugue")) playerCombatDamage_Ghastlord_of_Fugue(c);
-		else if(c.getName().equals("Garza Zol, Plague Queen")) playerCombatDamage_May_draw(c);
 		else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c);
 		else if(c.getName().equals("Augury Adept")) playerCombatDamage_Augury_Adept(c);
 		else if(c.getName().equals("Spawnwrithe")) playerCombatDamage_Spawnwrithe(c);
