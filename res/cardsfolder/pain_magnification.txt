@@ -6,4 +6,5 @@ T:Mode$ DamageDone | ValidTarget$ Opponent | DamageAmount$ GE3 | Execute$ TrigDe
 SVar:TrigDestroy:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pain_magnification.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/121.jpg
 End

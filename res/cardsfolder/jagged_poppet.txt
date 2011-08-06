@@ -10,4 +10,5 @@ SVar:TrigOppDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ X | Mod
 SVar:X:Count$TriggeredDamageAmount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jagged_poppet.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/115.jpg
 End

@@ -13,4 +13,5 @@ SVar:X:Tapped$CardPower
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_battlewagon.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/139.jpg
 End

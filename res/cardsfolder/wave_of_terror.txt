@@ -8,4 +8,5 @@ SVar:TrigDestroyAll:AB$DestroyAll | Cost$ 0 | ValidCards$ Creature.cmcEQX | NoRe
 SVar:X:Count$CardCounters.AGE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wave_of_terror.jpg
+SetInfo:WTH|Rare|http://magiccards.info/scans/en/wl/28.jpg
 End

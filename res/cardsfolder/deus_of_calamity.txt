@@ -8,4 +8,5 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | DamageAmou
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land.YouDontCtrl | TgtPrompt$ Select target land opponent controls.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deus_of_calamity.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/204.jpg
 End
