@@ -436,11 +436,16 @@ public class MagicStack extends MyObservable {
 		}
 
 		// Handle cards that need to be moved differently
-		if (sa.isFlashBackAbility())
-			c.replaceMoveToGraveyard();
+		if (sa.isFlashBackAbility()){
+			AllZone.GameAction.exile(c);
+			sa.setFlashBackAbility(false);
+		}
 
-		else if (fizzle)
+		else if (fizzle && sa.isSpell())
 			AllZone.GameAction.moveToGraveyard(c);
+		
+		else if (sa.isAbility())
+		{}	// don't send to graveyard if the spell is using an ability
 
 		else if ((c.isInstant() || c.isSorcery()) && (!c.getName().startsWith("Beacon of"))
 				&& (!c.getName().startsWith("Pulse of the")))												

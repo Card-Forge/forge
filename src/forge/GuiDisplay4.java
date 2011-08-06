@@ -154,7 +154,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
            
             @Override
             protected Card[] getCards() {
-                return CardFactoryUtil.getFlashbackUnearthCards(AllZone.HumanPlayer).toArray();
+                return CardFactoryUtil.getGraveyardActivationCards(AllZone.HumanPlayer).toArray();
             }
            
             @Override
@@ -463,7 +463,7 @@ public class GuiDisplay4 extends JFrame implements CardContainer, Display, NewCo
                     playerHandValue.setText("" + AllZone.Human_Hand.getCards().length);
                     playerGraveValue.setText("" + AllZone.Human_Graveyard.getCards().length);
                     playerLibraryValue.setText("" + AllZone.Human_Library.getCards().length);
-                    playerFBValue.setText("" + CardFactoryUtil.getFlashbackUnearthCards(AllZone.HumanPlayer).size());
+                    playerFBValue.setText("" + CardFactoryUtil.getGraveyardActivationCards(AllZone.HumanPlayer).size());
                     playerRemovedValue.setText("" + AllZone.Human_Removed.getCards().length);
                    
                 }

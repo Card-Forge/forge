@@ -136,7 +136,7 @@ public class ComputerUtil
     CardList all = new CardList();
     all.addAll(AllZone.Computer_Play.getCards());
     all.addAll(AllZone.Computer_Hand.getCards());
-    all.addAll(CardFactoryUtil.getFlashbackUnearthCards(AllZone.ComputerPlayer).toArray());
+    all.addAll(CardFactoryUtil.getGraveyardActivationCards(AllZone.ComputerPlayer).toArray());
     
     CardList humanPlayable = new CardList();
     humanPlayable.addAll(AllZone.Human_Play.getCards());

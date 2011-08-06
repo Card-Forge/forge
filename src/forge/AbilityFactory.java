@@ -129,9 +129,6 @@ public class AbilityFactory {
 			isTargeted = true;
 		}
 		
-		if (mapParams.containsKey("ValidCards"))
-			hasValid = true;
-		
 		if (mapParams.containsKey("Tgt"))
 		{
 			isTargeted = true;
@@ -143,7 +140,6 @@ public class AbilityFactory {
 				abTgt = new Target("TgtV", mapParams.get("TgtPrompt"), mapParams.get("ValidTgts").split(","));
 			else
 				abTgt = new Target(mapParams.get("Tgt"));
-			
 			if (mapParams.containsKey("TgtZone"))	// if Targeting something not in play, this Key should be set
 				abTgt.setZone(mapParams.get("TgtZone"));
 		}
@@ -192,6 +188,14 @@ public class AbilityFactory {
 				SA = AbilityFactory_Fetch.createAbilityFetch(this);
 			if (isSp){
 				SA = AbilityFactory_Fetch.createSpellFetch(this);
+			}
+		}
+		
+		if (API.equals("Retrieve")){
+			if (isAb)
+				SA = AbilityFactory_Fetch.createAbilityRetrieve(this);
+			if (isSp){
+				SA = AbilityFactory_Fetch.createSpellRetrieve(this);
 			}
 		}
 		

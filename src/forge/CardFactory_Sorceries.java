@@ -4044,45 +4044,6 @@ public class CardFactory_Sorceries {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
-        //*************** START *********** START **************************
-        else if(cardName.equals("Hammer of Bogardan")) {
-            final Ability ability2 = new Ability(card, "2 R R R") {
-                
-    			private static final long serialVersionUID = -5633123448009L;
-
-    			@Override
-                public void resolve() {
-           //         PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-           //         grave.remove(card);          
-                   card.addReplaceMoveToGraveyardCommand(new Command() {
-                       private static final long serialVersionUID = -25594893330418L;
-                       
-                       public void execute() {
-                           PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-                           AllZone.GameAction.moveTo(hand, card);
-                       }
-                   });
-    			}
-                
-                
-                @Override
-                public boolean canPlay() {
-                    PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
-                    
-                    return AllZone.GameAction.isCardInZone(card, grave) && AllZone.Phase.isPlayerTurn(card.getController());                   
-                }
-                
-            };
-            card.addSpellAbility(ability2);
-            ability2.setFlashBackAbility(true);
-            card.setUnearth(true);
-            ability2.setDescription("2 R R R: Return Hammer of Bogardan from your graveyard to your hand. Activate this ability only during your upkeep.");
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card.getName()).append(" returns from the graveyard to hand");
-            ability2.setStackDescription(sb.toString());
-        }//*************** END ************ END **************************
-        
 
         //*************** START *********** START **************************
         else if(cardName.equals("Innocent Blood")) {

@@ -1125,16 +1125,13 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, sourceCard.getController());
-                PlayerZone removed = AllZone.getZone(Constant.Zone.Removed_From_Play, sourceCard.getController());
                 
                 SpellAbility[] sa = sourceCard.getSpellAbility();
-                
-                AllZone.Stack.add(sa[0]);
-                
                 grave.remove(sourceCard);
-                removed.add(sourceCard);
+                SpellAbility flash = sa[0];
+                flash.setFlashBackAbility(true);
+                AllZone.Stack.add(flash);
                 
-                //AllZone.GameAction.getPlayerLife(sourceCard.getController()).subtractLife(loss,sourceCard);
                 sourceCard.getController().loseLife(loss, sourceCard);
                 
             }
@@ -1162,7 +1159,6 @@ public class CardFactoryUtil {
         String lifecost = "";
         if(loss != 0) lifecost = ", pay " + lifeloss + " life";
         
-        flashback.setFlashBackAbility(true);
         flashback.setManaCost(manaCost);
         
         StringBuilder sbDesc = new StringBuilder();
@@ -3597,17 +3593,31 @@ public class CardFactoryUtil {
         return cl;
     }
 
-    public static CardList getFlashbackUnearthCards(Player player) {
-    	final CardList crucible = AllZoneUtil.getPlayerCardsInPlay(player, "Crucible of Worlds");
-    	
+    public static CardList getGraveyardActivationCards(final Player player) {
         PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, player);
         CardList cl = new CardList(grave.getCards());
         cl = cl.filter(new CardListFilter() {
             public boolean addCard(Card c) {
-                return c.hasFlashback() || c.hasUnearth() || (c.isLand() && crucible.size() > 0);
+                return activateFromGrave(c, player);
             }
         });
         return cl;
+    }
+    
+    public static boolean activateFromGrave(Card c, Player player){
+    	if (c.hasFlashback() || c.hasUnearth())
+    		return true;
+    	
+    	final CardList crucible = AllZoneUtil.getPlayerCardsInPlay(player, "Crucible of Worlds");
+    	if (c.isLand() && crucible.size() > 0)
+    		return true;
+    	
+    	for(SpellAbility sa : c.getSpellAbility()){
+    		if (sa.getRestrictions().getActivateZone().equals(Constant.Zone.Graveyard))
+    			return true;
+    	}
+    	
+    	return false;
     }
     
     public static int countOccurrences(String arg1, String arg2) {

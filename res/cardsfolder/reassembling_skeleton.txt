@@ -1,0 +1,9 @@
+Name:Reassembling Skeleton
+ManaCost:1 B
+Types:Creature Skeleton Warrior
+Text:no text
+PT:1/1
+A:AB$Retrieve|Cost$1 B|Destination$Battlefield|ActivatingZone$Graveyard|Tapped$True|SpellDescription$Return Reassembling Skeleton from your graveyard to the battlefield tapped.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/reassembling_skeleton.jpg
+End
