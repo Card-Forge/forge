@@ -31,8 +31,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return untapCanPlayAI(af,this);
 			}
 			
 		};
@@ -87,8 +86,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return untapPlayDrawbackAI(af, this);
 			}
 			
 		};
@@ -315,8 +313,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return tapCanPlayAI(af,this);
 			}
 			
 		};
@@ -371,8 +368,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return tapPlayDrawbackAI(af, this);
 			}
 			
 		};
@@ -598,8 +594,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return untapAllCanPlayAI(af, this);
 			}
 
 		};
@@ -708,8 +703,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return tapAllCanPlayAI(af, this);
 			}
 
 		};
@@ -762,8 +756,7 @@ public class AbilityFactory_PermanentState {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return tapAllPlayDrawbackAI(af, this);
 			}
 			
 		};

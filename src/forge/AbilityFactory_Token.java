@@ -90,11 +90,6 @@ public class AbilityFactory_Token extends AbilityFactory {
 			private static final long serialVersionUID = 8460074843405764620L;
 
 			@Override
-			public boolean canPlay() {
-				return super.canPlay();
-			}
-			
-			@Override
 			public boolean canPlayAI() {
 				return true;
 			}
@@ -126,11 +121,6 @@ public class AbilityFactory_Token extends AbilityFactory {
 		{
 			private static final long serialVersionUID = -8041427947613029670L;
 
-			@Override
-			public boolean canPlay() {
-				return super.canPlay();
-			}
-			
 			@Override
 			public boolean canPlayAI() {
 				return true;

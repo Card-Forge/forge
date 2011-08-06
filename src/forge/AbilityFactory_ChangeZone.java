@@ -32,8 +32,7 @@ public class AbilityFactory_ChangeZone {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return changeZoneCanPlayAI(AF, this);
 			}
 		
 		};
@@ -84,8 +83,7 @@ public class AbilityFactory_ChangeZone {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return changeZoneCanPlayAI(AF, this);
 			}
 		};
 		setMiscellaneous(AF, dbChangeZone);
@@ -954,8 +952,7 @@ public class AbilityFactory_ChangeZone {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return changeZoneAllCanPlayAI(AF, this);
 			}
 		
 		};
@@ -1006,8 +1003,7 @@ public class AbilityFactory_ChangeZone {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return changeZoneAllCanPlayAI(AF, this);
 			}
 		};
 		setMiscellaneous(AF, dbChangeZone);

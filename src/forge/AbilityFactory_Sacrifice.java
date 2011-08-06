@@ -30,8 +30,7 @@ public class AbilityFactory_Sacrifice {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return sacrificeCanPlayAI(af, this);
 			}
 		};
 		return abSacrifice;
@@ -82,8 +81,7 @@ public class AbilityFactory_Sacrifice {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return sacrificePlayDrawbackAI(af, this);
 			}
 		};
 		return dbSacrifice;

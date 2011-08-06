@@ -13,11 +13,6 @@ public class AbilityFactory_Regenerate {
 
 		final SpellAbility abRegenerate = new Ability_Activated(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
 			private static final long serialVersionUID = -6386981911243700037L;
-			
-			@Override
-			public boolean canPlay(){
-				return super.canPlay();
-			}
 
 			@Override
 			public boolean canPlayAI() {
@@ -37,8 +32,7 @@ public class AbilityFactory_Regenerate {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return doCanPlayAI(af, this);
 			}
 			
 		};//Ability_Activated

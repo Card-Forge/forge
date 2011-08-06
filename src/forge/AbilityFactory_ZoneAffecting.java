@@ -22,12 +22,7 @@ public class AbilityFactory_ZoneAffecting {
 			// when getStackDesc is called, just build exactly what is happening
 				return drawStackDescription(af, this);
 			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();		
-			}
-			
+
 			public boolean canPlayAI()
 			{
 				return drawCanPlayAI(af,this);
@@ -40,8 +35,7 @@ public class AbilityFactory_ZoneAffecting {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return drawCanPlayAI(af,this);
 			}
 			
 		};
@@ -59,12 +53,7 @@ public class AbilityFactory_ZoneAffecting {
 				// when getStackDesc is called, just build exactly what is happening
 				return drawStackDescription(af, this);
 			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
+
 			public boolean canPlayAI()
 			{
 				return drawCanPlayAI(af, this);
@@ -103,8 +92,7 @@ public class AbilityFactory_ZoneAffecting {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return drawTargetAI(af, this);
 			}
 			
 		};
@@ -331,12 +319,7 @@ public class AbilityFactory_ZoneAffecting {
 			public String getStackDescription(){
 				return millStackDescription(this, af);
 			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();		
-			}
-			
+
 			public boolean canPlayAI()
 			{
 				return millCanPlayAI(af,this);
@@ -349,8 +332,7 @@ public class AbilityFactory_ZoneAffecting {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return millCanPlayAI(af,this);
 			}
 			
 		};
@@ -366,11 +348,6 @@ public class AbilityFactory_ZoneAffecting {
 			@Override
 			public String getStackDescription(){
 				return millStackDescription(this, af);
-			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
 			}
 			
 			public boolean canPlayAI()
@@ -397,12 +374,7 @@ public class AbilityFactory_ZoneAffecting {
 			public String getStackDescription(){
 				return millStackDescription(this, af);
 			}
-			
-			public boolean canPlayAI()
-			{
-				return millCanPlayAI(af, this);
-			}
-			
+
 			@Override
 			public void resolve() {
 				millResolve(af, this);
@@ -415,8 +387,7 @@ public class AbilityFactory_ZoneAffecting {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return millTargetAI(af, this);
 			}
 			
 		};
@@ -598,12 +569,6 @@ public class AbilityFactory_ZoneAffecting {
 			}
 			
 			@Override
-			public boolean canPlay() {
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
-			@Override
 			public boolean canPlayAI() {
 				discardTargetAI(af);
 				return discardCanPlayAI(af, this);
@@ -616,8 +581,8 @@ public class AbilityFactory_ZoneAffecting {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				discardTargetAI(af);
+				return discardCanPlayAI(af, this);
 			}
 			
 		};
@@ -634,13 +599,7 @@ public class AbilityFactory_ZoneAffecting {
 				// when getStackDesc is called, just build exactly what is happening
 				return discardStackDescription(af, this);
 			}
-			
-			@Override
-			public boolean canPlay() {
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
+
 			@Override
 			public boolean canPlayAI() {
 				discardTargetAI(af);
@@ -668,18 +627,6 @@ public class AbilityFactory_ZoneAffecting {
 			}
 			
 			@Override
-			public boolean canPlay() {
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
-			}
-			
-			@Override
-			public boolean canPlayAI() {
-				discardTargetAI(af);
-				return discardCanPlayAI(af, this);
-			}
-			
-			@Override
 			public void resolve() {
 				discardResolve(af, this);
 			}
@@ -692,8 +639,8 @@ public class AbilityFactory_ZoneAffecting {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				discardTargetAI(af);
+				return discardCheckDrawbackAI(af, this);
 			}
 			
 		};
@@ -955,6 +902,59 @@ public class AbilityFactory_ZoneAffecting {
 	//******************************* SCRY *********************************
 	//**********************************************************************
 	
+	public static SpellAbility createAbilityScry(final AbilityFactory AF){
+		final SpellAbility abScry = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = 2631175859655699419L;
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription(){
+				return scryStackDescription(af, this);
+			}
+			
+			public boolean canPlayAI()
+			{
+				return scryCanPlayAI(af,this);
+			}
+			
+			@Override
+			public void resolve() {
+				scryResolve(af, this);
+			}
+
+			@Override
+			public boolean doTrigger(boolean mandatory) {
+				return scryCanPlayAI(af,this);
+			}
+			
+		};
+		return abScry;
+	}
+	
+	public static SpellAbility createSpellScry(final AbilityFactory AF){
+		final SpellAbility spScry = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = 6273876397392154403L;
+			final AbilityFactory af = AF;
+			
+			@Override
+			public String getStackDescription(){
+				return scryStackDescription(af, this);
+			}
+			
+			public boolean canPlayAI()
+			{
+				return scryCanPlayAI(af, this);
+			}
+			
+			@Override
+			public void resolve() {
+				scryResolve(af, this);
+			}
+			
+		};
+		return spScry;
+	}
+	
 	public static SpellAbility createDrawbackScry(final AbilityFactory AF){
 		final SpellAbility dbScry = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
 			private static final long serialVersionUID = 7763043327497404630L;
@@ -978,8 +978,7 @@ public class AbilityFactory_ZoneAffecting {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return scryTargetAI(af, this);
 			}
 			
 		};
@@ -1068,69 +1067,13 @@ public class AbilityFactory_ZoneAffecting {
 	}
 	
 	private static boolean scryCanPlayAI(final AbilityFactory af, SpellAbility sa){
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+	     	   return abSub.chkAI_Drawback();
+	        }
+		}
 		return true;
 	}
-	
-	public static SpellAbility createAbilityScry(final AbilityFactory AF){
-		final SpellAbility abScry = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
-			private static final long serialVersionUID = 2631175859655699419L;
-			final AbilityFactory af = AF;
-			
-			@Override
-			public String getStackDescription(){
-				return scryStackDescription(af, this);
-			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();		
-			}
-			
-			public boolean canPlayAI()
-			{
-				return scryCanPlayAI(af,this);
-			}
-			
-			@Override
-			public void resolve() {
-				scryResolve(af, this);
-			}
 
-			@Override
-			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-			
-		};
-		return abScry;
-	}
-	
-	public static SpellAbility createSpellScry(final AbilityFactory AF){
-		final SpellAbility spScry = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
-			private static final long serialVersionUID = 6273876397392154403L;
-			final AbilityFactory af = AF;
-			
-			@Override
-			public String getStackDescription(){
-				return scryStackDescription(af, this);
-			}
-			
-			public boolean canPlay(){
-				return super.canPlay();	
-			}
-			
-			public boolean canPlayAI()
-			{
-				return scryCanPlayAI(af, this);
-			}
-			
-			@Override
-			public void resolve() {
-				scryResolve(af, this);
-			}
-			
-		};
-		return spScry;
-	}
 }

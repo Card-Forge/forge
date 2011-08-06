@@ -94,11 +94,6 @@ public class AbilityFactory_GainControl {
 			private static final long serialVersionUID = -4384705198674678831L;
 
 			@Override
-			public boolean canPlay(){
-				return super.canPlay();
-			}
-
-			@Override
 			public boolean canPlayAI() {
 				return doTgtAI(this);
 			}
@@ -124,8 +119,7 @@ public class AbilityFactory_GainControl {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return doTgtAI(this);
 			}
 		};//Ability_Activated
 
@@ -274,16 +268,13 @@ public class AbilityFactory_GainControl {
         
 		}//end foreach target
 		
-		//drawbacks are not implemented
-		/*
-		Card first = tgtCards.get(0);
-		
-        if(AF.hasSubAbility()) 
-        	CardFactoryUtil.doDrawBack(params.get("SubAbility"), 0,
-                hostCard.getController(), hostCard.getController().getOpponent(),
-                first.getController(), hostCard, first, sa);
-                */
-        
+		if (AF.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+			   abSub.resolve();
+			}
+			// doesn't support old style drawbacks
+		}
     }
     
     private Command getDestroyCommand(final int i) {

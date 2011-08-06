@@ -19,11 +19,7 @@ public class AbilityFactory_Turns {
 			public String getStackDescription(){
 				return addTurnStackDescription(af, this);
 			}
-			
-			public boolean canPlay(){
-				return super.canPlay();	
-			}
-			
+
 			public boolean canPlayAI() {
 				return addTurnCanPlayAI(af, this, params.get("NumTurns"));
 			}
@@ -37,7 +33,7 @@ public class AbilityFactory_Turns {
 			@Override
 			public boolean doTrigger(boolean mandatory) {
 				// TODO Auto-generated method stub
-				return false;
+				return addTurnCanPlayAI(af, this, params.get("NumTurns"));
 			}
 			
 		};
@@ -53,11 +49,6 @@ public class AbilityFactory_Turns {
 			@Override
 			public String getStackDescription(){
 				return addTurnStackDescription(af, this);
-			}
-			
-			public boolean canPlay(){
-				// super takes care of AdditionalCosts
-				return super.canPlay();	
 			}
 			
 			public boolean canPlayAI()
@@ -87,10 +78,6 @@ public class AbilityFactory_Turns {
 			@Override
 			public String getStackDescription(){
 				return addTurnStackDescription(af, this);
-			}
-			
-			public boolean canPlayAI() {
-				return addTurnCanPlayAI(af, this, params.get("NumTurns"));
 			}
 			
 			@Override

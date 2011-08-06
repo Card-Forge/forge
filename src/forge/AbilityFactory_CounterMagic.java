@@ -82,8 +82,7 @@ public class AbilityFactory_CounterMagic {
 
 			@Override
 			public boolean doTrigger(boolean mandatory) {
-				// TODO Auto-generated method stub
-				return false;
+				return counterCanPlayAI(af, this);
 			}
 
 		};
