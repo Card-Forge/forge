@@ -32,6 +32,7 @@ public abstract class SpellAbility {
     private boolean			multiKicker 	   = false;
     private boolean 		xCost			   = false;
     private boolean         kickerAbility      = false;
+    private boolean			anyPlayer		   = false;
     
     private Input           beforePayMana;
     private Input           afterResolve;
@@ -172,6 +173,14 @@ public abstract class SpellAbility {
     
     public boolean isXCost(){
     	return xCost;
+    }
+    
+    public void setAnyPlayer(boolean b) {
+    	anyPlayer = b;
+    }
+    
+    public boolean isAnyPlayer() {
+        return anyPlayer;
     }
     
     

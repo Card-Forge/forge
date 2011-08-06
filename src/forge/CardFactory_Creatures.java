@@ -20542,6 +20542,59 @@ public class CardFactory_Creatures {
         //*************** END ************ END **************************
         
         //*************** START *********** START **************************
+        else if(cardName.equals("Ifh-Biff Efreet")) {
+            final SpellAbility ability = new Ability(card, "G") {
+            	
+                @Override
+                public boolean canPlayAI() {
+					//todo(sol) setting up some AI for next go through
+					CardList human = new CardList(AllZone.Human_Play.getCards());
+					CardList computer = new CardList(AllZone.Computer_Play.getCards());
+					  
+					human = human.getType("Creature").getKeyword("Flying");
+					computer = computer.getType("Creature").getKeyword("Flying");
+                	
+					//int compLife = AllZone.Computer_Life.getLife();
+					//int humanLife = AllZone.Human_Life.getLife();
+					
+					// if complife > humanLife && humanlife <= available green mana, try to kill human
+					
+                	if (card.getController().equals(Constant.Player.Computer)){
+                		// needs to be careful activating ability if human has green mana available
+                	}
+                	else{
+                		// should try to kill human's flyers but spare own
+                		return true;
+                	}
+
+                	return false;
+                }
+                
+                @Override
+                public void resolve() {
+                    //get all creatures
+                    CardList list = new CardList();
+                    list.addAll(AllZone.Human_Play.getCards());
+                    list.addAll(AllZone.Computer_Play.getCards());
+                    list = list.getType("Creature");
+                    list = list.getKeyword("Flying");
+                    
+                    for(int i = 0; i < list.size(); i++) {
+                        if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
+                    }
+                    
+                    AllZone.Human_Life.subtractLife(1,card);
+                    AllZone.Computer_Life.subtractLife(1,card);
+                }//resolve()
+            };//SpellAbility
+            ability.setDescription("G: Ifh-Bíff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability");
+            ability.setStackDescription(card + " deals 1 damage to each flying creature and each player.");
+            ability.setAnyPlayer(true);
+            card.addSpellAbility(ability);
+        }
+        //*************** END ************ END **************************
+        
+        //*************** START *********** START **************************
         if (cardName.equals("Roc Egg")) {
             final SpellAbility ability = new Ability(card, "0") {
             	

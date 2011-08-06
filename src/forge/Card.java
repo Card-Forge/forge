@@ -235,6 +235,15 @@ public class Card extends MyObservable {
         return dealtCombatDmgToOppThisTurn;
     }
     
+    public boolean canAnyPlayerActivate() {
+    	for(SpellAbility s : spellAbility)
+    	{
+    		if (s.isAnyPlayer())
+    			return true;
+    	}
+    	return false;
+    }
+    
     public void setDealtDmgToOppThisTurn(boolean b) {
         dealtDmgToOppThisTurn = b;
     }

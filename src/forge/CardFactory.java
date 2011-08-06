@@ -15456,9 +15456,8 @@ public class CardFactory implements NewConstants {
 
             ability1.setDescription("Any player may play creature cards with converted mana cost 3 or less without paying their mana cost any time he or she could play an instant.");
             ability1.setStackDescription("Aluren - Play creature with converted manacost 3 or less for free.");
+            ability1.setAnyPlayer(true);
             card.addSpellAbility(ability1);
-            ability1.setBeforePayMana(new Input_PayManaCost(ability1));
-            
         }
         //*************** END ************ END **************************
         

@@ -119,6 +119,18 @@ public class ComputerUtil
     all.addAll(AllZone.Computer_Hand.getCards());
     all.addAll(CardFactoryUtil.getFlashbackUnearthCards(Constant.Player.Computer).toArray());
     
+    CardList humanPlayable = new CardList();
+    humanPlayable.addAll(AllZone.Human_Play.getCards());
+    humanPlayable = humanPlayable.filter(new CardListFilter()
+    {
+      public boolean addCard(Card c)
+      {
+        return (c.canAnyPlayerActivate());
+      }
+    });
+    
+    all.addAll(humanPlayable.toArray());
+    
     all = all.filter(new CardListFilter()
     {
       public boolean addCard(Card c)
