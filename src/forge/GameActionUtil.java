@@ -13793,8 +13793,11 @@ public class GameActionUtil {
 						}
 					}// resolve()
 				};// SpellAbility
-				ability.setStackDescription("Sosuke's Summons - return card to "
-						+ player + "'s hand");
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Sosuke's Summons - return card to ").append(player).append("'s hand");
+				ability.setStackDescription(sb.toString());
+				
 				AllZone.Stack.add(ability);
 			}// if
 
@@ -14258,14 +14261,12 @@ public class GameActionUtil {
 									new String[] {"Creature", "Insect"}, 1, 1, new String[] {""});
 						}
 					}
-				};
-				ability.setStackDescription(hivemasterList.get(
-						outer).getName()
-						+ " - "
-						+ hivemasterList.get(outer).getController()
-						+ " puts "
-						+ n[0]
-						    + " insect tokens into play.");
+				};// SpellAbility
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append(hivemasterList.get(outer).getName()).append(" - ").append(hivemasterList.get(outer).getController());
+				sb.append(" puts ").append(n[0]).append(" insect tokens into play.");
+				ability.setStackDescription(sb.toString());
 
 				if(n[0] != 0) {
 					AllZone.Stack.push(ability);
@@ -20853,8 +20854,12 @@ public class GameActionUtil {
 			public void resolve() {
 				crd.addCounter(Counters.P1P1, 1);
 			}
-		};
-		ability.setStackDescription(c.getName() + " - gets a +1/+1 counter.");
+		};// Ability
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(c.getName()).append(" - gets a +1/+1 counter.");
+		ability.setStackDescription(sb.toString());
+		
 		AllZone.Stack.add(ability);
 	}
 
