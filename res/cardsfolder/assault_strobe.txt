@@ -1,7 +1,7 @@
 Name:Assault Strobe
 ManaCost:R
 Types:Sorcery
-Text:Target creature gains double strike until end of turn.
+Text:no text
 K:spPumpTgt:Double Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assault_strobe.jpg
