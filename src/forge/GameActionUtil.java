@@ -470,9 +470,7 @@ public class GameActionUtil {
 		// (called in MagicStack.java)
 		Card c = sa.getSourceCard();
 		
-		if (c.getName().equals("Ulamog, the Infinite Gyre"))
-			playCard_Ulamog(c);
-		else if (c.getName().equals("Emrakul, the Aeons Torn"))
+		if (c.getName().equals("Emrakul, the Aeons Torn"))
 			playCard_Emrakul(c);
 		else if (c.getName().equals("Artisan of Kozilek"))
 			playCard_Artisan_of_Kozilek(c);
@@ -526,47 +524,6 @@ public class GameActionUtil {
 		playCard_Presence_of_the_Master(c);
 		
 		AllZone.GameAction.checkWheneverKeyword(c,"CastSpell",null);
-	}
-	
-	public static void playCard_Ulamog(Card c)
-	{
-		final Card ulamog = c;
-		final Player controller = c.getController();
-		final Ability ability = new Ability(c, "0")
-		{
-			public void chooseTargetAI()
-			{
-				CardList list = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
-				list = list.filter(new CardListFilter()
-				{
-					public boolean addCard(Card card)
-					{
-						return CardFactoryUtil.canTarget(ulamog, card);
-					}
-				});
-				
-				if (list.size()>0)
-				{
-					CardListUtil.sortCMC(list);
-					setTargetCard(list.get(0));
-				}
-			}
-			public void resolve()
-			{
-				Card crd = getTargetCard();
-				if (crd!=null) {
-					if (CardFactoryUtil.canTarget(ulamog, crd))
-						AllZone.GameAction.destroy(crd);
-				}
-			}
-		};
-		ability.setBeforePayMana(CardFactoryUtil.input_targetPermanent(ability));
-		if (controller.equals(AllZone.HumanPlayer))
-			AllZone.GameAction.playSpellAbility(ability);
-		else {
-			ability.chooseTargetAI();
-			AllZone.Stack.add(ability);
-		}
 	}
 	
 	public static void playCard_Emrakul(Card c)
