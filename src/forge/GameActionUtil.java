@@ -3920,21 +3920,11 @@ public class GameActionUtil {
 		 * At the beginning of your upkeep, destroy the creature with the
 		 * least power. It can't be regenerated. If two or more creatures
 		 * are tied for least power, you choose one of them.
-		 * 
-		 * When there are no creatures on the battlefield, sacrifice Drop of Honey.
 		 */
 		final Player player = AllZone.Phase.getPlayerTurn();
 		CardList drops = AllZoneUtil.getPlayerCardsInPlay(player, "Drop of Honey");
 		drops.add(AllZoneUtil.getPlayerCardsInPlay(player, "Porphyry Nodes"));
 		final CardList cards = drops;
-		
-		//if no creatures in play, sacrifice all "Drop of Honey"s
-		if(AllZoneUtil.getCreaturesInPlay().size() == 0) {
-			for(Card drop:cards) {
-				AllZone.GameAction.sacrifice(drop);
-			}
-			return;
-		}
 		
 		for(int i = 0; i < cards.size(); i++) {
 			final Card c = cards.get(i);
@@ -11028,6 +11018,7 @@ public class GameActionUtil {
 		Sacrifice_NoIslands.execute();
 		Sacrifice_NoForests.execute();
 		Sacrifice_NoLands.execute();
+		Sacrifice_NoCreatures.execute();
 		
 		topCardReveal_Update.execute();
 		//Angelic_Chorus.execute();
@@ -17907,6 +17898,28 @@ public class GameActionUtil {
 
 			for(Card c:cards) {
 				if(AllZoneUtil.getLandsInPlay().size() == 0) {
+					AllZone.GameAction.sacrifice(c);
+				}
+			}
+
+		}//execute()
+	};
+	
+	public static Command Sacrifice_NoCreatures = new Command() {
+		private static final long serialVersionUID = -177976088524215734L;
+
+		public void execute() {
+			CardList cards = AllZoneUtil.getCardsInPlay();
+
+			cards = cards.filter(new CardListFilter() {
+				public boolean addCard(Card c) {
+					return c.getKeyword().contains(
+							"When there are no creatures on the battlefield, sacrifice CARDNAME.");
+				}
+			});
+
+			for(Card c:cards) {
+				if(AllZoneUtil.getCreaturesInPlay().size() == 0) {
 					AllZone.GameAction.sacrifice(c);
 				}
 			}
