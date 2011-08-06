@@ -5,6 +5,7 @@ Text:no text
 PT:13/13
 K:stPumpSelf:Creature:X/X:no Condition:CARDNAME gets -X/-X, where X is your life total.
 SVar:X:Count$YourLifeTotal/Times.-1
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deaths_shadow.jpg
 SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/57.jpg

@@ -2224,7 +2224,7 @@ public class CombatUtil {
             
     }//checkDeclareBlockers
     
-    public static void checkBlockedAttackers(Card a, Card b) {
+    public static void checkBlockedAttackers(final Card a, Card b) {
         //System.out.println(a.getName() + " got blocked by " + b.getName());
     	if(!a.getCreatureGotBlockedThisCombat()) 
     		AllZone.GameAction.checkWheneverKeyword(a,"BecomesBlocked",null);
@@ -2232,6 +2232,41 @@ public class CombatUtil {
         if(!a.getCreatureGotBlockedThisCombat()) {
             for(Ability ab:CardFactoryUtil.getBushidoEffects(a))
                 AllZone.Stack.add(ab);
+            
+            final int blockers = AllZone.Combat.getBlockers(a).size();
+            
+        	if(a.getKeyword().contains("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.")) {
+        		Ability ability = new Ability(a, "0") {
+	        		@Override
+	    			public void resolve() {
+	    				final Command untilEOT = new Command() {
+	    					private static final long serialVersionUID = -5476584542164560128L;
+	
+	    					public void execute() {
+	    						if(AllZone.GameAction.isCardInPlay(a)) {
+	    							a.addTempAttackBoost(-blockers);
+	    							a.addTempDefenseBoost(-blockers);
+	    						}
+	    					}
+	    				};//Command
+	
+	    				if(AllZone.GameAction.isCardInPlay(a)) {
+	    					a.addTempAttackBoost(blockers);
+	    					a.addTempDefenseBoost(blockers);
+	
+	    					AllZone.EndOfTurn.addUntil(untilEOT);
+	    				}
+	    			}//resolve
+	    		};
+	        			
+		    	StringBuilder sb = new StringBuilder();
+		        sb.append(a.getName()+" - gains +1/+1 for each blocker");
+		        ability.setStackDescription(sb.toString());
+	        	int amount = a.getAmountOfKeyword("Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it.");
+		        
+		        for(int i=0 ; i < amount ; i++)
+		        	AllZone.Stack.add(ability);
+        	}
         }
         
         //Rampage

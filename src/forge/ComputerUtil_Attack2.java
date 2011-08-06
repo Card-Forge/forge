@@ -1,49 +1,49 @@
 package forge;
 import java.util.*;
 
-    //doesHumanAttackAndWin() uses the global variable AllZone.ComputerPlayer
-    public class ComputerUtil_Attack2
-    {
-       //possible attackers and blockers
-       private CardList attackers;
-       private CardList blockers;
-       private int blockerLife;
+//doesHumanAttackAndWin() uses the global variable AllZone.ComputerPlayer
+public class ComputerUtil_Attack2 {
+	
+//possible attackers and blockers
+	private CardList attackers;
+	private CardList blockers;
+	private int blockerLife;
+	
+	private Random random = new Random();
+	private final int randomInt = random.nextInt();
+	
+	private CardList humanList;   //holds human player creatures
+	private CardList computerList;//holds computer creatures
+	
+	public ComputerUtil_Attack2(Card[] possibleAttackers, Card[] possibleBlockers, int blockerLife)
+	{
+		this(new CardList(possibleAttackers), new CardList(possibleBlockers), blockerLife);
+	}
 
-       private Random random = new Random();
-       private final int randomInt = random.nextInt();
-
-       private CardList humanList;   //holds human player creatures
-       private CardList computerList;//holds computer creatures
-
-       public ComputerUtil_Attack2(Card[] possibleAttackers, Card[] possibleBlockers, int blockerLife)
-       {
-          this(new CardList(possibleAttackers), new CardList(possibleBlockers), blockerLife);
-       }
-
-       public ComputerUtil_Attack2(CardList possibleAttackers, CardList possibleBlockers, int blockerLife)
-       {
-          humanList = new CardList(possibleBlockers.toArray());
-          humanList = humanList.getType("Creature");
-
-          computerList = new CardList(possibleAttackers.toArray()); 
-          computerList = computerList.getType("Creature");
-
-          attackers = getUntappedCreatures(possibleAttackers, true);
-          blockers  = getUntappedCreatures(possibleBlockers , false);
-          this.blockerLife = blockerLife;
-
-        final ArrayList<String> valuable = new ArrayList<String>();
-        valuable.add("Kamahl, Pit Fighter");
-        valuable.add("Elvish Piper");
-
-        attackers = attackers.filter(new CardListFilter()
-        {
-          public boolean addCard(Card c)
-          {
-            return (0 < getAttack(c) || c.getName().equals("Guiltfeeder")) && ! valuable.contains(c.getName());
-          }
-        });
-      }//constructor
+	public ComputerUtil_Attack2(CardList possibleAttackers, CardList possibleBlockers, int blockerLife)
+	{
+		humanList = new CardList(possibleBlockers.toArray());
+		humanList = humanList.getType("Creature");
+		
+		computerList = new CardList(possibleAttackers.toArray()); 
+		computerList = computerList.getType("Creature");
+		
+		attackers = getUntappedCreatures(possibleAttackers, true);
+		blockers  = getUntappedCreatures(possibleBlockers , false);
+		this.blockerLife = blockerLife;
+		
+		final ArrayList<String> valuable = new ArrayList<String>();
+		valuable.add("Kamahl, Pit Fighter");
+		valuable.add("Elvish Piper");
+		
+		attackers = attackers.filter(new CardListFilter()
+		{
+		  public boolean addCard(Card c)
+		  {
+		    return (0 < getAttack(c) || c.getName().equals("Guiltfeeder")) && ! valuable.contains(c.getName());
+		  }
+		});
+	}//constructor
        
       public CardList getUntappedCreatures(CardList in, final boolean checkCanAttack)
       {
@@ -54,10 +54,8 @@ import java.util.*;
           {
             boolean b = c.isCreature() && c.isUntapped();
 
-            if(checkCanAttack)
-            	return b && CombatUtil.canAttack(c);
-
-            return b;
+            if(checkCanAttack) return b && CombatUtil.canAttack(c);
+            else return b && CombatUtil.canBlock(c);
           }
         });
         return list;
@@ -158,7 +156,8 @@ import java.util.*;
           random.setSeed(AllZone.Phase.getTurn() + randomInt);
 
           Combat combat = new Combat();
-
+          
+          //Atackers that don't really have a choice
           for (int i=0; i<attackers.size();i++)
           {
              if ( attackers.get(i).getKeyword().contains("CARDNAME attacks each turn if able.") 
@@ -169,7 +168,8 @@ import java.util.*;
             	   || attackers.get(i).getSirenAttackOrDestroy())
                 combat.addAttacker(attackers.get(i));
           }
-
+          
+          //Exalted
           if (combat.getAttackers().length == 0 && (countExaltedBonus(AllZone.ComputerPlayer) >= 3 ||
         		  AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.ComputerPlayer) ||
                    AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer, "Battlegrace Angel").size() >= 2 ||
@@ -187,6 +187,7 @@ import java.util.*;
              if (att!= null)
              combat.addAttacker(att);
           }
+          
           //do assault (all creatures attack) if the computer would win the game
           //or if the computer has 4 creatures and the player has 1
           else if(doAssault() || (humanList.size() == 1 && 3 < attackers.size()))
@@ -194,6 +195,7 @@ import java.util.*;
              for(int i = 0; i < attackers.size(); i++)
                 combat.addAttacker(attackers.get(i));
           }
+          
           else
           {
              //should the computer randomly not attack with one attacker?
@@ -226,8 +228,8 @@ import java.util.*;
              
              for(; i < attackers.size(); i++)
              {
-            	 int totalFirstStrikeBlockPower = 0;
-            	 if (!attackers.get(i).hasFirstStrike() && !attackers.get(i).hasDoubleStrike())
+            	int totalFirstStrikeBlockPower = 0;
+            	if (!attackers.get(i).hasFirstStrike() && !attackers.get(i).hasDoubleStrike())
             		 totalFirstStrikeBlockPower = CombatUtil.getTotalFirstStrikeBlockPower(attackers.get(i), AllZone.HumanPlayer);
         
                 if ( shouldAttack(attackers.get(i),blockers) &&	totalFirstStrikeBlockPower < attackers.get(i).getKillDamage() )
@@ -250,43 +252,43 @@ import java.util.*;
     return null;
   }
 
-  //returns null if no blockers found
-  public Card getBiggestDefense(Card attack)
-  {
-    CardListUtil.sortDefense(blockers);
-    for(int i = 0; i < blockers.size(); i++)
-      if(CombatUtil.canBlock(attack, blockers.get(i)))
-        return blockers.get(i);
+  	//returns null if no blockers found
+	public Card getBiggestDefense(Card attack)
+	{
+		CardListUtil.sortDefense(blockers);
+		for(int i = 0; i < blockers.size(); i++)
+		  if(CombatUtil.canBlock(attack, blockers.get(i)))
+		    return blockers.get(i);
+		
+		return null;
+	}
 
-    return null;
+   public int countExaltedBonus(Player player)
+   {
+      PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
+      CardList list = new CardList();
+      list.addAll(play.getCards());
+      list = list.filter(new CardListFilter(){
+    	 public boolean addCard(Card c) {
+    		 return c.getKeyword().contains("Exalted");
+    	 }
+	  });
+  
+      return list.size();
   }
-
-       public int countExaltedBonus(Player player)
-       {
-          PlayerZone play = AllZone.getZone(Constant.Zone.Play, player);
-          CardList list = new CardList();
-          list.addAll(play.getCards());
-          list = list.filter(new CardListFilter(){
-        	 public boolean addCard(Card c) {
-        		 return c.getKeyword().contains("Exalted");
-        	 }
-		  });
-	  
-          return list.size();
-      }
     
-       public int getAttack(Card c)
-       {
-          int n = c.getNetAttack();
+   public int getAttack(Card c)
+   {
+      int n = c.getNetAttack();
 
-          if(CombatUtil.isDoranInPlay())
-             n = c.getNetDefense();
+      if(CombatUtil.isDoranInPlay())
+         n = c.getNetDefense();
 
-          if(c.getKeyword().contains("Double Strike"))
-             n *= 2;
+      if(c.getKeyword().contains("Double Strike"))
+         n *= 2;
 
-          return n;
-       }   
+      return n;
+   }   
     
     public boolean shouldAttack(Card attacker, CardList defenders)
     {
@@ -300,87 +302,23 @@ import java.util.*;
     		}
     	}
     return (canKillAll || !canBeKilled); // A creature should attack if it can't be killed or can kill any blocker
-    }   
+    }  
+    
+    //
+	public static Combat getAttackers(CardList attackerPermanents, CardList defenderPermanents) {
+  	  	
+		Combat combat = new Combat();
+		CardList attackersLeft = new CardList(); //keeps track of all undecided attackers
+		CardList humanBlockers = new CardList();
+		
+		for(Card c:defenderPermanents) {
+			if(c.isCreature() && CombatUtil.canBlock(c)) humanBlockers.add(c);
+		}
+		
+		for(Card c:attackerPermanents) {
+			if(c.isCreature() && CombatUtil.canAttack(c)) attackersLeft.add(c);
+		}
+		
+		return combat;
+    }
  }
-
-    /*   
-       //this returns the attacking power that is needed to destroy
-       //Card c and takes into account first and double strike
-       //
-       //Doran, the Siege Tower doesn't change a card's defense
-       //used by sortDefense()
-       private int getDefense(Card c)
-       {
-          int n = c.getNetDefense();
-
-          //is the defense is less than attack and the card has
-          //first or double strike?
-          if(hasStrike(c) && n < getAttack_FirstStrike(c))
-              n = getAttack_FirstStrike(c);
-          
-          return n;
-       }   
-       
-       //does this card have first or double strike?
-       private boolean hasStrike(Card c)
-       {
-          return c.getKeyword.contains("First Strike") ||
-                 c.getKeyword.contains("Double Strike")
-       }
-       
-       //the higher the defense the better
-       @SuppressWarnings("unchecked") // Comparator needs <type>
-       private void sortDefense(CardList list)
-       {
-          Comparator com = new Comparator()
-          {
-             public int compare(Object a1, Object b1)
-             {
-                Card a = (Card)a1;
-                Card b = (Card)b1;
-
-                return getDefense(b) - getDefense(a);
-             }
-          };
-          list.sort(com);
-       }//sortDefense()
-       
-       //use this method if you need to know about first strike
-       public int getAttack_FirstStrike(Card c)
-       {
-          int n = getAttack(c);
-       
-          //adding 1 is a little bit hacky bit it shows
-          //that first strike is a little better
-          //than a average creature
-          if(c.getKeyword().contains("First Strike"))
-             n += 1;
-       
-          return n;
-       }
-
-       //returns lowest attack first
-       private void sortAttackLowFirst(CardList list)
-       {
-          sortAttack(list);
-          list.reverse();
-          return list;
-       }
-
-       //the higher the attack the better
-       @SuppressWarnings("unchecked") // Comparator needs type
-       private void sortAttack(CardList list)
-       {
-          Comparator com = new Comparator()
-          {
-             public int compare(Object a1, Object b1)
-             {
-                Card a = (Card)a1;
-                Card b = (Card)b1;
-
-                return getAttack_FirstStrike(b) - getAttack_FirstStrike(a);
-             }
-          };
-          list.sort(com);
-       }//sortAttack() 
-    */
