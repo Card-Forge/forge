@@ -252,6 +252,9 @@ public class CombatUtil {
         if (attacker.getKeyword().contains("CARDNAME can't be blocked except by Walls and/or creatures with flying.") && 
         		!(blocker.isType("Wall") || blocker.getKeyword().contains("Flying"))) return false;
         
+        if (attacker.getKeyword().contains("CARDNAME can't be blocked by more than one creature.") 
+        		&& AllZone.Combat.getBlockers(attacker).size() > 0)  return false;
+        
         if (blocker.getCounters(Counters.BRIBERY) > 0 && AllZoneUtil.isCardInPlay("Gwafa Hazid, Profiteer"))
         	return false;
         
