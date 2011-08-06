@@ -1,0 +1,9 @@
+Name:Vagrant Plowbeasts
+ManaCost:5 G W
+Types:Creature Beast
+Text:no text
+PT:6/6
+A:AB$Regenerate|Cost$1|ValidTgts$Creature.powerGE5|TgtPrompt$Select target creature with power 5 or greater.|SpellDescription$Regenerate target creature with power 5 or greater.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vagrant_plowbeasts.jpg
+End
