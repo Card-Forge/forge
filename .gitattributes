@@ -5260,6 +5260,7 @@ src/forge/AbilityFactory_Combat.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Counters.java -text svneol=native#text/plain
 src/forge/AbilityFactory_DealDamage.java -text svneol=native#text/plain
 src/forge/AbilityFactory_Fetch.java -text svneol=native#text/plain
+src/forge/AbilityFactory_Pump.java -text svneol=native#text/plain
 src/forge/Ability_Activated.java svneol=native#text/plain
 src/forge/Ability_Cost.java -text svneol=native#text/plain
 src/forge/Ability_Hand.java svneol=native#text/plain
