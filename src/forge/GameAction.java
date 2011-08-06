@@ -525,7 +525,9 @@ public class GameAction {
 	                    Card perm = c.getEnchanting().get(i);
 	                    if(!AllZone.GameAction.isCardInPlay(perm)
 	                            || CardFactoryUtil.hasProtectionFrom(c, perm)
-	                            || (c.getKeyword().contains("Enchant creature") && !perm.getType().contains("Creature"))) {
+	                            || ((c.getKeyword().contains("Enchant creature") || c.getKeyword().contains("Enchant tapped creature") ) 
+	                               && !perm.getType().contains("Creature"))
+	                            || (c.getKeyword().contains("Enchant tapped creature") && perm.isUntapped() ) ) {
 	                        c.unEnchantCard(perm);
 	                        destroy(c);
 	                    }
