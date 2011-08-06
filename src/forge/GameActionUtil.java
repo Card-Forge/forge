@@ -4227,7 +4227,8 @@ public class GameActionUtil {
 
 			for (int i=0;i<keywords.size();i++)
 			{
-				AllZone.Stack.add(ability);
+				if (keywords.get(i).equals("Poisonous 1"))
+					AllZone.Stack.add(ability);
 			}
 		}
 
