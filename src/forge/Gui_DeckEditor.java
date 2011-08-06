@@ -793,17 +793,17 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     
     private FileFilter dckFilter = new FileFilter() {
                                      
-                                     @Override
-                                     public boolean accept(File f) {
-                                         return f.getName().endsWith(".jpg") || f.isDirectory();
-                                     }
+    	@Override
+    	public boolean accept(File f) {
+    		return f.getName().endsWith(".jpg") || f.isDirectory();
+    	}
                                      
-                                     @Override
-                                     public String getDescription() {
-                                         return "*.jpg";
-                                     }
+    	@Override
+    	public String getDescription() {
+    		return "*.jpg";
+    	}
                                      
-                                 };
+	};
     
     
     void removePictureButton_actionPerformed(ActionEvent e) {
