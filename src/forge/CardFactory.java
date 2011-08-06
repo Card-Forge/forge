@@ -8245,7 +8245,11 @@ public class CardFactory implements NewConstants {
                         if(crd.isLand() || count == topOfLibrary.size()) {
                             c = crd;
                             damage = count;
-                            if(crd.getName().equals("Mountain")) damage = damage * 2;
+                            if (crd.isLand())
+                            	damage--;
+                            
+                            if(crd.getName().equals("Mountain")) 
+                            	damage *= 2;
                         }
                     }//while
                     AllZone.Display.getChoiceOptional("Revealed cards:", revealed.toArray());
