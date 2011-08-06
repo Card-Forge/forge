@@ -1,3 +1,159 @@
+Basilisk Collar
+1
+Artifact Equipment
+Equipped creature has deathtouch and lifelink.
+VanillaEquipment:0:0:2:Deathtouch:Lifelink:none
+
+Behemoth Sledge
+1 G W
+Artifact Equipment
+Equipped creature gets +2/+2 and has lifelink and trample.
+VanillaEquipment:2:2:3:Lifelink:Trample:none
+
+Blight Sickle
+2
+Artifact Equipment
+Equipped creature gets +1/+0 and has wither.
+VanillaEquipment:1:0:2:Wither:none:none
+
+Bone Saw
+0
+Artifact Equipment
+Equipped creature gets +1/+0.
+VanillaEquipment:1:0:1:none:none:none
+
+Bonesplitter
+1
+Artifact Equipment
+Equipped creature gets +2/+0.
+VanillaEquipment:2:0:1:none:none:none
+
+Fireshrieker
+3
+Artifact Equipment
+Equipped creature has double strike.
+VanillaEquipment:0:0:2:Double Strike:none:none
+
+Gorgon Flail
+2
+Artifact Equipment
+Equipped creature gets +1/+1 and has deathtouch.
+VanillaEquipment:1:1:2:Deathtouch:none:none
+
+Kitesail
+2
+Artifact Equipment
+Equipped creature gets +1/+0 and has flying.
+VanillaEquipment:1:0:2:Flying:none:none
+
+Leonin Scimitar
+1
+Artifact Equipment
+Equipped creature gets +1/+1.
+VanillaEquipment:1:1:1:none:none:none
+
+Lightning Greaves
+2
+Artifact Equipment
+Equipped creature has haste and shroud.
+VanillaEquipment:0:0:0:Haste:Shroud:none
+
+Loxodon Warhammer
+3
+Artifact Equipment
+Equipped creature gets +3/+0 and has lifelink and trample.
+VanillaEquipment:3:0:3:Trample:Lifelink:none
+
+Mask of Riddles
+U B
+Artifact Equipment
+Equipped creature has fear. Whenever equipped creature deals combat damage to a player, you may draw a card. 
+VanillaEquipment:0:0:2:Fear:none:none
+
+Neurok Hoversail
+1
+Artifact Equipment
+Equipped creature has flying.
+VanillaEquipment:0:0:2:Flying:none:none
+
+No-Dachi
+2
+Artifact Equipment
+Equipped creature gets +2/+0 and has first strike.
+VanillaEquipment:2:0:3:First Strike:none:none
+
+Peregrine Mask
+1
+Artifact Equipment
+Equipped creature has defender, flying, and first strike.
+VanillaEquipment:0:0:2:Defender:Flying:First Strike
+
+Quietus Spike
+3
+Artifact Equipment
+Equipped creature has deathtouch. Whenever equipped creature deals combat damage to a player, that player loses half his or her life, rounded up.
+VanillaEquipment:0:0:3:Deathtouch:none:none
+
+Runed Stalactite
+1
+Artifact Equipment
+Equipped creature gets +1/+1 and is every creature type.
+VanillaEquipment:1:1:2:Changeling:none:none
+
+Shuko
+1
+Artifact Equipment
+Equipped creature gets +1/+0.
+VanillaEquipment:1:0:0:none:none:none
+
+Slagwurm Armor
+1
+Artifact Equipment
+Equipped creature gets +0/+6.
+VanillaEquipment:0:6:3:none:none:none
+
+Spidersilk Net
+0
+Artifact Equipment
+Equipped creature gets +0/+2 and has reach.
+VanillaEquipment:0:2:2:Reach:none:none
+
+Trailblazer's Boots
+2
+Artifact Equipment
+Equipped creature has nonbasic landwalk.
+VanillaEquipment:0:0:2:Nonbasic landwalk:none:none
+
+Trusty Machete
+1
+Artifact Equipment
+Equipped creature gets +2/+1.
+VanillaEquipment:2:1:2:none:none:none
+
+Vulshok Battlegear
+3
+Artifact Equipment
+Equipped creature gets +3/+3.
+VanillaEquipment:3:3:3:none:none:none
+
+Vulshok Gauntlets
+2
+Artifact Equipment
+Equipped creature gets +4/+2 and doesn't untap during its controller's untap step.
+VanillaEquipment:4:2:3:This card doesn't untap during your untap step.:none:none
+
+Vulshok Morningstar
+2
+Artifact Equipment
+Equipped creature gets +2/+2.
+VanillaEquipment:2:2:2:none:none:none
+
+Whispersilk Cloak
+3
+Artifact Equipment
+Equipped creature is unblockable. Equipped creature has shroud.
+VanillaEquipment:0:0:2:Unblockable:Shroud:none
+
 Bloodcurdling Scream
 X B
 Sorcery
@@ -900,12 +1056,6 @@ no text
 2/1
 tap: add G to your mana pool for each Forest you control.
 
-Basilisk Collar
-1
-Artifact Equipment
-Equipped creature has deathtouch and lifelink.
-VanillaEquipment:0:0:2:Deathtouch:Lifelink:none
-
 Battle Hurda
 4 W
 Creature Giant
@@ -953,12 +1103,6 @@ Creature Insect
 no text
 3/2
 Flying
-
-Kitesail
-2
-Artifact Equipment
-Equipped creature gets +1/+0 and has flying.
-VanillaEquipment:1:0:2:Flying:none:none
 
 Leatherback Baloth
 G G G
@@ -2272,78 +2416,6 @@ Creature Spirit Avatar
 Whenever Ghastlord of Fugue deals combat damage to a player, that player reveals his or her hand. You choose a card from it. That player exiles that card.
 4/4
 Unblockable
-
-Quietus Spike
-3
-Artifact Equipment
-Equipped creature has deathtouch. Whenever equipped creature deals combat damage to a player, that player loses half his or her life, rounded up.
-VanillaEquipment:0:0:3:Deathtouch:none:none
-
-Mask of Riddles
-U B
-Artifact Equipment
-Equipped creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.) Whenever equipped creature deals combat damage to a player, you may draw a card. 
-VanillaEquipment:0:0:2:Fear:none:none
-
-Peregrine Mask
-1
-Artifact Equipment
-Equipped creature has defender, flying, and first strike.
-VanillaEquipment:0:0:2:Defender:Flying:First Strike
-
-Leonin Scimitar
-1
-Artifact Equipment
-Equipped creature gets +1/+1.
-VanillaEquipment:1:1:1:none:none:none
-
-Runed Stalactite
-1
-Artifact Equipment
-Equipped creature gets +1/+1 and is every creature type.
-VanillaEquipment:1:1:2:Changeling:none:none
-
-Bone Saw
-0
-Artifact Equipment
-Equipped creature gets +1/+0.
-VanillaEquipment:1:0:1:none:none:none
-
-Gorgon Flail
-2
-Artifact Equipment
-Equipped creature gets +1/+1 and has deathtouch. (Creatures dealt damage by this creature are destroyed. You can divide its combat damage among any of the creatures blocking or blocked by it.)
-VanillaEquipment:1:1:2:Deathtouch:none:none
-
-Vulshok Battlegear
-3
-Artifact Equipment
-Equipped creature gets +3/+3.
-VanillaEquipment:3:3:3:none:none:none
-
-Neurok Hoversail
-1
-Artifact Equipment
-Equipped creature has flying.
-VanillaEquipment:0:0:2:Flying:none:none
-
-Vulshok Gauntlets
-2
-Artifact Equipment
-Equipped creature gets +4/+2 and doesn't untap during its controller's untap step.
-VanillaEquipment:4:2:3:This card doesn't untap during your untap step.:none:none
-
-Vulshok Morningstar
-2
-Artifact Equipment
-Equipped creature gets +2/+2.
-VanillaEquipment:2:2:2:none:none:none
-
-Slagwurm Armor
-1
-Artifact Equipment
-Equipped creature gets +0/+6.
-VanillaEquipment:0:6:3:none:none:none
 
 Cinder Pyromancer
 2 R
@@ -4114,18 +4186,6 @@ Comes into play tapped.
 tap: add B
 tap: add R
 
-No-Dachi
-2
-Artifact Equipment
-Equipped creature gets +2/+0 and has first strike.
-VanillaEquipment:2:0:3:First Strike:none:none
-
-Shuko
-1
-Artifact Equipment
-Equipped creature gets +1/+0.
-VanillaEquipment:1:0:0:none:none:none
-
 Tiger Claws
 2 G
 Enchantment Aura
@@ -4481,12 +4541,6 @@ Jacques le Vert
 Legendary Creature Human Warrior
 Green creatures you control get +0/+2.
 3/2
-
-Spidersilk Net
-0
-Artifact Equipment
-Equipped creature gets +0/+2 and has reach.
-VanillaEquipment:0:2:2:Reach:none:none
 
 Accumulated Knowledge
 1 U
@@ -5191,12 +5245,6 @@ WG,tap: add WW
 WG,tap: add WG
 WG,tap: add GG
 
-Whispersilk Cloak
-3
-Artifact Equipment
-Equipped creature is unblockable. Equipped creature has shroud.
-VanillaEquipment:0:0:2:Unblockable:Shroud:none
-
 Hero's Resolve
 1 W
 Enchantment Aura
@@ -5731,18 +5779,6 @@ Creature Dryad
 no text
 2/1
 Nonbasic landwalk
-
-Trailblazer's Boots
-2
-Artifact Equipment
-Equipped creature has nonbasic landwalk.
-VanillaEquipment:0:0:2:Nonbasic landwalk:none:none
-
-Trusty Machete
-1
-Artifact Equipment
-Equipped creature gets +2/+1.
-VanillaEquipment:2:1:2:none:none:none
 
 Oversold Cemetery
 1 B
@@ -7499,12 +7535,6 @@ no text
 2/2
 abPumpTgt T:Haste
 
-Blight Sickle
-2
-Artifact Equipment
-Equipped creature gets +1/+0 and has wither.
-VanillaEquipment:1:0:2:Wither:none:none
-
 Priest of Titania
 1 G
 Creature Elf Druid
@@ -7739,40 +7769,10 @@ At the beginning of each upkeep, put a 1/1 red and green Dragon creature token w
 4/4
 Flying
 
-Loxodon Warhammer
-3
-Artifact Equipment
-Equipped creature gets +3/+0 and has lifelink and trample.
-VanillaEquipment:3:0:3:Trample:Lifelink:none
-
-Lightning Greaves
-2
-Artifact Equipment
-Equipped creature has haste and shroud.
-VanillaEquipment:0:0:0:Haste:Shroud:none
-
-Behemoth Sledge
-1 G W
-Artifact Equipment
-Equipped creature gets +2/+2 and has lifelink and trample.
-VanillaEquipment:2:2:3:Lifelink:Trample:none
-
-Fireshrieker
-3
-Artifact Equipment
-Equipped creature has double strike.
-VanillaEquipment:0:0:2:Double Strike:none:none
-
 Skullclamp
 1
 Artifact Equipment
 Equipped creature gets +1/-1. When equipped creature is put into a graveyard, draw two cards.
-
-Bonesplitter
-1
-Artifact Equipment
-Equipped creature gets +2/+0.
-VanillaEquipment:2:0:1:none:none:none
 
 Survival of the Fittest
 1 G
