@@ -2819,6 +2819,7 @@ public class CardFactory implements NewConstants {
                         if(c.isToken()) AllZone.getZone(c).remove(c);
                         else {  
 					if(Destination.equals("TopofLibrary")) AllZone.GameAction.moveToTopOfLibrary(c);
+					else if(Destination.equals("BottomofLibrary")) AllZone.GameAction.moveToBottomOfLibrary(c);
 					else if(Destination.equals("ShuffleIntoLibrary")) {
 							AllZone.GameAction.moveToTopOfLibrary(c);
 							AllZone.GameAction.shuffle(c.getOwner());
