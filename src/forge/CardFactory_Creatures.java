@@ -1156,7 +1156,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Hunted Phantasm")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -1180,8 +1180,8 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Hunted Phantasm - Opponent puts five 1/1 Goblin Creature tokens onto the battlefield.");
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
-        
+        */
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Hunted Horror")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -1204,8 +1204,8 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Hunted Horror - Opponent puts two 3/3 Centaur tokens with Protection from Black onto the battlefield.");
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
-        
+        */
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Hunted Lammasu")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -1229,8 +1229,8 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Hunted Lammasu - Opponent puts a 4/4 black Horror creature token onto the battlefield.");
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
-        
+        */
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Hunted Dragon")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -1253,8 +1253,8 @@ public class CardFactory_Creatures {
             ability.setStackDescription("Hunted Dragon - Opponent puts 3 Knight tokens with First Strike into play");
             card.addComesIntoPlayCommand(intoPlay);
         }//*************** END ************ END **************************
-        
-
+        */
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Hunted Troll")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -1304,6 +1304,7 @@ public class CardFactory_Creatures {
             
             a1.setBeforePayMana(new Input_PayManaCost(a1));
         }//*************** END ************ END **************************
+        */
         
 
         //*************** START *********** START **************************
