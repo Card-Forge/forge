@@ -4757,7 +4757,7 @@ spDrawCards:2:Draw two cards.:Touch of Brilliance - draw 2 cards.
 
 Inspiration
 3 U
-Sorcery
+Instant
 no text
 spDrawCardsTgt:2:Target player draws two cards.:Inspiration - draw 2 cards.
 
