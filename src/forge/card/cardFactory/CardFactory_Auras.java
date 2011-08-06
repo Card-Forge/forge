@@ -317,120 +317,6 @@ class CardFactory_Auras {
         // *****************************************************************
         // Enchant artifacts:   ********************************************
         // *****************************************************************
-
-        //*************** START *********** START **************************
-        else if (cardName.equals("Animate Artifact")) {
-            
-            final SpellAbility spell = new Spell(card) {
-				private static final long serialVersionUID = 28936527178122685L;
-
-				@Override
-                public boolean canPlayAI() {
-                	/*
-                	 *  AI targets computer artifact but not artifact equipment
-                	 */
-                	CardList list = new CardList(AllZone.Computer_Battlefield.getCards());
-                	list = list.filter(new CardListFilter() {
-                		public boolean addCard(Card c) {
-                			return !c.isCreature() 
-                					&& CardFactoryUtil.canTarget(card, c) 
-                					&& c.isArtifact() 
-                					&& !c.getType().contains("Equipment");
-                		}
-                	});
-                    
-                    if (list.isEmpty()) {
-                    	return false;
-                    } else {
-                    	Card crd = CardFactoryUtil.AI_getBestArtifact(list);
-                    	if (CardUtil.getConvertedManaCost(crd) >= 2) setTargetCard(crd);
-                    	else return false;
-                    }
-                    return super.canPlayAI();
-                }//canPlayAI()
-                
-                @Override
-                public void resolve() {
-                	AllZone.GameAction.moveToPlay(card);
-                    
-                    Card c = getTargetCard();
-                    
-                    if (AllZoneUtil.isCardInPlay(c) 
-                    		&& CardFactoryUtil.canTarget(card, c)) card.enchantCard(c);
-                    
-                }//resolve()
-            };//SpellAbility
-            // Do not remove SpellAbilities created by AbilityFactory or Keywords.
-            card.clearFirstSpellAbility();
-            card.addSpellAbility(spell);
-            
-            Command onEnchant = new Command() {
-				private static final long serialVersionUID = -4748506461176516841L;
-
-				public void execute() {
-                    if (card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        if (!crd.getType().contains("Creature")) {
-                            crd.addType("Creature");
-                            crd.setBaseAttack(CardUtil.getConvertedManaCost(crd));
-                            crd.setBaseDefense(CardUtil.getConvertedManaCost(crd));
-                        }
-                    }
-                }//execute()
-            };//Command
-            
-            Command onUnEnchant = new Command() {
-				private static final long serialVersionUID = 7475405057975133320L;
-
-				public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        crd.removeType("Creature");
-                        crd.setBaseAttack(0);
-                        crd.setBaseDefense(0);
-                    }
-                }//execute()
-            };//Command
-            
-            Command onLeavesPlay = new Command() {
-				private static final long serialVersionUID = -7820794265954245241L;
-
-				public void execute() {
-                    if(card.isEnchanting()) {
-                        Card crd = card.getEnchanting().get(0);
-                        card.unEnchantCard(crd);
-                    }
-                }
-            };
-            
-            Input runtime = new Input() {
-				private static final long serialVersionUID = -7462101446917907106L;
-
-				// Can't allow an artifact equipment that is equipping a creature to become animated
-				@Override
-                public void showMessage() {
-                    PlayerZone comp = AllZone.getZone(Constant.Zone.Battlefield, AllZone.ComputerPlayer);
-                    PlayerZone hum = AllZone.getZone(Constant.Zone.Battlefield, AllZone.HumanPlayer);
-                    CardList artifacts = new CardList();
-                    artifacts.addAll(comp.getCards());
-                    artifacts.addAll(hum.getCards());
-                    artifacts = artifacts.filter(new CardListFilter() {
-                        public boolean addCard(Card c) {
-                            return !c.isCreature() 
-                            		&& CardFactoryUtil.canTarget(card, c) 
-                            		&& !c.isEquipping();
-                        }
-                    });
-                    
-                    stopSetNext(CardFactoryUtil.input_targetSpecific(spell, artifacts, "Select target artifact", true, false));
-                }
-            };
-            card.addEnchantCommand(onEnchant);
-            card.addUnEnchantCommand(onUnEnchant);
-            card.addLeavesPlayCommand(onLeavesPlay);
-            
-            spell.setBeforePayMana(runtime);
-        }//*************** END ************ END **************************
         
 
         
@@ -893,6 +779,7 @@ class CardFactory_Auras {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetCreature(spell));
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Animate Dead") || cardName.equals("Dance of the Dead")) {
