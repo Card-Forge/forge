@@ -30,8 +30,9 @@ public class Input_PassPriority extends Input implements java.io.Serializable {
     public void selectButtonOK() {
     	AllZone.Phase.passPriority();
     	GuiDisplayUtil.updateGUI();
-    	
-    	if (AllZone.InputControl.getInput() == this) AllZone.InputControl.resetInput();
+    	Input in = AllZone.InputControl.getInput();
+    	if (in == this || in == null) 
+    		AllZone.InputControl.resetInput();
     	// Clear out PassPriority after clicking button
     }
     
