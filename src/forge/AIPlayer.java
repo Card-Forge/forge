@@ -60,12 +60,13 @@ public class AIPlayer extends Player{
 	}
 	
 	public boolean dredge() {
+		CardList dredgers = getDredge();
 		Random random = MyRandom.random;
-		boolean use = random.nextBoolean();
-		if(use) {
-			CardList tmp = getDredge();
-			tmp.shuffle();
-			Card c = tmp.get(0);
+		
+		//use dredge if there are more than one of them in your graveyard 
+		if(dredgers.size() > 1 || (dredgers.size() == 1 && random.nextBoolean())) {
+			dredgers.shuffle();
+			Card c = dredgers.get(0);
 			//rule 702.49a
 			if(getDredgeNumber(c) <= AllZone.Computer_Library.size() ) {
 				//dredge library, put card in hand
@@ -75,12 +76,10 @@ public class AIPlayer extends Player{
 					Card c2 = AllZone.Computer_Library.get(0);
 					AllZone.GameAction.moveToGraveyard(c2);
 				}
-			}
-			else {
-				use = false;
+			return true;
 			}
 		}
-		return use;
+		return false;
 	}
 	
 	////////////////////////////////

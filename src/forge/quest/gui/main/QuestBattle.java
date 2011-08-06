@@ -166,6 +166,7 @@ public class QuestBattle extends QuestSelectablePanel {
         addToDeckList("Hercules 2", "medium", "GW Deck with Bant Sureblade and Naya Hushblade");
         addToDeckList("Hercules 3", "hard", "GW Deck with Wilt-Leaf Liege, Bant Sureblade and Naya Hushblade");
         addToDeckList("Higgins 3", "hard", "UBR Grixis Control deck");
+        addToDeckList("Hobbes 3", "hard", "UBG Dredge deck with Hermit Druid, Ichorid and Narcomoeba");
         addToDeckList("Homer Simpson 1", "easy", "UBR Sacrifice deck with Mortician Beetle");
         addToDeckList("Homer Simpson 2", "medium", "UBR Sacrifice deck with Mortician Beetle");
         addToDeckList("Homer Simpson 3", "hard", "UBR Sacrifice deck with Mortician Beetle");

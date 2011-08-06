@@ -1817,8 +1817,9 @@ public class CardFactory_Creatures {
 
 				@Override
                 public boolean canPlayAI() {
-                    // todo: figure out when the AI would want to use the Druid
-					return true;
+					//Use the ability if there is still a forest in the library
+					CardList library = AllZoneUtil.getPlayerCardsInLibrary(card.getController());
+					return !library.getName("Forest").isEmpty();
                 }                
                 
                 @Override
