@@ -1793,6 +1793,445 @@ public class CardFactory implements NewConstants {
     }//SpDamageP
 */    
 
+    while (hasKeyword(card, "abDamageTgt") != -1)
+    {
+    	int n = hasKeyword(card, "abDamageTgt");
+    	if (n != -1)
+    	{
+    		String parse = card.getKeyword().get(n).toString();
+    		card.removeIntrinsicKeyword(parse);
+    		
+    		String k[] = parse.split(":");
+    		
+            final boolean TgtCreature[] = {false};
+            final boolean TgtPlayer[] = {false};
+            final boolean TgtCP[] = {false};
+            final boolean TgtOpp[] = {false};
+            String tmpCost = new String("");
+            
+            if (k[0].contains("CP"))
+            {
+            	TgtCP[0] = true;
+            	tmpCost = k[0].substring(13);
+            }
+            else if (k[0].contains("P"))
+            {
+            	TgtPlayer[0] = true;
+            	tmpCost = k[0].substring(12);
+            }
+            else if (k[0].contains("C"))
+            {
+            	TgtCreature[0] = true;
+            	tmpCost = k[0].substring(12);
+            }
+            
+            boolean tapCost = false;
+            boolean tapOnlyCost = false;
+           
+            if (tmpCost.contains("T"))
+            {
+               tapCost = true;
+               tmpCost = tmpCost.replace("T", "");
+               tmpCost = tmpCost.trim();
+               if (tmpCost.length() == 0)
+                  tapOnlyCost = true;
+            }
+           
+            final String manaCost = tmpCost;
+
+
+    		final int NumDmg[] = {-1};
+    		final String NumDmgX[] = {"none"};
+    		
+            if (k[1].matches("X"))
+            {
+          	  String x = card.getSVar(k[1]);
+          	  if (x.startsWith("Count$"))
+          	  {
+          		  String kk[] = x.split("\\$");
+          		  NumDmgX[0] = kk[1];
+          	  }
+          	   
+            }
+            else if (k[1].matches("[0-9][0-9]?"))
+          		  NumDmg[0] = Integer.parseInt(k[1]);
+           
+            //drawbacks and descriptions
+            final String DrawBack[] = {"none"};
+            final String spDesc[] = {"none"};
+            final String stDesc[] = {"none"};
+            if (k.length > 2)
+            {
+               if (k[2].contains("Drawback$"))
+               {
+                  String kk[] = k[2].split("\\$");
+                  DrawBack[0] = kk[1];
+                  if (k.length > 3)
+                     spDesc[0] = k[3];
+                  if (k.length > 4)
+                     stDesc[0] = k[4];
+               }
+               else
+               {
+                  if (k.length > 2)
+                     spDesc[0] = k[2];
+                  if (k.length > 3)
+                     stDesc[0] = k[3];
+               }
+            }
+            else
+            {
+            	StringBuilder sb = new StringBuilder();
+            	sb.append(" deals " + NumDmg[0] + " damage to target ");
+
+            	if (TgtCP[0])
+            		sb.append("creature or player.");
+            	else if (TgtCreature[0])
+            		sb.append("creature.");
+            	else if (TgtPlayer[0])
+            		sb.append("player.");
+            	
+                if (tapOnlyCost == true)
+                    spDesc[0] = "Tap: " + card.getName() + sb.toString();
+                 else if (tapCost == true)
+                    spDesc[0] = manaCost + ", tap: " + card.getName() + sb.toString();
+                 else
+                    spDesc[0] = manaCost + ": " + card.getName() + sb.toString();
+
+                 stDesc[0] = card.getName() + " -" + sb.toString();
+            }
+            
+            if (! tapCost)
+            {
+            	final SpellAbility abDamage = new Ability_Activated(card, manaCost)
+            	{
+            		private static final long serialVersionUID = -7560349014757367722L;
+
+            		private int damage;
+            		public int getNumDamage()
+            		{
+            			if (NumDmg[0] != -1)
+            				return NumDmg[0];
+
+            			if (!NumDmgX[0].equals("none"))
+            				return CardFactoryUtil.xCount(card, NumDmgX[0]);
+
+            			return 0;
+            		}
+
+            		boolean shouldTgtP()
+            		{
+            			PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+            			CardList hand = new CardList(compHand.getCards());
+
+            			if (hand.size() >= 7)      // anti-discard-at-EOT
+            				return true;
+
+            			if(AllZone.Human_Life.getLife() < (10 - damage))   // if damage from this spell would drop the human to less than 10 life
+            				return true;
+
+            			return false;
+            		}
+
+            		Card chooseTgtC()
+            		{
+            			// Combo alert!!
+            			PlayerZone compy = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+            			CardList cPlay = new CardList(compy.getCards());
+            			if (cPlay.size() > 0)
+            				for (int i = 0; i < cPlay.size(); i++)
+            					if (cPlay.get(i).getName().equals("Stuffy Doll"))
+            						return cPlay.get(i);
+
+            			PlayerZone human = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+            			CardList hPlay = new CardList(human.getCards());
+            			hPlay = hPlay.filter(new CardListFilter()
+            			{
+            				public boolean addCard(Card c)
+            				{
+            					// will include creatures already dealt damage
+            					return c.isCreature() && ((c.getNetDefense() + c.getDamage()) <= damage) && CardFactoryUtil.canTarget(card, c);
+            				}
+            			});
+
+            			if (hPlay.size() > 0)
+            			{
+            				Card best = hPlay.get(0);
+
+            				if (hPlay.size() > 1)
+            				{
+            					for (int i = 1; i < hPlay.size(); i++)
+            					{
+            						Card b = hPlay.get(i);
+            						// choose best overall creature?
+            						if (b.getSpellAbility().length > best.getSpellAbility().length ||
+            								b.getKeyword().size() > best.getKeyword().size() ||
+            								b.getNetAttack() > best.getNetAttack())
+            							best = b;
+            					}
+            				}
+
+            				return best;
+            			}
+
+            			return null;
+            		}
+
+            		public boolean canPlayAI()
+            		{
+            			damage = getNumDamage();
+
+            			Random r = new Random();	// prevent run-away activations 
+            			boolean rr = false;
+            			if (r.nextFloat() <= Math.pow(.6667, card.getAbilityUsed()))
+            				rr = true;
+
+            			if (TgtCP[0] == true)
+            			{
+            				if (shouldTgtP() == true)
+            				{
+            					setTargetPlayer(Constant.Player.Human);
+            					return rr && true;
+            				}
+
+            				Card c = chooseTgtC();
+            				if (c != null)
+            				{
+            					setTargetCard(c);
+            					return rr && true;
+            				}
+            			}
+
+            			if (TgtPlayer[0] == true || TgtOpp[0] == true)
+            			{
+            				setTargetPlayer(Constant.Player.Human);
+            				return rr && true;
+            			}
+
+            			if (TgtCreature[0] == true)
+            			{
+            				Card c = chooseTgtC();
+            				if (c != null)
+            				{
+            					setTargetCard(c);
+            					return rr && true;
+            				}
+            			}
+
+            			return false;   
+            		}
+
+            		public void resolve()
+            		{
+            			int damage = getNumDamage();
+            			String tgtP = "";
+
+            			if (TgtOpp[0] == true)
+            			{
+            				tgtP = AllZone.GameAction.getOpponent(card.getController());
+            				setTargetPlayer(tgtP);
+            			}
+            			Card c = getTargetCard();
+            			if(c != null)
+            			{
+            				if(AllZone.GameAction.isCardInPlay(c)  && CardFactoryUtil.canTarget(card, c))
+            				{
+            					AllZone.GameAction.addDamage(c, card, damage);
+            					tgtP = c.getController();
+            				}
+            			}
+            			else
+            			{
+            				tgtP = getTargetPlayer();
+            				AllZone.GameAction.addDamage(tgtP, card, damage);
+            			}
+
+            			if (! DrawBack[0].equals("none"))
+            				CardFactoryUtil.doDrawBack(DrawBack[0], damage, card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtP, card, getTargetCard());
+            		}//resolve()
+            	};//Ability_Activated
+
+            	abDamage.setDescription(spDesc[0]);
+            	abDamage.setStackDescription(stDesc[0]);
+            	
+            	if (TgtCP[0] == true)
+            		abDamage.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(abDamage, true, false));
+            	else if (TgtCreature[0] == true)
+            		abDamage.setBeforePayMana(CardFactoryUtil.input_targetCreature(abDamage));
+            	else if (TgtPlayer[0] == true)
+            		abDamage.setBeforePayMana(CardFactoryUtil.input_targetPlayer(abDamage));
+            		
+            	card.addSpellAbility(abDamage);
+            }//!tapCost
+            
+            if (tapCost)
+            {
+            	final SpellAbility abDamage = new Ability_Tap(card)
+            	{
+            		private static final long serialVersionUID = -7960649024757327722L;
+
+            		private int damage;
+            		public int getNumDamage()
+            		{
+            			if (NumDmg[0] != -1)
+            				return NumDmg[0];
+
+            			if (!NumDmgX[0].equals("none"))
+            				return CardFactoryUtil.xCount(card, NumDmgX[0]);
+
+            			return 0;
+            		}
+
+            		boolean shouldTgtP()
+            		{
+            			PlayerZone compHand = AllZone.getZone(Constant.Zone.Hand, Constant.Player.Computer);
+            			CardList hand = new CardList(compHand.getCards());
+
+            			if (hand.size() >= 7)      // anti-discard-at-EOT
+            				return true;
+
+            			if(AllZone.Human_Life.getLife() < (10 - damage))   // if damage from this spell would drop the human to less than 10 life
+            				return true;
+
+            			return false;
+            		}
+
+            		Card chooseTgtC()
+            		{
+            			// Combo alert!!
+            			PlayerZone compy = AllZone.getZone(Constant.Zone.Play, Constant.Player.Computer);
+            			CardList cPlay = new CardList(compy.getCards());
+            			if (cPlay.size() > 0)
+            				for (int i = 0; i < cPlay.size(); i++)
+            					if (cPlay.get(i).getName().equals("Stuffy Doll"))
+            						return cPlay.get(i);
+
+            			PlayerZone human = AllZone.getZone(Constant.Zone.Play, Constant.Player.Human);
+            			CardList hPlay = new CardList(human.getCards());
+            			hPlay = hPlay.filter(new CardListFilter()
+            			{
+            				public boolean addCard(Card c)
+            				{
+            					// will include creatures already dealt damage
+            					return c.isCreature() && ((c.getNetDefense() + c.getDamage()) <= damage) && CardFactoryUtil.canTarget(card, c);
+            				}
+            			});
+
+            			if (hPlay.size() > 0)
+            			{
+            				Card best = hPlay.get(0);
+
+            				if (hPlay.size() > 1)
+            				{
+            					for (int i = 1; i < hPlay.size(); i++)
+            					{
+            						Card b = hPlay.get(i);
+            						// choose best overall creature?
+            						if (b.getSpellAbility().length > best.getSpellAbility().length ||
+            								b.getKeyword().size() > best.getKeyword().size() ||
+            								b.getNetAttack() > best.getNetAttack())
+            							best = b;
+            					}
+            				}
+
+            				return best;
+            			}
+
+            			return null;
+            		}
+
+            		public boolean canPlayAI()
+            		{
+            			damage = getNumDamage();
+
+            			boolean na = false;
+            			if (!CardFactoryUtil.AI_doesCreatureAttack(card))
+            				na = true;
+
+            			if (TgtCP[0] == true)
+            			{
+            				if (shouldTgtP() == true)
+            				{
+            					setTargetPlayer(Constant.Player.Human);
+            					return na && true;
+            				}
+
+            				Card c = chooseTgtC();
+            				if (c != null)
+            				{
+            					setTargetCard(c);
+            					return na && true;
+            				}
+            			}
+
+            			if (TgtPlayer[0] == true || TgtOpp[0] == true)
+            			{
+            				setTargetPlayer(Constant.Player.Human);
+            				return na && true;
+            			}
+
+            			if (TgtCreature[0] == true)
+            			{
+            				Card c = chooseTgtC();
+            				if (c != null)
+            				{
+            					setTargetCard(c);
+            					return na && true;
+            				}
+            			}
+
+            			return false;   
+            		}
+
+            		public void resolve()
+            		{
+            			int damage = getNumDamage();
+            			String tgtP = "";
+
+            			if (TgtOpp[0] == true)
+            			{
+            				tgtP = AllZone.GameAction.getOpponent(card.getController());
+            				setTargetPlayer(tgtP);
+            			}
+            			Card c = getTargetCard();
+            			if(c != null)
+            			{
+            				if(AllZone.GameAction.isCardInPlay(c)  && CardFactoryUtil.canTarget(card, c))
+            				{
+            					AllZone.GameAction.addDamage(c, card, damage);
+            					tgtP = c.getController();
+            				}
+            			}
+            			else
+            			{
+            				tgtP = getTargetPlayer();
+            				AllZone.GameAction.addDamage(tgtP, card, damage);
+            			}
+
+            			if (! DrawBack[0].equals("none"))
+            				CardFactoryUtil.doDrawBack(DrawBack[0], damage, card.getController(), AllZone.GameAction.getOpponent(card.getController()), tgtP, card, getTargetCard());
+            		}//resolve()
+            	};//Ability_Tap
+            	
+            	abDamage.setDescription(spDesc[0]);
+            	abDamage.setStackDescription(stDesc[0]);
+            	
+            	if (TgtCP[0] == true)
+            		abDamage.setBeforePayMana(CardFactoryUtil.input_targetCreaturePlayer(abDamage, true, false));
+            	else if (TgtCreature[0] == true)
+            		abDamage.setBeforePayMana(CardFactoryUtil.input_targetCreature(abDamage));
+            	else if (TgtPlayer[0] == true)
+            		abDamage.setBeforePayMana(CardFactoryUtil.input_targetPlayer(abDamage));
+
+            	if (!tapOnlyCost)
+            		abDamage.setManaCost(manaCost);
+            	
+            	card.addSpellAbility(abDamage);
+            }//tapCost
+            
+    	}
+    }
+    
     if (hasKeyword(card, "abDamageCP") != -1)
     {
        int n = hasKeyword(card, "abDamageCP");
