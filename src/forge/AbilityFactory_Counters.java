@@ -893,4 +893,201 @@ public class AbilityFactory_Counters {
 			}
 		}
 	}
+	
+	// *******************************************
+	// ********** PutCounterAll ******************
+	// *******************************************
+	
+	public static SpellAbility createAbilityPutCounterAll(final AbilityFactory AF){
+
+		final SpellAbility abPutCounterAll = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = -712473347429870385L;
+			final AbilityFactory af = AF;
+
+			@Override
+			public String getStackDescription() {
+				return putAllStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return putAllCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				putAllResolve(af, this);
+			}
+
+		};
+		return abPutCounterAll;
+	}
+	
+	public static SpellAbility createSpellPutCounterAll(final AbilityFactory AF){
+		final SpellAbility spPutCounterAll = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()){
+			private static final long serialVersionUID = -4400684695467183219L;
+			final AbilityFactory af = AF;
+
+			@Override
+			public String getStackDescription(){
+				return putAllStackDescription(af, this);
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return putAllCanPlayAI(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				putAllResolve(af, this);
+			}
+
+		};
+		return spPutCounterAll;
+	}
+	
+	public static SpellAbility createDrawbackPutCounterAll(final AbilityFactory AF){
+		final SpellAbility dbPutCounterAll = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()){
+			private static final long serialVersionUID = -3101160929130043022L;
+			final AbilityFactory af = AF;
+
+			@Override
+			public String getStackDescription(){
+				return putAllStackDescription(af, this);
+			}
+
+			@Override
+			public void resolve() {
+				putAllResolve(af, this);
+			}
+
+			@Override
+			public boolean chkAI_Drawback() {
+				return putAllPlayDrawbackAI(af, this);
+			}
+
+		};
+		return dbPutCounterAll;
+	}
+	
+	public static String putAllStackDescription(AbilityFactory af, SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
+		StringBuilder sb = new StringBuilder();
+
+		if (!(sa instanceof Ability_Sub))
+			sb.append(sa.getSourceCard().getName()).append(" - ");
+		else
+			sb.append(" ");
+
+		Counters cType = Counters.valueOf(params.get("CounterType"));
+		int amount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+
+		sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
+		if(amount != 1) sb.append("s");
+		sb.append(" on");
+		sb.append(" each valid permanent.");
+
+		Ability_Sub abSub = sa.getSubAbility();
+		if (abSub != null){
+			sb.append(abSub.getStackDescription());
+		}
+
+		return sb.toString();
+	}
+	
+	public static boolean putAllCanPlayAI(final AbilityFactory af, final SpellAbility sa){
+		// AI needs to be expanded, since this function can be pretty complex based on what the expected targets could be
+		Random r = new Random();
+		HashMap<String,String> params = af.getMapParams();
+		Ability_Cost abCost = sa.getPayCosts();
+		final Card source = sa.getSourceCard();
+		CardList hList;
+		CardList cList;
+		String type = params.get("CounterType");
+		String amountStr = params.get("CounterNum");
+		String valid = params.get("ValidCards");
+		boolean curse = af.isCurse();
+
+		hList = AllZoneUtil.getPlayerCardsInPlay(AllZone.HumanPlayer);
+		cList = AllZoneUtil.getPlayerCardsInPlay(AllZone.ComputerPlayer);
+
+		hList = hList.getValidCards(valid, source.getController(), source);
+		cList = cList.getValidCards(valid, source.getController(), source);
+
+		if (abCost != null){
+			// AI currently disabled for these costs
+			if (abCost.getSacCost()){ 
+				return false;
+			}
+			if (abCost.getLifeCost())	 return false;
+			if (abCost.getDiscardCost()) return false;
+		}
+
+		if (!ComputerUtil.canPayCost(sa))
+			return false;
+
+		// TODO handle proper calculation of X values based on Cost
+		final int amount = AbilityFactory.calculateAmount(af.getHostCard(), amountStr, sa);
+
+		// prevent run-away activations - first time will always return true
+		boolean chance = r.nextFloat() <= Math.pow(.6667, source.getAbilityUsed());
+
+		if(curse){
+			if(type.equals("M1M1")) {
+				CardList killable = hList.filter(new CardListFilter() {
+					public boolean addCard(Card c) {
+						return c.getNetDefense() <= amount;
+					}
+				});
+				if (!(killable.size() > 2)) return false;
+			}
+			else{
+				//make sure compy doesn't harm his stuff more than human's stuff
+				if(cList.size() > hList.size()) return false;
+			}
+		}
+		else{
+			//human has more things that will benefit, don't play
+			if(hList.size() > cList.size()) return false; 
+		}
+
+		Ability_Sub subAb = sa.getSubAbility();
+		if (subAb != null)
+			chance &= subAb.chkAI_Drawback();
+
+		return ((r.nextFloat() < .6667) && chance);
+	}
+	
+	public static boolean putAllPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
+		return putAllCanPlayAI(af, sa);
+	}
+
+	public static void putAllResolve(final AbilityFactory af, final SpellAbility sa) {
+		HashMap<String,String> params = af.getMapParams();
+		String DrawBack = params.get("SubAbility");
+		Card card = af.getHostCard();
+		String type = params.get("CounterType");
+		int counterAmount = AbilityFactory.calculateAmount(af.getHostCard(), params.get("CounterNum"), sa);
+		String valid = params.get("ValidCards");
+
+		CardList cards = AllZoneUtil.getCardsInPlay();
+		cards = cards.getValidCards(valid, sa.getSourceCard().getController(), sa.getSourceCard());
+
+		for(Card tgtCard : cards) {
+			if (AllZone.getZone(tgtCard).is(Constant.Zone.Battlefield))
+				tgtCard.addCounter(Counters.valueOf(type), counterAmount);
+			else	// adding counters to something like re-suspend cards
+				tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
+		}
+
+		if (af.hasSubAbility()){
+			Ability_Sub abSub = sa.getSubAbility();
+			if (abSub != null){
+				abSub.resolve();
+			}
+			else
+				CardFactoryUtil.doDrawBack(DrawBack, counterAmount, card.getController(), card.getController().getOpponent(), card.getController(), card, cards.get(0), sa);
+		}
+	}
 }

@@ -214,6 +214,15 @@ public class AbilityFactory {
 				SA = AbilityFactory_Counters.createDrawbackPutCounters(this);
 		}
 		
+		if (API.equals("PutCounterAll")){
+			if (isAb)
+				SA = AbilityFactory_Counters.createAbilityPutCounterAll(this);
+			else if (isSp)
+				SA = AbilityFactory_Counters.createSpellPutCounterAll(this);
+			else if (isDb)
+				SA = AbilityFactory_Counters.createDrawbackPutCounterAll(this);
+		}
+		
 		if (API.equals("RemoveCounter")){
 			if (isAb)
 				SA = AbilityFactory_Counters.createAbilityRemoveCounters(this);
