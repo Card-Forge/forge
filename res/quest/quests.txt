@@ -6,7 +6,7 @@ Repeatable
 25
 Three white rares
 100
-whiteOrbSmall.png
+noIcon
 
 2
 Dungeon Crawling (Blue)
@@ -16,7 +16,7 @@ Repeatable
 25
 Three blue rares
 100
-blueIconSmall.png
+noIcon
 
 3
 Dungeon Crawling (Black)
@@ -26,7 +26,7 @@ Repeatable
 25
 Three black rares
 100
-blackOrbSmall.png
+noIcon
 
 4
 Dungeon Crawling (Red)
@@ -36,7 +36,7 @@ Repeatable
 25
 Three red rares
 100
-redOrbSmall.png
+noIcon
 
 5
 Dungeon Crawling (Green)
@@ -46,7 +46,7 @@ Repeatable
 25
 Three green rares
 100
-leafIconSmall.png
+noICon
 
 6
 Dungeon Crawling (Colorless)
@@ -56,7 +56,7 @@ Repeatable
 35
 Three colorless rares
 150
-crystalIconSmall.png
+noIcon
 
 7
 Dungeon Crawling (Gold)
@@ -66,7 +66,7 @@ Repeatable
 35
 Three multi-colored rares
 150
-foxIconSmall.png
+noIcon
 
 8
 A Wolf in Sheep's Clothing
@@ -76,7 +76,7 @@ Not Repeatable
 35
 Three random rares
 200
-leafIconSmall.png
+noIcon
 
 9
 Bushwhacked!
@@ -86,7 +86,7 @@ Not Repeatable
 50
 Four green rares
 225
-leafIconSmall.png
+noIcon
 
 10
 Zombie Attack!
@@ -96,7 +96,7 @@ Not Repeatable
 50
 Four black rares
 200
-blackOrbSmall.png
+noIcon
 
 11
 The King's Contest

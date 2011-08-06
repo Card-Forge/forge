@@ -134,8 +134,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     	JLabel difficulty;
     	JLabel repeatable;
     	JLabel reward;
-    	JLabel iconLabel;
-
+    	//JLabel iconLabel;
     	
     	int y = 75;
     	//display the choices:
@@ -256,7 +255,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
     	//Deck computerDeck = deckIO.readDeck("quest"+selectedQuest.getId());
     	Deck computerDeck = questData.ai_getDeckNewFormat("quest"+selectedQuest.getId());
     	
-    	System.out.println(computerDeck.getName());
+    	//System.out.println(computerDeck.getName());
     	
     	Constant.Runtime.HumanDeck[0] = hDeck;
         Constant.Runtime.ComputerDeck[0] = computerDeck;
@@ -264,6 +263,7 @@ public class Gui_Quest_Assignments extends JFrame implements NewConstants{
         //Constant.Quest.qa[0] = selectedQuest;
     	AllZone.QuestAssignment = selectedQuest;
     	
+    	Constant.Quest.oppIconName[0] = selectedQuest.getIconName();
     	
 	    AllZone.GameAction.newGame(hDeck, computerDeck, QuestUtil.getHumanPlantAndPet(questData, selectedQuest), new CardList(), questData.getLife(), 
 	    						   selectedQuest.getComputerLife(), selectedQuest);

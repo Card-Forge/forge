@@ -12,7 +12,8 @@ public class Input_Untap extends Input {
         PlayerZone p = AllZone.getZone(Constant.Zone.Play, AllZone.Phase.getActivePlayer());
         Card[] c = p.getCards();
         
-        if (AllZone.Phase.getTurn() != 1)
+        if (AllZone.Phase.getTurn() != 1 && 
+        	!(AllZone.Phase.getActivePlayer().equals(Constant.Player.Human) && AllZone.Phase.getTurn() == 2) )
         {
 	        for(int i = 0; i < c.length; i++)
 	            c[i].setSickness(false);
