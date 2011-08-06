@@ -1,6 +1,6 @@
 Masticore
 4
-Artifact Creature
+Artifact Creature Masticore
 Choose and discard a card during your upkeep, or sacrifice Masticore.
 4/4
 RegenerateMe:2
