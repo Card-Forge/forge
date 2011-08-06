@@ -6177,6 +6177,7 @@ res/cardsfolder/tezzeret_agent_of_bolas.txt svneol=native#text/plain
 res/cardsfolder/tezzeret_the_seeker.txt -text svneol=native#text/plain
 res/cardsfolder/thalakos_drifters.txt -text svneol=native#text/plain
 res/cardsfolder/thalakos_lowlands.txt -text svneol=native#text/plain
+res/cardsfolder/thalakos_mistfolk.txt svneol=native#text/plain
 res/cardsfolder/thalakos_scout.txt -text svneol=native#text/plain
 res/cardsfolder/thalakos_seer.txt -text svneol=native#text/plain
 res/cardsfolder/thalakos_sentry.txt -text svneol=native#text/plain
