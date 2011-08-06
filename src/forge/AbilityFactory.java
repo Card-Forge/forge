@@ -686,17 +686,14 @@ public class AbilityFactory {
 		
 		if (defined.equals("Targeted")){
 			Target tgt = sa.getTarget();
-			if (tgt != null && tgt.getTargetPlayers().size() != 0){
-				players.addAll(tgt.getTargetPlayers());
-				return players;
-			}
-			
-			SpellAbility parent;
+			SpellAbility parent = sa;
+
 			do{
-				parent = ((Ability_Sub)sa).getParent();
-			}while(parent.getTarget() == null && parent.getTarget().getTargetPlayers().size() == 0);
+				parent = ((Ability_Sub)parent).getParent();
+				tgt = parent.getTarget();
+			}while(tgt == null || tgt.getTargetPlayers().size() == 0);
 			
-			players.addAll(parent.getTarget().getTargetPlayers());
+			players.addAll(tgt.getTargetPlayers());
 		}
 		else{
 			if (defined.equals("You") || defined.equals("Each"))
@@ -714,15 +711,10 @@ public class AbilityFactory {
 		
 		if (defined.equals("Targeted")){
 			Target tgt = sa.getTarget();
-			if (tgt != null && tgt.getTargets().size() != 0){
-				objects.addAll(tgt.getTargets());
-				return objects;
-			}
-			
-			SpellAbility parent;
+			SpellAbility parent = sa;
 			do{
-				parent = ((Ability_Sub)sa).getParent();
-			}while(parent.getTarget() == null && parent.getTarget().getTargets().size() == 0);
+				parent = ((Ability_Sub)parent).getParent();
+			}while(parent.getTarget() == null || parent.getTarget().getTargets().size() == 0);
 			
 			objects.addAll(parent.getTarget().getTargets());
 		}
@@ -765,7 +757,7 @@ public class AbilityFactory {
 		SpellAbility parent = sa;
 		do{
 			parent = ((Ability_Sub)parent).getParent();
-		}while(parent.getTarget() == null && parent.getTarget().getTargetCards().size() == 0);
+		}while(parent.getTarget() == null || parent.getTarget().getTargetCards().size() == 0);
 		
 		return parent;
 	}
