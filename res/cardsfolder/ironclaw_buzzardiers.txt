@@ -4,7 +4,7 @@ Types:Creature Orc Scout
 Text:no text
 PT:2/2
 K:CARDNAME can't block creatures with power 2 or greater.
-K:abPump R:Flying
+A:AB$Pump | Cost$ R | KW$ Flying | SpellDescription$ Ironclaw Buzzardiers gains flying until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ironclaw_buzzardiers.jpg
 SetInfo:TSP|Common|http://magiccards.info/scans/en/ts/165.jpg

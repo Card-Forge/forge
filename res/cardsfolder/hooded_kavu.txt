@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Kavu
 Text:no text
 PT:2/2
-K:abPump B:Fear
+A:AB$Pump | Cost$ B | KW$ Fear | SpellDescription$ Hooded Kavu gains fear until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hooded_kavu.jpg
 SetInfo:INV|Common|http://magiccards.info/scans/en/in/147.jpg

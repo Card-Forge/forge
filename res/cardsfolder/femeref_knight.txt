@@ -4,7 +4,7 @@ Types:Creature Human Knight
 Text:no text
 PT:2/2
 K:Flanking
-K:abPump W:Vigilance
+A:AB$Pump | Cost$ W | KW$ Vigilance | SpellDescription$ Femeref Knight gains vigilance until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/femeref_knight.jpg
 SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/222.jpg

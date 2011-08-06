@@ -3,7 +3,7 @@ ManaCost:4 R R
 Types:Creature Giant
 Text:no text
 PT:6/6
-K:abPump R:+1/+0
+A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ Inferno Titan gets +1/+0 until end of turn.
 K:WheneverKeyword:EntersBattleField:Self:Play:Damage/3:InputType - CreatureORPlayer:ASAP:No_Condition:MultipleTargets:Whenever Inferno Titan enters the battlefield
 K:WheneverKeyword:Attacks:Self:Play:Damage/3:InputType - CreatureORPlayer:ASAP:No_Condition:MultipleTargets:or attacks, it deals 3 damage divided as you choose among one, two, or three target creatures and/or players.
 SVar:Rarity:Mythic

@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Creature Dragon Wurm
 Text:no text
 PT:3/4
-K:abPump 2:Trample
+A:AB$Pump | Cost$ 2 | KW$ Trample | SpellDescription$ Henge Guardian gains trample until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/henge_guardian.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/297.jpg

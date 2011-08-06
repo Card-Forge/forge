@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Beast
 Text:no text
 PT:2/2
-K:abPump R:+1/-1
+A:AB$Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ Flowstone Shambler gets +1/-1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_shambler.jpg
 SetInfo:STH|Common|http://magiccards.info/scans/en/sh/86.jpg

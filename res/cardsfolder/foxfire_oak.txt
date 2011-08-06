@@ -3,7 +3,7 @@ ManaCost:5 G
 Types:Creature Treefolk Shaman
 Text:no text
 PT:3/6
-K:abPump RG RG RG:+3/+0
+A:AB$Pump | Cost$ RG RG RG | NumAtt$ +3 | SpellDescription$ Foxfire Oak gets +3/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foxfire_oak.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/115.jpg

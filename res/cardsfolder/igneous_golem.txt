@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Creature Golem
 Text:no text
 PT:3/4
-K:abPump 2:Trample
+A:AB$Pump | Cost$ 2 | KW$ Trample | SpellDescription$ Igneous Golem gains trample until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/igneous_golem.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/270.jpg

@@ -4,7 +4,7 @@ Types:Creature Beast
 Text:no text
 PT:4/5
 K:Trample
-K:abPump R:+1/-1
+A:AB$Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ Flowstone Mauler gets +1/-1 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_mauler.jpg
 SetInfo:STH|Rare|http://magiccards.info/scans/en/sh/85.jpg

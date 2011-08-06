@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Soldier
 Text:no text
 PT:1/1
-K:abPump W:+0/+1
+A:AB$Pump | Cost$ W | NumDef$ +1 | SpellDescription$ Honor Guard gets +0/+1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/honor_guard.jpg
 SetInfo:8ED|Common|http://magiccards.info/scans/en/8e/25.jpg

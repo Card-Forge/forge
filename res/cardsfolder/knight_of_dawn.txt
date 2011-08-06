@@ -4,11 +4,11 @@ Types:Creature Human Knight
 Text:no text
 PT:2/2
 K:First Strike
-K:abPump W W:Protection from black
-K:abPump W W:Protection from blue
-K:abPump W W:Protection from green
-K:abPump W W:Protection from red
-K:abPump W W:Protection from white
+A:AB$Pump | Cost$ W W | KW$ Protection from black | SpellDescription$ Knight of Dawn gains protection from black until end of turn.
+A:AB$Pump | Cost$ W W | KW$ Protection from blue | SpellDescription$ Knight of Dawn gains protection from blue until end of turn.
+A:AB$Pump | Cost$ W W | KW$ Protection from green | SpellDescription$ Knight of Dawn gains protection from green until end of turn.
+A:AB$Pump | Cost$ W W | KW$ Protection from red | SpellDescription$ Knight of Dawn gains protection from red until end of turn.
+A:AB$Pump | Cost$ W W | KW$ Protection from white | SpellDescription$ Knight of Dawn gains protection from white until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/knight_of_dawn.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/238.jpg

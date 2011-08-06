@@ -4,7 +4,7 @@ Types:Creature Wall
 Text:no text
 PT:0/6
 K:Defender
-K:abPump R:+1/-1
+A:AB$Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ Flowstone Wall gets +1/-1 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_wall.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/86.jpg

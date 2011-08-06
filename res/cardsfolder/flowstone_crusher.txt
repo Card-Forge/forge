@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Creature Beast
 Text:no text
 PT:4/4
-K:abPump R:+1/-1
+A:AB$Pump | Cost$ R | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ Flowstone Crusher gets +1/-1 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowstone_crusher.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/81.jpg

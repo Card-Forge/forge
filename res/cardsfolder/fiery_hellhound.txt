@@ -3,7 +3,7 @@ ManaCost:1 R R
 Types:Creature Elemental Hound
 Text:no text
 PT:2/2
-K:abPump R:+1/+0
+A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ Fiery Hellhound gets +1/+0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_hellhound.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/136.jpg

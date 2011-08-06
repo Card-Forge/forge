@@ -4,7 +4,7 @@ Types:Creature Gargoyle
 Text:no text
 PT:2/2
 K:Flying
-K:abPump R:+0/+1
+A:AB$Pump | Cost$ R | NumDef$ +1 | SpellDescription$ Granite Gargoyle gets +0/+1 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granite_gargoyle.jpg
 SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/157.jpg

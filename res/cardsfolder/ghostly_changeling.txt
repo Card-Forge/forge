@@ -4,7 +4,7 @@ Types:Creature Shapeshifter
 Text:no text
 PT:2/2
 K:Changeling
-K:abPump 1 B:+1/+1
+A:AB$Pump | Cost$ 1 B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Ghostly Changeling gets +1/+1 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghostly_changeling.jpg
 SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/116.jpg

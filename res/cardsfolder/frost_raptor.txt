@@ -4,7 +4,7 @@ Types:Snow Creature Bird
 Text:no text
 PT:2/2
 K:Flying
-K:abPump S S:Shroud
+A:AB$Pump | Cost$ S S | KW$ Shroud | SpellDescription$ Frost Raptor gains shroud until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frost_raptor.jpg
 SetInfo:CSP|Common|http://magiccards.info/scans/en/cs/34.jpg

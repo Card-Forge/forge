@@ -4,7 +4,7 @@ Types:Creature Dragon
 Text:no text
 PT:2/2
 K:Flying
-K:abPump R:+1/+0
+A:AB$Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ Furnace Whelp gets +1/+0 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card73578.jpg
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/65.jpg
