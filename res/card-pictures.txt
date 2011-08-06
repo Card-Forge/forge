@@ -38,6 +38,8 @@ snow_covered_mountain.jpg        http://www.wizards.com/global/images/magic/gene
 snow_covered_mountain1.jpg       http://www.wizards.com/global/images/magic/general/snow_covered_mountain.jpg
 snow_covered_mountain2.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
 snow_covered_mountain3.jpg       http://www.magickartenmarkt.de/img/cards/Ice_Age/snow_covered_mountain.jpg
+tunnel.jpg		http://www.wizards.com/global/images/magic/general/tunnel.jpg
+rend_spirit.jpg		http://www.wizards.com/global/images/magic/general/rend_spirit.jpg
 deception.jpg		http://www.wizards.com/global/images/magic/general/deception.jpg
 mind_knives.jpg		http://www.wizards.com/global/images/magic/general/mind_knives.jpg
 stupor.jpg		http://www.wizards.com/global/images/magic/general/stupor.jpg

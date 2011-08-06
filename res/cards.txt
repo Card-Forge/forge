@@ -1,3 +1,15 @@
+Rend Spirit 
+2 B
+Instant 
+Destroy target Spirit.
+spDestroyTgt:Creature.Spirit
+
+Tunnel 
+R
+Instant 
+Destroy target Wall. It can't be regenerated.
+spDestroyTgt:Creature.Wall:NoRegen
+
 Deception
 2 B
 Sorcery
