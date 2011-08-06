@@ -89,6 +89,8 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
     private JLabel            jLabel2              = new JLabel();
     private JLabel            jLabel3              = new JLabel();
     
+    private JLabel            jLabel4              = new JLabel();
+    
     /*
     public JCheckBox          whiteCheckBox        = new JCheckBox("W", true);
     public JCheckBox          blueCheckBox         = new JCheckBox("U", true);
@@ -798,8 +800,14 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         this.getContentPane().add(statsLabel2, "cell 0 4");
         this.getContentPane().add(pictureViewPanel, "wmin 239, hmin 323, grow, cell 1 4 1 4");
         
-        this.getContentPane().add(addButton, "w 100, h 49, sg button, cell 0 5, split 3");
+        this.getContentPane().add(addButton, "w 100, h 49, sg button, cell 0 5, split 4");
         this.getContentPane().add(removeButton, "w 100, h 49, sg button");
+        
+        // jLabel4 is used to push the analysis button to the right
+        // This will separate this button from the add and remove card buttons
+        jLabel4.setText("");
+        this.getContentPane().add(jLabel4, "wmin 100, grow");
+        
         this.getContentPane().add(analysisButton, "w 100, h 49, wrap");   
         
         this.getContentPane().add(jScrollPane2, "cell 0 6, grow");
