@@ -17909,21 +17909,9 @@ public class GameActionUtil {
 				PlayerZone z = zone[outer];
 				Player player = z.getPlayer();
 				
-				if (AllZoneUtil.getPlayerGraveyard(player).size() >= 7)
+				if (player.hasThreshold())
 				{
-					// CardList creature = new CardList(zone[outer].getCards());
-					CardList creature = new CardList();
-					creature.addAll(AllZone.Human_Play.getCards());
-					creature.addAll(AllZone.Computer_Play.getCards());
-					creature = creature.getType("Creature");
-					
-					creature = creature.filter(new CardListFilter()
-					{
-						public boolean addCard(Card crd)
-						{
-							return crd.getType().contains("Squirrel") || crd.getKeyword().contains("Changeling");
-						}
-					});
+					CardList creature = AllZoneUtil.getTypeInPlay("Squirrel");
 					
 					for(int i = 0; i < creature.size(); i++) {
 						c = creature.get(i);
@@ -18000,14 +17988,8 @@ public class GameActionUtil {
 			}
 
 			list.clear();
-
-			PlayerZone cplay = AllZone.Computer_Play;
-			PlayerZone hplay = AllZone.Human_Play;
-
-			CardList cl = new CardList();
-			cl.addAll(cplay.getCards());
-			cl.addAll(hplay.getCards());
-			cl = cl.getName("Gaddock Teeg");
+			
+			CardList cl = AllZoneUtil.getCardsInPlay("Gaddock Teeg");
 
 			for(int i = 0; i < cl.size(); i++) {
 				CardList spells = new CardList();
@@ -18189,13 +18171,13 @@ public class GameActionUtil {
 	// if Computer has 2 Glorious Anthems, AllZone.Computer_Play will be
 	// returned twice
 	private static PlayerZone[] getZone(String cardName) {
-		CardList all = new CardList();
-		all.addAll(AllZone.Human_Play.getCards());
-		all.addAll(AllZone.Computer_Play.getCards());
+		CardList all = AllZoneUtil.getCardsInPlay();
 
 		ArrayList<PlayerZone> zone = new ArrayList<PlayerZone>();
-		for(int i = 0; i < all.size(); i++)
-			if(all.get(i).getName().equals(cardName) && !all.get(i).isFaceDown()) zone.add(AllZone.getZone(all.get(i)));
+		for(int i = 0; i < all.size(); i++) {
+			Card c = all.get(i);
+			if(c.getName().equals(cardName) && !c.isFaceDown()) zone.add(AllZone.getZone(c));
+		}
 
 		PlayerZone[] z = new PlayerZone[zone.size()];
 		zone.toArray(z);
@@ -18243,7 +18225,6 @@ public class GameActionUtil {
 		commands.put("Deranged_Hermit", Deranged_Hermit);
 		commands.put("Divinity_of_Pride", Divinity_of_Pride);
 		commands.put("Drove_of_Elves", Drove_of_Elves);
-		
 		
 		commands.put("Eladamri", Eladamri);
 		commands.put("Eldrazi_Monument", Eldrazi_Monument);
