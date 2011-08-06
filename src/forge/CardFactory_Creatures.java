@@ -3116,7 +3116,6 @@ public class CardFactory_Creatures {
 	    }//*************** END ************ END **************************
 
 
-
 	    //*************** START *********** START **************************
 	    else if(cardName.equals("Drekavac"))
 	    {

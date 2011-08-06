@@ -2270,8 +2270,7 @@ public class GameActionUtil
 
 		list = list.getName("Mold Adder");
 
-		if (list.size() > 0 && (CardUtil.getColors(c).contains(Constant.Color.White) ||
-					CardUtil.getColors(c).contains(Constant.Color.Blue) ||
+		if (list.size() > 0 && (CardUtil.getColors(c).contains(Constant.Color.Blue) ||
 					CardUtil.getColors(c).contains(Constant.Color.Black) ))
 		{
 			for (int i=0;i<list.size();i++)
