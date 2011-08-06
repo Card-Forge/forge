@@ -9805,6 +9805,8 @@ public class CardFactory implements NewConstants {
             ability.setDescription("G, Sacrifice Midsummer Revel: Put X 3/3 green Beast creature tokens onto the battlefield, where X is the number of verse counters on Midsummer Revel.");
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Thoughtseize") || cardName.equals("Distress")) {
             final SpellAbility spell = new Spell(card) {
@@ -9860,6 +9862,8 @@ public class CardFactory implements NewConstants {
             
             spell.setBeforePayMana(CardFactoryUtil.input_targetPlayer(spell));
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Echoing Decay")) {
