@@ -211,6 +211,7 @@ res/cardsfolder/ant_queen.txt -text svneol=native#text/plain
 res/cardsfolder/anthroplasm.txt -text svneol=native#text/plain
 res/cardsfolder/antler_skulkin.txt -text svneol=native#text/plain
 res/cardsfolder/anurid_barkripper.txt -text svneol=native#text/plain
+res/cardsfolder/anurid_brushhopper.txt svneol=native#text/plain
 res/cardsfolder/anurid_murkdiver.txt -text svneol=native#text/plain
 res/cardsfolder/anvil_of_bogardan.txt svneol=native#text/plain
 res/cardsfolder/apex_hawks.txt -text svneol=native#text/plain

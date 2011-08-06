@@ -12431,6 +12431,42 @@ public class CardFactory_Creatures {
             };//Command
             card.addDestroyCommand(exile);
         }//*************** END ************ END **************************
+        
+      
+        //*************** START *********** START **************************
+        else if(cardName.equals("Anurid Brushhopper")) {
+        	
+        	final SpellAbility toPlay = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    AllZone.GameAction.moveToPlay(card);
+                }
+            }; //ability
+            StringBuilder sb = new StringBuilder();
+            sb.append("Return "+card+" to the battlefield.");
+            toPlay.setStackDescription(sb.toString());
+            
+            final Command eot = new Command() {
+				private static final long serialVersionUID = 911163814565333484L;
+
+				public void execute() {
+            		AllZone.Stack.add(toPlay);
+            	}
+            };
+        	
+        	final Ability_Cost abCost = new Ability_Cost("Discard<2/Any>", cardName, true);
+        	final Ability_Activated toExile = new Ability_Activated(card, abCost, null) {
+				private static final long serialVersionUID = 7850843970664800204L;
+
+				public void resolve() {
+        			AllZone.GameAction.exile(card);
+        			AllZone.EndOfTurn.addAt(eot);
+        		}
+        	};
+        	toExile.setDescription(abCost+"Exile CARDNAME. Return it to the battlefield under its owner's control at the beginning of the next end step.");
+        	toExile.setStackDescription(card+" - exile "+card+".");
+        	card.addSpellAbility(toExile);
+        }//*************** END ************ END **************************
                
         
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
