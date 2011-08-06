@@ -10168,12 +10168,15 @@ public class GameActionUtil {
 
 			// for each zone found add +1/+1 to each card
 			for(int outer = 0; outer < zone.length; outer++) {
-				CardList creature = new CardList(
-						zone[outer].getCards());
+				CardList creature = new CardList();
+				creature.addAll(AllZone.Human_Play.getCards());
+				creature.addAll(AllZone.Computer_Play.getCards());
 
 				for(int i = 0; i < creature.size(); i++) {
 					final Card crd = creature.get(i);
-					CardList Type = new CardList(zone[outer].getCards());
+					CardList Type = new CardList();
+					Type.addAll(AllZone.Human_Play.getCards());
+					Type.addAll(AllZone.Computer_Play.getCards());
 					Type = Type.filter(new CardListFilter() {
 	                    public boolean addCard(Card card) {
 	                        return !card.equals(crd) && card.isCreature() && !crd.getName().equals("Mana Pool");
