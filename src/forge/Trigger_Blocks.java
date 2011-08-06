@@ -20,7 +20,7 @@ public class Trigger_Blocks extends Trigger {
 		}
 		if(mapParams.containsKey("ValidBlocked"))
 		{
-			if(!matchesValid(runParams.get("Attacker"),mapParams.get("ValidCard").split(","),hostCard))
+			if(!matchesValid(runParams.get("Attacker"),mapParams.get("ValidBlocked").split(","),hostCard))
 			{
 				return false;
 			}

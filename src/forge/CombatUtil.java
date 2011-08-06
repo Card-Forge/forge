@@ -690,12 +690,21 @@ public class CombatUtil {
 		{
 			HashMap<String,String> trigParams = trigger.getMapParams();
 			if (trigParams.get("Mode").equals("Blocks")) {
-				String ability = defender.getSVar(trigParams.get("Execute"));
-				AbilityFactory AF = new AbilityFactory();
-        		HashMap<String,String> abilityParams = AF.getMapParams(ability, defender, defender);
-				if (abilityParams.get("AB").equals("Pump")) 
-					if (abilityParams.containsKey("NumAtt")) {
-						power += Integer.parseInt(abilityParams.get("NumAtt"));
+				boolean willTrigger = true;
+				if(trigParams.containsKey("ValidBlocked"))
+					if(!trigger.matchesValid(attacker, trigParams.get("ValidBlocked").split(","), defender))
+						willTrigger = false;
+				if(willTrigger) {
+					String ability = defender.getSVar(trigParams.get("Execute"));
+					AbilityFactory AF = new AbilityFactory();
+	        		HashMap<String,String> abilityParams = AF.getMapParams(ability, defender, defender);
+					if (abilityParams.get("AB").equals("Pump")) 
+						if (abilityParams.containsKey("NumAtt")){
+							String att = abilityParams.get("NumAtt");
+							if (att.startsWith("+"))
+								att = att.substring(1);
+							power += Integer.parseInt(att);
+						}
 				}
 			}
 		}
@@ -716,12 +725,21 @@ public class CombatUtil {
 		{
 			HashMap<String,String> trigParams = trigger.getMapParams();
 			if (trigParams.get("Mode").equals("Blocks")) {
-				String ability = defender.getSVar(trigParams.get("Execute"));
-				AbilityFactory AF = new AbilityFactory();
-        		HashMap<String,String> abilityParams = AF.getMapParams(ability, defender, defender);
-				if (abilityParams.get("AB").equals("Pump")) 
-					if (abilityParams.containsKey("NumDef")) {
-						toughness += Integer.parseInt(abilityParams.get("NumDef"));
+				boolean willTrigger = true;
+				if(trigParams.containsKey("ValidBlocked"))
+					if(!trigger.matchesValid(attacker, trigParams.get("ValidBlocked").split(","), defender))
+						willTrigger = false;
+				if(willTrigger) {
+					String ability = defender.getSVar(trigParams.get("Execute"));
+					AbilityFactory AF = new AbilityFactory();
+	        		HashMap<String,String> abilityParams = AF.getMapParams(ability, defender, defender);
+					if (abilityParams.get("AB").equals("Pump")) 
+						if (abilityParams.containsKey("NumDef")) {
+							String def = abilityParams.get("NumDef");
+							if (def.startsWith("+"))
+								def = def.substring(1);
+							toughness += Integer.parseInt(def);
+						}
 				}
 			}
 		}
