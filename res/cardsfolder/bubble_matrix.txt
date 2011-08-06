@@ -1,0 +1,9 @@
+Name:Bubble Matrix
+ManaCost:4
+Types:Artifact
+Text:no text
+K:stPumpAll:Creature:0/0/Prevent all damage that would be dealt to CARDNAME.:No Condition:Prevent all damage that would be dealt to creatures.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bubble_matrix.jpg
+End
