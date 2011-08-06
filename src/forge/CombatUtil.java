@@ -694,23 +694,35 @@ public class CombatUtil {
 		boolean willTrigger = false;
 		Card source = trigger.getHostCard();
 		
+		if (!trigger.zonesCheck()) return false;
+		if (!trigger.requirementsCheck()) return false;
+		
+		if (trigParams.get("Mode").equals("Attacks")) {
+			willTrigger = true;
+			if (attacker.isAttacking()) return false; //The trigger should have triggered already
+			if(trigParams.containsKey("ValidCard"))
+				if(!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), source))
+					return false;
+		}
+		
 		if (trigParams.get("Mode").equals("Blocks")) {
 			willTrigger = true;
 			if(trigParams.containsKey("ValidBlocked"))
 				if(!trigger.matchesValid(attacker, trigParams.get("ValidBlocked").split(","), source))
-					willTrigger = false;
+					return false;
 			if(trigParams.containsKey("ValidCard"))
 				if(!trigger.matchesValid(defender, trigParams.get("ValidCard").split(","), source))
-					willTrigger = false;
+					return false;
 		}
+		
 		else if (trigParams.get("Mode").equals("AttackerBlocked")) {
 			willTrigger = true;
 			if(trigParams.containsKey("ValidBlocker"))
 				if(!trigger.matchesValid(defender, trigParams.get("ValidBlocker").split(","), source))
-					willTrigger = false;
+					return false;
 			if(trigParams.containsKey("ValidCard"))
 				if(!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","), source))
-					willTrigger = false;
+					return false;
 		}
 		
 		return willTrigger;
