@@ -4704,11 +4704,11 @@ public class GameActionUtil {
 		if(c.getName().equals("Ghastlord of Fugue")) playerCombatDamage_Ghastlord_of_Fugue(c);
 		else if(c.getName().equals("Garza Zol, Plague Queen")) playerCombatDamage_May_draw(c);
 		else if(c.getName().equals("Scalpelexis")) playerCombatDamage_Scalpelexis(c); 
-		else if(c.getName().equals("Guul Draz Specter")) opponent_Discard(c, 1);
-		else if(c.getName().equals("Chilling Apparition")) opponent_Discard(c, 1);
-		else if(c.getName().equals("Sedraxis Specter")) opponent_Discard(c, 1);
-		else if(c.getName().equals("Headhunter")) opponent_Discard(c, 1);
-		else if(c.getName().equals("Riptide Pilferer")) opponent_Discard(c, 1);
+		//else if(c.getName().equals("Guul Draz Specter")) opponent_Discard(c, 1);
+		//else if(c.getName().equals("Chilling Apparition")) opponent_Discard(c, 1);
+		//else if(c.getName().equals("Sedraxis Specter")) opponent_Discard(c, 1);
+		//else if(c.getName().equals("Headhunter")) opponent_Discard(c, 1);
+		//else if(c.getName().equals("Riptide Pilferer")) opponent_Discard(c, 1);
 		else if(c.getName().equals("Shadowmage Infiltrator")) playerCombatDamage_Shadowmage_Infiltrator(c);
 		else if(c.getName().equals("Augury Adept")) playerCombatDamage_Augury_Adept(c);
 		else if(c.getName().equals("Spawnwrithe")) playerCombatDamage_Spawnwrithe(c);
@@ -4725,7 +4725,7 @@ public class GameActionUtil {
 		else if(c.getName().equals("Rith, the Awakener")) playerCombatDamage_Rith(c);
 		else if(c.getName().equals("Vorosh, the Hunter")) playerCombatDamage_Vorosh(c);
 		else if(c.getName().equals("Doomsday Specter")) opponent_Discard_You_Choose(c);
-		else if(c.getName().equals("Silent Specter")) opponent_Discard(c, 2);
+		//else if(c.getName().equals("Silent Specter")) opponent_Discard(c, 2);
 		else if(c.getName().equals("The Unspeakable")) may_Return_Graveyard_to_Hand(c, "Arcane".split(","));
 		else if(c.getName().equals("Woebearer")) may_Return_Graveyard_to_Hand(c, "Creature".split(","));
 		else if(c.isEnchantedBy("Necromantic Thirst")) may_Return_Graveyard_to_Hand(c, "Creature".split(","));
@@ -5355,6 +5355,7 @@ public class GameActionUtil {
 		}
 	}
 	
+	/*
 	private static void opponent_Discard(final Card source, final int num) {
 		final Player player = source.getController().getOpponent();
 
@@ -5373,7 +5374,7 @@ public class GameActionUtil {
 			
 			AllZone.Stack.add(ability);
 		}
-	}
+	}*/
 	
 	private static void opponent_Discard_You_Choose(final Card source) {
 		final Player player = source.getController().getOpponent();
