@@ -20821,13 +20821,17 @@ public class CardFactory_Creatures {
 
         	final Card[] tgt = new Card[1];
         	final Command untilEOT = new Command() {
-        		public void execute() {
+				private static final long serialVersionUID = -2965655379557016324L;
+
+				public void execute() {
         			tgt[0].setShield(0);                    
         		}
         	};
 
         	SpellAbility ability = new Ability_Activated(card, abCost, target) {
-        		@Override
+				private static final long serialVersionUID = -5837325332051427693L;
+
+				@Override
         		public void resolve() {
         			tgt[0] = getTargetCard();
         			tgt[0].addShield();
@@ -20848,7 +20852,6 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
             ability.setDescription("G: Regenerate another target Elf.");
             
-            //ability.setBeforePayMana(CardFactoryUtil.input_targetCreature_NoCost_TapAbility_NoTargetSelf(ability));
         }//*************** END ************ END **************************
                
         if(hasKeyword(card, "Level up") != -1 && hasKeyword(card, "maxLevel") != -1)
