@@ -3,6 +3,7 @@ ManaCost:1 U B
 Types:Creature Demon Illusion
 Text:no text
 PT:4/3
+K:Flying
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you cast a spell, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Self
 SVar:RemRandomDeck:True
