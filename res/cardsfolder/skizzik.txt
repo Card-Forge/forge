@@ -1,0 +1,11 @@
+Name:Skizzik
+ManaCost:3 R
+Types:Creature Elemental
+Text:At the beginning of the end step, sacrifice Skizzik unless it was kicked.
+PT:5/3
+K:Haste
+K:Trample
+K:At the beginning of the end step, sacrifice CARDNAME.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skizzik.jpg
+End

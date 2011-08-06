@@ -13438,7 +13438,8 @@ public class CardFactory_Creatures {
         	card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
         
-      //*************** START *********** START **************************
+        
+        //*************** START *********** START **************************
         else if(cardName.equals("Sea Gate Oracle")) {
         	final Ability ability = new Ability(card, "") {
         		@Override
@@ -13475,6 +13476,63 @@ public class CardFactory_Creatures {
         	};
 
         	card.addComesIntoPlayCommand(intoPlay);
+        }//*************** END ************ END **************************
+        
+        
+        //*************** START *********** START ************************** 
+        else if(cardName.equals("Skizzik")) {
+            final SpellAbility kicker = new Spell(card) {
+                private static final long serialVersionUID = -1598664196463358630L;
+                
+                @Override
+                public void resolve() {
+                    PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
+                    PlayerZone play = AllZone.getZone(Constant.Zone.Battlefield, card.getController());
+                    
+                    card.setKicked(true);
+                    hand.remove(card);
+                    play.add(card);
+                }
+                
+                @Override
+                public boolean canPlay() {
+                    return super.canPlay() && AllZone.Phase.getPlayerTurn().equals(card.getController())
+                            && !AllZone.Phase.getPhase().equals("End of Turn")
+                            && !AllZone.GameAction.isCardInPlay(card);
+                }
+                
+            };
+            kicker.setKickerAbility(true);
+            kicker.setManaCost("3 R R");
+            kicker.setAdditionalManaCost("R");
+            kicker.setDescription("Kicker R");
+            
+            StringBuilder sb = new StringBuilder();
+            sb.append(card.getName()).append(" - Creature 5/3 (Kicked)");
+            kicker.setStackDescription(sb.toString());
+            
+            card.addSpellAbility(kicker);
+            
+            final Ability ability = new Ability(card, "0") {
+                @Override
+                public void resolve() {
+                    card.removeIntrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
+                	card.setKicked(false);
+                }
+            };
+            
+            Command commandComes = new Command() {
+				private static final long serialVersionUID = -5895458115371755529L;
+
+				public void execute() {
+                    if(card.isKicked()) {
+                            ability.setStackDescription(card.getName()+" is not sacrificed at end of turn.");
+                            AllZone.Stack.add(ability);
+                    }
+                }//execute()
+            };//CommandComes
+            
+            card.addComesIntoPlayCommand(commandComes);
         }//*************** END ************ END **************************
         
                
