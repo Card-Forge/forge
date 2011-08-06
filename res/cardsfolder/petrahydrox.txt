@@ -5,6 +5,6 @@ Text:no text
 PT:3/3
 K:When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.
 SVar:RemAIDeck:True
-SVar:Rarity:common
+SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petrahydrox.jpg
 End
