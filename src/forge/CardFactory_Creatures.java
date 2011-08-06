@@ -17975,6 +17975,7 @@ public class CardFactory_Creatures {
         			if(zone.is(Constant.Zone.Play) && c.isUntapped() && 
         					c.isCreature() && (c.getNetAttack() <= 3)) {
         				ability.setTargetCard(c);
+        				card.tap();
         				 AllZone.Stack.add(ability);
         				 stop();
         			}
