@@ -12728,64 +12728,6 @@ public class CardFactory_Creatures {
         
         
         //*************** START *********** START **************************
-        else if(cardName.equals("Ifh-Biff Efreet")) {
-            final SpellAbility ability = new Ability(card, "G") {
-            	
-                @Override
-                public boolean canPlayAI() {
-					//todo(sol) setting up some AI for next go through
-					//CardList human = new CardList(AllZone.Human_Play.getCards());
-					//CardList computer = new CardList(AllZone.Computer_Play.getCards());
-					  
-					//human = human.getType("Creature").getKeyword("Flying");
-					//computer = computer.getType("Creature").getKeyword("Flying");
-                	
-					//int compLife = AllZone.ComputerPlayer.getLife();
-					//int humanLife = AllZone.HumanPlayer.getLife();
-					
-					// if complife > humanLife && humanlife <= available green mana, try to kill human
-					
-                	if (card.getController().equals(AllZone.ComputerPlayer)){
-                		// needs to be careful activating ability if human has green mana available
-                	}
-                	else{
-                		// should try to kill human's flyers but spare own
-                		return true;
-                	}
-
-                	return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    //get all creatures
-                    CardList list = AllZoneUtil.getCreaturesInPlay();
-                    list = list.getKeyword("Flying");
-                    
-                    for(int i = 0; i < list.size(); i++) {
-                        if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
-                    }
-                    
-                    AllZone.HumanPlayer.addDamage(1, card);
-                    AllZone.ComputerPlayer.addDamage(1, card);
-                }//resolve()
-            };//SpellAbility
-            
-            StringBuilder sbDesc = new StringBuilder();
-            sbDesc.append("G: Ifh-Biff Efreet deals 1 damage to each creature with ");
-            sbDesc.append("flying and each player. Any player may activate this ability");
-            ability.setDescription(sbDesc.toString());
-            
-            StringBuilder sbStack = new StringBuilder();
-            sbStack.append(card).append(" deals 1 damage to each flying creature and each player.");
-            ability.setStackDescription(sbStack.toString());
-            
-            ability.getRestrictions().setAnyPlayer(true);
-            card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
         else if (cardName.equals("Roc Egg")) {
             final SpellAbility ability = new Ability(card, "0") {
                 
