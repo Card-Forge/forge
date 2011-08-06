@@ -21661,11 +21661,6 @@ no text
 2/2
 Flying
 
-Klaas, Elf Friend
-3 G G
-Enchantment
-At the beginning of your upkeep, if you control 10 or more Elves, you win the game.
-
 Treetop Village
 no cost
 Land
@@ -22084,13 +22079,6 @@ Boil
 3 R
 Instant
 Destroy all Islands.
-
-Tortuga
-no cost
-Land MTG Cast Promo
-no text
-tap: add 1
-tap: Discard a card, then draw a card.
 
 Dryad Arbor
 no cost
@@ -23991,11 +23979,6 @@ Land Swamp Forest
 no text
 tap: add B
 tap: add G
-
-Test Destroy
-1
-Instant
-Destroy target permanent.
 
 Royal Assassin
 1 B B

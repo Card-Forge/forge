@@ -14,6 +14,7 @@ res/booster-decks -text svneol=unset#unset
 res/card-pictures-token.txt -text svneol=native#text/plain
 res/card-pictures.txt -text svneol=native#text/plain
 res/cards.txt -text svneol=native#text/plain
+res/cardsScript.py -text svneol=native#text/x-python
 res/common.txt -text svneol=native#text/plain
 res/draft/common.txt -text svneol=native#text/plain
 res/draft/draft.properties -text svneol=native#text/plain
