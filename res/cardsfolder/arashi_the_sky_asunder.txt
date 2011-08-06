@@ -1,7 +1,7 @@
 Name:Arashi, the Sky Asunder
 ManaCost:3 G G
 Types:Legendary Creature Spirit
-Text:(NOTE: "X G, T: Arashi, the Sky Asunder deals X damage to target creature with flying." not implemented.) (NOTE: "Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
+Text:(NOTE: "X G, tap: Arashi, the Sky Asunder deals X damage to target creature with flying." not implemented.) (NOTE: "Channel - X G G, Discard Arashi: Arashi deals X damage to each creature with flying." not implemented.)
 PT:5/5
 K:SVar:RemAIDeck:True
 K:SVar:Rarity:Rare
