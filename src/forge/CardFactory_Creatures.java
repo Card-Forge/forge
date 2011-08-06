@@ -13646,24 +13646,30 @@ public class CardFactory_Creatures {
     						return c.isCreature() && c.getNetAttack() <=2;
     					}
     				});
+    				
+    				if (graveList.size() == 0)
+    					return;
+    				
+					PlayerZone battlefield = AllZone.getZone(Constant.Zone.Battlefield, player);
+    				
         			if( player.equals(AllZone.HumanPlayer)) {
-        				if(graveList.size() > 0) {
-        					for(int i = 0; i < 2; i++) {
-        						Card c = AllZone.Display.getChoiceOptional("Select creature", graveList.toArray());
-        						if(c == null) break;
-        						AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Battlefield, player), c);
-        						graveList.remove(c);
-        					}
-        				}
+    					for(int i = 0; i < 2; i++) {
+    						if(graveList.size() == 0)  break;
+    						
+    						Card c = AllZone.Display.getChoiceOptional("Select creature", graveList.toArray());
+    						if(c == null) break;
+    						AllZone.GameAction.moveTo(battlefield, c);
+    						graveList.remove(c);
+    					}
         			}
         			else{ //computer
-        				if(graveList.size() > 0) {
-        					int end = graveList.size();
-        					graveList.shuffle();
-        					for(int i=0;i<end;i++) {
-        						AllZone.GameAction.moveTo(AllZone.getZone(Constant.Zone.Battlefield, player), graveList.get(i));
-        					}
-        				}
+    					for(int i=0; i < 2; i++) {
+    						if(graveList.size() == 0)  break;
+    						
+    						Card c = CardFactoryUtil.AI_getBestCreature(graveList);
+    						AllZone.GameAction.moveTo(battlefield, c);
+    						graveList.remove(c);
+    					}
         			}
         		}//resolve()
         	};//SpellAbility
