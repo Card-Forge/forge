@@ -2977,7 +2977,11 @@ public class Card extends MyObservable {
     	else
 	        if(source.getKeyword().contains("Deathtouch")) {
 	        	for(int i=1; i <= maxDamage; i++) {
-	        		if (predictDamage(i, source, isCombat) > 0)
+	        		if (noPrevention) {
+	        			if (staticReplaceDamage(i, source, isCombat) > 0)
+		        			return i;
+	        		}
+	        		else if (predictDamage(i, source, isCombat) > 0)
 	        			return i;
 	        	}
 	        }

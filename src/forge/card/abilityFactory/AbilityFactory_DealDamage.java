@@ -292,8 +292,9 @@ public class AbilityFactory_DealDamage {
 
 	private Card chooseTgtC(final int d, final boolean noPrevention, final Player pl, final boolean mandatory) {
 		Target tgt = AF.getAbTgt();
+		final Card source = AF.getHostCard();
 		CardList hPlay = AllZoneUtil.getPlayerCardsInPlay(pl);
-		hPlay = hPlay.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, AF.getHostCard());
+		hPlay = hPlay.getValidCards(tgt.getValidTgts(), AllZone.ComputerPlayer, source);
 
 		ArrayList<Object> objects = tgt.getTargets();
 		for(Object o : objects){
@@ -303,19 +304,12 @@ public class AbilityFactory_DealDamage {
 					hPlay.remove(c);
 			}
 		}
-		hPlay = hPlay.getTargetableCards(AF.getHostCard());
+		hPlay = hPlay.getTargetableCards(source);
 
 		CardList killables = hPlay.filter(new CardListFilter() {
 			public boolean addCard(Card c) {
-				int restDamage = d;
-				if (!noPrevention)
-					restDamage = c.predictDamage(d,AF.getHostCard(),false);
-				else 
-					restDamage = c.staticReplaceDamage(restDamage, AF.getHostCard(), false);
-				
-				// will include creatures already dealt damage
-				return c.getKillDamage() <= restDamage && c.getShield() == 0 &&
-					!c.getKeyword().contains("Indestructible") && !(c.getSVar("SacMe").length() > 0);
+				return (c.getEnoughDamageToKill(d, source, false, noPrevention) <= d ) 
+					&& !(c.getSVar("SacMe").length() > 0);
 			}
 		});
 
