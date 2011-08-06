@@ -359,6 +359,11 @@ public class Card extends MyObservable {
         } else return 0;
     }
     
+    public boolean hasCounters()
+    {
+    	return counters.size() > 0;
+    }
+    
     public void setCounter(Counters counterName, int n) {
         counters.put(counterName, Integer.valueOf(n));
         this.updateObservers();
