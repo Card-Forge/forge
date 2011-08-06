@@ -18,7 +18,6 @@ res/lang/howTo/de.properties svneol=native#text/plain
 res/lang/howTo/en.properties svneol=native#text/plain
 res/lang/lang.properties svneol=native#text/plain
 res/main.properties svneol=native#text/plain
-res/name-mutator.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_a.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_b.txt -text svneol=native#text/plain
 res/pics_link/card-pictures_c.txt -text svneol=native#text/plain

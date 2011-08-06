@@ -18,7 +18,7 @@ public class NameChanger implements NewConstants {
     private boolean             changeCardName;
     
     public NameChanger() {
-        readFile();
+//      readFile();
         setShouldChangeCardName(false);
     }
     
@@ -90,7 +90,8 @@ public class NameChanger implements NewConstants {
         return o.toString();
     }//getOriginalName()
     
-    private void readFile() {
+    @SuppressWarnings("unused")
+	private void readFile() {
         try {
             BufferedReader in = new BufferedReader(new FileReader(ForgeProps.getFile(NAME_MUTATOR)));
             
