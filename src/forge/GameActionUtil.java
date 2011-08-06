@@ -143,6 +143,9 @@ public class GameActionUtil {
 		// card gets played
 		// (called in MagicStack.java)
 		Card c = sa.getSourceCard();
+		
+		if (c.getName().equals("Kozilek, Butcher of Truth"))
+			playCard_Kozilek(c);
 
 		playCard_Cascade(c);
 
@@ -188,6 +191,21 @@ public class GameActionUtil {
 		playCard_Kor_Firewalker(c);       
 	}
 
+	public static void playCard_Kozilek(Card c)
+	{
+		final String controller = c.getController();
+		final Ability ability = new Ability(c, "0")
+		{
+			public void resolve()
+			{
+				for (int i=0;i<4;i++)
+					AllZone.GameAction.drawCard(controller);
+			}
+		};
+		ability.setStackDescription("Kozilek - draw four cards.");
+		AllZone.Stack.add(ability);
+	}
+	
 	public static void playCard_Cascade(Card c) {
 
 		if(c.getKeyword().contains("Cascade") || c.getName().equals("Bituminous Blast")) //keyword gets cleared for Bitumonous Blast

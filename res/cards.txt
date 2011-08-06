@@ -1,7 +1,7 @@
 Kozilek, Butcher of Truth
 10
 Legendary Creature Eldrazi
-no text
+When you cast Kozilek, Butcher of Truth, draw four cards.
 12/12
 Annihilator 4
 When this card is put into a graveyard from anywhere, reveal this card and shuffle it into its owner's library instead.
