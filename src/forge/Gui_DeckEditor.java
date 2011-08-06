@@ -545,10 +545,10 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         int land = deck.getType("Land").size();
         
         StringBuffer show = new StringBuffer();
-        show.append("Total - ").append(total).append(", Creatures - ").append(creature).append(", Land - ").append(land);
+        show.append("Total: ").append(total).append(", Creatures: ").append(creature).append(", Land: ").append(land);
         String[] color = Constant.Color.Colors;
         for(int i = 0; i < 5; i++)
-        	show.append(", ").append(color[i]).append(" - ").append(CardListUtil.getColor(deck, color[i]).size());
+        	show.append(", ").append(color[i]).append(": ").append(CardListUtil.getColor(deck, color[i]).size());
         
         return show.toString();
     }//getStats()
@@ -577,8 +577,11 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         border2 = BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140));
         titledBorder2 = new TitledBorder(border2, "Deck");
         this.getContentPane().setLayout(null);
+        String toolTip = "Click on the column name (like name or color) to sort the cards";
         jScrollPane1.setBorder(titledBorder1);
+        jScrollPane1.setToolTipText(toolTip);
         jScrollPane2.setBorder(titledBorder2);
+        jScrollPane2.setToolTipText(toolTip);
         //removeButton.setIcon(upIcon);
         if(!Gui_NewGame.useLAFFonts.isSelected()) removeButton.setFont(new java.awt.Font("Dialog", 0, 13));
         removeButton.setText("Remove from Deck");
@@ -660,18 +663,16 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         colorlessCheckBox.setOpaque(false);
         
         picture.addMouseListener(new CustomListener());
-        // if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
-        if (!Gui_NewGame.useLAFFonts.isSelected()) statsLabel.setFont(new java.awt.Font("Dialog", 0, 13));
-        statsLabel.setText("Total - 0, Creatures - 0 Land - 0");
+        if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel.setFont(new java.awt.Font("Dialog", 0, 14));
+        statsLabel.setText("Total: 0, Creatures: 0, Land: 0");
         //Do not lower statsLabel any lower, we want this to be visible at 1024 x 768 screen size
         this.setTitle("Deck Editor");
         jScrollPane3.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         jPanel3.setLayout(gridLayout1);
         gridLayout1.setColumns(1);
         gridLayout1.setRows(0);
-        statsLabel2.setText("Total - 0, Creatures - 0 Land - 0");
-        // if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
-        if (!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 13));
+        statsLabel2.setText("Total: 0, Creatures: 0, Land: 0");
+        if(!Gui_NewGame.useLAFFonts.isSelected()) statsLabel2.setFont(new java.awt.Font("Dialog", 0, 14));
         /* jLabel1.setText("Click on the column name (like name or color) to sort the cards"); */
         
         pictureViewPanel.setCardPanel(picture);
@@ -694,7 +695,7 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         this.getContentPane().add(greenCheckBox, "");
         this.getContentPane().add(colorlessCheckBox, "");
 
-        this.getContentPane().add(filterButton, "wmin 100, hmin 25");
+        this.getContentPane().add(filterButton, "wmin 100, hmin 25, wmax 140, hmax 25, grow");
         
         this.getContentPane().add(jScrollPane1, "cell 0 2 1 2, pushy, grow");
         // this.getContentPane().add(detail, "w 239, h 323, grow, flowy, wrap");
@@ -703,16 +704,19 @@ public class Gui_DeckEditor extends JFrame implements CardContainer, DeckDisplay
         this.getContentPane().add(changePictureButton, "align 50% 0%, cell 1 3, split 2, flowx");
         this.getContentPane().add(removePictureButton, "align 50% 0%, wrap");
         
-        jLabel1.setText("By name: ");
+        jLabel1.setText("Name:");
+        jLabel1.setToolTipText("Card names must include the text in this field");
         this.getContentPane().add(jLabel1, "cell 0 1, split 6");
-        this.getContentPane().add(searchTextField, "wmin 120");
+        this.getContentPane().add(searchTextField, "wmin 100, grow");
         
-        jLabel2.setText("By type: ");
+        jLabel2.setText("Type:");
+        jLabel2.setToolTipText("Card types must include the text in this field");
         this.getContentPane().add(jLabel2, "");
-        this.getContentPane().add(searchTextField2, "wmin 120");
-        jLabel3.setText("By description: ");
+        this.getContentPane().add(searchTextField2, "wmin 100, grow");
+        jLabel3.setText("Text:");
+        jLabel3.setToolTipText("Card descriptions must include the text in this field");
         this.getContentPane().add(jLabel3, "");
-        this.getContentPane().add(searchTextField3, "wmin 200, wrap");
+        this.getContentPane().add(searchTextField3, "wmin 200, grow, wrap");
         
         this.getContentPane().add(statsLabel2, "cell 0 4");
         this.getContentPane().add(pictureViewPanel, "wmin 239, hmin 323, grow, cell 1 4 1 4");
