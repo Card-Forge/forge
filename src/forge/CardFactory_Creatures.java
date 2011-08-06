@@ -435,7 +435,7 @@ public class CardFactory_Creatures {
             a1.setDescription(abCost+"For each counter on target permanent, put another of those counters on that permanent.");
         }//*************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Crater Hellion")) {
             final SpellAbility ability = new Ability(card, "0") {
@@ -497,7 +497,7 @@ public class CardFactory_Creatures {
             card.addComesIntoPlayCommand(intoPlay);
             
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Lava Hounds")) {
@@ -3848,7 +3848,7 @@ public class CardFactory_Creatures {
             ability.setDescription(abCost+"Destroy target land. If that land was nonbasic, untap Helldozer.");
         }//*************** END ************ END **************************
                
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Spitting Spider")) {
         	// temporary fix until DamageAll is created
@@ -3877,7 +3877,7 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability);
         }//*************** END ************ END **************************
-        
+        */
         
         //*************** START *********** START **************************
         else if(cardName.equals("Obsidian Fireheart")) {
@@ -3918,7 +3918,7 @@ public class CardFactory_Creatures {
             card.addSpellAbility(ability);
         }// *************** END ************ END **************************
         
-        
+        /*
         //*************** START *********** START **************************
         else if(cardName.equals("Subterranean Spirit")) {
             Ability_Cost abCost = new Ability_Cost("T", cardName, true);
@@ -3950,65 +3950,6 @@ public class CardFactory_Creatures {
             
             ability.setDescription(abCost+cardName+" deals 1 damage to each creature without flying.");
             card.addSpellAbility(ability);
-        }//*************** END ************ END **************************
-        
-        /*
-        //*************** START *********** START **************************
-        else if(cardName.equals("Scourge of Kher Ridges")) {
-            
-            final Ability ability = new Ability(card, "1 R") {
-            	
-                @Override
-                public void resolve() {
-                	
-      				CardList all = AllZoneUtil.getCreaturesInPlay();
-                    all = all.filter(new CardListFilter()
-                    {
-                    	public boolean addCard(Card c)
-                    	{
-                    		return !c.getKeyword().contains("Flying");
-                    	}
-                    });
-                    
-                    for(int i = 0; i < all.size(); i++)
-                        	all.get(i).addDamage(2, card);
-
-                }//resolve()
-            };//SpellAbility
-            
-            StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" deals 2 damage to each creature without flying.");
-            ability.setStackDescription(sb.toString());
-            
-            ability.setDescription("1 R: Scourge of Kher Ridges deals 2 damage to each creature without flying.");
-            card.addSpellAbility(ability);
-            
-            final Ability a2 = new Ability(card, "5 R") {
-            	
-                @Override
-                public void resolve() {
-                	
-      				CardList all = AllZoneUtil.getCreaturesInPlay();
-                    all = all.filter(new CardListFilter()
-                    {
-                    	public boolean addCard(Card c)
-                    	{
-                    		return c.getKeyword().contains("Flying");
-                    	}
-                    });
-                    
-                    for(int i = 0; i < all.size(); i++)
-                        	all.get(i).addDamage(6, card);
-
-                }//resolve()
-            };//SpellAbility
-            
-            StringBuilder sb2 = new StringBuilder();
-            sb2.append(card).append(" deals 6 damage to each other creature with flying.");
-            a2.setStackDescription(sb2.toString());
-            
-            a2.setDescription("5 R: Scourge of Kher Ridges deals 6 damage to each creature with flying.");
-            card.addSpellAbility(a2);
         }//*************** END ************ END **************************
         */
         
@@ -4758,6 +4699,7 @@ public class CardFactory_Creatures {
             ability.setBeforePayMana(runtime);
         }//*************** END ************ END **************************
 
+        
         //*************** START *********** START **************************
         else if(cardName.equals("Transluminant")) {
             final Command atEOT = new Command() {
@@ -4889,8 +4831,7 @@ public class CardFactory_Creatures {
                     
                     if(list.size() == 1) AllZone.GameAction.exile(list.get(0));
                 }
-            });
-            
+            });            
         }//*************** END ************ END **************************
         
         
