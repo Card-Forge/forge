@@ -4680,7 +4680,7 @@ public class CardFactory_Sorceries {
         			//Hand
         			CardList humHand = AllZoneUtil.getPlayerHand(AllZone.HumanPlayer);
         			CardList compHand = AllZoneUtil.getPlayerHand(AllZone.ComputerPlayer);
-        			int handDiff = humHand.size() - compHand.size();
+        			int handDiff = Math.abs(humHand.size() - compHand.size());
         			
         			if (compHand.size() > humHand.size())
         			{
@@ -6444,7 +6444,7 @@ public class CardFactory_Sorceries {
         //*************** START *********** START **************************
         else if(cardName.equals("Sanity Grinding")) {
         	/*
-        	 * Chroma � Reveal the top ten cards of your library. For each blue
+        	 * Chroma - Reveal the top ten cards of your library. For each blue
         	 * mana symbol in the mana costs of the revealed cards, target opponent
         	 * puts the top card of his or her library into his or her graveyard.
         	 * Then put the cards you revealed this way on the bottom of your
@@ -6726,6 +6726,7 @@ public class CardFactory_Sorceries {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Molten Psyche")) {
@@ -7033,6 +7034,7 @@ public class CardFactory_Sorceries {
         	card.clearSpellAbility();
         	card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+        
         
     	return card;
     }//getCard
