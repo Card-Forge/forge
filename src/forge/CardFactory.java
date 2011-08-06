@@ -5409,7 +5409,9 @@ public class CardFactory implements NewConstants {
             sb.append(numCounters);
             sb.append(" ");
             sb.append(counter.getName());
-            sb.append(" counters on it.");
+            sb.append(" counter");
+            if(1 != numCounters) sb.append("s"); 
+            sb.append(" on it.");
             
             card.setText(sb.toString());
 
