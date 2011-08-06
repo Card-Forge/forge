@@ -2,7 +2,7 @@ Name:Karma
 ManaCost:2 W W
 Types:Enchantment
 Text:At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps he or she controls.
-SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karma.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/28.jpg
