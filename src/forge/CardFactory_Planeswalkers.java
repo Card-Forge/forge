@@ -2097,14 +2097,18 @@ class CardFactory_Planeswalkers {
                         AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
                     } else if((card.isCreature() || card.isPlaneswalker()) && zone.is(Constant.Zone.Play)) {
                         ability2.setTargetCard(card);
-                        stopSetNext(new Input_PayManaCost(ability2));
+                        //stopSetNext(new Input_PayManaCost(ability2));
+                        AllZone.Stack.add(ability2);
+                        stop();
                     }
                 }//selectCard()
                 
                 @Override
                 public void selectPlayer(String player) {
                     ability2.setTargetPlayer(player);
-                    stopSetNext(new Input_PayManaCost(ability2));
+                    //stopSetNext(new Input_PayManaCost(ability2));
+                    AllZone.Stack.add(ability2);
+                    stop();
                 }
             };
             ability2.setBeforePayMana(target);

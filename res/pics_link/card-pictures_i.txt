@@ -100,7 +100,7 @@ indentured_oaf.jpg	http://[server]/RAV/Indentured%20Oaf.full.jpg
 independent_troops.jpg	http://[server]/P3/Independent%20Troops.full.jpg
 indestructibility.jpg	http://[server]/M10/Indestructibility.full.jpg
 indestructible_aura.jpg	http://[server]/LG/Indestructible%20Aura.full.jpg
-index.jpg	http://[server]/9E/Index.full.jpg
+index.jpg	http://[server]/AP/Index.full.jpg
 indigo_faerie.jpg	http://[server]/EVE/Indigo%20Faerie.full.jpg
 indomitable_ancients.jpg	http://[server]/MOR/Indomitable%20Ancients.full.jpg
 indomitable_will.jpg	http://[server]/CHK/Indomitable%20Will.full.jpg

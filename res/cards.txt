@@ -1,3 +1,9 @@
+Broodwarden
+3 G G
+Creature Eldrazi Drone
+Eldrazi Spawn creatures you control get +2/+1.
+4/4
+
 Garza Zol, Plague Queen
 4 U B R
 Legendary Creature Vampire

@@ -30,7 +30,7 @@ safehold_elite.jpg	http://[server]/SHM/Safehold%20Elite.full.jpg
 safehold_sentry.jpg	http://[server]/SHM/Safehold%20Sentry.full.jpg
 safewright_quest.jpg	http://[server]/SHM/Safewright%20Quest.full.jpg
 saffi_eriksdotter.jpg	http://[server]/TSP/Saffi%20Eriksdotter.full.jpg
-sage_aven.jpg	http://[server]/9E/Sage%20Aven.full.jpg
+sage_aven.jpg	http://[server]/ON/Sage%20Aven.full.jpg
 sage_of_epityr.jpg	http://[server]/TSP/Sage%20of%20Epityr.full.jpg
 sage_of_fables.jpg	http://[server]/MOR/Sage%20of%20Fables.full.jpg
 sage_of_lat_nam.jpg	http://[server]/8E/Sage%20of%20Lat-Nam.full.jpg
@@ -749,7 +749,7 @@ skyward_eye_prophets.jpg	http://[server]/CFX/Skyward%20Eye%20Prophets.full.jpg
 skywing_aven.jpg	http://[server]/TO/Skywing%20Aven.full.jpg
 slagwurm_armor.jpg	http://[server]/MR/Slagwurm%20Armor.full.jpg
 slashing_tiger.jpg	http://[server]/P3/Slashing%20Tiger.full.jpg
-slate_of_ancestry.jpg	http://[server]/9E/Slate%20of%20Ancestry.full.jpg
+slate_of_ancestry.jpg	http://[server]/ON/Slate%20of%20Ancestry.full.jpg
 slaughter.jpg	http://[server]/EX/Slaughter.full.jpg
 slaughter_cry.jpg	http://[server]/ZEN/Slaughter%20Cry.full.jpg
 slaughter_pact.jpg	http://[server]/FUT/Slaughter%20Pact.full.jpg

@@ -12656,6 +12656,48 @@ public class GameActionUtil {
 
 	}; //Privileged_Position_Other
 
+	public static Command Broodwarden      = new Command() {
+
+		private static final long serialVersionUID = -9033688979680507210L;
+		CardList                  gloriousAnthemList = new CardList();
+
+		public void execute() {
+
+			CardList cList = gloriousAnthemList;
+			Card c;
+
+			for(int i = 0; i < cList.size(); i++) {
+				c = cList.get(i);
+				c.addSemiPermanentAttackBoost(-2);
+				c.addSemiPermanentDefenseBoost(-1);
+			}
+			cList.clear();
+			PlayerZone[] zone = getZone("Broodwarden");
+
+			// for each zone found add +1/+1 to each card
+			for(int outer = 0; outer < zone.length; outer++) {
+				CardList creature = new CardList(
+						zone[outer].getCards());
+				creature = creature.filter(new CardListFilter()
+				{
+					public boolean addCard(Card c)
+					{
+						return (c.getType().contains("Eldrazi") && c.getType().contains("Spawn") ) || c.getKeyword().contains("Changeling");
+					}
+				});
+
+				for(int i = 0; i < creature.size(); i++) {
+					c = creature.get(i);
+					c.addSemiPermanentAttackBoost(2);
+					c.addSemiPermanentDefenseBoost(1);
+					gloriousAnthemList.add(c);
+
+				} // for
+			} // for
+
+		}// execute()
+
+	}; //Elvish_Archdruid_Pump
 
 	public static Command Elvish_Archdruid_Pump       = new Command() {
 
@@ -17007,6 +17049,7 @@ public class GameActionUtil {
 		commands.put("Relentless_Rats_Other", Relentless_Rats_Other);
 		commands.put("Privileged_Position", Privileged_Position);
 		commands.put("Privileged_Position_Other", Privileged_Position_Other);
+		commands.put("Broodwarden", Broodwarden);
 		commands.put("Elvish_Archdruid_Pump", Elvish_Archdruid_Pump);
 		commands.put("Elvish_Archdruid_Other", Elvish_Archdruid_Other);
 		commands.put("Elvish_Champion_Pump", Elvish_Champion_Pump);
