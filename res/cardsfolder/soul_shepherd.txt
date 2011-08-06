@@ -1,0 +1,10 @@
+Name:Soul Shepherd
+ManaCost:1 W
+Types:Creature Human Cleric
+Text:no text
+PT:2/1
+A:AB$ GainLife | Cost$ W ExileFromGrave<1/Creature> | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_shepherd.jpg
+SetInfo:WTH|Common|http://magiccards.info/scans/en/wl/142.jpg
+End

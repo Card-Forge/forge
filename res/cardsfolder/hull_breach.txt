@@ -8,4 +8,5 @@ A:SP$Destroy | Cost$ R G | ValidTgts$ Artifact | TgtPrompt$ Select target artifa
 SVar:DestroyEnch:DB$ Destroy | Cost$ 0 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hull_breach.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/111.jpg
 End

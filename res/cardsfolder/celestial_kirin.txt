@@ -10,4 +10,5 @@ SVar:X:Triggered$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_kirin.jpg
+SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/3.jpg
 End

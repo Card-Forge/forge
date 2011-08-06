@@ -1,0 +1,9 @@
+Name:Screams of the Damned
+ManaCost:3 B B
+Types:Enchantment
+Text:no text
+A:AB$ DamageAll | Cost$ 1 B ExileFromGrave<1/Card> | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/screams_of_the_damned.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/160.jpg
+End
