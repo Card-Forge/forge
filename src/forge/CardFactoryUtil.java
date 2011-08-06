@@ -4091,7 +4091,9 @@ public class CardFactoryUtil {
         c.setBaseDefense(baseDefense);
         
         for(String kw:intrinsicKeywords)
-            c.addIntrinsicKeyword(kw);
+        	if(kw.startsWith("HIDDEN"))
+        		c.addExtrinsicKeyword(kw);
+        	else c.addIntrinsicKeyword(kw);
         
         int multiplier = AllZoneUtil.getDoublingSeasonMagnitude(controller);
         // todo: does this need to set PlayerZone_ComesIntoPlay.SimultaneousEntry like Rite of Replication does?
