@@ -1,0 +1,9 @@
+Name:Timber Protector
+ManaCost:4 G
+Types:Creature Treefolk Warrior
+Text:Other Treefolk creatures you control get +1/+1. Other Treefolk and Forests you control are indestructible.
+PT:4/6
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/timber_protector.jpg
+End

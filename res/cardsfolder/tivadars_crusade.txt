@@ -1,0 +1,9 @@
+Name:Tivadar's Crusade
+ManaCost:1 W W
+Types:Sorcery
+Text:Destroy all Goblins.
+K:spDestroyAll:Goblin
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tivadars_crusade.jpg
+End

@@ -1,0 +1,10 @@
+Name:Torpor Dust
+ManaCost:2 UB
+Types:Enchantment Aura
+Text:Enchanted creature gets -3/-0.
+K:Flash
+K:Enchant creature
+K:enPumpCurse:-3/-0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/torpor_dust.jpg
+End

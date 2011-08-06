@@ -1,0 +1,9 @@
+Name:Thundering Giant
+ManaCost:3 R R
+Types:Creature Giant
+Text:no text
+PT:4/3
+K:Haste
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card130381.jpg
+End

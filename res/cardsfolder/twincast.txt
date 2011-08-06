@@ -1,0 +1,7 @@
+Name:Twincast
+ManaCost:U U
+Types:Instant
+Text:Copy target instant or sorcery spell. You may choose new targets for the copy.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/twincast.jpg
+End

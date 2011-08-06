@@ -1,0 +1,10 @@
+Name:Talisman of Dominance
+ManaCost:2
+Types:Artifact
+Text:no text
+K:tap: add 1
+K:paintap:1:U
+K:paintap:1:B
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_dominance.jpg
+End

@@ -1,0 +1,10 @@
+Name:Twinblade Slasher
+ManaCost:G
+Types:Creature Elf Warrior
+Text:Play this ability only once each turn.
+PT:1/1
+K:abPump 1 G:+2/+2
+K:Wither
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/twinblade_slasher.jpg
+End

@@ -1,0 +1,10 @@
+Name:Tuktuk Grunts
+ManaCost:4 R
+Types:Creature Goblin Warrior Ally
+Text:Whenever Tuktuk Grunts or another Ally enters the battlefield under your control, you may put a +1/+1 counter on Tuktuk Grunts.
+PT:2/2
+K:Haste
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tuktuk_grunts.jpg
+End

@@ -1,0 +1,10 @@
+Name:Tarox Bladewing
+ManaCost:2 R R R
+Types:Legendary Creature Dragon
+Text:no text
+PT:4/3
+K:Flying
+K:Haste
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/fut/en-us/card136139.jpg
+End

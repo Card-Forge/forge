@@ -1,0 +1,8 @@
+Name:Tranquil Domain
+ManaCost:1 G
+Types:Instant
+Text:Destroy all non-Aura enchantments.
+K:spDestroyAll:Enchantment.nonAura
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tranquil_domain.jpg
+End

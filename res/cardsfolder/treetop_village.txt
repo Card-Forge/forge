@@ -1,0 +1,8 @@
+Name:Treetop Village
+ManaCost:no cost
+Types:Land
+Text:Treetop Village comes into play tapped.
+K:tap: add G
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_village.jpg
+End

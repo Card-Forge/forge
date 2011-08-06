@@ -1,0 +1,9 @@
+Name:Tortoise Formation
+ManaCost:3 U
+Types:Instant
+Text:no text
+K:spAllPump:YouCtrl:Shroud:Creatures you control gain shroud until end of turn.:Tortoise Formation - Creatures gain shroud until EOT
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tortoise_formation.jpg
+End

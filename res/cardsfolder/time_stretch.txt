@@ -1,0 +1,7 @@
+Name:Time Stretch
+ManaCost:8 U U
+Types:Sorcery
+Text:Target player takes two extra turns after this one.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/time_stretch.jpg
+End

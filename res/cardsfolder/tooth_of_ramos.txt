@@ -1,0 +1,10 @@
+Name:Tooth of Ramos
+ManaCost:3
+Types:Artifact
+Text:no text
+K:tap: add W
+K:Sacrifice CARDNAME: Add W to your mana pool.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tooth_of_ramos.jpg
+End

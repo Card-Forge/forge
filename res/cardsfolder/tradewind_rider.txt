@@ -1,0 +1,9 @@
+Name:Tradewind Rider
+ManaCost:3 U
+Types:Creature Spirit
+Text:no text
+PT:1/4
+K:Flying
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tradewind_rider.jpg
+End

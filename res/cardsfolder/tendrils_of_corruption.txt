@@ -1,0 +1,9 @@
+Name:Tendrils of Corruption
+ManaCost:3 B
+Types:Instant
+Text:no text
+K:spDamageTgtC:X:Drawback$YouGainLife/X:Tendrils of Corruption deals X damage to target creature and you gain X life, where X is the number of Swamps you control.:Tendrils of Corruption - deals damage and you gain life.
+K:SVar:X:Count$TypeYouCtrl.Swamp
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card106632.jpg
+End

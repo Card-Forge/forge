@@ -1,0 +1,8 @@
+Name:The Lady of the Mountain
+ManaCost:4 R G
+Types:Legendary Creature Giant
+Text:no text
+PT:5/5
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/le/en-us/card1689.jpg
+End

@@ -1,0 +1,9 @@
+Name:Terra Eternal
+ManaCost:2 W
+Types:Enchantment
+Text:no text
+K:StaticEffect:Play:All Permanents:Keyword/Indestructible:Type.Land:All lands are indestructible.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/terra_eternal.jpg
+End

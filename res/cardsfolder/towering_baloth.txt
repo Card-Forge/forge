@@ -1,0 +1,9 @@
+Name:Towering Baloth
+ManaCost:6 G G
+Types:Creature Beast
+Text:no text
+PT:7/6
+K:Morph:6 G
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/towering_baloth.jpg
+End

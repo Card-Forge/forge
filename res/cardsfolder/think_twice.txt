@@ -1,0 +1,7 @@
+Name:Think Twice
+ManaCost:1 U
+Types:Instant
+Text:Draw a card.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/think_twice.jpg
+End

@@ -1,0 +1,9 @@
+Name:Thran Dynamo
+ManaCost:4
+Types:Artifact
+Text:no text
+K:tap: add 3
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_dynamo.jpg
+End

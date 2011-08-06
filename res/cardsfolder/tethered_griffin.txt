@@ -1,0 +1,10 @@
+Name:Tethered Griffin
+ManaCost:W
+Types:Creature Griffin
+Text:When you control no enchantments, sacrifice Tethered Griffin.
+PT:2/3
+K:Flying
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tethered_griffin.jpg
+End

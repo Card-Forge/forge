@@ -1,0 +1,7 @@
+Name:Tithe
+ManaCost:W
+Types:Instant
+Text:Search your library for a Plains card. If you control fewer lands than an opponent, you may search your library for an additional Plains card. Put them into your hand.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3730.jpg
+End

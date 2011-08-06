@@ -1,0 +1,10 @@
+Name:Thought Nibbler
+ManaCost:U
+Types:Creature Beast
+Text:Your maximum hand size is reduced by two.
+PT:1/1
+K:HandSize - 2 Self
+K:Flying
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_nibbler.jpg
+End

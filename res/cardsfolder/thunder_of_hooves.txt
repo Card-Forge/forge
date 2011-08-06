@@ -1,0 +1,10 @@
+Name:Thunder of Hooves
+ManaCost:3 R
+Types:Sorcery
+Text:no text
+K:spDamageAll:Player,Creature.withoutFlying:X:Thunder of Hooves deals X damage to each creature without flying and each player, where X is the number of Beasts on the battlefield.
+K:SVar:X:Count$TypeOnBattlefield.Beast
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_of_hooves.jpg
+End

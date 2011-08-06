@@ -1,0 +1,8 @@
+Name:Teroh's Faithful
+ManaCost:3 W
+Types:Creature Human Cleric
+Text:When Teroh's Faithful comes into play, you gain 4 life.
+PT:1/4
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/terohs_faithful.jpg
+End

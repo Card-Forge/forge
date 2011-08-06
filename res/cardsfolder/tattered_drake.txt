@@ -1,0 +1,10 @@
+Name:Tattered Drake
+ManaCost:4 U
+Types:Creature Zombie Drake
+Text:no text
+PT:2/2
+K:Flying
+K:RegenerateMe:B
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tattered_drake.jpg
+End

@@ -1,0 +1,10 @@
+Name:Troll Ascetic
+ManaCost:1 G G
+Types:Creature Troll Shaman
+Text:no text
+PT:3/2
+K:RegenerateMe:1 G
+K:CARDNAME can't be the target of spells or abilities your opponents control.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/mrd/en-us/card49828.jpg
+End

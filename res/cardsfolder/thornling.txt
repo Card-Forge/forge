@@ -1,0 +1,13 @@
+Name:Thornling
+ManaCost:3 G G
+Types:Creature Elemental Shapeshifter
+Text:no text
+PT:4/4
+K:abPump G:Haste
+K:abPump G:Trample
+K:abPump G:Indestructible
+K:abPump 1:+1/-1
+K:abPump 1:-1/+1
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thornling.jpg
+End

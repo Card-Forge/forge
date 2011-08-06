@@ -1,0 +1,8 @@
+Name:Tor Wauki
+ManaCost:2 B B R
+Types:Legendary Creature Human Archer
+Text:no text
+PT:3/3
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tor_wauki.jpg
+End

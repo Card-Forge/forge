@@ -1,0 +1,9 @@
+Name:Tundra
+ManaCost:no cost
+Types:Land Plains Island
+Text:no text
+K:tap: add W
+K:tap: add U
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tundra.jpg
+End

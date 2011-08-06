@@ -1,0 +1,8 @@
+Name:Tower of Champions
+ManaCost:4
+Types:Artifact
+Text:no text
+K:abPumpTgtC 8 T:+6/+6
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_champions.jpg
+End

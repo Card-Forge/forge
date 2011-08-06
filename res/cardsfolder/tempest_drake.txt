@@ -1,0 +1,10 @@
+Name:Tempest Drake
+ManaCost:1 W U
+Types:Creature Drake
+Text:no text
+PT:2/2
+K:Flying
+K:Vigilance
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/vi/en-us/card3746.jpg
+End

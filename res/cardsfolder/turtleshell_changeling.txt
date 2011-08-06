@@ -1,0 +1,9 @@
+Name:Turtleshell Changeling
+ManaCost:3 U
+Types:Creature Shapeshifter
+Text:no text
+PT:1/4
+K:Changeling
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/turtleshell_changeling.jpg
+End

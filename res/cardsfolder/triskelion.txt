@@ -1,0 +1,11 @@
+Name:Triskelion
+ManaCost:6
+Types:Artifact Creature Construct
+Text:no text
+PT:1/1
+K:etbCounter:P1P1:3
+K:abDamageTgtCP 0 SubCounter<P1P1/1>:1
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/triskelion.jpg
+End

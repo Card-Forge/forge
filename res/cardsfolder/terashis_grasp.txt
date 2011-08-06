@@ -1,0 +1,10 @@
+Name:Terashi's Grasp
+ManaCost:2 W
+Types:Sorcery Arcane
+Text:Destroy target artifact or enchantment. You gain life equal to its converted mana cost.
+K:spDestroyTgt:Artifact,Enchantment:Drawback$YouGainLife/dX
+K:SVar:dX:Count$TgtCardManaCost
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/terashis_grasp.jpg
+End

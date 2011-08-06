@@ -1,0 +1,9 @@
+Name:Talas Warrior
+ManaCost:1 U U
+Types:Creature Human Pirate Warrior
+Text:no text
+PT:2/2
+K:Unblockable
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6545.jpg
+End

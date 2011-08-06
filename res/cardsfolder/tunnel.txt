@@ -1,0 +1,8 @@
+Name:Tunnel
+ManaCost:R
+Types:Instant
+Text:Destroy target Wall. It can't be regenerated.
+K:spDestroyTgt:Creature.Wall:NoRegen
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tunnel.jpg
+End

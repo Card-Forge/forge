@@ -1,0 +1,9 @@
+Name:Thriss, Nantuko Primus
+ManaCost:5 G G
+Types:Legendary Creature Insect Druid
+Text:no text
+PT:5/5
+K:abPumpTgtC G T:+5/+5
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thriss_nantuko_primus.jpg
+End

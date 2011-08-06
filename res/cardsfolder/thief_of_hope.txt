@@ -1,0 +1,9 @@
+Name:Thief of Hope
+ManaCost:2 B
+Types:Creature Spirit
+Text:Whenever you play a Spirit or Arcane spell, target opponent loses 1 life and you gain 1 life.
+PT:2/2
+K:Soulshift:2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thief_of_hope.jpg
+End

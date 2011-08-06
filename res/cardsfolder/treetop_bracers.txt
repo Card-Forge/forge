@@ -1,0 +1,9 @@
+Name:Treetop Bracers
+ManaCost:1 G
+Types:Enchantment Aura
+Text:Enchanted creature gets +1/+1 and can't be blocked except by creatures with flying.
+K:Enchant creature
+K:enPump:+1/+1/CARDNAME can't be blocked except by creatures with flying.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/treetop_bracers.jpg
+End

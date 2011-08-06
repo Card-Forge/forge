@@ -1,0 +1,10 @@
+Name:Talisman of Impulse
+ManaCost:2
+Types:Artifact
+Text:no text
+K:tap: add 1
+K:paintap:1:R
+K:paintap:1:G
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/talisman_of_impulse.jpg
+End

@@ -1,0 +1,8 @@
+Name:Tempest of Light
+ManaCost:2 W
+Types:Instant
+Text:Destroy all enchantments.
+K:spDestroyAll:Enchantment
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tempest_of_light.jpg
+End

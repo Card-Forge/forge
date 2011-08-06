@@ -1,0 +1,10 @@
+Name:Transcendent Master
+ManaCost:1 W W
+Types:Creature Human Cleric Avatar
+Text:LEVEL 6-11 6/6 Lifelink LEVEL 12+ 9/9 Lifelink Indestructible
+PT:3/3
+K:Level up:1
+K:maxLevel:12
+K:SVar:Rarity:Mythic
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/transcendent_master.jpg
+End

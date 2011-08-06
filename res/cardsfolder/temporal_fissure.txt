@@ -1,0 +1,9 @@
+Name:Temporal Fissure
+ManaCost:4 U
+Types:Sorcery
+Text:Return target permanent to its owner's hand.
+K:spBounceTgt:Permanent:Hand
+K:Storm
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_fissure.jpg
+End

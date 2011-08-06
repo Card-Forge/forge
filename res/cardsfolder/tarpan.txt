@@ -1,0 +1,8 @@
+Name:Tarpan
+ManaCost:G
+Types:Creature Horse
+Text:When Tarpan is put into a graveyard from play, you gain 1 life.
+PT:1/1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tarpan.jpg
+End

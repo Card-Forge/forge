@@ -1,0 +1,14 @@
+Name:Thornscape Master
+ManaCost:2 G G
+Types:Creature Human Wizard
+Text:no text
+PT:2/2
+K:abDamageTgtC R R T:2
+K:abPumpTgtC W W T:Protection from white
+K:abPumpTgtC W W T:Protection from blue
+K:abPumpTgtC W W T:Protection from black
+K:abPumpTgtC W W T:Protection from red
+K:abPumpTgtC W W T:Protection from green
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thornscape_master.jpg
+End

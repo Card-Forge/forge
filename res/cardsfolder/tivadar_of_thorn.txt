@@ -1,0 +1,11 @@
+Name:Tivadar of Thorn
+ManaCost:1 W W
+Types:Legendary Creature Human Knight
+Text:When Tivadar of Thorn enters the battlefield, destroy target Goblin.
+PT:2/2
+K:First Strike
+K:Protection from red
+K:etbDestroyTgt:Goblin
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tivadar_of_thorn.jpg
+End

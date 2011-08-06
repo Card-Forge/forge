@@ -1,0 +1,9 @@
+Name:Tsunami
+ManaCost:3 G
+Types:Sorcery
+Text:Destroy all Islands.
+K:spDestroyAll:Island
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tsunami.jpg
+End

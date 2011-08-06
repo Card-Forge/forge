@@ -1,0 +1,10 @@
+Name:Talonrend
+ManaCost:4 U
+Types:Creature Elemental
+Text:no text
+PT:0/5
+K:Flying
+K:abPump UR:+1/-1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/talonrend.jpg
+End

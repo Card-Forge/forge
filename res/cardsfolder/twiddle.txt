@@ -1,0 +1,8 @@
+Name:Twiddle
+ManaCost:U
+Types:Instant
+Text:You may tap or untap target artifact, creature, or land.
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/twiddle.jpg
+End

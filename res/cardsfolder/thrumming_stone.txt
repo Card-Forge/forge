@@ -1,0 +1,7 @@
+Name:Thrumming Stone
+ManaCost:5
+Types:Legendary Artifact
+Text:Spells you cast have ripple 4.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thrumming_stone.jpg
+End

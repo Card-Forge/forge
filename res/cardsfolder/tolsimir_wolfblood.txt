@@ -1,0 +1,9 @@
+Name:Tolsimir Wolfblood
+ManaCost:4 G W
+Types:Legendary Creature Elf Warrior
+Text:Other green creatures you control get +1/+1.\r\nOther white creatures you control get +1/+1.
+PT:3/4
+K:SVar:PlayMain1:TRUE
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tolsimir_wolfblood.jpg
+End

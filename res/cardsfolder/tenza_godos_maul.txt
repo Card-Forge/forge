@@ -1,0 +1,8 @@
+Name:Tenza, Godo's Maul
+ManaCost:3
+Types:Legendary Artifact Equipment
+Text:Equipped creature gets +1/+1.
+K:eqPump 1:+1/+1
+K:StaticEffect:Play:Eqiupped Permanent:PTBonus/2/2:Type.Legendary:As long as it's legendary, it gets an additional +2/+2.
+K:StaticEffect:Play:Eqiupped Permanent:Keyword/Trample:Color.red:As long as it's red, it has trample.
+End

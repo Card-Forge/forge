@@ -1,0 +1,10 @@
+Name:Territorial Baloth
+ManaCost:4 G
+Types:Creature Beast
+Text:no text
+PT:4/4
+K:Landfall - Whenever a land enters the battlefield under your control, CARDNAME gets +2/+2 until end of turn.
+K:SVar:BuffedBy:Land
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/territorial_baloth.jpg
+End

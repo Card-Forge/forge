@@ -1,0 +1,9 @@
+Name:Tribal Forcemage
+ManaCost:1 G
+Types:Creature Elf Wizard
+Text:When Tribal Forcemage is turned face up, creatures of the creature type of your choice get +2/+2 and gain trample until end of turn.
+PT:1/1
+K:Morph:1 G
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tribal_forcemage.jpg
+End

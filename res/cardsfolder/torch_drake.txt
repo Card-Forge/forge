@@ -1,0 +1,10 @@
+Name:Torch Drake
+ManaCost:3 U
+Types:Creature Drake
+Text:no text
+PT:2/2
+K:Flying
+K:abPump 1 R:+1/+0
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/torch_drake.jpg
+End

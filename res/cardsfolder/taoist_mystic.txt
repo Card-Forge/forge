@@ -1,0 +1,8 @@
+Name:Taoist Mystic
+ManaCost:2 G
+Types:Creature Human Mystic
+Text:Taoist Mystic can't be blocked by creatures with horsemanship.
+PT:2/2
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/taoist_mystic.jpg
+End

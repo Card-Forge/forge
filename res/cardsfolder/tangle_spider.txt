@@ -1,0 +1,10 @@
+Name:Tangle Spider
+ManaCost:4 G G
+Types:Creature Spider
+Text:no text
+PT:3/4
+K:Flash
+K:Reach
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_spider.jpg
+End

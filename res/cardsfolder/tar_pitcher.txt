@@ -1,0 +1,9 @@
+Name:Tar Pitcher
+ManaCost:3 R
+Types:Creature Goblin Shaman
+Text:no text
+PT:2/2
+K:abDamageTgtCP T Sac-Goblin:2
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tar_pitcher.jpg
+End

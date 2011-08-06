@@ -1,0 +1,8 @@
+Name:Touch of Brilliance
+ManaCost:3 U
+Types:Sorcery
+Text:no text
+K:spDrawCards:2:Draw two cards.:Touch of Brilliance - draw 2 cards.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.magickartenmarkt.de/img/cards/Portal/touch_of_brilliance.jpg
+End

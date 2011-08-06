@@ -1,0 +1,7 @@
+Name:Tremor
+ManaCost:R
+Types:Sorcery
+Text:Tremor deals 1 damage to each creature without flying.
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6592.jpg
+End

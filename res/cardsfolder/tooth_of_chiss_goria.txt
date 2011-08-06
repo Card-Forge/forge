@@ -1,0 +1,10 @@
+Name:Tooth of Chiss-Goria
+ManaCost:3
+Types:Artifact
+Text:Affinity for artifacts (This spell costs 1 less to cast for each artifact you control.)
+K:Flash
+K:abPumpTgtC T:+1/+0
+K:CostChange:Player:Less:1:Self:All:All:Affinity/Artifact
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tooth_of_chiss_goria.jpg
+End

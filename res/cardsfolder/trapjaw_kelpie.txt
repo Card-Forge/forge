@@ -1,0 +1,10 @@
+Name:Trapjaw Kelpie
+ManaCost:4 GU GU
+Types:Creature Beast
+Text:no text
+PT:3/3
+K:Flash
+K:Persist
+K:SVar:Rarity:Common
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/trapjaw_kelpie.jpg
+End

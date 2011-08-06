@@ -1,0 +1,11 @@
+Name:The Unspeakable
+ManaCost:6 U U U
+Types:Legendary Creature Spirit
+Text:(NOTE: "Whenever The Unspeakable deals combat damage to a player, you may return target Arcane card from your graveyard to your hand." not implemented.)
+PT:6/7
+K:Flying
+K:Trample
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card78693.jpg
+End

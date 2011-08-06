@@ -1,0 +1,9 @@
+Name:Taoist Hermit
+ManaCost:2 G
+Types:Creature Human Mystic
+Text:no text
+PT:2/2
+K:CARDNAME can't be the target of spells or abilities your opponents control.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/taoist_hermit.jpg
+End

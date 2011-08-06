@@ -1,0 +1,10 @@
+Name:Thaumatog
+ManaCost:1 W G
+Types:Creature Atog
+Text:no text
+PT:1/2
+K:abPump 0 Sac-Enchantment:+1/+1
+K:abPump 0 Sac-Land:+1/+1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thaumatog.jpg
+End

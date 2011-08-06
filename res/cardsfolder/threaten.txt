@@ -1,0 +1,7 @@
+Name:Threaten
+ManaCost:2 R
+Types:Sorcery
+Text:Untap target creature and gain control of it until end of turn. That creature gains haste until end of turn. (It can attack this turn.)
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83472.jpg
+End

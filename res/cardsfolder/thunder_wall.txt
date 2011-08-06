@@ -1,0 +1,11 @@
+Name:Thunder Wall
+ManaCost:1 U U
+Types:Creature Wall
+Text:no text
+PT:0/2
+K:Defender
+K:Flying
+K:abPump U:+1/+1
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_wall.jpg
+End

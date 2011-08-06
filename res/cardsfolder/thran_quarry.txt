@@ -1,0 +1,13 @@
+Name:Thran Quarry
+ManaCost:no cost
+Types:Land
+Text:At the beginning of the end step, if you control no creatures, sacrifice CARDNAME.
+K:tap: add W
+K:tap: add U
+K:tap: add B
+K:tap: add R
+K:tap: add G
+K:SVar:RemAIDeck:True
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_quarry.jpg
+End

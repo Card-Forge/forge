@@ -1,0 +1,8 @@
+Name:Tower of Eons
+ManaCost:4
+Types:Artifact
+Text:no text
+K:abGainLife 8 T:10
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_eons.jpg
+End

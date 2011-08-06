@@ -1,0 +1,7 @@
+Name:Teferi's Puzzle Box
+ManaCost:4
+Types:Artifact
+Text:At the beginning of each player's draw step, that player puts the cards in his or her hand on the bottom of his or her library in any order, then draws that many cards.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/teferis_puzzle_box.jpg
+End

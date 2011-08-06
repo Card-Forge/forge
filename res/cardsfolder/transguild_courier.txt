@@ -1,0 +1,13 @@
+Name:Transguild Courier
+ManaCost:4
+Types:Artifact Creature Golem
+Text:no text
+PT:3/3
+K:CARDNAME is white.
+K:CARDNAME is blue.
+K:CARDNAME is black.
+K:CARDNAME is red.
+K:CARDNAME is green.
+K:SVar:Rarity:Uncommon
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/transguild_courier.jpg
+End

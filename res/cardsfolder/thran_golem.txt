@@ -1,0 +1,9 @@
+Name:Thran Golem
+ManaCost:5
+Types:Artifact Creature Golem
+Text:no text
+PT:3/3
+K:StaticEffect:Play:Self:PTBonus/2/2!Keyword/Flying!Keyword/First Strike!Keyword/Trample:enchanted:As long as Thran Golem is enchanted, it gets +2/+2 and has flying, first strike, and trample.
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/thran_golem.jpg
+End

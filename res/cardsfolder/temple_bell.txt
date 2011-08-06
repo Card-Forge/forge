@@ -1,0 +1,8 @@
+Name:Temple Bell
+ManaCost:3
+Types:Artifact
+Text:no text
+K:abDrawCards T:1:Drawback$OppDraw/1:Each player draws a card.:Temple Bell - each player draws a card
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_bell.jpg
+End

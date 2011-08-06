@@ -1,0 +1,8 @@
+Name:Tanglebloom
+ManaCost:1
+Types:Artifact
+Text:no text
+K:abGainLife 1 T:1
+K:SVar:Rarity:Common
+K:SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card95221.jpg
+End

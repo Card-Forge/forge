@@ -1,0 +1,9 @@
+Name:Tower of the Magistrate
+ManaCost:no cost
+Types:Land
+Text:no text
+K:tap: add 1
+K:abPumpTgtC 1 T:Protection from artifacts
+K:SVar:Rarity:Rare
+K:SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_of_the_magistrate.jpg
+End
