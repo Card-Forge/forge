@@ -1083,11 +1083,18 @@ public class Card extends MyObservable {
         
         ArrayList<String> addedManaStrings = new ArrayList<String>();
         SpellAbility[] abilities = getSpellAbility();
+        boolean primaryCost = true;
         for(SpellAbility sa : abilities){
         	// only add abilities not Spell portions of cards
-            if(!isPermanent() || sa instanceof Spell_Permanent)
-            	continue;
-            
+        	if (!isPermanent())
+        		continue;
+        	
+        	if (sa instanceof Spell_Permanent && primaryCost){
+        		// For Alt costs, make sure to display the cost!
+        		primaryCost = false;
+        		continue;
+        	}
+
             String sAbility = sa.toString();
             
             if (sa instanceof Ability_Mana){
@@ -1096,8 +1103,14 @@ public class Card extends MyObservable {
         		addedManaStrings.add(sAbility);
             }
 
-            sb.append(sAbility);
-            sb.append("\r\n");
+            if (sa instanceof Spell_Permanent){
+            	sb.insert(0, "\r\n");
+            	sb.insert(0, sAbility);
+            }
+            else{
+	            sb.append(sAbility);
+	            sb.append("\r\n");
+            }
         }
         
         // NOTE:
