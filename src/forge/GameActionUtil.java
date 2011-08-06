@@ -46,7 +46,6 @@ public class GameActionUtil {
 		upkeep_Honden_of_Lifes_Web();
 		upkeep_Honden_of_Nights_Reach();
 		upkeep_Honden_of_Infinite_Rage();
-		upkeep_Vensers_Journal();
 		upkeep_Dega_Sanctuary();
 		upkeep_Sheltered_Valley();
 		upkeep_Land_Tax();
@@ -65,7 +64,6 @@ public class GameActionUtil {
 		upkeep_Curse_of_Chains();
 		upkeep_Festering_Wound_Counter();
 		upkeep_Festering_Wound_Damage();
-		upkeep_Kemba_Kha_Regent();
 		upkeep_Greener_Pastures();
 		upkeep_Wort();
 		upkeep_Squee();
@@ -7725,32 +7723,6 @@ public class GameActionUtil {
 			} // for
 		} // if creatures > 0
 	};
-	
-	/*
-	 * At the beginning of your upkeep, put a 2/2 white Cat creature token
-	 * onto the battlefield for each Equipment attached to Kemba, Kha Regent.
-	 */
-	private static void upkeep_Kemba_Kha_Regent() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Kemba, Kha Regent");
-		
-		for(Card src:list) {
-			final Card regent = src;
-			final int equipNum = regent.getEquippedBy().size();
-			Ability ability = new Ability(regent, "0") {
-				@Override
-				public void resolve() {
-					for(int i = 0; i < equipNum; i++) {
-						CardFactoryUtil.makeToken("Cat", "W 2 2 Cat", regent.getController(), "W",
-								new String[] {"Creature", "Cat"}, 2, 2, new String[] {});
-					}
-				}
-
-			};// Ability
-			ability.setStackDescription(regent.getName()+" - put "+equipNum+" 2/2 white Cat creature token(s) onto the battlefield.");
-			if(equipNum > 0) AllZone.Stack.add(ability);
-		}
-	};
 
 	private static void upkeep_Scute_Mob() {
 		final Player player = AllZone.Phase.getPlayerTurn();
@@ -9812,29 +9784,6 @@ public class GameActionUtil {
 			}
 		}//for
 	}//upkeep_Planar_Collapse()
-	
-	private static void upkeep_Vensers_Journal() {
-		final Player player = AllZone.Phase.getPlayerTurn();
-
-		CardList list = AllZoneUtil.getPlayerCardsInPlay(player, "Venser's Journal");
-
-		for(Card journal:list) {
-			final Card source = journal;
-			final Ability ability = new Ability(source, "0") {
-				public void resolve() {
-					CardList hand = AllZoneUtil.getPlayerHand(player);
-					player.gainLife(hand.size(), source);
-				}
-			};//Ability
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append(source.getName()).append(" - ").append(player);
-			sb.append(" gains 1 life for each card in your hand.");
-			ability.setStackDescription(sb.toString());
-
-			AllZone.Stack.add(ability);
-		}//for
-	}//upkeep_Vensers_Journal()
 	
 	private static void upkeep_Dega_Sanctuary() {
 		final Player player = AllZone.Phase.getPlayerTurn();

@@ -1,9 +1,10 @@
 Name:Skinrender
 ManaCost:2 B B
 Types:Creature Zombie
-Text:When Skinrender enters the battlefield, put three -1/-1 counters on target creature.
+Text:no text
 PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put three -1/-1 counters on target creature.
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Tgt$ TgtC | CounterType$ M1M1 | CounterNum$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skinrender.jpg
-SetInfo:SOM|Uncommon|http://magiccards.info/scans/en/som/78.jpg
 End

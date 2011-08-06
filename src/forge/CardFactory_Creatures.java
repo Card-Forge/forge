@@ -1825,99 +1825,6 @@ public class CardFactory_Creatures {
             });
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Skinrender")) {
-
-            final CommandReturn getCreature = new CommandReturn() {
-                //get target card, may be null
-                public Object execute() {
-                    CardList l = CardFactoryUtil.AI_getHumanCreature(card, true);
-                                        
-                    CardList list = new CardList(l.toArray());                  
-                    if (list.isEmpty())	// todo: if human doesn't have a valid creature must kill own valid target
-                    	return null;
-                    
-                    // Sorts: Highest Attacking Flyer at the top. 
-                    CardListUtil.sortAttack(list);
-                    CardListUtil.sortFlying(list);
-                    
-                    Card target = list.get(0);
-                    // if "Best creature has 2+ Attack and flying target that. 
-                    if(2 <= target.getNetAttack() && target.getKeyword().contains("Flying")) 
-                    	return target;
-                    
-                    if(MyRandom.percentTrue(50))
-                    	CardListUtil.sortAttack(list);
-
-                    return target;
-                }//execute()
-            };//CommandReturn
-            
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    Card c = getTargetCard();
-                    
-                    if(AllZone.GameAction.isCardInPlay(c) && CardFactoryUtil.canTarget(card, c)) {
-                    	c.addCounter(Counters.M1M1,3);
-                    }
-                }//resolve()
-            };//SpellAbility
-            Command intoPlay = new Command() {
-
-				private static final long serialVersionUID = 8876482925803330585L;
-
-				public void execute() {
-                    Input target = new Input() {
-                    	
-						private static final long serialVersionUID = -2760098744343748530L;
-
-						@Override
-                        public void showMessage() {
-                            AllZone.Display.showMessage("Select target creature");
-                            ButtonUtil.disableAll();
-                        }
-                        
-                        @Override
-                        public void selectCard(Card card, PlayerZone zone) {
-                            if(!CardFactoryUtil.canTarget(ability, card)) {
-                                AllZone.Display.showMessage("Cannot target this card (Shroud? Protection?).");
-                            } else if(card.isCreature() && zone.is(Constant.Zone.Battlefield)) {
-                                ability.setTargetCard(card);
-                                AllZone.Stack.add(ability);
-                                stop();
-                            }
-                        }
-                    };//Input target
-                    
-                    if(card.getController().equals(AllZone.HumanPlayer)) {
-                        //get all creatures
-                    	CardList creatures = AllZoneUtil.getTypeInPlay("Creature");
-                        creatures = creatures.filter(new CardListFilter(){
-                        	public boolean addCard(Card c)
-                        	{
-                        		return CardFactoryUtil.canTarget(card, c);
-                        	}
-                        });
-                    	
-                        if(creatures.size() != 0) AllZone.InputControl.setInput(target);
-
-                    } 
-                    else{ //computer
-                        Object o = getCreature.execute();
-                        if(o != null)//should never happen, but just in case
-                        {
-                            ability.setTargetCard((Card) o);
-                            AllZone.Stack.add(ability);
-                        }
-                    }//else
-                }//execute()
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-               
-        
         //*************** START *********** START **************************
         else if(cardName.equals("Phylactery Lich") ) {
             final CommandReturn getArt = new CommandReturn() {
@@ -6800,41 +6707,6 @@ public class CardFactory_Creatures {
             card.addDestroyCommand(make3Tokens);
         }//*************** END ************ END **************************
         
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Wurmcoil Engine")) {
-            final Ability ability = new Ability(card, "0") {
-                
-                @Override
-                public void resolve() {
-                    makeTokens();
-                }//resolve()
-                
-                void makeTokens() {
-                    CardFactoryUtil.makeToken("Wurm", "C 3 3 Wurm Deathtouch", card.getController(), "", new String[] {
-                            "Artifact", "Creature", "Wurm"}, 3, 3, new String[] {"Deathtouch"});
-                    CardFactoryUtil.makeToken("Wurm", "C 3 3 Wurm Lifelink", card.getController(), "", new String[] {
-                            "Artifact", "Creature", "Wurm"}, 3, 3, new String[] {"Lifelink"});
-                }//makeToken()
-            };//Ability
-            
-            Command makeTokens = new Command() {
-                
-                private static final long serialVersionUID = 8458814538376248271L;
-
-                public void execute() {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName()).append(" - put creature tokens onto the battlefield.");
-                    ability.setStackDescription(sb.toString());
-                    AllZone.Stack.add(ability);
-                }
-            };//Command
-            
-            card.addDestroyCommand(makeTokens);
-            
-        }//*************** END ************ END **************************
-        
-
         //*************** START *********** START **************************
         else if(cardName.equals("Solemn Simulacrum") || cardName.equals("Yavimaya Granger")
         		|| cardName.equals("Ondu Giant") || cardName.equals("Quirion Trailblazer")) {
@@ -11862,36 +11734,6 @@ public class CardFactory_Creatures {
             
             card.addSpellAbility(ability); 
         }//*************** END ************ END **************************
-        
-        
-        //*************** START *********** START **************************
-        else if(cardName.equals("Sunblast Angel") ) {
-                        
-            final SpellAbility ability = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    CardList tappedCreatures = AllZoneUtil.getCreaturesInPlay();
-                    tappedCreatures = tappedCreatures.filter(AllZoneUtil.tapped);
-                    for(Card c:tappedCreatures) {
-                    	AllZone.GameAction.destroy(c);
-                    }
-                }//resolve()
-            };//SpellAbility
-            Command intoPlay = new Command() {
-				private static final long serialVersionUID = -8702934390670388771L;
-
-				public void execute() {
-					StringBuilder sb = new StringBuilder();
-					sb.append(card).append(" - destroy all tapped creatures.");
-					ability.setStackDescription(sb.toString());
-					
-                    AllZone.Stack.add(ability);
-                }//execute()
-            };
-                       
-            card.addComesIntoPlayCommand(intoPlay);
-        }//*************** END ************ END **************************
-        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Thundermare") || cardName.equals("Timbermare")) {
