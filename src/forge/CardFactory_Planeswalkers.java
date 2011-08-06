@@ -2319,7 +2319,7 @@ class CardFactory_Planeswalkers {
 			private int count;
 	        public void showMessage()
 	        {
-	          AllZone.Display.showMessage("Select a land to untap");
+	          AllZone.Display.showMessage("Select an artifact to untap");
 	          ButtonUtil.disableAll();
 	        }
 	        public void selectCard(Card c, PlayerZone zone)
@@ -2516,6 +2516,11 @@ class CardFactory_Planeswalkers {
 			        			}
 			                };//Command
 			                
+			                if (art[0].isEquipment() && art[0].isEquipping())
+			                {
+			                	Card equippedCreature = art[0].getEquipping().get(0);
+		                		art[0].unEquipCard(equippedCreature);
+			                }
 			                art[0].addType("Creature");
 			                art[0].setBaseAttack(5);
 			                art[0].setBaseDefense(5);

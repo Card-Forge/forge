@@ -9963,8 +9963,8 @@ public class GameActionUtil
 			for (int i = 0; i < list.size(); i++)
 			{
 				Card c = list.get(i);
-				c.setBaseAttack(countEquipment(c)*2);
-				c.setBaseDefense(c.getBaseAttack()+1);
+				c.setBaseAttack(2+countEquipment(c)*2);
+				c.setBaseDefense(c.getBaseAttack());
 			}
 
 		}// execute()
@@ -11692,6 +11692,7 @@ public class GameActionUtil
 		commands.put("Yavimaya_Enchantress", Yavimaya_Enchantress);
 		commands.put("Knight_of_the_Reliquary", Knight_of_the_Reliquary);
 		commands.put("Zuberi", Zuberi);
+		commands.put("Loxodon_Punisher", Loxodon_Punisher);
 		commands.put("Master_of_Etherium", Master_of_Etherium);
 		commands.put("Master_of_Etherium_Pump", Master_of_Etherium_Pump);
 		commands.put("Master_of_Etherium_Other", Master_of_Etherium_Other);

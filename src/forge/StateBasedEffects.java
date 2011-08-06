@@ -60,6 +60,7 @@ public class StateBasedEffects
 		cardToEffectsList.put("Yavimaya Enchantress", new String[] {"Yavimaya_Enchantress"});
 		cardToEffectsList.put("Knight of the Reliquary", new String[] {"Knight_of_the_Reliquary"});
 		cardToEffectsList.put("Zuberi, Golden Feather", new String[] {"Zuberi"});
+		cardToEffectsList.put("Loxodon Punisher", new String[] {"Loxodon_Punisher"});
 		cardToEffectsList.put("Master of Etherium", new String[] {"Master_of_Etherium", "Master_of_Etherium_Pump", "Master_of_Etherium_Other"});
 		cardToEffectsList.put("Relentless Rats", new String[] {"Relentless_Rats_Other"});
 		cardToEffectsList.put("Privileged Position", new String[] {"Privileged_Position", "Privileged_Position_Other"});
