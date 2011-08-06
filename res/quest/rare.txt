@@ -1,42 +1,65 @@
 Absorb
+Academy Rector
+Academy Ruins
 Adarkar Valkyrie
+Adun Oakenshield
 Ajani Goldmane
+Ajani Vengeant
+Akroma's Vengeance
 Akroma, Angel of Fury
 Akroma, Angel of Wrath
+Aladdin's Ring
 Aluren
+Ambassador Laquatus
 Ancestral Recall
+Ancient Craving
 Ancient Silverback
 Ancient Spider
 Angel of Despair
 Angel of Retribution
+Ant Queen
 Arashi, the Sky Asunder
 Arcanis the Omnipotent
 Archangel
+Archivist
 Archon of Justice
 Argothian Enchantress
 Armageddon
 Armored Guardian
 Ashes to Ashes
+Augury Adept
 Aven Brigadier
+Ayumi, the Last Visitor
+Azusa, Lost but Seeking
 Bad Moon
 Badlands
 Ball Lightning
+Baneslayer Angel
+Barren Glory
+Bartel Runeaxe
 Baru, Fist of Krosa
 Battle of Wits
 Battlegrace Angel
 Bayou
 Beacon of Destruction
 Beacon of Unrest
+Beastmaster Ascension
 Belbe's Portal
 Benthic Behemoth
+Biomantic Mastery
 Birds of Paradise
 Bitterblossom
+Black Lotus
 Blazing Archon
+Blazing Specter
 Blinding Light
 Blinkmoth Nexus
 Blistering Firecat
 Blizzard Elemental
 Blood Crypt
+Blurred Mongoose
+Boris Devilboon
+Bounteous Kirin
 Breeding Pool
 Bribery
 Brimstone Dragon
@@ -46,20 +69,34 @@ Bringer of the White Dawn
 Brion Stoutarm
 Broodmate Dragon
 Caldera Hellion
+Call of the Herd
+Callous Giant
+Cantivore
 Cao Cao, Lord of Wei
+Cao Ren, Wei Commander
 Captain Sisay
+Captain of the Watch
+Capture of Jingzhou
+Caribou Range
 Carnassid
+Cascade Bluffs
 Cateran Overlord
 Cateran Slaver
+Chainer, Dementia Master
+Chameleon Colossus
 Chandra Nalaar
 Char
 Child of Alara
 Cho-Manno, Revolutionary
 Cleanse
 Cloud Dragon
+Cloudhoof Kirin
+Cognivore
 Cold-Eyed Selkie
+Collective Unconscious
 Commander Eesha
 Concordant Crossroads
+Conqueror's Pledge
 Conspiracy
 Convalescence
 Convalescent Care
@@ -67,92 +104,161 @@ Corrupt Official
 Cover of Darkness
 Covetous Dragon
 Cranial Extraction
+Cromat
 Crucible of Fire
+Cruel Bargain
 Cruel Tutor
 Crusade
+Crush of Wurms
+Crypt of Agadeem
+Crystal Quarry
 Culling Sun
 Cunning Lethemancer
+Dakkon Blackblade
 Damnation
 Dark Confidant
 Dark Depths
 Darksteel Colossus
+Darkwater Catacombs
+Dauntless Dourbark
+Day of Judgment
+Debtors' Knell
 Defense of the Heart
+Demigod of Revenge
+Devastation
+Devout Lightcaster
+Dimir Cutpurse
+Dingus Egg
 Divinity of Pride
 Djinn of the Lamp
 Do or Die
+Door to Nothingness
 Doran, the Siege Tower
+Dovescape
+Dragon Broodmother
 Dragon Engine
 Dragon Roost
+Dwarven Pony
+Earthcraft
 El-Hajjaj
 Eladamri's Call
 Eladamri, Lord of Leaves
+Eldrazi Monument
 Elspeth, Knight-Errant
 Elven Warhounds
+Elvish Archdruid
 Elvish Archers
+Elvish Champion
 Elvish Farmer
 Elvish Piper
+Emeria Angel
+Emeria, the Sky Ruin
 Enchantress's Presence
+Endless Cockroaches
+Energizer
 Entomb
 Epic Proportions
 Essence Sliver
 Ethersworn Adjudicator
 Evacuation
+Eviscerator
 Exalted Angel
 Exploration
 Fable of Wolf and Owl
 Fastbond
+Felidar Sovereign
+Femeref Enchantress
+Fervent Charge
 Fervor
+Fetid Heath
 Feudkiller's Verdict
 Field Marshal
 Figure of Destiny
+Filigree Angel
+Fire-Lit Thicket
 Flagstones of Trokair
 Flamebreak
+Fleeting Image
+Flooded Grove
 Flowstone Mauler
+Flowstone Overseer
 Flowstone Wyvern
 Font of Mythos
 Force of Savagery
+Forced Fruition
+Gaddock Teeg
 Gaea's Anthem
+Gaea's Cradle
+Gargoyle Castle
 Garruk Wildspeaker
 Garza Zol, Plague Queen
+Ghastlord of Fugue
 Giant Solifuge
+Gilded Lotus
 Gilt-Leaf Archdruid
 Giltspire Avenger
+Glimpse the Unthinkable
 Glint-Eye Nephilim
 Global Ruin
 Glorious Anthem
+Goblin Charbelcher
+Goblin Chieftain
+Goblin King
+Goblin Sharpshooter
 Goblin Trenches
 Godless Shrine
 Godsire
 Granite Gargoyle
+Graven Cairns
+Great Sable Stag
 Greener Pastures
+Grim Monolith
+Grim Tutor
 Grinning Demon
 Groundbreaker
+Guan Yu, Sainted Warrior
 Guiltfeeder
+Guul Draz Specter
+Gwendlyn Di Corci
 Hallowed Fountain
 Hammerfist Giant
 Hanna, Ship's Navigator
 Hatching Plans
+Haunting Echoes
+Heartmender
+Hell-Bent Raider
 Helldozer
 Hellkite Overlord
+Hero's Demise
 Hex
 Hidetsugu's Second Rite
+Honor of the Pure
 Hoofprints of the Stag
 Horde of Notions
 Howling Mine
 Hunted Dragon
+Hunted Horror
+Hunted Lammasu
+Hunted Phantasm
 Hunted Troll
 Hystrodon
+Identity Crisis
 Ifh-Biff Efreet
 Imperial Hellkite
+Imperial Seal
 Incendiary Command
 Indomitable Ancients
+Infernal Contract
 Infernal Kirin
 Inkwell Leviathan
 Intrepid Hero
 Intuition
 Invincible Hymn
+Iona, Shield of Emeria
 Iridescent Angel
 Isamaru, Hound of Konda
+Jace Beleren
+Jacques le Vert
 Jedit Ojanen of Efrava
 Jenara, Asura of War
 Jeska, Warrior Adept
@@ -161,8 +267,11 @@ Joiner Adept
 Jokulhaups
 Jugan, the Rising Star
 Juzam Djinn
+Kaervek's Spite
+Kalonian Behemoth
 Kamahl, Pit Fighter
 Kaysa
+Kazuul Warlord
 Keiga, the Tide Star
 Kher Keep
 Kiki-Jiki, Mirror Breaker
@@ -170,33 +279,59 @@ Kinsbaile Borderguard
 Kinsbaile Cavalier
 Knight of the Reliquary
 Knight of the White Orchid
+Knotvine Paladin
 Kobold Overlord
 Kodama of the North Tree
 Kokusho, the Evening Star
 Korlash, Heir to Blackblade
 Krosan Colossus
+Lady Zhurong, Warrior Queen
+Laquatus's Champion
+Last Word
 Leaf-Crowned Elder
+Legacy Weapon
+Lhurgoyf
+Lich Lord of Unx
+Lichenthrope
 Lightning Angel
 Liliana Vess
+Liu Bei, Lord of Shu
+Livonya Silone
+Lord of Atlantis
+Lord of Extinction
+Lotus Cobra
 Lotus Guardian
 Loxodon Hierarch
+Loxodon Punisher
+Lu Bu, Master-at-Arms
+Lu Meng, Wu General
+Lu Xun, Scholar General
 Mad Auntie
+Madrush Cyclops
 Maelstrom Pulse
+Magnivore
+Magus of the Coffers
 Magus of the Disk
 Magus of the Library
 Magus of the Moat
 Mahamoti Djinn
 Marble Titan
 March of Souls
+Maro
 Marrow-Gnawer
 Mass Calcify
 Mass Hysteria
+Master Transmuter
 Master of Etherium
 Mawcor
+Meddling Mage
+Meekstone
 Meglonoth
 Meloku the Clouded Mirror
 Memnarch
+Memory Erosion
 Meng Huo, Barbarian King
+Merfolk Sovereign
 Mesa Enchantress
 Might of Oaks
 Mikokoro, Center of the Sea
@@ -204,32 +339,51 @@ Mirri the Cursed
 Mirri, Cat Warrior
 Moat
 Mobilization
+Molimo, Maro-Sorcerer
 Morphling
+Mortivore
+Mossfire Valley
 Mox Diamond
 Mox Emerald
 Mox Jet
 Mox Pearl
 Mox Ruby
 Mox Sapphire
+Multani, Maro-Sorcerer
 Muraganda Petroglyphs
+Mutavault
 Mycoloth
+Mystic Enforcer
+Mystic Gate
 Mystic Snake
+Mythic Proportions
 Nantuko Shade
 Nath of the Gilt-Leaf
+Nature's Cloak
 Necropotence
 Nemata, Grove Guardian
+Nemesis of Reason
 Nether Spirit
 Nevinyrral's Disk
 Nicol Bolas, Planeswalker
 Night of Souls' Betrayal
 Nightmare
+Nissa Revane
 Niv-Mizzet, the Firemind
 Noble Hierarch
 Noble Panther
+Nova Chaser
+Nyxathid
+Ob Nixilis, the Fallen
+Obliterate
+Oboro, Palace in the Clouds
+Obsidian Fireheart
 Okina, Temple to the Grandfathers
+Oran-Rief, the Vastwood
 Order of Whiteclay
 Oros, the Avenger
 Overgrown Tomb
+Oversold Cemetery
 Oversoul of Dusk
 Overwhelming Forces
 Paladin en-Vec
@@ -237,33 +391,51 @@ Pale Bears
 Pardic Dragon
 Pearl Dragon
 Penumbra Wurm
+Phantom Nishoba
 Phantom Warrior
 Phyrexian Arena
+Phytohydra
+Pirate Ship
 Pixie Queen
 Plague Wind
+Planar Cleansing
 Plateau
+Plated Slagwurm
+Political Trickery
 Predator Dragon
 Preeminent Captain
 Primal Clay
 Primordial Sage
+Privileged Position
+Progenitus
+Proper Burial
 Pulse of the Tangle
 Punish Ignorance
+Purify
 Pygmy Allosaurus
 Pyroclasm
+Quietus Spike
 Quirion Dryad
 Radiant, Archangel
 Rafiq of the Many
 Raging Kavu
+Rakdos Pit Dragon
 Rakka Mar
 Ramosian Sky Marshal
+Rampaging Baloths
 Ranger of Eos
 Ratcatcher
 Rathi Assassin
+Ravages of War
+Raven Guild Master
 Reach of Branches
 Reki, the History of Kamigawa
+Rendclaw Trow
 Retribution of the Meek
 Reya Dawnbringer
 Rhys the Redeemed
+Riding the Dilu Horse
+Rith, the Awakener
 River Merfolk
 Roc of Kher Ridges
 Rockshard Elemental
@@ -271,108 +443,178 @@ Rolling Stones
 Rootwater Thief
 Rorix Bladewing
 Royal Assassin
+Rugged Prairie
 Ryusei, the Falling Star
 Sabertooth Nishoba
 Sacred Foundry
+Sapling of Colfenor
 Saprazzan Heir
+Sarkhan Vol
+Sarpadian Empires, Vol. VII
 Savannah
 Savannah Lions
+Scalpelexis
 Scarblade Elite
+Scepter of Insight
 Scion of Oona
 Scrubland
+Scute Mob
 Searing Wind
 Sedge Troll
 Seizan, Perverter of Truth
+Sek'Kuar, Deathkeeper
 Sengir Vampire
 Sensation Gorger
 Serendib Efreet
+Serendib Sorcerer
 Serra Angel
 Serra Avatar
 Serra Avenger
 Serra Sphinx
+Serra's Sanctum
+Shadowblood Ridge
 Shadowmage Infiltrator
 Shared Triumph
 Shivan Dragon
+Shivan Hellkite
+Shivan Phoenix
 Shivan Wurm
+Shizo, Death's Storehouse
 Siege-Gang Commander
 Sigil of the Empty Throne
 Silvos, Rogue Elemental
 Simic Sky Swallower
 Skullmulcher
 Sky Swallower
+Skycloud Expanse
 Sleeper Agent
 Sliver Legion
 Sliver Overlord
 Sliver Queen
 Sol'kanar the Swamp King
 Solemn Simulacrum
+Soltari Champion
 Soltari Emissary
 Sorceress Queen
+Soulscour
 Sower of Temptation
 Spawnwrithe
 Spectral Lynx
+Sphinx of Jwar Isle
 Sphinx of the Steel Wind
 Spiritmonger
 Spiritual Guardian
 Squee, Goblin Nabob
+Staff of Domination
+Stangg
 Steam Vents
 Steely Resolve
 Stillmoon Cavalier
 Stomping Ground
 Storm Herd
 Stuffy Doll
+Sun Ce, Young Conquerer
+Sun Quan, Lord of Wu
+Sunglasses of Urza
+Sungrass Prairie
+Sunken Ruins
 Sunweb
+Supreme Exemplar
+Survival of the Fittest
+Swans of Bryn Argoll
+Sygg, River Guide
+Sylvan Tutor
 Taiga
 Take Possession
 Talas Warrior
+Taoist Mystic
 Tarmogoyf
 Tarox Bladewing
 Temple Garden
+Temporal Manipulation
+Terra Stomper
 Terravore
+Tethered Griffin
+Tetsuo Umezawa
+Tezzeret the Seeker
 That Which Was Taken
 The Hive
 The Unspeakable
 Thelonite Hermit
 Thornling
 Thoughtseize
+Thriss, Nantuko Primus
 Tidal Kraken
+Timber Protector
+Time Stretch
+Time Walk
+Time Warp
 Timetwister
 Titanic Ultimatum
 Tithe
+Tolarian Academy
 Tolsimir Wolfblood
+Tower of Champions
 Tower of the Magistrate
+Tradewind Rider
+Trailblazer
 Trained Orgg
+Traumatize
 Treva, the Renewer
 Troll Ascetic
 Tropical Island
+Tuknir Deathlock
 Tundra
+Turntimber Ranger
+Twilight Mire
+Umezawa's Jitte
 Underground Sea
 Undermine
 Undying Beast
+Uril, the Miststalker
+Ursapine
 Utopia Tree
 Vampiric Tutor
 Vedalken Archmage
 Veldrane of Sengir
+Vendilion Clique
 Vengeful Firebrand
 Verduran Enchantress
+Vexing Beetle
 Viashivan Dragon
 Vindicate
+Viridian Zealot
 Visara the Dreadful
 Vitalizing Wind
 Vizzerdrix
 Volcanic Dragon
 Volcanic Island
+Volrath's Stronghold
+Vorosh, the Hunter
 Wall of Kelp
+Warren Instigator
 Warrior Angel
 Watery Grave
 Weathered Wayfarer
+Weatherseed Treefolk
 Wheel of Fortune
 Will-o'-the-Wisp
 Wit's End
+Witch-Maw Nephilim
+Wooded Bastion
 Wort, Boggart Auntie
 Wrath of God
+Wren's Run Packmaster
 Wydwen, the Biting Gale
+Xiahou Dun, the One-Eyed
+Xira Arien
 Yawgmoth's Bargain
+Yellow Scarves General
 Yore-Tiller Nephilim
 Zephid
+Zhang Fei, Fierce Warrior
+Zhang He, Wei General
+Zhou Yu, Chief Commander
+Zuberi, Golden Feather
+Zuo Ci, the Mocking Sage
 Zur the Enchanter
