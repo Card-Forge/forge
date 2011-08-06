@@ -2069,16 +2069,16 @@ public class CardFactory implements NewConstants {
                     
                     if(choices.size() > 0) {
                         for(int i = 0; i < Tgts.length; i++) {
-                            if(Tgts[i].equals("Artifact")) {
+                            if(Tgts[i].startsWith("Artifact")) {
                                 if(CardFactoryUtil.AI_getBestArtifact(choices) != null) results.add(CardFactoryUtil.AI_getBestArtifact(choices));
-                            } else if(Tgts[i].equals("Creature")) {
+                            } else if(Tgts[i].startsWith("Creature")) {
                                 if(CardFactoryUtil.AI_getBestCreature(choices) != null) results.add(CardFactoryUtil.AI_getBestCreature(choices));
-                            } else if(Tgts[i].equals("Enchantment")) {
+                            } else if(Tgts[i].startsWith("Enchantment")) {
                                 if(CardFactoryUtil.AI_getBestEnchantment(choices, card, true) != null) results.add(CardFactoryUtil.AI_getBestEnchantment(
                                         choices, card, true));
-                            } else if(Tgts[i].equals("Land")) {
+                            } else if(Tgts[i].startsWith("Land")) {
                                 if(CardFactoryUtil.AI_getBestLand(choices) != null) results.add(CardFactoryUtil.AI_getBestLand(choices));
-                            } else if(Tgts[i].equals("Permanent")) {
+                            } else if(Tgts[i].startsWith("Permanent")) {
                                 if(CardFactoryUtil.AI_getMostExpensivePermanent(choices, card, true) != null) results.add(CardFactoryUtil.AI_getMostExpensivePermanent(
                                         choices, card, true));
                             }
@@ -2160,7 +2160,7 @@ public class CardFactory implements NewConstants {
 
         }//spDestroyTgt
 
-// Generic bounce target card
+        // Generic bounce target card
         if(hasKeyword(card, "spBounceTgt") != -1) {
             int n = hasKeyword(card, "spBounceTgt");
             

@@ -38,10 +38,16 @@ public class CardFactoryUtil {
         Card biggest = null;
         biggest = all.get(0);
         
-        for(int i = 0; i < all.size(); i++) {
-            if(CardUtil.getConvertedManaCost(biggest.getManaCost()) >= CardUtil.getConvertedManaCost(biggest.getManaCost())) {
-                biggest = all.get(i);
-            }
+        int bigCMC = 0;
+        for (int i=0; i<all.size(); i++)
+        {
+           int curCMC = CardUtil.getConvertedManaCost(all.get(i).getManaCost());
+           
+           if (curCMC > bigCMC)
+           {
+              bigCMC = curCMC;
+              biggest = all.get(i);
+           }
         }
         
         return biggest;
@@ -147,10 +153,16 @@ public class CardFactoryUtil {
         Card biggest = null;
         biggest = all.get(0);
         
-        for(int i = 0; i < all.size(); i++) {
-            if(CardUtil.getConvertedManaCost(biggest.getManaCost()) >= CardUtil.getConvertedManaCost(biggest.getManaCost())) {
-                biggest = all.get(i);
-            }
+        int bigCMC = 0;
+        for (int i=0; i<all.size(); i++)
+        {
+           int curCMC = CardUtil.getConvertedManaCost(all.get(i).getManaCost());
+           
+           if (curCMC > bigCMC)
+           {
+              bigCMC = curCMC;
+              biggest = all.get(i);
+           }
         }
         
         return biggest;
@@ -169,10 +181,16 @@ public class CardFactoryUtil {
         Card biggest = null;
         biggest = all.get(0);
         
-        for(int i = 0; i < all.size(); i++) {
-            if(CardUtil.getConvertedManaCost(biggest.getManaCost()) >= CardUtil.getConvertedManaCost(biggest.getManaCost())) {
-                biggest = all.get(i);
-            }
+        int bigCMC = 0;
+        for (int i=0; i<all.size(); i++)
+        {
+           int curCMC = CardUtil.getConvertedManaCost(all.get(i).getManaCost());
+           
+           if (curCMC > bigCMC)
+           {
+              bigCMC = curCMC;
+              biggest = all.get(i);
+           }
         }
         
         return biggest;
