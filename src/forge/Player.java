@@ -89,6 +89,7 @@ public abstract class Player extends MyObservable{
 	}
 	
 	public boolean canGainLife() {
+		if(AllZoneUtil.isCardInPlay("Sulfuric Vortex")) return false;
 		return true;
 	}
 	

@@ -139,6 +139,7 @@ public class GameActionUtil {
 		upkeep_Dark_Confidant(); // keep this one semi-last
 
 		upkeep_Copper_Tablet();
+		upkeep_Sulfuric_Vortex();
 		upkeep_Power_Surge();
 		upkeep_The_Rack();
 		upkeep_Storm_World();
@@ -8021,7 +8022,6 @@ public class GameActionUtil {
 			ability = new Ability(source, "0") {
 				@Override
 				public void resolve() {
-					//AllZone.GameAction.addDamage(player, source, 1);
 					player.addDamage(1, source);
 				}
 			};// Ability
@@ -8030,6 +8030,29 @@ public class GameActionUtil {
 			AllZone.Stack.add(ability);
 		}// for
 	}// upkeep_Copper_Tablet()
+	
+	private static void upkeep_Sulfuric_Vortex() {
+		/*
+		 * At the beginning of each player's upkeep, Sulfuric Vortex deals 2
+		 * damage to that player.
+		 */
+		final Player player = AllZone.Phase.getActivePlayer();
+		CardList list = AllZoneUtil.getCardsInPlay("Sulfuric Vortex");
+
+		Ability ability;
+		for(Card tablet:list) {
+			final Card source = tablet;
+			ability = new Ability(source, "0") {
+				@Override
+				public void resolve() {
+					player.addDamage(2, source);
+				}
+			};// Ability
+			ability.setStackDescription(source+" - deals 2 damage to " + player);
+
+			AllZone.Stack.add(ability);
+		}// for
+	}// upkeep_Sulfuric_Vortex()
 	
 	private static void upkeep_Power_Surge() {
 		/*

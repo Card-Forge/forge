@@ -1,0 +1,7 @@
+Name:Sulfuric Vortex
+ManaCost:1 R R
+Types:Enchantment
+Text:At the beginning of each player's upkeep, Sulfuric Vortex deals 2 damage to that player.\r\nIf a player would gain life, that player gains no life instead.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfuric_vortex.jpg
+End
