@@ -227,7 +227,7 @@ public class ComputerUtil
   
   final static public void playNoStack(SpellAbility sa)
   {
-	  // todo: We should really restrict what doesn't use the Stack
+	  // TODO: We should really restrict what doesn't use the Stack
 	  
     if(canPayCost(sa))
     {
@@ -997,7 +997,7 @@ public class ComputerUtil
 		list.reverse();
 
 		for (int i = 0; i < max; i++) {
-			// todo: use getWorstPermanent() would be wayyyy better
+			// TODO: use getWorstPermanent() would be wayyyy better
 
 			Card c;
 			if (list.getNotType("Creature").size() == 0) {
@@ -1011,7 +1011,7 @@ public class ComputerUtil
 			ArrayList<Card> auras = c.getEnchantedBy();
 
 			if (auras.size() > 0){
-				// todo: choose "worst" controlled enchanting Aura
+				// TODO: choose "worst" controlled enchanting Aura
 				for(int j = 0; j < auras.size(); j++){
 					Card aura = auras.get(j);
 					if (aura.getController().isPlayer(c.getController()) && list.contains(aura)){

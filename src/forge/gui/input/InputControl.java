@@ -69,7 +69,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         final Player playerTurn = AllZone.Phase.getPlayerTurn();
         final Player priority = AllZone.Phase.getPriorityPlayer();
 
-        // todo: this resolving portion needs more work, but fixes Death Cloud issues 
+        // TODO: this resolving portion needs more work, but fixes Death Cloud issues 
 		if (resolvingStack.size() > 0) {
 			if (input != null) {				
 				return input;

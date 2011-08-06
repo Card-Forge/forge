@@ -538,7 +538,7 @@ public abstract class Player extends MyObservable{
 		PlayerZone library = AllZone.getZone(Constant.Zone.Library, this);
 
 		for(int i = 0; i < n; i++) {
-			// todo: any draw replacements would go here, not just Dredge
+			// TODO: any draw replacements would go here, not just Dredge
 			if(getDredge().size() == 0 || !dredge()) {
 				doDraw(library);
 			}

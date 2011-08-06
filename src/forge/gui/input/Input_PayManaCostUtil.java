@@ -55,7 +55,7 @@ public class Input_PayManaCostUtil
     if(abilities.isEmpty())
     	return manaCost;
     
-    // todo when implementing sunburst 
+    // TODO when implementing sunburst 
     // If the card has sunburst or any other ability that tracks mana spent, skip express Mana choice
     // if (card.getTrackManaPaid()) skipExpress = true;
 

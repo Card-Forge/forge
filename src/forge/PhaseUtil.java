@@ -447,7 +447,7 @@ public class PhaseUtil {
 	
 	
 	// ***** Combat Utility **********
-	// todo: the below functions should be removed and the code blocks that use them should instead use SA_Restriction
+	// TODO: the below functions should be removed and the code blocks that use them should instead use SA_Restriction
 	public static boolean isBeforeAttackersAreDeclared() {
 		String phase = AllZone.Phase.getPhase();
 		return phase.equals(Constant.Phase.Untap) || phase.equals(Constant.Phase.Upkeep)

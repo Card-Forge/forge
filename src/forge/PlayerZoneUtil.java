@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class PlayerZoneUtil
 {	
-	//todo(sol) this whole class is pretty useless 
+	//TODO(sol) this whole class is pretty useless 
   public static ArrayList<Card> getCardType(PlayerZone zone, String cardType)
   {
     Card c;

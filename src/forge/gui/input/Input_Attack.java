@@ -67,7 +67,7 @@ public class Input_Attack extends Input {
     	
         if(zone.is(Constant.Zone.Battlefield, AllZone.HumanPlayer) && CombatUtil.canAttack(card,AllZone.Combat)) {
             
-        	// todo add the propaganda code here and remove it in Phase.nextPhase()
+        	// TODO add the propaganda code here and remove it in Phase.nextPhase()
         	// if (!CombatUtil.checkPropagandaEffects(card))
         	// 		return;
         	         

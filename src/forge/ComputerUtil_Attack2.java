@@ -104,7 +104,7 @@ public class ComputerUtil_Attack2 {
         	}
         });
         return possibleBlockers;
-      }//getUntappedCreatures()
+      }//getPossibleBlockers()
 
        //this checks to make sure that the computer player
        //doesn't lose when the human player attacks
@@ -396,7 +396,7 @@ public class ComputerUtil_Attack2 {
            // *****************
 
            // decide on attack aggression based on a comparison of forces, life totals and other considerations
-           // some bad "magic numbers" here, todo replace with nice descriptive variable names
+           // some bad "magic numbers" here, TODO replace with nice descriptive variable names
            if((ratioDiff > 0 && doAttritionalAttack)){ // (playerLifeToDamageRatio <= 1 && ratioDiff >= 1 && outNumber > 0)  ||
                aiAggression = 5; // attack at all costs
             }else if((playerLifeToDamageRatio < 2 && ratioDiff >= 0) || ratioDiff > 3 || (ratioDiff > 0 && outNumber > 0)){

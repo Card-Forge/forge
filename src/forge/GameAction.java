@@ -32,7 +32,7 @@ public class GameAction {
         }
     }
 
-    // todo(sol) Combine all of these move tos
+    // TODO(sol) Combine all of these move tos
     
     public Card moveTo(PlayerZone zone, Card c) {
     	// Ideally move to should never be called without a prevZone
@@ -76,7 +76,7 @@ public class GameAction {
         }
         
         if (zone.is(Constant.Zone.Battlefield) && c.isAura()){
-        	// todo: add attachment code here
+        	// TODO: add attachment code here
         }
         
         // copyCard above seems to already clearRemembered, commenting out for now
@@ -2447,7 +2447,7 @@ public class GameAction {
             AllZone.ComputerPlayer.drawCard();
         }
 
-        // todo: ManaPool should be moved to Player and be represented in the player panel
+        // TODO: ManaPool should be moved to Player and be represented in the player panel
         ManaPool mp = AllZone.ManaPool;
         mp.setImageFilename("mana_pool");
         AllZone.Human_Battlefield.add(mp);

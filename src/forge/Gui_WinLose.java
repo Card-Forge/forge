@@ -285,7 +285,7 @@ public class Gui_WinLose extends JFrame implements NewConstants {
     
     private String getWinText(long creds, QuestMatchState winLose, forge.quest.data.QuestData q)
     {
-    	// todo use q.qdPrefs to write bonus credits in prefs file 
+    	// TODO use q.qdPrefs to write bonus credits in prefs file 
     	StringBuilder sb = new StringBuilder();
     	String[] wins = winLose.getWinMethods();
     	

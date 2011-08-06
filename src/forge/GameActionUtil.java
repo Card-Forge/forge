@@ -2186,7 +2186,7 @@ public class GameActionUtil {
 			if(showLandfallDialog(c)) AllZone.Stack.addSimultaneousStackEntry(ability);
 		}
 		else{
-			// todo: once AI has a mana pool he should choose add Ability and choose a mana as appropriate
+			// TODO: once AI has a mana pool he should choose add Ability and choose a mana as appropriate
 		}
 	}
 	
@@ -4694,7 +4694,7 @@ public class GameActionUtil {
 	}//upkeep_Shapeshifter
 	
 	private static void upkeep_Vesuvan_Doppelganger_Keyword() {
-		// todo: what about enchantments? i dont know how great this solution is
+		// TODO: what about enchantments? i dont know how great this solution is
 		final Player player = AllZone.Phase.getPlayerTurn();
 		final String keyword = "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability.";
 		CardList list = AllZoneUtil.getPlayerCardsInPlay(player);

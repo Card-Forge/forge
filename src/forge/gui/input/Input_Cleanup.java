@@ -32,7 +32,7 @@ public class Input_Cleanup extends Input {
             CombatUtil.removeAllDamage();
             
             AllZone.Phase.setNeedToNextPhase(true);
-            AllZone.Phase.nextPhase();	// todo: keep an eye on this code, see if we can get rid of it.
+            AllZone.Phase.nextPhase();	// TODO: keep an eye on this code, see if we can get rid of it.
         }
     }
     

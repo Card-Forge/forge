@@ -64,7 +64,7 @@ public class ComputerUtil_Block2
 	   
 	   boolean bLifeInDanger = CombatUtil.lifeInDanger(combat);
 	   
-	   // todo: Add creatures attacking Planeswalkers in order of which we want to protect
+	   // TODO: Add creatures attacking Planeswalkers in order of which we want to protect
        // defend planeswalkers with more loyalty before planeswalkers with less loyalty
 	   // if planeswalker will be too difficult to defend don't even bother
 	   for(int i = 1; i < attackerLists.length; i++){

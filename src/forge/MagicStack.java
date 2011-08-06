@@ -106,7 +106,7 @@ public class MagicStack extends MyObservable {
 	}
 
 	public void clearFrozen() {
-		// todo: frozen triggered abilities and undoable costs have nasty
+		// TODO: frozen triggered abilities and undoable costs have nasty
 		// consequences
 		frozen = false;
 		frozenStack.clear();
@@ -282,7 +282,7 @@ public class MagicStack extends MyObservable {
 				}
 				
 				else if (sp.isXCost()) {
-					// todo: convert any X costs to use abCost so it happens earlier
+					// TODO: convert any X costs to use abCost so it happens earlier
 					final SpellAbility sa = sp;
 					final Ability ability = new Ability(sp.getSourceCard(), sa.getXManaCost()) {
 						public void resolve() {
@@ -330,7 +330,7 @@ public class MagicStack extends MyObservable {
 				} 
 				
 				else if (sp.isMultiKicker()){
-					// todo: convert multikicker support in abCost so this doesn't happen here
+					// TODO: convert multikicker support in abCost so this doesn't happen here
 					// both X and multi is not supported yet
 				
 					final SpellAbility sa = sp;
@@ -413,7 +413,7 @@ public class MagicStack extends MyObservable {
 				}
 				
 				else if (sp.isReplicate()){
-					// todo: convert multikicker/replicate support in abCost so this doesn't happen here
+					// TODO: convert multikicker/replicate support in abCost so this doesn't happen here
 					// X and multi and replicate are not supported yet
 				
 					final SpellAbility sa = sp;

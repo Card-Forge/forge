@@ -38,7 +38,7 @@ public class ComputerAI_Input extends Input {
     }
     
     private void think() {
-    	//todo: instead of setNextPhase, pass priority
+    	//TODO: instead of setNextPhase, pass priority
         final String phase = AllZone.Phase.getPhase();
         
         if (AllZone.Stack.size() > 0)

@@ -354,7 +354,7 @@ public class Phase extends MyObservable
         }
         
         if (is(Constant.Phase.Combat_End) && extraCombats > 0){
-        	// todo: ExtraCombat needs to be changed for other spell/abilities that give extra combat
+        	// TODO: ExtraCombat needs to be changed for other spell/abilities that give extra combat
         	// can do it like ExtraTurn stack ExtraPhases
 
         	Player player = getPlayerTurn();
