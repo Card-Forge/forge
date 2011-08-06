@@ -5680,6 +5680,7 @@ res/cardsfolder/vensers_journal.txt -text svneol=native#text/plain
 res/cardsfolder/vensers_sliver.txt -text svneol=native#text/plain
 res/cardsfolder/vent_sentinel.txt -text svneol=native#text/plain
 res/cardsfolder/verdant_catacombs.txt -text svneol=native#text/plain
+res/cardsfolder/verdant_eidolon.txt -text svneol=native#text/plain
 res/cardsfolder/verdant_force.txt -text svneol=native#text/plain
 res/cardsfolder/verdigris.txt -text svneol=native#text/plain
 res/cardsfolder/verduran_enchantress.txt -text svneol=native#text/plain
