@@ -4,7 +4,7 @@ Types:Creature Rhino Soldier
 Text:no text
 PT:3/3
 K:First Strike
-K:StaticEffect:Play:Permanents you Control:Keyword/First Strike:Type.Creature!Type.Soldier!NotSelf:Other Soldier creatures you control have first strike.
+K:stPumpAll:Creature.Soldier+Other+YouCtrl:0/0/First Strike:No Condition:Other Soldier creatures you control have first strike.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_pikemaster.jpg

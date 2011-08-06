@@ -1,0 +1,9 @@
+Name:Aura Flux
+ManaCost:2 U
+Types:Enchantment
+Text:no text
+K:stPumpAll:Enchantment.Other:0/0/At the beginning of your upkeep, sacrifice CARDNAME unless you pay 2:No Condition:Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}."
+SVar:Rarity:Uncommon
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_flux.jpg
+End

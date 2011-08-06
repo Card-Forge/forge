@@ -11641,7 +11641,7 @@ public class GameActionUtil {
 	      		// Special Conditions
 	      		final String Affected = Keyword_Details[1];			
   				final String Specific[] = Affected.split(",");
-  				Cards_inZone = Cards_inZone.getValidCards(Specific, SourceCard.getController());
+  				Cards_inZone = Cards_inZone.getValidCards(Specific, SourceCard.getController(), SourceCard);
 		      		
   				// From the cards left, determine which cards have already got the bonus 		
   				for(int i = 0; i < Cards_inZone.size(); i++) {
@@ -11701,7 +11701,7 @@ public class GameActionUtil {
       	      	String Affected = k[1];
       	      	final String Specific[] = Affected.split(",");
       	      	final Player Controller = Source.getController();
-				if(old[ANumber].contains(c) && (!AffectedCards(Source, k).contains(c) || !c.isValidCard(Specific, Controller))) {
+				if(old[ANumber].contains(c) && (!AffectedCards(Source, k).contains(c) || !c.isValidCard(Specific, Controller, Source))) {
 					old[ANumber].remove(c);
 					removeKeywords(Source, c, k, ANumber);
 				}
@@ -11816,11 +11816,8 @@ public class GameActionUtil {
 	      	}
       		
       		if(Range.equals("Equipped")) {
-	      			CardList CardsinPlay = new CardList();
-	      			CardsinPlay.addAll(AllZone.Human_Play.getCards());
-	      			CardsinPlay.addAll(AllZone.Computer_Play.getCards());
-		      		for(int i = 0; i < CardsinPlay.size(); i++)
-		      		if(CardsinPlay.get(i).getEquippedBy().contains(SourceCard)) Cards_inZone.add(CardsinPlay.get(i));
+      			if (SourceCard.getEquipping().size() > 0)
+      				Cards_inZone.addAll(SourceCard.getEquipping().toArray());
 		    }
       		
 			return Cards_inZone;

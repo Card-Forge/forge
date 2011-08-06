@@ -4,7 +4,7 @@ Types:Creature Giant Soldier
 Text:no text
 PT:3/4
 K:Vigilance
-K:StaticEffect:Play:Permanents you Control:PTBonus/0/2!Keyword/Vigilance:Type.Creature!NotSelf:Other creatures you control get +0/+2 and have vigilance.
+K:stPumpAll:Creature.Other+YouCtrl:0/2/Vigilance:No Condition:Other creatures you control get +0/+2 and have vigilance.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oathsworn_giant.jpg

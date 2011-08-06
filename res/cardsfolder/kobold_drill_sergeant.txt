@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Kobold Soldier
 Text:no text
 PT:1/2
-K:StaticEffect:Play:Permanents you Control:PTBonus/0/1!Keyword/Trample:Type.Creature!Type.Kobold!NotSelf:Other Kobold creatures you control get +0/+1 and have trample.
+K:stPumpAll:Creature.Kobold+Other+YouCtrl:0/1/Trample:No Condition:Other Kobold creatures you control get +0/+1 and have trample.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kobold_drill_sergeant.jpg
