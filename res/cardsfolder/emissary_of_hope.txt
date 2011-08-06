@@ -1,10 +1,10 @@
 Name:Emissary of Hope
-ManaCost:1 B B
+ManaCost:1 W W
 Types:Creature Spirit
 Text:no text
 PT:2/1
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player loses 1 life for each artifact he or she controls.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you gain 1 life for each artifact that player controls.
 SVar:TrigLoseLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Artifact.YouDontCtrl
 SVar:Rarity:Uncommon
