@@ -23235,7 +23235,6 @@ public class CardFactory implements NewConstants {
                 public void resolve() {
                     String player = AllZone.Phase.getActivePlayer();
                     PlayerZone PlayerHand = AllZone.getZone(Constant.Zone.Hand, player);
-                    PlayerZone RFG = AllZone.getZone(Constant.Zone.Removed_From_Play , player);
                     PlayerZone lib = AllZone.getZone(Constant.Zone.Library, player);
                     CardList libList = new CardList(lib.getCards());
                     final String[] input = new String[1];
@@ -23243,8 +23242,7 @@ public class CardFactory implements NewConstants {
                     
                     for(int i = 0; i < 7; i++) {
                         Card c = libList.get(i);
-                        lib.remove(c);
-                        RFG.add(c);
+                        AllZone.GameAction.removeFromGame(c);
                     }
 
                     int max = libList.size();
@@ -23258,8 +23256,7 @@ public class CardFactory implements NewConstants {
                             }
                             
                         } else if(stop == 0) {
-                            lib.remove(c);
-                            RFG.add(c);
+                            AllZone.GameAction.removeFromGame(c);
                         }
                     }
                 }
