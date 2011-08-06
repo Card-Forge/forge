@@ -404,6 +404,7 @@ res/cardsfolder/barbarian_general.txt -text svneol=native#text/plain
 res/cardsfolder/barbarian_horde.txt -text svneol=native#text/plain
 res/cardsfolder/barbarian_lunatic.txt -text svneol=native#text/plain
 res/cardsfolder/barbarian_riftcutter.txt -text svneol=native#text/plain
+res/cardsfolder/barbarian_ring.txt -text svneol=native#text/plain
 res/cardsfolder/barbary_apes.txt -text svneol=native#text/plain
 res/cardsfolder/barbed_battlegear.txt -text svneol=native#text/plain
 res/cardsfolder/barbtooth_wurm.txt -text svneol=native#text/plain
