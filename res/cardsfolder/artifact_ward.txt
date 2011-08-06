@@ -1,9 +1,9 @@
 Name:Artifact Ward
 ManaCost:W
 Types:Enchantment Aura
-Text:Enchanted creature has protection from artifacts. This effect doesn't remove Artifact Ward.
+Text:no text
 K:Enchant creature
-K:enPump:Protection from artifacts
+K:enPump:Protection from artifacts:Enchanted creature has protection from artifacts. This effect doesn't remove Artifact Ward.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_ward.jpg
 SetInfo:ATQ|Common|http://magiccards.info/scans/en/aq/96.jpg

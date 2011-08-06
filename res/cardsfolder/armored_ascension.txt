@@ -1,9 +1,9 @@
 Name:Armored Ascension
 ManaCost:3 W
 Types:Enchantment Aura
-Text:Enchanted creature gets +1/+1 for each Plains you control and has flying.
+Text:no text
 K:Enchant creature
-K:enPump:Flying
+K:enPump:Flying:Enchanted creature gets +1/+1 for each Plains you control and has flying.
 K:stPumpEnchanted:Creature:X/X:no Condition:no text
 SVar:X:Count$TypeYouCtrl.Plains
 SVar:BuffedBy:Plains

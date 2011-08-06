@@ -1,7 +1,7 @@
 Name:Agility
 ManaCost:1 R
 Types:Enchantment Aura
-Text:Enchanted creature gets +1/+1 and has flanking.
+Text:no text
 K:Enchant creature
 K:enPump:+1/+1/Flanking
 SVar:Rarity:Common
