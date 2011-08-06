@@ -2595,36 +2595,33 @@ public class GameActionUtil {
 
         if (c.isEnchantment()) {
             for (int i = 0; i < list.size(); i++) {
-                final Card card = list.get(i);        //was "list.get(0);"
+                final Card card = list.get(i);
 
                 Ability ability2 = new Ability(card, "0") {
                     @Override
                     public void resolve() {
-                        Boolean mayDrawNotMust = (card.getName().equals("Verduran Enchantress") || card.getName().equals("Mesa Enchantress")
-                        		|| card.getName().equals("Kor Spiritdancer"));
-                        int choice = 0;
+                        Player controller = card.getController();
+                        int compLibSize = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
+                        int compHandSize = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size();
                         
-                        if (card.getController().equals(AllZone.HumanPlayer)) {
-                            if (mayDrawNotMust) {
-                            	StringBuilder title = new StringBuilder();
-                                title.append(card.getName()).append(" Ability");
-                                StringBuilder message = new StringBuilder();
-                                message.append("Will you draw a card?");
-                                choice = JOptionPane.showConfirmDialog(null, message.toString(), title.toString(), JOptionPane.YES_NO_OPTION);
-                            }// May Draw a card
+                        Boolean mayDrawNotMust = (card.getName().equals("Verduran Enchantress") 
+                                || card.getName().equals("Mesa Enchantress")
+                                || card.getName().equals("Kor Spiritdancer"));
+                        
+                        if (mayDrawNotMust) {
                             
-                            if ((mayDrawNotMust && choice == JOptionPane.YES_OPTION) || !mayDrawNotMust) {
-                                card.getController().drawCard();
-                            }
-                        }// Human
+                            if (controller.isHuman()) {
+                                String question = "Will you draw a card?";
+                                if (showYesNoDialog(card, question)) {
+                                    controller.drawCard();
+                                }
+                            }// controller isComputer() and may draw
+                            else if (compLibSize >= 5 && compHandSize < 7) {
+                                controller.drawCard();
+                        }
+                        // Must draw, not may draw
+                        } else controller.drawCard();
                         
-                        if (card.getController().equals(AllZone.ComputerPlayer)) {
-                            int compLibSize = AllZone.getZone(Constant.Zone.Library, AllZone.ComputerPlayer).size();
-                            int compHandSize = AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).size();
-                            if ((!mayDrawNotMust) || (mayDrawNotMust && compLibSize >= 5  && compHandSize <= 7)) {
-                                card.getController().drawCard();
-                            }
-                        }// Computer
                     }// resolve()
                 };// ability2
                 
@@ -2632,8 +2629,8 @@ public class GameActionUtil {
                 sb.append(card.getName()).append(" - ").append(c.getController()).append(" plays an enchantment spell and ");
                 
                 if (card.getName().equals("Verduran Enchantress") 
-                		|| card.getName().equals("Mesa Enchantress")
-                		|| card.getName().equals("Kor Spiritdancer")) {
+                        || card.getName().equals("Mesa Enchantress")
+                        || card.getName().equals("Kor Spiritdancer")) {
                     sb.append("may draw a card.");
                 } else {
                     sb.append("draws a card.");
