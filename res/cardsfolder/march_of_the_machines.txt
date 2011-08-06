@@ -6,4 +6,6 @@ K:stAnimateAll:Artifact.nonCreature:Count$CardManaCost/Count$CardManaCost:Creatu
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/march_of_the_machines.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/42.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/91.jpg
 End

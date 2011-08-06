@@ -9,4 +9,5 @@ T:Mode$ Clashed | ValidPlayer$ You | Won$ False | TriggerZones$ Battlefield | Ex
 SVar:TrigTapL:AB$Tap | Cost$ 0 | Tgt$ TgtC
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entangling_trap.jpg
+SetInfo:LRW|Uncommon|http://magiccards.info/scans/en/lw/13.jpg
 End
