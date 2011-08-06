@@ -3,7 +3,7 @@ ManaCost:U B R G
 Types:Creature Nephilim
 Text:Whenever Glint-Eye Nephilim deals combat damage to a player, draw that many cards.
 PT:2/2
-A:AB$Pump|Cost$1 Discard<1/Any>|NumAtt$+1|NumDef+1|SpellDescription$CARDNAME gets +1/+1 until end of turn.
+A:AB$Pump|Cost$1 Discard<1/Any>|NumAtt$+1|NumDef$+1|SpellDescription$CARDNAME gets +1/+1 until end of turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glint_eye_nephilim.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/115.jpg
