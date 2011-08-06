@@ -13980,6 +13980,7 @@ public class GameActionUtil {
 		}
 	};
 
+	/*
 	public static Command People_of_the_Woods                   = new Command() {
 		private static final long serialVersionUID = 1987554325573387864L;
 
@@ -13993,6 +13994,7 @@ public class GameActionUtil {
 			}
 		}// execute()
 	};
+	*/
 	
 	public static Command Maraxus_of_Keld = new Command() {
 		private static final long serialVersionUID = 7128144927031872127L;
@@ -16469,7 +16471,7 @@ public class GameActionUtil {
 		commands.put("Omnath", Omnath);
 		commands.put("Overbeing_of_Myth", Overbeing_of_Myth);
 		
-		commands.put("People_of_the_Woods", People_of_the_Woods);
+		//commands.put("People_of_the_Woods", People_of_the_Woods);
 		commands.put("Phylactery_Lich", Phylactery_Lich);
 		commands.put("Plague_Rats", Plague_Rats);
 		commands.put("Primalcrux", Primalcrux);

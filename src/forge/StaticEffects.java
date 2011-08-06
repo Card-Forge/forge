@@ -53,7 +53,6 @@ public class StaticEffects
 		cardToEffectsList.put("Faerie Swarm", new String[] {"Faerie_Swarm"});
 		
 		cardToEffectsList.put("Gaddock Teeg", new String[] {"Gaddock_Teeg"});
-		
 		cardToEffectsList.put("Gaea's Avenger", new String[] {"Gaeas_Avenger"});
 		cardToEffectsList.put("Gemhide Sliver", new String[] {"Gemhide_Sliver"});
 		cardToEffectsList.put("Goblin Assault", new String[] {"Goblin_Assault"});
@@ -109,7 +108,7 @@ public class StaticEffects
 		cardToEffectsList.put("Omnath, Locus of Mana", new String[] {"Omnath"});
 		cardToEffectsList.put("Overbeing of Myth", new String[] {"Overbeing_of_Myth"});
 		
-		cardToEffectsList.put("People of the Woods", new String[] {"People_of_the_Woods"});
+		//cardToEffectsList.put("People of the Woods", new String[] {"People_of_the_Woods"});
 		cardToEffectsList.put("Phylactery Lich", new String[]{"Phylactery_Lich"});
 		cardToEffectsList.put("Plague Rats", new String[] {"Plague_Rats"});
 		cardToEffectsList.put("Primalcrux",new String[] {"Primalcrux"});
