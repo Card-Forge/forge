@@ -4,9 +4,9 @@ Types:Artifact Equipment
 Text:Equipped creature gets +2/+2 and has protection from black and from green.
 K:eqPump 2:+2/+2/Protection from black & Protection from green
 #Switched order of abilities since DB$UntapAll doesn't exist yet -PA
-T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, that player discards a card and you untap all lands you control.
+T:Mode$ DamageDone | ValidSource$ Creature.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, that player discards a card and you untap all lands you control.
 SVar:TrigUntap:AB$UntapAll | Cost$ 0 | ValidCards$ Land.YouCtrl | SubAbility$ SVar=DBDiscard
-SVar:DBDiscard:DB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:DBDiscard:DB$Discard | Cost$ 0 | Defined$ Target | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sword_of_feast_and_famine.jpg
 SetInfo:MBS|Mythic|http://magiccards.info/scans/en/mbs/138.jpg
