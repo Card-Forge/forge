@@ -132,8 +132,9 @@ public class ComputerUtil_Block2
 	  if (blockersLeft.size() == 0)
 		  return combat;
 	   
+	  /*
 	  //Begin with the attackers that pose the biggest thread
-	  CardListUtil.sortAttack(attackersLeft);
+	  CardListUtil.sortAttack(attackersLeft);*/
 	  
 	  //Begin with the weakest blockers
 	  CardListUtil.sortAttackLowFirst(blockersLeft);
