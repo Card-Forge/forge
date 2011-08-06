@@ -1,3 +1,17 @@
+Haze of Rage
+1 R
+Sorcery
+no text
+spAllPump:YouCtrl:+1/+0:Creatures you control get +1/+0 until end of turn.:Haze of Rage - Creatures get +1/+0 until EOT
+SVar:Buyback:2
+Storm
+
+Titanic Ultimatum
+R R G G G W W
+Sorcery
+no text
+spAllPump:YouCtrl:+5/+5/First Strike & Lifelink & Trample:Until end of turn, creatures you control get +5/+5 and gain first strike, lifelink and trample.:Titanic Ultimatum - Creatures get +5/+5 and gain first strike, lifelink and trample until EOT
+
 Crossbow Ambush
 G
 Instant
@@ -867,12 +881,6 @@ Astral Steel
 2 W
 Instant
 Target creature gets +1/+2 until end of turn. Storm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)
-Storm
-
-Haze of Rage
-1 R
-Sorcery
-no text
 Storm
 
 Ignite Memories
@@ -15491,11 +15499,6 @@ no cost
 Legendary Land
 When Flagstones of Trokair is put into a graveyard from play, you may search your library for a Plains card and put it into play tapped. If you do, shuffle your library.
 tap: add W
-
-Titanic Ultimatum
-R R G G G W W
-Sorcery
-Until end of turn, creatures you control get +5/+5 and gain first strike, lifelink, and trample.
 
 Rolling Stones
 1 W

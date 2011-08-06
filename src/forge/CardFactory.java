@@ -7159,6 +7159,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
         
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Haze of Rage")) {
             final Card crd = card;
@@ -7263,6 +7265,8 @@ public class CardFactory implements NewConstants {
             card.addSpellAbility(spell);
             card.addSpellAbility(Card_Buyback);
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Astral Steel")) {
@@ -14542,7 +14546,8 @@ public class CardFactory implements NewConstants {
             card.setSVar("PlayMain1", "TRUE");
         }//*************** END ************ END **************************
         
-
+        
+/*
         //*************** START *********** START **************************
         else if(cardName.equals("Titanic Ultimatum")) {
             SpellAbility spell = new Spell(card) {
@@ -14601,6 +14606,8 @@ public class CardFactory implements NewConstants {
             card.clearSpellAbility();
             card.addSpellAbility(spell);
         }//*************** END ************ END **************************
+*/
+        
         
         //*************** START *********** START **************************
         else if(cardName.equals("Primal Boost")) {
