@@ -169,6 +169,7 @@ public class GameActionUtil {
 		draw_Font_of_Mythos(player);
 		draw_Overbeing_of_Myth(player);
 		draw_Mana_Vault(player);
+		draw_Sylvan_Library();
 		AllZone.Stack.unfreezeStack();
 	}
 
@@ -9730,6 +9731,72 @@ public class GameActionUtil {
 		CardList list = AllZoneUtil.getCardsInPlay("Spiteful Visions");
 		player.drawCards(list.size());
 	}// Spiteful_Visions()
+	
+	private static void draw_Sylvan_Library() {
+		/*
+		 * At the beginning of your draw step, you may draw two additional
+		 * cards. If you do, choose two cards in your hand drawn this turn.
+		 * For each of those cards, pay 4 life or put the card on top of
+		 * your library.
+		 */
+		final Player player = AllZone.Phase.getPlayerTurn();
+		final CardList cards = AllZoneUtil.getPlayerCardsInPlay(player, "Sylvan Library");
+		
+		for(final Card source:cards) {
+			final Ability ability = new Ability(source, "") {
+				@Override
+				public void resolve() {
+					final Player player = source.getController();
+					if (player.isHuman()) {
+						String question = "Draw 2 additional cards?";
+						final String cardQuestion = "Pay 4 life and keep in hand?";
+						if (GameActionUtil.showYesNoDialog(source, question)) {
+							player.drawCards(2);
+							for(int i = 0; i < 2; i++) {
+								final String prompt = source.getName()+" - Select a card drawn this turn: "+(2-i)+" of 2";
+								//TODO - add enforcement of "drawn this turn"
+								AllZone.InputControl.setInput(new Input() {
+									private static final long serialVersionUID = -3389565833121544797L;
+
+									@Override
+						            public void showMessage() {
+						            	if (AllZone.Human_Hand.getCards().length == 0) stop();
+						                AllZone.Display.showMessage(prompt);
+						                ButtonUtil.disableAll();
+						            }
+						            
+						            @Override
+						            public void selectCard(Card card, PlayerZone zone) {
+						                if(zone.is(Constant.Zone.Hand)) {
+						                    /////////////////////////////////////////
+						                	if (GameActionUtil.showYesNoDialog(source, cardQuestion)) {
+						                		player.payLife(4);
+						                		//card stays in hand
+						                	}
+						                	else {
+						                		AllZone.GameAction.moveToTopOfLibrary(card);
+						                	}
+						                	stop();
+						                	////////////////////////////////////
+						                }
+						            }
+								});//end Input
+							}
+						}
+					}
+					else {
+						//Computer, but he's too stupid to play this
+					}
+				}//resolve
+			};// Ability
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append(source.getName()).append(" - draw 2 extra cards.");
+			ability.setStackDescription(sb.toString());
+			
+			AllZone.Stack.add(ability);
+		}//end for
+	}
 	
 	private static void draw_Kami_Crescent_Moon(Player player) {
 		CardList list = AllZoneUtil.getCardsInPlay("Kami of the Crescent Moon");
