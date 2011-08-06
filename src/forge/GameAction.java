@@ -1236,6 +1236,40 @@ private int getDifferentLand(CardList list, String land)
 	    playSpellAbility(sa);
 	}
   }
+  
+  public void playCardNoCost(Card c)
+  {
+	    SpellAbility[] choices = canPlaySpellAbility(c.getSpellAbility());
+	    SpellAbility sa;
+	/*
+	 System.out.println(choices.length);
+	 for(int i = 0; i < choices.length; i++)
+	     System.out.println(choices[i]);
+	*/
+	    if(choices.length == 0)
+	      return;
+	    else if(choices.length == 1)
+	      sa = choices[0];
+	    else
+	      sa = (SpellAbility) AllZone.Display.getChoiceOptional("Choose", choices);
+	
+	    if(sa == null)
+	      return;
+	
+	    playSpellAbilityForFree(sa);
+  }
+  
+  public void playSpellAbilityForFree(SpellAbility sa)
+  {
+	if (sa.getBeforePayMana() == null){
+		AllZone.Stack.add(sa);
+		if (sa.isTapAbility())
+			sa.getSourceCard().tap();
+	}
+	else
+		AllZone.InputControl.setInput(sa.getBeforePayMana());
+  }
+  
   public void playSpellAbility(SpellAbility sa)
   {
 	if (sa.getManaCost().equals("0") && sa.getBeforePayMana() == null){

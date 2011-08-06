@@ -9752,7 +9752,7 @@ public class CardFactory implements NewConstants {
 	          for(int i = 0; i < sameName.size(); i++)
 	          {
 	            if(sameName.get(i).isToken())
-	              AllZone.GameAction.destroy(sameName.get(i));
+	              AllZone.GameAction.removeFromGame(sameName.get(i));
 	            else
 	            {
 	              PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, sameName.get(i).getOwner());
@@ -9820,12 +9820,7 @@ public class CardFactory implements NewConstants {
             else
             {
               PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, getTargetCard().getOwner());
-              @SuppressWarnings("unused") // play
-			  PlayerZone play = AllZone.getZone(Constant.Zone.Play, getTargetCard().getOwner());
               AllZone.GameAction.moveTo(hand, getTargetCard());
-              
-              //play.remove(getTargetCard());
-              //hand.add(getTargetCard());
             }
             AllZone.GameAction.drawCard(card.getController());
           }//if

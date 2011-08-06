@@ -2019,7 +2019,7 @@ class CardFactory_Lands {
 	           }
 	         };//SpellAbility
 
-	         card.clearSpellAbility();
+	         card.clearSpellKeepManaAbility();
 	         card.addSpellAbility(a1);
 	         a1.setDescription("1: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.");
 	         a1.setStackDescription(card +" becomes a 2/2 creature with changeling until EOT");
@@ -2923,14 +2923,13 @@ class CardFactory_Lands {
 	         
 	          public void execute()
 	            {
-	              Card c = card;
-
-	              c.setBaseAttack(0);
-	              c.setBaseDefense(0);
+	              Card c = card;	              
 	              c.removeType("Creature");
 	              c.removeType("Zombie");
 	              c.removeType("Plant");              
 	              c.setManaCost("");
+	              c.setBaseAttack(0);
+	              c.setBaseDefense(0);
 	              
 	            }
 	          };

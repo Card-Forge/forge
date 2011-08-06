@@ -140,6 +140,7 @@ public class GameActionUtil
 		playCard_Mold_Adder(c);
 		playCard_Fable_of_Wolf_and_Owl(c);
 	}
+	
 	public static void playCard_Emberstrike_Duo(Card c)
 	{
 		final String controller = c.getController();

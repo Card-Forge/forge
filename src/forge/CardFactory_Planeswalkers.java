@@ -120,10 +120,10 @@ class CardFactory_Planeswalkers {
 	          turn[0] = AllZone.Phase.getTurn();
 	
 	          //make all permanents in play/hand/library and graveyard	
-	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card.getController());
-	          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card.getController());
-	          PlayerZone library = AllZone.getZone(Constant.Zone.Library, card.getController());
-	          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card.getController());
+	          PlayerZone play = AllZone.getZone(Constant.Zone.Play, card2.getController());
+	          PlayerZone hand = AllZone.getZone(Constant.Zone.Hand, card2.getController());
+	          PlayerZone library = AllZone.getZone(Constant.Zone.Library, card2.getController());
+	          PlayerZone grave = AllZone.getZone(Constant.Zone.Graveyard, card2.getController());
 	          
 	          CardList list = new CardList();
 	          list.addAll(play.getCards());
