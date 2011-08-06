@@ -6595,60 +6595,6 @@ public class CardFactory_Creatures {
             };
             card.clearSpellAbility();
             card.addSpellAbility(spell);
-            
-            final Command untilEOT = new Command() {
-				private static final long serialVersionUID = 8163158247122311120L;
-
-				public void execute() {
-                    card.setShield(0);   
-                }
-            };
-            
-            final SpellAbility a1 = new Ability(card, "B") {
-                @Override
-                public boolean canPlayAI() {
-                    if(CardFactoryUtil.AI_isMainPhase()) {
-                        if(CardFactoryUtil.AI_doesCreatureAttack(card)) {
-                         
-                            int weight[] = new int[3];
-                            
-                            if(card.getKeyword().size() > 0) weight[0] = 75;
-                            else weight[0] = 0;
-                            
-                            CardList HandList = new CardList(AllZone.getZone(Constant.Zone.Hand,
-                                    AllZone.ComputerPlayer).getCards());
-                            
-                            if(HandList.size() >= 4) weight[1] = 25;
-                            else weight[1] = 75;
-                            
-                            int hCMC = 0;
-                            for(int i = 0; i < HandList.size(); i++)
-                                if(CardUtil.getConvertedManaCost(HandList.getCard(i).getManaCost()) > hCMC) hCMC = CardUtil.getConvertedManaCost(HandList.getCard(
-                                        i).getManaCost());
-                            
-                            CardList LandList = new CardList(AllZone.getZone(Constant.Zone.Battlefield,
-                                    AllZone.ComputerPlayer).getCards());
-                            LandList = LandList.getType("Land");
-                            
-                            if(hCMC + 2 >= LandList.size()) weight[2] = 50;
-                            else weight[2] = 0;
-                            
-                            int aw = (weight[0] + weight[1] + weight[2]) / 3;
-                            Random r = new Random();
-                            if(r.nextInt(100) <= aw) return true;
-                        }
-                    }
-                    return false;
-                }
-                
-                @Override
-                public void resolve() {
-                    card.addShield();
-                    AllZone.EndOfTurn.addUntil(untilEOT);
-                }
-            }; //SpellAbility
-            a1.setDescription("Regenerate: B");
-            card.addSpellAbility(a1);
         }
         //*************** END ************ END **************************
         
