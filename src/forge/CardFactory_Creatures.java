@@ -15384,8 +15384,9 @@ public class CardFactory_Creatures {
                 }//resolve()
             };
             
-            ability.setDescription("3: put a +1/+1 counter on Feral Hydra. ");
-            ability.setStackDescription("Feral Hydra gets a +1/+1 counter. ");
+            ability.setDescription("3: put a +1/+1 counter on Feral Hydra. Any player may activate this ability.");
+            ability.setStackDescription("Feral Hydra gets a +1/+1 counter.");
+            ability.getRestrictions().setAnyPlayer(true);
             card.addSpellAbility(ability);
   
             Command intoPlay = new Command() {
@@ -19998,15 +19999,13 @@ public class CardFactory_Creatures {
                         if(CardFactoryUtil.canDamage(card, list.get(i))) list.get(i).addDamage(1, card);
                     }
                     
-                    //AllZone.HumanPlayer.subtractLife(1,card);
-                    //AllZone.ComputerPlayer.subtractLife(1,card);
                     AllZone.GameAction.addDamage(AllZone.HumanPlayer, card, 1);
                     AllZone.GameAction.addDamage(AllZone.ComputerPlayer, card, 1);
                 }//resolve()
             };//SpellAbility
-            ability.setDescription("G: Ifh-B�ff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability");
+            ability.setDescription("G: Ifh-Biff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability");
             ability.setStackDescription(card + " deals 1 damage to each flying creature and each player.");
-            ability.setAnyPlayer(true);
+            ability.getRestrictions().setAnyPlayer(true);
             card.addSpellAbility(ability);
         }
         //*************** END ************ END **************************

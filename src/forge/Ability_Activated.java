@@ -26,7 +26,7 @@ abstract public class Ability_Activated extends SpellAbility implements java.io.
 				return false;
         }
         
-        if (!(getRestrictions().canPlay(c)))     
+        if (!(getRestrictions().canPlay(c, this)))     
         	return false;
         
         return Cost_Payment.canPayAdditionalCosts(payCosts, this);

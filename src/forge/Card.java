@@ -249,7 +249,7 @@ public class Card extends MyObservable {
     public boolean canAnyPlayerActivate() {
     	for(SpellAbility s : spellAbility)
     	{
-    		if (s.isAnyPlayer())
+    		if (s.getRestrictions().getAnyPlayer())
     			return true;
     	}
     	return false;

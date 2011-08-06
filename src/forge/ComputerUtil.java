@@ -19,42 +19,42 @@ public class ComputerUtil
   static public boolean playCards(SpellAbility[] all)
   {
     //not sure "playing biggest spell" matters?
-    sortSpellAbilityByCost(all);
-//    MyRandom.shuffle(all);
-
-    for(int i = 0; i < all.length; i++)
-    {
-      if(canPayCost(all[i]) && all[i].canPlay() && all[i].canPlayAI())
-      {
-    	
-        if(all[i].isSpell() && AllZone.GameAction.isCardInZone(all[i].getSourceCard(),AllZone.Computer_Hand))
-        	AllZone.Computer_Hand.remove(all[i].getSourceCard());
-
-        Ability_Cost cost = all[i].getPayCosts();
-        Target tgt = all[i].getTarget();
-        
-        if (cost == null){
-	        if(all[i] instanceof Ability_Tap)
-	        	all[i].getSourceCard().tap();
+	    sortSpellAbilityByCost(all);
+	//    MyRandom.shuffle(all);
 	
-	        payManaCost(all[i]);
-	        all[i].chooseTargetAI();
-	        all[i].getBeforePayManaAI().execute();
-	        all[i].setActivatingPlayer(AllZone.ComputerPlayer);
-	        AllZone.Stack.add(all[i]);
-        }
-        else{
-        	if (tgt != null && tgt.doesTarget())
-        		all[i].chooseTargetAI();
-        	
-        	Cost_Payment pay = new Cost_Payment(cost, all[i]);
-        	pay.payComputerCosts();
-        }
-
-        return false;
-      }
-    }//while
-    return true;
+	    for(int i = 0; i < all.length; i++)
+	    {
+	    	all[i].setActivatingPlayer(AllZone.ComputerPlayer);
+	    	if(canPayCost(all[i]) && all[i].canPlay() && all[i].canPlayAI())
+	    	{
+		    	
+	    		if(all[i].isSpell() && AllZone.GameAction.isCardInZone(all[i].getSourceCard(),AllZone.Computer_Hand))
+		        	AllZone.Computer_Hand.remove(all[i].getSourceCard());
+		
+		        Ability_Cost cost = all[i].getPayCosts();
+		        Target tgt = all[i].getTarget();
+		        
+		        if (cost == null){
+			        if(all[i] instanceof Ability_Tap)
+			        	all[i].getSourceCard().tap();
+			
+			        payManaCost(all[i]);
+			        all[i].chooseTargetAI();
+			        all[i].getBeforePayManaAI().execute();
+			        AllZone.Stack.add(all[i]);
+		        }
+		        else{
+		        	if (tgt != null && tgt.doesTarget())
+		        		all[i].chooseTargetAI();
+		        	
+		        	Cost_Payment pay = new Cost_Payment(cost, all[i]);
+		        	pay.payComputerCosts();
+		        }
+		
+		        return false;
+	    	}
+	    }//while
+	    return true;
   }//playCards()
   
   //this is used for AI's counterspells

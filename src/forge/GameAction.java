@@ -3643,9 +3643,11 @@ public class GameAction {
     public SpellAbility[] canPlaySpellAbility(SpellAbility[] sa) {
         ArrayList<SpellAbility> list = new ArrayList<SpellAbility>();
         
-        for(int i = 0; i < sa.length; i++)
-            if(sa[i].canPlay() && (sa[i].getSourceCard().getController().equals(AllZone.HumanPlayer) || sa[i].isAnyPlayer())) 
+        for(int i = 0; i < sa.length; i++){
+        	sa[i].setActivatingPlayer(AllZone.HumanPlayer);
+            if(sa[i].canPlay()) 
             	list.add(sa[i]);
+        }
         
         SpellAbility[] array = new SpellAbility[list.size()];
         list.toArray(array);

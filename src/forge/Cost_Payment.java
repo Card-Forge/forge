@@ -236,7 +236,7 @@ public class Cost_Payment {
         			JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
         			null, possibleValues, possibleValues[0]);
             if(choice.equals(0)) {
-            	  card.getController().payLife(cost.getLifeAmount());
+            	  AllZone.HumanPlayer.payLife(cost.getLifeAmount());
             	  payLife = true;
             }
 			else{
@@ -443,7 +443,7 @@ public class Cost_Payment {
     		card.subtractCounter(cost.getCounterType(), cost.getCounterNum());
     	
     	if (cost.getLifeCost())
-    		card.getController().payLife(cost.getLifeAmount());
+    		AllZone.ComputerPlayer.payLife(cost.getLifeAmount());
     	
     	if (cost.getDiscardCost()){
     		String discType = cost.getDiscardType();

@@ -18,6 +18,7 @@ public class ComputerAI_Burn2 implements Computer {
 
                         if(list != null && list.size() != 0) {
                             SpellAbility sa = list.get(0);
+                            sa.setActivatingPlayer(AllZone.ComputerPlayer);
                             if(ComputerUtil.canPlay(sa) && sa.canPlay()) {
                                 if(sa.isSpell()) {
                                     AllZone.Computer_Hand.remove(sa.getSourceCard());

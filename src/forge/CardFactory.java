@@ -1817,7 +1817,7 @@ public class CardFactory implements NewConstants {
                     
                     @Override
                     public boolean canPlay() {
-                        return (Cost_Payment.canPayAdditionalCosts(abCost, this) && CardFactoryUtil.canUseAbility(card) && super.canPlay());
+                        return CardFactoryUtil.canUseAbility(card) && super.canPlay();
                     }
                     
                     private CardList getCreatures() {
@@ -8482,7 +8482,7 @@ public class CardFactory implements NewConstants {
 
             ability1.setDescription("Any player may play creature cards with converted mana cost 3 or less without paying their mana cost any time he or she could play an instant.");
             ability1.setStackDescription("Aluren - Play creature with converted manacost 3 or less for free.");
-            ability1.setAnyPlayer(true);
+            ability1.getRestrictions().setAnyPlayer(true);
             card.addSpellAbility(ability1);
         }
         //*************** END ************ END **************************
@@ -8544,122 +8544,72 @@ public class CardFactory implements NewConstants {
         
         //*************** START *********** START **************************
         else if(cardName.equals("Volrath's Dungeon")) {
-            final SpellAbility dungeon = new Ability(card, "0") {
-            	// todo(sol) discard really needs to happen as a cost but in resolution for now :(
-            	
-                @Override
+        	
+        	Ability_Cost dungeonCost = new Ability_Cost("Discard<1/Any>", cardName, true);
+        	Target dungeonTgt = new Target("TgtV", "Volrath's Dungeon - Target player" , "player".split(","));
+        	
+            final SpellAbility dungeon = new Ability_Activated(card, dungeonCost, dungeonTgt){
+				private static final long serialVersionUID = 334033015590321821L;
+
+				@Override
                 public void chooseTargetAI() {
                     setTargetPlayer(AllZone.HumanPlayer);
                 }
                 
                 @Override
-                public boolean canPlay() {
-                    return Phase.canCastSorcery(AllZone.HumanPlayer) && AllZone.GameAction.isCardInPlay(card) && super.canPlay() &&
-                    		AllZone.getZone(Constant.Zone.Hand, AllZone.HumanPlayer).getCards().length > 0;
-                }
-                
-                @Override
                 public void resolve() {
-                	Player player = getActivatingPlayer();
                 	Player target = getTargetPlayer();
-                    CardList playerHand = new CardList(AllZone.getZone(Constant.Zone.Hand, player).getCards());
                     CardList targetHand = new CardList(AllZone.getZone(Constant.Zone.Hand, target).getCards());
-                    
-                    if(playerHand.size() == 0) return;
-                    
-                    if (player.isHuman()){
-                    	if (!humanDiscard(playerHand, false))
-                    		return;
-                    }
-                    else if (player.isComputer()){
-                    	if (!computerDiscard(playerHand, false))
-                    		return;
-                    }
-                    
+
                     if (targetHand.size() == 0) return;
                     
                     if (target == AllZone.HumanPlayer){
-                    	if (!humanDiscard(targetHand, true))
-                    		return;
+    	                Object discard = AllZone.Display.getChoice("Select Card to place on top of library.", targetHand.toArray());
+    	                
+                        Card card = (Card)discard;
+                        AllZone.GameAction.moveToTopOfLibrary(card);
                     }
                     else if (target == AllZone.ComputerPlayer){
-                    	if (!computerDiscard(targetHand, true))
-                    		return;
-                    }
-                }
-                
-                public boolean humanDiscard(CardList hand, boolean toLibrary)
-                {
-                	String destination = "discard";
-                	if (toLibrary)
-                		destination = "place on top of library.";
-                    Object discard = AllZone.Display.getChoiceOptional("Select Card to " + destination,
-                    		hand.toArray());
-                    if(discard == null) return false;
-                    
-                    Card card = (Card)discard;
-                    
-                    if (toLibrary)
-                    	AllZone.GameAction.moveToTopOfLibrary(card);
-                    else
-                    	AllZone.GameAction.discard(card, this);
-                    
-                	return true;
-                }
-                
-                public boolean computerDiscard(CardList hand, boolean toLibrary)
-                {
-                    if (toLibrary)
                     	AllZone.GameAction.AI_handToLibrary("Top");
-                    else
-                    	AllZone.GameAction.AI_discard(this);
-                    
-                	return true;
+                    }
                 }
                 
                 @Override
                 public boolean canPlayAI() {
-                    return (card.getController().equals(AllZone.ComputerPlayer) && Phase.canCastSorcery(AllZone.ComputerPlayer)
-                    		&& AllZone.getZone(Constant.Zone.Hand, AllZone.ComputerPlayer).getCards().length > 0
-                    		&& AllZone.getZone(Constant.Zone.Hand, getTargetPlayer()).getCards().length > 0);
+                	return AllZone.Computer_Hand.size() > 0 && AllZone.Human_Hand.size() > 0 && super.canPlay();
                 }
 
             };//SpellAbility dungeon
            
-            final SpellAbility bail = new Ability(card, "0") {
-            	// Life payment really should happen on activation, maybe can do with a popup?
-                @Override
+            
+        	Ability_Cost bailCost = new Ability_Cost("PayLife<5>", cardName, true);
+            final SpellAbility bail = new Ability_Activated(card, bailCost, null){
+				private static final long serialVersionUID = -8990402917139817175L;
+
+				@Override
                 public void resolve() {
-                	Player player = getActivatingPlayer();
-                	
-                	if (player.payLife(5, card))
-                		AllZone.GameAction.destroy(card);
+                	AllZone.GameAction.destroy(card);
                 }
       
                 @Override
                 public boolean canPlay() {
-                    if(AllZone.HumanPlayer.getLife() >= 5 && AllZone.GameAction.isPlayerTurn(AllZone.HumanPlayer) && super.canPlay()) 
-                    	return true;
-                    else return false;
+                    return super.canPlay();
                 }
                                 
                 @Override
                 public boolean canPlayAI() {
-                	if (card.getController().equals(AllZone.HumanPlayer) && AllZone.ComputerPlayer.getLife() >= 9 && 
-                			AllZone.GameAction.isPlayerTurn(AllZone.ComputerPlayer) && 
-                			AllZone.GameAction.isCardInPlay(card)) 
-                    	return true;
-                    else return false;
+                	return card.getController().equals(AllZone.HumanPlayer) && AllZone.ComputerPlayer.getLife() >= 9 && 
+                			super.canPlay() && AllZone.Computer_Hand.size() > 0;
                 }
 
             };//SpellAbility pay bail
 
-            dungeon.setBeforePayMana(CardFactoryUtil.input_targetPlayer(dungeon));
-            dungeon.setChooseTargetAI(CardFactoryUtil.AI_targetHuman());
             dungeon.setDescription("Discard a card: Target player puts a card from his or her hand on top of his or her library. Activate this ability only any time you could cast a sorcery.");
             dungeon.setStackDescription("CARDNAME - Target player chooses a card in hand and puts on top of library.");
+            dungeon.getRestrictions().setSorcerySpeed(true);
             
-            bail.setAnyPlayer(true);
+            bail.getRestrictions().setAnyPlayer(true);
+            bail.getRestrictions().setPlayerTurn(true);
             bail.setDescription("Pay 5 Life: Destroy Volrath's Dungeon. Any player may activate this ability but only during his or her turn.");
             bail.setStackDescription("Destroy CARDNAME.");
             

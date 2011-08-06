@@ -40,6 +40,7 @@ public class Input_Main extends Input {
                 if(sa.length > 0) {
                     int count = 0;
                     for(SpellAbility s:sa) {
+                    	s.setActivatingPlayer(AllZone.HumanPlayer);
                         if(s.canPlay()) count++;
                     }
                     if(count > 0) InputUtil.playAnyCard(card, zone);

@@ -8,7 +8,7 @@ public class SpellAbility_Restriction {
 	// The CanPlay function will use these values to determine if the current game state is ok with these restrictions
 	
 	// default values for Sorcery speed abilities
-	String activateZone = Constant.Zone.Play;
+	private String activateZone = Constant.Zone.Play;
 
 	public void setActivateZone(String zone){
 		activateZone = zone;
@@ -18,13 +18,43 @@ public class SpellAbility_Restriction {
 		return activateZone;
 	}
 	
+	private boolean bSorcerySpeed = false;
+	
+	public void setSorcerySpeed(boolean bSpeed){
+		bSorcerySpeed = bSpeed;
+	}
+	
+	public boolean getSorcerySpeed(){
+		return bSorcerySpeed;
+	}
+	
+	private boolean bAnyPlayer = false;
+	
+	public void setAnyPlayer(boolean anyPlayer){
+		bAnyPlayer = anyPlayer;
+	}
+	
+	public boolean getAnyPlayer(){
+		return bAnyPlayer;
+	}
+	
+	private boolean bPlayerTurn = false;
+	
+	public void setPlayerTurn(boolean bTurn){
+		bPlayerTurn = bTurn;
+	}
+	
+	public boolean getPlayerTurn(){
+		return bPlayerTurn;
+	}
+	
 	/*
-	 * Some restrictions to come...
-	boolean bInstantActivation = false;
+	 * Restrictions of the future
+
 	ArrayList<String> activatePhases = new ArrayList<String>();
 	int amountPerTurn = -1;
 	int activatedPerTurn = 0;
-	boolean bAnyPlayer = false;
+
 	boolean bHasThreshold = false;
 	boolean bHasMetalcraft = false;
 	int levelMin = 0;
@@ -35,12 +65,24 @@ public class SpellAbility_Restriction {
 	
 	SpellAbility_Restriction(){	}
 
-	//SpellAbility_Restriction(String zone, Phase phase, boolean bIsInstantSpeed, int perTurn, String activatingPlayer){}
-	
-	public boolean canPlay(Card c){
+	public boolean canPlay(Card c, SpellAbility sa){
 		if (!AllZone.getZone(c).getZone().equals(activateZone))
 			return false;
 		
+		Player activater = sa.getActivatingPlayer();
+		if (activater == null){
+			c.getController();
+			System.out.println(c.getName() + " Did not have activater set in SpellAbility_Restriction.canPlay()");
+		}
+		
+		if (bSorcerySpeed && !Phase.canCastSorcery(activater))
+			return false;
+		
+		if (bPlayerTurn && !AllZone.GameAction.isPlayerTurn(activater))
+			return false;
+		
+		if (!bAnyPlayer && !activater.equals(c.getController()))
+			return false;
 		
 		return true;
 	}

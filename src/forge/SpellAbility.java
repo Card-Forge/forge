@@ -35,7 +35,6 @@ public abstract class SpellAbility {
     private boolean			multiKicker 	   = false;
     private boolean 		xCost			   = false;
     private boolean         kickerAbility      = false;
-    private boolean			anyPlayer		   = false;
     private boolean 		kothThirdAbility   = false;
     
     private Input           beforePayMana;
@@ -195,15 +194,6 @@ public abstract class SpellAbility {
     public boolean isXCost(){
     	return xCost;
     }
-    
-    public void setAnyPlayer(boolean b) {
-    	anyPlayer = b;
-    }
-    
-    public boolean isAnyPlayer() {
-        return anyPlayer;
-    }
-    
     
     public void setSourceCard(Card c) {
         sourceCard = c;

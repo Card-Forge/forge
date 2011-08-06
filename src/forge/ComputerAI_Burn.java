@@ -18,6 +18,7 @@ public class ComputerAI_Burn implements Computer {
                         SpellAbility[] all = ComputerUtil.getSpellAbility();
                         
                         for(int i = 0; i < all.length; i++) {
+                        	all[i].setActivatingPlayer(AllZone.ComputerPlayer);
                             if(ComputerUtil.canPayCost(all[i]) && all[i].canPlay()) {
                                 if(all[i].isSpell()) AllZone.Computer_Hand.remove(all[i].getSourceCard());
                                 

@@ -117,7 +117,7 @@ public class MagicStack extends MyObservable
 	  // if activating player slips through the cracks, assign activating Player to the controller here
 	  if (null == sp.getActivatingPlayer()){
 			sp.setActivatingPlayer(sp.getSourceCard().getController());
-			//System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
+			System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
 	  }
 	  // WheneverKeyword Test
 	  ActualEffectTriggered = false;

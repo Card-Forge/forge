@@ -241,8 +241,19 @@ public class AbilityFactory {
         if (!isTargeted)
         	SA.setStackDescription(hostCard.getName());
         
+        // SpellAbility_Restrictions should be added in here
+        
         if (mapParams.containsKey("ActivatingZone"))
         	SA.getRestrictions().setActivateZone(mapParams.get("ActivatingZone"));
+        
+        if (mapParams.containsKey("SorcerySpeed"))
+        	SA.getRestrictions().setSorcerySpeed(true);
+        
+        if (mapParams.containsKey("PlayerTurn"))
+        	SA.getRestrictions().setPlayerTurn(true);
+        
+        if (mapParams.containsKey("AnyPlayer"))
+        	SA.getRestrictions().setAnyPlayer(true);
         
         return SA;
 	}
