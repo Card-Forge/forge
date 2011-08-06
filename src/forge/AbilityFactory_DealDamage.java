@@ -19,74 +19,69 @@ import java.util.Random;
     		// Note: TgtOpp should not be used, Please use ValidTgts$ Opponent instead
     	}
        
-       public SpellAbility getAbility()
-       {
-            final SpellAbility abDamage = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt())
-            {
-               private static final long serialVersionUID = -7560349014757367722L;
-               
-                @Override
-                public boolean canPlay(){
-                    return super.canPlay();
-                }
-               
-                @Override
-                public boolean canPlayAI() {
-                   return doCanPlayAI(this);
-                   
-                }
-               
-             @Override
-             public String getStackDescription(){
-                return damageStackDescription(AF, this);
-             }
-               
-                @Override
-                public void resolve() {
-                   doResolve(this);
-                   AF.getHostCard().setAbilityUsed(AF.getHostCard().getAbilityUsed() + 1);
-                   
-                }
-            };//Ability_Activated
-          
-          return abDamage;
-       }
-       
-       public SpellAbility getSpell()
-       {
-          final SpellAbility spDealDamage = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
-                private static final long serialVersionUID = 7239608350643325111L;
+	public SpellAbility getAbility() {
+		final SpellAbility abDamage = new Ability_Activated(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = -7560349014757367722L;
 
-                @Override
-                public boolean canPlay(){
-                    return super.canPlay();
-                }
-               
-                @Override
-                public boolean canPlayAI() {
-                   return doCanPlayAI(this);
-                   
-                }
-               
-             @Override
-             public String getStackDescription(){
-                return damageStackDescription(AF, this);
-             }
-               
-                @Override
-                public void resolve() {
-                   doResolve(this);
-                   
-                }
+			@Override
+			public boolean canPlay() {
+				return super.canPlay();
+			}
 
-           
-            }; // Spell
-           
-          return spDealDamage;
-       }
+			@Override
+			public boolean canPlayAI() {
+				return doCanPlayAI(this);
 
-       public SpellAbility getDrawback()
-       {
+			}
+
+			@Override
+			public String getStackDescription() {
+				return damageStackDescription(AF, this);
+			}
+
+			@Override
+			public void resolve() {
+				doResolve(this);
+				AF.getHostCard().setAbilityUsed(AF.getHostCard().getAbilityUsed() + 1);
+
+			}
+		};// Ability_Activated
+
+		return abDamage;
+	}
+
+	public SpellAbility getSpell() {
+		final SpellAbility spDealDamage = new Spell(AF.getHostCard(), AF.getAbCost(), AF.getAbTgt()) {
+			private static final long serialVersionUID = 7239608350643325111L;
+
+			@Override
+			public boolean canPlay() {
+				return super.canPlay();
+			}
+
+			@Override
+			public boolean canPlayAI() {
+				return doCanPlayAI(this);
+
+			}
+
+			@Override
+			public String getStackDescription() {
+				return damageStackDescription(AF, this);
+			}
+
+			@Override
+			public void resolve() {
+				doResolve(this);
+
+			}
+
+		}; // Spell
+
+		return spDealDamage;
+	}
+
+	public SpellAbility getDrawback() {
 		final SpellAbility dbDealDamage = new Ability_Sub(AF.getHostCard(), AF.getAbTgt()) {
 			private static final long serialVersionUID = 7239608350643325111L;
 
@@ -119,7 +114,7 @@ import java.util.Random;
         	int restDamage = d;
         	
         	if (!noPrevention)
-        		restDamage = AllZone.HumanPlayer.staticDamagePrevention(restDamage,AF.getHostCard(),false);
+        		restDamage = AllZone.HumanPlayer.staticDamagePrevention(restDamage, AF.getHostCard(), false);
         	
         	if (restDamage == 0) return false;
         	
@@ -157,11 +152,13 @@ import java.util.Random;
                 return best;
             }
             
-            // Combo alert!!
+            // Combo alert!! Casting burn on your own Stuffy Dolls is a waste
+            /*
             PlayerZone compy = AllZone.getZone(Constant.Zone.Play, AllZone.ComputerPlayer);
             CardList cPlay = new CardList(compy.getCards());
             if(cPlay.size() > 0) for(int i = 0; i < cPlay.size(); i++)
                 if(cPlay.get(i).getName().equals("Stuffy Doll")) return cPlay.get(i);
+             */
             
             return null;
         }
@@ -191,6 +188,7 @@ import java.util.Random;
 
           // TODO handle proper calculation of X values based on Cost
            
+           // todo: this should only happen during Players EOT
            if(AF.getHostCard().equals("Stuffy Doll")) {
         	   return true;
            }
@@ -220,17 +218,20 @@ import java.util.Random;
 		
 		boolean noPrevention = params.containsKey("NoPrevention");
 		
-		// AI handle multi-targeting?
 		if (tgt == null){
-			if (AF.getMapParams().containsKey("Affected")){
-        	   String affected = AF.getMapParams().get("Affected");
-        	   if (affected.equals("You"))
-        		   // todo: when should AI not use an SA like Psionic Blast?
-        		   ;
-        	   else if (affected.equals("Self"))
-        		   // todo: when should AI not use an SA like Orcish Artillery?
-        		   ;
-           }
+			// todo: Improve circumstances where the Defined Damage is unwanted
+			ArrayList<Object> objects = AbilityFactory.getDefinedObjects(saMe.getSourceCard(), params.get("Defined"), saMe);
+			
+			for(Object o : objects){
+				if (o instanceof Card){
+					//Card c = (Card)o;
+				}
+				else if (o instanceof Player){
+					Player p = (Player)o;
+					if (p.isComputer() && dmg >= p.getLife())	// Damage from this spell will kill me
+						return false;
+				}			
+			}
 		   return true;
 		}
 		
@@ -282,33 +283,29 @@ import java.util.Random;
         private String damageStackDescription(AbilityFactory af, SpellAbility sa){
           // when damageStackDescription is called, just build exactly what is happening
            StringBuilder sb = new StringBuilder();
-           String name = af.getHostCard().getName();
+           String name = af.getHostCard().toString();
            int dmg = getNumDamage(sa);
 
-           ArrayList<Object> tgts = findTargets(sa);
+           ArrayList<Object> tgts;
+           if(sa.getTarget() == null) 
+        	   tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), af.getMapParams().get("Defined"), sa);
+           else 
+        	   tgts = sa.getTarget().getTargets();
            
            if (!(sa instanceof Ability_Sub))
         	   sb.append(name).append(" - ");
            
            sb.append("Deals ").append(dmg).append(" damage to ");
-           if(tgts == null || tgts.size() == 0) {
-        	   sb.append("itself");
-           }
-           else {
-        	   for(int i = 0; i < tgts.size(); i++){
-        		   if (i != 0)
-        			   sb.append(" ");
+           
+    	   for(int i = 0; i < tgts.size(); i++){
+    		   if (i != 0)
+    			   sb.append(" ");
 
-        		   Object o = tgts.get(0);
-        		   if (o instanceof Player){
-        			   sb.append(((Player)o).getName());
-        		   }
-        		   else{
-        			   sb.append(((Card)o).getName());
-        		   }
+    		   Object o = tgts.get(0);
+    		   if (o instanceof Card || o instanceof Player)
+    		   sb.append(o.toString());
+    	   }
 
-        	   }
-           }
            sb.append(". ");
            
            if (sa.getSubAbility() != null){
@@ -316,24 +313,6 @@ import java.util.Random;
             }
 
            return sb.toString();
-        }
-       
-        private  ArrayList<Object> findTargets(SpellAbility saMe){
-            Target tgt = AF.getAbTgt();
-            ArrayList<Object> tgts;
-            if (tgt != null)
-               tgts = tgt.getTargets();
-            else{
-               tgts = new ArrayList<Object>();
-               if (AF.getMapParams().containsKey("Affected")){
-            	   String affected = AF.getMapParams().get("Affected");
-            	   if (affected.equals("You"))
-            		   tgts.add(saMe.getActivatingPlayer());
-            	   else if (affected.equals("Self"))
-            		   tgts.add(saMe.getSourceCard());
-               }
-            }
-            return tgts;
         }
         
         private void doResolve(SpellAbility saMe)
@@ -343,43 +322,35 @@ import java.util.Random;
     		
     		boolean noPrevention = params.containsKey("NoPrevention");
 
-            ArrayList<Object> tgts = findTargets(saMe);
+            ArrayList<Object> tgts;
+            if(saMe.getTarget() == null) 
+         	   tgts = AbilityFactory.getDefinedObjects(saMe.getSourceCard(), params.get("Defined"), saMe);
+            else 
+         	   tgts = saMe.getTarget().getTargets();
+            
             boolean targeted = (AF.getAbTgt() != null);
 
-            if (tgts == null || tgts.size() == 0){
-            	System.out.println("AF_DealDamage ("+AF.getHostCard()+") - No targets?  Ok.  Just making sure.");
-            	//if no targets, damage goes to self (Card; i.e. Stuffy Doll)
-            	Card c = saMe.getSourceCard();
-            	if(AllZone.GameAction.isCardInPlay(c)) {
-    				if (noPrevention)
-    					c.addDamageWithoutPrevention(dmg, AF.getHostCard());
-    				else
-    					c.addDamage(dmg, AF.getHostCard());
-    			}
-            }
-            else {
-            	for(Object o : tgts){
-            		if (o instanceof Card){
-            			Card c = (Card)o;
-            			if(AllZone.GameAction.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(AF.getHostCard(), c))) {
-            				if (noPrevention)
-            					c.addDamageWithoutPrevention(dmg, AF.getHostCard());
-            				else
-            					c.addDamage(dmg, AF.getHostCard());
-            			}
+        	for(Object o : tgts){
+        		if (o instanceof Card){
+        			Card c = (Card)o;
+        			if(AllZone.GameAction.isCardInPlay(c) && (!targeted || CardFactoryUtil.canTarget(AF.getHostCard(), c))) {
+        				if (noPrevention)
+        					c.addDamageWithoutPrevention(dmg, AF.getHostCard());
+        				else
+        					c.addDamage(dmg, AF.getHostCard());
+        			}
 
-            		}
-            		else if (o instanceof Player){
-            			Player p = (Player) o;
-            			if (!targeted || p.canTarget(AF.getHostCard())) {
-            				if (noPrevention)
-            					p.addDamageWithoutPrevention(dmg, AF.getHostCard());
-            				else
-            					p.addDamage(dmg, AF.getHostCard());
-            			}
-            		}
-            	}
-            }
+        		}
+        		else if (o instanceof Player){
+        			Player p = (Player) o;
+        			if (!targeted || p.canTarget(AF.getHostCard())) {
+        				if (noPrevention)
+        					p.addDamageWithoutPrevention(dmg, AF.getHostCard());
+        				else
+        					p.addDamage(dmg, AF.getHostCard());
+        			}
+        		}
+        	}
    
     		if (AF.hasSubAbility()){
     			Ability_Sub abSub = saMe.getSubAbility();

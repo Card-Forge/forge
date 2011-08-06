@@ -534,13 +534,17 @@ public class AbilityFactory {
 		return Integer.parseInt(amount) * multiplier;
 	}
 	
+	// should the three getDefined functions be merged into one? Or better to have separate?
+	// If we only have one, each function needs to Cast the Object to the appropriate type when using
+	// But then we only need update one function at a time once the casting is everywhere.
+	// Probably will move to One function solution sometime in the future
 	public static ArrayList<Card> getDefinedCards(Card hostCard, String def, SpellAbility sa){
 		ArrayList<Card> cards = new ArrayList<Card>();
-		String defined = (def == null) ? "Self" : def;
+		String defined = (def == null) ? "Self" : def;	// default to Self
 		
 		Card c = null; 
 		
-		if (defined == null || defined.equals("Self"))	// default to Self
+		if (defined.equals("Self"))
 			c = hostCard;
 		
 		else if (defined.equals("Equipped"))
@@ -563,7 +567,7 @@ public class AbilityFactory {
 	
 	public static ArrayList<Player> getDefinedPlayers(Card card, String def, SpellAbility sa){
 		ArrayList<Player> players = new ArrayList<Player>();
-		String defined = (def == null) ? "Self" : def;
+		String defined = (def == null) ? "You" : def;
 		
 		players = new ArrayList<Player>();
 		if (defined.equals("Targeted")){
@@ -575,30 +579,67 @@ public class AbilityFactory {
 			players.addAll(parent.getTarget().getTargetPlayers());
 		}
 		else{
-			if (defined.equals("Self") || defined.equals("Each"))
+			if (defined.equals("You") || defined.equals("Each"))
 				players.add(sa.getActivatingPlayer());
-			if (defined.equals("Each"))
+			
+			if (defined.equals("Opponent") || defined.equals("Each"))
 				players.add(sa.getActivatingPlayer().getOpponent());
 		}
 		return players;
 	}
 	
-	public static SpellAbility findRootAbility(SpellAbility sa){
-		if (!(sa instanceof Ability_Sub))
-			return sa;
+	public static ArrayList<Object> getDefinedObjects(Card card, String def, SpellAbility sa){
+		ArrayList<Object> objects = new ArrayList<Object>();
+		String defined = (def == null) ? "Self" : def;
 		
+		objects = new ArrayList<Object>();
+		if (defined.equals("Targeted")){
+			SpellAbility parent;
+			do{
+				parent = ((Ability_Sub)sa).getParent();
+			}while(parent.getTarget() == null && parent.getTarget().getTargets().size() == 0);
+			
+			objects.addAll(parent.getTarget().getTargets());
+		}
+		else{
+			// Player checks
+			if (defined.equals("You") || defined.equals("Each"))
+				objects.add(sa.getActivatingPlayer());
+			
+			if (defined.equals("Opponent") || defined.equals("Each"))
+				objects.add(sa.getActivatingPlayer().getOpponent());
+
+			// Card checks
+			Card c = null;
+
+			if (defined.equals("Self"))
+				c = card;
+			
+			if (defined.equals("Equipped"))
+				c = card.getEquippingCard();
+
+			if (defined.equals("Enchanted"))
+				c = card.getEnchantingCard();
+			
+			if (c != null)
+				objects.add(c);
+		}
+		return objects;
+	}
+	
+	
+	public static SpellAbility findRootAbility(SpellAbility sa){
 		SpellAbility parent = sa;
-		do{
+		while (parent instanceof Ability_Sub)
 			parent = ((Ability_Sub)parent).getParent();
-		}while(parent instanceof Ability_Sub);
 		
 		return parent;
 	}
 	
 	public static SpellAbility findParentsTargetedCard(SpellAbility sa){
-		SpellAbility parent;
+		SpellAbility parent = sa;
 		do{
-			parent = ((Ability_Sub)sa).getParent();
+			parent = ((Ability_Sub)parent).getParent();
 		}while(parent.getTarget() == null && parent.getTarget().getTargetCards().size() == 0);
 		
 		return parent;
