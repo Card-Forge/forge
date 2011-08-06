@@ -16647,6 +16647,125 @@ public class CardFactory implements NewConstants {
         
       }
       //*************** END ************ END **************************
+	  
+      //*************** START *********** START **************************
+      else if(cardName.equals("Isochron Scepter"))
+      {
+    	  final Ability_Tap freeCast = new Ability_Tap(card, "2")
+          {
+
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 4455819149429678456L;
+
+			@Override
+			public void resolve() {
+				if(getSourceCard().getAttachedCards().length == 0)
+				{
+					//AllZone.Display.showMessage("You have not exiled a card.");
+					return;
+				}
+				Card c = copyCard(getSourceCard().getAttachedCards()[0]);
+				if(getSourceCard().getController().equals(Constant.Player.Computer))
+				{
+					for(SpellAbility sa:getSourceCard().getAttachedCards()[0].getSpellAbility())
+		            if(sa.canPlayAI())
+		            {
+		            	ComputerUtil.playStackFree(sa);
+		            	return;
+		            }
+				}
+				else AllZone.GameAction.playCardNoCost(c);
+			}
+			public boolean canPlayAI()
+			{
+				for(SpellAbility sa:getSourceCard().getAttachedCards()[0].getSpellAbility())
+                    if(sa.canPlayAI())
+                    	return true;
+                return false;
+			}
+          };
+          freeCast.setDescription("2, Tap: You may copy the exiled card. If you do, you may cast the copy without paying its mana cost");
+          freeCast.setStackDescription("Copy the exiled card and cast the copy without paying its mana cost.");
+          
+          final Input exile = new Input() {
+              private static final long serialVersionUID = -6392468000100283596L;
+              
+              @Override
+              public void showMessage() {
+                  AllZone.Display.showMessage("Your may exile an Instant with converted mana cost two or less from your hand");
+                  ButtonUtil.enableOnlyCancel();
+              }
+              
+              @Override
+              public void selectCard(Card c, PlayerZone zone) {
+                  if(zone.is(Constant.Zone.Hand) && c.isInstant() && CardUtil.getConvertedManaCost(c) <= 2)
+                  {
+                      AllZone.GameAction.moveTo(AllZone.Human_Removed, c);
+                      card.attachCard(c);
+                      stop();
+                  }
+              }
+              
+              @Override
+              public void selectButtonCancel() {
+                  stop();
+              }
+          };//Input
+          
+          final SpellAbility ability = new Ability(card, "0") {
+              @Override
+              public void resolve() {
+                  if(card.getController().equals(Constant.Player.Human)) {
+                      if(AllZone.Human_Hand.getCards().length > 0)
+                    	  AllZone.InputControl.setInput(exile);
+                  } else {
+                      CardList list = new CardList(AllZone.Computer_Hand.getCards())
+                        .filter(
+                    		  new CardListFilter(){
+                    			  public boolean addCard(Card c)
+                    			  {
+                    				  return c.isInstant()
+                    				  && CardUtil.getConvertedManaCost(c) <=2 ;
+                    			  }
+                    		  });
+                      CardListUtil.sortCMC(list);
+                      list.reverse();
+                      Card c = list.get(0);
+                      AllZone.GameAction.moveTo(AllZone.Human_Removed, c);
+                      card.attachCard(c);
+                  }//else
+              }//resolve()
+          };//SpellAbility
+          Command intoPlay = new Command() {
+              private static final long serialVersionUID = 9202753910259054021L;
+              
+              public void execute() {
+                  ability.setStackDescription("Imprint — " + card.getController()
+                		  + " may exile an instant card with converted mana cost 2 or less from their hand.");
+                  AllZone.Stack.add(ability);
+              }
+          };
+          SpellAbility spell = new Spell_Permanent(card) {
+              private static final long serialVersionUID = -2940969025405788931L;
+              
+              //could never get the AI to work correctly
+              //it always played the same card 2 or 3 times
+              @Override
+              public boolean canPlayAI() {
+                  for(Card c : AllZone.Computer_Hand.getCards())
+                	  if(c.isInstant() && CardUtil.getConvertedManaCost(c) <=2)
+                		  return true;
+                  return false;
+              }
+          };
+          card.addComesIntoPlayCommand(intoPlay);
+          card.clearSpellAbility();
+          card.addSpellAbility(spell);
+          card.addSpellAbility(freeCast);
+      }
+      //*************** END ************ END **************************
       
       //*************** START *********** START **************************
       else if (cardName.equals("Prosperity"))
@@ -16677,7 +16796,6 @@ public class CardFactory implements NewConstants {
       }
       //*************** END ************ END **************************
       
-        
         // Cards with Cycling abilities
         // -1 means keyword "Cycling" not found
         if(hasKeyword(card, "Cycling") != -1) {
