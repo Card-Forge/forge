@@ -1,9 +1,10 @@
 Name:Scrivener
 ManaCost:4 U
 Types:Creature Human Wizard
-Text:When Scrivener enters the battlefield, you may return target instant card from your graveyard to your hand.
+Text:no text
 PT:2/2
-K:etbReturnTgt:1/MayReturn:Instant:Hand
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | Optional$ True | TriggerDescription$ When Scrivener enters the battlefield, you may return target instant card from your graveyard to your hand.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scrivener.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/46.jpg
