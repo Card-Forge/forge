@@ -8234,13 +8234,16 @@ public class CardFactory_Creatures {
             
             Input runtime2 = new Input() {
 
+            	boolean once = false;
 				private static final long serialVersionUID = 8243511353958609599L;
 
 				@Override
                 public void showMessage() {
 					CardList list = new CardList(AllZone.Human_Graveyard.getCards());
-					if (list.size() < 2)
+					if (list.size() < 2 || once) {
+						once = false;
 						stop();
+					}
 					else {
 						Object o = AllZone.Display.getChoice("Choose first card to exile", list.toArray());
 						if (o!=null)
@@ -8256,6 +8259,7 @@ public class CardFactory_Creatures {
 								Card c2 = (Card)o;
 								AllZone.GameAction.removeFromGame(c2);
 	
+								once = true;
 								AllZone.Stack.add(ability2);
 							}
 						}
